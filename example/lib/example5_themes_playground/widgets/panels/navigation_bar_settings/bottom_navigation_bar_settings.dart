@@ -59,6 +59,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const BottomNavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: 'default (background)',
@@ -203,9 +204,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavShowUnselectedLabels
               : null,
         ),
-        const SizedBox(height: 8),
-        const BottomNavigationBarShowcase(),
-        const Divider(height: 16),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
           child: Text(
@@ -243,7 +241,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setUseFlutterDefaults
               : null,
         ),
-        const SizedBox(height: 8),
       ],
     );
   }

@@ -4,7 +4,7 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter themes,
+Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes,
 with optional primary color surface blends, or key color seeded color schemes.
 The themes are based on the same concept as Flutter's ColorScheme based themes,
 but offers many additional features, and numerous pre-made themes.
@@ -29,13 +29,13 @@ colors to all color properties in `ThemeData`, as long as they still exist. This
 ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`.
 There are no surprises in `ThemeData` that do not match your `ColorScheme`.
 
-You can opt-in on using opinionated component sub-themes.
+You can opt in on using opinionated component sub-themes.
 By doing so you can for example adjust the border radius on all UI widgets
 with a single property value. Flutter's Material UI widgets still default to
 being based on the Material 2 design, and thus use 4 dp corner radius on most
 widgets.
 
-When you opt-in on using the component sub-themes, the border radius on widgets
+When you opt in on using the component sub-themes, the border radius on widgets
 default to the new rounded corners as specified by the
 [Material 3 guide](https://m3.material.io/), where the
 radius varies by widget type. You can keep this, or set the global widget
@@ -61,7 +61,7 @@ avoid the both complicated and confusing `MaterialState` theming properties.
 
 **FlexColorScheme** has many advanced coloring features, like using
 surface alpha blends. It also fully supports Material 3 based color schemes,
-including seed key color generated `ColorSchemes`. It offers many configuration
+including seed key color generated `ColorSchemes`. It offers different configuration
 options that you can use when you generate your `ColorScheme` from
 key colors, customization features that are currently not available in Flutter.
 

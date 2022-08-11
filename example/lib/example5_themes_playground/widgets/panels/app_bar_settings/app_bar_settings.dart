@@ -4,21 +4,22 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
+import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import 'app_bar_style_buttons.dart';
+import 'app_bar_style_popup_menu.dart';
 
 class AppBarSettings extends StatelessWidget {
   const AppBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  String explainAppBarStyle(final FlexAppBarStyle style, final bool isLight) {
+  String explainAppBarStyle(final FlexAppBarStyle? style, final bool isLight) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'Primary color - M2 default' : 'Primary color';
+        return isLight ? 'Primary (M2 default)' : 'Primary';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'White background'
-            : 'Dark background (#121212) - M2 default';
+            ? 'White (M2 light surface)'
+            : 'Dark (M2 default surface #121212)';
       case FlexAppBarStyle.surface:
         return 'Surface, with primary color blend';
       case FlexAppBarStyle.background:
@@ -26,6 +27,18 @@ class AppBarSettings extends StatelessWidget {
       case FlexAppBarStyle.custom:
         return 'Custom, built-in schemes use tertiary color, '
             'but you can use any color';
+      case null:
+        {
+          if (controller.useMaterial3) {
+            return 'Surface (M3 default)';
+          } else {
+            if (isLight) {
+              return 'Primary (M2 default)';
+            } else {
+              return 'Dark (M2 default surface #121212)';
+            }
+          }
+        }
     }
   }
 
@@ -35,81 +48,64 @@ class AppBarSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     return Column(
       children: <Widget>[
-        const SizedBox(height: 8),
+        const AppBarShowcase(),
         const ListTile(
           subtitle: Text(
-            'Material 2 themes use primary colored AppBar in light '
-            'mode, and almost black in dark mode. With this quick selection, '
-            'you can use '
-            'Primary, Material background or background and surface color, '
-            'with their primary blends or even a custom color as the as the '
-            'themed AppBar color.',
+            'Material2 uses primary colored AppBar in light '
+            'mode and almost black in dark mode. Material3 defaults to surface '
+            'color in both light and dark theme mode. '
+            'Here you can use select '
+            'Primary, Material2 surface, background and surface colors '
+            'with their surfaceTint blends, or use a custom color.',
           ),
         ),
-        if (isLight) ...<Widget>[
-          ListTile(
-            enabled: controller.useFlexColorScheme &&
-                controller.appBarBackgroundSchemeColorLight == null,
+        if (isLight)
+          AppBarStylePopupMenu(
             title: const Text('Light theme AppBarStyle'),
-            subtitle: Text(
-              explainAppBarStyle(
-                  controller.useFlexColorScheme &&
-                          controller.appBarBackgroundSchemeColorLight == null
-                      ? controller.appBarStyleLight
-                      : FlexAppBarStyle.primary,
-                  isLight),
-            ),
-          ),
-          ListTile(
-            enabled: controller.useFlexColorScheme &&
-                controller.appBarBackgroundSchemeColorLight == null,
-            trailing: AppBarStyleButtons(
-                style: controller.useFlexColorScheme &&
-                        controller.appBarBackgroundSchemeColorLight == null
-                    ? controller.appBarStyleLight
-                    : FlexAppBarStyle.primary,
-                onChanged: controller.useFlexColorScheme &&
-                        controller.appBarBackgroundSchemeColorLight == null
-                    ? controller.setAppBarStyleLight
-                    : null,
-                // To access the custom color we defined for app bar, in this
-                // toggle buttons widget, we have to pass along, or the
-                // entire controller. Chose the color in this case. It is not
-                // carried with the theme, so we cannot get it from there in
-                // the widget. FlexColorScheme knows the color when
-                // you make a theme with it. This color is used to show the
-                // correct color on the toggle button option for custom color.
-                // In our examples we only actually have a custom app bar
-                // color in the first custom color example, and we want to
-                // show this color as well on the toggle button.
-                customAppBarColor:
-                    AppColor.scheme(controller).light.appBarColor),
-          ),
-        ] else ...<Widget>[
-          ListTile(
-            enabled: controller.useFlexColorScheme,
+            labelForDefault: 'default',
+            index: controller.appBarStyleLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.appBarBackgroundSchemeColorLight == null
+                ? (int index) {
+                    if (index < 0 || index >= FlexAppBarStyle.values.length) {
+                      controller.setAppBarStyleLight(null);
+                    } else {
+                      controller
+                          .setAppBarStyleLight(FlexAppBarStyle.values[index]);
+                    }
+                  }
+                : null,
+            // To access the custom color we defined for AppBars in this
+            // PopupMenu buttons widget, we have to pass it along, or the
+            // entire controller. We chose the color in this case. It is not
+            // carried with the theme, so we cannot get it from there in
+            // the widget. FlexColorScheme knows the color when
+            // you make a theme with it. This color is used to show the
+            // correct color on the AppBar custom color option for the not
+            // built-in custom color scheme.
+            // In our examples we only actually have a custom app bar
+            // color in the three custom color examples, and we want to
+            // show them as well on the PopupMenu button.
+            customAppBarColor: AppColor.scheme(controller).light.appBarColor,
+          )
+        else
+          AppBarStylePopupMenu(
             title: const Text('Dark theme AppBarStyle'),
-            subtitle: Text(
-              explainAppBarStyle(
-                  controller.useFlexColorScheme
-                      ? controller.appBarStyleDark
-                      : FlexAppBarStyle.material,
-                  isLight),
-            ),
+            labelForDefault: 'default',
+            index: controller.appBarStyleDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.appBarBackgroundSchemeColorDark == null
+                ? (int index) {
+                    if (index < 0 || index >= FlexAppBarStyle.values.length) {
+                      controller.setAppBarStyleDark(null);
+                    } else {
+                      controller
+                          .setAppBarStyleDark(FlexAppBarStyle.values[index]);
+                    }
+                  }
+                : null,
+            customAppBarColor: AppColor.scheme(controller).dark.appBarColor,
           ),
-          ListTile(
-            enabled: controller.useFlexColorScheme,
-            trailing: AppBarStyleButtons(
-                style: controller.useFlexColorScheme
-                    ? controller.appBarStyleDark
-                    : FlexAppBarStyle.material,
-                onChanged: controller.useFlexColorScheme
-                    ? controller.setAppBarStyleDark
-                    : null,
-                customAppBarColor:
-                    AppColor.scheme(controller).dark.appBarColor),
-          ),
-        ],
         SwitchListTileAdaptive(
           title: const Text('One colored AppBar on Android'),
           subtitle: const Text(
@@ -266,20 +262,18 @@ class AppBarSettings extends StatelessWidget {
             ),
           ),
         ],
-        const Divider(),
         const ListTile(
-          title: Text('Custom color'),
+          title: Text('Background color'),
           subtitle: Text('With component themes enabled you can select scheme '
-              'color for the themed '
-              'AppBar background color. '
+              'color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color to override used AppBarStyle, set it back '
+              'Selecting a color overrides used AppBarStyle, set it back '
               'to default to use AppBarStyle again.'),
         ),
         if (isLight)
           ColorSchemePopupMenu(
-            title: const Text('Light theme AppBar background color'),
+            title: const Text('Light theme custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (primary)',
@@ -297,7 +291,7 @@ class AppBarSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark theme AppBar background color'),
+            title: const Text('Dark theme custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (surface)',

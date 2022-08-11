@@ -238,8 +238,18 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.background,
               ),
               ColorCard(
+                label: 'Outline\nVariant',
+                color: colorScheme.outlineVariant,
+                textColor: colorScheme.background,
+              ),
+              ColorCard(
                 label: 'Shadow',
                 color: colorScheme.shadow,
+                textColor: _onColor(colorScheme.shadow, background),
+              ),
+              ColorCard(
+                label: 'Scrim',
+                color: colorScheme.scrim,
                 textColor: _onColor(colorScheme.shadow, background),
               ),
               ColorCard(

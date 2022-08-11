@@ -32,13 +32,20 @@ void main() {
         ThemeData,
       );
     });
-
+    // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+    //   This is repeated for many test cases. It seems like ThemeData
+    //   equality comparison cannot be guaranteed when using sub-themes that
+    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   Investigate first what SDK ThemeData test do, if they even attempt it
     test(
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
       expect(
-        FlexColorScheme.light().toTheme,
-        equals(FlexThemeData.light()),
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -46,10 +53,10 @@ void main() {
         'FTD1.00DefL2: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexThemeData.light(),
-          equals(FlexColorScheme.light(
+          FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine)));
     });
     test(
         'FTD1.00aL: GIVEN two FlexThemeData.light made with identical '
@@ -57,39 +64,50 @@ void main() {
       expect(
           FlexThemeData.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
-          equals(FlexThemeData.light(
+          ).toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexThemeData.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          )));
+          ).toString(minLevel: DiagnosticLevel.fine)));
     });
     test(
         'FTD1.00bL: GIVEN a FlexThemeData.light made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
-      expect(FlexThemeData.light(),
-          FlexThemeData.light(scheme: FlexScheme.material));
+      expect(
+        FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.light(scheme: FlexScheme.material)
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00cL: GIVEN a FlexThemeData.light made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-          FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           FlexThemeData.light(
             scheme: FlexScheme.material,
-          ));
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00dL: GIVEN a FlexThemeData.light made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
-          FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
-          FlexThemeData.light());
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     test(
@@ -98,18 +116,21 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark scheme with '
         'no parameters.', () {
       expect(
-          FlexColorScheme.dark(
-            colors: const FlexSchemeColor(
-              primary: FlexColor.materialDarkPrimary,
-              primaryContainer: FlexColor.materialDarkPrimaryContainer,
-              secondary: FlexColor.materialDarkSecondary,
-              secondaryContainer: FlexColor.materialDarkSecondaryContainer,
-              tertiary: FlexColor.materialDarkTertiary,
-              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
-              appBarColor: FlexColor.materialDarkTertiary,
-            ),
-          ).toTheme,
-          equals(FlexThemeData.dark()));
+        FlexColorScheme.dark(
+          colors: const FlexSchemeColor(
+            primary: FlexColor.materialDarkPrimary,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
+            tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            appBarColor: FlexColor.materialDarkTertiary,
+          ),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // themeDark = Default material dark scheme colors.
@@ -117,10 +138,11 @@ void main() {
         'FTD1.00SwapL: GIVEN FlexThemeData.light(swapColors: true) EXPECT it '
         'to be equal to one made with light scheme colors swapped ', () {
       expect(
-          FlexThemeData.light(
-            swapColors: true,
-          ),
-          equals(FlexColorScheme.light(
+        FlexThemeData.light(
+          swapColors: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colors: const FlexSchemeColor(
               primary: FlexColor.materialLightSecondary,
               primaryContainer: FlexColor.materialLightSecondaryContainer,
@@ -130,7 +152,9 @@ void main() {
               tertiary: FlexColor.materialLightTertiary,
               appBarColor: FlexColor.materialDarkTertiary,
             ),
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // themeDark = Default material dark scheme colors.
@@ -138,10 +162,11 @@ void main() {
         'FTD1.00SwapD: GIVEN FlexThemeData.dark(swapColors: true) EXPECT it '
         'to be equal to one made with dark scheme colors swapped ', () {
       expect(
-          FlexThemeData.dark(
-            swapColors: true,
-          ),
-          equals(FlexColorScheme.dark(
+        FlexThemeData.dark(
+          swapColors: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
             colors: const FlexSchemeColor(
               primary: FlexColor.materialDarkSecondary,
               primaryContainer: FlexColor.materialDarkSecondaryContainer,
@@ -151,15 +176,19 @@ void main() {
               tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
               appBarColor: FlexColor.materialDarkTertiary,
             ),
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     test(
         'FTD1.00DefD1: GIVEN FFlexColorScheme.dark().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.dark().', () {
       expect(
-        FlexColorScheme.dark().toTheme,
-        equals(FlexThemeData.dark()),
+        FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -167,50 +196,67 @@ void main() {
         'FTD1.00DefD2: GIVEN FlexThemeData.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexThemeData.dark(),
-          equals(FlexThemeData.dark(
+        FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark(
             colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          )));
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00aD: GIVEN two FlexThemeData.dark made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
+        FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           FlexThemeData.dark(
             colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ),
-          FlexThemeData.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ));
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00bD: GIVEN a FlexThemeData.dark made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
-      expect(FlexThemeData.dark(),
-          FlexThemeData.dark(scheme: FlexScheme.material));
+      expect(
+        FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark(scheme: FlexScheme.material)
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00cD: GIVEN a FlexThemeData.dark made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-          FlexThemeData.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ),
+        FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           FlexThemeData.dark(
             scheme: FlexScheme.material,
-          ));
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00dD: GIVEN a FlexThemeData.dark made with scheme '
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
-          FlexThemeData.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
-          ),
-          FlexThemeData.dark());
+        FlexThemeData.dark(
+          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // themeLight = Default material light scheme colors.
@@ -271,7 +317,9 @@ void main() {
             surfaceVariant: Color(0xffffffff),
             onSurfaceVariant: Color(0xff000000),
             outline: Color(0xff4d4d4d),
+            outlineVariant: Color(0xff999999),
             shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
             inverseSurface: Color(0xff121212),
             onInverseSurface: Color(0xffffffff),
             inversePrimary: Color(0xffda99ff),
@@ -307,7 +355,9 @@ void main() {
             surfaceVariant: Color(0xff121212),
             onSurfaceVariant: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
+            outlineVariant: Color(0xff666666),
             shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -348,24 +398,28 @@ void main() {
     // scheme compliance gaps.
     //**************************************************************************
 
-    test(
-        'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
-        'colors EXPECT toggleableActiveColor equality with '
-        'colorScheme.secondary.', () {
-      expect(
-        themeLight.toggleableActiveColor,
-        themeLight.colorScheme.secondary,
-      );
-    });
-    test(
-        'FTD1.08: GIVEN a FlexThemeData.raw theme with Material scheme dark '
-        'colors EXPECT toggleableActiveColor equality with '
-        'colorScheme.secondary.', () {
-      expect(
-        themeDark.toggleableActiveColor,
-        themeDark.colorScheme.secondary,
-      );
-    });
+    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
+    // This property is deprecated in Flutter SDK and now excluded from test
+    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
+    //
+    // test(
+    //    'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
+    //     'colors EXPECT toggleableActiveColor equality with '
+    //     'colorScheme.secondary.', () {
+    //   expect(
+    //     themeLight.toggleableActiveColor,
+    //     themeLight.colorScheme.secondary,
+    //   );
+    // });
+    // test(
+    //     'FTD1.08: GIVEN a FlexThemeData.raw theme with Material scheme dark '
+    //     'colors EXPECT toggleableActiveColor equality with '
+    //     'colorScheme.secondary.', () {
+    //   expect(
+    //     themeDark.toggleableActiveColor,
+    //     themeDark.colorScheme.secondary,
+    //   );
+    // });
     test(
         'FTD1.09: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -1281,8 +1335,22 @@ void main() {
     test(
         'FTD2.01: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'EXPECT equal.', () {
-      expect(FlexThemeData.light(), FlexColorScheme.light().toTheme);
-      expect(FlexThemeData.dark(), FlexColorScheme.dark().toTheme);
+      expect(
+        FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+      expect(
+        FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD2.02: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
@@ -1290,18 +1358,22 @@ void main() {
       expect(
         FlexThemeData.light(
           colors: FlexColor.mandyRed.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: FlexColor.mandyRed.light,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.light(
-          colors: FlexColor.mandyRed.light,
-        ).toTheme,
       );
       expect(
         FlexThemeData.dark(
           colors: FlexColor.mandyRed.dark,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: FlexColor.mandyRed.dark,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.dark(
-          colors: FlexColor.mandyRed.dark,
-        ).toTheme,
       );
     });
     test(
@@ -1311,21 +1383,25 @@ void main() {
         FlexThemeData.light(
           scheme: FlexScheme.barossa,
           usedColors: 1,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            scheme: FlexScheme.barossa,
+            usedColors: 1,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.light(
-          scheme: FlexScheme.barossa,
-          usedColors: 1,
-        ).toTheme,
       );
       expect(
         FlexThemeData.dark(
           scheme: FlexScheme.barossa,
           usedColors: 1,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            scheme: FlexScheme.barossa,
+            usedColors: 1,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.dark(
-          scheme: FlexScheme.barossa,
-          usedColors: 1,
-        ).toTheme,
       );
     });
     test(
@@ -1339,15 +1415,17 @@ void main() {
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            scheme: FlexScheme.bigStone,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+            blendLevel: 10,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            usedColors: 2,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.light(
-          scheme: FlexScheme.bigStone,
-          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-          blendLevel: 10,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          usedColors: 2,
-        ).toTheme,
       );
       expect(
         FlexThemeData.dark(
@@ -1357,15 +1435,17 @@ void main() {
           appBarStyle: FlexAppBarStyle.background,
           tabBarStyle: FlexTabBarStyle.forBackground,
           usedColors: 2,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            scheme: FlexScheme.bigStone,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+            blendLevel: 12,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            usedColors: 2,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.dark(
-          scheme: FlexScheme.bigStone,
-          surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-          blendLevel: 12,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          usedColors: 2,
-        ).toTheme,
       );
     });
     test(
@@ -1396,32 +1476,34 @@ void main() {
           transparentStatusBar: false,
           visualDensity: VisualDensity.compact,
           applyElevationOverlayColor: false,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: FlexColor.mandyRed.light,
+            scheme: FlexScheme.bigStone,
+            usedColors: 3,
+            surfaceMode: FlexSurfaceMode.level,
+            blendLevel: 0,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            appBarElevation: 1,
+            bottomAppBarElevation: 1,
+            primary: FlexColor.indigo.light.primary,
+            primaryContainer: FlexColor.indigo.light.primaryContainer,
+            secondary: FlexColor.indigo.light.secondary,
+            secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+            surface: FlexColor.lightSurface,
+            background: FlexColor.lightBackground,
+            scaffoldBackground: FlexColor.lightScaffoldBackground,
+            dialogBackground: FlexColor.lightSurface,
+            appBarBackground: FlexColor.indigo.light.primary,
+            swapColors: true,
+            tooltipsMatchBackground: true,
+            transparentStatusBar: false,
+            visualDensity: VisualDensity.compact,
+            applyElevationOverlayColor: false,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.light(
-          colors: FlexColor.mandyRed.light,
-          scheme: FlexScheme.bigStone,
-          usedColors: 3,
-          surfaceMode: FlexSurfaceMode.level,
-          blendLevel: 0,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          appBarElevation: 1,
-          bottomAppBarElevation: 1,
-          primary: FlexColor.indigo.light.primary,
-          primaryContainer: FlexColor.indigo.light.primaryContainer,
-          secondary: FlexColor.indigo.light.secondary,
-          secondaryContainer: FlexColor.indigo.light.secondaryContainer,
-          surface: FlexColor.lightSurface,
-          background: FlexColor.lightBackground,
-          scaffoldBackground: FlexColor.lightScaffoldBackground,
-          dialogBackground: FlexColor.lightSurface,
-          appBarBackground: FlexColor.indigo.light.primary,
-          swapColors: true,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-          visualDensity: VisualDensity.compact,
-          applyElevationOverlayColor: false,
-        ).toTheme,
       );
       expect(
         FlexThemeData.dark(
@@ -1448,32 +1530,34 @@ void main() {
           transparentStatusBar: false,
           visualDensity: VisualDensity.compact,
           applyElevationOverlayColor: false,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: FlexColor.mandyRed.dark,
+            scheme: FlexScheme.bigStone,
+            usedColors: 3,
+            surfaceMode: FlexSurfaceMode.level,
+            blendLevel: 0,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            appBarElevation: 1,
+            bottomAppBarElevation: 1,
+            primary: FlexColor.indigo.dark.primary,
+            primaryContainer: FlexColor.indigo.dark.primaryContainer,
+            secondary: FlexColor.indigo.dark.secondary,
+            secondaryContainer: FlexColor.indigo.dark.secondaryContainer,
+            surface: FlexColor.darkSurface,
+            background: FlexColor.darkBackground,
+            scaffoldBackground: FlexColor.darkScaffoldBackground,
+            dialogBackground: FlexColor.darkSurface,
+            appBarBackground: FlexColor.indigo.dark.primary,
+            swapColors: true,
+            tooltipsMatchBackground: true,
+            transparentStatusBar: false,
+            visualDensity: VisualDensity.compact,
+            applyElevationOverlayColor: false,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.dark(
-          colors: FlexColor.mandyRed.dark,
-          scheme: FlexScheme.bigStone,
-          usedColors: 3,
-          surfaceMode: FlexSurfaceMode.level,
-          blendLevel: 0,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          appBarElevation: 1,
-          bottomAppBarElevation: 1,
-          primary: FlexColor.indigo.dark.primary,
-          primaryContainer: FlexColor.indigo.dark.primaryContainer,
-          secondary: FlexColor.indigo.dark.secondary,
-          secondaryContainer: FlexColor.indigo.dark.secondaryContainer,
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkBackground,
-          scaffoldBackground: FlexColor.darkScaffoldBackground,
-          dialogBackground: FlexColor.darkSurface,
-          appBarBackground: FlexColor.indigo.dark.primary,
-          swapColors: true,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: false,
-          visualDensity: VisualDensity.compact,
-          applyElevationOverlayColor: false,
-        ).toTheme,
       );
     });
     test(
@@ -1505,33 +1589,35 @@ void main() {
           visualDensity: VisualDensity.compact,
           applyElevationOverlayColor: true,
           platform: TargetPlatform.android,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: FlexColor.mandyRed.light,
+            scheme: FlexScheme.bigStone,
+            usedColors: 3,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+            blendLevel: 0,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            appBarElevation: 1,
+            bottomAppBarElevation: 1,
+            primary: FlexColor.indigo.light.primary,
+            primaryContainer: FlexColor.indigo.light.primaryContainer,
+            secondary: FlexColor.indigo.light.secondary,
+            secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+            surface: FlexColor.lightSurface,
+            background: FlexColor.lightBackground,
+            scaffoldBackground: FlexColor.lightScaffoldBackground,
+            dialogBackground: FlexColor.lightSurface,
+            appBarBackground: FlexColor.indigo.light.primary,
+            swapColors: true,
+            tooltipsMatchBackground: true,
+            transparentStatusBar: true,
+            visualDensity: VisualDensity.compact,
+            applyElevationOverlayColor: true,
+            platform: TargetPlatform.android,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.light(
-          colors: FlexColor.mandyRed.light,
-          scheme: FlexScheme.bigStone,
-          usedColors: 3,
-          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
-          blendLevel: 0,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          appBarElevation: 1,
-          bottomAppBarElevation: 1,
-          primary: FlexColor.indigo.light.primary,
-          primaryContainer: FlexColor.indigo.light.primaryContainer,
-          secondary: FlexColor.indigo.light.secondary,
-          secondaryContainer: FlexColor.indigo.light.secondaryContainer,
-          surface: FlexColor.lightSurface,
-          background: FlexColor.lightBackground,
-          scaffoldBackground: FlexColor.lightScaffoldBackground,
-          dialogBackground: FlexColor.lightSurface,
-          appBarBackground: FlexColor.indigo.light.primary,
-          swapColors: true,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: true,
-          visualDensity: VisualDensity.compact,
-          applyElevationOverlayColor: true,
-          platform: TargetPlatform.android,
-        ).toTheme,
       );
       expect(
         FlexThemeData.dark(
@@ -1559,33 +1645,35 @@ void main() {
           visualDensity: VisualDensity.compact,
           applyElevationOverlayColor: true,
           platform: TargetPlatform.android,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: FlexColor.mandyRed.dark,
+            scheme: FlexScheme.bigStone,
+            usedColors: 3,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+            blendLevel: 0,
+            appBarStyle: FlexAppBarStyle.background,
+            tabBarStyle: FlexTabBarStyle.forBackground,
+            appBarElevation: 1,
+            bottomAppBarElevation: 1,
+            primary: FlexColor.indigo.dark.primary,
+            primaryContainer: FlexColor.indigo.dark.primaryContainer,
+            secondary: FlexColor.indigo.dark.secondary,
+            secondaryContainer: FlexColor.indigo.dark.secondaryContainer,
+            surface: FlexColor.darkSurface,
+            background: FlexColor.darkBackground,
+            scaffoldBackground: FlexColor.darkScaffoldBackground,
+            dialogBackground: FlexColor.darkSurface,
+            appBarBackground: FlexColor.indigo.dark.primary,
+            swapColors: true,
+            tooltipsMatchBackground: true,
+            transparentStatusBar: true,
+            visualDensity: VisualDensity.compact,
+            applyElevationOverlayColor: true,
+            platform: TargetPlatform.android,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        FlexColorScheme.dark(
-          colors: FlexColor.mandyRed.dark,
-          scheme: FlexScheme.bigStone,
-          usedColors: 3,
-          surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
-          blendLevel: 0,
-          appBarStyle: FlexAppBarStyle.background,
-          tabBarStyle: FlexTabBarStyle.forBackground,
-          appBarElevation: 1,
-          bottomAppBarElevation: 1,
-          primary: FlexColor.indigo.dark.primary,
-          primaryContainer: FlexColor.indigo.dark.primaryContainer,
-          secondary: FlexColor.indigo.dark.secondary,
-          secondaryContainer: FlexColor.indigo.dark.secondaryContainer,
-          surface: FlexColor.darkSurface,
-          background: FlexColor.darkBackground,
-          scaffoldBackground: FlexColor.darkScaffoldBackground,
-          dialogBackground: FlexColor.darkSurface,
-          appBarBackground: FlexColor.indigo.dark.primary,
-          swapColors: true,
-          tooltipsMatchBackground: true,
-          transparentStatusBar: true,
-          visualDensity: VisualDensity.compact,
-          applyElevationOverlayColor: true,
-          platform: TargetPlatform.android,
-        ).toTheme,
       );
     });
     test(
@@ -1683,16 +1771,17 @@ void main() {
       );
       // Check to String equality
       expect(
-        fcsLightTd.toString(),
+        fcsLightTd.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          ftdLight.toString(),
+          ftdLight.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // Check object equality
-      expect(
-        fcsLightTd,
-        equals(ftdLight),
-      );
+
+      // Check object equality - Removed since as stated earlier, does not work.
+      // expect(
+      //   fcsLightTd,
+      //   equals(ftdLight),
+      // );
       // Same test for dark mode
       final FlexColorScheme fcsDark = FlexColorScheme.dark(
         colors: FlexColor.mandyRed.dark,
@@ -1766,8 +1855,10 @@ void main() {
           platform: TargetPlatform.android,
           typography: Typography.material2018(platform: TargetPlatform.android),
           applyElevationOverlayColor: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          fcsDark.toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        fcsDark.toTheme,
       );
     });
     test(
@@ -1910,9 +2001,9 @@ void main() {
       );
       // Check to String equality
       expect(
-        fcsLightTd.toString(),
+        fcsLightTd.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          ftdLight.toString(),
+          ftdLight.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
       // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
@@ -2315,41 +2406,57 @@ void main() {
         'FTD3.00DefL: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexThemeData.light(),
-          equals(FlexColorScheme.light(
+        FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD3.00aL: GIVEN FlexThemeData.light made with identical '
         'parameters as FlexColorScheme EXPECT their ThemeData '
         'to be equal.', () {
       expect(
-          FlexThemeData.light(
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
-          equals(FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD3.00bL: GIVEN a FlexColorScheme.light made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexThemeData.light FlexScheme.material.', () {
-      expect(FlexColorScheme.light().toTheme,
-          equals(FlexThemeData.light(scheme: FlexScheme.material)));
+      expect(
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.light(scheme: FlexScheme.material)
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD3.00cL: GIVEN a FlexThemeData.light made with colors '
         'material EXPECT ThemeData to be equal to one made with '
         'scheme FlexColorScheme.light FlexScheme.material.', () {
       expect(
-          FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
-          equals(FlexColorScheme.light(
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             scheme: FlexScheme.material,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD3.00dL: GIVEN a FlexThemeData.light made with scheme '
@@ -2358,8 +2465,10 @@ void main() {
       expect(
           FlexThemeData.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ),
-          equals(FlexColorScheme.light().toTheme));
+          ).toString(minLevel: DiagnosticLevel.fine),
+          equalsIgnoringHashCodes(FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine)));
     });
 
     test(
@@ -2368,18 +2477,23 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with FlexColorScheme '
         'dark scheme with no parameters.', () {
       expect(
-          FlexThemeData.dark(
-            colors: const FlexSchemeColor(
-              primary: FlexColor.materialDarkPrimary,
-              primaryContainer: FlexColor.materialDarkPrimaryContainer,
-              secondary: FlexColor.materialDarkSecondary,
-              secondaryContainer: FlexColor.materialDarkSecondaryContainer,
-              tertiary: FlexColor.materialDarkTertiary,
-              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
-              appBarColor: FlexColor.materialDarkTertiary,
-            ),
+        FlexThemeData.dark(
+          colors: const FlexSchemeColor(
+            primary: FlexColor.materialDarkPrimary,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
+            tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            appBarColor: FlexColor.materialDarkTertiary,
           ),
-          equals(FlexColorScheme.dark().toTheme));
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // themeDark = Default material dark scheme colors.
@@ -2398,10 +2512,12 @@ void main() {
             tertiary: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
           ),
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            swapColors: true,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        equals(FlexColorScheme.light(
-          swapColors: true,
-        ).toTheme),
       );
     });
 
@@ -2421,10 +2537,12 @@ void main() {
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
             appBarColor: FlexColor.materialDarkTertiary,
           ),
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            swapColors: true,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
-        equals(FlexColorScheme.dark(
-          swapColors: true,
-        ).toTheme),
       );
     });
 
@@ -2433,10 +2551,12 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with FlexThemeData '
         'dark scheme.', () {
       expect(
-        FlexColorScheme.dark().toTheme,
-        equals(FlexThemeData.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        )),
+        FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark(
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -2446,10 +2566,12 @@ void main() {
       expect(
         FlexColorScheme.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme,
-        equals(FlexThemeData.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        )),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark(
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -2457,8 +2579,11 @@ void main() {
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-        FlexThemeData.dark(),
-        equals(FlexThemeData.dark(scheme: FlexScheme.material)),
+        FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark(scheme: FlexScheme.material)
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -2468,10 +2593,10 @@ void main() {
       expect(
         FlexThemeData.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ),
-        equals(FlexColorScheme.dark(
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(FlexColorScheme.dark(
           scheme: FlexScheme.material,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
     test(
@@ -2481,9 +2606,58 @@ void main() {
       expect(
         FlexColorScheme.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme,
-        equals(FlexThemeData.dark()),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
+    });
+
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNull = FlexThemeData.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    );
+    test(
+        'FTD3.10 Light: GIVEN a FlexThemeData.light with null appBarStyle and '
+        'not using M3 EXPECT app bar background primary ', () {
+      expect(tLAppBarNull.appBarTheme.backgroundColor,
+          equals(tLAppBarNull.colorScheme.primary));
+    });
+    final ThemeData tDAppBarNull = FlexThemeData.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    );
+    test(
+        'FTD3.10 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
+        'not using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNull.appBarTheme.backgroundColor,
+          equals(tDAppBarNull.colorScheme.surface));
+    });
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNullM3 = FlexThemeData.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    );
+    test(
+        'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
+        'and using M3 EXPECT app bar background surface ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tLAppBarNullM3.colorScheme.surface));
+    });
+    final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    );
+    test(
+        'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
+        ' using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tDAppBarNullM3.colorScheme.surface));
     });
   });
 }

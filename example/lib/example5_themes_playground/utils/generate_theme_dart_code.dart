@@ -95,14 +95,16 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendLevelDark = controller.blendLevelDark > 0
       ? '  blendLevel: ${controller.blendLevelDark},\n'
       : '';
-  final String appBarStyleLight =
-      controller.appBarStyleLight != FlexAppBarStyle.primary
-          ? '  appBarStyle: ${controller.appBarStyleLight},\n'
-          : '';
-  final String appBarStyleDark =
-      controller.appBarStyleDark != FlexAppBarStyle.material
-          ? '  appBarStyle: ${controller.appBarStyleDark},\n'
-          : '';
+  final String appBarStyleLight = controller.appBarStyleLight == null ||
+          (controller.useMaterial3 &&
+              controller.appBarBackgroundSchemeColorLight != null)
+      ? ''
+      : '  appBarStyle: ${controller.appBarStyleLight},\n';
+  final String appBarStyleDark = controller.appBarStyleDark == null ||
+          (controller.useMaterial3 &&
+              controller.appBarBackgroundSchemeColorDark != null)
+      ? ''
+      : '  appBarStyle: ${controller.appBarStyleDark},\n';
   final String appBarOpacityLight = controller.appBarOpacityLight != 1
       ? '  appBarOpacity: ${controller.appBarOpacityLight.toStringAsFixed(2)},\n'
       : '';
@@ -155,18 +157,22 @@ String generateThemeDartCode(ThemeController controller) {
   final String interactionEffects = controller.interactionEffects
       ? ''
       : '    interactionEffects: ${controller.interactionEffects},\n';
-  final String blendOnLevelLight = controller.blendOnLevel > 0
-      ? '    blendOnLevel: ${controller.blendOnLevel},\n'
-      : '';
-  final String blendOnLevelDark = controller.blendOnLevelDark > 0
-      ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
-      : '';
-  final String blendLightOnColors = controller.blendLightOnColors
-      ? ''
-      : '    blendOnColors: ${controller.blendLightOnColors},\n';
-  final String blendDarkOnColors = controller.blendDarkOnColors
-      ? ''
-      : '    blendOnColors: ${controller.blendDarkOnColors},\n';
+  final String blendOnLevelLight =
+      controller.blendOnLevel > 0 && !controller.useKeyColors
+          ? '    blendOnLevel: ${controller.blendOnLevel},\n'
+          : '';
+  final String blendOnLevelDark =
+      controller.blendOnLevelDark > 0 && !controller.useKeyColors
+          ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
+          : '';
+  final String blendLightOnColors =
+      controller.blendLightOnColors || controller.useKeyColors
+          ? ''
+          : '    blendOnColors: ${controller.blendLightOnColors},\n';
+  final String blendDarkOnColors =
+      controller.blendDarkOnColors || controller.useKeyColors
+          ? ''
+          : '    blendOnColors: ${controller.blendDarkOnColors},\n';
   final String blendLightTextTheme = controller.blendLightTextTheme
       ? ''
       : '    blendTextTheme: ${controller.blendLightTextTheme},\n';
@@ -181,6 +187,12 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String defRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String thinBorderWidth = controller.thinBorderWidth != null
+      ? '    thinBorderWidth: ${controller.thinBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String thickBorderWidth = controller.thickBorderWidth != null
+      ? '    thickBorderWidth: ${controller.thickBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
   // Material bottom sheet.
@@ -223,12 +235,22 @@ String generateThemeDartCode(ThemeController controller) {
           controller.elevatedButtonSchemeColor == null
       ? ''
       : '    elevatedButtonSchemeColor: ${controller.elevatedButtonSchemeColor},\n';
+  final String elevatedButtonSecondarySchemeColor = controller
+              .elevatedButtonSecondarySchemeColor ==
+          null
+      ? ''
+      : '    elevatedButtonSecondarySchemeColor: ${controller.elevatedButtonSecondarySchemeColor},\n';
   final String outlinedButtonSchemeColor = controller
                   .outlinedButtonSchemeColor ==
               SchemeColor.primary ||
           controller.outlinedButtonSchemeColor == null
       ? ''
       : '    outlinedButtonSchemeColor: ${controller.outlinedButtonSchemeColor},\n';
+  final String outlinedButtonOutlineSchemeColor = controller
+              .outlinedButtonOutlineSchemeColor ==
+          null
+      ? ''
+      : '    outlinedButtonOutlineSchemeColor: ${controller.outlinedButtonOutlineSchemeColor},\n';
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
               SchemeColor.primary ||
           controller.toggleButtonsSchemeColor == null
@@ -295,8 +317,8 @@ String generateThemeDartCode(ThemeController controller) {
   // Fab and chip, snack, card, dialog, popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
-      ? ''
-      : '    fabUseShape: ${controller.fabUseShape},\n';
+      ? '    fabUseShape: ${controller.fabUseShape},\n'
+      : '';
   final String fabBorderRadius = controller.fabBorderRadius != null &&
           controller.fabUseShape
       ? '    fabRadius: ${controller.fabBorderRadius!.toStringAsFixed(1)},\n'
@@ -570,6 +592,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendLightTextTheme'
           '$useTextTheme'
           '$defRadius'
+          '$thinBorderWidth'
+          '$thickBorderWidth'
           //
           '$bottomSheetRadius'
           '$textButtonBorderRadius'
@@ -579,7 +603,9 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
+          '$elevatedButtonSecondarySchemeColor'
           '$outlinedButtonSchemeColor'
+          '$outlinedButtonOutlineSchemeColor'
           '$toggleButtonsSchemeColor'
           //
           '$switchSchemeColor'
@@ -662,6 +688,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendDarkTextTheme'
           '$useTextTheme'
           '$defRadius'
+          '$thinBorderWidth'
+          '$thickBorderWidth'
           //
           '$bottomSheetRadius'
           '$textButtonBorderRadius'
@@ -671,7 +699,9 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$textButtonSchemeColor'
           '$elevatedButtonSchemeColor'
+          '$elevatedButtonSecondarySchemeColor'
           '$outlinedButtonSchemeColor'
+          '$outlinedButtonOutlineSchemeColor'
           '$toggleButtonsSchemeColor'
           //
           '$switchSchemeColor'

@@ -20,42 +20,42 @@
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example_copy_paste/main.dart"
+            "program": "lib/example_copy_paste_from_playground/main.dart"
         },
         {
             "name": "Example 1 - Basic Theme Usage",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example1/main.dart"
+            "program": "lib/example1_basic_theme_usage/main.dart"
         },
         {
             "name": "Example 2 - Custom Theme",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example2/main.dart"
+            "program": "lib/example2_custom_theme/main.dart"
         },
         {
             "name": "Example 3 - Four Themes",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example3/main.dart"
+            "program": "lib/example3_four_themes/main.dart"
         },
         {
             "name": "Example 4 - All Themes",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example4/main.dart"
+            "program": "lib/example4_all_themes/main.dart"
         },
         {
             "name": "Example 5 - Themes Playground",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
-            "program": "lib/example5/main.dart"
+            "program": "lib/example5_themes_playground/main.dart"
         }
     ]
 }

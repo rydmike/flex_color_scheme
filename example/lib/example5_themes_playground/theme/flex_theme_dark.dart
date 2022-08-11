@@ -32,10 +32,7 @@ ThemeData flexThemeDark(ThemeController controller) =>
 ///
 /// Normally you would probably only have a few properties offered as possible
 /// features the user can change. Since this is a feature demo of almost
-/// everything [FlexColorScheme] it is a bit wild.
-///
-/// This function returns the Dark theme mode data that we us in the
-/// ThemesPlayground app.
+/// everything [FlexColorScheme] can do, it is a bit wild.
 ///
 /// The function only contains tutorial comments on topics not covered in the
 /// almost identical `flexColorSchemeLight` function. Please see it for
@@ -84,6 +81,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             blendTextTheme: controller.blendDarkTextTheme,
             useFlutterDefaults: controller.useFlutterDefaults,
             useTextTheme: controller.useTextTheme,
+            thinBorderWidth: controller.thinBorderWidth,
+            thickBorderWidth: controller.thickBorderWidth,
             //
             defaultRadius: controller.defaultRadius,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
@@ -94,7 +93,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller) {
             //
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            elevatedButtonSecondarySchemeColor:
+                controller.elevatedButtonSecondarySchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
+            outlinedButtonOutlineSchemeColor:
+                controller.outlinedButtonOutlineSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,

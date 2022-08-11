@@ -125,7 +125,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: primary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: primary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -173,7 +173,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -197,7 +196,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -210,7 +208,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: primaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: primaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -262,7 +260,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -313,7 +310,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: secondary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: secondary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -361,7 +358,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -385,7 +381,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -398,7 +393,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: secondaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: secondaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -454,7 +449,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -505,7 +499,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: tertiary,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: tertiary,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -545,7 +539,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -569,7 +562,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -582,7 +574,7 @@ class SchemeColors extends StatelessWidget {
                       },
                       child: Material(
                         color: tertiaryContainer,
-                        child: ColorPickerInkWell(
+                        child: ColorPickerInkWellDialog(
                           color: tertiaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
@@ -624,7 +616,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -685,7 +676,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -708,7 +698,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -731,7 +720,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -759,7 +747,7 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Background and shadow colors presentation
+          // Background and surface colors presentation
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -791,7 +779,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -814,7 +801,169 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.surface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.surface,
+                        child: ColorNameValue(
+                          color: colorScheme.surface,
+                          textColor: colorScheme.onSurface,
+                          label: 'surface',
+                          tone: tones.surfaceTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.onSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onSurface,
+                        child: ColorNameValue(
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
+                          label: 'onSurface',
+                          tone: tones.onSurfaceTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // SurfaceVariant and inverseSurface colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.surfaceVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.surfaceVariant,
+                        child: ColorNameValue(
+                          color: colorScheme.surfaceVariant,
+                          textColor: colorScheme.onSurfaceVariant,
+                          label: 'surfaceVariant',
+                          tone: tones.surfaceVariantTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.onSurfaceVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onSurfaceVariant,
+                        child: ColorNameValue(
+                          color: colorScheme.onSurfaceVariant,
+                          textColor: colorScheme.surfaceVariant,
+                          label: 'onSurfaceVariant',
+                          tone: tones.onSurfaceVariantTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
                   const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.inverseSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.inverseSurface,
+                        child: ColorNameValue(
+                          color: colorScheme.inverseSurface,
+                          textColor: colorScheme.onInverseSurface,
+                          label: 'inverseSurface',
+                          tone: tones.inverseSurfaceTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.onInverseSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.onInverseSurface,
+                        child: ColorNameValue(
+                          color: colorScheme.onInverseSurface,
+                          textColor: colorScheme.inverseSurface,
+                          label: 'onInverseSurface',
+                          tone: tones.onInverseSurfaceTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // Outline, OutlineVariant, shadow and scrim colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -837,7 +986,28 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.outlineVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.outlineVariant,
+                        child: ColorNameValue(
+                          color: colorScheme.outline,
+                          textColor: _onColor(colorScheme.outlineVariant),
+                          label: 'outlineVariant',
+                          tone: tones.outlineVariantTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -865,7 +1035,7 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Surface colors presentation
+          // Inverse colors presentation NEW
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -878,7 +1048,7 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.surface);
+                        tc.setHoverColor(colorScheme.scrim);
                         tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
@@ -886,147 +1056,17 @@ class SchemeColors extends StatelessWidget {
                         tc.setHoverTonalPalette(null);
                       },
                       child: Material(
-                        color: colorScheme.surface,
+                        color: colorScheme.scrim,
                         child: ColorNameValue(
-                          color: colorScheme.surface,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface',
-                          tone: tones.surfaceTone,
+                          color: colorScheme.scrim,
+                          textColor: _onColor(colorScheme.scrim),
+                          label: 'scrim',
+                          tone: tones.scrimTone,
                           showTone: showTones,
                         ),
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.onSurface);
-                        tc.setHoverTonalPalette(TonalPalettes.neutral);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.onSurface,
-                        child: ColorNameValue(
-                          color: colorScheme.onSurface,
-                          textColor: colorScheme.surface,
-                          label: 'onSurface',
-                          tone: tones.onSurfaceTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.surfaceVariant);
-                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.surfaceVariant,
-                        child: ColorNameValue(
-                          color: colorScheme.surfaceVariant,
-                          textColor: colorScheme.onSurfaceVariant,
-                          label: 'surfaceVariant',
-                          tone: tones.surfaceVariantTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.onSurfaceVariant);
-                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.onSurfaceVariant,
-                        child: ColorNameValue(
-                          color: colorScheme.onSurfaceVariant,
-                          textColor: colorScheme.surfaceVariant,
-                          label: 'onSurfaceVariant',
-                          tone: tones.onSurfaceVariantTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          //
-          // Inverse colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.inverseSurface);
-                        tc.setHoverTonalPalette(TonalPalettes.neutral);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.inverseSurface,
-                        child: ColorNameValue(
-                          color: colorScheme.inverseSurface,
-                          textColor: colorScheme.onInverseSurface,
-                          label: 'inverseSurface',
-                          tone: tones.inverseSurfaceTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.onInverseSurface);
-                        tc.setHoverTonalPalette(TonalPalettes.neutral);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.onInverseSurface,
-                        child: ColorNameValue(
-                          color: colorScheme.onInverseSurface,
-                          textColor: colorScheme.inverseSurface,
-                          label: 'onInverseSurface',
-                          tone: tones.onInverseSurfaceTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -1049,7 +1089,6 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {

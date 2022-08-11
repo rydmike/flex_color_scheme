@@ -12,7 +12,6 @@
 #    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
-#  - branch: version-5-0-0-dev1
 name: Test
 on:
   pull_request:
@@ -32,7 +31,7 @@ jobs:
       - name: "Install Flutter and Dart SDK"
         uses: subosito/flutter-action@v1.5.3
         with:
-          channel: "stable"
+          channel: "master"
       - name: "Show Dart SDK version"
         run: dart --version
       - name: "Show Flutter SDK version"

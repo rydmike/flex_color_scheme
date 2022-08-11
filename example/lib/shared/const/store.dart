@@ -85,6 +85,16 @@ class Store {
   // Default value for the defaultRadius, also used to reset settings.
   static const double? defaultDefaultRadius = null;
 
+  // Key used to read and save the thinBorderWidth value.
+  static const String keyThinBorderWidth = 'thinBorderWidth';
+  // Default value for the thinBorderWidth, also used to reset settings.
+  static const double? defaultThinBorderWidth = null;
+
+  // Key used to read and save the thickBorderWidth value.
+  static const String keyThickBorderWidth = 'thickBorderWidth';
+  // Default value for the thickBorderWidth, also used to reset settings.
+  static const double? defaultThickBorderWidth = null;
+
   // Key used to read and save the tooltipsMatchBackground value.
   static const String keyTooltipsMatchBackground = 'tooltipsMatchBackground';
   // Default value for the tooltipsMatchBackground, also to reset settings.
@@ -350,14 +360,14 @@ class Store {
   // Key used to read and save the appBarStyleLight value.
   static const String keyAppBarStyleLight = 'lightAppBarStyle';
   // Default value for the appBarStyleLight, also used to reset settings.
-  static const FlexAppBarStyle defaultAppBarStyleLight =
-      FlexAppBarStyle.primary;
+  static const FlexAppBarStyle? defaultAppBarStyleLight = null;
+  // FlexAppBarStyle.primary;
 
   // Key used to read and save the appBarStyleDark value.
   static const String keyAppBarStyleDark = 'darkAppBarStyle';
   // Default value for the appBarStyleDark, also used to reset settings.
-  static const FlexAppBarStyle defaultAppBarStyleDark =
-      FlexAppBarStyle.background;
+  static const FlexAppBarStyle? defaultAppBarStyleDark = null;
+  // FlexAppBarStyle.background;
 
   // Key used to read and save the appBarOpacityLight value.
   static const String keyAppBarOpacityLight = 'appBarOpacity';
@@ -654,6 +664,14 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultElevatedButtonSchemeColor = null;
 
+  // Key used to read and save the elevatedButtonSecondarySchemeColor value.
+  static const String keyElevatedButtonSecondarySchemeColor =
+      'elevatedButtonSecondarySchemeColor';
+  // Default value for the elevatedButtonSecondarySchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultElevatedButtonSecondarySchemeColor = null;
+
   // Key used to read and save the elevatedButtonBorderRadius value.
   static const String keyElevatedButtonBorderRadius =
       'elevatedButtonBorderRadius';
@@ -669,6 +687,14 @@ class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultOutlinedButtonSchemeColor = null;
+
+  // Key used to read and save the outlinedButtonOutlineSchemeColor value.
+  static const String keyOutlinedButtonOutlineSchemeColor =
+      'outlinedButtonOutlineSchemeColor';
+  // Default value for the outlinedButtonOutlineSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultOutlinedButtonOutlineSchemeColor = null;
 
   // Key used to read and save the outlinedButtonBorderRadius value.
   static const String keyOutlinedButtonBorderRadius =
@@ -726,7 +752,7 @@ class Store {
   // Key used to read and save the fabUseShape value.
   static const String keyFabUseShape = 'fabUseShape';
   // Default value for the fabUseShape, also to reset settings.
-  static const bool defaultFabUseShape = true;
+  static const bool defaultFabUseShape = false;
 
   // Key used to read and save the fabBorderRadius value.
   static const String keyFabBorderRadius = 'fabBorderRadius';

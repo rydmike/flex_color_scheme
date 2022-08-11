@@ -112,18 +112,20 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.buttonMinSize = kButtonMinSize,
     this.buttonPadding = kButtonPadding,
-    this.thickBorderWidth = kThickBorderWidth,
-    this.thinBorderWidth = kThinBorderWidth,
+    this.thickBorderWidth,
+    this.thinBorderWidth,
     //
     this.textButtonRadius,
     this.elevatedButtonRadius,
-    this.elevatedButtonElevation = kElevatedButtonElevation,
+    this.elevatedButtonElevation,
     this.outlinedButtonRadius,
     this.toggleButtonsRadius,
     //
     this.textButtonSchemeColor,
     this.elevatedButtonSchemeColor,
+    this.elevatedButtonSecondarySchemeColor,
     this.outlinedButtonSchemeColor,
+    this.outlinedButtonOutlineSchemeColor,
     this.materialButtonSchemeColor,
     this.toggleButtonsSchemeColor,
     //
@@ -146,7 +148,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorUnfocusedBorderIsColored = true,
     //
     this.fabRadius,
-    this.fabUseShape = true,
+    this.fabUseShape = false,
     this.fabSchemeColor,
     this.chipRadius,
     this.chipSchemeColor,
@@ -157,6 +159,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuRadius,
     this.popupMenuElevation = kPopupMenuElevation,
     this.popupMenuOpacity = 1,
+    //
     this.dialogRadius,
     this.dialogElevation = kDialogElevation,
     this.dialogBackgroundSchemeColor,
@@ -165,6 +168,8 @@ class FlexSubThemesData with Diagnosticable {
     this.snackBarBackgroundSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
+    this.appBarCenterTitle,
+    //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
     //
@@ -575,16 +580,21 @@ class FlexSubThemesData with Diagnosticable {
   /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
   /// as to selected state of [InputDecorator].
   ///
-  /// Defaults to [kThickBorderWidth].
-  final double thickBorderWidth;
+  ///
+  /// If undefined and [ThemeData.useMaterial3] is false,
+  /// defaults to [kThickBorderWidth].
+  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  final double? thickBorderWidth;
 
   /// Border thickness on unselected input decorator and disabled buttons.
   ///
   /// Applies to disabled [OutlinedButton] and to un-selected state in
   /// [InputDecorator].
   ///
-  /// Defaults to [kThinBorderWidth].
-  final double thinBorderWidth;
+  /// If undefined and [ThemeData.useMaterial3] is false,
+  /// defaults to [kThinBorderWidth].
+  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  final double? thinBorderWidth;
 
   /// Border radius override value for [TextButton].
   ///
@@ -603,11 +613,13 @@ class FlexSubThemesData with Diagnosticable {
   /// Elevation of [ElevatedButton].
   ///
   /// This design favors a flat design using colors, the elevated button is
-  /// primary colored by default, it thus needs no elevation or ery little in
-  /// this design.
+  /// primary colored by default, it thus needs no elevation or very little in
+  /// FlexColorSchemes custom design.
   ///
-  /// Defaults to [kElevatedButtonElevation] = 1.
-  final double elevatedButtonElevation;
+  /// If null, defaults to [kElevatedButtonElevation] = 1, when [useMaterial3]
+  /// is false. If [useMaterial3] is true, it is kept null and default M3
+  /// elevation of [ElevatedButton] is kept.
+  final double? elevatedButtonElevation;
 
   /// Border radius value for [OutlinedButton].
   ///
@@ -633,22 +645,50 @@ class FlexSubThemesData with Diagnosticable {
   /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   final SchemeColor? textButtonSchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ElevatedButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [ElevatedButton] used as its main color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  /// If [useMaterial3] is false, the [elevatedButtonSchemeColor] is used as
+  /// button background color in M2 style. If [useMaterial3] is true, it is
+  /// used as the button foreground color for text and icon.
+  ///
+  /// If not defined, it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on sub themes.
   final SchemeColor? elevatedButtonSchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [OutlinedButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [ElevatedButton] uses as its secondary color.
+  ///
+  /// If [useMaterial3] is false, the [elevatedButtonSecondarySchemeColor] is
+  /// used as button foreground color in M2 style. If [useMaterial3] is true,
+  /// it is used as the button background color.
+  ///
+  /// If not defined, the [elevatedButtonSchemeColor]'s on color will be used if
+  /// [useMaterial3] is false, and if it is true, then [ColorScheme.surface]
+  /// will be used as default.
+  final SchemeColor? elevatedButtonSecondarySchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [OutlinedButton] use as its main theme color.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color via
   /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   final SchemeColor? outlinedButtonSchemeColor;
 
-  /// Defines which [Theme] based [ColorScheme] based color the old
-  /// [MaterialButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color, that the
+  /// [OutlinedButton] uses as its outline color.
+  ///
+  /// If [useMaterial3] is false, and the [outlinedButtonOutlineSchemeColor] is
+  /// not defined, the [outlinedButtonSchemeColor] is used as default button
+  /// outline color, following M2 style.
+  ///
+  /// If [useMaterial3] is true, and the [outlinedButtonOutlineSchemeColor] is
+  /// not defined, the [ColorScheme.outline] is used as default button
+  /// outline color in M3 style.
+  final SchemeColor? outlinedButtonOutlineSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color, that the old
+  /// [MaterialButton] use as its main theme color.
   ///
   /// The [MaterialButton] is the parent class of old deprecated and removed
   /// buttons `RaisedButton`, `OutlineButton` and `FlatButton`. The theme
@@ -854,30 +894,39 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [FloatingActionButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kFabRadius] 16dp, based on M3 Specification
+  /// [kFabRadius] 16dp, based on M3 Specification for normal sized FAB.
   /// https://m3.material.io/components/floating-action-button/specs
+  ///
+  /// The border radius is only assigned when [fabUseShape] is true, if
+  /// [fabUseShape] is false, the [fabRadius] has no effect on FAB shapes.
+  ///
+  /// If [ThemeData.useMaterial3] and [fabUseShape] are true, you cannot define
+  /// FAB buttons that get the same rounding style as defined by the M3 spec.
+  /// This is because the FAB cannot be themed in same style as its default null
+  /// shape behavior. See issue
+  /// [#107946](https://github.com/flutter/flutter/issues/107946) for
+  /// more information.
   final double? fabRadius;
 
   /// Use shape theming on Floating Action Button (FAB).
   ///
-  /// By setting [fabUseShape] to false it is possible to opt out of all
-  /// shape theming on FABs and keeping tis un-themed defaults, while still
-  /// eg. keeping M3 defaults on other widgets or changing their border radius
-  /// with the shared global value.
+  /// When [fabUseShape] is false, default since FCS version 5.2.0, no custom
+  /// shape theme is used on FABs, it keeps its un-themed defaults. The
+  /// [fabRadius] properties has no effect when[ fabUseShape] is false.
   ///
-  /// You may want to continue to keep the FAB round and extended FAB stadium
-  /// shaped as before, despite otherwise using a rounder or M3 design.
-  /// The circular M2 FAB goes well with those designs too.
+  /// If [ThemeData.useMaterial3] is false the FAB is circular. If it is true,
+  /// the FAB uses M3 shapes as defined by
+  /// https://m3.material.io/components/floating-action-button/specs
   ///
-  /// When the [ThemeData.useMaterial3] will start to have an impact in Flutter
-  /// SDK on the [FloatingActionButton] shape and design, setting [fabUseShape]
-  /// to false and [ThemeData.useMaterial3] to true, will result in the
-  /// M3 spec default FAB shape as implemented by the SDK. As long as the
-  /// [ThemeData.useMaterial3] exist in the framework, setting it to false
-  /// and setting [fabUseShape] to false, will continue to produce the M2
-  /// design.
+  /// Defaults to false.
   ///
-  /// Defaults to true.
+  /// The default opinionated style was changed from true to false, in
+  /// version 5.2.0. This is a style break with previous versions where it was
+  /// true. The opinionated style change was done to use a style that by default
+  /// matches M3 style, when [ThemeData.useMaterial3] is true.
+  ///
+  /// To make make circular FAB when [ThemeData.useMaterial3] is true, set
+  /// [fabUseShape] to true and [fabRadius] to a high values, like 60.
   final bool fabUseShape;
 
   /// Defines which [Theme] based [ColorScheme] based color the Floating
@@ -898,7 +947,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as their base color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color.
+  /// The selected color is only used as base for the [Chip] colors, it also
+  /// uses alpha blend and opacity to create the effective Chip colors using
+  /// the selected scheme color as base.
+  ///
+  /// If not defined it defaults to effective theme based color from using
+  /// [SchemeColor.primary], when [useMaterial3] is false.
+  ///
+  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
+  /// result in M3 default Chip coloring being used without opacity and alpha
+  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
+  /// pass in [SchemeColor.primary].
   final SchemeColor? chipSchemeColor;
 
   /// Border radius value for [Card].
@@ -1064,6 +1123,13 @@ class FlexSubThemesData with Diagnosticable {
   /// options offered via [FlexColorScheme.light] and [FlexColorScheme.dark]
   /// ([appBarStyle) factory parameter.
   final SchemeColor? appBarBackgroundSchemeColor;
+
+  /// Whether the AppBar title should be centered.
+  ///
+  /// Overrides the default value of [AppBar.centerTitle] property in all
+  /// descendant [AppBar] widgets. Ff this property is null, then value
+  /// is adapted to the current [TargetPlatform].
+  final bool? appBarCenterTitle;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
@@ -1827,7 +1893,9 @@ class FlexSubThemesData with Diagnosticable {
     final double? toggleButtonsRadius,
     final SchemeColor? textButtonSchemeColor,
     final SchemeColor? elevatedButtonSchemeColor,
+    final SchemeColor? elevatedButtonSecondarySchemeColor,
     final SchemeColor? outlinedButtonSchemeColor,
+    final SchemeColor? outlinedButtonOutlineSchemeColor,
     final SchemeColor? materialButtonSchemeColor,
     final SchemeColor? toggleButtonsSchemeColor,
     final SchemeColor? switchSchemeColor,
@@ -1859,7 +1927,10 @@ class FlexSubThemesData with Diagnosticable {
     final double? timePickerDialogRadius,
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
+    //
     final SchemeColor? appBarBackgroundSchemeColor,
+    final bool? appBarCenterTitle,
+    //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     //
@@ -1947,8 +2018,12 @@ class FlexSubThemesData with Diagnosticable {
           textButtonSchemeColor ?? this.textButtonSchemeColor,
       elevatedButtonSchemeColor:
           elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
+      elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ??
+          this.elevatedButtonSecondarySchemeColor,
       outlinedButtonSchemeColor:
           outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
+      outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ??
+          this.outlinedButtonOutlineSchemeColor,
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       toggleButtonsSchemeColor:
@@ -1994,6 +2069,7 @@ class FlexSubThemesData with Diagnosticable {
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
+      appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
@@ -2160,7 +2236,11 @@ class FlexSubThemesData with Diagnosticable {
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.textButtonSchemeColor == textButtonSchemeColor &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
+        other.elevatedButtonSecondarySchemeColor ==
+            elevatedButtonSecondarySchemeColor &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
+        other.outlinedButtonOutlineSchemeColor ==
+            outlinedButtonOutlineSchemeColor &&
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
         other.switchSchemeColor == switchSchemeColor &&
@@ -2192,7 +2272,10 @@ class FlexSubThemesData with Diagnosticable {
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
+        //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
+        other.appBarCenterTitle == appBarCenterTitle &&
+        //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
@@ -2321,7 +2404,9 @@ class FlexSubThemesData with Diagnosticable {
         //
         textButtonSchemeColor,
         elevatedButtonSchemeColor,
+        elevatedButtonSecondarySchemeColor,
         outlinedButtonSchemeColor,
+        outlinedButtonOutlineSchemeColor,
         materialButtonSchemeColor,
         toggleButtonsSchemeColor,
         //
@@ -2359,7 +2444,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         snackBarElevation,
         snackBarBackgroundSchemeColor,
+        //
         appBarBackgroundSchemeColor,
+        appBarCenterTitle,
+        //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
         //
@@ -2460,7 +2548,12 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSchemeColor', elevatedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
+        'elevatedButtonSecondarySchemeColor',
+        elevatedButtonSecondarySchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'materialButtonSchemeColor', materialButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
@@ -2515,6 +2608,8 @@ class FlexSubThemesData with Diagnosticable {
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
+    properties
+        .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(

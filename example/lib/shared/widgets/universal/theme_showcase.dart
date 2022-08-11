@@ -62,6 +62,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const ListTileShowcase(),
         const Divider(),
+        const AppBarShowcase(),
+        const Divider(),
         const TabBarForAppBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -152,6 +154,68 @@ class ElevatedButtonShowcase extends StatelessWidget {
   }
 }
 
+// These are commented until https://github.com/flutter/flutter/pull/107382
+// lands in master 3.1.0 channel.
+// TODO(rydmike): Add these buttons to showcase
+// TODO(rydmike): FCS fix FCS M3 defaults.
+//
+// class FilledButtonShowcase extends StatelessWidget {
+//   const FilledButtonShowcase({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Wrap(
+//       crossAxisAlignment: WrapCrossAlignment.center,
+//       spacing: 8,
+//       runSpacing: 8,
+//       children: <Widget>[
+//         FilledButton(
+//           onPressed: () {},
+//           child: const Text('FilledButton button'),
+//         ),
+//         FilledButton.icon(
+//           onPressed: () {},
+//           icon: const Icon(Icons.add),
+//           label: const Text('FilledButton icon'),
+//         ),
+//         const FilledButton(
+//           onPressed: null,
+//           child: Text('FilledButton button'),
+//         ),
+//       ],
+//     );
+//   }
+// }
+//
+//
+// class FilledButtonTonalShowcase extends StatelessWidget {
+//   const FilledButtonTonalShowcase({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Wrap(
+//       crossAxisAlignment: WrapCrossAlignment.center,
+//       spacing: 8,
+//       runSpacing: 8,
+//       children: <Widget>[
+//         FilledButton.tonal(
+//           onPressed: () {},
+//           child: const Text('FilledButton.tonal'),
+//         ),
+//         FilledButton.tonal.icon(
+//           onPressed: () {},
+//           icon: const Icon(Icons.add),
+//           label: const Text('FilledButton.tonal icon'),
+//         ),
+//         const FilledButton.tonal(
+//           onPressed: null,
+//           child: Text('FilledButton.tonal button'),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
 class OutlinedButtonShowcase extends StatelessWidget {
   const OutlinedButtonShowcase({super.key});
 
@@ -208,8 +272,16 @@ class TextButtonShowcase extends StatelessWidget {
   }
 }
 
-class ToggleButtonsShowcase extends StatelessWidget {
-  const ToggleButtonsShowcase({super.key});
+class ToggleButtonsShowcase extends StatefulWidget {
+  const ToggleButtonsShowcase({this.showOutlinedButton, super.key});
+  final bool? showOutlinedButton;
+
+  @override
+  State<ToggleButtonsShowcase> createState() => _ToggleButtonsShowcaseState();
+}
+
+class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
+  List<bool> selected = <bool>[true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -219,14 +291,23 @@ class ToggleButtonsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         ToggleButtons(
-          isSelected: const <bool>[true, false, false],
-          onPressed: (int newIndex) {},
+          isSelected: selected,
+          onPressed: (int toggledIndex) {
+            setState(() {
+              selected[toggledIndex] = !selected[toggledIndex];
+            });
+          },
           children: const <Widget>[
             Icon(Icons.adb),
             Icon(Icons.phone),
             Icon(Icons.account_circle),
           ],
         ),
+        if (widget.showOutlinedButton ?? false)
+          OutlinedButton(
+            onPressed: () {},
+            child: const Text('Outlined'),
+          ),
         ToggleButtons(
           isSelected: const <bool>[true, false, false],
           onPressed: null,
@@ -236,6 +317,11 @@ class ToggleButtonsShowcase extends StatelessWidget {
             Icon(Icons.account_circle),
           ],
         ),
+        if (widget.showOutlinedButton ?? false)
+          const OutlinedButton(
+            onPressed: null,
+            child: Text('Outlined'),
+          ),
       ],
     );
   }
@@ -436,9 +522,9 @@ class _PopupMenuButton extends StatelessWidget {
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: scheme.primary,
-            onPrimary: scheme.onPrimary,
-            onSurface: scheme.onSurface,
+            backgroundColor: scheme.primary,
+            foregroundColor: scheme.onPrimary,
+            disabledForegroundColor: scheme.onSurface,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(radius ?? 8)),
             ),
@@ -570,32 +656,68 @@ class ChipShowcase extends StatelessWidget {
           onDeleted: () {},
         ),
         const Chip(
-          label: Text('Avatar Chip'),
+          label: Text('Chip'),
           avatar: FlutterLogo(),
         ),
-        InputChip(
-          label: const Text('Input Chip'),
+        ActionChip(
+          label: const Text('ActionChip'),
+          avatar: const Icon(Icons.settings),
+          onPressed: () {},
+        ),
+        ActionChip(
+          label: const Text('ActionChip'),
+          avatar: const Icon(Icons.settings),
+          // TODO(rydmike): Uncomment in 3.1.0 to get disabled ActionChip.
+          // The onPressed is required in 3.0.5 stable, but not in 3.1.0 master.
+          onPressed: () {},
+        ),
+        FilterChip(
+          label: const Text('FilterChip'),
+          selected: true,
           onSelected: (bool value) {},
+        ),
+        FilterChip(
+          label: const Text('FilterChip'),
+          selected: false,
+          onSelected: (bool value) {},
+        ),
+        const FilterChip(
+          label: Text('FilterChip'),
+          selected: true,
+          onSelected: null,
+        ),
+        ChoiceChip(
+          label: const Text('ChoiceChip'),
+          selected: true,
+          onSelected: (bool value) {},
+        ),
+        ChoiceChip(
+          label: const Text('ChoiceChip'),
+          selected: false,
+          onSelected: (bool value) {},
+        ),
+        const ChoiceChip(
+          label: Text('ChoiceChip'),
+          selected: true,
+        ),
+        InputChip(
+          label: const Text('InputChip'),
+          onSelected: (bool value) {},
+          onDeleted: () {},
         ),
         InputChip(
           showCheckmark: true,
           selected: true,
-          label: const Text('Chip check'),
+          label: const Text('InputChip'),
           onSelected: (bool value) {},
+          onDeleted: () {},
         ),
-        const InputChip(
-          label: Text('Disabled Chip'),
+        InputChip(
+          label: const Text('InputChip'),
           isEnabled: false,
-        ),
-        ChoiceChip(
-          label: const Text('Selected Chip'),
-          selected: true,
           onSelected: (bool value) {},
-        ),
-        ChoiceChip(
-          label: const Text('Not selected Chip'),
-          selected: false,
-          onSelected: (bool value) {},
+          onDeleted: () {},
+          // onDeleted: () {},
         ),
       ],
     );
@@ -603,7 +725,8 @@ class ChipShowcase extends StatelessWidget {
 }
 
 class TextInputField extends StatefulWidget {
-  const TextInputField({super.key});
+  const TextInputField({this.filled, super.key});
+  final bool? filled;
 
   @override
   State<TextInputField> createState() => _TextInputFieldState();
@@ -646,8 +769,9 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField1'),
           controller: _textController1,
           decoration: InputDecoration(
+            filled: widget.filled ?? true,
             hintText: 'Write something...',
-            labelText: 'Text entry',
+            labelText: 'TextField - Underline border, if not defined',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -667,8 +791,12 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField2'),
           controller: _textController2,
           decoration: InputDecoration(
+            filled: widget.filled ?? true,
+            border: const OutlineInputBorder(),
             hintText: 'Write something...',
-            labelText: 'Another text entry',
+            labelText: 'TextField - Outline border, if not defined',
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: const Icon(Icons.info),
             errorText: _errorState2
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -678,12 +806,59 @@ class _TextInputFieldState extends State<TextInputField> {
         const TextField(
           enabled: false,
           decoration: InputDecoration(
-            labelText: 'Disabled text input',
+            labelText: 'TextField - Disabled',
           ),
         ),
         const SizedBox(height: 8),
         const _DropDownButtonFormField(),
       ],
+    );
+  }
+}
+
+class AppBarShowcase extends StatelessWidget {
+  const AppBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery.removePadding(
+      context: context,
+      removeBottom: true,
+      removeTop: true,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+              const Text('Behind AppBar'),
+              FloatingActionButton.small(
+                onPressed: () {},
+                child: const Icon(Icons.add),
+              ),
+              InputChip(
+                showCheckmark: true,
+                selected: true,
+                label: const Text('Chip check'),
+                onSelected: (bool value) {},
+              ),
+            ]),
+          ),
+          AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            title: const Text('Material AppBar'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -838,28 +1013,50 @@ class _BottomNavigationBarShowcaseState
         MediaQuery.removePadding(
           context: context,
           removeBottom: true,
-          child: BottomNavigationBar(
-            currentIndex: buttonIndex,
-            onTap: (int value) {
-              setState(() {
-                buttonIndex = value;
-              });
-            },
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble),
-                label: 'Chat',
-                // title: Text('Item 1'),
+          removeTop: true,
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+                  const Text('Behind BottomNavBar'),
+                  FloatingActionButton.small(
+                    onPressed: () {},
+                    child: const Icon(Icons.add),
+                  ),
+                  InputChip(
+                    showCheckmark: true,
+                    selected: true,
+                    label: const Text('Chip check'),
+                    onSelected: (bool value) {},
+                  ),
+                ]),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.beenhere),
-                label: 'Tasks',
-                // title: Text('Item 2'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.create_new_folder),
-                label: 'Folder',
-                // title: Text('Item 3'),
+              BottomNavigationBar(
+                currentIndex: buttonIndex,
+                onTap: (int value) {
+                  setState(() {
+                    buttonIndex = value;
+                  });
+                },
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.chat_bubble),
+                    label: 'Chat',
+                    // title: Text('Item 1'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.beenhere),
+                    label: 'Tasks',
+                    // title: Text('Item 2'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.create_new_folder),
+                    label: 'Folder',
+                    // title: Text('Item 3'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -910,25 +1107,47 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
         MediaQuery.removePadding(
           context: context,
           removeBottom: true,
-          child: NavigationBar(
-            selectedIndex: buttonIndex,
-            onDestinationSelected: (int value) {
-              setState(() {
-                buttonIndex = value;
-              });
-            },
-            destinations: const <NavigationDestination>[
-              NavigationDestination(
-                icon: Icon(Icons.chat_bubble),
-                label: 'Chat',
+          removeTop: true,
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+                  const Text('Behind NavBar'),
+                  FloatingActionButton.small(
+                    onPressed: () {},
+                    child: const Icon(Icons.add),
+                  ),
+                  InputChip(
+                    showCheckmark: true,
+                    selected: true,
+                    label: const Text('Chip check'),
+                    onSelected: (bool value) {},
+                  ),
+                ]),
               ),
-              NavigationDestination(
-                icon: Icon(Icons.beenhere),
-                label: 'Tasks',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.create_new_folder),
-                label: 'Folder',
+              NavigationBar(
+                selectedIndex: buttonIndex,
+                onDestinationSelected: (int value) {
+                  setState(() {
+                    buttonIndex = value;
+                  });
+                },
+                destinations: const <NavigationDestination>[
+                  NavigationDestination(
+                    icon: Icon(Icons.chat_bubble),
+                    label: 'Chat',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.beenhere),
+                    label: 'Tasks',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.create_new_folder),
+                    label: 'Folder',
+                  ),
+                ],
               ),
             ],
           ),
@@ -1031,37 +1250,44 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
               maxHeight: 1200,
               child: Row(
                 children: <Widget>[
-                  NavigationRail(
-                    extended: isExtended,
-                    useIndicator: widget.useAssertWorkAround ? true : null,
-                    minExtendedWidth: 150,
-                    indicatorColor:
-                        widget.useAssertWorkAround ? Colors.transparent : null,
-                    labelType: isExtended ? NavigationRailLabelType.none : null,
-                    selectedIndex: buttonIndex,
-                    onDestinationSelected: (int value) {
-                      setState(() {
-                        buttonIndex = value;
-                      });
-                    },
-                    destinations: const <NavigationRailDestination>[
-                      NavigationRailDestination(
-                        icon: Icon(Icons.chat_bubble),
-                        label: Text('Chat'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.beenhere),
-                        label: Text('Tasks'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.create_new_folder),
-                        label: Text('Folder'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.logout),
-                        label: Text('Logout'),
-                      ),
-                    ],
+                  MediaQuery.removePadding(
+                    context: context,
+                    removeBottom: true,
+                    removeTop: true,
+                    child: NavigationRail(
+                      extended: isExtended,
+                      useIndicator: widget.useAssertWorkAround ? true : null,
+                      minExtendedWidth: 150,
+                      indicatorColor: widget.useAssertWorkAround
+                          ? Colors.transparent
+                          : null,
+                      labelType:
+                          isExtended ? NavigationRailLabelType.none : null,
+                      selectedIndex: buttonIndex,
+                      onDestinationSelected: (int value) {
+                        setState(() {
+                          buttonIndex = value;
+                        });
+                      },
+                      destinations: const <NavigationRailDestination>[
+                        NavigationRailDestination(
+                          icon: Icon(Icons.chat_bubble),
+                          label: Text('Chat'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.beenhere),
+                          label: Text('Tasks'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.create_new_folder),
+                          label: Text('Folder'),
+                        ),
+                        NavigationRailDestination(
+                          icon: Icon(Icons.logout),
+                          label: Text('Logout'),
+                        ),
+                      ],
+                    ),
                   ),
                   const VerticalDivider(width: 1),
                   Expanded(

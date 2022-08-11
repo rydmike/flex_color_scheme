@@ -28,16 +28,26 @@ void main() {
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
+    // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+    //   This is repeated for many test cases. It seems like ThemeData
+    //   equality comparison cannot be guaranteed when using sub-themes that
+    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   Investigate first what SDK ThemeData test do, if they even attempt it.
     test(
         'FCS7.01-Default-Light: GIVEN FlexColorScheme.light() made with light '
         'brightness '
         'EXPECT its ThemeData to be equal to one made with light factory '
         'only primary color. v5.0.0 test case', () {
       expect(
-          FlexColorScheme.light().toTheme,
-          equals(FlexColorScheme.light(
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             primary: FlexColor.materialLightPrimary,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     test(
@@ -45,10 +55,13 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'only primary color. v5.0.0 test case', () {
       expect(
-          FlexColorScheme.dark().toTheme,
-          equals(FlexColorScheme.dark(
+        FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
             primary: FlexColor.materialDarkPrimary,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     const ColorScheme schemeLight = ColorScheme(
@@ -76,7 +89,9 @@ void main() {
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
+      outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -105,10 +120,15 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light factory. '
         ' v4.2.0 test case.', () {
       expect(
-          const FlexColorScheme(
-            colorScheme: schemeLight,
-          ).toTheme,
-          equals(FlexColorScheme.light().toTheme));
+        const FlexColorScheme(
+          colorScheme: schemeLight,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FCS7.05-Default-scheme-light-STING: GIVEN FlexColorScheme() made with '
@@ -129,12 +149,15 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and ColorScheme.light v4.2.0 test case.', () {
       expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
-          ).toTheme,
-          equals(FlexColorScheme.light(
+        const FlexColorScheme(
+          colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     const ColorScheme schemeDark = ColorScheme(
       brightness: Brightness.dark,
@@ -161,7 +184,9 @@ void main() {
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xffb3b3b3),
+      outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -189,8 +214,14 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'correcting on error. v4.2.0 test case', () {
       expect(
-        const FlexColorScheme(colorScheme: schemeDark).toTheme,
-        equals(FlexColorScheme.dark().toTheme),
+        const FlexColorScheme(colorScheme: schemeDark)
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -200,12 +231,15 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'and ColorScheme.dark v4.2.0 test case.', () {
       expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme.dark(),
-          ).toTheme,
-          equals(FlexColorScheme.dark(
+        const FlexColorScheme(
+          colorScheme: ColorScheme.dark(),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
             colorScheme: const ColorScheme.dark(),
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     const FlexColorScheme rawHcLight = FlexColorScheme(
@@ -215,7 +249,9 @@ void main() {
         surfaceVariant: Color(0xffffffff),
         onSurfaceVariant: Color(0xff000000),
         outline: Color(0xff4d4d4d),
+        outlineVariant: Color(0xff999999),
         shadow: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xff121212),
         onInverseSurface: Color(0xffffffff),
         inversePrimary: Color(0xff9999ff),
@@ -281,8 +317,11 @@ void main() {
         'EXPECT its ThemeData to be equal to one made '
         'FlexColorScheme.light(scheme: FlexScheme.materialHc)', () {
       expect(
-        rawHcLight.toTheme,
-        equals(FlexColorScheme.light(scheme: FlexScheme.materialHc).toTheme),
+        rawHcLight.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            FlexColorScheme.light(scheme: FlexScheme.materialHc)
+                .toTheme
+                .toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -355,27 +394,30 @@ void main() {
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
 
       expect(
-          const FlexColorScheme(
-            colorScheme: hcDarkScheme,
-            brightness: Brightness.light,
-            primary: Color(0xff0000ba),
-            onPrimary: Colors.white,
-            primaryContainer: Color(0xff000088),
-            onPrimaryContainer: Colors.white,
-            secondary: Color(0xff66fff9),
-            onSecondary: Colors.black,
-            secondaryContainer: Color(0xff018786),
-            onSecondaryContainer: Colors.white,
-            error: Color(0xff790000),
-            onError: Colors.white,
-            surface: Colors.white,
-            onSurface: Colors.black,
-            background: Colors.white,
-            onBackground: Colors.black,
-          ).toTheme,
-          equals(FlexColorScheme.light(
+        const FlexColorScheme(
+          colorScheme: hcDarkScheme,
+          brightness: Brightness.light,
+          primary: Color(0xff0000ba),
+          onPrimary: Colors.white,
+          primaryContainer: Color(0xff000088),
+          onPrimaryContainer: Colors.white,
+          secondary: Color(0xff66fff9),
+          onSecondary: Colors.black,
+          secondaryContainer: Color(0xff018786),
+          onSecondaryContainer: Colors.white,
+          error: Color(0xff790000),
+          onError: Colors.white,
+          surface: Colors.white,
+          onSurface: Colors.black,
+          background: Colors.white,
+          onBackground: Colors.black,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colorScheme: overrideScheme,
-          ).toTheme));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     const ColorScheme hcDarkWithLight = ColorScheme(
@@ -401,7 +443,9 @@ void main() {
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
+      outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xff9999ff),
@@ -461,7 +505,12 @@ void main() {
         'EXPECT its ThemeData to be equal to one made '
         'FlexColorScheme.light(scheme: FlexScheme.materialHc) '
         'v4.2.0 test case.', () {
-      expect(hcLightWithLight.toTheme, equals(hcLight.toTheme));
+      expect(
+        hcLightWithLight.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          hcLight.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // Dark default color scheme
@@ -487,7 +536,9 @@ void main() {
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
         outline: Color(0xffb3b3b3),
+        outlineVariant: Color(0xff666666),
         shadow: Color(0xff000000),
+        scrim: Color(0xff000000),
       ),
     );
 
@@ -531,8 +582,10 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'and minimal color inputs.', () {
       expect(
-        darkDefault.toTheme,
-        equals(darkFactoryDefault.toTheme),
+        darkDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          darkFactoryDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -561,7 +614,9 @@ void main() {
         background: Color(0xff121212),
         onBackground: Colors.white,
         outline: Color(0xffb3b3b3),
+        outlineVariant: Color(0xff666666),
         shadow: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xffffffff),
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
@@ -603,8 +658,10 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark factory '
         'and minimal color inputs.', () {
       expect(
-        hcDarkDefault.toTheme,
-        equals(hcDarkFactoryDefault.toTheme),
+        hcDarkDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          hcDarkFactoryDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -633,7 +690,9 @@ void main() {
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Colors.white,
       outline: Color(0xffb3b3b3),
+      outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff6f5970),
@@ -691,7 +750,12 @@ void main() {
         'override colors despite conflicting colorscheme given '
         'EXPECT its toScheme to be equal to one made with dark factory '
         'and minimal colors', () {
-      expect(rawHcFCS.toTheme, equals(hcDarkFactoryDefault.toTheme));
+      expect(
+        rawHcFCS.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          hcDarkFactoryDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     test(
@@ -722,7 +786,9 @@ void main() {
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
+            outlineVariant: Color(0xff666666),
             shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -778,12 +844,14 @@ void main() {
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
+            outlineVariant: Color(0xff666666),
             shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
-        ).toTheme,
-        equals(
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           FlexColorScheme.dark(
             primary: const Color(0xffefb7ff),
             primaryContainer: const Color(0xffbe9eff),
@@ -801,7 +869,7 @@ void main() {
             onSurface: Colors.white,
             onBackground: Colors.white,
             onError: Colors.white,
-          ).toTheme,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -832,25 +900,34 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light scheme with '
         'no parameters.', () {
       expect(
-          const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightPrimary,
-            primaryContainer: FlexColor.materialLightPrimaryContainer,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: FlexColor.materialLightSecondaryContainer,
-            tertiary: FlexColor.materialLightTertiary,
-            tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-          ).toTheme,
-          equals(FlexColorScheme.light().toTheme));
+        const FlexColorScheme(
+          brightness: Brightness.light,
+          primary: FlexColor.materialLightPrimary,
+          primaryContainer: FlexColor.materialLightPrimaryContainer,
+          secondary: FlexColor.materialLightSecondary,
+          secondaryContainer: FlexColor.materialLightSecondaryContainer,
+          tertiary: FlexColor.materialLightTertiary,
+          tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FCS7.22DefL: GIVEN FlexColorScheme.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-        FlexColorScheme.light().toTheme,
-        equals(FlexColorScheme.light(
-          colors: FlexColor.schemes[FlexScheme.material]!.light,
-        ).toTheme),
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -859,10 +936,12 @@ void main() {
       expect(
         FlexColorScheme.light(
           colors: FlexColor.schemes[FlexScheme.material]!.light,
-        ).toTheme,
-        equals(FlexColorScheme.light(
-          colors: FlexColor.schemes[FlexScheme.material]!.light,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: FlexColor.schemes[FlexScheme.material]!.light,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -870,8 +949,14 @@ void main() {
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
       expect(
-        FlexColorScheme.light().toTheme,
-        equals(FlexColorScheme.light(scheme: FlexScheme.material).toTheme),
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(scheme: FlexScheme.material)
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -881,8 +966,12 @@ void main() {
       expect(
         FlexColorScheme.light(
           colors: FlexColor.schemes[FlexScheme.material]!.light,
-        ).toTheme,
-        equals(FlexColorScheme.light(scheme: FlexScheme.material).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(scheme: FlexScheme.material)
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -892,8 +981,12 @@ void main() {
       expect(
         FlexColorScheme.light(
           colors: FlexColor.schemes[FlexScheme.material]!.light,
-        ).toTheme,
-        equals(FlexColorScheme.light().toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -903,17 +996,22 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with dark scheme with '
         'no parameters.', () {
       expect(
-          FlexColorScheme.dark(
-            colors: const FlexSchemeColor(
-              primary: FlexColor.materialDarkPrimary,
-              primaryContainer: FlexColor.materialDarkPrimaryContainer,
-              secondary: FlexColor.materialDarkSecondary,
-              secondaryContainer: FlexColor.materialDarkSecondaryContainer,
-              tertiary: FlexColor.materialDarkTertiary,
-              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
-            ),
-          ).toTheme,
-          equals(FlexColorScheme.dark().toTheme));
+        FlexColorScheme.dark(
+          colors: const FlexSchemeColor(
+            primary: FlexColor.materialDarkPrimary,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            tertiary: FlexColor.materialDarkTertiary,
+            tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+          ),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
 
     // themeDark = Default material dark scheme colors.
@@ -923,17 +1021,19 @@ void main() {
       expect(
         FlexColorScheme.light(
           swapColors: true,
-        ).toTheme,
-        equals(FlexColorScheme.light(
-          colors: const FlexSchemeColor(
-            primary: FlexColor.materialLightSecondary,
-            primaryContainer: FlexColor.materialLightSecondaryContainer,
-            secondary: FlexColor.materialLightPrimary,
-            secondaryContainer: FlexColor.materialLightPrimaryContainer,
-            tertiary: FlexColor.materialLightTertiary,
-            tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-          ),
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialLightSecondary,
+              primaryContainer: FlexColor.materialLightSecondaryContainer,
+              secondary: FlexColor.materialLightPrimary,
+              secondaryContainer: FlexColor.materialLightPrimaryContainer,
+              tertiary: FlexColor.materialLightTertiary,
+              tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+            ),
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -944,17 +1044,19 @@ void main() {
       expect(
         FlexColorScheme.dark(
           swapColors: true,
-        ).toTheme,
-        equals(FlexColorScheme.dark(
-          colors: const FlexSchemeColor(
-            primary: FlexColor.materialDarkSecondary,
-            primaryContainer: FlexColor.materialDarkSecondaryContainer,
-            secondary: FlexColor.materialDarkPrimary,
-            secondaryContainer: FlexColor.materialDarkPrimaryContainer,
-            tertiary: FlexColor.materialDarkTertiary,
-            tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
-          ),
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: const FlexSchemeColor(
+              primary: FlexColor.materialDarkSecondary,
+              primaryContainer: FlexColor.materialDarkSecondaryContainer,
+              secondary: FlexColor.materialDarkPrimary,
+              secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+              tertiary: FlexColor.materialDarkTertiary,
+              tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            ),
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -962,10 +1064,12 @@ void main() {
         'FCS7.30DefL: GIVEN FlexColorScheme.dark made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-        FlexColorScheme.dark().toTheme,
-        equals(FlexColorScheme.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme),
+        FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -974,18 +1078,26 @@ void main() {
       expect(
         FlexColorScheme.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme,
-        equals(FlexColorScheme.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
         'FCS7.32D: GIVEN a FlexColorScheme.dark made with no '
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexScheme.material.', () {
-      expect(FlexColorScheme.dark().toTheme,
-          FlexColorScheme.dark(scheme: FlexScheme.material).toTheme);
+      expect(
+        FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(scheme: FlexScheme.material)
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FCS7.33D: GIVEN a FlexColorScheme.dark made with colors '
@@ -994,10 +1106,12 @@ void main() {
       expect(
         FlexColorScheme.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme,
-        equals(FlexColorScheme.dark(
-          scheme: FlexScheme.material,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            scheme: FlexScheme.material,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -1007,8 +1121,12 @@ void main() {
       expect(
         FlexColorScheme.dark(
           colors: FlexColor.schemes[FlexScheme.material]!.dark,
-        ).toTheme,
-        equals(FlexColorScheme.dark().toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark()
+              .toTheme
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -1023,14 +1141,16 @@ void main() {
           primaryContainer: FlexColor.materialLightPrimaryContainer,
           secondary: FlexColor.materialLightSecondary,
           secondaryContainer: FlexColor.materialLightTertiary,
-        ).toTheme,
-        equals(const FlexColorScheme(
-          brightness: Brightness.light,
-          primary: FlexColor.materialLightPrimary,
-          primaryContainer: FlexColor.materialLightPrimaryContainer,
-          secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightTertiary,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          const FlexColorScheme(
+            brightness: Brightness.light,
+            primary: FlexColor.materialLightPrimary,
+            primaryContainer: FlexColor.materialLightPrimaryContainer,
+            secondary: FlexColor.materialLightSecondary,
+            secondaryContainer: FlexColor.materialLightTertiary,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -1045,14 +1165,16 @@ void main() {
           primaryContainer: FlexColor.materialDarkPrimaryContainer,
           secondary: FlexColor.materialDarkSecondary,
           secondaryContainer: FlexColor.materialDarkTertiary,
-        ).toTheme,
-        equals(const FlexColorScheme(
-          brightness: Brightness.dark,
-          primary: FlexColor.materialDarkPrimary,
-          primaryContainer: FlexColor.materialDarkPrimaryContainer,
-          secondary: FlexColor.materialDarkSecondary,
-          secondaryContainer: FlexColor.materialDarkTertiary,
-        ).toTheme),
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          const FlexColorScheme(
+            brightness: Brightness.dark,
+            primary: FlexColor.materialDarkPrimary,
+            primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            secondary: FlexColor.materialDarkSecondary,
+            secondaryContainer: FlexColor.materialDarkTertiary,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -1091,6 +1213,7 @@ void main() {
       surface: Colors.white,
       onSurface: Colors.black,
       outline: Color(0xff4d4d4d),
+      outlineVariant: Color(0xff999999),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -1149,7 +1272,7 @@ void main() {
             surfaceVariant: Color(0xff121212),
             onSurfaceVariant: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
-            shadow: Color(0xff000000),
+            outlineVariant: Color(0xff666666),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -1199,24 +1322,28 @@ void main() {
     // scheme compliance gaps.
     //**************************************************************************
 
-    test(
-        'FCS7.07: GIVEN a FlexColorScheme theme with Material scheme light '
-        'colors EXPECT toggleableActiveColor equality with '
-        'colorScheme.secondary.', () {
-      expect(
-        themeLight.toggleableActiveColor,
-        equals(themeLight.colorScheme.secondary),
-      );
-    });
-    test(
-        'FCS7.08: GIVEN a FlexColorScheme theme with Material scheme dark '
-        'colors EXPECT toggleableActiveColor equality with '
-        'colorScheme.secondary.', () {
-      expect(
-        themeDark.toggleableActiveColor,
-        equals(themeDark.colorScheme.secondary),
-      );
-    });
+    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
+    // This property is deprecated in Flutter SDK and now excluded from test
+    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
+    //
+    // test(
+    //     'FCS7.07: GIVEN a FlexColorScheme theme with Material scheme light '
+    //     'colors EXPECT toggleableActiveColor equality with '
+    //     'colorScheme.secondary.', () {
+    //   expect(
+    //     themeLight.toggleableActiveColor,
+    //     equals(themeLight.colorScheme.secondary),
+    //   );
+    // });
+    // test(
+    //     'FCS7.08: GIVEN a FlexColorScheme theme with Material scheme dark '
+    //     'colors EXPECT toggleableActiveColor equality with '
+    //     'colorScheme.secondary.', () {
+    //   expect(
+    //     themeDark.toggleableActiveColor,
+    //     equals(themeDark.colorScheme.secondary),
+    //   );
+    // });
     test(
         'FCS7.09: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -1891,7 +2018,9 @@ void main() {
           surfaceVariant: Color(0xfff7e9e9),
           onSurfaceVariant: Color(0xff000000),
           outline: Color(0xff4d4d4d),
+          outlineVariant: Color(0xff999999),
           shadow: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xff1b1414),
           onInverseSurface: Color(0xffffffff),
           inversePrimary: Color(0xfffff0f0),
@@ -1975,8 +2104,9 @@ void main() {
         'FCS7.79e-theme: GIVEN a Equal Raw and FlexColorScheme.light with '
         'heavy branding and 2 colors EXPECT toTheme equals.', () {
       expect(
-        fcsLightH2.toTheme,
-        equals(fcsLightH2Raw.toTheme),
+        fcsLightH2.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            fcsLightH2Raw.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -2019,7 +2149,9 @@ void main() {
           surfaceVariant: Color(0xff191313),
           onSurfaceVariant: Color(0xffffffff),
           outline: Color(0xffb3b3b3),
+          outlineVariant: Color(0xff666666),
           shadow: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Color(0xff000000),
           inversePrimary: Color(0xff644141),
@@ -2096,8 +2228,10 @@ void main() {
         'FlexColorScheme objects '
         'EXPECT equals toTheme.', () {
       expect(
-        fcsDarkH2.toTheme,
-        equals(fcsDarkH2Raw.toTheme),
+        fcsDarkH2.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          fcsDarkH2Raw.toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -2586,6 +2720,82 @@ void main() {
         'defined EXPECT equal to default with same primary text theme and '
         'typography 2018 and primaryColor set as in FlexColorScheme.dark.', () {
       expect(fCPDText, equals(nCPDText));
+    });
+
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNull = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.96 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
+        'and not using M3 EXPECT app bar background primary ', () {
+      expect(tLAppBarNull.appBarTheme.backgroundColor,
+          equals(tLAppBarNull.colorScheme.primary));
+    });
+    final ThemeData tDAppBarNull = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.96 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
+        'not using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNull.appBarTheme.backgroundColor,
+          equals(tDAppBarNull.colorScheme.surface));
+    });
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarNullM3 = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
+        'and using M3 EXPECT app bar background surface ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tLAppBarNullM3.colorScheme.surface));
+    });
+    final ThemeData tDAppBarNullM3 = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      // appBarStyle: null, // Default value
+      useMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
+        ' using M3 EXPECT app bar background surface ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
+          equals(tDAppBarNullM3.colorScheme.surface));
+    });
+    // AppBar test null center title.
+    final ThemeData tLAppBarCenterNull = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+    ).toTheme;
+    test(
+        'FCS7.99 null: GIVEN a FlexColorScheme.light with no centerTitle '
+        'EXPECT app bar center title null ', () {
+      expect(tLAppBarCenterNull.appBarTheme.centerTitle, equals(null));
+    });
+    // AppBar test true center title.
+    final ThemeData tDAppBarCenterTrue = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      subThemesData: const FlexSubThemesData(appBarCenterTitle: true),
+    ).toTheme;
+    test(
+        'FCS7.99 true: GIVEN a FlexColorScheme.dark with no centerTitle '
+        'EXPECT app bar center title true ', () {
+      expect(tDAppBarCenterTrue.appBarTheme.centerTitle, equals(true));
+    });
+    // AppBar test true center title.
+    final ThemeData tLAppBarCenterFalse = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      subThemesData: const FlexSubThemesData(appBarCenterTitle: false),
+    ).toTheme;
+    test(
+        'FCS7.99 false: GIVEN a FlexColorScheme.light with no centerTitle '
+        'EXPECT app bar center title false ', () {
+      expect(tLAppBarCenterFalse.appBarTheme.centerTitle, equals(false));
     });
   });
 }

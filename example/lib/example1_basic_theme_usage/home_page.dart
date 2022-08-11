@@ -43,6 +43,7 @@ class HomePage extends StatelessWidget {
       body: PageBody(
         constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
         child: ListView(
+          primary: true,
           padding: EdgeInsets.all(margins),
           children: <Widget>[
             const Text(

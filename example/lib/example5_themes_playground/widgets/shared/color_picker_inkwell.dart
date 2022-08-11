@@ -2,15 +2,17 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// A [ColorPicker] that shows a dialog, when a child, normally Material
-/// is wrapped in an InkWell.
+/// An [InkWell] that when tapped shows [ColorPicker.showPickerDialog] when
+/// tapped.
 ///
 /// It uses a stateless color InkWell. Clicking on it allows the user to
-/// change the color using a custom
-/// [ColorPicker] package via a dialog. The indicator has an onChanged
-/// callback that can be used to follow the changes of the color in the
-/// dialog as user tries different colors. If the users closes the dialog
-/// via cancel or barrier dismiss, the wasCancelled returns true.
+/// change the color using the [ColorPicker] package with its built-in dialog.
+///
+/// The widget has an onChanged callback that can be used to follow the changes
+/// of the color in the dialog as user tries different colors.
+///
+/// If the users closes the dialog via cancel or barrier dismiss, the
+/// wasCancelled returns true.
 /// This widget is stateless so it will be up to the user of this
 /// widget to hold state and return the color to the state it had
 /// when dialog was opened, if so desired.
@@ -20,8 +22,12 @@ import 'package:flutter/material.dart';
 /// the application and allow it to rebuild the theme of the entire app and the
 /// screens of the context that opened the dialog. Since the dialog is stateless
 /// it can be kept open even though the app under it is being rebuilt.
-class ColorPickerInkWell extends StatelessWidget {
-  const ColorPickerInkWell({
+/// It on purpose uses its stale context and can stay open, however any color
+/// theme changes will only apply to a new dialog, it will not affect the open
+/// dialog itself. The application and widgets visible below the dialog is
+/// however changing as colors are manipulated from the color picker dialog.
+class ColorPickerInkWellDialog extends StatelessWidget {
+  const ColorPickerInkWellDialog({
     super.key,
     required this.color,
     required this.onChanged,
@@ -222,7 +228,78 @@ class ColorPickerInkWell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+
+    // Make the picker using current theme, this will not change after
+    // the picker dialog is opened.
+    final ColorPicker colorPicker = ColorPicker(
+      color: color,
+      onColorChanged: onChanged,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
+      enableShadesSelection: true,
+      enableTonalPalette: true,
+      width: 35,
+      height: 35,
+      spacing: 2,
+      runSpacing: 2,
+      elevation: 0,
+      hasBorder: true,
+      borderRadius: 4,
+      wheelDiameter: 195,
+      wheelHasBorder: false,
+      pickersEnabled: const <ColorPickerType, bool>{
+        ColorPickerType.both: false,
+        ColorPickerType.primary: true,
+        ColorPickerType.accent: true,
+        ColorPickerType.bw: false,
+        ColorPickerType.custom: true,
+        ColorPickerType.wheel: true,
+      },
+      pickerTypeLabels: const <ColorPickerType, String>{
+        ColorPickerType.primary: 'Primary',
+        ColorPickerType.accent: 'Accent',
+        ColorPickerType.bw: 'B&W',
+        ColorPickerType.both: 'Both',
+        ColorPickerType.custom: 'FlexColor',
+        ColorPickerType.wheel: 'Any',
+      },
+      maxRecentColors: 9,
+      recentColors: recentColors,
+      onRecentColorsChanged: onRecentColorsChanged,
+      title: Text('Select Color', style: theme.textTheme.titleLarge),
+      subheading: Text('Select color shade', style: theme.textTheme.bodyLarge),
+      wheelSubheading: Text('Selected color and its shades',
+          style: theme.textTheme.bodyLarge),
+      recentColorsSubheading:
+          Text('Recent colors', style: theme.textTheme.bodyLarge),
+      selectedPickerTypeColor: theme.colorScheme.primary,
+      showMaterialName: true,
+      showColorName: true,
+      showColorCode: true,
+      colorCodeHasColor: true,
+      customColorSwatchesAndNames: isLight
+          ? ColorPickerInkWellDialog._lightSwatches
+          : ColorPickerInkWellDialog._darkSwatches,
+      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+        longPressMenu: true,
+        editUsesParsedPaste: true,
+        copyButton: true,
+        pasteButton: true,
+        copyFormat: ColorPickerCopyFormat.dartCode,
+      ),
+      actionButtons: const ColorPickerActionButtons(
+        closeButton: true,
+        okButton: true,
+        dialogActionButtons: false,
+        closeTooltipIsClose: false,
+      ),
+      showRecentColors: true,
+    );
 
     return InkWell(
       onHover: (bool value) {
@@ -230,74 +307,8 @@ class ColorPickerInkWell extends StatelessWidget {
       },
       onTap: enabled
           ? () async {
-              if (await ColorPicker(
-                color: color,
-                onColorChanged: onChanged,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                enableShadesSelection: true,
-                enableTonalPalette: true,
-                width: 35,
-                height: 35,
-                spacing: 2,
-                runSpacing: 2,
-                elevation: 0,
-                hasBorder: true,
-                borderRadius: 4,
-                wheelDiameter: 195,
-                wheelHasBorder: false,
-                pickersEnabled: const <ColorPickerType, bool>{
-                  ColorPickerType.both: false,
-                  ColorPickerType.primary: true,
-                  ColorPickerType.accent: true,
-                  ColorPickerType.bw: false,
-                  ColorPickerType.custom: true,
-                  ColorPickerType.wheel: true,
-                },
-                pickerTypeLabels: const <ColorPickerType, String>{
-                  ColorPickerType.primary: 'Primary',
-                  ColorPickerType.accent: 'Accent',
-                  ColorPickerType.bw: 'B&W',
-                  ColorPickerType.both: 'Both',
-                  ColorPickerType.custom: 'FlexColor',
-                  ColorPickerType.wheel: 'Any',
-                },
-                maxRecentColors: 9,
-                recentColors: recentColors,
-                onRecentColorsChanged: onRecentColorsChanged,
-                title: Text('Select Color',
-                    style: Theme.of(context).textTheme.titleLarge),
-                subheading: Text('Select color shade',
-                    style: Theme.of(context).textTheme.bodyLarge),
-                wheelSubheading: Text('Selected color and its shades',
-                    style: Theme.of(context).textTheme.bodyLarge),
-                recentColorsSubheading: Text('Recent colors',
-                    style: Theme.of(context).textTheme.bodyLarge),
-                selectedPickerTypeColor: Theme.of(context).colorScheme.primary,
-                showMaterialName: true,
-                showColorName: true,
-                showColorCode: true,
-                colorCodeHasColor: true,
-                customColorSwatchesAndNames:
-                    isLight ? _lightSwatches : _darkSwatches,
-                copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-                  longPressMenu: true,
-                  editUsesParsedPaste: true,
-                  copyButton: true,
-                  pasteButton: true,
-                  copyFormat: ColorPickerCopyFormat.dartCode,
-                ),
-                actionButtons: const ColorPickerActionButtons(
-                  closeButton: true,
-                  okButton: true,
-                  dialogActionButtons: false,
-                  closeTooltipIsClose: false,
-                ),
-                showRecentColors: true,
-              ).showPickerDialog(
+              // ignore: use_build_context_synchronously
+              if (await colorPicker.showPickerDialog(
                 context,
                 insetPadding: const EdgeInsets.all(16),
                 barrierColor: Colors.black.withOpacity(0.05),

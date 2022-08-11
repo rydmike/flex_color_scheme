@@ -258,6 +258,87 @@ void main() {
   });
 
   //****************************************************************************
+  // FlexColor error colors match seed colors - Color verification, seed results
+  //****************************************************************************
+
+  group('FC-Seed: WITH custom ColorScheme.seed colors brightness', () {
+    test('light equals FlexColor error colors and other seed results', () {
+      final ColorScheme scheme = ColorScheme.fromSeed(seedColor: Colors.blue);
+      expect(scheme.primary, const Color(0xff0061a4));
+      expect(scheme.onPrimary, const Color(0xffffffff));
+      expect(scheme.primaryContainer, const Color(0xffd1e4ff));
+      expect(scheme.onPrimaryContainer, const Color(0xff001d36));
+      expect(scheme.secondary, const Color(0xff535f70));
+      expect(scheme.onSecondary, const Color(0xffffffff));
+      expect(scheme.secondaryContainer, const Color(0xffd7e3f7));
+      expect(scheme.onSecondaryContainer, const Color(0xff101c2b));
+      expect(scheme.tertiary, const Color(0xff6b5778));
+      expect(scheme.onTertiary, const Color(0xffffffff));
+      expect(scheme.tertiaryContainer, const Color(0xfff2daff));
+      expect(scheme.onTertiaryContainer, const Color(0xff251431));
+      expect(scheme.error, const Color(0xffba1a1a));
+      expect(scheme.error, FlexColor.material3LightError);
+      expect(scheme.onError, const Color(0xffffffff));
+      expect(scheme.onError, FlexColor.material3LightOnError);
+      expect(scheme.errorContainer, const Color(0xffffdad6));
+      expect(scheme.errorContainer, FlexColor.material3LightErrorContainer);
+      expect(scheme.onErrorContainer, const Color(0xff410002));
+      expect(scheme.onErrorContainer, FlexColor.material3LightOnErrorContainer);
+      expect(scheme.outline, const Color(0xff73777f));
+      expect(scheme.background, const Color(0xfffdfcff));
+      expect(scheme.onBackground, const Color(0xff1a1c1e));
+      expect(scheme.surface, const Color(0xfffdfcff));
+      expect(scheme.onSurface, const Color(0xff1a1c1e));
+      expect(scheme.surfaceVariant, const Color(0xffdfe2eb));
+      expect(scheme.onSurfaceVariant, const Color(0xff43474e));
+      expect(scheme.inverseSurface, const Color(0xff2f3033));
+      expect(scheme.onInverseSurface, const Color(0xfff1f0f4));
+      expect(scheme.inversePrimary, const Color(0xff9ecaff));
+      expect(scheme.shadow, const Color(0xff000000));
+      expect(scheme.surfaceTint, const Color(0xff0061a4));
+      expect(scheme.brightness, Brightness.light);
+    });
+
+    test('dark equals FlexColor error colors and other seed results', () {
+      final ColorScheme scheme = ColorScheme.fromSeed(
+          seedColor: Colors.blue, brightness: Brightness.dark);
+      expect(scheme.primary, const Color(0xff9ecaff));
+      expect(scheme.onPrimary, const Color(0xff003258));
+      expect(scheme.primaryContainer, const Color(0xff00497d));
+      expect(scheme.onPrimaryContainer, const Color(0xffd1e4ff));
+      expect(scheme.secondary, const Color(0xffbbc7db));
+      expect(scheme.onSecondary, const Color(0xff253140));
+      expect(scheme.secondaryContainer, const Color(0xff3b4858));
+      expect(scheme.onSecondaryContainer, const Color(0xffd7e3f7));
+      expect(scheme.tertiary, const Color(0xffd6bee4));
+      expect(scheme.onTertiary, const Color(0xff3b2948));
+      expect(scheme.tertiaryContainer, const Color(0xff523f5f));
+      expect(scheme.onTertiaryContainer, const Color(0xfff2daff));
+      expect(scheme.error, const Color(0xffffb4ab));
+      expect(scheme.error, FlexColor.material3DarkError);
+      expect(scheme.onError, const Color(0xff690005));
+      expect(scheme.onError, FlexColor.material3DarkOnError);
+      expect(scheme.errorContainer, const Color(0xff93000a));
+      expect(scheme.errorContainer, FlexColor.material3DarkErrorContainer);
+      expect(scheme.onErrorContainer, const Color(0xffffb4ab));
+      expect(scheme.onErrorContainer, FlexColor.material3DarkOnErrorContainer);
+      expect(scheme.outline, const Color(0xff8d9199));
+      expect(scheme.background, const Color(0xff1a1c1e));
+      expect(scheme.onBackground, const Color(0xffe2e2e6));
+      expect(scheme.surface, const Color(0xff1a1c1e));
+      expect(scheme.onSurface, const Color(0xffe2e2e6));
+      expect(scheme.surfaceVariant, const Color(0xff43474e));
+      expect(scheme.onSurfaceVariant, const Color(0xffc3c7cf));
+      expect(scheme.inverseSurface, const Color(0xffe2e2e6));
+      expect(scheme.onInverseSurface, const Color(0xff2f3033));
+      expect(scheme.inversePrimary, const Color(0xff0061a4));
+      expect(scheme.shadow, const Color(0xff000000));
+      expect(scheme.surfaceTint, const Color(0xff9ecaff));
+      expect(scheme.brightness, Brightness.dark);
+    });
+  });
+
+  //****************************************************************************
   // FlexColor unit tests - Test the color value definitions.
   //
   // This test that ALL the color values defined in the code, are as they were
@@ -324,10 +405,10 @@ void main() {
     });
     test(
         'FC5 colors FlexColor is material3LightError '
-        'EXPECT color is Color(0xFFBA1B1B)', () {
+        'EXPECT color is Color(0xFFBA1A1A)', () {
       expect(
         FlexColor.material3LightError,
-        equals(const Color(0xFFBA1B1B)),
+        equals(const Color(0xFFBA1A1A)),
       );
     });
     test(
@@ -340,18 +421,18 @@ void main() {
     });
     test(
         'FC5 colors FlexColor is material3LightErrorContainer '
-        'EXPECT color is Color(0xFFFFDAD4)', () {
+        'EXPECT color is Color(0xFFFFDAD6)', () {
       expect(
         FlexColor.material3LightErrorContainer,
-        equals(const Color(0xFFFFDAD4)),
+        equals(const Color(0xFFFFDAD6)),
       );
     });
     test(
         'FC5 colors FlexColor is material3LightOnErrorContainer '
-        'EXPECT color is Color(0xFF410001)', () {
+        'EXPECT color is Color(0xFF410002)', () {
       expect(
         FlexColor.material3LightOnErrorContainer,
-        equals(const Color(0xFF410001)),
+        equals(const Color(0xFF410002)),
       );
     });
     //
@@ -376,34 +457,34 @@ void main() {
     });
     test(
         'FC5 colors FlexColor is material3DarkError '
-        'EXPECT color is Color(0xFFFFB4A9)', () {
+        'EXPECT color is Color(0xFFFFB4AB)', () {
       expect(
         FlexColor.material3DarkError,
-        equals(const Color(0xFFFFB4A9)),
+        equals(const Color(0xFFFFB4AB)),
       );
     });
     test(
         'FC5 colors FlexColor is material3DarkOnError '
-        'EXPECT color is Color(0xFF680003)', () {
+        'EXPECT color is Color(0xFF690005)', () {
       expect(
         FlexColor.material3DarkOnError,
-        equals(const Color(0xFF680003)),
+        equals(const Color(0xFF690005)),
       );
     });
     test(
         'FC5 colors FlexColor is material3DarkErrorContainer '
-        'EXPECT color is Color(0xFF930006)', () {
+        'EXPECT color is Color(0xFF93000A)', () {
       expect(
         FlexColor.material3DarkErrorContainer,
-        equals(const Color(0xFF930006)),
+        equals(const Color(0xFF93000A)),
       );
     });
     test(
         'FC5 colors FlexColor is material3DarkOnErrorContainer '
-        'EXPECT color is Color(0xFFFFB4A9)', () {
+        'EXPECT color is Color(0xFFFFB4AB)', () {
       expect(
         FlexColor.material3DarkOnErrorContainer,
-        equals(const Color(0xFFFFB4A9)),
+        equals(const Color(0xFFFFB4AB)),
       );
     });
     //

@@ -310,20 +310,27 @@ enum FlexSurfaceMode {
 enum FlexAppBarStyle {
   /// Use the scheme primary color as the AppBar's themed background color.
   ///
-  /// This is the default for light themes.
+  /// This is the default for light themes, when [ThemeData.useMaterial3] is
+  /// false.
   primary,
 
-  /// Use Material surface color as the AppBar's themed background color.
+  /// Use Material 2 default surface color as the AppBar's themed background
+  /// color.
   ///
-  /// This is the default for dark schemes.
+  /// This is the default for dark schemes, when [ThemeData.useMaterial3] is
+  /// false.
   ///
-  /// For a dark scheme this choice will result in a near black app bar. If this
-  /// setting is used in a light scheme, it will result in a white app bar, as
-  /// the standard Material surface color for light scheme is white.
+  /// For a dark scheme this choice will result in a near black app bar with
+  /// color value (#FF121212). If this setting is used in a light scheme, it
+  /// will result in a white app bar, as the standard Material 2 surface color
+  /// for light scheme is white.
   material,
 
   /// Use scheme surface color as the the AppBar's themed background color,
   /// including any blend color it may have.
+  ///
+  /// This is the default for light and dark theme mode, when
+  /// [ThemeData.useMaterial3] is true.
   surface,
 
   /// Use scheme background color as the the AppBar's themed background color,
@@ -341,10 +348,10 @@ enum FlexAppBarStyle {
   /// custom color for the [AppBar] theme.
   ///
   /// The built-in color schemes have the same color value that is assigned to
-  /// [FlexSchemeColor.secondaryContainer] also assigned to
+  /// [FlexSchemeColor.tertiary] also assigned to
   /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
-  /// results in the [FlexSchemeColor.secondaryContainer] color, which is same
-  /// as output [ColorScheme.secondaryContainer], being used as the [AppBar]
+  /// results in the [FlexSchemeColor.tertiaryContainer] color, which is same
+  /// as output [ColorScheme.tertiaryContainer], being used as the [AppBar]
   /// color when using the [custom] choice with them.
   ///
   /// FlexColorSchemes using custom [FlexSchemeColor] can assign any color
@@ -1610,10 +1617,12 @@ class FlexColorScheme with Diagnosticable {
 
     /// Style used to define the themed color of the AppBar background color.
     ///
-    /// Defaults to [FlexAppBarStyle.primary] which produces the same results
-    /// as a Flutter standard light [ThemeData.from] by tying the app bar color
-    /// to the primary color.
-    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.primary,
+    /// Defaults to null, which when [useMaterial3] is false results in
+    /// [FlexAppBarStyle.primary] which produces the same results
+    /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
+    /// color to the primary color. If [useMaterial3] is true it defaults
+    /// [FlexAppBarStyle.surface] which is the same as M3 default.
+    final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -2849,14 +2858,21 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(Brightness.light, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(Brightness.light, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(Brightness.light, onColors.onBackground),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
+
+    // Determine effective AppBar style, passed in or default based on M2 or M3.
+    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
+        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.primary);
 
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
@@ -2869,7 +2885,7 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (appBarStyle) {
+      switch (effectiveAppBarStyle) {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor = effectiveColors.primary;
           break;
@@ -3280,10 +3296,12 @@ class FlexColorScheme with Diagnosticable {
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
-    /// Defaults to [FlexAppBarStyle.material] which produces the same results
-    /// as a Flutter standard dark [ThemeData.from] by tying the app bar color
-    /// to the surface color.
-    final FlexAppBarStyle appBarStyle = FlexAppBarStyle.material,
+    /// Defaults to null, which when [useMaterial3] is false results in
+    /// [FlexAppBarStyle.material] which produces the same results
+    /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
+    /// color to the M2 dark Material color. If [useMaterial3] is true it
+    /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
+    final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -4543,14 +4561,21 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(Brightness.dark, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(Brightness.dark, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(Brightness.dark, onColors.onBackground),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
+
+    // Determine effective AppBar style, passed in or default based on M2 or M3.
+    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
+        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.material);
 
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
@@ -4563,7 +4588,7 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (appBarStyle) {
+      switch (effectiveAppBarStyle) {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor = effectiveColors.primary;
           break;
@@ -4582,7 +4607,7 @@ class FlexColorScheme with Diagnosticable {
           break;
       }
     }
-    // Apply specified opacity on on the resulting color.
+    // Apply specified opacity on the resulting color.
     effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
 
     return FlexColorScheme(
@@ -5835,11 +5860,7 @@ class FlexColorScheme with Diagnosticable {
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
-            radius: subTheme.inputDecoratorRadius ??
-                subTheme.defaultRadius ??
-                (useMaterial3
-                    ? kInputDecoratorM3Radius
-                    : kInputDecoratorRadius),
+            radius: subTheme.inputDecoratorRadius ?? subTheme.defaultRadius,
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
@@ -5847,7 +5868,8 @@ class FlexColorScheme with Diagnosticable {
             unfocusedBorderWidth: subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
             unfocusedBorderIsColored:
-                subTheme.inputDecoratorUnfocusedBorderIsColored)
+                subTheme.inputDecoratorUnfocusedBorderIsColored,
+            useMaterial3: useMaterial3)
         // Default one is also a bit opinionated, this is the FCS standard
         // in all previous versions before version 4.0.0. Kept for
         // backwards defaults compatibility.
@@ -5873,6 +5895,7 @@ class FlexColorScheme with Diagnosticable {
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of fontFamily.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
@@ -5889,7 +5912,9 @@ class FlexColorScheme with Diagnosticable {
       // factory ThemeData.from() for creating a theme from a color scheme and
       // text theme.
       brightness: colorScheme.brightness,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
       primaryColor: colorScheme.primary,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
       canvasColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
@@ -5902,10 +5927,14 @@ class FlexColorScheme with Diagnosticable {
       // separately alone. We want to do so in order to make elegantly nuanced
       // primary color branded themes.
       scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
       // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
       backgroundColor: colorScheme.background,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using themed interaction
       // effects, if not opted in same as before v4.0.0, use ThemeData default.
       disabledColor: themedEffects
@@ -5915,7 +5944,7 @@ class FlexColorScheme with Diagnosticable {
           : isDark
               ? Colors.white38
               : Colors.black38,
-
+      // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
       // Same as ThemeData SDK.
       // hintColor is only used by DropdownButton and InputDecorator in SDK.
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
@@ -5961,6 +5990,7 @@ class FlexColorScheme with Diagnosticable {
       // Define errorColor via color scheme error color.
       errorColor: colorScheme.error,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
+      // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
       indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
@@ -5996,6 +6026,7 @@ class FlexColorScheme with Diagnosticable {
       // longer needed corrections or remove totally deprecated
       // ThemeData properties when it is appropriate and timely to do so.
       // ----------------------------------------------------------------------
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
       // See: https://github.com/flutter/flutter/pull/95870
       // This color is still important, if it is not set we get a teal color for
@@ -6007,9 +6038,12 @@ class FlexColorScheme with Diagnosticable {
       // When using sub-themes, or Material 3 style, we use primary color
       // instead, because it is the best match for M3 ColorDesign for the M2
       // components using M3 Colors.
-      toggleableActiveColor: useSubThemes || useMaterial3
-          ? colorScheme.primary
-          : colorScheme.secondary,
+      // TODO(rydmike): Try removal of toggleableActiveColor.
+      //   Remove ALL above comments and commented prop when released to stable.
+      // toggleableActiveColor: useSubThemes || useMaterial3
+      //     ? colorScheme.primary
+      //     : colorScheme.secondary,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but
@@ -6049,6 +6083,7 @@ class FlexColorScheme with Diagnosticable {
       // The FlexColorScheme implementation below has been changed to
       // use these new AppBarTheme features in version 2.0.0.
       appBarTheme: AppBarTheme(
+        centerTitle: subTheme.appBarCenterTitle,
         backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
         iconTheme: IconThemeData(color: appBarIconColor),
@@ -6069,11 +6104,14 @@ class FlexColorScheme with Diagnosticable {
           statusBarIconBrightness: appBarBrightness == Brightness.dark
               ? Brightness.light
               : Brightness.dark,
-          // TODO(rydmike): Raise sys-nav AppBar systemOverlayStyle SDK issue.
+          // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
           //   Would be useful it could set system navbar properties too and not
           //   only status bar properties. While it might be odd to do so, it
           //   seems even more odd that a part of the SystemUiOverlayStyle has
           //   no effect when used here.
+          //   See https://github.com/flutter/flutter/issues/104410
+          //   and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
+          //   PR: https://github.com/flutter/flutter/pull/104827
           // The systemNavigationBarColor used by default AppBar in SDK is
           // always black, like so:
           // systemNavigationBarColor: const Color(0xFF000000),
@@ -6221,21 +6259,25 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.elevatedButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.elevatedButtonSchemeColor,
+              onBaseSchemeColor: subTheme.elevatedButtonSecondarySchemeColor,
               radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
               elevation: subTheme.elevatedButtonElevation,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              useMaterial3: useMaterial3,
             )
           : null,
       outlinedButtonTheme: useSubThemes
           ? FlexSubThemes.outlinedButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.outlinedButtonSchemeColor,
+              outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
               radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
               pressedOutlineWidth: subTheme.thickBorderWidth,
               outlineWidth: subTheme.thinBorderWidth,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              useMaterial3: useMaterial3,
             )
           : null,
       // Since the old buttons have been deprecated in Flutter 2.0.0
@@ -6283,6 +6325,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,
+              useMaterial3: useMaterial3,
             )
           : null,
       // Switch theme.
@@ -6292,7 +6335,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.switchSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.switchTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Checkbox theme.
       checkboxTheme: useSubThemes
           ? FlexSubThemes.checkboxTheme(
@@ -6300,7 +6348,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.checkboxSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.checkboxTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Radio theme.
       radioTheme: useSubThemes
           ? FlexSubThemes.radioTheme(
@@ -6308,7 +6361,12 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.radioSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : null,
+          : FlexSubThemes.radioTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
       // FAB, floating action button theme.
@@ -6331,14 +6389,17 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
-              labelStyle: effectiveTextTheme.button!,
+              labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+              useMaterial3: useMaterial3,
             )
-          : ChipThemeData.fromDefaults(
-              secondaryColor: colorScheme.primary,
-              brightness: colorScheme.brightness,
-              labelStyle: effectiveTextTheme.bodyText1!,
-            ),
+          : useMaterial3
+              ? null
+              : ChipThemeData.fromDefaults(
+                  secondaryColor: colorScheme.primary,
+                  brightness: colorScheme.brightness,
+                  labelStyle: effectiveTextTheme.bodyText1!,
+                ),
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(
               radius: subTheme.cardRadius ?? subTheme.defaultRadius,
@@ -6720,11 +6781,13 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: colorScheme?.outline,
+          outlineVariant: colorScheme?.outlineVariant,
+          shadow: colorScheme?.shadow,
+          scrim: colorScheme?.scrim,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: colorScheme?.inversePrimary,
-          shadow: colorScheme?.shadow,
-          outline: colorScheme?.outline,
           surfaceTint:
               surfaceTint ?? colorScheme?.surfaceTint ?? colors.primary,
         ) ??
@@ -6754,12 +6817,15 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(usedBrightness, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(usedBrightness, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               usedBrightness, colors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(usedBrightness, onColors.onBackground),
           surfaceTint: surfaceTint ?? usedPrimary,
         );
   }
@@ -6781,11 +6847,12 @@ class FlexColorScheme with Diagnosticable {
   }
 
   /// FlexColorScheme default for outline color, when not using seeds.
-  static Color _outlineColor(Brightness brightness, Color onBackground) {
+  static Color _outlineColor(
+      Brightness brightness, Color onBackground, int amount) {
     if (brightness == Brightness.light) {
-      return onBackground.lighten(30);
+      return onBackground.lighten(amount);
     } else {
-      return onBackground.darken(30);
+      return onBackground.darken(amount);
     }
   }
 
@@ -7750,7 +7817,9 @@ class _Scheme {
   final int surfaceVariant;
   final int onSurfaceVariant;
   final int outline;
+  final int outlineVariant;
   final int shadow;
+  final int scrim;
   final int inverseSurface;
   final int inverseOnSurface;
   final int inversePrimary;
@@ -7779,7 +7848,9 @@ class _Scheme {
     required this.surfaceVariant,
     required this.onSurfaceVariant,
     required this.outline,
+    required this.outlineVariant,
     required this.shadow,
+    required this.scrim,
     required this.inverseSurface,
     required this.inverseOnSurface,
     required this.inversePrimary,
@@ -7828,7 +7899,9 @@ class _Scheme {
       surfaceVariant: core.neutralVariant.get(tones.surfaceVariantTone),
       onSurfaceVariant: core.neutralVariant.get(tones.onSurfaceVariantTone),
       outline: core.neutralVariant.get(tones.outlineTone),
+      outlineVariant: core.neutralVariant.get(tones.outlineVariantTone),
       shadow: core.neutral.get(tones.shadowTone),
+      scrim: core.neutral.get(tones.scrimTone),
       inverseSurface: core.neutral.get(tones.inverseSurfaceTone),
       inverseOnSurface: core.neutral.get(tones.onInverseSurfaceTone),
       inversePrimary: core.primary.get(tones.inversePrimaryTone),
@@ -7857,17 +7930,19 @@ class _Scheme {
     Color? onError,
     Color? errorContainer,
     Color? onErrorContainer,
-    Color? outline,
     Color? background,
     Color? onBackground,
     Color? surface,
     Color? onSurface,
     Color? surfaceVariant,
     Color? onSurfaceVariant,
+    Color? outline,
+    Color? outlineVariant,
+    Color? shadow,
+    Color? scrim,
     Color? inverseSurface,
     Color? onInverseSurface,
     Color? inversePrimary,
-    Color? shadow,
     Color? surfaceTint,
   }) {
     final _Scheme scheme;
@@ -7910,17 +7985,19 @@ class _Scheme {
       onError: onError ?? Color(scheme.onError),
       errorContainer: errorContainer ?? Color(scheme.errorContainer),
       onErrorContainer: onErrorContainer ?? Color(scheme.onErrorContainer),
-      outline: outline ?? Color(scheme.outline),
       background: background ?? Color(scheme.background),
       onBackground: onBackground ?? Color(scheme.onBackground),
       surface: surface ?? Color(scheme.surface),
       onSurface: onSurface ?? Color(scheme.onSurface),
       surfaceVariant: surfaceVariant ?? Color(scheme.surfaceVariant),
       onSurfaceVariant: onSurfaceVariant ?? Color(scheme.onSurfaceVariant),
+      outline: outline ?? Color(scheme.outline),
+      outlineVariant: outlineVariant ?? Color(scheme.outlineVariant),
+      shadow: shadow ?? Color(scheme.shadow),
+      scrim: scrim ?? Color(scheme.scrim),
       inverseSurface: inverseSurface ?? Color(scheme.inverseSurface),
       onInverseSurface: onInverseSurface ?? Color(scheme.inverseOnSurface),
       inversePrimary: inversePrimary ?? Color(scheme.inversePrimary),
-      shadow: shadow ?? Color(scheme.shadow),
       surfaceTint: surfaceTint ?? Color(scheme.primary),
       brightness: brightness,
     );

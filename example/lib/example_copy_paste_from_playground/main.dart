@@ -38,10 +38,10 @@ class _DemoAppState extends State<DemoApp> {
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
       theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-        typography: Typography.material2018(platform: defaultTargetPlatform),
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
       darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-        typography: Typography.material2018(platform: defaultTargetPlatform),
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
 
       // This is where you would put a copy-pasted theme definition from
@@ -99,10 +99,10 @@ class _DemoAppState extends State<DemoApp> {
       // FlexThemeData extensions and opinionated component themes.
 
       // theme: ThemeData.from(colorScheme: flexSchemeLight).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
+      //   typography: Typography.material2021(platform: defaultTargetPlatform),
       // ),
       // darkTheme: ThemeData.from(colorScheme: flexSchemeDark).copyWith(
-      //   typography: Typography.material2018(platform: defaultTargetPlatform),
+      //   typography: Typography.material2021(platform: defaultTargetPlatform),
       // ),
 
       // ThemeMode toggle via callback

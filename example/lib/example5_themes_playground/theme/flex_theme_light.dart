@@ -31,7 +31,7 @@ ThemeData flexThemeLight(ThemeController controller) =>
 ///
 /// Normally you would probably only have a few properties offered as possible
 /// features the user can change. Since this is a feature demo of almost
-/// everything [FlexColorScheme] it is a bit wild.
+/// everything [FlexColorScheme] can do, it is a bit wild.
 FlexColorScheme flexColorSchemeLight(ThemeController controller) {
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
@@ -117,6 +117,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // not yet natively available in Flutter SDK 2.10.3 or earlier,
             // this offers it as a way to use it already now.
             useTextTheme: controller.useTextTheme,
+            // Outline thickness theming
+            thinBorderWidth: controller.thinBorderWidth,
+            thickBorderWidth: controller.thickBorderWidth,
             // Prefer Flutter SDK null default behavior for sub-themes, when
             // possible.
             useFlutterDefaults: controller.useFlutterDefaults,
@@ -137,7 +140,11 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
             // SchemeColor based ColorScheme color used on buttons & toggles.
             textButtonSchemeColor: controller.textButtonSchemeColor,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
+            elevatedButtonSecondarySchemeColor:
+                controller.elevatedButtonSecondarySchemeColor,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
+            outlinedButtonOutlineSchemeColor:
+                controller.outlinedButtonOutlineSchemeColor,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,

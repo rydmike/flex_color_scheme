@@ -18,7 +18,9 @@ class ButtonsSettings extends StatelessWidget {
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.elevatedButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -26,7 +28,9 @@ class ButtonsSettings extends StatelessWidget {
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.outlinedButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -34,7 +38,9 @@ class ButtonsSettings extends StatelessWidget {
     final String textButtonRadiusDefaultLabel =
         controller.textButtonBorderRadius == null &&
                 controller.defaultRadius == null
-            ? 'default 20'
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
             : controller.textButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -43,16 +49,15 @@ class ButtonsSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
-        const ListTile(
-          subtitle: Text('You can change button theme colors, default is '
-              'primary color. All component themes with border radius can '
-              'also have their own radius changed individually. It then either '
-              'overrides the M3 default or the set global radius default, '
-              'depending on what is in use.'),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: ElevatedButtonShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('ElevatedButton color'),
+          title: const Text('ElevatedButton main color'),
+          subtitle: controller.useMaterial3
+              ? const Text('Foreground color')
+              : const Text('Background color'),
           index: controller.elevatedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -65,9 +70,25 @@ class ButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ElevatedButtonShowcase(),
+        ColorSchemePopupMenu(
+          title: const Text('ElevatedButton secondary color'),
+          subtitle: controller.useMaterial3
+              ? const Text('Background color')
+              : const Text('Foreground color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (surface)'
+              : 'default (onPrimary)',
+          index: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setElevatedButtonSecondarySchemeColor(null);
+                  } else {
+                    controller.setElevatedButtonSecondarySchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -83,7 +104,9 @@ class ButtonsSettings extends StatelessWidget {
                     : (controller.elevatedButtonBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.elevatedButtonBorderRadius ?? -1
                 : -1,
@@ -111,7 +134,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.elevatedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -121,8 +146,13 @@ class ButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: OutlinedButtonShowcase(),
+        ),
         ColorSchemePopupMenu(
-          title: const Text('OutlinedButton color'),
+          title: const Text('OutlinedButton foreground color'),
           index: controller.outlinedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -135,9 +165,24 @@ class ButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: OutlinedButtonShowcase(),
+        ColorSchemePopupMenu(
+          title: const Text('OutlinedButton outline color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (outline)'
+              : controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'default (primary)'
+                  : 'default (onSurface opacity 0.12)',
+          index: controller.outlinedButtonOutlineSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setOutlinedButtonOutlineSchemeColor(null);
+                  } else {
+                    controller.setOutlinedButtonOutlineSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -153,7 +198,9 @@ class ButtonsSettings extends StatelessWidget {
                     : (controller.outlinedButtonBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.outlinedButtonBorderRadius ?? -1
                 : -1,
@@ -181,7 +228,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.outlinedButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!
@@ -190,6 +239,120 @@ class ButtonsSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Normal border width'),
+          subtitle: const Text('Setting shared with unfocused TextField and '
+              'ToggleButtons'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider.adaptive(
+            min: -0.5,
+            max: 5,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth == null ||
+                        (controller.thinBorderWidth ?? -0.5) < 0
+                    ? controller.useMaterial3
+                        ? 'default 1'
+                        : 'default 1.5'
+                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth ?? -0.5
+                : -0.5,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThinBorderWidth(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thinBorderWidth == null ||
+                              (controller.thinBorderWidth ?? -0.5) < 0
+                          ? controller.useMaterial3
+                              ? 'default 1'
+                              : 'default 1.5'
+                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Pressed border width'),
+          subtitle: const Text('Setting shared with focused TextField'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider.adaptive(
+            min: -0.5,
+            max: 5,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth == null ||
+                        (controller.thickBorderWidth ?? -0.5) < 0
+                    ? 'default 2'
+                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 2',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth ?? -0.5
+                : -0.5,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThickBorderWidth(value < 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thickBorderWidth == null ||
+                              (controller.thickBorderWidth ?? -0.5) < 0
+                          ? 'default 2'
+                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 2',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: TextButtonShowcase(),
         ),
         ColorSchemePopupMenu(
           title: const Text('TextButton color'),
@@ -205,10 +368,6 @@ class ButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: TextButtonShowcase(),
-        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('TextButton border radius'),
@@ -222,7 +381,9 @@ class ButtonsSettings extends StatelessWidget {
                     ? textButtonRadiusDefaultLabel
                     : (controller.textButtonBorderRadius?.toStringAsFixed(0) ??
                         '')
-                : 'default 4',
+                : controller.useMaterial3
+                    ? 'default stadium'
+                    : 'default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.textButtonBorderRadius ?? -1
                 : -1,
@@ -250,7 +411,9 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.textButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 4',
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
                   style: Theme.of(context)
                       .textTheme
                       .caption!

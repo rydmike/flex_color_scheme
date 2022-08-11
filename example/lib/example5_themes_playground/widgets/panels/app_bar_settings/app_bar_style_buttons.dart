@@ -1,7 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+// TODO(rydmike): Remove this widget in example 5 in future release 6.0.0.
 // Widget used to change the used app bar style mode in example 5.
+//
+// In version 5.2.0 of FlexColorScheme and its example 5, this widget is
+// no longer used, but keeping it around for a while.
 class AppBarStyleButtons extends StatelessWidget {
   const AppBarStyleButtons({
     super.key,

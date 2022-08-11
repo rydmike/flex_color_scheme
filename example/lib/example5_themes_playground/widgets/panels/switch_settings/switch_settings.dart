@@ -25,17 +25,10 @@ class SwitchesSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        SwitchListTileAdaptive(
-          title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: default grey'),
-          value: controller.unselectedToggleIsColored &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUnselectedToggleIsColored
-              : null,
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: SwitchShowcase(),
         ),
-        const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Switch color'),
           labelForDefault: labelForDefaultColor,
@@ -50,11 +43,12 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const Divider(height: 1),
+        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: SwitchShowcase(),
+          child: CheckboxShowcase(),
         ),
-        const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Checkbox color'),
           labelForDefault: labelForDefaultColor,
@@ -70,11 +64,12 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const Divider(height: 1),
+        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: CheckboxShowcase(),
+          child: RadioShowcase(),
         ),
-        const Divider(height: 1),
         ColorSchemePopupMenu(
           title: const Text('Radio color'),
           labelForDefault: labelForDefaultColor,
@@ -89,11 +84,19 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: RadioShowcase(),
+
+        // const SizedBox(height: 8),
+        const Divider(height: 1),
+        SwitchListTileAdaptive(
+          title: const Text('Unselected toggle color'),
+          subtitle: const Text('ON: Use theme color   OFF: default grey'),
+          value: controller.unselectedToggleIsColored &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUnselectedToggleIsColored
+              : null,
         ),
-        const SizedBox(height: 8),
       ],
     );
   }
