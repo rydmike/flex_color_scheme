@@ -5,7 +5,7 @@
 
 Use **FlexColorScheme** to make beautiful color scheme based Flutter themes, with optional color 
 branded surfaces. The created themes are based on the same concept as Flutter's ColorScheme based 
-themes, with many additional useful and convenient features.
+themes, with many additional features.
 
 <img src="https://rydmike.com/assets_fcsv4/CollageSize50.png?raw=true" alt="ColorScheme Intro"/>
 
