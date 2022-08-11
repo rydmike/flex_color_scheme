@@ -6,22 +6,24 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Aug 11, 2022**
 
-This is a dev branch to test features on Flutter channel *master 3.1.0-0.0.pre.2199* and later to 
-prepare for next style and feature alignments when `useMaterial3` is true.
+This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
+prepare for new style and feature alignments when `useMaterial3` is true.
 
-This dev release requires at least Flutter *master 3.1.0-0.0.pre.2199*. It includes new Flutter
-SDK ColorScheme colors. This dev release is going to be released when next stable Flutter version
-after 3.0 version comes out. It is expected to be released during Flutter Vikings 2022, Sep 1.
+This dev release requires at least Flutter *master 3.1.0-0.0.pre.2199*. It includes two new Flutter
+`ColorScheme` colors. This dev release is going to be released as stable when next Flutter stable 
+version after 3.0 comes out. It is expected to be released during Flutter Vikings 2022, Sep 1 and 
+might be called Flutter 3.3.
 
-All features current available in master Flutter *master 3.1.0-0.0.pre.2199*, might not be included
-in next stable release. If there are features in this dev release that do not land in stable
+All features currently available in Flutter *master 3.1.0-0.0.pre.2199*, might not be included
+in next stable release. If there are features in this dev release that do not land in next stable,
 they will be reverted from the FlexColorScheme 5.2.0 stable release.
 
 Due to a number of known and below listed Flutter SDK issues when using `useMaterial3` set to
 `true`, we cannot yet recommend using the option. Use it only if you are willing to accept the
-still incomplete Material 3 implementation in Flutter and the listed issues. If you keep it `false`,
-and use FCS opinionated component themes, you can create a theme that is visually fairly similar to
-M3, but still using M2 `ThemeData` mode to avoid the issues.
+still incomplete Material 3 implementation in Flutter and the issues. If you
+keep `useMaterial3` set to `false`, and use FCS opinionated component themes, you can create a 
+theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid the 
+issues.
 
 **NEW**
 
@@ -170,8 +172,8 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
 * *Themes Playground*: To the component panel added support to customize outline border
   thickness for `OutlinedButton`, `ToggleButtons` and `TextField`'s `InputDecorator`.
 
-* *Themes Playground*: Features and UI for new Flutter SDK `ColorScheme` colors `outlineVariant`
-  and `scrim`.
+* *Themes Playground*: Added features and UI for new Flutter SDK `ColorScheme` colors 
+  `outlineVariant` and `scrim`.
 
 **DOCS**
 
@@ -180,38 +182,49 @@ M3, but still using M2 `ThemeData` mode to avoid the issues.
 * Harmonized the changelog style and its past history. The new style and how it looks will be tested
   with a dev release to ensure it works well on pub.
 
-**KNOWN FLUTTER SDK ISSUES**
+**KNOWN FLUTTER SDK ISSUES IMPACTING THEMING**
 
 The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter
-theming in general.
+theming in general. The issues typically caused by incomplete Material 3 implementation in Flutter.
 
-* The M3 Chip themes available in Flutter `master 3.1.0-*` at the time of writing, do as noted here
+* The M3 Chip themes available in Flutter `master 3.1.0-0.0.pre.2216` at the time of writing, 
+  do as noted here
   [PR 107166 comment](https://github.com/flutter/flutter/pull/107166#issuecomment-1189206217),
   not yet M3 theme plain vanilla `Chip` when using Material 3. This might be fixed in an 
-  additional PR later in the SDK.
+  additional PR later in the SDK. There is however no separate raised issue for it, only 
+  the above comment, so it might be forgotten. Might raise an issue later.
 
 * [**#107946**](https://github.com/flutter/flutter/issues/107946) Cannot theme Shape and IconSize 
   differently for different sized FloatingActionButtons. One of the drivers behind the breaking
-  FAB defaults for the opinionated FAB theme was this issue.
+  FAB style defaults for the opinionated FAB theme in FCS, was this issue.
 
 * [**#108539**](https://github.com/flutter/flutter/issues/108539) Cannot theme shape independently 
-  for `SnackBar` with different `behavior`. This is the reason why FCS does not offer a custom shape
-  in its opinionated `SnackBar` theme.
+  for `SnackBar` with different `behavior`. This is the reason why FCS does not yet offer a 
+  custom shape in its opinionated `SnackBar` theme. To replicate the un-themed behavior with
+  slightly different border radius values, one must make custom wrapper widgets for `SnackBar`.
 
 The Flutter SDK M3 `useMaterial3` flag set to `true` continues to have a number of challenges in
-addition to the above ones. We as before still have these issues in Flutter *stable 3.0.5* and
-also at least in Flutter *master 3.1.0-0.0.pre.2033* and earlier:
+addition to the above ones. We as before still have the issues below in Flutter *stable 3.0.5* and
+also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
 
 * [**#107190**](https://github.com/flutter/flutter/issues/107190) Elevation issue with `Material` 
-  widget, when opting in on `useMaterial3` causes widespread elevation issues.
+  widget, when opting in on `useMaterial3` causes widespread elevation issues. Concerning the 
+  reported elevation issue for dialogs included in the linked report, it was observed as fixed for
+  them in master, but later the PR fixing it was reverted. Then it was relanded and then the reland 
+  reverted, see [Issue #107423](https://github.com/flutter/flutter/issues/107423),
+  [PR #108718](https://github.com/flutter/flutter/pull/108718), 
+  [PR #109170](https://github.com/flutter/flutter/pull/109170) and
+  [PR 109172](https://github.com/flutter/flutter/pull/109172). Even after it lands it won't solve
+  all the mentioned incompleteness caused M3 elevation issues, only Dialogs. Popup in particular
+  will remain troublesome.
 
 * [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing `Typography` 
   in `ThemeData` generates an error
 
 * [**FIXED #107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` 
   properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3`
-  is true. This is not in stable Flutter channel *stable 3.0.5*, but if you use 
-  master channel it is something to be aware of, as it exists in Flutter
+  is true. This is not in stable Flutter channel *stable 3.0.5*, but if you used 
+  master channel it was something to be aware of, as it exists in Flutter
   *master 3.1.0-0.0.pre.2033* and many earlier *master 3.1.0-x* versions. This issue was fixed via
   [PR #108332](https://github.com/flutter/flutter/pull/108332) and can no longer be observed in
   *master, 3.1.0-0.0.pre.2108* or later versions.
