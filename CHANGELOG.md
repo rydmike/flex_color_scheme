@@ -149,7 +149,7 @@ issues.
   styles must now be created also when not opting in on sub-themes. This update includes the
   necessary change to do so. This will be reflected in updates to the core defaults documentation.
   For a migration guide concerning `toggleableActiveColor` see 
-  https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide
+  [Flutter breaking-changes](https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide).
 
 
 **EXAMPLES**
