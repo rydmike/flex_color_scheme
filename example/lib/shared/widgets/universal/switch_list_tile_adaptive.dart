@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: comment_references
 
-/// A theme following wrapper for [SwitchListTileAdaptive].
+/// A theme following wrapper for [SwitchListTile.adaptive].
 ///
 /// The wrapper sets the active thumb color for the switch to
-/// SwitchTheme.active color, and if not define to theme.colorscheme.secondary.
+/// SwitchTheme.active color, and if not defined to theme.colorscheme.secondary.
 ///
 /// NOTE: toggleableActiveColor will be deprecated soon in Flutter SDK,
 /// so we are using its replacement fallback already now. See:
