@@ -2858,12 +2858,15 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(Brightness.light, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(Brightness.light, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(Brightness.light, onColors.onBackground),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
@@ -4558,12 +4561,15 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(Brightness.dark, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(Brightness.dark, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(Brightness.dark, onColors.onBackground),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
@@ -6775,11 +6781,13 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: colorScheme?.outline,
+          outlineVariant: colorScheme?.outlineVariant,
+          shadow: colorScheme?.shadow,
+          scrim: colorScheme?.scrim,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: colorScheme?.inversePrimary,
-          shadow: colorScheme?.shadow,
-          outline: colorScheme?.outline,
           surfaceTint:
               surfaceTint ?? colorScheme?.surfaceTint ?? colors.primary,
         ) ??
@@ -6809,12 +6817,15 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          outline: _outlineColor(usedBrightness, onColors.onBackground, 30),
+          outlineVariant:
+              _outlineColor(usedBrightness, onColors.onBackground, 60),
+          shadow: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
               usedBrightness, colors.primary, effectiveSurfaceColor),
-          shadow: Colors.black,
-          outline: _outlineColor(usedBrightness, onColors.onBackground),
           surfaceTint: surfaceTint ?? usedPrimary,
         );
   }
@@ -6836,11 +6847,12 @@ class FlexColorScheme with Diagnosticable {
   }
 
   /// FlexColorScheme default for outline color, when not using seeds.
-  static Color _outlineColor(Brightness brightness, Color onBackground) {
+  static Color _outlineColor(
+      Brightness brightness, Color onBackground, int amount) {
     if (brightness == Brightness.light) {
-      return onBackground.lighten(30);
+      return onBackground.lighten(amount);
     } else {
-      return onBackground.darken(30);
+      return onBackground.darken(amount);
     }
   }
 
@@ -7805,7 +7817,9 @@ class _Scheme {
   final int surfaceVariant;
   final int onSurfaceVariant;
   final int outline;
+  final int outlineVariant;
   final int shadow;
+  final int scrim;
   final int inverseSurface;
   final int inverseOnSurface;
   final int inversePrimary;
@@ -7834,7 +7848,9 @@ class _Scheme {
     required this.surfaceVariant,
     required this.onSurfaceVariant,
     required this.outline,
+    required this.outlineVariant,
     required this.shadow,
+    required this.scrim,
     required this.inverseSurface,
     required this.inverseOnSurface,
     required this.inversePrimary,
@@ -7883,7 +7899,9 @@ class _Scheme {
       surfaceVariant: core.neutralVariant.get(tones.surfaceVariantTone),
       onSurfaceVariant: core.neutralVariant.get(tones.onSurfaceVariantTone),
       outline: core.neutralVariant.get(tones.outlineTone),
+      outlineVariant: core.neutralVariant.get(tones.outlineVariantTone),
       shadow: core.neutral.get(tones.shadowTone),
+      scrim: core.neutral.get(tones.scrimTone),
       inverseSurface: core.neutral.get(tones.inverseSurfaceTone),
       inverseOnSurface: core.neutral.get(tones.onInverseSurfaceTone),
       inversePrimary: core.primary.get(tones.inversePrimaryTone),
@@ -7912,17 +7930,19 @@ class _Scheme {
     Color? onError,
     Color? errorContainer,
     Color? onErrorContainer,
-    Color? outline,
     Color? background,
     Color? onBackground,
     Color? surface,
     Color? onSurface,
     Color? surfaceVariant,
     Color? onSurfaceVariant,
+    Color? outline,
+    Color? outlineVariant,
+    Color? shadow,
+    Color? scrim,
     Color? inverseSurface,
     Color? onInverseSurface,
     Color? inversePrimary,
-    Color? shadow,
     Color? surfaceTint,
   }) {
     final _Scheme scheme;
@@ -7965,17 +7985,19 @@ class _Scheme {
       onError: onError ?? Color(scheme.onError),
       errorContainer: errorContainer ?? Color(scheme.errorContainer),
       onErrorContainer: onErrorContainer ?? Color(scheme.onErrorContainer),
-      outline: outline ?? Color(scheme.outline),
       background: background ?? Color(scheme.background),
       onBackground: onBackground ?? Color(scheme.onBackground),
       surface: surface ?? Color(scheme.surface),
       onSurface: onSurface ?? Color(scheme.onSurface),
       surfaceVariant: surfaceVariant ?? Color(scheme.surfaceVariant),
       onSurfaceVariant: onSurfaceVariant ?? Color(scheme.onSurfaceVariant),
+      outline: outline ?? Color(scheme.outline),
+      outlineVariant: outlineVariant ?? Color(scheme.outlineVariant),
+      shadow: shadow ?? Color(scheme.shadow),
+      scrim: scrim ?? Color(scheme.scrim),
       inverseSurface: inverseSurface ?? Color(scheme.inverseSurface),
       onInverseSurface: onInverseSurface ?? Color(scheme.inverseOnSurface),
       inversePrimary: inversePrimary ?? Color(scheme.inversePrimary),
-      shadow: shadow ?? Color(scheme.shadow),
       surfaceTint: surfaceTint ?? Color(scheme.primary),
       brightness: brightness,
     );

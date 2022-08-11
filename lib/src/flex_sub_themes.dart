@@ -20,8 +20,8 @@ enum FlexInputBorderType {
   underline,
 }
 
-/// Enum used to described which color from the active theme's
-/// [ColorScheme], should be used for by color properties available in
+/// Enum used to described which color from the active theme's 30
+/// [ColorScheme] colors, should be used for by color properties available in
 /// component sub-themes.
 ///
 /// Used when opting in on component themes. The opinionated component themes
@@ -34,7 +34,7 @@ enum FlexInputBorderType {
 /// but is often the same if defined at all.
 ///
 /// The enum selection `primaryVariant` and `secondaryVariant` colors have been
-/// deprecated in Flutter SDK 2.10.0 stable, after master v2.6.0-0.0.pre landed.
+/// deprecated in v4.2.0 as they were deprecated in Flutter SDK stable 2.10.0.
 enum SchemeColor {
   /// The active theme's color scheme primary color will be used.
   primary,
@@ -93,12 +93,6 @@ enum SchemeColor {
   /// The active theme's color scheme surface color will be used.
   surface,
 
-  /// The active theme's color scheme outline color will be used.
-  outline,
-
-  /// The active theme's color scheme shadow color will be used.
-  shadow,
-
   /// The active theme's color scheme  onSurface color will be used.
   onSurface,
 
@@ -107,6 +101,18 @@ enum SchemeColor {
 
   /// The active theme's color scheme onSurfaceVariant color will be used.
   onSurfaceVariant,
+
+  /// The active theme's color scheme outline color will be used.
+  outline,
+
+  /// The active theme's color scheme outlineVariant color will be used.
+  outlineVariant,
+
+  /// The active theme's color scheme shadow color will be used.
+  shadow,
+
+  /// The active theme's color scheme scrim color will be used.
+  scrim,
 
   /// The active theme's color scheme inverseSurface color will be used.
   inverseSurface,
@@ -283,8 +289,12 @@ class FlexSubThemes {
         return colorScheme.onSurfaceVariant;
       case SchemeColor.outline:
         return colorScheme.outline;
+      case SchemeColor.outlineVariant:
+        return colorScheme.outlineVariant;
       case SchemeColor.shadow:
         return colorScheme.shadow;
+      case SchemeColor.scrim:
+        return colorScheme.scrim;
       case SchemeColor.inverseSurface:
         return colorScheme.inverseSurface;
       case SchemeColor.onInverseSurface:
@@ -361,7 +371,11 @@ class FlexSubThemes {
         return colorScheme.surfaceVariant;
       case SchemeColor.outline:
         return colorScheme.background;
+      case SchemeColor.outlineVariant:
+        return colorScheme.background;
       case SchemeColor.shadow:
+        return colorScheme.background;
+      case SchemeColor.scrim:
         return colorScheme.background;
       case SchemeColor.inverseSurface:
         return colorScheme.onInverseSurface;

@@ -77,7 +77,9 @@ class FlexTones with Diagnosticable {
     required this.surfaceVariantTone,
     required this.onSurfaceVariantTone,
     required this.outlineTone,
+    required this.outlineVariantTone,
     required this.shadowTone,
+    required this.scrimTone,
     required this.inverseSurfaceTone,
     required this.onInverseSurfaceTone,
     required this.inversePrimaryTone,
@@ -121,7 +123,9 @@ class FlexTones with Diagnosticable {
     this.surfaceVariantTone = 90,
     this.onSurfaceVariantTone = 30,
     this.outlineTone = 50,
+    this.outlineVariantTone = 80,
     this.shadowTone = 0,
+    this.scrimTone = 0,
     this.inverseSurfaceTone = 20,
     this.onInverseSurfaceTone = 95,
     this.inversePrimaryTone = 80,
@@ -165,7 +169,9 @@ class FlexTones with Diagnosticable {
     this.surfaceVariantTone = 30,
     this.onSurfaceVariantTone = 80,
     this.outlineTone = 60,
+    this.outlineVariantTone = 30,
     this.shadowTone = 0,
+    this.scrimTone = 0,
     this.inverseSurfaceTone = 90,
     this.onInverseSurfaceTone = 20,
     this.inversePrimaryTone = 40,
@@ -438,8 +444,15 @@ class FlexTones with Diagnosticable {
   /// Tone used for [ColorScheme.outline] from neutralVariant [TonalPalette].
   final int outlineTone;
 
+  /// Tone used for [ColorScheme.outlineVariant] from neutralVariant
+  /// [TonalPalette].
+  final int outlineVariantTone;
+
   /// Tone used for [ColorScheme.shadow] from neutral [TonalPalette].
   final int shadowTone;
+
+  /// Tone used for [ColorScheme.scrim] from neutral [TonalPalette].
+  final int scrimTone;
 
   /// Tone used for [ColorScheme.inverseSurface] from neutral [TonalPalette].
   final int inverseSurfaceTone;
@@ -572,7 +585,9 @@ class FlexTones with Diagnosticable {
     int? surfaceVariantTone,
     int? onSurfaceVariantTone,
     int? outlineTone,
+    int? outlineVariantTone,
     int? shadowTone,
+    int? scrimTone,
     int? inverseSurfaceTone,
     int? onInverseSurfaceTone,
     int? inversePrimaryTone,
@@ -614,7 +629,9 @@ class FlexTones with Diagnosticable {
       surfaceVariantTone: surfaceVariantTone ?? this.surfaceVariantTone,
       onSurfaceVariantTone: onSurfaceVariantTone ?? this.onSurfaceVariantTone,
       outlineTone: outlineTone ?? this.outlineTone,
+      outlineVariantTone: outlineVariantTone ?? this.outlineVariantTone,
       shadowTone: shadowTone ?? this.shadowTone,
+      scrimTone: scrimTone ?? this.scrimTone,
       inverseSurfaceTone: inverseSurfaceTone ?? this.inverseSurfaceTone,
       onInverseSurfaceTone: onInverseSurfaceTone ?? this.onInverseSurfaceTone,
       inversePrimaryTone: inversePrimaryTone ?? this.inversePrimaryTone,
@@ -658,7 +675,9 @@ class FlexTones with Diagnosticable {
         other.surfaceVariantTone == surfaceVariantTone &&
         other.onSurfaceVariantTone == onSurfaceVariantTone &&
         other.outlineTone == outlineTone &&
+        other.outlineVariantTone == outlineVariantTone &&
         other.shadowTone == shadowTone &&
+        other.scrimTone == scrimTone &&
         other.inverseSurfaceTone == inverseSurfaceTone &&
         other.onInverseSurfaceTone == onInverseSurfaceTone &&
         other.inversePrimaryTone == inversePrimaryTone &&
@@ -698,7 +717,9 @@ class FlexTones with Diagnosticable {
         surfaceVariantTone,
         onSurfaceVariantTone,
         outlineTone,
+        outlineVariantTone,
         shadowTone,
+        scrimTone,
         inverseSurfaceTone,
         onInverseSurfaceTone,
         inversePrimaryTone,
@@ -750,7 +771,10 @@ class FlexTones with Diagnosticable {
     properties.add(
         DiagnosticsProperty<int>('onSurfaceVariantTone', onSurfaceVariantTone));
     properties.add(DiagnosticsProperty<int>('outlineTone', outlineTone));
+    properties.add(
+        DiagnosticsProperty<int>('outlineVariantTone', outlineVariantTone));
     properties.add(DiagnosticsProperty<int>('shadowTone', shadowTone));
+    properties.add(DiagnosticsProperty<int>('scrimTone', scrimTone));
     properties.add(
         DiagnosticsProperty<int>('inverseSurfaceTone', inverseSurfaceTone));
     properties.add(
