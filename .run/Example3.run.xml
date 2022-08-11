@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Example3 - Four Themes" type="FlutterRunConfigurationType" factoryName="Flutter">
-    <option name="filePath" value="$PROJECT_DIR$/example/lib/example3/main.dart" />
+    <option name="filePath" value="$PROJECT_DIR$/example/lib/example3_four_themes/main.dart" />
     <method v="2" />
   </configuration>
 </component>
