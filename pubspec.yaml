@@ -22,10 +22,10 @@ dependencies:
   # Use ^0.1.3 for Flutter rel candidates 3.1, 3.2, 3.4, that uses 0.1.5, beware that
   # version 0.1.5 has a new algo compared to 0.1.4 that changes some seed colors slightly.
   # Use ^0.2.0 for Flutter master 3.1.0-x, that uses 0.2.0 after 5.8.2022.
-  # material_color_utilities: ^0.1.3
-  # material_color_utilities: ^0.1.4
-  # material_color_utilities: ^0.1.5
-  material_color_utilities: ^0.2.0
+  #
+  # Here we use an unusual range since 0.2.0 is braking over 0.1.x, but it works for this case.
+  # Older version 0.1.3 and 0.1.4 in theory also works, but they break the package color tests.
+  material_color_utilities: '>=0.1.5 <=0.2.0'
 
 dev_dependencies:
   flutter_test:

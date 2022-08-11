@@ -6,6 +6,11 @@ import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
 
+/// Used to show effective theme colors.
+///
+/// * Boxes with [ColorScheme] colors.
+/// * Boxes with [ThemeData] colors.
+/// * Boxes with effective sub-theme colors.
 class EffectiveColors extends StatelessWidget {
   const EffectiveColors(this.controller, {super.key});
   final ThemeController controller;

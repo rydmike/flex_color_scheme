@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
+import 'code_theme.dart';
 
 /// This function calls [flexColorSchemeLight] and uses
 /// [FlexColorScheme.toTheme] to return the [ThemeData] object represented by
@@ -18,11 +19,24 @@ import '../../shared/controllers/theme_controller.dart';
 /// The [ThemeData.from] a [ColorScheme] will be used to demonstrate difference
 /// using the exact same [ColorScheme], but using just default [ThemeData] with
 /// no [FlexColorScheme] theming applied.
-ThemeData flexThemeLight(ThemeController controller) =>
-    flexColorSchemeLight(controller).toTheme;
+ThemeData flexThemeLight(ThemeController controller) {
+  // Must get the effective primary color, so we can use it as source color to
+  // harmonize the CodeTheme extension colors towards it, by using
+  // MaterialColorUtilities function Blend.harmonize, at this point
+  // the source color does not matter.
+  final Color source =
+      flexColorSchemeLight(controller, Colors.black).toScheme.primary;
+  // Now we can use our function that takes theme controller and source color,
+  // which is the effective primary color.
+  return flexColorSchemeLight(controller, source).toTheme;
+}
 
 /// Create the FlexColorScheme object represented by our current
-/// [ThemeController] configuration.
+/// [ThemeController] value [controller] configuration and [source] color.
+///
+/// The [source] color is used to color adjust all the custom code highlight
+/// theme colors added via ThemeData extension [CodeTheme], towards the
+/// [source] color.
 ///
 /// This setup may seem complex, but all the controller does is represent
 /// configuration values selected in the UI that are input to a large number
@@ -32,7 +46,7 @@ ThemeData flexThemeLight(ThemeController controller) =>
 /// Normally you would probably only have a few properties offered as possible
 /// features the user can change. Since this is a feature demo of almost
 /// everything [FlexColorScheme] can do, it is a bit wild.
-FlexColorScheme flexColorSchemeLight(ThemeController controller) {
+FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
       controller.schemeIndex < AppColor.schemes.length - 1;
@@ -301,5 +315,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller) {
     // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
     textTheme: fakeM2TypographyTextTheme,
     primaryTextTheme: fakeM2TypographyTextTheme,
+    // Add a custom theme extension with light mode code highlight colors.
+    extensions: <ThemeExtension<dynamic>>{
+      CodeTheme.dynamic(source, Brightness.light),
+    },
   );
 }

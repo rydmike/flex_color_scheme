@@ -5,7 +5,7 @@ import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
-/// All the sub theme show cases in a column.
+/// All the widgets using effective theming in a column.
 class WidgetShowcase extends StatelessWidget {
   const WidgetShowcase({super.key});
 

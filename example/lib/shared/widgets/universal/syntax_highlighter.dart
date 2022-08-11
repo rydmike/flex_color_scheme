@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:string_scanner/string_scanner.dart';
 
+import '../../../example5_themes_playground/theme/code_theme.dart';
+
 /// This syntax highlighter is adopted and converted from the Google Flutter
 /// Gallery application.
 ///
@@ -18,8 +20,12 @@ class SyntaxHighlighterStyle {
       this.classStyle,
       this.constantStyle});
 
+  /// A fixed example light code view style.
+  ///
+  /// It uses the same colors as the colors used in the [CodeTheme] theme
+  /// extension.
   static SyntaxHighlighterStyle lightThemeStyle() => SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFF000000)),
+        baseStyle: const TextStyle(color: Color(0xFF081936)),
         numberStyle: const TextStyle(color: Color(0xFF1565C0)),
         commentStyle: const TextStyle(color: Color(0xFF446736)),
         keywordStyle: const TextStyle(color: Color(0xFF9C27B0)),
@@ -29,6 +35,10 @@ class SyntaxHighlighterStyle {
         constantStyle: const TextStyle(color: Color(0xFF795548)),
       );
 
+  /// A fixed example dark code view style.
+  ///
+  /// It uses the same colors as the colors used in the [CodeTheme] theme
+  /// extension.
   static SyntaxHighlighterStyle darkThemeStyle() => SyntaxHighlighterStyle(
         baseStyle: const TextStyle(color: Color(0xFFE3E3D7)),
         numberStyle: const TextStyle(color: Color(0xFFB4CDA8)),
@@ -39,6 +49,36 @@ class SyntaxHighlighterStyle {
         classStyle: const TextStyle(color: Color(0xFF39C8B0)),
         constantStyle: const TextStyle(color: Color(0xFF9D79C4)),
       );
+
+  /// A dynamic code view style.
+  ///
+  /// This style gets its colors from the theme extension [CodeTheme] baked
+  /// into [ThemeData].
+  static SyntaxHighlighterStyle dynamic(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    // Get our custom code view theme from the BrandTheme extension, with a
+    // fallback to primary color. We use the light and dark fixed version as
+    // it uses the const values as fallback in case the theme extension has
+    // not been added to [ThemeData].
+    //
+    // While the theme extension [CodeTheme] in this example is based on same
+    // colors as it static light and dark mode, it is also color harmonized to
+    // source color. In this case theme primary color.
+    final CodeTheme colors = theme.extension<CodeTheme>() ??
+        (isLight ? CodeTheme.light : CodeTheme.dark);
+
+    return SyntaxHighlighterStyle(
+      baseStyle: TextStyle(color: colors.baseColor),
+      numberStyle: TextStyle(color: colors.numberColor),
+      commentStyle: TextStyle(color: colors.commentColor),
+      keywordStyle: TextStyle(color: colors.keywordColor),
+      stringStyle: TextStyle(color: colors.stringColor),
+      punctuationStyle: TextStyle(color: colors.punctuationColor),
+      classStyle: TextStyle(color: colors.classColor),
+      constantStyle: TextStyle(color: colors.constantColor),
+    );
+  }
 
   SyntaxHighlighterStyle copyWith({
     TextStyle? baseStyle,

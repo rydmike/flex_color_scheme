@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/widgets/universal/syntax_highlighter.dart';
 
-/// Show the code for the Theme in a Dialog screen.
+/// Show the code for the currently configured FlexColorScheme theme setup.
+///
+/// Used by the dialog `showCopySetupCodeDialog` to show the code .
 class DartCodeDialogScreen extends StatelessWidget {
   const DartCodeDialogScreen({
     super.key,
@@ -26,16 +28,11 @@ class DartCodeDialogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // We want to show the snack bar only in this screen, not on the main
     // screen too. So we create a scoped ScaffoldMessenger that we use instead
-    // of the default one. If we use the default one the snack bar shows
+    // of the default one. If we use the default one the SnackBar shows
     // also on the main screen when we view the code in a dialog, as well as
     // in the dialog. We don't want that.
     final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
         GlobalKey<ScaffoldMessengerState>();
-
-    final SyntaxHighlighterStyle style =
-        Theme.of(context).brightness == Brightness.dark
-            ? SyntaxHighlighterStyle.darkThemeStyle()
-            : SyntaxHighlighterStyle.lightThemeStyle();
 
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
@@ -69,7 +66,9 @@ class DartCodeDialogScreen extends StatelessWidget {
                   TextSpan(
                     style: GoogleFonts.firaMono(fontSize: 12),
                     children: <TextSpan>[
-                      DartSyntaxHighlighter(style).format(code)
+                      DartSyntaxHighlighter(
+                        SyntaxHighlighterStyle.dynamic(context),
+                      ).format(code),
                     ],
                   ),
                 ),

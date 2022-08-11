@@ -154,6 +154,17 @@ issues.
 
 **EXAMPLES**
 
+* *Themes Playground:* New feature, the used code highlight colors were added as colors in 
+  a `CodeTheme` class `ThemeExtension` to `ThemeData`. To demonstrate how one can use theme 
+  extensions directly with FlexColorScheme as well, in this case to add custom semantic colors 
+  for the code view's code keyword highlighter. Additionally, a fancy Material 3 feature was added, 
+  color harmonization of custom colors. The proces is described in M3 guide under 
+  [custom colors](https://m3.material.io/styles/color/the-color-system/custom-colors).
+  The M3 library [MaterialColorUtilities](https://pub.dev/packages/material_color_utilities) has 
+  the `Blend` function needed to perform the color harmonization, as described
+  [here](https://github.com/material-foundation/material-color-utilities#readme) and the Dart color
+  `Blend` function is [here](https://github.com/material-foundation/material-color-utilities/blob/main/dart/lib/blend/blend.dart).
+
 * *Themes Playground:* Updated the default AppBar style, it uses a dropdown menu that can also select 
   'null' choice and use default M2 and M3 theming as defaults via it. The AppBar panel now also
   displays an AppBar Widget of its own, so one does not have to look at the actual AppBar to

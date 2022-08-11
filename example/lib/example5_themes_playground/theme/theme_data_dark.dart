@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
+import 'code_theme.dart';
 import 'flex_theme_dark.dart';
 
 // ignore_for_file: comment_references
@@ -40,7 +41,8 @@ ThemeData themeDataDark(ThemeController controller) {
       Typography.material2021(platform: controller.platform);
   final TextTheme? fakeM2TypographyTextTheme =
       controller.useMaterial3 ? null : AppData.m2TextTheme;
-  final ColorScheme colorScheme = flexColorSchemeDark(controller).toScheme;
+  final ColorScheme colorScheme =
+      flexColorSchemeDark(controller, Colors.black).toScheme;
   final TextTheme? fakeM2TypographyPrimTextTheme =
       controller.useMaterial3 ? null : AppData.m2TextTheme;
   final bool primaryIsDark =
@@ -79,5 +81,9 @@ ThemeData themeDataDark(ThemeController controller) {
     typography: alwaysM3Typography,
     // Typography used before workaround needed.
     // typography: Typography.material2018(platform: controller.platform),
+    // Add a custom theme extension with light mode code highlight colors.
+    extensions: <ThemeExtension<dynamic>>{
+      CodeTheme.dynamic(colorScheme.primary, Brightness.dark),
+    },
   );
 }
