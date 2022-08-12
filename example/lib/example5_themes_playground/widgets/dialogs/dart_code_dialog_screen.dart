@@ -67,7 +67,7 @@ class DartCodeDialogScreen extends StatelessWidget {
                     style: GoogleFonts.firaMono(fontSize: 12),
                     children: <TextSpan>[
                       DartSyntaxHighlighter(
-                        SyntaxHighlighterStyle.dynamic(context),
+                        SyntaxHighlighterStyle.harmonized(context),
                       ).format(code),
                     ],
                   ),

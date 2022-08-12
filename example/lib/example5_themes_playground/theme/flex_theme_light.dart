@@ -342,7 +342,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     primaryTextTheme: fakeM2TypographyTextTheme,
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
-      CodeTheme.dynamic(source, Brightness.light),
+      CodeTheme.harmonized(source, Brightness.light),
     },
   );
 }

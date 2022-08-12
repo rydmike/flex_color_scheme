@@ -84,7 +84,7 @@ ThemeData themeDataLight(ThemeController controller) {
 
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
-      CodeTheme.dynamic(colorScheme.primary, Brightness.light),
+      CodeTheme.harmonized(colorScheme.primary, Brightness.light),
     },
   );
 }

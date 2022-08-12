@@ -63,14 +63,38 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     );
   }
 
-  /// A dynamic code view color theme, based on [brightness] where colors
+  /// Code view theme colors for light mode.
+  static const CodeTheme light = CodeTheme(
+    baseColor: Color(0xFF092249),
+    numberColor: Color(0xFF1565C0),
+    commentColor: Color(0xFF446736),
+    keywordColor: Color(0xFF9C27B0),
+    stringColor: Color(0xFF43A047),
+    punctuationColor: Color(0xFF081936),
+    classColor: Color(0xFF6607C5),
+    constantColor: Color(0xFF795548),
+  );
+
+  /// Code view theme colors for dark mode.
+  static const CodeTheme dark = CodeTheme(
+    baseColor: Color(0xFFEEEED6),
+    numberColor: Color(0xFFB4CDA8),
+    commentColor: Color(0xFF90C07A),
+    keywordColor: Color(0xFF5BAAE8),
+    stringColor: Color(0xFFD3A384),
+    punctuationColor: Color(0xFFEAE9D4),
+    classColor: Color(0xFF39C8B0),
+    constantColor: Color(0xFFB9A1DC),
+  );
+
+  /// A harmonized code view color theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
-  static CodeTheme dynamic(Color sourceColor, Brightness brightness) {
+  static CodeTheme harmonized(Color sourceColor, Brightness brightness) {
     final int sourceColorValue = sourceColor.value;
 
     // Fallback color value that can be used for all colors in both modes.
     const int fallbackValue = 0xFF1565C0; // Bright dark blue
-    // Get the code theme for used brightness.
+    // Use the code theme for target brightness.
     final CodeTheme codeTheme = brightness == Brightness.light ? light : dark;
 
     // MaterialColorUtilities Blend function is used to harmonize each color
@@ -131,28 +155,4 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
       ),
     );
   }
-
-  /// Code view theme colors for light mode.
-  static const CodeTheme light = CodeTheme(
-    baseColor: Color(0xFF092249),
-    numberColor: Color(0xFF1565C0),
-    commentColor: Color(0xFF446736),
-    keywordColor: Color(0xFF9C27B0),
-    stringColor: Color(0xFF43A047),
-    punctuationColor: Color(0xFF081936),
-    classColor: Color(0xFF6607C5),
-    constantColor: Color(0xFF795548),
-  );
-
-  /// Code view theme colors for dark mode.
-  static const CodeTheme dark = CodeTheme(
-    baseColor: Color(0xFFEEEED6),
-    numberColor: Color(0xFFB4CDA8),
-    commentColor: Color(0xFF90C07A),
-    keywordColor: Color(0xFF5BAAE8),
-    stringColor: Color(0xFFD3A384),
-    punctuationColor: Color(0xFFEAE9D4),
-    classColor: Color(0xFF39C8B0),
-    constantColor: Color(0xFFB9A1DC),
-  );
 }
