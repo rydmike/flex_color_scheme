@@ -202,8 +202,8 @@ theming in general. The issues typically caused by incomplete Material 3 impleme
   do as noted here
   [PR 107166 comment](https://github.com/flutter/flutter/pull/107166#issuecomment-1189206217),
   not yet M3 theme plain vanilla `Chip` when using Material 3. This might be fixed in an 
-  additional PR later in the SDK. There is however no separate raised issue for it, only 
-  the above comment, so it might be forgotten. Might raise an issue later.
+  additional PR later in the SDK. This proposal tracks the potential implementation of this
+  [#109470](https://github.com/flutter/flutter/issues/109470).
 
 * [**#107946**](https://github.com/flutter/flutter/issues/107946) Cannot theme Shape and IconSize 
   differently for different sized FloatingActionButtons. One of the drivers behind the breaking

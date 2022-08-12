@@ -132,7 +132,7 @@ class HeaderCard extends StatelessWidget {
     final Color cardColor = color ?? theme.cardColor;
     // Compute a header color with fixed primary blend from the card color,
     final Color headerColor =
-        Color.alphaBlend(scheme.primary.withAlpha(20), cardColor);
+        Color.alphaBlend(scheme.surfaceTint.withAlpha(20), cardColor);
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
     final bool useHeading =
