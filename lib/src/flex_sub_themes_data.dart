@@ -110,8 +110,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.defaultRadius,
     //
-    this.buttonMinSize = kButtonMinSize,
-    this.buttonPadding = kButtonPadding,
+    this.buttonMinSize,
+    this.buttonPadding,
     this.thickBorderWidth,
     this.thinBorderWidth,
     //
@@ -564,16 +564,33 @@ class FlexSubThemesData with Diagnosticable {
   /// [ToggleButtons], and the legacy deprecated/removed buttons
   /// `RaisedButton`, `OutlineButton` and `FlatButton` and to [MaterialButton].
   ///
-  /// Defaults to [kButtonMinSize].
-  final Size buttonMinSize;
+  /// If undefined and [ThemeData.useMaterial3] is false,
+  /// defaults to [kButtonMinSize] = `Size(40, 40)`.
+  /// If undefined and [ThemeData.useMaterial3] is true,
+  /// defaults to `Size(64, 40)`.
+  final Size? buttonMinSize;
 
   /// Padding on [TextButton], [ElevatedButton] and [OutlinedButton].
   ///
   /// Rounded buttons may need a bit more horizontal padding to
   /// accommodate for the rounding.
   ///
-  /// Defaults to [kButtonPadding].
-  final EdgeInsetsGeometry buttonPadding;
+  /// If undefined then defaults to each buttons un-themed textScale based
+  /// padding static function `ButtonStyleButton.scaledPadding` where
+  /// Elevated, Filled and Outline button use padding:
+  ///   * `textScaleFactor <= 1` - horizontal(16)
+  ///   * `1 < textScaleFactor <= 2` - lerp(horizontal(16), horizontal(8))
+  ///   * `2 < textScaleFactor <= 3` - lerp(horizontal(8), horizontal(4))
+  ///   * `3 < textScaleFactor` - horizontal(4)
+  ///
+  /// And TextButton uses padding:
+  ///   * `textScaleFactor <= 1` - all(8)
+  ///   * `1 < textScaleFactor <= 2` - lerp(all(8), horizontal(8))
+  ///   * `2 < textScaleFactor <= 3` - lerp(horizontal(8), horizontal(4))
+  ///   * `3 < textScaleFactor` - horizontal(4)
+  ///
+  /// This default is same in both Material 2 and Material 3 theme mode.
+  final EdgeInsetsGeometry? buttonPadding;
 
   /// Border width of Widgets with an outline border.
   ///

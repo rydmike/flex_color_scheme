@@ -1593,6 +1593,22 @@ void main() {
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
       );
+      // Custom shape test
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          radius: 10,
+          useMaterial3: true,
+        ).style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+        ),
+      );
     });
     test(
         'FST1.09custom-1: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
@@ -2691,13 +2707,32 @@ void main() {
           width: 2.0,
         )),
       );
+      // Custom shape test
+      expect(
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          outlineSchemeColor: SchemeColor.primaryContainer,
+          outlineWidth: 2,
+          pressedOutlineWidth: 3,
+          radius: 10,
+          useMaterial3: true,
+        ).style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+        ),
+      );
     });
 
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.11: GIVEN a default FlexSubTheme.textButtonTheme() '
+        'FST1.11-M2: GIVEN a default FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -2741,7 +2776,101 @@ void main() {
         ),
       );
     });
-    test('FST1.11-states: Does TextButton have right material states', () {
+    test(
+        'FST1.11-M2-base: GIVEN a custom FlexSubTheme.textButtonTheme() '
+        'EXPECT equal to TextButtonThemeData() version with same color', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TextButtonThemeData(
+            style: TextButton.styleFrom(
+              minimumSize: const Size(40, 40),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ), // buttonShape,
+            ).copyWith(
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.secondary.withAlpha(0x0D);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.secondary.withAlpha(0x26);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.secondary.withAlpha(0x33);
+                  }
+                  return Colors.transparent;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.11-M3: GIVEN a default M3 FlexSubTheme.textButtonTheme() '
+        'EXPECT equal to TextButtonThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return colorScheme.primary;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return colorScheme.primary.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return colorScheme.primary.withOpacity(0.12);
+        }
+        return null;
+      });
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TextButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: foregroundColor,
+              backgroundColor:
+                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
+              overlayColor: overlayColor,
+              elevation: ButtonStyleButton.allOrNull<double>(0.0),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test('FST1.11-M2-states: Does TextButton have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Disabled foreground
       expect(
@@ -2790,54 +2919,158 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test(
-        'FST1.11-base-color: GIVEN a default FlexSubTheme.textButtonTheme() '
-        'EXPECT equal to TextButtonThemeData() version with same color', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+    test('FST1.11-M3-states: Does TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Disabled foreground
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
-        ).toString(),
-        equalsIgnoringHashCodes(
-          TextButtonThemeData(
-            style: TextButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ), // buttonShape,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.secondary.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.secondary.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.secondary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+          radius: 15,
+        ).style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
             ),
-          ).toString(),
+          ),
         ),
       );
     });
+    test(
+        'FST1.11-M3-custom-states: Does TextButton have right material '
+        'states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Disabled foreground
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        )
+            .style!
+            .foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Overlay color states
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.tertiary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.tertiary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+          radius: 1,
+        ).style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(1),
+            ),
+          ),
+        ),
+      );
+    });
+
     // TODO(rydmike): Monitor Flutter SDK deprecation of ButtonThemeData.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
