@@ -20,14 +20,39 @@ import 'code_theme.dart';
 /// using the exact same [ColorScheme], but using just default [ThemeData] with
 /// no [FlexColorScheme] theming applied.
 ThemeData flexThemeLight(ThemeController controller) {
-  // Must get the effective primary color, so we can use it as source color to
-  // harmonize the CodeTheme extension colors towards it, by using
-  // MaterialColorUtilities function Blend.harmonize, at this point
-  // the source color does not matter.
+  // Get the effective theme primary color, so we can use it as source color to
+  // harmonize the CodeTheme extension colors towards it. Which is done by using
+  // the M3 package MaterialColorUtilities function Blend.harmonize. At this
+  // point the source color does not matter.
+  //
+  // Here it is worth pointing out this creates an extra FlexColorScheme that we
+  // never use to make our ThemeData, we only use it to get its identical
+  // effective ColorScheme and then grab the effective primary color. We then
+  // proceed to make an almost identical FlexColorScheme, but with the effective
+  // primary color we got as its color, and use it as source color to harmonize
+  // our out custom theme extension colors with it.
+  //
+  // The way the M3 seed based color algorithm and the harmonize color functions
+  // work. We could actually use our ThemeController `controller` here and get
+  // the effective primary input color via it. Then use that as source color for
+  // the harmonization. In tests this produced same harmonization results as
+  // when using the actual effective primary color created when also using it
+  // as a seed to make the effective ColorScheme.
+  // However, in dark mode, when not using seeds, but generating dark mode
+  // colors from light mode primary color, with or without swap primary and
+  // container colors on, by using `toDark` to compute the dark mode primary
+  // color from the light mode primary input color. The harmonization results
+  // diverge a bit from the harmonization result based on actual effective dark
+  // mode primary color and using the in the controller accessible input color
+  // as source color. This way by getting the actual effective ColorScheme is
+  // simpler and guaranteed to always produce the right M3 intended color
+  // harmonization towards the effective primary color. Regardless of what
+  // settings and config we have used in the Themes Playground to define and
+  // make our primary color.
   final Color source =
       flexColorSchemeLight(controller, Colors.black).toScheme.primary;
-  // Now we can use our function that takes theme controller and source color,
-  // which is the effective primary color.
+  // Now we can use a function that takes our ThemeController and source color,
+  // which is the effective primary color, the get the effective ThemeData.
   return flexColorSchemeLight(controller, source).toTheme;
 }
 
@@ -53,8 +78,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
   // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
 
-  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
   // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
+  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
   final bool useFakeTypo2018 =
       (controller.useSubThemes && !controller.useTextTheme) ||
           (!controller.useSubThemes && !controller.useMaterial3);
@@ -123,7 +148,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // the themed text. If you plan to put text on surfaces that are not
             // primary color tinted or primary colored, then you may need to
             // turn this off, or make custom text themes for those surfaces.
-            // Material3 has containers with matching colors too, they work
+            // Material3 has containers with matching on colors too, they work
             // great for contrast colored text, do use them too.
             blendTextTheme: controller.blendLightTextTheme,
             // Opt in/out of the Material 3 style matched TextTheme geometry, or

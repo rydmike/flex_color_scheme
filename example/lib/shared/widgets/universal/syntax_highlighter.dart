@@ -22,32 +22,36 @@ class SyntaxHighlighterStyle {
 
   /// A fixed example light code view style.
   ///
+  /// This constructor does not create a ThemeData extensions based
+  /// SyntaxHighlighterStyle.
   /// It uses the same colors as the colors used in the [CodeTheme] theme
-  /// extension.
+  /// extension, but it could be any fixed none theme related colors.
   static SyntaxHighlighterStyle lightThemeStyle() => SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFF081936)),
+        baseStyle: const TextStyle(color: Color(0xFF092249)),
         numberStyle: const TextStyle(color: Color(0xFF1565C0)),
         commentStyle: const TextStyle(color: Color(0xFF446736)),
         keywordStyle: const TextStyle(color: Color(0xFF9C27B0)),
         stringStyle: const TextStyle(color: Color(0xFF43A047)),
-        punctuationStyle: const TextStyle(color: Color(0xFF000000)),
-        classStyle: const TextStyle(color: Color(0xFF512DA8)),
+        punctuationStyle: const TextStyle(color: Color(0xFF081936)),
+        classStyle: const TextStyle(color: Color(0xFF6607C5)),
         constantStyle: const TextStyle(color: Color(0xFF795548)),
       );
 
   /// A fixed example dark code view style.
   ///
+  /// This constructor does not create a ThemeData extensions based
+  /// SyntaxHighlighterStyle.
   /// It uses the same colors as the colors used in the [CodeTheme] theme
-  /// extension.
+  /// extension, but it could be any fixed none theme related colors.
   static SyntaxHighlighterStyle darkThemeStyle() => SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFFE3E3D7)),
+        baseStyle: const TextStyle(color: Color(0xFFEEEED6)),
         numberStyle: const TextStyle(color: Color(0xFFB4CDA8)),
-        commentStyle: const TextStyle(color: Color(0xFF699856)),
-        keywordStyle: const TextStyle(color: Color(0xFF499CD5)),
-        stringStyle: const TextStyle(color: Color(0xFFCD9069)),
-        punctuationStyle: const TextStyle(color: Color(0xFFFFFFFF)),
+        commentStyle: const TextStyle(color: Color(0xFF90C07A)),
+        keywordStyle: const TextStyle(color: Color(0xFF5BAAE8)),
+        stringStyle: const TextStyle(color: Color(0xFFD3A384)),
+        punctuationStyle: const TextStyle(color: Color(0xFFEAE9D4)),
         classStyle: const TextStyle(color: Color(0xFF39C8B0)),
-        constantStyle: const TextStyle(color: Color(0xFF9D79C4)),
+        constantStyle: const TextStyle(color: Color(0xFFB9A1DC)),
       );
 
   /// A dynamic code view style.
@@ -57,14 +61,19 @@ class SyntaxHighlighterStyle {
   static SyntaxHighlighterStyle dynamic(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    // Get our custom code view theme from the BrandTheme extension, with a
-    // fallback to primary color. We use the light and dark fixed version as
-    // it uses the const values as fallback in case the theme extension has
-    // not been added to [ThemeData].
+    // Get our custom code view theme from the CodeTheme extension, with a
+    // fallback to brightness dependent CodeTheme.light or CodeTheme.dark.
+    // We use the static const light and dark versions as fallback highlight
+    // colors in case the theme extension CodeTheme has not been added to
+    // ThemeData, making this dynamic constructor more robust.
     //
-    // While the theme extension [CodeTheme] in this example is based on same
-    // colors as it static light and dark mode, it is also color harmonized to
-    // source color. In this case theme primary color.
+    // While the theme extension CodeTheme in this example is based on same
+    // colors as its static light and dark mode, the dynamic one from
+    // ThemeData it is also color harmonized to source color. In this case
+    // theme primary color. Another benefit with using the colors from the
+    // ThemeData extension is, is harmonization function result is actually
+    // lerp animated in sync with the rest of the ThemeData change as you
+    // change app theme in the app.
     final CodeTheme colors = theme.extension<CodeTheme>() ??
         (isLight ? CodeTheme.light : CodeTheme.dark);
 
