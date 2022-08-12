@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
-/// A [ThemeExtension] with custom code highlight color properties used by
-/// the code viewer.
+/// A [ThemeExtension] for code highlight color properties used by code viewer.
 class CodeTheme extends ThemeExtension<CodeTheme> {
   const CodeTheme({
     this.baseColor,
@@ -64,22 +63,26 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     );
   }
 
-  /// Make a dynamic code view color theme, that is based on [brightness]
-  /// and where colors are harmonized towards a given [sourceColor].
+  /// A dynamic code view color theme, based on [brightness] where colors
+  /// are harmonized towards a given [sourceColor].
   static CodeTheme dynamic(Color sourceColor, Brightness brightness) {
     final int sourceColorValue = sourceColor.value;
 
-    // Fallback color value that can be used for all styles in both modes.
-    const int fallbackValue = 0xFF1565C0;
+    // Fallback color value that can be used for all colors in both modes.
+    const int fallbackValue = 0xFF1565C0; // Bright dark blue
+    // Get the code theme for used brightness.
     final CodeTheme codeTheme = brightness == Brightness.light ? light : dark;
 
     // MaterialColorUtilities Blend function is used to harmonize each color
     // towards the source color hue. This way the code view text will fit better
-    // with the overall ColorScheme. This also works if source color the
-    // ColorScheme is extracted from OS theme colors or device wallpaper.
+    // with the overall ColorScheme. This also works well if the source color
+    // for the ColorScheme was extracted from OS theme colors or a device
+    // wallpaper, or any image and then created with ColorScheme.fromSeed.
     return CodeTheme(
       baseColor: Color(
         Blend.harmonize(
+          // As used used in this app we could bang the color, instead of using
+          // a fallback, but this is safer generally.
           codeTheme.baseColor?.value ?? fallbackValue,
           sourceColorValue,
         ),
@@ -129,27 +132,27 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     );
   }
 
-  // Custom code view color theme in light mode.
+  /// Code view theme colors for light mode.
   static const CodeTheme light = CodeTheme(
-    baseColor: Color(0xFF081936),
+    baseColor: Color(0xFF092249),
     numberColor: Color(0xFF1565C0),
     commentColor: Color(0xFF446736),
     keywordColor: Color(0xFF9C27B0),
     stringColor: Color(0xFF43A047),
-    punctuationColor: Color(0xFF000000),
-    classColor: Color(0xFF512DA8),
+    punctuationColor: Color(0xFF081936),
+    classColor: Color(0xFF6607C5),
     constantColor: Color(0xFF795548),
   );
 
-  // Custom code view color theme in dark mode.
+  /// Code view theme colors for dark mode.
   static const CodeTheme dark = CodeTheme(
-    baseColor: Color(0xFFE3E3D7),
+    baseColor: Color(0xFFEEEED6),
     numberColor: Color(0xFFB4CDA8),
-    commentColor: Color(0xFF699856),
-    keywordColor: Color(0xFF499CD5),
-    stringColor: Color(0xFFCD9069),
-    punctuationColor: Color(0xFFFFFFFF),
+    commentColor: Color(0xFF90C07A),
+    keywordColor: Color(0xFF5BAAE8),
+    stringColor: Color(0xFFD3A384),
+    punctuationColor: Color(0xFFEAE9D4),
     classColor: Color(0xFF39C8B0),
-    constantColor: Color(0xFF9D79C4),
+    constantColor: Color(0xFFB9A1DC),
   );
 }
