@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 5.2.0-dev.1
 
-**Aug 12, 2022**
+**Aug 13, 2022**
 
 This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
 prepare for new style and feature alignments when `useMaterial3` is true.
@@ -198,8 +198,8 @@ issues.
 
 **KNOWN FLUTTER SDK ISSUES IMPACTING THEMING**
 
-The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter
-theming in general. The issues typically caused by incomplete Material 3 implementation in Flutter.
+The issues below in the Flutter SDK itself, are known to impact FlexColorScheme and Flutter theming
+in general. The issues are typically caused by incomplete Material 3 implementation in Flutter.
 
 * The M3 Chip themes available in Flutter `master 3.1.0-0.0.pre.2216` at the time of writing, 
   do as noted here
