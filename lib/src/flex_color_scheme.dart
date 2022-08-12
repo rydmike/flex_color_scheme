@@ -4968,7 +4968,6 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
-
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system
@@ -6253,6 +6252,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              useMaterial3: useMaterial3,
             )
           : null,
       elevatedButtonTheme: useSubThemes
@@ -7556,8 +7556,8 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   }
 }
 
-// Private class to hold alpha values for a given FlexSurfaceMode blend mode
-// and blend level and static helper to compute the alpha blend values.
+/// Private class to hold alpha values for a given FlexSurfaceMode blend mode
+/// and blend level and static helper to compute the alpha blend values.
 @immutable
 class _AlphaValues {
   const _AlphaValues({
@@ -7619,7 +7619,7 @@ class _AlphaValues {
   /// Alpha blend value for scaffold background color.
   final int scaffoldAlpha;
 
-  // Returns alpha values for a given blend level and blend mode and brightness.
+  /// Returns alpha values for a given blend level and blend mode and brightness.
   static _AlphaValues getAlphas(
       final FlexSurfaceMode mode, final int blendLevel) {
     switch (mode) {
@@ -7856,6 +7856,7 @@ class _Scheme {
     required this.inversePrimary,
   });
 
+  /// Returns a _Scheme based on seed keys and FlexTones tones mapping.
   static _Scheme tones({
     required int primaryKey,
     int? secondaryKey,
@@ -7908,6 +7909,7 @@ class _Scheme {
     );
   }
 
+  /// Returns a ColorScheme, from seed keys and FlexTones tones mapping.
   static ColorScheme fromSeeds({
     required Color primaryKey,
     Color? secondaryKey,

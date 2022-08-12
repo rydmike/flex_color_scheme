@@ -386,7 +386,7 @@ class FlexSubThemes {
     }
   }
 
-  // TODO(rydmike): Remove buttonTheme, when ButtonThemeData is deprecated.
+  // TODO(rydmike): Remove when ButtonThemeData is deprecated in SDK.
   /// DEPRECATED: An opinionated [ButtonThemeData] theme.
   ///
   /// This [ButtonThemeData] is marked as **obsolete** in Flutter SDK
@@ -436,24 +436,28 @@ class FlexSubThemes {
 
     /// Padding for legacy button.
     ///
-    /// Defaults to EdgeInsets.symmetric(horizontal: 16).
+    /// If not defined,
+    /// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
     /// This makes the legacy buttons same size as default margin on new ones.
-    final EdgeInsetsGeometry padding = kButtonPadding,
+    final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
+    /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
+    final Size? minButtonSize,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    // Effective minimum button size.
+    final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
+
     return ButtonThemeData(
       colorScheme: colorScheme,
-      minWidth: minButtonSize.width,
-      height: minButtonSize.height,
-      padding: padding,
+      minWidth: effectiveMinButtonSize.width,
+      height: effectiveMinButtonSize.height,
+      padding: padding ?? kButtonPadding,
       layoutBehavior: ButtonBarLayoutBehavior.constrained,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       hoverColor: baseColor
@@ -3236,56 +3240,117 @@ class FlexSubThemes {
     /// M3 has more horizontal padding 24dp, but the tighter default padding
     /// in M2 that is 16dp looks fine as well when using stadium borders
     /// as in M3.
-    /// Making the custom scalable padding and separate one for icon
-    /// versions is rather involved, so sticking to defaults, but exposing the
-    /// padding property for future or external use.
+    ///
+    /// If null and [useMaterial3] is true in the context, the correct M3
+    /// button theme default computed button padding for M3 will be used.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
-    /// Defaults to `kButtonMinSize` = Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
+    /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+    /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+    /// [useMaterial3] is true.
+    final Size? minButtonSize,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated defaults values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    return TextButtonThemeData(
-      style: TextButton.styleFrom(
-        minimumSize: minButtonSize,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
+    // We are using FCS M2 buttons, styled in M3 fashion.
+    if (!useMaterial3) {
+      return TextButtonThemeData(
+        style: TextButton.styleFrom(
+          minimumSize: minButtonSize ?? kButtonMinSize,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? kButtonRadius),
+            ),
+          ), // buttonShape,
+          padding: padding,
+        ).copyWith(
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return baseColor
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledForegroundAlpha);
+              }
+              return baseColor;
+            },
           ),
-        ), // buttonShape,
-        padding: padding,
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledForegroundAlpha);
-            }
-            return baseColor;
-          },
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.hovered)) {
+                return baseColor.withAlpha(kHoverBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return baseColor.withAlpha(kFocusBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return baseColor.withAlpha(kPressedBackgroundAlpha);
+              }
+              return Colors.transparent;
+            },
+          ),
         ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kHoverBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kFocusBackgroundAlpha);
-            }
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor.withAlpha(kPressedBackgroundAlpha);
-            }
-            return Colors.transparent;
-          },
+      );
+    }
+    // We are using M3 style buttons, with potentially custom radius,
+    // foregroundColor, overlayColor, padding and minButtonSize.
+    else {
+      final MaterialStateProperty<Color?> foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return baseColor;
+      });
+
+      final MaterialStateProperty<Color?> overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return baseColor.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return baseColor.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return baseColor.withOpacity(0.12);
+        }
+        return null;
+      });
+
+      return TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: foregroundColor,
+          backgroundColor:
+              ButtonStyleButton.allOrNull<Color>(Colors.transparent),
+          overlayColor: overlayColor,
+          minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
+          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+          elevation: ButtonStyleButton.allOrNull<double>(0.0),
+          shape: radius == null
+              ? null
+              : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(radius),
+                    ),
+                  ),
+                ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   /// An opinionated [TimePickerThemeData] with custom corner radius.
@@ -3391,6 +3456,7 @@ class FlexSubThemes {
     );
   }
 
+  // TODO(rydmike): Add actual M3 ToggleButtons style when it arrives in SDK.
   /// An opinionated [ToggleButtonsThemeData] theme.
   ///
   /// The adjustable button corner [radius] defaults to 20 this is new
@@ -3436,8 +3502,8 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// Defaults to Size(40, 40).
-    final Size minButtonSize = kButtonMinSize,
+    /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
+    final Size? minButtonSize,
 
     /// VisualDensity for ToggleButtons.
     ///
@@ -3467,6 +3533,8 @@ class FlexSubThemes {
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
 
+    // Effective minimum button size.
+    final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
     // Effective border width, default different with M3.
     final double effectiveWidth =
         borderWidth ?? (useMaterial3 ? 1.0 : kThinBorderWidth);
@@ -3511,10 +3579,10 @@ class FlexSubThemes {
         // based on theme setting, to do so this theme can accept a
         // VisualDensity property. Give it the same value that your theme
         // uses. This defaults to same value that ThemeData uses by default.
-        minWidth: minButtonSize.width -
+        minWidth: effectiveMinButtonSize.width -
             effectiveWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dx,
-        minHeight: minButtonSize.height -
+        minHeight: effectiveMinButtonSize.height -
             effectiveWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dy,
       ),

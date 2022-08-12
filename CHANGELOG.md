@@ -109,6 +109,9 @@ issues.
   It now also uses stadium border instead of 20dp, M3 size and padding, when `useMaterial3` is 
   opted in on.
 
+* Updated `TextButton` to support `useMaterial3` defaults concerning its use of stadium border 
+  instead of 20dp radius, as well M3 size and padding, when `useMaterial3` is opted in on.
+
 * Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
   10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
   did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
