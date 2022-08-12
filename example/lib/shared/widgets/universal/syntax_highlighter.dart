@@ -54,26 +54,26 @@ class SyntaxHighlighterStyle {
         constantStyle: const TextStyle(color: Color(0xFFB9A1DC)),
       );
 
-  /// A dynamic code view style.
+  /// A theme harmonized code view syntax syntax highlighter style.
   ///
   /// This style gets its colors from the theme extension [CodeTheme] baked
   /// into [ThemeData].
-  static SyntaxHighlighterStyle dynamic(BuildContext context) {
+  static SyntaxHighlighterStyle harmonized(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     // Get our custom code view theme from the CodeTheme extension, with a
     // fallback to brightness dependent CodeTheme.light or CodeTheme.dark.
     // We use the static const light and dark versions as fallback highlight
     // colors in case the theme extension CodeTheme has not been added to
-    // ThemeData, making this dynamic constructor more robust.
+    // ThemeData, making this harmonized constructor more robust.
     //
-    // While the theme extension CodeTheme in this example is based on same
-    // colors as its static light and dark mode, the dynamic one from
-    // ThemeData it is also color harmonized to source color. In this case
-    // theme primary color. Another benefit with using the colors from the
-    // ThemeData extension is, is harmonization function result is actually
-    // lerp animated in sync with the rest of the ThemeData change as you
-    // change app theme in the app.
+    // The theme extension CodeTheme in this example is based on same
+    // colors as its static light and dark mode, but the harmonized one from
+    // ThemeData is M3 color harmonized to source color. In this case active
+    // theme primary color. Another benefit from using the colors via the
+    // ThemeData extension, is that its harmonization function result is color
+    // lerp animated, in sync with the rest of the ThemeData color changes
+    // automatically as you change theme in the app, as it should be.
     final CodeTheme colors = theme.extension<CodeTheme>() ??
         (isLight ? CodeTheme.light : CodeTheme.dark);
 
