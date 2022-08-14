@@ -7619,7 +7619,8 @@ class _AlphaValues {
   /// Alpha blend value for scaffold background color.
   final int scaffoldAlpha;
 
-  /// Returns alpha values for a given blend level and blend mode and brightness.
+  /// Returns alpha values for a given blend level and blend mode
+  /// and brightness.
   static _AlphaValues getAlphas(
       final FlexSurfaceMode mode, final int blendLevel) {
     switch (mode) {
