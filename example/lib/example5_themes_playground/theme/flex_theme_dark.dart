@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
 import '../../shared/const/app_data.dart';
+import '../../shared/const/flex_tones_enum.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
 
@@ -248,8 +249,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
-    tones:
-        AppColor.flexTonesConfig(Brightness.dark, controller.usedFlexToneSetup),
+    tones: FlexTone.values[controller.usedFlexToneSetup].tones(Brightness.dark),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //

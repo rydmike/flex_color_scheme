@@ -68,7 +68,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                         SchemeColor.values[i],
                         colorScheme,
                       ),
-                defaultColor: i >= SchemeColor.values.length - 2,
+                defaultOption: i >= SchemeColor.values.length - 2,
               ),
               title: i >= SchemeColor.values.length - 2
                   // If we reached first deprecated color, make default label.
@@ -96,7 +96,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                   colorScheme,
                 )
               : colorScheme.surface,
-          defaultColor: useDefault,
+          defaultOption: useDefault,
         ),
       ),
     );

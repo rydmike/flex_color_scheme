@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
+import '../../../../shared/const/flex_tones_enum.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/use_key_colors_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import 'flex_tone_config_buttons.dart';
+import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
 
@@ -17,73 +18,28 @@ class SeededColorScheme extends StatelessWidget {
   });
   final ThemeController controller;
 
-  String _describeFlexToneLabel(int colors) {
-    if (colors == 1) {
-      return 'Material 3';
-    } else if (colors == 2) {
-      return 'Soft';
-    } else if (colors == 3) {
-      return 'Vivid';
-    } else if (colors == 4) {
-      return 'Vivid surfaces';
-    } else if (colors == 5) {
-      return 'High contrast';
+  String get _flexToneName {
+    if (controller.useKeyColors) {
+      return FlexTone.values[controller.usedFlexToneSetup].name;
+    } else {
+      return FlexTone.values[0].name;
     }
-    return 'Disabled';
   }
 
-  String _describeFlexToneShort(int colors) {
-    if (colors == 1) {
-      return 'Default Material 3 design tone map and chroma setup';
-    } else if (colors == 2) {
-      return 'Softer and more earth like tones than Material 3 defaults';
-    } else if (colors == 3) {
-      return 'More Vivid colors than Material 3 defaults';
-    } else if (colors == 4) {
-      return 'Like Vivid, but with more colorful containers, onColors and '
-          'surface tones. Creates alpha blend like effect without '
-          'any blend level';
-    } else if (colors == 5) {
-      return 'High contrast version, may be useful for accessibility';
+  String get _flexToneDescribe {
+    if (controller.useKeyColors) {
+      return FlexTone.values[controller.usedFlexToneSetup].describe;
+    } else {
+      return FlexTone.values[0].describe;
     }
-    return 'Disabled';
   }
 
-  String _describeFlexToneLong(int colors) {
-    if (colors == 1) {
-      return 'Primary - Chroma from key color, but min 48\n'
-          'Secondary - Chroma set to 16\n'
-          'Tertiary - Chroma set to 24\n'
-          'Neutral - Chroma set to 4\n'
-          'Neutral variant - Chroma set to 8\n';
-    } else if (colors == 2) {
-      return 'Primary - Chroma set to 30\n'
-          'Secondary - Chroma set to 14\n'
-          'Tertiary - Chroma set to 20\n'
-          'Neutral - Chroma set to 4\n'
-          'Neutral variant - Chroma set to 8\n';
-    } else if (colors == 3) {
-      return 'Primary - Chroma from key color, but min 50\n'
-          'Secondary - Chroma from key color\n'
-          'Tertiary - Chroma from key color\n'
-          'Neutral - Chroma set to 4\n'
-          'Neutral variant - Chroma set to 8\n';
-    } else if (colors == 4) {
-      return 'Primary - Chroma from key color, but min 50\n'
-          'Secondary - Chroma from key color\n'
-          'Tertiary - Chroma from key color\n'
-          'Neutral - Chroma set to 8\n'
-          'Neutral variant - Chroma set to 16\n';
-    } else if (colors == 5) {
-      return 'Primary - Chroma from key color, but min 65\n'
-          'Secondary - Chroma from key color, but min 55\n'
-          'Tertiary - Chroma from key color, but min 55\n'
-          'Neutral - Chroma set to 4\n'
-          'Neutral variant - Chroma set to 8\n';
+  String get _flexToneSetup {
+    if (controller.useKeyColors) {
+      return FlexTone.values[controller.usedFlexToneSetup].setup;
+    } else {
+      return FlexTone.values[0].setup;
     }
-    return 'Key color based tonal palettes are not used.\n'
-        'Enable at least one key color to seed the palettes.\n'
-        'Primary color must always be included as a key color.\n\n\n';
   }
 
   @override
@@ -186,24 +142,23 @@ class SeededColorScheme extends StatelessWidget {
             'secondary and tertiary TonalPalettes.',
           ),
         ),
-        ListTile(
-          title: Text('Used FlexTones setup: '
-              // ignore: lines_longer_than_80_chars
-              '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'),
-          subtitle: Text(
-            _describeFlexToneShort(
-                controller.useKeyColors ? controller.usedFlexToneSetup : 0),
-          ),
-          trailing: FlexToneConfigButtons(controller: controller),
+        // ListTile(
+        //   title: Text('Used FlexTones setup: $_flexToneName'),
+        //   subtitle: Text(_flexToneDescribe),
+        //   trailing: FlexToneConfigButtons(controller: controller),
+        // ),
+        FlexToneConfigPopupMenu(
+          title: 'Used FlexTones setup:',
+          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
+          onChanged:
+              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
         ),
         ListTile(
-          title: Text(
-              // ignore: lines_longer_than_80_chars
-              '${_describeFlexToneLabel(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}'
+          title: Text('$_flexToneName'
               ' FlexTones setup has CAM16 chroma:'),
           subtitle: Text(
             // ignore: lines_longer_than_80_chars
-            '${_describeFlexToneLong(controller.useKeyColors ? controller.usedFlexToneSetup : 0)}\n'
+            '$_flexToneSetup\n'
             'In this app you can choose between the default Material 3 '
             'tone mapping and four pre-defined custom FlexTones setups. With '
             'the API you can make your own FlexTones configurations. A '

@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
+import '../../../../shared/const/flex_tones_enum.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import 'tonal_palette_colors.dart';
 
@@ -31,10 +32,9 @@ class ShowTonalPalette extends StatelessWidget {
     );
 
     // Get the FlexTones setup
-    final FlexTones tones = AppColor.flexTonesConfig(
-      brightness,
-      controller.usedFlexToneSetup,
-    );
+    final FlexTones tones =
+        FlexTone.values[controller.usedFlexToneSetup].tones(brightness);
+
     // Compute all the core Tonal Palettes.
     final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
       primary: colors.primary.value,

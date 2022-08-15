@@ -264,21 +264,6 @@ class AppColor {
                 : null);
   }
 
-  /// Return [FlexTones] based on passed in [brightness] and [tones] value.
-  static FlexTones flexTonesConfig(Brightness brightness, int tones) {
-    if (tones == 2) {
-      return FlexTones.soft(brightness);
-    } else if (tones == 3) {
-      return FlexTones.vivid(brightness);
-    } else if (tones == 4) {
-      return FlexTones.vividSurfaces(brightness);
-    } else if (tones == 5) {
-      return FlexTones.highContrast(brightness);
-    } else {
-      return FlexTones.material(brightness);
-    }
-  }
-
   /// Used by example 5, the Themes Playground.
   /// Used to explain the current selection of key colors used to
   /// generate the ColorScheme, when it is activated.

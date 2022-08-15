@@ -1,27 +1,32 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-/// Widget used to display a colored box used in PopupMenus.
+/// Widget used to display a colored option box used in PopupMenus.
 ///
-/// It has a palette icon fo none default color, and a texture icon representing
-/// the default unknown color.
+/// Uses a palette icon for none default option, asi it is typically used to
+/// select a color in this app. It uses a texture icon representing the the
+/// default selection, also often representative of unknown color selection.
 class ColorSchemeBox extends StatelessWidget {
   const ColorSchemeBox({
     super.key,
     this.color = Colors.white,
     this.size = const Size(45, 35),
-    this.defaultColor = false,
+    this.defaultOption = false,
+    this.optionIcon = Icons.palette_outlined,
+    this.defaultOptionIcon = Icons.texture_outlined,
   });
 
   final Color color;
   final Size size;
-  final bool defaultColor;
+  final bool defaultOption;
+  final IconData optionIcon;
+  final IconData defaultOptionIcon;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
       FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
-  // On color used when a theme color property does not have a theme onColor.
+  // On color for icon on the colored box.
   static Color _onColor(final Color color) => _isLight(color)
       ? Colors.black.withOpacity(0.4)
       : Colors.white.withOpacity(0.4);
@@ -41,9 +46,9 @@ class ColorSchemeBox extends StatelessWidget {
             width: 1,
           ),
         ),
-        child: defaultColor
-            ? Icon(Icons.texture_outlined, color: _onColor(color))
-            : Icon(Icons.palette_outlined, color: _onColor(color)),
+        child: defaultOption
+            ? Icon(defaultOptionIcon, color: _onColor(color))
+            : Icon(optionIcon, color: _onColor(color)),
       ),
     );
   }

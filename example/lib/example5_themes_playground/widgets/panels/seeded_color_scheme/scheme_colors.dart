@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
+import '../../../../shared/const/flex_tones_enum.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../shared/color_name_value.dart';
 import '../../shared/color_picker_inkwell.dart';
@@ -61,7 +62,8 @@ class SchemeColors extends StatelessWidget {
 
     // Grab active tons and chroma setup.
     final FlexTones tones =
-        AppColor.flexTonesConfig(theme.brightness, tc.usedFlexToneSetup);
+        FlexTone.values[tc.usedFlexToneSetup].tones(theme.brightness);
+
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones = tc.useKeyColors && tc.useFlexColorScheme;
 

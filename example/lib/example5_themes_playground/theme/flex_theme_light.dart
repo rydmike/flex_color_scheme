@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
 import '../../shared/const/app_data.dart';
+import '../../shared/const/flex_tones_enum.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
 
@@ -314,8 +315,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // You can make your custom [FlexTones] object right here
     // and apps it it, this just uses an int value to select
     // between a few pre-configured ones.
-    tones: AppColor.flexTonesConfig(
-        Brightness.light, controller.usedFlexToneSetup),
+    tones:
+        FlexTone.values[controller.usedFlexToneSetup].tones(Brightness.light),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintLight,
     //
