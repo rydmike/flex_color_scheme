@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 5.2.0-dev.1
 
-**Aug 13, 2022**
+**Aug 15, 2022**
 
 This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
 prepare for new style and feature alignments when `useMaterial3` is true.
@@ -135,7 +135,7 @@ issues.
   This feature will only work with intended design in stable channel after feature and PR
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
   stable channel. Currently, it is only available in Flutter *master 3.1.0-x*. 
-  The M3 alignment of FCS `InputDecoration` still needs more work, like:
+  The M3 alignment of FCS `InputDecoration` may still need more work, like:
   - Move towards same error container color idea for FCS default, like M3 uses
   - Option to use FCS component defaults on fill colors and disabled color when opting in on M3.
 

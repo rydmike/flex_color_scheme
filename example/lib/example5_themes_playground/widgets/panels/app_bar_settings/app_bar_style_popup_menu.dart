@@ -138,7 +138,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
                         isLight,
                         useM3,
                       ),
-                defaultColor: i >= FlexAppBarStyle.values.length,
+                defaultOption: i >= FlexAppBarStyle.values.length,
               ),
               title: i >= FlexAppBarStyle.values.length
                   // If we reached max length make default label.
@@ -168,7 +168,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
                   useM3,
                 )
               : _appBarStyleColor(null, colorScheme, isLight, useM3),
-          defaultColor: useDefault,
+          defaultOption: useDefault,
         ),
       ),
     );

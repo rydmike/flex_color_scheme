@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 
+// TODO(rydmike): Remove this widget in example 5 in future release 6.0.0.
 // Widget used to change usage of flex tones configuration for
 // color scheme generation in example 5.
+//
+// In version 5.2.0 of FlexColorScheme and its example 5, this widget is
+// no longer used, but keeping it around for a while.
 class FlexToneConfigButtons extends StatelessWidget {
   const FlexToneConfigButtons({super.key, required this.controller});
   final ThemeController controller;
