@@ -433,9 +433,9 @@ void main() {
         equals(
           const FlexTones.light(
             primaryTone: 30,
-            secondaryTone: 30,
+            secondaryTone: 40,
             tertiaryTone: 30,
-            errorTone: 30,
+            errorTone: 40,
             primaryContainerTone: 95,
             secondaryContainerTone: 95,
             tertiaryContainerTone: 95,
@@ -474,6 +474,119 @@ void main() {
             primaryMinChroma: 65,
             secondaryMinChroma: 55,
             tertiaryMinChroma: 55,
+          ),
+        ),
+      );
+    });
+    test('FTO1.027: Verify FlexTones.ultraContrast(Brightness.light).', () {
+      expect(
+        FlexTones.ultraContrast(Brightness.light),
+        equals(
+          const FlexTones.light(
+            primaryTone: 30,
+            tertiaryTone: 30,
+            errorTone: 40,
+            onBackgroundTone: 0,
+            onSurfaceTone: 0,
+            primaryContainerTone: 95,
+            secondaryContainerTone: 95,
+            tertiaryContainerTone: 95,
+            errorContainerTone: 95,
+            surfaceVariantTone: 95,
+            onSurfaceVariantTone: 10,
+            onInverseSurfaceTone: 99,
+            inversePrimaryTone: 90,
+            outlineTone: 40,
+            outlineVariantTone: 70,
+            //
+            primaryChroma: null,
+            secondaryChroma: null,
+            tertiaryChroma: 40,
+            primaryMinChroma: 60,
+            secondaryMinChroma: 70,
+            neutralChroma: 1,
+            neutralVariantChroma: 5,
+          ),
+        ),
+      );
+    });
+    test('FTO1.028: Verify FlexTones.ultraContrast(Brightness.dark).', () {
+      expect(
+        FlexTones.ultraContrast(Brightness.dark),
+        equals(
+          const FlexTones.dark(
+            primaryTone: 95,
+            secondaryTone: 99,
+            tertiaryTone: 95,
+            onPrimaryTone: 10,
+            onSecondaryTone: 10,
+            onTertiaryTone: 10,
+            onErrorTone: 10,
+            onPrimaryContainerTone: 95,
+            onSecondaryContainerTone: 95,
+            onTertiaryContainerTone: 95,
+            onErrorContainerTone: 95,
+            onBackgroundTone: 99,
+            onSurfaceTone: 99,
+            surfaceVariantTone: 20,
+            onSurfaceVariantTone: 95,
+            onInverseSurfaceTone: 10,
+            outlineTone: 80,
+            outlineVariantTone: 50,
+            //
+            primaryChroma: null,
+            secondaryChroma: null,
+            tertiaryChroma: 40,
+            primaryMinChroma: 60,
+            secondaryMinChroma: 70,
+            neutralChroma: 1,
+            neutralVariantChroma: 5,
+          ),
+        ),
+      );
+    });
+    test('FTO1.029: Verify FlexTones.jolly(Brightness.light).', () {
+      expect(
+        FlexTones.jolly(Brightness.light),
+        equals(
+          const FlexTones.light(
+            primaryTone: 30,
+            secondaryTone: 50,
+            onPrimaryTone: 99,
+            onSecondaryTone: 99,
+            onTertiaryTone: 99,
+            onErrorTone: 99,
+            secondaryContainerTone: 95,
+            primaryChroma: null,
+            secondaryChroma: null,
+            tertiaryChroma: 40,
+            primaryMinChroma: 55,
+            secondaryMinChroma: 40,
+            neutralChroma: 6,
+            neutralVariantChroma: 10,
+          ),
+        ),
+      );
+    });
+    test('FTO1.030: Verify FlexTones.jolly(Brightness.dark).', () {
+      expect(
+        FlexTones.jolly(Brightness.dark),
+        equals(
+          const FlexTones.dark(
+            primaryTone: 80,
+            secondaryTone: 90,
+            secondaryContainerTone: 20,
+            onPrimaryTone: 10,
+            onSecondaryTone: 10,
+            onTertiaryTone: 10,
+            onErrorTone: 10,
+            primaryChroma: null,
+            secondaryChroma: null,
+            tertiaryChroma: 40,
+            primaryMinChroma: 55,
+            secondaryMinChroma: 40,
+            neutralChroma: 6,
+            neutralVariantChroma: 10,
           ),
         ),
       );
