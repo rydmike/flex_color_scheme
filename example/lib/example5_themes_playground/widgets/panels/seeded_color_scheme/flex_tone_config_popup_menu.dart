@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/flex_tones_enum.dart';
+import '../../../../shared/const/flex_tone.dart';
 import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [FlexTones] with a popup menu.

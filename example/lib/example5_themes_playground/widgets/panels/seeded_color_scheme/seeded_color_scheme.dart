@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
-import '../../../../shared/const/flex_tones_enum.dart';
+import '../../../../shared/const/flex_tone.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/use_key_colors_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';

@@ -4,10 +4,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 5.2.0-dev.1
 
-**Aug 15, 2022**
+**Aug 16, 2022**
 
 This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
 prepare for new style and feature alignments when `useMaterial3` is true.
+
+If you experiment with this dev release and want to use the Theme Playground, then please build
+bundled example 5 for macOS, Windows or Linux desktop. Don't use the 5.1.0 live web based version.
+While it will work, to copy-paste code from it too, it is not broken. It will however not show you 
+the exact same style in all cases that you actually get when you use it with this release.
 
 This dev release requires at least Flutter *master 3.1.0-0.0.pre.2199*. It includes two new Flutter
 `ColorScheme` colors. This dev release is going to be released as stable when next Flutter stable 
@@ -37,6 +42,10 @@ issues.
   enum values. In the bundled example applications and Themes Playground, you might for example see
   wrong color selections loaded from local storage, just reset persisted theme or select correct
   value to fix it.
+
+* Added two new `FlexTones`.
+  1. `FlexTones.ultraContrast` with even more contrast that `highContrast`.
+  2. `FlexTones.jolly` for a seeded `ColorScheme` with more poppy and jolly seed colors.
 
 * Added `appBarCenterTitle` property to `FlexSubThemesData` configuration. It works the
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the

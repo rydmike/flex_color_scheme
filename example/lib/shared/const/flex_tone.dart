@@ -78,6 +78,29 @@ enum FlexTone {
         'Neutral variant - Chroma set to 8\n',
     icon: Icons.contrast,
     shade: 14,
+  ),
+  ultraContrast(
+    name: 'Ultra contrast',
+    describe: 'Ultra high contrast version, useful for accessibility, '
+        'less colorful than high contrast, especially dark mode',
+    setup: 'Primary - Chroma from key color, but min 60\n'
+        'Secondary - Chroma from key color, but min 70\n'
+        'Tertiary - Chroma set to 40\n'
+        'Neutral - Chroma set to 1\n'
+        'Neutral variant - Chroma set to 5\n',
+    icon: Icons.lens,
+    shade: 20,
+  ),
+  jolly(
+    name: 'Jolly',
+    describe: 'Jolly color tones with more chroma and pop in them',
+    setup: 'Primary - Chroma from key color, but min 55\n'
+        'Secondary - Chroma from key color, but min 40\n'
+        'Tertiary - Chroma set to 40\n'
+        'Neutral - Chroma set to 6\n'
+        'Neutral variant - Chroma set to 10\n',
+    icon: Icons.sunny,
+    shade: 8,
   );
 
   const FlexTone({
@@ -108,6 +131,10 @@ enum FlexTone {
         return FlexTones.vividSurfaces(brightness);
       case FlexTone.highContrast:
         return FlexTones.highContrast(brightness);
+      case FlexTone.ultraContrast:
+        return FlexTones.ultraContrast(brightness);
+      case FlexTone.jolly:
+        return FlexTones.jolly(brightness);
     }
   }
 }

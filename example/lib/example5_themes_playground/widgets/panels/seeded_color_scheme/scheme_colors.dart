@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
-import '../../../../shared/const/flex_tones_enum.dart';
+import '../../../../shared/const/flex_tone.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../shared/color_name_value.dart';
 import '../../shared/color_picker_inkwell.dart';
