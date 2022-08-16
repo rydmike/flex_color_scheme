@@ -185,9 +185,9 @@ class FlexTones with Diagnosticable {
     this.neutralVariantChroma = 8,
   });
 
-  /// Alternative static constructor with brightness as input to create
-  /// a tonal palette extraction setup matching the Material Design 3 setup.
-  static FlexTones material(Brightness brightness) =>
+  /// Convenience material style factory constructor with brightness as input.
+  /// Creates a tonal palette extraction setup matching the Material 3 tones.
+  factory FlexTones.material(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light()
           : const FlexTones.dark();
@@ -197,19 +197,20 @@ class FlexTones with Diagnosticable {
   ///
   /// Primary chroma is 30, secondary 14 and tertiary 20. Tones are same as
   /// in Material 3 default setup.
-  static FlexTones soft(Brightness brightness) => brightness == Brightness.light
-      ? const FlexTones.light(
-          primaryChroma: 30,
-          primaryMinChroma: 0,
-          secondaryChroma: 14,
-          tertiaryChroma: 20,
-        )
-      : const FlexTones.dark(
-          primaryChroma: 30,
-          primaryMinChroma: 0,
-          secondaryChroma: 14,
-          tertiaryChroma: 20,
-        );
+  factory FlexTones.soft(Brightness brightness) =>
+      brightness == Brightness.light
+          ? const FlexTones.light(
+              primaryChroma: 30,
+              primaryMinChroma: 0,
+              secondaryChroma: 14,
+              tertiaryChroma: 20,
+            )
+          : const FlexTones.dark(
+              primaryChroma: 30,
+              primaryMinChroma: 0,
+              secondaryChroma: 14,
+              tertiaryChroma: 20,
+            );
 
   /// Creates a tonal palette extraction setup that results in M3 like
   /// ColorsSchemes with more vivid colors.
@@ -219,7 +220,7 @@ class FlexTones with Diagnosticable {
   /// value of 50. Secondary and tertiary key colors use their own chroma
   /// with no min limits, making the secondary and tertiary mid tones closer
   /// to their used key colors.
-  static FlexTones vivid(Brightness brightness) =>
+  factory FlexTones.vivid(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,
@@ -255,7 +256,7 @@ class FlexTones with Diagnosticable {
   /// blend level in FlexColorScheme. You can apply alpha blends to this tones
   /// setup too, but it is easy to overdo it with these surfaces and
   /// backgrounds as starting points.
-  static FlexTones vividSurfaces(Brightness brightness) =>
+  factory FlexTones.vividSurfaces(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,
@@ -328,7 +329,7 @@ class FlexTones with Diagnosticable {
   /// the spirit of the original theme. It may still be useful to also
   /// provide purposefully designed optional extremely high contrast
   /// themes as options for the high contrast accessibility themes.
-  static FlexTones highContrast(Brightness brightness) =>
+  factory FlexTones.highContrast(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,
@@ -370,7 +371,7 @@ class FlexTones with Diagnosticable {
 
   /// Creates a tonal palette extraction setup that results in a very high
   /// contrast version of selected ColorsSchemes.
-  static FlexTones ultraContrast(Brightness brightness) =>
+  factory FlexTones.ultraContrast(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,
@@ -428,7 +429,7 @@ class FlexTones with Diagnosticable {
 
   /// Creates a tonal palette extraction setup that results in a more jolly
   /// colorful ColorsSchemes.
-  static FlexTones jolly(Brightness brightness) =>
+  factory FlexTones.jolly(Brightness brightness) =>
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,

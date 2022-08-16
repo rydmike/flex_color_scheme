@@ -26,14 +26,6 @@ class SeededColorScheme extends StatelessWidget {
     }
   }
 
-  String get _flexToneDescribe {
-    if (controller.useKeyColors) {
-      return FlexTone.values[controller.usedFlexToneSetup].describe;
-    } else {
-      return FlexTone.values[0].describe;
-    }
-  }
-
   String get _flexToneSetup {
     if (controller.useKeyColors) {
       return FlexTone.values[controller.usedFlexToneSetup].setup;

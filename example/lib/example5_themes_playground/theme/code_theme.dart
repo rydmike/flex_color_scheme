@@ -89,7 +89,7 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
 
   /// A harmonized code view color theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
-  static CodeTheme harmonized(Color sourceColor, Brightness brightness) {
+  factory CodeTheme.harmonized(Color sourceColor, Brightness brightness) {
     final int sourceColorValue = sourceColor.value;
 
     // Fallback color value that can be used for all colors in both modes.
