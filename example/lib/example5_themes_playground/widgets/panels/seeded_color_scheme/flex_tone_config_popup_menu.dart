@@ -49,7 +49,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
                     ? colorScheme.primary.lighten(FlexTone.values[i].shade * -1)
                     : colorScheme.primary.darken(FlexTone.values[i].shade),
               ),
-              title: Text(FlexTone.values[i].name, style: txtStyle),
+              title: Text(FlexTone.values[i].tone, style: txtStyle),
             ),
           )
       ],
@@ -57,7 +57,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         enabled: !disabled,
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
-        title: Text('$title ${FlexTone.values[index].name}'),
+        title: Text('$title ${FlexTone.values[index].tone}'),
         subtitle: Text(FlexTone.values[index].describe),
         trailing: ColorSchemeBox(
           color: !disabled ? colorScheme.primary : colorScheme.primaryContainer,
