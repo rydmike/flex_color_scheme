@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 /// enhanced enums.
 enum FlexTone {
   disabled(
-    name: 'Disabled',
+    tone: 'Disabled',
     describe: 'Disabled',
     setup: 'Key color based tonal palettes are not used.\n'
         'Enable at least one key color to seed the palettes.\n'
@@ -23,7 +23,7 @@ enum FlexTone {
     shade: -5,
   ),
   material(
-    name: 'Material 3',
+    tone: 'Material 3',
     describe: 'Default Material 3 design tone map and chroma setup',
     setup: 'Primary - Chroma from key color, but min 48\n'
         'Secondary - Chroma set to 16\n'
@@ -34,7 +34,7 @@ enum FlexTone {
     shade: -5,
   ),
   soft(
-    name: 'Soft',
+    tone: 'Soft',
     describe: 'Softer and more earth like tones than Material 3 defaults',
     setup: 'Primary - Chroma set to 30\n'
         'Secondary - Chroma set to 14\n'
@@ -45,7 +45,7 @@ enum FlexTone {
     shade: 2,
   ),
   vivid(
-    name: 'Vivid',
+    tone: 'Vivid',
     describe: 'More Vivid colors than Material 3 defaults',
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
@@ -56,7 +56,7 @@ enum FlexTone {
     shade: 6,
   ),
   vividSurfaces(
-    name: 'Vivid surfaces',
+    tone: 'Vivid surfaces',
     describe: 'Like Vivid, but with more colorful containers, onColors and '
         'surface tones. Creates alpha blend like effect without '
         'any blend level',
@@ -69,7 +69,7 @@ enum FlexTone {
     shade: 10,
   ),
   highContrast(
-    name: 'High contrast',
+    tone: 'High contrast',
     describe: 'High contrast version, may be useful for accessibility',
     setup: 'Primary - Chroma from key color, but min 65\n'
         'Secondary - Chroma from key color, but min 55\n'
@@ -80,7 +80,7 @@ enum FlexTone {
     shade: 14,
   ),
   ultraContrast(
-    name: 'Ultra contrast',
+    tone: 'Ultra contrast',
     describe: 'Ultra high contrast version, useful for accessibility, '
         'less colorful than high contrast, especially dark mode',
     setup: 'Primary - Chroma from key color, but min 60\n'
@@ -92,7 +92,7 @@ enum FlexTone {
     shade: 20,
   ),
   jolly(
-    name: 'Jolly',
+    tone: 'Jolly',
     describe: 'Jolly color tones with more chroma and pop in them',
     setup: 'Primary - Chroma from key color, but min 55\n'
         'Secondary - Chroma from key color, but min 40\n'
@@ -104,14 +104,14 @@ enum FlexTone {
   );
 
   const FlexTone({
-    required this.name,
+    required this.tone,
     required this.describe,
     required this.setup,
     required this.icon,
     required this.shade,
   });
 
-  final String name;
+  final String tone;
   final String describe;
   final String setup;
   final IconData icon;
