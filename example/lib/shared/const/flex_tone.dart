@@ -85,9 +85,9 @@ enum FlexTone {
         'less colorful than high contrast, especially dark mode',
     setup: 'Primary - Chroma from key color, but min 60\n'
         'Secondary - Chroma from key color, but min 70\n'
-        'Tertiary - Chroma set to 40\n'
-        'Neutral - Chroma set to 1\n'
-        'Neutral variant - Chroma set to 5\n',
+        'Tertiary - Chroma from key color, but min 65\n'
+        'Neutral - Chroma set to 3\n'
+        'Neutral variant - Chroma set to 6\n',
     icon: Icons.lens,
     shade: 20,
   ),
