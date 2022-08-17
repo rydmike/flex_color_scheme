@@ -41,6 +41,7 @@ void main() {
       inverseSurfaceTone: 20,
       onInverseSurfaceTone: 95,
       inversePrimaryTone: 80,
+      surfaceTintTone: 40,
       primaryChroma: null,
       primaryMinChroma: 48,
       secondaryChroma: 16,
@@ -149,6 +150,7 @@ void main() {
           inverseSurfaceTone: 20,
           onInverseSurfaceTone: 95,
           inversePrimaryTone: 80,
+          surfaceTintTone: 40,
           primaryChroma: null,
           primaryMinChroma: 48,
           secondaryChroma: 16,
@@ -176,7 +178,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexTones#00000(primaryTone: 40, onPrimaryTone: 100, primaryContainerTone: 90, onPrimaryContainerTone: 10, secondaryTone: 40, onSecondaryTone: 100, secondaryContainerTone: 90, onSecondaryContainerTone: 10, tertiaryTone: 40, onTertiaryTone: 100, tertiaryContainerTone: 90, onTertiaryContainerTone: 10, errorTone: 40, errorContainerTone: 90, onErrorContainerTone: 10, backgroundTone: 99, onBackgroundTone: 10, surfaceTone: 99, onSurfaceTone: 10, surfaceVariantTone: 90, onSurfaceVariantTone: 30, outlineTone: 50, outlineVariantTone: 80, shadowTone: 0, scrimTone: 0, inverseSurfaceTone: 20, onInverseSurfaceTone: 95, inversePrimaryTone: 80, primaryChroma: null, primaryMinChroma: 48.0, secondaryChroma: 16.0, secondaryMinChroma: 0.0, tertiaryChroma: 24.0, tertiaryMinChroma: 0.0, neutralChroma: 4.0, neutralVariantChroma: 8.0)'));
+              'FlexTones#00000(primaryTone: 40, onPrimaryTone: 100, primaryContainerTone: 90, onPrimaryContainerTone: 10, secondaryTone: 40, onSecondaryTone: 100, secondaryContainerTone: 90, onSecondaryContainerTone: 10, tertiaryTone: 40, onTertiaryTone: 100, tertiaryContainerTone: 90, onTertiaryContainerTone: 10, errorTone: 40, errorContainerTone: 90, onErrorContainerTone: 10, backgroundTone: 99, onBackgroundTone: 10, surfaceTone: 99, onSurfaceTone: 10, surfaceVariantTone: 90, onSurfaceVariantTone: 30, outlineTone: 50, outlineVariantTone: 80, shadowTone: 0, scrimTone: 0, inverseSurfaceTone: 20, onInverseSurfaceTone: 95, inversePrimaryTone: 80, surfaceTintTone: 40, primaryChroma: null, primaryMinChroma: 48.0, secondaryChroma: 16.0, secondaryMinChroma: 0.0, tertiaryChroma: 24.0, tertiaryMinChroma: 0.0, neutralChroma: 4.0, neutralVariantChroma: 8.0)'));
     });
     test(
         'FTO1.11: Test toStringShort implemented via debugFillProperties '
@@ -233,6 +235,7 @@ void main() {
             inverseSurfaceTone: 20,
             onInverseSurfaceTone: 95,
             inversePrimaryTone: 80,
+            surfaceTintTone: 40,
             primaryChroma: null,
             primaryMinChroma: 48,
             secondaryChroma: 16,
@@ -279,6 +282,7 @@ void main() {
             inverseSurfaceTone: 90,
             onInverseSurfaceTone: 20,
             inversePrimaryTone: 40,
+            surfaceTintTone: 80,
             primaryChroma: null,
             primaryMinChroma: 48,
             secondaryChroma: 16,
@@ -335,6 +339,7 @@ void main() {
         equals(
           const FlexTones.light(
             primaryTone: 30,
+            surfaceTintTone: 30,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: null,
@@ -381,6 +386,7 @@ void main() {
             onSurfaceVariantTone: 20,
             inverseSurfaceTone: 30,
             backgroundTone: 90,
+            surfaceTintTone: 30,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: null,
@@ -417,6 +423,7 @@ void main() {
             inverseSurfaceTone: 95,
             onInverseSurfaceTone: 30,
             surfaceVariantTone: 40,
+            surfaceTintTone: 80,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: null,
@@ -440,6 +447,7 @@ void main() {
             secondaryContainerTone: 95,
             tertiaryContainerTone: 95,
             errorContainerTone: 95,
+            surfaceTintTone: 30,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: null,
@@ -468,6 +476,7 @@ void main() {
             tertiaryContainerTone: 20,
             errorContainerTone: 20,
             onErrorContainerTone: 90,
+            surfaceTintTone: 80,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: null,
@@ -498,14 +507,15 @@ void main() {
             inversePrimaryTone: 90,
             outlineTone: 40,
             outlineVariantTone: 70,
+            surfaceTintTone: 30,
             //
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: 40,
             primaryMinChroma: 60,
             secondaryMinChroma: 70,
-            neutralChroma: 1,
-            neutralVariantChroma: 5,
+            neutralChroma: 3,
+            neutralVariantChroma: 6,
           ),
         ),
       );
@@ -533,14 +543,15 @@ void main() {
             onInverseSurfaceTone: 10,
             outlineTone: 80,
             outlineVariantTone: 50,
+            surfaceTintTone: 95,
             //
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: 40,
             primaryMinChroma: 60,
             secondaryMinChroma: 70,
-            neutralChroma: 1,
-            neutralVariantChroma: 5,
+            neutralChroma: 3,
+            neutralVariantChroma: 6,
           ),
         ),
       );
@@ -557,6 +568,7 @@ void main() {
             onTertiaryTone: 99,
             onErrorTone: 99,
             secondaryContainerTone: 95,
+            surfaceTintTone: 30,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: 40,
@@ -580,6 +592,7 @@ void main() {
             onSecondaryTone: 10,
             onTertiaryTone: 10,
             onErrorTone: 10,
+            surfaceTintTone: 80,
             primaryChroma: null,
             secondaryChroma: null,
             tertiaryChroma: 40,

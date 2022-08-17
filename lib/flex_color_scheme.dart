@@ -50,12 +50,20 @@ export 'src/flex_scheme_data.dart';
 /// secondary and tertiary colors.
 export 'src/flex_scheme_on_colors.dart';
 
+/// Immutable data class used to make the six different surface colors in a
+/// FlexColorScheme.
+export 'src/flex_scheme_surface_colors.dart';
+
 /// Defines opinionated component sub-themes used by FlexColorScheme.
 export 'src/flex_sub_themes.dart';
 
 /// Immutable data class used to configure FlexSubThemes used by
 /// FlexColorScheme.
 export 'src/flex_sub_themes_data.dart';
+
+/// Enum used to describe how alpha blends are applied to surface colors in
+/// FlexColorScheme.
+export 'src/flex_surface_mode.dart';
 
 /// Extensions on ThemeData used to return a ThemeData object defined
 /// by a FlexColorScheme object and its toTheme method.
@@ -65,8 +73,8 @@ export 'src/flex_theme_data_extensions.dart';
 /// show scheme colors for light, dark and system mode, on each button.
 export 'src/flex_theme_mode_switch.dart';
 
-/// Immutable configuration data class that defines which tone to use from each
-/// tonal palette, when assigning used color to each color scheme color.
+/// Defines which tone to use from each tonal palette, when assigning
+/// used color to each color scheme color.
 ///
 /// Also enables defining how Cam16 chroma is used and limited when
 /// generating the tonal palettes.

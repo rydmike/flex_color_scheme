@@ -1,5 +1,3 @@
-// ignore_for_file: comment_references
-
 import 'package:flutter/material.dart';
 
 import 'flex_color_scheme.dart';
@@ -7,7 +5,10 @@ import 'flex_key_color.dart';
 import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_sub_themes_data.dart';
+import 'flex_surface_mode.dart';
 import 'flex_tones.dart';
+
+// ignore_for_file: comment_references
 
 /// A convenience extension on [ThemeData] to define a
 /// [FlexColorScheme] object and return the [ThemeData] object defined by
