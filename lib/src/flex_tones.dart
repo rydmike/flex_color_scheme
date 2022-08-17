@@ -83,6 +83,7 @@ class FlexTones with Diagnosticable {
     required this.inverseSurfaceTone,
     required this.onInverseSurfaceTone,
     required this.inversePrimaryTone,
+    required this.surfaceTintTone,
     this.primaryChroma,
     required this.primaryMinChroma,
     this.secondaryChroma,
@@ -129,6 +130,7 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 20,
     this.onInverseSurfaceTone = 95,
     this.inversePrimaryTone = 80,
+    this.surfaceTintTone = 40,
     this.primaryChroma, // Defaults to null, chroma in key color is used.
     this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
@@ -175,6 +177,7 @@ class FlexTones with Diagnosticable {
     this.inverseSurfaceTone = 90,
     this.onInverseSurfaceTone = 20,
     this.inversePrimaryTone = 40,
+    this.surfaceTintTone = 80,
     this.primaryChroma, // Defaults to null, chroma in key color is used.
     this.primaryMinChroma = 48,
     this.secondaryChroma = 16,
@@ -224,6 +227,7 @@ class FlexTones with Diagnosticable {
       brightness == Brightness.light
           ? const FlexTones.light(
               primaryTone: 30,
+              surfaceTintTone: 30,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
@@ -276,6 +280,7 @@ class FlexTones with Diagnosticable {
               onSurfaceVariantTone: 20,
               inverseSurfaceTone: 30,
               backgroundTone: 90,
+              surfaceTintTone: 30,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
@@ -305,6 +310,7 @@ class FlexTones with Diagnosticable {
               inverseSurfaceTone: 95,
               onInverseSurfaceTone: 30,
               surfaceVariantTone: 40,
+              surfaceTintTone: 80,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
@@ -340,6 +346,7 @@ class FlexTones with Diagnosticable {
               secondaryContainerTone: 95,
               tertiaryContainerTone: 95,
               errorContainerTone: 95,
+              surfaceTintTone: 30,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
@@ -361,6 +368,7 @@ class FlexTones with Diagnosticable {
               tertiaryContainerTone: 20,
               errorContainerTone: 20,
               onErrorContainerTone: 90,
+              surfaceTintTone: 80,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: null,
@@ -389,14 +397,15 @@ class FlexTones with Diagnosticable {
               inversePrimaryTone: 90,
               outlineTone: 40,
               outlineVariantTone: 70,
+              surfaceTintTone: 30,
               //
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: 40,
               primaryMinChroma: 60,
               secondaryMinChroma: 70,
-              neutralChroma: 1,
-              neutralVariantChroma: 5,
+              neutralChroma: 3,
+              neutralVariantChroma: 6,
             )
           : const FlexTones.dark(
               primaryTone: 95,
@@ -417,14 +426,15 @@ class FlexTones with Diagnosticable {
               onInverseSurfaceTone: 10,
               outlineTone: 80,
               outlineVariantTone: 50,
+              surfaceTintTone: 95,
               //
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: 40,
               primaryMinChroma: 60,
               secondaryMinChroma: 70,
-              neutralChroma: 1,
-              neutralVariantChroma: 5,
+              neutralChroma: 3,
+              neutralVariantChroma: 6,
             );
 
   /// Creates a tonal palette extraction setup that results in a more jolly
@@ -439,6 +449,7 @@ class FlexTones with Diagnosticable {
               onTertiaryTone: 99,
               onErrorTone: 99,
               secondaryContainerTone: 95,
+              surfaceTintTone: 30,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: 40,
@@ -455,6 +466,7 @@ class FlexTones with Diagnosticable {
               onSecondaryTone: 10,
               onTertiaryTone: 10,
               onErrorTone: 10,
+              surfaceTintTone: 80,
               primaryChroma: null,
               secondaryChroma: null,
               tertiaryChroma: 40,
@@ -558,6 +570,9 @@ class FlexTones with Diagnosticable {
 
   /// Tone used for [ColorScheme.inversePrimary] from primary [TonalPalette].
   final int inversePrimaryTone;
+
+  /// Tone used for [ColorScheme.surfaceTint] from primary [TonalPalette].
+  final int surfaceTintTone;
 
   /// Cam16 chroma value to use for primary colors [TonalPalette] generation.
   ///
@@ -687,6 +702,7 @@ class FlexTones with Diagnosticable {
     int? inverseSurfaceTone,
     int? onInverseSurfaceTone,
     int? inversePrimaryTone,
+    int? surfaceTintTone,
     double? primaryChroma,
     double? primaryMinChroma,
     double? secondaryChroma,
@@ -731,6 +747,7 @@ class FlexTones with Diagnosticable {
       inverseSurfaceTone: inverseSurfaceTone ?? this.inverseSurfaceTone,
       onInverseSurfaceTone: onInverseSurfaceTone ?? this.onInverseSurfaceTone,
       inversePrimaryTone: inversePrimaryTone ?? this.inversePrimaryTone,
+      surfaceTintTone: surfaceTintTone ?? this.surfaceTintTone,
       primaryChroma: primaryChroma ?? this.primaryChroma,
       primaryMinChroma: primaryMinChroma ?? this.primaryMinChroma,
       secondaryChroma: secondaryChroma ?? this.secondaryChroma,
@@ -777,6 +794,7 @@ class FlexTones with Diagnosticable {
         other.inverseSurfaceTone == inverseSurfaceTone &&
         other.onInverseSurfaceTone == onInverseSurfaceTone &&
         other.inversePrimaryTone == inversePrimaryTone &&
+        other.surfaceTintTone == surfaceTintTone &&
         other.primaryChroma == primaryChroma &&
         other.primaryMinChroma == primaryMinChroma &&
         other.secondaryChroma == secondaryChroma &&
@@ -819,6 +837,7 @@ class FlexTones with Diagnosticable {
         inverseSurfaceTone,
         onInverseSurfaceTone,
         inversePrimaryTone,
+        surfaceTintTone,
         primaryChroma,
         primaryMinChroma,
         secondaryChroma,
@@ -877,6 +896,8 @@ class FlexTones with Diagnosticable {
         DiagnosticsProperty<int>('onInverseSurfaceTone', onInverseSurfaceTone));
     properties.add(
         DiagnosticsProperty<int>('inversePrimaryTone', inversePrimaryTone));
+    properties
+        .add(DiagnosticsProperty<int>('surfaceTintTone', surfaceTintTone));
     properties.add(DiagnosticsProperty<double>('primaryChroma', primaryChroma));
     properties
         .add(DiagnosticsProperty<double>('primaryMinChroma', primaryMinChroma));

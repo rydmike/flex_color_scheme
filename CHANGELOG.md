@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 5.2.0-dev.1
 
-**Aug 16, 2022**
+**Aug 18, 2022**
 
 This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
 prepare for new style and feature alignments when `useMaterial3` is true.
