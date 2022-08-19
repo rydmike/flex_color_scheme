@@ -22,7 +22,7 @@ class PageExamples extends StatelessWidget {
               'reduce the blend on your Scaffold in such a use case.'),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            Subpage.show(context);
+            SubpageDemo.show(context);
           },
         ),
         ListTile(
