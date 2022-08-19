@@ -322,13 +322,13 @@ class FlexColorScheme with Diagnosticable {
   /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
-  /// capabilities. This is useful when using fully custom scheme or using the
-  /// Material 3 based design and its seed generated color schemes.
+  /// capabilities, often used with Material 3 based design and its seed
+  /// generated color schemes.
   ///
   /// The factories [FlexColorScheme.light] and [FlexColorScheme.dark] provide
   /// convenience factories for also generating M3 based seeded themes using
-  /// the built in [ColorSchemes] as seed colors or custom colors you provide
-  /// as seeding colors.
+  /// the built-in [FlexSchemeColor] colors as seed color(s), or using custom
+  /// color values you provide as seed colors.
   ///
   /// If you provide both a [ColorScheme] and some individual direct property
   /// values that also exist in a [ColorScheme], the individual property values
@@ -340,12 +340,12 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
   /// [toScheme]. This will always get you a complete color scheme, including
-  /// calculated and derived color values, which is particularly useful when
-  /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
-  /// to compute color scheme branded surface colors for you. The effective
-  /// [ColorScheme] for your theme is often needed if you want to create custom
-  /// sub-themes that should use the colors from the scheme using none default
-  /// color assignments computed from the input colors.
+  /// calculated and derived color values,. This can be used when using the
+  /// [FlexColorScheme.light] and [FlexColorScheme.dark] factories to compute
+  /// schemes with branded or tinted surface colors. The effective [ColorScheme]
+  /// of your theme is often needed if you want to create component sub-themes
+  /// that should use the colors from the scheme, with its color assignments
+  /// computed from the input colors.
   final ColorScheme? colorScheme;
 
   /// The overall brightness of this color scheme.

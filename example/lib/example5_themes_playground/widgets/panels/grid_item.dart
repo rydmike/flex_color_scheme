@@ -94,9 +94,19 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.crop_16_9_outlined,
   ),
   GridItem(
-    panelLabel: 'FAB, ToggleButtons, Chip and Popup',
+    panelLabel: 'Toggle Buttons',
+    buttonLabel: 'Toggle\nButtons',
+    icon: Icons.view_week_outlined,
+  ),
+  GridItem(
+    panelLabel: 'FloatingActionButton and Chip',
     buttonLabel: 'FAB Toggle\nChip Popup',
     icon: Icons.add_circle,
+  ),
+  GridItem(
+    panelLabel: 'PopupMenu and IconButton',
+    buttonLabel: 'Popup and\nIconButton',
+    icon: Icons.arrow_drop_down_circle_outlined,
   ),
   GridItem(
     panelLabel: 'Switch, CheckBox and Radio',

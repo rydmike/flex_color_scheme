@@ -11,7 +11,7 @@ import '../panels/card_and_material_settings/card_settings.dart';
 import '../panels/card_and_material_settings/material_and_bottom_sheet_settings.dart';
 import '../panels/component_themes/component_themes.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
-import '../panels/fab_toggle_chip_popup_settings/fab_toggle_chip_popup_settings.dart';
+import '../panels/fab_chip_settings/fab_chip_settings.dart';
 import '../panels/input_colors/input_colors.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
@@ -20,6 +20,7 @@ import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/panel_item.dart';
 import '../panels/panel_selector.dart';
+import '../panels/popup_icon_button_settings/popup_icon_button_settings.dart';
 import '../panels/seeded_color_scheme/seeded_color_scheme.dart';
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
@@ -32,6 +33,7 @@ import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
 import '../panels/theme_selector.dart';
+import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -160,7 +162,9 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             PanelPage(NavigationRailSettings(themeCtrl), page, themeCtrl),
             PanelPage(AndroidNavigationBarSettings(themeCtrl), page, themeCtrl),
             PanelPage(ButtonsSettings(themeCtrl), page, themeCtrl),
-            PanelPage(FabToggleChipPopupSettings(themeCtrl), page, themeCtrl),
+            PanelPage(ToggleButtonsSettings(themeCtrl), page, themeCtrl),
+            PanelPage(FabChipSettings(themeCtrl), page, themeCtrl),
+            PanelPage(PopupIconButtonSettings(themeCtrl), page, themeCtrl),
             PanelPage(SwitchesSettings(themeCtrl), page, themeCtrl),
             PanelPage(ListTileSettings(themeCtrl), page, themeCtrl),
             PanelPage(DialogSettings(themeCtrl), page, themeCtrl),
