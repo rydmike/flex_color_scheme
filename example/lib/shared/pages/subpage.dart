@@ -10,23 +10,23 @@ import '../widgets/universal/theme_showcase.dart';
 
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
-class Subpage extends StatefulWidget {
-  const Subpage({super.key});
+class SubpageDemo extends StatefulWidget {
+  const SubpageDemo({super.key});
 
   // A static convenience function show this screen, as pushed on top.
   static Future<void> show(BuildContext context) async {
     await Navigator.of(context).push<Widget>(
       MaterialPageRoute<Widget>(
-        builder: (BuildContext context) => const Subpage(),
+        builder: (BuildContext context) => const SubpageDemo(),
       ),
     );
   }
 
   @override
-  State<Subpage> createState() => _SubpageState();
+  State<SubpageDemo> createState() => _SubpageDemoState();
 }
 
-class _SubpageState extends State<Subpage> {
+class _SubpageDemoState extends State<SubpageDemo> {
   int _buttonIndex = 0;
 
   @override
@@ -63,6 +63,7 @@ class _SubpageState extends State<Subpage> {
         ),
         body: PageBody(
           child: ListView(
+            primary: true,
             padding: EdgeInsets.fromLTRB(
               sideMargin,
               topPadding + AppData.edgeInsetsTablet,
