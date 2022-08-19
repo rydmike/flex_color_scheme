@@ -39,26 +39,31 @@ class ThemeShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const SizedBox(height: 8),
+        const TextInputField(),
+        const Divider(),
         const ElevatedButtonShowcase(),
         const SizedBox(height: 8),
         const OutlinedButtonShowcase(),
         const SizedBox(height: 8),
         const TextButtonShowcase(),
         const SizedBox(height: 8),
+        const ToggleButtonsShowcase(),
         const Divider(),
         const FabShowcase(),
         const SizedBox(height: 16),
-        const ToggleButtonsShowcase(),
+        const ChipShowcase(),
+        const Divider(),
+        const SizedBox(height: 8),
+        const PopupMenuShowcase(),
+        const SizedBox(height: 8),
+        const SizedBox(height: 8),
+        const IconButtonCircleAvatarDropdownTooltipShowcase(),
+        const Divider(),
         const SwitchShowcase(),
         const CheckboxShowcase(),
         const RadioShowcase(),
-        const PopupMenuShowcase(),
         const SizedBox(height: 8),
-        const IconButtonCircleAvatarDropdownTooltipShowcase(),
-        const SizedBox(height: 8),
-        const ChipShowcase(),
-        const Divider(),
-        const TextInputField(),
         const Divider(),
         const ListTileShowcase(),
         const Divider(),
@@ -338,13 +343,13 @@ class FabShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         FloatingActionButton.small(
-          heroTag: null,
+          heroTag: 'FAB small',
           onPressed: () {},
           tooltip: 'Tooltip on small\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
         FloatingActionButton.extended(
-          heroTag: null,
+          heroTag: 'FAB extended false',
           isExtended: false,
           onPressed: () {},
           tooltip: 'Tooltip on extended:false\nFloatingActionButton.extended',
@@ -352,7 +357,7 @@ class FabShowcase extends StatelessWidget {
           label: const Text('Extended'),
         ),
         FloatingActionButton.extended(
-          heroTag: null,
+          heroTag: 'FAB extended true',
           isExtended: true,
           onPressed: () {},
           tooltip: 'Tooltip on extended:true\nFloatingActionButton.extended',
@@ -360,13 +365,13 @@ class FabShowcase extends StatelessWidget {
           label: const Text('Extended'),
         ),
         FloatingActionButton(
-          heroTag: null,
+          heroTag: 'FAB standard',
           onPressed: () {},
           tooltip: 'Tooltip on default\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
         FloatingActionButton.large(
-          heroTag: null,
+          heroTag: 'FAB large',
           onPressed: () {},
           tooltip: 'Tooltip on large\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
@@ -833,6 +838,7 @@ class AppBarShowcase extends StatelessWidget {
             child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
               const Text('Behind AppBar'),
               FloatingActionButton.small(
+                heroTag: 'Behind AppBar',
                 onPressed: () {},
                 child: const Icon(Icons.add),
               ),
@@ -1022,6 +1028,7 @@ class _BottomNavigationBarShowcaseState
                 child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
                   const Text('Behind BottomNavBar'),
                   FloatingActionButton.small(
+                    heroTag: 'Behind BottomNavBar',
                     onPressed: () {},
                     child: const Icon(Icons.add),
                   ),
@@ -1116,6 +1123,7 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
                 child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
                   const Text('Behind NavBar'),
                   FloatingActionButton.small(
+                    heroTag: 'Behind NavBar',
                     onPressed: () {},
                     child: const Icon(Icons.add),
                   ),
