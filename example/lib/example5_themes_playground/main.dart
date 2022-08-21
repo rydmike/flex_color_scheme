@@ -115,10 +115,15 @@ class DemoApp extends StatelessWidget {
                 : themeDataDark(controller),
             // Use the dark or light theme based on controller setting.
             themeMode: controller.themeMode,
-            // Pass the controller to the HomePage where we use it to change
-            // the theme settings that will cause themes above to change and
-            // rebuild the entire look of the app based on modified theme.
-            home: HomePage(controller: controller),
+            // Using SelectionArea here makes text selectable and copy enabled
+            // in entire app. How it actually behaves, depends on current
+            // platform.
+            home: SelectionArea(
+              // Pass the controller to the HomePage where we use it to change
+              // the theme settings that will cause themes above to change and
+              // rebuild the entire look of the app based on modified theme.
+              child: HomePage(controller: controller),
+            ),
           );
         });
   }
