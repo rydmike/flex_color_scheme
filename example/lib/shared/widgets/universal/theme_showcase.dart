@@ -1504,22 +1504,6 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        MaterialBanner(
-          padding: const EdgeInsets.all(20),
-          content: const Text('Hello, I am a Material Banner'),
-          leading: const Icon(Icons.agriculture_outlined),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OPEN'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('DISMISS'),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
         Text('Material elevation and tint', style: denseHeader),
         Text(
           'When using useMaterial3 set to true, Material gets no elevation, '
@@ -1554,7 +1538,21 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Material type canvas, elevation 1')),
+            child: Center(
+                child: Text('Material type canvas, elevation 1, '
+                    'with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Material(
+          type: MaterialType.canvas,
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type canvas, elevation 1, '
+                    'no shadow')),
           ),
         ),
         const SizedBox(height: 10),
@@ -1565,7 +1563,21 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Material type canvas, elevation 4')),
+            child: Center(
+                child: Text('Material type canvas, elevation 4, '
+                    'with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Material(
+          type: MaterialType.canvas,
+          elevation: 4,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type canvas, elevation 4, '
+                    'no shadow')),
           ),
         ),
         const SizedBox(height: 32),
@@ -1594,7 +1606,21 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Material type card, elevation 1')),
+            child: Center(
+                child: Text('Material type card, elevation 1, '
+                    'with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Material(
+          type: MaterialType.card,
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type card, elevation 1, '
+                    'no shadow')),
           ),
         ),
         const SizedBox(height: 10),
@@ -1605,8 +1631,39 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Material type card, elevation 4')),
+            child: Center(
+                child: Text('Material type card, elevation 4, '
+                    'with shadow')),
           ),
+        ),
+        const SizedBox(height: 10),
+        Material(
+          type: MaterialType.card,
+          elevation: 4,
+          surfaceTintColor: colorScheme.surfaceTint,
+          child: const SizedBox(
+            height: 50,
+            child: Center(
+                child: Text('Material type card, elevation 4, '
+                    'no shadow')),
+          ),
+        ),
+        const SizedBox(height: 12),
+        const Divider(height: 1),
+        MaterialBanner(
+          padding: const EdgeInsets.all(20),
+          content: const Text('Hello, I am a Material Banner'),
+          leading: const Icon(Icons.agriculture_outlined),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OPEN'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: const Text('DISMISS'),
+              onPressed: () {},
+            ),
+          ],
         ),
         const SizedBox(height: 24),
         AbsorbPointer(
@@ -1692,7 +1749,7 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 0')),
+            child: Center(child: Text('Card, elevation 0, with shadow')),
           ),
         ),
         const SizedBox(height: 10),
@@ -1701,7 +1758,17 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 1')),
+            child: Center(child: Text('Card, elevation 1, with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Card(
+          elevation: 1,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
+          child: const SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 1, no shadow')),
           ),
         ),
         const SizedBox(height: 10),
@@ -1710,7 +1777,17 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 4')),
+            child: Center(child: Text('Card, elevation 4, with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Card(
+          elevation: 4,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
+          child: const SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 4, no shadow')),
           ),
         ),
         const SizedBox(height: 10),
@@ -1719,7 +1796,17 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
             height: 50,
-            child: Center(child: Text('Card, elevation 8')),
+            child: Center(child: Text('Card, elevation 8, with shadow')),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Card(
+          elevation: 8,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
+          child: const SizedBox(
+            height: 50,
+            child: Center(child: Text('Card, elevation 8, no shadow')),
           ),
         ),
       ],
