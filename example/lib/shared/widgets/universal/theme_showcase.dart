@@ -830,41 +830,103 @@ class AppBarShowcase extends StatelessWidget {
       context: context,
       removeBottom: true,
       removeTop: true,
-      child: Stack(
-        alignment: AlignmentDirectional.center,
+      child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-              const Text('Behind AppBar'),
-              FloatingActionButton.small(
-                heroTag: 'Behind AppBar',
-                onPressed: () {},
-                child: const Icon(Icons.add),
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              const _BehindAppBar(),
+              AppBar(
+                leading: IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {},
+                ),
+                title: const Text('Standard AppBar'),
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                ],
               ),
-              InputChip(
-                showCheckmark: true,
-                selected: true,
-                label: const Text('Chip check'),
-                onSelected: (bool value) {},
-              ),
-            ]),
+            ],
           ),
-          AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
-            title: const Text('Material AppBar'),
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {},
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              const _BehindAppBar(),
+              CustomScrollView(
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverAppBar.medium(
+                    leading: IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {},
+                    ),
+                    title: const Text('SliverAppBar.medium'),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              const _BehindAppBar(),
+              CustomScrollView(
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverAppBar.large(
+                    leading: IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {},
+                    ),
+                    title: const Text('SliverAppBar.large'),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
+                ],
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _BehindAppBar extends StatelessWidget {
+  const _BehindAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
+        const Text('Behind AppBar'),
+        FloatingActionButton.small(
+          heroTag: 'Behind AppBar',
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
+        InputChip(
+          showCheckmark: true,
+          selected: true,
+          label: const Text('Chip check'),
+          onSelected: (bool value) {},
+        ),
+      ]),
     );
   }
 }

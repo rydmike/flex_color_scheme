@@ -1037,7 +1037,7 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Inverse colors presentation NEW
+          // Inverse colors presentation
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -1083,7 +1083,7 @@ class SchemeColors extends StatelessWidget {
                         color: colorScheme.inversePrimary,
                         child: ColorNameValue(
                           color: colorScheme.inversePrimary,
-                          textColor: primary,
+                          textColor: colorScheme.inverseSurface,
                           label: 'inversePrimary',
                           tone: tones.inversePrimaryTone,
                           showTone: showTones,
