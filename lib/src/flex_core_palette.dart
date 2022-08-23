@@ -131,7 +131,7 @@ class FlexCorePalette extends CorePalette {
     /// the default secondary tonal palette.
     ///
     /// To use chroma value from the primary key color, pass in null and keep
-    /// min chroma below  desired threshold for required colorfulness.
+    /// min chroma below desired threshold for required colorfulness.
     final double? tertiaryChroma = 24,
 
     /// The minimum used chroma value.
