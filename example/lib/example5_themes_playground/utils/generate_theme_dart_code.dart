@@ -875,6 +875,14 @@ String generateThemeDartCode(ThemeController controller) {
       flexTonesLight = '  tones: FlexTones.highContrast(Brightness.light),\n';
       flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark),\n';
     }
+    if (controller.usedFlexToneSetup == 6) {
+      flexTonesLight = '  tones: FlexTones.ultraContrast(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.ultraContrast(Brightness.dark),\n';
+    }
+    if (controller.usedFlexToneSetup == 7) {
+      flexTonesLight = '  tones: FlexTones.jolly(Brightness.light),\n';
+      flexTonesDark = '  tones: FlexTones.jolly(Brightness.dark),\n';
+    }
   }
   //
   // Compose the final FlexThemeData code string, from all above fragments.
