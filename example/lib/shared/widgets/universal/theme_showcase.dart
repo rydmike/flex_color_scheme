@@ -907,7 +907,7 @@ class AppBarShowcase extends StatelessWidget {
 }
 
 class _BehindAppBar extends StatelessWidget {
-  const _BehindAppBar({super.key});
+  const _BehindAppBar();
 
   @override
   Widget build(BuildContext context) {
