@@ -80,16 +80,18 @@ is also available.
 ## Themes Playground
 
 If you are here for the **FlexColorScheme** companion application that allows you
-to configure a theme and copy-paste its setup code for use in
+to configure a theme and copy-paste its API setup code for use in
 your application, then head over to the
 [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6).
 
-> If you are using **FlexColorScheme version 5** you can go here to use 
-> [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate
-> API setup code for it.
-> 
-> If you are using FlexColorScheme version 4, you can still try 
-> [**Themes Playground V4**](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any
-> API code generation, since version 4 did not have that feature.
-
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v5)
+
+### Older versions of  Themes Playground 
+
+If you are using **FlexColorScheme version 5**, you can go here to use 
+[**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate
+API setup code for it.   
+
+If you are using **FlexColorScheme version 4**, you can still try 
+[**Themes Playground V4**](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any
+API code generation since version 4 did not have that feature.
