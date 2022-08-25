@@ -82,7 +82,7 @@ class PopupIconButtonSettings extends StatelessWidget {
                       : 'default 4',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -117,7 +117,7 @@ class PopupIconButtonSettings extends StatelessWidget {
                   '${(popupOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

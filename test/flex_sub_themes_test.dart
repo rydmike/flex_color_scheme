@@ -3410,16 +3410,16 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.button!,
+          labelStyle: textTheme.labelLarge!,
         ),
         equals(
           ChipThemeData(
             brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
             secondaryLabelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff6200ee),
             disabledColor: const Color(0x313a008e),
@@ -3445,7 +3445,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.button!,
+          labelStyle: textTheme.labelLarge!,
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ),
@@ -3453,9 +3453,9 @@ void main() {
           ChipThemeData(
             brightness: Brightness.dark,
             labelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
             secondaryLabelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff6200ee),
             disabledColor: const Color(0x313a008e),
@@ -3476,7 +3476,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.button!,
+          labelStyle: textTheme.labelLarge!,
           useMaterial3: true,
         ),
         equals(
@@ -3495,16 +3495,16 @@ void main() {
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
-          labelStyle: textTheme.button!,
+          labelStyle: textTheme.labelLarge!,
         ),
         equals(
           ChipThemeData(
             brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
             secondaryLabelStyle:
-                textTheme.button!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
             backgroundColor: const Color(0xffccf7f3),
             deleteIconColor: const Color(0xff03dac6),
             disabledColor: const Color(0x31018276),
@@ -3579,10 +3579,10 @@ void main() {
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
-                  return FlexColorScheme.m3TextTheme.overline!
+                  return FlexColorScheme.m3TextTheme.labelSmall!
                       .copyWith(color: colorScheme.error);
                 }
-                return FlexColorScheme.m3TextTheme.overline!.copyWith(
+                return FlexColorScheme.m3TextTheme.labelSmall!.copyWith(
                   color: colorScheme.error
                       .blendAlpha(colorScheme.error, 0x66)
                       .withAlpha(0xA5),
@@ -3643,7 +3643,7 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
-        labelTextStyle: FlexColorScheme.m3TextTheme.caption,
+        labelTextStyle: FlexColorScheme.m3TextTheme.bodySmall,
         selectedIconSchemeColor: SchemeColor.secondaryContainer,
         selectedLabelSchemeColor: SchemeColor.primaryContainer,
         unselectedIconSchemeColor: SchemeColor.onSurface,
@@ -3672,10 +3672,10 @@ void main() {
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
-                  return FlexColorScheme.m3TextTheme.caption!
+                  return FlexColorScheme.m3TextTheme.bodySmall!
                       .copyWith(color: colorScheme.primaryContainer);
                 }
-                return FlexColorScheme.m3TextTheme.caption!
+                return FlexColorScheme.m3TextTheme.bodySmall!
                     .copyWith(color: colorScheme.onSurface);
               },
             ),

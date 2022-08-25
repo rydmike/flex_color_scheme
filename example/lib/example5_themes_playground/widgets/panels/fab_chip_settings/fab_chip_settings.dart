@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -20,14 +18,7 @@ class FabChipSettings extends StatelessWidget {
         : controller.fabBorderRadius == null && controller.defaultRadius != null
             ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
             : '';
-    final String toggleButtonRadiusDefaultLabel =
-        controller.toggleButtonsBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 20'
-            : controller.toggleButtonsBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
-                : '';
+
     final String chipRadiusDefaultLabel =
         controller.chipBorderRadius == null && controller.defaultRadius == null
             ? 'default 8'
@@ -35,21 +26,6 @@ class FabChipSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
-
-    final double popupEffectiveRadius = controller.popupMenuBorderRadius ??
-        math.min(controller.defaultRadius ?? 4.0, 10.0);
-    final String popupMenuDefaultLabel =
-        controller.popupMenuBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 4'
-            : controller.popupMenuBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${popupEffectiveRadius.toStringAsFixed(0)}'
-                : '';
-    final double popupOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.popupMenuOpacity
-            : 1;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -141,7 +117,7 @@ class FabChipSettings extends StatelessWidget {
                           : 'circular',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -214,7 +190,7 @@ class FabChipSettings extends StatelessWidget {
                           : 'stadium',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

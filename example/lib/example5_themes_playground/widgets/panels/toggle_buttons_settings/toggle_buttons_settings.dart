@@ -90,7 +90,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                       : 'default 0',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -147,7 +147,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                       : 'default 1',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

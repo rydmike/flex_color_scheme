@@ -139,7 +139,7 @@ class ButtonsSettings extends StatelessWidget {
                           : 'default 4',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -233,7 +233,7 @@ class ButtonsSettings extends StatelessWidget {
                           : 'default 4',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -290,7 +290,7 @@ class ButtonsSettings extends StatelessWidget {
                       : 'default 1',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -342,7 +342,7 @@ class ButtonsSettings extends StatelessWidget {
                       : 'default 2',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -416,7 +416,7 @@ class ButtonsSettings extends StatelessWidget {
                           : 'default 4',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

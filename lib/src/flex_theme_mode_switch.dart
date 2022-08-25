@@ -295,7 +295,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
             child: title ??
                 Text(
                   'Theme mode',
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
           ),
         if (buttonOrder ==
@@ -455,7 +455,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
               if (label != null && labelAbove)
                 Text(
                   label!,
-                  style: labelStyle ?? Theme.of(context).textTheme.caption,
+                  style: labelStyle ?? Theme.of(context).textTheme.bodySmall,
                   semanticsLabel: '', // Is set on button instead
                 ),
               Material(
@@ -534,7 +534,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
               if (label != null && !labelAbove)
                 Text(
                   label!,
-                  style: labelStyle ?? Theme.of(context).textTheme.caption,
+                  style: labelStyle ?? Theme.of(context).textTheme.bodySmall,
                   semanticsLabel: '', // Is set on button instead
                 ),
             ],

@@ -79,7 +79,7 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
                       : 'default 0',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

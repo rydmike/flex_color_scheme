@@ -34,7 +34,7 @@ issues.
 
 **NEW**
 
-* Added support for new Flutter SDK `ColorScheme` colors `outlineVariant` and `scrim`. 
+* Added support for new Flutter SDK `ColorScheme` colors `outlineVariant` and `scrim`.
 
 * The enum `SchemeColor` has new values and past values are in a new order. The 
   **order was changed** to accommodate new color values `outlineVariant` and `scrim` and to keep 
@@ -78,6 +78,9 @@ issues.
     When `useMaterial3` is `false`, the `outlineSchemeColor` defaults to `baseSchemeColor`.
     When `useMaterial3` is `true`, the `outlineSchemeColor` defaults to `SchemeColor.outline`.
 
+* Added `SeedColorScheme.fromSeeds(...)` that can be used to create a seeded `ColorScheme` 
+  using multiple seed colors and `FlexTones` configuration, without using `FlexColorScheme` class.
+ 
 **BREAKING**
 
 * `FlexTones` contains a minor breaking change to make the API cleaner. The `FlexTones.light` and

@@ -235,17 +235,31 @@ class FlexSeedScheme {
       surfaceTint: core.primary.get(tones.surfaceTintTone),
     );
   }
+}
 
-  /// Returns a [ColorScheme], from seed keys and FlexTones tones mapping.
+/// Extension on [ColorScheme] to provide a more flexible alternative to
+/// Flutter's Material 3 [ColorScheme.fromSeed].
+///
+/// Use this extension to make a seeded [ColorScheme] using separate key colors
+/// for primary, secondary and tertiary colors in [ColorScheme].
+///
+/// By providing a [FlexTones] you can override customize tone mapping from
+/// tonal palettes to [ColorScheme] color and key color chroma usage per key
+/// color for the tonal palette creation.
+extension SeedColorScheme on ColorScheme {
+  /// Returns a [ColorScheme] from seed keys [primaryKey], [secondaryKey] and
+  /// [tertiaryKey] colors. Use [FlexTones] configuration to customize mapping
+  /// from tonal palettes to [ColorScheme] color and key color chroma usage per
+  /// key color for the tonal palette creation.
   ///
   /// Any seed produced [ColorScheme] color can be overridden by providing it a
-  /// given [Color] value.
+  /// given [Color] pre-assigned value.
   static ColorScheme fromSeeds({
+    Brightness brightness = Brightness.light,
     required Color primaryKey,
     Color? secondaryKey,
     Color? tertiaryKey,
     FlexTones? tones,
-    Brightness brightness = Brightness.light,
     Color? primary,
     Color? onPrimary,
     Color? primaryContainer,
@@ -277,25 +291,19 @@ class FlexSeedScheme {
     Color? inversePrimary,
     Color? surfaceTint,
   }) {
-    final FlexSeedScheme scheme;
-    switch (brightness) {
-      case Brightness.light:
-        scheme = FlexSeedScheme._tones(
-          primaryKey: primaryKey.value,
-          secondaryKey: secondaryKey?.value,
-          tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? FlexTones.material(Brightness.light),
-        );
-        break;
-      case Brightness.dark:
-        scheme = FlexSeedScheme._tones(
-          primaryKey: primaryKey.value,
-          secondaryKey: secondaryKey?.value,
-          tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? FlexTones.material(Brightness.dark),
-        );
-        break;
-    }
+    final FlexSeedScheme scheme = brightness == Brightness.light
+        ? FlexSeedScheme._tones(
+            primaryKey: primaryKey.value,
+            secondaryKey: secondaryKey?.value,
+            tertiaryKey: tertiaryKey?.value,
+            tones: tones ?? FlexTones.material(Brightness.light),
+          )
+        : FlexSeedScheme._tones(
+            primaryKey: primaryKey.value,
+            secondaryKey: secondaryKey?.value,
+            tertiaryKey: tertiaryKey?.value,
+            tones: tones ?? FlexTones.material(Brightness.dark),
+          );
     return ColorScheme(
       primary: primary ?? Color(scheme.primary),
       onPrimary: onPrimary ?? Color(scheme.onPrimary),
