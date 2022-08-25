@@ -82,6 +82,12 @@ is also available.
 If you are here for the **FlexColorScheme** companion application that allows you
 to configure a theme and copy-paste its setup code for use in
 your application, then head over to the
-[**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v5).
+[**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6).
+
+> If you are using **FlexColorScheme version 5** you can still use 
+> [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5).
+> 
+> Likewise, if you are using FlexColorScheme version 4, go here for  
+> [**Themes Playground V4**](https://rydmike.com/flexcolorschemeV4Tut5).
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v5)
