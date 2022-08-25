@@ -28,7 +28,7 @@ import 'flex_tones.dart';
 /// Which tones to use for what color in the [ColorScheme] is not hard coded
 /// like it is in material_color_utilities [Scheme] class. It also
 /// accepts an optional [FlexTones] class that can be used to configure
-/// all the tone mapping from [TonalPalette] to [ColorScheme], including
+/// all the tone mapping from [FlexTonalPalette] to [ColorScheme], including
 /// passing all the extra min chroma and fixed level parameters it should
 /// use when it makes the [FlexCorePalette].
 ///
