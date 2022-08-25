@@ -84,7 +84,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "5.2.0-dev.1"
+    version: "6.0.0-dev.1"
   flutter:
     dependency: "direct main"
     description: flutter

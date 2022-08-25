@@ -32,10 +32,10 @@ class AppData {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
-  static const String versionMajor = '5';
+  static const String versionMajor = '6';
   static const String versionBuild = '01';
-  static const String version = '$versionMajor.2.0 Build-$versionBuild';
-  static const String packageVersion = '5.2.0-dev.1';
+  static const String version = '$versionMajor.0.0 Build-$versionBuild';
+  static const String packageVersion = '6.0.0-dev.1';
   static const String flutterVersion = 'master 3.1.0-0.0.pre.2216';
   static const String copyright = '© 2020, 2021, 2022';
   static const String author = 'Mike Rydstrom';
