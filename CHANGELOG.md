@@ -80,6 +80,12 @@ issues.
 
 * Added `SeedColorScheme.fromSeeds(...)` that can be used to create a seeded `ColorScheme` 
   using multiple seed colors and `FlexTones` configuration, without using `FlexColorScheme` class.
+
+* Added `FlexTonalPalette` a re-implementation of Material Color Utilities `TonalPalette`, with
+  addition of tonal palette tones 5 and 98. The tone 98 also exists in the
+  [Web Material Theme Builder app](https://m3.material.io/theme-builder#/custom), but not in
+  Flutter or [Material Color Utilities package](https://pub.dev/packages/material_color_utilities).
+  Tone 5 is custom addition for `FlexTones` and `FlexColorScheme`.
  
 **BREAKING**
 
@@ -96,6 +102,13 @@ issues.
   before. This change was introduced to prepare for extracting `FlexTones` and `FlexSeedScheme` to
   their own package that will provide a `fromFlexSeeds` extension on `ColorScheme`. It is unlikely
   to impact any normal usage of FlexColorScheme, but it is still a breaking change.
+
+* `FlexCorePalette.fromSeeds` properties `secondaryChroma` and `tertiaryChroma` default to null
+  instead of previous M3 palette default generating values 16 and 24 respectively. Set them to 
+  previous values 16 and 24 to create same tonal palettes as Material Color Utilities `CorePalette`
+  and previous versions of `FlexCorePalette`. To allow for greater flexibility and addition of 
+  tonal palette tones 5 (custom for FCS) and 98 (Google Web app has this but not Flutter, we get
+  it now too), `FlexCorePalette` no longer extend `CorePalette` it is a modified re-implementation.
 
 **STYLE CHANGE - BREAKING**
 

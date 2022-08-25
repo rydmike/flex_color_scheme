@@ -32,11 +32,12 @@ void main() {
     // and default parameters.
     final FlexCorePalette m1 = FlexCorePalette.fromSeeds(
       primary: const Color(0xFF6750A4).value,
+      secondaryChroma: 16,
+      tertiaryChroma: 24,
     );
     // m2, makes tonal palette using CorePalette.of
     final CorePalette m2 = CorePalette.of(const Color(0xFF6750A4).value);
     // Do identity tests
-    // debugPrint(m1.toString());
     test(
         'FCP1.01: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
@@ -143,6 +144,8 @@ void main() {
       primary: const Color(0xFF6750A4).value,
       secondary: const Color(0xFF625B71).value,
       tertiary: const Color(0xFF7D5260).value,
+      secondaryChroma: 16,
+      tertiaryChroma: 24,
     );
     test(
         'FCP1.07: GIVEN FlexCorePalette.fromSeeds with 3 colors and defaults '
@@ -323,14 +326,29 @@ void main() {
     // and default parameters, equal to m1.
     final FlexCorePalette m5 = FlexCorePalette.fromSeeds(
       primary: const Color(0xFF6750A4).value,
+      secondaryChroma: 16,
+      tertiaryChroma: 24,
     );
     test(
-        'FCP1.U01: GIVEN to identical FlexCorePalette '
+        'FCP1.U01a: GIVEN two identical FlexCorePalette '
         'EXPECT them to be equal', () {
       expect(
         m1,
         equals(m5),
       );
+    });
+    test(
+        'FCP1.U01b: GIVEN two identical FlexCorePalette '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FCP1.U01c: GIVEN to identical FlexCorePalette '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m5, true);
+    });
+    test('FCP1.U01c: Test hashCode has value.', () {
+      expect(m1.hashCode, isNotNull);
     });
     test(
         'FCP1.U02: GIVEN to identical FlexCorePalette '
@@ -349,7 +367,31 @@ void main() {
       );
     });
     test(
-        'FCP1.U04: GIVEN a FlexCorePalette from a List '
+        'FCP1.U05: GIVEN FlexCorePalette.of() '
+        'EXPECT it to be equal to same FlexCorePalette.fromSeed() ', () {
+      expect(
+        m1,
+        equals(FlexCorePalette.of(const Color(0xFF6750A4).value)),
+      );
+    });
+    test(
+        'FCP1.U06: GIVEN FlexCorePalette.of() '
+        'EXPECT it to be equal to same FlexCorePalette.fromHueChroma() ', () {
+      expect(
+        FlexCorePalette.fromHueChroma(40, 82),
+        equals(
+          FlexCorePalette(
+            primary: FlexTonalPalette.of(40.0, 82.0),
+            secondary: FlexTonalPalette.of(40.0, 16.0),
+            tertiary: FlexTonalPalette.of(100.0, 24.0),
+            neutral: FlexTonalPalette.of(40.0, 4.0),
+            neutralVariant: FlexTonalPalette.of(40.0, 8.0),
+          ),
+        ),
+      );
+    });
+    test(
+        'FCP1.U07: GIVEN a FlexCorePalette from a List '
         'EXPECT it to be equal to one created from same seed Based one', () {
       expect(
         m3,
@@ -501,7 +543,7 @@ void main() {
     ]);
 
     test(
-        'FTP1.U01: GIVEN to identical FlexTonalPalette.of '
+        'FTP1.U01a: GIVEN to identical FlexTonalPalette.of '
         'EXPECT them to be equal', () {
       expect(
         m1,
@@ -509,12 +551,38 @@ void main() {
       );
     });
     test(
-        'FTP1.U02: GIVEN to identical FlexTonalPalette.fromList '
+        'FTP1.U01b: GIVEN two identical FlexTonalPalette.of '
+        'EXPECT them to have identity', () {
+      expect(identical(m1, m1), true);
+    });
+    test(
+        'FTP1.U01c: GIVEN to identical FlexTonalPalette.of '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
+    test('FTP1.U01d: Test lexTonalPalette.of hashCode has value.', () {
+      expect(m1.hashCode, isNotNull);
+    });
+    test(
+        'FTP1.U02a: GIVEN to identical FlexTonalPalette.fromList '
         'EXPECT them to be equal', () {
       expect(
         m4,
         equals(m5),
       );
+    });
+    test(
+        'FTP1.U02b: GIVEN two identical FlexTonalPalette.fromList '
+        'EXPECT them to have identity', () {
+      expect(identical(m4, m4), true);
+    });
+    test(
+        'FTP1.U02c: GIVEN to identical FlexTonalPalette.fromList '
+        'EXPECT them to have equality with operator', () {
+      expect(m4 == m5, true);
+    });
+    test('FTP1.U02d: Test lexTonalPalette.fromList hashCode has value.', () {
+      expect(m4.hashCode, isNotNull);
     });
     test(
         'FTP1.U03: GIVEN to identical FlexTonalPalette '
@@ -622,6 +690,14 @@ void main() {
           equals(m5List[i]),
         );
       }
+    });
+    test(
+        'FTP1.U10: GIVEN a FlexTonalPalette.fromList '
+        'EXPECT accessing none existing to tone to throw argument error', () {
+      expect(
+        () => m5.get(7),
+        throwsArgumentError,
+      );
     });
   });
 }
