@@ -284,7 +284,7 @@ class FlexSeedScheme {
           primaryKey: primaryKey.value,
           secondaryKey: secondaryKey?.value,
           tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? const FlexTones.light(),
+          tones: tones ?? FlexTones.material(Brightness.light),
         );
         break;
       case Brightness.dark:
@@ -292,7 +292,7 @@ class FlexSeedScheme {
           primaryKey: primaryKey.value,
           secondaryKey: secondaryKey?.value,
           tertiaryKey: tertiaryKey?.value,
-          tones: tones ?? const FlexTones.dark(),
+          tones: tones ?? FlexTones.material(Brightness.dark),
         );
         break;
     }

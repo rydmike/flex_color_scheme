@@ -2,9 +2,9 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 5.2.0-dev.1
+## 6.0.0-dev.1
 
-**Aug 18, 2022**
+**Aug 25, 2022**
 
 This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
 prepare for new style and feature alignments when `useMaterial3` is true.
@@ -16,16 +16,18 @@ the exact same style in all cases that you actually get when you use it with thi
 
 This dev release requires at least Flutter *master 3.1.0-0.0.pre.2199*. It includes two new Flutter
 `ColorScheme` colors. This dev release is going to be released as stable when next Flutter stable 
-version after 3.0 comes out. It is expected to be released during Flutter Vikings 2022, Sep 1 and 
+version after 3.0 comes out. It is expected to be released around Flutter Vikings 2022 and 
 might be called Flutter 3.3.
 
 All features currently available in Flutter *master 3.1.0-0.0.pre.2199*, might not be included
-in next stable release. If there are features in this dev release that do not land in next stable,
-they will be reverted from the FlexColorScheme 5.2.0 stable release.
+in next stable 3.3 release. If there are features in this dev release that do not land in next 
+Flutter stable, they will be reverted from the next FlexColorScheme stable release. Due to some minor
+breaking changes in style and in a lower level API `FlexTones`, the next stable FCS will be 
+released as version 6.0.0 and also take the opportunity to clean out all deprecated APIs. 
 
-Due to a number of known and below listed Flutter SDK issues when using `useMaterial3` set to
-`true`, we cannot yet recommend using the option. Use it only if you are willing to accept the
-still incomplete Material 3 implementation in Flutter and the issues. If you
+Due to a number of known and below documented Flutter SDK issues when using `useMaterial3` set to
+`true`, we cannot yet recommend using the option in production. Use it only if you are willing to
+accept the still incomplete Material 3 implementation in Flutter and the issues. If you
 keep `useMaterial3` set to `false`, and use FCS opinionated component themes, you can create a 
 theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid the 
 issues.
@@ -76,33 +78,49 @@ issues.
     When `useMaterial3` is `false`, the `outlineSchemeColor` defaults to `baseSchemeColor`.
     When `useMaterial3` is `true`, the `outlineSchemeColor` defaults to `SchemeColor.outline`.
 
+**BREAKING**
+
+* `FlexTones` contains a minor breaking change to make the API cleaner. The `FlexTones.light` and
+  `FlexTones.dark` no longer produce the config for the Material 3 tone and chroma setup.
+  They no longer lock the chroma values to the default values for M3, but use null in their configs
+  for their chroma values. Resulting in that chroma from key colors will be used, as long as they 
+  are over set minimum values. These named constructors then provide a cleaner starting API for
+  defining additional configurations, by not forcing `null` to be passed to use chroma value in 
+  key colors. To get the Material 3 configuration, use the factory `FlexTones.material` instead of 
+  `FlexTones.light` and `FlexTones.light`. It as before produces the correct Material 3 
+  configuration, by defining `secondaryChroma: 16` and `tertiaryChroma: 24` using `FlexTones.light`
+  and `FlexTones.dark` to return the correct Material 3 matching `FlexTones` configuration as
+  before. This change was introduced to prepare for extracting `FlexTones` and `FlexSeedScheme` to
+  their own package that will provide a `fromFlexSeeds` extension on `ColorScheme`. It is unlikely
+  to impact any normal usage of FlexColorScheme, but it is still a breaking change.
+
 **STYLE CHANGE - BREAKING**
 
 * `FlexSubThemesData.fabUseShape` opinionated component theme style default was changed from `true`
-  to `false`. This is a breaking style with previous versions. The opinionated style change was done
+  to `false`, this breaks previous default style. The opinionated style change was done
   to use a style that by default matches M3 style when `ThemeData.useMaterial3` is `true`.
   The new default style is also a way to work around issue 
   [#107946](https://github.com/flutter/flutter/issues/107946), where it is shown that you cannot 
   create a theme that replicates the default roundings in M3 of the FAB.
-  **Style migration**: If you had kept `FlexSubThemesData.fabUseShape` unspecified and relayed on
+  **Style migration**: If you had kept `FlexSubThemesData.fabUseShape` unspecified and relied on
   default value in a previous version, you must set it to `true` to get the same result as before.
-  These breaking style changes in the opinionated opt in component sub-themes are unfortunate,
-  but required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3 
-  theming, while offering its own opinionated tweaks on some M3 default styles.
+  Breaking style changes like this, in the opinionated opt in component sub-themes are unfortunate.
+  However, required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3 
+  theming, while offering its own opinionated tweaks on some M3 default styles as well.
+
+**STYLE CHANGE - MINOR**
 
 * The M3 color utilities package *material_color_utilities* from the Material team, that Flutter SDK
   depends on and FCS also uses, introduced a minor breaking change going from version 0.1.4 to
   0.1.5. Some colors in the tonal palettes no longer give exactly the same color values as before.
   This changes the results for some colors when you create a `ColorScheme.fromSeed` or FCS does
-  it internally with its extended version `_Scheme.fromSeeds`. The new algorithm changes for example 
-  all the default M3 error colors slightly. The changes in the color values are minor, and not
-  visually noticeable to the eye. Values are slightly different, and this release uses the new
-  value for FCS M3 error colors. Tests were also updated to use the new values. The change did break
-  FCS color value tests, and should be per its own policy be considered a major breaking change.
-  However, since the Material 3 design and *material_color_utilities* calls this change minor, 
-  then so does FCS.   
-
-**STYLE CHANGE - MINOR**
+  it internally with its extended version `FlexSeedScheme.fromSeeds`. The new algorithm changes
+  for example all the default M3 error colors slightly. The changes in the color values are minor,
+  and not visually noticeable to the eye. Values are however slightly different, and this release
+  uses the new value for FCS M3 error colors. Tests were also updated to use the new values.
+  The change did break FCS color value tests, and should be per its own policy be considered a
+  major breaking change. However, since the Material 3 design and *material_color_utilities* calls
+  this change minor, then so does FCS.
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
