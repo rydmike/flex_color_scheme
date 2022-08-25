@@ -2612,35 +2612,35 @@ void main() {
 
     // Next let's test som crazy themes, make one for TextTheme
     const TextTheme customText = TextTheme(
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
         height: 24 / 20,
       ),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
       ),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.25,
         height: 20 / 17,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
         height: 20 / 14,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
@@ -2650,12 +2650,12 @@ void main() {
     // Make a custom text theme for PrimaryTextTheme, it should only get these
     // customizations + default style, not the the ones in the custom TextTheme.
     const TextTheme customPrimText = TextTheme(
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
       ),
-      overline: TextStyle(
+      labelSmall: TextStyle(
         letterSpacing: 0.5,
       ),
     );

@@ -165,7 +165,7 @@ class NavigationRailSettings extends StatelessWidget {
                   '${(navRailOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -197,7 +197,7 @@ class NavigationRailSettings extends StatelessWidget {
                   navRailElevation.toStringAsFixed(1),
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -272,7 +272,7 @@ class NavigationRailSettings extends StatelessWidget {
                       : 'default 24%',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

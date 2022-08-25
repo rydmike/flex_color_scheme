@@ -1215,35 +1215,35 @@ void main() {
     });
     // Next let's test som crazy themes, make one for TextTheme
     const TextTheme customText = TextTheme(
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
         height: 24 / 20,
       ),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.15,
       ),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.25,
         height: 20 / 17,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
         height: 20 / 14,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
@@ -1253,12 +1253,12 @@ void main() {
     // Make a custom text theme for PrimaryTextTheme, it should only get these
     // customizations + default style, not the the ones in the custom TextTheme.
     const TextTheme customPrimText = TextTheme(
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
       ),
-      overline: TextStyle(
+      labelSmall: TextStyle(
         letterSpacing: 0.5,
       ),
     );
@@ -1680,14 +1680,14 @@ void main() {
         'FTD2.07: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case no sub-themes EXPECT equal.', () {
       const TextTheme myTextTheme = TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 70, // Defaults to 96 in Material2018 Typography.
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           fontSize: 16, // Defaults to 14 in Material2018 Typography.
           letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
         ),
-        overline: TextStyle(
+        labelSmall: TextStyle(
           fontSize: 11, // Defaults to 10 in Material2018 Typography.
           letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
         ),
@@ -1865,14 +1865,14 @@ void main() {
         'FTD2.08-w-sub: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case with sub-theme EXPECT equal.', () {
       const TextTheme myTextTheme = TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 70, // Defaults to 96 in Material2018 Typography.
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           fontSize: 16, // Defaults to 14 in Material2018 Typography.
           letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
         ),
-        overline: TextStyle(
+        labelSmall: TextStyle(
           fontSize: 11, // Defaults to 10 in Material2018 Typography.
           letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
         ),
@@ -2031,14 +2031,14 @@ void main() {
         'FTD2.08-w-sub2: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
         'case with sub-theme and rev tooltip EXPECT equal.', () {
       const TextTheme myTextTheme = TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 70, // Defaults to 96 in Material2018 Typography.
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           fontSize: 16, // Defaults to 14 in Material2018 Typography.
           letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
         ),
-        overline: TextStyle(
+        labelSmall: TextStyle(
           fontSize: 11, // Defaults to 10 in Material2018 Typography.
           letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
         ),
@@ -2233,14 +2233,14 @@ void main() {
         'FTD2.09-w-sub-DARK: GIVEN equal FlexThemeData and '
         'FlexColorScheme.toTheme case with sub-theme EXPECT equal.', () {
       const TextTheme myTextTheme = TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 70, // Defaults to 96 in Material2018 Typography.
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           fontSize: 16, // Defaults to 14 in Material2018 Typography.
           letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
         ),
-        overline: TextStyle(
+        labelSmall: TextStyle(
           fontSize: 11, // Defaults to 10 in Material2018 Typography.
           letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
         ),

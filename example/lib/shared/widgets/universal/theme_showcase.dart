@@ -119,7 +119,7 @@ class ThemeShowcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Primary TextTheme',
-                      style: Theme.of(context).primaryTextTheme.subtitle1),
+                      style: Theme.of(context).primaryTextTheme.titleMedium),
                 ),
                 const PrimaryTextThemeShowcase(),
               ],

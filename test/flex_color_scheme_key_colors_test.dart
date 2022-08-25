@@ -51,6 +51,20 @@ void main() {
       );
     });
     test(
+        'FCS7.001-l-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
+        'EXPECT equal to ColorScheme.fromSeed using same color as key.', () {
+      expect(
+        SeedColorScheme.fromSeeds(
+          brightness: Brightness.light,
+          primaryKey: m3BaseSeed,
+        ),
+        equals(ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: m3BaseSeed,
+        )),
+      );
+    });
+    test(
         'FCS7.001-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'only one seed color '
         'EXPECT FlexColorScheme.dark.toScheme to be equal to '
@@ -60,6 +74,20 @@ void main() {
         equals(ColorScheme.fromSeed(
           seedColor: m3BaseSeed,
           brightness: Brightness.dark,
+        )),
+      );
+    });
+    test(
+        'FCS7.001-d-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
+        'EXPECT equal to ColorScheme.fromSeed using same color as key.', () {
+      expect(
+        SeedColorScheme.fromSeeds(
+          brightness: Brightness.dark,
+          primaryKey: m3BaseSeed,
+        ),
+        equals(ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: m3BaseSeed,
         )),
       );
     });

@@ -2320,7 +2320,7 @@ class FlexColorScheme with Diagnosticable {
     // If keyColor seeds is active, apply seeded colors to effective colors.
     if (seed.useKeyColors) {
       // Create a complete ColorScheme from active and effective seed colors.
-      seedScheme = FlexSeedScheme.fromSeeds(
+      seedScheme = SeedColorScheme.fromSeeds(
         brightness: Brightness.light,
         primaryKey: effectiveColors.primary,
         // If use secondary seed, use it with fromSeeds, otherwise undefined.
@@ -4020,7 +4020,7 @@ class FlexColorScheme with Diagnosticable {
         brightness: Brightness.dark,
       );
       // Create a ColorScheme from active and effective seed key colors.
-      seedScheme = FlexSeedScheme.fromSeeds(
+      seedScheme = SeedColorScheme.fromSeeds(
         brightness: Brightness.dark,
         primaryKey: effectiveKeyColors.primary,
         // If use secondary seed, use it with fromSeeds, otherwise undefined.
@@ -5884,12 +5884,12 @@ class FlexColorScheme with Diagnosticable {
       // pass in `null` and let ThemeData use default sub-theme for TabBarTheme.
       tabBarTheme: TabBarTheme(
           indicatorSize: TabBarIndicatorSize.tab,
-          labelStyle: effectiveTextTheme.bodyText1,
+          labelStyle: effectiveTextTheme.bodyLarge,
           labelColor: subTheme.tabBarItemSchemeColor == null
               ? selectedTabColor()
               : FlexSubThemes.schemeColor(
                   subTheme.tabBarItemSchemeColor!, colorScheme),
-          unselectedLabelStyle: effectiveTextTheme.bodyText1,
+          unselectedLabelStyle: effectiveTextTheme.bodyLarge,
           unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
               ? unselectedTabColor()
               : FlexSubThemes.schemeColor(
@@ -5898,10 +5898,10 @@ class FlexColorScheme with Diagnosticable {
           ),
       // Set colors for icons in opted in sub themes.
       iconTheme: useSubThemes
-          ? IconThemeData(color: effectiveTextTheme.headline6!.color)
+          ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
           : null,
       primaryIconTheme: useSubThemes
-          ? IconThemeData(color: effectivePrimaryTextTheme.headline6!.color)
+          ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
           : null,
       // TODO(rydmike): Tech debt: Move tooltip theme opt-in to FlexSubThemes.
       // TODO(rydmike): Offer more tooltip theming options, like tip delays.
@@ -5915,7 +5915,7 @@ class FlexColorScheme with Diagnosticable {
         // Do not use the min height, the custom padding handles it instead.
         padding: tooltipPadding(),
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        textStyle: effectiveTextTheme.bodyText2!.copyWith(
+        textStyle: effectiveTextTheme.bodyMedium!.copyWith(
           inherit: false,
           color: tooltipsMatchBackground
               ? isDark
@@ -6115,7 +6115,7 @@ class FlexColorScheme with Diagnosticable {
               : ChipThemeData.fromDefaults(
                   secondaryColor: colorScheme.primary,
                   brightness: colorScheme.brightness,
-                  labelStyle: effectiveTextTheme.bodyText1!,
+                  labelStyle: effectiveTextTheme.bodyLarge!,
                 ),
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(

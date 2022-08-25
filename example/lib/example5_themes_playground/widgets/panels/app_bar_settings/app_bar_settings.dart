@@ -114,7 +114,7 @@ class AppBarSettings extends StatelessWidget {
                     controller.appBarElevationLight.toStringAsFixed(1),
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -153,7 +153,7 @@ class AppBarSettings extends StatelessWidget {
                     ' %',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -186,7 +186,7 @@ class AppBarSettings extends StatelessWidget {
                     controller.appBarElevationDark.toStringAsFixed(1),
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -224,7 +224,7 @@ class AppBarSettings extends StatelessWidget {
                     ' %',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],

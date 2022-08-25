@@ -192,7 +192,7 @@ class SurfaceBlends extends StatelessWidget {
                     '${controller.blendLevel}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -246,7 +246,7 @@ class SurfaceBlends extends StatelessWidget {
                     '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevel : ""}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -367,7 +367,7 @@ class SurfaceBlends extends StatelessWidget {
                     '${controller.blendLevelDark}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -421,7 +421,7 @@ class SurfaceBlends extends StatelessWidget {
                     '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevelDark : ""}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],

@@ -79,7 +79,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                   '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

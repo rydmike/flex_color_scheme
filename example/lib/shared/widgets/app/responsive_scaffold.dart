@@ -969,7 +969,7 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
             radius: widget.railWidth / 2 - hPadding,
             child: Text(
               widget.menuLeadingAvatarLabel,
-              style: primaryTextTheme.subtitle1!.copyWith(
+              style: primaryTextTheme.titleMedium!.copyWith(
                   color: theme.colorScheme.onPrimary,
                   fontWeight: FontWeight.w600),
             ),

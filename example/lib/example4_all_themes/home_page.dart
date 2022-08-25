@@ -256,7 +256,7 @@ class HomePage extends StatelessWidget {
                                         : '4',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .caption!
+                                        .bodySmall!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ],

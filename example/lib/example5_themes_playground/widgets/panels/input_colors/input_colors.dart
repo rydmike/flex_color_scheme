@@ -209,7 +209,7 @@ class InputColors extends StatelessWidget {
                         '${controller.darkMethodLevel} %',
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],

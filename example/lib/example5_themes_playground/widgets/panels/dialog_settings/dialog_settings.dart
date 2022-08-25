@@ -97,7 +97,7 @@ class DialogSettings extends StatelessWidget {
                           : 'default 4',
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
