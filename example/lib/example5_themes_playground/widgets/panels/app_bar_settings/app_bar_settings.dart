@@ -12,36 +12,6 @@ class AppBarSettings extends StatelessWidget {
   const AppBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  String explainAppBarStyle(final FlexAppBarStyle? style, final bool isLight) {
-    switch (style) {
-      case FlexAppBarStyle.primary:
-        return isLight ? 'Primary (M2 default)' : 'Primary';
-      case FlexAppBarStyle.material:
-        return isLight
-            ? 'White (M2 light surface)'
-            : 'Dark (M2 default surface #121212)';
-      case FlexAppBarStyle.surface:
-        return 'Surface, with primary color blend';
-      case FlexAppBarStyle.background:
-        return 'Background, with primary color blend';
-      case FlexAppBarStyle.custom:
-        return 'Custom, built-in schemes use tertiary color, '
-            'but you can use any color';
-      case null:
-        {
-          if (controller.useMaterial3) {
-            return 'Surface (M3 default)';
-          } else {
-            if (isLight) {
-              return 'Primary (M2 default)';
-            } else {
-              return 'Dark (M2 default surface #121212)';
-            }
-          }
-        }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
