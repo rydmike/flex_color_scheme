@@ -81,7 +81,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
       case FlexAppBarStyle.background:
         return 'Background color, with primary color blend';
       case FlexAppBarStyle.custom:
-        return 'Custom. Built-in schemes use tertiaryContainer color, '
+        return 'Custom. Built-in schemes use tertiary color, '
             'but you can use any color';
       case null:
         {
