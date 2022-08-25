@@ -25,6 +25,7 @@ class TonalPaletteColors extends StatelessWidget {
   /// Commonly-used tone values.
   static const List<int> commonTones = <int>[
     0,
+    5,
     10,
     20,
     30,
@@ -35,6 +36,7 @@ class TonalPaletteColors extends StatelessWidget {
     80,
     90,
     95,
+    98,
     99,
     100,
   ];

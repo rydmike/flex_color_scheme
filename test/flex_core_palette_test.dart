@@ -11,6 +11,23 @@ void main() {
   // Basic object tests, equality, none equal.
   //****************************************************************************
   group('FCP1: WITH FlexCorePalette ', () {
+    const List<int> commonTones = <int>[
+      0,
+      5,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      95,
+      98,
+      99,
+      100,
+    ];
     // m1, is tonal palettes using FlexCorePalette.fromSeeds with one color
     // and default parameters.
     final FlexCorePalette m1 = FlexCorePalette.fromSeeds(
@@ -24,8 +41,17 @@ void main() {
         'FCP1.01: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT primary palette lists to be equal', () {
+      // If we remove the tones 5 and 98 that MaterialColorUtilities
+      // CorePalette.of does not include, out custom list should be equal.
+      final List<int> m1List = m1.primary.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.primary.asList,
+        m1No5and98List,
         equals(m2.primary.asList),
       );
     });
@@ -33,8 +59,17 @@ void main() {
         'FCP1.02: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT secondary palette lists to be equal', () {
+      // If we remove the tones 5 and 98 that MaterialColorUtilities
+      // CorePalette.of does not include, out custom list should be equal.
+      final List<int> m1List = m1.secondary.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.secondary.asList,
+        m1No5and98List,
         equals(m2.secondary.asList),
       );
     });
@@ -42,8 +77,15 @@ void main() {
         'FCP1.03: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT tertiary palette lists to be equal', () {
+      final List<int> m1List = m1.tertiary.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.tertiary.asList,
+        m1No5and98List,
         equals(m2.tertiary.asList),
       );
     });
@@ -51,8 +93,15 @@ void main() {
         'FCP1.04: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT error palette lists to be equal', () {
+      final List<int> m1List = m1.error.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.error.asList,
+        m1No5and98List,
         equals(m2.error.asList),
       );
     });
@@ -60,8 +109,15 @@ void main() {
         'FCP1.05: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT neutral palette lists to be equal', () {
+      final List<int> m1List = m1.neutral.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.neutral.asList,
+        m1No5and98List,
         equals(m2.neutral.asList),
       );
     });
@@ -69,8 +125,15 @@ void main() {
         'FCP1.06: GIVEN same FlexCorePalette.fromSeeds default and '
         'CorePalette.of using same input color '
         'EXPECT neutralVariant palette lists to be equal', () {
+      final List<int> m1List = m1.neutralVariant.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
       expect(
-        m1.neutralVariant.asList,
+        m1No5and98List,
         equals(m2.neutralVariant.asList),
       );
     });
@@ -86,6 +149,7 @@ void main() {
         'EXPECT a given list result', () {
       expect(m3.asList(), <int>[
         4278190080,
+        4279631937,
         4280418397,
         4281867890,
         4283381642,
@@ -96,9 +160,11 @@ void main() {
         4291804415,
         4293516799,
         4294373119,
+        4294834175,
         4294966271,
         4294967295,
         4278190080,
+        4279438880,
         4280162603,
         4281544001,
         4283057240,
@@ -109,9 +175,11 @@ void main() {
         4291609307,
         4293451512,
         4294372863,
+        4294899711,
         4294966271,
         4294967295,
         4278190080,
+        4280550930,
         4281405469,
         4283049266,
         4284693320,
@@ -122,9 +190,11 @@ void main() {
         4293900488,
         4294957539,
         4294962416,
+        4294965496,
         4294966271,
         4294967295,
         4278190080,
+        4279373844,
         4280032030,
         4281413683,
         4282926666,
@@ -135,9 +205,11 @@ void main() {
         4291478986,
         4293321190,
         4294242292,
+        4294834429,
         4294966271,
         4294967295,
         4278190080,
+        4279373847,
         4280097314,
         4281478968,
         4282991950,
@@ -148,6 +220,7 @@ void main() {
         4291478735,
         4293386475,
         4294307578,
+        4294834175,
         4294966271,
         4294967295,
       ]);
@@ -169,6 +242,7 @@ void main() {
         m4.asList(),
         <int>[
           4278190080,
+          4279631937,
           4280418397,
           4281867890,
           4283381642,
@@ -179,9 +253,11 @@ void main() {
           4291804415,
           4293516799,
           4294373119,
+          4294834175,
           4294966271,
           4294967295,
           4278190080,
+          4279438880,
           4280162603,
           4281544001,
           4283056984,
@@ -192,9 +268,11 @@ void main() {
           4291609308,
           4293451513,
           4294372863,
+          4294899711,
           4294966271,
           4294967295,
           4278190080,
+          4280550930,
           4281405725,
           4282983730,
           4284693320,
@@ -205,9 +283,11 @@ void main() {
           4293834952,
           4294957539,
           4294962416,
+          4294965496,
           4294966271,
           4294967295,
           4278190080,
+          4279373844,
           4280032030,
           4281413683,
           4282926666,
@@ -218,9 +298,11 @@ void main() {
           4291478986,
           4293321190,
           4294242292,
+          4294834429,
           4294966271,
           4294967295,
           4278190080,
+          4279373847,
           4280097314,
           4281478968,
           4282991950,
@@ -231,11 +313,315 @@ void main() {
           4291478735,
           4293386475,
           4294307578,
+          4294834175,
           4294966271,
           4294967295,
         ],
       );
     });
+    // m5, is tonal palettes using FlexCorePalette.fromSeeds with one color
+    // and default parameters, equal to m1.
+    final FlexCorePalette m5 = FlexCorePalette.fromSeeds(
+      primary: const Color(0xFF6750A4).value,
+    );
+    test(
+        'FCP1.U01: GIVEN to identical FlexCorePalette '
+        'EXPECT them to be equal', () {
+      expect(
+        m1,
+        equals(m5),
+      );
+    });
+    test(
+        'FCP1.U02: GIVEN to identical FlexCorePalette '
+        'EXPECT their asList to be equal', () {
+      expect(
+        m1.asList(),
+        equals(m5.asList()),
+      );
+    });
+    test(
+        'FCP1.U03: GIVEN to identical FlexCorePalette '
+        'EXPECT their toString to be equal', () {
+      expect(
+        m1.toString(),
+        equals(m5.toString()),
+      );
+    });
+    test(
+        'FCP1.U04: GIVEN a FlexCorePalette from a List '
+        'EXPECT it to be equal to one created from same seed Based one', () {
+      expect(
+        m3,
+        equals(FlexCorePalette.fromList(const <int>[
+          4278190080,
+          4279631937,
+          4280418397,
+          4281867890,
+          4283381642,
+          4284960932,
+          4286605759,
+          4288316379,
+          4290158072,
+          4291804415,
+          4293516799,
+          4294373119,
+          4294834175,
+          4294966271,
+          4294967295,
+          4278190080,
+          4279438880,
+          4280162603,
+          4281544001,
+          4283057240,
+          4284636016,
+          4286280842,
+          4287991204,
+          4289767359,
+          4291609307,
+          4293451512,
+          4294372863,
+          4294899711,
+          4294966271,
+          4294967295,
+          4278190080,
+          4280550930,
+          4281405469,
+          4283049266,
+          4284693320,
+          4286468704,
+          4288244345,
+          4290085778,
+          4291993005,
+          4293900488,
+          4294957539,
+          4294962416,
+          4294965496,
+          4294966271,
+          4294967295,
+          4278190080,
+          4279373844,
+          4280032030,
+          4281413683,
+          4282926666,
+          4284505442,
+          4286150266,
+          4287860628,
+          4289637038,
+          4291478986,
+          4293321190,
+          4294242292,
+          4294834429,
+          4294966271,
+          4294967295,
+          4278190080,
+          4279373847,
+          4280097314,
+          4281478968,
+          4282991950,
+          4284570982,
+          4286215551,
+          4287926169,
+          4289702324,
+          4291478735,
+          4293386475,
+          4294307578,
+          4294834175,
+          4294966271,
+          4294967295,
+        ])),
+      );
+    });
     //
+  });
+  //
+  //****************************************************************************
+  // FlexTonalPalette unit tests.
+  //
+  // Basic object tests, equality, none equal.
+  //****************************************************************************
+  group('FTP1: WITH FlexTonalPalette ', () {
+    const List<int> commonTones = <int>[
+      0,
+      5,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      95,
+      98,
+      99,
+      100,
+    ];
+    // m1, is tonal palettes using FlexTonalPalette.
+    final FlexTonalPalette m1 = FlexTonalPalette.of(40, 55);
+    final FlexTonalPalette m2 = FlexTonalPalette.of(40, 55);
+    // m3, is tonal palettes using TonalPalette.
+    final TonalPalette m3 = TonalPalette.of(40, 55);
+    // m4, is tonal palette from list
+    final FlexTonalPalette m4 = FlexTonalPalette.fromList(const <int>[
+      4278190080,
+      4280616704,
+      4281798144,
+      4284095488,
+      4286524160,
+      4288692500,
+      4290795563,
+      4292964674,
+      4294937692,
+      4294948249,
+      4294958030,
+      4294962663,
+      4294965494,
+      4294966271,
+      4294967295
+    ]);
+    // m5, is tonal palette from list, same as m4
+    final FlexTonalPalette m5 = FlexTonalPalette.fromList(const <int>[
+      4278190080,
+      4280616704,
+      4281798144,
+      4284095488,
+      4286524160,
+      4288692500,
+      4290795563,
+      4292964674,
+      4294937692,
+      4294948249,
+      4294958030,
+      4294962663,
+      4294965494,
+      4294966271,
+      4294967295
+    ]);
+
+    test(
+        'FTP1.U01: GIVEN to identical FlexTonalPalette.of '
+        'EXPECT them to be equal', () {
+      expect(
+        m1,
+        equals(m2),
+      );
+    });
+    test(
+        'FTP1.U02: GIVEN to identical FlexTonalPalette.fromList '
+        'EXPECT them to be equal', () {
+      expect(
+        m4,
+        equals(m5),
+      );
+    });
+    test(
+        'FTP1.U03: GIVEN to identical FlexTonalPalette '
+        'EXPECT their asList to be equal', () {
+      expect(
+        m1.asList,
+        equals(m2.asList),
+      );
+    });
+    test(
+        'FTP1.U04: GIVEN a FlexTonalPalette.of(40.0, 55.0) '
+        'EXPECT its toString to be "FlexTonalPalette.of(40.0, 55.0)"', () {
+      expect(
+        m1.toString(),
+        equals('FlexTonalPalette.of(40.0, 55.0)'),
+      );
+    });
+    test(
+        'FTP1.U05: GIVEN same FlexTonalPalette.of and '
+        'TonalPalette.of using same input color '
+        'EXPECT palette lists to be equal without tone 5 and 98', () {
+      // If we remove the tones 5 and 98 that MaterialColorUtilities
+      // CorePalette.of does not include, out custom list should be equal.
+      final List<int> m1List = m1.asList;
+      final List<int> m1No5and98List = <int>[];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        if (commonTones[i] != 5 && commonTones[i] != 98) {
+          m1No5and98List.add(m1List[i]);
+        }
+      }
+      expect(
+        m1No5and98List,
+        equals(m3.asList),
+      );
+    });
+    test(
+        'FTP1.U06: GIVEN to FlexTonalPalette fromList '
+        'EXPECT it to be equal to same created with FlexTonalPalette.of', () {
+      expect(
+        m1,
+        equals(m4),
+      );
+    });
+    test(
+        'FCP1.U07: GIVEN a FlexTonalPalette.fromList '
+        'EXPECT its toString to be "FlexTonalPalette.fromList(...)"', () {
+      // ignore: lines_longer_than_80_chars
+      expect(
+        m4.toString(),
+        equals(
+            // ignore: lines_longer_than_80_chars
+            'FlexTonalPalette.fromList({0: 4278190080, 5: 4280616704, 10: 4281798144, 20: 4284095488, 30: 4286524160, 40: 4288692500, 50: 4290795563, 60: 4292964674, 70: 4294937692, 80: 4294948249, 90: 4294958030, 95: 4294962663, 98: 4294965494, 99: 4294966271, 100: 4294967295})'),
+      );
+    });
+    test(
+        'FTP1.U08: GIVEN same FlexTonalPalette.of '
+        'EXPECT each of its tones to match output asList', () {
+      const List<int> m1List = <int>[
+        4278190080,
+        4280616704,
+        4281798144,
+        4284095488,
+        4286524160,
+        4288692500,
+        4290795563,
+        4292964674,
+        4294937692,
+        4294948249,
+        4294958030,
+        4294962663,
+        4294965494,
+        4294966271,
+        4294967295
+      ];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        expect(
+          m1.get(commonTones[i]),
+          equals(m1List[i]),
+        );
+      }
+    });
+    test(
+        'FTP1.U09: GIVEN same FlexTonalPalette.fromList '
+        'EXPECT each of its tones to match output asList', () {
+      const List<int> m5List = <int>[
+        4278190080,
+        4280616704,
+        4281798144,
+        4284095488,
+        4286524160,
+        4288692500,
+        4290795563,
+        4292964674,
+        4294937692,
+        4294948249,
+        4294958030,
+        4294962663,
+        4294965494,
+        4294966271,
+        4294967295
+      ];
+      for (int i = 0; i <= commonTones.length - 1; i++) {
+        expect(
+          m5.get(commonTones[i]),
+          equals(m5List[i]),
+        );
+      }
+    });
   });
 }
