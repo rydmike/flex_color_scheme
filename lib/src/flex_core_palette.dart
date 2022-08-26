@@ -5,38 +5,185 @@ import 'package:meta/meta.dart' show immutable;
 
 // ignore_for_file: comment_references
 
-// Background of why having custom versions of CorePalette and TonalPalette.
+// Background: Why make custom versions of CorePalette and TonalPalette?
+// (Mostly so author will remember it later)
 //
-// The FlexCorePalette and FlexTonalPalette below are used to create a custom
-// version of material_color_utilities CorePalette and TonalPalette.
-// FlexCorePalette has the needed [fromSeeds] factory that is a bit more
-// efficient than a version that extends CorePalette, thanks to reduced
-// interface overhead. Some more ramblings below.
+// The FlexCorePalette and FlexTonalPalette below are used to create custom
+// versions of material_color_utilities CorePalette and TonalPalette.
+// FlexCorePalette has an additional [fromSeeds] factory that is a bit more
+// efficient than a version that would extend from CorePalette, via reduced
+// interface overhead. More reminder ramblings below.
 //
-// The conversion of [TonalPalette]es to a list of ints and having super
+// The conversion of TonalPalettes to a list of ints, and having super
 // create the CorePalette from this list, has unneeded extra overhead.
-// It would be a bit more efficient to make an own implementation
-// of this simple mid-layer that has the needed constructors directly.
-// Keeping this version around as a small private classes so I can later
-// benchmark and see if it makes a difference. Perhaps it does not matter,
-// in that case extending the parent [CorePalette] is a bit prettier.
-// But its interface feels a bit like using FFI.
+// It is a bit more efficient to make and use an own implementation
+// of this simple mid-layer that has the needed constructors fromSeed directly.
+// Perhaps it does not matter, in that case extending the parent [CorePalette]
+// to make FlexCorePalette is an option, I have one stashed away, but its
+// constructor interface felt a bit like using FFI.
 //
-// The [CorePalette] in Material Color Utilities is just a convenience
-// wrapper for the needed [TonalPalette]s, that are used by an additional
-// upper layer called [Scheme] that [ColorScheme.fromSeed] uses to create
-// a [ColorScheme] from a seed color. To make a [ColorScheme.fromSeeds]
-// versions of it, we need to make a slightly modified version of it anyway.
-// The usage of [CorePalette.of] is hard coded into the upper layer, so we
-// cannot plug-in our extended version of it anyway.
+// The [CorePalette] in Material Color Utilities is a convenience wrapper for
+// the needed [TonalPalette]s, that is used by an additional upper layer
+// called [Scheme] that [ColorScheme.fromSeed] uses to create
+// a [ColorScheme] from a seed color. To in FlexColorScheme make a ColorScheme
+// "fromSeeds" version, we need to make a slightly modified version of [Scheme]
+// too. The usage of [CorePalette.of] is hard coded into it, so we
+// cannot plug-in our version of FlexCorePalette in it anyway.
 //
-// It seems better to use a custom modified version of [CorePalette]
-// instead and name it [FlexCorePalette]. It does not share parent
-// with [CorePalette], but it is not needed, it is just color utility class.
+// Considering we need a custom version [Scheme] and [TonalPalette] it seemed
+// we might as well make modified re-implementation version of [CorePalette] as
+// well instead of extending from [CorePalette] and name it [FlexCorePalette].
+// Downside, it does not share parent with [CorePalette], like earlier
+// implementation did when this class was a part of [FlexColorScheme] package,
+// but it is not really needed, it is just color utility class.
 //
 // Regarding the custom version of TonalPalette, named FlexTonalPalette, there
 // was just no convenient way to add the desired tones 5 and 98 to it without
-// making our own version of it.
+// making our own version of it. Future version of [TonalPalette] in package
+// material_color_utilities might add tone 98, as it exists in Web tool, but
+// not in M3 guide, so who knows. We liked tone 98 for more light tone options.
+
+/// A convenience class for retrieving colors that are constant in hue and
+/// chroma, but vary in tone.
+///
+/// This is a modification of package:material_color_utilities [TonalPalette]
+/// to be able to add the tone 98 that the Web based utility has, as well as
+/// an additional custom tone 5.
+///
+/// This class can be instantiated in two ways:
+/// 1. [of] From hue and chroma. (preferred)
+/// 2. [fromList] From a fixed-size ([FlexTonalPalette.commonSize]) list of
+/// int representing ARBG colors. Correctness (constant hue and chroma) of the
+/// input is not enforced. [get] will only return the input colors,
+/// corresponding to [commonTones].
+@immutable
+class FlexTonalPalette {
+  // If changed commonTones length, update commonSize to commonTones.length.
+  // There is a test and assert that fails if you did not.
+  //
+  /// Commonly-used tone values in a [FlexTonalPalette].
+  ///
+  /// Contains custom tones 5 and 98, in addition to the 13 tones included
+  /// in the Material 3 guide. The tone 98 also exists in the
+  /// [Web Material Theme Builder app](https://m3.material.io/theme-builder#/custom),
+  /// but not in Flutter or
+  /// [Material Color Utilities package](https://pub.dev/packages/material_color_utilities).
+  /// Tone 5 is custom addition used in e.g. in [FlexTones.ultraContrast].
+  static const List<int> commonTones = <int>[
+    0,
+    5,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    95,
+    98,
+    99,
+    100,
+  ];
+
+  // If changed commonTones length, update commonSize to commonTones.length.
+  // There is a test and assert that fails if you did not.
+  //
+  ///
+  /// In original implementation package:material_color_utilities it is
+  /// defined as well, presumably for improved efficiency, there set to
+  /// [commonTones.length].
+  ///
+  /// Here it instead manually set to compile time const of same const list
+  /// length.
+  static const int commonSize = 15;
+
+  final double? _hue;
+  final double? _chroma;
+  final Map<int, int> _cache;
+
+  FlexTonalPalette._fromHueAndChroma(double hue, double chroma)
+      : _cache = <int, int>{},
+        _hue = hue,
+        _chroma = chroma;
+
+  const FlexTonalPalette._fromCache(Map<int, int> cache)
+      : _cache = cache,
+        _hue = null,
+        _chroma = null;
+
+  /// Create colors using [hue] and [chroma].
+  static FlexTonalPalette of(double hue, double chroma) {
+    return FlexTonalPalette._fromHueAndChroma(hue, chroma);
+  }
+
+  /// Create colors from a fixed-size list of ARGB color ints.
+  ///
+  /// Inverse of [FlexTonalPalette.asList].
+  static FlexTonalPalette fromList(List<int> colors) {
+    assert(colors.length == commonSize, 'Length must be $commonSize');
+    Map<int, int> cache;
+    cache = <int, int>{};
+    commonTones.asMap().forEach(
+        (int index, int toneValue) => cache[toneValue] = colors[index]);
+    return FlexTonalPalette._fromCache(cache);
+  }
+
+  /// Returns a fixed-size list of ARGB color ints for common tone values.
+  ///
+  /// Inverse of [fromList].
+  List<int> get asList => commonTones.map(get).toList();
+
+  /// Returns the ARGB representation of an HCT color.
+  ///
+  /// If the class was instantiated from [_hue] and [_chroma], will return the
+  /// color with corresponding [tone].
+  /// If the class was instantiated from a fixed-size list of color ints, [tone]
+  /// must be in [commonTones].
+  int get(int tone) {
+    if (_hue == null || _chroma == null) {
+      if (!_cache.containsKey(tone)) {
+        throw ArgumentError.value(
+          tone,
+          'tone',
+          'When a FlexTonalPalette is created with fromList, tone must be '
+              'one of $commonTones',
+        );
+      } else {
+        return _cache[tone]!;
+      }
+    }
+    final double chroma = (tone >= 90.0) ? math.min(_chroma!, 40.0) : _chroma!;
+    return _cache.putIfAbsent(
+        tone, () => Hct.from(_hue!, chroma, tone.toDouble()).toInt());
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is FlexTonalPalette) {
+      if (_hue != null && _chroma != null) {
+        return _hue == other._hue && _chroma == other._chroma;
+      } else {
+        return _cache.values.toSet().containsAll(other._cache.values);
+      }
+    }
+    return false;
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(_hue, _chroma) ^ Object.hashAll(_cache.values);
+
+  @override
+  String toString() {
+    if (_hue != null && _chroma != null) {
+      return 'FlexTonalPalette.of($_hue, $_chroma)';
+    } else {
+      return 'FlexTonalPalette.fromList($_cache)';
+    }
+  }
+}
 
 /// An intermediate concept between the key color for a UI theme, and a full
 /// color scheme. Five tonal palettes are generated, plus fixed error palette.
@@ -100,6 +247,9 @@ class FlexCorePalette {
         tertiary = FlexTonalPalette.of(hue + 60, 24),
         neutral = FlexTonalPalette.of(hue, 4),
         neutralVariant = FlexTonalPalette.of(hue, 8);
+
+  // TODO(rydmike): Consider adding neutrals ARGB and chroma input parameters.
+  // TODO(rydmike): Consider adding error ARGB and chroma input parameters.
 
   /// Create a [FlexCorePalette] from one to three seed colors.
   ///
@@ -315,18 +465,18 @@ class FlexCorePalette {
   ///
   /// Inverse of [asList].
   FlexCorePalette.fromList(List<int> colors)
-      : assert(colors.length == size * FlexTonalPalette._commonSize,
+      : assert(colors.length == size * FlexTonalPalette.commonSize,
             'Incorrect size.'),
         primary = FlexTonalPalette.fromList(
-            _getPartition(colors, 0, FlexTonalPalette._commonSize)),
+            _getPartition(colors, 0, FlexTonalPalette.commonSize)),
         secondary = FlexTonalPalette.fromList(
-            _getPartition(colors, 1, FlexTonalPalette._commonSize)),
+            _getPartition(colors, 1, FlexTonalPalette.commonSize)),
         tertiary = FlexTonalPalette.fromList(
-            _getPartition(colors, 2, FlexTonalPalette._commonSize)),
+            _getPartition(colors, 2, FlexTonalPalette.commonSize)),
         neutral = FlexTonalPalette.fromList(
-            _getPartition(colors, 3, FlexTonalPalette._commonSize)),
+            _getPartition(colors, 3, FlexTonalPalette.commonSize)),
         neutralVariant = FlexTonalPalette.fromList(
-            _getPartition(colors, 4, FlexTonalPalette._commonSize));
+            _getPartition(colors, 4, FlexTonalPalette.commonSize));
 
   /// Returns a list of ARGB color [int]s from concatenated tonal palettes.
   ///
@@ -350,7 +500,7 @@ class FlexCorePalette {
       neutralVariant == other.neutralVariant &&
       error == other.error;
 
-  /// Override for hashcode, dart.ui Jenkins based.
+  /// Override hashcode.
   @override
   int get hashCode => Object.hashAll(<Object?>[
         primary,
@@ -385,127 +535,5 @@ class FlexCorePalette {
       partitionNumber * partitionSize,
       (partitionNumber + 1) * partitionSize,
     );
-  }
-}
-
-/// A convenience class for retrieving colors that are constant in hue and
-/// chroma, but vary in tone.
-///
-/// This is a modification of package:material_color_utilities [TonalPalette]
-/// to be able to add the tone 98 that the Web based utility has, as well as
-/// an additional custom tone 5.
-///
-/// This class can be instantiated in two ways:
-/// 1. [of] From hue and chroma. (preferred)
-/// 2. [fromList] From a fixed-size ([FlexTonalPalette._commonSize]) list of
-/// int representing ARBG colors. Correctness (constant hue and chroma) of the
-/// input is not enforced. [get] will only return the input colors,
-/// corresponding to [commonTones].
-@immutable
-class FlexTonalPalette {
-  /// Commonly-used tone values.
-  static const List<int> commonTones = <int>[
-    0,
-    5,
-    10,
-    20,
-    30,
-    40,
-    50,
-    60,
-    70,
-    80,
-    90,
-    95,
-    98,
-    99,
-    100,
-  ];
-
-  static final int _commonSize = commonTones.length;
-
-  final double? _hue;
-  final double? _chroma;
-  final Map<int, int> _cache;
-
-  FlexTonalPalette._fromHueAndChroma(double hue, double chroma)
-      : _cache = <int, int>{},
-        _hue = hue,
-        _chroma = chroma;
-
-  const FlexTonalPalette._fromCache(Map<int, int> cache)
-      : _cache = cache,
-        _hue = null,
-        _chroma = null;
-
-  /// Create colors using [hue] and [chroma].
-  static FlexTonalPalette of(double hue, double chroma) {
-    return FlexTonalPalette._fromHueAndChroma(hue, chroma);
-  }
-
-  /// Create colors from a fixed-size list of ARGB color ints.
-  ///
-  /// Inverse of [FlexTonalPalette.asList].
-  static FlexTonalPalette fromList(List<int> colors) {
-    assert(colors.length == _commonSize, 'Length must be $_commonSize');
-    Map<int, int> cache;
-    cache = <int, int>{};
-    commonTones.asMap().forEach(
-        (int index, int toneValue) => cache[toneValue] = colors[index]);
-    return FlexTonalPalette._fromCache(cache);
-  }
-
-  /// Returns a fixed-size list of ARGB color ints for common tone values.
-  ///
-  /// Inverse of [fromList].
-  List<int> get asList => commonTones.map(get).toList();
-
-  /// Returns the ARGB representation of an HCT color.
-  ///
-  /// If the class was instantiated from [_hue] and [_chroma], will return the
-  /// color with corresponding [tone].
-  /// If the class was instantiated from a fixed-size list of color ints, [tone]
-  /// must be in [commonTones].
-  int get(int tone) {
-    if (_hue == null || _chroma == null) {
-      if (!_cache.containsKey(tone)) {
-        throw ArgumentError.value(
-          tone,
-          'tone',
-          'When a FlexTonalPalette is created with fromList, tone must be '
-              'one of $commonTones',
-        );
-      } else {
-        return _cache[tone]!;
-      }
-    }
-    final double chroma = (tone >= 90.0) ? math.min(_chroma!, 40.0) : _chroma!;
-    return _cache.putIfAbsent(
-        tone, () => Hct.from(_hue!, chroma, tone.toDouble()).toInt());
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (other is FlexTonalPalette) {
-      if (_hue != null && _chroma != null) {
-        return _hue == other._hue && _chroma == other._chroma;
-      } else {
-        return _cache.values.toSet().containsAll(other._cache.values);
-      }
-    }
-    return false;
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(_hue, _chroma) ^ Object.hashAll(_cache.values);
-
-  @override
-  String toString() {
-    if (_hue != null && _chroma != null) {
-      return 'FlexTonalPalette.of($_hue, $_chroma)';
-    } else {
-      return 'FlexTonalPalette.fromList($_cache)';
-    }
   }
 }

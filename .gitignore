@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+migrate_working_dir/
 **.fvm/
 .fvm
 .fvm/
@@ -37,6 +38,17 @@ example/.fvm
 /build/
 build/
 
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
@@ -46,19 +58,8 @@ build/
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
 # Web related
 lib/generated_plugin_registrant.dart
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -94,4 +95,3 @@ app.*.map.json
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-
