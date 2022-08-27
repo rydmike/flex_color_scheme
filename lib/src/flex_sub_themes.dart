@@ -378,13 +378,11 @@ class FlexSubThemes {
     }
   }
 
-  // TODO(rydmike): Remove when ButtonThemeData is deprecated in SDK.
-  /// DEPRECATED: An opinionated `ButtonThemeData` theme.
+  /// An opinionated `ButtonThemeData` theme.
   ///
   /// This `ButtonThemeData` is marked as **obsolete** in Flutter SDK
   /// documentation, but not yet deprecated in Flutter SDK 3.3.0.
-  /// FlexColorscheme now marks it as deprecated. It will be removed in FCS
-  /// released after Flutter SDK fully deprecates ButtonThemeData.
+  /// It will be removed in FCS after Flutter SDK deprecates ButtonThemeData.
   ///
   /// This theme is used to provide the same opinionated theme and style on
   /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
@@ -398,15 +396,12 @@ class FlexSubThemes {
   /// It is used to make the buttons match the padding on the newer buttons.
   ///
   /// The above legacy buttons this sub theme is for, will be completely
-  /// removed in Flutter stable version after 2.10.x. The `ButtonThemeData`
-  /// this helper uses will however remain available after that, because widgets
+  /// removed in Flutter stable version. The `ButtonThemeData` this helper uses
+  /// will however remain available after that, because widgets
   /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
-  /// in FlexColorScheme package as long as it might have some use.
-  @Deprecated('The ButtonThemeData is marked as obsolete in Flutter SDK, but '
-      'not yet deprecated in Flutter version 3.3.0. FlexColorscheme marks '
-      'it as deprecated. It will be removed in FCS released after Flutter SDK '
-      'fully deprecates ButtonThemeData.')
+  /// in FlexColorScheme package as long as it might have some use and exists
+  /// in Flutter stable SDK.
   static ButtonThemeData buttonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,

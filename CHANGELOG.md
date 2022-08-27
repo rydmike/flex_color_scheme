@@ -107,25 +107,16 @@ issues.
 
 **REMOVED EARLIER DEPRECATED MEMBERS**
 
-Removed in versions 4 and 5 deprecated members as follows.
+Removed in versions 4 and 5 deprecated members as follows:
 
-**FlexSubThemesData:**
-* `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, `navigationBarIsStyled` 
-  `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`, `navigationBarIconSchemeColor`
-  `navigationBarHighlightSchemeColor`
-
-**FlexColorScheme:**
-* `primaryVariant`, `secondaryVariant`, `useSubThemes`
-
-**FlexThemeData:**
-* `primaryVariant`, `secondaryVariant`, `useSubThemes`
-
-**SchemeColor:**
-* `primaryVariant`, `secondaryVariant`
- 
-**FlexConstants:**
-* `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`
-
+* *FlexSubThemesData:* `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, 
+  `navigationBarIsStyled`, `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`,
+  `navigationBarIconSchemeColor`, `navigationBarHighlightSchemeColor`
+* *FlexColorScheme:* `primaryVariant`, `secondaryVariant`, `useSubThemes`
+* *FlexThemeData:* `primaryVariant`, `secondaryVariant`, `useSubThemes`
+* *SchemeColor:* `primaryVariant`, `secondaryVariant`
+* *FlexConstants:* `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`,
+  `kDarkenPrimaryVariant`
 
 **STYLE CHANGE - BREAKING**
 
@@ -201,8 +192,10 @@ Removed in versions 4 and 5 deprecated members as follows.
 
 **CHANGE**
   
+* Un-deprecated earlier internal deprecation of `FlexSubThemes.buttonTheme`, as long as Flutter
+  SDK has not deprecated it, neither will FCS.
 * To support deprecation of `toggleableActiveColor` when PR 
-  [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,  
+  [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,
   while retaining the previous FCS defaults for `Switch`, `CheckBox` and `Radio` widgets, when 
   not opting in on component sub-themes. The created `SwitchThemeData`, `CheckboxThemeData` and
   `CheckboxThemeData` can no longer be null, when not opting in on sub-themes like before.
