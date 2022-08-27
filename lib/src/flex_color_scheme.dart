@@ -4378,11 +4378,6 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to Brightness.light.
     final Brightness nullContextBrightness = Brightness.light,
-
-    /// Deprecated property, use systemNavigationBarColor instead.
-    @Deprecated('This property is deprecated use systemNavigationBarColor '
-        'instead. Deprecated in v2.0.0.')
-        Color? nullContextBackground,
   }) {
     double usedOpacity = opacity;
     if (usedOpacity < 0) usedOpacity = 0;
@@ -4398,12 +4393,7 @@ class FlexColorScheme with Diagnosticable {
     if (usedOpacity < 1) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
-    // Background color logic.
-    //
-    // If systemNavigationBarColor is null, we assign nullContextBackground
-    // to it, that may also be null. This is done for backwards compatibility.
-    final Color? navigationBarColor =
-        systemNavigationBarColor ?? nullContextBackground;
+
     // If context was null, use nullContextBrightness as brightness value.
     final bool isDark = context != null
         ? Theme.of(context).brightness == Brightness.dark
@@ -4424,7 +4414,7 @@ class FlexColorScheme with Diagnosticable {
         : (isDark ? Colors.black : Colors.white);
     // If a systemNavigationBarColor color is given, it will always be used,
     // If it is not given, we use above flexBackground.
-    final Color background = navigationBarColor ?? flexBackground;
+    final Color background = systemNavigationBarColor ?? flexBackground;
 
     // TODO(rydmike): Remove SysNavBar workaround when issue #100027 solved.
     // See issue: https://github.com/flutter/flutter/issues/100027

@@ -1078,9 +1078,7 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFFCCCCCC),
+          systemNavigationBarColor: const Color(0xFFCCCCCC),
         ),
         equals(
           const SystemUiOverlayStyle(
@@ -1163,9 +1161,7 @@ void main() {
           null,
           useDivider: false,
           nullContextBrightness: Brightness.dark,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         equals(
           const SystemUiOverlayStyle(
@@ -1186,9 +1182,7 @@ void main() {
           null,
           useDivider: false,
           nullContextBrightness: Brightness.dark,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         equals(
           FlexColorScheme.themedSystemNavigationBar(
@@ -1208,9 +1202,7 @@ void main() {
           null,
           useDivider: true,
           nullContextBrightness: Brightness.dark,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
@@ -1231,9 +1223,6 @@ void main() {
           useDivider: false,
           nullContextBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFF4545F3),
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
@@ -1294,12 +1283,9 @@ void main() {
         FlexColorScheme.themedSystemNavigationBar(
           null,
           useDivider: true,
-
           opacity: 1,
           nullContextBrightness: Brightness.dark,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
@@ -1343,9 +1329,7 @@ void main() {
           useDivider: true,
           opacity: 0.5,
           nullContextBrightness: Brightness.dark,
-          // Testing that the deprecated member still works as it should.
-          // ignore: deprecated_member_use_from_same_package
-          nullContextBackground: const Color(0xFF202020),
+          systemNavigationBarColor: const Color(0xFF202020),
         ),
         SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
