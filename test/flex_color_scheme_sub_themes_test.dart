@@ -278,63 +278,64 @@ void main() {
         equals(fcsScheme.primaryContainer.withOpacity(0.8)),
       );
     });
-    test(
-        'FCS8.007-deprecated: GIVEN a FlexColorScheme.light with sub themes '
-        'using deprecated sub-themes members '
-        'EXPECT them to produce past results via new members. ', () {
-      final FlexColorScheme fcs = FlexColorScheme.light(
-        scheme: FlexScheme.flutterDash,
-        blendLevel: 0,
-        subThemesData: const FlexSubThemesData(
-          inputDecoratorRadius: 15,
-          bottomNavigationBarSchemeColor: SchemeColor.surfaceVariant,
-          navigationBarHighlightSchemeColor: SchemeColor.tertiary,
-          navigationBarTextSchemeColor: SchemeColor.secondary,
-          navigationBarIconSchemeColor: SchemeColor.secondaryContainer,
-          navigationBarMutedUnselectedText: false,
-        ),
-      );
-      final ColorScheme fcsScheme = fcs.toScheme;
-      final ThemeData fcsTheme = fcs.toTheme;
-      expect(
-        fcsTheme.inputDecorationTheme.enabledBorder,
-        equals(OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-          borderSide: BorderSide(
-            color: fcs.colorScheme!.primary.withAlpha(0xA7),
-            width: 1.5,
-          ),
-        )),
-      );
-      expect(
-        fcsTheme.bottomNavigationBarTheme.backgroundColor,
-        equals(fcsScheme.surfaceVariant),
-      );
-      expect(
-        fcsTheme.navigationBarTheme.indicatorColor,
-        equals(fcsScheme.tertiary.withOpacity(0.24)),
-      );
-      expect(
-        fcsTheme.navigationBarTheme.labelTextStyle!
-            .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(fcsScheme.secondary),
-      );
-      expect(
-        fcsTheme.navigationBarTheme.labelTextStyle!
-            .resolve(<MaterialState>{})?.color,
-        equals(fcsScheme.onSurface),
-      );
-      expect(
-        fcsTheme.navigationBarTheme.iconTheme!
-            .resolve(<MaterialState>{MaterialState.selected})?.color,
-        equals(fcsScheme.secondaryContainer),
-      );
-      expect(
-        fcsTheme.navigationBarTheme.iconTheme!
-            .resolve(<MaterialState>{})?.color,
-        equals(fcsScheme.onSurface.withAlpha(0xA5)),
-      );
-    });
+    // TODO: Remove this code
+    // test(
+    //     'FCS8.007-deprecated: GIVEN a FlexColorScheme.light with sub themes '
+    //     'using deprecated sub-themes members '
+    //     'EXPECT them to produce past results via new members. ', () {
+    //   final FlexColorScheme fcs = FlexColorScheme.light(
+    //     scheme: FlexScheme.flutterDash,
+    //     blendLevel: 0,
+    //     subThemesData: const FlexSubThemesData(
+    //       inputDecoratorRadius: 15,
+    //       bottomNavigationBarSchemeColor: SchemeColor.surfaceVariant,
+    //       navigationBarHighlightSchemeColor: SchemeColor.tertiary,
+    //       navigationBarTextSchemeColor: SchemeColor.secondary,
+    //       navigationBarIconSchemeColor: SchemeColor.secondaryContainer,
+    //       navigationBarMutedUnselectedText: false,
+    //     ),
+    //   );
+    //   final ColorScheme fcsScheme = fcs.toScheme;
+    //   final ThemeData fcsTheme = fcs.toTheme;
+    //   expect(
+    //     fcsTheme.inputDecorationTheme.enabledBorder,
+    //     equals(OutlineInputBorder(
+    //       borderRadius: const BorderRadius.all(Radius.circular(15)),
+    //       borderSide: BorderSide(
+    //         color: fcs.colorScheme!.primary.withAlpha(0xA7),
+    //         width: 1.5,
+    //       ),
+    //     )),
+    //   );
+    //   expect(
+    //     fcsTheme.bottomNavigationBarTheme.backgroundColor,
+    //     equals(fcsScheme.surfaceVariant),
+    //   );
+    //   expect(
+    //     fcsTheme.navigationBarTheme.indicatorColor,
+    //     equals(fcsScheme.tertiary.withOpacity(0.24)),
+    //   );
+    //   expect(
+    //     fcsTheme.navigationBarTheme.labelTextStyle!
+    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
+    //     equals(fcsScheme.secondary),
+    //   );
+    //   expect(
+    //     fcsTheme.navigationBarTheme.labelTextStyle!
+    //         .resolve(<MaterialState>{})?.color,
+    //     equals(fcsScheme.onSurface),
+    //   );
+    //   expect(
+    //     fcsTheme.navigationBarTheme.iconTheme!
+    //         .resolve(<MaterialState>{MaterialState.selected})?.color,
+    //     equals(fcsScheme.secondaryContainer),
+    //   );
+    //   expect(
+    //     fcsTheme.navigationBarTheme.iconTheme!
+    //         .resolve(<MaterialState>{})?.color,
+    //     equals(fcsScheme.onSurface.withAlpha(0xA5)),
+    //   );
+    // });
     test(
         'FCS8.008-deprecated: GIVEN a FlexColorScheme.light with old '
         'variant colors input, '
