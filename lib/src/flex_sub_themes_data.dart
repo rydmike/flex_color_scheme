@@ -199,13 +199,7 @@ class FlexSubThemesData with Diagnosticable {
     bool? navigationBarMutedUnselectedLabel,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
-    SchemeColor? navigationBarSelectedIconSchemeColor,
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been renamed to: '
-        'navigationBarSelectedIconSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        this.navigationBarIconSchemeColor,
+    this.navigationBarSelectedIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
     SchemeColor? navigationBarIndicatorSchemeColor,
@@ -242,8 +236,6 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
   })  : _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
-        _navigationBarSelectedIconSchemeColor =
-            navigationBarSelectedIconSchemeColor,
         _navigationBarIndicatorSchemeColor = navigationBarIndicatorSchemeColor;
 
   /// Opt-in on using color branded hover, focus, highlight and splash
@@ -1431,18 +1423,7 @@ class FlexSubThemesData with Diagnosticable {
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.onSurface] in M2 and [ColorScheme.onSecondaryContainer]
   /// in M3.
-  SchemeColor? get navigationBarSelectedIconSchemeColor =>
-      _navigationBarSelectedIconSchemeColor ?? navigationBarIconSchemeColor;
-  final SchemeColor? _navigationBarSelectedIconSchemeColor;
-
-  /// Deprecated and replaced by [navigationBarSelectedIconSchemeColor].
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been renamed to: '
-      'navigationBarSelectedIconSchemeColor. '
-      'This property will be completely removed in version 6.0.0.')
-  final SchemeColor? navigationBarIconSchemeColor;
+  final SchemeColor? navigationBarSelectedIconSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
   /// the [NavigationBar]'s unselected item icon color.
