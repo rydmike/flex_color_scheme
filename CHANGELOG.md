@@ -34,17 +34,6 @@ issues.
 
 **NEW**
 
-* Added support for new Flutter SDK `ColorScheme` colors `outlineVariant` and `scrim`.
-
-* The enum `SchemeColor` has new values and past values are in a new order. The 
-  **order was changed** to accommodate new color values `outlineVariant` and `scrim` and to keep 
-  them in the same order as their corresponding color properties in Flutter SDK updated
-  `ColorScheme`. The change of order is potentially breaking concerning index values of the enums,
-  but unlikely to break anything in a major way, other than possibly local storage of selected
-  enum values. In the bundled example applications and Themes Playground, you might for example see
-  wrong color selections loaded from local storage, just reset persisted theme or select correct
-  value to fix it.
-
 * Added two new `FlexTones`.
   1. `FlexTones.ultraContrast` with even more contrast that `highContrast`.
   2. `FlexTones.jolly` for a seeded `ColorScheme` with more poppy and jolly seed colors.
