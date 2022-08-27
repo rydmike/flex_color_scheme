@@ -45,23 +45,10 @@ class FlexSchemeColor with Diagnosticable {
     this.appBarColor,
     this.error,
     this.errorContainer,
-    @Deprecated('Use primaryContainer instead. '
-        'In FlexSchemeColor old primaryContainer built-in colors were moved to '
-        'the primaryContainer color since their design fitted that role best. '
-        'This property was deprecated after FlexColorScheme v4.2.0.')
-        Color? primaryVariant,
-    @Deprecated(
-        'Use secondaryContainer, tertiary or tertiaryContainer instead. '
-        'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
-        'the tertiary color since their design fitted that role best. '
-        'This property was deprecated after FlexColorScheme v4.2.0.')
-        Color? secondaryVariant,
   })  : _primaryContainer = primaryContainer,
         _secondaryContainer = secondaryContainer,
         _tertiary = tertiary,
-        _tertiaryContainer = tertiaryContainer,
-        _primaryVariant = primaryVariant,
-        _secondaryVariant = secondaryVariant;
+        _tertiaryContainer = tertiaryContainer;
 
   /// The color displayed most frequently across your application's screens
   /// and components.
@@ -72,7 +59,7 @@ class FlexSchemeColor with Diagnosticable {
   final Color? _primaryContainer;
 
   /// A color used for elements needing less emphasis than [primary].
-  Color get primaryContainer => _primaryContainer ?? _primaryVariant ?? primary;
+  Color get primaryContainer => _primaryContainer ?? primary;
 
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your app.
@@ -85,8 +72,7 @@ class FlexSchemeColor with Diagnosticable {
   //  It is only used to keep the old mapping during dev to get old color on
   //  it in example app before we have defined it.
   /// A color used for elements needing less emphasis than [secondary].
-  Color get secondaryContainer =>
-      _secondaryContainer ?? _secondaryVariant ?? secondary;
+  Color get secondaryContainer => _secondaryContainer ?? secondary;
 
   // A private color used as a contrasting accent that can balance [primary]
   // and [secondary] colors or bring heightened attention to an element,
@@ -120,51 +106,9 @@ class FlexSchemeColor with Diagnosticable {
   /// A color used for error elements needing less emphasis than [error].
   final Color? errorContainer;
 
-  // A private darker version of primary color, set via constructor init list.
-  // Used to support deprecated value as null with past defaults as fallback.
-  final Color? _primaryVariant;
-
-  /// A darker version of the primary color.
-  ///
-  /// In Flutter SDK before v 2.10 the `primaryVariant` color is only used
-  /// by [SnackBar] button color in dark theme mode as a part of predefined
-  /// widget behavior.
-  /// If you provide a custom [SnackBarThemeData] where you define
-  /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-  /// color property becomes a good property to use if you need a custom color
-  /// for custom widgets accessible via your application's ThemeData, that is
-  /// not used as default color by any built-in widgets.
-  @Deprecated('Use primaryContainer instead. '
-      'In FlexSchemeColor the new primaryContainer use old primaryVariant '
-      'as fallback if un-assigned in custom FlexSchemeColor schemes. '
-      'An old value for it in a custom scheme, may however not be a perfect '
-      'for primaryContainer in Material 3 color design. '
-      'This property was deprecated after FlexColorScheme v4.2.0.')
-  Color get primaryVariant => _primaryVariant ?? _primaryContainer ?? primary;
-
-  // A private color, typically a darker version of the secondary color, set via
-  // constructor initializer. Used to support deprecated value as null with
-  // past defaults as fallback.
-  final Color? _secondaryVariant;
-
-  /// Typically a darker version of the secondary color.
-  ///
-  /// In Flutter SDK the `secondaryVariant` color is not used by in any
-  /// built-in widgets default themes or predefined widget behavior.
-  /// It is an excellent property to use if you need a custom color for
-  /// custom widgets accessible via your application's ThemeData, that is
-  /// not used as default color by any built-in widgets.
-  @Deprecated('Use secondaryContainer, tertiary or tertiaryContainer instead. '
-      'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
-      'the tertiary color since their design fitted that role best. '
-      'If you in custom old FlexSchemeColor scheme use secondaryVariant and '
-      'have not assigned a value to the new property secondaryContainer, it '
-      'will fallback via secondaryVariant to create similar looking scheme '
-      'as before by using the old secondaryVariant on new secondaryContainer. '
-      'Be aware though that it may not be a perfect fit for the design intent '
-      'of the new secondaryContainer color property. '
-      'This property was deprecated after FlexColorScheme v4.2.0.')
-  Color get secondaryVariant => _secondaryVariant ?? _tertiary ?? secondary;
+  // // A private darker version of primary color, set via constructor init list.
+  // // Used to support deprecated value as null with past defaults as fallback.
+  // final Color? _primaryVariant;
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
@@ -191,25 +135,6 @@ class FlexSchemeColor with Diagnosticable {
     Color? error,
     Color? errorContainer,
     Brightness? brightness,
-    @Deprecated('Use primaryContainer instead. '
-        'In FlexSchemeColor the new primaryContainer use old primaryVariant '
-        'as fallback if un-assigned in custom FlexSchemeColor schemes. '
-        'An old value for it in a custom scheme, may however not be a perfect '
-        'fit for primaryContainer in Material 3 color design. '
-        'This property was deprecated after FlexColorScheme v4.2.0.')
-        Color? primaryVariant,
-    @Deprecated(
-        'Use secondaryContainer, tertiary or tertiaryContainer instead. '
-        'In FlexSchemeColor old secondaryVariant built-in colors were moved to '
-        'the tertiary color since their design fitted that role best. '
-        'If you in custom old FlexSchemeColor scheme use secondaryVariant and '
-        'have not assigned a value to the new property secondaryContainer, it '
-        'will fallback via secondaryVariant to create similar looking scheme '
-        'as before by using the old secondaryVariant on new '
-        'secondaryContainer. Be aware though that it may not be a perfect fit '
-        'for the design intent of the new secondaryContainer color property. '
-        'This property was deprecated after FlexColorScheme v4.2.0.')
-        Color? secondaryVariant,
   }) {
     if (brightness == Brightness.light) {
       return FlexSchemeColor(
@@ -225,7 +150,6 @@ class FlexSchemeColor with Diagnosticable {
             primary.brighten(15).lighten(20).blend(Colors.white, 60),
         appBarColor: appBarColor ??
             tertiary ??
-            secondaryVariant ??
             primary.brighten(15).lighten(20).blend(Colors.white, 60),
         error: error ?? FlexColor.materialLightError,
         errorContainer: errorContainer ??
@@ -246,7 +170,6 @@ class FlexSchemeColor with Diagnosticable {
             primary.brighten(15).darken(20).blend(Colors.black, 30),
         appBarColor: appBarColor ??
             tertiary ??
-            secondaryVariant ??
             primary.brighten(15).darken(20).blend(Colors.black, 30),
         error: error ?? FlexColor.materialDarkError,
         errorContainer: errorContainer ??
@@ -255,16 +178,13 @@ class FlexSchemeColor with Diagnosticable {
     } else {
       return FlexSchemeColor(
         primary: primary,
-        primaryContainer: primaryContainer ??
-            primaryVariant ??
-            primary.darken(kDarkenPrimaryContainer),
+        primaryContainer:
+            primaryContainer ?? primary.darken(kDarkenPrimaryContainer),
         secondary: secondary ?? primary.darken(kDarkenSecondary),
         secondaryContainer: secondaryContainer ??
             secondary?.darken(kDarkenSecondaryContainerFromSecondary) ??
             primary.darken(kDarkenSecondaryContainer),
-        tertiary: tertiary ??
-            secondaryVariant ??
-            primary.lighten(kDarkenPrimaryContainer),
+        tertiary: tertiary ?? primary.lighten(kDarkenPrimaryContainer),
         tertiaryContainer: tertiaryContainer ??
             tertiary?.lighten(kDarkenSecondaryContainer) ??
             primary
@@ -272,7 +192,6 @@ class FlexSchemeColor with Diagnosticable {
                 .lighten(kDarkenSecondaryContainer),
         appBarColor: appBarColor ??
             tertiary ??
-            secondaryVariant ??
             secondary?.lighten(kDarkenPrimaryContainer) ??
             primary.lighten(kDarkenPrimaryContainer),
         error: error,
@@ -334,8 +253,6 @@ class FlexSchemeColor with Diagnosticable {
             primaryContainer: colors.secondaryContainer,
             secondary: colors.primary,
             secondaryContainer: colors.primaryContainer,
-            primaryVariant: colors.secondaryVariant,
-            secondaryVariant: colors.primaryVariant,
           )
         : colors;
 
@@ -367,17 +284,6 @@ class FlexSchemeColor with Diagnosticable {
                     .brighten(15)
                     .lighten(20)
                     .blend(Colors.white, 60),
-        // Computed default for the deprecated ColorScheme colors are kept as
-        // in versions before version 5.
-        primaryVariant: usedColors > 2
-            ? effectiveColors.primaryVariant
-            : effectiveColors.primary.darken(kDarkenPrimaryContainer),
-        secondaryVariant: usedColors > 3
-            ? effectiveColors.secondaryVariant
-            : usedColors > 1
-                ? effectiveColors.secondary
-                    .darken(kDarkenSecondaryContainerFromSecondary)
-                : effectiveColors.primary.darken(kDarkenSecondaryContainer),
         appBarColor: colors.appBarColor,
         error: colors.error ?? FlexColor.materialLightError,
         errorContainer: colors.errorContainer ??
@@ -412,17 +318,6 @@ class FlexSchemeColor with Diagnosticable {
                     .brighten(15)
                     .darken(20)
                     .blend(Colors.black, 30),
-        // Computed default for the deprecated ColorScheme colors are kept as
-        // in versions before version 5.
-        primaryVariant: usedColors > 2
-            ? effectiveColors.primaryVariant
-            : effectiveColors.primary.darken(kDarkenPrimaryContainer),
-        secondaryVariant: usedColors > 3
-            ? effectiveColors.secondaryVariant
-            : usedColors > 1
-                ? effectiveColors.secondary
-                    .darken(kDarkenSecondaryContainerFromSecondary)
-                : effectiveColors.primary.darken(kDarkenSecondaryContainer),
         appBarColor: colors.appBarColor,
         error: colors.error ?? FlexColor.materialDarkError,
         errorContainer: colors.errorContainer ??
@@ -456,15 +351,6 @@ class FlexSchemeColor with Diagnosticable {
                 : effectiveColors.primary
                     .brighten(kDarkenSecondary * 2)
                     .lighten(kDarkenSecondaryContainer),
-        primaryVariant: usedColors > 2
-            ? effectiveColors.primaryVariant
-            : effectiveColors.primary.darken(kDarkenPrimaryContainer),
-        secondaryVariant: usedColors > 3
-            ? effectiveColors.secondaryVariant
-            : usedColors > 1
-                ? effectiveColors.secondary
-                    .darken(kDarkenSecondaryContainerFromSecondary)
-                : effectiveColors.primary.darken(kDarkenSecondaryContainer),
         appBarColor: colors.appBarColor,
         error: colors.error,
         errorContainer: colors.errorContainer,
@@ -576,12 +462,6 @@ class FlexSchemeColor with Diagnosticable {
     final Color? appBarColor,
     final Color? error,
     final Color? errorContainer,
-    @Deprecated('Use primary or primaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
-        Color? primaryVariant,
-    @Deprecated('Use secondary or secondaryContainer instead. '
-        'This feature was deprecated after v4.2.0.')
-        Color? secondaryVariant,
   }) {
     return FlexSchemeColor(
       primary: primary ?? this.primary,
@@ -593,8 +473,6 @@ class FlexSchemeColor with Diagnosticable {
       appBarColor: appBarColor ?? this.appBarColor,
       error: error ?? this.error,
       errorContainer: errorContainer ?? this.errorContainer,
-      primaryVariant: primaryVariant ?? this.primaryVariant,
-      secondaryVariant: secondaryVariant ?? this.secondaryVariant,
     );
   }
 
@@ -612,9 +490,7 @@ class FlexSchemeColor with Diagnosticable {
         other.tertiaryContainer == tertiaryContainer &&
         other.appBarColor == appBarColor &&
         other.error == error &&
-        other.errorContainer == errorContainer &&
-        other.primaryVariant == primaryVariant &&
-        other.secondaryVariant == secondaryVariant;
+        other.errorContainer == errorContainer;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -629,8 +505,6 @@ class FlexSchemeColor with Diagnosticable {
         appBarColor,
         error,
         errorContainer,
-        primaryVariant,
-        secondaryVariant,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -646,7 +520,5 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('appBarColor', appBarColor));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('errorContainer', errorContainer));
-    properties.add(ColorProperty('primaryVariant', primaryVariant));
-    properties.add(ColorProperty('secondaryVariant', secondaryVariant));
   }
 }
