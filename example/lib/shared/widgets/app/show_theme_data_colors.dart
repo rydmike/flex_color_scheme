@@ -155,9 +155,10 @@ class ShowThemeDataColors extends StatelessWidget {
                 color: theme.secondaryHeaderColor,
                 textColor: _onColor(theme.secondaryHeaderColor, background),
               ),
-              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.',
+              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
+              // Sill included in Flutter 3.3 though, so we keep it in.
               ColorCard(
-                label: 'Toggleable\nActive\nDEPRECATED',
+                label: 'Toggleable\nActive',
                 color: theme.toggleableActiveColor,
                 textColor: _onColor(theme.toggleableActiveColor, background),
               ),
@@ -236,12 +237,13 @@ class ShowThemeDataColors extends StatelessWidget {
                 color: theme.hintColor,
                 textColor: _onColor(theme.hintColor, background),
               ),
-              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.',
-              // ColorCard(
-              //   label: 'Selected\nRow\nDEPRECATED',
-              //   color: theme.selectedRowColor,
-              //   textColor: _onColor(theme.selectedRowColor, background),
-              // ),
+              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
+              // Sill included in Flutter 3.3 though, so we keep it in.
+              ColorCard(
+                label: 'Selected\nRow',
+                color: theme.selectedRowColor,
+                textColor: _onColor(theme.selectedRowColor, background),
+              ),
               ColorCard(
                 label: 'Unselected\nWidget',
                 color: theme.unselectedWidgetColor,
