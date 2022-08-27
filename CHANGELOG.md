@@ -114,7 +114,7 @@ Removed in versions 4 and 5 deprecated members as follows:
   `navigationBarIsStyled`, `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`,
   `navigationBarIconSchemeColor`, `navigationBarHighlightSchemeColor`
 * *FlexColorScheme:*  
-  `primaryVariant`, `secondaryVariant`, `useSubThemes`
+  `primaryVariant`, `secondaryVariant`, `useSubThemes`, `m3TextTheme`
 * *FlexThemeData:*  
   `primaryVariant`, `secondaryVariant`, `useSubThemes`
 * *FlexSchemeColor:*  
@@ -206,6 +206,9 @@ Removed in versions 4 and 5 deprecated members as follows:
   
 * Un-deprecated earlier internal deprecation of `FlexSubThemes.buttonTheme`, as long as Flutter
   SDK has not deprecated it, neither will FCS.
+* Un-deprecated earlier internal deprecation of all *"variant"* named const `FlexColor` colors.
+  They are not used actively by any built-in schemes. However, in line with past statement.
+  The old M2 color names and values will not be removed. Feel free to use to them, if so desired.
 * To support deprecation of `toggleableActiveColor` when PR 
   [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,
   while retaining the previous FCS defaults for `Switch`, `CheckBox` and `Radio` widgets, when 
