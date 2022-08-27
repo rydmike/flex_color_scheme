@@ -196,7 +196,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarUnselectedLabelSize,
     this.navigationBarSelectedLabelSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
-    bool? navigationBarMutedUnselectedLabel,
+    this.navigationBarMutedUnselectedLabel = true,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
     this.navigationBarSelectedIconSchemeColor,
@@ -229,7 +229,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  }) : _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel;
+  });
 
   /// Opt-in on using color branded hover, focus, highlight and splash
   /// interaction state effects.
@@ -1391,9 +1391,7 @@ class FlexSubThemesData with Diagnosticable {
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
   /// If undefined, defaults to true.
-  bool? get navigationBarMutedUnselectedLabel =>
-      _navigationBarMutedUnselectedLabel ?? true;
-  final bool? _navigationBarMutedUnselectedLabel;
+  final bool? navigationBarMutedUnselectedLabel;
 
   /// The size of the icon on selected [NavigationBar] item.
   ///
