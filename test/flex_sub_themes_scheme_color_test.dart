@@ -260,18 +260,6 @@ void main() {
       expect(FlexSubThemes.schemeColor(SchemeColor.surfaceTint, scheme),
           equals(surfaceTint));
     });
-    test(
-        'FST.sC-31: GIVEN SchemeColor.primaryVariant '
-        'EXPECT primaryVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.primaryVariant, scheme),
-          equals(primaryContainer));
-    });
-    test(
-        'FST.sC-32: GIVEN SchemeColor.secondaryVariant '
-        'EXPECT secondaryVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.secondaryVariant, scheme),
-          equals(secondaryContainer));
-    });
   });
 
   //****************************************************************************
@@ -470,19 +458,6 @@ void main() {
         'EXPECT primary color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.surfaceTint, scheme),
           equals(onPrimary));
-    });
-    test(
-        'FST.sCP-31: GIVEN SchemeColor.primaryVariant '
-        'EXPECT onPrimaryContainer color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.primaryVariant, scheme),
-          equals(onPrimaryContainer));
-    });
-    test(
-        'FST.sCP-32: GIVEN SchemeColor.secondaryVariant '
-        'EXPECT onSecondaryContainer color to be returned', () {
-      expect(
-          FlexSubThemes.schemeColorPair(SchemeColor.secondaryVariant, scheme),
-          equals(onSecondaryContainer));
     });
   });
 }

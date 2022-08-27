@@ -57,8 +57,8 @@ import 'flex_sub_themes.dart';
 /// There are custom and opinionated component themes available in
 /// [FlexSubThemes] as static theming helpers:
 ///
-/// * [ButtonThemeData] for old deprecated buttons, via
-///   [FlexSubThemes.buttonTheme].
+/// * `ButtonThemeData` for old deprecated buttons, via
+///   `FlexSubThemes.buttonTheme`.
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [FlexSubThemes.bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via
@@ -91,11 +91,11 @@ import 'flex_sub_themes.dart';
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via
 ///   [FlexSubThemes.toggleButtonsTheme].
 ///
-/// The custom [ButtonThemeData] still provides matching styling
+/// The custom `ButtonThemeData` can still provides matching styling
 /// for the deprecated legacy buttons if they are used.
 /// Please consider phasing out the legacy buttons, as they are deprecated
-/// and will be removed from the Flutter SDK in next stable release. Their
-/// theme [ButtonThemeData] will also soon be deprecated and later removed.
+/// and will be removed from the Flutter SDK. Their theme `ButtonThemeData`
+/// will also soon be deprecated and later removed.
 @immutable
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
@@ -479,7 +479,7 @@ class FlexSubThemesData with Diagnosticable {
   /// * [TextButton]
   /// * [ElevatedButton]
   /// * [OutlinedButton]
-  /// * Older deprecated buttons using [ButtonThemeData]
+  /// * Older deprecated buttons using `ButtonThemeData`
   /// * [ToggleButtons]
   /// * [FloatingActionButton]
   /// * [InputDecoration]
@@ -657,7 +657,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The [MaterialButton] is the parent class of old deprecated and removed
   /// buttons `RaisedButton`, `OutlineButton` and `FlatButton`. The theme
-  /// [ButtonThemeData] it affects, is also used by [ButtonBar] and
+  /// `ButtonThemeData` it affects, is also used by [ButtonBar] and
   /// [DropdownButton] and it may still be useful to theme to same style
   /// as the theme used by the other buttons.
   ///

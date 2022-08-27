@@ -140,7 +140,7 @@ const Size kButtonMinSize =
 
 /// Default padding on legacy buttons.
 ///
-/// This padding is used on [ButtonThemeData] for legacy `RaisedButton`,
+/// This padding is used on `ButtonThemeData` for legacy `RaisedButton`,
 /// `OutlineButton` and `FlatButton` making the look like the default
 /// padding used on [TextButton], [ElevatedButton] and [OutlinedButton]
 /// whe style with `styleFrom`.
@@ -201,7 +201,7 @@ const int kPressedBackgroundAlpha = 0x33;
 /// Disabled state alpha value on background elements.
 ///
 /// Used on opt in sub-themes by [InputDecorator], [ElevatedButton],
-/// [OutlinedButton], [TextButton], [ButtonThemeData] for legacy buttons and
+/// [OutlinedButton], [TextButton], `ButtonThemeData` for legacy buttons and
 /// by [ToggleButtons].
 ///
 /// Value: 0x31 = 49 = 19%

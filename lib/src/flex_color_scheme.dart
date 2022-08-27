@@ -829,7 +829,7 @@ class FlexColorScheme with Diagnosticable {
   /// * [TextButton]
   /// * [ElevatedButton]
   /// * [OutlinedButton]
-  /// * Older buttons using [ButtonThemeData]
+  /// * Older buttons using `ButtonThemeData`
   /// * [ToggleButtons]
   /// * [Switch]
   /// * [Checkbox]
@@ -1780,7 +1780,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// These component themes are available:
     ///
-    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -1807,11 +1807,11 @@ class FlexColorScheme with Diagnosticable {
     /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// The custom [ButtonThemeData] still provides matching styling
+    /// The custom `ButtonThemeData` still provides matching styling
     /// for the deprecated legacy buttons if they are used.
     /// Please consider phasing out the legacy buttons, as they are deprecated
     /// and will be removed from the Flutter SDK in next stable release. Their
-    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
+    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -3366,7 +3366,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// These component themes are available:
     ///
-    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -3393,11 +3393,11 @@ class FlexColorScheme with Diagnosticable {
     /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// The custom [ButtonThemeData] still provides matching styling
+    /// The custom `ButtonThemeData` can still provide matching styling
     /// for the deprecated legacy buttons if they are used.
     /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK in next stable release. Their
-    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
+    /// and will be removed from the Flutter SDK. Their
+    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -5745,9 +5745,9 @@ class FlexColorScheme with Diagnosticable {
       // and outline color and the elevation behavior on the raised button.
       // A useSubThemes was added in version 4.0.0 to also still support
       // the old buttons.
-      // The legacy buttons will be completely removed in Flutter stable
-      // version after 2.10.x. The [ButtonThemeData] this helper uses will
-      // however remain available after that, because widgets
+      // The legacy buttons will be completely removed in Flutter.
+      // The `ButtonThemeData` this helper uses will
+      // however remain available after that for a while, because widgets
       // [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
       // obsolete in SDK docs though) still use this theme. It is thus kept
       // around in FlexColorScheme package as long as it might have some use.
