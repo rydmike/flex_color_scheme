@@ -262,14 +262,8 @@ class FlexColorScheme with Diagnosticable {
     this.brightness,
     this.primary,
     this.primaryContainer,
-    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        this.primaryVariant,
     this.secondary,
     this.secondaryContainer,
-    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        this.secondaryVariant,
     this.tertiary,
     this.tertiaryContainer,
     this.error,
@@ -371,28 +365,6 @@ class FlexColorScheme with Diagnosticable {
   /// result will be [primary] color.
   final Color? primaryContainer;
 
-  /// (Deprecated) A darker version of the primary color.
-  ///
-  /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
-  /// button color in dark theme mode as a part of predefined widget behavior.
-  /// If you provide a custom [SnackBarThemeData] where you define
-  /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-  /// color property becomes a good property to use if you need a custom color
-  /// for custom widgets accessible via your application's ThemeData, that is
-  /// not used as default color by any other built-in widgets. This applies
-  /// to Flutter 2.8.1 and earlier versions.
-  ///
-  /// The property is deprecated in Flutter SDK and was replaced
-  /// by a new property called [primaryContainer]. It is deprecated from
-  /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-  /// See https://github.com/flutter/flutter/issues/89852.
-  ///
-  /// If not defined, and if there is no [colorScheme] defined, it will default
-  /// to [primary] color.
-  @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-      'due to deprecation in Flutter master from 2.10.0')
-  final Color? primaryVariant;
-
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your application.
   ///
@@ -405,28 +377,6 @@ class FlexColorScheme with Diagnosticable {
   /// If not defined, and if there is no [colorScheme] defined, it will default
   /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? secondaryContainer;
-
-  /// (Deprecated) A darker version of the secondary color.
-  ///
-  /// In Flutter SDK the `secondaryVariant` color is not used by in any
-  /// built-in widgets default themes or predefined widget behavior.
-  /// It is an excellent property to use if you need a custom color for
-  /// custom widgets accessible via your application's ThemeData, and that is
-  /// not used as default color by any built-in widgets. So you are in
-  /// Flutter 2.8.1 and earlier version free to set it to whatever color you
-  /// need and not affect any built-in widgets theme based colors.
-  ///
-  /// The property is deprecated in Flutter SDK and was replaced
-  /// by a new property called [secondaryContainer]. It is deprecated from
-  /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-  /// See https://github.com/flutter/flutter/issues/89852.
-  ///
-  /// If not defined, and if there is no [colorScheme] defining, scheme result
-  /// will be [secondary] color, and if it is not defined either then
-  /// [primary] color.
-  @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-      'due to deprecation in Flutter master from 2.10.0')
-  final Color? secondaryVariant;
 
   /// A color used as a contrasting accent that can balance [primary]
   /// and [secondary] colors or bring heightened attention to an element,
@@ -1435,40 +1385,6 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? primaryContainer,
 
-    /// A darker version of the primary color.
-    ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
-    /// button color in dark theme mode as a part of predefined widget behavior.
-    /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-    /// color property becomes a good property to use if you need a custom color
-    /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any other built-in widgets. This applies
-    /// to Flutter 2.8.1 and earlier versions.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [primaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? primaryVariant,
-
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
     ///
@@ -1505,39 +1421,6 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
-
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, and that is
-    /// not used as default color by any built-in widgets. So you are in
-    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
-    /// need and not affect any built-in widgets theme based colors.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [secondaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? secondaryVariant,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -1681,10 +1564,10 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onPrimary,
 
-    /// A color that's clearly legible when drawn on `primaryVariant`.
+    /// A color that's clearly legible when drawn on [primaryContainer].
     ///
     /// To ensure that an app is accessible, a contrast ratio between
-    /// `primaryVariant` and [onPrimaryContainer] of at least 4.5:1
+    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
     /// is recommended. See
     /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
     ///
@@ -1848,7 +1731,7 @@ class FlexColorScheme with Diagnosticable {
     /// lighter (8%), if using low blend levels they may become fully white too.
     final bool lightIsWhite = false,
 
-    /// When true, the primary and primaryVariant colors will be swapped with
+    /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counter parts.
     ///
     /// Set this flag to true if you want to make a theme where
@@ -2286,17 +2169,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors too.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      // Use primaryVariant also as potential passed in override for
-      // container, for backwards behavior compatibility.
-      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      primaryContainer:
-          primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+      primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      // Use old secondaryVariant also as potential passed in override for
-      // container, for backwards behavior compatibility.
-      secondaryContainer: secondaryContainer ??
-          secondaryVariant ??
-          colorScheme?.secondaryContainer,
+      secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
@@ -3116,40 +2991,6 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? primaryContainer,
 
-    /// A darker version of the primary color.
-    ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
-    /// button color in dark theme mode as a part of predefined widget behavior.
-    /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-    /// color property becomes a good property to use if you need a custom color
-    /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any other built-in widgets. This applies
-    /// to Flutter 2.8.1 and earlier versions.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [primaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? primaryVariant,
-
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
     ///
@@ -3186,39 +3027,6 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
-
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, and that is
-    /// not used as default color by any built-in widgets. So you are in
-    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
-    /// need and not affect any built-in widgets theme based colors.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [secondaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? secondaryVariant,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -3965,17 +3773,9 @@ class FlexColorScheme with Diagnosticable {
     // property values or colorScheme based colors too.
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
-      // Use primaryVariant also as potential passed in override for
-      // container, for backwards behavior compatibility.
-      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      primaryContainer:
-          primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+      primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
       secondary: secondary ?? colorScheme?.secondary,
-      // Use old secondaryVariant as potential passed in override for
-      // container, for backwards behavior compatibility.
-      secondaryContainer: secondaryContainer ??
-          secondaryVariant ??
-          colorScheme?.secondaryContainer,
+      secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
@@ -4004,12 +3804,10 @@ class FlexColorScheme with Diagnosticable {
       // Get effective light color with same rules as the dark colors.
       final FlexSchemeColor withPassedColors = flexKeyColors.copyWith(
         primary: primary ?? colorScheme?.primary,
-        primaryContainer:
-            primaryContainer ?? primaryVariant ?? colorScheme?.primaryContainer,
+        primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
         secondary: secondary ?? colorScheme?.secondary,
-        secondaryContainer: secondaryContainer ??
-            secondaryVariant ??
-            colorScheme?.secondaryContainer,
+        secondaryContainer:
+            secondaryContainer ?? colorScheme?.secondaryContainer,
         tertiary: tertiary ?? colorScheme?.tertiary,
         tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       );
@@ -6374,19 +6172,10 @@ class FlexColorScheme with Diagnosticable {
     // All falls back to primary, if nothing else is available before that.
     final FlexSchemeColor colors = FlexSchemeColor.from(
       primary: usedPrimary,
-      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      //   The fallthrough via internally deprecated primaryVariant is for
-      //   backwards compatibility with FlexColorScheme before version 5.
-      primaryContainer: primaryContainer ??
-          primaryVariant ??
-          colorScheme?.primaryContainer ??
-          usedPrimary,
+      primaryContainer:
+          primaryContainer ?? colorScheme?.primaryContainer ?? usedPrimary,
       secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
-      // TODO(rydmike): Remove backwards compatibility behavior in v6.0.0.
-      //   The fallthrough via internally deprecated primaryVariant is for
-      //   backwards compatibility with FlexColorScheme before version 5.
       secondaryContainer: secondaryContainer ??
-          secondaryVariant ??
           colorScheme?.secondaryContainer ??
           secondary ??
           colorScheme?.secondary ??
@@ -6586,10 +6375,8 @@ class FlexColorScheme with Diagnosticable {
     Brightness? brightness,
     Color? primary,
     Color? primaryContainer,
-    Color? primaryVariant,
     Color? secondary,
     Color? secondaryContainer,
-    Color? secondaryVariant,
     Color? tertiary,
     Color? tertiaryContainer,
     Color? error,
@@ -6629,12 +6416,10 @@ class FlexColorScheme with Diagnosticable {
       brightness: brightness ?? this.brightness,
       primary: primary ?? this.primary,
       primaryContainer: primaryContainer ?? this.primaryContainer,
-      primaryVariant: primaryVariant ?? this.primaryVariant,
       secondary: secondary ?? this.secondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
       tertiary: tertiary ?? this.tertiary,
       tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
-      secondaryVariant: secondaryVariant ?? this.secondaryVariant,
       error: error ?? this.error,
       surface: surface ?? this.surface,
       background: background ?? this.background,
@@ -6682,10 +6467,8 @@ class FlexColorScheme with Diagnosticable {
         other.brightness == brightness &&
         other.primary == primary &&
         other.primaryContainer == primaryContainer &&
-        other.primaryVariant == primaryVariant &&
         other.secondary == secondary &&
         other.secondaryContainer == secondaryContainer &&
-        other.secondaryVariant == secondaryVariant &&
         other.tertiary == tertiary &&
         other.tertiaryContainer == tertiaryContainer &&
         other.error == error &&
@@ -6728,10 +6511,8 @@ class FlexColorScheme with Diagnosticable {
         brightness,
         primary,
         primaryContainer,
-        primaryVariant,
         secondary,
         secondaryContainer,
-        secondaryVariant,
         tertiary,
         tertiaryContainer,
         error,
@@ -6776,10 +6557,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(EnumProperty<Brightness>('brightness', brightness));
     properties.add(ColorProperty('primary', primary));
     properties.add(ColorProperty('primaryContainer', primaryContainer));
-    properties.add(ColorProperty('primaryVariant', primaryVariant));
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryContainer', secondaryContainer));
-    properties.add(ColorProperty('secondaryVariant', secondaryVariant));
     properties.add(ColorProperty('tertiary', tertiary));
     properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
     properties.add(ColorProperty('error', error));
