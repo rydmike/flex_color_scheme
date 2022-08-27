@@ -286,7 +286,7 @@ void main() {
         scheme: FlexScheme.flutterDash,
         blendLevel: 0,
         subThemesData: const FlexSubThemesData(
-          inputDecorationRadius: 15,
+          inputDecoratorRadius: 15,
           bottomNavigationBarSchemeColor: SchemeColor.surfaceVariant,
           navigationBarHighlightSchemeColor: SchemeColor.tertiary,
           navigationBarTextSchemeColor: SchemeColor.secondary,

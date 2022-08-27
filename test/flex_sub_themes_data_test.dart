@@ -515,7 +515,7 @@ void main() {
         'FSTC1.09: GIVEN input on deprecated renamed properties '
         'EXPECT to find them on new properties', () {
       const FlexSubThemesData newGetsOld = FlexSubThemesData(
-        inputDecorationRadius: 10.0,
+        inputDecoratorRadius: 10.0,
         bottomNavigationBarSchemeColor: SchemeColor.error,
         navigationBarTextSchemeColor: SchemeColor.onSurface,
         navigationBarMutedUnselectedText: false,

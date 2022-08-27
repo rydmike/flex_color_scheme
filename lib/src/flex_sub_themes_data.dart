@@ -134,12 +134,7 @@ class FlexSubThemesData with Diagnosticable {
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
     //
-    double? inputDecoratorRadius,
-    @Deprecated('This property has been replaced after 4.2.0. To harmonize '
-        'input decorator property names it has been renamed to '
-        'inputDecoratorRadius, please use it instead. '
-        'This property will be completely removed in version 6.0.0.')
-        this.inputDecorationRadius,
+    this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
@@ -271,8 +266,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  })  : _inputDecoratorRadius = inputDecoratorRadius,
-        _bottomNavigationBarSelectedLabelSchemeColor =
+  })  : _bottomNavigationBarSelectedLabelSchemeColor =
             bottomNavigationBarSelectedLabelSchemeColor,
         _bottomNavigationBarSelectedIconSchemeColor =
             bottomNavigationBarSelectedIconSchemeColor,
@@ -815,25 +809,9 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [InputDecoration].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kInputDecoratorRadius] 20dp.
-  ///
-  /// Was not specified in M3 guide what it should be.
-  /// Will be adjusted when known. Now set to same as button radius (20dp), so
-  /// it matches them. The M3 design intent may also be that it should
-  /// be same as FAB and Drawer, ie 16dp.
-  double? get inputDecoratorRadius =>
-      _inputDecoratorRadius ?? inputDecorationRadius;
-  final double? _inputDecoratorRadius;
-
-  /// Deprecated border radius override value for [InputDecoration],
-  /// this property has been replaced by [inputDecoratorRadius].
-  ///
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has been replaced after 4.2.0. To harmonize '
-      'input decorator property names it has been renamed to '
-      'inputDecoratorRadius, please use it instead. '
-      'This property will be completely removed in version 6.0.0.')
-  final double? inputDecorationRadius;
+  /// [kInputDecoratorRadius] 16dpm if [useMaterial3] is false and to
+  /// [kInputDecoratorM3Radius] if [useMaterial3] is true.
+  final double? inputDecoratorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
   /// uses as color for the border and fill color when they are used.
