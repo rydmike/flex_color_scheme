@@ -294,13 +294,6 @@ class FlexColorScheme with Diagnosticable {
     this.platform,
     this.typography,
     this.applyElevationOverlayColor = true,
-    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-        'opinionated component sub-themes are added by adding a default '
-        'constructor FlexSubThemesData() to subThemesData. This creates '
-        'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing the FlexSubThemesData properties. '
-        'This property will be completely removed in version 6.0.0.')
-        this.useSubThemes = false,
     this.subThemesData,
     this.useMaterial3 = false,
     this.extensions,
@@ -443,8 +436,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// If you assign a background [SchemeColor] to [dialogBackgroundSchemeColor]
   /// in [FlexSubThemesData] and you have opted in on using component sub themes
-  /// with [useSubThemes], then its selected scheme color will override this
-  /// value.
+  /// then its selected scheme color will override this value.
   final Color? dialogBackground;
 
   /// Background theme color for the [AppBar].
@@ -799,22 +791,6 @@ class FlexColorScheme with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/90353
   final bool applyElevationOverlayColor;
 
-  /// This property has no function after 4.2.0. Prior to version 5 this
-  /// property was used to activate the opinionated component sub-themes.
-  /// Starting with version 5 they are now enabled by adding a default
-  /// constructor `FlexSubThemesData()` to [subThemesData].
-  ///
-  /// Defaults to false.
-  ///
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-      'opinionated component sub-themes are added by adding a default '
-      'constructor FlexSubThemesData() to subThemesData. This creates '
-      'sub-themes using the FlexColorScheme opinionated defaults. You can '
-      'modify the sub-themes by changing the FlexSubThemesData properties. '
-      'This property will be completely removed in version 6.0.0.')
-  final bool useSubThemes;
-
   /// Activate using FlexColorScheme opinionated component sub-themes by
   /// passing in a default `FlexSubThemesData()`.
   ///
@@ -934,13 +910,12 @@ class FlexColorScheme with Diagnosticable {
   /// --------------------------------------------------------
   ///
   /// While the migration of Flutter SDK to the Material 3 design spec is
-  /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
-  /// will also produce widget sub-themes using current Flutter Material 2
-  /// theming limitations. By default these opinionated sub-themes also
-  /// implement the Material 3 design and look when it is possible within
-  /// current SDK limits. During SDK transition to full M3 support, keeping
-  /// useMaterial3 false and just using the FlexColorScheme sub-theming, may
-  /// be preferred since it has fewer transitional issues.
+  /// in progress, using [FlexColorScheme] sub-themes will produce widget
+  /// sub-themes, using current Flutter Material 2 theming limitations, that
+  /// by default also implement the Material 3 design and look when it is
+  /// possible within current SDK limits. During SDK transition to full M3
+  /// support, keeping useMaterial3 false and just using the FlexColorScheme
+  /// sub-theming, may be preferred since it has fewer transitional issues.
   final bool useMaterial3;
 
   /// Arbitrary additions to this theme.
@@ -990,9 +965,8 @@ class FlexColorScheme with Diagnosticable {
   /// to create beautiful themes by just adjusting a few behavior properties.
   ///
   /// To activate using opinionated sub themes that further refines the produced
-  /// theme, set [useSubThemes] to true and optionally pass in a
-  /// [FlexSubThemesData] to [subThemesData] to use short cut properties to
-  /// setup additional features in the sub-themes.
+  /// theme, pass in a default [FlexSubThemesData] to [subThemesData], or use
+  /// short cut properties to setup additional features in the sub-themes.
   ///
   /// Material 3 guide introduces a new color system with key colors and tonal
   /// palettes, see
@@ -1148,7 +1122,7 @@ class FlexColorScheme with Diagnosticable {
     /// [colorScheme] based [surface] and [background] properties and make them
     /// 8% lighter.
     ///
-    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// If you opt in on using sub themes and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
     /// and set [blendLevel] > 0, then the effective color scheme based on
     /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
@@ -1528,8 +1502,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
     /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with [useSubThemes], then its selected scheme color will override this
-    /// value.
+    /// with, then its selected scheme color will override this value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -1772,19 +1745,6 @@ class FlexColorScheme with Diagnosticable {
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
-
-    /// This property has no function after 4.2.0. Prior to version 5 this
-    /// property was used to activate the opinionated component sub-themes.
-    /// Starting with version 5 they are now enabled by adding a default
-    /// constructor `FlexSubThemesData()` to [subThemesData].
-    ///
-    /// Defaults to false.
-    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-        'opinionated component sub-themes are added by adding a default '
-        'constructor FlexSubThemesData() to subThemesData. This creates '
-        'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing the FlexSubThemesData properties.')
-        final bool useSubThemes = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -2117,13 +2077,12 @@ class FlexColorScheme with Diagnosticable {
     ///   * [Material Design 3](https://m3.material.io).
     ///
     /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
-    /// will also produce widget sub-themes using current Flutter Material 2
-    /// theming limitations. By default these opinionated sub-themes also
-    /// implement the Material 3 design and look when it is possible within
-    /// current SDK limits. During SDK transition to full M3 support, keeping
-    /// useMaterial3 false and just using the FlexColorScheme sub-theming, may
-    /// be preferred since it has fewer transitional issues.
+    /// in progress, using [FlexColorScheme] sub-themes will produce widget
+    /// sub-themes, using current Flutter Material 2 theming limitations, that
+    /// by default also implement the Material 3 design and look when it is
+    /// possible within current SDK limits. During SDK transition to full M3
+    /// support, keeping useMaterial3 false and just using the FlexColorScheme
+    /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -2260,9 +2219,7 @@ class FlexColorScheme with Diagnosticable {
           // Default surfaces are used as starting point for blended ones.
           : null,
     );
-    // We on purpose shadow deprecated this.useSubThemesData that has
-    // been deprecated, and set it it true if a none null subThemesData was
-    // provided.
+    // Use sub-themes if a none null FlexSubThemesData was provided.
     final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
@@ -2596,9 +2553,8 @@ class FlexColorScheme with Diagnosticable {
   /// to create beautiful themes by just adjusting a few behavior properties.
   ///
   /// To activate using opinionated sub themes that further refines the produced
-  /// theme, set [useSubThemes] to true and optionally pass in a
-  /// [FlexSubThemesData] to [subThemesData] to use short cut properties to
-  /// setup additional features in the sub-themes.
+  /// theme, pass in a [FlexSubThemesData] to [subThemesData], and define more
+  /// shortcut properties to setup additional features in the sub-themes.
   ///
   /// Material 3 guide introduces a new color system with key colors and tonal
   /// palettes, see
@@ -2754,7 +2710,7 @@ class FlexColorScheme with Diagnosticable {
     /// [colorScheme] based [surface] and [background] properties and make them
     /// 8% lighter.
     ///
-    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// If you opt in on using sub themes and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
     /// and set [blendLevel] > 0, then the effective color scheme based on
     /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
@@ -3131,9 +3087,8 @@ class FlexColorScheme with Diagnosticable {
     /// [FlexSurface].
     ///
     /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with [useSubThemes], then its selected scheme color will override this
-    /// value.
+    /// [FlexSubThemesData] and you have opted in on using component sub themes,
+    /// then its selected scheme color will override this value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -3376,19 +3331,6 @@ class FlexColorScheme with Diagnosticable {
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
-
-    /// This property has no function after 4.2.0. Prior to version 5 this
-    /// property was used to activate the opinionated component sub-themes.
-    /// Starting with version 5 they are now enabled by adding a default
-    /// constructor `FlexSubThemesData()` to [subThemesData].
-    ///
-    /// Defaults to false.
-    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-        'opinionated component sub-themes are added by adding a default '
-        'constructor FlexSubThemesData() to subThemesData. This creates '
-        'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing its properties.')
-        final bool useSubThemes = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -3721,13 +3663,12 @@ class FlexColorScheme with Diagnosticable {
     ///   * [Material Design 3](https://m3.material.io).
     ///
     /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
-    /// will also produce widget sub-themes using current Flutter Material 2
-    /// theming limitations. By default these opinionated sub-themes also
-    /// implement the Material 3 design and look when it is possible within
-    /// current SDK limits. During SDK transition to full M3 support, keeping
-    /// useMaterial3 false and just using the FlexColorScheme sub-theming, may
-    /// be preferred since it has fewer transitional issues.
+    /// in progress, using [FlexColorScheme] sub-themes will produce widget
+    /// sub-themes, using current Flutter Material 2 theming limitations, that
+    /// by default also implement the Material 3 design and look when it is
+    /// possible within current SDK limits. During SDK transition to full M3
+    /// support, keeping useMaterial3 false and just using the FlexColorScheme
+    /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -3888,9 +3829,7 @@ class FlexColorScheme with Diagnosticable {
           // Default surfaces are used as starting point for blended ones.
           : null,
     );
-    // We on purpose shadow deprecated this.useSubThemesData that has
-    // been deprecated, and set it it true if a none null subThemesData was
-    // provided.
+    // Use subThemes if a none null FlexSubThemesData was passed in.
     final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
     final FlexSubThemesData subTheme =
@@ -5078,9 +5017,7 @@ class FlexColorScheme with Diagnosticable {
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
-    // We on purpose shadow deprecated this.useSubThemesData that has
-    // been deprecated, and set it it true if a none null subThemesData was
-    // provided.
+    // Use sub-themes if a none null FlexSubThemesData was passed in.
     final bool useSubThemes = subThemesData != null;
     // If we did not have any sub-theme data, we make one instead that cannot
     // be null. It makes the logic easier to deal with when we create
@@ -5555,11 +5492,9 @@ class FlexColorScheme with Diagnosticable {
       // When using sub-themes, or Material 3 style, we use primary color
       // instead, because it is the best match for M3 ColorDesign for the M2
       // components using M3 Colors.
-      // TODO(rydmike): Try removal of toggleableActiveColor.
-      //   Remove ALL above comments and commented prop when released to stable.
-      // toggleableActiveColor: useSubThemes || useMaterial3
-      //     ? colorScheme.primary
-      //     : colorScheme.secondary,
+      toggleableActiveColor: useSubThemes || useMaterial3
+          ? colorScheme.primary
+          : colorScheme.secondary,
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
