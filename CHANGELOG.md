@@ -107,28 +107,32 @@ issues.
 
 **REMOVED EARLIER DEPRECATED MEMBERS**
 
-Removed in versions 4 and 5 deprecated members as follows:
+As a chore and clean up all previously deprecated members have been removed from version 6.0.0. It
+no longer has any self deprecated members. This removes a lot legacy backwards compatibility with 
+deprecated members from versions 2, 3 and 4, and even one from version 5.1.0. Removed all earlier 
+self deprecated members as follows:
 
 * *FlexSubThemesData:*  
   `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, 
   `navigationBarIsStyled`, `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`,
-  `navigationBarIconSchemeColor`, `navigationBarHighlightSchemeColor`
+  `navigationBarIconSchemeColor`, `navigationBarHighlightSchemeColor`.
 * *FlexColorScheme:*  
-  `primaryVariant`, `secondaryVariant`, `useSubThemes`, `m3TextTheme`
+  `primaryVariant`, `secondaryVariant`, `useSubThemes`. Removed static `FlexColorScheme.m3TextTheme` 
+   deprecated in 5.1.0 and static `FlexColorScheme.themedSystemNavigationBar` in version
+   2 its deprecated parameter `nullContextBackground`.
 * *FlexThemeData:*  
-  `primaryVariant`, `secondaryVariant`, `useSubThemes`
+  `primaryVariant`, `secondaryVariant`, `useSubThemes`.
 * *FlexSchemeColor:*  
-  `primaryVariant`, `secondaryVariant`
+  `primaryVariant`, `secondaryVariant`.
 * *SchemeColor:*  
-  `primaryVariant`, `secondaryVariant`
+  `primaryVariant`, `secondaryVariant`.
 * *FlexConstants:*  
-  `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`
+  `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`.
 * *FlexSubThemes.bottomNavigationBar:*
-  `baseSchemeColor`
+  `baseSchemeColor`.
 * *FlexSubThemes.navigationBarTheme:*
   `textSchemeColor`, `unselectedTextSchemeColor`, `mutedUnselectedText`, `iconSchemeColor`,
   `highlightSchemeColor`.
-
 
 **STYLE CHANGE - BREAKING**
 
