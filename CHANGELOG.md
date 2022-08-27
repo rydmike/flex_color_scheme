@@ -185,6 +185,8 @@ issues.
   necessary change to do so. This will be reflected in updates to the core defaults documentation.
   For a migration guide concerning `toggleableActiveColor` see 
   [Flutter breaking-changes](https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide).
+* Since Flutter 3.3 did not yet include the actual deprecation of `toggleableActiveColor` FCS still
+  defines its appropraiet color value for `ThemeData`.
 
 
 **EXAMPLES**
