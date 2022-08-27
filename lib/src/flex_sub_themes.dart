@@ -539,16 +539,6 @@ class FlexSubThemes {
     /// [ColorScheme.dark] theme mode.
     final SchemeColor? selectedLabelSchemeColor,
 
-    /// Deprecated and replaced by [selectedLabelSchemeColor].
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'selectedLabelSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        final SchemeColor? baseSchemeColor,
-
     /// Select which color from the passed in [ColorScheme] to use for
     /// the [BottomNavigationBar]'s unselected items text color.
     ///
@@ -741,7 +731,7 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        baseSchemeColor == null &&
+        // baseSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
         useFlutterDefaults;
 
@@ -756,7 +746,7 @@ class FlexSubThemes {
     // Get text color, defaults to primary in light and to secondary in dark.
     final Color labelColor = schemeColor(
         selectedLabelSchemeColor ??
-            baseSchemeColor ??
+            // baseSchemeColor ??
             (colorScheme.brightness == Brightness.dark && useDefaultTextStyle
                 ? SchemeColor.secondary
                 : SchemeColor.primary),
@@ -1850,16 +1840,6 @@ class FlexSubThemes {
     /// the effective color will be [ColorScheme.onSurface] in M2 and M3.
     final SchemeColor? selectedLabelSchemeColor,
 
-    /// Deprecated and replaced by [selectedLabelSchemeColor].
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'selectedLabelSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        final SchemeColor? textSchemeColor,
-
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationBar]'s unselected label text color.
     ///
@@ -1874,16 +1854,6 @@ class FlexSubThemes {
     /// [ColorScheme.onSurfaceVariant] in M3.
     final SchemeColor? unselectedLabelSchemeColor,
 
-    /// Deprecated and replaced by [unselectedLabelSchemeColor].
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'unselectedLabelSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        final SchemeColor? unselectedTextSchemeColor,
-
     /// If true, the unselected label in the [NavigationBar] use a more
     /// muted color version of the color defined by
     /// [navigationBarUnselectedLabelSchemeColor].
@@ -1893,16 +1863,6 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to true.
     final bool? mutedUnselectedLabel,
-
-    /// Deprecated and replaced by [mutedUnselectedLabel].
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'mutedUnselectedLabel. '
-        'This property will be completely removed in version 6.0.0.')
-        final bool? mutedUnselectedText,
 
     /// The size of the icon on selected [NavigationBar] item.
     ///
@@ -1926,16 +1886,6 @@ class FlexSubThemes {
     /// [ColorScheme.onSurface] in M2 and [ColorScheme.onSecondaryContainer]
     /// in M3.
     final SchemeColor? selectedIconSchemeColor,
-
-    /// Deprecated and replaced by [selectedIconSchemeColor].
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'selectedIconSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        final SchemeColor? iconSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationBar]'s unselected item icon color.
@@ -1972,20 +1922,6 @@ class FlexSubThemes {
     /// the effective indicator color will be [ColorScheme.secondary]
     /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
     final SchemeColor? indicatorSchemeColor,
-
-    /// Deprecated, was used to select which color from the passed in
-    /// [ColorScheme] to use as base for the selected [NavigationBar]'s
-    /// indicator item highlight color.
-    ///
-    /// Replaced with indicatorSchemeColor.
-    ///
-    /// This property will be completely removed in version 6.0.0.
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been replaced by: '
-        'indicatorSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        final SchemeColor? highlightSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as background
     /// color for the [NavigationBar].
@@ -2129,9 +2065,7 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        textSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
-        unselectedTextSchemeColor == null &&
         useFlutterDefaults;
 
     // Determine if we can even use default icon styles, only when all are null,
@@ -2139,21 +2073,16 @@ class FlexSubThemes {
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
-        iconSchemeColor == null &&
         unselectedIconSchemeColor == null &&
         useFlutterDefaults;
 
     // Get text color, defaults to primary.
     final Color labelColor = schemeColor(
-        selectedLabelSchemeColor ?? textSchemeColor ?? SchemeColor.primary,
-        colorScheme);
+        selectedLabelSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get unselected label color, defaults to colorScheme.onSurface
     final Color unselectedLabelColor = schemeColor(
-        unselectedLabelSchemeColor ??
-            unselectedTextSchemeColor ??
-            SchemeColor.onSurface,
-        colorScheme);
+        unselectedLabelSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     // Get text style, defaults to TextStyle(), we can use it since
     // size and color are applied to is separately.
@@ -2166,8 +2095,7 @@ class FlexSubThemes {
 
     // Get icon color, default to primary.
     final Color iconColor = schemeColor(
-        selectedIconSchemeColor ?? iconSchemeColor ?? SchemeColor.primary,
-        colorScheme);
+        selectedIconSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
     final Color unselectedIconColor = schemeColor(
@@ -2183,10 +2111,9 @@ class FlexSubThemes {
         .withOpacity(opacity);
 
     // Indicator color, when using normal default, falls back to primary.
-    final Color indicatorColor = schemeColor(
-            indicatorSchemeColor ?? highlightSchemeColor ?? SchemeColor.primary,
-            colorScheme)
-        .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
+    final Color indicatorColor =
+        schemeColor(indicatorSchemeColor ?? SchemeColor.primary, colorScheme)
+            .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     return NavigationBarThemeData(
       height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
@@ -2212,7 +2139,7 @@ class FlexSubThemes {
                 }
                 return textStyle.copyWith(
                   fontSize: effectiveUnselectedLabelSize,
-                  color: (mutedUnselectedLabel ?? mutedUnselectedText ?? true)
+                  color: (mutedUnselectedLabel ?? true)
                       ? unselectedLabelColor
                           .blendAlpha(
                               unselectedLabelColor, unselectedAlphaBlend)
