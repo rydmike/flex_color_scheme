@@ -190,18 +190,13 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarShowUnselectedLabels = true,
     this.bottomNavigationBarType = BottomNavigationBarType.fixed,
     this.bottomNavigationBarLandscapeLayout,
+    //
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
     this.navigationBarSelectedLabelSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
     bool? navigationBarMutedUnselectedLabel,
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been renamed to: '
-        'navigationBarMutedUnselectedLabel. '
-        'This property will be completely removed in version 6.0.0.')
-        this.navigationBarMutedUnselectedText,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
     SchemeColor? navigationBarSelectedIconSchemeColor,
@@ -1412,19 +1407,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to true.
   bool? get navigationBarMutedUnselectedLabel =>
-      _navigationBarMutedUnselectedLabel ??
-      navigationBarMutedUnselectedText ??
-      true;
+      _navigationBarMutedUnselectedLabel ?? true;
   final bool? _navigationBarMutedUnselectedLabel;
-
-  /// Deprecated and replaced by [navigationBarMutedUnselectedLabel].
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been renamed to: '
-      'navigationBarMutedUnselectedLabel. '
-      'This property will be completely removed in version 6.0.0.')
-  final bool? navigationBarMutedUnselectedText;
 
   /// The size of the icon on selected [NavigationBar] item.
   ///
