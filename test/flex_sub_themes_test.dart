@@ -3339,7 +3339,7 @@ void main() {
       expect(
         FlexSubThemes.floatingActionButtonTheme(
           radius: 30,
-          backgroundSchemeColor: SchemeColor.primaryVariant,
+          backgroundSchemeColor: SchemeColor.primaryContainer,
         ),
         equals(
           const FloatingActionButtonThemeData(

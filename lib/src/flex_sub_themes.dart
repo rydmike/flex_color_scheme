@@ -127,14 +127,6 @@ enum SchemeColor {
 
   /// The active theme's color scheme surfaceTint color will be used.
   surfaceTint,
-
-  /// The active theme's color scheme primaryVariant color will be used.
-  @Deprecated('Use primaryContainer instead. Deprecated after version 4.2.0.')
-  primaryVariant,
-
-  /// The active theme's color scheme secondaryVariant color will be used.
-  @Deprecated('Use secondaryContainer instead. Deprecated after version 4.2.0.')
-  secondaryVariant,
 }
 
 /// Contains static sub-theme helpers used by opt-in widget sub theming
@@ -159,7 +151,7 @@ enum SchemeColor {
 ///
 /// These component themes are available:
 ///
-/// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+/// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -193,15 +185,15 @@ enum SchemeColor {
 /// Material states used on two different [ButtonStyleButton] buttons that
 /// it should match.
 ///
-/// The theme [ButtonThemeData] is included to provide a very similar
+/// The theme `ButtonThemeData` is included to provide a very similar
 /// theme style on the deprecated legacy buttons `RaisedButton`,
 /// `OutlineButton` and `FlatButton` as on the current main buttons. It is not
 /// an exact match, since the legacy buttons do not offer as flexible
 /// styling as the newer buttons. They do follow and match the styling on
 /// [ToggleButtons] when it comes to hover, press, selected and focus.
 /// Please consider phasing out the legacy buttons, as they are deprecated and
-/// will be removed from the Flutter SDK in next stable release. Their theme
-/// the [ButtonThemeData] will also soon be deprecated and later removed.
+/// will be removed from the Flutter SDK. Their theme
+/// the `ButtonThemeData` will also soon be deprecated and later removed.
 ///
 /// The following widgets that have rounded corners, but are excluded from the
 /// component theming for now:
@@ -307,10 +299,6 @@ class FlexSubThemes {
         return colorScheme.inversePrimary;
       case SchemeColor.surfaceTint:
         return colorScheme.surfaceTint;
-      case SchemeColor.primaryVariant:
-        return colorScheme.primaryContainer;
-      case SchemeColor.secondaryVariant:
-        return colorScheme.secondaryContainer;
     }
   }
 
@@ -332,7 +320,6 @@ class FlexSubThemes {
       case SchemeColor.onPrimary:
         return colorScheme.primary;
       case SchemeColor.primaryContainer:
-      case SchemeColor.primaryVariant:
         return colorScheme.onPrimaryContainer;
       case SchemeColor.onPrimaryContainer:
         return colorScheme.primaryContainer;
@@ -341,7 +328,6 @@ class FlexSubThemes {
       case SchemeColor.onSecondary:
         return colorScheme.secondary;
       case SchemeColor.secondaryContainer:
-      case SchemeColor.secondaryVariant:
         return colorScheme.onSecondaryContainer;
       case SchemeColor.onSecondaryContainer:
         return colorScheme.secondaryContainer;
@@ -393,10 +379,10 @@ class FlexSubThemes {
   }
 
   // TODO(rydmike): Remove when ButtonThemeData is deprecated in SDK.
-  /// DEPRECATED: An opinionated [ButtonThemeData] theme.
+  /// DEPRECATED: An opinionated `ButtonThemeData` theme.
   ///
-  /// This [ButtonThemeData] is marked as **obsolete** in Flutter SDK
-  /// documentation, but not yet deprecated in Flutter SDK 3.0.0.
+  /// This `ButtonThemeData` is marked as **obsolete** in Flutter SDK
+  /// documentation, but not yet deprecated in Flutter SDK 3.3.0.
   /// FlexColorscheme now marks it as deprecated. It will be removed in FCS
   /// released after Flutter SDK fully deprecates ButtonThemeData.
   ///
@@ -411,14 +397,14 @@ class FlexSubThemes {
   /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
   /// It is used to make the buttons match the padding on the newer buttons.
   ///
-  /// The above legacy buttons this sub theme is primary for, will be completely
-  /// removed in Flutter stable version after 2.10.x. The [ButtonThemeData]
+  /// The above legacy buttons this sub theme is for, will be completely
+  /// removed in Flutter stable version after 2.10.x. The `ButtonThemeData`
   /// this helper uses will however remain available after that, because widgets
   /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
   /// in FlexColorScheme package as long as it might have some use.
   @Deprecated('The ButtonThemeData is marked as obsolete in Flutter SDK, but '
-      'not yet deprecated in Flutter version 3.0.0. FlexColorscheme now marks '
+      'not yet deprecated in Flutter version 3.3.0. FlexColorscheme marks '
       'it as deprecated. It will be removed in FCS released after Flutter SDK '
       'fully deprecates ButtonThemeData.')
   static ButtonThemeData buttonTheme({

@@ -759,7 +759,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// These component themes are available:
     ///
-    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -786,11 +786,11 @@ extension FlexThemeData on ThemeData {
     /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// The custom [ButtonThemeData] still provides matching styling
+    /// The custom `ButtonThemeData` still provides matching styling
     /// for the deprecated legacy buttons if they are used.
     /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK in next stable release. Their
-    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
+    /// and will be removed from the Flutter SDK. Their
+    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -1836,7 +1836,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// These component themes are available:
     ///
-    /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -1863,11 +1863,11 @@ extension FlexThemeData on ThemeData {
     /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
     ///
-    /// The custom [ButtonThemeData] still provides matching styling
+    /// The custom `ButtonThemeData` still provides matching styling
     /// for the deprecated legacy buttons if they are used.
     /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK in next stable release. Their
-    /// theme [ButtonThemeData] will also soon be deprecated and later removed.
+    /// and will be removed from the Flutter SDK. Their
+    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].

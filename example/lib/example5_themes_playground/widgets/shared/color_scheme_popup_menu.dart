@@ -37,7 +37,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
     // Negative value, or index covering the last two in the enum,
     // the deprecated primaryVariant and secondaryVariant are considered as
     // null and default value.
-    final bool useDefault = index < 0 || index >= SchemeColor.values.length - 2;
+    final bool useDefault = index < 0 || index >= SchemeColor.values.length;
     final String colorName = enabled && !useDefault
         ? SchemeColor.values[index].name
         : labelForDefault;
@@ -50,28 +50,28 @@ class ColorSchemePopupMenu extends StatelessWidget {
         // -1, or any negative value will cause controller for a
         // SchemeColor to be set to "null", we need to be able to do that
         // to input "null" property value to SchemeColor configs.
-        onChanged?.call(index >= SchemeColor.values.length - 2 ? -1 : index);
+        onChanged?.call(index >= SchemeColor.values.length ? -1 : index);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
         // Exclude the last two enums, deprecated primaryVariant and
         // secondaryVariant.
-        for (int i = 0; i < SchemeColor.values.length - 1; i++)
+        for (int i = 0; i <= SchemeColor.values.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               dense: true,
               leading: ColorSchemeBox(
-                color: i >= SchemeColor.values.length - 2
+                color: i >= SchemeColor.values.length
                     ? colorScheme.surface
                     : FlexSubThemes.schemeColor(
                         SchemeColor.values[i],
                         colorScheme,
                       ),
-                defaultOption: i >= SchemeColor.values.length - 2,
+                defaultOption: i >= SchemeColor.values.length,
               ),
-              title: i >= SchemeColor.values.length - 2
-                  // If we reached first deprecated color, make default label.
+              title: i >= SchemeColor.values.length
+                  // If we are over enum length, make default label.
                   ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
                   : Text(SchemeColor.values[i].name, style: txtStyle),
             ),
@@ -92,9 +92,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
         trailing: ColorSchemeBox(
           color: enabled && !useDefault
               ? FlexSubThemes.schemeColor(
-                  SchemeColor.values[index],
-                  colorScheme,
-                )
+                  SchemeColor.values[index], colorScheme)
               : colorScheme.surface,
           defaultOption: useDefault,
         ),
