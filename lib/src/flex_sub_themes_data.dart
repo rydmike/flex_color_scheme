@@ -193,13 +193,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
-    SchemeColor? navigationBarSelectedLabelSchemeColor,
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been renamed to: '
-        'navigationBarSelectedLabelSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        this.navigationBarTextSchemeColor,
+    this.navigationBarSelectedLabelSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
     bool? navigationBarMutedUnselectedLabel,
     @Deprecated('This property has no function after 4.2.0. To harmonize '
@@ -252,9 +246,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  })  : _navigationBarSelectedLabelSchemeColor =
-            navigationBarSelectedLabelSchemeColor,
-        _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
+  })  : _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
         _navigationBarSelectedIconSchemeColor =
             navigationBarSelectedIconSchemeColor,
         _navigationBarIndicatorSchemeColor = navigationBarIndicatorSchemeColor;
@@ -1395,18 +1387,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] is true, and this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.onSurface] in M2 and M3.
-  SchemeColor? get navigationBarSelectedLabelSchemeColor =>
-      _navigationBarSelectedLabelSchemeColor ?? navigationBarTextSchemeColor;
-  final SchemeColor? _navigationBarSelectedLabelSchemeColor;
-
-  /// Deprecated and replaced by [navigationBarSelectedLabelSchemeColor].
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been renamed to: '
-      'navigationBarSelectedLabelSchemeColor. '
-      'This property will be completely removed in version 6.0.0.')
-  final SchemeColor? navigationBarTextSchemeColor;
+  final SchemeColor? navigationBarSelectedLabelSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
   /// the [NavigationBar]'s unselected label text color.
