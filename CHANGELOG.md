@@ -4,26 +4,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.0.0-dev.1
 
-**Aug 25, 2022**
+**Aug 27, 2022**
 
-This is a development release to test features on Flutter channel *master 3.1.0-0.0.pre.2199*, to 
-prepare for new style and feature alignments when `useMaterial3` is true.
+This dev release is for Flutter *beta 3.3.0-0.5.pre*, it will be released when next Flutter 
+stable version after 3.0 comes out. 
 
 If you experiment with this dev release and want to use the Theme Playground, then please build
 bundled example 5 for macOS, Windows or Linux desktop. Don't use the 5.1.0 live web based version.
 While it will work, to copy-paste code from it too, it is not broken. It will however not show you 
 the exact same style in all cases that you actually get when you use it with this release.
-
-This dev release requires at least Flutter *master 3.1.0-0.0.pre.2199*. It includes two new Flutter
-`ColorScheme` colors. This dev release is going to be released as stable when next Flutter stable 
-version after 3.0 comes out. It is expected to be released around Flutter Vikings 2022 and 
-might be called Flutter 3.3.
-
-All features currently available in Flutter *master 3.1.0-0.0.pre.2199*, might not be included
-in next stable 3.3 release. If there are features in this dev release that do not land in next 
-Flutter stable, they will be reverted from the next FlexColorScheme stable release. Due to some minor
-breaking changes in style and in a lower level API `FlexTones`, the next stable FCS will be 
-released as version 6.0.0 and also take the opportunity to clean out all deprecated APIs. 
 
 Due to a number of known and below documented Flutter SDK issues when using `useMaterial3` set to
 `true`, we cannot yet recommend using the option in production. Use it only if you are willing to
@@ -32,11 +21,60 @@ keep `useMaterial3` set to `false`, and use FCS opinionated component themes, yo
 theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid the 
 issues.
 
+**BREAKING**
+
+* This **FlexColorScheme** version no longer directly depends on package
+  [Material Color Utilities package](https://pub.dev/packages/material_color_utilities), which 
+  is also used by Flutter SDK. Instead, it uses package 
+  [FlexSeedScheme](https://pub.dev/packages/flex_seed_scheme) that depends on it.
+  As a part of this change classes `FlexTones`, `FlexTonalPalette` and `FlexCorePalette` where
+  moved into the package **FlexSeedScheme**. FlexColorScheme still exports these classes. If you
+  were using them directly before, you can still do so without adding the FlexSeedScheme package.
+  
+* In **FlexSeedScheme**, `FlexTones` contains a minor breaking change to make the API cleaner. 
+  The `FlexTones.light` and `FlexTones.dark` no longer produce the config for the Material 3 tone 
+  and chroma setup. They no longer lock the chroma values to the default values for M3, but use
+  null in their configs for their chroma values. Resulting in that chroma from key colors will be 
+  used, as long as they are over set minimum values. 
+  These named constructors then provide a cleaner starting API for
+  defining additional configurations, by not forcing `null` to be passed to use chroma value in 
+  key colors. To get the Material 3 configuration, use the factory `FlexTones.material` instead of 
+  `FlexTones.light` and `FlexTones.light`. It as before produces the correct Material 3 
+  configuration, by defining `secondaryChroma: 16` and `tertiaryChroma: 24` using `FlexTones.light`
+  and `FlexTones.dark` to return the correct Material 3 matching `FlexTones` configuration as
+  before. This change was introduced to prepare for extracting `FlexTones` and `FlexSeedScheme` to
+  their own package that will provide a `fromFlexSeeds` extension on `ColorScheme`. It is unlikely
+  to impact any normal usage of FlexColorScheme, but it is still a breaking change.
+
+* In **FlexSeedScheme** `FlexCorePalette.fromSeeds` properties `secondaryChroma` and 
+  `tertiaryChroma` now default to null instead of previous M3 palette default generating values 
+  16 and 24 respectively. Set them to values 16 and 24 to create same tonal palettes as 
+  Material Color Utilities `CorePalette` and previous versions of `FlexCorePalette`.
+* 
+* To allow for greater flexibility and addition of tonal palette tones 5 (custom for FCS) and 98
+  (Google Material 3 Web theme builder app includes tone 98 to, but not Flutter SDK), 
+ `FlexCorePalette` no longer extends `CorePalette`, it is a modified re-implementation.
+
+* In **FlexSeedScheme** the `FlexTonalPalette` method `asList` and constructor `fromList`, now 
+  include the values of the error color in produced asList, and as required values in fromList.
+
 **NEW**
 
-* Added two new `FlexTones`.
+* In **FlexSeedScheme**, added customization possibility of `error` tonal palette to the default 
+  `FlexTonalPalette` constructor.
+
+* In **FlexSeedScheme**, added two new `FlexTones`:
   1. `FlexTones.ultraContrast` with even more contrast that `highContrast`.
   2. `FlexTones.jolly` for a seeded `ColorScheme` with more poppy and jolly seed colors.
+
+* In **FlexSeedScheme**, added `SeedColorScheme.fromSeeds(...)` that can be used to create a 
+  seeded `ColorScheme` using multiple seed colors and `FlexTones` configuration.
+
+* In **FlexSeedScheme**, added `FlexTonalPalette` a re-implementation of Material Color Utilities
+  `TonalPalette`, with addition of tonal palette tones 5 and 98. The tone 98 also exists in the
+  [Web Material Theme Builder app](https://m3.material.io/theme-builder#/custom), but not in
+  Flutter or [Material Color Utilities package](https://pub.dev/packages/material_color_utilities).
+  Tone 5 is custom addition for `FlexTones` and `FlexColorScheme`.
 
 * Added `appBarCenterTitle` property to `FlexSubThemesData` configuration. It works the
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the
@@ -67,37 +105,27 @@ issues.
     When `useMaterial3` is `false`, the `outlineSchemeColor` defaults to `baseSchemeColor`.
     When `useMaterial3` is `true`, the `outlineSchemeColor` defaults to `SchemeColor.outline`.
 
-* Added `SeedColorScheme.fromSeeds(...)` that can be used to create a seeded `ColorScheme` 
-  using multiple seed colors and `FlexTones` configuration, without using `FlexColorScheme` class.
+**REMOVED EARLIER DEPRECATED MEMBERS**
 
-* Added `FlexTonalPalette` a re-implementation of Material Color Utilities `TonalPalette`, with
-  addition of tonal palette tones 5 and 98. The tone 98 also exists in the
-  [Web Material Theme Builder app](https://m3.material.io/theme-builder#/custom), but not in
-  Flutter or [Material Color Utilities package](https://pub.dev/packages/material_color_utilities).
-  Tone 5 is custom addition for `FlexTones` and `FlexColorScheme`.
+Removed in versions 4 and 5 deprecated members as follows.
+
+**FlexSubThemesData:**
+* `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, `navigationBarIsStyled` 
+  `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`, `navigationBarIconSchemeColor`
+  `navigationBarHighlightSchemeColor`
+
+**FlexColorScheme:**
+* `primaryVariant`, `secondaryVariant`, `useSubThemes`
+
+**FlexThemeData:**
+* `primaryVariant`, `secondaryVariant`, `useSubThemes`
+
+**SchemeColor:**
+* `primaryVariant`, `secondaryVariant`
  
-**BREAKING**
+**FlexConstants:**
+* `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`
 
-* `FlexTones` contains a minor breaking change to make the API cleaner. The `FlexTones.light` and
-  `FlexTones.dark` no longer produce the config for the Material 3 tone and chroma setup.
-  They no longer lock the chroma values to the default values for M3, but use null in their configs
-  for their chroma values. Resulting in that chroma from key colors will be used, as long as they 
-  are over set minimum values. These named constructors then provide a cleaner starting API for
-  defining additional configurations, by not forcing `null` to be passed to use chroma value in 
-  key colors. To get the Material 3 configuration, use the factory `FlexTones.material` instead of 
-  `FlexTones.light` and `FlexTones.light`. It as before produces the correct Material 3 
-  configuration, by defining `secondaryChroma: 16` and `tertiaryChroma: 24` using `FlexTones.light`
-  and `FlexTones.dark` to return the correct Material 3 matching `FlexTones` configuration as
-  before. This change was introduced to prepare for extracting `FlexTones` and `FlexSeedScheme` to
-  their own package that will provide a `fromFlexSeeds` extension on `ColorScheme`. It is unlikely
-  to impact any normal usage of FlexColorScheme, but it is still a breaking change.
-
-* `FlexCorePalette.fromSeeds` properties `secondaryChroma` and `tertiaryChroma` default to null
-  instead of previous M3 palette default generating values 16 and 24 respectively. Set them to 
-  previous values 16 and 24 to create same tonal palettes as Material Color Utilities `CorePalette`
-  and previous versions of `FlexCorePalette`. To allow for greater flexibility and addition of 
-  tonal palette tones 5 (custom for FCS) and 98 (Google Web app has this but not Flutter, we get
-  it now too), `FlexCorePalette` no longer extend `CorePalette` it is a modified re-implementation.
 
 **STYLE CHANGE - BREAKING**
 
@@ -119,7 +147,7 @@ issues.
   depends on and FCS also uses, introduced a minor breaking change going from version 0.1.4 to
   0.1.5. Some colors in the tonal palettes no longer give exactly the same color values as before.
   This changes the results for some colors when you create a `ColorScheme.fromSeed` or FCS does
-  it internally with its extended version `FlexSeedScheme.fromSeeds`. The new algorithm changes
+  it internally with its extended version `SeedColorScheme.fromSeeds`. The new algorithm changes
   for example all the default M3 error colors slightly. The changes in the color values are minor,
   and not visually noticeable to the eye. Values are however slightly different, and this release
   uses the new value for FCS M3 error colors. Tests were also updated to use the new values.
