@@ -511,44 +511,5 @@ void main() {
       expect(
           m1.hashCode, equals(m1.copyWith(interactionEffects: true).hashCode));
     });
-    // TODO: Remove this code.
-    //
-    // test(
-    //     'FSTC1.09: GIVEN input on deprecated renamed properties '
-    //     'EXPECT to find them on new properties', () {
-    //   const FlexSubThemesData newGetsOld = FlexSubThemesData(
-    //     inputDecoratorRadius: 10.0,
-    //     bottomNavigationBarSchemeColor: SchemeColor.error,
-    //     navigationBarTextSchemeColor: SchemeColor.onSurface,
-    //     navigationBarMutedUnselectedText: false,
-    //     navigationBarIconSchemeColor: SchemeColor.onBackground,
-    //     navigationBarHighlightSchemeColor: SchemeColor.inversePrimary,
-    //   );
-    //   expect(newGetsOld.inputDecoratorRadius, equals(10));
-    //   expect(
-    //     newGetsOld.bottomNavigationBarSelectedLabelSchemeColor,
-    //     SchemeColor.error,
-    //   );
-    //   expect(
-    //     newGetsOld.bottomNavigationBarSelectedIconSchemeColor,
-    //     SchemeColor.error,
-    //   );
-    //   expect(
-    //     newGetsOld.navigationBarSelectedLabelSchemeColor,
-    //     SchemeColor.onSurface,
-    //   );
-    //   expect(
-    //     newGetsOld.navigationBarMutedUnselectedLabel,
-    //     false,
-    //   );
-    //   expect(
-    //     newGetsOld.navigationBarSelectedIconSchemeColor,
-    //     SchemeColor.onBackground,
-    //   );
-    //   expect(
-    //     newGetsOld.navigationBarIndicatorSchemeColor,
-    //     SchemeColor.inversePrimary,
-    //   );
-    // });
   });
 }
