@@ -102,7 +102,7 @@ extension FlexThemeData on ThemeData {
     /// [colorScheme] based [surface] and [background] properties and make them
     /// 8% lighter.
     ///
-    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
     /// and set [blendLevel] > 0, then the effective color scheme based on
     /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
@@ -479,9 +479,8 @@ extension FlexThemeData on ThemeData {
     /// [FlexSurface].
     ///
     /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with [useSubThemes], then its selected scheme color will override this
-    /// value.
+    /// [FlexSubThemesData] and you have opted in on using component sub themes,
+    /// then its selected scheme color will override this value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -724,19 +723,6 @@ extension FlexThemeData on ThemeData {
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
-
-    /// This property has no function after 4.2.0. Prior to version 5 this
-    /// property was used to activate the opinionated component sub-themes.
-    /// Starting with version 5 they are now enabled by adding a default
-    /// constructor `FlexSubThemesData()` to [subThemesData].
-    ///
-    /// Defaults to false.
-    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-        'opinionated component sub-themes are added by adding a default '
-        'constructor FlexSubThemesData() to subThemesData. This creates '
-        'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing the FlexSubThemesData properties.')
-        final bool useSubThemes = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -1016,66 +1002,63 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK 3.0.5 [useMaterial3] documentation:
-    /// -----------------------------------------------
-    /// If true, then components that have been migrated to Material 3 will
-    /// use new colors, typography and other features of Material 3.
-    /// If false, they will use the Material 2 look and feel.
-    ///
+    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// --------------------------------------------------------
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
-    /// some properties will get special defaults. However, just copying a
-    /// [ThemeData] with [useMaterial3] set to true will not change any of
-    /// these properties in the
-    /// resulting [ThemeData]. These properties are:
-    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; }
-    /// td { border: 1px solid }</style>
+    /// some properties will get updated defaults. Please note that
+    /// [ThemeData.copyWith] with [useMaterial3] set to true will
+    /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// | Property        | Material 3 default           | Fallback default  |
-    /// | :-------------- | :--------------------------- | :---------------- |
-    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]       |
-    ///
-    /// \* if and only if the target platform is Android and the app is not
+    /// ```
+    /// Property      | Material 3 default          | Material 2 default      |
+    /// ------------- | --------------------------  | ----------------------  |
+    /// typography]   | Typography.material2021]    | Typography.material2014]|
+    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
+    /// ```
+    /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
     ///
-    /// During the migration to Material 3, turning this on may yield
-    /// inconsistent look and feel in your app. Some components will be migrated
-    /// before others and typography changes will be coming in stages.
+    /// ## Affected widgets
     ///
-    /// [useMaterial3] defaults to false. After all the migrated components
-    /// have landed on stable, we will change this to be true by default. After
-    /// that change has landed on stable, we will deprecate this flag and remove
-    /// all uses of it. Everything will use the Material 3 look and feel at
-    /// that point.
+    /// This flag affects styles and components.
     ///
-    /// Components that have been migrated to Material 3 are:
+    /// ### Styles
+    ///   * Color: [ColorScheme], [Material]
+    ///   * Shape: (see components below)
+    ///   * Typography: `typography` (see table above)
     ///
-    ///   * [AlertDialog]
-    ///   * [AppBar]
-    ///   * [Card]
-    ///   * [Dialog]
-    ///   * [ElevatedButton]
-    ///   * [FloatingActionButton]
-    ///   * [Material]
-    ///   * [NavigationBar]
+    /// ### Components
+    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
+    ///   * FAB: [FloatingActionButton]
+    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Cards: [Card]
+    ///   * Chips:
+    ///     - [ActionChip] (used for Assist and Suggestion chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [InputChip]
+    ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Lists: [ListTile]
+    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
     ///   * [NavigationRail]
-    ///   * [OutlinedButton]
-    ///   * [StretchingOverscrollIndicator], replacing the
-    ///     [GlowingOverscrollIndicator]
-    ///   * [TextButton]
+    ///   * Top app bar: [AppBar]
+    ///
+    /// In addition, this flag enables features introduced in Android 12.
+    ///   * Stretch overscroll: [MaterialScrollBehavior]
+    ///   * Ripple: `splashFactory` (see table above)
     ///
     /// See also:
     ///
     ///   * [Material Design 3](https://m3.material.io).
     ///
+    /// --------------------------------------------------------
+    ///
     /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
-    /// will also produce widget sub-themes using current Flutter Material 2
-    /// theming limitations. By default these opinionated sub-themes also
-    /// implement the Material 3 design and look when it is possible within
-    /// current SDK limits. During SDK transition to full M3 support, keeping
-    /// useMaterial3 false and just using the FlexColorScheme sub-theming, may
-    /// be preferred since it has fewer transitional issues.
+    /// in progress, using [FlexColorScheme] sub-themes will produce widget
+    /// sub-themes, using current Flutter Material 2 theming limitations, that
+    /// by default also implement the Material 3 design and look when it is
+    /// possible within current SDK limits. During SDK transition to full M3
+    /// support, keeping useMaterial3 false and just using the FlexColorScheme
+    /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -1200,7 +1183,7 @@ extension FlexThemeData on ThemeData {
     /// [colorScheme] based [surface] and [background] properties and make them
     /// 8% lighter.
     ///
-    /// If you opt in on using sub themes with [useSubThemes] and have set
+    /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
     /// and set [blendLevel] > 0, then the effective color scheme based on
     /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
@@ -1574,8 +1557,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
     /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with [useSubThemes], then its selected scheme color will override this
-    /// value.
+    /// with, then its selected scheme color will override this value.
     ///
     /// Defaults to null.
     final Color? dialogBackground,
@@ -1818,19 +1800,6 @@ extension FlexThemeData on ThemeData {
     /// desktop with device pixel ratio 1.0 and also use a padding style also
     /// suitable for multiline tooltips.
     final bool tooltipsMatchBackground = false,
-
-    /// This property has no function after 4.2.0. Prior to version 5 this
-    /// property was used to activate the opinionated component sub-themes.
-    /// Starting with version 5 they are now enabled by adding a default
-    /// constructor `FlexSubThemesData()` to [subThemesData].
-    ///
-    /// Defaults to false.
-    @Deprecated('This property has no function after 4.2.0. FlexColorScheme '
-        'opinionated component sub-themes are added by adding a default '
-        'constructor FlexSubThemesData() to subThemesData. This creates '
-        'sub-themes using the FlexColorScheme opinionated defaults. You can '
-        'modify the sub-themes by changing the FlexSubThemesData properties.')
-        final bool useSubThemes = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -2110,66 +2079,63 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK 3.0.5 [useMaterial3] documentation:
-    /// -----------------------------------------------
-    /// If true, then components that have been migrated to Material 3 will
-    /// use new colors, typography and other features of Material 3.
-    /// If false, they will use the Material 2 look and feel.
-    ///
+    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// --------------------------------------------------------
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
-    /// some properties will get special defaults. However, just copying a
-    /// [ThemeData] with [useMaterial3] set to true will not change any of
-    /// these properties in the
-    /// resulting [ThemeData]. These properties are:
-    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; }
-    /// td { border: 1px solid }</style>
+    /// some properties will get updated defaults. Please note that
+    /// [ThemeData.copyWith] with [useMaterial3] set to true will
+    /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// | Property        | Material 3 default           | Fallback default  |
-    /// | :-------------- | :--------------------------- | :---------------- |
-    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]       |
-    ///
-    /// \* if and only if the target platform is Android and the app is not
+    /// ```
+    /// Property      | Material 3 default          | Material 2 default      |
+    /// ------------- | --------------------------  | ----------------------  |
+    /// typography]   | Typography.material2021]    | Typography.material2014]|
+    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
+    /// ```
+    /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
     ///
-    /// During the migration to Material 3, turning this on may yield
-    /// inconsistent look and feel in your app. Some components will be migrated
-    /// before others and typography changes will be coming in stages.
+    /// ## Affected widgets
     ///
-    /// [useMaterial3] defaults to false. After all the migrated components
-    /// have landed on stable, we will change this to be true by default. After
-    /// that change has landed on stable, we will deprecate this flag and remove
-    /// all uses of it. Everything will use the Material 3 look and feel at
-    /// that point.
+    /// This flag affects styles and components.
     ///
-    /// Components that have been migrated to Material 3 are:
+    /// ### Styles
+    ///   * Color: [ColorScheme], [Material]
+    ///   * Shape: (see components below)
+    ///   * Typography: `typography` (see table above)
     ///
-    ///   * [AlertDialog]
-    ///   * [AppBar]
-    ///   * [Card]
-    ///   * [Dialog]
-    ///   * [ElevatedButton]
-    ///   * [FloatingActionButton]
-    ///   * [Material]
-    ///   * [NavigationBar]
+    /// ### Components
+    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
+    ///   * FAB: [FloatingActionButton]
+    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Cards: [Card]
+    ///   * Chips:
+    ///     - [ActionChip] (used for Assist and Suggestion chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [InputChip]
+    ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Lists: [ListTile]
+    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
     ///   * [NavigationRail]
-    ///   * [OutlinedButton]
-    ///   * [StretchingOverscrollIndicator], replacing the
-    ///     [GlowingOverscrollIndicator]
-    ///   * [TextButton]
+    ///   * Top app bar: [AppBar]
+    ///
+    /// In addition, this flag enables features introduced in Android 12.
+    ///   * Stretch overscroll: [MaterialScrollBehavior]
+    ///   * Ripple: `splashFactory` (see table above)
     ///
     /// See also:
     ///
     ///   * [Material Design 3](https://m3.material.io).
     ///
+    /// --------------------------------------------------------
+    ///
     /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, setting [useSubThemes] in [FlexColorScheme] to true,
-    /// will also produce widget sub-themes using current Flutter Material 2
-    /// theming limitations. By default these opinionated sub-themes also
-    /// implement the Material 3 design and look when it is possible within
-    /// current SDK limits. During SDK transition to full M3 support, keeping
-    /// useMaterial3 false and just using the FlexColorScheme sub-theming, may
-    /// be preferred since it has fewer transitional issues.
+    /// in progress, using [FlexColorScheme] sub-themes will produce widget
+    /// sub-themes, using current Flutter Material 2 theming limitations, that
+    /// by default also implement the Material 3 design and look when it is
+    /// possible within current SDK limits. During SDK transition to full M3
+    /// support, keeping useMaterial3 false and just using the FlexColorScheme
+    /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
     /// Arbitrary additions to this theme.
