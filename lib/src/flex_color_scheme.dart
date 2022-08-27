@@ -2576,10 +2576,12 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.light, onColors.onBackground, 30),
-          outlineVariant:
-              _outlineColor(Brightness.light, onColors.onBackground, 60),
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // outlineVariant:
+          //     _outlineColor(Brightness.light, onColors.onBackground, 60),
           shadow: Colors.black,
-          scrim: Colors.black,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
@@ -4279,10 +4281,12 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.dark, onColors.onBackground, 30),
-          outlineVariant:
-              _outlineColor(Brightness.dark, onColors.onBackground, 60),
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // outlineVariant:
+          //     _outlineColor(Brightness.dark, onColors.onBackground, 60),
           shadow: Colors.black,
-          scrim: Colors.black,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
@@ -4685,6 +4689,7 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
+
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system
@@ -6499,9 +6504,11 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: colorScheme?.outline,
-          outlineVariant: colorScheme?.outlineVariant,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          //     outlineVariant: colorScheme?.outlineVariant,
           shadow: colorScheme?.shadow,
-          scrim: colorScheme?.scrim,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: colorScheme?.scrim,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: colorScheme?.inversePrimary,
@@ -6535,10 +6542,12 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(usedBrightness, onColors.onBackground, 30),
-          outlineVariant:
-              _outlineColor(usedBrightness, onColors.onBackground, 60),
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // outlineVariant:
+          //     _outlineColor(usedBrightness, onColors.onBackground, 60),
           shadow: Colors.black,
-          scrim: Colors.black,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(

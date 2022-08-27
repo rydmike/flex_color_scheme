@@ -237,21 +237,23 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.outline,
                 textColor: colorScheme.background,
               ),
-              ColorCard(
-                label: 'Outline\nVariant',
-                color: colorScheme.outlineVariant,
-                textColor: colorScheme.background,
-              ),
+              // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
+              // ColorCard(
+              //   label: 'Outline\nVariant',
+              //   color: colorScheme.outlineVariant,
+              //   textColor: colorScheme.background,
+              // ),
               ColorCard(
                 label: 'Shadow',
                 color: colorScheme.shadow,
                 textColor: _onColor(colorScheme.shadow, background),
               ),
-              ColorCard(
-                label: 'Scrim',
-                color: colorScheme.scrim,
-                textColor: _onColor(colorScheme.shadow, background),
-              ),
+              // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
+              // ColorCard(
+              //   label: 'Scrim',
+              //   color: colorScheme.scrim,
+              //   textColor: _onColor(colorScheme.shadow, background),
+              // ),
               ColorCard(
                 label: 'Inverse\nSurface',
                 color: colorScheme.inverseSurface,

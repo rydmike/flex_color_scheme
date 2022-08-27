@@ -988,28 +988,29 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.outlineVariant);
-                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.outlineVariant,
-                        child: ColorNameValue(
-                          color: colorScheme.outline,
-                          textColor: _onColor(colorScheme.outlineVariant),
-                          label: 'outlineVariant',
-                          tone: tones.outlineVariantTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
+                  // Expanded(
+                  //   child: MouseRegion(
+                  //     onEnter: (PointerEvent details) {
+                  //       tc.setHoverColor(colorScheme.outlineVariant);
+                  //      tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
+                  //     },
+                  //     onExit: (PointerEvent details) {
+                  //       tc.setHoverColor(null);
+                  //       tc.setHoverTonalPalette(null);
+                  //     },
+                  //     child: Material(
+                  //       color: colorScheme.outlineVariant,
+                  //       child: ColorNameValue(
+                  //         color: colorScheme.outline,
+                  //         textColor: _onColor(colorScheme.outlineVariant),
+                  //         label: 'outlineVariant',
+                  //         tone: tones.outlineVariantTone,
+                  //         showTone: showTones,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -1047,28 +1048,29 @@ class SchemeColors extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: Column(
                 children: <Widget>[
-                  Expanded(
-                    child: MouseRegion(
-                      onEnter: (PointerEvent details) {
-                        tc.setHoverColor(colorScheme.scrim);
-                        tc.setHoverTonalPalette(TonalPalettes.neutral);
-                      },
-                      onExit: (PointerEvent details) {
-                        tc.setHoverColor(null);
-                        tc.setHoverTonalPalette(null);
-                      },
-                      child: Material(
-                        color: colorScheme.scrim,
-                        child: ColorNameValue(
-                          color: colorScheme.scrim,
-                          textColor: _onColor(colorScheme.scrim),
-                          label: 'scrim',
-                          tone: tones.scrimTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
+                  // Expanded(
+                  //   child: MouseRegion(
+                  //     onEnter: (PointerEvent details) {
+                  //       tc.setHoverColor(colorScheme.scrim);
+                  //       tc.setHoverTonalPalette(TonalPalettes.neutral);
+                  //     },
+                  //     onExit: (PointerEvent details) {
+                  //       tc.setHoverColor(null);
+                  //       tc.setHoverTonalPalette(null);
+                  //     },
+                  //     child: Material(
+                  //       color: colorScheme.scrim,
+                  //       child: ColorNameValue(
+                  //         color: colorScheme.scrim,
+                  //         textColor: _onColor(colorScheme.scrim),
+                  //         label: 'scrim',
+                  //         tone: tones.scrimTone,
+                  //         showTone: showTones,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {

@@ -635,9 +635,11 @@ void main() {
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
-      outlineVariant: Color(0xff999999),
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      // outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
-      scrim: Color(0xff000000),
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      // scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -709,9 +711,11 @@ void main() {
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xffb3b3b3),
-      outlineVariant: Color(0xff666666),
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      // outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
-      scrim: Color(0xff000000),
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      // scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -781,9 +785,11 @@ void main() {
           onInverseSurface: Colors.white,
           inversePrimary: Color(0xff9999ff),
           outline: Color(0xff4d4d4d),
-          outlineVariant: Color(0xff999999),
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // outlineVariant: Color(0xff999999),
           shadow: Colors.black,
-          scrim: Colors.black,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: Colors.black,
         )),
       );
     });
@@ -832,9 +838,11 @@ void main() {
           onInverseSurface: Colors.black,
           inversePrimary: Color(0xff6f5970),
           outline: Color(0xffb3b3b3),
-          outlineVariant: Color(0xff666666),
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // outlineVariant: Color(0xff666666),
           shadow: Colors.black,
-          scrim: Colors.black,
+          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+          // scrim: Colors.black,
         )),
       );
     });

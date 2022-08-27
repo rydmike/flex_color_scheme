@@ -3,8 +3,8 @@ description: Examples that demonstrate how to use the FlexColorScheme package.
 version: 6.0.0-dev.1
 publish_to: 'none'
 environment:
-  sdk: '>=2.17.0 <3.0.0'
-  flutter: '>=3.1.0-0.0.pre.2199'
+  sdk: '>=2.18.0-271.4.beta <3.0.0'
+  # flutter: '>=3.1.0-0.0.pre.2199'
 
 dependencies:
   # Adds the Cupertino Icons font to your application. Used by the
@@ -44,11 +44,11 @@ dependencies:
   # Use ^0.1.3 for Flutter stable 2.10.x, that uses 0.1.3
   # Use ^0.1.3 for Flutter stable 3.0.x, that uses 0.1.4.
   # Use ^0.1.3 for Flutter rel candidates 3.1, 3.2, 3.4, that uses 0.1.5, beware that
-  # version 0.1.5 has a new algo compared to 0.1.4 that changes some seed colors slightly.
+  # version 0.1.5 has a new faster algo compared to 0.1.4 that changes some seed colors slightly.
   # Use ^0.2.0 for Flutter master 3.1.0-x, that uses 0.2.0 after 5.8.2022.
   #
-  # Here we use an unusual range since 0.2.0 is braking over 0.1.x, but it works for this case.
-  # Older version 0.1.3 and 0.1.4 in theory also works, but they break the package color tests.
+  # This is an unusual range since 0.2.0 is a breaking semver step over 0.1.x, but it works for this
+  # case, and was also observed as range used by Google package dynamic_color.
   material_color_utilities: '>=0.1.5 <=0.2.0'
 
   # Material Design Icons, community designed. Used for
