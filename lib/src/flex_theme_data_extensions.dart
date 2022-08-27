@@ -1,3 +1,4 @@
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_color_scheme.dart';
@@ -6,7 +7,6 @@ import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_sub_themes_data.dart';
 import 'flex_surface_mode.dart';
-import 'flex_tones.dart';
 
 // ignore_for_file: comment_references
 

@@ -92,6 +92,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
+  flex_seed_scheme:
+    dependency: "direct main"
+    description:
+      name: flex_seed_scheme
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0-dev.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -159,7 +166,7 @@ packages:
     source: hosted
     version: "0.12.12"
   material_color_utilities:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: material_color_utilities
       url: "https://pub.dartlang.org"

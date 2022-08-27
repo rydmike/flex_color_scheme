@@ -10,6 +10,10 @@ environment:
   # flutter: '>=3.1.0-0.0.pre.2199'
 
 dependencies:
+  # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # https://pub.dev/packages/flex_seed_scheme
+  flex_seed_scheme: ^0.2.0-dev.1
+
   flutter:
     sdk: flutter
 
@@ -25,7 +29,7 @@ dependencies:
   #
   # This is an unusual range since 0.2.0 is a breaking semver step over 0.1.x, but it works for this
   # case, and was also observed as range used by Google package dynamic_color.
-  material_color_utilities: '>=0.1.5 <=0.2.0'
+  # material_color_utilities: '>=0.1.5 <=0.2.0'
 
   # Annotations used to express developer intentions that can't otherwise be deduced by
   # statically analyzing source code. Package is from Google dart.dev team.
