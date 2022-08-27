@@ -175,19 +175,12 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
     this.bottomNavigationBarUnselectedLabelSize,
-    SchemeColor? bottomNavigationBarSelectedLabelSchemeColor,
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-        'version 5 and later this property has been renamed and split to two '
-        'properties: bottomNavigationBarSelectedLabelSchemeColor and '
-        'bottomNavigationBarSelectedIconSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        this.bottomNavigationBarSchemeColor,
+    this.bottomNavigationBarSelectedLabelSchemeColor,
     this.bottomNavigationBarUnselectedLabelSchemeColor,
     this.bottomNavigationBarMutedUnselectedLabel = true,
     this.bottomNavigationBarSelectedIconSize,
     this.bottomNavigationBarUnselectedIconSize,
-    SchemeColor? bottomNavigationBarSelectedIconSchemeColor,
+    this.bottomNavigationBarSelectedIconSchemeColor,
     this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
@@ -266,11 +259,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  })  : _bottomNavigationBarSelectedLabelSchemeColor =
-            bottomNavigationBarSelectedLabelSchemeColor,
-        _bottomNavigationBarSelectedIconSchemeColor =
-            bottomNavigationBarSelectedIconSchemeColor,
-        _navigationBarSelectedLabelSchemeColor =
+  })  : _navigationBarSelectedLabelSchemeColor =
             navigationBarSelectedLabelSchemeColor,
         _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
         _navigationBarSelectedIconSchemeColor =
@@ -1227,22 +1216,7 @@ class FlexSubThemesData with Diagnosticable {
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.primary] in light theme and
   /// [ColorScheme.dark] in dark theme mode.
-  SchemeColor? get bottomNavigationBarSelectedLabelSchemeColor =>
-      _bottomNavigationBarSelectedLabelSchemeColor ??
-      bottomNavigationBarSchemeColor;
-  final SchemeColor? _bottomNavigationBarSelectedLabelSchemeColor;
-
-  /// Deprecated and replaced by [bottomNavigationBarSelectedLabelSchemeColor]
-  /// and [bottomNavigationBarSelectedIconSchemeColor] that still fall through
-  /// this property.
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar, BottomNavigationBar and NavigationRail sub-themes in '
-      'version 5 and later this property has been renamed and split to two '
-      'properties: bottomNavigationBarSelectedLabelSchemeColor and '
-      'bottomNavigationBarSelectedIconSchemeColor. '
-      'This property will be completely removed in version 6.0.0.')
-  final SchemeColor? bottomNavigationBarSchemeColor;
+  final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
   /// the [BottomNavigationBar]'s unselected label text color.
@@ -1288,10 +1262,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] is true, and this property and all other
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.primary] in light and [ColorScheme.dark] in dark theme mode.
-  SchemeColor? get bottomNavigationBarSelectedIconSchemeColor =>
-      _bottomNavigationBarSelectedIconSchemeColor ??
-      bottomNavigationBarSchemeColor;
-  final SchemeColor? _bottomNavigationBarSelectedIconSchemeColor;
+  final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
   /// the [BottomNavigationBar]'s unselected items icon color.
