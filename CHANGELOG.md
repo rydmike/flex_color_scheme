@@ -109,14 +109,20 @@ issues.
 
 Removed in versions 4 and 5 deprecated members as follows:
 
-* *FlexSubThemesData:* `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, 
+* *FlexSubThemesData:*  
+  `inputDecorationRadius`, `bottomNavigationBarSchemeColor`, 
   `navigationBarIsStyled`, `navigationBarTextSchemeColor`, `navigationBarMutedUnselectedText`,
   `navigationBarIconSchemeColor`, `navigationBarHighlightSchemeColor`
-* *FlexColorScheme:* `primaryVariant`, `secondaryVariant`, `useSubThemes`
-* *FlexThemeData:* `primaryVariant`, `secondaryVariant`, `useSubThemes`
-* *SchemeColor:* `primaryVariant`, `secondaryVariant`
-* *FlexConstants:* `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`,
-  `kDarkenPrimaryVariant`
+* *FlexColorScheme:*  
+  `primaryVariant`, `secondaryVariant`, `useSubThemes`
+* *FlexThemeData:*  
+  `primaryVariant`, `secondaryVariant`, `useSubThemes`
+* *FlexSchemeColor:*  
+  `primaryVariant`, `secondaryVariant`
+* *SchemeColor:*  
+  `primaryVariant`, `secondaryVariant`
+* *FlexConstants:*  
+  `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`
 
 **STYLE CHANGE - BREAKING**
 

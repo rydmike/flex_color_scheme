@@ -83,7 +83,7 @@ class FlexColor {
   static Color lightErrorContainer(Color lightError) =>
       lightError.brighten(25).blend(const Color(0xFFFFFFFF), 80);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
+  // INFO: v0.1.5 of material_color_utilities changed this color.
   // Before version 0.1.5. the color value was:
   // static const Color material3LightError = Color(0xFFBA1B1B);
   // In version 0.1.5 and due to a small braking algo change, it is:
@@ -94,19 +94,19 @@ class FlexColor {
   /// Material 3 standard light onError color.
   static const Color material3LightOnError = Color(0xFFFFFFFF);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
-  // In version 0.1.5 and due to a small braking algo change, it is:
-  //
   /// Material 3 standard light error container color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
+  /// In version 0.1.5 and due to a small braking algo change, it is:
   static const Color material3LightErrorContainer = Color(0xFFFFDAD6);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3LightOnErrorContainer = Color(0xFF410001);
-  //
   /// Material 3 standard light on error container color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3LightOnErrorContainer = Color(0xFF410001);
   static const Color material3LightOnErrorContainer = Color(0xFF410002);
 
   /// Material 2 standard dark error color.
@@ -116,32 +116,32 @@ class FlexColor {
   static Color darkErrorContainer(Color darkError) =>
       darkError.darken(15); //.blend(const Color(0xFF000000), 30);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3DarkError = Color(0xFFFFB4A9);
-  //
   /// Material 3 standard dark error color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3DarkError = Color(0xFFFFB4A9);
   static const Color material3DarkError = Color(0xFFFFB4AB);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3DarkOnError = Color(0xFF680003);
-  //
   /// Material 3 standard dark onError color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3DarkOnError = Color(0xFF680003);
   static const Color material3DarkOnError = Color(0xFF690005);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3DarkErrorContainer = Color(0xFF930006);
-  //
   /// Material 3 standard dark error container color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3DarkErrorContainer = Color(0xFF930006);
   static const Color material3DarkErrorContainer = Color(0xFF93000A);
 
-  // TODO(rydmike): v0.1.5 of material_color_utilities changed this color.
-  // Before version 0.1.5. the color value was:
-  // static const Color material3DarkOnErrorContainer = Color(0xFFFFB4A9);
-  //
   /// Material 3 standard dark on error container color.
+  ///
+  /// INFO: v0.1.5 of material_color_utilities changed this color.
+  /// Before version 0.1.5. the color value was:
+  /// static const Color material3DarkOnErrorContainer = Color(0xFFFFB4A9);
   static const Color material3DarkOnErrorContainer = Color(0xFFFFB4AB);
 
   // High contrast Material 2 standard error color as per those used in Flutter
