@@ -1,9 +1,9 @@
 import 'dart:math' as math;
 
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:material_color_utilities/material_color_utilities.dart';
 
 import 'flex_alpha_values.dart';
 import 'flex_color.dart';
@@ -14,11 +14,9 @@ import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_scheme_on_colors.dart';
 import 'flex_scheme_surface_colors.dart';
-import 'flex_seed_scheme.dart';
 import 'flex_sub_themes.dart';
 import 'flex_sub_themes_data.dart';
 import 'flex_surface_mode.dart';
-import 'flex_tones.dart';
 
 // ignore_for_file: comment_references
 
