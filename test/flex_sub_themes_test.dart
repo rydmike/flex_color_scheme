@@ -3550,6 +3550,8 @@ void main() {
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2021(platform: TargetPlatform.android).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -3579,10 +3581,10 @@ void main() {
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
-                  return FlexColorScheme.m3TextTheme.labelSmall!
+                  return textTheme.labelSmall!
                       .copyWith(color: colorScheme.error);
                 }
-                return FlexColorScheme.m3TextTheme.labelSmall!.copyWith(
+                return textTheme.labelSmall!.copyWith(
                   color: colorScheme.error
                       .blendAlpha(colorScheme.error, 0x66)
                       .withAlpha(0xA5),
@@ -3640,10 +3642,12 @@ void main() {
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2021(platform: TargetPlatform.android).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
-        labelTextStyle: FlexColorScheme.m3TextTheme.bodySmall,
+        labelTextStyle: textTheme.bodySmall,
         selectedIconSchemeColor: SchemeColor.secondaryContainer,
         selectedLabelSchemeColor: SchemeColor.primaryContainer,
         unselectedIconSchemeColor: SchemeColor.onSurface,
@@ -3672,10 +3676,10 @@ void main() {
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
-                  return FlexColorScheme.m3TextTheme.bodySmall!
+                  return textTheme.bodySmall!
                       .copyWith(color: colorScheme.primaryContainer);
                 }
-                return FlexColorScheme.m3TextTheme.bodySmall!
+                return textTheme.bodySmall!
                     .copyWith(color: colorScheme.onSurface);
               },
             ),
