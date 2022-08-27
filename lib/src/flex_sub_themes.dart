@@ -105,14 +105,16 @@ enum SchemeColor {
   /// The active theme's color scheme outline color will be used.
   outline,
 
-  /// The active theme's color scheme outlineVariant color will be used.
-  outlineVariant,
+  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+  // /// The active theme's color scheme outlineVariant color will be used.
+  // outlineVariant,
 
   /// The active theme's color scheme shadow color will be used.
   shadow,
 
-  /// The active theme's color scheme scrim color will be used.
-  scrim,
+  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+  // /// The active theme's color scheme scrim color will be used.
+  // scrim,
 
   /// The active theme's color scheme inverseSurface color will be used.
   inverseSurface,
@@ -289,12 +291,14 @@ class FlexSubThemes {
         return colorScheme.onSurfaceVariant;
       case SchemeColor.outline:
         return colorScheme.outline;
-      case SchemeColor.outlineVariant:
-        return colorScheme.outlineVariant;
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      //   case SchemeColor.outlineVariant:
+      //     return colorScheme.outlineVariant;
       case SchemeColor.shadow:
         return colorScheme.shadow;
-      case SchemeColor.scrim:
-        return colorScheme.scrim;
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      //   case SchemeColor.scrim:
+      //     return colorScheme.scrim;
       case SchemeColor.inverseSurface:
         return colorScheme.inverseSurface;
       case SchemeColor.onInverseSurface:
@@ -371,12 +375,14 @@ class FlexSubThemes {
         return colorScheme.surfaceVariant;
       case SchemeColor.outline:
         return colorScheme.background;
-      case SchemeColor.outlineVariant:
-        return colorScheme.background;
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      //   case SchemeColor.outlineVariant:
+      //     return colorScheme.background;
       case SchemeColor.shadow:
         return colorScheme.background;
-      case SchemeColor.scrim:
-        return colorScheme.background;
+      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
+      //   case SchemeColor.scrim:
+      //     return colorScheme.background;
       case SchemeColor.inverseSurface:
         return colorScheme.onInverseSurface;
       case SchemeColor.onInverseSurface:

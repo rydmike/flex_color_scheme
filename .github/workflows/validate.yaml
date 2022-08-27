@@ -48,7 +48,7 @@ jobs:
       - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
       - name: "Upload test coverage to Codecov"
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage/lcov.info
