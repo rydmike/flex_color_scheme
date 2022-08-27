@@ -34,11 +34,8 @@ export 'src/flex_key_color.dart';
 /// definition objects.
 export 'src/flex_scheme.dart';
 
-/// Immutable data class used to hold the main colors used to provide colors to
+/// Immutable data class used to hold the main colors providing colors to
 /// FlexColorScheme.
-///
-/// Used as a container to hold the color value combinations for
-/// built in color schemes.
 export 'src/flex_scheme_color.dart';
 
 /// Immutable data class used to hold a light and dark `FlexSchemeColor` set
@@ -52,7 +49,9 @@ export 'src/flex_scheme_on_colors.dart';
 
 /// Immutable data class used to make the six different surface colors in a
 /// FlexColorScheme.
-export 'src/flex_scheme_surface_colors.dart'; // Defines opinionated component sub-themes used by FlexColorScheme.
+export 'src/flex_scheme_surface_colors.dart';
+
+/// Defines opinionated component sub-themes used by FlexColorScheme.
 export 'src/flex_sub_themes.dart';
 
 /// Immutable data class used to configure FlexSubThemes used by
@@ -70,12 +69,3 @@ export 'src/flex_theme_data_extensions.dart';
 /// A theme-mode 3-way switch widget that uses `FlexSchemeData` as colors to
 /// show scheme colors for light, dark and system mode, on each button.
 export 'src/flex_theme_mode_switch.dart';
-
-//
-// TODO(rydmike): Remove me
-// /// Defines which tone to use from each tonal palette, when assigning
-// /// used color to each color scheme color.
-// ///
-// /// Also enables defining how Cam16 chroma is used and limited when
-// /// generating the tonal palettes.
-// export 'src/flex_tones.dart';
