@@ -202,13 +202,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarSelectedIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = true,
-    SchemeColor? navigationBarIndicatorSchemeColor,
-    @Deprecated('This property has no function after 4.2.0. To harmonize '
-        'NavigationBar and NavigationRail sub-themes in '
-        'version 5 and later, this property has been renamed to: '
-        'navigationBarIndicatorSchemeColor. '
-        'This property will be completely removed in version 6.0.0.')
-        this.navigationBarHighlightSchemeColor,
+    this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity = 1,
@@ -235,8 +229,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation = kNavigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
-  })  : _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel,
-        _navigationBarIndicatorSchemeColor = navigationBarIndicatorSchemeColor;
+  }) : _navigationBarMutedUnselectedLabel = navigationBarMutedUnselectedLabel;
 
   /// Opt-in on using color branded hover, focus, highlight and splash
   /// interaction state effects.
@@ -1460,20 +1453,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If [useFlutterDefaults] true, and this property is undefined,
   /// the effective indicator color will be [ColorScheme.secondary]
   /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
-  SchemeColor? get navigationBarIndicatorSchemeColor =>
-      _navigationBarIndicatorSchemeColor ?? navigationBarHighlightSchemeColor;
-  final SchemeColor? _navigationBarIndicatorSchemeColor;
-
-  /// Select which color from the theme [ColorScheme] to use as base for
-  /// the selected [NavigationBar]'s highlighted item.
-  /// Deprecated and replaced by [navigationBarIndicatorSchemeColor].
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. To harmonize '
-      'NavigationBar  and NavigationRail sub-themes in '
-      'version 5 and later, this property has been renamed to: '
-      'navigationBarIndicatorSchemeColor. '
-      'This property will be completely removed in version 6.0.0.')
-  final SchemeColor? navigationBarHighlightSchemeColor;
+  final SchemeColor? navigationBarIndicatorSchemeColor;
 
   /// Opacity used on the [NavigationBar] indicator.
   ///
