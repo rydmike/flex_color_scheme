@@ -340,40 +340,6 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? primaryContainer,
 
-    /// A darker version of the primary color.
-    ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
-    /// button color in dark theme mode as a part of predefined widget behavior.
-    /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-    /// color property becomes a good property to use if you need a custom color
-    /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any other built-in widgets. This applies
-    /// to Flutter 2.8.1 and earlier versions.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [primaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? primaryVariant,
-
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
     ///
@@ -410,39 +376,6 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
-
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, and that is
-    /// not used as default color by any built-in widgets. So you are in
-    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
-    /// need and not affect any built-in widgets theme based colors.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [secondaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? secondaryVariant,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -1170,9 +1103,9 @@ extension FlexThemeData on ThemeData {
         bottomAppBarElevation: bottomAppBarElevation,
         tabBarStyle: tabBarStyle,
         primary: primary,
-        primaryContainer: primaryContainer ?? primaryVariant,
+        primaryContainer: primaryContainer,
         secondary: secondary,
-        secondaryContainer: secondaryContainer ?? secondaryVariant,
+        secondaryContainer: secondaryContainer,
         tertiary: tertiary,
         tertiaryContainer: tertiaryContainer,
         error: error,
@@ -1500,40 +1433,6 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? primaryContainer,
 
-    /// A darker version of the primary color.
-    ///
-    /// In Flutter SDK the `primaryVariant` color is only used by [SnackBar]
-    /// button color in dark theme mode as a part of predefined widget behavior.
-    /// If you provide a custom [SnackBarThemeData] where you define
-    /// [SnackBarThemeData.actionTextColor] to [primary] or [secondary], this
-    /// color property becomes a good property to use if you need a custom color
-    /// for custom widgets accessible via your application's ThemeData, that is
-    /// not used as default color by any other built-in widgets. This applies
-    /// to Flutter 2.8.1 and earlier versions.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [primaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `primaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? primaryVariant,
-
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
     ///
@@ -1570,39 +1469,6 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
-
-    /// A darker version of the secondary color.
-    ///
-    /// In Flutter SDK the `secondaryVariant` color is not used by in any
-    /// built-in widgets default themes or predefined widget behavior.
-    /// It is an excellent property to use if you need a custom color for
-    /// custom widgets accessible via your application's ThemeData, and that is
-    /// not used as default color by any built-in widgets. So you are in
-    /// Flutter 2.8.1 and earlier version free to set it to whatever color you
-    /// need and not affect any built-in widgets theme based colors.
-    ///
-    /// The property is deprecated in Flutter SDK and was replaced
-    /// by a new property called [secondaryContainer]. It is deprecated from
-    /// master v2.6.0-0.0.pre, and in stable (2.10.0).
-    /// See https://github.com/flutter/flutter/issues/89852.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    @Deprecated('Replaced with `secondaryContainer`, after version 4.2.0, '
-        'due to deprecation in Flutter master from 2.10.0')
-        final Color? secondaryVariant,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -2331,9 +2197,9 @@ extension FlexThemeData on ThemeData {
         bottomAppBarElevation: bottomAppBarElevation,
         tabBarStyle: tabBarStyle,
         primary: primary,
-        primaryContainer: primaryContainer ?? primaryVariant,
+        primaryContainer: primaryContainer,
         secondary: secondary,
-        secondaryContainer: secondaryContainer ?? secondaryVariant,
+        secondaryContainer: secondaryContainer,
         tertiary: tertiary,
         tertiaryContainer: tertiaryContainer,
         error: error,
