@@ -2396,13 +2396,11 @@ void main() {
       subThemesData: const FlexSubThemesData(
         defaultRadius: 8,
         tabBarIndicatorSchemeColor: SchemeColor.secondary,
-        navigationBarIsStyled: false,
       ),
     ).toTheme;
 
     test(
         'FCS7.82-M3Bar1: GIVEN a FlexColorScheme.light with more options '
-        'setting navigationBarIsStyled '
         'EXPECT none null result.', () {
       expect(tLightM3Bar1, isNotNull);
     });
@@ -2420,7 +2418,6 @@ void main() {
       subThemesData: const FlexSubThemesData(
         defaultRadius: 8,
         tabBarIndicatorSchemeColor: SchemeColor.secondary,
-        navigationBarIsStyled: false,
         navigationBarHeight: 70,
         navigationBarOpacity: 0.95,
         navigationBarSelectedIconSchemeColor: SchemeColor.primary,

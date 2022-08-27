@@ -190,13 +190,6 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarShowUnselectedLabels = true,
     this.bottomNavigationBarType = BottomNavigationBarType.fixed,
     this.bottomNavigationBarLandscapeLayout,
-    //
-    @Deprecated('This property has no function after 4.2.0. It has been '
-        'replaced by similar function FlexSubThemesData.useFlutterDefaults, '
-        'please see it for more details. If you want to use the new property, '
-        'you have to set it explicitly, it does not fall back via this past '
-        'property. This property will be completely removed in version 6.0.0.')
-        this.navigationBarIsStyled = true,
     this.navigationBarLabelTextStyle,
     this.navigationBarSelectedLabelSize,
     this.navigationBarUnselectedLabelSize,
@@ -1360,20 +1353,6 @@ class FlexSubThemesData with Diagnosticable {
   // NavigationBar Properties
   //
   // ---------------------------------------------------------------------------
-
-  /// Deprecated and removed styling property that caused the NavigationBar
-  /// to default to its Flutter SDK default theme when sub-theme properties
-  /// were null.
-  ///
-  /// This property has no function after 4.2.0. It has been replaced by
-  /// [FlexSubThemesData.useFlutterDefaults], please see it for more details.
-  /// This property will be completely removed in version 6.0.0.
-  @Deprecated('This property has no function after 4.2.0. It has been '
-      'replaced by similar function FlexSubThemesData.useFlutterDefaults, '
-      'please see it for more details. If you want to use the new property, '
-      'you have to set it explicitly, it does not fall back via this past '
-      'property. This property will be completely removed in version 6.0.0.')
-  final bool? navigationBarIsStyled;
 
   /// Optional text style for the [NavigationBar] labels.
   ///
