@@ -123,6 +123,12 @@ Removed in versions 4 and 5 deprecated members as follows:
   `primaryVariant`, `secondaryVariant`
 * *FlexConstants:*  
   `kDarkenSecondaryVariant`, `kDarkenSecondaryVariantFromSecondary`, `kDarkenPrimaryVariant`
+* *FlexSubThemes.bottomNavigationBar:*
+  `baseSchemeColor`
+* *FlexSubThemes.navigationBarTheme:*
+  `textSchemeColor`, `unselectedTextSchemeColor`, `mutedUnselectedText`, `iconSchemeColor`,
+  `highlightSchemeColor`.
+
 
 **STYLE CHANGE - BREAKING**
 
