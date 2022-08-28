@@ -77,7 +77,7 @@ packages:
       name: flex_color_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.0-dev.2"
+    version: "2.6.0-dev.3"
   flex_color_scheme:
     dependency: "direct main"
     description:
@@ -91,7 +91,7 @@ packages:
       name: flex_seed_scheme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0-dev.1"
+    version: "0.2.0-dev.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -443,4 +443,4 @@ packages:
     version: "0.2.0+1"
 sdks:
   dart: ">=2.18.0-271.4.beta <3.0.0"
-  flutter: ">=3.1.0-0.0.pre.2111"
+  flutter: ">=3.0.0"
