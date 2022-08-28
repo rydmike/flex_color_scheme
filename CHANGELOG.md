@@ -4,21 +4,21 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.0.0-dev.1
 
-**Aug 27, 2022**
+**Aug 28, 2022**
 
 This dev release is for Flutter *beta 3.3.0-0.5.pre*, it will be released when next Flutter 
-stable version after 3.0 comes out. 
+stable version after 3.0 comes out, presumably version 3.3. 
 
-If you experiment with this dev release and want to use the Theme Playground, then please build
-bundled example 5 for macOS, Windows or Linux desktop. Don't use the 5.1.0 live web based version.
-While it will work, to copy-paste code from it too, it is not broken. It will however not show you 
-the exact same style in all cases that you actually get when you use it with this release.
+If you experiment with this dev release and want to use the Theme Playground, then please use the
+version 6 beta build, [**here**](https://rydmike.com/flexcolorscheme/themesplayground-v6). The doc
+site does not yet contain any information about version 6, it will be added after its stable
+release.
 
 Due to a number of known and below documented Flutter SDK issues when using `useMaterial3` set to
 `true`, we cannot yet recommend using the option in production. Use it only if you are willing to
 accept the still incomplete Material 3 implementation in Flutter and the issues. If you
 keep `useMaterial3` set to `false`, and use FCS opinionated component themes, you can create a 
-theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid the 
+theme that is visually fairly similar to M3, but still using M2 `ThemeData` mode to avoid many 
 issues.
 
 **BREAKING**
@@ -50,7 +50,7 @@ issues.
   `tertiaryChroma` now default to null instead of previous M3 palette default generating values 
   16 and 24 respectively. Set them to values 16 and 24 to create same tonal palettes as 
   Material Color Utilities `CorePalette` and previous versions of `FlexCorePalette`.
-* 
+
 * To allow for greater flexibility and addition of tonal palette tones 5 (custom for FCS) and 98
   (Google Material 3 Web theme builder app includes tone 98 to, but not Flutter SDK), 
  `FlexCorePalette` no longer extends `CorePalette`, it is a modified re-implementation.
