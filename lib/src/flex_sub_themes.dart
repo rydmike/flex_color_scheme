@@ -1589,12 +1589,10 @@ class FlexSubThemes {
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    final Color? usedFillColor = fillColor ??
-        (useMaterial3
-            ? null
-            : (colorScheme.brightness == Brightness.dark
-                ? baseColor.withAlpha(kFillColorAlphaDark)
-                : baseColor.withAlpha(kFillColorAlphaLight)));
+    final Color usedFillColor = fillColor ??
+        (colorScheme.brightness == Brightness.dark
+            ? baseColor.withAlpha(kFillColorAlphaDark)
+            : baseColor.withAlpha(kFillColorAlphaLight));
 
     final Color enabledBorder = unfocusedBorderIsColored
         ? baseColor.withAlpha(kEnabledBorderAlpha)

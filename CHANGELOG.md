@@ -194,17 +194,18 @@ self deprecated members as follows:
   channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
 * Updated `InputDecoration` default sub-theme when opting in on `useMaterial3`. When `true` it 
-  now results in more upcoming M3 styled `TextField` style, instead of its own totally opinionated 
-  custom style also when the opinionated component sub-themes are enabled. It still uses a touch
-  of its own style. To get the same opinionated coloring as before, but on the M3 styled
-  'TextField' when using M3, set component sub-themes data
-  `subThemesData: const FlexSubThemesData(cinputDecoratorSchemeColor: SchemeColor.primary)`.
-  This feature will only work with intended design in stable channel after feature and PR
+  now results in a more upcoming M3 styled `TextField` style by default, instead of its own more 
+  opinionated custom style, also when the opinionated component sub-themes are enabled. 
+  It still uses a touch a lot of its own style in M3 mode, because TextField's real M3 design is
+  not yet available in Flutter 3.3. TextField FCS opinionated style, combined with M3 real defaulta,
+  will need more work on M3 styles after 
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
-  stable channel. Currently, it is only available in Flutter *master 3.1.0-x*. 
-  The M3 alignment of FCS `InputDecoration` may still need more work, like:
-  - Move towards same error container color idea for FCS default, like M3 uses
-  - Option to use FCS component defaults on fill colors and disabled color when opting in on M3.
+  stable channel.   
+  The M3 alignment of FCS `InputDecoration` planned adjustments are:
+  - Use same error container color idea for FCS default that M3 uses, could be OK for all modes.
+  - Option to use FCS component defaults on fill colors and disabled colors, also when 
+    opting in on M3. These FCS defaults can provide a nice alternative also when opting in on M3,
+    but should not force it on M3 unless asked for.
 
 **CHANGE**
   
