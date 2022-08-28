@@ -208,7 +208,7 @@ self deprecated members as follows:
   now results in a more upcoming M3 styled `TextField` style by default, instead of its own more 
   opinionated custom style, also when the opinionated component sub-themes are enabled. 
   It still uses a touch a lot of its own style in M3 mode, because TextField's real M3 design is
-  not yet available in Flutter 3.3. TextField FCS opinionated style, combined with M3 real defaulta,
+  not yet available in Flutter 3.3. TextField FCS opinionated style, combined with M3 real defaults,
   will need more work on M3 styles after 
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
   stable channel.   
@@ -238,7 +238,7 @@ self deprecated members as follows:
   For a migration guide concerning `toggleableActiveColor` see 
   [Flutter breaking-changes](https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide).
 * Since Flutter 3.3 did not yet include the actual deprecation of `toggleableActiveColor` FCS still
-  defines its appropraiet color value for `ThemeData`.
+  defines its appropriate color value for `ThemeData`.
 
 
 **EXAMPLES**
@@ -247,7 +247,7 @@ self deprecated members as follows:
   a `CodeTheme` class `ThemeExtension` to `ThemeData`. To demonstrate how one can use theme 
   extensions directly with FlexColorScheme as well, in this case to add custom semantic colors 
   for the code view's code keyword highlighter. Additionally, a fancy Material 3 feature was added, 
-  color harmonization of custom colors. The proces is described in M3 guide under 
+  color harmonization of custom colors. The process is described in M3 guide under 
   [custom colors](https://m3.material.io/styles/color/the-color-system/custom-colors).
   The M3 library [MaterialColorUtilities](https://pub.dev/packages/material_color_utilities) has 
   the `Blend` function needed to perform the color harmonization, as described
@@ -1451,12 +1451,6 @@ should be relatively easy, despite the long list of changes and new features.
 * Add more tests for legacy fallbacks when using old deprecated
   `primaryVariant` and `secondaryVariant` properties.
 * Add tests and verification of old colors definition backwards behavior.
-
-### What is Next?
-
-Curious about what is planned next for FlexColorScheme? Head over
-to the TODO section at the end of this page and read more
-[here](#future-features).
 
 ## 4.2.0
 
