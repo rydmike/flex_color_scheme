@@ -69,7 +69,7 @@ class ThemeSelectorDelegateWrapper extends StatelessWidget {
     final MediaQueryData media = MediaQuery.of(context);
     final double margins = AppData.responsiveInsets(media.size.width);
     return Material(
-      color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
+      color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),

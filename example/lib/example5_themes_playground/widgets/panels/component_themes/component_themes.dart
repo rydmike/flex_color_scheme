@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
+import '../../shared/use_material3_text_theme.dart';
+import '../../shared/use_tinted_text_theme.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -13,7 +15,6 @@ class ComponentThemes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -25,40 +26,8 @@ class ComponentThemes extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
-        SwitchListTileAdaptive(
-          title: const Text('Use Material 3 TextTheme'),
-          subtitle: const Text("ON to use FlexColorScheme's M3 text styles "
-              'and geometry\n'
-              'OFF to use SDK M2 2018 text styles and geometry'),
-          value: controller.useTextTheme &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseTextTheme
-              : null,
-        ),
-        if (isLight)
-          SwitchListTileAdaptive(
-            title: const Text('Light mode TextTheme is primary colored'),
-            subtitle: const Text('Primary color is mixed into main text theme'),
-            value: controller.blendLightTextTheme &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendLightTextTheme
-                : null,
-          )
-        else
-          SwitchListTileAdaptive(
-            title: const Text('Dark mode TextTheme is primary colored'),
-            subtitle: const Text('Primary color is mixed into main text theme'),
-            value: controller.blendDarkTextTheme &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendDarkTextTheme
-                : null,
-          ),
+        UseMaterial3TextTheme(controller: controller),
+        UseTinted3TextTheme(controller: controller),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Global border radius on components'),
