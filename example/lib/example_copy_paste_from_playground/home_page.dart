@@ -7,7 +7,6 @@ import '../shared/const/app_data.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
-import '../shared/widgets/app/show_sub_theme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
@@ -193,8 +192,7 @@ class _MainPanelState extends State<_MainPanel> {
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Text('Copy a FlexColorScheme V5 '
-                'theme, from the Themes Playground'),
+            child: Text('Theme setup copied from Themes Playground'),
           ),
           ListTile(
             title: const Text('Theme mode'),
@@ -219,10 +217,6 @@ class _MainPanelState extends State<_MainPanel> {
           const Padding(
             padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: ShowThemeDataColors(),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: ShowSubThemeColors(),
           ),
         ],
       ),
@@ -276,23 +270,23 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.toggle_on_outlined, color: iconColor),
-      title: const Text('ToggleButtons FAB Switches and Chips'),
+      title: const Text('FABs Chips Toggles Switches'),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const <Widget>[
-            ToggleButtonsShowcase(),
-            SizedBox(height: 8),
             FabShowcase(),
+            SizedBox(height: 8),
+            ChipShowcase(),
+            SizedBox(height: 8),
+            ToggleButtonsShowcase(),
             SwitchShowcase(),
             CheckboxShowcase(),
             RadioShowcase(),
             PopupMenuShowcase(),
             SizedBox(height: 8),
             IconButtonCircleAvatarDropdownTooltipShowcase(),
-            SizedBox(height: 8),
-            ChipShowcase(),
           ],
         ),
       ),
@@ -334,7 +328,7 @@ class _ListTileShowcase extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
-      leading: Icon(Icons.pin_outlined, color: iconColor),
+      leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTile'),
       child: const ListTileShowcase(),
     );
@@ -355,12 +349,14 @@ class _TabBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
-      title: const Text('TabBar and BottomNavigationBar'),
+      title: const Text('TabBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
           SizedBox(height: 8),
           TabBarForAppBarShowcase(),
+          SizedBox(height: 8),
+          TabBarForBackgroundShowcase(),
         ],
       ),
     );
@@ -381,7 +377,7 @@ class _BottomBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.video_label, color: iconColor),
-      title: const Text('BottomNavigationBar and NavigationBar'),
+      title: const Text('NavigationBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
@@ -410,7 +406,7 @@ class _NavigationRailShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
-      child: const NavigationRailShowcase(),
+      child: const NavigationRailShowcase(useAssertWorkAround: false),
     );
   }
 }
@@ -429,7 +425,7 @@ class _DialogShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
-      title: const Text('Themed TimePickerDialog'),
+      title: const Text('Dialogs'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
@@ -459,7 +455,7 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
-      title: const Text('Material, Banner, Sheet and SnackBar'),
+      title: const Text('Material, Banner, Sheet & Snack'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: MaterialAndBottomSheetShowcase(),
@@ -504,7 +500,7 @@ class _TextThemeShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download_outlined, color: iconColor),
-      title: const Text('Themed TextTheme'),
+      title: const Text('TextTheme'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: TextThemeShowcase(),
@@ -527,7 +523,7 @@ class _PrimaryTextThemeShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download, color: iconColor),
-      title: const Text('Themed PrimaryTextTheme'),
+      title: const Text('PrimaryTextTheme'),
       child: SizedBox(
         width: double.infinity,
         child: Material(
