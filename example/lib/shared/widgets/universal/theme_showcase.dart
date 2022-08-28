@@ -612,8 +612,17 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
   }
 }
 
-class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
+class IconButtonCircleAvatarDropdownTooltipShowcase extends StatefulWidget {
   const IconButtonCircleAvatarDropdownTooltipShowcase({super.key});
+
+  @override
+  State<IconButtonCircleAvatarDropdownTooltipShowcase> createState() =>
+      _IconButtonCircleAvatarDropdownTooltipShowcaseState();
+}
+
+class _IconButtonCircleAvatarDropdownTooltipShowcaseState
+    extends State<IconButtonCircleAvatarDropdownTooltipShowcase> {
+  bool isLockOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -628,6 +637,20 @@ class IconButtonCircleAvatarDropdownTooltipShowcase extends StatelessWidget {
             icon: const Icon(Icons.accessibility),
             tooltip: 'Tooltip on\nIconButton',
             onPressed: () {},
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: IconButton(
+            icon: const Icon(Icons.lock_outlined),
+            selectedIcon: const Icon(Icons.lock_open_outlined),
+            tooltip: isLockOpen ? 'In M3 tap to close' : 'In M3 tap to open',
+            isSelected: isLockOpen,
+            onPressed: () {
+              setState(() {
+                isLockOpen = !isLockOpen;
+              });
+            },
           ),
         ),
         const Tooltip(
@@ -1527,7 +1550,6 @@ class AlertDialogShowcase extends StatelessWidget {
         TextButton(onPressed: () {}, child: const Text('CANCEL')),
         TextButton(onPressed: () {}, child: const Text('ALLOW')),
       ],
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 }
