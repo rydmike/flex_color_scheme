@@ -162,6 +162,17 @@ self deprecated members as follows:
   major breaking change. However, since the Material 3 design and *material_color_utilities* calls
   this change minor, then so does FCS.
 
+* The opt-in opinionated tinted text themes were made less aggressive on the tint, and received a
+  bit of opacity for styles that in 2014/2018/2021 styles have opacity. The custom styles uses 
+  significantly less opacity since they already also get alpha blended tint color applied. 
+  Combining it with same level of opacity would make them too low contrast.
+
+* Style **fix**, the main text theme uses `surfaceTint` color instead of `primary` when tinted text
+  theme is enabled. By default `surfaceTint` equals `primary`, but if theme `surfaceTint` is set 
+  to use a custom color, the for surface tinted textTheme is now also based on it, to fit the 
+  custom tinted surfaces. The primary text theme, that fits on primary color, still
+  uses `primary` color as its tint color.
+
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
   When it is null and `useMaterial3` is false, the app bar will use style `FlexAppBarStyle.primary`
   in light mode as default, like before and `FlexAppBarStyle.material` in dark mode. However, if

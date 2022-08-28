@@ -4877,99 +4877,102 @@ class FlexColorScheme with Diagnosticable {
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
     if (useSubThemes && subTheme.blendTextTheme) {
-      // Use the on color for surface or background that gives us better
-      // contrast. Finding the right one by comparing red values seemed
-      // to work well enough.
-      final Color onColor = isDark
-          ? (colorScheme.onBackground.red < colorScheme.onSurface.red)
-              ? colorScheme.onSurface
-              : colorScheme.onBackground
-          : (colorScheme.onBackground.red > colorScheme.onSurface.red)
-              ? colorScheme.onSurface
-              : colorScheme.onBackground;
-      // Calculate colors for the different TextStyles, these are just best
-      // approximations, color blend strength is a bit inline with opacities on
-      // the 2018 typography, but that might not match what is will be used for
-      // color and opacity on Typography in Material 3. Could not find
-      // definitions for it in the Material 3 guide. They might also be
-      // just flat one color tone for all sizes. That would be simpler, but
-      // even that color is not know yet.
-      final Color headerColor = isDark
-          ? onColor.blend(colorScheme.primary, 40)
-          : onColor.blend(colorScheme.primary, 50);
-      final Color mediumColor = isDark
-          ? onColor.blend(colorScheme.primary, 22)
-          : onColor.blend(colorScheme.primary, 40);
-      final Color smallColor = isDark
-          ? onColor.blend(colorScheme.primary, 20)
-          : onColor.blend(colorScheme.primary, 30);
-      // Apply the computed colors. Most fonts have no opacity when using this
-      // type of styling, they are computed with a color matching their
-      // background. This does not work so well if you need to put text on
-      // a completely different colored container than the background color.
-      // Which is why this feature can be opted out of.
+      // Calculate colors for the different TextStyles, color blend strength are
+      // inline with opacities on the 2014/2018/2021 typographies.
+      final Color textBase = isDark ? Colors.white : Colors.black;
+      // For main text theme we are suing surface tint instead of primary,
+      // nromally it default to primary, but if it is customized we should base
+      // tinted text theme on it instead.
+      final Color textHiOpacity = isDark // SDK dark 70%, light 54%
+          ? textBase.blend(colorScheme.surfaceTint, 30).withAlpha(0xCC) // 80%
+          : textBase.blend(colorScheme.surfaceTint, 40).withAlpha(0xBF); // 75%
+      final Color textMediumOpacity = isDark // SDK dark 0%, light 87%
+          ? textBase.blend(colorScheme.surfaceTint, 22)
+          : textBase.blend(colorScheme.surfaceTint, 28).withAlpha(0xF2); // 95%
+      final Color textNoOpacity = isDark // SDK dark 0%, light 0%
+          ? textBase.blend(colorScheme.surfaceTint, 20)
+          : textBase.blend(colorScheme.surfaceTint, 25);
+      // Apply the computed colors. With this opt-in style, text gets a hint
+      // of primary and less opacity than defaults. The primary tint may
+      // not work so well if you need to put text on a completely different
+      // colored container than the background color. Which is why this
+      // feature can be opted out of.
       // M3 has separate on colors for all colorscheme colors that can also
-      // be used for color matched text on each color. However, this slightly
-      // primary colored default text works very well for the slight primary
-      // colored M3 "neutral" surface colors with a primary hint too.
+      // be used for color matched text on each container color.
+      // This slightly primary colored default text works very well for the
+      // slight primary colored M3 "neutral" surface colors that by default have
+      // a primary tint too.
       defText = defText.copyWith(
-        displayLarge: defText.displayLarge!.copyWith(color: headerColor),
-        displayMedium: defText.displayMedium!.copyWith(color: headerColor),
-        displaySmall: defText.displaySmall!.copyWith(color: headerColor),
-        headlineLarge: defText.headlineLarge!.copyWith(color: headerColor),
-        headlineMedium: defText.headlineMedium!.copyWith(color: headerColor),
-        headlineSmall: defText.headlineSmall!.copyWith(color: mediumColor),
-        titleLarge: defText.titleLarge!.copyWith(color: mediumColor),
-        titleMedium: defText.titleMedium!.copyWith(color: mediumColor),
-        titleSmall: defText.titleSmall!.copyWith(color: smallColor),
-        bodyLarge: defText.bodyLarge!.copyWith(color: mediumColor),
-        bodyMedium: defText.bodyMedium!.copyWith(color: mediumColor),
-        // Caption in English2018 has heading level opacity in Material2.
-        // I noticed it still needs some, eg ListTile uses the color from
-        // caption, with its opacity, to make the subtitles more muted, this
-        // is an important design effect that we get automatically if we give
-        // it some opacity, just not going to give it as much, since we also
-        // have colors and it is imo a bit too low contrast in M2 anyway.
-        bodySmall: defText.bodySmall!.copyWith(
-            color: mediumColor.withAlpha(isDark ? 0xCC : 0xBF)), // 80% & 75%
-        labelLarge: defText.labelLarge!.copyWith(color: mediumColor),
-        labelMedium: defText.labelMedium!.copyWith(color: smallColor),
-        labelSmall: defText.labelSmall!.copyWith(color: smallColor),
-      );
-      // Equivalent color blend calculations for primary text theme.
-      final Color headerPrimary = primaryIsDark
-          ? colorScheme.onPrimary.blend(colorScheme.primary, 16)
-          : colorScheme.onPrimary.blend(colorScheme.primary, 10);
-      final Color mediumPrimary = primaryIsDark
-          ? colorScheme.onPrimary.blend(colorScheme.primary, 8)
-          : colorScheme.onPrimary.blend(colorScheme.primary, 5);
-      final Color smallPrimary = primaryIsDark
-          ? colorScheme.onPrimary.blend(colorScheme.primary, 7)
-          : colorScheme.onPrimary.blend(colorScheme.primary, 4);
-      defPrimaryText = defPrimaryText.copyWith(
-        displayLarge:
-            defPrimaryText.displayLarge!.copyWith(color: headerPrimary),
-        displayMedium:
-            defPrimaryText.displayMedium!.copyWith(color: headerPrimary),
-        displaySmall:
-            defPrimaryText.displaySmall!.copyWith(color: headerPrimary),
-        headlineLarge:
-            defPrimaryText.headlineLarge!.copyWith(color: headerPrimary),
-        headlineMedium:
-            defPrimaryText.headlineMedium!.copyWith(color: mediumPrimary),
+        // The textHiOpacity color style group.
+        displayLarge: defText.displayLarge!.copyWith(color: textHiOpacity),
+        displayMedium: defText.displayMedium!.copyWith(color: textHiOpacity),
+        displaySmall: defText.displaySmall!.copyWith(color: textHiOpacity),
+        headlineLarge: defText.headlineLarge!.copyWith(color: textHiOpacity),
+        headlineMedium: defText.headlineMedium!.copyWith(color: textHiOpacity),
+        bodySmall: defText.bodySmall!.copyWith(color: textHiOpacity),
+        // The textMediumOpacity color style group.
         headlineSmall:
-            defPrimaryText.headlineSmall!.copyWith(color: mediumPrimary),
-        titleLarge: defPrimaryText.titleLarge!.copyWith(color: mediumPrimary),
-        titleMedium: defPrimaryText.titleMedium!.copyWith(color: mediumPrimary),
-        titleSmall: defPrimaryText.titleSmall!.copyWith(color: smallPrimary),
-        bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: mediumPrimary),
-        bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: mediumPrimary),
-        bodySmall: defPrimaryText.bodySmall!.copyWith(
-            color:
-                mediumPrimary.withAlpha(primaryIsDark ? 0xD8 : 0xCC)), //85,70%)
-        labelLarge: defPrimaryText.labelLarge!.copyWith(color: mediumPrimary),
-        labelMedium: defPrimaryText.labelMedium!.copyWith(color: smallPrimary),
-        labelSmall: defPrimaryText.labelSmall!.copyWith(color: smallPrimary),
+            defText.headlineSmall!.copyWith(color: textMediumOpacity),
+        titleLarge: defText.titleLarge!.copyWith(color: textMediumOpacity),
+        titleMedium: defText.titleMedium!.copyWith(color: textMediumOpacity),
+        bodyLarge: defText.bodyLarge!.copyWith(color: textMediumOpacity),
+        bodyMedium: defText.bodyMedium!.copyWith(color: textMediumOpacity),
+        labelLarge: defText.labelLarge!.copyWith(color: textMediumOpacity),
+        // The textNoOpacity color style group.
+        titleSmall: defText.titleSmall!.copyWith(color: textNoOpacity),
+        labelMedium: defText.labelMedium!.copyWith(color: textNoOpacity),
+        labelSmall: defText.labelSmall!.copyWith(color: textNoOpacity),
+      );
+      // Calculate colors for the different TextStyles, color blend strength are
+      // inline with opacities on the 2014/2018/2021 typographies.
+      final Color primeBase = primaryIsDark ? Colors.white : Colors.black;
+      // For primeBase we could do this instead:
+      // final Color primeBase = colorScheme.onPrimary;
+      // and get additional variation into its color from current onPrimary,
+      // likewise for onSurface for normal text, but it is confusing, and also
+      // we get even more tinted text color then when those on colors are more
+      // more tinted, so it is a bit confusing.
+      final Color primeHiOpacity = primaryIsDark // SDK dark 70%, light 54%
+          ? primeBase.blend(colorScheme.primary, 12).withAlpha(0xE5) // 90%
+          : primeBase.blend(colorScheme.primary, 12).withAlpha(0xCC); // 80%;
+      final Color primeMediumOpacity = primaryIsDark // SDK dark 0%, light 87%
+          ? primeBase.blend(colorScheme.primary, 10)
+          : primeBase.blend(colorScheme.primary, 5).withAlpha(0xF2); // 95%;
+      final Color primeNoOpacity = primaryIsDark // SDK dark 0%, light 0%
+          ? primeBase.blend(colorScheme.primary, 7)
+          : primeBase.blend(colorScheme.primary, 4);
+      // Equivalent blend text styles for primary text theme.
+      defPrimaryText = defPrimaryText.copyWith(
+        // The primeHiOpacity color style group.
+        displayLarge:
+            defPrimaryText.displayLarge!.copyWith(color: primeHiOpacity),
+        displayMedium:
+            defPrimaryText.displayMedium!.copyWith(color: primeHiOpacity),
+        displaySmall:
+            defPrimaryText.displaySmall!.copyWith(color: primeHiOpacity),
+        headlineLarge:
+            defPrimaryText.headlineLarge!.copyWith(color: primeHiOpacity),
+        headlineMedium:
+            defPrimaryText.headlineMedium!.copyWith(color: primeHiOpacity),
+        bodySmall: defPrimaryText.bodySmall!.copyWith(color: primeHiOpacity),
+        // The primeMediumOpacity color style group.
+        headlineSmall:
+            defPrimaryText.headlineSmall!.copyWith(color: primeMediumOpacity),
+        titleLarge:
+            defPrimaryText.titleLarge!.copyWith(color: primeMediumOpacity),
+        titleMedium:
+            defPrimaryText.titleMedium!.copyWith(color: primeMediumOpacity),
+        bodyLarge:
+            defPrimaryText.bodyLarge!.copyWith(color: primeMediumOpacity),
+        bodyMedium:
+            defPrimaryText.bodyMedium!.copyWith(color: primeMediumOpacity),
+        labelLarge:
+            defPrimaryText.labelLarge!.copyWith(color: primeMediumOpacity),
+        // The primeNoOpacity color style group.
+        titleSmall: defPrimaryText.titleSmall!.copyWith(color: primeNoOpacity),
+        labelMedium:
+            defPrimaryText.labelMedium!.copyWith(color: primeNoOpacity),
+        labelSmall: defPrimaryText.labelSmall!.copyWith(color: primeNoOpacity),
       );
     }
     // Make our final complete TextTheme, by also merging in the two TextThemes
