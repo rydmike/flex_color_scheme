@@ -83,7 +83,7 @@ ThemeData themeDataDark(ThemeController controller) {
     // typography: Typography.material2018(platform: controller.platform),
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
-      CodeTheme.harmonized(colorScheme.primary, Brightness.dark),
+      CodeTheme.harmonized(colorScheme.surfaceTint, Brightness.dark),
     },
   );
 }

@@ -35,23 +35,23 @@ ThemeData flexThemeLight(ThemeController controller) {
   //
   // The way the M3 seed based color algorithm and the harmonize color functions
   // work. We could actually use our ThemeController `controller` here and get
-  // the effective primary input color via it. Then use that as source color for
+  // the effective input color via it. Then use that as source color for
   // the harmonization. In tests this produced same harmonization results as
-  // when using the actual effective primary color created when also using it
+  // when using the actual effective tint color created when also using it
   // as a seed to make the effective ColorScheme.
   // However, in dark mode, when not using seeds, but generating dark mode
   // colors from light mode primary color, with or without swap primary and
-  // container colors on, by using `toDark` to compute the dark mode primary
+  // container colors on, by using `toDark` to compute the dark mode tint
   // color from the light mode primary input color. The harmonization results
   // diverge a bit from the harmonization result based on actual effective dark
-  // mode primary color and using the in the controller accessible input color
+  // mode tint color and using the in the controller accessible input color
   // as source color. This way by getting the actual effective ColorScheme is
   // simpler and guaranteed to always produce the right M3 intended color
-  // harmonization towards the effective primary color. Regardless of what
+  // harmonization towards the effective surface tint color. Regardless of what
   // settings and config we have used in the Themes Playground to define and
-  // make our primary color.
+  // make our surface tint color, even custom one is adjusted for.
   final Color source =
-      flexColorSchemeLight(controller, Colors.black).toScheme.primary;
+      flexColorSchemeLight(controller, Colors.black).toScheme.surfaceTint;
   // Now we can use a function that takes our ThemeController and source color,
   // which is the effective primary color, the get the effective ThemeData.
   return flexColorSchemeLight(controller, source).toTheme;
