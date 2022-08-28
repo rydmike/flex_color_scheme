@@ -938,11 +938,7 @@ class _BehindAppBar extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
         const Text('Behind AppBar'),
-        FloatingActionButton.small(
-          heroTag: 'Behind AppBar',
-          onPressed: () {},
-          child: const Icon(Icons.add),
-        ),
+        const CircleAvatar(child: Text('AV')),
         InputChip(
           showCheckmark: true,
           selected: true,
@@ -1111,9 +1107,9 @@ class _BottomNavigationBarShowcaseState
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-                  const Text('Behind BottomNavBar'),
+                  const Text('Behind Bottom'),
                   FloatingActionButton.small(
-                    heroTag: 'Behind BottomNavBar',
+                    heroTag: 'Behind Bottom',
                     onPressed: () {},
                     child: const Icon(Icons.add),
                   ),
@@ -1164,9 +1160,9 @@ class _BottomNavigationBarShowcaseState
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: Text(
             'Default SDK background color is theme canvasColor via Material, '
-            'and theme.canvasColor is set to theme.colorScheme.background, '
-            'elevation is 8. FlexColorScheme sub-theme default is '
-            'colorScheme.background and elevation 0.',
+            'and canvasColor is set to color scheme background, elevation '
+            'is 8. FCS sub-theme default is color scheme background and '
+            'elevation 0.',
             style: denseBody,
           ),
         ),
@@ -1255,10 +1251,10 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: Text(
-            'Default SDK background color is theme.colorScheme.surface with '
-            'in an onSurface (in M2), primary (in M3) overlay color, with '
-            'elevation 3. FlexColorScheme component theme default is '
-            'colorScheme.background, with used surface blend and elevation 0.',
+            'Default background color is surface with an onSurface overlay '
+            'color in M2, and primary in M3, with elevation 3. '
+            'FlexColorScheme component theme default is color scheme '
+            'background, with used surface blend and elevation 0.',
             style: denseBody,
           ),
         ),
@@ -1590,10 +1586,10 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
       children: <Widget>[
         Text('Material elevation and tint', style: denseHeader),
         Text(
-          'When using useMaterial3 set to true, Material gets no elevation, '
+          'When useMaterial3 is true, Material gets no elevation, '
           'unless its shadowColor is also specified, which is not needed when '
           'it is false and using M2. To in M3 give it surface elevated '
-          'tint, also specify its surfaceTintColor. Below both are used.',
+          'tint, also specify its surfaceTint color.',
           style: denseBody,
         ),
         const SizedBox(height: 12),
@@ -1610,10 +1606,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.canvas,
           elevation: 0,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 0, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 0, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1623,10 +1626,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.canvas,
           elevation: 1,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 1, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 1, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1635,10 +1645,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 1, '
-                    'with surfaceTint, no shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 1, '
+                  'with surfaceTint, no shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1648,10 +1665,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 1, '
-                    'with surfaceTint, and shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 1, '
+                  'with surfaceTint, and shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1661,10 +1685,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.canvas,
           elevation: 6,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 6, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 6, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1673,10 +1704,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 6, '
-                    'with surfaceTint, no shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 6, '
+                  'with surfaceTint, no shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1686,10 +1724,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type canvas, elevation 6, '
-                    'with surfaceTint, and shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type canvas, elevation 6, '
+                  'with surfaceTint, and shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1708,10 +1753,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.card,
           elevation: 0,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 0, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 0, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1721,10 +1773,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.card,
           elevation: 1,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 1, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 1, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1733,10 +1792,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 1, '
-                    'with surfaceTint, no shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 1, '
+                  'with surfaceTint, no shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1746,10 +1812,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 1, '
-                    'with surfaceTint, and shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 1, '
+                  'with surfaceTint, and shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1759,10 +1832,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           type: MaterialType.card,
           elevation: 6,
           child: SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 6, '
-                    'default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 6, '
+                  'default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1771,10 +1851,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 6, '
-                    'with surfaceTint, no shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 6, '
+                  'with surfaceTint, no shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1784,10 +1871,17 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Material type card, elevation 6, '
-                    'with surfaceTint, and shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Material type card, elevation 6, '
+                  'with surfaceTint, and shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -1880,11 +1974,9 @@ class CardShowcase extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'Default background color comes from Material of type card. '
-            'When using useMaterial3 set to true, Card gets no elevation '
-            'overlay color in dark mode, unless surfaceTintColor is also '
-            'specified, which is not needed when it is false and using M2. '
-            'To in M3 give it surface elevated '
-            'tint, also specify its surfaceTintColor. Below it is used.',
+            'When useMaterial3 is true, Card gets elevation based '
+            'surfaceTint, when it is false and using M2, surfaceTint has no '
+            'effect even if specified.',
             style: denseBody,
           ),
         ),
@@ -1892,16 +1984,31 @@ class CardShowcase extends StatelessWidget {
           elevation: 0,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 0')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 0',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 10),
         const Card(
           elevation: 1,
           child: SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 1, default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                  child: Text(
+                'Card, elevation 1, default',
+                textAlign: TextAlign.center,
+              )),
+            ),
           ),
         ),
         const SizedBox(height: 2),
@@ -1909,8 +2016,16 @@ class CardShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 1, with surfaceTint')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 1, with surfaceTint',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 2),
@@ -1919,18 +2034,33 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Card, elevation 1,  with surfaceTint, '
-                    'transparent shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 1,  with surfaceTint, '
+                  'transparent shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const Divider(),
         const Card(
           elevation: 4,
           child: SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 4, default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 4, default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 4),
@@ -1938,8 +2068,13 @@ class CardShowcase extends StatelessWidget {
           elevation: 4,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 4, with surfaceTint')),
+            height: 60,
+            child: Center(
+              child: Text(
+                'Card, elevation 4, with surfaceTint',
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 4),
@@ -1948,18 +2083,33 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Card, elevation 4, with surfaceTint, '
-                    'transparent shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 4, with surfaceTint, '
+                  'transparent shadow',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const Divider(),
         const Card(
           elevation: 10,
           child: SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 10, default')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 10, default',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 10),
@@ -1967,8 +2117,16 @@ class CardShowcase extends StatelessWidget {
           elevation: 10,
           surfaceTintColor: colorScheme.surfaceTint,
           child: const SizedBox(
-            height: 50,
-            child: Center(child: Text('Card, elevation 10, with surfaceTint')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'Card, elevation 10, with surfaceTint',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 10),
@@ -1977,10 +2135,16 @@ class CardShowcase extends StatelessWidget {
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
           child: const SizedBox(
-            height: 50,
-            child: Center(
-                child: Text('Card, elevation 10, with surfaceTint, '
-                    'transparent shadow')),
+            height: 60,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                  child: Text(
+                'Card, elevation 10, with surfaceTint, '
+                'transparent shadow',
+                textAlign: TextAlign.center,
+              )),
+            ),
           ),
         ),
       ],
