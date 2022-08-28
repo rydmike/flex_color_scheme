@@ -116,7 +116,11 @@ class SeededColorScheme extends StatelessWidget {
             child: Text(
               'This is the custom color theme, you can tap primary, '
               'secondary or tertiary, plus their container colors to '
-              'change them.',
+              'change them.\n'
+              // ignore: lines_longer_than_80_chars
+              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+              // ignore: lines_longer_than_80_chars
+              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
