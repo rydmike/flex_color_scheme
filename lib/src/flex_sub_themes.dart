@@ -1170,7 +1170,6 @@ class FlexSubThemes {
     return DialogTheme(
       elevation: elevation,
       backgroundColor: background,
-      // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
       actionsPadding: actionsPadding ??
           const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
       shape: RoundedRectangleBorder(

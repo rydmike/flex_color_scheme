@@ -22,12 +22,6 @@ class ResetCustomColorsDialog extends StatelessWidget {
             },
             child: const Text('RESET')),
       ],
-      // Add some padding to the action buttons, they are so close the
-      // dialog edge without it.
-      // Can't theme the padding in the dialog to something nicer, not yet!
-      // I've seen it mentioned that it is coming, since M3 has more
-      // default padding in its specs.
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 }
