@@ -1653,11 +1653,6 @@ Opt in opinionated sub themes minor style changes:
   opacity on `caption` text style. The opacity on it is lower though, to
   retain a bit more contrast on blended surfaces, while still adhering to
   the style intent.
-  >Minor details on the opinionated sub themes may still be tuned and
-  changed slightly as a part of improving them and their appeal. For the
-  text theme coloring future version may expose parameter(s) that can be
-  used to adjust the color tint effect on text theme when colored
-  text theme is enabled.
 
 * Major updates to readme doc, and typo corrections.
 
@@ -2338,74 +2333,3 @@ First dev version with null-safety.
 **December 17, 2020**
 
 * First development pre-release on pub.dev.
-
-
----
-
-## Future Features
-
-The topics on the list below were TODOs for this package prior to version 5.0.0 release.
-
-Have a new suggestion and idea? Check the docs to see if it already exists in 
-[future features](https://docs.flexcolorscheme.com/future_features). If not, feel free to open 
-a suggestion in repo [discussions](https://github.com/rydmike/flex_color_scheme/discussions). 
-There is also a project where active tasks being worked are 
-[tracked](https://github.com/rydmike/flex_color_scheme/projects/1).
-
-### TODOs
-
-- [x] Created own documentation site for FlexColorScheme.
-- [x] Version 5.0.0 Added a sub-theme for the `NavigationRail`.
-- [x] Version 5.0.0 Added `SchemeColor` color selection to buttons and toggle buttons.
-- [x] Version 5.0.0 Added support for Material.
-- [x] Version 5.0.0 Added AppBar with optional `SchemeColor` based color selection.
-- [x] Version 5.0.0 Added `SchemeColor` selection to TabBar
-- [x] Version 5.0.0 Added `SchemeColor` color selection to the Floating Action Button sub-theme.
-- [x] Version 4.2.0 support making themes from standard ColorScheme. More customization of sub-themes. Support for M3 NavigationBar and sub-theming it, and a default that matches FlexColorScheme styles.
-- [x] Version 4.0.0 Docs with quick start example first.
-- [x] Version 4.0.0 Added a more complex example that also persists theme.
-- [x] Version 4.0.0 Added API offering more flexibility and customization capabilities to the surface color branding.
-- [x] Version 3.0.0 Deprecated `accentColor`. Swap primary and secondary colors feature added. Added 4 new color schemes.
-- [x] Version 2.0.0 Release official null-safe version, when nullsafety is available in Flutter stable channel.
-- [x] Version 2.0.0-nullsafety.2: Minor new APIs and features added. Example 5 updated.
-- [x] Since [#71184](https://github.com/flutter/flutter/pull/71184) landed in Flutter 2.0.0. The past custom "white" AppBarTheme implementation was as planned changed to the new one that is supported by the SDK.
-- [x] Version 2.0.0-nullsafety.1 released
-- [x] Version 1.4.1 Added automated build and publish pipes for the Web examples!
-- [x] Version 1.4.1 More tests, tests are now considered sufficient for current features.
-- [x] Version 1.4.0: Increased unit and widget test to 689 tests. All color definitions are now also tested to ensure they will not be changed by any accidental edit. Test coverage is higher than 95%, certainly sufficient for this type of package, but there are still some areas that could and will be improved.
-- [x] Version 1.3.0: Added 195 unit and widgets tests, mostly unit tests.
-- [x] API to assist with themed annotated region for system navigation bar theming.
-- [x] API to opt-out from one-toned AppBar and return it to Android's default two-toned.
-- [x] Add API that allows us to use an additional extra color definition for ThemeData.accentColor to easily make themes with custom input border color in dark-mode.
-- [x] Add API the can create the dark scheme based on a light scheme's colors.
-- [x] Release version 1.0.0 on pub.dev.
-- [x] Review and correct documentation mistakes and typos, first pass anyway.
-- [x] Review and update the API.
-- [x] Publish live Web versions of the five examples.
-- [x] Complete the documentation.
-- [x] Release first version 1.0.0-dev.1 publicly on GitHub and pub.dev.
-
-### Was maybe, now obsolete
-
-These maybes were on the PLANNED agenda earlier, however for version 5
-and Material 3 the correct alternative was to replace swatches with the
-Material 3 design based color utilities called
-[material_color_utilities](https://pub.dev/packages/material_color_utilities)
-that the Flutter SDK also depends on.
-While I don't like adding a none SDK library to the package, if Flutter SDK
-uses it as well, then why not. It would still be nice to have the actual
-Material 2 swatch algorithm in Dart as well, then we could:
-
-- [ ] Use actual Material 2 color shades when a Material color is selected as primary color, for its light/dark shades. 
-- [ ] For this we need to find and use the color algorithm Google uses on its Material colors site [here](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) and [here](https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=582aed&secondary.color=00B0FF).
-- [ ] The algorithms for them are actually even a bit different. The second link also
-  seems to imply that color schemes should have had primary and secondary colors,
-  with light and dark variants. Instead of using just one variant color, like
-  past `ColorScheme` class in Flutter did. This of course all changed with
-  the updated Material 3 ColorScheme, that deprecated the variant colors.
-  As for the actual old Material 2 swatch algorithm see these sources:
-  https://stackoverflow.com/questions/32942503/material-design-color-palette
-  Starting points here:
-  - https://github.com/eugeneford/material-palette-generator
-  - https://github.com/mbitson/mcg/issues/19
-  - https://github.com/edelstone/material-palette-generator
