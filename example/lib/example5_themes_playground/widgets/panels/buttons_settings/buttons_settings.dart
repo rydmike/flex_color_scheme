@@ -311,9 +311,13 @@ class ButtonsSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.thickBorderWidth == null ||
                         (controller.thickBorderWidth ?? -0.5) < 0
-                    ? 'default 2'
+                    ? controller.useMaterial3
+                        ? 'default 1'
+                        : 'default 2'
                     : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
-                : 'default 2',
+                : controller.useMaterial3
+                    ? 'default 1'
+                    : 'default 2',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.thickBorderWidth ?? -0.5
                 : -0.5,
@@ -336,10 +340,14 @@ class ButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.thickBorderWidth == null ||
                               (controller.thickBorderWidth ?? -0.5) < 0
-                          ? 'default 2'
+                          ? controller.useMaterial3
+                              ? 'default 1'
+                              : 'default 2'
                           : (controller.thickBorderWidth?.toStringAsFixed(1) ??
                               '')
-                      : 'default 2',
+                      : controller.useMaterial3
+                          ? 'default 1'
+                          : 'default 2',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
