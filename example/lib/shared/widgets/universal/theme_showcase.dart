@@ -160,7 +160,7 @@ class ElevatedButtonShowcase extends StatelessWidget {
 }
 
 // These are commented until https://github.com/flutter/flutter/pull/107382
-// lands in master 3.1.0 channel.
+// lands in master 3.1.0 channel. and makes their way to stable channel.
 // TODO(rydmike): Add these buttons to showcase
 // TODO(rydmike): FCS fix FCS M3 defaults.
 //
@@ -870,6 +870,33 @@ class AppBarShowcase extends StatelessWidget {
                     icon: const Icon(Icons.search),
                     onPressed: () {},
                   ),
+                ],
+              ),
+            ],
+          ),
+          // A bit nasty usage of CustomScrollViews and Slivers and shrinkWraps,
+          // to show what the SliverAppBars look like, don't do this in a
+          // production app. With just a few widgets, we can get away with it.
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              const _BehindAppBar(),
+              CustomScrollView(
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  SliverAppBar(
+                    leading: IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {},
+                    ),
+                    title: const Text('SliverAppBar'),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
                 ],
               ),
             ],
