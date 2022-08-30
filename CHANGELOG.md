@@ -315,16 +315,9 @@ also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
 * [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing `Typography`
   in `ThemeData` generates an error
 
-* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme`
-  properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3`
-  is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via
-  [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in
-  *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into 
-  Flutter stable 3.3.0 and now exists there. THe issues must be re-opened or a new one submitted.
+* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3` is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into  Flutter stable 3.3.0 and now exists there. The issue must be re-opened or a new one submitted.
 
-* This issue discussed in SliverAppBar.medium and large PR
-  [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now 
-  exists in stable channel. There is no open issue for it yet.
+* This issue discussed in SliverAppBar.medium and large [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
 
 ## 6.0.0-dev.1
 
