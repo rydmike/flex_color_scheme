@@ -2,7 +2,9 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-**Aug 30, 2022**
+## 6.0.0
+
+**Aug 31, 2022**
 
 * Updated minimum dependencies to Dart >=2.18.0 and Flutter >= 3.3.0.
 
