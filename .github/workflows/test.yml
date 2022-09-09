@@ -19,7 +19,7 @@ on:
     paths-ignore:
       - "**.md"
   push:
-    branches: [none]
+    branches: [master]
     paths-ignore:
       - "**.md"
 jobs:
@@ -27,9 +27,9 @@ jobs:
     name: "Analyze and test package"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: "Install Flutter and Dart SDK"
-        uses: subosito/flutter-action@v1.5.3
+        uses: subosito/flutter-action@v2
         with:
           channel: "stable"
       - name: "Show Dart SDK version"
