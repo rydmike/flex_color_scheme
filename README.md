@@ -114,22 +114,22 @@ To make it even easier to configure and setup **FlexColorScheme**, it comes with
 
 The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings, and you can reset them back to their default values, so don't be afraid to experiment.
 
-The most useful and popular feature of the **Themes Playground** is that it can generate the Dart and Flutter FlexColorScheme setup code needed to produce the shown active theme configuration. It even shows and modifies the code as you change settings, and you can see the code side-by-side as you change settings. This is a fun way to get familiar with the API. Beware, fiddling with all the different themes and settings can be quite addictive, happy theming! 💙
+The most useful and popular feature of the **Themes Playground** is that it can generate FlexColorScheme API setup code needed to produce the shown active theme configuration. It even shows and modifies the code as you change settings. You can see the code side-by-side as you change settings. This is a fun way to get familiar with the API. Beware, fiddling with all the different themes and settings can be quite addictive, happy theming! 💙
 
 The **Themes Playground** can be used as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v6).
 
-For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) the docs.
+For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) in the docs.
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v5)
 
 ### Open Source
 
-The **Themes Playground** application is open source as well, and is bundled with the `FlexColorScheme` package in the example sub-folder. In its GitHub repository you can find it here [/example/lib/example5_themes_playground](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5_themes_playground).
+The **Themes Playground** application is open source and bundled with the `FlexColorScheme` package in the example sub-folder. In its GitHub repository you can find it [here](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5_themes_playground).
 
-The playground is also the last step in the package tutorial series. The tutorial goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights, if it is of interest. It is on purposes a bit excessively commented. The tutorial also briefly talks about it's background, design choices and limitations.
+The Playground app is also the last step in the package tutorial series. The [tutorial](https://docs.flexcolorscheme.com/tutorial1) goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights. It is on purposes a bit excessively commented. The tutorial also briefly talks about it's background, design choices and limitations.
 
 ### Older versions of Themes Playground
 
 If you are using **FlexColorScheme version 5**, you can go here to use [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate API setup code for it.
 
-If you are using **FlexColorScheme version 4**, you can still try [**Themes Playground V4**](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any API code generation, since version 4 did not have that feature.
+If you are using **FlexColorScheme version 4** (you should really upgarde), but you can still try Themes Playground V4 [here](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any API code generation, since version 4 did not have that feature.
