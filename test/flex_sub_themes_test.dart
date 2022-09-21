@@ -1593,6 +1593,47 @@ void main() {
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
       );
+      // Elevation states
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(0.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(4.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(2.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(2.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(2.0),
+      );
       // Custom shape test
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -1788,7 +1829,22 @@ void main() {
                   ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                   const EdgeInsets.symmetric(horizontal: 8)),
-              elevation: ButtonStyleButton.allOrNull<double>(1),
+              elevation: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return 0.0;
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return 3.0;
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return 1.0;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return 1.0;
+                }
+                return 1.0;
+              }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -1851,7 +1907,22 @@ void main() {
                   ButtonStyleButton.allOrNull<Size>(const Size(55, 55)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                   const EdgeInsets.symmetric(horizontal: 9)),
-              elevation: ButtonStyleButton.allOrNull<double>(2),
+              elevation: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return 0.0;
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return 4.0;
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return 2.0;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return 2.0;
+                }
+                return 2.0;
+              }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

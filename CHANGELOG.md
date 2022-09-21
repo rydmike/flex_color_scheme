@@ -2,6 +2,37 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.1.0
+
+**Sep 21, 2022**
+
+
+**TODO**
+
+* Bottom sheet M3 spec check.
+* Bottoms sheet color options. Include scaffoldBackground, add as general color? How?
+* Tooltip add themed delays.
+
+* CHORE: AppBar theme, move to sub-theme.
+* CHORE: TabBar theme, move to sub-theme.
+* CHORE: Tooltip theme, move to sub-theme.
+
+**NEW**
+
+* Added support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
+  `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`.
+  This is a convenience property to allow different text styles on buttons without having to use
+  `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
+  include their adjustments via the Playground, but size changes might be added later, as a usage
+  example of this property, that is a `MaterialStateProperty`.
+
+**FIX**
+
+* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0 
+  via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before 
+  moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does however
+  export it as before, it is used by the **FlexColorPicker**.
+
 ## 6.0.0
 
 **Aug 31, 2022**
@@ -194,9 +225,6 @@ self deprecated members as follows:
   sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled
   chips when using M3, set component sub-themes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`.
-  This feature will only work with intended design in stable channel after feature and PR
-  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
-  channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
 * Updated `InputDecoration` default sub-theme when opting in on `useMaterial3`. When `true` it
   now results in a more upcoming M3 styled `TextField` style by default, instead of its own more

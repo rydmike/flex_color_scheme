@@ -1,5 +1,4 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,12 +36,15 @@ class _DemoAppState extends State<DemoApp> {
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
-      theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-        typography: Typography.material2021(platform: defaultTargetPlatform),
-      ),
-      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-        typography: Typography.material2021(platform: defaultTargetPlatform),
-      ),
+      // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+      //   typography: Typography.material2021(platform: defaultTargetPlatform),
+      // ),
+      // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+      //   typography: Typography.material2021(platform: defaultTargetPlatform),
+      // ),
+
+      theme: Themes.light(),
+      darkTheme: Themes.dark(),
 
       // This is where you would put a copy-pasted theme definition from
       // the Themes Playground. There is already one example below, but do
@@ -191,4 +193,131 @@ const ColorScheme flexSchemeDark = ColorScheme(
   onInverseSurface: Color(0xff42474e),
   inversePrimary: Color(0xff0061a2),
   shadow: Color(0xff000000),
+);
+
+class Themes {
+  static ThemeData light() {
+    // Make the FlexColorScheme object, it is just a data object
+    final FlexColorScheme flexScheme = FlexColorScheme.light(
+      colorScheme: lightColorScheme,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      blendLevel: 5,
+      appBarOpacity: 0.95,
+      appBarStyle: FlexAppBarStyle.background,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 5,
+        blendOnColors: false,
+      ),
+    );
+    // We can extract the color scheme it defines, you passed in a given
+    // colorscheme, that is fine and what it is for, bur surface colors in
+    // effective will be modified by defined blend settings, we can extract it
+    // on use its effective colors in custom component themes.
+    final ColorScheme colorScheme = flexScheme.toScheme;
+    // We can also make the themeData from it, it is easier to manipulate any
+    // component themes it haa already defined if we get the ThemeData it
+    // defines.
+    final ThemeData flexTheme = flexScheme.toTheme;
+    // Now we can use copyWith to adjust the bottomSheetThemeData it already
+    // defined, and we can use the colors from the color scheme it makes or
+    // any of thee direct computed color values in ThemeData too.
+    return flexTheme.copyWith(
+      bottomSheetTheme: flexTheme.bottomSheetTheme.copyWith(
+        // For effective color scheme background
+        backgroundColor: colorScheme.background,
+        // For scaffold background color, use. It is not the same in your theme.
+        // Beware that scaffoldBackgroundColor will be deprecated soon
+        // in Flutter, there will be theme replacing it and FCS will set the
+        // color in it instead when it gets deprecated in ThemeData.
+        // backgroundColor: flexTheme.scaffoldBackgroundColor,
+      ),
+    );
+  }
+
+  static ThemeData dark() {
+    final FlexColorScheme flexScheme = FlexColorScheme.dark(
+      colorScheme: darkColorScheme,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      blendLevel: 10,
+      appBarOpacity: 0.90,
+      appBarStyle: FlexAppBarStyle.background,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 20,
+      ),
+    );
+    final ColorScheme colorScheme = flexScheme.toScheme;
+    final ThemeData flexTheme = flexScheme.toTheme;
+    return flexTheme.copyWith(
+      bottomSheetTheme: flexTheme.bottomSheetTheme.copyWith(
+        // backgroundColor: colorScheme.background,
+        backgroundColor: flexTheme.scaffoldBackgroundColor,
+      ),
+    );
+  }
+}
+
+const ColorScheme lightColorScheme = ColorScheme(
+  brightness: Brightness.light,
+  primary: Color(0xFF00658E),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFC7E7FF),
+  onPrimaryContainer: Color(0xFF001E2E),
+  secondary: Color(0xFF006398),
+  onSecondary: Color(0xFFFFFFFF),
+  secondaryContainer: Color(0xFFCCE5FF),
+  onSecondaryContainer: Color(0xFF001D31),
+  tertiary: Color(0xFF006684),
+  onTertiary: Color(0xFFFFFFFF),
+  tertiaryContainer: Color(0xFFBDE9FF),
+  onTertiaryContainer: Color(0xFF001F2A),
+  error: Color(0xFFBA1A1A),
+  errorContainer: Color(0xFFFFDAD6),
+  onError: Color(0xFFFFFFFF),
+  onErrorContainer: Color(0xFF410002),
+  background: Color(0xFFF6FEFF),
+  onBackground: Color(0xFF001F24),
+  surface: Color(0xFFF6FEFF),
+  onSurface: Color(0xFF001F24),
+  surfaceVariant: Color(0xFFDDE3EA),
+  onSurfaceVariant: Color(0xFF41484D),
+  outline: Color(0xFF71787E),
+  onInverseSurface: Color(0xFFD0F8FF),
+  inverseSurface: Color(0xFF00363D),
+  inversePrimary: Color(0xFF83CFFF),
+  shadow: Color(0xFF000000),
+  surfaceTint: Color(0xFF00658E),
+);
+
+const ColorScheme darkColorScheme = ColorScheme(
+  brightness: Brightness.dark,
+  primary: Color(0xFF83CFFF),
+  onPrimary: Color(0xFF00344C),
+  primaryContainer: Color(0xFF004C6C),
+  onPrimaryContainer: Color(0xFFC7E7FF),
+  secondary: Color(0xFF93CCFF),
+  onSecondary: Color(0xFF003351),
+  secondaryContainer: Color(0xFF004B73),
+  onSecondaryContainer: Color(0xFFCCE5FF),
+  tertiary: Color(0xFF66D3FF),
+  onTertiary: Color(0xFF003546),
+  tertiaryContainer: Color(0xFF004D64),
+  onTertiaryContainer: Color(0xFFBDE9FF),
+  error: Color(0xFFFFB4AB),
+  errorContainer: Color(0xFF93000A),
+  onError: Color(0xFF690005),
+  onErrorContainer: Color(0xFFFFDAD6),
+  background: Color(0xFF001F24),
+  onBackground: Color(0xFF97F0FF),
+  surface: Color(0xFF001F24),
+  onSurface: Color(0xFF97F0FF),
+  surfaceVariant: Color(0xFF41484D),
+  onSurfaceVariant: Color(0xFFC1C7CE),
+  outline: Color(0xFF8B9198),
+  onInverseSurface: Color(0xFF001F24),
+  inverseSurface: Color(0xFF97F0FF),
+  inversePrimary: Color(0xFF00658E),
+  shadow: Color(0xFF000000),
+  surfaceTint: Color(0xFF83CFFF),
 );

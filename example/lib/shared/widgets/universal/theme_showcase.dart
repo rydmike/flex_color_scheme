@@ -381,8 +381,15 @@ class FabShowcase extends StatelessWidget {
   }
 }
 
-class SwitchShowcase extends StatelessWidget {
+class SwitchShowcase extends StatefulWidget {
   const SwitchShowcase({super.key});
+
+  @override
+  State<SwitchShowcase> createState() => _SwitchShowcaseState();
+}
+
+class _SwitchShowcaseState extends State<SwitchShowcase> {
+  bool isOn = true;
 
   @override
   Widget build(BuildContext context) {
@@ -392,9 +399,30 @@ class SwitchShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Switch(
-          value: true,
-          onChanged: (bool value) {},
+          value: isOn,
+          onChanged: (bool value) {
+            setState(() {
+              isOn = value;
+            });
+          },
         ),
+        // TODO(rydmike): New M3 Switch features, only master. Add later.
+        // Switch(
+        //   thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
+        //       (Set<MaterialState> states) {
+        //     if (states.contains(MaterialState.selected)) {
+        //       return const Icon(Icons.check);
+        //     }
+        //     return const Icon(Icons
+        //         .close); // All other states will use the default thumbIcon.
+        //   }),
+        //   value: isOn,
+        //   onChanged: (bool value) {
+        //     setState(() {
+        //       isOn = value;
+        //     });
+        //   },
+        // ),
         Switch(
           value: false,
           onChanged: (bool value) {},

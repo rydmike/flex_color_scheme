@@ -4240,7 +4240,6 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
-
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system
@@ -5514,6 +5513,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.textButtonTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -5526,6 +5526,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.elevatedButtonElevation,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.elevatedButtonTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -5539,6 +5540,7 @@ class FlexColorScheme with Diagnosticable {
               outlineWidth: subTheme.thinBorderWidth,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.outlinedButtonTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,

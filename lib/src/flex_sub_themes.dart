@@ -1242,9 +1242,10 @@ class FlexSubThemes {
     /// Material 3.
     ///
     /// If a value is passed in, the [ElevatedButton.styleFrom] constructor used
-    /// for M2 style elevation is used with the passed in value. The
-    /// constructor has its own built on logic for the different elevation
-    /// values for its MaterialStateProperty.
+    /// for M2 style elevation is used with the passed in value in M2 mode. In
+    /// M3 the given elevation value is used as baseline, with M3 state
+    /// modifiers, this means disabled is fat, zero elevation, and pressed is
+    /// elevation + 2, other states are at given elevation.
     final double? elevation,
 
     /// Padding for the button theme.
@@ -1265,6 +1266,12 @@ class FlexSubThemes {
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
     /// [useMaterial3] is true.
     final Size? minButtonSize,
+
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
 
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
@@ -1299,6 +1306,7 @@ class FlexSubThemes {
             ),
           ), //buttonShape,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -1370,14 +1378,34 @@ class FlexSubThemes {
         return null;
       });
 
+      final MaterialStateProperty<double?>? elevationM3 = elevation == null
+          ? null
+          : MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return 0.0;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return elevation + 2.0;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return elevation;
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return elevation;
+              }
+              return elevation;
+            });
+
       return ElevatedButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          elevation: ButtonStyleButton.allOrNull<double>(elevation),
+          // TODO(rydmike): Add test for M3 elevation results.
+          elevation: elevationM3,
           shape: radius == null
               ? null
               : ButtonStyleButton.allOrNull<OutlinedBorder>(
@@ -2679,6 +2707,12 @@ class FlexSubThemes {
     /// [useMaterial3] is true.
     final Size? minButtonSize,
 
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -2718,6 +2752,7 @@ class FlexSubThemes {
           ), //buttonShape,
           padding: padding,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -2826,6 +2861,7 @@ class FlexSubThemes {
 
       return OutlinedButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor:
               ButtonStyleButton.allOrNull<Color>(Colors.transparent),
@@ -3163,6 +3199,12 @@ class FlexSubThemes {
     /// [useMaterial3] is true.
     final Size? minButtonSize,
 
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -3189,6 +3231,7 @@ class FlexSubThemes {
           ), // buttonShape,
           padding: padding,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -3243,6 +3286,7 @@ class FlexSubThemes {
 
       return TextButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor:
               ButtonStyleButton.allOrNull<Color>(Colors.transparent),

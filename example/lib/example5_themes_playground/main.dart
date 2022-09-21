@@ -85,11 +85,11 @@ Future<void> main() async {
   // ThemeController for changes. The same ThemeController as used in example 4
   // controls all the myriad of Theme settings and the ThemeService also
   // persists the settings with the injected ThemeServiceHive.
-  runApp(DemoApp(controller: themeController));
+  runApp(PlaygroundApp(controller: themeController));
 }
 
-class DemoApp extends StatelessWidget {
-  const DemoApp({super.key, required this.controller});
+class PlaygroundApp extends StatelessWidget {
+  const PlaygroundApp({super.key, required this.controller});
   final ThemeController controller;
 
   @override
@@ -97,34 +97,35 @@ class DemoApp extends StatelessWidget {
     // Whenever the theme controller notifies the animation listener in the
     // AnimatedBuilder, the MaterialApp is rebuilt.
     return AnimatedBuilder(
-        animation: controller,
-        builder: (BuildContext context, Widget? child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            scrollBehavior: const AppScrollBehavior(),
-            title: 'Themes Playground',
-            // The Theme controller controls if we use FlexColorScheme made
-            // ThemeData or standard SDK ThemeData.from a ColorScheme. It also
-            // controls all the configuration parameters used to define the
-            // FlexColorScheme object that produces the ThemeData object.
-            theme: controller.useFlexColorScheme
-                ? flexThemeLight(controller)
-                : themeDataLight(controller),
-            darkTheme: controller.useFlexColorScheme
-                ? flexThemeDark(controller)
-                : themeDataDark(controller),
-            // Use the dark or light theme based on controller setting.
-            themeMode: controller.themeMode,
-            // Using SelectionArea here makes text selectable and copy enabled
-            // in entire app. How it actually behaves, depends on current
-            // platform.
-            home: SelectionArea(
-              // Pass the controller to the HomePage where we use it to change
-              // the theme settings that will cause themes above to change and
-              // rebuild the entire look of the app based on modified theme.
-              child: HomePage(controller: controller),
-            ),
-          );
-        });
+      animation: controller,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          scrollBehavior: const AppScrollBehavior(),
+          title: 'Themes Playground',
+          // The Theme controller controls if we use FlexColorScheme made
+          // ThemeData or standard SDK ThemeData.from a ColorScheme. It also
+          // controls all the configuration parameters used to define the
+          // FlexColorScheme object that produces the ThemeData object.
+          theme: controller.useFlexColorScheme
+              ? flexThemeLight(controller)
+              : themeDataLight(controller),
+          darkTheme: controller.useFlexColorScheme
+              ? flexThemeDark(controller)
+              : themeDataDark(controller),
+          // Use the dark or light theme based on controller setting.
+          themeMode: controller.themeMode,
+          // Using SelectionArea here makes text selectable and copy enabled
+          // in entire app. How it actually behaves, depends on current
+          // platform.
+          home: SelectionArea(
+            // Pass the controller to the HomePage where we use it to change
+            // the theme settings that will cause themes above to change and
+            // rebuild the entire look of the app based on modified theme.
+            child: HomePage(controller: controller),
+          ),
+        );
+      },
+    );
   }
 }

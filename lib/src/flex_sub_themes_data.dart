@@ -115,6 +115,10 @@ class FlexSubThemesData with Diagnosticable {
     this.thickBorderWidth,
     this.thinBorderWidth,
     //
+    this.elevatedButtonTextStyle,
+    this.outlinedButtonTextStyle,
+    this.textButtonTextStyle,
+    //
     this.textButtonRadius,
     this.elevatedButtonRadius,
     this.elevatedButtonElevation,
@@ -560,6 +564,24 @@ class FlexSubThemesData with Diagnosticable {
   /// defaults to [kThinBorderWidth].
   /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
   final double? thinBorderWidth;
+
+  /// The style for the [ElevatedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle;
+
+  /// The style for the [OutlinedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle;
+
+  /// The style for the [TextButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? textButtonTextStyle;
 
   /// Border radius override value for [TextButton].
   ///
@@ -1755,6 +1777,11 @@ class FlexSubThemesData with Diagnosticable {
     final EdgeInsetsGeometry? buttonPadding,
     final double? thickBorderWidth,
     final double? thinBorderWidth,
+    //
+    final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle,
+    final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle,
+    final MaterialStateProperty<TextStyle?>? textButtonTextStyle,
+    //
     final double? textButtonRadius,
     final double? elevatedButtonRadius,
     final double? elevatedButtonElevation,
@@ -1877,6 +1904,13 @@ class FlexSubThemesData with Diagnosticable {
       buttonPadding: buttonPadding ?? this.buttonPadding,
       thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
       thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
+      //
+      elevatedButtonTextStyle:
+          elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
+      outlinedButtonTextStyle:
+          outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
+      textButtonTextStyle: textButtonTextStyle ?? this.textButtonTextStyle,
+      //
       textButtonRadius: textButtonRadius ?? this.textButtonRadius,
       elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
       elevatedButtonElevation:
@@ -2098,6 +2132,11 @@ class FlexSubThemesData with Diagnosticable {
         other.buttonPadding == buttonPadding &&
         other.thickBorderWidth == thickBorderWidth &&
         other.thinBorderWidth == thinBorderWidth &&
+        //
+        other.elevatedButtonTextStyle == elevatedButtonTextStyle &&
+        other.outlinedButtonTextStyle == outlinedButtonTextStyle &&
+        other.textButtonTextStyle == textButtonTextStyle &&
+        //
         other.textButtonRadius == textButtonRadius &&
         other.elevatedButtonRadius == elevatedButtonRadius &&
         other.elevatedButtonElevation == elevatedButtonElevation &&
@@ -2265,6 +2304,11 @@ class FlexSubThemesData with Diagnosticable {
         //
         thickBorderWidth,
         thinBorderWidth,
+        //
+        elevatedButtonTextStyle,
+        outlinedButtonTextStyle,
+        textButtonTextStyle,
+        //
         textButtonRadius,
         elevatedButtonRadius,
         elevatedButtonElevation,
@@ -2402,6 +2446,14 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
     properties
         .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
+    //
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'elevatedButtonTextStyle', elevatedButtonTextStyle));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'outlinedButtonTextStyle', outlinedButtonTextStyle));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'textButtonTextStyle', textButtonTextStyle));
+    //
     properties
         .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
     properties.add(DiagnosticsProperty<double>(
