@@ -1,10 +1,11 @@
 /// A library to help you make beautiful color scheme based themes for Flutter.
 library flex_color_scheme;
 
-/// Exports the full API of FlexSeedScheme packages.
+/// Export FlexSeedScheme package API, except Cam16.
 ///
-/// Its features were baked into version of FlexColorScheme before 6.0.0.
-export 'package:flex_seed_scheme/flex_seed_scheme.dart';
+/// These features and APIs were baked into FlexColorScheme before version
+/// 6.0.0, but were moved to their own package starting from version 6.0.0.
+export 'package:flex_seed_scheme/flex_seed_scheme.dart' hide Cam16;
 
 /// Offers built-in reusable color schemes and color values.
 ///
