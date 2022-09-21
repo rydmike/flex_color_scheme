@@ -8,12 +8,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
  
-* A null check was fixed by [@sososdk](https://github.com/sososdk) in `FlexColorScheme.light` when using custom scheme [PR #90](https://github.com/rydmike/flex_color_scheme/pull/90). Issue did not exist on `FlexColorScheme.dark`.
+* A null check was fixed by [sososdk](https://github.com/sososdk) in `FlexColorScheme.light` when using custom scheme [PR #90](https://github.com/rydmike/flex_color_scheme/pull/90). Issue did not exist in `FlexColorScheme.dark`.
 
-* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0
-  via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before
-  moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does however
-  export it as before, it is used by the **FlexColorPicker**.
+* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0 via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does however export it as before, it is used by the **FlexColorPicker**.
 
 ## 6.0.0
 
