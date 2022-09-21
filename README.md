@@ -35,7 +35,7 @@ When you opt in on using the component sub-themes, the border radius on widgets 
 With **FlexColorScheme** component themes you use simple flat property values. No need for verbose Flutter SDK component sub-themes, with `ShapeBorder` definitions on multiple widget themes to change their border radius. The component theming provides a large amount of easy to configure options via simple flat properties, instead of complicated nested ones. In many cases you can also avoid the both complicated and confusing `MaterialState` theming properties.
 
 **FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from
-key colors, customization features that are currently not available in Flutter. This includes using multiple key colors as seed, custom minimum chroma levels and customized tone mapping to ColorScheme colors. 
+key colors, customization features that are currently not available in Flutter. This includes using multiple key colors as seed, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
 
 ## Getting Started
 
@@ -102,7 +102,7 @@ The included examples contain dummy user interface to better demonstrate the res
 
 ## Documentation
 
-For more information and tutorials on how to use **FlexColorScheme**, please see its documentation site at [**docs.flexcolorscheme.com**](https://docs.flexcolorscheme.com/). It contains additional getting started info, extensive tutorials, key API walkthrough and even general Flutter theming advice and guidance. 
+For more information and tutorials on how to use **FlexColorScheme**, please see its documentation site at [**docs.flexcolorscheme.com**](https://docs.flexcolorscheme.com/). It contains additional getting started info, extensive tutorials, key API walkthrough and even general Flutter theming advice and guidance.
 
 Please refer to it for more information and guidance on its usage and features. The documentation site is powered by [docs.page](https://docs.page/) from [Invertase](https://invertase.io/).
 
@@ -110,7 +110,7 @@ Complete generated package [**API documentation**](https://pub.dev/documentation
 
 ## Themes Playground
 
-To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB app called the **Themes Playground**. 
+To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB app called the **Themes Playground**.
 
 The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings, and you can reset them back to their default values, so don't be afraid to experiment.
 
@@ -130,6 +130,6 @@ The playground is also the last step in the package tutorial series. The tutoria
 
 ### Older versions of Themes Playground
 
-If you are using **FlexColorScheme version 5**, you can go here to use [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate API setup code for it.   
+If you are using **FlexColorScheme version 5**, you can go here to use [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate API setup code for it.
 
 If you are using **FlexColorScheme version 4**, you can still try [**Themes Playground V4**](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any API code generation, since version 4 did not have that feature.
