@@ -2,6 +2,14 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.0.1
+
+**Sep 21, 2022**
+
+**FIX**
+ 
+* A null check was fixed by [@sososdk](https://github.com/sososdk) in `FlexColorScheme.light` when using custom scheme [PR #90](https://github.com/rydmike/flex_color_scheme/pull/90). Issue did not exist on `FlexColorScheme.dark`.
+
 ## 6.0.0
 
 **Aug 31, 2022**
