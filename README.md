@@ -132,4 +132,4 @@ The Playground app is also the last step in the package tutorial series. The [tu
 
 If you are using **FlexColorScheme version 5**, you can go here to use [**Themes Playground V5**](https://rydmike.com/flexcolorscheme/themesplayground-v5), to generate API setup code for it.
 
-If you are using **FlexColorScheme version 4** (you should really upgarde), but you can still try Themes Playground V4 [here](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any API code generation, since version 4 did not have that feature.
+If you are using **FlexColorScheme version 4**, you should really upgrade, but you can still try Themes Playground V4 [here](https://rydmike.com/flexcolorschemeV4Tut5), but it does not offer any API code generation, since version 4 did not have that feature.
