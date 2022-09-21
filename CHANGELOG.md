@@ -2,6 +2,30 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.1.0
+
+**Sep 21, 2022**
+
+
+**TODO**
+
+* Bottom sheet M3 spec check.
+* Bottoms sheet color options. Include scaffoldBackground, add as general color? How?
+* Tooltip add themed delays.
+
+* CHORE: AppBar theme, move to sub-theme.
+* CHORE: TabBar theme, move to sub-theme.
+* CHORE: Tooltip theme, move to sub-theme.
+
+**NEW**
+
+* Added support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
+  `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`.
+  This is a convenience property to allow different text styles on buttons without having to use
+  `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
+  include their adjustments via the Playground, but size changes might be added later, as a usage
+  example of this property, that is a `MaterialStateProperty`.
+
 ## 6.0.1
 
 **Sep 21, 2022**
