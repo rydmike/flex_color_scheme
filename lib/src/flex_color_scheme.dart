@@ -2119,7 +2119,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexScheme flexScheme = scheme ?? FlexScheme.material;
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
-        colors ?? FlexColor.schemes[flexScheme]!.light;
+        colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
 
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them. Doing it here
