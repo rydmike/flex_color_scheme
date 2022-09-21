@@ -88,11 +88,11 @@ This gives us a counter application that looks like this:
 
 <table>
   <tr>
-    <td>[<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-01.png?raw=true" alt="Counter light" width="280"/>](https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-01.png?raw=true)</td>
-    <td>[<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-02.png?raw=true" alt="Counter dark" width="280"/>](https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-02.png?raw=true)</td>
+    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-01.png?raw=true" alt="Counter light" width="280"/></td>
+    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-02.png?raw=true" alt="Counter dark" width="280"/></td>
   </tr>
 </table>
-_FlexColorScheme applied on the standard Flutter counter template_
+*FlexColorScheme applied on the standard Flutter counter template*
 
 Not as exciting as the images shown above. That is because the basic counter app uses very few features and widgets, so it does not present the results very well.
 
