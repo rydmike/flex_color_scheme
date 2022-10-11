@@ -197,66 +197,74 @@ const ColorScheme flexSchemeDark = ColorScheme(
 
 class Themes {
   static ThemeData light() {
-    // Make the FlexColorScheme object, it is just a data object
+    // Make the FlexColorScheme object, it is just a data object.
     final FlexColorScheme flexScheme = FlexColorScheme.light(
-      colorScheme: lightColorScheme,
+      scheme: FlexScheme.flutterDash,
       surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      blendLevel: 5,
+      blendLevel: 20,
       appBarOpacity: 0.95,
-      appBarStyle: FlexAppBarStyle.background,
       subThemesData: const FlexSubThemesData(
-        blendOnLevel: 5,
+        blendOnLevel: 20,
         blendOnColors: false,
+        elevatedButtonRadius: 12.0,
       ),
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
     );
-    // We can extract the color scheme it defines, you passed in a given
-    // colorscheme, that is fine and what it is for, bur surface colors in
-    // effective will be modified by defined blend settings, we can extract it
-    // on use its effective colors in custom component themes.
-    final ColorScheme colorScheme = flexScheme.toScheme;
-    // We can also make the themeData from it, it is easier to manipulate any
-    // component themes it haa already defined if we get the ThemeData it
-    // defines.
+    // We can make the ThemeData it defines, it is easy to manipulate any
+    // component themes it has already defined if we get its ThemeData.
     final ThemeData flexTheme = flexScheme.toTheme;
-    // Now we can use copyWith to adjust the bottomSheetThemeData it already
-    // defined, and we can use the colors from the color scheme it makes or
-    // any of thee direct computed color values in ThemeData too.
+    // We can extract the elevated button theme it defines.
+    final ElevatedButtonThemeData elevatedButtonTheme =
+        flexTheme.elevatedButtonTheme;
+    // The odd part with the button themes is that they don't have direct
+    // theme properties, only a single ButtonStyle class that defines all its
+    // styles and settings, this is same with the other buttons.
+    // So let's grab that too.
+    final ButtonStyle buttonStyle =
+        elevatedButtonTheme.style ?? const ButtonStyle();
+    // Now we can use copyWith to adjust the ThemeData we have, however
+    // there is no "copyWith" on `ElevatedButtonThemeData`, but it only has one
+    // property the `style` with a `ButtonStyle`, and it has a `copyWith`, so we can
+    // do e.g. this to keep all other made FCS theme definitions and only change the
+    // `tapTargetSize` in its `elevatedButtonTheme`.
     return flexTheme.copyWith(
-      bottomSheetTheme: flexTheme.bottomSheetTheme.copyWith(
-        // For effective color scheme background
-        backgroundColor: colorScheme.background,
-        // For scaffold background color, use. It is not the same in your theme.
-        // Beware that scaffoldBackgroundColor will be deprecated soon
-        // in Flutter, there will be theme replacing it and FCS will set the
-        // color in it instead when it gets deprecated in ThemeData.
-        // backgroundColor: flexTheme.scaffoldBackgroundColor,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: buttonStyle.copyWith(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ),
     );
   }
 
+  // Same setup with the dark theme.
   static ThemeData dark() {
     final FlexColorScheme flexScheme = FlexColorScheme.dark(
-      colorScheme: darkColorScheme,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      blendLevel: 10,
+      scheme: FlexScheme.flutterDash,
+      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
+      blendLevel: 30,
       appBarOpacity: 0.90,
-      appBarStyle: FlexAppBarStyle.background,
       subThemesData: const FlexSubThemesData(
         blendOnLevel: 20,
+        elevatedButtonRadius: 12.0,
       ),
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
     );
-    final ColorScheme colorScheme = flexScheme.toScheme;
     final ThemeData flexTheme = flexScheme.toTheme;
+    final ElevatedButtonThemeData elevatedButtonTheme =
+        flexTheme.elevatedButtonTheme;
+    final ButtonStyle buttonStyle =
+        elevatedButtonTheme.style ?? const ButtonStyle();
     return flexTheme.copyWith(
-      bottomSheetTheme: flexTheme.bottomSheetTheme.copyWith(
-        // backgroundColor: colorScheme.background,
-        backgroundColor: flexTheme.scaffoldBackgroundColor,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: buttonStyle.copyWith(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ),
     );
   }
 }
+
+// If you do not have a themeMode switch, uncomment this line
+// to let the device system mode control the theme mode:
+// themeMode: ThemeMode.system,
 
 const ColorScheme lightColorScheme = ColorScheme(
   brightness: Brightness.light,

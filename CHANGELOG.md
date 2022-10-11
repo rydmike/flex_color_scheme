@@ -4,18 +4,23 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Sep 21, 2022**
-
+**Oct 12, 2022**
 
 **TODO**
 
 * Bottom sheet M3 spec check.
-* Bottoms sheet color options. Include scaffoldBackground, add as general color? How?
-* Tooltip add themed delays.
-
+* Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
 * CHORE: AppBar theme, move to sub-theme.
 * CHORE: TabBar theme, move to sub-theme.
 * CHORE: Tooltip theme, move to sub-theme.
+* Tooltip add themed delays.
+* Add: ThemeData passthrough: materialTapTargetSize
+* Add: ThemeData passthrough: pageTransitionsTheme
+* Slider theme
+* Playground: Add slider and to theme showcase.
+* Playground: Make custom colors an own page.
+* Playground: Add label size for buttons
+
 
 **NEW**
 

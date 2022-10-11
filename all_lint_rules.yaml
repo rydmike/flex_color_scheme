@@ -1,11 +1,9 @@
-# A list of all linter rules. Up to date auto generated list of all
+# A list of all linter rules. Up-to-date auto generated list of all
 # lint rules can be found here:
 # https://dart-lang.github.io/linter/lints/options/options.html
-linter:
-  rules:
+    - always_put_required_named_parameters_first
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_put_required_named_parameters_first
     - always_require_non_null_named_parameters
     - always_specify_types
     - always_use_package_imports
@@ -57,6 +55,8 @@ linter:
     - cascade_invocations
     - cast_nullable_to_non_nullable
     - close_sinks
+    - collection_methods_unrelated_type
+    - combinators_ordering
     - comment_references
     - conditional_uri_does_not_exist
     - constant_identifier_names
@@ -66,6 +66,7 @@ linter:
     - deprecated_consistency
     - diagnostic_describe_all_properties
     - directives_ordering
+    - discarded_futures
     - do_not_use_environment
     - empty_catches
     - empty_constructor_bodies
@@ -76,7 +77,6 @@ linter:
     - flutter_style_todos
     - hash_and_equals
     - implementation_imports
-    - invariant_booleans
     - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
@@ -174,6 +174,7 @@ linter:
     - unnecessary_late
     - unnecessary_new
     - unnecessary_null_aware_assignments
+    - unnecessary_null_aware_operator_on_extension_on_nullable
     - unnecessary_null_checks
     - unnecessary_null_in_if_null_operators
     - unnecessary_nullable_for_final_variable_declarations
@@ -184,6 +185,8 @@ linter:
     - unnecessary_string_escapes
     - unnecessary_string_interpolations
     - unnecessary_this
+    - unnecessary_to_list_in_spreads
+    - unreachable_from_main
     - unrelated_type_equality_checks
     - unsafe_html
     - use_build_context_synchronously
@@ -201,6 +204,7 @@ linter:
     - use_rethrow_when_possible
     - use_setters_to_change_properties
     - use_string_buffers
+    - use_string_in_part_of_directives
     - use_super_parameters
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
