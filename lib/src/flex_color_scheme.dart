@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
@@ -4390,7 +4391,7 @@ class FlexColorScheme with Diagnosticable {
     // be able to see content scrolling behind the transparent bar. We only do
     // so when we have any opacity specified.
     if (usedOpacity < 1) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
     }
 
     // If context was null, use nullContextBrightness as brightness value.

@@ -99,7 +99,7 @@ class PlatformPopupMenu extends StatelessWidget {
         onChanged(value);
       },
       itemBuilder: (BuildContext context) =>
-          <PopupMenuItem<TargetPlatform>>[...platformItems.values.toList()],
+          <PopupMenuItem<TargetPlatform>>[...platformItems.values],
       child: ListTile(
         dense: true,
         trailing: Padding(

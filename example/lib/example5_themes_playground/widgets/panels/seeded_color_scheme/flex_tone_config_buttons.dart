@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -25,7 +27,7 @@ class FlexToneConfigButtons extends StatelessWidget {
       isSelected: isSelected,
       onPressed: controller.useKeyColors
           ? (int index) {
-              controller.setUsedFlexToneSetup(index + 1);
+              unawaited(controller.setUsedFlexToneSetup(index + 1));
             }
           : null,
       children: const <Widget>[

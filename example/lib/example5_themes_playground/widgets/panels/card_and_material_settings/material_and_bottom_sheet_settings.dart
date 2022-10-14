@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -54,8 +56,8 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller
-                        .setBottomSheetBorderRadius(value < 0 ? null : value);
+                    unawaited(controller
+                        .setBottomSheetBorderRadius(value < 0 ? null : value));
                   }
                 : null,
           ),
@@ -93,10 +95,10 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSnackBarSchemeColor(null);
+                    unawaited(controller.setSnackBarSchemeColor(null));
                   } else {
-                    controller
-                        .setSnackBarSchemeColor(SchemeColor.values[index]);
+                    unawaited(controller
+                        .setSnackBarSchemeColor(SchemeColor.values[index]));
                   }
                 }
               : null,

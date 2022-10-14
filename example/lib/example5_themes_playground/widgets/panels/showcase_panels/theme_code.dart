@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,12 +42,12 @@ class ThemeCode extends StatelessWidget {
               'theme you have configured. It changes as you adjust settings.'),
           trailing: ElevatedButton(
             onPressed: () {
-              _handleCopyCode(context, code);
+              unawaited(_handleCopyCode(context, code));
             },
             child: const Text('Copy'),
           ),
           onTap: () {
-            _handleCopyCode(context, code);
+            unawaited(_handleCopyCode(context, code));
           },
         ),
         const Divider(height: 1),

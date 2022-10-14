@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'splash_page_one.dart';
@@ -22,7 +24,7 @@ class PageExamples extends StatelessWidget {
               'reduce the blend on your Scaffold in such a use case.'),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            SubpageDemo.show(context);
+            unawaited(SubpageDemo.show(context));
           },
         ),
         ListTile(
@@ -33,7 +35,7 @@ class PageExamples extends StatelessWidget {
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            SplashPageOne.show(context, false);
+            unawaited(SplashPageOne.show(context, false));
           },
         ),
         ListTile(
@@ -45,7 +47,7 @@ class PageExamples extends StatelessWidget {
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            SplashPageOne.show(context, true);
+            unawaited(SplashPageOne.show(context, true));
           },
         ),
         ListTile(
@@ -56,7 +58,7 @@ class PageExamples extends StatelessWidget {
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            SplashPageTwo.show(context);
+            unawaited(SplashPageTwo.show(context));
           },
         ),
       ],

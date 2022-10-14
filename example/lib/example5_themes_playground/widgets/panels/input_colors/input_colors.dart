@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
@@ -62,9 +64,9 @@ class InputColors extends StatelessWidget {
           // Toggle theme mode also via the ListTile tap.
           onTap: () {
             if (Theme.of(context).brightness == Brightness.light) {
-              controller.setThemeMode(ThemeMode.dark);
+              unawaited(controller.setThemeMode(ThemeMode.dark));
             } else {
-              controller.setThemeMode(ThemeMode.light);
+              unawaited(controller.setThemeMode(ThemeMode.light));
             }
           },
         ),
@@ -192,7 +194,8 @@ class InputColors extends StatelessWidget {
                           controller.useFlexColorScheme &&
                           !controller.useKeyColors
                       ? (double value) {
-                          controller.setDarkMethodLevel(value.floor());
+                          unawaited(
+                              controller.setDarkMethodLevel(value.floor()));
                         }
                       : null,
                 ),

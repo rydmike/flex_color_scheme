@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -43,10 +45,11 @@ class TextFieldSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setInputDecoratorSchemeColorLight(null);
+                      unawaited(
+                          controller.setInputDecoratorSchemeColorLight(null));
                     } else {
-                      controller.setInputDecoratorSchemeColorLight(
-                          SchemeColor.values[index]);
+                      unawaited(controller.setInputDecoratorSchemeColorLight(
+                          SchemeColor.values[index]));
                     }
                   }
                 : null,
@@ -58,10 +61,11 @@ class TextFieldSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setInputDecoratorSchemeColorDark(null);
+                      unawaited(
+                          controller.setInputDecoratorSchemeColorDark(null));
                     } else {
-                      controller.setInputDecoratorSchemeColorDark(
-                          SchemeColor.values[index]);
+                      unawaited(controller.setInputDecoratorSchemeColorDark(
+                          SchemeColor.values[index]));
                     }
                   }
                 : null,
@@ -91,11 +95,11 @@ class TextFieldSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (bool isOn) {
                   if (isOn) {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.outline);
+                    unawaited(controller.setInputDecoratorBorderType(
+                        FlexInputBorderType.outline));
                   } else {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.underline);
+                    unawaited(controller.setInputDecoratorBorderType(
+                        FlexInputBorderType.underline));
                   }
                 }
               : null,
@@ -128,8 +132,8 @@ class TextFieldSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setInputDecoratorBorderRadius(
-                        value < 0 ? null : value);
+                    unawaited(controller.setInputDecoratorBorderRadius(
+                        value < 0 ? null : value));
                   }
                 : null,
           ),
@@ -206,7 +210,8 @@ class TextFieldSettings extends StatelessWidget {
                 : -0.5,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThinBorderWidth(value < 0 ? null : value);
+                    unawaited(controller
+                        .setThinBorderWidth(value < 0 ? null : value));
                   }
                 : null,
           ),
@@ -260,7 +265,8 @@ class TextFieldSettings extends StatelessWidget {
                 : -0.5,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThickBorderWidth(value < 0 ? null : value);
+                    unawaited(controller
+                        .setThickBorderWidth(value < 0 ? null : value));
                   }
                 : null,
           ),

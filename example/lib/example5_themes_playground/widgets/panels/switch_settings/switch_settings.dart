@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -36,9 +38,10 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSwitchSchemeColor(null);
+                    unawaited(controller.setSwitchSchemeColor(null));
                   } else {
-                    controller.setSwitchSchemeColor(SchemeColor.values[index]);
+                    unawaited(controller
+                        .setSwitchSchemeColor(SchemeColor.values[index]));
                   }
                 }
               : null,
@@ -56,10 +59,10 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setCheckboxSchemeColor(null);
+                    unawaited(controller.setCheckboxSchemeColor(null));
                   } else {
-                    controller
-                        .setCheckboxSchemeColor(SchemeColor.values[index]);
+                    unawaited(controller
+                        .setCheckboxSchemeColor(SchemeColor.values[index]));
                   }
                 }
               : null,
@@ -77,9 +80,10 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setRadioSchemeColor(null);
+                    unawaited(controller.setRadioSchemeColor(null));
                   } else {
-                    controller.setRadioSchemeColor(SchemeColor.values[index]);
+                    unawaited(controller
+                        .setRadioSchemeColor(SchemeColor.values[index]));
                   }
                 }
               : null,

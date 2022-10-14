@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -97,9 +98,9 @@ class _PanelSelectorState extends State<PanelSelector> {
           media.size.height < AppData.phoneHeightBreakpoint;
       final double effectiveWidth = AppData.panelButtonWidth +
           (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
-      scrollController.animateTo(effectiveWidth * viewIndex,
+      unawaited(scrollController.animateTo(effectiveWidth * viewIndex,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic);
+          curve: Curves.easeOutCubic));
     }
   }
 
@@ -138,6 +139,7 @@ class _PanelSelectorState extends State<PanelSelector> {
                         return PanelButton(
                           item: panelItems[index],
                           onSelect: () {
+                            // ignore: discarded_futures
                             scrollController.animateTo(effectiveWidth * index,
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeOutCubic);

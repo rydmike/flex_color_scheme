@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -130,13 +132,13 @@ class SurfaceBlends extends StatelessWidget {
             trailing: ElevatedButton(
               onPressed: controller.surfaceTintLight != null
                   ? () {
-                      controller.setSurfaceTintLight(null);
+                      unawaited(controller.setSurfaceTintLight(null));
                     }
                   : null,
               child: const Text('Default'),
             ),
             onTap: () {
-              controller.setSurfaceTintLight(null);
+              unawaited(controller.setSurfaceTintLight(null));
             },
           ),
           ColorPickerInkWellDialog(
@@ -146,7 +148,7 @@ class SurfaceBlends extends StatelessWidget {
             onRecentColorsChanged: controller.setRecentColors,
             wasCancelled: (bool cancelled) {
               if (cancelled) {
-                controller.setSurfaceTintLight(previousTintLight);
+                unawaited(controller.setSurfaceTintLight(previousTintLight));
               }
             },
             enabled: true,
@@ -176,7 +178,7 @@ class SurfaceBlends extends StatelessWidget {
               label: controller.blendLevel.toString(),
               value: controller.blendLevel.toDouble(),
               onChanged: (double value) {
-                controller.setBlendLevel(value.toInt());
+                unawaited(controller.setBlendLevel(value.toInt()));
               },
             ),
             trailing: Padding(
@@ -228,7 +230,7 @@ class SurfaceBlends extends StatelessWidget {
                       controller.useFlexColorScheme &&
                       !controller.useKeyColors
                   ? (double value) {
-                      controller.setBlendOnLevel(value.toInt());
+                      unawaited(controller.setBlendOnLevel(value.toInt()));
                     }
                   : null,
             ),
@@ -305,13 +307,13 @@ class SurfaceBlends extends StatelessWidget {
             trailing: ElevatedButton(
               onPressed: controller.surfaceTintDark != null
                   ? () {
-                      controller.setSurfaceTintDark(null);
+                      unawaited(controller.setSurfaceTintDark(null));
                     }
                   : null,
               child: const Text('Default'),
             ),
             onTap: () {
-              controller.setSurfaceTintDark(null);
+              unawaited(controller.setSurfaceTintDark(null));
             },
           ),
           ColorPickerInkWellDialog(
@@ -321,7 +323,7 @@ class SurfaceBlends extends StatelessWidget {
             onRecentColorsChanged: controller.setRecentColors,
             wasCancelled: (bool cancelled) {
               if (cancelled) {
-                controller.setSurfaceTintDark(previousTintDark);
+                unawaited(controller.setSurfaceTintDark(previousTintDark));
               }
             },
             enabled: true,
@@ -351,7 +353,7 @@ class SurfaceBlends extends StatelessWidget {
               label: controller.blendLevelDark.toString(),
               value: controller.blendLevelDark.toDouble(),
               onChanged: (double value) {
-                controller.setBlendLevelDark(value.toInt());
+                unawaited(controller.setBlendLevelDark(value.toInt()));
               },
             ),
             trailing: Padding(
@@ -403,7 +405,7 @@ class SurfaceBlends extends StatelessWidget {
                       controller.useFlexColorScheme &&
                       !controller.useKeyColors
                   ? (double value) {
-                      controller.setBlendOnLevelDark(value.toInt());
+                      unawaited(controller.setBlendOnLevelDark(value.toInt()));
                     }
                   : null,
             ),

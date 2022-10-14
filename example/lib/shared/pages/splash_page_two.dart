@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -51,10 +53,10 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // Another thing to be aware of with this method is that eg bringing up
     // the keyboard will bring the navigation bar back, so that is not so nice
     // with it either.
-    SystemChrome.setEnabledSystemUIMode(
+    unawaited(SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,
       overlays: <SystemUiOverlay>[],
-    );
+    ));
     super.initState();
   }
 
@@ -71,8 +73,8 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // is put them all back. If we control the parent it is not a problem,
     // because then we know and can but back what it had, but if we use this
     // in a package, it is a not possible.
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values));
     super.dispose();
   }
 

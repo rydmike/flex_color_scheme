@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -55,7 +57,8 @@ class ComponentThemes extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setDefaultRadius(value < 0 ? null : value);
+                    unawaited(
+                        controller.setDefaultRadius(value < 0 ? null : value));
                   }
                 : null,
           ),

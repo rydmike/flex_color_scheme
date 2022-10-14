@@ -7,6 +7,8 @@
 // made public widget and put into their own files if there would be a need
 // to use them on other other screens too.
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -128,6 +130,7 @@ class IntroductionPanel extends StatelessWidget {
           trailing: ElevatedButton(
             onPressed: controller.useFlexColorScheme
                 ? () {
+                    // ignore: discarded_futures
                     showCopySetupCodeDialog(context, controller);
                   }
                 : null,
@@ -135,6 +138,7 @@ class IntroductionPanel extends StatelessWidget {
           ),
           onTap: controller.useFlexColorScheme
               ? () {
+                  // ignore: discarded_futures
                   showCopySetupCodeDialog(context, controller);
                 }
               : null,
@@ -206,12 +210,12 @@ class IntroductionPanel extends StatelessWidget {
           title: const Text('Set to actual platform'),
           trailing: ElevatedButton(
             onPressed: () {
-              controller.setPlatform(defaultTargetPlatform);
+              unawaited(controller.setPlatform(defaultTargetPlatform));
             },
             child: const Text('Actual'),
           ),
           onTap: () {
-            controller.setPlatform(defaultTargetPlatform);
+            unawaited(controller.setPlatform(defaultTargetPlatform));
           },
         ),
         const SizedBox(height: 8),

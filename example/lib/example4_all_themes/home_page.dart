@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -226,8 +228,8 @@ class HomePage extends StatelessWidget {
                               onChanged: controller.useSubThemes &&
                                       controller.useFlexColorScheme
                                   ? (double value) {
-                                      controller.setDefaultRadius(
-                                          value < 0 ? null : value);
+                                      unawaited(controller.setDefaultRadius(
+                                          value < 0 ? null : value));
                                     }
                                   : null,
                             ),

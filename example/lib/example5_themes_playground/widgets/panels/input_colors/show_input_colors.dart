@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -130,12 +132,12 @@ class ShowInputColors extends StatelessWidget {
                         onChanged: (Color color) {
                           if (isLight) {
                             swapLight
-                                ? controller.setSecondaryLight(color)
-                                : controller.setPrimaryLight(color);
+                                ? unawaited(controller.setSecondaryLight(color))
+                                : unawaited(controller.setPrimaryLight(color));
                           } else {
                             swapDark
-                                ? controller.setSecondaryDark(color)
-                                : controller.setPrimaryDark(color);
+                                ? unawaited(controller.setSecondaryDark(color))
+                                : unawaited(controller.setPrimaryDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -144,12 +146,16 @@ class ShowInputColors extends StatelessWidget {
                           if (cancelled) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setSecondaryLight(primary)
-                                  : controller.setPrimaryLight(primary);
+                                  ? unawaited(
+                                      controller.setSecondaryLight(primary))
+                                  : unawaited(
+                                      controller.setPrimaryLight(primary));
                             } else {
                               swapDark
-                                  ? controller.setSecondaryDark(primary)
-                                  : controller.setPrimaryDark(primary);
+                                  ? unawaited(
+                                      controller.setSecondaryDark(primary))
+                                  : unawaited(
+                                      controller.setPrimaryDark(primary));
                             }
                           }
                         },
@@ -174,12 +180,16 @@ class ShowInputColors extends StatelessWidget {
                         onChanged: (Color color) {
                           if (isLight) {
                             swapLight
-                                ? controller.setSecondaryContainerLight(color)
-                                : controller.setPrimaryContainerLight(color);
+                                ? unawaited(controller
+                                    .setSecondaryContainerLight(color))
+                                : unawaited(
+                                    controller.setPrimaryContainerLight(color));
                           } else {
                             swapDark
-                                ? controller.setSecondaryContainerDark(color)
-                                : controller.setPrimaryContainerDark(color);
+                                ? unawaited(
+                                    controller.setSecondaryContainerDark(color))
+                                : unawaited(
+                                    controller.setPrimaryContainerDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -188,16 +198,20 @@ class ShowInputColors extends StatelessWidget {
                           if (cancelled) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setSecondaryContainerLight(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerLight(
-                                      primaryContainer);
+                                  ? unawaited(
+                                      controller.setSecondaryContainerLight(
+                                          primaryContainer))
+                                  : unawaited(
+                                      controller.setPrimaryContainerLight(
+                                          primaryContainer));
                             } else {
                               swapDark
-                                  ? controller.setSecondaryContainerDark(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerDark(
-                                      primaryContainer);
+                                  ? unawaited(
+                                      controller.setSecondaryContainerDark(
+                                          primaryContainer))
+                                  : unawaited(
+                                      controller.setPrimaryContainerDark(
+                                          primaryContainer));
                             }
                           }
                         },
@@ -235,12 +249,13 @@ class ShowInputColors extends StatelessWidget {
                         onChanged: (Color color) {
                           if (isLight) {
                             swapLight
-                                ? controller.setPrimaryLight(color)
-                                : controller.setSecondaryLight(color);
+                                ? unawaited(controller.setPrimaryLight(color))
+                                : unawaited(
+                                    controller.setSecondaryLight(color));
                           } else {
                             swapDark
-                                ? controller.setPrimaryDark(color)
-                                : controller.setSecondaryDark(color);
+                                ? unawaited(controller.setPrimaryDark(color))
+                                : unawaited(controller.setSecondaryDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -249,12 +264,16 @@ class ShowInputColors extends StatelessWidget {
                           if (cancelled) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setPrimaryLight(secondary)
-                                  : controller.setSecondaryLight(secondary);
+                                  ? unawaited(
+                                      controller.setPrimaryLight(secondary))
+                                  : unawaited(
+                                      controller.setSecondaryLight(secondary));
                             } else {
                               swapDark
-                                  ? controller.setPrimaryDark(secondary)
-                                  : controller.setSecondaryDark(secondary);
+                                  ? unawaited(
+                                      controller.setPrimaryDark(secondary))
+                                  : unawaited(
+                                      controller.setSecondaryDark(secondary));
                             }
                           }
                         },
@@ -279,12 +298,16 @@ class ShowInputColors extends StatelessWidget {
                         onChanged: (Color color) {
                           if (isLight) {
                             swapLight
-                                ? controller.setPrimaryContainerLight(color)
-                                : controller.setSecondaryContainerLight(color);
+                                ? unawaited(
+                                    controller.setPrimaryContainerLight(color))
+                                : unawaited(controller
+                                    .setSecondaryContainerLight(color));
                           } else {
                             swapDark
-                                ? controller.setPrimaryContainerDark(color)
-                                : controller.setSecondaryContainerDark(color);
+                                ? unawaited(
+                                    controller.setPrimaryContainerDark(color))
+                                : unawaited(controller
+                                    .setSecondaryContainerDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -293,16 +316,20 @@ class ShowInputColors extends StatelessWidget {
                           if (cancelled) {
                             if (isLight) {
                               swapLight
-                                  ? controller.setPrimaryContainerLight(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerLight(
-                                      secondaryContainer);
+                                  ? unawaited(
+                                      controller.setPrimaryContainerLight(
+                                          secondaryContainer))
+                                  : unawaited(
+                                      controller.setSecondaryContainerLight(
+                                          secondaryContainer));
                             } else {
                               swapDark
-                                  ? controller.setPrimaryContainerDark(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerDark(
-                                      secondaryContainer);
+                                  ? unawaited(
+                                      controller.setPrimaryContainerDark(
+                                          secondaryContainer))
+                                  : unawaited(
+                                      controller.setSecondaryContainerDark(
+                                          secondaryContainer));
                             }
                           }
                         },
@@ -340,9 +367,9 @@ class ShowInputColors extends StatelessWidget {
                         color: tertiary,
                         onChanged: (Color color) {
                           if (isLight) {
-                            controller.setTertiaryLight(color);
+                            unawaited(controller.setTertiaryLight(color));
                           } else {
-                            controller.setTertiaryDark(color);
+                            unawaited(controller.setTertiaryDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -350,9 +377,9 @@ class ShowInputColors extends StatelessWidget {
                         wasCancelled: (bool cancelled) {
                           if (cancelled) {
                             if (isLight) {
-                              controller.setTertiaryLight(tertiary);
+                              unawaited(controller.setTertiaryLight(tertiary));
                             } else {
-                              controller.setTertiaryDark(tertiary);
+                              unawaited(controller.setTertiaryDark(tertiary));
                             }
                           }
                         },
@@ -376,9 +403,11 @@ class ShowInputColors extends StatelessWidget {
                         color: tertiaryContainer,
                         onChanged: (Color color) {
                           if (isLight) {
-                            controller.setTertiaryContainerLight(color);
+                            unawaited(
+                                controller.setTertiaryContainerLight(color));
                           } else {
-                            controller.setTertiaryContainerDark(color);
+                            unawaited(
+                                controller.setTertiaryContainerDark(color));
                           }
                         },
                         recentColors: controller.recentColors,
@@ -386,11 +415,11 @@ class ShowInputColors extends StatelessWidget {
                         wasCancelled: (bool cancelled) {
                           if (cancelled) {
                             if (isLight) {
-                              controller
-                                  .setTertiaryContainerLight(tertiaryContainer);
+                              unawaited(controller.setTertiaryContainerLight(
+                                  tertiaryContainer));
                             } else {
-                              controller
-                                  .setTertiaryContainerDark(tertiaryContainer);
+                              unawaited(controller
+                                  .setTertiaryContainerDark(tertiaryContainer));
                             }
                           }
                         },

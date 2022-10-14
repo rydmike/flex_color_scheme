@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../shared/copy_color_to_clipboard.dart';
@@ -61,7 +63,8 @@ class TonalPaletteColors extends StatelessWidget {
               color: Color(tonalPalette[i]),
               height: height,
               onTap: () {
-                copyColorToClipboard(context, Color(tonalPalette[i]));
+                unawaited(
+                    copyColorToClipboard(context, Color(tonalPalette[i])));
               },
               child: Center(
                 child: Stack(

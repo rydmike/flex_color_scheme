@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,6 +7,7 @@ import 'home_page.dart';
 
 // ignore_for_file: unused_import
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: unreachable_from_main
 
 // -----------------------------------------------------------------------------
 /// EXAMPLE: COPY-PASTE PLAYGROUND
@@ -36,15 +38,12 @@ class _DemoAppState extends State<DemoApp> {
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
-      // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-      //   typography: Typography.material2021(platform: defaultTargetPlatform),
-      // ),
-      // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-      //   typography: Typography.material2021(platform: defaultTargetPlatform),
-      // ),
-
-      theme: Themes.light(),
-      darkTheme: Themes.dark(),
+      theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+        typography: Typography.material2021(platform: defaultTargetPlatform),
+      ),
+      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+        typography: Typography.material2021(platform: defaultTargetPlatform),
+      ),
 
       // This is where you would put a copy-pasted theme definition from
       // the Themes Playground. There is already one example below, but do
@@ -193,139 +192,4 @@ const ColorScheme flexSchemeDark = ColorScheme(
   onInverseSurface: Color(0xff42474e),
   inversePrimary: Color(0xff0061a2),
   shadow: Color(0xff000000),
-);
-
-class Themes {
-  static ThemeData light() {
-    // Make the FlexColorScheme object, it is just a data object.
-    final FlexColorScheme flexScheme = FlexColorScheme.light(
-      scheme: FlexScheme.flutterDash,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      blendLevel: 20,
-      appBarOpacity: 0.95,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 20,
-        blendOnColors: false,
-        elevatedButtonRadius: 12.0,
-      ),
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    );
-    // We can make the ThemeData it defines, it is easy to manipulate any
-    // component themes it has already defined if we get its ThemeData.
-    final ThemeData flexTheme = flexScheme.toTheme;
-    // We can extract the elevated button theme it defines.
-    final ElevatedButtonThemeData elevatedButtonTheme =
-        flexTheme.elevatedButtonTheme;
-    // The odd part with the button themes is that they don't have direct
-    // theme properties, only a single ButtonStyle class that defines all its
-    // styles and settings, this is same with the other buttons.
-    // So let's grab that too.
-    final ButtonStyle buttonStyle =
-        elevatedButtonTheme.style ?? const ButtonStyle();
-    // Now we can use copyWith to adjust the ThemeData we have, however
-    // there is no "copyWith" on `ElevatedButtonThemeData`, but it only has one
-    // property the `style` with a `ButtonStyle`, and it has a `copyWith`, so we can
-    // do e.g. this to keep all other made FCS theme definitions and only change the
-    // `tapTargetSize` in its `elevatedButtonTheme`.
-    return flexTheme.copyWith(
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: buttonStyle.copyWith(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-      ),
-    );
-  }
-
-  // Same setup with the dark theme.
-  static ThemeData dark() {
-    final FlexColorScheme flexScheme = FlexColorScheme.dark(
-      scheme: FlexScheme.flutterDash,
-      surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
-      blendLevel: 30,
-      appBarOpacity: 0.90,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 20,
-        elevatedButtonRadius: 12.0,
-      ),
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-    );
-    final ThemeData flexTheme = flexScheme.toTheme;
-    final ElevatedButtonThemeData elevatedButtonTheme =
-        flexTheme.elevatedButtonTheme;
-    final ButtonStyle buttonStyle =
-        elevatedButtonTheme.style ?? const ButtonStyle();
-    return flexTheme.copyWith(
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: buttonStyle.copyWith(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-      ),
-    );
-  }
-}
-
-// If you do not have a themeMode switch, uncomment this line
-// to let the device system mode control the theme mode:
-// themeMode: ThemeMode.system,
-
-const ColorScheme lightColorScheme = ColorScheme(
-  brightness: Brightness.light,
-  primary: Color(0xFF00658E),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFC7E7FF),
-  onPrimaryContainer: Color(0xFF001E2E),
-  secondary: Color(0xFF006398),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFFCCE5FF),
-  onSecondaryContainer: Color(0xFF001D31),
-  tertiary: Color(0xFF006684),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color(0xFFBDE9FF),
-  onTertiaryContainer: Color(0xFF001F2A),
-  error: Color(0xFFBA1A1A),
-  errorContainer: Color(0xFFFFDAD6),
-  onError: Color(0xFFFFFFFF),
-  onErrorContainer: Color(0xFF410002),
-  background: Color(0xFFF6FEFF),
-  onBackground: Color(0xFF001F24),
-  surface: Color(0xFFF6FEFF),
-  onSurface: Color(0xFF001F24),
-  surfaceVariant: Color(0xFFDDE3EA),
-  onSurfaceVariant: Color(0xFF41484D),
-  outline: Color(0xFF71787E),
-  onInverseSurface: Color(0xFFD0F8FF),
-  inverseSurface: Color(0xFF00363D),
-  inversePrimary: Color(0xFF83CFFF),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF00658E),
-);
-
-const ColorScheme darkColorScheme = ColorScheme(
-  brightness: Brightness.dark,
-  primary: Color(0xFF83CFFF),
-  onPrimary: Color(0xFF00344C),
-  primaryContainer: Color(0xFF004C6C),
-  onPrimaryContainer: Color(0xFFC7E7FF),
-  secondary: Color(0xFF93CCFF),
-  onSecondary: Color(0xFF003351),
-  secondaryContainer: Color(0xFF004B73),
-  onSecondaryContainer: Color(0xFFCCE5FF),
-  tertiary: Color(0xFF66D3FF),
-  onTertiary: Color(0xFF003546),
-  tertiaryContainer: Color(0xFF004D64),
-  onTertiaryContainer: Color(0xFFBDE9FF),
-  error: Color(0xFFFFB4AB),
-  errorContainer: Color(0xFF93000A),
-  onError: Color(0xFF690005),
-  onErrorContainer: Color(0xFFFFDAD6),
-  background: Color(0xFF001F24),
-  onBackground: Color(0xFF97F0FF),
-  surface: Color(0xFF001F24),
-  onSurface: Color(0xFF97F0FF),
-  surfaceVariant: Color(0xFF41484D),
-  onSurfaceVariant: Color(0xFFC1C7CE),
-  outline: Color(0xFF8B9198),
-  onInverseSurface: Color(0xFF001F24),
-  inverseSurface: Color(0xFF97F0FF),
-  inversePrimary: Color(0xFF00658E),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF83CFFF),
 );

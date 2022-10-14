@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -43,10 +45,10 @@ class DialogSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDialogBackgroundSchemeColor(null);
+                    unawaited(controller.setDialogBackgroundSchemeColor(null));
                   } else {
-                    controller.setDialogBackgroundSchemeColor(
-                        SchemeColor.values[index]);
+                    unawaited(controller.setDialogBackgroundSchemeColor(
+                        SchemeColor.values[index]));
                   }
                 }
               : null,
@@ -71,7 +73,8 @@ class DialogSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setDialogBorderRadius(value < 0 ? null : value);
+                    unawaited(controller
+                        .setDialogBorderRadius(value < 0 ? null : value));
                   }
                 : null,
           ),

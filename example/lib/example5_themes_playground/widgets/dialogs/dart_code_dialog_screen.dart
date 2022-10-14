@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +46,7 @@ class DartCodeDialogScreen extends StatelessWidget {
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copy code\nto clipboard',
                 onPressed: () {
-                  copyToClipBoard(code);
+                  unawaited(copyToClipBoard(code));
                   // Show a snack bar with copy message.
                   scaffoldMessengerKey.currentState!.showSnackBar(
                     SnackBar(

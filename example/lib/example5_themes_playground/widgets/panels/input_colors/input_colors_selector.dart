@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -121,15 +123,15 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                     width: 4,
                   ),
                   onSelect: () {
-                    scrollController.animateTo(
+                    unawaited(scrollController.animateTo(
                         (_kWidthOfScrollItem +
                                 phoneReduce +
                                 phoneButtonsSpacingReduce) *
                             index,
                         duration: const Duration(milliseconds: 350),
-                        curve: Curves.easeOutCubic);
+                        curve: Curves.easeOutCubic));
                     schemeIndex = index;
-                    widget.controller.setSchemeIndex(index);
+                    unawaited(widget.controller.setSchemeIndex(index));
                   },
                   selected: widget.controller.schemeIndex == index,
                   backgroundColor: Theme.of(context).colorScheme.surface,

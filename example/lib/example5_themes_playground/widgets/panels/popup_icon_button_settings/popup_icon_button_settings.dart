@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -57,8 +58,8 @@ class PopupIconButtonSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller
-                        .setPopupMenuBorderRadius(value < 0 ? null : value);
+                    unawaited(controller
+                        .setPopupMenuBorderRadius(value < 0 ? null : value));
                   }
                 : null,
           ),
@@ -99,7 +100,7 @@ class PopupIconButtonSettings extends StatelessWidget {
             value: popupOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setPopupMenuOpacity(value / 100);
+                    unawaited(controller.setPopupMenuOpacity(value / 100));
                   }
                 : null,
           ),

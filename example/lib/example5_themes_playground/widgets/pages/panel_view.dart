@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -120,10 +122,10 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                 setState(() {
                   previousPage = themeCtrl.viewIndex;
                 });
-                themeCtrl.setViewIndex(page);
-                pageController.animateToPage(page,
+                unawaited(themeCtrl.setViewIndex(page));
+                unawaited(pageController.animateToPage(page,
                     duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeOutCubic);
+                    curve: Curves.easeOutCubic));
               },
             ),
           ),
@@ -143,7 +145,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
           setState(() {
             previousPage = themeCtrl.viewIndex;
           });
-          themeCtrl.setViewIndex(page);
+          unawaited(themeCtrl.setViewIndex(page));
         },
         itemBuilder: (BuildContext context, int page) {
           return <Widget>[
