@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: comment_references
 
-/// A theme following wrapper for [SwitchListTile.adaptive].
+// TODO(rydmike): Copy this version to FlexColorScheme.
+
+/// A theme following wrapper for [SwitchListTileAdaptive].
 ///
-/// The wrapper sets the active thumb color for the switch to
-/// SwitchTheme.active color, and if not defined to theme.colorscheme.secondary.
+/// This wrapper sets the active thumb color for the switch in iOS or macOS
+/// adaptive mode to a color that matches themed value on the switch in
+/// Material on other platforms.
+///
+/// In iOS and MacOS adaptive mode, the switch color is always iOS switch green,
+/// we want to follow the Material theme colors. If a switch color is not
+/// defined and we are on iOS or macOS, and using Material 2
+/// (theme.useMaterial3 = false) the switch will be theme.colorscheme.secondary
+/// and if using Material3 (theme.useMaterial3 = true) to
+/// theme.colorscheme.primary.
 ///
 /// NOTE: toggleableActiveColor will be deprecated soon in Flutter SDK,
 /// so we are using its replacement fallback already now. See:
@@ -56,12 +66,14 @@ class SwitchListTileAdaptive extends StatelessWidget {
 
   /// The color to use when this switch is on.
   ///
-  /// Defaults to selected thumb color of SwitchTheme, and if not defined to
-  /// [theme.toggleableActiveColor] color of the current [Theme].
+  /// If not provided, defaults to selected thumb color of SwitchTheme, and if
+  /// not defined to [Colorscheme.secondary] in M2 and via M3 Switch theme
+  /// implementation to [Colorscheme.primary] in M3, of the current [Theme].
   ///
   /// The Material mode of this switch does this by default, but the iOS remain
   /// iOS active green despite the theme, unless explicitly set via the
-  /// active color. We make custom version to make it behave as we want it to.
+  /// active color. This custom version makes the iOS switch mode follow the
+  /// theme.
   ///
   /// NOTE: It is not really an SDK themed widget, but our custom wrapped
   /// version now follow effective theme in the desired way.
@@ -103,15 +115,34 @@ class SwitchListTileAdaptive extends StatelessWidget {
   /// is used.
   final EdgeInsetsGeometry? contentPadding;
 
+  Color? activeThumbColor(BuildContext context) {
+    Color? color;
+    final ThemeData theme = Theme.of(context);
+
+    /// As long as Flutter SDK stable does not included the new M3 switch and
+    /// its theme. We should d this for all platforms, later when it is
+    /// defined, we can use this logic only on iOS and macOS and let
+    /// the switch get correct color on other platforms via theme default.
+    //
+    // if (theme.platform == TargetPlatform.iOS ||
+    //     theme.platform == TargetPlatform.macOS) {
+    if (theme.useMaterial3) {
+      color = theme.switchTheme.thumbColor
+              ?.resolve(<MaterialState>{MaterialState.selected}) ??
+          theme.colorScheme.primary;
+    } else {
+      color = theme.switchTheme.thumbColor
+              ?.resolve(<MaterialState>{MaterialState.selected}) ??
+          theme.colorScheme.secondary;
+    }
+    // }
+    return color;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SwitchListTile.adaptive(
-      activeColor: activeColor ??
-          Theme.of(context)
-              .switchTheme
-              .thumbColor
-              ?.resolve(<MaterialState>{MaterialState.selected}) ??
-          Theme.of(context).toggleableActiveColor,
+      activeColor: activeColor ?? activeThumbColor(context),
       value: value,
       onChanged: onChanged,
       title: title,
