@@ -138,11 +138,6 @@ class SeededColorScheme extends StatelessWidget {
             'secondary and tertiary TonalPalettes.',
           ),
         ),
-        // ListTile(
-        //   title: Text('Used FlexTones setup: $_flexToneName'),
-        //   subtitle: Text(_flexToneDescribe),
-        //   trailing: FlexToneConfigButtons(controller: controller),
-        // ),
         FlexToneConfigPopupMenu(
           title: 'Used FlexTones setup:',
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
@@ -156,7 +151,7 @@ class SeededColorScheme extends StatelessWidget {
             // ignore: lines_longer_than_80_chars
             '$_flexToneSetup\n'
             'In this app you can choose between the default Material 3 '
-            'tone mapping and four pre-defined custom FlexTones setups. With '
+            'tone mapping plus six pre-defined custom FlexTones setups. With '
             'the API you can make your own FlexTones configurations. A '
             'future version of the app may add interactive configuration of '
             'tone to ColorScheme color mapping.',

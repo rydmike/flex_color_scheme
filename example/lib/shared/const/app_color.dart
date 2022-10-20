@@ -274,24 +274,24 @@ class AppColor {
   static String explainUsedColors(ThemeController controller) {
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '
-          'used. The ColorScheme is based directly on the effective '
-          'input colors';
+          'used. The ColorScheme is based directly on the selected theme';
     }
     if (!controller.useSecondary && !controller.useTertiary) {
-      return 'Only Primary input color is used to generate the Colorscheme. '
-          'This is like using ColorScheme.fromSeed with Primary color';
+      return 'Light theme Primary color is used to generate the Colorscheme. '
+          'This is like using Flutter ColorScheme.fromSeed with the Primary '
+          'color as seed color';
     }
     if (controller.useSecondary && !controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Secondary colors are used as keys, Tertiary is computed '
-          'from Primary';
+      return 'Tonal palettes for the ColorScheme, are made with light theme '
+          'Primary and Secondary colors as seed keys. Tertiary key is computed '
+          'from Primary color';
     }
     if (!controller.useSecondary && controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Tertiary colors are used as keys, Secondary is computed '
-          'from Primary';
+      return 'Tonal palettes for the ColorScheme, are made with light theme '
+          'Primary and Tertiary colors as seed keys, Secondary key is computed '
+          'from Primary color';
     }
-    return 'Input Primary, Secondary and Tertiary colors are used as '
+    return 'Light theme Primary, Secondary and Tertiary colors are used as '
         'keys to generate tonal palettes that define the ColorScheme';
   }
 }
