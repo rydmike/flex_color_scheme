@@ -235,13 +235,13 @@ const int kDisabledAlphaBlend = 0x66;
 /// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
 /// [ToggleButtons].
 ///
-/// Value: 0xE5 = 229 = 90%
+/// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
 
 /// Alpha value, for transparency on selected onPrimary color on
 /// [ToggleButtons].
 ///
-/// Value: 0xCC = 204 = 80%
+/// Value: 0xE5 = 229 = 90%
 const int kSelectedAlpha = 0xE5;
 
 /// White alpha blend, for alternative less saturated primary color.

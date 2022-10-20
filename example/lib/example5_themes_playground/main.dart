@@ -118,12 +118,15 @@ class PlaygroundApp extends StatelessWidget {
           // Using SelectionArea here makes text selectable and copy enabled
           // in entire app. How it actually behaves, depends on current
           // platform.
-          home: SelectionArea(
-            // Pass the controller to the HomePage where we use it to change
-            // the theme settings that will cause themes above to change and
-            // rebuild the entire look of the app based on modified theme.
-            child: HomePage(controller: controller),
-          ),
+          //
+          // Taking it away for now
+          // home: SelectionArea(
+          // Pass the controller to the HomePage where we use it to change
+          // the theme settings that will cause themes above to change and
+          // rebuild the entire look of the app based on modified theme.
+          // child: HomePage(controller: controller),
+          // ),
+          home: HomePage(controller: controller),
         );
       },
     );
