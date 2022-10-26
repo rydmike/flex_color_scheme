@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -39,10 +37,10 @@ class ToggleButtonsSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setToggleButtonsSchemeColor(null));
+                    controller.setToggleButtonsSchemeColor(null);
                   } else {
-                    unawaited(controller.setToggleButtonsSchemeColor(
-                        SchemeColor.values[index]));
+                    controller
+                        .setToggleButtonsSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -67,8 +65,8 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller.setToggleButtonsBorderRadius(
-                        value < 0 ? null : value.roundToDouble()));
+                    controller.setToggleButtonsBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -124,8 +122,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : -0.5,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setThinBorderWidth(value < 0 ? null : value));
+                    controller.setThinBorderWidth(value < 0 ? null : value);
                   }
                 : null,
           ),

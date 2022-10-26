@@ -122,7 +122,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                 setState(() {
                   previousPage = themeCtrl.viewIndex;
                 });
-                unawaited(themeCtrl.setViewIndex(page));
+                themeCtrl.setViewIndex(page);
                 unawaited(pageController.animateToPage(page,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeOutCubic));
@@ -145,7 +145,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
           setState(() {
             previousPage = themeCtrl.viewIndex;
           });
-          unawaited(themeCtrl.setViewIndex(page));
+          themeCtrl.setViewIndex(page);
         },
         itemBuilder: (BuildContext context, int page) {
           return <Widget>[

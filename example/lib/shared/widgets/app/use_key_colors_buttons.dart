@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import '../../controllers/theme_controller.dart';
@@ -28,13 +26,13 @@ class UseKeyColorsButtons extends StatelessWidget {
       isSelected: isSelected,
       onPressed: (int index) {
         if (index == 0) {
-          unawaited(controller.setUseKeyColors(!controller.useKeyColors));
+          controller.setUseKeyColors(!controller.useKeyColors);
         }
         if (index == 1 && controller.useKeyColors) {
-          unawaited(controller.setUseSecondary(!controller.useSecondary));
+          controller.setUseSecondary(!controller.useSecondary);
         }
         if (index == 2 && controller.useKeyColors) {
-          unawaited(controller.setUseTertiary(!controller.useTertiary));
+          controller.setUseTertiary(!controller.useTertiary);
         }
       },
       children: <Widget>[

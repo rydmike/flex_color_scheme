@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -38,10 +36,9 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setSwitchSchemeColor(null));
+                    controller.setSwitchSchemeColor(null);
                   } else {
-                    unawaited(controller
-                        .setSwitchSchemeColor(SchemeColor.values[index]));
+                    controller.setSwitchSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -59,10 +56,10 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setCheckboxSchemeColor(null));
+                    controller.setCheckboxSchemeColor(null);
                   } else {
-                    unawaited(controller
-                        .setCheckboxSchemeColor(SchemeColor.values[index]));
+                    controller
+                        .setCheckboxSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -80,10 +77,9 @@ class SwitchesSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setRadioSchemeColor(null));
+                    controller.setRadioSchemeColor(null);
                   } else {
-                    unawaited(controller
-                        .setRadioSchemeColor(SchemeColor.values[index]));
+                    controller.setRadioSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,

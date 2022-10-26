@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -40,10 +38,10 @@ class AppBarSettings extends StatelessWidget {
                     controller.appBarBackgroundSchemeColorLight == null
                 ? (int index) {
                     if (index < 0 || index >= FlexAppBarStyle.values.length) {
-                      unawaited(controller.setAppBarStyleLight(null));
+                      controller.setAppBarStyleLight(null);
                     } else {
-                      unawaited(controller
-                          .setAppBarStyleLight(FlexAppBarStyle.values[index]));
+                      controller
+                          .setAppBarStyleLight(FlexAppBarStyle.values[index]);
                     }
                   }
                 : null,
@@ -69,10 +67,10 @@ class AppBarSettings extends StatelessWidget {
                     controller.appBarBackgroundSchemeColorDark == null
                 ? (int index) {
                     if (index < 0 || index >= FlexAppBarStyle.values.length) {
-                      unawaited(controller.setAppBarStyleDark(null));
+                      controller.setAppBarStyleDark(null);
                     } else {
-                      unawaited(controller
-                          .setAppBarStyleDark(FlexAppBarStyle.values[index]));
+                      controller
+                          .setAppBarStyleDark(FlexAppBarStyle.values[index]);
                     }
                   }
                 : null,
@@ -136,7 +134,7 @@ class AppBarSettings extends StatelessWidget {
               value: controller.appBarOpacityLight * 100,
               onChanged: controller.useFlexColorScheme
                   ? (double value) {
-                      unawaited(controller.setAppBarOpacityLight(value / 100));
+                      controller.setAppBarOpacityLight(value / 100);
                     }
                   : null,
             ),
@@ -208,7 +206,7 @@ class AppBarSettings extends StatelessWidget {
               value: controller.appBarOpacityDark * 100,
               onChanged: controller.useFlexColorScheme
                   ? (double value) {
-                      unawaited(controller.setAppBarOpacityDark(value / 100));
+                      controller.setAppBarOpacityDark(value / 100);
                     }
                   : null,
             ),
@@ -253,11 +251,10 @@ class AppBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(
-                          controller.setAppBarBackgroundSchemeColorLight(null));
+                      controller.setAppBarBackgroundSchemeColorLight(null);
                     } else {
-                      unawaited(controller.setAppBarBackgroundSchemeColorLight(
-                          SchemeColor.values[index]));
+                      controller.setAppBarBackgroundSchemeColorLight(
+                          SchemeColor.values[index]);
                     }
                   }
                 : null,
@@ -272,11 +269,10 @@ class AppBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(
-                          controller.setAppBarBackgroundSchemeColorDark(null));
+                      controller.setAppBarBackgroundSchemeColorDark(null);
                     } else {
-                      unawaited(controller.setAppBarBackgroundSchemeColorDark(
-                          SchemeColor.values[index]));
+                      controller.setAppBarBackgroundSchemeColorDark(
+                          SchemeColor.values[index]);
                     }
                   }
                 : null,

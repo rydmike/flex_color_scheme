@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -132,10 +130,10 @@ class NavigationRailSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavRailBackgroundSchemeColor(null));
+                    controller.setNavRailBackgroundSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavRailBackgroundSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavRailBackgroundSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -150,7 +148,7 @@ class NavigationRailSettings extends StatelessWidget {
             value: navRailOpacity * 100,
             onChanged: navRailOpacityEnabled
                 ? (double value) {
-                    unawaited(controller.setNavRailOpacity(value / 100));
+                    controller.setNavRailOpacity(value / 100);
                   }
                 : null,
           ),
@@ -226,10 +224,10 @@ class NavigationRailSettings extends StatelessWidget {
                   controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavRailIndicatorSchemeColor(null));
+                    controller.setNavRailIndicatorSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavRailIndicatorSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavRailIndicatorSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -250,8 +248,8 @@ class NavigationRailSettings extends StatelessWidget {
             value: navRailIndicatorOpacity * 100,
             onChanged: navRailIndicatorOpacityEnabled
                 ? (double value) {
-                    unawaited(controller.setNavRailIndicatorOpacity(
-                        value < 0 ? null : value / 100));
+                    controller.setNavRailIndicatorOpacity(
+                        value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -326,11 +324,10 @@ class NavigationRailSettings extends StatelessWidget {
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          unawaited(
-                              controller.setNavRailSelectedSchemeColor(null));
+                          controller.setNavRailSelectedSchemeColor(null);
                         } else {
-                          unawaited(controller.setNavRailSelectedSchemeColor(
-                              SchemeColor.values[index]));
+                          controller.setNavRailSelectedSchemeColor(
+                              SchemeColor.values[index]);
                         }
                       }
                     : null,
@@ -345,11 +342,10 @@ class NavigationRailSettings extends StatelessWidget {
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          unawaited(
-                              controller.setNavRailUnselectedSchemeColor(null));
+                          controller.setNavRailUnselectedSchemeColor(null);
                         } else {
-                          unawaited(controller.setNavRailUnselectedSchemeColor(
-                              SchemeColor.values[index]));
+                          controller.setNavRailUnselectedSchemeColor(
+                              SchemeColor.values[index]);
                         }
                       }
                     : null,

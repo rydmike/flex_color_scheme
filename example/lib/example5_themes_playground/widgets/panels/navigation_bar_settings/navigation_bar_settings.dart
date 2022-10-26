@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -133,10 +131,10 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavBarBackgroundSchemeColor(null));
+                    controller.setNavBarBackgroundSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavBarBackgroundSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavBarBackgroundSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -151,7 +149,7 @@ class NavigationBarSettings extends StatelessWidget {
             value: navBarOpacity * 100,
             onChanged: navBarOpacityEnabled
                 ? (double value) {
-                    unawaited(controller.setNavBarOpacity(value / 100));
+                    controller.setNavBarOpacity(value / 100);
                   }
                 : null,
           ),
@@ -195,8 +193,8 @@ class NavigationBarSettings extends StatelessWidget {
                 : 54,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller.setNavBarHeight(
-                        value < 55 ? null : value.roundToDouble()));
+                    controller.setNavBarHeight(
+                        value < 55 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -234,10 +232,10 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavBarIndicatorSchemeColor(null));
+                    controller.setNavBarIndicatorSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavBarIndicatorSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavBarIndicatorSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -260,8 +258,8 @@ class NavigationBarSettings extends StatelessWidget {
             value: navBarHighlightOpacity * 100,
             onChanged: navBarHighlightOpacityEnabled
                 ? (double value) {
-                    unawaited(controller.setNavBarIndicatorOpacity(
-                        value < 0 ? null : value / 100));
+                    controller.setNavBarIndicatorOpacity(
+                        value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -302,10 +300,10 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavBarSelectedSchemeColor(null));
+                    controller.setNavBarSelectedSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavBarSelectedSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavBarSelectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -318,10 +316,10 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setNavBarUnselectedSchemeColor(null));
+                    controller.setNavBarUnselectedSchemeColor(null);
                   } else {
-                    unawaited(controller.setNavBarUnselectedSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setNavBarUnselectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

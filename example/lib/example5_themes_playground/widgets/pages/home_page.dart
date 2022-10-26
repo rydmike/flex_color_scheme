@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
         onSelect: (int index) async {
           // Toggle grid view mode true/false.
           if (index == 0) {
-            await widget.controller
+            widget.controller
                 .setAdvancedView(!widget.controller.isLargeGridView);
             menuItemsEnabled[4] = !menuItemsEnabled[4];
             menuItemsEnabled[5] = !menuItemsEnabled[5];
@@ -142,9 +142,9 @@ class _HomePageState extends State<HomePage> {
           // Set theme-mode light/dark
           if (index == 1) {
             if (isDark) {
-              await widget.controller.setThemeMode(ThemeMode.light);
+              widget.controller.setThemeMode(ThemeMode.light);
             } else {
-              await widget.controller.setThemeMode(ThemeMode.dark);
+              widget.controller.setThemeMode(ThemeMode.dark);
             }
           }
           // Copy theme setup code

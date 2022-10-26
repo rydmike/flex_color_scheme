@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -85,10 +83,10 @@ class TabBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(controller.setTabBarItemSchemeColorLight(null));
+                      controller.setTabBarItemSchemeColorLight(null);
                     } else {
-                      unawaited(controller.setTabBarItemSchemeColorLight(
-                          SchemeColor.values[index]));
+                      controller.setTabBarItemSchemeColorLight(
+                          SchemeColor.values[index]);
                     }
                   }
                 : null,
@@ -100,10 +98,10 @@ class TabBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(controller.setTabBarIndicatorLight(null));
+                      controller.setTabBarIndicatorLight(null);
                     } else {
-                      unawaited(controller
-                          .setTabBarIndicatorLight(SchemeColor.values[index]));
+                      controller
+                          .setTabBarIndicatorLight(SchemeColor.values[index]);
                     }
                   }
                 : null,
@@ -116,10 +114,10 @@ class TabBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(controller.setTabBarItemSchemeColorDark(null));
+                      controller.setTabBarItemSchemeColorDark(null);
                     } else {
-                      unawaited(controller.setTabBarItemSchemeColorDark(
-                          SchemeColor.values[index]));
+                      controller.setTabBarItemSchemeColorDark(
+                          SchemeColor.values[index]);
                     }
                   }
                 : null,
@@ -131,10 +129,10 @@ class TabBarSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
-                      unawaited(controller.setTabBarIndicatorDark(null));
+                      controller.setTabBarIndicatorDark(null);
                     } else {
-                      unawaited(controller
-                          .setTabBarIndicatorDark(SchemeColor.values[index]));
+                      controller
+                          .setTabBarIndicatorDark(SchemeColor.values[index]);
                     }
                   }
                 : null,

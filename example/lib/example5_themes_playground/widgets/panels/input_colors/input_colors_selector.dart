@@ -131,7 +131,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                         duration: const Duration(milliseconds: 350),
                         curve: Curves.easeOutCubic));
                     schemeIndex = index;
-                    unawaited(widget.controller.setSchemeIndex(index));
+                    widget.controller.setSchemeIndex(index);
                   },
                   selected: widget.controller.schemeIndex == index,
                   backgroundColor: Theme.of(context).colorScheme.surface,

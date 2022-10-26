@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -51,8 +49,8 @@ class CardSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller.setCardBorderRadius(
-                        value < 0 ? null : value.roundToDouble()));
+                    controller.setCardBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),

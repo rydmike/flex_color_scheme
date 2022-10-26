@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -45,10 +43,9 @@ class FabChipSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setFabSchemeColor(null));
+                    controller.setFabSchemeColor(null);
                   } else {
-                    unawaited(controller
-                        .setFabSchemeColor(SchemeColor.values[index]));
+                    controller.setFabSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -93,8 +90,8 @@ class FabChipSettings extends StatelessWidget {
                     controller.useFlexColorScheme &&
                     controller.fabUseShape
                 ? (double value) {
-                    unawaited(controller.setFabBorderRadius(
-                        value < 0 ? null : value.roundToDouble()));
+                    controller.setFabBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -142,10 +139,9 @@ class FabChipSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(controller.setChipSchemeColor(null));
+                    controller.setChipSchemeColor(null);
                   } else {
-                    unawaited(controller
-                        .setChipSchemeColor(SchemeColor.values[index]));
+                    controller.setChipSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -170,8 +166,8 @@ class FabChipSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller.setChipBorderRadius(
-                        value < 0 ? null : value.roundToDouble()));
+                    controller.setChipBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),

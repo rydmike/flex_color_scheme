@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -120,13 +118,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(primary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(primary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: primary,
@@ -135,12 +133,12 @@ class SchemeColors extends StatelessWidget {
                           onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? unawaited(tc.setSecondaryLight(color))
-                                  : unawaited(tc.setPrimaryLight(color));
+                                  ? tc.setSecondaryLight(color)
+                                  : tc.setPrimaryLight(color);
                             } else {
                               swapDark
-                                  ? unawaited(tc.setSecondaryDark(color))
-                                  : unawaited(tc.setPrimaryDark(color));
+                                  ? tc.setSecondaryDark(color)
+                                  : tc.setPrimaryDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -149,12 +147,12 @@ class SchemeColors extends StatelessWidget {
                             if (cancelled) {
                               if (isLight) {
                                 swapLight
-                                    ? unawaited(tc.setSecondaryLight(primary))
-                                    : unawaited(tc.setPrimaryLight(primary));
+                                    ? tc.setSecondaryLight(primary)
+                                    : tc.setPrimaryLight(primary);
                               } else {
                                 swapDark
-                                    ? unawaited(tc.setSecondaryDark(primary))
-                                    : unawaited(tc.setPrimaryDark(primary));
+                                    ? tc.setSecondaryDark(primary)
+                                    : tc.setPrimaryDark(primary);
                               }
                             }
                           },
@@ -181,13 +179,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onPrimary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(colorScheme.onPrimary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onPrimary,
@@ -205,13 +203,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(primaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(primaryContainer);
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: primaryContainer,
@@ -220,16 +217,12 @@ class SchemeColors extends StatelessWidget {
                           onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? unawaited(
-                                      tc.setSecondaryContainerLight(color))
-                                  : unawaited(
-                                      tc.setPrimaryContainerLight(color));
+                                  ? tc.setSecondaryContainerLight(color)
+                                  : tc.setPrimaryContainerLight(color);
                             } else {
                               swapDark
-                                  ? unawaited(
-                                      tc.setSecondaryContainerDark(color))
-                                  : unawaited(
-                                      tc.setPrimaryContainerDark(color));
+                                  ? tc.setSecondaryContainerDark(color)
+                                  : tc.setPrimaryContainerDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -238,16 +231,16 @@ class SchemeColors extends StatelessWidget {
                             if (cancelled) {
                               if (isLight) {
                                 swapLight
-                                    ? unawaited(tc.setSecondaryContainerLight(
-                                        primaryContainer))
-                                    : unawaited(tc.setPrimaryContainerLight(
-                                        primaryContainer));
+                                    ? tc.setSecondaryContainerLight(
+                                        primaryContainer)
+                                    : tc.setPrimaryContainerLight(
+                                        primaryContainer);
                               } else {
                                 swapDark
-                                    ? unawaited(tc.setSecondaryContainerDark(
-                                        primaryContainer))
-                                    : unawaited(tc.setPrimaryContainerDark(
-                                        primaryContainer));
+                                    ? tc.setSecondaryContainerDark(
+                                        primaryContainer)
+                                    : tc.setPrimaryContainerDark(
+                                        primaryContainer);
                               }
                             }
                           },
@@ -274,14 +267,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onPrimaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(colorScheme.onPrimaryContainer);
+
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onPrimaryContainer,
@@ -314,13 +306,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(secondary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.secondary));
+                        tc.setHoverColor(secondary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.secondary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: secondary,
@@ -329,12 +321,12 @@ class SchemeColors extends StatelessWidget {
                           onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? unawaited(tc.setPrimaryLight(color))
-                                  : unawaited(tc.setSecondaryLight(color));
+                                  ? tc.setPrimaryLight(color)
+                                  : tc.setSecondaryLight(color);
                             } else {
                               swapDark
-                                  ? unawaited(tc.setPrimaryDark(color))
-                                  : unawaited(tc.setSecondaryDark(color));
+                                  ? tc.setPrimaryDark(color)
+                                  : tc.setSecondaryDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -343,13 +335,12 @@ class SchemeColors extends StatelessWidget {
                             if (cancelled) {
                               if (isLight) {
                                 swapLight
-                                    ? unawaited(tc.setPrimaryLight(secondary))
-                                    : unawaited(
-                                        tc.setSecondaryLight(secondary));
+                                    ? tc.setPrimaryLight(secondary)
+                                    : tc.setSecondaryLight(secondary);
                               } else {
                                 swapDark
-                                    ? unawaited(tc.setPrimaryDark(secondary))
-                                    : unawaited(tc.setSecondaryDark(secondary));
+                                    ? tc.setPrimaryDark(secondary)
+                                    : tc.setSecondaryDark(secondary);
                               }
                             }
                           },
@@ -376,13 +367,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onSecondary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.secondary));
+                        tc.setHoverColor(colorScheme.onSecondary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.secondary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onSecondary,
@@ -400,13 +391,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(secondaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.secondary));
+                        tc.setHoverColor(secondaryContainer);
+
+                        tc.setHoverTonalPalette(TonalPalettes.secondary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: secondaryContainer,
@@ -415,15 +406,12 @@ class SchemeColors extends StatelessWidget {
                           onChanged: (Color color) {
                             if (isLight) {
                               swapLight
-                                  ? unawaited(
-                                      tc.setPrimaryContainerLight(color))
-                                  : unawaited(
-                                      tc.setSecondaryContainerLight(color));
+                                  ? tc.setPrimaryContainerLight(color)
+                                  : tc.setSecondaryContainerLight(color);
                             } else {
                               swapDark
-                                  ? unawaited(tc.setPrimaryContainerDark(color))
-                                  : unawaited(
-                                      tc.setSecondaryContainerDark(color));
+                                  ? tc.setPrimaryContainerDark(color)
+                                  : tc.setSecondaryContainerDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -432,16 +420,16 @@ class SchemeColors extends StatelessWidget {
                             if (cancelled) {
                               if (isLight) {
                                 swapLight
-                                    ? unawaited(tc.setPrimaryContainerLight(
-                                        secondaryContainer))
-                                    : unawaited(tc.setSecondaryContainerLight(
-                                        secondaryContainer));
+                                    ? tc.setPrimaryContainerLight(
+                                        secondaryContainer)
+                                    : tc.setSecondaryContainerLight(
+                                        secondaryContainer);
                               } else {
                                 swapDark
-                                    ? unawaited(tc.setPrimaryContainerDark(
-                                        secondaryContainer))
-                                    : unawaited(tc.setSecondaryContainerDark(
-                                        secondaryContainer));
+                                    ? tc.setPrimaryContainerDark(
+                                        secondaryContainer)
+                                    : tc.setSecondaryContainerDark(
+                                        secondaryContainer);
                               }
                             }
                           },
@@ -472,14 +460,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onSecondaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.secondary));
+                        tc.setHoverColor(colorScheme.onSecondaryContainer);
+
+                        tc.setHoverTonalPalette(TonalPalettes.secondary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onSecondaryContainer,
@@ -512,13 +499,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(tertiary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.tertiary));
+                        tc.setHoverColor(tertiary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.tertiary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: tertiary,
@@ -526,9 +513,9 @@ class SchemeColors extends StatelessWidget {
                           color: tertiary,
                           onChanged: (Color color) {
                             if (isLight) {
-                              unawaited(tc.setTertiaryLight(color));
+                              tc.setTertiaryLight(color);
                             } else {
-                              unawaited(tc.setTertiaryDark(color));
+                              tc.setTertiaryDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -536,9 +523,9 @@ class SchemeColors extends StatelessWidget {
                           wasCancelled: (bool cancelled) {
                             if (cancelled) {
                               if (isLight) {
-                                unawaited(tc.setTertiaryLight(tertiary));
+                                tc.setTertiaryLight(tertiary);
                               } else {
-                                unawaited(tc.setTertiaryDark(tertiary));
+                                tc.setTertiaryDark(tertiary);
                               }
                             }
                           },
@@ -565,13 +552,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onTertiary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.tertiary));
+                        tc.setHoverColor(colorScheme.onTertiary);
+
+                        tc.setHoverTonalPalette(TonalPalettes.tertiary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onTertiary,
@@ -589,13 +576,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(tertiaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.tertiary));
+                        tc.setHoverColor(tertiaryContainer);
+
+                        tc.setHoverTonalPalette(TonalPalettes.tertiary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: tertiaryContainer,
@@ -603,9 +590,9 @@ class SchemeColors extends StatelessWidget {
                           color: tertiaryContainer,
                           onChanged: (Color color) {
                             if (isLight) {
-                              unawaited(tc.setTertiaryContainerLight(color));
+                              tc.setTertiaryContainerLight(color);
                             } else {
-                              unawaited(tc.setTertiaryContainerDark(color));
+                              tc.setTertiaryContainerDark(color);
                             }
                           },
                           recentColors: tc.recentColors,
@@ -613,11 +600,9 @@ class SchemeColors extends StatelessWidget {
                           wasCancelled: (bool cancelled) {
                             if (cancelled) {
                               if (isLight) {
-                                unawaited(tc.setTertiaryContainerLight(
-                                    tertiaryContainer));
+                                tc.setTertiaryContainerLight(tertiaryContainer);
                               } else {
-                                unawaited(tc.setTertiaryContainerDark(
-                                    tertiaryContainer));
+                                tc.setTertiaryContainerDark(tertiaryContainer);
                               }
                             }
                           },
@@ -646,14 +631,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onTertiaryContainer));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.tertiary));
+                        tc.setHoverColor(colorScheme.onTertiaryContainer);
+                        tc.setHoverTonalPalette(TonalPalettes.tertiary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onTertiaryContainer,
@@ -686,12 +669,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.error));
-                        unawaited(tc.setHoverTonalPalette(TonalPalettes.error));
+                        tc.setHoverColor(colorScheme.error);
+                        tc.setHoverTonalPalette(TonalPalettes.error);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.error,
@@ -708,12 +691,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onError));
-                        unawaited(tc.setHoverTonalPalette(TonalPalettes.error));
+                        tc.setHoverColor(colorScheme.onError);
+                        tc.setHoverTonalPalette(TonalPalettes.error);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onError,
@@ -730,12 +713,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.errorContainer));
-                        unawaited(tc.setHoverTonalPalette(TonalPalettes.error));
+                        tc.setHoverColor(colorScheme.errorContainer);
+                        tc.setHoverTonalPalette(TonalPalettes.error);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.errorContainer,
@@ -752,13 +735,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onErrorContainer));
-                        unawaited(tc.setHoverTonalPalette(TonalPalettes.error));
+                        tc.setHoverColor(colorScheme.onErrorContainer);
+                        tc.setHoverTonalPalette(TonalPalettes.error);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onErrorContainer,
@@ -790,13 +772,13 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.background));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.background);
+
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.background,
@@ -813,13 +795,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onBackground));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.onBackground);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onBackground,
@@ -836,13 +817,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.surface));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.surface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.surface,
@@ -859,13 +839,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.onSurface));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.onSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onSurface,
@@ -897,13 +876,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.surfaceVariant));
-                        unawaited(tc.setHoverTonalPalette(
-                            TonalPalettes.neutralVariant));
+                        tc.setHoverColor(colorScheme.surfaceVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.surfaceVariant,
@@ -920,14 +898,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onSurfaceVariant));
-                        unawaited(tc.setHoverTonalPalette(
-                            TonalPalettes.neutralVariant));
+                        tc.setHoverColor(colorScheme.onSurfaceVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onSurfaceVariant,
@@ -945,13 +921,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.inverseSurface));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.inverseSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.inverseSurface,
@@ -968,14 +943,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(
-                            tc.setHoverColor(colorScheme.onInverseSurface));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.onInverseSurface);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.onInverseSurface,
@@ -1007,13 +980,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.outline));
-                        unawaited(tc.setHoverTonalPalette(
-                            TonalPalettes.neutralVariant));
+                        tc.setHoverColor(colorScheme.outline);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.outline,
@@ -1053,13 +1025,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.shadow));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.neutral));
+                        tc.setHoverColor(colorScheme.shadow);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.shadow,
@@ -1114,13 +1085,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.inversePrimary));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(colorScheme.inversePrimary);
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.inversePrimary,
@@ -1137,13 +1107,12 @@ class SchemeColors extends StatelessWidget {
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(colorScheme.surfaceTint));
-                        unawaited(
-                            tc.setHoverTonalPalette(TonalPalettes.primary));
+                        tc.setHoverColor(colorScheme.surfaceTint);
+                        tc.setHoverTonalPalette(TonalPalettes.primary);
                       },
                       onExit: (PointerEvent details) {
-                        unawaited(tc.setHoverColor(null));
-                        unawaited(tc.setHoverTonalPalette(null));
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
                       },
                       child: Material(
                         color: colorScheme.surfaceTint,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -69,11 +67,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(
-                        controller.setBottomNavBarBackgroundSchemeColor(null));
+                    controller.setBottomNavBarBackgroundSchemeColor(null);
                   } else {
-                    unawaited(controller.setBottomNavBarBackgroundSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setBottomNavBarBackgroundSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -88,8 +85,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
             value: navBarOpacity * 100,
             onChanged: navBarOpacityEnabled
                 ? (double value) {
-                    unawaited(
-                        controller.setBottomNavigationBarOpacity(value / 100));
+                    controller.setBottomNavigationBarOpacity(value / 100);
                   }
                 : null,
           ),
@@ -154,11 +150,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(
-                        controller.setBottomNavBarSelectedSchemeColor(null));
+                    controller.setBottomNavBarSelectedSchemeColor(null);
                   } else {
-                    unawaited(controller.setBottomNavBarSelectedSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setBottomNavBarSelectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
@@ -171,11 +166,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    unawaited(
-                        controller.setBottomNavBarUnselectedSchemeColor(null));
+                    controller.setBottomNavBarUnselectedSchemeColor(null);
                   } else {
-                    unawaited(controller.setBottomNavBarUnselectedSchemeColor(
-                        SchemeColor.values[index]));
+                    controller.setBottomNavBarUnselectedSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

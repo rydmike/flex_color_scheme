@@ -29,9 +29,9 @@ class InputColors extends StatelessWidget {
     if (copy ?? false) {
       // Copy scheme to custom scheme, by setting custom scheme
       // to scheme of current scheme index.
-      await controller.setCustomScheme(AppColor.scheme(controller));
+      controller.setCustomScheme(AppColor.scheme(controller));
       // After copy, set input colors to the custom one so user can edit it.
-      await controller.setSchemeIndex(AppColor.schemes.length - 1);
+      controller.setSchemeIndex(AppColor.schemes.length - 1);
     }
   }
 
@@ -64,9 +64,9 @@ class InputColors extends StatelessWidget {
           // Toggle theme mode also via the ListTile tap.
           onTap: () {
             if (Theme.of(context).brightness == Brightness.light) {
-              unawaited(controller.setThemeMode(ThemeMode.dark));
+              controller.setThemeMode(ThemeMode.dark);
             } else {
-              unawaited(controller.setThemeMode(ThemeMode.light));
+              controller.setThemeMode(ThemeMode.light);
             }
           },
         ),
@@ -194,8 +194,7 @@ class InputColors extends StatelessWidget {
                           controller.useFlexColorScheme &&
                           !controller.useKeyColors
                       ? (double value) {
-                          unawaited(
-                              controller.setDarkMethodLevel(value.floor()));
+                          controller.setDarkMethodLevel(value.floor());
                         }
                       : null,
                 ),

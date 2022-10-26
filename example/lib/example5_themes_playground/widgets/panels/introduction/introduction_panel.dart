@@ -7,8 +7,6 @@
 // made public widget and put into their own files if there would be a need
 // to use them on other other screens too.
 
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -210,12 +208,12 @@ class IntroductionPanel extends StatelessWidget {
           title: const Text('Set to actual platform'),
           trailing: ElevatedButton(
             onPressed: () {
-              unawaited(controller.setPlatform(defaultTargetPlatform));
+              controller.setPlatform(defaultTargetPlatform);
             },
             child: const Text('Actual'),
           ),
           onTap: () {
-            unawaited(controller.setPlatform(defaultTargetPlatform));
+            controller.setPlatform(defaultTargetPlatform);
           },
         ),
         const SizedBox(height: 8),
