@@ -27,8 +27,8 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.info_outlined,
   ),
   PanelItem(
-    panelLabel: 'Input Colors',
-    buttonLabel: 'Input\ncolors',
+    panelLabel: 'Theme Colors',
+    buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
   PanelItem(

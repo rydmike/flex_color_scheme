@@ -73,8 +73,8 @@ class InputColors extends StatelessWidget {
         InputColorsPopupMenu(controller: controller),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
           ListTile(
-            title: const Text('Copy effective input colors to customizable '
-                'scheme?'),
+            title: const Text('Copy current colors to the customizable '
+                'theme?'),
             subtitle:
                 const Text('Or tap a color code to copy it to the clipboard'),
             trailing: ElevatedButton(
@@ -104,12 +104,11 @@ class InputColors extends StatelessWidget {
           child: ShowInputColors(controller: controller),
         ),
         const ListTile(
-          title: Text('Input color modifiers'),
-          subtitle: Text('Use input modifiers to change the effective colors '
-              'that define the ColorScheme. The input color values show the '
+          title: Text('Theme color modifiers'),
+          subtitle: Text('Use theme modifiers to change the effective colors '
+              'that define the ColorScheme. The theme color values show the '
               'color before input modifiers, surrounding color is the '
-              'effective result. Seeded ColorSchemes also modify '
-              'input colors, above you can see how.'),
+              'effective theme.'),
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
@@ -123,7 +122,7 @@ class InputColors extends StatelessWidget {
               : null,
         ),
         UsedColorsPopupMenu(
-          title: const Text('Reduce amount of used input colors'),
+          title: const Text('Reduce amount of used theme colors'),
           index: controller.usedColors,
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,

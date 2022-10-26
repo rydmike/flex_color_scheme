@@ -46,7 +46,7 @@ class InputColorsPopupMenu extends StatelessWidget {
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: Text(
-          '${AppColor.schemes[controller.schemeIndex].name} color scheme',
+          '${AppColor.schemes[controller.schemeIndex].name} theme',
         ),
         subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
         trailing: ColorSchemeBox(

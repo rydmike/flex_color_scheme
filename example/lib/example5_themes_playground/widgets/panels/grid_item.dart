@@ -32,8 +32,8 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.integration_instructions_outlined,
   ),
   GridItem(
-    panelLabel: 'Input Colors',
-    buttonLabel: 'Input\ncolors',
+    panelLabel: 'Theme Colors',
+    buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
   GridItem(
