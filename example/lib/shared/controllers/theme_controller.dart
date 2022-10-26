@@ -788,7 +788,7 @@ class ThemeController with ChangeNotifier {
     if (value == null) return;
     if (value == _schemeIndex) return;
     _schemeIndex = value;
-    notifyListeners();
+    if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySchemeIndex, value));
   }
 
