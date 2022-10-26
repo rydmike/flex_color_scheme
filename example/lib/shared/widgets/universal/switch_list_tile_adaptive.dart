@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: comment_references
 
-// TODO(rydmike): Copy this version to FlexColorScheme.
-
 /// A theme following wrapper for [SwitchListTileAdaptive].
 ///
 /// This wrapper sets the active thumb color for the switch in iOS or macOS
-/// adaptive mode to a color that matches themed value on the switch in
-/// Material on other platforms.
+/// adaptive mode to a color that matches themed color value of the switch in
+/// Material adaptive resulting mode on other platforms.
 ///
 /// In iOS and MacOS adaptive mode, the switch color is always iOS switch green,
-/// we want to follow the Material theme colors. If a switch color is not
+/// we want it to follow the Material themed color. If a switch color is not
 /// defined and we are on iOS or macOS, and using Material 2
 /// (theme.useMaterial3 = false) the switch will be theme.colorscheme.secondary
-/// and if using Material3 (theme.useMaterial3 = true) to
+/// and if using Material3 (theme.useMaterial3 = true) it will be
 /// theme.colorscheme.primary.
 ///
 /// NOTE: toggleableActiveColor will be deprecated soon in Flutter SDK,
@@ -24,17 +22,17 @@ import 'package:flutter/material.dart';
 /// The theme sets this color too, and that is fine for the Material mode.
 /// However, if we want the color to also have an effect on the switch
 /// when it is in its Cupertino mode, we actually have to set the [activeColor]
-/// the the same color for the switch thumb. The Cupertino thumb switch button
+/// to the same color for the switch thumb. The Cupertino thumb switch button
 /// cannot be changed via Material dependent theme. It cannot even be changed
 /// with a Cupertino theme in a Cupertino app. It is so by design, since Apple
 /// wants it to always be bright green when it is on.
 ///
 /// In this app we want it to follow the selected theme color for consistency,
-/// so we wrap the widget in a simple wrapper that sets the color to its
+/// so we wrap the widget in a simple wrapper that sets the color to the correct
 /// themed color, then it works and we get the themed color also in its
 /// adaptive Cupertino mode.
 ///
-/// This wrapper only wraps most common properties that we needed for the
+/// This wrapper only wraps common properties that we needed for the
 /// SwitchListTileAdaptive in this application. Easy to add more when needed.
 class SwitchListTileAdaptive extends StatelessWidget {
   const SwitchListTileAdaptive({
@@ -120,8 +118,8 @@ class SwitchListTileAdaptive extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     /// As long as Flutter SDK stable does not included the new M3 switch and
-    /// its theme. We should d this for all platforms, later when it is
-    /// defined, we can use this logic only on iOS and macOS and let
+    /// its theme, we should do this for all platforms. Later when it is in
+    /// stable, we can use this logic only on iOS and macOS and let
     /// the switch get correct color on other platforms via theme default.
     //
     // if (theme.platform == TargetPlatform.iOS ||

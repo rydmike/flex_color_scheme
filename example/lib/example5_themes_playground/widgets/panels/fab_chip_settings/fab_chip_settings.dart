@@ -93,8 +93,8 @@ class FabChipSettings extends StatelessWidget {
                     controller.useFlexColorScheme &&
                     controller.fabUseShape
                 ? (double value) {
-                    unawaited(controller
-                        .setFabBorderRadius(value < 0 ? null : value));
+                    unawaited(controller.setFabBorderRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),
@@ -170,8 +170,8 @@ class FabChipSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setChipBorderRadius(value < 0 ? null : value));
+                    unawaited(controller.setChipBorderRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

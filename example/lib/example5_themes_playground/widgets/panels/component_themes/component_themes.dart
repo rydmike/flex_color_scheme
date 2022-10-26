@@ -57,8 +57,8 @@ class ComponentThemes extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(
-                        controller.setDefaultRadius(value < 0 ? null : value));
+                    unawaited(controller.setDefaultRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

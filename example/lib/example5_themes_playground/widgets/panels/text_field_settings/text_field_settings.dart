@@ -133,7 +133,7 @@ class TextFieldSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     unawaited(controller.setInputDecoratorBorderRadius(
-                        value < 0 ? null : value));
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

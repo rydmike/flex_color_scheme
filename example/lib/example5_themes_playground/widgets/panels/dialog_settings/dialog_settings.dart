@@ -73,8 +73,8 @@ class DialogSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setDialogBorderRadius(value < 0 ? null : value));
+                    unawaited(controller.setDialogBorderRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

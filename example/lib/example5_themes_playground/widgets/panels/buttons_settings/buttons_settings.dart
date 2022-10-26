@@ -116,7 +116,7 @@ class ButtonsSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     unawaited(controller.setElevatedButtonBorderRadius(
-                        value < 0 ? null : value));
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),
@@ -211,7 +211,7 @@ class ButtonsSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     unawaited(controller.setOutlinedButtonBorderRadius(
-                        value < 0 ? null : value));
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),
@@ -269,8 +269,8 @@ class ButtonsSettings extends StatelessWidget {
                 : -0.5,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setThinBorderWidth(value < 0 ? null : value));
+                    unawaited(controller.setThinBorderWidth(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),
@@ -403,8 +403,8 @@ class ButtonsSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setTextButtonBorderRadius(value < 0 ? null : value));
+                    unawaited(controller.setTextButtonBorderRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

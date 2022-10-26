@@ -58,8 +58,8 @@ class PopupIconButtonSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(controller
-                        .setPopupMenuBorderRadius(value < 0 ? null : value));
+                    unawaited(controller.setPopupMenuBorderRadius(
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

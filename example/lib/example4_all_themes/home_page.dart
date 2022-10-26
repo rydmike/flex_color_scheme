@@ -229,7 +229,9 @@ class HomePage extends StatelessWidget {
                                       controller.useFlexColorScheme
                                   ? (double value) {
                                       unawaited(controller.setDefaultRadius(
-                                          value < 0 ? null : value));
+                                          value < 0
+                                              ? null
+                                              : value.roundToDouble()));
                                     }
                                   : null,
                             ),

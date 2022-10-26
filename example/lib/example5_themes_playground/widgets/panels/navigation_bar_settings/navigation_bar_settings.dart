@@ -195,8 +195,8 @@ class NavigationBarSettings extends StatelessWidget {
                 : 54,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    unawaited(
-                        controller.setNavBarHeight(value < 55 ? null : value));
+                    unawaited(controller.setNavBarHeight(
+                        value < 55 ? null : value.roundToDouble()));
                   }
                 : null,
           ),

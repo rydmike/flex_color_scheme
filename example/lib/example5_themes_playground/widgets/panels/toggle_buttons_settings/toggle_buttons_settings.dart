@@ -68,7 +68,7 @@ class ToggleButtonsSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     unawaited(controller.setToggleButtonsBorderRadius(
-                        value < 0 ? null : value));
+                        value < 0 ? null : value.roundToDouble()));
                   }
                 : null,
           ),
