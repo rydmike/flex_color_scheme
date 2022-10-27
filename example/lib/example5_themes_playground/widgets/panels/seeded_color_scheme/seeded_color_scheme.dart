@@ -37,6 +37,10 @@ class SeededColorScheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final bool useSeed = controller.useKeyColors;
+    final String explainSeed = useSeed
+        ? 'Theme is based on M3 seed generated ColorScheme below'
+        : 'Theme is based on selected FlexColorScheme scheme colors';
     final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
             (!isLight && controller.blendLevelDark > 0)) &&
         controller.useKeyColors;
@@ -55,43 +59,13 @@ class SeededColorScheme extends StatelessWidget {
               'When using custom colors, you can decide if you do so or not.'),
         ),
         ListTile(
-          title: const Text('Light input colors used to seed '
-              'the ColorScheme'),
+          // dense: true,
+          title: Text(explainSeed),
           subtitle: Text(AppColor.explainUsedColors(controller)),
         ),
-        ListTile(trailing: UseKeyColorsButtons(controller: controller)),
-        Visibility(
-          visible: !isLight,
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
-          child: SwitchListTileAdaptive(
-              title: const Text('Custom dark scheme uses its own key colors'),
-              subtitle: const Text(
-                'This option is only available on custom dark schemes. If '
-                'you "keep" dark input colors with custom dark schemes, '
-                'turn this ON to use its own input color definition.',
-              ),
-              value: controller.useDarkColorsForSeed &&
-                  controller.useKeyColors &&
-                  (controller.schemeIndex == 0 ||
-                      controller.schemeIndex == 1 ||
-                      controller.schemeIndex == 2 ||
-                      controller.schemeIndex == AppColor.schemes.length - 1),
-              onChanged: controller.useKeyColors &&
-                      (controller.schemeIndex == 0 ||
-                          controller.schemeIndex == 1 ||
-                          controller.schemeIndex == 2 ||
-                          controller.schemeIndex == AppColor.schemes.length - 1)
-                  ? controller.setUseDarkColorsForSeed
-                  : null),
-        ),
-        const ListTile(
-          title: Text('Keep input color'),
-          subtitle: Text('You can lock primary, secondary, tertiary and their '
-              'container colors to their input colors, '
-              'instead of using its color from seeded tonal palette. '
-              'Switches have separate states for light and dark theme mode.'),
+        ListTile(
+          dense: true,
+          trailing: UseKeyColorsButtons(controller: controller),
         ),
         const ListTile(title: Text('Effective ColorScheme')),
         Padding(
@@ -124,12 +98,51 @@ class SeededColorScheme extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-        const ListTile(title: Text('Generated tonal palettes')),
+        const ListTile(
+          dense: true,
+          title: Text('Want to keep a theme color when using seeds?'),
+          subtitle: Text('With the switches on the colors above you can lock '
+              'primary, secondary, tertiary and their container colors to '
+              'their theme colors instead of using the color from seeded tonal '
+              'palette. Switches have separate states for light and dark '
+              'theme.'),
+        ),
+        const SizedBox(height: 8),
+        if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
+          SwitchListTileAdaptive(
+              dense: true,
+              title: const Text('Custom dark scheme uses its own key colors'),
+              subtitle: const Text(
+                'This option is only available on the custom dark schemes. If '
+                'you "keep" dark input colors with custom dark schemes, '
+                'turn this ON to use its own input color definition.',
+              ),
+              value: controller.useDarkColorsForSeed &&
+                  controller.useKeyColors &&
+                  (controller.schemeIndex == 0 ||
+                      controller.schemeIndex == 1 ||
+                      controller.schemeIndex == 2 ||
+                      controller.schemeIndex == AppColor.schemes.length - 1),
+              onChanged: controller.useKeyColors &&
+                      (controller.schemeIndex == 0 ||
+                          controller.schemeIndex == 1 ||
+                          controller.schemeIndex == 2 ||
+                          controller.schemeIndex == AppColor.schemes.length - 1)
+                  ? controller.setUseDarkColorsForSeed
+                  : null),
+        FlexToneConfigPopupMenu(
+          title: 'Use FlexTones',
+          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
+          onChanged:
+              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
+        ),
+        const ListTile(title: Text('Effective tonal palettes')),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ShowTonalPalette(controller: controller),
         ),
         const ListTile(
+          dense: true,
           subtitle: Text(
             'With FlexTones, you can configure which tone from '
             'generated palettes each color in the ColorScheme use. '
@@ -138,13 +151,8 @@ class SeededColorScheme extends StatelessWidget {
             'secondary and tertiary TonalPalettes.',
           ),
         ),
-        FlexToneConfigPopupMenu(
-          title: 'Used FlexTones setup:',
-          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
-          onChanged:
-              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
-        ),
         ListTile(
+          dense: true,
           title: Text('$_flexToneName'
               ' FlexTones setup has CAM16 chroma:'),
           subtitle: Text(
@@ -152,9 +160,7 @@ class SeededColorScheme extends StatelessWidget {
             '$_flexToneSetup\n'
             'In this app you can choose between the default Material 3 '
             'tone mapping plus six pre-defined custom FlexTones setups. With '
-            'the API you can make your own FlexTones configurations. A '
-            'future version of the app may add interactive configuration of '
-            'tone to ColorScheme color mapping.',
+            'the API you can make your own FlexTones configurations.',
           ),
         ),
         const SizedBox(height: 8),

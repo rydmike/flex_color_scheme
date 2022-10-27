@@ -50,6 +50,13 @@ class InputColors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final bool useSeed = controller.useKeyColors;
+    final String explainSeed = useSeed
+        ? 'Adjust the seed generated theme further with the "Seeded '
+            'ColorScheme" feature'
+        : 'Seeded scheme use primary color to compute ColorSchemes for '
+            'light and dark theme';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -71,12 +78,24 @@ class InputColors extends StatelessWidget {
           },
         ),
         InputColorsPopupMenu(controller: controller),
-        if (controller.schemeIndex != (AppColor.schemes.length - 1))
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+          child: ShowInputColors(controller: controller),
+        ),
+        if (controller.schemeIndex !=
+            (AppColor.schemes.length - 1)) ...<Widget>[
+          ListTile(
+            title: const Text('Use a custom theme?'),
+            subtitle: const Text('Tap here to active the customizable theme'),
+            onTap: () {
+              controller.setSchemeIndex(AppColor.schemes.length - 1);
+            },
+          ),
           ListTile(
             title: const Text('Copy current colors to the customizable '
                 'theme?'),
             subtitle:
-                const Text('Or tap a color code to copy it to the clipboard'),
+                const Text('Tap a color code to copy it to the clipboard'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -87,28 +106,37 @@ class InputColors extends StatelessWidget {
               await _handleCopySchemeTap(context);
             },
           )
-        else
+        ] else ...<Widget>[
+          const ListTile(
+            title: Text('This is the customizable theme'),
+            subtitle: Text('Tap on colors above to modify theme colors'),
+          ),
           ListTile(
-            title: const Text('Customizable color scheme'),
-            subtitle: const Text('Tap the primary, secondary, tertiary color '
-                'or their container colors to change color'),
+            title: const Text('Reset custom theme to its default colors?'),
+            subtitle: const Text('With a predefined theme selected, you can '
+                'copy it as a custom theme starting point'),
             trailing: ElevatedButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);
               },
               child: const Text('Reset'),
             ),
-          ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
-          child: ShowInputColors(controller: controller),
-        ),
+          )
+        ],
+        const Divider(),
         const ListTile(
           title: Text('Theme color modifiers'),
-          subtitle: Text('Use theme modifiers to change the effective colors '
+          subtitle: Text('Use the theme modifiers below to change the '
+              'effective colors '
               'that define the ColorScheme. The theme color values show the '
               'color before input modifiers, surrounding color is the '
               'effective theme.'),
+        ),
+        SwitchListTileAdaptive(
+          title: const Text('Use Material 3 seeded ColorScheme'),
+          subtitle: Text(explainSeed),
+          value: useSeed,
+          onChanged: controller.setUseKeyColors,
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
@@ -129,7 +157,7 @@ class InputColors extends StatelessWidget {
         ),
         if (isLight)
           SwitchListTileAdaptive(
-            title: const Text('Light theme swap colors'),
+            title: const Text('Light theme swap primary'),
             subtitle: const Text(
               'Swap primary and secondary, and their container colors',
             ),
@@ -140,7 +168,7 @@ class InputColors extends StatelessWidget {
           )
         else
           SwitchListTileAdaptive(
-            title: const Text('Dark theme swap colors'),
+            title: const Text('Dark theme swap primary'),
             subtitle: const Text(
               'Swap primary and secondary, and their container colors',
             ),

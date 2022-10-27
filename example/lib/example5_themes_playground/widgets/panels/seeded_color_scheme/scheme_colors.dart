@@ -44,7 +44,8 @@ class SchemeColors extends StatelessWidget {
     final bool swapDark = tc.swapDarkColors;
     // Size of the color presentation boxes
     const double boxWidth = 152;
-    const double boxHeight = 360;
+    const double boxLargeHeight = 230;
+    const double boxSmallHeight = 184;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -66,6 +67,25 @@ class SchemeColors extends StatelessWidget {
 
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones = tc.useKeyColors && tc.useFlexColorScheme;
+
+    // Get controller input colors, if we are using the the to dark
+    final FlexSchemeColor inputColor = isLight || tc.useToDarkMethod
+        ? AppColor.scheme(tc).light
+        : AppColor.scheme(tc).dark;
+
+    // But error input dark mode colors also when we use toDark
+    final FlexSchemeColor inputErrColor =
+        isLight ? AppColor.scheme(tc).light : AppColor.scheme(tc).dark;
+
+    // Input errorColors
+    final Color inputErrorColor = inputErrColor.error ??
+        (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
+    final Color inputOnErrorColor = _onColor(inputErrorColor);
+    final Color inputErrorContainerColor = inputErrColor.errorContainer ??
+        (isLight
+            ? FlexColor.lightErrorContainer(inputErrorColor)
+            : FlexColor.darkErrorContainer(inputErrorColor));
+    final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -108,7 +128,7 @@ class SchemeColors extends StatelessWidget {
           // Primary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxLargeHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -116,6 +136,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(primary);
@@ -161,6 +182,8 @@ class SchemeColors extends StatelessWidget {
                             color: primary,
                             textColor: colorScheme.onPrimary,
                             label: 'primary',
+                            inputColor: inputColor.primary,
+                            inputTextColor: _onColor(inputColor.primary),
                             tone: tones.primaryTone,
                             showTone: _locked(
                                 isLight, !tc.keepPrimary, !tc.keepDarkPrimary),
@@ -177,6 +200,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onPrimary);
@@ -200,7 +224,23 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // PrimaryContainer colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxLargeHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(primaryContainer);
@@ -249,6 +289,9 @@ class SchemeColors extends StatelessWidget {
                             color: primaryContainer,
                             textColor: colorScheme.onPrimaryContainer,
                             label: 'primary\u200BContainer',
+                            inputColor: inputColor.primaryContainer,
+                            inputTextColor:
+                                _onColor(inputColor.primaryContainer),
                             tone: tones.primaryContainerTone,
                             showTone: _locked(isLight, !tc.keepPrimaryContainer,
                                 !tc.keepDarkPrimaryContainer),
@@ -265,6 +308,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onPrimaryContainer);
@@ -296,7 +340,7 @@ class SchemeColors extends StatelessWidget {
           // Secondary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxLargeHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -304,6 +348,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(secondary);
@@ -349,6 +394,8 @@ class SchemeColors extends StatelessWidget {
                             color: secondary,
                             textColor: colorScheme.onSecondary,
                             label: 'secondary',
+                            inputColor: inputColor.secondary,
+                            inputTextColor: _onColor(inputColor.secondary),
                             tone: tones.secondaryTone,
                             showTone: _locked(isLight, !tc.keepSecondary,
                                 !tc.keepDarkSecondary),
@@ -365,6 +412,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onSecondary);
@@ -388,7 +436,23 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // SecondaryContainer colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxLargeHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(secondaryContainer);
@@ -438,6 +502,9 @@ class SchemeColors extends StatelessWidget {
                             color: secondaryContainer,
                             textColor: colorScheme.onSecondaryContainer,
                             label: 'secondary\u200BContainer',
+                            inputColor: inputColor.secondaryContainer,
+                            inputTextColor:
+                                _onColor(inputColor.secondaryContainer),
                             tone: tones.secondaryContainerTone,
                             showTone: _locked(
                                 isLight,
@@ -458,6 +525,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onSecondaryContainer);
@@ -489,7 +557,7 @@ class SchemeColors extends StatelessWidget {
           // Tertiary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxLargeHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -497,6 +565,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(tertiary);
@@ -534,6 +603,8 @@ class SchemeColors extends StatelessWidget {
                             color: tertiary,
                             textColor: colorScheme.onTertiary,
                             label: 'tertiary',
+                            inputColor: inputColor.tertiary,
+                            inputTextColor: _onColor(inputColor.tertiary),
                             tone: tones.tertiaryTone,
                             showTone: _locked(isLight, !tc.keepTertiary,
                                 !tc.keepDarkTertiary),
@@ -550,6 +621,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onTertiary);
@@ -573,7 +645,23 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // TertiaryContainer colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxLargeHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(tertiaryContainer);
@@ -611,6 +699,9 @@ class SchemeColors extends StatelessWidget {
                             color: tertiaryContainer,
                             textColor: colorScheme.onTertiaryContainer,
                             label: 'tertiary\u200BContainer',
+                            inputColor: inputColor.tertiaryContainer,
+                            inputTextColor:
+                                _onColor(inputColor.tertiaryContainer),
                             tone: tones.tertiaryContainerTone,
                             showTone: _locked(
                                 isLight,
@@ -629,6 +720,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onTertiaryContainer);
@@ -659,7 +751,7 @@ class SchemeColors extends StatelessWidget {
           // Error colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxLargeHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -667,6 +759,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.error);
@@ -682,6 +775,8 @@ class SchemeColors extends StatelessWidget {
                           color: colorScheme.error,
                           textColor: colorScheme.onError,
                           label: 'error',
+                          inputColor: inputErrorColor,
+                          inputTextColor: inputOnErrorColor,
                           tone: tones.errorTone,
                           showTone: showTones,
                         ),
@@ -689,6 +784,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onError);
@@ -710,7 +806,23 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // ErrorContainer colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxLargeHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.errorContainer);
@@ -725,7 +837,9 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.errorContainer,
                           textColor: colorScheme.onErrorContainer,
-                          label: 'errorContainer',
+                          label: 'error\nContainer',
+                          inputColor: inputErrorContainerColor,
+                          inputTextColor: inputOnErrorContainerColor,
                           tone: tones.errorContainerTone,
                           showTone: showTones,
                         ),
@@ -733,6 +847,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onErrorContainer);
@@ -759,10 +874,10 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Background and surface colors presentation
+          // Background colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxSmallHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -814,6 +929,21 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // Surface colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxSmallHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -863,10 +993,10 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // SurfaceVariant and inverseSurface colors presentation
+          // SurfaceVariant colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxSmallHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -888,7 +1018,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.surfaceVariant,
                           textColor: colorScheme.onSurfaceVariant,
-                          label: 'surfaceVariant',
+                          label: 'surface\u200BVariant',
                           tone: tones.surfaceVariantTone,
                           showTone: showTones,
                         ),
@@ -910,14 +1040,28 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onSurfaceVariant,
                           textColor: colorScheme.surfaceVariant,
-                          label: 'onSurfaceVariant',
+                          label: 'onSurface\u200BVariant',
                           tone: tones.onSurfaceVariantTone,
                           showTone: showTones,
                         ),
                       ),
                     ),
                   ),
-                  const Divider(height: 1, thickness: 1),
+                ],
+              ),
+            ),
+          ),
+          //
+          // InverseSurface colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxSmallHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -933,7 +1077,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.inverseSurface,
                           textColor: colorScheme.onInverseSurface,
-                          label: 'inverseSurface',
+                          label: 'inverse\u200BSurface',
                           tone: tones.inverseSurfaceTone,
                           showTone: showTones,
                         ),
@@ -955,7 +1099,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.onInverseSurface,
                           textColor: colorScheme.inverseSurface,
-                          label: 'onInverseSurface',
+                          label: 'onInverse\u200BSurface',
                           tone: tones.onInverseSurfaceTone,
                           showTone: showTones,
                         ),
@@ -970,7 +1114,7 @@ class SchemeColors extends StatelessWidget {
           // Outline, OutlineVariant, shadow and scrim colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxSmallHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -1015,7 +1159,7 @@ class SchemeColors extends StatelessWidget {
                   //       child: ColorNameValue(
                   //         color: colorScheme.outline,
                   //         textColor: _onColor(colorScheme.outlineVariant),
-                  //         label: 'outlineVariant',
+                  //         label: 'outline\u200BVariant',
                   //         tone: tones.outlineVariantTone,
                   //         showTone: showTones,
                   //       ),
@@ -1049,10 +1193,10 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Inverse colors presentation
+          // InversePrimary and surfaceTint colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxHeight,
+            height: boxSmallHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -1097,7 +1241,7 @@ class SchemeColors extends StatelessWidget {
                         child: ColorNameValue(
                           color: colorScheme.inversePrimary,
                           textColor: colorScheme.inverseSurface,
-                          label: 'inversePrimary',
+                          label: 'inverse\u200BPrimary',
                           tone: tones.inversePrimaryTone,
                           showTone: showTones,
                         ),

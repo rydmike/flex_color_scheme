@@ -37,9 +37,9 @@ class ShowInputColors extends StatelessWidget {
     // Are colors swapped?
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
-    // Size of the color boxes
+    // Size of theme color presentation boxes
     const double boxWidth = 152; // Was 155, 150 OK on Android
-    const double boxHeight = 140;
+    const double boxHeight = 280;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -114,7 +114,7 @@ class ShowInputColors extends StatelessWidget {
         children: <Widget>[
           SizedBox(
             width: boxWidth,
-            height: boxHeight * 2,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -219,7 +219,7 @@ class ShowInputColors extends StatelessWidget {
           ),
           SizedBox(
             width: boxWidth,
-            height: boxHeight * 2,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -325,7 +325,7 @@ class ShowInputColors extends StatelessWidget {
           ),
           SizedBox(
             width: boxWidth,
-            height: boxHeight * 2,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
@@ -413,7 +413,7 @@ class ShowInputColors extends StatelessWidget {
           ),
           SizedBox(
             width: boxWidth,
-            height: boxHeight * 2,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
