@@ -38,6 +38,7 @@ class InputColorsSelector extends StatefulWidget {
 class _InputColorsSelectorState extends State<InputColorsSelector> {
   late final ScrollController scrollController;
   late int schemeIndex;
+  late double scrollPosition;
 
   // The fixed width the scrolling button at desktop size.
   static const double _kWidthOfScrollItem = 67.2;
@@ -51,11 +52,12 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     final double phoneReduce =
         widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+    scrollPosition =
+        (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+            schemeIndex;
     scrollController = ScrollController(
       keepScrollOffset: true,
-      initialScrollOffset:
-          (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
-              schemeIndex,
+      initialScrollOffset: scrollPosition,
     );
   }
 
@@ -73,9 +75,12 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
           widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
       final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
-      scrollController.jumpTo(
+      scrollPosition =
           (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
-              schemeIndex);
+              schemeIndex;
+      unawaited(scrollController.animateTo(scrollPosition,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeOutCubic));
     }
   }
 
@@ -123,13 +128,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                     width: 4,
                   ),
                   onSelect: () {
-                    unawaited(scrollController.animateTo(
-                        (_kWidthOfScrollItem +
-                                phoneReduce +
-                                phoneButtonsSpacingReduce) *
-                            index,
-                        duration: const Duration(milliseconds: 350),
-                        curve: Curves.easeOutCubic));
+                    scrollPosition = scrollController.offset;
                     schemeIndex = index;
                     widget.controller.setSchemeIndex(index);
                   },
