@@ -25,6 +25,20 @@ class AppScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
+/// AppScrollBehavior with no implicit scrollbars on any platform.
+///
+/// Useful with nested listviews that need to share scroll controller
+@immutable
+class NoScrollbarBehavior extends AppScrollBehavior {
+  const NoScrollbarBehavior();
+  // Override for no scrollbars.
+  @override
+  Widget buildScrollbar(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
+}
+
 /// Another alternative custom scroll behavior class.
 /// Using the Apple iOS bouncing scroll and over stretch.
 ///

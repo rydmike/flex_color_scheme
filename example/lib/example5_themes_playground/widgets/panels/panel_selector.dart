@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
+import '../../../shared/controllers/theme_controller.dart';
 import 'panel_item.dart';
 
 // PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
@@ -16,23 +17,26 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   PanelSelectorHeaderDelegate({
     required this.vsync,
     required this.extent,
+    required this.controller,
     required this.page,
     required this.previousPage,
-    required this.onChanged,
+    required this.onSelect,
   });
   @override
   final TickerProvider vsync;
   final double extent;
+  final ThemeController controller;
   final int page;
   final int previousPage;
-  final ValueChanged<int> onChanged;
+  final VoidCallback onSelect;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return PanelSelector(
-      index: page,
-      onChanged: onChanged,
+      controller: controller,
+      // index: page,
+      onSelect: onSelect,
     );
   }
 
@@ -58,11 +62,11 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 class PanelSelector extends StatefulWidget {
   const PanelSelector({
     super.key,
-    required this.index,
-    required this.onChanged,
+    required this.controller,
+    required this.onSelect,
   });
-  final int index;
-  final ValueChanged<int> onChanged;
+  final ThemeController controller;
+  final VoidCallback onSelect;
 
   @override
   State<PanelSelector> createState() => _PanelSelectorState();
@@ -71,14 +75,16 @@ class PanelSelector extends StatefulWidget {
 class _PanelSelectorState extends State<PanelSelector> {
   late final ScrollController scrollController;
   late int viewIndex;
+  late double scrollOffset;
 
   @override
   void initState() {
     super.initState();
-    viewIndex = widget.index;
+    viewIndex = widget.controller.viewIndex;
+    scrollOffset = AppData.panelButtonWidth * viewIndex;
     scrollController = ScrollController(
       keepScrollOffset: true,
-      initialScrollOffset: AppData.panelButtonWidth * viewIndex,
+      initialScrollOffset: scrollOffset,
     );
   }
 
@@ -91,14 +97,15 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   void didUpdateWidget(covariant PanelSelector oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.index != viewIndex) {
-      viewIndex = widget.index;
+    if (widget.controller.viewIndex != viewIndex) {
+      viewIndex = widget.controller.viewIndex;
       final MediaQueryData media = MediaQuery.of(context);
       final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
           media.size.height < AppData.phoneHeightBreakpoint;
       final double effectiveWidth = AppData.panelButtonWidth +
           (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
-      unawaited(scrollController.animateTo(effectiveWidth * viewIndex,
+      scrollOffset = effectiveWidth * viewIndex;
+      unawaited(scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic));
     }
@@ -110,8 +117,6 @@ class _PanelSelectorState extends State<PanelSelector> {
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
-    final double effectiveWidth = AppData.panelButtonWidth +
-        (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double effectiveHeight = AppData.panelButtonHeight +
         margins * 2 +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
@@ -139,14 +144,11 @@ class _PanelSelectorState extends State<PanelSelector> {
                         return PanelButton(
                           item: panelItems[index],
                           onSelect: () {
-                            // ignore: discarded_futures
-                            scrollController.animateTo(effectiveWidth * index,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeOutCubic);
+                            widget.controller.setViewIndex(index);
                             viewIndex = index;
-                            widget.onChanged(index);
+                            widget.onSelect();
                           },
-                          selected: widget.index == index,
+                          selected: widget.controller.viewIndex == index,
                         );
                       },
                     ),

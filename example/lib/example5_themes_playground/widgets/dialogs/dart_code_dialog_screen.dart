@@ -36,10 +36,31 @@ class DartCodeDialogScreen extends StatelessWidget {
     final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
         GlobalKey<ScaffoldMessengerState>();
 
+    final ThemeData theme = Theme.of(context);
+
+    // We want to make the used Scaffold background color behave like Dialog
+    // theme. We Could make it transparent, to see the Material in the
+    // ResponsiveDialog behind it, but then we see through and screen behind it
+    // when it becomes a MaterialPageRoute full screen modal dialog.
+    // This ensure the Scaffold background has matching color. To a themed or
+    // default themed dialog.
+    final double elevation =
+        theme.dialogTheme.elevation ?? (theme.useMaterial3 ? 6 : 24);
+    final Color background = theme.colorScheme.surface;
+    final Color scaffoldBackground = Theme.of(context).useMaterial3
+        ? ElevationOverlay.applySurfaceTint(
+            background, theme.colorScheme.surfaceTint, elevation)
+        : ElevationOverlay.applyOverlay(context, background, elevation);
+
     return ScaffoldMessenger(
       key: scaffoldMessengerKey,
       child: Scaffold(
+          // Color should come from its custom Dialog that matches normal
+          // Dialog color behavior.
+          backgroundColor: scaffoldBackground,
           appBar: AppBar(
+            surfaceTintColor: theme.colorScheme.surfaceTint,
+            shadowColor: theme.useMaterial3 ? Colors.transparent : null,
             title: Text(dialogHeader),
             actions: <Widget>[
               IconButton(
