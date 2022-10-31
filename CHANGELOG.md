@@ -47,6 +47,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - ToggleButtons: CHANGE: Outline default to 1dp.
 
 * **New**
+  - Add: M2 color legacy design property and swap when using M3.
   - Add: Tooltip themed delays.
   - Add: ThemeData passthrough: materialTapTargetSize
   - Add: ThemeData passthrough: pageTransitionsTheme
@@ -58,10 +59,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 * **Themes Playground** 
   - Add slider and to theme showcase.
-  - Split Material, Banner & snack to Material in one and Banner and Snack in another panel
+  - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add label size for buttons, using new text style feature.
   - Even shorter labels for M2 FCS Component themes (Comp?)
-  - 
   - Use SurfaceStyle button from theme_demo.
 
 
