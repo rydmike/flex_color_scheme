@@ -64,8 +64,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Even shorter labels for M2 FCS Component themes (Comp?)
   - Use SurfaceStyle button from theme_demo.
 
-
-
 ## 6.0.1
 
 **Sep 21, 2022**
