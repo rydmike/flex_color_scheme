@@ -45,7 +45,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
               dense: true,
               leading: ColorSchemeBox(
                 optionIcon: FlexTone.values[i].icon,
-                color: FlexTone.values[i].shade < 0
+                backgroundColor: FlexTone.values[i].shade < 0
                     ? colorScheme.primary.lighten(FlexTone.values[i].shade * -1)
                     : colorScheme.primary.darken(FlexTone.values[i].shade),
               ),
@@ -60,7 +60,8 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         title: Text('$title ${FlexTone.values[index].tone}'),
         subtitle: Text(FlexTone.values[index].describe),
         trailing: ColorSchemeBox(
-          color: !disabled ? colorScheme.primary : colorScheme.primaryContainer,
+          backgroundColor:
+              !disabled ? colorScheme.primary : colorScheme.primaryContainer,
           defaultOption: disabled,
           optionIcon: FlexTone.values[index].icon,
         ),

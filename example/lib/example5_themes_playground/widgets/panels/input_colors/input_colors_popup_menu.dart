@@ -33,7 +33,7 @@ class InputColorsPopupMenu extends StatelessWidget {
             child: ListTile(
               dense: true,
               leading: ColorSchemeBox(
-                color: isLight
+                backgroundColor: isLight
                     ? AppColor.schemeAtIndex(i, controller).light.primary
                     : AppColor.schemeAtIndex(i, controller).dark.primary,
                 size: const Size(55, 36),
@@ -50,7 +50,7 @@ class InputColorsPopupMenu extends StatelessWidget {
         ),
         subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
         trailing: ColorSchemeBox(
-          color: colorScheme.primary,
+          backgroundColor: colorScheme.primary,
           size: const Size(55, 36),
         ),
       ),

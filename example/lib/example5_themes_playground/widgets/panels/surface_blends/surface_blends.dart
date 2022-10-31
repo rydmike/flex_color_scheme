@@ -157,7 +157,8 @@ class SurfaceBlends extends StatelessWidget {
                   '$nameThatColorLight $materialNameLight$spaceLight'
                   '#${effectiveTintLight.hexCode}'),
               trailing: ColorSchemeBox(
-                color: controller.surfaceTintLight ?? colorScheme.primary,
+                backgroundColor:
+                    controller.surfaceTintLight ?? colorScheme.primary,
               ),
             ),
           ),
@@ -332,7 +333,8 @@ class SurfaceBlends extends StatelessWidget {
                   '$nameThatColorDark $materialNameDark$spaceDark'
                   '#${effectiveTintDark.hexCode}'),
               trailing: ColorSchemeBox(
-                color: controller.surfaceTintDark ?? colorScheme.primary,
+                backgroundColor:
+                    controller.surfaceTintDark ?? colorScheme.primary,
               ),
             ),
           ),

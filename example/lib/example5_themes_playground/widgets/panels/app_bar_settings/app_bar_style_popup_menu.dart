@@ -135,7 +135,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
             child: ListTile(
               dense: true,
               leading: ColorSchemeBox(
-                color: i >= FlexAppBarStyle.values.length
+                backgroundColor: i >= FlexAppBarStyle.values.length
                     ? _appBarStyleColor(
                         null,
                         colorScheme,
@@ -172,7 +172,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
           ],
         ),
         trailing: ColorSchemeBox(
-          color: enabled && !useDefault
+          backgroundColor: enabled && !useDefault
               ? _appBarStyleColor(
                   FlexAppBarStyle.values[index],
                   colorScheme,

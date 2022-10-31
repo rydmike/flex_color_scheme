@@ -6,39 +6,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Oct 31, 2022**
 
-**TODO**
-
-* M3 Review all new M3 capable widgets and tune, fix add as needed to FCS.
-  - TextField
-  - PopupMenu
-  - Switches
-  - AppBar fix
-  - Material fix
-  - Add Tonal button  
-
-* Tests
-  - Add tests for new AppBarStyle scaffold.
-  - Add tests for text style on buttons.
-
-* Bottom sheet M3 spec check.
-* Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
-* AppBar: Scaffold background color.
-* ToggleButtons: CHANGE: Outline default to 1dp.
-* CHORE: AppBar theme, move to sub-theme.
-* CHORE: TabBar theme, move to sub-theme.
-* CHORE: Tooltip theme, move to sub-theme.
-* Add: Tooltip themed delays.
-* Add: ThemeData passthrough: materialTapTargetSize
-* Add: ThemeData passthrough: pageTransitionsTheme
-* Add: Slider theme, which props to include?
-
-* Playground: 
-  - Add slider and to theme showcase.
-  - Add label size for buttons, using new text style feature.
-  - Even shorter labels for M2 FCS Component themes (Comp?)
-  - Take AppBarStyle button from theme_demo or the color scheme box at least.
-  - Take SurfaceStyle button from theme_demo.
-
 **NEW**
 
 * Added support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
@@ -53,8 +20,51 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   * Improved discoverability of custom theme colors.
   * Removed animation from horizontal list theme picker when clicking on it.
   * Removed animation from topic panel when clicking on it in the page view.
-  * Removed animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in. 
+  * Removed animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in.
   * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
+  * New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
+
+**TODO:**
+
+* **M3 Review** 
+  - Check all new M3 capable widgets and tune, fix and add as needed to FCS:
+    - TextField (figure out custom color) 
+    - PopupMenu
+    - Switches (figure out custom color)
+    - BottomSheet (Add custom colors)
+    - Tonal button
+    - AppBar SDK bugs
+    - Material SDK bugs
+    - Sys navbar SDK bugs    
+
+* **Chore**
+  - AppBar theme, move to sub-theme.
+  - TabBar theme, move to sub-theme.
+  - Tooltip theme, move to sub-theme.
+
+* **Change**
+  - Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
+  - ToggleButtons: CHANGE: Outline default to 1dp.
+
+* **New**
+  - Add: Tooltip themed delays.
+  - Add: ThemeData passthrough: materialTapTargetSize
+  - Add: ThemeData passthrough: pageTransitionsTheme
+  - Add: Slider theme, which props to include?
+
+* **Tests**
+  - Add tests for new AppBarStyle scaffold.
+  - Add tests for text style on buttons.
+
+* **Themes Playground** 
+  - Add slider and to theme showcase.
+  - Split Material, Banner & snack to Material in one and Banner and Snack in another panel
+  - Add label size for buttons, using new text style feature.
+  - Even shorter labels for M2 FCS Component themes (Comp?)
+  - 
+  - Use SurfaceStyle button from theme_demo.
+
+
 
 ## 6.0.1
 

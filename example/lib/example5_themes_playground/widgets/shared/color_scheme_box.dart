@@ -9,18 +9,65 @@ import 'package:flutter/material.dart';
 class ColorSchemeBox extends StatelessWidget {
   const ColorSchemeBox({
     super.key,
-    this.color = Colors.white,
-    this.size = const Size(45, 35),
+    this.selected = false,
+    this.foregroundColor,
+    this.backgroundColor,
+    this.borderColor,
+    this.size,
     this.defaultOption = false,
     this.optionIcon = Icons.palette_outlined,
     this.defaultOptionIcon = Icons.texture_outlined,
+    this.child,
   });
 
-  final Color color;
-  final Size size;
+  /// The box is selected.
+  ///
+  ///Changes the border from 1dp to 2.5dp.
+  final bool selected;
+
+  /// Color used on foreground icon. If and IconData is provided or default
+  /// one used.
+  ///
+  /// Defaults to
+  final Color? foregroundColor;
+
+  /// Color used on the Material used for the box.
+  ///
+  /// Default to Material default background color.
+  final Color? backgroundColor;
+
+  /// Color of the border.
+  ///
+  /// Defaults theme colorscheme outline.
+  final Color? borderColor;
+
+  /// Size of the item.
+  ///
+  /// Defaults to Themed ToggleButtons min width+16 and height constraints, if
+  /// one fo them is not defined, then defaults to width 45+16 and height 35.
+  final Size? size;
+
+  /// This is the default options.
+  ///
+  /// If set to true, the [defaultOptionIcon] is used.
   final bool defaultOption;
+
+  /// Icon used for option.
+  ///
+  /// Defaults to [Icons.palette_outlined].
   final IconData optionIcon;
+
+  /// Icon used for the default option.
+  ///
+  /// Defaults to [Icons.texture_outlined].
   final IconData defaultOptionIcon;
+
+  /// Use a child widget as content instead of an icon.
+  ///
+  /// If child is null the icon or default icon is used.
+  /// If a child is used the foreground color has no effect, the child
+  /// need to provide its own coloring.
+  final Widget? child;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -28,27 +75,39 @@ class ColorSchemeBox extends StatelessWidget {
 
   // On color for icon on the colored box.
   static Color _onColor(final Color color) => _isLight(color)
-      ? Colors.black.withOpacity(0.4)
-      : Colors.white.withOpacity(0.4);
+      ? Colors.black.withOpacity(0.8)
+      : Colors.white.withOpacity(0.8);
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme scheme = theme.colorScheme;
+    final Color foreground =
+        foregroundColor ?? _onColor(backgroundColor ?? scheme.background);
+    final double width =
+        size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 45;
+    final double height =
+        size?.height ?? theme.toggleButtonsTheme.constraints?.minHeight ?? 35;
+    final BorderRadius borderRadius = theme.toggleButtonsTheme.borderRadius ??
+        const BorderRadius.all(Radius.circular(12));
+
     return SizedBox(
-      width: size.width,
-      height: size.height,
+      width: width + 16,
+      height: height,
       child: Material(
-        color: color,
+        color: backgroundColor ?? scheme.background,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          borderRadius: borderRadius,
           side: BorderSide(
-            color: Theme.of(context).dividerColor,
-            width: 1,
+            color: borderColor ?? scheme.outline,
+            width: selected ? 2 : 1,
           ),
         ),
-        child: defaultOption
-            ? Icon(defaultOptionIcon, color: _onColor(color))
-            : Icon(optionIcon, color: _onColor(color)),
+        child: child ??
+            (defaultOption
+                ? Icon(defaultOptionIcon, color: foreground)
+                : Icon(optionIcon, color: foreground)),
       ),
     );
   }

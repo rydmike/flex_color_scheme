@@ -62,7 +62,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
             child: ListTile(
               dense: true,
               leading: ColorSchemeBox(
-                color: i >= SchemeColor.values.length
+                backgroundColor: i >= SchemeColor.values.length
                     ? colorScheme.surface
                     : FlexSubThemes.schemeColor(
                         SchemeColor.values[i],
@@ -90,7 +90,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
           ],
         ),
         trailing: ColorSchemeBox(
-          color: enabled && !useDefault
+          backgroundColor: enabled && !useDefault
               ? FlexSubThemes.schemeColor(
                   SchemeColor.values[index], colorScheme)
               : colorScheme.surface,
