@@ -47,13 +47,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
   include their adjustments via the Playground, but size changes might be added later, as a usage
   example of this property, that is a `MaterialStateProperty`.
-* Added Scaffold background color as selectable AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`.
+* Added Scaffold background color as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`.
 
 * **Themes Playground**
-  * Improve discoverability of custom theme colors.
-  * Remove animation from horizontal list theme picker when clicking on it.
-  * Remove animation from topic panel when clicking on it in the page view.
-  * Remove animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in. 
+  * Improved discoverability of custom theme colors.
+  * Removed animation from horizontal list theme picker when clicking on it.
+  * Removed animation from topic panel when clicking on it in the page view.
+  * Removed animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in. 
   * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
 
 ## 6.0.1
