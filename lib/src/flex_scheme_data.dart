@@ -29,6 +29,7 @@ class FlexSchemeData with Diagnosticable {
     required this.description,
     required this.light,
     required this.dark,
+    this.isMaterial3Scheme = false,
   });
 
   /// A short name for the [FlexSchemeData] based color scheme.
@@ -43,18 +44,24 @@ class FlexSchemeData with Diagnosticable {
   /// The dark scheme colors used by this [FlexSchemeData].
   final FlexSchemeColor dark;
 
+  /// Set this flag to true, if the [FlexSchemeColor]'s in this [FlexSchemeData]
+  /// are design to follow the Material 3 color system.
+  final bool isMaterial3Scheme;
+
   /// Copy the object with one or more provided properties changed.
   FlexSchemeData copyWith({
     final String? name,
     final String? description,
     final FlexSchemeColor? light,
     final FlexSchemeColor? dark,
+    final bool? isMaterial3Scheme,
   }) {
     return FlexSchemeData(
       name: name ?? this.name,
       description: description ?? this.description,
       light: light ?? this.light,
       dark: dark ?? this.dark,
+      isMaterial3Scheme: isMaterial3Scheme ?? this.isMaterial3Scheme,
     );
   }
 
@@ -67,7 +74,8 @@ class FlexSchemeData with Diagnosticable {
         other.name == name &&
         other.description == description &&
         other.light == light &&
-        other.dark == dark;
+        other.dark == dark &&
+        other.isMaterial3Scheme == isMaterial3Scheme;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -77,6 +85,7 @@ class FlexSchemeData with Diagnosticable {
         description,
         light,
         dark,
+        isMaterial3Scheme,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -87,5 +96,7 @@ class FlexSchemeData with Diagnosticable {
     properties.add(StringProperty('description', description));
     properties.add(DiagnosticsProperty<FlexSchemeColor>('light', light));
     properties.add(DiagnosticsProperty<FlexSchemeColor>('dark', dark));
+    properties
+        .add(DiagnosticsProperty<bool>('isMaterial3Scheme', isMaterial3Scheme));
   }
 }
