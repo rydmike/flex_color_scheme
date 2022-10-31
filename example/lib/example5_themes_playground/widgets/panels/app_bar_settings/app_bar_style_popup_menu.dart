@@ -33,6 +33,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
   Color _appBarStyleColor(
     final FlexAppBarStyle? style,
     final ColorScheme colorScheme,
+    final Color scaffold,
     final bool isLight,
     final bool useMaterial3,
   ) {
@@ -47,6 +48,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return colorScheme.surface;
       case FlexAppBarStyle.background:
         return colorScheme.background;
+      case FlexAppBarStyle.scaffold:
+        return scaffold;
       case FlexAppBarStyle.custom:
         return customAppBarColor ?? colorScheme.tertiaryContainer;
       case null:
@@ -80,6 +83,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return 'Surface color, with primary color blend';
       case FlexAppBarStyle.background:
         return 'Background color, with primary color blend';
+      case FlexAppBarStyle.scaffold:
+        return 'Scaffold color, with primary color blend';
       case FlexAppBarStyle.custom:
         return 'Custom. Built-in schemes use tertiary color, '
             'but you can use any color';
@@ -131,10 +136,17 @@ class AppBarStylePopupMenu extends StatelessWidget {
               dense: true,
               leading: ColorSchemeBox(
                 color: i >= FlexAppBarStyle.values.length
-                    ? _appBarStyleColor(null, colorScheme, isLight, useM3)
+                    ? _appBarStyleColor(
+                        null,
+                        colorScheme,
+                        theme.scaffoldBackgroundColor,
+                        isLight,
+                        useM3,
+                      )
                     : _appBarStyleColor(
                         FlexAppBarStyle.values[i],
                         colorScheme,
+                        theme.scaffoldBackgroundColor,
                         isLight,
                         useM3,
                       ),
@@ -164,10 +176,17 @@ class AppBarStylePopupMenu extends StatelessWidget {
               ? _appBarStyleColor(
                   FlexAppBarStyle.values[index],
                   colorScheme,
+                  theme.scaffoldBackgroundColor,
                   isLight,
                   useM3,
                 )
-              : _appBarStyleColor(null, colorScheme, isLight, useM3),
+              : _appBarStyleColor(
+                  null,
+                  colorScheme,
+                  theme.scaffoldBackgroundColor,
+                  isLight,
+                  useM3,
+                ),
           defaultOption: useDefault,
         ),
       ),

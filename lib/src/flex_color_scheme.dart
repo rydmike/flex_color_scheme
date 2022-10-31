@@ -42,16 +42,20 @@ enum FlexAppBarStyle {
   /// for light scheme is white.
   material,
 
-  /// Use scheme surface color as the the AppBar's themed background color,
+  /// Use scheme surface color as the AppBar's themed background color,
   /// including any blend color it may have.
   ///
   /// This is the default for light and dark theme mode, when
   /// [ThemeData.useMaterial3] is true.
   surface,
 
-  /// Use scheme background color as the the AppBar's themed background color,
+  /// Use scheme background color as the AppBar's themed background color,
   /// including any blend color it may have.
   background,
+
+  /// Use scaffold background color as the AppBar's themed background color,
+  /// including any blend color it may have.
+  scaffold,
 
   /// Use a custom [AppBar] background color as its themed background color.
   ///
@@ -2334,6 +2338,11 @@ class FlexColorScheme with Diagnosticable {
     // light is white, we use provided background color, or computed one.
     final Color effectiveBackgroundColor =
         lightIsWhite ? inputBackground.lighten(5) : inputBackground;
+
+    // Determine the effective scaffold background color.
+    final Color effectiveScaffoldColor = scaffoldBackground ??
+        (lightIsWhite ? Colors.white : surfaceSchemeColors.scaffoldBackground);
+
     // Determine effective dialog background color.
     // If light is white, we use lighter than normal. If not,
     // we use dialog provided background color, or computed one.
@@ -2441,11 +2450,14 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.material:
           effectiveAppBarColor = FlexColor.materialLightSurface;
           break;
+        case FlexAppBarStyle.surface:
+          effectiveAppBarColor = effectiveSurfaceColor;
+          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor = effectiveBackgroundColor;
           break;
-        case FlexAppBarStyle.surface:
-          effectiveAppBarColor = effectiveSurfaceColor;
+        case FlexAppBarStyle.scaffold:
+          effectiveAppBarColor = effectiveScaffoldColor;
           break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
@@ -2474,10 +2486,7 @@ class FlexColorScheme with Diagnosticable {
       // Background is used e.g. by drawer and bottom nav bar.
       background: effectiveBackgroundColor,
       // Color of the scaffold background.
-      scaffoldBackground: scaffoldBackground ??
-          (lightIsWhite
-              ? Colors.white
-              : surfaceSchemeColors.scaffoldBackground),
+      scaffoldBackground: effectiveScaffoldColor,
       // Color of dialog background elements, a passed in dialogBackground
       // color will override the factory style, if provided.
       dialogBackground: effectiveDialogBackground,
@@ -3950,6 +3959,14 @@ class FlexColorScheme with Diagnosticable {
     // we use dialog provided background color, or computed one.
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by true black mode for a darker effect.
+
+    // If darkIsTrueBlack is set, we use black as default scaffold background,
+    // otherwise provided value or if null effective scheme background.
+    final Color effectiveScaffoldColor = scaffoldBackground ??
+        (darkIsTrueBlack
+            ? Colors.black
+            : surfaceSchemeColors.scaffoldBackground);
+
     final Color effectiveDialogBackground = darkIsTrueBlack
         ? dialogBackground?.darken(5) ??
             surfaceSchemeColors.dialogBackground.darken(5)
@@ -4051,11 +4068,14 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.material:
           effectiveAppBarColor = FlexColor.materialDarkSurface;
           break;
+        case FlexAppBarStyle.surface:
+          effectiveAppBarColor = effectiveSurfaceColor;
+          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor = effectiveBackgroundColor;
           break;
-        case FlexAppBarStyle.surface:
-          effectiveAppBarColor = effectiveSurfaceColor;
+        case FlexAppBarStyle.scaffold:
+          effectiveAppBarColor = effectiveScaffoldColor;
           break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
@@ -4086,10 +4106,7 @@ class FlexColorScheme with Diagnosticable {
       background: effectiveBackgroundColor,
       // If darkIsTrueBlack is set, we use black as default scaffold background,
       // otherwise provided value or if null effective scheme background.
-      scaffoldBackground: scaffoldBackground ??
-          (darkIsTrueBlack
-              ? Colors.black
-              : surfaceSchemeColors.scaffoldBackground),
+      scaffoldBackground: effectiveScaffoldColor,
       // Color of dialog background elements, a passed in dialogBackground
       // color will override the factory style, if provided.
       dialogBackground: effectiveDialogBackground,
@@ -4241,6 +4258,7 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
+
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system

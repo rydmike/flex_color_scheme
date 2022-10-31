@@ -4,23 +4,40 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Oct 12, 2022**
+**Oct 31, 2022**
 
 **TODO**
 
+* M3 Review all new M3 capable widgets and tune, fix add as needed to FCS.
+  - TextField
+  - PopupMenu
+  - Switches
+  - AppBar fix
+  - Material fix
+  - Add Tonal button  
+
+* Tests
+  - Add tests for new AppBarStyle scaffold.
+  - Add tests for text style on buttons.
+
 * Bottom sheet M3 spec check.
 * Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
+* AppBar: Scaffold background color.
+* ToggleButtons: CHANGE: Outline default to 1dp.
 * CHORE: AppBar theme, move to sub-theme.
 * CHORE: TabBar theme, move to sub-theme.
 * CHORE: Tooltip theme, move to sub-theme.
-* Tooltip add themed delays.
+* Add: Tooltip themed delays.
 * Add: ThemeData passthrough: materialTapTargetSize
 * Add: ThemeData passthrough: pageTransitionsTheme
-* Slider theme
-* Playground: Add slider and to theme showcase.
-* Playground: Make custom colors an own page.
-* Playground: Add label size for buttons
+* Add: Slider theme, which props to include?
 
+* Playground: 
+  - Add slider and to theme showcase.
+  - Add label size for buttons, using new text style feature.
+  - Even shorter labels for M2 FCS Component themes (Comp?)
+  - Take AppBarStyle button from theme_demo or the color scheme box at least.
+  - Take SurfaceStyle button from theme_demo.
 
 **NEW**
 
@@ -30,6 +47,14 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
   include their adjustments via the Playground, but size changes might be added later, as a usage
   example of this property, that is a `MaterialStateProperty`.
+* Added Scaffold background color as selectable AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`.
+
+* **Themes Playground**
+  * Improve discoverability of custom theme colors.
+  * Remove animation from horizontal list theme picker when clicking on it.
+  * Remove animation from topic panel when clicking on it in the page view.
+  * Remove animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in. 
+  * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
 
 ## 6.0.1
 
