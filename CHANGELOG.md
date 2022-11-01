@@ -15,6 +15,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   include their adjustments via the Playground, but size changes might be added later, as a usage
   example of this property, that is a `MaterialStateProperty`.
 * Added Scaffold background color as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`.
+* Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`, it is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
 
 * **Themes Playground**
   * Improved discoverability of custom theme colors.
@@ -23,6 +24,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   * Removed animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in.
   * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
   * New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
+
 
 **TODO:**
 
@@ -49,7 +51,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * **New**
   - Add: M2 color legacy design property and swap when using M3.
   - Add: Tooltip themed delays.
-  - Add: ThemeData passthrough: materialTapTargetSize
   - Add: ThemeData passthrough: pageTransitionsTheme
   - Add: Slider theme, which props to include?
 

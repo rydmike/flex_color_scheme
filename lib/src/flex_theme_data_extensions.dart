@@ -892,6 +892,13 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
@@ -1117,6 +1124,7 @@ extension FlexThemeData on ThemeData {
         visualDensity: visualDensity,
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
+        materialTapTargetSize: materialTapTargetSize,
         fontFamily: fontFamily,
         platform: platform,
         typography: typography,
@@ -1969,6 +1977,13 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
@@ -2195,6 +2210,7 @@ extension FlexThemeData on ThemeData {
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
         fontFamily: fontFamily,
+        materialTapTargetSize: materialTapTargetSize,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,

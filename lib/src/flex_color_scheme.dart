@@ -296,6 +296,7 @@ class FlexColorScheme with Diagnosticable {
     this.textTheme,
     this.primaryTextTheme,
     this.fontFamily,
+    this.materialTapTargetSize,
     this.platform,
     this.typography,
     this.applyElevationOverlayColor = true,
@@ -687,6 +688,13 @@ class FlexColorScheme with Diagnosticable {
 
   /// Name of the font family to use as default for the theme.
   final String? fontFamily;
+
+  /// Configures the hit test size of certain Material widgets.
+  ///
+  /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
+  /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+  /// platforms.
+  final MaterialTapTargetSize? materialTapTargetSize;
 
   /// The platform adaptive widgets should adapt to target and mechanics too.
   ///
@@ -1918,6 +1926,13 @@ class FlexColorScheme with Diagnosticable {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
@@ -2517,6 +2532,7 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
+      materialTapTargetSize: materialTapTargetSize,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -3509,6 +3525,13 @@ class FlexColorScheme with Diagnosticable {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
     /// The platform adaptive widgets should adapt to target and mechanics too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
@@ -4138,6 +4161,7 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
+      materialTapTargetSize: materialTapTargetSize,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -5186,7 +5210,8 @@ class FlexColorScheme with Diagnosticable {
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
       primaryTextTheme: effectivePrimaryTextTheme,
-      // Pass along custom typography and platform.
+      // Pass along custom materialTapTargetSize, typography and platform.
+      materialTapTargetSize: materialTapTargetSize,
       typography: effectiveTypography,
       platform: effectivePlatform,
       // Most definitions below are very close to the ones used by the Flutter
