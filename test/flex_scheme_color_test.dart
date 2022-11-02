@@ -915,6 +915,55 @@ void main() {
       );
     });
 
+    final FlexSchemeColor m1SwapLegacy = FlexSchemeColor(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimaryContainer, // -> SecVar
+      secondary: FlexColor.materialLightTertiary, // -> primVar
+      secondaryContainer: FlexColor.blueLightTertiaryContainer,
+      tertiary: FlexColor.materialLightSecondary,
+      tertiaryContainer: FlexColor.blueLightSecondaryContainer,
+      appBarColor: Colors.white,
+      error: FlexColor.materialLightError,
+      errorContainer:
+          FlexColor.lightErrorContainer(FlexColor.materialLightError),
+    );
+
+    test(
+        'FSC1.30-L1: GIVEN a FlexSchemeColor.effective(SchemeColors, 6, '
+        'swapLegacy: true) '
+        'EXPECT it equal to FlexSchemeColor made with legacy '
+        'colors swapped. ', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 6, swapLegacy: true),
+        equals(m1SwapLegacy),
+      );
+    });
+
+    final FlexSchemeColor m1SwapLegacyAndSwapColors = FlexSchemeColor(
+      primary: FlexColor.materialLightTertiary,
+      primaryContainer: FlexColor.blueLightTertiaryContainer,
+      secondary: FlexColor.materialLightPrimary,
+      secondaryContainer: FlexColor.materialLightPrimaryContainer,
+      tertiary: FlexColor.materialLightSecondary,
+      tertiaryContainer: FlexColor.blueLightSecondaryContainer,
+      appBarColor: Colors.white,
+      error: FlexColor.materialLightError,
+      errorContainer:
+          FlexColor.lightErrorContainer(FlexColor.materialLightError),
+    );
+
+    test(
+        'FSC1.30-L2: GIVEN a FlexSchemeColor.effective(SchemeColors, 6, '
+        'swapLegacy: true, swapColors: true) '
+        'EXPECT it equal to FlexSchemeColor made with legacy '
+        'colors and then primary and secondary swapped. ', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 6,
+            swapLegacy: true, swapColors: true),
+        equals(m1SwapLegacyAndSwapColors),
+      );
+    });
+
     final FlexSchemeColor m1Swap = FlexSchemeColor(
       primary: FlexColor.materialLightSecondary,
       primaryContainer: FlexColor.blueLightSecondaryContainer,
@@ -1046,7 +1095,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null)'));
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: false)'));
     });
     test(
         'FSC1.37: Test toStringShort implemented via debugFillProperties '
