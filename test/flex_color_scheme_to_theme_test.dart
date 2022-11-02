@@ -2448,8 +2448,6 @@ void main() {
     // Test result with custom features like surface, appbar, tab bar options.
     //**************************************************************************
 
-    // TODO(rydmike): Improve tests by adding more results verification checks.
-
     final ThemeData tLightC = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceMode: FlexSurfaceMode.custom,
@@ -2462,6 +2460,20 @@ void main() {
       bottomAppBarElevation: 1,
       usedColors: 1,
     ).toTheme;
+
+    test(
+        'FCS7.83: GIVEN a FlexColorScheme.light with given options '
+        'EXPECT none null result and matching ThemeData to options.', () {
+      expect(tLightC, isNotNull);
+      expect(
+        tLightC.appBarTheme.backgroundColor,
+        FlexColor.mandyRed.light.tertiary,
+      );
+      expect(
+        tLightC.appBarTheme.elevation,
+        2,
+      );
+    });
 
     final ThemeData tDarkC = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
@@ -2478,14 +2490,17 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.83: GIVEN a FlexColorScheme.light with more options '
-        'EXPECT none null result.', () {
-      expect(tLightC, isNotNull);
-    });
-    test(
-        'FCS7.84: GIVEN a FlexColorScheme.dark with more options '
-        'EXPECT none null result.', () {
+        'FCS7.84: GIVEN a FlexColorScheme.dark with given options '
+        'EXPECT none null result and matching ThemeData to options.', () {
       expect(tDarkC, isNotNull);
+      expect(
+        tDarkC.appBarTheme.backgroundColor,
+        FlexColor.mandyRed.dark.tertiary,
+      );
+      expect(
+        tDarkC.appBarTheme.elevation,
+        4,
+      );
     });
 
     // With surface and background colors defined, and light is white
@@ -2793,6 +2808,33 @@ void main() {
     final ThemeData tLAppBarCenterNull = FlexColorScheme.light(
       scheme: FlexScheme.flutterDash,
     ).toTheme;
+    // AppBar test null style, not using M3.
+    final ThemeData tLAppBarScaffold = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      appBarStyle: FlexAppBarStyle.scaffold,
+      scaffoldBackground: FlexColor.amberDarkTertiary,
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.98 Light: GIVEN a FlexColorScheme.light with '
+        'appBarStyle.scaffold and not using M3 '
+        'EXPECT app bar background equals theme.scaffoldBackground ', () {
+      expect(tLAppBarScaffold.appBarTheme.backgroundColor,
+          equals(tLAppBarScaffold.scaffoldBackgroundColor));
+    });
+    final ThemeData tDAppBarScaffold = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      appBarStyle: FlexAppBarStyle.scaffold,
+      scaffoldBackground: FlexColor.verdunHemlockDarkSecondaryContainer,
+      // useMaterial3: false, // Default value
+    ).toTheme;
+    test(
+        'FCS7.98 DArk: GIVEN a FlexColorScheme.dark with '
+        'appBarStyle.scaffold and not using M3 '
+        'EXPECT app bar background equals theme.scaffoldBackground ', () {
+      expect(tDAppBarScaffold.appBarTheme.backgroundColor,
+          equals(tDAppBarScaffold.scaffoldBackgroundColor));
+    });
     test(
         'FCS7.99 null: GIVEN a FlexColorScheme.light with no centerTitle '
         'EXPECT app bar center title null ', () {
@@ -2817,6 +2859,114 @@ void main() {
         'FCS7.99 false: GIVEN a FlexColorScheme.light with no centerTitle '
         'EXPECT app bar center title false ', () {
       expect(tLAppBarCenterFalse.appBarTheme.centerTitle, equals(false));
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    final ThemeData tLSwapLegacy = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.100 GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme flutterDash '
+        'EXPECT no legacy swap - Dash does not swap', () {
+      expect(
+        tLSwapLegacy.colorScheme.secondary,
+        equals(FlexColor.dashBlueLightSecondary),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.secondaryContainer,
+        equals(FlexColor.dashBlueLightSecondaryContainer),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.tertiary,
+        equals(FlexColor.dashBlueLightTertiary),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.tertiaryContainer,
+        equals(FlexColor.dashBlueLightTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    final ThemeData tLSwapLegacy2 = FlexColorScheme.light(
+      scheme: FlexScheme.blumineBlue,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.100 GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme blumineBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      expect(
+        tLSwapLegacy2.colorScheme.secondary,
+        equals(FlexColor.blumineBlueLightTertiary),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.secondaryContainer,
+        equals(FlexColor.blumineBlueLightTertiaryContainer),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.tertiary,
+        equals(FlexColor.blumineBlueLightSecondary),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.tertiaryContainer,
+        equals(FlexColor.blumineBlueLightSecondaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    final ThemeData tDSwapLegacy = FlexColorScheme.dark(
+      scheme: FlexScheme.flutterDash,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.100 GIVEN a FlexColorScheme.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme flutterDash '
+        'EXPECT no legacy swap - Dash does not swap', () {
+      expect(
+        tDSwapLegacy.colorScheme.secondary,
+        equals(FlexColor.dashBlueDarkSecondary),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.secondaryContainer,
+        equals(FlexColor.dashBlueDarkSecondaryContainer),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.tertiary,
+        equals(FlexColor.dashBlueDarkTertiary),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.tertiaryContainer,
+        equals(FlexColor.dashBlueDarkTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    final ThemeData tDSwapLegacy2 = FlexColorScheme.dark(
+      scheme: FlexScheme.blumineBlue,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    ).toTheme;
+    test(
+        'FCS7.100 GIVEN a FlexColorScheme.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme blumineBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      expect(
+        tDSwapLegacy2.colorScheme.secondary,
+        equals(FlexColor.blumineBlueDarkTertiary),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.secondaryContainer,
+        equals(FlexColor.blumineBlueDarkTertiaryContainer),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.tertiary,
+        equals(FlexColor.blumineBlueDarkSecondary),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.tertiaryContainer,
+        equals(FlexColor.blumineBlueDarkSecondaryContainer),
+      );
     });
   });
 }

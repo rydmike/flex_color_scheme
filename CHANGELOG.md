@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 2, 2022**
+**Nov 3, 2022**
 
 **NEW**
 
@@ -28,6 +28,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
   * New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
   * To Theme Colors panel, and an on/off that controls the `swapLegacyOnMaterial3` setting.
+
+* **Tests**
+  - Tests for FlexSchemeColor.effective, using swapLegacy and combo with swapColor.
+  - Tests for swapLegacyOnMaterial3.
+  - Tests for new AppBarStyle scaffold.
 
 **TODO:**
 
@@ -58,12 +63,14 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Add: Slider theme, which props to include?
 
 * **Tests**
-  - Add tests for new AppBarStyle scaffold.
+  
   - Add tests for text style on buttons.
+  - Add tests materialTapTargetSize
 
 * **Themes Playground** 
 
-  - Add slider and to theme showcase.
+  - Add slider theme config 
+  - Add slider to theme showcase.
   - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add label size for buttons, using new text style feature.
   - Even shorter labels for M2 FCS Component themes (Comp?)
