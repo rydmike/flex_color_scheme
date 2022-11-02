@@ -119,6 +119,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     tabBarStyle: controller.tabBarStyle,
     // Keep scaffold plain white in all blend modes.
     lightIsWhite: controller.lightIsWhite,
+    // Swap M2 legacy colors when using M3, if there is a benefit.
+    swapLegacyOnMaterial3: controller.swapLegacyColors,
     // Swap primary and secondary colors.
     swapColors: controller.swapLightColors,
     // If true, tooltip theme background will be light in light

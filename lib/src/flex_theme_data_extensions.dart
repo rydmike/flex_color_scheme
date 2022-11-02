@@ -1068,6 +1068,53 @@ extension FlexThemeData on ThemeData {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped.
+    ///
+    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
+    /// and have this flag set to true. If this flag is false (default) it may
+    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
+    /// benefit from swapping secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// color schemes that also use chroma from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make such FlexSchemeColor designs automatically swap secondary and
+    /// tertiary colors when useMaterial3 is set to true , set
+    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
+    /// compatibility, but it is recommended to turn it on when using
+    /// Material 3 color system. If you use seeded color schemes with
+    /// Material 2, (useMaterial3 flag is false), it may be preferable to
+    /// keep [swapOnMaterial3] false.
+    ///
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
+    /// currently used built-in scheme [FlexSchemeData].
+    ///
+    /// If a custom colorScheme is passed in, or any of the direct color
+    /// properties secondary, secondaryContainer, tertiary or
+    /// tertiaryContainer, then it is assumed custom scheme or overrides is
+    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -1130,6 +1177,7 @@ extension FlexThemeData on ThemeData {
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
       ).toTheme;
 
@@ -2153,6 +2201,53 @@ extension FlexThemeData on ThemeData {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped.
+    ///
+    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
+    /// and have this flag set to true. If this flag is false (default) it may
+    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
+    /// benefit from swapping secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// color schemes that also use chroma from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make such FlexSchemeColor designs automatically swap secondary and
+    /// tertiary colors when useMaterial3 is set to true , set
+    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
+    /// compatibility, but it is recommended to turn it on when using
+    /// Material 3 color system. If you use seeded color schemes with
+    /// Material 2, (useMaterial3 flag is false), it may be preferable to
+    /// keep [swapOnMaterial3] false.
+    ///
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
+    /// currently used built-in scheme [FlexSchemeData].
+    ///
+    /// If a custom colorScheme is passed in, or any of the direct color
+    /// properties secondary, secondaryContainer, tertiary or
+    /// tertiaryContainer, then it is assumed custom scheme or overrides is
+    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -2215,6 +2310,7 @@ extension FlexThemeData on ThemeData {
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
       ).toTheme;
 }

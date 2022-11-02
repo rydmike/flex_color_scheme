@@ -129,6 +129,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String darkIsTrueBlack = controller.darkIsTrueBlack
       ? '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
       : '';
+  final String swapLegacyOnMaterial3 = controller.swapLegacyColors
+      ? '  swapLegacyOnMaterial3: ${controller.swapLegacyColors},\n'
+      : '';
   final String swapLightColors = controller.swapLightColors
       ? '  swapColors: ${controller.swapLightColors},\n'
       : '';
@@ -898,6 +901,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarElevationLight'
       '$tabBarStyle'
       '$lightIsWhite'
+      '$swapLegacyOnMaterial3'
       '$swapLightColors'
       '$tintLightColor'
       '$tooltipsMatchBackground'
@@ -921,6 +925,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarElevationDark'
       '$tabBarStyle'
       '$darkIsTrueBlack'
+      '$swapLegacyOnMaterial3'
       '$swapDarkColors'
       '$tintDarkColor'
       '$tooltipsMatchBackground'

@@ -155,6 +155,18 @@ class InputColors extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
+        SwitchListTileAdaptive(
+          title: const Text('When using M3 swap secondary and tertiary'),
+          subtitle: const Text(
+            'Only applies to built-in M2 designed schemes that benefit from '
+            'it. Prefer ON when using M3, may try OFF when using seeded '
+            'ColorScheme with only primary seed key',
+          ),
+          value: controller.swapLegacyColors && controller.useFlexColorScheme,
+          onChanged: controller.useFlexColorScheme
+              ? controller.setSwapLegacyColors
+              : null,
+        ),
         if (isLight)
           SwitchListTileAdaptive(
             title: const Text('Light theme swap primary'),

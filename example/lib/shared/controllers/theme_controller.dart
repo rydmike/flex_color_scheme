@@ -114,6 +114,8 @@ class ThemeController with ChangeNotifier {
         Store.keyBlendOnLevelDark, Store.defaultBlendOnLevelDark);
     _usedColors =
         await _themeService.load(Store.keyUsedColors, Store.defaultUsedColors);
+    _swapLegacyColors = await _themeService.load(
+        Store.keySwapLegacyColors, Store.defaultSwapLegacyColors);
     _swapLightColors = await _themeService.load(
         Store.keySwapLightColors, Store.defaultSwapLightColors);
     _swapDarkColors = await _themeService.load(
@@ -474,6 +476,7 @@ class ThemeController with ChangeNotifier {
     setBlendOnLevel(Store.defaultBlendOnLevel, false);
     setBlendOnLevelDark(Store.defaultBlendOnLevelDark, false);
     setUsedColors(Store.defaultUsedColors, false);
+    setSwapLegacyColors(Store.defaultSwapLegacyColors, false);
     setSwapLightColors(Store.defaultSwapLightColors, false);
     setSwapDarkColors(Store.defaultSwapDarkColors, false);
     setLightIsWhite(Store.defaultLightIsWhite, false);
@@ -910,6 +913,16 @@ class ThemeController with ChangeNotifier {
     _usedColors = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUsedColors, value));
+  }
+
+  late bool _swapLegacyColors;
+  bool get swapLegacyColors => _swapLegacyColors;
+  void setSwapLegacyColors(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _swapLegacyColors) return;
+    _swapLegacyColors = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySwapLegacyColors, value));
   }
 
   late bool _swapLightColors;

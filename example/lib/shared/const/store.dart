@@ -145,6 +145,11 @@ class Store {
   // Defaults to 6.
   static const int defaultUsedColors = 6;
 
+  // Key used to swap legacy M2 secondary and tertiary colors.
+  static const String keySwapLegacyColors = 'swapLegacyColors';
+  // Default value for the swapLegacyColors, also to reset settings.
+  static const bool defaultSwapLegacyColors = true;
+
   // Key used to read and save the swapLightColors value.
   static const String keySwapLightColors = 'swapLightColors';
   // Default value for the swapLightColors, also to reset settings.

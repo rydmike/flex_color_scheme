@@ -26,6 +26,7 @@ class AppColor {
     // the custom app bar style. We use a light blue that matches branded
     // surface colors, but is a bit stronger than most surface branding.
     appBarColor: Color(0xFFC8DCF8),
+    swapOnMaterial3: true,
   );
 // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
@@ -37,6 +38,7 @@ class AppColor {
     tertiaryContainer: Color(0xFF535393),
     // A custom very dark blue, to match the dark theme mode
     appBarColor: Color(0xFF00102B),
+    swapOnMaterial3: true,
   );
 
   // We can build a scheme the long way, by specifying all the required
@@ -93,6 +95,7 @@ class AppColor {
     primary: const Color(0xFF1145A4),
     secondary: const Color(0xFFB61D1D),
     brightness: Brightness.light,
+    swapOnMaterial3: true,
   );
 
   // These colors are used as default for the customizable colors in

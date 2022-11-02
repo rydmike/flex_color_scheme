@@ -1928,8 +1928,8 @@ class FlexColorScheme with Diagnosticable {
 
     /// Configures the hit test size of certain Material widgets.
     ///
-    /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
-    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
@@ -2104,6 +2104,53 @@ class FlexColorScheme with Diagnosticable {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped.
+    ///
+    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
+    /// and have this flag set to true. If this flag is false (default) it may
+    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
+    /// benefit from swapping secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// color schemes that also use chroma from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make such FlexSchemeColor designs automatically swap secondary and
+    /// tertiary colors when useMaterial3 is set to true , set
+    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
+    /// compatibility, but it is recommended to turn it on when using
+    /// Material 3 color system. If you use seeded color schemes with
+    /// Material 2, (useMaterial3 flag is false), it may be preferable to
+    /// keep [swapOnMaterial3] false.
+    ///
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
+    /// currently used built-in scheme [FlexSchemeData].
+    ///
+    /// If a custom colorScheme is passed in, or any of the direct color
+    /// properties secondary, secondaryContainer, tertiary or
+    /// tertiaryContainer, then it is assumed custom scheme or overrides is
+    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -2155,13 +2202,27 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? colorScheme?.error,
       errorContainer: colorScheme?.errorContainer,
     );
+    // Swap legacy secondary and tertiary color if we use Material 3 and
+    // we have swapping of legacy colors on and if the colors in used built-in
+    // scheme has flag [swapOnMaterial3] set that tells it benefits from doing
+    // this. Additionally we should only do this if we have not passed a custom
+    // ColorScheme, nor secondary or tertiary colors directly.
+    final bool swapLegacy = useMaterial3 &&
+        swapLegacyOnMaterial3 &&
+        flexColors.swapOnMaterial3 &&
+        secondary == null &&
+        secondaryContainer == null &&
+        tertiary == null &&
+        tertiaryContainer == null &&
+        colorScheme == null;
     // First cut of effective FlexSchemeColor depends on colors, usedColors
-    // and swap. When we use Brightness.light, we also guarantee that we have
-    // colors on effectiveColors.error and errorContainer, they are guaranteed
-    // to no longer be null after this call.
+    // and swapLegacy and swap. When we use Brightness.light, we also guarantee
+    // that we have colors on effectiveColors.error and errorContainer, they
+    // are guaranteed to no longer be null after this call.
     FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
       withPassedColors,
       usedColors,
+      swapLegacy: swapLegacy,
       swapColors: swapColors,
       brightness: Brightness.light,
     );
@@ -3527,8 +3588,8 @@ class FlexColorScheme with Diagnosticable {
 
     /// Configures the hit test size of certain Material widgets.
     ///
-    /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
-    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
@@ -3703,6 +3764,53 @@ class FlexColorScheme with Diagnosticable {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped.
+    ///
+    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
+    /// and have this flag set to true. If this flag is false (default) it may
+    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
+    /// benefit from swapping secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// color schemes that also use chroma from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make such FlexSchemeColor designs automatically swap secondary and
+    /// tertiary colors when useMaterial3 is set to true , set
+    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
+    /// compatibility, but it is recommended to turn it on when using
+    /// Material 3 color system. If you use seeded color schemes with
+    /// Material 2, (useMaterial3 flag is false), it may be preferable to
+    /// keep [swapOnMaterial3] false.
+    ///
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
+    /// currently used built-in scheme [FlexSchemeData].
+    ///
+    /// If a custom colorScheme is passed in, or any of the direct color
+    /// properties secondary, secondaryContainer, tertiary or
+    /// tertiaryContainer, then it is assumed custom scheme or overrides is
+    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -3754,13 +3862,27 @@ class FlexColorScheme with Diagnosticable {
       error: error ?? colorScheme?.error,
       errorContainer: colorScheme?.errorContainer,
     );
+    // Swap legacy secondary and tertiary color if we use Material 3 and
+    // we have swapping of legacy colors on and if the colors in used built-in
+    // scheme has flag [swapOnMaterial3] set that tells it benefits from doing
+    // this. Additionally we should only do this if we have not passed a custom
+    // ColorScheme, nor secondary or tertiary colors directly.
+    final bool swapLegacy = useMaterial3 &&
+        swapLegacyOnMaterial3 &&
+        flexColors.swapOnMaterial3 &&
+        secondary == null &&
+        secondaryContainer == null &&
+        tertiary == null &&
+        tertiaryContainer == null &&
+        colorScheme == null;
     // First cut of effective FlexSchemeColor depends on colors, usedColors
-    // and swap. When we use Brightness.dark, we also guarantee that we have
-    // colors on effectiveColors.error and errorContainer, they are guaranteed
-    // to no longer be null after this call.
+    // and swapLegacy and swap. When we use Brightness.dark, we also guarantee
+    // that we have colors on effectiveColors.error and errorContainer, they
+    // are guaranteed to no longer be null after this call.
     FlexSchemeColor effectiveColors = FlexSchemeColor.effective(
       withPassedColors,
       usedColors,
+      swapLegacy: swapLegacy,
       swapColors: swapColors,
       brightness: Brightness.dark,
     );
@@ -4715,8 +4837,8 @@ class FlexColorScheme with Diagnosticable {
   ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme related color for the `primaryColorDark` color, this method
-  ///    does.  See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///    scheme related color for the `primaryColorDark` color, FCS does.
+  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
   ///    The `ThemeData.from` leaves this color at `ThemeData` factory default,
   ///    this may not match your scheme. Widgets seldom use this color, so the
   ///    issue is rarely seen.
@@ -4724,7 +4846,7 @@ class FlexColorScheme with Diagnosticable {
   ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme based color for the `primaryColorLight` color, this method does.
+  ///    scheme related color for the `primaryColorDark` color, FCS does.
   ///    See issue: https:///github.com/flutter/flutter/issues/65782.
   ///    The `ThemeData.from` leaves this color at `ThemeData` factory default
   ///    this may not match your scheme. Widgets seldom use this color, so the
@@ -4733,8 +4855,8 @@ class FlexColorScheme with Diagnosticable {
   ///    [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme based color for the `secondaryHeaderColor` color, this method
-  ///    does. See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///    scheme related color for the `primaryColorDark` color, FCS does.
+  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
   ///    `ThemeData.from` leaves this color at `ThemeData` factory default this
   ///    may not match your scheme. Widgets seldom use this color, so the issue
   ///    is rarely seen.
@@ -4923,7 +5045,7 @@ class FlexColorScheme with Diagnosticable {
       // inline with opacities on the 2014/2018/2021 typographies.
       final Color textBase = isDark ? Colors.white : Colors.black;
       // For main text theme we are suing surface tint instead of primary,
-      // nromally it default to primary, but if it is customized we should base
+      // normally it defaults to primary, but if it is customized we should base
       // tinted text theme on it instead.
       final Color textHiOpacity = isDark // SDK dark 70%, light 54%
           ? textBase.blend(colorScheme.surfaceTint, 30).withAlpha(0xCC) // 80%
@@ -6194,6 +6316,7 @@ class FlexColorScheme with Diagnosticable {
     TextTheme? textTheme,
     TextTheme? primaryTextTheme,
     String? fontFamily,
+    MaterialTapTargetSize? materialTapTargetSize,
     TargetPlatform? platform,
     Typography? typography,
     bool? applyElevationOverlayColor,
@@ -6237,6 +6360,8 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme ?? this.textTheme,
       primaryTextTheme: primaryTextTheme ?? this.primaryTextTheme,
       fontFamily: fontFamily ?? this.fontFamily,
+      materialTapTargetSize:
+          materialTapTargetSize ?? this.materialTapTargetSize,
       platform: platform ?? this.platform,
       typography: typography ?? this.typography,
       applyElevationOverlayColor:
@@ -6285,6 +6410,7 @@ class FlexColorScheme with Diagnosticable {
         other.visualDensity == visualDensity &&
         other.textTheme == textTheme &&
         other.primaryTextTheme == primaryTextTheme &&
+        other.materialTapTargetSize == materialTapTargetSize &&
         other.fontFamily == fontFamily &&
         other.platform == platform &&
         other.typography == typography &&
@@ -6330,6 +6456,7 @@ class FlexColorScheme with Diagnosticable {
         textTheme,
         primaryTextTheme,
         fontFamily,
+        materialTapTargetSize,
         platform,
         typography,
         applyElevationOverlayColor,
@@ -6381,6 +6508,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(
         DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
+    properties.add(EnumProperty<MaterialTapTargetSize>(
+        'materialTapTargetSize', materialTapTargetSize));
     properties.add(EnumProperty<TargetPlatform>('platform', platform));
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
     properties.add(DiagnosticsProperty<bool>(

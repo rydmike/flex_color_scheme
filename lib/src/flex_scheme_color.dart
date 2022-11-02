@@ -45,6 +45,7 @@ class FlexSchemeColor with Diagnosticable {
     this.appBarColor,
     this.error,
     this.errorContainer,
+    this.swapOnMaterial3 = false,
   })  : _primaryContainer = primaryContainer,
         _secondaryContainer = secondaryContainer,
         _tertiary = tertiary,
@@ -69,8 +70,6 @@ class FlexSchemeColor with Diagnosticable {
   // set via constructor initializer.
   final Color? _secondaryContainer;
 
-  //  It is only used to keep the old mapping during dev to get old color on
-  //  it in example app before we have defined it.
   /// A color used for elements needing less emphasis than [secondary].
   Color get secondaryContainer => _secondaryContainer ?? secondary;
 
@@ -106,9 +105,47 @@ class FlexSchemeColor with Diagnosticable {
   /// A color used for error elements needing less emphasis than [error].
   final Color? errorContainer;
 
-  // // A private darker version of primary color, set via constructor init list.
-  // // Used to support deprecated value as null with past defaults as fallback.
-  // final Color? _primaryVariant;
+  /// When using Material3 color system, this [FlexSchemeColor] should prefer
+  /// to swap secondary and tertiary colors.
+  ///
+  /// Set this flag to true, if this [FlexSchemeColor]'s has a design
+  /// that if Material 3 color system is used, will benefit
+  /// if the secondary and tertiary colors, including their containers, are
+  /// swapped.
+  ///
+  /// Most FlexColorScheme color schemes were designed with M2 usage in mind and
+  /// have this flag set to true. If this flag is false (default) it may mean
+  /// that its [FlexSchemeColor] was designed for M3 or that it won't benefit
+  /// from swapping secondary and tertiary colors.
+  ///
+  /// This property does not cause swapping of any color information, it is only
+  /// metadata that provides information that such swapping is beneficial when
+  /// using the Material 3 color system for this particular [FlexSchemeColor].
+  ///
+  /// Using seed generated color scheme with the built-in [FlexSchemeColor]
+  /// colors is another way to make them suitable for the M3 Color system.
+  /// However, in some cases the secondary color in their design may not be
+  /// in-line with M3 color system design intent, especially if you use seeded
+  /// color schemes that also use chroma from the secondary color to make tonal
+  /// palettes for it. However, in many of the legacy FlexSchemeColor color
+  /// designs, this can be fixed if we swap the secondary and tertiary colors.
+  /// Such [FlexSchemeColor] has since FlexColorScheme version 6.1.0 been
+  /// configured with its [swapOnMaterial3] property set to true.
+  /// All others have it set to false.
+  ///
+  /// To actually make such [FlexSchemeColor] automatically swap secondary and
+  /// tertiary colors when [useMaterial3] is set to true , set the
+  /// [FlexColorScheme] property [swapLegacyOnMaterial3] to true.
+  /// It defaults to false for backwards compatibility, but it is recommended
+  /// to turn it on when using Material 3 color system. If you use seeded
+  /// color schemes with Material 2 ([useMaterial3] flag is false), it may be
+  /// preferable to keep [swapOnMaterial3] false.
+  ///
+  /// The Themes Playground app defaults to setting this value to true, but
+  /// allows you to turn it off.
+  ///
+  /// Defaults to false.
+  final bool swapOnMaterial3;
 
   /// Make a [FlexSchemeColor] from just one primary color or possible also
   /// from a more complete color scheme set. This is a convenience factory that
@@ -135,6 +172,7 @@ class FlexSchemeColor with Diagnosticable {
     Color? error,
     Color? errorContainer,
     Brightness? brightness,
+    bool swapOnMaterial3 = false,
   }) {
     if (brightness == Brightness.light) {
       return FlexSchemeColor(
@@ -155,6 +193,7 @@ class FlexSchemeColor with Diagnosticable {
         errorContainer: errorContainer ??
             FlexColor.lightErrorContainer(
                 error ?? FlexColor.materialLightError),
+        swapOnMaterial3: swapOnMaterial3,
       );
     } else if (brightness == Brightness.dark) {
       return FlexSchemeColor(
@@ -174,6 +213,7 @@ class FlexSchemeColor with Diagnosticable {
         error: error ?? FlexColor.materialDarkError,
         errorContainer: errorContainer ??
             FlexColor.darkErrorContainer(error ?? FlexColor.materialDarkError),
+        swapOnMaterial3: swapOnMaterial3,
       );
     } else {
       return FlexSchemeColor(
@@ -196,6 +236,7 @@ class FlexSchemeColor with Diagnosticable {
             primary.lighten(kDarkenPrimaryContainer),
         error: error,
         errorContainer: errorContainer,
+        swapOnMaterial3: swapOnMaterial3,
       );
     }
   }
@@ -241,20 +282,31 @@ class FlexSchemeColor with Diagnosticable {
   static FlexSchemeColor effective(
     final FlexSchemeColor colors,
     final int usedColors, {
+    final bool swapLegacy = false,
     final bool swapColors = false,
     final Brightness? brightness,
   }) {
     assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
 
-    // In the swap, tertiary is kept where it is, nothing to swap with.
-    final FlexSchemeColor effectiveColors = swapColors
+    // Swap legacy M2 designed secondary and tertiary colors.
+    final FlexSchemeColor fixColors = swapLegacy
         ? colors.copyWith(
-            primary: colors.secondary,
-            primaryContainer: colors.secondaryContainer,
-            secondary: colors.primary,
-            secondaryContainer: colors.primaryContainer,
+            secondary: colors.tertiary,
+            secondaryContainer: colors.tertiaryContainer,
+            tertiary: colors.secondary,
+            tertiaryContainer: colors.secondaryContainer,
           )
         : colors;
+
+    // Swap primary and secondary colors, using legacy fixColors.
+    final FlexSchemeColor effectiveColors = swapColors
+        ? fixColors.copyWith(
+            primary: fixColors.secondary,
+            primaryContainer: fixColors.secondaryContainer,
+            secondary: fixColors.primary,
+            secondaryContainer: fixColors.primaryContainer,
+          )
+        : fixColors;
 
     if (brightness == Brightness.light) {
       return effectiveColors.copyWith(
@@ -389,6 +441,7 @@ class FlexSchemeColor with Diagnosticable {
         appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
         error: error?.blend(Colors.white, whiteBlend),
         errorContainer: errorContainer?.blend(Colors.white, whiteBlend),
+        swapOnMaterial3: swapOnMaterial3,
       );
     } else {
       return FlexSchemeColor.from(
@@ -401,6 +454,7 @@ class FlexSchemeColor with Diagnosticable {
         appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
         error: error?.blend(Colors.white, whiteBlend),
         errorContainer: errorContainer?.blend(Colors.white, whiteBlend),
+        swapOnMaterial3: swapOnMaterial3,
       );
     }
   }
@@ -448,6 +502,7 @@ class FlexSchemeColor with Diagnosticable {
       tertiary: tertiary,
       tertiaryContainer: tertiaryContainer,
       appBarColor: appBarColor,
+      swapOnMaterial3: swapOnMaterial3,
     );
   }
 
@@ -462,6 +517,7 @@ class FlexSchemeColor with Diagnosticable {
     final Color? appBarColor,
     final Color? error,
     final Color? errorContainer,
+    final bool? swapOnMaterial3,
   }) {
     return FlexSchemeColor(
       primary: primary ?? this.primary,
@@ -473,6 +529,7 @@ class FlexSchemeColor with Diagnosticable {
       appBarColor: appBarColor ?? this.appBarColor,
       error: error ?? this.error,
       errorContainer: errorContainer ?? this.errorContainer,
+      swapOnMaterial3: swapOnMaterial3 ?? this.swapOnMaterial3,
     );
   }
 
@@ -490,7 +547,8 @@ class FlexSchemeColor with Diagnosticable {
         other.tertiaryContainer == tertiaryContainer &&
         other.appBarColor == appBarColor &&
         other.error == error &&
-        other.errorContainer == errorContainer;
+        other.errorContainer == errorContainer &&
+        other.swapOnMaterial3 == swapOnMaterial3;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -505,6 +563,7 @@ class FlexSchemeColor with Diagnosticable {
         appBarColor,
         error,
         errorContainer,
+        swapOnMaterial3,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -520,5 +579,7 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('appBarColor', appBarColor));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('errorContainer', errorContainer));
+    properties
+        .add(DiagnosticsProperty<bool>('swapOnMaterial3', swapOnMaterial3));
   }
 }

@@ -110,6 +110,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     appBarElevation: controller.appBarElevationDark,
     tabBarStyle: controller.tabBarStyle,
     darkIsTrueBlack: controller.darkIsTrueBlack,
+    swapLegacyOnMaterial3: controller.swapLegacyColors,
     swapColors: controller.swapDarkColors,
     tooltipsMatchBackground: controller.tooltipsMatchBackground,
     //

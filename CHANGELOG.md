@@ -8,23 +8,26 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
-* Added support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
+* Support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
   `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`.
   This is a convenience property to allow different text styles on buttons without having to use
   `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
   include their adjustments via the Playground, but size changes might be added later, as a usage
   example of this property, that is a `MaterialStateProperty`.
-* Added Scaffold background color as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`.
+* Scaffold background color can now be used as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`, that enables this.
 * Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`, it is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
+* The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better tuning of scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes.
 
 * **Themes Playground**
-  * Improved discoverability of custom theme colors.
+  * Simpler terminology used on theme colors.
+  * Seeded ColorScheme now also show the source input "theme" colors, actually FlexSchemeColor, but that is an implementation detail.
+  * Improved discoverability of defining and using totally custom theme colors in the Playground.
   * Removed animation from horizontal list theme picker when clicking on it.
   * Removed animation from topic panel when clicking on it in the page view.
-  * Removed animate to page when clicking on a topic in the panel selector. Page selection via it uses a small Fade+Zoom in.
+  * Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade+Zoom in to show the selected settings panel.
   * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
   * New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
-
+  * To Theme Colors panel, and an on/off that controls the `swapLegacyOnMaterial3` setting.
 
 **TODO:**
 
@@ -59,6 +62,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Add tests for text style on buttons.
 
 * **Themes Playground** 
+
   - Add slider and to theme showcase.
   - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add label size for buttons, using new text style feature.
@@ -328,7 +332,7 @@ self deprecated members as follows:
 
 * *Themes Playground:* Code gen and control enable/disable for onColor blends updated to lock controls
   with no impact when using seeded color scheme. Code is also not generated for onColor blend
-  settings that has no impact when using seeded color schemes.
+  settings that have no impact when using seeded color schemes.
 
 * *Themes Playground*: Features and code gen for additional `Elevated.button` individual foreground
   and background colors.
@@ -549,7 +553,7 @@ theming in general.
   like 2018 Typography is used. All other examples also avoid the issue by only using the 
   M3 2021 Typography and not even mimicking a switch between M2 and M3 Typography. 
 
-  The above workaround is needed because the *Themes Playground* app has toggles that switches 
+  The above workaround is needed because the *Themes Playground* app has toggles that switch 
   `Typography` frequently, without the workaround it will eventually crash. With this workaround it never
   switches Typography, it just looks like it does, but app stays in 2021 Typography all the time.
   The by Themes Playground generated ThemeData config will use the actual real effective 
