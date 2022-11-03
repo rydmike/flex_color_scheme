@@ -5322,7 +5322,6 @@ class FlexColorScheme with Diagnosticable {
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory.
-      // TODO(rydmike): Monitor Flutter SDK deprecation of fontFamily.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
