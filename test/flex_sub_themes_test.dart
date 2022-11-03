@@ -701,7 +701,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -710,7 +710,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -724,7 +724,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -776,7 +776,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -785,7 +785,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -799,7 +799,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -849,7 +849,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -858,7 +858,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -872,7 +872,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -924,7 +924,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -933,7 +933,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -947,7 +947,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -1059,7 +1059,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: UnderlineInputBorder(
@@ -1071,7 +1071,7 @@ void main() {
                 color: colorScheme.secondary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: UnderlineInputBorder(
@@ -1091,7 +1091,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -2401,7 +2401,7 @@ void main() {
             color: colorScheme.primary
                 .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                 .withAlpha(kDisabledBackgroundAlpha),
-            width: 1.5)),
+            width: 1)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -2430,7 +2430,7 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
           color: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
-          width: 1.5,
+          width: 1,
         )),
       );
     });
@@ -2508,7 +2508,7 @@ void main() {
             color: colorScheme.primaryContainer
                 .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                 .withAlpha(kDisabledBackgroundAlpha),
-            width: 1.5)),
+            width: 1)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -2540,7 +2540,7 @@ void main() {
         ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
           color: colorScheme.primaryContainer.withAlpha(kEnabledBorderAlpha),
-          width: 1.5,
+          width: 1,
         )),
       );
     });
@@ -3283,7 +3283,7 @@ void main() {
         FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 1.5,
+            borderWidth: 1,
             selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
             color: colorScheme.primary,
             fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
@@ -3310,8 +3310,8 @@ void main() {
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),
@@ -3330,7 +3330,7 @@ void main() {
         ),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 1.5,
+            borderWidth: 1,
             selectedColor: colorScheme.onSecondary.withAlpha(0xE5),
             color: colorScheme.secondary,
             fillColor: colorScheme.secondary.blendAlpha(Colors.white, 0x19),
@@ -3357,8 +3357,8 @@ void main() {
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),

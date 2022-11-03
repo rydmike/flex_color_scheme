@@ -6,7 +6,10 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
-import 'surface_mode_buttons.dart';
+import 'dark_surface_mode_list_tile.dart';
+import 'dark_surface_mode_popup_menu.dart';
+import 'light_surface_mode_list_tile.dart';
+import 'light_surface_mode_popup_menu.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
@@ -107,22 +110,8 @@ class SurfaceBlends extends StatelessWidget {
           ),
         ),
         if (isLight) ...<Widget>[
-          ListTile(
-            title: const Text('Light theme blend mode'),
-            subtitle: Text(explainMode(controller.surfaceModeLight)),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              SurfaceModeButtons(
-                mode: controller.surfaceModeLight,
-                onChanged: controller.setSurfaceModeLight,
-                showAllModes: allBlends,
-              ),
-              const SizedBox(width: 16),
-            ],
-          ),
-          const SizedBox(height: 8),
+          LightSurfaceModePopupMenu(controller: controller),
+          LightSurfaceModeListTile(controller: controller),
           ListTile(
             enabled: controller.surfaceTintLight != null,
             title: const Text('Set light blend and tint color back to default'),
@@ -282,23 +271,13 @@ class SurfaceBlends extends StatelessWidget {
             value: controller.lightIsWhite,
             onChanged: controller.setLightIsWhite,
           ),
-        ] else ...<Widget>[
-          ListTile(
-            title: const Text('Dark theme blend mode'),
-            subtitle: Text(explainMode(controller.surfaceModeDark)),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              SurfaceModeButtons(
-                mode: controller.surfaceModeDark,
-                onChanged: controller.setSurfaceModeDark,
-                showAllModes: allBlends,
-              ),
-              const SizedBox(width: 16),
-            ],
-          ),
-          const SizedBox(height: 8),
+        ]
+        //
+        // ELSE Dark mode widgets
+        //
+        else ...<Widget>[
+          DarkSurfaceModePopupMenu(controller: controller),
+          DarkSurfaceModeListTile(controller: controller),
           ListTile(
             enabled: controller.surfaceTintDark != null,
             title: const Text('Set dark blend and tint color back to default'),

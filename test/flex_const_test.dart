@@ -105,8 +105,8 @@ void main() {
     test('FCT kThickBorderWidth is 2', () {
       expect(kThickBorderWidth, 2);
     });
-    test('FCT kThinBorderWidth is 1.5', () {
-      expect(kThinBorderWidth, 1.5);
+    test('FCT kThinBorderWidth is 1', () {
+      expect(kThinBorderWidth, 1);
     });
     test('FCT kFillColorAlphaLight is 0x0D', () {
       expect(kFillColorAlphaLight, 0x0D);

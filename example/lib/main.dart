@@ -420,7 +420,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // properties, they affect the outline input decorator, outlined button and
   // toggle buttons.
   thickBorderWidth: 2, // Default is 2.0.
-  thinBorderWidth: 1.5, // Default is 1.5.
+  thinBorderWidth: 1.5, // Default is 1.0.
 
   // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.

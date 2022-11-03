@@ -1563,7 +1563,7 @@ class FlexSubThemes {
 
     /// The border width when the input is unselected or disabled.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// If null, defaults to [kThinBorderWidth] = 1.0, when
     /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
     final double? unfocusedBorderWidth,
 
@@ -2684,7 +2684,7 @@ class FlexSubThemes {
 
     /// The outline thickness when the button is not selected and not pressed.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// If null, defaults to [kThinBorderWidth] = 1.0, when
     /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
     final double? outlineWidth,
 
@@ -3451,7 +3451,7 @@ class FlexSubThemes {
     /// In this design it uses the same default as outline thickness for
     /// selected outline button and input decorator.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// If null, defaults to [kThinBorderWidth] = 1.0, when
     /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
     final double? borderWidth,
 

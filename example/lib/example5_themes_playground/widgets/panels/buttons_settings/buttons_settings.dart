@@ -256,8 +256,8 @@ class ButtonsSettings extends StatelessWidget {
                 ? controller.thinBorderWidth == null ||
                         (controller.thinBorderWidth ?? -0.5) < 0
                     ? controller.useMaterial3
-                        ? 'default 1'
-                        : 'default 1.5'
+                        ? 'default 1' // M3
+                        : 'default 1' // M2
                     : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
                 : 'default 1',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -284,8 +284,8 @@ class ButtonsSettings extends StatelessWidget {
                       ? controller.thinBorderWidth == null ||
                               (controller.thinBorderWidth ?? -0.5) < 0
                           ? controller.useMaterial3
-                              ? 'default 1'
-                              : 'default 1.5'
+                              ? 'default 1' // M3
+                              : 'default 1' // M2
                           : (controller.thinBorderWidth?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',

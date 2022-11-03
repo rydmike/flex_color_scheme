@@ -157,7 +157,7 @@ const double kThickBorderWidth = 2;
 /// Applies to disabled [OutlinedButton] border and to un-selected state of
 /// [InputDecorator] when using [OutlineInputBorder], and to all states of
 /// [ToggleButtons].
-const double kThinBorderWidth = 1.5;
+const double kThinBorderWidth = 1;
 
 // The values below for all the effects opacities and alpha blends are tricky.
 // Getting them just right is magic and dark arts plus some pixie dust.

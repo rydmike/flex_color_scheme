@@ -18,21 +18,26 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`, it is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
 * The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better tuning of scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes.
 
-* **Themes Playground**
-  * Simpler terminology used on theme colors.
-  * Seeded ColorScheme now also show the source input "theme" colors, actually FlexSchemeColor, but that is an implementation detail.
-  * Improved discoverability of defining and using totally custom theme colors in the Playground.
-  * Removed animation from horizontal list theme picker when clicking on it.
-  * Removed animation from topic panel when clicking on it in the page view.
-  * Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade+Zoom in to show the selected settings panel.
-  * AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
-  * New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
-  * To Theme Colors panel, and an on/off that controls the `swapLegacyOnMaterial3` setting.
+**CHANGE**
 
-* **Tests**
-  - Tests for FlexSchemeColor.effective, using swapLegacy and combo with swapColor.
-  - Tests for swapLegacyOnMaterial3.
-  - Tests for new AppBarStyle scaffold.
+* STYLE: Changed component themes `thinBorderWidth` to default to 1.0. Was 1.5. This is a **breaking style* change with previous thin outline. Using fractional dp may cause artefact issues at screens using or running at native resolution where 1 dp = 1 physical display pixel. You can still set `thinBorderWidth` to 1.5, the get the same result as previous default.
+
+**Themes Playground**
+- Simpler terminology used on theme colors.
+- Seeded ColorScheme now also show the source input "theme" colors, actually FlexSchemeColor, but that is an implementation detail.
+- Improved discoverability of defining and using totally custom theme colors in the Playground.
+- Removed animation from horizontal list theme picker when clicking on it.
+- Removed animation from topic panel when clicking on it in the page view.
+- Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade+Zoom in to show the selected settings panel.
+- AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
+- New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
+- The surface style control now also has popup that always can access all styles, also in smaller UI. The ToggleButtons surface style can also be cycled by tapping on the ListTile it is in.
+- Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
+
+ **Tests**
+ - Tests for FlexSchemeColor.effective, using swapLegacy and combo with swapColor.
+ - Tests for swapLegacyOnMaterial3.
+ - Tests for new AppBarStyle scaffold.
 
 **TODO:**
 
@@ -57,24 +62,22 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - ToggleButtons: CHANGE: Outline default to 1dp.
 
 * **New**
-  - Add: M2 color legacy design property and swap when using M3.
   - Add: Tooltip themed delays.
-  - Add: ThemeData passthrough: pageTransitionsTheme
+  - Add: ThemeData passthrough: pageTransitionsTheme (HOLD, no need, use copyWith)
   - Add: Slider theme, which props to include?
 
 * **Tests**
-  
   - Add tests for text style on buttons.
   - Add tests materialTapTargetSize
 
 * **Themes Playground** 
-
+  - Review and fix Slider to double rounding issue, see ThemeDemo app.
+  - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add slider theme config 
   - Add slider to theme showcase.
-  - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add label size for buttons, using new text style feature.
   - Even shorter labels for M2 FCS Component themes (Comp?)
-  - Use SurfaceStyle button from theme_demo.
+
 
 ## 6.0.1
 
