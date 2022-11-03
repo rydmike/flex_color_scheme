@@ -131,12 +131,11 @@ class SeededColorScheme extends StatelessWidget {
                   ? controller.setUseDarkColorsForSeed
                   : null),
         FlexToneConfigPopupMenu(
-          title: 'Use FlexTones',
+          title: 'For tonal palettes use FlexTones',
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
           onChanged:
               controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
         ),
-        const ListTile(title: Text('Effective tonal palettes')),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ShowTonalPalette(controller: controller),

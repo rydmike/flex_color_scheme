@@ -12,7 +12,7 @@ class TonalPaletteColors extends StatelessWidget {
     super.key,
     required this.tonalPalette,
     this.selectedColor,
-    this.height = 34,
+    this.height = 30,
   });
 
   /// The tonal palette to draw.
@@ -83,7 +83,7 @@ class TonalPaletteColors extends StatelessWidget {
                       Center(
                         child: Icon(
                           Icons.circle,
-                          size: 34,
+                          size: height,
                           color: _onColor(
                             Color(tonalPalette[i]),
                           ).withAlpha(0x33),
