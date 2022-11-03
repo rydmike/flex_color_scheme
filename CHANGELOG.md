@@ -41,36 +41,35 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO:**
 
+* **New**
+  - Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
+  - Add: Tooltip themed delays.
+  - Add: ThemeData passthrough: pageTransitionsTheme (HOLD, no need, use copyWith)
+  - Add: Slider theme, which props to include?
+
 * **M3 Review** 
   - Check all new M3 capable widgets and tune, fix and add as needed to FCS:
-    - TextField (figure out custom color) 
-    - PopupMenu
-    - Switches (figure out custom color)
-    - BottomSheet (Add custom colors)
-    - Tonal button
-    - AppBar SDK bugs
-    - Material SDK bugs
-    - Sys navbar SDK bugs    
+  - TextField (figure out custom color) 
+  - PopupMenu
+  - Switches (figure out custom color)
+  - BottomSheet (Add custom colors)
+  - Tonal button
+  - AppBar SDK bugs
+  - Material SDK bugs
+  - Sys navbar SDK bugs    
 
 * **Chore**
   - AppBar theme, move to sub-theme.
   - TabBar theme, move to sub-theme.
   - Tooltip theme, move to sub-theme.
 
-* **Change**
-  - Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
-  - ToggleButtons: CHANGE: Outline default to 1dp.
-
-* **New**
-  - Add: Tooltip themed delays.
-  - Add: ThemeData passthrough: pageTransitionsTheme (HOLD, no need, use copyWith)
-  - Add: Slider theme, which props to include?
 
 * **Tests**
   - Add tests for text style on buttons.
   - Add tests materialTapTargetSize
 
 * **Themes Playground** 
+  - Text on theme color "Theme colors" -> "Input theme"
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
   - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add slider theme config 

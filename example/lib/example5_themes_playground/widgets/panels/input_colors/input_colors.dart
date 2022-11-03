@@ -54,8 +54,8 @@ class InputColors extends StatelessWidget {
     final String explainSeed = useSeed
         ? 'Adjust the seed generated theme further with the "Seeded '
             'ColorScheme" feature'
-        : 'Seeded scheme use primary color to compute ColorSchemes for '
-            'light and dark theme';
+        : 'Seeded color schemes use at least primary color as key to seed '
+            'ColorSchemes for light and dark theme';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,14 +126,15 @@ class InputColors extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('Theme color modifiers'),
-          subtitle: Text('Use the theme modifiers below to change the '
-              'effective colors '
-              'that define the ColorScheme. The theme color values show the '
-              'color before input modifiers, surrounding color is the '
-              'effective theme.'),
+          subtitle: Text('Use the modifiers below to change the '
+              'effective theme colors '
+              "that define the theme's ColorScheme. The theme input color "
+              'values show the used colors before input modifiers, surrounding '
+              'color is the effective theme.'),
         ),
         SwitchListTileAdaptive(
-          title: const Text('Use Material 3 seeded ColorScheme'),
+          title: const Text('Use Material 3 color system seed generated '
+              'ColorScheme'),
           subtitle: Text(explainSeed),
           value: useSeed,
           onChanged: controller.setUseKeyColors,
@@ -156,10 +157,11 @@ class InputColors extends StatelessWidget {
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('When using M3 swap secondary and tertiary'),
+          title: const Text('When using Material 3, swap secondary '
+              'and tertiary colors'),
           subtitle: const Text(
             'Only applies to built-in M2 designed schemes that benefit from '
-            'it. Prefer ON when using M3, may try OFF when using seeded '
+            'it. Prefer ON when using M3. You can try OFF when using seeded '
             'ColorScheme with only primary seed key',
           ),
           value: controller.swapLegacyColors && controller.useFlexColorScheme,
