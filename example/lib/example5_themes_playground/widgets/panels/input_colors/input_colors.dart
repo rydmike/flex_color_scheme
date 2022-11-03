@@ -164,10 +164,9 @@ class InputColors extends StatelessWidget {
             'it. Prefer ON when using M3. You can try OFF when using seeded '
             'ColorScheme with only primary seed key',
           ),
-          value: controller.swapLegacyColors && controller.useFlexColorScheme,
-          onChanged: controller.useFlexColorScheme
-              ? controller.setSwapLegacyColors
-              : null,
+          value: controller.swapLegacyColors && controller.useMaterial3,
+          onChanged:
+              controller.useMaterial3 ? controller.setSwapLegacyColors : null,
         ),
         if (isLight)
           SwitchListTileAdaptive(

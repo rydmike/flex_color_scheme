@@ -129,9 +129,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String darkIsTrueBlack = controller.darkIsTrueBlack
       ? '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
       : '';
-  final String swapLegacyOnMaterial3 = controller.swapLegacyColors
-      ? '  swapLegacyOnMaterial3: ${controller.swapLegacyColors},\n'
-      : '';
+  final String swapLegacyOnMaterial3 =
+      controller.swapLegacyColors && controller.useMaterial3
+          ? '  swapLegacyOnMaterial3: ${controller.swapLegacyColors},\n'
+          : '';
   final String swapLightColors = controller.swapLightColors
       ? '  swapColors: ${controller.swapLightColors},\n'
       : '';
@@ -901,7 +902,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarElevationLight'
       '$tabBarStyle'
       '$lightIsWhite'
-      '$swapLegacyOnMaterial3'
       '$swapLightColors'
       '$tintLightColor'
       '$tooltipsMatchBackground'
@@ -911,6 +911,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$flexTonesLight'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
+      '$swapLegacyOnMaterial3'
       '  // To use the playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
@@ -925,7 +926,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarElevationDark'
       '$tabBarStyle'
       '$darkIsTrueBlack'
-      '$swapLegacyOnMaterial3'
       '$swapDarkColors'
       '$tintDarkColor'
       '$tooltipsMatchBackground'
@@ -935,6 +935,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$flexTonesDark'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
+      '$swapLegacyOnMaterial3'
       '  // To use the playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
