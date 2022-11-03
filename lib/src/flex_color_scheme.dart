@@ -4716,8 +4716,8 @@ class FlexColorScheme with Diagnosticable {
   /// work so well if the provided color was not of roughly a mid point 500
   /// index equivalent. So it worked well for light theme mode, but not so well
   /// for dark theme mode themes were [ColorScheme.primary] is typically much
-  /// lighter than then [MaterialColor] 500 index. FlexColorScheme moved to just
-  /// using lighten and darken to provide primary color matching colors to
+  /// lighter than then [MaterialColor] 500 index. FlexColorScheme moved to
+  /// using alpha blends to provide primary color matching colors to
   /// above mentioned colors. Since the colors are very rarely used and on a
   /// deprecation path in Flutter SDK they are not so critical.
   ///
