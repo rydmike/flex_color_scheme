@@ -104,39 +104,43 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
               scrollDirection: Axis.horizontal,
               itemCount: AppColor.schemes.length,
               itemBuilder: (BuildContext context, int index) {
-                return FlexThemeModeOptionButton(
-                  optionButtonPadding: EdgeInsetsDirectional.only(
-                      start: 6 + phoneButtonsSpacingReduce),
-                  optionButtonBorderRadius: widget.controller.useSubThemes &&
-                          widget.controller.useFlexColorScheme
-                      // M3 default for Card is 12.
-                      ? (widget.controller.cardBorderRadius ??
-                          widget.controller.defaultRadius ??
-                          12)
-                      // M3 or M2 default for Card.
-                      : useMaterial3
-                          ? 12
-                          : 4,
-                  height: 30 + phoneReduce / 2,
-                  width: 30 + phoneReduce / 2,
-                  padding: const EdgeInsets.all(0.3),
-                  optionButtonMargin: EdgeInsets.zero,
-                  borderRadius: 0,
-                  unselectedBorder: BorderSide.none,
-                  selectedBorder: BorderSide(
-                    color: Theme.of(context).primaryColorLight,
-                    width: 4,
+                return Tooltip(
+                  message: AppColor.schemes[index].name,
+                  waitDuration: const Duration(milliseconds: 700),
+                  child: FlexThemeModeOptionButton(
+                    optionButtonPadding: EdgeInsetsDirectional.only(
+                        start: 6 + phoneButtonsSpacingReduce),
+                    optionButtonBorderRadius: widget.controller.useSubThemes &&
+                            widget.controller.useFlexColorScheme
+                        // M3 default for Card is 12.
+                        ? (widget.controller.cardBorderRadius ??
+                            widget.controller.defaultRadius ??
+                            12)
+                        // M3 or M2 default for Card.
+                        : useMaterial3
+                            ? 12
+                            : 4,
+                    height: 30 + phoneReduce / 2,
+                    width: 30 + phoneReduce / 2,
+                    padding: const EdgeInsets.all(0.3),
+                    optionButtonMargin: EdgeInsets.zero,
+                    borderRadius: 0,
+                    unselectedBorder: BorderSide.none,
+                    selectedBorder: BorderSide(
+                      color: Theme.of(context).primaryColorLight,
+                      width: 4,
+                    ),
+                    onSelect: () {
+                      scrollOffset = scrollController.offset;
+                      schemeIndex = index;
+                      widget.controller.setSchemeIndex(index);
+                    },
+                    selected: widget.controller.schemeIndex == index,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    flexSchemeColor: isLight
+                        ? AppColor.schemeAtIndex(index, widget.controller).light
+                        : AppColor.schemeAtIndex(index, widget.controller).dark,
                   ),
-                  onSelect: () {
-                    scrollOffset = scrollController.offset;
-                    schemeIndex = index;
-                    widget.controller.setSchemeIndex(index);
-                  },
-                  selected: widget.controller.schemeIndex == index,
-                  backgroundColor: Theme.of(context).colorScheme.surface,
-                  flexSchemeColor: isLight
-                      ? AppColor.schemeAtIndex(index, widget.controller).light
-                      : AppColor.schemeAtIndex(index, widget.controller).dark,
                 );
               },
             ),

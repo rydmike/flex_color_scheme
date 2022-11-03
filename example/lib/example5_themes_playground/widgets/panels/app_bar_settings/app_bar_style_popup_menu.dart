@@ -134,6 +134,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
             value: i,
             child: ListTile(
               dense: true,
+              contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
                 backgroundColor: i >= FlexAppBarStyle.values.length
                     ? _appBarStyleColor(

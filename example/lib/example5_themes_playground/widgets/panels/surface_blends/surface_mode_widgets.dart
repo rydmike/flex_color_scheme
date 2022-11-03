@@ -167,6 +167,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
               value: i,
               child: ListTile(
                 dense: true,
+                contentPadding: EdgeInsets.zero,
                 leading: index == i
                     ? IconTheme(
                         data: selectedIconTheme,

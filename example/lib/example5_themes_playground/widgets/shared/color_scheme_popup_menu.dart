@@ -61,6 +61,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
             value: i,
             child: ListTile(
               dense: true,
+              contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
                 backgroundColor: i >= SchemeColor.values.length
                     ? colorScheme.surface

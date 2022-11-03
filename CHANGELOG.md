@@ -46,6 +46,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Add: Tooltip themed delays.
   - Add: ThemeData passthrough: pageTransitionsTheme (HOLD, no need, use copyWith)
   - Add: Slider theme, which props to include?
+  - Add: FAB Always circular, also in M3.
 
 * **M3 Review** 
   - Check all new M3 capable widgets and tune, fix and add as needed to FCS:
@@ -69,8 +70,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Add tests materialTapTargetSize
 
 * **Themes Playground** 
-  - Text on theme color "Theme colors" -> "Input theme"
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
+  - Add TabBar ToggleButtons ListTile tap cycle.
   - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
   - Add slider theme config 
   - Add slider to theme showcase.
