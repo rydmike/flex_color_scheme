@@ -129,7 +129,7 @@ class InputColors extends StatelessWidget {
           subtitle: Text('Use the modifiers below to change the '
               'effective theme colors '
               "that define the theme's ColorScheme. The theme input color "
-              'values show the used colors before input modifiers, surrounding '
+              'values show the colors before input modifiers, surrounding '
               'color is the effective theme.'),
         ),
         SwitchListTileAdaptive(
