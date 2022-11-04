@@ -69,6 +69,10 @@ class ColorSchemePopupMenu extends StatelessWidget {
                         SchemeColor.values[i],
                         colorScheme,
                       ),
+                selected: i == index,
+                borderColor: i == index
+                    ? theme.colorScheme.onSurface
+                    : theme.dividerColor,
                 defaultOption: i >= SchemeColor.values.length,
               ),
               title: i >= SchemeColor.values.length
@@ -95,6 +99,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
               ? FlexSubThemes.schemeColor(
                   SchemeColor.values[index], colorScheme)
               : colorScheme.surface,
+          borderColor: theme.dividerColor,
           defaultOption: useDefault,
         ),
       ),
