@@ -14,8 +14,8 @@ import 'package:flutter/material.dart';
 /// enhanced enums.
 enum FlexTone {
   disabled(
-    tone: 'Disabled',
-    describe: 'Disabled',
+    tone: 'none',
+    describe: 'Tonal palettes are not in use',
     setup: 'Key color based tonal palettes are not used.\n'
         'Enable at least one key color to seed the palettes.\n'
         'Primary color must always be included as a key color.\n\n\n',
