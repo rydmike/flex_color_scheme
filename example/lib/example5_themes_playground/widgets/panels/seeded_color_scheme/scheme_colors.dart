@@ -44,8 +44,7 @@ class SchemeColors extends StatelessWidget {
     final bool swapDark = tc.swapDarkColors;
     // Size of the color presentation boxes
     const double boxWidth = 152;
-    const double boxLargeHeight = 230;
-    const double boxSmallHeight = 184;
+    const double boxHeight = 230;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -128,7 +127,7 @@ class SchemeColors extends StatelessWidget {
           // Primary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -232,7 +231,7 @@ class SchemeColors extends StatelessWidget {
           // PrimaryContainer colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -340,7 +339,7 @@ class SchemeColors extends StatelessWidget {
           // Secondary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -444,7 +443,7 @@ class SchemeColors extends StatelessWidget {
           // SecondaryContainer colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -557,7 +556,7 @@ class SchemeColors extends StatelessWidget {
           // Tertiary colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -653,7 +652,7 @@ class SchemeColors extends StatelessWidget {
           // TertiaryContainer colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -751,7 +750,7 @@ class SchemeColors extends StatelessWidget {
           // Error colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -814,7 +813,7 @@ class SchemeColors extends StatelessWidget {
           // ErrorContainer colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxLargeHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -877,7 +876,7 @@ class SchemeColors extends StatelessWidget {
           // Background colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -937,7 +936,7 @@ class SchemeColors extends StatelessWidget {
           // Surface colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -996,7 +995,7 @@ class SchemeColors extends StatelessWidget {
           // SurfaceVariant colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -1055,7 +1054,7 @@ class SchemeColors extends StatelessWidget {
           // InverseSurface colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -1114,7 +1113,7 @@ class SchemeColors extends StatelessWidget {
           // Outline, OutlineVariant, shadow and scrim colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
@@ -1196,7 +1195,7 @@ class SchemeColors extends StatelessWidget {
           // InversePrimary and surfaceTint colors presentation
           SizedBox(
             width: boxWidth,
-            height: boxSmallHeight,
+            height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,

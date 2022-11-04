@@ -39,8 +39,9 @@ class SeededColorScheme extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     final bool useSeed = controller.useKeyColors;
     final String explainSeed = useSeed
-        ? 'Theme is based on M3 seed generated ColorScheme below'
+        ? 'Theme is based on seed generated ColorScheme below'
         : 'Theme is based on selected FlexColorScheme scheme colors';
+    final String schemeMode = useSeed ? 'Seeded' : 'Selected';
     final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
             (!isLight && controller.blendLevelDark > 0)) &&
         controller.useKeyColors;
@@ -67,7 +68,18 @@ class SeededColorScheme extends StatelessWidget {
           dense: true,
           trailing: UseKeyColorsButtons(controller: controller),
         ),
-        const ListTile(title: Text('Effective ColorScheme')),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ShowTonalPalette(controller: controller),
+        ),
+        FlexToneConfigPopupMenu(
+          title: 'Tonal palettes use FlexTones',
+          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
+          onChanged:
+              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
+        ),
+        ListTile(title: Text('$schemeMode ColorScheme')),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),
           child: SchemeColors(tc: controller),
@@ -78,7 +90,7 @@ class SeededColorScheme extends StatelessWidget {
             child: Text(
               'Tap a color code to copy it to the clipboard.\n'
               // ignore: lines_longer_than_80_chars
-              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
               "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: Theme.of(context).textTheme.labelSmall,
@@ -107,7 +119,6 @@ class SeededColorScheme extends StatelessWidget {
               'palette. Switches have separate states for light and dark '
               'theme.'),
         ),
-        const SizedBox(height: 8),
         if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
           SwitchListTileAdaptive(
               dense: true,
@@ -130,18 +141,9 @@ class SeededColorScheme extends StatelessWidget {
                           controller.schemeIndex == AppColor.schemes.length - 1)
                   ? controller.setUseDarkColorsForSeed
                   : null),
-        FlexToneConfigPopupMenu(
-          title: 'For tonal palettes use FlexTones',
-          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
-          onChanged:
-              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ShowTonalPalette(controller: controller),
-        ),
         const ListTile(
           dense: true,
+          title: Text('FlexTones'),
           subtitle: Text(
             'With FlexTones, you can configure which tone from '
             'generated palettes each color in the ColorScheme use. '
