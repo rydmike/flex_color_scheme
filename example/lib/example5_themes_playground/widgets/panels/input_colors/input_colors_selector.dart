@@ -84,6 +84,17 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     }
   }
 
+  double _borderRadius(bool useMaterial3) =>
+      widget.controller.useSubThemes && widget.controller.useFlexColorScheme
+          // M3 default for Card is 12.
+          ? (widget.controller.cardBorderRadius ??
+              widget.controller.defaultRadius ??
+              12)
+          // M3 or M2 default for Card.
+          : useMaterial3
+              ? 12
+              : 4;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -110,16 +121,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                   child: FlexThemeModeOptionButton(
                     optionButtonPadding: EdgeInsetsDirectional.only(
                         start: 6 + phoneButtonsSpacingReduce),
-                    optionButtonBorderRadius: widget.controller.useSubThemes &&
-                            widget.controller.useFlexColorScheme
-                        // M3 default for Card is 12.
-                        ? (widget.controller.cardBorderRadius ??
-                            widget.controller.defaultRadius ??
-                            12)
-                        // M3 or M2 default for Card.
-                        : useMaterial3
-                            ? 12
-                            : 4,
+                    optionButtonBorderRadius: _borderRadius(useMaterial3),
                     height: 30 + phoneReduce / 2,
                     width: 30 + phoneReduce / 2,
                     padding: const EdgeInsets.all(0.3),
