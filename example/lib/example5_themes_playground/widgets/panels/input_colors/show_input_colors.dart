@@ -85,7 +85,7 @@ class ShowInputColors extends StatelessWidget {
           width: 1,
         ),
       );
-      // If
+      // else
     } else {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
@@ -112,6 +112,7 @@ class ShowInputColors extends StatelessWidget {
         spacing: 6,
         runSpacing: 6,
         children: <Widget>[
+          // Primary color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -119,56 +120,50 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK Primary color
-                  Expanded(
-                    child: Material(
-                      color: primary,
-                      child: ColorPickerInkWellDialog(
-                        color: primary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setSecondaryLight(color)
-                                : controller.setPrimaryLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setSecondaryDark(color)
-                                : controller.setPrimaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setSecondaryLight(primary)
-                                  : controller.setPrimaryLight(primary);
-                            } else {
-                              swapDark
-                                  ? controller.setSecondaryDark(primary)
-                                  : controller.setPrimaryDark(primary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: primary,
-                          textColor: colorScheme.onPrimary,
-                          label: 'primary',
-                          inputColor: inputColor.primary,
-                          inputTextColor: _onColor(inputColor.primary),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: primary,
+                child: ColorPickerInkWellDialog(
+                  color: primary,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setSecondaryLight(color)
+                          : controller.setPrimaryLight(color);
+                    } else {
+                      swapDark
+                          ? controller.setSecondaryDark(color)
+                          : controller.setPrimaryDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        swapLight
+                            ? controller.setSecondaryLight(primary)
+                            : controller.setPrimaryLight(primary);
+                      } else {
+                        swapDark
+                            ? controller.setSecondaryDark(primary)
+                            : controller.setPrimaryDark(primary);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: primary,
+                    textColor: colorScheme.onPrimary,
+                    label: 'primary',
+                    inputColor: inputColor.primary,
+                    inputTextColor: _onColor(inputColor.primary),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // PrimaryContainer color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -176,60 +171,54 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK Primary variant color
-                  Expanded(
-                    child: Material(
-                      color: primaryContainer,
-                      child: ColorPickerInkWellDialog(
-                        color: primaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setSecondaryContainerLight(color)
-                                : controller.setPrimaryContainerLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setSecondaryContainerDark(color)
-                                : controller.setPrimaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setSecondaryContainerLight(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerLight(
-                                      primaryContainer);
-                            } else {
-                              swapDark
-                                  ? controller.setSecondaryContainerDark(
-                                      primaryContainer)
-                                  : controller.setPrimaryContainerDark(
-                                      primaryContainer);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: primaryContainer,
-                          textColor: colorScheme.onPrimaryContainer,
-                          label: 'primary\nContainer',
-                          inputColor: inputColor.primaryContainer,
-                          inputTextColor: _onColor(inputColor.primaryContainer),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: primaryContainer,
+                child: ColorPickerInkWellDialog(
+                  color: primaryContainer,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setSecondaryContainerLight(color)
+                          : controller.setPrimaryContainerLight(color);
+                    } else {
+                      swapDark
+                          ? controller.setSecondaryContainerDark(color)
+                          : controller.setPrimaryContainerDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        swapLight
+                            ? controller
+                                .setSecondaryContainerLight(primaryContainer)
+                            : controller
+                                .setPrimaryContainerLight(primaryContainer);
+                      } else {
+                        swapDark
+                            ? controller
+                                .setSecondaryContainerDark(primaryContainer)
+                            : controller
+                                .setPrimaryContainerDark(primaryContainer);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: primaryContainer,
+                    textColor: colorScheme.onPrimaryContainer,
+                    label: 'primary\nContainer',
+                    inputColor: inputColor.primaryContainer,
+                    inputTextColor: _onColor(inputColor.primaryContainer),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // Secondary color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -237,56 +226,50 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK Secondary color
-                  Expanded(
-                    child: Material(
-                      color: secondary,
-                      child: ColorPickerInkWellDialog(
-                        color: secondary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setPrimaryLight(color)
-                                : controller.setSecondaryLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setPrimaryDark(color)
-                                : controller.setSecondaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setPrimaryLight(secondary)
-                                  : controller.setSecondaryLight(secondary);
-                            } else {
-                              swapDark
-                                  ? controller.setPrimaryDark(secondary)
-                                  : controller.setSecondaryDark(secondary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: secondary,
-                          textColor: colorScheme.onSecondary,
-                          label: 'secondary',
-                          inputColor: inputColor.secondary,
-                          inputTextColor: _onColor(inputColor.secondary),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: secondary,
+                child: ColorPickerInkWellDialog(
+                  color: secondary,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setPrimaryLight(color)
+                          : controller.setSecondaryLight(color);
+                    } else {
+                      swapDark
+                          ? controller.setPrimaryDark(color)
+                          : controller.setSecondaryDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        swapLight
+                            ? controller.setPrimaryLight(secondary)
+                            : controller.setSecondaryLight(secondary);
+                      } else {
+                        swapDark
+                            ? controller.setPrimaryDark(secondary)
+                            : controller.setSecondaryDark(secondary);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: secondary,
+                    textColor: colorScheme.onSecondary,
+                    label: 'secondary',
+                    inputColor: inputColor.secondary,
+                    inputTextColor: _onColor(inputColor.secondary),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // SecondaryContainer color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -294,61 +277,54 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK Secondary container color
-                  Expanded(
-                    child: Material(
-                      color: secondaryContainer,
-                      child: ColorPickerInkWellDialog(
-                        color: secondaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            swapLight
-                                ? controller.setPrimaryContainerLight(color)
-                                : controller.setSecondaryContainerLight(color);
-                          } else {
-                            swapDark
-                                ? controller.setPrimaryContainerDark(color)
-                                : controller.setSecondaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              swapLight
-                                  ? controller.setPrimaryContainerLight(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerLight(
-                                      secondaryContainer);
-                            } else {
-                              swapDark
-                                  ? controller.setPrimaryContainerDark(
-                                      secondaryContainer)
-                                  : controller.setSecondaryContainerDark(
-                                      secondaryContainer);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: secondaryContainer,
-                          textColor: colorScheme.onSecondaryContainer,
-                          label: 'secondary\nContainer',
-                          inputColor: inputColor.secondaryContainer,
-                          inputTextColor:
-                              _onColor(inputColor.secondaryContainer),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: secondaryContainer,
+                child: ColorPickerInkWellDialog(
+                  color: secondaryContainer,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      swapLight
+                          ? controller.setPrimaryContainerLight(color)
+                          : controller.setSecondaryContainerLight(color);
+                    } else {
+                      swapDark
+                          ? controller.setPrimaryContainerDark(color)
+                          : controller.setSecondaryContainerDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        swapLight
+                            ? controller
+                                .setPrimaryContainerLight(secondaryContainer)
+                            : controller
+                                .setSecondaryContainerLight(secondaryContainer);
+                      } else {
+                        swapDark
+                            ? controller
+                                .setPrimaryContainerDark(secondaryContainer)
+                            : controller
+                                .setSecondaryContainerDark(secondaryContainer);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: secondaryContainer,
+                    textColor: colorScheme.onSecondaryContainer,
+                    label: 'secondary\nContainer',
+                    inputColor: inputColor.secondaryContainer,
+                    inputTextColor: _onColor(inputColor.secondaryContainer),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // Tertiary color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -356,48 +332,42 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK Tertiary color
-                  Expanded(
-                    child: Material(
-                      color: tertiary,
-                      child: ColorPickerInkWellDialog(
-                        color: tertiary,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            controller.setTertiaryLight(color);
-                          } else {
-                            controller.setTertiaryDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              controller.setTertiaryLight(tertiary);
-                            } else {
-                              controller.setTertiaryDark(tertiary);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: tertiary,
-                          textColor: colorScheme.onTertiary,
-                          label: 'tertiary',
-                          inputColor: inputColor.tertiary,
-                          inputTextColor: _onColor(inputColor.tertiary),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: tertiary,
+                child: ColorPickerInkWellDialog(
+                  color: tertiary,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      controller.setTertiaryLight(color);
+                    } else {
+                      controller.setTertiaryDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        controller.setTertiaryLight(tertiary);
+                      } else {
+                        controller.setTertiaryDark(tertiary);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: tertiary,
+                    textColor: colorScheme.onTertiary,
+                    label: 'tertiary',
+                    inputColor: inputColor.tertiary,
+                    inputTextColor: _onColor(inputColor.tertiary),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // TertiaryContainer color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -405,51 +375,42 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // PICK TertiaryContainer color
-                  Expanded(
-                    child: Material(
-                      color: tertiaryContainer,
-                      child: ColorPickerInkWellDialog(
-                        color: tertiaryContainer,
-                        onChanged: (Color color) {
-                          if (isLight) {
-                            controller.setTertiaryContainerLight(color);
-                          } else {
-                            controller.setTertiaryContainerDark(color);
-                          }
-                        },
-                        recentColors: controller.recentColors,
-                        onRecentColorsChanged: controller.setRecentColors,
-                        wasCancelled: (bool cancelled) {
-                          if (cancelled) {
-                            if (isLight) {
-                              controller
-                                  .setTertiaryContainerLight(tertiaryContainer);
-                            } else {
-                              controller
-                                  .setTertiaryContainerDark(tertiaryContainer);
-                            }
-                          }
-                        },
-                        enabled: isCustomTheme,
-                        child: ColorNameValue(
-                          color: tertiaryContainer,
-                          textColor: colorScheme.onTertiaryContainer,
-                          label: 'tertiary\nContainer',
-                          inputColor: inputColor.tertiaryContainer,
-                          inputTextColor:
-                              _onColor(inputColor.tertiaryContainer),
-                          showMaterialName: true,
-                        ),
-                      ),
-                    ),
+              child: Material(
+                color: tertiaryContainer,
+                child: ColorPickerInkWellDialog(
+                  color: tertiaryContainer,
+                  onChanged: (Color color) {
+                    if (isLight) {
+                      controller.setTertiaryContainerLight(color);
+                    } else {
+                      controller.setTertiaryContainerDark(color);
+                    }
+                  },
+                  recentColors: controller.recentColors,
+                  onRecentColorsChanged: controller.setRecentColors,
+                  wasCancelled: (bool cancelled) {
+                    if (cancelled) {
+                      if (isLight) {
+                        controller.setTertiaryContainerLight(tertiaryContainer);
+                      } else {
+                        controller.setTertiaryContainerDark(tertiaryContainer);
+                      }
+                    }
+                  },
+                  enabled: isCustomTheme,
+                  child: ColorNameValue(
+                    color: tertiaryContainer,
+                    textColor: colorScheme.onTertiaryContainer,
+                    label: 'tertiary\nContainer',
+                    inputColor: inputColor.tertiaryContainer,
+                    inputTextColor: _onColor(inputColor.tertiaryContainer),
+                    showMaterialName: true,
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          // Error color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -457,26 +418,20 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // Show Error color
-                  Expanded(
-                    child: Material(
-                      color: colorScheme.error,
-                      child: ColorNameValue(
-                        color: colorScheme.error,
-                        textColor: colorScheme.onError,
-                        label: 'error',
-                        inputColor: inputErrorColor,
-                        inputTextColor: inputOnErrorColor,
-                        showMaterialName: true,
-                      ),
-                    ),
-                  ),
-                ],
+              child: Material(
+                color: colorScheme.error,
+                child: ColorNameValue(
+                  color: colorScheme.error,
+                  textColor: colorScheme.onError,
+                  label: 'error',
+                  inputColor: inputErrorColor,
+                  inputTextColor: inputOnErrorColor,
+                  showMaterialName: true,
+                ),
               ),
             ),
           ),
+          // ErrorContainer color
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -484,23 +439,16 @@ class ShowInputColors extends StatelessWidget {
               margin: EdgeInsets.zero,
               elevation: isCustomTheme ? 2 : 0,
               clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  // Show Error container color
-                  Expanded(
-                    child: Material(
-                      color: colorScheme.errorContainer,
-                      child: ColorNameValue(
-                        color: colorScheme.errorContainer,
-                        textColor: colorScheme.onErrorContainer,
-                        label: 'error\nContainer',
-                        inputColor: inputErrorContainerColor,
-                        inputTextColor: inputOnErrorContainerColor,
-                        showMaterialName: true,
-                      ),
-                    ),
-                  ),
-                ],
+              child: Material(
+                color: colorScheme.errorContainer,
+                child: ColorNameValue(
+                  color: colorScheme.errorContainer,
+                  textColor: colorScheme.onErrorContainer,
+                  label: 'error\nContainer',
+                  inputColor: inputErrorContainerColor,
+                  inputTextColor: inputOnErrorContainerColor,
+                  showMaterialName: true,
+                ),
               ),
             ),
           ),
