@@ -39,7 +39,7 @@ class ShowInputColors extends StatelessWidget {
     final bool swapDark = controller.swapDarkColors;
     // Size of theme color presentation boxes
     const double boxWidth = 152; // Was 155, 150 OK on Android
-    const double boxHeight = 280;
+    const double boxHeight = 140;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -165,6 +165,19 @@ class ShowInputColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   // PICK Primary variant color
                   Expanded(
                     child: Material(
@@ -270,6 +283,19 @@ class ShowInputColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   // PICK Secondary container color
                   Expanded(
                     child: Material(
@@ -368,7 +394,20 @@ class ShowInputColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
+                  // PICK TertiaryContainer color
                   Expanded(
                     child: Material(
                       color: tertiaryContainer,
@@ -434,6 +473,19 @@ class ShowInputColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: isCustomTheme ? 2 : 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   // Show Error container color
                   Expanded(
                     child: Material(

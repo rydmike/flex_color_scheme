@@ -49,14 +49,14 @@ class SeededColorScheme extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          subtitle: Text('In Material Design 3, seed generated light and '
+          subtitle: Text('In Material 3 color system, seed generated light and '
               'dark mode ColorSchemes use same key colors to generate six '
-              'tonal palettes. Both light and dark theme ColorScheme colors '
-              'are picked from these palettes, but using different tones. '
+              'tonal palettes. Both light and dark ColorScheme colors '
+              'use same palettes, but different tones. '
               'To ensure light and dark themes use identical tonal palettes, '
-              'FlexColorScheme automatically only uses the light mode colors '
+              'FlexColorScheme uses the light mode colors '
               'from built-in schemes to seed ColorSchemes. '
-              'When using custom colors, you can decide if you do so or not.'),
+              'With custom colors, you can decide if you do so or not.'),
         ),
         ListTile(
           // dense: true,
