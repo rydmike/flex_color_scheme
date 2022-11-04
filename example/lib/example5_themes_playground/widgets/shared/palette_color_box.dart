@@ -1,3 +1,5 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// A Material widget used as a color indicator to show a color in the
@@ -10,6 +12,8 @@ class PaletteColorBox extends StatelessWidget {
       this.onTap,
       this.color = Colors.blue,
       this.height = 40,
+      required this.name,
+      required this.tone,
       this.child})
       : assert(height > 0, 'Height must be positive.');
 
@@ -28,6 +32,12 @@ class PaletteColorBox extends StatelessWidget {
   /// Defaults to 40.
   final double height;
 
+  /// Name of tonal palette.
+  final String name;
+
+  /// String representation of used tone number.
+  final String tone;
+
   /// Child widget to draw in the color indicator
   final Widget? child;
 
@@ -35,18 +45,27 @@ class PaletteColorBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isLight =
         ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+    final String materialName = ColorTools.materialName(color);
+    final String nameThatColor = ColorTools.nameThatColor(color);
+    final String space = materialName == '' ? '' : ' ';
 
-    return Material(
-      type: MaterialType.canvas,
-      color: color,
-      clipBehavior: Clip.none,
-      child: SizedBox(
-        height: height,
-        child: InkWell(
-          focusColor: isLight ? Colors.black26 : Colors.white30,
-          hoverColor: isLight ? Colors.black26 : Colors.white30,
-          onTap: onTap?.call,
-          child: child,
+    return Tooltip(
+      waitDuration: const Duration(milliseconds: 700),
+      message: '$name tone $tone\n'
+          '#${color.hexCode} $nameThatColor$space$materialName\n'
+          'Tap to copy to Clipboard',
+      child: Material(
+        type: MaterialType.canvas,
+        color: color,
+        clipBehavior: Clip.none,
+        child: SizedBox(
+          height: height,
+          child: InkWell(
+            focusColor: isLight ? Colors.black26 : Colors.white30,
+            hoverColor: isLight ? Colors.black26 : Colors.white30,
+            onTap: onTap?.call,
+            child: child,
+          ),
         ),
       ),
     );

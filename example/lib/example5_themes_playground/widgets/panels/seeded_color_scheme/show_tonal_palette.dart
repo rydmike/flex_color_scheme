@@ -56,6 +56,7 @@ class ShowTonalPalette extends StatelessWidget {
     return Column(
       children: <Widget>[
         TonalPaletteColors(
+          name: 'Primary',
           tonalPalette: palettes.primary.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.primary
@@ -63,6 +64,7 @@ class ShowTonalPalette extends StatelessWidget {
               : null,
         ),
         TonalPaletteColors(
+          name: 'Secondary',
           tonalPalette: palettes.secondary.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.secondary
@@ -70,6 +72,7 @@ class ShowTonalPalette extends StatelessWidget {
               : null,
         ),
         TonalPaletteColors(
+          name: 'Tertiary',
           tonalPalette: palettes.tertiary.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.tertiary
@@ -77,6 +80,7 @@ class ShowTonalPalette extends StatelessWidget {
               : null,
         ),
         TonalPaletteColors(
+          name: 'Error',
           tonalPalette: palettes.error.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.error
@@ -84,6 +88,7 @@ class ShowTonalPalette extends StatelessWidget {
               : null,
         ),
         TonalPaletteColors(
+          name: 'Neutral',
           tonalPalette: palettes.neutral.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.neutral
@@ -91,6 +96,7 @@ class ShowTonalPalette extends StatelessWidget {
               : null,
         ),
         TonalPaletteColors(
+          name: 'Neutral variant',
           tonalPalette: palettes.neutralVariant.asList,
           selectedColor: controller.useKeyColors &&
                   controller.hoverTonalPalette == TonalPalettes.neutralVariant

@@ -10,10 +10,14 @@ class TonalPaletteColors extends StatelessWidget {
   /// Default const constructor.
   const TonalPaletteColors({
     super.key,
+    required this.name,
     required this.tonalPalette,
     this.selectedColor,
-    this.height = 30,
+    this.height = 28,
   });
+
+  /// Name of tonal palette.
+  final String name;
 
   /// The tonal palette to draw.
   final List<int> tonalPalette;
@@ -60,6 +64,8 @@ class TonalPaletteColors extends StatelessWidget {
         for (int i = 0; i < tonalPalette.length; i++)
           Expanded(
             child: PaletteColorBox(
+              name: name,
+              tone: _toneLabel(i),
               color: Color(tonalPalette[i]),
               height: height,
               onTap: () {
