@@ -22,28 +22,28 @@ class UsedColorsPopupMenu extends StatelessWidget {
 
   String _describeUsedColors(int colors) {
     if (colors == 1) {
-      return 'Only theme primary color used, other colors are computed by '
-          'FlexColorScheme';
+      return 'Only scheme defined primary color used, other colors are '
+          'computed by FlexColorScheme';
     }
     if (colors == 2) {
-      return 'Theme primary and secondary colors used, other colors are '
-          'computed by FlexColorScheme';
+      return 'Scheme defined primary and secondary colors used, other colors '
+          'are computed by FlexColorScheme';
     }
     if (colors == 3) {
-      return 'Theme primary, secondary and primary container colors used, '
-          'other colors are computed by FlexColorScheme';
+      return 'Scheme defined primary, secondary and primary container colors '
+          'used, other colors are computed by FlexColorScheme';
     }
     if (colors == 4) {
-      return 'Theme primary, secondary, plus primary and secondary container '
-          'colors used, other colors are computed by FlexColorScheme';
+      return 'Scheme defined primary, secondary, plus primary and secondary '
+          'container colors used, other colors are computed by FlexColorScheme';
     }
     if (colors == 5) {
-      return 'Theme primary, secondary, tertiary, plus primary and secondary '
-          'container colors used, only tertiary container color '
+      return 'Scheme defined primary, secondary, tertiary, plus primary and '
+          'secondary container colors used, only tertiary container color '
           'computed by FlexColorScheme';
     }
-    return 'All theme colors defined in FlexColorScheme are using their '
-        'defined values';
+    return 'All scheme defined colors defined in FlexColorScheme are using '
+        'their defined values to make the theme';
   }
 
   String _selectColors(int colors) {

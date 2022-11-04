@@ -40,7 +40,7 @@ class SeededColorScheme extends StatelessWidget {
     final bool useSeed = controller.useKeyColors;
     final String explainSeed = useSeed
         ? 'Theme is based on seed generated ColorScheme below'
-        : 'Theme is based on selected FlexColorScheme scheme colors';
+        : 'Theme is based on selected FlexColorScheme defined colors';
     final String schemeMode = useSeed ? 'Seeded' : 'Selected';
     final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
             (!isLight && controller.blendLevelDark > 0)) &&
@@ -117,7 +117,7 @@ class SeededColorScheme extends StatelessWidget {
               'primary, secondary, tertiary and their container colors to '
               'their theme colors instead of using the color from seeded tonal '
               'palette. Switches have separate states for light and dark '
-              'theme.'),
+              'theme. '),
         ),
         if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
           SwitchListTileAdaptive(
@@ -149,20 +149,17 @@ class SeededColorScheme extends StatelessWidget {
             'generated palettes each color in the ColorScheme use. '
             'Set limits on used CAM16 chroma values '
             'for the three colors used as keys for primary, '
-            'secondary and tertiary TonalPalettes.',
+            'secondary and tertiary TonalPalettes. '
+            'In this app you can choose between the default Material 3 '
+            'tone mapping plus six pre-defined custom FlexTones setups. With '
+            'the API you can make your own FlexTones configurations.',
           ),
         ),
         ListTile(
           dense: true,
           title: Text('$_flexToneName'
               ' FlexTones setup has CAM16 chroma:'),
-          subtitle: Text(
-            // ignore: lines_longer_than_80_chars
-            '$_flexToneSetup\n'
-            'In this app you can choose between the default Material 3 '
-            'tone mapping plus six pre-defined custom FlexTones setups. With '
-            'the API you can make your own FlexTones configurations.',
-          ),
+          subtitle: Text(_flexToneSetup),
         ),
         const SizedBox(height: 8),
       ],

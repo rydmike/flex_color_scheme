@@ -54,8 +54,8 @@ class InputColors extends StatelessWidget {
     final String explainSeed = useSeed
         ? 'Adjust the seed generated theme further with the "Seeded '
             'ColorScheme" feature'
-        : 'Seeded color schemes use at least primary color as key to seed '
-            'ColorSchemes for light and dark theme';
+        : 'Seeded ColorSchemes use at least the scheme defined primary color '
+            'as key to seed ColorSchemes for light and dark theme';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,12 +125,12 @@ class InputColors extends StatelessWidget {
         ],
         const Divider(),
         const ListTile(
-          title: Text('Theme color modifiers'),
+          title: Text('Theme Color Modifiers'),
           subtitle: Text('Use the modifiers below to change the '
               'effective theme colors '
-              "that define the theme's ColorScheme. The theme input color "
+              "that define the theme's ColorScheme. The scheme defined color "
               'values show the colors before input modifiers, surrounding '
-              'color is the effective theme.'),
+              "color is the effective theme's ColorScheme"),
         ),
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 color system seed generated '
@@ -142,7 +142,8 @@ class InputColors extends StatelessWidget {
         SwitchListTileAdaptive(
           title: const Text('Use Material 3 error colors'),
           subtitle: const Text('Override default M2 error colors and use M3 '
-              'error colors, also when not using seeded ColorSchemes'),
+              'error colors, when not using seeded ColorSchemes. Seed '
+              'generated ColorSchemes always use M3 error colors'),
           value: controller.useM3ErrorColors &&
               controller.useFlexColorScheme &&
               !controller.useKeyColors,
@@ -151,7 +152,7 @@ class InputColors extends StatelessWidget {
               : null,
         ),
         UsedColorsPopupMenu(
-          title: const Text('Reduce amount of used theme colors'),
+          title: const Text('Reduce amount of used scheme colors'),
           index: controller.usedColors,
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,

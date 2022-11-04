@@ -14,11 +14,11 @@ import 'package:flutter/material.dart';
 /// enhanced enums.
 enum FlexTone {
   disabled(
-    tone: 'none',
+    tone: 'None',
     describe: 'Tonal palettes are not in use',
     setup: 'Key color based tonal palettes are not used.\n'
         'Enable at least one key color to seed the palettes.\n'
-        'Primary color must always be included as a key color.\n\n\n',
+        'Primary color must always be included as a key color.',
     icon: Icons.texture_outlined,
     shade: -5,
   ),
@@ -29,7 +29,7 @@ enum FlexTone {
         'Secondary - Chroma set to 16\n'
         'Tertiary - Chroma set to 24\n'
         'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8\n',
+        'Neutral variant - Chroma set to 8',
     icon: Icons.blur_circular,
     shade: -5,
   ),
@@ -40,7 +40,7 @@ enum FlexTone {
         'Secondary - Chroma set to 14\n'
         'Tertiary - Chroma set to 20\n'
         'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8\n',
+        'Neutral variant - Chroma set to 8',
     icon: Icons.blur_on,
     shade: 2,
   ),
@@ -51,7 +51,7 @@ enum FlexTone {
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
         'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8\n',
+        'Neutral variant - Chroma set to 8',
     icon: Icons.tonality,
     shade: 6,
   ),
@@ -64,7 +64,7 @@ enum FlexTone {
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
         'Neutral - Chroma set to 8\n'
-        'Neutral variant - Chroma set to 16\n',
+        'Neutral variant - Chroma set to 16',
     icon: Icons.radio_button_checked,
     shade: 10,
   ),
@@ -75,7 +75,7 @@ enum FlexTone {
         'Secondary - Chroma from key color, but min 55\n'
         'Tertiary - Chroma from key color, but min 55\n'
         'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8\n',
+        'Neutral variant - Chroma set to 8',
     icon: Icons.contrast,
     shade: 14,
   ),
@@ -87,7 +87,7 @@ enum FlexTone {
         'Secondary - Chroma from key color, but min 70\n'
         'Tertiary - Chroma from key color, but min 65\n'
         'Neutral - Chroma set to 3\n'
-        'Neutral variant - Chroma set to 6\n',
+        'Neutral variant - Chroma set to 6',
     icon: Icons.lens,
     shade: 20,
   ),
@@ -98,7 +98,7 @@ enum FlexTone {
         'Secondary - Chroma from key color, but min 40\n'
         'Tertiary - Chroma set to 40\n'
         'Neutral - Chroma set to 6\n'
-        'Neutral variant - Chroma set to 10\n',
+        'Neutral variant - Chroma set to 10',
     icon: Icons.sunny,
     shade: 8,
   );

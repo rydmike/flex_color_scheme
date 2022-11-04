@@ -195,7 +195,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Theme input',
+                        Text('Scheme defined',
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
                             style: TextStyle(

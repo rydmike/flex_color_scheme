@@ -277,24 +277,26 @@ class AppColor {
   static String explainUsedColors(ThemeController controller) {
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '
-          'used. The ColorScheme is based directly on the selected theme';
+          'used. The effective ColorScheme is based directly on the selected '
+          "pre-defined FlexColorScheme's colors";
     }
     if (!controller.useSecondary && !controller.useTertiary) {
-      return 'Light theme Primary color is used to generate the Colorscheme. '
-          'This is like using Flutter ColorScheme.fromSeed with the Primary '
-          'color as seed color';
+      return 'Light scheme defined Primary color is used to generate '
+          'the Colorscheme. '
+          "This is like using Flutter's ColorScheme.fromSeed with the scheme "
+          'defined Primary color as seed color';
     }
     if (controller.useSecondary && !controller.useTertiary) {
-      return 'Tonal palettes for the ColorScheme, are made with light theme '
-          'Primary and Secondary colors as seed keys. Tertiary key is computed '
-          'from Primary color';
+      return 'Tonal palettes for the ColorScheme are made with light scheme '
+          'defined Primary and Secondary colors as seed keys. Tertiary key '
+          'is computed from Primary color';
     }
     if (!controller.useSecondary && controller.useTertiary) {
-      return 'Tonal palettes for the ColorScheme, are made with light theme '
-          'Primary and Tertiary colors as seed keys, Secondary key is computed '
-          'from Primary color';
+      return 'Tonal palettes for the ColorScheme, are made with light scheme '
+          'defined Primary and Tertiary colors as seed keys, Secondary key is '
+          'computed from Primary color';
     }
-    return 'Light theme Primary, Secondary and Tertiary colors are used as '
-        'keys to generate tonal palettes that define the ColorScheme';
+    return 'Light scheme defined Primary, Secondary and Tertiary colors are '
+        'used as keys to generate tonal palettes that define the ColorScheme';
   }
 }
