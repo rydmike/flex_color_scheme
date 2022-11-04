@@ -67,7 +67,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 
   late final AnimationController scaleController = AnimationController(
     duration: const Duration(milliseconds: 280),
-    lowerBound: 0.70,
+    lowerBound: 0.75,
     upperBound: 1.0,
     vsync: this,
   );
@@ -78,7 +78,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 
   late final AnimationController fadeController = AnimationController(
     duration: const Duration(milliseconds: 280),
-    lowerBound: 0.2,
+    lowerBound: 0.1,
     upperBound: 1.0,
     vsync: this,
   );
