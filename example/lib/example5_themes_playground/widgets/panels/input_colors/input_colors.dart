@@ -157,8 +157,8 @@ class InputColors extends StatelessWidget {
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
         SwitchListTileAdaptive(
-          title: const Text('When using Material 3, swap secondary '
-              'and tertiary colors'),
+          title: const Text('When using Material 3 swap secondary '
+              'and tertiary'),
           subtitle: const Text(
             'Only applies to built-in M2 designed schemes that benefit from '
             'it. Prefer ON when using M3. You can try OFF when using seeded '
@@ -170,9 +170,11 @@ class InputColors extends StatelessWidget {
         ),
         if (isLight)
           SwitchListTileAdaptive(
-            title: const Text('Light theme swap primary'),
+            title: const Text('Light theme swap primary and secondary'),
             subtitle: const Text(
-              'Swap primary and secondary, and their container colors',
+              'Swap primary and secondary, and their container colors. '
+              'Material 3 mode secondary and tertiary swap, is done '
+              'first when used',
             ),
             value: controller.swapLightColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -181,9 +183,11 @@ class InputColors extends StatelessWidget {
           )
         else
           SwitchListTileAdaptive(
-            title: const Text('Dark theme swap primary'),
+            title: const Text('Dark theme swap primary and secondary'),
             subtitle: const Text(
-              'Swap primary and secondary, and their container colors',
+              'Swap primary and secondary, and their container colors. '
+              'Material 3 mode secondary and tertiary swap, is done '
+              'first when used',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
