@@ -7,7 +7,7 @@ import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import 'input_colors/input_colors_selector.dart';
+import 'theme_colors_settings/input_colors_selector.dart';
 
 // ThemeSelectorHeaderDelegate for our custom SliverPersistentHeader.
 //

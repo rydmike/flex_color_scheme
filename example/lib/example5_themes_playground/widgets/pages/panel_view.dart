@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +7,14 @@ import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
+import '../panels/banner_bottom_sheet_snack_settings/banner_bottom_sheet_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
-import '../panels/card_and_material_settings/card_settings.dart';
-import '../panels/card_and_material_settings/material_and_bottom_sheet_settings.dart';
-import '../panels/component_themes/component_themes.dart';
+import '../panels/card_settings/card_settings.dart';
+import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
-import '../panels/input_colors/input_colors.dart';
 import '../panels/introduction/introduction_panel.dart';
+import '../panels/material_panel/material_panel.dart';
 import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
@@ -24,17 +22,18 @@ import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/panel_item.dart';
 import '../panels/panel_selector.dart';
 import '../panels/popup_icon_button_settings/popup_icon_button_settings.dart';
-import '../panels/seeded_color_scheme/seeded_color_scheme.dart';
+import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
 import '../panels/showcase_panels/widget_showcase.dart';
-import '../panels/surface_blends/surface_blends.dart';
+import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
 import '../panels/tab_bar_settings/tab_bar_settings.dart';
 import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
+import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 
@@ -195,16 +194,20 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                 child: <Widget>[
                   PanelPage(IntroductionPanel(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(InputColors(themeCtrl), pageIndex, themeCtrl,
+                  PanelPage(
+                      ThemeColorsSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(SeededColorScheme(themeCtrl), pageIndex, themeCtrl,
+                  PanelPage(SeededColorSchemeSettings(themeCtrl), pageIndex,
+                      themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(SurfaceBlends(themeCtrl, allBlends: showAllBlends),
-                      pageIndex, themeCtrl,
+                  PanelPage(
+                      SurfaceBlendSettings(themeCtrl, allBlends: showAllBlends),
+                      pageIndex,
+                      themeCtrl,
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(EffectiveColors(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(ComponentThemes(themeCtrl), pageIndex, themeCtrl,
+                  PanelPage(ComponentSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(TextFieldSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
@@ -240,8 +243,10 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(MaterialAndBottomSheetSettings(themeCtrl),
+                  PanelPage(BannerBottomSheetSnackSettings(themeCtrl),
                       pageIndex, themeCtrl,
+                      key: ValueKey<int>(pageIndex)),
+                  PanelPage(const MaterialPanel(), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(CardSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),

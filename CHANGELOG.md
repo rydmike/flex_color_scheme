@@ -29,6 +29,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
 - The surface style control now also has popup that always can access all styles, also in smaller UI. The ToggleButtons surface style can also be cycled by tapping on the ListTile it is in.
 - Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
+- Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
 
  **Tests**
  - Tests for `FlexSchemeColor.effective`, using `swapLegacy` and combo with `swapColor`.
@@ -71,7 +72,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * **Themes Playground** 
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
   - Add TabBar ToggleButtons ListTile tap cycle.
-  - Split Material, Banner & SnackBar to Material in one and Banner and SnackBar in another panel
+  
   - Add slider theme config 
   - Add slider to theme showcase.
   - Add label size for buttons, using new text style feature.

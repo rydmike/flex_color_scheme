@@ -458,7 +458,7 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
       title: const Text('Material, Banner, Sheet & Snack'),
       child: const Padding(
         padding: EdgeInsets.all(16),
-        child: MaterialAndBottomSheetShowcase(),
+        child: BannerBottomSheetSnackShowcase(),
       ),
     );
   }

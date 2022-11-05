@@ -87,8 +87,9 @@ class ThemeShowcase extends StatelessWidget {
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
-        const Divider(),
-        const MaterialAndBottomSheetShowcase(),
+        const BannerBottomSheetSnackShowcase(),
+        const Divider(height: 32),
+        const MaterialShowcase(),
         const Divider(height: 32),
         const CardShowcase(),
         const SizedBox(height: 8),
@@ -1605,8 +1606,8 @@ class AlertDialogShowcase extends StatelessWidget {
   }
 }
 
-class MaterialAndBottomSheetShowcase extends StatelessWidget {
-  const MaterialAndBottomSheetShowcase({super.key});
+class BannerBottomSheetSnackShowcase extends StatelessWidget {
+  const BannerBottomSheetSnackShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1630,6 +1631,82 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
             .textTheme
             .titleMedium!
             .copyWith(color: snackForeground);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 8),
+        const Divider(height: 1),
+        MaterialBanner(
+          padding: const EdgeInsets.all(20),
+          content: const Text('Hello, I am a Material Banner'),
+          leading: const Icon(Icons.agriculture_outlined),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OPEN'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: const Text('DISMISS'),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        AbsorbPointer(
+          child: BottomSheet(
+            enableDrag: false,
+            onClosing: () {},
+            builder: (final BuildContext context) => SizedBox(
+              height: 150,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 20),
+                    Text(
+                      'A Material BottomSheet',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Like Drawer it uses Material of type canvas as '
+                      'background.',
+                      style: Theme.of(context).textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                    const Spacer(),
+                    Material(
+                      color: snackBackground,
+                      elevation: 0,
+                      surfaceTintColor: colorScheme.surfaceTint,
+                      shadowColor: colorScheme.shadow,
+                      child: SizedBox(
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                              'A Material SnackBar, style simulation only',
+                              style: snackStyle),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MaterialShowcase extends StatelessWidget {
+  const MaterialShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -1940,67 +2017,6 @@ class MaterialAndBottomSheetShowcase extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
-        const Divider(height: 1),
-        MaterialBanner(
-          padding: const EdgeInsets.all(20),
-          content: const Text('Hello, I am a Material Banner'),
-          leading: const Icon(Icons.agriculture_outlined),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OPEN'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('DISMISS'),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        const SizedBox(height: 24),
-        AbsorbPointer(
-          child: BottomSheet(
-            enableDrag: false,
-            onClosing: () {},
-            builder: (final BuildContext context) => SizedBox(
-              height: 150,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    Text(
-                      'A Material BottomSheet',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      'Like Drawer it uses Material of type canvas as '
-                      'background.',
-                      style: Theme.of(context).textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
-                    const Spacer(),
-                    Material(
-                      color: snackBackground,
-                      elevation: 0,
-                      surfaceTintColor: colorScheme.surfaceTint,
-                      shadowColor: colorScheme.shadow,
-                      child: SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                              'A Material SnackBar, style simulation only',
-                              style: snackStyle),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }

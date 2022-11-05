@@ -5,8 +5,8 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-class MaterialAndBottomSheetSettings extends StatelessWidget {
-  const MaterialAndBottomSheetSettings(this.controller, {super.key});
+class BannerBottomSheetSnackSettings extends StatelessWidget {
+  const BannerBottomSheetSnackSettings(this.controller, {super.key});
 
   final ThemeController controller;
 
@@ -33,7 +33,7 @@ class MaterialAndBottomSheetSettings extends StatelessWidget {
       children: <Widget>[
         const Padding(
           padding: EdgeInsets.all(16),
-          child: MaterialAndBottomSheetShowcase(),
+          child: BannerBottomSheetSnackShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

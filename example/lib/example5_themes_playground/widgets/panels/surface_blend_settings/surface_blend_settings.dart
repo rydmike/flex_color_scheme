@@ -13,8 +13,8 @@ import 'light_surface_mode_popup_menu.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
-class SurfaceBlends extends StatelessWidget {
-  const SurfaceBlends(
+class SurfaceBlendSettings extends StatelessWidget {
+  const SurfaceBlendSettings(
     this.controller, {
     super.key,
     required this.allBlends,

@@ -123,8 +123,13 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.branding_watermark_outlined,
   ),
   GridItem(
-    panelLabel: 'Material, Banner, Sheet and SnackBar',
-    buttonLabel: 'Material\nBanner, Snack',
+    panelLabel: 'Banner, BottomSheet and SnackBar',
+    buttonLabel: 'Banner\nSheet, Snack',
+    icon: Icons.call_to_action_outlined,
+  ),
+  GridItem(
+    panelLabel: 'Material',
+    buttonLabel: 'Material',
     icon: Icons.call_to_action_outlined,
   ),
   GridItem(

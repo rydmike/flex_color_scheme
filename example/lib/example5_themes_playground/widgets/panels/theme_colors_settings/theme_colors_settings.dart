@@ -12,8 +12,8 @@ import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
 
-class InputColors extends StatelessWidget {
-  const InputColors(
+class ThemeColorsSettings extends StatelessWidget {
+  const ThemeColorsSettings(
     this.controller, {
     super.key,
   });
