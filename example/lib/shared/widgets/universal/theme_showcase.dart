@@ -2028,9 +2028,10 @@ class CardShowcase extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'Default background color comes from Material of type card. '
+            'Default background color comes from Material of type card, which '
+            'by default is set to theme colorScheme surface. '
             'When useMaterial3 is true, Card gets elevation based '
-            'surfaceTint, when it is false and using M2, surfaceTint has no '
+            'surfaceTint. When it is false, surfaceTint has no '
             'effect even if specified.',
             style: denseBody,
           ),
@@ -2060,7 +2061,7 @@ class CardShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                   child: Text(
-                'Card, elevation 1, default',
+                'Card, elevation 1, default surfaceTint and shadow',
                 textAlign: TextAlign.center,
               )),
             ),
@@ -2076,7 +2077,7 @@ class CardShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 1, with surfaceTint',
+                  'Card, elevation 1, with surfaceTint, default shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2111,7 +2112,7 @@ class CardShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 4, default',
+                  'Card, elevation 4, default surfaceTint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2126,7 +2127,7 @@ class CardShowcase extends StatelessWidget {
             height: 60,
             child: Center(
               child: Text(
-                'Card, elevation 4, with surfaceTint',
+                'Card, elevation 4, with surfaceTint, default shadow',
                 textAlign: TextAlign.center,
               ),
             ),
@@ -2160,7 +2161,7 @@ class CardShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 10, default',
+                  'Card, elevation 10, default surfaceTint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),

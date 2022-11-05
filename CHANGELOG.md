@@ -8,35 +8,31 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
-* Support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via
-  `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`.
-  This is a convenience property to allow different text styles on buttons without having to use
-  `copyWith` on the overall `ThemeData` and its button component themes. Current version does not
-  include their adjustments via the Playground, but size changes might be added later, as a usage
-  example of this property, that is a `MaterialStateProperty`.
+* Support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes. It does not offer any simplification over standard ThemeData. Current version does not include their adjustments via the Playground, but size changes might be added later, as a usage example of this property, that is a `MaterialStateProperty`.
 * Scaffold background color can now be used as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffold`, that enables this.
-* Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`, it is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
-* The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better tuning of scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes.
+* Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`. It is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
+* The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better automatic adjustment of built-in scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes. Setting `swapLegacyOnMaterial3` will when `useMaterial3` is true swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. This only happens for built-in schemes where this swap makes the color design more compatible with the intended usage of the `secondary` and `tertiary` colors. To implement this, the class `FlexColor` with the built-in scheme definitions `FlexSchemeColor` have a new bool meta-data property `swapOnMaterial3` that has been defined to be `true` when the `FlexSchemeColor` it defines benefits from their swapping when using Material 3. For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to set it to `true`. The flag has no impact when using Material 2. The flag can also be toggled in the **Themes Playground** it is on by default there. The `swapLegacyOnMaterial3` when it is done for a `FlexSchemeColor` is done before any other built-in scheme modifier properties, including `swapColor`.
 
 **CHANGE**
 
-* STYLE: Changed component themes `thinBorderWidth` to default to 1.0. Was 1.5. This is a **breaking style* change with previous thin outline. Using fractional dp may cause artefact issues at screens using or running at native resolution where 1 dp = 1 physical display pixel. You can still set `thinBorderWidth` to 1.5, the get the same result as previous default.
+* **STYLE:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline. Using fractional dp may cause artefact issues at screens using or running at native resolution where 1 dp = 1 physical display pixel. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default.
 
 **Themes Playground**
-- Simpler terminology used on theme colors.
-- Seeded ColorScheme now also show the source input "theme" colors, actually FlexSchemeColor, but that is an implementation detail.
+- Themes Playground got surface blend mode defaults that are mobile friendly. Previously used Playground default values were intended for desktop/tablet designs where controls and text is placed on containers with a lower surface blend, like the Cards used in the Themes Playground app. While one can make a responsive app that does so nicely for mobile, tablet and desktop sizes, most mobile firs apps are not designed to do this.
+- Improved terminology used on theme colors panel labels. Simplified color presentation.
+- Seeded ColorScheme now also show the source input "Scheme defined" colors, the used FlexSchemeColor. Arranged the controls for better inclusion and presentation of the Tonal Palettes used to make the seeded ColorScheme. Tones have tooltips that present each tone.
 - Improved discoverability of defining and using totally custom theme colors in the Playground.
 - Removed animation from horizontal list theme picker when clicking on it.
-- Removed animation from topic panel when clicking on it in the page view.
-- Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade+Zoom in to show the selected settings panel.
-- AppBar theming can use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when it uses different surface blend than theme's ColorScheme surface or background colors.
+- Removed animation from topic/component panel when clicking on it in the page view.
+- Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade and Zoom in to show the selected settings panel. Without any panel page change effect it was hard to notice what changed, but the default slide animation with the `PageView` that is fine one swipe, was just annoying when clicking on the panel page selector.
+- AppBar theming can now use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
 - New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
 - The surface style control now also has popup that always can access all styles, also in smaller UI. The ToggleButtons surface style can also be cycled by tapping on the ListTile it is in.
 - Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
 
  **Tests**
- - Tests for FlexSchemeColor.effective, using swapLegacy and combo with swapColor.
- - Tests for swapLegacyOnMaterial3.
+ - Tests for `FlexSchemeColor.effective`, using `swapLegacy` and combo with `swapColor`.
+ - Tests for `swapLegacyOnMaterial3`.
  - Tests for new AppBarStyle scaffold.
 
 **TODO:**
@@ -59,15 +55,18 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Material SDK bugs
   - Sys navbar SDK bugs    
 
+* **Design**
+  - Consider a bit less tint on tinted text in dark mode.
+  
 * **Chore**
   - AppBar theme, move to sub-theme.
   - TabBar theme, move to sub-theme.
   - Tooltip theme, move to sub-theme.
 
-
 * **Tests**
   - Add tests for text style on buttons.
   - Add tests materialTapTargetSize
+  - Verify tests and docs for raw FlexColorScheme.
 
 * **Themes Playground** 
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
@@ -76,7 +75,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Add slider theme config 
   - Add slider to theme showcase.
   - Add label size for buttons, using new text style feature.
-  - Even shorter labels for M2 FCS Component themes (Comp?)
+  - Even shorter labels for M3 FCS and Component themes (Comp?)
+  - FIX: Rail indicator lock when using Flutter defaults
 
 
 ## 6.0.1

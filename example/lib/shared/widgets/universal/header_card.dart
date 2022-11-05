@@ -103,7 +103,7 @@ class HeaderCard extends StatelessWidget {
   /// The child to be revealed.
   final Widget? child;
 
-  static bool _colorsAreClose(Color a, Color b) {
+  static bool _colorsAreClose(Color a, Color b, Brightness brightness) {
     final int dR = a.red - b.red;
     final int dG = a.green - b.green;
     final int dB = a.blue - b.blue;
@@ -115,7 +115,10 @@ class HeaderCard extends StatelessWidget {
     // around our panel.
     // This value was just determined by visually testing what was a good
     // trigger for when the border appeared and disappeared during testing.
-    if (distance < 120) {
+    // We can get better results if we use a different trigger value for light
+    // and dark mode.
+    final int closeTrigger = brightness == Brightness.light ? 20 : 30;
+    if (distance < closeTrigger) {
       return true;
     } else {
       return false;
@@ -140,8 +143,9 @@ class HeaderCard extends StatelessWidget {
     // Make a shape border if Card or its header color are close in color
     // to the scaffold background color, because if that happens we want to
     // separate the header card from the background with a border.
-    if (_colorsAreClose(cardColor, background) ||
-        (_colorsAreClose(headerColor, background) && useHeading)) {
+    if (_colorsAreClose(cardColor, background, theme.brightness) ||
+        (_colorsAreClose(headerColor, background, theme.brightness) &&
+            useHeading)) {
       // If we had one shape, copy in a border side to it.
       if (shapeBorder is RoundedRectangleBorder) {
         shapeBorder = shapeBorder.copyWith(

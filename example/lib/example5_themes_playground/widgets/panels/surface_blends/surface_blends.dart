@@ -99,14 +99,21 @@ class SurfaceBlends extends StatelessWidget {
           subtitle: Text(
             'Material Design 2 guide mentions using surfaces with '
             'primary color alpha blends. FlexColorScheme surface blends '
-            'implements it.\n'
+            'does it for you.\n'
             '\n'
             'Material Design 3 has a new color system where a hint of primary '
             'color is also used on surfaces. It is done via its neutral tonal '
             'palettes that are shifted slightly towards the primary color. '
-            'If you use M3 seeded ColorSchemes and set blend level to zero, '
-            'you get the M3 design. With surface blends, you can further '
-            'strengthen the effect and vary blend levels by surface type.',
+            'If you use M3 seeded ColorSchemes, set blend level to zero '
+            'to get the pure M3 design. With surface blends, you can further '
+            'strengthen the effect and vary blend levels by surface type.\n'
+            '\n'
+            'When using a surface blend mode with a high factor on Scaffold '
+            'background, the design intent is to not place any controls and '
+            'text on it directly, but to always use them on other surfaces '
+            'with less surface tint. For example in Cards, like this '
+            'application does. The Scaffold background is then only used as a '
+            'background effect.',
           ),
         ),
         if (isLight) ...<Widget>[

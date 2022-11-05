@@ -8,7 +8,7 @@ import '../../shared/controllers/theme_controller.dart';
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.
 ///
-/// The properties are in the order they are in the classes.
+/// The properties are typically in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
   // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
   // theme as a starting point suggestion.
@@ -18,10 +18,10 @@ String generateThemeDartCode(ThemeController controller) {
   // Here is a default Material 2 starting point theme setup for you.
   //
   theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-    typography: Typography.material2018(platform: defaultTargetPlatform),
+    typography: Typography.material2021(platform: defaultTargetPlatform),
   ),
   darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-    typography: Typography.material2018(platform: defaultTargetPlatform),
+    typography: Typography.material2021(platform: defaultTargetPlatform),
   ),
   themeMode: ThemeMode.system,''';
   }

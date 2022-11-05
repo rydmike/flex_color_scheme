@@ -43,18 +43,19 @@ enum FlexAppBarStyle {
   material,
 
   /// Use scheme surface color as the AppBar's themed background color,
-  /// including any blend color it may have.
+  /// including any blend (surface tint) color it may have.
   ///
   /// This is the default for light and dark theme mode, when
   /// [ThemeData.useMaterial3] is true.
   surface,
 
   /// Use scheme background color as the AppBar's themed background color,
-  /// including any blend color it may have.
+  /// including any blend (surface tint) color it may have.
   background,
 
+  // TODO(rydmike): Rename to scaffoldBackground before publish.
   /// Use scaffold background color as the AppBar's themed background color,
-  /// including any blend color it may have.
+  /// including any blend (surface tint) color it may have.
   scaffold,
 
   /// Use a custom [AppBar] background color as its themed background color.
@@ -69,7 +70,7 @@ enum FlexAppBarStyle {
   ///
   /// The built-in color schemes have the same color value that is assigned to
   /// [FlexSchemeColor.tertiary] also assigned to
-  /// [FlexSchemeColor.appBarColor], so with them, the custom choice always
+  /// [FlexSchemeColor.appBarColor]. With them, the custom choice always
   /// results in the [FlexSchemeColor.tertiaryContainer] color, which is same
   /// as output [ColorScheme.tertiaryContainer], being used as the [AppBar]
   /// color when using the [custom] choice with them.
@@ -157,6 +158,7 @@ enum FlexTabBarStyle {
   /// [FlexColorScheme], prefer using [forAppBar] for that.
   flutterDefault,
 
+  // TODO(rydmike): Try a contrasting color from tonal palettes.
   /// An experimental [TabBarTheme] mode that works on both primary and
   /// background colors.
   ///
@@ -181,7 +183,7 @@ enum FlexTabBarStyle {
 /// to their defaults from the standard [ThemeData] factory constructor, those
 /// default values will end up not matching the used [ColorScheme], especially
 /// in dark mode themes. [FlexColorScheme] fixes these gaps and makes it much
-/// easier to create themes using the color scheme concept.
+/// easier to create consistent themes using the [ColorScheme] concept.
 ///
 /// You can create the theme using a standard [ColorScheme], but you can also
 /// create a theme by just providing a few selected color values, or
@@ -196,13 +198,13 @@ enum FlexTabBarStyle {
 /// with the [FlexColorScheme.toTheme] getter.
 ///
 /// A more opinionated theme and style can be returned by passing in a default
-/// [FlexSubThemesData] () constructor to [subThemesData].
+/// [FlexSubThemesData] constructor to [subThemesData].
 /// By default the sub-themes take inspiration from the Material 3 (M3) Design
-/// guide [specification](https://m3.material.io) and uses its values as
+/// guide [specification](https://m3.material.io) and uses many f its values as
 /// defaults when it is possible to do so in Flutter
-/// SDK theming, within its current Material 2 (M2) design limitations.
+/// SDK theming, within any remaining Material 2 (M2) design limitations.
 ///
-/// The component sub-themes can configured further by configuring a large
+/// The component sub-themes can be configured further by configuring a large
 /// amount of properties in [FlexSubThemesData] that is passed into
 /// [FlexColorScheme.subThemesData]. A commonly used feature is
 /// to adjust the default corner border radius on all sub-themes for widgets
@@ -210,15 +212,15 @@ enum FlexTabBarStyle {
 /// primary tinted hover, focus, highlight and splash colors, among other
 /// things.
 ///
-/// It can be verbose to define nice color scheme directly with the default
+/// It can be verbose to define nice themes directly with the default
 /// unnamed constructor. [FlexColorScheme] is primarily intended to be used
 /// with its two factory constructors [FlexColorScheme.light] and
-/// [FlexColorScheme.dark], that create nice schemes using defaults and
-/// computed color values. The light and dark schemes also give you access
+/// [FlexColorScheme.dark], that create nice themes using defaults and
+/// computed color values. The light and dark factories also give you access
 /// to many predefined color schemes that you can use and easily modify.
 ///
 /// With the light and dark factories you can also create
-/// beautiful toned themes from just a single color.
+/// beautiful toned themes from just a single color. Additionally
 /// [FlexColorScheme] makes it easy to create themes that use color branded
 /// surfaces (backgrounds), that use alpha blend to mix in a varying degree
 /// of a color, typically the primary color, into surfaces and backgrounds.
@@ -226,12 +228,20 @@ enum FlexTabBarStyle {
 /// Branded surface are described in the Material design guide, but Flutter
 /// offers no out of the box help to make such themes. With [FlexColorScheme]
 /// you can use a varying degree of surface and background branding levels for
-/// any theme you make, both in light and dark mode.
+/// any theme you make, both in light and dark mode. When you use Material 3
+/// color system matching [ColorScheme] its surface colors also include a hint
+/// of the primary color in surfaces and background. This is called surface tint
+/// in the Material 3 design guide. The name may be different and the algorithm
+/// to generate the colors is also much more refined, but the design idea is the
+/// same. With the factory constructors [FlexColorScheme.light] and
+/// [FlexColorScheme.dark] you can also use the Material 3 color system and
+/// its tools to generate ColorScheme for it. The factories also provide
+/// more advanced and flexible key color generated [ColorScheme]'s, than what
+/// is offered in Flutter SDK via [ColorScheme.fromSeed].
 ///
-/// [FlexColorScheme] makes it easy to make a theme where the [AppBar]
-/// themed background color is not tied to primary color in light theme mode or
-/// to surface color in dark theme mode, and it can also follow the branded
-/// scheme surface or background color.
+/// [FlexColorScheme] makes it easy to adjust the [AppBar]'s themed background
+/// also to surface, background and scaffold background colors that also
+/// use the same tint as these themed colors.
 ///
 /// [FlexColorScheme] can automatically adjust the [TabBarTheme] to fit with the
 /// active [AppBar] background or to be themed to always fit on
@@ -239,16 +249,17 @@ enum FlexTabBarStyle {
 /// body, or [Material] surface or canvas.
 ///
 /// You can also quickly adjust things like the scrim on the app bar in Android
-/// with [transparentStatusBar] and tooltip style with
+/// with [transparentStatusBar] and a quick tooltip style adjustment with
 /// [tooltipsMatchBackground].
-///
-/// The two factory constructors [FlexColorScheme.light] and
-/// [FlexColorScheme.dark] also offer support for more advanced and
-/// customizable key color generated [ColorScheme]'s, than what is offered out
-/// of the box in Flutter SDK via [ColorScheme.fromSeed].
 @immutable
 class FlexColorScheme with Diagnosticable {
-  /// Default constructor that requires [brightness] and four main color scheme
+  /// Default constructor with no required properties.
+  ///
+  /// Creates a a light theme by default using the M2 colors as its default
+  /// theme.
+  ///
+  /// Typically you would define
+  /// requires [brightness] and four main color scheme
   /// color properties in order to make a fully defined color scheme for
   /// a [ThemeData] object.
   ///
@@ -322,7 +333,7 @@ class FlexColorScheme with Diagnosticable {
   /// color values you provide as seed colors.
   ///
   /// If you provide both a [ColorScheme] and some individual direct property
-  /// values that also exist in a [ColorScheme], the individual property values
+  /// values that also exist in a [ColorScheme], the direct property values
   /// will override the corresponding ones in your [ColorScheme].
   ///
   /// If you do not define a [colorScheme], the individual color value
@@ -358,6 +369,7 @@ class FlexColorScheme with Diagnosticable {
   /// is [Brightness.dark] it defaults to [FlexColor.materialDarkPrimary].
   final Color? primary;
 
+  // TODO(rydmike): These seem to come from ".from" factory now. Test & docs!
   /// A color used for elements needing less emphasis than [primary].
   ///
   /// If not defined, and if there is no [colorScheme] defined, the default
@@ -433,16 +445,13 @@ class FlexColorScheme with Diagnosticable {
   /// If no color is given, it defaults to [background].
   final Color? scaffoldBackground;
 
+  // TODO(rydmike): Verify the described override. Check test!
   /// The background color of [Dialog] elements.
   ///
   /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
   /// controlled separately with only a [ThemeData.from] a color scheme.
   ///
   /// If no value is given, it defaults to [surface].
-  ///
-  /// If you assign a background [SchemeColor] to [dialogBackgroundSchemeColor]
-  /// in [FlexSubThemesData] and you have opted in on using component sub themes
-  /// then its selected scheme color will override this value.
   final Color? dialogBackground;
 
   /// Background theme color for the [AppBar].
@@ -456,7 +465,7 @@ class FlexColorScheme with Diagnosticable {
   /// set automatically based on provided color.
   ///
   /// This AppBar color will also override any scheme color based selection
-  /// in active used sub-themes if you have selected on for the AppBar there.
+  /// in active used sub-themes if you have selected one for the AppBar there.
   final Color? appBarBackground;
 
   /// A color that is clearly legible when drawn on [primary] color.
@@ -1503,6 +1512,7 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? scaffoldBackground,
 
+    // TODO(rydmike): Verify the described override. Check tests!
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
@@ -1512,11 +1522,12 @@ class FlexColorScheme with Diagnosticable {
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
     ///
-    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with, then its selected scheme color will override this value.
+    /// If you assign a background [SchemeColor] to
+    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
+    /// opted in on using component sub themes, then the selected scheme
+    /// color will override this value.
     ///
-    /// Defaults to null.
+    /// Defaults to null, resulting in theme surface being used.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -1717,7 +1728,7 @@ class FlexColorScheme with Diagnosticable {
     final bool lightIsWhite = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
-    /// their secondary counter parts.
+    /// their secondary counterparts.
     ///
     /// Set this flag to true if you want to make a theme where
     /// your primary and secondary colors are swapped, compared to how they
@@ -1783,11 +1794,11 @@ class FlexColorScheme with Diagnosticable {
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
     /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// any legacy Material 2 theming limitations that may still apply.
     ///
-    /// In version 5, by opting in via a default [subThemesData] you
+    /// By opting in via a default [subThemesData] you also
     /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via the [subThemesData] property, that has
+    /// They can be customized via their [subThemesData] properties, that have
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
@@ -1837,13 +1848,17 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// By default it is not defined (null), and a traditional manually
     /// configured color scheme will be created based on input property values
-    /// or the passed in [colorScheme].
+    /// or a passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of key colors and from them generated color scheme.
+    /// of the used light scheme's primary color as key color and to seed
+    /// generated a color scheme. The result will by default be equal to using
+    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
+    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
+    /// SDK does not support this.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -1865,14 +1880,17 @@ class FlexColorScheme with Diagnosticable {
     /// [TonalPalette] generation setup.
     final bool useMaterial3ErrorColors = false,
 
-    /// An advanced configuration class enabling complete customization of
+    /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTones.light] will be used, resulting in a default
-    /// Material Design 3 based usage of tones and CAM16 chroma for the
-    /// seed generated light [ColorScheme].
+    /// By default a `FlexTones` configuration `FlexTones.material` that
+    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
+    ///
+    /// There are six other built-in definitions that you can use, they can also
+    /// serve as an example of how you can make custom `FlexTones`
+    /// configurations.
     final FlexTones? tones,
 
     /// The density value for specifying the compactness of various UI
@@ -1884,7 +1902,7 @@ class FlexColorScheme with Diagnosticable {
     /// touch friendly surfaces, but not quite as large as small touch devices.
     ///
     /// This is the same property as in [ThemeData] factory, it is just
-    /// passed along to it. Included for convenience to avoid a copyWith if
+    /// passed along to it. Included for convenience, to avoid a copyWith
     /// to change it.
     ///
     /// Density, in the context of a UI, is the vertical and horizontal
@@ -1933,10 +1951,11 @@ class FlexColorScheme with Diagnosticable {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
-    /// The platform adaptive widgets should adapt to target and mechanics too.
+    /// The platform adaptive widgets adapt to defined target and mechanics,
+    /// like scrolling too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
+    /// avoid a copyWith to change it.
     ///
     /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
     /// This should be used in order to style UI elements according to platform
@@ -1959,13 +1978,16 @@ class FlexColorScheme with Diagnosticable {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
+    ///
+    /// When developing applications you can use this property to dynamically
+    /// in the application change the used platform and partially test and see
+    /// how adaptive widgets and scroll looks and feels on other platforms.
     final TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values use to configure [textTheme].
+    // TODO(rydmike): Consider changing the default to Typography 2021.
+    /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
+    /// Same property as in [ThemeData] factory.
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
@@ -2108,47 +2130,48 @@ class FlexColorScheme with Diagnosticable {
     /// built-in color schemes when [useMaterial3] is true, that benefit from it
     /// to better match the Material 3 color system design intent.
     ///
-    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
     /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
     /// defined to be true, informs that it will benefit if the secondary and
-    /// tertiary colors, including their containers, are swapped.
-    ///
-    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
-    /// and have this flag set to true. If this flag is false (default) it may
-    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
-    /// benefit from swapping secondary and tertiary colors.
+    /// tertiary colors, including their containers, are swapped when using
+    /// Material 3. Most FlexColorScheme color schemes were designed with
+    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
+    /// set to true. If this flag is false, it may  mean that its
+    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
+    /// swapping its secondary and tertiary colors.
     ///
     /// Using seed generated color scheme with built-in FlexSchemeColor
     /// colors is another way to make them suitable for the M3 Color system.
     /// However, in some cases the secondary color in their design may not be
     /// in-line with M3 color system design intent, especially if you use seeded
-    /// color schemes that also use chroma from the secondary color to make
+    /// setup that also use the hue from the secondary color to make
     /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
     /// color  designs, this can be fixed if we swap the secondary and
     /// tertiary colors.
     ///
-    /// To make such FlexSchemeColor designs automatically swap secondary and
-    /// tertiary colors when useMaterial3 is set to true , set
-    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
-    /// compatibility, but it is recommended to turn it on when using
-    /// Material 3 color system. If you use seeded color schemes with
-    /// Material 2, (useMaterial3 flag is false), it may be preferable to
-    /// keep [swapOnMaterial3] false.
+    /// To make FlexSchemeColor designs color designs that benefit from it
+    /// automatically swap secondary and tertiary colors when `useMaterial3` is
+    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
+    /// for backwards compatibility, but it is recommended to turn it on when
+    /// using Material 3 and its color system. If you use seeded color schemes
+    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
+    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
     ///
-    /// This color swap has higher priority than [swapColor], using it will
-    /// always happen on the effective result of [swapLegacyOnMaterial3] and
-    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
-    /// currently used built-in scheme [FlexSchemeData].
+    /// This color swap has higher priority than `swapColor`, using it will
+    /// always happen on the effective result of `swapLegacyOnMaterial3` and
+    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
+    /// built-in scheme `FlexSchemeColor`.
     ///
-    /// If a custom colorScheme is passed in, or any of the direct color
-    /// properties secondary, secondaryContainer, tertiary or
-    /// tertiaryContainer, then it is assumed custom scheme or overrides is
-    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    /// If a custom `colorScheme` is passed in, or any of the direct color
+    /// properties `secondary`, `secondaryContainer`, `tertiary` or
+    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
+    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
     ///
-    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
     /// to ON (true), but allows you to turn it OFF.
     ///
-    /// Defaults to false.
+    /// Defaults to false, for backwards compatibility, but prefer setting it
+    /// to true if you also set `useMaterial3` to true.
     final bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -2423,7 +2446,7 @@ class FlexColorScheme with Diagnosticable {
     // If light is white, we use lighter than normal. If not,
     // we use dialog provided background color, or computed one.
     // The provided dialog background color overrides factory surface behavior,
-    // but is impacted by true black mode for a darker effect.
+    // but is impacted by plain white for a lighter effect.
     final Color effectiveDialogBackground = lightIsWhite
         ? dialogBackground?.lighten(5) ??
             surfaceSchemeColors.dialogBackground.lighten(5)
@@ -3165,18 +3188,21 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? scaffoldBackground,
 
-    /// The background color of Dialog elements.
+    /// The background color of [Dialog] elements.
+    ///
+    /// The color is applied to [ThemeData.dialogBackgroundColor].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
     ///
-    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes,
-    /// then its selected scheme color will override this value.
+    /// If you assign a background [SchemeColor] to
+    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
+    /// opted in on using component sub themes, then the selected scheme
+    /// color will override this value.
     ///
-    /// Defaults to null.
+    /// Defaults to null, resulting in theme surface being used.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -3377,7 +3403,7 @@ class FlexColorScheme with Diagnosticable {
     final bool darkIsTrueBlack = false,
 
     /// When true, the primary and primary container colors will be swapped with
-    /// their secondary counter parts.
+    /// their secondary counterparts.
     ///
     /// Set this flag to true if you want to make a theme where
     /// your primary and secondary colors are swapped, compared to how they
@@ -3443,11 +3469,11 @@ class FlexColorScheme with Diagnosticable {
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
     /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// any legacy Material 2 theming limitations that may still apply.
     ///
-    /// In version 5, by opting in via a default [subThemesData] you
+    /// By opting in via a default [subThemesData] you also
     /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via the [subThemesData] property, that has
+    /// They can be customized via their [subThemesData] properties, that have
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
@@ -3497,13 +3523,17 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// By default it is not defined (null), and a traditional manually
     /// configured color scheme will be created based on input property values
-    /// or the passed in [colorScheme].
+    /// or a passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of key colors and from them generated color scheme.
+    /// of the used light scheme's primary color as key color and to seed
+    /// generated a color scheme. The result will by default be equal to using
+    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
+    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
+    /// SDK does not support this.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -3525,14 +3555,17 @@ class FlexColorScheme with Diagnosticable {
     /// [TonalPalette] generation setup.
     final bool useMaterial3ErrorColors = false,
 
-    /// An advanced configuration class enabling complete customization of
+    /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTones.dark] will be used, resulting in a default
-    /// Material Design 3 based usage of tones and CAM16 chroma for the
-    /// seed generated dark [ColorScheme].
+    /// By default a `FlexTones` configuration `FlexTones.material` that
+    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
+    ///
+    /// There are six other built-in definitions that you can use, they can also
+    /// serve as an example of how you can make custom `FlexTones`
+    /// configurations.
     final FlexTones? tones,
 
     /// The density value for specifying the compactness of various UI
@@ -3593,10 +3626,11 @@ class FlexColorScheme with Diagnosticable {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
-    /// The platform adaptive widgets should adapt to target and mechanics too.
+    /// The platform adaptive widgets adapt to defined target and mechanics,
+    /// like scrolling too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
+    /// avoid a copyWith to change it.
     ///
     /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
     /// This should be used in order to style UI elements according to platform
@@ -3609,8 +3643,8 @@ class FlexColorScheme with Diagnosticable {
     /// underlying platform platform can depend on [defaultTargetPlatform]
     /// directly, or may require that the target platform be provided as an
     /// argument. The `dart.io.Platform` object should only be used directly
-    /// when it's critical to actually know the current platform, without any
-    /// overrides possible, e.g. when a system API is about to be called.
+    /// when it's critical to actually know the current platform, without
+    /// any overrides possible, e.g. when a system API is about to be called.
     ///
     /// In a test environment, the platform returned is [TargetPlatform.android]
     /// regardless of the host platform. (Android was chosen because the tests
@@ -3619,13 +3653,15 @@ class FlexColorScheme with Diagnosticable {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
+    ///
+    /// When developing applications you can use this property to dynamically
+    /// in the application change the used platform and partially test and see
+    /// how adaptive widgets and scroll looks and feels on other platforms.
     final TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values use to configure [textTheme].
+    /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
+    /// Same property as in [ThemeData] factory.
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
@@ -3768,47 +3804,48 @@ class FlexColorScheme with Diagnosticable {
     /// built-in color schemes when [useMaterial3] is true, that benefit from it
     /// to better match the Material 3 color system design intent.
     ///
-    /// Since FlexColorScheme version 6.1.0, built-in color scheme, defined via
+    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
     /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
     /// defined to be true, informs that it will benefit if the secondary and
-    /// tertiary colors, including their containers, are swapped.
-    ///
-    /// Most FlexColorScheme color schemes were designed with M2 usage in mind
-    /// and have this flag set to true. If this flag is false (default) it may
-    /// mean that its [FlexSchemeColor] was designed for M3 or that it won't
-    /// benefit from swapping secondary and tertiary colors.
+    /// tertiary colors, including their containers, are swapped when using
+    /// Material 3. Most FlexColorScheme color schemes were designed with
+    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
+    /// set to true. If this flag is false, it may  mean that its
+    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
+    /// swapping its secondary and tertiary colors.
     ///
     /// Using seed generated color scheme with built-in FlexSchemeColor
     /// colors is another way to make them suitable for the M3 Color system.
     /// However, in some cases the secondary color in their design may not be
     /// in-line with M3 color system design intent, especially if you use seeded
-    /// color schemes that also use chroma from the secondary color to make
+    /// setup that also use the hue from the secondary color to make
     /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
     /// color  designs, this can be fixed if we swap the secondary and
     /// tertiary colors.
     ///
-    /// To make such FlexSchemeColor designs automatically swap secondary and
-    /// tertiary colors when useMaterial3 is set to true , set
-    /// swapLegacyOnMaterial3 to true. It defaults to false for backwards
-    /// compatibility, but it is recommended to turn it on when using
-    /// Material 3 color system. If you use seeded color schemes with
-    /// Material 2, (useMaterial3 flag is false), it may be preferable to
-    /// keep [swapOnMaterial3] false.
+    /// To make FlexSchemeColor designs color designs that benefit from it
+    /// automatically swap secondary and tertiary colors when `useMaterial3` is
+    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
+    /// for backwards compatibility, but it is recommended to turn it on when
+    /// using Material 3 and its color system. If you use seeded color schemes
+    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
+    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
     ///
-    /// This color swap has higher priority than [swapColor], using it will
-    /// always happen on the effective result of [swapLegacyOnMaterial3] and
-    /// [useMaterial3], plus the individual definition of [swapOnMaterial3] in
-    /// currently used built-in scheme [FlexSchemeData].
+    /// This color swap has higher priority than `swapColor`, using it will
+    /// always happen on the effective result of `swapLegacyOnMaterial3` and
+    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
+    /// built-in scheme `FlexSchemeColor`.
     ///
-    /// If a custom colorScheme is passed in, or any of the direct color
-    /// properties secondary, secondaryContainer, tertiary or
-    /// tertiaryContainer, then it is assumed custom scheme or overrides is
-    /// being used and the [swapLegacyOnMaterial3] setting does nothing.
+    /// If a custom `colorScheme` is passed in, or any of the direct color
+    /// properties `secondary`, `secondaryContainer`, `tertiary` or
+    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
+    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
     ///
-    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
     /// to ON (true), but allows you to turn it OFF.
     ///
-    /// Defaults to false.
+    /// Defaults to false, for backwards compatibility, but prefer setting it
+    /// to true if you also set `useMaterial3` to true.
     final bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -5278,6 +5315,7 @@ class FlexColorScheme with Diagnosticable {
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
     // If our onSurface is primary tinted it has an effect on this divider too.
     final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
+
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration
     // theme is also passed into the TimePickerTheme, so we get the same
