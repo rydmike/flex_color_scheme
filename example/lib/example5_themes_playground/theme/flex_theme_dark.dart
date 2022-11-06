@@ -155,6 +155,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.inputDecoratorUnfocusedBorderIsColored,
             //
             fabUseShape: controller.fabUseShape,
+            fabAlwaysCircular: controller.fabAlwaysCircular,
             fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,

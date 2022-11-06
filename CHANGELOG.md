@@ -31,6 +31,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - The surface style control now also has popup that always can access all styles, also in smaller UI. The ToggleButtons surface style can also be cycled by tapping on the ListTile it is in.
 - Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
 - Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
+- Added always use circular FAB feature.
 
  **Tests**
  - Tests for `FlexSchemeColor.effective`, using `swapLegacy` and combo with `swapColor`.

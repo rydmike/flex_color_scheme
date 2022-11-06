@@ -62,10 +62,25 @@ class FabChipSettings extends StatelessWidget {
               ? controller.setFabUseShape
               : null,
         ),
+        SwitchListTileAdaptive(
+          title: const Text('Always circular'),
+          subtitle: const Text('Turn on to always use circular and stadium '
+              'shaped FAB, also in Material 3'),
+          value: controller.fabAlwaysCircular &&
+              controller.fabUseShape &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes &&
+                  controller.useFlexColorScheme &&
+                  controller.fabUseShape
+              ? controller.setFabAlwaysCircular
+              : null,
+        ),
         ListTile(
           enabled: controller.useSubThemes &&
               controller.useFlexColorScheme &&
-              controller.fabUseShape,
+              controller.fabUseShape &&
+              !controller.fabAlwaysCircular,
           title: const Text('Border radius'),
           subtitle: Slider.adaptive(
             min: -1,
@@ -73,22 +88,27 @@ class FabChipSettings extends StatelessWidget {
             divisions: 61,
             label: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? controller.fabBorderRadius == null ||
                         (controller.fabBorderRadius ?? -1) < 0
                     ? fabRadiusDefaultLabel
                     : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
-                    ? 'M3 rounded'
-                    : 'circular',
+                : controller.fabAlwaysCircular
+                    ? 'circular'
+                    : controller.useMaterial3
+                        ? 'M3 rounded'
+                        : 'circular',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? controller.fabBorderRadius ?? -1
                 : -1,
             onChanged: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? (double value) {
                     controller.setFabBorderRadius(
                         value < 0 ? null : value.roundToDouble());
@@ -107,15 +127,18 @@ class FabChipSettings extends StatelessWidget {
                 Text(
                   controller.useSubThemes &&
                           controller.useFlexColorScheme &&
-                          controller.fabUseShape
+                          controller.fabUseShape &&
+                          !controller.fabAlwaysCircular
                       ? controller.fabBorderRadius == null ||
                               (controller.fabBorderRadius ?? -1) < 0
                           ? fabRadiusDefaultLabel
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : controller.useMaterial3
-                          ? 'M3 rounded'
-                          : 'circular',
+                      : controller.fabAlwaysCircular
+                          ? 'circular'
+                          : controller.useMaterial3
+                              ? 'M3 rounded'
+                              : 'circular',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
