@@ -173,6 +173,8 @@ class FlexSubThemesData with Diagnosticable {
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
     //
+    this.bottomSheetBackgroundColor,
+    this.bottomSheetModalBackgroundColor,
     this.bottomSheetRadius,
     this.bottomSheetElevation = kBottomSheetElevation,
     this.bottomSheetModalElevation = kBottomSheetModalElevation,
@@ -1148,6 +1150,24 @@ class FlexSubThemesData with Diagnosticable {
   /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color that the
+  /// [BottomSheet] uses as background color when presented as a none modal
+  /// bottom sheet.
+  ///
+  /// If not defined, defaults to default color of [Material] which is
+  /// theme.canvasColor which typically is assigned the same value as
+  /// theme.colorScheme.background.
+  final SchemeColor? bottomSheetBackgroundColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color that the
+  /// [BottomSheet] uses as background color when presented as a modal
+  /// bottom sheet.
+  ///
+  /// If not defined, defaults to default color of [Material] which is
+  /// theme.canvasColor which typically is assigned the same value as
+  /// theme.colorScheme.background.
+  final SchemeColor? bottomSheetModalBackgroundColor;
+
   /// Border radius value for [BottomSheet].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -1852,6 +1872,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     //
+    final SchemeColor? bottomSheetBackgroundColor,
+    final SchemeColor? bottomSheetModalBackgroundColor,
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
@@ -2001,6 +2023,11 @@ class FlexSubThemesData with Diagnosticable {
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
+      //
+      bottomSheetBackgroundColor:
+          bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
+      bottomSheetModalBackgroundColor: bottomSheetModalBackgroundColor ??
+          this.bottomSheetModalBackgroundColor,
       bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
@@ -2211,6 +2238,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
+        //
+        other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
+        other.bottomSheetModalBackgroundColor ==
+            bottomSheetModalBackgroundColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
@@ -2390,6 +2421,8 @@ class FlexSubThemesData with Diagnosticable {
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
         //
+        bottomSheetBackgroundColor,
+        bottomSheetModalBackgroundColor,
         bottomSheetRadius,
         bottomSheetElevation,
         bottomSheetModalElevation,
@@ -2563,6 +2596,10 @@ class FlexSubThemesData with Diagnosticable {
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'bottomSheetModalBackgroundColor', bottomSheetModalBackgroundColor));
     properties.add(
         DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
     properties.add(DiagnosticsProperty<double>(
