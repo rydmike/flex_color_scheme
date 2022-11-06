@@ -23,7 +23,9 @@ class UsedColorsPopupMenu extends StatelessWidget {
   String _describeUsedColors(int colors) {
     if (colors == 1) {
       return 'Only scheme defined primary color used, other colors are '
-          'computed by FlexColorScheme';
+          'computed by FlexColorScheme. Easy harmonious theme where all '
+          'colors are different shades and variants of a single used '
+          'primary color';
     }
     if (colors == 2) {
       return 'Scheme defined primary and secondary colors used, other colors '
