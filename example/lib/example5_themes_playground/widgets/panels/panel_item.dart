@@ -123,10 +123,7 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.call_to_action_outlined,
   ),
   PanelItem(
-    panelLabel: 'Material',
-    buttonLabel: 'Material',
-    icon: Icons.call_to_action_outlined,
-  ),
+      panelLabel: 'Material', buttonLabel: 'Material', icon: Icons.square),
   PanelItem(
     panelLabel: 'Card',
     buttonLabel: 'Card',

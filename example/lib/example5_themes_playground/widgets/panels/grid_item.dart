@@ -130,7 +130,7 @@ const List<GridItem> gridItems = <GridItem>[
   GridItem(
     panelLabel: 'Material',
     buttonLabel: 'Material',
-    icon: Icons.call_to_action_outlined,
+    icon: Icons.square,
   ),
   GridItem(
     panelLabel: 'Card',
