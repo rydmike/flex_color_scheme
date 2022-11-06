@@ -1467,13 +1467,34 @@ class FlexSubThemes {
     /// https://m3.material.io/components/floating-action-button/specs
     final double? radius,
 
-    /// Set to false, to not apply Shape theming to the FAB.
+    /// Set to false to not apply any Shape theming to the FAB.
     ///
     /// If set to false, the Shape property will be kept null, regardless
-    /// of what border radius was given. This results in that the FAB
-    /// using fab theme data, will use and implement its SDK default
-    /// shape behavior.
+    /// of what border radius was given, also via `alwaysCircular` property.
+    /// This results in that the FAB theme data, will use and implement its
+    /// Flutter SDK default shape behavior. Other properties are still used.
+    ///
+    /// Default to true.
     final bool useShape = true,
+
+    /// Set to true to always use circular and stadium shapes on the FAB.
+    ///
+    /// If set to true, it overrides `radius` and shape is always circular
+    /// or stadium shaped.
+    ///
+    /// Implementation is via `StadiumBorder` to be able
+    /// to support the extended FAB as well. It looks same with Stadium on
+    /// the circular cases as the actual Circular FAB using ones in M2, but
+    /// implementation is different since we cannot use different themed
+    /// shapes for different types of FAB, like the hard coded default
+    /// none themed behavior does. See issue
+    /// [#107946](https://github.com/flutter/flutter/issues/107946) for
+    /// more information.
+    ///
+    /// Has no impact if `useShape` is false.
+    ///
+    /// Defaults to false.
+    final bool alwaysCircular = false,
   }) {
     final Color? background = colorScheme == null
         ? null
@@ -1489,11 +1510,13 @@ class FlexSubThemes {
       foregroundColor: foreground,
       backgroundColor: background,
       shape: useShape
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kFabRadius),
-              ),
-            )
+          ? alwaysCircular
+              ? const StadiumBorder()
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius ?? kFabRadius),
+                  ),
+                )
           : null,
     );
   }

@@ -53,10 +53,9 @@ enum FlexAppBarStyle {
   /// including any blend (surface tint) color it may have.
   background,
 
-  // TODO(rydmike): Rename to scaffoldBackground before publish.
   /// Use scaffold background color as the AppBar's themed background color,
   /// including any blend (surface tint) color it may have.
-  scaffold,
+  scaffoldBackground,
 
   /// Use a custom [AppBar] background color as its themed background color.
   ///
@@ -2555,7 +2554,7 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.background:
           effectiveAppBarColor = effectiveBackgroundColor;
           break;
-        case FlexAppBarStyle.scaffold:
+        case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor = effectiveScaffoldColor;
           break;
         case FlexAppBarStyle.custom:
@@ -4256,7 +4255,7 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.background:
           effectiveAppBarColor = effectiveBackgroundColor;
           break;
-        case FlexAppBarStyle.scaffold:
+        case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor = effectiveScaffoldColor;
           break;
         case FlexAppBarStyle.custom:
@@ -5843,6 +5842,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.fabSchemeColor,
               radius: subTheme.fabRadius ?? subTheme.defaultRadius,
               useShape: subTheme.fabUseShape,
+              alwaysCircular: subTheme.fabAlwaysCircular,
             )
           : null,
       // The default chip theme in Flutter does not work correctly with dark

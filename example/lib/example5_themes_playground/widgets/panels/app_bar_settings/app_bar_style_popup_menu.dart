@@ -48,7 +48,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return colorScheme.surface;
       case FlexAppBarStyle.background:
         return colorScheme.background;
-      case FlexAppBarStyle.scaffold:
+      case FlexAppBarStyle.scaffoldBackground:
         return scaffold;
       case FlexAppBarStyle.custom:
         return customAppBarColor ?? colorScheme.tertiaryContainer;
@@ -83,7 +83,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return 'Surface color, with primary color blend';
       case FlexAppBarStyle.background:
         return 'Background color, with primary color blend';
-      case FlexAppBarStyle.scaffold:
+      case FlexAppBarStyle.scaffoldBackground:
         return 'Scaffold color, with primary color blend';
       case FlexAppBarStyle.custom:
         return 'Custom. Built-in schemes use tertiary color, '

@@ -3368,7 +3368,7 @@ void main() {
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
+        'FST1.14a: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -3376,9 +3376,7 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
           ),
         ),
@@ -3395,16 +3393,28 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
           ),
         ),
       );
     });
     test(
-        'FST1.14c: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'FST1.14c: GIVEN a circular FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same Shape', () {
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          radius: 30,
+          alwaysCircular: true,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(shape: StadiumBorder()),
+        ),
+      );
+    });
+    test(
+        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -3415,30 +3425,7 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
-    test(
-        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
-        'EXPECT equal to FloatingActionButtonThemeData() version '
-        'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.floatingActionButtonTheme(
-          colorScheme: colorScheme,
-          radius: 32,
-        ),
-        equals(
-          const FloatingActionButtonThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(32),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
           ),
         ),
@@ -3453,7 +3440,68 @@ void main() {
         FlexSubThemes.floatingActionButtonTheme(
           colorScheme: colorScheme,
           radius: 32,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14f: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with default shape values and colors', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.secondary,
+          radius: 32,
+          useShape: false,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.secondary,
+            foregroundColor: colorScheme.onSecondary,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14f: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with default shape values and colors', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.secondary,
+          radius: 32,
+          useShape: true,
+          alwaysCircular: true,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.secondary,
+            foregroundColor: colorScheme.onSecondary,
+            shape: const StadiumBorder(),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14g: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.onPrimary,
+          radius: 32,
         ),
         equals(
           FloatingActionButtonThemeData(

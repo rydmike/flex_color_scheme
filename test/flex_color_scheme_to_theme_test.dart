@@ -2811,7 +2811,7 @@ void main() {
     // AppBar test null style, not using M3.
     final ThemeData tLAppBarScaffold = FlexColorScheme.light(
       scheme: FlexScheme.flutterDash,
-      appBarStyle: FlexAppBarStyle.scaffold,
+      appBarStyle: FlexAppBarStyle.scaffoldBackground,
       scaffoldBackground: FlexColor.amberDarkTertiary,
       // useMaterial3: false, // Default value
     ).toTheme;
@@ -2824,7 +2824,7 @@ void main() {
     });
     final ThemeData tDAppBarScaffold = FlexColorScheme.dark(
       scheme: FlexScheme.flutterDash,
-      appBarStyle: FlexAppBarStyle.scaffold,
+      appBarStyle: FlexAppBarStyle.scaffoldBackground,
       scaffoldBackground: FlexColor.verdunHemlockDarkSecondaryContainer,
       // useMaterial3: false, // Default value
     ).toTheme;
