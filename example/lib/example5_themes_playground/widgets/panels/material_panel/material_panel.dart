@@ -10,6 +10,13 @@ class MaterialPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const <Widget>[
+        SizedBox(height: 8),
+        ListTile(
+          subtitle: Text('The Material widget is lower level building block, '
+              'it cannot be themed, but has theme dependent default behaviour '
+              'show below. Material is clipping, elevation and ink effects '
+              'below its children.'),
+        ),
         Padding(
           padding: EdgeInsets.all(16),
           child: MaterialShowcase(),
