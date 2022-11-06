@@ -20,8 +20,8 @@ class ComponentSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         SwitchListTileAdaptive(
-          title: const Text('Use component themes'),
-          subtitle: const Text('Enable opinionated widget themes'),
+          title: const Text('Use component sub themes'),
+          subtitle: const Text('Enable opinionated widget sub themes'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -87,9 +87,9 @@ class ComponentSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           title: const Text('Themed interaction effects'),
-          subtitle: const Text('Disable, hover, focus, highlight and '
-              'splash are based on primary color.\n'
-              'OFF for Flutter grey defaults'),
+          subtitle: const Text('The hover, focus, highlight, splash and '
+              'disabled colors and effects are based on primary color.\n'
+              'Turn OFF for Flutter transparent grey defaults'),
           value: controller.interactionEffects &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

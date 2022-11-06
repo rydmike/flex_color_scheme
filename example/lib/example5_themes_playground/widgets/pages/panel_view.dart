@@ -307,12 +307,13 @@ class PanelPage extends StatelessWidget {
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
 
       // We get double implicit scrollbars and that causes issues with the
-      // scroll controller.
+      // scroll controller, this scroll config removes it.
       return ScrollConfiguration(
         behavior: const NoScrollbarBehavior(),
         // This ListView allows the content in the PageView to scroll
         // vertically as apart of the NestedScroll view the PageView is
-        // included in.
+        // included in, but by itself, but we need the ListView to allow
+        // its page content to grow beyond the visible page.
         child: ListView(
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.fromLTRB(

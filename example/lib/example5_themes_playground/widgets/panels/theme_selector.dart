@@ -104,8 +104,9 @@ class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
+    final bool isPhone =
+        isNarrow || media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
     return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),
@@ -130,7 +131,9 @@ class ThemeSelector extends StatelessWidget {
                         ? const EdgeInsets.symmetric(horizontal: 8)
                         : null,
                     dense: isPhone,
-                    title: const Text('Use Material3'),
+                    title: isNarrow
+                        ? const Text('M3')
+                        : const Text('Use Material3'),
                     value: controller.useMaterial3,
                     onChanged: controller.setUseMaterial3,
                   ),
@@ -140,7 +143,9 @@ class ThemeSelector extends StatelessWidget {
                     contentPadding: isPhone
                         ? const EdgeInsetsDirectional.only(start: 16, end: 0)
                         : null,
-                    title: const Text('Flex\u200BColor\u200BScheme'),
+                    title: isNarrow
+                        ? const Text('FCS')
+                        : const Text('Use Flex\u200BColor\u200BScheme'),
                     dense: isPhone,
                     value: controller.useFlexColorScheme,
                     onChanged: controller.setUseFlexColorScheme,
@@ -152,7 +157,9 @@ class ThemeSelector extends StatelessWidget {
                         ? const EdgeInsets.symmetric(horizontal: 8)
                         : null,
                     dense: isPhone,
-                    title: const Text('Compo\u200Bnent themes'),
+                    title: isNarrow
+                        ? const Text('Sub')
+                        : const Text('Use sub themes'),
                     value: controller.useSubThemes &&
                         controller.useFlexColorScheme,
                     onChanged: controller.useFlexColorScheme

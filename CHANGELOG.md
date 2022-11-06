@@ -33,51 +33,14 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
 - Added always use circular FAB feature.
 
- **Tests**
- - Tests for `FlexSchemeColor.effective`, using `swapLegacy` and combo with `swapColor`.
- - Tests for `swapLegacyOnMaterial3`.
- - Tests for new AppBarStyle scaffold.
-
 **TODO:**
 
 * **New**
-  - Bottoms sheet color options. Maybe include scaffoldBackground, add as general color? How?
-  - Add: Tooltip themed delays.
-  - Add: ThemeData passthrough: pageTransitionsTheme (HOLD, no need, use copyWith)
-  - Add: Slider theme, which props to include?
-  
-
-* **M3 Review** 
-  - Check all new M3 capable widgets and tune, fix and add as needed to FCS:
-  - TextField (figure out custom color) 
-  - PopupMenu
-  - Switches (figure out custom color)
-  - BottomSheet (Add custom colors)
-  - Tonal button
-  - AppBar SDK bugs
-  - Material SDK bugs
-  - Sys navbar SDK bugs    
-
-* **Design**
-  - Consider a bit less tint on tinted text in dark mode.
-  
-* **Chore**
-  - AppBar theme, move to sub-theme.
-  - TabBar theme, move to sub-theme.
-  - Tooltip theme, move to sub-theme.
-
-* **Tests**
-  - Add tests for text style on buttons.
-  - Add tests materialTapTargetSize
-  - Verify tests and docs for raw FlexColorScheme.
+  - BottomsSheet color options.
+  - Tooltip themed delays.
 
 * **Themes Playground** 
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
-  - Add TabBar ToggleButtons ListTile tap cycle.  
-  - Add slider theme config 
-  - Add slider to theme showcase.
-  - Add label size for buttons, using new text style feature.
-  - Even shorter labels for M3 FCS and Component themes (Comp?)
   - FIX: Rail indicator lock when using Flutter defaults
 
 
