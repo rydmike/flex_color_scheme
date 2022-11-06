@@ -119,7 +119,7 @@ class Store {
   static const String keyBlendLevel = 'blendLevel';
   // Default value for the blendLevel, also used to reset settings.
   // Defaults to 20.
-  static const int defaultBlendLevel = 13;
+  static const int defaultBlendLevel = 10;
 
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
