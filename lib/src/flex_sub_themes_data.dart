@@ -148,6 +148,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.fabRadius,
     this.fabUseShape = false,
+    this.fabAlwaysCircular = false,
     this.fabSchemeColor,
     this.chipRadius,
     this.chipSchemeColor,
@@ -869,7 +870,12 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/floating-action-button/specs
   ///
   /// The border radius is only assigned when [fabUseShape] is true, if
-  /// [fabUseShape] is false, the [fabRadius] has no effect on FAB shapes.
+  /// [fabUseShape] is false, the [fabRadius] or [fabAlwaysCircular] has no
+  /// effect on FAB shapes.
+  ///
+  /// If [fabAlwaysCircular] is true and a radius is given by [defaultRadius] or
+  /// [fabRadius] the FAB will still be circular, radius settings have no
+  /// effect then.
   ///
   /// If [ThemeData.useMaterial3] and [fabUseShape] are true, you cannot define
   /// FAB buttons that get the same rounding style as defined by the M3 spec.
@@ -899,6 +905,20 @@ class FlexSubThemesData with Diagnosticable {
   /// To make make circular FAB when [ThemeData.useMaterial3] is true, set
   /// [fabUseShape] to true and [fabRadius] to a high values, like 60.
   final bool fabUseShape;
+
+  /// Always use circular Shape on Floating Actions Button.
+  ///
+  /// If [fabUseShape] is false the [fabAlwaysCircular] has no effect, FAB will
+  /// be circular in in M2 and rounded with different radii depending on FAB
+  /// size in M3.
+  ///
+  /// if [defaultRadius] or [fabRadius] is defined and [fabAlwaysCircular] is
+  /// true the FAB will be circular in both M2 and M3.
+  ///
+  /// Extended FAB will use Stadium border when [fabAlwaysCircular] is true.
+  ///
+  /// Defaults to false.
+  final bool fabAlwaysCircular;
 
   /// Defines which [Theme] based [ColorScheme] based color the Floating
   /// Action Buttons (FABs) use as their base color.
@@ -1809,7 +1829,9 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? fabRadius,
     final bool? fabUseShape,
+    final bool? fabAlwaysCircular,
     final SchemeColor? fabSchemeColor,
+    //
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
     final double? cardRadius,
@@ -1953,7 +1975,9 @@ class FlexSubThemesData with Diagnosticable {
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
+      fabAlwaysCircular: fabAlwaysCircular ?? this.fabAlwaysCircular,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
+      //
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
       cardRadius: cardRadius ?? this.cardRadius,
@@ -2166,6 +2190,7 @@ class FlexSubThemesData with Diagnosticable {
             inputDecoratorUnfocusedBorderIsColored &&
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
+        other.fabAlwaysCircular == fabAlwaysCircular &&
         other.fabSchemeColor == fabSchemeColor &&
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
@@ -2338,6 +2363,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         fabRadius,
         fabUseShape,
+        fabAlwaysCircular,
         fabSchemeColor,
         //
         chipRadius,
@@ -2504,6 +2530,8 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorUnfocusedBorderIsColored));
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
+    properties
+        .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties

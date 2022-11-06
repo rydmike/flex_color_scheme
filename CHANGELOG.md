@@ -71,8 +71,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 * **Themes Playground** 
   - Review and fix Slider to double rounding issue, see ThemeDemo app.
-  - Add TabBar ToggleButtons ListTile tap cycle.
-  
+  - Add TabBar ToggleButtons ListTile tap cycle.  
   - Add slider theme config 
   - Add slider to theme showcase.
   - Add label size for buttons, using new text style feature.
