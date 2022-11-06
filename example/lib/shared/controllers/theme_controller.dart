@@ -373,10 +373,13 @@ class ThemeController with ChangeNotifier {
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     _fabUseShape = await _themeService.load(
         Store.keyFabUseShape, Store.defaultFabUseShape);
+    _fabAlwaysCircular = await _themeService.load(
+        Store.keyFabAlwaysCircular, Store.defaultFabAlwaysCircular);
     _fabBorderRadius = await _themeService.load(
         Store.keyFabBorderRadius, Store.defaultFabBorderRadius);
     _fabSchemeColor = await _themeService.load(
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
+    //
     _chipSchemeColor = await _themeService.load(
         Store.keyChipSchemeColor, Store.defaultChipSchemeColor);
     _chipBorderRadius = await _themeService.load(
@@ -628,8 +631,10 @@ class ThemeController with ChangeNotifier {
     //
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     setFabUseShape(Store.defaultFabUseShape, false);
+    setFabAlwaysCircular(Store.defaultFabAlwaysCircular, false);
     setFabBorderRadius(Store.defaultFabBorderRadius, false);
     setFabSchemeColor(Store.defaultFabSchemeColor, false);
+    //
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
@@ -1939,6 +1944,16 @@ class ThemeController with ChangeNotifier {
     _fabUseShape = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyFabUseShape, value));
+  }
+
+  late bool _fabAlwaysCircular;
+  bool get fabAlwaysCircular => _fabAlwaysCircular;
+  void setFabAlwaysCircular(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _fabAlwaysCircular) return;
+    _fabAlwaysCircular = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyFabAlwaysCircular, value));
   }
 
   late double? _fabBorderRadius;

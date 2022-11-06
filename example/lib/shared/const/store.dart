@@ -759,6 +759,11 @@ class Store {
   // Default value for the fabUseShape, also to reset settings.
   static const bool defaultFabUseShape = false;
 
+  // Key used to read and save the fabUseShape value.
+  static const String keyFabAlwaysCircular = 'fabAlwaysCircular';
+  // Default value for the fabUseShape, also to reset settings.
+  static const bool defaultFabAlwaysCircular = false;
+
   // Key used to read and save the fabBorderRadius value.
   static const String keyFabBorderRadius = 'fabBorderRadius';
   // Default value for the fabBorderRadius, also used to reset settings.
