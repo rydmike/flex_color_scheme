@@ -121,8 +121,18 @@ class _PanelSelectorState extends State<PanelSelector> {
         margins * 2 +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
     final double topPadding = media.padding.top;
+
+    // TODO(rydmike): Experiments with alternative panel selector bg look
+    // final ThemeData theme = Theme.of(context);
+    // final bool isLight = theme.brightness == Brightness.light;
+    // final ColorScheme scheme = theme.colorScheme;
+    // final Color selectorColor = Color.alphaBlend(
+    //         scheme.surfaceTint.withAlpha(isLight ? 0 : 40),
+    //         theme.scaffoldBackgroundColor)
+    //     .withAlpha(0x77);
+
     return Material(
-      color: Theme.of(context).colorScheme.primary.withAlpha(0x38),
+      color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
