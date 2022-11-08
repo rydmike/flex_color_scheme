@@ -32,7 +32,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
 - Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
 - Added always use circular FAB feature.
-- All single option select ToggleButtons controls in a ListTile can now for convenience be toggled in sequance by just tapping on the ListTile it is used in.  
+- All single option select ToggleButtons controls in a ListTile can now for convenience be toggled in sequence by just tapping on the ListTile it is used in.  
+- Changed all used Slider.adaptive to just Slider. The Cupertino one has poorer UX when you can click on the track to move the thumb to a positions. Besides, the app presents Material theming so let's show Material widgets in its own controls as well on all platforms.
 
 **TODO:**
 
