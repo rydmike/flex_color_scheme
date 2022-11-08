@@ -99,9 +99,14 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.add_circle,
   ),
   PanelItem(
-    panelLabel: 'PopupMenu and IconButton',
-    buttonLabel: 'Popup and\nIconButton',
+    panelLabel: 'PopupMenuButton',
+    buttonLabel: 'Popup\nMenuButton',
     icon: Icons.arrow_drop_down_circle_outlined,
+  ),
+  PanelItem(
+    panelLabel: 'Tooltip, IconButton, CircleAvatar and DropdownButton ',
+    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    icon: Icons.live_help_outlined,
   ),
   PanelItem(
     panelLabel: 'Switch, CheckBox and Radio',

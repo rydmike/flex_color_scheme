@@ -20,7 +20,7 @@ import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
-import '../panels/popup_icon_button_settings/popup_icon_button_settings.dart';
+import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
 import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
@@ -34,6 +34,7 @@ import '../panels/text_theme_settings/text_theme_settings.dart';
 import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
+import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -207,7 +208,8 @@ class _LargeGridViewState extends State<LargeGridView>
                   ButtonsSettings(themeCtrl),
                   ToggleButtonsSettings(themeCtrl),
                   FabChipSettings(themeCtrl),
-                  PopupIconButtonSettings(themeCtrl),
+                  PopupMenuButtonSettings(themeCtrl),
+                  TooltipIconButtonAvatarDropdownSettings(themeCtrl),
                   SwitchesSettings(themeCtrl),
                   ListTileSettings(themeCtrl),
                   DialogSettings(themeCtrl),

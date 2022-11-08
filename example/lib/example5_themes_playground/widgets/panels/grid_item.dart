@@ -104,9 +104,14 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.add_circle,
   ),
   GridItem(
-    panelLabel: 'PopupMenu and IconButton',
-    buttonLabel: 'Popup and\nIconButton',
+    panelLabel: 'PopupMenuButton',
+    buttonLabel: 'Popup\nMenuButton',
     icon: Icons.arrow_drop_down_circle_outlined,
+  ),
+  GridItem(
+    panelLabel: 'Tooltip, IconButton, CircleAvatar and DropdownButton ',
+    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    icon: Icons.live_help_outlined,
   ),
   GridItem(
     panelLabel: 'Switch, CheckBox and Radio',

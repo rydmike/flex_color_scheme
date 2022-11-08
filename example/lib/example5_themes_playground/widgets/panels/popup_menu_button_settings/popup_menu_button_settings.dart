@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
-class PopupIconButtonSettings extends StatelessWidget {
-  const PopupIconButtonSettings(this.controller, {super.key});
+class PopupMenuButtonSettings extends StatelessWidget {
+  const PopupMenuButtonSettings(this.controller, {super.key});
   final ThemeController controller;
 
   @override
@@ -34,7 +34,7 @@ class PopupIconButtonSettings extends StatelessWidget {
           // The button used in the PopupMenuShowcase to open the PopupMenu
           // is not a native widget, only the menu is, and it is the one that
           // is themed.
-          child: PopupMenuShowcase(),
+          child: PopupMenuButtonShowcase(),
         ),
         const SizedBox(height: 16),
         ListTile(
@@ -122,29 +122,6 @@ class PopupIconButtonSettings extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        const Divider(),
-        const ListTile(
-          title: Text('IconButton, CircleAvatar, DropdownButton and Tooltip'),
-          subtitle: Text('Included to show their effective themed style'),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: IconButtonCircleAvatarDropdownTooltipShowcase(),
-        ),
-        SwitchListTile(
-          title: const Text(
-            'Tooltip background brightness',
-          ),
-          subtitle: const Text(
-            'OFF theme mode inverted, common on Web\n'
-            'ON theme mode brightness, like Windows',
-          ),
-          value: controller.tooltipsMatchBackground &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useFlexColorScheme
-              ? controller.setTooltipsMatchBackground
-              : null,
         ),
       ],
     );

@@ -38,10 +38,13 @@ class ThemeShowcase extends StatelessWidget {
         const ChipShowcase(),
         const Divider(),
         const SizedBox(height: 8),
-        const PopupMenuShowcase(),
+        const PopupMenuButtonShowcase(),
         const SizedBox(height: 8),
+        const Divider(),
         const SizedBox(height: 8),
-        const IconButtonCircleAvatarDropdownTooltipShowcase(),
+        const TooltipShowcase(),
+        const SizedBox(height: 16),
+        const IconButtonCircleAvatarDropdownShowcase(),
         const Divider(),
         const SwitchShowcase(),
         const CheckboxShowcase(),
@@ -511,8 +514,7 @@ class _SliderShowcaseState extends State<SliderShowcase> {
         ListTile(
           title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
           subtitle: Slider(
-            max: 100,
-            // divisions: 100,
+            max: 30,
             label: value.toStringAsFixed(2),
             value: value,
             onChanged: (double newValue) {
@@ -525,8 +527,8 @@ class _SliderShowcaseState extends State<SliderShowcase> {
         ListTile(
           title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
           subtitle: Slider(
-            max: 100,
-            divisions: 100,
+            max: 30,
+            divisions: 31,
             label: value.toStringAsFixed(0),
             value: value,
             onChanged: (double newValue) {
@@ -541,8 +543,8 @@ class _SliderShowcaseState extends State<SliderShowcase> {
   }
 }
 
-class PopupMenuShowcase extends StatelessWidget {
-  const PopupMenuShowcase({
+class PopupMenuButtonShowcase extends StatelessWidget {
+  const PopupMenuButtonShowcase({
     super.key,
     this.enabled = true,
     this.popupRadius,
@@ -599,7 +601,7 @@ class _PopupMenuButton extends StatelessWidget {
           ),
           onPressed: enabled ? () {} : null,
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('PopupMenu'),
+          label: const Text('PopupMenuButton'),
         ),
       ),
     );
@@ -633,7 +635,10 @@ class _DropDownButtonState extends State<_DropDownButton> {
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(value),
+          ),
         );
       }).toList(),
     );
@@ -675,16 +680,44 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
   }
 }
 
-class IconButtonCircleAvatarDropdownTooltipShowcase extends StatefulWidget {
-  const IconButtonCircleAvatarDropdownTooltipShowcase({super.key});
+class TooltipShowcase extends StatelessWidget {
+  const TooltipShowcase({super.key});
 
   @override
-  State<IconButtonCircleAvatarDropdownTooltipShowcase> createState() =>
-      _IconButtonCircleAvatarDropdownTooltipShowcaseState();
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 16,
+      runSpacing: 4,
+      children: const <Widget>[
+        Tooltip(
+          message: 'Current tooltip theme',
+          child: Text('Text with tooltip'),
+        ),
+        Tooltip(
+          message: 'Current tooltip theme.\nThis a two row tooltip.',
+          child: Text('Text with two row tooltip'),
+        ),
+        Tooltip(
+          message: 'Current tooltip theme.\nThis tooltip is too long.\n'
+              'Try to keep them short.',
+          child: Text('Text with three row tooltip'),
+        ),
+      ],
+    );
+  }
 }
 
-class _IconButtonCircleAvatarDropdownTooltipShowcaseState
-    extends State<IconButtonCircleAvatarDropdownTooltipShowcase> {
+class IconButtonCircleAvatarDropdownShowcase extends StatefulWidget {
+  const IconButtonCircleAvatarDropdownShowcase({super.key});
+
+  @override
+  State<IconButtonCircleAvatarDropdownShowcase> createState() =>
+      _IconButtonCircleAvatarDropdownShowcaseState();
+}
+
+class _IconButtonCircleAvatarDropdownShowcaseState
+    extends State<IconButtonCircleAvatarDropdownShowcase> {
   bool isLockOpen = false;
 
   @override
@@ -723,10 +756,6 @@ class _IconButtonCircleAvatarDropdownTooltipShowcaseState
           ),
         ),
         const _DropDownButton(),
-        const Tooltip(
-          message: 'Current tooltip theme.\nThis a two row tooltip.',
-          child: Text('Text with tooltip'),
-        ),
       ],
     );
   }
@@ -755,12 +784,9 @@ class ChipShowcase extends StatelessWidget {
           avatar: const Icon(Icons.settings),
           onPressed: () {},
         ),
-        ActionChip(
-          label: const Text('ActionChip'),
-          avatar: const Icon(Icons.settings),
-          // TODO(rydmike): Uncomment in 3.1.0 to get disabled ActionChip.
-          // The onPressed is required in 3.0.5 stable, but not in 3.1.0 master.
-          onPressed: () {},
+        const ActionChip(
+          label: Text('ActionChip'),
+          avatar: Icon(Icons.settings),
         ),
         FilterChip(
           label: const Text('FilterChip'),
