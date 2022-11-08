@@ -73,6 +73,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ShowTonalPalette(controller: controller),
         ),
+        const SizedBox(height: 8),
         FlexToneConfigPopupMenu(
           title: 'Tonal palettes use FlexTones',
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
