@@ -51,8 +51,8 @@ void main() {
     test('FCT kInputDecoratorM3Radius is 4', () {
       expect(kInputDecoratorM3Radius, 4);
     });
-    test('FCT kBottomSheetBorderRadius is 16', () {
-      expect(kBottomSheetBorderRadius, 16);
+    test('FCT kBottomSheetBorderRadius is 28', () {
+      expect(kBottomSheetBorderRadius, 28);
     });
     test('FCT kDialogRadius is 28', () {
       expect(kDialogRadius, 28);
