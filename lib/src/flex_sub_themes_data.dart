@@ -176,8 +176,8 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
     this.bottomSheetRadius,
-    this.bottomSheetElevation = kBottomSheetElevation,
-    this.bottomSheetModalElevation = kBottomSheetModalElevation,
+    this.bottomSheetElevation,
+    this.bottomSheetModalElevation,
     //
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
