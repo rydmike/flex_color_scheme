@@ -118,26 +118,26 @@ class Store {
   // Key used to read and save the blendLevel value.
   static const String keyBlendLevel = 'blendLevel';
   // Default value for the blendLevel, also used to reset settings.
-  // Defaults to 20.
-  static const int defaultBlendLevel = 10;
+  // Defaults to 12.
+  static const int defaultBlendLevel = 12;
 
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
-  // Defaults to 15.
-  static const int defaultBlendLevelDark = 20;
+  // Defaults to 17.
+  static const int defaultBlendLevelDark = 17;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
   // Default value for the onBlendLevel, also used to reset settings.
-  // Defaults to 20.
+  // Defaults to 10.
   static const int defaultBlendOnLevel = 10;
 
   // Key used to read and save the blendOnLevelDark value.
   static const String keyBlendOnLevelDark = 'blendOnLevelDark';
   // Default value for the blendOnLevelDark, also used to reset settings.
-  // Defaults to 30.
-  static const int defaultBlendOnLevelDark = 25;
+  // Defaults to 20.
+  static const int defaultBlendOnLevelDark = 20;
 
   // Key used to read and save the usedColors value.
   static const String keyUsedColors = 'usedColors';
