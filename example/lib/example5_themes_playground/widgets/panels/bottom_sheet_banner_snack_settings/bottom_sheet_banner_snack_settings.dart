@@ -177,10 +177,11 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           subtitle: Text('The modal and none modal BottomSheet '
               'have separate API values for elevation and background color. '
               'They only share controls in the Playground. If you need '
-              'separate values you edit the copied code.'),
+              'separate values, please edit the copied code.'),
         ),
         const SizedBox(height: 16),
         const MaterialBannerSnackBarShowcase(),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('SnackBar background color'),
           labelForDefault: snackDefaultColorLabel,
