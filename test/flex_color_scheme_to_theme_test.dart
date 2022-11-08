@@ -2968,5 +2968,202 @@ void main() {
         equals(FlexColor.blumineBlueDarkSecondaryContainer),
       );
     });
+    // Test default bottomSheet theming, light M2
+    final ThemeData tLBottomDefault = FlexColorScheme.light(
+      scheme: FlexScheme.flutterDash,
+      useMaterial3: false,
+      subThemesData: const FlexSubThemesData(),
+    ).toTheme;
+    test(
+        'FCS7.101 GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT bottom surface and elevation 4 and 8 and border radius '
+        'top 28', () {
+      expect(
+        tLBottomDefault.bottomSheetTheme.backgroundColor,
+        equals(tLBottomDefault.colorScheme.surface),
+      );
+      expect(
+        tLBottomDefault.bottomSheetTheme.modalBackgroundColor,
+        equals(tLBottomDefault.colorScheme.surface),
+      );
+      expect(
+        tLBottomDefault.bottomSheetTheme.elevation,
+        equals(4),
+      );
+      expect(
+        tLBottomDefault.bottomSheetTheme.modalElevation,
+        equals(8),
+      );
+      expect(
+        tLBottomDefault.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        tLBottomDefault.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(28),
+              topRight: Radius.circular(28),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test default bottomSheet theming dark M3
+    final ThemeData tLBottomDefaultM3 = FlexColorScheme.dark(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(),
+    ).toTheme;
+    test(
+        'FCS7.101 GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a default FlexSubThemesData '
+        'EXPECT bottom surface+tint and elevation 4 and 8 and border radius '
+        'top 28', () {
+      final ColorScheme scheme = tLBottomDefaultM3.colorScheme;
+      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
+          scheme.surface, scheme.surfaceTint, 4);
+      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+          scheme.surface, scheme.surfaceTint, 8);
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.backgroundColor,
+        equals(bottomSheetColor),
+      );
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.modalBackgroundColor,
+        equals(bottomSheetModalColor),
+      );
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.elevation,
+        equals(4),
+      );
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.modalElevation,
+        equals(8),
+      );
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        tLBottomDefaultM3.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(28),
+              topRight: Radius.circular(28),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // Test bottomSheet theming custom dark M2
+    final ThemeData tLBottomCustomM2 = FlexColorScheme.dark(
+      scheme: FlexScheme.sanJuanBlue,
+      useMaterial3: false,
+      subThemesData: const FlexSubThemesData(
+        bottomSheetRadius: 8,
+        bottomSheetElevation: 2,
+        bottomSheetModalElevation: 12,
+        bottomSheetBackgroundColor: SchemeColor.background,
+        bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+      ),
+    ).toTheme;
+    test(
+        'FCS7.101 GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT bottom surface and elevation 2 and 12 and border radius '
+        'top 8 and none tinted backgrounds', () {
+      final ColorScheme scheme = tLBottomCustomM2.colorScheme;
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.backgroundColor,
+        equals(scheme.background),
+      );
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.modalBackgroundColor,
+        equals(scheme.surfaceVariant),
+      );
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.elevation,
+        equals(2),
+      );
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.modalElevation,
+        equals(12),
+      );
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        tLBottomCustomM2.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // Test bottomSheet theming custom light M3
+    final ThemeData tLBottomCustomM3 = FlexColorScheme.light(
+      scheme: FlexScheme.sakura,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        bottomSheetRadius: 20,
+        bottomSheetElevation: 6,
+        bottomSheetModalElevation: 10,
+        bottomSheetBackgroundColor: SchemeColor.onPrimary,
+        bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+      ),
+    ).toTheme;
+    test(
+        'FCS7.101 GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a custom FlexSubThemesData '
+        'EXPECT bottom surface and elevation 6 and 10 and border radius '
+        'top 20 and tinted backgrounds', () {
+      final ColorScheme scheme = tLBottomCustomM3.colorScheme;
+      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
+          scheme.onPrimary, scheme.surfaceTint, 6);
+      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.backgroundColor,
+        equals(bottomSheetColor),
+      );
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.modalBackgroundColor,
+        equals(bottomSheetModalColor),
+      );
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.elevation,
+        equals(6),
+      );
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.modalElevation,
+        equals(10),
+      );
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        tLBottomCustomM3.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      );
+    });
   });
 }
