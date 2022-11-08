@@ -230,7 +230,7 @@ class ThemeColorsSettings extends StatelessWidget {
                     : null,
               ),
               ListTile(
-                title: Slider.adaptive(
+                title: Slider(
                   max: 100,
                   divisions: 100,
                   label: controller.darkMethodLevel.toString(),

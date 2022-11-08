@@ -78,7 +78,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
@@ -113,7 +113,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 24,
             divisions: 48,
             label: navBarElevation.toStringAsFixed(1),

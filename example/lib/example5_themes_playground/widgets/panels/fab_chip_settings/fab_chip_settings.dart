@@ -82,7 +82,7 @@ class FabChipSettings extends StatelessWidget {
               controller.fabUseShape &&
               !controller.fabAlwaysCircular,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 60,
             divisions: 61,
@@ -172,7 +172,7 @@ class FabChipSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,

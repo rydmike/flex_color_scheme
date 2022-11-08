@@ -130,7 +130,7 @@ class NavigationRailSettings extends StatelessWidget {
         ListTile(
           enabled: navRailOpacityEnabled,
           title: const Text('Background opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (navRailOpacity * 100).toStringAsFixed(0),
@@ -164,7 +164,7 @@ class NavigationRailSettings extends StatelessWidget {
         // const Divider(),
         ListTile(
           title: const Text('Elevation'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 24,
             divisions: 48,
             label: navRailElevation.toStringAsFixed(1),
@@ -224,7 +224,7 @@ class NavigationRailSettings extends StatelessWidget {
         ListTile(
           enabled: navRailIndicatorOpacityEnabled,
           title: const Text('Selection indicator opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 100,
             divisions: 101,

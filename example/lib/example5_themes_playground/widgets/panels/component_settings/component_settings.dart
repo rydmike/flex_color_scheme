@@ -40,7 +40,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          title: Slider(
             min: -1,
             max: 60,
             divisions: 61,

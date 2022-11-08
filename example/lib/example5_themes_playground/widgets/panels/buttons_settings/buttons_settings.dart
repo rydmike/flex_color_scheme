@@ -93,7 +93,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('ElevatedButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -187,7 +187,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('OutlinedButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -248,7 +248,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          title: Slider(
             min: -0.5,
             max: 5,
             divisions: 11,
@@ -305,7 +305,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          title: Slider(
             min: -0.5,
             max: 5,
             divisions: 11,
@@ -380,7 +380,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('TextButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,

@@ -130,7 +130,7 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
@@ -164,7 +164,7 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Height'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: 54,
             max: 100,
             divisions: 46,
@@ -231,7 +231,7 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarHighlightOpacityEnabled,
           title: const Text('Selection indicator opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 100,
             divisions: 101,

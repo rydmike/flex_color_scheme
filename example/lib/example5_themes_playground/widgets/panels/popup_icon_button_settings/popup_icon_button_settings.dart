@@ -41,7 +41,7 @@ class PopupIconButtonSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius, follows global to max 10'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 12,
             divisions: 13,
@@ -92,7 +92,7 @@ class PopupIconButtonSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('PopupMenu opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (popupOpacity * 100).toStringAsFixed(0),

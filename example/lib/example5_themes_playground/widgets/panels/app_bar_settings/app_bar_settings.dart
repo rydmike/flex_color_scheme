@@ -92,7 +92,7 @@ class AppBarSettings extends StatelessWidget {
           ListTile(
             enabled: controller.useFlexColorScheme,
             title: const Text('Light theme elevation'),
-            subtitle: Slider.adaptive(
+            subtitle: Slider(
               max: 24,
               divisions: 48,
               label: controller.appBarElevationLight.toStringAsFixed(1),
@@ -127,7 +127,7 @@ class AppBarSettings extends StatelessWidget {
             subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
-            title: Slider.adaptive(
+            title: Slider(
               max: 100,
               divisions: 100,
               label: (controller.appBarOpacityLight * 100).toStringAsFixed(0),
@@ -164,7 +164,7 @@ class AppBarSettings extends StatelessWidget {
           ListTile(
             enabled: controller.useFlexColorScheme,
             title: const Text('Dark theme elevation'),
-            subtitle: Slider.adaptive(
+            subtitle: Slider(
               max: 24,
               divisions: 48,
               label: controller.appBarElevationDark.toStringAsFixed(1),
@@ -199,7 +199,7 @@ class AppBarSettings extends StatelessWidget {
             subtitle: const Text('Themed opacity, try 85% to 98%'),
           ),
           ListTile(
-            title: Slider.adaptive(
+            title: Slider(
               max: 100,
               divisions: 100,
               label: (controller.appBarOpacityDark * 100).toStringAsFixed(0),

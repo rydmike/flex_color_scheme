@@ -168,7 +168,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 'surface blends'),
           ),
           ListTile(
-            title: Slider.adaptive(
+            title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
@@ -213,7 +213,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
-            title: Slider.adaptive(
+            title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
@@ -335,7 +335,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 'surface blends'),
           ),
           ListTile(
-            title: Slider.adaptive(
+            title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
@@ -380,7 +380,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
-            title: Slider.adaptive(
+            title: Slider(
               min: 0,
               max: 40,
               divisions: 40,

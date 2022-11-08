@@ -111,7 +111,7 @@ class TextFieldSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -189,7 +189,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          title: Slider(
             min: -0.5,
             max: 5,
             divisions: 11,
@@ -245,7 +245,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
+          title: Slider(
             min: -0.5,
             max: 5,
             divisions: 11,

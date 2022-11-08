@@ -38,7 +38,7 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('BottomSheet border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 50,
             divisions: 51,

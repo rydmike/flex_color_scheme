@@ -210,7 +210,7 @@ class HomePage extends StatelessWidget {
                             enabled: controller.useSubThemes &&
                                 controller.useFlexColorScheme,
                             contentPadding: EdgeInsets.zero,
-                            title: Slider.adaptive(
+                            title: Slider(
                               min: -1,
                               max: 30,
                               divisions: 31,

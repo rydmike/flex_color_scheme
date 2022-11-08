@@ -56,7 +56,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           subtitle: Text('System navigation bar opacity'),
         ),
         ListTile(
-          title: Slider.adaptive(
+          title: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
