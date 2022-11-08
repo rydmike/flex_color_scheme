@@ -13,39 +13,55 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`. It is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
 * The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better automatic adjustment of built-in scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes. Setting `swapLegacyOnMaterial3` will when `useMaterial3` is true swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. This only happens for built-in schemes where this swap makes the color design more compatible with the intended usage of the `secondary` and `tertiary` colors. To implement this, the class `FlexColor` with the built-in scheme definitions `FlexSchemeColor` have a new bool meta-data property `swapOnMaterial3` that has been defined to be `true` when the `FlexSchemeColor` it defines benefits from their swapping when using Material 3. For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to set it to `true`. The flag has no impact when using Material 2. The flag can also be toggled in the **Themes Playground** it is on by default there. The `swapLegacyOnMaterial3` when it is done for a `FlexSchemeColor` is done before any other built-in scheme modifier properties, including `swapColor`.
 * New feature: FAB Always circular, also in M3 without high radius setting. Want same old circular and stadium look on FAB in Material 3, just set `fabAlwaysCircular` in `FlexSubThemesData` to true and FAB stays circular regardless of if you use M2 or M3 or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is easier.
+* In `FlexSubThemesData` the new properties `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
 
 **CHANGE**
 
-* **STYLE:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline. Using fractional dp may cause artefact issues at screens using or running at native resolution where 1 dp = 1 physical display pixel. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default.
+* In `FlexSubThemesData` the properties `bottomSheetElevation` and `bottomSheetModalElevation` are now nullable. FCS sub-theme defaults to same values as before (4 and 8) if null. Being nullable enables potential different defaults in FCS M2 and M3 mode `BottomSheet` elevations. Currently, they are the same, but this might change when M3 style BottomSheet lands in stable channel.
+* **STYLE:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FCS. Using fractional dp may cause artefact issues with monitors using or running at native resolution where 1 dp = 1 physical display pixel. You can set `thinBorderWidth` to 1.5, to get the same result as previous default.
+* **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now default to theme's ColorScheme `surface` color in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in many designs the color values are the same, but if needed you can put it back to background with:
+
+```dart
+    final ThemeData themeLight = FlexThemeData.light(
+      subThemesData: const FlexSubThemesData(
+        bottomSheetBackgroundColor: SchemeColor.background,
+        bottomSheetModalBackgroundColor: SchemeColor.background,
+      ),
+    );
+```
+
+**FIX**
+
+* **TEMP M3 FIX:** The FCS M3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable. 
 
 **Themes Playground**
+- Improved discoverability of defining and using totally custom theme colors in the Playground.
 - The Themes Playground app (example 5) got surface blend mode defaults that are mobile friendly. No API change involved, API defaults are same as before. Previously used **Playground** default values were intended for desktop/tablet designs, where controls and text is placed on containers with a lower surface blend, like the Cards used in the Themes Playground app itself. While one can make a responsive app that does so nicely for mobile, tablet and desktop sizes too, most mobile first apps are not designed to do this. Using Playground theme defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users get started with it quicker.
 - Improved terminology used on theme colors panel. Simplified its color presentation.
-- Improved discoverability of defining and using totally custom theme colors in the Playground.
 - Seeded ColorScheme now also show the source input "Scheme defined" colors, the used FlexSchemeColor. Arranged the controls for better inclusion and presentation of the Tonal Palettes used to make the seeded ColorScheme. Tones have tooltips that present each tone.
 - Removed animation from horizontal list theme picker when clicking on it.
 - Removed animation from topic/component panel when clicking on it in the page view.
-- Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade and Zoom in to show the selected settings panel. Without any panel page change effect it was hard to notice what changed, but the default slide animation with the `PageView` that is fine one swipe, was just annoying when clicking on the panel page selector.
+- Removed animation to a page when clicking on a topic in the panel selector. Settings panel selection via it now instead uses a small Fade and Zoom in to show the selected settings panel. Without any panel page change effect it was hard to notice what changed, but the default slide animation with the `PageView` that is fine when swiping, was just annoying when clicking on the panel page selector.
 - AppBar theming can now use scaffold background color as themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
-- New design on popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
+- New design of popup menu indicators for AppBarStyle, SchemeColor selection and SurfaceStyle. Their style follow ToggleButtons height and border radius.
 - The surface style control now also has popup that always can access all styles, also in smaller UI. The ToggleButtons surface style can also be cycled by tapping on the ListTile it is in.
-- Theme colors panel got an on/off that controls the `swapLegacyOnMaterial3` setting.
+- Theme colors panel got an on/off switch, that controls the `swapLegacyOnMaterial3` setting.
 - Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
 - Added always use circular FAB feature.
-- All single option select ToggleButtons controls in a ListTile can now for convenience be toggled in sequence by just tapping on the ListTile it is used in.  
-- Changed all used `Slider.adaptive` to just `Slider`. The Cupertino one has poorer UX. You can not click on the track to move the thumb to a positions. Besides, the app presents Material theming so let's show Material widgets in its own controls on all platforms.
-- A themed `Slider` widget is now presented in the Widget Showcase, but Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic color change theming offered when its M3 version is released.
-- Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like the custom Material theme following `SwitchListTileAdaptive` variant on iOS on macOS. Besides, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. It is even nicer than the Cupertino design. Let's thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms. The `SwitchListTileAdaptive` is kept in use on examples 2 to 4, as an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platform, nor can it be themed to be so, you have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
-- FIX: Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
+- All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.  
+- Changed all used `Slider.adaptive` to just `Slider`. The Cupertino adaptive one has poorer UX. You can not click on the track to move the thumb to a positions. Besides, the app presents Material theming so let's show Material widgets in its own controls on all platforms.
+- A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
+- Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like the custom Material theme following `SwitchListTileAdaptive` variant on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. It is even nicer than the Cupertino design. Let's thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms. The `SwitchListTileAdaptive` is kept in use on examples 2 to 4, as an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platform, nor can it be themed to be so, you have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
+- Added support for adjusting background color and elevation of `BottomSheet`.
+- **FIX:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**
 
 * **New**
-  - BottomsSheet color options.
+  - Outline widths, split to shared and own values.
   - Tooltip themed delays.
 
-* **Themes Playground** 
-  - Review and fix Slider to double rounding issue, see ThemeDemo app.
+* **Themes Playground**
   - FIX: Rail indicator lock when using Flutter defaults
 
 

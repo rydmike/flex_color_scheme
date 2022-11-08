@@ -3061,7 +3061,7 @@ void main() {
     });
 
     // Test bottomSheet theming custom dark M2
-    final ThemeData tLBottomCustomM2 = FlexColorScheme.dark(
+    final ThemeData tLBottomCustomM2 = FlexThemeData.dark(
       scheme: FlexScheme.sanJuanBlue,
       useMaterial3: false,
       subThemesData: const FlexSubThemesData(
@@ -3071,7 +3071,7 @@ void main() {
         bottomSheetBackgroundColor: SchemeColor.background,
         bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
       ),
-    ).toTheme;
+    );
     test(
         'FCS7.101 GIVEN a FlexColorScheme.dark with useMaterial3:false '
         'and a custom FlexSubThemesData '
@@ -3112,7 +3112,7 @@ void main() {
     });
 
     // Test bottomSheet theming custom light M3
-    final ThemeData tLBottomCustomM3 = FlexColorScheme.light(
+    final ThemeData tLBottomCustomM3 = FlexThemeData.light(
       scheme: FlexScheme.sakura,
       useMaterial3: true,
       subThemesData: const FlexSubThemesData(
@@ -3122,7 +3122,7 @@ void main() {
         bottomSheetBackgroundColor: SchemeColor.onPrimary,
         bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
       ),
-    ).toTheme;
+    );
     test(
         'FCS7.101 GIVEN a FlexColorScheme.light with useMaterial3:true '
         'and a custom FlexSubThemesData '
