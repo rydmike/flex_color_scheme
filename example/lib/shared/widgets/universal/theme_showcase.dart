@@ -50,6 +50,9 @@ class ThemeShowcase extends StatelessWidget {
         const RadioShowcase(),
         const SizedBox(height: 8),
         const Divider(),
+        const SliderShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         const ListTileShowcase(),
         const Divider(),
         const AppBarShowcase(),
@@ -486,6 +489,53 @@ class RadioShowcase extends StatelessWidget {
           value: false,
           groupValue: true,
           onChanged: null,
+        ),
+      ],
+    );
+  }
+}
+
+class SliderShowcase extends StatefulWidget {
+  const SliderShowcase({super.key});
+
+  @override
+  State<SliderShowcase> createState() => _SliderShowcaseState();
+}
+
+class _SliderShowcaseState extends State<SliderShowcase> {
+  double value = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
+          subtitle: Slider(
+            max: 100,
+            // divisions: 100,
+            label: value.toStringAsFixed(2),
+            value: value,
+            onChanged: (double newValue) {
+              setState(() {
+                value = newValue;
+              });
+            },
+          ),
+        ),
+        ListTile(
+          title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
+          subtitle: Slider(
+            max: 100,
+            divisions: 100,
+            label: value.toStringAsFixed(0),
+            value: value,
+            onChanged: (double newValue) {
+              setState(() {
+                value = newValue.roundToDouble();
+              });
+            },
+          ),
         ),
       ],
     );
