@@ -5083,14 +5083,14 @@ class FlexColorScheme with Diagnosticable {
       // normally it defaults to primary, but if it is customized we should base
       // tinted text theme on it instead.
       final Color textHiOpacity = isDark // SDK dark 70%, light 54%
-          ? textBase.blend(colorScheme.surfaceTint, 30).withAlpha(0xCC) // 80%
-          : textBase.blend(colorScheme.surfaceTint, 40).withAlpha(0xBF); // 75%
+          ? textBase.blend(colorScheme.surfaceTint, 26).withAlpha(0xCC) // 80%
+          : textBase.blend(colorScheme.surfaceTint, 30).withAlpha(0xBF); // 75%
       final Color textMediumOpacity = isDark // SDK dark 0%, light 87%
-          ? textBase.blend(colorScheme.surfaceTint, 22)
-          : textBase.blend(colorScheme.surfaceTint, 28).withAlpha(0xF2); // 95%
-      final Color textNoOpacity = isDark // SDK dark 0%, light 0%
           ? textBase.blend(colorScheme.surfaceTint, 20)
-          : textBase.blend(colorScheme.surfaceTint, 25);
+          : textBase.blend(colorScheme.surfaceTint, 26).withAlpha(0xF2); // 95%
+      final Color textNoOpacity = isDark // SDK dark 0%, light 0%
+          ? textBase.blend(colorScheme.surfaceTint, 18)
+          : textBase.blend(colorScheme.surfaceTint, 23);
       // Apply the computed colors. With this opt-in style, text gets a hint
       // of primary and less opacity than defaults. The primary tint may
       // not work so well if you need to put text on a completely different
@@ -5132,10 +5132,10 @@ class FlexColorScheme with Diagnosticable {
       // we get even more tinted text color then when those on colors are more
       // more tinted, so it is a bit confusing.
       final Color primeHiOpacity = primaryIsDark // SDK dark 70%, light 54%
-          ? primeBase.blend(colorScheme.primary, 12).withAlpha(0xE5) // 90%
-          : primeBase.blend(colorScheme.primary, 12).withAlpha(0xCC); // 80%;
+          ? primeBase.blend(colorScheme.primary, 10).withAlpha(0xE5) // 90%
+          : primeBase.blend(colorScheme.primary, 10).withAlpha(0xD8); // 85%;
       final Color primeMediumOpacity = primaryIsDark // SDK dark 0%, light 87%
-          ? primeBase.blend(colorScheme.primary, 10)
+          ? primeBase.blend(colorScheme.primary, 9)
           : primeBase.blend(colorScheme.primary, 5).withAlpha(0xF2); // 95%;
       final Color primeNoOpacity = primaryIsDark // SDK dark 0%, light 0%
           ? primeBase.blend(colorScheme.primary, 7)
