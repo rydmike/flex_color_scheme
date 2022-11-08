@@ -123,6 +123,13 @@ class PopupMenuButtonSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const ListTile(
+          // title: Text('IconButton, CircleAvatar and DropdownButton'),
+          subtitle: Text('The theming only concerns the actual popup menu. '
+              'The popup can be used on any kind of tappable widget, above '
+              'a custom ElevatedButton is being used.'),
+        ),
       ],
     );
   }
