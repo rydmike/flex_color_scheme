@@ -26,8 +26,8 @@ void main() {
             modalElevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(28),
+                topRight: Radius.circular(28),
               ),
             ),
           ),
