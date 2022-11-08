@@ -263,21 +263,15 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Toggleable sub themes setup CODE.
   //
-  final String switchSchemeColor =
-      controller.switchSchemeColor == SchemeColor.secondary ||
-              controller.switchSchemeColor == null
-          ? ''
-          : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
-  final String checkboxSchemeColor =
-      controller.checkboxSchemeColor == SchemeColor.secondary ||
-              controller.checkboxSchemeColor == null
-          ? ''
-          : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
-  final String radioSchemeColor =
-      controller.radioSchemeColor == SchemeColor.secondary ||
-              controller.radioSchemeColor == null
-          ? ''
-          : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
+  final String switchSchemeColor = controller.switchSchemeColor == null
+      ? ''
+      : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
+  final String checkboxSchemeColor = controller.checkboxSchemeColor == null
+      ? ''
+      : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
+  final String radioSchemeColor = controller.radioSchemeColor == null
+      ? ''
+      : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
   final String unselectedIsColored = controller.unselectedToggleIsColored
       ? '    unselectedToggleIsColored: ${controller.unselectedToggleIsColored},\n'
       : '';
