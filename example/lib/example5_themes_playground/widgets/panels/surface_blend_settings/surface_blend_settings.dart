@@ -3,7 +3,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
 import 'dark_surface_mode_list_tile.dart';
@@ -252,7 +251,7 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('Light theme main colors use onColor blending'),
             subtitle:
                 const Text('In M3 design, only container colors use color '
@@ -270,7 +269,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 ? controller.setBlendLightOnColors
                 : null,
           ),
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('Plain white'),
             subtitle: const Text(
               'White Scaffold in all blend modes, '
@@ -419,7 +418,7 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('Dark theme main colors use onColor blending'),
             subtitle: const Text(
                 'In M3 dark design, not only container colors use '
@@ -437,7 +436,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 ? controller.setBlendDarkOnColors
                 : null,
           ),
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('True black'),
             subtitle: const Text(
               'Black Scaffold in all blend modes, '

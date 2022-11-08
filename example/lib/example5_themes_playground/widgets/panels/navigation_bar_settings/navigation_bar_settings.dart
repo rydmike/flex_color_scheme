@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
@@ -312,7 +311,7 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Mute unselected items'),
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
@@ -342,7 +341,7 @@ class NavigationBarSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           dense: true,
           title: const Text('Navigators use Flutter defaults'),
           subtitle: const Text('Undefined values fall back to '

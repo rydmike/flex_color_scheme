@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'theme_colors_settings/input_colors_selector.dart';
 
 // ThemeSelectorHeaderDelegate for our custom SliverPersistentHeader.
@@ -126,7 +125,7 @@ class ThemeSelector extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  child: SwitchListTileAdaptive(
+                  child: SwitchListTile(
                     contentPadding: isPhone
                         ? const EdgeInsets.symmetric(horizontal: 8)
                         : null,
@@ -139,7 +138,7 @@ class ThemeSelector extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: SwitchListTileAdaptive(
+                  child: SwitchListTile(
                     contentPadding: isPhone
                         ? const EdgeInsetsDirectional.only(start: 16, end: 0)
                         : null,
@@ -152,7 +151,7 @@ class ThemeSelector extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: SwitchListTileAdaptive(
+                  child: SwitchListTile(
                     contentPadding: isPhone
                         ? const EdgeInsets.symmetric(horizontal: 8)
                         : null,

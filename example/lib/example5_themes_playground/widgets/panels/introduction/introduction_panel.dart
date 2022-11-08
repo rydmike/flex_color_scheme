@@ -11,7 +11,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../dialogs/show_copy_setup_code_dialog.dart';
 import 'platform_popup_menu.dart';
 
@@ -85,7 +84,7 @@ class IntroductionPanel extends StatelessWidget {
               'background color, since it does not have its '
               'own value in ColorScheme.'),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Use FlexColorScheme'),
           subtitle: const Text(
             "With FlexColorScheme disabled, you can see Flutter's default "
@@ -110,7 +109,7 @@ class IntroductionPanel extends StatelessWidget {
               'Most visible change is the corner radius on Widgets, that '
               'depends on Widget type, but also font sizes in the TextTheme.'),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Use component themes'),
           subtitle: const Text('Turn ON to use the opinionated component '
               'sub-themes and adjust their settings'),
@@ -181,7 +180,7 @@ class IntroductionPanel extends StatelessWidget {
             'using its own opinionated default.',
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text(
             'Use Flutter SDK Material 3 ThemeData defaults',
           ),

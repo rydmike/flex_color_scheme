@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../shared/use_material3_text_theme.dart';
 import '../../shared/use_tinted_text_theme.dart';
 
@@ -19,7 +18,7 @@ class ComponentSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Use component sub themes'),
           subtitle: const Text('Enable opinionated widget sub themes'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
@@ -85,7 +84,7 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Themed interaction effects'),
           subtitle: const Text('The hover, focus, highlight, splash and '
               'disabled colors and effects are based on primary color.\n'
@@ -100,7 +99,7 @@ class ComponentSettings extends StatelessWidget {
         // Tooltip theme style.
         Tooltip(
           message: 'A tooltip, on the tooltip style toggle',
-          child: SwitchListTileAdaptive(
+          child: SwitchListTile(
             title: const Text(
               'Tooltip background brightness',
             ),
@@ -127,7 +126,7 @@ class ComponentSettings extends StatelessWidget {
               'ColorScheme based used theme color for each component.'),
         ),
         const Divider(height: 16),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           dense: true,
           title: const Text('Navigators use Flutter defaults'),
           subtitle: const Text('Undefined sub-theme values will fall '

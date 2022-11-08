@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
@@ -132,14 +131,14 @@ class ThemeColorsSettings extends StatelessWidget {
               'values show the colors before input modifiers, surrounding '
               "color is the effective theme's ColorScheme"),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Use Material 3 color system seed generated '
               'ColorScheme'),
           subtitle: Text(explainSeed),
           value: useSeed,
           onChanged: controller.setUseKeyColors,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Use Material 3 error colors'),
           subtitle: const Text('Override default M2 error colors and use M3 '
               'error colors, when not using seeded ColorSchemes. Seed '
@@ -157,7 +156,7 @@ class ThemeColorsSettings extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('When using Material 3 swap secondary '
               'and tertiary'),
           subtitle: const Text(
@@ -170,7 +169,7 @@ class ThemeColorsSettings extends StatelessWidget {
               controller.useMaterial3 ? controller.setSwapLegacyColors : null,
         ),
         if (isLight)
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('Light theme swap primary and secondary'),
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
@@ -183,7 +182,7 @@ class ThemeColorsSettings extends StatelessWidget {
                 : null,
           )
         else
-          SwitchListTileAdaptive(
+          SwitchListTile(
             title: const Text('Dark theme swap primary and secondary'),
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
@@ -202,7 +201,7 @@ class ThemeColorsSettings extends StatelessWidget {
           maintainState: true,
           child: Column(
             children: <Widget>[
-              SwitchListTileAdaptive(
+              SwitchListTile(
                 title: const Text('Compute dark theme'),
                 subtitle: const Text('Compute dark theme from light color '
                     'values, instead of using predefined dark colors'),
@@ -214,7 +213,7 @@ class ThemeColorsSettings extends StatelessWidget {
                         ? controller.setUseToDarkMethod
                         : null,
               ),
-              SwitchListTileAdaptive(
+              SwitchListTile(
                 title: const Text('Computed dark swaps main and container'),
                 subtitle: const Text('If swapped, you can often use them '
                     'as they are with no white blend level, if light colors '

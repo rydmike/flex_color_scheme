@@ -7,7 +7,6 @@ import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
@@ -83,7 +82,7 @@ class HomePage extends StatelessWidget {
             // https://github.com/flutter/flutter/issues/91772
             const ShowThemeDataColors(),
             const SizedBox(height: 8),
-            SwitchListTileAdaptive(
+            SwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: const Text('Use component themes'),
               subtitle: const Text('Enable opinionated widget sub themes'),

@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -87,7 +86,7 @@ class SwitchesSettings extends StatelessWidget {
 
         // const SizedBox(height: 8),
         const Divider(height: 1),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Unselected toggle color'),
           subtitle: const Text('ON: Use theme color   OFF: default grey'),
           value: controller.unselectedToggleIsColored &&

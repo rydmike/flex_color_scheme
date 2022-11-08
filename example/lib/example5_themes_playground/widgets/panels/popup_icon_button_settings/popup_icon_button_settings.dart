@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class PopupIconButtonSettings extends StatelessWidget {
@@ -133,7 +132,7 @@ class PopupIconButtonSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: IconButtonCircleAvatarDropdownTooltipShowcase(),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text(
             'Tooltip background brightness',
           ),

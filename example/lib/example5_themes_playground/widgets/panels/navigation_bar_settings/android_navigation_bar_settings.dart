@@ -112,7 +112,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         // https://github.com/flutter/flutter/issues/100027
         // Has been resolved and landed in Flutter stable.
         //
-        // SwitchListTileAdaptive(
+        // SwitchListTile(
         //   title: const Text('Android navigation bar divider'),
         //   subtitle: const Text('There is also an extra system built-in '
         //       'scrim on the nav bar when it is enabled. Recommend not '

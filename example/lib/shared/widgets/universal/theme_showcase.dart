@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'switch_list_tile_adaptive.dart';
-
 /// Theme showcase for the current theme.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
@@ -1455,7 +1453,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        SwitchListTileAdaptive(
+                        SwitchListTile(
                           title: const Text('Expand and collapse'),
                           subtitle: const Text('ON to expand  OFF to collapse\n'
                               'Only used for local control of Rail '
