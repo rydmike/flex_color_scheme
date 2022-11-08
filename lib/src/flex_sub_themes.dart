@@ -847,10 +847,31 @@ class FlexSubThemes {
   /// An opinionated [BottomSheetThemeData] with custom top corner
   /// radius.
   ///
-  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 16,
+  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 28,
   /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
   /// [kBottomSheetModalElevation] = 8.
   static BottomSheetThemeData bottomSheetTheme({
+    /// Default value for [BottomSheet.backgroundColor].
+    ///
+    /// If null, defaults to [Material]'s default.
+    final Color? backgroundColor,
+
+    /// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
+    /// presented as a modal bottom sheet.
+    ///
+    /// If null, defaults to [Material]'s default.
+    final Color? modalBackgroundColor,
+
+    /// The none modal bottom sheet elevation.
+    ///
+    /// If null, defaults to [kBottomSheetElevation] = 4.
+    final double? elevation,
+
+    /// The modal bottom sheet elevation.
+    ///
+    /// If null, defaults to [kBottomSheetModalElevation] = 8.
+    final double? modalElevation,
+
     /// The corner radius of the top corners.
     ///
     /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
@@ -862,29 +883,31 @@ class FlexSubThemes {
     /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
-    /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
-    final double elevation = kBottomSheetElevation,
-
-    /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
-    final double modalElevation = kBottomSheetModalElevation,
-
     /// The clipBehavior of the bottom sheet theme, defaults to
     /// [Clip.antiAlias] for smoother clipping when using rounded corners.
     ///
     /// This property is not available in [FlexSubThemeData] but you can use
     /// it if you otherwise use this as theme helper.
     final Clip clipBehavior = Clip.antiAlias,
+
+    /// Constrains the size of the [BottomSheet].
+    ///
+    /// If null, the bottom sheet's size will be unconstrained.
+    final BoxConstraints? constraints,
   }) =>
       BottomSheetThemeData(
-        clipBehavior: clipBehavior,
-        elevation: elevation,
-        modalElevation: modalElevation,
+        backgroundColor: backgroundColor,
+        modalBackgroundColor: modalBackgroundColor,
+        elevation: elevation ?? kBottomSheetElevation,
+        modalElevation: modalElevation ?? kBottomSheetModalElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
             topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
           ),
         ),
+        clipBehavior: clipBehavior,
+        constraints: constraints,
       );
 
   /// An opinionated [CardTheme] with custom corner radius and elevation.

@@ -5352,6 +5352,17 @@ class FlexColorScheme with Diagnosticable {
     // Use themed interaction effects on hover, focus, highlight and splash?
     final bool themedEffects = useSubThemes && subTheme.interactionEffects;
 
+    // BottomSheet Colors with non null fallback color.
+    final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
+        ? FlexSubThemes.schemeColor(
+            subTheme.bottomSheetBackgroundColor!, colorScheme)
+        : colorScheme.surface;
+    final Color bottomSheetModalColor =
+        subTheme.bottomSheetModalBackgroundColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.bottomSheetBackgroundColor!, colorScheme)
+            : colorScheme.surface;
+
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
     return ThemeData(
@@ -5747,6 +5758,7 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : null,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of buttonTheme.
       // Since the old buttons have been deprecated in Flutter 2.0.0
       // they are no longer presented or used in the code in FlexColorScheme.
       // The button theming below still makes the old buttons almost
@@ -5920,9 +5932,23 @@ class FlexColorScheme with Diagnosticable {
           : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
-              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
+              backgroundColor: useMaterial3
+                  // TODO(rydmike): Remove tint temp fix when M3 supported.
+                  ? ElevationOverlay.applySurfaceTint(
+                      bottomSheetColor,
+                      colorScheme.surfaceTint,
+                      subTheme.bottomSheetElevation ?? 4)
+                  : bottomSheetColor,
+              modalBackgroundColor: useMaterial3
+                  // TODO(rydmike): Remove tint temp fix when M3 supported.
+                  ? ElevationOverlay.applySurfaceTint(
+                      bottomSheetModalColor,
+                      colorScheme.surfaceTint,
+                      subTheme.bottomSheetModalElevation ?? 8)
+                  : bottomSheetModalColor,
               elevation: subTheme.bottomSheetElevation,
               modalElevation: subTheme.bottomSheetModalElevation,
+              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
             )
           : null,
       // Opinionated default theming for the bottom navigation bar: Use primary

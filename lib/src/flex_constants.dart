@@ -59,9 +59,9 @@ const double kInputDecoratorM3Radius = 4;
 
 /// Default border radius on top edge of bottom sheet.
 ///
-/// Not specified in M3 guide, using same as Drawer, as this would fit with
-/// same design since this is like a drawer, but from the bottom.
-const double kBottomSheetBorderRadius = kDrawerRadius;
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/bottom-sheets/specs
+const double kBottomSheetBorderRadius = 28;
 
 /// Default border radius on dialogs.
 ///

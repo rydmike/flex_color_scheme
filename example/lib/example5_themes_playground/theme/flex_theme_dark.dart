@@ -124,22 +124,25 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             useTextTheme: controller.useTextTheme,
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
-            //
+            // Default radius for all widgets, if not null.
             defaultRadius: controller.defaultRadius,
-            bottomSheetRadius: controller.bottomSheetBorderRadius,
+            // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
-            elevatedButtonRadius: controller.elevatedButtonBorderRadius,
-            outlinedButtonRadius: controller.outlinedButtonBorderRadius,
-            toggleButtonsRadius: controller.toggleButtonsBorderRadius,
-            //
             textButtonSchemeColor: controller.textButtonSchemeColor,
+            // ElevatedButton settings.
+            elevatedButtonRadius: controller.elevatedButtonBorderRadius,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
             elevatedButtonSecondarySchemeColor:
                 controller.elevatedButtonSecondarySchemeColor,
+            // OutlineButton settings.
+            outlinedButtonRadius: controller.outlinedButtonBorderRadius,
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             outlinedButtonOutlineSchemeColor:
                 controller.outlinedButtonOutlineSchemeColor,
+            // ToggleButtons settings.
+            toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            //
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
@@ -153,11 +156,18 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.inputDecoratorUnfocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
-            //
+            // FAB settings.
             fabUseShape: controller.fabUseShape,
             fabAlwaysCircular: controller.fabAlwaysCircular,
             fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
+            // BottomSheet settings.
+            bottomSheetElevation: controller.bottomSheetElevation,
+            bottomSheetModalElevation: controller.bottomSheetElevation,
+            bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetRadius: controller.bottomSheetBorderRadius,
+            //
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
             chipSchemeColor: controller.chipSchemeColor,
             chipRadius: controller.chipBorderRadius,
@@ -172,7 +182,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.appBarBackgroundSchemeColorDark,
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
-            // BottomNavigationBar settings
+            // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavBarSelectedSchemeColor,
             bottomNavigationBarUnselectedLabelSchemeColor:
@@ -194,7 +204,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
-            // NavigationBar settings
+            // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
@@ -213,7 +223,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationBarOpacity: controller.navBarOpacity,
             navigationBarHeight: controller.navBarHeight,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
-            // NavigationRail settings
+            // NavigationRail settings.
             navigationRailSelectedLabelSchemeColor:
                 controller.navRailSelectedSchemeColor,
             navigationRailUnselectedLabelSchemeColor:

@@ -242,6 +242,11 @@ class ThemeController with ChangeNotifier {
         Store.defaultTabBarItemSchemeColorDark);
     //
     // BottomSheet SETTINGS.
+    //
+    _bottomSheetSchemeColor = await _themeService.load(
+        Store.keyBottomSheetSchemeColor, Store.defaultBottomSheetSchemeColor);
+    _bottomSheetElevation = await _themeService.load(
+        Store.keyBottomSheetElevation, Store.defaultBottomSheetElevation);
     _bottomSheetBorderRadius = await _themeService.load(
         Store.keyBottomSheetBorderRadius, Store.defaultBottomSheetBorderRadius);
     //
@@ -551,6 +556,8 @@ class ThemeController with ChangeNotifier {
     setTabBarItemSchemeColorDark(Store.defaultTabBarItemSchemeColorDark, false);
     //
     // BottomSheet SETTINGS.
+    setBottomSheetSchemeColor(Store.defaultBottomSheetSchemeColor, false);
+    setBottomSheetElevation(Store.defaultBottomSheetElevation, false);
     setBottomSheetBorderRadius(Store.defaultBottomSheetBorderRadius, false);
     //
     // Android System Navigator bar SETTINGS.
@@ -1464,8 +1471,26 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTabBarItemSchemeColorDark, value));
   }
 
-  //
   // BottomSheet SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _bottomSheetSchemeColor;
+  SchemeColor? get bottomSheetSchemeColor => _bottomSheetSchemeColor;
+  void setBottomSheetSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _bottomSheetSchemeColor) return;
+    _bottomSheetSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomSheetSchemeColor, value));
+  }
+
+  late double? _bottomSheetElevation;
+  double? get bottomSheetElevation => _bottomSheetElevation;
+  void setBottomSheetElevation(double? value, [bool notify = true]) {
+    if (value == _bottomSheetElevation) return;
+    _bottomSheetElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomSheetElevation, value));
+  }
 
   late double? _bottomSheetBorderRadius;
   double? get bottomSheetBorderRadius => _bottomSheetBorderRadius;

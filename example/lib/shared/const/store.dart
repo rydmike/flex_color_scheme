@@ -426,36 +426,48 @@ class Store {
   // Key used to read and save the tabBarIndicatorLight value.
   static const String keyTabBarIndicatorLight = 'tabBarIndicatorLight';
   // Default value for the tabBarIndicatorLight, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarIndicatorLight = null;
 
   // Key used to read and save the tabBarIndicatorDark value.
   static const String keyTabBarIndicatorDark = 'tabBarIndicatorDark';
   // Default value for the tabBarIndicatorDark, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarIndicatorDark = null;
 
   // Key used to read and save the tabBarItemSchemeColor value.
   static const String keyTabBarItemSchemeColorLight =
       'tabBarItemSchemeColorLight';
   // Default value for the tabBarItemSchemeColor, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorLight = null;
 
   // Key used to read and save the tabBarItemSchemeColorDark value.
   static const String keyTabBarItemSchemeColorDark =
       'tabBarItemSchemeColorDark';
   // Default value for the tabBarItemSchemeColorDark, also to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
   // BottomSheet SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the bottomSheetSchemeColor value.
+  static const String keyBottomSheetSchemeColor = 'bottomSheetSchemeColor';
+  // Default value for the bottomSheetSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomSheetSchemeColor = null;
+
+  // Key used to read and save the bottomSheetElevation value.
+  static const String keyBottomSheetElevation = 'bottomSheetElevation';
+  // Default value for the bottomSheetElevation, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultBottomSheetElevation = null;
+
   // Key used to read and save the bottomSheetBorderRadius value.
   static const String keyBottomSheetBorderRadius = 'bottomSheetBorderRadius';
   // Default value for the bottomSheetBorderRadius, also to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const double? defaultBottomSheetBorderRadius = null;
 
   // Android System Navigator bar SETTINGS.

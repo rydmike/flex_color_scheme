@@ -12,28 +12,84 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final String labelForDefaultSelectedItem = isDark
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool isDark = theme.brightness == Brightness.dark;
+
+    final String snackDefaultColorLabel = isDark
         ? (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default (light primary, 93% opacity)'
             : 'default (Light grey)'
         : (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default (dark primary, 95% opacity)'
             : 'default (dark grey)';
-    final String sheetRadiusDefaultLabel =
-        controller.bottomSheetBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 16'
+
+    // TODO(rydmike): Update BottomSheet M3 default when M3 version is released.
+    final String sheetDefaultColorLabel = controller.useSubThemes &&
+            controller.useFlexColorScheme
+        ? 'default (surface)'
+        : useMaterial3
+            ? 'default (theme.canvasColor)' // Will become surface later in SDK.
+            : 'default (theme.canvasColor)';
+
+    final String sheetElevationDefaultLabel =
+        controller.bottomSheetElevation == null
+            ? 'modal 8\nfree 4'
             : controller.bottomSheetBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+
+    final String sheetRadiusDefaultLabel =
+        controller.bottomSheetBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 28'
+            : controller.bottomSheetBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Padding(
           padding: EdgeInsets.all(16),
-          child: BannerBottomSheetSnackShowcase(),
+          child: MaterialBannerSnackBarShowcase(),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('SnackBar background color'),
+          labelForDefault: snackDefaultColorLabel,
+          index: controller.snackBarSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSnackBarSchemeColor(null);
+                  } else {
+                    controller
+                        .setSnackBarSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: BottomSheetShowcase(),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('BottomSheet background color'),
+          labelForDefault: sheetDefaultColorLabel,
+          index: controller.bottomSheetSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setBottomSheetSchemeColor(null);
+                  } else {
+                    controller
+                        .setBottomSheetSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -66,7 +122,7 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -77,29 +133,61 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
                                   ?.toStringAsFixed(0) ??
                               '')
                       : 'default 0',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
         ),
-        ColorSchemePopupMenu(
-          title: const Text('SnackBar background color'),
-          labelForDefault: labelForDefaultSelectedItem,
-          index: controller.snackBarSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSnackBarSchemeColor(null);
-                  } else {
-                    controller
-                        .setSnackBarSchemeColor(SchemeColor.values[index]);
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('BottomSheet elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 30,
+            divisions: 31,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetElevation == null ||
+                        (controller.bottomSheetElevation ?? -1) < 0
+                    ? sheetElevationDefaultLabel
+                    : (controller.bottomSheetElevation?.toStringAsFixed(0) ??
+                        '')
+                : 'default 0',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setBottomSheetElevation(
+                        value < 0 ? null : value.roundToDouble());
                   }
-                }
-              : null,
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.bottomSheetElevation == null ||
+                              (controller.bottomSheetElevation ?? -1) < 0
+                          ? sheetElevationDefaultLabel
+                          : (controller.bottomSheetElevation
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

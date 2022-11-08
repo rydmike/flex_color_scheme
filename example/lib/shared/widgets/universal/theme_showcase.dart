@@ -73,7 +73,8 @@ class ThemeShowcase extends StatelessWidget {
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
-        const BannerBottomSheetSnackShowcase(),
+        const MaterialBannerSnackBarShowcase(),
+        const BottomSheetShowcase(),
         const Divider(height: 32),
         const MaterialShowcase(),
         const Divider(height: 32),
@@ -1621,8 +1622,8 @@ class AlertDialogShowcase extends StatelessWidget {
   }
 }
 
-class BannerBottomSheetSnackShowcase extends StatelessWidget {
-  const BannerBottomSheetSnackShowcase({super.key});
+class MaterialBannerSnackBarShowcase extends StatelessWidget {
+  const MaterialBannerSnackBarShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1668,6 +1669,35 @@ class BannerBottomSheetSnackShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 24),
+        Material(
+          color: snackBackground,
+          elevation: 0,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: SizedBox(
+            height: 40,
+            child: Center(
+              child: Text('A Material SnackBar, style simulation only',
+                  style: snackStyle),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BottomSheetShowcase extends StatelessWidget {
+  const BottomSheetShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 24),
         AbsorbPointer(
           child: BottomSheet(
             enableDrag: false,
@@ -1681,28 +1711,13 @@ class BannerBottomSheetSnackShowcase extends StatelessWidget {
                     const SizedBox(height: 20),
                     Text(
                       'A Material BottomSheet',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: theme.textTheme.titleMedium,
                     ),
                     Text(
                       'Like Drawer it uses Material of type canvas as '
                       'background.',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: theme.textTheme.bodySmall,
                       textAlign: TextAlign.center,
-                    ),
-                    const Spacer(),
-                    Material(
-                      color: snackBackground,
-                      elevation: 0,
-                      surfaceTintColor: colorScheme.surfaceTint,
-                      shadowColor: colorScheme.shadow,
-                      child: SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                              'A Material SnackBar, style simulation only',
-                              style: snackStyle),
-                        ),
-                      ),
                     ),
                   ],
                 ),

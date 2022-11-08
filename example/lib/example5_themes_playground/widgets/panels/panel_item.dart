@@ -118,12 +118,15 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.branding_watermark_outlined,
   ),
   PanelItem(
-    panelLabel: 'Banner, BottomSheet and SnackBar',
-    buttonLabel: 'Banner\nSheet, Snack',
+    panelLabel: 'MaterialBanner, SnackBar and BottomSheet',
+    buttonLabel: 'Banner\nSnack, Sheet',
     icon: Icons.call_to_action_outlined,
   ),
   PanelItem(
-      panelLabel: 'Material', buttonLabel: 'Material', icon: Icons.square),
+    panelLabel: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
+  ),
   PanelItem(
     panelLabel: 'Card',
     buttonLabel: 'Card',

@@ -1154,8 +1154,9 @@ class FlexSubThemesData with Diagnosticable {
   /// [BottomSheet] uses as background color when presented as a none modal
   /// bottom sheet.
   ///
-  /// If not defined, defaults to default color of [Material] which is
-  /// theme.canvasColor which typically is assigned the same value as
+  /// If not defined, defaults to Material 3 default ColorScheme.surface.
+  /// None FlexColorScheme using defaults to default color of [Material] which
+  /// is theme.canvasColor which typically is assigned the same value as
   /// theme.colorScheme.background.
   final SchemeColor? bottomSheetBackgroundColor;
 
@@ -1163,32 +1164,30 @@ class FlexSubThemesData with Diagnosticable {
   /// [BottomSheet] uses as background color when presented as a modal
   /// bottom sheet.
   ///
-  /// If not defined, defaults to default color of [Material] which is
-  /// theme.canvasColor which typically is assigned the same value as
+  /// If not defined, defaults to Material 3 default ColorScheme.surface.
+  /// None FlexColorScheme using defaults to default color of [Material] which
+  /// is theme.canvasColor which typically is assigned the same value as
   /// theme.colorScheme.background.
   final SchemeColor? bottomSheetModalBackgroundColor;
 
   /// Border radius value for [BottomSheet].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kBottomSheetBorderRadius] 16p.
+  /// [kBottomSheetBorderRadius] 28.
   ///
-  /// This value is not mentioned in the
-  /// M3 Specification. It is based on an assumption that a sliding in
-  /// surface from the bottom should have the same rounding on its top corners
-  /// as the [Drawer] does on its visible side edges.
-  /// /// https://m3.material.io/components/navigation-drawer/specs
+  /// FCS default, follows the Material M3 guide:
+  /// https://m3.material.io/components/text-fields/specs
   final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].
   ///
-  /// Defaults to [kBottomSheetElevation] = 4.
-  final double bottomSheetElevation;
+  /// If null, defaults to [kBottomSheetElevation] = 4.
+  final double? bottomSheetElevation;
 
   /// Elevation of modal [BottomSheet].
   ///
-  /// Defaults to [kBottomSheetModalElevation] = 8.
-  final double bottomSheetModalElevation;
+  /// If null, defaults to [kBottomSheetModalElevation] = 8.
+  final double? bottomSheetModalElevation;
 
   // ---------------------------------------------------------------------------
   //
