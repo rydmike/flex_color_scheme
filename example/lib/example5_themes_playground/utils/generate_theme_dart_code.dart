@@ -203,6 +203,22 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetRadius = controller.bottomSheetBorderRadius != null
       ? '    bottomSheetRadius: ${controller.bottomSheetBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String bottomSheetElevation = controller.bottomSheetElevation != null
+      ? '    bottomSheetElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String bottomSheetModalElevation = controller.bottomSheetElevation !=
+          null
+      ? '    bottomSheetModalElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String bottomSheetBackgroundColor = controller.bottomSheetSchemeColor !=
+          null
+      ? '    bottomSheetBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      : '';
+  final String bottomSheetModalBackgroundColor = controller
+              .bottomSheetSchemeColor !=
+          null
+      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      : '';
   //
   // Material button sub themes border radius setup CODE.
   //
@@ -595,21 +611,29 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendLightTextTheme'
           '$useTextTheme'
           '$defRadius'
+          //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$bottomSheetRadius'
           '$textButtonBorderRadius'
-          '$elevatedButtonBorderRadius'
-          '$outlinedButtonBorderRadius'
-          '$toggleButtonsBorderRadius'
-          //
           '$textButtonSchemeColor'
+          //
+          '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
           '$elevatedButtonSecondarySchemeColor'
+          //
+          '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          //
+          '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          //
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
           //
           '$switchSchemeColor'
           '$checkboxSchemeColor'
@@ -692,21 +716,29 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendDarkTextTheme'
           '$useTextTheme'
           '$defRadius'
+          //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$bottomSheetRadius'
           '$textButtonBorderRadius'
-          '$elevatedButtonBorderRadius'
-          '$outlinedButtonBorderRadius'
-          '$toggleButtonsBorderRadius'
-          //
           '$textButtonSchemeColor'
+          //
+          '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
           '$elevatedButtonSecondarySchemeColor'
+          //
+          '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          //
+          '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          //
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
           //
           '$switchSchemeColor'
           '$checkboxSchemeColor'

@@ -7,7 +7,7 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/pages/page_examples.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
-import '../panels/banner_bottom_sheet_snack_settings/banner_bottom_sheet_snack_settings.dart';
+import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/component_settings/component_settings.dart';
@@ -213,7 +213,7 @@ class _LargeGridViewState extends State<LargeGridView>
                   SwitchesSettings(themeCtrl),
                   ListTileSettings(themeCtrl),
                   DialogSettings(themeCtrl),
-                  BannerBottomSheetSnackSettings(themeCtrl),
+                  BottomSheetBannerSnackSettings(themeCtrl),
                   const MaterialPanel(),
                   CardSettings(themeCtrl),
                   TextThemeSettings(themeCtrl),

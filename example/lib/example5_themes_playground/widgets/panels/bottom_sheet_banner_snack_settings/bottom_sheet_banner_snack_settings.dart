@@ -5,8 +5,8 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-class BannerBottomSheetSnackSettings extends StatelessWidget {
-  const BannerBottomSheetSnackSettings(this.controller, {super.key});
+class BottomSheetBannerSnackSettings extends StatelessWidget {
+  const BottomSheetBannerSnackSettings(this.controller, {super.key});
 
   final ThemeController controller;
 
@@ -52,45 +52,7 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: MaterialBannerSnackBarShowcase(),
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('SnackBar background color'),
-          labelForDefault: snackDefaultColorLabel,
-          index: controller.snackBarSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSnackBarSchemeColor(null);
-                  } else {
-                    controller
-                        .setSnackBarSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        const Divider(),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: BottomSheetShowcase(),
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('BottomSheet background color'),
-          labelForDefault: sheetDefaultColorLabel,
-          index: controller.bottomSheetSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomSheetSchemeColor(null);
-                  } else {
-                    controller
-                        .setBottomSheetSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
+        const SizedBox(height: 8),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('BottomSheet border radius'),
@@ -140,6 +102,12 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: BottomSheetShowcase(),
+        ),
+        const SizedBox(height: 16),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('BottomSheet elevation'),
@@ -188,6 +156,45 @@ class BannerBottomSheetSnackSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('BottomSheet background color'),
+          labelForDefault: sheetDefaultColorLabel,
+          index: controller.bottomSheetSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setBottomSheetSchemeColor(null);
+                  } else {
+                    controller
+                        .setBottomSheetSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('The modal and none modal BottomSheet '
+              'have separate API values for elevation and background color. '
+              'They only share controls in the Playground. If you need '
+              'separate values you edit the copied code.'),
+        ),
+        const SizedBox(height: 16),
+        const MaterialBannerSnackBarShowcase(),
+        ColorSchemePopupMenu(
+          title: const Text('SnackBar background color'),
+          labelForDefault: snackDefaultColorLabel,
+          index: controller.snackBarSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSnackBarSchemeColor(null);
+                  } else {
+                    controller
+                        .setSnackBarSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
       ],
     );

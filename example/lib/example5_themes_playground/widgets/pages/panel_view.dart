@@ -7,7 +7,7 @@ import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
-import '../panels/banner_bottom_sheet_snack_settings/banner_bottom_sheet_snack_settings.dart';
+import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/component_settings/component_settings.dart';
@@ -247,7 +247,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(BannerBottomSheetSnackSettings(themeCtrl),
+                  PanelPage(BottomSheetBannerSnackSettings(themeCtrl),
                       pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(const MaterialPanel(), pageIndex, themeCtrl,

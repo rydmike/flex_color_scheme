@@ -76,8 +76,9 @@ class ThemeShowcase extends StatelessWidget {
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
-        const MaterialBannerSnackBarShowcase(),
         const BottomSheetShowcase(),
+        const SizedBox(height: 32),
+        const MaterialBannerSnackBarShowcase(),
         const Divider(height: 32),
         const MaterialShowcase(),
         const Divider(height: 32),
@@ -1648,6 +1649,47 @@ class AlertDialogShowcase extends StatelessWidget {
   }
 }
 
+class BottomSheetShowcase extends StatelessWidget {
+  const BottomSheetShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        AbsorbPointer(
+          child: BottomSheet(
+            enableDrag: false,
+            onClosing: () {},
+            builder: (final BuildContext context) => SizedBox(
+              height: 150,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'A Material BottomSheet',
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Like Drawer it uses Material of type canvas as '
+                      'background.',
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class MaterialBannerSnackBarShowcase extends StatelessWidget {
   const MaterialBannerSnackBarShowcase({super.key});
 
@@ -1677,7 +1719,6 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
         const Divider(height: 1),
         MaterialBanner(
           padding: const EdgeInsets.all(20),
@@ -1694,7 +1735,7 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
         Material(
           color: snackBackground,
           elevation: 0,
@@ -1705,49 +1746,6 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
             child: Center(
               child: Text('A Material SnackBar, style simulation only',
                   style: snackStyle),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BottomSheetShowcase extends StatelessWidget {
-  const BottomSheetShowcase({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const SizedBox(height: 24),
-        AbsorbPointer(
-          child: BottomSheet(
-            enableDrag: false,
-            onClosing: () {},
-            builder: (final BuildContext context) => SizedBox(
-              height: 150,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    Text(
-                      'A Material BottomSheet',
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    Text(
-                      'Like Drawer it uses Material of type canvas as '
-                      'background.',
-                      style: theme.textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
         ),
