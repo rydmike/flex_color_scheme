@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import 'system_nav_bar_style_buttons.dart';
+import 'system_nav_bar_style_toggle_buttons.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
 //
@@ -93,10 +93,19 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               '${explainStyle(controller.sysNavBarStyle, isLight)}'),
         ),
         ListTile(
-          trailing: SystemNavBarStyleButtons(
+          trailing: SystemNavBarStyleToggleButtons(
             style: controller.sysNavBarStyle,
             onChanged: controller.setSysNavBarStyle,
           ),
+          onTap: () {
+            if (controller.sysNavBarStyle.index + 1 >=
+                FlexSystemNavBarStyle.values.length) {
+              controller.setSysNavBarStyle(FlexSystemNavBarStyle.values[0]);
+            } else {
+              controller.setSysNavBarStyle(FlexSystemNavBarStyle
+                  .values[controller.sysNavBarStyle.index + 1]);
+            }
+          },
         ),
         // TODO(rydmike): Put back when issue #100027 is resolved.
         // This switch is removed from demo until issue:

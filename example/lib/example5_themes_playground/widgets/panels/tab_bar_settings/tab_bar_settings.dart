@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import 'tab_bar_style_buttons.dart';
+import 'tab_bar_list_tile.dart';
 
 class TabBarSettings extends StatelessWidget {
   const TabBarSettings(this.controller, {super.key});
@@ -53,18 +53,7 @@ class TabBarSettings extends StatelessWidget {
               ? controller.tabBarStyle
               : FlexTabBarStyle.flutterDefault)),
         ),
-        // const SizedBox(height: 4),
-        ListTile(
-          enabled: controller.useFlexColorScheme,
-          trailing: TabBarStyleButtons(
-            style: controller.useFlexColorScheme
-                ? controller.tabBarStyle
-                : FlexTabBarStyle.flutterDefault,
-            onChanged: controller.useFlexColorScheme
-                ? controller.setTabBarStyle
-                : null,
-          ),
-        ),
+        TabBarStyleListTile(controller: controller),
         const ListTile(
           title: Text('Custom colors'),
           subtitle: Text('With component themes enabled you can select '

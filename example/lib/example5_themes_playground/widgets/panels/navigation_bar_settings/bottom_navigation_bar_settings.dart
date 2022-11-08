@@ -226,13 +226,12 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           dense: true,
-          title: const Text('Use Flutter defaults'),
-          subtitle: const Text('Undefined color values will fall back to '
+          title: const Text('Navigators use Flutter defaults'),
+          subtitle: const Text('Undefined values fall back to '
               'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Here, both selected and unselected color have to be null before '
+              'Both selected and unselected color have to be null before '
               'the item colors can fall back to Flutter defaults. '
-              'This setting affects many component themes that implement it. '
-              'It is included on panels where it has an impact. '
+              'This setting affects navigation bars and rail. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&

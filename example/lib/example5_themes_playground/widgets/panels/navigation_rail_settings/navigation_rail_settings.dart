@@ -2,25 +2,14 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_rail_label_type_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'navigation_rail_label_type_list_tile.dart';
 
 class NavigationRailSettings extends StatelessWidget {
   const NavigationRailSettings(this.controller, {super.key});
   final ThemeController controller;
-
-  String explainLabelStyle(final NavigationRailLabelType labelStyle) {
-    switch (labelStyle) {
-      case NavigationRailLabelType.none:
-        return 'Items have no labels';
-      case NavigationRailLabelType.selected:
-        return 'Only selected item has a label';
-      case NavigationRailLabelType.all:
-        return 'All items have labels';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -280,37 +269,9 @@ class NavigationRailSettings extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Labels when rail is collapsed'),
-          subtitle: Text(explainLabelStyle(
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.navRailLabelType
-                  : NavigationRailLabelType.none)),
-          trailing: NavigationRailLabelTypeButtons(
-            style: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navRailLabelType
-                : NavigationRailLabelType.none,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setNavRailLabelType
-                : null,
-          ),
-        ),
+        NavigationRailLabelBehaviorListTile(controller: controller),
         NavigationRailShowcase(
           height: 700,
-          // TODO(rydmike): Raise Flutter issue about this too eager assert.
-          // This is used as a work around to avoid unnecessarily eager
-          // assert in SDK.
-          // Assertion: line 562: 'useIndicator || indicatorColor == null'
-          // A flag is used to do trickery with transparency for this
-          // assertion that we cannot avoid since the theme controls the
-          // setup and user it. User may enter combo that has no effect, and
-          // triggers the assert.
-          // It should be obvious that if you have no indicator color
-          // you cannot use an indicator, why assert it? Just don't show one!
-          useAssertWorkAround:
-              (!controller.useSubThemes || !controller.useFlexColorScheme) &&
-                  !controller.useMaterial3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -386,13 +347,12 @@ class NavigationRailSettings extends StatelessWidget {
               ),
               SwitchListTileAdaptive(
                 dense: true,
-                title: const Text('Use Flutter defaults'),
-                subtitle: const Text('Undefined values will fall back to '
+                title: const Text('Navigators use Flutter defaults'),
+                subtitle: const Text('Undefined values fall back to '
                     'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-                    'Here, both selected and unselected color have to be null '
-                    'before the item colors can fall back to Flutter defaults. '
-                    'This setting affects many component themes that implement '
-                    'it. It is included on panels where it has an impact. '
+                    'Both selected and unselected color have to be null before '
+                    'the item colors can fall back to Flutter defaults. '
+                    'This setting affects navigation bars and rail. '
                     'See API docs for more info.'),
                 value: controller.useFlutterDefaults &&
                     controller.useSubThemes &&

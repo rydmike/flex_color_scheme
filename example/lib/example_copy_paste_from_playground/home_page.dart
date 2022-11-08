@@ -406,7 +406,7 @@ class _NavigationRailShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
-      child: const NavigationRailShowcase(useAssertWorkAround: false),
+      child: const NavigationRailShowcase(),
     );
   }
 }

@@ -44,6 +44,7 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         const SizedBox(width: 0.01),
         Expanded(
+          // TODO(rydmike): Check if this old finding still applies.
           // Wrapping the Scaffold in a Row, with an almost zero width SizedBox
           // before the Scaffold that is in an Expanded widget so it fills the
           // available screen, causes the PopupMenu to open up right aligned on
@@ -274,9 +275,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Divider(),
                   Text('Theme Showcase', style: headlineMedium),
-                  ThemeShowcase(
-                    useRailAssertWorkAround: !controller.useSubThemes,
-                  ),
+                  const ThemeShowcase(),
                 ],
               ),
             ),

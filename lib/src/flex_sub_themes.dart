@@ -3435,6 +3435,7 @@ class FlexSubThemes {
   }
 
   // TODO(rydmike): Add actual M3 ToggleButtons style when it arrives in SDK.
+  //   May never arrive there is mention of a potentially new replacing widget.
   /// An opinionated [ToggleButtonsThemeData] theme.
   ///
   /// The adjustable button corner [radius] defaults to 20 this is new

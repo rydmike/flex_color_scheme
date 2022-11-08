@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
 
 /// Widget using [ToggleButtons) that can be used to toggle the label style
-/// of a [NavigationBar].
+/// of a [NavigationRail].
 ///
 /// This is a simple Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
-class NavigationBarLabelBehaviorButtons extends StatelessWidget {
-  const NavigationBarLabelBehaviorButtons({
+class NavigationRailLabelTypeToggleButtons extends StatelessWidget {
+  const NavigationRailLabelTypeToggleButtons({
     super.key,
-    this.labelBehavior,
+    this.style,
     this.onChanged,
   });
-  final NavigationDestinationLabelBehavior? labelBehavior;
-  final ValueChanged<NavigationDestinationLabelBehavior>? onChanged;
+  final NavigationRailLabelType? style;
+  final ValueChanged<NavigationRailLabelType>? onChanged;
 
   @override
   Widget build(BuildContext context) {
     final List<bool> isSelected = <bool>[
-      labelBehavior == NavigationDestinationLabelBehavior.alwaysHide,
-      labelBehavior == NavigationDestinationLabelBehavior.onlyShowSelected,
-      labelBehavior == NavigationDestinationLabelBehavior.alwaysShow,
+      style == NavigationRailLabelType.none,
+      style == NavigationRailLabelType.selected,
+      style == NavigationRailLabelType.all,
     ];
     return ToggleButtons(
       isSelected: isSelected,
       onPressed: onChanged == null
           ? null
           : (int index) {
-              if (index == 0) {
-                onChanged?.call(NavigationDestinationLabelBehavior.alwaysHide);
-              } else if (index == 1) {
-                onChanged
-                    ?.call(NavigationDestinationLabelBehavior.onlyShowSelected);
-              } else {
-                onChanged?.call(NavigationDestinationLabelBehavior.alwaysShow);
-              }
+              onChanged?.call(NavigationRailLabelType.values[index]);
             },
       children: const <Widget>[
         Tooltip(

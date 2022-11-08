@@ -157,7 +157,6 @@ enum FlexTabBarStyle {
   /// [FlexColorScheme], prefer using [forAppBar] for that.
   flutterDefault,
 
-  // TODO(rydmike): Try a contrasting color from tonal palettes.
   /// An experimental [TabBarTheme] mode that works on both primary and
   /// background colors.
   ///
@@ -5240,6 +5239,8 @@ class FlexColorScheme with Diagnosticable {
               : Colors.white;
         case FlexTabBarStyle.universal:
           // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo.
+          //   Try a contrasting color from tonal palettes, will work if using
+          //   seeded color scheme, but not neceassrily otherwise.
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%

@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            ThemeShowcase(useRailAssertWorkAround: !controller.useSubThemes),
+            const ThemeShowcase(),
           ],
         ),
       ),

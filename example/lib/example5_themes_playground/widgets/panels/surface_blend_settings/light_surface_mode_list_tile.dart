@@ -22,6 +22,7 @@ class LightSurfaceModeListTile extends StatelessWidget {
     return ListTile(
       title: title,
       subtitle: subtitle,
+      trailing: LightSurfaceModeToggleButtons(controller: controller),
       onTap: () {
         // We skip the last custom item and go to start again before it.
         if (mode.index + 1 >= FlexSurfaceMode.values.length - 1) {
@@ -31,7 +32,6 @@ class LightSurfaceModeListTile extends StatelessWidget {
               .setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
         }
       },
-      trailing: LightSurfaceModeToggleButtons(controller: controller),
     );
   }
 }

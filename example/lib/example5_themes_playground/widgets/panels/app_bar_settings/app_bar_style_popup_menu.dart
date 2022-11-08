@@ -136,6 +136,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
+                // TODO(rydmike): Consider outlineVariant when it lands.
+                borderColor: theme.dividerColor,
                 backgroundColor: i >= FlexAppBarStyle.values.length
                     ? _appBarStyleColor(
                         null,
@@ -173,6 +175,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
           ],
         ),
         trailing: ColorSchemeBox(
+          // TODO(rydmike): Consider colorScheme.outlineVariant when it lands.
+          borderColor: theme.dividerColor,
           backgroundColor: enabled && !useDefault
               ? _appBarStyleColor(
                   FlexAppBarStyle.values[index],

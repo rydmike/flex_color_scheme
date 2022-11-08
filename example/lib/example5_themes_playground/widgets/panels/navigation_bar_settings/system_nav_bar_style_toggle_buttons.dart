@@ -2,8 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 // Widget used to change the used app bar style mode in example 5.
-class SystemNavBarStyleButtons extends StatelessWidget {
-  const SystemNavBarStyleButtons({
+class SystemNavBarStyleToggleButtons extends StatelessWidget {
+  const SystemNavBarStyleToggleButtons({
     super.key,
     required this.style,
     required this.onChanged,

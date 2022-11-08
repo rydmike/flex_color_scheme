@@ -2,27 +2,15 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_bar_label_behavior_buttons.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
 class NavigationBarSettings extends StatelessWidget {
   const NavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
-
-  String explainLabelStyle(
-      final NavigationDestinationLabelBehavior labelBehavior) {
-    switch (labelBehavior) {
-      case NavigationDestinationLabelBehavior.alwaysHide:
-        return 'Items have no labels';
-      case NavigationDestinationLabelBehavior.onlyShowSelected:
-        return 'Only selected item has a label';
-      case NavigationDestinationLabelBehavior.alwaysShow:
-        return 'All items have labels';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -333,23 +321,7 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged:
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Label behavior'),
-          subtitle: Text(explainLabelStyle(
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.navBarLabelBehavior
-                  : NavigationDestinationLabelBehavior.alwaysShow)),
-          trailing: NavigationBarLabelBehaviorButtons(
-            labelBehavior:
-                controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.navBarLabelBehavior
-                    : NavigationDestinationLabelBehavior.alwaysShow,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setNavBarLabelBehavior
-                : null,
-          ),
-        ),
+        NavigationBarLabelBehaviorListTile(controller: controller),
         const Divider(height: 1),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -372,13 +344,12 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileAdaptive(
           dense: true,
-          title: const Text('Use Flutter defaults'),
-          subtitle: const Text('Undefined values will fall back to '
+          title: const Text('Navigators use Flutter defaults'),
+          subtitle: const Text('Undefined values fall back to '
               'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Here, both selected and unselected color have to be null before '
+              'Both selected and unselected color have to be null before '
               'the item colors can fall back to Flutter defaults. '
-              'This setting affects many component themes that implement it. '
-              'It is included on panels where it has an impact. '
+              'This setting affects navigation bars and rail. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&

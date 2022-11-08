@@ -129,11 +129,10 @@ class ComponentSettings extends StatelessWidget {
         const Divider(height: 16),
         SwitchListTileAdaptive(
           dense: true,
-          title: const Text('Use Flutter defaults'),
+          title: const Text('Navigators use Flutter defaults'),
           subtitle: const Text('Undefined sub-theme values will fall '
               'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'This setting affects component themes that implement it, '
-              'currently BottomNavigationBar, NavigationBar and '
+              'This setting affects BottomNavigationBar, NavigationBar and '
               'NavigationRail. See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&
