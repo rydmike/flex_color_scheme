@@ -11,6 +11,7 @@ import '../shared/widgets/app/show_sub_theme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_popup_menu.dart';
 
@@ -122,7 +123,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           if (isLight) ...<Widget>[
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep primary color'),
                               value: controller.useKeyColors &&
@@ -131,7 +132,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepPrimary
                                   : null,
                             ),
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep secondary color'),
                               value: controller.useKeyColors &&
@@ -140,7 +141,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepSecondary
                                   : null,
                             ),
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep tertiary color'),
                               value: controller.useKeyColors &&
@@ -150,7 +151,7 @@ class HomePage extends StatelessWidget {
                                   : null,
                             ),
                           ] else ...<Widget>[
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep primary color'),
                               value: controller.useKeyColors &&
@@ -159,7 +160,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepDarkPrimary
                                   : null,
                             ),
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep secondary color'),
                               value: controller.useKeyColors &&
@@ -168,7 +169,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepDarkSecondary
                                   : null,
                             ),
-                            SwitchListTile(
+                            SwitchListTileAdaptive(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep tertiary color'),
                               value: controller.useKeyColors &&
@@ -185,7 +186,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 8),
                           const ShowSubThemeColors(),
                           const SizedBox(height: 8),
-                          SwitchListTile(
+                          SwitchListTileAdaptive(
                             contentPadding: EdgeInsets.zero,
                             title: const Text('Use component themes'),
                             subtitle: const Text(

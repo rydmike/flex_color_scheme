@@ -33,7 +33,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Split Material, Banner, BottomSheet and SnackBar single panel to Material only in one and Banner, BottomSheet and SnackBar in another settings panel.
 - Added always use circular FAB feature.
 - All single option select ToggleButtons controls in a ListTile can now for convenience be toggled in sequence by just tapping on the ListTile it is used in.  
-- Changed all used Slider.adaptive to just Slider. The Cupertino one has poorer UX when you can click on the track to move the thumb to a positions. Besides, the app presents Material theming so let's show Material widgets in its own controls as well on all platforms.
+- Changed all used `Slider.adaptive` to just `Slider`. The Cupertino one has poorer UX. You can not click on the track to move the thumb to a positions. Besides, the app presents Material theming so let's show Material widgets in its own controls on all platforms.
+- Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like the custom Material theme following `SwitchListTileAdaptive` variant on iOS on macOS. Besides, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. It is even nicer than the Cupertino design. Let's thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms. The `SwitchListTileAdaptive` is kept in use on examples 2 to 4, as an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platform, nor can it be themed to be so, you have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).     
 
 **TODO:**
 
