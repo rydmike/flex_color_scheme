@@ -83,28 +83,69 @@ const double kCardRadius = 12;
 const double kMenuRadius = 4;
 
 /// Default elevation on [Card] widgets.
+///
+/// Based on https://m3.material.io/components/cards/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// In M3 Elevated Card is level 1, 1 dp, the other Cards
+/// Filled, Tonal and Outlined are Level 0 (0 dp). Since there in
+/// Flutter is no constructor for the different types of Card
+/// we default them all to 0 dp.
 const double kCardElevation = 0;
 
 /// Default for elevation of [ElevatedButton].
+///
+/// Based on https://m3.material.io/components/buttons/specs
+/// and https://m3.material.io/styles/elevation/tokens
 const double kElevatedButtonElevation = 1;
 
 /// Default elevation of [PopupMenuButton].
+///
+/// Based on https://m3.material.io/components/menus/specs
+/// and https://m3.material.io/styles/elevation/tokens
 const double kPopupMenuElevation = 3;
 
 /// Default elevation of [Dialog].
 ///
 /// Based on https://m3.material.io/components/dialogs/specs
+/// and https://m3.material.io/styles/elevation/tokens
 /// and Flutter M3 implementation.
 const double kDialogElevation = 6;
 
 /// Default for elevation of none modal [BottomSheet].
-const double kBottomSheetElevation = 4;
+///
+/// Based https://m3.material.io/components/bottom-sheets/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// M2 spec did not specify a value Nov 9,. 2022. FCS uses 1,
+/// and uses 2 for modal version to make them different.
+const double kBottomSheetElevation = 1;
 
 /// Default for elevation of modal [BottomSheet].
-const double kBottomSheetModalElevation = 8;
+///
+/// Based https://m3.material.io/components/bottom-sheets/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// Spec says 1, but FCS uses 2, and uses 1 for none modal
+/// version.
+const double kBottomSheetModalElevation = 2;
 
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;
+
+/// Default for elevation of [NavigationRail].
+///
+/// M3 based https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens.
+const double kNavigationRailElevation = 0;
+
+/// Default for elevation of [SnackBar].
+///
+/// M3 uses https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens.
+///
+/// FCS thinks it is too high and uses opinionated style 4.
+const double kSnackBarElevation = 4;
 
 /// Default height of [NavigationBar].
 ///
@@ -120,12 +161,6 @@ const double kNavigationBarHeight = 62;
 ///
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
-
-/// Default for elevation of [NavigationRail].
-const double kNavigationRailElevation = 0;
-
-/// Default for elevation of [SnackBar].
-const double kSnackBarElevation = 4;
 
 /// Default minimum button size.
 ///

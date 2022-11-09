@@ -75,11 +75,11 @@ void main() {
     test('FCT kDialogElevation is 6', () {
       expect(kDialogElevation, 6);
     });
-    test('FCT kBottomSheetElevation is 4', () {
-      expect(kBottomSheetElevation, 4);
+    test('FCT kBottomSheetElevation is 1', () {
+      expect(kBottomSheetElevation, 1);
     });
-    test('FCT kBottomSheetModalElevation is 8', () {
-      expect(kBottomSheetModalElevation, 8);
+    test('FCT kBottomSheetModalElevation is 2', () {
+      expect(kBottomSheetModalElevation, 2);
     });
     test('FCT kBottomNavigationBarElevation is 0', () {
       expect(kBottomNavigationBarElevation, 0);

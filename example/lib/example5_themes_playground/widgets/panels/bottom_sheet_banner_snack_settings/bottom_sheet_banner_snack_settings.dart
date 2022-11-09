@@ -34,7 +34,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
 
     final String sheetElevationDefaultLabel =
         controller.bottomSheetElevation == null
-            ? 'modal 8\nfree 4'
+            ? 'default 1\nmodal 2'
             : controller.bottomSheetBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
@@ -113,8 +113,8 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           title: const Text('BottomSheet elevation'),
           subtitle: Slider(
             min: -1,
-            max: 30,
-            divisions: 31,
+            max: 20,
+            divisions: 21,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomSheetElevation == null ||
                         (controller.bottomSheetElevation ?? -1) < 0

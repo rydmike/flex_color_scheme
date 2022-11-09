@@ -2989,11 +2989,11 @@ void main() {
       );
       expect(
         tLBottomDefault.bottomSheetTheme.elevation,
-        equals(4),
+        equals(1),
       );
       expect(
         tLBottomDefault.bottomSheetTheme.modalElevation,
-        equals(8),
+        equals(2),
       );
       expect(
         tLBottomDefault.bottomSheetTheme.clipBehavior,
@@ -3037,11 +3037,11 @@ void main() {
       );
       expect(
         tLBottomDefaultM3.bottomSheetTheme.elevation,
-        equals(4),
+        equals(1),
       );
       expect(
         tLBottomDefaultM3.bottomSheetTheme.modalElevation,
-        equals(8),
+        equals(2),
       );
       expect(
         tLBottomDefaultM3.bottomSheetTheme.clipBehavior,

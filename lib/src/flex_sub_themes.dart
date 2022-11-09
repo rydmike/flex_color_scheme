@@ -634,8 +634,8 @@ class FlexSubThemes {
 
     /// [BottomNavigationBar] container elevation.
     ///
-    /// Defaults to [kBottomNavigationBarElevation] = 0.
-    final double elevation = kBottomNavigationBarElevation,
+    /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+    final double? elevation,
 
     /// Whether the labels are shown for the selected
     /// [BottomNavigationBarItem].
@@ -794,7 +794,7 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
-      elevation: elevation,
+      elevation: elevation ?? kBottomNavigationBarElevation,
       unselectedIconTheme: useDefaultIconTheme
           ? null
           : IconThemeData(
@@ -864,12 +864,12 @@ class FlexSubThemes {
 
     /// The none modal bottom sheet elevation.
     ///
-    /// If null, defaults to [kBottomSheetElevation] = 4.
+    /// If null, defaults to [kBottomSheetElevation] = 1.
     final double? elevation,
 
     /// The modal bottom sheet elevation.
     ///
-    /// If null, defaults to [kBottomSheetModalElevation] = 8.
+    /// If null, defaults to [kBottomSheetModalElevation] = 2.
     final double? modalElevation,
 
     /// The corner radius of the top corners.
@@ -925,8 +925,10 @@ class FlexSubThemes {
     /// https://m3.material.io/components/cards/specs
     final double? radius,
 
-    /// Card elevation defaults to [kCardElevation] = 0.
-    final double elevation = kCardElevation,
+    /// Card elevation.
+    ///
+    /// If not defined, defaults to [kCardElevation] = 0dp.
+    final double? elevation,
 
     /// The clipBehavior of the card theme, defaults to
     /// [Clip.antiAlias] for smooth clipping when using rounded corners.
@@ -937,7 +939,7 @@ class FlexSubThemes {
   }) =>
       CardTheme(
         clipBehavior: clipBehavior,
-        elevation: elevation,
+        elevation: elevation ?? kCardElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius ?? kCardRadius),
@@ -1168,8 +1170,10 @@ class FlexSubThemes {
     /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
-    /// Dialog elevation defaults to 6 [kDialogElevation].
-    final double? elevation = kDialogElevation,
+    /// Dialog elevation.
+    ///
+    /// If not defined, defaults to [kDialogElevation] = 6.
+    final double? elevation,
 
     /// Padding around the set of [actions] at the bottom of the dialog.
     ///
@@ -1191,7 +1195,7 @@ class FlexSubThemes {
             : schemeColor(backgroundSchemeColor, colorScheme);
 
     return DialogTheme(
-      elevation: elevation,
+      elevation: elevation ?? kDialogElevation,
       backgroundColor: background,
       actionsPadding: actionsPadding ??
           const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
@@ -2438,8 +2442,8 @@ class FlexSubThemes {
 
     /// [NavigationRail] elevation.
     ///
-    /// Defaults to [kNavigationRailElevation] = 0.
-    final double elevation = kNavigationRailElevation,
+    /// If undefined, defaults to [kNavigationRailElevation] = 0.
+    final double? elevation,
 
     /// Defines the layout and behavior of the labels for the
     /// un-extended [NavigationRail].
@@ -2639,7 +2643,7 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
-      elevation: elevation,
+      elevation: elevation ?? kNavigationRailElevation,
       unselectedLabelTextStyle: useDefaultTextStyle
           ? null
           : textStyle.copyWith(
@@ -2958,14 +2962,16 @@ class FlexSubThemes {
     /// Defaults to [kMenuRadius] = 4, M3 specification.
     final double? radius,
 
-    /// Popup menu elevation defaults to 3, making it more subtle.
-    final double elevation = kPopupMenuElevation,
+    /// Popup menu elevation.
+    ///
+    /// If null, defaults to [kPopupMenuElevation] = 3, M3 default.
+    final double? elevation,
 
     /// The background color of the popup menu.
     final Color? color,
   }) =>
       PopupMenuThemeData(
-        elevation: elevation,
+        elevation: elevation ?? kPopupMenuElevation,
         color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -3057,8 +3063,10 @@ class FlexSubThemes {
   ///
   /// The [elevation] defaults to [kSnackBarElevation] (4).
   static SnackBarThemeData snackBarTheme({
-    /// SnackBar elevation defaults to [kSnackBarElevation] 4.
-    final double? elevation = kSnackBarElevation,
+    /// SnackBar elevation
+    ///
+    /// If undefined defaults to [kSnackBarElevation] = 4.
+    final double? elevation,
 
     /// The background color of the themed SnackBar. Typically one of inverse
     /// brightness compared to theme's surface color brightness.
@@ -3124,7 +3132,7 @@ class FlexSubThemes {
         : null;
 
     return SnackBarThemeData(
-      elevation: elevation,
+      elevation: elevation ?? kSnackBarElevation,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
     );

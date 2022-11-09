@@ -1662,6 +1662,8 @@ class BottomSheetShowcase extends StatelessWidget {
         AbsorbPointer(
           child: BottomSheet(
             enableDrag: false,
+            elevation: theme.bottomSheetTheme.elevation,
+            backgroundColor: theme.bottomSheetTheme.backgroundColor,
             onClosing: () {},
             builder: (final BuildContext context) => SizedBox(
               height: 150,
@@ -1670,12 +1672,41 @@ class BottomSheetShowcase extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'A Material BottomSheet',
+                      'Material BottomSheet',
                       style: theme.textTheme.titleMedium,
                     ),
                     Text(
-                      'Like Drawer it uses Material of type canvas as '
-                      'background.',
+                      'Uses Material of type canvas as default background.\n'
+                      'ColorScheme background in M2, but surface in M3.',
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        AbsorbPointer(
+          child: BottomSheet(
+            elevation: theme.bottomSheetTheme.modalElevation,
+            backgroundColor: theme.bottomSheetTheme.modalBackgroundColor,
+            enableDrag: false,
+            onClosing: () {},
+            builder: (final BuildContext context) => SizedBox(
+              height: 150,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Material Modal BottomSheet',
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Uses Material of type canvas as default background.\n'
+                      'ColorScheme background in M2, but surface in M3.',
                       style: theme.textTheme.bodySmall,
                       textAlign: TextAlign.center,
                     ),
@@ -1715,6 +1746,7 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
             .textTheme
             .titleMedium!
             .copyWith(color: snackForeground);
+    final double snackElevation = theme.snackBarTheme.elevation ?? 6;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1738,13 +1770,13 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
         const SizedBox(height: 16),
         Material(
           color: snackBackground,
-          elevation: 0,
+          elevation: snackElevation,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
           child: SizedBox(
             height: 40,
             child: Center(
-              child: Text('A Material SnackBar, style simulation only',
+              child: Text('Material SnackBar (style simulation only)',
                   style: snackStyle),
             ),
           ),

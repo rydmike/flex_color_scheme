@@ -22,8 +22,8 @@ void main() {
         equals(
           const BottomSheetThemeData(
             clipBehavior: Clip.antiAlias,
-            elevation: 4,
-            modalElevation: 8,
+            elevation: 1,
+            modalElevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(28),

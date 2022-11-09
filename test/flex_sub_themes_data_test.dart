@@ -26,15 +26,10 @@ void main() {
       inputDecoratorUnfocusedBorderIsColored: true,
       fabUseShape: false,
       fabAlwaysCircular: false,
-      cardElevation: 0,
-      popupMenuElevation: 3,
       popupMenuOpacity: 1,
-      dialogElevation: 6,
-      snackBarElevation: 4,
       bottomNavigationBarMutedUnselectedLabel: true,
       bottomNavigationBarMutedUnselectedIcon: true,
       bottomNavigationBarOpacity: 1,
-      bottomNavigationBarElevation: 0,
       bottomNavigationBarShowSelectedLabels: true,
       bottomNavigationBarShowUnselectedLabels: true,
       bottomNavigationBarType: BottomNavigationBarType.fixed,
@@ -45,7 +40,6 @@ void main() {
       navigationRailMutedUnselectedIcon: true,
       navigationRailUseIndicator: true,
       navigationRailOpacity: 1,
-      navigationRailElevation: 0,
       navigationRailLabelType: NavigationRailLabelType.all,
     );
     // m3, one different values than m1 and m2.
@@ -62,15 +56,10 @@ void main() {
       inputDecoratorUnfocusedBorderIsColored: true,
       fabUseShape: false,
       fabAlwaysCircular: false,
-      cardElevation: 0,
-      popupMenuElevation: 3,
       popupMenuOpacity: 1,
-      dialogElevation: 6,
-      snackBarElevation: 4,
       bottomNavigationBarMutedUnselectedLabel: true,
       bottomNavigationBarMutedUnselectedIcon: true,
       bottomNavigationBarOpacity: 1,
-      bottomNavigationBarElevation: 0,
       bottomNavigationBarShowSelectedLabels: true,
       bottomNavigationBarShowUnselectedLabels: true,
       bottomNavigationBarType: BottomNavigationBarType.fixed,
@@ -82,7 +71,6 @@ void main() {
       navigationRailMutedUnselectedIcon: true,
       navigationRailUseIndicator: true,
       navigationRailOpacity: 1,
-      navigationRailElevation: 0,
       navigationRailLabelType: NavigationRailLabelType.all,
     );
     // m4, all values different from m1 and m2.
@@ -99,15 +87,10 @@ void main() {
       inputDecoratorUnfocusedBorderIsColored: false,
       fabUseShape: true,
       fabAlwaysCircular: true,
-      cardElevation: 2,
-      popupMenuElevation: 4,
       popupMenuOpacity: 5,
-      dialogElevation: 12,
-      snackBarElevation: 6,
       bottomNavigationBarMutedUnselectedLabel: false,
       bottomNavigationBarMutedUnselectedIcon: false,
       bottomNavigationBarOpacity: 0.6,
-      bottomNavigationBarElevation: 3,
       bottomNavigationBarShowSelectedLabels: false,
       bottomNavigationBarShowUnselectedLabels: false,
       bottomNavigationBarType: BottomNavigationBarType.shifting,
@@ -120,7 +103,6 @@ void main() {
       navigationRailMutedUnselectedIcon: false,
       navigationRailUseIndicator: false,
       navigationRailOpacity: 0.3,
-      navigationRailElevation: 3,
       navigationRailLabelType: NavigationRailLabelType.none,
     );
     // Identity and quality tests
@@ -186,15 +168,10 @@ void main() {
           inputDecoratorUnfocusedBorderIsColored: true,
           fabUseShape: false,
           fabAlwaysCircular: false,
-          cardElevation: 0,
-          popupMenuElevation: 3,
           popupMenuOpacity: 1,
-          dialogElevation: 6,
-          snackBarElevation: 4,
           bottomNavigationBarMutedUnselectedLabel: true,
           bottomNavigationBarMutedUnselectedIcon: true,
           bottomNavigationBarOpacity: 1,
-          bottomNavigationBarElevation: 0,
           bottomNavigationBarShowSelectedLabels: true,
           bottomNavigationBarShowUnselectedLabels: true,
           bottomNavigationBarType: BottomNavigationBarType.fixed,
@@ -207,7 +184,6 @@ void main() {
           navigationRailMutedUnselectedIcon: true,
           navigationRailUseIndicator: true,
           navigationRailOpacity: 1,
-          navigationRailElevation: 0,
           navigationRailLabelType: NavigationRailLabelType.all,
         ),
         equals(m1),
@@ -503,7 +479,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, elevatedButtonTextStyle: null, outlinedButtonTextStyle: null, textButtonTextStyle: null, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: null, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, materialButtonSchemeColor: null, toggleButtonsSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: 0.0, popupMenuRadius: null, popupMenuElevation: 3.0, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: 6.0, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: 4.0, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: 0.0, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarHighlightOpacity: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: 1.0, navigationBarHeight: null, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: 1.0, navigationRailElevation: 0.0, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, elevatedButtonTextStyle: null, outlinedButtonTextStyle: null, textButtonTextStyle: null, textButtonRadius: null, elevatedButtonRadius: null, elevatedButtonElevation: null, outlinedButtonRadius: null, toggleButtonsRadius: null, textButtonSchemeColor: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, materialButtonSchemeColor: null, toggleButtonsSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: null, popupMenuRadius: null, popupMenuElevation: null, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: null, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: null, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: null, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarHighlightOpacity: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: 1.0, navigationBarHeight: null, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: 1.0, navigationRailElevation: null, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '

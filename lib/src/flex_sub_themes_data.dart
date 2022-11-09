@@ -109,29 +109,31 @@ class FlexSubThemesData with Diagnosticable {
     this.useTextTheme = true,
     //
     this.defaultRadius,
-    //
     this.buttonMinSize,
     this.buttonPadding,
+    //
     this.thickBorderWidth,
     this.thinBorderWidth,
     //
-    this.elevatedButtonTextStyle,
-    this.outlinedButtonTextStyle,
+    this.textButtonRadius,
+    this.textButtonSchemeColor,
     this.textButtonTextStyle,
     //
-    this.textButtonRadius,
     this.elevatedButtonRadius,
     this.elevatedButtonElevation,
-    this.outlinedButtonRadius,
-    this.toggleButtonsRadius,
-    //
-    this.textButtonSchemeColor,
     this.elevatedButtonSchemeColor,
     this.elevatedButtonSecondarySchemeColor,
+    this.elevatedButtonTextStyle,
+    //
+    this.outlinedButtonRadius,
     this.outlinedButtonSchemeColor,
     this.outlinedButtonOutlineSchemeColor,
-    this.materialButtonSchemeColor,
+    this.outlinedButtonTextStyle,
+    //
+    this.toggleButtonsRadius,
     this.toggleButtonsSchemeColor,
+    //
+    this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
     this.checkboxSchemeColor,
@@ -150,21 +152,23 @@ class FlexSubThemesData with Diagnosticable {
     this.fabUseShape = false,
     this.fabAlwaysCircular = false,
     this.fabSchemeColor,
+    //
     this.chipRadius,
     this.chipSchemeColor,
     //
     this.cardRadius,
-    this.cardElevation = kCardElevation,
+    this.cardElevation,
     //
     this.popupMenuRadius,
-    this.popupMenuElevation = kPopupMenuElevation,
+    this.popupMenuElevation,
     this.popupMenuOpacity = 1,
     //
     this.dialogRadius,
-    this.dialogElevation = kDialogElevation,
+    this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.timePickerDialogRadius,
-    this.snackBarElevation = kSnackBarElevation,
+    //
+    this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
@@ -192,7 +196,7 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
     this.bottomNavigationBarOpacity = 1,
-    this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
+    this.bottomNavigationBarElevation,
     this.bottomNavigationBarShowSelectedLabels = true,
     this.bottomNavigationBarShowUnselectedLabels = true,
     this.bottomNavigationBarType = BottomNavigationBarType.fixed,
@@ -233,7 +237,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailIndicatorOpacity,
     this.navigationRailBackgroundSchemeColor,
     this.navigationRailOpacity = 1,
-    this.navigationRailElevation = kNavigationRailElevation,
+    this.navigationRailElevation,
     this.navigationRailLabelType = NavigationRailLabelType.all,
     this.navigationRailGroupAlignment,
   });
@@ -965,7 +969,9 @@ class FlexSubThemesData with Diagnosticable {
   /// This design favors a flat design using color branded tint on card
   /// background, and defaults to [kCardElevation] = 0 as default
   /// themed elevation on [Card] widgets.
-  final double cardElevation;
+  ///
+  /// If not defined, defaults to [kCardElevation] = 0dp.
+  final double? cardElevation;
 
   /// Border radius override value for the menu on [PopupMenuButton].
   ///
@@ -1005,8 +1011,11 @@ class FlexSubThemesData with Diagnosticable {
   /// Default elevation of [PopupMenuButton].
   ///
   /// The SDK elevation 8 is too high, we make it more subtle via
-  /// opinionated default value [kPopupMenuElevation] of 3.
-  final double popupMenuElevation;
+  /// opinionated default value [kPopupMenuElevation] of 3, which happens to
+  /// be M3 default, we use it for FCS M2 default as well
+  ///
+  /// If null, defaults to [kPopupMenuElevation] = 3, M3 default.
+  final double? popupMenuElevation;
 
   /// Popup menu background opacity.
   ///
@@ -1034,13 +1043,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
-  /// elevated via opinionated default value [kDialogElevation] of 10.
+  /// elevated via opinionated default value [kDialogElevation] of 6.
   ///
   /// One rationale for this change is that when using strong surface color
-  /// branding and overlay color
-  /// elevation in dark mode, the elevated dialog surface will become too
-  /// light and contrast poorly with primary color.
-  final double dialogElevation;
+  /// branding and overlay color elevation in dark mode, the elevated dialog
+  /// surface will become too light and contrast poorly with primary color.
+  ///
+  /// The value 6dp is also Material 3 spec default, we use it for M2 as well
+  /// as FCS opinionated default.
+  ///
+  /// If not defined, defaults to [kDialogElevation] = 6.
+  final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
   /// as their background color.
@@ -1078,9 +1091,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [SnackBar].
   ///
-  /// Defaults to [kSnackBarElevation] = 4.
-  final double snackBarElevation;
+  /// If undefined, defaults to [kSnackBarElevation] = 4.
+  final double? snackBarElevation;
 
+  // TODO(rydmike): Review the FCS defaults, is doc below still correct?
   /// Defines which [Theme] based [ColorScheme] based color the SnackBars
   /// use as their base color. Typically one of inverse brightness compared
   /// to theme's surface color brightness.
@@ -1088,16 +1102,16 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, it defaults to the opinionated color FlexColorScheme (FCS)
   /// choices below, when used via [FlexSubThemesData].
   ///
-  /// * In light theme mode:  ///
+  /// * In light theme mode:
   ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
-  ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
-  ///     top of surface.
+  ///   * Flutter M2 SDK uses: onSurface with surface at opacity 80%, blended
+  ///     on top of surface.
   ///
   /// * In dark theme mode:
   ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
-  ///   * Flutter SDK uses: colorScheme.onSurface
+  ///   * Flutter M2 SDK uses: colorScheme.onSurface
   ///
-  /// In M3 design the default will likely be [ColorScheme.inversePrimary],
+  /// In M3 design the default is [ColorScheme.inverseSurface],
   /// which you can assign by selecting that as its property here too.
   final SchemeColor? snackBarBackgroundSchemeColor;
 
@@ -1181,12 +1195,12 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of none modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetElevation] = 4.
+  /// If null, defaults to [kBottomSheetElevation] = 1.
   final double? bottomSheetElevation;
 
   /// Elevation of modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetModalElevation] = 8.
+  /// If null, defaults to [kBottomSheetModalElevation] = 2.
   final double? bottomSheetModalElevation;
 
   // ---------------------------------------------------------------------------
@@ -1339,8 +1353,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [BottomNavigationBar].
   ///
-  /// Defaults to [kBottomNavigationBarElevation] = 0.
-  final double bottomNavigationBarElevation;
+  /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+  final double? bottomNavigationBarElevation;
 
   /// Whether the labels are shown for the selected
   /// [BottomNavigationBarItem].
@@ -1765,8 +1779,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The z-coordinate to be used for the [NavigationRail]'s elevation.
   ///
-  /// Default is [kNavigationRailElevation] = 0.
-  final double navigationRailElevation;
+  /// If undefined, defaults to [kNavigationRailElevation] = 0.
+  final double? navigationRailElevation;
 
   /// Defines the layout and behavior of the labels for the un-extended
   /// [NavigationRail].
