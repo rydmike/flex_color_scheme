@@ -1195,12 +1195,14 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of none modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetElevation] = 1.
+  /// If null, defaults to [kBottomSheetElevation] = 1, if [useMaterial3]
+  /// is true, and to [kBottomSheetElevationM2] = 4, if false.
   final double? bottomSheetElevation;
 
   /// Elevation of modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetModalElevation] = 2.
+  /// If null, defaults to [kBottomSheetModalElevation] = 2, if [useMaterial3]
+  /// is true, and to [kBottomSheetModalElevationM2] = 8 if false.
   final double? bottomSheetModalElevation;
 
   // ---------------------------------------------------------------------------

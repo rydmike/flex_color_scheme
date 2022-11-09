@@ -5352,7 +5352,7 @@ class FlexColorScheme with Diagnosticable {
     // Use themed interaction effects on hover, focus, highlight and splash?
     final bool themedEffects = useSubThemes && subTheme.interactionEffects;
 
-    // BottomSheet Colors with non null fallback color.
+    // BottomSheet Colors and elevations.
     final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
         ? FlexSubThemes.schemeColor(
             subTheme.bottomSheetBackgroundColor!, colorScheme)
@@ -5362,6 +5362,13 @@ class FlexColorScheme with Diagnosticable {
             ? FlexSubThemes.schemeColor(
                 subTheme.bottomSheetBackgroundColor!, colorScheme)
             : colorScheme.surface;
+    final double bottomSheetElevation = subTheme.bottomSheetElevation ??
+        (useMaterial3 ? kBottomSheetElevation : kBottomSheetElevationM2);
+    final double bottomSheetModalElevation =
+        subTheme.bottomSheetModalElevation ??
+            (useMaterial3
+                ? kBottomSheetModalElevation
+                : kBottomSheetModalElevationM2);
 
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
@@ -5934,20 +5941,16 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.bottomSheetTheme(
               backgroundColor: useMaterial3
                   // TODO(rydmike): Remove tint temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(
-                      bottomSheetColor,
-                      colorScheme.surfaceTint,
-                      subTheme.bottomSheetElevation ?? 4)
+                  ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
+                      colorScheme.surfaceTint, bottomSheetElevation)
                   : bottomSheetColor,
               modalBackgroundColor: useMaterial3
                   // TODO(rydmike): Remove tint temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(
-                      bottomSheetModalColor,
-                      colorScheme.surfaceTint,
-                      subTheme.bottomSheetModalElevation ?? 8)
+                  ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
+                      colorScheme.surfaceTint, bottomSheetModalElevation)
                   : bottomSheetModalColor,
-              elevation: subTheme.bottomSheetElevation,
-              modalElevation: subTheme.bottomSheetModalElevation,
+              elevation: bottomSheetElevation,
+              modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
             )
           : null,

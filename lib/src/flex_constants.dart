@@ -112,7 +112,7 @@ const double kPopupMenuElevation = 3;
 /// and Flutter M3 implementation.
 const double kDialogElevation = 6;
 
-/// Default for elevation of none modal [BottomSheet].
+/// Default elevation of none modal Material 3 [BottomSheet].
 ///
 /// Based https://m3.material.io/components/bottom-sheets/specs
 /// and https://m3.material.io/styles/elevation/tokens
@@ -121,7 +121,7 @@ const double kDialogElevation = 6;
 /// and uses 2 for modal version to make them different.
 const double kBottomSheetElevation = 1;
 
-/// Default for elevation of modal [BottomSheet].
+/// Default elevation of modal Material 3 [BottomSheet].
 ///
 /// Based https://m3.material.io/components/bottom-sheets/specs
 /// and https://m3.material.io/styles/elevation/tokens
@@ -129,6 +129,18 @@ const double kBottomSheetElevation = 1;
 /// Spec says 1, but FCS uses 2, and uses 1 for none modal
 /// version.
 const double kBottomSheetModalElevation = 2;
+
+/// Default elevation of none modal Material 2 [BottomSheet].
+///
+/// This is FCS default when opting in on opinionated component sub-themes
+/// but not opting in on using Material 3.
+const double kBottomSheetElevationM2 = 4;
+
+/// Default for elevation of modal Material 2 [BottomSheet].
+///
+/// This is FCS default when opting in on opinionated component sub-themes
+/// but not opting in on using Material 3.
+const double kBottomSheetModalElevationM2 = 8;
 
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;

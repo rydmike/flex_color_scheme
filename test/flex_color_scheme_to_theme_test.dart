@@ -2989,11 +2989,11 @@ void main() {
       );
       expect(
         tLBottomDefault.bottomSheetTheme.elevation,
-        equals(1),
+        equals(4),
       );
       expect(
         tLBottomDefault.bottomSheetTheme.modalElevation,
-        equals(2),
+        equals(8),
       );
       expect(
         tLBottomDefault.bottomSheetTheme.clipBehavior,
@@ -3020,13 +3020,13 @@ void main() {
     test(
         'FCS7.101 GIVEN a FlexColorScheme.dark with useMaterial3:true '
         'and a default FlexSubThemesData '
-        'EXPECT bottom surface+tint and elevation 4 and 8 and border radius '
+        'EXPECT bottom surface+tint and elevation 1 and 2 and border radius '
         'top 28', () {
       final ColorScheme scheme = tLBottomDefaultM3.colorScheme;
       final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 4);
+          scheme.surface, scheme.surfaceTint, 1);
       final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 8);
+          scheme.surface, scheme.surfaceTint, 2);
       expect(
         tLBottomDefaultM3.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),

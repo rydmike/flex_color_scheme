@@ -81,6 +81,12 @@ void main() {
     test('FCT kBottomSheetModalElevation is 2', () {
       expect(kBottomSheetModalElevation, 2);
     });
+    test('FCT kBottomSheetElevationM2 is 4', () {
+      expect(kBottomSheetElevationM2, 4);
+    });
+    test('FCT kBottomSheetModalElevationM2 is 8', () {
+      expect(kBottomSheetModalElevationM2, 8);
+    });
     test('FCT kBottomNavigationBarElevation is 0', () {
       expect(kBottomNavigationBarElevation, 0);
     });
