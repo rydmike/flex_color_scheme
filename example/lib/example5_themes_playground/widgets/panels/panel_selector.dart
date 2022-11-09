@@ -164,7 +164,6 @@ class _PanelSelectorState extends State<PanelSelector> {
 
 class _PanelButton extends StatelessWidget {
   const _PanelButton({
-    super.key,
     required this.item,
     required this.selected,
     required this.onSelect,

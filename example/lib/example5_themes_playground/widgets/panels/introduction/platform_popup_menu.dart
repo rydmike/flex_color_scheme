@@ -101,7 +101,6 @@ class PlatformPopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) =>
           <PopupMenuItem<TargetPlatform>>[...platformItems.values],
       child: ListTile(
-        dense: true,
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 12),
           child: Icon(
@@ -110,7 +109,7 @@ class PlatformPopupMenu extends StatelessWidget {
             size: 40,
           ),
         ),
-        title: const Text('Select platform mechanics'),
+        title: const Text('Select platform. For testing purposes only'),
         subtitle: Text(subtitle),
       ),
     );

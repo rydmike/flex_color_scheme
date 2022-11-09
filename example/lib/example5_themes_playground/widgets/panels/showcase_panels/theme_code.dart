@@ -37,7 +37,7 @@ class ThemeCode extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         ListTile(
-          title: const Text('FlexColorScheme code'),
+          title: const Text('FlexColorScheme API Code'),
           subtitle: const Text('This is the setup code for the light and dark '
               'theme you have configured. It changes as you adjust settings.'),
           trailing: ElevatedButton(
