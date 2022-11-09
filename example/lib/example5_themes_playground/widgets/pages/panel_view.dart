@@ -144,30 +144,32 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               pinned: isPinned,
               floating: true,
               delegate: PanelSelectorHeaderDelegate(
-                vsync: this,
-                extent: headerExtent,
-                controller: themeCtrl,
-                page: themeCtrl.viewIndex,
-                previousPage: previousPage,
-                onSelect: () {
-                  if (previousPage != themeCtrl.viewIndex) {
-                    setState(() {
-                      previousPage = themeCtrl.viewIndex;
-                    });
-                    // This is handmade scale and fade up animation
-                    // when user taps on header item. We use it instead
-                    // animating to the page with the page controller.
-                    // Instead we jump to the page and trigger a slight
-                    // fade and zoom in effect, without it it is hard too
-                    // notice that the page changed.
-                    scaleController.value = 0.7;
-                    fadeController.value = 0.2;
-                    scaleController.forward();
-                    fadeController.forward();
-                    pageController.jumpToPage(themeCtrl.viewIndex);
-                  }
-                },
-              ),
+                  vsync: this,
+                  extent: headerExtent,
+                  // controller: themeCtrl,
+                  page: themeCtrl.viewIndex,
+                  previousPage: previousPage,
+                  onSelect: (int index) {
+                    if (previousPage != index) {
+                      setState(() {
+                        previousPage = index;
+                      });
+                    }
+                    if (themeCtrl.viewIndex != index) {
+                      themeCtrl.setViewIndex(index);
+                      // This is handmade scale and fade up animation
+                      // when user taps on header item. We use it instead
+                      // animating to the page with the page controller.
+                      // Instead we jump to the page and trigger a slight
+                      // fade and zoom in effect, without it it is hard too
+                      // notice that the page changed.
+                      scaleController.value = 0.7;
+                      fadeController.value = 0.2;
+                      scaleController.forward();
+                      fadeController.forward();
+                      pageController.jumpToPage(themeCtrl.viewIndex);
+                    }
+                  }),
             ),
             // SliverAppBar(),
             SliverToBoxAdapter(
@@ -193,79 +195,50 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               child: FadeTransition(
                 opacity: fadeAnimation,
                 child: <Widget>[
-                  PanelPage(IntroductionPanel(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                  PanelPage(IntroductionPanel(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
-                      ThemeColorsSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      ThemeColorsSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(SeededColorSchemeSettings(themeCtrl), pageIndex,
-                      themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      themeCtrl),
                   PanelPage(
                       SurfaceBlendSettings(themeCtrl, allBlends: showAllBlends),
                       pageIndex,
-                      themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(EffectiveColors(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(ComponentSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(TextFieldSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(AppBarSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(TabBarSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      themeCtrl),
+                  PanelPage(EffectiveColors(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(ComponentSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TextFieldSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(AppBarSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TabBarSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(BottomNavigationBarSettings(themeCtrl), pageIndex,
-                      themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      themeCtrl),
                   PanelPage(
-                      NavigationBarSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      NavigationBarSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
-                      NavigationRailSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      NavigationRailSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
-                      themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      themeCtrl),
+                  PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
-                      ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(FabChipSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(FabChipSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
-                      PopupMenuButtonSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      PopupMenuButtonSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(TooltipIconButtonAvatarDropdownSettings(themeCtrl),
-                      pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(ListTileSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      pageIndex, themeCtrl),
+                  PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(ListTileSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(BottomSheetBannerSnackSettings(themeCtrl),
-                      pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(const MaterialPanel(), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(CardSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(
-                      PrimaryTextThemeSettings(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(
-                      PageExamples(controller: themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(const WidgetShowcase(), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
-                  PanelPage(ThemeCode(themeCtrl), pageIndex, themeCtrl,
-                      key: ValueKey<int>(pageIndex)),
+                      pageIndex, themeCtrl),
+                  PanelPage(const MaterialPanel(), pageIndex, themeCtrl),
+                  PanelPage(CardSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(PrimaryTextThemeSettings(themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(PageExamples(controller: themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(const WidgetShowcase(), pageIndex, themeCtrl),
+                  PanelPage(ThemeCode(themeCtrl), pageIndex, themeCtrl),
                 ].elementAt(pageIndex),
               ),
             );

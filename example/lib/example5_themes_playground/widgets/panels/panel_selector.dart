@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
-import '../../../shared/controllers/theme_controller.dart';
 import 'panel_item.dart';
 
 // PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
@@ -17,7 +16,6 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   PanelSelectorHeaderDelegate({
     required this.vsync,
     required this.extent,
-    required this.controller,
     required this.page,
     required this.previousPage,
     required this.onSelect,
@@ -25,17 +23,15 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   final TickerProvider vsync;
   final double extent;
-  final ThemeController controller;
   final int page;
   final int previousPage;
-  final VoidCallback onSelect;
+  final ValueChanged<int> onSelect;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return PanelSelector(
-      controller: controller,
-      // index: page,
+      page: page,
       onSelect: onSelect,
     );
   }
@@ -62,11 +58,11 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 class PanelSelector extends StatefulWidget {
   const PanelSelector({
     super.key,
-    required this.controller,
+    required this.page,
     required this.onSelect,
   });
-  final ThemeController controller;
-  final VoidCallback onSelect;
+  final int page;
+  final ValueChanged<int> onSelect;
 
   @override
   State<PanelSelector> createState() => _PanelSelectorState();
@@ -74,14 +70,14 @@ class PanelSelector extends StatefulWidget {
 
 class _PanelSelectorState extends State<PanelSelector> {
   late final ScrollController scrollController;
-  late int viewIndex;
+  late int selectedPage;
   late double scrollOffset;
 
   @override
   void initState() {
     super.initState();
-    viewIndex = widget.controller.viewIndex;
-    scrollOffset = AppData.panelButtonWidth * viewIndex;
+    selectedPage = widget.page;
+    scrollOffset = AppData.panelButtonWidth * selectedPage;
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
@@ -97,14 +93,15 @@ class _PanelSelectorState extends State<PanelSelector> {
   @override
   void didUpdateWidget(covariant PanelSelector oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.controller.viewIndex != viewIndex) {
-      viewIndex = widget.controller.viewIndex;
+
+    if (selectedPage != widget.page) {
+      selectedPage = widget.page;
       final MediaQueryData media = MediaQuery.of(context);
       final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
           media.size.height < AppData.phoneHeightBreakpoint;
       final double effectiveWidth = AppData.panelButtonWidth +
           (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
-      scrollOffset = effectiveWidth * viewIndex;
+      scrollOffset = effectiveWidth * selectedPage;
       unawaited(scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic));
@@ -121,15 +118,6 @@ class _PanelSelectorState extends State<PanelSelector> {
         margins * 2 +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
     final double topPadding = media.padding.top;
-
-    // TODO(rydmike): Experiments with alternative panel selector bg look
-    // final ThemeData theme = Theme.of(context);
-    // final bool isLight = theme.brightness == Brightness.light;
-    // final ColorScheme scheme = theme.colorScheme;
-    // final Color selectorColor = Color.alphaBlend(
-    //         scheme.surfaceTint.withAlpha(isLight ? 0 : 40),
-    //         theme.scaffoldBackgroundColor)
-    //     .withAlpha(0x77);
 
     return Material(
       color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
@@ -151,14 +139,15 @@ class _PanelSelectorState extends State<PanelSelector> {
                       scrollDirection: Axis.horizontal,
                       itemCount: panelItems.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return PanelButton(
+                        return _PanelButton(
                           item: panelItems[index],
                           onSelect: () {
-                            widget.controller.setViewIndex(index);
-                            viewIndex = index;
-                            widget.onSelect();
+                            widget.onSelect(index);
+                            setState(() {
+                              selectedPage = index;
+                            });
                           },
-                          selected: widget.controller.viewIndex == index,
+                          selected: selectedPage == index,
                         );
                       },
                     ),
@@ -173,8 +162,8 @@ class _PanelSelectorState extends State<PanelSelector> {
   }
 }
 
-class PanelButton extends StatelessWidget {
-  const PanelButton({
+class _PanelButton extends StatelessWidget {
+  const _PanelButton({
     super.key,
     required this.item,
     required this.selected,
@@ -183,25 +172,6 @@ class PanelButton extends StatelessWidget {
   final PanelItem item;
   final bool selected;
   final VoidCallback onSelect;
-
-  static bool _colorsAreClose(Color a, Color b) {
-    final int dR = a.red - b.red;
-    final int dG = a.green - b.green;
-    final int dB = a.blue - b.blue;
-    final int distance = dR * dR + dG * dG + dB * dB;
-    // Calculating orthogonal distance between colors should take the
-    // square root as well, but we don't need that extra compute step.
-    // We just need a number to represents some relative closeness of the
-    // colors. We use this to determine a level when we should draw a border
-    // around our panel.
-    // This value was just determined by visually testing what was a good
-    // trigger for when the border appeared and disappeared during testing.
-    if (distance < 120) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,10 +188,8 @@ class PanelButton extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
-    final Color scaffoldColor = theme.scaffoldBackgroundColor;
     final Color background =
-        Color.alphaBlend(scheme.primary.withAlpha(15), cardColor);
-    final bool closeColors = _colorsAreClose(background, scaffoldColor);
+        Color.alphaBlend(scheme.surfaceTint.withAlpha(15), cardColor);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -229,7 +197,6 @@ class PanelButton extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
     final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
-
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
     // Make a shape border if our background color is close in color
@@ -240,12 +207,7 @@ class PanelButton extends StatelessWidget {
       shapeBorder = shapeBorder.copyWith(
         side: selected
             ? BorderSide(color: iconColor, width: borderWidth)
-            : closeColors
-                ? BorderSide(
-                    color: theme.dividerColor,
-                    width: 1,
-                  )
-                : BorderSide.none,
+            : BorderSide(color: theme.dividerColor),
       );
       // If
     } else {
@@ -257,15 +219,9 @@ class PanelButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
         side: selected
             ? BorderSide(color: iconColor, width: borderWidth)
-            : closeColors
-                ? BorderSide(
-                    color: theme.dividerColor,
-                    width: 1,
-                  )
-                : BorderSide.none,
+            : BorderSide(color: theme.dividerColor),
       );
     }
-
     return SizedBox(
       width: effectiveWidth,
       child: Card(
