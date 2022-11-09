@@ -269,6 +269,8 @@ class PanelButton extends StatelessWidget {
     return SizedBox(
       width: effectiveWidth,
       child: Card(
+        elevation: 0,
+        clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.symmetric(horizontal: 4),
         color: background,
         shape: shapeBorder,

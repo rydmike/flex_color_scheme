@@ -12,10 +12,11 @@ class MaterialPanel extends StatelessWidget {
       children: const <Widget>[
         SizedBox(height: 8),
         ListTile(
-          subtitle: Text('The Material widget is lower level building block, '
-              'it cannot be themed, but has theme dependent default behaviour '
-              'show below. Material is clipping, elevation and ink effects '
-              'below its children.'),
+          title: Text('Material'),
+          subtitle: Text('The Material widget is lower level building block. '
+              'It cannot be themed, but has theme dependent default behaviour '
+              'shown below. Material is responsible for clipping, elevation '
+              'and ink effects below its children.'),
         ),
         Padding(
           padding: EdgeInsets.all(16),
