@@ -162,8 +162,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Outline thickness theming
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
-            // Prefer Flutter SDK null default behavior for sub-themes, when
-            // possible.
+            // Prefer Flutter SDK null default behavior for navigaor sub-themes,
+            // when possible.
             useFlutterDefaults: controller.useFlutterDefaults,
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
@@ -191,13 +191,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
-            //
+            // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             // Style of unselected switch/checkbox/radio.
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
-            //
+            // Input decoration (TextField) settings.
             // Base ColorScheme used by TextField InputDecorator.
             inputDecoratorSchemeColor:
                 controller.inputDecoratorSchemeColorLight,
@@ -223,27 +223,32 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             fabAlwaysCircular: controller.fabAlwaysCircular,
             fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
+            // Chip settings.
+            chipSchemeColor: controller.chipSchemeColor,
+            chipRadius: controller.chipBorderRadius,
+            // Card settings.
+            cardRadius: controller.cardBorderRadius,
+            // PopupMenuButton settings.
+            popupMenuOpacity: controller.popupMenuOpacity,
+            popupMenuRadius: controller.popupMenuBorderRadius,
+            // Dialog settings.
+            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            dialogRadius: controller.dialogBorderRadius,
+            timePickerDialogRadius: controller.dialogBorderRadius,
+            // SnackBar settings.
+            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            // AppBar settings.
+            appBarBackgroundSchemeColor:
+                controller.appBarBackgroundSchemeColorLight,
+            // TabBar settings.
+            tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
+            tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             // BottomSheet settings.
             bottomSheetElevation: controller.bottomSheetElevation,
             bottomSheetModalElevation: controller.bottomSheetElevation,
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
-            //
-            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
-            chipSchemeColor: controller.chipSchemeColor,
-            chipRadius: controller.chipBorderRadius,
-            cardRadius: controller.cardBorderRadius,
-            popupMenuOpacity: controller.popupMenuOpacity,
-            popupMenuRadius: controller.popupMenuBorderRadius,
-            // ColorScheme used on various widgets.
-            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
-            dialogRadius: controller.dialogBorderRadius,
-            timePickerDialogRadius: controller.dialogBorderRadius,
-            appBarBackgroundSchemeColor:
-                controller.appBarBackgroundSchemeColorLight,
-            tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
-            tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavBarSelectedSchemeColor,

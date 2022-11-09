@@ -116,12 +116,15 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     //
     subThemesData: controller.useSubThemes
         ? FlexSubThemesData(
+            // Overall effect settings.
             interactionEffects: controller.interactionEffects,
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
-            blendTextTheme: controller.blendDarkTextTheme,
             useFlutterDefaults: controller.useFlutterDefaults,
+            // Text theme settings.
+            blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,
+            // Outline default thickness settings.
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
             // Default radius for all widgets, if not null.
@@ -142,12 +145,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
-            //
+            // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
-            //
+            // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
@@ -157,31 +160,36 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
             // FAB settings.
+            fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,
             fabAlwaysCircular: controller.fabAlwaysCircular,
-            fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
-            // BottomSheet settings.
-            bottomSheetElevation: controller.bottomSheetElevation,
-            bottomSheetModalElevation: controller.bottomSheetElevation,
-            bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
-            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
-            bottomSheetRadius: controller.bottomSheetBorderRadius,
-            //
-            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipRadius: controller.chipBorderRadius,
+            // Card settings.
             cardRadius: controller.cardBorderRadius,
+            // PopupMenuButton settings.
             popupMenuOpacity: controller.popupMenuOpacity,
             popupMenuRadius: controller.popupMenuBorderRadius,
-            //
+            // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
             timePickerDialogRadius: controller.dialogBorderRadius,
+            // SnackBar settings.
+            snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            // AppBar settings.
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorDark,
+            // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
+            // BottomSheet settings.
+            bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetRadius: controller.bottomSheetBorderRadius,
+            bottomSheetElevation: controller.bottomSheetElevation,
+            bottomSheetModalElevation: controller.bottomSheetElevation,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavBarSelectedSchemeColor,

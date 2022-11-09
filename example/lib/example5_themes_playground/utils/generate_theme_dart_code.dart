@@ -601,19 +601,22 @@ String generateThemeDartCode(ThemeController controller) {
           : '';
   //
   // Compose the sub themes from above fragments.
-  //
+  // Order attempts to be in same order as they appear in the large
+  // FlexSubThemesData class.
   String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelLight'
           '$blendLightOnColors'
+          '$useFlutterDefaults'
+          //
           '$blendLightTextTheme'
           '$useTextTheme'
-          '$defRadius'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
+          //
+          '$defRadius'
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
@@ -628,12 +631,6 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
-          //
-          '$bottomSheetRadius'
-          '$bottomSheetElevation'
-          '$bottomSheetModalElevation'
-          '$bottomSheetBackgroundColor'
-          '$bottomSheetModalBackgroundColor'
           //
           '$switchSchemeColor'
           '$checkboxSchemeColor'
@@ -651,20 +648,31 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
-          '$snackSchemeColor'
+          //
           '$chipSchemeColor'
           '$chipBorderRadius'
+          //
           '$cardBorderRadius'
-
           //
           '$popupMenuOpacity'
           '$popupMenuBorderRadius'
+          //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          //
+          '$snackSchemeColor'
+          //
           '$appBarBackgroundSchemeColorLight'
+          //
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
+          //
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'
@@ -709,12 +717,14 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
+          '$useFlutterDefaults'
+          //
           '$blendDarkTextTheme'
           '$useTextTheme'
+          //
           '$defRadius'
           //
           '$thinBorderWidth'
@@ -734,12 +744,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
           //
-          '$bottomSheetRadius'
-          '$bottomSheetElevation'
-          '$bottomSheetModalElevation'
-          '$bottomSheetBackgroundColor'
-          '$bottomSheetModalBackgroundColor'
-          //
           '$switchSchemeColor'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
@@ -756,19 +760,31 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
-          '$snackSchemeColor'
+          //
           '$chipSchemeColor'
           '$chipBorderRadius'
+          //
           '$cardBorderRadius'
           //
           '$popupMenuOpacity'
           '$popupMenuBorderRadius'
+          //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          //
+          '$snackSchemeColor'
+          //
           '$appBarBackgroundSchemeColorDark'
+          //
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'
+          //
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'

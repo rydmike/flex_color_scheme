@@ -553,12 +553,12 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border width of Widgets with an outline border.
   ///
-  /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
+  /// Applies to [OutlinedButton] and always to [ToggleButtons], as well
   /// as to selected state of [InputDecorator].
   ///
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
-  /// defaults to [kThickBorderWidth].
+  /// defaults to [kThickBorderWidth] = 2.
   /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
   final double? thickBorderWidth;
 
@@ -568,27 +568,9 @@ class FlexSubThemesData with Diagnosticable {
   /// [InputDecorator].
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
-  /// defaults to [kThinBorderWidth].
+  /// defaults to [kThinBorderWidth] = 1.
   /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
   final double? thinBorderWidth;
-
-  /// The style for the [ElevatedButton]'s [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
-  final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle;
-
-  /// The style for the [OutlinedButton]'s [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
-  final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle;
-
-  /// The style for the [TextButton]'s [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
-  final MaterialStateProperty<TextStyle?>? textButtonTextStyle;
 
   /// Border radius override value for [TextButton].
   ///
@@ -596,6 +578,19 @@ class FlexSubThemesData with Diagnosticable {
   /// [kButtonRadius] 20dp, based on M3 Specification
   /// https://m3.material.io/components/buttons/specs
   final double? textButtonRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [TextButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? textButtonSchemeColor;
+
+  /// The style for the [TextButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? textButtonTextStyle;
 
   /// Border radius value for [ElevatedButton].
   ///
@@ -614,30 +609,6 @@ class FlexSubThemesData with Diagnosticable {
   /// is false. If [useMaterial3] is true, it is kept null and default M3
   /// elevation of [ElevatedButton] is kept.
   final double? elevatedButtonElevation;
-
-  /// Border radius value for [OutlinedButton].
-  ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp, based on M3 Specification
-  /// https://m3.material.io/components/buttons/specs
-  final double? outlinedButtonRadius;
-
-  /// Border radius value for [ToggleButtons].
-  ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp.
-  ///
-  /// This is not in M3 specification, but FlexColorScheme component
-  /// sub-themes harmonizes [ToggleButtons] size
-  /// and border radius with the other Material buttons.
-  final double? toggleButtonsRadius;
-
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [TextButton] use as its base theme color.
-  ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
-  final SchemeColor? textButtonSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [ElevatedButton] used as its main color.
@@ -662,6 +633,19 @@ class FlexSubThemesData with Diagnosticable {
   /// will be used as default.
   final SchemeColor? elevatedButtonSecondarySchemeColor;
 
+  /// The style for the [ElevatedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle;
+
+  /// Border radius value for [OutlinedButton].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// https://m3.material.io/components/buttons/specs
+  final double? outlinedButtonRadius;
+
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [OutlinedButton] use as its main theme color.
   ///
@@ -681,6 +665,29 @@ class FlexSubThemesData with Diagnosticable {
   /// outline color in M3 style.
   final SchemeColor? outlinedButtonOutlineSchemeColor;
 
+  /// The style for the [OutlinedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle;
+
+  /// Border radius value for [ToggleButtons].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp.
+  ///
+  /// This is not in M3 specification, but FlexColorScheme component
+  /// sub-themes harmonizes [ToggleButtons] size
+  /// and border radius with the other Material buttons.
+  final double? toggleButtonsRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? toggleButtonsSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color, that the old
   /// [MaterialButton] use as its main theme color.
   ///
@@ -693,13 +700,6 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined it defaults to theme.colorScheme.primary color via
   /// FlexColorScheme sub-theme defaults when opting on its sub themes.
   final SchemeColor? materialButtonSchemeColor;
-
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ToggleButtons] use as its base theme color.
-  ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
-  final SchemeColor? toggleButtonsSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Switch] and [SwitchListTile] use as base themed color.
@@ -1825,35 +1825,42 @@ class FlexSubThemesData with Diagnosticable {
     final int? blendOnLevel,
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
+    //
     final bool? blendTextTheme,
     final bool? useTextTheme,
+    //
     final double? defaultRadius,
     final Size? buttonMinSize,
     final EdgeInsetsGeometry? buttonPadding,
+    //
     final double? thickBorderWidth,
     final double? thinBorderWidth,
     //
-    final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle,
-    final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle,
+    final double? textButtonRadius,
+    final SchemeColor? textButtonSchemeColor,
     final MaterialStateProperty<TextStyle?>? textButtonTextStyle,
     //
-    final double? textButtonRadius,
     final double? elevatedButtonRadius,
     final double? elevatedButtonElevation,
-    final double? outlinedButtonRadius,
-    final double? toggleButtonsRadius,
-    final SchemeColor? textButtonSchemeColor,
     final SchemeColor? elevatedButtonSchemeColor,
     final SchemeColor? elevatedButtonSecondarySchemeColor,
+    final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle,
+    //
+    final double? outlinedButtonRadius,
     final SchemeColor? outlinedButtonSchemeColor,
     final SchemeColor? outlinedButtonOutlineSchemeColor,
-    final SchemeColor? materialButtonSchemeColor,
+    final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle,
+    //
+    final double? toggleButtonsRadius,
     final SchemeColor? toggleButtonsSchemeColor,
+    //
+    final SchemeColor? materialButtonSchemeColor,
+    //
     final SchemeColor? switchSchemeColor,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
-    //
     final bool? unselectedToggleIsColored,
+    //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
@@ -1869,15 +1876,19 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
+    //
     final double? cardRadius,
     final double? cardElevation,
+    //
     final double? popupMenuRadius,
     final double? popupMenuElevation,
     final double? popupMenuOpacity,
-    final SchemeColor? dialogBackgroundSchemeColor,
+    //
     final double? dialogElevation,
     final double? dialogRadius,
+    final SchemeColor? dialogBackgroundSchemeColor,
     final double? timePickerDialogRadius,
+    //
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
     //
@@ -1956,45 +1967,53 @@ class FlexSubThemesData with Diagnosticable {
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
+      //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
+      //
       defaultRadius: defaultRadius ?? this.defaultRadius,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      //
       thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
       thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
       //
-      elevatedButtonTextStyle:
-          elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
-      outlinedButtonTextStyle:
-          outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
+      textButtonRadius: textButtonRadius ?? this.textButtonRadius,
+      textButtonSchemeColor:
+          textButtonSchemeColor ?? this.textButtonSchemeColor,
       textButtonTextStyle: textButtonTextStyle ?? this.textButtonTextStyle,
       //
-      textButtonRadius: textButtonRadius ?? this.textButtonRadius,
       elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
       elevatedButtonElevation:
           elevatedButtonElevation ?? this.elevatedButtonElevation,
-      outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
-      toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
-      textButtonSchemeColor:
-          textButtonSchemeColor ?? this.textButtonSchemeColor,
       elevatedButtonSchemeColor:
           elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
       elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ??
           this.elevatedButtonSecondarySchemeColor,
+      elevatedButtonTextStyle:
+          elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
+      //
+      outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
       outlinedButtonSchemeColor:
           outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
       outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ??
           this.outlinedButtonOutlineSchemeColor,
-      materialButtonSchemeColor:
-          materialButtonSchemeColor ?? this.materialButtonSchemeColor,
+      outlinedButtonTextStyle:
+          outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
+      //
+      toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
       toggleButtonsSchemeColor:
           toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
+      //
+      materialButtonSchemeColor:
+          materialButtonSchemeColor ?? this.materialButtonSchemeColor,
+      //
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
           unselectedToggleIsColored ?? this.unselectedToggleIsColored,
+      //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
@@ -2017,23 +2036,29 @@ class FlexSubThemesData with Diagnosticable {
       //
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
+      //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
+      //
       dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogElevation: dialogElevation ?? this.dialogElevation,
       dialogBackgroundSchemeColor:
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
+      timePickerDialogRadius:
+          timePickerDialogRadius ?? this.timePickerDialogRadius,
+      //
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
       popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
-      timePickerDialogRadius:
-          timePickerDialogRadius ?? this.timePickerDialogRadius,
+      //
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       snackBarBackgroundSchemeColor:
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
+      //
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
+      //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
@@ -2191,36 +2216,44 @@ class FlexSubThemesData with Diagnosticable {
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
         other.useFlutterDefaults == useFlutterDefaults &&
+        //
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
+        //
         other.defaultRadius == defaultRadius &&
         other.buttonMinSize == buttonMinSize &&
         other.buttonPadding == buttonPadding &&
+        //
         other.thickBorderWidth == thickBorderWidth &&
         other.thinBorderWidth == thinBorderWidth &&
         //
-        other.elevatedButtonTextStyle == elevatedButtonTextStyle &&
-        other.outlinedButtonTextStyle == outlinedButtonTextStyle &&
+        other.textButtonRadius == textButtonRadius &&
+        other.textButtonSchemeColor == textButtonSchemeColor &&
         other.textButtonTextStyle == textButtonTextStyle &&
         //
-        other.textButtonRadius == textButtonRadius &&
         other.elevatedButtonRadius == elevatedButtonRadius &&
         other.elevatedButtonElevation == elevatedButtonElevation &&
-        other.outlinedButtonRadius == outlinedButtonRadius &&
-        other.toggleButtonsRadius == toggleButtonsRadius &&
-        other.textButtonSchemeColor == textButtonSchemeColor &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
         other.elevatedButtonSecondarySchemeColor ==
             elevatedButtonSecondarySchemeColor &&
+        other.elevatedButtonTextStyle == elevatedButtonTextStyle &&
+        //
+        other.outlinedButtonRadius == outlinedButtonRadius &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
         other.outlinedButtonOutlineSchemeColor ==
             outlinedButtonOutlineSchemeColor &&
-        other.materialButtonSchemeColor == materialButtonSchemeColor &&
+        other.outlinedButtonTextStyle == outlinedButtonTextStyle &&
+        //
+        other.toggleButtonsRadius == toggleButtonsRadius &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
+        //
+        other.materialButtonSchemeColor == materialButtonSchemeColor &&
+        //
         other.switchSchemeColor == switchSchemeColor &&
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
+        //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
@@ -2230,21 +2263,27 @@ class FlexSubThemesData with Diagnosticable {
             inputDecoratorUnfocusedHasBorder &&
         other.inputDecoratorUnfocusedBorderIsColored ==
             inputDecoratorUnfocusedBorderIsColored &&
+        //
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
         other.fabAlwaysCircular == fabAlwaysCircular &&
         other.fabSchemeColor == fabSchemeColor &&
+        //
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
+        //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
+        //
         other.popupMenuRadius == popupMenuRadius &&
         other.popupMenuElevation == popupMenuElevation &&
         other.popupMenuOpacity == popupMenuOpacity &&
+        //
         other.dialogRadius == dialogRadius &&
         other.dialogElevation == dialogElevation &&
-        other.dialogElevation == dialogElevation &&
+        other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
+        //
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
         //
@@ -2376,23 +2415,25 @@ class FlexSubThemesData with Diagnosticable {
         thickBorderWidth,
         thinBorderWidth,
         //
-        elevatedButtonTextStyle,
-        outlinedButtonTextStyle,
+        textButtonRadius,
+        textButtonSchemeColor,
         textButtonTextStyle,
         //
-        textButtonRadius,
         elevatedButtonRadius,
         elevatedButtonElevation,
-        outlinedButtonRadius,
-        toggleButtonsRadius,
-        //
-        textButtonSchemeColor,
         elevatedButtonSchemeColor,
         elevatedButtonSecondarySchemeColor,
+        elevatedButtonTextStyle,
+        //
+        outlinedButtonRadius,
         outlinedButtonSchemeColor,
         outlinedButtonOutlineSchemeColor,
-        materialButtonSchemeColor,
+        outlinedButtonTextStyle,
+        //
+        toggleButtonsRadius,
         toggleButtonsSchemeColor,
+        //
+        materialButtonSchemeColor,
         //
         switchSchemeColor,
         checkboxSchemeColor,
@@ -2510,6 +2551,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     properties.add(
         DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
+    //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
@@ -2521,38 +2563,42 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
     //
-    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
-        'elevatedButtonTextStyle', elevatedButtonTextStyle));
-    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
-        'outlinedButtonTextStyle', outlinedButtonTextStyle));
+    properties
+        .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'textButtonSchemeColor', textButtonSchemeColor));
     properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
         'textButtonTextStyle', textButtonTextStyle));
     //
-    properties
-        .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonRadius', elevatedButtonRadius));
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonElevation', elevatedButtonElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'outlinedButtonRadius', outlinedButtonRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'toggleButtonsRadius', toggleButtonsRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'textButtonSchemeColor', textButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSchemeColor', elevatedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSecondarySchemeColor',
         elevatedButtonSecondarySchemeColor));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'elevatedButtonTextStyle', elevatedButtonTextStyle));
+    //
+    properties.add(DiagnosticsProperty<double>(
+        'outlinedButtonRadius', outlinedButtonRadius));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'materialButtonSchemeColor', materialButtonSchemeColor));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'outlinedButtonTextStyle', outlinedButtonTextStyle));
+    //
+    properties.add(DiagnosticsProperty<double>(
+        'toggleButtonsRadius', toggleButtonsRadius));
     properties.add(EnumProperty<SchemeColor>(
         'toggleButtonsSchemeColor', toggleButtonsSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'materialButtonSchemeColor', materialButtonSchemeColor));
+    //
     properties
         .add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
     properties.add(
@@ -2561,6 +2607,7 @@ class FlexSubThemesData with Diagnosticable {
         .add(EnumProperty<SchemeColor>('radioSchemeColor', radioSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'unselectedToggleIsColored', unselectedToggleIsColored));
+    //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));
     properties.add(EnumProperty<SchemeColor>(
@@ -2576,22 +2623,27 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedBorderIsColored',
         inputDecoratorUnfocusedBorderIsColored));
+    //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
     properties
         .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
+    //
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
+    //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
+    //
     properties
         .add(DiagnosticsProperty<double>('popupMenuRadius', popupMenuRadius));
     properties.add(
         DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
     properties
         .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
+    //
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
     properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
@@ -2599,18 +2651,22 @@ class FlexSubThemesData with Diagnosticable {
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
+    //
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
     properties.add(EnumProperty<SchemeColor>(
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
     properties.add(EnumProperty<SchemeColor>(
