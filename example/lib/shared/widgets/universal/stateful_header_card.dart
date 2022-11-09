@@ -127,11 +127,11 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     // We just need a number to represents some relative closeness of the
     // colors. We use this to determine a level when we should draw a border
     // around our panel.
-    // This value was just determined by visually testing what was a good
+    // These values were just determined by visually testing what was a good
     // trigger for when the border appeared and disappeared during testing.
-    // We can get better results if we use a different trigger value for light
+    // We get better results if we use a different trigger value for light
     // and dark mode.
-    final int closeTrigger = isLight ? 19 : 29;
+    final int closeTrigger = isLight ? 14 : 29;
     if (distance < closeTrigger) {
       return true;
     } else {
