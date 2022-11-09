@@ -62,7 +62,7 @@ class ThemeColorsSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ListTile(
           title: const Text('Theme mode'),
-          subtitle: Text('Mode ${controller.themeMode.name}'),
+          subtitle: Text('Theme ${controller.themeMode.name}'),
           trailing: ThemeModeSwitch(
             themeMode: controller.themeMode,
             onChanged: controller.setThemeMode,

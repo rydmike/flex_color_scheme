@@ -120,6 +120,7 @@ class HomePage extends StatelessWidget {
                     // deprecated in Flutter SDK, for more info see
                     // https://github.com/flutter/flutter/issues/91772
                     const ShowThemeDataColors(),
+                    const SizedBox(height: 8),
                     SwitchListTileAdaptive(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Use component themes'),

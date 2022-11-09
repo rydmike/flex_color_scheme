@@ -259,7 +259,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(
                       PrimaryTextThemeSettings(themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
-                  PanelPage(const PageExamples(), pageIndex, themeCtrl,
+                  PanelPage(
+                      PageExamples(controller: themeCtrl), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),
                   PanelPage(const WidgetShowcase(), pageIndex, themeCtrl,
                       key: ValueKey<int>(pageIndex)),

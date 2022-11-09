@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                 onThemeModeChanged: widget.onThemeModeChanged,
               ),
               const SizedBox(height: 8),
-              const ShowSubPages(isOpen: false),
+              const ShowSubPages(),
               const SizedBox(height: 8),
               const _MaterialButtonsShowcase(),
               const SizedBox(height: 8),
@@ -196,7 +196,7 @@ class _MainPanelState extends State<_MainPanel> {
           ),
           ListTile(
             title: const Text('Theme mode'),
-            subtitle: Text('Mode '
+            subtitle: Text('Theme '
                 '${widget.themeMode.toString().dotTail}'),
             trailing: ThemeModeSwitch(
               themeMode: widget.themeMode,
@@ -270,7 +270,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.toggle_on_outlined, color: iconColor),
-      title: const Text('FABs Chips Toggles Switches'),
+      title: const Text('Common Widgets'),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -284,9 +284,11 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             SwitchShowcase(),
             CheckboxShowcase(),
             RadioShowcase(),
+            SliderShowcase(),
             PopupMenuButtonShowcase(),
             SizedBox(height: 8),
             IconButtonCircleAvatarDropdownShowcase(),
+            TooltipShowcase(),
           ],
         ),
       ),
@@ -456,9 +458,15 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: MaterialBannerSnackBarShowcase(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: BottomSheetShowcase(),
+          ),
+          MaterialBannerSnackBarShowcase(),
+        ],
       ),
     );
   }

@@ -2,18 +2,22 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../controllers/theme_controller.dart';
 import 'splash_page_one.dart';
 import 'splash_page_two.dart';
 import 'subpage.dart';
 
 /// All the sub demo pages wrapped in a header card.
 class PageExamples extends StatelessWidget {
-  const PageExamples({super.key});
+  const PageExamples({this.controller, super.key});
+
+  final ThemeController? controller;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        const SizedBox(height: 8),
         ListTile(
           title: const Text('Sub page example with all widgets'),
           subtitle: const Text('Uses the same color scheme and theme. '
@@ -24,7 +28,7 @@ class PageExamples extends StatelessWidget {
               'reduce the blend on your Scaffold in such a use case.'),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () {
-            unawaited(SubpageDemo.show(context));
+            unawaited(SubpageDemo.show(context, controller));
           },
         ),
         ListTile(

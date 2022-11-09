@@ -218,7 +218,7 @@ class _LargeGridViewState extends State<LargeGridView>
                   CardSettings(themeCtrl),
                   TextThemeSettings(themeCtrl),
                   PrimaryTextThemeSettings(themeCtrl),
-                  const PageExamples(),
+                  PageExamples(controller: themeCtrl),
                 ].elementAt(itemIndex),
               ),
             ),

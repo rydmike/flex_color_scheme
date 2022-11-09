@@ -271,7 +271,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   // Open some sub-pages
-                  const ShowSubPages(),
+                  ShowSubPages(controller: controller),
                   const SizedBox(height: 8),
                   const Divider(),
                   Text('Theme Showcase', style: headlineMedium),

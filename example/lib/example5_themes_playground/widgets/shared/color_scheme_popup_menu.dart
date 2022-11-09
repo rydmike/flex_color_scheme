@@ -91,7 +91,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text('ColorScheme color $colorName'),
+            Text('Color $colorName'),
           ],
         ),
         trailing: ColorSchemeBox(

@@ -892,7 +892,7 @@ class _HomePageState extends State<HomePage> {
               Text('Theme Extension Colored Header',
                   style: headlineMedium.copyWith(color: brandColor)),
               const Text(
-                'This is FlexColorScheme V5 developers Hot Reload '
+                'This is FlexColorScheme developers Hot Reload '
                 'Playground. It has property values that you can modify and '
                 'hot reload the app to try different options and features.',
               ),
@@ -900,7 +900,7 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Theme mode'),
-                subtitle: Text('Mode '
+                subtitle: Text('Theme '
                     '${widget.themeMode.toString().dotTail}'),
                 trailing: ThemeModeSwitch(
                   themeMode: widget.themeMode,

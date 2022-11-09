@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
 import '../const/app_data.dart';
+import '../controllers/theme_controller.dart';
 import '../widgets/app/about.dart';
 import '../widgets/app/show_color_scheme_colors.dart';
 import '../widgets/app/show_sub_theme_colors.dart';
 import '../widgets/app/show_theme_data_colors.dart';
 import '../widgets/universal/page_body.dart';
+import '../widgets/universal/theme_mode_switch.dart';
 import '../widgets/universal/theme_showcase.dart';
 
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
 class SubpageDemo extends StatefulWidget {
-  const SubpageDemo({super.key});
+  const SubpageDemo({this.controller, super.key});
+
+  final ThemeController? controller;
 
   // A static convenience function show this screen, as pushed on top.
-  static Future<void> show(BuildContext context) async {
+  static Future<void> show(BuildContext context,
+      [ThemeController? controller]) async {
     await Navigator.of(context).push<Widget>(
       MaterialPageRoute<Widget>(
-        builder: (BuildContext context) => const SubpageDemo(),
+        builder: (BuildContext context) => SubpageDemo(controller: controller),
       ),
     );
   }
@@ -77,6 +82,24 @@ class _SubpageDemoState extends State<SubpageDemo> {
                 'FlexColorScheme based ThemeData inherited theme being used. '
                 'It also has a NavigationBar and TabBar in the AppBar.',
               ),
+              const SizedBox(height: 8),
+              if (widget.controller != null)
+                ListTile(
+                  title: const Text('Theme mode'),
+                  subtitle: Text('Theme ${widget.controller!.themeMode.name}'),
+                  trailing: ThemeModeSwitch(
+                    themeMode: widget.controller!.themeMode,
+                    onChanged: widget.controller!.setThemeMode,
+                  ),
+                  // Toggle theme mode also via the ListTile tap.
+                  onTap: () {
+                    if (Theme.of(context).brightness == Brightness.light) {
+                      widget.controller!.setThemeMode(ThemeMode.dark);
+                    } else {
+                      widget.controller!.setThemeMode(ThemeMode.light);
+                    }
+                  },
+                ),
               const Divider(),
               // Show all key active theme colors.
               Text('Theme Colors', style: headlineMedium),
