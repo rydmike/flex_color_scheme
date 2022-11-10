@@ -607,9 +607,9 @@ class FlexColorScheme with Diagnosticable {
   /// but it can easily be adjusted for the theme with this property.
   final double bottomAppBarElevation;
 
-  // TODO(rydmike): Update docs about issue (solved) and add style info.
-  /// When `true`, tooltip background color will match the brightness of the
-  /// theme's background color.
+  // TODO(rydmike): Review if padding/margins in tooltip theme can be removed.
+  /// When set to true, tooltip background color will match the brightness of
+  /// the theme's background color.
   ///
   /// By default Flutter's Material tooltips use a theme where the tooltip
   /// background color brightness is inverted in relation to the overall
@@ -617,24 +617,74 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// [FlexColorScheme] allows you to use a single toggle to invert this.
   /// Light tooltips on light background is e.g. the default style on
-  /// Windows Desktop. You can use this toggle to use this style, or use it as
-  /// a means to create a platform adaptive tooltip style, where the
-  /// Material and Flutter style is used on devices and Web, but the inverted
-  /// scheme is used on desktop platforms.
+  /// Windows Desktop toggle. You can use this toggle to use this style,
+  /// or use it as a means to create a platform adaptive tooltip style, where
+  /// the Material and Flutter style is used on devices and Web, but the
+  /// inverted scheme is used on e.g. Windows platform.
   ///
-  /// Defaults to false, and uses same background style as Material Design guide
-  /// and Flutter.
+  /// Defaults to false, and uses same background style as Material Design
+  /// guide and Flutter.
   ///
-  /// Regardless of value used on this property, the tooltip theme created by
-  /// [FlexColorScheme] does deviate a bit from Flutter's default tooltip theme.
-  /// With default Material text theme, it uses a slightly larger font 12dp, for
-  /// improved legibility on web and desktop with device pixel ratio 1.0, and
-  /// it also uses a padding style suitable for multiline tooltips.
+  /// Tooltip theming always done by FlexColorScheme:
   ///
-  /// Default tooltip theme in Flutter Material 2 is currently a bit flawed on
-  /// desktop and web, because it defaults to using a very small font (10 dp).
-  /// See issue: https:///github.com/flutter/flutter/issues/71429.
-  /// Material 3 changes the default tooltip theme size to 11dp.
+  /// - Desktop OS (macOS, Linux, Windows)
+  ///   - Fontsize : 12 dp
+  ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
+  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+  ///
+  /// - Mobile OS (iOS, Android, Fuchsia)
+  ///   - Fontsize : 14 dp
+  ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+  ///
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  text: white
+  ///   - light theme: text: black
+  /// - tooltipsMatchBackground: false
+  ///   - Dark theme:  text: black
+  ///   - light theme: text: white
+  ///
+  /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+  ///
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  background: Color(0xED444444),
+  ///   - light theme: background: Color(0xF0FCFCFC),
+  ///   - radius: 4 dp
+  ///   - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: false
+  ///   - none
+  ///
+  /// Additional styles when opting in on FlexColorScheme sub themes are:
+  ///
+  /// - radius: 8 dp
+  /// - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+  ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+  /// - tooltipsMatchBackground: false
+  ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+  ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+  ///
+  ///
+  /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
+  /// desktop and web, because it defaulted to using a very small font (10 dp).
+  /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
+  /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
+  /// May 6, 2022.
+  ///
+  /// The above issue is the reason for the rather extensive theme on tooltips
+  /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
+  /// default adds background tinting and more border radius.
+  ///
+  /// In a future version FCS may look into with removing some of the
+  /// custom theming above like padding, margins and fonts, that
+  /// may no longer be needed, since the new defaults are same or very
+  /// close to similar. This will in that case be done when perceived style
+  /// differences are negligible.
+  ///
+  /// When using additional theming via sub-themes properties, its
+  /// properties will if used override background color, text color and
+  /// background opacity.
   final bool tooltipsMatchBackground;
 
   /// When `true`, the status bar on Android will be the same color as
@@ -1744,28 +1794,83 @@ class FlexColorScheme with Diagnosticable {
     /// scheme the other way around only in dark mode.
     final bool swapColors = false,
 
-    /// When `true`, tooltip background color will match the brightness of the
-    /// theme's background color.
+    /// When set to true, tooltip background color will match the brightness of
+    /// the theme's background color.
     ///
     /// By default Flutter's Material tooltips use a theme where the tooltip
     /// background color brightness is inverted in relation to the overall
     /// theme's background color.
     ///
-    /// FlexColorScheme allows you to use a single
-    /// toggle to invert this. Light tooltips on light background is e.g. the
-    /// default style on Windows Desktop. You can use this toggle to use this
-    /// style, or as a means to create a platform adaptive
-    /// tooltip style, where the Material/Flutter style is used on devices and
-    /// Web, but the inverted scheme is used on desktop platforms.
+    /// [FlexColorScheme] allows you to use a single toggle to invert this.
+    /// Light tooltips on light background is e.g. the default style on
+    /// Windows Desktop toggle. You can use this toggle to use this style,
+    /// or use it as a means to create a platform adaptive tooltip style, where
+    /// the Material and Flutter style is used on devices and Web, but the
+    /// inverted scheme is used on e.g. Windows platform.
     ///
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Regardless of value used on this property, the tooltip theme created by
-    /// [FlexColorScheme] does however deviate a bit from the Flutter default
-    /// theme, it has slightly larger font for improved legibility on web and
-    /// desktop with device pixel ratio 1.0 and also use a padding style also
-    /// suitable for multiline tooltips.
+    /// Tooltip theming always done by FlexColorScheme:
+    ///
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Fontsize : 12 dp
+    ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
+    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+    ///
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Fontsize : 14 dp
+    ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  text: white
+    ///   - light theme: text: black
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  text: black
+    ///   - light theme: text: white
+    ///
+    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  background: Color(0xED444444),
+    ///   - light theme: background: Color(0xF0FCFCFC),
+    ///   - radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: false
+    ///   - none
+    ///
+    /// Additional styles when opting in on FlexColorScheme sub themes are:
+    ///
+    /// - radius: 8 dp
+    /// - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///
+    ///
+    /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
+    /// desktop and web, because it defaulted to using a very small font 10dp.
+    /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
+    /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
+    /// May 6, 2022.
+    ///
+    /// The above issue is the reason for the rather extensive theme on tooltips
+    /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
+    /// default adds background tinting and more border radius.
+    ///
+    /// In a future version FCS may look into with removing some of the
+    /// custom theming above like padding, margins and fonts, that
+    /// may no longer be needed, since the new defaults are same or very
+    /// close to similar. This will in that case be done when perceived style
+    /// differences are negligible.
+    ///
+    /// When using additional theming via sub-themes properties, its
+    /// properties will if used override background color, text color and
+    /// background opacity.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -3419,28 +3524,83 @@ class FlexColorScheme with Diagnosticable {
     /// scheme the other way around only in dark mode.
     final bool swapColors = false,
 
-    /// When true, tooltip background color will match the brightness of the
-    /// theme's background color.
+    /// When set to true, tooltip background color will match the brightness of
+    /// the theme's background color.
     ///
     /// By default Flutter's Material tooltips use a theme where the tooltip
     /// background color brightness is inverted in relation to the overall
     /// theme's background color.
     ///
-    /// FlexColorScheme allows you to use a single
-    /// toggle to invert this. Light tooltips on light background is e.g. the
-    /// default style on Windows Desktop. You can use this toggle to use this
-    /// style, or as a means to create a platform adaptive
-    /// tooltip style, where the Material/Flutter style is used on devices and
-    /// Web, but the inverted scheme is used on desktop platforms.
+    /// [FlexColorScheme] allows you to use a single toggle to invert this.
+    /// Light tooltips on light background is e.g. the default style on
+    /// Windows Desktop toggle. You can use this toggle to use this style,
+    /// or use it as a means to create a platform adaptive tooltip style, where
+    /// the Material and Flutter style is used on devices and Web, but the
+    /// inverted scheme is used on e.g. Windows platform.
     ///
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Regardless of value used on this property, the tooltip theme created by
-    /// [FlexColorScheme] does however deviate a bit from the Flutter default
-    /// theme, it has slightly larger font for improved legibility on web and
-    /// desktop with device pixel ratio 1.0 and also use a padding style also
-    /// suitable for multiline tooltips.
+    /// Tooltip theming always done by FlexColorScheme:
+    ///
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Fontsize : 12 dp
+    ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
+    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+    ///
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Fontsize : 14 dp
+    ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  text: white
+    ///   - light theme: text: black
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  text: black
+    ///   - light theme: text: white
+    ///
+    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  background: Color(0xED444444),
+    ///   - light theme: background: Color(0xF0FCFCFC),
+    ///   - radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: false
+    ///   - none
+    ///
+    /// Additional styles when opting in on FlexColorScheme sub themes are:
+    ///
+    /// - radius: 8 dp
+    /// - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///
+    ///
+    /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
+    /// desktop and web, because it defaulted to using a very small font 10dp.
+    /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
+    /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
+    /// May 6, 2022.
+    ///
+    /// The above issue is the reason for the rather extensive theme on tooltips
+    /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
+    /// default adds background tinting and more border radius.
+    ///
+    /// In a future version FCS may look into with removing some of the
+    /// custom theming above like padding, margins and fonts, that
+    /// may no longer be needed, since the new defaults are same or very
+    /// close to similar. This will in that case be done when perceived style
+    /// differences are negligible.
+    ///
+    /// When using additional theming via sub-themes properties, its
+    /// properties will if used override background color, text color and
+    /// background opacity.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -4987,24 +5147,85 @@ class FlexColorScheme with Diagnosticable {
   ///   agree and think it looks better as the default choice for apps also
   ///   in dark mode.
   ///
-  /// * Default tooltip theme in Flutter is currently a bit flawed on desktop
-  ///   and web, because it defaults to using a very small font (10 dp).
-  ///   See issue: https:///github.com/flutter/flutter/issues/71429
+  /// * The [ToolTipThemeData] will when [tooltipsMatchBackground] is set to
+  ///   true, make tooltip background color will match the brightness of
+  ///   the theme's background color.
   ///
-  ///   The default theming also does not handle multiline tooltips very well.
-  ///   The here used [TooltipThemeData] theme design corrects both these
-  ///   issues. It uses 12 dp font on desktop and web instead of 10 dp,
-  ///   and some padding instead of a height constraint to ensure that
-  ///   multiline tooltips look nice too.
+  /// By default Flutter's Material tooltips use a theme where the tooltip
+  /// background color brightness is inverted in relation to the overall
+  /// theme's background color.
   ///
-  ///   FlexColorScheme also includes a new boolean property
-  ///   [tooltipsMatchBackground], that can be toggled to not used Flutter's
-  ///   Material default that has a theme mode
-  ///   inverted background. Tooltips using light background in light theme
-  ///   and dark in dark, are commonly used on the Windows desktop platform.
-  ///   You can tie the extra property to used platform to make an automatic
-  ///   platform adaptation of the tooltip style if you like, or give users
-  ///   a preference toggle the tooltip style to their liking.
+  /// [FlexColorScheme] allows you to use a single toggle to invert this.
+  /// Light tooltips on light background is e.g. the default style on
+  /// Windows Desktop toggle. You can use this toggle to use this style,
+  /// or use it as a means to create a platform adaptive tooltip style, where
+  /// the Material and Flutter style is used on devices and Web, but the
+  /// inverted scheme is used on e.g. Windows platform.
+  ///
+  /// Defaults to false, and uses same background style as Material Design
+  /// guide and Flutter.
+  ///
+  /// Tooltip theming always done by FlexColorScheme:
+  ///
+  /// - Desktop OS (macOS, Linux, Windows)
+  ///   - Fontsize : 12 dp
+  ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
+  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+  ///
+  /// - Mobile OS (iOS, Android, Fuchsia)
+  ///   - Fontsize : 14 dp
+  ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+  ///
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  text: white
+  ///   - light theme: text: black
+  /// - tooltipsMatchBackground: false
+  ///   - Dark theme:  text: black
+  ///   - light theme: text: white
+  ///
+  /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+  ///
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  background: Color(0xED444444),
+  ///   - light theme: background: Color(0xF0FCFCFC),
+  ///   - radius: 4 dp
+  ///   - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: false
+  ///   - none
+  ///
+  /// Additional styles when opting in on FlexColorScheme sub themes are:
+  ///
+  /// - radius: 8 dp
+  /// - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: true
+  ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+  ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+  /// - tooltipsMatchBackground: false
+  ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+  ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+  ///
+  /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
+  /// desktop and web, because it defaulted to using a very small font 10dp.
+  /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
+  /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
+  /// May 6, 2022.
+  ///
+  /// The above issue is the reason for the rather extensive theme on tooltips
+  /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
+  /// default adds background tinting and more border radius.
+  ///
+  /// In a future version FCS may look into with removing some of the
+  /// custom theming above like padding, margins and fonts, that
+  /// may no longer be needed, since the new defaults are same or very
+  /// close to similar. This will in that case be done when perceived style
+  /// differences are negligible.
+  ///
+  /// When using additional theming via sub-themes properties, its
+  /// properties will if used override background color, text color and
+  /// background opacity.
+  ///
+  /// ---
   ///
   /// * The property [transparentStatusBar] is set to true by default and
   ///   used to make to the AppBar one-toned on Android device like on iOS.
@@ -5241,7 +5462,7 @@ class FlexColorScheme with Diagnosticable {
         case FlexTabBarStyle.universal:
           // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo.
           //   Try a contrasting color from tonal palettes, will work if using
-          //   seeded color scheme, but not neceassrily otherwise.
+          //   seeded color scheme, but not necessarily otherwise.
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
