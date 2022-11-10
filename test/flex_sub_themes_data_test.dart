@@ -15,6 +15,7 @@ void main() {
     // m2, same definition as m1, but using default values to create.
     const FlexSubThemesData m2 = FlexSubThemesData(
       interactionEffects: true,
+      tintedDisabledControls: true,
       blendOnColors: true,
       useFlutterDefaults: false,
       blendTextTheme: true,
@@ -45,6 +46,7 @@ void main() {
     // m3, one different values than m1 and m2.
     const FlexSubThemesData m3 = FlexSubThemesData(
       interactionEffects: true,
+      tintedDisabledControls: true,
       blendOnColors: true,
       useFlutterDefaults: false,
       blendTextTheme: true,
@@ -76,6 +78,7 @@ void main() {
     // m4, all values different from m1 and m2.
     const FlexSubThemesData m4 = FlexSubThemesData(
       interactionEffects: false,
+      tintedDisabledControls: false,
       blendOnColors: false,
       useFlutterDefaults: true,
       blendTextTheme: false,
@@ -157,6 +160,7 @@ void main() {
       expect(
         m4.copyWith(
           interactionEffects: true,
+          tintedDisabledControls: true,
           blendOnColors: true,
           useFlutterDefaults: false,
           blendTextTheme: true,
@@ -199,14 +203,18 @@ void main() {
     // MaterialStateProperty functions, they always kill equality checks.
     const FlexSubThemesData m5 = FlexSubThemesData(
       interactionEffects: true,
+      tintedDisabledControls: true,
       blendOnLevel: 5,
       blendOnColors: true,
       useFlutterDefaults: true,
+      //
       blendTextTheme: false,
       useTextTheme: true,
+      //
       defaultRadius: 14,
       buttonMinSize: Size(41, 41),
       buttonPadding: EdgeInsets.symmetric(horizontal: 14),
+      //
       thickBorderWidth: 3,
       thinBorderWidth: 2,
       // Exclude these, since they kill equality checks, we include them in
@@ -220,21 +228,32 @@ void main() {
       //     MaterialStateProperty.all<TextStyle?>(const TextStyle()),
       //
       textButtonRadius: 10,
+      textButtonSchemeColor: SchemeColor.background,
+      //
       elevatedButtonRadius: 12,
       elevatedButtonElevation: 4,
-      outlinedButtonRadius: 14,
-      toggleButtonsRadius: 10,
-      textButtonSchemeColor: SchemeColor.background,
       elevatedButtonSchemeColor: SchemeColor.primary,
       elevatedButtonSecondarySchemeColor: SchemeColor.onPrimary,
+      //
+      outlinedButtonRadius: 14,
       outlinedButtonSchemeColor: SchemeColor.surface,
       outlinedButtonOutlineSchemeColor: SchemeColor.outline,
-      materialButtonSchemeColor: SchemeColor.tertiary,
+      outlinedButtonBorderWidth: 2,
+      outlinedButtonPressedBorderWidth: 5,
+      //
+      toggleButtonsRadius: 10,
       toggleButtonsSchemeColor: SchemeColor.tertiaryContainer,
+      toggleButtonsBorderWidth: 3,
+      //
+      materialButtonSchemeColor: SchemeColor.tertiary,
+      //
       switchSchemeColor: SchemeColor.inversePrimary,
       checkboxSchemeColor: SchemeColor.inverseSurface,
       radioSchemeColor: SchemeColor.error,
       unselectedToggleIsColored: true,
+      //
+      sliderBaseSchemeColor: SchemeColor.outline,
+      //
       inputDecoratorRadius: 8,
       inputDecoratorSchemeColor: SchemeColor.secondary,
       inputDecoratorIsFilled: true,
@@ -242,27 +261,47 @@ void main() {
       inputDecoratorBorderType: FlexInputBorderType.outline,
       inputDecoratorUnfocusedHasBorder: true,
       inputDecoratorUnfocusedBorderIsColored: false,
+      inputDecoratorBorderWidth: 2.5,
+      inputDecoratorFocusedBorderWidth: 5,
+      //
       fabRadius: 12,
       fabUseShape: true,
       fabAlwaysCircular: true,
       fabSchemeColor: SchemeColor.primary,
+      //
       chipRadius: 20,
       chipSchemeColor: SchemeColor.secondaryContainer,
+      //
       cardRadius: 20,
       cardElevation: 2,
+      //
       popupMenuRadius: 8,
       popupMenuElevation: 10,
+      popupMenuSchemeColor: SchemeColor.onErrorContainer,
       popupMenuOpacity: 0.95,
+      //
+      tooltipRadius: 4,
+      tooltipWaitDuration: Duration(milliseconds: 50),
+      tooltipShowDuration: Duration(milliseconds: 500),
+      tooltipSchemeColor: SchemeColor.inversePrimary,
+      tooltipOpacity: 0.67,
+      //
       dialogRadius: 24,
       dialogElevation: 16,
       dialogBackgroundSchemeColor: SchemeColor.errorContainer,
       timePickerDialogRadius: 24,
+      //
       snackBarElevation: 8,
       snackBarBackgroundSchemeColor: SchemeColor.onPrimary,
+      //
       appBarBackgroundSchemeColor: SchemeColor.primary,
       appBarCenterTitle: true,
+      //
       tabBarItemSchemeColor: SchemeColor.onSecondary,
       tabBarIndicatorSchemeColor: SchemeColor.onPrimary,
+      //
+      bottomSheetBackgroundColor: SchemeColor.background,
+      bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
       bottomSheetRadius: 20,
       bottomSheetElevation: 10,
       bottomSheetModalElevation: 8,
@@ -302,6 +341,7 @@ void main() {
       navigationBarIndicatorOpacity: 0.6,
       navigationBarBackgroundSchemeColor: SchemeColor.tertiaryContainer,
       navigationBarOpacity: 0.5,
+      navigationBarElevation: 7,
       navigationBarHeight: 58,
       navigationBarLabelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       //
@@ -333,14 +373,18 @@ void main() {
         m5,
         equals(m4.copyWith(
           interactionEffects: true,
+          tintedDisabledControls: true,
           blendOnLevel: 5,
           blendOnColors: true,
           useFlutterDefaults: true,
+          //
           blendTextTheme: false,
           useTextTheme: true,
+          //
           defaultRadius: 14,
           buttonMinSize: const Size(41, 41),
           buttonPadding: const EdgeInsets.symmetric(horizontal: 14),
+          //
           thickBorderWidth: 3,
           thinBorderWidth: 2,
           // Exclude these, since they kill equality checks, we include them in
@@ -354,21 +398,32 @@ void main() {
           //     MaterialStateProperty.all<TextStyle?>(const TextStyle()),
           //
           textButtonRadius: 10,
+          textButtonSchemeColor: SchemeColor.background,
+          //
           elevatedButtonRadius: 12,
           elevatedButtonElevation: 4,
-          outlinedButtonRadius: 14,
-          toggleButtonsRadius: 10,
-          textButtonSchemeColor: SchemeColor.background,
           elevatedButtonSchemeColor: SchemeColor.primary,
           elevatedButtonSecondarySchemeColor: SchemeColor.onPrimary,
+          //
+          outlinedButtonRadius: 14,
           outlinedButtonSchemeColor: SchemeColor.surface,
           outlinedButtonOutlineSchemeColor: SchemeColor.outline,
-          materialButtonSchemeColor: SchemeColor.tertiary,
+          outlinedButtonBorderWidth: 2,
+          outlinedButtonPressedBorderWidth: 5,
+          //
+          toggleButtonsRadius: 10,
           toggleButtonsSchemeColor: SchemeColor.tertiaryContainer,
+          toggleButtonsBorderWidth: 3,
+          //
+          materialButtonSchemeColor: SchemeColor.tertiary,
+          //
           switchSchemeColor: SchemeColor.inversePrimary,
           checkboxSchemeColor: SchemeColor.inverseSurface,
           radioSchemeColor: SchemeColor.error,
           unselectedToggleIsColored: true,
+          //
+          sliderBaseSchemeColor: SchemeColor.outline,
+          //
           inputDecoratorRadius: 8,
           inputDecoratorSchemeColor: SchemeColor.secondary,
           inputDecoratorIsFilled: true,
@@ -376,27 +431,47 @@ void main() {
           inputDecoratorBorderType: FlexInputBorderType.outline,
           inputDecoratorUnfocusedHasBorder: true,
           inputDecoratorUnfocusedBorderIsColored: false,
+          inputDecoratorBorderWidth: 2.5,
+          inputDecoratorFocusedBorderWidth: 5,
+          //
           fabRadius: 12,
           fabUseShape: true,
           fabAlwaysCircular: true,
           fabSchemeColor: SchemeColor.primary,
+          //
           chipRadius: 20,
           chipSchemeColor: SchemeColor.secondaryContainer,
+          //
           cardRadius: 20,
           cardElevation: 2,
+          //
           popupMenuRadius: 8,
           popupMenuElevation: 10,
+          popupMenuSchemeColor: SchemeColor.onErrorContainer,
           popupMenuOpacity: 0.95,
+          //
+          tooltipRadius: 4,
+          tooltipWaitDuration: const Duration(milliseconds: 50),
+          tooltipShowDuration: const Duration(milliseconds: 500),
+          tooltipSchemeColor: SchemeColor.inversePrimary,
+          tooltipOpacity: 0.67,
+          //
           dialogRadius: 24,
           dialogElevation: 16,
           dialogBackgroundSchemeColor: SchemeColor.errorContainer,
           timePickerDialogRadius: 24,
+          //
           snackBarElevation: 8,
           snackBarBackgroundSchemeColor: SchemeColor.onPrimary,
+          //
           appBarBackgroundSchemeColor: SchemeColor.primary,
           appBarCenterTitle: true,
+          //
           tabBarItemSchemeColor: SchemeColor.onSecondary,
           tabBarIndicatorSchemeColor: SchemeColor.onPrimary,
+          //
+          bottomSheetBackgroundColor: SchemeColor.background,
+          bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
           bottomSheetRadius: 20,
           bottomSheetElevation: 10,
           bottomSheetModalElevation: 8,
@@ -436,6 +511,7 @@ void main() {
           navigationBarIndicatorOpacity: 0.6,
           navigationBarBackgroundSchemeColor: SchemeColor.tertiaryContainer,
           navigationBarOpacity: 0.5,
+          navigationBarElevation: 7,
           navigationBarHeight: 58,
           navigationBarLabelBehavior:
               NavigationDestinationLabelBehavior.alwaysShow,
@@ -479,7 +555,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : 0, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, textButtonRadius: null, textButtonSchemeColor: null, textButtonTextStyle: null, elevatedButtonRadius: null, elevatedButtonElevation: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, elevatedButtonTextStyle: null, outlinedButtonRadius: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, outlinedButtonTextStyle: null, toggleButtonsRadius: null, toggleButtonsSchemeColor: null, materialButtonSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: null, popupMenuRadius: null, popupMenuElevation: null, popupMenuOpacity: 1.0, dialogRadius: null, dialogElevation: null, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: null, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: null, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarHighlightOpacity: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: 1.0, navigationBarHeight: null, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: 1.0, navigationRailElevation: null, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
+              'FlexSubThemesData#00000(interactionEffects: true, tintedDisabledControls: true, blendOnLevel : 0, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: null, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, textButtonRadius: null, textButtonSchemeColor: null, textButtonTextStyle: null, elevatedButtonRadius: null, elevatedButtonElevation: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, elevatedButtonTextStyle: null, outlinedButtonRadius: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, outlinedButtonBorderWidth: null, outlinedButtonPressedBorderWidth: null, outlinedButtonTextStyle: null, toggleButtonsRadius: null, toggleButtonsSchemeColor: null, toggleButtonsBorderWidth: null, materialButtonSchemeColor: null, switchSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, sliderBaseSchemeColor: null, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: outline, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, inputDecoratorBorderWidth: null, inputDecoratorFocusedBorderWidth: null, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, cardRadius: null, cardElevation: null, popupMenuRadius: null, popupMenuElevation: null, popupMenuSchemeColor: null, popupMenuOpacity: 1.0, tooltipRadius: null, tooltipWaitDuration: null, tooltipShowDuration: null, tooltipSchemeColor: null, tooltipOpacity: null, dialogRadius: null, dialogElevation: null, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: null, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: 1.0, bottomNavigationBarElevation: null, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: fixed, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarHighlightOpacity: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: 1.0, navigationBarElevation: null, navigationBarHeight: null, navigationBarLabelBehavior: alwaysShow, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: 1.0, navigationRailElevation: null, navigationRailLabelType: all, navigationRailGroupAlignment: null)'));
     });
     test(
         'FSTC1.07: Test toStringShort implemented via debugFillProperties '

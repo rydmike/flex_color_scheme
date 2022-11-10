@@ -607,6 +607,7 @@ class FlexColorScheme with Diagnosticable {
   /// but it can easily be adjusted for the theme with this property.
   final double bottomAppBarElevation;
 
+  // TODO(rydmike): Update docs about issue (solved) and add style info.
   /// When `true`, tooltip background color will match the brightness of the
   /// theme's background color.
   ///
