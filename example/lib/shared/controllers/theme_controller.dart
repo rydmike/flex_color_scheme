@@ -290,6 +290,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarBackgroundSchemeColor);
     _navBarOpacity = await _themeService.load(
         Store.keyNavBarOpacity, Store.defaultNavBarOpacity);
+    _navigationBarElevation = await _themeService.load(
+        Store.keyNavigationBarElevation, Store.defaultNavigationBarElevation);
     _navBarHeight = await _themeService.load(
         Store.keyNavBarHeight, Store.defaultNavBarHeight);
     _navBarSelectedSchemeColor = await _themeService.load(
@@ -587,6 +589,7 @@ class ThemeController with ChangeNotifier {
     setNavBarBackgroundSchemeColor(
         Store.defaultNavBarBackgroundSchemeColor, false);
     setNavBarOpacity(Store.defaultNavBarOpacity, false);
+    setNavigationBarElevation(Store.defaultNavigationBarElevation, false);
     setNavBarHeight(Store.defaultNavBarHeight, false);
     setNavBarSelectedSchemeColor(
         Store.defaultNavBarSelectedItemSchemeColor, false);
@@ -1645,6 +1648,15 @@ class ThemeController with ChangeNotifier {
     _navBarOpacity = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyNavBarOpacity, value));
+  }
+
+  late double? _navigationBarElevation;
+  double? get navigationBarElevation => _navigationBarElevation;
+  void setNavigationBarElevation(double? value, [bool notify = true]) {
+    if (value == _navigationBarElevation) return;
+    _navigationBarElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNavigationBarElevation, value));
   }
 
   late double? _navBarHeight;

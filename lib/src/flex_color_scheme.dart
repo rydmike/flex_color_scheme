@@ -6252,6 +6252,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor:
                   subTheme.navigationBarBackgroundSchemeColor,
               opacity: subTheme.navigationBarOpacity,
+              elevation: subTheme.navigationBarElevation,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
               indicatorAlpha: subTheme.navigationBarIndicatorOpacity != null

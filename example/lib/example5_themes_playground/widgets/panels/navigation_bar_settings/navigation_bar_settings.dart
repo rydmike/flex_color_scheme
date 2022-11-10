@@ -13,6 +13,14 @@ class NavigationBarSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Logic for default elevation label.
+    final String elevationDefaultLabel =
+        controller.navigationBarElevation == null
+            ? controller.useMaterial3
+                ? 'default 3'
+                : 'default 0'
+            : 'global ${controller.navigationBarElevation!.toStringAsFixed(1)}';
+
     final ThemeData theme = Theme.of(context);
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
@@ -154,6 +162,69 @@ class NavigationBarSettings extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              !controller.useFlutterDefaults,
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 24,
+            divisions: 25,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationBarElevation == null ||
+                        (controller.navigationBarElevation ?? -1) < 0
+                    ? elevationDefaultLabel
+                    : (controller.navigationBarElevation?.toStringAsFixed(1) ??
+                        '')
+                : controller.useMaterial3
+                    ? 'default 3'
+                    : 'default 0',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationBarElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? (double value) {
+                    controller.setNavigationBarElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          !controller.useFlutterDefaults
+                      ? controller.navigationBarElevation == null ||
+                              (controller.navigationBarElevation ?? -1) < 0
+                          ? elevationDefaultLabel
+                          : (controller.navigationBarElevation
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : controller.useMaterial3
+                          ? 'default stadium'
+                          : 'default 4',
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

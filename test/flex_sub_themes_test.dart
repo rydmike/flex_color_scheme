@@ -136,11 +136,12 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
+          elevation: 3,
           // useFlutterDefaults: false, <<- Expect this to be default too
         ),
         equals(
           const BottomNavigationBarThemeData(
-            elevation: 0,
+            elevation: 3,
             backgroundColor: Color(0xff121212),
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
@@ -3650,6 +3651,7 @@ void main() {
         equals(
           const NavigationBarThemeData(
             height: null,
+            elevation: null,
             labelBehavior: null,
             backgroundColor: null,
             indicatorColor: null,
@@ -3669,6 +3671,7 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
+        elevation: 3,
         selectedIconSchemeColor: SchemeColor.secondary,
         selectedLabelSchemeColor: SchemeColor.error,
         unselectedIconSchemeColor: SchemeColor.onSurface,
@@ -3689,6 +3692,7 @@ void main() {
         equalsIgnoringHashCodes(
           NavigationBarThemeData(
             height: 80,
+            elevation: 3,
             backgroundColor: colorScheme.background.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),

@@ -2034,6 +2034,14 @@ class FlexSubThemes {
     /// Defaults to 1, fully opaque.
     final double opacity = 1,
 
+    /// [NavigationBar] elevation.
+    ///
+    /// If undefined, defaults to default [NavigationBarThemeData].
+    ///
+    /// If [useMaterial] if true, the default is 3 dp.
+    /// If [useMaterial] if false, the default is 0 dp.
+    final double? elevation,
+
     /// Height of the container for the Material 3 [NavigationBar].
     ///
     /// In undefined, defaults to [kNavigationBarHeight] which is 62 dp.
@@ -2192,6 +2200,7 @@ class FlexSubThemes {
 
     return NavigationBarThemeData(
       height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
+      elevation: elevation,
       backgroundColor: backgroundSchemeColor == null
           ? useFlutterDefaults || useMaterial3
               ? null

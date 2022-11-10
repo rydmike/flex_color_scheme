@@ -229,6 +229,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
             navigationBarOpacity: controller.navBarOpacity,
+            navigationBarElevation: controller.navigationBarElevation,
             navigationBarHeight: controller.navBarHeight,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings.

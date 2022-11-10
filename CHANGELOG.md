@@ -4,21 +4,23 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 8, 2022**
+**Nov 11, 2022**
 
 **NEW**
 
-* Support for changing TextStyle on themed `ElevatedButton`, `OutlinedButton`, `TextButton` via `FlexSubThemesData` properties `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes. It does not offer any simplification over standard ThemeData. Current version does not include their adjustments via the Playground, but size changes might be added later, as a usage example of this property, that sadly is a `MaterialStateProperty`.
 * Scaffold background color can now be used as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground`, that enables this.
 * Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`. It is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
 * The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` factories and `FlexThemeData.light/dark` extensions allows for better automatic adjustment of built-in scheme colors originally designed for Material 2, when using Material 3 mode and/or its seed generated ColorSchemes. Setting `swapLegacyOnMaterial3` will when `useMaterial3` is true swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. This only happens for built-in schemes where this swap makes the color design more compatible with the intended usage of the `secondary` and `tertiary` colors. To implement this, the class `FlexColor` with the built-in scheme definitions `FlexSchemeColor` have a new bool meta-data property `swapOnMaterial3` that has been defined to be `true` when the `FlexSchemeColor` it defines benefits from their swapping when using Material 3. For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to set it to `true`. The flag has no impact when using Material 2. The flag can also be toggled in the **Themes Playground** it is on by default there. The `swapLegacyOnMaterial3` when it is done for a `FlexSchemeColor` is done before any other built-in scheme modifier properties, including `swapColor`.
 * New feature: FAB Always circular, also in M3 without high radius setting. Want same old circular and stadium look on FAB in Material 3, just set `fabAlwaysCircular` in `FlexSubThemesData` to true and FAB stays circular regardless of if you use M2 or M3 or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is easier.
-* In `FlexSubThemesData` the new properties `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
+* Additional new `FlexSubThemesData` properties:
+  - `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
+  - `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
+  - `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. It does not offer any simplification over standard `ThemeData`and its button themes. Current version does not include their adjustments via the Playground, but size changes might be added later as an usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplification theming. We will allow it for the benefit of including them as passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than other themes. An example of doing it can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92), if needed for other not included button properties.
 
 **CHANGE**
 
-* In `FlexSubThemesData` the properties `bottomSheetElevation` and `bottomSheetModalElevation` are now nullable. FCS sub-theme defaults to same values as before (4 and 8) if null. Being nullable enables potential different defaults in FCS M2 and M3 mode `BottomSheet` elevations. Currently, they are the same, but this might change when M3 style BottomSheet lands in stable channel.
-* **STYLE:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FCS. Using fractional dp may cause artefact issues with monitors using or running at native resolution where 1 dp = 1 physical display pixel. You can set `thinBorderWidth` to 1.5, to get the same result as previous default.
+* In `FlexSubThemesData` all component controlling elevation properties are now nullable. FlexColorScheme sub-theme defaults to same values as before if null. Being nullable enables using potentially different defaults in FlexColorScheme Material 2 and Material 3 mode.
+* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FlexColorScheme. Using fractional dp may cause artefact issues with monitors using or running at native resolution where 1 dp = 1 physical display pixel, we see it as a default design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default.
 * **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now default to theme's ColorScheme `surface` color in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in many designs the color values are the same, but if needed you can put it back to background with:
 
 ```dart
@@ -32,7 +34,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-* **TEMP M3 FIX:** The FCS M3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable. 
+* **TEMP M3 FIX:** The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable, the `BottomSheet` will get this tint automatically via its own implementation then.
 
 **Themes Playground**
 - Improved discoverability of defining and using totally custom theme colors in the Playground.
@@ -53,6 +55,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
 - Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like the custom Material theme following `SwitchListTileAdaptive` variant on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. It is even nicer than the Cupertino design. Let's thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms. The `SwitchListTileAdaptive` is kept in use on examples 2 to 4, as an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platform, nor can it be themed to be so, you have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
 - Added support for adjusting background color and elevation of `BottomSheet`.
+- Added elevation changes of `NavigationBar`.
 - **FIX:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**
@@ -390,7 +393,7 @@ also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
 
 * [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3` is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into  Flutter stable 3.3.0 and now exists there. The issue must be re-opened or a new one submitted.
 
-* This issue discussed in SliverAppBar.medium and large [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
+* This issue discussed in `SliverAppBar.medium` and `large` [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
 
 ## 6.0.0-dev.1
 
