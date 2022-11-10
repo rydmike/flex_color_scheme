@@ -11,7 +11,8 @@ class TextFieldSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null &&
                 controller.defaultRadius == null
@@ -139,7 +140,7 @@ class TextFieldSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -150,9 +151,7 @@ class TextFieldSettings extends StatelessWidget {
                                   ?.toStringAsFixed(0) ??
                               '')
                       : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -216,7 +215,7 @@ class TextFieldSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -228,9 +227,7 @@ class TextFieldSettings extends StatelessWidget {
                           : (controller.thinBorderWidth?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -270,7 +267,7 @@ class TextFieldSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -280,9 +277,7 @@ class TextFieldSettings extends StatelessWidget {
                           : (controller.thickBorderWidth?.toStringAsFixed(1) ??
                               '')
                       : 'default 2',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

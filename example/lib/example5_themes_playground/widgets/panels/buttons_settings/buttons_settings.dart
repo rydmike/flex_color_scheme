@@ -46,6 +46,8 @@ class ButtonsSettings extends StatelessWidget {
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
 
+    final ThemeData theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -124,7 +126,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -137,9 +139,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -218,7 +218,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -231,9 +231,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -277,7 +275,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -289,9 +287,7 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.thinBorderWidth?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -335,7 +331,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -349,9 +345,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 1'
                           : 'default 2',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -410,7 +404,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -423,9 +417,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

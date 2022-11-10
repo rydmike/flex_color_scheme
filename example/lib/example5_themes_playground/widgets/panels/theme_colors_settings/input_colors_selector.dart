@@ -129,7 +129,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                     borderRadius: 0,
                     unselectedBorder: BorderSide.none,
                     selectedBorder: BorderSide(
-                      color: Theme.of(context).primaryColorLight,
+                      color: theme.primaryColorLight,
                       width: 4,
                     ),
                     onSelect: () {
@@ -138,7 +138,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                       widget.controller.setSchemeIndex(index);
                     },
                     selected: widget.controller.schemeIndex == index,
-                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    backgroundColor: theme.colorScheme.surface,
                     flexSchemeColor: isLight
                         ? AppColor.schemeAtIndex(index, widget.controller).light
                         : AppColor.schemeAtIndex(index, widget.controller).dark,

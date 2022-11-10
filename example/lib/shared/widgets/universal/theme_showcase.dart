@@ -19,6 +19,7 @@ class ThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -93,7 +94,7 @@ class ThemeShowcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Normal TextTheme',
-                      style: Theme.of(context).textTheme.titleMedium),
+                      style: theme.textTheme.titleMedium),
                 ),
                 const TextThemeShowcase(),
               ],
@@ -102,7 +103,7 @@ class ThemeShowcase extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Card(
-          color: Theme.of(context).colorScheme.primary,
+          color: theme.colorScheme.primary,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -111,7 +112,7 @@ class ThemeShowcase extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Primary TextTheme',
-                      style: Theme.of(context).primaryTextTheme.titleMedium),
+                      style: theme.primaryTextTheme.titleMedium),
                 ),
                 const PrimaryTextThemeShowcase(),
               ],
@@ -1076,9 +1077,8 @@ class TabBarForAppBarShowcase extends StatelessWidget {
     final bool isDark = theme.brightness == Brightness.dark;
     final ColorScheme colorScheme = theme.colorScheme;
 
-    final Color effectiveTabBackground =
-        Theme.of(context).appBarTheme.backgroundColor ??
-            (isDark ? colorScheme.surface : colorScheme.primary);
+    final Color effectiveTabBackground = theme.appBarTheme.backgroundColor ??
+        (isDark ? colorScheme.surface : colorScheme.primary);
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -1410,6 +1410,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

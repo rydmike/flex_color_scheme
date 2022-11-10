@@ -858,10 +858,8 @@ class _HomePageState extends State<HomePage> {
         menuTitle: const Text(AppData.packageName),
         menuLeadingTitle: Text(
           AppData.title(context),
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(fontWeight: FontWeight.w600),
+          style:
+              theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
         ),
         menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',

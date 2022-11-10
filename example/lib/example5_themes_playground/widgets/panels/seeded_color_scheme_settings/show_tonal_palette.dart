@@ -16,8 +16,9 @@ class ShowTonalPalette extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightness = Theme.of(context).brightness;
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final Brightness brightness = theme.brightness;
+    final bool isLight = brightness == Brightness.light;
 
     final FlexSchemeData scheme = AppColor.scheme(controller);
 

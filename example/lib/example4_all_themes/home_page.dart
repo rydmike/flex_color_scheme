@@ -37,8 +37,7 @@ class HomePage extends StatelessWidget {
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Row(
       children: <Widget>[
@@ -241,8 +240,7 @@ class HomePage extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     'RADIUS',
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
+                                    style: theme.textTheme.bodySmall,
                                   ),
                                   Text(
                                     controller.useSubThemes &&
@@ -256,9 +254,7 @@ class HomePage extends StatelessWidget {
                                                     ?.toStringAsFixed(0) ??
                                                 '')
                                         : '4',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
+                                    style: theme.textTheme.bodySmall!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ],

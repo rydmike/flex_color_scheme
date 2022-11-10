@@ -48,7 +48,8 @@ class ThemeColorsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final bool useSeed = controller.useKeyColors;
     final String explainSeed = useSeed
         ? 'Adjust the seed generated theme further with the "Seeded '
@@ -69,7 +70,7 @@ class ThemeColorsSettings extends StatelessWidget {
           ),
           // Toggle theme mode also via the ListTile tap.
           onTap: () {
-            if (Theme.of(context).brightness == Brightness.light) {
+            if (theme.brightness == Brightness.light) {
               controller.setThemeMode(ThemeMode.dark);
             } else {
               controller.setThemeMode(ThemeMode.light);
@@ -249,13 +250,11 @@ class ThemeColorsSettings extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'LEVEL',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall,
                       ),
                       Text(
                         '${controller.darkMethodLevel} %',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
+                        style: theme.textTheme.bodySmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ],

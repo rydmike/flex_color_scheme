@@ -37,8 +37,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     final MediaQueryData media = MediaQuery.of(context);
     final double topPadding = media.padding.top + kToolbarHeight * 2;
@@ -93,7 +92,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   ),
                   // Toggle theme mode also via the ListTile tap.
                   onTap: () {
-                    if (Theme.of(context).brightness == Brightness.light) {
+                    if (theme.brightness == Brightness.light) {
                       widget.controller!.setThemeMode(ThemeMode.dark);
                     } else {
                       widget.controller!.setThemeMode(ThemeMode.light);

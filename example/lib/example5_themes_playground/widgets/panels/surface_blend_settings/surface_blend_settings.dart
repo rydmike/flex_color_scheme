@@ -184,13 +184,11 @@ class SurfaceBlendSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'LEVEL',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     '${controller.blendLevel}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -237,14 +235,12 @@ class SurfaceBlendSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'LEVEL',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
                     '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevel : ""}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -351,13 +347,11 @@ class SurfaceBlendSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'LEVEL',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     '${controller.blendLevelDark}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -404,14 +398,12 @@ class SurfaceBlendSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'LEVEL',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
                     '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevelDark : ""}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],

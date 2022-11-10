@@ -35,7 +35,8 @@ class SeededColorSchemeSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final bool useSeed = controller.useKeyColors;
     final String explainSeed = useSeed
         ? 'Theme is based on seed generated ColorScheme below'
@@ -93,7 +94,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
               "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
               "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: theme.textTheme.labelSmall,
             ),
           ),
         if (controller.schemeIndex == (AppColor.schemes.length - 1))
@@ -107,7 +108,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
               "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
               // ignore: lines_longer_than_80_chars
               "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: theme.textTheme.labelSmall,
             ),
           ),
         const ListTile(
