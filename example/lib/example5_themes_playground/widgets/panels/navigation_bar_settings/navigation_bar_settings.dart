@@ -222,8 +222,8 @@ class NavigationBarSettings extends StatelessWidget {
                                   ?.toStringAsFixed(1) ??
                               '')
                       : controller.useMaterial3
-                          ? 'default stadium'
-                          : 'default 4',
+                          ? 'default 3'
+                          : 'default 0',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
