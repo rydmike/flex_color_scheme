@@ -170,7 +170,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuRadius,
     this.popupMenuElevation,
     this.popupMenuSchemeColor,
-    this.popupMenuOpacity = 1,
+    this.popupMenuOpacity,
     //
     this.tooltipRadius,
     this.tooltipWaitDuration,
@@ -1098,7 +1098,9 @@ class FlexSubThemesData with Diagnosticable {
   /// and widget then uses its default behavior background color, which also
   /// defaults to use [ThemeData.colorscheme] and in it [ColorScheme.surface].
   ///
-  /// If null, defaults to 1, fully opaque.
+  /// Defaults to undefined (null).
+  ///
+  /// If undefined, produced result is same as 1, fully opaque.
   final double? popupMenuOpacity;
 
   // TODO(rydmike): Define all default for tooltips, see old FCS style.
