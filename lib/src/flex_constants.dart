@@ -99,11 +99,16 @@ const double kCardElevation = 0;
 /// and https://m3.material.io/styles/elevation/tokens
 const double kElevatedButtonElevation = 1;
 
-/// Default elevation of [PopupMenuButton].
+/// Default elevation of [PopupMenuButton] in Material 3.
 ///
 /// Based on https://m3.material.io/components/menus/specs
 /// and https://m3.material.io/styles/elevation/tokens
 const double kPopupMenuElevation = 3;
+
+/// Default elevation of [PopupMenuButton] in Material 2 mode.
+///
+/// Opinionated value, M2 spec is 8.
+const double kPopupMenuElevationFCS = 6;
 
 /// Default elevation of [Dialog].
 ///

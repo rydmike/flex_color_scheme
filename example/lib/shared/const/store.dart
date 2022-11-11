@@ -811,6 +811,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSnackBarSchemeColor = null;
 
+  // Key used to read and save the popupMenuSchemeColor value.
+  static const String keyPopupMenuSchemeColor = 'popupMenuSchemeColor';
+  // Default value for the popupMenuSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultPopupMenuSchemeColor = null;
+
   // Key used to read and save the popupMenuOpacity value.
   static const String keyPopupMenuOpacity = 'popupMenuOpacity';
   // Default value for the popupMenuOpacity, also used to reset settings.
@@ -821,6 +827,12 @@ class Store {
   // Default value for the popupMenuBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultPopupMenuBorderRadius = null;
+
+  // Key used to read and save the popupMenuElevation value.
+  static const String keyPopupMenuElevation = 'popupMenuElevation';
+  // Default value for the popupMenuElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultPopupMenuElevation = null;
 
   // Key used to read and save the cardBorderRadius value.
   static const String keyCardBorderRadius = 'cardBorderRadius';

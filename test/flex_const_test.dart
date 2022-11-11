@@ -72,6 +72,9 @@ void main() {
     test('FCT kPopupMenuElevation is 3', () {
       expect(kPopupMenuElevation, 3);
     });
+    test('FCT kPopupMenuElevationFCS is 6', () {
+      expect(kPopupMenuElevationFCS, 6);
+    });
     test('FCT kDialogElevation is 6', () {
       expect(kDialogElevation, 6);
     });

@@ -393,10 +393,16 @@ class ThemeController with ChangeNotifier {
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
     _snackBarSchemeColor = await _themeService.load(
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
+    //
+    _popupMenuSchemeColor = await _themeService.load(
+        Store.keyPopupMenuSchemeColor, Store.defaultPopupMenuSchemeColor);
     _popupMenuOpacity = await _themeService.load(
         Store.keyPopupMenuOpacity, Store.defaultPopupMenuOpacity);
+    _popupMenuElevation = await _themeService.load(
+        Store.keyPopupMenuElevation, Store.defaultPopupMenuElevation);
     _popupMenuBorderRadius = await _themeService.load(
         Store.keyPopupMenuBorderRadius, Store.defaultPopupMenuBorderRadius);
+    //
     _cardBorderRadius = await _themeService.load(
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
     _dialogBackgroundSchemeColor = await _themeService.load(
@@ -648,8 +654,12 @@ class ThemeController with ChangeNotifier {
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
+    //
+    setPopupMenuSchemeColor(Store.defaultPopupMenuSchemeColor, false);
     setPopupMenuOpacity(Store.defaultPopupMenuOpacity, false);
+    setPopupMenuElevation(Store.defaultPopupMenuElevation, false);
     setPopupMenuBorderRadius(Store.defaultPopupMenuBorderRadius, false);
+    //
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
@@ -2038,6 +2048,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySnackBarSchemeColor, value));
   }
 
+  late SchemeColor? _popupMenuSchemeColor;
+  SchemeColor? get popupMenuSchemeColor => _popupMenuSchemeColor;
+  void setPopupMenuSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _popupMenuSchemeColor) return;
+    _popupMenuSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPopupMenuSchemeColor, value));
+  }
+
   late double _popupMenuOpacity;
   double get popupMenuOpacity => _popupMenuOpacity;
   void setPopupMenuOpacity(double? value, [bool notify = true]) {
@@ -2046,6 +2065,15 @@ class ThemeController with ChangeNotifier {
     _popupMenuOpacity = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyPopupMenuOpacity, value));
+  }
+
+  late double? _popupMenuElevation;
+  double? get popupMenuElevation => _popupMenuElevation;
+  void setPopupMenuElevation(double? value, [bool notify = true]) {
+    if (value == _popupMenuElevation) return;
+    _popupMenuElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPopupMenuElevation, value));
   }
 
   late double? _popupMenuBorderRadius;

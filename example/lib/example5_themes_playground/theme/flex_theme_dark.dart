@@ -170,8 +170,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Card settings.
             cardRadius: controller.cardBorderRadius,
             // PopupMenuButton settings.
-            popupMenuOpacity: controller.popupMenuOpacity,
             popupMenuRadius: controller.popupMenuBorderRadius,
+            popupMenuElevation: controller.popupMenuElevation,
+            popupMenuSchemeColor: controller.popupMenuSchemeColor,
+            popupMenuOpacity: controller.popupMenuOpacity,
             // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,

@@ -1071,16 +1071,18 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Default elevation of [PopupMenuButton].
   ///
-  /// The SDK elevation 8 is too high, we make it more subtle via
-  /// opinionated default value [kPopupMenuElevation] of 3, which happens to
-  /// be M3 default, we use it for FCS M2 default as well
+  /// If not defined, then if [useMaterial3] is:
   ///
-  /// If null, defaults to [kPopupMenuElevation] = 3, M3 default.
+  /// - false : defaults to [kPopupMenuElevationFCS] = 6 dp.
+  /// - true  : defaults to [kPopupMenuElevation] = 3 dp.
   final double? popupMenuElevation;
 
   /// The ColorScheme based color used as background color on [PopupMenuButton].
   ///
-  /// If not defined, default to ambient theme default, which is surface color.
+  /// If not defined, then if [useMaterial3] is:
+  /// - false : defaults to theme.cardColor.
+  /// - true  : defaults to theme.colorScheme.surface.
+  /// Usually they are the same.
   final SchemeColor? popupMenuSchemeColor;
 
   /// Popup menu background opacity.

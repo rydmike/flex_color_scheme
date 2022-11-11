@@ -5592,6 +5592,23 @@ class FlexColorScheme with Diagnosticable {
                 ? kBottomSheetModalElevation
                 : kBottomSheetModalElevationM2);
 
+    // Popupmenu background Color and elevation.
+    final double popupMenuElevation = subTheme.popupMenuElevation ??
+        (useMaterial3 ? kPopupMenuElevation : kPopupMenuElevationFCS);
+    final Color? popupMenuColor = subTheme.popupMenuOpacity == null
+        ? subTheme.popupMenuSchemeColor == null
+            ? null
+            : FlexSubThemes.schemeColor(
+                subTheme.popupMenuSchemeColor!,
+                colorScheme,
+              )
+        : subTheme.popupMenuSchemeColor == null
+            ? colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!)
+            : FlexSubThemes.schemeColor(
+                subTheme.popupMenuSchemeColor!,
+                colorScheme,
+              ).withOpacity(subTheme.popupMenuOpacity!);
+
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
     return ThemeData(
@@ -6121,10 +6138,14 @@ class FlexColorScheme with Diagnosticable {
                   (subTheme.defaultRadius == null
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: subTheme.popupMenuElevation,
-              color: subTheme.popupMenuOpacity == null
-                  ? null
-                  : colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!),
+              elevation: popupMenuElevation,
+              color: useMaterial3
+                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+                  ? ElevationOverlay.applySurfaceTint(
+                      popupMenuColor ?? colorScheme.surface,
+                      colorScheme.surfaceTint,
+                      popupMenuElevation)
+                  : popupMenuColor,
             )
           : null,
       dialogTheme: useSubThemes
@@ -6162,12 +6183,12 @@ class FlexColorScheme with Diagnosticable {
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
               backgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint temp fix when M3 supported.
+                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
                   ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
                       colorScheme.surfaceTint, bottomSheetElevation)
                   : bottomSheetColor,
               modalBackgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint temp fix when M3 supported.
+                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
                   ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
                       colorScheme.surfaceTint, bottomSheetModalElevation)
                   : bottomSheetModalColor,

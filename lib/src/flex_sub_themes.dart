@@ -2973,14 +2973,22 @@ class FlexSubThemes {
 
     /// Popup menu elevation.
     ///
-    /// If null, defaults to [kPopupMenuElevation] = 3, M3 default.
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to 8 dp.
+    /// - true  : defaults to 3 dp.
+    /// Usually they are the same.
     final double? elevation,
 
     /// The background color of the popup menu.
+    ///
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to theme.cardColor.
+    /// - true  : defaults to theme.colorScheme.surface.
+    /// Usually they are the same.
     final Color? color,
   }) =>
       PopupMenuThemeData(
-        elevation: elevation ?? kPopupMenuElevation,
+        elevation: elevation,
         color: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

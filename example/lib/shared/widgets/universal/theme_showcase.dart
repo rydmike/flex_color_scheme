@@ -546,34 +546,7 @@ class _SliderShowcaseState extends State<SliderShowcase> {
 }
 
 class PopupMenuButtonShowcase extends StatelessWidget {
-  const PopupMenuButtonShowcase({
-    super.key,
-    this.enabled = true,
-    this.popupRadius,
-  });
-  final bool enabled;
-  final double? popupRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 4,
-      children: <Widget>[
-        _PopupMenuButton(enabled: enabled, radius: popupRadius),
-      ],
-    );
-  }
-}
-
-class _PopupMenuButton extends StatelessWidget {
-  const _PopupMenuButton({
-    this.enabled = true,
-    this.radius,
-  });
-  final bool enabled;
-  final double? radius;
+  const PopupMenuButtonShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -581,8 +554,11 @@ class _PopupMenuButton extends StatelessWidget {
     final ColorScheme scheme = theme.colorScheme;
     return PopupMenuButton<int>(
       onSelected: (_) {},
-      enabled: enabled,
-      tooltip: enabled ? 'Show menu' : 'Menu disabled',
+      tooltip: 'Show menu',
+      position: PopupMenuPosition.under,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
       itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
         PopupMenuItem<int>(value: 1, child: Text('Option 1')),
         PopupMenuItem<int>(value: 2, child: Text('Option 2')),
@@ -591,19 +567,19 @@ class _PopupMenuButton extends StatelessWidget {
         PopupMenuItem<int>(value: 5, child: Text('Option 5')),
       ],
       child: AbsorbPointer(
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
+        child: TextButton.icon(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             backgroundColor: scheme.primary,
             foregroundColor: scheme.onPrimary,
             disabledForegroundColor: scheme.onSurface,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(radius ?? 8)),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ),
-          onPressed: enabled ? () {} : null,
+          onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('PopupMenuButton'),
+          label: const Text('Show menu'),
         ),
       ),
     );

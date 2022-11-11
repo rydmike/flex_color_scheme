@@ -15,7 +15,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * Additional new `FlexSubThemesData` properties:
   - `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
   - `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
+  - `popupMenuElevation` and `popupMenuSchemeColor`.
   - `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. It does not offer any simplification over standard `ThemeData`and its button themes. Current version does not include their adjustments via the Playground, but size changes might be added later as an usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplification theming. We will allow it for the benefit of including them as passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than other themes. An example of doing it can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92), if needed for other not included button properties.
+   
 
 **CHANGE**
 
@@ -34,7 +36,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-* **TEMP M3 FIX:** The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable, the `BottomSheet` will get this tint automatically via its own implementation then.
+* **TEMP M3 FIX:** The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable, the `BottomSheet` will get this tint automatically via its own implementation then. The same temp M3 fix is also used on themed `PopupMenuButton`. Unfortunately the elevation based shadow cannot be added. This will wait for actual implementation of these Material 3 themes. That exist in Flutter master channel already, but not yet in Flutter stable 3.3. This temp fix makes it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3 already now. 
 
 **Themes Playground**
 - Improved discoverability of defining and using totally custom theme colors in the Playground.
@@ -56,7 +58,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
 - Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like the custom Material theme following `SwitchListTileAdaptive` variant on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. It is even nicer than the Cupertino design. Let's thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms. The `SwitchListTileAdaptive` is kept in use on examples 2 to 4, as an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platform, nor can it be themed to be so, you have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
 - Added support for adjusting background color and elevation of `BottomSheet`.
-- Added elevation changes of `NavigationBar`.
+- Added support for adjusting elevation of `NavigationBar`.
+- Added support for adjusting elevation and background color of `PopupMenuButton`.
 - **FIX:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**

@@ -359,12 +359,19 @@ String generateThemeDartCode(ThemeController controller) {
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '    cardRadius: ${controller.cardBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String popupMenuOpacity = controller.popupMenuOpacity != 1
-      ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
-      : '';
   final String popupMenuBorderRadius = controller.popupMenuBorderRadius != null
       ? '    popupMenuRadius: ${controller.popupMenuBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String popupMenuElevation = controller.popupMenuElevation != null
+      ? '    popupMenuElevation: ${controller.popupMenuElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String popupMenuSchemeColor = controller.popupMenuSchemeColor != null
+      ? '    popupMenuSchemeColor: ${controller.popupMenuSchemeColor},\n'
+      : '';
+  final String popupMenuOpacity = controller.popupMenuOpacity != 1
+      ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
+      : '';
+
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor !=
           null
@@ -654,8 +661,10 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$cardBorderRadius'
           //
-          '$popupMenuOpacity'
           '$popupMenuBorderRadius'
+          '$popupMenuElevation'
+          '$popupMenuSchemeColor'
+          '$popupMenuOpacity'
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
@@ -766,8 +775,11 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$cardBorderRadius'
           //
-          '$popupMenuOpacity'
           '$popupMenuBorderRadius'
+          '$popupMenuElevation'
+          '$popupMenuSchemeColor'
+          '$popupMenuOpacity'
+
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
