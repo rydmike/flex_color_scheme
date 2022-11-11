@@ -15,6 +15,9 @@ class ButtonsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null &&
                 controller.defaultRadius == null
@@ -56,13 +59,13 @@ class ButtonsSettings extends StatelessWidget {
     final String thickBorderDefaultLabel =
         controller.outlinedButtonPressedBorderWidth == null &&
                 controller.thickBorderWidth == null
-            ? 'default 2'
+            ? useMaterial3
+                ? 'default 1'
+                : 'default 2'
             : controller.outlinedButtonPressedBorderWidth == null &&
                     controller.thickBorderWidth != null
                 ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
                 : '';
-
-    final ThemeData theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,7 +277,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setInputDecoratorBorderWidth(
+                    controller.setOutlinedButtonBorderWidth(
                         value <= 0 ? null : value);
                   }
                 : null,
@@ -324,7 +327,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setInputDecoratorFocusedBorderWidth(
+                    controller.setOutlinedButtonPressedBorderWidth(
                         value <= 0 ? null : value);
                   }
                 : null,

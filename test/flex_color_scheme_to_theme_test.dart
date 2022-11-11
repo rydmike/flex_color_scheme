@@ -3499,5 +3499,380 @@ void main() {
         ),
       );
     });
+    // Test custom outlines on ToggleButtons, OutlinedButton, InputDecorator
+    test(
+        'FCS7.103a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with default global widths set '
+        'EXPECT default global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+            // We will override these and should not see them
+            // thinBorderWidth: 1,
+            // thickBorderWidth: 2,
+            ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(1),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(1),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(2),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(2),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(1),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(2),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(2),
+      );
+    });
+    test(
+        'FCS7.103b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a FlexSubThemesData with default global widths set '
+        'EXPECT default global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+            // Defaults we should see
+            // thinBorderWidth: 1,
+            // thickBorderWidth: 2,
+            ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(1),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(1),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(2),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(2),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(1),
+      );
+      // OutlinedButton thick widths, Material 3 has own default of 1!!
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(1),
+      );
+    });
+    test(
+        'FCS7.103c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with custom global widths set '
+        'EXPECT custom global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(3),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(3),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(3),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(4),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(4),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(3),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(4),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(4),
+      );
+    });
+    test(
+        'FCS7.103d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a FlexSubThemesData with custom global widths set '
+        'EXPECT custom global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(3),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(3),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(3),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(4),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(4),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(3),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(4),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(4),
+      );
+    });
+    test(
+        'FCS7.103e GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with custom component widths set '
+        'EXPECT custom component widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          // We will override these and should not see them
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+          // Component overrides we should find instead.
+          toggleButtonsBorderWidth: 1.5,
+          inputDecoratorBorderWidth: 2.5,
+          inputDecoratorFocusedBorderWidth: 3.5,
+          outlinedButtonBorderWidth: 0.5,
+          outlinedButtonPressedBorderWidth: 1.5,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1.5),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(2.5),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(2.5),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(3.5),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(3.5),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(0.5),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(1.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(1.5),
+      );
+    });
   });
 }

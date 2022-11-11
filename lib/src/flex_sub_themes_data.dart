@@ -580,25 +580,25 @@ class FlexSubThemesData with Diagnosticable {
   /// This default is same in both Material 2 and Material 3 theme mode.
   final EdgeInsetsGeometry? buttonPadding;
 
-  /// Border width of Widgets with an outline border.
+  /// Default for thicker border width state of Widgets with an outline border.
   ///
-  /// Applies to [OutlinedButton] and always to [ToggleButtons], as well
-  /// as to selected state of [InputDecorator].
-  ///
+  /// Used as default for pressed and error [OutlinedButton] and for
+  /// focused [InputDecorator].
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
   /// defaults to [kThickBorderWidth] = 2.
   /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
   final double? thickBorderWidth;
 
-  /// Border thickness on unselected input decorator and disabled buttons.
+  /// Default for normal border width of Widgets with an outline border.
   ///
-  /// Applies to disabled [OutlinedButton] and to un-selected state in
-  /// [InputDecorator].
+  /// Used as default by [OutlinedButton], [ToggleButtons] and [InputDecorator].
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
   /// defaults to [kThinBorderWidth] = 1.
-  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  ///
+  /// If undefined and [ThemeData.useMaterial3] is true,
+  /// defaults to [kThinBorderWidth] = 1.
   final double? thinBorderWidth;
 
   /// Border radius override value for [TextButton].

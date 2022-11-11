@@ -185,7 +185,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             outlinedButtonOutlineSchemeColor:
                 controller.outlinedButtonOutlineSchemeColor,
-            outlinedButtonBorderWidth: controller.outlinedButtonBorderRadius,
+            outlinedButtonBorderWidth: controller.outlinedButtonBorderWidth,
             outlinedButtonPressedBorderWidth:
                 controller.outlinedButtonPressedBorderWidth,
             // TextButton settings.

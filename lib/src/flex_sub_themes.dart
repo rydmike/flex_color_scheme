@@ -1613,8 +1613,7 @@ class FlexSubThemes {
 
     /// The border width when the input is unselected or disabled.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.0, when
-    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    /// If null, defaults to [kThinBorderWidth] = 1.
     final double? unfocusedBorderWidth,
 
     /// Horizontal padding on either side of the border's
@@ -1680,8 +1679,7 @@ class FlexSubThemes {
         (useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
 
     // Default outline widths.
-    final double unfocusedWidth =
-        unfocusedBorderWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
     final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
     switch (borderType) {
@@ -2743,8 +2741,7 @@ class FlexSubThemes {
 
     /// The outline thickness when the button is not selected and not pressed.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.0, when
-    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    /// If null, defaults to [kThinBorderWidth] = 1.0.
     final double? outlineWidth,
 
     /// Padding for the button theme.
@@ -2794,8 +2791,7 @@ class FlexSubThemes {
         : schemeColor(outlineSchemeColor, colorScheme);
 
     // Default outline widths.
-    final double normalWidth =
-        outlineWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double normalWidth = outlineWidth ?? kThinBorderWidth;
     final double pressedWidth =
         pressedOutlineWidth ?? (useMaterial3 ? 1 : kThickBorderWidth);
 
