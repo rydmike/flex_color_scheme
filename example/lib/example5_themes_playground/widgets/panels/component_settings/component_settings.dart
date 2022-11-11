@@ -14,6 +14,7 @@ class ComponentSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -27,6 +28,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
+        const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Global border radius on components'),
@@ -84,6 +86,112 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
+
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Thin border width'),
+          subtitle: const Text('Used as default by '
+              'InputDecorator, OutlinedButton and ToggleButtons'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth == null ||
+                        (controller.thinBorderWidth ?? 0) <= 0
+                    ? 'default 1'
+                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThinBorderWidth(value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thinBorderWidth == null ||
+                              (controller.thinBorderWidth ?? 0) < 0
+                          ? controller.useMaterial3
+                              ? 'default 1' // M3
+                              : 'default 1' // M2
+                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Thick border width'),
+          subtitle: const Text('Used as default for focused InputDecorator '
+              'and pressed OutlinedButton'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth == null ||
+                        (controller.thickBorderWidth ?? 0) < 0
+                    ? 'default 2'
+                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 2',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThickBorderWidth(value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thickBorderWidth == null ||
+                              (controller.thickBorderWidth ?? 0) <= 0
+                          ? 'default 2'
+                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 2',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
         SwitchListTile(
           title: const Text('Themed interaction effects'),
           subtitle: const Text('The hover, focus, highlight, splash and '

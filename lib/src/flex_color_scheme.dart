@@ -5551,8 +5551,10 @@ class FlexColorScheme with Diagnosticable {
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
-            focusedBorderWidth: subTheme.thickBorderWidth,
-            unfocusedBorderWidth: subTheme.thinBorderWidth,
+            focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
+                subTheme.thickBorderWidth,
+            unfocusedBorderWidth:
+                subTheme.inputDecoratorBorderWidth ?? subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
             unfocusedBorderIsColored:
                 subTheme.inputDecoratorUnfocusedBorderIsColored,
@@ -5996,8 +5998,10 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.outlinedButtonSchemeColor,
               outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
               radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
-              pressedOutlineWidth: subTheme.thickBorderWidth,
-              outlineWidth: subTheme.thinBorderWidth,
+              pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ??
+                  subTheme.thickBorderWidth,
+              outlineWidth: subTheme.outlinedButtonBorderWidth ??
+                  subTheme.thinBorderWidth,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.outlinedButtonTextStyle,
@@ -6046,7 +6050,8 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.toggleButtonsSchemeColor,
-              borderWidth: subTheme.thinBorderWidth,
+              borderWidth:
+                  subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
               radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,

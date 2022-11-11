@@ -11,6 +11,23 @@ class TextFieldSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String thinBorderDefaultLabel =
+        controller.inputDecoratorBorderWidth == null &&
+                controller.thinBorderWidth == null
+            ? 'default 1'
+            : controller.inputDecoratorBorderWidth == null &&
+                    controller.thinBorderWidth != null
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
+                : '';
+    final String thickBorderDefaultLabel =
+        controller.inputDecoratorFocusedBorderWidth == null &&
+                controller.thickBorderWidth == null
+            ? 'default 2'
+            : controller.inputDecoratorFocusedBorderWidth == null &&
+                    controller.thickBorderWidth != null
+                ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
+                : '';
+
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final String decoratorRadiusDefaultLabel =
@@ -180,31 +197,27 @@ class TextFieldSettings extends StatelessWidget {
               : null,
         ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Unfocused border width'),
-          subtitle: const Text('Setting shared with OutlinedButton and '
-              'ToggleButtons'),
-        ),
-        ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -0.5,
+          subtitle: Slider(
+            min: 0,
             max: 5,
-            divisions: 11,
+            divisions: 10,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth == null ||
-                        (controller.thinBorderWidth ?? -0.5) < 0
-                    ? controller.useMaterial3
-                        ? 'default 1' // M3
-                        : 'default 1' // M2
-                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                ? controller.inputDecoratorBorderWidth == null ||
+                        (controller.inputDecoratorBorderWidth ?? 0) <= 0
+                    ? thinBorderDefaultLabel
+                    : (controller.inputDecoratorBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
                 : 'default 1',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth ?? -0.5
-                : -0.5,
+                ? controller.inputDecoratorBorderWidth ?? 0
+                : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThinBorderWidth(value < 0 ? null : value);
+                    controller.setInputDecoratorBorderWidth(
+                        value <= 0 ? null : value);
                   }
                 : null,
           ),
@@ -219,12 +232,11 @@ class TextFieldSettings extends StatelessWidget {
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thinBorderWidth == null ||
-                              (controller.thinBorderWidth ?? -0.5) < 0
-                          ? controller.useMaterial3
-                              ? 'default 1' // M3
-                              : 'default 1' // M2
-                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                      ? controller.inputDecoratorBorderWidth == null ||
+                              (controller.inputDecoratorBorderWidth ?? 0) < 0
+                          ? thinBorderDefaultLabel
+                          : (controller.inputDecoratorBorderWidth
+                                  ?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',
                   style: theme.textTheme.bodySmall!
@@ -237,26 +249,25 @@ class TextFieldSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Focused border width'),
-          subtitle: const Text('Setting shared with pressed OutlinedButton'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -0.5,
+          subtitle: Slider(
+            min: 0,
             max: 5,
-            divisions: 11,
+            divisions: 10,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth == null ||
-                        (controller.thickBorderWidth ?? -0.5) < 0
-                    ? 'default 2'
-                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
+                ? controller.inputDecoratorFocusedBorderWidth == null ||
+                        (controller.inputDecoratorFocusedBorderWidth ?? 0) <= 0
+                    ? thickBorderDefaultLabel
+                    : (controller.inputDecoratorFocusedBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
                 : 'default 2',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth ?? -0.5
-                : -0.5,
+                ? controller.inputDecoratorFocusedBorderWidth ?? 0
+                : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThickBorderWidth(value < 0 ? null : value);
+                    controller.setInputDecoratorFocusedBorderWidth(
+                        value <= 0 ? null : value);
                   }
                 : null,
           ),
@@ -271,10 +282,13 @@ class TextFieldSettings extends StatelessWidget {
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thickBorderWidth == null ||
-                              (controller.thickBorderWidth ?? -0.5) < 0
-                          ? 'default 2'
-                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                      ? controller.inputDecoratorFocusedBorderWidth == null ||
+                              (controller.inputDecoratorFocusedBorderWidth ??
+                                      0) <=
+                                  0
+                          ? thickBorderDefaultLabel
+                          : (controller.inputDecoratorFocusedBorderWidth
+                                  ?.toStringAsFixed(1) ??
                               '')
                       : 'default 2',
                   style: theme.textTheme.bodySmall!
