@@ -204,6 +204,12 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorUnfocusedBorderIsColored = await _themeService.load(
         Store.keyInputDecoratorUnfocusedBorderIsColored,
         Store.defaultInputDecoratorUnfocusedBorderIsColored);
+    _inputDecoratorBorderWidth = await _themeService.load(
+        Store.keyInputDecoratorBorderWidth,
+        Store.defaultInputDecoratorBorderWidth);
+    _inputDecoratorFocusedBorderWidth = await _themeService.load(
+        Store.keyInputDecoratorFocusedBorderWidth,
+        Store.defaultInputDecoratorFocusedBorderWidth);
     //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
@@ -341,6 +347,7 @@ class ThemeController with ChangeNotifier {
         Store.keyTextButtonSchemeColor, Store.defaultTextButtonSchemeColor);
     _textButtonBorderRadius = await _themeService.load(
         Store.keyTextButtonBorderRadius, Store.defaultTextButtonBorderRadius);
+    //
     _elevatedButtonSchemeColor = await _themeService.load(
         Store.keyElevatedButtonSchemeColor,
         Store.defaultElevatedButtonSchemeColor);
@@ -350,6 +357,7 @@ class ThemeController with ChangeNotifier {
     _elevatedButtonBorderRadius = await _themeService.load(
         Store.keyElevatedButtonBorderRadius,
         Store.defaultElevatedButtonBorderRadius);
+    //
     _outlinedButtonSchemeColor = await _themeService.load(
         Store.keyOutlinedButtonSchemeColor,
         Store.defaultOutlinedButtonSchemeColor);
@@ -359,12 +367,22 @@ class ThemeController with ChangeNotifier {
     _outlinedButtonBorderRadius = await _themeService.load(
         Store.keyOutlinedButtonBorderRadius,
         Store.defaultOutlinedButtonBorderRadius);
+    _outlinedButtonBorderWidth = await _themeService.load(
+        Store.keyOutlinedButtonBorderWidth,
+        Store.defaultOutlinedButtonBorderWidth);
+    _outlinedButtonPressedBorderWidth = await _themeService.load(
+        Store.keyOutlinedButtonPressedBorderWidth,
+        Store.defaultOutlinedButtonPressedBorderWidth);
+    //
     _toggleButtonsSchemeColor = await _themeService.load(
         Store.keyToggleButtonsSchemeColor,
         Store.defaultToggleButtonsSchemeColor);
     _toggleButtonsBorderRadius = await _themeService.load(
         Store.keyToggleButtonsBorderRadius,
         Store.defaultToggleButtonsBorderRadius);
+    _toggleButtonsBorderWidth = await _themeService.load(
+        Store.keyToggleButtonsBorderWidth,
+        Store.defaultToggleButtonsBorderWidth);
     //
     // Toggleable SETTINGS.
     _unselectedToggleIsColored = await _themeService.load(
@@ -541,6 +559,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorUnfocusedHasBorder, false);
     setInputDecoratorUnfocusedBorderIsColored(
         Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
+    setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
+    setInputDecoratorFocusedBorderWidth(
+        Store.defaultInputDecoratorFocusedBorderWidth, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -626,18 +647,25 @@ class ThemeController with ChangeNotifier {
     // Button SETTINGS.
     setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
     setTextButtonBorderRadius(Store.defaultTextButtonBorderRadius, false);
+    //
     setElevatedButtonSchemeColor(Store.defaultElevatedButtonSchemeColor, false);
     setElevatedButtonSecondarySchemeColor(
         Store.defaultElevatedButtonSecondarySchemeColor, false);
     setElevatedButtonBorderRadius(
         Store.defaultElevatedButtonBorderRadius, false);
+    //
     setOutlinedButtonSchemeColor(Store.defaultOutlinedButtonSchemeColor, false);
     setOutlinedButtonOutlineSchemeColor(
         Store.defaultOutlinedButtonOutlineSchemeColor, false);
     setOutlinedButtonBorderRadius(
         Store.defaultOutlinedButtonBorderRadius, false);
+    setOutlinedButtonBorderWidth(Store.defaultOutlinedButtonBorderWidth, false);
+    setOutlinedButtonPressedBorderWidth(
+        Store.defaultOutlinedButtonPressedBorderWidth, false);
+    //
     setToggleButtonsSchemeColor(Store.defaultToggleButtonsSchemeColor, false);
     setToggleButtonsBorderRadius(Store.defaultToggleButtonsBorderRadius, false);
+    setToggleButtonsBorderWidth(Store.defaultToggleButtonsBorderWidth, false);
     //
     // Toggleable SETTINGS.
     setUnselectedToggleIsColored(Store.defaultUnselectedToggleIsColored, false);
@@ -1338,6 +1366,27 @@ class ThemeController with ChangeNotifier {
         Store.keyInputDecoratorUnfocusedBorderIsColored, value));
   }
 
+  late double? _inputDecoratorBorderWidth;
+  double? get inputDecoratorBorderWidth => _inputDecoratorBorderWidth;
+  void setInputDecoratorBorderWidth(double? value, [bool notify = true]) {
+    if (value == _inputDecoratorBorderWidth) return;
+    _inputDecoratorBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorBorderWidth, value));
+  }
+
+  late double? _inputDecoratorFocusedBorderWidth;
+  double? get inputDecoratorFocusedBorderWidth =>
+      _inputDecoratorFocusedBorderWidth;
+  void setInputDecoratorFocusedBorderWidth(double? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorFocusedBorderWidth) return;
+    _inputDecoratorFocusedBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputDecoratorFocusedBorderWidth, value));
+  }
+
   // AppBar SETTINGS.
   // ===========================================================================
 
@@ -1922,6 +1971,27 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyOutlinedButtonBorderRadius, value));
   }
 
+  late double? _outlinedButtonBorderWidth;
+  double? get outlinedButtonBorderWidth => _outlinedButtonBorderWidth;
+  void setOutlinedButtonBorderWidth(double? value, [bool notify = true]) {
+    if (value == _outlinedButtonBorderWidth) return;
+    _outlinedButtonBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyOutlinedButtonBorderWidth, value));
+  }
+
+  late double? _outlinedButtonPressedBorderWidth;
+  double? get outlinedButtonPressedBorderWidth =>
+      _outlinedButtonPressedBorderWidth;
+  void setOutlinedButtonPressedBorderWidth(double? value,
+      [bool notify = true]) {
+    if (value == _outlinedButtonPressedBorderWidth) return;
+    _outlinedButtonPressedBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyOutlinedButtonPressedBorderWidth, value));
+  }
+
   late SchemeColor? _toggleButtonsSchemeColor;
   SchemeColor? get toggleButtonsSchemeColor => _toggleButtonsSchemeColor;
   void setToggleButtonsSchemeColor(SchemeColor? value, [bool notify = true]) {
@@ -1938,6 +2008,15 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyToggleButtonsBorderRadius, value));
+  }
+
+  late double? _toggleButtonsBorderWidth;
+  double? get toggleButtonsBorderWidth => _toggleButtonsBorderWidth;
+  void setToggleButtonsBorderWidth(double? value, [bool notify = true]) {
+    if (value == _toggleButtonsBorderWidth) return;
+    _toggleButtonsBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyToggleButtonsBorderWidth, value));
   }
 
   // Toggleable SETTINGS.

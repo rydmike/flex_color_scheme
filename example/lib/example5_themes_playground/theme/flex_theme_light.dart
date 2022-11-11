@@ -185,12 +185,16 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             outlinedButtonOutlineSchemeColor:
                 controller.outlinedButtonOutlineSchemeColor,
+            outlinedButtonBorderWidth: controller.outlinedButtonBorderRadius,
+            outlinedButtonPressedBorderWidth:
+                controller.outlinedButtonPressedBorderWidth,
             // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
             textButtonSchemeColor: controller.textButtonSchemeColor,
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            toggleButtonsBorderWidth: controller.toggleButtonsBorderWidth,
             // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
@@ -215,6 +219,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // set this to false
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
+            inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
+            inputDecoratorFocusedBorderWidth:
+                controller.inputDecoratorFocusedBorderWidth,
             // FAB settings.
             // Set to false to keep using M2 style FAB and ignore
             // M3 type default and global radius on the FAB, it thus

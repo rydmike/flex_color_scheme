@@ -359,6 +359,20 @@ class Store {
   // reset settings.
   static const bool defaultInputDecoratorUnfocusedBorderIsColored = true;
 
+  // Key used to read and save the inputDecoratorBorderWidth value.
+  static const String keyInputDecoratorBorderWidth =
+      'inputDecoratorBorderWidth';
+  // Default value for the inputDecoratorBorderWidth, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorBorderWidth = null;
+
+  // Key used to read and save the inputDecoratorFocusedBorderWidth value.
+  static const String keyInputDecoratorFocusedBorderWidth =
+      'inputDecoratorFocusedBorderWidth';
+  // Default value for the inputDecoratorFocusedBorderWidth, to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorFocusedBorderWidth = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
@@ -726,6 +740,22 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultOutlinedButtonBorderRadius = null;
 
+  // Key used to read and save the outlinedButtonBorderWidth value.
+  static const String keyOutlinedButtonBorderWidth =
+      'outlinedButtonBorderWidth';
+  // Default value for the outlinedButtonBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultOutlinedButtonBorderWidth = null;
+
+  // Key used to read and save the outlinedButtonPressedBorderWidth value.
+  static const String keyOutlinedButtonPressedBorderWidth =
+      'outlinedButtonPressedBorderWidth';
+  // Default value for the outlinedButtonPressedBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultOutlinedButtonPressedBorderWidth = null;
+
   // Key used to read and save the toggleButtonsSchemeColor value.
   static const String keyToggleButtonsSchemeColor = 'toggleButtonsSchemeColor';
   // Default value for the toggleButtonsSchemeColor, also used to
@@ -740,6 +770,13 @@ class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderRadius = null;
+
+  // Key used to read and save the toggleButtonsBorderWidth value.
+  static const String keyToggleButtonsBorderWidth = 'toggleButtonsBorderWidth';
+  // Default value for the toggleButtonsBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultToggleButtonsBorderWidth = null;
 
   // Toggleable SETTINGS.
   // ===========================================================================

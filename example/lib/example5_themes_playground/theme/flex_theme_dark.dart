@@ -142,9 +142,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             outlinedButtonSchemeColor: controller.outlinedButtonSchemeColor,
             outlinedButtonOutlineSchemeColor:
                 controller.outlinedButtonOutlineSchemeColor,
+            outlinedButtonBorderWidth: controller.outlinedButtonBorderRadius,
+            outlinedButtonPressedBorderWidth:
+                controller.outlinedButtonPressedBorderWidth,
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            toggleButtonsBorderWidth: controller.toggleButtonsBorderWidth,
             // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             checkboxSchemeColor: controller.checkboxSchemeColor,
@@ -159,6 +163,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.inputDecoratorUnfocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
+            inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
+            inputDecoratorFocusedBorderWidth:
+                controller.inputDecoratorFocusedBorderWidth,
             // FAB settings.
             fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,
