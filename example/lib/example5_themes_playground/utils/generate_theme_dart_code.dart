@@ -271,11 +271,26 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    outlinedButtonOutlineSchemeColor: ${controller.outlinedButtonOutlineSchemeColor},\n';
+
+  final String outlinedButtonBorderWidth = controller
+              .outlinedButtonBorderWidth !=
+          null
+      ? '    outlinedButtonBorderWidth: ${controller.outlinedButtonBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String outlinedButtonPressedBorderWidth = controller
+              .outlinedButtonPressedBorderWidth !=
+          null
+      ? '    outlinedButtonPressedBorderWidth: ${controller.outlinedButtonPressedBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
               SchemeColor.primary ||
           controller.toggleButtonsSchemeColor == null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
+  final String toggleButtonsBorderWidth = controller.toggleButtonsBorderWidth !=
+          null
+      ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   //
   // Toggleable sub themes setup CODE.
   //
@@ -327,6 +342,16 @@ String generateThemeDartCode(ThemeController controller) {
           !controller.inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
+  final String inputDecoratorBorderWidth = controller
+              .inputDecoratorBorderWidth !=
+          null
+      ? '    inputDecoratorBorderWidth: ${controller.inputDecoratorBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String inputDecoratorFocusedBorderWidth = controller
+              .inputDecoratorFocusedBorderWidth !=
+          null
+      ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   //
   // Fab and chip, snack, card, dialog, popup setup CODE
   //
@@ -635,9 +660,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          '$outlinedButtonBorderWidth'
+          '$outlinedButtonPressedBorderWidth'
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
           '$checkboxSchemeColor'
@@ -650,6 +678,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
+          '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
@@ -749,9 +779,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          '$outlinedButtonBorderWidth'
+          '$outlinedButtonPressedBorderWidth'
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
           '$checkboxSchemeColor'
@@ -764,6 +797,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
+          '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'

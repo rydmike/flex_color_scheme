@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 11, 2022**
+**Nov 12, 2022**
 
 **NEW**
 
@@ -16,6 +16,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
   - `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
   - `popupMenuElevation` and `popupMenuSchemeColor`.
+  - `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth`, these use default values from previous properties `thinBorderWidth` and `thickBorderWidth`, but can now be defined separately for respective component.
   - `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. It does not offer any simplification over standard `ThemeData`and its button themes. Current version does not include their adjustments via the Playground, but size changes might be added later as an usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplification theming. We will allow it for the benefit of including them as passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than other themes. An example of doing it can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92), if needed for other not included button properties.
    
 
@@ -60,6 +61,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added support for adjusting background color and elevation of `BottomSheet`.
 - Added support for adjusting elevation of `NavigationBar`.
 - Added support for adjusting elevation and background color of `PopupMenuButton`.
+- Added support for component independent settings of `ToggleButtons` border width.
+- Added support for component independent settings of `OutlineButtons` border widths.
+- Added support for component independent settings of `InputDecorator` border widths.
 - **FIX:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**
