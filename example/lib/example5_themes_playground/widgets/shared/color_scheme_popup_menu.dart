@@ -43,6 +43,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
         : labelForDefault;
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {

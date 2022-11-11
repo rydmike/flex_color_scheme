@@ -118,6 +118,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         : _explainAppBarStyle(null, isLight, useM3);
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {

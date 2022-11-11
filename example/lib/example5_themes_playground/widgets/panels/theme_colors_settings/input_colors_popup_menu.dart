@@ -34,6 +34,7 @@ class InputColorsPopupMenu extends StatelessWidget {
 
     return PopupMenuButton<int>(
       tooltip: '',
+      initialValue: controller.schemeIndex,
       padding: EdgeInsets.zero,
       onSelected: controller.setSchemeIndex,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
