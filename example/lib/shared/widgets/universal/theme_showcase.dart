@@ -556,9 +556,6 @@ class PopupMenuButtonShowcase extends StatelessWidget {
       onSelected: (_) {},
       tooltip: 'Show menu',
       position: PopupMenuPosition.under,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
       itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
         PopupMenuItem<int>(value: 1, child: Text('Option 1')),
         PopupMenuItem<int>(value: 2, child: Text('Option 2')),
