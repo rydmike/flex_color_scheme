@@ -110,9 +110,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - IN PROGRESS: Tooltip theming: Add delays and stay durations, radius, plus custom scheme based background color. Maybe clean out old paddings and font sizes.
   - Slider theming: Add theme, with at least one property, "base" scheme color. Explain why not more.
 
-* **Themes Playground**
-  - FIX: Rail indicator lock when using Flutter defaults
-
 
 ## 6.0.1
 
