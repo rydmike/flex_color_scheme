@@ -101,7 +101,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
     this.interactionEffects = true,
-    this.tintedDisabledControls = true,
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // this.tintedDisabledControls = true,
     this.blendOnLevel,
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
@@ -300,18 +301,19 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
-  /// Use primary tint on disabled controls.
-  ///
-  /// Set to true to make disabled controls use a shared slightly primary color
-  /// tint on their disabled state.
-  ///
-  /// Set to false to use default grey only disabled controls.
-  ///
-  /// Impacts controls:
-  /// - To be added...
-  ///
-  /// Defaults to true.
-  final bool tintedDisabledControls;
+  // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+  // /// Use primary tint on disabled controls.
+  // ///
+  // /// Set to true to make disabled controls use a shared slightly
+  // /// primary color tint on their disabled state.
+  // ///
+  // /// Set to false to use default grey only disabled controls.
+  // ///
+  // /// Impacts controls:
+  // /// - To be added...
+  // ///
+  // /// Defaults to true.
+  // final bool tintedDisabledControls;
 
   /// Sets the blend level strength of container color used on its onColor.
   ///
@@ -1941,7 +1943,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
-    final bool? tintedDisabledControls,
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // final bool? tintedDisabledControls,
     final int? blendOnLevel,
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
@@ -2099,8 +2102,9 @@ class FlexSubThemesData with Diagnosticable {
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
-      tintedDisabledControls:
-          tintedDisabledControls ?? this.tintedDisabledControls,
+      // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+      // tintedDisabledControls:
+      //     tintedDisabledControls ?? this.tintedDisabledControls,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
@@ -2372,7 +2376,8 @@ class FlexSubThemesData with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSubThemesData &&
         other.interactionEffects == interactionEffects &&
-        other.tintedDisabledControls == tintedDisabledControls &&
+        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+        // other.tintedDisabledControls == tintedDisabledControls &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
         other.useFlutterDefaults == useFlutterDefaults &&
@@ -2578,7 +2583,8 @@ class FlexSubThemesData with Diagnosticable {
   @override
   int get hashCode => Object.hashAll(<Object?>[
         interactionEffects,
-        tintedDisabledControls,
+        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+        // tintedDisabledControls,
         blendOnLevel,
         blendOnColors,
         useFlutterDefaults,
@@ -2740,8 +2746,9 @@ class FlexSubThemesData with Diagnosticable {
     super.debugFillProperties(properties);
     properties.add(
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
-    properties.add(DiagnosticsProperty<bool>(
-        'tintedDisabledControls', tintedDisabledControls));
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // properties.add(DiagnosticsProperty<bool>(
+    //     'tintedDisabledControls', tintedDisabledControls));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     properties.add(
