@@ -109,8 +109,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * **New**
   - IN PROGRESS: Tooltip theming: Add delays and stay durations, radius, plus custom scheme based background color. Maybe clean out old paddings and font sizes.
   - Slider theming: Add theme, with at least one property, "base" scheme color. Explain why not more.
-  - MAYBE: FlexTones onMain and onSurface tint removal feature. Requires new FlexSeedScheme release.
-  - MAYBE: Add four new built in schemes? Might push to next release. Too much on the plate already?
 
 * **Themes Playground**
   - FIX: Rail indicator lock when using Flutter defaults
