@@ -3055,12 +3055,65 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
-  //
-  // /// An opinionated [SliderThemeData].
-  // static SliderThemeData sliderTheme() {
-  //   return const SliderThemeData();
-  // }
+  /// An opinionated [SliderThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The splashRadius is not used by FlexColorScheme sub-themes.
+  static SliderThemeData sliderTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the Slider.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The height of the [Slider] track.
+    ///
+    /// If not defined, defaults to 4 via Flutter SDK defaults.
+    final double? trackHeight,
+
+    /// The color given to the [valueIndicatorShape] to draw itself with.
+    ///
+    /// If undefined, defaults to using Flutter SDK's logic for the color.
+    final Color? valueIndicatorColor,
+
+    /// The text style for the text on the value indicator.
+    ///
+    /// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
+    final TextStyle? valueIndicatorTextStyle,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    final Color onBaseColor =
+        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    return SliderThemeData(
+      trackHeight: trackHeight,
+      activeTrackColor: baseColor,
+      inactiveTrackColor: baseColor.withOpacity(0.24),
+      disabledActiveTrackColor: colorScheme.onSurface.withOpacity(0.32),
+      disabledInactiveTrackColor: colorScheme.onSurface.withOpacity(0.12),
+      activeTickMarkColor: onBaseColor.withOpacity(0.54),
+      inactiveTickMarkColor: baseColor.withOpacity(0.54),
+      disabledActiveTickMarkColor: onBaseColor.withOpacity(0.12),
+      disabledInactiveTickMarkColor: colorScheme.onSurface.withOpacity(0.12),
+      thumbColor: baseColor,
+      disabledThumbColor: Color.alphaBlend(
+          colorScheme.onSurface.withOpacity(.38), colorScheme.surface),
+      overlayColor: baseColor.withOpacity(0.12),
+      valueIndicatorColor: valueIndicatorColor,
+      valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
+      valueIndicatorTextStyle: valueIndicatorTextStyle,
+    );
+  }
 
   // TODO(rydmike): SnackBar needs two different corner radius versions.
   // The fixed one should not have a shape, but the floating one should.

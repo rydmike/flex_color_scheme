@@ -6095,6 +6095,19 @@ class FlexColorScheme with Diagnosticable {
                   useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
               unselectedIsColored: false,
             ),
+      // Slider theme.
+      sliderTheme: FlexSubThemes.sliderTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          trackHeight: 5,
+          valueIndicatorColor: isDark
+              ? colorScheme.onSurface
+                  .blendAlpha(colorScheme.secondary, 0x63) // 39%
+                  .withAlpha(0xF2) // 95%
+              : colorScheme.onSurface
+                  .blendAlpha(colorScheme.secondary, 0x72) // 45%
+                  .withAlpha(0xED) // 93%
+          ),
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
       // FAB, floating action button theme.

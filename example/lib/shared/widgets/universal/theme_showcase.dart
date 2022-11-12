@@ -507,37 +507,56 @@ class SliderShowcase extends StatefulWidget {
 }
 
 class _SliderShowcaseState extends State<SliderShowcase> {
-  double value = 0;
+  double value1 = 5;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         ListTile(
-          title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
+          title: Text('Slider continuous (${value1.toStringAsFixed(2)})'),
           subtitle: Slider(
             max: 30,
-            label: value.toStringAsFixed(2),
-            value: value,
+            label: value1.toStringAsFixed(2),
+            value: value1,
             onChanged: (double newValue) {
               setState(() {
-                value = newValue;
+                value1 = newValue;
               });
             },
           ),
         ),
         ListTile(
-          title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
+          title: Text('Slider continuous disabled (${14.toStringAsFixed(2)})'),
+          subtitle: Slider(
+            max: 30,
+            label: 14.toStringAsFixed(2),
+            value: 14,
+            onChanged: null,
+          ),
+        ),
+        ListTile(
+          title: Text('Slider stepped (${value1.toStringAsFixed(0)})'),
           subtitle: Slider(
             max: 30,
             divisions: 31,
-            label: value.toStringAsFixed(0),
-            value: value,
+            label: value1.toStringAsFixed(0),
+            value: value1,
             onChanged: (double newValue) {
               setState(() {
-                value = newValue.roundToDouble();
+                value1 = newValue.roundToDouble();
               });
             },
+          ),
+        ),
+        ListTile(
+          title: Text('Slider stepped disabled (${22.toStringAsFixed(0)})'),
+          subtitle: Slider(
+            max: 30,
+            divisions: 31,
+            label: 22.toStringAsFixed(0),
+            value: 22,
+            onChanged: null,
           ),
         ),
       ],
