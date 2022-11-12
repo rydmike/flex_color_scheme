@@ -18,7 +18,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - `popupMenuElevation` and `popupMenuSchemeColor`.
   - `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth`, these use default values from previous properties `thinBorderWidth` and `thickBorderWidth`, but can now be defined separately for respective component.
   - `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. It does not offer any simplification over standard `ThemeData`and its button themes. Current version does not include their adjustments via the Playground, but size changes might be added later as an usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplification theming. We will allow it for the benefit of including them as passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than other themes. An example of doing it can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92), if needed for other not included button properties.
-   
 
 **CHANGE**
 
@@ -37,7 +36,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-* **TEMP M3 FIX:** The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background, despite Material elevation being broken in Flutter 3.3 when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable, the `BottomSheet` will get this tint automatically via its own implementation then. The same temp M3 fix is also used on themed `PopupMenuButton`. Unfortunately the elevation based shadow cannot be added. This will wait for actual implementation of these Material 3 themes. That exist in Flutter master channel already, but not yet in Flutter stable 3.3. This temp fix makes it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3 already now. 
+* **TEMP M3 GAP FIXES:** The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temp fix works despite Material elevation being broken in Flutter 3.3 and earlier when `useMaterial3` is true. This work-around will be removed when the M3 version of `BottomSheet` lands in Flutter stable. Then the `BottomSheet` will get this tint automatically via its own implementation. 
+
+  Same temp M3 fix is also used on themed `PopupMenuButton`. Unfortunately the elevation based shadow cannot be added. It will have to wait for actual implementation of these Material 3 themes with support for it. The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master channel already, they will probably land in next stable release after 3.3, of Flutter. These temp M3 fixes makes it more possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3, since shadow elevations are not working it is not perfect, but much better. The reason why these issues exists are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this issue [**#107190**](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or shadow and such `Material` using widgets. The issue [**#107190**](https://github.com/flutter/flutter/issues/107190) has also been fixed. So even if/when only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes would not land. In combination with the here made M3 manual elevation tint fix, they would already have the correct M3 default background behaviour then. 
 
 **Themes Playground**
 - Improved discoverability of defining and using totally custom theme colors in the Playground.
@@ -64,13 +65,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added support for component independent settings of `ToggleButtons` border width.
 - Added support for component independent settings of `OutlineButtons` border widths.
 - Added support for component independent settings of `InputDecorator` border widths.
-- **FIX:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
+- **FIXED:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**
 
 * **New**
-  - Outline widths, split to shared and own values.
-  - Tooltip themed delays.
+  - IN PROGRESS: Tooltip theming: Add delays and stay durations, radius, plus custom scheme based background color. Maybe clean out old paddings and font sizes.
+  - Slider theming: Add theme, with at least one property, "base" scheme color. Explain why not more.
+  - MAYBE: FlexTones onMain and onSurface tint removal feature. Requires new FlexSeedScheme release.
+  - MAYBE: Add four new built in schemes? Might push to next release. Too much on the plate already?
 
 * **Themes Playground**
   - FIX: Rail indicator lock when using Flutter defaults
