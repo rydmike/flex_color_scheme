@@ -3,6 +3,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
+import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
@@ -991,7 +992,13 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = 'theme: FlexThemeData.light(\n'
+  final String code = '// This theme was made for FlexColorScheme version '
+      '${AppData.packageVersion}. Make sure\n'
+      '// you use same or higher version, but still same major version. If\n'
+      '// you use a lower version, some properties may not be supported. In\n'
+      '// that case you can also remove them after copying the theme to '
+      'your app.\n'
+      'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
       '$surfaceModeLight'
@@ -1036,7 +1043,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
-      '  // To use the playground font, add GoogleFonts package and uncomment\n'
+      '  // To use the Playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       '// If you do not have a themeMode switch, uncomment this line\n'
