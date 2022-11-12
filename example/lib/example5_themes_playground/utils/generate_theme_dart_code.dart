@@ -408,6 +408,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String timePickerDialogRadius = controller.dialogBorderRadius != null
       ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String dialogElevation = controller.dialogElevation != null
+      ? '    dialogElevation: ${controller.dialogElevation!.toStringAsFixed(1)},\n'
+      : '';
   final String appBarBackgroundSchemeColorLight = controller
               .appBarBackgroundSchemeColorLight !=
           null
@@ -699,6 +702,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          '$dialogElevation'
           //
           '$snackSchemeColor'
           //
@@ -814,11 +818,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuElevation'
           '$popupMenuSchemeColor'
           '$popupMenuOpacity'
-
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          '$dialogElevation'
           //
           '$snackSchemeColor'
           //

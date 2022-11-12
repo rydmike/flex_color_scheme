@@ -1700,10 +1700,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to 1, fully opaque.
   final double? navigationBarOpacity;
 
-  // TODO(rydmike): Figure out the correct default for this the nav bar.
   /// The z-coordinate to be used for the [NavigationBar]'s elevation.
   ///
-  /// If undefined, defaults to [kNavigationBarElevation] = 0.
+  /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
+  /// which if:
+  ///  - If [useMaterial] if true, is 3 dp.
+  ///  - If [useMaterial] if false, is 0 dp.
   final double? navigationBarElevation;
 
   /// Specifies when each [NavigationDestination]'s label should appear.

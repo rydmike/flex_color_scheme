@@ -428,6 +428,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultDialogBackgroundSchemeColor);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
+    _dialogElevation = await _themeService.load(
+        Store.keyDialogElevation, Store.defaultDialogElevation);
     //
     // Custom surface tint color SETTINGS.
     _surfaceTintLight = await _themeService.load(
@@ -692,6 +694,7 @@ class ThemeController with ChangeNotifier {
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
+    setDialogElevation(Store.defaultDialogElevation, false);
     //
     // Surface tint colors.
     setSurfaceTintLight(Store.defaultSurfaceTintLight, false);
@@ -2190,6 +2193,15 @@ class ThemeController with ChangeNotifier {
     _dialogBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDialogBorderRadius, value));
+  }
+
+  late double? _dialogElevation;
+  double? get dialogElevation => _dialogElevation;
+  void setDialogElevation(double? value, [bool notify = true]) {
+    if (value == _dialogElevation) return;
+    _dialogElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDialogElevation, value));
   }
 
   // Custom surface tint color SETTINGS.

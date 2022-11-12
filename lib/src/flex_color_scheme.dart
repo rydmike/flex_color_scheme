@@ -443,7 +443,6 @@ class FlexColorScheme with Diagnosticable {
   /// If no color is given, it defaults to [background].
   final Color? scaffoldBackground;
 
-  // TODO(rydmike): Verify the described override. Check test!
   /// The background color of [Dialog] elements.
   ///
   /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
@@ -1561,7 +1560,6 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? scaffoldBackground,
 
-    // TODO(rydmike): Verify the described override. Check tests!
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].

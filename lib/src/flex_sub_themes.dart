@@ -2038,10 +2038,10 @@ class FlexSubThemes {
 
     /// [NavigationBar] elevation.
     ///
-    /// If undefined, defaults to default [NavigationBarThemeData].
-    ///
-    /// If [useMaterial] if true, the default is 3 dp.
-    /// If [useMaterial] if false, the default is 0 dp.
+    /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
+    /// which if:
+    ///  - If [useMaterial] if true, is 3 dp.
+    ///  - If [useMaterial] if false, is 0 dp.
     final double? elevation,
 
     /// Height of the container for the Material 3 [NavigationBar].

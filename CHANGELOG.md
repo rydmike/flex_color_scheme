@@ -82,6 +82,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Added support for component independent settings of `ToggleButtons` border width.
   - Added support for component independent settings of `OutlineButtons` border widths.
   - Added support for component independent settings of `InputDecorator` border widths.
+  - Added support for adjusting `Dialog` elevation.
 
 * User interface changes:
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
