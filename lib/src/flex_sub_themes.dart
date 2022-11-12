@@ -629,8 +629,8 @@ class FlexSubThemes {
     /// Flutter SDK background color available when backgroundSchemeColor is
     /// null.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
 
     /// [BottomNavigationBar] container elevation.
     ///
@@ -650,6 +650,12 @@ class FlexSubThemes {
     /// With [BottomNavigationBarType.fixed] the items have fixed width.
     /// With [BottomNavigationBarType.shifting], the location and size of the
     /// items animate and labels fade in when they are tapped.
+    ///
+    /// If undefined, defaults to Flutter SDK default. Where
+    /// If type is provided, it is returned. Next, if the bottom navigation bar
+    /// theme provides a type, it is used. Finally, the default behavior will be
+    /// [BottomNavigationBarType.fixed] for 3 or fewer items, and
+    /// [BottomNavigationBarType.shifting] is used for 4+ items.
     final BottomNavigationBarType? type,
 
     /// The arrangement of the bar's [items] when the enclosing
@@ -731,7 +737,6 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        // baseSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
         useFlutterDefaults;
 
@@ -746,7 +751,6 @@ class FlexSubThemes {
     // Get text color, defaults to primary in light and to secondary in dark.
     final Color labelColor = schemeColor(
         selectedLabelSchemeColor ??
-            // baseSchemeColor ??
             (colorScheme.brightness == Brightness.dark && useDefaultTextStyle
                 ? SchemeColor.secondary
                 : SchemeColor.primary),
@@ -786,7 +790,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
       backgroundColor: backgroundSchemeColor == null
@@ -1583,8 +1587,8 @@ class FlexSubThemes {
 
     /// Selects input border type.
     ///
-    /// Defaults to [FlexInputBorderType.outline].
-    final FlexInputBorderType borderType = FlexInputBorderType.outline,
+    /// If undefined, defaults to [FlexInputBorderType.outline].
+    final FlexInputBorderType? borderType,
 
     /// If true the decoration's container is filled with [fillColor].
     ///
@@ -1682,7 +1686,7 @@ class FlexSubThemes {
     final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
     final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
-    switch (borderType) {
+    switch (borderType ?? FlexInputBorderType.outline) {
       case FlexInputBorderType.outline:
         return InputDecorationTheme(
           floatingLabelStyle:
@@ -2029,8 +2033,8 @@ class FlexSubThemes {
     /// Flutter SDK background color available when backgroundSchemeColor is
     /// null.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
 
     /// [NavigationBar] elevation.
     ///
@@ -2053,7 +2057,7 @@ class FlexSubThemes {
     /// This is used to determine the behavior of NavigationBar's destinations.
     ///
     /// If null, theme behavior defaults to
-    /// `NavigationDestinationLabelBehavior.alwaysShow`
+    /// `NavigationDestinationLabelBehavior.alwaysShow` via Flutter SDK default.
     final NavigationDestinationLabelBehavior? labelBehavior,
 
     /// The alpha value used on selection color of the selection indicator on
@@ -2189,7 +2193,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to primary.
     final Color indicatorColor =
@@ -2444,8 +2448,8 @@ class FlexSubThemes {
 
     /// NavigationRail background opacity.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
 
     /// [NavigationRail] elevation.
     ///
@@ -2641,7 +2645,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(

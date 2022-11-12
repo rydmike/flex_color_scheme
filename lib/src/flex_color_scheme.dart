@@ -2432,7 +2432,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
     // Effective blend level for the onColors.
-    int onBlendLevel = useSubThemes ? subTheme.blendOnLevel : 0;
+    int onBlendLevel = useSubThemes ? (subTheme.blendOnLevel ?? 0) : 0;
     assert(
         onBlendLevel >= 0 && onBlendLevel <= 40,
         'Only onBlendLevel:s from 0 to 40 '
@@ -4185,7 +4185,7 @@ class FlexColorScheme with Diagnosticable {
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
     // Effective blend level for the onColors.
-    int onBlendLevel = useSubThemes ? subTheme.blendOnLevel : 0;
+    int onBlendLevel = useSubThemes ? (subTheme.blendOnLevel ?? 0) : 0;
     assert(
         onBlendLevel >= 0 && onBlendLevel <= 40,
         'Only onBlendLevel:s from 0 to 40 '

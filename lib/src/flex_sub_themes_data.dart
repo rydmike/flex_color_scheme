@@ -102,7 +102,7 @@ class FlexSubThemesData with Diagnosticable {
   const FlexSubThemesData({
     this.interactionEffects = true,
     this.tintedDisabledControls = true,
-    this.blendOnLevel = 0,
+    this.blendOnLevel,
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
     //
@@ -150,7 +150,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
-    this.inputDecoratorBorderType = FlexInputBorderType.outline,
+    this.inputDecoratorBorderType,
     this.inputDecoratorUnfocusedHasBorder = true,
     this.inputDecoratorUnfocusedBorderIsColored = true,
     this.inputDecoratorBorderWidth,
@@ -210,11 +210,11 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
-    this.bottomNavigationBarOpacity = 1,
+    this.bottomNavigationBarOpacity,
     this.bottomNavigationBarElevation,
     this.bottomNavigationBarShowSelectedLabels = true,
     this.bottomNavigationBarShowUnselectedLabels = true,
-    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
+    this.bottomNavigationBarType,
     this.bottomNavigationBarLandscapeLayout,
     //
     this.navigationBarLabelTextStyle,
@@ -231,11 +231,10 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
     this.navigationBarBackgroundSchemeColor,
-    this.navigationBarOpacity = 1,
+    this.navigationBarOpacity,
     this.navigationBarElevation,
     this.navigationBarHeight,
-    this.navigationBarLabelBehavior =
-        NavigationDestinationLabelBehavior.alwaysShow,
+    this.navigationBarLabelBehavior,
     //
     this.navigationRailLabelTextStyle,
     this.navigationRailSelectedLabelSize,
@@ -252,9 +251,9 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailIndicatorSchemeColor,
     this.navigationRailIndicatorOpacity,
     this.navigationRailBackgroundSchemeColor,
-    this.navigationRailOpacity = 1,
+    this.navigationRailOpacity,
     this.navigationRailElevation,
-    this.navigationRailLabelType = NavigationRailLabelType.all,
+    this.navigationRailLabelType,
     this.navigationRailGroupAlignment,
   });
 
@@ -343,8 +342,8 @@ class FlexSubThemesData with Diagnosticable {
   /// with [blendOnLevel] and completely turned off by setting [blendOnLevel]
   /// to 0 (zero).
   ///
-  /// Defaults to 0.
-  final int blendOnLevel;
+  /// If undefined, defaults to 0.
+  final int? blendOnLevel;
 
   /// Set to true to enable [blendOnLevel] based onColor blending also on
   /// [onPrimary], [onSecondary] and [onTertiary] colors.
@@ -881,7 +880,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// To change input decorator's border radius separately define
   /// [inputDecoratorRadius] that will then override [defaultRadius].
-  final FlexInputBorderType inputDecoratorBorderType;
+  ///
+  /// If undefined, defaults to [FlexInputBorderType.outline].
+  final FlexInputBorderType? inputDecoratorBorderType;
 
   /// Determines if the [InputDecorator] unfocused state has a border.
   ///
@@ -1459,8 +1460,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// BottomNavigationBar background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double bottomNavigationBarOpacity;
+  /// If undefined, default to 1, fully opaque.
+  final double? bottomNavigationBarOpacity;
 
   /// Elevation of [BottomNavigationBar].
   ///
@@ -1481,6 +1482,12 @@ class FlexSubThemesData with Diagnosticable {
   /// * [BottomNavigationBarType.fixed], where items have fixed width.
   /// * [BottomNavigationBarType.shifting], where location and size of the
   ///   items animate and labels fade in when they are tapped.
+  ///
+  /// If undefined, defaults to Flutter SDK default. Where
+  /// If type is provided, it is returned. Next, if the bottom navigation bar
+  /// theme provides a type, it is used. Finally, the default behavior will be
+  /// [BottomNavigationBarType.fixed] for 3 or fewer items, and
+  /// [BottomNavigationBarType.shifting] is used for 4+ items.
   final BottomNavigationBarType? bottomNavigationBarType;
 
   /// The arrangement of the bottom navigation bar's [items] when the enclosing
@@ -1688,8 +1695,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// NavigationBar background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double navigationBarOpacity;
+  /// If undefined, defaults to 1, fully opaque.
+  final double? navigationBarOpacity;
 
   // TODO(rydmike): Figure out the correct default for this the nav bar.
   /// The z-coordinate to be used for the [NavigationBar]'s elevation.
@@ -1699,10 +1706,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Specifies when each [NavigationDestination]'s label should appear.
   ///
-  /// Default to [NavigationDestinationLabelBehavior.alwaysShow].
-  /// If set to null, it will also default to
-  /// [NavigationDestinationLabelBehavior.alwaysShow] as that is the Flutter
-  /// SDK default behavior for it.
+  /// If undefined, default to [NavigationDestinationLabelBehavior.alwaysShow].
   final NavigationDestinationLabelBehavior? navigationBarLabelBehavior;
 
   // ---------------------------------------------------------------------------
@@ -1891,8 +1895,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// NavigationRail background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double navigationRailOpacity;
+  /// If undefined, defaults to 1, fully opaque.
+  final double? navigationRailOpacity;
 
   /// The z-coordinate to be used for the [NavigationRail]'s elevation.
   ///
