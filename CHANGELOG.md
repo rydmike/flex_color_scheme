@@ -8,7 +8,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
-* Scaffold background color can now be used as themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this.
+* Scaffold background color can now be used as the themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this.
 * Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`. It is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
 * The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors, that were originally designed for Material 2, when using Material 3 mode, with or without seed generated ColorSchemes. 
   - Setting `swapLegacyOnMaterial3` to `true`, will when `useMaterial3` is `true`, swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. 
@@ -28,9 +28,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **CHANGE**
 
-* In `FlexSubThemesData` all component controlling elevation properties are now nullable. FlexColorScheme sub-theme defaults to same values as before if null. Being nullable enables using potentially different defaults in FlexColorScheme Material 2 and Material 3 mode.
-* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FlexColorScheme. Using fractional dp may cause artefact issues with monitors using or running at native resolution where 1 dp = 1 physical display pixel, we see it as a default design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default.
-* **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now default to theme's ColorScheme `surface` color in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in many designs the color values are the same, but if needed you can put it back to background with:
+* In `FlexSubThemesData` all component controlling properties except boolean ones, are now nullable and null by default. FlexColorScheme sub themes defaults to same values as before if null. Being nullable enables using potentially different default behavior in FlexColorScheme Material 2 and Material 3 modes.
+* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FlexColorScheme.
+  - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
+* **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in most designs the color values are the same. If needed you can put it back to background color with:
 
 ```dart
     final ThemeData themeLight = FlexThemeData.light(
