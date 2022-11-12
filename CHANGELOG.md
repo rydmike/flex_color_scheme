@@ -55,45 +55,45 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Themes Playground**
 
-- On **Theme colors** panel, improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme, as a starting point for your custom color definitions.
-- Simplified the terminology used on the **Theme colors** panel. Also simplified its color presentation.
-- **Theme colors** panel got an on/off switch, that controls the `swapLegacyOnMaterial3` setting.
+* On **Theme colors** panel, improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme, as a starting point for your custom color definitions.
+* Simplified the terminology used on the **Theme colors** panel. Also simplified its color presentation.
+* **Theme colors** panel got an on/off switch, that controls the `swapLegacyOnMaterial3` setting.
 
-- Updated and shorter **Introduction**. Probably nobody reads it, or the [package docs](https://docs.flexcolorscheme.com/) with **Playground** guides, but at least it is there.
-- The **Seeded ColorScheme** panel now show the source input "Scheme defined" colors, the used FlexSchemeColor, that gets used as key colors for the Material 3 style seeded ColorScheme generation, when it is turned on.
+* Updated and shorter **Introduction**. Probably nobody reads it, or the [package docs](https://docs.flexcolorscheme.com/) with **Playground** guides, but at least it is there.
+* The **Seeded ColorScheme** panel now show the source input "Scheme defined" colors, the used FlexSchemeColor, that gets used as key colors for the Material 3 style seeded ColorScheme generation, when it is turned on.
   - Arranged the panel content for better inclusion and presentation of the created **Tonal Palettes** used to make the seeded ColorScheme.
   - The Tonal palette color **tones** now have tooltips that present each tone.
 
-- On **Surface blends**, changed the surface blend mode defaults to settings that are more mobile design friendly. No API change involved. API defaults are same as before, changes only affect the Playground app defaults. 
+* On **Surface blends**, changed the surface blend mode defaults to settings that are more mobile design friendly. No API change involved. API defaults are same as before, changes only affect the Playground app defaults. 
   - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text is placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
-- On **Surface blends**, the blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows the popular options.
+* On **Surface blends**, the blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows the popular options.
 
-- On the **AppBar** panel, AppBar theming can now use scaffold background color as its themed background color.
+* On the **AppBar** panel, AppBar theming can now use scaffold background color as its themed background color.
   - This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
-- New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
-- All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.
-- Split out some components that where on shared panels, to their own panel/page. This is done when componnts get more settings and having them in a separate panel makes sense.
-- On **FAB and Chips** panel, added the "Always use circular FAB" feature.
-- A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
+* New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
+* All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.
+* Split out some components that where on shared panels, to their own panel/page. This is done when componnts get more settings and having them in a separate panel makes sense.
+* On **FAB and Chips** panel, added the "Always use circular FAB" feature.
+* A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
 
-- Removed animation from horizontal list **Theme selector** when selecting a theme.
-- Removed animation from topic/component panel when selecting one, the **Page view**.
-- Removed the slide to a page animation, when clicking on a topic in the **panel/page selector**.
+* Removed animation from horizontal list **Theme selector** when selecting a theme.
+* Removed animation from topic/component panel when selecting one, the **Page view**.
+* Removed the slide to a page animation, when clicking on a topic in the **panel/page selector**.
   - Direct panel/page selection via the control now instead uses a small **Fade and Zoom in** to show the selected settings panel.
-    - Without any panel page change effect, it was hard to notice what changed. The default slide to the page animation, with the `PageView` is fine when swiping, where it remains, but it was a tad annoying when clicking on the panel page selector.
+  - Without any panel page change effect, it was hard to notice what changed. The default slide to the page animation, with the `PageView` is fine when swiping, where it remains, but it was a tad annoying when clicking on the panel page selector.
 
-- Changed all used `Slider.adaptive` to `Slider`. The Cupertino adaptive one has poorer UX. You cannot click on the track to move the thumb to a given position. The app presents Material theming, so we will show only Material widgets in the apps own controls, on all platforms going forward.
-- Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like using the Material theme following `SwitchListTileAdaptive` iOS switch on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. The new Material 3 `Switch` is even nicer than the Cupertino Switch, and we want to see it in the app when it lands. We will thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms going forward.
+* Changed all used `Slider.adaptive` to `Slider`. The Cupertino adaptive one has poorer UX. You cannot click on the track to move the thumb to a given position. The app presents Material theming, so we will show only Material widgets in the apps own controls, on all platforms going forward.
+* Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`. We like using the Material theme following `SwitchListTileAdaptive` iOS switch on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. The new Material 3 `Switch` is even nicer than the Cupertino Switch, and we want to see it in the app when it lands. We will thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms going forward.
   - The `SwitchListTileAdaptive` is kept in use on examples 2 to 4. As an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platforms, nor can it be themed to be so. You have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
 
-- Added support for adjusting background color and elevation of `BottomSheet`.
-- Added support for adjusting elevation of `NavigationBar`.
-- Added support for adjusting elevation and background color of `PopupMenuButton`.
-- Added support for component independent settings of `ToggleButtons` border width.
-- Added support for component independent settings of `OutlineButtons` border widths.
-- Added support for component independent settings of `InputDecorator` border widths.
+* Added support for adjusting background color and elevation of `BottomSheet`.
+* Added support for adjusting elevation of `NavigationBar`.
+* Added support for adjusting elevation and background color of `PopupMenuButton`.
+* Added support for component independent settings of `ToggleButtons` border width.
+* Added support for component independent settings of `OutlineButtons` border widths.
+* Added support for component independent settings of `InputDecorator` border widths.
 
-- **FIXED:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
+* **FIXED:** Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
 
 **TODO:**
 
