@@ -24,7 +24,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButon`.
   - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from previous properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
   - The `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` where added to be able to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. 
-    > These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground, but size changes might be added later as a usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is quite a bit more involved than other themes. If you need to do that, an example of doing that can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
+    > These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground, but size changes might be added later as a usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than for other sub themes. If you need to do that, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
 
 **CHANGE**
 
@@ -72,12 +72,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
     - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text is placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
   - The blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows the popular options.
 
-* On the **AppBar** panel: 
-  - AppBar theming can now use scaffold background color as its themed background color.
-  - This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
-* On **FAB and Chips** panel, added the "Always use circular FAB" feature.
-
-* Other **new properties**:
+* Other **new properties** and features:
+  - **AppBar** theming can now use scaffold background color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
+  - On **FAB and Chips** panel, added the "Always use circular FAB" feature.
   - Added support for adjusting background color and elevation of `BottomSheet`.
   - Added support for adjusting elevation of `NavigationBar`.
   - Added support for adjusting elevation and background color of `PopupMenuButton`.
@@ -85,11 +82,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Added support for component independent settings of `OutlineButtons` border widths.
   - Added support for component independent settings of `InputDecorator` border widths.
 
-* Changes in **Playground UI**:
+* User interface changes:
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
   - All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.
-  - Split out some components that where on shared panels, to their own panel/page. This is done when componnts get more settings and having them in a separate panel makes sense.
-  - A themed `Slider` widget is now presented in the Widget Showcase. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
+  - Split out some components that where on shared panels, to their own panel/page. This is done when components get more settings and having them in a separate panel makes sense.
+  - A themed `Slider` widget is now presented in the **Widget Showcase** panel. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
   - Removed animation from horizontal list **Theme selector** when selecting a theme.
   - Removed animation from topic/component panel when selecting one, the **Page view**.
   - Removed the slide to a page animation, when clicking on a topic in the **panel/page selector**.
