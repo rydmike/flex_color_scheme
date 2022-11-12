@@ -43,15 +43,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-* **Temporary Material 3 Flutter SDK GAP FIXES** 
-  - The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temp fix works despite Material elevation being broken in Flutter 3.3 and earlier when `useMaterial3` is true. 
+* **Temporary Material 3 Flutter SDK GAP fixes** 
+  - The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temp fix works despite Material elevation being broken in Flutter 3.3 and earlier, when `useMaterial3` is true. 
   - Same temp M3 fix is also used on themed `PopupMenuButton`. 
-  - Unfortunately the elevation based shadow cannot be added to either of them. This will have to wait for actual implementation of the components and their Material 3 themes with support for it.
-  - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master channel already, they will probably land in next stable release after 3.3, of Flutter. 
-  - These temporary M3 fixes makes it more possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working, it is not perfect, but much better.
-  - The reason why these issues exists are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this issue [**#107190**](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or any shadow and such `Material` using widgets.
-  - The issue [**#107190**](https://github.com/flutter/flutter/issues/107190) has been fixed in master. So even if only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes would not land. In combination with the here made M3 manual elevation tint fix, they would in such a case already get the correct M3 default background behaviour.
-  - These temporary work-around fixes will be removed when the framework implements correct Material 3 behavior for these widgets.
+  - Unfortunately the elevation based shadow cannot be added to any of them. This will have to wait for actual implementation of the components and their Material 3 themes with support for it.
+  - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master channel already, they will probably land in next new stable release after Flutter 3.3. 
+  - These temporary M3 fixes makes it more possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3, it is not perfect, but much better.
+  - The reason why these issues exists are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this `Material` issue [**#107190**](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or any shadow on such `Material` using widgets.
+  - The issue [**#107190**](https://github.com/flutter/flutter/issues/107190) has been fixed in master. So even if only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes would not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
+  - These temporary work-around fixes will be removed when the framework implements correct Material 3 behavior for these widgets, hopefully in next stable release of Flutter.
 
 **Themes Playground**
 
