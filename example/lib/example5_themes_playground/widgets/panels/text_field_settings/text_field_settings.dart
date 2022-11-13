@@ -233,7 +233,7 @@ class TextFieldSettings extends StatelessWidget {
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.inputDecoratorBorderWidth == null ||
-                              (controller.inputDecoratorBorderWidth ?? 0) < 0
+                              (controller.inputDecoratorBorderWidth ?? 0) <= 0
                           ? thinBorderDefaultLabel
                           : (controller.inputDecoratorBorderWidth
                                   ?.toStringAsFixed(1) ??

@@ -28,6 +28,18 @@ class ComponentSettings extends StatelessWidget {
         ),
         UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
+        SwitchListTile(
+          title: const Text('Themed interaction effects'),
+          subtitle: const Text('The hover, focus, highlight, splash and '
+              'disabled colors and effects are based on primary color.\n'
+              'Turn OFF for Flutter transparent grey defaults'),
+          value: controller.interactionEffects &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInteractionEffects
+              : null,
+        ),
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -86,7 +98,6 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
-
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border width'),
@@ -189,37 +200,6 @@ class ComponentSettings extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-        const Divider(),
-        SwitchListTile(
-          title: const Text('Themed interaction effects'),
-          subtitle: const Text('The hover, focus, highlight, splash and '
-              'disabled colors and effects are based on primary color.\n'
-              'Turn OFF for Flutter transparent grey defaults'),
-          value: controller.interactionEffects &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setInteractionEffects
-              : null,
-        ),
-        // Tooltip theme style.
-        Tooltip(
-          message: 'A tooltip, on the tooltip style toggle',
-          child: SwitchListTile(
-            title: const Text(
-              'Tooltip background brightness',
-            ),
-            subtitle: const Text(
-              'OFF theme mode inverted, common on Web\n'
-              'ON theme mode brightness, like Windows',
-            ),
-            value: controller.tooltipsMatchBackground &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useFlexColorScheme
-                ? controller.setTooltipsMatchBackground
-                : null,
           ),
         ),
         const Divider(),

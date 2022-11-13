@@ -140,7 +140,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String swapDarkColors = controller.swapDarkColors
       ? '  swapColors: ${controller.swapDarkColors},\n'
       : '';
-  final String tooltipsMatchBackground = controller.tooltipsMatchBackground
+  final String tooltipsMatchBackground = controller.tooltipsMatchBackground &&
+          controller.tooltipSchemeColor == null
       ? '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
       : '';
   final String useM3ErrorColors =
@@ -424,9 +425,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String tooltipSchemeColor = controller.tooltipSchemeColor != null
       ? '    tooltipSchemeColor: ${controller.tooltipSchemeColor},\n'
       : '';
-  final String tooltipOpacity = controller.tooltipOpacity != null
-      ? '    tooltipOpacity: ${controller.tooltipOpacity},\n'
-      : '';
+  final String tooltipOpacity =
+      controller.tooltipOpacity == 1.0 || controller.tooltipSchemeColor == null
+          ? ''
+          : '    tooltipOpacity: ${controller.tooltipOpacity},\n';
   //
   // Dialog, AppBar and TabBar setup CODE
   //

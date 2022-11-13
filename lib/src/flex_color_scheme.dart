@@ -5997,8 +5997,8 @@ class FlexColorScheme with Diagnosticable {
             : tooltipsMatchBackground
                 ? BoxDecoration(
                     color: isDark
-                        ? const Color(0xED444444)
-                        : const Color(0xF0FCFCFC),
+                        ? const Color(0xED444444) // 93%
+                        : const Color(0xF0FCFCFC), // 94%
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
                     border: Border.all(color: dividerColor),
                   )
