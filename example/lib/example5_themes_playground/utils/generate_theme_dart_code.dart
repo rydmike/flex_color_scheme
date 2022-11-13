@@ -366,7 +366,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
-  // Fab and chip, snack, card, dialog, popup setup CODE
+  // Fab and chip, snack, card, and popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
       ? '    fabUseShape: ${controller.fabUseShape},\n'
@@ -409,7 +409,27 @@ String generateThemeDartCode(ThemeController controller) {
   final String popupMenuOpacity = controller.popupMenuOpacity != 1
       ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
       : '';
-
+  //
+  // Tooltip setup CODE
+  //
+  final String tooltipRadius = controller.tooltipRadius != null
+      ? '    tooltipRadius: ${controller.tooltipRadius},\n'
+      : '';
+  final String tooltipWaitDuration = controller.tooltipWaitDuration != null
+      ? '    tooltipWaitDuration: Duration(milliseconds: ${controller.tooltipWaitDuration}),\n'
+      : '';
+  final String tooltipShowDuration = controller.tooltipShowDuration != null
+      ? '    tooltipShowDuration: Duration(milliseconds: ${controller.tooltipShowDuration}),\n'
+      : '';
+  final String tooltipSchemeColor = controller.tooltipSchemeColor != null
+      ? '    tooltipSchemeColor: ${controller.tooltipSchemeColor},\n'
+      : '';
+  final String tooltipOpacity = controller.tooltipOpacity != null
+      ? '    tooltipOpacity: ${controller.tooltipOpacity},\n'
+      : '';
+  //
+  // Dialog, AppBar and TabBar setup CODE
+  //
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor !=
           null
@@ -716,6 +736,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuSchemeColor'
           '$popupMenuOpacity'
           //
+          '$tooltipRadius'
+          '$tooltipWaitDuration'
+          '$tooltipShowDuration'
+          '$tooltipSchemeColor'
+          '$tooltipOpacity'
+          //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
@@ -839,6 +865,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuElevation'
           '$popupMenuSchemeColor'
           '$popupMenuOpacity'
+          //
+          '$tooltipRadius'
+          '$tooltipWaitDuration'
+          '$tooltipShowDuration'
+          '$tooltipSchemeColor'
+          '$tooltipOpacity'
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
