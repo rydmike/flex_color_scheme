@@ -244,6 +244,16 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             popupMenuElevation: controller.popupMenuElevation,
             popupMenuSchemeColor: controller.popupMenuSchemeColor,
             popupMenuOpacity: controller.popupMenuOpacity,
+            // Tooltip
+            tooltipRadius: controller.tooltipRadius,
+            tooltipWaitDuration: controller.tooltipWaitDuration == null
+                ? null
+                : Duration(milliseconds: controller.tooltipWaitDuration!),
+            tooltipShowDuration: controller.tooltipShowDuration == null
+                ? null
+                : Duration(milliseconds: controller.tooltipShowDuration!),
+            tooltipSchemeColor: controller.tooltipSchemeColor,
+            tooltipOpacity: controller.tooltipOpacity,
             // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
