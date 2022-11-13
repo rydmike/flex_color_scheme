@@ -916,6 +916,39 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogElevation = null;
 
+  // Tooltip SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the tooltipRadius value.
+  static const String keyTooltipRadius = 'tooltipRadius';
+  // Default value for the tooltipRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTooltipRadius = null;
+
+  // Key used to read and save the tooltipWaitDuration value.
+  static const String keyTooltipWaitDuration = 'tooltipWaitDuration';
+  // Default value for the tooltipWaitDuration, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const int? defaultTooltipWaitDuration = null;
+
+  // Key used to read and save the tooltipShowDuration value.
+  static const String keyTooltipShowDuration = 'tooltipShowDuration';
+  // Default value for the tooltipShowDuration, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const int? defaultTooltipShowDuration = null;
+
+  // Key used to read and save the tooltipSchemeColor value.
+  static const String keyTooltipSchemeColor = 'tooltipSchemeColor';
+  // Default value for the tooltipSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultTooltipSchemeColor = null;
+
+  // Key used to read and save the tooltipOpacity value.
+  static const String keyTooltipOpacity = 'tooltipOpacity';
+  // Default value for the tooltipOpacity, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTooltipOpacity = null;
+
   // Custom surface tint color SETTINGS.
   // ===========================================================================
 

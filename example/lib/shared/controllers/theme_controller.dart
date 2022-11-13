@@ -439,6 +439,18 @@ class ThemeController with ChangeNotifier {
     _dialogElevation = await _themeService.load(
         Store.keyDialogElevation, Store.defaultDialogElevation);
     //
+    // Tooltip SETTINGS.
+    _tooltipRadius = await _themeService.load(
+        Store.keyTooltipRadius, Store.defaultTooltipRadius);
+    _tooltipWaitDuration = await _themeService.load(
+        Store.keyTooltipWaitDuration, Store.defaultTooltipWaitDuration);
+    _tooltipShowDuration = await _themeService.load(
+        Store.keyTooltipShowDuration, Store.defaultTooltipShowDuration);
+    _tooltipSchemeColor = await _themeService.load(
+        Store.keyTooltipSchemeColor, Store.defaultTooltipSchemeColor);
+    _tooltipOpacity = await _themeService.load(
+        Store.keyTooltipOpacity, Store.defaultTooltipOpacity);
+    //
     // Custom surface tint color SETTINGS.
     _surfaceTintLight = await _themeService.load(
         Store.keySurfaceTintLight, Store.defaultSurfaceTintLight);
@@ -708,6 +720,13 @@ class ThemeController with ChangeNotifier {
         Store.defaultDialogBackgroundSchemeColor, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
     setDialogElevation(Store.defaultDialogElevation, false);
+    //
+    // Tooltip SETTINGS.
+    setTooltipRadius(Store.defaultTooltipRadius, false);
+    setTooltipWaitDuration(Store.defaultTooltipWaitDuration, false);
+    setTooltipShowDuration(Store.defaultTooltipShowDuration, false);
+    setTooltipSchemeColor(Store.defaultTooltipSchemeColor, false);
+    setTooltipOpacity(Store.defaultTooltipOpacity, false);
     //
     // Surface tint colors.
     setSurfaceTintLight(Store.defaultSurfaceTintLight, false);
@@ -2246,6 +2265,54 @@ class ThemeController with ChangeNotifier {
     _dialogElevation = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDialogElevation, value));
+  }
+
+  // Tooltip SETTINGS.
+  // ===========================================================================
+
+  late double? _tooltipRadius;
+  double? get tooltipRadius => _tooltipRadius;
+  void setTooltipRadius(double? value, [bool notify = true]) {
+    if (value == _tooltipRadius) return;
+    _tooltipRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTooltipRadius, value));
+  }
+
+  late int? _tooltipWaitDuration;
+  int? get tooltipWaitDuration => _tooltipWaitDuration;
+  void setTooltipWaitDuration(int? value, [bool notify = true]) {
+    if (value == _tooltipWaitDuration) return;
+    _tooltipWaitDuration = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTooltipWaitDuration, value));
+  }
+
+  late int? _tooltipShowDuration;
+  int? get tooltipShowDuration => _tooltipShowDuration;
+  void setTooltipShowDuration(int? value, [bool notify = true]) {
+    if (value == _tooltipShowDuration) return;
+    _tooltipShowDuration = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTooltipShowDuration, value));
+  }
+
+  late SchemeColor? _tooltipSchemeColor;
+  SchemeColor? get tooltipSchemeColor => _tooltipSchemeColor;
+  void setTooltipSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _tooltipSchemeColor) return;
+    _tooltipSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTooltipSchemeColor, value));
+  }
+
+  late double? _tooltipOpacity;
+  double? get tooltipOpacity => _tooltipOpacity;
+  void setTooltipOpacity(double? value, [bool notify = true]) {
+    if (value == _tooltipOpacity) return;
+    _tooltipOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTooltipOpacity, value));
   }
 
   // Custom surface tint color SETTINGS.
