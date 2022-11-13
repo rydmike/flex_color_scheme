@@ -4637,5 +4637,66 @@ void main() {
         ),
       );
     });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Slider tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.24a-light: GIVEN a light default FlexSubTheme.sliderTheme() '
+        'EXPECT equal to SliderThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.sliderTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          const SliderThemeData(
+            activeTrackColor: Color(0xff6200ee),
+            inactiveTrackColor: Color(0x3d6200ee),
+            disabledActiveTrackColor: Color(0x52000000),
+            disabledInactiveTrackColor: Color(0x1f000000),
+            activeTickMarkColor: Color(0x8affffff),
+            inactiveTickMarkColor: Color(0x8a6200ee),
+            disabledActiveTickMarkColor: Color(0x1fffffff),
+            disabledInactiveTickMarkColor: Color(0x1f000000),
+            thumbColor: Color(0xff6200ee),
+            disabledThumbColor: Color(0xff9e9e9e),
+            overlayColor: Color(0x1f6200ee),
+            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.24b-light: GIVEN a light custom FlexSubTheme.sliderTheme() '
+        'EXPECT equal to SliderThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.sliderTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          trackHeight: 6,
+          valueIndicatorColor: const Color(0xFF342342),
+          valueIndicatorTextStyle: const TextStyle(color: Colors.white12),
+        ).toString(),
+        equalsIgnoringHashCodes(
+          const SliderThemeData(
+            trackHeight: 6.0,
+            activeTrackColor: Color(0xff03dac6),
+            inactiveTrackColor: Color(0x3d03dac6),
+            disabledActiveTrackColor: Color(0x52000000),
+            disabledInactiveTrackColor: Color(0x1f000000),
+            activeTickMarkColor: Color(0x8a000000),
+            inactiveTickMarkColor: Color(0x8a03dac6),
+            disabledActiveTickMarkColor: Color(0x1f000000),
+            disabledInactiveTickMarkColor: Color(0x1f000000),
+            thumbColor: Color(0xff03dac6),
+            disabledThumbColor: Color(0xff9e9e9e),
+            overlayColor: Color(0x1f03dac6),
+            valueIndicatorColor: Color(0xff342342),
+            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            valueIndicatorTextStyle:
+                TextStyle(inherit: true, color: Color(0x1fffffff)),
+          ).toString(),
+        ),
+      );
+    });
   });
 }

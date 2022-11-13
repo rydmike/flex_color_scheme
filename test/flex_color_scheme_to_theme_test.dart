@@ -3874,5 +3874,116 @@ void main() {
         equals(1.5),
       );
     });
+    // Test default Slider theming, light M2
+    test(
+        'FCS7.104a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Slider default', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+          theme.sliderTheme,
+          equals(
+            const SliderThemeData(
+              activeTrackColor: Color(0xff6750a4),
+              inactiveTrackColor: Color(0x3d6750a4),
+              disabledActiveTrackColor: Color(0x52000000),
+              disabledInactiveTrackColor: Color(0x1f000000),
+              activeTickMarkColor: Color(0x8affffff),
+              inactiveTickMarkColor: Color(0x8a6750a4),
+              disabledActiveTickMarkColor: Color(0x1fffffff),
+              disabledInactiveTickMarkColor: Color(0x1f000000),
+              thumbColor: Color(0xff6750a4),
+              disabledThumbColor: Color(0xff9e9e9e),
+              overlayColor: Color(0x1f6750a4),
+              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            ),
+          ));
+    });
+    // Test default Slider theming, dark M2
+    test(
+        'FCS7.104b GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Slider default', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+          theme.sliderTheme,
+          equals(
+            const SliderThemeData(
+              activeTrackColor: Color(0xffd0bcff),
+              inactiveTrackColor: Color(0x3dd0bcff),
+              disabledActiveTrackColor: Color(0x52ffffff),
+              disabledInactiveTrackColor: Color(0x1fffffff),
+              activeTickMarkColor: Color(0x8a000000),
+              inactiveTickMarkColor: Color(0x8ad0bcff),
+              disabledActiveTickMarkColor: Color(0x1f000000),
+              disabledInactiveTickMarkColor: Color(0x1fffffff),
+              thumbColor: Color(0xffd0bcff),
+              disabledThumbColor: Color(0xff6c6c6c),
+              overlayColor: Color(0x1fd0bcff),
+              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            ),
+          ));
+    });
+    test(
+        'FCS7.104c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and custom FlexSubThemesData with tinted value & height 6 '
+        'EXPECT Slider with tinted value and height 6', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          sliderValueTinted: true,
+          sliderTrackHeight: 6,
+        ),
+      ).toTheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(const Color(0xed2e2349)),
+      );
+      expect(
+        theme.sliderTheme.trackHeight,
+        equals(6),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(theme.colorScheme.primary),
+      );
+    });
+    test(
+        'FCS7.104c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and custom FlexSubThemesData with tinted value & height 8 '
+        ' and Scheme color tertiary '
+        'EXPECT Slider with tinted value and height 8 and tertiary '
+        'track ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          sliderValueTinted: true,
+          sliderBaseSchemeColor: SchemeColor.tertiary,
+          sliderTrackHeight: 8,
+        ),
+      ).toTheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(const Color(0xed37242a)),
+      );
+      expect(
+        theme.sliderTheme.trackHeight,
+        equals(8),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(theme.colorScheme.tertiary),
+      );
+    });
   });
 }
