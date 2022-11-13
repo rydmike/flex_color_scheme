@@ -201,6 +201,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             radioSchemeColor: controller.radioSchemeColor,
             // Style of unselected switch/checkbox/radio.
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
+            // Slider settings.
+            sliderBaseSchemeColor: controller.sliderBaseSchemeColor,
+            sliderValueTinted: controller.sliderValueTinted,
+            sliderTrackHeight: controller.sliderTrackHeight,
             // Input decoration (TextField) settings.
             // Base ColorScheme used by TextField InputDecorator.
             inputDecoratorSchemeColor:

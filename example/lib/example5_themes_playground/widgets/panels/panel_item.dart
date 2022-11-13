@@ -114,6 +114,11 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.toggle_on_outlined,
   ),
   PanelItem(
+    panelLabel: 'Slider',
+    buttonLabel: 'Slider',
+    icon: Icons.tune,
+  ),
+  PanelItem(
     panelLabel: 'ListTile',
     buttonLabel: 'ListTile',
     icon: Icons.dns_outlined,

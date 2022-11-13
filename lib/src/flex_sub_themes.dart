@@ -169,6 +169,7 @@ enum SchemeColor {
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
+/// * [SliderThemeData] for [Slider] via [sliderTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
@@ -3060,8 +3061,6 @@ class FlexSubThemes {
   /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
-  ///
-  /// The splashRadius is not used by FlexColorScheme sub-themes.
   static SliderThemeData sliderTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,

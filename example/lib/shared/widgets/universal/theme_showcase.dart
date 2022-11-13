@@ -514,28 +514,7 @@ class _SliderShowcaseState extends State<SliderShowcase> {
     return Column(
       children: <Widget>[
         ListTile(
-          title: Text('Slider continuous (${value1.toStringAsFixed(2)})'),
-          subtitle: Slider(
-            max: 30,
-            label: value1.toStringAsFixed(2),
-            value: value1,
-            onChanged: (double newValue) {
-              setState(() {
-                value1 = newValue;
-              });
-            },
-          ),
-        ),
-        ListTile(
-          title: Text('Slider continuous disabled (${14.toStringAsFixed(2)})'),
-          subtitle: Slider(
-            max: 30,
-            label: 14.toStringAsFixed(2),
-            value: 14,
-            onChanged: null,
-          ),
-        ),
-        ListTile(
+          dense: true,
           title: Text('Slider stepped (${value1.toStringAsFixed(0)})'),
           subtitle: Slider(
             max: 30,
@@ -550,12 +529,37 @@ class _SliderShowcaseState extends State<SliderShowcase> {
           ),
         ),
         ListTile(
+          dense: true,
+          title: Text('Slider continuous (${value1.toStringAsFixed(2)})'),
+          subtitle: Slider(
+            max: 30,
+            label: value1.toStringAsFixed(2),
+            value: value1,
+            onChanged: (double newValue) {
+              setState(() {
+                value1 = newValue;
+              });
+            },
+          ),
+        ),
+        ListTile(
+          dense: true,
           title: Text('Slider stepped disabled (${22.toStringAsFixed(0)})'),
           subtitle: Slider(
             max: 30,
             divisions: 31,
             label: 22.toStringAsFixed(0),
             value: 22,
+            onChanged: null,
+          ),
+        ),
+        ListTile(
+          dense: true,
+          title: Text('Slider continuous disabled (${14.toStringAsFixed(2)})'),
+          subtitle: Slider(
+            max: 30,
+            label: 14.toStringAsFixed(2),
+            value: 14,
             onChanged: null,
           ),
         ),

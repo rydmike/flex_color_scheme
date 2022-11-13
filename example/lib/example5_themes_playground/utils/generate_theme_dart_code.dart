@@ -293,7 +293,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
-  // Toggleable sub themes setup CODE.
+  // Switches, CheckBox and radio sub themes setup CODE.
   //
   final String switchSchemeColor = controller.switchSchemeColor == null
       ? ''
@@ -307,6 +307,18 @@ String generateThemeDartCode(ThemeController controller) {
   final String unselectedIsColored = controller.unselectedToggleIsColored
       ? '    unselectedToggleIsColored: ${controller.unselectedToggleIsColored},\n'
       : '';
+  //
+  // Slider sub themes setup CODE.
+  //
+  final String sliderBaseSchemeColor = controller.sliderBaseSchemeColor == null
+      ? ''
+      : '    sliderBaseSchemeColor: ${controller.sliderBaseSchemeColor},\n';
+  final String sliderValueTinted = controller.sliderValueTinted == false
+      ? ''
+      : '    sliderValueTinted: ${controller.sliderValueTinted},\n';
+  final String sliderTrackHeight = controller.sliderTrackHeight == null
+      ? ''
+      : '    sliderTrackHeight: ${controller.sliderTrackHeight},\n';
   //
   // Input decorator setup CODE.
   //
@@ -676,6 +688,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$radioSchemeColor'
           '$unselectedIsColored'
           //
+          '$sliderBaseSchemeColor'
+          '$sliderValueTinted'
+          '$sliderTrackHeight'
+          //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
           '$inputDecoratorBorderType'
@@ -795,6 +811,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
+          //
+          '$sliderBaseSchemeColor'
+          '$sliderValueTinted'
+          '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'

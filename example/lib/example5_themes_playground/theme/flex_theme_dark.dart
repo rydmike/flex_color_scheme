@@ -154,6 +154,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
+            // Slider settings.
+            sliderBaseSchemeColor: controller.sliderBaseSchemeColor,
+            sliderValueTinted: controller.sliderValueTinted,
+            sliderTrackHeight: controller.sliderTrackHeight,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,

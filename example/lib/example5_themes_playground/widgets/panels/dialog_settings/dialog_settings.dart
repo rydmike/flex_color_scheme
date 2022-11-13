@@ -194,8 +194,9 @@ class DialogSettings extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: '. Dialogs usually have a scrim, so the issue is not '
-                        'so visible when they are actually used as dialogs. Fix '
-                        'should arrive in next stable release after Flutter 3.3.',
+                        'so visible when they are actually used as dialogs. '
+                        'Fix should arrive in next stable release after '
+                        'Flutter 3.3.',
                   ),
                 ],
               ),

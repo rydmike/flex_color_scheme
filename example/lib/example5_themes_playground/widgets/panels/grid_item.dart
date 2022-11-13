@@ -118,6 +118,7 @@ const List<GridItem> gridItems = <GridItem>[
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
   ),
+  GridItem(panelLabel: 'Slider', buttonLabel: 'Slider', icon: Icons.tune),
   GridItem(
     panelLabel: 'ListTile',
     buttonLabel: 'ListTile',

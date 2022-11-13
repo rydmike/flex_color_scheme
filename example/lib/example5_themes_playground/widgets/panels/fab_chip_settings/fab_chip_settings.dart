@@ -29,10 +29,6 @@ class FabChipSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FabShowcase(),
-        ),
         ColorSchemePopupMenu(
           title: const Text('FloatingActionButton color'),
           labelForDefault: controller.useMaterial3
@@ -48,6 +44,10 @@ class FabChipSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FabShowcase(),
         ),
         SwitchListTile(
           title: const Text('Use themed shape'),
@@ -148,10 +148,6 @@ class FabChipSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
-        ),
         ColorSchemePopupMenu(
           title: const Text('Chip color base'),
           labelForDefault: controller.useMaterial3
@@ -167,6 +163,10 @@ class FabChipSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

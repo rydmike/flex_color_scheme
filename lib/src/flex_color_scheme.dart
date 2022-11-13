@@ -5242,6 +5242,14 @@ class FlexColorScheme with Diagnosticable {
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
+    // Return true if the color is dark, it needs light text for contrast.
+    bool isColorDark(final Color color) =>
+        ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+
+    // On color used when a color property does not have a theme onColor.
+    Color onColor(final Color color) =>
+        isColorDark(color) ? Colors.white : Colors.black;
+
     // Use sub-themes if a none null FlexSubThemesData was passed in.
     final bool useSubThemes = subThemesData != null;
     // If we did not have any sub-theme data, we make one instead that cannot
@@ -5275,9 +5283,7 @@ class FlexColorScheme with Diagnosticable {
     // fully using the same process that the ThemeData() factory uses.
     TextTheme defText =
         isDark ? effectiveTypography.white : effectiveTypography.black;
-    final bool primaryIsDark =
-        ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
-            Brightness.dark;
+    final bool primaryIsDark = isColorDark(colorScheme.primary);
     TextTheme defPrimaryText =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
 
@@ -5412,6 +5418,7 @@ class FlexColorScheme with Diagnosticable {
     final Color secondaryHeaderColor = isDark
         ? colorScheme.primary.blend(Colors.black, 60)
         : colorScheme.primary.blend(Colors.white, 80);
+
     // AppBar background color:
     // - If a color is passed in, that is used first.
     // - If we use sub-themes, we use its scheme based color.
@@ -5443,6 +5450,7 @@ class FlexColorScheme with Diagnosticable {
       }
       appBarIconColor = appBarForeground;
     }
+
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior,
     // it can be used, but is not as useful as the `forAppBar` version which
@@ -5530,6 +5538,36 @@ class FlexColorScheme with Diagnosticable {
           return const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
       }
     }
+
+    // FCS opinionated tinted semi transparent background color.
+    // Used as background on SnackBar (default) and as option on Slider value.
+    Color tintedBackground({
+      required Color background,
+      required Color blend,
+      required Brightness brightness,
+    }) =>
+        brightness == Brightness.dark
+            ? background
+                .blendAlpha(blend, 0x63) // 39%
+                .withAlpha(0xF2) // 95%
+            : background
+                .blendAlpha(blend, 0x72) // 45%
+                .withAlpha(0xED); // 93%
+
+    // Effective and opinionated sliderValueIndicator color for themed Slider.
+    final Color? sliderValueIndicator = subTheme.sliderValueTinted
+        ? tintedBackground(
+            background: colorScheme.onSurface,
+            blend: FlexSubThemes.schemeColor(
+                subTheme.sliderBaseSchemeColor ?? SchemeColor.primary,
+                colorScheme),
+            brightness: colorScheme.brightness)
+        : null;
+    final Color sliderValueStyleOnColor =
+        onColor((sliderValueIndicator ?? colorScheme.primary).withAlpha(0xFF));
+    final TextStyle? sliderValueStyle = subTheme.sliderValueTinted
+        ? effectiveTextTheme.bodyLarge!.copyWith(color: sliderValueStyleOnColor)
+        : null;
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
@@ -6096,18 +6134,15 @@ class FlexColorScheme with Diagnosticable {
               unselectedIsColored: false,
             ),
       // Slider theme.
-      sliderTheme: FlexSubThemes.sliderTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
-          trackHeight: 5,
-          valueIndicatorColor: isDark
-              ? colorScheme.onSurface
-                  .blendAlpha(colorScheme.secondary, 0x63) // 39%
-                  .withAlpha(0xF2) // 95%
-              : colorScheme.onSurface
-                  .blendAlpha(colorScheme.secondary, 0x72) // 45%
-                  .withAlpha(0xED) // 93%
-          ),
+      sliderTheme: useSubThemes
+          ? FlexSubThemes.sliderTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.sliderBaseSchemeColor,
+              trackHeight: subTheme.sliderTrackHeight,
+              valueIndicatorColor: sliderValueIndicator,
+              valueIndicatorTextStyle: sliderValueStyle,
+            )
+          : null,
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
       // FAB, floating action button theme.
@@ -6187,14 +6222,12 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.snackBarElevation,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
-              backgroundColor: isDark
-                  ? colorScheme.onSurface
-                      .blendAlpha(colorScheme.primary, 0x63) // 39%
-                      .withAlpha(0xF2) // 95%
-                  : colorScheme.onSurface
-                      .blendAlpha(colorScheme.primary, 0x72) // 45%
-                      .withAlpha(0xED) // 93%
-              )
+              backgroundColor: tintedBackground(
+                background: colorScheme.onSurface,
+                blend: colorScheme.primary,
+                brightness: colorScheme.brightness,
+              ),
+            )
           : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(

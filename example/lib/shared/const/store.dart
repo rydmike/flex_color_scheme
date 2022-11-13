@@ -778,7 +778,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderWidth = null;
 
-  // Toggleable SETTINGS.
+  // Switch, CheckBox and Radio SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the unselectedToggleIsColored value.
@@ -804,6 +804,26 @@ class Store {
   // Default value for the radioSchemeColor, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultRadioSchemeColor = null;
+
+  // Slider SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the sliderBaseSchemeColor value.
+  static const String keySliderBaseSchemeColor = 'sliderBaseSchemeColor';
+  // Default value for the sliderBaseSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSliderBaseSchemeColor = null;
+
+  // Key used to read and save the sliderValueTinted value.
+  static const String keySliderValueTinted = 'sliderValueTinted';
+  // Default value for the sliderValueTinted, also to reset settings.
+  static const bool defaultSliderValueTinted = false;
+
+  // Key used to read and save the sliderTrackHeight value.
+  static const String keySliderTrackHeight = 'sliderTrackHeight';
+  // Default value for the sliderTrackHeight, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSliderTrackHeight = null;
 
   // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
   // ===========================================================================

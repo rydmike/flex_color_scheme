@@ -146,6 +146,8 @@ class FlexSubThemesData with Diagnosticable {
     this.unselectedToggleIsColored = false,
     //
     this.sliderBaseSchemeColor,
+    this.sliderValueTinted = false,
+    this.sliderTrackHeight,
     //
     this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
@@ -840,6 +842,19 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, the [Slider] theme defaults natively to using the
   /// ambient theme's primary color.
   final SchemeColor? sliderBaseSchemeColor;
+
+  /// If true, the value indicator is a tinted high contrast version of current
+  /// [sliderBaseSchemeColor], with a bit of opacity.
+  ///
+  /// If false, the value indicator uses Flutter SDK default.
+  ///
+  /// Default to false.
+  final bool sliderValueTinted;
+
+  /// The height of the [Slider] track.
+  ///
+  /// If undefined, defaults to 4db via Flutter SDK defaults.
+  final double? sliderTrackHeight;
 
   /// Border radius value for [InputDecoration].
   ///
@@ -1990,6 +2005,8 @@ class FlexSubThemesData with Diagnosticable {
     final bool? unselectedToggleIsColored,
     //
     final SchemeColor? sliderBaseSchemeColor,
+    final bool? sliderValueTinted,
+    final double? sliderTrackHeight,
     //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
@@ -2165,6 +2182,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       sliderBaseSchemeColor:
           sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
+      sliderValueTinted: sliderValueTinted ?? this.sliderValueTinted,
+      sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
@@ -2426,6 +2445,8 @@ class FlexSubThemesData with Diagnosticable {
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
         //
         other.sliderBaseSchemeColor == sliderBaseSchemeColor &&
+        other.sliderValueTinted == sliderValueTinted &&
+        other.sliderTrackHeight == sliderTrackHeight &&
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
@@ -2630,6 +2651,8 @@ class FlexSubThemesData with Diagnosticable {
         unselectedToggleIsColored,
         //
         sliderBaseSchemeColor,
+        sliderValueTinted,
+        sliderTrackHeight,
         //
         inputDecoratorRadius,
         inputDecoratorSchemeColor,
@@ -2820,6 +2843,10 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(EnumProperty<SchemeColor>(
         'sliderBaseSchemeColor', sliderBaseSchemeColor));
+    properties
+        .add(DiagnosticsProperty<bool>('sliderValueTinted', sliderValueTinted));
+    properties.add(
+        DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
     //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));

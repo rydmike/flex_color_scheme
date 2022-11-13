@@ -24,6 +24,7 @@ import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
 import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
+import '../panels/slider_settings/slider_settings.dart';
 import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
@@ -211,6 +212,7 @@ class _LargeGridViewState extends State<LargeGridView>
                   PopupMenuButtonSettings(themeCtrl),
                   TooltipIconButtonAvatarDropdownSettings(themeCtrl),
                   SwitchesSettings(themeCtrl),
+                  SliderSettings(themeCtrl),
                   ListTileSettings(themeCtrl),
                   DialogSettings(themeCtrl),
                   BottomSheetBannerSnackSettings(themeCtrl),

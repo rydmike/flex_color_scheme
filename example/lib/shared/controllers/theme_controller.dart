@@ -384,7 +384,7 @@ class ThemeController with ChangeNotifier {
         Store.keyToggleButtonsBorderWidth,
         Store.defaultToggleButtonsBorderWidth);
     //
-    // Toggleable SETTINGS.
+    // Switch, CheckBox and Radio SETTINGS.
     _unselectedToggleIsColored = await _themeService.load(
         Store.keyUnselectedToggleIsColored,
         Store.defaultUnselectedToggleIsColored);
@@ -393,7 +393,15 @@ class ThemeController with ChangeNotifier {
     _checkboxSchemeColor = await _themeService.load(
         Store.keyCheckboxSchemeColor, Store.defaultCheckboxSchemeColor);
     _radioSchemeColor = await _themeService.load(
-        Store.keyRadioSchemeColor, Store.defaultRadioSchemeColor);
+        Store.keySliderBaseSchemeColor, Store.defaultRadioSchemeColor);
+    //
+    // Slider SETTINGS.
+    _sliderBaseSchemeColor = await _themeService.load(
+        Store.keySwitchSchemeColor, Store.defaultSliderBaseSchemeColor);
+    _sliderValueTinted = await _themeService.load(
+        Store.keySliderValueTinted, Store.defaultSliderValueTinted);
+    _sliderTrackHeight = await _themeService.load(
+        Store.keySliderTrackHeight, Store.defaultSliderTrackHeight);
     //
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     _fabUseShape = await _themeService.load(
@@ -669,11 +677,16 @@ class ThemeController with ChangeNotifier {
     setToggleButtonsBorderRadius(Store.defaultToggleButtonsBorderRadius, false);
     setToggleButtonsBorderWidth(Store.defaultToggleButtonsBorderWidth, false);
     //
-    // Toggleable SETTINGS.
+    // Switch, CheckBox and Radio SETTINGS.
     setUnselectedToggleIsColored(Store.defaultUnselectedToggleIsColored, false);
     setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
     setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
+    //
+    // Slider SETTINGS.
+    setSliderBaseSchemeColor(Store.defaultSliderBaseSchemeColor, false);
+    setSliderValueTinted(Store.defaultSliderValueTinted, false);
+    setSliderTrackHeight(Store.defaultSliderTrackHeight, false);
     //
     // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
     setFabUseShape(Store.defaultFabUseShape, false);
@@ -2022,7 +2035,7 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyToggleButtonsBorderWidth, value));
   }
 
-  // Toggleable SETTINGS.
+  // Switch, CheckBox and Radio SETTINGS.
   // ===========================================================================
 
   late bool _unselectedToggleIsColored;
@@ -2060,6 +2073,37 @@ class ThemeController with ChangeNotifier {
     _radioSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyRadioSchemeColor, value));
+  }
+
+  // Slider SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _sliderBaseSchemeColor;
+  SchemeColor? get sliderBaseSchemeColor => _sliderBaseSchemeColor;
+  void setSliderBaseSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _sliderBaseSchemeColor) return;
+    _sliderBaseSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderBaseSchemeColor, value));
+  }
+
+  late bool _sliderValueTinted;
+  bool get sliderValueTinted => _sliderValueTinted;
+  void setSliderValueTinted(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _sliderValueTinted) return;
+    _sliderValueTinted = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderValueTinted, value));
+  }
+
+  late double? _sliderTrackHeight;
+  double? get sliderTrackHeight => _sliderTrackHeight;
+  void setSliderTrackHeight(double? value, [bool notify = true]) {
+    if (value == _sliderTrackHeight) return;
+    _sliderTrackHeight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderTrackHeight, value));
   }
 
   // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.

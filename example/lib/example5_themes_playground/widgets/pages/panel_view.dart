@@ -26,6 +26,7 @@ import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
 import '../panels/showcase_panels/widget_showcase.dart';
+import '../panels/slider_settings/slider_settings.dart';
 import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
@@ -226,6 +227,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(TooltipIconButtonAvatarDropdownSettings(themeCtrl),
                       pageIndex, themeCtrl),
                   PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(SliderSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(ListTileSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(BottomSheetBannerSnackSettings(themeCtrl),
