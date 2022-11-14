@@ -71,6 +71,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Tooltip background color'),
+          subtitle: controller.tooltipSchemeColor == null
+              ? null
+              : const Text('Foreground pair used'),
           labelForDefault: toolTipDefaultColorLabel,
           index: controller.tooltipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -185,7 +188,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ? controller.tooltipWaitDuration == null ||
                         (controller.tooltipWaitDuration ?? 0) <= 0
                     ? 'default 0'
-                    : (controller.tooltipWaitDuration.toString() ?? '')
+                    : (controller.tooltipWaitDuration.toString())
                 : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.tooltipWaitDuration?.toDouble() ?? 0
@@ -232,7 +235,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ? controller.tooltipShowDuration == null ||
                         (controller.tooltipShowDuration ?? 0) <= 0
                     ? 'tap/long 1500\nmouse exit 100'
-                    : (controller.tooltipShowDuration.toString() ?? '')
+                    : (controller.tooltipShowDuration.toString())
                 : 'tap/long 1500\nmouse exit 100',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.tooltipShowDuration?.toDouble() ?? 0

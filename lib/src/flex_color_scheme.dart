@@ -606,7 +606,6 @@ class FlexColorScheme with Diagnosticable {
   /// but it can easily be adjusted for the theme with this property.
   final double bottomAppBarElevation;
 
-  // TODO(rydmike): Review if padding/margins in tooltip theme can be removed.
   /// When set to true, tooltip background color will match the brightness of
   /// the theme's background color.
   ///
@@ -628,13 +627,8 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// - Desktop OS (macOS, Linux, Windows)
   ///   - Fontsize : 12 dp
-  ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
-  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-  ///
   /// - Mobile OS (iOS, Android, Fuchsia)
   ///   - Fontsize : 14 dp
-  ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
   ///
   /// - tooltipsMatchBackground: true
   ///   - Dark theme:  text: white
@@ -664,26 +658,9 @@ class FlexColorScheme with Diagnosticable {
   ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
   ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
   ///
-  ///
-  /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
-  /// desktop and web, because it defaulted to using a very small font (10 dp).
-  /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
-  /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
-  /// May 6, 2022.
-  ///
-  /// The above issue is the reason for the rather extensive theme on tooltips
-  /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
-  /// default adds background tinting and more border radius.
-  ///
-  /// In a future version FCS may look into with removing some of the
-  /// custom theming above like padding, margins and fonts, that
-  /// may no longer be needed, since the new defaults are same or very
-  /// close to similar. This will in that case be done when perceived style
-  /// differences are negligible.
-  ///
   /// When using additional theming via sub-themes properties, its
   /// properties will if used override background color, text color and
-  /// background opacity.
+  /// background opacity as well as border radius.
   final bool tooltipsMatchBackground;
 
   /// When `true`, the status bar on Android will be the same color as
@@ -888,7 +865,7 @@ class FlexColorScheme with Diagnosticable {
   /// defaults when it is possible to do so in Flutter SDK theming, within
   /// its current Material 2 (M2) design limitations.
   ///
-  /// In version 5, by opting in via a default [subThemesData] you
+  /// Starting from version 5, by opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -896,29 +873,41 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Opinionated sub themes are provided for:
   ///
-  /// * [TextButton]
-  /// * [ElevatedButton]
-  /// * [OutlinedButton]
-  /// * Older buttons using `ButtonThemeData`
-  /// * [ToggleButtons]
-  /// * [Switch]
-  /// * [Checkbox]
-  /// * [Radio]
-  /// * [InputDecoration]
-  /// * [FloatingActionButton]
-  /// * [Chip]
-  /// * [Card]
-  /// * [PopupMenuButton]
-  /// * [Dialog]
-  /// * [TimePickerDialog]
-  /// * [SnackBar]
-  /// * [Tooltip]
-  /// * [BottomSheet]
-  /// * [BottomNavigationBar]
-  /// * [NavigationBar]
-  /// * [NavigationRail]
+  /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+  ///   [FlexSubThemes.bottomNavigationBar].
+  /// * [BottomSheetThemeData] for [BottomSheet] via
+  ///   [FlexSubThemes.bottomSheetTheme].
+  /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+  /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+  /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+  /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+  /// * [ElevatedButtonThemeData] for [ElevatedButton] via
+  ///   [FlexSubThemes.elevatedButtonTheme].
+  /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+  ///   [FlexSubThemes.floatingActionButtonTheme].
+  /// * [InputDecorationTheme] for [InputDecoration] via
+  ///   [FlexSubThemes.inputDecorationTheme].
+  /// * [NavigationBarThemeData] for [NavigationBar] via
+  ///   [FlexSubThemes.navigationBarTheme].
+  /// * [NavigationRailThemeData] for [NavigationRail] via
+  ///   [FlexSubThemes.navigationRailTheme].
+  /// * [OutlinedButtonThemeData] for [OutlinedButton] via
+  ///   [FlexSubThemes.outlinedButtonTheme].
+  /// * [PopupMenuThemeData] for [PopupMenuButton] via
+  ///   [FlexSubThemes.popupMenuTheme].
+  /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+  /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+  /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+  /// * [TextButtonThemeData] for [TextButton] via
+  ///   [FlexSubThemes.textButtonTheme].
+  /// * [TimePickerThemeData] for [TimePickerDialog] via
+  ///   [FlexSubThemes.timePickerTheme].
+  /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+  ///   [FlexSubThemes.toggleButtonsTheme].
+  /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
   ///
-  /// * The custom [ButtonTextTheme] even still provides matching styling to
+  /// * The custom `ButtonThemeData` even still provides matching styling to
   ///   the deprecated legacy buttons if they are used.
   ///
   /// Defaults to null, resulting in FlexColorScheme not using any extra
@@ -1813,13 +1802,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// - Desktop OS (macOS, Linux, Windows)
     ///   - Fontsize : 12 dp
-    ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
-    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-    ///
     /// - Mobile OS (iOS, Android, Fuchsia)
     ///   - Fontsize : 14 dp
-    ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
     ///
     /// - tooltipsMatchBackground: true
     ///   - Dark theme:  text: white
@@ -1849,26 +1833,9 @@ class FlexColorScheme with Diagnosticable {
     ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
     ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
     ///
-    ///
-    /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
-    /// desktop and web, because it defaulted to using a very small font 10dp.
-    /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
-    /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
-    /// May 6, 2022.
-    ///
-    /// The above issue is the reason for the rather extensive theme on tooltips
-    /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
-    /// default adds background tinting and more border radius.
-    ///
-    /// In a future version FCS may look into with removing some of the
-    /// custom theming above like padding, margins and fonts, that
-    /// may no longer be needed, since the new defaults are same or very
-    /// close to similar. This will in that case be done when perceived style
-    /// differences are negligible.
-    ///
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and
-    /// background opacity.
+    /// background opacity as well as border radius.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -1896,48 +1863,52 @@ class FlexColorScheme with Diagnosticable {
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
     /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// any legacy Material 2 theming limitations that may still apply.
+    /// its current Material 2 (M2) design limitations.
     ///
-    /// By opting in via a default [subThemesData] you also
+    /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via their [subThemesData] properties, that have
+    /// They can be customized via the [subThemesData] property, that has
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// These component themes are available:
+    /// Opinionated sub themes are provided for:
     ///
-    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [bottomNavigationBar].
-    /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
-    /// * [CardTheme] for [Card] via [cardTheme].
-    /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
-    /// * [ChipThemeData] for [Chip] via [chipTheme].
-    /// * [DialogTheme] for [Dialog] via [dialogTheme].
+    ///   [FlexSubThemes.bottomNavigationBar].
+    /// * [BottomSheetThemeData] for [BottomSheet] via
+    ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+    /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
-    ///   [elevatedButtonTheme].
+    ///   [FlexSubThemes.elevatedButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
-    ///   [floatingActionButtonTheme].
+    ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
-    ///   [inputDecorationTheme].
-    /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+    ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [NavigationBarThemeData] for [NavigationBar] via
+    ///   [FlexSubThemes.navigationBarTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
-    ///   [navigationRailTheme].
+    ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
-    ///   [outlinedButtonTheme].
-    /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
-    /// * [RadioThemeData] for [Radio] via [radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
-    /// * [SwitchThemeData] for [Switch] via [switchTheme].
-    /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
-    /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
-    /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
+    ///   [FlexSubThemes.outlinedButtonTheme].
+    /// * [PopupMenuThemeData] for [PopupMenuButton] via
+    ///   [FlexSubThemes.popupMenuTheme].
+    /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+    /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TextButtonThemeData] for [TextButton] via
+    ///   [FlexSubThemes.textButtonTheme].
+    /// * [TimePickerThemeData] for [TimePickerDialog] via
+    ///   [FlexSubThemes.timePickerTheme].
+    /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+    ///   [FlexSubThemes.toggleButtonsTheme].
+    /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
     ///
-    /// The custom `ButtonThemeData` still provides matching styling
-    /// for the deprecated legacy buttons if they are used.
-    /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK in next stable release. Their
-    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
+    /// * The custom `ButtonThemeData` even still provides matching styling to
+    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -3543,13 +3514,8 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// - Desktop OS (macOS, Linux, Windows)
     ///   - Fontsize : 12 dp
-    ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
-    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-    ///
     /// - Mobile OS (iOS, Android, Fuchsia)
     ///   - Fontsize : 14 dp
-    ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-    ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
     ///
     /// - tooltipsMatchBackground: true
     ///   - Dark theme:  text: white
@@ -3579,26 +3545,9 @@ class FlexColorScheme with Diagnosticable {
     ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
     ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
     ///
-    ///
-    /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
-    /// desktop and web, because it defaulted to using a very small font 10dp.
-    /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
-    /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
-    /// May 6, 2022.
-    ///
-    /// The above issue is the reason for the rather extensive theme on tooltips
-    /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
-    /// default adds background tinting and more border radius.
-    ///
-    /// In a future version FCS may look into with removing some of the
-    /// custom theming above like padding, margins and fonts, that
-    /// may no longer be needed, since the new defaults are same or very
-    /// close to similar. This will in that case be done when perceived style
-    /// differences are negligible.
-    ///
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and
-    /// background opacity.
+    /// background opacity as well as border radius.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -3626,48 +3575,52 @@ class FlexColorScheme with Diagnosticable {
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
     /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// any legacy Material 2 theming limitations that may still apply.
+    /// its current Material 2 (M2) design limitations.
     ///
-    /// By opting in via a default [subThemesData] you also
+    /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via their [subThemesData] properties, that have
+    /// They can be customized via the [subThemesData] property, that has
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// These component themes are available:
+    /// Opinionated sub themes are provided for:
     ///
-    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [bottomNavigationBar].
-    /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
-    /// * [CardTheme] for [Card] via [cardTheme].
-    /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
-    /// * [ChipThemeData] for [Chip] via [chipTheme].
-    /// * [DialogTheme] for [Dialog] via [dialogTheme].
+    ///   [FlexSubThemes.bottomNavigationBar].
+    /// * [BottomSheetThemeData] for [BottomSheet] via
+    ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+    /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
-    ///   [elevatedButtonTheme].
+    ///   [FlexSubThemes.elevatedButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
-    ///   [floatingActionButtonTheme].
+    ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
-    ///   [inputDecorationTheme].
-    /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+    ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [NavigationBarThemeData] for [NavigationBar] via
+    ///   [FlexSubThemes.navigationBarTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
-    ///   [navigationRailTheme].
+    ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
-    ///   [outlinedButtonTheme].
-    /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
-    /// * [RadioThemeData] for [Radio] via [radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
-    /// * [SwitchThemeData] for [Switch] via [switchTheme].
-    /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
-    /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
-    /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
+    ///   [FlexSubThemes.outlinedButtonTheme].
+    /// * [PopupMenuThemeData] for [PopupMenuButton] via
+    ///   [FlexSubThemes.popupMenuTheme].
+    /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+    /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TextButtonThemeData] for [TextButton] via
+    ///   [FlexSubThemes.textButtonTheme].
+    /// * [TimePickerThemeData] for [TimePickerDialog] via
+    ///   [FlexSubThemes.timePickerTheme].
+    /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+    ///   [FlexSubThemes.toggleButtonsTheme].
+    /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
     ///
-    /// The custom `ButtonThemeData` can still provide matching styling
-    /// for the deprecated legacy buttons if they are used.
-    /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK. Their
-    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
+    /// * The custom `ButtonThemeData` even still provides matching styling to
+    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -5167,13 +5120,8 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// - Desktop OS (macOS, Linux, Windows)
   ///   - Fontsize : 12 dp
-  ///   - Padding  : EdgeInsets.fromLTRB(8, 3, 8, 4);
-  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-  ///
   /// - Mobile OS (iOS, Android, Fuchsia)
   ///   - Fontsize : 14 dp
-  ///   - Padding  : EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-  ///   - Margin   : EdgeInsets.symmetric(horizontal: 12, vertical: 6)
   ///
   /// - tooltipsMatchBackground: true
   ///   - Dark theme:  text: white
@@ -5203,25 +5151,9 @@ class FlexColorScheme with Diagnosticable {
   ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
   ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
   ///
-  /// Default tooltip theme in Flutter Material 2 used to be a bit flawed on
-  /// desktop and web, because it defaulted to using a very small font 10dp.
-  /// See issue: https:///github.com/flutter/flutter/issues/71429 Nov 30, 2020
-  /// This PR: https://github.com/flutter/flutter/pull/103189 fixed it
-  /// May 6, 2022.
-  ///
-  /// The above issue is the reason for the rather extensive theme on tooltips
-  /// applied by FlexColorScheme in all cases. Opting in on sub-themes by
-  /// default adds background tinting and more border radius.
-  ///
-  /// In a future version FCS may look into with removing some of the
-  /// custom theming above like padding, margins and fonts, that
-  /// may no longer be needed, since the new defaults are same or very
-  /// close to similar. This will in that case be done when perceived style
-  /// differences are negligible.
-  ///
   /// When using additional theming via sub-themes properties, its
   /// properties will if used override background color, text color and
-  /// background opacity.
+  /// background opacity as well as border radius.
   ///
   /// ---
   ///
@@ -5506,11 +5438,7 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // The current default theme for Material themed Tooltips are not ideal
-    // choices for desktop https://material.io/components/tooltips#specs.
-    // See issue: https://github.com/flutter/flutter/issues/71429
-    // The font size of 10 dp is too small for desktops with pixel density
-    // 1.0 so here we use 12 dp on desktop/Web and 14 dp on devices.
+    // Platform adjusting font size for tooltips.
     double tooltipFontSize() {
       switch (effectivePlatform) {
         case TargetPlatform.macOS:
@@ -5524,19 +5452,63 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // This padding on tooltips fixes that default tooltips do not work well if
-    // multi-row tooltips are used with the default fixed sized behavior.
-    EdgeInsets tooltipPadding() {
-      switch (effectivePlatform) {
-        case TargetPlatform.macOS:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          return const EdgeInsets.fromLTRB(8, 3, 8, 4);
-        case TargetPlatform.iOS:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.android:
-          return const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    // Tooltip background defaults logic.
+    Color? tooltipBackground() {
+      if (useSubThemes && subTheme.tooltipSchemeColor != null) return null;
+      if (useSubThemes && tooltipsMatchBackground) {
+        if (isDark) {
+          // 16% blend
+          return FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x28);
+        }
+        // 4% blend
+        return FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x0A);
       }
+      if (useSubThemes && !tooltipsMatchBackground) {
+        if (isDark) {
+          // 39% blend
+          return FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63);
+        }
+        // 45% blend
+        return FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72);
+      }
+      if (!useSubThemes && tooltipsMatchBackground) {
+        if (isDark) return const Color(0xFF444444);
+        return const Color(0xFFFCFCFC);
+      }
+      return null;
+    }
+
+    // Tooltip foregrounds defaults logic.
+    Color? tooltipForeground() {
+      if (useSubThemes && subTheme.tooltipSchemeColor != null) return null;
+      if (tooltipsMatchBackground) {
+        if (isDark) return Colors.white;
+        return Colors.black;
+      } else {
+        if (isDark) return Colors.black;
+        return Colors.white;
+      }
+    }
+
+    // Tooltip opacity via alpha values defaults logic.
+    int? tooltipAlpha() {
+      if (useSubThemes && subTheme.tooltipSchemeColor != null) {
+        return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 1);
+      }
+      if (useSubThemes && tooltipsMatchBackground) {
+        return 0xF2; // 95%
+      }
+      if (!useSubThemes && tooltipsMatchBackground) {
+        if (isDark) return 0xED; // 93%
+        return 0xF0; // 94%
+      }
+      return null;
+    }
+
+    // Tooltip border radius value;
+    double? tooltipBorderRadius() {
+      if (!useSubThemes) return 4;
+      return subTheme.tooltipRadius ?? 8;
     }
 
     // FCS opinionated tinted semi transparent background color.
@@ -5945,65 +5917,23 @@ class FlexColorScheme with Diagnosticable {
       primaryIconTheme: useSubThemes
           ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
           : null,
-      // TODO(rydmike): Tech debt: Move tooltip theme opt-in to FlexSubThemes.
-      // TODO(rydmike): Offer more tooltip theming options, like tip delays.
-      // Opinionated theming of Tooltips, the default theme for Material
-      // themed Tooltips are not ideal design choices on desktop and web
-      // https://material.io/components/tooltips#specs.
-      // The theming below is an opinionated alternative design, with an option
-      // to also invert the tooltip background color.
-      // See issue: https://github.com/flutter/flutter/issues/71429
-      tooltipTheme: TooltipThemeData(
-        // Do not use the min height, the custom padding handles it instead.
-        padding: tooltipPadding(),
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        textStyle: effectiveTextTheme.bodyMedium!.copyWith(
-          inherit: false,
-          color: tooltipsMatchBackground
-              ? isDark
-                  ? Colors.white
-                  : Colors.black
-              : isDark
-                  ? Colors.black
-                  : Colors.white,
-          fontSize: tooltipFontSize(),
-        ),
-        decoration: useSubThemes
-            // Opted in on sub-themes, we make a more fitting tooltip too.
-            ? tooltipsMatchBackground
-                ? BoxDecoration(
-                    color: isDark
-                        ? FlexColor.darkSurface
-                            .blendAlpha(colorScheme.primary, 0x28) // 16%
-                            .withAlpha(0xF2) // 95%
-                        : FlexColor.lightSurface
-                            .blendAlpha(colorScheme.primary, 0x0A) // 4%
-                            .withAlpha(0xF2), // 95%
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: Border.all(color: dividerColor),
-                  )
-                : BoxDecoration(
-                    color: isDark
-                        ? FlexColor.lightSurface
-                            .blendAlpha(colorScheme.primary, 0x63) // 39%
-                            .withAlpha(0xF2) // 95%
-                        : FlexColor.darkSurface
-                            .blendAlpha(colorScheme.primary, 0x72) // 45%
-                            .withAlpha(0xF2), // 95%
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: Border.all(color: dividerColor),
-                  )
-            // Not opted in on sub themes, use the before v4 style.
-            : tooltipsMatchBackground
-                ? BoxDecoration(
-                    color: isDark
-                        ? const Color(0xED444444) // 93%
-                        : const Color(0xF0FCFCFC), // 94%
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    border: Border.all(color: dividerColor),
-                  )
-                : null,
-      ),
+      // Tooltip theme
+      tooltipTheme: !useSubThemes && !tooltipsMatchBackground
+          ? null
+          : FlexSubThemes.tooltipTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.tooltipSchemeColor,
+              backgroundColor: tooltipBackground(),
+              backgroundAlpha: tooltipAlpha(),
+              foregroundColor: tooltipForeground(),
+              textStyle: effectiveTextTheme.bodyMedium!.copyWith(
+                fontSize: tooltipFontSize(),
+              ),
+              borderRadius: tooltipBorderRadius(),
+              borderColor: dividerColor,
+              waitDuration: subTheme.tooltipWaitDuration,
+              showDuration: subTheme.tooltipShowDuration,
+            ),
       textButtonTheme: useSubThemes
           ? FlexSubThemes.textButtonTheme(
               colorScheme: colorScheme,
