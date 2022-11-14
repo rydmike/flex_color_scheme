@@ -37,7 +37,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     : 'default (White op90%)';
 
     final double tooltipEffectiveRadius = controller.tooltipRadius ??
-        math.min(controller.defaultRadius ?? 4.0, 10.0);
+        math.min(controller.defaultRadius ?? 4.0, 20.0);
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null &&
             controller.defaultRadius == null
         ? controller.useSubThemes
@@ -131,11 +131,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Tooltip border radius, follows global to max 10'),
+          title: const Text('Tooltip border radius, follows global to max 20'),
           subtitle: Slider(
             min: -1,
-            max: 12,
-            divisions: 13,
+            max: 30,
+            divisions: 31,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.tooltipRadius == null ||
                         (controller.tooltipRadius ?? -1) < 0
