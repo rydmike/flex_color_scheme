@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 12, 2022**
+**Nov 14, 2022**
 
 **NEW**
 
@@ -19,8 +19,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - When the swap is done for a `FlexSchemeColor`, it is done before any other built-in scheme modifier properties, including `swapColor`.
 * The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true` and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
 * Additional new `FlexSubThemesData` properties:
+  - `Slider` theme can now be adjusted via `FlexSubThemesData` properties `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.
+  - `Tooltip` theme now has `FlexSubThemesData` properties `tooltipRadius`, `tooltipWaitDuration`, `tooltipShowDuration`, `tooltipSchemeColor` and `tooltipSchemeColor`.
   - The `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
-  - Totally new is that `Slider` theme can now be adjusted via `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.   
   - Use `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
   - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButon`.
   - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from previous properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
@@ -85,6 +86,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Added support for component independent settings of `InputDecorator` border widths.
   - Added support for adjusting `Dialog` elevation.
   - Added support for adjusting `Slider` via base color, track height and base color tinted value indicator.
+  - Added support for adjusting `Tooltip` via scheme color, radius, opacity, show duration and wait duration.
 
 * User interface changes:
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
@@ -104,12 +106,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 * **FIXED:** 
   - Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
-
-
-**TODO:**
-
-* **New**
-  - IN PROGRESS: Tooltip theming: Add delays and stay durations, radius, plus custom scheme based background color. Maybe clean out old paddings and font sizes.  
 
 
 ## 6.0.1
