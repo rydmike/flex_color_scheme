@@ -3985,5 +3985,181 @@ void main() {
         equals(theme.colorScheme.tertiary),
       );
     });
+    // Test default tooltip theming, light M2
+    test(
+        'FCS7.105a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Tooltip default', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color:
+                  FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.light)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105b GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color:
+                  FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.black)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.black),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105c GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color: FlexColor.darkSurface
+                  .blendAlpha(colorScheme.primary, 0x28)
+                  .withAlpha(0xF2),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105d GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+          tooltipOpacity: 0.5, // Has no effect ! Verify!
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color: FlexColor.darkSurface
+                  .blendAlpha(colorScheme.primary, 0x28)
+                  .withAlpha(0xF2),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105e GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+          tooltipSchemeColor: SchemeColor.tertiaryContainer,
+          tooltipOpacity: 0.5,
+          tooltipWaitDuration: Duration(seconds: 1),
+          tooltipShowDuration: Duration(milliseconds: 2500),
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            waitDuration: const Duration(seconds: 1),
+            showDuration: const Duration(milliseconds: 2500),
+            decoration: BoxDecoration(
+              color: colorScheme.tertiaryContainer
+                  .withAlpha(Color.getAlphaFromOpacity(0.5)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: colorScheme.onTertiaryContainer)
+                .copyWith(fontSize: 14)
+                .copyWith(color: colorScheme.onTertiaryContainer),
+          ).toString(),
+        ),
+      );
+    });
   });
 }

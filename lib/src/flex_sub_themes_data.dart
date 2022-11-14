@@ -1158,6 +1158,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to FCS default opacity, see
   /// [FlexColorScheme.tooltipsMatchBackground] for details.
+  ///
+  /// If defined and [tooltipSchemeColor] is undefined (null), the
+  /// [tooltipOpacity] has no effect since it cannot act on undefined value.
   final double? tooltipOpacity;
 
   /// Border radius value for [Dialog].

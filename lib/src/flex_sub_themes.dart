@@ -3753,13 +3753,13 @@ class FlexSubThemes {
         (backgroundSchemeColor == null && backgroundColor != null)
             ? backgroundColor
             : schemeColor(
-                backgroundSchemeColor ?? SchemeColor.primary, colorScheme);
+                backgroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     final Color foreground =
         (backgroundSchemeColor == null && foregroundColor != null)
             ? foregroundColor
             : schemeColorPair(
-                backgroundSchemeColor ?? SchemeColor.primary, colorScheme);
+                backgroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
     final TextStyle tooltipTextStyle = textStyle == null
         ? ThemeData(brightness: Brightness.light)
