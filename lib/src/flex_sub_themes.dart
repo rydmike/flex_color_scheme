@@ -3336,8 +3336,11 @@ class FlexSubThemes {
     // Get selected base color, and its pair, defaults to primary and onPrimary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-    final Color onBaseColor =
-        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+    // final Color onBaseColor =
+    //     schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
     // Get selected thumb color, and its pair, defaults to
     // M2: primary and onPrimary.
     // M3: primaryContainer and onPrimaryContainer
@@ -3348,137 +3351,140 @@ class FlexSubThemes {
                 : baseSchemeColor ?? SchemeColor.primary),
         colorScheme);
 
-    if (!useMaterial3) {
-      return SwitchThemeData(
-        splashRadius: splashRadius,
-        thumbColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
-            }
-            if (states.contains(MaterialState.selected)) {
-              return thumbColor;
-            }
-            return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
-          },
-        ),
-        trackColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return isLight ? Colors.black12 : Colors.white10;
-            }
-            if (states.contains(MaterialState.selected)) {
-              return baseColor.withAlpha(isLight ? 0x70 : 0x80);
-            }
-            // Opinionated color on track when not selected
-            if (unselectedIsColored) {
-              return baseColor.withAlpha(isLight ? 0x50 : 0x65);
-            }
-            // This is SDK default.
-            return isLight ? const Color(0x52000000) : Colors.white30;
-          },
-        ),
-      );
-    } else {
-      return SwitchThemeData(
-        thumbColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+    // if (!useMaterial3) {
+    return SwitchThemeData(
+      splashRadius: splashRadius,
+      thumbColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
-              return colorScheme.surface.withOpacity(1.0);
-            }
-            return colorScheme.onSurface.withOpacity(0.38);
+            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
           }
           if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
-              return thumbColor;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return thumbColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return thumbColor;
-            }
-            return onBaseColor;
+            return thumbColor;
           }
-          if (states.contains(MaterialState.pressed)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          if (states.contains(MaterialState.hovered)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          if (states.contains(MaterialState.focused)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          return colorScheme.outline;
-        }),
-        trackColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+        },
+      ),
+      trackColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
-              return colorScheme.onSurface.withOpacity(0.12);
-            }
-            return colorScheme.surfaceVariant.withOpacity(0.12);
+            return isLight ? Colors.black12 : Colors.white10;
           }
           if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor;
-            }
-            return baseColor;
+            return baseColor.withAlpha(isLight ? 0x70 : 0x80);
           }
-          if (states.contains(MaterialState.pressed)) {
-            return unselectedIsColored
-                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
-                : colorScheme.surfaceVariant;
+          // Opinionated color on track when not selected
+          if (unselectedIsColored) {
+            return baseColor.withAlpha(isLight ? 0x50 : 0x65);
           }
-          if (states.contains(MaterialState.hovered)) {
-            return unselectedIsColored
-                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
-                : colorScheme.surfaceVariant;
-          }
-          if (states.contains(MaterialState.focused)) {
-            return unselectedIsColored
-                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
-                : colorScheme.surfaceVariant;
-          }
-          return unselectedIsColored
-              ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
-              : colorScheme.surfaceVariant;
-        }),
-        overlayColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
-              return baseColor.withOpacity(0.12);
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return baseColor.withOpacity(0.08);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return baseColor.withOpacity(0.12);
-            }
-            return null;
-          }
-          if (states.contains(MaterialState.pressed)) {
-            return colorScheme.onSurface.withOpacity(0.12);
-          }
-          if (states.contains(MaterialState.hovered)) {
-            return colorScheme.onSurface.withOpacity(0.08);
-          }
-          if (states.contains(MaterialState.focused)) {
-            return colorScheme.onSurface.withOpacity(0.12);
-          }
-          return null;
-        }),
-      );
-    }
+          // This is SDK default.
+          return isLight ? const Color(0x52000000) : Colors.white30;
+        },
+      ),
+    );
   }
+  // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+  //   else {
+  //     return SwitchThemeData(
+  //       thumbColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.disabled)) {
+  //           if (states.contains(MaterialState.selected)) {
+  //             return colorScheme.surface.withOpacity(1.0);
+  //           }
+  //           return colorScheme.onSurface.withOpacity(0.38);
+  //         }
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return thumbColor;
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return thumbColor;
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return thumbColor;
+  //           }
+  //           return onBaseColor;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         return colorScheme.outline;
+  //       }),
+  //       trackColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.disabled)) {
+  //           if (states.contains(MaterialState.selected)) {
+  //             return colorScheme.onSurface.withOpacity(0.12);
+  //           }
+  //           return colorScheme.surfaceVariant.withOpacity(0.12);
+  //         }
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return baseColor;
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return baseColor;
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return baseColor;
+  //           }
+  //           return baseColor;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         return unselectedIsColored
+  //             ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //             : colorScheme.surfaceVariant;
+  //       }),
+  //       overlayColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return baseColor.withOpacity(0.12);
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return baseColor.withOpacity(0.08);
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return baseColor.withOpacity(0.12);
+  //           }
+  //           return null;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return colorScheme.onSurface.withOpacity(0.12);
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return colorScheme.onSurface.withOpacity(0.08);
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return colorScheme.onSurface.withOpacity(0.12);
+  //         }
+  //         return null;
+  //       }),
+  //     );
+  //   }
+  // }
 
   /// An opinionated [TextButtonThemeData] theme.
   ///

@@ -3529,22 +3529,26 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff6200ee),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x313a008e),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff310077),
+            checkmarkColor: const Color(0xff000000),
+            surfaceTintColor: const Color(0xff6200ee),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
             ),
           ),
         ),
@@ -3566,17 +3570,21 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff6200ee),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x313a008e),
-            selectedColor: const Color(0xffbe96f8),
-            secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff310077),
+            selectedColor: const Color(0xff03dac6),
+            secondarySelectedColor: const Color(0xff03dac6),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
+            ),
           ),
         ),
       );
@@ -3614,22 +3622,26 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffccf7f3),
-            deleteIconColor: const Color(0xff03dac6),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x31018276),
             selectedColor: const Color(0xff97efe7),
             secondarySelectedColor: const Color(0xff97efe7),
-            checkmarkColor: const Color(0xff016d63),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff015c54),
+              size: 18.0,
             ),
           ),
         ),
@@ -3922,10 +3934,11 @@ void main() {
         equals(Colors.grey.shade50),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x50)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -3998,7 +4011,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x80)),
       );
       // Default states
       expect(
@@ -4008,10 +4021,11 @@ void main() {
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x65)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
