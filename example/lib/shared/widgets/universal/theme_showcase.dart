@@ -382,7 +382,8 @@ class SwitchShowcase extends StatefulWidget {
 }
 
 class _SwitchShowcaseState extends State<SwitchShowcase> {
-  bool isOn = true;
+  bool isOn1 = true;
+  bool isOn2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -392,10 +393,10 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
       runSpacing: 4,
       children: <Widget>[
         Switch(
-          value: isOn,
+          value: isOn1,
           onChanged: (bool value) {
             setState(() {
-              isOn = value;
+              isOn1 = value;
             });
           },
         ),
@@ -417,8 +418,12 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
         //   },
         // ),
         Switch(
-          value: false,
-          onChanged: (bool value) {},
+          value: isOn2,
+          onChanged: (bool value) {
+            setState(() {
+              isOn2 = value;
+            });
+          },
         ),
         const Switch(
           value: true,
@@ -433,10 +438,18 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
   }
 }
 
-class CheckboxShowcase extends StatelessWidget {
+class CheckboxShowcase extends StatefulWidget {
   const CheckboxShowcase({super.key});
 
   @override
+  State<CheckboxShowcase> createState() => _CheckboxShowcaseState();
+}
+
+class _CheckboxShowcaseState extends State<CheckboxShowcase> {
+  bool? isSelected1 = true;
+  bool? isSelected2;
+
+  @override
   Widget build(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -444,8 +457,21 @@ class CheckboxShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Checkbox(
-          value: true,
-          onChanged: (bool? value) {},
+          value: isSelected1,
+          onChanged: (bool? value) {
+            setState(() {
+              isSelected1 = value;
+            });
+          },
+        ),
+        Checkbox(
+          tristate: true,
+          value: isSelected2,
+          onChanged: (bool? value) {
+            setState(() {
+              isSelected2 = value;
+            });
+          },
         ),
         Checkbox(
           value: false,
@@ -453,6 +479,11 @@ class CheckboxShowcase extends StatelessWidget {
         ),
         const Checkbox(
           value: true,
+          onChanged: null,
+        ),
+        const Checkbox(
+          value: null,
+          tristate: true,
           onChanged: null,
         ),
         const Checkbox(
@@ -464,8 +495,15 @@ class CheckboxShowcase extends StatelessWidget {
   }
 }
 
-class RadioShowcase extends StatelessWidget {
+class RadioShowcase extends StatefulWidget {
   const RadioShowcase({super.key});
+
+  @override
+  State<RadioShowcase> createState() => _RadioShowcaseState();
+}
+
+class _RadioShowcaseState extends State<RadioShowcase> {
+  bool? groupValue = true;
 
   @override
   Widget build(BuildContext context) {
@@ -476,22 +514,30 @@ class RadioShowcase extends StatelessWidget {
       children: <Widget>[
         Radio<bool>(
           value: true,
-          groupValue: true,
-          onChanged: (bool? value) {},
+          groupValue: groupValue,
+          onChanged: (bool? value) {
+            setState(() {
+              groupValue = value;
+            });
+          },
         ),
         Radio<bool>(
           value: false,
-          groupValue: true,
-          onChanged: (bool? value) {},
+          groupValue: groupValue,
+          onChanged: (bool? value) {
+            setState(() {
+              groupValue = value;
+            });
+          },
         ),
-        const Radio<bool>(
+        Radio<bool>(
           value: true,
-          groupValue: true,
+          groupValue: groupValue,
           onChanged: null,
         ),
-        const Radio<bool>(
+        Radio<bool>(
           value: false,
-          groupValue: true,
+          groupValue: groupValue,
           onChanged: null,
         ),
       ],

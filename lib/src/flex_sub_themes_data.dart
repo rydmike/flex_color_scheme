@@ -167,6 +167,7 @@ class FlexSubThemesData with Diagnosticable {
     this.chipRadius,
     this.chipSchemeColor,
     this.chipSelectedSchemeColor,
+    this.switchThumbSchemeColor,
     //
     this.cardRadius,
     this.cardElevation,
@@ -773,6 +774,17 @@ class FlexSubThemesData with Diagnosticable {
   /// eg using M3 color seeding. If you use a custom M3 color design where
   /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? switchSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [Switch] and [SwitchListTile] use as themed thumb color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// If not defined, defaults to:
+  ///
+  /// - If [useMaterial3] is false [switchSchemeColor].
+  /// - If [useMaterial3 ]is true [SchemeColor.primaryContainer].
+  final SchemeColor? switchThumbSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Checkbox] and [CheckboxListTile] use as base themed color.
@@ -2021,6 +2033,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? materialButtonSchemeColor,
     //
     final SchemeColor? switchSchemeColor,
+    final SchemeColor? switchThumbSchemeColor,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
     final bool? unselectedToggleIsColored,
@@ -2197,6 +2210,8 @@ class FlexSubThemesData with Diagnosticable {
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       //
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
+      switchThumbSchemeColor:
+          switchThumbSchemeColor ?? this.switchThumbSchemeColor,
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
@@ -2464,6 +2479,7 @@ class FlexSubThemesData with Diagnosticable {
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         //
         other.switchSchemeColor == switchSchemeColor &&
+        other.switchThumbSchemeColor == switchThumbSchemeColor &&
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
@@ -2671,6 +2687,7 @@ class FlexSubThemesData with Diagnosticable {
         materialButtonSchemeColor,
         //
         switchSchemeColor,
+        switchThumbSchemeColor,
         checkboxSchemeColor,
         radioSchemeColor,
         unselectedToggleIsColored,
@@ -2860,6 +2877,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties
         .add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'switchThumbSchemeColor', switchThumbSchemeColor));
     properties.add(
         EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
     properties

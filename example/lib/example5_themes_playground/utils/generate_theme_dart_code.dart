@@ -299,6 +299,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String switchSchemeColor = controller.switchSchemeColor == null
       ? ''
       : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
+  final String switchThumbSchemeColor = controller.switchThumbSchemeColor ==
+          null
+      ? ''
+      : '    switchThumbSchemeColor: ${controller.switchThumbSchemeColor},\n';
   final String checkboxSchemeColor = controller.checkboxSchemeColor == null
       ? ''
       : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
@@ -710,6 +714,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
+          '$switchThumbSchemeColor'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
@@ -841,6 +846,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
+          '$switchThumbSchemeColor'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'

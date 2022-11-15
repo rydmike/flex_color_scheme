@@ -20,6 +20,17 @@ class SwitchesSettings extends StatelessWidget {
             : isDark
                 ? 'default (tealAccent[200])'
                 : 'default (secondary)';
+    final String labelForDefaultThumbColor =
+        (controller.useSubThemes || controller.useMaterial3) &&
+                controller.useFlexColorScheme
+            ? controller.useMaterial3
+                ? 'default (primaryContainer)'
+                : 'default (primary)'
+            : isDark
+                ? 'default (tealAccent[200])'
+                : 'default (secondary)';
+    final String explainThumb =
+        controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -29,7 +40,7 @@ class SwitchesSettings extends StatelessWidget {
           child: SwitchShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Switch color'),
+          title: const Text('Switch main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -42,6 +53,21 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: Text('Switch $explainThumb thumb color'),
+          labelForDefault: labelForDefaultThumbColor,
+          index: controller.switchThumbSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSwitchThumbSchemeColor(null);
+                  } else {
+                    controller
+                        .setSwitchThumbSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         const Divider(height: 1),
         const SizedBox(height: 8),
         const Padding(
@@ -49,7 +75,7 @@ class SwitchesSettings extends StatelessWidget {
           child: CheckboxShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Checkbox color'),
+          title: const Text('Checkbox main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -70,7 +96,7 @@ class SwitchesSettings extends StatelessWidget {
           child: RadioShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Radio color'),
+          title: const Text('Radio main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -87,8 +113,9 @@ class SwitchesSettings extends StatelessWidget {
         // const SizedBox(height: 8),
         const Divider(height: 1),
         SwitchListTile(
-          title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: default grey'),
+          title: const Text('Unselected toggle is colored'),
+          subtitle: const Text(
+              'ON: Use main theme color   OFF: default grey/surface'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

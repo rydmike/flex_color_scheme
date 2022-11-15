@@ -6047,8 +6047,7 @@ class FlexColorScheme with Diagnosticable {
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               padding: const EdgeInsets.symmetric(horizontal: 16),
             ),
-      // Toggle buttons have limited theming capability and cannot match new
-      // buttons fully, this is an approximation.
+      // ToggleButtons theme.
       toggleButtonsTheme: useSubThemes
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
@@ -6066,13 +6065,16 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.switchTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.switchSchemeColor,
+              thumbSchemeColor: subTheme.switchThumbSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
+              useMaterial3: useMaterial3,
             )
           : FlexSubThemes.switchTheme(
               colorScheme: colorScheme,
               baseSchemeColor:
                   useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
               unselectedIsColored: false,
+              useMaterial3: useMaterial3,
             ),
       // Checkbox theme.
       checkboxTheme: useSubThemes

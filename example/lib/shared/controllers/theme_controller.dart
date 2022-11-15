@@ -390,6 +390,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultUnselectedToggleIsColored);
     _switchSchemeColor = await _themeService.load(
         Store.keySwitchSchemeColor, Store.defaultSwitchSchemeColor);
+    _switchThumbSchemeColor = await _themeService.load(
+        Store.keySwitchThumbSchemeColor, Store.defaultSwitchThumbSchemeColor);
     _checkboxSchemeColor = await _themeService.load(
         Store.keyCheckboxSchemeColor, Store.defaultCheckboxSchemeColor);
     _radioSchemeColor = await _themeService.load(
@@ -397,7 +399,7 @@ class ThemeController with ChangeNotifier {
     //
     // Slider SETTINGS.
     _sliderBaseSchemeColor = await _themeService.load(
-        Store.keySwitchSchemeColor, Store.defaultSliderBaseSchemeColor);
+        Store.keySliderBaseSchemeColor, Store.defaultSliderBaseSchemeColor);
     _sliderValueTinted = await _themeService.load(
         Store.keySliderValueTinted, Store.defaultSliderValueTinted);
     _sliderTrackHeight = await _themeService.load(
@@ -699,6 +701,7 @@ class ThemeController with ChangeNotifier {
     // Switch, CheckBox and Radio SETTINGS.
     setUnselectedToggleIsColored(Store.defaultUnselectedToggleIsColored, false);
     setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
+    setSwitchThumbSchemeColor(Store.defaultSwitchThumbSchemeColor, false);
     setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
     //
@@ -2087,6 +2090,15 @@ class ThemeController with ChangeNotifier {
     _switchSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySwitchSchemeColor, value));
+  }
+
+  late SchemeColor? _switchThumbSchemeColor;
+  SchemeColor? get switchThumbSchemeColor => _switchThumbSchemeColor;
+  void setSwitchThumbSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _switchThumbSchemeColor) return;
+    _switchThumbSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySwitchThumbSchemeColor, value));
   }
 
   late SchemeColor? _checkboxSchemeColor;

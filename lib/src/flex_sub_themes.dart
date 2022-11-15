@@ -3294,8 +3294,27 @@ class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used. This is more in-line
     /// with M3 design, but applied to M2 switch. The M3 color design
     /// specification for the secondary color, is a poor choice for toggles and
-    /// switches, primary color works better.
+    /// switches, if such colors are used in M2 mode, primary color works
+    /// better.
     final SchemeColor? baseSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the thumb
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used in M2 mode.
+    /// This is more in-line
+    /// with M3 design, but applied to M2 switch. The M3 color design
+    /// specification for the secondary color, is a poor choice for toggles and
+    /// switches, if such colors are used in M2 mode, primary color works
+    /// better.
+    ///
+    /// If not defined, defaults to:
+    ///
+    /// - If useMaterial3 is false [baseSchemeColor].
+    /// - If useMaterial3 is true [SchemeColor.primaryContainer].
+    final SchemeColor? thumbSchemeColor,
 
     /// The splash radius of the circular Material ink response.
     ///
@@ -3304,44 +3323,161 @@ class FlexSubThemes {
 
     /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
     ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
+    /// If false, it is grey like in Flutter SDK.
+    ///
+    /// Defaults to false.
+    final bool unselectedIsColored = false,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    final bool useMaterial3 = false,
   }) {
-    // Get selected color, defaults to primary.
+    // Get colorScheme brightness.
+    final bool isLight = colorScheme.brightness == Brightness.light;
+    // Get selected base color, and its pair, defaults to primary and onPrimary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-    final bool isLight = colorScheme.brightness == Brightness.light;
+    final Color onBaseColor =
+        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    // Get selected thumb color, and its pair, defaults to
+    // M2: primary and onPrimary.
+    // M3: primaryContainer and onPrimaryContainer
+    final Color thumbColor = schemeColor(
+        thumbSchemeColor ??
+            (useMaterial3
+                ? SchemeColor.primaryContainer
+                : baseSchemeColor ?? SchemeColor.primary),
+        colorScheme);
 
-    return SwitchThemeData(
-      splashRadius: splashRadius,
-      thumbColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+    if (!useMaterial3) {
+      return SwitchThemeData(
+        splashRadius: splashRadius,
+        thumbColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return thumbColor;
+            }
+            return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
+          },
+        ),
+        trackColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return isLight ? Colors.black12 : Colors.white10;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return baseColor.withAlpha(isLight ? 0x70 : 0x80);
+            }
+            // Opinionated color on track when not selected
+            if (unselectedIsColored) {
+              return baseColor.withAlpha(isLight ? 0x50 : 0x65);
+            }
+            // This is SDK default.
+            return isLight ? const Color(0x52000000) : Colors.white30;
+          },
+        ),
+      );
+    } else {
+      return SwitchThemeData(
+        thumbColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.surface.withOpacity(1.0);
+            }
+            return colorScheme.onSurface.withOpacity(0.38);
           }
           if (states.contains(MaterialState.selected)) {
+            if (states.contains(MaterialState.pressed)) {
+              return thumbColor;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return thumbColor;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return thumbColor;
+            }
+            return onBaseColor;
+          }
+          if (states.contains(MaterialState.pressed)) {
+            return colorScheme.onSurfaceVariant;
+          }
+          if (states.contains(MaterialState.hovered)) {
+            return colorScheme.onSurfaceVariant;
+          }
+          if (states.contains(MaterialState.focused)) {
+            return colorScheme.onSurfaceVariant;
+          }
+          return colorScheme.outline;
+        }),
+        trackColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            if (states.contains(MaterialState.selected)) {
+              return colorScheme.onSurface.withOpacity(0.12);
+            }
+            return colorScheme.surfaceVariant.withOpacity(0.12);
+          }
+          if (states.contains(MaterialState.selected)) {
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor;
+            }
             return baseColor;
           }
-          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
-        },
-      ),
-      trackColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.black12 : Colors.white10;
+          if (states.contains(MaterialState.pressed)) {
+            return unselectedIsColored
+                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+                : colorScheme.surfaceVariant;
           }
+          if (states.contains(MaterialState.hovered)) {
+            return unselectedIsColored
+                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+                : colorScheme.surfaceVariant;
+          }
+          if (states.contains(MaterialState.focused)) {
+            return unselectedIsColored
+                ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+                : colorScheme.surfaceVariant;
+          }
+          return unselectedIsColored
+              ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+              : colorScheme.surfaceVariant;
+        }),
+        overlayColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
-            return baseColor.withAlpha(0x70);
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withOpacity(0.12);
+            }
+            return null;
           }
-          // Opinionated color on track when not selected
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0x70);
+          if (states.contains(MaterialState.pressed)) {
+            return colorScheme.onSurface.withOpacity(0.12);
           }
-          // This is SDK default.
-          return isLight ? const Color(0x52000000) : Colors.white30;
-        },
-      ),
-    );
+          if (states.contains(MaterialState.hovered)) {
+            return colorScheme.onSurface.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return null;
+        }),
+      );
+    }
   }
 
   /// An opinionated [TextButtonThemeData] theme.
