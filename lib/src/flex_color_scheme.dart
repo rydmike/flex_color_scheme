@@ -306,6 +306,7 @@ class FlexColorScheme with Diagnosticable {
     this.primaryTextTheme,
     this.fontFamily,
     this.materialTapTargetSize,
+    this.pageTransitionsTheme,
     this.platform,
     this.typography,
     this.applyElevationOverlayColor = true,
@@ -728,7 +729,20 @@ class FlexColorScheme with Diagnosticable {
   /// Defaults to a [platform]-appropriate size: [MaterialTapTargetSize.padded]
   /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
   /// platforms.
+  ///
+  /// This is convenience pass through in FlexColorScheme to avoid a `copyWith`
+  /// on `ThemeData` produced by FlexColorScheme.
   final MaterialTapTargetSize? materialTapTargetSize;
+
+  /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+  ///
+  /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+  /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+  /// whose platform is null is used.
+  ///
+  /// This is convenience pass through in FlexColorScheme to avoid a `copyWith`
+  /// on `ThemeData` produced by FlexColorScheme.
+  final PageTransitionsTheme? pageTransitionsTheme;
 
   /// The platform adaptive widgets should adapt to target and mechanics too.
   ///
@@ -2024,6 +2038,16 @@ class FlexColorScheme with Diagnosticable {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -2690,6 +2714,7 @@ class FlexColorScheme with Diagnosticable {
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       materialTapTargetSize: materialTapTargetSize,
+      pageTransitionsTheme: pageTransitionsTheme,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -3736,6 +3761,16 @@ class FlexColorScheme with Diagnosticable {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -4431,6 +4466,7 @@ class FlexColorScheme with Diagnosticable {
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
       materialTapTargetSize: materialTapTargetSize,
+      pageTransitionsTheme: pageTransitionsTheme,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -5621,27 +5657,29 @@ class FlexColorScheme with Diagnosticable {
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
     return ThemeData(
-      // These properties we just pass along to the standard ThemeData factory.
+      // These properties we pass along to the standard ThemeData factory.
       // They are included in FlexColorScheme (FCS) so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
-      // of the values may be null and get defaults via the ThemeData() factory.
+      // of the values may be null and get defaults via the ThemeData() factory
+      // som might pass along given value, which we may have used internally
+      // in FlexColorScheme as well.
       fontFamily: fontFamily,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
+      materialTapTargetSize: materialTapTargetSize,
+      pageTransitionsTheme: pageTransitionsTheme,
+      typography: effectiveTypography,
+      platform: effectivePlatform,
       extensions: extensions,
       // TextTheme properties use the same logic as in ThemeData, allowing us
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.
       textTheme: effectiveTextTheme,
       primaryTextTheme: effectivePrimaryTextTheme,
-      // Pass along custom materialTapTargetSize, typography and platform.
-      materialTapTargetSize: materialTapTargetSize,
-      typography: effectiveTypography,
-      platform: effectivePlatform,
-      // Most definitions below are very close to the ones used by the Flutter
-      // factory ThemeData.from() for creating a theme from a color scheme and
-      // text theme.
+      // Most color definitions below are very close to the ones used by the
+      // Flutter factory ThemeData.from() for creating a theme from a
+      // ColorScheme and TextTheme.
       brightness: colorScheme.brightness,
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
       primaryColor: colorScheme.primary,
@@ -6607,6 +6645,7 @@ class FlexColorScheme with Diagnosticable {
     TextTheme? primaryTextTheme,
     String? fontFamily,
     MaterialTapTargetSize? materialTapTargetSize,
+    PageTransitionsTheme? pageTransitionsTheme,
     TargetPlatform? platform,
     Typography? typography,
     bool? applyElevationOverlayColor,
@@ -6652,6 +6691,7 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily ?? this.fontFamily,
       materialTapTargetSize:
           materialTapTargetSize ?? this.materialTapTargetSize,
+      pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       platform: platform ?? this.platform,
       typography: typography ?? this.typography,
       applyElevationOverlayColor:
@@ -6701,6 +6741,7 @@ class FlexColorScheme with Diagnosticable {
         other.textTheme == textTheme &&
         other.primaryTextTheme == primaryTextTheme &&
         other.materialTapTargetSize == materialTapTargetSize &&
+        other.pageTransitionsTheme == pageTransitionsTheme &&
         other.fontFamily == fontFamily &&
         other.platform == platform &&
         other.typography == typography &&
@@ -6747,6 +6788,7 @@ class FlexColorScheme with Diagnosticable {
         primaryTextTheme,
         fontFamily,
         materialTapTargetSize,
+        pageTransitionsTheme,
         platform,
         typography,
         applyElevationOverlayColor,
@@ -6800,6 +6842,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
     properties.add(EnumProperty<MaterialTapTargetSize>(
         'materialTapTargetSize', materialTapTargetSize));
+    properties.add(DiagnosticsProperty<PageTransitionsTheme>(
+        'pageTransitionsTheme', pageTransitionsTheme));
     properties.add(EnumProperty<TargetPlatform>('platform', platform));
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
     properties.add(DiagnosticsProperty<bool>(

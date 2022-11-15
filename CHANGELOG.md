@@ -4,34 +4,35 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 14, 2022**
+**Nov 15, 2022**
 
 **NEW**
 
-* Scaffold background color can now be used as the themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this.
-* Added property `materialTapTargetSize` to `FlexColorScheme` and `FlexThemeData`. It is a convenience passthrough to `ThemeData` to avoid having to use `copyWith` to assign it.
-* The new property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors, that were originally designed for Material 2, when using Material 3 mode, with or without seed generated ColorSchemes. 
+* Scaffold background color can now be used as the themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's `ColorScheme` surface or background colors.
+* Added properties `materialTapTargetSize` and `pageTransitionsTheme` to `FlexColorScheme` and `FlexThemeData`. They are only convenience properties to avoid having to use a `copyWith` on FlexColorScheme produced `ThemeData`, to define them.
+* Property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors to Material 3 color system. It applies to color schemes that were originally designed for Material 2, when using Material 3 mode, with or without seed generated ColorSchemes. 
   - Setting `swapLegacyOnMaterial3` to `true`, will when `useMaterial3` is `true`, swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. 
   - This only happens for built-in schemes where this swap makes the color design **more compatible** with the intended design and usage of the `secondary` and `tertiary` colors in Material 3 color system.
   - To implement this, the class `FlexSchemeColor` has a new bool meta-data property called `swapOnMaterial3`, that has been defined to be `true`, if the `FlexSchemeColor` it defines, benefits design compliance wise from swapping its `secondary` and `tertiary` colors, when using Material 3.
   - For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to always set it to `true`. The flag has no impact when using Material 2. 
   - The `swapLegacyOnMaterial3` flag can also be toggled in the **Themes Playground**, it is on by default there.
-  - When the swap is done for a `FlexSchemeColor`, it is done before any other built-in scheme modifier properties, including `swapColor`.
-* The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true` and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
+  - When the swap is done for a `FlexSchemeColor`, it is done before any other built-in scheme modifier properties, including `swapColor` and `usedColors`.
+* The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true`, and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
 * Additional new `FlexSubThemesData` properties:
   - `Slider` theme can now be adjusted via `FlexSubThemesData` properties `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.
+  - The `chipSelectedSchemeColor` was added to theme background color of Chips that are selectable. While doing it, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364). 
   - `Tooltip` theme now has `FlexSubThemesData` properties `tooltipRadius`, `tooltipWaitDuration`, `tooltipShowDuration`, `tooltipSchemeColor` and `tooltipSchemeColor`.
   - The `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
   - Use `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
-  - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButon`.
-  - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from previous properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
-  - The `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` where added to be able to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. 
-    > These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground, but size changes might be added later as a usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than for other sub themes. If you need to do that, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
+  - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButton`.
+  - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from existing properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
+  - The `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` were added to be able to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. 
+    > These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground, but size changes might be added later as a usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than for other sub themes. If you need to do that, for other properties, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
 
 **CHANGE**
 
-* In `FlexSubThemesData` all component controlling properties except boolean, are now nullable and null by default. FlexColorScheme made sub themes, still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. That the properties are nullable, enables using potentially different default behavior in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
-* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous thin outline style in FlexColorScheme.
+* In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. That the properties are nullable, enables using potentially different default behavior in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
+* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous default thin outline style in FlexColorScheme.
   - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
 * **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in most designs the color values are the same. If needed you can put it back to background color with:
 
@@ -61,23 +62,23 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * On **Theme colors** panel:
   - Improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme, as a starting point for your custom color definitions.
   - Simplified the terminology used on the **Theme colors** panel. Also simplified its color presentation.
-  - Added on/off switch, that controls the `swapLegacyOnMaterial3` setting.
+  - Added an on/off switch that controls the `swapLegacyOnMaterial3` setting.
 
 * Updated and shorter **Introduction**. Probably nobody reads it, or the [package docs](https://docs.flexcolorscheme.com/) with **Playground** guides, but at least it is there.
 
 * The **Seeded ColorScheme** panel:
-  - Now show the source input "Scheme defined" colors, the used FlexSchemeColor, that gets used as key colors for the Material 3 style seeded ColorScheme generation, when it is turned on.
+  - Now also show the source input "Scheme defined" colors, the `FlexSchemeColor`, that gets used as key colors for the Material 3 seeded ColorScheme generation, when it is turned on.
     - Arranged the panel content for better inclusion and presentation of the created **Tonal Palettes** used to make the seeded ColorScheme.
     - The Tonal palette color **tones** now have tooltips that present each tone.
 
 * On **Surface blends**: 
   - Changed the surface blend mode defaults to settings that are more mobile design friendly. No API change involved. API defaults are same as before, changes only affect the Playground app defaults. 
     - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text is placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
-  - The blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows the popular options.
+  - The blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
 
-* Other **new properties** and features:
-  - **AppBar** theming can now use scaffold background color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
-  - On **FAB and Chips** panel, added the "Always use circular FAB" feature.
+* Other **new controllable properties** and features:
+  - **AppBar** theming can now use themed `scaffoldBackground` color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
+  - On **FAB and Chips** panel, added the **Always use circular FAB** feature.
   - Added support for adjusting background color and elevation of `BottomSheet`.
   - Added support for adjusting elevation of `NavigationBar`.
   - Added support for adjusting elevation and background color of `PopupMenuButton`.
@@ -87,6 +88,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Added support for adjusting `Dialog` elevation.
   - Added support for adjusting `Slider` via base color, track height and base color tinted value indicator.
   - Added support for adjusting `Tooltip` via scheme color, radius, opacity, show duration and wait duration.
+  - 
 
 * User interface changes:
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.

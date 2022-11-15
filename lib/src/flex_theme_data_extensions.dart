@@ -945,6 +945,16 @@ extension FlexThemeData on ThemeData {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -1222,6 +1232,7 @@ extension FlexThemeData on ThemeData {
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
         materialTapTargetSize: materialTapTargetSize,
+        pageTransitionsTheme: pageTransitionsTheme,
         fontFamily: fontFamily,
         platform: platform,
         typography: typography,
@@ -2129,6 +2140,16 @@ extension FlexThemeData on ThemeData {
     /// platforms.
     final MaterialTapTargetSize? materialTapTargetSize,
 
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -2407,6 +2428,7 @@ extension FlexThemeData on ThemeData {
         primaryTextTheme: primaryTextTheme,
         fontFamily: fontFamily,
         materialTapTargetSize: materialTapTargetSize,
+        pageTransitionsTheme: pageTransitionsTheme,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
