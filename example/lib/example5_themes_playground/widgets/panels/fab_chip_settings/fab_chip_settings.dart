@@ -93,7 +93,7 @@ class FabChipSettings extends StatelessWidget {
                         (controller.fabBorderRadius ?? -1) < 0
                     ? fabRadiusDefaultLabel
                     : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.fabAlwaysCircular
+                : controller.fabAlwaysCircular && controller.fabUseShape
                     ? 'circular'
                     : controller.useMaterial3
                         ? 'M3 rounded'
@@ -133,7 +133,7 @@ class FabChipSettings extends StatelessWidget {
                           ? fabRadiusDefaultLabel
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : controller.fabAlwaysCircular
+                      : controller.fabAlwaysCircular && controller.fabUseShape
                           ? 'circular'
                           : controller.useMaterial3
                               ? 'M3 rounded'
