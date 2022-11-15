@@ -3337,7 +3337,7 @@ class FlexSubThemes {
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
     // final Color onBaseColor =
     //     schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
@@ -3345,13 +3345,17 @@ class FlexSubThemes {
     // M2: primary and onPrimary.
     // M3: primaryContainer and onPrimaryContainer
     final Color thumbColor = schemeColor(
-        thumbSchemeColor ??
-            (useMaterial3
-                ? SchemeColor.primaryContainer
-                : baseSchemeColor ?? SchemeColor.primary),
+        thumbSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
         colorScheme);
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
+    // final Color thumbColor = schemeColor(
+    //     thumbSchemeColor ??
+    //         (useMaterial3
+    //             ? SchemeColor.primaryContainer
+    //             : baseSchemeColor ?? SchemeColor.primary),
+    //     colorScheme);
 
-    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
     // if (!useMaterial3) {
     return SwitchThemeData(
       splashRadius: splashRadius,
@@ -3384,7 +3388,7 @@ class FlexSubThemes {
       ),
     );
   }
-  // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+  // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
   //   else {
   //     return SwitchThemeData(
   //       thumbColor:
