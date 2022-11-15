@@ -20,7 +20,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true`, and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
 * Additional new `FlexSubThemesData` properties:
   - `Slider` theme can now be adjusted via `FlexSubThemesData` properties `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.
-  - The `chipSelectedSchemeColor` was added to theme background color of Chips that are selectable. While doing it, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364). 
+  - The `chipSelectedSchemeColor` was added to theme background color of Chips that are selectable. While doing it, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364).
+  - Switch got `switchThumbSchemeColor` to control the thumb color separately, and switch custom color theme was prepared for M3. (Not available yet in Flutter 3.3).
   - `Tooltip` theme now has `FlexSubThemesData` properties `tooltipRadius`, `tooltipWaitDuration`, `tooltipShowDuration`, `tooltipSchemeColor` and `tooltipSchemeColor`.
   - The `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
   - Use `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
@@ -88,7 +89,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Added support for adjusting `Dialog` elevation.
   - Added support for adjusting `Slider` via base color, track height and base color tinted value indicator.
   - Added support for adjusting `Tooltip` via scheme color, radius, opacity, show duration and wait duration.
-  - 
+  - Added support for adjusting `Switch` thumb color via scheme color selection.
 
 * User interface changes:
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.

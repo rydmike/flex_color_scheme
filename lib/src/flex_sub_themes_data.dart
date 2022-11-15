@@ -775,6 +775,7 @@ class FlexSubThemesData with Diagnosticable {
   /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? switchSchemeColor;
 
+  // TODO(rydmike): Follow up M3 icon and outline cannot be themed, make issue.
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Switch] and [SwitchListTile] use as themed thumb color.
   ///
