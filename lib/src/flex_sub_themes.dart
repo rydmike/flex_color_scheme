@@ -1103,7 +1103,7 @@ class FlexSubThemes {
     // theme default. It is not possible due to SDK lChip theming issues
     // and limitations to recreate the exact M3 Chip themes with any other
     // theme colors than the default built-in ones.
-    // TODO(rydmike): Raise issue about Chip theme issues and ink spec bug.
+    // TODO(rydmike): Chip https://github.com/flutter/flutter/issues/115364
     final bool useM3Defaults =
         useM3 && baseSchemeColor == null && selectedSchemeColor == null;
 
