@@ -471,18 +471,21 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? scaffoldBackground,
 
-    /// The background color of Dialog elements.
+    /// The background color of [Dialog] elements.
+    ///
+    /// The color is applied to [ThemeData.dialogBackgroundColor].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
     ///
-    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes,
-    /// then its selected scheme color will override this value.
+    /// If you assign a background [SchemeColor] to
+    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
+    /// opted in on using component sub themes, then the selected scheme
+    /// color will override this value.
     ///
-    /// Defaults to null.
+    /// Defaults to null, resulting in theme surface being used.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -683,7 +686,7 @@ extension FlexThemeData on ThemeData {
     final bool lightIsWhite = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
-    /// their secondary counter parts.
+    /// their secondary counterparts.
     ///
     /// Set this flag to true if you want to make a theme where
     /// your primary and secondary colors are swapped, compared to how they
@@ -700,28 +703,61 @@ extension FlexThemeData on ThemeData {
     /// scheme the other way around only in dark mode.
     final bool swapColors = false,
 
-    /// When `true`, tooltip background color will match the brightness of the
-    /// theme's background color.
+    /// When set to true, tooltip background color will match the brightness of
+    /// the theme's background color.
     ///
     /// By default Flutter's Material tooltips use a theme where the tooltip
     /// background color brightness is inverted in relation to the overall
     /// theme's background color.
     ///
-    /// FlexColorScheme allows you to use a single
-    /// toggle to invert this. Light tooltips on light background is e.g. the
-    /// default style on Windows Desktop. You can use this toggle to use this
-    /// style, or as a means to create a platform adaptive
-    /// tooltip style, where the Material/Flutter style is used on devices and
-    /// Web, but the inverted scheme is used on desktop platforms.
+    /// [FlexColorScheme] allows you to use a single toggle to invert this.
+    /// Light tooltips on light background is e.g. the default style on
+    /// Windows Desktop toggle. You can use this toggle to use this style,
+    /// or use it as a means to create a platform adaptive tooltip style, where
+    /// the Material and Flutter style is used on devices and Web, but the
+    /// inverted scheme is used on e.g. Windows platform.
     ///
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Regardless of value used on this property, the tooltip theme created by
-    /// [FlexColorScheme] does however deviate a bit from the Flutter default
-    /// theme, it has slightly larger font for improved legibility on web and
-    /// desktop with device pixel ratio 1.0 and also use a padding style also
-    /// suitable for multiline tooltips.
+    /// Tooltip theming always done by FlexColorScheme:
+    ///
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Fontsize : 12 dp
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Fontsize : 14 dp
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  text: white
+    ///   - light theme: text: black
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  text: black
+    ///   - light theme: text: white
+    ///
+    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  background: Color(0xED444444),
+    ///   - light theme: background: Color(0xF0FCFCFC),
+    ///   - radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: false
+    ///   - none
+    ///
+    /// Additional styles when opting in on FlexColorScheme sub themes are:
+    ///
+    /// - radius: 8 dp
+    /// - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///
+    /// When using additional theming via sub-themes properties, its
+    /// properties will if used override background color, text color and
+    /// background opacity as well as border radius.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -749,11 +785,11 @@ extension FlexThemeData on ThemeData {
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
     /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// any legacy Material 2 theming limitations that may still apply.
     ///
-    /// In version 5, by opting in via a default [subThemesData] you
+    /// By opting in via a default [subThemesData] you also
     /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via the [subThemesData] property, that has
+    /// They can be customized via their [subThemesData] properties, that have
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
@@ -803,13 +839,17 @@ extension FlexThemeData on ThemeData {
     ///
     /// By default it is not defined (null), and a traditional manually
     /// configured color scheme will be created based on input property values
-    /// or the passed in [colorScheme].
+    /// or a passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of key colors and from them generated color scheme.
+    /// of the used light scheme's primary color as key color and to seed
+    /// generated a color scheme. The result will by default be equal to using
+    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
+    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
+    /// SDK does not support this.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -831,7 +871,7 @@ extension FlexThemeData on ThemeData {
     /// [TonalPalette] generation setup.
     final bool useMaterial3ErrorColors = false,
 
-    /// An advanced configuration class enabling complete customization of
+    /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
@@ -839,6 +879,12 @@ extension FlexThemeData on ThemeData {
     /// If null [FlexTones.light] will be used, resulting in a default
     /// Material Design 3 based usage of tones and CAM16 chroma for the
     /// seed generated light [ColorScheme].
+    ///
+    /// By default a `FlexTones` configuration `FlexTones.material` that
+    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
+    /// There are six other built-in definitions that you can use, they can also
+    /// serve as an example of how you can make custom `FlexTones`
+    /// configurations.
     final FlexTones? tones,
 
     /// The density value for specifying the compactness of various UI
@@ -892,12 +938,30 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
-    /// The platform adaptive widgets should adapt to target and mechanics too.
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
+    /// The platform adaptive widgets adapt to defined target and mechanics,
+    /// like scrolling too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
+    /// avoid a copyWith to change it.
     ///
-    /// Defaults to the current platform, as exposed by `defaultTargetPlatform`
+    /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
     /// This should be used in order to style UI elements according to platform
     /// conventions.
     ///
@@ -918,13 +982,15 @@ extension FlexThemeData on ThemeData {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
+    ///
+    /// When developing applications you can use this property to dynamically
+    /// in the application change the used platform and partially test and see
+    /// how adaptive widgets and scroll looks and feels on other platforms.
     final TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values use to configure [textTheme].
+    /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
+    /// Same property as in [ThemeData] factory.
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
@@ -1061,6 +1127,54 @@ extension FlexThemeData on ThemeData {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped when using
+    /// Material 3. Most FlexColorScheme color schemes were designed with
+    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
+    /// set to true. If this flag is false, it may  mean that its
+    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
+    /// swapping its secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// setup that also use the hue from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make FlexSchemeColor designs color designs that benefit from it
+    /// automatically swap secondary and tertiary colors when `useMaterial3` is
+    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
+    /// for backwards compatibility, but it is recommended to turn it on when
+    /// using Material 3 and its color system. If you use seeded color schemes
+    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
+    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
+    ///
+    /// This color swap has higher priority than `swapColor`, using it will
+    /// always happen on the effective result of `swapLegacyOnMaterial3` and
+    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
+    /// built-in scheme `FlexSchemeColor`.
+    ///
+    /// If a custom `colorScheme` is passed in, or any of the direct color
+    /// properties `secondary`, `secondaryContainer`, `tertiary` or
+    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
+    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false, for backwards compatibility, but prefer setting it
+    /// to true if you also set `useMaterial3` to true.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -1117,11 +1231,14 @@ extension FlexThemeData on ThemeData {
         visualDensity: visualDensity,
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
+        materialTapTargetSize: materialTapTargetSize,
+        pageTransitionsTheme: pageTransitionsTheme,
         fontFamily: fontFamily,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
       ).toTheme;
 
@@ -1548,18 +1665,21 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? scaffoldBackground,
 
-    /// The background color of Dialog elements.
+    /// The background color of [Dialog] elements.
+    ///
+    /// The color is applied to [ThemeData.dialogBackgroundColor].
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
     /// [FlexSurface].
     ///
-    /// If you assign a background [SchemeColor] to [dialogBackgroundColor] in
-    /// [FlexSubThemesData] and you have opted in on using component sub themes
-    /// with, then its selected scheme color will override this value.
+    /// If you assign a background [SchemeColor] to
+    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
+    /// opted in on using component sub themes, then the selected scheme
+    /// color will override this value.
     ///
-    /// Defaults to null.
+    /// Defaults to null, resulting in theme surface being used.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -1760,7 +1880,7 @@ extension FlexThemeData on ThemeData {
     final bool darkIsTrueBlack = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
-    /// their secondary counter parts.
+    /// their secondary counterparts.
     ///
     /// Set this flag to true if you want to make a theme where
     /// your primary and secondary colors are swapped, compared to how they
@@ -1777,28 +1897,61 @@ extension FlexThemeData on ThemeData {
     /// scheme the other way around only in dark mode.
     final bool swapColors = false,
 
-    /// When true, tooltip background color will match the brightness of the
-    /// theme's background color.
+    /// When set to true, tooltip background color will match the brightness of
+    /// the theme's background color.
     ///
     /// By default Flutter's Material tooltips use a theme where the tooltip
     /// background color brightness is inverted in relation to the overall
     /// theme's background color.
     ///
-    /// FlexColorScheme allows you to use a single
-    /// toggle to invert this. Light tooltips on light background is e.g. the
-    /// default style on Windows Desktop. You can use this toggle to use this
-    /// style, or as a means to create a platform adaptive
-    /// tooltip style, where the Material/Flutter style is used on devices and
-    /// Web, but the inverted scheme is used on desktop platforms.
+    /// [FlexColorScheme] allows you to use a single toggle to invert this.
+    /// Light tooltips on light background is e.g. the default style on
+    /// Windows Desktop toggle. You can use this toggle to use this style,
+    /// or use it as a means to create a platform adaptive tooltip style, where
+    /// the Material and Flutter style is used on devices and Web, but the
+    /// inverted scheme is used on e.g. Windows platform.
     ///
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Regardless of value used on this property, the tooltip theme created by
-    /// [FlexColorScheme] does however deviate a bit from the Flutter default
-    /// theme, it has slightly larger font for improved legibility on web and
-    /// desktop with device pixel ratio 1.0 and also use a padding style also
-    /// suitable for multiline tooltips.
+    /// Tooltip theming always done by FlexColorScheme:
+    ///
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Fontsize : 12 dp
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Fontsize : 14 dp
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  text: white
+    ///   - light theme: text: black
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  text: black
+    ///   - light theme: text: white
+    ///
+    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
+    ///
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  background: Color(0xED444444),
+    ///   - light theme: background: Color(0xF0FCFCFC),
+    ///   - radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: false
+    ///   - none
+    ///
+    /// Additional styles when opting in on FlexColorScheme sub themes are:
+    ///
+    /// - radius: 8 dp
+    /// - Border: Yes, dividerColor
+    /// - tooltipsMatchBackground: true
+    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
+    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
+    /// - tooltipsMatchBackground: false
+    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
+    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///
+    /// When using additional theming via sub-themes properties, its
+    /// properties will if used override background color, text color and
+    /// background opacity as well as border radius.
     final bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -1828,46 +1981,50 @@ extension FlexThemeData on ThemeData {
     /// defaults when it is possible to do so in Flutter SDK theming, within
     /// its current Material 2 (M2) design limitations.
     ///
-    /// In version 5, by opting in via a default [subThemesData] you
+    /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
     /// They can be customized via the [subThemesData] property, that has
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// These component themes are available:
+    /// Opinionated sub themes are provided for:
     ///
-    /// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [bottomNavigationBar].
-    /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
-    /// * [CardTheme] for [Card] via [cardTheme].
-    /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
-    /// * [ChipThemeData] for [Chip] via [chipTheme].
-    /// * [DialogTheme] for [Dialog] via [dialogTheme].
+    ///   [FlexSubThemes.bottomNavigationBar].
+    /// * [BottomSheetThemeData] for [BottomSheet] via
+    ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+    /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
-    ///   [elevatedButtonTheme].
+    ///   [FlexSubThemes.elevatedButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
-    ///   [floatingActionButtonTheme].
+    ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
-    ///   [inputDecorationTheme].
-    /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+    ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [NavigationBarThemeData] for [NavigationBar] via
+    ///   [FlexSubThemes.navigationBarTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
-    ///   [navigationRailTheme].
+    ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
-    ///   [outlinedButtonTheme].
-    /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
-    /// * [RadioThemeData] for [Radio] via [radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
-    /// * [SwitchThemeData] for [Switch] via [switchTheme].
-    /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
-    /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
-    /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
+    ///   [FlexSubThemes.outlinedButtonTheme].
+    /// * [PopupMenuThemeData] for [PopupMenuButton] via
+    ///   [FlexSubThemes.popupMenuTheme].
+    /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+    /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TextButtonThemeData] for [TextButton] via
+    ///   [FlexSubThemes.textButtonTheme].
+    /// * [TimePickerThemeData] for [TimePickerDialog] via
+    ///   [FlexSubThemes.timePickerTheme].
+    /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+    ///   [FlexSubThemes.toggleButtonsTheme].
+    /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
     ///
-    /// The custom `ButtonThemeData` still provides matching styling
-    /// for the deprecated legacy buttons if they are used.
-    /// Please consider phasing out the legacy buttons, as they are deprecated
-    /// and will be removed from the Flutter SDK. Their
-    /// theme `ButtonThemeData` will also soon be deprecated and later removed.
+    /// * The custom `ButtonThemeData` even still provides matching styling to
+    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -1880,13 +2037,17 @@ extension FlexThemeData on ThemeData {
     ///
     /// By default it is not defined (null), and a traditional manually
     /// configured color scheme will be created based on input property values
-    /// or the passed in [colorScheme].
+    /// or a passed in [colorScheme].
     ///
     /// If a [FlexKeyColors] instance is passed in, the key color seeding
     /// behavior depends on properties defined in the [FlexKeyColors]
     /// instance. The default constructor makes one where
     /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of key colors and from them generated color scheme.
+    /// of the used light scheme's primary color as key color and to seed
+    /// generated a color scheme. The result will by default be equal to using
+    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
+    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
+    /// SDK does not support this.
     ///
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
@@ -1908,14 +2069,17 @@ extension FlexThemeData on ThemeData {
     /// [TonalPalette] generation setup.
     final bool useMaterial3ErrorColors = false,
 
-    /// An advanced configuration class enabling complete customization of
+    /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
     /// as well as changing which tone in the tonal palettes is used
     /// for which [ColorScheme] color.
     ///
-    /// If null [FlexTones.dark] will be used, resulting in a default
-    /// Material Design 3 based usage of tones and CAM16 chroma for the
-    /// seed generated dark [ColorScheme].
+    /// By default a `FlexTones` configuration `FlexTones.material` that
+    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
+    ///
+    /// There are six other built-in definitions that you can use, they can also
+    /// serve as an example of how you can make custom `FlexTones`
+    /// configurations.
     final FlexTones? tones,
 
     /// The density value for specifying the compactness of various UI
@@ -1969,12 +2133,30 @@ extension FlexThemeData on ThemeData {
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     final String? fontFamily,
 
-    /// The platform adaptive widgets should adapt to target and mechanics too.
+    /// Configures the hit test size of certain Material widgets.
+    ///
+    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
+    /// platforms.
+    final MaterialTapTargetSize? materialTapTargetSize,
+
+    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+    ///
+    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+    /// whose platform is null is used.
+    ///
+    /// This is convenience pass through in FlexColorScheme to avoid a
+    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
+    final PageTransitionsTheme? pageTransitionsTheme,
+
+    /// The platform adaptive widgets adapt to defined target and mechanics,
+    /// like scrolling too.
     ///
     /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
+    /// avoid a copyWith to change it.
     ///
-    /// Defaults to the current platform, as exposed by `defaultTargetPlatform`
+    /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
     /// This should be used in order to style UI elements according to platform
     /// conventions.
     ///
@@ -1982,11 +2164,11 @@ extension FlexThemeData on ThemeData {
     /// [Theme.of]) to determine the current platform for the purpose of
     /// emulating the platform behavior (e.g. scrolling or haptic effects).
     /// Widgets and render objects at lower layers that try to emulate the
-    /// underlying platform platform can depend on `defaultTargetPlatform`
+    /// underlying platform platform can depend on [defaultTargetPlatform]
     /// directly, or may require that the target platform be provided as an
     /// argument. The `dart.io.Platform` object should only be used directly
-    /// when it's critical to actually know the current platform, without any
-    /// overrides possible, e.g. when a system API is about to be called.
+    /// when it's critical to actually know the current platform, without
+    /// any overrides possible, e.g. when a system API is about to be called.
     ///
     /// In a test environment, the platform returned is [TargetPlatform.android]
     /// regardless of the host platform. (Android was chosen because the tests
@@ -1995,13 +2177,15 @@ extension FlexThemeData on ThemeData {
     /// behavior for other platforms by setting the [platform] of the [Theme]
     /// explicitly to another [TargetPlatform] value, or by setting
     /// [debugDefaultTargetPlatformOverride].
+    ///
+    /// When developing applications you can use this property to dynamically
+    /// in the application change the used platform and partially test and see
+    /// how adaptive widgets and scroll looks and feels on other platforms.
     final TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values use to configure [textTheme].
+    /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
+    /// Same property as in [ThemeData] factory.
     /// Included for convenience to avoid a copyWith if it needs to be changed.
     /// Default value deviates from the Flutter standard that uses the old
     /// [Typography.material2014], in favor of newer [Typography.material2018]
@@ -2138,6 +2322,54 @@ extension FlexThemeData on ThemeData {
     /// sub-theming, may be preferred since it has fewer transitional issues.
     final bool useMaterial3 = false,
 
+    /// Set to true to automatically swap secondary and tertiary colors, on
+    /// built-in color schemes when [useMaterial3] is true, that benefit from it
+    /// to better match the Material 3 color system design intent.
+    ///
+    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
+    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
+    /// defined to be true, informs that it will benefit if the secondary and
+    /// tertiary colors, including their containers, are swapped when using
+    /// Material 3. Most FlexColorScheme color schemes were designed with
+    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
+    /// set to true. If this flag is false, it may  mean that its
+    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
+    /// swapping its secondary and tertiary colors.
+    ///
+    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// colors is another way to make them suitable for the M3 Color system.
+    /// However, in some cases the secondary color in their design may not be
+    /// in-line with M3 color system design intent, especially if you use seeded
+    /// setup that also use the hue from the secondary color to make
+    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
+    /// color  designs, this can be fixed if we swap the secondary and
+    /// tertiary colors.
+    ///
+    /// To make FlexSchemeColor designs color designs that benefit from it
+    /// automatically swap secondary and tertiary colors when `useMaterial3` is
+    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
+    /// for backwards compatibility, but it is recommended to turn it on when
+    /// using Material 3 and its color system. If you use seeded color schemes
+    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
+    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
+    ///
+    /// This color swap has higher priority than `swapColor`, using it will
+    /// always happen on the effective result of `swapLegacyOnMaterial3` and
+    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
+    /// built-in scheme `FlexSchemeColor`.
+    ///
+    /// If a custom `colorScheme` is passed in, or any of the direct color
+    /// properties `secondary`, `secondaryContainer`, `tertiary` or
+    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
+    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
+    ///
+    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
+    /// to ON (true), but allows you to turn it OFF.
+    ///
+    /// Defaults to false, for backwards compatibility, but prefer setting it
+    /// to true if you also set `useMaterial3` to true.
+    final bool swapLegacyOnMaterial3 = false,
+
     /// Arbitrary additions to this theme.
     ///
     /// This is the same property as [extensions] in ThemeData, it is provided
@@ -2195,10 +2427,13 @@ extension FlexThemeData on ThemeData {
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
         fontFamily: fontFamily,
+        materialTapTargetSize: materialTapTargetSize,
+        pageTransitionsTheme: pageTransitionsTheme,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
         useMaterial3: useMaterial3,
+        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
       ).toTheme;
 }

@@ -441,6 +441,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final Color effectiveHoverColor = hoverColor ??
         (Theme.of(context).brightness == Brightness.light
             ? const Color(0x50BCBCBC)
@@ -455,7 +456,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
               if (label != null && labelAbove)
                 Text(
                   label!,
-                  style: labelStyle ?? Theme.of(context).textTheme.bodySmall,
+                  style: labelStyle ?? theme.textTheme.bodySmall,
                   semanticsLabel: '', // Is set on button instead
                 ),
               Material(
@@ -469,12 +470,12 @@ class FlexThemeModeOptionButton extends StatelessWidget {
                   side: selected
                       ? selectedBorder ??
                           BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
+                            color: theme.colorScheme.primary,
                             width: 4,
                           )
                       : unselectedBorder ??
                           BorderSide(
-                            color: Theme.of(context).dividerColor,
+                            color: theme.dividerColor,
                           ),
                 ),
                 child: Semantics(
@@ -534,7 +535,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
               if (label != null && !labelAbove)
                 Text(
                   label!,
-                  style: labelStyle ?? Theme.of(context).textTheme.bodySmall,
+                  style: labelStyle ?? theme.textTheme.bodySmall,
                   semanticsLabel: '', // Is set on button instead
                 ),
             ],

@@ -19,6 +19,16 @@ class ToggleButtonsSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+    final String borderWidthDefaultLabel =
+        controller.toggleButtonsBorderWidth == null &&
+                controller.thinBorderWidth == null
+            ? 'default 1'
+            : controller.toggleButtonsBorderWidth == null &&
+                    controller.thinBorderWidth != null
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
+                : '';
+    final ThemeData theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -48,7 +58,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -65,8 +75,8 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller
-                        .setToggleButtonsBorderRadius(value < 0 ? null : value);
+                    controller.setToggleButtonsBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -77,7 +87,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -88,9 +98,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                                   ?.toStringAsFixed(0) ??
                               '')
                       : 'default 0',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -98,31 +106,27 @@ class ToggleButtonsSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border width'),
-          subtitle: const Text('Setting shared with OutlinedButton and '
-              'unfocused TextField'),
-        ),
-        ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
-            min: -0.5,
+          subtitle: Slider(
+            min: 0,
             max: 5,
-            divisions: 11,
+            divisions: 10,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth == null ||
-                        (controller.thinBorderWidth ?? -0.5) < 0
-                    ? controller.useMaterial3
-                        ? 'default 1'
-                        : 'default 1.5'
-                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                ? controller.toggleButtonsBorderWidth == null ||
+                        (controller.toggleButtonsBorderWidth ?? 0) <= 0
+                    ? borderWidthDefaultLabel
+                    : (controller.toggleButtonsBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
                 : 'default 1',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth ?? -0.5
-                : -0.5,
+                ? controller.toggleButtonsBorderWidth ?? 0
+                : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThinBorderWidth(value < 0 ? null : value);
+                    controller
+                        .setToggleButtonsBorderWidth(value <= 0 ? null : value);
                   }
                 : null,
           ),
@@ -133,21 +137,18 @@ class ToggleButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thinBorderWidth == null ||
-                              (controller.thinBorderWidth ?? -0.5) < 0
-                          ? controller.useMaterial3
-                              ? 'default 1'
-                              : 'default 1.5'
-                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                      ? controller.toggleButtonsBorderWidth == null ||
+                              (controller.toggleButtonsBorderWidth ?? 0) <= 0
+                          ? borderWidthDefaultLabel
+                          : (controller.toggleButtonsBorderWidth
+                                  ?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

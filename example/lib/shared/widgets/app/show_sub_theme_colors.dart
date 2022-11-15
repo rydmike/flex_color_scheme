@@ -98,13 +98,13 @@ class ShowSubThemeColors extends StatelessWidget {
                 : colorScheme.secondary);
     final Color switchColor = theme.switchTheme.thumbColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color checkboxColor = theme.checkboxTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color circleAvatarColor =
         isDark ? theme.primaryColorLight : theme.primaryColorDark;
     final Color chipColor =
@@ -180,7 +180,7 @@ class ShowSubThemeColors extends StatelessWidget {
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
     return Theme(
-      data: Theme.of(context).copyWith(
+      data: theme.copyWith(
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,

@@ -33,6 +33,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
   Color _appBarStyleColor(
     final FlexAppBarStyle? style,
     final ColorScheme colorScheme,
+    final Color scaffold,
     final bool isLight,
     final bool useMaterial3,
   ) {
@@ -47,6 +48,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return colorScheme.surface;
       case FlexAppBarStyle.background:
         return colorScheme.background;
+      case FlexAppBarStyle.scaffoldBackground:
+        return scaffold;
       case FlexAppBarStyle.custom:
         return customAppBarColor ?? colorScheme.tertiaryContainer;
       case null:
@@ -80,6 +83,8 @@ class AppBarStylePopupMenu extends StatelessWidget {
         return 'Surface color, with primary color blend';
       case FlexAppBarStyle.background:
         return 'Background color, with primary color blend';
+      case FlexAppBarStyle.scaffoldBackground:
+        return 'Scaffold color, with primary color blend';
       case FlexAppBarStyle.custom:
         return 'Custom. Built-in schemes use tertiary color, '
             'but you can use any color';
@@ -113,6 +118,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         : _explainAppBarStyle(null, isLight, useM3);
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -129,12 +135,22 @@ class AppBarStylePopupMenu extends StatelessWidget {
             value: i,
             child: ListTile(
               dense: true,
+              contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
-                color: i >= FlexAppBarStyle.values.length
-                    ? _appBarStyleColor(null, colorScheme, isLight, useM3)
+                // TODO(rydmike): Consider outlineVariant when it lands.
+                borderColor: theme.dividerColor,
+                backgroundColor: i >= FlexAppBarStyle.values.length
+                    ? _appBarStyleColor(
+                        null,
+                        colorScheme,
+                        theme.scaffoldBackgroundColor,
+                        isLight,
+                        useM3,
+                      )
                     : _appBarStyleColor(
                         FlexAppBarStyle.values[i],
                         colorScheme,
+                        theme.scaffoldBackgroundColor,
                         isLight,
                         useM3,
                       ),
@@ -160,14 +176,23 @@ class AppBarStylePopupMenu extends StatelessWidget {
           ],
         ),
         trailing: ColorSchemeBox(
-          color: enabled && !useDefault
+          // TODO(rydmike): Consider colorScheme.outlineVariant when it lands.
+          borderColor: theme.dividerColor,
+          backgroundColor: enabled && !useDefault
               ? _appBarStyleColor(
                   FlexAppBarStyle.values[index],
                   colorScheme,
+                  theme.scaffoldBackgroundColor,
                   isLight,
                   useM3,
                 )
-              : _appBarStyleColor(null, colorScheme, isLight, useM3),
+              : _appBarStyleColor(
+                  null,
+                  colorScheme,
+                  theme.scaffoldBackgroundColor,
+                  isLight,
+                  useM3,
+                ),
           defaultOption: useDefault,
         ),
       ),

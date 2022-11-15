@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -21,6 +20,19 @@ class SwitchesSettings extends StatelessWidget {
             : isDark
                 ? 'default (tealAccent[200])'
                 : 'default (secondary)';
+    final String labelForDefaultThumbColor =
+        (controller.useSubThemes || controller.useMaterial3) &&
+                controller.useFlexColorScheme
+            ? controller.useMaterial3
+                ? 'default (primaryContainer)'
+                : 'default (primary)'
+            : isDark
+                ? 'default (tealAccent[200])'
+                : 'default (secondary)';
+    const String explainThumb =
+        // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+        // controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
+        'selected';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -30,7 +42,7 @@ class SwitchesSettings extends StatelessWidget {
           child: SwitchShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Switch color'),
+          title: const Text('Switch main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -43,6 +55,21 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Switch $explainThumb thumb color'),
+          labelForDefault: labelForDefaultThumbColor,
+          index: controller.switchThumbSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSwitchThumbSchemeColor(null);
+                  } else {
+                    controller
+                        .setSwitchThumbSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         const Divider(height: 1),
         const SizedBox(height: 8),
         const Padding(
@@ -50,7 +77,7 @@ class SwitchesSettings extends StatelessWidget {
           child: CheckboxShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Checkbox color'),
+          title: const Text('Checkbox main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -71,7 +98,7 @@ class SwitchesSettings extends StatelessWidget {
           child: RadioShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Radio color'),
+          title: const Text('Radio main color'),
           labelForDefault: labelForDefaultColor,
           index: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -87,9 +114,10 @@ class SwitchesSettings extends StatelessWidget {
 
         // const SizedBox(height: 8),
         const Divider(height: 1),
-        SwitchListTileAdaptive(
-          title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: default grey'),
+        SwitchListTile(
+          title: const Text('Unselected toggle is colored'),
+          subtitle: const Text(
+              'ON: Use main theme color   OFF: default grey/surface'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

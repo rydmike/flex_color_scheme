@@ -27,8 +27,8 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.info_outlined,
   ),
   PanelItem(
-    panelLabel: 'Input Colors',
-    buttonLabel: 'Input\ncolors',
+    panelLabel: 'Theme Colors',
+    buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
   PanelItem(
@@ -99,14 +99,24 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.add_circle,
   ),
   PanelItem(
-    panelLabel: 'PopupMenu and IconButton',
-    buttonLabel: 'Popup and\nIconButton',
+    panelLabel: 'PopupMenuButton',
+    buttonLabel: 'Popup\nMenuButton',
     icon: Icons.arrow_drop_down_circle_outlined,
+  ),
+  PanelItem(
+    panelLabel: 'Tooltip, IconButton, CircleAvatar and DropdownButton ',
+    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    icon: Icons.live_help_outlined,
   ),
   PanelItem(
     panelLabel: 'Switch, CheckBox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
+  ),
+  PanelItem(
+    panelLabel: 'Slider',
+    buttonLabel: 'Slider',
+    icon: Icons.tune,
   ),
   PanelItem(
     panelLabel: 'ListTile',
@@ -118,9 +128,14 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.branding_watermark_outlined,
   ),
   PanelItem(
-    panelLabel: 'Material, Banner, Sheet and SnackBar',
-    buttonLabel: 'Material\nBanner, Snack',
+    panelLabel: 'BottomSheet, MaterialBanner and SnackBar',
+    buttonLabel: 'BottomSheet\nBanner, Snack',
     icon: Icons.call_to_action_outlined,
+  ),
+  PanelItem(
+    panelLabel: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
   ),
   PanelItem(
     panelLabel: 'Card',

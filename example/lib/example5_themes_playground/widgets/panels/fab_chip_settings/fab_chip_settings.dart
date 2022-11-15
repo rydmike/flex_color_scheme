@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -30,10 +29,6 @@ class FabChipSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FabShowcase(),
-        ),
         ColorSchemePopupMenu(
           title: const Text('FloatingActionButton color'),
           labelForDefault: controller.useMaterial3
@@ -50,7 +45,11 @@ class FabChipSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTileAdaptive(
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FabShowcase(),
+        ),
+        SwitchListTile(
           title: const Text('Use themed shape'),
           subtitle: const Text('OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
@@ -62,35 +61,56 @@ class FabChipSettings extends StatelessWidget {
               ? controller.setFabUseShape
               : null,
         ),
+        SwitchListTile(
+          title: const Text('Always circular'),
+          subtitle: const Text('Turn on to always use circular and stadium '
+              'shaped FAB, also in Material 3'),
+          value: controller.fabAlwaysCircular &&
+              controller.fabUseShape &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes &&
+                  controller.useFlexColorScheme &&
+                  controller.fabUseShape
+              ? controller.setFabAlwaysCircular
+              : null,
+        ),
         ListTile(
           enabled: controller.useSubThemes &&
               controller.useFlexColorScheme &&
-              controller.fabUseShape,
+              controller.fabUseShape &&
+              !controller.fabAlwaysCircular,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 60,
             divisions: 61,
             label: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? controller.fabBorderRadius == null ||
                         (controller.fabBorderRadius ?? -1) < 0
                     ? fabRadiusDefaultLabel
                     : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
-                    ? 'M3 rounded'
-                    : 'circular',
+                : controller.fabAlwaysCircular && controller.fabUseShape
+                    ? 'circular'
+                    : controller.useMaterial3
+                        ? 'M3 rounded'
+                        : 'circular',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? controller.fabBorderRadius ?? -1
                 : -1,
             onChanged: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
-                    controller.fabUseShape
+                    controller.fabUseShape &&
+                    !controller.fabAlwaysCircular
                 ? (double value) {
-                    controller.setFabBorderRadius(value < 0 ? null : value);
+                    controller.setFabBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -106,15 +126,18 @@ class FabChipSettings extends StatelessWidget {
                 Text(
                   controller.useSubThemes &&
                           controller.useFlexColorScheme &&
-                          controller.fabUseShape
+                          controller.fabUseShape &&
+                          !controller.fabAlwaysCircular
                       ? controller.fabBorderRadius == null ||
                               (controller.fabBorderRadius ?? -1) < 0
                           ? fabRadiusDefaultLabel
                           : (controller.fabBorderRadius?.toStringAsFixed(0) ??
                               '')
-                      : controller.useMaterial3
-                          ? 'M3 rounded'
-                          : 'circular',
+                      : controller.fabAlwaysCircular && controller.fabUseShape
+                          ? 'circular'
+                          : controller.useMaterial3
+                              ? 'M3 rounded'
+                              : 'circular',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -125,15 +148,11 @@ class FabChipSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
-        ),
         ColorSchemePopupMenu(
-          title: const Text('Chip color base'),
+          title: const Text('Chip blend color'),
           labelForDefault: controller.useMaterial3
-              ? 'default M3 (surface & secondaryContainer)'
-              : 'default (primary with opacity)',
+              ? 'default (surface)'
+              : 'default (primary)',
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -145,10 +164,31 @@ class FabChipSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Selected Chip color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (secondaryContainer)'
+              : 'default (none)',
+          index: controller.chipSelectedSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setChipSelectedSchemeColor(null);
+                  } else {
+                    controller
+                        .setChipSelectedSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -165,7 +205,8 @@ class FabChipSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setChipBorderRadius(value < 0 ? null : value);
+                    controller.setChipBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),

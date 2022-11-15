@@ -43,6 +43,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
         : labelForDefault;
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -61,13 +62,18 @@ class ColorSchemePopupMenu extends StatelessWidget {
             value: i,
             child: ListTile(
               dense: true,
+              contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
-                color: i >= SchemeColor.values.length
+                backgroundColor: i >= SchemeColor.values.length
                     ? colorScheme.surface
                     : FlexSubThemes.schemeColor(
                         SchemeColor.values[i],
                         colorScheme,
                       ),
+                selected: i == index,
+                borderColor: i == index
+                    ? theme.colorScheme.onSurface
+                    : theme.dividerColor,
                 defaultOption: i >= SchemeColor.values.length,
               ),
               title: i >= SchemeColor.values.length
@@ -85,15 +91,16 @@ class ColorSchemePopupMenu extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Text('Color $colorName'),
             if (subtitle != null) subtitle!,
-            Text('ColorScheme color $colorName'),
           ],
         ),
         trailing: ColorSchemeBox(
-          color: enabled && !useDefault
+          backgroundColor: enabled && !useDefault
               ? FlexSubThemes.schemeColor(
                   SchemeColor.values[index], colorScheme)
               : colorScheme.surface,
+          borderColor: theme.dividerColor,
           defaultOption: useDefault,
         ),
       ),

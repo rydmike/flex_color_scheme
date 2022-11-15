@@ -4,36 +4,40 @@ import 'package:flutter/material.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/pages/page_examples.dart';
+import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
+import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
-import '../panels/card_and_material_settings/card_settings.dart';
-import '../panels/card_and_material_settings/material_and_bottom_sheet_settings.dart';
-import '../panels/component_themes/component_themes.dart';
+import '../panels/card_settings/card_settings.dart';
+import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
-import '../panels/input_colors/input_colors.dart';
 import '../panels/introduction/introduction_panel.dart';
+import '../panels/material_panel/material_panel.dart';
 import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/panel_item.dart';
 import '../panels/panel_selector.dart';
-import '../panels/popup_icon_button_settings/popup_icon_button_settings.dart';
-import '../panels/seeded_color_scheme/seeded_color_scheme.dart';
+import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
+import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/showcase_panels/effective_colors.dart';
 import '../panels/showcase_panels/theme_code.dart';
 import '../panels/showcase_panels/widget_showcase.dart';
-import '../panels/surface_blends/surface_blends.dart';
+import '../panels/slider_settings/slider_settings.dart';
+import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
 import '../panels/tab_bar_settings/tab_bar_settings.dart';
 import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
+import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
+import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -45,7 +49,7 @@ const bool _debug = !kReleaseMode && false;
 /// This is the smaller more focused single panel view of the Themes Playground.
 ///
 /// It shows only one panel at a time as a PageView. This is a nice layout
-/// on mid size screen, like tablets, might be preferable on a phone too.
+/// on mid size screen, like tablets, probably preferable on a phone too.
 class PanelView extends StatefulWidget {
   const PanelView({
     super.key,
@@ -59,8 +63,30 @@ class PanelView extends StatefulWidget {
 
 class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   late final PageController pageController;
-  late final ScrollController scrollController;
+  late final ScrollController scrollCtrl;
   late int previousPage;
+
+  late final AnimationController scaleController = AnimationController(
+    duration: const Duration(milliseconds: 280),
+    lowerBound: 0.75,
+    upperBound: 1.0,
+    vsync: this,
+  );
+  late final Animation<double> scaleAnimation = CurvedAnimation(
+    parent: scaleController,
+    curve: Curves.fastOutSlowIn,
+  );
+
+  late final AnimationController fadeController = AnimationController(
+    duration: const Duration(milliseconds: 280),
+    lowerBound: 0.1,
+    upperBound: 1.0,
+    vsync: this,
+  );
+  late final Animation<double> fadeAnimation = CurvedAnimation(
+    parent: fadeController,
+    curve: Curves.fastOutSlowIn,
+  );
 
   @override
   void initState() {
@@ -69,13 +95,17 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       initialPage: widget.themeController.viewIndex,
     );
     previousPage = widget.themeController.viewIndex;
-    scrollController = ScrollController();
+    scrollCtrl = ScrollController();
+    scaleController.value = 1.0;
+    fadeController.value = 1.0;
   }
 
   @override
   void dispose() {
     pageController.dispose();
-    scrollController.dispose();
+    scrollCtrl.dispose();
+    scaleController.dispose();
+    fadeController.dispose();
     super.dispose();
   }
 
@@ -104,80 +134,118 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       debugPrint('media.size.width ........ : ${media.size.width}');
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
-    return NestedScrollView(
-      controller: scrollController,
-      headerSliverBuilder: (BuildContext context, bool value) {
-        return <Widget>[
-          SliverPersistentHeader(
-            pinned: isPinned,
-            floating: true,
-            delegate: PanelSelectorHeaderDelegate(
-              vsync: this,
-              extent: headerExtent,
-              page: themeCtrl.viewIndex,
-              previousPage: previousPage,
-              onChanged: (int page) {
-                setState(() {
-                  previousPage = themeCtrl.viewIndex;
-                });
-                themeCtrl.setViewIndex(page);
-                pageController.animateToPage(page,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeOutCubic);
-              },
-            ),
-          ),
-          // SliverAppBar(),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: margins),
-              child: ThemeSelector(controller: themeCtrl),
-            ),
-          ),
-        ];
-      },
-      body: PageView.builder(
-        controller: pageController,
-        itemCount: panelItems.length,
-        onPageChanged: (int page) {
-          setState(() {
-            previousPage = themeCtrl.viewIndex;
-          });
-          themeCtrl.setViewIndex(page);
-        },
-        itemBuilder: (BuildContext context, int page) {
+    return Scrollbar(
+      controller: scrollCtrl,
+      interactive: false,
+      child: NestedScrollView(
+        controller: scrollCtrl,
+        headerSliverBuilder: (BuildContext context, bool value) {
           return <Widget>[
-            PanelPage(IntroductionPanel(themeCtrl), page, themeCtrl),
-            PanelPage(InputColors(themeCtrl), page, themeCtrl),
-            PanelPage(SeededColorScheme(themeCtrl), page, themeCtrl),
-            PanelPage(SurfaceBlends(themeCtrl, allBlends: showAllBlends), page,
-                themeCtrl),
-            PanelPage(EffectiveColors(themeCtrl), page, themeCtrl),
-            PanelPage(ComponentThemes(themeCtrl), page, themeCtrl),
-            PanelPage(TextFieldSettings(themeCtrl), page, themeCtrl),
-            PanelPage(AppBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(TabBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(BottomNavigationBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(NavigationBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(NavigationRailSettings(themeCtrl), page, themeCtrl),
-            PanelPage(AndroidNavigationBarSettings(themeCtrl), page, themeCtrl),
-            PanelPage(ButtonsSettings(themeCtrl), page, themeCtrl),
-            PanelPage(ToggleButtonsSettings(themeCtrl), page, themeCtrl),
-            PanelPage(FabChipSettings(themeCtrl), page, themeCtrl),
-            PanelPage(PopupIconButtonSettings(themeCtrl), page, themeCtrl),
-            PanelPage(SwitchesSettings(themeCtrl), page, themeCtrl),
-            PanelPage(ListTileSettings(themeCtrl), page, themeCtrl),
-            PanelPage(DialogSettings(themeCtrl), page, themeCtrl),
-            PanelPage(
-                MaterialAndBottomSheetSettings(themeCtrl), page, themeCtrl),
-            PanelPage(CardSettings(themeCtrl), page, themeCtrl),
-            PanelPage(TextThemeSettings(themeCtrl), page, themeCtrl),
-            PanelPage(PrimaryTextThemeSettings(themeCtrl), page, themeCtrl),
-            PanelPage(const PageExamples(), page, themeCtrl),
-            PanelPage(const WidgetShowcase(), page, themeCtrl),
-            PanelPage(ThemeCode(themeCtrl), page, themeCtrl),
-          ].elementAt(page);
+            SliverPersistentHeader(
+              pinned: isPinned,
+              floating: true,
+              delegate: PanelSelectorHeaderDelegate(
+                  vsync: this,
+                  extent: headerExtent,
+                  // controller: themeCtrl,
+                  page: themeCtrl.viewIndex,
+                  previousPage: previousPage,
+                  onSelect: (int index) {
+                    if (previousPage != index) {
+                      setState(() {
+                        previousPage = index;
+                      });
+                    }
+                    if (themeCtrl.viewIndex != index) {
+                      themeCtrl.setViewIndex(index);
+                      // This is handmade scale and fade up animation
+                      // when user taps on header item. We use it instead
+                      // animating to the page with the page controller.
+                      // Instead we jump to the page and trigger a slight
+                      // fade and zoom in effect, without it it is hard too
+                      // notice that the page changed.
+                      scaleController.value = 0.7;
+                      fadeController.value = 0.2;
+                      scaleController.forward();
+                      fadeController.forward();
+                      pageController.jumpToPage(themeCtrl.viewIndex);
+                    }
+                  }),
+            ),
+            // SliverAppBar(),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: margins),
+                child: ThemeSelector(controller: themeCtrl),
+              ),
+            ),
+          ];
         },
+        body: PageView.builder(
+          controller: pageController,
+          itemCount: panelItems.length,
+          onPageChanged: (int pageIndex) {
+            setState(() {
+              previousPage = themeCtrl.viewIndex;
+            });
+            themeCtrl.setViewIndex(pageIndex);
+          },
+          itemBuilder: (BuildContext context, int pageIndex) {
+            return ScaleTransition(
+              scale: scaleAnimation,
+              child: FadeTransition(
+                opacity: fadeAnimation,
+                child: <Widget>[
+                  PanelPage(IntroductionPanel(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(
+                      ThemeColorsSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(SeededColorSchemeSettings(themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(
+                      SurfaceBlendSettings(themeCtrl, allBlends: showAllBlends),
+                      pageIndex,
+                      themeCtrl),
+                  PanelPage(EffectiveColors(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(ComponentSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TextFieldSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(AppBarSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TabBarSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(BottomNavigationBarSettings(themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(
+                      NavigationBarSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(
+                      NavigationRailSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(
+                      ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(FabChipSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(
+                      PopupMenuButtonSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TooltipIconButtonAvatarDropdownSettings(themeCtrl),
+                      pageIndex, themeCtrl),
+                  PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(SliderSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(ListTileSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(BottomSheetBannerSnackSettings(themeCtrl),
+                      pageIndex, themeCtrl),
+                  PanelPage(const MaterialPanel(), pageIndex, themeCtrl),
+                  PanelPage(CardSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(PrimaryTextThemeSettings(themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(PageExamples(controller: themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(const WidgetShowcase(), pageIndex, themeCtrl),
+                  PanelPage(ThemeCode(themeCtrl), pageIndex, themeCtrl),
+                ].elementAt(pageIndex),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -192,12 +260,10 @@ class PanelPage extends StatelessWidget {
     this.panelPage,
     this.controller, {
     super.key,
-    this.showCodeView = true,
   });
   final Widget child;
   final int panelPage;
   final ThemeController controller;
-  final bool showCodeView;
 
   @override
   Widget build(BuildContext context) {
@@ -220,29 +286,39 @@ class PanelPage extends StatelessWidget {
       final double margins =
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
 
-      return ListView(
-        padding: EdgeInsets.fromLTRB(
-          margins,
-          0,
-          margins,
-          margins + MediaQuery.of(context).padding.bottom,
-        ),
-        children: <Widget>[
-          HeaderCard(
-            title: Text(panelItems[panelPage].panelLabel),
-            leading: Icon(panelItems[panelPage].icon, color: iconColor),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(child: child),
-                if (showCodeSideBySide)
-                  Expanded(
-                    child: ThemeCode(controller),
-                  ),
-              ],
-            ),
+      // We get double implicit scrollbars and that causes issues with the
+      // scroll controller, this scroll config removes it.
+      return ScrollConfiguration(
+        behavior: const NoScrollbarBehavior(),
+        // This ListView allows the content in the PageView to scroll
+        // vertically as apart of the NestedScroll view the PageView is
+        // included in, but by itself, but we need the ListView to allow
+        // its page content to grow beyond the visible page.
+        child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.fromLTRB(
+            margins,
+            0,
+            margins,
+            margins + MediaQuery.of(context).padding.bottom,
           ),
-        ],
+          children: <Widget>[
+            HeaderCard(
+              title: Text(panelItems[panelPage].panelLabel),
+              leading: Icon(panelItems[panelPage].icon, color: iconColor),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(child: child),
+                  if (showCodeSideBySide)
+                    Expanded(
+                      child: ThemeCode(controller),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
       );
     });
   }

@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 6.0.1
+version: 6.1.0
 publish_to: 'none'
 environment:
   sdk: '>=2.18.0 <3.0.0'

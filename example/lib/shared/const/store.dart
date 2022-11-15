@@ -107,43 +107,48 @@ class Store {
   static const String keySurfaceModeLight = 'surfaceModeLight';
   // Default value for the surfaceModeLight, also used to reset settings.
   static const FlexSurfaceMode defaultSurfaceModeLight =
-      FlexSurfaceMode.highScaffoldLowSurface;
+      FlexSurfaceMode.levelSurfacesLowScaffold;
 
   // Key used to read and save the surfaceModeDark value.
   static const String keySurfaceModeDark = 'surfaceModeDark';
   // Default value for the surfaceModeDark, also used to reset settings.
   static const FlexSurfaceMode defaultSurfaceModeDark =
-      FlexSurfaceMode.highScaffoldLowSurface;
+      FlexSurfaceMode.levelSurfacesLowScaffold;
 
   // Key used to read and save the blendLevel value.
   static const String keyBlendLevel = 'blendLevel';
   // Default value for the blendLevel, also used to reset settings.
-  // Defaults to 20.
-  static const int defaultBlendLevel = 20;
+  // Defaults to 9.
+  static const int defaultBlendLevel = 9;
 
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
-  // Defaults to 15.
-  static const int defaultBlendLevelDark = 15;
+  // Defaults to 17.
+  static const int defaultBlendLevelDark = 17;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
   // Default value for the onBlendLevel, also used to reset settings.
-  // Defaults to 20.
-  static const int defaultBlendOnLevel = 20;
+  // Defaults to 10.
+  static const int defaultBlendOnLevel = 10;
 
   // Key used to read and save the blendOnLevelDark value.
   static const String keyBlendOnLevelDark = 'blendOnLevelDark';
   // Default value for the blendOnLevelDark, also used to reset settings.
-  // Defaults to 30.
-  static const int defaultBlendOnLevelDark = 30;
+  // Defaults to 20.
+  static const int defaultBlendOnLevelDark = 20;
 
   // Key used to read and save the usedColors value.
   static const String keyUsedColors = 'usedColors';
   // Default value for the usedColorsLevel, also used to reset settings.
   // Defaults to 6.
   static const int defaultUsedColors = 6;
+
+  // Key used to swap legacy M2 secondary and tertiary colors.
+  static const String keySwapLegacyColors = 'swapLegacyColors';
+  // Default value for the swapLegacyColors, also to reset settings.
+  static const bool defaultSwapLegacyColors = true;
 
   // Key used to read and save the swapLightColors value.
   static const String keySwapLightColors = 'swapLightColors';
@@ -354,6 +359,20 @@ class Store {
   // reset settings.
   static const bool defaultInputDecoratorUnfocusedBorderIsColored = true;
 
+  // Key used to read and save the inputDecoratorBorderWidth value.
+  static const String keyInputDecoratorBorderWidth =
+      'inputDecoratorBorderWidth';
+  // Default value for the inputDecoratorBorderWidth, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorBorderWidth = null;
+
+  // Key used to read and save the inputDecoratorFocusedBorderWidth value.
+  static const String keyInputDecoratorFocusedBorderWidth =
+      'inputDecoratorFocusedBorderWidth';
+  // Default value for the inputDecoratorFocusedBorderWidth, to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorFocusedBorderWidth = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
@@ -372,12 +391,12 @@ class Store {
   // Key used to read and save the appBarOpacityLight value.
   static const String keyAppBarOpacityLight = 'appBarOpacity';
   // Default value for the appBarOpacityLight, also used to reset settings.
-  static const double defaultAppBarOpacityLight = 0.95;
+  static const double defaultAppBarOpacityLight = 1.0;
 
   // Key used to read and save the appBarOpacityDark value.
   static const String keyAppBarOpacityDark = 'appBarOpacityDark';
   // Default value for the appBarOpacityDark, also used to reset settings.
-  static const double defaultAppBarOpacityDark = 0.9;
+  static const double defaultAppBarOpacityDark = 1.0;
 
   // Key used to read and save the appBarElevation value.
   static const String keyAppBarElevationLight = 'appBarElevation';
@@ -421,36 +440,48 @@ class Store {
   // Key used to read and save the tabBarIndicatorLight value.
   static const String keyTabBarIndicatorLight = 'tabBarIndicatorLight';
   // Default value for the tabBarIndicatorLight, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarIndicatorLight = null;
 
   // Key used to read and save the tabBarIndicatorDark value.
   static const String keyTabBarIndicatorDark = 'tabBarIndicatorDark';
   // Default value for the tabBarIndicatorDark, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarIndicatorDark = null;
 
   // Key used to read and save the tabBarItemSchemeColor value.
   static const String keyTabBarItemSchemeColorLight =
       'tabBarItemSchemeColorLight';
   // Default value for the tabBarItemSchemeColor, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorLight = null;
 
   // Key used to read and save the tabBarItemSchemeColorDark value.
   static const String keyTabBarItemSchemeColorDark =
       'tabBarItemSchemeColorDark';
   // Default value for the tabBarItemSchemeColorDark, also to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
   // BottomSheet SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the bottomSheetSchemeColor value.
+  static const String keyBottomSheetSchemeColor = 'bottomSheetSchemeColor';
+  // Default value for the bottomSheetSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomSheetSchemeColor = null;
+
+  // Key used to read and save the bottomSheetElevation value.
+  static const String keyBottomSheetElevation = 'bottomSheetElevation';
+  // Default value for the bottomSheetElevation, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultBottomSheetElevation = null;
+
   // Key used to read and save the bottomSheetBorderRadius value.
   static const String keyBottomSheetBorderRadius = 'bottomSheetBorderRadius';
   // Default value for the bottomSheetBorderRadius, also to reset settings.
-  // We use NULL as default, on nullable settings.
+  // We use NULL as default, on this nullable setting.
   static const double? defaultBottomSheetBorderRadius = null;
 
   // Android System Navigator bar SETTINGS.
@@ -538,6 +569,11 @@ class Store {
   static const String keyNavBarOpacity = 'navBarOpacity';
   // Default value for the navBarOpacity, also to reset settings.
   static const double defaultNavBarOpacity = 1.0;
+
+  // Key used to read and save the navigationBarElevation value.
+  static const String keyNavigationBarElevation = 'navigationBarElevation';
+  // Default value for the navigationBarElevation, also reset settings.
+  static const double? defaultNavigationBarElevation = null;
 
   // Key used to read and save the navBarHeight value.
   static const String keyNavBarHeight = 'navBarHeight';
@@ -704,6 +740,22 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultOutlinedButtonBorderRadius = null;
 
+  // Key used to read and save the outlinedButtonBorderWidth value.
+  static const String keyOutlinedButtonBorderWidth =
+      'outlinedButtonBorderWidth';
+  // Default value for the outlinedButtonBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultOutlinedButtonBorderWidth = null;
+
+  // Key used to read and save the outlinedButtonPressedBorderWidth value.
+  static const String keyOutlinedButtonPressedBorderWidth =
+      'outlinedButtonPressedBorderWidth';
+  // Default value for the outlinedButtonPressedBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultOutlinedButtonPressedBorderWidth = null;
+
   // Key used to read and save the toggleButtonsSchemeColor value.
   static const String keyToggleButtonsSchemeColor = 'toggleButtonsSchemeColor';
   // Default value for the toggleButtonsSchemeColor, also used to
@@ -719,7 +771,14 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderRadius = null;
 
-  // Toggleable SETTINGS.
+  // Key used to read and save the toggleButtonsBorderWidth value.
+  static const String keyToggleButtonsBorderWidth = 'toggleButtonsBorderWidth';
+  // Default value for the toggleButtonsBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultToggleButtonsBorderWidth = null;
+
+  // Switch, CheckBox and Radio SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the unselectedToggleIsColored value.
@@ -734,6 +793,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSwitchSchemeColor = null;
 
+  // Key used to read and save the switchThumbSchemeColor value.
+  static const String keySwitchThumbSchemeColor = 'switchThumbSchemeColor';
+  // Default value for the switchThumbSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSwitchThumbSchemeColor = null;
+
   // Key used to read and save the checkboxSchemeColor value.
   static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';
   // Default value for the checkboxSchemeColor, also used to reset settings.
@@ -746,6 +811,26 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultRadioSchemeColor = null;
 
+  // Slider SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the sliderBaseSchemeColor value.
+  static const String keySliderBaseSchemeColor = 'sliderBaseSchemeColor';
+  // Default value for the sliderBaseSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSliderBaseSchemeColor = null;
+
+  // Key used to read and save the sliderValueTinted value.
+  static const String keySliderValueTinted = 'sliderValueTinted';
+  // Default value for the sliderValueTinted, also to reset settings.
+  static const bool defaultSliderValueTinted = false;
+
+  // Key used to read and save the sliderTrackHeight value.
+  static const String keySliderTrackHeight = 'sliderTrackHeight';
+  // Default value for the sliderTrackHeight, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSliderTrackHeight = null;
+
   // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
   // ===========================================================================
 
@@ -753,6 +838,11 @@ class Store {
   static const String keyFabUseShape = 'fabUseShape';
   // Default value for the fabUseShape, also to reset settings.
   static const bool defaultFabUseShape = false;
+
+  // Key used to read and save the fabUseShape value.
+  static const String keyFabAlwaysCircular = 'fabAlwaysCircular';
+  // Default value for the fabUseShape, also to reset settings.
+  static const bool defaultFabAlwaysCircular = false;
 
   // Key used to read and save the fabBorderRadius value.
   static const String keyFabBorderRadius = 'fabBorderRadius';
@@ -772,6 +862,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultChipSchemeColor = null;
 
+  // Key used to read and save the chipSelectedSchemeColor value.
+  static const String keyChipSelectedSchemeColor = 'chipSelectedSchemeColor';
+  // Default value for the chipSelectedSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultChipSelectedSchemeColor = null;
+
   // Key used to read and save the chipBorderRadius value.
   static const String keyChipBorderRadius = 'chipBorderRadius';
   // Default value for the chipBorderRadius, also used to reset settings.
@@ -784,6 +880,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSnackBarSchemeColor = null;
 
+  // Key used to read and save the popupMenuSchemeColor value.
+  static const String keyPopupMenuSchemeColor = 'popupMenuSchemeColor';
+  // Default value for the popupMenuSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultPopupMenuSchemeColor = null;
+
   // Key used to read and save the popupMenuOpacity value.
   static const String keyPopupMenuOpacity = 'popupMenuOpacity';
   // Default value for the popupMenuOpacity, also used to reset settings.
@@ -794,6 +896,12 @@ class Store {
   // Default value for the popupMenuBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultPopupMenuBorderRadius = null;
+
+  // Key used to read and save the popupMenuElevation value.
+  static const String keyPopupMenuElevation = 'popupMenuElevation';
+  // Default value for the popupMenuElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultPopupMenuElevation = null;
 
   // Key used to read and save the cardBorderRadius value.
   static const String keyCardBorderRadius = 'cardBorderRadius';
@@ -813,6 +921,44 @@ class Store {
   // Default value for the dialogBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadius = null;
+
+  // Key used to read and save the dialogElevation value.
+  static const String keyDialogElevation = 'dialogElevation';
+  // Default value for the dialogElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDialogElevation = null;
+
+  // Tooltip SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the tooltipRadius value.
+  static const String keyTooltipRadius = 'tooltipRadius';
+  // Default value for the tooltipRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTooltipRadius = null;
+
+  // Key used to read and save the tooltipWaitDuration value.
+  static const String keyTooltipWaitDuration = 'tooltipWaitDuration';
+  // Default value for the tooltipWaitDuration, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const int? defaultTooltipWaitDuration = null;
+
+  // Key used to read and save the tooltipShowDuration value.
+  static const String keyTooltipShowDuration = 'tooltipShowDuration';
+  // Default value for the tooltipShowDuration, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const int? defaultTooltipShowDuration = null;
+
+  // Key used to read and save the tooltipSchemeColor value.
+  static const String keyTooltipSchemeColor = 'tooltipSchemeColor';
+  // Default value for the tooltipSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultTooltipSchemeColor = null;
+
+  // Key used to read and save the tooltipOpacity value.
+  static const String keyTooltipOpacity = 'tooltipOpacity';
+  // Default value for the tooltipOpacity, also used to reset settings.
+  static const double defaultTooltipOpacity = 1.0;
 
   // Custom surface tint color SETTINGS.
   // ===========================================================================
@@ -914,5 +1060,4 @@ class Store {
 
   // Not yet implemented SETTINGS.
   // ===========================================================================
-
 }

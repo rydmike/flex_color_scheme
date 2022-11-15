@@ -26,6 +26,7 @@ class AppColor {
     // the custom app bar style. We use a light blue that matches branded
     // surface colors, but is a bit stronger than most surface branding.
     appBarColor: Color(0xFFC8DCF8),
+    swapOnMaterial3: true,
   );
 // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
@@ -37,6 +38,7 @@ class AppColor {
     tertiaryContainer: Color(0xFF535393),
     // A custom very dark blue, to match the dark theme mode
     appBarColor: Color(0xFF00102B),
+    swapOnMaterial3: true,
   );
 
   // We can build a scheme the long way, by specifying all the required
@@ -93,6 +95,7 @@ class AppColor {
     primary: const Color(0xFF1145A4),
     secondary: const Color(0xFFB61D1D),
     brightness: Brightness.light,
+    swapOnMaterial3: true,
   );
 
   // These colors are used as default for the customizable colors in
@@ -274,24 +277,26 @@ class AppColor {
   static String explainUsedColors(ThemeController controller) {
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '
-          'used. The ColorScheme is based directly on the effective '
-          'input colors';
+          'used. The effective ColorScheme is based directly on the selected '
+          "pre-defined FlexColorScheme's colors";
     }
     if (!controller.useSecondary && !controller.useTertiary) {
-      return 'Only Primary input color is used to generate the Colorscheme. '
-          'This is like using ColorScheme.fromSeed with Primary color';
+      return 'Light scheme defined Primary color is used to generate '
+          'the Colorscheme. '
+          "This is like using Flutter's ColorScheme.fromSeed with the scheme "
+          'defined Primary color as seed color';
     }
     if (controller.useSecondary && !controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Secondary colors are used as keys, Tertiary is computed '
-          'from Primary';
+      return 'Tonal palettes for the ColorScheme are made with light scheme '
+          'defined Primary and Secondary colors as seed keys. Tertiary key '
+          'is computed from Primary color';
     }
     if (!controller.useSecondary && controller.useTertiary) {
-      return 'To make tonal palettes for the ColorScheme, Primary and '
-          'Tertiary colors are used as keys, Secondary is computed '
-          'from Primary';
+      return 'Tonal palettes for the ColorScheme, are made with light scheme '
+          'defined Primary and Tertiary colors as seed keys, Secondary key is '
+          'computed from Primary color';
     }
-    return 'Input Primary, Secondary and Tertiary colors are used as '
-        'keys to generate tonal palettes that define the ColorScheme';
+    return 'Light scheme defined Primary, Secondary and Tertiary colors are '
+        'used as keys to generate tonal palettes that define the ColorScheme';
   }
 }

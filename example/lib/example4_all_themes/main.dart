@@ -112,7 +112,7 @@ class DemoApp extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // Our content is not all wrapped in cards in this demo, so
             // we keep the blend level fairly low for good contrast.
-            blendLevel: 5,
+            blendLevel: 2,
             appBarElevation: 0.5,
             // Opt-in/out on using the additional opinionated
             // component sub-themes. You can use property `subThemesData`

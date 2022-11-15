@@ -22,12 +22,12 @@ void main() {
         equals(
           const BottomSheetThemeData(
             clipBehavior: Clip.antiAlias,
-            elevation: 4,
-            modalElevation: 8,
+            elevation: 1,
+            modalElevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(28),
+                topRight: Radius.circular(28),
               ),
             ),
           ),
@@ -136,11 +136,12 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
+          elevation: 3,
           // useFlutterDefaults: false, <<- Expect this to be default too
         ),
         equals(
           const BottomNavigationBarThemeData(
-            elevation: 0,
+            elevation: 3,
             backgroundColor: Color(0xff121212),
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
@@ -352,7 +353,6 @@ void main() {
         equals(
           const DialogTheme(
             elevation: 6,
-            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -377,7 +377,6 @@ void main() {
           const DialogTheme(
             backgroundColor: Color(0xFF343476),
             elevation: 6,
-            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -404,7 +403,6 @@ void main() {
           const DialogTheme(
             backgroundColor: Color(0xFFDDDDDD),
             elevation: 6,
-            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             shape: RoundedRectangleBorder(
@@ -430,7 +428,6 @@ void main() {
         equals(
           DialogTheme(
             backgroundColor: colorScheme.tertiary,
-            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
             elevation: 6,
@@ -456,7 +453,6 @@ void main() {
         equals(
           const DialogTheme(
             elevation: 10,
-            // TODO(rydmike): For 3.1.0, not available in stable 3.0.5.
             actionsPadding:
                 EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
             shape: RoundedRectangleBorder(
@@ -478,7 +474,7 @@ void main() {
         FlexSubThemes.popupMenuTheme(),
         equals(
           const PopupMenuThemeData(
-            elevation: 3,
+            // elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(4),
@@ -701,7 +697,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -710,7 +706,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -724,7 +720,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -776,7 +772,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -785,7 +781,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -799,7 +795,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -849,7 +845,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -858,7 +854,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -872,7 +868,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -924,7 +920,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: OutlineInputBorder(
@@ -933,7 +929,7 @@ void main() {
                 color: colorScheme.primary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
@@ -947,7 +943,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -1059,7 +1055,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
             disabledBorder: UnderlineInputBorder(
@@ -1071,7 +1067,7 @@ void main() {
                 color: colorScheme.secondary
                     .blendAlpha(colorScheme.onSurface, 0x66)
                     .withAlpha(0x31),
-                width: 1.5,
+                width: 1,
               ),
             ),
             focusedErrorBorder: UnderlineInputBorder(
@@ -1091,7 +1087,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
-                width: 1.5,
+                width: 1,
               ),
             ),
           ),
@@ -1593,6 +1589,47 @@ void main() {
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
       );
+      // Elevation states
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(0.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(4.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(2.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(2.0),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          elevation: 2,
+          useMaterial3: true,
+        ).style!.elevation!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(2.0),
+      );
       // Custom shape test
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -1788,7 +1825,22 @@ void main() {
                   ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                   const EdgeInsets.symmetric(horizontal: 8)),
-              elevation: ButtonStyleButton.allOrNull<double>(1),
+              elevation: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return 0.0;
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return 3.0;
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return 1.0;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return 1.0;
+                }
+                return 1.0;
+              }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -1851,7 +1903,22 @@ void main() {
                   ButtonStyleButton.allOrNull<Size>(const Size(55, 55)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                   const EdgeInsets.symmetric(horizontal: 9)),
-              elevation: ButtonStyleButton.allOrNull<double>(2),
+              elevation: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return 0.0;
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return 4.0;
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return 2.0;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return 2.0;
+                }
+                return 2.0;
+              }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -2330,7 +2397,7 @@ void main() {
             color: colorScheme.primary
                 .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                 .withAlpha(kDisabledBackgroundAlpha),
-            width: 1.5)),
+            width: 1)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
@@ -2359,7 +2426,7 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
           color: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
-          width: 1.5,
+          width: 1,
         )),
       );
     });
@@ -2437,7 +2504,7 @@ void main() {
             color: colorScheme.primaryContainer
                 .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                 .withAlpha(kDisabledBackgroundAlpha),
-            width: 1.5)),
+            width: 1)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -2469,7 +2536,7 @@ void main() {
         ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
           color: colorScheme.primaryContainer.withAlpha(kEnabledBorderAlpha),
-          width: 1.5,
+          width: 1,
         )),
       );
     });
@@ -3212,7 +3279,7 @@ void main() {
         FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 1.5,
+            borderWidth: 1,
             selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
             color: colorScheme.primary,
             fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
@@ -3239,8 +3306,8 @@ void main() {
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),
@@ -3259,7 +3326,7 @@ void main() {
         ),
         equals(
           ToggleButtonsThemeData(
-            borderWidth: 1.5,
+            borderWidth: 1,
             selectedColor: colorScheme.onSecondary.withAlpha(0xE5),
             color: colorScheme.secondary,
             fillColor: colorScheme.secondary.blendAlpha(Colors.white, 0x19),
@@ -3286,8 +3353,8 @@ void main() {
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
-              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
-              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+              minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
             ),
           ),
         ),
@@ -3297,7 +3364,7 @@ void main() {
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.14: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
+        'FST1.14a: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -3305,9 +3372,7 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
           ),
         ),
@@ -3324,16 +3389,28 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
           ),
         ),
       );
     });
     test(
-        'FST1.14c: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'FST1.14c: GIVEN a circular FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same Shape', () {
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          radius: 30,
+          alwaysCircular: true,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(shape: StadiumBorder()),
+        ),
+      );
+    });
+    test(
+        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -3344,30 +3421,7 @@ void main() {
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
-    test(
-        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
-        'EXPECT equal to FloatingActionButtonThemeData() version '
-        'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.floatingActionButtonTheme(
-          colorScheme: colorScheme,
-          radius: 32,
-        ),
-        equals(
-          const FloatingActionButtonThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(32),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
           ),
         ),
@@ -3382,7 +3436,68 @@ void main() {
         FlexSubThemes.floatingActionButtonTheme(
           colorScheme: colorScheme,
           radius: 32,
+        ),
+        equals(
+          const FloatingActionButtonThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14f: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with default shape values and colors', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.secondary,
+          radius: 32,
+          useShape: false,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.secondary,
+            foregroundColor: colorScheme.onSecondary,
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14f: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with default shape values and colors', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.secondary,
+          radius: 32,
+          useShape: true,
+          alwaysCircular: true,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.secondary,
+            foregroundColor: colorScheme.onSecondary,
+            shape: const StadiumBorder(),
+          ),
+        ),
+      );
+    });
+    test(
+        'FST1.14g: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.onPrimary,
+          radius: 32,
         ),
         equals(
           FloatingActionButtonThemeData(
@@ -3414,22 +3529,26 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff6200ee),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x313a008e),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff310077),
+            checkmarkColor: const Color(0xff000000),
+            surfaceTintColor: const Color(0xff6200ee),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
             ),
           ),
         ),
@@ -3451,17 +3570,21 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff310077)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff6200ee),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x313a008e),
-            selectedColor: const Color(0xffbe96f8),
-            secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff310077),
+            selectedColor: const Color(0xff03dac6),
+            secondarySelectedColor: const Color(0xff03dac6),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
+            ),
           ),
         ),
       );
@@ -3499,22 +3622,26 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            brightness: Brightness.dark,
             padding: const EdgeInsets.all(4),
             labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff016d63)),
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffccf7f3),
-            deleteIconColor: const Color(0xff03dac6),
+            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x31018276),
             selectedColor: const Color(0xff97efe7),
             secondarySelectedColor: const Color(0xff97efe7),
-            checkmarkColor: const Color(0xff016d63),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff015c54),
+              size: 18.0,
             ),
           ),
         ),
@@ -3536,6 +3663,7 @@ void main() {
         equals(
           const NavigationBarThemeData(
             height: null,
+            elevation: null,
             labelBehavior: null,
             backgroundColor: null,
             indicatorColor: null,
@@ -3555,6 +3683,7 @@ void main() {
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
+        elevation: 3,
         selectedIconSchemeColor: SchemeColor.secondary,
         selectedLabelSchemeColor: SchemeColor.error,
         unselectedIconSchemeColor: SchemeColor.onSurface,
@@ -3575,6 +3704,7 @@ void main() {
         equalsIgnoringHashCodes(
           NavigationBarThemeData(
             height: 80,
+            elevation: 3,
             backgroundColor: colorScheme.background.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
@@ -3804,10 +3934,11 @@ void main() {
         equals(Colors.grey.shade50),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x50)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -3880,7 +4011,7 @@ void main() {
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .trackColor!
             .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        equals(colorScheme.primary.withAlpha(0x80)),
       );
       // Default states
       expect(
@@ -3890,10 +4021,11 @@ void main() {
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x65)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -4516,6 +4648,170 @@ void main() {
             labelType: NavigationRailLabelType.all,
             groupAlignment: 0,
           ),
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Slider tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.24a-light: GIVEN a light default FlexSubTheme.sliderTheme() '
+        'EXPECT equal to SliderThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.sliderTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          const SliderThemeData(
+            activeTrackColor: Color(0xff6200ee),
+            inactiveTrackColor: Color(0x3d6200ee),
+            disabledActiveTrackColor: Color(0x52000000),
+            disabledInactiveTrackColor: Color(0x1f000000),
+            activeTickMarkColor: Color(0x8affffff),
+            inactiveTickMarkColor: Color(0x8a6200ee),
+            disabledActiveTickMarkColor: Color(0x1fffffff),
+            disabledInactiveTickMarkColor: Color(0x1f000000),
+            thumbColor: Color(0xff6200ee),
+            disabledThumbColor: Color(0xff9e9e9e),
+            overlayColor: Color(0x1f6200ee),
+            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.24b-light: GIVEN a light custom FlexSubTheme.sliderTheme() '
+        'EXPECT equal to SliderThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.sliderTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          trackHeight: 6,
+          valueIndicatorColor: const Color(0xFF342342),
+          valueIndicatorTextStyle: const TextStyle(color: Colors.white12),
+        ).toString(),
+        equalsIgnoringHashCodes(
+          const SliderThemeData(
+            trackHeight: 6.0,
+            activeTrackColor: Color(0xff03dac6),
+            inactiveTrackColor: Color(0x3d03dac6),
+            disabledActiveTrackColor: Color(0x52000000),
+            disabledInactiveTrackColor: Color(0x1f000000),
+            activeTickMarkColor: Color(0x8a000000),
+            inactiveTickMarkColor: Color(0x8a03dac6),
+            disabledActiveTickMarkColor: Color(0x1f000000),
+            disabledInactiveTickMarkColor: Color(0x1f000000),
+            thumbColor: Color(0xff03dac6),
+            disabledThumbColor: Color(0xff9e9e9e),
+            overlayColor: Color(0x1f03dac6),
+            valueIndicatorColor: Color(0xff342342),
+            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            valueIndicatorTextStyle:
+                TextStyle(inherit: true, color: Color(0x1fffffff)),
+          ).toString(),
+        ),
+      );
+    });
+    // -------------------------------------------------------------------------
+    // FlexSubThemes Tooltip tests
+    // -------------------------------------------------------------------------
+    test(
+        'FST1.25a-light: GIVEN a light default FlexSubTheme.tooltipTheme() '
+        'EXPECT equal to TooltipThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.tooltipTheme(
+          colorScheme: colorScheme,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            textStyle: ThemeData(brightness: Brightness.light)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: colorScheme.surface),
+            decoration: BoxDecoration(
+              color: colorScheme.onSurface,
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
+              border: Border.all(color: Colors.transparent),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.25b-light: GIVEN a light custom FlexSubTheme.tooltipTheme() '
+        'EXPECT equal to TooltipThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.tooltipTheme(
+          colorScheme: colorScheme,
+          foregroundColor: const Color(0xFFB5DEC2),
+          backgroundColor: const Color(0xFF032F11),
+          borderColor: const Color(0x88CCCCCC),
+          borderRadius: 9,
+          backgroundAlpha: 0xDD,
+          textStyle:
+              ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(12),
+          waitDuration: const Duration(seconds: 1),
+          showDuration: const Duration(milliseconds: 2500),
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            textStyle: ThemeData(brightness: Brightness.light)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: const Color(0xFFB5DEC2)),
+            decoration: BoxDecoration(
+              color: const Color(0xDD032F11),
+              borderRadius: const BorderRadius.all(Radius.circular(9)),
+              border: Border.all(color: const Color(0x88CCCCCC)),
+            ),
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(12),
+            waitDuration: const Duration(seconds: 1),
+            showDuration: const Duration(milliseconds: 2500),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FST1.25b-light: GIVEN a light custom FlexSubTheme.tooltipTheme() '
+        'EXPECT equal to TooltipThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.tooltipTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.tertiary,
+          foregroundColor: const Color(0xFFB5DEC2),
+          backgroundColor: const Color(0xFF032F11),
+          borderColor: const Color(0x88CCCCCC),
+          borderRadius: 9,
+          backgroundAlpha: 0xDD,
+          textStyle:
+              ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(12),
+          waitDuration: const Duration(seconds: 1),
+          showDuration: const Duration(milliseconds: 2500),
+        ).toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            textStyle: ThemeData(brightness: Brightness.light)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: colorScheme.onTertiary),
+            decoration: BoxDecoration(
+              color: colorScheme.tertiary.withAlpha(0xDD),
+              borderRadius: const BorderRadius.all(Radius.circular(9)),
+              border: Border.all(color: const Color(0x88CCCCCC)),
+            ),
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(12),
+            waitDuration: const Duration(seconds: 1),
+            showDuration: const Duration(milliseconds: 2500),
+          ).toString(),
         ),
       );
     });

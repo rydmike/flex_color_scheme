@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -9,8 +10,21 @@ class DialogSettings extends StatelessWidget {
   const DialogSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssues = Uri(
+    scheme: 'https',
+    host: 'docs.flexcolorscheme.com',
+    path: 'known_issues',
+  );
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+        .copyWith(color: theme.textTheme.bodySmall!.color);
+    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
     final String dialogRadiusDefaultLabel =
         controller.dialogBorderRadius == null &&
                 controller.defaultRadius == null
@@ -53,8 +67,8 @@ class DialogSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Dialog border radius'),
-          subtitle: Slider.adaptive(
+          title: const Text('Border radius'),
+          subtitle: Slider(
             min: -1,
             max: 50,
             divisions: 51,
@@ -71,7 +85,8 @@ class DialogSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setDialogBorderRadius(value < 0 ? null : value);
+                    controller.setDialogBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -104,6 +119,89 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 20,
+            divisions: 21,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.dialogElevation == null ||
+                        (controller.dialogElevation ?? -1) < 0
+                    ? 'default 6'
+                    : (controller.dialogElevation?.toStringAsFixed(0) ?? '')
+                : useMaterial3
+                    ? 'default 6'
+                    : 'default 24',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.dialogElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDialogElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.dialogElevation == null ||
+                              (controller.dialogElevation ?? -1) < 0
+                          ? 'default 6'
+                          : (controller.dialogElevation?.toStringAsFixed(0) ??
+                              '')
+                      : useMaterial3
+                          ? 'default 6'
+                          : 'default 24',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+        // Material 3 dialog elevation issue info.
+        if (useMaterial3)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    style: spanTextStyle,
+                    text:
+                        "Do to an issue with Material's behavior in M3, there "
+                        'is no elevation or tint on Dialogs when Material 3 is '
+                        'enabled in Flutter 3.3 and earlier versions. You '
+                        'can read more about it in docs ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterIssues,
+                    text: 'known SDK M3 issues',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '. Dialogs usually have a scrim, so the issue is not '
+                        'so visible when they are actually used as dialogs. '
+                        'Fix should arrive in next stable release after '
+                        'Flutter 3.3.',
+                  ),
+                ],
+              ),
+            ),
+          ),
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),

@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -78,7 +77,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
@@ -113,7 +112,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 24,
             divisions: 48,
             label: navBarElevation.toStringAsFixed(1),
@@ -174,7 +173,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Mute unselected items'),
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
@@ -186,7 +185,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavBarMuteUnselected
               : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Show selected labels'),
           value: controller.bottomNavShowSelectedLabels &&
               controller.useSubThemes &&
@@ -195,7 +194,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavShowSelectedLabels
               : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Show unselected labels'),
           value: controller.bottomNavShowUnselectedLabels &&
               controller.useSubThemes &&
@@ -224,15 +223,14 @@ class BottomNavigationBarSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           dense: true,
-          title: const Text('Use Flutter defaults'),
-          subtitle: const Text('Undefined color values will fall back to '
+          title: const Text('Navigators use Flutter defaults'),
+          subtitle: const Text('Undefined values fall back to '
               'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Here, both selected and unselected color have to be null before '
+              'Both selected and unselected color have to be null before '
               'the item colors can fall back to Flutter defaults. '
-              'This setting affects many component themes that implement it. '
-              'It is included on panels where it has an impact. '
+              'This setting affects navigation bars and rail. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&

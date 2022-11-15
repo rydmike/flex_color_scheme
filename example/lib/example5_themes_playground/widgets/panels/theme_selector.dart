@@ -6,8 +6,7 @@ import 'package:flutter/rendering.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import 'input_colors/input_colors_selector.dart';
+import 'theme_colors_settings/input_colors_selector.dart';
 
 // ThemeSelectorHeaderDelegate for our custom SliverPersistentHeader.
 //
@@ -104,8 +103,9 @@ class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
+    final bool isPhone =
+        isNarrow || media.size.height < AppData.phoneHeightBreakpoint;
     final double margins = AppData.responsiveInsets(media.size.width);
     return HeaderCard(
       margin: EdgeInsets.symmetric(horizontal: margins),
@@ -120,50 +120,53 @@ class ThemeSelector extends StatelessWidget {
           ),
           SizedBox(
             height: isPhone ? _kHeightDenseListTile : _kHeightNormaListTile,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, margins, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
-                          ? const EdgeInsets.symmetric(horizontal: 8)
-                          : null,
-                      dense: isPhone,
-                      title: const Text('Use Material3'),
-                      value: controller.useMaterial3,
-                      onChanged: controller.setUseMaterial3,
-                    ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: SwitchListTile(
+                    contentPadding: isPhone
+                        ? const EdgeInsets.symmetric(horizontal: 8)
+                        : null,
+                    dense: isPhone,
+                    title: isNarrow
+                        ? const Text('M3')
+                        : const Text('Use Material3'),
+                    value: controller.useMaterial3,
+                    onChanged: controller.setUseMaterial3,
                   ),
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
-                          ? const EdgeInsetsDirectional.only(start: 16, end: 0)
-                          : null,
-                      title: const Text('Flex\u200BColor\u200BScheme'),
-                      dense: isPhone,
-                      value: controller.useFlexColorScheme,
-                      onChanged: controller.setUseFlexColorScheme,
-                    ),
+                ),
+                Expanded(
+                  child: SwitchListTile(
+                    contentPadding: isPhone
+                        ? const EdgeInsetsDirectional.only(start: 16, end: 0)
+                        : null,
+                    title: isNarrow
+                        ? const Text('FCS')
+                        : const Text('Use Flex\u200BColor\u200BScheme'),
+                    dense: isPhone,
+                    value: controller.useFlexColorScheme,
+                    onChanged: controller.setUseFlexColorScheme,
                   ),
-                  Expanded(
-                    child: SwitchListTileAdaptive(
-                      contentPadding: isPhone
-                          ? const EdgeInsets.symmetric(horizontal: 8)
-                          : null,
-                      dense: isPhone,
-                      title: const Text('Compo\u200Bnent themes'),
-                      value: controller.useSubThemes &&
-                          controller.useFlexColorScheme,
-                      onChanged: controller.useFlexColorScheme
-                          ? controller.setUseSubThemes
-                          : null,
-                    ),
+                ),
+                Expanded(
+                  child: SwitchListTile(
+                    contentPadding: isPhone
+                        ? const EdgeInsets.symmetric(horizontal: 8)
+                        : null,
+                    dense: isPhone,
+                    title: isNarrow
+                        ? const Text('Sub')
+                        : const Text('Use sub themes'),
+                    value: controller.useSubThemes &&
+                        controller.useFlexColorScheme,
+                    onChanged: controller.useFlexColorScheme
+                        ? controller.setUseSubThemes
+                        : null,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

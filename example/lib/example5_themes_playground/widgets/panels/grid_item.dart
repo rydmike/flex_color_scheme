@@ -32,8 +32,8 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.integration_instructions_outlined,
   ),
   GridItem(
-    panelLabel: 'Input Colors',
-    buttonLabel: 'Input\ncolors',
+    panelLabel: 'Theme Colors',
+    buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
   GridItem(
@@ -104,15 +104,21 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.add_circle,
   ),
   GridItem(
-    panelLabel: 'PopupMenu and IconButton',
-    buttonLabel: 'Popup and\nIconButton',
+    panelLabel: 'PopupMenuButton',
+    buttonLabel: 'Popup\nMenuButton',
     icon: Icons.arrow_drop_down_circle_outlined,
+  ),
+  GridItem(
+    panelLabel: 'Tooltip, IconButton, CircleAvatar and DropdownButton ',
+    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    icon: Icons.live_help_outlined,
   ),
   GridItem(
     panelLabel: 'Switch, CheckBox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
   ),
+  GridItem(panelLabel: 'Slider', buttonLabel: 'Slider', icon: Icons.tune),
   GridItem(
     panelLabel: 'ListTile',
     buttonLabel: 'ListTile',
@@ -123,9 +129,14 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.branding_watermark_outlined,
   ),
   GridItem(
-    panelLabel: 'Material, Banner, Sheet and SnackBar',
-    buttonLabel: 'Material\nBanner, Snack',
+    panelLabel: 'BottomSheet, MaterialBanner and SnackBar',
+    buttonLabel: 'BottomSheet\nBanner, Snack',
     icon: Icons.call_to_action_outlined,
+  ),
+  GridItem(
+    panelLabel: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
   ),
   GridItem(
     panelLabel: 'Card',

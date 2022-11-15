@@ -27,14 +27,19 @@ class ResponsiveDialog extends StatelessWidget {
             constraints.maxHeight < _kDialogSize.height) {
           return child;
         } else {
+          final ThemeData theme = Theme.of(context);
           return Center(
             child: SizedBox.fromSize(
               size: _kDialogSize,
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Material(
-                    elevation: Theme.of(context).dialogTheme.elevation ?? 4,
-                    shape: Theme.of(context).dialogTheme.shape ??
+                    elevation: theme.dialogTheme.elevation ??
+                        (theme.useMaterial3 ? 6 : 24),
+                    color: Colors.transparent,
+                    surfaceTintColor: theme.colorScheme.surfaceTint,
+                    shadowColor: theme.colorScheme.shadow,
+                    shape: theme.dialogTheme.shape ??
                         const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(4),
@@ -69,7 +74,6 @@ Future<T?> showResponsiveDialog<T>({
     return showDialog<T>(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black38,
       builder: (BuildContext context) => ResponsiveDialog(
         child: child,
       ),

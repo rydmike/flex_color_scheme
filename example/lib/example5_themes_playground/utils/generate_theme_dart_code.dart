@@ -3,12 +3,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app_color.dart';
+import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.
 ///
-/// The properties are in the order they are in the classes.
+/// The properties are typically in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
   // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
   // theme as a starting point suggestion.
@@ -18,10 +19,10 @@ String generateThemeDartCode(ThemeController controller) {
   // Here is a default Material 2 starting point theme setup for you.
   //
   theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-    typography: Typography.material2018(platform: defaultTargetPlatform),
+    typography: Typography.material2021(platform: defaultTargetPlatform),
   ),
   darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-    typography: Typography.material2018(platform: defaultTargetPlatform),
+    typography: Typography.material2021(platform: defaultTargetPlatform),
   ),
   themeMode: ThemeMode.system,''';
   }
@@ -129,13 +130,18 @@ String generateThemeDartCode(ThemeController controller) {
   final String darkIsTrueBlack = controller.darkIsTrueBlack
       ? '  darkIsTrueBlack: ${controller.darkIsTrueBlack},\n'
       : '';
+  final String swapLegacyOnMaterial3 =
+      controller.swapLegacyColors && controller.useMaterial3
+          ? '  swapLegacyOnMaterial3: ${controller.swapLegacyColors},\n'
+          : '';
   final String swapLightColors = controller.swapLightColors
       ? '  swapColors: ${controller.swapLightColors},\n'
       : '';
   final String swapDarkColors = controller.swapDarkColors
       ? '  swapColors: ${controller.swapDarkColors},\n'
       : '';
-  final String tooltipsMatchBackground = controller.tooltipsMatchBackground
+  final String tooltipsMatchBackground = controller.tooltipsMatchBackground &&
+          controller.tooltipSchemeColor == null
       ? '  tooltipsMatchBackground: ${controller.tooltipsMatchBackground},\n'
       : '';
   final String useM3ErrorColors =
@@ -199,6 +205,22 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetRadius = controller.bottomSheetBorderRadius != null
       ? '    bottomSheetRadius: ${controller.bottomSheetBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String bottomSheetElevation = controller.bottomSheetElevation != null
+      ? '    bottomSheetElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String bottomSheetModalElevation = controller.bottomSheetElevation !=
+          null
+      ? '    bottomSheetModalElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String bottomSheetBackgroundColor = controller.bottomSheetSchemeColor !=
+          null
+      ? '    bottomSheetBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      : '';
+  final String bottomSheetModalBackgroundColor = controller
+              .bottomSheetSchemeColor !=
+          null
+      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      : '';
   //
   // Material button sub themes border radius setup CODE.
   //
@@ -251,32 +273,57 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    outlinedButtonOutlineSchemeColor: ${controller.outlinedButtonOutlineSchemeColor},\n';
+
+  final String outlinedButtonBorderWidth = controller
+              .outlinedButtonBorderWidth !=
+          null
+      ? '    outlinedButtonBorderWidth: ${controller.outlinedButtonBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String outlinedButtonPressedBorderWidth = controller
+              .outlinedButtonPressedBorderWidth !=
+          null
+      ? '    outlinedButtonPressedBorderWidth: ${controller.outlinedButtonPressedBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
               SchemeColor.primary ||
           controller.toggleButtonsSchemeColor == null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
+  final String toggleButtonsBorderWidth = controller.toggleButtonsBorderWidth !=
+          null
+      ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   //
-  // Toggleable sub themes setup CODE.
+  // Switches, CheckBox and radio sub themes setup CODE.
   //
-  final String switchSchemeColor =
-      controller.switchSchemeColor == SchemeColor.secondary ||
-              controller.switchSchemeColor == null
-          ? ''
-          : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
-  final String checkboxSchemeColor =
-      controller.checkboxSchemeColor == SchemeColor.secondary ||
-              controller.checkboxSchemeColor == null
-          ? ''
-          : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
-  final String radioSchemeColor =
-      controller.radioSchemeColor == SchemeColor.secondary ||
-              controller.radioSchemeColor == null
-          ? ''
-          : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
+  final String switchSchemeColor = controller.switchSchemeColor == null
+      ? ''
+      : '    switchSchemeColor: ${controller.switchSchemeColor},\n';
+  final String switchThumbSchemeColor = controller.switchThumbSchemeColor ==
+          null
+      ? ''
+      : '    switchThumbSchemeColor: ${controller.switchThumbSchemeColor},\n';
+  final String checkboxSchemeColor = controller.checkboxSchemeColor == null
+      ? ''
+      : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
+  final String radioSchemeColor = controller.radioSchemeColor == null
+      ? ''
+      : '    radioSchemeColor: ${controller.radioSchemeColor},\n';
   final String unselectedIsColored = controller.unselectedToggleIsColored
       ? '    unselectedToggleIsColored: ${controller.unselectedToggleIsColored},\n'
       : '';
+  //
+  // Slider sub themes setup CODE.
+  //
+  final String sliderBaseSchemeColor = controller.sliderBaseSchemeColor == null
+      ? ''
+      : '    sliderBaseSchemeColor: ${controller.sliderBaseSchemeColor},\n';
+  final String sliderValueTinted = controller.sliderValueTinted == false
+      ? ''
+      : '    sliderValueTinted: ${controller.sliderValueTinted},\n';
+  final String sliderTrackHeight = controller.sliderTrackHeight == null
+      ? ''
+      : '    sliderTrackHeight: ${controller.sliderTrackHeight},\n';
   //
   // Input decorator setup CODE.
   //
@@ -313,14 +360,29 @@ String generateThemeDartCode(ThemeController controller) {
           !controller.inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
+  final String inputDecoratorBorderWidth = controller
+              .inputDecoratorBorderWidth !=
+          null
+      ? '    inputDecoratorBorderWidth: ${controller.inputDecoratorBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String inputDecoratorFocusedBorderWidth = controller
+              .inputDecoratorFocusedBorderWidth !=
+          null
+      ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   //
-  // Fab and chip, snack, card, dialog, popup setup CODE
+  // Fab and chip, snack, card, and popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
       ? '    fabUseShape: ${controller.fabUseShape},\n'
       : '';
+  final String fabAlwaysCircular =
+      controller.fabUseShape && controller.fabAlwaysCircular
+          ? '    fabAlwaysCircular: ${controller.fabAlwaysCircular},\n'
+          : '';
   final String fabBorderRadius = controller.fabBorderRadius != null &&
-          controller.fabUseShape
+          controller.fabUseShape &&
+          !controller.fabAlwaysCircular
       ? '    fabRadius: ${controller.fabBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String fabSchemeColor =
@@ -334,18 +396,50 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipSchemeColor = controller.chipSchemeColor != null
       ? '    chipSchemeColor: ${controller.chipSchemeColor},\n'
       : '';
+  final String chipSelectedSchemeColor = controller.chipSelectedSchemeColor !=
+          null
+      ? '    chipSelectedSchemeColor: ${controller.chipSelectedSchemeColor},\n'
+      : '';
   final String chipBorderRadius = controller.chipBorderRadius != null
       ? '    chipRadius: ${controller.chipBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '    cardRadius: ${controller.cardBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String popupMenuOpacity = controller.popupMenuOpacity != 1
-      ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
-      : '';
   final String popupMenuBorderRadius = controller.popupMenuBorderRadius != null
       ? '    popupMenuRadius: ${controller.popupMenuBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String popupMenuElevation = controller.popupMenuElevation != null
+      ? '    popupMenuElevation: ${controller.popupMenuElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String popupMenuSchemeColor = controller.popupMenuSchemeColor != null
+      ? '    popupMenuSchemeColor: ${controller.popupMenuSchemeColor},\n'
+      : '';
+  final String popupMenuOpacity = controller.popupMenuOpacity != 1
+      ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
+      : '';
+  //
+  // Tooltip setup CODE
+  //
+  final String tooltipRadius = controller.tooltipRadius != null
+      ? '    tooltipRadius: ${controller.tooltipRadius},\n'
+      : '';
+  final String tooltipWaitDuration = controller.tooltipWaitDuration != null
+      ? '    tooltipWaitDuration: Duration(milliseconds: ${controller.tooltipWaitDuration}),\n'
+      : '';
+  final String tooltipShowDuration = controller.tooltipShowDuration != null
+      ? '    tooltipShowDuration: Duration(milliseconds: ${controller.tooltipShowDuration}),\n'
+      : '';
+  final String tooltipSchemeColor = controller.tooltipSchemeColor != null
+      ? '    tooltipSchemeColor: ${controller.tooltipSchemeColor},\n'
+      : '';
+  final String tooltipOpacity =
+      controller.tooltipOpacity == 1.0 || controller.tooltipSchemeColor == null
+          ? ''
+          : '    tooltipOpacity: ${controller.tooltipOpacity},\n';
+  //
+  // Dialog, AppBar and TabBar setup CODE
+  //
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor !=
           null
@@ -356,6 +450,9 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String timePickerDialogRadius = controller.dialogBorderRadius != null
       ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String dialogElevation = controller.dialogElevation != null
+      ? '    dialogElevation: ${controller.dialogElevation!.toStringAsFixed(1)},\n'
       : '';
   final String appBarBackgroundSchemeColorLight = controller
               .appBarBackgroundSchemeColorLight !=
@@ -582,36 +679,49 @@ String generateThemeDartCode(ThemeController controller) {
           : '';
   //
   // Compose the sub themes from above fragments.
-  //
+  // Order attempts to be in same order as they appear in the large
+  // FlexSubThemesData class.
   String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelLight'
           '$blendLightOnColors'
+          '$useFlutterDefaults'
+          //
           '$blendLightTextTheme'
           '$useTextTheme'
-          '$defRadius'
+          //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$bottomSheetRadius'
-          '$textButtonBorderRadius'
-          '$elevatedButtonBorderRadius'
-          '$outlinedButtonBorderRadius'
-          '$toggleButtonsBorderRadius'
+          '$defRadius'
           //
+          '$textButtonBorderRadius'
           '$textButtonSchemeColor'
+          //
+          '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
           '$elevatedButtonSecondarySchemeColor'
+          //
+          '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          '$outlinedButtonBorderWidth'
+          '$outlinedButtonPressedBorderWidth'
+          //
+          '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
+          '$switchThumbSchemeColor'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
+          //
+          '$sliderBaseSchemeColor'
+          '$sliderValueTinted'
+          '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
@@ -619,24 +729,48 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
+          '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'
+          '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
-          '$snackSchemeColor'
-          '$chipSchemeColor'
-          '$chipBorderRadius'
-          '$cardBorderRadius'
-
           //
-          '$popupMenuOpacity'
+          '$chipSchemeColor'
+          '$chipSelectedSchemeColor'
+          '$chipBorderRadius'
+          //
+          '$cardBorderRadius'
+          //
           '$popupMenuBorderRadius'
+          '$popupMenuElevation'
+          '$popupMenuSchemeColor'
+          '$popupMenuOpacity'
+          //
+          '$tooltipRadius'
+          '$tooltipWaitDuration'
+          '$tooltipShowDuration'
+          '$tooltipSchemeColor'
+          '$tooltipOpacity'
+          //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          '$dialogElevation'
+          //
+          '$snackSchemeColor'
+          //
           '$appBarBackgroundSchemeColorLight'
+          //
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
+          //
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'
@@ -681,33 +815,45 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
-          '$useFlutterDefaults'
           '$interactionEffects'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
+          '$useFlutterDefaults'
+          //
           '$blendDarkTextTheme'
           '$useTextTheme'
+          //
           '$defRadius'
+          //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$bottomSheetRadius'
           '$textButtonBorderRadius'
-          '$elevatedButtonBorderRadius'
-          '$outlinedButtonBorderRadius'
-          '$toggleButtonsBorderRadius'
-          //
           '$textButtonSchemeColor'
+          //
+          '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
           '$elevatedButtonSecondarySchemeColor'
+          //
+          '$outlinedButtonBorderRadius'
           '$outlinedButtonSchemeColor'
           '$outlinedButtonOutlineSchemeColor'
+          '$outlinedButtonBorderWidth'
+          '$outlinedButtonPressedBorderWidth'
+          //
+          '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
+          '$switchThumbSchemeColor'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
+          //
+          '$sliderBaseSchemeColor'
+          '$sliderValueTinted'
+          '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
@@ -715,23 +861,48 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
+          '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'
+          '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
-          '$snackSchemeColor'
+          //
           '$chipSchemeColor'
+          '$chipSelectedSchemeColor'
           '$chipBorderRadius'
+          //
           '$cardBorderRadius'
           //
-          '$popupMenuOpacity'
           '$popupMenuBorderRadius'
+          '$popupMenuElevation'
+          '$popupMenuSchemeColor'
+          '$popupMenuOpacity'
+          //
+          '$tooltipRadius'
+          '$tooltipWaitDuration'
+          '$tooltipShowDuration'
+          '$tooltipSchemeColor'
+          '$tooltipOpacity'
+          //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
           '$timePickerDialogRadius'
+          '$dialogElevation'
+          //
+          '$snackSchemeColor'
+          //
           '$appBarBackgroundSchemeColorDark'
+          //
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'
+          //
+          '$bottomSheetBackgroundColor'
+          '$bottomSheetModalBackgroundColor'
+          '$bottomSheetRadius'
+          '$bottomSheetElevation'
+          '$bottomSheetModalElevation'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'
@@ -887,7 +1058,13 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = 'theme: FlexThemeData.light(\n'
+  final String code = '// This theme was made for FlexColorScheme version '
+      '${AppData.packageVersion}. Make sure\n'
+      '// you use same or higher version, but still same major version. If\n'
+      '// you use a lower version, some properties may not be supported. In\n'
+      '// that case you can also remove them after copying the theme to '
+      'your app.\n'
+      'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
       '$surfaceModeLight'
@@ -907,6 +1084,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$flexTonesLight'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
+      '$swapLegacyOnMaterial3'
       '  // To use the playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
@@ -930,7 +1108,8 @@ String generateThemeDartCode(ThemeController controller) {
       '$flexTonesDark'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
-      '  // To use the playground font, add GoogleFonts package and uncomment\n'
+      '$swapLegacyOnMaterial3'
+      '  // To use the Playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       '// If you do not have a themeMode switch, uncomment this line\n'

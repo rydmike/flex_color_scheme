@@ -2663,5 +2663,114 @@ void main() {
       expect(tDAppBarNullM3.appBarTheme.backgroundColor,
           equals(tDAppBarNullM3.colorScheme.surface));
     });
+
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    final ThemeData tLSwapLegacy = FlexThemeData.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    );
+    test(
+        'FCS7.100 GIVEN a FlexThemeData.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme materialBaseline '
+        'EXPECT no legacy swap - materialBaseline does not swap', () {
+      expect(
+        tLSwapLegacy.colorScheme.secondary,
+        equals(FlexColor.materialBaselineLightSecondary),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.secondaryContainer,
+        equals(FlexColor.materialBaselineLightSecondaryContainer),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.tertiary,
+        equals(FlexColor.materialBaselineLightTertiary),
+      );
+      expect(
+        tLSwapLegacy.colorScheme.tertiaryContainer,
+        equals(FlexColor.materialBaselineLightTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    final ThemeData tLSwapLegacy2 = FlexThemeData.light(
+      scheme: FlexScheme.sanJuanBlue,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    );
+    test(
+        'FCS7.100 GIVEN a FlexThemeData.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme sanJuanBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      expect(
+        tLSwapLegacy2.colorScheme.secondary,
+        equals(FlexColor.sanJuanBlueLightTertiary),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.secondaryContainer,
+        equals(FlexColor.sanJuanBlueLightTertiaryContainer),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.tertiary,
+        equals(FlexColor.sanJuanBlueLightSecondary),
+      );
+      expect(
+        tLSwapLegacy2.colorScheme.tertiaryContainer,
+        equals(FlexColor.sanJuanBlueLightSecondaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    final ThemeData tDSwapLegacy = FlexThemeData.dark(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    );
+    test(
+        'FCS7.100 GIVEN a FlexThemeData.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme materialBaseline '
+        'EXPECT no legacy swap - materialBaseline does not swap', () {
+      expect(
+        tDSwapLegacy.colorScheme.secondary,
+        equals(FlexColor.materialBaselineDarkSecondary),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.secondaryContainer,
+        equals(FlexColor.materialBaselineDarkSecondaryContainer),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.tertiary,
+        equals(FlexColor.materialBaselineDarkTertiary),
+      );
+      expect(
+        tDSwapLegacy.colorScheme.tertiaryContainer,
+        equals(FlexColor.materialBaselineDarkTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    final ThemeData tDSwapLegacy2 = FlexThemeData.dark(
+      scheme: FlexScheme.sanJuanBlue,
+      useMaterial3: true,
+      swapLegacyOnMaterial3: true,
+    );
+    test(
+        'FCS7.100 GIVEN a FlexThemeData.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme sanJuanBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      expect(
+        tDSwapLegacy2.colorScheme.secondary,
+        equals(FlexColor.sanJuanBlueDarkTertiary),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.secondaryContainer,
+        equals(FlexColor.sanJuanBlueDarkTertiaryContainer),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.tertiary,
+        equals(FlexColor.sanJuanBlueDarkSecondary),
+      );
+      expect(
+        tDSwapLegacy2.colorScheme.tertiaryContainer,
+        equals(FlexColor.sanJuanBlueDarkSecondaryContainer),
+      );
+    });
   });
 }

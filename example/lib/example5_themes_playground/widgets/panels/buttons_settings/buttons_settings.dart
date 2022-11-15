@@ -15,6 +15,9 @@ class ButtonsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null &&
                 controller.defaultRadius == null
@@ -44,6 +47,24 @@ class ButtonsSettings extends StatelessWidget {
             : controller.textButtonBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+    final String thinBorderDefaultLabel =
+        controller.outlinedButtonBorderWidth == null &&
+                controller.thinBorderWidth == null
+            ? 'default 1'
+            : controller.outlinedButtonBorderWidth == null &&
+                    controller.thinBorderWidth != null
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
+                : '';
+    final String thickBorderDefaultLabel =
+        controller.outlinedButtonPressedBorderWidth == null &&
+                controller.thickBorderWidth == null
+            ? useMaterial3
+                ? 'default 1'
+                : 'default 2'
+            : controller.outlinedButtonPressedBorderWidth == null &&
+                    controller.thickBorderWidth != null
+                ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
                 : '';
 
     return Column(
@@ -93,7 +114,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('ElevatedButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -113,7 +134,7 @@ class ButtonsSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setElevatedButtonBorderRadius(
-                        value < 0 ? null : value);
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -124,7 +145,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -137,9 +158,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -187,7 +206,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('OutlinedButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -207,7 +226,7 @@ class ButtonsSettings extends StatelessWidget {
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setOutlinedButtonBorderRadius(
-                        value < 0 ? null : value);
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -218,7 +237,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -231,9 +250,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -241,31 +258,27 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         ListTile(
+          title: const Text('Border width'),
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Normal border width'),
-          subtitle: const Text('Setting shared with unfocused TextField and '
-              'ToggleButtons'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
-            min: -0.5,
+          subtitle: Slider(
+            min: 0,
             max: 5,
-            divisions: 11,
+            divisions: 10,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth == null ||
-                        (controller.thinBorderWidth ?? -0.5) < 0
-                    ? controller.useMaterial3
-                        ? 'default 1'
-                        : 'default 1.5'
-                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                ? controller.outlinedButtonBorderWidth == null ||
+                        (controller.outlinedButtonBorderWidth ?? 0) <= 0
+                    ? thinBorderDefaultLabel
+                    : (controller.outlinedButtonBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
                 : 'default 1',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth ?? -0.5
-                : -0.5,
+                ? controller.outlinedButtonBorderWidth ?? 0
+                : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThinBorderWidth(value < 0 ? null : value);
+                    controller.setOutlinedButtonBorderWidth(
+                        value <= 0 ? null : value);
                   }
                 : null,
           ),
@@ -276,21 +289,18 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thinBorderWidth == null ||
-                              (controller.thinBorderWidth ?? -0.5) < 0
-                          ? controller.useMaterial3
-                              ? 'default 1'
-                              : 'default 1.5'
-                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                      ? controller.outlinedButtonBorderWidth == null ||
+                              (controller.outlinedButtonBorderWidth ?? 0) < 0
+                          ? thinBorderDefaultLabel
+                          : (controller.outlinedButtonBorderWidth
+                                  ?.toStringAsFixed(1) ??
                               '')
                       : 'default 1',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -300,30 +310,25 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Pressed border width'),
-          subtitle: const Text('Setting shared with focused TextField'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider.adaptive(
-            min: -0.5,
+          subtitle: Slider(
+            min: 0,
             max: 5,
-            divisions: 11,
+            divisions: 10,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth == null ||
-                        (controller.thickBorderWidth ?? -0.5) < 0
-                    ? controller.useMaterial3
-                        ? 'default 1'
-                        : 'default 2'
-                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
-                : controller.useMaterial3
-                    ? 'default 1'
-                    : 'default 2',
+                ? controller.outlinedButtonPressedBorderWidth == null ||
+                        (controller.outlinedButtonPressedBorderWidth ?? 0) <= 0
+                    ? thickBorderDefaultLabel
+                    : (controller.outlinedButtonPressedBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
+                : 'default 2',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth ?? -0.5
-                : -0.5,
+                ? controller.outlinedButtonPressedBorderWidth ?? 0
+                : 0,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setThickBorderWidth(value < 0 ? null : value);
+                    controller.setOutlinedButtonPressedBorderWidth(
+                        value <= 0 ? null : value);
                   }
                 : null,
           ),
@@ -334,23 +339,20 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'WIDTH',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thickBorderWidth == null ||
-                              (controller.thickBorderWidth ?? -0.5) < 0
-                          ? controller.useMaterial3
-                              ? 'default 1'
-                              : 'default 2'
-                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                      ? controller.outlinedButtonPressedBorderWidth == null ||
+                              (controller.outlinedButtonPressedBorderWidth ??
+                                      0) <=
+                                  0
+                          ? thickBorderDefaultLabel
+                          : (controller.outlinedButtonPressedBorderWidth
+                                  ?.toStringAsFixed(1) ??
                               '')
-                      : controller.useMaterial3
-                          ? 'default 1'
-                          : 'default 2',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                      : 'default 2',
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -379,7 +381,7 @@ class ButtonsSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('TextButton border radius'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 40,
             divisions: 41,
@@ -397,8 +399,8 @@ class ButtonsSettings extends StatelessWidget {
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller
-                        .setTextButtonBorderRadius(value < 0 ? null : value);
+                    controller.setTextButtonBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -409,7 +411,7 @@ class ButtonsSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -422,9 +424,7 @@ class ButtonsSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default stadium'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

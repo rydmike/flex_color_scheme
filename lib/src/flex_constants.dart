@@ -59,9 +59,9 @@ const double kInputDecoratorM3Radius = 4;
 
 /// Default border radius on top edge of bottom sheet.
 ///
-/// Not specified in M3 guide, using same as Drawer, as this would fit with
-/// same design since this is like a drawer, but from the bottom.
-const double kBottomSheetBorderRadius = kDrawerRadius;
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/bottom-sheets/specs
+const double kBottomSheetBorderRadius = 28;
 
 /// Default border radius on dialogs.
 ///
@@ -83,28 +83,86 @@ const double kCardRadius = 12;
 const double kMenuRadius = 4;
 
 /// Default elevation on [Card] widgets.
+///
+/// Based on https://m3.material.io/components/cards/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// In M3 Elevated Card is level 1, 1 dp, the other Cards
+/// Filled, Tonal and Outlined are Level 0 (0 dp). Since there in
+/// Flutter is no constructor for the different types of Card
+/// we default them all to 0 dp.
 const double kCardElevation = 0;
 
 /// Default for elevation of [ElevatedButton].
+///
+/// Based on https://m3.material.io/components/buttons/specs
+/// and https://m3.material.io/styles/elevation/tokens
 const double kElevatedButtonElevation = 1;
 
-/// Default elevation of [PopupMenuButton].
+/// Default elevation of [PopupMenuButton] in Material 3.
+///
+/// Based on https://m3.material.io/components/menus/specs
+/// and https://m3.material.io/styles/elevation/tokens
 const double kPopupMenuElevation = 3;
+
+/// Default elevation of [PopupMenuButton] in Material 2 mode.
+///
+/// Opinionated value, M2 spec is 8.
+const double kPopupMenuElevationFCS = 6;
 
 /// Default elevation of [Dialog].
 ///
 /// Based on https://m3.material.io/components/dialogs/specs
+/// and https://m3.material.io/styles/elevation/tokens
 /// and Flutter M3 implementation.
 const double kDialogElevation = 6;
 
-/// Default for elevation of none modal [BottomSheet].
-const double kBottomSheetElevation = 4;
+/// Default elevation of none modal Material 3 [BottomSheet].
+///
+/// Based https://m3.material.io/components/bottom-sheets/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// M2 spec did not specify a value Nov 9,. 2022. FCS uses 1,
+/// and uses 2 for modal version to make them different.
+const double kBottomSheetElevation = 1;
 
-/// Default for elevation of modal [BottomSheet].
-const double kBottomSheetModalElevation = 8;
+/// Default elevation of modal Material 3 [BottomSheet].
+///
+/// Based https://m3.material.io/components/bottom-sheets/specs
+/// and https://m3.material.io/styles/elevation/tokens
+///
+/// Spec says 1, but FCS uses 2, and uses 1 for none modal
+/// version.
+const double kBottomSheetModalElevation = 2;
+
+/// Default elevation of none modal Material 2 [BottomSheet].
+///
+/// This is FCS default when opting in on opinionated component sub-themes
+/// but not opting in on using Material 3.
+const double kBottomSheetElevationM2 = 4;
+
+/// Default for elevation of modal Material 2 [BottomSheet].
+///
+/// This is FCS default when opting in on opinionated component sub-themes
+/// but not opting in on using Material 3.
+const double kBottomSheetModalElevationM2 = 8;
 
 /// Default for elevation of [BottomNavigationBar].
 const double kBottomNavigationBarElevation = 0;
+
+/// Default for elevation of [NavigationRail].
+///
+/// M3 based https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens.
+const double kNavigationRailElevation = 0;
+
+/// Default for elevation of [SnackBar].
+///
+/// M3 uses https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens.
+///
+/// FCS thinks it is too high and uses opinionated style 4.
+const double kSnackBarElevation = 4;
 
 /// Default height of [NavigationBar].
 ///
@@ -120,12 +178,6 @@ const double kNavigationBarHeight = 62;
 ///
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
-
-/// Default for elevation of [NavigationRail].
-const double kNavigationRailElevation = 0;
-
-/// Default for elevation of [SnackBar].
-const double kSnackBarElevation = 4;
 
 /// Default minimum button size.
 ///
@@ -157,7 +209,7 @@ const double kThickBorderWidth = 2;
 /// Applies to disabled [OutlinedButton] border and to un-selected state of
 /// [InputDecorator] when using [OutlineInputBorder], and to all states of
 /// [ToggleButtons].
-const double kThinBorderWidth = 1.5;
+const double kThinBorderWidth = 1;
 
 // The values below for all the effects opacities and alpha blends are tricky.
 // Getting them just right is magic and dark arts plus some pixie dust.
@@ -235,13 +287,13 @@ const int kDisabledAlphaBlend = 0x66;
 /// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
 /// [ToggleButtons].
 ///
-/// Value: 0xE5 = 229 = 90%
+/// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
 
 /// Alpha value, for transparency on selected onPrimary color on
 /// [ToggleButtons].
 ///
-/// Value: 0xCC = 204 = 80%
+/// Value: 0xE5 = 229 = 90%
 const int kSelectedAlpha = 0xE5;
 
 /// White alpha blend, for alternative less saturated primary color.

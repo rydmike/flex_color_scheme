@@ -51,8 +51,8 @@ void main() {
     test('FCT kInputDecoratorM3Radius is 4', () {
       expect(kInputDecoratorM3Radius, 4);
     });
-    test('FCT kBottomSheetBorderRadius is 16', () {
-      expect(kBottomSheetBorderRadius, 16);
+    test('FCT kBottomSheetBorderRadius is 28', () {
+      expect(kBottomSheetBorderRadius, 28);
     });
     test('FCT kDialogRadius is 28', () {
       expect(kDialogRadius, 28);
@@ -72,14 +72,23 @@ void main() {
     test('FCT kPopupMenuElevation is 3', () {
       expect(kPopupMenuElevation, 3);
     });
+    test('FCT kPopupMenuElevationFCS is 6', () {
+      expect(kPopupMenuElevationFCS, 6);
+    });
     test('FCT kDialogElevation is 6', () {
       expect(kDialogElevation, 6);
     });
-    test('FCT kBottomSheetElevation is 4', () {
-      expect(kBottomSheetElevation, 4);
+    test('FCT kBottomSheetElevation is 1', () {
+      expect(kBottomSheetElevation, 1);
     });
-    test('FCT kBottomSheetModalElevation is 8', () {
-      expect(kBottomSheetModalElevation, 8);
+    test('FCT kBottomSheetModalElevation is 2', () {
+      expect(kBottomSheetModalElevation, 2);
+    });
+    test('FCT kBottomSheetElevationM2 is 4', () {
+      expect(kBottomSheetElevationM2, 4);
+    });
+    test('FCT kBottomSheetModalElevationM2 is 8', () {
+      expect(kBottomSheetModalElevationM2, 8);
     });
     test('FCT kBottomNavigationBarElevation is 0', () {
       expect(kBottomNavigationBarElevation, 0);
@@ -105,8 +114,8 @@ void main() {
     test('FCT kThickBorderWidth is 2', () {
       expect(kThickBorderWidth, 2);
     });
-    test('FCT kThinBorderWidth is 1.5', () {
-      expect(kThinBorderWidth, 1.5);
+    test('FCT kThinBorderWidth is 1', () {
+      expect(kThinBorderWidth, 1);
     });
     test('FCT kFillColorAlphaLight is 0x0D', () {
       expect(kFillColorAlphaLight, 0x0D);

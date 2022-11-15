@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 
 class ListTileSettings extends StatelessWidget {
@@ -23,7 +22,7 @@ class ListTileSettings extends StatelessWidget {
             'switches, checkboxes and radio buttons they use.',
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Unselected toggle color'),
           subtitle: const Text('ON: Use theme color   OFF: default grey'),
           value: controller.unselectedToggleIsColored &&

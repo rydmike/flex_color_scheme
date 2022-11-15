@@ -2748,6 +2748,7 @@ class FlexColor {
       tertiaryContainer: materialLightTertiaryContainer,
       appBarColor: materialLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: materialDarkPrimary,
@@ -2758,6 +2759,7 @@ class FlexColor {
       tertiaryContainer: materialDarkTertiaryContainer,
       appBarColor: materialDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -2774,6 +2776,7 @@ class FlexColor {
       tertiaryContainer: materialLightTertiaryContainerHc,
       appBarColor: materialLightTertiaryHc,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: materialDarkPrimaryHc,
@@ -2784,6 +2787,7 @@ class FlexColor {
       tertiaryContainer: materialDarkTertiaryContainerHc,
       appBarColor: materialDarkTertiaryHc,
       error: materialDarkErrorHc,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -2800,6 +2804,7 @@ class FlexColor {
       tertiaryContainer: blueLightTertiaryContainer,
       appBarColor: blueLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: blueDarkPrimary,
@@ -2810,6 +2815,7 @@ class FlexColor {
       tertiaryContainer: blueDarkTertiaryContainer,
       appBarColor: blueDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -2852,6 +2858,7 @@ class FlexColor {
       tertiaryContainer: hippieBlueLightTertiaryContainer,
       appBarColor: hippieBlueLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: hippieBlueDarkPrimary,
@@ -2862,6 +2869,7 @@ class FlexColor {
       tertiaryContainer: hippieBlueDarkTertiaryContainer,
       appBarColor: hippieBlueDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -2982,6 +2990,7 @@ class FlexColor {
       tertiaryContainer: mandyRedLightTertiaryContainer,
       appBarColor: mandyRedLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: mandyRedDarkPrimary,
@@ -2992,6 +3001,7 @@ class FlexColor {
       tertiaryContainer: mandyRedDarkTertiaryContainer,
       appBarColor: mandyRedDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3008,6 +3018,7 @@ class FlexColor {
       tertiaryContainer: redLightTertiaryContainer,
       appBarColor: redLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: redDarkPrimary,
@@ -3018,6 +3029,7 @@ class FlexColor {
       tertiaryContainer: redDarkTertiaryContainer,
       appBarColor: redDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3034,6 +3046,7 @@ class FlexColor {
       tertiaryContainer: redWineLightTertiaryContainer,
       appBarColor: redWineLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: redWineDarkPrimary,
@@ -3044,6 +3057,7 @@ class FlexColor {
       tertiaryContainer: redWineDarkTertiaryContainer,
       appBarColor: redWineDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3060,6 +3074,7 @@ class FlexColor {
       tertiaryContainer: purpleBrownLightTertiaryContainer,
       appBarColor: purpleBrownLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: purpleBrownDarkPrimary,
@@ -3070,6 +3085,7 @@ class FlexColor {
       tertiaryContainer: purpleBrownDarkTertiaryContainer,
       appBarColor: purpleBrownDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3086,6 +3102,7 @@ class FlexColor {
       tertiaryContainer: greenLightTertiaryContainer,
       appBarColor: greenLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: greenDarkPrimary,
@@ -3096,6 +3113,7 @@ class FlexColor {
       tertiaryContainer: greenDarkTertiaryContainer,
       appBarColor: greenDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3112,6 +3130,7 @@ class FlexColor {
       tertiaryContainer: moneyLightTertiaryContainer,
       appBarColor: moneyLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: moneyDarkPrimary,
@@ -3122,6 +3141,7 @@ class FlexColor {
       tertiaryContainer: moneyDarkTertiaryContainer,
       appBarColor: moneyDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3138,6 +3158,7 @@ class FlexColor {
       tertiaryContainer: jungleLightTertiaryContainer,
       appBarColor: jungleLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: jungleDarkPrimary,
@@ -3148,6 +3169,7 @@ class FlexColor {
       tertiaryContainer: jungleDarkTertiaryContainer,
       appBarColor: jungleDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3164,6 +3186,7 @@ class FlexColor {
       tertiaryContainer: greyLawLightTertiaryContainer,
       appBarColor: greyLawLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: greyLawDarkPrimary,
@@ -3174,6 +3197,7 @@ class FlexColor {
       tertiaryContainer: greyLawDarkTertiaryContainer,
       appBarColor: greyLawDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3190,6 +3214,7 @@ class FlexColor {
       tertiaryContainer: wasabiLightTertiaryContainer,
       appBarColor: wasabiLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: wasabiDarkPrimary,
@@ -3200,6 +3225,7 @@ class FlexColor {
       tertiaryContainer: wasabiDarkTertiaryContainer,
       appBarColor: wasabiDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3216,6 +3242,7 @@ class FlexColor {
       tertiaryContainer: goldLightTertiaryContainer,
       appBarColor: goldLightTertiary,
       error: materialLightErrorHc,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: goldDarkPrimary,
@@ -3226,6 +3253,7 @@ class FlexColor {
       tertiaryContainer: goldDarkTertiaryContainer,
       appBarColor: goldDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3242,6 +3270,7 @@ class FlexColor {
       tertiaryContainer: mangoLightTertiaryContainer,
       appBarColor: mangoLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: mangoDarkPrimary,
@@ -3252,6 +3281,7 @@ class FlexColor {
       tertiaryContainer: mangoDarkTertiaryContainer,
       appBarColor: mangoDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3323,6 +3353,7 @@ class FlexColor {
       tertiaryContainer: deepPurpleLightTertiaryContainer,
       appBarColor: deepPurpleLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: deepPurpleDarkPrimary,
@@ -3333,6 +3364,7 @@ class FlexColor {
       tertiaryContainer: deepPurpleDarkTertiaryContainer,
       appBarColor: deepPurpleDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3350,6 +3382,7 @@ class FlexColor {
       tertiaryContainer: ebonyClayLightTertiaryContainer,
       appBarColor: ebonyClayLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: ebonyClayDarkPrimary,
@@ -3360,6 +3393,7 @@ class FlexColor {
       tertiaryContainer: ebonyClayDarkTertiaryContainer,
       appBarColor: ebonyClayDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3402,6 +3436,7 @@ class FlexColor {
       tertiaryContainer: sharkLightTertiaryContainer,
       appBarColor: sharkLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: sharkDarkPrimary,
@@ -3412,6 +3447,7 @@ class FlexColor {
       tertiaryContainer: sharkDarkTertiaryContainer,
       appBarColor: sharkDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3480,6 +3516,7 @@ class FlexColor {
       tertiaryContainer: bahamaBlueLightTertiaryContainer,
       appBarColor: bahamaBlueLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: bahamaBlueDarkPrimary,
@@ -3490,6 +3527,7 @@ class FlexColor {
       tertiaryContainer: bahamaBlueDarkTertiaryContainer,
       appBarColor: bahamaBlueDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3506,6 +3544,7 @@ class FlexColor {
       tertiaryContainer: mallardGreenLightTertiaryContainer,
       appBarColor: mallardGreenLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: mallardGreenDarkPrimary,
@@ -3516,6 +3555,7 @@ class FlexColor {
       tertiaryContainer: mallardGreenDarkTertiaryContainer,
       appBarColor: mallardGreenDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3532,6 +3572,7 @@ class FlexColor {
       tertiaryContainer: espressoLightTertiaryContainer,
       appBarColor: espressoLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: espressoDarkPrimary,
@@ -3542,6 +3583,7 @@ class FlexColor {
       tertiaryContainer: espressoDarkTertiaryContainer,
       appBarColor: espressoDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3558,6 +3600,7 @@ class FlexColor {
       tertiaryContainer: outerSpaceLightTertiaryContainer,
       appBarColor: outerSpaceLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: outerSpaceDarkPrimary,
@@ -3568,6 +3611,7 @@ class FlexColor {
       tertiaryContainer: outerSpaceDarkTertiaryContainer,
       appBarColor: outerSpaceDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3584,6 +3628,7 @@ class FlexColor {
       tertiaryContainer: blueWhaleLightTertiaryContainer,
       appBarColor: blueWhaleLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: blueWhaleDarkPrimary,
@@ -3594,6 +3639,7 @@ class FlexColor {
       tertiaryContainer: blueWhaleDarkTertiaryContainer,
       appBarColor: blueWhaleDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3610,6 +3656,7 @@ class FlexColor {
       tertiaryContainer: sanJuanBlueLightTertiaryContainer,
       appBarColor: sanJuanBlueLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: sanJuanBlueDarkPrimary,
@@ -3620,6 +3667,7 @@ class FlexColor {
       tertiaryContainer: sanJuanBlueDarkTertiaryContainer,
       appBarColor: sanJuanBlueDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 
@@ -3662,6 +3710,7 @@ class FlexColor {
       tertiaryContainer: blumineBlueLightTertiaryContainer,
       appBarColor: blumineBlueLightTertiary,
       error: materialLightError,
+      swapOnMaterial3: true,
     ),
     dark: FlexSchemeColor(
       primary: blumineBlueDarkPrimary,
@@ -3672,6 +3721,7 @@ class FlexColor {
       tertiaryContainer: blumineBlueDarkTertiaryContainer,
       appBarColor: blumineBlueDarkTertiary,
       error: materialDarkError,
+      swapOnMaterial3: true,
     ),
   );
 

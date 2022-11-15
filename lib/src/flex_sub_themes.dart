@@ -169,10 +169,12 @@ enum SchemeColor {
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
+/// * [SliderThemeData] for [Slider] via [sliderTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
+/// * [TooltipThemeData] for [Tooltip] via [tooltipTheme].
 ///
 /// In [ToggleButtons] hover, press, selected and focus states are not
 /// an exact match for the main buttons. It does not have as flexible styling
@@ -629,13 +631,13 @@ class FlexSubThemes {
     /// Flutter SDK background color available when backgroundSchemeColor is
     /// null.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
 
     /// [BottomNavigationBar] container elevation.
     ///
-    /// Defaults to [kBottomNavigationBarElevation] = 0.
-    final double elevation = kBottomNavigationBarElevation,
+    /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+    final double? elevation,
 
     /// Whether the labels are shown for the selected
     /// [BottomNavigationBarItem].
@@ -650,6 +652,12 @@ class FlexSubThemes {
     /// With [BottomNavigationBarType.fixed] the items have fixed width.
     /// With [BottomNavigationBarType.shifting], the location and size of the
     /// items animate and labels fade in when they are tapped.
+    ///
+    /// If undefined, defaults to Flutter SDK default. Where
+    /// If type is provided, it is returned. Next, if the bottom navigation bar
+    /// theme provides a type, it is used. Finally, the default behavior will be
+    /// [BottomNavigationBarType.fixed] for 3 or fewer items, and
+    /// [BottomNavigationBarType.shifting] is used for 4+ items.
     final BottomNavigationBarType? type,
 
     /// The arrangement of the bar's [items] when the enclosing
@@ -731,7 +739,6 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        // baseSchemeColor == null &&
         unselectedLabelSchemeColor == null &&
         useFlutterDefaults;
 
@@ -746,7 +753,6 @@ class FlexSubThemes {
     // Get text color, defaults to primary in light and to secondary in dark.
     final Color labelColor = schemeColor(
         selectedLabelSchemeColor ??
-            // baseSchemeColor ??
             (colorScheme.brightness == Brightness.dark && useDefaultTextStyle
                 ? SchemeColor.secondary
                 : SchemeColor.primary),
@@ -786,7 +792,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
       backgroundColor: backgroundSchemeColor == null
@@ -794,7 +800,7 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
-      elevation: elevation,
+      elevation: elevation ?? kBottomNavigationBarElevation,
       unselectedIconTheme: useDefaultIconTheme
           ? null
           : IconThemeData(
@@ -847,10 +853,31 @@ class FlexSubThemes {
   /// An opinionated [BottomSheetThemeData] with custom top corner
   /// radius.
   ///
-  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 16,
+  /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 28,
   /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
   /// [kBottomSheetModalElevation] = 8.
   static BottomSheetThemeData bottomSheetTheme({
+    /// Default value for [BottomSheet.backgroundColor].
+    ///
+    /// If null, defaults to [Material]'s default.
+    final Color? backgroundColor,
+
+    /// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
+    /// presented as a modal bottom sheet.
+    ///
+    /// If null, defaults to [Material]'s default.
+    final Color? modalBackgroundColor,
+
+    /// The none modal bottom sheet elevation.
+    ///
+    /// If null, defaults to [kBottomSheetElevation] = 1.
+    final double? elevation,
+
+    /// The modal bottom sheet elevation.
+    ///
+    /// If null, defaults to [kBottomSheetModalElevation] = 2.
+    final double? modalElevation,
+
     /// The corner radius of the top corners.
     ///
     /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
@@ -862,29 +889,31 @@ class FlexSubThemes {
     /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
-    /// The bottom sheet elevation defaults to [kBottomSheetElevation] = 4.
-    final double elevation = kBottomSheetElevation,
-
-    /// The bottom sheet elevation defaults to [kBottomSheetModalElevation] = 8.
-    final double modalElevation = kBottomSheetModalElevation,
-
     /// The clipBehavior of the bottom sheet theme, defaults to
     /// [Clip.antiAlias] for smoother clipping when using rounded corners.
     ///
     /// This property is not available in [FlexSubThemeData] but you can use
     /// it if you otherwise use this as theme helper.
     final Clip clipBehavior = Clip.antiAlias,
+
+    /// Constrains the size of the [BottomSheet].
+    ///
+    /// If null, the bottom sheet's size will be unconstrained.
+    final BoxConstraints? constraints,
   }) =>
       BottomSheetThemeData(
-        clipBehavior: clipBehavior,
-        elevation: elevation,
-        modalElevation: modalElevation,
+        backgroundColor: backgroundColor,
+        modalBackgroundColor: modalBackgroundColor,
+        elevation: elevation ?? kBottomSheetElevation,
+        modalElevation: modalElevation ?? kBottomSheetModalElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
             topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
           ),
         ),
+        clipBehavior: clipBehavior,
+        constraints: constraints,
       );
 
   /// An opinionated [CardTheme] with custom corner radius and elevation.
@@ -902,8 +931,10 @@ class FlexSubThemes {
     /// https://m3.material.io/components/cards/specs
     final double? radius,
 
-    /// Card elevation defaults to [kCardElevation] = 0.
-    final double elevation = kCardElevation,
+    /// Card elevation.
+    ///
+    /// If not defined, defaults to [kCardElevation] = 0dp.
+    final double? elevation,
 
     /// The clipBehavior of the card theme, defaults to
     /// [Clip.antiAlias] for smooth clipping when using rounded corners.
@@ -914,7 +945,7 @@ class FlexSubThemes {
   }) =>
       CardTheme(
         clipBehavior: clipBehavior,
-        elevation: elevation,
+        elevation: elevation ?? kCardElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius ?? kCardRadius),
@@ -993,26 +1024,27 @@ class FlexSubThemes {
   }
 
   /// An opinionated [ChipThemeData] theme with custom border radius and a
-  /// custom theme that partially mimics the M3 style and works well with
+  /// custom theme that partially mimics the M3 style in M2 and works well with
   /// FlexColorScheme surface blends.
   ///
   /// The border radius defaults to 8dp [kChipRadius], new M3 default.
   /// https://m3.material.io/components/chips/specs
-  ///
-  /// This is inspired by M3 Chip design and applies it using the limited
-  /// theming features for old M2 chips in Flutter, to some extent. It is
-  /// tricky to get this theme to play nicely, but this setup is pretty ok
-  /// and fits well with the FlexColorScheme color blended themes.
-  ///
-  /// It is possible that there will be new Chips entirely for Material 3 in
-  /// Flutter. This theme brings the M2 Chips look closer to M3 design, but
-  /// cannot reach it all the way.
   static ChipThemeData chipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Defines which [Theme] based [ColorScheme] based color the selected Chips
+    /// use as their selected state color.
+    ///
+    /// The color scheme contrast pair color is used for text and icons, on the
+    /// [selectedSchemeColor]
+    ///
+    /// If not defined and [useMaterial3] is true, defaults to
+    /// [SchemeColor.secondaryContainer].
+    final SchemeColor? selectedSchemeColor,
+
     /// Defines which [Theme] based [ColorScheme] based color the Chips
-    /// use as their base color.
+    /// use as their color tint base color.
     ///
     /// The selected color is only used as base for the [Chip] colors, it also
     /// uses alpha blend and opacity to create the effective Chip colors using
@@ -1045,59 +1077,125 @@ class FlexSubThemes {
     /// If false widgets will use more opinionated FlexColorScheme defaults.
     final bool? useMaterial3,
   }) {
-    // Flag for not using any defined values, but instead falling back to
-    // effective M3 theme defaults.
+    // Function used to increase icon color for selections resulting in poor
+    // icon color.
+    Color fixContrast(Color color) {
+      if (colorScheme.brightness == Brightness.light) {
+        if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
+          return color.darken(25);
+        } else {
+          return color;
+        }
+      } else {
+        if (ThemeData.estimateBrightnessForColor(color) == Brightness.dark) {
+          return color.lighten(25);
+        } else {
+          return color;
+        }
+      }
+    }
+
+    // Used to toggle between different defaults from M2 and M3.
+    final bool useM3 = useMaterial3 ?? false;
+    // Flag for not using any defined color values in M3 mode, but instead
+    // falling back to M3 theme defaults, when using Material 3.
+    // We do this when no Scheme colors are selected to get the exact M3
+    // theme default. It is not possible due to SDK lChip theming issues
+    // and limitations to recreate the exact M3 Chip themes with any other
+    // theme colors than the default built-in ones.
+    // TODO(rydmike): Chip https://github.com/flutter/flutter/issues/115364
     final bool useM3Defaults =
-        baseSchemeColor == null && (useMaterial3 ?? false);
+        useM3 && baseSchemeColor == null && selectedSchemeColor == null;
 
-    // Get base color, defaults to primary.
-    final Color usedBaseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    // Get blend color, defaults to surface for M3 and to primary for M2.
+    final SchemeColor fallbackBlend =
+        useM3 ? SchemeColor.surface : SchemeColor.primary;
+    final Color blendColor =
+        schemeColor(baseSchemeColor ?? fallbackBlend, colorScheme);
 
-    // Foreground color for all Chips except disabled Chip.
-    final Color foreground = usedBaseColor.blendAlpha(
-        colorScheme.onSurface, kChipForegroundAlphaBlend);
-    // For selected InputChip & ChoiceChip.
-    final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
-        colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+    // Selected color
+    final SchemeColor fallbackSelected =
+        useM3 ? SchemeColor.secondaryContainer : SchemeColor.surface;
+    final Color selectedColor = useM3 || selectedSchemeColor != null
+        ? schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme)
+        : blendColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+    // The onSelected onColor
+    final Color onSelectedColor =
+        schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
+
+    // Icon color.
+    final Color iconColor;
+    if (blendColor == colorScheme.surface ||
+        blendColor == colorScheme.background) {
+      iconColor = selectedColor;
+    } else {
+      iconColor = blendColor;
+    }
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveLabelStyle =
-        labelStyle.copyWith(color: foreground);
+        labelStyle.copyWith(color: onSelectedColor);
 
     return ChipThemeData(
-      brightness: useM3Defaults
-          ? null
-          : ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      padding: (useMaterial3 ?? false) ? null : const EdgeInsets.all(4),
-      // For all Chip types, except disabled, InputChip & ChoiceChip.
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip], [RawChip], but NOT to ANY selected or disabled Chip.
       backgroundColor: useM3Defaults
           ? null
-          : usedBaseColor.blendAlpha(
+          : blendColor.blendAlpha(
               colorScheme.surface, kChipBackgroundAlphaBlend),
-      selectedColor:
-          useM3Defaults ? null : selectedBackgroundColor, // Selected InputChip
-      secondarySelectedColor:
-          useM3Defaults ? null : selectedBackgroundColor, // Selected ChoiceChip
-      checkmarkColor: useM3Defaults ? null : foreground,
-      deleteIconColor: useM3Defaults ? null : usedBaseColor,
-      // Same formula as on Elevated button and ToggleButtons. The Chip has
-      // a built in scrim for disabled state, making it look a bit different,
-      // but it is pretty close.
+
+      // Applies to [Chip], [InputChip], [RawChip].
+      deleteIconColor: useM3Defaults ? null : colorScheme.onSurface,
+
+      // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
+      // Same formula as on FCS Elevated button and ToggleButtons.
       disabledColor: useM3Defaults
           ? null
-          : usedBaseColor
+          : blendColor
               .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
               .withAlpha(kDisabledBackgroundAlpha),
-      // Same label style on selected and not selected chips, their different
-      // background style make them stand out enough.
-      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
-      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
-      shape: (useMaterial3 ?? false) && radius == null
+
+      // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
+      selectedColor: useM3Defaults ? null : selectedColor,
+
+      // Applies to [ChoiceChip.selectedColor], if set it overrides the
+      // [selectedColor], for ChoiceChips.
+      secondarySelectedColor: useM3Defaults ? null : selectedColor,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      surfaceTintColor: useM3Defaults ? null : colorScheme.surfaceTint,
+
+      // Applies to [FilterChip], [InputChip], [RawChip].
+      checkmarkColor: useM3Defaults ? null : onSelectedColor,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      padding: useM3 ? null : const EdgeInsets.all(4),
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      shape: useM3 && radius == null
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(radius ?? kChipRadius),
               ),
+            ),
+
+      // Applies to [ActionChip], [Chip], [FilterChip], [InputChip], [RawChip].
+      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
+
+      // Applies to [ChoiceChip.labelStyle],
+      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      iconTheme: useM3Defaults
+          ? null
+          : IconThemeData(
+              color: fixContrast(iconColor),
+              size: 18.0,
             ),
     );
   }
@@ -1145,8 +1243,10 @@ class FlexSubThemes {
     /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
-    /// Dialog elevation defaults to 6 [kDialogElevation].
-    final double? elevation = kDialogElevation,
+    /// Dialog elevation.
+    ///
+    /// If not defined, defaults to [kDialogElevation] = 6.
+    final double? elevation,
 
     /// Padding around the set of [actions] at the bottom of the dialog.
     ///
@@ -1168,7 +1268,7 @@ class FlexSubThemes {
             : schemeColor(backgroundSchemeColor, colorScheme);
 
     return DialogTheme(
-      elevation: elevation,
+      elevation: elevation ?? kDialogElevation,
       backgroundColor: background,
       actionsPadding: actionsPadding ??
           const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
@@ -1242,9 +1342,10 @@ class FlexSubThemes {
     /// Material 3.
     ///
     /// If a value is passed in, the [ElevatedButton.styleFrom] constructor used
-    /// for M2 style elevation is used with the passed in value. The
-    /// constructor has its own built on logic for the different elevation
-    /// values for its MaterialStateProperty.
+    /// for M2 style elevation is used with the passed in value in M2 mode. In
+    /// M3 the given elevation value is used as baseline, with M3 state
+    /// modifiers, this means disabled is fat, zero elevation, and pressed is
+    /// elevation + 2, other states are at given elevation.
     final double? elevation,
 
     /// Padding for the button theme.
@@ -1265,6 +1366,12 @@ class FlexSubThemes {
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
     /// [useMaterial3] is true.
     final Size? minButtonSize,
+
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
 
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
@@ -1299,6 +1406,7 @@ class FlexSubThemes {
             ),
           ), //buttonShape,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -1370,14 +1478,34 @@ class FlexSubThemes {
         return null;
       });
 
+      final MaterialStateProperty<double?>? elevationM3 = elevation == null
+          ? null
+          : MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return 0.0;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return elevation + 2.0;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return elevation;
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return elevation;
+              }
+              return elevation;
+            });
+
       return ElevatedButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          elevation: ButtonStyleButton.allOrNull<double>(elevation),
+          // TODO(rydmike): Add test for M3 elevation results.
+          elevation: elevationM3,
           shape: radius == null
               ? null
               : ButtonStyleButton.allOrNull<OutlinedBorder>(
@@ -1439,13 +1567,34 @@ class FlexSubThemes {
     /// https://m3.material.io/components/floating-action-button/specs
     final double? radius,
 
-    /// Set to false, to not apply Shape theming to the FAB.
+    /// Set to false to not apply any Shape theming to the FAB.
     ///
     /// If set to false, the Shape property will be kept null, regardless
-    /// of what border radius was given. This results in that the FAB
-    /// using fab theme data, will use and implement its SDK default
-    /// shape behavior.
+    /// of what border radius was given, also via `alwaysCircular` property.
+    /// This results in that the FAB theme data, will use and implement its
+    /// Flutter SDK default shape behavior. Other properties are still used.
+    ///
+    /// Default to true.
     final bool useShape = true,
+
+    /// Set to true to always use circular and stadium shapes on the FAB.
+    ///
+    /// If set to true, it overrides `radius` and shape is always circular
+    /// or stadium shaped.
+    ///
+    /// Implementation is via `StadiumBorder` to be able
+    /// to support the extended FAB as well. It looks same with Stadium on
+    /// the circular cases as the actual Circular FAB using ones in M2, but
+    /// implementation is different since we cannot use different themed
+    /// shapes for different types of FAB, like the hard coded default
+    /// none themed behavior does. See issue
+    /// [#107946](https://github.com/flutter/flutter/issues/107946) for
+    /// more information.
+    ///
+    /// Has no impact if `useShape` is false.
+    ///
+    /// Defaults to false.
+    final bool alwaysCircular = false,
   }) {
     final Color? background = colorScheme == null
         ? null
@@ -1461,11 +1610,13 @@ class FlexSubThemes {
       foregroundColor: foreground,
       backgroundColor: background,
       shape: useShape
-          ? RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(radius ?? kFabRadius),
-              ),
-            )
+          ? alwaysCircular
+              ? const StadiumBorder()
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius ?? kFabRadius),
+                  ),
+                )
           : null,
     );
   }
@@ -1505,8 +1656,8 @@ class FlexSubThemes {
 
     /// Selects input border type.
     ///
-    /// Defaults to [FlexInputBorderType.outline].
-    final FlexInputBorderType borderType = FlexInputBorderType.outline,
+    /// If undefined, defaults to [FlexInputBorderType.outline].
+    final FlexInputBorderType? borderType,
 
     /// If true the decoration's container is filled with [fillColor].
     ///
@@ -1535,8 +1686,7 @@ class FlexSubThemes {
 
     /// The border width when the input is unselected or disabled.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
-    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    /// If null, defaults to [kThinBorderWidth] = 1.
     final double? unfocusedBorderWidth,
 
     /// Horizontal padding on either side of the border's
@@ -1602,11 +1752,10 @@ class FlexSubThemes {
         (useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
 
     // Default outline widths.
-    final double unfocusedWidth =
-        unfocusedBorderWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
     final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
-    switch (borderType) {
+    switch (borderType ?? FlexInputBorderType.outline) {
       case FlexInputBorderType.outline:
         return InputDecorationTheme(
           floatingLabelStyle:
@@ -1953,8 +2102,16 @@ class FlexSubThemes {
     /// Flutter SDK background color available when backgroundSchemeColor is
     /// null.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
+
+    /// [NavigationBar] elevation.
+    ///
+    /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
+    /// which if:
+    ///  - If [useMaterial] if true, is 3 dp.
+    ///  - If [useMaterial] if false, is 0 dp.
+    final double? elevation,
 
     /// Height of the container for the Material 3 [NavigationBar].
     ///
@@ -1969,7 +2126,7 @@ class FlexSubThemes {
     /// This is used to determine the behavior of NavigationBar's destinations.
     ///
     /// If null, theme behavior defaults to
-    /// `NavigationDestinationLabelBehavior.alwaysShow`
+    /// `NavigationDestinationLabelBehavior.alwaysShow` via Flutter SDK default.
     final NavigationDestinationLabelBehavior? labelBehavior,
 
     /// The alpha value used on selection color of the selection indicator on
@@ -2105,7 +2262,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to primary.
     final Color indicatorColor =
@@ -2114,6 +2271,7 @@ class FlexSubThemes {
 
     return NavigationBarThemeData(
       height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
+      elevation: elevation,
       backgroundColor: backgroundSchemeColor == null
           ? useFlutterDefaults || useMaterial3
               ? null
@@ -2359,13 +2517,13 @@ class FlexSubThemes {
 
     /// NavigationRail background opacity.
     ///
-    /// Defaults to 1, fully opaque.
-    final double opacity = 1,
+    /// If undefined, defaults to 1, fully opaque.
+    final double? opacity,
 
     /// [NavigationRail] elevation.
     ///
-    /// Defaults to [kNavigationRailElevation] = 0.
-    final double elevation = kNavigationRailElevation,
+    /// If undefined, defaults to [kNavigationRailElevation] = 0.
+    final double? elevation,
 
     /// Defines the layout and behavior of the labels for the
     /// un-extended [NavigationRail].
@@ -2556,7 +2714,7 @@ class FlexSubThemes {
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
             backgroundSchemeColor ?? SchemeColor.background, colorScheme)
-        .withOpacity(opacity);
+        .withOpacity(opacity ?? 1.0);
 
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(
@@ -2565,7 +2723,7 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
-      elevation: elevation,
+      elevation: elevation ?? kNavigationRailElevation,
       unselectedLabelTextStyle: useDefaultTextStyle
           ? null
           : textStyle.copyWith(
@@ -2656,8 +2814,7 @@ class FlexSubThemes {
 
     /// The outline thickness when the button is not selected and not pressed.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
-    /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
+    /// If null, defaults to [kThinBorderWidth] = 1.0.
     final double? outlineWidth,
 
     /// Padding for the button theme.
@@ -2678,6 +2835,12 @@ class FlexSubThemes {
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
     /// [useMaterial3] is true.
     final Size? minButtonSize,
+
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
 
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
@@ -2701,8 +2864,7 @@ class FlexSubThemes {
         : schemeColor(outlineSchemeColor, colorScheme);
 
     // Default outline widths.
-    final double normalWidth =
-        outlineWidth ?? (useMaterial3 ? 1 : kThinBorderWidth);
+    final double normalWidth = outlineWidth ?? kThinBorderWidth;
     final double pressedWidth =
         pressedOutlineWidth ?? (useMaterial3 ? 1 : kThickBorderWidth);
 
@@ -2718,6 +2880,7 @@ class FlexSubThemes {
           ), //buttonShape,
           padding: padding,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -2826,6 +2989,7 @@ class FlexSubThemes {
 
       return OutlinedButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor:
               ButtonStyleButton.allOrNull<Color>(Colors.transparent),
@@ -2876,10 +3040,20 @@ class FlexSubThemes {
     /// Defaults to [kMenuRadius] = 4, M3 specification.
     final double? radius,
 
-    /// Popup menu elevation defaults to 3, making it more subtle.
-    final double elevation = kPopupMenuElevation,
+    /// Popup menu elevation.
+    ///
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to 8 dp.
+    /// - true  : defaults to 3 dp.
+    /// Usually they are the same.
+    final double? elevation,
 
     /// The background color of the popup menu.
+    ///
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to theme.cardColor.
+    /// - true  : defaults to theme.colorScheme.surface.
+    /// Usually they are the same.
     final Color? color,
   }) =>
       PopupMenuThemeData(
@@ -2950,12 +3124,63 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Consider a SliderTheme with value popup using primary blend.
-  //
-  // /// An opinionated [SliderThemeData].
-  // static SliderThemeData sliderTheme() {
-  //   return const SliderThemeData();
-  // }
+  /// An opinionated [SliderThemeData] theme.
+  ///
+  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  static SliderThemeData sliderTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the Slider.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The height of the [Slider] track.
+    ///
+    /// If not defined, defaults to 4 via Flutter SDK defaults.
+    final double? trackHeight,
+
+    /// The color given to the [valueIndicatorShape] to draw itself with.
+    ///
+    /// If undefined, defaults to using Flutter SDK's logic for the color.
+    final Color? valueIndicatorColor,
+
+    /// The text style for the text on the value indicator.
+    ///
+    /// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
+    final TextStyle? valueIndicatorTextStyle,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    final Color onBaseColor =
+        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    return SliderThemeData(
+      trackHeight: trackHeight,
+      activeTrackColor: baseColor,
+      inactiveTrackColor: baseColor.withOpacity(0.24),
+      disabledActiveTrackColor: colorScheme.onSurface.withOpacity(0.32),
+      disabledInactiveTrackColor: colorScheme.onSurface.withOpacity(0.12),
+      activeTickMarkColor: onBaseColor.withOpacity(0.54),
+      inactiveTickMarkColor: baseColor.withOpacity(0.54),
+      disabledActiveTickMarkColor: onBaseColor.withOpacity(0.12),
+      disabledInactiveTickMarkColor: colorScheme.onSurface.withOpacity(0.12),
+      thumbColor: baseColor,
+      disabledThumbColor: Color.alphaBlend(
+          colorScheme.onSurface.withOpacity(.38), colorScheme.surface),
+      overlayColor: baseColor.withOpacity(0.12),
+      valueIndicatorColor: valueIndicatorColor,
+      valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
+      valueIndicatorTextStyle: valueIndicatorTextStyle,
+    );
+  }
 
   // TODO(rydmike): SnackBar needs two different corner radius versions.
   // The fixed one should not have a shape, but the floating one should.
@@ -2975,8 +3200,10 @@ class FlexSubThemes {
   ///
   /// The [elevation] defaults to [kSnackBarElevation] (4).
   static SnackBarThemeData snackBarTheme({
-    /// SnackBar elevation defaults to [kSnackBarElevation] 4.
-    final double? elevation = kSnackBarElevation,
+    /// SnackBar elevation
+    ///
+    /// If undefined defaults to [kSnackBarElevation] = 4.
+    final double? elevation,
 
     /// The background color of the themed SnackBar. Typically one of inverse
     /// brightness compared to theme's surface color brightness.
@@ -3042,7 +3269,7 @@ class FlexSubThemes {
         : null;
 
     return SnackBarThemeData(
-      elevation: elevation,
+      elevation: elevation ?? kSnackBarElevation,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
     );
@@ -3067,24 +3294,69 @@ class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used. This is more in-line
     /// with M3 design, but applied to M2 switch. The M3 color design
     /// specification for the secondary color, is a poor choice for toggles and
-    /// switches, primary color works better.
+    /// switches, if such colors are used in M2 mode, primary color works
+    /// better.
     final SchemeColor? baseSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the thumb
+    /// color for the switch.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used in M2 mode.
+    /// This is more in-line
+    /// with M3 design, but applied to M2 switch. The M3 color design
+    /// specification for the secondary color, is a poor choice for toggles and
+    /// switches, if such colors are used in M2 mode, primary color works
+    /// better.
+    ///
+    /// If not defined, defaults to:
+    ///
+    /// - If useMaterial3 is false [baseSchemeColor].
+    /// - If useMaterial3 is true [SchemeColor.primaryContainer].
+    final SchemeColor? thumbSchemeColor,
 
     /// The splash radius of the circular Material ink response.
     ///
-    /// Defaults to kRadialReactionRadius = 20.
+    /// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
     final double? splashRadius,
 
     /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
     ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
+    /// If false, it is grey like in Flutter SDK.
+    ///
+    /// Defaults to false.
+    final bool unselectedIsColored = false,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    final bool useMaterial3 = false,
   }) {
-    // Get selected color, defaults to primary.
+    // Get colorScheme brightness.
+    final bool isLight = colorScheme.brightness == Brightness.light;
+    // Get selected base color, and its pair, defaults to primary and onPrimary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
-    final bool isLight = colorScheme.brightness == Brightness.light;
 
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
+    // final Color onBaseColor =
+    //     schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Get selected thumb color, and its pair, defaults to
+    // M2: primary and onPrimary.
+    // M3: primaryContainer and onPrimaryContainer
+    final Color thumbColor = schemeColor(
+        thumbSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
+        colorScheme);
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
+    // final Color thumbColor = schemeColor(
+    //     thumbSchemeColor ??
+    //         (useMaterial3
+    //             ? SchemeColor.primaryContainer
+    //             : baseSchemeColor ?? SchemeColor.primary),
+    //     colorScheme);
+
+    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
+    // if (!useMaterial3) {
     return SwitchThemeData(
       splashRadius: splashRadius,
       thumbColor: MaterialStateProperty.resolveWith<Color>(
@@ -3093,7 +3365,7 @@ class FlexSubThemes {
             return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
           }
           if (states.contains(MaterialState.selected)) {
-            return baseColor;
+            return thumbColor;
           }
           return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
         },
@@ -3104,11 +3376,11 @@ class FlexSubThemes {
             return isLight ? Colors.black12 : Colors.white10;
           }
           if (states.contains(MaterialState.selected)) {
-            return baseColor.withAlpha(0x70);
+            return baseColor.withAlpha(isLight ? 0x70 : 0x80);
           }
           // Opinionated color on track when not selected
           if (unselectedIsColored) {
-            return baseColor.withAlpha(0x70);
+            return baseColor.withAlpha(isLight ? 0x50 : 0x65);
           }
           // This is SDK default.
           return isLight ? const Color(0x52000000) : Colors.white30;
@@ -3116,6 +3388,107 @@ class FlexSubThemes {
       ),
     );
   }
+  // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
+  //   else {
+  //     return SwitchThemeData(
+  //       thumbColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.disabled)) {
+  //           if (states.contains(MaterialState.selected)) {
+  //             return colorScheme.surface.withOpacity(1.0);
+  //           }
+  //           return colorScheme.onSurface.withOpacity(0.38);
+  //         }
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return thumbColor;
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return thumbColor;
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return thumbColor;
+  //           }
+  //           return onBaseColor;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return colorScheme.onSurfaceVariant;
+  //         }
+  //         return colorScheme.outline;
+  //       }),
+  //       trackColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.disabled)) {
+  //           if (states.contains(MaterialState.selected)) {
+  //             return colorScheme.onSurface.withOpacity(0.12);
+  //           }
+  //           return colorScheme.surfaceVariant.withOpacity(0.12);
+  //         }
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return baseColor;
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return baseColor;
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return baseColor;
+  //           }
+  //           return baseColor;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return unselectedIsColored
+  //               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //               : colorScheme.surfaceVariant;
+  //         }
+  //         return unselectedIsColored
+  //             ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
+  //             : colorScheme.surfaceVariant;
+  //       }),
+  //       overlayColor:
+  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //         if (states.contains(MaterialState.selected)) {
+  //           if (states.contains(MaterialState.pressed)) {
+  //             return baseColor.withOpacity(0.12);
+  //           }
+  //           if (states.contains(MaterialState.hovered)) {
+  //             return baseColor.withOpacity(0.08);
+  //           }
+  //           if (states.contains(MaterialState.focused)) {
+  //             return baseColor.withOpacity(0.12);
+  //           }
+  //           return null;
+  //         }
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return colorScheme.onSurface.withOpacity(0.12);
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return colorScheme.onSurface.withOpacity(0.08);
+  //         }
+  //         if (states.contains(MaterialState.focused)) {
+  //           return colorScheme.onSurface.withOpacity(0.12);
+  //         }
+  //         return null;
+  //       }),
+  //     );
+  //   }
+  // }
 
   /// An opinionated [TextButtonThemeData] theme.
   ///
@@ -3163,6 +3536,12 @@ class FlexSubThemes {
     /// [useMaterial3] is true.
     final Size? minButtonSize,
 
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -3189,6 +3568,7 @@ class FlexSubThemes {
           ), // buttonShape,
           padding: padding,
         ).copyWith(
+          textStyle: textStyle,
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
@@ -3243,6 +3623,7 @@ class FlexSubThemes {
 
       return TextButtonThemeData(
         style: ButtonStyle(
+          textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor:
               ButtonStyleButton.allOrNull<Color>(Colors.transparent),
@@ -3368,6 +3749,7 @@ class FlexSubThemes {
   }
 
   // TODO(rydmike): Add actual M3 ToggleButtons style when it arrives in SDK.
+  //   May never arrive there is mention of a potentially new replacing widget.
   /// An opinionated [ToggleButtonsThemeData] theme.
   ///
   /// The adjustable button corner [radius] defaults to 20 this is new
@@ -3407,7 +3789,7 @@ class FlexSubThemes {
     /// In this design it uses the same default as outline thickness for
     /// selected outline button and input decorator.
     ///
-    /// If null, defaults to [kThinBorderWidth] = 1.5, when
+    /// If null, defaults to [kThinBorderWidth] = 1.0, when
     /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
     final double? borderWidth,
 
@@ -3497,6 +3879,119 @@ class FlexSubThemes {
             effectiveWidth * 2 +
             usedVisualDensity.baseSizeAdjustment.dy,
       ),
+    );
+  }
+
+  /// An opinionated [TooltipThemeData]
+  static TooltipThemeData tooltipTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// dialog background color.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, defaults to [SchemeColor.onSurface].
+    ///
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Background color of the tooltip.
+    ///
+    /// If backgroundSchemeColor is defined, it will be used instead.
+    final Color? backgroundColor,
+
+    /// Foreground color of the tooltip.
+    ///
+    /// If backgroundSchemeColor is defined, its Scheme color pair will be
+    /// used instead.
+    final Color? foregroundColor,
+
+    /// Alpha value for the background color.
+    ///
+    /// If not defined, default to 0xFF, fully opaque.
+    final int? backgroundAlpha,
+
+    /// The border radius of the tooltip.
+    ///
+    /// If not defined, defaults to 4.
+    final double? borderRadius,
+
+    /// The color of the tooltip border.
+    ///
+    /// If not defined, defaults to fully transparent.
+    final Color? borderColor,
+
+    /// The tooltip text style.
+    ///
+    /// If not defined defaults to bodyMedium, with effective foregroundColor.
+    final TextStyle? textStyle,
+
+    /// The amount of space by which to inset the tooltip's [child].
+    ///
+    /// On mobile,
+    ///   defaults to 16.0 logical pixels horizontally and 4.0 vertically.
+    /// On desktop,
+    ///   defaults to 8.0 logical pixels horizontally and 4.0 vertically.
+    final EdgeInsetsGeometry? padding,
+
+    /// If provided, the amount of empty space to surround the [Tooltip].
+    ///
+    /// Defines the tooltip's outer [Container.margin]. By default, a
+    /// long tooltip will span the width of its window. If long enough,
+    /// a tooltip might also span the window's height. This property allows
+    /// one to define how much space the tooltip must be inset from the edges
+    /// of their display window.
+    ///
+    /// If this property is null, the default margin is
+    /// 0.0 logical pixels on all sides.
+    final EdgeInsetsGeometry? margin,
+
+    /// The length of time that a pointer must hover over a tooltip's widget
+    /// before the tooltip will be shown.
+    ///
+    /// Defaults to 0 milliseconds (tooltips are shown immediately upon hover).
+    final Duration? waitDuration,
+
+    /// The length of time that the tooltip will be shown after a long press is
+    /// released (if triggerMode is [TooltipTriggerMode.longPress]) or a tap is
+    /// released (if triggerMode is [TooltipTriggerMode.tap]) or mouse pointer
+    /// exits the widget.
+    ///
+    /// Defaults to 1.5 seconds for long press and tap released or 0.1 seconds
+    /// for mouse pointer exits the widget.
+    final Duration? showDuration,
+  }) {
+    final Color background =
+        (backgroundSchemeColor == null && backgroundColor != null)
+            ? backgroundColor
+            : schemeColor(
+                backgroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
+
+    final Color foreground =
+        (backgroundSchemeColor == null && foregroundColor != null)
+            ? foregroundColor
+            : schemeColorPair(
+                backgroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
+
+    final TextStyle tooltipTextStyle = textStyle == null
+        ? ThemeData(brightness: Brightness.light)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: foreground)
+        : textStyle.copyWith(color: foreground);
+
+    return TooltipThemeData(
+      padding: padding,
+      margin: margin,
+      textStyle: tooltipTextStyle,
+      decoration: BoxDecoration(
+        color: background.withAlpha(backgroundAlpha ?? 0xFF),
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 4)),
+        border: Border.all(color: borderColor ?? Colors.transparent),
+      ),
+      waitDuration: waitDuration,
+      showDuration: showDuration,
     );
   }
 }

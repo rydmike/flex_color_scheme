@@ -2,30 +2,25 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_bar_label_behavior_buttons.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
 class NavigationBarSettings extends StatelessWidget {
   const NavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  String explainLabelStyle(
-      final NavigationDestinationLabelBehavior labelBehavior) {
-    switch (labelBehavior) {
-      case NavigationDestinationLabelBehavior.alwaysHide:
-        return 'Items have no labels';
-      case NavigationDestinationLabelBehavior.onlyShowSelected:
-        return 'Only selected item has a label';
-      case NavigationDestinationLabelBehavior.alwaysShow:
-        return 'All items have labels';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Logic for default elevation label.
+    final String elevationDefaultLabel =
+        controller.navigationBarElevation == null
+            ? controller.useMaterial3
+                ? 'default 3'
+                : 'default 0'
+            : 'global ${controller.navigationBarElevation!.toStringAsFixed(1)}';
+
     final ThemeData theme = Theme.of(context);
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
@@ -142,7 +137,7 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
@@ -174,9 +169,72 @@ class NavigationBarSettings extends StatelessWidget {
           ),
         ),
         ListTile(
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              !controller.useFlutterDefaults,
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 24,
+            divisions: 25,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationBarElevation == null ||
+                        (controller.navigationBarElevation ?? -1) < 0
+                    ? elevationDefaultLabel
+                    : (controller.navigationBarElevation?.toStringAsFixed(1) ??
+                        '')
+                : controller.useMaterial3
+                    ? 'default 3'
+                    : 'default 0',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationBarElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? (double value) {
+                    controller.setNavigationBarElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          !controller.useFlutterDefaults
+                      ? controller.navigationBarElevation == null ||
+                              (controller.navigationBarElevation ?? -1) < 0
+                          ? elevationDefaultLabel
+                          : (controller.navigationBarElevation
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : controller.useMaterial3
+                          ? 'default 3'
+                          : 'default 0',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Height'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: 54,
             max: 100,
             divisions: 46,
@@ -193,7 +251,8 @@ class NavigationBarSettings extends StatelessWidget {
                 : 54,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setNavBarHeight(value < 55 ? null : value);
+                    controller.setNavBarHeight(
+                        value < 55 ? null : value.roundToDouble());
                   }
                 : null,
           ),
@@ -242,7 +301,7 @@ class NavigationBarSettings extends StatelessWidget {
         ListTile(
           enabled: navBarHighlightOpacityEnabled,
           title: const Text('Selection indicator opacity'),
-          subtitle: Slider.adaptive(
+          subtitle: Slider(
             min: -1,
             max: 100,
             divisions: 101,
@@ -323,7 +382,7 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           title: const Text('Mute unselected items'),
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
@@ -332,23 +391,7 @@ class NavigationBarSettings extends StatelessWidget {
           onChanged:
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Label behavior'),
-          subtitle: Text(explainLabelStyle(
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.navBarLabelBehavior
-                  : NavigationDestinationLabelBehavior.alwaysShow)),
-          trailing: NavigationBarLabelBehaviorButtons(
-            labelBehavior:
-                controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.navBarLabelBehavior
-                    : NavigationDestinationLabelBehavior.alwaysShow,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setNavBarLabelBehavior
-                : null,
-          ),
-        ),
+        NavigationBarLabelBehaviorListTile(controller: controller),
         const Divider(height: 1),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -369,15 +412,14 @@ class NavigationBarSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
-        SwitchListTileAdaptive(
+        SwitchListTile(
           dense: true,
-          title: const Text('Use Flutter defaults'),
-          subtitle: const Text('Undefined values will fall back to '
+          title: const Text('Navigators use Flutter defaults'),
+          subtitle: const Text('Undefined values fall back to '
               'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Here, both selected and unselected color have to be null before '
+              'Both selected and unselected color have to be null before '
               'the item colors can fall back to Flutter defaults. '
-              'This setting affects many component themes that implement it. '
-              'It is included on panels where it has an impact. '
+              'This setting affects navigation bars and rail. '
               'See API docs for more info.'),
           value: controller.useFlutterDefaults &&
               controller.useSubThemes &&

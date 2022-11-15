@@ -2448,8 +2448,6 @@ void main() {
     // Test result with custom features like surface, appbar, tab bar options.
     //**************************************************************************
 
-    // TODO(rydmike): Improve tests by adding more results verification checks.
-
     final ThemeData tLightC = FlexColorScheme.light(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.light,
       surfaceMode: FlexSurfaceMode.custom,
@@ -2462,6 +2460,20 @@ void main() {
       bottomAppBarElevation: 1,
       usedColors: 1,
     ).toTheme;
+
+    test(
+        'FCS7.83: GIVEN a FlexColorScheme.light with given options '
+        'EXPECT none null result and matching ThemeData to options.', () {
+      expect(tLightC, isNotNull);
+      expect(
+        tLightC.appBarTheme.backgroundColor,
+        FlexColor.mandyRed.light.tertiary,
+      );
+      expect(
+        tLightC.appBarTheme.elevation,
+        2,
+      );
+    });
 
     final ThemeData tDarkC = FlexColorScheme.dark(
       colors: FlexColor.schemes[FlexScheme.mandyRed]!.dark,
@@ -2478,14 +2490,17 @@ void main() {
     ).toTheme;
 
     test(
-        'FCS7.83: GIVEN a FlexColorScheme.light with more options '
-        'EXPECT none null result.', () {
-      expect(tLightC, isNotNull);
-    });
-    test(
-        'FCS7.84: GIVEN a FlexColorScheme.dark with more options '
-        'EXPECT none null result.', () {
+        'FCS7.84: GIVEN a FlexColorScheme.dark with given options '
+        'EXPECT none null result and matching ThemeData to options.', () {
       expect(tDarkC, isNotNull);
+      expect(
+        tDarkC.appBarTheme.backgroundColor,
+        FlexColor.mandyRed.dark.tertiary,
+      );
+      expect(
+        tDarkC.appBarTheme.elevation,
+        4,
+      );
     });
 
     // With surface and background colors defined, and light is white
@@ -2744,79 +2759,1407 @@ void main() {
     });
 
     // AppBar test null style, not using M3.
-    final ThemeData tLAppBarNull = FlexColorScheme.light(
-      scheme: FlexScheme.flutterDash,
-      // appBarStyle: null, // Default value
-      // useMaterial3: false, // Default value
-    ).toTheme;
     test(
         'FCS7.96 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
         'and not using M3 EXPECT app bar background primary ', () {
-      expect(tLAppBarNull.appBarTheme.backgroundColor,
-          equals(tLAppBarNull.colorScheme.primary));
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        // appBarStyle: null, // Default value
+        // useMaterial3: false, // Default value
+      ).toTheme;
+      expect(
+          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.primary));
     });
-    final ThemeData tDAppBarNull = FlexColorScheme.dark(
-      scheme: FlexScheme.flutterDash,
-      // appBarStyle: null, // Default value
-      // useMaterial3: false, // Default value
-    ).toTheme;
+    // AppBar test dark defaults.
     test(
         'FCS7.96 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
         'not using M3 EXPECT app bar background surface ', () {
-      expect(tDAppBarNull.appBarTheme.backgroundColor,
-          equals(tDAppBarNull.colorScheme.surface));
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        // appBarStyle: null, // Default value
+        // useMaterial3: false, // Default value
+      ).toTheme;
+      expect(
+          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
     });
     // AppBar test null style, not using M3.
-    final ThemeData tLAppBarNullM3 = FlexColorScheme.light(
-      scheme: FlexScheme.flutterDash,
-      // appBarStyle: null, // Default value
-      useMaterial3: true,
-    ).toTheme;
     test(
         'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
         'and using M3 EXPECT app bar background surface ', () {
-      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
-          equals(tLAppBarNullM3.colorScheme.surface));
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        // appBarStyle: null, // Default value
+        useMaterial3: true,
+      ).toTheme;
+      expect(
+          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
     });
-    final ThemeData tDAppBarNullM3 = FlexColorScheme.dark(
-      scheme: FlexScheme.flutterDash,
-      // appBarStyle: null, // Default value
-      useMaterial3: true,
-    ).toTheme;
+    // AppBar test null style, using M3.
     test(
         'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
         ' using M3 EXPECT app bar background surface ', () {
-      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
-          equals(tDAppBarNullM3.colorScheme.surface));
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        // appBarStyle: null, // Default value
+        useMaterial3: true,
+      ).toTheme;
+      expect(
+          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
+    });
+    // AppBar test null style, not using M3.
+    test(
+        'FCS7.98 Light: GIVEN a FlexColorScheme.light with '
+        'appBarStyle.scaffold and not using M3 '
+        'EXPECT app bar background equals theme.scaffoldBackground ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        appBarStyle: FlexAppBarStyle.scaffoldBackground,
+        scaffoldBackground: FlexColor.amberDarkTertiary,
+        // useMaterial3: false, // Default value
+      ).toTheme;
+      expect(theme.appBarTheme.backgroundColor,
+          equals(theme.scaffoldBackgroundColor));
+    });
+    // AppBar test scaffoldBackground style, not using M3.
+    test(
+        'FCS7.98 Dark: GIVEN a FlexColorScheme.dark with '
+        'appBarStyle.scaffold and not using M3 '
+        'EXPECT app bar background equals theme.scaffoldBackground ', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        appBarStyle: FlexAppBarStyle.scaffoldBackground,
+        scaffoldBackground: FlexColor.verdunHemlockDarkSecondaryContainer,
+        // useMaterial3: false, // Default value
+      ).toTheme;
+      expect(theme.appBarTheme.backgroundColor,
+          equals(theme.scaffoldBackgroundColor));
+    });
+    // AppBar test scaffoldBackground style, not using M3.
+    test(
+        'FCS7.98 Dark: GIVEN a FlexColorScheme.dark with '
+        'appBarStyle.scaffold and using M3 '
+        'EXPECT app bar background equals theme.scaffoldBackground ', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        appBarStyle: FlexAppBarStyle.scaffoldBackground,
+        scaffoldBackground: FlexColor.verdunHemlockDarkSecondaryContainer,
+        useMaterial3: true,
+      ).toTheme;
+      expect(theme.appBarTheme.backgroundColor,
+          equals(theme.scaffoldBackgroundColor));
     });
     // AppBar test null center title.
-    final ThemeData tLAppBarCenterNull = FlexColorScheme.light(
-      scheme: FlexScheme.flutterDash,
-    ).toTheme;
     test(
         'FCS7.99 null: GIVEN a FlexColorScheme.light with no centerTitle '
         'EXPECT app bar center title null ', () {
+      final ThemeData tLAppBarCenterNull = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+      ).toTheme;
       expect(tLAppBarCenterNull.appBarTheme.centerTitle, equals(null));
     });
     // AppBar test true center title.
-    final ThemeData tDAppBarCenterTrue = FlexColorScheme.dark(
-      scheme: FlexScheme.flutterDash,
-      subThemesData: const FlexSubThemesData(appBarCenterTitle: true),
-    ).toTheme;
     test(
         'FCS7.99 true: GIVEN a FlexColorScheme.dark with no centerTitle '
         'EXPECT app bar center title true ', () {
-      expect(tDAppBarCenterTrue.appBarTheme.centerTitle, equals(true));
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(appBarCenterTitle: true),
+      ).toTheme;
+      expect(theme.appBarTheme.centerTitle, equals(true));
     });
     // AppBar test true center title.
-    final ThemeData tLAppBarCenterFalse = FlexColorScheme.light(
-      scheme: FlexScheme.flutterDash,
-      subThemesData: const FlexSubThemesData(appBarCenterTitle: false),
-    ).toTheme;
     test(
         'FCS7.99 false: GIVEN a FlexColorScheme.light with no centerTitle '
         'EXPECT app bar center title false ', () {
-      expect(tLAppBarCenterFalse.appBarTheme.centerTitle, equals(false));
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(appBarCenterTitle: false),
+      ).toTheme;
+      expect(theme.appBarTheme.centerTitle, equals(false));
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    test(
+        'FCS7.100a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme flutterDash '
+        'EXPECT no legacy swap - Dash does not swap', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+      ).toTheme;
+      expect(
+        theme.colorScheme.secondary,
+        equals(FlexColor.dashBlueLightSecondary),
+      );
+      expect(
+        theme.colorScheme.secondaryContainer,
+        equals(FlexColor.dashBlueLightSecondaryContainer),
+      );
+      expect(
+        theme.colorScheme.tertiary,
+        equals(FlexColor.dashBlueLightTertiary),
+      );
+      expect(
+        theme.colorScheme.tertiaryContainer,
+        equals(FlexColor.dashBlueLightTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    test(
+        'FCS7.100b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme blumineBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.blumineBlue,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+      ).toTheme;
+      expect(
+        theme.colorScheme.secondary,
+        equals(FlexColor.blumineBlueLightTertiary),
+      );
+      expect(
+        theme.colorScheme.secondaryContainer,
+        equals(FlexColor.blumineBlueLightTertiaryContainer),
+      );
+      expect(
+        theme.colorScheme.tertiary,
+        equals(FlexColor.blumineBlueLightSecondary),
+      );
+      expect(
+        theme.colorScheme.tertiaryContainer,
+        equals(FlexColor.blumineBlueLightSecondaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
+    test(
+        'FCS7.100c GIVEN a FlexColorScheme.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme flutterDash '
+        'EXPECT no legacy swap - Dash does not swap', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+      ).toTheme;
+      expect(
+        theme.colorScheme.secondary,
+        equals(FlexColor.dashBlueDarkSecondary),
+      );
+      expect(
+        theme.colorScheme.secondaryContainer,
+        equals(FlexColor.dashBlueDarkSecondaryContainer),
+      );
+      expect(
+        theme.colorScheme.tertiary,
+        equals(FlexColor.dashBlueDarkTertiary),
+      );
+      expect(
+        theme.colorScheme.tertiaryContainer,
+        equals(FlexColor.dashBlueDarkTertiaryContainer),
+      );
+    });
+    // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
+    test(
+        'FCS7.100d GIVEN a FlexColorScheme.Dark with useMaterial3:true '
+        'and swapLegacyOnMaterial3:true and theme blumineBlue '
+        'EXPECT legacy swap - Blumine swaps', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.blumineBlue,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
+      ).toTheme;
+      expect(
+        theme.colorScheme.secondary,
+        equals(FlexColor.blumineBlueDarkTertiary),
+      );
+      expect(
+        theme.colorScheme.secondaryContainer,
+        equals(FlexColor.blumineBlueDarkTertiaryContainer),
+      );
+      expect(
+        theme.colorScheme.tertiary,
+        equals(FlexColor.blumineBlueDarkSecondary),
+      );
+      expect(
+        theme.colorScheme.tertiaryContainer,
+        equals(FlexColor.blumineBlueDarkSecondaryContainer),
+      );
+    });
+    // Test default bottomSheet theming, light M2
+    test(
+        'FCS7.101a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT bottom surface and elevation 4 and 8 and border radius '
+        'top 28', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+        theme.bottomSheetTheme.backgroundColor,
+        equals(theme.colorScheme.surface),
+      );
+      expect(
+        theme.bottomSheetTheme.modalBackgroundColor,
+        equals(theme.colorScheme.surface),
+      );
+      expect(
+        theme.bottomSheetTheme.elevation,
+        equals(4),
+      );
+      expect(
+        theme.bottomSheetTheme.modalElevation,
+        equals(8),
+      );
+      expect(
+        theme.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        theme.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(28),
+              topRight: Radius.circular(28),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test default bottomSheet theming dark M3
+    test(
+        'FCS7.101b GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a default FlexSubThemesData '
+        'EXPECT bottom surface+tint and elevation 1 and 2 and border radius '
+        'top 28', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      final ColorScheme scheme = theme.colorScheme;
+      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
+          scheme.surface, scheme.surfaceTint, 1);
+      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+          scheme.surface, scheme.surfaceTint, 2);
+      expect(
+        theme.bottomSheetTheme.backgroundColor,
+        equals(bottomSheetColor),
+      );
+      expect(
+        theme.bottomSheetTheme.modalBackgroundColor,
+        equals(bottomSheetModalColor),
+      );
+      expect(
+        theme.bottomSheetTheme.elevation,
+        equals(1),
+      );
+      expect(
+        theme.bottomSheetTheme.modalElevation,
+        equals(2),
+      );
+      expect(
+        theme.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        theme.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(28),
+              topRight: Radius.circular(28),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // Test bottomSheet theming custom dark M2
+    test(
+        'FCS7.101c GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT bottom surface and elevation 2 and 12 and border radius '
+        'top 8 and none tinted backgrounds', () {
+      final ThemeData theme = FlexThemeData.dark(
+        scheme: FlexScheme.sanJuanBlue,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          bottomSheetRadius: 8,
+          bottomSheetElevation: 2,
+          bottomSheetModalElevation: 12,
+          bottomSheetBackgroundColor: SchemeColor.background,
+          bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+        ),
+      );
+      final ColorScheme scheme = theme.colorScheme;
+      expect(
+        theme.bottomSheetTheme.backgroundColor,
+        equals(scheme.background),
+      );
+      expect(
+        theme.bottomSheetTheme.modalBackgroundColor,
+        equals(scheme.surfaceVariant),
+      );
+      expect(
+        theme.bottomSheetTheme.elevation,
+        equals(2),
+      );
+      expect(
+        theme.bottomSheetTheme.modalElevation,
+        equals(12),
+      );
+      expect(
+        theme.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        theme.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // Test bottomSheet theming custom light M3
+    test(
+        'FCS7.101d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a custom FlexSubThemesData '
+        'EXPECT bottom surface and elevation 6 and 10 and border radius '
+        'top 20 and tinted backgrounds', () {
+      final ThemeData theme = FlexThemeData.light(
+        scheme: FlexScheme.sakura,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          bottomSheetRadius: 20,
+          bottomSheetElevation: 6,
+          bottomSheetModalElevation: 10,
+          bottomSheetBackgroundColor: SchemeColor.onPrimary,
+          bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+        ),
+      );
+      final ColorScheme scheme = theme.colorScheme;
+      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
+          scheme.onPrimary, scheme.surfaceTint, 6);
+      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      expect(
+        theme.bottomSheetTheme.backgroundColor,
+        equals(bottomSheetColor),
+      );
+      expect(
+        theme.bottomSheetTheme.modalBackgroundColor,
+        equals(bottomSheetModalColor),
+      );
+      expect(
+        theme.bottomSheetTheme.elevation,
+        equals(6),
+      );
+      expect(
+        theme.bottomSheetTheme.modalElevation,
+        equals(10),
+      );
+      expect(
+        theme.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        theme.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test default PopupMenu theming, light M2
+    test(
+        'FCS7.102a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT popup surface and elevation 6 and border radius 4', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+        theme.popupMenuTheme.color,
+        equals(null), // Will show as theme.cardColor via defaults.
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(6.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(4.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test default PopupMenu theming, light M3
+    test(
+        'FCS7.102b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a default FlexSubThemesData '
+        'EXPECT popup surface with elev tint and elevation 3 and border '
+        'radius 4', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      // TODO(rydmike): Temp M3 tint fix, will be null when M3 supported by SDK.
+      final Color background = ElevationOverlay.applySurfaceTint(
+          theme.colorScheme.surface, theme.colorScheme.surfaceTint, 3);
+      expect(
+        theme.popupMenuTheme.color,
+        equals(background),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(3.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(4.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with default background, light M2.
+    test(
+        'FCS7.102c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with popup opacity 0.95, elev 5, radius 8 '
+        'EXPECT popup surface, with opacity 0.95, elev 5 and radius 8 ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 5,
+          popupMenuRadius: 8,
+          popupMenuOpacity: 0.95,
+        ),
+      ).toTheme;
+      expect(
+        theme.popupMenuTheme.color,
+        equals(theme.colorScheme.surface.withOpacity(0.95)),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(5.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with default background, light M3.
+    test(
+        'FCS7.102d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a FlexSubThemesData with popup opacity 0.9, elev 6, radius 10 '
+        'EXPECT popup surface, with opacity 0.9, elev 6 and radius 10 ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 6,
+          popupMenuRadius: 10,
+          popupMenuOpacity: 0.9,
+        ),
+      ).toTheme;
+      final Color background = ElevationOverlay.applySurfaceTint(
+        theme.colorScheme.surface.withOpacity(0.9),
+        theme.colorScheme.surfaceTint,
+        6,
+      );
+      expect(
+        theme.popupMenuTheme.color,
+        equals(background),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(6.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with custom background, dark M2.
+    test(
+        'FCS7.102d GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a FlexSubThemesData with popup opacity 0.98, elev 12, radius 11 '
+        'and custom background '
+        'EXPECT popup surface, with opacity 0.98, elev 12 and radius 11 '
+        'using custom background.', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 12,
+          popupMenuRadius: 11,
+          popupMenuOpacity: 0.98,
+          popupMenuSchemeColor: SchemeColor.primaryContainer,
+        ),
+      ).toTheme;
+      expect(
+        theme.popupMenuTheme.color,
+        equals(theme.colorScheme.primaryContainer.withOpacity(0.98)),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(12),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(11.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with custom background, dark M3.
+    test(
+        'FCS7.102e GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a FlexSubThemesData with popup opacity 0.8, elev 2, radius 9 '
+        'and custom background '
+        'EXPECT popup surface, with opacity 0.8, elev 2 and radius 9 '
+        'using custom background.', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 2,
+          popupMenuRadius: 9,
+          popupMenuOpacity: 0.8,
+          popupMenuSchemeColor: SchemeColor.surfaceVariant,
+        ),
+      ).toTheme;
+      final Color background = ElevationOverlay.applySurfaceTint(
+        theme.colorScheme.surfaceVariant.withOpacity(0.8),
+        theme.colorScheme.surfaceTint,
+        2,
+      );
+      expect(
+        theme.popupMenuTheme.color,
+        equals(background),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(2.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(9.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with custom background, dark M2.
+    test(
+        'FCS7.102d GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a FlexSubThemesData with popup opacity null, elev 12, radi 11 '
+        'and custom background '
+        'EXPECT popup surface, with opacity null, elev 12 and radius 11 '
+        'using custom background.', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 12,
+          popupMenuRadius: 11,
+          popupMenuSchemeColor: SchemeColor.primaryContainer,
+        ),
+      ).toTheme;
+      expect(
+        theme.popupMenuTheme.color,
+        equals(theme.colorScheme.primaryContainer),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(12),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(11.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom PopupMenu theming, with custom background, dark M3.
+    test(
+        'FCS7.102e GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a FlexSubThemesData with popup opacity null, elev 2, radius 9 '
+        'and custom background '
+        'EXPECT popup surface, with opacity null, elev 2 and radius 9 '
+        'using custom background.', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          popupMenuElevation: 2,
+          popupMenuRadius: 9,
+          popupMenuSchemeColor: SchemeColor.surfaceVariant,
+        ),
+      ).toTheme;
+      final Color background = ElevationOverlay.applySurfaceTint(
+        theme.colorScheme.surfaceVariant,
+        theme.colorScheme.surfaceTint,
+        2,
+      );
+      expect(
+        theme.popupMenuTheme.color,
+        equals(background),
+      );
+      expect(
+        theme.popupMenuTheme.elevation,
+        equals(2.0),
+      );
+      expect(
+        theme.popupMenuTheme.textStyle,
+        equals(null),
+      );
+      expect(
+        theme.popupMenuTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(9.0),
+            ),
+          ),
+        ),
+      );
+    });
+    // Test custom outlines on ToggleButtons, OutlinedButton, InputDecorator
+    test(
+        'FCS7.103a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with default global widths set '
+        'EXPECT default global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+            // We will override these and should not see them
+            // thinBorderWidth: 1,
+            // thickBorderWidth: 2,
+            ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(1),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(1),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(2),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(2),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(1),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(2),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(2),
+      );
+    });
+    test(
+        'FCS7.103b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a FlexSubThemesData with default global widths set '
+        'EXPECT default global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+            // Defaults we should see
+            // thinBorderWidth: 1,
+            // thickBorderWidth: 2,
+            ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(1),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(1),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(2),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(2),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(1),
+      );
+      // OutlinedButton thick widths, Material 3 has own default of 1!!
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(1),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(1),
+      );
+    });
+    test(
+        'FCS7.103c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with custom global widths set '
+        'EXPECT custom global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(3),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(3),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(3),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(4),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(4),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(3),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(4),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(4),
+      );
+    });
+    test(
+        'FCS7.103d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a FlexSubThemesData with custom global widths set '
+        'EXPECT custom global widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(3),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(3),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(3),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(4),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(4),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(3),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(3),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(4),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(4),
+      );
+    });
+    test(
+        'FCS7.103e GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a FlexSubThemesData with custom component widths set '
+        'EXPECT custom component widths on components using it ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          // We will override these and should not see them
+          thinBorderWidth: 3,
+          thickBorderWidth: 4,
+          // Component overrides we should find instead.
+          toggleButtonsBorderWidth: 1.5,
+          inputDecoratorBorderWidth: 2.5,
+          inputDecoratorFocusedBorderWidth: 3.5,
+          outlinedButtonBorderWidth: 0.5,
+          outlinedButtonPressedBorderWidth: 1.5,
+        ),
+      ).toTheme;
+      // ToggleButtons thin width
+      expect(
+        theme.toggleButtonsTheme.borderWidth,
+        equals(1.5),
+      );
+      // InputDecoration thin width
+      expect(
+        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        equals(2.5),
+      );
+      expect(
+        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        equals(2.5),
+      );
+      // InputDecoration thick width
+      expect(
+        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        equals(3.5),
+      );
+      expect(
+        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        equals(3.5),
+      );
+      // The general width should not be defined since we used the specific ones
+      expect(
+        theme.inputDecorationTheme.border?.borderSide.width,
+        equals(null),
+      );
+      // OutlinedButton thin widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+        equals(0.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+        equals(0.5),
+      );
+      // OutlinedButton thick widths
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+        equals(1.5),
+      );
+      expect(
+        theme.outlinedButtonTheme.style?.side
+            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+        equals(1.5),
+      );
+    });
+    // Test default Slider theming, light M2
+    test(
+        'FCS7.104a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Slider default', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+          theme.sliderTheme,
+          equals(
+            const SliderThemeData(
+              activeTrackColor: Color(0xff6750a4),
+              inactiveTrackColor: Color(0x3d6750a4),
+              disabledActiveTrackColor: Color(0x52000000),
+              disabledInactiveTrackColor: Color(0x1f000000),
+              activeTickMarkColor: Color(0x8affffff),
+              inactiveTickMarkColor: Color(0x8a6750a4),
+              disabledActiveTickMarkColor: Color(0x1fffffff),
+              disabledInactiveTickMarkColor: Color(0x1f000000),
+              thumbColor: Color(0xff6750a4),
+              disabledThumbColor: Color(0xff9e9e9e),
+              overlayColor: Color(0x1f6750a4),
+              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            ),
+          ));
+    });
+    // Test default Slider theming, dark M2
+    test(
+        'FCS7.104b GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Slider default', () {
+      final ThemeData theme = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(
+          theme.sliderTheme,
+          equals(
+            const SliderThemeData(
+              activeTrackColor: Color(0xffd0bcff),
+              inactiveTrackColor: Color(0x3dd0bcff),
+              disabledActiveTrackColor: Color(0x52ffffff),
+              disabledInactiveTrackColor: Color(0x1fffffff),
+              activeTickMarkColor: Color(0x8a000000),
+              inactiveTickMarkColor: Color(0x8ad0bcff),
+              disabledActiveTickMarkColor: Color(0x1f000000),
+              disabledInactiveTickMarkColor: Color(0x1fffffff),
+              thumbColor: Color(0xffd0bcff),
+              disabledThumbColor: Color(0xff6c6c6c),
+              overlayColor: Color(0x1fd0bcff),
+              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            ),
+          ));
+    });
+    test(
+        'FCS7.104c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and custom FlexSubThemesData with tinted value & height 6 '
+        'EXPECT Slider with tinted value and height 6', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          sliderValueTinted: true,
+          sliderTrackHeight: 6,
+        ),
+      ).toTheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(const Color(0xed2e2349)),
+      );
+      expect(
+        theme.sliderTheme.trackHeight,
+        equals(6),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(theme.colorScheme.primary),
+      );
+    });
+    test(
+        'FCS7.104c GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and custom FlexSubThemesData with tinted value & height 8 '
+        ' and Scheme color tertiary '
+        'EXPECT Slider with tinted value and height 8 and tertiary '
+        'track ', () {
+      final ThemeData theme = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          sliderValueTinted: true,
+          sliderBaseSchemeColor: SchemeColor.tertiary,
+          sliderTrackHeight: 8,
+        ),
+      ).toTheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(const Color(0xed37242a)),
+      );
+      expect(
+        theme.sliderTheme.trackHeight,
+        equals(8),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(theme.colorScheme.tertiary),
+      );
+    });
+    // Test default tooltip theming, light M2
+    test(
+        'FCS7.105a GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a default FlexSubThemesData '
+        'EXPECT Tooltip default', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color:
+                  FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.light)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105b GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color:
+                  FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.black)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.black),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105c GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color: FlexColor.darkSurface
+                  .blendAlpha(colorScheme.primary, 0x28)
+                  .withAlpha(0xF2),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105d GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+          tooltipOpacity: 0.5, // Has no effect ! Verify!
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            decoration: BoxDecoration(
+              color: FlexColor.darkSurface
+                  .blendAlpha(colorScheme.primary, 0x28)
+                  .withAlpha(0xF2),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white)
+                .copyWith(fontSize: 14)
+                .copyWith(color: Colors.white),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FCS7.105e GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and a custom FlexSubThemesData '
+        'EXPECT Tooltip with custom results', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        tooltipsMatchBackground: true,
+        subThemesData: const FlexSubThemesData(
+          tooltipRadius: 12,
+          tooltipSchemeColor: SchemeColor.tertiaryContainer,
+          tooltipOpacity: 0.5,
+          tooltipWaitDuration: Duration(seconds: 1),
+          tooltipShowDuration: Duration(milliseconds: 2500),
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tooltipTheme.toString(),
+        equalsIgnoringHashCodes(
+          TooltipThemeData(
+            waitDuration: const Duration(seconds: 1),
+            showDuration: const Duration(milliseconds: 2500),
+            decoration: BoxDecoration(
+              color: colorScheme.tertiaryContainer
+                  .withAlpha(Color.getAlphaFromOpacity(0.5)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: Border.all(color: theme.dividerColor),
+            ),
+            textStyle: ThemeData(brightness: Brightness.dark)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: colorScheme.onTertiaryContainer)
+                .copyWith(fontSize: 14)
+                .copyWith(color: colorScheme.onTertiaryContainer),
+          ).toString(),
+        ),
+      );
     });
   });
 }

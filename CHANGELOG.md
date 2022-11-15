@@ -2,6 +2,115 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.1.0
+
+**Nov 15, 2022**
+
+**NEW**
+
+* Scaffold background color can now be used as the themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's `ColorScheme` surface or background colors.
+* Added properties `materialTapTargetSize` and `pageTransitionsTheme` to `FlexColorScheme` and `FlexThemeData`. They are only convenience properties to avoid having to use a `copyWith` on FlexColorScheme produced `ThemeData`, to define them.
+* Property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors to Material 3 color system. It applies to color schemes that were originally designed for Material 2, when using Material 3 mode, with or without seed generated ColorSchemes. 
+  - Setting `swapLegacyOnMaterial3` to `true`, will when `useMaterial3` is `true`, swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. 
+  - This only happens for built-in schemes where this swap makes the color design **more compatible** with the intended design and usage of the `secondary` and `tertiary` colors in Material 3 color system.
+  - To implement this, the class `FlexSchemeColor` has a new bool meta-data property called `swapOnMaterial3`, that has been defined to be `true`, if the `FlexSchemeColor` it defines, benefits design compliance wise from swapping its `secondary` and `tertiary` colors, when using Material 3.
+  - For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to always set it to `true`. The flag has no impact when using Material 2. 
+  - The `swapLegacyOnMaterial3` flag can also be toggled in the **Themes Playground**, it is on by default there.
+  - When the swap is done for a `FlexSchemeColor`, it is done before any other built-in scheme modifier properties, including `swapColor` and `usedColors`.
+* The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true`, and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
+* Additional new `FlexSubThemesData` properties:
+  - `Slider` theme can now be adjusted via `FlexSubThemesData` properties `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.
+  - The `chipSelectedSchemeColor` was added to theme background color of Chips that are selectable. While doing it, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364).
+  - Switch got `switchThumbSchemeColor` to control the thumb color separately, and switch custom color theme was prepared for M3. (Not available yet in Flutter 3.3).
+  - `Tooltip` theme now has `FlexSubThemesData` properties `tooltipRadius`, `tooltipWaitDuration`, `tooltipShowDuration`, `tooltipSchemeColor` and `tooltipSchemeColor`.
+  - The `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
+  - Use `navigationBarElevation` to adjust themed elevation of `NavigationBar`.
+  - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButton`.
+  - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from existing properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
+  - The `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` were added to be able to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. 
+    > These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground, but size changes might be added later as a usage example of these properties. The properties are `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than for other sub themes. If you need to do that, for other properties, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
+
+**CHANGE**
+
+* In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. That the properties are nullable, enables using potentially different default behavior in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
+* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous default thin outline style in FlexColorScheme.
+  - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
+* **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in most designs the color values are the same. If needed you can put it back to background color with:
+
+```dart
+    final ThemeData themeLight = FlexThemeData.light(
+      subThemesData: const FlexSubThemesData(
+        bottomSheetBackgroundColor: SchemeColor.background,
+        bottomSheetModalBackgroundColor: SchemeColor.background,
+      ),
+    );
+```
+
+**FIX**
+
+* **Temporary Material 3 Flutter SDK GAP fixes** 
+  - The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temp fix works despite Material elevation being broken in Flutter 3.3 and earlier, when `useMaterial3` is true. 
+  - Same temp M3 fix is also used on themed `PopupMenuButton`. 
+  - Unfortunately the elevation based shadow cannot be added to any of them. This will have to wait for actual implementation of the components and their Material 3 themes with support for it.
+  - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master channel already, they will probably land in next new stable release after Flutter 3.3. 
+  - These temporary M3 fixes makes it more possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3, it is not perfect, but much better.
+  - The reason why these issues exists are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this `Material` [issue #107190](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or any shadow on such `Material` using widgets.
+  - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. So even if only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes would not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
+  - These temporary work-around fixes will be removed when the framework implements correct Material 3 behavior for these widgets, hopefully in next stable release of Flutter.
+
+**Themes Playground**
+
+* On **Theme colors** panel:
+  - Improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme, as a starting point for your custom color definitions.
+  - Simplified the terminology used on the **Theme colors** panel. Also simplified its color presentation.
+  - Added an on/off switch that controls the `swapLegacyOnMaterial3` setting.
+
+* Updated and shorter **Introduction**. Probably nobody reads it, or the [package docs](https://docs.flexcolorscheme.com/) with **Playground** guides, but at least it is there.
+
+* The **Seeded ColorScheme** panel:
+  - Now also show the source input "Scheme defined" colors, the `FlexSchemeColor`, that gets used as key colors for the Material 3 seeded ColorScheme generation, when it is turned on.
+    - Arranged the panel content for better inclusion and presentation of the created **Tonal Palettes** used to make the seeded ColorScheme.
+    - The Tonal palette color **tones** now have tooltips that present each tone.
+
+* On **Surface blends**: 
+  - Changed the surface blend mode defaults to settings that are more mobile design friendly. No API change involved. API defaults are same as before, changes only affect the Playground app defaults. 
+    - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text is placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
+  - The blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
+
+* Other **new controllable properties** and features:
+  - **AppBar** theming can now use themed `scaffoldBackground` color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
+  - On **FAB and Chips** panel, added the **Always use circular FAB** feature.
+  - Added support for adjusting background color and elevation of `BottomSheet`.
+  - Added support for adjusting elevation of `NavigationBar`.
+  - Added support for adjusting elevation and background color of `PopupMenuButton`.
+  - Added support for component independent settings of `ToggleButtons` border width.
+  - Added support for component independent settings of `OutlineButtons` border widths.
+  - Added support for component independent settings of `InputDecorator` border widths.
+  - Added support for adjusting `Dialog` elevation.
+  - Added support for adjusting `Slider` via base color, track height and base color tinted value indicator.
+  - Added support for adjusting `Tooltip` via scheme color, radius, opacity, show duration and wait duration.
+  - Added support for adjusting `Switch` thumb color via scheme color selection.
+
+* User interface changes:
+  - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
+  - All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.
+  - Split out some components that where on shared panels, to their own panel/page. This is done when components get more settings and having them in a separate panel makes sense.
+  - A themed `Slider` widget is now presented in the **Widget Showcase** panel. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
+  - Removed animation from horizontal list **Theme selector** when selecting a theme.
+  - Removed animation from topic/component panel when selecting one, the **Page view**.
+  - Removed the slide to a page animation, when clicking on a topic in the **panel/page selector**.
+    - Direct panel/page selection via the control now instead uses a small **Fade and Zoom in** to show the selected settings panel.
+    - Without any panel page change effect, it was hard to notice what changed. The default slide to the page animation, with the `PageView` is fine when swiping, where it remains, but it was a tad annoying when clicking on the panel page selector.
+  - Changed all used `Slider.adaptive` to `Slider`.
+    - The Cupertino adaptive one has poorer UX. You cannot click on the track to move the thumb to a given position. The app presents Material theming, so we will show only Material widgets in the apps own controls, on all platforms going forward.
+  - Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`.
+    - We like using the Material theme following `SwitchListTileAdaptive` iOS switch on iOS on macOS. However, the app presents Material theming, and the new Material 3 Switch will land in Flutter stable soon. The new Material 3 `Switch` is even nicer than the Cupertino Switch, and we want to see it in the app when it lands. We will thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms going forward.
+    - The `SwitchListTileAdaptive` is kept in use on examples 2 to 4. As an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platforms, nor can it be themed to be so. You have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
+
+* **FIXED:** 
+  - Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
+
+
 ## 6.0.1
 
 **Sep 21, 2022**
@@ -265,7 +374,7 @@ self deprecated members as follows:
 
 * *Themes Playground:* Code gen and control enable/disable for onColor blends updated to lock controls
   with no impact when using seeded color scheme. Code is also not generated for onColor blend
-  settings that has no impact when using seeded color schemes.
+  settings that have no impact when using seeded color schemes.
 
 * *Themes Playground*: Features and code gen for additional `Elevated.button` individual foreground
   and background colors.
@@ -327,22 +436,13 @@ also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
 
 * [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3` is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into  Flutter stable 3.3.0 and now exists there. The issue must be re-opened or a new one submitted.
 
-* This issue discussed in SliverAppBar.medium and large [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
+* This issue discussed in `SliverAppBar.medium` and `large` [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
 
 ## 6.0.0-dev.1
 
 **Aug 28, 2022**
 
-This dev release is for Flutter *beta 3.3.0-0.5.pre*, it will be released when next Flutter 
-stable version after 3.0 comes out, presumably version 3.3. 
-
-If you experiment with this dev release and want to use the Theme Playground, then please use the
-version 6 beta build, [**here**](https://rydmike.com/flexcolorscheme/themesplayground-v6). The doc
-site does not yet contain any information about version 6, it will be added after its stable
-release.
-
-For the actual list of changes that are in 6.0.0.dev.1, please refer to release 6.0.0 above.
-The change list is identical and were all included in 6.0.0.
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_6_0_0_dev_1.md)
 
 ## 5.1.0
 
@@ -486,7 +586,7 @@ theming in general.
   like 2018 Typography is used. All other examples also avoid the issue by only using the 
   M3 2021 Typography and not even mimicking a switch between M2 and M3 Typography. 
 
-  The above workaround is needed because the *Themes Playground* app has toggles that switches 
+  The above workaround is needed because the *Themes Playground* app has toggles that switch 
   `Typography` frequently, without the workaround it will eventually crash. With this workaround it never
   switches Typography, it just looks like it does, but app stays in 2021 Typography all the time.
   The by Themes Playground generated ThemeData config will use the actual real effective 
@@ -614,7 +714,6 @@ theme: FlexThemeData.light(
     to enabled/disable it, then pass in the `FlexSubThemesData` when enabled,
     and null when not using it.
 
-
 **DEPRECATED AND BREAKING** due to Flutter SDK change in 2.10.0 stable release.
 
 * `primaryVariant` and `secondaryVariant`
@@ -698,226 +797,13 @@ theme: FlexThemeData.light(
 
 **April 20, 2022**
 
-**STYLE CHANGE - BREAKING**
-
-* The custom "internal" and temporary `m3TextTheme` was changed.
-  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
-  It breaks past used style when opting in on component themes and its optional
-  custom `m3TextTheme` enabled. The updated custom implementation of it now follows the
-  implementation used in Flutter master channel, apart from this
-  [issue](https://github.com/flutter/flutter/issues/102121),
-  where it for now implements the value used in the M3 Web guide.
-  The changes in styles otherwise concern the addition of the font geometry, height, which the
-  previous custom implementation did not have. The usage of the custom `m3TextTheme` should be
-  considered internal and temporary, it will be changed to use the actual Flutter implementation
-  once [PR #97829](https://github.com/flutter/flutter/pull/97829) lands in Flutter stable
-  channel. The custom `m3TextTheme` will then be deprecated.
-
-* The computed colors for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
-  `secondaryHeaderColor` were changed.
-  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The change breaks past
-  used styles on these rarely used colors. These `ThemeData` colors are also on
-  a deprecation path and will likely receive some new none `MaterialColor` dependent
-  color defaults when that change happens. The new `ColorScheme.primary` computed
-  colors for these rarely used colors are better balanced than before, and work well
-  regardless of used `ColorScheme.primary` shade and tint.
-
-* The color definition value for `FlexColor.espressoLightPrimary` color was changed.
-  This is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The new color for
-  `FlexColor.espressoLightPrimary` breaks past used color for this color constant.
-  The color was changed from `0xFF220804` to `0xFF452F2B`. Past color was too dark brown, almost
-  black to be very usable in a UI. It was very black coffee like, but not very practical in a UI,
-  it was too close to black. Since version 5 is anyway a major style breaking with the introduction
-  of the new Material 3 ColorScheme, the opportunity to improve this color value used in the
-  built-in theme `espresso` theme was used.
-
-**CHANGE**
-
-* The package documentation has now moved too its own site at
-  [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com).
-  It is a major update and rewrite of previous documentation. It also contains general
-  Flutter theming guidance.
-
-**FIX**
-
-* The examples contain minor improvements and fixes.
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_5_0_0_dev_3.md)
 
 ## 5.0.0-dev.2
 
 **April 4, 2022**
 
-**BREAKING**
-
-* Completed in version 4.0.0 for version 5.0.0 planned removal of
-  deprecated property `surfaceStyle`, including all its implementing classes,
-  enums and helpers:
-  - Removed property: `surfaceStyle` in `FlexColorScheme.light`.
-  - Removed property: `surfaceStyle` in `FlexColorScheme.dark`.
-  - Removed: enum `FlexSurface`, that `surfaceStyle` where.
-  - Removed: factory `FlexSchemeSurfaceColors.from` that was used to create
-    surface using the `FlexSurface`. The factory `FlexSchemeSurfaceColors.blend`
-    replaced in version 4.0.0 already when using `surfaceMode` and `blendLevel`.
-  - Removed tests and modified tests needing to consider above removals.
-
-* Deprecated property `useSubThemes`. This property has no function after
-  4.2.0 stable and 5.0.0-dev.1. FlexColorScheme opinionated component sub-themes
-  are now created by adding a default constructor `FlexSubThemesData()` or one with
-  some custom property values set, to `subThemesData`. This creates sub-themes
-  using the FlexColorScheme opinionated sub-themes. Removing this property makes the
-  API more consistent. It now follows the same design that is used for `keyColors`
-  with `FlexKeyColors` and `tones` with `FlexTones`.
-  Setting the property `useSubThemes` will not cause an error, it just has no effect.
-  You can safely remove it. The property `useSubThemes` will be removed in release 6.0.0.
-
-* The property `navigationBarIsStyled` in `FlexSubThemesData` was removed in
-  **v5.0.0-dev.1** as no longer needed. It is now kind of back with a new broader
-  replacement called `FlexSubThemesData.useFlutterDefaults`.
-  The in dev.1 version tested API-style to
-  set various `SchemeColor` properties to null, to get SDK default for them was not
-  nice. The `FlexSubThemesData` should default to its own preferred
-  and recommended harmonized defaults when not defined. It is better to offer a
-  toggle that can be set, to when possible/offer an opt-out from some bigger style
-  differences from SDK defaults. This can be useful if one wants to create
-  custom component themes and wish to start from less opinionated ones.
-  The new `useFlutterDefaults` is false by default, and the sub-themes undefined
-  null values result in its own harmonized and recommended settings. By setting
-  it to `true` a bit messier and un-harmonized Flutter default are back. Currently,
-  this impacts different styles and colors on `BottomNavigationBar`, `NavigationBar`,
-  and `NavigationRail`. See API docs for details regarding
-  defaults with this flag on and off.
-
-* The `FlexSubThemesData` property `popupMenuRadius` and the radius in
-  corresponding static sub-theme helper `FlexSubThemes.popupMenuTheme`,
-  now defaults to 4.
-  In versions before v5.0.0-dev.2 it defaulted to 10. The M3 spec for it
-  was not available when it was chosen originally. It was assumed to have
-  higher border radius like rest of designs. However, the spec has it
-  defined [here](https://m3.material.io/components/menus/specs) now, and it
-  is 4. Since border radius default values are stated in FlexColorScheme
-  sub-theme design goals to follow the M3 design specs, it was updated to
-  match the spec. A bit higher rounding, may actually fit better with
-  the very round M3 design, try 8 or 10. It is very simple to change bach with
-  the API.
-
-**FIX**
-
-* Pub.dev analysis does not like document references to deprecated Flutter
-  properties. Changed the **primaryVariant** and **secondaryVariant** references
-  in document comments to `primaryVariant` and `secondaryVariant`. Nor does it
-  like when you use tests to deprecated Flutter SDK members, removed them too,
-  they were not needed either after some redesign of a few tests.
-
-* Fixed. When using sub-themes and selecting a `ColorScheme` based color, as
-  color for the `AppBar`, instead of using `abbBarStyle` in light and dark
-  factories, the `appBarOpacity` was not applied to the selected color. The
-  priority of effective `AppBar` color was also revised to follow the norm,
-  which from lowest to highest is:
-  - `appBarStyle` in light/dark factories and ThemeData extensions, which
-     selects the used color from active `scheme` or `colors`, in the same
-     factories or extensions.
-  - `appBarBackgroundSchemeColor` in `FlexSubThemesData` when used.
-  - `appBarBackground` in FlexColorScheme.
-
-**CHANGE**
-
-* Changed the priority in FlexColorScheme when using direct input color
-  properties, `colorScheme` input and using key color seeded ColorScheme
-  generation. The new order is that input `colorScheme` is in this rare use case
-  always overridden by the seed generate `ColorScheme`. This allows us
-  to use a `colorScheme` as input to seed generation, where this color
-  scheme could already have been externally seeded generated, but that we want
-  to modify by using custom FlexTones or surface blends in FlexColorScheme.
-  The direct properties overrides the seeded color scheme as before, unless it
-  is `primary`, `secondary`, `tertiary` or their container colors. In that case
-  the `keyColors`, "keep" property determines if those colors are kept or not.
-
-* The `FlexSubThemesData` property `inputDecorationRadius` was deprecated and
-  renamed to `inputDecoratorRadius`, to harmonize the other
-  `InputDecoration` property names in `FlexSubThemesData`.
-  The old name will be removed in release 6.0.0.
-
-* Deprecated and renamed `navigationBarHighlightSchemeColor` to
-  `navigationBarIndicatorSchemeColor` in `FlexSubThemesData`, to
-  harmonize the naming standard. Likewise, the parameter `highlightSchemeColor`
-  ìn `FlexSubThemes.navigationBarTheme` was deprecated and replaced by
-  `indicatorSchemeColor`. The old names will be removed in release 6.0.0.
-
-* In 5.0.0-dev.1, the renamed properties were deprecated and broken with 4.2.0.
-  They are still deprecated, but now fallback via the old properties. They
-  are no longer breaking. This concerns `FlexSubThemesData` properties:
-  - `bottomNavigationBarSchemeColor` -> `bottomNavigationBarSelectedLabelSchemeColor`
-  - `navigationBarTextSchemeColor` -> `navigationBarSelectedLabelSchemeColor`
-  - `navigationBarMutedUnselectedText` -> `navigationBarMutedUnselectedLabel`
-  - `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
-
-  And `FlexSubThemes.navigationBarTheme` properties:
-  - `textSchemeColor` -> `selectedLabelSchemeColor`
-  - `unselectedTextSchemeColor` -> `unselectedLabelSchemeColor`
-  - `iconSchemeColor` -> `selectedIconSchemeColor`
-  -  `mutedUnselectedText` -> `mutedUnselectedLabel`
-
-  And `FlexSubThemes.bottomNavigationBarTheme` properties:
-  - `baseSchemeColor ` -> `selectedLabelSchemeColor`
-
-  The old property names will be removed in release 6.0.0.
-
-**NEW**
-
-* Added `SchemeColor` based theming of `SnackBar` background color via
-  `snackBarBackgroundSchemeColor` in `FlexSubThemesData` and support for it
-  in `FlexSubThemes`.
-
-* Changed the color values for `FlexColor.materialLightSecondaryContainer` and
-  `FlexColor.materialLightSecondaryContainerHc`. These color properties
-  do not have any specification in Material 2 spec. Updated the colors values
-  that had been made up for **dev.1** release to better match the design intent
-  of those colors for the new Material 3 `ColorScheme`.
-
-* Added `inputDecoratorUnfocusedBorderIsColored` to `FlexSubThemesData` and
-  support for it in `FlexSubThemes` via `unfocusedBorderIsColored`. Previously
-  an unfocused or hovered border/underline always had a hint of selected
-  base color. Setting this to false, leaves it at the grey defaults used by
-  Flutter defaults.
-
-* Added `navigationBarIndicatorOpacity` and `navigationRailIndicatorOpacity`
-  to `FlexSubThemesData`, to expose their already existing properties in
-  corresponding sub-themes used by `FlexColorScheme`.
-
-**EXAMPLES**
-
-* *Themes Playground:*
-  - Added a new single panel "Page" view. The previous large masonry grid view
-    is still available. Both views can be used and switch to based on what
-    is appropriate when using different media sizes.
-  - The switches to keep main input colors for primary, secondary, tertiary
-    and their containers, where separated so that their state and code
-    generation for light and dark theme mode are separate. This makes them
-    more useful for actual theme setup. Earlier you had to separate them by
-    editing the generated code.
-  - Added display of SnackBar style to the Themed Material panel.
-  - Added display of more ListTile types.
-  - Added ColorScheme based color selection theming of SnackBar background color.
-  - Added CodeView as a panel of its own. It is now possible to view the
-    changes to generated code as settings are changed. In the
-    advanced view where one can keep it open and close other panels, except one
-    being operated in. In page view it is shown as last page, however if
-    the media is large enough, it is shown side-by-side with controls on current
-    page. This is a really handy view for studying what each control does in
-    the generated code.
-  - Added missing code gen for button border radius.
-  - Fixed broken code gen for dark mode blend level.
-  - Decoupled all bundled theming controls in the app.
-  - Added individual override controls for border radius to all components.
-  - Added option to swap or not swap computed dark mode main and container color.
-  - Added indicator opacity controls to NavigationBar and NavigationRail.
-  - Reduced amount of pre-set  defaults in the app, so it starts with simpler setup code.
-  - Changed the code gen style for dark mode when using from light mode computed dark theme.
-  - Changed the code gen, so it does not add any code when using API default values.
-  - Changed the ThemeService to use generic types.
-
-**TESTS**
-
-* Finalized test updates. Now 1684 tests, coverage about 99.8%.
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_5_0_0_dev_2.md)
 
 ## 5.0.0-dev.1
 
@@ -933,539 +819,7 @@ many new features, actual breaking changes are very few and mostly concerns
 in version 4 deprecated members and of course requiring minimum Flutter
 2.10.0 to work.
 
-The WIP updates now includes the version of the key color seeded M3 `ColorScheme`
-usage intended for the final design. The feature supports seeding by not only
-using a single `primary` key color, but also using separate key colors for
-`secondary` and `tertiary` colors. The Flutter SDK `ColorScheme.fromSeed` only
-support using a single color as seed. The `primary`, `secondary` and `tertiary`
-color are used as key color seeds, when seeding is used, and by default all
-three color are used as key for their respective tonal palette used by
-the generated `ColorScheme`. Using `secondary` and `tertiary` colors can each
-optionally be turned OFF. If both are, the result is same as when using
-`ColorScheme.fromSeed`, with the `primary` color as seed key color.
-
-When using a key seed color generated `ColorScheme`, it may sometimes, e.g., for
-branding purposes, be useful to lock a certain color in the resulting
-`ColorScheme` to the actual key color value used for `primary`, `secondary`
-and `tertiary`. `FlexColorScheme` includes scheme appropriate colors for
-each of these color properties, as well
-their containers. You can for each property define which ones you want to keep
-as defined by these input colors, in the seed generated `ColorScheme`. You
-can of course use this feature with custom input colors as well.
-
-The bundled example 5, the Themes Playground is now fully up to date with all
-the new features. Its updated code generation still
-needs results verification.
-
-There are also now in Flutter master channel more actual
-M3 impacts and ThemeData color property deprecations commits landed in Flutter
-master channel that I reviewed and prepared for in advance when possible.
-
-Much work on tests, and readme documentation updates remain, but API docs are
-up-to-date. This book long change log may also help. There are only a few
-breaking changes, and most of them are rarely used properties, so migration
-should be relatively easy, despite the long list of changes and new features.
-
-**BREAKING**
-
-* Requires at least Flutter stable 2.10.0.This release uses new M3 `ColorScheme`
-  properties that are not included before Flutter version 2.10.0, as well
-  as the `ThemeData` flag `useMaterial3`.
-
-* Removed parameter `surfaceStyle` from `FlexThemeData`
-  extensions `FlexThemeData.light` and `FlexThemeData.dark` that uses
-  in version 4.2.0 already deprecated property `surfaceStyle` in `FlexColorScheme`
-  class. The same deprecated property `surfaceStyle` in `FlexColorScheme` class
-  is still available in 5.0.0-dev.1. In the stable release 5.0.0 it might
-  be removed as well. They were all scheduled for deprecation in version 5.0.0,
-  but keeping it around a bit longer in the main class in 5.0.0-dev releases
-  to prolong backwards API compatibility during development. Maybe I will keep
-  it in the release too, many tests need to be rewritten when they are removed.
-
-* The enum `SchemeColor` has new values and past values are in a
-  new order. The **order was changed** to accommodate new color values and to
-  keep them in the same order as their corresponding color properties
-  in M3 `ColorScheme`. The change of order is potentially breaking, but unlikely
-  to break anything in major ways, other than possibly local storage of selected
-  enum values. In the bundled samples you might for example see wrong color
-  selections loaded from local storage, just reset or select correct value
-  to fix it.
-
-* To get more harmonized setup on opt-in sub themes for `NavigationBar`,
-  `BottomNavigationBar` and `NavigationRail` a few properties in
-  `FlexSubThemesData` and `FlexSubThemes` had to be modified and broken.
-  Impact is estimated to be low for most users.
-
-  The following properties were renamed in `FlexSubThemesData`:
-  * `navigationBarTextSchemeColor` -> `navigationBarSelectedLabelSchemeColor`
-  * `navigationBarMutedUnselectedText` -> `navigationBarMutedUnselectedLabel`
-  * `navigationBarIconSchemeColor` -> `navigationBarSelectedIconSchemeColor`
-  * `bottomNavigationBarSchemeColor` -> `bottomNavigationBarSelectedLabelSchemeColor`
-
-  In `FlexSubThemesData` the property `navigationBarIsStyled` was removed. It is
-  no longer needed. The same end result it enabled can be achieved by
-  setting all NavigationBar related properties in `FlexSubThemesData` that
-  have a none null default value to null.
-
-  The following parameters were renamed in `FlexSubThemes.navigationBarTheme`:
-  * `textSchemeColor` -> `selectedLabelSchemeColor`
-  * `unselectedTextSchemeColor` -> `unselectedLabelSchemeColor`
-  * `iconSchemeColor` -> `selectedIconSchemeColor`
-  * `mutedUnselectedText` -> `mutedUnselectedLabel`
-
-  The following parameter was renamed in `FlexSubThemes.bottomNavigationBarTheme`:
-  * `baseSchemeColor ` -> `selectedLabelSchemeColor`
-
-
-**NEW**
-
-* Added `useMaterial3` to all theme constructors and factories. This is
-  the same flag as in `ThemeData`, it does not have any major impact on
-  default themed widgets in Flutter 2.10.x. Opting in on opinionated
-  sub-themes, will however as before give opinionated component sub-themes that
-  result in Material 3 like styles. Similar look will become default widget
-  design in later Flutter SDK versions when using the flag `useMaterial3` is
-  set to true.
-
-* Added new properties `onPrimaryContainer`, `onSecondaryContainer`,
-  `tertiary`, `tertiaryContainer`, `onTertiary` and  `onTertiaryContainer` to
-  the un-named`FlexColorScheme` constructor and factories
-  `FlexColorScheme.light` and `FlexColorScheme.dark`, as well as to extension
-  `FlexThemeData` to extensions `FlexThemeData.light` and `FlexThemeData.dark`
-  on `ThemeData`.
-
-* In `FlexColor` added new color properties for all color values to cover the
-  new "`Container`" color properties in Flutter 2.10 new M3 `ColorScheme`.
-  For every built-in `FlexColor`, there are now also these new color properties:
-   - `primaryContainer`
-   - `secondaryContainer`
-   - `tertiary`
-   - `tertiaryContainer`
-
-   The previous color values maps as follows:
-   - `tertiary` = old `secondaryVariant` color value, that is deprecated
-     for each color value.
-   - Old `primaryVariant`, is just deprecated for each color value.
-
-   The "variant" colors are still available as deprecated properties, and will
-   remain available until version 6.0.0. The old color properties and their values
-   still work as inputs, and they produce same equivalent `ColorScheme` results
-   as before. This is done by the values still being assigned as fallback value
-   in custom schemes so that new:
-   - `primaryContainer` if not assigned, falls back via old `primaryVariant`.
-   - `secondaryContainer` if not assigned, falls back via old `secondaryVariant`.
-
-   When it comes to the new built-in scheme designs, the color used on past:
-   - `secondaryVariant` was a reasonable fit for new M3 `tertiary` color property
-     and was used as its value.
-   - The new properties `secondaryContainer` and
-     `tertiaryContainer`, had to get new built-in color values that fit with
-     the M3 design intent for those color properties. This while considering the
-     value `secondary` already had, and the value `tertiary` got by being
-     assigned the color value of past `secondaryVariant`.
-   - The new color property `primaryContainer` also needed a new color value. The
-     past `primaryVariant` is not the correct design fit for how the color
-     value is intended to be used in M3 Color design.
-   - In many cases it was possible to make nice color schemes, by reshuffling
-     some existing color values and using colors from light scheme, in container
-     properties in dark scheme and vice versa. Sometimes new better tuned
-     color values were used. In all events all `Container` color properties
-     are **new** features in this release, so they are considered "new" even
-     if their color value might have been recycled from previous properties
-     in some cases. Some `Container` color values **may** still be fine-tuned
-     before final 5.0.0 release, but it is unlikely.
-
-
-* In class `FlexSchemeColor` added **new** color properties
-  `primaryContainer` and `secondaryContainer` they replace
-  deprecated properties `primaryVariant`and `secondaryVariant`. The old
-  properties still work and are
-  used as fallback to the new ones when the new ones are not provided.
-  The previous properties are still available as deprecated, and will remain
-  available until version 6.0.0, or until they are removed from the Flutter
-  stable channel, whichever comes first. The properties for built-in schemes
-  were assigned to their new corresponding `FlexColor`values.
-
-* In class `FlexSchemeColor` added **new** color definitions from `FlexColor`
-  for `FlexSchemeColor.tertiary` and `FlexSchemeColor.tertiaryContainer`.
-
-* In class `FlexSchemeColor` the `FlexSchemeColor.secondaryContainer`
-  and `FlexSchemeColor.tertiaryContainer` should be brighter versions of their
-  none container parent light mode and darker in dark mode. They receive
-  such color values via new corresponding `FlexColor`values.
-
-* In factory `FlexSchemeColor.from` added optional and nullable parameter
-  `brightness`. If not assigned, the factory works as before, producing a
-  complete `FlexSchemeColor` from just one or more color property inputs,
-  by producing a toned complete `FlexSchemeColor` suitable for a light or
-  dark M2 design based theme. If brightness is given value `Brightness.light`
-  it produces a `FlexSchemeColor` from just one or more color property inputs
-  suitable for a M3 light theme mode theme. If `brightness` is dark, for
-  a dark mode intended M3 scheme. When `brightness` is defined the factory
-  also sets defaults for `error` and `errorContainer` colors, if they
-  were not passed in. The `error` color is based on the Material 2 guide color
-  and `errorContainer` is a FlexColorScheme definition as it has no M2 value.
-  Seed based new M3 error colors are used when using key based seeded M3
-  ColorScheme. An option to also use M3 based error colors when not using
-  seeded ColorScheme, may be added in a future version.
-
-
-* Factory `FlexSchemeColor.effective` got the same nullable and optional
-  `brightness` property as `FlexSchemeColor.from`, with same functionality,
-  producing the same kind of M3 tone mapped colors when reducing amount of
-  used colors, and also providing error color defaults.
-  The `FlexSchemeColor.effective` factory otherwise works as before considering
-  color swapping and effective input colors reduction. Producing same results
-  via `usedColors` input limiter as if provided `FlexSchemeColor` would have
-  been created with `FlexSchemeColor.from` limited to same colors as implied
-  by `usedColors` parameter in the `FlexSchemeColor.effective` factory.
-
-* To the method `FlexSchemeColor.toDark()`, that computes a dark theme mode
-  appropriate `FlexSchemeColor` set from colors designed for light
-  theme mode, added the optional positional bool parameter `swapColors`.
-  It is false by default to not break past behavior.
-  It is used to swap the "main" and its `Container` color properties. So that
-  `primary` <> `primaryContainer`, `secondary`<> `secondaryContainer` and
-  `tertiary`<> `tertiaryContainer` in the input light theme mode designed
-  `FlexSchemeColor` are swapped before producing the output `FlexSchemeColor`
-  suitable for a dark theme mode. This is useful if the input
-  `FlexSchemeColor` is designed for a light M3 based `ColorScheme`. If it is
-  then, to get a correct M3 designed output and via `whiteBlend` value
-  desaturated colors, the main and container values of the light mode colors
-  should be swapped in the result. In light mode, M3 main is darker than
-  container, but in M3 dark mode it should be the other way around so that
-  main is lighter and container is darker. By swapping the colors and then
-  de-saturate them with an adjustable white alpha blend, we can achieve
-  this design goal as well, when computed dark theme mode colors from a set
-  of provided light theme mode input colors.
-
-
-* Added additional opinionated component sub-themes for:
-  - `SwitchThemeData` via `FlexSubThemes.switchTheme`.
-  - `CheckboxTHemeData` via `FlexSubThemes.checkboxTheme`.
-  - `Radio` via `FlexSubThemes.radioTheme`.
-  - `NavigationRailThemeData` via `FlexSubThemes.navigationRailTheme`.
-
-  There are many quick and easy configuration parameters added
-  to `FlexSubThemesData`. The following built-in widgets now have quick and
-  easy custom theming option via sub-themes opt-in.
-
-  * `TextButton`
-  * `ElevatedButton`
-  * `OutlinedButton`
-  * Older buttons using `ButtonThemeData`
-  * `ToggleButtons`
-  * `Switch`
-  * `Checkbox`
-  * `Radio`
-  * `InputDecoration`
-  * `FloatingActionButton`
-  * `Chip`
-  * `Card`
-  * `PopupMenuButton`
-  * `Dialog`
-  * `TimePickerDialog`
-  * `SnackBar`
-  * `Tooltip`
-  * `BottomSheet`
-  * `BottomNavigationBar`
-  * `NavigationBar`
-  * `NavigationRail`
-
-* Added additional `ColorScheme` color selection options to component
-  sub-themes configuration class `FlexSubThemesData`. The feature
-  introduced in version 4.2.0 is now also supported by sub-themes for:
-  - `FloatingActionButton`, via `FlexSubThemesData.fabSchemeColor`.
-  - `TextButton`, via `FlexSubThemesData.textButtonColor`.
-  - `ElevatedButton`, via `FlexSubThemesData.elevatedButtonColor`.
-  - `OutlinedButton`, via `FlexSubThemesData.outlinedButtonColor`.
-  - `MaterialButton`, via `FlexSubThemesData.materialButtonColor`.
-  - `ToggleButtons`, via `FlexSubThemesData.toggleButtonsColor`.
-  - `Switch` via `FlexSubThemes.switchTheme`.
-  - `Checkbox` via `FlexSubThemes.checkboxTheme`.
-  - `Radio` via `FlexSubThemes.radioTheme`.
-  - `NavigationRail` via `FlexSubThemes.navigationRailTheme`.
-  - Dialog backgrounds, affects `DialogTheme` and `TimePickerThemeData`
-    via `FlexSubThemesData.dialogBackgroundColor`. If used this property
-    overrides color property `dialogBackground` in all FlexColorScheme
-    constructors, factories and theme data extensions.
-  - `AppBar` background color, via the AppBar sub-theme definition is built into
-    the `FlexColorScheme.toTheme` method (legacy).
-    May migrate its implementation to own `FlexSubThemes` sub-theme later.
-  - `TabBar` for indicator and item color. The TabBar sub-theme definition
-     is currently built into the `FlexColorScheme.toTheme` method (legacy).
-     May migrate its implementation to own `FlexSubThemes` sub-theme later.
-
-
-* Added a `FlexKeyColors` configuration class that can be used with
-  the `FlexColorScheme.keyColors` to enable and configure Material 3 based
-  key color based tonal palettes' generation that are then used to define
-  the `ColorScheme`. The tonal palettes are generated using existing
-  built-in or custom colors, as key colors for generating palettes.
-  The method matches the `ColorScheme.fromSeed` Flutter SDK
-  feature if you only use primary color as input. However, it also offers more
-  configuration and flexibility on how to use key colors as seed colors. It
-  does so without the need to go to lower API levels to produce custom tonal
-  palettes and use them manually in the `ColorScheme` definition. The
-  implementation makes it easy to use a combination of key seeded colors and
-  fixed colors, in any combination, to produce the color scheme.
-  This makes using seeded colors an option for supplementary colors while e.g.,
-  primary color is locked to a given brand or design color value, but
-  other colors in the ColorScheme are less critical, and it is more important
-  that they match the tone of the over all theme.
-
-* Added bool property `useMaterial3ErrorColors` to `FlexColorScheme.light` and
-  `FlexColorScheme.dark`. Set to true, to use the new Material 3 error colors,
-  instead of past Material2 based ones, which are still default. When using key
-  color seed generated [ColorScheme]s always use the Material 3 based error
-  colors.
-
-* Added custom tone configuration for seeded `ColorScheme`. M3 color design
-  has it own fixed defaults for which tone from the relevant `TonalPalette`
-  is used as input on each color property in the light and corresponding dark
-  `ColorScheme`. By configuring and passing in a `FlexTones` to `tones` in
-  `FlexColorScheme.light` and `FlexColorScheme.dark` it is possible
-  to control which color tone from the relevant `TonalPalette` is used for
-  each color property in generated `ColorScheme`.
-  Obviously making poor selections produces bad results, but there are some
-  tuning that works very well for different needs, e.g., primary could
-  be assigned a one step lower value in light mode, to produce seeded color
-  schemes that are more vivid or saturated.
-
-
-* The Material 3 based seeded `ColorScheme` also locks down the chroma level of
-  seed color for secondary colors to 16 and to 24 for tertiary colors, and keeps
-  it at min 48 for primary color. The `FlexTones` configuration makes it
-  possible to change these restrictions. You can then get more vivid tonal
-  palettes also for secondary and tertiary `TonalPalettes`. FlexTones has a
-  `FlexTones.light` and `FlexTones.dark` constructor that have default values
-  that gives the same result as using the hard coded `ColorScheme.fromSeed`
-  tone mapping and chroma limit behavior on `TonalPalette`. These constructors
-  are also convenient to use when making custom `FlexTones` setups. To show
-  how, it comes with four built in examples. They take a `Brightness` value
-  as input, and return `FlexTones` configs with different design goals suitable
-  for dark or light mode brightness themes. There is `FlexTones.material`, it is
-  an alternative `Brightness` input based API for `FlexTones.light` and
- `FlexTones.dark` to get the default Material 3 design guide config.
-  Similarly, there are 3 alternative configurations.
-  * `FlexTones.soft` for even softer and more earthy tones than
-     M3 defaults, that are pretty soft and pastel like to begin with.
-  * If you prefer more vivid tones to be generated, try `FlexTones.vivid`.
-  * If you like or need more contrast differences between your colors, you can
-    try `FlexTones.highContrast`.
-
-  It is easy to make your own configs with the API. The setup of the
-  these built-in examples shows how.
-
-
-* Added new alpha blend control `blendOnLevel` value for onColors to class
-  `FlexSubThemesData`. It is used to produce onColors for main colors that
-  can be adjusted and be more in-line with M3 seed color usage design by tuning
-  their blend level. Before, this was turned on via `blendOnColors` toggle
-  that will remain, but has a slightly modified new function.
-  The `blendOnLevel` introduces a new blend level value for onColor that is not
-  tied to used blend level on surfaces.
-
-
-* Defined matching color values for new `FlexSchemeColor.secondaryContainer`
-  and `FlexSchemeColor.tertiaryContainer` for all existing built-in
-  color schemes. This was surprisingly tedious task.
-
-* **New color schemes:** Added four new built-in color schemes.
-  Total number of color schemes is now 40 matched light and dark pairs.
-  * **Flutter Dash** - A Flutter Dash 4k desktop wallpaper colors based theme.
-    Use enum value `FlexScheme.flutterDash` for easy access to it.
-  * **M3 baseline** - Material guide 3 baseline based theme.
-    Use enum value `FlexScheme.materialBaseline` for easy access to it.
-  * **Verdun green** - Material guide 3 verdun and mineral green with hemlock.
-    Use enum value `FlexScheme.verdunHemlock` for easy access to it.
-  * **Dell genoa green** - Material guide 3 theme with dell, axolotl
-   and genoa greens.
-   Use enum value `FlexScheme.dellGenoa` for easy access to it.
-
-**CHANGE**
-
-* Added all the new `ColorScheme` M3 color properties to `SchemeColor`
-  enum and its static functions `schemeColor` and `schemeColorPair`.
-  Deprecated the enum values `primaryVariant` and `secondaryVariant`. These
-  deprecated enum values are still available, but return correct replacement M3
-  color values from the in Flutter 2.10.0 updated `ColorScheme` when using
-  functions `schemeColor` and `schemeColorPair`.
-
-* To class `FlexColorScheme` default constructor, `light` and
-  `dark` factories, added properties `primaryContainer` and
-  `secondaryContainer`. They replace deprecated properties `primaryVariant`
-  `secondaryVariant`. The old properties still work and are used as fallback to
-  the new ones, if the new ones are not provided.
-  The previous properties are still available as deprecated, and will remain
-  available until version 6.0.0.
-
-* In extension `FlexThemeData` to extensions `FlexThemeData.light`
-  and `FlexThemeData.dark` added properties `primaryContainer` and
-  `secondaryContainer`. They replace deprecated properties `primaryVariant`
-  `secondaryVariant`. The old properties still work and are used as fallback to
-  the new ones, if the new ones are not provided.
-  The previous properties are still available as deprecated, and will remain
-  available until version 6.0.0.
-
-
-* The opt-in, custom M3 `TextTheme` is now defined using the
-  new actual M3 `TextStyle` names available in Flutter 2.10.0. The change is
-  none breaking thanks to underlying implementation in Flutter SDK 2.10.0.
-  It now also includes the new styles `headlineMedium` and `labelMedium` that do
-  not directly map to any previous M2 text styles. Flutter SDK automatically
-  maps the new `TextTheme` and its `TextStyles` to corresponding M2 text style
-  names, so they work and can be used as before. This opt-in TextTheme includes
-  the new M3 typography (text size and letter spacing), for what presumably will
-  become `EnglishLike2021` as `Typography` when it is included in Flutter.
-  This typography (font geometry) is not yet available in Flutter 2.10.0 and
-  was not even in master at the time when Flutter 2.10.0 was released.
-  FlexColorScheme has included a EnglishLike2021 geometry since version
-  4.0.0, now it also uses the correct `TextStyle` names since they became
-  available in Flutter 2.10.0. The actual `EnglishLike2021` will arrive in
-  the Flutter stable release after 2.10.x. The current custom version of it
-  will be removed then.
-
-* The feature of `blendOnColors` has changed design wise slightly, it is now
-  used as a toggle to indicate that on colors for the main colors,
-  that is onPrimary, onSecondary, onTertiary and onError should also receive
-  an alpha bland of its color pair, of strength `blendOnLevel`/2 when
-  `blendOnColors` is true. If `blendOnColors` is false, they use white or
-  black contrast color as appropriate for their main color pair. The
-  blending of onColor only occurs when their main color is not using seed
-  based ColorScheme based color value.
-
-* The `darkIsTrueBlack` option in `FlexColorScheme.dark` that makes and keeps
-  scaffold background fully black, now makes other blended surfaces 5% darker
-  instead of 8%, scaffold remains black.
-
-* The `lightIsWhite` option in `FlexColorScheme.light` that makes and keeps
-  scaffold background fully white, now makes other blended surfaces 5% lighter
-  instead of 8%, scaffold remains white.
-
-* The built-in description for `FlexScheme.material` was changed to
-  "Default Material 2 color theme, used in the design guide" from
-  "Default Material color theme, used in the design guide", to make it clear
-  it came from the M2 guide.
-
-* The built-in description for `FlexScheme.materialHc` was changed to
-  "High contrast Material 2 design guide theme" from
-  "High contrast Material design guide theme", to make it clear it came
-  from the M2 guide.
-
-* The order of the colors, in the rarely outside FlexColorScheme
-  used demo apps, theme presentation/switch button `FlexThemeModeSwitch` was
-  changed for better placement of new color `primaryContainer` and `tertiary`.
-  The Colors `primaryVariant` and `secondaryVariant` were removed from it
-  since the colors are deprecated in Flutter SDK. The change was from:
-
-  | Before           | Before            |
-  |------------------|-------------------|
-  | Primary          | Primary variant   |
-  | Secondary        | Secondary variant |
-
-   to:
-
-  | After              | After           |
-  |--------------------|-----------------|
-  | Primary            | Secondary       |
-  | Primary container  | Tertiary        |
-
-
-**FIX**
-
-* When using `FlexSubThemesData.inputDecoratorSchemeColor` the floating label
-  did not change to the selected ColorScheme based `SchemeColor`. Now it does,
-  it also keeps the correct error color behavior. Tricky bugger to define this
-  one by the way.
-
-* **FIX TO MATCH M2 SPEC** and **STYLE BREAKING**: In **all** previous versions
-   of FlexColorScheme, the Flutter
-  `ThemeData.estimateBrightnessForColor` was used to calculate if black or white
-  on color should be used on the `error` colors. In dark mode for the default
-  error `FlexColor.materialDarkError` and the high contrast dark mode error
-  color `FlexColor.materialDarkErrorHc`, this resulted in correctly computed
-  contrast color value **white** being used on them. Regardless of this, the
-  Material 2 guide specifies and Flutter SDK uses, **black** as the on color
-  for these colors. These two cases were added as special considerations
-  to return black color for these two particular color cases, even if the Flutter
-  contrast color computation says it should be white, but since M2 spec is black,
-  we decided to go with that despite this. It is a borderline case, both work
-  but results in different style.
-
-**KNOWN ISSUES**
-
-* Due to Flutter SDK
-  [issue #100027](https://github.com/flutter/flutter/issues/100027)
-  "Using systemNavigationBarDividerColor changes statusBarIconBrightness and
-  systemNavigationBarIconBrightness on Android 11" a number of temporary
-  changes were made to `FlexColorScheme.themedSystemNavigationBar`. The
-  divider feature is disabled until the issue has been resolved. There is
-  also a temporary workaround implemented, it attempts to keep system icons from
-  getting the wrong brightness on Android 11. It may not always work.
-
-**EXAMPLES**
-
-* Updates to examples 1...4
-  - Add a few of the new features to examples 3 and 4.
-  - Removed showing the old, already in Flutter v1.26 deprecated
-    buttons `RaisedButton`, `OutlineButton` and `FlatButton` in ALL the examples.
-    They are going away in next stable release of Flutter after 2.10.x, as
-    per this notice [#98537](https://github.com/flutter/flutter/issues/98537).
-
-* Update default example app *Hot Reload Playground*.
-
-* Major update to example 5 *Themes Playground*, it now
-  includes support for all the new features:
-
-  - Added config for unselected toggleable style.
-  - Added feature to export the code for the active `ColorScheme`.
-  - Added color scheme color configuration to all opinionated component
-    sub-themes that have it.
-  - Added color limit input `usedColors`, it is an old
-    API in FlexColorScheme, it has just never been featured much.
-  - Added `useMaterial3` toggle.
-  - Added controls for using key color dynamic seeded ColorScheme, using
-    the predefined colors primary, secondary and tertiary as seed colors.
-  - Added a setup that demonstrates the usage
-    of `FlexTones`. Made some useful setups as pre-configured FlexTones, and the
-    playground uses demo. Now comes with `FlexTones.material` for the default
-    Material 3 design guide config, and `FlexTones.soft`, `FlexTones.vivid`,
-    `FlexTones.vividSurfaces` and `FlexTones.highContrast` as built-in
-    pre-configured options. It is easy to make own configs with the API.
-  - The ThemesPlayground paints active TonalPalettes and highlights selected
-    tones in the palettes when you have on a ColorScheme color. May extend this
-    to make an interactively configurable tonal setup by pickling tones from
-    the `TonalPalette` and sliders to adjust chroma. this could later be used to
-    create a custom `FlexTones` config and get it as part of setup code too.
-  - Playground Cupertino adaptive switches now also follow theme via
-    a custom SwitchListTileAdaptive wrapper. The iOS green switches are an
-    eyesore imo, but the SDK adaptive switch cannot be changed via a theme
-    alone. Needed to make a custom  widget where active thumb,
-    explicitly uses switch theme color as thumb color, sigh.
-  - Added border radius individual override adjustments on buttons, to demo
-    that the API can do it too.
-  - NavigationBar, BottomNavigationBar and Android system navigation bar were
-    given separate panels, and many new configuration options. They still share
-    some controller values, might separate them in some future version of
-    the app.
-  - Added NavigationRail Settings panel, with similar settings and NavigationBar.
-
-**TESTS**
-
-* Tests are still incomplete and currently down to about 86% coverage,
-  but at least all existing (1275) ones are passing and behave as expected.
-* Add tests for new `SchemeColor` properties.
-* Add tests for `FlexTones`.
-* Add tests for `FlexKeyColors`.
-* Add tests for `FlexCorePalette`.
-* Add test for all new sub-themes in `FlexSubThemes`.
-* Add tests for new `useMaterial3` property.
-* Add tests for all new sub themes `FlexSubThemes` and its config data
-  in `FlexSubThemesData`.
-* Add more tests for legacy fallbacks when using old deprecated
-  `primaryVariant` and `secondaryVariant` properties.
-* Add tests and verification of old colors definition backwards behavior.
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_5_0_0_dev_1.md)
 
 ## 4.2.0
 
@@ -1856,447 +1210,85 @@ features, that it in itself warrants a new major release bump.
 
 **November 13, 2021**
 
-* See change log for stable 4.0.0, it was the same for this dev release.
-  the text is just not repeated here anymore.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_4_0_0_dev_1.md)
 
 ## 3.0.1
 
 **July 1, 2021**
 
-**FIX**
-
-* The internal order of swapping primary and secondary colors and reducing
-  used colors in static function `FlexSchemeColor.effective(FlexSchemeColor colors,
-  int usedColors, {bool swapColors = false})` matters for the intended result when
-  used together in the same call. The function now swaps primary and secondary colors,
-  before reducing the used colors.
-
-* Documentation and typo fixes.
-
-**Tests**
-* Added tests for above fix that captures the issue and fails
-  in version 3.0.0. Total 741 tests, coverage 99.75%.
-
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_3_0_1.md)
 
 ## 3.0.0
 
 **June 25, 2021**
 
-**BREAKING**
-
-* The color `accentColor` is being deprecated in Flutter SDK `ThemeData` starting
-  from version v2.3.0-0.1.pre. For more info see
-  [Flutter docs here.](https://flutter.dev/docs/release/breaking-changes/theme-data-accent-properties)
-
-  Usage of `accentColor` in **FlexColorScheme** is removed to support this
-  transition. The property is deprecated in FlexColorScheme, but it is still present. Its
-  usage does however no longer have any impact on produced themes.
-  This is a potential breaking change.
-  The probability that you might have used it as a property in your
-  FlexColorScheme based theme is low. It was before set to primary color
-  in FlexColorScheme, as a way to make the highlight color of outlines and underlines on
-  text field boxes primary colored in dark theme mode. In default Flutter dark theme they
-  used accentColor that followed `colorScheme.secondary` color. The old `accentColor` was
-  previously not used for anything else in themes anymore when using FlexColorScheme.
-  The property is now going away totally in Flutter SDK.
-  The default ThemeData in Flutter SDK in dark mode now creates a
-  theme for outline and underline indicators on input fields that are based on primary color,
-  just like **FlexColorScheme** always did. The resulting default dark mode style on text
-  fields thus remains unchanged in FlexColorScheme even with this definition removed.
-
-  If you had used `accentColor` in FlexColorScheme as an unusual way to define a different
-  text field outline or underline color in dark mode than primary color. In that case
-  you will need to recreate this style via a text field decoration theme.
-
-
-**NEW** 
- 
-* The `FlexColorScheme.dark` and `FlexColorScheme.light` factories have a new
-  property called `swapColors`. If true, this will swap `primary` and `primaryVariant`
-  colors with their secondary counter-parts.
-
-  This flag can be set to true if you want to make a theme where your primary and secondary
-  colors are swapped compared to their definition. It is useful if you want to quickly
-  swap primary and secondary colors when using the pre-defined color
-  schemes or with computed dark schemes from light schemes. It doubles the
-  variation possibilities of themes based on the pre-defined color schemes.
-
-  If you are explicitly defining all you light or dark scheme colors, you can of course define
-  them in desired order. This feature will still swap whatever
-  colors you defined for primary and secondary when set to true. You can thus also
-  use this feature as an easy end-user modifiable theme option, if you like
-  to offer the capability to toggle the primary and secondary theme colors the
-  other way around.
-
-
-* The static function `FlexSchemeColor.effective(FlexSchemeColor colors,
-  int usedColors, {bool swapColors = false})` is used to implement the above
-  `swapColors` feature. It also exposes the logic behind the FlexColorScheme
-  dark and light theme `usedColors` property. This static method is helpful if
-  you need to compute effective built-in theme colors externally to FlexColorScheme
-  to present the active theme, based on these settings. This is used by example 5
-  to change the colors on the theme mode switch when the swap color settings
-  is toggled. The `usedColors` property is not shown in any bundled
-  example, but it can be used the same way.
-
-
-* **New color schemes:** Added four new built-in color schemes.
-  * **Bahama and trinidad** - Bahama blue and trinidad orange colored theme.
-    Use enum value `FlexScheme.bahamaBlue` for easy access to it.
-  * **Mallard and valencia** - Mallard green and Valencia pink colored theme.
-    Use enum value `FlexScheme.mallardGreen` for easy access to it.
-  * **Espresso and crema** - Espresso dark brown and crema colored theme.
-    Use enum value `FlexScheme.espresso` for easy access to it.
-  * **Outer space stage** - Outer space dark blue-grey and stage red theme.
-    Use enum value `FlexScheme.outerSpace` for easy access to it.
-
-**TESTS** 
- 
-* Added tests for the new features and removed test related to
-  `accentColor`. Total 736 tests, coverage 99.75%.
-
-**OTHER**
-
-* Inspired by **MaterialYou** at GoogleIO 2021, I recently hooked up **FlexColorScheme**
-  with a Google Dart library that extracts prominent colors from images. Then fed these
-  colors to FlexColorScheme to make themes from them. The above new color schemes in
-  release 3.0.0 came from these image based theme experiments. You can see examples
-  of **FlexColorScheme** making color schemes and themes from images in my Tweets about it.
-  This was a first [quick test](https://twitter.com/RydMike/status/1399139552200114179?s=20)
-  of the idea, later I added some more features to it, [here](https://twitter.com/RydMike/status/1399301081939820545?s=20) and [here](https://twitter.com/RydMike/status/1399933068614504451?s=20). These
-  quick tests show that FlexColorScheme is very versatile. It already supports
-  Android 12 like image color branded themes, by wiring extracted image
-  colors, to colors in a FlexColorScheme based theme.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_3_0_0.md)
 
 ## 2.1.1
 
 **March 30, 2021**
 
-**CHANGE** 
- 
-* Made the VoidCallback `onSelect` in `FlexThemeModeOptionButton` nullable.
-  The optional callback allows for the button to be used for example as a trailing
-  widget in a ListTile. Keep it null to not have any callback, nor hover or Ink of its own, and use
-  the select event of the parent instead. When it is used as standalone button you
-  normally want to use this callback, but not if you want the parent to handle it, that use case was
-  not allowed with previous version.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_2_1_1.md)
 
 ## 2.1.0
 
 **March 22, 2021**
 
-**FIX** 
- 
-* Toggling `FlexColorScheme(transparentStatusBar)` from true to false, did not restore the
-  Android default status bar scrim, unless the app was completely rebuilt. This has been fixed.
- 
-* When using `FlexColorScheme.themedSystemNavigationBar(useDivider)` in an `AnnotatedRegion`, toggling
-  `useDivider` from true to false, did not remove the system navigation bar divider again, unless the
-  app was completely rebuilt. This has been fixed, see API docs for more info.
- 
-**NEW** 
- 
-* The `FlexColorScheme.themedSystemNavigationBar` for styling the system navigation bar got a
-  new convenience property `systemNavBarStyle` that takes a `FlexSystemNavBarStyle` enum with values:
-  * `system` for default white system nav bar in light theme and black in dark theme mode.
-  * `surface` the system navigation bar will be the same color as active theme `colorScheme.surface` color.
-    If your FlexColorScheme definition is set to use primary branded surface and background colors, the
-    same primary color blend that the surface color has received will be used.
-  * `background` the system navigation bar will be the same color as active theme `colorScheme.background` color.
-    If your FlexColorScheme definition is set to use primary branded surface and background colors, the
-    same primary color blend that the background color has received will be used.
-  * `scaffoldBackground` the system navigation bar will be the same color as active theme `scaffoldBackground` color.
-    If your FlexColorScheme definition is set to use primary branded surface and background colors, the
-    same primary color blend that the scaffoldBackground color has received will be used.
-  * `transparent` an experimental feature. The goal is to make the system navigation bar fully transparent,
-    showing the background, while navigation buttons float over the background. This feature only works if it is
-    also configured in the Android embedder and on SDK 30 or higher.
-    More information in this example: https://github.com/rydmike/sysnavbar
- 
-**EXAMPLES** 
-
-* Added status bar scrim, system navigation bar divider,
-  and navigation bar style toggles to example 5.
-  These only work on Android builds and do not have any functionality on the live Web builds.
-
-**TESTS**
-
-* Added tests for the new features. Total 690 tests, coverage 99.75%.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_2_1_0.md)
 
 ## 2.0.0
 
 **March 15, 2021**
 
-## Overview
-
-First stable release of FlexColorScheme with sound null safety.
-Includes the changes from [2.0.0-nullsafety.1] and [2.0.0-nullsafety.2].
- 
-**BREAKING** 
-
-* The by default enabled divider for `FlexColorScheme.themedSystemNavigationBar` has been
-  revised to be disabled by default. To use a divider on the top of the system navigation bar on 
-  Android, you have to enabled it manually. This is more in line with expected default behavior.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_2_0_0.md)
 
 ## 2.0.0-nullsafety.2
 
 **March 15, 2021**
 
-**BREAKING**
-
-* Minor change to the none default `tooltipsMatchBackground: true` border style, it now uses
-  the theme divider color as its default outline color.
-* As stated earlier in the documentation, as a planned change for version 2.0.0, the sub theme for
-  `FloatingActionButtonThemeData` was removed. It is thus now null, just as in a default Flutter ThemeData.
-  It still produces the same theme as before, the ThemeData definition was just no longer needed to do so.
- 
-**NEW**
-
-* The static helper `FlexColorScheme.themedSystemNavigationBar` received three new properties
-  `noAppBar`, `invertStatusIcons` and `systemNavigationBarDividerColor`. The old property
-  `nullContextBackground` was deprecated and replaced with `systemNavigationBarColor`. Example 5
-  has been updated to show how and when these new features can be used.
- 
-**CHANGE**
-* AppBar theming to use the implementation introduced in Flutter 2.0.0 instead of using
-  its own custom implementation for the "white" app bar theme.
- 
-**TESTS**
-
-* Number of tests increased from 639 to 661. Coverage 99.78%.
- 
-**DOCS**
-
-* Added thumbnails to **Appendix A**. This pub.dev version is also to test the
-  thumbnails work and how they look on pub.dev before stable 2.0.0 release.
-
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_2_0_0-nullsafety_2.md)
 
 ## 2.0.0-nullsafety.1
 
 **February 4, 2021**
 
-### Overview
-
-First dev version with null-safety. 
-
-**BREAKING** 
-
-* Removed the in version 1.3.0 deprecated `FlexSchemeSurfaceColors.themeSurface`, use
-  `FlexSchemeSurfaceColors.surfaceStyle` instead.
-
-**TESTS**
-
-* Number of tests were reduced from 723 to 639, when all null related tests were removed.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_2_0_0-nullsafety_1.md)
 
 ## 1.4.1
  
 **January 31, 2021**
 
-**NEW**
-
-* **New color schemes:** Added four new built-in color schemes.
-  * **Barossa** - Barossa red and cardin green theme.
-    Use enum value `FlexScheme.barossa` for easy access to it.
-  * **Shark and orange** - Shark grey and orange ecstasy theme.
-    Use enum value `FlexScheme.shark` for easy access to it.
-  * **Big stone tulip** - Big stone blue and tulip tree yellow theme.
-    Use enum value `FlexScheme.bigStone` for easy access to it.
-  * **Damask and lunar** - Damask red and lunar green theme.
-    Use enum value `FlexScheme.damask` for easy access to it.
-
-* Semantics for the ThemeMode Widget buttons.
-
-**TESTS**
-
-* FlexThemeModeSwitch widget tests, makes and checks for system mode changes.
-* More tests, totally 723 tests, codecov is now > 99.5%.
-* **CI/CD:** Added GitHub actions to automate build and to publish the examples on the Web on a new release.
-
-**EXAMPLES** 
- 
-* Minor changes to the examples. Modified to not need the `late` keyword when they are converted
-  to null safe versions.
-
-**DOCS**
-
-* Added the new color schemes to the documentation.
-* Minor typo corrections.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_4_1.md)
 
 ## 1.4.0
 
 **January 18, 2021**
 
-**NEW**
- 
-* Added convenience property `scheme` to FlexColorScheme factories light and dark. This a shortcut for
-  using the built-in color schemes. The `colors` property can still be used as before. The `.light` and
-  `.dark` factories no longer have any required properties. If `scheme` is not provided it defaults
-  to `FlexScheme.material` and if both `scheme` and `colors` are provided, the scheme provided via `colors` prevail.
-* Added experimental support for transparent system navigation bar for Android for SDK >= 30 (Android 11).
-  The support is added via new `opacity` property in `FlexColorScheme.themedSystemNavigationBar`.
- 
-**EXAMPLES**
-
-* Updated the simple example 1 to use the new `scheme` property, as in
-  `theme: FlexColorScheme.light(scheme: FlexScheme.mandyRed).toTheme`.
-
-* Added a separate example that builds
-  on example 5, shows and explains how and when transparent system navigation bar can be used in Android. It also shows
-  how to make it look nice when using primary color branded background color applied to the system
-  navigation bar in Android, that is used when transparency is not supported. While if supported, your app otherwise
-  uses a transparent system navigation. Please see this separate small stand-alone example Android project
-  [**sysnavbar** on GitHub](https://github.com/rydmike/sysnavbar) for more information.
- 
-**TESTS**
-* Added more tests, now 689 tests. All color values used are now also tested, any modification to them is considered
-  a breaking change. A bit more tests would still be nice, for the ThemeModeSwitch Widget at least.
-  Total test coverage > 98%, it will do for now.
-
-**DOCS**
-
-* Changed example one and the intro, to use the new simpler `scheme` property when using built-in schemes.
-* Added a section that lists which sub-themes, and which of their properties, are NOT null when creating a theme data
-  object with FlexColorScheme.toTheme.
-* Removed the "back to content" link after each chapter. It was nice and worked fine on GitHub, but for some reason
-  it did not on pub.dev.
-* Tried finding and adding comments for the 3 missing API comments needed to reach 100% API
-  documentation comments, not sure if it succeeded. I will see when the update is published.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_4_0.md)
 
 ## 1.3.0
 
 **January 7, 2021**
 
-**DEPRECATED**
-
-* Marked `FlexSchemeSurfaceColors.themeSurface` as deprecated in favor of the correctly named
-  `FlexSchemeSurfaceColors.surfaceStyle` version. The older `themeSurface` will be removed when
-  null safe Version 2.0.0 is officially released as the main version.
-
-**NEW**
-
-* Added `Diagnosticable` mixin to classes `FlexSchemeOnColors`, `FlexSchemeSurfaceColors` and `FlexColorScheme`,
-  that all also received proper identity overrides and `copyWith` methods.
-
-**CHANGE** 
- 
-* Improved internal null safe behavior, with fall-backs values in some classes and helper functions.
-  It might make migration to null-safety easier.
-
-**TESTS**
-
-* Added 389 tests. Coverage is 89% based on Codecov report. Will add more tests later, enough for now.
-* The tests will make the migration to null-safety easier by providing some quality control checks.
-* Added GitHub actions to run all the tests and automated test coverage analysis with Codecov.
- 
-**DOCS**
- 
-* Documentation improvements and API doc fixes.
-  In previous version API-doc analysis says
-  "441 out of 444 API elements (99.3 %) have documentation comments.". I have not been able to find any missing ones.
-  The result from this update will only be seen after it has been uploaded, but I doubt it will change much. If
-  somebody happens to find the missing doc comments let my know, the IDE analyzer does not find them either.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_3_0.md)
 
 ## 1.2.0
 
 **January 4, 2021**
 
-**NEW**
-* Added four new built-in color schemes.
-  * **Amber blue** - Amber blaze and blue color theme, based on Material amber and blue accent colors.
-    Use enum value `FlexScheme.amber` for easy access to it.
-  * **Vesuvius burned** - Vesuvius burned orange and eden green theme.
-    Use enum value `FlexScheme.vesuviusBurn` for easy access to it.
-  * **Deep purple** - Deep purple daisy bush theme, based on Material deepPurple and lightBlueAccent colors.
-    Use enum value `FlexScheme.deepPurple` for easy access to it.
-  * **Ebony clay** - Ebony clay dark blue-grey and watercourse green colored theme.
-    Use enum value `FlexScheme.ebonyClay` for easy access to it.
-
-* Added a style option for the tab bar. The `FlexColorScheme` created tab bar theme now **defaults** to a
-  `TabBarTheme` that fits its created `AppBarTheme`, also works via the factory app bar style options. There is also
-  an optional style that makes the tab bar theme suitable for surface and background colors. This was the
-  default style before. The change to this default style is a **fix** to make the default `TabBarTheme` one that
-  fits on app bar's instead, which is expected default behavior in Flutter and Material design.
-  The style is set via the `FlexColorScheme` property `tabBarStyle` using enum values `FlexTabBarStyle.forAppBar`
-  (default) and `FlexTabBarStyle.forBackground`.
-
-* The themed `AppBar` and `BottomAppBar` elevations still default to 0. For convenience, the themed values
-  can now both be modified directly via the `FlexColorScheme` properties `appBarElevation` and `bottomAppBarElevation`,
-  without need to change these frequently modified values with an extra `copyWith` to get them re-themed as desired.
-  When using the recommended `FlexColorScheme.light` and `FlexColorScheme.dark` factories, `appBarElevation`
-  defaults to '0', if not defined and `bottomAppBarElevation` defaults to `appBarElevation`, if not defined.
-  When using the default constructor (the factories are recommended), they both default to '0'.
-
-**EXAMPLES**
-
-* All examples: The widget showcase now show the resulting themed tab bar on two different backgrounds, one on the
-  app bar color and one on background color. This can guide you in which tab bar style is right for your use case.
-* Example 4 and 5: The sub-page now has a demo tab bar in the app bar, and a demo bottom navigation bar.
-* Example 5: Now includes a toggle that can be used to select the tab bar theme style.
-* Example 5: Now includes a slider to modify the themed app bar elevation.
-* Example 5: The Roboto font that is always used by the examples regardless of platform, is now also
-  used when you create the theme from the scheme with the `ThemeData.from(colorScheme)`. It looked
-  a bit odd when it changed to platform default font on Desktop and Web versions, while
-  `FlexColorScheme.toTheme` used Roboto. This was modified so that the resulting themes use the
-  same font and are thus more comparable.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_2_0.md)
 
 ## 1.1.1
 
 **December 31, 2020**
 
-**NEW**
-
-* Added a `defaultError` modifier that enables the built-in schemes to use the Material design guide's default dark
-  error color when using the `toDark` method to compute a dark scheme from a light scheme.
-  The `toDark` method can be used without the `defaultError` scheme modifier, but then the
-  error color also changes with the other computed dark scheme colors when using `toDark` method
-  and the level adjustment. This is not necessarily the desired behavior. The fix enables the alternative more often
-  desired behavior and ensures that the dark error color just uses the default value. For custom schemes that do not
-  specify a custom error color for their light scheme and thus default to the Material Guide's standard error color,
-  the fix is not needed. Example 5 demonstrates the use case of `defaultError` as well.
-
-**EXAMPLES**
- 
-* Updated example 5 to include UI that can be used to vary the computed dark themes white blend percentage level.
-  This was added to better demonstrate the `toDark` feature.
- 
-**DOCS** 
- 
-* Major documentation review and updates.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_1_1.md)
 
 ## 1.1.0
 
 **December 29, 2020**
 
-**NEW**
-
-* Added API to make a matching dark scheme from a light scheme. See
-  [FlexSchemeColor.toDark](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSchemeColor/toDark.html).
-* Added a [showSystemMode](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeSwitch/showSystemMode.html)
-  property to [FlexThemeModeSwitch](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexThemeModeSwitch-class.html).
-  It defaults to true. Set it to `false`, to exclude the system setting based theme mode option.
-* Added static method [FlexColorScheme.comfortablePlatformDensity](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/comfortablePlatformDensity.html).
-* Added static method [FlexColorScheme.themedSystemNavigationBar](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/themedSystemNavigationBar.html) that can be used to assist with theming the system navigation bar via an annotated region. See updated example 5, for a demo on how to use it.
-* Added API property [FlexColorScheme.transparentStatusBar](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexColorScheme/transparentStatusBar.html) to allow opting out of the one-toned AppBar in Android.
-
-**EXAMPLES** 
-
-* All examples now use the new platform adaptive `FlexColorScheme.comfortablePlatformDensity` as their `visualDensity`
-  setting. The Flutter default `compact` mode for desktop and web goes a bit overboard in its compactness. This
-  optional setting presents an alternative where `comfortable` density is used on desktops and Web, while devices keep
-  their standard visual density. Just omit the setting if you prefer Flutter's super compact Web and Desktop widgets.
-* *Example 3:* excludes the system theme mode option, just to show this new feature of the switch.
-* *Example 4:* includes all built-in schemes, plus 3 custom ones, including one where the dark scheme is made
-  with the `toDark` method. Example 4 also includes a sub-page that can be opened to see the same theme on a new page.
-* *Example 5:*  now includes an option make all the dark mode schemes with the `toDark` option, so it can be
-  toggled and compared to the hand-tuned versions. The same custom color scheme as in example 4 are also included.
-  Example 5 also has the same sub-page as example 4. Example 5 now also show how to solve the issue that the system
-  navigation bar does not get color scheme and theme mode appropriate style in Android when we
-  change the theme. This improvement is done with an `AnnotatedRegion` and the new static helper
-  method `FlexColorScheme.themedSystemNavigationBar`.
-
-**DOCS**
-
-* Documentation updates and typo corrections.
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_1_0.md)
 
 ## 1.0.0
 
@@ -2312,30 +1304,7 @@ First dev version with null-safety.
 
 **December 21, 2020**
 
-**BREAKING** 
- 
-* Made planned API name changes, SchemeOnColors -> FlexSchemeOnColors and
-  SchemeSurfaceColors -> FlexSchemeSurfaceColors. These are lower level APIs that are
-  only used when making custom on and surface colors.
-  Changed ThemeModeOptionButton -> FlexThemeModeOptionButton, this is a lower
-  level API that can be used when making more advanced custom theme selection
-  controls that are based on the same button that the `FlexThemeModeSwitch` uses.
-* Removed the constants that had no function in the public interface from the API.
-
-**NEW** 
-* Exposed planned configuration APIs for the FlexThemeModeSwitch and FlexThemeModeOptionButton.
-
-**CHANGE**
-
-* Removed legacy usage of deprecated ThemeData properties textSelectionColor, cursorColor
-  and textSelectionHandleColor. They are no longer needed even for stable channel, they were
-  useful earlier but not anymore, using only TextSelectionThemeData is
-  enough in the latest stable version.
-
-**DOCS**
- 
-* Documentation updates and corrections.
- 
+* [Changes](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_1_0_0-dev.2.md)
 
 ## 1.0.0-dev.1
 

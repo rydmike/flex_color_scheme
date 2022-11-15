@@ -36,8 +36,7 @@ class HomePage extends StatelessWidget {
     final double margins =
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +93,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            ThemeShowcase(useRailAssertWorkAround: !controller.useSubThemes),
+            const ThemeShowcase(),
           ],
         ),
       ),

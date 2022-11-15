@@ -37,8 +37,8 @@ class UseKeyColorsButtons extends StatelessWidget {
       },
       children: <Widget>[
         const Tooltip(
-          message: 'Use input Primary color\n'
-              'as key to seed your ColorScheme',
+          message: 'Use light theme Primary color\n'
+              'as key color to seed your ColorScheme',
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text('Primary', style: TextStyle(fontSize: 12)),
@@ -50,8 +50,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use input Secondary color\n'
-                'as key to seed your ColorScheme',
+            message: 'Use light theme Secondary color\n'
+                'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Text('Secondary', style: TextStyle(fontSize: 12)),
@@ -64,8 +64,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use input Tertiary color\n'
-                'as key to seed your ColorScheme',
+            message: 'Use light theme Tertiary color\n'
+                'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Text('Tertiary', style: TextStyle(fontSize: 12)),

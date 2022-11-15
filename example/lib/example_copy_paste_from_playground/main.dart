@@ -7,6 +7,7 @@ import 'home_page.dart';
 
 // ignore_for_file: unused_import
 // ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: unreachable_from_main
 
 // -----------------------------------------------------------------------------
 /// EXAMPLE: COPY-PASTE PLAYGROUND

@@ -1,43 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../../controllers/theme_controller.dart';
 import '../../pages/page_examples.dart';
-import '../universal/header_card.dart';
+import '../universal/stateful_header_card.dart';
 
-// Stateful HeaderCard wrapper os PageExamples.
+// StatefulHeaderCard wrapper of PageExamples.
 //
 // Widget to show some example sub pages one that also includes the
 // ThemeShowcase, where widgets are presented on Scaffold background color
 // instead of in cards, as otherwise used but examples.
 //
 // Used by main example, Copy Paste Playground and Example 4 "All Themes"
-class ShowSubPages extends StatefulWidget {
-  const ShowSubPages({
-    super.key,
-    this.isOpen = true,
-  });
+class ShowSubPages extends StatelessWidget {
+  const ShowSubPages({this.controller, super.key});
 
-  final bool isOpen;
-
-  @override
-  State<ShowSubPages> createState() => _ShowSubPagesState();
-}
-
-class _ShowSubPagesState extends State<ShowSubPages> {
-  bool isOpen = true;
-
-  @override
-  void initState() {
-    super.initState();
-    isOpen = widget.isOpen;
-  }
-
-  @override
-  void didUpdateWidget(covariant ShowSubPages oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isOpen != isOpen) {
-      isOpen = widget.isOpen;
-    }
-  }
+  final ThemeController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +25,10 @@ class _ShowSubPagesState extends State<ShowSubPages> {
             theme.colorScheme.onBackground)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
-    return HeaderCard(
+    return StatefulHeaderCard(
       leading: Icon(Icons.article_outlined, color: iconColor),
       title: const Text('Page Examples'),
-      isOpen: isOpen,
-      onTap: () {
-        setState(() {
-          isOpen = !isOpen;
-        });
-      },
-      child: const PageExamples(),
+      child: PageExamples(controller: controller),
     );
   }
 }

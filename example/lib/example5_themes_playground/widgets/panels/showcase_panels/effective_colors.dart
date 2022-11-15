@@ -15,17 +15,18 @@ class EffectiveColors extends StatelessWidget {
   const EffectiveColors(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _githubIssueUri = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/91772',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle =
         theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
-    final Uri githubIssueUri = Uri(
-      scheme: 'https',
-      host: 'github.com',
-      path: 'flutter/flutter/issues/91772',
-    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,7 +62,7 @@ class EffectiveColors extends StatelessWidget {
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: githubIssueUri,
+                  uri: _githubIssueUri,
                   text: 'issue #91772',
                 ),
               ],
@@ -71,7 +72,7 @@ class EffectiveColors extends StatelessWidget {
         const ListTile(
           dense: true,
           subtitle: Text('Above ThemeData colors are still important in '
-              'Flutter 3.0 and earlier. Many widgets still depend on them for '
+              'Flutter 3.3 and earlier. Many widgets still depend on them for '
               'their default colors. FlexColorScheme keeps them in sync '
               'with ColorScheme to produce an app with consistent colors '
               'on all widgets. It will do so as long as the colors exist '

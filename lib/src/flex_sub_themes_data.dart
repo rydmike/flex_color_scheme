@@ -101,7 +101,9 @@ class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
     this.interactionEffects = true,
-    this.blendOnLevel = 0,
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // this.tintedDisabledControls = true,
+    this.blendOnLevel,
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
     //
@@ -109,57 +111,84 @@ class FlexSubThemesData with Diagnosticable {
     this.useTextTheme = true,
     //
     this.defaultRadius,
-    //
     this.buttonMinSize,
     this.buttonPadding,
+    //
     this.thickBorderWidth,
     this.thinBorderWidth,
     //
     this.textButtonRadius,
+    this.textButtonSchemeColor,
+    this.textButtonTextStyle,
+    //
     this.elevatedButtonRadius,
     this.elevatedButtonElevation,
-    this.outlinedButtonRadius,
-    this.toggleButtonsRadius,
-    //
-    this.textButtonSchemeColor,
     this.elevatedButtonSchemeColor,
     this.elevatedButtonSecondarySchemeColor,
+    this.elevatedButtonTextStyle,
+    //
+    this.outlinedButtonRadius,
     this.outlinedButtonSchemeColor,
     this.outlinedButtonOutlineSchemeColor,
-    this.materialButtonSchemeColor,
+    this.outlinedButtonBorderWidth,
+    this.outlinedButtonPressedBorderWidth,
+    this.outlinedButtonTextStyle,
+    //
+    this.toggleButtonsRadius,
     this.toggleButtonsSchemeColor,
+    this.toggleButtonsBorderWidth,
+    //
+    this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
     this.checkboxSchemeColor,
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
     //
+    this.sliderBaseSchemeColor,
+    this.sliderValueTinted = false,
+    this.sliderTrackHeight,
+    //
     this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
-    this.inputDecoratorBorderType = FlexInputBorderType.outline,
+    this.inputDecoratorBorderType,
     this.inputDecoratorUnfocusedHasBorder = true,
     this.inputDecoratorUnfocusedBorderIsColored = true,
+    this.inputDecoratorBorderWidth,
+    this.inputDecoratorFocusedBorderWidth,
     //
     this.fabRadius,
     this.fabUseShape = false,
+    this.fabAlwaysCircular = false,
     this.fabSchemeColor,
+    //
     this.chipRadius,
     this.chipSchemeColor,
+    this.chipSelectedSchemeColor,
+    this.switchThumbSchemeColor,
     //
     this.cardRadius,
-    this.cardElevation = kCardElevation,
+    this.cardElevation,
     //
     this.popupMenuRadius,
-    this.popupMenuElevation = kPopupMenuElevation,
-    this.popupMenuOpacity = 1,
+    this.popupMenuElevation,
+    this.popupMenuSchemeColor,
+    this.popupMenuOpacity,
+    //
+    this.tooltipRadius,
+    this.tooltipWaitDuration,
+    this.tooltipShowDuration,
+    this.tooltipSchemeColor,
+    this.tooltipOpacity,
     //
     this.dialogRadius,
-    this.dialogElevation = kDialogElevation,
+    this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.timePickerDialogRadius,
-    this.snackBarElevation = kSnackBarElevation,
+    //
+    this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
@@ -168,9 +197,11 @@ class FlexSubThemesData with Diagnosticable {
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
     //
+    this.bottomSheetBackgroundColor,
+    this.bottomSheetModalBackgroundColor,
     this.bottomSheetRadius,
-    this.bottomSheetElevation = kBottomSheetElevation,
-    this.bottomSheetModalElevation = kBottomSheetModalElevation,
+    this.bottomSheetElevation,
+    this.bottomSheetModalElevation,
     //
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
@@ -184,11 +215,11 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
     this.bottomNavigationBarBackgroundSchemeColor,
-    this.bottomNavigationBarOpacity = 1,
-    this.bottomNavigationBarElevation = kBottomNavigationBarElevation,
+    this.bottomNavigationBarOpacity,
+    this.bottomNavigationBarElevation,
     this.bottomNavigationBarShowSelectedLabels = true,
     this.bottomNavigationBarShowUnselectedLabels = true,
-    this.bottomNavigationBarType = BottomNavigationBarType.fixed,
+    this.bottomNavigationBarType,
     this.bottomNavigationBarLandscapeLayout,
     //
     this.navigationBarLabelTextStyle,
@@ -205,10 +236,10 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
     this.navigationBarBackgroundSchemeColor,
-    this.navigationBarOpacity = 1,
+    this.navigationBarOpacity,
+    this.navigationBarElevation,
     this.navigationBarHeight,
-    this.navigationBarLabelBehavior =
-        NavigationDestinationLabelBehavior.alwaysShow,
+    this.navigationBarLabelBehavior,
     //
     this.navigationRailLabelTextStyle,
     this.navigationRailSelectedLabelSize,
@@ -225,9 +256,9 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailIndicatorSchemeColor,
     this.navigationRailIndicatorOpacity,
     this.navigationRailBackgroundSchemeColor,
-    this.navigationRailOpacity = 1,
-    this.navigationRailElevation = kNavigationRailElevation,
-    this.navigationRailLabelType = NavigationRailLabelType.all,
+    this.navigationRailOpacity,
+    this.navigationRailElevation,
+    this.navigationRailLabelType,
     this.navigationRailGroupAlignment,
   });
 
@@ -274,6 +305,20 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
+  // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+  // /// Use primary tint on disabled controls.
+  // ///
+  // /// Set to true to make disabled controls use a shared slightly
+  // /// primary color tint on their disabled state.
+  // ///
+  // /// Set to false to use default grey only disabled controls.
+  // ///
+  // /// Impacts controls:
+  // /// - To be added...
+  // ///
+  // /// Defaults to true.
+  // final bool tintedDisabledControls;
+
   /// Sets the blend level strength of container color used on its onColor.
   ///
   /// Use [blendOnLevel] value to in FlexColorScheme themes to also blend in
@@ -303,8 +348,8 @@ class FlexSubThemesData with Diagnosticable {
   /// with [blendOnLevel] and completely turned off by setting [blendOnLevel]
   /// to 0 (zero).
   ///
-  /// Defaults to 0.
-  final int blendOnLevel;
+  /// If undefined, defaults to 0.
+  final int? blendOnLevel;
 
   /// Set to true to enable [blendOnLevel] based onColor blending also on
   /// [onPrimary], [onSecondary] and [onTertiary] colors.
@@ -540,25 +585,25 @@ class FlexSubThemesData with Diagnosticable {
   /// This default is same in both Material 2 and Material 3 theme mode.
   final EdgeInsetsGeometry? buttonPadding;
 
-  /// Border width of Widgets with an outline border.
+  /// Default for thicker border width state of Widgets with an outline border.
   ///
-  /// Applies to enabled [OutlinedButton] and always to [ToggleButtons], as well
-  /// as to selected state of [InputDecorator].
-  ///
+  /// Used as default for pressed and error [OutlinedButton] and for
+  /// focused [InputDecorator].
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
-  /// defaults to [kThickBorderWidth].
+  /// defaults to [kThickBorderWidth] = 2.
   /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
   final double? thickBorderWidth;
 
-  /// Border thickness on unselected input decorator and disabled buttons.
+  /// Default for normal border width of Widgets with an outline border.
   ///
-  /// Applies to disabled [OutlinedButton] and to un-selected state in
-  /// [InputDecorator].
+  /// Used as default by [OutlinedButton], [ToggleButtons] and [InputDecorator].
   ///
   /// If undefined and [ThemeData.useMaterial3] is false,
-  /// defaults to [kThinBorderWidth].
-  /// If undefined and [ThemeData.useMaterial3] is true, defaults to 1.0.
+  /// defaults to [kThinBorderWidth] = 1.
+  ///
+  /// If undefined and [ThemeData.useMaterial3] is true,
+  /// defaults to [kThinBorderWidth] = 1.
   final double? thinBorderWidth;
 
   /// Border radius override value for [TextButton].
@@ -567,6 +612,19 @@ class FlexSubThemesData with Diagnosticable {
   /// [kButtonRadius] 20dp, based on M3 Specification
   /// https://m3.material.io/components/buttons/specs
   final double? textButtonRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [TextButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? textButtonSchemeColor;
+
+  /// The style for the [TextButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? textButtonTextStyle;
 
   /// Border radius value for [ElevatedButton].
   ///
@@ -585,30 +643,6 @@ class FlexSubThemesData with Diagnosticable {
   /// is false. If [useMaterial3] is true, it is kept null and default M3
   /// elevation of [ElevatedButton] is kept.
   final double? elevatedButtonElevation;
-
-  /// Border radius value for [OutlinedButton].
-  ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp, based on M3 Specification
-  /// https://m3.material.io/components/buttons/specs
-  final double? outlinedButtonRadius;
-
-  /// Border radius value for [ToggleButtons].
-  ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp.
-  ///
-  /// This is not in M3 specification, but FlexColorScheme component
-  /// sub-themes harmonizes [ToggleButtons] size
-  /// and border radius with the other Material buttons.
-  final double? toggleButtonsRadius;
-
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [TextButton] use as its base theme color.
-  ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
-  final SchemeColor? textButtonSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [ElevatedButton] used as its main color.
@@ -633,6 +667,19 @@ class FlexSubThemesData with Diagnosticable {
   /// will be used as default.
   final SchemeColor? elevatedButtonSecondarySchemeColor;
 
+  /// The style for the [ElevatedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle;
+
+  /// Border radius value for [OutlinedButton].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// https://m3.material.io/components/buttons/specs
+  final double? outlinedButtonRadius;
+
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [OutlinedButton] use as its main theme color.
   ///
@@ -652,6 +699,44 @@ class FlexSubThemesData with Diagnosticable {
   /// outline color in M3 style.
   final SchemeColor? outlinedButtonOutlineSchemeColor;
 
+  /// The border width of the [OutlineButton].
+  ///
+  /// If not defined, defaults to [thinBorderWidth];
+  final double? outlinedButtonBorderWidth;
+
+  /// The border width of the pressed [OutlineButton].
+  ///
+  /// If not defined, defaults to [thickBorderWidth];
+  final double? outlinedButtonPressedBorderWidth;
+
+  /// The style for the [OutlinedButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle;
+
+  /// Border radius value for [ToggleButtons].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp.
+  ///
+  /// This is not in M3 specification, but FlexColorScheme component
+  /// sub-themes harmonizes [ToggleButtons] size
+  /// and border radius with the other Material buttons.
+  final double? toggleButtonsRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? toggleButtonsSchemeColor;
+
+  /// The border width of [ToggleButtons].
+  ///
+  /// If not defined, defaults to [thinBorderWidth];
+  final double? toggleButtonsBorderWidth;
+
   /// Defines which [Theme] based [ColorScheme] based color, that the old
   /// [MaterialButton] use as its main theme color.
   ///
@@ -666,18 +751,11 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? materialButtonSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ToggleButtons] use as its base theme color.
-  ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
-  final SchemeColor? toggleButtonsSchemeColor;
-
-  /// Defines which [Theme] based [ColorScheme] based color the
   /// [Switch] and [SwitchListTile] use as base themed color.
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -697,12 +775,24 @@ class FlexSubThemesData with Diagnosticable {
   /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? switchSchemeColor;
 
+  // TODO(rydmike): Follow up M3 icon and outline cannot be themed, make issue.
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [Switch] and [SwitchListTile] use as themed thumb color.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// If not defined, defaults to:
+  ///
+  /// - If [useMaterial3] is false [switchSchemeColor].
+  /// - If [useMaterial3 ]is true [SchemeColor.primaryContainer].
+  final SchemeColor? switchThumbSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Checkbox] and [CheckboxListTile] use as base themed color.
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -727,7 +817,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -759,6 +849,26 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Defaults to false, set it to for slightly different style.
   final bool unselectedToggleIsColored;
+
+  /// The ColorScheme based color used on the [Slider] as its overall base
+  /// color.
+  ///
+  /// If not defined, the [Slider] theme defaults natively to using the
+  /// ambient theme's primary color.
+  final SchemeColor? sliderBaseSchemeColor;
+
+  /// If true, the value indicator is a tinted high contrast version of current
+  /// [sliderBaseSchemeColor], with a bit of opacity.
+  ///
+  /// If false, the value indicator uses Flutter SDK default.
+  ///
+  /// Default to false.
+  final bool sliderValueTinted;
+
+  /// The height of the [Slider] track.
+  ///
+  /// If undefined, defaults to 4db via Flutter SDK defaults.
+  final double? sliderTrackHeight;
 
   /// Border radius value for [InputDecoration].
   ///
@@ -801,7 +911,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// To change input decorator's border radius separately define
   /// [inputDecoratorRadius] that will then override [defaultRadius].
-  final FlexInputBorderType inputDecoratorBorderType;
+  ///
+  /// If undefined, defaults to [FlexInputBorderType.outline].
+  final FlexInputBorderType? inputDecoratorBorderType;
 
   /// Determines if the [InputDecorator] unfocused state has a border.
   ///
@@ -840,6 +952,16 @@ class FlexSubThemesData with Diagnosticable {
   /// The unfocused border color selection also applies to it hovered state.
   final bool inputDecoratorUnfocusedBorderIsColored;
 
+  /// The border width of unfocused [InputDecoration] when it has a border.
+  ///
+  /// If not defined, defaults to [thinBorderWidth];
+  final double? inputDecoratorBorderWidth;
+
+  /// The border width of focused [InputDecoration] when it has a border.
+  ///
+  /// If not defined, defaults to [thickBorderWidth];
+  final double? inputDecoratorFocusedBorderWidth;
+
   /// Border radius value for [FloatingActionButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -847,7 +969,12 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/floating-action-button/specs
   ///
   /// The border radius is only assigned when [fabUseShape] is true, if
-  /// [fabUseShape] is false, the [fabRadius] has no effect on FAB shapes.
+  /// [fabUseShape] is false, the [fabRadius] or [fabAlwaysCircular] has no
+  /// effect on FAB shapes.
+  ///
+  /// If [fabAlwaysCircular] is true and a radius is given by [defaultRadius] or
+  /// [fabRadius] the FAB will still be circular, radius settings have no
+  /// effect then.
   ///
   /// If [ThemeData.useMaterial3] and [fabUseShape] are true, you cannot define
   /// FAB buttons that get the same rounding style as defined by the M3 spec.
@@ -878,6 +1005,20 @@ class FlexSubThemesData with Diagnosticable {
   /// [fabUseShape] to true and [fabRadius] to a high values, like 60.
   final bool fabUseShape;
 
+  /// Always use circular Shape on Floating Actions Button.
+  ///
+  /// If [fabUseShape] is false the [fabAlwaysCircular] has no effect, FAB will
+  /// be circular in in M2 and rounded with different radii depending on FAB
+  /// size in M3.
+  ///
+  /// if [defaultRadius] or [fabRadius] is defined and [fabAlwaysCircular] is
+  /// true the FAB will be circular in both M2 and M3.
+  ///
+  /// Extended FAB will use Stadium border when [fabAlwaysCircular] is true.
+  ///
+  /// Defaults to false.
+  final bool fabAlwaysCircular;
+
   /// Defines which [Theme] based [ColorScheme] based color the Floating
   /// Action Buttons (FABs) use as their base color.
   ///
@@ -894,7 +1035,7 @@ class FlexSubThemesData with Diagnosticable {
   final double? chipRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
-  /// use as their base color.
+  /// use as their base tint color.
   ///
   /// The selected color is only used as base for the [Chip] colors, it also
   /// uses alpha blend and opacity to create the effective Chip colors using
@@ -909,6 +1050,23 @@ class FlexSubThemesData with Diagnosticable {
   /// pass in [SchemeColor.primary].
   final SchemeColor? chipSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color the Chips
+  /// use as their selected color.
+  ///
+  /// The selected color is used together with its pair color, onColor if normal
+  /// color was selected, and with normal color if onColor was selected
+  /// for contrast text icon color on selected chips.
+  ///
+  ///
+  /// If not defined it defaults to effective theme based color from using
+  /// [SchemeColor.primary], when [useMaterial3] is false.
+  ///
+  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
+  /// result in M3 default Chip coloring being used without opacity and alpha
+  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
+  /// pass in [SchemeColor.primary].
+  final SchemeColor? chipSelectedSchemeColor;
+
   /// Border radius value for [Card].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -921,7 +1079,9 @@ class FlexSubThemesData with Diagnosticable {
   /// This design favors a flat design using color branded tint on card
   /// background, and defaults to [kCardElevation] = 0 as default
   /// themed elevation on [Card] widgets.
-  final double cardElevation;
+  ///
+  /// If not defined, defaults to [kCardElevation] = 0dp.
+  final double? cardElevation;
 
   /// Border radius override value for the menu on [PopupMenuButton].
   ///
@@ -960,9 +1120,19 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Default elevation of [PopupMenuButton].
   ///
-  /// The SDK elevation 8 is too high, we make it more subtle via
-  /// opinionated default value [kPopupMenuElevation] of 3.
-  final double popupMenuElevation;
+  /// If not defined, then if [useMaterial3] is:
+  ///
+  /// - false : defaults to [kPopupMenuElevationFCS] = 6 dp.
+  /// - true  : defaults to [kPopupMenuElevation] = 3 dp.
+  final double? popupMenuElevation;
+
+  /// The ColorScheme based color used as background color on [PopupMenuButton].
+  ///
+  /// If not defined, then if [useMaterial3] is:
+  /// - false : defaults to theme.cardColor.
+  /// - true  : defaults to theme.colorScheme.surface.
+  /// Usually they are the same.
+  final SchemeColor? popupMenuSchemeColor;
 
   /// Popup menu background opacity.
   ///
@@ -977,8 +1147,52 @@ class FlexSubThemesData with Diagnosticable {
   /// and widget then uses its default behavior background color, which also
   /// defaults to use [ThemeData.colorscheme] and in it [ColorScheme.surface].
   ///
-  /// If null, defaults to 1, fully opaque.
+  /// Defaults to undefined (null).
+  ///
+  /// If undefined, produced result is same as 1, fully opaque.
   final double? popupMenuOpacity;
+
+  // TODO(rydmike): Define all default for tooltips, see old FCS style.
+  /// Border radius value for [Tooltips].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kTooltipRadius].
+  final double? tooltipRadius;
+
+  /// The length of time that a pointer must hover over a tooltip's widget
+  /// before the tooltip will be shown.
+  ///
+  /// If not defined, defaults to [kTooltipWaitDuration].
+  final Duration? tooltipWaitDuration;
+
+  /// The length of time that the tooltip will be shown once it has appeared.
+  ///
+  /// If not defined, defaults to [kTooltipShowDuration].
+  final Duration? tooltipShowDuration;
+
+  /// The ColorScheme based color used as background color on [Tooltips].
+  ///
+  /// If defined this overrides the style set via
+  /// [FlexColorScheme.tooltipsMatchBackground].
+  ///
+  /// If not defined, defaults to FCS default styling, see
+  /// [FlexColorScheme.tooltipsMatchBackground] for details.
+  final SchemeColor? tooltipSchemeColor;
+
+  /// Tooltip background opacity.
+  ///
+  /// Used by FlexColorScheme to modify the opacity on the effective
+  /// colorScheme.surface color used on the themed PopupMenu background color.
+  ///
+  /// If defined this overrides the opacity included via
+  /// [FlexColorScheme.tooltipsMatchBackground].
+  ///
+  /// If not defined, defaults to FCS default opacity, see
+  /// [FlexColorScheme.tooltipsMatchBackground] for details.
+  ///
+  /// If defined and [tooltipSchemeColor] is undefined (null), the
+  /// [tooltipOpacity] has no effect since it cannot act on undefined value.
+  final double? tooltipOpacity;
 
   /// Border radius value for [Dialog].
   ///
@@ -990,13 +1204,17 @@ class FlexSubThemesData with Diagnosticable {
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
-  /// elevated via opinionated default value [kDialogElevation] of 10.
+  /// elevated via opinionated default value [kDialogElevation] of 6.
   ///
   /// One rationale for this change is that when using strong surface color
-  /// branding and overlay color
-  /// elevation in dark mode, the elevated dialog surface will become too
-  /// light and contrast poorly with primary color.
-  final double dialogElevation;
+  /// branding and overlay color elevation in dark mode, the elevated dialog
+  /// surface will become too light and contrast poorly with primary color.
+  ///
+  /// The value 6dp is also Material 3 spec default, we use it for M2 as well
+  /// as FCS opinionated default.
+  ///
+  /// If not defined, defaults to [kDialogElevation] = 6.
+  final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
   /// as their background color.
@@ -1034,9 +1252,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [SnackBar].
   ///
-  /// Defaults to [kSnackBarElevation] = 4.
-  final double snackBarElevation;
+  /// If undefined, defaults to [kSnackBarElevation] = 4.
+  final double? snackBarElevation;
 
+  // TODO(rydmike): Review the FCS defaults, is doc below still correct?
   /// Defines which [Theme] based [ColorScheme] based color the SnackBars
   /// use as their base color. Typically one of inverse brightness compared
   /// to theme's surface color brightness.
@@ -1044,16 +1263,16 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, it defaults to the opinionated color FlexColorScheme (FCS)
   /// choices below, when used via [FlexSubThemesData].
   ///
-  /// * In light theme mode:  ///
+  /// * In light theme mode:
   ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
-  ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
-  ///     top of surface.
+  ///   * Flutter M2 SDK uses: onSurface with surface at opacity 80%, blended
+  ///     on top of surface.
   ///
   /// * In dark theme mode:
   ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
-  ///   * Flutter SDK uses: colorScheme.onSurface
+  ///   * Flutter M2 SDK uses: colorScheme.onSurface
   ///
-  /// In M3 design the default will likely be [ColorScheme.inversePrimary],
+  /// In M3 design the default is [ColorScheme.inverseSurface],
   /// which you can assign by selecting that as its property here too.
   final SchemeColor? snackBarBackgroundSchemeColor;
 
@@ -1106,27 +1325,46 @@ class FlexSubThemesData with Diagnosticable {
   /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color that the
+  /// [BottomSheet] uses as background color when presented as a none modal
+  /// bottom sheet.
+  ///
+  /// If not defined, defaults to Material 3 default ColorScheme.surface.
+  /// None FlexColorScheme using defaults to default color of [Material] which
+  /// is theme.canvasColor which typically is assigned the same value as
+  /// theme.colorScheme.background.
+  final SchemeColor? bottomSheetBackgroundColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color that the
+  /// [BottomSheet] uses as background color when presented as a modal
+  /// bottom sheet.
+  ///
+  /// If not defined, defaults to Material 3 default ColorScheme.surface.
+  /// None FlexColorScheme using defaults to default color of [Material] which
+  /// is theme.canvasColor which typically is assigned the same value as
+  /// theme.colorScheme.background.
+  final SchemeColor? bottomSheetModalBackgroundColor;
+
   /// Border radius value for [BottomSheet].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kBottomSheetBorderRadius] 16p.
+  /// [kBottomSheetBorderRadius] 28.
   ///
-  /// This value is not mentioned in the
-  /// M3 Specification. It is based on an assumption that a sliding in
-  /// surface from the bottom should have the same rounding on its top corners
-  /// as the [Drawer] does on its visible side edges.
-  /// /// https://m3.material.io/components/navigation-drawer/specs
+  /// FCS default, follows the Material M3 guide:
+  /// https://m3.material.io/components/text-fields/specs
   final double? bottomSheetRadius;
 
   /// Elevation of none modal [BottomSheet].
   ///
-  /// Defaults to [kBottomSheetElevation] = 4.
-  final double bottomSheetElevation;
+  /// If null, defaults to [kBottomSheetElevation] = 1, if [useMaterial3]
+  /// is true, and to [kBottomSheetElevationM2] = 4, if false.
+  final double? bottomSheetElevation;
 
   /// Elevation of modal [BottomSheet].
   ///
-  /// Defaults to [kBottomSheetModalElevation] = 8.
-  final double bottomSheetModalElevation;
+  /// If null, defaults to [kBottomSheetModalElevation] = 2, if [useMaterial3]
+  /// is true, and to [kBottomSheetModalElevationM2] = 8 if false.
+  final double? bottomSheetModalElevation;
 
   // ---------------------------------------------------------------------------
   //
@@ -1273,13 +1511,13 @@ class FlexSubThemesData with Diagnosticable {
 
   /// BottomNavigationBar background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double bottomNavigationBarOpacity;
+  /// If undefined, default to 1, fully opaque.
+  final double? bottomNavigationBarOpacity;
 
   /// Elevation of [BottomNavigationBar].
   ///
-  /// Defaults to [kBottomNavigationBarElevation] = 0.
-  final double bottomNavigationBarElevation;
+  /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+  final double? bottomNavigationBarElevation;
 
   /// Whether the labels are shown for the selected
   /// [BottomNavigationBarItem].
@@ -1295,6 +1533,12 @@ class FlexSubThemesData with Diagnosticable {
   /// * [BottomNavigationBarType.fixed], where items have fixed width.
   /// * [BottomNavigationBarType.shifting], where location and size of the
   ///   items animate and labels fade in when they are tapped.
+  ///
+  /// If undefined, defaults to Flutter SDK default. Where
+  /// If type is provided, it is returned. Next, if the bottom navigation bar
+  /// theme provides a type, it is used. Finally, the default behavior will be
+  /// [BottomNavigationBarType.fixed] for 3 or fewer items, and
+  /// [BottomNavigationBarType.shifting] is used for 4+ items.
   final BottomNavigationBarType? bottomNavigationBarType;
 
   /// The arrangement of the bottom navigation bar's [items] when the enclosing
@@ -1502,15 +1746,20 @@ class FlexSubThemesData with Diagnosticable {
 
   /// NavigationBar background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double navigationBarOpacity;
+  /// If undefined, defaults to 1, fully opaque.
+  final double? navigationBarOpacity;
+
+  /// The z-coordinate to be used for the [NavigationBar]'s elevation.
+  ///
+  /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
+  /// which if:
+  ///  - If [useMaterial] if true, is 3 dp.
+  ///  - If [useMaterial] if false, is 0 dp.
+  final double? navigationBarElevation;
 
   /// Specifies when each [NavigationDestination]'s label should appear.
   ///
-  /// Default to [NavigationDestinationLabelBehavior.alwaysShow].
-  /// If set to null, it will also default to
-  /// [NavigationDestinationLabelBehavior.alwaysShow] as that is the Flutter
-  /// SDK default behavior for it.
+  /// If undefined, default to [NavigationDestinationLabelBehavior.alwaysShow].
   final NavigationDestinationLabelBehavior? navigationBarLabelBehavior;
 
   // ---------------------------------------------------------------------------
@@ -1699,13 +1948,13 @@ class FlexSubThemesData with Diagnosticable {
 
   /// NavigationRail background opacity.
   ///
-  /// Defaults to 1, fully opaque.
-  final double navigationRailOpacity;
+  /// If undefined, defaults to 1, fully opaque.
+  final double? navigationRailOpacity;
 
   /// The z-coordinate to be used for the [NavigationRail]'s elevation.
   ///
-  /// Default is [kNavigationRailElevation] = 0.
-  final double navigationRailElevation;
+  /// If undefined, defaults to [kNavigationRailElevation] = 0.
+  final double? navigationRailElevation;
 
   /// Defines the layout and behavior of the labels for the un-extended
   /// [NavigationRail].
@@ -1745,33 +1994,55 @@ class FlexSubThemesData with Diagnosticable {
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // final bool? tintedDisabledControls,
     final int? blendOnLevel,
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
+    //
     final bool? blendTextTheme,
     final bool? useTextTheme,
+    //
     final double? defaultRadius,
     final Size? buttonMinSize,
     final EdgeInsetsGeometry? buttonPadding,
+    //
     final double? thickBorderWidth,
     final double? thinBorderWidth,
+    //
     final double? textButtonRadius,
+    final SchemeColor? textButtonSchemeColor,
+    final MaterialStateProperty<TextStyle?>? textButtonTextStyle,
+    //
     final double? elevatedButtonRadius,
     final double? elevatedButtonElevation,
-    final double? outlinedButtonRadius,
-    final double? toggleButtonsRadius,
-    final SchemeColor? textButtonSchemeColor,
     final SchemeColor? elevatedButtonSchemeColor,
     final SchemeColor? elevatedButtonSecondarySchemeColor,
+    final MaterialStateProperty<TextStyle?>? elevatedButtonTextStyle,
+    //
+    final double? outlinedButtonRadius,
     final SchemeColor? outlinedButtonSchemeColor,
     final SchemeColor? outlinedButtonOutlineSchemeColor,
-    final SchemeColor? materialButtonSchemeColor,
+    final MaterialStateProperty<TextStyle?>? outlinedButtonTextStyle,
+    final double? outlinedButtonBorderWidth,
+    final double? outlinedButtonPressedBorderWidth,
+    //
+    final double? toggleButtonsRadius,
     final SchemeColor? toggleButtonsSchemeColor,
+    final double? toggleButtonsBorderWidth,
+    //
+    final SchemeColor? materialButtonSchemeColor,
+    //
     final SchemeColor? switchSchemeColor,
+    final SchemeColor? switchThumbSchemeColor,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
-    //
     final bool? unselectedToggleIsColored,
+    //
+    final SchemeColor? sliderBaseSchemeColor,
+    final bool? sliderValueTinted,
+    final double? sliderTrackHeight,
+    //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
@@ -1779,21 +2050,37 @@ class FlexSubThemesData with Diagnosticable {
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorUnfocusedHasBorder,
     final bool? inputDecoratorUnfocusedBorderIsColored,
+    final double? inputDecoratorBorderWidth,
+    final double? inputDecoratorFocusedBorderWidth,
     //
     final double? fabRadius,
     final bool? fabUseShape,
+    final bool? fabAlwaysCircular,
     final SchemeColor? fabSchemeColor,
+    //
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
+    final SchemeColor? chipSelectedSchemeColor,
+    //
     final double? cardRadius,
     final double? cardElevation,
+    //
     final double? popupMenuRadius,
     final double? popupMenuElevation,
+    final SchemeColor? popupMenuSchemeColor,
     final double? popupMenuOpacity,
-    final SchemeColor? dialogBackgroundSchemeColor,
+    //
+    final double? tooltipRadius,
+    final Duration? tooltipWaitDuration,
+    final Duration? tooltipShowDuration,
+    final SchemeColor? tooltipSchemeColor,
+    final double? tooltipOpacity,
+    //
     final double? dialogElevation,
     final double? dialogRadius,
+    final SchemeColor? dialogBackgroundSchemeColor,
     final double? timePickerDialogRadius,
+    //
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
     //
@@ -1803,6 +2090,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     //
+    final SchemeColor? bottomSheetBackgroundColor,
+    final SchemeColor? bottomSheetModalBackgroundColor,
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
@@ -1842,6 +2131,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? navigationBarIndicatorOpacity,
     final SchemeColor? navigationBarBackgroundSchemeColor,
     final double? navigationBarOpacity,
+    final double? navigationBarElevation,
     final double? navigationBarHeight,
     final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
     //
@@ -1867,41 +2157,72 @@ class FlexSubThemesData with Diagnosticable {
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
+      // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+      // tintedDisabledControls:
+      //     tintedDisabledControls ?? this.tintedDisabledControls,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
+      //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
+      //
       defaultRadius: defaultRadius ?? this.defaultRadius,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      //
       thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
       thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
+      //
       textButtonRadius: textButtonRadius ?? this.textButtonRadius,
+      textButtonSchemeColor:
+          textButtonSchemeColor ?? this.textButtonSchemeColor,
+      textButtonTextStyle: textButtonTextStyle ?? this.textButtonTextStyle,
+      //
       elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
       elevatedButtonElevation:
           elevatedButtonElevation ?? this.elevatedButtonElevation,
-      outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
-      toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
-      textButtonSchemeColor:
-          textButtonSchemeColor ?? this.textButtonSchemeColor,
       elevatedButtonSchemeColor:
           elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
       elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ??
           this.elevatedButtonSecondarySchemeColor,
+      elevatedButtonTextStyle:
+          elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
+      //
+      outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
       outlinedButtonSchemeColor:
           outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
       outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ??
           this.outlinedButtonOutlineSchemeColor,
-      materialButtonSchemeColor:
-          materialButtonSchemeColor ?? this.materialButtonSchemeColor,
+      outlinedButtonBorderWidth:
+          outlinedButtonBorderWidth ?? this.outlinedButtonBorderWidth,
+      outlinedButtonPressedBorderWidth: outlinedButtonPressedBorderWidth ??
+          this.outlinedButtonPressedBorderWidth,
+      outlinedButtonTextStyle:
+          outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
+      //
+      toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
       toggleButtonsSchemeColor:
           toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
+      toggleButtonsBorderWidth:
+          toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
+      //
+      materialButtonSchemeColor:
+          materialButtonSchemeColor ?? this.materialButtonSchemeColor,
+      //
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
+      switchThumbSchemeColor:
+          switchThumbSchemeColor ?? this.switchThumbSchemeColor,
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
           unselectedToggleIsColored ?? this.unselectedToggleIsColored,
+      //
+      sliderBaseSchemeColor:
+          sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
+      sliderValueTinted: sliderValueTinted ?? this.sliderValueTinted,
+      sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
+      //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
@@ -1916,33 +2237,59 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorUnfocusedBorderIsColored:
           inputDecoratorUnfocusedBorderIsColored ??
               this.inputDecoratorUnfocusedBorderIsColored,
+      inputDecoratorBorderWidth:
+          inputDecoratorBorderWidth ?? this.inputDecoratorBorderWidth,
+      inputDecoratorFocusedBorderWidth: inputDecoratorFocusedBorderWidth ??
+          this.inputDecoratorFocusedBorderWidth,
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
+      fabAlwaysCircular: fabAlwaysCircular ?? this.fabAlwaysCircular,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
+      //
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
+      chipSelectedSchemeColor:
+          chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
+      //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
+      //
       dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogElevation: dialogElevation ?? this.dialogElevation,
       dialogBackgroundSchemeColor:
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
-      popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
-      popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
-      popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
+      //
+      popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
+      popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
+      popupMenuSchemeColor: popupMenuSchemeColor ?? this.popupMenuSchemeColor,
+      popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
+      //
+      tooltipRadius: tooltipRadius ?? this.tooltipRadius,
+      tooltipWaitDuration: tooltipWaitDuration ?? this.tooltipWaitDuration,
+      tooltipShowDuration: tooltipShowDuration ?? this.tooltipShowDuration,
+      tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
+      tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
+      //
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       snackBarBackgroundSchemeColor:
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
+      //
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
+      //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
+      //
+      bottomSheetBackgroundColor:
+          bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
+      bottomSheetModalBackgroundColor: bottomSheetModalBackgroundColor ??
+          this.bottomSheetModalBackgroundColor,
       bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
@@ -2031,6 +2378,8 @@ class FlexSubThemesData with Diagnosticable {
       navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
           this.navigationBarBackgroundSchemeColor,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
+      navigationBarElevation:
+          navigationBarElevation ?? this.navigationBarElevation,
       navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
       navigationBarLabelBehavior:
           navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
@@ -2088,34 +2437,58 @@ class FlexSubThemesData with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSubThemesData &&
         other.interactionEffects == interactionEffects &&
+        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+        // other.tintedDisabledControls == tintedDisabledControls &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
         other.useFlutterDefaults == useFlutterDefaults &&
+        //
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
+        //
         other.defaultRadius == defaultRadius &&
         other.buttonMinSize == buttonMinSize &&
         other.buttonPadding == buttonPadding &&
+        //
         other.thickBorderWidth == thickBorderWidth &&
         other.thinBorderWidth == thinBorderWidth &&
+        //
         other.textButtonRadius == textButtonRadius &&
+        other.textButtonSchemeColor == textButtonSchemeColor &&
+        other.textButtonTextStyle == textButtonTextStyle &&
+        //
         other.elevatedButtonRadius == elevatedButtonRadius &&
         other.elevatedButtonElevation == elevatedButtonElevation &&
-        other.outlinedButtonRadius == outlinedButtonRadius &&
-        other.toggleButtonsRadius == toggleButtonsRadius &&
-        other.textButtonSchemeColor == textButtonSchemeColor &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
         other.elevatedButtonSecondarySchemeColor ==
             elevatedButtonSecondarySchemeColor &&
+        other.elevatedButtonTextStyle == elevatedButtonTextStyle &&
+        //
+        other.outlinedButtonRadius == outlinedButtonRadius &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
         other.outlinedButtonOutlineSchemeColor ==
             outlinedButtonOutlineSchemeColor &&
-        other.materialButtonSchemeColor == materialButtonSchemeColor &&
+        other.outlinedButtonBorderWidth == outlinedButtonBorderWidth &&
+        other.outlinedButtonPressedBorderWidth ==
+            outlinedButtonPressedBorderWidth &&
+        other.outlinedButtonTextStyle == outlinedButtonTextStyle &&
+        //
+        other.toggleButtonsRadius == toggleButtonsRadius &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
+        other.toggleButtonsBorderWidth == toggleButtonsBorderWidth &&
+        //
+        other.materialButtonSchemeColor == materialButtonSchemeColor &&
+        //
         other.switchSchemeColor == switchSchemeColor &&
+        other.switchThumbSchemeColor == switchThumbSchemeColor &&
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
+        //
+        other.sliderBaseSchemeColor == sliderBaseSchemeColor &&
+        other.sliderValueTinted == sliderValueTinted &&
+        other.sliderTrackHeight == sliderTrackHeight &&
+        //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
@@ -2125,20 +2498,38 @@ class FlexSubThemesData with Diagnosticable {
             inputDecoratorUnfocusedHasBorder &&
         other.inputDecoratorUnfocusedBorderIsColored ==
             inputDecoratorUnfocusedBorderIsColored &&
+        other.inputDecoratorBorderWidth == inputDecoratorBorderWidth &&
+        other.inputDecoratorFocusedBorderWidth ==
+            inputDecoratorFocusedBorderWidth &&
+        //
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
+        other.fabAlwaysCircular == fabAlwaysCircular &&
         other.fabSchemeColor == fabSchemeColor &&
+        //
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
+        other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
+        //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
+        //
         other.popupMenuRadius == popupMenuRadius &&
         other.popupMenuElevation == popupMenuElevation &&
+        other.popupMenuSchemeColor == popupMenuSchemeColor &&
         other.popupMenuOpacity == popupMenuOpacity &&
+        //
+        other.tooltipRadius == tooltipRadius &&
+        other.tooltipWaitDuration == tooltipWaitDuration &&
+        other.tooltipShowDuration == tooltipShowDuration &&
+        other.tooltipSchemeColor == tooltipSchemeColor &&
+        other.tooltipOpacity == tooltipOpacity &&
+        //
         other.dialogRadius == dialogRadius &&
         other.dialogElevation == dialogElevation &&
-        other.dialogElevation == dialogElevation &&
+        other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
+        //
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
         //
@@ -2147,6 +2538,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
+        //
+        other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
+        other.bottomSheetModalBackgroundColor ==
+            bottomSheetModalBackgroundColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
@@ -2211,6 +2606,7 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationBarBackgroundSchemeColor ==
             navigationBarBackgroundSchemeColor &&
         other.navigationBarOpacity == navigationBarOpacity &&
+        other.navigationBarElevation == navigationBarElevation &&
         other.navigationBarHeight == navigationBarHeight &&
         other.navigationBarLabelBehavior == navigationBarLabelBehavior &&
         //
@@ -2252,6 +2648,8 @@ class FlexSubThemesData with Diagnosticable {
   @override
   int get hashCode => Object.hashAll(<Object?>[
         interactionEffects,
+        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+        // tintedDisabledControls,
         blendOnLevel,
         blendOnColors,
         useFlutterDefaults,
@@ -2265,24 +2663,39 @@ class FlexSubThemesData with Diagnosticable {
         //
         thickBorderWidth,
         thinBorderWidth,
+        //
         textButtonRadius,
+        textButtonSchemeColor,
+        textButtonTextStyle,
+        //
         elevatedButtonRadius,
         elevatedButtonElevation,
-        outlinedButtonRadius,
-        toggleButtonsRadius,
-        //
-        textButtonSchemeColor,
         elevatedButtonSchemeColor,
         elevatedButtonSecondarySchemeColor,
+        elevatedButtonTextStyle,
+        //
+        outlinedButtonRadius,
         outlinedButtonSchemeColor,
         outlinedButtonOutlineSchemeColor,
-        materialButtonSchemeColor,
+        outlinedButtonBorderWidth,
+        outlinedButtonPressedBorderWidth,
+        outlinedButtonTextStyle,
+        //
+        toggleButtonsRadius,
         toggleButtonsSchemeColor,
+        toggleButtonsBorderWidth,
+        //
+        materialButtonSchemeColor,
         //
         switchSchemeColor,
+        switchThumbSchemeColor,
         checkboxSchemeColor,
         radioSchemeColor,
         unselectedToggleIsColored,
+        //
+        sliderBaseSchemeColor,
+        sliderValueTinted,
+        sliderTrackHeight,
         //
         inputDecoratorRadius,
         inputDecoratorSchemeColor,
@@ -2291,20 +2704,31 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorBorderType,
         inputDecoratorUnfocusedHasBorder,
         inputDecoratorUnfocusedBorderIsColored,
+        inputDecoratorBorderWidth,
+        inputDecoratorFocusedBorderWidth,
         //
         fabRadius,
         fabUseShape,
+        fabAlwaysCircular,
         fabSchemeColor,
         //
         chipRadius,
         chipSchemeColor,
+        chipSelectedSchemeColor,
         //
         cardRadius,
         cardElevation,
         //
         popupMenuRadius,
         popupMenuElevation,
+        popupMenuSchemeColor,
         popupMenuOpacity,
+        //
+        tooltipRadius,
+        tooltipWaitDuration,
+        tooltipShowDuration,
+        tooltipSchemeColor,
+        tooltipOpacity,
         //
         dialogRadius,
         dialogElevation,
@@ -2320,6 +2744,8 @@ class FlexSubThemesData with Diagnosticable {
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
         //
+        bottomSheetBackgroundColor,
+        bottomSheetModalBackgroundColor,
         bottomSheetRadius,
         bottomSheetElevation,
         bottomSheetModalElevation,
@@ -2358,6 +2784,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarIndicatorOpacity,
         navigationBarBackgroundSchemeColor,
         navigationBarOpacity,
+        navigationBarElevation,
         navigationBarHeight,
         navigationBarLabelBehavior,
         //
@@ -2388,10 +2815,14 @@ class FlexSubThemesData with Diagnosticable {
     super.debugFillProperties(properties);
     properties.add(
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
+    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+    // properties.add(DiagnosticsProperty<bool>(
+    //     'tintedDisabledControls', tintedDisabledControls));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     properties.add(
         DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
+    //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
@@ -2402,39 +2833,67 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
     properties
         .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
+    //
     properties
         .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'textButtonSchemeColor', textButtonSchemeColor));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'textButtonTextStyle', textButtonTextStyle));
+    //
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonRadius', elevatedButtonRadius));
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonElevation', elevatedButtonElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'outlinedButtonRadius', outlinedButtonRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'toggleButtonsRadius', toggleButtonsRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'textButtonSchemeColor', textButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSchemeColor', elevatedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'elevatedButtonSecondarySchemeColor',
         elevatedButtonSecondarySchemeColor));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'elevatedButtonTextStyle', elevatedButtonTextStyle));
+    //
+    properties.add(DiagnosticsProperty<double>(
+        'outlinedButtonRadius', outlinedButtonRadius));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'materialButtonSchemeColor', materialButtonSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'outlinedButtonBorderWidth', outlinedButtonBorderWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'outlinedButtonPressedBorderWidth', outlinedButtonPressedBorderWidth));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'outlinedButtonTextStyle', outlinedButtonTextStyle));
+    //
+    properties.add(DiagnosticsProperty<double>(
+        'toggleButtonsRadius', toggleButtonsRadius));
     properties.add(EnumProperty<SchemeColor>(
         'toggleButtonsSchemeColor', toggleButtonsSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'toggleButtonsBorderWidth', toggleButtonsBorderWidth));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'materialButtonSchemeColor', materialButtonSchemeColor));
+    //
     properties
         .add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'switchThumbSchemeColor', switchThumbSchemeColor));
     properties.add(
         EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
     properties
         .add(EnumProperty<SchemeColor>('radioSchemeColor', radioSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'unselectedToggleIsColored', unselectedToggleIsColored));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'sliderBaseSchemeColor', sliderBaseSchemeColor));
+    properties
+        .add(DiagnosticsProperty<bool>('sliderValueTinted', sliderValueTinted));
+    properties.add(
+        DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
+    //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));
     properties.add(EnumProperty<SchemeColor>(
@@ -2450,20 +2909,45 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedBorderIsColored',
         inputDecoratorUnfocusedBorderIsColored));
+    properties.add(DiagnosticsProperty<double>(
+        'inputDecoratorBorderWidth', inputDecoratorBorderWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'inputDecoratorFocusedBorderWidth', inputDecoratorFocusedBorderWidth));
+    //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
+    properties
+        .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
+    //
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'chipSelectedSchemeColor', chipSelectedSchemeColor));
+    //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
+    //
     properties
         .add(DiagnosticsProperty<double>('popupMenuRadius', popupMenuRadius));
     properties.add(
         DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
+    properties.add(EnumProperty<SchemeColor>(
+        'popupMenuSchemeColor', popupMenuSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
+    //
+    properties.add(DiagnosticsProperty<double>('tooltipRadius', tooltipRadius));
+    properties.add(DiagnosticsProperty<Duration>(
+        'tooltipWaitDuration', tooltipWaitDuration));
+    properties.add(DiagnosticsProperty<Duration>(
+        'tooltipShowDuration', tooltipShowDuration));
+    properties.add(
+        EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
+    properties
+        .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
+    //
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
     properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
@@ -2471,18 +2955,26 @@ class FlexSubThemesData with Diagnosticable {
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
+    //
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
     properties.add(EnumProperty<SchemeColor>(
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'bottomSheetModalBackgroundColor', bottomSheetModalBackgroundColor));
     properties.add(
         DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
     properties.add(DiagnosticsProperty<double>(
@@ -2577,6 +3069,8 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'navigationBarOpacity', navigationBarOpacity));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarElevation', navigationBarElevation));
     properties.add(DiagnosticsProperty<double>(
         'navigationBarHeight', navigationBarHeight));
     properties.add(EnumProperty<NavigationDestinationLabelBehavior>(

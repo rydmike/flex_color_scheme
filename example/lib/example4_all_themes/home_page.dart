@@ -37,13 +37,13 @@ class HomePage extends StatelessWidget {
         AppData.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final TextTheme textTheme = theme.textTheme;
-    final TextStyle headlineMedium = textTheme.headlineMedium!;
+    final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Row(
       children: <Widget>[
         const SizedBox(width: 0.01),
         Expanded(
+          // TODO(rydmike): Check if this old finding still applies.
           // Wrapping the Scaffold in a Row, with an almost zero width SizedBox
           // before the Scaffold that is in an Expanded widget so it fills the
           // available screen, causes the PopupMenu to open up right aligned on
@@ -209,7 +209,7 @@ class HomePage extends StatelessWidget {
                             enabled: controller.useSubThemes &&
                                 controller.useFlexColorScheme,
                             contentPadding: EdgeInsets.zero,
-                            title: Slider.adaptive(
+                            title: Slider(
                               min: -1,
                               max: 30,
                               divisions: 31,
@@ -226,8 +226,9 @@ class HomePage extends StatelessWidget {
                               onChanged: controller.useSubThemes &&
                                       controller.useFlexColorScheme
                                   ? (double value) {
-                                      controller.setDefaultRadius(
-                                          value < 0 ? null : value);
+                                      controller.setDefaultRadius(value < 0
+                                          ? null
+                                          : value.roundToDouble());
                                     }
                                   : null,
                             ),
@@ -239,8 +240,7 @@ class HomePage extends StatelessWidget {
                                 children: <Widget>[
                                   Text(
                                     'RADIUS',
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
+                                    style: theme.textTheme.bodySmall,
                                   ),
                                   Text(
                                     controller.useSubThemes &&
@@ -254,9 +254,7 @@ class HomePage extends StatelessWidget {
                                                     ?.toStringAsFixed(0) ??
                                                 '')
                                         : '4',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
+                                    style: theme.textTheme.bodySmall!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -269,13 +267,11 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   // Open some sub-pages
-                  const ShowSubPages(),
+                  ShowSubPages(controller: controller),
                   const SizedBox(height: 8),
                   const Divider(),
                   Text('Theme Showcase', style: headlineMedium),
-                  ThemeShowcase(
-                    useRailAssertWorkAround: !controller.useSubThemes,
-                  ),
+                  const ThemeShowcase(),
                 ],
               ),
             ),

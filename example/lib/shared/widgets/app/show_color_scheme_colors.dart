@@ -100,7 +100,7 @@ class ShowColorSchemeColors extends StatelessWidget {
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
     return Theme(
-      data: Theme.of(context).copyWith(
+      data: theme.copyWith(
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,

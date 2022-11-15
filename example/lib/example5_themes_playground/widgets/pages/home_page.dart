@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
         onSelect: (int index) async {
           // Toggle grid view mode true/false.
           if (index == 0) {
-            await widget.controller
+            widget.controller
                 .setAdvancedView(!widget.controller.isLargeGridView);
             menuItemsEnabled[4] = !menuItemsEnabled[4];
             menuItemsEnabled[5] = !menuItemsEnabled[5];
@@ -140,20 +140,20 @@ class _HomePageState extends State<HomePage> {
             setState(() {});
           }
           // Set theme-mode light/dark
-          if (index == 1) {
+          else if (index == 1) {
             if (isDark) {
-              await widget.controller.setThemeMode(ThemeMode.light);
+              widget.controller.setThemeMode(ThemeMode.light);
             } else {
-              await widget.controller.setThemeMode(ThemeMode.dark);
+              widget.controller.setThemeMode(ThemeMode.dark);
             }
           }
           // Copy theme setup code
-          if (index == 2) {
+          else if (index == 2) {
             // ignore: use_build_context_synchronously
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
-          if (index == 3) {
+          else if (index == 3) {
             final String code = generateColorSchemeDartCode(colorScheme);
             await showResponsiveDialog<void>(
               context: context,
@@ -166,21 +166,21 @@ class _HomePageState extends State<HomePage> {
             );
           }
           // Open all cards
-          if (index == 4) {
+          else if (index == 4) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = true;
             }
             setState(() {});
           }
           // Close all cards
-          if (index == 5) {
+          else if (index == 5) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = false;
             }
             setState(() {});
           }
           // Reset theme settings.
-          if (index == 6) {
+          else if (index == 6) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {

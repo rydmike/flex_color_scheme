@@ -117,7 +117,7 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     });
   }
 
-  static bool _colorsAreClose(Color a, Color b) {
+  static bool _colorsAreClose(Color a, Color b, bool isLight) {
     final int dR = a.red - b.red;
     final int dG = a.green - b.green;
     final int dB = a.blue - b.blue;
@@ -127,9 +127,12 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     // We just need a number to represents some relative closeness of the
     // colors. We use this to determine a level when we should draw a border
     // around our panel.
-    // This value was just determined by visually testing what was a good
+    // These values were just determined by visually testing what was a good
     // trigger for when the border appeared and disappeared during testing.
-    if (distance < 120) {
+    // We get better results if we use a different trigger value for light
+    // and dark mode.
+    final int closeTrigger = isLight ? 14 : 29;
+    if (distance < closeTrigger) {
       return true;
     } else {
       return false;
@@ -139,14 +142,15 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    // Use passed in color for the Card, or default themed Card theme color.
-    final Color cardColor = widget.color ?? theme.cardColor;
+    // Use passed in color for the Card, or scheme surface, used for Card.
+    final Color cardColor = widget.color ?? theme.colorScheme.surface;
     // Compute a header color with fixed primary blend from the card color,
-    final Color headerColor =
-        Color.alphaBlend(scheme.surfaceTint.withAlpha(20), cardColor);
+    final Color headerColor = Color.alphaBlend(
+        scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
     final bool useHeading = widget.title != null ||
@@ -155,8 +159,8 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     // Make a shape border if Card or its header color are close in color
     // to the scaffold background color, because if that happens we want to
     // separate the header card from the background with a border.
-    if (_colorsAreClose(cardColor, background) ||
-        (_colorsAreClose(headerColor, background) && useHeading)) {
+    if (_colorsAreClose(cardColor, background, isLight) ||
+        (_colorsAreClose(headerColor, background, isLight) && useHeading)) {
       // If we had one shape, copy in a border side to it.
       if (shapeBorder is RoundedRectangleBorder) {
         shapeBorder = shapeBorder.copyWith(
