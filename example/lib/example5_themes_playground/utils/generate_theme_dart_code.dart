@@ -392,6 +392,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipSchemeColor = controller.chipSchemeColor != null
       ? '    chipSchemeColor: ${controller.chipSchemeColor},\n'
       : '';
+  final String chipSelectedSchemeColor = controller.chipSelectedSchemeColor !=
+          null
+      ? '    chipSelectedSchemeColor: ${controller.chipSelectedSchemeColor},\n'
+      : '';
   final String chipBorderRadius = controller.chipBorderRadius != null
       ? '    chipRadius: ${controller.chipBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -729,6 +733,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabSchemeColor'
           //
           '$chipSchemeColor'
+          '$chipSelectedSchemeColor'
           '$chipBorderRadius'
           //
           '$cardBorderRadius'
@@ -859,6 +864,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabSchemeColor'
           //
           '$chipSchemeColor'
+          '$chipSelectedSchemeColor'
           '$chipBorderRadius'
           //
           '$cardBorderRadius'

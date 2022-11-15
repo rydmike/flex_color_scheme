@@ -1024,26 +1024,27 @@ class FlexSubThemes {
   }
 
   /// An opinionated [ChipThemeData] theme with custom border radius and a
-  /// custom theme that partially mimics the M3 style and works well with
+  /// custom theme that partially mimics the M3 style in M2 and works well with
   /// FlexColorScheme surface blends.
   ///
   /// The border radius defaults to 8dp [kChipRadius], new M3 default.
   /// https://m3.material.io/components/chips/specs
-  ///
-  /// This is inspired by M3 Chip design and applies it using the limited
-  /// theming features for old M2 chips in Flutter, to some extent. It is
-  /// tricky to get this theme to play nicely, but this setup is pretty ok
-  /// and fits well with the FlexColorScheme color blended themes.
-  ///
-  /// It is possible that there will be new Chips entirely for Material 3 in
-  /// Flutter. This theme brings the M2 Chips look closer to M3 design, but
-  /// cannot reach it all the way.
   static ChipThemeData chipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Defines which [Theme] based [ColorScheme] based color the selected Chips
+    /// use as their selected state color.
+    ///
+    /// The color scheme contrast pair color is used for text and icons, on the
+    /// [selectedSchemeColor]
+    ///
+    /// If not defined and [useMaterial3] is true, defaults to
+    /// [SchemeColor.secondaryContainer].
+    final SchemeColor? selectedSchemeColor,
+
     /// Defines which [Theme] based [ColorScheme] based color the Chips
-    /// use as their base color.
+    /// use as their color tint base color.
     ///
     /// The selected color is only used as base for the [Chip] colors, it also
     /// uses alpha blend and opacity to create the effective Chip colors using
@@ -1076,59 +1077,125 @@ class FlexSubThemes {
     /// If false widgets will use more opinionated FlexColorScheme defaults.
     final bool? useMaterial3,
   }) {
-    // Flag for not using any defined values, but instead falling back to
-    // effective M3 theme defaults.
+    // Function used to increase icon color for selections resulting in poor
+    // icon color.
+    Color fixContrast(Color color) {
+      if (colorScheme.brightness == Brightness.light) {
+        if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
+          return color.darken(25);
+        } else {
+          return color;
+        }
+      } else {
+        if (ThemeData.estimateBrightnessForColor(color) == Brightness.dark) {
+          return color.lighten(25);
+        } else {
+          return color;
+        }
+      }
+    }
+
+    // Used to toggle between different defaults from M2 and M3.
+    final bool useM3 = useMaterial3 ?? false;
+    // Flag for not using any defined color values in M3 mode, but instead
+    // falling back to M3 theme defaults, when using Material 3.
+    // We do this when no Scheme colors are selected to get the exact M3
+    // theme default. It is not possible due to SDK lChip theming issues
+    // and limitations to recreate the exact M3 Chip themes with any other
+    // theme colors than the default built-in ones.
+    // TODO(rydmike): Raise issue about Chip theme issues and ink spec bug.
     final bool useM3Defaults =
-        baseSchemeColor == null && (useMaterial3 ?? false);
+        useM3 && baseSchemeColor == null && selectedSchemeColor == null;
 
-    // Get base color, defaults to primary.
-    final Color usedBaseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    // Get blend color, defaults to surface for M3 and to primary for M2.
+    final SchemeColor fallbackBlend =
+        useM3 ? SchemeColor.surface : SchemeColor.primary;
+    final Color blendColor =
+        schemeColor(baseSchemeColor ?? fallbackBlend, colorScheme);
 
-    // Foreground color for all Chips except disabled Chip.
-    final Color foreground = usedBaseColor.blendAlpha(
-        colorScheme.onSurface, kChipForegroundAlphaBlend);
-    // For selected InputChip & ChoiceChip.
-    final Color selectedBackgroundColor = usedBaseColor.blendAlpha(
-        colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+    // Selected color
+    final SchemeColor fallbackSelected =
+        useM3 ? SchemeColor.secondaryContainer : SchemeColor.surface;
+    final Color selectedColor = useM3 || selectedSchemeColor != null
+        ? schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme)
+        : blendColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+    // The onSelected onColor
+    final Color onSelectedColor =
+        schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
+
+    // Icon color.
+    final Color iconColor;
+    if (blendColor == colorScheme.surface ||
+        blendColor == colorScheme.background) {
+      iconColor = selectedColor;
+    } else {
+      iconColor = blendColor;
+    }
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveLabelStyle =
-        labelStyle.copyWith(color: foreground);
+        labelStyle.copyWith(color: onSelectedColor);
 
     return ChipThemeData(
-      brightness: useM3Defaults
-          ? null
-          : ThemeData.estimateBrightnessForColor(colorScheme.primary),
-      padding: (useMaterial3 ?? false) ? null : const EdgeInsets.all(4),
-      // For all Chip types, except disabled, InputChip & ChoiceChip.
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip], [RawChip], but NOT to ANY selected or disabled Chip.
       backgroundColor: useM3Defaults
           ? null
-          : usedBaseColor.blendAlpha(
+          : blendColor.blendAlpha(
               colorScheme.surface, kChipBackgroundAlphaBlend),
-      selectedColor:
-          useM3Defaults ? null : selectedBackgroundColor, // Selected InputChip
-      secondarySelectedColor:
-          useM3Defaults ? null : selectedBackgroundColor, // Selected ChoiceChip
-      checkmarkColor: useM3Defaults ? null : foreground,
-      deleteIconColor: useM3Defaults ? null : usedBaseColor,
-      // Same formula as on Elevated button and ToggleButtons. The Chip has
-      // a built in scrim for disabled state, making it look a bit different,
-      // but it is pretty close.
+
+      // Applies to [Chip], [InputChip], [RawChip].
+      deleteIconColor: useM3Defaults ? null : colorScheme.onSurface,
+
+      // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
+      // Same formula as on FCS Elevated button and ToggleButtons.
       disabledColor: useM3Defaults
           ? null
-          : usedBaseColor
+          : blendColor
               .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
               .withAlpha(kDisabledBackgroundAlpha),
-      // Same label style on selected and not selected chips, their different
-      // background style make them stand out enough.
-      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
-      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
-      shape: (useMaterial3 ?? false) && radius == null
+
+      // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
+      selectedColor: useM3Defaults ? null : selectedColor,
+
+      // Applies to [ChoiceChip.selectedColor], if set it overrides the
+      // [selectedColor], for ChoiceChips.
+      secondarySelectedColor: useM3Defaults ? null : selectedColor,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      surfaceTintColor: useM3Defaults ? null : colorScheme.surfaceTint,
+
+      // Applies to [FilterChip], [InputChip], [RawChip].
+      checkmarkColor: useM3Defaults ? null : onSelectedColor,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      padding: useM3 ? null : const EdgeInsets.all(4),
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      shape: useM3 && radius == null
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(radius ?? kChipRadius),
               ),
+            ),
+
+      // Applies to [ActionChip], [Chip], [FilterChip], [InputChip], [RawChip].
+      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
+
+      // Applies to [ChoiceChip.labelStyle],
+      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
+
+      // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
+      // [InputChip] and [RawChip].
+      iconTheme: useM3Defaults
+          ? null
+          : IconThemeData(
+              color: fixContrast(iconColor),
+              size: 18.0,
             ),
     );
   }
@@ -3232,7 +3299,7 @@ class FlexSubThemes {
 
     /// The splash radius of the circular Material ink response.
     ///
-    /// Defaults to kRadialReactionRadius = 20.
+    /// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
     final double? splashRadius,
 
     /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].

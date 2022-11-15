@@ -21,7 +21,7 @@ class DialogSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
-        .copyWith(color: theme.textTheme.caption!.color);
+        .copyWith(color: theme.textTheme.bodySmall!.color);
     final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 

@@ -785,11 +785,17 @@ class ChipShowcase extends StatelessWidget {
         const ActionChip(
           label: Text('ActionChip'),
           avatar: Icon(Icons.settings),
+          onPressed: null,
         ),
         FilterChip(
           label: const Text('FilterChip'),
           selected: true,
           onSelected: (bool value) {},
+        ),
+        const FilterChip(
+          label: Text('FilterChip'),
+          selected: true,
+          onSelected: null,
         ),
         FilterChip(
           label: const Text('FilterChip'),
@@ -798,13 +804,17 @@ class ChipShowcase extends StatelessWidget {
         ),
         const FilterChip(
           label: Text('FilterChip'),
-          selected: true,
+          selected: false,
           onSelected: null,
         ),
         ChoiceChip(
           label: const Text('ChoiceChip'),
           selected: true,
           onSelected: (bool value) {},
+        ),
+        const ChoiceChip(
+          label: Text('ChoiceChip'),
+          selected: true,
         ),
         ChoiceChip(
           label: const Text('ChoiceChip'),
@@ -813,16 +823,23 @@ class ChipShowcase extends StatelessWidget {
         ),
         const ChoiceChip(
           label: Text('ChoiceChip'),
-          selected: true,
+          selected: false,
+          onSelected: null,
         ),
         InputChip(
+          selected: true,
           label: const Text('InputChip'),
           onSelected: (bool value) {},
           onDeleted: () {},
         ),
         InputChip(
-          showCheckmark: true,
           selected: true,
+          label: const Text('InputChip'),
+          isEnabled: false,
+          onSelected: (bool value) {},
+          onDeleted: () {},
+        ),
+        InputChip(
           label: const Text('InputChip'),
           onSelected: (bool value) {},
           onDeleted: () {},

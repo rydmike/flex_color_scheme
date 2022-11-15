@@ -149,10 +149,10 @@ class FabChipSettings extends StatelessWidget {
         ),
         const Divider(),
         ColorSchemePopupMenu(
-          title: const Text('Chip color base'),
+          title: const Text('Chip blend color'),
           labelForDefault: controller.useMaterial3
-              ? 'default M3 (surface & secondaryContainer)'
-              : 'default (primary with opacity)',
+              ? 'default (surface)'
+              : 'default (primary)',
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -160,6 +160,23 @@ class FabChipSettings extends StatelessWidget {
                     controller.setChipSchemeColor(null);
                   } else {
                     controller.setChipSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Selected Chip color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (secondaryContainer)'
+              : 'default (none)',
+          index: controller.chipSelectedSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setChipSelectedSchemeColor(null);
+                  } else {
+                    controller
+                        .setChipSelectedSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,

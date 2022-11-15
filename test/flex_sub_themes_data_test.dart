@@ -248,6 +248,7 @@ void main() {
       //
       chipRadius: 20,
       chipSchemeColor: SchemeColor.secondaryContainer,
+      chipSelectedSchemeColor: SchemeColor.onSecondaryContainer,
       //
       cardRadius: 20,
       cardElevation: 2,
@@ -421,6 +422,7 @@ void main() {
           //
           chipRadius: 20,
           chipSchemeColor: SchemeColor.secondaryContainer,
+          chipSelectedSchemeColor: SchemeColor.onSecondaryContainer,
           //
           cardRadius: 20,
           cardElevation: 2,

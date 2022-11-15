@@ -236,6 +236,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             fabSchemeColor: controller.fabSchemeColor,
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
+            chipSelectedSchemeColor: controller.chipSelectedSchemeColor,
             chipRadius: controller.chipBorderRadius,
             // Card settings.
             cardRadius: controller.cardBorderRadius,

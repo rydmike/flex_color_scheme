@@ -98,13 +98,13 @@ class ShowSubThemeColors extends StatelessWidget {
                 : colorScheme.secondary);
     final Color switchColor = theme.switchTheme.thumbColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color checkboxColor = theme.checkboxTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
-        theme.toggleableActiveColor;
+        (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color circleAvatarColor =
         isDark ? theme.primaryColorLight : theme.primaryColorDark;
     final Color chipColor =

@@ -166,6 +166,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.chipRadius,
     this.chipSchemeColor,
+    this.chipSelectedSchemeColor,
     //
     this.cardRadius,
     this.cardElevation,
@@ -753,7 +754,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -778,7 +779,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -803,7 +804,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// When not using sub-themes, the color defaults to
   /// ThemeData.colorScheme.secondary color that is used as FlexColorScheme's
-  /// default for [ThemeData.toggleableActiveColor].
+  /// default for ThemeData toggleableActiveColor, as long as still needed.
   ///
   /// The ThemeData property toggleableActiveColor is being deprecated
   /// https://github.com/flutter/flutter/pull/95870. A future change for
@@ -1021,7 +1022,7 @@ class FlexSubThemesData with Diagnosticable {
   final double? chipRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
-  /// use as their base color.
+  /// use as their base tint color.
   ///
   /// The selected color is only used as base for the [Chip] colors, it also
   /// uses alpha blend and opacity to create the effective Chip colors using
@@ -1035,6 +1036,23 @@ class FlexSubThemesData with Diagnosticable {
   /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
   /// pass in [SchemeColor.primary].
   final SchemeColor? chipSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the Chips
+  /// use as their selected color.
+  ///
+  /// The selected color is used together with its pair color, onColor if normal
+  /// color was selected, and with normal color if onColor was selected
+  /// for contrast text icon color on selected chips.
+  ///
+  ///
+  /// If not defined it defaults to effective theme based color from using
+  /// [SchemeColor.primary], when [useMaterial3] is false.
+  ///
+  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
+  /// result in M3 default Chip coloring being used without opacity and alpha
+  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
+  /// pass in [SchemeColor.primary].
+  final SchemeColor? chipSelectedSchemeColor;
 
   /// Border radius value for [Card].
   ///
@@ -2028,6 +2046,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
+    final SchemeColor? chipSelectedSchemeColor,
     //
     final double? cardRadius,
     final double? cardElevation,
@@ -2214,6 +2233,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
+      chipSelectedSchemeColor:
+          chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
       //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
@@ -2471,6 +2492,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
+        other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
         //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
@@ -2674,6 +2696,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         chipRadius,
         chipSchemeColor,
+        chipSelectedSchemeColor,
         //
         cardRadius,
         cardElevation,
@@ -2880,6 +2903,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'chipSelectedSchemeColor', chipSelectedSchemeColor));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));

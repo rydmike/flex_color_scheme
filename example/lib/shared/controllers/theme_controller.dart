@@ -403,7 +403,7 @@ class ThemeController with ChangeNotifier {
     _sliderTrackHeight = await _themeService.load(
         Store.keySliderTrackHeight, Store.defaultSliderTrackHeight);
     //
-    // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
+    // Fab SETTINGS.
     _fabUseShape = await _themeService.load(
         Store.keyFabUseShape, Store.defaultFabUseShape);
     _fabAlwaysCircular = await _themeService.load(
@@ -413,13 +413,19 @@ class ThemeController with ChangeNotifier {
     _fabSchemeColor = await _themeService.load(
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
     //
+    // Chip Settings
     _chipSchemeColor = await _themeService.load(
         Store.keyChipSchemeColor, Store.defaultChipSchemeColor);
+    _chipSelectedSchemeColor = await _themeService.load(
+        Store.keyChipSelectedSchemeColor, Store.defaultChipSelectedSchemeColor);
     _chipBorderRadius = await _themeService.load(
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
+    //
+    // SnackBar SETTINGS.
     _snackBarSchemeColor = await _themeService.load(
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
     //
+    // PopupMenuButton SETTINGS.
     _popupMenuSchemeColor = await _themeService.load(
         Store.keyPopupMenuSchemeColor, Store.defaultPopupMenuSchemeColor);
     _popupMenuOpacity = await _themeService.load(
@@ -429,6 +435,7 @@ class ThemeController with ChangeNotifier {
     _popupMenuBorderRadius = await _themeService.load(
         Store.keyPopupMenuBorderRadius, Store.defaultPopupMenuBorderRadius);
     //
+    // Card SETTINGS.
     _cardBorderRadius = await _themeService.load(
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
     _dialogBackgroundSchemeColor = await _themeService.load(
@@ -700,21 +707,27 @@ class ThemeController with ChangeNotifier {
     setSliderValueTinted(Store.defaultSliderValueTinted, false);
     setSliderTrackHeight(Store.defaultSliderTrackHeight, false);
     //
-    // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
+    // Fab SETTINGS.
     setFabUseShape(Store.defaultFabUseShape, false);
     setFabAlwaysCircular(Store.defaultFabAlwaysCircular, false);
     setFabBorderRadius(Store.defaultFabBorderRadius, false);
     setFabSchemeColor(Store.defaultFabSchemeColor, false);
     //
+    // Chip SETTINGS.
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
+    setChipSelectedSchemeColor(Store.defaultChipSelectedSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
+    //
+    // SnackBar SETTINGS.
     setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
     //
+    // PopupMenuButton SETTINGS.
     setPopupMenuSchemeColor(Store.defaultPopupMenuSchemeColor, false);
     setPopupMenuOpacity(Store.defaultPopupMenuOpacity, false);
     setPopupMenuElevation(Store.defaultPopupMenuElevation, false);
     setPopupMenuBorderRadius(Store.defaultPopupMenuBorderRadius, false);
     //
+    // Card SETTINGS.
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
@@ -2173,6 +2186,15 @@ class ThemeController with ChangeNotifier {
     _chipSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipSchemeColor, value));
+  }
+
+  late SchemeColor? _chipSelectedSchemeColor;
+  SchemeColor? get chipSelectedSchemeColor => _chipSelectedSchemeColor;
+  void setChipSelectedSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _chipSelectedSchemeColor) return;
+    _chipSelectedSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipSelectedSchemeColor, value));
   }
 
   late double? _chipBorderRadius;

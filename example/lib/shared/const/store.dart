@@ -856,6 +856,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultChipSchemeColor = null;
 
+  // Key used to read and save the chipSelectedSchemeColor value.
+  static const String keyChipSelectedSchemeColor = 'chipSelectedSchemeColor';
+  // Default value for the chipSelectedSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultChipSelectedSchemeColor = null;
+
   // Key used to read and save the chipBorderRadius value.
   static const String keyChipBorderRadius = 'chipBorderRadius';
   // Default value for the chipBorderRadius, also used to reset settings.
@@ -1048,5 +1054,4 @@ class Store {
 
   // Not yet implemented SETTINGS.
   // ===========================================================================
-
 }
