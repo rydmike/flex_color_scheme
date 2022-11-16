@@ -311,6 +311,26 @@ class Store {
   // Default value for the useM3ErrorColor, also to reset settings.
   static const bool defaultUseM3ErrorColors = false;
 
+  // Key used to read and save the noLightOnMainsTint value.
+  static const String keyNoLightOnMainsTint = 'noLightOnMainsTint';
+  // Default value for the noLightOnMainsTint, also to reset settings.
+  static const bool defaultNoLightOnMainsTint = false;
+
+  // Key used to read and save the noDarkOnMainsTint value.
+  static const String keyNoDarkOnMainsTint = 'noDarkOnMainsTint';
+  // Default value for the noDarkOnMainsTint, also to reset settings.
+  static const bool defaultNoDarkOnMainsTint = false;
+
+  // Key used to read and save the noLightOnSurfacesTint value.
+  static const String keyNoLightOnSurfacesTint = 'noLightOnSurfacesTint';
+  // Default value for the noLightOnSurfacesTint, also to reset settings.
+  static const bool defaultNoLightOnSurfacesTint = false;
+
+  // Key used to read and save the noDarkOnSurfacesTint value.
+  static const String keyNoDarkOnSurfacesTint = 'noDarkOnSurfacesTint';
+  // Default value for the noDarkOnSurfacesTint, also to reset settings.
+  static const bool defaultNoDarkOnSurfacesTint = false;
+
   // InputDecorator SETTINGS.
   // ===========================================================================
 

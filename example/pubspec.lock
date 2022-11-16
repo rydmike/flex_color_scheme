@@ -74,9 +74,9 @@ packages:
   flex_color_picker:
     dependency: "direct main"
     description:
-      name: flex_color_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../flex_color_picker"
+      relative: true
+    source: path
     version: "2.6.1"
   flex_color_scheme:
     dependency: "direct main"
@@ -88,9 +88,9 @@ packages:
   flex_seed_scheme:
     dependency: "direct main"
     description:
-      name: flex_seed_scheme
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../flex_seed_scheme"
+      relative: true
+    source: path
     version: "1.0.1"
   flutter:
     dependency: "direct main"

@@ -95,9 +95,9 @@ packages:
   flex_seed_scheme:
     dependency: "direct main"
     description:
-      name: flex_seed_scheme
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../flex_seed_scheme"
+      relative: true
+    source: path
     version: "1.0.1"
   flutter:
     dependency: "direct main"

@@ -183,6 +183,15 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = await _themeService.load(
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
+    _noLightOnMainsTint = await _themeService.load(
+        Store.keyNoLightOnMainsTint, Store.defaultNoLightOnMainsTint);
+    _noDarkOnMainsTint = await _themeService.load(
+        Store.keyNoDarkOnMainsTint, Store.defaultNoDarkOnMainsTint);
+    _noLightOnSurfacesTint = await _themeService.load(
+        Store.keyNoLightOnSurfacesTint, Store.defaultNoLightOnSurfacesTint);
+    _noDarkOnSurfacesTint = await _themeService.load(
+        Store.keyNoDarkOnSurfacesTint, Store.defaultNoDarkOnSurfacesTint);
+    //
     // InputDecorator SETTINGS.
     _inputDecoratorSchemeColorLight = await _themeService.load(
         Store.keyInputDecoratorSchemeColorLight,
@@ -576,6 +585,11 @@ class ThemeController with ChangeNotifier {
     setKeepDarkTertiaryContainer(Store.defaultKeepDarkTertiaryContainer, false);
     setUsedFlexToneSetup(Store.defaultUsedFlexToneSetup, false);
     setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
+    //
+    setNoLightOnMainsTint(Store.defaultNoLightOnMainsTint, false);
+    setNoDarkOnMainsTint(Store.defaultNoDarkOnMainsTint, false);
+    setNoLightOnSurfacesTint(Store.defaultNoLightOnSurfacesTint, false);
+    setNoDarkOnSurfacesTint(Store.defaultNoDarkOnSurfacesTint, false);
     //
     // InputDecorator SETTINGS.
     setInputDecoratorSchemeColorLight(
@@ -1333,6 +1347,46 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseM3ErrorColors, value));
+  }
+
+  late bool _noLightOnMainsTint;
+  bool get noLightOnMainsTint => _noLightOnMainsTint;
+  void setNoLightOnMainsTint(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _noLightOnMainsTint) return;
+    _noLightOnMainsTint = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNoLightOnMainsTint, value));
+  }
+
+  late bool _noDarkOnMainsTint;
+  bool get noDarkOnMainsTint => _noDarkOnMainsTint;
+  void setNoDarkOnMainsTint(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _noDarkOnMainsTint) return;
+    _noDarkOnMainsTint = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNoDarkOnMainsTint, value));
+  }
+
+  late bool _noLightOnSurfacesTint;
+  bool get noLightOnSurfacesTint => _noLightOnSurfacesTint;
+  void setNoLightOnSurfacesTint(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _noLightOnSurfacesTint) return;
+    _noLightOnSurfacesTint = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNoLightOnSurfacesTint, value));
+  }
+
+  late bool _noDarkOnSurfacesTint;
+  bool get noDarkOnSurfacesTint => _noDarkOnSurfacesTint;
+  void setNoDarkOnSurfacesTint(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _noDarkOnSurfacesTint) return;
+    _noDarkOnSurfacesTint = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNoDarkOnSurfacesTint, value));
   }
 
   // InputDecorator SETTINGS.

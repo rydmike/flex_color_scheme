@@ -113,6 +113,8 @@ class FlexKeyColors with Diagnosticable {
     this.keepPrimaryContainer = false,
     this.keepSecondaryContainer = false,
     this.keepTertiaryContainer = false,
+    this.noOnMainsTint = false,
+    this.noOnSurfacesTint = false,
   });
 
   /// Turn on using Material 3 key color based [TonalPalette] colors for the
@@ -286,6 +288,33 @@ class FlexKeyColors with Diagnosticable {
   /// Defaults to false.
   final bool keepTertiaryContainer;
 
+  /// When using [useKeyColors], set [noOnMainsTint] to true, to make
+  /// the seeded on colors for [onPrimary], [onPrimaryContainer],
+  /// [onSecondary], [onSecondaryContainer], [onTertiary],
+  /// [onTertiaryContainer], [onError] and [onErrorContainer] pure black or
+  /// white, depending on need contrast, instead of tinted black and white.
+  ///
+  /// This feature can be used to when using seeded generated ColorScheme to
+  /// still keep traditional black and white contrasting colors for all the
+  /// main colors.
+  ///
+  /// This option can also be used to make more accessible themes by increasing
+  /// contrast of text drawn on main colors.
+  final bool noOnMainsTint;
+
+  /// When using [useKeyColors], set [noOnSurfacesTint] to true, to make
+  /// the seeded on colors for [onBackground], [onSurface],
+  /// [onSurfaceVariant], and [onInverseSurface] pure black or
+  /// white, depending on need contrast, instead of tinted black and white.
+  ///
+  /// This feature can be used to when using seeded generated ColorScheme to
+  /// still keep traditional black and white contrasting colors for all the
+  /// surface related colors.
+  ///
+  /// This option can also be used to make more accessible themes by increasing
+  /// contrast of text drawn on surface and background colors.
+  final bool noOnSurfacesTint;
+
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
     final bool? useKeyColors,
@@ -297,6 +326,8 @@ class FlexKeyColors with Diagnosticable {
     final bool? keepPrimaryContainer,
     final bool? keepSecondaryContainer,
     final bool? keepTertiaryContainer,
+    final bool? noOnMainsTint,
+    final bool? noOnSurfacesTint,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
@@ -310,6 +341,8 @@ class FlexKeyColors with Diagnosticable {
           keepSecondaryContainer ?? this.keepSecondaryContainer,
       keepTertiaryContainer:
           keepTertiaryContainer ?? this.keepTertiaryContainer,
+      noOnMainsTint: noOnMainsTint ?? this.noOnMainsTint,
+      noOnSurfacesTint: noOnSurfacesTint ?? this.noOnSurfacesTint,
     );
   }
 
@@ -327,7 +360,9 @@ class FlexKeyColors with Diagnosticable {
         other.keepTertiary == keepTertiary &&
         other.keepPrimaryContainer == keepPrimaryContainer &&
         other.keepSecondaryContainer == keepSecondaryContainer &&
-        other.keepTertiaryContainer == keepTertiaryContainer;
+        other.keepTertiaryContainer == keepTertiaryContainer &&
+        other.noOnMainsTint == noOnMainsTint &&
+        other.noOnSurfacesTint == noOnSurfacesTint;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -342,6 +377,8 @@ class FlexKeyColors with Diagnosticable {
         keepPrimaryContainer,
         keepSecondaryContainer,
         keepTertiaryContainer,
+        noOnMainsTint,
+        noOnSurfacesTint,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -360,5 +397,8 @@ class FlexKeyColors with Diagnosticable {
         'keepSecondaryContainer', keepSecondaryContainer));
     properties.add(DiagnosticsProperty<bool>(
         'keepTertiaryContainer', keepTertiaryContainer));
+    properties.add(DiagnosticsProperty<bool>('noOnMainsTint', noOnMainsTint));
+    properties
+        .add(DiagnosticsProperty<bool>('noOnSurfacesTint', noOnSurfacesTint));
   }
 }

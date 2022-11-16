@@ -354,6 +354,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
       keepPrimaryContainer: controller.keepPrimaryContainer,
       keepSecondaryContainer: controller.keepSecondaryContainer,
       keepTertiaryContainer: controller.keepTertiaryContainer,
+      noOnMainsTint: controller.noLightOnMainsTint,
+      noOnSurfacesTint: controller.noLightOnSurfacesTint,
     ),
     // Use Material3 error colors with Material2 themes.
     useMaterial3ErrorColors: controller.useM3ErrorColors,

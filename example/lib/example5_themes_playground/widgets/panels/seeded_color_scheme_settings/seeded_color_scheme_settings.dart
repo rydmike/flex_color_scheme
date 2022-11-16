@@ -80,6 +80,51 @@ class SeededColorSchemeSettings extends StatelessWidget {
           onChanged:
               controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
         ),
+        if (isLight) ...<Widget>[
+          SwitchListTile(
+            title: const Text('No tint on seeded main "On" colors, use '
+                'black & white'),
+            subtitle:
+                const Text('Main colors are primary, secondary, tertiary, '
+                    'error and their container colors'),
+            value: controller.noLightOnMainsTint && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setNoLightOnMainsTint
+                : null,
+          ),
+          SwitchListTile(
+            title: const Text('No tint on seeded surfaces "On" colors, use '
+                'black & white'),
+            subtitle: const Text('Surface colors are background, surface, '
+                'surfaceVariant and inverseSurface'),
+            value: controller.noLightOnSurfacesTint && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setNoLightOnSurfacesTint
+                : null,
+          ),
+        ] else ...<Widget>[
+          SwitchListTile(
+            title: const Text('No tint on seeded main "On" colors, use '
+                'black & white'),
+            subtitle:
+                const Text('Main colors are primary, secondary, tertiary, '
+                    'error and their container colors'),
+            value: controller.noDarkOnMainsTint && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setNoDarkOnMainsTint
+                : null,
+          ),
+          SwitchListTile(
+            title: const Text('No tint on seeded surfaces "On" colors, use '
+                'black & white'),
+            subtitle: const Text('Surface colors are background, surface, '
+                'surfaceVariant and inverseSurface'),
+            value: controller.noDarkOnSurfacesTint && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setNoDarkOnSurfacesTint
+                : null,
+          ),
+        ],
         ListTile(title: Text('$schemeMode ColorScheme')),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),

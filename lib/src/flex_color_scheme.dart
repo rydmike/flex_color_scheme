@@ -2360,7 +2360,12 @@ class FlexColorScheme with Diagnosticable {
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
         // Use provided tones configuration or default one.
-        tones: tones ?? FlexTones.material(Brightness.light),
+        tones: tones
+                ?.noOnMainsTint(seed.noOnMainsTint)
+                .noOnSurfacesTint(seed.noOnSurfacesTint) ??
+            FlexTones.material(Brightness.light)
+                .noOnMainsTint(seed.noOnMainsTint)
+                .noOnSurfacesTint(seed.noOnSurfacesTint),
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4105,7 +4110,12 @@ class FlexColorScheme with Diagnosticable {
         // Use provided tones configuration or the default one, which uses
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.
-        tones: tones ?? FlexTones.material(Brightness.dark),
+        tones: tones
+                ?.noOnMainsTint(seed.noOnMainsTint)
+                .noOnSurfacesTint(seed.noOnSurfacesTint) ??
+            FlexTones.material(Brightness.dark)
+                .noOnMainsTint(seed.noOnMainsTint)
+                .noOnSurfacesTint(seed.noOnSurfacesTint),
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4587,6 +4597,7 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
+
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system

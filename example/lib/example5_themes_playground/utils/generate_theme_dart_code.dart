@@ -996,6 +996,21 @@ String generateThemeDartCode(ThemeController controller) {
   final String keepDarkTertiaryContainer = controller.keepDarkTertiaryContainer
       ? '    keepTertiaryContainer: ${controller.keepDarkTertiaryContainer},\n'
       : '';
+
+  final String noOnMainsTint = controller.noLightOnMainsTint
+      ? '    noOnMainsTint: ${controller.noLightOnMainsTint},\n'
+      : '';
+  final String noOnSurfacesTint = controller.noLightOnSurfacesTint
+      ? '    noOnSurfacesTint: ${controller.noLightOnSurfacesTint},\n'
+      : '';
+
+  final String noDarkOnMainsTint = controller.noDarkOnMainsTint
+      ? '    noOnMainsTint: ${controller.noDarkOnMainsTint},\n'
+      : '';
+  final String noDarkOnSurfacesTint = controller.noDarkOnSurfacesTint
+      ? '    noOnSurfacesTint: ${controller.noDarkOnSurfacesTint},\n'
+      : '';
+
   String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
@@ -1006,6 +1021,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepPrimaryContainer'
           '$keepSecondaryContainer'
           '$keepTertiaryContainer'
+          '$noOnMainsTint'
+          '$noOnSurfacesTint'
           '  ),\n'
       : '';
   String useKeyColorsDark = controller.useKeyColors
@@ -1018,6 +1035,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepDarkPrimaryContainer'
           '$keepDarkSecondaryContainer'
           '$keepDarkTertiaryContainer'
+          '$noDarkOnMainsTint'
+          '$noDarkOnSurfacesTint'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.

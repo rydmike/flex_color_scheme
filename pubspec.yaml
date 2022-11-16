@@ -12,7 +12,8 @@ environment:
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.0.0
+  flex_seed_scheme: # ^1.0.0
+    path: ../flex_seed_scheme/
 
   flutter:
     sdk: flutter
