@@ -385,8 +385,51 @@ void main() {
             surfaceTintTone: 30,
             //
             primaryMinChroma: 50,
-            neutralChroma: 6,
-            neutralVariantChroma: 12,
+            neutralChroma: 5,
+            neutralVariantChroma: 10,
+          ),
+        ),
+      );
+    });
+    test('FTO1.023b: Verify FlexTones.vividSurfaces(Brightness.light).', () {
+      expect(
+        FlexTones.vividBackground(Brightness.light),
+        equals(
+          const FlexTones.light(
+            primaryTone: 30,
+            onPrimaryTone: 98,
+            onSecondaryTone: 98,
+            onTertiaryTone: 98,
+            onErrorTone: 98,
+            surfaceTone: 98,
+            onSurfaceVariantTone: 20,
+            inverseSurfaceTone: 30,
+            backgroundTone: 95,
+            surfaceTintTone: 30,
+            //
+            primaryMinChroma: 50,
+            neutralChroma: 5,
+            neutralVariantChroma: 10,
+          ),
+        ),
+      );
+    });
+    test('FTO1.024b: Verify FlexTones.vividSurfaces(Brightness.dark).', () {
+      expect(
+        FlexTones.vividBackground(Brightness.dark),
+        equals(
+          const FlexTones.dark(
+            onPrimaryTone: 10,
+            onSecondaryTone: 10,
+            onTertiaryTone: 10,
+            primaryContainerTone: 20,
+            backgroundTone: 20,
+            onSurfaceVariantTone: 95,
+            inverseSurfaceTone: 95,
+            //
+            primaryMinChroma: 50,
+            neutralChroma: 5,
+            neutralVariantChroma: 10,
           ),
         ),
       );
@@ -405,8 +448,8 @@ void main() {
             inverseSurfaceTone: 95,
             //
             primaryMinChroma: 50,
-            neutralChroma: 6,
-            neutralVariantChroma: 12,
+            neutralChroma: 5,
+            neutralVariantChroma: 10,
           ),
         ),
       );
@@ -579,6 +622,40 @@ void main() {
             secondaryMinChroma: 40,
             neutralChroma: 6,
             neutralVariantChroma: 10,
+          ),
+        ),
+      );
+    });
+    test('FTO1.031: Verify FlexTones.oneHue(Brightness.light).', () {
+      expect(
+        FlexTones.oneHue(Brightness.light),
+        equals(
+          const FlexTones.light(
+            secondaryContainerTone: 95,
+            tertiaryTone: 30,
+            tertiaryContainerTone: 80,
+            //
+            primaryMinChroma: 55,
+            secondaryChroma: 26,
+            tertiaryChroma: 36,
+            tertiaryHueRotation: 0,
+          ),
+        ),
+      );
+    });
+    test('FTO1.030: Verify FlexTones.oneHue(Brightness.dark).', () {
+      expect(
+        FlexTones.oneHue(Brightness.dark),
+        equals(
+          const FlexTones.dark(
+            tertiaryTone: 90,
+            tertiaryContainerTone: 40,
+            onTertiaryContainerTone: 95,
+            //
+            primaryMinChroma: 55,
+            secondaryChroma: 26,
+            tertiaryChroma: 36,
+            tertiaryHueRotation: 0,
           ),
         ),
       );

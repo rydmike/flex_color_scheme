@@ -6,27 +6,21 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Nov 17, 2022**
 
-**TODO**
-
-- Add info about oneHue and vivid background.
-- Tune vivid background and surface more, too strong surfaces.
-
 **NEW**
 
 * Scaffold background color can now be used as the themed AppBar background color. The enum `FlexAppBarStyle` that is used by property `appBarStyle` got a new value `scaffoldBackground` that enables this. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's `ColorScheme` surface or background colors.
 * Added properties `materialTapTargetSize` and `pageTransitionsTheme` to `FlexColorScheme` and `FlexThemeData`. They are only convenience properties to avoid having to use a `copyWith` on FlexColorScheme produced `ThemeData`, to define them.
-* Property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors to Material 3 color system. It applies to color schemes that were originally designed for Material 2, when using Material 3 mode, with or without seed generated ColorSchemes. 
+* Property `swapLegacyOnMaterial3` in `FlexColorScheme.light/dark` and `FlexThemeData.light/dark` allows for better automatic adjustment of built-in scheme colors to the Material 3 color-system. It applies to color schemes that were originally designed for Material 2, when using the Material 3 mode, with or without seed-generated ColorSchemes. 
   - Setting `swapLegacyOnMaterial3` to `true`, will when `useMaterial3` is `true`, swap the built-in scheme colors `secondary` and `tertiary` and also their container colors. 
   - This only happens for built-in schemes where this swap makes the color design **more compatible** with the intended design and usage of the `secondary` and `tertiary` colors in Material 3 color system.
   - To implement this, the class `FlexSchemeColor` has a new bool meta-data property called `swapOnMaterial3`, that has been defined to be `true`, if the `FlexSchemeColor` it defines, benefits design compliance wise from swapping its `secondary` and `tertiary` colors, when using Material 3.
   - For backwards compatibility the `swapLegacyOnMaterial3` is `false` by default, but it is recommended to always set it to `true`. The flag has no impact when using Material 2. 
   - The `swapLegacyOnMaterial3` flag can also be toggled in the **Themes Playground**, it is on by default there.
   - When the swap is done for a `FlexSchemeColor`, it is done before any other built-in scheme modifier properties, including `swapColor` and `usedColors`. 
-* The `FlexKeyColor` configuration class got two new boolean parameters, `noOnMainsTint` and `noOnSurfacesTint`. Use `noOnMainsTint` to control if seed generated contrasting **on** colors for the main colors, primary, secondary, tertiary, error and their containers, get their seeded colored versions as before, or if they use only classic black and white contrast colors, as in Material 2. The `noOnSurfacesTint` does the same thing, but for the surface **on** colors for, background, surface, surfaceVariant and inverseSurface.
-* The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true`, and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
+* The `FloatingActionButton` can now be set to always be circular, also in Material 3 and without assigning a high-radius setting. If you always want a circular FAB, and stadium on extended FEB, then set `fabAlwaysCircular` in `FlexSubThemesData` to `true`, and FAB stays circular regardless of if you use M2 or M3, or how you modify the global default border radius. You could get this effect before too by setting a very high themed radius on the FAB, but this is more convenient.
 * Additional new `FlexSubThemesData` properties:
   - `Slider` theme can now be adjusted via `FlexSubThemesData` properties `sliderBaseSchemeColor`, `sliderBaseSchemeColor` and `sliderTrackHeight`.
-  - The `chipSelectedSchemeColor` was added as a themeable background color, for Chips that are selectable. While adding this feature, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364).
+  - The `chipSelectedSchemeColor` was added as themed background color, for Chips that are selectable. While adding this feature, found some Flutter M3 Chip spec and theming issues, [see issue #115364](https://github.com/flutter/flutter/issues/115364).
   - Switch got a `switchThumbSchemeColor` property, to control the thumb color separately. A switch custom color theme was prepared for M3. (Not available yet in Flutter 3.3).
   - `Tooltip` theme now has `FlexSubThemesData` properties `tooltipRadius`, `tooltipWaitDuration`, `tooltipShowDuration`, `tooltipSchemeColor` and `tooltipSchemeColor`.
   - The `bottomSheetBackgroundColor` and `bottomSheetModalBackgroundColor` can be used to theme the background color of the `BottomSheet`.
@@ -34,15 +28,16 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Use `popupMenuElevation` and `popupMenuSchemeColor` to further quick theme the `PopupMenuButton`.
   - The `outlinedButtonBorderWidth`, `outlinedButtonPressedBorderWidth`, `toggleButtonsBorderWidth`, `inputDecoratorBorderWidth` and `inputDecoratorFocusedBorderWidth` define the themed outline border thickness in different states of respective components. These properties use default values from existing properties `thinBorderWidth` and `thickBorderWidth`, they are API backwards compatible. You can now define themed outline border thickness separately for these components.
   - The `elevatedButtonTextStyle`, `outlinedButtonTextStyle` and `textButtonTextStyle` were added to be able to theme `TextStyle` on `ElevatedButton`, `OutlinedButton`, `TextButton`. These are convenience properties to allow different text styles on buttons without having to use `copyWith` on the overall `ThemeData` and its button component themes to modify the text styles, often sizes. 
-    - These properties do not offer any simplification over standard `ThemeData` and its button themes. Current version does not offer their adjustments via the Playground. Adding all possible usage of them is currently not in the scope of the Playground app. However, size changes might be added later as a usage example of these properties. The properties are using `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of including them as a theme passthrough. Modifying the `ButtonStyle` theme using `copyWith` is a bit more involved than for other sub themes. If you need to do that, for other properties, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
+    - These properties do not offer any simplification over standard `ThemeData` and its button themes. The current version does not include adjusting them in the Themes Playground. Adding all possible usage of them is currently not in the scope of the Playground app. However, size changes might be added later as a usage example of these properties. The properties are using `MaterialStateProperty`, that have so far been avoided in this flattened simplified theming. It was used for the benefit of offering them as `ThemeData` pass along properties. Modifying the `ButtonStyle` theme using `copyWith`, is a bit more involved than for other sub themes. If you need to do that, for some properties, an example of how to do it, can be found [here](https://github.com/rydmike/flex_color_scheme/discussions/92).
 
 **CHANGE**
 
-* FlexColorScheme now uses FlexSeedScheme version 1.1, instead of 1.0. It includes the following new features and changes:
-  - Features that enabled implementation of just black and whit on seeded **on** colors.
-  - Tone mappings fr
+* FlexColorScheme now uses **FlexSeedScheme** version 1.1. It includes the following new features and changes:
+  - Features that enabled implementation of just black and white on seeded **on** colors. 
+  - Additional `FlexTones`, the `FlexTones.oneHue` and `FlexTones.vividBackground`.
+  - See [FlexSeedScheme on pub.dev](https://pub.dev/packages/flex_seed_scheme/changelog) for more information.
 * In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. That the properties are nullable, enables using potentially different default behavior in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
-* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change with previous default thin outline style in FlexColorScheme.
+* **STYLE BREAKING:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change from previous thin outline style in FlexColorScheme.
   - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid potential such issues in default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
 * **STYLE MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color of `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is very minor, in most designs the color values are the same. If needed you can put it back to background color with:
 
@@ -60,12 +55,12 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * **Temporary Material 3 Flutter SDK GAP fixes** 
   - The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temp fix works despite Material elevation being broken in Flutter 3.3 and earlier, when `useMaterial3` is true. 
   - Same temp M3 fix is also used on themed `PopupMenuButton`. 
-  - Unfortunately the elevation based shadow cannot be added to any of them. This will have to wait for actual implementation of the components and their Material 3 themes with support for it.
-  - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master channel already, they will probably land in next new stable release after Flutter 3.3. 
+  - Unfortunately, elevation-based shadow cannot be added to any of them. It will have to wait for actual implementation of the components and their Material 3 themes with support for it.
+  - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, exist in Flutter master, they will probably land in next new stable release after Flutter 3.3. 
   - These temporary M3 fixes makes it more possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3, it is not perfect, but much better.
-  - The reason why these issues exists are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this `Material` [issue #107190](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or any shadow on such `Material` using widgets.
-  - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. So even if only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes would not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
-  - These temporary work-around fixes will be removed when the framework implements correct Material 3 behavior for these widgets, hopefully in next stable release of Flutter.
+  - The reasons why these issues exist, are because these widgets have not been migrated to M3 in Flutter 3.3 and in combination with this `Material` [issue #107190](https://github.com/flutter/flutter/issues/107190), we get no elevation tint or any shadow on such `Material` using widgets.
+  - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. Even if only it lands, we will get shadows back in M3 default `Material`, even if the components and their themes do not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
+  - These temporary work-around fixes will be removed when the stable version of the framework implements correct Material 3 behavior for these widgets, hopefully in the next stable release of Flutter.
 
 **Themes Playground**
 
@@ -77,15 +72,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 * Updated and shorter **Introduction**. Probably nobody reads it, or the [package docs](https://docs.flexcolorscheme.com/) with **Playground** guides, but at least it is there.
 
 * The **Seeded ColorScheme** panel:
-  - When using seeded color schemes, it is now possible to force contrasting **on** colors for all the main colors (primary, secondary, tertiary, error and their containers) to be plain black or white, for better and more traditional contrast text and iconography colors. Likewise for the **on** colors for all the surfaces, background, surface, surfaceVariant and inverseSurface. This is a great toggle to get a more classic look while seeding main and surface colors. Turning these toggles on can also help with accessibility by increasing contrast and not using color on color for contrast. Offering these as use controllable toggles in apps can be a good way to allow users to tune not only the look but accessibility.  
+  - When using seeded color schemes, it is now possible to force contrasting **on** colors for all the main colors (primary, secondary, tertiary, error and their containers) to be plain black or white, for better and more traditional contrast text and iconography colors. Likewise, for the **on** colors for all the surfaces, background, surface, surfaceVariant and inverseSurface. This is a great toggle to get a more classic look while seeding main and surface colors. Turning these toggles on can also help with accessibility by increasing contrast and not using color on color for contrast. Offering these as user controllable toggles in apps can be a good way to allow users to tune not only the look, but also color accessibility.  
   - Now also show the source input "Scheme defined" colors, the `FlexSchemeColor`, that gets used as key colors for the Material 3 seeded ColorScheme generation, when it is turned on.
     - Arranged the panel content for better inclusion and presentation of the created **Tonal Palettes** used to make the seeded ColorScheme.
     - The Tonal palette color **tones** now have tooltips that present each tone.
 
 * On **Surface blends**: 
-  - Changed the surface blend mode defaults to settings that are more mobile design friendly. No API change involved. API defaults are same as before, changes only affect the Playground app defaults. 
-    - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text is placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
-  - The blend mode control now also has popup menu that always show all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
+  - Changed the surface blend mode defaults to settings that are more mobile design-friendly. No API change involved. API defaults are the same as before, changes only affect the Playground app defaults. 
+    - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text are placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
+  - The blend mode control now also has a popup-menu, that always shows all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
 
 * Other **new controllable properties** and features:
   - **AppBar** theming can now use themed `scaffoldBackground` color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
@@ -105,10 +100,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - New design of popup menu indicators for `AppBarStyle`, `SchemeColor` selection and `SurfaceStyle`. Their style follow `ToggleButtons` height and border radius.
   - All single option select `ToggleButtons` controls in a `ListTile` can now for convenience be toggled in sequence by just tapping on the `ListTile` it is used in.
   - Split out some components that where on shared panels, to their own panel/page. This is done when components get more settings and having them in a separate panel makes sense.
-  - A themed `Slider` widget is now presented in the **Widget Showcase** panel. Playground or FCS does not yet offer any theming of it. Slider theme is very good out of the box, and when you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. There may still be some basic theming offered in FCS and Playground when M3 Slider version is released.
+  - A themed `Slider` widget is now presented in the **Widget Showcase** panel. Basic theming options are now available. The Slider theme is already excellent out of the box. When you need more radical changes to it, those typically go beyond the scope of FCS and require extending the Slider widget. 
   - Removed animation from horizontal list **Theme selector** when selecting a theme.
-  - Removed animation from topic/component panel when selecting one, the **Page view**.
-  - Removed the slide to a page animation, when clicking on a topic in the **panel/page selector**.
+  - Removed animation from the theming topics when selecting one on the **Page view**.
+  - Removed the slide to page animation, when clicking on a topic, on the **topic panel selector**.
     - Direct panel/page selection via the control now instead uses a small **Fade and Zoom in** to show the selected settings panel.
     - Without any panel page change effect, it was hard to notice what changed. The default slide to the page animation, with the `PageView` is fine when swiping, where it remains, but it was a tad annoying when clicking on the panel page selector.
   - Changed all used `Slider.adaptive` to `Slider`.
@@ -118,7 +113,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
     - The `SwitchListTileAdaptive` is kept in use on examples 2 to 4. As an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platforms, nor can it be themed to be so. You have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
 
 * **FIXED:** 
-  - Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. Issue was only with Playground code gen, APIs worked as expected.
+  - Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. The issue only concerned the Themes Playground code generation, APIs worked as expected.
 
 
 ## 6.0.1
@@ -129,7 +124,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
  
 * A null check was fixed by [sososdk](https://github.com/sososdk) in `FlexColorScheme.light` when using custom scheme [PR #90](https://github.com/rydmike/flex_color_scheme/pull/90). Issue did not exist in `FlexColorScheme.dark`.
 
-* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0 via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does however export it as before, it is used by the **FlexColorPicker**.
+* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0 via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does, however export it as before, it is used by the **FlexColorPicker**.
 
 ## 6.0.0
 
@@ -146,7 +141,7 @@ issues.
 
 **BREAKING**
 
-* This **FlexColorScheme** version no longer directly depends on package
+* This **FlexColorScheme** version no longer directly depends on the
   [Material Color Utilities package](https://pub.dev/packages/material_color_utilities), which
   is also used by Flutter SDK. Instead, it uses package
   [FlexSeedScheme](https://pub.dev/packages/flex_seed_scheme) that depends on it.
@@ -174,8 +169,8 @@ issues.
   16 and 24 respectively. Set them to values 16 and 24 to create same tonal palettes as
   Material Color Utilities `CorePalette` and previous versions of `FlexCorePalette`.
 
-* To allow for greater flexibility and addition of tonal palette tones 5 (custom for FCS) and 98
-  (Google Material 3 Web theme builder app includes tone 98 to, but not Flutter SDK),
+* To allow for greater flexibility, and addition of tonal palette tones 5 (custom for FCS) and 98
+  (Google Material 3, Web theme builder app includes tone 98 to, but not Flutter SDK),
   `FlexCorePalette` no longer extends `CorePalette`, it is a modified re-implementation.
 
 * In **FlexSeedScheme** the `FlexTonalPalette` method `asList` and constructor `fromList`, now
@@ -194,7 +189,7 @@ issues.
   seeded `ColorScheme` using multiple seed colors and `FlexTones` configuration.
 
 * In **FlexSeedScheme**, added `FlexTonalPalette` a re-implementation of Material Color Utilities
-  `TonalPalette`, with addition of tonal palette tones 5 and 98. The tone 98 also exists in the
+  `TonalPalette`, with addition of tonal palette tones 5 and 98. Tone 98 also exists in the
   [Web Material Theme Builder app](https://m3.material.io/theme-builder#/custom), but not in
   Flutter or [Material Color Utilities package](https://pub.dev/packages/material_color_utilities).
   Tone 5 is custom addition for `FlexTones` and `FlexColorScheme`.
@@ -202,8 +197,8 @@ issues.
 * Added `appBarCenterTitle` property to `FlexSubThemesData` configuration. It works the
   same way as `centerTitle` in `AppBar` and its theme. The property is not available in the
   Themes Playground app, only via the API. We recommend keeping it null to use platform
-  adaptive default behavior, but offer it as convenience property for those that like to use
-  same centering style regardless of used platform.
+  adaptive default behavior, but offer it as a convenience property for those that like to use the
+  same centering style, regardless of the used platform.
 
 * Added two new properties to `FlexSubThemes.elevatedButtonTheme`.
   * Boolean `useMaterial3`, defaults to false.
@@ -219,7 +214,7 @@ issues.
   `FlexSubThemesData`. Use it to control secondary color of the `ElevatedButton` in its
   sub-themes. FCS applies this color to `FlexSubThemes.elevatedButtonTheme.onBaseSchemeColor`.
   If `useMaterial3` is false, it is the foreground color. If `useMaterial3` is true, it is the
-  background color. Material 3 and 2 have a completely different default elevated button styles.
+  background color. Material 3, and 2, have completely different elevated button styles.
   The Material 2 elevated button is color wise, like the M3 filled button, but with elevation.
 
 * Added two new properties to `FlexSubThemes.outlinedButtonTheme`.
@@ -231,9 +226,9 @@ issues.
 **REMOVED EARLIER DEPRECATED MEMBERS**
 
 As a chore and clean up all previously deprecated members have been removed from version 6.0.0. It
-no longer has any self deprecated members. This removes a lot legacy backwards compatibility with
+no longer has any self-deprecated members. This removes legacy backwards compatibility with
 deprecated members from versions 2, 3 and 4, and even one from version 5.1.0. Removed all earlier
-self deprecated members as follows:
+self-deprecated members as follows:
 
 * *FlexSubThemesData:*  
   `inputDecorationRadius`, `bottomNavigationBarSchemeColor`,
@@ -257,7 +252,7 @@ self deprecated members as follows:
   `textSchemeColor`, `unselectedTextSchemeColor`, `mutedUnselectedText`, `iconSchemeColor`,
   `highlightSchemeColor`.
 
-**STYLE CHANGE - BREAKING**
+**STYLE CHANGE — BREAKING**
 
 * `FlexSubThemesData.fabUseShape` opinionated component theme style default was changed from `true`
   to `false`, this breaks previous default style. The opinionated style change was done
@@ -268,10 +263,10 @@ self deprecated members as follows:
   **Style migration**: If you had kept `FlexSubThemesData.fabUseShape` unspecified and relied on
   default value in a previous version, you must set it to `true` to get the same result as before.
   Breaking style changes like this, in the opinionated opt in component sub-themes are unfortunate.
-  However, required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3
+  It is, however, required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3
   theming, while offering its own opinionated tweaks on some M3 default styles as well.
 
-**STYLE CHANGE - MINOR**
+**STYLE CHANGE — MINOR**
 
 * The M3 color utilities package *material_color_utilities* from the Material team, that Flutter SDK
   depends on and FCS also uses, introduced a minor breaking change going from version 0.1.4 to

@@ -294,11 +294,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepPrimaryContainer: controller.keepDarkPrimaryContainer,
       keepSecondaryContainer: controller.keepDarkSecondaryContainer,
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
-      noOnMainsTint: controller.noDarkOnMainsTint,
-      noOnSurfacesTint: controller.noDarkOnSurfacesTint,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
-    tones: FlexTone.values[controller.usedFlexToneSetup].tones(Brightness.dark),
+    tones: FlexTone.values[controller.usedFlexToneSetup]
+        .tones(Brightness.dark)
+        .onMainsUseBW(controller.onMainsUseBWDark)
+        .onSurfacesUseBW(controller.onSurfacesUseBWDark),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //

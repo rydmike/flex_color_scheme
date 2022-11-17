@@ -183,14 +183,14 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = await _themeService.load(
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
-    _noLightOnMainsTint = await _themeService.load(
-        Store.keyNoLightOnMainsTint, Store.defaultNoLightOnMainsTint);
-    _noDarkOnMainsTint = await _themeService.load(
-        Store.keyNoDarkOnMainsTint, Store.defaultNoDarkOnMainsTint);
-    _noLightOnSurfacesTint = await _themeService.load(
-        Store.keyNoLightOnSurfacesTint, Store.defaultNoLightOnSurfacesTint);
-    _noDarkOnSurfacesTint = await _themeService.load(
-        Store.keyNoDarkOnSurfacesTint, Store.defaultNoDarkOnSurfacesTint);
+    _onMainsUseBWLight = await _themeService.load(
+        Store.keyOnMainsUseBWLight, Store.defaultOnMainsUseBWLight);
+    _onMainsUseBWDark = await _themeService.load(
+        Store.keyOnMainsUseBWDark, Store.defaultOnMainsUseBWDark);
+    _onSurfacesUseBWLight = await _themeService.load(
+        Store.keyOnSurfacesUseBWLight, Store.defaultOnSurfacesUseBWLight);
+    _onSurfacesUseBWDark = await _themeService.load(
+        Store.keyOnSurfacesUseBWDark, Store.defaultOnSurfacesUseBWDark);
     //
     // InputDecorator SETTINGS.
     _inputDecoratorSchemeColorLight = await _themeService.load(
@@ -586,10 +586,10 @@ class ThemeController with ChangeNotifier {
     setUsedFlexToneSetup(Store.defaultUsedFlexToneSetup, false);
     setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
-    setNoLightOnMainsTint(Store.defaultNoLightOnMainsTint, false);
-    setNoDarkOnMainsTint(Store.defaultNoDarkOnMainsTint, false);
-    setNoLightOnSurfacesTint(Store.defaultNoLightOnSurfacesTint, false);
-    setNoDarkOnSurfacesTint(Store.defaultNoDarkOnSurfacesTint, false);
+    setOnMainsUseBWLight(Store.defaultOnMainsUseBWLight, false);
+    setOnMainsUseBWDark(Store.defaultOnMainsUseBWDark, false);
+    setOnSurfacesUseBWLight(Store.defaultOnSurfacesUseBWLight, false);
+    setOnSurfacesUseBWDark(Store.defaultOnSurfacesUseBWDark, false);
     //
     // InputDecorator SETTINGS.
     setInputDecoratorSchemeColorLight(
@@ -1349,44 +1349,44 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseM3ErrorColors, value));
   }
 
-  late bool _noLightOnMainsTint;
-  bool get noLightOnMainsTint => _noLightOnMainsTint;
-  void setNoLightOnMainsTint(bool? value, [bool notify = true]) {
+  late bool _onMainsUseBWLight;
+  bool get onMainsUseBWLight => _onMainsUseBWLight;
+  void setOnMainsUseBWLight(bool? value, [bool notify = true]) {
     if (value == null) return;
-    if (value == _noLightOnMainsTint) return;
-    _noLightOnMainsTint = value;
+    if (value == _onMainsUseBWLight) return;
+    _onMainsUseBWLight = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNoLightOnMainsTint, value));
+    unawaited(_themeService.save(Store.keyOnMainsUseBWLight, value));
   }
 
-  late bool _noDarkOnMainsTint;
-  bool get noDarkOnMainsTint => _noDarkOnMainsTint;
-  void setNoDarkOnMainsTint(bool? value, [bool notify = true]) {
+  late bool _onMainsUseBWDark;
+  bool get onMainsUseBWDark => _onMainsUseBWDark;
+  void setOnMainsUseBWDark(bool? value, [bool notify = true]) {
     if (value == null) return;
-    if (value == _noDarkOnMainsTint) return;
-    _noDarkOnMainsTint = value;
+    if (value == _onMainsUseBWDark) return;
+    _onMainsUseBWDark = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNoDarkOnMainsTint, value));
+    unawaited(_themeService.save(Store.keyOnMainsUseBWDark, value));
   }
 
-  late bool _noLightOnSurfacesTint;
-  bool get noLightOnSurfacesTint => _noLightOnSurfacesTint;
-  void setNoLightOnSurfacesTint(bool? value, [bool notify = true]) {
+  late bool _onSurfacesUseBWLight;
+  bool get onSurfacesUseBWLight => _onSurfacesUseBWLight;
+  void setOnSurfacesUseBWLight(bool? value, [bool notify = true]) {
     if (value == null) return;
-    if (value == _noLightOnSurfacesTint) return;
-    _noLightOnSurfacesTint = value;
+    if (value == _onSurfacesUseBWLight) return;
+    _onSurfacesUseBWLight = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNoLightOnSurfacesTint, value));
+    unawaited(_themeService.save(Store.keyOnSurfacesUseBWLight, value));
   }
 
-  late bool _noDarkOnSurfacesTint;
-  bool get noDarkOnSurfacesTint => _noDarkOnSurfacesTint;
-  void setNoDarkOnSurfacesTint(bool? value, [bool notify = true]) {
+  late bool _onSurfacesUseBWDark;
+  bool get onSurfacesUseBWDark => _onSurfacesUseBWDark;
+  void setOnSurfacesUseBWDark(bool? value, [bool notify = true]) {
     if (value == null) return;
-    if (value == _noDarkOnSurfacesTint) return;
-    _noDarkOnSurfacesTint = value;
+    if (value == _onSurfacesUseBWDark) return;
+    _onSurfacesUseBWDark = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNoDarkOnSurfacesTint, value));
+    unawaited(_themeService.save(Store.keyOnSurfacesUseBWDark, value));
   }
 
   // InputDecorator SETTINGS.

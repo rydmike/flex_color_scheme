@@ -124,8 +124,8 @@ class Store {
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
-  // Defaults to 17.
-  static const int defaultBlendLevelDark = 17;
+  // Defaults to 15.
+  static const int defaultBlendLevelDark = 15;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
@@ -311,25 +311,25 @@ class Store {
   // Default value for the useM3ErrorColor, also to reset settings.
   static const bool defaultUseM3ErrorColors = false;
 
-  // Key used to read and save the noLightOnMainsTint value.
-  static const String keyNoLightOnMainsTint = 'noLightOnMainsTint';
-  // Default value for the noLightOnMainsTint, also to reset settings.
-  static const bool defaultNoLightOnMainsTint = false;
+  // Key used to read and save the onMainsUseBWLight value.
+  static const String keyOnMainsUseBWLight = 'onMainsUseBWLight';
+  // Default value for the onMainsUseBWLight, also to reset settings.
+  static const bool defaultOnMainsUseBWLight = false;
 
-  // Key used to read and save the noDarkOnMainsTint value.
-  static const String keyNoDarkOnMainsTint = 'noDarkOnMainsTint';
-  // Default value for the noDarkOnMainsTint, also to reset settings.
-  static const bool defaultNoDarkOnMainsTint = false;
+  // Key used to read and save the onMainsUseBWDark value.
+  static const String keyOnMainsUseBWDark = 'onMainsUseBWDark';
+  // Default value for the onMainsUseBWDark, also to reset settings.
+  static const bool defaultOnMainsUseBWDark = false;
 
-  // Key used to read and save the noLightOnSurfacesTint value.
-  static const String keyNoLightOnSurfacesTint = 'noLightOnSurfacesTint';
-  // Default value for the noLightOnSurfacesTint, also to reset settings.
-  static const bool defaultNoLightOnSurfacesTint = false;
+  // Key used to read and save the onSurfacesUseBWLight value.
+  static const String keyOnSurfacesUseBWLight = 'onSurfacesUseBWLight';
+  // Default value for the onSurfacesUseBWLight, also to reset settings.
+  static const bool defaultOnSurfacesUseBWLight = false;
 
-  // Key used to read and save the noDarkOnSurfacesTint value.
-  static const String keyNoDarkOnSurfacesTint = 'noDarkOnSurfacesTint';
-  // Default value for the noDarkOnSurfacesTint, also to reset settings.
-  static const bool defaultNoDarkOnSurfacesTint = false;
+  // Key used to read and save the onSurfacesUseBWDark value.
+  static const String keyOnSurfacesUseBWDark = 'onSurfacesUseBWDark';
+  // Default value for the onSurfacesUseBWDark, also to reset settings.
+  static const bool defaultOnSurfacesUseBWDark = false;
 
   // InputDecorator SETTINGS.
   // ===========================================================================

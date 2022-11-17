@@ -4167,15 +4167,13 @@ void main() {
         'and a default FlexSubThemesData() and no tints on colors '
         'EXPECT correct and only BW onColors', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
-          scheme: FlexScheme.materialBaseline,
-          useMaterial3: true,
-          subThemesData: const FlexSubThemesData(),
-          keyColors: const FlexKeyColors(
-              useSecondary: true,
-              useTertiary: true,
-              noOnMainsTint: true,
-              noOnSurfacesTint: true),
-          tones: FlexTones.jolly(Brightness.light));
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(),
+        keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true),
+        tones:
+            FlexTones.jolly(Brightness.light).onMainsUseBW().onSurfacesUseBW(),
+      );
       final ColorScheme scheme = fcs.toScheme;
       expect(scheme.onPrimary, Colors.white);
       expect(scheme.onPrimaryContainer, Colors.black);
@@ -4197,15 +4195,16 @@ void main() {
         'and a default FlexSubThemesData() and no tints on colors '
         'EXPECT correct and only BW onColors', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
-          scheme: FlexScheme.materialBaseline,
-          useMaterial3: true,
-          subThemesData: const FlexSubThemesData(),
-          keyColors: const FlexKeyColors(
-              useSecondary: true,
-              useTertiary: true,
-              noOnMainsTint: true,
-              noOnSurfacesTint: true),
-          tones: FlexTones.jolly(Brightness.dark));
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(),
+        keyColors: const FlexKeyColors(
+          useSecondary: true,
+          useTertiary: true,
+        ),
+        tones:
+            FlexTones.jolly(Brightness.dark).onMainsUseBW().onSurfacesUseBW(),
+      );
       final ColorScheme scheme = fcs.toScheme;
       expect(scheme.onPrimary, Colors.black);
       expect(scheme.onPrimaryContainer, Colors.white);

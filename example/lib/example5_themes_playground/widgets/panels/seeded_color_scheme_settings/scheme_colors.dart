@@ -63,10 +63,9 @@ class SchemeColors extends StatelessWidget {
     // Grab active tons and chroma setup.
     final FlexTones tones = FlexTone.values[tc.usedFlexToneSetup]
         .tones(theme.brightness)
-        .noOnMainsTint(isLight ? tc.noLightOnMainsTint : tc.noDarkOnMainsTint)
-        .noOnSurfacesTint(
-            isLight ? tc.noLightOnSurfacesTint : tc.noDarkOnSurfacesTint);
-
+        .onMainsUseBW(isLight ? tc.onMainsUseBWLight : tc.onMainsUseBWDark)
+        .onSurfacesUseBW(
+            isLight ? tc.onSurfacesUseBWLight : tc.onSurfacesUseBWDark);
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones = tc.useKeyColors && tc.useFlexColorScheme;
 

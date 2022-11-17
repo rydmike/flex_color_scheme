@@ -82,46 +82,41 @@ class SeededColorSchemeSettings extends StatelessWidget {
         ),
         if (isLight) ...<Widget>[
           SwitchListTile(
-            title: const Text('No tint on seeded main "On" colors, use '
-                'black & white'),
+            title: const Text('Use black & white for main onColors'),
             subtitle:
                 const Text('Main colors are primary, secondary, tertiary, '
                     'error and their container colors'),
-            value: controller.noLightOnMainsTint && controller.useKeyColors,
+            value: controller.onMainsUseBWLight && controller.useKeyColors,
             onChanged: controller.useKeyColors
-                ? controller.setNoLightOnMainsTint
+                ? controller.setOnMainsUseBWLight
                 : null,
           ),
           SwitchListTile(
-            title: const Text('No tint on seeded surfaces "On" colors, use '
-                'black & white'),
+            title: const Text('Use black & white for surface onColors'),
             subtitle: const Text('Surface colors are background, surface, '
                 'surfaceVariant and inverseSurface'),
-            value: controller.noLightOnSurfacesTint && controller.useKeyColors,
+            value: controller.onSurfacesUseBWLight && controller.useKeyColors,
             onChanged: controller.useKeyColors
-                ? controller.setNoLightOnSurfacesTint
+                ? controller.setOnSurfacesUseBWLight
                 : null,
           ),
         ] else ...<Widget>[
           SwitchListTile(
-            title: const Text('No tint on seeded main "On" colors, use '
-                'black & white'),
+            title: const Text('Use black & white for main onColors'),
             subtitle:
                 const Text('Main colors are primary, secondary, tertiary, '
                     'error and their container colors'),
-            value: controller.noDarkOnMainsTint && controller.useKeyColors,
-            onChanged: controller.useKeyColors
-                ? controller.setNoDarkOnMainsTint
-                : null,
+            value: controller.onMainsUseBWDark && controller.useKeyColors,
+            onChanged:
+                controller.useKeyColors ? controller.setOnMainsUseBWDark : null,
           ),
           SwitchListTile(
-            title: const Text('No tint on seeded surfaces "On" colors, use '
-                'black & white'),
+            title: const Text('Use black & white for surface onColors'),
             subtitle: const Text('Surface colors are background, surface, '
                 'surfaceVariant and inverseSurface'),
-            value: controller.noDarkOnSurfacesTint && controller.useKeyColors,
+            value: controller.onSurfacesUseBWDark && controller.useKeyColors,
             onChanged: controller.useKeyColors
-                ? controller.setNoDarkOnSurfacesTint
+                ? controller.setOnSurfacesUseBWDark
                 : null,
           ),
         ],
@@ -176,15 +171,9 @@ class SeededColorSchemeSettings extends StatelessWidget {
               ),
               value: controller.useDarkColorsForSeed &&
                   controller.useKeyColors &&
-                  (controller.schemeIndex == 0 ||
-                      controller.schemeIndex == 1 ||
-                      controller.schemeIndex == 2 ||
-                      controller.schemeIndex == AppColor.schemes.length - 1),
+                  controller.schemeIndex == AppColor.schemes.length - 1,
               onChanged: controller.useKeyColors &&
-                      (controller.schemeIndex == 0 ||
-                          controller.schemeIndex == 1 ||
-                          controller.schemeIndex == 2 ||
-                          controller.schemeIndex == AppColor.schemes.length - 1)
+                      controller.schemeIndex == AppColor.schemes.length - 1
                   ? controller.setUseDarkColorsForSeed
                   : null),
         const ListTile(

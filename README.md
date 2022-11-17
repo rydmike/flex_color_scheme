@@ -4,7 +4,7 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes, with optional surface blends, or seeded color schemes. The color themes are based on the same concept as Flutter's ColorScheme based themes, but FlexColorscheme offers many additional features, and numerous pre-made themes.
+Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes. Apply optional surface blends, or use Material 3 style seeded color schemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` themes, but with many additional features. Choose from numerous pre-made designs or make your own. You can also use optional component sub theming, that are quick and easy to configure.
 
 <table>
   <tr>
@@ -21,7 +21,9 @@ When you theme a Flutter application correctly, all built-in widgets use the col
 
 You can opt in on using opinionated component sub-themes. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. Flutter's Material UI widgets still default to the Material 2 design, and thus use 4 dp corner radius on most widgets.
 
-When you opt in on using the component sub-themes, border radius on widgets defaults to the new rounded corner design. Where the radius varies by widget type, as specified by the [Material 3 guide](https://m3.material.io/). You can keep this or set the global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 default or the global radius value you defined.
+When you opt in on using the component sub-themes, border radius on widgets defaults to the new Material 3 rounded corner design. In it, the radius varies by widget type, as specified by the [Material 3 guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 default or the global radius value you defined. 
+
+You can also opt in on using Material 3. The Material 3 mode component sub-theming is far less opinionated, using mostly Material 3 defaults. One could say that opting in on using FlexColorScheme component sub themes, is a way of getting a Material 2 mode design, of Material 3, in Flutter. In Flutter 3.3 and earlier, using Material 3 design is still incomplete and also has many issues. Please refer to the docs for more information on the status of known problematic [Material 3 issues](https://docs.flexcolorscheme.com/known_issues) in Flutter.
 
 <table>
   <tr>

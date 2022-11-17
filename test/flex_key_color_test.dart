@@ -19,8 +19,6 @@ void main() {
       keepPrimaryContainer: false,
       keepSecondaryContainer: false,
       keepTertiaryContainer: false,
-      noOnMainsTint: false,
-      noOnSurfacesTint: false,
     );
     // m2, has same definition as m1, but via default values
     const FlexKeyColors m2 = FlexKeyColors();
@@ -35,8 +33,6 @@ void main() {
       keepPrimaryContainer: false,
       keepSecondaryContainer: false,
       keepTertiaryContainer: false,
-      noOnMainsTint: false,
-      noOnSurfacesTint: false,
     );
     // m4, has all values different from m1
     const FlexKeyColors m4 = FlexKeyColors(
@@ -49,8 +45,6 @@ void main() {
       keepPrimaryContainer: true,
       keepSecondaryContainer: true,
       keepTertiaryContainer: true,
-      noOnMainsTint: true,
-      noOnSurfacesTint: true,
     );
     // Do identity tests
     test(
@@ -125,8 +119,6 @@ void main() {
           keepPrimaryContainer: false,
           keepSecondaryContainer: false,
           keepTertiaryContainer: false,
-          noOnMainsTint: false,
-          noOnSurfacesTint: false,
         ),
         equals(m1),
       );
@@ -146,7 +138,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexKeyColors#00000(useKeyColors: true, useSecondary: false, useTertiary: false, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false, noOnMainsTint: false, noOnSurfacesTint: false)'));
+              'FlexKeyColors#00000(useKeyColors: true, useSecondary: false, useTertiary: false, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
     });
     test(
         'FKCS1.11: Test toStringShort implemented via debugFillProperties '

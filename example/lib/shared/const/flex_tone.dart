@@ -63,8 +63,8 @@ enum FlexTone {
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 6\n'
-        'Neutral variant - Chroma set to 12',
+        'Neutral - Chroma set to 5\n'
+        'Neutral variant - Chroma set to 10',
     icon: Icons.radio_button_checked,
     shade: 10,
   ),
@@ -109,19 +109,19 @@ enum FlexTone {
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 6\n'
-        'Neutral variant - Chroma set to 12',
+        'Neutral - Chroma set to 5\n'
+        'Neutral variant - Chroma set to 10',
     icon: Icons.panorama_wide_angle_select_rounded,
     shade: 10,
   ),
   oneHue(
-    tone: 'One Hue',
+    tone: 'One hue',
     describe: 'If only primary key color given, scheme uses only one hue',
     setup: 'Primary - Chroma from key color, but min 55\n'
-        'Secondary - Chroma set to 20\n'
-        'Tertiary - Chroma set to 35, no Hue rotation\n'
-        'Neutral - Chroma set to 6\n'
-        'Neutral variant - Chroma set to 10',
+        'Secondary - Chroma set to 26\n'
+        'Tertiary - Chroma set to 36, no Hue rotation\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8',
     icon: Icons.looks_one_rounded,
     shade: 7,
   );
