@@ -385,8 +385,8 @@ void main() {
             surfaceTintTone: 30,
             //
             primaryMinChroma: 50,
-            neutralChroma: 8,
-            neutralVariantChroma: 16,
+            neutralChroma: 6,
+            neutralVariantChroma: 12,
           ),
         ),
       );
@@ -405,8 +405,8 @@ void main() {
             inverseSurfaceTone: 95,
             //
             primaryMinChroma: 50,
-            neutralChroma: 8,
-            neutralVariantChroma: 16,
+            neutralChroma: 6,
+            neutralVariantChroma: 12,
           ),
         ),
       );

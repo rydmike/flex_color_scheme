@@ -63,8 +63,8 @@ enum FlexTone {
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 8\n'
-        'Neutral variant - Chroma set to 16',
+        'Neutral - Chroma set to 6\n'
+        'Neutral variant - Chroma set to 12',
     icon: Icons.radio_button_checked,
     shade: 10,
   ),
@@ -109,8 +109,8 @@ enum FlexTone {
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 8\n'
-        'Neutral variant - Chroma set to 16',
+        'Neutral - Chroma set to 6\n'
+        'Neutral variant - Chroma set to 12',
     icon: Icons.panorama_wide_angle_select_rounded,
     shade: 10,
   ),
