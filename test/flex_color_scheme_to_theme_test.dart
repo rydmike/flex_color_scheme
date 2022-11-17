@@ -4161,5 +4161,65 @@ void main() {
         ),
       );
     });
+    // Test FlexKeys noOnMainsTint and noOnSurfacesTint
+    test(
+        'FCS7.106a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a default FlexSubThemesData() and no tints on colors '
+        'EXPECT correct and only BW onColors', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          useMaterial3: true,
+          subThemesData: const FlexSubThemesData(),
+          keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+              noOnMainsTint: true,
+              noOnSurfacesTint: true),
+          tones: FlexTones.jolly(Brightness.light));
+      final ColorScheme scheme = fcs.toScheme;
+      expect(scheme.onPrimary, Colors.white);
+      expect(scheme.onPrimaryContainer, Colors.black);
+      expect(scheme.onSecondary, Colors.white);
+      expect(scheme.onSecondaryContainer, Colors.black);
+      expect(scheme.onTertiary, Colors.white);
+      expect(scheme.onTertiaryContainer, Colors.black);
+      expect(scheme.onError, Colors.white);
+      expect(scheme.onErrorContainer, Colors.black);
+      //
+      expect(scheme.onBackground, Colors.black);
+      expect(scheme.onSurface, Colors.black);
+      expect(scheme.onSurfaceVariant, Colors.black);
+      expect(scheme.onInverseSurface, Colors.white);
+    });
+    // Test FlexKeys noOnMainsTint and noOnSurfacesTint
+    test(
+        'FCS7.106a GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a default FlexSubThemesData() and no tints on colors '
+        'EXPECT correct and only BW onColors', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+          scheme: FlexScheme.materialBaseline,
+          useMaterial3: true,
+          subThemesData: const FlexSubThemesData(),
+          keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+              noOnMainsTint: true,
+              noOnSurfacesTint: true),
+          tones: FlexTones.jolly(Brightness.dark));
+      final ColorScheme scheme = fcs.toScheme;
+      expect(scheme.onPrimary, Colors.black);
+      expect(scheme.onPrimaryContainer, Colors.white);
+      expect(scheme.onSecondary, Colors.black);
+      expect(scheme.onSecondaryContainer, Colors.white);
+      expect(scheme.onTertiary, Colors.black);
+      expect(scheme.onTertiaryContainer, Colors.white);
+      expect(scheme.onError, Colors.black);
+      expect(scheme.onErrorContainer, Colors.white);
+      //
+      expect(scheme.onBackground, Colors.white);
+      expect(scheme.onSurface, Colors.white);
+      expect(scheme.onSurfaceVariant, Colors.white);
+      expect(scheme.onInverseSurface, Colors.black);
+    });
   });
 }
