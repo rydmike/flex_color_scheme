@@ -4,7 +4,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.1.0
 
-**Nov 17, 2022**
+**Nov 18, 2022**
+
+**FlexColorScheme** version 6.1.1 contains a large number of new features, like more component sub-themes and configurable properties. It also improves the seed-generated color scheme capabilities, by adding more pre-configured seed generation configurations and color contrast accessibility options. 
+
+A valid criticism of Material 3's color system and seed-generated color schemes is that using colored contrasting colors can be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, so that any seed generation configuration can also return results with plain white and black contrasting on colors.
+
+The **Themes Playground** application, also known as tutorial example 5 bundled with the package source, has been updated to include most of the new features. It has been overhauled to make it easier to discover some of its previously already existing features, like using totally custom colors in the Playground to use your own theme colors. 
 
 **NEW**
 
@@ -225,7 +231,7 @@ issues.
 
 **REMOVED EARLIER DEPRECATED MEMBERS**
 
-As a chore and clean up all previously deprecated members have been removed from version 6.0.0. It
+As a chore and clean-up, all previously deprecated members have been removed from version 6.0.0. It
 no longer has any self-deprecated members. This removes legacy backwards compatibility with
 deprecated members from versions 2, 3 and 4, and even one from version 5.1.0. Removed all earlier
 self-deprecated members as follows:
@@ -272,13 +278,13 @@ self-deprecated members as follows:
   depends on and FCS also uses, introduced a minor breaking change going from version 0.1.4 to
   0.1.5. Some colors in the tonal palettes no longer give exactly the same color values as before.
   This changes the results for some colors when you create a `ColorScheme.fromSeed` or FCS does
-  it internally with its extended version `SeedColorScheme.fromSeeds`. The new algorithm changes
-  for example all the default M3 error colors slightly. The changes in the color values are minor,
-  and not visually noticeable to the eye. Values are however slightly different, and this release
+  it internally with its extended version `SeedColorScheme.fromSeeds`. The new algorithm changes, 
+  all the default M3 error colors slightly. The changes in the color values are minor,
+  and not visually noticeable to the eye. Values are still slightly different, and this release
   uses the new value for FCS M3 error colors. Tests were also updated to use the new values.
-  The change did break FCS color value tests, and should be per its own policy be considered a
-  major breaking change. However, since the Material 3 design and *material_color_utilities* calls
-  this change minor, then so does FCS.
+  The change did break FCS color value tests, and should per its own policy be considered a
+  major breaking change. However, since the Material 3 design and **material_color_utilities**
+  call this change minor, then so does FCS.  
 
 * The opt-in opinionated tinted text themes were made less aggressive on the tint, and received a
   bit of opacity for styles that in 2014/2018/2021 styles have opacity. The custom styles uses
