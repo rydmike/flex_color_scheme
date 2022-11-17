@@ -4,7 +4,7 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes, with optional primary color surface blends, or key color seeded color schemes. The themes are based on the same concept as Flutter's ColorScheme based themes, but offers many additional features, and numerous pre-made themes.
+Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes, with optional surface blends, or seeded color schemes. The color themes are based on the same concept as Flutter's ColorScheme based themes, but FlexColorscheme offers many additional features, and numerous pre-made themes.
 
 <table>
   <tr>
@@ -17,11 +17,11 @@ Use **FlexColorScheme** to make beautiful color scheme based Flutter Material de
 
 When you theme a Flutter application correctly, all built-in widgets use the colors of the `ColorScheme` in your theme. At least in theory, and it is almost so if you defined your `ThemeData` by using the `ThemeData.from` factory, but it misses a few details.
 
-**FlexColorScheme** ensures that all Flutter SDK UI components gets themed completely by its color schemes and custom colors you provide. It applies effective `ColorScheme` colors to all color properties in `ThemeData`, as long as they still exist. This ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprises in `ThemeData` that do not match your `ColorScheme`.
+**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its color schemes and custom colors you provide. It applies effective `ColorScheme` colors to all color properties in `ThemeData`. This ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprises in `ThemeData` that do not match your `ColorScheme`.
 
-You can opt in on using opinionated component sub-themes. By doing so you can for example adjust the border radius on all UI widgets with a single property value. Flutter's Material UI widgets still default to being based on the Material 2 design, and thus use 4 dp corner radius on most widgets.
+You can opt in on using opinionated component sub-themes. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. Flutter's Material UI widgets still default to the Material 2 design, and thus use 4 dp corner radius on most widgets.
 
-When you opt in on using the component sub-themes, the border radius on widgets default to the new rounded corners as specified by the [Material 3 guide](https://m3.material.io/), where the radius varies by widget type. You can keep this, or set the global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 default, or the global radius value you defined.
+When you opt in on using the component sub-themes, border radius on widgets defaults to the new rounded corner design. Where the radius varies by widget type, as specified by the [Material 3 guide](https://m3.material.io/). You can keep this or set the global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 default or the global radius value you defined.
 
 <table>
   <tr>
@@ -32,10 +32,10 @@ When you opt in on using the component sub-themes, the border radius on widgets 
   </tr>
 </table>
 
-With **FlexColorScheme** component themes you use simple flat property values. No need for verbose Flutter SDK component sub-themes, with `ShapeBorder` definitions on multiple widget themes to change their border radius. The component theming provides a large amount of easy to configure options via simple flat properties, instead of complicated nested ones. In many cases you can also avoid the both complicated and confusing `MaterialState` theming properties.
+With **FlexColorScheme** component themes, you use simple flat property values. No need for verbose Flutter SDK component sub-themes, with `ShapeBorder` definitions on multiple widget themes to change their border radius. The component theming provides a large number of easy to configure options via simple flat properties. In many cases you can avoid the both complicated and confusing `MaterialState` theming properties.
 
 **FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from
-key colors, customization features that are currently not available in Flutter. This includes using multiple key colors as seed, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
+key colors. Customization features that are currently not available in Flutter. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
 
 ## Getting Started
 
@@ -51,13 +51,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so, is to try one of the **40** built-in color schemes. They have enum values that you can use to select which one to use as the theme of your application.
 
-The package **default example** offers a heavily commented code guide on how to use almost every property in FlexColorScheme. The [examples](/examples) chapter shows you how to try it, as well as the five [tutorial](/tutorial) examples.
+The package **default example** offers a heavily commented code guide on how to use almost every property in FlexColorScheme. The [**Examples**](https://docs.flexcolorscheme.com/examples) chapter shows you how to try it. In the [**Tutorial**](https://docs.flexcolorscheme.com/tutorial1) you can learn more via five additional examples of increasing complexity.
 
 ## FlexColorScheme Counter App
 
 Let's first setup FlexColorScheme in the default Flutter counter app. Create a new Flutter project, giving you the default counter app. Add the FlexColorScheme import, after that we change one line of code, and add two lines to enable it in the default counter app.
 
-Here we use the **Oh Mandy red** color scheme, it is represented by `enum` value `FlexScheme.mandyRed`. Set the `MaterialApp.themeMode` to `ThemeMode.system` so that the device can control if the app uses its light or dark theme mode. You can then toggle theme mode by changing theme mode on the used device.
+Here we use the **Oh Mandy red** color scheme, it is represented by `enum` value `FlexScheme.mandyRed`. Set the `MaterialApp.themeMode` to `ThemeMode.system` so that the device can control if the app uses its light or dark theme mode. You can then toggle the theme mode by changing mode on the used device.
 
 Assign `FlexThemeData.light` to the app's `theme` property, which is the application's light theme definition property, and `FlexThemeData.dark` to `darkTheme`.
 
@@ -93,12 +93,12 @@ This gives us a counter application that looks like this:
   </tr>
 </table>
 
-*FlexColorScheme applied on the standard Flutter counter template*
+*FlexColorScheme applied to the standard Flutter counter template*
 
 
 Not as exciting as the images shown above. That is because the basic counter app uses very few features and widgets, so it does not present the results very well.
 
-The included examples contain dummy user interface to better demonstrate the results. The used UI demonstration code in the examples, is not relevant to using FlexColorScheme, it is only there to present the results.
+The included examples contain placeholder user interface to better demonstrate the results. The used UI demonstration code in the examples is not relevant to using FlexColorScheme, it is only there to present the results.
 
 ## Documentation
 
@@ -112,9 +112,9 @@ Complete generated package [**API documentation**](https://pub.dev/documentation
 
 To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB app called the **Themes Playground**.
 
-The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings, and you can reset them back to their default values, so don't be afraid to experiment.
+The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings. You can reset settings back to their default values, so you can always start over if you get lost in all the configuration possibilities.
 
-The most useful and popular feature of the **Themes Playground** is that it can generate FlexColorScheme API setup code needed to produce the shown active theme configuration. It even shows and modifies the code as you change settings. You can see the code side-by-side as you change settings. This is a fun way to get familiar with the API. Beware, fiddling with all the different themes and settings can be quite addictive, happy theming! 💙
+The most useful and popular feature of the **Themes Playground** is that it can generate FlexColorScheme API setup code needed to produce the shown active theme configuration. It even shows and modifies the code as you change settings. You can see the code side-by-side as you change settings. This is a fun way to get familiar with the API. Beware, fiddling with all the different themes and settings can be quite fun and addictive, happy theming! 💙
 
 The **Themes Playground** can be used as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v6).
 
@@ -126,7 +126,7 @@ For guidance on how to use the Themes Playground, please read the [Themes Playgr
 
 The **Themes Playground** application is open source and bundled with the `FlexColorScheme` package in the example sub-folder. In its GitHub repository you can find it [here](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5_themes_playground).
 
-The Playground app is also the last step in the package tutorial series. The [tutorial](https://docs.flexcolorscheme.com/tutorial1) goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights. It is on purposes a bit excessively commented. The tutorial also briefly talks about it's background, design choices and limitations.
+The Playground app is also the last step in the package tutorial series. The [tutorial](https://docs.flexcolorscheme.com/tutorial1) goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights. It is on purposes a bit excessively commented. The tutorial also briefly talks about its background, design choices and limitations.
 
 ### Older versions of Themes Playground
 
