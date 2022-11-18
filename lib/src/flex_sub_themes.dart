@@ -1134,6 +1134,10 @@ class FlexSubThemes {
     }
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveLabelStyle =
+        labelStyle.copyWith(color: colorScheme.onSurface);
+
+    // Text color, uses the foreground color for all chip styles.
+    final TextStyle effectiveSelectedLabelStyle =
         labelStyle.copyWith(color: onSelectedColor);
 
     return ChipThemeData(
@@ -1167,7 +1171,7 @@ class FlexSubThemes {
       surfaceTintColor: useM3Defaults ? null : colorScheme.surfaceTint,
 
       // Applies to [FilterChip], [InputChip], [RawChip].
-      checkmarkColor: useM3Defaults ? null : onSelectedColor,
+      checkmarkColor: onSelectedColor,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
@@ -1187,7 +1191,7 @@ class FlexSubThemes {
       labelStyle: useM3Defaults ? null : effectiveLabelStyle,
 
       // Applies to [ChoiceChip.labelStyle],
-      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
+      secondaryLabelStyle: useM3Defaults ? null : effectiveSelectedLabelStyle,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
