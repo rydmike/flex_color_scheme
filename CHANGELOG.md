@@ -43,9 +43,10 @@ The **Themes Playground** application, also known as tutorial example 5, that co
   - Additional `FlexTones`, the `FlexTones.oneHue` and `FlexTones.vividBackground`.
   - See [FlexSeedScheme on pub.dev](https://pub.dev/packages/flex_seed_scheme/changelog) for more information.
 * In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. The properties are nullable to enable using different defaults in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
-* **STYLE BREAKING MINOR:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a **breaking style** change from previous thin outline style in FlexColorScheme.
+* **Style breaking:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a style breaking change from previous thin outline style in FlexColorScheme.
   - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid such issues with default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
-* **STYLE BREAKING MINOR:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is minor, in most designs the color values are the same. If needed you can put it back to theme `background` color with:
+* **Style breaking:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is minor, in most designs the color values are the same. If needed you can put it back to theme `background` color with:
+* **Style breaking:** When opting in on opinionated sub-themes, the `Chip` style is slightly modified from previous versions. The new opinionated FCS default style is more distinct than before and more aligned with styling borrowed from the Material 3 mode `Chip` design. Their revised style looks better than before. Using Material 3 and with it themed `Chips` is also fully supported, also customizing color on selected state of selectable **Chips** is available. Color-tinted chips are also available as before. Be aware though that Material 3 theming in the current 3.3 version of Flutter has some limitations. If you assign a custom color to selected chips, the disabled state of Chips can no longer conform, to M3 spec of disabled selected Chips. For more information, [see issue #115364](https://github.com/flutter/flutter/issues/115364).
 
 ```dart
     final ThemeData themeLight = FlexThemeData.light(
@@ -66,7 +67,7 @@ The **Themes Playground** application, also known as tutorial example 5, that co
   - These temporary M3 fixes, make it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3, it is not perfect, but much better.
   - The reasons why these issues exist are because these components have not yet been migrated to M3 in Flutter 3.3, plus the combination of this `Material` elevation [issue #107190](https://github.com/flutter/flutter/issues/107190) in M3 mode. As a result we get no elevation tint or any shadow on such `Material` using widgets in M3 mode.
   - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. Even if only it lands, we will get shadows back in M3 default `Material`, also if the components and their themes do not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
-  - These temporary work-around fixes will be removed when the stable version of the framework implements correct Material 3 elevation behavior for these widgets, hopefully in the next stable release of Flutter.
+  - The above temporary work-around fixes will be removed when the stable version of the framework implements correct Material 3 elevation behavior for these widgets, and produces the same results itself. Hopefully in the next stable release of Flutter.
 
 **Themes Playground**
 
@@ -119,7 +120,7 @@ The **Themes Playground** application, also known as tutorial example 5, that co
     - The `SwitchListTileAdaptive` is kept in use on examples 2 to 4. As an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platforms, nor can it be themed to be so. You have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).
 
 * **FIXED:** 
-  - Fixed codegen for Switch, CheckBox and Radio that did not include color selection for setting primary color since it used to be default. The issue only concerned the Themes Playground code generation, APIs worked as expected.
+  - Fixed codegen for Switch, CheckBox and Radio, that did not include color selection for setting primary color since it used to be default. The issue only concerned the Themes Playground code generation, APIs worked as expected.
 
 
 ## 6.0.1
@@ -130,7 +131,7 @@ The **Themes Playground** application, also known as tutorial example 5, that co
  
 * A null check was fixed by [sososdk](https://github.com/sososdk) in `FlexColorScheme.light` when using custom scheme [PR #90](https://github.com/rydmike/flex_color_scheme/pull/90). Issue did not exist in `FlexColorScheme.dark`.
 
-* Cam16 from Material Color Utilities was exported by accident by FlexColorScheme in version 6.0.0 via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does, however export it as before, it is used by the **FlexColorPicker**.
+* Cam16 from Material Color Utilities exported by accident by FlexColorScheme in version 6.0.0 via its **FlexSeedScheme** package export. This export was removed. Cam16 was not exported before moving features to FlexSeedScheme and should not have been now either. FlexSeedScheme does, however export it as before, it is used by the **FlexColorPicker**.
 
 ## 6.0.0
 
@@ -700,7 +701,7 @@ theme: FlexThemeData.light(
     removed. If you have used it, it has a broader more general replacement called
     `FlexSubThemesData.useFlutterDefaults`.
   * **Migration:** Consider using `useFlutterDefaults` instead, or set styles
-    manually using individual properties to desired styles matching Flutter defaults
+    manually using individual properties to match Flutter defaults
     un-themed component designs.
 
 
@@ -774,7 +775,7 @@ theme: FlexThemeData.light(
 **STYLE CHANGE - BREAKING**
 
 * The custom "internal" and temporary `m3TextTheme` was changed.
-  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
+  It is **style-breaking** with 4.2.0 and 5.0.0-dev.1 & 2.
   It breaks past used style when opting in on component themes and its optional
   custom `m3TextTheme` enabled. The updated custom implementation of it now follows the
   implementation used in the Flutter master channel, apart from this
@@ -788,7 +789,7 @@ theme: FlexThemeData.light(
 
 * The computed colors for `ThemeData` colors `primaryColorLight`, `primaryColorDark` and
   `secondaryHeaderColor` were changed.
-  It is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The change breaks past
+  It is **style-breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The change breaks past
   used styles on these rarely used colors. These `ThemeData` colors are also on
   a deprecation path and will likely receive some new none `MaterialColor` dependent
   color defaults when that change happens. The new `ColorScheme.primary` computed
@@ -796,7 +797,7 @@ theme: FlexThemeData.light(
   regardless of used `ColorScheme.primary` shade and tint.
 
 * The color definition value for `FlexColor.espressoLightPrimary` color was changed.
-  This is **style breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The new color for
+  This is **style-breaking** with 4.2.0 and 5.0.0-dev.1 & 2. The new color for
   `FlexColor.espressoLightPrimary` breaks past used color for this color constant.
   The color was changed from `0xFF220804` to `0xFF452F2B`. Past color was too dark brown, almost
   black to be very usable in a UI. It was very black coffee like, but not very practical in a UI,
@@ -939,7 +940,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
 **CHANGE**
 
 * All properties in all `FlexColorScheme` constructors are now
-  optional. The change is none breaking, and uses Material 2 based
+  optional. The change is none breaking, and uses the Material 2
   design guide example theme light and dark as defaults for undefined values.
 
 * Removed the `uses-material-design: true` line from library
@@ -1018,7 +1019,7 @@ Opt in opinionated sub themes minor style changes:
 * Added missing themed background color for `SnackBarThemeData` when
   using opt in opinionated sub themes.
  
-* Tuned the colored text theme on the sub themes that is applied when
+* Tuned the colored text theme on the sub themes that are applied when
   using the optional colored text themes. The text styles now better match
   the regular none colored style,
   and they are a bit more subtle. Text style `caption` got a bit
@@ -1032,11 +1033,11 @@ Opt in opinionated sub themes minor style changes:
 
 **EXAMPLES**
 
-* Updated and tuned the examples. Example 5 *Themes Playground*
+* Updated and tuned the examples. Example 5 **Themes Playground**
   now includes capability to define custom color schemes starting from built-in ones.
   It can also generate the FlexColorScheme setup code needed for any defined
   viewed theme setup. You can copy/paste a theme's Flutter Dart code,
-  from the Themes Playground to your app and use it as its theme. This is a very
+  from the Themes Playground to your app and use it as its theme. This is a
   quick and convenient way to try a theme you made and see in the Themes
   Playground in your own app.
 
@@ -1053,7 +1054,7 @@ Opt in opinionated sub themes minor style changes:
 
 The breaking case is a minor difference in produced style for true
 black mode. Version 4.0.0 is still fully API compatible with version 3.
-Version 4.0.0 does however contain so many new
+Version 4.0.0 does, however contain so many new
 features, that it in itself warrants a new major release bump.
 
 **BREAKING** 
@@ -1061,7 +1062,7 @@ features, that it in itself warrants a new major release bump.
 * In dark mode, the `darkIsTrueBlack` now makes `surface` color
   8% darker instead of 6%. This change was needed to support overlay color
   in dark mode when using `darkIsTrueBlack` when using the new `surfaceMode`
-  property. For more information see Flutter SDK
+  property. For more information, see Flutter SDK
   issue [90353](https://github.com/flutter/flutter/issues/90353).
  
 * From the color scheme English descriptions the sentence end "." was removed from all 
@@ -1081,14 +1082,14 @@ features, that it in itself warrants a new major release bump.
 * Major new feature, easy sub-theming of Flutter SDK UI widgets.
   * You can opt in on nice looking opinionated widget sub-themes by setting
   `FlexColorScheme.useSubThemes` to true, it is false by default.
-  * The default settings for the sub-theme is inspired by
-  [Material 3 design (M3)](https://m3.material.io/.) It mimics it to large extent
+  * The defaults for the sub-themes are inspired by
+  [Material 3 design (M3)](https://m3.material.io). It mimics it to a large extent
   when using default value sub-theme values and settings. The varying corner
   radius is different per widget type. The new TextTheme Typography is also
   included. All parts cannot be made to look exactly like M3 in Flutter when using
-  [Material 2 design (M2)](https://material.io/), but many parts
-  can, and where possible the defaults try follow those values. You can of
-  course override the default.
+  [Material 2 design (M2)](https://material.io), but many parts
+  can, and where possible the defaults try follow those values. You can, of course, 
+  override the defaults.
   * You can tweak these sub themes with a number of parameters
   defined in the `FlexSubThemesData` class, passed to
   `FlexColorScheme.subThemesData`.
@@ -1101,7 +1102,7 @@ features, that it in itself warrants a new major release bump.
   to match the standard buttons regarding size and design as far as possible.
   * In case you still use the old deprecated buttons, they also get
   `ButtonThemeData` that as far as possible match the same style.
-  * Via the sub themes it is by default opted-in to also use a bit Material You
+  * Via the sub themes, it is by default opted-in to also use a bit Material You
   like coloring on the text styles. This can also be opted out of, even if
   otherwise opting in on sub-themes, it is on by default when opting in on
   sub themes.
@@ -1156,7 +1157,7 @@ features, that it in itself warrants a new major release bump.
 * All `FlexSchemeData` objects in `FlexColor` are exposed as static
   const objects, making them easy to pick and reuse as const objects
   individually in custom color scheme lists, or as input to the `colors`
-  property. Previously only the individual color value definitions were exposed.
+  property. Previously, only the individual color value definitions were exposed.
  
 * Added convenience extension `.blendAlpha()` on `Color`
   in `FlexColorExtensions`.
@@ -1174,29 +1175,29 @@ features, that it in itself warrants a new major release bump.
   into the supported fold in FlexColorScheme. Its functionality
   requires min Android SDK level 29, but other than that it works without
   Android setup shenanigans. No added APIs, the API for it already existed
-  in previous version of FlexColorScheme, using it did however require
-  special Android build configuration setup, this is no longer required.
+  in the previous version of FlexColorScheme, using it did however require
+  special Android build configuration setup. This is no longer required.
 
 * **New color schemes:** Added four new built-in color schemes.
-  Total number of color schemes is now 36 matched light and dark pairs.
-  * **Blue whale** - Blue whale, jungle green and outrageous tango orange.
+  The total number of color schemes is now 36 matched light and dark pairs.
+  * **Blue whale**, jungle green and outrageous tango orange.
     Use enum value `FlexScheme.blueWhale` for easy access to it.
     This theme is final and selected for inclusion as a new one.
-  * **San Juan blue** - San Juan blue and pink salmon theme.
+  * **San Juan blue** and pink salmon theme.
     Use enum value `FlexScheme.sanJuanBlue` for easy access to it.
-  * **Rosewood** - Rosewood red, with horses neck and driftwood theme.
+  * **Rosewood** red, with horses neck and driftwood theme.
     Use enum value `FlexScheme.rosewood` for easy access to it.
-  * **Blumine** - Blumine, easter blue and saffron mango theme.
+  * **Blumine**, easter blue and saffron mango theme.
     Use enum value `FlexScheme.blumineBlue` for easy access to it.
   
 **CHANGE**
 
-* The `FlexColor.schemesList` is now a `const` for improved  efficiency.
+* The `FlexColor.schemesList` is now a `const` for improved efficiency.
 
 
 **DOCS**
  
-* The new main example is a complete quick start guide that doubles as
+* The new main example is a complete quick start guide that doubles as the
   "developers" hot reload based playground template. It has comments
   explaining what is going on.
   If you skip reading the readme docs and tutorial, the example may help
