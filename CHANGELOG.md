@@ -6,11 +6,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Nov 18, 2022**
 
-**FlexColorScheme** version 6.1.1 contains a large number of new features, like more component sub-themes and configurable properties. It also improves the seed-generated color scheme capabilities, by adding more pre-configured seed generation configurations and color contrast accessibility options. 
+**FlexColorScheme** version 6.1.1 contains a large number of new features, more component sub-themes and configurable properties. It improves the seed-generated color scheme capabilities, by adding more pre-configured seed generation configurations and color contrast accessibility options. 
 
-A valid criticism of Material 3's color system and seed-generated color schemes is that using colored contrasting colors can be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, so that any seed generation configuration can also return results with plain white and black contrasting on colors.
+A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, so that any seed generation configuration can optionally return results with plain white and black contrasting on colors.
 
-The **Themes Playground** application, also known as tutorial example 5 bundled with the package source, has been updated to include most of the new features. It has been overhauled to make it easier to discover some of its previously already existing features, like using totally custom colors in the Playground to use your own theme colors. 
+The **Themes Playground** application, also known as tutorial example 5, that comes bundled with the package source, has been updated to include most of the new features. It has been improved to make it easier to discover some of its previously existing, but less obvious features, like using custom colors in the Playground to define your own theme. 
 
 **NEW**
 
@@ -286,15 +286,15 @@ self-deprecated members as follows:
   major breaking change. However, since the Material 3 design and **material_color_utilities**
   call this change minor, then so does FCS.  
 
-* The opt-in opinionated tinted text themes were made less aggressive on the tint, and received a
-  bit of opacity for styles that in 2014/2018/2021 styles have opacity. The custom styles uses
-  significantly less opacity since they already also get alpha blended tint color applied.
-  Combining it with same level of opacity would make them too low contrast.
+* The opt-in opinionated tinted text themes were made less aggressive on the tint and received a
+  bit of opacity for styles that in 2014/2018/2021 styles have opacity. The custom styles use
+  significantly less opacity since they already also get alpha-blended tint color applied.
+  Combining it with the same level of opacity would make them too low contrast.
 
 * Style **fix**, the main text theme uses `surfaceTint` color instead of `primary` when tinted text
   theme is enabled. By default `surfaceTint` equals `primary`, but if theme `surfaceTint` is set
   to use a custom color, the for surface tinted textTheme is now also based on it, to fit the
-  custom tinted surfaces. The primary text theme, that fits on primary color, still
+  custom-tinted surfaces. The primary text theme, that fits on primary color, still
   uses `primary` color as its tint color.
 
 * The `FlexAppBarStyle` property was made nullable. It now defaults to null in all constructors.
@@ -311,7 +311,7 @@ self-deprecated members as follows:
   It now also uses stadium border instead of 20dp, M3 size and padding, when `useMaterial3` is
   opted in on.
 
-* Updated `TextButton` to support `useMaterial3` defaults concerning its use of stadium border
+* Updated `TextButton` to support `useMaterial3` defaults concerning its use of a stadium border
   instead of 20dp radius, as well M3 size and padding, when `useMaterial3` is opted in on.
 
 * Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
@@ -324,8 +324,8 @@ self-deprecated members as follows:
   sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled
   chips when using M3, set component sub-themes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`.
-  This feature will only work with intended design in stable channel after feature and PR
-  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166) lands in stable
+  This feature will only work with intended design in the stable channel, after the feature and PR
+  ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166), lands in the stable
   channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
 * Updated `InputDecoration` default sub-theme when opting in on `useMaterial3`. When `true` it
@@ -335,9 +335,9 @@ self-deprecated members as follows:
   not yet available in Flutter 3.3. TextField FCS opinionated style, combined with M3 real defaults,
   will need more work on M3 styles after
   ["Migrate TextField to Material 3"](https://github.com/flutter/flutter/pull/108366) lands in
-  stable channel.   
+  the stable channel.   
   The M3 alignment of FCS `InputDecoration` planned adjustments are:
-  - Use same error container color idea for FCS default that M3 uses, could be OK for all modes.
+  - Use the same error container color idea for FCS default that M3 uses, could be OK for all modes.
   - Option to use FCS component defaults on fill colors and disabled colors, also when
     opting in on M3. These FCS defaults can provide a nice alternative also when opting in on M3,
     but should not force it on M3 unless asked for.
@@ -347,18 +347,18 @@ self-deprecated members as follows:
 * Un-deprecated earlier internal deprecation of `FlexSubThemes.buttonTheme`, as long as Flutter
   SDK has not deprecated it, neither will FCS.
 * Un-deprecated earlier internal deprecation of all *"variant"* named const `FlexColor` colors.
-  They are not used actively by any built-in schemes. However, in line with past statement.
-  The old M2 color names and values will not be removed. Feel free to use to them, if so desired.
+  They are not used actively by any built-in schemes. However, in line with past practice,
+  the old M2 color names and values will not be removed. Feel free to use them, if so desired.
 * To support deprecation of `toggleableActiveColor` when PR
   [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,
   while retaining the previous FCS defaults for `Switch`, `CheckBox` and `Radio` widgets, when
   not opting in on component sub-themes. The created `SwitchThemeData`, `CheckboxThemeData` and
   `CheckboxThemeData` can no longer be null, when not opting in on sub-themes like before.
-  To support the previous nicely theme colored
+  To support the previous theme colored
   toggles in light and dark themes, that were set by defining the right scheme color for
   `toggleableActiveColor` in M2 and M3 theme modes, sub-themes for them that replicates the color
   styles must now be created also when not opting in on sub-themes. This update includes the
-  necessary change to do so. This will be reflected in updates to the core defaults documentation.
+  necessary change to do so. This will be reflected in updates to the core default documentation.
   For a migration guide concerning `toggleableActiveColor` see
   [Flutter breaking-changes](https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide).
 * Since Flutter 3.3 did not yet include the actual deprecation of `toggleableActiveColor` FCS still
@@ -371,7 +371,7 @@ self-deprecated members as follows:
   a `CodeTheme` class `ThemeExtension` to `ThemeData`. To demonstrate how one can use theme
   extensions directly with FlexColorScheme as well, in this case to add custom semantic colors
   for the code view's code keyword highlighter. Additionally, a fancy Material 3 feature was added,
-  color harmonization of custom colors. The process is described in M3 guide under
+  color harmonization of custom colors. The process is described in the Material 3 guide under
   [custom colors](https://m3.material.io/styles/color/the-color-system/custom-colors).
   The M3 library [MaterialColorUtilities](https://pub.dev/packages/material_color_utilities) has
   the `Blend` function needed to perform the color harmonization, as described
@@ -384,7 +384,7 @@ self-deprecated members as follows:
   see the style. It also has widgets below it used to demonstrate the opacity setting.
 
 * *Themes Playground:* Code gen and control enable/disable for onColor blends updated to lock controls
-  with no impact when using seeded color scheme. Code is also not generated for onColor blend
+  with no impact when using seeded color schemes. Code is also not generated for onColor blend
   settings that have no impact when using seeded color schemes.
 
 * *Themes Playground*: Features and code gen for additional `Elevated.button` individual foreground
@@ -401,7 +401,7 @@ self-deprecated members as follows:
 
 **DOCS**
 
-* Removed duplicated section of 5.1.0 changelog entry with date July 5, 2022.
+* Removed the duplicated section of 5.1.0 changelog entry with date July 5, 2022.
 
 * Harmonized the changelog style and its past history. The new style and how it looks will be tested
   with a dev release to ensure it works well on pub.
@@ -434,18 +434,18 @@ also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
 * [**#107190**](https://github.com/flutter/flutter/issues/107190) Elevation issue with `Material`
   widget, when opting in on `useMaterial3` causes widespread elevation issues. Concerning the
   reported elevation issue for dialogs included in the linked report, it was observed as fixed for
-  them in master, but later the PR fixing it was reverted. Then it was relanded and then the reland
-  reverted, see [Issue #107423](https://github.com/flutter/flutter/issues/107423),
+  them in master, but later the PR fixing it was reverted. After that, it was relanded, then
+  the reland reverted, see [Issue #107423](https://github.com/flutter/flutter/issues/107423),
   [PR #108718](https://github.com/flutter/flutter/pull/108718),
   [PR #109170](https://github.com/flutter/flutter/pull/109170) and
-  [PR 109172](https://github.com/flutter/flutter/pull/109172). Even after it lands it won't solve
-  all the mentioned incompleteness caused M3 elevation issues, only Dialogs. Popup in particular
-  will remain troublesome.
+  [PR 109172](https://github.com/flutter/flutter/pull/109172). Even after it eventually lands in 
+  stable it won't solve all the mentioned incompleteness caused M3 elevation issues, it only will
+  for Dialogs. Popup in particular will remain troublesome.
 
 * [**#103864**](https://github.com/flutter/flutter/issues/103864) Dynamically changing `Typography`
   in `ThemeData` generates an error
 
-* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` properties `iconTheme` and `actionsIconTheme` ignored on master channel when `useMaterial3` is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into  Flutter stable 3.3.0 and now exists there. The issue must be re-opened or a new one submitted.
+* [**#107305**](https://github.com/flutter/flutter/issues/107305) Regression: `AppBarTheme` properties `iconTheme` and `actionsIconTheme` are ignored in the master channel when `useMaterial3` is true. This was not in stable Flutter channel *stable 3.0.5*. This issue was fixed via [PR #108332](https://github.com/flutter/flutter/pull/108332) and could no longer be observed in *master, 3.1.0-0.0.pre.2108* or later versions. The fix did however not make it into  Flutter stable 3.3.0 and now exists there. The issue must be re-opened or a new one submitted.
 
 * This issue discussed in `SliverAppBar.medium` and `large` [PR #103962](https://github.com/flutter/flutter/pull/103962#issuecomment-1224269768), now exists in stable channel. There is no open issue for it yet.
 
