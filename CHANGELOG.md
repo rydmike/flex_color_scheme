@@ -6,11 +6,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Nov 18, 2022**
 
-**FlexColorScheme** version 6.1.1 contains a large number of new features, more component sub-themes and configurable properties. It improves the seed-generated color scheme capabilities, by adding more pre-configured seed generation configurations and color contrast accessibility options. 
+**FlexColorScheme** version 6.1.0 contains many new features, more component sub-themes and configurable properties. It improves seed-generated color scheme capabilities by adding more pre-configured seed generation configurations and color contrast accessibility options. 
 
-A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, so that any seed generation configuration can optionally return results with plain white and black contrasting on colors.
+A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, any seed generation configuration can optionally return results with plain white and black contrasting on colors. This can be applied separately for main on colors and on surfaces.
 
-The **Themes Playground** application, also known as tutorial example 5, that comes bundled with the package source, has been updated to include most of the new features. It has been improved to make it easier to discover some of its previously existing, but less obvious features, like using custom colors in the Playground to define your own theme. 
+The **Themes Playground** application, has been updated to include most of the new features. It has been improved to make it easier to discover some of its previously existing features, like using custom colors in the Playground to define your own theme. 
 
 **NEW**
 

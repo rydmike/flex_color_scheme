@@ -2233,7 +2233,7 @@ class FlexColorScheme with Diagnosticable {
     /// tertiary colors, including their containers, are swapped when using
     /// Material 3. Most FlexColorScheme color schemes were designed with
     /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
-    /// set to true. If this flag is false, it may  mean that its
+    /// set to true. If this flag is false, it may mean that its
     /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
     /// swapping its secondary and tertiary colors.
     ///
@@ -6137,6 +6137,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
+              deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
               useMaterial3: useMaterial3,

@@ -58,7 +58,6 @@ app.*.map.json
 **/android/**/GeneratedPluginRegistrant.java
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # iOS/XCode related
 **/ios/**/*.mode1v3

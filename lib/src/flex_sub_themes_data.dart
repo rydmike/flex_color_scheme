@@ -82,6 +82,7 @@ import 'flex_sub_themes.dart';
 /// * [PopupMenuThemeData] for [PopupMenuButton] via
 ///   [FlexSubThemes.popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+/// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
 /// * [TextButtonThemeData] for [TextButton] via
@@ -90,6 +91,7 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.timePickerTheme].
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via
 ///   [FlexSubThemes.toggleButtonsTheme].
+/// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
 ///
 /// The custom `ButtonThemeData` can still provides matching styling
 /// for the deprecated legacy buttons if they are used.
@@ -141,6 +143,7 @@ class FlexSubThemesData with Diagnosticable {
     this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
+    this.switchThumbSchemeColor,
     this.checkboxSchemeColor,
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
@@ -167,7 +170,7 @@ class FlexSubThemesData with Diagnosticable {
     this.chipRadius,
     this.chipSchemeColor,
     this.chipSelectedSchemeColor,
-    this.switchThumbSchemeColor,
+    this.chipDeleteIconSchemeColor,
     //
     this.cardRadius,
     this.cardElevation,
@@ -1066,6 +1069,17 @@ class FlexSubThemesData with Diagnosticable {
   /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
   /// pass in [SchemeColor.primary].
   final SchemeColor? chipSelectedSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the Chips
+  /// use as color of the delete icon.
+  ///
+  /// The selected color is only used as base for the [Chip] colors, it also
+  /// uses alpha blend and opacity to create the effective Chip colors using
+  /// the selected scheme color as base.
+  ///
+  /// If not defined it defaults to effective theme based color from using
+  /// [SchemeColor.onSurface].
+  final SchemeColor? chipDeleteIconSchemeColor;
 
   /// Border radius value for [Card].
   ///
@@ -2061,6 +2075,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
     final SchemeColor? chipSelectedSchemeColor,
+    final SchemeColor? chipDeleteIconSchemeColor,
     //
     final double? cardRadius,
     final double? cardElevation,
@@ -2251,6 +2266,8 @@ class FlexSubThemesData with Diagnosticable {
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
       chipSelectedSchemeColor:
           chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
+      chipDeleteIconSchemeColor:
+          chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
       //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
@@ -2510,6 +2527,7 @@ class FlexSubThemesData with Diagnosticable {
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
         other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
+        other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
         //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
@@ -2715,6 +2733,7 @@ class FlexSubThemesData with Diagnosticable {
         chipRadius,
         chipSchemeColor,
         chipSelectedSchemeColor,
+        chipDeleteIconSchemeColor,
         //
         cardRadius,
         cardElevation,
@@ -2925,6 +2944,8 @@ class FlexSubThemesData with Diagnosticable {
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'chipSelectedSchemeColor', chipSelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));

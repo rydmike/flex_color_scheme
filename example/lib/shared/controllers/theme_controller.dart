@@ -429,6 +429,9 @@ class ThemeController with ChangeNotifier {
         Store.keyChipSchemeColor, Store.defaultChipSchemeColor);
     _chipSelectedSchemeColor = await _themeService.load(
         Store.keyChipSelectedSchemeColor, Store.defaultChipSelectedSchemeColor);
+    _chipDeleteIconSchemeColor = await _themeService.load(
+        Store.keyChipDeleteIconSchemeColor,
+        Store.defaultChipDeleteIconSchemeColor);
     _chipBorderRadius = await _themeService.load(
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
     //
@@ -733,6 +736,7 @@ class ThemeController with ChangeNotifier {
     // Chip SETTINGS.
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
     setChipSelectedSchemeColor(Store.defaultChipSelectedSchemeColor, false);
+    setChipDeleteIconSchemeColor(Store.defaultChipDeleteIconSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     //
     // SnackBar SETTINGS.
@@ -2261,6 +2265,15 @@ class ThemeController with ChangeNotifier {
     _chipSelectedSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipSelectedSchemeColor, value));
+  }
+
+  late SchemeColor? _chipDeleteIconSchemeColor;
+  SchemeColor? get chipDeleteIconSchemeColor => _chipDeleteIconSchemeColor;
+  void setChipDeleteIconSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _chipDeleteIconSchemeColor) return;
+    _chipDeleteIconSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipDeleteIconSchemeColor, value));
   }
 
   late double? _chipBorderRadius;

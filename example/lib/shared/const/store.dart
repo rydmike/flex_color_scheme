@@ -888,6 +888,13 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultChipSelectedSchemeColor = null;
 
+  // Key used to read and save the chipDeleteIconSchemeColor value.
+  static const String keyChipDeleteIconSchemeColor =
+      'chipDeleteIconSchemeColor';
+  // Default value for the chipDeleteIconSchemeColor, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultChipDeleteIconSchemeColor = null;
+
   // Key used to read and save the chipBorderRadius value.
   static const String keyChipBorderRadius = 'chipBorderRadius';
   // Default value for the chipBorderRadius, also used to reset settings.

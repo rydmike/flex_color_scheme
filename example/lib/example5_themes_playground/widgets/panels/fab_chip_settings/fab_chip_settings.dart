@@ -181,6 +181,21 @@ class FabChipSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Chip delete icon color'),
+          labelForDefault: 'default (onSurface)',
+          index: controller.chipDeleteIconSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setChipDeleteIconSchemeColor(null);
+                  } else {
+                    controller.setChipDeleteIconSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
           child: ChipShowcase(),
