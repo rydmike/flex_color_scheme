@@ -253,6 +253,17 @@ class FabChipSettings extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        const ListTile(
+          dense: true,
+          subtitle: Text('Current Flutter SDK Switch theming has many '
+              'limitations and M3 styling gaps. For example You cannot make '
+              'themed Chips where Selected chips require different text '
+              'contrast than the normal Chips, there is no way to define '
+              'different Chip text styles for such a setup. See Flutter '
+              'SDK issue #115364. Stick to theme colors that needs and work '
+              'with the default Chip text contrast'),
+        ),
       ],
     );
   }
