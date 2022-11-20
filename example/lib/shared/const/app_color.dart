@@ -106,6 +106,7 @@ class AppColor {
   static const Color customSecondaryContainerLight = Color(0xFFFFDBCF);
   static const Color customTertiaryLight = Color(0xFF006875);
   static const Color customTertiaryContainerLight = Color(0xFF95F0FF);
+
   static const Color customPrimaryDark = Color(0xFF9FC9FF);
   static const Color customPrimaryContainerDark = Color(0xFF00325B);
   static const Color customSecondaryDark = Color(0xFFFFB59D);
@@ -114,6 +115,7 @@ class AppColor {
   static const Color customTertiaryContainerDark = Color(0xFF004E59);
 
   // Used by example 4, the "All themes" demo.
+  //
   // Finally we create a list with all color schemes we will use. Starting with
   // our custom schemes, since normally when we make custom schemes, those are
   // probably the ones we want to use primarily, so we put them first. After our
@@ -184,7 +186,7 @@ class AppColor {
     FlexColor.customColors.copyWith(name: 'Customizable'),
   ];
 
-  /// Return current FlexSchemeData based on theme current Theme controller.
+  /// Return current FlexSchemeData based on the Theme controllers schemeIndex.
   ///
   /// Used by example 5, the Themes Playground.
   ///
@@ -216,7 +218,7 @@ class AppColor {
   /// `colors` at an index, we should like the `useToDarkMethod` case base the
   /// input colors for that on the same light colors.
   ///
-  /// This is of course more of a design  and use case choice. However,
+  /// This is of course more of a design and use case choice. However,
   /// the seed algorithm is based on using the same
   /// seed colors for light and dark mode and thus use the same resulting
   /// tonal palettes to make the ColorScheme.

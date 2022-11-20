@@ -238,6 +238,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,
+            chipDeleteIconSchemeColor: controller.chipDeleteIconSchemeColor,
             chipRadius: controller.chipBorderRadius,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
@@ -362,8 +363,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // You can make your custom [FlexTones] object right here
     // and apps it it, this just uses an int value to select
     // between a few pre-configured ones.
-    tones:
-        FlexTone.values[controller.usedFlexToneSetup].tones(Brightness.light),
+    tones: FlexTone.values[controller.usedFlexToneSetup]
+        .tones(Brightness.light)
+        .onMainsUseBW(controller.onMainsUseBWLight)
+        .onSurfacesUseBW(controller.onSurfacesUseBWLight),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintLight,
     //

@@ -80,6 +80,46 @@ class SeededColorSchemeSettings extends StatelessWidget {
           onChanged:
               controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
         ),
+        if (isLight) ...<Widget>[
+          SwitchListTile(
+            title: const Text('Use black & white for main onColors'),
+            subtitle:
+                const Text('Main colors are primary, secondary, tertiary, '
+                    'error and their container colors'),
+            value: controller.onMainsUseBWLight && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setOnMainsUseBWLight
+                : null,
+          ),
+          SwitchListTile(
+            title: const Text('Use black & white for surface onColors'),
+            subtitle: const Text('Surface colors are background, surface, '
+                'surfaceVariant and inverseSurface'),
+            value: controller.onSurfacesUseBWLight && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setOnSurfacesUseBWLight
+                : null,
+          ),
+        ] else ...<Widget>[
+          SwitchListTile(
+            title: const Text('Use black & white for main onColors'),
+            subtitle:
+                const Text('Main colors are primary, secondary, tertiary, '
+                    'error and their container colors'),
+            value: controller.onMainsUseBWDark && controller.useKeyColors,
+            onChanged:
+                controller.useKeyColors ? controller.setOnMainsUseBWDark : null,
+          ),
+          SwitchListTile(
+            title: const Text('Use black & white for surface onColors'),
+            subtitle: const Text('Surface colors are background, surface, '
+                'surfaceVariant and inverseSurface'),
+            value: controller.onSurfacesUseBWDark && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setOnSurfacesUseBWDark
+                : null,
+          ),
+        ],
         ListTile(title: Text('$schemeMode ColorScheme')),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),
@@ -131,15 +171,9 @@ class SeededColorSchemeSettings extends StatelessWidget {
               ),
               value: controller.useDarkColorsForSeed &&
                   controller.useKeyColors &&
-                  (controller.schemeIndex == 0 ||
-                      controller.schemeIndex == 1 ||
-                      controller.schemeIndex == 2 ||
-                      controller.schemeIndex == AppColor.schemes.length - 1),
+                  controller.schemeIndex == AppColor.schemes.length - 1,
               onChanged: controller.useKeyColors &&
-                      (controller.schemeIndex == 0 ||
-                          controller.schemeIndex == 1 ||
-                          controller.schemeIndex == 2 ||
-                          controller.schemeIndex == AppColor.schemes.length - 1)
+                      controller.schemeIndex == AppColor.schemes.length - 1
                   ? controller.setUseDarkColorsForSeed
                   : null),
         const ListTile(

@@ -179,6 +179,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,
+            chipDeleteIconSchemeColor: controller.chipDeleteIconSchemeColor,
             chipRadius: controller.chipBorderRadius,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
@@ -296,7 +297,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
-    tones: FlexTone.values[controller.usedFlexToneSetup].tones(Brightness.dark),
+    tones: FlexTone.values[controller.usedFlexToneSetup]
+        .tones(Brightness.dark)
+        .onMainsUseBW(controller.onMainsUseBWDark)
+        .onSurfacesUseBW(controller.onSurfacesUseBWDark),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //

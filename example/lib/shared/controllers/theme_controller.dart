@@ -183,6 +183,15 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = await _themeService.load(
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
+    _onMainsUseBWLight = await _themeService.load(
+        Store.keyOnMainsUseBWLight, Store.defaultOnMainsUseBWLight);
+    _onMainsUseBWDark = await _themeService.load(
+        Store.keyOnMainsUseBWDark, Store.defaultOnMainsUseBWDark);
+    _onSurfacesUseBWLight = await _themeService.load(
+        Store.keyOnSurfacesUseBWLight, Store.defaultOnSurfacesUseBWLight);
+    _onSurfacesUseBWDark = await _themeService.load(
+        Store.keyOnSurfacesUseBWDark, Store.defaultOnSurfacesUseBWDark);
+    //
     // InputDecorator SETTINGS.
     _inputDecoratorSchemeColorLight = await _themeService.load(
         Store.keyInputDecoratorSchemeColorLight,
@@ -420,6 +429,9 @@ class ThemeController with ChangeNotifier {
         Store.keyChipSchemeColor, Store.defaultChipSchemeColor);
     _chipSelectedSchemeColor = await _themeService.load(
         Store.keyChipSelectedSchemeColor, Store.defaultChipSelectedSchemeColor);
+    _chipDeleteIconSchemeColor = await _themeService.load(
+        Store.keyChipDeleteIconSchemeColor,
+        Store.defaultChipDeleteIconSchemeColor);
     _chipBorderRadius = await _themeService.load(
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
     //
@@ -577,6 +589,11 @@ class ThemeController with ChangeNotifier {
     setUsedFlexToneSetup(Store.defaultUsedFlexToneSetup, false);
     setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
+    setOnMainsUseBWLight(Store.defaultOnMainsUseBWLight, false);
+    setOnMainsUseBWDark(Store.defaultOnMainsUseBWDark, false);
+    setOnSurfacesUseBWLight(Store.defaultOnSurfacesUseBWLight, false);
+    setOnSurfacesUseBWDark(Store.defaultOnSurfacesUseBWDark, false);
+    //
     // InputDecorator SETTINGS.
     setInputDecoratorSchemeColorLight(
         Store.defaultInputDecoratorSchemeColorLight, false);
@@ -719,6 +736,7 @@ class ThemeController with ChangeNotifier {
     // Chip SETTINGS.
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
     setChipSelectedSchemeColor(Store.defaultChipSelectedSchemeColor, false);
+    setChipDeleteIconSchemeColor(Store.defaultChipDeleteIconSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     //
     // SnackBar SETTINGS.
@@ -1333,6 +1351,46 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseM3ErrorColors, value));
+  }
+
+  late bool _onMainsUseBWLight;
+  bool get onMainsUseBWLight => _onMainsUseBWLight;
+  void setOnMainsUseBWLight(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _onMainsUseBWLight) return;
+    _onMainsUseBWLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyOnMainsUseBWLight, value));
+  }
+
+  late bool _onMainsUseBWDark;
+  bool get onMainsUseBWDark => _onMainsUseBWDark;
+  void setOnMainsUseBWDark(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _onMainsUseBWDark) return;
+    _onMainsUseBWDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyOnMainsUseBWDark, value));
+  }
+
+  late bool _onSurfacesUseBWLight;
+  bool get onSurfacesUseBWLight => _onSurfacesUseBWLight;
+  void setOnSurfacesUseBWLight(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _onSurfacesUseBWLight) return;
+    _onSurfacesUseBWLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyOnSurfacesUseBWLight, value));
+  }
+
+  late bool _onSurfacesUseBWDark;
+  bool get onSurfacesUseBWDark => _onSurfacesUseBWDark;
+  void setOnSurfacesUseBWDark(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _onSurfacesUseBWDark) return;
+    _onSurfacesUseBWDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyOnSurfacesUseBWDark, value));
   }
 
   // InputDecorator SETTINGS.
@@ -2207,6 +2265,15 @@ class ThemeController with ChangeNotifier {
     _chipSelectedSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipSelectedSchemeColor, value));
+  }
+
+  late SchemeColor? _chipDeleteIconSchemeColor;
+  SchemeColor? get chipDeleteIconSchemeColor => _chipDeleteIconSchemeColor;
+  void setChipDeleteIconSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _chipDeleteIconSchemeColor) return;
+    _chipDeleteIconSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipDeleteIconSchemeColor, value));
   }
 
   late double? _chipBorderRadius;

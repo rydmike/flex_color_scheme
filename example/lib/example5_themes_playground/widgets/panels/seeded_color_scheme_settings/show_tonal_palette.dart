@@ -27,6 +27,7 @@ class ShowTonalPalette extends StatelessWidget {
     final FlexSchemeColor colors = FlexSchemeColor.effective(
       scheme.light,
       controller.usedColors,
+      swapLegacy: controller.swapLegacyColors && scheme.light.swapOnMaterial3,
       swapColors: (isLight && controller.swapLightColors) ||
           (!isLight && controller.swapDarkColors),
       brightness: Brightness.light,
@@ -50,6 +51,8 @@ class ShowTonalPalette extends StatelessWidget {
           controller.useKeyColors ? tones.secondaryMinChroma : 0,
       tertiaryChroma: controller.useKeyColors ? tones.tertiaryChroma : 0,
       tertiaryMinChroma: controller.useKeyColors ? tones.tertiaryMinChroma : 0,
+      tertiaryHueRotation:
+          controller.useKeyColors ? tones.tertiaryHueRotation : 0,
       neutralChroma: controller.useKeyColors ? tones.neutralChroma : 0,
       neutralVariantChroma:
           controller.useKeyColors ? tones.neutralVariantChroma : 0,

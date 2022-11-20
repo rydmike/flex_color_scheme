@@ -2233,7 +2233,7 @@ class FlexColorScheme with Diagnosticable {
     /// tertiary colors, including their containers, are swapped when using
     /// Material 3. Most FlexColorScheme color schemes were designed with
     /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
-    /// set to true. If this flag is false, it may  mean that its
+    /// set to true. If this flag is false, it may mean that its
     /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
     /// swapping its secondary and tertiary colors.
     ///
@@ -2360,7 +2360,7 @@ class FlexColorScheme with Diagnosticable {
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
         // Use provided tones configuration or default one.
-        tones: tones ?? FlexTones.material(Brightness.light),
+        tones: tones,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4105,7 +4105,7 @@ class FlexColorScheme with Diagnosticable {
         // Use provided tones configuration or the default one, which uses
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.
-        tones: tones ?? FlexTones.material(Brightness.dark),
+        tones: tones,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4587,6 +4587,7 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
+
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system
@@ -6136,6 +6137,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
+              deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
               useMaterial3: useMaterial3,

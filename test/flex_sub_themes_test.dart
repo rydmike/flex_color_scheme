@@ -3593,7 +3593,8 @@ void main() {
         'FST1.15-M3-n: GIVEN a default FlexSubTheme.chipTheme(M3 null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
@@ -3603,7 +3604,9 @@ void main() {
           useMaterial3: true,
         ),
         equals(
-          const ChipThemeData(),
+          ChipThemeData(
+            checkmarkColor: colorScheme.onSecondaryContainer,
+          ),
         ),
       );
     });

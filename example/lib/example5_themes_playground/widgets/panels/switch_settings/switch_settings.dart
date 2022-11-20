@@ -29,10 +29,11 @@ class SwitchesSettings extends StatelessWidget {
             : isDark
                 ? 'default (tealAccent[200])'
                 : 'default (secondary)';
-    const String explainThumb =
-        // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
-        // controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
-        'selected';
+
+    const String explainThumb = 'selected';
+    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
+    // controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

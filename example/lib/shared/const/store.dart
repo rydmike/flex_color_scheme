@@ -124,8 +124,8 @@ class Store {
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
-  // Defaults to 17.
-  static const int defaultBlendLevelDark = 17;
+  // Defaults to 15.
+  static const int defaultBlendLevelDark = 15;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
@@ -310,6 +310,26 @@ class Store {
   static const String keyUseM3ErrorColors = 'useM3ErrorColors';
   // Default value for the useM3ErrorColor, also to reset settings.
   static const bool defaultUseM3ErrorColors = false;
+
+  // Key used to read and save the onMainsUseBWLight value.
+  static const String keyOnMainsUseBWLight = 'onMainsUseBWLight';
+  // Default value for the onMainsUseBWLight, also to reset settings.
+  static const bool defaultOnMainsUseBWLight = false;
+
+  // Key used to read and save the onMainsUseBWDark value.
+  static const String keyOnMainsUseBWDark = 'onMainsUseBWDark';
+  // Default value for the onMainsUseBWDark, also to reset settings.
+  static const bool defaultOnMainsUseBWDark = false;
+
+  // Key used to read and save the onSurfacesUseBWLight value.
+  static const String keyOnSurfacesUseBWLight = 'onSurfacesUseBWLight';
+  // Default value for the onSurfacesUseBWLight, also to reset settings.
+  static const bool defaultOnSurfacesUseBWLight = false;
+
+  // Key used to read and save the onSurfacesUseBWDark value.
+  static const String keyOnSurfacesUseBWDark = 'onSurfacesUseBWDark';
+  // Default value for the onSurfacesUseBWDark, also to reset settings.
+  static const bool defaultOnSurfacesUseBWDark = false;
 
   // InputDecorator SETTINGS.
   // ===========================================================================
@@ -867,6 +887,13 @@ class Store {
   // Default value for the chipSelectedSchemeColor, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultChipSelectedSchemeColor = null;
+
+  // Key used to read and save the chipDeleteIconSchemeColor value.
+  static const String keyChipDeleteIconSchemeColor =
+      'chipDeleteIconSchemeColor';
+  // Default value for the chipDeleteIconSchemeColor, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultChipDeleteIconSchemeColor = null;
 
   // Key used to read and save the chipBorderRadius value.
   static const String keyChipBorderRadius = 'chipBorderRadius';

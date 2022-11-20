@@ -168,8 +168,8 @@ enum SchemeColor {
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
-/// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
+/// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
@@ -1059,6 +1059,17 @@ class FlexSubThemes {
     /// pass in [SchemeColor.primary].
     final SchemeColor? baseSchemeColor,
 
+    /// Defines which [Theme] based [ColorScheme] based color the Chips
+    /// use as color of the delete icon.
+    ///
+    /// The selected color is only used as base for the [Chip] colors, it also
+    /// uses alpha blend and opacity to create the effective Chip colors using
+    /// the selected scheme color as base.
+    ///
+    /// If not defined it defaults to effective theme based color from using
+    /// [SchemeColor.onSurface].
+    final SchemeColor? deleteIconSchemeColor,
+
     /// The style to be applied to the chip's label.
     ///
     /// This only has an effect on label widgets that respect the
@@ -1124,6 +1135,10 @@ class FlexSubThemes {
     final Color onSelectedColor =
         schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
 
+    // The onSelected onColor
+    final Color deleteIconColor = schemeColor(
+        deleteIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
+
     // Icon color.
     final Color iconColor;
     if (blendColor == colorScheme.surface ||
@@ -1134,6 +1149,10 @@ class FlexSubThemes {
     }
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveLabelStyle =
+        labelStyle.copyWith(color: colorScheme.onSurface);
+
+    // Text color, uses the foreground color for all chip styles.
+    final TextStyle effectiveSelectedLabelStyle =
         labelStyle.copyWith(color: onSelectedColor);
 
     return ChipThemeData(
@@ -1145,7 +1164,9 @@ class FlexSubThemes {
               colorScheme.surface, kChipBackgroundAlphaBlend),
 
       // Applies to [Chip], [InputChip], [RawChip].
-      deleteIconColor: useM3Defaults ? null : colorScheme.onSurface,
+      deleteIconColor: useM3Defaults && deleteIconSchemeColor == null
+          ? null
+          : deleteIconColor,
 
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       // Same formula as on FCS Elevated button and ToggleButtons.
@@ -1167,7 +1188,7 @@ class FlexSubThemes {
       surfaceTintColor: useM3Defaults ? null : colorScheme.surfaceTint,
 
       // Applies to [FilterChip], [InputChip], [RawChip].
-      checkmarkColor: useM3Defaults ? null : onSelectedColor,
+      checkmarkColor: onSelectedColor,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
@@ -1187,7 +1208,7 @@ class FlexSubThemes {
       labelStyle: useM3Defaults ? null : effectiveLabelStyle,
 
       // Applies to [ChoiceChip.labelStyle],
-      secondaryLabelStyle: useM3Defaults ? null : effectiveLabelStyle,
+      secondaryLabelStyle: useM3Defaults ? null : effectiveSelectedLabelStyle,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
