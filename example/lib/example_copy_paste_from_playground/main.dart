@@ -38,103 +38,12 @@ class _DemoAppState extends State<DemoApp> {
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
-      // theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-      //   typography: Typography.material2021(platform: defaultTargetPlatform),
-      // ),
-      // darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-      //   typography: Typography.material2021(platform: defaultTargetPlatform),
-      // ),
-
-      // This theme was made for FlexColorScheme version 6.1.0. Make sure
-// you use same or higher version, but still same major version. If
-// you use a lower version, some properties may not be supported. In
-// that case you can also remove them after copying the theme to your app.
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
-        blendLevel: 9,
-        subThemesData: const FlexSubThemesData(
-          toggleButtonsRadius: 13.0,
-          switchSchemeColor: SchemeColor.secondary,
-          switchThumbSchemeColor: SchemeColor.onSecondaryContainer,
-          checkboxSchemeColor: SchemeColor.primaryContainer,
-          radioSchemeColor: SchemeColor.onSecondaryContainer,
-          sliderBaseSchemeColor: SchemeColor.secondary,
-          sliderValueTinted: true,
-          sliderTrackHeight: 8.0,
-          chipSelectedSchemeColor: SchemeColor.primaryContainer,
-          cardRadius: 16.0,
-          popupMenuRadius: 8.0,
-          popupMenuElevation: 4.0,
-          tooltipRadius: 6.0,
-          tooltipWaitDuration: Duration(milliseconds: 1000),
-          tooltipShowDuration: Duration(milliseconds: 1700),
-          tooltipSchemeColor: SchemeColor.onSecondaryContainer,
-          tooltipOpacity: 0.84,
-          dialogRadius: 30.0,
-          timePickerDialogRadius: 30.0,
-          dialogElevation: 5.0,
-          bottomSheetElevation: 5.0,
-          bottomSheetModalElevation: 5.0,
-          bottomNavigationBarElevation: 2.0,
-          navigationBarHeight: 70.0,
-        ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-        ),
-        tones:
-            FlexTones.jolly(Brightness.light).onMainsUseBW().onSurfacesUseBW(),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
-        // To use the playground font, add GoogleFonts package and uncomment
-        fontFamily: GoogleFonts.notoSans().fontFamily,
+      theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.flutterDash,
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 15,
-        subThemesData: const FlexSubThemesData(
-          toggleButtonsRadius: 13.0,
-          switchSchemeColor: SchemeColor.secondary,
-          switchThumbSchemeColor: SchemeColor.onSecondaryContainer,
-          checkboxSchemeColor: SchemeColor.primaryContainer,
-          radioSchemeColor: SchemeColor.onSecondaryContainer,
-          sliderBaseSchemeColor: SchemeColor.secondary,
-          sliderValueTinted: true,
-          sliderTrackHeight: 8.0,
-          chipSelectedSchemeColor: SchemeColor.primaryContainer,
-          cardRadius: 16.0,
-          popupMenuRadius: 8.0,
-          popupMenuElevation: 4.0,
-          tooltipRadius: 6.0,
-          tooltipWaitDuration: Duration(milliseconds: 1000),
-          tooltipShowDuration: Duration(milliseconds: 1700),
-          tooltipSchemeColor: SchemeColor.onSecondaryContainer,
-          tooltipOpacity: 0.84,
-          dialogRadius: 30.0,
-          timePickerDialogRadius: 30.0,
-          dialogElevation: 5.0,
-          bottomSheetElevation: 5.0,
-          bottomSheetModalElevation: 5.0,
-          bottomNavigationBarElevation: 2.0,
-          navigationBarHeight: 70.0,
-        ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-        ),
-        tones: FlexTones.jolly(Brightness.dark),
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        useMaterial3: true,
-        swapLegacyOnMaterial3: true,
-        // To use the Playground font, add GoogleFonts package and uncomment
-        fontFamily: GoogleFonts.notoSans().fontFamily,
+      darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
-// If you do not have a themeMode switch, uncomment this line
-// to let the device system mode control the theme mode:
-// themeMode: ThemeMode.system,
 
       // This is where you would put a copy-pasted theme definition from
       // the Themes Playground. There is already one example below, but do

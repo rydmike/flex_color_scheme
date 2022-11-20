@@ -2224,51 +2224,53 @@ class FlexColorScheme with Diagnosticable {
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
-    /// built-in color schemes when [useMaterial3] is true, that benefit from it
-    /// to better match the Material 3 color system design intent.
+    /// built-in color schemes when [useMaterial3] is true, that benefit
+    /// from it to better match the Material 3 color system design intent.
     ///
-    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
-    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
-    /// defined to be true, informs that it will benefit if the secondary and
-    /// tertiary colors, including their containers, are swapped when using
+    /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
+    /// defined via [FlexSchemeColor], have a flag [swapOnMaterial3]. When
+    /// defined to be true, the scheme will benefit if the [secondary] and
+    /// [tertiary] colors, including their containers, are swapped when using
     /// Material 3. Most FlexColorScheme color schemes were designed with
-    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
-    /// set to true. If this flag is false, it may mean that its
-    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
-    /// swapping its secondary and tertiary colors.
+    /// M2 usage in mind, before M3 existed. They may often have their
+    /// [swapOnMaterial3] set to true. If this flag is false, it may mean
+    /// that its `FlexSchemeColor` was designed for M3 or that it won't
+    /// benefit from swapping its secondary and tertiary colors. In the
+    /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
+    /// you can see which schemes have the flag defined to true.
     ///
-    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// Using a seed-generated color scheme based on built-in FlexSchemeColor
     /// colors is another way to make them suitable for the M3 Color system.
-    /// However, in some cases the secondary color in their design may not be
-    /// in-line with M3 color system design intent, especially if you use seeded
-    /// setup that also use the hue from the secondary color to make
-    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
-    /// color  designs, this can be fixed if we swap the secondary and
-    /// tertiary colors.
+    /// However, in some cases, the secondary color in their design may not
+    /// be in-line with the M3 color system design intent, especially if you
+    /// use the config that also uses the hue from the secondary color to
+    /// make tonal palettes for it. In some legacy FlexSchemeColor color
+    /// designs this can be fixed if we swap the secondary and tertiary colors.
     ///
     /// To make FlexSchemeColor designs color designs that benefit from it
-    /// automatically swap secondary and tertiary colors when `useMaterial3` is
-    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
-    /// for backwards compatibility, but it is recommended to turn it on when
-    /// using Material 3 and its color system. If you use seeded color schemes
-    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
-    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
+    /// automatically swap secondary and tertiary colors when [useMaterial3]
+    /// is set to true, set `swapLegacyOnMaterial3` to true. It defaults to
+    /// false, for backward compatibility, but it is recommended to turn
+    /// it on when using Material 3 and its color system. If you use
+    /// seeded color schemes with Material 2, [useMaterial3] flag is false,
+    /// then it may be preferable to keep [swapOnMaterial3] false for more
+    /// prominent colors on secondaries.
     ///
-    /// This color swap has higher priority than `swapColor`, using it will
-    /// always happen on the effective result of `swapLegacyOnMaterial3` and
-    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
-    /// built-in scheme `FlexSchemeColor`.
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], and value of [swapOnMaterial3] in currently used
+    /// built-in scheme [FlexSchemeColor].
     ///
-    /// If a custom `colorScheme` is passed in, or any of the direct color
-    /// properties `secondary`, `secondaryContainer`, `tertiary` or
-    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
-    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
+    /// If a custom [colorScheme] is passed in, or any of the direct color
+    /// properties [secondary], [secondaryContainer], [tertiary] or
+    /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
+    /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
     ///
-    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
     /// to ON (true), but allows you to turn it OFF.
     ///
     /// Defaults to false, for backwards compatibility, but prefer setting it
-    /// to true if you also set `useMaterial3` to true.
+    /// to true if you also set [useMaterial3] to true.
     final bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -3946,51 +3948,53 @@ class FlexColorScheme with Diagnosticable {
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
-    /// built-in color schemes when [useMaterial3] is true, that benefit from it
-    /// to better match the Material 3 color system design intent.
+    /// built-in color schemes when [useMaterial3] is true, that benefit
+    /// from it to better match the Material 3 color system design intent.
     ///
-    /// Since FlexColorScheme version 6.1.0 built-in color scheme, defined via
-    /// [FlexSchemeColor], have a flag property [swapOnMaterial3] that when
-    /// defined to be true, informs that it will benefit if the secondary and
-    /// tertiary colors, including their containers, are swapped when using
+    /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
+    /// defined via [FlexSchemeColor], have a flag [swapOnMaterial3]. When
+    /// defined to be true, the scheme will benefit if the [secondary] and
+    /// [tertiary] colors, including their containers, are swapped when using
     /// Material 3. Most FlexColorScheme color schemes were designed with
-    /// M2 usage in mind, before M3 existed and have their [swapOnMaterial3]
-    /// set to true. If this flag is false, it may  mean that its
-    /// [FlexSchemeColor] was designed for M3 or that it won't benefit from
-    /// swapping its secondary and tertiary colors.
+    /// M2 usage in mind, before M3 existed. They may often have their
+    /// [swapOnMaterial3] set to true. If this flag is false, it may mean
+    /// that its `FlexSchemeColor` was designed for M3 or that it won't
+    /// benefit from swapping its secondary and tertiary colors. In the
+    /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
+    /// you can see which schemes have the flag defined to true.
     ///
-    /// Using seed generated color scheme with built-in FlexSchemeColor
+    /// Using a seed-generated color scheme based on built-in FlexSchemeColor
     /// colors is another way to make them suitable for the M3 Color system.
-    /// However, in some cases the secondary color in their design may not be
-    /// in-line with M3 color system design intent, especially if you use seeded
-    /// setup that also use the hue from the secondary color to make
-    /// tonal palettes for it. However, in many of the legacy FlexSchemeColor
-    /// color  designs, this can be fixed if we swap the secondary and
-    /// tertiary colors.
+    /// However, in some cases, the secondary color in their design may not
+    /// be in-line with the M3 color system design intent, especially if you
+    /// use the config that also uses the hue from the secondary color to
+    /// make tonal palettes for it. In some legacy FlexSchemeColor color
+    /// designs this can be fixed if we swap the secondary and tertiary colors.
     ///
     /// To make FlexSchemeColor designs color designs that benefit from it
-    /// automatically swap secondary and tertiary colors when `useMaterial3` is
-    /// set to true , set `swapLegacyOnMaterial3` to true. It defaults to false
-    /// for backwards compatibility, but it is recommended to turn it on when
-    /// using Material 3 and its color system. If you use seeded color schemes
-    /// with Material 2, `useMaterial3` flag is false, it may be preferable to
-    /// keep `swapOnMaterial3` false for more prominent colors on secondaries.
+    /// automatically swap secondary and tertiary colors when [useMaterial3]
+    /// is set to true, set `swapLegacyOnMaterial3` to true. It defaults to
+    /// false, for backward compatibility, but it is recommended to turn
+    /// it on when using Material 3 and its color system. If you use
+    /// seeded color schemes with Material 2, [useMaterial3] flag is false,
+    /// then it may be preferable to keep [swapOnMaterial3] false for more
+    /// prominent colors on secondaries.
     ///
-    /// This color swap has higher priority than `swapColor`, using it will
-    /// always happen on the effective result of `swapLegacyOnMaterial3` and
-    /// `useMaterial3`, and value of `swapOnMaterial3` in currently used
-    /// built-in scheme `FlexSchemeColor`.
+    /// This color swap has higher priority than [swapColor], using it will
+    /// always happen on the effective result of [swapLegacyOnMaterial3] and
+    /// [useMaterial3], and value of [swapOnMaterial3] in currently used
+    /// built-in scheme [FlexSchemeColor].
     ///
-    /// If a custom `colorScheme` is passed in, or any of the direct color
-    /// properties `secondary`, `secondaryContainer`, `tertiary` or
-    /// `tertiaryContainer`, then it is assumed custom scheme or overrides is
-    /// being used and the `swapLegacyOnMaterial3` setting does nothing.
+    /// If a custom [colorScheme] is passed in, or any of the direct color
+    /// properties [secondary], [secondaryContainer], [tertiary] or
+    /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
+    /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
     ///
-    /// The Themes Playground app defaults to setting `swapLegacyOnMaterial3`
+    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
     /// to ON (true), but allows you to turn it OFF.
     ///
     /// Defaults to false, for backwards compatibility, but prefer setting it
-    /// to true if you also set `useMaterial3` to true.
+    /// to true if you also set [useMaterial3] to true.
     final bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
@@ -5012,7 +5016,7 @@ class FlexColorScheme with Diagnosticable {
   ///    or on surface/background colors.
   ///
   ///  * For `toggleableActiveColor` the `ColorScheme.secondary` color is used.
-  ///    The Flutter default just uses the default `ThemeData` colors and
+  ///    The Flutter SDK uses the default `ThemeData` colors and
   ///    not the actual colors you define in the `ColorScheme` you create your
   ///    theme from. Perhaps an oversight in Flutter?
   ///    See issue: https:///github.com/flutter/flutter/issues/65782.
@@ -5100,13 +5104,18 @@ class FlexColorScheme with Diagnosticable {
   ///    Thus the `RaisedButton` looks very similar to `ElevatedButton`,
   ///    `OutlineButton` to `OutlinedButton` and `FlatButton` to `TextButton`.
   ///    There are some differences in margins and looks, especially in
-  ///    dark-mode, but they are very similar.
+  ///    dark-mode, but they are very similar. These legacy buttons are
+  ///    deprecated in Flutter and some no longer exists. The `buttonTheme` is
+  ///    also on a deprecation path and will be removed when it is.
   ///
-  ///  * The default theme for Chips contain a design bug that makes the
-  ///    selected `ChoiceChip()` widget look disabled in dark-mode, regardless
-  ///    if was created with `ThemeData` or `ThemeData.from` factory.
-  ///    See issue: https:///github.com/flutter/flutter/issues/65663
-  ///    The [ChipThemeData] modification used here fixes the issue.
+  ///  * In older Flutter version, the default theme for Chips contained a
+  ///    design bug that makes the selected `ChoiceChip()` widget look
+  ///    disabled in dark-mode, regardless of if it was created with `ThemeData`
+  ///    or `ThemeData.from` factory. See issue:
+  ///    https:///github.com/flutter/flutter/issues/65663
+  ///    The [ChipThemeData] modification originally used in core
+  ///    FlexColorScheme fixed the issue. The issue has been resolved but
+  ///    same [ChipThemeData] is still in use for backward style compatibility.
   ///
   /// * For [TabBarTheme], the Flutter standard selected tab and indicator
   ///   color is onSurface in dark mode and on Primary in light mode, which is
@@ -5154,17 +5163,17 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Tooltip theming always done by FlexColorScheme:
   ///
-  /// - Desktop OS (macOS, Linux, Windows)
-  ///   - Fontsize : 12 dp
-  /// - Mobile OS (iOS, Android, Fuchsia)
-  ///   - Fontsize : 14 dp
+  /// - tooltipsMatchBackground: false
+  ///   - Dark theme:  text: black
+  ///   - light theme: text: white
   ///
   /// - tooltipsMatchBackground: true
   ///   - Dark theme:  text: white
   ///   - light theme: text: black
-  /// - tooltipsMatchBackground: false
-  ///   - Dark theme:  text: black
-  ///   - light theme: text: white
+  ///   - Desktop OS (macOS, Linux, Windows)
+  ///     - Fontsize : 12 dp
+  ///   - Mobile OS (iOS, Android, Fuchsia)
+  ///     - Fontsize : 14 dp
   ///
   /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
   ///
@@ -5188,7 +5197,7 @@ class FlexColorScheme with Diagnosticable {
   ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
   ///
   /// When using additional theming via sub-themes properties, its
-  /// properties will if used override background color, text color and
+  /// properties will, if used, override background color, text color and
   /// background opacity as well as border radius.
   ///
   /// ---
