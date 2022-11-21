@@ -95,7 +95,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       initialPage: widget.themeController.viewIndex,
     );
     previousPage = widget.themeController.viewIndex;
-    scrollCtrl = ScrollController();
+    scrollCtrl = ScrollController(debugLabel: 'PanelViewScrollController');
     scaleController.value = 1.0;
     fadeController.value = 1.0;
   }
@@ -136,7 +136,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
     }
     return Scrollbar(
       controller: scrollCtrl,
-      interactive: false,
+      // interactive: false,
       child: NestedScrollView(
         controller: scrollCtrl,
         headerSliverBuilder: (BuildContext context, bool value) {
@@ -147,7 +147,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               delegate: PanelSelectorHeaderDelegate(
                   vsync: this,
                   extent: headerExtent,
-                  // controller: themeCtrl,
                   page: themeCtrl.viewIndex,
                   previousPage: previousPage,
                   onSelect: (int index) {
@@ -295,7 +294,6 @@ class PanelPage extends StatelessWidget {
         // included in, but by itself, but we need the ListView to allow
         // its page content to grow beyond the visible page.
         child: ListView(
-          physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.fromLTRB(
             margins,
             0,

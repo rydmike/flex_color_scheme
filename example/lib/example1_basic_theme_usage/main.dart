@@ -36,7 +36,7 @@ class _DemoAppState extends State<DemoApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      scrollBehavior: const AppScrollBehavior(),
+      scrollBehavior: const DragScrollBehavior(),
       title: 'Basic Theme Usage',
       // Use a predefined FlexThemeData.light() theme for the light theme.
       theme: FlexThemeData.light(

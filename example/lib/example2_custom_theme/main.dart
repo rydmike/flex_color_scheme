@@ -121,7 +121,7 @@ class DemoApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            scrollBehavior: const AppScrollBehavior(),
+            scrollBehavior: const DragScrollBehavior(),
             title: 'Custom Theme',
             // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
