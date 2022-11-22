@@ -21,7 +21,7 @@
 name: Deploy Web
 on:
   push:
-    branches: [playground-scroll-fix]
+    branches: [none]
     paths-ignore:
      - "**.md"
 jobs:
