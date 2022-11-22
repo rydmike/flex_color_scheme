@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
+import '../../../shared/utils/app_scroll_behavior.dart';
 import 'panel_item.dart';
 
 // PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
@@ -132,24 +133,27 @@ class _PanelSelectorState extends State<PanelSelector> {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: ListView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: margins - 4),
-                      controller: scrollController,
-                      physics: const ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: panelItems.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return _PanelButton(
-                          item: panelItems[index],
-                          onSelect: () {
-                            widget.onSelect(index);
-                            setState(() {
-                              selectedPage = index;
-                            });
-                          },
-                          selected: selectedPage == index,
-                        );
-                      },
+                    child: ScrollConfiguration(
+                      behavior: const DragScrollBehavior(),
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: margins - 4),
+                        controller: scrollController,
+                        physics: const ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: panelItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return _PanelButton(
+                            item: panelItems[index],
+                            onSelect: () {
+                              widget.onSelect(index);
+                              setState(() {
+                                selectedPage = index;
+                              });
+                            },
+                            selected: selectedPage == index,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],

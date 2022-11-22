@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
-import '../shared/utils/app_scroll_behavior.dart';
 import 'theme/flex_theme_dark.dart';
 import 'theme/flex_theme_light.dart';
 import 'theme/theme_data_dark.dart';
@@ -101,7 +100,6 @@ class PlaygroundApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          scrollBehavior: const AppScrollBehavior(),
           title: 'Themes Playground',
           // The Theme controller controls if we use FlexColorScheme made
           // ThemeData or standard SDK ThemeData.from a ColorScheme. It also

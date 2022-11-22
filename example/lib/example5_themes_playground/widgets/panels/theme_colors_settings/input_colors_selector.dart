@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/const/app_data.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/app_scroll_behavior.dart';
 
 /// Horizontal theme selector of themes offered in our [AppColor.schemes].
 ///
@@ -108,43 +109,48 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: ListView.builder(
-              controller: scrollController,
-              padding: const EdgeInsetsDirectional.only(start: 8, end: 16),
-              physics: const ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: AppColor.schemes.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Tooltip(
-                  message: AppColor.schemes[index].name,
-                  waitDuration: const Duration(milliseconds: 700),
-                  child: FlexThemeModeOptionButton(
-                    optionButtonPadding: EdgeInsetsDirectional.only(
-                        start: 6 + phoneButtonsSpacingReduce),
-                    optionButtonBorderRadius: _borderRadius(useMaterial3),
-                    height: 30 + phoneReduce / 2,
-                    width: 30 + phoneReduce / 2,
-                    padding: const EdgeInsets.all(0.3),
-                    optionButtonMargin: EdgeInsets.zero,
-                    borderRadius: 0,
-                    unselectedBorder: BorderSide.none,
-                    selectedBorder: BorderSide(
-                      color: theme.primaryColorLight,
-                      width: 4,
+            child: ScrollConfiguration(
+              behavior: const DragScrollBehavior(),
+              child: ListView.builder(
+                controller: scrollController,
+                padding: const EdgeInsetsDirectional.only(start: 8, end: 16),
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: AppColor.schemes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Tooltip(
+                    message: AppColor.schemes[index].name,
+                    waitDuration: const Duration(milliseconds: 700),
+                    child: FlexThemeModeOptionButton(
+                      optionButtonPadding: EdgeInsetsDirectional.only(
+                          start: 6 + phoneButtonsSpacingReduce),
+                      optionButtonBorderRadius: _borderRadius(useMaterial3),
+                      height: 30 + phoneReduce / 2,
+                      width: 30 + phoneReduce / 2,
+                      padding: const EdgeInsets.all(0.3),
+                      optionButtonMargin: EdgeInsets.zero,
+                      borderRadius: 0,
+                      unselectedBorder: BorderSide.none,
+                      selectedBorder: BorderSide(
+                        color: theme.primaryColorLight,
+                        width: 4,
+                      ),
+                      onSelect: () {
+                        scrollOffset = scrollController.offset;
+                        schemeIndex = index;
+                        widget.controller.setSchemeIndex(index);
+                      },
+                      selected: widget.controller.schemeIndex == index,
+                      backgroundColor: theme.colorScheme.surface,
+                      flexSchemeColor: isLight
+                          ? AppColor.schemeAtIndex(index, widget.controller)
+                              .light
+                          : AppColor.schemeAtIndex(index, widget.controller)
+                              .dark,
                     ),
-                    onSelect: () {
-                      scrollOffset = scrollController.offset;
-                      schemeIndex = index;
-                      widget.controller.setSchemeIndex(index);
-                    },
-                    selected: widget.controller.schemeIndex == index,
-                    backgroundColor: theme.colorScheme.surface,
-                    flexSchemeColor: isLight
-                        ? AppColor.schemeAtIndex(index, widget.controller).light
-                        : AppColor.schemeAtIndex(index, widget.controller).dark,
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ],

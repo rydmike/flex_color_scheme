@@ -1,0 +1,73 @@
+# This GitHub action runs on a release, when the GitHub repo is "published".
+# This workflow:
+#  - Installs dart and flutter
+#  - Uses flutter stable channel.
+#    Consider setting up a matrix later with beta and dev included too.
+#  - Enables flutter web
+#  - Gets package dependencies
+#  - Runs dart analyze.
+#  - Show outdated packages, just added for info.
+#  - Verify that dart format is used by all committed code, fails if not.
+#    Controversial but pub.dev penalizes you if dart format is not used.
+#  - Run all tests with coverage.
+#  - Upload code coverage output to Codecov for analysis.
+#  - Build 5 different WEB example apps using FlexColorScheme.
+#    All examples use these steps:
+#    - Flutter clean.
+#    - Flutter build web app, in release mode and with CanvasKit renderer.
+#    - Use rpl to fix/modify the index.html file to give it the correct
+#      href deployment sub-folder.
+#    - Deploy each built Web App to GitHub pages.
+name: Deploy Web
+on:
+  push:
+    branches: [none]
+    paths-ignore:
+     - "**.md"
+jobs:
+  flutter_tests:
+    name: "Analyze and test package, then build and deploy 5 web apps"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flutter and Dart SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: "Show Dart SDK version"
+        run: dart --version
+      - name: "Show Flutter SDK version"
+        run: flutter --version
+      - name: "Flutter Enable Web"
+        run: flutter config --enable-web
+      - name: "Install Flutter package dependencies"
+        run: flutter pub get
+      - name: "Analyze Dart source"
+        run: dart analyze
+      - name: "Show outdated packages"
+        run: flutter pub outdated
+      - name: "Verify that Dart formatting is used, fail if not"
+        run: dart format --output=none --set-exit-if-changed .
+      - name: "Test package FlexColorScheme with coverage"
+        run: flutter test --coverage
+      - name: "Upload test coverage to Codecov"
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage/lcov.info
+
+      # Example 5 Themes playground - Build and deploy
+      - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
+        run: flutter clean && cd example && flutter clean
+      - name: "EXAMPLE-5 WEB release build"
+        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-v6/" --release -t lib/example5_themes_playground/main.dart
+      - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'example/build/web/.'
+          destination_folder: 'flexcolorscheme/themesplayground-v6'
+          destination_repo: 'rydmike/rydmike.github.io'
+          user_email: 'm.rydstrom@gmail.com'
+          user_name: 'rydmike'

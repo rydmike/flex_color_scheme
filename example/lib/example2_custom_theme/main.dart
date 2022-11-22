@@ -7,7 +7,6 @@ import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 // import '../shared/services/theme_service_hive.dart';
 import '../shared/services/theme_service_mem.dart';
-import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
@@ -121,7 +120,6 @@ class DemoApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            scrollBehavior: const AppScrollBehavior(),
             title: 'Custom Theme',
             // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
