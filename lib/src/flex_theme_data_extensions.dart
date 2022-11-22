@@ -720,40 +720,48 @@ extension FlexThemeData on ThemeData {
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Tooltip theming always done by FlexColorScheme:
+    /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
+    /// themes are:
     ///
-    /// - Desktop OS (macOS, Linux, Windows)
-    ///   - Fontsize : 12 dp
-    /// - Mobile OS (iOS, Android, Fuchsia)
-    ///   - Fontsize : 14 dp
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  text: white
-    ///   - light theme: text: black
-    /// - tooltipsMatchBackground: false
-    ///   - Dark theme:  text: black
-    ///   - light theme: text: white
-    ///
-    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  background: Color(0xED444444),
-    ///   - light theme: background: Color(0xF0FCFCFC),
-    ///   - radius: 4 dp
-    ///   - Border: Yes, dividerColor
     /// - tooltipsMatchBackground: false
     ///   - none
     ///
+    /// - tooltipsMatchBackground: true
+    ///   - light theme:
+    ///     - background: Color(0xF0FCFCFC),
+    ///     - text: black
+    ///   - Dark theme:
+    ///     - background: Color(0xED444444),
+    ///     - text: white
+    ///   - Border radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    ///   - Desktop OS (macOS, Linux, Windows)
+    ///     - Font size : 12 dp
+    ///   - Mobile OS (iOS, Android, Fuchsia)
+    ///     - Font size : 14 dp
+    ///
     /// Additional styles when opting in on FlexColorScheme sub themes are:
     ///
-    /// - radius: 8 dp
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Font size : 12 dp
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Font size : 14 dp
+    /// - Border radius: 8 dp
     /// - Border: Yes, dividerColor
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
-    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
     /// - tooltipsMatchBackground: false
-    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
-    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///   - light theme:
+    ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
+    ///     - text: white
+    ///   - Dark theme:
+    ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
+    ///     - text: black
+    /// - tooltipsMatchBackground: true
+    ///   - light theme:
+    ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
+    ///     - text: black
+    ///   - Dark theme:
+    ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
+    ///     - text: white
     ///
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and
@@ -1920,40 +1928,48 @@ extension FlexThemeData on ThemeData {
     /// Defaults to false, and uses same background style as Material Design
     /// guide and Flutter.
     ///
-    /// Tooltip theming always done by FlexColorScheme:
+    /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
+    /// themes are:
     ///
-    /// - Desktop OS (macOS, Linux, Windows)
-    ///   - Fontsize : 12 dp
-    /// - Mobile OS (iOS, Android, Fuchsia)
-    ///   - Fontsize : 14 dp
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  text: white
-    ///   - light theme: text: black
-    /// - tooltipsMatchBackground: false
-    ///   - Dark theme:  text: black
-    ///   - light theme: text: white
-    ///
-    /// Additional styles when NOT opting in on FlexColorScheme sub themes are:
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  background: Color(0xED444444),
-    ///   - light theme: background: Color(0xF0FCFCFC),
-    ///   - radius: 4 dp
-    ///   - Border: Yes, dividerColor
     /// - tooltipsMatchBackground: false
     ///   - none
     ///
+    /// - tooltipsMatchBackground: true
+    ///   - light theme:
+    ///     - background: Color(0xF0FCFCFC),
+    ///     - text: black
+    ///   - Dark theme:
+    ///     - background: Color(0xED444444),
+    ///     - text: white
+    ///   - Border radius: 4 dp
+    ///   - Border: Yes, dividerColor
+    ///   - Desktop OS (macOS, Linux, Windows)
+    ///     - Font size : 12 dp
+    ///   - Mobile OS (iOS, Android, Fuchsia)
+    ///     - Font size : 14 dp
+    ///
     /// Additional styles when opting in on FlexColorScheme sub themes are:
     ///
-    /// - radius: 8 dp
+    /// - Desktop OS (macOS, Linux, Windows)
+    ///   - Font size : 12 dp
+    /// - Mobile OS (iOS, Android, Fuchsia)
+    ///   - Font size : 14 dp
+    /// - Border radius: 8 dp
     /// - Border: Yes, dividerColor
-    /// - tooltipsMatchBackground: true
-    ///   - Dark theme:  Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
-    ///   - light theme: Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%.
     /// - tooltipsMatchBackground: false
-    ///   - Dark theme:  Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%.
-    ///   - light theme: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%.
+    ///   - light theme:
+    ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
+    ///     - text: white
+    ///   - Dark theme:
+    ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
+    ///     - text: black
+    /// - tooltipsMatchBackground: true
+    ///   - light theme:
+    ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
+    ///     - text: black
+    ///   - Dark theme:
+    ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
+    ///     - text: white
     ///
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and

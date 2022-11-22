@@ -295,7 +295,7 @@ const FlexKeyColors _keyColors = FlexKeyColors(
 // FlexTones.dark, when you pass it a brightness, called FlexTones.material,
 // to indicate that it is using the default Material 3 specification.
 //
-// There are few more pre-made static configurations:
+// There are few more pre-made static configurations, for example:
 //
 // * FlexTones.soft
 // * FlexTones.vivid
@@ -437,11 +437,11 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
 
   // Below are some example quick override properties that you can use on the
-  // M3 based NavigationBar. They are double commented out, so it its easy to
-  // remove the comments to try them.
+  // M3 based NavigationBar. The section is double commented out, so it its
+  // easy to uncomment to try them all.
   //
   // // SchemeColor based color for [NavigationBar]'s selected item icon.
-  // navigationBarSelectedIconSchemeColor: SchemeColor.tertiary,
+  // // navigationBarSelectedIconSchemeColor: SchemeColor.tertiary,
   // // SchemeColor based color for [NavigationBar]'s selected item label.
   // navigationBarSelectedLabelSchemeColor: SchemeColor.tertiary,
   // // SchemeColor based color for [NavigationBar]'s unselected item icons.
@@ -714,7 +714,7 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
-        // Use predefined M3 typography while this issue is in effect:
+        // Use predefined Material 3 typography while this issue is in effect:
         // https://github.com/flutter/flutter/issues/103864
         typography: Typography.material2021(
           platform: _platform,

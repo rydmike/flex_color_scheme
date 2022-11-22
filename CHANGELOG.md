@@ -2,6 +2,15 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.1.1
+
+**Nov 22, 2022**
+
+**FIX**
+
+- Themes Playground (Example 5): Fixed scroll issue in page view mode on Web builds. Only examples related, no package impact.
+- API doc updates.
+
 ## 6.1.0
 
 **Nov 20, 2022**

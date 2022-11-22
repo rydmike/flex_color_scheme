@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_prefs.dart';
-import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
@@ -113,7 +112,6 @@ class DemoApp extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          scrollBehavior: const DragScrollBehavior(),
           title: 'Four Themes',
           // Select used light theme for the app by using the ThemeController
           // usedScheme, that contains the value of currently selected

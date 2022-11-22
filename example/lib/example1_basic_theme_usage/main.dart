@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/utils/app_scroll_behavior.dart';
 import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
@@ -36,7 +35,6 @@ class _DemoAppState extends State<DemoApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      scrollBehavior: const DragScrollBehavior(),
       title: 'Basic Theme Usage',
       // Use a predefined FlexThemeData.light() theme for the light theme.
       theme: FlexThemeData.light(
