@@ -301,7 +301,7 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onErrorContainer == onErrorContainer;
   }
 
-  /// Override for hashcode, dart.ui Jenkins based.
+  /// Override for hashcode. Using Darts object hash.
   @override
   int get hashCode => Object.hash(
         onPrimary,

@@ -9,10 +9,11 @@
 .history
 .svn/
 migrate_working_dir/
+.fvm/
 **.fvm/
 .fvm
-.fvm/
 example/.fvm
+example/.fvm/
 /coverage/lcov.info
 
 # IntelliJ related

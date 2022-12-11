@@ -636,14 +636,16 @@ void main() {
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
       // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
       // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
     );
+// ColorScheme#00000(brightness: Brightness.light, primary: Color(0xff6200ee), onPrimary: Color(0xffffffff), primaryContainer: Color(0xffbb86fc), onPrimaryContainer: Color(0xff000000), secondary: Color(0xff03dac6), onSecondary: Color(0xff000000), secondaryContainer: Color(0xffcefaf8), onSecondaryContainer: Color(0xff000000), tertiary: Color(0xff018786), onTertiary: Color(0xffffffff), tertiaryContainer: Color(0xffa4f1ef), onTertiaryContainer: Color(0xff000000), error: Color(0xffb00020), onError: Color(0xffffffff), errorContainer: Color(0xfffcd8df), onErrorContainer: Color(0xff000000), background: Color(0xffffffff), onBackground: Color(0xff000000), surface: Color(0xffffffff), onSurface: Color(0xff000000), surfaceVariant: Color(0xffffffff), onSurfaceVariant: Color(0xff000000), outline: Color(0xff4d4d4d), outlineVariant: Color(0xff999999), shadow: Color(0xff000000), scrim: Color(0xff000000), inverseSurface: Color(0xff121212), onInverseSurface: Color(0xffffffff), inversePrimary: Color(0xffda99ff), primaryVariant: Color(0xff6200ee), secondaryVariant: Color(0xff03dac6), surfaceTint: Color(0xff6200ee))'
+// ColorScheme#00000(brightness: Brightness.light, primary: Color(0xff6200ee), onPrimary: Color(0xffffffff), primaryContainer: Color(0xffbb86fc), onPrimaryContainer: Color(0xff000000), secondary: Color(0xff03dac6), onSecondary: Color(0xff000000), secondaryContainer: Color(0xffcefaf8), onSecondaryContainer: Color(0xff000000), tertiary: Color(0xff018786), onTertiary: Color(0xffffffff), tertiaryContainer: Color(0xffa4f1ef), onTertiaryContainer: Color(0xff000000), error: Color(0xffb00020), onError: Color(0xffffffff), errorContainer: Color(0xfffcd8df), onErrorContainer: Color(0xff000000), background: Color(0xffffffff), onBackground: Color(0xff000000), surface: Color(0xffffffff), onSurface: Color(0xff000000), surfaceVariant: Color(0xffffffff), onSurfaceVariant: Color(0xff000000), outline: Color(0xff4d4d4d), outlineVariant: Color(0xff000000), shadow: Color(0xff000000), scrim: Color(0xff000000), inverseSurface: Color(0xff121212), onInverseSurface: Color(0xffffffff), inversePrimary: Color(0xffda99ff), primaryVariant: Color(0xff6200ee), secondaryVariant: Color(0xff03dac6), surfaceTint: Color(0xff6200ee))'
     test(
         'FCS2.01string: GIVEN a Material light FlexColorScheme object '
         'EXPECT toScheme to be equal to raw ColorScheme light', () {
@@ -712,10 +714,10 @@ void main() {
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xffb3b3b3),
       // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
       // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -786,10 +788,10 @@ void main() {
           inversePrimary: Color(0xff9999ff),
           outline: Color(0xff4d4d4d),
           // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff999999),
+          outlineVariant: Color(0xff999999),
           shadow: Colors.black,
           // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
         )),
       );
     });
@@ -839,10 +841,10 @@ void main() {
           inversePrimary: Color(0xff6f5970),
           outline: Color(0xffb3b3b3),
           // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff666666),
+          outlineVariant: Color(0xff666666),
           shadow: Colors.black,
           // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
         )),
       );
     });
