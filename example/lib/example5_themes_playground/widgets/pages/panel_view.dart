@@ -12,6 +12,7 @@ import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
+import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/material_panel/material_panel.dart';
@@ -23,9 +24,6 @@ import '../panels/panel_item.dart';
 import '../panels/panel_selector.dart';
 import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
 import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
-import '../panels/showcase_panels/effective_colors.dart';
-import '../panels/showcase_panels/theme_code.dart';
-import '../panels/showcase_panels/widget_showcase.dart';
 import '../panels/slider_settings/slider_settings.dart';
 import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/list_tile_settings.dart';
@@ -34,10 +32,12 @@ import '../panels/tab_bar_settings/tab_bar_settings.dart';
 import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
+import '../panels/theme_code/theme_code.dart';
 import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
+import '../panels/widget_showcase/widget_showcase.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

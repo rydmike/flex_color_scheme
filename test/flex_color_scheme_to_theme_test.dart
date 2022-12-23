@@ -89,11 +89,9 @@ void main() {
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -186,11 +184,9 @@ void main() {
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xffb3b3b3),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -253,11 +249,9 @@ void main() {
         surfaceVariant: Color(0xffffffff),
         onSurfaceVariant: Color(0xff000000),
         outline: Color(0xff4d4d4d),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff999999),
+        outlineVariant: Color(0xff999999),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xff121212),
         onInverseSurface: Color(0xffffffff),
         inversePrimary: Color(0xff9999ff),
@@ -449,11 +443,9 @@ void main() {
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outlineVariant: Color(0xff999999),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xff9999ff),
@@ -544,11 +536,9 @@ void main() {
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
         outline: Color(0xffb3b3b3),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff666666),
+        outlineVariant: Color(0xff666666),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
       ),
     );
 
@@ -624,11 +614,9 @@ void main() {
         background: Color(0xff121212),
         onBackground: Colors.white,
         outline: Color(0xffb3b3b3),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff666666),
+        outlineVariant: Color(0xff666666),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xffffffff),
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
@@ -702,11 +690,9 @@ void main() {
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Colors.white,
       outline: Color(0xffb3b3b3),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outlineVariant: Color(0xff666666),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff6f5970),
@@ -800,11 +786,9 @@ void main() {
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outlineVariant: Color(0xff666666),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -860,11 +844,9 @@ void main() {
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outlineVariant: Color(0xff666666),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -1231,8 +1213,7 @@ void main() {
       surface: Colors.white,
       onSurface: Colors.black,
       outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outlineVariant: Color(0xff999999),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -1291,8 +1272,7 @@ void main() {
             surfaceVariant: Color(0xff121212),
             onSurfaceVariant: Color(0xffffffff),
             outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outlineVariant: Color(0xff666666),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -2038,11 +2018,9 @@ void main() {
           surfaceVariant: Color(0xfff7e9e9),
           onSurfaceVariant: Color(0xff000000),
           outline: Color(0xff4d4d4d),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff999999),
+          outlineVariant: Color(0xff999999),
           shadow: Color(0xff000000),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xff1b1414),
           onInverseSurface: Color(0xffffffff),
           inversePrimary: Color(0xfffff0f0),
@@ -2171,11 +2149,9 @@ void main() {
           surfaceVariant: Color(0xff191313),
           onSurfaceVariant: Color(0xffffffff),
           outline: Color(0xffb3b3b3),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff666666),
+          outlineVariant: Color(0xff666666),
           shadow: Color(0xff000000),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Color(0xff000000),
           inversePrimary: Color(0xff644141),
@@ -3998,23 +3974,22 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color:
-                  FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.light)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4031,23 +4006,22 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color:
-                  FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.black)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.black),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.black),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4065,24 +4039,24 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color: FlexColor.darkSurface
-                  .blendAlpha(colorScheme.primary, 0x28)
-                  .withAlpha(0xF2),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface
+                .blendAlpha(colorScheme.primary, 0x28)
+                .withAlpha(0xF2),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4101,24 +4075,24 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color: FlexColor.darkSurface
-                  .blendAlpha(colorScheme.primary, 0x28)
-                  .withAlpha(0xF2),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface
+                .blendAlpha(colorScheme.primary, 0x28)
+                .withAlpha(0xF2),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4140,25 +4114,31 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            waitDuration: const Duration(seconds: 1),
-            showDuration: const Duration(milliseconds: 2500),
-            decoration: BoxDecoration(
-              color: colorScheme.tertiaryContainer
-                  .withAlpha(Color.getAlphaFromOpacity(0.5)),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: colorScheme.onTertiaryContainer)
-                .copyWith(fontSize: 14)
-                .copyWith(color: colorScheme.onTertiaryContainer),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: colorScheme.tertiaryContainer
+                .withAlpha(Color.getAlphaFromOpacity(0.5)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
+      );
+      expect(
+        theme.tooltipTheme.waitDuration,
+        const Duration(seconds: 1),
+      );
+      expect(
+        theme.tooltipTheme.showDuration,
+        const Duration(milliseconds: 2500),
       );
     });
     // Test FlexKeys noOnMainsTint and noOnSurfacesTint

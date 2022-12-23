@@ -105,14 +105,12 @@ enum SchemeColor {
   /// The active theme's color scheme outline color will be used.
   outline,
 
-  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
   /// The active theme's color scheme outlineVariant color will be used.
   outlineVariant,
 
   /// The active theme's color scheme shadow color will be used.
   shadow,
 
-  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
   /// The active theme's color scheme scrim color will be used.
   scrim,
 
@@ -285,12 +283,10 @@ class FlexSubThemes {
         return colorScheme.onSurfaceVariant;
       case SchemeColor.outline:
         return colorScheme.outline;
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
       case SchemeColor.outlineVariant:
         return colorScheme.outlineVariant;
       case SchemeColor.shadow:
         return colorScheme.shadow;
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
       case SchemeColor.scrim:
         return colorScheme.scrim;
       case SchemeColor.inverseSurface:
@@ -363,12 +359,10 @@ class FlexSubThemes {
         return colorScheme.surfaceVariant;
       case SchemeColor.outline:
         return colorScheme.background;
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
       case SchemeColor.outlineVariant:
         return colorScheme.background;
       case SchemeColor.shadow:
         return colorScheme.background;
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
       case SchemeColor.scrim:
         return colorScheme.background;
       case SchemeColor.inverseSurface:
@@ -3358,18 +3352,12 @@ class FlexSubThemes {
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
     final Color onBaseColor =
         schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get selected thumb color, and its pair, defaults to
     // M2: primary and onPrimary.
     // M3: primaryContainer and onPrimaryContainer
-
-    // final Color thumbColor = schemeColor(
-    //     thumbSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
-    //     colorScheme);
-    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
     final Color thumbColor = schemeColor(
         thumbSchemeColor ??
             (useMaterial3
@@ -3377,7 +3365,6 @@ class FlexSubThemes {
                 : baseSchemeColor ?? SchemeColor.primary),
         colorScheme);
 
-    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
     if (!useMaterial3) {
       return SwitchThemeData(
         splashRadius: splashRadius,
@@ -3409,9 +3396,7 @@ class FlexSubThemes {
           },
         ),
       );
-    }
-    // TODO(rydmike): Commented for Flutter 3.3, will be used with Flutter 3.6.
-    else {
+    } else {
       return SwitchThemeData(
         thumbColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {

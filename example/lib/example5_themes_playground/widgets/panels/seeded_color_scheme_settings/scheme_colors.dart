@@ -1144,29 +1144,42 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
-                  // Expanded(
-                  //   child: MouseRegion(
-                  //     onEnter: (PointerEvent details) {
-                  //       tc.setHoverColor(colorScheme.outlineVariant);
-                  //      tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                  //     },
-                  //     onExit: (PointerEvent details) {
-                  //       tc.setHoverColor(null);
-                  //       tc.setHoverTonalPalette(null);
-                  //     },
-                  //     child: Material(
-                  //       color: colorScheme.outlineVariant,
-                  //       child: ColorNameValue(
-                  //         color: colorScheme.outline,
-                  //         textColor: _onColor(colorScheme.outlineVariant),
-                  //         label: 'outline\u200BVariant',
-                  //         tone: tones.outlineVariantTone,
-                  //         showTone: showTones,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.outlineVariant);
+                        tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.outlineVariant,
+                        child: ColorNameValue(
+                          color: colorScheme.outline,
+                          textColor: _onColor(colorScheme.outlineVariant),
+                          label: 'outline\u200BVariant',
+                          tone: tones.outlineVariantTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Outline, OutlineVariant, shadow and scrim colors presentation
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
@@ -1189,6 +1202,30 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Divider(height: 1),
+                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
+                  Expanded(
+                    child: MouseRegion(
+                      onEnter: (PointerEvent details) {
+                        tc.setHoverColor(colorScheme.scrim);
+                        tc.setHoverTonalPalette(TonalPalettes.neutral);
+                      },
+                      onExit: (PointerEvent details) {
+                        tc.setHoverColor(null);
+                        tc.setHoverTonalPalette(null);
+                      },
+                      child: Material(
+                        color: colorScheme.scrim,
+                        child: ColorNameValue(
+                          color: colorScheme.scrim,
+                          textColor: _onColor(colorScheme.scrim),
+                          label: 'scrim',
+                          tone: tones.scrimTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1204,29 +1241,6 @@ class SchemeColors extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: Column(
                 children: <Widget>[
-                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
-                  // Expanded(
-                  //   child: MouseRegion(
-                  //     onEnter: (PointerEvent details) {
-                  //       tc.setHoverColor(colorScheme.scrim);
-                  //       tc.setHoverTonalPalette(TonalPalettes.neutral);
-                  //     },
-                  //     onExit: (PointerEvent details) {
-                  //       tc.setHoverColor(null);
-                  //       tc.setHoverTonalPalette(null);
-                  //     },
-                  //     child: Material(
-                  //       color: colorScheme.scrim,
-                  //       child: ColorNameValue(
-                  //         color: colorScheme.scrim,
-                  //         textColor: _onColor(colorScheme.scrim),
-                  //         label: 'scrim',
-                  //         tone: tones.scrimTone,
-                  //         showTone: showTones,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {

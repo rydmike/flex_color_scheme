@@ -29,11 +29,9 @@ void main() {
   const Color surfaceVariant = Color(0xFFB9C4F1);
   const Color onSurfaceVariant = Color(0xFF22252D);
   const Color outline = Color(0xFF020F34);
-  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-  // const Color outlineVariant = Color(0xFF0D5937);
+  const Color outlineVariant = Color(0xFF0D5937);
   const Color shadow = Color(0xFF060B20);
-  // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-  // const Color scrim = Color(0xFF071331);
+  const Color scrim = Color(0xFF071331);
   const Color inverseSurface = Color(0xFFBCCBED);
   const Color onInverseSurface = Color(0xFF2A303C);
   const Color inversePrimary = Color(0xFF333333);
@@ -63,11 +61,9 @@ void main() {
     surfaceVariant: surfaceVariant,
     onSurfaceVariant: onSurfaceVariant,
     outline: outline,
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // outlineVariant: outlineVariant,
+    outlineVariant: outlineVariant,
     shadow: shadow,
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // scrim: scrim,
+    scrim: scrim,
     inverseSurface: inverseSurface,
     onInverseSurface: onInverseSurface,
     inversePrimary: inversePrimary,
@@ -216,26 +212,24 @@ void main() {
       expect(FlexSubThemes.schemeColor(SchemeColor.outline, scheme),
           equals(outline));
     });
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // test(
-    //     'FST.sC-24: GIVEN SchemeColor.outlineVariant '
-    //     'EXPECT outlineVariant color to be returned', () {
-    //   expect(FlexSubThemes.schemeColor(SchemeColor.outlineVariant, scheme),
-    //       equals(outlineVariant));
-    // });
+    test(
+        'FST.sC-24: GIVEN SchemeColor.outlineVariant '
+        'EXPECT outlineVariant color to be returned', () {
+      expect(FlexSubThemes.schemeColor(SchemeColor.outlineVariant, scheme),
+          equals(outlineVariant));
+    });
     test(
         'FST.sC-25: GIVEN SchemeColor.shadow '
         'EXPECT shadow color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.shadow, scheme),
           equals(shadow));
     });
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // test(
-    //     'FST.sC-26: GIVEN SchemeColor.scrim '
-    //     'EXPECT scrim color to be returned', () {
-    //   expect(
-    //     FlexSubThemes.schemeColor(SchemeColor.scrim, scheme), equals(scrim));
-    // });
+    test(
+        'FST.sC-26: GIVEN SchemeColor.scrim '
+        'EXPECT scrim color to be returned', () {
+      expect(
+          FlexSubThemes.schemeColor(SchemeColor.scrim, scheme), equals(scrim));
+    });
     test(
         'FST.sC-27: GIVEN SchemeColor.inverseSurface '
         'EXPECT inverseSurface color to be returned', () {
@@ -414,26 +408,24 @@ void main() {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.outline, scheme),
           equals(background));
     });
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // test(
-    //     'FST.sCP-24: GIVEN SchemeColor.outlineVariant '
-    //     'EXPECT background color to be returned', () {
-    // expect(FlexSubThemes.schemeColorPair(SchemeColor.outlineVariant, scheme),
-    //       equals(background));
-    // });
+    test(
+        'FST.sCP-24: GIVEN SchemeColor.outlineVariant '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.outlineVariant, scheme),
+          equals(background));
+    });
     test(
         'FST.sCP-25: GIVEN SchemeColor.shadow '
         'EXPECT background color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.shadow, scheme),
           equals(background));
     });
-    // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-    // test(
-    //     'FST.sCP-26: GIVEN SchemeColor.scrim '
-    //     'EXPECT background color to be returned', () {
-    //   expect(FlexSubThemes.schemeColorPair(SchemeColor.scrim, scheme),
-    //       equals(background));
-    // });
+    test(
+        'FST.sCP-26: GIVEN SchemeColor.scrim '
+        'EXPECT background color to be returned', () {
+      expect(FlexSubThemes.schemeColorPair(SchemeColor.scrim, scheme),
+          equals(background));
+    });
     test(
         'FST.sCP-27: GIVEN SchemeColor.inverseSurface '
         'EXPECT onInverseSurface color to be returned', () {

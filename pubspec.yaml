@@ -1,18 +1,18 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
-version: 6.1.1
+version: 6.2.0-dev.1
 homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues
 documentation: https://docs.flexcolorscheme.com
 environment:
   sdk: '>=2.18.0 <3.0.0'
-  flutter: '>=3.3.0'
+  flutter: '>=3.7.0-13.0.pre.45'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.1.0
+  flex_seed_scheme: ^1.2.0-dev.1
 
   flutter:
     sdk: flutter
