@@ -6,6 +6,19 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Dec 26, 2022**
 
+**TODO**
+
+- Add tonal buttons to theming.
+- Review buttons hover elevation.
+- Review TextField defaults.  
+- Add SegmentedButtons theme.
+- Add Divider theme.
+- Add Drawer theme.
+- Add new colors.
+- Add fontFamilyFallback.
+- Playground M3 mode panel header needs tint fix.
+- Remove Typography workaround in Playground.
+
 **NEW** 
 
 - Add support for new `ColorScheme` colors `scrim` and `outlineVariant`.

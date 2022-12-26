@@ -28,6 +28,10 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const ElevatedButtonShowcase(),
         const SizedBox(height: 8),
+        const FilledButtonShowcase(),
+        const SizedBox(height: 8),
+        const FilledButtonTonalShowcase(),
+        const SizedBox(height: 8),
         const OutlinedButtonShowcase(),
         const SizedBox(height: 8),
         const TextButtonShowcase(),
@@ -154,67 +158,61 @@ class ElevatedButtonShowcase extends StatelessWidget {
   }
 }
 
-// These are commented until https://github.com/flutter/flutter/pull/107382
-// lands in master 3.1.0 channel. and makes their way to stable channel.
-// TODO(rydmike): Add these buttons to showcase
-// TODO(rydmike): FCS fix FCS M3 defaults.
-//
-// class FilledButtonShowcase extends StatelessWidget {
-//   const FilledButtonShowcase({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Wrap(
-//       crossAxisAlignment: WrapCrossAlignment.center,
-//       spacing: 8,
-//       runSpacing: 8,
-//       children: <Widget>[
-//         FilledButton(
-//           onPressed: () {},
-//           child: const Text('FilledButton button'),
-//         ),
-//         FilledButton.icon(
-//           onPressed: () {},
-//           icon: const Icon(Icons.add),
-//           label: const Text('FilledButton icon'),
-//         ),
-//         const FilledButton(
-//           onPressed: null,
-//           child: Text('FilledButton button'),
-//         ),
-//       ],
-//     );
-//   }
-// }
-//
-//
-// class FilledButtonTonalShowcase extends StatelessWidget {
-//   const FilledButtonTonalShowcase({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Wrap(
-//       crossAxisAlignment: WrapCrossAlignment.center,
-//       spacing: 8,
-//       runSpacing: 8,
-//       children: <Widget>[
-//         FilledButton.tonal(
-//           onPressed: () {},
-//           child: const Text('FilledButton.tonal'),
-//         ),
-//         FilledButton.tonal.icon(
-//           onPressed: () {},
-//           icon: const Icon(Icons.add),
-//           label: const Text('FilledButton.tonal icon'),
-//         ),
-//         const FilledButton.tonal(
-//           onPressed: null,
-//           child: Text('FilledButton.tonal button'),
-//         ),
-//       ],
-//     );
-//   }
-// }
+class FilledButtonShowcase extends StatelessWidget {
+  const FilledButtonShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
+      children: <Widget>[
+        FilledButton(
+          onPressed: () {},
+          child: const Text('Filled button'),
+        ),
+        FilledButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+          label: const Text('Filled icon'),
+        ),
+        const FilledButton(
+          onPressed: null,
+          child: Text('Filled button'),
+        ),
+      ],
+    );
+  }
+}
+
+class FilledButtonTonalShowcase extends StatelessWidget {
+  const FilledButtonTonalShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 8,
+      children: <Widget>[
+        FilledButton.tonal(
+          onPressed: () {},
+          child: const Text('Tonal button'),
+        ),
+        FilledButton.tonalIcon(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+          label: const Text('Tonal icon'),
+        ),
+        const FilledButton.tonal(
+          onPressed: null,
+          child: Text('Tonal button'),
+        ),
+      ],
+    );
+  }
+}
 
 class OutlinedButtonShowcase extends StatelessWidget {
   const OutlinedButtonShowcase({super.key});
