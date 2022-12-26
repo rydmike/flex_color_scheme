@@ -3199,14 +3199,8 @@ void main() {
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.onPrimary, scheme.surfaceTint, 6);
       final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
           scheme.surfaceVariant, scheme.surfaceTint, 10);
-      expect(
-        theme.bottomSheetTheme.backgroundColor,
-        equals(bottomSheetColor),
-      );
       expect(
         theme.bottomSheetTheme.modalBackgroundColor,
         equals(bottomSheetModalColor),
