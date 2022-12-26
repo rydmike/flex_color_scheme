@@ -57,7 +57,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('BottomSheet border radius'),
+          title: const Text('BottomSheet border radius (modal and none modal)'),
           subtitle: Slider(
             min: -1,
             max: 50,
@@ -251,13 +251,6 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const ListTile(
-          dense: true,
-          subtitle: Text('The modal and none modal BottomSheet '
-              'have separate API values for elevation and background color. '
-              'They only share controls in the Playground. If you need '
-              'separate values, please edit the copied code.'),
         ),
         const SizedBox(height: 16),
         const MaterialBannerSnackBarShowcase(),
