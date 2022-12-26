@@ -492,11 +492,25 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultBottomSheetSchemeColor = null;
 
+  // Key used to read and save the bottomSheetModalSchemeColor value.
+  static const String keyBottomSheetModalSchemeColor =
+      'bottomSheetModalSchemeColor';
+  // Default value for the bottomSheetModalSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomSheetModalSchemeColor = null;
+
   // Key used to read and save the bottomSheetElevation value.
   static const String keyBottomSheetElevation = 'bottomSheetElevation';
   // Default value for the bottomSheetElevation, also to reset settings.
   // We use NULL as default, on this nullable setting.
   static const double? defaultBottomSheetElevation = null;
+
+  // Key used to read and save the bottomSheetModalElevation value.
+  static const String keyBottomSheetModalElevation =
+      'bottomSheetModalElevation';
+  // Default value for the bottomSheetModalElevation, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultBottomSheetModalElevation = null;
 
   // Key used to read and save the bottomSheetBorderRadius value.
   static const String keyBottomSheetBorderRadius = 'bottomSheetBorderRadius';

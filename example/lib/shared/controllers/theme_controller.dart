@@ -262,6 +262,12 @@ class ThemeController with ChangeNotifier {
         Store.keyBottomSheetSchemeColor, Store.defaultBottomSheetSchemeColor);
     _bottomSheetElevation = await _themeService.load(
         Store.keyBottomSheetElevation, Store.defaultBottomSheetElevation);
+    _bottomSheetModalSchemeColor = await _themeService.load(
+        Store.keyBottomSheetModalSchemeColor,
+        Store.defaultBottomSheetModalSchemeColor);
+    _bottomSheetModalElevation = await _themeService.load(
+        Store.keyBottomSheetModalElevation,
+        Store.defaultBottomSheetModalElevation);
     _bottomSheetBorderRadius = await _themeService.load(
         Store.keyBottomSheetBorderRadius, Store.defaultBottomSheetBorderRadius);
     //
@@ -635,6 +641,9 @@ class ThemeController with ChangeNotifier {
     // BottomSheet SETTINGS.
     setBottomSheetSchemeColor(Store.defaultBottomSheetSchemeColor, false);
     setBottomSheetElevation(Store.defaultBottomSheetElevation, false);
+    setBottomSheetModalSchemeColor(
+        Store.defaultBottomSheetModalSchemeColor, false);
+    setBottomSheetModalElevation(Store.defaultBottomSheetModalElevation, false);
     setBottomSheetBorderRadius(Store.defaultBottomSheetBorderRadius, false);
     //
     // Android System Navigator bar SETTINGS.
@@ -1661,6 +1670,25 @@ class ThemeController with ChangeNotifier {
     _bottomSheetElevation = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyBottomSheetElevation, value));
+  }
+
+  late SchemeColor? _bottomSheetModalSchemeColor;
+  SchemeColor? get bottomSheetModalSchemeColor => _bottomSheetModalSchemeColor;
+  void setBottomSheetModalSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _bottomSheetModalSchemeColor) return;
+    _bottomSheetModalSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomSheetModalSchemeColor, value));
+  }
+
+  late double? _bottomSheetModalElevation;
+  double? get bottomSheetModalElevation => _bottomSheetModalElevation;
+  void setBottomSheetModalElevation(double? value, [bool notify = true]) {
+    if (value == _bottomSheetModalElevation) return;
+    _bottomSheetModalElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomSheetModalElevation, value));
   }
 
   late double? _bottomSheetBorderRadius;

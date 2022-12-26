@@ -3016,10 +3016,14 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 1);
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 2);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      final Color bottomSheetColor = refTheme.colorScheme.surface;
+      // TODO(rydmike): Clean out tint tests
+      // ElevationOverlay.applySurfaceTint(
+      //     scheme.surface, scheme.surfaceTint, 1);
+      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      // ElevationOverlay.applySurfaceTint(
+      //     scheme.surface, scheme.surfaceTint, 2);
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3122,10 +3126,15 @@ void main() {
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.onPrimary, scheme.surfaceTint, 6);
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      // TODO(rydmike): Clean out tint tests
+      final Color bottomSheetColor = refTheme.colorScheme.surface;
+      // ElevationOverlay.applySurfaceTint(
+      //     scheme.onPrimary, scheme.surfaceTint, 6);
+      //
+      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      // ElevationOverlay.applySurfaceTint(
+      //     scheme.surfaceVariant, scheme.surfaceTint, 10);
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3175,8 +3184,11 @@ void main() {
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      // TODO(rydmike): Clean out tint tests
+      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      // final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+      //     scheme.surfaceVariant, scheme.surfaceTint, 10);
       expect(
         theme.bottomSheetTheme.modalBackgroundColor,
         equals(bottomSheetModalColor),
@@ -3245,12 +3257,15 @@ void main() {
         useMaterial3: true,
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
+      // final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      // TODO(rydmike): Clean out tint tests
+      // final Color background = refTheme.colorScheme.surface;
       // TODO(rydmike): Temp M3 tint fix, will be null when M3 supported by SDK.
-      final Color background = ElevationOverlay.applySurfaceTint(
-          theme.colorScheme.surface, theme.colorScheme.surfaceTint, 3);
+      // final Color background = ElevationOverlay.applySurfaceTint(
+      //     theme.colorScheme.surface, theme.colorScheme.surfaceTint, 3);
       expect(
         theme.popupMenuTheme.color,
-        equals(background),
+        equals(null),
       );
       expect(
         theme.popupMenuTheme.elevation,
@@ -3322,11 +3337,14 @@ void main() {
           popupMenuOpacity: 0.9,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surface.withOpacity(0.9),
-        theme.colorScheme.surfaceTint,
-        6,
-      );
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      // TODO(rydmike): Clean out tint tests
+      final Color background = refTheme.colorScheme.surface.withOpacity(0.9);
+      // final Color background = ElevationOverlay.applySurfaceTint(
+      //   theme.colorScheme.surface.withOpacity(0.9),
+      //   theme.colorScheme.surfaceTint,
+      //   6,
+      // );
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3407,11 +3425,15 @@ void main() {
           popupMenuSchemeColor: SchemeColor.surfaceVariant,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surfaceVariant.withOpacity(0.8),
-        theme.colorScheme.surfaceTint,
-        2,
-      );
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      // TODO(rydmike): Clean out tint tests
+      final Color background =
+          refTheme.colorScheme.surfaceVariant.withOpacity(0.8);
+      // final Color background = ElevationOverlay.applySurfaceTint(
+      //   theme.colorScheme.surfaceVariant.withOpacity(0.8),
+      //   theme.colorScheme.surfaceTint,
+      //   2,
+      // );
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3451,9 +3473,12 @@ void main() {
           popupMenuSchemeColor: SchemeColor.primaryContainer,
         ),
       ).toTheme;
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      // TODO(rydmike): Clean out tint tests
+      final Color background = refTheme.colorScheme.primaryContainer;
       expect(
         theme.popupMenuTheme.color,
-        equals(theme.colorScheme.primaryContainer),
+        equals(background),
       );
       expect(
         theme.popupMenuTheme.elevation,
@@ -3490,11 +3515,14 @@ void main() {
           popupMenuSchemeColor: SchemeColor.surfaceVariant,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surfaceVariant,
-        theme.colorScheme.surfaceTint,
-        2,
-      );
+      // TODO(rydmike): Clean out tint tests
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      final Color background = refTheme.colorScheme.surfaceVariant;
+      // final Color background = ElevationOverlay.applySurfaceTint(
+      //   theme.colorScheme.surfaceVariant,
+      //   theme.colorScheme.surfaceTint,
+      //   2,
+      // );
       expect(
         theme.popupMenuTheme.color,
         equals(background),

@@ -272,9 +272,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             // BottomSheet settings.
             bottomSheetElevation: controller.bottomSheetElevation,
-            bottomSheetModalElevation: controller.bottomSheetElevation,
+            bottomSheetModalElevation: controller.bottomSheetModalElevation,
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
-            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetModalBackgroundColor:
+                controller.bottomSheetModalSchemeColor,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:

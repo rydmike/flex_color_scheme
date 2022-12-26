@@ -2,6 +2,25 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.2.0-dev.1
+
+**Dec 26, 2022**
+
+**NEW** 
+
+- Add support for new `ColorScheme` colors `scrim` and `outlineVariant`.
+- Add support for new tonal Material buttons.
+
+**CHANGE**
+
+- Remove manual elevation tint for ...
+
+**THEMES PLAYGROUND**
+
+**NEW**
+
+- Add separate UI to set elevation and background color of modal and none model `BottomSheet` independently.
+
 ## 6.1.2
 
 **Dec 26, 2022**

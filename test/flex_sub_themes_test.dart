@@ -4080,6 +4080,104 @@ void main() {
         ),
       );
     });
+    test('FST1.19-light-M3-states: Does Switch have right M3 states', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final SwitchThemeData switchTheme = FlexSubThemes.switchTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+      );
+      // Disabled thumb colors
+      expect(
+        switchTheme.thumbColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(colorScheme.surface.withOpacity(1.0)),
+      );
+      expect(
+        switchTheme.thumbColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      // Disabled track colors
+      expect(
+        switchTheme.trackColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        switchTheme.trackColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.surfaceVariant.withOpacity(0.12)),
+      );
+      // Selected thumb colors
+      expect(
+        switchTheme.thumbColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primaryContainer),
+      );
+      expect(
+        switchTheme.thumbColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primaryContainer),
+      );
+      expect(
+        switchTheme.thumbColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primaryContainer),
+      );
+      expect(
+        switchTheme.thumbColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      // Selected track color
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary.withAlpha(0x70)),
+      );
+      // Pressed color
+      expect(
+        switchTheme.thumbColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      // Hovered color
+      expect(
+        switchTheme.thumbColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      // Focused color
+      expect(
+        switchTheme.thumbColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      // Default states
+      expect(
+        switchTheme.thumbColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.surfaceVariant),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+          useMaterial3: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.surfaceVariant),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x33)),
+      );
+    });
     // -------------------------------------------------------------------------
     // FlexSubThemes CheckBox tests
     // -------------------------------------------------------------------------

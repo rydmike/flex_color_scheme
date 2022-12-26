@@ -210,7 +210,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String bottomSheetModalElevation = controller.bottomSheetElevation !=
           null
-      ? '    bottomSheetModalElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      ? '    bottomSheetModalElevation: ${controller.bottomSheetModalElevation!.toStringAsFixed(1)},\n'
       : '';
   final String bottomSheetBackgroundColor = controller.bottomSheetSchemeColor !=
           null
@@ -219,7 +219,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetModalBackgroundColor = controller
               .bottomSheetSchemeColor !=
           null
-      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetModalSchemeColor},\n'
       : '';
   //
   // Material button sub themes border radius setup CODE.

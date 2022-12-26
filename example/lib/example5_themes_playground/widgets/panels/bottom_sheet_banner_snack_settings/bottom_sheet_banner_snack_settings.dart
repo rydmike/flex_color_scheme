@@ -24,17 +24,23 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
             ? 'default (dark primary, 95% opacity)'
             : 'default (dark grey)';
     // TODO(rydmike): Update BottomSheet M3 default when M3 version is released.
-    final String sheetDefaultColorLabel = controller.useSubThemes &&
-            controller.useFlexColorScheme
-        ? 'default (surface)'
-        : useMaterial3
-            ? 'default (theme.canvasColor)' // Will become surface later in SDK.
-            : 'default (theme.canvasColor)';
+    final String sheetDefaultColorLabel =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? 'default (surface)'
+            : useMaterial3
+                ? 'default (surfaceColor)' // Will become surface later in SDK.
+                : 'default (theme.canvasColor)';
     final String sheetElevationDefaultLabel =
         controller.bottomSheetElevation == null
             ? useMaterial3
-                ? 'default 1\nmodal 2'
-                : 'default 4\nmodal 8'
+                ? 'default 1'
+                : 'default 4'
+            : '';
+    final String sheetModalElevationDefaultLabel =
+        controller.bottomSheetModalElevation == null
+            ? useMaterial3
+                ? 'default 2'
+                : 'default 8'
             : '';
     final String sheetRadiusDefaultLabel =
         controller.bottomSheetBorderRadius == null &&
@@ -117,7 +123,9 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                     ? sheetElevationDefaultLabel
                     : (controller.bottomSheetElevation?.toStringAsFixed(0) ??
                         '')
-                : 'default 0',
+                : useMaterial3
+                    ? 'default 1'
+                    : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomSheetElevation ?? -1
                 : -1,
@@ -145,7 +153,9 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                           : (controller.bottomSheetElevation
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 0',
+                      : useMaterial3
+                          ? 'default 1'
+                          : 'default 0',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -164,6 +174,80 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                   } else {
                     controller
                         .setBottomSheetSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: BottomSheetModalShowcase(),
+        ),
+        const SizedBox(height: 16),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Modal BottomSheet elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 20,
+            divisions: 21,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetModalElevation == null ||
+                        (controller.bottomSheetModalElevation ?? -1) < 0
+                    ? sheetModalElevationDefaultLabel
+                    : (controller.bottomSheetModalElevation
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : useMaterial3
+                    ? 'default 1'
+                    : 'default 0',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomSheetModalElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setBottomSheetModalElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.bottomSheetModalElevation == null ||
+                              (controller.bottomSheetModalElevation ?? -1) < 0
+                          ? sheetModalElevationDefaultLabel
+                          : (controller.bottomSheetModalElevation
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : useMaterial3
+                          ? 'default 1'
+                          : 'default 0',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Modal BottomSheet background color'),
+          labelForDefault: sheetDefaultColorLabel,
+          index: controller.bottomSheetModalSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setBottomSheetModalSchemeColor(null);
+                  } else {
+                    controller.setBottomSheetModalSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

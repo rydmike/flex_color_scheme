@@ -78,6 +78,8 @@ class ThemeShowcase extends StatelessWidget {
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
         const BottomSheetShowcase(),
+        const SizedBox(height: 16),
+        const BottomSheetModalShowcase(),
         const SizedBox(height: 32),
         const MaterialBannerSnackBarShowcase(),
         const Divider(height: 32),
@@ -1716,67 +1718,71 @@ class BottomSheetShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        AbsorbPointer(
-          child: BottomSheet(
-            enableDrag: false,
-            elevation: theme.bottomSheetTheme.elevation,
-            backgroundColor: theme.bottomSheetTheme.backgroundColor,
-            onClosing: () {},
-            builder: (final BuildContext context) => SizedBox(
-              height: 150,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Material BottomSheet',
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    Text(
-                      'Uses Material of type canvas as default background.\n'
-                      'ColorScheme background in M2, but surface in M3.',
-                      style: theme.textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+    return AbsorbPointer(
+      child: BottomSheet(
+        enableDrag: false,
+        elevation: theme.bottomSheetTheme.elevation,
+        backgroundColor: theme.bottomSheetTheme.backgroundColor,
+        onClosing: () {},
+        builder: (final BuildContext context) => SizedBox(
+          height: 150,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Material BottomSheet',
+                  style: theme.textTheme.titleMedium,
                 ),
-              ),
+                Text(
+                  'Uses Material of type canvas as default background.\n'
+                  'ColorScheme background in M2, but surface in M3.',
+                  style: theme.textTheme.bodySmall,
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        AbsorbPointer(
-          child: BottomSheet(
-            elevation: theme.bottomSheetTheme.modalElevation,
-            backgroundColor: theme.bottomSheetTheme.modalBackgroundColor,
-            enableDrag: false,
-            onClosing: () {},
-            builder: (final BuildContext context) => SizedBox(
-              height: 150,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Material Modal BottomSheet',
-                      style: theme.textTheme.titleMedium,
-                    ),
-                    Text(
-                      'Uses Material of type canvas as default background.\n'
-                      'ColorScheme background in M2, but surface in M3.',
-                      style: theme.textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+      ),
+    );
+  }
+}
+
+class BottomSheetModalShowcase extends StatelessWidget {
+  const BottomSheetModalShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return AbsorbPointer(
+      child: BottomSheet(
+        elevation: theme.bottomSheetTheme.modalElevation,
+        backgroundColor: theme.bottomSheetTheme.modalBackgroundColor,
+        enableDrag: false,
+        onClosing: () {},
+        builder: (final BuildContext context) => SizedBox(
+          height: 150,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Material Modal BottomSheet',
+                  style: theme.textTheme.titleMedium,
                 ),
-              ),
+                Text(
+                  'Uses Material of type canvas as default background.\n'
+                  'ColorScheme background in M2, but surface in M3.',
+                  style: theme.textTheme.bodySmall,
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

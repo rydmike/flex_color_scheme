@@ -213,10 +213,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
-            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetModalBackgroundColor:
+                controller.bottomSheetModalSchemeColor,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
             bottomSheetElevation: controller.bottomSheetElevation,
-            bottomSheetModalElevation: controller.bottomSheetElevation,
+            bottomSheetModalElevation: controller.bottomSheetModalElevation,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavBarSelectedSchemeColor,

@@ -874,13 +874,10 @@ class FlexSubThemes {
 
     /// The corner radius of the top corners.
     ///
-    /// If not defined, defaults to [kBottomSheetBorderRadius] 16p.
+    /// If not defined, defaults to [kBottomSheetBorderRadius] 28p.
     ///
-    /// This value is not mentioned in the M3 Specification.
-    /// It is based on an assumption that a sliding in
-    /// surface from the bottom should have the same rounding on its top corners
-    /// as the [Drawer] does on its visible side edges.
-    /// https://m3.material.io/components/navigation-drawer/specs
+    /// Follows Material M3 guide as default value.
+    /// https://m3.material.io/components/bottom-sheets/specs
     final double? radius,
 
     /// The clipBehavior of the bottom sheet theme, defaults to
