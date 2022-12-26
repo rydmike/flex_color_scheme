@@ -6200,13 +6200,15 @@ class FlexColorScheme with Diagnosticable {
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: popupMenuElevation,
-              color: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(
-                      popupMenuColor ?? colorScheme.surface,
-                      colorScheme.surfaceTint,
-                      popupMenuElevation)
-                  : popupMenuColor,
+              color: popupMenuColor,
+              //
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(
+              //         popupMenuColor ?? colorScheme.surface,
+              //         colorScheme.surfaceTint,
+              //         popupMenuElevation)
+              //     : popupMenuColor,
             )
           : null,
       dialogTheme: useSubThemes
@@ -6241,16 +6243,19 @@ class FlexColorScheme with Diagnosticable {
           : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
-              backgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
-                      colorScheme.surfaceTint, bottomSheetElevation)
-                  : bottomSheetColor,
-              modalBackgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
-                      colorScheme.surfaceTint, bottomSheetModalElevation)
-                  : bottomSheetModalColor,
+              backgroundColor: bottomSheetColor,
+              //
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
+              //         colorScheme.surfaceTint, bottomSheetElevation)
+              //     : bottomSheetColor,
+              modalBackgroundColor: bottomSheetModalColor,
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
+              //          colorScheme.surfaceTint, bottomSheetModalElevation)
+              //       : bottomSheetModalColor,
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,

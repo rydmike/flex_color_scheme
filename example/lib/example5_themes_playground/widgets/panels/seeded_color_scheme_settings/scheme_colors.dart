@@ -1203,7 +1203,6 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   const Divider(height: 1),
-                  // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
                   Expanded(
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
