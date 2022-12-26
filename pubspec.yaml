@@ -1,18 +1,18 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
-version: 6.1.2
+version: 6.2.0-dev.1
 homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues
 documentation: https://docs.flexcolorscheme.com
 environment:
   sdk: '>=2.18.0 <3.0.0'
-  flutter: '>=3.3.0'
+  flutter: '>=3.7.0-13.0.pre.45'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.1.0
+  flex_seed_scheme: ^1.2.0-dev.1
 
   flutter:
     sdk: flutter
@@ -35,7 +35,7 @@ dev_dependencies:
   # Use ^0.1.3 for Flutter stable 2.10.x, that uses 0.1.3
   # Use ^0.1.3 for Flutter stable 3.0.x, that uses 0.1.4.
   # Use ^0.1.3 for Flutter rel candidates 3.1, 3.2, 3.4, that uses 0.1.5, beware that
-  # version 0.1.5 has a new faster algo compared to 0.1.4 that changes some seed colors slightly.
+  # version 0.1.5 has a new faster algo compared to 0.1.4, that changes some seed colors slightly.
   # Use ^0.2.0 for Flutter master 3.1.0-x, that uses 0.2.0 after 5.8.2022.
   #
   # This is an unusual range since 0.2.0 is a breaking semver step over 0.1.x, but it works for this

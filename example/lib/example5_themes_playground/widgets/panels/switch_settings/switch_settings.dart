@@ -30,9 +30,8 @@ class SwitchesSettings extends StatelessWidget {
                 ? 'default (tealAccent[200])'
                 : 'default (secondary)';
 
-    const String explainThumb = 'selected';
-    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
-    // controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
+    final String explainThumb =
+        controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +56,7 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('Switch $explainThumb thumb color'),
+          title: Text('Switch $explainThumb thumb color'),
           labelForDefault: labelForDefaultThumbColor,
           index: controller.switchThumbSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme

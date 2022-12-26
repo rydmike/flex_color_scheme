@@ -425,7 +425,7 @@ class FlexColorScheme with Diagnosticable {
   /// A color that typically appears behind scrollable content.
   ///
   /// The color is applied to [ThemeData.canvasColor] and
-  /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+  /// ThemeData.backgroundColor, it is used eg by menu [Drawer] and by all
   /// [Material] of type [MaterialType.canvas].
   ///
   /// If no value is given, and if there is no [colorScheme] defined, it
@@ -2629,12 +2629,10 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.light, onColors.onBackground, 30),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant:
-          //     _outlineColor(Brightness.light, onColors.onBackground, 60),
+          outlineVariant:
+              _outlineColor(Brightness.light, onColors.onBackground, 60),
           shadow: Colors.black,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
@@ -4388,12 +4386,10 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.dark, onColors.onBackground, 30),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant:
-          //     _outlineColor(Brightness.dark, onColors.onBackground, 60),
+          outlineVariant:
+              _outlineColor(Brightness.dark, onColors.onBackground, 60),
           shadow: Colors.black,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(
@@ -4615,7 +4611,6 @@ class FlexColorScheme with Diagnosticable {
   /// useful e.g. for splash and intro screens.
   static SystemUiOverlayStyle themedSystemNavigationBar(
     BuildContext? context, {
-
     /// Use a divider line on the top edge of the system navigation bar.
     ///
     /// On Android 11 (SDK30) there is an issue when using the system
@@ -5744,7 +5739,7 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
       // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
-      backgroundColor: colorScheme.background,
+      // backgroundColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using themed interaction
       // effects, if not opted in same as before v4.0.0, use ThemeData default.
@@ -5799,7 +5794,7 @@ class FlexColorScheme with Diagnosticable {
       // The dialogBackgroundColor in ThemeData is going to be deprecated.
       dialogBackgroundColor: dialogBackground ?? colorScheme.surface,
       // Define errorColor via color scheme error color.
-      errorColor: colorScheme.error,
+      // errorColor: colorScheme.error,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
       // Use TabBar style dependent function for selected Tab as indicatorColor
@@ -5849,9 +5844,10 @@ class FlexColorScheme with Diagnosticable {
       // When using sub-themes, or Material 3 style, we use primary color
       // instead, because it is the best match for M3 ColorDesign for the M2
       // components using M3 Colors.
-      toggleableActiveColor: useSubThemes || useMaterial3
-          ? colorScheme.primary
-          : colorScheme.secondary,
+      // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
+      // toggleableActiveColor: useSubThemes || useMaterial3
+      //     ? colorScheme.primary
+      //     : colorScheme.secondary,
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
@@ -5945,12 +5941,13 @@ class FlexColorScheme with Diagnosticable {
         ),
       ),
 
+      // TODO(rydmike): BottomAppBar deprecated after v3.3.0-0.6.pre
+      // bottomAppBarColor: colorScheme.background,
       // The bottom app bar uses color scheme background color to match the
       // background color of the drawer, bottom navigation bar, possible side
       // menu and system navigation bar on android (if theming of it is used).
       // This is a slight change from the ColorScheme default that uses
       // surface color.
-      bottomAppBarColor: colorScheme.background,
       bottomAppBarTheme: BottomAppBarTheme(
         color: colorScheme.background,
         elevation: bottomAppBarElevation,
@@ -6203,13 +6200,15 @@ class FlexColorScheme with Diagnosticable {
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: popupMenuElevation,
-              color: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(
-                      popupMenuColor ?? colorScheme.surface,
-                      colorScheme.surfaceTint,
-                      popupMenuElevation)
-                  : popupMenuColor,
+              color: popupMenuColor,
+              //
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(
+              //         popupMenuColor ?? colorScheme.surface,
+              //         colorScheme.surfaceTint,
+              //         popupMenuElevation)
+              //     : popupMenuColor,
             )
           : null,
       dialogTheme: useSubThemes
@@ -6244,16 +6243,19 @@ class FlexColorScheme with Diagnosticable {
           : null,
       bottomSheetTheme: useSubThemes
           ? FlexSubThemes.bottomSheetTheme(
-              backgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
-                      colorScheme.surfaceTint, bottomSheetElevation)
-                  : bottomSheetColor,
-              modalBackgroundColor: useMaterial3
-                  // TODO(rydmike): Remove tint elev temp fix when M3 supported.
-                  ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
-                      colorScheme.surfaceTint, bottomSheetModalElevation)
-                  : bottomSheetModalColor,
+              backgroundColor: bottomSheetColor,
+              //
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
+              //         colorScheme.surfaceTint, bottomSheetElevation)
+              //     : bottomSheetColor,
+              modalBackgroundColor: bottomSheetModalColor,
+              // useMaterial3
+              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              //     ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
+              //          colorScheme.surfaceTint, bottomSheetModalElevation)
+              //       : bottomSheetModalColor,
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
@@ -6576,11 +6578,9 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: colorScheme?.outline,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          //     outlineVariant: colorScheme?.outlineVariant,
+          outlineVariant: colorScheme?.outlineVariant,
           shadow: colorScheme?.shadow,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: colorScheme?.scrim,
+          scrim: colorScheme?.scrim,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: colorScheme?.inversePrimary,
@@ -6614,12 +6614,10 @@ class FlexColorScheme with Diagnosticable {
           surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(usedBrightness, onColors.onBackground, 30),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant:
-          //     _outlineColor(usedBrightness, onColors.onBackground, 60),
+          outlineVariant:
+              _outlineColor(usedBrightness, onColors.onBackground, 60),
           shadow: Colors.black,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: _inversePrimary(

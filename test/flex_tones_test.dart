@@ -49,13 +49,17 @@ void main() {
       tertiaryChroma: null,
       tertiaryMinChroma: 0,
       tertiaryHueRotation: 60,
+      errorChroma: null,
+      errorMinChroma: 0,
       neutralChroma: 4,
+      neutralMinChroma: 0,
       neutralVariantChroma: 8,
+      neutralVariantMinChroma: 0,
     );
     // m2, has same definition as m1, but via default values
     const FlexTones m2 = FlexTones.light();
     // m3, has same definition as m1, but one value is different.
-    const FlexTones m3 = FlexTones.light(neutralChroma: 8);
+    const FlexTones m3 = FlexTones.light(neutralMinChroma: 8);
     // m4, has all values different from m1
     const FlexTones m4 = FlexTones.dark();
     // Do identity tests
@@ -104,7 +108,7 @@ void main() {
         'an unequal object when made equal with copyWith.', () {
       expect(
         m3.copyWith(
-          neutralChroma: 4,
+          neutralMinChroma: 0,
         ),
         equals(m1),
       );
@@ -179,7 +183,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexTones#00000(primaryTone: 40, onPrimaryTone: 100, primaryContainerTone: 90, onPrimaryContainerTone: 10, secondaryTone: 40, onSecondaryTone: 100, secondaryContainerTone: 90, onSecondaryContainerTone: 10, tertiaryTone: 40, onTertiaryTone: 100, tertiaryContainerTone: 90, onTertiaryContainerTone: 10, errorTone: 40, errorContainerTone: 90, onErrorContainerTone: 10, backgroundTone: 99, onBackgroundTone: 10, surfaceTone: 99, onSurfaceTone: 10, surfaceVariantTone: 90, onSurfaceVariantTone: 30, outlineTone: 50, outlineVariantTone: 80, shadowTone: 0, scrimTone: 0, inverseSurfaceTone: 20, onInverseSurfaceTone: 95, inversePrimaryTone: 80, surfaceTintTone: 40, primaryChroma: null, primaryMinChroma: 48.0, secondaryChroma: null, secondaryMinChroma: 0.0, tertiaryChroma: null, tertiaryHueRotation: 60.0, tertiaryMinChroma: 0.0, neutralChroma: 4.0, neutralVariantChroma: 8.0)'));
+              'FlexTones#00000(primaryTone: 40, onPrimaryTone: 100, primaryContainerTone: 90, onPrimaryContainerTone: 10, secondaryTone: 40, onSecondaryTone: 100, secondaryContainerTone: 90, onSecondaryContainerTone: 10, tertiaryTone: 40, onTertiaryTone: 100, tertiaryContainerTone: 90, onTertiaryContainerTone: 10, errorTone: 40, errorContainerTone: 90, onErrorContainerTone: 10, backgroundTone: 99, onBackgroundTone: 10, surfaceTone: 99, onSurfaceTone: 10, surfaceVariantTone: 90, onSurfaceVariantTone: 30, outlineTone: 50, outlineVariantTone: 80, shadowTone: 0, scrimTone: 0, inverseSurfaceTone: 20, onInverseSurfaceTone: 95, inversePrimaryTone: 80, surfaceTintTone: 40, primaryChroma: null, primaryMinChroma: 48.0, secondaryChroma: null, secondaryMinChroma: 0.0, tertiaryChroma: null, tertiaryHueRotation: 60.0, tertiaryMinChroma: 0.0, errorChroma: null, errorMinChroma: 0.0, neutralChroma: 4.0, neutralMinChroma: 0.0, neutralVariantChroma: 8.0, neutralVariantMinChroma: 0.0)'));
     });
     test(
         'FTO1.11: Test toStringShort implemented via debugFillProperties '
@@ -244,8 +248,12 @@ void main() {
             tertiaryChroma: null,
             tertiaryMinChroma: 0,
             tertiaryHueRotation: 60,
+            errorChroma: null,
+            errorMinChroma: 0,
             neutralChroma: 4,
+            neutralMinChroma: 0,
             neutralVariantChroma: 8,
+            neutralVariantMinChroma: 0,
           ),
         ),
       );
@@ -292,8 +300,12 @@ void main() {
             tertiaryChroma: null,
             tertiaryMinChroma: 0,
             tertiaryHueRotation: 60,
+            errorChroma: null,
+            errorMinChroma: 0,
             neutralChroma: 4,
+            neutralMinChroma: 0,
             neutralVariantChroma: 8,
+            neutralVariantMinChroma: 0,
           ),
         ),
       );

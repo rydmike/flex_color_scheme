@@ -156,22 +156,24 @@ class ShowThemeDataColors extends StatelessWidget {
                 textColor: _onColor(theme.secondaryHeaderColor, background),
               ),
               // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
-              // Sill included in Flutter 3.3 though, so we keep it in.
-              ColorCard(
-                label: 'Toggleable\nActive',
-                color: theme.toggleableActiveColor,
-                textColor: _onColor(theme.toggleableActiveColor, background),
-              ),
-              ColorCard(
-                label: 'Bottom\nAppBar',
-                color: theme.bottomAppBarColor,
-                textColor: _onColor(theme.bottomAppBarColor, background),
-              ),
-              ColorCard(
-                label: 'Error\nColor',
-                color: theme.errorColor,
-                textColor: colorScheme.onError,
-              ),
+              // ColorCard(
+              //   label: 'Toggleable\nActive',
+              //   color: theme.toggleableActiveColor,
+              //   textColor: _onColor(theme.toggleableActiveColor, background),
+              // ),
+              // TODO(rydmike): BottomAppBar deprecated after v3.3.0-0.6.pre
+              // ColorCard(
+              //   label: 'Bottom\nAppBar',
+              //   color: theme.bottomAppBarColor,
+              //   textColor: _onColor(theme.bottomAppBarColor, background),
+              // ),
+
+              // TODO(rydmike): errorColor deprecated after v3.3.0-0.5.pre.',
+              // ColorCard(
+              //   label: 'Error\nColor',
+              //   color: theme.errorColor,
+              //   textColor: colorScheme.onError,
+              // ),
               ColorCard(
                 label: 'Canvas$backTooHigh',
                 color: theme.canvasColor,
@@ -239,11 +241,11 @@ class ShowThemeDataColors extends StatelessWidget {
               ),
               // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
               // Sill included in Flutter 3.3 though, so we keep it in.
-              ColorCard(
-                label: 'Selected\nRow',
-                color: theme.selectedRowColor,
-                textColor: _onColor(theme.selectedRowColor, background),
-              ),
+              // ColorCard(
+              //   label: 'Selected\nRow',
+              //   color: theme.selectedRowColor,
+              //   textColor: _onColor(theme.selectedRowColor, background),
+              // ),
               ColorCard(
                 label: 'Unselected\nWidget',
                 color: theme.unselectedWidgetColor,
