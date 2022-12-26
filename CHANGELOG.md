@@ -2,6 +2,14 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 6.1.2
+
+**Dec 26, 2022**
+
+**FIX**
+
+- Fix for issue [#106 bottomSheetModalBackgroundColor not correctly set](https://github.com/rydmike/flex_color_scheme/issues/106). Thanks [mcssym](https://github.com/mcssym) for the fix [PR #107](https://github.com/rydmike/flex_color_scheme/pull/107).
+
 ## 6.1.1
 
 **Nov 22, 2022**

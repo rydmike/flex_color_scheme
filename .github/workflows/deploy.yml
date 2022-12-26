@@ -29,7 +29,7 @@ on:
     paths-ignore:
       - "**.md"
   release:
-    branches: [master]
+    branches: [none]
     types: [published]
     paths-ignore:
       - "**.md"

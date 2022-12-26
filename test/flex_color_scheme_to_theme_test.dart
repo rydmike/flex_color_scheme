@@ -3158,6 +3158,49 @@ void main() {
         ),
       );
     });
+    // Test bottomSheet theming custom light M3
+    test(
+        'FCS7.101d MODAL GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a custom FlexSubThemesData, FAILING test for issue '
+        'https://github.com/rydmike/flex_color_scheme/issues/106 '
+        'EXPECT modal bottom surface and elevation 6 and 10 and border radius '
+        'top 20 and tinted backgrounds', () {
+      final ThemeData theme = FlexThemeData.light(
+        scheme: FlexScheme.sakura,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          bottomSheetRadius: 20,
+          bottomSheetModalElevation: 10,
+          bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+        ),
+      );
+      final ColorScheme scheme = theme.colorScheme;
+      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
+          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      expect(
+        theme.bottomSheetTheme.modalBackgroundColor,
+        equals(bottomSheetModalColor),
+      );
+      expect(
+        theme.bottomSheetTheme.modalElevation,
+        equals(10),
+      );
+      expect(
+        theme.bottomSheetTheme.clipBehavior,
+        equals(Clip.antiAlias),
+      );
+      expect(
+        theme.bottomSheetTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+        ),
+      );
+    });
     // Test default PopupMenu theming, light M2
     test(
         'FCS7.102a GIVEN a FlexColorScheme.light with useMaterial3:false '
