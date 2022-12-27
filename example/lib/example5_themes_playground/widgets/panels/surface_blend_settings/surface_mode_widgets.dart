@@ -166,6 +166,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
             PopupMenuItem<int>(
               value: i,
               child: ListTile(
+                tileColor: Colors.transparent,
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 leading: index == i
