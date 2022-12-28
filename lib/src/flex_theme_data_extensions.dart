@@ -945,10 +945,27 @@ extension FlexThemeData on ThemeData {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -1248,6 +1265,8 @@ extension FlexThemeData on ThemeData {
         materialTapTargetSize: materialTapTargetSize,
         pageTransitionsTheme: pageTransitionsTheme,
         fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
@@ -2150,10 +2169,27 @@ extension FlexThemeData on ThemeData {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -2451,6 +2487,8 @@ extension FlexThemeData on ThemeData {
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
         fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
         materialTapTargetSize: materialTapTargetSize,
         pageTransitionsTheme: pageTransitionsTheme,
         platform: platform,

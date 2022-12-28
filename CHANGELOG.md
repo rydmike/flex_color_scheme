@@ -17,19 +17,20 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Add ListTile theme.
 - Add new MenuBar theme?
 - Add new DrawerMenu theme?  
-- Add new colors.
-- Add fontFamilyFallback.
+- Maybe add new colors.
+- Added support for new tonal Material buttons.
 - Playground M3 mode panel header needs tint fix.
 - Remove Typography workaround in Playground.
 
 **NEW** 
 
-- Add support for new `ColorScheme` colors `scrim` and `outlineVariant`.
-- Add support for new tonal Material buttons.
+- Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
+- Added support for `fontFamilyFallback` and `package` so that a `copyWith` on `FlexColorScheme` generated `ThemeData` is not needed to use them. 
 
 **CHANGE**
 
-- Remove manual elevation tint for ...
+- Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
+
 
 **THEMES PLAYGROUND**
 

@@ -305,6 +305,8 @@ class FlexColorScheme with Diagnosticable {
     this.textTheme,
     this.primaryTextTheme,
     this.fontFamily,
+    this.fontFamilyFallback,
+    this.package,
     this.materialTapTargetSize,
     this.pageTransitionsTheme,
     this.platform,
@@ -729,8 +731,27 @@ class FlexColorScheme with Diagnosticable {
   /// A text theme that contrasts with the primary color.
   final TextTheme? primaryTextTheme;
 
-  /// Name of the font family to use as default for the theme.
+  /// Name of the font family to use as default font for the text theme in
+  /// created theme.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// name to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
   final String? fontFamily;
+
+  /// Name of the font families to use as fallback to main font family.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// fallback to default text theme and primary text theme, also passed
+  /// along to [ThemeData],
+  final List<String>? fontFamilyFallback;
+
+  /// Name of the font package to use with font fallback.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font package
+  /// to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
+  final String? package;
 
   /// Configures the hit test size of certain Material widgets.
   ///
@@ -2042,10 +2063,27 @@ class FlexColorScheme with Diagnosticable {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -2729,6 +2767,8 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
+      fontFamilyFallback: fontFamilyFallback,
+      package: package,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
       platform: platform,
@@ -3773,10 +3813,27 @@ class FlexColorScheme with Diagnosticable {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -4489,6 +4546,8 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme,
       primaryTextTheme: primaryTextTheme,
       fontFamily: fontFamily,
+      fontFamilyFallback: fontFamilyFallback,
+      package: package,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
       platform: platform,
@@ -5291,16 +5350,28 @@ class FlexColorScheme with Diagnosticable {
     TextTheme defPrimaryText =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
 
+    // ThemeData uses this to apply a font from fontFamily, fontFamilyFallback
+    // and package in this order to default text theme and primary text theme.
+    // We excluded the accent text theme since it is deprecated, Flutter SDK
+    // still applies font to it as well, not sure why it is kept around.
+    // This all works OK, but it resets all typography and it uses regular style
+    // and weight for all styles in the text theme. Consider defining the text
+    // theme explicitly via textTheme and primaryTextTheme with the custom
+    // font applied, at least if you want to use custom fonts and keep the
+    // standard typography, or supply your own complete typography with your
+    // custom text theme.
     if (fontFamily != null) {
-      // ThemeData uses this to apply a font from fontFamily. It works OK, but
-      // it resets all typography and it uses regular style and weight
-      // for all styles in the text theme. Consider defining the text theme
-      // explicitly via textTheme and primaryTextTheme with the custom
-      // font applied, at least if you want to use custom fonts and keep the
-      // standard typography, or supply your own complete typography with your
-      // custom text theme.
       defText = defText.apply(fontFamily: fontFamily);
       defPrimaryText = defPrimaryText.apply(fontFamily: fontFamily);
+    }
+    if (fontFamilyFallback != null) {
+      defText = defText.apply(fontFamilyFallback: fontFamilyFallback);
+      defPrimaryText =
+          defPrimaryText.apply(fontFamilyFallback: fontFamilyFallback);
+    }
+    if (package != null) {
+      defText = defText.apply(package: package);
+      defPrimaryText = defPrimaryText.apply(package: package);
     }
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
@@ -5702,6 +5773,8 @@ class FlexColorScheme with Diagnosticable {
       // som might pass along given value, which we may have used internally
       // in FlexColorScheme as well.
       fontFamily: fontFamily,
+      fontFamilyFallback: fontFamilyFallback,
+      package: package,
       visualDensity: visualDensity,
       useMaterial3: useMaterial3,
       materialTapTargetSize: materialTapTargetSize,
@@ -6687,6 +6760,8 @@ class FlexColorScheme with Diagnosticable {
     TextTheme? textTheme,
     TextTheme? primaryTextTheme,
     String? fontFamily,
+    List<String>? fontFamilyFallback,
+    String? package,
     MaterialTapTargetSize? materialTapTargetSize,
     PageTransitionsTheme? pageTransitionsTheme,
     TargetPlatform? platform,
@@ -6732,6 +6807,8 @@ class FlexColorScheme with Diagnosticable {
       textTheme: textTheme ?? this.textTheme,
       primaryTextTheme: primaryTextTheme ?? this.primaryTextTheme,
       fontFamily: fontFamily ?? this.fontFamily,
+      fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
+      package: package ?? this.package,
       materialTapTargetSize:
           materialTapTargetSize ?? this.materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
@@ -6786,6 +6863,8 @@ class FlexColorScheme with Diagnosticable {
         other.materialTapTargetSize == materialTapTargetSize &&
         other.pageTransitionsTheme == pageTransitionsTheme &&
         other.fontFamily == fontFamily &&
+        other.fontFamilyFallback == fontFamilyFallback &&
+        other.package == package &&
         other.platform == platform &&
         other.typography == typography &&
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
@@ -6830,6 +6909,8 @@ class FlexColorScheme with Diagnosticable {
         textTheme,
         primaryTextTheme,
         fontFamily,
+        fontFamilyFallback,
+        package,
         materialTapTargetSize,
         pageTransitionsTheme,
         platform,
@@ -6883,6 +6964,9 @@ class FlexColorScheme with Diagnosticable {
     properties.add(
         DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
+    properties.add(DiagnosticsProperty<List<String>>(
+        'fontFamilyFallback', fontFamilyFallback));
+    properties.add(DiagnosticsProperty<String>('package', package));
     properties.add(EnumProperty<MaterialTapTargetSize>(
         'materialTapTargetSize', materialTapTargetSize));
     properties.add(DiagnosticsProperty<PageTransitionsTheme>(
