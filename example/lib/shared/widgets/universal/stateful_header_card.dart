@@ -212,6 +212,7 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
             type: MaterialType.card,
             color: headerColor,
             child: ListTile(
+              tileColor: Colors.transparent,
               contentPadding: widget.headerPadding,
               leading: widget.leading,
               title: cardTitle,

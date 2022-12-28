@@ -38,6 +38,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Add separate UI to set elevation and background color of modal and none model `BottomSheet` independently.
 
+**FIX**
+
+- M3 mode panel header ListTile must use transparent tileColor in M3.
+
 ## 6.1.2
 
 **Dec 26, 2022**
