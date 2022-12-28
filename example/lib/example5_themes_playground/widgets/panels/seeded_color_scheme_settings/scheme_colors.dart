@@ -1157,7 +1157,7 @@ class SchemeColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.outlineVariant,
                         child: ColorNameValue(
-                          color: colorScheme.outline,
+                          color: colorScheme.outlineVariant,
                           textColor: _onColor(colorScheme.outlineVariant),
                           label: 'outline\u200BVariant',
                           tone: tones.outlineVariantTone,
