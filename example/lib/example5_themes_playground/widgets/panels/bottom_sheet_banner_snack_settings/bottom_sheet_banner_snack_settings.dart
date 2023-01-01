@@ -23,12 +23,11 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         : (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default (dark primary, 95% opacity)'
             : 'default (dark grey)';
-    // TODO(rydmike): Update BottomSheet M3 default when M3 version is released.
     final String sheetDefaultColorLabel =
         controller.useSubThemes && controller.useFlexColorScheme
             ? 'default (surface)'
             : useMaterial3
-                ? 'default (surfaceColor)' // Will become surface later in SDK.
+                ? 'default (surface)'
                 : 'default (theme.canvasColor)';
     final String sheetElevationDefaultLabel =
         controller.bottomSheetElevation == null
