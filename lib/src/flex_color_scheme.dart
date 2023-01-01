@@ -5685,9 +5685,12 @@ class FlexColorScheme with Diagnosticable {
         : null;
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
-    // Same as in ThemeData.from, but defined for use in the tooltip sub-theme.
-    // If our onSurface is primary tinted it has an effect on this divider too.
-    final Color dividerColor = colorScheme.onSurface.withAlpha(0x1E); // 12%
+    // Same as in ThemeData.from. Defined for use in the tooltip sub-theme.
+    // If our onSurface is primary tinted it has an effect on this divider in
+    // M2 too. In M3 use the new dividerColor colorScheme.outlineVariant.
+    final Color dividerColor = useMaterial3
+        ? colorScheme.outlineVariant
+        : colorScheme.onSurface.withAlpha(0x1F); // 12%
 
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration

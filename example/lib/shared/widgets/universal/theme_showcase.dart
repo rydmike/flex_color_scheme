@@ -1134,10 +1134,15 @@ class TabBarForAppBarShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
+    final bool useM3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
 
     final Color effectiveTabBackground = theme.appBarTheme.backgroundColor ??
-        (isDark ? colorScheme.surface : colorScheme.primary);
+        (isDark
+            ? colorScheme.surface
+            : useM3
+                ? colorScheme.surface
+                : colorScheme.primary);
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );

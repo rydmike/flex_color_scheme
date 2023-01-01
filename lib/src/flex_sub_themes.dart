@@ -1102,7 +1102,7 @@ class FlexSubThemes {
     // Flag for not using any defined color values in M3 mode, but instead
     // falling back to M3 theme defaults, when using Material 3.
     // We do this when no Scheme colors are selected to get the exact M3
-    // theme default. It is not possible due to SDK lChip theming issues
+    // theme default. It is not possible due to SDK Chip theming issues
     // and limitations to recreate the exact M3 Chip themes with any other
     // theme colors than the default built-in ones.
     // TODO(rydmike): Chip https://github.com/flutter/flutter/issues/115364
@@ -1925,6 +1925,16 @@ class FlexSubThemes {
           ),
         );
     }
+  }
+
+  //TODO(rydmike): Review LitTile need.
+  /// A [ListTileThemeData] with a flat API.
+  ///
+  /// At the moment this is only used to adjust the M3 default
+  /// [ListTile.tileColor] property to be transparent in Material 3.
+  ///
+  static ListTileThemeData listTileTheme({Color? tileColor}) {
+    return ListTileThemeData(tileColor: tileColor);
   }
 
   /// An opinionated [NavigationBarThemeData] with a flat API.
