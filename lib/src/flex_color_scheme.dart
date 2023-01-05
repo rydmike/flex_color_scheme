@@ -6279,7 +6279,7 @@ class FlexColorScheme with Diagnosticable {
               color: popupMenuColor,
               //
               // useMaterial3
-              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              // TODO(rydmike): Remove tint elev temp fix when M3 supported.
               //     ? ElevationOverlay.applySurfaceTint(
               //         popupMenuColor ?? colorScheme.surface,
               //         colorScheme.surfaceTint,
@@ -6322,13 +6322,13 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: bottomSheetColor,
               //
               // useMaterial3
-              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              // TODO(rydmike): Remove tint elev temp fix when M3 supported.
               //     ? ElevationOverlay.applySurfaceTint(bottomSheetColor,
               //         colorScheme.surfaceTint, bottomSheetElevation)
               //     : bottomSheetColor,
               modalBackgroundColor: bottomSheetModalColor,
               // useMaterial3
-              // // TODO(rydmike): Remove tint elev temp fix when M3 supported.
+              // TODO(rydmike): Remove tint elev temp fix when M3 supported.
               //     ? ElevationOverlay.applySurfaceTint(bottomSheetModalColor,
               //          colorScheme.surfaceTint, bottomSheetModalElevation)
               //       : bottomSheetModalColor,

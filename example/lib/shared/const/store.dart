@@ -495,8 +495,8 @@ class Store {
   // Key used to read and save the bottomSheetModalSchemeColor value.
   static const String keyBottomSheetModalSchemeColor =
       'bottomSheetModalSchemeColor';
-  // Default value for the bottomSheetModalSchemeColor, also used to reset settings.
-  // We use NULL as default, on nullable settings.
+  // Default value for the bottomSheetModalSchemeColor, also used to reset
+  // settings. We use NULL as default, on nullable settings.
   static const SchemeColor? defaultBottomSheetModalSchemeColor = null;
 
   // Key used to read and save the bottomSheetElevation value.

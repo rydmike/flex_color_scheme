@@ -1927,7 +1927,7 @@ class FlexSubThemes {
     }
   }
 
-  //TODO(rydmike): Review LitTile need.
+  // TODO(rydmike): Review LitTile need.
   /// A [ListTileThemeData] with a flat API.
   ///
   /// At the moment this is only used to adjust the M3 default

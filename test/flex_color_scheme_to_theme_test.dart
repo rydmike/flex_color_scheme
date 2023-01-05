@@ -3257,7 +3257,8 @@ void main() {
         useMaterial3: true,
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
-      // final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      // final ThemeData refTheme =
+      // ThemeData.from(colorScheme: theme.colorScheme);
       // TODO(rydmike): Clean out tint tests
       // final Color background = refTheme.colorScheme.surface;
       // TODO(rydmike): Temp M3 tint fix, will be null when M3 supported by SDK.
