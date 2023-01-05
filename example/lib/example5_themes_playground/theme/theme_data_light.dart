@@ -35,23 +35,23 @@ import 'flex_theme_light.dart';
 /// ThemeData is created with, thus using the same colors in your custom
 /// sub-themes.
 ThemeData themeDataLight(ThemeController controller) {
-  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
-  // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-  final Typography alwaysM3Typography =
-      Typography.material2021(platform: controller.platform);
-  final TextTheme? fakeM2TypographyTextTheme =
-      controller.useMaterial3 ? null : AppData.m2TextTheme;
   final ColorScheme colorScheme =
       flexColorSchemeLight(controller, Colors.black).toScheme;
-  final TextTheme? fakeM2TypographyPrimTextTheme =
-      controller.useMaterial3 ? null : AppData.m2TextTheme;
-  final bool primaryIsDark =
-      ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
-          Brightness.dark;
-  final TextTheme defPrimaryText =
-      primaryIsDark ? alwaysM3Typography.white : alwaysM3Typography.black;
-  final TextTheme effectivePrimaryTextTheme =
-      defPrimaryText.merge(fakeM2TypographyPrimTextTheme);
+  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
+  // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
+  // final Typography alwaysM3Typography =
+  //     Typography.material2021(platform: controller.platform);
+  // final TextTheme? fakeM2TypographyTextTheme =
+  //     controller.useMaterial3 ? null : AppData.m2TextTheme;
+  // final TextTheme? fakeM2TypographyPrimTextTheme =
+  //     controller.useMaterial3 ? null : AppData.m2TextTheme;
+  // final bool primaryIsDark =
+  //     ThemeData.estimateBrightnessForColor(colorScheme.primary) ==
+  //         Brightness.dark;
+  // final TextTheme defPrimaryText =
+  //     primaryIsDark ? alwaysM3Typography.white : alwaysM3Typography.black;
+  // final TextTheme effectivePrimaryTextTheme =
+  //     defPrimaryText.merge(fakeM2TypographyPrimTextTheme);
   // End of fix for workaround for issue #10386
 
   return ThemeData(
@@ -59,10 +59,10 @@ ThemeData themeDataLight(ThemeController controller) {
     fontFamily: controller.useAppFont ? AppData.font : null,
     // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
     // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    textTheme: fakeM2TypographyTextTheme,
+    // textTheme: fakeM2TypographyTextTheme,
     // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
     // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    primaryTextTheme: effectivePrimaryTextTheme,
+    // primaryTextTheme: effectivePrimaryTextTheme,
     // The ColorScheme we get here is the same one you can also generate
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
@@ -78,7 +78,10 @@ ThemeData themeDataLight(ThemeController controller) {
     useMaterial3: controller.useMaterial3,
     // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
     // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    typography: alwaysM3Typography,
+    typography: controller.useTextTheme
+        ? Typography.material2021(platform: controller.platform)
+        : Typography.material2018(platform: controller.platform),
+    // typography: alwaysM3Typography,
     // Typography used before workaround needed.
     // typography: Typography.material2018(platform: controller.platform),
 

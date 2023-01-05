@@ -11,21 +11,56 @@ import '../../shared/controllers/theme_controller.dart';
 ///
 /// The properties are typically in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
-  // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
+  // Are we using Typography 2021 or 2018?
+  String usedTypography = controller.useTextTheme
+      ? '  typography: Typography.material2021(platform: defaultTargetPlatform),'
+      : '  typography: Typography.material2018(platform: defaultTargetPlatform),';
+
+  // If FlexColorsScheme is not in use, return a default M3/M2 ColorScheme based
   // theme as a starting point suggestion.
   if (!controller.useFlexColorScheme) {
-    return '''
+    if (controller.useMaterial3) {
+      usedTypography = '\n  $usedTypography';
+      // M3 mode defaults to 2021 style, no need to specify it.
+      if (controller.useTextTheme && controller.useMaterial3) {
+        usedTypography = '';
+      }
+      return '''
+  // FlexColorScheme is not in use!
+  // Here is a default Material 3 starting point theme setup for you.
+  //
+  theme: ThemeData(
+    useMaterial3: true,$usedTypography 
+  ),
+  darkTheme: ThemeData(
+    useMaterial3: true,$usedTypography
+  ),
+  themeMode: ThemeMode.system,''';
+    } else {
+      return '''
   // FlexColorScheme is not in use!
   // Here is a default Material 2 starting point theme setup for you.
   //
   theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-    typography: Typography.material2021(platform: defaultTargetPlatform),
+  $usedTypography
   ),
   darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-    typography: Typography.material2021(platform: defaultTargetPlatform),
+  $usedTypography  
   ),
   themeMode: ThemeMode.system,''';
+    }
   }
+  // Typography code segment usage and style fix.
+  usedTypography = '$usedTypography\n';
+  // M3 mode defaults to 2021 style, no need to specify it when using M3.
+  if (controller.useTextTheme && controller.useMaterial3) {
+    usedTypography = '';
+  }
+  // M2 mode defaults to 2018 style, no need to specify it when using M2.
+  if (!controller.useTextTheme && !controller.useMaterial3) {
+    usedTypography = '';
+  }
+
   // Code for main theme setup, the effective colors setup.
   final FlexSchemeData scheme = AppColor.scheme(controller);
   // Get the enum index of scheme
@@ -148,14 +183,15 @@ String generateThemeDartCode(ThemeController controller) {
       controller.useM3ErrorColors && !controller.useKeyColors
           ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
           : '';
-  final String useMaterial3 = controller.useMaterial3
-      ? '  useMaterial3: ${controller.useMaterial3},\n'
-      : '';
   final String tintLightColor = controller.surfaceTintLight != null
       ? '  surfaceTint: ${controller.surfaceTintLight},\n'
       : '';
   final String tintDarkColor = controller.surfaceTintDark != null
       ? '  surfaceTint: ${controller.surfaceTintDark},\n'
+      : '';
+  // Are we using Material3?
+  final String useMaterial3 = controller.useMaterial3
+      ? '  useMaterial3: ${controller.useMaterial3},\n'
       : '';
   //
   // Code for FlexSubThemesData setup.
@@ -1128,6 +1164,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesLight'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$usedTypography'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the playground font, add GoogleFonts package and uncomment\n'
@@ -1152,6 +1189,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesDark'
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$usedTypography'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the Playground font, add GoogleFonts package and uncomment\n'

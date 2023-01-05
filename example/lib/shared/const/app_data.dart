@@ -196,96 +196,96 @@ class AppData {
   // in the app dynamically. Instead is always uses M3 2021 Typography and
   // simulates 2018 Typography. This is done to avoid issue:
   // https://github.com/flutter/flutter/issues/103864
-  static const TextTheme m2TextTheme = TextTheme(
-    displayLarge: TextStyle(
-        debugLabel: 'englishLike displayLarge 2018',
-        fontSize: 96.0,
-        fontWeight: FontWeight.w300,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: -1.5),
-    displayMedium: TextStyle(
-        debugLabel: 'englishLike displayMedium 2018',
-        fontSize: 60.0,
-        fontWeight: FontWeight.w300,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: -0.5),
-    displaySmall: TextStyle(
-        debugLabel: 'englishLike displaySmall 2018',
-        fontSize: 48.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.0),
-    headlineLarge: TextStyle(
-        debugLabel: 'englishLike headlineLarge 2018',
-        fontSize: 40.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.25),
-    headlineMedium: TextStyle(
-        debugLabel: 'englishLike headlineMedium 2018',
-        fontSize: 34.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.25),
-    headlineSmall: TextStyle(
-        debugLabel: 'englishLike headlineSmall 2018',
-        fontSize: 24.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.0),
-    titleLarge: TextStyle(
-        debugLabel: 'englishLike titleLarge 2018',
-        fontSize: 20.0,
-        fontWeight: FontWeight.w500,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.15),
-    titleMedium: TextStyle(
-        debugLabel: 'englishLike titleMedium 2018',
-        fontSize: 16.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.15),
-    titleSmall: TextStyle(
-        debugLabel: 'englishLike titleSmall 2018',
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.1),
-    bodyLarge: TextStyle(
-        debugLabel: 'englishLike bodyLarge 2018',
-        fontSize: 16.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.5),
-    bodyMedium: TextStyle(
-        debugLabel: 'englishLike bodyMedium 2018',
-        fontSize: 14.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.25),
-    bodySmall: TextStyle(
-        debugLabel: 'englishLike bodySmall 2018',
-        fontSize: 12.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 0.4),
-    labelLarge: TextStyle(
-        debugLabel: 'englishLike labelLarge 2018',
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 1.25),
-    labelMedium: TextStyle(
-        debugLabel: 'englishLike labelMedium 2018',
-        fontSize: 11.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 1.5),
-    labelSmall: TextStyle(
-        debugLabel: 'englishLike labelSmall 2018',
-        fontSize: 10.0,
-        fontWeight: FontWeight.w400,
-        textBaseline: TextBaseline.alphabetic,
-        letterSpacing: 1.5),
-  );
+  // static const TextTheme m2TextTheme = TextTheme(
+  //   displayLarge: TextStyle(
+  //       debugLabel: 'englishLike displayLarge 2018',
+  //       fontSize: 96.0,
+  //       fontWeight: FontWeight.w300,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: -1.5),
+  //   displayMedium: TextStyle(
+  //       debugLabel: 'englishLike displayMedium 2018',
+  //       fontSize: 60.0,
+  //       fontWeight: FontWeight.w300,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: -0.5),
+  //   displaySmall: TextStyle(
+  //       debugLabel: 'englishLike displaySmall 2018',
+  //       fontSize: 48.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.0),
+  //   headlineLarge: TextStyle(
+  //       debugLabel: 'englishLike headlineLarge 2018',
+  //       fontSize: 40.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.25),
+  //   headlineMedium: TextStyle(
+  //       debugLabel: 'englishLike headlineMedium 2018',
+  //       fontSize: 34.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.25),
+  //   headlineSmall: TextStyle(
+  //       debugLabel: 'englishLike headlineSmall 2018',
+  //       fontSize: 24.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.0),
+  //   titleLarge: TextStyle(
+  //       debugLabel: 'englishLike titleLarge 2018',
+  //       fontSize: 20.0,
+  //       fontWeight: FontWeight.w500,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.15),
+  //   titleMedium: TextStyle(
+  //       debugLabel: 'englishLike titleMedium 2018',
+  //       fontSize: 16.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.15),
+  //   titleSmall: TextStyle(
+  //       debugLabel: 'englishLike titleSmall 2018',
+  //       fontSize: 14.0,
+  //       fontWeight: FontWeight.w500,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.1),
+  //   bodyLarge: TextStyle(
+  //       debugLabel: 'englishLike bodyLarge 2018',
+  //       fontSize: 16.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.5),
+  //   bodyMedium: TextStyle(
+  //       debugLabel: 'englishLike bodyMedium 2018',
+  //       fontSize: 14.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.25),
+  //   bodySmall: TextStyle(
+  //       debugLabel: 'englishLike bodySmall 2018',
+  //       fontSize: 12.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 0.4),
+  //   labelLarge: TextStyle(
+  //       debugLabel: 'englishLike labelLarge 2018',
+  //       fontSize: 14.0,
+  //       fontWeight: FontWeight.w500,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 1.25),
+  //   labelMedium: TextStyle(
+  //       debugLabel: 'englishLike labelMedium 2018',
+  //       fontSize: 11.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 1.5),
+  //   labelSmall: TextStyle(
+  //       debugLabel: 'englishLike labelSmall 2018',
+  //       fontSize: 10.0,
+  //       fontWeight: FontWeight.w400,
+  //       textBaseline: TextBaseline.alphabetic,
+  //       letterSpacing: 1.5),
+  // );
 }
