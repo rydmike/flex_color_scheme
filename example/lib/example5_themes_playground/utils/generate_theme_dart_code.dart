@@ -29,10 +29,11 @@ String generateThemeDartCode(ThemeController controller) {
   // FlexColorScheme is not in use!
   // Here is a default Material 3 starting point theme setup for you.
   //
-  theme: ThemeData(
+  theme: ThemeData(    
     useMaterial3: true,$usedTypography 
   ),
   darkTheme: ThemeData(
+    brightness: Brightness.dark,
     useMaterial3: true,$usedTypography
   ),
   themeMode: ThemeMode.system,''';
@@ -41,10 +42,12 @@ String generateThemeDartCode(ThemeController controller) {
   // FlexColorScheme is not in use!
   // Here is a default Material 2 starting point theme setup for you.
   //
-  theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
+  theme: ThemeData(
+    colorScheme: const ColorScheme.light(),
   $usedTypography
   ),
-  darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
+  darkTheme: ThemeData(    
+    colorScheme: const ColorScheme.dark(),
   $usedTypography  
   ),
   themeMode: ThemeMode.system,''';
@@ -224,6 +227,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
+  final String useOpacityBasedDividerInM3 = controller.useM2StyleDividerInM3 &&
+          controller.useMaterial3
+      ? '    useOpacityBasedDividerInM3: ${controller.useM2StyleDividerInM3},\n'
+      : '';
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
@@ -740,6 +747,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$blendLightTextTheme'
           '$useTextTheme'
+          '$useOpacityBasedDividerInM3'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
@@ -876,6 +884,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$blendDarkTextTheme'
           '$useTextTheme'
+          '$useOpacityBasedDividerInM3'
           //
           '$defRadius'
           //

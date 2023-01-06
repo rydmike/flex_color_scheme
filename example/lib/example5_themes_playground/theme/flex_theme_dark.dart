@@ -124,6 +124,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,
+            // Divider settings
+            useOpacityBasedDividerInM3: controller.useM2StyleDividerInM3,
             // Outline default thickness settings.
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,

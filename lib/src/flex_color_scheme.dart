@@ -5691,12 +5691,16 @@ class FlexColorScheme with Diagnosticable {
         : null;
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
-    // Same as in ThemeData.from. Defined for use in the tooltip sub-theme.
-    // If our onSurface is primary tinted it has an effect on this divider in
-    // M2 too. In M3 use the new dividerColor colorScheme.outlineVariant.
-    final Color dividerColor = useMaterial3
+    // Same as in ThemeData. Defined for use in the tooltip sub-theme.
+    // In M3 use the new dividerColor colorScheme.outlineVariant,
+    // unless useOpacityBasedDividerInM3 is set to true.
+    final Color dividerColor = (useMaterial3 &&
+                (useSubThemes && !subTheme.useOpacityBasedDividerInM3)) ||
+            (useMaterial3 && !useSubThemes)
         ? colorScheme.outlineVariant
-        : colorScheme.onSurface.withAlpha(0x1F); // 12%
+        : isDark
+            ? const Color(0x1FFFFFFF) // White 12%
+            : const Color(0x1F000000); // Black 12%
 
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration
@@ -5820,6 +5824,12 @@ class FlexColorScheme with Diagnosticable {
       cardColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
+      // Create a Divider theme only when sub themes is used and we want M2
+      // style in M3. Otherwise we keep the theme as default.
+      dividerTheme:
+          useMaterial3 && (useSubThemes && subTheme.useOpacityBasedDividerInM3)
+              ? DividerThemeData(color: dividerColor)
+              : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
       // backgroundColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.

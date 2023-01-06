@@ -155,14 +155,14 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // great for contrast colored text, do use them too.
             blendTextTheme: controller.blendLightTextTheme,
             // Opt in/out of the Material 3 style matched TextTheme geometry, or
-            // Typography, as it is called in Flutter SDK. The M3 Typography is
-            // not yet natively available in Flutter SDK 2.10.3 or earlier,
-            // this offers it as a way to use it already now.
+            // Typography, as it is called in Flutter SDK.
             useTextTheme: controller.useTextTheme,
+            // Divider settings
+            useOpacityBasedDividerInM3: controller.useM2StyleDividerInM3,
             // Outline thickness theming
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
-            // Prefer Flutter SDK null default behavior for navigaor sub-themes,
+            // Prefer Flutter SDK null default behavior for navigator themes,
             // when possible.
             useFlutterDefaults: controller.useFlutterDefaults,
             // Value to adjust themed border radius on widgets with

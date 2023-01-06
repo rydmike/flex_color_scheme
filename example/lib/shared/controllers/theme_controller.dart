@@ -72,6 +72,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
+    _useM2StyleDividerInM3 = await _themeService.load(
+        Store.keyUseM2StyleDividerInM3, Store.defaultUseM2StyleDividerInM3);
     _useAppFont =
         await _themeService.load(Store.keyUseAppFont, Store.defaultUseAppFont);
     _usedScheme =
@@ -548,6 +550,7 @@ class ThemeController with ChangeNotifier {
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
     setUseTextTheme(Store.defaultUseTextTheme, false);
+    setUseM2StyleDividerInM3(Store.defaultUseM2StyleDividerInM3, false);
     setUseAppFont(Store.defaultUseAppFont, false);
     setUsedScheme(Store.defaultUsedScheme, false);
     setSchemeIndex(Store.defaultSchemeIndex, false);
@@ -903,6 +906,16 @@ class ThemeController with ChangeNotifier {
     _useTextTheme = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseTextTheme, value));
+  }
+
+  late bool _useM2StyleDividerInM3;
+  bool get useM2StyleDividerInM3 => _useM2StyleDividerInM3;
+  void setUseM2StyleDividerInM3(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useM2StyleDividerInM3) return;
+    _useM2StyleDividerInM3 = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyUseM2StyleDividerInM3, value));
   }
 
   late bool _useAppFont;

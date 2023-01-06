@@ -13,7 +13,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added support for Material 3 buttons `FilledButton` and `FilledButton.tonal`.
   - Supported via `FlexSubThemes.filledButtonTheme` that is controlled via `FlexSubThemesData` properties `filledButtonRadius`, `filledButtonSchemeColor` and `filledButtonTextStyle`.
   - When setting up theming for `FilledButton` it was noticed that variant `FilledButton.tonal` cannot be themed separately, see issue: https://github.com/flutter/flutter/issues/115827.
-  
+- Added option to keep using M2 style Divider in M3. The in M3 used primary color tinted outlineVariant does not fit on all colors. The M2 style based on black or white with opacity does. It is also less prominent than the M3 style and may be preferred. Set `FlexSubThemesData` property `useOpacityBasedDividerInM3` to true to use the M2 style in M3. Defaults to false. 
+    - FlexColorScheme also sets `ThemeData.dividerColor` to `ThemeData.colorScheme.outlineVariant` when `ThemeData.useMaterial3` is `true`. This keeps the in Flutter SDK to be deprecated `ThemeData.dividerColor` always same as actually used effective `Divider` color. Thus, if a legacy app uses `Theme.of(context).dividerColor`, while it still exists, to set a color it, and expects it to then be the same color as effective `Divider` color, it will be so in FCS regardless of if M2 or M3 is being used. 
+
 **CHANGE**
 
 - Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
@@ -29,6 +31,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Improved codegen for used Typography selection, only shown when needed.
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
+- Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 
 
 **FIX**
@@ -40,11 +43,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
+- Review M3 Playground component colors and add new buttons to it.  
 - FIX Material ShowCase elevation shadow.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on TabBar.
 - Clean up tech debt on AppBar  
-- Add optional opinionated Divider theme setting to use M2 style in M3.
 - Maybe add BottomAppBar theme.
 - Maybe add DropdownMenu theme.  
 - Maybe add Drawer theme.
@@ -52,7 +55,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add ListTile theme.
 - Maybe add new MenuBar theme.
 - Maybe add new DrawerMenu theme.
-- Maybe add new M3 optimized themes and colors.
+- Maybe add some new M3 optimized color schemes.
 - Review and fix test coverage.
 - Review and test all examples. 
 - Add important changes to docs.flexcolorscheme.com:

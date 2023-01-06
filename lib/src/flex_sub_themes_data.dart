@@ -115,6 +115,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.blendTextTheme = true,
     this.useTextTheme = true,
+    this.useOpacityBasedDividerInM3 = false,
     //
     this.defaultRadius,
     this.buttonMinSize,
@@ -530,6 +531,20 @@ class FlexSubThemesData with Diagnosticable {
   /// and not FlexColorScheme related, for more info see issue:
   /// https://github.com/flutter/flutter/issues/103864.
   final bool useTextTheme;
+
+  /// Determines if opacity based divider is used in Material 3.
+  ///
+  /// Material 3 uses [ColorScheme.outlineVariant] in its default
+  /// [Divider] style. Set this to false to use Material 2 style [Divider]
+  /// in Material 3, that is black with alpha 1F in light theme and white with
+  /// alpha 1F in dark theme.
+  ///
+  /// The primary tinted [ColorScheme.outlineVariant] may not work universally
+  /// on all background colors. The white and black variants with some
+  /// transparency works on all background colors.
+  ///
+  /// Defaults to false.
+  final bool useOpacityBasedDividerInM3;
 
   /// Border radius used on all widgets when [FlexColorScheme] use its
   /// [FlexSubThemesData] to configure sub-themes with [FlexSubThemes].
@@ -2070,6 +2085,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final bool? blendTextTheme,
     final bool? useTextTheme,
+    final bool? useOpacityBasedDividerInM3,
     //
     final double? defaultRadius,
     final Size? buttonMinSize,
@@ -2244,6 +2260,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
+      useOpacityBasedDividerInM3:
+          useOpacityBasedDividerInM3 ?? this.useOpacityBasedDividerInM3,
       //
       defaultRadius: defaultRadius ?? this.defaultRadius,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
@@ -2539,6 +2557,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
+        other.useOpacityBasedDividerInM3 == useOpacityBasedDividerInM3 &&
         //
         other.defaultRadius == defaultRadius &&
         other.buttonMinSize == buttonMinSize &&
@@ -2760,6 +2779,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         blendTextTheme,
         useTextTheme,
+        useOpacityBasedDividerInM3,
         //
         defaultRadius,
         buttonMinSize,
@@ -2939,6 +2959,9 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
+    properties.add(DiagnosticsProperty<bool>(
+        'useOpacityBasedDividerInM3', useOpacityBasedDividerInM3));
+    //
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
     properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(

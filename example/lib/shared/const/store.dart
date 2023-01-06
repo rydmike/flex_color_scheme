@@ -58,6 +58,11 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseTextTheme = true;
 
+  // Key used to read and save the useM2StyleDividerInM3 value.
+  static const String keyUseM2StyleDividerInM3 = 'useM2StyleDividerInM3';
+  // Default value for the useM2StyleDividerInM3, also used to reset settings.
+  static const bool defaultUseM2StyleDividerInM3 = true;
+
   // Key used to read and save the useAppFont value.
   static const String keyUseAppFont = 'useAppFont';
   // Default value for the useAppFont, also used to reset settings.
