@@ -198,16 +198,16 @@ class FilledButtonTonalShowcase extends StatelessWidget {
       children: <Widget>[
         FilledButton.tonal(
           onPressed: () {},
-          child: const Text('Tonal button'),
+          child: const Text('Filled tonal button'),
         ),
         FilledButton.tonalIcon(
           onPressed: () {},
           icon: const Icon(Icons.add),
-          label: const Text('Tonal icon'),
+          label: const Text('Filled tonal icon'),
         ),
         const FilledButton.tonal(
           onPressed: null,
-          child: Text('Tonal button'),
+          child: Text('Filled tonal button'),
         ),
       ],
     );

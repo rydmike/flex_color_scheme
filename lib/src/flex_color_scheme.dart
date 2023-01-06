@@ -6097,6 +6097,16 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : null,
+      filledButtonTheme: useSubThemes
+          ? FlexSubThemes.filledButtonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.filledButtonSchemeColor,
+              radius: subTheme.filledButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.filledButtonTextStyle,
+            )
+          : null,
       elevatedButtonTheme: useSubThemes
           ? FlexSubThemes.elevatedButtonTheme(
               colorScheme: colorScheme,

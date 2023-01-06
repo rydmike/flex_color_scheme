@@ -363,6 +363,12 @@ class ThemeController with ChangeNotifier {
     _textButtonBorderRadius = await _themeService.load(
         Store.keyTextButtonBorderRadius, Store.defaultTextButtonBorderRadius);
     //
+    _filledButtonSchemeColor = await _themeService.load(
+        Store.keyFilledButtonSchemeColor, Store.defaultFilledButtonSchemeColor);
+    _filledButtonBorderRadius = await _themeService.load(
+        Store.keyFilledButtonBorderRadius,
+        Store.defaultFilledButtonBorderRadius);
+    //
     _elevatedButtonSchemeColor = await _themeService.load(
         Store.keyElevatedButtonSchemeColor,
         Store.defaultElevatedButtonSchemeColor);
@@ -704,6 +710,9 @@ class ThemeController with ChangeNotifier {
     // Button SETTINGS.
     setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
     setTextButtonBorderRadius(Store.defaultTextButtonBorderRadius, false);
+    //
+    setFilledButtonSchemeColor(Store.defaultFilledButtonSchemeColor, false);
+    setFilledButtonBorderRadius(Store.defaultFilledButtonBorderRadius, false);
     //
     setElevatedButtonSchemeColor(Store.defaultElevatedButtonSchemeColor, false);
     setElevatedButtonSecondarySchemeColor(
@@ -2046,6 +2055,24 @@ class ThemeController with ChangeNotifier {
     _textButtonBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTextButtonBorderRadius, value));
+  }
+
+  late SchemeColor? _filledButtonSchemeColor;
+  SchemeColor? get filledButtonSchemeColor => _filledButtonSchemeColor;
+  void setFilledButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _filledButtonSchemeColor) return;
+    _filledButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyFilledButtonSchemeColor, value));
+  }
+
+  late double? _filledButtonBorderRadius;
+  double? get filledButtonBorderRadius => _filledButtonBorderRadius;
+  void setFilledButtonBorderRadius(double? value, [bool notify = true]) {
+    if (value == _filledButtonBorderRadius) return;
+    _filledButtonBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyFilledButtonBorderRadius, value));
   }
 
   late SchemeColor? _elevatedButtonSchemeColor;

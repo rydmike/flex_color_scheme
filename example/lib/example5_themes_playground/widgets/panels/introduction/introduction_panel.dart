@@ -157,7 +157,7 @@ class IntroductionPanel extends StatelessWidget {
               'Want to use the FlexColorScheme theme you configured here in '
               'your Flutter app? Then Copy the setup code, paste it into your '
               'Flutter app, import FlexColorScheme, and theming is done.'),
-          trailing: ElevatedButton(
+          trailing: FilledButton(
             onPressed: controller.useFlexColorScheme
                 ? () {
                     // ignore: discarded_futures
@@ -225,7 +225,7 @@ class IntroductionPanel extends StatelessWidget {
         ),
         ListTile(
           subtitle: const Text('Set back to actual platform'),
-          trailing: ElevatedButton(
+          trailing: FilledButton(
             onPressed: () {
               controller.setPlatform(defaultTargetPlatform);
             },

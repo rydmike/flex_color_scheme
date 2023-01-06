@@ -726,6 +726,18 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultTextButtonBorderRadius = null;
 
+  // Key used to read and save the filledButtonSchemeColor value.
+  static const String keyFilledButtonSchemeColor = 'filledButtonSchemeColor';
+  // Default value for the filledButtonSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultFilledButtonSchemeColor = null;
+
+  // Key used to read and save the filledButtonBorderRadius value.
+  static const String keyFilledButtonBorderRadius = 'filledButtonBorderRadius';
+  // Default value for the filledButtonBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultFilledButtonBorderRadius = null;
+
   // Key used to read and save the elevatedButtonSchemeColor value.
   static const String keyElevatedButtonSchemeColor =
       'elevatedButtonSchemeColor';

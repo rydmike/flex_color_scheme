@@ -264,6 +264,10 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    textButtonRadius: ${controller.textButtonBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String filledButtonBorderRadius = controller.filledButtonBorderRadius !=
+          null
+      ? '    filledButtonRadius: ${controller.filledButtonBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String elevatedButtonBorderRadius = controller
               .elevatedButtonBorderRadius !=
           null
@@ -287,6 +291,11 @@ String generateThemeDartCode(ThemeController controller) {
               controller.textButtonSchemeColor == null
           ? ''
           : '    textButtonSchemeColor: ${controller.textButtonSchemeColor},\n';
+  final String filledButtonSchemeColor = controller.filledButtonSchemeColor ==
+              SchemeColor.primary ||
+          controller.filledButtonSchemeColor == null
+      ? ''
+      : '    filledButtonSchemeColor: ${controller.filledButtonSchemeColor},\n';
   final String elevatedButtonSchemeColor = controller
                   .elevatedButtonSchemeColor ==
               SchemeColor.primary ||
@@ -740,6 +749,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
           //
+          '$filledButtonBorderRadius'
+          '$filledButtonSchemeColor'
+          //
           '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
           '$elevatedButtonSecondarySchemeColor'
@@ -872,6 +884,9 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
+          //
+          '$filledButtonBorderRadius'
+          '$filledButtonSchemeColor'
           //
           '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'

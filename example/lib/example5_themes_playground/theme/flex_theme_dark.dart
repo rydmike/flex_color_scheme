@@ -132,6 +132,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
             textButtonSchemeColor: controller.textButtonSchemeColor,
+            // FilledButton settings.
+            filledButtonRadius: controller.filledButtonBorderRadius,
+            filledButtonSchemeColor: controller.filledButtonSchemeColor,
             // ElevatedButton settings.
             elevatedButtonRadius: controller.elevatedButtonBorderRadius,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,

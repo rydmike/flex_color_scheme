@@ -40,7 +40,7 @@ class ThemeCode extends StatelessWidget {
           title: const Text('FlexColorScheme API Code'),
           subtitle: const Text('This is the setup code for the light and dark '
               'theme you have configured. It changes as you adjust settings.'),
-          trailing: ElevatedButton(
+          trailing: FilledButton(
             onPressed: () {
               unawaited(_handleCopyCode(context, code));
             },

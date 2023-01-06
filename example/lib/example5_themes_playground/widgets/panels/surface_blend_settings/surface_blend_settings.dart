@@ -123,7 +123,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             title: const Text('Set light blend and tint color back to default'),
             subtitle: const Text('Sets custom blend and tint color back '
                 'to primary color'),
-            trailing: ElevatedButton(
+            trailing: FilledButton(
               onPressed: controller.surfaceTintLight != null
                   ? () {
                       controller.setSurfaceTintLight(null);
@@ -286,7 +286,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             title: const Text('Set dark blend and tint color back to default'),
             subtitle: const Text('Sets custom blend and tint color back '
                 'to primary color'),
-            trailing: ElevatedButton(
+            trailing: FilledButton(
               onPressed: controller.surfaceTintDark != null
                   ? () {
                       controller.setSurfaceTintDark(null);

@@ -69,6 +69,8 @@ import 'flex_sub_themes.dart';
 /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via
 ///   [FlexSubThemes.elevatedButtonTheme].
+/// * [FilledButtonThemeData] for [FilledButton] via
+///   [FlexSubThemes.filledButtonTheme].
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [FlexSubThemes.floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via
@@ -124,6 +126,15 @@ class FlexSubThemesData with Diagnosticable {
     this.textButtonRadius,
     this.textButtonSchemeColor,
     this.textButtonTextStyle,
+    //
+    this.filledButtonRadius,
+    this.filledButtonSchemeColor,
+    this.filledButtonTextStyle,
+    //
+    // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
+    // this.filledButtonTonalRadius,
+    // this.filledButtonTonalSchemeColor,
+    // this.filledButtonTonalTextStyle,
     //
     this.elevatedButtonRadius,
     this.elevatedButtonElevation,
@@ -614,7 +625,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [TextButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? textButtonRadius;
 
@@ -631,10 +642,51 @@ class FlexSubThemesData with Diagnosticable {
   /// [foregroundColor] is used instead.
   final MaterialStateProperty<TextStyle?>? textButtonTextStyle;
 
+  /// Border radius override value for [FilledButton].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  /// https://m3.material.io/components/buttons/specs
+  final double? filledButtonRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [FilledButton] use as its base theme color.
+  ///
+  /// If not defined it defaults to theme.colorScheme.primary color via
+  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  final SchemeColor? filledButtonSchemeColor;
+
+  /// The style for the [FilledButton]'s [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundColor] is used instead.
+  final MaterialStateProperty<TextStyle?>? filledButtonTextStyle;
+
+  // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
+  // /// Border radius override value for [FilledButton.tonal].
+  // ///
+  // /// If not defined and [defaultRadius] is undefined, defaults to
+  // /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  // /// https://m3.material.io/components/buttons/specs
+  // final double? filledButtonTonalRadius;
+  //
+  // /// Defines which [Theme] based [ColorScheme] based color the
+  // /// [FilledButton.tonal] use as its base theme color.
+  // ///
+  // /// If not defined it defaults to theme.colorScheme.primary color via
+  // /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  // final SchemeColor? filledButtonTonalSchemeColor;
+  //
+  // /// The style for the [FilledButton.tonal]'s [Text] widget descendants.
+  // ///
+  // /// The color of the [textStyle] is typically not used directly, the
+  // /// [foregroundColor] is used instead.
+  // final MaterialStateProperty<TextStyle?>? filledButtonTonalTextStyle;
+
   /// Border radius value for [ElevatedButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? elevatedButtonRadius;
 
@@ -681,7 +733,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [OutlinedButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp, based on M3 Specification
+  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? outlinedButtonRadius;
 
@@ -2030,6 +2082,15 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? textButtonSchemeColor,
     final MaterialStateProperty<TextStyle?>? textButtonTextStyle,
     //
+    final double? filledButtonRadius,
+    final SchemeColor? filledButtonSchemeColor,
+    final MaterialStateProperty<TextStyle?>? filledButtonTextStyle,
+    //
+    // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
+    // final double? filledButtonTonalRadius,
+    // final SchemeColor? filledButtonTonalSchemeColor,
+    // final MaterialStateProperty<TextStyle?>? filledButtonTonalTextStyle,
+    //
     final double? elevatedButtonRadius,
     final double? elevatedButtonElevation,
     final SchemeColor? elevatedButtonSchemeColor,
@@ -2195,6 +2256,20 @@ class FlexSubThemesData with Diagnosticable {
       textButtonSchemeColor:
           textButtonSchemeColor ?? this.textButtonSchemeColor,
       textButtonTextStyle: textButtonTextStyle ?? this.textButtonTextStyle,
+      //
+      filledButtonRadius: filledButtonRadius ?? this.filledButtonRadius,
+      filledButtonSchemeColor:
+          filledButtonSchemeColor ?? this.filledButtonSchemeColor,
+      filledButtonTextStyle:
+          filledButtonTextStyle ?? this.filledButtonTextStyle,
+      //
+      // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
+      // filledButtonTonalRadius:
+      //     filledButtonTonalRadius ?? this.filledButtonTonalRadius,
+      // filledButtonTonalSchemeColor:
+      //     filledButtonTonalSchemeColor ?? this.filledButtonTonalSchemeColor,
+      // filledButtonTonalTextStyle:
+      //     filledButtonTonalTextStyle ?? this.filledButtonTonalTextStyle,
       //
       elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
       elevatedButtonElevation:
@@ -2476,6 +2551,15 @@ class FlexSubThemesData with Diagnosticable {
         other.textButtonSchemeColor == textButtonSchemeColor &&
         other.textButtonTextStyle == textButtonTextStyle &&
         //
+        other.filledButtonRadius == filledButtonRadius &&
+        other.filledButtonSchemeColor == filledButtonSchemeColor &&
+        other.filledButtonTextStyle == filledButtonTextStyle &&
+        //
+        // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
+        // other.filledButtonTonalRadius == filledButtonTonalRadius &&
+        // other.filledButtonTonalSchemeColor == filledButtonTonalSchemeColor &&
+        // other.filledButtonTonalTextStyle == filledButtonTonalTextStyle &&
+        //
         other.elevatedButtonRadius == elevatedButtonRadius &&
         other.elevatedButtonElevation == elevatedButtonElevation &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
@@ -2688,6 +2772,15 @@ class FlexSubThemesData with Diagnosticable {
         textButtonSchemeColor,
         textButtonTextStyle,
         //
+        filledButtonRadius,
+        filledButtonSchemeColor,
+        filledButtonTextStyle,
+        //
+        // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
+        // filledButtonTonalRadius,
+        // filledButtonTonalSchemeColor,
+        // filledButtonTonalTextStyle,
+        //
         elevatedButtonRadius,
         elevatedButtonElevation,
         elevatedButtonSchemeColor,
@@ -2861,6 +2954,21 @@ class FlexSubThemesData with Diagnosticable {
         'textButtonSchemeColor', textButtonSchemeColor));
     properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
         'textButtonTextStyle', textButtonTextStyle));
+    //
+    properties.add(
+        DiagnosticsProperty<double>('filledButtonRadius', filledButtonRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'filledButtonSchemeColor', filledButtonSchemeColor));
+    properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+        'filledButtonTextStyle', filledButtonTextStyle));
+    //
+    // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
+    // properties.add(DiagnosticsProperty<double>(
+    //     'filledButtonTonalRadius', filledButtonTonalRadius));
+    // properties.add(EnumProperty<SchemeColor>(
+    //     'filledButtonTonalSchemeColor', filledButtonTonalSchemeColor));
+    // properties.add(DiagnosticsProperty<MaterialStateProperty<TextStyle?>>(
+    //     'filledButtonTonalTextStyle', filledButtonTonalTextStyle));
     //
     properties.add(DiagnosticsProperty<double>(
         'elevatedButtonRadius', elevatedButtonRadius));

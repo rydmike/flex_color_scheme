@@ -158,6 +158,8 @@ enum SchemeColor {
 /// * [ChipThemeData] for [Chip] via [chipTheme].
 /// * [DialogTheme] for [Dialog] via [dialogTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via [elevatedButtonTheme].
+/// * [FilledButtonThemeData] for [FilledButton] via
+///   [FlexSubThemes.filledButtonTheme].
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
@@ -413,7 +415,7 @@ class FlexSubThemes {
     /// The button corner radius.
     ///
     /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
+    /// based on earlier M3 specification, that was later changed to stadium.
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
@@ -1530,6 +1532,120 @@ class FlexSubThemes {
         ),
       );
     }
+  }
+
+  /// An opinionated [FilledButtonThemeData] theme.
+  ///
+  /// Requires a [ColorScheme], the color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  ///
+  /// The adjustable button corner [radius] defaults to Stadium in M3, and FCS
+  /// uses 20 in M2, where SDK M2 defaults to 4.
+  static FilledButtonThemeData filledButtonTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner radius.
+    final double? radius,
+
+    /// Padding for the button theme.
+    ///
+    /// Defaults to null and uses `styleFrom` constructors default padding.
+    ///
+    /// M3 has more horizontal padding 24dp, but the tighter default padding
+    /// in M2 that is 16dp looks fine as well when using stadium borders
+    /// as in M3.
+    ///
+    /// If null and [useMaterial3] is true in the context, the correct M3
+    /// button theme default computed button padding for M3 will be used.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
+    /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+    /// [useMaterial3] is true.
+    final Size? minButtonSize,
+
+    /// The style for the button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Get selected color, defaults to primary.
+    final Color onBaseColor =
+        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    MaterialStateProperty<Color?>? backgroundColor;
+    MaterialStateProperty<Color?>? foregroundColor;
+    MaterialStateProperty<Color?>? overlayColor;
+
+    if (baseSchemeColor != null) {
+      backgroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.12);
+        }
+        return baseColor;
+      });
+
+      foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return onBaseColor;
+      });
+
+      overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return onBaseColor.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return onBaseColor.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return onBaseColor.withOpacity(0.12);
+        }
+        return null;
+      });
+    }
+
+    return FilledButtonThemeData(
+      style: ButtonStyle(
+        textStyle: textStyle,
+        foregroundColor: foregroundColor,
+        backgroundColor: backgroundColor,
+        overlayColor: overlayColor,
+        minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
+        padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+        shape: radius == null
+            ? null
+            : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius),
+                  ),
+                ),
+              ),
+      ),
+    );
+    // }
   }
 
   /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
@@ -3545,7 +3661,7 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+    /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
     /// [useMaterial3] is true.
     final Size? minButtonSize,

@@ -33,15 +33,15 @@ class AppData {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '6';
-  static const String versionMinor = '1';
-  static const String versionPatch = '1';
-  static const String versionBuild = '02';
+  static const String versionMinor = '2';
+  static const String versionPatch = '0-dev.1';
+  static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = 'stable 3.3.8';
-  static const String copyright = '© 2020, 2021, 2022';
+  static const String flutterVersion = 'master 3.7.0-14.0.pre.42';
+  static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';

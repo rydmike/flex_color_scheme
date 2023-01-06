@@ -96,7 +96,7 @@ class ThemeColorsSettings extends StatelessWidget {
                 'theme?'),
             subtitle:
                 const Text('Tap a color code to copy it to the clipboard'),
-            trailing: ElevatedButton(
+            trailing: FilledButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
               },
@@ -115,7 +115,7 @@ class ThemeColorsSettings extends StatelessWidget {
             title: const Text('Reset custom theme to its default colors?'),
             subtitle: const Text('With a predefined theme selected, you can '
                 'copy it as a custom theme starting point'),
-            trailing: ElevatedButton(
+            trailing: FilledButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);
               },

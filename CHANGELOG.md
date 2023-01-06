@@ -4,29 +4,16 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Dec 28, 2022**
-
-**TODO**
-
-- Add tonal buttons to theming.
-- Review buttons hover elevation.
-- Review TextField defaults.  
-- Add new SegmentedButtons theme.
-- Add Divider theme.
-- Add Drawer theme.
-- Add ListTile theme.
-- Add new MenuBar theme?
-- Add new DrawerMenu theme?  
-- Maybe add new colors.
-- Added support for new tonal Material buttons.
-- Playground M3 mode panel header needs tint fix.
-- Remove Typography workaround in Playground.
+**Jan 6, 2022**
 
 **NEW** 
 
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
 - Added support for `fontFamilyFallback` and `package` so that a `copyWith` on `FlexColorScheme` generated `ThemeData` is not needed to use them. 
-
+- Added support for Material 3 buttons `FilledButton` and `FilledButton.tonal`.
+  - Supported via `FlexSubThemes.filledButtonTheme` that is controlled via `FlexSubThemesData` properties `filledButtonRadius`, `filledButtonSchemeColor` and `filledButtonTextStyle`.
+  - When setting up theming for `FilledButton` it was noticed that variant `FilledButton.tonal` cannot be themed separately, see issue: https://github.com/flutter/flutter/issues/115827.
+  
 **CHANGE**
 
 - Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
@@ -37,10 +24,32 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **NEW**
 
 - Add separate UI to set elevation and background color of modal and none model `BottomSheet` independently.
+- Removed used Typography workaround in Playground app. Workaround was used before due to issue https://github.com/flutter/flutter/issues/103864 that is now fixed by https://github.com/flutter/flutter/pull/110870. 
+- Improved codegen for used Typography selection, only shown when needed.
+- Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
+- Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
+
 
 **FIX**
 
-- M3 mode panel header ListTile must use transparent tileColor in M3.
+- ListTiles must use transparent `tileColor` in M3. At least until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965.
+
+
+**TODO**
+
+- Add ListTile transparent `tileColor` theme fix info to doc comments and FCS M3 base info.
+- Review buttons hover elevation and null base color.
+- Review M3 TextField defaults.
+- Add M3 support to `TabBar`.  
+- Add optional opinionated Divider theme setting to use M2 style in M3.
+- Maybe add BottomAppBar theme.
+- Maybe add DropdownMenu theme.  
+- Maybe add Drawer theme.
+- Maybe add new SegmentedButtons theme.
+- Maybe add ListTile theme.
+- Maybe add new MenuBar theme.
+- Maybe add new DrawerMenu theme.
+- Maybe add new M3 optimized themes and colors.
 
 ## 6.1.2
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
-import '../../shared/use_material3_text_theme.dart';
 import '../../shared/use_tinted_text_theme.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
@@ -26,7 +25,8 @@ class ComponentSettings extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
-        UseMaterial3TextTheme(controller: controller),
+        // TODO(rydmike): Removed control from here, only on TextTheme panel.
+        // UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
         SwitchListTile(
           title: const Text('Themed interaction effects'),
