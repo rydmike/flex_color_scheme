@@ -56,6 +56,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add new MenuBar theme.
 - Maybe add new DrawerMenu theme.
 - Maybe add some new M3 optimized color schemes.
+- Consider mods for tinted disabled color, light at least.  
 - Review and fix test coverage.
 - Review and test all examples. 
 - Add important changes to docs.flexcolorscheme.com:
