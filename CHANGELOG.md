@@ -18,6 +18,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
 
+- The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix may be removed when the issue is fixed.
 
 **THEMES PLAYGROUND**
 
@@ -32,15 +33,17 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-- ListTiles must use transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965.
+- ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect.
 
 
 **TODO**
 
-- Add ListTile transparent `tileColor` theme fix info to doc comments and FCS M3 base info.
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
-- Add M3 support to `TabBar`.  
+- FIX Material ShowCase elevation shadow.  
+- Add M3 support to `TabBar`.
+- Clean up tech debt on TabBar.
+- Clean up tech debt on AppBar  
 - Add optional opinionated Divider theme setting to use M2 style in M3.
 - Maybe add BottomAppBar theme.
 - Maybe add DropdownMenu theme.  
@@ -50,6 +53,12 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add new MenuBar theme.
 - Maybe add new DrawerMenu theme.
 - Maybe add new M3 optimized themes and colors.
+- Review and fix test coverage.
+- Review and test all examples. 
+- Add important changes to docs.flexcolorscheme.com:
+  - Changelog.
+  - ListTile transparent added to core defaults.
+  - Update known issues.
 
 ## 6.1.2
 

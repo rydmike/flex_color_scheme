@@ -2043,16 +2043,6 @@ class FlexSubThemes {
     }
   }
 
-  // TODO(rydmike): Review LitTile need.
-  /// A [ListTileThemeData] with a flat API.
-  ///
-  /// At the moment this is only used to adjust the M3 default
-  /// [ListTile.tileColor] property to be transparent in Material 3.
-  ///
-  static ListTileThemeData listTileTheme({Color? tileColor}) {
-    return ListTileThemeData(tileColor: tileColor);
-  }
-
   /// An opinionated [NavigationBarThemeData] with a flat API.
   ///
   /// The navigation bar can use opinionated color choices from the passed

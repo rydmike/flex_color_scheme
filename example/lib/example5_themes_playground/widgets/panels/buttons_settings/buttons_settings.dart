@@ -223,9 +223,7 @@ class ButtonsSettings extends StatelessWidget {
                     : (controller.filledButtonBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : controller.useMaterial3
-                    ? 'default stadium'
-                    : 'default 4',
+                : 'default stadium',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.filledButtonBorderRadius ?? -1
                 : -1,
@@ -253,9 +251,7 @@ class ButtonsSettings extends StatelessWidget {
                           : (controller.filledButtonBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : controller.useMaterial3
-                          ? 'default stadium'
-                          : 'default 4',
+                      : 'default stadium',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -304,7 +300,7 @@ class ButtonsSettings extends StatelessWidget {
         //             controller.setFilledButtonSchemeColor(null);
         //           } else {
         //             controller
-        //                 .setFilledButtonSchemeColor(SchemeColor.values[index]);
+        //              .setFilledButtonSchemeColor(SchemeColor.values[index]);
         //           }
         //         }
         //       : null,
@@ -329,7 +325,7 @@ class ButtonsSettings extends StatelessWidget {
         //     value: controller.useSubThemes && controller.useFlexColorScheme
         //         ? controller.filledButtonBorderRadius ?? -1
         //         : -1,
-        //     onChanged: controller.useSubThemes && controller.useFlexColorScheme
+        //   nChanged: controller.useSubThemes && controller.useFlexColorScheme
         //         ? (double value) {
         //             controller.setFilledButtonBorderRadius(
         //                 value < 0 ? null : value.roundToDouble());

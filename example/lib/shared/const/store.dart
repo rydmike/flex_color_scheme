@@ -734,7 +734,7 @@ class Store {
 
   // Key used to read and save the filledButtonBorderRadius value.
   static const String keyFilledButtonBorderRadius = 'filledButtonBorderRadius';
-  // Default value for the filledButtonBorderRadius, also used to reset settings.
+  // Default value for the filledButtonBorderRadius, used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultFilledButtonBorderRadius = null;
 

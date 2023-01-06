@@ -41,12 +41,18 @@ class PopupMenuButtonSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 16),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           // The button used in the PopupMenuShowcase to open the PopupMenu
           // is not a native widget, only the menu is, and it is the one that
           // is themed.
-          child: PopupMenuButtonShowcase(),
+          child: Wrap(
+            children: const <Widget>[
+              PopupMenuButtonShowcase(),
+              SizedBox(width: 8),
+              PopupMenuButtonTilesShowcase(),
+            ],
+          ),
         ),
         const SizedBox(height: 16),
         ListTile(

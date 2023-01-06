@@ -5214,6 +5214,12 @@ class FlexColorScheme with Diagnosticable {
   ///   This opacity value is the same  as Flutter default for the default
   ///   theme that is also designed for AppBar usage.
   ///
+  /// * The [ListTileThemeData] is added to core defaults and it sets
+  ///   [ListTileThemeData.tileColor] to [Colors.transparent] if
+  ///   [ThemeData.useMaterial3] is true. This is done to avoid issue:
+  ///   https://github.com/flutter/flutter/issues/117700. This extra M3 core
+  ///   default theme fix may be removed when the issue is fixed.
+  ///
   /// * The [BottomNavigationBarThemeData] uses color scheme primary color for
   ///   the selected item in both light and dark theme. Flutter SDK defaults
   ///   to secondary color in dark mode. Using only primary color
@@ -6017,7 +6023,7 @@ class FlexColorScheme with Diagnosticable {
         ),
       ),
 
-      // TODO(rydmike): BottomAppBar deprecated after v3.3.0-0.6.pre
+      // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre
       // bottomAppBarColor: colorScheme.background,
       // The bottom app bar uses color scheme background color to match the
       // background color of the drawer, bottom navigation bar, possible side
@@ -6068,6 +6074,12 @@ class FlexColorScheme with Diagnosticable {
           : null,
       primaryIconTheme: useSubThemes
           ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
+          : null,
+      // TODO(rydmike): Remove ListTile, tileColor transparent when SDK fixed.
+      // Set tileColor to transparent when using M3 to avoid issue:
+      // https://github.com/flutter/flutter/issues/117700.
+      listTileTheme: useMaterial3
+          ? const ListTileThemeData(tileColor: Colors.transparent)
           : null,
       // Tooltip theme
       tooltipTheme: !useSubThemes && !tooltipsMatchBackground

@@ -43,7 +43,13 @@ class ThemeShowcase extends StatelessWidget {
         const ChipShowcase(),
         const Divider(),
         const SizedBox(height: 8),
-        const PopupMenuButtonShowcase(),
+        Wrap(
+          children: const <Widget>[
+            PopupMenuButtonShowcase(),
+            SizedBox(width: 8),
+            PopupMenuButtonTilesShowcase(),
+          ],
+        ),
         const SizedBox(height: 8),
         const Divider(),
         const SizedBox(height: 8),
@@ -646,6 +652,56 @@ class PopupMenuButtonShowcase extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
           label: const Text('Show menu'),
+        ),
+      ),
+    );
+  }
+}
+
+class PopupMenuButtonTilesShowcase extends StatelessWidget {
+  const PopupMenuButtonTilesShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme scheme = theme.colorScheme;
+    return PopupMenuButton<int>(
+      onSelected: (_) {},
+      tooltip: 'Show menu',
+      position: PopupMenuPosition.under,
+      itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
+        PopupMenuItem<int>(
+            value: 1,
+            child: ListTile(leading: Icon(Icons.alarm), title: Text('Alarm'))),
+        PopupMenuItem<int>(
+            value: 2,
+            child: ListTile(
+                leading: Icon(Icons.cabin), title: Text('Wood cabin'))),
+        PopupMenuItem<int>(
+            value: 3,
+            child: ListTile(
+                leading: Icon(Icons.camera_outdoor_rounded),
+                title: Text('Surveillance'))),
+        PopupMenuItem<int>(
+            value: 4,
+            child: ListTile(
+                leading: Icon(Icons.water_damage),
+                title: Text('Water damage'))),
+      ],
+      child: AbsorbPointer(
+        child: TextButton.icon(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            backgroundColor: scheme.primary,
+            foregroundColor: scheme.onPrimary,
+            disabledForegroundColor: scheme.onSurface,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+          onPressed: () {},
+          icon: const Icon(Icons.expand_more_outlined),
+          label: const Text('Show ListTile menu'),
         ),
       ),
     );
