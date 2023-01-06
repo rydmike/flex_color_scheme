@@ -32,7 +32,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-- ListTiles must use transparent `tileColor` in M3. At least until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965.
+- ListTiles must use transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965.
 
 
 **TODO**
