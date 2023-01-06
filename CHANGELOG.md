@@ -23,7 +23,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
-- Add separate UI to set elevation and background color of modal and none model `BottomSheet` independently.
+- Add separate UI to set elevation and background color of modal and none modal `BottomSheet` independently.
 - Removed used Typography workaround in Playground app. Workaround was used before due to issue https://github.com/flutter/flutter/issues/103864 that is now fixed by https://github.com/flutter/flutter/pull/110870. 
 - Improved codegen for used Typography selection, only shown when needed.
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
