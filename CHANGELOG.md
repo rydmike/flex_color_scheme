@@ -32,29 +32,29 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
 - Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
-- Adding showing `SegmentedButton` in panel **Toggle Buttons** and to widget showcase.
+- Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
+- Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 
 **FIX**
 
 - ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect.
-
+- Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
 
 **TODO**
 
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
 - Review M3 Playground component colors and add new buttons to it.  
-- FIX Material ShowCase elevation shadow.  
 - Add M3 support to `TabBar`.
-- Clean up tech debt on TabBar.
-- Clean up tech debt on AppBar  
+- Clean up tech debt on `TabBar`.
+- Clean up tech debt on `AppBar`.  
 - Maybe add BottomAppBar theme.
 - Maybe add DropdownMenu theme.  
 - Maybe add Drawer theme.
 - Maybe add ToggleButtons border color.   
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
+- Maybe add new NavigationDrawer theme.
 - Maybe add new MenuBar theme.
-- Maybe add new DrawerMenu theme.
 - Maybe add some new M3 optimized color schemes.
 - Maybe consider mods for tinted disabled color, light mode at least.  
 - Review and fix test coverage.

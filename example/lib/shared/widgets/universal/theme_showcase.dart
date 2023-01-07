@@ -85,6 +85,9 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const NavigationRailShowcase(),
         const SizedBox(height: 8),
+        const NavigationDrawerShowcase(),
+        const DrawerShowcase(),
+        const SizedBox(height: 8),
         const Divider(),
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
@@ -1750,6 +1753,146 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
   }
 }
 
+class NavigationDrawerShowcase extends StatefulWidget {
+  const NavigationDrawerShowcase({
+    super.key,
+  });
+
+  @override
+  State<NavigationDrawerShowcase> createState() =>
+      _NavigationDrawerShowcaseState();
+}
+
+class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Text(
+            'NavigationDrawer',
+            style: denseHeader,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color is colorScheme.surface, '
+            'with elevation tint in M3.',
+            style: denseBody,
+          ),
+        ),
+        SizedBox(
+          height: 280,
+          child: Row(
+            children: <Widget>[
+              MediaQuery.removePadding(
+                context: context,
+                removeBottom: true,
+                removeTop: true,
+                child: NavigationDrawer(
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (int value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                  children: const <Widget>[
+                    SizedBox(height: 16),
+                    NavigationDrawerDestination(
+                      icon: Icon(Icons.chat_bubble),
+                      label: Text('Chat'),
+                    ),
+                    NavigationDrawerDestination(
+                      icon: Icon(Icons.beenhere),
+                      label: Text('Tasks'),
+                    ),
+                    Divider(),
+                    NavigationDrawerDestination(
+                      icon: Icon(Icons.create_new_folder),
+                      label: Text('Folder'),
+                    ),
+                    NavigationDrawerDestination(
+                      icon: Icon(Icons.logout),
+                      label: Text('Logout'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class DrawerShowcase extends StatelessWidget {
+  const DrawerShowcase({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Text(
+            'Drawer',
+            style: denseHeader,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color in M3 is colorScheme.surface, '
+            'with elevation tint and now shadow. In M2 it has shadow and color '
+            'theme.canvasColor that typical is set to colorScheme.background.',
+            style: denseBody,
+          ),
+        ),
+        SizedBox(
+          height: 280,
+          child: Row(
+            children: <Widget>[
+              MediaQuery.removePadding(
+                context: context,
+                removeBottom: true,
+                removeTop: true,
+                child: const Drawer(
+                  child: Center(
+                    child: Text('Drawer'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ListTileShowcase extends StatelessWidget {
   const ListTileShowcase({super.key});
 
@@ -2051,10 +2194,8 @@ class MaterialShowcase extends StatelessWidget {
       children: <Widget>[
         Text('Material elevation and tint', style: denseHeader),
         Text(
-          'When useMaterial3 is true, Material gets no elevation, '
-          'unless its shadowColor is also specified, which is not needed when '
-          'it is false and using M2. To in M3 give it surface elevated '
-          'tint, also specify its surfaceTint color.',
+          'Material can also specify surfaceTintColor, which is applied when '
+          'Material is elevated and useMaterial3 is true. ',
           style: denseBody,
         ),
         const SizedBox(height: 12),
@@ -2065,7 +2206,6 @@ class MaterialShowcase extends StatelessWidget {
           'color canvasColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        const Divider(),
         const SizedBox(height: 8),
         const Material(
           type: MaterialType.canvas,
@@ -2076,17 +2216,14 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type canvas, elevation 0, '
-                  'default',
+                  'Material type canvas, elevation 0, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Material(
           type: MaterialType.canvas,
           elevation: 1,
@@ -2096,8 +2233,7 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type canvas, elevation 1, '
-                  'default',
+                  'Material type canvas, elevation 1, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2109,6 +2245,7 @@ class MaterialShowcase extends StatelessWidget {
           type: MaterialType.canvas,
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 60,
             child: Padding(
@@ -2116,7 +2253,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 1, '
-                  'with surfaceTint, no shadow',
+                  'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2143,9 +2280,7 @@ class MaterialShowcase extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Material(
           type: MaterialType.canvas,
           elevation: 6,
@@ -2155,19 +2290,19 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type canvas, elevation 6, '
-                  'default',
+                  'Material type canvas, elevation 6, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Material(
           type: MaterialType.canvas,
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 60,
             child: Padding(
@@ -2175,14 +2310,14 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
-                  'with surfaceTint, no shadow',
+                  'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Material(
           type: MaterialType.canvas,
           elevation: 6,
@@ -2195,14 +2330,14 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
-                  'with surfaceTint, and shadow',
+                  'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Divider(),
         const SizedBox(height: 8),
         Text('Material type card', style: denseHeader),
@@ -2212,7 +2347,6 @@ class MaterialShowcase extends StatelessWidget {
           'color cardColor is going to be deprecated in Flutter SDK',
           style: denseBody,
         ),
-        const Divider(),
         const SizedBox(height: 8),
         const Material(
           type: MaterialType.card,
@@ -2223,17 +2357,14 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type card, elevation 0, '
-                  'default',
+                  'Material type card, elevation 0, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Material(
           type: MaterialType.card,
           elevation: 1,
@@ -2243,8 +2374,7 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type card, elevation 1, '
-                  'default',
+                  'Material type card, elevation 1, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2256,6 +2386,7 @@ class MaterialShowcase extends StatelessWidget {
           type: MaterialType.card,
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 60,
             child: Padding(
@@ -2263,7 +2394,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
-                  'with surfaceTint, no shadow',
+                  'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -2283,16 +2414,14 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
-                  'with surfaceTint, and shadow',
+                  'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Divider(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Material(
           type: MaterialType.card,
           elevation: 6,
@@ -2302,19 +2431,19 @@ class MaterialShowcase extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Material type card, elevation 6, '
-                  'default',
+                  'Material type card, elevation 6, default tint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Material(
           type: MaterialType.card,
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: Colors.transparent,
           child: const SizedBox(
             height: 60,
             child: Padding(
@@ -2322,14 +2451,14 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
-                  'with surfaceTint, no shadow',
+                  'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Material(
           type: MaterialType.card,
           elevation: 6,
@@ -2342,7 +2471,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
-                  'with surfaceTint, and shadow',
+                  'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
