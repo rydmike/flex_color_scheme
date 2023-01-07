@@ -37,6 +37,8 @@ class ThemeShowcase extends StatelessWidget {
         const TextButtonShowcase(),
         const SizedBox(height: 8),
         const ToggleButtonsShowcase(),
+        const SizedBox(height: 8),
+        const SegmentedButtonShowcase(),
         const Divider(),
         const FabShowcase(),
         const SizedBox(height: 16),
@@ -277,8 +279,8 @@ class TextButtonShowcase extends StatelessWidget {
 }
 
 class ToggleButtonsShowcase extends StatefulWidget {
-  const ToggleButtonsShowcase({this.showOutlinedButton, super.key});
-  final bool? showOutlinedButton;
+  const ToggleButtonsShowcase({this.compareButtons, super.key});
+  final bool? compareButtons;
 
   @override
   State<ToggleButtonsShowcase> createState() => _ToggleButtonsShowcaseState();
@@ -307,10 +309,15 @@ class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
             Icon(Icons.account_circle),
           ],
         ),
-        if (widget.showOutlinedButton ?? false)
+        if (widget.compareButtons ?? false)
           OutlinedButton(
             onPressed: () {},
             child: const Text('Outlined'),
+          ),
+        if (widget.compareButtons ?? false)
+          FilledButton(
+            onPressed: () {},
+            child: const Text('Filled'),
           ),
         ToggleButtons(
           isSelected: const <bool>[true, false, false],
@@ -321,11 +328,126 @@ class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
             Icon(Icons.account_circle),
           ],
         ),
-        if (widget.showOutlinedButton ?? false)
+        if (widget.compareButtons ?? false)
           const OutlinedButton(
             onPressed: null,
             child: Text('Outlined'),
           ),
+      ],
+    );
+  }
+}
+
+class SegmentedButtonShowcase extends StatefulWidget {
+  const SegmentedButtonShowcase({this.showOutlinedButton, super.key});
+  final bool? showOutlinedButton;
+
+  @override
+  State<SegmentedButtonShowcase> createState() =>
+      _SegmentedButtonShowcaseState();
+}
+
+enum Calendar { day, week, month, year }
+
+class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
+  List<bool> selected = <bool>[true, false, false];
+  Calendar _selected = Calendar.day;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 8,
+      runSpacing: 4,
+      children: <Widget>[
+        SegmentedButton<Calendar>(
+          segments: const <ButtonSegment<Calendar>>[
+            ButtonSegment<Calendar>(
+              value: Calendar.day,
+              label: Text('Day'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.week,
+              label: Text('Week'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.month,
+              label: Text('Month'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.year,
+              label: Text('Year'),
+            ),
+          ],
+          selected: <Calendar>{_selected},
+          onSelectionChanged: (Set<Calendar> selected) {
+            setState(() {
+              _selected = selected.first;
+            });
+          },
+        ),
+        SegmentedButton<Calendar>(
+          segments: const <ButtonSegment<Calendar>>[
+            ButtonSegment<Calendar>(
+              value: Calendar.day,
+              label: Text('Day'),
+              icon: Icon(Icons.calendar_view_day),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.week,
+              icon: Icon(Icons.calendar_view_week),
+              label: Text('Week'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.month,
+              icon: Icon(Icons.calendar_view_month),
+              label: Text('Month'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.year,
+              icon: Icon(Icons.calendar_today),
+              label: Text('Year'),
+            ),
+          ],
+          selected: <Calendar>{_selected},
+          onSelectionChanged: (Set<Calendar> selected) {
+            setState(() {
+              _selected = selected.first;
+            });
+          },
+        ),
+        SegmentedButton<Calendar>(
+          segments: const <ButtonSegment<Calendar>>[
+            ButtonSegment<Calendar>(
+              value: Calendar.day,
+              label: Text('Day'),
+              icon: Icon(Icons.calendar_view_day),
+              enabled: false,
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.week,
+              icon: Icon(Icons.calendar_view_week),
+              label: Text('Week'),
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.month,
+              icon: Icon(Icons.calendar_view_month),
+              label: Text('Month'),
+              enabled: false,
+            ),
+            ButtonSegment<Calendar>(
+              value: Calendar.year,
+              icon: Icon(Icons.calendar_today),
+              label: Text('Year'),
+            ),
+          ],
+          selected: <Calendar>{_selected},
+          onSelectionChanged: (Set<Calendar> selected) {
+            setState(() {
+              _selected = selected.first;
+            });
+          },
+        ),
       ],
     );
   }

@@ -39,7 +39,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: ToggleButtonsShowcase(showOutlinedButton: true),
+          child: ToggleButtonsShowcase(compareButtons: true),
         ),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons color'),
@@ -154,6 +154,18 @@ class ToggleButtonsSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        const Divider(),
+        const ListTile(
+          title: Text('SegmentedButton'),
+          subtitle: Text('New in Material 3, uses default M3 '
+              'style but colored by FCS in current version. '
+              'Component theming may be added in future versions. '
+              'The default style is pretty and nice as is.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: SegmentedButtonShowcase(),
         ),
       ],
     );

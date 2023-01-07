@@ -32,7 +32,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
 - Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
-
+- Adding showing `SegmentedButton` in panel **Toggle Buttons** and to widget showcase.
 
 **FIX**
 
@@ -51,11 +51,12 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add BottomAppBar theme.
 - Maybe add DropdownMenu theme.  
 - Maybe add Drawer theme.
-- Maybe add new SegmentedButtons theme.
+- Maybe add ToggleButtons border color.   
+- Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
 - Maybe add new MenuBar theme.
 - Maybe add new DrawerMenu theme.
 - Maybe add some new M3 optimized color schemes.
-- Consider mods for tinted disabled color, light at least.  
+- Maybe consider mods for tinted disabled color, light mode at least.  
 - Review and fix test coverage.
 - Review and test all examples. 
 - Add important changes to docs.flexcolorscheme.com:
