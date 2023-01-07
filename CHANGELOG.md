@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Jan 6, 2022**
+**Jan 7, 2023**
 
 **NEW** 
 
