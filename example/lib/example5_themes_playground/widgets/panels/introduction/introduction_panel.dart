@@ -23,6 +23,11 @@ class IntroductionPanel extends StatelessWidget {
   const IntroductionPanel(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsDocs = Uri(
+    scheme: 'https',
+    host: 'docs.flexcolorscheme.com',
+  );
+
   static final Uri _fcsDocsPlayground = Uri(
     scheme: 'https',
     host: 'docs.flexcolorscheme.com',
@@ -55,11 +60,18 @@ class IntroductionPanel extends StatelessWidget {
                   style: spanTextStyle,
                   text: 'Use Themes Playground to try features and themes '
                       'of FlexColorScheme. Find a theme you like, experiment '
-                      'with surface blends.\n'
+                      'with surface blends and try Material 3.\n'
                       '\n'
-                      'Check out the FlexColorScheme '
-                      'documentation site for more information. It also has a '
-                      'section on ',
+                      'Check out the FlexColorScheme ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsDocs,
+                  text: 'documentation site',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more information. It also has a section on ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,

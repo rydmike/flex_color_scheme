@@ -52,7 +52,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add DropdownMenu theme.  
 - Maybe add Drawer theme.
 - Maybe add new SegmentedButtons theme.
-- Maybe add ListTile theme.
 - Maybe add new MenuBar theme.
 - Maybe add new DrawerMenu theme.
 - Maybe add some new M3 optimized color schemes.
