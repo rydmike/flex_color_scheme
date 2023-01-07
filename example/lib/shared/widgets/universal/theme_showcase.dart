@@ -71,6 +71,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const AppBarShowcase(),
         const Divider(),
+        const BottomAppBarShowcase(),
+        const Divider(),
         const TabBarForAppBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -1304,6 +1306,69 @@ class _BehindAppBar extends StatelessWidget {
           onSelected: (bool value) {},
         ),
       ]),
+    );
+  }
+}
+
+class BottomAppBarShowcase extends StatelessWidget {
+  const BottomAppBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+    return MediaQuery.removePadding(
+      context: context,
+      removeBottom: true,
+      removeTop: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'BottomAppBar',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Defaults in Flutter SDK in M2 ThemeData.bottomAppBarColor which '
+              'is set to colorScheme.surface in M2 and elevation 8. In M3 '
+              'to colorScheme.surface color, elevation 3, no shadow but '
+              'with surface elevation tint.',
+              style: denseBody,
+            ),
+          ),
+          BottomAppBar(
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  tooltip: 'Open navigation menu',
+                  icon: const Icon(Icons.menu),
+                  onPressed: () {},
+                ),
+                const Spacer(),
+                IconButton(
+                  tooltip: 'Search',
+                  icon: const Icon(Icons.search),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  tooltip: 'Favorite',
+                  icon: const Icon(Icons.favorite),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

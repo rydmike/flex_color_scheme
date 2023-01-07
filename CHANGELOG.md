@@ -34,6 +34,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
+- Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
 
 **FIX**
 
@@ -44,7 +45,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
-- Review M3 Playground component colors and add new buttons to it.  
+- Review M3 Playground component colors and add new buttons to it.
+- Fix `BottomAppBar` M3 theme/defaults, needs its default elevation for tint.
+- Fix `BottomAppBar` tests.  
+- Open `BottomAppBar` M3 drop shadow issue, has but should not have.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  

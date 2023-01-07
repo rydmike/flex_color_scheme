@@ -2049,7 +2049,7 @@ void main() {
         tabBarStyle: FlexTabBarStyle.forBackground,
         appBarBackground: const Color(0xfffaf3f3),
         appBarElevation: 0,
-        bottomAppBarElevation: 0,
+        bottomAppBarElevation: null,
         tooltipsMatchBackground: false,
         transparentStatusBar: true,
         visualDensity: null,

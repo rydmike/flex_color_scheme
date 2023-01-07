@@ -276,6 +276,9 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+        const Divider(),
+        const BottomAppBarShowcase(),
+        const SizedBox(height: 16),
       ],
     );
   }

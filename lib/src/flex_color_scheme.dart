@@ -298,7 +298,7 @@ class FlexColorScheme with Diagnosticable {
     this.surfaceTint,
     this.tabBarStyle = FlexTabBarStyle.forAppBar,
     this.appBarElevation = 0,
-    this.bottomAppBarElevation = 0,
+    this.bottomAppBarElevation,
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
     this.visualDensity,
@@ -316,8 +316,8 @@ class FlexColorScheme with Diagnosticable {
     this.useMaterial3 = false,
     this.extensions,
   })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
-        assert(bottomAppBarElevation >= 0.0,
-            'Bottom AppBar elevation must be >= 0.');
+        assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+            'Bottom AppBar elevation must be >= 0 or null.');
 
   /// The overall [ColorScheme] based colors for the theme.
   ///
@@ -603,11 +603,10 @@ class FlexColorScheme with Diagnosticable {
 
   /// The themed elevation for the bottom app bar.
   ///
-  /// Defaults to 0, cannot be null.
-  ///
-  /// The 0 default is so it matches the themed app bar elevation default,
-  /// but it can easily be adjusted for the theme with this property.
-  final double bottomAppBarElevation;
+  /// If null, defaults to [appBarElevation] in M2. So it matches the themed
+  /// app bar elevation. In M3 it is kept null to default to M3's default
+  /// elevation of 3, to always get elevation tint.
+  final double? bottomAppBarElevation;
 
   /// When set to true, tooltip background color will match the brightness of
   /// the theme's background color.
@@ -1407,7 +1406,9 @@ class FlexColorScheme with Diagnosticable {
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
     /// Select preferred themed style for the [TabBarTheme].
@@ -2350,9 +2351,6 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
-    // If bottomAppBarElevation was null, fallback to appBarElevation.
-    final double effectiveBottomAppBarElevation =
-        bottomAppBarElevation ?? appBarElevation;
     // Use color seeding based on passed in keyColors or make one where
     // it is not used, if one was not defined, since we want that as default
     // behavior to match past default behavior.
@@ -2760,7 +2758,7 @@ class FlexColorScheme with Diagnosticable {
       surfaceTint: surfaceTint,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
-      bottomAppBarElevation: effectiveBottomAppBarElevation,
+      bottomAppBarElevation: bottomAppBarElevation,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
@@ -3157,7 +3155,9 @@ class FlexColorScheme with Diagnosticable {
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
     /// Select preferred themed style for the [TabBarTheme].
@@ -4099,9 +4099,7 @@ class FlexColorScheme with Diagnosticable {
     assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
-    // If bottomAppBarElevation is null, fallback to appBarElevation.
-    final double effectiveBottomAppBarElevation =
-        bottomAppBarElevation ?? appBarElevation;
+
     // Use color seeding based on passed in keyColors or make one where
     // it is not used, if one was not defined, since we want that as default
     // behavior to match past default behavior.
@@ -4539,7 +4537,7 @@ class FlexColorScheme with Diagnosticable {
       surfaceTint: surfaceTint,
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
-      bottomAppBarElevation: effectiveBottomAppBarElevation,
+      bottomAppBarElevation: bottomAppBarElevation,
       tooltipsMatchBackground: tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar,
       visualDensity: visualDensity,
@@ -5152,11 +5150,11 @@ class FlexColorScheme with Diagnosticable {
   ///    This is a slight change from the ColorScheme default that uses
   ///    surface color.
   ///
-  ///  * The `BottomAppBarTheme` elevation defaults to `appBarElevation` or 0 if
-  ///    it is null. It can easily be adjusted directly in the
-  ///    `FlexColorScheme` definition with property
-  ///    value `bottomAppBarElevation` without creating a sub theme or
-  ///    using `copyWith`.
+  ///  * In M2 the `BottomAppBarTheme` elevation defaults to `appBarElevation`
+  ///    In M3 it is kept null for M3 defaults.
+  ///    It can easily be adjusted directly in the `FlexColorScheme`
+  ///    definition with property value `bottomAppBarElevation` without
+  ///    creating a sub theme or using `copyWith`.
   ///
   ///  * In `TextSelectionThemeData`, the standard for `selectionColor` is
   ///    `colorScheme.primary` with opacity value `0.4` for dark-mode and `0.12`
@@ -6040,9 +6038,11 @@ class FlexColorScheme with Diagnosticable {
       // menu and system navigation bar on android (if theming of it is used).
       // This is a slight change from the ColorScheme default that uses
       // surface color.
+      // TODO(rydmike): Maybe move to default color for bottom app bar color.
       bottomAppBarTheme: BottomAppBarTheme(
         color: colorScheme.background,
-        elevation: bottomAppBarElevation,
+        elevation:
+            bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
       ),
       // In TextSelectionThemeData, the standard for selectionColor is
       // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
