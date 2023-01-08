@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Jan 7, 2023**
+**Jan 8, 2023**
 
 **NEW** 
 
@@ -50,20 +50,19 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO**
 
+- Add `BottomAppBar` elevation setting to Playground.
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
 - Review M3 Playground component colors and add new buttons to it.
-- Add `BottomAppBar` elevation setting to Playground. 
-- Fix `BottomAppBar` tests.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  
 - Maybe add BottomAppBar theme.
 - Maybe add DropdownMenu theme.  
 - Maybe add Drawer theme.
+- Maybe add new NavigationDrawer theme.  
 - Maybe add ToggleButtons border color.   
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
-- Maybe add new NavigationDrawer theme.
 - Maybe add new MenuBar theme.
 - Maybe add some new M3 optimized color schemes.
 - Maybe consider mods for tinted disabled color, light mode at least.  
