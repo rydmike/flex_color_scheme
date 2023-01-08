@@ -9,10 +9,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **NEW** 
 
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
+
 - Added support for `fontFamilyFallback` and `package` so that a `copyWith` on `FlexColorScheme` generated `ThemeData` is not needed to use them. 
+
 - Added support for Material 3 buttons `FilledButton` and `FilledButton.tonal`.
   - Supported via `FlexSubThemes.filledButtonTheme` that is controlled via `FlexSubThemesData` properties `filledButtonRadius`, `filledButtonSchemeColor` and `filledButtonTextStyle`.
   - When setting up theming for `FilledButton` it was noticed that variant `FilledButton.tonal` cannot be themed separately, see issue: https://github.com/flutter/flutter/issues/115827.
+
 - Added option to keep using M2 style Divider in M3. The in M3 used primary color tinted outlineVariant does not fit on all colors. The M2 style based on black or white with opacity does. It is also less prominent than the M3 style and may be preferred. Set `FlexSubThemesData` property `useOpacityBasedDividerInM3` to true to use the M2 style in M3. Defaults to false. 
     - FlexColorScheme also sets `ThemeData.dividerColor` to `ThemeData.colorScheme.outlineVariant` when `ThemeData.useMaterial3` is `true`. This keeps the in Flutter SDK to be deprecated `ThemeData.dividerColor` always same as actually used effective `Divider` color. Thus, if a legacy app uses `Theme.of(context).dividerColor`, while it still exists to set a color to it, and expects it to then be the same color as effective `Divider` color, it will be so in FCS, regardless of if M2 or M3 is being used. This is not the case in Flutter SDK by default, see issue https://github.com/flutter/flutter/issues/117755 for more information.  
 
@@ -21,6 +24,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
 
 - The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix may be removed when the issue is fixed.
+
+- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if null it follows defined `appBarElevation` as before. In M3 it is kept null to default to M3's default elevation of 3, to always get elevation tint.
+
+- Changed FlexColorScheme default of for `BottomAppBar` color to be `colorScheme.surface` same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color value is the same.
 
 **THEMES PLAYGROUND**
 
@@ -46,9 +53,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults.
 - Review M3 Playground component colors and add new buttons to it.
-- Fix `BottomAppBar` M3 theme/defaults, needs its default elevation for tint.
+- Add `BottomAppBar` elevation setting to Playground. 
 - Fix `BottomAppBar` tests.  
-- Open `BottomAppBar` M3 drop shadow issue, has but should not have.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  

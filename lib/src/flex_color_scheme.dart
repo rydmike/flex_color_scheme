@@ -6032,15 +6032,9 @@ class FlexColorScheme with Diagnosticable {
       ),
 
       // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre
-      // bottomAppBarColor: colorScheme.background,
-      // The bottom app bar uses color scheme background color to match the
-      // background color of the drawer, bottom navigation bar, possible side
-      // menu and system navigation bar on android (if theming of it is used).
-      // This is a slight change from the ColorScheme default that uses
-      // surface color.
-      // TODO(rydmike): Maybe move to default color for bottom app bar color.
+      // bottomAppBarColor: colorScheme.surface,
       bottomAppBarTheme: BottomAppBarTheme(
-        color: colorScheme.background,
+        color: colorScheme.surface,
         elevation:
             bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
       ),

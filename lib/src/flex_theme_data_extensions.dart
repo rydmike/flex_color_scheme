@@ -287,7 +287,9 @@ extension FlexThemeData on ThemeData {
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
     /// Select preferred themed style for the [TabBarTheme].
@@ -1513,7 +1515,9 @@ extension FlexThemeData on ThemeData {
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
     /// Select preferred themed style for the [TabBarTheme].
