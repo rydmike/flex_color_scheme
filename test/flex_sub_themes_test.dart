@@ -1210,45 +1210,17 @@ void main() {
     test(
         'FST1.09-M3: GIVEN a default M3 FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
-        'same values', () {
+        'defaults', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           useMaterial3: true,
-        ).toString(),
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          ElevatedButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.38);
-                }
-                return colorScheme.primary;
-              }),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
-                }
-                return colorScheme.onPrimary;
-              }),
-              overlayColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.hovered)) {
-                  return colorScheme.primary.withOpacity(0.08);
-                }
-                if (states.contains(MaterialState.focused)) {
-                  return colorScheme.primary.withOpacity(0.12);
-                }
-                if (states.contains(MaterialState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
-                }
-                return null;
-              }),
-            ),
-          ).toString(),
+          const ElevatedButtonThemeData(
+            style: ButtonStyle(),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -1483,6 +1455,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -1490,7 +1463,7 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
       );
-      // Disabled foreground, default, M3
+      // Disabled foreground, custom, M3
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
@@ -1506,6 +1479,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -1542,6 +1516,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -1553,6 +1528,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -1564,6 +1540,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
         equals(colorScheme.primary.withOpacity(0.08)),
@@ -1571,6 +1548,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -1578,6 +1556,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -1585,6 +1564,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
@@ -1593,6 +1573,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           elevation: 2,
           useMaterial3: true,
         ).style!.elevation!.resolve(<MaterialState>{MaterialState.disabled}),
@@ -1601,6 +1582,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           elevation: 2,
           useMaterial3: true,
         ).style!.elevation!.resolve(<MaterialState>{MaterialState.hovered}),
@@ -1617,6 +1599,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           elevation: 2,
           useMaterial3: true,
         ).style!.elevation!.resolve(<MaterialState>{MaterialState.pressed}),
@@ -1625,6 +1608,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           elevation: 2,
           useMaterial3: true,
         ).style!.elevation!.resolve(<MaterialState>{MaterialState.selected}),
@@ -1785,7 +1769,7 @@ void main() {
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
-          elevation: 1,
+          elevation: 2,
           padding: const EdgeInsets.symmetric(horizontal: 8),
           minButtonSize: const Size(50, 50),
           radius: 10,
@@ -1794,33 +1778,33 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.38);
-                }
-                return colorScheme.primary;
-              }),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
-                }
-                return colorScheme.onPrimary;
-              }),
-              overlayColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.hovered)) {
-                  return colorScheme.primary.withOpacity(0.08);
-                }
-                if (states.contains(MaterialState.focused)) {
-                  return colorScheme.primary.withOpacity(0.12);
-                }
-                if (states.contains(MaterialState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
-                }
-                return null;
-              }),
+              // foregroundColor: MaterialStateProperty.resolveWith(
+              //     (Set<MaterialState> states) {
+              //   if (states.contains(MaterialState.disabled)) {
+              //     return colorScheme.onSurface.withOpacity(0.38);
+              //   }
+              //   return colorScheme.primary;
+              // }),
+              // backgroundColor: MaterialStateProperty.resolveWith(
+              //     (Set<MaterialState> states) {
+              //   if (states.contains(MaterialState.disabled)) {
+              //     return colorScheme.onSurface.withOpacity(0.12);
+              //   }
+              //   return colorScheme.onPrimary;
+              // }),
+              // overlayColor: MaterialStateProperty.resolveWith(
+              //     (Set<MaterialState> states) {
+              //   if (states.contains(MaterialState.hovered)) {
+              //     return colorScheme.primary.withOpacity(0.08);
+              //   }
+              //   if (states.contains(MaterialState.focused)) {
+              //     return colorScheme.primary.withOpacity(0.12);
+              //   }
+              //   if (states.contains(MaterialState.pressed)) {
+              //     return colorScheme.primary.withOpacity(0.12);
+              //   }
+              //   return null;
+              // }),
               minimumSize:
                   ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
@@ -1831,15 +1815,15 @@ void main() {
                   return 0.0;
                 }
                 if (states.contains(MaterialState.hovered)) {
-                  return 3.0;
+                  return 4.0;
                 }
                 if (states.contains(MaterialState.focused)) {
-                  return 1.0;
+                  return 2.0;
                 }
                 if (states.contains(MaterialState.pressed)) {
-                  return 1.0;
+                  return 2.0;
                 }
-                return 1.0;
+                return 2.0;
               }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
@@ -2099,69 +2083,15 @@ void main() {
         seedColor: const Color(0xFF7142E7),
         brightness: Brightness.light,
       );
-      final MaterialStateProperty<Color?> foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
-        }
-        return colorScheme.primary;
-      });
-
-      final MaterialStateProperty<Color?> overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return colorScheme.primary.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return colorScheme.primary.withOpacity(0.12);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return colorScheme.primary.withOpacity(0.12);
-        }
-        return null;
-      });
-
-      final MaterialStateProperty<BorderSide> side =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12),
-            width: 1,
-          );
-        }
-        if (states.contains(MaterialState.error)) {
-          return BorderSide(
-            color: colorScheme.error,
-            width: 1,
-          );
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return BorderSide(
-            color: colorScheme.outline,
-            width: 1,
-          );
-        }
-        return BorderSide(
-          color: colorScheme.outline,
-          width: 1,
-        );
-      });
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
           useMaterial3: true,
-        ).toString(),
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          OutlinedButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor: foregroundColor,
-              backgroundColor:
-                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
-              overlayColor: overlayColor,
-              elevation: ButtonStyleButton.allOrNull<double>(0.0),
-              side: side,
-            ),
-          ).toString(),
+          const OutlinedButtonThemeData(
+            style: ButtonStyle(),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2257,19 +2187,19 @@ void main() {
         if (states.contains(MaterialState.disabled)) {
           return colorScheme.onSurface.withOpacity(0.38);
         }
-        return colorScheme.primary;
+        return colorScheme.secondary;
       });
 
       final MaterialStateProperty<Color?> overlayColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          return colorScheme.primary.withOpacity(0.08);
+          return colorScheme.secondary.withOpacity(0.08);
         }
         if (states.contains(MaterialState.focused)) {
-          return colorScheme.primary.withOpacity(0.12);
+          return colorScheme.secondary.withOpacity(0.12);
         }
         if (states.contains(MaterialState.pressed)) {
-          return colorScheme.primary.withOpacity(0.12);
+          return colorScheme.secondary.withOpacity(0.12);
         }
         return null;
       });
@@ -2290,12 +2220,12 @@ void main() {
         }
         if (states.contains(MaterialState.pressed)) {
           return BorderSide(
-            color: colorScheme.outline,
+            color: colorScheme.tertiary,
             width: 1,
           );
         }
         return BorderSide(
-          color: colorScheme.outline,
+          color: colorScheme.tertiary,
           width: 1,
         );
       });
@@ -2308,19 +2238,16 @@ void main() {
           minButtonSize: const Size(52, 40),
           radius: 13,
           useMaterial3: true,
-        ).toString(),
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: ButtonStyle(
               foregroundColor: foregroundColor,
-              backgroundColor:
-                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
               overlayColor: overlayColor,
               minimumSize:
                   ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                   const EdgeInsets.symmetric(horizontal: 17)),
-              elevation: ButtonStyleButton.allOrNull<double>(0.0),
               side: side,
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
@@ -2330,7 +2257,7 @@ void main() {
                 ),
               ),
             ),
-          ).toString(),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2343,7 +2270,10 @@ void main() {
       );
       // Disabled foreground
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        )
             .style!
             .foregroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
@@ -2352,7 +2282,10 @@ void main() {
             .withAlpha(kDisabledForegroundAlpha)),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        )
             .style!
             .foregroundColor!
             .resolve(<MaterialState>{MaterialState.selected}),
@@ -2360,39 +2293,39 @@ void main() {
       );
       // Overlay color states
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.hovered}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
         equals(colorScheme.primary.withAlpha(kHoverBackgroundAlpha)),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.focused}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.primary.withAlpha(kFocusBackgroundAlpha)),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.pressed}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(colorScheme.primary.withAlpha(kPressedBackgroundAlpha)),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(Colors.transparent),
       );
       // Border side states
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .side!
-            .resolve(<MaterialState>{MaterialState.disabled}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.disabled}),
         equals(BorderSide(
             color: colorScheme.primary
                 .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
@@ -2400,30 +2333,30 @@ void main() {
             width: 1)),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .side!
-            .resolve(<MaterialState>{MaterialState.error}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.error}),
         equals(BorderSide(
           color: colorScheme.error,
           width: 2,
         )),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .side!
-            .resolve(<MaterialState>{MaterialState.pressed}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(BorderSide(
           color: colorScheme.primary,
           width: 2,
         )),
       );
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .side!
-            .resolve(<MaterialState>{MaterialState.selected}),
+        FlexSubThemes.outlinedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+        ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
           color: colorScheme.primary.withAlpha(kEnabledBorderAlpha),
           width: 1,
@@ -2550,6 +2483,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -2560,6 +2494,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -2571,6 +2506,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
         equals(colorScheme.primary.withOpacity(0.08)),
@@ -2578,6 +2514,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -2585,6 +2522,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -2592,6 +2530,7 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
@@ -2600,6 +2539,8 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          outlineWidth: 1,
           useMaterial3: true,
         ).style!.side!.resolve(<MaterialState>{MaterialState.disabled}),
         equals(BorderSide(
@@ -2608,6 +2549,8 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          outlineWidth: 1,
           useMaterial3: true,
         ).style!.side!.resolve(<MaterialState>{MaterialState.error}),
         equals(BorderSide(
@@ -2618,6 +2561,8 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          outlineWidth: 1,
           useMaterial3: true,
         ).style!.side!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(BorderSide(
@@ -2628,6 +2573,8 @@ void main() {
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          outlineWidth: 1,
           useMaterial3: true,
         ).style!.side!.resolve(<MaterialState>{MaterialState.selected}),
         equals(BorderSide(
@@ -2898,42 +2845,15 @@ void main() {
         seedColor: const Color(0xFF7142E7),
         brightness: Brightness.light,
       );
-      final MaterialStateProperty<Color?> foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
-        }
-        return colorScheme.primary;
-      });
-
-      final MaterialStateProperty<Color?> overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return colorScheme.primary.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return colorScheme.primary.withOpacity(0.12);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return colorScheme.primary.withOpacity(0.12);
-        }
-        return null;
-      });
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
           useMaterial3: true,
-        ).toString(),
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          TextButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor: foregroundColor,
-              backgroundColor:
-                  ButtonStyleButton.allOrNull<Color>(Colors.transparent),
-              overlayColor: overlayColor,
-              elevation: ButtonStyleButton.allOrNull<double>(0.0),
-            ),
-          ).toString(),
+          const TextButtonThemeData(
+            style: ButtonStyle(),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2995,6 +2915,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -3005,6 +2926,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         )
             .style!
@@ -3016,6 +2938,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
         equals(colorScheme.primary.withOpacity(0.08)),
@@ -3023,6 +2946,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -3030,6 +2954,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -3037,6 +2962,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
@@ -3045,6 +2971,7 @@ void main() {
       expect(
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
           radius: 15,
         ).style!.shape!.resolve(<MaterialState>{}),

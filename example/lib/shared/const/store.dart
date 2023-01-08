@@ -442,7 +442,7 @@ class Store {
   // Key used to read and save the bottomAppBarElevationDark value.
   static const String keyBottomAppBarElevationDark =
       'bottomAppBarElevationDark';
-  // Default value for the bottomAppBarElevationDark, also used to reset settings.
+  // Default value for the bottomAppBarElevationDark, also to reset settings.
   static const double? defaultBottomAppBarElevationDark = null;
 
   // Key used to read and save the transparentStatusBar value.

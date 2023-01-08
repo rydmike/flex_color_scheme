@@ -1338,8 +1338,8 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
+    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
@@ -1457,41 +1457,65 @@ class FlexSubThemes {
           ),
         ),
       );
+    } else {
       //
       // We are using M3 style buttons, with potentially custom radius,
       // elevation, foregroundColor, backgroundColor, overlayColor, padding
       // and minButtonSize.
-    } else {
-      final MaterialStateProperty<Color?> foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
-        }
-        return baseColor;
-      });
+      MaterialStateProperty<Color?>? backgroundColor;
+      MaterialStateProperty<Color?>? foregroundColor;
+      MaterialStateProperty<Color?>? overlayColor;
 
-      final MaterialStateProperty<Color?> backgroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.12);
-        }
-        return onBaseColor;
-      });
+      // If a baseSchemeColor was given we need to define all M3 color in
+      // all states, if it was not defined, we can keeping them all null
+      // and let M3 widget defaults handle the colors.
+      if (baseSchemeColor != null) {
+        foregroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.38);
+          }
+          return baseColor;
+        });
 
-      final MaterialStateProperty<Color?> overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return baseColor.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return baseColor.withOpacity(0.12);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return baseColor.withOpacity(0.12);
-        }
-        return null;
-      });
+        overlayColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered)) {
+            return baseColor.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            return baseColor.withOpacity(0.12);
+          }
+          if (states.contains(MaterialState.pressed)) {
+            return baseColor.withOpacity(0.12);
+          }
+          return null;
+        });
+        backgroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return onBaseColor;
+        });
+      }
+      // If the baseSchemeColor was null, but onBaseSchemeColor was not,
+      // we ned to define background color. Otherwise it will have value from
+      // above or be left at defaults and let widget default define it.
+      if (baseSchemeColor == null && onBaseSchemeColor != null) {
+        backgroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return onBaseColor;
+        });
+      }
 
+      // If elevation is null, we use widget defaults, otherwise we define a
+      // custom elevation behavior that is based on how M3 elevation works,
+      // but where we can modify the base degree. If elevation 1, is passed
+      // the result is the same as M3 elevation behavior.
       final MaterialStateProperty<double?>? elevationM3 = elevation == null
           ? null
           : MaterialStateProperty.resolveWith((Set<MaterialState> states) {
@@ -1518,7 +1542,6 @@ class FlexSubThemes {
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          // TODO(rydmike): Add test for M3 elevation results.
           elevation: elevationM3,
           shape: radius == null
               ? null
@@ -1554,7 +1577,8 @@ class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
 
-    /// The button corner radius.
+    /// If not defined, defaults to Stadium border based on
+    /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
     /// Padding for the button theme.
@@ -2929,8 +2953,8 @@ class FlexSubThemes {
 
     /// The button corner border radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
+    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
@@ -3063,68 +3087,78 @@ class FlexSubThemes {
           ),
         ),
       );
+    } else {
       // We are using M3 style buttons, with potentially custom radius,
       // foregroundColor, outlineColor, overlayColor, padding
       // and minButtonSize.
-    } else {
-      final MaterialStateProperty<Color?> foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
-        }
-        return baseColor;
-      });
+      MaterialStateProperty<Color?>? foregroundColor;
+      MaterialStateProperty<Color?>? overlayColor;
+      // If a baseSchemeColor was given we need to define all M3 color in
+      // all states, if it was not defined, we can keeping them all null
+      // and let M3 widget defaults handle the colors.
+      if (baseSchemeColor != null) {
+        foregroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.38);
+          }
+          return baseColor;
+        });
 
-      final MaterialStateProperty<Color?> overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return baseColor.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return baseColor.withOpacity(0.12);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return baseColor.withOpacity(0.12);
-        }
-        return null;
-      });
+        overlayColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered)) {
+            return baseColor.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            return baseColor.withOpacity(0.12);
+          }
+          if (states.contains(MaterialState.pressed)) {
+            return baseColor.withOpacity(0.12);
+          }
+          return null;
+        });
+      }
 
-      final MaterialStateProperty<BorderSide> side =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12),
-            width: normalWidth,
-          );
-        }
-        if (states.contains(MaterialState.error)) {
-          return BorderSide(
-            color: colorScheme.error,
-            width: pressedWidth,
-          );
-        }
-        if (states.contains(MaterialState.pressed)) {
+      MaterialStateProperty<BorderSide>? side;
+      // Define side it its widths or color has any custom definition,
+      // If not we fall back to default theme.
+      if (outlineSchemeColor != null ||
+          outlineWidth != null ||
+          pressedOutlineWidth != null) {
+        side = MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return BorderSide(
+              color: colorScheme.onSurface.withOpacity(0.12),
+              width: normalWidth,
+            );
+          }
+          if (states.contains(MaterialState.error)) {
+            return BorderSide(
+              color: colorScheme.error,
+              width: pressedWidth,
+            );
+          }
+          if (states.contains(MaterialState.pressed)) {
+            return BorderSide(
+              color: outlineColor,
+              width: pressedWidth,
+            );
+          }
           return BorderSide(
             color: outlineColor,
-            width: pressedWidth,
+            width: normalWidth,
           );
-        }
-        return BorderSide(
-          color: outlineColor,
-          width: normalWidth,
-        );
-      });
+        });
+      }
 
       return OutlinedButtonThemeData(
         style: ButtonStyle(
           textStyle: textStyle,
           foregroundColor: foregroundColor,
-          backgroundColor:
-              ButtonStyleButton.allOrNull<Color>(Colors.transparent),
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          elevation: ButtonStyleButton.allOrNull<double>(0.0),
           side: side,
           shape: radius == null
               ? null
@@ -3632,8 +3666,8 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on M3 Specification
+    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
 
@@ -3715,42 +3749,46 @@ class FlexSubThemes {
           ),
         ),
       );
-    }
-    // We are using M3 style buttons, with potentially custom radius,
-    // foregroundColor, overlayColor, padding and minButtonSize.
-    else {
-      final MaterialStateProperty<Color?> foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
-        }
-        return baseColor;
-      });
+    } else {
+      // We are using M3 style buttons, with potentially custom radius,
+      // foregroundColor, overlayColor, padding and minButtonSize.
+      MaterialStateProperty<Color?>? foregroundColor;
+      MaterialStateProperty<Color?>? overlayColor;
 
-      final MaterialStateProperty<Color?> overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return baseColor.withOpacity(0.08);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return baseColor.withOpacity(0.12);
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return baseColor.withOpacity(0.12);
-        }
-        return null;
-      });
+      // If a baseSchemeColor was given we need to define all M3 color in
+      // all states, if it was not defined, we can keeping them all null
+      // and let M3 widget defaults handle the colors.
+      if (baseSchemeColor != null) {
+        foregroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.38);
+          }
+          return baseColor;
+        });
+
+        overlayColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered)) {
+            return baseColor.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            return baseColor.withOpacity(0.12);
+          }
+          if (states.contains(MaterialState.pressed)) {
+            return baseColor.withOpacity(0.12);
+          }
+          return null;
+        });
+      }
 
       return TextButtonThemeData(
         style: ButtonStyle(
           textStyle: textStyle,
           foregroundColor: foregroundColor,
-          backgroundColor:
-              ButtonStyleButton.allOrNull<Color>(Colors.transparent),
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          elevation: ButtonStyleButton.allOrNull<double>(0.0),
           shape: radius == null
               ? null
               : ButtonStyleButton.allOrNull<OutlinedBorder>(

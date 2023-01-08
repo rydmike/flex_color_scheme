@@ -3667,33 +3667,33 @@ void main() {
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.selected})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.focused})?.width,
-        equals(1),
+        equals(null),
       );
-      // OutlinedButton thick widths, Material 3 has own default of 1!!
+      // OutlinedButton thick widths, Material 3 has own default of null!!
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.error})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
-        equals(1),
+        equals(null),
       );
     });
     test(

@@ -29,6 +29,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Changed FlexColorScheme default of for `BottomAppBar` color to be `colorScheme.surface` same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color value is the same.
 
+- The Material buttons `ElevatedButton`, `OutlinedButton` and `TextButon`, now only create custom sub-theme properties in Material 3 mode when using none default (none null) values. Previously, they created sub-themes for some properties corresponding to the default values. This task now falls back to the role of default widget behaviour, as it should. Effective styles are unchanged.
+
 **THEMES PLAYGROUND**
 
 **NEW**
@@ -51,9 +53,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO**
 
-- Review buttons hover elevation and null base color.
 - Review M3 TextField defaults and support plain M3 style too.
-- Add DropdownMenu to Widget Showcase.
+- Add DropdownMenu to the Widget Showcase.
 - Review M3 Playground component colors and add new buttons to it.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.

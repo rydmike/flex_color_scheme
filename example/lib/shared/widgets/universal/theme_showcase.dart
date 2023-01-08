@@ -25,6 +25,10 @@ class ThemeShowcase extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const TextInputField(),
+        const SizedBox(height: 8),
+        const DropDownButtonFormField(),
+        const SizedBox(height: 8),
+        const DropDownMenuShowcase(),
         const Divider(),
         const ElevatedButtonShowcase(),
         const SizedBox(height: 8),
@@ -872,15 +876,15 @@ class _DropDownButtonState extends State<_DropDownButton> {
   }
 }
 
-class _DropDownButtonFormField extends StatefulWidget {
-  const _DropDownButtonFormField();
+class DropDownButtonFormField extends StatefulWidget {
+  const DropDownButtonFormField({super.key});
 
   @override
-  State<_DropDownButtonFormField> createState() =>
+  State<DropDownButtonFormField> createState() =>
       _DropDownButtonFormFieldState();
 }
 
-class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
+class _DropDownButtonFormFieldState extends State<DropDownButtonFormField> {
   String selectedItem = 'Dropdown button form field 1';
   @override
   Widget build(BuildContext context) {
@@ -903,6 +907,46 @@ class _DropDownButtonFormFieldState extends State<_DropDownButtonFormField> {
           child: Text(value),
         );
       }).toList(),
+    );
+  }
+}
+
+class DropDownMenuShowcase extends StatefulWidget {
+  const DropDownMenuShowcase({super.key});
+
+  @override
+  State<DropDownMenuShowcase> createState() => _DropDownMenuShowcaseState();
+}
+
+class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
+  String selectedItem = 'Drop menu 1';
+  @override
+  Widget build(BuildContext context) {
+    return DropdownMenu<String>(
+      initialSelection: selectedItem,
+      onSelected: (String? value) {
+        setState(() {
+          selectedItem = value ?? 'Dropdown button form field 1';
+        });
+      },
+      dropdownMenuEntries: const <DropdownMenuEntry<String>>[
+        DropdownMenuEntry<String>(
+          label: 'Drop menu 1',
+          value: 'one',
+        ),
+        DropdownMenuEntry<String>(
+          label: 'Drop menu 2',
+          value: 'two',
+        ),
+        DropdownMenuEntry<String>(
+          label: 'Drop menu 3',
+          value: 'three',
+        ),
+        DropdownMenuEntry<String>(
+          label: 'Drop menu 4',
+          value: 'four',
+        ),
+      ],
     );
   }
 }
@@ -1170,8 +1214,6 @@ class _TextInputFieldState extends State<TextInputField> {
             labelText: 'TextField - Disabled',
           ),
         ),
-        const SizedBox(height: 8),
-        const _DropDownButtonFormField(),
       ],
     );
   }

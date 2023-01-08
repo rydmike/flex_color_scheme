@@ -298,6 +298,25 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const ListTile(
+          title: Text('DropdownMenu'),
+          subtitle: Text('New Material 3 widget'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: DropDownMenuShowcase(),
+        ),
+        const ListTile(
+          title: Text('DropdownButtonFormField'),
+          subtitle: Text('An older Material widget. Uses the text input '
+              'decoration theme'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: DropDownButtonFormField(),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }
