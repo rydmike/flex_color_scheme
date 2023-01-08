@@ -25,7 +25,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix may be removed when the issue is fixed.
 
-- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if null it follows defined `appBarElevation` as before. In M3 it is kept null to default to M3's default elevation of 3, to always get elevation tint.
+- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if null it follows defined `appBarElevation` as before. In M3 it is kept null to default to M3's default elevation of 3, to always get elevation tint. In M3 mode a minor spec deviation was noted in Flutter SDK and reported here https://github.com/flutter/flutter/issues/118150.
 
 - Changed FlexColorScheme default of for `BottomAppBar` color to be `colorScheme.surface` same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color value is the same.
 
