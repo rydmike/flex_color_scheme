@@ -159,6 +159,16 @@ String generateThemeDartCode(ThemeController controller) {
   final String appBarElevationDark = controller.appBarElevationDark != 0
       ? '  appBarElevation: ${controller.appBarElevationDark.toStringAsFixed(1)},\n'
       : '';
+  final String bottomAppBarElevationLight = controller
+              .bottomAppBarElevationLight !=
+          null
+      ? '  bottomAppBarElevation: ${controller.bottomAppBarElevationLight!.toStringAsFixed(1)},\n'
+      : '';
+  final String bottomAppBarElevationDark = controller
+              .bottomAppBarElevationDark !=
+          null
+      ? '  bottomAppBarElevation: ${controller.bottomAppBarElevationDark!.toStringAsFixed(1)},\n'
+      : '';
   final String tabBarStyle = controller.tabBarStyle != FlexTabBarStyle.forAppBar
       ? '  tabBarStyle: ${controller.tabBarStyle},\n'
       : '';
@@ -1178,6 +1188,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarOpacityLight'
       '$transparentStatusBar'
       '$appBarElevationLight'
+      '$bottomAppBarElevationLight'
       '$tabBarStyle'
       '$lightIsWhite'
       '$swapLightColors'
@@ -1203,6 +1214,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarOpacityDark'
       '$transparentStatusBar'
       '$appBarElevationDark'
+      '$bottomAppBarElevationDark'
       '$tabBarStyle'
       '$darkIsTrueBlack'
       '$swapDarkColors'

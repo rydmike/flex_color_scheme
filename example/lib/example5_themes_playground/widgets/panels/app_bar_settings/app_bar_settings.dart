@@ -92,8 +92,8 @@ class AppBarSettings extends StatelessWidget {
             enabled: controller.useFlexColorScheme,
             title: const Text('Light AppBar elevation'),
             subtitle: Slider(
-              max: 24,
-              divisions: 48,
+              max: 20,
+              divisions: 40,
               label: controller.appBarElevationLight.toStringAsFixed(1),
               value: controller.appBarElevationLight,
               onChanged: controller.useFlexColorScheme
@@ -160,8 +160,8 @@ class AppBarSettings extends StatelessWidget {
             enabled: controller.useFlexColorScheme,
             title: const Text('Dark AppBar elevation'),
             subtitle: Slider(
-              max: 24,
-              divisions: 48,
+              max: 20,
+              divisions: 40,
               label: controller.appBarElevationDark.toStringAsFixed(1),
               value: controller.appBarElevationDark,
               onChanged: controller.useFlexColorScheme
@@ -281,14 +281,15 @@ class AppBarSettings extends StatelessWidget {
             title: const Text('Light BottomAppBar elevation'),
             subtitle: Slider(
               min: -0.5,
-              max: 24,
-              divisions: 49,
+              max: 20,
+              divisions: 41,
               label: controller.useFlexColorScheme
                   ? controller.bottomAppBarElevationLight == null ||
                           (controller.bottomAppBarElevationLight ?? -0.5) < 0
                       ? controller.useMaterial3
                           ? 'default 3'
-                          : controller.appBarElevationLight.toStringAsFixed(1)
+                          // ignore: lines_longer_than_80_chars
+                          : 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
                       : (controller.bottomAppBarElevationLight
                               ?.toStringAsFixed(1) ??
                           '')
@@ -301,7 +302,7 @@ class AppBarSettings extends StatelessWidget {
               onChanged: controller.useFlexColorScheme
                   ? (double value) {
                       controller.setBottomAppBarElevationLight(
-                          value < 0 ? null : value.roundToDouble());
+                          value < 0 ? null : value);
                     }
                   : null,
             ),
@@ -322,8 +323,8 @@ class AppBarSettings extends StatelessWidget {
                                     0
                             ? controller.useMaterial3
                                 ? 'default 3'
-                                : controller.appBarElevationLight
-                                    .toStringAsFixed(1)
+                                // ignore: lines_longer_than_80_chars
+                                : 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
                             : (controller.bottomAppBarElevationLight
                                     ?.toStringAsFixed(1) ??
                                 '')
@@ -343,14 +344,15 @@ class AppBarSettings extends StatelessWidget {
             title: const Text('Dark BottomAppBar elevation'),
             subtitle: Slider(
               min: -0.5,
-              max: 24,
-              divisions: 49,
+              max: 20,
+              divisions: 40,
               label: controller.useFlexColorScheme
                   ? controller.bottomAppBarElevationDark == null ||
                           (controller.bottomAppBarElevationDark ?? -0.5) < 0
                       ? controller.useMaterial3
                           ? 'default 3'
-                          : controller.appBarElevationDark.toStringAsFixed(1)
+                          // ignore: lines_longer_than_80_chars
+                          : 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
                       : (controller.bottomAppBarElevationDark
                               ?.toStringAsFixed(1) ??
                           '')
@@ -363,7 +365,7 @@ class AppBarSettings extends StatelessWidget {
               onChanged: controller.useFlexColorScheme
                   ? (double value) {
                       controller.setBottomAppBarElevationDark(
-                          value < 0 ? null : value.roundToDouble());
+                          value < 0 ? null : value);
                     }
                   : null,
             ),
@@ -383,8 +385,8 @@ class AppBarSettings extends StatelessWidget {
                                     0
                             ? controller.useMaterial3
                                 ? 'default 3'
-                                : controller.appBarElevationDark
-                                    .toStringAsFixed(1)
+                                // ignore: lines_longer_than_80_chars
+                                : 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
                             : (controller.bottomAppBarElevationDark
                                     ?.toStringAsFixed(1) ??
                                 '')

@@ -301,7 +301,9 @@ class TextFieldSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('DropdownMenu'),
-          subtitle: Text('New Material 3 widget'),
+          subtitle: Text('This is a new Material 3 widget. Can bu used for '
+              'text entry input to select an option in a dropdown. By default '
+              'the text entry part follow input decoration theme.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
