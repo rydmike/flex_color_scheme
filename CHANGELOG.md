@@ -45,6 +45,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
+- Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
 
 **FIX**
 
@@ -54,7 +55,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **TODO**
 
 - Review M3 TextField defaults and support plain M3 style too.
-- Add DropdownMenu to the Widget Showcase.
 - Review M3 Playground component colors and add new buttons to it.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
