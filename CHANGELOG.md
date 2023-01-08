@@ -42,6 +42,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
+- Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 
 **FIX**
 
@@ -50,7 +51,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO**
 
-- Add `BottomAppBar` elevation setting to Playground.
 - Review buttons hover elevation and null base color.
 - Review M3 TextField defaults and support plain M3 style too.
 - Add DropdownMenu to Widget Showcase.

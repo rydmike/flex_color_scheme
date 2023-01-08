@@ -423,7 +423,7 @@ class Store {
   // Default value for the appBarOpacityDark, also used to reset settings.
   static const double defaultAppBarOpacityDark = 1.0;
 
-  // Key used to read and save the appBarElevation value.
+  // Key used to read and save the appBarElevationLight value.
   static const String keyAppBarElevationLight = 'appBarElevation';
   // Default value for the appBarElevation, also used to reset settings.
   static const double defaultAppBarElevationLight = 0.0;
@@ -432,6 +432,18 @@ class Store {
   static const String keyAppBarElevationDark = 'appBarElevationDark';
   // Default value for the appBarElevationDark, also used to reset settings.
   static const double defaultAppBarElevationDark = 0.0;
+
+  // Key used to read and save the bottomAppBarElevation value.
+  static const String keyBottomAppBarElevationLight =
+      'bottomAppBarElevationLight';
+  // Default value for the bottomAppBarElevation, also used to reset settings.
+  static const double? defaultBottomAppBarElevationLight = null;
+
+  // Key used to read and save the bottomAppBarElevationDark value.
+  static const String keyBottomAppBarElevationDark =
+      'bottomAppBarElevationDark';
+  // Default value for the bottomAppBarElevationDark, also used to reset settings.
+  static const double? defaultBottomAppBarElevationDark = null;
 
   // Key used to read and save the transparentStatusBar value.
   static const String keyTransparentStatusBar = 'transparentStatusBar';

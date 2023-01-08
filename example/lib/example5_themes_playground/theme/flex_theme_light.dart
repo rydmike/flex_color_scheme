@@ -113,8 +113,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     appBarOpacity: controller.appBarOpacityLight,
     // Used to control if we use one or two toned status bar.
     transparentStatusBar: controller.transparentStatusBar,
-    // Used to modify the themed AppBar elevation.
+    // Used to modify the themed AppBar and BottomAppBar elevation.
     appBarElevation: controller.appBarElevationLight,
+    bottomAppBarElevation: controller.bottomAppBarElevationLight,
     // Enum used to select what TabBar style we use.
     tabBarStyle: controller.tabBarStyle,
     // Keep scaffold plain white in all blend modes.

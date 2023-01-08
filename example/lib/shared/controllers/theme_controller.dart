@@ -235,6 +235,12 @@ class ThemeController with ChangeNotifier {
         Store.keyAppBarElevationLight, Store.defaultAppBarElevationLight);
     _appBarElevationDark = await _themeService.load(
         Store.keyAppBarElevationDark, Store.defaultAppBarElevationDark);
+    _bottomAppBarElevationLight = await _themeService.load(
+        Store.keyBottomAppBarElevationLight,
+        Store.defaultBottomAppBarElevationLight);
+    _bottomAppBarElevationDark = await _themeService.load(
+        Store.keyBottomAppBarElevationDark,
+        Store.defaultBottomAppBarElevationDark);
     _transparentStatusBar = await _themeService.load(
         Store.keyTransparentStatusBar, Store.defaultTransparentStatusBar);
     _appBarBackgroundSchemeColorLight = await _themeService.load(
@@ -633,6 +639,9 @@ class ThemeController with ChangeNotifier {
     setAppBarOpacityDark(Store.defaultAppBarOpacityDark, false);
     setAppBarElevationLight(Store.defaultAppBarElevationLight, false);
     setAppBarElevationDark(Store.defaultAppBarElevationDark, false);
+    setBottomAppBarElevationLight(
+        Store.defaultBottomAppBarElevationLight, false);
+    setBottomAppBarElevationDark(Store.defaultBottomAppBarElevationDark, false);
     setTransparentStatusBar(Store.defaultTransparentStatusBar, false);
     setAppBarBackgroundSchemeColorLight(
         Store.defaultAppBarBackgroundSchemeColorLight, false);
@@ -1588,6 +1597,24 @@ class ThemeController with ChangeNotifier {
     _appBarElevationDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAppBarElevationDark, value));
+  }
+
+  late double? _bottomAppBarElevationLight;
+  double? get bottomAppBarElevationLight => _bottomAppBarElevationLight;
+  void setBottomAppBarElevationLight(double? value, [bool notify = true]) {
+    if (value == _bottomAppBarElevationLight) return;
+    _bottomAppBarElevationLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarElevationLight, value));
+  }
+
+  late double? _bottomAppBarElevationDark;
+  double? get bottomAppBarElevationDark => _bottomAppBarElevationDark;
+  void setBottomAppBarElevationDark(double? value, [bool notify = true]) {
+    if (value == _bottomAppBarElevationDark) return;
+    _bottomAppBarElevationDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarElevationDark, value));
   }
 
   late bool _transparentStatusBar;

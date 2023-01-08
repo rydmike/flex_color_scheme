@@ -1328,23 +1328,6 @@ class BottomAppBarShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'BottomAppBar',
-              style: denseHeader,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Defaults in Flutter SDK in M2 ThemeData.bottomAppBarColor which '
-              'is set to colorScheme.surface in M2 and elevation 8. In M3 '
-              'to colorScheme.surface color, elevation 3, no shadow but '
-              'with surface elevation tint.',
-              style: denseBody,
-            ),
-          ),
           BottomAppBar(
             child: Row(
               children: <Widget>[
@@ -1365,6 +1348,23 @@ class BottomAppBarShowcase extends StatelessWidget {
                   onPressed: () {},
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'BottomAppBar',
+              style: denseHeader,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Flutter M2 past default color is ThemeData.bottomAppBarColor '
+              '(deprecated) now colorScheme.surface and elevation 8. '
+              'In M3 it defaults to to colorScheme.surface color, elevation 3, '
+              'no shadow, but with surface elevation tint.',
+              style: denseBody,
             ),
           ),
         ],
@@ -1586,9 +1586,9 @@ class _BottomNavigationBarShowcaseState
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: Text(
-            'Default SDK background color is theme canvasColor via Material, '
-            'and canvasColor is set to color scheme background, elevation '
-            'is 8. FCS sub-theme default is color scheme background and '
+            'Default SDK background color is theme canvasColor via Material. '
+            'The canvasColor is typically colorScheme.background, elevation '
+            'is 8. FCS sub-theme default is colorScheme.background and '
             'elevation 0.',
             style: denseBody,
           ),

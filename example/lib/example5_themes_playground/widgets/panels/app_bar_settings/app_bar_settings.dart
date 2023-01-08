@@ -20,17 +20,17 @@ class AppBarSettings extends StatelessWidget {
         const AppBarShowcase(),
         const ListTile(
           subtitle: Text(
-            'Material2 uses primary colored AppBar in light '
-            'mode and almost black in dark mode. Material3 defaults to surface '
+            'Material 2 uses primary colored AppBar in light mode and almost '
+            'black in dark mode. Material 3 defaults to surface '
             'color in both light and dark theme mode. '
-            'Here you can use select '
+            'With FCS you can use select '
             'Primary, Material2 surface, background and surface colors '
             'with their surfaceTint blends, or use a custom color.',
           ),
         ),
         if (isLight)
           AppBarStylePopupMenu(
-            title: const Text('Light theme AppBarStyle'),
+            title: const Text('Light AppBarStyle'),
             labelForDefault: 'default',
             index: controller.appBarStyleLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
@@ -59,7 +59,7 @@ class AppBarSettings extends StatelessWidget {
           )
         else
           AppBarStylePopupMenu(
-            title: const Text('Dark theme AppBarStyle'),
+            title: const Text('Dark AppBarStyle'),
             labelForDefault: 'default',
             index: controller.appBarStyleDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
@@ -90,7 +90,7 @@ class AppBarSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light theme elevation'),
+            title: const Text('Light AppBar elevation'),
             subtitle: Slider(
               max: 24,
               divisions: 48,
@@ -107,13 +107,11 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'ELEV',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     controller.appBarElevationLight.toStringAsFixed(1),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -122,8 +120,8 @@ class AppBarSettings extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light theme opacity'),
-            subtitle: const Text('Themed opacity, try 85% to 98%'),
+            title: const Text('Light opacity'),
+            subtitle: const Text('To use themed opacity, try 85% to 98%'),
           ),
           ListTile(
             title: Slider(
@@ -144,15 +142,13 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'OPACITY',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
                     '${(controller.appBarOpacityLight * 100).toStringAsFixed(0)}'
                     ' %',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -162,7 +158,7 @@ class AppBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark theme elevation'),
+            title: const Text('Dark AppBar elevation'),
             subtitle: Slider(
               max: 24,
               divisions: 48,
@@ -179,13 +175,11 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'ELEV',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     controller.appBarElevationDark.toStringAsFixed(1),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -194,8 +188,8 @@ class AppBarSettings extends StatelessWidget {
           ),
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark theme opacity'),
-            subtitle: const Text('Themed opacity, try 85% to 98%'),
+            title: const Text('Dark opacity'),
+            subtitle: const Text('To use themed opacity, try 85% to 98%'),
           ),
           ListTile(
             title: Slider(
@@ -216,14 +210,12 @@ class AppBarSettings extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'OPACITY',
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
                   Text(
                     '${(controller.appBarOpacityDark * 100).toStringAsFixed(0)}'
                     ' %',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
+                    style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -242,7 +234,7 @@ class AppBarSettings extends StatelessWidget {
         ),
         if (isLight)
           ColorSchemePopupMenu(
-            title: const Text('Light theme custom background color'),
+            title: const Text('Light custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (primary)',
@@ -260,7 +252,7 @@ class AppBarSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark theme custom background color'),
+            title: const Text('Dark custom background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
                 : 'default (surface)',
@@ -277,6 +269,136 @@ class AppBarSettings extends StatelessWidget {
                 : null,
           ),
         const Divider(),
+        const ListTile(
+          title: Text('BottomAppBar'),
+          subtitle: Text('Typically used with Scaffold.bottomNavigationBar. '
+              'Elevation in FCS defaults to AppBar elevation in M2, '
+              'when using M3 it defaults to 3 and gets elevation tint.'),
+        ),
+        if (isLight) ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Light BottomAppBar elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 24,
+              divisions: 49,
+              label: controller.useFlexColorScheme
+                  ? controller.bottomAppBarElevationLight == null ||
+                          (controller.bottomAppBarElevationLight ?? -0.5) < 0
+                      ? controller.useMaterial3
+                          ? 'default 3'
+                          : controller.appBarElevationLight.toStringAsFixed(1)
+                      : (controller.bottomAppBarElevationLight
+                              ?.toStringAsFixed(1) ??
+                          '')
+                  : controller.useMaterial3
+                      ? 'default 3'
+                      : 'default 8',
+              value: controller.useFlexColorScheme
+                  ? controller.bottomAppBarElevationLight ?? -0.5
+                  : -0.5,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setBottomAppBarElevationLight(
+                          value < 0 ? null : value.roundToDouble());
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme
+                        ? controller.bottomAppBarElevationLight == null ||
+                                (controller.bottomAppBarElevationLight ??
+                                        -0.5) <
+                                    0
+                            ? controller.useMaterial3
+                                ? 'default 3'
+                                : controller.appBarElevationLight
+                                    .toStringAsFixed(1)
+                            : (controller.bottomAppBarElevationLight
+                                    ?.toStringAsFixed(1) ??
+                                '')
+                        : controller.useMaterial3
+                            ? 'default 3'
+                            : 'default 8',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Dark BottomAppBar elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 24,
+              divisions: 49,
+              label: controller.useFlexColorScheme
+                  ? controller.bottomAppBarElevationDark == null ||
+                          (controller.bottomAppBarElevationDark ?? -0.5) < 0
+                      ? controller.useMaterial3
+                          ? 'default 3'
+                          : controller.appBarElevationDark.toStringAsFixed(1)
+                      : (controller.bottomAppBarElevationDark
+                              ?.toStringAsFixed(1) ??
+                          '')
+                  : controller.useMaterial3
+                      ? 'default 3'
+                      : 'default 8',
+              value: controller.useFlexColorScheme
+                  ? controller.bottomAppBarElevationDark ?? -0.5
+                  : -0.5,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setBottomAppBarElevationDark(
+                          value < 0 ? null : value.roundToDouble());
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme
+                        ? controller.bottomAppBarElevationDark == null ||
+                                (controller.bottomAppBarElevationDark ?? -0.5) <
+                                    0
+                            ? controller.useMaterial3
+                                ? 'default 3'
+                                : controller.appBarElevationDark
+                                    .toStringAsFixed(1)
+                            : (controller.bottomAppBarElevationDark
+                                    ?.toStringAsFixed(1) ??
+                                '')
+                        : controller.useMaterial3
+                            ? 'default 3'
+                            : 'default 8',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
         const BottomAppBarShowcase(),
         const SizedBox(height: 16),
       ],
