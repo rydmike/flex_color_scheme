@@ -537,23 +537,22 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
             });
           },
         ),
-        // TODO(rydmike): New M3 Switch features, only master. Add later.
-        // Switch(
-        //   thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-        //       (Set<MaterialState> states) {
-        //     if (states.contains(MaterialState.selected)) {
-        //       return const Icon(Icons.check);
-        //     }
-        //     return const Icon(Icons
-        //         .close); // All other states will use the default thumbIcon.
-        //   }),
-        //   value: isOn,
-        //   onChanged: (bool value) {
-        //     setState(() {
-        //       isOn = value;
-        //     });
-        //   },
-        // ),
+        Switch(
+          thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return const Icon(Icons.check);
+            }
+            // All other states will use the default thumbIcon.
+            return const Icon(Icons.close);
+          }),
+          value: isOn1,
+          onChanged: (bool value) {
+            setState(() {
+              isOn1 = value;
+            });
+          },
+        ),
         Switch(
           value: isOn2,
           onChanged: (bool value) {
@@ -782,7 +781,7 @@ class PopupMenuButtonShowcase extends StatelessWidget {
           ),
           onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('Show menu'),
+          label: const Text('Show Popup Menu'),
         ),
       ),
     );
@@ -832,7 +831,7 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
           ),
           onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('Show ListTile menu'),
+          label: const Text('Show Popup ListTile menu'),
         ),
       ),
     );

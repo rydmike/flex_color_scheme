@@ -29,7 +29,7 @@ class ComponentSettings extends StatelessWidget {
         // UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
         SwitchListTile(
-          title: const Text('Use Material 2 style Divider in Material 3'),
+          title: const Text('Use Material 2 style divider in Material 3'),
           subtitle: const Text('In M3 used primary color tinted outlineVariant '
               'does not fit on all colors. The M2 style based on '
               'black or white with opacity does. It is also less prominent '
