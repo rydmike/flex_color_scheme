@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -254,6 +256,18 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         const SizedBox(height: 16),
         const MaterialBannerSnackBarShowcase(),
         const SizedBox(height: 8),
+        ListTile(
+          title: const Text('Show a test SnackBar'),
+          trailing: FilledButton(
+            onPressed: () {
+              unawaited(_showDemoSnackBar(context));
+            },
+            child: const Text('show'),
+          ),
+          onTap: () {
+            unawaited(_showDemoSnackBar(context));
+          },
+        ),
         ColorSchemePopupMenu(
           title: const Text('SnackBar background color'),
           labelForDefault: snackDefaultColorLabel,
@@ -270,6 +284,20 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
               : null,
         ),
       ],
+    );
+  }
+
+  Future<void> _showDemoSnackBar(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('A demo SnackBar'),
+        showCloseIcon: true,
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {},
+        ),
+        duration: const Duration(milliseconds: 2000),
+      ),
     );
   }
 }

@@ -3430,10 +3430,15 @@ class FlexSubThemes {
             .copyWith(color: foreground)
         : null;
 
+    // TODO(rydmike): Maybe add customization of action and close colors.
+    // TODO(rydmike): Report M3 bug, action colors are not used in M3 mode.
     return SnackBarThemeData(
       elevation: elevation ?? kSnackBarElevation,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
+      actionTextColor: foreground?.withAlpha(0xDD),
+      disabledActionTextColor: foreground?.withAlpha(0x11),
+      closeIconColor: foreground?.withAlpha(0xBB),
     );
   }
 

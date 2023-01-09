@@ -35,6 +35,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Previous Material 3 color schemes, `materialBaseline`, `verdunHemlock` and `dellGenoa` were changed to use Material 3 error colors, also in Material 2 mode and when not using seed colors.
 
+- Fixed `SnackBarTheme` action and closed icon colors. Found SDK bug, action color theme colors no effect in M3 mode. Issue not yet reported. Report it.
+
 **THEMES PLAYGROUND**
 
 **NEW**
