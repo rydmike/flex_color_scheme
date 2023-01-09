@@ -16,9 +16,8 @@ class ListTileSettings extends StatelessWidget {
           title: Text('Themed List tiles'),
           subtitle: Text(
             'There are four different ListTile types in Flutter. They '
-            'are very useful widgets for settings and options. '
-            'In FlexColorScheme you can '
-            'for now only quick theme them, by theming the colors of the '
+            'are useful widgets for settings and options. '
+            'In FSC you can theme them by theming the colors of the '
             'switches, checkboxes and radio buttons they use.',
           ),
         ),

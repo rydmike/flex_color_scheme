@@ -31,7 +31,7 @@ class SwitchesSettings extends StatelessWidget {
                 : 'default (secondary)';
 
     final String explainThumb =
-        controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
+        controller.useMaterial3 ? ' pressed/hovered/focused' : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,7 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: Text('Switch $explainThumb thumb color'),
+          title: Text('Switch ON state$explainThumb thumb color'),
           labelForDefault: labelForDefaultThumbColor,
           index: controller.switchThumbSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
