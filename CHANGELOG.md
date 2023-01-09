@@ -59,7 +59,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **TODO**
 
 - Review M3 TextField defaults and support plain M3 style too.
-- Review and tune new M3 colors, make secondaries slightly off from primary hue.   
+- Review and tune new M3 color schemes, make secondaries slightly off from primary hue.   
 - Review M3 Playground component colors and add new buttons to it.
 - In seed, use custom tint color on neutral tonal palette.  
 - Add M3 support to `TabBar`.

@@ -251,18 +251,23 @@ class _ColorNameValueState extends State<ColorNameValue> {
               textDirection: Directionality.of(context),
               top: 14,
               start: 0,
-              child: Switch(
-                value: widget.isLocked!,
-                activeColor: Color.alphaBlend(
-                    widget.color.withAlpha(0x25), widget.textColor),
-                activeTrackColor: Color.alphaBlend(
-                    widget.color.withAlpha(0x60), widget.textColor),
-                inactiveTrackColor: Color.alphaBlend(
-                    widget.color.withAlpha(0xAA), widget.textColor),
-                inactiveThumbColor: Color.alphaBlend(
-                    widget.color.withAlpha(0xDD), widget.textColor),
-                onChanged: widget.onLocked?.call,
-                // materialTapTargetSize: MaterialTapTargetSize.padded,
+              child: Theme(
+                data: theme.copyWith(
+                    colorScheme: theme.colorScheme
+                        .copyWith(outline: widget.color.withAlpha(0x77))),
+                child: Switch(
+                  value: widget.isLocked!,
+                  activeColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x44), widget.textColor),
+                  activeTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x99), widget.textColor),
+                  inactiveTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xAA), widget.textColor),
+                  inactiveThumbColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xCC), widget.textColor),
+                  onChanged: widget.onLocked?.call,
+                  // materialTapTargetSize: MaterialTapTargetSize.padded,
+                ),
               ),
             ),
         ],
