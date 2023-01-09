@@ -50,6 +50,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const SizedBox(height: 8),
         Wrap(
+          spacing: 8,
+          runSpacing: 4,
           children: const <Widget>[
             PopupMenuButtonShowcase(),
             SizedBox(width: 8),
@@ -781,7 +783,7 @@ class PopupMenuButtonShowcase extends StatelessWidget {
           ),
           onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('Show Popup Menu'),
+          label: const Text('Show PopupMenu'),
         ),
       ),
     );
@@ -831,7 +833,7 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
           ),
           onPressed: () {},
           icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('Show Popup ListTile menu'),
+          label: const Text('ListTile PopupMenu'),
         ),
       ),
     );
@@ -2313,34 +2315,36 @@ class MaterialShowcase extends StatelessWidget {
           style: denseBody,
         ),
         const SizedBox(height: 8),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 0,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 0, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 1,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 1, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2372,32 +2376,34 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 1, '
                   'with surfaceTint, and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        const Material(
+        Material(
           type: MaterialType.canvas,
           elevation: 6,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2409,15 +2415,16 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
                   'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2429,15 +2436,16 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
                   'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2454,34 +2462,36 @@ class MaterialShowcase extends StatelessWidget {
           style: denseBody,
         ),
         const SizedBox(height: 8),
-        const Material(
+        Material(
           type: MaterialType.card,
           elevation: 0,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 0, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        const Material(
+        Material(
           type: MaterialType.card,
           elevation: 1,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2493,15 +2503,16 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
                   'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2513,32 +2524,34 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
                   'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        const Material(
+        Material(
           type: MaterialType.card,
           elevation: 6,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, default tint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2550,15 +2563,16 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
                   'with surfaceTint and no shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2570,15 +2584,16 @@ class MaterialShowcase extends StatelessWidget {
           elevation: 6,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
                   'with surfaceTint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2623,30 +2638,32 @@ class CardShowcase extends StatelessWidget {
         Card(
           elevation: 0,
           surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 0',
+                  'Card, elevation 0, with surfaceTint and default shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 10),
-        const Card(
+        Card(
           elevation: 1,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                   child: Text(
                 'Card, elevation 1, default surfaceTint and shadow',
                 textAlign: TextAlign.center,
+                style: denseHeader,
               )),
             ),
           ),
@@ -2655,14 +2672,15 @@ class CardShowcase extends StatelessWidget {
         Card(
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 1, with surfaceTint, default shadow',
+                  'Card, elevation 1, with surfaceTint and default shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2673,31 +2691,33 @@ class CardShowcase extends StatelessWidget {
           elevation: 1,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 1,  with surfaceTint, '
+                  'Card, elevation 1, with surfaceTint and '
                   'transparent shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const Divider(),
-        const Card(
+        Card(
           elevation: 4,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Card, elevation 4, default surfaceTint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2707,12 +2727,13 @@ class CardShowcase extends StatelessWidget {
         Card(
           elevation: 4,
           surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Center(
               child: Text(
-                'Card, elevation 4, with surfaceTint, default shadow',
+                'Card, elevation 4, with surfaceTint and default shadow',
                 textAlign: TextAlign.center,
+                style: denseHeader,
               ),
             ),
           ),
@@ -2722,31 +2743,33 @@ class CardShowcase extends StatelessWidget {
           elevation: 4,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 4, with surfaceTint, '
+                  'Card, elevation 4, with surfaceTint and '
                   'transparent shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
           ),
         ),
         const Divider(),
-        const Card(
+        Card(
           elevation: 10,
           child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
                   'Card, elevation 10, default surfaceTint and shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2756,14 +2779,15 @@ class CardShowcase extends StatelessWidget {
         Card(
           elevation: 10,
           surfaceTintColor: colorScheme.surfaceTint,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 10, with surfaceTint',
+                  'Card, elevation 10, with surfaceTint and default shadow',
                   textAlign: TextAlign.center,
+                  style: denseHeader,
                 ),
               ),
             ),
@@ -2774,15 +2798,16 @@ class CardShowcase extends StatelessWidget {
           elevation: 10,
           surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: Colors.transparent,
-          child: const SizedBox(
+          child: SizedBox(
             height: 60,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Center(
                   child: Text(
-                'Card, elevation 10, with surfaceTint, '
+                'Card, elevation 10, with surfaceTint and '
                 'transparent shadow',
                 textAlign: TextAlign.center,
+                style: denseHeader,
               )),
             ),
           ),
