@@ -257,7 +257,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         const MaterialBannerSnackBarShowcase(),
         const SizedBox(height: 8),
         ListTile(
-          title: const Text('Show a test SnackBar'),
+          title: const Text('Show a real test SnackBar'),
           trailing: FilledButton(
             onPressed: () {
               unawaited(_showDemoSnackBar(context));
@@ -290,13 +290,13 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
   Future<void> _showDemoSnackBar(BuildContext context) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('A demo SnackBar'),
+        content: const Text('A SnackBar example'),
         showCloseIcon: true,
         action: SnackBarAction(
           label: 'Undo',
           onPressed: () {},
         ),
-        duration: const Duration(milliseconds: 2000),
+        duration: const Duration(milliseconds: 3000),
       ),
     );
   }
