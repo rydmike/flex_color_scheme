@@ -8,6 +8,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW** 
 
+- Added 5 new Material 3 color schemes: `indigoM3`, `tealM3`, `greenM3`, `yukonGoldM3` and `orangeM3`.
+  
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
 
 - Added support for `fontFamilyFallback` and `package` so that a `copyWith` on `FlexColorScheme` generated `ThemeData` is not needed to use them. 
@@ -30,6 +32,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Changed FlexColorScheme default of for `BottomAppBar` color to be `colorScheme.surface` same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color value is the same.
 
 - The Material buttons `ElevatedButton`, `OutlinedButton` and `TextButon`, now only create custom sub-theme properties in Material 3 mode when using none default (none null) values. Previously, they created sub-themes for some properties corresponding to the default values. This task now falls back to the role of default widget behaviour, as it should. Effective styles are unchanged.
+
+- Previous Material 3 color schemes, `materialBaseline`, `verdunHemlock` and `dellGenoa` were changed to use Material 3 error colors, also in Material 2 mode and when not using seed colors.
 
 **THEMES PLAYGROUND**
 
@@ -55,7 +59,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **TODO**
 
 - Review M3 TextField defaults and support plain M3 style too.
-- Review M3 Playground component colors and add new buttons to it.  
+- Review and tune new M3 colors, make secondaries slightly off from primary hue.   
+- Review M3 Playground component colors and add new buttons to it.
+- In seed, use custom tint color on neutral tonal palette.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  
@@ -65,7 +71,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Maybe add ToggleButtons border color.   
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
 - Maybe add new MenuBar theme.
-- Maybe add some new M3 optimized color schemes.
 - Maybe consider mods for tinted disabled color, light mode at least.  
 - Review and fix test coverage.
 - Review and test all examples. 

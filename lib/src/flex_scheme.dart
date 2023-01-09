@@ -142,6 +142,21 @@ enum FlexScheme {
   /// [here](https://m3.material.io/styles/color/the-color-system/color-roles).
   dellGenoa,
 
+  /// An indigo based Material 3 colorscheme, with old lavender tertiary.
+  indigoM3,
+
+  /// A teal based Material 3 colorscheme, with azure blue tertiary.
+  tealM3,
+
+  /// A green based Material 3 colorscheme, with william blue-grey tertiary.
+  greenM3,
+
+  /// A Yukon Gold based Material 3 colorscheme, with mineral green tertiary.
+  yukonGoldM3,
+
+  /// An orange based Material 3 colorscheme, with verdigris green tertiary.
+  orangeM3,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
