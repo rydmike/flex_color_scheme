@@ -2744,34 +2744,34 @@ class FlexColor {
   static const Color redM3LightPrimaryContainer = Color(0xFFFFDAD5);
 
   /// Red M3 theme color for light secondary color.
-  static const Color redM3LightSecondary = Color(0xFF775652);
+  static const Color redM3LightSecondary = Color(0xFF96482B);
 
   /// Red M3 theme color for light secondary container color.
-  static const Color redM3LightSecondaryContainer = Color(0xFFFFDAD5);
+  static const Color redM3LightSecondaryContainer = Color(0xFFFFDBCF);
 
   /// Red M3 theme color for light tertiary color.
-  static const Color redM3LightTertiary = Color(0xFF705C2E);
+  static const Color redM3LightTertiary = Color(0xFF286294);
 
   /// Red M3 theme color for light tertiary container color.
-  static const Color redM3LightTertiaryContainer = Color(0xFFFCDFA6);
+  static const Color redM3LightTertiaryContainer = Color(0xFFD0E4FF);
 
   /// Red M3 theme color for dark primary color.
-  static const Color redM3DarkPrimary = Color(0xFFFFB4A9);
+  static const Color redM3DarkPrimary = Color(0xFFFFB4AA);
 
   /// Red M3 theme color for dark primary container color.
-  static const Color redM3DarkPrimaryContainer = Color(0xFF930005);
+  static const Color redM3DarkPrimaryContainer = Color(0xFFFFB4AA);
 
   /// Red M3 theme color for dark secondary color.
-  static const Color redM3DarkSecondary = Color(0xFFE7BDB7);
+  static const Color redM3DarkSecondary = Color(0xFF690003);
 
   /// Red M3 theme color for dark secondary container color.
-  static const Color redM3DarkSecondaryContainer = Color(0xFF5D3F3B);
+  static const Color redM3DarkSecondaryContainer = Color(0xFF783116);
 
   /// Red M3 theme color for dark tertiary color.
-  static const Color redM3DarkTertiary = Color(0xFFDFC38C);
+  static const Color redM3DarkTertiary = Color(0xFF9BCBFF);
 
   /// Red M3 theme color for dark tertiary container color.
-  static const Color redM3DarkTertiaryContainer = Color(0xFF574419);
+  static const Color redM3DarkTertiaryContainer = Color(0xFF004A79);
 
   /// English name of the pink M3 theme.
   static const String pinkM3Name = 'Pink M3';
@@ -2788,16 +2788,16 @@ class FlexColor {
   static const Color pinkM3LightPrimaryContainer = Color(0xFFFFD9DE);
 
   /// Pink M3 theme color for light secondary color.
-  static const Color pinkM3LightSecondary = Color(0xFF75565B);
+  static const Color pinkM3LightSecondary = Color(0xFF9B4050);
 
   /// Pink M3 theme color for light secondary container color.
-  static const Color pinkM3LightSecondaryContainer = Color(0xFFFFD9DE);
+  static const Color pinkM3LightSecondaryContainer = Color(0xFFF8C7CB);
 
   /// Pink M3 theme color for light tertiary color.
-  static const Color pinkM3LightTertiary = Color(0xFF795831);
+  static const Color pinkM3LightTertiary = Color(0xFF874978);
 
   /// Pink M3 theme color for light tertiary container color.
-  static const Color pinkM3LightTertiaryContainer = Color(0xFFFFDDB9);
+  static const Color pinkM3LightTertiaryContainer = Color(0xFFFFD7F0);
 
   /// Pink M3 theme color for dark primary color.
   static const Color pinkM3DarkPrimary = Color(0xFFFFB2BE);
@@ -2806,16 +2806,16 @@ class FlexColor {
   static const Color pinkM3DarkPrimaryContainer = Color(0xFF900038);
 
   /// Pink M3 theme color for dark secondary color.
-  static const Color pinkM3DarkSecondary = Color(0xFFE4BDC2);
+  static const Color pinkM3DarkSecondary = Color(0xFFFFD9DC);
 
   /// Pink M3 theme color for dark secondary container color.
-  static const Color pinkM3DarkSecondaryContainer = Color(0xFF5C3F44);
+  static const Color pinkM3DarkSecondaryContainer = Color(0xFF5F1224);
 
   /// Pink M3 theme color for dark tertiary color.
-  static const Color pinkM3DarkTertiary = Color(0xFFEABF8F);
+  static const Color pinkM3DarkTertiary = Color(0xFFFAAFE4);
 
   /// Pink M3 theme color for dark tertiary container color.
-  static const Color pinkM3DarkTertiaryContainer = Color(0xFF5E411C);
+  static const Color pinkM3DarkTertiaryContainer = Color(0xFF6B325F);
 
   /// English name of the purple M3 theme.
   static const String purpleM3Name = 'Purple M3';
@@ -2832,16 +2832,16 @@ class FlexColor {
   static const Color purpleM3LightPrimaryContainer = Color(0xFFFFD6FE);
 
   /// Purple M3 theme color for light secondary color.
-  static const Color purpleM3LightSecondary = Color(0xFF6B586B);
+  static const Color purpleM3LightSecondary = Color(0xFF8728CF);
 
   /// Purple M3 theme color for light secondary container color.
-  static const Color purpleM3LightSecondaryContainer = Color(0xFFF4DBF1);
+  static const Color purpleM3LightSecondaryContainer = Color(0xFFF2DAFF);
 
   /// Purple M3 theme color for light tertiary color.
-  static const Color purpleM3LightTertiary = Color(0xFF82524A);
+  static const Color purpleM3LightTertiary = Color(0xFF934932);
 
   /// Purple M3 theme color for light tertiary container color.
-  static const Color purpleM3LightTertiaryContainer = Color(0xFFFFDAD4);
+  static const Color purpleM3LightTertiaryContainer = Color(0xFFFFDBD0);
 
   /// Purple M3 theme color for dark primary color.
   static const Color purpleM3DarkPrimary = Color(0xFFF9ABFF);
@@ -2850,16 +2850,16 @@ class FlexColor {
   static const Color purpleM3DarkPrimaryContainer = Color(0xFF7B008F);
 
   /// Purple M3 theme color for dark secondary color.
-  static const Color purpleM3DarkSecondary = Color(0xFFD7BFD5);
+  static const Color purpleM3DarkSecondary = Color(0xFFE0B6FF);
 
   /// Purple M3 theme color for dark secondary container color.
-  static const Color purpleM3DarkSecondaryContainer = Color(0xFF534153);
+  static const Color purpleM3DarkSecondaryContainer = Color(0xFF6B00AF);
 
   /// Purple M3 theme color for dark tertiary color.
-  static const Color purpleM3DarkTertiary = Color(0xFFF6B8AD);
+  static const Color purpleM3DarkTertiary = Color(0xFFFFB59F);
 
   /// Purple M3 theme color for dark tertiary container color.
-  static const Color purpleM3DarkTertiaryContainer = Color(0xFF673B34);
+  static const Color purpleM3DarkTertiaryContainer = Color(0xFF76331D);
 
   /// English name of the indigo M3 theme.
   static const String indigoM3Name = 'Indigo M3';
@@ -2876,16 +2876,16 @@ class FlexColor {
   static const Color indigoM3LightPrimaryContainer = Color(0xFFDEE0FF);
 
   /// Indigo M3 theme color for light secondary color.
-  static const Color indigoM3LightSecondary = Color(0xFF605B71);
+  static const Color indigoM3LightSecondary = Color(0xFF3C64AE);
 
   /// Indigo M3 theme color for light secondary container color.
-  static const Color indigoM3LightSecondaryContainer = Color(0xFFE6DFF9);
+  static const Color indigoM3LightSecondaryContainer = Color(0xFFD8E2FF);
 
   /// Indigo M3 theme color for light tertiary color.
-  static const Color indigoM3LightTertiary = Color(0xFF77536D);
+  static const Color indigoM3LightTertiary = Color(0xFF537577);
 
   /// Indigo M3 theme color for light tertiary container color.
-  static const Color indigoM3LightTertiaryContainer = Color(0xFFFFD7F1);
+  static const Color indigoM3LightTertiaryContainer = Color(0xFFA9D4D6);
 
   /// Indigo M3 theme color for dark primary color.
   static const Color indigoM3DarkPrimary = Color(0xFFBAC3FF);
@@ -2894,16 +2894,16 @@ class FlexColor {
   static const Color indigoM3DarkPrimaryContainer = Color(0xFF293CA0);
 
   /// Indigo M3 theme color for dark secondary color.
-  static const Color indigoM3DarkSecondary = Color(0xFFCAC3DC);
+  static const Color indigoM3DarkSecondary = Color(0xFFAEC6FF);
 
   /// Indigo M3 theme color for dark secondary container color.
-  static const Color indigoM3DarkSecondaryContainer = Color(0xFF484458);
+  static const Color indigoM3DarkSecondaryContainer = Color(0xFF14448D);
 
   /// Indigo M3 theme color for dark tertiary color.
-  static const Color indigoM3DarkTertiary = Color(0xFFE6BAD7);
+  static const Color indigoM3DarkTertiary = Color(0xFFA9CDCF);
 
   /// Indigo M3 theme color for dark tertiary container color.
-  static const Color indigoM3DarkTertiaryContainer = Color(0xFF5D3C54);
+  static const Color indigoM3DarkTertiaryContainer = Color(0xFF2A4C4E);
 
   /// English name of the blue M3 theme.
   static const String blueM3Name = 'Blue M3';
@@ -2920,16 +2920,16 @@ class FlexColor {
   static const Color blueM3LightPrimaryContainer = Color(0xFFD1E4FF);
 
   /// Blue M3 theme color for light secondary color.
-  static const Color blueM3LightSecondary = Color(0xFF535F70);
+  static const Color blueM3LightSecondary = Color(0xFF006781);
 
   /// Blue M3 theme color for light secondary container color.
-  static const Color blueM3LightSecondaryContainer = Color(0xFFD7E3F7);
+  static const Color blueM3LightSecondaryContainer = Color(0xFFB9EAFF);
 
   /// Blue M3 theme color for light tertiary color.
-  static const Color blueM3LightTertiary = Color(0xFF6B5778);
+  static const Color blueM3LightTertiary = Color(0xFFA73A00);
 
   /// Blue M3 theme color for light tertiary container color.
-  static const Color blueM3LightTertiaryContainer = Color(0xFFF2DAFF);
+  static const Color blueM3LightTertiaryContainer = Color(0xFFFFDBCE);
 
   /// Blue M3 theme color for dark primary color.
   static const Color blueM3DarkPrimary = Color(0xFF9ECAFF);
@@ -2938,16 +2938,16 @@ class FlexColor {
   static const Color blueM3DarkPrimaryContainer = Color(0xFF00497D);
 
   /// Blue M3 theme color for dark secondary color.
-  static const Color blueM3DarkSecondary = Color(0xFFBBC7DB);
+  static const Color blueM3DarkSecondary = Color(0xFF86D1EE);
 
   /// Blue M3 theme color for dark secondary container color.
-  static const Color blueM3DarkSecondaryContainer = Color(0xFF3B4858);
+  static const Color blueM3DarkSecondaryContainer = Color(0xFF004D62);
 
   /// Blue M3 theme color for dark tertiary color.
-  static const Color blueM3DarkTertiary = Color(0xFFD6BEE4);
+  static const Color blueM3DarkTertiary = Color(0xFFFFB599);
 
   /// Blue M3 theme color for dark tertiary container color.
-  static const Color blueM3DarkTertiaryContainer = Color(0xFF523F5F);
+  static const Color blueM3DarkTertiaryContainer = Color(0xFF802A00);
 
   /// English name of the cyan M3 theme.
   static const String cyanM3Name = 'Cyan M3';
@@ -2964,16 +2964,16 @@ class FlexColor {
   static const Color cyanM3LightPrimaryContainer = Color(0xFFA1EFFF);
 
   /// Cyan M3 theme color for light secondary color.
-  static const Color cyanM3LightSecondary = Color(0xFF4A6268);
+  static const Color cyanM3LightSecondary = Color(0xFF476365);
 
   /// Cyan M3 theme color for light secondary container color.
-  static const Color cyanM3LightSecondaryContainer = Color(0xFFCDE7ED);
+  static const Color cyanM3LightSecondaryContainer = Color(0xFFCAE8EA);
 
   /// Cyan M3 theme color for light tertiary color.
-  static const Color cyanM3LightTertiary = Color(0xFF545D7E);
+  static const Color cyanM3LightTertiary = Color(0xFF585C82);
 
   /// Cyan M3 theme color for light tertiary container color.
-  static const Color cyanM3LightTertiaryContainer = Color(0xFFDBE1FF);
+  static const Color cyanM3LightTertiaryContainer = Color(0xFFDFE0FF);
 
   /// Cyan M3 theme color for dark primary color.
   static const Color cyanM3DarkPrimary = Color(0xFF44D8F1);
@@ -2982,16 +2982,16 @@ class FlexColor {
   static const Color cyanM3DarkPrimaryContainer = Color(0xFF004E59);
 
   /// Cyan M3 theme color for dark secondary color.
-  static const Color cyanM3DarkSecondary = Color(0xFFB1CBD1);
+  static const Color cyanM3DarkSecondary = Color(0xFFAECCCE);
 
   /// Cyan M3 theme color for dark secondary container color.
-  static const Color cyanM3DarkSecondaryContainer = Color(0xFF334A50);
+  static const Color cyanM3DarkSecondaryContainer = Color(0xFF304B4D);
 
   /// Cyan M3 theme color for dark tertiary color.
-  static const Color cyanM3DarkTertiary = Color(0xFFBCC5EB);
+  static const Color cyanM3DarkTertiary = Color(0xFFC0C3EF);
 
   /// Cyan M3 theme color for dark tertiary container color.
-  static const Color cyanM3DarkTertiaryContainer = Color(0xFF3C4665);
+  static const Color cyanM3DarkTertiaryContainer = Color(0xFF404468);
 
   /// English name of the teal M3 theme.
   static const String tealM3Name = 'Teal M3';
@@ -3005,7 +3005,7 @@ class FlexColor {
   static const Color tealM3LightPrimary = Color(0xFF006A60);
 
   /// Teal M3 theme color for light primary container color.
-  static const Color tealM3LightPrimaryContainer = Color(0xFF92F4E5);
+  static const Color tealM3LightPrimaryContainer = Color(0xFFBBEDE6);
 
   /// Teal M3 theme color for light secondary color.
   static const Color tealM3LightSecondary = Color(0xFF4A635F);
@@ -3014,10 +3014,10 @@ class FlexColor {
   static const Color tealM3LightSecondaryContainer = Color(0xFFCCE8E2);
 
   /// Teal M3 theme color for light tertiary color.
-  static const Color tealM3LightTertiary = Color(0xFF336096);
+  static const Color tealM3LightTertiary = Color(0xFF48617A);
 
   /// Teal M3 theme color for light tertiary container color.
-  static const Color tealM3LightTertiaryContainer = Color(0xFFD4E3FF);
+  static const Color tealM3LightTertiaryContainer = Color(0xFFCFE5FF);
 
   /// Teal M3 theme color for dark primary color.
   static const Color tealM3DarkPrimary = Color(0xFF53DBCA);
@@ -3026,16 +3026,16 @@ class FlexColor {
   static const Color tealM3DarkPrimaryContainer = Color(0xFF005048);
 
   /// Teal M3 theme color for dark secondary color.
-  static const Color tealM3DarkSecondary = Color(0xFFB1CCC6);
+  static const Color tealM3DarkSecondary = Color(0xFFAECCCE);
 
   /// Teal M3 theme color for dark secondary container color.
-  static const Color tealM3DarkSecondaryContainer = Color(0xFF334B47);
+  static const Color tealM3DarkSecondaryContainer = Color(0xFF304B4D);
 
   /// Teal M3 theme color for dark tertiary color.
-  static const Color tealM3DarkTertiary = Color(0xFFB4C8E9);
+  static const Color tealM3DarkTertiary = Color(0xFFC0C3EF);
 
   /// Teal M3 theme color for dark tertiary container color.
-  static const Color tealM3DarkTertiaryContainer = Color(0xFF344863);
+  static const Color tealM3DarkTertiaryContainer = Color(0xFF404468);
 
   /// English name of the green M3 theme.
   static const String greenM3Name = 'Green M3';
