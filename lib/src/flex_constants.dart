@@ -279,8 +279,8 @@ const int kDisabledForegroundAlpha = 0x5E;
 ///                  .withAlpha(kDisabledBackgroundAlpha);
 /// ```
 ///
-/// Value: 0x66 = 102 = 40%
-const int kDisabledAlphaBlend = 0x66;
+/// Value: 0xAA = 170 = 67%
+const int kDisabledAlphaBlend = 0xAA;
 
 /// Enabled border alpha value on border sides.
 ///
