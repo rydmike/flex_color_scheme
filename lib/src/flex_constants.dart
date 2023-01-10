@@ -159,7 +159,7 @@ const double kNavigationRailElevation = 0;
 /// Default for elevation of [SnackBar].
 ///
 /// M3 uses https://m3.material.io/components/snackbar/specs
-/// and https://m3.material.io/styles/elevation/tokens.
+/// and https://m3.material.io/styles/elevation/tokens, level 3 which is 6 dp.
 ///
 /// FCS thinks it is too high and uses opinionated style 4.
 const double kSnackBarElevation = 4;

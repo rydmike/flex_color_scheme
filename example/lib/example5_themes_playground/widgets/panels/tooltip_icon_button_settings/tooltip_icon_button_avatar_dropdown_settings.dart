@@ -277,9 +277,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('IconButton, CircleAvatar and DropdownButton'),
-          subtitle: Text('Included to demonstrate their themed styles with '
+          subtitle: Text('Included to show their themes with '
               'current ColorScheme.\n\n'
-              'They have adjustable component theme properties in current '
+              'They have no adjustable component theme properties in current '
               'version of FCS. Use "copyWith" on FCS returned ThemeData to '
               'add your custom component theming to them.'),
         ),

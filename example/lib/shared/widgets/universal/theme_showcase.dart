@@ -51,7 +51,7 @@ class ThemeShowcase extends StatelessWidget {
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
-          runSpacing: 4,
+          runSpacing: 8,
           children: const <Widget>[
             PopupMenuButtonShowcase(),
             SizedBox(width: 8),
@@ -64,6 +64,7 @@ class ThemeShowcase extends StatelessWidget {
         const TooltipShowcase(),
         const SizedBox(height: 16),
         const IconButtonCircleAvatarDropdownShowcase(),
+        const ProgressIndicatorShowcase(),
         const Divider(),
         const SwitchShowcase(),
         const CheckboxShowcase(),
@@ -305,7 +306,7 @@ class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         ToggleButtons(
           isSelected: selected,
@@ -369,9 +370,10 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         SegmentedButton<Calendar>(
+          showSelectedIcon: false,
           segments: const <ButtonSegment<Calendar>>[
             ButtonSegment<Calendar>(
               value: Calendar.day,
@@ -472,7 +474,7 @@ class FabShowcase extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         FloatingActionButton.small(
           heroTag: 'FAB small',
@@ -529,7 +531,7 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         Switch(
           value: isOn1,
@@ -592,7 +594,7 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         Checkbox(
           value: isSelected1,
@@ -648,7 +650,7 @@ class _RadioShowcaseState extends State<RadioShowcase> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 8,
-      runSpacing: 4,
+      runSpacing: 8,
       children: <Widget>[
         Radio<bool>(
           value: true,
@@ -920,31 +922,35 @@ class DropDownMenuShowcase extends StatefulWidget {
 }
 
 class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
-  String selectedItem = 'Drop menu 1';
+  String selectedItem = 'one';
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<String>(
       initialSelection: selectedItem,
       onSelected: (String? value) {
         setState(() {
-          selectedItem = value ?? 'Dropdown button form field 1';
+          selectedItem = value ?? 'one';
         });
       },
       dropdownMenuEntries: const <DropdownMenuEntry<String>>[
         DropdownMenuEntry<String>(
-          label: 'Drop menu 1',
+          label: 'Alarm settings',
+          leadingIcon: Icon(Icons.alarm),
           value: 'one',
         ),
         DropdownMenuEntry<String>(
-          label: 'Drop menu 2',
+          label: 'Cabin overview',
+          leadingIcon: Icon(Icons.cabin),
           value: 'two',
         ),
         DropdownMenuEntry<String>(
-          label: 'Drop menu 3',
+          label: 'Surveillance view',
+          leadingIcon: Icon(Icons.camera_outdoor_rounded),
           value: 'three',
         ),
         DropdownMenuEntry<String>(
-          label: 'Drop menu 4',
+          label: 'Water alert',
+          leadingIcon: Icon(Icons.water_damage),
           value: 'four',
         ),
       ],
@@ -1028,6 +1034,27 @@ class _IconButtonCircleAvatarDropdownShowcaseState
           ),
         ),
         const _DropDownButton(),
+      ],
+    );
+  }
+}
+
+class ProgressIndicatorShowcase extends StatelessWidget {
+  const ProgressIndicatorShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 16,
+      runSpacing: 16,
+      children: const <Widget>[
+        SizedBox(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
+        ),
+        SizedBox(width: 200, child: LinearProgressIndicator()),
       ],
     );
   }
@@ -1339,16 +1366,20 @@ class _BehindAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-        const Text('Behind AppBar'),
-        const CircleAvatar(child: Text('AV')),
-        InputChip(
-          showCheckmark: true,
-          selected: true,
-          label: const Text('Chip check'),
-          onSelected: (bool value) {},
-        ),
-      ]),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          const Text('Behind AppBar'),
+          const CircleAvatar(child: Text('AV')),
+          InputChip(
+            showCheckmark: true,
+            selected: true,
+            label: const Text('Chip check'),
+            onSelected: (bool value) {},
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1576,20 +1607,24 @@ class _BottomNavigationBarShowcaseState
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-                  const Text('Behind Bottom'),
-                  FloatingActionButton.small(
-                    heroTag: 'Behind Bottom',
-                    onPressed: () {},
-                    child: const Icon(Icons.add),
-                  ),
-                  InputChip(
-                    showCheckmark: true,
-                    selected: true,
-                    label: const Text('Chip check'),
-                    onSelected: (bool value) {},
-                  ),
-                ]),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    const Text('Behind Bottom'),
+                    FloatingActionButton.small(
+                      heroTag: 'Behind Bottom',
+                      onPressed: () {},
+                      child: const Icon(Icons.add),
+                    ),
+                    InputChip(
+                      showCheckmark: true,
+                      selected: true,
+                      label: const Text('Chip check'),
+                      onSelected: (bool value) {},
+                    ),
+                  ],
+                ),
               ),
               BottomNavigationBar(
                 currentIndex: buttonIndex,
@@ -1671,20 +1706,24 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Wrap(spacing: 8, runSpacing: 8, children: <Widget>[
-                  const Text('Behind NavBar'),
-                  FloatingActionButton.small(
-                    heroTag: 'Behind NavBar',
-                    onPressed: () {},
-                    child: const Icon(Icons.add),
-                  ),
-                  InputChip(
-                    showCheckmark: true,
-                    selected: true,
-                    label: const Text('Chip check'),
-                    onSelected: (bool value) {},
-                  ),
-                ]),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: <Widget>[
+                    const Text('Behind NavBar'),
+                    FloatingActionButton.small(
+                      heroTag: 'Behind NavBar',
+                      onPressed: () {},
+                      child: const Icon(Icons.add),
+                    ),
+                    InputChip(
+                      showCheckmark: true,
+                      selected: true,
+                      label: const Text('Chip check'),
+                      onSelected: (bool value) {},
+                    ),
+                  ],
+                ),
               ),
               NavigationBar(
                 selectedIndex: buttonIndex,

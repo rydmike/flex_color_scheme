@@ -69,7 +69,9 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                     ? sheetRadiusDefaultLabel
                     : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
                         '')
-                : 'default 0',
+                : useMaterial3
+                    ? 'default 28'
+                    : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomSheetBorderRadius ?? -1
                 : -1,
@@ -97,7 +99,9 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                           : (controller.bottomSheetBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : 'default 0',
+                      : useMaterial3
+                          ? 'default 28'
+                          : 'default 0',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

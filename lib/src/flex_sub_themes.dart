@@ -3370,7 +3370,7 @@ class FlexSubThemes {
     /// The background color of the themed SnackBar. Typically one of inverse
     /// brightness compared to theme's surface color brightness.
     ///
-    /// If null, then FlexColorScheme (FCS) sets onw default when used via
+    /// If null, then FlexColorScheme (FCS) sets own default when used via
     /// FlexSubThemesData as follows, the SDK default is used if this is not
     /// used via FlexSubThemesData:
     ///
@@ -3400,12 +3400,8 @@ class FlexSubThemes {
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to to dark grey: `Color(0xFF323232)`, via M2
-    /// Flutter SDK defaults if not defined.
-    ///
-    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
-    /// its default as [SchemeColor.surface].
+    /// [backgroundColor] will be used, which may be null too and SnackBar then
+    /// falls back Flutter defaults.
     final SchemeColor? backgroundSchemeColor,
   }) {
     final Color? background =
