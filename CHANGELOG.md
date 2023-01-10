@@ -8,8 +8,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW** 
 
-- Added 5 new Material 3 color schemes: `indigoM3`, `tealM3`, `greenM3`, `yukonGoldM3` and `orangeM3`.
-  
+- Added 12 new Material 3 color schemes: `redM3`,`pinkM3`, `purpleM3`, `indigoM3`, `blueM3`, `cyanM3`, `tealM3`, `greenM3`, `limeM3`, `yellowM3`, `orangeM3` and `deepOrangeM3` for a total of 52 built-in light and dark theme pairs. These schemes work well in Material 3 with or without seed generation.
+
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
 
 - Added support for `fontFamilyFallback` and `package` so that a `copyWith` on `FlexColorScheme` generated `ThemeData` is not needed to use them. 
