@@ -3093,10 +3093,17 @@ class FlexColor {
   /// English description of the lime M3 theme.
   static const String limeM3Description = 'Lime based Material 3 theme';
 
+  // TODO(rydmike): Consider reporting issue with Lime case to Material team.
   /// Lime M3 theme color for light primary color.
   ///
   /// This is primary color you get when you seed from M2 [Colors.lime].
-  static const Color limeM3LightPrimary = Color(0xFF5A6400);
+  ///
+  /// In this case it almost the result from the lime color. The result from
+  /// Here we use 0xFF596400 because the result M2 Colors.lime[500]
+  /// is 0xFF5B6300, and it produces very bright surface. Feels like a bug in the
+  /// Material Color Utilities algorithm since it does not produce a smooth
+  /// tone set, it suddenly jumps and gets much brighter at tone 99.
+  static const Color limeM3LightPrimary = Color(0xFF596400);
 
   /// Lime M3 theme color for light primary container color.
   static const Color limeM3LightPrimaryContainer = Color(0xFFDFEA8B);
