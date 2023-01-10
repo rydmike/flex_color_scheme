@@ -48,10 +48,9 @@ class TextFieldSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: TextInputField(filled: isFilled),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: TextInputField(),
         ),
         if (isLight)
           ColorSchemePopupMenu(

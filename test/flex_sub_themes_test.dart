@@ -223,11 +223,12 @@ void main() {
         'EXPECT equal to SnackBarThemeData() version '
         'with same values', () {
       expect(
-        FlexSubThemes.snackBarTheme(),
-        equals(
-          const SnackBarThemeData(
+        FlexSubThemes.snackBarTheme().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          SnackBarThemeData(
             elevation: 4,
-          ),
+            actionTextColor: Colors.grey[500],
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -241,15 +242,18 @@ void main() {
           colorScheme: null,
           backgroundColor: const Color(0xFF343476),
           backgroundSchemeColor: SchemeColor.tertiary,
-        ),
-        equals(
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           SnackBarThemeData(
             backgroundColor: const Color(0xFF343476),
             elevation: 10,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                 ),
-          ),
+            actionTextColor: Colors.white.withAlpha(0xDD),
+            disabledActionTextColor: Colors.white.withAlpha(0x11),
+            closeIconColor: Colors.white.withAlpha(0xAA),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -264,15 +268,18 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFFBBC2D5),
           backgroundSchemeColor: null,
-        ),
-        equals(
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           SnackBarThemeData(
             backgroundColor: const Color(0xFFBBC2D5),
             elevation: 5,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: Colors.black,
                 ),
-          ),
+            actionTextColor: Colors.black.withAlpha(0xDD),
+            disabledActionTextColor: Colors.black.withAlpha(0x11),
+            closeIconColor: Colors.black.withAlpha(0xAA),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -287,15 +294,18 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFF763370),
           backgroundSchemeColor: SchemeColor.error,
-        ),
-        equals(
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           SnackBarThemeData(
             backgroundColor: colorScheme.error,
             elevation: 0,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
                 ),
-          ),
+            actionTextColor: colorScheme.onError.withAlpha(0xDD),
+            disabledActionTextColor: colorScheme.onError.withAlpha(0x11),
+            closeIconColor: colorScheme.onError.withAlpha(0xAA),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -704,7 +714,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31),
                 width: 1,
               ),
@@ -779,7 +789,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31),
                 width: 1,
               ),
@@ -852,7 +862,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31),
                 width: 1,
               ),
@@ -927,7 +937,7 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31),
                 width: 1,
               ),
@@ -986,7 +996,7 @@ void main() {
           equals(
             TextStyle(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31)),
           ));
       // Floating label default style
@@ -1065,7 +1075,7 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31),
                 width: 1,
               ),
@@ -1133,7 +1143,7 @@ void main() {
           equals(
             TextStyle(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .blendAlpha(colorScheme.onSurface, 0xAA)
                     .withAlpha(0x31)),
           ));
       // Floating label default style
@@ -3096,7 +3106,7 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x31),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -3140,7 +3150,7 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x31),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -3182,7 +3192,7 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x31),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -3226,10 +3236,10 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F + 0x19)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x5E),
             disabledBorderColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
@@ -3273,10 +3283,10 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F + 0x19)
                 .withAlpha(0x33),
             disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x5E),
             disabledBorderColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0x66)
+                .blendAlpha(colorScheme.onSurface, 0xAA)
                 .withAlpha(0x31),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
@@ -3463,7 +3473,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x313a008e),
+            disabledColor: const Color(0x3120004f),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: const Color(0xff000000),
@@ -3503,7 +3513,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x313a008e),
+            disabledColor: const Color(0x3120004f),
             selectedColor: const Color(0xff03dac6),
             secondarySelectedColor: const Color(0xff03dac6),
             surfaceTintColor: const Color(0xff6200ee),
@@ -3559,7 +3569,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffccf7f3),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x31018276),
+            disabledColor: const Color(0x31014842),
             selectedColor: const Color(0xff97efe7),
             secondarySelectedColor: const Color(0xff97efe7),
             surfaceTintColor: const Color(0xff6200ee),

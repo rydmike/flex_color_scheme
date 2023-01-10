@@ -138,8 +138,8 @@ void main() {
     test('FCT kDisabledForegroundAlpha is 0x5E', () {
       expect(kDisabledForegroundAlpha, 0x5E);
     });
-    test('FCT kDisabledAlphaBlend is 0x66', () {
-      expect(kDisabledAlphaBlend, 0x66);
+    test('FCT kDisabledAlphaBlend is 0xAA', () {
+      expect(kDisabledAlphaBlend, 0xAA);
     });
     test('FCT kEnabledBorderAlpha is 0xA7', () {
       expect(kEnabledBorderAlpha, 0xA7);

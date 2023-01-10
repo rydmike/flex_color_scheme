@@ -11,8 +11,8 @@ class UseTinted3TextTheme extends StatelessWidget {
     return isLight
         ? SwitchListTile(
             title: const Text('Light mode TextTheme is tinted'),
-            subtitle: const Text('A hint of tint and primary color is mixed '
-                'into main and primary text theme'),
+            subtitle: const Text('A hint of tint color, usually primary, is '
+                'mixed into main and primary text theme'),
             value: controller.blendLightTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -22,8 +22,8 @@ class UseTinted3TextTheme extends StatelessWidget {
           )
         : SwitchListTile(
             title: const Text('Dark mode TextTheme is tinted'),
-            subtitle: const Text('A hint of tint and primary color is mixed '
-                'into main and primary text theme'),
+            subtitle: const Text('A hint of tint color, usually primary, is '
+                'mixed into main and primary text theme'),
             value: controller.blendDarkTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,

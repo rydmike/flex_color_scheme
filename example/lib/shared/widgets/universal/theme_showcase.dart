@@ -1158,8 +1158,7 @@ class ChipShowcase extends StatelessWidget {
 }
 
 class TextInputField extends StatefulWidget {
-  const TextInputField({this.filled, super.key});
-  final bool? filled;
+  const TextInputField({super.key});
 
   @override
   State<TextInputField> createState() => _TextInputFieldState();
@@ -1202,7 +1201,6 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField1'),
           controller: _textController1,
           decoration: InputDecoration(
-            filled: widget.filled ?? true,
             hintText: 'Write something...',
             labelText: 'TextField - Underline border, if not defined',
             errorText: _errorState1
@@ -1224,7 +1222,6 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField2'),
           controller: _textController2,
           decoration: InputDecoration(
-            filled: widget.filled ?? true,
             border: const OutlineInputBorder(),
             hintText: 'Write something...',
             labelText: 'TextField - Outline border, if not defined',
