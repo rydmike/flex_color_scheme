@@ -23,31 +23,31 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **CHANGE**
 
-- Remove in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically.
+- Removed in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically as it should be and we no longer need the workaround.
 
-- The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix may be removed when the issue is fixed.
+- The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix will be removed as soon as the issue is fixed.
 
-- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if null it follows defined `appBarElevation` as before. In M3 it is kept null to default to M3's default elevation of 3, to always get elevation tint. In M3 mode a minor spec deviation was noted in Flutter SDK and reported here https://github.com/flutter/flutter/issues/118150.
+- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if is null, it follows defined `appBarElevation` as before. In M3 it is kept null in order to default to M3's default elevation of 3, so that `BottomAppBar` getd elevation tint by default. In M3 mode a minor spec deviation was noted in Flutter SDK and reported here https://github.com/flutter/flutter/issues/118150.
 
-- Changed FlexColorScheme default of for `BottomAppBar` color to be `colorScheme.surface` same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color value is the same.
+- Changed FlexColorScheme default `BottomAppBar` color to be `colorScheme.surface`, same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color values are the same.
 
 - The Material buttons `ElevatedButton`, `OutlinedButton` and `TextButon`, now only create custom sub-theme properties in Material 3 mode when using none default (none null) values. Previously, they created sub-themes for some properties corresponding to the default values. This task now falls back to the role of default widget behaviour, as it should. Effective styles are unchanged.
 
-- Previous Material 3 color schemes, `materialBaseline`, `verdunHemlock` and `dellGenoa` were changed to use Material 3 error colors, also in Material 2 mode and when not using seed colors.
+- Previously existing "native" Material 3 color schemes, `materialBaseline`, `verdunHemlock` and `dellGenoa` were changed to use Material 3 error colors, also in Material 2 mode and when not using seed colors.
 
 - When making seed generated `ColorScheme` with a custom `surfaceTint` color. This tint color is now also used as seed-key for the neutral and neutral variant tonal palettes. Flutter SDK can only use
-primary color as seed-key for the neutral colors. This limitation in Flutter makes using a custom `surfaceTint` in seeded `ColorSchemes` a bad idea, since the custom tint color then differs from the slight `primary` tint that is hard coded into Flutter's seeded neutral colors used for surfaces and backgrounds. In FlexColorScheme the custom tint color is automatically also used to slightly tint the neutral colors used for surfaces and backgrounds in the seed-generated `ColorScheme`. The same color is then also used as `ColorScheme.surfaceTint` color. This makes the custom elevation tint color match the custom seed-tinted surface and background colors. This feature is enabled by [FlexSeedScheme package](https://pub.dev/packages/flex_seed_scheme), starting from version 1.2.0-dev.1. When using a custom `surfaceTint` color, the same color is also used as the surface alpha blend color, when using `SurfaceMode` and `blendLevel` to adjust surface color with or without using seed generated `ColorScheme`. 
+primary color as seed-key for the neutral colors. This limitation in Flutter makes using a custom `surfaceTint` in seeded `ColorSchemes` less usable with often unappealing results. This happens because the custom tint color then differs from the slight `primary` tint that is hard coded into Flutter's seeded neutral colors used for surfaces and backgrounds, and the colors may clash. In FlexColorScheme the custom tint color is automatically also used to slightly tint the neutral colors used for surfaces and backgrounds in the seed-generated `ColorScheme`. The same color is then also used as `ColorScheme.surfaceTint` color. This makes the custom elevation tint color match the custom seed-tinted surface and background colors. This feature is enabled by [FlexSeedScheme package](https://pub.dev/packages/flex_seed_scheme) starting from version 1.2.0-dev.1. When using a custom `surfaceTint` color, the same color is also used as the surface alpha blend color, when using `SurfaceMode` and `blendLevel` to adjust surface color with or without using seed generated `ColorScheme`. Ensuring that neutral seed tint, elevation and surface blend color always match, as they should.
 
-- Changed or one could say fixed `SnackBarTheme` action and closed icon colors. They are now also themed automatically on selected SnackBar color. 
+- Changed or one could call it fixed `SnackBarTheme` action and close icon colors. They are now also themed automatically to fit on selected SnackBar color. 
 
 **THEMES PLAYGROUND**
 
 **NEW**
 
-- Add separate UI to set elevation and background color of modal and none modal `BottomSheet` independently.
+- Add UI to set elevation and background color of modal and none modal `BottomSheet` independently.
 - Removed used Typography workaround in Playground app. Workaround was used before due to issue https://github.com/flutter/flutter/issues/103864 that is now fixed by https://github.com/flutter/flutter/pull/110870. 
-- Improved codegen for used Typography selection, only shown when needed.
-- Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography, but still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
+- Improved codegen for used Typography selection, it is now only shown when needed.
+- Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography. It still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
 - Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
