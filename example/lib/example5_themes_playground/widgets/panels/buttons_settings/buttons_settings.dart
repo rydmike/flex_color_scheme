@@ -290,7 +290,7 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        // TODO(rydmike): Future controls when
+        // TODO(rydmike): Future controls when FilledButton tonal has own theme.
         // ColorSchemePopupMenu(
         //   title: const Text('FilledButton.tonal color'),
         //   index: controller.filledButtonSchemeColor?.index ?? -1,

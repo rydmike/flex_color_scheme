@@ -25,8 +25,6 @@ class ComponentSettings extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
-        // TODO(rydmike): Removed control from here, only on TextTheme panel.
-        // UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
         SwitchListTile(
           title: const Text('Use Material 2 style divider in Material 3'),

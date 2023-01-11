@@ -167,7 +167,6 @@ class ShowThemeDataColors extends StatelessWidget {
               //   color: theme.bottomAppBarColor,
               //   textColor: _onColor(theme.bottomAppBarColor, background),
               // ),
-
               // TODO(rydmike): errorColor deprecated after v3.3.0-0.5.pre.',
               // ColorCard(
               //   label: 'Error\nColor',

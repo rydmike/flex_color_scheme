@@ -79,17 +79,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
   // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
 
-  // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
-  // final bool useFakeTypo2018 =
-  //     (controller.useSubThemes && !controller.useTextTheme) ||
-  //         (!controller.useSubThemes && !controller.useMaterial3);
-  // final TextTheme? fakeM2TypographyTextTheme =
-  //     useFakeTypo2018 ? AppData.m2TextTheme : null;
-  // final Typography alwaysM3Typography =
-  //     Typography.material2021(platform: controller.platform);
-  // End of fix variables for issue #10386
-
   return FlexColorScheme.light(
     // Use controller to get current scheme colors, use custom "colors"
     // property only if we use an index where we have custom colors in use.
@@ -389,16 +378,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // with FlexColorScheme too, and in this demo we can see its
     // impact easily.
     useMaterial3: controller.useMaterial3,
-    // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-    // typography: alwaysM3Typography,
     typography: controller.useTextTheme
         ? Typography.material2021(platform: controller.platform)
         : Typography.material2018(platform: controller.platform),
-    // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-    // textTheme: fakeM2TypographyTextTheme,
-    // primaryTextTheme: fakeM2TypographyTextTheme,
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(source, Brightness.light),
