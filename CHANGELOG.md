@@ -35,7 +35,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Previous Material 3 color schemes, `materialBaseline`, `verdunHemlock` and `dellGenoa` were changed to use Material 3 error colors, also in Material 2 mode and when not using seed colors.
 
-- Fixed `SnackBarTheme` action and closed icon colors. 
+- When making seed generated `ColorScheme` with a custom `surfaceTint` color. This tint color is now also used as seed-key for the neutral and neutral variant tonal palettes. Flutter SDK can only use
+primary color as seed-key for the neutral colors. This limitation in Flutter makes using a custom `surfaceTint` in seeded `ColorSchemes` a bad idea, since the custom tint color then differs from the slight `primary` tint that is hard coded into Flutter's seeded neutral colors used for surfaces and backgrounds. In FlexColorScheme the custom tint color is automatically also used to slightly tint the neutral colors used for surfaces and backgrounds in the seed-generated `ColorScheme`. The same color is then also used as `ColorScheme.surfaceTint` color. This makes the custom elevation tint color match the custom seed-tinted surface and background colors. This feature is enabled by [FlexSeedScheme package](https://pub.dev/packages/flex_seed_scheme), starting from version 1.2.0-dev.1. When using a custom `surfaceTint` color, the same color is also used as the surface alpha blend color, when using `SurfaceMode` and `blendLevel` to adjust surface color with or without using seed generated `ColorScheme`. 
+
+- Changed or one could say fixed `SnackBarTheme` action and closed icon colors. They are now also themed automatically on selected SnackBar color. 
 
 **THEMES PLAYGROUND**
 
@@ -63,7 +66,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Review M3 TextField defaults and support plain M3 style too.
 - Review and tune new M3 color schemes, red to teal done. Six remaining.  
 - Review M3 Playground component colors, and add new buttons.
-- In seed, use custom tint color on the neutral tonal palette generation.  
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  

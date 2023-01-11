@@ -2413,6 +2413,10 @@ class FlexColorScheme with Diagnosticable {
         secondaryKey: seed.useSecondary ? effectiveColors.secondary : null,
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
+        // If a custom surface tint is used, use it also as key for neutral and
+        // neutral variant tonal palette generation.
+        neutralKey: surfaceTint,
+        neutralVariantKey: surfaceTint,
         // Use provided tones configuration or default one.
         tones: tones,
         surfaceTint: surfaceTint,
@@ -4183,6 +4187,10 @@ class FlexColorScheme with Diagnosticable {
         secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
         // If use tertiary seed, use it with fromSeeds, otherwise undefined.
         tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+        // If a custom surface tint is used, use it also as key for neutral and
+        // neutral variant tonal palette generation.
+        neutralKey: surfaceTint,
+        neutralVariantKey: surfaceTint,
         // Use provided tones configuration or the default one, which uses
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.

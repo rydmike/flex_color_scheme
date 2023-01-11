@@ -43,6 +43,13 @@ class ShowTonalPalette extends StatelessWidget {
       // Pass in null if set to not secondary or tertiary colors seed keys.
       secondary: controller.useSecondary ? colors.secondary.value : null,
       tertiary: controller.useTertiary ? colors.tertiary.value : null,
+      // If custom surfaceTint is not null, use it as key for neutrals.
+      neutral: isLight
+          ? controller.surfaceTintLight?.value
+          : controller.surfaceTintDark?.value,
+      neutralVariant: isLight
+          ? controller.surfaceTintLight?.value
+          : controller.surfaceTintDark?.value,
       // Tone config details we get from active FlexTones.
       primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
       primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
