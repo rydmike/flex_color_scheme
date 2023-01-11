@@ -566,18 +566,25 @@ class FlexColorScheme with Diagnosticable {
   /// color, and will be be black if it is light and white if it is dark.
   final Color? onError;
 
-  /// A color used as an overlay on a surface color to indicate a component's
-  /// elevation.
+  /// A custom color used as an overlay on a surface color to indicate a
+  /// component's elevation and surface color branding or tinting.
   ///
-  /// You can use this property for convenience if you want to override the
-  /// color that this scheme color gets via the factory behavior.
   /// If a [colorScheme] was provided where this corresponding color is
   /// defined, this color property will override the same color in it.
   ///
-  /// This color is used by M3 for colored elevation, it is also used as the
-  /// blend  color for FlexColorScheme surface blends.
+  /// This color is used by Material 3 for colored elevation, it is also used
+  /// as the blend color for FlexColorScheme surface blends. Additionally
+  /// this color is if provided used as key color for seeding
+  /// the neutral color palettes, when seed generated color schemes are used.
+  /// It is important that all these properties use the same color.
   ///
-  /// If undefined it defaults to [primary] color.
+  /// Typically this color is not customized, most designs use the default
+  /// where the theme primary color is used for slightly mixing it into the
+  /// neutral background and surface colors, when seeding is used. As well as
+  /// using it for the the elevation tint in Material 3, plus for the
+  /// surface blends that can optionally be added with FlexColorScheme.
+  ///
+  /// If undefined, [primary] color is used.
   final Color? surfaceTint;
 
   /// Select preferred style for the default [TabBarTheme].
@@ -1787,18 +1794,25 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
-    /// A color used as an overlay on a surface color to indicate a component's
-    /// elevation.
+    /// A custom color used as an overlay on a surface color to indicate a
+    /// component's elevation and surface color branding or tinting.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
     /// If a [colorScheme] was provided where this corresponding color is
     /// defined, this color property will override the same color in it.
     ///
-    /// This color is used by M3 for colored elevation, it is also used as the
-    /// blend color for FlexColorScheme surface blends.
+    /// This color is used by Material 3 for colored elevation, it is also used
+    /// as the blend color for FlexColorScheme surface blends. Additionally
+    /// this color is if provided used as key color for seeding
+    /// the neutral color palettes, when seed generated color schemes are used.
+    /// It is important that all these properties use the same color.
     ///
-    /// If undefined it defaults to [primary] color.
+    /// Typically this color is not customized, most designs use the default
+    /// where the theme primary color is used for slightly mixing it into the
+    /// neutral background and surface colors, when seeding is used. As well as
+    /// using it for the the elevation tint in Material 3, plus for the
+    /// surface blends that can optionally be added with FlexColorScheme.
+    ///
+    /// If undefined, [primary] color is used.
     final Color? surfaceTint,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -3540,18 +3554,25 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
-    /// A color used as an overlay on a surface color to indicate a component's
-    /// elevation.
+    /// A custom color used as an overlay on a surface color to indicate a
+    /// component's elevation and surface color branding or tinting.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
     /// If a [colorScheme] was provided where this corresponding color is
     /// defined, this color property will override the same color in it.
     ///
-    /// This color is used by M3 for colored elevation, it is also used as the
-    /// blend color for FlexColorScheme surface blends.
+    /// This color is used by Material 3 for colored elevation, it is also used
+    /// as the blend color for FlexColorScheme surface blends. Additionally
+    /// this color is if provided used as key color for seeding
+    /// the neutral color palettes, when seed generated color schemes are used.
+    /// It is important that all these properties use the same color.
     ///
-    /// If undefined it defaults to [primary] color.
+    /// Typically this color is not customized, most designs use the default
+    /// where the theme primary color is used for slightly mixing it into the
+    /// neutral background and surface colors, when seeding is used. As well as
+    /// using it for the the elevation tint in Material 3, plus for the
+    /// surface blends that can optionally be added with FlexColorScheme.
+    ///
+    /// If undefined, [primary] color is used.
     final Color? surfaceTint,
 
     /// Makes the dark theme backgrounds darker or even black.
