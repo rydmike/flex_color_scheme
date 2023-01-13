@@ -6284,6 +6284,11 @@ class FlexColorScheme with Diagnosticable {
           : null,
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
+      // TODO(rydmike): Consider own sub theme? Consider opt-out? Add docs!
+      // Add input decorator to MenuButton theme, to make it follow same style.
+      dropdownMenuTheme: DropdownMenuThemeData(
+        inputDecorationTheme: effectiveInputDecorationTheme,
+      ),
       // FAB, floating action button theme.
       floatingActionButtonTheme: useSubThemes
           ? FlexSubThemes.floatingActionButtonTheme(
@@ -6348,6 +6353,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: dialogBackground,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              elevation: subTheme.dialogElevation,
               radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
               elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)

@@ -3844,6 +3844,11 @@ class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.background].
     final SchemeColor? backgroundSchemeColor,
 
+    /// Dialog elevation.
+    ///
+    /// If not defined, defaults to [kDialogElevation] = 6.
+    final double? elevation,
+
     /// Outer corner radius.
     ///
     /// If not defined, defaults to [kDialogRadius] 28dp,
@@ -3875,6 +3880,7 @@ class FlexSubThemes {
 
     return TimePickerThemeData(
       backgroundColor: background,
+      elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),

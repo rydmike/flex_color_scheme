@@ -21,6 +21,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added option to keep using M2 style Divider in M3. The in M3 used primary color tinted outlineVariant does not fit on all colors. The M2 style based on black or white with opacity does. It is also less prominent than the M3 style and may be preferred. Set `FlexSubThemesData` property `useOpacityBasedDividerInM3` to true to use the M2 style in M3. Defaults to false. 
     - FlexColorScheme also sets `ThemeData.dividerColor` to `ThemeData.colorScheme.outlineVariant` when `ThemeData.useMaterial3` is `true`. This keeps the in Flutter SDK to be deprecated `ThemeData.dividerColor` always same as actually used effective `Divider` color. Thus, if an app uses `Theme.of(context).dividerColor` while it still exists, to set a color to it, and expects it be the same color as effective `Divider` color, it will be so in FCS, regardless of if M2 or M3 is being used. This is not the case in Flutter SDK by default, see issue https://github.com/flutter/flutter/issues/117755 for more information.  
 
+- Add `elevation` to `FlexSubThemes.timePickerTheme`, and make it use the dialog shared `FlexSubThemesData.dialogElevation` setting.
+
 **CHANGE**
 
 - Removed in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically as it should be and we no longer need the workaround.
@@ -70,7 +72,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  
-- Maybe add DropdownMenu theme.  
+- Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
 - Maybe add ToggleButtons border color.   
