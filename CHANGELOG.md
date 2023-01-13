@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Jan 11, 2023**
+**Jan 13, 2023**
 
 **NEW** 
 
@@ -55,6 +55,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 - Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
+- Added showing new M3 `MenuBar` to **Widget Showcase**.
 
 **FIX**
 

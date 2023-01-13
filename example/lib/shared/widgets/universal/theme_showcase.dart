@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Theme showcase for the current theme.
 ///
@@ -89,6 +90,11 @@ class ThemeShowcase extends StatelessWidget {
         const BottomNavigationBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
+        const Shortcuts(shortcuts: <ShortcutActivator, Intent>{
+          SingleActivator(LogicalKeyboardKey.keyT, control: true):
+              VoidCallbackIntent(debugDumpApp),
+        }, child: MenuBarShowcase()),
+        const SizedBox(height: 8),
         const NavigationBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -1891,6 +1897,163 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
               ),
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class MenuBarShowcase extends StatelessWidget {
+  const MenuBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Text(
+            'MenuBar',
+            style: denseHeader,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'The M3 menus can be used in a MenuBar via SubMenuButton and '
+            'its MenuItemButton, but they can also be used in a '
+            'MenuAnchor anywhere.',
+            style: denseBody,
+          ),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: MenuBar(
+                children: <Widget>[
+                  SubmenuButton(
+                    menuChildren: <Widget>[
+                      MenuItemButton(
+                        onPressed: () {
+                          showAboutDialog(
+                            context: context,
+                            applicationName: 'MenuBar Demo',
+                            applicationVersion: '1.0.0',
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&About'),
+                      ),
+                      SubmenuButton(
+                        menuChildren: <Widget>[
+                          MenuItemButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Saved!'),
+                                ),
+                              );
+                            },
+                            child: const MenuAcceleratorLabel('&Save now'),
+                          ),
+                          MenuItemButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Load!'),
+                                ),
+                              );
+                            },
+                            child: const MenuAcceleratorLabel('&Load now'),
+                          ),
+                        ],
+                        child: const Text('File'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Quit!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Quit'),
+                      ),
+                    ],
+                    child: const MenuAcceleratorLabel('&File'),
+                  ),
+                  SubmenuButton(
+                    menuChildren: <Widget>[
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Bold!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Bold'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Italic!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Italic'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Underline!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Underline'),
+                      ),
+                    ],
+                    child: const MenuAcceleratorLabel('&Style'),
+                  ),
+                  SubmenuButton(
+                    menuChildren: <Widget>[
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Magnify!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Magnify'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Minify!'),
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('Mi&nify'),
+                      ),
+                    ],
+                    child: const MenuAcceleratorLabel('&View'),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );
