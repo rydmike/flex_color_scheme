@@ -67,6 +67,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 **TODO**
 
 - Review M3 TextField defaults and support plain M3 style too.
+  - Need: `fillSchemeColor`, `fillColorOpacity` and `textFieldBorderOpacity` to match M3 style.
 - Review and tune new M3 color schemes, red to teal done. Six remaining.  
 - Review M3 Playground component colors, and add new buttons.
 - Add M3 support to `TabBar`.
