@@ -1985,7 +1985,7 @@ class MenuBarShowcase extends StatelessWidget {
           ),
         ),
         Row(
-          children: [
+          children: <Widget>[
             Expanded(
               child: MenuBar(
                 children: <Widget>[

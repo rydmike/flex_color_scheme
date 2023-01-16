@@ -1013,8 +1013,6 @@ void main() {
             TextStyle(color: colorScheme.primary),
           ));
     });
-    // InputDecorationTheme:<InputDecorationTheme#352e9(floatingLabelStyle: _MaterialStateTextStyle(<all styles inherited>), filled: true, fillColor: Color(0x0d03dac6), focusColor: Color(0x2603dac6), hoverColor: Color(0x0d03dac6), errorBorder: UnderlineInputBorder(), focusedBorder: UnderlineInputBorder(), focusedErrorBorder: UnderlineInputBorder(), disabledBorder: UnderlineInputBorder(), enabledBorder: UnderlineInputBorder())>
-    // InputDecorationTheme:<InputDecorationTheme#95174(floatingLabelStyle: _MaterialStateTextStyle(<all styles inherited>), filled: true, fillColor: Color(0x0d03dac6), focusColor: Color(0x2603dac6), hoverColor: Color(0x0d03dac6), errorBorder: UnderlineInputBorder(), focusedBorder: UnderlineInputBorder(), focusedErrorBorder: UnderlineInputBorder(), disabledBorder: UnderlineInputBorder(), enabledBorder: UnderlineInputBorder())>
     test(
         'FST1.08b-light: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(borderType: '

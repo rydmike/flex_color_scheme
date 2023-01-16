@@ -21,11 +21,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added option to keep using the M2 style Divider in M3. The in M3 used primary color tinted outlineVariant does not fit on any color. The M2 style based on black or white with opacity does. It is also less prominent than the M3 style and may be preferred. Set `FlexSubThemesData` property `useOpacityBasedDividerInM3` to true to use the M2 style in M3. Defaults to false. 
     - FlexColorScheme also sets `ThemeData.dividerColor` to `ThemeData.colorScheme.outlineVariant` when `ThemeData.useMaterial3` is `true`. This keeps the in Flutter SDK to be deprecated `ThemeData.dividerColor` always same as actually used effective `Divider` color. Thus, if an app uses `Theme.of(context).dividerColor` while it still exists, to set a color to it, and expects it be the same color as effective `Divider` color, it will be so in FCS, regardless of if M2 or M3 is being used. This is not the case in Flutter SDK by default, see issue https://github.com/flutter/flutter/issues/117755 for more information.  
 
-- Add `elevation` to `FlexSubThemes.timePickerTheme`, and make it use the dialog shared `FlexSubThemesData.dialogElevation` setting. This property does not yet exist in Flutter beta 3.7.0-1.4.pre. It is thus unsure if it will land in next stable Flutter, if it does not it will be commented and removed for the next FCS release as well.
+- Added `elevation` to `FlexSubThemes.timePickerTheme`, and make it use the dialog shared `FlexSubThemesData.dialogElevation` setting. This property does not yet exist in Flutter beta 3.7.0-1.4.pre. It is thus unsure if it will land in next stable Flutter, if it does not it will be commented and removed for the next FCS release as well.
 
-- Add boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. This also applies in M3 mode and to widgets that use separate defaults for disabled color, not one to disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting, with broader and more consistent impact. Defaults to true. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.        
+- Added boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. This also applies in M3 mode and to widgets that use separate defaults for disabled color, not one to disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting, with broader and more consistent impact. Defaults to true. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.        
 
-- Add boolean `inputDecoratorFocusedHasBorder` to `FlexSubThemesData`. Default to true. If set to false, there is no border on the `InputDecorator`, typically used by text fields, when the input decorator is focused.
+- Added boolean `inputDecoratorFocusedHasBorder` to `FlexSubThemesData`. Default to true. If set to false, there is no border on the `InputDecorator`, typically used by text fields, when the input decorator is focused. It controls the new parameter `focusedHasBorder` in `FlexSubThemes.inputDecorationTheme`.
+
+- Added `SchemeColor` value `inputDecoratorBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the border color of `InputDecorator` on e.g. TextField. It controls the new parameter `borderSchemeColor` in `FlexSubThemes.inputDecorationTheme`.
   
 
 **CHANGE**
@@ -45,12 +47,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - When making seed generated `ColorScheme` with a custom `surfaceTint` color. This tint color is now also used as seed-key for the neutral and neutral variant tonal palettes. Flutter SDK can only use
 primary color as seed-key for the neutral colors. This limitation in Flutter makes using a custom `surfaceTint` in seeded `ColorSchemes` less usable with often unappealing results. This happens because the custom tint color then differs from the slight `primary` tint that is hard coded into Flutter's seeded neutral colors used for surfaces and backgrounds, and the colors may clash. In FlexColorScheme the custom tint color is automatically also used to slightly tint the neutral colors used for surfaces and backgrounds in the seed-generated `ColorScheme`. The same color is then also used as `ColorScheme.surfaceTint` color. This makes the custom elevation tint color match the custom seed-tinted surface and background colors. This feature is enabled by the [FlexSeedScheme package](https://pub.dev/packages/flex_seed_scheme) starting from version 1.2.0-dev.1. When using a custom `surfaceTint` color, the same color is also used as the surface alpha blend color, when using `SurfaceMode` and `blendLevel` to adjust surface color with or without using seed generated `ColorScheme`. Ensuring that neutral seed tint, elevation and surface blend color always match, as they should.
 
-- Changed or one could call it fixed `SnackBarTheme` action and close icon colors. They are now also themed automatically to fit on selected SnackBar color. 
+- Changed, or one could call it fixed `SnackBarTheme` action and close icon colors. They are now also themed automatically to fit on selected SnackBar color. 
 
-- The boolean `FlexSubThemesData.interactionEffects` no longer modifies `ThemeData.disabledColor`. This part of the control is now instead controlled by  `FlexSubThemesData.tintedDisabledControls`.
+- The boolean `FlexSubThemesData.interactionEffects` no longer modifies `ThemeData.disabledColor`. This part of the control is now instead controlled separately by `FlexSubThemesData.tintedDisabledControls`.
 
-- The `InputDecorator`, can now be configured to match Material 3 for critical styles if so desired. It uses a few opinionated values that give it a slightly different style by default. It can be configured to match M3 defaults if so desired. FCS does one opinionated adjustment to error border and suffix icon. It keeps them `error` colored on unfocused error and hover state, instead of `onErrorContainer`. The M3 default looks odd. The FCS change is considered an opinionated M3 style fix in FCS. The M3 default of setting unfocused hovered error floating label also to `onErrorContainer`, is also keeping FCS own past style here `error.withAlpha(0xA7)`, which looks more refined. There is no way to set these settings back the M3 default style within FCS. You can adjust them with `copyWith` if needed.
-
+- The `InputDecorationTheme`, can now be configured to match Material 3 for critical styles if so desired. It uses a few opinionated values that give it a slightly different style by default. It can be configured to match M3 defaults if so desired. FCS does one opinionated adjustment to error border and suffix icon. It keeps them `error` colored on unfocused-hovered error state, instead of `onErrorContainer`. The M3 default looks odd. This FCS change is considered an opinionated M3 style fix in FCS. The M3 default of setting unfocused hovered error floating label also to `onErrorContainer`, is also keeping FCS own past style `error.withAlpha(0xA7)`, which looks more refined. There is no way to set these settings back to the M3 default style within FCS. You can of course as always adjust them and anything with `copyWith` on produced `ThemeData` if needed.
 
 
 **THEMES PLAYGROUND**
@@ -58,17 +59,19 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 **NEW**
 
 - Add UI to set elevation and background color of modal and none modal `BottomSheet` independently.
-- Removed used Typography workaround in Playground app. Workaround was used before due to issue https://github.com/flutter/flutter/issues/103864 that is now fixed by https://github.com/flutter/flutter/pull/110870. 
+- Removed used `Typography` workaround in Playground app. Workaround was used before due to issue https://github.com/flutter/flutter/issues/103864 that is now fixed in Flutter by https://github.com/flutter/flutter/pull/110870. 
 - Improved codegen for used Typography selection, it is now only shown when needed.
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography. It still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
-- Added UI for `useOpacityBasedDividerInM3` to panel "Component Themes" with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
+- Added UI for `useOpacityBasedDividerInM3` to panel **Component Themes** with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 - Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
 - Added showing new M3 `MenuBar` to **Widget Showcase**.
+- Added setting for focused `TextField` has a border, in panel **Text Field**.   
+- Added setting for border color selection of `TextField`, in panel **Text Field**.
 
 **FIX**
 
@@ -83,7 +86,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  
-- Maybe add separate border color to TextField. 
 - Maybe add no opacity on base color background to TextField, or opacity slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
