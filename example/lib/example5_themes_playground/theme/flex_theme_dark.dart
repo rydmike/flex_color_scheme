@@ -157,6 +157,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             sliderTrackHeight: controller.sliderTrackHeight,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
+            inputDecoratorBorderSchemeColor:
+                controller.inputDecoratorBorderSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,

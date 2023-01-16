@@ -358,6 +358,20 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputDecoratorSchemeColorDark = null;
 
+  // Key used to read and save the inputDecoratorBorderSchemeColorLight value.
+  static const String keyInputDecoratorBorderSchemeColorLight =
+      'inputDecoratorBorderSchemeColorLight';
+  // Default value for the inputDecoratorBorderSchemeColorLight, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorBorderSchemeColorLight = null;
+
+  // Key used to read and save the inputDecoratorBorderSchemeColorDark value.
+  static const String keyInputDecoratorBorderSchemeColorDark =
+      'inputDecoratorBorderSchemeColorDark';
+  // Default value for the inputDecoratorBorderSchemeColorDark, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorBorderSchemeColorDark = null;
+
   // Key used to read and save the inputDecoratorIsFilled value.
   static const String keyInputDecoratorIsFilled = 'inputDecoratorIsFilled';
   // Default value for the inputDecoratorIsFilled, also used to reset settings.

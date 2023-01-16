@@ -894,22 +894,22 @@ class DropDownButtonFormField extends StatefulWidget {
 }
 
 class _DropDownButtonFormFieldState extends State<DropDownButtonFormField> {
-  String selectedItem = 'Dropdown button form field 1';
+  String selectedItem = 'DropDownButtonFormField - Option 1';
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: selectedItem,
       onChanged: (String? value) {
         setState(() {
-          selectedItem = value ?? 'Dropdown button form field 1';
+          selectedItem = value ?? 'DropDownButtonFormField - Option 1';
         });
       },
       items: <String>[
-        'Dropdown button form field 1',
-        'Dropdown button form field 2',
-        'Dropdown button form field 3',
-        'Dropdown button form field 4',
-        'Dropdown button form field 5'
+        'DropDownButtonFormField - Option 1',
+        'DropDownButtonFormField - Option 2',
+        'DropDownButtonFormField - Option 3',
+        'DropDownButtonFormField - Option 4',
+        'DropDownButtonFormField - Option 5',
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -1178,7 +1178,6 @@ class _TextInputFieldState extends State<TextInputField> {
   bool _errorState1 = false;
   bool _errorState2 = false;
   bool _errorState3 = false;
-  bool _errorState4 = false;
 
   @override
   void initState() {
@@ -1215,9 +1214,8 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField1'),
           controller: _textController1,
           decoration: InputDecoration(
-            // filled: true,
             hintText: 'Hint: Write something...',
-            labelText: 'Label: Underline border (if not defined)',
+            labelText: 'Label: Underline border by default if not defined',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -1239,8 +1237,8 @@ class _TextInputFieldState extends State<TextInputField> {
           decoration: InputDecoration(
             filled: true,
             hintText: 'Hint: Write something...',
-            labelText:
-                'Label: Underline border (if not defined), always filled',
+            labelText: 'Label: Underline border by default if not defined, '
+                'filled set true by Widget',
             errorText: _errorState2
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -1262,7 +1260,7 @@ class _TextInputFieldState extends State<TextInputField> {
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             hintText: 'Hint: Write something...',
-            labelText: 'Label: Outline border (if not defined)',
+            labelText: 'Label: Outline border set by Widget if not defined',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.info),
             errorText: _errorState3
@@ -1272,15 +1270,6 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
         const SizedBox(height: 16),
         TextField(
-          onChanged: (String text) {
-            setState(() {
-              if (text.contains('a') | text.isEmpty) {
-                _errorState4 = false;
-              } else {
-                _errorState4 = true;
-              }
-            });
-          },
           key: const Key('TextField4'),
           controller: _textController4,
           decoration: const InputDecoration.collapsed(

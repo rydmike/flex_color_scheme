@@ -203,6 +203,12 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorSchemeColorDark = await _themeService.load(
         Store.keyInputDecoratorSchemeColorDark,
         Store.defaultInputDecoratorSchemeColorDark);
+    _inputDecoratorBorderSchemeColorLight = await _themeService.load(
+        Store.keyInputDecoratorBorderSchemeColorLight,
+        Store.defaultInputDecoratorBorderSchemeColorLight);
+    _inputDecoratorBorderSchemeColorDark = await _themeService.load(
+        Store.keyInputDecoratorBorderSchemeColorDark,
+        Store.defaultInputDecoratorBorderSchemeColorDark);
     _inputDecoratorIsFilled = await _themeService.load(
         Store.keyInputDecoratorIsFilled, Store.defaultInputDecoratorIsFilled);
     _inputDecoratorBorderType = await _themeService.load(
@@ -626,6 +632,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorSchemeColorLight, false);
     setInputDecoratorSchemeColorDark(
         Store.defaultInputDecoratorSchemeColorDark, false);
+    setInputDecoratorBorderSchemeColorLight(
+        Store.defaultInputDecoratorBorderSchemeColorLight, false);
+    setInputDecoratorBorderSchemeColorDark(
+        Store.defaultInputDecoratorBorderSchemeColorDark, false);
     setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
     setInputDecoratorBorderRadius(
@@ -1476,6 +1486,30 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(
         _themeService.save(Store.keyInputDecoratorSchemeColorDark, value));
+  }
+
+  late SchemeColor? _inputDecoratorBorderSchemeColorLight;
+  SchemeColor? get inputDecoratorBorderSchemeColorLight =>
+      _inputDecoratorBorderSchemeColorLight;
+  void setInputDecoratorBorderSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorBorderSchemeColorLight) return;
+    _inputDecoratorBorderSchemeColorLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorBorderSchemeColorLight, value));
+  }
+
+  late SchemeColor? _inputDecoratorBorderSchemeColorDark;
+  SchemeColor? get inputDecoratorBorderSchemeColorDark =>
+      _inputDecoratorBorderSchemeColorDark;
+  void setInputDecoratorBorderSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorBorderSchemeColorDark) return;
+    _inputDecoratorBorderSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorBorderSchemeColorDark, value));
   }
 
   late bool _inputDecoratorIsFilled;

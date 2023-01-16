@@ -50,10 +50,10 @@ class TextFieldSettings extends StatelessWidget {
         ),
         if (isLight)
           ColorSchemePopupMenu(
+            title: const Text('Light theme base color'),
             labelForDefault: controller.useMaterial3
                 ? 'default (primary & surfaceVariant)'
                 : 'default (primary)',
-            title: const Text('Light theme base color'),
             index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -69,6 +69,9 @@ class TextFieldSettings extends StatelessWidget {
         else
           ColorSchemePopupMenu(
             title: const Text('Dark theme base color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (primary & surfaceVariant)'
+                : 'default (primary)',
             index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -185,6 +188,46 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorUnfocusedBorderIsColored
               : null,
         ),
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorLight(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorDark(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         ListTile(
           title: const Text('Unfocused border width'),
           enabled: controller.useSubThemes &&
