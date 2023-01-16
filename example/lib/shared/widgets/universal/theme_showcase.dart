@@ -1173,20 +1173,28 @@ class TextInputField extends StatefulWidget {
 class _TextInputFieldState extends State<TextInputField> {
   late TextEditingController _textController1;
   late TextEditingController _textController2;
+  late TextEditingController _textController3;
+  late TextEditingController _textController4;
   bool _errorState1 = false;
   bool _errorState2 = false;
+  bool _errorState3 = false;
+  bool _errorState4 = false;
 
   @override
   void initState() {
     super.initState();
     _textController1 = TextEditingController();
     _textController2 = TextEditingController();
+    _textController3 = TextEditingController();
+    _textController4 = TextEditingController();
   }
 
   @override
   void dispose() {
     _textController1.dispose();
     _textController2.dispose();
+    _textController3.dispose();
+    _textController4.dispose();
     super.dispose();
   }
 
@@ -1209,7 +1217,7 @@ class _TextInputFieldState extends State<TextInputField> {
           decoration: InputDecoration(
             // filled: true,
             hintText: 'Hint: Write something...',
-            labelText: 'Label: Underline border, if not defined',
+            labelText: 'Label: Underline border (if not defined)',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -1227,14 +1235,12 @@ class _TextInputFieldState extends State<TextInputField> {
             });
           },
           key: const Key('TextField2'),
-          controller: _textController2,
+          controller: _textController1,
           decoration: InputDecoration(
-            // filled: true,
-            border: const OutlineInputBorder(),
+            filled: true,
             hintText: 'Hint: Write something...',
-            labelText: 'Label: Outline border, if not defined',
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: const Icon(Icons.info),
+            labelText:
+                'Label: Underline border (if not defined), always filled',
             errorText: _errorState2
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
@@ -1242,10 +1248,51 @@ class _TextInputFieldState extends State<TextInputField> {
         ),
         const SizedBox(height: 16),
         TextField(
+          onChanged: (String text) {
+            setState(() {
+              if (text.contains('a') | text.isEmpty) {
+                _errorState3 = false;
+              } else {
+                _errorState3 = true;
+              }
+            });
+          },
+          key: const Key('TextField3'),
+          controller: _textController3,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            hintText: 'Hint: Write something...',
+            labelText: 'Label: Outline border (if not defined)',
+            prefixIcon: const Icon(Icons.search),
+            suffixIcon: const Icon(Icons.info),
+            errorText: _errorState3
+                ? "Any entry without an 'a' will trigger this error"
+                : null,
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          onChanged: (String text) {
+            setState(() {
+              if (text.contains('a') | text.isEmpty) {
+                _errorState4 = false;
+              } else {
+                _errorState4 = true;
+              }
+            });
+          },
+          key: const Key('TextField4'),
+          controller: _textController4,
+          decoration: const InputDecoration.collapsed(
+            border: OutlineInputBorder(),
+            hintText: 'Hint: Collapsed TextField...',
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextField(
           controller: TextEditingController(),
           enabled: false,
           decoration: const InputDecoration(
-            // filled: true,
             labelText: 'TextField - Disabled label',
           ),
         ),
@@ -1254,7 +1301,6 @@ class _TextInputFieldState extends State<TextInputField> {
           controller: TextEditingController(text: 'Disabled with text entry'),
           enabled: false,
           decoration: const InputDecoration(
-            // filled: true,
             labelText: 'TextField - Disabled label',
             prefixIcon: Icon(Icons.search),
             suffixIcon: Icon(Icons.info),
