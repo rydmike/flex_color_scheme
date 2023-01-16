@@ -1284,7 +1284,6 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField4'),
           controller: _textController4,
           decoration: const InputDecoration.collapsed(
-            border: OutlineInputBorder(),
             hintText: 'Hint: Collapsed TextField...',
           ),
         ),
