@@ -83,6 +83,8 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
 - Clean up tech debt on `AppBar`.  
+- Maybe add separate border color to TextField. 
+- Maybe add no opacity on base color background to TextField, or opacity slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  

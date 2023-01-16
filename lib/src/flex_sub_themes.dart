@@ -1800,6 +1800,8 @@ class FlexSubThemes {
     /// and fill color of the input decorator.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
+    /// You can give the border a separate color value by defining
+    /// [borderSchemeColor].
     ///
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
@@ -1836,6 +1838,18 @@ class FlexSubThemes {
     /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
     /// if color scheme is dark.
     final Color? fillColor,
+
+    /// Selects which color from the passed in colorScheme to use as the border
+    /// color of the input decorator.
+    ///
+    /// The color is used by the focused border, but also as slight opacity
+    /// based color on unfocused border, when [unfocusedHasBorder] and
+    /// [unfocusedBorderIsColored] are true.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [baseSchemeColor] will be used.
+    final SchemeColor? borderSchemeColor,
 
     /// The border width when the input is selected.
     ///
@@ -1927,7 +1941,13 @@ class FlexSubThemes {
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // TODO(rydmike): Define consts for tinted disabled.
+    // Used border color, for focus and unfocused when that option is used.
+    final Color borderColor = schemeColor(
+        borderSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
+        colorScheme);
+
+    // TODO(rydmike): Decide and define consts for tinted disabled TextField.
+    // Effective used fill color, can also be a totally custom color value.
     final Color usedFillColor = fillColor ??
         MaterialStateColor.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
@@ -1951,7 +1971,7 @@ class FlexSubThemes {
     final Color disabledColor = isDark ? Colors.white38 : Colors.black38;
 
     final Color enabledBorder = unfocusedBorderIsColored
-        ? baseColor.withAlpha(kEnabledBorderAlpha)
+        ? borderColor.withAlpha(kEnabledBorderAlpha)
         : useMaterial3
             ? borderType == FlexInputBorderType.underline
                 ? colorScheme.onSurfaceVariant
@@ -2031,7 +2051,8 @@ class FlexSubThemes {
           return TextStyle(color: colorScheme.error);
         }
         if (states.contains(MaterialState.focused)) {
-          return TextStyle(color: baseColor);
+          // TODO(rydmike): Verify that border color usage is correct here.
+          return TextStyle(color: borderColor);
         }
         if (states.contains(MaterialState.hovered)) {
           return TextStyle(color: colorScheme.onSurfaceVariant);
@@ -2131,15 +2152,15 @@ class FlexSubThemes {
       filled: filled,
       fillColor: usedFillColor,
       hoverColor: tintedInteractions
-          ? baseColor.withAlpha(kHoverBackgroundAlpha)
+          ? (fillColor ?? baseColor).withAlpha(kHoverBackgroundAlpha)
           : null,
       focusColor: tintedInteractions
-          ? baseColor.withAlpha(kFocusBackgroundAlpha)
+          ? (fillColor ?? baseColor).withAlpha(kFocusBackgroundAlpha)
           : null,
       focusedBorder: effectiveInputBorder.copyWith(
         borderSide: focusedHasBorder
             ? BorderSide(
-                color: baseColor,
+                color: borderColor,
                 width: focusedWidth,
               )
             : BorderSide.none,
@@ -2156,7 +2177,7 @@ class FlexSubThemes {
         borderSide: unfocusedHasBorder
             ? BorderSide(
                 color: tintedDisabled
-                    ? baseColor
+                    ? borderColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha)
                     : borderType == FlexInputBorderType.underline

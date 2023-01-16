@@ -53,7 +53,7 @@ class TextFieldSettings extends StatelessWidget {
             labelForDefault: controller.useMaterial3
                 ? 'default (primary & surfaceVariant)'
                 : 'default (primary)',
-            title: const Text('Light theme TextField color base'),
+            title: const Text('Light theme base color'),
             index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -68,7 +68,7 @@ class TextFieldSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark theme TextField color base'),
+            title: const Text('Dark theme base color'),
             index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -82,9 +82,8 @@ class TextFieldSettings extends StatelessWidget {
                 : null,
           ),
         SwitchListTile(
-          title: const Text(
-            'TextField has fill color',
-          ),
+          title: const Text('Background has fill color'),
+          subtitle: const Text('The base color is used'),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

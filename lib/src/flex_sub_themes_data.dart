@@ -169,6 +169,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
+    this.inputDecoratorBorderSchemeColor,
     this.inputDecoratorBorderType,
     this.inputDecoratorFocusedHasBorder = true,
     this.inputDecoratorUnfocusedHasBorder = true,
@@ -953,6 +954,9 @@ class FlexSubThemesData with Diagnosticable {
   /// uses as color for the border and fill color when they are used.
   ///
   /// If not defined it defaults to theme.colorScheme.primary color.
+  ///
+  /// The border [inputDecoratorBorderSchemeColor] can be used to define the
+  /// border color separately, but it defaults to this color if not defined.
   final SchemeColor? inputDecoratorSchemeColor;
 
   /// Determines if the [InputDecorator] is filled with a color.
@@ -972,6 +976,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If null, defaults to theme.colorScheme color selected by
   /// [inputDecoratorSchemeColor].withAlpha(0x0F).
   final Color? inputDecoratorFillColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the input decorator
+  /// uses as color for the border color when they are used.
+  ///
+  /// If not defined it defaults to color given by [inputDecoratorSchemeColor].
+  final SchemeColor? inputDecoratorBorderSchemeColor;
 
   /// Determines the type of border [InputDecorator] uses.
   ///
@@ -2154,6 +2164,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
+    final SchemeColor? inputDecoratorBorderSchemeColor,
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorFocusedHasBorder,
     final bool? inputDecoratorUnfocusedHasBorder,
@@ -2352,8 +2363,11 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
       inputDecoratorIsFilled:
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
+
       inputDecoratorFillColor:
           inputDecoratorFillColor ?? this.inputDecoratorFillColor,
+      inputDecoratorBorderSchemeColor: inputDecoratorBorderSchemeColor ??
+          this.inputDecoratorBorderSchemeColor,
       inputDecoratorBorderType:
           inputDecoratorBorderType ?? this.inputDecoratorBorderType,
       inputDecoratorFocusedHasBorder:
@@ -2630,6 +2644,8 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
+        other.inputDecoratorBorderSchemeColor ==
+            inputDecoratorBorderSchemeColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
         other.inputDecoratorFocusedHasBorder ==
             inputDecoratorFocusedHasBorder &&
@@ -2850,6 +2866,7 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorSchemeColor,
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
+        inputDecoratorBorderSchemeColor,
         inputDecoratorBorderType,
         inputDecoratorFocusedHasBorder,
         inputDecoratorUnfocusedHasBorder,
@@ -3070,6 +3087,8 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorIsFilled', inputDecoratorIsFilled));
     properties
         .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'inputDecoratorBorderSchemeColor', inputDecoratorBorderSchemeColor));
     properties.add(EnumProperty<FlexInputBorderType>(
         'inputDecoratorBorderType', inputDecoratorBorderType));
     properties.add(DiagnosticsProperty<bool>(
