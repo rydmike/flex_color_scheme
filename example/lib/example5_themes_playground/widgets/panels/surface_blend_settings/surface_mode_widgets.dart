@@ -206,12 +206,15 @@ class SurfaceModePopupMenu extends StatelessWidget {
             Text(styleName),
           ],
         ),
-        trailing: IconTheme(
-          data: selectedIconTheme,
-          child: ColorSchemeBox(
-            backgroundColor: scheme.primary,
-            borderColor: scheme.primary,
-            child: modeWidgets[index],
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: IconTheme(
+            data: selectedIconTheme,
+            child: ColorSchemeBox(
+              backgroundColor: scheme.primary,
+              borderColor: scheme.primary,
+              child: modeWidgets[index],
+            ),
           ),
         ),
       ),

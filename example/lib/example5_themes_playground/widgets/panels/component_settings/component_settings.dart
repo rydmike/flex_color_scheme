@@ -43,15 +43,27 @@ class ComponentSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTile(
-          title: const Text('Themed interaction effects'),
-          subtitle: const Text('The hover, focus, highlight, splash and '
-              'disabled colors and effects are based on primary color.\n'
+          title: const Text('Tinted interaction effects'),
+          subtitle: const Text('Hover, focus, highlight and splash '
+              'colors get a slight primary primary color tint.\n'
               'Turn OFF for Flutter transparent grey defaults'),
           value: controller.interactionEffects &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setInteractionEffects
+              : null,
+        ),
+        SwitchListTile(
+          title: const Text('Tinted disabled components'),
+          subtitle: const Text('Disabled widgets get a slight primary color '
+              'tint instead of Flutter transparent grey defaults.\n'
+              'Turn OFF for Flutter transparent grey defaults'),
+          value: controller.tintedDisabledControls &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setTintedDisabledControls
               : null,
         ),
         const Divider(),

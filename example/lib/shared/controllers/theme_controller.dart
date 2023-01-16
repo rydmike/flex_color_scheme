@@ -82,6 +82,8 @@ class ThemeController with ChangeNotifier {
         Store.keySchemeIndex, Store.defaultSchemeIndex);
     _interactionEffects = await _themeService.load(
         Store.keyInteractionEffects, Store.defaultInteractionEffects);
+    _tintedDisabledControls = await _themeService.load(
+        Store.keyTintedDisabledControls, Store.defaultTintedDisabledControls);
     _defaultRadius = await _themeService.load(
       Store.keyDefaultRadius,
       Store.defaultDefaultRadius,
@@ -212,6 +214,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorUnfocusedHasBorder = await _themeService.load(
         Store.keyInputDecoratorUnfocusedHasBorder,
         Store.defaultInputDecoratorUnfocusedHasBorder);
+    _inputDecoratorFocusedHasBorder = await _themeService.load(
+        Store.keyInputDecoratorFocusedHasBorder,
+        Store.defaultInputDecoratorFocusedHasBorder);
     _inputDecoratorUnfocusedBorderIsColored = await _themeService.load(
         Store.keyInputDecoratorUnfocusedBorderIsColored,
         Store.defaultInputDecoratorUnfocusedBorderIsColored);
@@ -561,6 +566,7 @@ class ThemeController with ChangeNotifier {
     setUsedScheme(Store.defaultUsedScheme, false);
     setSchemeIndex(Store.defaultSchemeIndex, false);
     setInteractionEffects(Store.defaultInteractionEffects, false);
+    setTintedDisabledControls(Store.defaultTintedDisabledControls, false);
     setDefaultRadius(Store.defaultDefaultRadius, false);
     setThinBorderWidth(Store.defaultThinBorderWidth, false);
     setThickBorderWidth(Store.defaultThickBorderWidth, false);
@@ -626,6 +632,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorBorderRadius, false);
     setInputDecoratorUnfocusedHasBorder(
         Store.defaultInputDecoratorUnfocusedHasBorder, false);
+    setInputDecoratorFocusedHasBorder(
+        Store.defaultInputDecoratorFocusedHasBorder, false);
     setInputDecoratorUnfocusedBorderIsColored(
         Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
     setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
@@ -965,6 +973,16 @@ class ThemeController with ChangeNotifier {
     _interactionEffects = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyInteractionEffects, value));
+  }
+
+  late bool _tintedDisabledControls;
+  bool get tintedDisabledControls => _tintedDisabledControls;
+  void setTintedDisabledControls(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _tintedDisabledControls) return;
+    _tintedDisabledControls = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTintedDisabledControls, value));
   }
 
   late double? _defaultRadius;
@@ -1500,6 +1518,17 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(
         _themeService.save(Store.keyInputDecoratorUnfocusedHasBorder, value));
+  }
+
+  late bool _inputDecoratorFocusedHasBorder;
+  bool get inputDecoratorFocusedHasBorder => _inputDecoratorFocusedHasBorder;
+  void setInputDecoratorFocusedHasBorder(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _inputDecoratorFocusedHasBorder) return;
+    _inputDecoratorFocusedHasBorder = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputDecoratorFocusedHasBorder, value));
   }
 
   late bool _inputDecoratorUnfocusedBorderIsColored;

@@ -5729,6 +5729,11 @@ class FlexColorScheme with Diagnosticable {
             ? const Color(0x1FFFFFFF) // White 12%
             : const Color(0x1F000000); // Black 12%
 
+    // Use tinted interaction effects on hover, focus, highlight and splash?
+    final bool tintedInteractions = useSubThemes && subTheme.interactionEffects;
+    // Use tinted disabled color?
+    final bool tintedDisabled = useSubThemes && subTheme.tintedDisabledControls;
+
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration
     // theme is also passed into the TimePickerTheme, so we get the same
@@ -5744,11 +5749,14 @@ class FlexColorScheme with Diagnosticable {
             fillColor: subTheme.inputDecoratorFillColor,
             focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
                 subTheme.thickBorderWidth,
+            focusedHasBorder: subTheme.inputDecoratorFocusedHasBorder,
             unfocusedBorderWidth:
                 subTheme.inputDecoratorBorderWidth ?? subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
             unfocusedBorderIsColored:
                 subTheme.inputDecoratorUnfocusedBorderIsColored,
+            tintedInteractions: tintedInteractions,
+            tintedDisabled: tintedDisabled,
             useMaterial3: useMaterial3)
         // Default one is also a bit opinionated, this is the FCS standard
         // in all previous versions before version 4.0.0. Kept for
@@ -5763,9 +5771,6 @@ class FlexColorScheme with Diagnosticable {
                 ? colorScheme.primary.withAlpha(0x0F) // 6%
                 : colorScheme.primary.withAlpha(0x09), // 3.5%
           );
-
-    // Use themed interaction effects on hover, focus, highlight and splash?
-    final bool themedEffects = useSubThemes && subTheme.interactionEffects;
 
     // BottomSheet Colors and elevations.
     final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
@@ -5860,9 +5865,9 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
       // backgroundColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
-      // Disabled color uses a different style when using themed interaction
-      // effects, if not opted in same as before v4.0.0, use ThemeData default.
-      disabledColor: themedEffects
+      // Disabled color uses a different style when using tinted disabled.
+      // effects, if not opted in same as before v4.0.0 =  ThemeData default.
+      disabledColor: tintedDisabled
           ? colorScheme.primary
               .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
               .withAlpha(kDisabledBackgroundAlpha)
@@ -5876,24 +5881,24 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
       // See: https://github.com/flutter/flutter/issues/91772
       // Special theming on hover, focus, highlight and splash, if opting in on
-      // themedEffects, otherwise use ThemeData defaults by passing in null
+      // tintedInteractions, otherwise use ThemeData defaults by passing in null
       // and letting it assign its values.
-      hoverColor: themedEffects
+      hoverColor: tintedInteractions
           ? colorScheme.primary
               .blendAlpha(Colors.white, kHoverAlphaBlend)
               .withAlpha(kHoverAlpha)
           : null,
-      focusColor: themedEffects
+      focusColor: tintedInteractions
           ? colorScheme.primary
               .blendAlpha(Colors.white, kFocusAlphaBlend)
               .withAlpha(kFocusAlpha)
           : null,
-      highlightColor: themedEffects
+      highlightColor: tintedInteractions
           ? colorScheme.primary
               .blendAlpha(Colors.white, kHighlightAlphaBlend)
               .withAlpha(kHighlightAlpha)
           : null,
-      splashColor: themedEffects
+      splashColor: tintedInteractions
           ? colorScheme.primary
               .blendAlpha(Colors.white, kSplashAlphaBlend)
               .withAlpha(kSplashAlpha)

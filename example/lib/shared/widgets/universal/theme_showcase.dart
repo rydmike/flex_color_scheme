@@ -1207,14 +1207,15 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField1'),
           controller: _textController1,
           decoration: InputDecoration(
-            hintText: 'Write something...',
-            labelText: 'TextField - Underline border, if not defined',
+            // filled: true,
+            hintText: 'Hint: Write something...',
+            labelText: 'Label: Underline border, if not defined',
             errorText: _errorState1
                 ? "Any entry without an 'a' will trigger this error"
                 : null,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         TextField(
           onChanged: (String text) {
             setState(() {
@@ -1228,9 +1229,10 @@ class _TextInputFieldState extends State<TextInputField> {
           key: const Key('TextField2'),
           controller: _textController2,
           decoration: InputDecoration(
+            // filled: true,
             border: const OutlineInputBorder(),
-            hintText: 'Write something...',
-            labelText: 'TextField - Outline border, if not defined',
+            hintText: 'Hint: Write something...',
+            labelText: 'Label: Outline border, if not defined',
             prefixIcon: const Icon(Icons.search),
             suffixIcon: const Icon(Icons.info),
             errorText: _errorState2
@@ -1238,11 +1240,24 @@ class _TextInputFieldState extends State<TextInputField> {
                 : null,
           ),
         ),
-        const SizedBox(height: 8),
-        const TextField(
+        const SizedBox(height: 16),
+        TextField(
+          controller: TextEditingController(),
           enabled: false,
-          decoration: InputDecoration(
-            labelText: 'TextField - Disabled',
+          decoration: const InputDecoration(
+            // filled: true,
+            labelText: 'TextField - Disabled label',
+          ),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: TextEditingController(text: 'Disabled with text entry'),
+          enabled: false,
+          decoration: const InputDecoration(
+            // filled: true,
+            labelText: 'TextField - Disabled label',
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: Icon(Icons.info),
           ),
         ),
       ],
@@ -2222,6 +2237,14 @@ class ListTileShowcase extends StatelessWidget {
           selected: true,
           onTap: () {},
         ),
+        ListTile(
+          enabled: false,
+          leading: const Icon(Icons.info),
+          title: const Text('ListTile disabled'),
+          subtitle: const Text('Selected list tile sub title'),
+          trailing: const Text('Trailing'),
+          onTap: () {},
+        ),
         const Divider(height: 1),
         SwitchListTile(
           secondary: const Icon(Icons.info),
@@ -2236,6 +2259,13 @@ class ListTileShowcase extends StatelessWidget {
           subtitle: const Text('The switch list tile is ON'),
           value: true,
           onChanged: (bool value) {},
+        ),
+        const SwitchListTile(
+          secondary: Icon(Icons.info),
+          title: Text('SwitchListTile disabled'),
+          subtitle: Text('The switch list tile is ON'),
+          value: true,
+          onChanged: null,
         ),
         const Divider(height: 1),
         CheckboxListTile(
@@ -2258,6 +2288,14 @@ class ListTileShowcase extends StatelessWidget {
           subtitle: const Text('The checkbox list tile is null in tristate'),
           tristate: true,
           value: null,
+          onChanged: (bool? value) {},
+        ),
+        CheckboxListTile(
+          enabled: false,
+          secondary: const Icon(Icons.info),
+          title: const Text('CheckboxListTile disabled'),
+          subtitle: const Text('The checkbox list tile is checked'),
+          value: true,
           onChanged: (bool? value) {},
         ),
         const Divider(height: 1),
@@ -2284,6 +2322,14 @@ class ListTileShowcase extends StatelessWidget {
           value: 1,
           selected: true,
           onChanged: (_) {},
+          groupValue: 1,
+        ),
+        const RadioListTile<int>(
+          secondary: Icon(Icons.info),
+          title: Text('RadioListTile disabled'),
+          subtitle: Text('The radio option is selected'),
+          value: 1,
+          onChanged: null,
           groupValue: 1,
         ),
       ],

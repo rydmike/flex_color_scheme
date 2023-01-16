@@ -85,6 +85,11 @@ class Store {
   // Default value for the interactionEffects, also used to reset settings.
   static const bool defaultInteractionEffects = true;
 
+  // Key used to read and save the tintedDisabledControls value.
+  static const String keyTintedDisabledControls = 'tintedDisabledControls';
+  // Default value for the tintedDisabledControls, also used to reset settings.
+  static const bool defaultTintedDisabledControls = true;
+
   // Key used to read and save the defaultRadius value.
   static const String keyDefaultRadius = 'defaultRadius';
   // Default value for the defaultRadius, also used to reset settings.
@@ -376,6 +381,12 @@ class Store {
       'inputDecoratorUnfocusedHasBorder';
   // Default value for the inputDecoratorUnfocusedHasBorder, reset settings.
   static const bool defaultInputDecoratorUnfocusedHasBorder = true;
+
+  // Key used to read and save the inputDecoratorFocusedHasBorder value.
+  static const String keyInputDecoratorFocusedHasBorder =
+      'inputDecoratorFocusedHasBorder';
+  // Default value for the inputDecoratorUnfocusedHasBorder, reset settings.
+  static const bool defaultInputDecoratorFocusedHasBorder = true;
 
   // Key used to read and save the inputDecoratorUnfocusedBorderIsColored value.
   static const String keyInputDecoratorUnfocusedBorderIsColored =

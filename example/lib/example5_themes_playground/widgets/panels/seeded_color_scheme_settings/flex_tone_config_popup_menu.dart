@@ -60,13 +60,16 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: Text('$title ${FlexTone.values[index].tone}'),
         subtitle: Text(FlexTone.values[index].describe),
-        trailing: ColorSchemeBox(
-          backgroundColor:
-              disabled ? colorScheme.surfaceVariant : colorScheme.primary,
-          foregroundColor: disabled ? theme.dividerColor : null,
-          borderColor: disabled ? theme.dividerColor : Colors.transparent,
-          defaultOption: disabled,
-          optionIcon: FlexTone.values[index].icon,
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: ColorSchemeBox(
+            backgroundColor:
+                disabled ? colorScheme.surfaceVariant : colorScheme.primary,
+            foregroundColor: disabled ? theme.dividerColor : null,
+            borderColor: disabled ? theme.dividerColor : Colors.transparent,
+            defaultOption: disabled,
+            optionIcon: FlexTone.values[index].icon,
+          ),
         ),
       ),
     );

@@ -108,6 +108,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
         ? FlexSubThemesData(
             // Overall effect settings.
             interactionEffects: controller.interactionEffects,
+            tintedDisabledControls: controller.tintedDisabledControls,
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
             useFlutterDefaults: controller.useFlutterDefaults,
@@ -161,6 +162,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
+            inputDecoratorFocusedHasBorder:
+                controller.inputDecoratorFocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,

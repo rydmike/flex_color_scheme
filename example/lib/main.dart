@@ -390,7 +390,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   inputDecoratorIsFilled: true,
   // If you do not want any underline/outline on the input decorator when it is
   // not in focus, then set this to false.
-  inputDecoratorUnfocusedHasBorder: true,
+  inputDecoratorUnfocusedHasBorder: false,
   // Select the ColorScheme color used for input decoration border.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.

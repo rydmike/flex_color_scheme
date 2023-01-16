@@ -176,25 +176,28 @@ class AppBarStylePopupMenu extends StatelessWidget {
             Text(styleName),
           ],
         ),
-        trailing: ColorSchemeBox(
-          // TODO(rydmike): Consider colorScheme.outlineVariant when it lands.
-          borderColor: theme.dividerColor,
-          backgroundColor: enabled && !useDefault
-              ? _appBarStyleColor(
-                  FlexAppBarStyle.values[index],
-                  colorScheme,
-                  theme.scaffoldBackgroundColor,
-                  isLight,
-                  useM3,
-                )
-              : _appBarStyleColor(
-                  null,
-                  colorScheme,
-                  theme.scaffoldBackgroundColor,
-                  isLight,
-                  useM3,
-                ),
-          defaultOption: useDefault,
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: ColorSchemeBox(
+            // TODO(rydmike): Consider colorScheme.outlineVariant when it lands.
+            borderColor: theme.dividerColor,
+            backgroundColor: enabled && !useDefault
+                ? _appBarStyleColor(
+                    FlexAppBarStyle.values[index],
+                    colorScheme,
+                    theme.scaffoldBackgroundColor,
+                    isLight,
+                    useM3,
+                  )
+                : _appBarStyleColor(
+                    null,
+                    colorScheme,
+                    theme.scaffoldBackgroundColor,
+                    isLight,
+                    useM3,
+                  ),
+            defaultOption: useDefault,
+          ),
         ),
       ),
     );

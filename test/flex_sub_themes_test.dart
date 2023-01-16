@@ -524,6 +524,7 @@ void main() {
         FlexSubThemes.timePickerTheme(),
         equals(
           TimePickerThemeData(
+            elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -561,6 +562,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
+            elevation: 6,
             backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -598,6 +600,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
+            elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -635,6 +638,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
+            elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -1009,6 +1013,8 @@ void main() {
             TextStyle(color: colorScheme.primary),
           ));
     });
+    // InputDecorationTheme:<InputDecorationTheme#352e9(floatingLabelStyle: _MaterialStateTextStyle(<all styles inherited>), filled: true, fillColor: Color(0x0d03dac6), focusColor: Color(0x2603dac6), hoverColor: Color(0x0d03dac6), errorBorder: UnderlineInputBorder(), focusedBorder: UnderlineInputBorder(), focusedErrorBorder: UnderlineInputBorder(), disabledBorder: UnderlineInputBorder(), enabledBorder: UnderlineInputBorder())>
+    // InputDecorationTheme:<InputDecorationTheme#95174(floatingLabelStyle: _MaterialStateTextStyle(<all styles inherited>), filled: true, fillColor: Color(0x0d03dac6), focusColor: Color(0x2603dac6), hoverColor: Color(0x0d03dac6), errorBorder: UnderlineInputBorder(), focusedBorder: UnderlineInputBorder(), focusedErrorBorder: UnderlineInputBorder(), disabledBorder: UnderlineInputBorder(), enabledBorder: UnderlineInputBorder())>
     test(
         'FST1.08b-light: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(borderType: '
@@ -1021,8 +1027,8 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           borderType: FlexInputBorderType.underline,
-        ),
-        equals(
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           InputDecorationTheme(
             floatingLabelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -1100,7 +1106,7 @@ void main() {
                 width: 1,
               ),
             ),
-          ),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });

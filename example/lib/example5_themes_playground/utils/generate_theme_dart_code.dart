@@ -212,6 +212,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String interactionEffects = controller.interactionEffects
       ? ''
       : '    interactionEffects: ${controller.interactionEffects},\n';
+  final String tintedDisabledControls = controller.tintedDisabledControls
+      ? ''
+      : '    tintedDisabledControls: ${controller.tintedDisabledControls},\n';
   final String blendOnLevelLight =
       controller.blendOnLevel > 0 && !controller.useKeyColors
           ? '    blendOnLevel: ${controller.blendOnLevel},\n'
@@ -390,15 +393,13 @@ String generateThemeDartCode(ThemeController controller) {
   // Input decorator setup CODE.
   //
   final String inputDecoratorSchemeColorLight = controller
-                  .inputDecoratorSchemeColorLight ==
-              SchemeColor.primary ||
-          controller.inputDecoratorSchemeColorLight == null
+              .inputDecoratorSchemeColorLight ==
+          null
       ? ''
       : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorLight},\n';
   final String inputDecoratorSchemeColorDark = controller
-                  .inputDecoratorSchemeColorDark ==
-              SchemeColor.primary ||
-          controller.inputDecoratorSchemeColorDark == null
+              .inputDecoratorSchemeColorDark ==
+          null
       ? ''
       : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorDark},\n';
   final String inputDecoratorIsFilled = controller.inputDecoratorIsFilled
@@ -417,19 +418,25 @@ String generateThemeDartCode(ThemeController controller) {
           .inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
+  final String inputDecoratorFocusedHasBorder = controller
+          .inputDecoratorFocusedHasBorder
+      ? ''
+      : '    inputDecoratorFocusedHasBorder: ${controller.inputDecoratorFocusedHasBorder},\n';
   final String inputDecoratorUnfocusedBorderIsColored = controller
               .inputDecoratorUnfocusedBorderIsColored ||
           !controller.inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
   final String inputDecoratorBorderWidth = controller
-              .inputDecoratorBorderWidth !=
-          null
+                  .inputDecoratorBorderWidth !=
+              null &&
+          controller.inputDecoratorUnfocusedHasBorder
       ? '    inputDecoratorBorderWidth: ${controller.inputDecoratorBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   final String inputDecoratorFocusedBorderWidth = controller
-              .inputDecoratorFocusedBorderWidth !=
-          null
+                  .inputDecoratorFocusedBorderWidth !=
+              null &&
+          controller.inputDecoratorFocusedHasBorder
       ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
@@ -751,6 +758,7 @@ String generateThemeDartCode(ThemeController controller) {
   String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$interactionEffects'
+          '$tintedDisabledControls'
           '$blendOnLevelLight'
           '$blendLightOnColors'
           '$useFlutterDefaults'
@@ -801,6 +809,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'
@@ -888,6 +897,7 @@ String generateThemeDartCode(ThemeController controller) {
   String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$interactionEffects'
+          '$tintedDisabledControls'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
           '$useFlutterDefaults'
@@ -938,6 +948,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
           //
           '$fabUseShape'

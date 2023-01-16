@@ -98,7 +98,10 @@ class UsedColorsPopupMenu extends StatelessWidget {
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
         title: title,
         subtitle: Text(_describeUsedColors(index)),
-        trailing: CircleAvatar(child: Text('$index')),
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: CircleAvatar(child: Text('$index')),
+        ),
       ),
     );
   }

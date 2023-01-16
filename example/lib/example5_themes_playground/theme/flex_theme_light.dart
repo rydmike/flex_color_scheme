@@ -131,6 +131,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Want color themed disable hover, focus, highlight and
             // splash colors? Then keep this one on.
             interactionEffects: controller.interactionEffects,
+            // Tinted disabled controls.
+            tintedDisabledControls: controller.tintedDisabledControls,
             // Blend level for on colors for on colors, primary
             // secondary and tertiary and their containers.
             blendOnLevel: controller.blendOnLevel,
@@ -217,6 +219,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // set this to false
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
+            inputDecoratorFocusedHasBorder:
+                controller.inputDecoratorFocusedHasBorder,
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,

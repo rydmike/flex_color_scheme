@@ -1790,6 +1790,12 @@ class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Optional provided effective TextTheme to use as base for the
+    /// input decorations.
+    ///
+    /// A default one is used if not provided.
+    final TextTheme? textTheme,
+
     /// Selects which color from the passed in colorScheme to use for the border
     /// and fill color of the input decorator.
     ///
@@ -1861,6 +1867,20 @@ class FlexSubThemes {
     /// and errorBorder, so error thus has a border also when it is not focused.
     final bool unfocusedHasBorder = true,
 
+    /// Focused input decoration has a border.
+    ///
+    /// Defaults to true.
+    ///
+    /// Applies to both outline and underline mode. You would typically
+    /// use this in a design where you use a fill color and want focused
+    /// input fields to only be highlighted by the fill color and not even
+    /// have an unfocused input border style.
+    ///
+    /// When set to false, there is no border bored on states enabledBorder and
+    /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
+    /// and errorBorder, so error thus has a border also when it is not focused.
+    final bool focusedHasBorder = true,
+
     /// Unfocused input decoration border uses the color baseScheme color.
     ///
     /// Applies to both outline and underline mode.
@@ -1876,6 +1896,20 @@ class FlexSubThemes {
     /// Defaults to true.
     final bool unfocusedBorderIsColored = true,
 
+    /// Use [baseSchemeColor] color tint on disabled state.
+    ///
+    /// Set to false to use default grey only disabled controls.
+    ///
+    /// Defaults to true.
+    final bool tintedInteractions = true,
+
+    /// Use [baseSchemeColor] color tint on disabled state.
+    ///
+    /// Set to false to use default grey only disabled controls.
+    ///
+    /// Defaults to true.
+    final bool tintedDisabled = true,
+
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -1886,18 +1920,43 @@ class FlexSubThemes {
     /// defined, if defined they keep their defined values.
     final bool useMaterial3 = false,
   }) {
+    // Used color scheme is for dark mode.
+    final bool isDark = colorScheme.brightness == Brightness.dark;
+
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    // TODO(rydmike): Define consts for tinted disabled.
     final Color usedFillColor = fillColor ??
-        (colorScheme.brightness == Brightness.dark
-            ? baseColor.withAlpha(kFillColorAlphaDark)
-            : baseColor.withAlpha(kFillColorAlphaLight));
+        MaterialStateColor.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return tintedDisabled
+                ? baseColor
+                    .blendAlpha(colorScheme.onSurface, 0x30)
+                    .withAlpha(0x08)
+                : colorScheme.onSurface.withOpacity(0.04);
+          }
+          return baseSchemeColor == null && useMaterial3
+              ? colorScheme.surfaceVariant
+              : (colorScheme.brightness == Brightness.dark
+                  ? baseColor.withAlpha(kFillColorAlphaDark)
+                  : baseColor.withAlpha(kFillColorAlphaLight));
+        });
+
+    // Some Flutter "magic" theme colors from ThemeData.
+    final Color hintColor =
+        isDark ? Colors.white60 : Colors.black.withAlpha(0x99); // 60%
+    final Color suffixIconColorM2 = isDark ? Colors.white70 : Colors.black45;
+    final Color disabledColor = isDark ? Colors.white38 : Colors.black38;
 
     final Color enabledBorder = unfocusedBorderIsColored
         ? baseColor.withAlpha(kEnabledBorderAlpha)
-        : colorScheme.onSurface.withOpacity(0.38);
+        : useMaterial3
+            ? borderType == FlexInputBorderType.underline
+                ? colorScheme.onSurfaceVariant
+                : colorScheme.outline
+            : colorScheme.onSurface.withOpacity(0.38);
 
     // Default border radius.
     final double effectiveRadius = radius ??
@@ -1907,164 +1966,224 @@ class FlexSubThemes {
     final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
     final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
-    switch (borderType ?? FlexInputBorderType.outline) {
-      case FlexInputBorderType.outline:
-        return InputDecorationTheme(
-          floatingLabelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error) &&
-                states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.error)) {
-              return TextStyle(
-                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+    final InputBorder effectiveInputBorder =
+        borderType == FlexInputBorderType.underline
+            ? UnderlineInputBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(effectiveRadius),
+                  topRight: Radius.circular(effectiveRadius),
+                ),
+              )
+            : OutlineInputBorder(
+                gapPadding: gapPadding,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(effectiveRadius),
+                ),
               );
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-              );
-            }
-            return TextStyle(color: baseColor);
-          }),
-          filled: filled,
-          fillColor: usedFillColor,
-          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
-          focusedBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
-              color: baseColor,
-              width: focusedWidth,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: enabledBorder,
-                    width: unfocusedWidth,
-                  )
-                : BorderSide.none,
-          ),
-          disabledBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: baseColor
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedWidth,
-                  )
-                : BorderSide.none,
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: focusedWidth,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            gapPadding: gapPadding,
-            borderRadius: BorderRadius.all(Radius.circular(effectiveRadius)),
-            borderSide: BorderSide(
+
+    return InputDecorationTheme(
+      labelStyle:
+          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.error)) {
+          if (states.contains(MaterialState.focused)) {
+            return TextStyle(color: colorScheme.error);
+          }
+          if (states.contains(MaterialState.hovered)) {
+            return TextStyle(color: colorScheme.onErrorContainer);
+          }
+          return TextStyle(color: colorScheme.error);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return TextStyle(color: baseColor);
+        }
+        if (states.contains(MaterialState.hovered)) {
+          return TextStyle(color: colorScheme.onSurfaceVariant);
+        }
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? TextStyle(
+                  color: baseColor
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                )
+              : TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+        }
+        return TextStyle(
+            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+      }),
+      floatingLabelStyle:
+          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.error)) {
+          if (states.contains(MaterialState.focused)) {
+            return TextStyle(color: colorScheme.error);
+          }
+
+          if (states.contains(MaterialState.hovered)) {
+            return
+                // TODO(rydmike): Default M3, excluding it. Opinionated.
+                // useMaterial3
+                //   ? TextStyle(color: colorScheme.onErrorContainer)
+                //   :
+                TextStyle(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedWidth,
-            ),
-          ),
-        );
-      case FlexInputBorderType.underline:
-        return InputDecorationTheme(
-          floatingLabelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error) &&
-                states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.error)) {
-              return TextStyle(
-                color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              );
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
-              );
-            }
-            return TextStyle(color: baseColor);
-          }),
-          filled: filled,
-          fillColor: usedFillColor,
-          hoverColor: baseColor.withAlpha(kHoverBackgroundAlpha),
-          focusColor: baseColor.withAlpha(kFocusBackgroundAlpha),
-          focusedBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: baseColor,
-              width: focusedWidth,
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: enabledBorder,
-                    width: unfocusedWidth,
-                  )
-                : BorderSide.none,
-          ),
-          disabledBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: unfocusedHasBorder
-                ? BorderSide(
-                    color: baseColor
+            );
+          }
+          return TextStyle(color: colorScheme.error);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return TextStyle(color: baseColor);
+        }
+        if (states.contains(MaterialState.hovered)) {
+          return TextStyle(color: colorScheme.onSurfaceVariant);
+        }
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? TextStyle(
+                  color: baseColor
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                )
+              : TextStyle(
+                  color: useMaterial3
+                      ? colorScheme.onSurface.withOpacity(0.38)
+                      : disabledColor);
+        }
+        return TextStyle(
+            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+      }),
+      helperStyle:
+          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? TextStyle(
+                  color: baseColor
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                )
+              : TextStyle(
+                  color: useMaterial3
+                      ? colorScheme.onSurface.withOpacity(0.38)
+                      : Colors.transparent);
+        }
+        return TextStyle(
+            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+      }),
+      hintStyle:
+          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return TextStyle(
+              color: tintedDisabled
+                  ? baseColor
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha)
+                  : disabledColor);
+        }
+        return TextStyle(color: hintColor);
+      }),
+      iconColor: MaterialStateColor.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha)
+              : colorScheme.onSurface.withOpacity(0.38);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+        }
+        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+      }),
+      prefixIconColor:
+          MaterialStateColor.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha)
+              : colorScheme.onSurface.withOpacity(0.38);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+        }
+        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+      }),
+      suffixIconColor:
+          MaterialStateColor.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.error)) {
+          // TODO(rydmike): Default M3 does this, excluding it. Opinionated.
+          // if (states.contains(MaterialState.hovered)) {
+          //   return colorScheme.onErrorContainer;
+          // }
+          return colorScheme.error;
+        }
+        if (states.contains(MaterialState.disabled)) {
+          return tintedDisabled
+              ? baseColor
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha)
+              : colorScheme.onSurface.withOpacity(0.38);
+        }
+        if (states.contains(MaterialState.focused)) {
+          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+        }
+        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+      }),
+      filled: filled,
+      fillColor: usedFillColor,
+      hoverColor: tintedInteractions
+          ? baseColor.withAlpha(kHoverBackgroundAlpha)
+          : null,
+      focusColor: tintedInteractions
+          ? baseColor.withAlpha(kFocusBackgroundAlpha)
+          : null,
+      focusedBorder: effectiveInputBorder.copyWith(
+        borderSide: focusedHasBorder
+            ? BorderSide(
+                color: baseColor,
+                width: focusedWidth,
+              )
+            : BorderSide.none,
+      ),
+      enabledBorder: effectiveInputBorder.copyWith(
+        borderSide: unfocusedHasBorder
+            ? BorderSide(
+                color: enabledBorder,
+                width: unfocusedWidth,
+              )
+            : BorderSide.none,
+      ),
+      disabledBorder: effectiveInputBorder.copyWith(
+        borderSide: unfocusedHasBorder
+            ? BorderSide(
+                color: tintedDisabled
+                    ? baseColor
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha),
-                    width: unfocusedWidth,
-                  )
-                : BorderSide.none,
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: focusedWidth,
-            ),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(effectiveRadius),
-              topRight: Radius.circular(effectiveRadius),
-            ),
-            borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-              width: unfocusedWidth,
-            ),
-          ),
-        );
-    }
+                        .withAlpha(kDisabledBackgroundAlpha)
+                    : borderType == FlexInputBorderType.underline
+                        ? colorScheme.onSurface.withOpacity(0.38)
+                        : colorScheme.onSurface.withOpacity(0.12),
+                width: unfocusedWidth,
+              )
+            : BorderSide.none,
+      ),
+      focusedErrorBorder: effectiveInputBorder.copyWith(
+        borderSide: focusedHasBorder
+            ? BorderSide(
+                color: colorScheme.error,
+                width: focusedWidth,
+              )
+            : BorderSide.none,
+      ),
+      errorBorder: effectiveInputBorder.copyWith(
+        borderSide: focusedHasBorder
+            ? BorderSide(
+                color: colorScheme.error
+                    .withAlpha(useMaterial3 ? 0xFF : kEnabledBorderAlpha),
+                width: unfocusedWidth,
+              )
+            : BorderSide.none,
+      ),
+    );
   }
 
   /// An opinionated [NavigationBarThemeData] with a flat API.

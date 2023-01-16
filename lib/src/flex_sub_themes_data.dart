@@ -107,8 +107,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
     this.interactionEffects = true,
-    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-    // this.tintedDisabledControls = true,
+    this.tintedDisabledControls = true,
     this.blendOnLevel,
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
@@ -171,6 +170,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorBorderType,
+    this.inputDecoratorFocusedHasBorder = true,
     this.inputDecoratorUnfocusedHasBorder = true,
     this.inputDecoratorUnfocusedBorderIsColored = true,
     this.inputDecoratorBorderWidth,
@@ -323,18 +323,18 @@ class FlexSubThemesData with Diagnosticable {
   final bool interactionEffects;
 
   // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-  // /// Use primary tint on disabled controls.
-  // ///
-  // /// Set to true to make disabled controls use a shared slightly
-  // /// primary color tint on their disabled state.
-  // ///
-  // /// Set to false to use default grey only disabled controls.
-  // ///
-  // /// Impacts controls:
-  // /// - To be added...
-  // ///
-  // /// Defaults to true.
-  // final bool tintedDisabledControls;
+  /// Use primary tint on disabled controls.
+  ///
+  /// Set to true to make disabled controls use a shared slightly
+  /// primary color tint on their disabled state.
+  ///
+  /// Set to false to use default grey only disabled controls.
+  ///
+  /// Impacts controls:
+  /// - To be added...
+  ///
+  /// Defaults to true.
+  final bool tintedDisabledControls;
 
   /// Sets the blend level strength of container color used on its onColor.
   ///
@@ -987,6 +987,19 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [FlexInputBorderType.outline].
   final FlexInputBorderType? inputDecoratorBorderType;
 
+  /// Determines if the [InputDecorator] focused state has a border.
+  ///
+  /// Defaults to true.
+  ///
+  /// Applies to both outline and underline mode.
+  ///
+  /// You can use this in a design where you use a fill color and want focused
+  /// input fields to only be highlighted by the fill color and not have any
+  /// focused input border style.
+  ///
+  /// When set to false, there is no border bored on focused states.
+  final bool inputDecoratorFocusedHasBorder;
+
   /// Determines if the [InputDecorator] unfocused state has a border.
   ///
   /// Defaults to true.
@@ -998,11 +1011,13 @@ class FlexSubThemesData with Diagnosticable {
   /// unfocused input border style.
   ///
   /// When set to false, there is no border bored on states enabledBorder and
-  /// disabledBorder. There is a border on focusedBorder, focusedErrorBorder
-  /// and errorBorder. Error state thus has a border also when it is not
-  /// focused, even when this is set to false. This is a design choice to
+  /// disabledBorder. Unless [inputDecoratorFocusedHasBorder] is set to false,
+  /// there is a border on focusedBorder, focusedErrorBorder
+  /// and errorBorder. Unfocused error state thus has a border also when it is
+  /// not focused, even when this is set to false. This is a design choice to
   /// continue to emphasize error state with an error border even when
-  /// this property is set to false.
+  /// this property is set to false. If you want all focused states to not have
+  /// a border also set [inputDecoratorFocusedHasBorder] to false.
   final bool inputDecoratorUnfocusedHasBorder;
 
   /// Determines if the [InputDecorator] unfocused state has a colored border.
@@ -2077,8 +2092,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
-    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-    // final bool? tintedDisabledControls,
+    final bool? tintedDisabledControls,
     final int? blendOnLevel,
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
@@ -2141,6 +2155,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
     final FlexInputBorderType? inputDecoratorBorderType,
+    final bool? inputDecoratorFocusedHasBorder,
     final bool? inputDecoratorUnfocusedHasBorder,
     final bool? inputDecoratorUnfocusedBorderIsColored,
     final double? inputDecoratorBorderWidth,
@@ -2251,9 +2266,8 @@ class FlexSubThemesData with Diagnosticable {
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
-      // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-      // tintedDisabledControls:
-      //     tintedDisabledControls ?? this.tintedDisabledControls,
+      tintedDisabledControls:
+          tintedDisabledControls ?? this.tintedDisabledControls,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
@@ -2342,6 +2356,8 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorFillColor ?? this.inputDecoratorFillColor,
       inputDecoratorBorderType:
           inputDecoratorBorderType ?? this.inputDecoratorBorderType,
+      inputDecoratorFocusedHasBorder:
+          inputDecoratorFocusedHasBorder ?? this.inputDecoratorFocusedHasBorder,
       inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
           this.inputDecoratorUnfocusedHasBorder,
       inputDecoratorUnfocusedBorderIsColored:
@@ -2549,8 +2565,7 @@ class FlexSubThemesData with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSubThemesData &&
         other.interactionEffects == interactionEffects &&
-        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-        // other.tintedDisabledControls == tintedDisabledControls &&
+        other.tintedDisabledControls == tintedDisabledControls &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
         other.useFlutterDefaults == useFlutterDefaults &&
@@ -2616,6 +2631,8 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
+        other.inputDecoratorFocusedHasBorder ==
+            inputDecoratorFocusedHasBorder &&
         other.inputDecoratorUnfocusedHasBorder ==
             inputDecoratorUnfocusedHasBorder &&
         other.inputDecoratorUnfocusedBorderIsColored ==
@@ -2771,8 +2788,7 @@ class FlexSubThemesData with Diagnosticable {
   @override
   int get hashCode => Object.hashAll(<Object?>[
         interactionEffects,
-        // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-        // tintedDisabledControls,
+        tintedDisabledControls,
         blendOnLevel,
         blendOnColors,
         useFlutterDefaults,
@@ -2835,6 +2851,7 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
         inputDecoratorBorderType,
+        inputDecoratorFocusedHasBorder,
         inputDecoratorUnfocusedHasBorder,
         inputDecoratorUnfocusedBorderIsColored,
         inputDecoratorBorderWidth,
@@ -2949,9 +2966,8 @@ class FlexSubThemesData with Diagnosticable {
     super.debugFillProperties(properties);
     properties.add(
         DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
-    // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
-    // properties.add(DiagnosticsProperty<bool>(
-    //     'tintedDisabledControls', tintedDisabledControls));
+    properties.add(DiagnosticsProperty<bool>(
+        'tintedDisabledControls', tintedDisabledControls));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     properties.add(
@@ -3056,6 +3072,8 @@ class FlexSubThemesData with Diagnosticable {
         .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
     properties.add(EnumProperty<FlexInputBorderType>(
         'inputDecoratorBorderType', inputDecoratorBorderType));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorFocusedHasBorder', inputDecoratorFocusedHasBorder));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
     properties.add(DiagnosticsProperty<bool>(

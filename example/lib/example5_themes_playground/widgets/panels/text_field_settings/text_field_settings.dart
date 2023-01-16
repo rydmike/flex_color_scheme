@@ -41,10 +41,6 @@ class TextFieldSettings extends StatelessWidget {
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
 
-    final bool? isFilled =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.inputDecoratorIsFilled
-            : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -54,6 +50,9 @@ class TextFieldSettings extends StatelessWidget {
         ),
         if (isLight)
           ColorSchemePopupMenu(
+            labelForDefault: controller.useMaterial3
+                ? 'default (primary & surfaceVariant)'
+                : 'default (primary)',
             title: const Text('Light theme TextField color base'),
             index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -116,13 +115,6 @@ class TextFieldSettings extends StatelessWidget {
                 }
               : null,
         ),
-        // TODO(rydmike): Flutter bug on UnderlineInputBorder.
-        // When using UnderlineInputBorder the border radius does not update
-        // when ThemeData has changed to a new version with different
-        // underline input border radius. This is because UnderlineInputBorder
-        // does not implement correctly where as OutlineInputBorder does.
-        // See issue:
-        // https://github.com/flutter/flutter/issues/118282
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
@@ -196,23 +188,35 @@ class TextFieldSettings extends StatelessWidget {
         ),
         ListTile(
           title: const Text('Unfocused border width'),
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.inputDecoratorUnfocusedHasBorder,
           subtitle: Slider(
             min: 0,
             max: 5,
             divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? controller.inputDecoratorBorderWidth == null ||
                         (controller.inputDecoratorBorderWidth ?? 0) <= 0
                     ? thinBorderDefaultLabel
                     : (controller.inputDecoratorBorderWidth
                             ?.toStringAsFixed(1) ??
                         '')
-                : 'default 1',
-            value: controller.useSubThemes && controller.useFlexColorScheme
+                : controller.inputDecoratorUnfocusedHasBorder ||
+                        !controller.useSubThemes ||
+                        !controller.useFlexColorScheme
+                    ? 'default 1'
+                    : 'none',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? controller.inputDecoratorBorderWidth ?? 0
                 : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? (double value) {
                     controller.setInputDecoratorBorderWidth(
                         value <= 0 ? null : value);
@@ -229,14 +233,20 @@ class TextFieldSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.inputDecoratorUnfocusedHasBorder
                       ? controller.inputDecoratorBorderWidth == null ||
                               (controller.inputDecoratorBorderWidth ?? 0) <= 0
                           ? thinBorderDefaultLabel
                           : (controller.inputDecoratorBorderWidth
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : 'default 1',
+                      : controller.inputDecoratorUnfocusedHasBorder ||
+                              !controller.useSubThemes ||
+                              !controller.useFlexColorScheme
+                          ? 'default 1'
+                          : 'none',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -244,25 +254,46 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ),
         ),
+        SwitchListTile(
+          title: const Text('Focused field has a border'),
+          value: controller.inputDecoratorFocusedHasBorder &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInputDecoratorFocusedHasBorder
+              : null,
+        ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.inputDecoratorFocusedHasBorder,
           title: const Text('Focused border width'),
           subtitle: Slider(
             min: 0,
             max: 5,
             divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? controller.inputDecoratorFocusedBorderWidth == null ||
                         (controller.inputDecoratorFocusedBorderWidth ?? 0) <= 0
                     ? thickBorderDefaultLabel
                     : (controller.inputDecoratorFocusedBorderWidth
                             ?.toStringAsFixed(1) ??
                         '')
-                : 'default 2',
-            value: controller.useSubThemes && controller.useFlexColorScheme
+                : controller.inputDecoratorFocusedHasBorder ||
+                        !controller.useSubThemes ||
+                        !controller.useFlexColorScheme
+                    ? 'default 2'
+                    : 'none',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? controller.inputDecoratorFocusedBorderWidth ?? 0
                 : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? (double value) {
                     controller.setInputDecoratorFocusedBorderWidth(
                         value <= 0 ? null : value);
@@ -279,7 +310,9 @@ class TextFieldSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.inputDecoratorFocusedHasBorder
                       ? controller.inputDecoratorFocusedBorderWidth == null ||
                               (controller.inputDecoratorFocusedBorderWidth ??
                                       0) <=
@@ -288,7 +321,11 @@ class TextFieldSettings extends StatelessWidget {
                           : (controller.inputDecoratorFocusedBorderWidth
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : 'default 2',
+                      : controller.inputDecoratorFocusedHasBorder ||
+                              !controller.useSubThemes ||
+                              !controller.useFlexColorScheme
+                          ? 'default 2'
+                          : 'none',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

@@ -96,13 +96,16 @@ class ColorSchemePopupMenu extends StatelessWidget {
             if (subtitle != null) subtitle!,
           ],
         ),
-        trailing: ColorSchemeBox(
-          backgroundColor: enabled && !useDefault
-              ? FlexSubThemes.schemeColor(
-                  SchemeColor.values[index], colorScheme)
-              : colorScheme.surface,
-          borderColor: theme.dividerColor,
-          defaultOption: useDefault,
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: ColorSchemeBox(
+            backgroundColor: enabled && !useDefault
+                ? FlexSubThemes.schemeColor(
+                    SchemeColor.values[index], colorScheme)
+                : colorScheme.surface,
+            borderColor: theme.dividerColor,
+            defaultOption: useDefault,
+          ),
         ),
       ),
     );
