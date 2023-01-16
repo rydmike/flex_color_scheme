@@ -5559,6 +5559,56 @@ class FlexColorScheme with Diagnosticable {
       appBarIconColor = appBarForeground;
     }
 
+    // The FlexColorScheme AppBar's customizable system UI overlay style.
+    // This refers to the top status bar on Android and iOS. Some features
+    // only apply to Android. These settings have no effect on other platforms
+    // than Android and iOS.
+    final SystemUiOverlayStyle systemOverlayStyle = SystemUiOverlayStyle(
+      systemStatusBarContrastEnforced: false,
+      // AppBar overlay style.
+      statusBarColor: transparentStatusBar
+          ? Colors.transparent
+          // This is the actual scrim color used by Android by default,
+          // here we just re-apply if false or if it had been removed
+          // earlier, using `null` does not restore it, we need to re-apply
+          // the used scrim color by Android to restore if it has been
+          // removed earlier.
+          : const Color(0x40000000),
+      statusBarBrightness: appBarBrightness,
+      statusBarIconBrightness: appBarBrightness == Brightness.dark
+          ? Brightness.light
+          : Brightness.dark,
+      // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
+      //   Would be useful it could set system navbar properties too and not
+      //   only status bar properties. While it might be odd to do so, it
+      //   seems even more odd that a part of the SystemUiOverlayStyle has
+      //   no effect when used here.
+      //   See https://github.com/flutter/flutter/issues/104410
+      //   and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
+      //   PR: https://github.com/flutter/flutter/pull/104827
+      // The systemNavigationBarColor used by default AppBar in SDK is
+      // always black, like so:
+      // systemNavigationBarColor: const Color(0xFF000000),
+      // We try to set it to scheme background instead in AppBar theme,
+      // does not do anything, result will be black anyway.
+      systemNavigationBarColor: colorScheme.background,
+      // The systemNavigationBarIconBrightness used by the AppBar in SDK, is
+      // always light, for the black background it get, like so:
+      // systemNavigationBarIconBrightness: Brightness.light,
+      // We try to match it to the color of our scheme background, but we
+      // always get the light ones anyway, which is fine, as long as the
+      // system navbar remains black anyway.
+      systemNavigationBarIconBrightness:
+          isDark ? Brightness.light : Brightness.dark,
+      // Keeping the above system navbar changes, even if they up to at
+      // least Flutter 2.10.3 did not do anything, maybe they start to
+      // work one day, then we do not not need an AnnotatedRegion for it
+      // anymore but can get it via AppBar theme, the way it should work.
+      // The systemNavigationBarDividerColor used by default AppBar in SDK:
+      systemNavigationBarDividerColor: null,
+      systemNavigationBarContrastEnforced: false,
+    );
+
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior,
     // it can be used, but is not as useful as the `forAppBar` version which
@@ -5719,15 +5769,16 @@ class FlexColorScheme with Diagnosticable {
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // Same as in ThemeData. Defined for use in the tooltip sub-theme.
-    // In M3 use the new dividerColor colorScheme.outlineVariant,
-    // unless useOpacityBasedDividerInM3 is set to true.
-    final Color dividerColor = (useMaterial3 &&
-                (useSubThemes && !subTheme.useOpacityBasedDividerInM3)) ||
-            (useMaterial3 && !useSubThemes)
-        ? colorScheme.outlineVariant
-        : isDark
-            ? const Color(0x1FFFFFFF) // White 12%
-            : const Color(0x1F000000); // Black 12%
+    // In M3 mode we use the new dividerColor colorScheme.outlineVariant,
+    // unless useM2StyleDividerInM3 is set to true, it it is true
+    // we use the the M2 style also in M3.
+    final Color dividerColor =
+        (useMaterial3 && (useSubThemes && !subTheme.useM2StyleDividerInM3)) ||
+                (useMaterial3 && !useSubThemes)
+            ? colorScheme.outlineVariant
+            : isDark
+                ? const Color(0x1FFFFFFF) // White 12%
+                : const Color(0x1F000000); // Black 12%
 
     // Use tinted interaction effects on hover, focus, highlight and splash?
     final bool tintedInteractions = useSubThemes && subTheme.interactionEffects;
@@ -5739,7 +5790,7 @@ class FlexColorScheme with Diagnosticable {
     // theme is also passed into the TimePickerTheme, so we get the same
     // style used there too.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
-        // V4 and later sub-theme based input decorator used.
+        // FCS V4 and later sub-theme based input decorator used.
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
@@ -5758,15 +5809,13 @@ class FlexColorScheme with Diagnosticable {
                 subTheme.inputDecoratorUnfocusedBorderIsColored,
             tintedInteractions: tintedInteractions,
             tintedDisabled: tintedDisabled,
-            useMaterial3: useMaterial3)
-        // Default one is also a bit opinionated, this is the FCS standard
-        // in all previous versions before version 4.0.0. Kept for
-        // backwards defaults compatibility.
+            useMaterial3: useMaterial3,
+          )
+        // Default decorator is also a bit opinionated, this is the FCS
+        // default one in all previous versions before version 4.0.0.
+        // Kept for backwards defaults compatibility. Used when not using
+        // opinionated component sub-themes.
         : InputDecorationTheme(
-            // Extend filled property to previous always filled ones, defaults
-            // to filled as before, but can now also be unfilled even if not
-            // opted in on sub themes, by setting the property for it in
-            // FlexSubThemesData.
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: isDark
                 ? colorScheme.primary.withAlpha(0x0F) // 6%
@@ -5860,7 +5909,7 @@ class FlexColorScheme with Diagnosticable {
       // Create a Divider theme only when sub themes is used and we want M2
       // style in M3. Otherwise we keep the theme as default.
       dividerTheme:
-          useMaterial3 && (useSubThemes && subTheme.useOpacityBasedDividerInM3)
+          useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
               ? DividerThemeData(color: dividerColor)
               : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
@@ -6002,68 +6051,24 @@ class FlexColorScheme with Diagnosticable {
       // value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
-      // TODO(rydmike): Tech debt: Move AppBar theme opt-in to FlexSubThemes.
       // The app bar theme allows us to use a custom colored appbar theme
-      // in both light and dark themes that is not dependent on theme primary
-      // or surface color, and still gets a correct working text and icon theme.
-      // In the versions prior to Flutter 2.0.0 doing this was very difficult,
-      // as presented in https://github.com/flutter/flutter/issues/50606 doing
-      // this was a tricky. A new feature in Flutter 2.0.0 implemented via:
-      // https://github.com/flutter/flutter/pull/71184 makes this setup easy.
-      // The FlexColorScheme implementation below has been changed to
-      // use these new AppBarTheme features in version 2.0.0.
+      // in both light and dark themes that is not dependent on ThemeData
+      // `primaryColor` or surface color, and still gets correct working text
+      // and icon theme. Historically, in versions prior to Flutter 2.0.0,
+      // doing this was very difficult, as presented in
+      // https://github.com/flutter/flutter/issues/50606.
+      // A new feature in Flutter 2.0.0 implemented via:
+      // https://github.com/flutter/flutter/pull/71184 made doing this easier.
+      // FlexColorScheme has uses the SDK supported way since it was launched.
       appBarTheme: AppBarTheme(
         centerTitle: subTheme.appBarCenterTitle,
         backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
+        elevation: appBarElevation,
+        scrolledUnderElevation: null,
         iconTheme: IconThemeData(color: appBarIconColor),
         actionsIconTheme: IconThemeData(color: appBarIconColor),
-        elevation: appBarElevation,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          systemStatusBarContrastEnforced: false,
-          // AppBar overlay style.
-          statusBarColor: transparentStatusBar
-              ? Colors.transparent
-              // This is the actual scrim color used by Android by default,
-              // here we just re-apply if false or if it had been removed
-              // earlier, using `null` does not restore it, we need to re-apply
-              // the used scrim color by Android to restore if it has been
-              // removed earlier.
-              : const Color(0x40000000),
-          statusBarBrightness: appBarBrightness,
-          statusBarIconBrightness: appBarBrightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
-          // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
-          //   Would be useful it could set system navbar properties too and not
-          //   only status bar properties. While it might be odd to do so, it
-          //   seems even more odd that a part of the SystemUiOverlayStyle has
-          //   no effect when used here.
-          //   See https://github.com/flutter/flutter/issues/104410
-          //   and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
-          //   PR: https://github.com/flutter/flutter/pull/104827
-          // The systemNavigationBarColor used by default AppBar in SDK is
-          // always black, like so:
-          // systemNavigationBarColor: const Color(0xFF000000),
-          // We try to set it to scheme background instead in AppBar theme,
-          // does not do anything, result will be black anyway.
-          systemNavigationBarColor: colorScheme.background,
-          // The systemNavigationBarIconBrightness used by the AppBar in SDK, is
-          // always light, for the black background it get, like so:
-          // systemNavigationBarIconBrightness: Brightness.light,
-          // We try to match it to the color of our scheme background, but we
-          // always get the light ones anyway, which is fine, as long as the
-          // system navbar remains black anyway.
-          systemNavigationBarIconBrightness:
-              isDark ? Brightness.light : Brightness.dark,
-          // Keeping the above system navbar changes, even if they up to at
-          // least Flutter 2.10.3 did not do anything, maybe they start to
-          // work one day, then we do not not need an AnnotatedRegion for it
-          // anymore but can get it via AppBar theme, the way it should work.
-          // The systemNavigationBarDividerColor used by default AppBar in SDK:
-          systemNavigationBarDividerColor: null,
-          systemNavigationBarContrastEnforced: false,
-        ),
+        systemOverlayStyle: systemOverlayStyle,
       ),
 
       // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre

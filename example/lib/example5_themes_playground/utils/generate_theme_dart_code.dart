@@ -240,10 +240,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
-  final String useOpacityBasedDividerInM3 = controller.useM2StyleDividerInM3 &&
-          controller.useMaterial3
-      ? '    useOpacityBasedDividerInM3: ${controller.useM2StyleDividerInM3},\n'
-      : '';
+  final String useOpacityBasedDividerInM3 =
+      controller.useM2StyleDividerInM3 && controller.useMaterial3
+          ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
+          : '';
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';

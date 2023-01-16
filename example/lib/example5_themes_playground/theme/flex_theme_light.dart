@@ -150,7 +150,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Typography, as it is called in Flutter SDK.
             useTextTheme: controller.useTextTheme,
             // Divider settings
-            useOpacityBasedDividerInM3: controller.useM2StyleDividerInM3,
+            useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
             // Outline thickness theming
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,

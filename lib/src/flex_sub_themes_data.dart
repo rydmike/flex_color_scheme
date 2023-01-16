@@ -114,7 +114,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.blendTextTheme = true,
     this.useTextTheme = true,
-    this.useOpacityBasedDividerInM3 = false,
+    this.useM2StyleDividerInM3 = false,
     //
     this.defaultRadius,
     this.buttonMinSize,
@@ -533,7 +533,7 @@ class FlexSubThemesData with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/103864.
   final bool useTextTheme;
 
-  /// Determines if opacity based divider is used in Material 3.
+  /// Determines if M2 style opacity based divider is used in Material 3.
   ///
   /// Material 3 uses [ColorScheme.outlineVariant] in its default
   /// [Divider] style. Set this to false to use Material 2 style [Divider]
@@ -542,10 +542,10 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The primary tinted [ColorScheme.outlineVariant] may not work universally
   /// on all background colors. The white and black variants with some
-  /// transparency works on all background colors.
+  /// transparency works well on all background colors.
   ///
   /// Defaults to false.
-  final bool useOpacityBasedDividerInM3;
+  final bool useM2StyleDividerInM3;
 
   /// Border radius used on all widgets when [FlexColorScheme] use its
   /// [FlexSubThemesData] to configure sub-themes with [FlexSubThemes].
@@ -1403,7 +1403,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Whether the AppBar title should be centered.
   ///
   /// Overrides the default value of [AppBar.centerTitle] property in all
-  /// descendant [AppBar] widgets. Ff this property is null, then value
+  /// descendant [AppBar] widgets. If this property is null, then value
   /// is adapted to the current [TargetPlatform].
   final bool? appBarCenterTitle;
 
@@ -2109,7 +2109,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final bool? blendTextTheme,
     final bool? useTextTheme,
-    final bool? useOpacityBasedDividerInM3,
+    final bool? useM2StyleDividerInM3,
     //
     final double? defaultRadius,
     final Size? buttonMinSize,
@@ -2285,8 +2285,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
-      useOpacityBasedDividerInM3:
-          useOpacityBasedDividerInM3 ?? this.useOpacityBasedDividerInM3,
+      useM2StyleDividerInM3:
+          useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
       //
       defaultRadius: defaultRadius ?? this.defaultRadius,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
@@ -2586,7 +2586,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
-        other.useOpacityBasedDividerInM3 == useOpacityBasedDividerInM3 &&
+        other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
         other.defaultRadius == defaultRadius &&
         other.buttonMinSize == buttonMinSize &&
@@ -2811,7 +2811,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         blendTextTheme,
         useTextTheme,
-        useOpacityBasedDividerInM3,
+        useM2StyleDividerInM3,
         //
         defaultRadius,
         buttonMinSize,
@@ -2993,7 +2993,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
     properties.add(DiagnosticsProperty<bool>(
-        'useOpacityBasedDividerInM3', useOpacityBasedDividerInM3));
+        'useM2StyleDividerInM3', useM2StyleDividerInM3));
     //
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
     properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));

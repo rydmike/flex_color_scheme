@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
@@ -149,7 +150,8 @@ enum SchemeColor {
 ///
 /// These component themes are available:
 ///
-/// * `ButtonThemeData` for old deprecated buttons, via `buttonTheme`.
+/// * [AppBarTheme] for [AppBar] via [appBarTheme].
+/// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -171,6 +173,7 @@ enum SchemeColor {
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
+/// * [TabBarTheme] for [TabBar] via [tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
@@ -376,19 +379,111 @@ class FlexSubThemes {
     }
   }
 
-  /// An opinionated `ButtonThemeData` theme.
+  /// An opinionated [AppBarTheme] theme.
   ///
-  /// This `ButtonThemeData` is marked as **obsolete** in Flutter SDK
-  /// documentation, but not yet deprecated in Flutter SDK 3.3.0.
-  /// It will be removed in FCS after Flutter SDK deprecates ButtonThemeData.
+  /// Contrary to the other opinionated static [FlexSubThemes] sub-theme
+  /// function, this one is only a sub-set of the original and does not do or
+  /// contain any feature shortcuts.
+  ///
+  /// The [FlexColorScheme.toTheme] needs many some the properties, like fore-
+  /// and background colors used here, for other component theme definitions as
+  /// well and has already computed them once, so they are reused here.
+  ///
+  /// At the moment the [FlexSubThemes.appBarTheme] is mostly included to
+  /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
+  /// class. Actual convenience features may be added to
+  /// [FlexSubThemes.appBarTheme] later.
+  static AppBarTheme appBarTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Whether the AppBar title should be centered.
+    ///
+    /// Overrides the default value of [AppBar.centerTitle] property in all
+    /// descendant [AppBar] widgets. If this property is null, then value
+    /// is adapted to the current [TargetPlatform].
+    final bool? centerTitle,
+
+    /// Overrides the default value of [AppBar.backgroundColor] in all
+    /// descendant [AppBar] widgets.
+    ///
+    /// See also:
+    ///
+    ///  * [foregroundColor], which overrides the default value of
+    ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
+    final Color? backgroundColor,
+
+    /// Overrides the default value of [AppBar.foregroundColor] in all
+    /// descendant [AppBar] widgets.
+    ///
+    /// See also:
+    ///
+    ///  * [backgroundColor], which overrides the default value of
+    ///    [AppBar.backgroundColor] in all descendant [AppBar] widgets.
+    final Color? foregroundColor,
+
+    /// Overrides the default value of [AppBar.elevation] in all
+    /// descendant [AppBar] widgets.
+    final double? elevation,
+
+    /// Overrides the default value of [AppBar.scrolledUnderElevation] in all
+    /// descendant [AppBar] widgets.
+    final double? scrolledUnderElevation,
+
+    /// Overrides the default value of [AppBar.iconTheme] in all
+    /// descendant [AppBar] widgets.
+    ///
+    /// See also:
+    ///
+    ///  * [actionsIconTheme], which overrides the default value of
+    ///    [AppBar.actionsIconTheme] in all descendant [AppBar] widgets.
+    ///  * [foregroundColor], which overrides the default value
+    ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
+    final IconThemeData? iconTheme,
+
+    /// Overrides the default value of [AppBar.actionsIconTheme] in all
+    /// descendant [AppBar] widgets.
+    ///
+    /// See also:
+    ///
+    ///  * [iconTheme], which overrides the default value of
+    ///    [AppBar.iconTheme] in all descendant [AppBar] widgets.
+    ///  * [foregroundColor], which overrides the default value
+    ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
+    final IconThemeData? actionsIconTheme,
+
+    /// Overrides the default value of [AppBar.systemOverlayStyle]
+    /// property in all descendant [AppBar] widgets.
+    final SystemUiOverlayStyle? systemOverlayStyle,
+  }) {
+    return AppBarTheme(
+      centerTitle: centerTitle,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      elevation: elevation,
+      scrolledUnderElevation: scrolledUnderElevation,
+      iconTheme: iconTheme,
+      actionsIconTheme: actionsIconTheme,
+      systemOverlayStyle: systemOverlayStyle,
+    );
+  }
+
+  /// An opinionated [ButtonThemeData] theme.
+  ///
+  /// The `ButtonThemeData` is marked as **obsolete** in Flutter SDK
+  /// documentation, but not yet deprecated in Flutter stable SDK 3.3.x.
+  ///
+  /// This sub-theme will be removed in FCS when Flutter SDK deprecates
+  /// [ButtonThemeData].
   ///
   /// This theme is used to provide the same opinionated theme and style on
   /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
   /// Button theme has more limited theming capability and cannot match
   /// the Material style buttons fully, this is an approximation.
   ///
-  /// The adjustable button corner [radius] defaults to 20. This is the new
-  /// default in M3, Flutter SDK M2 defaults to 4.
+  /// The adjustable button corner [radius] defaults to 20. This was an early
+  /// default in M3 for buttons, it was later changed to stadium border.
+  /// Flutter SDK M2 defaults to 4.
   ///
   /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
   /// It is used to make the buttons match the padding on the newer buttons.

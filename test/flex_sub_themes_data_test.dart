@@ -20,7 +20,7 @@ void main() {
       useFlutterDefaults: false,
       blendTextTheme: true,
       useTextTheme: true,
-      useOpacityBasedDividerInM3: false,
+      useM2StyleDividerInM3: false,
       unselectedToggleIsColored: false,
       sliderValueTinted: false,
       inputDecoratorIsFilled: true,
@@ -46,7 +46,7 @@ void main() {
       useFlutterDefaults: false,
       blendTextTheme: true,
       useTextTheme: true,
-      useOpacityBasedDividerInM3: false,
+      useM2StyleDividerInM3: false,
       unselectedToggleIsColored: false,
       sliderValueTinted: false,
       inputDecoratorIsFilled: false, //<- Diff
@@ -73,7 +73,7 @@ void main() {
       useFlutterDefaults: true,
       blendTextTheme: false,
       useTextTheme: false,
-      useOpacityBasedDividerInM3: true,
+      useM2StyleDividerInM3: true,
       unselectedToggleIsColored: true,
       sliderValueTinted: true,
       inputDecoratorIsFilled: false,
@@ -149,7 +149,7 @@ void main() {
           useFlutterDefaults: false,
           blendTextTheme: true,
           useTextTheme: true,
-          useOpacityBasedDividerInM3: false,
+          useM2StyleDividerInM3: false,
           unselectedToggleIsColored: false,
           sliderValueTinted: false,
           inputDecoratorIsFilled: true,
@@ -188,7 +188,7 @@ void main() {
       //
       blendTextTheme: false,
       useTextTheme: true,
-      useOpacityBasedDividerInM3: true,
+      useM2StyleDividerInM3: true,
       //
       defaultRadius: 14,
       buttonMinSize: Size(41, 41),
@@ -372,7 +372,7 @@ void main() {
           //
           blendTextTheme: false,
           useTextTheme: true,
-          useOpacityBasedDividerInM3: true,
+          useM2StyleDividerInM3: true,
           //
           defaultRadius: 14,
           buttonMinSize: const Size(41, 41),
