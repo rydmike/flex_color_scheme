@@ -5616,7 +5616,11 @@ class FlexColorScheme with Diagnosticable {
     Color selectedTabColor() {
       switch (tabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
-          return isDark ? Colors.white : colorScheme.onPrimary;
+          return useMaterial3
+              ? colorScheme.primary
+              : isDark
+                  ? Colors.white
+                  : colorScheme.onPrimary;
         case FlexTabBarStyle.forBackground:
           return colorScheme.primary;
         case FlexTabBarStyle.forAppBar:
@@ -5638,7 +5642,9 @@ class FlexColorScheme with Diagnosticable {
     Color unselectedTabColor() {
       switch (tabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
-          return selectedTabColor().withAlpha(0xB2); // 70%
+          return useMaterial3
+              ? colorScheme.onSurface
+              : selectedTabColor().withAlpha(0xB2); // 70%
         case FlexTabBarStyle.forBackground:
           return useSubThemes
               ? colorScheme.onSurface

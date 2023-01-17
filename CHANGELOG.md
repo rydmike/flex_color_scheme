@@ -90,7 +90,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
 - Review and tune new M3 color schemes, red to teal done. Six more remaining.  
 - Review M3 Playground component colors, and add new buttons.
-- Add M3 support to `TabBar`.
+- Add M3 support to `TabBar`. Partial added. Review. Add unselected color, undimmed not selected. Divider under it?
 - Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.

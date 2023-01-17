@@ -3908,6 +3908,9 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.indicatorColor].
     final Color? indicatorColor,
 
+    /// Overrides the default value for [TabBar.dividerColor].
+    final Color? dividerColor,
+
     /// Overrides the default value for [TabBar.labelStyle].
     final TextStyle? labelStyle,
 
@@ -3927,6 +3930,7 @@ class FlexSubThemes {
       indicatorSize: indicatorSize ??
           (useMaterial3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
       indicatorColor: indicatorColor,
+      dividerColor: dividerColor,
       labelStyle: labelStyle,
       labelColor: labelColor,
       unselectedLabelStyle: unselectedLabelStyle,
