@@ -75,6 +75,12 @@ const double kDialogRadius = 28;
 /// https://m3.material.io/components/cards/specs
 const double kCardRadius = 12;
 
+/// Default border radius on dialogs.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/time-pickers/specs.
+const double kTimeElementRadius = 8;
+
 /// Default border radius on menus, typically small popup menus.
 /// Drawer menu has its own default.
 ///

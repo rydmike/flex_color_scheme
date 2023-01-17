@@ -532,12 +532,12 @@ void main() {
             ),
             hourMinuteShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             inputDecorationTheme: const InputDecorationTheme().copyWith(
@@ -571,12 +571,12 @@ void main() {
             ),
             hourMinuteShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             inputDecorationTheme: const InputDecorationTheme().copyWith(
@@ -609,12 +609,12 @@ void main() {
             ),
             hourMinuteShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(8),
               ),
             ),
             inputDecorationTheme:
@@ -628,13 +628,14 @@ void main() {
     });
 
     test(
-        'FST1.07.background-b: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'FST1.07.background-b: GIVEN a custom FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
         FlexSubThemes.timePickerTheme(
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(filled: true),
+          elementRadius: 12,
         ),
         equals(
           TimePickerThemeData(

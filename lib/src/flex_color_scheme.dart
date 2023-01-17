@@ -451,6 +451,10 @@ class FlexColorScheme with Diagnosticable {
   /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
   /// controlled separately with only a [ThemeData.from] a color scheme.
   ///
+  /// It is also applied to dialog themes:
+  /// * DialogTheme
+  /// * TimePickerThemeData
+  ///
   /// If no value is given, it defaults to [surface].
   final Color? dialogBackground;
 
@@ -1603,6 +1607,10 @@ class FlexColorScheme with Diagnosticable {
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
+    ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
@@ -3364,6 +3372,10 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
     ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
+    ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
@@ -5106,7 +5118,7 @@ class FlexColorScheme with Diagnosticable {
   ///   important to be able to vary the very prominent ScaffoldBackgroundColor
   ///   separately from other surfaces and backgrounds.
   ///
-  /// * The `dialogBackgroundColor` uses the `ColorScheme.surface` color
+  /// * The `dialogBackgroundColor` in M2 uses the `ColorScheme.surface` color
   ///   instead of the default `ColorScheme.background`. In order to preserve
   ///   the `elevationOverlayColor` in dark mode when `ColorScheme.surface` and
   ///   `ColorScheme.background` differs due to different surface blends, the
@@ -5114,6 +5126,7 @@ class FlexColorScheme with Diagnosticable {
   ///   elevated gets the overlay color applied in dark theme mode. For more
   ///   info see:
   ///   [issue #90353](https://github.com/flutter/flutter/issues/90353).
+  ///   In M3 `ColorScheme.surface` is used by the SDK as well.
   ///
   ///  * The `indicatorColor` is same as `effectiveTabColor` which uses a
   ///    function with logic to determine its color based on if a TabBarTheme

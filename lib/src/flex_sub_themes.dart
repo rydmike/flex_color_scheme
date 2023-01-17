@@ -4149,7 +4149,7 @@ class FlexSubThemes {
 
     /// Elements corner radius.
     ///
-    /// Defaults to [kCardRadius] = 12.
+    /// Defaults to [kTimeElementRadius] = 8.
     final double? elementRadius,
 
     /// An input decoration theme, for the time picker.
@@ -4180,12 +4180,12 @@ class FlexSubThemes {
       ),
       hourMinuteShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(elementRadius ?? kCardRadius),
+          Radius.circular(elementRadius ?? kTimeElementRadius),
         ),
       ),
       dayPeriodShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(elementRadius ?? kCardRadius),
+          Radius.circular(elementRadius ?? kTimeElementRadius),
         ),
       ),
       // Custom additions the Widget does internally, but for some reason

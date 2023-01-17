@@ -93,6 +93,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add M3 support to `TabBar`. Partial added. Review. Add unselected color, undimmed not selected. Divider under it?
 - Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
+- TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card now, should be its own thing.  
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
