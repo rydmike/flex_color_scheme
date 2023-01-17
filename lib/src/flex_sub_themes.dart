@@ -4170,12 +4170,39 @@ class FlexSubThemes {
     required final ColorScheme colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the main
+    /// base color for the toggle buttons.
+    ///
+    /// Always defines the background color for selected button, and
+    /// it's onColor pair defines the foreground for selected button.
+    ///
+    /// If [unselectedSchemeColor] is not defined, [baseSchemeColor] is also
+    /// used as foreground color for unselected buttons.
+    ///
+    /// If [borderSchemeColor] is not defined, then in M2 it is also used as
+    /// color base for the border color, in M3 and undefined borderSchemeColor
+    /// results in [ColorScheme.outline] color being used.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [SchemeColor.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the
+    /// foreground color for unselected toggle buttons.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [baseSchemeColor] will be used as base.
+    final SchemeColor? unselectedSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the border
     /// color for the toggle buttons.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
+    /// If not defined, [baseSchemeColor] will be used as base in M2, in M3
+    /// [ColorScheme.outline] will be the effective result.
+    final SchemeColor? borderSchemeColor,
 
     /// The button corner radius.
     ///
@@ -4226,7 +4253,13 @@ class FlexSubThemes {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
+    final Color unselectedColor =
+        schemeColor(unselectedSchemeColor ?? baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
+    final SchemeColor borderDefault =
+        useMaterial3 ? SchemeColor.outline : baseScheme;
+    final Color borderColor =
+        schemeColor(borderSchemeColor ?? borderDefault, colorScheme);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
@@ -4239,11 +4272,14 @@ class FlexSubThemes {
     return ToggleButtonsThemeData(
       borderWidth: effectiveWidth,
       selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
-      color: baseColor,
+      color: unselectedColor,
       fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      borderColor: baseColor.withAlpha(kEnabledBorderAlpha),
-      selectedBorderColor:
-          baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
+      borderColor: useMaterial3
+          ? borderColor
+          : borderColor.withAlpha(kEnabledBorderAlpha),
+      selectedBorderColor: useMaterial3
+          ? borderColor
+          : borderColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
       hoverColor: baseColor
           .blendAlpha(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
           .withAlpha(kHoverAlpha),
@@ -4260,7 +4296,7 @@ class FlexSubThemes {
       disabledColor: baseColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledForegroundAlpha),
-      disabledBorderColor: baseColor
+      disabledBorderColor: borderColor
           .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
           .withAlpha(kDisabledBackgroundAlpha),
       borderRadius: BorderRadius.circular(radius ?? kButtonRadius),

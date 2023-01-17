@@ -6233,6 +6233,9 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.toggleButtonsSchemeColor,
+              unselectedSchemeColor:
+                  subTheme.toggleButtonsUnselectedSchemeColor,
+              borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,
               borderWidth:
                   subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
               radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,

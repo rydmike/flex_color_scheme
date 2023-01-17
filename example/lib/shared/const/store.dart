@@ -863,6 +863,22 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultToggleButtonsSchemeColor = null;
 
+  // Key used to read and save the toggleButtonsUnselectedSchemeColor value.
+  static const String keyToggleButtonsUnselectedSchemeColor =
+      'toggleButtonsUnselectedSchemeColor';
+  // Default value for the toggleButtonsUnselectedSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsUnselectedSchemeColor = null;
+
+  // Key used to read and save the toggleButtonsBorderSchemeColor value.
+  static const String keyToggleButtonsBorderSchemeColor =
+      'toggleButtonsBorderSchemeColor';
+  // Default value for the toggleButtonsBorderSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsBorderSchemeColor = null;
+
   // Key used to read and save the toggleButtonsBorderRadius value.
   static const String keyToggleButtonsBorderRadius =
       'toggleButtonsBorderRadius';

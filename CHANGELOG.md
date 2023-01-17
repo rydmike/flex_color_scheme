@@ -32,7 +32,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes``
 
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
-  
+
+- Added `SchemeColor` value `toggleButtonsUnselectedSchemeColor` and `toggleButtonsBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the themed unselected button and border color of `ToggleButtons`. They control the new parameters `unselectedSchemeColor` and `borderSchemeColor` in `FlexSubThemes.toggleButtonsTheme`.
 
 **CHANGE**
 
@@ -74,9 +75,10 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 - Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
 - Added showing new M3 `MenuBar` to **Widget Showcase**.
-- Added setting for focused `TextField` has a border, in panel **Text Field**.   
-- Added setting for border color selection of `TextField`, in panel **Text Field**.
-- Added setting for scrolled under elevation of `AppBar`, in panel **AppBar**.
+- Added setting for focused `TextField` has a border to panel **Text Field**.   
+- Added setting for border color selection of `TextField` to panel **Text Field**.
+- Added setting for scrolled under elevation of `AppBar` to panel **AppBar**.
+- Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
 
 **FIX**
 
@@ -94,7 +96,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
-- Maybe add ToggleButtons border color.   
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
 - Maybe add new MenuBar theme.
 - Maybe consider mods for tinted disabled color, light mode at least.  

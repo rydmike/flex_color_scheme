@@ -304,7 +304,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   //
-  // Material button sub themes scheme colors setup CODE.
+  // Material buttons sub themes setup CODE.
   //
   final String textButtonSchemeColor =
       controller.textButtonSchemeColor == SchemeColor.primary ||
@@ -349,11 +349,23 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    outlinedButtonPressedBorderWidth: ${controller.outlinedButtonPressedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // ToggleButtons sub themes setup CODE.
+  //
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
-              SchemeColor.primary ||
-          controller.toggleButtonsSchemeColor == null
+          null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
+  final String toggleButtonsUnselectedSchemeColor = controller
+              .toggleButtonsUnselectedSchemeColor ==
+          null
+      ? ''
+      : '    toggleButtonsUnselectedSchemeColor: ${controller.toggleButtonsUnselectedSchemeColor},\n';
+  final String toggleButtonsBorderSchemeColor = controller
+              .toggleButtonsBorderSchemeColor ==
+          null
+      ? ''
+      : '    toggleButtonsBorderSchemeColor: ${controller.toggleButtonsBorderSchemeColor},\n';
   final String toggleButtonsBorderWidth = controller.toggleButtonsBorderWidth !=
           null
       ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
@@ -819,6 +831,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsUnselectedSchemeColor'
+          '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'
@@ -960,6 +974,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsUnselectedSchemeColor'
+          '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
           //
           '$switchSchemeColor'

@@ -28,14 +28,16 @@ class ToggleButtonsSettings extends StatelessWidget {
                 ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
                 : '';
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const ListTile(
           title: Text('ToggleButtons'),
-          subtitle: Text('Component themes style and height aligns '
-              'ToggleButtons with OutlinedButton and FilledButton'),
+          subtitle: Text('By default ToggleButtons are themed to style and '
+              'height align with OutlinedButton and FilledButton, shown '
+              'here for comparison.'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -51,6 +53,48 @@ class ToggleButtonsSettings extends StatelessWidget {
                   } else {
                     controller
                         .setToggleButtonsSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('ToggleButtons unselected button color'),
+          labelForDefault: controller.useSubThemes &&
+                  controller.useFlexColorScheme &&
+                  controller.toggleButtonsUnselectedSchemeColor == null
+              // ignore: lines_longer_than_80_chars
+              ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
+              : 'default (primary)',
+          index: controller.toggleButtonsUnselectedSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setToggleButtonsUnselectedSchemeColor(null);
+                  } else {
+                    controller.setToggleButtonsUnselectedSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('ToggleButtons border color'),
+          labelForDefault: useMaterial3
+              ? 'default (outline)'
+              : controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      controller.toggleButtonsBorderSchemeColor == null
+                  // ignore: lines_longer_than_80_chars
+                  ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
+                  : 'default (primary)',
+          index: controller.toggleButtonsBorderSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setToggleButtonsBorderSchemeColor(null);
+                  } else {
+                    controller.setToggleButtonsBorderSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,

@@ -423,6 +423,12 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsSchemeColor = await _themeService.load(
         Store.keyToggleButtonsSchemeColor,
         Store.defaultToggleButtonsSchemeColor);
+    _toggleButtonsUnselectedSchemeColor = await _themeService.load(
+        Store.keyToggleButtonsUnselectedSchemeColor,
+        Store.defaultToggleButtonsUnselectedSchemeColor);
+    _toggleButtonsBorderSchemeColor = await _themeService.load(
+        Store.keyToggleButtonsBorderSchemeColor,
+        Store.defaultToggleButtonsBorderSchemeColor);
     _toggleButtonsBorderRadius = await _themeService.load(
         Store.keyToggleButtonsBorderRadius,
         Store.defaultToggleButtonsBorderRadius);
@@ -770,6 +776,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultOutlinedButtonPressedBorderWidth, false);
     //
     setToggleButtonsSchemeColor(Store.defaultToggleButtonsSchemeColor, false);
+    setToggleButtonsUnselectedSchemeColor(
+        Store.defaultToggleButtonsUnselectedSchemeColor, false);
+    setToggleButtonsBorderSchemeColor(
+        Store.defaultToggleButtonsBorderSchemeColor, false);
     setToggleButtonsBorderRadius(Store.defaultToggleButtonsBorderRadius, false);
     setToggleButtonsBorderWidth(Store.defaultToggleButtonsBorderWidth, false);
     //
@@ -2300,6 +2310,30 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyToggleButtonsSchemeColor, value));
+  }
+
+  late SchemeColor? _toggleButtonsUnselectedSchemeColor;
+  SchemeColor? get toggleButtonsUnselectedSchemeColor =>
+      _toggleButtonsUnselectedSchemeColor;
+  void setToggleButtonsUnselectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _toggleButtonsUnselectedSchemeColor) return;
+    _toggleButtonsUnselectedSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyToggleButtonsUnselectedSchemeColor, value));
+  }
+
+  late SchemeColor? _toggleButtonsBorderSchemeColor;
+  SchemeColor? get toggleButtonsBorderSchemeColor =>
+      _toggleButtonsBorderSchemeColor;
+  void setToggleButtonsBorderSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _toggleButtonsBorderSchemeColor) return;
+    _toggleButtonsBorderSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyToggleButtonsBorderSchemeColor, value));
   }
 
   late double? _toggleButtonsBorderRadius;

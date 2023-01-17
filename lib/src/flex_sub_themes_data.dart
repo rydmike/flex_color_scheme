@@ -153,6 +153,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.toggleButtonsRadius,
     this.toggleButtonsSchemeColor,
+    this.toggleButtonsUnselectedSchemeColor,
+    this.toggleButtonsBorderSchemeColor,
     this.toggleButtonsBorderWidth,
     //
     this.materialButtonSchemeColor,
@@ -804,9 +806,34 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [ToggleButtons] use as its base theme color.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color via
-  /// FlexColorScheme sub-theme defaults when opting on its sub themes.
+  /// Always defines the background color for selected button, and
+  /// it's onColor pair defines the foreground for selected button.
+  ///
+  /// If [unselectedSchemeColor] is not defined, [baseSchemeColor] is also
+  /// used as foreground color for unselected buttons.
+  ///
+  /// If [toggleButtonsBorderSchemeColor] is not defined, then in M2 it is also
+  /// used as color base for the border color, in M3 an undefined
+  /// [toggleButtonsBorderSchemeColor] results in [ColorScheme.outline] color
+  /// being used.
+  ///
+  /// If not defined it defaults to [SchemeColor.primary].
   final SchemeColor? toggleButtonsSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as the foreground color for unselected toggle buttons.
+  ///
+  /// All colors in the color scheme are not good choices, but some work well.
+  ///
+  /// If not defined, [toggleButtonsSchemeColor] will be used as base.
+  final SchemeColor? toggleButtonsUnselectedSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as its border themed color.
+  ///
+  /// If not defined it defaults to [toggleButtonsSchemeColor] in M2 mode,
+  /// in M3 it will result in [SchemeColor.outline] being used as fallback.
+  final SchemeColor? toggleButtonsBorderSchemeColor;
 
   /// The border width of [ToggleButtons].
   ///
@@ -2158,6 +2185,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? toggleButtonsRadius,
     final SchemeColor? toggleButtonsSchemeColor,
+    final SchemeColor? toggleButtonsUnselectedSchemeColor,
+    final SchemeColor? toggleButtonsBorderSchemeColor,
     final double? toggleButtonsBorderWidth,
     //
     final SchemeColor? materialButtonSchemeColor,
@@ -2352,6 +2381,10 @@ class FlexSubThemesData with Diagnosticable {
       toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
       toggleButtonsSchemeColor:
           toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
+      toggleButtonsUnselectedSchemeColor: toggleButtonsUnselectedSchemeColor ??
+          this.toggleButtonsUnselectedSchemeColor,
+      toggleButtonsBorderSchemeColor:
+          toggleButtonsBorderSchemeColor ?? this.toggleButtonsBorderSchemeColor,
       toggleButtonsBorderWidth:
           toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
       //
@@ -2641,6 +2674,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
+        other.toggleButtonsUnselectedSchemeColor ==
+            toggleButtonsUnselectedSchemeColor &&
+        other.toggleButtonsBorderSchemeColor ==
+            toggleButtonsBorderSchemeColor &&
         other.toggleButtonsBorderWidth == toggleButtonsBorderWidth &&
         //
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
@@ -2864,6 +2901,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         toggleButtonsRadius,
         toggleButtonsSchemeColor,
+        toggleButtonsUnselectedSchemeColor,
+        toggleButtonsBorderSchemeColor,
         toggleButtonsBorderWidth,
         //
         materialButtonSchemeColor,
@@ -3072,6 +3111,11 @@ class FlexSubThemesData with Diagnosticable {
         'toggleButtonsRadius', toggleButtonsRadius));
     properties.add(EnumProperty<SchemeColor>(
         'toggleButtonsSchemeColor', toggleButtonsSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'toggleButtonsUnselectedSchemeColor',
+        toggleButtonsUnselectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'toggleButtonsBorderSchemeColor', toggleButtonsBorderSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'toggleButtonsBorderWidth', toggleButtonsBorderWidth));
     //
