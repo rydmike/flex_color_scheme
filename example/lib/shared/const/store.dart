@@ -228,7 +228,7 @@ class Store {
   // Key used to read and save the useMaterial3 value.
   static const String keyUseMaterial3 = 'useMaterial3';
   // Default value for the useMaterial3, also to reset settings.
-  static const bool defaultUseMaterial3 = false;
+  static const bool defaultUseMaterial3 = true;
 
   // Key used to read and save the useKeyColors value.
   static const String keyUseKeyColors = 'useKeyColors';
