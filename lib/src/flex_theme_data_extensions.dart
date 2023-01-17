@@ -477,6 +477,10 @@ extension FlexThemeData on ThemeData {
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
     ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
+    ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
     /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
@@ -1712,6 +1716,10 @@ extension FlexThemeData on ThemeData {
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
+    ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
