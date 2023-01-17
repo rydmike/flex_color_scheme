@@ -385,7 +385,7 @@ class FlexSubThemes {
   /// function, this one is only a sub-set of the original and does not do or
   /// contain any feature shortcuts.
   ///
-  /// The [FlexColorScheme.toTheme] needs many some the properties, like fore-
+  /// The [FlexColorScheme.toTheme] needs some the properties, like fore-
   /// and background colors used here, for other component theme definitions as
   /// well and has already computed them once, so they are reused here.
   ///
@@ -3882,6 +3882,56 @@ class FlexSubThemes {
         }),
       );
     }
+  }
+
+  /// An opinionated [TabBarTheme] theme.
+  ///
+  /// Contrary to the other opinionated static [FlexSubThemes] sub-theme
+  /// function, this one is only a sub-set of the original and does not do or
+  /// contain any feature shortcuts.
+  ///
+  /// The [FlexColorScheme.toTheme] needs some the properties, like fore-
+  /// and background colors used here, for other component theme definitions as
+  /// well and has already computed them once, so they are reused here.
+  ///
+  /// At the moment the [FlexSubThemes.tabBarTheme] is mostly included to
+  /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
+  /// class. Actual convenience features may be added to
+  /// [FlexSubThemes.tabBarTheme] later.
+  static TabBarTheme tabBarTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Overrides the default value for [TabBar.indicatorSize].
+    final TabBarIndicatorSize? indicatorSize,
+
+    /// Overrides the default value for [TabBar.indicatorColor].
+    final Color? indicatorColor,
+
+    /// Overrides the default value for [TabBar.labelStyle].
+    final TextStyle? labelStyle,
+
+    /// Overrides the default value for [TabBar.labelColor].
+    final Color? labelColor,
+
+    /// Overrides the default value for [TabBar.unselectedLabelColor].
+    final Color? unselectedLabelColor,
+
+    /// Overrides the default value for [TabBar.unselectedLabelStyle].
+    final TextStyle? unselectedLabelStyle,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    final bool useMaterial3 = false,
+  }) {
+    return TabBarTheme(
+      indicatorSize: indicatorSize ??
+          (useMaterial3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
+      indicatorColor: indicatorColor,
+      labelStyle: labelStyle,
+      labelColor: labelColor,
+      unselectedLabelStyle: unselectedLabelStyle,
+      unselectedLabelColor: unselectedLabelColor,
+    );
   }
 
   /// An opinionated [TextButtonThemeData] theme.

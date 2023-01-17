@@ -6060,7 +6060,8 @@ class FlexColorScheme with Diagnosticable {
       // A new feature in Flutter 2.0.0 implemented via:
       // https://github.com/flutter/flutter/pull/71184 made doing this easier.
       // FlexColorScheme has uses the SDK supported way since it was launched.
-      appBarTheme: AppBarTheme(
+      appBarTheme: FlexSubThemes.appBarTheme(
+        colorScheme: colorScheme,
         centerTitle: subTheme.appBarCenterTitle,
         backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
@@ -6089,7 +6090,6 @@ class FlexColorScheme with Diagnosticable {
             : colorScheme.primary.withAlpha(0x4C), // 30%
         selectionHandleColor: primaryColorDark,
       ),
-      // TODO(rydmike): Tech debt: Move TabBar theme opt-in to a FlexSubThemes.
       // Defines the TabBar theme that will fit nicely in an AppBar
       // (default) or on background color for use eg in a Scaffold, the choice
       // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
@@ -6098,20 +6098,25 @@ class FlexColorScheme with Diagnosticable {
       // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
       // That still has some issue related to it, is using default is used, we
       // pass in `null` and let ThemeData use default sub-theme for TabBarTheme.
-      tabBarTheme: TabBarTheme(
-          indicatorSize: TabBarIndicatorSize.tab,
-          labelStyle: effectiveTextTheme.bodyLarge,
-          labelColor: subTheme.tabBarItemSchemeColor == null
-              ? selectedTabColor()
-              : FlexSubThemes.schemeColor(
-                  subTheme.tabBarItemSchemeColor!, colorScheme),
-          unselectedLabelStyle: effectiveTextTheme.bodyLarge,
-          unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
-              ? unselectedTabColor()
-              : FlexSubThemes.schemeColor(
-                      subTheme.tabBarItemSchemeColor!, colorScheme)
-                  .withAlpha(0x99) // 60%,
-          ),
+      tabBarTheme: FlexSubThemes.tabBarTheme(
+        colorScheme: colorScheme,
+        indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
+            ? selectedTabColor()
+            : FlexSubThemes.schemeColor(
+                subTheme.tabBarIndicatorSchemeColor!, colorScheme),
+        labelStyle: effectiveTextTheme.bodyLarge,
+        labelColor: subTheme.tabBarItemSchemeColor == null
+            ? selectedTabColor()
+            : FlexSubThemes.schemeColor(
+                subTheme.tabBarItemSchemeColor!, colorScheme),
+        unselectedLabelStyle: effectiveTextTheme.bodyLarge,
+        unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
+            ? unselectedTabColor()
+            : FlexSubThemes.schemeColor(
+                    subTheme.tabBarItemSchemeColor!, colorScheme)
+                .withAlpha(0x99), // 60%,
+        useMaterial3: useMaterial3,
+      ),
       // Set colors for icons in opted in sub themes.
       iconTheme: useSubThemes
           ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)

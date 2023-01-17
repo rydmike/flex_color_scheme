@@ -91,7 +91,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Review and tune new M3 color schemes, red to teal done. Six more remaining.  
 - Review M3 Playground component colors, and add new buttons.
 - Add M3 support to `TabBar`.
-- Clean up tech debt on `TabBar`.
 - Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
