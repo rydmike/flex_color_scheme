@@ -33,7 +33,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
 
-- Added `SchemeColor` value `toggleButtonsUnselectedSchemeColor` and `toggleButtonsBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the themed unselected button and border color of `ToggleButtons`. They control the new parameters `unselectedSchemeColor` and `borderSchemeColor` in `FlexSubThemes.toggleButtonsTheme`.
+- Added `SchemeColor` value `toggleButtonsUnselectedSchemeColor` and `toggleButtonsBorderSchemeColor` to `FlexSubThemesData`. They are used to define and customize the themed unselected button and border color of `ToggleButtons`. They control the new parameters `unselectedSchemeColor` and `borderSchemeColor` in `FlexSubThemes.toggleButtonsTheme`.
 
 **CHANGE**
 
