@@ -57,8 +57,9 @@ import 'flex_sub_themes.dart';
 /// There are custom and opinionated component themes available in
 /// [FlexSubThemes] as static theming helpers:
 ///
-/// * `ButtonThemeData` for old deprecated buttons, via
-///   `FlexSubThemes.buttonTheme`.
+/// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+/// * [ButtonThemeData] for old deprecated buttons, via
+///   [FlexSubThemes.buttonTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [FlexSubThemes.bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via
@@ -89,6 +90,7 @@ import 'flex_sub_themes.dart';
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+/// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via
 ///   [FlexSubThemes.textButtonTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via
@@ -211,6 +213,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.appBarBackgroundSchemeColor,
     this.appBarCenterTitle,
+    this.appBarScrolledUnderElevation,
     //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
@@ -1407,6 +1410,15 @@ class FlexSubThemesData with Diagnosticable {
   /// is adapted to the current [TargetPlatform].
   final bool? appBarCenterTitle;
 
+  /// The elevation that will be used if this app bar has something
+  /// scrolled underneath it.
+  ///
+  /// Overrides the default value of [AppBar.scrolledUnderElevation] in all
+  /// descendant [AppBar] widgets.
+  ///
+  /// If not defined, defaults to 3.
+  final double? appBarScrolledUnderElevation;
+
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
@@ -2206,6 +2218,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final SchemeColor? appBarBackgroundSchemeColor,
     final bool? appBarCenterTitle,
+    final double? appBarScrolledUnderElevation,
     //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
@@ -2422,6 +2435,8 @@ class FlexSubThemesData with Diagnosticable {
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
+      appBarScrolledUnderElevation:
+          appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
       //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
@@ -2691,6 +2706,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
         other.appBarCenterTitle == appBarCenterTitle &&
+        other.appBarScrolledUnderElevation == appBarScrolledUnderElevation &&
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
@@ -2908,6 +2924,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         appBarBackgroundSchemeColor,
         appBarCenterTitle,
+        appBarScrolledUnderElevation,
         //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
@@ -3156,6 +3173,8 @@ class FlexSubThemesData with Diagnosticable {
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
+    properties.add(DiagnosticsProperty<double>(
+        'appBarScrolledUnderElevation', appBarScrolledUnderElevation));
     //
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));

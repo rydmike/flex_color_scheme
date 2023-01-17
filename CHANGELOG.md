@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Jan 16, 2023**
+**Jan 17, 2023**
 
 **NEW** 
 
@@ -28,6 +28,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added boolean `inputDecoratorFocusedHasBorder` to `FlexSubThemesData`. Default to true. If set to false, there is no border on the `InputDecorator`, typically used by text fields, when the input decorator is focused. It controls the new parameter `focusedHasBorder` in `FlexSubThemes.inputDecorationTheme`.
 
 - Added `SchemeColor` value `inputDecoratorBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the border color of `InputDecorator` on e.g. TextField. It controls the new parameter `borderSchemeColor` in `FlexSubThemes.inputDecorationTheme`.
+
+- Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes``
+
+- Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
   
 
 **CHANGE**
@@ -72,6 +76,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing new M3 `MenuBar` to **Widget Showcase**.
 - Added setting for focused `TextField` has a border, in panel **Text Field**.   
 - Added setting for border color selection of `TextField`, in panel **Text Field**.
+- Added setting for scrolled under elevation of `AppBar`, in panel **AppBar**.
 
 **FIX**
 
@@ -85,7 +90,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Review M3 Playground component colors, and add new buttons.
 - Add M3 support to `TabBar`.
 - Clean up tech debt on `TabBar`.
-- Maybe add no opacity on base color background to TextField, or opacity slider?  
+- Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  

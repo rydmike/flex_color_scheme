@@ -266,6 +266,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // AppBar settings.
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorLight,
+            appBarScrolledUnderElevation:
+                controller.appBarScrolledUnderElevationLight,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,

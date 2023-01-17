@@ -208,6 +208,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // AppBar settings.
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorDark,
+            appBarScrolledUnderElevation:
+                controller.appBarScrolledUnderElevationDark,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,

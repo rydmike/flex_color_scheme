@@ -6065,7 +6065,7 @@ class FlexColorScheme with Diagnosticable {
         backgroundColor: effectiveAppBarBackgroundColor,
         foregroundColor: appBarForeground,
         elevation: appBarElevation,
-        scrolledUnderElevation: null,
+        scrolledUnderElevation: subTheme.appBarScrolledUnderElevation,
         iconTheme: IconThemeData(color: appBarIconColor),
         actionsIconTheme: IconThemeData(color: appBarIconColor),
         systemOverlayStyle: systemOverlayStyle,

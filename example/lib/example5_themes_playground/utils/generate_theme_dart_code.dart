@@ -240,7 +240,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
-  final String useOpacityBasedDividerInM3 =
+  final String useM2StyleDividerInM3 =
       controller.useM2StyleDividerInM3 && controller.useMaterial3
           ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
           : '';
@@ -528,7 +528,7 @@ String generateThemeDartCode(ThemeController controller) {
           ? ''
           : '    tooltipOpacity: ${controller.tooltipOpacity},\n';
   //
-  // Dialog, AppBar and TabBar setup CODE
+  // Dialogs setup CODE
   //
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor !=
@@ -544,6 +544,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String dialogElevation = controller.dialogElevation != null
       ? '    dialogElevation: ${controller.dialogElevation!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // AppBar and TabBar setup CODE
+  //
   final String appBarBackgroundSchemeColorLight = controller
               .appBarBackgroundSchemeColorLight !=
           null
@@ -553,6 +556,16 @@ String generateThemeDartCode(ThemeController controller) {
               .appBarBackgroundSchemeColorDark !=
           null
       ? '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorDark},\n'
+      : '';
+  final String appBarScrolledUnderElevationLight = controller
+              .appBarScrolledUnderElevationLight !=
+          null
+      ? '    appBarScrolledUnderElevation: ${controller.appBarScrolledUnderElevationLight!.toStringAsFixed(1)},\n'
+      : '';
+  final String appBarScrolledUnderElevationDark = controller
+              .appBarScrolledUnderElevationDark !=
+          null
+      ? '    appBarScrolledUnderElevation: ${controller.appBarScrolledUnderElevationDark!.toStringAsFixed(1)},\n'
       : '';
   final String tabBarItemSchemeColorLight = controller
               .tabBarItemSchemeColorLight !=
@@ -781,7 +794,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$blendLightTextTheme'
           '$useTextTheme'
-          '$useOpacityBasedDividerInM3'
+          '$useM2StyleDividerInM3'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
@@ -860,6 +873,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$snackSchemeColor'
           //
           '$appBarBackgroundSchemeColorLight'
+          '$appBarScrolledUnderElevationLight'
           //
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
@@ -921,7 +935,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$blendDarkTextTheme'
           '$useTextTheme'
-          '$useOpacityBasedDividerInM3'
+          '$useM2StyleDividerInM3'
           //
           '$defRadius'
           //
@@ -1000,6 +1014,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$snackSchemeColor'
           //
           '$appBarBackgroundSchemeColorDark'
+          '$appBarScrolledUnderElevationDark'
           //
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'

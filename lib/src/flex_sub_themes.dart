@@ -428,6 +428,8 @@ class FlexSubThemes {
 
     /// Overrides the default value of [AppBar.scrolledUnderElevation] in all
     /// descendant [AppBar] widgets.
+    ///
+    /// If not defined, defaults to 3.
     final double? scrolledUnderElevation,
 
     /// Overrides the default value of [AppBar.iconTheme] in all

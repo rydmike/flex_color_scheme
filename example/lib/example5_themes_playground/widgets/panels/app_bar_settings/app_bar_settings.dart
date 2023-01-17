@@ -94,8 +94,14 @@ class AppBarSettings extends StatelessWidget {
             subtitle: Slider(
               max: 20,
               divisions: 40,
-              label: controller.appBarElevationLight.toStringAsFixed(1),
-              value: controller.appBarElevationLight,
+              label: controller.useFlexColorScheme
+                  ? controller.appBarElevationLight.toStringAsFixed(1)
+                  : controller.useMaterial3
+                      ? 'default 0'
+                      : 'default 4',
+              value: controller.useFlexColorScheme
+                  ? controller.appBarElevationLight
+                  : 0,
               onChanged: controller.useFlexColorScheme
                   ? controller.setAppBarElevationLight
                   : null,
@@ -110,7 +116,11 @@ class AppBarSettings extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    controller.appBarElevationLight.toStringAsFixed(1),
+                    controller.useFlexColorScheme
+                        ? controller.appBarElevationLight.toStringAsFixed(1)
+                        : controller.useMaterial3
+                            ? 'default 0'
+                            : 'default 4',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -162,8 +172,14 @@ class AppBarSettings extends StatelessWidget {
             subtitle: Slider(
               max: 20,
               divisions: 40,
-              label: controller.appBarElevationDark.toStringAsFixed(1),
-              value: controller.appBarElevationDark,
+              label: controller.useFlexColorScheme
+                  ? controller.appBarElevationDark.toStringAsFixed(1)
+                  : controller.useMaterial3
+                      ? 'default 0'
+                      : 'default 4',
+              value: controller.useFlexColorScheme
+                  ? controller.appBarElevationDark
+                  : 0,
               onChanged: controller.useFlexColorScheme
                   ? controller.setAppBarElevationDark
                   : null,
@@ -178,7 +194,11 @@ class AppBarSettings extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    controller.appBarElevationDark.toStringAsFixed(1),
+                    controller.useFlexColorScheme
+                        ? controller.appBarElevationDark.toStringAsFixed(1)
+                        : controller.useMaterial3
+                            ? 'default 0'
+                            : 'default 4',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -215,6 +235,156 @@ class AppBarSettings extends StatelessWidget {
                   Text(
                     '${(controller.appBarOpacityDark * 100).toStringAsFixed(0)}'
                     ' %',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        if (isLight) ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme && controller.useSubThemes,
+            title: const Text('Light AppBar scrolled under elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 20,
+              divisions: 41,
+              label: controller.useFlexColorScheme && controller.useSubThemes
+                  ? controller.appBarScrolledUnderElevationLight == null ||
+                          (controller.appBarScrolledUnderElevationLight ??
+                                  -0.5) <
+                              0
+                      ? controller.useMaterial3
+                          ? 'default 3'
+                          : controller.useSubThemes
+                              // ignore: lines_longer_than_80_chars
+                              ? 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
+                              : 'default 4'
+                      : (controller.appBarScrolledUnderElevationLight
+                              ?.toStringAsFixed(1) ??
+                          '')
+                  : controller.useMaterial3
+                      ? 'default 3'
+                      : !controller.useSubThemes
+                          // ignore: lines_longer_than_80_chars
+                          ? 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
+                          : 'default 4',
+              value: controller.useFlexColorScheme && controller.useSubThemes
+                  ? controller.appBarScrolledUnderElevationLight ?? -0.5
+                  : -0.5,
+              onChanged:
+                  controller.useFlexColorScheme && controller.useSubThemes
+                      ? (double value) {
+                          controller.setAppBarScrolledUnderElevationLight(
+                              value < 0 ? null : value);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme && controller.useSubThemes
+                        ? controller.appBarScrolledUnderElevationLight ==
+                                    null ||
+                                (controller.appBarScrolledUnderElevationLight ??
+                                        -0.5) <
+                                    0
+                            ? controller.useMaterial3
+                                ? 'default 3'
+                                // ignore: lines_longer_than_80_chars
+                                : 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
+                            : (controller.appBarScrolledUnderElevationLight
+                                    ?.toStringAsFixed(1) ??
+                                '')
+                        : controller.useMaterial3
+                            ? 'default 3'
+                            : !controller.useSubThemes
+                                // ignore: lines_longer_than_80_chars
+                                ? 'default ${controller.appBarElevationLight.toStringAsFixed(1)}'
+                                : 'default 4',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme && controller.useSubThemes,
+            title: const Text('Dark AppBar scrolled under elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 20,
+              divisions: 41,
+              label: controller.useFlexColorScheme && controller.useSubThemes
+                  ? controller.appBarScrolledUnderElevationDark == null ||
+                          (controller.appBarScrolledUnderElevationDark ??
+                                  -0.5) <
+                              0
+                      ? controller.useMaterial3
+                          ? 'default 3'
+                          : controller.useSubThemes
+                              // ignore: lines_longer_than_80_chars
+                              ? 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
+                              : 'default 4'
+                      : (controller.appBarScrolledUnderElevationDark
+                              ?.toStringAsFixed(1) ??
+                          '')
+                  : controller.useMaterial3
+                      ? 'default 3'
+                      : !controller.useSubThemes
+                          // ignore: lines_longer_than_80_chars
+                          ? 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
+                          : 'default 4',
+              value: controller.useFlexColorScheme && controller.useSubThemes
+                  ? controller.appBarScrolledUnderElevationDark ?? -0.5
+                  : -0.5,
+              onChanged:
+                  controller.useFlexColorScheme && controller.useSubThemes
+                      ? (double value) {
+                          controller.setAppBarScrolledUnderElevationDark(
+                              value < 0 ? null : value);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme && controller.useSubThemes
+                        ? controller.appBarScrolledUnderElevationDark == null ||
+                                (controller.appBarScrolledUnderElevationDark ??
+                                        -0.5) <
+                                    0
+                            ? controller.useMaterial3
+                                ? 'default 3'
+                                // ignore: lines_longer_than_80_chars
+                                : 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
+                            : (controller.appBarScrolledUnderElevationDark
+                                    ?.toStringAsFixed(1) ??
+                                '')
+                        : controller.useMaterial3
+                            ? 'default 3'
+                            : !controller.useSubThemes
+                                // ignore: lines_longer_than_80_chars
+                                ? 'default ${controller.appBarElevationDark.toStringAsFixed(1)}'
+                                : 'default 4',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -345,7 +515,7 @@ class AppBarSettings extends StatelessWidget {
             subtitle: Slider(
               min: -0.5,
               max: 20,
-              divisions: 40,
+              divisions: 41,
               label: controller.useFlexColorScheme
                   ? controller.bottomAppBarElevationDark == null ||
                           (controller.bottomAppBarElevationDark ?? -0.5) < 0

@@ -246,6 +246,12 @@ class ThemeController with ChangeNotifier {
         Store.keyAppBarElevationLight, Store.defaultAppBarElevationLight);
     _appBarElevationDark = await _themeService.load(
         Store.keyAppBarElevationDark, Store.defaultAppBarElevationDark);
+    _appBarScrolledUnderElevationLight = await _themeService.load(
+        Store.keyAppBarScrolledUnderElevationLight,
+        Store.defaultAppBarScrolledUnderElevationLight);
+    _appBarScrolledUnderElevationDark = await _themeService.load(
+        Store.keyAppBarScrolledUnderElevationDark,
+        Store.defaultAppBarScrolledUnderElevationDark);
     _bottomAppBarElevationLight = await _themeService.load(
         Store.keyBottomAppBarElevationLight,
         Store.defaultBottomAppBarElevationLight);
@@ -657,6 +663,10 @@ class ThemeController with ChangeNotifier {
     setAppBarOpacityDark(Store.defaultAppBarOpacityDark, false);
     setAppBarElevationLight(Store.defaultAppBarElevationLight, false);
     setAppBarElevationDark(Store.defaultAppBarElevationDark, false);
+    setAppBarScrolledUnderElevationLight(
+        Store.defaultAppBarScrolledUnderElevationLight, false);
+    setAppBarScrolledUnderElevationDark(
+        Store.defaultAppBarScrolledUnderElevationDark, false);
     setBottomAppBarElevationLight(
         Store.defaultBottomAppBarElevationLight, false);
     setBottomAppBarElevationDark(Store.defaultBottomAppBarElevationDark, false);
@@ -1660,6 +1670,30 @@ class ThemeController with ChangeNotifier {
     _appBarElevationDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAppBarElevationDark, value));
+  }
+
+  late double? _appBarScrolledUnderElevationLight;
+  double? get appBarScrolledUnderElevationLight =>
+      _appBarScrolledUnderElevationLight;
+  void setAppBarScrolledUnderElevationLight(double? value,
+      [bool notify = true]) {
+    if (value == _appBarScrolledUnderElevationLight) return;
+    _appBarScrolledUnderElevationLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarScrolledUnderElevationLight, value));
+  }
+
+  late double? _appBarScrolledUnderElevationDark;
+  double? get appBarScrolledUnderElevationDark =>
+      _appBarScrolledUnderElevationDark;
+  void setAppBarScrolledUnderElevationDark(double? value,
+      [bool notify = true]) {
+    if (value == _appBarScrolledUnderElevationDark) return;
+    _appBarScrolledUnderElevationDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarScrolledUnderElevationDark, value));
   }
 
   late double? _bottomAppBarElevationLight;

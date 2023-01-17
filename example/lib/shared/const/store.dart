@@ -458,6 +458,18 @@ class Store {
   // Default value for the appBarElevationDark, also used to reset settings.
   static const double defaultAppBarElevationDark = 0.0;
 
+  // Key used to read and save the appBarScrolledUnderElevationLight value.
+  static const String keyAppBarScrolledUnderElevationLight =
+      'appBarScrolledUnderElevationLight';
+  // Default value for the appBarScrolledUnderElevation, used to reset settings.
+  static const double? defaultAppBarScrolledUnderElevationLight = null;
+
+  // Key used to read and save the appBarScrolledUnderElevationDark value.
+  static const String keyAppBarScrolledUnderElevationDark =
+      'appBarScrolledUnderElevationDark';
+  // Default value for the appBarScrolledUnderElevationDark, reset settings.
+  static const double? defaultAppBarScrolledUnderElevationDark = null;
+
   // Key used to read and save the bottomAppBarElevation value.
   static const String keyBottomAppBarElevationLight =
       'bottomAppBarElevationLight';
