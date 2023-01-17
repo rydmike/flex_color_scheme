@@ -29,8 +29,12 @@ dev_dependencies:
     sdk: flutter
 
   # Color utilities by Google (material.io).
+  #
   # Used to compute and create Tonal Palette theme colors.
   # Flutter SDK from 2.10.0 stable also uses and depends on this package.
+  #
+  # This dependency is only used by tests, but the package flex_seed_scheme has a
+  # transitive dependency on it as well.
   #
   # Use ^0.1.3 for Flutter stable 2.10.x, that uses 0.1.3
   # Use ^0.1.3 for Flutter stable 3.0.x, that uses 0.1.4.
