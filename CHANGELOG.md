@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 6.2.0-dev.1
 
-**Jan 17, 2023**
+**Jan 18, 2023**
 
 **NEW** 
 
@@ -58,6 +58,10 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 - The `InputDecorationTheme`, can now be configured to match Material 3 for critical styles if so desired. It uses a few opinionated values that give it a slightly different style by default. It can be configured to match M3 defaults if so desired. FCS does one opinionated adjustment to error border and suffix icon. It keeps them `error` colored on unfocused-hovered error state, instead of `onErrorContainer`. The M3 default looks odd. This FCS change is considered an opinionated M3 style fix in FCS. The M3 default of setting unfocused hovered error floating label also to `onErrorContainer`, is also keeping FCS own past style `error.withAlpha(0xA7)`, which looks more refined. There is no way to set these settings back to the M3 default style within FCS. You can of course as always adjust them and anything with `copyWith` on produced `ThemeData` if needed.
 
+- Added M3 slider support with correct `DropSliderValueIndicatorShape` in M3 mode.
+
+- Added theming for `TimePicker` that corrects Flutter SDK issue https://github.com/flutter/flutter/issues/118657 when using FCS component sub-themes. 
+
 
 **THEMES PLAYGROUND**
 
@@ -68,7 +72,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Improved codegen for used Typography selection, it is now only shown when needed.
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography. It still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
-- Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 Style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
+- Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
@@ -90,11 +94,10 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
 - Review and tune new M3 color schemes, red to teal done. Six more remaining.  
 - Review M3 Playground component colors, and add new buttons.
-- Add M3 support to `TabBar`. Partial added. Review. Add unselected color, undimmed not selected. Divider under it?
+- Added M3 support to `TabBar`. Partial support added. Add unselected color, undimmed not selected. Divider under it?
 - Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
 - TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card now, should be its own thing.
-- Review Slider M3 theme, indicators.  
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
