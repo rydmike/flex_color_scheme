@@ -2,9 +2,13 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 6.2.0-dev.1
+## 7.0.0-dev.1
 
-**Jan 18, 2023**
+**Jan 19, 2023**
+
+This release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design included in the **Flutter 3.8/4.0** release. 
+
+The new features are also quite significant.
 
 **NEW** 
 

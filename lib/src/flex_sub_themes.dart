@@ -21,6 +21,28 @@ enum FlexInputBorderType {
   underline,
 }
 
+/// Enum used to select the type of built-in value indicator used by [Slider].
+///
+/// The current two options included Material 2 default
+/// [RectangularSliderValueIndicatorShape] and Material 3 default
+/// [DropSliderValueIndicatorShape].
+///
+/// This enum is used by [FlexSubThemes.sliderTheme].
+enum FlexSliderIndicatorType {
+  /// Used to select [RectangularSliderValueIndicatorShape] as value indicator
+  /// in [FlexSubThemes.sliderTheme].
+  ///
+  /// It is a rounded rectangle with talk bubble pointer to slider thumb.
+  rectangular,
+
+  /// Used to select [DropSliderValueIndicatorShape] as value indicator
+  /// in [FlexSubThemes.sliderTheme].
+  ///
+  /// It is a like an inverted water drop, or a map pin drop pointing
+  /// towards the slider thumb.
+  drop,
+}
+
 /// Enum used to described which color from the active theme's 30
 /// [ColorScheme] colors, should be used for by color properties available in
 /// component sub-themes.
@@ -3545,6 +3567,24 @@ class FlexSubThemes {
     /// If not defined, defaults to 4 via Flutter SDK defaults.
     final double? trackHeight,
 
+    /// Whether the value indicator should be shown for different types of
+    /// sliders.
+    ///
+    /// By default, [showValueIndicator] is set to
+    /// [ShowValueIndicator.onlyForDiscrete]. The value indicator is only shown
+    /// when the thumb is being touched.
+    final ShowValueIndicator? showValueIndicator,
+
+    /// Enum used to select the type of built-in value indicator used by
+    /// [Slider].
+    ///
+    /// The current two options included Material 2 default
+    /// [RectangularSliderValueIndicatorShape] and Material 3 default
+    /// [DropSliderValueIndicatorShape].
+    ///
+    /// If not defined, the default for the M2/M3 mode is used.
+    final FlexSliderIndicatorType? valueIndicatorType,
+
     /// The color given to the [valueIndicatorShape] to draw itself with.
     ///
     /// If undefined, defaults to using Flutter SDK's logic for the color.
@@ -3564,6 +3604,21 @@ class FlexSubThemes {
     final Color onBaseColor =
         schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    SliderComponentShape effectiveIndicatorShape() {
+      if (valueIndicatorType == null) {
+        return useMaterial3
+            ? const DropSliderValueIndicatorShape()
+            : const RectangularSliderValueIndicatorShape();
+      } else {
+        switch (valueIndicatorType) {
+          case FlexSliderIndicatorType.rectangular:
+            return const RectangularSliderValueIndicatorShape();
+          case FlexSliderIndicatorType.drop:
+            return const DropSliderValueIndicatorShape();
+        }
+      }
+    }
+
     return SliderThemeData(
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
@@ -3578,10 +3633,9 @@ class FlexSubThemes {
       disabledThumbColor: Color.alphaBlend(
           colorScheme.onSurface.withOpacity(.38), colorScheme.surface),
       overlayColor: baseColor.withOpacity(0.12),
+      showValueIndicator: showValueIndicator,
       valueIndicatorColor: valueIndicatorColor,
-      valueIndicatorShape: useMaterial3
-          ? const DropSliderValueIndicatorShape()
-          : const RectangularSliderValueIndicatorShape(),
+      valueIndicatorShape: effectiveIndicatorShape(),
       valueIndicatorTextStyle: valueIndicatorTextStyle,
     );
   }

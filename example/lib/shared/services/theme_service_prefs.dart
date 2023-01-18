@@ -482,6 +482,52 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= NavigationRailLabelType.values.length) return defaultValue;
         return NavigationRailLabelType.values[value] as T;
       }
+      // T is FlexSliderIndicatorType nullable value.
+      if (sameTypes<T, FlexSliderIndicatorType?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded FlexSliderIndicatorType?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexSliderIndicatorType.values.length) return defaultValue;
+        return FlexSliderIndicatorType.values[value] as T;
+      }
+      // T is FlexSliderIndicatorType none nullable value.
+      if (sameTypes<T, FlexSliderIndicatorType>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded FlexSliderIndicatorType : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= FlexSliderIndicatorType.values.length) return defaultValue;
+        return FlexSliderIndicatorType.values[value] as T;
+      }
+      // T is ShowValueIndicator nullable value.
+      if (sameTypes<T, ShowValueIndicator?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded ShowValueIndicator?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= ShowValueIndicator.values.length) return defaultValue;
+        return ShowValueIndicator.values[value] as T;
+      }
+      // T is ShowValueIndicator none nullable value.
+      if (sameTypes<T, ShowValueIndicator>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded ShowValueIndicator : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= ShowValueIndicator.values.length) return defaultValue;
+        return ShowValueIndicator.values[value] as T;
+      }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');

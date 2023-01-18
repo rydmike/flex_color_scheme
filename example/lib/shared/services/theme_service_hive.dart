@@ -79,6 +79,8 @@ class ThemeServiceHive implements ThemeService {
     Hive.registerAdapter(FlexSchemeColorAdapter());
     Hive.registerAdapter(NavigationDestinationLabelBehaviorAdapter());
     Hive.registerAdapter(NavigationRailLabelTypeAdapter());
+    Hive.registerAdapter(FlexSliderIndicatorTypeAdapter());
+    Hive.registerAdapter(ShowValueIndicatorAdapter());
   }
 
   // ----------
