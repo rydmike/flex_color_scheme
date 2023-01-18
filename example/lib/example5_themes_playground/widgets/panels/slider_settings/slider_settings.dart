@@ -33,9 +33,10 @@ class SliderSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTile(
-          title: const Text('Use base color tinted value indicator'),
-          subtitle: const Text('The value indicator by default only shows on '
-              'stepped Slider'),
+          title: const Text('Base color tinted value indicator'),
+          subtitle: const Text('Uses scrim and opacity, makes it darker than '
+              'base color, but with some opacity. The value indicator by '
+              'default only shows on a stepped Slider'),
           value: controller.sliderValueTinted &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

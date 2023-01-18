@@ -5779,12 +5779,18 @@ class FlexColorScheme with Diagnosticable {
                 subTheme.sliderBaseSchemeColor ?? SchemeColor.primary,
                 colorScheme),
             brightness: colorScheme.brightness)
-        : null;
+        : useMaterial3
+            ? FlexSubThemes.schemeColor(
+                subTheme.sliderBaseSchemeColor ?? SchemeColor.primary,
+                colorScheme)
+            : null;
     final Color sliderValueStyleOnColor =
         onColor((sliderValueIndicator ?? colorScheme.primary).withAlpha(0xFF));
-    final TextStyle? sliderValueStyle = subTheme.sliderValueTinted
-        ? effectiveTextTheme.bodyLarge!.copyWith(color: sliderValueStyleOnColor)
-        : null;
+    final TextStyle? sliderValueStyle =
+        subTheme.sliderValueTinted || useMaterial3
+            ? effectiveTextTheme.labelMedium!
+                .copyWith(color: sliderValueStyleOnColor)
+            : null;
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // Same as in ThemeData. Defined for use in the tooltip sub-theme.
@@ -6318,6 +6324,7 @@ class FlexColorScheme with Diagnosticable {
               trackHeight: subTheme.sliderTrackHeight,
               valueIndicatorColor: sliderValueIndicator,
               valueIndicatorTextStyle: sliderValueStyle,
+              useMaterial3: useMaterial3,
             )
           : null,
       // Input decorator theme.

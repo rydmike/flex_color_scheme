@@ -564,6 +564,7 @@ void main() {
           TimePickerThemeData(
             elevation: 6,
             backgroundColor: colorScheme.tertiary,
+            dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -602,6 +603,7 @@ void main() {
           TimePickerThemeData(
             elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
+            dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),

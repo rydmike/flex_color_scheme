@@ -3523,7 +3523,7 @@ class FlexSubThemes {
     );
   }
 
-  /// An opinionated [SliderThemeData] theme.
+  /// An opinionated [SliderThemeData] theme for the [Slider].
   ///
   /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
@@ -3554,6 +3554,9 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
     final TextStyle? valueIndicatorTextStyle,
+
+    /// A temporary flag used to opt-in to new Material 3 features.
+    final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
@@ -3576,7 +3579,9 @@ class FlexSubThemes {
           colorScheme.onSurface.withOpacity(.38), colorScheme.surface),
       overlayColor: baseColor.withOpacity(0.12),
       valueIndicatorColor: valueIndicatorColor,
-      valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
+      valueIndicatorShape: useMaterial3
+          ? const DropSliderValueIndicatorShape()
+          : const RectangularSliderValueIndicatorShape(),
       valueIndicatorTextStyle: valueIndicatorTextStyle,
     );
   }
