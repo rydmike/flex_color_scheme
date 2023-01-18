@@ -4,15 +4,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.1
 
+### Work in progress!
+
 **Jan 19, 2023**
 
-This release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design included in the **Flutter 3.8/4.0** release. 
-
-The new features are also quite significant.
+This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also quite significant.
 
 **NEW** 
 
-- Added 12 new Material 3 color schemes: `redM3`,`pinkM3`, `purpleM3`, `indigoM3`, `blueM3`, `cyanM3`, `tealM3`, `greenM3`, `limeM3`, `yellowM3`, `orangeM3` and `deepOrangeM3` for a total of 52 built-in light and dark theme pairs. These schemes work well in Material 3 with or without seed generation.
+- Added 12 new Material 3 color schemes: `redM3`,`pinkM3`, `purpleM3`, `indigoM3`, `blueM3`, `cyanM3`, `tealM3`, `greenM3`, `limeM3`, `yellowM3`, `orangeM3` and `deepOrangeM3` for a total of **52 built-in** light and dark theme pairs. These schemes work well in Material 3 with or without seed generation.
 
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
 
@@ -45,7 +45,7 @@ The new features are also quite significant.
 
 - The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix will be removed as soon as the issue is fixed.
 
-- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if is null, it follows defined `appBarElevation` as before. In M3 it is kept null in order to default to M3's default elevation of 3, so that `BottomAppBar` getd elevation tint by default. In M3 mode a minor spec deviation was noted in Flutter SDK and reported here https://github.com/flutter/flutter/issues/118150.
+- Changed `FlexColorScheme.bottomAppBarElevation` to be nullable. In M2 mode if is null, it follows defined `appBarElevation` as before. In M3, it is kept null in order to default to M3's default elevation of 3, so that `BottomAppBar` get elevation tint by default. In M3 mode a minor spec deviation was noted in Flutter SDK and reported here https://github.com/flutter/flutter/issues/118150.
 
 - Changed FlexColorScheme default `BottomAppBar` color to be `colorScheme.surface`, same as Flutter default. Previously FlexColorScheme used `colorScheme.background` color as an opinionated default. The change is minor, and in many designs the color values are the same.
 
@@ -76,7 +76,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Improved codegen for used Typography selection, it is now only shown when needed.
 - Improved codegen for when FlexColorScheme is not used at all. It can now use the setting for using Material 3 and Typography. It still does not support generating code for the active `ColorScheme`, when FCS is **not** in use.
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
-- Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 style Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
+- Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 styled Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
 - Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
@@ -101,7 +101,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added M3 support to `TabBar`. Partial support added. Add unselected color, undimmed not selected. Divider under it?
 - Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
-- TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card now, should be its own thing.
+- TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
@@ -128,7 +128,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 **FIX**
 
-- Themes Playground (Example 5): Fixed scroll issue in page view mode on Web builds. Only examples related, no package impact.
+- Themes Playground (Example 5): Fixed scroll issue in page view mode on Web-builds. Only examples related, no package impact.
 - API doc updates.
 
 ## 6.1.0
@@ -1136,7 +1136,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
 **FIX**
 
 * The `defaultRadius` in `FlexSubThemesData` now defaults to null, 
-  so all sub-themes border radius will default to M3 default border
+  sub-themes border radius will then default to M3 default border
   radius per widget. The const default value it had before was a remnant from early
   dev phase when widgets all defaulted to single shared radius and not M3
   defaults per widget type. If you explicitly passed in null, you did also in
@@ -1164,7 +1164,7 @@ Opt in opinionated sub themes minor style changes:
 
 **EXAMPLES**
 
-* Updated and tuned the examples. Example 5 **Themes Playground**
+* Updated and tuned the examples. Example 5, the **Themes Playground**
   now includes capability to define custom color schemes starting from built-in ones.
   It can also generate the FlexColorScheme setup code needed for any defined
   viewed theme setup. You can copy/paste a theme's Flutter Dart code,
