@@ -166,13 +166,17 @@ class FlexSubThemesData with Diagnosticable {
     this.unselectedToggleIsColored = false,
     //
     this.sliderBaseSchemeColor,
+    this.sliderIndicatorSchemeColor,
     this.sliderValueTinted = false,
+    this.sliderValueIndicatorType,
+    this.sliderShowValueIndicator,
     this.sliderTrackHeight,
     //
     this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
+    this.inputDecoratorBackgroundAlpha,
     this.inputDecoratorBorderSchemeColor,
     this.inputDecoratorBorderType,
     this.inputDecoratorFocusedHasBorder = true,
@@ -956,21 +960,54 @@ class FlexSubThemesData with Diagnosticable {
   /// The ColorScheme based color used on the [Slider] as its overall base
   /// color.
   ///
-  /// If not defined, the [Slider] theme defaults natively to using the
+  /// If not defined, the [Slider] theme defaults to using the
   /// ambient theme's primary color.
   final SchemeColor? sliderBaseSchemeColor;
 
-  /// If true, the value indicator is a tinted high contrast version of current
-  /// [sliderBaseSchemeColor], with a bit of opacity.
+  /// The ColorScheme based color used on the [Slider] indicator color.
   ///
-  /// If false, the value indicator uses Flutter SDK default.
+  /// If not defined, the [Slider] theme defaults in M2 mode to a dark grey in
+  /// light mode, and a light grey in dark mode. In M3 mode it uses the
+  /// [sliderBaseSchemeColor] as its color if not defined, defaulting to
+  /// primary color if neither is defined.
+  final SchemeColor? sliderIndicatorSchemeColor;
+
+  /// If true, the value indicator becomes a tinted high contrast version of
+  /// current [sliderIndicatorSchemeColor], with a bit of opacity.
   ///
   /// Default to false.
   final bool sliderValueTinted;
 
+  // TODO(rydmike): RangeSlider to use real M3 style drop when supported.
+  /// Enum used to select the type of built-in value indicator used by
+  /// [Slider].
+  ///
+  /// The current two options included Material 2 default
+  /// [RectangularSliderValueIndicatorShape] and Material 3 default
+  /// [DropSliderValueIndicatorShape].
+  ///
+  /// If not defined, the default for the M2/M3 mode is used respectively.
+  ///
+  /// The effective [RangeSliderValueIndicatorShape] for a [RangeSlider] will
+  /// also be the rectangular type, if that is effective value of
+  /// [sliderValueIndicatorType]. If it is drop, then the reasonably matching
+  /// [PaddleRangeSliderValueIndicatorShape] is used by the [RangeSlider].
+  ///
+  /// There is no M3 drop style available yet for [RangeSlider], it will be
+  /// added to FCS when it is supported in Flutter.
+  final FlexSliderIndicatorType? sliderValueIndicatorType;
+
+  /// Whether the value indicator should be shown for different types of
+  /// sliders.
+  ///
+  /// By default, [sliderShowValueIndicator] is set to
+  /// [ShowValueIndicator.onlyForDiscrete]. The value indicator is only shown
+  /// when the thumb is being touched.
+  final ShowValueIndicator? sliderShowValueIndicator;
+
   /// The height of the [Slider] track.
   ///
-  /// If undefined, defaults to 4db via Flutter SDK defaults.
+  /// If undefined, defaults to 4 dp via Flutter SDK defaults.
   final double? sliderTrackHeight;
 
   /// Border radius value for [InputDecoration].
@@ -1004,8 +1041,22 @@ class FlexSubThemesData with Diagnosticable {
   /// decorator to a color that is not included in the theme color scheme.
   ///
   /// If null, defaults to theme.colorScheme color selected by
-  /// [inputDecoratorSchemeColor].withAlpha(0x0F).
+  /// [inputDecoratorSchemeColor].
   final Color? inputDecoratorFillColor;
+
+  /// Defines the alpha, opacity channel value used as opacity on effective
+  /// [InputDecorator] background color.
+  ///
+  /// If defined, the valid range is 0 to 255 (0x00 to 0xFF), if out of bounds
+  /// it is capped at closer value.
+  ///
+  /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
+  /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme and
+  /// to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
+  ///
+  /// The border [inputDecoratorBorderSchemeColor] can be used to define the
+  /// border color separately, but it defaults to this color if not defined.
+  final int? inputDecoratorBackgroundAlpha;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
   /// uses as color for the border color when they are used.
@@ -2198,13 +2249,17 @@ class FlexSubThemesData with Diagnosticable {
     final bool? unselectedToggleIsColored,
     //
     final SchemeColor? sliderBaseSchemeColor,
+    final SchemeColor? sliderIndicatorSchemeColor,
     final bool? sliderValueTinted,
+    final FlexSliderIndicatorType? sliderValueIndicatorType,
+    final ShowValueIndicator? sliderShowValueIndicator,
     final double? sliderTrackHeight,
     //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
+    final int? inputDecoratorBackgroundAlpha,
     final SchemeColor? inputDecoratorBorderSchemeColor,
     final FlexInputBorderType? inputDecoratorBorderType,
     final bool? inputDecoratorFocusedHasBorder,
@@ -2401,7 +2456,13 @@ class FlexSubThemesData with Diagnosticable {
       //
       sliderBaseSchemeColor:
           sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
+      sliderIndicatorSchemeColor:
+          sliderIndicatorSchemeColor ?? this.sliderIndicatorSchemeColor,
       sliderValueTinted: sliderValueTinted ?? this.sliderValueTinted,
+      sliderValueIndicatorType:
+          sliderValueIndicatorType ?? this.sliderValueIndicatorType,
+      sliderShowValueIndicator:
+          sliderShowValueIndicator ?? this.sliderShowValueIndicator,
       sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
@@ -2409,9 +2470,10 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
       inputDecoratorIsFilled:
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
-
       inputDecoratorFillColor:
           inputDecoratorFillColor ?? this.inputDecoratorFillColor,
+      inputDecoratorBackgroundAlpha:
+          inputDecoratorBackgroundAlpha ?? this.inputDecoratorBackgroundAlpha,
       inputDecoratorBorderSchemeColor: inputDecoratorBorderSchemeColor ??
           this.inputDecoratorBorderSchemeColor,
       inputDecoratorBorderType:
@@ -2689,13 +2751,17 @@ class FlexSubThemesData with Diagnosticable {
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
         //
         other.sliderBaseSchemeColor == sliderBaseSchemeColor &&
+        other.sliderIndicatorSchemeColor == sliderIndicatorSchemeColor &&
         other.sliderValueTinted == sliderValueTinted &&
+        other.sliderValueIndicatorType == sliderValueIndicatorType &&
+        other.sliderShowValueIndicator == sliderShowValueIndicator &&
         other.sliderTrackHeight == sliderTrackHeight &&
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
+        other.inputDecoratorBackgroundAlpha == inputDecoratorBackgroundAlpha &&
         other.inputDecoratorBorderSchemeColor ==
             inputDecoratorBorderSchemeColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
@@ -2914,13 +2980,17 @@ class FlexSubThemesData with Diagnosticable {
         unselectedToggleIsColored,
         //
         sliderBaseSchemeColor,
+        sliderIndicatorSchemeColor,
         sliderValueTinted,
+        sliderValueIndicatorType,
+        sliderShowValueIndicator,
         sliderTrackHeight,
         //
         inputDecoratorRadius,
         inputDecoratorSchemeColor,
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
+        inputDecoratorBackgroundAlpha,
         inputDecoratorBorderSchemeColor,
         inputDecoratorBorderType,
         inputDecoratorFocusedHasBorder,
@@ -3135,8 +3205,14 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(EnumProperty<SchemeColor>(
         'sliderBaseSchemeColor', sliderBaseSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'sliderIndicatorSchemeColor', sliderIndicatorSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('sliderValueTinted', sliderValueTinted));
+    properties.add(EnumProperty<FlexSliderIndicatorType>(
+        'sliderValueIndicatorType', sliderValueIndicatorType));
+    properties.add(EnumProperty<ShowValueIndicator>(
+        'sliderShowValueIndicator', sliderShowValueIndicator));
     properties.add(
         DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
     //
@@ -3148,6 +3224,8 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorIsFilled', inputDecoratorIsFilled));
     properties
         .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
+    properties.add(DiagnosticsProperty<int>(
+        'inputDecoratorBackgroundAlpha', inputDecoratorBackgroundAlpha));
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorBorderSchemeColor', inputDecoratorBorderSchemeColor));
     properties.add(EnumProperty<FlexInputBorderType>(

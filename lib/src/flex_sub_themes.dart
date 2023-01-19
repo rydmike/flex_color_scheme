@@ -401,6 +401,112 @@ class FlexSubThemes {
     }
   }
 
+  /// An opinionated [DrawerThemeData] theme for the [Drawer]
+  static DrawerThemeData drawerTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// [Drawer] background color.
+    ///
+    ///
+    ///
+    /// If not defined, defaults to [SchemeColor.background] in M2. Flutter
+    /// SDK uses surface color as default background, but FCS keeps as
+    /// background color.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Corner radius of the [Drawer].
+    ///
+    /// If not defined, defaults to [kDrawerRadius] 16 dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/navigation-drawer/specs
+    final double? radius,
+
+    /// Drawer elevation.
+    ///
+    /// If not defined, defaults to default value for for M2 mode (16) and in
+    /// M3 (1) via SDK defaults.
+    final double? elevation,
+
+    /// Overrides the default value of [Drawer.shape] for a end drawer.
+    final ShapeBorder? endShape,
+
+    /// Overrides the default value of [Drawer.width].
+    final double? width,
+
+    /// You would typically pass in `Directionality.of(context)`].void
+    ///
+    /// Default to LTR if not defined.
+    final TextDirection? direction,
+  }) {
+    // Get selected background color, defaults to primary.
+    final Color backgroundColor = schemeColor(
+        backgroundSchemeColor ?? SchemeColor.background, colorScheme);
+
+    return DrawerThemeData(
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      width: width,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.horizontal(
+          end: Radius.circular(radius ?? kDrawerRadius),
+        ), //.resolve(direction ?? TextDirection.ltr),
+      ),
+      endShape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.horizontal(
+          end: Radius.circular(radius ?? kDrawerRadius),
+        ), //.resolve(direction ?? TextDirection.ltr),
+      ),
+    );
+  }
+
+  /// An opinionated [DropdownMenuThemeData] theme.
+  static DropdownMenuThemeData dropdownMenuTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
+    /// Typically you want it to match the input decorator on your TextField.
+    final InputDecorationTheme? inputDecorationTheme,
+  }) {
+    return DropdownMenuThemeData(
+      inputDecorationTheme: inputDecorationTheme,
+    );
+  }
+
+  /// An opinionated [NavigationDrawerThemeData] theme.
+  static NavigationDrawerThemeData navigationDrawerTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+  }) {
+    return NavigationDrawerThemeData();
+  }
+
+  /// An opinionated [MenuBarThemeData] theme.
+  static MenuBarThemeData menuBarTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+  }) {
+    return MenuBarThemeData();
+  }
+
+  /// An opinionated [MenuButtonThemeData] theme.
+  static MenuButtonThemeData menuButtonTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+  }) {
+    return MenuButtonThemeData();
+  }
+
+  /// An opinionated [MenuThemeData] theme.
+  static MenuThemeData menuTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+  }) {
+    return MenuThemeData();
+  }
+
   /// An opinionated [AppBarTheme] theme.
   ///
   /// Contrary to the other opinionated static [FlexSubThemes] sub-theme
@@ -1958,6 +2064,20 @@ class FlexSubThemes {
     /// if color scheme is dark.
     final Color? fillColor,
 
+    /// Defines the alpha, opacity channel value used as opacity on effective
+    /// [InputDecorator] background color.
+    ///
+    /// If defined, the valid range is 0 to 255 (0x00 to 0xFF), if out of bounds
+    /// it is capped at closer value.
+    ///
+    /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
+    /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme
+    /// and to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
+    ///
+    /// The border [inputDecoratorBorderSchemeColor] can be used to define the
+    /// border color separately, but it defaults to this color if not defined.
+    final int? backgroundAlpha,
+
     /// Selects which color from the passed in colorScheme to use as the border
     /// color of the input decorator.
     ///
@@ -2065,22 +2185,28 @@ class FlexSubThemes {
         borderSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
         colorScheme);
 
+    // Get effective alpha value for background color.
+    final int effectiveAlpha = backgroundAlpha?.clamp(0, 255) ??
+        (useMaterial3
+            ? 0xFF
+            : isDark
+                ? kFillColorAlphaDark
+                : kFillColorAlphaLight);
+
     // TODO(rydmike): Decide and define consts for tinted disabled TextField.
     // Effective used fill color, can also be a totally custom color value.
-    final Color usedFillColor = fillColor ??
+    final Color usedFillColor = fillColor?.withAlpha(effectiveAlpha) ??
         MaterialStateColor.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             return tintedDisabled
                 ? baseColor
                     .blendAlpha(colorScheme.onSurface, 0x30)
                     .withAlpha(0x08)
-                : colorScheme.onSurface.withOpacity(0.04);
+                : colorScheme.onSurface.withOpacity(0.04); // M3 spec
           }
           return baseSchemeColor == null && useMaterial3
-              ? colorScheme.surfaceVariant
-              : (colorScheme.brightness == Brightness.dark
-                  ? baseColor.withAlpha(kFillColorAlphaDark)
-                  : baseColor.withAlpha(kFillColorAlphaLight));
+              ? colorScheme.surfaceVariant.withAlpha(effectiveAlpha)
+              : baseColor.withAlpha(effectiveAlpha);
         });
 
     // Some Flutter "magic" theme colors from ThemeData.
@@ -2159,7 +2285,7 @@ class FlexSubThemes {
 
           if (states.contains(MaterialState.hovered)) {
             return
-                // TODO(rydmike): Default M3, excluding it. Opinionated.
+                // TODO(rydmike): Default M3, excluding it. FCS opinionated.
                 // useMaterial3
                 //   ? TextStyle(color: colorScheme.onErrorContainer)
                 //   :
@@ -2250,7 +2376,7 @@ class FlexSubThemes {
       suffixIconColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.error)) {
-          // TODO(rydmike): Default M3 does this, excluding it. Opinionated.
+          // TODO(rydmike): Default M3 does this, excluding it. FCS Opinionated.
           // if (states.contains(MaterialState.hovered)) {
           //   return colorScheme.onErrorContainer;
           // }

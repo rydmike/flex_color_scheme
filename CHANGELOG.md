@@ -87,6 +87,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added setting for border color selection of `TextField` to panel **Text Field**.
 - Added setting for scrolled under elevation of `AppBar` to panel **AppBar**.
 - Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
+- Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
 
 **FIX**
 
@@ -95,24 +96,33 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 **TODO**
 
-- Add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
-- Review and tune new M3 color schemes, red to teal done. Six more remaining.  
-- Review M3 Playground component colors, and add new buttons.
-- Added M3 support to `TabBar`. Partial support added. Add unselected color, undimmed not selected. Divider under it?
-- Maybe add no opacity on base color background to TextField, or opacity (alpha) slider?  
+- Maybe add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
+- Maybe add harmonized theme for menu used by menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
+- Maybe add new MenuBar theme.
 - TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
 - Maybe add Drawer theme.
 - Maybe add new NavigationDrawer theme.  
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
-- Maybe add new MenuBar theme.
-- Maybe consider mods for tinted disabled color, light mode at least.  
-- Review and fix test coverage.
-- Review and test all examples. 
-- Add important changes to docs.flexcolorscheme.com:
+- Maybe consider tuning the tinted disabled color, in light mode at least.
+- Maybe add a "set to M3 design" button and dialog to some components, like NavigationBar, TabBar, TextField.
+
+- MUST DO: Add/Review M3 support to `TabBar`. Basic support added, but also add unselected color, undimmed not selected. Divider under it. Make it respect FCS hover and splash settings.
+- MUST DO: Add alpha slider to `TextField` background color, it is fixed now.
+- MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
+- MUST DO: Review M3 Playground component colors presentations, add new buttons and other widgets.
+- MUST DO: Review and fix test coverage.
+- MUST DO: Review and test all examples. 
+- MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
   - ListTile transparent added to core defaults.
   - Update known issues.
+  - Section about what is missing in Flutter 3.8/4.0 from M3.
+- After release, more updates to docs.flexcolorscheme.com:
+  - New color scheme images
+  - Review and update screens shots and GIF.
+  - Use image zoom feature in docs.page more on current images.
+  - Use new highlight banners in docs.page.
 
 ## 6.1.2
 

@@ -84,6 +84,11 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.view_sidebar_outlined,
   ),
   GridItem(
+    panelLabel: 'Drawer and NavigationDrawer',
+    buttonLabel: 'Drawer',
+    icon: Icons.featured_video_outlined,
+  ),
+  GridItem(
     panelLabel: 'Android System Navigation Bar',
     buttonLabel: 'AndroidBar',
     icon: Icons.android_outlined,

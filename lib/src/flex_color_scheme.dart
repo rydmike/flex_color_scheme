@@ -5824,6 +5824,7 @@ class FlexColorScheme with Diagnosticable {
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
+            backgroundAlpha: subTheme.inputDecoratorBackgroundAlpha,
             focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
                 subTheme.thickBorderWidth,
             focusedHasBorder: subTheme.inputDecoratorFocusedHasBorder,
@@ -6324,14 +6325,17 @@ class FlexColorScheme with Diagnosticable {
               trackHeight: subTheme.sliderTrackHeight,
               valueIndicatorColor: sliderValueIndicator,
               valueIndicatorTextStyle: sliderValueStyle,
+              valueIndicatorType: subTheme.sliderValueIndicatorType,
+              showValueIndicator: subTheme.sliderShowValueIndicator,
               useMaterial3: useMaterial3,
             )
           : null,
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
-      // TODO(rydmike): Consider own sub theme? Consider opt-out? Add docs!
-      // Add input decorator to MenuButton theme, to make it follow same style.
-      dropdownMenuTheme: DropdownMenuThemeData(
+      // DropDown menu theme.
+      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
+        colorScheme: colorScheme,
+        // FCS only support style matching it to same as TextField
         inputDecorationTheme: effectiveInputDecorationTheme,
       ),
       // FAB, floating action button theme.
@@ -6372,6 +6376,15 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.cardTheme(
               radius: subTheme.cardRadius ?? subTheme.defaultRadius,
               elevation: subTheme.cardElevation,
+            )
+          : null,
+      drawerTheme: useSubThemes
+          ? FlexSubThemes.drawerTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.dialogElevation,
+              // directionality: Directionality.of(context),
             )
           : null,
       popupMenuTheme: useSubThemes

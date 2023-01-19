@@ -12,6 +12,7 @@ import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
+import '../panels/drawer_settings/drawer_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
 import '../panels/grid_item.dart';
@@ -205,6 +206,7 @@ class _LargeGridViewState extends State<LargeGridView>
                   BottomNavigationBarSettings(themeCtrl),
                   NavigationBarSettings(themeCtrl),
                   NavigationRailSettings(themeCtrl),
+                  DrawerSettings(themeCtrl),
                   AndroidNavigationBarSettings(themeCtrl),
                   ButtonsSettings(themeCtrl),
                   ToggleButtonsSettings(themeCtrl),

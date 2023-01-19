@@ -79,6 +79,11 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.view_sidebar_outlined,
   ),
   PanelItem(
+    panelLabel: 'Drawer and NavigationDrawer',
+    buttonLabel: 'Drawer',
+    icon: Icons.featured_video_outlined,
+  ),
+  PanelItem(
     panelLabel: 'Android System Navigation Bar',
     buttonLabel: 'AndroidBar',
     icon: Icons.android_outlined,

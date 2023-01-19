@@ -12,6 +12,7 @@ import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
+import '../panels/drawer_settings/drawer_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
@@ -215,6 +216,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                       NavigationBarSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
                       NavigationRailSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(DrawerSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
                       themeCtrl),
                   PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl),
