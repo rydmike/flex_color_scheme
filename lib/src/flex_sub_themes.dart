@@ -3619,6 +3619,8 @@ class FlexSubThemes {
       }
     }
 
+    final SliderComponentShape indicatorShape = effectiveIndicatorShape();
+
     return SliderThemeData(
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
@@ -3635,8 +3637,13 @@ class FlexSubThemes {
       overlayColor: baseColor.withOpacity(0.12),
       showValueIndicator: showValueIndicator,
       valueIndicatorColor: valueIndicatorColor,
-      valueIndicatorShape: effectiveIndicatorShape(),
+      valueIndicatorShape: indicatorShape,
       valueIndicatorTextStyle: valueIndicatorTextStyle,
+      // TODO(rydmike): RangeSlider to use real M3 style drop when supported.
+      // Use the almost matching drop style for RangeSlider
+      rangeValueIndicatorShape: indicatorShape is DropSliderValueIndicatorShape
+          ? const PaddleRangeSliderValueIndicatorShape()
+          : null,
     );
   }
 

@@ -93,11 +93,19 @@ class SliderSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         const ListTile(title: Text('Slider style demos')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: SliderShowcase(),
         ),
+        const Divider(),
+        const ListTile(title: Text('RangeSlider style demos')),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RangeSliderShowcase(),
+        ),
+        const Divider(),
         const ListTile(
           dense: true,
           subtitle:

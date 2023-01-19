@@ -74,6 +74,8 @@ class ThemeShowcase extends StatelessWidget {
         const Divider(),
         const SliderShowcase(),
         const SizedBox(height: 8),
+        const RangeSliderShowcase(),
+        const SizedBox(height: 8),
         const Divider(),
         const ListTileShowcase(),
         const Divider(),
@@ -699,7 +701,7 @@ class SliderShowcase extends StatefulWidget {
 }
 
 class _SliderShowcaseState extends State<SliderShowcase> {
-  double value1 = 5;
+  double value = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -707,51 +709,149 @@ class _SliderShowcaseState extends State<SliderShowcase> {
       children: <Widget>[
         ListTile(
           dense: true,
-          title: Text('Slider stepped (${value1.toStringAsFixed(0)})'),
+          title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
           subtitle: Slider(
             max: 30,
             divisions: 31,
-            label: value1.toStringAsFixed(0),
-            value: value1,
+            label: value.toStringAsFixed(0),
+            value: value,
             onChanged: (double newValue) {
               setState(() {
-                value1 = newValue.roundToDouble();
+                value = newValue.roundToDouble();
               });
             },
           ),
         ),
         ListTile(
           dense: true,
-          title: Text('Slider continuous (${value1.toStringAsFixed(2)})'),
+          title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
           subtitle: Slider(
             max: 30,
-            label: value1.toStringAsFixed(2),
-            value: value1,
+            label: value.toStringAsFixed(0),
+            value: value,
             onChanged: (double newValue) {
               setState(() {
-                value1 = newValue;
+                value = newValue;
               });
             },
           ),
         ),
         ListTile(
           dense: true,
-          title: Text('Slider stepped disabled (${22.toStringAsFixed(0)})'),
+          title: Text('Slider stepped disabled (${value.toStringAsFixed(0)})'),
           subtitle: Slider(
             max: 30,
             divisions: 31,
-            label: 22.toStringAsFixed(0),
-            value: 22,
+            label: value.toStringAsFixed(0),
+            value: value,
             onChanged: null,
           ),
         ),
         ListTile(
           dense: true,
-          title: Text('Slider continuous disabled (${14.toStringAsFixed(2)})'),
+          title:
+              Text('Slider continuous disabled (${value.toStringAsFixed(2)})'),
           subtitle: Slider(
             max: 30,
-            label: 14.toStringAsFixed(2),
-            value: 14,
+            label: value.toStringAsFixed(0),
+            value: value,
+            onChanged: null,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RangeSliderShowcase extends StatefulWidget {
+  const RangeSliderShowcase({super.key});
+
+  @override
+  State<RangeSliderShowcase> createState() => _RangeSliderShowcaseState();
+}
+
+class _RangeSliderShowcaseState extends State<RangeSliderShowcase> {
+  RangeValues values = const RangeValues(5, 12);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          dense: true,
+          title: Text('RangeSlider stepped (${RangeLabels(
+            values.start.toStringAsFixed(0),
+            values.end.toStringAsFixed(0),
+          )})'),
+          subtitle: RangeSlider(
+            max: 30,
+            divisions: 31,
+            labels: RangeLabels(
+              values.start.toStringAsFixed(0),
+              values.end.toStringAsFixed(0),
+            ),
+            values: values,
+            onChanged: (RangeValues newValues) {
+              setState(() {
+                values = RangeValues(
+                  newValues.start.roundToDouble(),
+                  newValues.end.roundToDouble(),
+                );
+              });
+            },
+          ),
+        ),
+        ListTile(
+          dense: true,
+          title: Text('RangeSlider continuous (${RangeLabels(
+            values.start.toStringAsFixed(2),
+            values.end.toStringAsFixed(2),
+          )})'),
+          subtitle: RangeSlider(
+            max: 30,
+            labels: RangeLabels(
+              values.start.toStringAsFixed(2),
+              values.end.toStringAsFixed(2),
+            ),
+            values: values,
+            onChanged: (RangeValues newValues) {
+              setState(() {
+                values = newValues;
+              });
+            },
+          ),
+        ),
+        ListTile(
+          dense: true,
+          title: Text('RangeSlider stepped disabled (${RangeLabels(
+            values.start.toStringAsFixed(0),
+            values.end.toStringAsFixed(0),
+          )})'),
+          subtitle: RangeSlider(
+            max: 30,
+            divisions: 31,
+            labels: RangeLabels(
+              values.start.toStringAsFixed(0),
+              values.end.toStringAsFixed(0),
+            ),
+            values: values,
+            onChanged: null,
+          ),
+        ),
+        ListTile(
+          dense: true,
+          title: Text('RangeSlider continuous disabled (${RangeLabels(
+            values.start.toStringAsFixed(2),
+            values.end.toStringAsFixed(2),
+          )})'),
+          subtitle: RangeSlider(
+            max: 30,
+            divisions: 31,
+            labels: RangeLabels(
+              values.start.toStringAsFixed(2),
+              values.end.toStringAsFixed(2),
+            ),
+            values: values,
             onChanged: null,
           ),
         ),
