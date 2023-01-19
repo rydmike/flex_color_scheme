@@ -33,7 +33,7 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `SchemeColor` value `inputDecoratorBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the border color of `InputDecorator` on e.g. TextField. It controls the new parameter `borderSchemeColor` in `FlexSubThemes.inputDecorationTheme`.
 
-- Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes``
+- Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes`.
 
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
 
@@ -78,7 +78,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
 - Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 styled Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
-- Added showing `Drawer` and `NavigationDrawer` to **Widget Showcase**.
+- Added showing `Drawer` and `NavigationDrawer` in the new **Drawer** panel and to the **Widget Showcase**.
 - Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 - Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
@@ -101,14 +101,14 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Maybe add harmonized theme for menu used by menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
 - Maybe add new MenuBar theme.
 - TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
-- Maybe add Drawer theme.
-- Maybe add new NavigationDrawer theme.  
+- Maybe add Drawer theme. Added, still WIP.
+- Maybe add new NavigationDrawer theme.  Added, still WIP.
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
 - Maybe consider tuning the tinted disabled color, in light mode at least.
 - Maybe add a "set to M3 design" button and dialog to some components, like NavigationBar, TabBar, TextField.
 
 - MUST DO: Add/Review M3 support to `TabBar`. Basic support added, but also add unselected color, undimmed not selected. Divider under it. Make it respect FCS hover and splash settings.
-- MUST DO: Add alpha slider to `TextField` background color, it is fixed now.
+- MUST DO: Add alpha slider to `TextField` background color, it is fixed value now.
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: Review M3 Playground component colors presentations, add new buttons and other widgets.
 - MUST DO: Review and fix test coverage.
