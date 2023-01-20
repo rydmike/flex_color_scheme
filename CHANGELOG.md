@@ -98,15 +98,16 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 **FIX**
 
-- ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect.
+- ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect. May not need this work around in V7.0 release if the issue does not land in new Flutter stable after 3.3. follow-up.
 - Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
 
 **TODO for STABLE 7.0**
 
-Next stable version of Flutter after version 3.3 must be released, before FlexColorScheme 7.0 can be released. 
+The next stable version of Flutter after version 3.3 must be released, before FlexColorScheme 7.0 can be released. 
 
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
-- MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). Based on Card now, but should be its own thing.
+- MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). Based on Card now, but should be its own thing
+- MUST DO: TabBar M3 to default to Flutter SDK default in M3. New selector that allows null.  
 - MUST DO: Review and fix test coverage.
 - MUST DO: Review and test all examples. 
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
@@ -120,15 +121,14 @@ Next stable version of Flutter after version 3.3 must be released, before FlexCo
   - Use image zoom feature in docs.page more on current images.
   - Use new highlight banners feature in docs.page when appropriate.
 
-
+- Maybe consider tuning the tinted disabled color.
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part)
 - Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
-- Maybe add new MenuBar theme.
-- Maybe add new NavigationDrawer theme.
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
 - Maybe add more sub-theme component color presentations to the Playground's "Component Color".
-- Maybe consider tuning the tinted disabled color.
-- Maybe add more "set to M3 design", like on TextField panel to e.g. NavigationBar and NavigationRail.
+- Maybe add new NavigationDrawer theme.
+- Maybe add new MenuBar theme.
+- Maybe add more "set to M3 design" buttons, like on TextField panel to e.g. NavigationBar and NavigationRail.
 - Maybe to `TabBar` add unselected color, not selected dim, divider color. Make it respect FCS hover and splash setting. (Postponed to V7.1)
 - Maybe add support for `FlexSubThemesData.tintedDisabledControls` to more widgets that use own disabled color settings, instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio and Slider. (Postponed to V7.1)
 
