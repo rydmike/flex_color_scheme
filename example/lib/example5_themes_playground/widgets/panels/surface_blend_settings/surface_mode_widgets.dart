@@ -150,6 +150,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {

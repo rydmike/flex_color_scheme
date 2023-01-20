@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'slider_indicator_popup_menu.dart';
 
 class SliderSettings extends StatelessWidget {
   const SliderSettings(this.controller, {super.key});
@@ -11,6 +12,16 @@ class SliderSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String labelIndicatorDefault =
+        controller.sliderBaseSchemeColor == null
+            ? controller.useMaterial3
+                ? controller.sliderValueTinted
+                    ? 'primary'
+                    : 'default (primary)'
+                : controller.sliderValueTinted
+                    ? 'primary'
+                    : 'default (grey)'
+            : '${controller.sliderBaseSchemeColor?.name}';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -32,16 +43,50 @@ class SliderSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Slider value indicator color'),
+          labelForDefault: labelIndicatorDefault,
+          colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
+          index: controller.sliderIndicatorSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSliderIndicatorSchemeColor(null);
+                  } else {
+                    controller.setSliderIndicatorSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         SwitchListTile(
-          title: const Text('Base color tinted value indicator'),
+          title: const Text('Tinted value indicator'),
           subtitle: const Text('Uses scrim and opacity, makes it darker than '
-              'base color, but with some opacity. The value indicator by '
+              'selected color, but with some opacity. The value indicator by '
               'default only shows on a stepped Slider'),
           value: controller.sliderValueTinted &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setSliderValueTinted
+              : null,
+        ),
+        SliderIndicatorPopupMenu(
+          title: const Text('Slider value indicator type'),
+          labelForDefault: controller.useMaterial3
+              ? 'default M3 (drop)'
+              : 'default M2 (rectangular)',
+          index: controller.sliderValueIndicatorType?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 ||
+                      index >= FlexSliderIndicatorType.values.length) {
+                    controller.setSliderValueIndicatorType(null);
+                  } else {
+                    controller.setSliderValueIndicatorType(
+                        FlexSliderIndicatorType.values[index]);
+                  }
+                }
               : null,
         ),
         ListTile(

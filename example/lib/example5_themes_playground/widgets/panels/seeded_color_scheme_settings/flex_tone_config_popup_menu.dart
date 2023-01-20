@@ -29,6 +29,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     final bool disabled = index < 1 || index >= FlexTone.values.length;
 
     return PopupMenuButton<int>(
+      initialValue: disabled ? 1 : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {

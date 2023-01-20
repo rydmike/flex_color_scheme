@@ -118,7 +118,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         : _explainAppBarStyle(null, isLight, useM3);
 
     return PopupMenuButton<int>(
-      initialValue: index,
+      initialValue: useDefault ? FlexAppBarStyle.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -138,8 +138,12 @@ class AppBarStylePopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
-                // TODO(rydmike): Consider outlineVariant when it lands.
-                borderColor: theme.dividerColor,
+                borderColor: i == index ||
+                        (index < 0 && i == FlexAppBarStyle.values.length)
+                    ? theme.colorScheme.onSurface
+                    : theme.dividerColor,
+                selected: i == index ||
+                    (index < 0 && i == FlexAppBarStyle.values.length),
                 backgroundColor: i >= FlexAppBarStyle.values.length
                     ? _appBarStyleColor(
                         null,

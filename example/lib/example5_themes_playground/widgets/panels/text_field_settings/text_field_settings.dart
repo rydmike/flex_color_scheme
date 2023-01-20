@@ -70,8 +70,7 @@ class TextFieldSettings extends StatelessWidget {
             controller.useSubThemes &&
             controller.useFlexColorScheme
         // ignore: lines_longer_than_80_chars
-        ? '0x${controller.inputDecoratorBackgroundAlphaLight?.toRadixString(16).toUpperCase()}' ??
-            ''
+        ? '0x${controller.inputDecoratorBackgroundAlphaLight?.toRadixString(16).toUpperCase()}'
         : 'Default 0x'
             '${defaultBackgroundAlpha.toInt().toRadixString(16).toUpperCase()}';
     final String lightBackgroundLabelOpacity =
@@ -88,8 +87,7 @@ class TextFieldSettings extends StatelessWidget {
             ? 'Default (0xFF)' // Dark M3 default
             : 'Default (0x14)' // Dark FCS own M2 default
         // ignore: lines_longer_than_80_chars
-        : '0x${controller.inputDecoratorBackgroundAlphaDark?.toRadixString(16).toUpperCase()}' ??
-            '';
+        : '0x${controller.inputDecoratorBackgroundAlphaDark?.toRadixString(16).toUpperCase()}';
     final String darkBackgroundLabelOpacity =
         controller.inputDecoratorBackgroundAlphaDark != null
             ? (controller.inputDecoratorBackgroundAlphaDark! / 255 * 100)

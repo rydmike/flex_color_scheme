@@ -5776,18 +5776,24 @@ class FlexColorScheme with Diagnosticable {
         ? tintedBackground(
             background: colorScheme.onSurface,
             blend: FlexSubThemes.schemeColor(
-                subTheme.sliderBaseSchemeColor ?? SchemeColor.primary,
+                subTheme.sliderIndicatorSchemeColor ??
+                    subTheme.sliderBaseSchemeColor ??
+                    SchemeColor.primary,
                 colorScheme),
             brightness: colorScheme.brightness)
-        : useMaterial3
+        : subTheme.sliderIndicatorSchemeColor != null ||
+                subTheme.sliderBaseSchemeColor != null
             ? FlexSubThemes.schemeColor(
-                subTheme.sliderBaseSchemeColor ?? SchemeColor.primary,
+                subTheme.sliderIndicatorSchemeColor ??
+                    subTheme.sliderBaseSchemeColor ??
+                    SchemeColor.primary,
                 colorScheme)
             : null;
     final Color sliderValueStyleOnColor =
         onColor((sliderValueIndicator ?? colorScheme.primary).withAlpha(0xFF));
     final TextStyle? sliderValueStyle =
-        subTheme.sliderValueTinted || useMaterial3
+        subTheme.sliderIndicatorSchemeColor != null ||
+                subTheme.sliderBaseSchemeColor != null
             ? effectiveTextTheme.labelMedium!
                 .copyWith(color: sliderValueStyleOnColor)
             : null;
