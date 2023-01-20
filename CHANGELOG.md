@@ -105,7 +105,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
 - Maybe add new MenuBar theme.
 - TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
-- Maybe add Drawer theme. Added, still WIP.
+- Maybe add Drawer theme. Added, still WIP. Uses Dialogs props in playground to test it.
 - Maybe add new NavigationDrawer theme.  Added, still WIP.
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
 - Maybe consider tuning the tinted disabled color, in light mode at least.
