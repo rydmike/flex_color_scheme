@@ -9,8 +9,8 @@ import '../../shared/color_scheme_box.dart';
 /// and select no selection of [FlexSliderIndicatorType] which sets its
 /// value to null in parent, so we can use a selectable item as null input,
 /// to represent default value via no value definition.
-class SliderIndicatorPopupMenu extends StatelessWidget {
-  const SliderIndicatorPopupMenu({
+class SliderShowIndicatorPopupMenu extends StatelessWidget {
+  const SliderShowIndicatorPopupMenu({
     super.key,
     required this.index,
     this.onChanged,
@@ -28,36 +28,43 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
   final String labelForDefault;
   final String? popupLabelDefault;
 
-  String _explainIndicatorStyle(
-    final FlexSliderIndicatorType? style,
+  String _explainIndicatorVisibility(
+    final ShowValueIndicator? style,
     final bool useMaterial3,
   ) {
     switch (style) {
-      case FlexSliderIndicatorType.rectangular:
-        return 'Rounded rectangular indicator';
-      case FlexSliderIndicatorType.drop:
-        return 'Inverted water drop';
+      case ShowValueIndicator.onlyForDiscrete:
+        return 'Only for discrete';
+      case ShowValueIndicator.onlyForContinuous:
+        return 'Only for continuous';
+      case ShowValueIndicator.always:
+        return 'Show on all types';
+      case ShowValueIndicator.never:
+        return 'Never show';
       case null:
-        {
-          if (useMaterial3) {
-            return 'Default M3 (Inverted water drop)';
-          }
-          return 'Default M2 (Rounded rectangular indicator)';
-        }
+        return 'Default (Only for discrete)';
     }
   }
 
   static const List<Widget> _indicatorWidgets = <Widget>[
     Tooltip(
-      message: 'Rounded rectangular indicator',
-      child: Icon(Icons.assistant),
+      message: 'Discrete',
+      child: Icon(Icons.linear_scale),
     ),
     Tooltip(
-      message: 'Inverted water drop',
-      child: Icon(Icons.pin_drop),
+      message: 'Continuous',
+      child: Icon(Icons.horizontal_rule),
     ),
     Tooltip(
-      message: 'Default indicator',
+      message: 'All',
+      child: Icon(Icons.done_outline),
+    ),
+    Tooltip(
+      message: 'Never',
+      child: Icon(Icons.block),
+    ),
+    Tooltip(
+      message: 'Default (discrete)',
       child: Icon(Icons.texture_outlined),
     ),
   ];
@@ -71,17 +78,17 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
     final bool useDefault =
-        index < 0 || index >= FlexSliderIndicatorType.values.length;
+        index < 0 || index >= ShowValueIndicator.values.length;
     final String styleName = !useDefault
-        ? _explainIndicatorStyle(FlexSliderIndicatorType.values[index], useM3)
-        : _explainIndicatorStyle(null, useM3);
+        ? _explainIndicatorVisibility(ShowValueIndicator.values[index], useM3)
+        : _explainIndicatorVisibility(null, useM3);
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
     final IconThemeData unSelectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
-      initialValue: useDefault ? FlexSliderIndicatorType.values.length : index,
+      initialValue: useDefault ? ShowValueIndicator.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -89,12 +96,11 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
         // value will cause controller for a FlexAppBarStyle to be set to
         // "null", we need to be able to do that to input "null" property
         // value to FlexAppBarStyle configs.
-        onChanged
-            ?.call(index >= FlexSliderIndicatorType.values.length ? -1 : index);
+        onChanged?.call(index >= ShowValueIndicator.values.length ? -1 : index);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i <= FlexSliderIndicatorType.values.length; i++)
+        for (int i = 0; i <= ShowValueIndicator.values.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
@@ -102,7 +108,7 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: index == i ||
-                      (index < 0 && i == FlexSliderIndicatorType.values.length)
+                      (index < 0 && i == ShowValueIndicator.values.length)
                   ? IconTheme(
                       data: selectedIconTheme,
                       child: ColorSchemeBox(
@@ -119,11 +125,10 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
                         child: _indicatorWidgets[i],
                       ),
                     ),
-              title: i >= FlexSliderIndicatorType.values.length
+              title: i >= ShowValueIndicator.values.length
                   // If we reached max length make default label.
                   ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
-                  : Text(FlexSliderIndicatorType.values[i].name,
-                      style: txtStyle),
+                  : Text(ShowValueIndicator.values[i].name, style: txtStyle),
             ),
           )
       ],
@@ -147,7 +152,7 @@ class SliderIndicatorPopupMenu extends StatelessWidget {
               backgroundColor: scheme.primary,
               borderColor: Colors.transparent,
               child: _indicatorWidgets[
-                  useDefault ? FlexSliderIndicatorType.values.length : index],
+                  useDefault ? ShowValueIndicator.values.length : index],
             ),
           ),
         ),

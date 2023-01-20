@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'slider_indicator_popup_menu.dart';
+import 'slider_show_indicator_popup_menu.dart';
 
 class SliderSettings extends StatelessWidget {
   const SliderSettings(this.controller, {super.key});
@@ -85,6 +86,21 @@ class SliderSettings extends StatelessWidget {
                   } else {
                     controller.setSliderValueIndicatorType(
                         FlexSliderIndicatorType.values[index]);
+                  }
+                }
+              : null,
+        ),
+        SliderShowIndicatorPopupMenu(
+          title: const Text('Slider value indicator visibility'),
+          labelForDefault: 'Default (Only for discrete)',
+          index: controller.sliderShowValueIndicator?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= ShowValueIndicator.values.length) {
+                    controller.setSliderShowValueIndicator(null);
+                  } else {
+                    controller.setSliderShowValueIndicator(
+                        ShowValueIndicator.values[index]);
                   }
                 }
               : null,
