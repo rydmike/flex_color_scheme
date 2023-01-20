@@ -395,9 +395,22 @@ String generateThemeDartCode(ThemeController controller) {
   final String sliderBaseSchemeColor = controller.sliderBaseSchemeColor == null
       ? ''
       : '    sliderBaseSchemeColor: ${controller.sliderBaseSchemeColor},\n';
+  final String sliderIndicatorSchemeColor = controller
+              .sliderIndicatorSchemeColor ==
+          null
+      ? ''
+      : '    sliderIndicatorSchemeColor: ${controller.sliderIndicatorSchemeColor},\n';
   final String sliderValueTinted = controller.sliderValueTinted == false
       ? ''
       : '    sliderValueTinted: ${controller.sliderValueTinted},\n';
+  final String sliderValueIndicatorType = controller.sliderValueIndicatorType ==
+          null
+      ? ''
+      : '    sliderValueIndicatorType: ${controller.sliderValueIndicatorType},\n';
+  final String sliderShowValueIndicator = controller.sliderShowValueIndicator ==
+          null
+      ? ''
+      : '    sliderShowValueIndicator: ${controller.sliderShowValueIndicator},\n';
   final String sliderTrackHeight = controller.sliderTrackHeight == null
       ? ''
       : '    sliderTrackHeight: ${controller.sliderTrackHeight},\n';
@@ -852,7 +865,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
+          '$sliderValueIndicatorType'
+          '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorLight'
@@ -996,7 +1012,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
+          '$sliderValueIndicatorType'
+          '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorDark'

@@ -29,9 +29,7 @@ class SliderSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Slider base color'),
-          labelForDefault: controller.useMaterial3
-              ? 'default (primary)'
-              : 'default (primary)',
+          labelForDefault: 'default (primary)',
           index: controller.sliderBaseSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ### Work in progress!
 
-**Jan 19, 2023**
+**Jan 20, 2023**
 
 This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also quite significant.
 
@@ -91,6 +91,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added setting for scrolled under elevation of `AppBar` to panel **AppBar**.
 - Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
+- Added settings for `Slider` value indicator color, visibility and type.
 
 **FIX**
 
@@ -111,6 +112,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Maybe add a "set to M3 design" button and dialog to e.g. NavigationBar and NavigationRail. TextField has this feature.
 - Maybe to `TabBar` add unselected color, undimmed not selected, divider under it. Make it respect FCS hover and splash settings.
 
+- MUST DO: Slider add info about new props.
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: Review M3 Playground component colors presentations, add new buttons and other widgets.
 - MUST DO: Review and fix test coverage.
