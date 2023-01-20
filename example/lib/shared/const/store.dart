@@ -950,10 +950,29 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSliderBaseSchemeColor = null;
 
+  // Key used to read and save the sliderIndicatorSchemeColor value.
+  static const String keySliderIndicatorSchemeColor =
+      'sliderIndicatorSchemeColor';
+  // Default value for the sliderIndicatorSchemeColor, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSliderIndicatorSchemeColor = null;
+
   // Key used to read and save the sliderValueTinted value.
   static const String keySliderValueTinted = 'sliderValueTinted';
   // Default value for the sliderValueTinted, also to reset settings.
   static const bool defaultSliderValueTinted = false;
+
+  // Key used to read and save the sliderValueIndicatorType value.
+  static const String keySliderValueIndicatorType = 'sliderValueIndicatorType';
+  // Default value for the sliderValueIndicatorType, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexSliderIndicatorType? defaultSliderValueIndicatorType = null;
+
+  // Key used to read and save the sliderShowValueIndicator value.
+  static const String keySliderShowValueIndicator = 'sliderShowValueIndicator';
+  // Default value for the sliderShowValueIndicator, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const ShowValueIndicator? defaultSliderShowValueIndicator = null;
 
   // Key used to read and save the sliderTrackHeight value.
   static const String keySliderTrackHeight = 'sliderTrackHeight';

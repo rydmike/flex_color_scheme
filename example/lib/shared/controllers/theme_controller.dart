@@ -458,8 +458,17 @@ class ThemeController with ChangeNotifier {
     // Slider SETTINGS.
     _sliderBaseSchemeColor = await _themeService.load(
         Store.keySliderBaseSchemeColor, Store.defaultSliderBaseSchemeColor);
+    _sliderIndicatorSchemeColor = await _themeService.load(
+        Store.keySliderIndicatorSchemeColor,
+        Store.defaultSliderIndicatorSchemeColor);
     _sliderValueTinted = await _themeService.load(
         Store.keySliderValueTinted, Store.defaultSliderValueTinted);
+    _sliderValueIndicatorType = await _themeService.load(
+        Store.keySliderValueIndicatorType,
+        Store.defaultSliderValueIndicatorType);
+    _sliderShowValueIndicator = await _themeService.load(
+        Store.keySliderShowValueIndicator,
+        Store.defaultSliderShowValueIndicator);
     _sliderTrackHeight = await _themeService.load(
         Store.keySliderTrackHeight, Store.defaultSliderTrackHeight);
     //
@@ -802,7 +811,11 @@ class ThemeController with ChangeNotifier {
     //
     // Slider SETTINGS.
     setSliderBaseSchemeColor(Store.defaultSliderBaseSchemeColor, false);
+    setSliderIndicatorSchemeColor(
+        Store.defaultSliderIndicatorSchemeColor, false);
     setSliderValueTinted(Store.defaultSliderValueTinted, false);
+    setSliderValueIndicatorType(Store.defaultSliderValueIndicatorType, false);
+    setSliderShowValueIndicator(Store.defaultSliderShowValueIndicator, false);
     setSliderTrackHeight(Store.defaultSliderTrackHeight, false);
     //
     // Fab SETTINGS.
@@ -2470,6 +2483,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySliderBaseSchemeColor, value));
   }
 
+  late SchemeColor? _sliderIndicatorSchemeColor;
+  SchemeColor? get sliderIndicatorSchemeColor => _sliderIndicatorSchemeColor;
+  void setSliderIndicatorSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _sliderIndicatorSchemeColor) return;
+    _sliderIndicatorSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderIndicatorSchemeColor, value));
+  }
+
   late bool _sliderValueTinted;
   bool get sliderValueTinted => _sliderValueTinted;
   void setSliderValueTinted(bool? value, [bool notify = true]) {
@@ -2478,6 +2500,27 @@ class ThemeController with ChangeNotifier {
     _sliderValueTinted = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySliderValueTinted, value));
+  }
+
+  late FlexSliderIndicatorType? _sliderValueIndicatorType;
+  FlexSliderIndicatorType? get sliderValueIndicatorType =>
+      _sliderValueIndicatorType;
+  void setSliderValueIndicatorType(FlexSliderIndicatorType? value,
+      [bool notify = true]) {
+    if (value == _sliderValueIndicatorType) return;
+    _sliderValueIndicatorType = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderValueIndicatorType, value));
+  }
+
+  late ShowValueIndicator? _sliderShowValueIndicator;
+  ShowValueIndicator? get sliderShowValueIndicator => _sliderShowValueIndicator;
+  void setSliderShowValueIndicator(ShowValueIndicator? value,
+      [bool notify = true]) {
+    if (value == _sliderShowValueIndicator) return;
+    _sliderShowValueIndicator = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderShowValueIndicator, value));
   }
 
   late double? _sliderTrackHeight;

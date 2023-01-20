@@ -157,7 +157,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
             // Slider settings.
             sliderBaseSchemeColor: controller.sliderBaseSchemeColor,
+            sliderIndicatorSchemeColor: controller.sliderIndicatorSchemeColor,
             sliderValueTinted: controller.sliderValueTinted,
+            sliderValueIndicatorType: controller.sliderValueIndicatorType,
+            sliderShowValueIndicator: controller.sliderShowValueIndicator,
             sliderTrackHeight: controller.sliderTrackHeight,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
