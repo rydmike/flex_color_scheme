@@ -876,6 +876,29 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
+  // Set TextField values to Flutter M3 defaults.
+  Future<void> setTextFieldToM3() async {
+    setInputDecoratorSchemeColorLight(null, false);
+    setInputDecoratorSchemeColorDark(null, false);
+
+    setInputDecoratorBorderSchemeColorLight(null, false);
+    setInputDecoratorBorderSchemeColorDark(null, false);
+
+    setInputDecoratorBackgroundAlphaDark(null, false);
+    setInputDecoratorBackgroundAlphaLight(null, false);
+    setInputDecoratorIsFilled(true, false);
+
+    setInputDecoratorBorderRadius(null, false);
+    setInputDecoratorBorderType(FlexInputBorderType.underline, false);
+    setInputDecoratorBorderWidth(null, false);
+    setInputDecoratorFocusedBorderWidth(null, false);
+    setInputDecoratorBorderRadius(null, false);
+    setInputDecoratorFocusedHasBorder(true, false);
+    setInputDecoratorUnfocusedHasBorder(true, false);
+    setInputDecoratorUnfocusedBorderIsColored(false, false);
+    notifyListeners();
+  }
+
   // GENERAL SETTINGS.
   // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
   // ===========================================================================

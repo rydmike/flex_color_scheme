@@ -33,7 +33,8 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `SchemeColor` value `inputDecoratorBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the border color of `InputDecorator` on e.g. TextField. It controls the new parameter `borderSchemeColor` in `FlexSubThemes.inputDecorationTheme`.
 
-- Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes`.
+- Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes`. 
+- Added Material 3 styling to `TabBar` when M3 is used. Set it to `FlexTabBarStyle.flutterDefault` to get the SDK default colors as well. `TabBar` may get more configuration options in the next FCS version.
 
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
 
@@ -85,6 +86,8 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing new M3 `MenuBar` to **Widget Showcase**.
 - Added setting for focused `TextField` has a border to panel **Text Field**.   
 - Added setting for border color selection of `TextField` to panel **Text Field**.
+- Added setting for alpha control of `TextField` background color to panel **Text Field**.
+- Added a button in panel **Text Field** to set `TextField` settings to M3 matching style.  
 - Added setting for scrolled under elevation of `AppBar` to panel **AppBar**.
 - Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
@@ -98,17 +101,16 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 - Maybe add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
-- Maybe add harmonized theme for menu used by menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
+- Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
 - Maybe add new MenuBar theme.
 - TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
 - Maybe add Drawer theme. Added, still WIP.
 - Maybe add new NavigationDrawer theme.  Added, still WIP.
-- Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and Colors.
+- Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
 - Maybe consider tuning the tinted disabled color, in light mode at least.
-- Maybe add a "set to M3 design" button and dialog to some components, like NavigationBar, TabBar, TextField.
+- Maybe add a "set to M3 design" button and dialog to e.g. NavigationBar and NavigationRail. TextField has this feature.
+- Maybe to `TabBar` add unselected color, undimmed not selected, divider under it. Make it respect FCS hover and splash settings.
 
-- MUST DO: Add/Review M3 support to `TabBar`. Basic support added, but also add unselected color, undimmed not selected. Divider under it. Make it respect FCS hover and splash settings.
-- MUST DO: Add alpha slider to `TextField` background color, it is fixed value now.
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: Review M3 Playground component colors presentations, add new buttons and other widgets.
 - MUST DO: Review and fix test coverage.

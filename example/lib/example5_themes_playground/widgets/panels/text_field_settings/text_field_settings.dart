@@ -3,11 +3,24 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TextFieldSettings extends StatelessWidget {
   const TextFieldSettings(this.controller, {super.key});
   final ThemeController controller;
+
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetTextFieldToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setTextFieldToM3();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +99,23 @@ class TextFieldSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const SizedBox(height: 8),
+        ListTile(
+            enabled: useMaterial3,
+            title: const Text('Use Material 3 style TextField?'),
+            subtitle: const Text('Update settings below to match M3 default '
+                'values'),
+            trailing: FilledButton(
+              onPressed: useMaterial3
+                  ? () async {
+                      await _handleSetToM3(context);
+                    }
+                  : null,
+              child: const Text('Set to M3'),
+            ),
+            onTap: () async {
+              await _handleSetToM3(context);
+            }),
         const Padding(
           padding: EdgeInsets.all(16),
           child: TextInputField(),
