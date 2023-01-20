@@ -181,6 +181,8 @@ enum SchemeColor {
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
 /// * [DialogTheme] for [Dialog] via [dialogTheme].
+/// * [DrawerThemeData] for [Drawer] via [drawerTheme].
+/// * [DropdownMenuThemeData] for [DropDownMenu] via [dropdownMenuTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via [elevatedButtonTheme].
 /// * [FilledButtonThemeData] for [FilledButton] via
 ///   [FlexSubThemes.filledButtonTheme].
@@ -188,6 +190,8 @@ enum SchemeColor {
 ///   [floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
+/// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+///   [navigationDrawerTheme].
 /// * [NavigationRailThemeData] for [NavigationRail] via [navigationRailTheme].
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].

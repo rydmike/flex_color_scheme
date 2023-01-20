@@ -264,7 +264,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetElevation = controller.bottomSheetElevation != null
       ? '    bottomSheetElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
       : '';
-  final String bottomSheetModalElevation = controller.bottomSheetElevation !=
+  final String bottomSheetModalElevation = controller
+              .bottomSheetModalElevation !=
           null
       ? '    bottomSheetModalElevation: ${controller.bottomSheetModalElevation!.toStringAsFixed(1)},\n'
       : '';

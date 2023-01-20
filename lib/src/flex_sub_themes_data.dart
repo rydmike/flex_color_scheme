@@ -68,6 +68,9 @@ import 'flex_sub_themes.dart';
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
 /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+/// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+/// * [DropdownMenuThemeData] for [DropDownMenu] via
+///   [FlexSubThemes.dropdownMenuTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via
 ///   [FlexSubThemes.elevatedButtonTheme].
 /// * [FilledButtonThemeData] for [FilledButton] via
@@ -80,6 +83,8 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.listTileTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via
 ///   [FlexSubThemes.navigationBarTheme].
+/// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+///   [FlexSubThemes.navigationDrawerTheme].
 /// * [NavigationRailThemeData] for [NavigationRail] via
 ///   [FlexSubThemes.navigationRailTheme].
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via
@@ -223,6 +228,10 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
+    //
+    this.drawerRadius,
+    this.drawerElevation,
+    this.drawerBackgroundSchemeColor,
     //
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
@@ -1421,13 +1430,13 @@ class FlexSubThemesData with Diagnosticable {
   /// Since FlexColorScheme also sets [ThemeData.dialogBackgroundColor] to
   /// [ColorScheme.surface], there is no difference when using FlexColorscheme
   /// and setting [dialogBackgroundSchemeColor] to null versus keeping it
-  /// at its default value SchemeColor.surface]. This is valid as long as
+  /// at its default value [SchemeColor.surface]. This is valid as long as
   /// [ThemeData.dialogBackgroundColor] exists, but it will be in deprecated,
   /// see issue https://github.com/flutter/flutter/issues/91772.
   /// After that there will be a difference.
   ///
   /// Using surface color as default instead of background,
-  /// ensures that dark mode dialogs will get elevation overlay
+  /// ensures that dark mode dialogs will get elevation overlay in Material 2
   /// color, also when surface and background color are not equal.
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
@@ -1522,6 +1531,27 @@ class FlexSubThemesData with Diagnosticable {
   /// override that offers more quick config options by allowing picking
   /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
+
+  /// Border radius value for [Drawer], also used by [NavigationDrawer].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDrawerRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
+  final double? drawerRadius;
+
+  /// Elevation of [Drawer] and [NavigationDrawer].
+  ///
+  /// If not defined, defaults to Flutter default, M2 uses 16 and M3 1.
+  final double? drawerElevation;
+
+  /// Defines which [Theme] based [ColorScheme] based color [Drawer] uses as
+  /// as its background color.
+  ///
+  /// This will affect both the background in [Drawer] and [NavigationDrawer].
+  ///
+  /// If undefined, defaults to [SchemeColor.surface] in M3 and to
+  /// [SchemeColor.background] in M2.
+  final SchemeColor? drawerBackgroundSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
   /// [BottomSheet] uses as background color when presented as a none modal
@@ -2307,6 +2337,10 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
     //
+    final double? drawerRadius,
+    final double? drawerElevation,
+    final SchemeColor? drawerBackgroundSchemeColor,
+    //
     final SchemeColor? bottomSheetBackgroundColor,
     final SchemeColor? bottomSheetModalBackgroundColor,
     final double? bottomSheetRadius,
@@ -2537,6 +2571,11 @@ class FlexSubThemesData with Diagnosticable {
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
+      //
+      drawerRadius: drawerRadius ?? this.drawerRadius,
+      drawerElevation: drawerElevation ?? this.drawerElevation,
+      drawerBackgroundSchemeColor:
+          drawerBackgroundSchemeColor ?? this.drawerBackgroundSchemeColor,
       //
       bottomSheetBackgroundColor:
           bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
@@ -2814,6 +2853,10 @@ class FlexSubThemesData with Diagnosticable {
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         //
+        other.drawerRadius == drawerRadius &&
+        other.drawerElevation == drawerElevation &&
+        other.drawerBackgroundSchemeColor == drawerBackgroundSchemeColor &&
+        //
         other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
         other.bottomSheetModalBackgroundColor ==
             bottomSheetModalBackgroundColor &&
@@ -3037,6 +3080,10 @@ class FlexSubThemesData with Diagnosticable {
         //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
+        //
+        drawerRadius,
+        drawerElevation,
+        drawerBackgroundSchemeColor,
         //
         bottomSheetBackgroundColor,
         bottomSheetModalBackgroundColor,
@@ -3302,6 +3349,12 @@ class FlexSubThemesData with Diagnosticable {
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    //
+    properties.add(DiagnosticsProperty<double>('drawerRadius', drawerRadius));
+    properties
+        .add(DiagnosticsProperty<double>('drawerElevation', drawerElevation));
+    properties.add(EnumProperty<SchemeColor>(
+        'drawerBackgroundSchemeColor', drawerBackgroundSchemeColor));
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
