@@ -405,7 +405,10 @@ class FlexSubThemes {
     }
   }
 
-  /// An opinionated [DrawerThemeData] theme for the [Drawer]
+  /// An opinionated [DrawerThemeData] theme for the [Drawer].
+  ///
+  /// The [NavigationDrawer] also uses these value for its drawer parts. Its
+  /// menu part has an own theme in Flutter SDK.
   static DrawerThemeData drawerTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -413,40 +416,39 @@ class FlexSubThemes {
     /// Selects which color from the passed in [colorScheme] to use as
     /// [Drawer] background color.
     ///
-    ///
-    ///
-    /// If not defined, defaults to [SchemeColor.background] in M2. Flutter
-    /// SDK uses surface color as default background, but FCS keeps as
-    /// background color.
+    /// If not defined, defaults to [SchemeColor.surface]. Flutter
+    /// SDK uses surface color as default in M3 and background in M3.
+    /// FCS keeps uses surface in both modes..
     final SchemeColor? backgroundSchemeColor,
 
-    /// Corner radius of the [Drawer].
+    /// Corner radius of the [Drawer]'s visible edge.
     ///
-    /// If not defined, defaults to [kDrawerRadius] 16 dp,
-    /// based on M3 Specification
+    /// If not defined, defaults to [kDrawerRadius] 16 dp in both M2 and M3
+    /// mode, based on M3 Specification
     /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
     /// Drawer elevation.
     ///
-    /// If not defined, defaults to default value for for M2 mode (16) and in
-    /// M3 (1) via SDK defaults.
+    /// If not defined, defaults to Flutter default values, in M2 mode (16)
+    /// and in M3 (1) via SDK defaults.
     final double? elevation,
 
-    /// Overrides the default value of [Drawer.shape] for a end drawer.
-    final ShapeBorder? endShape,
-
-    /// Overrides the default value of [Drawer.width].
+    /// Themes the default width of the [Drawer].
+    ///
+    /// Currently not available as a property in [FlexSubThemesData], may be
+    /// added later.
     final double? width,
 
-    /// You would typically pass in `Directionality.of(context)`].void
-    ///
-    /// Default to LTR if not defined.
-    final TextDirection? direction,
+    // TODO(rydmike): Confirm this is not needed, resolve happens later.
+    // /// You would typically pass in `Directionality.of(context)`].
+    // ///
+    // /// Defaults to LTR if not defined.
+    // final TextDirection? direction,
   }) {
     // Get selected background color, defaults to primary.
-    final Color backgroundColor = schemeColor(
-        backgroundSchemeColor ?? SchemeColor.background, colorScheme);
+    final Color backgroundColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
     return DrawerThemeData(
       backgroundColor: backgroundColor,
@@ -517,9 +519,9 @@ class FlexSubThemes {
   /// function, this one is only a sub-set of the original and does not do or
   /// contain any feature shortcuts.
   ///
-  /// The [FlexColorScheme.toTheme] needs some the properties, like fore-
+  /// The [FlexColorScheme.toTheme] needs some of the properties, like fore-
   /// and background colors used here, for other component theme definitions as
-  /// well and has already computed them once, so they are reused here.
+  /// well, and has already computed them once, so they are reused here.
   ///
   /// At the moment the [FlexSubThemes.appBarTheme] is mostly included to
   /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]

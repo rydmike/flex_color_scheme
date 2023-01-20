@@ -287,8 +287,16 @@ class ThemeController with ChangeNotifier {
         Store.keyTabBarItemSchemeColorDark,
         Store.defaultTabBarItemSchemeColorDark);
     //
-    // BottomSheet SETTINGS.
+    // Drawer SETTINGS.
+    _drawerBorderRadius = await _themeService.load(
+        Store.keyDrawerBorderRadius, Store.defaultDrawerBorderRadius);
+    _drawerElevation = await _themeService.load(
+        Store.keyDrawerElevation, Store.defaultDrawerElevation);
+    _drawerBackgroundSchemeColor = await _themeService.load(
+        Store.keyDrawerBackgroundSchemeColor,
+        Store.defaultDrawerBackgroundSchemeColor);
     //
+    // BottomSheet SETTINGS.
     _bottomSheetSchemeColor = await _themeService.load(
         Store.keyBottomSheetSchemeColor, Store.defaultBottomSheetSchemeColor);
     _bottomSheetElevation = await _themeService.load(
@@ -510,6 +518,8 @@ class ThemeController with ChangeNotifier {
     // Card SETTINGS.
     _cardBorderRadius = await _themeService.load(
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
+    //
+    // Dialog SETTINGS.
     _dialogBackgroundSchemeColor = await _themeService.load(
         Store.keyDialogBackgroundSchemeColor,
         Store.defaultDialogBackgroundSchemeColor);
@@ -709,6 +719,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultTabBarItemSchemeColorLight, false);
     setTabBarItemSchemeColorDark(Store.defaultTabBarItemSchemeColorDark, false);
     //
+    // Drawer SETTINGS.
+    setDrawerBorderRadius(Store.defaultDrawerBorderRadius, false);
+    setDrawerElevation(Store.defaultDrawerElevation, false);
+    setDrawerBackgroundSchemeColor(
+        Store.defaultDrawerBackgroundSchemeColor, false);
+    //
     // BottomSheet SETTINGS.
     setBottomSheetSchemeColor(Store.defaultBottomSheetSchemeColor, false);
     setBottomSheetElevation(Store.defaultBottomSheetElevation, false);
@@ -841,6 +857,8 @@ class ThemeController with ChangeNotifier {
     //
     // Card SETTINGS.
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
+    //
+    // Dialog SETTINGS.
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
@@ -1873,6 +1891,37 @@ class ThemeController with ChangeNotifier {
     _tabBarItemSchemeColorDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTabBarItemSchemeColorDark, value));
+  }
+
+  // Drawer SETTINGS.
+  // ===========================================================================
+
+  late double? _drawerBorderRadius;
+  double? get drawerBorderRadius => _drawerBorderRadius;
+  void setDrawerBorderRadius(double? value, [bool notify = true]) {
+    if (value == _drawerBorderRadius) return;
+    _drawerBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerBorderRadius, value));
+  }
+
+  late double? _drawerElevation;
+  double? get drawerElevation => _drawerElevation;
+  void setDrawerElevation(double? value, [bool notify = true]) {
+    if (value == _drawerElevation) return;
+    _drawerElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerElevation, value));
+  }
+
+  late SchemeColor? _drawerBackgroundSchemeColor;
+  SchemeColor? get drawerBackgroundSchemeColor => _drawerBackgroundSchemeColor;
+  void setDrawerBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _drawerBackgroundSchemeColor) return;
+    _drawerBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerBackgroundSchemeColor, value));
   }
 
   // BottomSheet SETTINGS.

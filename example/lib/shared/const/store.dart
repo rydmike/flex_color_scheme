@@ -551,6 +551,28 @@ class Store {
   // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
+  // Drawer SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the drawerBorderRadius value.
+  static const String keyDrawerBorderRadius = 'drawerBorderRadius';
+  // Default value for the drawerBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerBorderRadius = null;
+
+  // Key used to read and save the drawerElevation value.
+  static const String keyDrawerElevation = 'drawerElevation';
+  // Default value for the drawerElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerElevation = null;
+
+  // Key used to read and save the drawerBackgroundSchemeColor value.
+  static const String keyDrawerBackgroundSchemeColor =
+      'drawerBackgroundSchemeColor';
+  // Default value for the drawerBackgroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerBackgroundSchemeColor = null;
+
   // BottomSheet SETTINGS.
   // ===========================================================================
 

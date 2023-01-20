@@ -2209,6 +2209,61 @@ class MenuBarShowcase extends StatelessWidget {
   }
 }
 
+class DrawerShowcase extends StatelessWidget {
+  const DrawerShowcase({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: Text(
+            'Drawer',
+            style: denseHeader,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            'Default SDK background color in M3 is colorScheme.surface, '
+            'with elevation tint and no shadow. In M2 it has shadow and color '
+            'theme.canvasColor, that is set to colorScheme.background.',
+            style: denseBody,
+          ),
+        ),
+        SizedBox(
+          height: 280,
+          child: Row(
+            children: <Widget>[
+              MediaQuery.removePadding(
+                context: context,
+                removeBottom: true,
+                removeTop: true,
+                child: const Drawer(
+                  child: Center(
+                    child: Text('Drawer'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class NavigationDrawerShowcase extends StatefulWidget {
   const NavigationDrawerShowcase({
     super.key,
@@ -2284,61 +2339,6 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
                       label: Text('Logout'),
                     ),
                   ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class DrawerShowcase extends StatelessWidget {
-  const DrawerShowcase({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Text(
-            'Drawer',
-            style: denseHeader,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
-            'Default SDK background color in M3 is colorScheme.surface, '
-            'with elevation tint and now shadow. In M2 it has shadow and color '
-            'theme.canvasColor that typical is set to colorScheme.background.',
-            style: denseBody,
-          ),
-        ),
-        SizedBox(
-          height: 280,
-          child: Row(
-            children: <Widget>[
-              MediaQuery.removePadding(
-                context: context,
-                removeBottom: true,
-                removeTop: true,
-                child: const Drawer(
-                  child: Center(
-                    child: Text('Drawer'),
-                  ),
                 ),
               ),
             ],

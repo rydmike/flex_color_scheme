@@ -222,6 +222,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
+            // Drawer Settings.
+            drawerRadius: controller.drawerBorderRadius,
+            drawerElevation: controller.drawerElevation,
+            drawerBackgroundSchemeColor: controller.drawerBackgroundSchemeColor,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetModalBackgroundColor:

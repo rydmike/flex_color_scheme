@@ -624,6 +624,20 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorDark},\n'
       : '';
   //
+  // Drawers setup CODE
+  //
+  final String drawerBorderRadius = controller.drawerBorderRadius != null
+      ? '    drawerRadius: ${controller.drawerBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerElevation = controller.drawerElevation != null
+      ? '    drawerElevation: ${controller.drawerElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerBackgroundSchemeColor = controller
+              .drawerBackgroundSchemeColor !=
+          null
+      ? '    drawerBackgroundSchemeColor: ${controller.drawerBackgroundSchemeColor},\n'
+      : '';
+  //
   // BottomNavigationBar setup CODE
   //
   final String bottomNavigationBarSelectedLabelSchemeColor = controller
@@ -920,6 +934,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
           //
+          '$drawerBorderRadius'
+          '$drawerElevation'
+          '$drawerBackgroundSchemeColor'
+          //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'
           '$bottomSheetRadius'
@@ -1066,6 +1084,10 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'
+          //
+          '$drawerBorderRadius'
+          '$drawerElevation'
+          '$drawerBackgroundSchemeColor'
           //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'

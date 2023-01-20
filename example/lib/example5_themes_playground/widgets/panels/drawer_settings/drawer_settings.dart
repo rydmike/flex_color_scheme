@@ -15,10 +15,10 @@ class DrawerSettings extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     final String drawerRadiusDefaultLabel =
-        controller.dialogBorderRadius == null &&
+        controller.drawerBorderRadius == null &&
                 controller.defaultRadius == null
             ? 'default 16'
-            : controller.dialogBorderRadius == null &&
+            : controller.drawerBorderRadius == null &&
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
@@ -26,28 +26,26 @@ class DrawerSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Themed drawer'),
+          title: Text('Themed Drawer and NavigationDrawer'),
           subtitle: Text('Flutter SDK default background is '
               'colorScheme.background for Drawer in M2, but '
-              'colorScheme.surface in M2. FlexColorScheme '
-              'sub-themes use background as default for all drawer types.\n\n'
-              'You can theme them to a shared color scheme based color too, '
-              'with M3 colors, surface and surface variant are options.'),
+              'colorScheme.surface in M3. FlexColorScheme component '
+              'sub-themes use surface as default for both modes.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
-              ? 'default (background)'
+              ? 'default (surface)'
               : useMaterial3
                   ? 'default (surface)'
-                  : ' default (background)',
-          index: controller.dialogBackgroundSchemeColor?.index ?? -1,
+                  : 'default (background)',
+          index: controller.drawerBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDialogBackgroundSchemeColor(null);
+                    controller.setDrawerBackgroundSchemeColor(null);
                   } else {
-                    controller.setDialogBackgroundSchemeColor(
+                    controller.setDrawerBackgroundSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }
@@ -61,19 +59,19 @@ class DrawerSettings extends StatelessWidget {
             max: 50,
             divisions: 51,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.dialogBorderRadius == null ||
-                        (controller.dialogBorderRadius ?? -1) < 0
+                ? controller.drawerBorderRadius == null ||
+                        (controller.drawerBorderRadius ?? -1) < 0
                     ? drawerRadiusDefaultLabel
-                    : (controller.dialogBorderRadius?.toStringAsFixed(0) ?? '')
+                    : (controller.drawerBorderRadius?.toStringAsFixed(0) ?? '')
                 : controller.useMaterial3
                     ? 'default 16'
                     : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.dialogBorderRadius ?? -1
+                ? controller.drawerBorderRadius ?? -1
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setDialogBorderRadius(
+                    controller.setDrawerBorderRadius(
                         value < 0 ? null : value.roundToDouble());
                   }
                 : null,
@@ -89,10 +87,10 @@ class DrawerSettings extends StatelessWidget {
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.dialogBorderRadius == null ||
-                              (controller.dialogBorderRadius ?? -1) < 0
+                      ? controller.drawerBorderRadius == null ||
+                              (controller.drawerBorderRadius ?? -1) < 0
                           ? drawerRadiusDefaultLabel
-                          : (controller.dialogBorderRadius
+                          : (controller.drawerBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
                       : controller.useMaterial3
@@ -115,19 +113,21 @@ class DrawerSettings extends StatelessWidget {
             max: 20,
             divisions: 21,
             label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.dialogElevation == null ||
-                        (controller.dialogElevation ?? -1) < 0
-                    ? 'default 1'
-                    : (controller.dialogElevation?.toStringAsFixed(0) ?? '')
+                ? controller.drawerElevation == null ||
+                        (controller.drawerElevation ?? -1) < 0
+                    ? useMaterial3
+                        ? 'default 1'
+                        : 'default 16'
+                    : (controller.drawerElevation?.toStringAsFixed(0) ?? '')
                 : useMaterial3
                     ? 'default 1'
                     : 'default 16',
             value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.dialogElevation ?? -1
+                ? controller.drawerElevation ?? -1
                 : -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setDialogElevation(
+                    controller.setDrawerElevation(
                         value < 0 ? null : value.roundToDouble());
                   }
                 : null,
@@ -143,10 +143,12 @@ class DrawerSettings extends StatelessWidget {
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.dialogElevation == null ||
-                              (controller.dialogElevation ?? -1) < 0
-                          ? 'default 1'
-                          : (controller.dialogElevation?.toStringAsFixed(0) ??
+                      ? controller.drawerElevation == null ||
+                              (controller.drawerElevation ?? -1) < 0
+                          ? useMaterial3
+                              ? 'default 1'
+                              : 'default 16'
+                          : (controller.drawerElevation?.toStringAsFixed(0) ??
                               '')
                       : useMaterial3
                           ? 'default 1'

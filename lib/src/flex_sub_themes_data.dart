@@ -1541,7 +1541,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [Drawer] and [NavigationDrawer].
   ///
-  /// If not defined, defaults to Flutter default, M2 uses 16 and M3 1.
+  /// If not defined, defaults to Flutter default, M2 uses 16 and M3 uses 1.
   final double? drawerElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color [Drawer] uses as

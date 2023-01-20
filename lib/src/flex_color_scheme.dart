@@ -6387,9 +6387,10 @@ class FlexColorScheme with Diagnosticable {
       drawerTheme: useSubThemes
           ? FlexSubThemes.drawerTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
-              elevation: subTheme.dialogElevation,
+              backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
+              radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.drawerElevation,
+              // TODO(rydmike): check it is not needed, resolve happens later?
               // directionality: Directionality.of(context),
             )
           : null,
