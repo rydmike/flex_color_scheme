@@ -1333,7 +1333,7 @@ class _TextInputFieldState extends State<TextInputField> {
             });
           },
           key: const Key('TextField2'),
-          controller: _textController1,
+          controller: _textController2,
           decoration: InputDecoration(
             filled: true,
             hintText: 'Hint: Write something...',

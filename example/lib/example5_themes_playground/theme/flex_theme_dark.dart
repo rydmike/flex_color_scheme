@@ -168,6 +168,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
+            inputDecoratorBackgroundAlpha:
+                controller.inputDecoratorBackgroundAlphaDark,
             inputDecoratorFocusedHasBorder:
                 controller.inputDecoratorFocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:

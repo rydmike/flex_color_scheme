@@ -213,6 +213,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.inputDecoratorBorderSchemeColorLight,
             // Text input field uses a themed fill color.
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
+            inputDecoratorBackgroundAlpha:
+                controller.inputDecoratorBackgroundAlphaLight,
             // Underline or outline border type?
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,

@@ -211,6 +211,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorBorderSchemeColorDark);
     _inputDecoratorIsFilled = await _themeService.load(
         Store.keyInputDecoratorIsFilled, Store.defaultInputDecoratorIsFilled);
+    _inputDecoratorBackgroundAlphaLight = await _themeService.load(
+        Store.keyInputDecoratorBackgroundAlphaLight,
+        Store.defaultInputDecoratorBackgroundAlphaLight);
+    _inputDecoratorBackgroundAlphaDark = await _themeService.load(
+        Store.keyInputDecoratorBackgroundAlphaDark,
+        Store.defaultInputDecoratorBackgroundAlphaDark);
     _inputDecoratorBorderType = await _themeService.load(
         Store.keyInputDecoratorBorderType,
         Store.defaultInputDecoratorBorderType);
@@ -649,6 +655,10 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorBorderSchemeColorDark(
         Store.defaultInputDecoratorBorderSchemeColorDark, false);
     setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
+    setInputDecoratorBackgroundAlphaLight(
+        Store.defaultInputDecoratorBackgroundAlphaLight, false);
+    setInputDecoratorBackgroundAlphaDark(
+        Store.defaultInputDecoratorBackgroundAlphaDark, false);
     setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
     setInputDecoratorBorderRadius(
         Store.defaultInputDecoratorBorderRadius, false);
@@ -1540,6 +1550,28 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorIsFilled = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyInputDecoratorIsFilled, value));
+  }
+
+  late int? _inputDecoratorBackgroundAlphaLight;
+  int? get inputDecoratorBackgroundAlphaLight =>
+      _inputDecoratorBackgroundAlphaLight;
+  void setInputDecoratorBackgroundAlphaLight(int? value, [bool notify = true]) {
+    if (value == _inputDecoratorBackgroundAlphaLight) return;
+    _inputDecoratorBackgroundAlphaLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputDecoratorBackgroundAlphaLight, value));
+  }
+
+  late int? _inputDecoratorBackgroundAlphaDark;
+  int? get inputDecoratorBackgroundAlphaDark =>
+      _inputDecoratorBackgroundAlphaDark;
+  void setInputDecoratorBackgroundAlphaDark(int? value, [bool notify = true]) {
+    if (value == _inputDecoratorBackgroundAlphaDark) return;
+    _inputDecoratorBackgroundAlphaDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputDecoratorBackgroundAlphaDark, value));
   }
 
   late FlexInputBorderType _inputDecoratorBorderType;

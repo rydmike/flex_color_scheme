@@ -11,6 +11,10 @@ class TextFieldSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool isLight = theme.brightness == Brightness.light;
+
     final String thinBorderDefaultLabel =
         controller.inputDecoratorBorderWidth == null &&
                 controller.thinBorderWidth == null
@@ -28,8 +32,6 @@ class TextFieldSettings extends StatelessWidget {
                 ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
                 : '';
 
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null &&
                 controller.defaultRadius == null
@@ -40,6 +42,46 @@ class TextFieldSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+
+    // Default decorator alpha values and labels
+    final double defaultBackgroundAlpha = useMaterial3
+        ? 0xFF // Light M3 default
+        : isLight
+            ? 0x0D // Light FCS own M2 default
+            : 0x14; // Dark FCS own M2 default
+
+    final String lightBackgroundLabel = (controller
+                        .inputDecoratorBackgroundAlphaLight ??
+                    -1) >=
+                0 &&
+            controller.useSubThemes &&
+            controller.useFlexColorScheme
+        // ignore: lines_longer_than_80_chars
+        ? '0x${controller.inputDecoratorBackgroundAlphaLight?.toRadixString(16).toUpperCase()}' ??
+            ''
+        : 'Default 0x'
+            '${defaultBackgroundAlpha.toInt().toRadixString(16).toUpperCase()}';
+    final String lightBackgroundLabelOpacity =
+        controller.inputDecoratorBackgroundAlphaLight != null
+            ? (controller.inputDecoratorBackgroundAlphaLight! / 255 * 100)
+                .toStringAsFixed(1)
+            : (defaultBackgroundAlpha / 255 * 100).toStringAsFixed(1);
+
+    final String darkBackgroundLabel = (controller
+                    .inputDecoratorBackgroundAlphaDark ??
+                -1) <
+            0
+        ? useMaterial3
+            ? 'Default (0xFF)' // Dark M3 default
+            : 'Default (0x14)' // Dark FCS own M2 default
+        // ignore: lines_longer_than_80_chars
+        : '0x${controller.inputDecoratorBackgroundAlphaDark?.toRadixString(16).toUpperCase()}' ??
+            '';
+    final String darkBackgroundLabelOpacity =
+        controller.inputDecoratorBackgroundAlphaDark != null
+            ? (controller.inputDecoratorBackgroundAlphaDark! / 255 * 100)
+                .toStringAsFixed(1)
+            : (defaultBackgroundAlpha / 255 * 100).toStringAsFixed(1);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +127,10 @@ class TextFieldSettings extends StatelessWidget {
                 : null,
           ),
         SwitchListTile(
-          title: const Text('Background has fill color'),
-          subtitle: const Text('The base color is used'),
+          title: const Text('Use base color as background fill'),
+          subtitle: const Text('TIP: If you leave this OFF, you can still '
+              'theme the fill color and turn it ON using widget level '
+              "'filled: true' property, and wise versa."),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -94,6 +138,95 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorIsFilled
               : null,
         ),
+        if (isLight) ...<Widget>[
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Light theme background alpha'),
+            subtitle: Text('Current alpha as opacity is '
+                '$lightBackgroundLabelOpacity%'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: -1,
+              max: 255,
+              divisions: 256,
+              label: lightBackgroundLabel,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.inputDecoratorBackgroundAlphaLight?.toDouble() ??
+                      -1
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputDecoratorBackgroundAlphaLight(
+                              value < 0 ? null : value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALPHA',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    lightBackgroundLabel,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Dark theme background alpha'),
+            subtitle: Text('Current alpha as opacity is '
+                '$darkBackgroundLabelOpacity%'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: -1,
+              max: 255,
+              divisions: 256,
+              label: darkBackgroundLabel,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.inputDecoratorBackgroundAlphaDark?.toDouble() ??
+                      -1
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputDecoratorBackgroundAlphaDark(
+                              value < 0 ? null : value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALPHA',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    darkBackgroundLabel,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
         SwitchListTile(
           title: const Text(
             'Border style',
@@ -378,9 +511,9 @@ class TextFieldSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('DropdownMenu'),
-          subtitle: Text('The DropDown menu has a text entry used to select '
-              'an option in a dropdown men by typing in the selection. '
-              'The text entry part matches the text input decoration theme '
+          subtitle: Text('The DropDownMenu has a text entry used to select '
+              'an option in a dropdown menu by typing in the selection. '
+              'The text entry part matches the text input decoration '
               'in FCS by default.'),
         ),
         const Padding(
@@ -389,8 +522,8 @@ class TextFieldSettings extends StatelessWidget {
         ),
         const ListTile(
           title: Text('DropdownButtonFormField'),
-          subtitle: Text('An older Material widget. Uses the text input '
-              'decoration theme'),
+          subtitle: Text('An older Material widget, also uses the text input '
+              'decoration theme.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

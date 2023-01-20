@@ -676,19 +676,26 @@ void main() {
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme),
-        equals(
+        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           InputDecorationTheme(
-            floatingLabelStyle:
+            labelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.error) &&
-                  states.contains(MaterialState.focused)) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.error)) {
-                return TextStyle(
-                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                );
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
@@ -697,7 +704,95 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: colorScheme.primary);
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            helperStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            hintStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha));
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            iconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
+            }),
+            prefixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
+            }),
+            suffixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
             }),
             filled: true,
             fillColor: colorScheme.primary.withAlpha(0x0D),
@@ -740,7 +835,7 @@ void main() {
                 width: 1,
               ),
             ),
-          ),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -751,19 +846,26 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme, unfocusedBorderIsColored: false),
-        equals(
+                colorScheme: colorScheme, unfocusedBorderIsColored: false)
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           InputDecorationTheme(
-            floatingLabelStyle:
+            labelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.error) &&
-                  states.contains(MaterialState.focused)) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.error)) {
-                return TextStyle(
-                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                );
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
@@ -772,7 +874,95 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: colorScheme.primary);
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            helperStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            hintStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha));
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            iconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
+            }),
+            prefixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
+            }),
+            suffixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.black45;
             }),
             filled: true,
             fillColor: colorScheme.primary.withAlpha(0x0D),
@@ -815,7 +1005,7 @@ void main() {
                 width: 1,
               ),
             ),
-          ),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -824,19 +1014,26 @@ void main() {
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
-        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme),
-        equals(
+        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           InputDecorationTheme(
-            floatingLabelStyle:
+            labelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.error) &&
-                  states.contains(MaterialState.focused)) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.error)) {
-                return TextStyle(
-                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                );
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
@@ -845,7 +1042,95 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: colorScheme.primary);
+              return const TextStyle(color: Colors.white60);
+            }),
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            helperStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            hintStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha));
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            iconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
+            }),
+            prefixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
+            }),
+            suffixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
             }),
             filled: true,
             fillColor: colorScheme.primary.withAlpha(0x14),
@@ -888,7 +1173,7 @@ void main() {
                 width: 1,
               ),
             ),
-          ),
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -899,72 +1184,165 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
         FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme, unfocusedBorderIsColored: false),
-        equals(
-          InputDecorationTheme(
-            floatingLabelStyle:
-                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.error) &&
-                  states.contains(MaterialState.focused)) {
+                colorScheme: colorScheme, unfocusedBorderIsColored: false)
+            .toString(minLevel: DiagnosticLevel.fine),
+        InputDecorationTheme(
+          labelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error)) {
+              if (states.contains(MaterialState.focused)) {
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.error)) {
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onErrorContainer);
+              }
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.primary);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return TextStyle(color: colorScheme.onSurfaceVariant);
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return const TextStyle(color: Colors.white60);
+          }),
+          floatingLabelStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error)) {
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.hovered)) {
                 return TextStyle(
                   color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
                 );
               }
-              if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
+              return TextStyle(color: colorScheme.error);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.primary);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return TextStyle(color: colorScheme.onSurfaceVariant);
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return const TextStyle(color: Colors.white60);
+          }),
+          helperStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
+                color: colorScheme.primary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha),
+              );
+            }
+            return const TextStyle(color: Colors.white60);
+          }),
+          hintStyle:
+              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return TextStyle(
                   color: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
-              }
-              return TextStyle(color: colorScheme.primary);
-            }),
-            filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x14),
-            hoverColor: colorScheme.primary.withAlpha(0x0D),
-            focusColor: colorScheme.primary.withAlpha(0x26),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+                      .withAlpha(kDisabledBackgroundAlpha));
+            }
+            return const TextStyle(color: Colors.white60);
+          }),
+          iconColor:
+              MaterialStateColor.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return colorScheme.primary
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return colorScheme.primary;
+            }
+            return Colors.white70;
+          }),
+          prefixIconColor:
+              MaterialStateColor.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return colorScheme.primary
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return colorScheme.primary;
+            }
+            return Colors.white70;
+          }),
+          suffixIconColor:
+              MaterialStateColor.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.error)) {
+              return colorScheme.error;
+            }
+            if (states.contains(MaterialState.disabled)) {
+              return colorScheme.primary
+                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                  .withAlpha(kDisabledBackgroundAlpha);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return colorScheme.primary;
+            }
+            return Colors.white70;
+          }),
+          filled: true,
+          fillColor: colorScheme.primary.withAlpha(0x14),
+          hoverColor: colorScheme.primary.withAlpha(0x0D),
+          focusColor: colorScheme.primary.withAlpha(0x26),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: 2,
             ),
           ),
-        ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderSide: BorderSide(
+              color: colorScheme.onSurface.withOpacity(0.38),
+              width: 1,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderSide: BorderSide(
+              color: colorScheme.primary
+                  .blendAlpha(colorScheme.onSurface, 0xAA)
+                  .withAlpha(0x31),
+              width: 1,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: 2,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            borderSide: BorderSide(
+              color: colorScheme.error.withAlpha(0xA7),
+              width: 1,
+            ),
+          ),
+        ).toString(minLevel: DiagnosticLevel.fine),
       );
     });
     test('FST1.08a-states: Does Decorator have right material states', () {
@@ -981,6 +1359,18 @@ void main() {
           equals(
             TextStyle(color: colorScheme.error),
           ));
+      // Floating label error hovered style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+            MaterialState.hovered,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+          ));
       // Floating label unfocused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
@@ -990,7 +1380,7 @@ void main() {
             MaterialState.error,
           }),
           equals(
-            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+            TextStyle(color: colorScheme.error),
           ));
       // Floating label disabled style
       expect(
@@ -1013,7 +1403,7 @@ void main() {
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{}),
           equals(
-            TextStyle(color: colorScheme.primary),
+            TextStyle(color: Colors.black.withAlpha(0x99)),
           ));
     });
     test(
@@ -1031,25 +1421,119 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            floatingLabelStyle:
+            labelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.error) &&
-                  states.contains(MaterialState.focused)) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.error)) {
-                return TextStyle(
-                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                );
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.secondary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
+                  color: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: colorScheme.primary);
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.secondary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            helperStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                      .withAlpha(kDisabledBackgroundAlpha),
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            hintStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                    color: colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                        .withAlpha(kDisabledBackgroundAlpha));
+              }
+              return TextStyle(color: Colors.black.withAlpha(0x99));
+            }),
+            iconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.secondary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.secondary;
+              }
+              return Colors.black45;
+            }),
+            prefixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.secondary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.secondary;
+              }
+              return Colors.black45;
+            }),
+            suffixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return colorScheme.secondary
+                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+                    .withAlpha(kDisabledBackgroundAlpha);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.secondary;
+              }
+              return Colors.black45;
             }),
             filled: true,
             fillColor: colorScheme.secondary.withAlpha(0x0D),
@@ -1057,8 +1541,8 @@ void main() {
             focusColor: colorScheme.secondary.withAlpha(0x26),
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary,
@@ -1067,8 +1551,8 @@ void main() {
             ),
             enabledBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary.withAlpha(0xA7),
@@ -1089,8 +1573,8 @@ void main() {
             ),
             focusedErrorBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
                 color: colorScheme.error,
@@ -1099,8 +1583,8 @@ void main() {
             ),
             errorBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
               borderSide: BorderSide(
                 color: colorScheme.error.withAlpha(0xA7),
@@ -1126,6 +1610,19 @@ void main() {
           equals(
             TextStyle(color: colorScheme.error),
           ));
+      // Floating label error hovered style
+      expect(
+          (FlexSubThemes.inputDecorationTheme(
+            colorScheme: colorScheme,
+            borderType: FlexInputBorderType.underline,
+          ).floatingLabelStyle as MaterialStateTextStyle?)!
+              .resolve(<MaterialState>{
+            MaterialState.error,
+            MaterialState.hovered,
+          }),
+          equals(
+            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+          ));
       // Floating label unfocused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
@@ -1136,7 +1633,7 @@ void main() {
             MaterialState.error,
           }),
           equals(
-            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+            TextStyle(color: colorScheme.error),
           ));
       // Floating label disabled style
       expect(
@@ -1161,7 +1658,7 @@ void main() {
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{}),
           equals(
-            TextStyle(color: colorScheme.primary),
+            TextStyle(color: Colors.black.withAlpha(0x99)),
           ));
     });
     // -------------------------------------------------------------------------

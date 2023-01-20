@@ -4239,4 +4239,91 @@ void main() {
       expect(scheme.onInverseSurface, Colors.black);
     });
   });
+  test(
+      'FCS7.107a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and a using M2 style divider '
+      'EXPECT M2 divider theme color in M3', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        useM2StyleDividerInM3: true,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    expect(
+      theme.dividerTheme.color,
+      equals(const Color(0x1F000000)),
+    );
+    expect(
+      theme.dividerColor,
+      equals(const Color(0x1F000000)),
+    );
+  });
+  test(
+      'FCS7.107b GIVEN a FlexColorScheme.dark with useMaterial3:true '
+      'and a using M2 style divider '
+      'EXPECT M2 divider theme color in M3', () {
+    final FlexColorScheme fcs = FlexColorScheme.dark(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        useM2StyleDividerInM3: true,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    expect(
+      theme.dividerTheme.color,
+      equals(const Color(0x1FFFFFFF)),
+    );
+    expect(
+      theme.dividerColor,
+      equals(const Color(0x1FFFFFFF)),
+    );
+  });
+  test(
+      'FCS7.107c GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and a using M2 style divider '
+      'EXPECT M2 divider theme color in M3', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        useM2StyleDividerInM3: false,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.dividerTheme.color,
+      equals(null),
+    );
+    expect(
+      theme.dividerColor,
+      equals(colorScheme.outlineVariant),
+    );
+  });
+  test(
+      'FCS7.108a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using Flutter default TabBar '
+      'EXPECT M2 divider theme color in M3', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      tabBarStyle: FlexTabBarStyle.flutterDefault,
+      subThemesData: const FlexSubThemesData(
+        useM2StyleDividerInM3: true,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.tabBarTheme.unselectedLabelColor,
+      equals(colorScheme.onSurface),
+    );
+    expect(
+      theme.tabBarTheme.labelColor,
+      equals(colorScheme.primary),
+    );
+  });
 }

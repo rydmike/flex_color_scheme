@@ -433,6 +433,16 @@ String generateThemeDartCode(ThemeController controller) {
   final String inputDecoratorIsFilled = controller.inputDecoratorIsFilled
       ? ''
       : '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n';
+  final String inputDecoratorBackgroundAlphaLight = controller
+              .inputDecoratorBackgroundAlphaLight ==
+          null
+      ? ''
+      : '    inputDecoratorBackgroundAlpha: ${controller.inputDecoratorBackgroundAlphaLight},\n';
+  final String inputDecoratorBackgroundAlphaDark = controller
+              .inputDecoratorBackgroundAlphaDark ==
+          null
+      ? ''
+      : '    inputDecoratorBackgroundAlpha: ${controller.inputDecoratorBackgroundAlphaDark},\n';
   final String inputDecoratorBorderType = controller.inputDecoratorBorderType ==
           FlexInputBorderType.outline
       ? ''
@@ -847,6 +857,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
+          '$inputDecoratorBackgroundAlphaLight'
           '$inputDecoratorBorderSchemeColorLight'
           '$inputDecoratorBorderType'
           '$inputDecoratorBorderRadius'
@@ -990,6 +1001,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
+          '$inputDecoratorBackgroundAlphaDark'
           '$inputDecoratorBorderSchemeColorDark'
           '$inputDecoratorBorderType'
           '$inputDecoratorBorderRadius'

@@ -377,6 +377,20 @@ class Store {
   // Default value for the inputDecoratorIsFilled, also used to reset settings.
   static const bool defaultInputDecoratorIsFilled = true;
 
+  // Key used to read and save the inputDecoratorBackgroundAlphaLight value.
+  static const String keyInputDecoratorBackgroundAlphaLight =
+      'inputDecoratorBackgroundAlphaLight';
+  // Default value for the inputDecoratorBackgroundAlphaLight,
+  // and to reset settings.
+  static const int? defaultInputDecoratorBackgroundAlphaLight = null;
+
+  // Key used to read and save the inputDecoratorBackgroundAlphaDark value.
+  static const String keyInputDecoratorBackgroundAlphaDark =
+      'inputDecoratorBackgroundAlphaDark';
+  // Default value for the inputDecoratorBackgroundAlphaDark,
+  // and to reset settings.
+  static const int? defaultInputDecoratorBackgroundAlphaDark = null;
+
   // Key used to read and save the inputDecoratorBorderType value.
   static const String keyInputDecoratorBorderType = 'inputDecoratorBorderType';
   // Default value for the inputDecoratorBorderType, also to reset settings.
