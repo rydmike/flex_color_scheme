@@ -541,7 +541,7 @@ class TextFieldSettings extends StatelessWidget {
           title: Text('DropdownMenu'),
           subtitle: Text('The DropDownMenu has a text entry used to select '
               'an option in a dropdown menu by typing in the selection. '
-              'The text entry part matches the text input decoration '
+              'The text entry part matches the used input decoration '
               'in FCS by default.'),
         ),
         const Padding(
@@ -550,8 +550,9 @@ class TextFieldSettings extends StatelessWidget {
         ),
         const ListTile(
           title: Text('DropdownButtonFormField'),
-          subtitle: Text('An older Material widget, also uses the text input '
-              'decoration theme.'),
+          subtitle: Text('An older Material widget, it also uses the text '
+              'input decoration theme, it does not work well with high '
+              'border radius.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

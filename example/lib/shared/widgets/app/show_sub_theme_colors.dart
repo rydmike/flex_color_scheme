@@ -81,7 +81,19 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color elevatedButtonColor = theme
             .elevatedButtonTheme.style?.backgroundColor
             ?.resolve(<MaterialState>{}) ??
+        (useMaterial3 ? colorScheme.surface : colorScheme.primary);
+    final Color elevatedForegroundButtonColor = theme
+            .elevatedButtonTheme.style?.foregroundColor
+            ?.resolve(<MaterialState>{}) ??
+        (useMaterial3 ? colorScheme.primary : colorScheme.onPrimary);
+    final Color filledButtonColor = theme
+            .filledButtonTheme.style?.backgroundColor
+            ?.resolve(<MaterialState>{}) ??
         colorScheme.primary;
+    final Color tonalButtonColor = theme
+            .filledButtonTheme.style?.backgroundColor
+            ?.resolve(<MaterialState>{}) ??
+        colorScheme.secondaryContainer;
     final Color outlinedButtonColor = theme
             .outlinedButtonTheme.style?.foregroundColor
             ?.resolve(<MaterialState>{}) ??
@@ -205,17 +217,29 @@ class ShowSubThemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Elevated\nButton',
                 color: elevatedButtonColor,
-                textColor: _onColor(elevatedButtonColor, background),
+                textColor: elevatedForegroundButtonColor,
+                elevation: useMaterial3 ? 2 : null,
+                shadowColor: Colors.transparent,
+              ),
+              ColorCard(
+                label: 'Filled\nButton',
+                color: filledButtonColor,
+                textColor: _onColor(filledButtonColor, background),
+              ),
+              ColorCard(
+                label: 'Tonal\nButton',
+                color: tonalButtonColor,
+                textColor: _onColor(tonalButtonColor, background),
               ),
               ColorCard(
                 label: 'Outlined\nButton',
-                color: outlinedButtonColor,
-                textColor: _onColor(outlinedButtonColor, background),
+                color: colorScheme.surface,
+                textColor: outlinedButtonColor,
               ),
               ColorCard(
                 label: 'Text\nButton',
-                color: textButtonColor,
-                textColor: _onColor(textButtonColor, background),
+                color: colorScheme.surface,
+                textColor: textButtonColor,
               ),
               ColorCard(
                 label: 'Toggle\nButtons',

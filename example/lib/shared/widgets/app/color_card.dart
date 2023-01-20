@@ -23,13 +23,19 @@ class ColorCard extends StatelessWidget {
     required this.label,
     required this.color,
     required this.textColor,
+    this.shadowColor,
     this.size,
+    this.elevation,
   });
 
   final String label;
   final Color color;
   final Color textColor;
+  final Color? shadowColor;
   final Size? size;
+
+  /// Default to 0 if not provided.
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +57,8 @@ class ColorCard extends StatelessWidget {
         message: 'Color #${color.hexCode} $nameThatColor$space$materialName.'
             '\nTap box to copy RGB value to Clipboard.',
         child: Card(
+          elevation: elevation ?? 0,
+          shadowColor: shadowColor,
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAlias,
           color: color,

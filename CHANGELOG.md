@@ -8,11 +8,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Jan 20, 2023**
 
-This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also quite significant.
+This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also significant.
 
 **NEW** 
 
-- Added 12 new Material 3 color schemes: `redM3`,`pinkM3`, `purpleM3`, `indigoM3`, `blueM3`, `cyanM3`, `tealM3`, `greenM3`, `limeM3`, `yellowM3`, `orangeM3` and `deepOrangeM3` for a total of **52 built-in** light and dark theme pairs. These schemes work well in Material 3 with or without seed generation.
+- Added 12 new Material 3 color schemes: `redM3`,`pinkM3`, `purpleM3`, `indigoM3`, `blueM3`, `cyanM3`, `tealM3`, `greenM3`, `limeM3`, `yellowM3`, `orangeM3` and `deepOrangeM3` for a total of **52 built-in** light and dark theme pairs. These schemes work well in Material 3 with or without seed generation. But using FCS advanced and flexible key color-based seed generation is recommended when using Material 3. You can always lock e.g. primary and tertiary color to custom brand color values you used as keys.
 
 - Added support for new `ColorScheme` colors `scrim` and `outlineVariant`.
 
@@ -39,6 +39,10 @@ This major release does not contain any breaking API changes. However, the major
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
 
 - Added `SchemeColor` value `toggleButtonsUnselectedSchemeColor` and `toggleButtonsBorderSchemeColor` to `FlexSubThemesData`. They are used to define and customize the themed unselected button and border color of `ToggleButtons`. They control the new parameters `unselectedSchemeColor` and `borderSchemeColor` in `FlexSubThemes.toggleButtonsTheme`.
+
+- Added `SchemeColor` value `sliderIndicatorSchemeColor`, and enum `FlexSliderIndicatorType` value `sliderValueIndicatorType`, plus enum `ShowValueIndicator` value `sliderShowValueIndicator` to `FlexSubThemesData`. They control the new parameters `valueIndicatorColor`, `valueIndicatorType` and `showValueIndicator` in `FlexSubThemes.sliderTheme`.
+
+- Added `SchemeColor` value `drawerBackgroundSchemeColor` and double values `drawerRadius`, `drawerElevation` to `FlexSubThemesData`. They control the new parameters `backgroundSchemeColor`, `radius` and `elevation` in new sub-theme `FlexSubThemes.drawerTheme`.
 
 **CHANGE**
 
@@ -67,7 +71,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 - Added theming for `TimePicker` that corrects Flutter SDK issue https://github.com/flutter/flutter/issues/118657 when using FCS component sub-themes. 
 
-
 **THEMES PLAYGROUND**
 
 **NEW**
@@ -79,54 +82,56 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added UI for theming `FilledButton` and `FilledButton.tonal`, see issue: https://github.com/flutter/flutter/issues/115827 for info on current theming limitations in the SDK for these new buttons.
 - Added UI for `useM2StyleDividerInM3` to panel **Component Themes** with name "Use Material 2 styled Divider in Material 3". Playground defaults this setting to ON (true), but default in API is false. Rationale for keeping it on in the Playground when using component sub-themes; it just looks better than M3:s new default (opinionated). When using M3 and FCS component themes, for a true M3 styled `Divider`, turn OFF the setting. 
 - Added showing `SegmentedButton` in panel **Toggle Buttons** and to **Widget Showcase**.
-- Added showing `Drawer` and `NavigationDrawer` in the new **Drawer** panel and to the **Widget Showcase**.
-- Added showing `BottomAppBar` in panel **AppBar** and to **Widget Showcase**.
+- Added showing `Drawer` and `NavigationDrawer` in the new **Drawer** panel and to the **Widget Showcase**. Also added controls to theme color, border radius and elevation of the `Drawer`. The border radius follows the global border radius setting if it is used. 
+- Added showing `BottomAppBar` in panel **AppBar** and also to the **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
 - Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
 - Added showing new M3 `MenuBar` to **Widget Showcase**.
 - Added setting for focused `TextField` has a border to panel **Text Field**.   
 - Added setting for border color selection of `TextField` to panel **Text Field**.
 - Added setting for alpha control of `TextField` background color to panel **Text Field**.
-- Added a button in panel **Text Field** to set `TextField` settings to M3 matching style.  
+- Added a button in panel **Text Field** to set `TextField` settings to match M3 default style.  
 - Added setting for scrolled under elevation of `AppBar` to panel **AppBar**.
 - Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
-- Added settings for `Slider` value indicator color, visibility and type.
+- Added settings for `Slider` value indicator color, visibility and value indicator type.
 
 **FIX**
 
 - ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect.
 - Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
 
-**TODO**
+**TODO for STABLE 7.0**
 
-- Maybe add more widget support for `FlexSubThemesData.tintedDisabledControls` to widgets that use own disabled color settings instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio, Slider.
-- Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part) 
-- Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
-- Maybe add new MenuBar theme.
-- TimePicker, maybe add internal element radius (kTimeElementRadius=8). Based on Card, but should be its own thing.
-- Maybe add Drawer theme. Added, still WIP. Uses Dialogs props in playground to test it.
-- Maybe add new NavigationDrawer theme.  Added, still WIP.
-- Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
-- Maybe consider tuning the tinted disabled color, in light mode at least.
-- Maybe add a "set to M3 design" button and dialog to e.g. NavigationBar and NavigationRail. TextField has this feature.
-- Maybe to `TabBar` add unselected color, undimmed not selected, divider under it. Make it respect FCS hover and splash settings.
+Next stable version of Flutter after version 3.3 must be released, before FlexColorScheme 7.0 can be released. 
 
-- MUST DO: Slider add info about new props.
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
-- MUST DO: Review M3 Playground component colors presentations, add new buttons and other widgets.
+- MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). Based on Card now, but should be its own thing.
 - MUST DO: Review and fix test coverage.
 - MUST DO: Review and test all examples. 
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
-  - ListTile transparent added to core defaults.
-  - Update known issues.
-  - Section about what is missing in Flutter 3.8/4.0 from M3.
+  - ListTile transparent added to core defaults, may not need, review before release.
+  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones.
+  - Info section (plus article later) about what is still missing in Flutter 3.8/4.0 from M3.
 - After release, more updates to docs.flexcolorscheme.com:
   - New color scheme images
-  - Review and update screens shots and GIF.
+  - Review and update older screenshots and GIFs.
   - Use image zoom feature in docs.page more on current images.
-  - Use new highlight banners in docs.page.
+  - Use new highlight banners feature in docs.page when appropriate.
+
+
+- Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part)
+- Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
+- Maybe add new MenuBar theme.
+- Maybe add new NavigationDrawer theme.
+- Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
+- Maybe add more sub-theme component color presentations to the Playground's "Component Color".
+- Maybe consider tuning the tinted disabled color.
+- Maybe add more "set to M3 design", like on TextField panel to e.g. NavigationBar and NavigationRail.
+- Maybe to `TabBar` add unselected color, not selected dim, divider color. Make it respect FCS hover and splash setting. (Postponed to V7.1)
+- Maybe add support for `FlexSubThemesData.tintedDisabledControls` to more widgets that use own disabled color settings, instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio and Slider. (Postponed to V7.1)
+
 
 ## 6.1.2
 

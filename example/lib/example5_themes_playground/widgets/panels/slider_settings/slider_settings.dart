@@ -168,11 +168,12 @@ class SliderSettings extends StatelessWidget {
         const ListTile(
           dense: true,
           subtitle:
-              Text('Flutter SDK slider theme is very configurable, offering '
-                  'also a lot of classes designed to be extended for complete '
-                  'customization capabilities. FCS and Playground only offers '
-                  'a limited set. Use copyWith on FCS generated theme if you '
-                  'need further customization of the Slider.'),
+              Text('Flutter Slider and its theme is very configurable. It '
+                  'also has classes designed to be extended for complete '
+                  'customization capabilities. FCS and Playground offer a good '
+                  'starter set. Use copyWith on FCS generated theme if you '
+                  'need further customization of the Slider and extend its '
+                  'its classes.'),
         ),
       ],
     );
