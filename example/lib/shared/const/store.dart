@@ -71,14 +71,14 @@ class Store {
   // Key used to read and save the usedScheme value.
   static const String keyUsedScheme = 'usedScheme';
   // Default value for the usedScheme, also used to reset settings.
-  static const FlexScheme defaultUsedScheme = FlexScheme.hippieBlue;
+  static const FlexScheme defaultUsedScheme = FlexScheme.materialBaseline;
 
   // Key used to read and save the schemeIndex value.
   static const String keySchemeIndex = 'schemeIndex';
   // Default value for the schemeIndex, also used to reset settings.
   // Defaults to 35, in examples 4 & 5 where this is used it will make
-  // the default theme based on the [FlexColor.flutterDash] color scheme.
-  static const int defaultSchemeIndex = 39;
+  // the default theme based on the [FlexColor.materialBaseline] color scheme.
+  static const int defaultSchemeIndex = 40;
 
   // Key used to read and save the interactionEffects value.
   static const String keyInteractionEffects = 'interactionEffects';
