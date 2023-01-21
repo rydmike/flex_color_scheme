@@ -204,7 +204,7 @@ class ShowSubThemeColors extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              'Component Colors',
+              'Component sub theme and interaction effect colors',
               style: theme.textTheme.titleMedium,
             ),
           ),

@@ -70,7 +70,7 @@ class FlexSurfaceModeAdapter extends TypeAdapter<FlexSurfaceMode> {
   int get typeId => 153;
 }
 
-/// A Hive data type adapter for enum [FlexTabBarStyle].
+/// A Hive data type adapter for enum [FlexInputBorderType].
 class FlexInputBorderTypeAdapter extends TypeAdapter<FlexInputBorderType> {
   @override
   FlexInputBorderType read(BinaryReader reader) {
@@ -104,17 +104,24 @@ class FlexAppBarStyleAdapter extends TypeAdapter<FlexAppBarStyle> {
   int get typeId => 155;
 }
 
-/// A Hive data type adapter for enum [FlexTabBarStyle].
-class FlexTabBarStyleAdapter extends TypeAdapter<FlexTabBarStyle> {
+/// A Hive data type adapter for enum [FlexTabBarStyle], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexTabBarStyleAdapter extends TypeAdapter<FlexTabBarStyle?> {
   @override
-  FlexTabBarStyle read(BinaryReader reader) {
+  FlexTabBarStyle? read(BinaryReader reader) {
     final int index = reader.readInt();
-    return FlexTabBarStyle.values[index];
+    if (index < 0 || index >= FlexTabBarStyle.values.length) {
+      return null;
+    } else {
+      return FlexTabBarStyle.values[index];
+    }
   }
 
   @override
-  void write(BinaryWriter writer, FlexTabBarStyle obj) {
-    writer.writeInt(obj.index);
+  void write(BinaryWriter writer, FlexTabBarStyle? obj) {
+    writer.writeInt(obj?.index ?? -1);
   }
 
   @override

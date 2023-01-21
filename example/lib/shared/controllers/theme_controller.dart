@@ -1847,10 +1847,9 @@ class ThemeController with ChangeNotifier {
   // TabBar SETTINGS.
   // ===========================================================================
 
-  late FlexTabBarStyle _tabBarStyle;
-  FlexTabBarStyle get tabBarStyle => _tabBarStyle;
+  late FlexTabBarStyle? _tabBarStyle;
+  FlexTabBarStyle? get tabBarStyle => _tabBarStyle;
   void setTabBarStyle(FlexTabBarStyle? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _tabBarStyle) return;
     _tabBarStyle = value;
     if (notify) notifyListeners();

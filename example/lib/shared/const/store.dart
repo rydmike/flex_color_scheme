@@ -523,7 +523,7 @@ class Store {
   // Key used to read and save the tabBarStyle value.
   static const String keyTabBarStyle = 'tabBarStyle';
   // Default value for the tabBarStyle, also used to reset settings.
-  static const FlexTabBarStyle defaultTabBarStyle = FlexTabBarStyle.forAppBar;
+  static const FlexTabBarStyle? defaultTabBarStyle = null;
 
   // Key used to read and save the tabBarIndicatorLight value.
   static const String keyTabBarIndicatorLight = 'tabBarIndicatorLight';

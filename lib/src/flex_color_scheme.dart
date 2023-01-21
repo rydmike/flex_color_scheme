@@ -593,8 +593,10 @@ class FlexColorScheme with Diagnosticable {
 
   /// Select preferred style for the default [TabBarTheme].
   ///
-  /// By default the TabBarTheme is made to fit with the style of the AppBar,
-  /// via default value [FlexTabBarStyle.forAppBar].
+  /// By default the TabBarTheme is made to fit with the style of the AppBar.
+  /// In M2 mode that is done by defaulting to using
+  /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+  /// defaulting to using [FlexTabBarStyle.flutterDefault].
   ///
   /// When setting this to [FlexTabBarStyle.forBackground], it will default
   /// to a theme that uses the color scheme and fits on background color,
@@ -602,7 +604,7 @@ class FlexColorScheme with Diagnosticable {
   /// This TabBarTheme style is useful if you primarily intended to use the
   /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
   /// colors.
-  final FlexTabBarStyle tabBarStyle;
+  final FlexTabBarStyle? tabBarStyle;
 
   /// The themed elevation for the [AppBar].
   ///
@@ -1422,10 +1424,12 @@ class FlexColorScheme with Diagnosticable {
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -1433,7 +1437,7 @@ class FlexColorScheme with Diagnosticable {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -3186,10 +3190,12 @@ class FlexColorScheme with Diagnosticable {
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -3197,7 +3203,7 @@ class FlexColorScheme with Diagnosticable {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -5235,7 +5241,7 @@ class FlexColorScheme with Diagnosticable {
   ///    FlexColorScheme fixed the issue. The issue has been resolved but
   ///    same [ChipThemeData] is still in use for backward style compatibility.
   ///
-  /// * For [TabBarTheme], the Flutter standard selected tab and indicator
+  /// * For [TabBarTheme], in M2 the Flutter standard selected tab and indicator
   ///   color is onSurface in dark mode and on Primary in light mode, which is
   ///   designed to fit an AppBar colored TabBar. This is kept, and the default
   ///   via [FlexTabBarStyle.forAppBar] style, with a minor modification. If
@@ -5243,7 +5249,9 @@ class FlexColorScheme with Diagnosticable {
   ///   the textTheme on AppBar in light app bar brightness.
   ///   If the [FlexTabBarStyle.forBackground] style was used, the
   ///   selected  color is always color scheme primary color, which works well
-  ///   on surface, background and scaffold background colors.
+  ///   on surface, background and scaffold background colors. When using M3
+  ///   the [FlexTabBarStyle.flutterDefault] is used. producing a TabBar with
+  ///   the default M3 design.
   ///
   ///   The unselected TabBar color when [FlexTabBarStyle.forBackground] style
   ///   is used, is always the onSurface color with 60% opacity. This is also
@@ -5626,8 +5634,12 @@ class FlexColorScheme with Diagnosticable {
     // The `flutterDefault` sets values corresponding to SDK Default behavior,
     // it can be used, but is not as useful as the `forAppBar` version which
     // is the default here.
+    final FlexTabBarStyle effectiveTabBarStyle = tabBarStyle ??
+        (useMaterial3
+            ? FlexTabBarStyle.flutterDefault
+            : FlexTabBarStyle.forAppBar);
     Color selectedTabColor() {
-      switch (tabBarStyle) {
+      switch (effectiveTabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
               ? colorScheme.primary
@@ -5653,7 +5665,7 @@ class FlexColorScheme with Diagnosticable {
     // Unselected TabBar color is based on FexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior.
     Color unselectedTabColor() {
-      switch (tabBarStyle) {
+      switch (effectiveTabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
               ? colorScheme.onSurface

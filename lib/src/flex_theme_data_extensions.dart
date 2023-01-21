@@ -292,10 +292,12 @@ extension FlexThemeData on ThemeData {
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -303,7 +305,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -1531,10 +1533,12 @@ extension FlexThemeData on ThemeData {
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -1542,7 +1546,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.

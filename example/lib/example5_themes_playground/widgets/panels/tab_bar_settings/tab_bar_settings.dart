@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import 'tab_bar_list_tile.dart';
+import 'tab_bar_style_popup_menu.dart';
 
 class TabBarSettings extends StatelessWidget {
   const TabBarSettings(this.controller, {super.key});
@@ -36,6 +36,7 @@ class TabBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final bool useMaterial3 = theme.useMaterial3;
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -47,15 +48,22 @@ class TabBarSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: TabBarForBackgroundShowcase(),
         ),
-        const SizedBox(height: 8),
-        ListTile(
-          enabled: controller.useFlexColorScheme,
+        TabBarStylePopupMenu(
           title: const Text('Choose TabBarStyle that fits your use case'),
-          subtitle: Text(explainTabStyle(controller.useFlexColorScheme
-              ? controller.tabBarStyle
-              : FlexTabBarStyle.flutterDefault)),
+          labelForDefault:
+              useMaterial3 ? 'Default (flutterDefault)' : 'Default (forAppBar)',
+          index: controller.tabBarStyle?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= FlexTabBarStyle.values.length) {
+                    controller.setTabBarStyle(null);
+                  } else {
+                    controller.setTabBarStyle(FlexTabBarStyle.values[index]);
+                  }
+                }
+              : null,
         ),
-        TabBarStyleListTile(controller: controller),
+        const SizedBox(height: 8),
         const ListTile(
           title: Text('Custom colors'),
           subtitle: Text('With component themes enabled you can select '

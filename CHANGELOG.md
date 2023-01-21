@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ### Work in progress!
 
-**Jan 20, 2023**
+**Jan 21, 2023**
 
 This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also significant.
 
@@ -34,7 +34,8 @@ This major release does not contain any breaking API changes. However, the major
 - Added `SchemeColor` value `inputDecoratorBorderSchemeColor` to `FlexSubThemesData`. It is used to define and customize the border color of `InputDecorator` on e.g. TextField. It controls the new parameter `borderSchemeColor` in `FlexSubThemes.inputDecorationTheme`.
 
 - Added `appBarTheme` and `tabBarTheme` to `FlexSubThemes`. 
-- Added Material 3 styling to `TabBar` when M3 is used. Set it to `FlexTabBarStyle.flutterDefault` to get the SDK default colors as well. `TabBar` may get more configuration options in the next FCS version.
+  
+- Added Material 3 styling to `TabBar` when M3 is used. Use `FlexTabBarStyle.flutterDefault` to get the SDK default colors in M3 mode. `TabBar` may get more configuration options in the next FCS version.
 
 - Added `double` value `appBarScrolledUnderElevation` to `FlexSubThemesData`. It is used to define and customize the themed scrolled under elevation of the `AppBar`. It controls the new parameter `scrolledUnderElevation` in `FlexSubThemes.appBarTheme`.
 
@@ -71,6 +72,8 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 - Added theming for `TimePicker` that corrects Flutter SDK issue https://github.com/flutter/flutter/issues/118657 when using FCS component sub-themes. 
 
+- Made `tabBarStyle` in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` nullable and null by default. In M2 mode `tabBarStyle` defaults to `FlexTabBarStyle.forAppBar` as before. However, in M3 mode, if not defined, it defaults to `FlexTabBarStyle.flutterDefault`, producing a style matching M3 default TabBar.     
+
 **THEMES PLAYGROUND**
 
 **NEW**
@@ -101,25 +104,24 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect. May not need this work around in V7.0 release if the issue does not land in new Flutter stable after 3.3. follow-up.
 - Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
 
-**TODO for STABLE 7.0**
+**TODO for STABLE 7.0 RELEASE**
 
 The next stable version of Flutter after version 3.3 must be released, before FlexColorScheme 7.0 can be released. 
 
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). Based on Card now, but should be its own thing
-- MUST DO: TabBar M3 to default to Flutter SDK default in M3. New selector that allows null.  
 - MUST DO: Review and fix test coverage.
 - MUST DO: Review and test all examples. 
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
   - ListTile transparent added to core defaults, may not need, review before release.
-  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones.
+  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
   - Info section (plus article later) about what is still missing in Flutter 3.8/4.0 from M3.
-- After release, more updates to docs.flexcolorscheme.com:
+- After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
   - New color scheme images
   - Review and update older screenshots and GIFs.
   - Use image zoom feature in docs.page more on current images.
-  - Use new highlight banners feature in docs.page when appropriate.
+  - Use new highlight banners feature, in the docs.page tool when appropriate.
 
 - Maybe consider tuning the tinted disabled color.
 - Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part)

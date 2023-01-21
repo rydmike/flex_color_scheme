@@ -132,8 +132,12 @@ class HeaderCard extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
+    // TODO(rydmike): Monitor deprecation of cardColor.
     // Use passed in color for the Card, or scheme surface, used for Card.
-    final Color cardColor = color ?? theme.colorScheme.surface;
+    // As long as cardColor exist in ThemeData, we use it here, to demonstrate
+    // the effect it has on an app using Card with default background in M2,
+    // if it does not have correct ColorScheme assignment in the theme.
+    final Color cardColor = color ?? theme.cardColor;
     // Compute a header color with fixed primary blend from the card color,
     final Color headerColor = Color.alphaBlend(
         scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
