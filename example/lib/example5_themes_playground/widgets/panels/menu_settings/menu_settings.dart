@@ -2,13 +2,14 @@ import 'dart:math' as math;
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-class PopupMenuButtonSettings extends StatelessWidget {
-  const PopupMenuButtonSettings(this.controller, {super.key});
+class MenuSettings extends StatelessWidget {
+  const MenuSettings(this.controller, {super.key});
   final ThemeController controller;
 
   @override
@@ -40,21 +41,11 @@ class PopupMenuButtonSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          // The button used in the PopupMenuShowcase to open the PopupMenu
-          // is not a native widget, only the menu is, and it is the one that
-          // is themed.
-          child: Wrap(
-            children: const <Widget>[
-              PopupMenuButtonShowcase(),
-              SizedBox(width: 8),
-              PopupMenuButtonTilesShowcase(),
-            ],
-          ),
+        const SizedBox(height: 8),
+        const ListTile(
+          title: Text('Menus'),
+          subtitle: Text('The theming below only concerns the opened menu.'),
         ),
-        const SizedBox(height: 16),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Menu border radius, follows global to max 10'),
@@ -210,11 +201,64 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          // title: Text('IconButton, CircleAvatar and DropdownButton'),
-          subtitle: Text('The theming only concerns the actual popup menu. '
-              'The popup can be used on any kind of widget, above '
-              'a custom TextButton is being used.'),
+          title: Text('PopupMenuButton'),
+          subtitle: Text('The PopupMenuButton can be used on any kind of '
+              'widget, below a custom TextButton is being used.'),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          // The button used in the PopupMenuShowcase to open the PopupMenu
+          // is not a native widget, only the menu is, and it is the one that
+          // is themed.
+          child: Wrap(
+            children: const <Widget>[
+              PopupMenuButtonShowcase(),
+              SizedBox(width: 8),
+              PopupMenuButtonTilesShowcase(),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        const ListTile(
+          title: Text('DropdownMenu'),
+          subtitle: Text('New component in M3. Text input area uses the active '
+              'InputDecorationTheme in FCS. The DropdownMenu will get more '
+              'styling options in FCS later versions, e.g. tuning the default '
+              'selection highlight style.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: DropDownMenuShowcase(),
+        ),
+        const SizedBox(height: 16),
+        const ListTile(
+          title: Text('MenuBar'),
+          subtitle: Text('New component in M3. MenuBar is made up of '
+              'SubMenuButton with MenuItemButton. The MenuBar will get more '
+              'styling options in FCS later versions.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Shortcuts(shortcuts: <ShortcutActivator, Intent>{
+            SingleActivator(LogicalKeyboardKey.keyT, control: true):
+                VoidCallbackIntent(debugDumpApp),
+          }, child: MenuBarShowcase(explainUsage: false)),
+        ),
+        const SizedBox(height: 16),
+        const ListTile(
+          title: Text('MenuAnchor'),
+          subtitle: Text('New component in M3. The MenuAnchor can be used to '
+              'attach a menu to any widget. It uses the same building blocks '
+              'as the MenuBar, SubMenuButton with MenuItemButton. It can thus '
+              'have sub-menus and keyboard shortcuts, like the MenuBar. '
+              'The MenuAnchor will get more '
+              'styling options in FCS later versions.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: MenuAnchorShowcase(explainUsage: false),
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }

@@ -104,8 +104,8 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.add_circle,
   ),
   PanelItem(
-    panelLabel: 'PopupMenuButton',
-    buttonLabel: 'Popup\nMenuButton',
+    panelLabel: 'Menus',
+    buttonLabel: 'Menus',
     icon: Icons.arrow_drop_down_circle_outlined,
   ),
   PanelItem(

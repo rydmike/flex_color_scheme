@@ -17,13 +17,13 @@ import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_chip_settings/fab_chip_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/material_panel/material_panel.dart';
+import '../panels/menu_settings/menu_settings.dart';
 import '../panels/navigation_bar_settings/android_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/bottom_navigation_bar_settings.dart';
 import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/panel_item.dart';
 import '../panels/panel_selector.dart';
-import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
 import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/slider_settings/slider_settings.dart';
 import '../panels/surface_blend_settings/surface_blend_settings.dart';
@@ -223,8 +223,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(
                       ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(FabChipSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(
-                      PopupMenuButtonSettings(themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(MenuSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(TooltipIconButtonAvatarDropdownSettings(themeCtrl),
                       pageIndex, themeCtrl),
                   PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl),

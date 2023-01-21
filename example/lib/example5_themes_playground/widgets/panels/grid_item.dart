@@ -109,8 +109,8 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.add_circle,
   ),
   GridItem(
-    panelLabel: 'PopupMenuButton',
-    buttonLabel: 'Popup\nMenuButton',
+    panelLabel: 'Menus',
+    buttonLabel: 'Menus',
     icon: Icons.arrow_drop_down_circle_outlined,
   ),
   GridItem(
