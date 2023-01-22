@@ -6304,8 +6304,6 @@ class FlexColorScheme with Diagnosticable {
               borderWidth: subTheme.segmentedButtonBorderWidth ??
                   subTheme.thinBorderWidth,
               radius: subTheme.segmentedButtonRadius ?? subTheme.defaultRadius,
-              // minButtonSize: subTheme.buttonMinSize,
-              // useMaterial3: useMaterial3,
             )
           : null,
       // Switch theme.

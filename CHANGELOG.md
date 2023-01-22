@@ -49,7 +49,7 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `timePickerElementRadius` to `FlexSubThemesData` that can be used to control `elementRadius` in `FlexSubThemes.timePickerTheme`, it changes the themed border radius of the time input entry fields.  
 
-- Added `segmentedButtonRadius`, `segmentedButtonSchemeColor`, `segmentedButtonUnselectedSchemeColor`, `segmentedButtonBorderSchemeColor` and `segmentedButtonBorderWidth` to `FlexSubThemesData` they controls the equivavlent properties in `FlexSubThemes.timePickerTHeme`
+- Added `segmentedButtonRadius`, `segmentedButtonSchemeColor`, `segmentedButtonUnselectedSchemeColor`, `segmentedButtonBorderSchemeColor` and `segmentedButtonBorderWidth` to `FlexSubThemesData` they control the equivalent properties in `FlexSubThemes.timePickerTHeme`
 
 **CHANGE**
 

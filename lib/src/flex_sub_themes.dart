@@ -3751,16 +3751,6 @@ class FlexSubThemes {
     ///
     /// If null, defaults to [kThinBorderWidth] = 1.0.
     final double? borderWidth,
-
-    // /// A temporary flag used to opt-in to new Material 3 features.
-    // ///
-    // /// If set to true, the theme will use Material3 default styles when
-    // /// properties are undefined, if false defaults will use FlexColorScheme's
-    // /// own opinionated defaults values.
-    // ///
-    // /// The M2/M3 SDK defaults will only be used for properties that are not
-    // /// defined, if defined they keep their defined values.
-    // final bool useMaterial3 = false,
   }) {
     // Get selected color, defaults to primary.
     final SchemeColor selectedScheme =
@@ -3773,8 +3763,7 @@ class FlexSubThemes {
         unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color borderColor =
         schemeColor(borderSchemeColor ?? SchemeColor.outline, colorScheme);
-
-    // Effective border width, default different with M3.
+    // Effective border width.
     final double effectiveWidth = borderWidth ?? kThinBorderWidth;
 
     return SegmentedButtonThemeData(
@@ -4720,7 +4709,7 @@ class FlexSubThemes {
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
-    // Effective border width, default different with M3.
+    // Effective border width.
     final double effectiveWidth =
         borderWidth ?? (useMaterial3 ? 1.0 : kThinBorderWidth);
     // Effective visual density.
