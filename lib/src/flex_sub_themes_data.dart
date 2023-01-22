@@ -79,6 +79,8 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via
 ///   [FlexSubThemes.inputDecorationTheme].
+/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+///   [FlexSubThemes.menuTheme].
 /// * [ListTileThemeData] for [ListTile] via
 ///   [FlexSubThemes.listTileTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via
@@ -1281,7 +1283,8 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [kCardElevation] = 0dp.
   final double? cardElevation;
 
-  /// Border radius override value for the menu on [PopupMenuButton].
+  /// Border radius override value for the menu on [PopupMenuButton], [MenuBar]
+  /// [MenuAnchor] and [DropDownMenu].
   ///
   /// When used by [FlexColorScheme] the border radius of popup menus follows
   /// the [defaultRadius] until and including 10 dp. After which it stays at
@@ -1316,7 +1319,8 @@ class FlexSubThemesData with Diagnosticable {
   /// the very round M3 design, try 8 or 10.
   final double? popupMenuRadius;
 
-  /// Default elevation of [PopupMenuButton].
+  /// Default elevation of [PopupMenuButton], [MenuBar], [MenuAnchor] and
+  /// [DropDownMenu].
   ///
   /// If not defined, then if [useMaterial3] is:
   ///
@@ -1324,7 +1328,8 @@ class FlexSubThemesData with Diagnosticable {
   /// - true  : defaults to [kPopupMenuElevation] = 3 dp.
   final double? popupMenuElevation;
 
-  /// The ColorScheme based color used as background color on [PopupMenuButton].
+  /// The ColorScheme based color used as background color on [PopupMenuButton],
+  /// [MenuBar], [MenuAnchor] and [DropDownMenu].
   ///
   /// If not defined, then if [useMaterial3] is:
   /// - false : defaults to theme.cardColor.

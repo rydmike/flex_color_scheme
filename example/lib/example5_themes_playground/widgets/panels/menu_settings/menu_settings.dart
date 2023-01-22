@@ -152,6 +152,10 @@ class MenuSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Menu background color'),
           labelForDefault: 'default (surface)',
+          subtitle: const Text(
+            'In current version of FCS, only colors that work '
+            'with the contrasting color for surface are usable options.',
+          ),
           index: controller.popupMenuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

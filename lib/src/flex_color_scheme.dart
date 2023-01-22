@@ -6350,12 +6350,6 @@ class FlexColorScheme with Diagnosticable {
           : null,
       // Input decorator theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
-      // DropDown menu theme.
-      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
-        colorScheme: colorScheme,
-        // FCS only support style matching it to same as TextField
-        inputDecorationTheme: effectiveInputDecorationTheme,
-      ),
       // FAB, floating action button theme.
       floatingActionButtonTheme: useSubThemes
           ? FlexSubThemes.floatingActionButtonTheme(
@@ -6406,6 +6400,7 @@ class FlexColorScheme with Diagnosticable {
               // directionality: Directionality.of(context),
             )
           : null,
+      // PopupMenuButton theme.
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(
               radius: subTheme.popupMenuRadius ??
@@ -6414,6 +6409,23 @@ class FlexColorScheme with Diagnosticable {
                       : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: popupMenuElevation,
               color: popupMenuColor,
+            )
+          : null,
+      // DropDownMenu theme.
+      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
+        colorScheme: colorScheme,
+        // FCS only support style matching it to same as TextField
+        inputDecorationTheme: effectiveInputDecorationTheme,
+      ),
+      // MenuTheme theme, for MenuBar, MenuAnchor and DropDownMenu.
+      menuTheme: useSubThemes
+          ? FlexSubThemes.menuTheme(
+              radius: subTheme.popupMenuRadius ??
+                  (subTheme.defaultRadius == null
+                      ? null
+                      : math.min(subTheme.defaultRadius!, 10.0)),
+              elevation: popupMenuElevation,
+              backgroundColor: popupMenuColor,
             )
           : null,
       dialogTheme: useSubThemes

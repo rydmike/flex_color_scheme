@@ -189,6 +189,8 @@ enum SchemeColor {
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
+/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+///   [menuTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
 /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
 ///   [navigationDrawerTheme].
@@ -405,113 +407,31 @@ class FlexSubThemes {
     }
   }
 
-  /// An opinionated [DrawerThemeData] theme for the [Drawer].
-  ///
-  /// The [NavigationDrawer] also uses these value for its drawer parts. Its
-  /// menu part has an own theme in Flutter SDK.
-  static DrawerThemeData drawerTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// Selects which color from the passed in [colorScheme] to use as
-    /// [Drawer] background color.
-    ///
-    /// If not defined, defaults to [SchemeColor.surface]. Flutter
-    /// SDK uses surface color as default in M3 and background in M3.
-    /// FCS keeps uses surface in both modes..
-    final SchemeColor? backgroundSchemeColor,
-
-    /// Corner radius of the [Drawer]'s visible edge.
-    ///
-    /// If not defined, defaults to [kDrawerRadius] 16 dp in both M2 and M3
-    /// mode, based on M3 Specification
-    /// https://m3.material.io/components/navigation-drawer/specs
-    final double? radius,
-
-    /// Drawer elevation.
-    ///
-    /// If not defined, defaults to Flutter default values, in M2 mode (16)
-    /// and in M3 (1) via SDK defaults.
-    final double? elevation,
-
-    /// Themes the default width of the [Drawer].
-    ///
-    /// Currently not available as a property in [FlexSubThemesData], may be
-    /// added later.
-    final double? width,
-
-    // TODO(rydmike): Confirm this is not needed, resolve happens later.
-    // /// You would typically pass in `Directionality.of(context)`].
-    // ///
-    // /// Defaults to LTR if not defined.
-    // final TextDirection? direction,
-  }) {
-    // Get selected background color, defaults to primary.
-    final Color backgroundColor =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
-
-    return DrawerThemeData(
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      width: width,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusDirectional.horizontal(
-          end: Radius.circular(radius ?? kDrawerRadius),
-        ), //.resolve(direction ?? TextDirection.ltr),
-      ),
-      endShape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusDirectional.horizontal(
-          end: Radius.circular(radius ?? kDrawerRadius),
-        ), //.resolve(direction ?? TextDirection.ltr),
-      ),
-    );
-  }
-
-  /// An opinionated [DropdownMenuThemeData] theme.
-  static DropdownMenuThemeData dropdownMenuTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-
-    /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
-    /// Typically you want it to match the input decorator on your TextField.
-    final InputDecorationTheme? inputDecorationTheme,
-  }) {
-    return DropdownMenuThemeData(
-      inputDecorationTheme: inputDecorationTheme,
-    );
-  }
-
-  /// An opinionated [NavigationDrawerThemeData] theme.
-  static NavigationDrawerThemeData navigationDrawerTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-  }) {
-    return NavigationDrawerThemeData();
-  }
-
-  /// An opinionated [MenuBarThemeData] theme.
-  static MenuBarThemeData menuBarTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-  }) {
-    return MenuBarThemeData();
-  }
-
-  /// An opinionated [MenuButtonThemeData] theme.
-  static MenuButtonThemeData menuButtonTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-  }) {
-    return MenuButtonThemeData();
-  }
-
-  /// An opinionated [MenuThemeData] theme.
-  static MenuThemeData menuTheme({
-    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
-  }) {
-    return MenuThemeData();
-  }
+  // TODO(rydmike): Placeholder for more new M3 sub-themes to be added.
+  //
+  // /// An opinionated [NavigationDrawerThemeData] theme.
+  // static NavigationDrawerThemeData navigationDrawerTheme({
+  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
+  //   required final ColorScheme colorScheme,
+  // }) {
+  //   return NavigationDrawerThemeData();
+  // }
+  //
+  // /// An opinionated [MenuBarThemeData] theme.
+  // static MenuBarThemeData menuBarTheme({
+  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
+  //   required final ColorScheme colorScheme,
+  // }) {
+  //   return MenuBarThemeData();
+  // }
+  //
+  // /// An opinionated [MenuButtonThemeData] theme.
+  // static MenuButtonThemeData menuButtonTheme({
+  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
+  //   required final ColorScheme colorScheme,
+  // }) {
+  //   return MenuButtonThemeData();
+  // }
 
   /// An opinionated [AppBarTheme] theme.
   ///
@@ -1525,6 +1445,82 @@ class FlexSubThemes {
     );
   }
 
+  /// An opinionated [DrawerThemeData] theme for the [Drawer].
+  ///
+  /// The [NavigationDrawer] also uses these value for its drawer parts. Its
+  /// menu part has an own theme in Flutter SDK.
+  static DrawerThemeData drawerTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as
+    /// [Drawer] background color.
+    ///
+    /// If not defined, defaults to [SchemeColor.surface]. Flutter
+    /// SDK uses surface color as default in M3 and background in M3.
+    /// FCS keeps uses surface in both modes..
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Corner radius of the [Drawer]'s visible edge.
+    ///
+    /// If not defined, defaults to [kDrawerRadius] 16 dp in both M2 and M3
+    /// mode, based on M3 Specification
+    /// https://m3.material.io/components/navigation-drawer/specs
+    final double? radius,
+
+    /// Drawer elevation.
+    ///
+    /// If not defined, defaults to Flutter default values, in M2 mode (16)
+    /// and in M3 (1) via SDK defaults.
+    final double? elevation,
+
+    /// Themes the default width of the [Drawer].
+    ///
+    /// Currently not available as a property in [FlexSubThemesData], may be
+    /// added later.
+    final double? width,
+
+    // TODO(rydmike): Confirm this is not needed, resolve happens later.
+    // /// You would typically pass in `Directionality.of(context)`].
+    // ///
+    // /// Defaults to LTR if not defined.
+    // final TextDirection? direction,
+  }) {
+    // Get selected background color, defaults to primary.
+    final Color backgroundColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    return DrawerThemeData(
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      width: width,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.horizontal(
+          end: Radius.circular(radius ?? kDrawerRadius),
+        ), //.resolve(direction ?? TextDirection.ltr),
+      ),
+      endShape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusDirectional.horizontal(
+          end: Radius.circular(radius ?? kDrawerRadius),
+        ), //.resolve(direction ?? TextDirection.ltr),
+      ),
+    );
+  }
+
+  /// An opinionated [DropdownMenuThemeData] theme.
+  static DropdownMenuThemeData dropdownMenuTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
+    /// Typically you want it to match the input decorator on your TextField.
+    final InputDecorationTheme? inputDecorationTheme,
+  }) {
+    return DropdownMenuThemeData(
+      inputDecorationTheme: inputDecorationTheme,
+    );
+  }
+
   /// An opinionated [ElevatedButtonThemeData] theme.
   ///
   /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
@@ -2454,6 +2450,47 @@ class FlexSubThemes {
                 width: unfocusedWidth,
               )
             : BorderSide.none,
+      ),
+    );
+  }
+
+  /// An opinionated [MenuThemeData] theme.
+  ///
+  /// This theme is used by the menu for the [DropDownMenu], [MenuBar] and
+  /// [MenuAnchor].
+  static MenuThemeData menuTheme({
+    /// Menu corner radius.
+    ///
+    /// Defaults to [kMenuRadius] = 4, M3 specification.
+    final double? radius,
+
+    /// Popup menu elevation.
+    ///
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to 6 dp [kPopupMenuElevationFCS], FCS default.
+    /// - true  : defaults to 3 dp.
+    /// Usually they are the same.
+    final double? elevation,
+
+    /// The background color of the popup menu.
+    ///
+    /// If not defined, then if [useMaterial3] is:
+    /// - false : defaults to theme.cardColor.
+    /// - true  : defaults to theme.colorScheme.surface.
+    /// Usually they are the same.
+    final Color? backgroundColor,
+  }) {
+    return MenuThemeData(
+      style: MenuStyle(
+        elevation: MaterialStatePropertyAll<double?>(elevation),
+        backgroundColor: MaterialStatePropertyAll<Color?>(backgroundColor),
+        shape: MaterialStatePropertyAll<OutlinedBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? kMenuRadius),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -3596,7 +3633,7 @@ class FlexSubThemes {
     /// Popup menu elevation.
     ///
     /// If not defined, then if [useMaterial3] is:
-    /// - false : defaults to 8 dp.
+    /// - false : defaults to 6 dp [kPopupMenuElevationFCS], FCS default.
     /// - true  : defaults to 3 dp.
     /// Usually they are the same.
     final double? elevation,

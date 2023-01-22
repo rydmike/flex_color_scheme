@@ -45,6 +45,8 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `SchemeColor` value `drawerBackgroundSchemeColor` and double values `drawerRadius`, `drawerElevation` to `FlexSubThemesData`. They control the new parameters `backgroundSchemeColor`, `radius` and `elevation` in new sub-theme `FlexSubThemes.drawerTheme`.
 
+- Added `menuTheme` to `FlexSubThemes`, it provides styling for elevation, radius and background color with optional opacity for the new Mw components `MenuAnchor`, `MenuBar` and `DropDownMenu`. The same `FlexSubThemesData` that are used for `PopupMenuButton` are used to control this theme. Those are `popupMenuRadius`, `popupMenuElevation`, `popupMenuSchemeColor`, and `popupMenuOpacity`.  
+
 **CHANGE**
 
 - Removed in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically as it should be and we no longer need the workaround.
@@ -88,8 +90,10 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing `Drawer` and `NavigationDrawer` in the new **Drawer** panel and to the **Widget Showcase**. Also added controls to theme color, border radius and elevation of the `Drawer`. The border radius follows the global border radius setting if it is used. 
 - Added showing `BottomAppBar` in panel **AppBar** and also to the **Widget Showcase**.
 - Added `BottomAppBar` elevation setting to Playground in panel **AppBar**.
-- Added showing new M3 `DropdownMenu` in panel **Text Field** and to **Widget Showcase**.
-- Added showing new M3 `MenuBar` to **Widget Showcase**.
+- Added showing new M3 `DropdownMenu` in panel **Text Field**, **Menu** and to **Widget Showcase**.
+- Added showing new M3 `MenuBar` in panel **Menu** and to **Widget Showcase**.
+- Added showing new M3 `MenuAnchor` in panel **Menu** and to **Widget Showcase**.
+- In panel **Menu** the previous controls for `PopuMenuButton`  not also control the menu style of `DropdownMenu`, `MenuBar` and `MenuAnchor`. 
 - Added setting for focused `TextField` has a border to panel **Text Field**.   
 - Added setting for border color selection of `TextField` to panel **Text Field**.
 - Added setting for alpha control of `TextField` background color to panel **Text Field**.
@@ -110,8 +114,10 @@ The next stable version of Flutter after version 3.3 must be released, before Fl
 
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). Based on Card now, but should be its own thing
+- MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
-- MUST DO: Review and test all examples. 
+- MUST DO: Review and test all examples.
+  
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
   - ListTile transparent added to core defaults, may not need, review before release.
