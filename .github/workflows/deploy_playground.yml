@@ -33,7 +33,7 @@ jobs:
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: "beta"
       - name: "Show Dart SDK version"
         run: dart --version
       - name: "Show Flutter SDK version"
@@ -60,14 +60,14 @@ jobs:
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-v6/" --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-v7/" --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/themesplayground-v6'
+          destination_folder: 'flexcolorscheme/themesplayground-v7'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
