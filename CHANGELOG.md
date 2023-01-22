@@ -6,7 +6,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ### Work in progress!
 
-**Jan 21, 2023**
+**Jan 22, 2023**
 
 This major release does not contain any breaking API changes. However, the major version is bumped because some past styles and defaults, when opting in on Material 3, have been slightly tuned to better align with new Material 3 widgets and design, included in the **Flutter 3.8/4.0 (?)** release. The new features are also significant.
 
@@ -46,6 +46,10 @@ This major release does not contain any breaking API changes. However, the major
 - Added `SchemeColor` value `drawerBackgroundSchemeColor` and double values `drawerRadius`, `drawerElevation` to `FlexSubThemesData`. They control the new parameters `backgroundSchemeColor`, `radius` and `elevation` in new sub-theme `FlexSubThemes.drawerTheme`.
 
 - Added `menuTheme` to `FlexSubThemes`, it provides styling for elevation, radius and background color with optional opacity for the new Mw components `MenuAnchor`, `MenuBar` and `DropDownMenu`. The same `FlexSubThemesData` that are used for `PopupMenuButton` are used to control this theme. Those are `popupMenuRadius`, `popupMenuElevation`, `popupMenuSchemeColor`, and `popupMenuOpacity`.  
+
+- Added `timePickerElementRadius` to `FlexSubThemesData` that can be used to control `elementRadius` in `FlexSubThemes.timePickerTheme`, it changes the themed border radius of the time input entry fields.  
+
+- Added `segmentedButtonRadius`, `segmentedButtonSchemeColor`, `segmentedButtonUnselectedSchemeColor`, `segmentedButtonBorderSchemeColor` and `segmentedButtonBorderWidth` to `FlexSubThemesData` they controls the equivavlent properties in `FlexSubThemes.timePickerTHeme`
 
 **CHANGE**
 
@@ -130,8 +134,6 @@ The next stable version of Flutter after version 3.3 must be released, before Fl
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
 - Maybe consider tuning the tinted disabled color.
-- Maybe add DropdownMenu theme. (Added, but only inline and with the decorator part)
-- Maybe add harmonized theme for the menu part of PopupMenuButton, DropDownMenu, MenuBar and AnchorMenu.
 - Maybe add new SegmentedButtons theme that adjusts radius, outlineThickness, and its colors.
 - Maybe add more sub-theme component color presentations to the Playground's "Component Color".
 - Maybe add new NavigationDrawer theme.

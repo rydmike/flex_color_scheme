@@ -892,6 +892,9 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultOutlinedButtonPressedBorderWidth = null;
 
+  // ToggleButtons SETTINGS.
+  // ===========================================================================
+
   // Key used to read and save the toggleButtonsSchemeColor value.
   static const String keyToggleButtonsSchemeColor = 'toggleButtonsSchemeColor';
   // Default value for the toggleButtonsSchemeColor, also used to
@@ -929,6 +932,49 @@ class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderWidth = null;
+
+  // SegmentedButton SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the segmentedButtonSchemeColor value.
+  static const String keySegmentedButtonSchemeColor =
+      'segmentedButtonSchemeColor';
+  // Default value for the segmentedButtonSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonUnselectedSchemeColor value.
+  static const String keySegmentedButtonUnselectedSchemeColor =
+      'segmentedButtonUnselectedSchemeColor';
+  // Default value for the segmentedButtonUnselectedSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonUnselectedSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonBorderSchemeColor value.
+  static const String keySegmentedButtonBorderSchemeColor =
+      'segmentedButtonBorderSchemeColor';
+  // Default value for the segmentedButtonBorderSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonBorderSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonBorderRadius value.
+  static const String keySegmentedButtonBorderRadius =
+      'segmentedButtonBorderRadius';
+  // Default value for the segmentedButtonBorderRadius, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSegmentedButtonBorderRadius = null;
+
+  // Key used to read and save the segmentedButtonBorderWidth value.
+  static const String keySegmentedButtonBorderWidth =
+      'segmentedButtonBorderWidth';
+  // Default value for the segmentedButtonBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSegmentedButtonBorderWidth = null;
 
   // Switch, CheckBox and Radio SETTINGS.
   // ===========================================================================

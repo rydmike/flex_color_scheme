@@ -11,7 +11,7 @@ class ToggleButtonsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String toggleButtonRadiusDefaultLabel =
+    final String toggleButtonsRadiusDefaultLabel =
         controller.toggleButtonsBorderRadius == null &&
                 controller.defaultRadius == null
             ? 'default 20'
@@ -19,11 +19,27 @@ class ToggleButtonsSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
-    final String borderWidthDefaultLabel =
+    final String toggleBorderWidthDefaultLabel =
         controller.toggleButtonsBorderWidth == null &&
                 controller.thinBorderWidth == null
             ? 'default 1'
             : controller.toggleButtonsBorderWidth == null &&
+                    controller.thinBorderWidth != null
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
+                : '';
+    final String segmentedButtonsRadiusDefaultLabel =
+        controller.segmentedButtonBorderRadius == null &&
+                controller.defaultRadius == null
+            ? 'default stadium'
+            : controller.segmentedButtonBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+    final String segmentedBorderWidthDefaultLabel =
+        controller.segmentedButtonBorderWidth == null &&
+                controller.thinBorderWidth == null
+            ? 'default 1'
+            : controller.segmentedButtonBorderWidth == null &&
                     controller.thinBorderWidth != null
                 ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
                 : '';
@@ -45,6 +61,8 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons color'),
+          subtitle: const Text('Always used as selected button background, '
+              'but also as unselected button foreground if it is not defined.'),
           index: controller.toggleButtonsSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -59,6 +77,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('ToggleButtons unselected button color'),
+          subtitle: const Text('Unselected button foreground'),
           labelForDefault: controller.useSubThemes &&
                   controller.useFlexColorScheme &&
                   controller.toggleButtonsUnselectedSchemeColor == null
@@ -109,7 +128,7 @@ class ToggleButtonsSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.toggleButtonsBorderRadius == null ||
                         (controller.toggleButtonsBorderRadius ?? -1) < 0
-                    ? toggleButtonRadiusDefaultLabel
+                    ? toggleButtonsRadiusDefaultLabel
                     : (controller.toggleButtonsBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
@@ -137,7 +156,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.toggleButtonsBorderRadius == null ||
                               (controller.toggleButtonsBorderRadius ?? -1) < 0
-                          ? toggleButtonRadiusDefaultLabel
+                          ? toggleButtonsRadiusDefaultLabel
                           : (controller.toggleButtonsBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
@@ -159,7 +178,7 @@ class ToggleButtonsSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.toggleButtonsBorderWidth == null ||
                         (controller.toggleButtonsBorderWidth ?? 0) <= 0
-                    ? borderWidthDefaultLabel
+                    ? toggleBorderWidthDefaultLabel
                     : (controller.toggleButtonsBorderWidth
                             ?.toStringAsFixed(1) ??
                         '')
@@ -187,7 +206,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.toggleButtonsBorderWidth == null ||
                               (controller.toggleButtonsBorderWidth ?? 0) <= 0
-                          ? borderWidthDefaultLabel
+                          ? toggleBorderWidthDefaultLabel
                           : (controller.toggleButtonsBorderWidth
                                   ?.toStringAsFixed(1) ??
                               '')
@@ -211,6 +230,160 @@ class ToggleButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: SegmentedButtonShowcase(),
         ),
+        ColorSchemePopupMenu(
+          title: const Text('SegmentedButton background color'),
+          labelForDefault: 'default (secondaryContainer)',
+          index: controller.segmentedButtonSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSegmentedButtonSchemeColor(null);
+                  } else {
+                    controller.setSegmentedButtonSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('SegmentedButton unselected button background '
+              'color'),
+          labelForDefault: 'default (surface and primary foreground)',
+          index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSegmentedButtonUnselectedSchemeColor(null);
+                  } else {
+                    controller.setSegmentedButtonUnselectedSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('SegmentedButton border color'),
+          labelForDefault: useMaterial3
+              ? 'default (outline)'
+              : controller.useSubThemes &&
+                      controller.useFlexColorScheme &&
+                      controller.segmentedButtonBorderSchemeColor == null
+                  // ignore: lines_longer_than_80_chars
+                  ? 'default (${controller.segmentedButtonSchemeColor?.name ?? SchemeColor.primary.name})'
+                  : 'default (primary)',
+          index: controller.segmentedButtonBorderSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSegmentedButtonBorderSchemeColor(null);
+                  } else {
+                    controller.setSegmentedButtonBorderSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 40,
+            divisions: 41,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.segmentedButtonBorderRadius == null ||
+                        (controller.segmentedButtonBorderRadius ?? -1) < 0
+                    ? segmentedButtonsRadiusDefaultLabel
+                    : (controller.segmentedButtonBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default 0',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.segmentedButtonBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setSegmentedButtonBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.segmentedButtonBorderRadius == null ||
+                              (controller.segmentedButtonBorderRadius ?? -1) < 0
+                          ? segmentedButtonsRadiusDefaultLabel
+                          : (controller.segmentedButtonBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          title: const Text('Border width'),
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.segmentedButtonBorderWidth == null ||
+                        (controller.segmentedButtonBorderWidth ?? 0) <= 0
+                    ? segmentedBorderWidthDefaultLabel
+                    : (controller.segmentedButtonBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.segmentedButtonBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setSegmentedButtonBorderWidth(
+                        value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.segmentedButtonBorderWidth == null ||
+                              (controller.segmentedButtonBorderWidth ?? 0) <= 0
+                          ? segmentedBorderWidthDefaultLabel
+                          : (controller.segmentedButtonBorderWidth
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

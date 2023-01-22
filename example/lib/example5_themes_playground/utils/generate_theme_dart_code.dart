@@ -299,11 +299,6 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    outlinedButtonRadius: ${controller.outlinedButtonBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String toggleButtonsBorderRadius = controller
-              .toggleButtonsBorderRadius !=
-          null
-      ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
-      : '';
   //
   // Material buttons sub themes setup CODE.
   //
@@ -367,9 +362,42 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    toggleButtonsBorderSchemeColor: ${controller.toggleButtonsBorderSchemeColor},\n';
+  final String toggleButtonsBorderRadius = controller
+              .toggleButtonsBorderRadius !=
+          null
+      ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String toggleButtonsBorderWidth = controller.toggleButtonsBorderWidth !=
           null
       ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  //
+  // SegmentedButton sub themes setup CODE.
+  //
+  final String segmentedButtonSchemeColor = controller
+              .segmentedButtonSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonSchemeColor: ${controller.segmentedButtonSchemeColor},\n';
+  final String segmentedButtonUnselectedSchemeColor = controller
+              .segmentedButtonUnselectedSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonUnselectedSchemeColor: ${controller.segmentedButtonUnselectedSchemeColor},\n';
+  final String segmentedButtonBorderSchemeColor = controller
+              .segmentedButtonBorderSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonBorderSchemeColor: ${controller.segmentedButtonBorderSchemeColor},\n';
+  final String segmentedButtonBorderRadius = controller
+              .segmentedButtonBorderRadius !=
+          null
+      ? '    segmentedButtonRadius: ${controller.segmentedButtonBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String segmentedButtonBorderWidth = controller
+              .segmentedButtonBorderWidth !=
+          null
+      ? '    segmentedButtonBorderWidth: ${controller.segmentedButtonBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
   // Switches, CheckBox and radio sub themes setup CODE.
@@ -873,6 +901,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
           //
+          '$segmentedButtonBorderRadius'
+          '$segmentedButtonSchemeColor'
+          '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonBorderSchemeColor'
+          '$segmentedButtonBorderWidth'
+          //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
           '$checkboxSchemeColor'
@@ -1023,6 +1057,12 @@ String generateThemeDartCode(ThemeController controller) {
           '$toggleButtonsUnselectedSchemeColor'
           '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
+          //
+          '$segmentedButtonBorderRadius'
+          '$segmentedButtonSchemeColor'
+          '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonBorderSchemeColor'
+          '$segmentedButtonBorderWidth'
           //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'

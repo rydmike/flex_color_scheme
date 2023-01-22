@@ -149,6 +149,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             toggleButtonsBorderSchemeColor:
                 controller.toggleButtonsBorderSchemeColor,
             toggleButtonsBorderWidth: controller.toggleButtonsBorderWidth,
+            // SegmentedButtons settings.
+            segmentedButtonRadius: controller.segmentedButtonBorderRadius,
+            segmentedButtonSchemeColor: controller.segmentedButtonSchemeColor,
+            segmentedButtonUnselectedSchemeColor:
+                controller.segmentedButtonUnselectedSchemeColor,
+            segmentedButtonBorderSchemeColor:
+                controller.segmentedButtonBorderSchemeColor,
+            segmentedButtonBorderWidth: controller.segmentedButtonBorderWidth,
             // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             switchThumbSchemeColor: controller.switchThumbSchemeColor,

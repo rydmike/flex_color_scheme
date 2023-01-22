@@ -99,8 +99,8 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.crop_16_9_outlined,
   ),
   GridItem(
-    panelLabel: 'Toggle Buttons',
-    buttonLabel: 'Toggle\nButtons',
+    panelLabel: 'Selection Buttons',
+    buttonLabel: 'Selection\nButtons',
     icon: Icons.view_week_outlined,
   ),
   GridItem(

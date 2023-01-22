@@ -450,6 +450,22 @@ class ThemeController with ChangeNotifier {
         Store.keyToggleButtonsBorderWidth,
         Store.defaultToggleButtonsBorderWidth);
     //
+    _segmentedButtonSchemeColor = await _themeService.load(
+        Store.keySegmentedButtonSchemeColor,
+        Store.defaultSegmentedButtonSchemeColor);
+    _segmentedButtonUnselectedSchemeColor = await _themeService.load(
+        Store.keySegmentedButtonUnselectedSchemeColor,
+        Store.defaultSegmentedButtonUnselectedSchemeColor);
+    _segmentedButtonBorderSchemeColor = await _themeService.load(
+        Store.keySegmentedButtonBorderSchemeColor,
+        Store.defaultSegmentedButtonBorderSchemeColor);
+    _segmentedButtonBorderRadius = await _themeService.load(
+        Store.keySegmentedButtonBorderRadius,
+        Store.defaultSegmentedButtonBorderRadius);
+    _segmentedButtonBorderWidth = await _themeService.load(
+        Store.keySegmentedButtonBorderWidth,
+        Store.defaultSegmentedButtonBorderWidth);
+    //
     // Switch, CheckBox and Radio SETTINGS.
     _unselectedToggleIsColored = await _themeService.load(
         Store.keyUnselectedToggleIsColored,
@@ -817,6 +833,17 @@ class ThemeController with ChangeNotifier {
         Store.defaultToggleButtonsBorderSchemeColor, false);
     setToggleButtonsBorderRadius(Store.defaultToggleButtonsBorderRadius, false);
     setToggleButtonsBorderWidth(Store.defaultToggleButtonsBorderWidth, false);
+    //
+    setSegmentedButtonSchemeColor(
+        Store.defaultSegmentedButtonSchemeColor, false);
+    setSegmentedButtonUnselectedSchemeColor(
+        Store.defaultSegmentedButtonUnselectedSchemeColor, false);
+    setSegmentedButtonBorderSchemeColor(
+        Store.defaultSegmentedButtonBorderSchemeColor, false);
+    setSegmentedButtonBorderRadius(
+        Store.defaultSegmentedButtonBorderRadius, false);
+    setSegmentedButtonBorderWidth(
+        Store.defaultSegmentedButtonBorderWidth, false);
     //
     // Switch, CheckBox and Radio SETTINGS.
     setUnselectedToggleIsColored(Store.defaultUnselectedToggleIsColored, false);
@@ -2419,6 +2446,9 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyOutlinedButtonPressedBorderWidth, value));
   }
 
+  // ToggleButtons SETTINGS.
+  // ===========================================================================
+
   late SchemeColor? _toggleButtonsSchemeColor;
   SchemeColor? get toggleButtonsSchemeColor => _toggleButtonsSchemeColor;
   void setToggleButtonsSchemeColor(SchemeColor? value, [bool notify = true]) {
@@ -2468,6 +2498,60 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsBorderWidth = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyToggleButtonsBorderWidth, value));
+  }
+
+  // SegmentedButton SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _segmentedButtonSchemeColor;
+  SchemeColor? get segmentedButtonSchemeColor => _segmentedButtonSchemeColor;
+  void setSegmentedButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _segmentedButtonSchemeColor) return;
+    _segmentedButtonSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySegmentedButtonSchemeColor, value));
+  }
+
+  late SchemeColor? _segmentedButtonUnselectedSchemeColor;
+  SchemeColor? get segmentedButtonUnselectedSchemeColor =>
+      _segmentedButtonUnselectedSchemeColor;
+  void setSegmentedButtonUnselectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _segmentedButtonUnselectedSchemeColor) return;
+    _segmentedButtonUnselectedSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keySegmentedButtonUnselectedSchemeColor, value));
+  }
+
+  late SchemeColor? _segmentedButtonBorderSchemeColor;
+  SchemeColor? get segmentedButtonBorderSchemeColor =>
+      _segmentedButtonBorderSchemeColor;
+  void setSegmentedButtonBorderSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _segmentedButtonBorderSchemeColor) return;
+    _segmentedButtonBorderSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keySegmentedButtonBorderSchemeColor, value));
+  }
+
+  late double? _segmentedButtonBorderRadius;
+  double? get segmentedButtonBorderRadius => _segmentedButtonBorderRadius;
+  void setSegmentedButtonBorderRadius(double? value, [bool notify = true]) {
+    if (value == _segmentedButtonBorderRadius) return;
+    _segmentedButtonBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySegmentedButtonBorderRadius, value));
+  }
+
+  late double? _segmentedButtonBorderWidth;
+  double? get segmentedButtonBorderWidth => _segmentedButtonBorderWidth;
+  void setSegmentedButtonBorderWidth(double? value, [bool notify = true]) {
+    if (value == _segmentedButtonBorderWidth) return;
+    _segmentedButtonBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySegmentedButtonBorderWidth, value));
   }
 
   // Switch, CheckBox and Radio SETTINGS.

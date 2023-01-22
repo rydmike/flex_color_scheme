@@ -164,6 +164,12 @@ class FlexSubThemesData with Diagnosticable {
     this.toggleButtonsBorderSchemeColor,
     this.toggleButtonsBorderWidth,
     //
+    this.segmentedButtonRadius,
+    this.segmentedButtonSchemeColor,
+    this.segmentedButtonUnselectedSchemeColor,
+    this.segmentedButtonBorderSchemeColor,
+    this.segmentedButtonBorderWidth,
+    //
     this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
@@ -220,6 +226,7 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.timePickerDialogRadius,
+    this.timePickerElementRadius,
     //
     this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
@@ -855,6 +862,38 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [thinBorderWidth];
   final double? toggleButtonsBorderWidth;
 
+  /// Border radius value for [SegmentedButton].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kButtonRadius] 20dp in M2 and to Stadium border in M3.
+  final double? segmentedButtonRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [SegmentedButton] use as its base theme color.
+  ///
+  /// Always defines the background color for selected button, and it's
+  /// onColor pair automatically defines the foreground for selected button.
+  ///
+  /// If not defined it defaults to [SchemeColor.secondaryContainer].
+  final SchemeColor? segmentedButtonSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [SegmentedButton] use as the foreground color for unselected toggle buttons.
+  ///
+  /// If not defined it defaults to [SchemeColor.onSecondaryContainer].
+  final SchemeColor? segmentedButtonUnselectedSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [SegmentedButton] use as its border themed color.
+  ///
+  /// If not defined it defaults to [SchemeColor.outline].
+  final SchemeColor? segmentedButtonBorderSchemeColor;
+
+  /// The border width of [SegmentedButton].
+  ///
+  /// If not defined, defaults to [thinBorderWidth];
+  final double? segmentedButtonBorderWidth;
+
   /// Defines which [Theme] based [ColorScheme] based color, that the old
   /// [MaterialButton] use as its main theme color.
   ///
@@ -1452,6 +1491,13 @@ class FlexSubThemesData with Diagnosticable {
   /// [kDialogRadius] 28dp, based on M3 Specification
   /// https://m3.material.io/components/dialogs/specs
   final double? timePickerDialogRadius;
+
+  /// Default border radius on time entry elements in [TimePickerDialog].
+  ///
+  /// Follows Material M3 guide.
+  /// https://m3.material.io/components/time-pickers/specs. and defaults to
+  /// [kTimeElementRadius] if not defined.
+  final double? timePickerElementRadius;
 
   /// Elevation of [SnackBar].
   ///
@@ -2275,6 +2321,12 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? toggleButtonsBorderSchemeColor,
     final double? toggleButtonsBorderWidth,
     //
+    final double? segmentedButtonRadius,
+    final SchemeColor? segmentedButtonSchemeColor,
+    final SchemeColor? segmentedButtonUnselectedSchemeColor,
+    final SchemeColor? segmentedButtonBorderSchemeColor,
+    final double? segmentedButtonBorderWidth,
+    //
     final SchemeColor? materialButtonSchemeColor,
     //
     final SchemeColor? switchSchemeColor,
@@ -2331,6 +2383,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? dialogRadius,
     final SchemeColor? dialogBackgroundSchemeColor,
     final double? timePickerDialogRadius,
+    final double? timePickerElementRadius,
     //
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
@@ -2482,6 +2535,18 @@ class FlexSubThemesData with Diagnosticable {
       toggleButtonsBorderWidth:
           toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
       //
+      segmentedButtonRadius:
+          segmentedButtonRadius ?? this.segmentedButtonRadius,
+      segmentedButtonSchemeColor:
+          segmentedButtonSchemeColor ?? this.segmentedButtonSchemeColor,
+      segmentedButtonUnselectedSchemeColor:
+          segmentedButtonUnselectedSchemeColor ??
+              this.segmentedButtonUnselectedSchemeColor,
+      segmentedButtonBorderSchemeColor: segmentedButtonBorderSchemeColor ??
+          this.segmentedButtonBorderSchemeColor,
+      segmentedButtonBorderWidth:
+          segmentedButtonBorderWidth ?? this.segmentedButtonBorderWidth,
+      //
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       //
@@ -2550,6 +2615,8 @@ class FlexSubThemesData with Diagnosticable {
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
+      timePickerElementRadius:
+          timePickerElementRadius ?? this.timePickerElementRadius,
       //
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
@@ -2786,6 +2853,14 @@ class FlexSubThemesData with Diagnosticable {
             toggleButtonsBorderSchemeColor &&
         other.toggleButtonsBorderWidth == toggleButtonsBorderWidth &&
         //
+        other.segmentedButtonRadius == segmentedButtonRadius &&
+        other.segmentedButtonSchemeColor == segmentedButtonSchemeColor &&
+        other.segmentedButtonUnselectedSchemeColor ==
+            segmentedButtonUnselectedSchemeColor &&
+        other.segmentedButtonBorderSchemeColor ==
+            segmentedButtonBorderSchemeColor &&
+        other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
+        //
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         //
         other.switchSchemeColor == switchSchemeColor &&
@@ -2847,6 +2922,7 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogElevation == dialogElevation &&
         other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
+        other.timePickerElementRadius == timePickerElementRadius &&
         //
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
@@ -3019,6 +3095,12 @@ class FlexSubThemesData with Diagnosticable {
         toggleButtonsBorderSchemeColor,
         toggleButtonsBorderWidth,
         //
+        segmentedButtonRadius,
+        segmentedButtonSchemeColor,
+        segmentedButtonUnselectedSchemeColor,
+        segmentedButtonBorderSchemeColor,
+        segmentedButtonBorderWidth,
+        //
         materialButtonSchemeColor,
         //
         switchSchemeColor,
@@ -3075,6 +3157,7 @@ class FlexSubThemesData with Diagnosticable {
         dialogElevation,
         dialogBackgroundSchemeColor,
         timePickerDialogRadius,
+        timePickerElementRadius,
         //
         snackBarElevation,
         snackBarBackgroundSchemeColor,
@@ -3241,6 +3324,18 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>(
         'toggleButtonsBorderWidth', toggleButtonsBorderWidth));
     //
+    properties.add(DiagnosticsProperty<double>(
+        'segmentedButtonRadius', segmentedButtonRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'segmentedButtonSchemeColor', segmentedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'segmentedButtonUnselectedSchemeColor',
+        segmentedButtonUnselectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'segmentedButtonBorderSchemeColor', segmentedButtonBorderSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'segmentedButtonBorderWidth', segmentedButtonBorderWidth));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'materialButtonSchemeColor', materialButtonSchemeColor));
     //
@@ -3337,6 +3432,8 @@ class FlexSubThemesData with Diagnosticable {
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'timePickerElementRadius', timePickerElementRadius));
     //
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));

@@ -198,6 +198,8 @@ enum SchemeColor {
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
+/// * [SegmentedButtonThemeData] for [SegmentedButton] via
+///   [segmentedButtonTheme].
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
@@ -3710,6 +3712,170 @@ class FlexSubThemes {
           // This is SDK default.
           return isLight ? Colors.black54 : Colors.white70;
         },
+      ),
+    );
+  }
+
+  /// An opinionated [SegmentedButtonThemeData] theme.
+  static SegmentedButtonThemeData segmentedButtonTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as background
+    /// color for the selected button.
+    ///
+    /// Defines the background color for selected button, and
+    /// it's onColor pair defines the foreground for selected button.
+    ///
+    /// If not defined, [SchemeColor.secondaryContainer] will be used.
+    final SchemeColor? selectedSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the
+    /// background color for unselected segmented button.
+    ///
+    /// If not defined, [SchemeColor.surface] will be used.
+    final SchemeColor? unselectedSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the border
+    /// color for the toggle buttons.
+    ///
+    /// If not defined, [ColorScheme.outline] will be the effective result.
+    final SchemeColor? borderSchemeColor,
+
+    /// The button corner radius.
+    ///
+    /// If not defined, defaults to defaults to Stadium border.
+    final double? radius,
+
+    /// The width of the borders around the segmented button.
+    ///
+    /// If null, defaults to [kThinBorderWidth] = 1.0.
+    final double? borderWidth,
+
+    // /// A temporary flag used to opt-in to new Material 3 features.
+    // ///
+    // /// If set to true, the theme will use Material3 default styles when
+    // /// properties are undefined, if false defaults will use FlexColorScheme's
+    // /// own opinionated defaults values.
+    // ///
+    // /// The M2/M3 SDK defaults will only be used for properties that are not
+    // /// defined, if defined they keep their defined values.
+    // final bool useMaterial3 = false,
+  }) {
+    // Get selected color, defaults to primary.
+    final SchemeColor selectedScheme =
+        selectedSchemeColor ?? SchemeColor.secondaryContainer;
+    final Color selectedColor = schemeColor(selectedScheme, colorScheme);
+    final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
+    final Color unselectedColor =
+        schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onUnselectedColor = schemeColorPair(
+        unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color borderColor =
+        schemeColor(borderSchemeColor ?? SchemeColor.outline, colorScheme);
+
+    // Effective border width, default different with M3.
+    final double effectiveWidth = borderWidth ?? kThinBorderWidth;
+
+    return SegmentedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return selectedColor;
+          }
+          return unselectedSchemeColor == null ? null : unselectedColor;
+        }),
+        foregroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return colorScheme.onSurface.withOpacity(0.38);
+          }
+          if (states.contains(MaterialState.selected)) {
+            if (states.contains(MaterialState.pressed)) {
+              return onSelectedColor;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return onSelectedColor;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return onSelectedColor;
+            }
+            return onSelectedColor;
+          } else {
+            if (states.contains(MaterialState.pressed)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface
+                  : onUnselectedColor;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface
+                  : onUnselectedColor;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface
+                  : onUnselectedColor;
+            }
+            return unselectedSchemeColor == null ? null : onUnselectedColor;
+          }
+        }),
+        overlayColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            if (states.contains(MaterialState.hovered)) {
+              return unselectedColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return unselectedColor.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return unselectedColor.withOpacity(0.12);
+            }
+          } else {
+            if (states.contains(MaterialState.hovered)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface.withOpacity(0.08)
+                  : onUnselectedColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface.withOpacity(0.12)
+                  : onUnselectedColor.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return unselectedSchemeColor == null
+                  ? colorScheme.onSurface.withOpacity(0.12)
+                  : onUnselectedColor.withOpacity(0.12);
+            }
+          }
+          return null;
+        }),
+        side: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return BorderSide(
+              color: colorScheme.onSurface.withOpacity(0.12),
+              width: effectiveWidth,
+            );
+          }
+          return BorderSide(
+            color: borderColor,
+            width: effectiveWidth,
+          );
+        }),
+        shape: radius == null
+            ? null
+            : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius),
+                  ),
+                ),
+              ),
       ),
     );
   }

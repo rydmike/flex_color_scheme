@@ -6293,6 +6293,21 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : null,
+      // ToggleButtons theme.
+      segmentedButtonTheme: useSubThemes
+          ? FlexSubThemes.segmentedButtonTheme(
+              colorScheme: colorScheme,
+              selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
+              unselectedSchemeColor:
+                  subTheme.segmentedButtonUnselectedSchemeColor,
+              borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
+              borderWidth: subTheme.segmentedButtonBorderWidth ??
+                  subTheme.thinBorderWidth,
+              radius: subTheme.segmentedButtonRadius ?? subTheme.defaultRadius,
+              // minButtonSize: subTheme.buttonMinSize,
+              // useMaterial3: useMaterial3,
+            )
+          : null,
       // Switch theme.
       switchTheme: useSubThemes
           ? FlexSubThemes.switchTheme(
