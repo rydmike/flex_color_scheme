@@ -3716,7 +3716,7 @@ class FlexSubThemes {
     );
   }
 
-  /// An opinionated [SegmentedButtonThemeData] theme.
+  /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
   static SegmentedButtonThemeData segmentedButtonTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,

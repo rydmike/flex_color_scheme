@@ -6293,7 +6293,7 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : null,
-      // ToggleButtons theme.
+      // SegmentedButton theme.
       segmentedButtonTheme: useSubThemes
           ? FlexSubThemes.segmentedButtonTheme(
               colorScheme: colorScheme,
@@ -6427,7 +6427,7 @@ class FlexColorScheme with Diagnosticable {
       // DropDownMenu theme.
       dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
         colorScheme: colorScheme,
-        // FCS only support style matching it to same as TextField
+        // Style match its InputDecoration to same as TextField.
         inputDecorationTheme: effectiveInputDecorationTheme,
       ),
       // MenuTheme theme, for MenuBar, MenuAnchor and DropDownMenu.
