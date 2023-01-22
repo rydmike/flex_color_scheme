@@ -119,7 +119,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 The next stable version of Flutter after version 3.3 must be released before FlexColorScheme 7.0 can be released. 
 
-- MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: Tune FCS the tinted disabled color.
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage. Test new colors too.
