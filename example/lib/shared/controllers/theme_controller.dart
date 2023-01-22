@@ -541,6 +541,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultDialogBackgroundSchemeColor);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
+    _timePickerElementRadius = await _themeService.load(
+        Store.keyTimePickerElementRadius, Store.defaultTimePickerElementRadius);
     _dialogElevation = await _themeService.load(
         Store.keyDialogElevation, Store.defaultDialogElevation);
     //
@@ -889,6 +891,7 @@ class ThemeController with ChangeNotifier {
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
+    setTimePickerElementRadius(Store.defaultTimePickerElementRadius, false);
     setDialogElevation(Store.defaultDialogElevation, false);
     //
     // Tooltip SETTINGS.
@@ -2813,6 +2816,15 @@ class ThemeController with ChangeNotifier {
     _dialogBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDialogBorderRadius, value));
+  }
+
+  late double? _timePickerElementRadius;
+  double? get timePickerElementRadius => _timePickerElementRadius;
+  void setTimePickerElementRadius(double? value, [bool notify = true]) {
+    if (value == _timePickerElementRadius) return;
+    _timePickerElementRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTimePickerElementRadius, value));
   }
 
   late double? _dialogElevation;

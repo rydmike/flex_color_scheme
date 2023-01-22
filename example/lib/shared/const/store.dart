@@ -1146,6 +1146,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadius = null;
 
+  // Key used to read and save the timePickerElementRadius value.
+  static const String keyTimePickerElementRadius = 'timePickerElementRadius';
+  // Default value for the timePickerElementRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTimePickerElementRadius = null;
+
   // Key used to read and save the dialogElevation value.
   static const String keyDialogElevation = 'dialogElevation';
   // Default value for the dialogElevation, also used to reset settings.

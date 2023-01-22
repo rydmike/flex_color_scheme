@@ -6457,7 +6457,8 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
-              elementRadius: subTheme.cardRadius ?? subTheme.defaultRadius,
+              elementRadius:
+                  subTheme.timePickerElementRadius ?? subTheme.defaultRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
           : null,
       snackBarTheme: useSubThemes

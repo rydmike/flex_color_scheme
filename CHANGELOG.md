@@ -27,7 +27,7 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `elevation` to `FlexSubThemes.timePickerTheme`, and make it use the dialog shared `FlexSubThemesData.dialogElevation` setting. This property does not yet exist in Flutter beta 3.7.0-1.4.pre. It is thus unsure if it will land in next stable Flutter, if it does not it will be commented and removed for the next FCS release as well.
 
-- Added boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. This also applies in M3 mode and to widgets that use separate defaults for disabled color, not one to disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting, with broader and more consistent impact. Defaults to true. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.        
+- Added boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. This also applies in M3 mode and to widgets that use separate defaults for disabled color, not one to disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting, with broader and more consistent impact. Defaults to true. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.
 
 - Added boolean `inputDecoratorFocusedHasBorder` to `FlexSubThemesData`. Default to true. If set to false, there is no border on the `InputDecorator`, typically used by text fields, when the input decorator is focused. It controls the new parameter `focusedHasBorder` in `FlexSubThemes.inputDecorationTheme`.
 
@@ -47,7 +47,7 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `menuTheme` to `FlexSubThemes`, it provides styling for elevation, radius and background color with optional opacity for the new Mw components `MenuAnchor`, `MenuBar` and `DropDownMenu`. The same `FlexSubThemesData` that are used for `PopupMenuButton` are used to control this theme. Those are `popupMenuRadius`, `popupMenuElevation`, `popupMenuSchemeColor`, and `popupMenuOpacity`.  
 
-- Added `timePickerElementRadius` to `FlexSubThemesData` that can be used to control `elementRadius` in `FlexSubThemes.timePickerTheme`, it changes the themed border radius of the time input entry fields.  
+- Added `timePickerElementRadius` to `FlexSubThemesData` that can be used to control `elementRadius` in `FlexSubThemes.timePickerTheme`, it changes the themed border radius of the time input entry elements.  
 
 - Added `segmentedButtonRadius`, `segmentedButtonSchemeColor`, `segmentedButtonUnselectedSchemeColor`, `segmentedButtonBorderSchemeColor` and `segmentedButtonBorderWidth` to `FlexSubThemesData` they control the equivalent properties in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
 
@@ -107,6 +107,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added settings for unselected button and border colors for `ToggleButtons` to panel **Toggle Buttons**.
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
 - Added settings for `Slider` value indicator color, visibility and value indicator type.
+- Added setting for time picker input element border radius to pane **Dialogs**.
 
 
 **FIX**
@@ -116,14 +117,13 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 **TODO for STABLE 7.0 RELEASE**
 
-The next stable version of Flutter after version 3.3 must be released, before FlexColorScheme 7.0 can be released. 
+The next stable version of Flutter after version 3.3 must be released before FlexColorScheme 7.0 can be released. 
 
-- MUST DO: TimePicker, add internal element radius (kTimeElementRadius=8). 
 - MUST DO: Review and tune new M3 color schemes, red to teal done. Six more remaining.
 - MUST DO: Tune FCS the tinted disabled color.
 - MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Review and fix test coverage.
-- MUST DO: Review and test all examples.
+- MUST DO: Review and fix test coverage. Test new colors too.
+- MUST DO: Review and test build all examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
   - ListTile transparent added to core defaults, may not need, review before release.
@@ -134,7 +134,6 @@ The next stable version of Flutter after version 3.3 must be released, before Fl
   - Review and update older screenshots and GIFs.
   - Use image zoom feature in docs.page more on current images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
-
 
 - Maybe add more sub-theme component color presentations to the Playground's "Component Color". (Postponed to V7.1)
 - Maybe add new NavigationDrawer theme. (Postponed to V7.1)

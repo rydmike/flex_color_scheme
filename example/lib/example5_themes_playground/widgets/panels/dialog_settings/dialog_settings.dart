@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -20,10 +19,6 @@ class DialogSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
-        .copyWith(color: theme.textTheme.bodySmall!.color);
-    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String dialogRadiusDefaultLabel =
         controller.dialogBorderRadius == null &&
@@ -33,6 +28,15 @@ class DialogSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+    final String dialogElementRadiusDefaultLabel =
+        controller.timePickerElementRadius == null &&
+                controller.defaultRadius == null
+            ? 'default 8'
+            : controller.timePickerElementRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -171,38 +175,62 @@ class DialogSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        // Material 3 dialog elevation issue info.
-        if (useMaterial3)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    style: spanTextStyle,
-                    text:
-                        "Do to an issue with Material's behavior in M3, there "
-                        'is no elevation or tint on Dialogs when Material 3 is '
-                        'enabled in Flutter 3.3 and earlier versions. You '
-                        'can read more about it in docs ',
-                  ),
-                  LinkTextSpan(
-                    style: linkStyle,
-                    uri: _fcsFlutterIssues,
-                    text: 'known SDK M3 issues',
-                  ),
-                  TextSpan(
-                    style: spanTextStyle,
-                    text: '. Dialogs usually have a scrim, so the issue is not '
-                        'so visible when they are actually used as dialogs. '
-                        'Fix should arrive in next stable release after '
-                        'Flutter 3.3.',
-                  ),
-                ],
-              ),
+        const AlertDialogShowcase(),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Time picker time input elements border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.timePickerElementRadius == null ||
+                        (controller.timePickerElementRadius ?? -1) < 0
+                    ? dialogElementRadiusDefaultLabel
+                    : (controller.timePickerElementRadius?.toStringAsFixed(0) ??
+                        '')
+                : controller.useMaterial3
+                    ? 'default 8'
+                    : 'default 4',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.timePickerElementRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setTimePickerElementRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.timePickerElementRadius == null ||
+                              (controller.timePickerElementRadius ?? -1) < 0
+                          ? dialogElementRadiusDefaultLabel
+                          : (controller.timePickerElementRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : controller.useMaterial3
+                          ? 'default 8'
+                          : 'default 4',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
           ),
-        const AlertDialogShowcase(),
+        ),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
       ],
