@@ -30,7 +30,9 @@ class DrawerSettings extends StatelessWidget {
           subtitle: Text('Flutter SDK default background is '
               'colorScheme.background for Drawer in M2, but '
               'colorScheme.surface in M3. FlexColorScheme component '
-              'sub-themes use surface as default for both modes.'),
+              'sub-themes use surface as default for both modes. The '
+              'NavigationDrawer will get more quick theming settings, '
+              'similar to NavigationRail in a future FCS version.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
