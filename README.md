@@ -2,6 +2,8 @@
 
 # FlexColorScheme
 
+> This is dev release 7.0.0-dev.1 of FlexColorScheme. It requires Flutter beta 3.7.0-1.4.pre or later.
+
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
 Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes. Apply optional surface blends, and use Material 3 style seeded color schemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from numerous pre-made designs or make your own. You can also use optional component sub theming, that are quick and easy to configure.
@@ -113,7 +115,7 @@ Complete generated package [**API documentation**](https://pub.dev/documentation
 
 To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB companion app called the **Themes Playground**.
 
-The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v6) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings. You can reset settings back to their default values, so you can always start over if you get lost in all the configuration possibilities.
+The [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-v7) is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings. You can reset settings back to their default values, so you can always start over if you get lost in all the configuration possibilities.
 
 The most useful and popular feature of the **Themes Playground** is that it can generate FlexColorScheme API setup code needed to produce the shown active theme configuration. It even shows and modifies the code as you change settings. You can see the code side-by-side as you change settings. This is a fun way to get familiar with the API. Beware, fiddling with all the different themes and settings can be quite fun and addictive, happy theming! 💙
 
