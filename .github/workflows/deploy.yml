@@ -30,7 +30,7 @@ on:
       - "**.md"
   release:
     branches: [none]
-    types: [published]
+    types: [none]
     paths-ignore:
       - "**.md"
 jobs:
