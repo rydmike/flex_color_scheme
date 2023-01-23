@@ -815,27 +815,17 @@ class FlexColorScheme with Diagnosticable {
 
   /// The color and geometry [TextTheme] values used to configure [textTheme].
   ///
-  /// Same property as in [ThemeData] factory. Included for convenience to
-  /// avoid a copyWith to change it.
-  ///
+  /// Same property as in [ThemeData] factory.
   /// Included for convenience to avoid a copyWith if it needs to be changed.
   /// Default value deviates from the Flutter standard that uses the old
   /// [Typography.material2014], in favor of newer [Typography.material2018]
   /// as default typography if one is not provided.
   ///
-  /// Never mix different [Typography] in light and dark theme mode. If you
-  /// do, lerp between dark and light theme mode will fail due Flutter SDK
-  /// not being able to handle the use case. See issue:
-  /// https://github.com/flutter/flutter/issues/89947
-  ///
-  /// If you use a default light or
-  /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
-  /// the other mode, you must set either the default ThemeData to
-  /// [Typography.material2018] OR the [FlexColorScheme.typography] to
-  /// [Typography.material2014] to avoid this issue. It is not generally
-  /// recommended to create your light and dark theme data with
-  /// different methods. If you use FlexColorScheme, DO use it for both the
-  /// light and dark theme mode.
+  /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
+  /// older [Typography.material2018], which is correct for M2. Please note
+  /// that Flutter ThemeData defaults to even older Typography
+  /// [Typography.material2014] when not using M3. This is done for legacy
+  /// compatibility reasons, you should use 2018 with M2.
   final Typography? typography;
 
   /// Apply a semi-transparent overlay color on Material surfaces to indicate
@@ -2162,7 +2152,6 @@ class FlexColorScheme with Diagnosticable {
     /// how adaptive widgets and scroll looks and feels on other platforms.
     final TargetPlatform? platform,
 
-    // TODO(rydmike): Consider changing the default to Typography 2021.
     /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
     /// Same property as in [ThemeData] factory.
@@ -2171,19 +2160,11 @@ class FlexColorScheme with Diagnosticable {
     /// [Typography.material2014], in favor of newer [Typography.material2018]
     /// as default typography if one is not provided.
     ///
-    /// Never mix different [Typography] in light and dark theme mode. If you
-    /// do, lerp between dark and light theme mode will fail due Flutter SDK
-    /// not being able to handle the use case. See issue:
-    /// https://github.com/flutter/flutter/issues/89947
-    ///
-    /// If you use a default light or
-    /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
-    /// the other mode, you must set either the default ThemeData to
-    /// [Typography.material2018] OR the [FlexColorScheme.typography] to
-    /// [Typography.material2014] to avoid this issue. It is not generally
-    /// recommended to create your light and dark theme data with
-    /// different methods. If you use FlexColorScheme, DO use it for both the
-    /// light and dark theme mode.
+    /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
+    /// older [Typography.material2018], which is correct for M2. Please note
+    /// that Flutter ThemeData defaults to even older Typography
+    /// [Typography.material2014] when not using M3. This is done for legacy
+    /// compatibility reasons, you should use 2018 with M2.
     final Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
@@ -3936,19 +3917,11 @@ class FlexColorScheme with Diagnosticable {
     /// [Typography.material2014], in favor of newer [Typography.material2018]
     /// as default typography if one is not provided.
     ///
-    /// Never mix different [Typography] in light and dark theme mode. If you
-    /// do, lerp between dark and light theme mode will fail due Flutter SDK
-    /// not being able to handle the use case. See issue:
-    /// https://github.com/flutter/flutter/issues/89947
-    ///
-    /// If you use a default light or
-    /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
-    /// the other mode, you must set either the default ThemeData to
-    /// [Typography.material2018] OR the [FlexColorScheme.typography] to
-    /// [Typography.material2014] to avoid this issue. It is not generally
-    /// recommended to create your light and dark theme data with
-    /// different methods. If you use FlexColorScheme, DO use it for both the
-    /// light and dark theme mode.
+    /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
+    /// older [Typography.material2018], which is correct for M2. Please note
+    /// that Flutter ThemeData defaults to even older Typography
+    /// [Typography.material2014] when not using M3. This is done for legacy
+    /// compatibility reasons, you should use 2018 with M2.
     final Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
@@ -5811,10 +5784,13 @@ class FlexColorScheme with Diagnosticable {
             : null;
 
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
-    // Same as in ThemeData. Defined for use in the tooltip sub-theme.
     // In M3 mode we use the new dividerColor colorScheme.outlineVariant,
-    // unless useM2StyleDividerInM3 is set to true, it it is true
+    // unless useM2StyleDividerInM3 is set to true, if it is true
     // we use the the M2 style also in M3.
+    // If no sub theme usage and not M3 we use same style as in ThemeData.
+    // The resulting Color is used by the old ThemeData.DividerColor and by
+    // the newer DividerTheme. The tooltip theme also uses it for a discrete
+    // outline border color.
     final Color dividerColor =
         (useMaterial3 && (useSubThemes && !subTheme.useM2StyleDividerInM3)) ||
                 (useMaterial3 && !useSubThemes)

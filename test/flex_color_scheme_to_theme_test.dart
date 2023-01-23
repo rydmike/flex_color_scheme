@@ -4326,4 +4326,58 @@ void main() {
       equals(colorScheme.primary),
     );
   });
+  test(
+      'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using Flutter Slider with baseSchemeColor secondaryContainer '
+      'EXPECT slider and indicator of secondaryContainer', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        sliderBaseSchemeColor: SchemeColor.secondaryContainer,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.sliderTheme.valueIndicatorColor,
+      equals(colorScheme.secondaryContainer),
+    );
+    expect(
+      theme.sliderTheme.activeTrackColor,
+      equals(colorScheme.secondaryContainer),
+    );
+    expect(
+      theme.sliderTheme.thumbColor,
+      equals(colorScheme.secondaryContainer),
+    );
+  });
+  test(
+      'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using Flutter Slider with baseSchemeColor primaryContainer '
+      'and sliderIndicatorSchemeColor inversePrimary '
+      'EXPECT slider primaryContainer and indicator of inversePrimary', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      subThemesData: const FlexSubThemesData(
+        sliderBaseSchemeColor: SchemeColor.primaryContainer,
+        sliderIndicatorSchemeColor: SchemeColor.inversePrimary,
+      ),
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.sliderTheme.valueIndicatorColor,
+      equals(colorScheme.inversePrimary),
+    );
+    expect(
+      theme.sliderTheme.activeTrackColor,
+      equals(colorScheme.primaryContainer),
+    );
+    expect(
+      theme.sliderTheme.thumbColor,
+      equals(colorScheme.primaryContainer),
+    );
+  });
 }
