@@ -5964,7 +5964,7 @@ class FlexColorScheme with Diagnosticable {
       disabledColor: tintedDisabled
           ? colorScheme.primary
               .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-              .withAlpha(kDisabledBackgroundAlpha)
+              .withAlpha(kDisabledForegroundAlpha)
           : isDark
               ? Colors.white38
               : Colors.black38,

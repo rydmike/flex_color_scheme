@@ -704,7 +704,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             floatingLabelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -732,7 +732,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -743,7 +743,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -753,7 +753,7 @@ void main() {
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha));
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -816,8 +816,8 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26),
                 width: 1,
               ),
             ),
@@ -874,7 +874,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             floatingLabelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -902,7 +902,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -913,7 +913,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -923,7 +923,7 @@ void main() {
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha));
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -986,8 +986,8 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26),
                 width: 1,
               ),
             ),
@@ -1154,8 +1154,8 @@ void main() {
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26),
                 width: 1,
               ),
             ),
@@ -1323,8 +1323,8 @@ void main() {
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             borderSide: BorderSide(
               color: colorScheme.primary
-                  .blendAlpha(colorScheme.onSurface, 0xAA)
-                  .withAlpha(0x31),
+                  .blendAlpha(colorScheme.onSurface, 0xCC)
+                  .withAlpha(0x26),
               width: 1,
             ),
           ),
@@ -1393,8 +1393,8 @@ void main() {
           equals(
             TextStyle(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31)),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26)),
           ));
       // Floating label default style
       expect(
@@ -1445,7 +1445,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             floatingLabelStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -1473,7 +1473,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -1484,7 +1484,7 @@ void main() {
                       .withAlpha(kDisabledBackgroundAlpha),
                 );
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -1494,7 +1494,7 @@ void main() {
                         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
                         .withAlpha(kDisabledBackgroundAlpha));
               }
-              return TextStyle(color: Colors.black.withAlpha(0x99));
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -1566,8 +1566,8 @@ void main() {
               ),
               borderSide: BorderSide(
                 color: colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26),
                 width: 1,
               ),
             ),
@@ -1647,8 +1647,8 @@ void main() {
           equals(
             TextStyle(
                 color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xAA)
-                    .withAlpha(0x31)),
+                    .blendAlpha(colorScheme.onSurface, 0xCC)
+                    .withAlpha(0x26)),
           ));
       // Floating label default style
       expect(
@@ -1697,7 +1697,7 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return colorScheme.primary
                         .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
+                        .withAlpha(0x26);
                   }
                   return colorScheme.primary;
                 },
@@ -1775,7 +1775,7 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return colorScheme.secondary
                         .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
+                        .withAlpha(0x26);
                   }
                   return colorScheme.secondary;
                 },
@@ -1837,7 +1837,7 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return colorScheme.primary
                         .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
+                        .withAlpha(0x26);
                   }
                   return colorScheme.primary;
                 },
@@ -2185,7 +2185,7 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return colorScheme.primary
                         .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
+                        .withAlpha(0x26);
                   }
                   return colorScheme.primary;
                 },
@@ -2251,7 +2251,7 @@ void main() {
                   if (states.contains(MaterialState.disabled)) {
                     return colorScheme.tertiary
                         .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x31);
+                        .withAlpha(0x26);
                   }
                   return colorScheme.tertiary;
                 },
@@ -2478,7 +2478,7 @@ void main() {
                     return BorderSide(
                       color: colorScheme.primary
                           .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x31),
+                          .withAlpha(0x26),
                       width: 1.5,
                     );
                   }
@@ -2563,7 +2563,7 @@ void main() {
                     return BorderSide(
                       color: colorScheme.secondaryContainer
                           .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x31),
+                          .withAlpha(0x26),
                       width: 1.5,
                     );
                   }
@@ -2660,7 +2660,7 @@ void main() {
                     return BorderSide(
                       color: colorScheme.tertiary
                           .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x31),
+                          .withAlpha(0x26),
                       width: 1.5,
                     );
                   }
@@ -3610,8 +3610,8 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
-                .withAlpha(0x31),
+                .blendAlpha(colorScheme.onSurface, 0xCC)
+                .withAlpha(0x26),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
@@ -3654,8 +3654,8 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
-                .withAlpha(0x31),
+                .blendAlpha(colorScheme.onSurface, 0xCC)
+                .withAlpha(0x26),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -3696,8 +3696,8 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F)
                 .withAlpha(0x33),
             disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
-                .withAlpha(0x31),
+                .blendAlpha(colorScheme.onSurface, 0xCC)
+                .withAlpha(0x26),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
@@ -3740,11 +3740,11 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F + 0x19)
                 .withAlpha(0x33),
             disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
+                .blendAlpha(colorScheme.onSurface, 0xCC)
                 .withAlpha(0x5E),
             disabledBorderColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
-                .withAlpha(0x31),
+                .blendAlpha(colorScheme.onSurface, 0xCC)
+                .withAlpha(0x26),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -3787,11 +3787,11 @@ void main() {
                 .blendAlpha(Colors.white, 0x1F + 0x19)
                 .withAlpha(0x33),
             disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
+                .blendAlpha(colorScheme.onSurface, 0xCC)
                 .withAlpha(0x5E),
             disabledBorderColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xAA)
-                .withAlpha(0x31),
+                .blendAlpha(colorScheme.onSurface, 0xCC)
+                .withAlpha(0x26),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -3977,7 +3977,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x3120004f),
+            disabledColor: const Color(0x2613002f),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: const Color(0xff000000),
@@ -4017,7 +4017,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x3120004f),
+            disabledColor: const Color(0x2613002f),
             selectedColor: const Color(0xff03dac6),
             secondarySelectedColor: const Color(0xff03dac6),
             surfaceTintColor: const Color(0xff6200ee),
@@ -4073,7 +4073,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffccf7f3),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x31014842),
+            disabledColor: const Color(0x26002b27),
             selectedColor: const Color(0xff97efe7),
             secondarySelectedColor: const Color(0xff97efe7),
             surfaceTintColor: const Color(0xff6200ee),

@@ -276,20 +276,21 @@ const int kFocusBackgroundAlpha = 0x26;
 /// Value: 0x33 = 51 = 20%
 const int kPressedBackgroundAlpha = 0x33;
 
+// TODO(rydmike): Add M3 mode tinted disable support to buttons.
 /// Disabled state alpha value on background elements.
 ///
 /// Used on opt in sub-themes by [InputDecorator], [ElevatedButton],
 /// [OutlinedButton], [TextButton], `ButtonThemeData` for legacy buttons and
-/// by [ToggleButtons].
+/// by [ToggleButtons], but current only in M2 mode.
 ///
-/// Value: 0x31 = 49 = 19%
-const int kDisabledBackgroundAlpha = 0x31;
+/// Value: 0x26 = 38 = 15%
+const int kDisabledBackgroundAlpha = 0x26;
 
 /// Disabled state alpha value on foreground elements.
 ///
 /// Used on opt in sub-themes by [ElevatedButton], [OutlinedButton] and by
 /// [ToggleButtons] as well as by [ThemeData.disabledColor] when opting in
-/// on sub-theme effects, for consistent disable colors.
+/// on sub-theme tinted disable colors.
 ///
 /// Value: 0x5E = 94 = 37%
 const int kDisabledForegroundAlpha = 0x5E;
@@ -305,8 +306,8 @@ const int kDisabledForegroundAlpha = 0x5E;
 ///                  .withAlpha(kDisabledBackgroundAlpha);
 /// ```
 ///
-/// Value: 0xAA = 170 = 67%
-const int kDisabledAlphaBlend = 0xAA;
+/// Value: 0xCC = 204 = 80%
+const int kDisabledAlphaBlend = 0xCC;
 
 /// Enabled border alpha value on border sides.
 ///

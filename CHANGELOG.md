@@ -27,7 +27,7 @@ This major release does not contain any breaking API changes. However, the major
 
 - Added `elevation` to `FlexSubThemes.timePickerTheme`, and make it use the dialog shared `FlexSubThemesData.dialogElevation` setting. This property does not yet exist in Flutter beta 3.7.0-1.4.pre. It is thus unsure if it will land in next stable Flutter, if it does not it will be commented and removed for the next FCS release as well.
 
-- Added boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. This also applies in M3 mode and to widgets that use separate defaults for disabled color, not one to disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting, with broader and more consistent impact. Defaults to true. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.
+- Added boolean `tintedDisabledControls` to `FlexSubThemesData`. If set to true, disabled widgets will get a hint of their active main color when disabled. In future minor versions, this will also apply to components that use own themed settings for disabled color, not only to the ones where disabled color controlled by `ThemeData.disabledColor`. Previously tinted disabled color for `ThemeData.disabledColor` was included and defined when `FlexSubThemesData.interactionEffects` was set to true. It is now instead controlled by this separate tinted disabled-controls setting. Defaults to true, for an FCS opinionated default. This matches past default when it was included in `FlexSubThemesData.interactionEffects`.
 
 - Added boolean `inputDecoratorFocusedHasBorder` to `FlexSubThemesData`. Default to true. If set to false, there is no border on the `InputDecorator`, typically used by text fields, when the input decorator is focused. It controls the new parameter `focusedHasBorder` in `FlexSubThemes.inputDecorationTheme`.
 
@@ -53,6 +53,8 @@ This major release does not contain any breaking API changes. However, the major
 
 **CHANGE**
 
+- Style change on tinted disabled components when opting in on `tintedDisabledControls`. It is visually breaking, but subtle. Disable opacity alpha and alpha blend constants where tuned, kDisabledAlphaBlend from 0xAA (67%) to 0xCC (80%) and kDisabledBackgroundAlpha from 0x31 (19%) to 0x26 (15%). The new tinted disable colors look better. They are close in style to default grey ones, with a subtle primary tint, while still being more legible than in previous versions. Opting in on tinted disabled components is still not yet available on all components. It is more available in M2 mode. In upcoming minor releases, tinted disabled components will be made available on all themed components and consistently applied in both M2 and M3 mode. More visual tuning of this feature may be required in later releases.
+  
 - Removed in version 6.1.0 included manual M3 elevation tint for `BottomSheet` and `PopupMenuButton`, in Flutter 3.7.0, the tint is included automatically as it should be and we no longer need the workaround.
 
 - The `ListTileThemeData` was added to core defaults. It sets `ListTileThemeData.tileColor` to `Colors.transparent` if `ThemeData.useMaterial3` is true. This is done to avoid issue: https://github.com/flutter/flutter/issues/117700. This extra M3 core default theme fix will be removed as soon as the issue is fixed.
@@ -115,11 +117,10 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect. May not need this work around in V7.0 release if the issue does not land in new Flutter stable after 3.3. follow-up.
 - Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
 
-**TODO for STABLE 7.0 RELEASE**
+**TODO BEFORE STABLE 7.0 RELEASE**
 
 The next stable version of Flutter after version 3.3 must be released before FlexColorScheme 7.0 can be released. 
 
-- MUST DO: Tune FCS the tinted disabled color.
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage. Test new colors too.
 - MUST DO: Review and test build all examples.
@@ -134,12 +135,15 @@ The next stable version of Flutter after version 3.3 must be released before Fle
   - Use image zoom feature in docs.page more on current images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
-- Maybe add more sub-theme component color presentations to the Playground's "Component Color". (Postponed to V7.1)
-- Maybe add new NavigationDrawer theme. (Postponed to V7.1)
-- Maybe add new MenuBar theme. (Postponed to V7.1)
-- Maybe add more "set to M3 design" buttons, like on TextField panel to e.g. NavigationBar and NavigationRail.
-- Maybe to `TabBar` add unselected color, not selected dim, divider color. Make it respect FCS hover and splash setting. (Postponed to V7.1)
-- Maybe add support for `FlexSubThemesData.tintedDisabledControls` to more widgets that use own disabled color settings, instead of `ThemeData.disabledColor`. Check at least all Material buttons, Chips, ToggleButtons, SegmentedButton, Switch, Check, Radio and Slider. (Postponed to V7.1)
+Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
+
+- Make tinted disabled controls apply consistently to all controls when applied.
+- Make tinted interaction effect apply consistently to all controls. New M3 widgets need to define it in their own sub-themes to get them, they don't use the hover, focus, highlight color from ThemeData for their defaults.   
+- Add more sub-theme component color presentations to the Playground's **Component Themes** panel.
+- Add some theming options for the new NavigationDrawer theme.
+- Add some theming options for the new MenuBar theme.
+- Add more "Set to M3 design" buttons like on **Text Field** panel, e.g. to Navigation Bar and Navigation Rail panels.
+- To TabBar theming, add unselected color, not selected dim/undim and custom bottom border line color.
 
 
 ## 6.1.2
