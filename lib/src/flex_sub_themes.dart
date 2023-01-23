@@ -4525,9 +4525,16 @@ class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.background].
     final SchemeColor? backgroundSchemeColor,
 
+    // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+    // Probably wont exist in next stable after 3.3 either.
     /// Dialog elevation.
     ///
     /// If not defined, defaults to [kDialogElevation] = 6.
+    ///
+    /// NOTE:
+    ///
+    /// This elevation does not exist in beta 3.7.0-1.4.pre. It has no
+    /// function until support from master lands.
     final double? elevation,
 
     /// Outer corner radius.
@@ -4562,8 +4569,8 @@ class FlexSubThemes {
     return TimePickerThemeData(
       backgroundColor: background,
       dialBackgroundColor: colorScheme?.surfaceVariant,
-      // TODO(rydmike): This elevation does not exist in beta 3.7.0
-      elevation: elevation ?? kDialogElevation,
+      // TODO(rydmike): This elevation does not exist in beta 3.7.0-1.4.pre
+      // elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),

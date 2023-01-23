@@ -524,7 +524,8 @@ void main() {
         FlexSubThemes.timePickerTheme(),
         equals(
           TimePickerThemeData(
-            elevation: 6,
+            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -562,7 +563,8 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            elevation: 6,
+            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // elevation: 6,
             backgroundColor: colorScheme.tertiary,
             dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
@@ -601,7 +603,8 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            elevation: 6,
+            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
@@ -641,7 +644,8 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            elevation: 6,
+            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

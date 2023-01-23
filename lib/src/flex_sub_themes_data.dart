@@ -1443,6 +1443,7 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
+  // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
@@ -1456,6 +1457,13 @@ class FlexSubThemesData with Diagnosticable {
   /// as FCS opinionated default.
   ///
   /// If not defined, defaults to [kDialogElevation] = 6.
+  ///
+  /// NOTE:
+  ///
+  /// Dialog elevation does not exist as a theme feature in Flutter
+  /// beta 3.7.0-1.4.pre yet. It probably wont land in next stable release after
+  /// Flutter stable 3.3 either. This feature has no function until it lands
+  /// in stable from from master channel where it exists.
   final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
