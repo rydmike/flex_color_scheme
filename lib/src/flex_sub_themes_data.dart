@@ -878,7 +878,7 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? segmentedButtonSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
-  /// [SegmentedButton] use as the foreground color for unselected toggle buttons.
+  /// [SegmentedButton] use as the foreground color for unselected buttons.
   ///
   /// If not defined it defaults to [SchemeColor.onSecondaryContainer].
   final SchemeColor? segmentedButtonUnselectedSchemeColor;
