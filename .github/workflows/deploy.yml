@@ -29,7 +29,7 @@ on:
     paths-ignore:
       - "**.md"
   release:
-    branches: [m3-master-channel]
+    branches: [none]
     types: [published]
     paths-ignore:
       - "**.md"
