@@ -221,10 +221,8 @@ class ToggleButtonsSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('SegmentedButton'),
-          subtitle: Text('New in Material 3, uses default M3 '
-              'style but colored by FCS in current version. '
-              'Component theming may be added in future versions. '
-              'The default style is pretty and nice as is.'),
+          subtitle: Text('New in Material 3, starts with default M3 '
+              'and you can modify key design elementts.'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
