@@ -2760,10 +2760,10 @@ class FlexColor {
   static const Color redM3DarkPrimary = Color(0xFFFFB4AA);
 
   /// Red M3 theme color for dark primary container color.
-  static const Color redM3DarkPrimaryContainer = Color(0xFFFFB4AA);
+  static const Color redM3DarkPrimaryContainer = Color(0xFF930006);
 
   /// Red M3 theme color for dark secondary color.
-  static const Color redM3DarkSecondary = Color(0xFF690003);
+  static const Color redM3DarkSecondary = Color(0xFFFFB59C);
 
   /// Red M3 theme color for dark secondary container color.
   static const Color redM3DarkSecondaryContainer = Color(0xFF783116);
