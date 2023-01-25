@@ -29,8 +29,8 @@ on:
     paths-ignore:
       - "**.md"
   release:
-    branches: [none]
-    types: [none]
+    branches: [m3-master-channel]
+    types: [publish]
     paths-ignore:
       - "**.md"
 jobs:
