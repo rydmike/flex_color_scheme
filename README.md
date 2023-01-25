@@ -2,7 +2,7 @@
 
 # FlexColorScheme
 
-> This is dev release 7.0.0-dev.1 of FlexColorScheme. It requires Flutter beta 3.7.0-1.4.pre or later.
+> This is FlexColorScheme release 7.0.0-dev.2 (beta). It is intended for Flutter stable 3.7.0 or later. Themes Playground 7.0.0-dev.2 (beta) is available as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v7).
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 

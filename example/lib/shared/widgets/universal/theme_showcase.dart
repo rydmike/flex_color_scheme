@@ -1636,7 +1636,10 @@ class TabBarForAppBarShowcase extends StatelessWidget {
                 tabs: <Widget>[
                   Tab(
                     text: 'Chat',
-                    icon: Icon(Icons.chat_bubble),
+                    icon: Badge(
+                      label: Text('18'),
+                      child: Icon(Icons.chat_bubble),
+                    ),
                   ),
                   Tab(
                     text: 'Tasks',
@@ -1694,7 +1697,10 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
               tabs: <Widget>[
                 Tab(
                   text: 'Chat',
-                  icon: Icon(Icons.chat_bubble),
+                  icon: Badge(
+                    label: Text('+99'),
+                    child: Icon(Icons.chat_bubble),
+                  ),
                 ),
                 Tab(
                   text: 'Tasks',
@@ -1789,7 +1795,10 @@ class _BottomNavigationBarShowcaseState
                 },
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.chat_bubble),
+                    icon: Badge(
+                      label: Text('3'),
+                      child: Icon(Icons.chat_bubble),
+                    ),
                     label: 'Chat',
                     // title: Text('Item 1'),
                   ),
@@ -1888,7 +1897,10 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
                 },
                 destinations: const <NavigationDestination>[
                   NavigationDestination(
-                    icon: Icon(Icons.chat_bubble),
+                    icon: Badge(
+                      label: Text('12'),
+                      child: Icon(Icons.chat_bubble),
+                    ),
                     label: 'Chat',
                   ),
                   NavigationDestination(
@@ -2006,7 +2018,10 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                       },
                       destinations: const <NavigationRailDestination>[
                         NavigationRailDestination(
-                          icon: Icon(Icons.chat_bubble),
+                          icon: Badge(
+                            label: Text('5'),
+                            child: Icon(Icons.chat_bubble),
+                          ),
                           label: Text('Chat'),
                         ),
                         NavigationRailDestination(
@@ -2386,19 +2401,29 @@ class _MyContextMenuState extends State<MyContextMenu> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text('Click anywhere on this container to show the '
-                    'MenuAnchor context menu.'),
-                const Text('Menu keyboard shortcuts also work.'),
+                const Text(
+                  'Click anywhere on this container to show the '
+                  'MenuAnchor context menu.',
+                  textAlign: TextAlign.center,
+                ),
+                const Text(
+                  'Menu keyboard shortcuts also work.',
+                  textAlign: TextAlign.center,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     showingMessage ? widget.message : '',
                     style: theme.textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                Text(_lastSelection != null
-                    ? 'Last Selected: ${_lastSelection!.label}'
-                    : ''),
+                Text(
+                  _lastSelection != null
+                      ? 'Last Selected: ${_lastSelection!.label}'
+                      : '',
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
@@ -2559,7 +2584,10 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
                   children: const <Widget>[
                     SizedBox(height: 16),
                     NavigationDrawerDestination(
-                      icon: Icon(Icons.chat_bubble),
+                      icon: Badge(
+                        label: Text('26'),
+                        child: Icon(Icons.chat_bubble),
+                      ),
                       label: Text('Chat'),
                     ),
                     NavigationDrawerDestination(

@@ -1333,7 +1333,7 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = '// This theme was made for FlexColorScheme version '
+  final String code = '// Made for FlexColorScheme version '
       '${AppData.packageVersion}. Make sure\n'
       '// you use same or higher version, but still same major version. If\n'
       '// you use a lower version, some properties may not be supported. In\n'

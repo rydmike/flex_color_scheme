@@ -215,9 +215,10 @@ class MenuSettings extends StatelessWidget {
           // is not a native widget, only the menu is, and it is the one that
           // is themed.
           child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: const <Widget>[
               PopupMenuButtonShowcase(),
-              SizedBox(width: 8),
               PopupMenuButtonTilesShowcase(),
             ],
           ),

@@ -51,7 +51,7 @@ class SchemeColors extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
-    // These color values are also used if picking is cancelled to restore
+    // These color values are used if picking is cancelled to restore
     // previous color selection.
     final Color primary = colorScheme.primary;
     final Color primaryContainer = colorScheme.primaryContainer;

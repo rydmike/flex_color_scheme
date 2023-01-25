@@ -188,26 +188,24 @@ class IntroductionPanel extends StatelessWidget {
         const Divider(),
         SwitchListTile(
           title: const Text('Use Material 3'),
-          subtitle: const Text('You can try Material 3 design based themes '
-              'too. Beware that Many components in Flutter 3.3 are not yet '
-              'implemented, do not yet use the '
-              "ColorScheme's new colors as specified in Material 3 guide."),
           value: controller.useMaterial3,
           onChanged: controller.setUseMaterial3,
         ),
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
-          subtitle: Text('In Flutter 3.3 and earlier that are still many '
-              'issues related to enabling and using Material 3.'),
+          subtitle: Text('In Flutter 3.7 there are only a few minor issues '
+              'with Material 3, with hardly any impact on an app using it. In '
+              'Flutter 3.3 and earlier, that are many issues '
+              'related to enabling and using Material 3.'),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You can read more about the issues in '
+                  text: 'You can read more about M3 issues in '
                       'FlexColorScheme docs, where they are being ',
                 ),
                 LinkTextSpan(
@@ -218,13 +216,14 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. Due to the large number of issues and also '
-                      'incomplete state of Material 3 implementation, '
-                      'resulting in mixed results. We recommend waiting until '
-                      'main issues are fixed and the implementation is more '
-                      'complete. Potentially next stable release after 3.3 '
-                      'will be more ready. It probably will not be M3 '
-                      'complete either, but maybe close enough for most use '
-                      'cases.',
+                      'incomplete state of Material 3 implementation in '
+                      'Flutter 3.3 and earlier, resulting in mixed results, '
+                      'We do NOT recommend using M3 with these versions.\n'
+                      '\n'
+                      'In Flutter stable 3.7 and later, M3 is ready and can be '
+                      'used in production. Some minor M3 fidelity and '
+                      'specification compliance issues still exists, but they '
+                      'are very minor.',
                 ),
               ],
             ),
