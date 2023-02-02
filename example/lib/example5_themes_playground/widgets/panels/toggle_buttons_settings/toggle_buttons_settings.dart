@@ -221,8 +221,8 @@ class ToggleButtonsSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('SegmentedButton'),
-          subtitle: Text('New in Material 3, starts with default M3 '
-              'and you can modify key design elementts.'),
+          subtitle: Text('New in Material 3, starts with default M3 style '
+              'and you can modify key design elements.'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -230,6 +230,8 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('SegmentedButton background color'),
+          subtitle: const Text('Selected foreground automatically uses the '
+              'color pair of used background color'),
           labelForDefault: 'default (secondaryContainer)',
           index: controller.segmentedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -246,7 +248,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('SegmentedButton unselected button background '
               'color'),
-          labelForDefault: 'default (surface and primary foreground)',
+          labelForDefault: 'default (surface)',
           index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -255,6 +257,27 @@ class ToggleButtonsSettings extends StatelessWidget {
                   } else {
                     controller.setSegmentedButtonUnselectedSchemeColor(
                         SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('SegmentedButton unselected button foreground '
+              'color'),
+          labelForDefault: 'default (onSurface)',
+          index: controller
+                  .segmentedButtonUnselectedForegroundSchemeColor?.index ??
+              -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller
+                        .setSegmentedButtonUnselectedForegroundSchemeColor(
+                            null);
+                  } else {
+                    controller
+                        .setSegmentedButtonUnselectedForegroundSchemeColor(
+                            SchemeColor.values[index]);
                   }
                 }
               : null,

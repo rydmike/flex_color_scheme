@@ -384,6 +384,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    segmentedButtonUnselectedSchemeColor: ${controller.segmentedButtonUnselectedSchemeColor},\n';
+  final String segmentedButtonUnselectedForegroundSchemeColor = controller
+              .segmentedButtonUnselectedForegroundSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonUnselectedForegroundSchemeColor: ${controller.segmentedButtonUnselectedForegroundSchemeColor},\n';
   final String segmentedButtonBorderSchemeColor = controller
               .segmentedButtonBorderSchemeColor ==
           null
@@ -908,6 +913,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$segmentedButtonBorderRadius'
           '$segmentedButtonSchemeColor'
           '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonUnselectedForegroundSchemeColor'
           '$segmentedButtonBorderSchemeColor'
           '$segmentedButtonBorderWidth'
           //
@@ -1066,6 +1072,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$segmentedButtonBorderRadius'
           '$segmentedButtonSchemeColor'
           '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonUnselectedForegroundSchemeColor'
           '$segmentedButtonBorderSchemeColor'
           '$segmentedButtonBorderWidth'
           //

@@ -456,6 +456,9 @@ class ThemeController with ChangeNotifier {
     _segmentedButtonUnselectedSchemeColor = await _themeService.load(
         Store.keySegmentedButtonUnselectedSchemeColor,
         Store.defaultSegmentedButtonUnselectedSchemeColor);
+    _segmentedButtonUnselectedForegroundSchemeColor = await _themeService.load(
+        Store.keySegmentedButtonUnselectedForegroundSchemeColor,
+        Store.defaultSegmentedButtonUnselectedForegroundSchemeColor);
     _segmentedButtonBorderSchemeColor = await _themeService.load(
         Store.keySegmentedButtonBorderSchemeColor,
         Store.defaultSegmentedButtonBorderSchemeColor);
@@ -840,6 +843,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultSegmentedButtonSchemeColor, false);
     setSegmentedButtonUnselectedSchemeColor(
         Store.defaultSegmentedButtonUnselectedSchemeColor, false);
+    setSegmentedButtonUnselectedForegroundSchemeColor(
+        Store.defaultSegmentedButtonUnselectedForegroundSchemeColor, false);
     setSegmentedButtonBorderSchemeColor(
         Store.defaultSegmentedButtonBorderSchemeColor, false);
     setSegmentedButtonBorderRadius(
@@ -2556,6 +2561,18 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keySegmentedButtonUnselectedSchemeColor, value));
+  }
+
+  late SchemeColor? _segmentedButtonUnselectedForegroundSchemeColor;
+  SchemeColor? get segmentedButtonUnselectedForegroundSchemeColor =>
+      _segmentedButtonUnselectedForegroundSchemeColor;
+  void setSegmentedButtonUnselectedForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _segmentedButtonUnselectedForegroundSchemeColor) return;
+    _segmentedButtonUnselectedForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keySegmentedButtonUnselectedForegroundSchemeColor, value));
   }
 
   late SchemeColor? _segmentedButtonBorderSchemeColor;

@@ -6,7 +6,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Feb 2, 2023**
 
+**NEW**
+
+- Added `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`. It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
+
 **CHANGE**
+
+- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. Flutter 3.7.1 and earlier via a bug defaults to `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color that Flutter uses as default, which looks quite nice. 
 
 - Style breaking: When using Material 3, changed the default `NavigationBar` height from 62dp to 80dp, the 62 default style is kept when using M2 in order to not break past default styles for M2 themes. The 80dp height is also the default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme a bit less opinionated compared to M3 spec. 
   - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Sadly the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
@@ -18,7 +24,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - Add BottomAppBarColor background color theming.
-- Add SegementedButton unselected item background color.
 - Add NavigationDrawer width and selected item colors. 
 - Playground: Select other than code page as side-by-side panel in page view.
 - Playground: Hide input color. Make it default to hide them.  

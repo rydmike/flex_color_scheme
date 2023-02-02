@@ -154,6 +154,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             segmentedButtonSchemeColor: controller.segmentedButtonSchemeColor,
             segmentedButtonUnselectedSchemeColor:
                 controller.segmentedButtonUnselectedSchemeColor,
+            segmentedButtonUnselectedForegroundSchemeColor:
+                controller.segmentedButtonUnselectedForegroundSchemeColor,
             segmentedButtonBorderSchemeColor:
                 controller.segmentedButtonBorderSchemeColor,
             segmentedButtonBorderWidth: controller.segmentedButtonBorderWidth,

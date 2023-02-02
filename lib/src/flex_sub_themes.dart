@@ -3738,6 +3738,12 @@ class FlexSubThemes {
     /// If not defined, [SchemeColor.surface] will be used.
     final SchemeColor? unselectedSchemeColor,
 
+    /// Selects which color from the passed in colorScheme to use as the
+    /// foreground color for unselected segmented button.
+    ///
+    /// If not defined, [SchemeColor.onSurface] will be used.
+    final SchemeColor? unselectedForegroundSchemeColor,
+
     /// Selects which color from the passed in colorScheme to use as the border
     /// color for the toggle buttons.
     ///
@@ -3761,8 +3767,8 @@ class FlexSubThemes {
     final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
     final Color unselectedColor =
         schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
-    final Color onUnselectedColor = schemeColorPair(
-        unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onUnselectedColor = schemeColor(
+        unselectedForegroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
     final Color borderColor =
         schemeColor(borderSchemeColor ?? SchemeColor.outline, colorScheme);
     // Effective border width.
@@ -3812,7 +3818,7 @@ class FlexSubThemes {
                   ? colorScheme.onSurface
                   : onUnselectedColor;
             }
-            return unselectedSchemeColor == null ? null : onUnselectedColor;
+            return onUnselectedColor;
           }
         }),
         overlayColor:

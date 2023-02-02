@@ -952,6 +952,16 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSegmentedButtonUnselectedSchemeColor = null;
 
+  // Key used to read and save the
+  // segmentedButtonUnselectedForegroundSchemeColor value.
+  static const String keySegmentedButtonUnselectedForegroundSchemeColor =
+      'segmentedButtonUnselectedForegroundSchemeColor';
+  // Default value for the segmentedButtonUnselectedForegroundSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor?
+      defaultSegmentedButtonUnselectedForegroundSchemeColor = null;
+
   // Key used to read and save the segmentedButtonBorderSchemeColor value.
   static const String keySegmentedButtonBorderSchemeColor =
       'segmentedButtonBorderSchemeColor';

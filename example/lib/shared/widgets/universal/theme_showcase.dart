@@ -50,10 +50,10 @@ class ThemeShowcase extends StatelessWidget {
         const ChipShowcase(),
         const Divider(),
         const SizedBox(height: 8),
-        const Wrap(
+        Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: <Widget>[
+          children: const <Widget>[
             PopupMenuButtonShowcase(),
             SizedBox(width: 8),
             PopupMenuButtonTilesShowcase(),
@@ -1071,11 +1071,11 @@ class TooltipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
+    return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 16,
       runSpacing: 4,
-      children: <Widget>[
+      children: const <Widget>[
         Tooltip(
           message: 'Current tooltip theme',
           child: Text('Text with tooltip'),
@@ -1152,11 +1152,11 @@ class ProgressIndicatorShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Wrap(
+    return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 16,
       runSpacing: 16,
-      children: <Widget>[
+      children: const <Widget>[
         SizedBox(
           width: 50,
           height: 50,

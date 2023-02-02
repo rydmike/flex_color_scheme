@@ -6521,6 +6521,8 @@ class FlexColorScheme with Diagnosticable {
               selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
               unselectedSchemeColor:
                   subTheme.segmentedButtonUnselectedSchemeColor,
+              unselectedForegroundSchemeColor:
+                  subTheme.segmentedButtonUnselectedForegroundSchemeColor,
               borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
               borderWidth: subTheme.segmentedButtonBorderWidth ??
                   subTheme.thinBorderWidth,

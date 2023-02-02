@@ -167,6 +167,7 @@ class FlexSubThemesData with Diagnosticable {
     this.segmentedButtonRadius,
     this.segmentedButtonSchemeColor,
     this.segmentedButtonUnselectedSchemeColor,
+    this.segmentedButtonUnselectedForegroundSchemeColor,
     this.segmentedButtonBorderSchemeColor,
     this.segmentedButtonBorderWidth,
     //
@@ -868,20 +869,27 @@ class FlexSubThemesData with Diagnosticable {
   /// [kButtonRadius] 20dp in M2 and to Stadium border in M3.
   final double? segmentedButtonRadius;
 
-  /// Defines which [Theme] based [ColorScheme] based color the
-  /// [SegmentedButton] use as its base theme color.
+  /// Defines which [Theme] based [ColorScheme] based color a selected
+  /// [SegmentedButton] use as its background theme color.
   ///
-  /// Always defines the background color for selected button, and it's
-  /// onColor pair automatically defines the foreground for selected button.
+  /// Defines the background color for selected button, and it's
+  /// onColor pair automatically defines the foreground for selected buttons.
   ///
-  /// If not defined it defaults to [SchemeColor.secondaryContainer].
+  /// If not defined it defaults to [SchemeColor.secondaryContainer] and
+  /// foreground color becomes [SchemeColor.onSecondaryContainer].
   final SchemeColor? segmentedButtonSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [SegmentedButton] use as the background color for unselected buttons.
+  ///
+  /// If not defined it defaults to [SchemeColor.surface].
+  final SchemeColor? segmentedButtonUnselectedSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [SegmentedButton] use as the foreground color for unselected buttons.
   ///
-  /// If not defined it defaults to [SchemeColor.onSecondaryContainer].
-  final SchemeColor? segmentedButtonUnselectedSchemeColor;
+  /// If not defined it defaults to [SchemeColor.onSurface].
+  final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [SegmentedButton] use as its border themed color.
@@ -2332,6 +2340,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? segmentedButtonRadius,
     final SchemeColor? segmentedButtonSchemeColor,
     final SchemeColor? segmentedButtonUnselectedSchemeColor,
+    final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor,
     final SchemeColor? segmentedButtonBorderSchemeColor,
     final double? segmentedButtonBorderWidth,
     //
@@ -2550,6 +2559,9 @@ class FlexSubThemesData with Diagnosticable {
       segmentedButtonUnselectedSchemeColor:
           segmentedButtonUnselectedSchemeColor ??
               this.segmentedButtonUnselectedSchemeColor,
+      segmentedButtonUnselectedForegroundSchemeColor:
+          segmentedButtonUnselectedForegroundSchemeColor ??
+              this.segmentedButtonUnselectedForegroundSchemeColor,
       segmentedButtonBorderSchemeColor: segmentedButtonBorderSchemeColor ??
           this.segmentedButtonBorderSchemeColor,
       segmentedButtonBorderWidth:
@@ -2865,6 +2877,8 @@ class FlexSubThemesData with Diagnosticable {
         other.segmentedButtonSchemeColor == segmentedButtonSchemeColor &&
         other.segmentedButtonUnselectedSchemeColor ==
             segmentedButtonUnselectedSchemeColor &&
+        other.segmentedButtonUnselectedForegroundSchemeColor ==
+            segmentedButtonUnselectedForegroundSchemeColor &&
         other.segmentedButtonBorderSchemeColor ==
             segmentedButtonBorderSchemeColor &&
         other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
@@ -3106,6 +3120,7 @@ class FlexSubThemesData with Diagnosticable {
         segmentedButtonRadius,
         segmentedButtonSchemeColor,
         segmentedButtonUnselectedSchemeColor,
+        segmentedButtonUnselectedForegroundSchemeColor,
         segmentedButtonBorderSchemeColor,
         segmentedButtonBorderWidth,
         //
@@ -3339,6 +3354,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'segmentedButtonUnselectedSchemeColor',
         segmentedButtonUnselectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'segmentedButtonUnselectedForegroundSchemeColor',
+        segmentedButtonUnselectedForegroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'segmentedButtonBorderSchemeColor', segmentedButtonBorderSchemeColor));
     properties.add(DiagnosticsProperty<double>(
