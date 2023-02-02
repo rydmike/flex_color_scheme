@@ -2,6 +2,50 @@
 
 All notable changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.0-dev.3
+
+**Feb 2, 2023**
+
+**CHANGE**
+
+**THEMES PLAYGROUND**
+
+
+
+**TODO BEFORE FCS STABLE 7.0 RELEASE**
+
+- Add BottomAppBarColor background color theming.
+- Add SegementedButton unselected item background color.
+- Add NavigationDrawer width and selected item colors. 
+- Playground: Select other than code page as side-by-side panel in page view.
+- Playground: Hide input color. Make it default to hide them.  
+- MUST DO: Review and do actionable TODOs in the code.
+- MUST DO: Review and fix test coverage. Test new colors too.
+- MUST DO: Review and test all tutorial examples.
+- MUST DO: Add important changes to docs.flexcolorscheme.com:
+  - Changelog.
+  - ListTile transparent added to core defaults, may not be needed. Review before release.
+  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
+  - Info section (plus article later) about what is still missing in Flutter 3.7 from M3.
+- After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
+  - New color scheme images
+  - Review and update older screenshots and GIFs.
+  - Use image zoom feature in docs.page more on current images.
+  - Use new highlight banners feature, in the docs.page tool when appropriate.
+
+
+Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
+
+- Add more "Set to M3 design" buttons like on **Text Field** panel, e.g. to Navigation Bar and Navigation Rail panels.
+- Add some theming options for the new NavigationDrawer theme.
+- Add some theming options for the new MenuBar theme.
+- Add more sub-theme component color presentations to the Playground's **Component Themes** panel.
+- Make tinted disabled controls apply consistently to all controls when applied.
+- Make tinted interaction effect apply consistently to all controls. New M3 widgets need to define it in their own sub-themes to get them. They don't use the hover, focus, highlight color from ThemeData for their defaults.  
+- To TabBar theming, add unselected color, not selected dim/undim and custom bottom borderline color.
+- Playground: Custom FlexTones. Maybe 7.2 or 7.3.
+- Playground: Image based colors. Maybe 7.x.
+
 ## 7.0.0-dev.2
 
 **Jan 25, 2023**
@@ -21,34 +65,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - CHANGE: Intro text, to say that M3 in Flutter SDK is now ready for production.  
 - FIX: Wrap for `PopupMenuButton`.
 - ADD: ThemeShowcase now includes `Badge`, so it gets featured as well.
-
-**TODO BEFORE FCS STABLE 7.0 RELEASE**
-
-- MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Review and fix test coverage. Test new colors too.
-- MUST DO: Review and test all tutorial examples.
-- MUST DO: Add important changes to docs.flexcolorscheme.com:
-  - Changelog.
-  - ListTile transparent added to core defaults, may not be needed. Review before release.
-  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
-  - Info section (plus article later) about what is still missing in Flutter 3.7 from M3.
-- After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
-  - New color scheme images
-  - Review and update older screenshots and GIFs.
-  - Use image zoom feature in docs.page more on current images.
-  - Use new highlight banners feature, in the docs.page tool when appropriate.
-
-
-- MAYBE: Make tinted disabled controls apply consistently to all controls when applied.
-- MAYBE: Make tinted interaction effect apply consistently to all controls. New M3 widgets need to define it in their own sub-themes to get them, they don't use the hover, focus, highlight color from ThemeData for their defaults.
-
-Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
-
-- Add more sub-theme component color presentations to the Playground's **Component Themes** panel.
-- Add some theming options for the new NavigationDrawer theme.
-- Add some theming options for the new MenuBar theme.
-- Add more "Set to M3 design" buttons like on **Text Field** panel, e.g. to Navigation Bar and Navigation Rail panels.
-- To TabBar theming, add unselected color, not selected dim/undim and custom bottom borderline color.
 
 ## 7.0.0-dev.1
 
@@ -164,35 +180,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 
 - ListTiles in the Themes Playground App must use and set transparent `tileColor` in M3, until a fix for https://github.com/flutter/flutter/issues/117700 lands via https://github.com/flutter/flutter/pull/117965. By doing this the ListTiles in the app will look OK also when FlexColorScheme theming is not used, even if issue #117965 might still be in effect. May not need this work around in V7.0 release if the issue does not land in new Flutter stable after 3.3, follow-up.
 - Fixed Material ShowCase surface tint and shadow presentation to support changes in `Material` in Flutter release.
-
-**TODO BEFORE STABLE 7.0 RELEASE**
-
-The next stable version of Flutter after version 3.3 must be released before FlexColorScheme 7.0 can be released. 
-
-- MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Review and fix test coverage. Test new colors too.
-- MUST DO: Review and test build all examples.
-- MUST DO: Add important changes to docs.flexcolorscheme.com:
-  - Changelog.
-  - ListTile transparent added to core defaults, may not need, review before release.
-  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
-  - Info section (plus article later) about what is still missing in Flutter 3.7 from M3.
-- After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
-  - New color scheme images
-  - Review and update older screenshots and GIFs.
-  - Use image zoom feature in docs.page more on current images.
-  - Use new highlight banners feature, in the docs.page tool when appropriate.
-
-Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
-
-- Make tinted disabled controls apply consistently to all controls when applied.
-- Make tinted interaction effect apply consistently to all controls. New M3 widgets need to define it in their own sub-themes to get them, they don't use the hover, focus, highlight color from ThemeData for their defaults.   
-- Add more sub-theme component color presentations to the Playground's **Component Themes** panel.
-- Add some theming options for the new NavigationDrawer theme.
-- Add some theming options for the new MenuBar theme.
-- Add more "Set to M3 design" buttons like on **Text Field** panel, e.g. to Navigation Bar and Navigation Rail panels.
-- To TabBar theming, add unselected color, not selected dim/undim and custom bottom borderline color.
-
 
 ## 6.1.2
 

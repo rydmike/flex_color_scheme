@@ -34,13 +34,13 @@ class AppData {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '0';
-  static const String versionPatch = '0-dev.2 (beta)';
+  static const String versionPatch = '0-dev.3 (beta)';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.0';
+  static const String flutterVersion = '3.7.1';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -120,6 +120,7 @@ class AppData {
   static VisualDensity get visualDensity =>
       FlexColorScheme.comfortablePlatformDensity;
 
+  // TODO(rydmike): Commented to see what breaks, nothing? => Remove it!
   // We define a custom text theme for our app. This is just for demo purposes
   // on how to setup a custom text theme. This works just as well with normal
   // ThemeData and ThemeData.from btw. FlexColorScheme does the TextTheme
@@ -134,25 +135,25 @@ class AppData {
   //
   // We also think that overline is a bit too small and have weird letter
   // spacing, so we change it too.
-  static const TextTheme textTheme = TextTheme(
-    displayLarge: TextStyle(
-      fontSize: 57, // Same as M3, defaults to 96 in Material2018 Typography.
-    ),
-    displayMedium: TextStyle(
-      fontSize: 45, // Same as M3, defaults to 60 in Material2018 Typography.
-    ),
-    displaySmall: TextStyle(
-      fontSize: 36, // Same as M3, defaults to 48 in Material2018 Typography.
-    ),
-    headlineMedium: TextStyle(
-      fontSize: 28, // Same as M3, defaults to 34 in Material2018 Typography.
-    ),
-    // I chose this, I later saw it happened to match new M3 style too - cool!
-    labelSmall: TextStyle(
-      fontSize: 11, // Defaults to 10 in Material2018 Typography.
-      letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
-    ),
-  );
+  // static const TextTheme textTheme = TextTheme(
+  //   displayLarge: TextStyle(
+  //     fontSize: 57, // Same as M3, defaults to 96 in Material2018 Typography.
+  //   ),
+  //   displayMedium: TextStyle(
+  //     fontSize: 45, // Same as M3, defaults to 60 in Material2018 Typography.
+  //   ),
+  //   displaySmall: TextStyle(
+  //     fontSize: 36, // Same as M3, defaults to 48 in Material2018 Typography.
+  //   ),
+  //   headlineMedium: TextStyle(
+  //     fontSize: 28, // Same as M3, defaults to 34 in Material2018 Typography.
+  //   ),
+  //   // I chose this, I later saw it happened to match new M3 style too - cool!
+  //   labelSmall: TextStyle(
+  //     fontSize: 11, // Defaults to 10 in Material2018 Typography.
+  //     letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+  //   ),
+  // );
 
   // The menu items that we use on the responsive side menu.
   static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[

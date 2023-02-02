@@ -50,10 +50,10 @@ class ThemeShowcase extends StatelessWidget {
         const ChipShowcase(),
         const Divider(),
         const SizedBox(height: 8),
-        Wrap(
+        const Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: const <Widget>[
+          children: <Widget>[
             PopupMenuButtonShowcase(),
             SizedBox(width: 8),
             PopupMenuButtonTilesShowcase(),
@@ -1071,11 +1071,11 @@ class TooltipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return const Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 16,
       runSpacing: 4,
-      children: const <Widget>[
+      children: <Widget>[
         Tooltip(
           message: 'Current tooltip theme',
           child: Text('Text with tooltip'),
@@ -1152,11 +1152,11 @@ class ProgressIndicatorShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return const Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: 16,
       runSpacing: 16,
-      children: const <Widget>[
+      children: <Widget>[
         SizedBox(
           width: 50,
           height: 50,
@@ -2581,25 +2581,32 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
                       selectedIndex = value;
                     });
                   },
-                  children: const <Widget>[
-                    SizedBox(height: 16),
-                    NavigationDrawerDestination(
+                  children: <Widget>[
+                    const SizedBox(height: 16),
+                    const NavigationDrawerDestination(
                       icon: Badge(
                         label: Text('26'),
                         child: Icon(Icons.chat_bubble),
                       ),
                       label: Text('Chat'),
                     ),
-                    NavigationDrawerDestination(
+                    const NavigationDrawerDestination(
                       icon: Icon(Icons.beenhere),
                       label: Text('Tasks'),
                     ),
-                    Divider(),
+                    const Divider(),
                     NavigationDrawerDestination(
-                      icon: Icon(Icons.create_new_folder),
-                      label: Text('Folder'),
+                      icon: const Icon(Icons.create_new_folder),
+                      label: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 200),
+                        child: const Text(
+                          'Folder, item with long text truncated with ellipses',
+                          softWrap: false,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
-                    NavigationDrawerDestination(
+                    const NavigationDrawerDestination(
                       icon: Icon(Icons.logout),
                       label: Text('Logout'),
                     ),

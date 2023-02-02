@@ -5879,100 +5879,66 @@ class FlexColorScheme with Diagnosticable {
 
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and the designed opinionated theme design choices.
+    //
+    // The used properties are sorted in the same order they are in
+    // ThemeData factory. For sake of sanity, let's keep it that way.
     return ThemeData(
-      // These properties we pass along to the standard ThemeData factory.
+      // Some properties we just pass along to the standard ThemeData factory.
       // They are included in FlexColorScheme (FCS) so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
       // to use them in a FlexColorSchemes, which might often be the case. Some
       // of the values may be null and get defaults via the ThemeData() factory
       // som might pass along given value, which we may have used internally
       // in FlexColorScheme as well.
-      fontFamily: fontFamily,
-      fontFamilyFallback: fontFamilyFallback,
-      package: package,
-      visualDensity: visualDensity,
-      useMaterial3: useMaterial3,
+      //
+      // Not all properties in ThemeData are included, if you need to modify
+      // them, use copyWith on ThemeData returnd by FCS.
+
+      // GENERAL CONFIGURATION
+      //
+      // Elevation overlay on dark material elevation is used on dark themes
+      // on surfaces when so requested, applyElevationOverlayColor defaults
+      // to true in FlexColorScheme themes, but you can turn it off.
+      // Flutter ThemeData.from ColorScheme based themes also uses this by
+      // default, but older ThemeData factories do not use it by default
+      // A correct Material 2 design should use it.
+      applyElevationOverlayColor: isDark && applyElevationOverlayColor,
+      extensions: extensions,
+      // Input decorator theme.
+      inputDecorationTheme: effectiveInputDecorationTheme,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
-      typography: effectiveTypography,
       platform: effectivePlatform,
-      extensions: extensions,
-      // TextTheme properties use the same logic as in ThemeData, allowing us
-      // to optionally define them. AccentTextTheme is omitted since it has
-      // been deprecated in Flutter 2.5.0.
-      textTheme: effectiveTextTheme,
-      primaryTextTheme: effectivePrimaryTextTheme,
+      useMaterial3: useMaterial3,
+      visualDensity: visualDensity,
+
+      // COLOR
+      //
+      // [colorScheme] is the preferred way to configure colors. The other color
+      // properties (as well as primaryColorBrightness, and primarySwatch)
+      // will gradually be phased out,
+      // see https://github.com/flutter/flutter/issues/91772.
+      //
       // Most color definitions below are very close to the ones used by the
       // Flutter factory ThemeData.from() for creating a theme from a
       // ColorScheme and TextTheme.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
+      // backgroundColor: colorScheme.background,
       brightness: colorScheme.brightness,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
-      primaryColor: colorScheme.primary,
+      // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre
+      // bottomAppBarColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
       canvasColor: colorScheme.background,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
-      // See: https://github.com/flutter/flutter/issues/91772
-      // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
-      // Here it is replaced with a separate color for the scaffold background,
-      // so we can use a configuration with a separate scaffold background
-      // color from scheme background and surface. Flutter's ThemeData.from
-      // a ColorScheme cannot do this. The good old ThemeData factory can of
-      // course, but color scheme based themes in Flutter cannot specify it
-      // separately alone. We want to do so in order to make elegantly nuanced
-      // primary color branded themes.
-      scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
       // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
-      dividerColor: dividerColor,
-      // Create a Divider theme only when sub themes is used and we want M2
-      // style in M3. Otherwise we keep the theme as default.
-      dividerTheme:
-          useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
-              ? DividerThemeData(color: dividerColor)
-              : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
-      // backgroundColor: colorScheme.background,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
-      // Disabled color uses a different style when using tinted disabled.
-      // effects, if not opted in same as before v4.0.0 =  ThemeData default.
-      disabledColor: tintedDisabled
-          ? colorScheme.primary
-              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-              .withAlpha(kDisabledForegroundAlpha)
-          : isDark
-              ? Colors.white38
-              : Colors.black38,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
-      // Same as ThemeData SDK.
-      // hintColor is only used by DropdownButton and InputDecorator in SDK.
-      hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
-      // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
-      // See: https://github.com/flutter/flutter/issues/91772
-      // Special theming on hover, focus, highlight and splash, if opting in on
-      // tintedInteractions, otherwise use ThemeData defaults by passing in null
-      // and letting it assign its values.
-      hoverColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kHoverAlphaBlend)
-              .withAlpha(kHoverAlpha)
-          : null,
-      focusColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kFocusAlphaBlend)
-              .withAlpha(kFocusAlpha)
-          : null,
-      highlightColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kHighlightAlphaBlend)
-              .withAlpha(kHighlightAlpha)
-          : null,
-      splashColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kSplashAlphaBlend)
-              .withAlpha(kSplashAlpha)
-          : null,
+      // Pass the from FlexColorScheme defined colorScheme to ThemeData
+      // colorScheme. Newer standard Flutter sub-themes use the colorScheme
+      // for their theming, and all sub themes will eventually be converted to
+      // be based on the defined color scheme colors. FlexColorScheme passes
+      // the scheme it has created to the colorScheme property in ThemeData.
+      // More info here: https://flutter.dev/go/material-theme-system-updates
+      colorScheme: colorScheme,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
       // Flutter standard dialogBackgroundColor for color scheme based themes
       // uses colorScheme.background.
@@ -5987,8 +5953,48 @@ class FlexColorScheme with Diagnosticable {
       // in dark mode. See : https://github.com/flutter/flutter/issues/90353
       // The dialogBackgroundColor in ThemeData is going to be deprecated.
       dialogBackgroundColor: dialogBackground ?? colorScheme.surface,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
+      // Disabled color uses a different style when using tinted disabled.
+      // effects, if not opted in same as before v4.0.0 =  ThemeData default.
+      disabledColor: tintedDisabled
+          ? colorScheme.primary
+              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+              .withAlpha(kDisabledForegroundAlpha)
+          : isDark
+              ? Colors.white38
+              : Colors.black38,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
+      dividerColor: dividerColor,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of errorColor.
       // Define errorColor via color scheme error color.
       // errorColor: colorScheme.error,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
+      // See: https://github.com/flutter/flutter/issues/91772
+      // Special theming on hover, focus, highlight and splash, if opting in on
+      // tintedInteractions, otherwise use ThemeData defaults by passing in null
+      // and letting it assign its values.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of focusColor.
+      focusColor: tintedInteractions
+          ? colorScheme.primary
+              .blendAlpha(Colors.white, kFocusAlphaBlend)
+              .withAlpha(kFocusAlpha)
+          : null,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of highlightColor.
+      highlightColor: tintedInteractions
+          ? colorScheme.primary
+              .blendAlpha(Colors.white, kHighlightAlphaBlend)
+              .withAlpha(kHighlightAlpha)
+          : null,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
+      // Same as ThemeData SDK, hintColor is only used by DropdownButton
+      // and InputDecorator in SDK.
+      hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
+      // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
+      hoverColor: tintedInteractions
+          ? colorScheme.primary
+              .blendAlpha(Colors.white, kHoverAlphaBlend)
+              .withAlpha(kHoverAlpha)
+          : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
       // Use TabBar style dependent function for selected Tab as indicatorColor
@@ -5997,52 +6003,8 @@ class FlexColorScheme with Diagnosticable {
           ? selectedTabColor()
           : FlexSubThemes.schemeColor(
               subTheme.tabBarIndicatorSchemeColor!, colorScheme),
-      // Elevation overlay on dark material elevation is used on dark themes
-      // on surfaces when so requested, applyElevationOverlayColor defaults
-      // to true in FlexColorScheme themes, but you can turn it off.
-      // Flutter ThemeData.from ColorScheme based
-      // themes also uses this by default, but older ThemeData factories do not.
-      applyElevationOverlayColor: isDark && applyElevationOverlayColor,
-      // Pass the from FlexColorScheme defined colorScheme to ThemeData
-      // colorScheme. Newer standard Flutter sub themes use the colorScheme
-      // for their theming, and all sub themes will eventually be converted to
-      // be based on the defined color scheme colors. FlexColorScheme passes
-      // the scheme it has created to the colorScheme property in ThemeData.
-      // More info here: https://flutter.dev/go/material-theme-system-updates
-      colorScheme: colorScheme,
-
-      // ----------------------------------------------------------------------
-      // The theme settings below are corrective additions to the Flutter
-      // standard Theme.from(colorScheme) factory. They are needed because it
-      // omits some definitions that will not be aligned with the ColorScheme
-      // theme if they are not added to it manually.
-      //
-      // This document relates to the on going transition:
-      // https://flutter.dev/go/material-theme-system-updates
-      // This issue explains and demos some of the current gaps:
-      // https://github.com/flutter/flutter/issues/65782
-      // Some of the gaps will probably be solved as Flutter's theme
-      // migration progresses. We monitor the development and will remove no
-      // longer needed corrections or remove totally deprecated
-      // ThemeData properties when it is appropriate and timely to do so.
-      // ----------------------------------------------------------------------
-
-      // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
-      // See: https://github.com/flutter/flutter/pull/95870
-      // This color is still important, if it is not set we get a teal color for
-      // it in dark mode, and not actually the secondary color that we want for
-      // our color scheme based theme. The Flutter color scheme based theme
-      // does not include this, in our opinion for correct application of the
-      // color scheme based theme, it should really do the same as below.
-      // See issue: https://github.com/flutter/flutter/issues/65782
-      // When using sub-themes, or Material 3 style, we use primary color
-      // instead, because it is the best match for M3 ColorDesign for the M2
-      // components using M3 Colors.
-      // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
-      // toggleableActiveColor: useSubThemes || useMaterial3
-      //     ? colorScheme.primary
-      //     : colorScheme.secondary,
-
+      // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
+      primaryColor: colorScheme.primary,
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
       // The primary dark color no longer exists in ColorScheme themes, but
@@ -6063,6 +6025,17 @@ class FlexColorScheme with Diagnosticable {
       // This property is used by `CircleAvatar` and `Slider`.
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorLight: primaryColorLight,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
+      // See: https://github.com/flutter/flutter/issues/91772
+      // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
+      // Here it is replaced with a separate color for the scaffold background,
+      // so we can use a configuration with a separate scaffold background
+      // color from scheme background and surface. Flutter's ThemeData.from
+      // a ColorScheme cannot do this. The good old ThemeData factory can of
+      // course, but color scheme based themes in Flutter cannot specify it
+      // separately alone. We want to do so in order to make elegantly nuanced
+      // primary color branded themes.
+      scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
       // Define a secondary header color, this property is only used in Flutter
@@ -6071,7 +6044,51 @@ class FlexColorScheme with Diagnosticable {
       // value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
-      // The app bar theme allows us to use a custom colored appbar theme
+      // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
+      splashColor: tintedInteractions
+          ? colorScheme.primary
+              .blendAlpha(Colors.white, kSplashAlphaBlend)
+              .withAlpha(kSplashAlpha)
+          : null,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
+      // See: https://github.com/flutter/flutter/pull/95870
+      // This color is still important, if it is not set we get a teal color for
+      // it in dark mode, and not actually the secondary color that we want for
+      // our color scheme based theme. The Flutter color scheme based theme
+      // does not include this, in our opinion for correct application of the
+      // color scheme based theme, it should really do the same as below.
+      // See issue: https://github.com/flutter/flutter/issues/65782
+      // When using sub-themes, or Material 3 style, we use primary color
+      // instead, because it is the best match for M3 ColorDesign for the M2
+      // components using M3 Colors.
+      // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
+      // toggleableActiveColor: useSubThemes || useMaterial3
+      //     ? colorScheme.primary
+      //     : colorScheme.secondary,
+
+      // TYPOGRAPHY & ICONOGRAPHY
+      //
+      fontFamily: fontFamily,
+      fontFamilyFallback: fontFamilyFallback,
+      package: package,
+      // Set colors for icons in opted in sub themes.
+      iconTheme: useSubThemes
+          ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
+          : null,
+      primaryIconTheme: useSubThemes
+          ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
+          : null,
+      // TextTheme properties use the same logic as in ThemeData, allowing us
+      // to optionally define them. AccentTextTheme is omitted since it has
+      // been deprecated in Flutter 2.5.0.
+      primaryTextTheme: effectivePrimaryTextTheme,
+      textTheme: effectiveTextTheme,
+      typography: effectiveTypography,
+
+      // COMPONENT THEMES
+      //
+      // AppBar Theme.
+      // Theme allows us to use a custom colored appbar theme
       // in both light and dark themes that is not dependent on ThemeData
       // `primaryColor` or surface color, and still gets correct working text
       // and icon theme. Historically, in versions prior to Flutter 2.0.0,
@@ -6091,378 +6108,25 @@ class FlexColorScheme with Diagnosticable {
         actionsIconTheme: IconThemeData(color: appBarIconColor),
         systemOverlayStyle: systemOverlayStyle,
       ),
-
-      // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre
-      // bottomAppBarColor: colorScheme.surface,
+      // badgeTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // bannerTheme:  NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // BottomAppBar Theme.
       bottomAppBarTheme: BottomAppBarTheme(
         color: colorScheme.surface,
         elevation:
             bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
       ),
-      // In TextSelectionThemeData, the standard for selectionColor is
-      // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
-      // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
-      // mode. The standard selectionHandleColor is colorScheme.primary,
-      // here we use the slightly darker shade primaryColorDark instead.
-      textSelectionTheme: TextSelectionThemeData(
-        selectionColor: isDark
-            ? colorScheme.primary.withAlpha(0xB2) // 50%
-            : colorScheme.primary.withAlpha(0x4C), // 30%
-        selectionHandleColor: primaryColorDark,
-      ),
-      // Defines the TabBar theme that will fit nicely in an AppBar
-      // (default) or on background color for use eg in a Scaffold, the choice
-      // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
-      // `FlexTabBarStyle.forAppBar`. Using different theme styles for intended
-      // target usage avoids this challenge:
-      // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
-      // That still has some issue related to it, is using default is used, we
-      // pass in `null` and let ThemeData use default sub-theme for TabBarTheme.
-      tabBarTheme: FlexSubThemes.tabBarTheme(
-        colorScheme: colorScheme,
-        indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
-            ? selectedTabColor()
-            : FlexSubThemes.schemeColor(
-                subTheme.tabBarIndicatorSchemeColor!, colorScheme),
-        labelStyle: effectiveTextTheme.bodyLarge,
-        labelColor: subTheme.tabBarItemSchemeColor == null
-            ? selectedTabColor()
-            : FlexSubThemes.schemeColor(
-                subTheme.tabBarItemSchemeColor!, colorScheme),
-        unselectedLabelStyle: effectiveTextTheme.bodyLarge,
-        unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
-            ? unselectedTabColor()
-            : FlexSubThemes.schemeColor(
-                    subTheme.tabBarItemSchemeColor!, colorScheme)
-                .withAlpha(0x99), // 60%,
-        useMaterial3: useMaterial3,
-      ),
-      // Set colors for icons in opted in sub themes.
-      iconTheme: useSubThemes
-          ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
-          : null,
-      primaryIconTheme: useSubThemes
-          ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
-          : null,
-      // TODO(rydmike): Remove ListTile, tileColor transparent when SDK fixed.
-      // Set tileColor to transparent when using M3 to avoid issue:
-      // https://github.com/flutter/flutter/issues/117700.
-      listTileTheme: useMaterial3
-          ? const ListTileThemeData(tileColor: Colors.transparent)
-          : null,
-      // Tooltip theme
-      tooltipTheme: !useSubThemes && !tooltipsMatchBackground
-          ? null
-          : FlexSubThemes.tooltipTheme(
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.tooltipSchemeColor,
-              backgroundColor: tooltipBackground(),
-              backgroundAlpha: tooltipAlpha(),
-              foregroundColor: tooltipForeground(),
-              textStyle: effectiveTextTheme.bodyMedium!.copyWith(
-                fontSize: tooltipFontSize(),
-              ),
-              borderRadius: tooltipBorderRadius(),
-              borderColor: dividerColor,
-              waitDuration: subTheme.tooltipWaitDuration,
-              showDuration: subTheme.tooltipShowDuration,
-            ),
-      textButtonTheme: useSubThemes
-          ? FlexSubThemes.textButtonTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.textButtonSchemeColor,
-              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.buttonMinSize,
-              textStyle: subTheme.textButtonTextStyle,
-              useMaterial3: useMaterial3,
-            )
-          : null,
-      filledButtonTheme: useSubThemes
-          ? FlexSubThemes.filledButtonTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.filledButtonSchemeColor,
-              radius: subTheme.filledButtonRadius ?? subTheme.defaultRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.buttonMinSize,
-              textStyle: subTheme.filledButtonTextStyle,
-            )
-          : null,
-      elevatedButtonTheme: useSubThemes
-          ? FlexSubThemes.elevatedButtonTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.elevatedButtonSchemeColor,
-              onBaseSchemeColor: subTheme.elevatedButtonSecondarySchemeColor,
-              radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
-              elevation: subTheme.elevatedButtonElevation,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.buttonMinSize,
-              textStyle: subTheme.elevatedButtonTextStyle,
-              useMaterial3: useMaterial3,
-            )
-          : null,
-      outlinedButtonTheme: useSubThemes
-          ? FlexSubThemes.outlinedButtonTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.outlinedButtonSchemeColor,
-              outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
-              radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
-              pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ??
-                  subTheme.thickBorderWidth,
-              outlineWidth: subTheme.outlinedButtonBorderWidth ??
-                  subTheme.thinBorderWidth,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.buttonMinSize,
-              textStyle: subTheme.outlinedButtonTextStyle,
-              useMaterial3: useMaterial3,
-            )
-          : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of buttonTheme.
-      // Since the old buttons have been deprecated in Flutter 2.0.0
-      // they are no longer presented or used in the code in FlexColorScheme.
-      // The button theming below still makes the old buttons almost
-      // look like the defaults for the new ElevatedButton, TextButton and
-      // OutlinedButton.
-      // This buttonTheme setup, makes the old legacy Material buttons
-      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
-      // style to the default color scheme based style used for the
-      // newer Material buttons [ElevatedButton], [OutlinedButton] and
-      // [TextButton]. There are some differences in margin
-      // and outline color and the elevation behavior on the raised button.
-      // A useSubThemes was added in version 4.0.0 to also still support
-      // the old buttons.
-      // The legacy buttons will be completely removed in Flutter.
-      // The `ButtonThemeData` this helper uses will
-      // however remain available after that for a while, because widgets
-      // [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
-      // obsolete in SDK docs though) still use this theme. It is thus kept
-      // around in FlexColorScheme package as long as it might have some use.
-      // Be aware that the buttonTheme will be removed from
-      // FlexColorScheme when/if ButtonThemeData becomes deprecated Flutter SDK.
-      buttonTheme: useSubThemes
-          ? FlexSubThemes.buttonTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.materialButtonSchemeColor,
-              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
-              padding: subTheme.buttonPadding,
-              minButtonSize: subTheme.buttonMinSize,
-            )
-          : ButtonThemeData(
-              colorScheme: colorScheme,
-              textTheme: ButtonTextTheme.primary,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-      // ToggleButtons theme.
-      toggleButtonsTheme: useSubThemes
-          ? FlexSubThemes.toggleButtonsTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.toggleButtonsSchemeColor,
-              unselectedSchemeColor:
-                  subTheme.toggleButtonsUnselectedSchemeColor,
-              borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,
-              borderWidth:
-                  subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
-              radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
-              minButtonSize: subTheme.buttonMinSize,
-              visualDensity: visualDensity,
-              useMaterial3: useMaterial3,
-            )
-          : null,
-      // SegmentedButton theme.
-      segmentedButtonTheme: useSubThemes
-          ? FlexSubThemes.segmentedButtonTheme(
-              colorScheme: colorScheme,
-              selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
-              unselectedSchemeColor:
-                  subTheme.segmentedButtonUnselectedSchemeColor,
-              borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
-              borderWidth: subTheme.segmentedButtonBorderWidth ??
-                  subTheme.thinBorderWidth,
-              radius: subTheme.segmentedButtonRadius ?? subTheme.defaultRadius,
-            )
-          : null,
-      // Switch theme.
-      switchTheme: useSubThemes
-          ? FlexSubThemes.switchTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.switchSchemeColor,
-              thumbSchemeColor: subTheme.switchThumbSchemeColor,
-              unselectedIsColored: subTheme.unselectedToggleIsColored,
-              useMaterial3: useMaterial3,
-            )
-          : FlexSubThemes.switchTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-              useMaterial3: useMaterial3,
-            ),
-      // Checkbox theme.
-      checkboxTheme: useSubThemes
-          ? FlexSubThemes.checkboxTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.checkboxSchemeColor,
-              unselectedIsColored: subTheme.unselectedToggleIsColored,
-            )
-          : FlexSubThemes.checkboxTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-            ),
-      // Radio theme.
-      radioTheme: useSubThemes
-          ? FlexSubThemes.radioTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.radioSchemeColor,
-              unselectedIsColored: subTheme.unselectedToggleIsColored,
-            )
-          : FlexSubThemes.radioTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-            ),
-      // Slider theme.
-      sliderTheme: useSubThemes
-          ? FlexSubThemes.sliderTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.sliderBaseSchemeColor,
-              trackHeight: subTheme.sliderTrackHeight,
-              valueIndicatorColor: sliderValueIndicator,
-              valueIndicatorTextStyle: sliderValueStyle,
-              valueIndicatorType: subTheme.sliderValueIndicatorType,
-              showValueIndicator: subTheme.sliderShowValueIndicator,
-              useMaterial3: useMaterial3,
-            )
-          : null,
-      // Input decorator theme.
-      inputDecorationTheme: effectiveInputDecorationTheme,
-      // FAB, floating action button theme.
-      floatingActionButtonTheme: useSubThemes
-          ? FlexSubThemes.floatingActionButtonTheme(
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.fabSchemeColor,
-              radius: subTheme.fabRadius ?? subTheme.defaultRadius,
-              useShape: subTheme.fabUseShape,
-              alwaysCircular: subTheme.fabAlwaysCircular,
-            )
-          : null,
-      // The default chip theme in Flutter does not work correctly with dark
-      // themes. See issue: https://github.com/flutter/flutter/issues/65663
-      // The chip theme below fixes it by using the colorScheme.primary color.
-      // The option when useSubThemes is true uses even more elaborate theming
-      // of chips. It is possible that there will be new Chips entirely for
-      // Material 3. This theme brings the look closer to M3 look, but cannot
-      // reach all the way.
-      chipTheme: useSubThemes
-          ? FlexSubThemes.chipTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor: subTheme.chipSchemeColor,
-              selectedSchemeColor: subTheme.chipSelectedSchemeColor,
-              deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
-              labelStyle: effectiveTextTheme.labelLarge!,
-              radius: subTheme.chipRadius ?? subTheme.defaultRadius,
-              useMaterial3: useMaterial3,
-            )
-          : useMaterial3
-              ? null
-              : ChipThemeData.fromDefaults(
-                  secondaryColor: colorScheme.primary,
-                  brightness: colorScheme.brightness,
-                  labelStyle: effectiveTextTheme.bodyLarge!,
-                ),
-      cardTheme: useSubThemes
-          ? FlexSubThemes.cardTheme(
-              radius: subTheme.cardRadius ?? subTheme.defaultRadius,
-              elevation: subTheme.cardElevation,
-            )
-          : null,
-      drawerTheme: useSubThemes
-          ? FlexSubThemes.drawerTheme(
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
-              radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
-              elevation: subTheme.drawerElevation,
-              // TODO(rydmike): check it is not needed, resolve happens later?
-              // directionality: Directionality.of(context),
-            )
-          : null,
-      // PopupMenuButton theme.
-      popupMenuTheme: useSubThemes
-          ? FlexSubThemes.popupMenuTheme(
-              radius: subTheme.popupMenuRadius ??
-                  (subTheme.defaultRadius == null
-                      ? null
-                      : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: popupMenuElevation,
-              color: popupMenuColor,
-            )
-          : null,
-      // DropDownMenu theme.
-      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
-        colorScheme: colorScheme,
-        // Style match its InputDecoration to same as TextField.
-        inputDecorationTheme: effectiveInputDecorationTheme,
-      ),
-      // MenuTheme theme, for MenuBar, MenuAnchor and DropDownMenu.
-      menuTheme: useSubThemes
-          ? FlexSubThemes.menuTheme(
-              radius: subTheme.popupMenuRadius ??
-                  (subTheme.defaultRadius == null
-                      ? null
-                      : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: popupMenuElevation,
-              backgroundColor: popupMenuColor,
-            )
-          : null,
-      dialogTheme: useSubThemes
-          ? FlexSubThemes.dialogTheme(
-              backgroundColor: dialogBackground,
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
-              elevation: subTheme.dialogElevation,
-            )
-          : null,
-      timePickerTheme: useSubThemes
-          ? FlexSubThemes.timePickerTheme(
-              backgroundColor: dialogBackground,
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              elevation: subTheme.dialogElevation,
-              radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
-              elementRadius:
-                  subTheme.timePickerElementRadius ?? subTheme.defaultRadius,
-              inputDecorationTheme: effectiveInputDecorationTheme)
-          : null,
-      snackBarTheme: useSubThemes
-          ? FlexSubThemes.snackBarTheme(
-              elevation: subTheme.snackBarElevation,
-              colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
-              backgroundColor: tintedBackground(
-                background: colorScheme.onSurface,
-                blend: colorScheme.primary,
-                brightness: colorScheme.brightness,
-              ),
-            )
-          : null,
-      bottomSheetTheme: useSubThemes
-          ? FlexSubThemes.bottomSheetTheme(
-              backgroundColor: bottomSheetColor,
-              modalBackgroundColor: bottomSheetModalColor,
-              elevation: bottomSheetElevation,
-              modalElevation: bottomSheetModalElevation,
-              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
-            )
-          : null,
-      // Opinionated default theming for the bottom navigation bar: Use primary
-      // color for selected item. Flutter defaults to using secondary color in
-      // dark mode, we want primary in dark mode too, like it is in light
-      // mode. Primary color is an iOS influenced style for the bottom nav.
-      // Above was default in version < 4, version 4 can also use sub-theme.
+      //
+      // BottomNavigationBar Theme.
+      // Opinionated default theming for it:
+      // Use primary for selected item. Flutter defaults to using secondary
+      // color in  dark mode, we want primary in dark mode too, like it is in
+      // light mode. Primary color is an iOS influenced style for the bottom
+      // nav. The above is a description of default in version < 4, or now
+      // when not using sub-themes. When we use sub-themes we can completely
+      // customize its appearance as done below. The none sub-themes using
+      // option further below if the past pre-version 4 default.
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
@@ -6508,7 +6172,216 @@ class FlexColorScheme with Diagnosticable {
               ),
               selectedItemColor: colorScheme.primary,
             ),
-      // Opinionated sub theme for Material 3 based Navigation Bar
+      //
+      // BottomSheet Theme.
+      bottomSheetTheme: useSubThemes
+          ? FlexSubThemes.bottomSheetTheme(
+              backgroundColor: bottomSheetColor,
+              modalBackgroundColor: bottomSheetModalColor,
+              elevation: bottomSheetElevation,
+              modalElevation: bottomSheetModalElevation,
+              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
+            )
+          : null,
+      //
+      // buttonBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // Button Theme.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of buttonTheme.
+      // Since the old buttons have been deprecated in Flutter 2.0.0
+      // they are no longer presented or used in the code in FlexColorScheme.
+      // The button theming below still makes the old buttons almost
+      // look like the defaults for the new ElevatedButton, TextButton and
+      // OutlinedButton.
+      // This buttonTheme setup, makes the old legacy Material buttons
+      // [RaisedButton], [OutlineButton] and [FlatButton] very similar in
+      // style to the default color scheme based style used for the
+      // newer Material buttons [ElevatedButton], [OutlinedButton] and
+      // [TextButton]. There are some differences in margin
+      // and outline color and the elevation behavior on the raised button.
+      // A useSubThemes was added in version 4.0.0 to also still support
+      // the old buttons.
+      // The legacy buttons will be completely removed in Flutter.
+      // The `ButtonThemeData` this helper uses will
+      // however remain available after that for a while, because widgets
+      // [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
+      // obsolete in SDK docs though) still use this theme. It is thus kept
+      // around in FlexColorScheme package as long as it might have some use.
+      // Be aware that the buttonTheme will be removed from
+      // FlexColorScheme when/if ButtonThemeData becomes deprecated Flutter SDK.
+      buttonTheme: useSubThemes
+          ? FlexSubThemes.buttonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.materialButtonSchemeColor,
+              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+            )
+          : ButtonThemeData(
+              colorScheme: colorScheme,
+              textTheme: ButtonTextTheme.primary,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+            ),
+      //
+      // Card Theme.
+      cardTheme: useSubThemes
+          ? FlexSubThemes.cardTheme(
+              radius: subTheme.cardRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.cardElevation,
+            )
+          : null,
+      //
+      // Checkbox theme.
+      checkboxTheme: useSubThemes
+          ? FlexSubThemes.checkboxTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.checkboxSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
+            )
+          : FlexSubThemes.checkboxTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
+      //
+      // Chip Theme.
+      // The default chip theme in Flutter does not work correctly with dark
+      // themes. See issue: https://github.com/flutter/flutter/issues/65663
+      // The chip theme below fixes it by using the colorScheme.primary color.
+      // The option when useSubThemes is true uses even more elaborate theming
+      // of chips. It is possible that there will be new Chips entirely for
+      // Material 3. This theme brings the look closer to M3 look, but cannot
+      // reach all the way.
+      chipTheme: useSubThemes
+          ? FlexSubThemes.chipTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.chipSchemeColor,
+              selectedSchemeColor: subTheme.chipSelectedSchemeColor,
+              deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
+              labelStyle: effectiveTextTheme.labelLarge!,
+              radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+              useMaterial3: useMaterial3,
+            )
+          : useMaterial3
+              ? null
+              : ChipThemeData.fromDefaults(
+                  secondaryColor: colorScheme.primary,
+                  brightness: colorScheme.brightness,
+                  labelStyle: effectiveTextTheme.bodyLarge!,
+                ),
+      //
+      // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // datePickerTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // Dialog Theme.
+      dialogTheme: useSubThemes
+          ? FlexSubThemes.dialogTheme(
+              backgroundColor: dialogBackground,
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.dialogElevation,
+            )
+          : null,
+      //
+      // Divider Theme.
+      // Create a Divider theme only when sub themes is used and we want M2
+      // style in M3. Otherwise we keep the theme as default.
+      dividerTheme:
+          useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
+              ? DividerThemeData(color: dividerColor)
+              : null,
+      //
+      // Drawer Theme.
+      // TODO(rydmike): Add width as a themed property.
+      drawerTheme: useSubThemes
+          ? FlexSubThemes.drawerTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
+              radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
+              // width: 450,
+              elevation: subTheme.drawerElevation,
+              // TODO(rydmike): check it is not needed, resolve happens later?
+              // directionality: Directionality.of(context),
+            )
+          : null,
+      //
+      // DropDownMenu Theme.
+      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
+        colorScheme: colorScheme,
+        // Style match its InputDecoration to same as TextField.
+        inputDecorationTheme: effectiveInputDecorationTheme,
+      ),
+      //
+      // ElevatedButton Theme.
+      elevatedButtonTheme: useSubThemes
+          ? FlexSubThemes.elevatedButtonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.elevatedButtonSchemeColor,
+              onBaseSchemeColor: subTheme.elevatedButtonSecondarySchemeColor,
+              radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
+              elevation: subTheme.elevatedButtonElevation,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.elevatedButtonTextStyle,
+              useMaterial3: useMaterial3,
+            )
+          : null,
+      //
+      // expansionTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // FilledButton Theme.
+      filledButtonTheme: useSubThemes
+          ? FlexSubThemes.filledButtonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.filledButtonSchemeColor,
+              radius: subTheme.filledButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.filledButtonTextStyle,
+            )
+          : null,
+      //
+      // FAB, floating action button theme.
+      floatingActionButtonTheme: useSubThemes
+          ? FlexSubThemes.floatingActionButtonTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.fabSchemeColor,
+              radius: subTheme.fabRadius ?? subTheme.defaultRadius,
+              useShape: subTheme.fabUseShape,
+              alwaysCircular: subTheme.fabAlwaysCircular,
+            )
+          : null,
+      //
+      // iconButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // ListTile Theme.
+      // TODO(rydmike): Remove ListTile, tileColor transparent when SDK fixed.
+      // Set tileColor to transparent when using M3 to avoid issue:
+      // https://github.com/flutter/flutter/issues/117700.
+      listTileTheme: useMaterial3
+          ? const ListTileThemeData(tileColor: Colors.transparent)
+          : null,
+      //
+      // menuBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // menuButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // MenuTheme theme.
+      // Used for menu container by MenuBar, MenuAnchor and DropDownMenu.
+      menuTheme: useSubThemes
+          ? FlexSubThemes.menuTheme(
+              radius: subTheme.popupMenuRadius ??
+                  (subTheme.defaultRadius == null
+                      ? null
+                      : math.min(subTheme.defaultRadius!, 10.0)),
+              elevation: popupMenuElevation,
+              backgroundColor: popupMenuColor,
+            )
+          : null,
+      //
+      // NavigationBar Theme.
       navigationBarTheme: useSubThemes
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
@@ -6547,7 +6420,14 @@ class FlexColorScheme with Diagnosticable {
               useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
-      // Opinionated sub theme for Material 3 based Navigation Bar
+      //
+      // NavigationDrawerTheme Theme.
+      // TODO(rydmike): Width of indicator to match Drawer width by default.
+      navigationDrawerTheme: const NavigationDrawerThemeData(
+        indicatorSize: Size(double.infinity, 56),
+      ),
+      //
+      // NavigationRail Theme.
       navigationRailTheme: useSubThemes
           ? FlexSubThemes.navigationRailTheme(
               colorScheme: colorScheme,
@@ -6587,6 +6467,214 @@ class FlexColorScheme with Diagnosticable {
               useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
+      //
+      // OutlinedButton Theme.
+      outlinedButtonTheme: useSubThemes
+          ? FlexSubThemes.outlinedButtonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.outlinedButtonSchemeColor,
+              outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
+              radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
+              pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ??
+                  subTheme.thickBorderWidth,
+              outlineWidth: subTheme.outlinedButtonBorderWidth ??
+                  subTheme.thinBorderWidth,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.outlinedButtonTextStyle,
+              useMaterial3: useMaterial3,
+            )
+          : null,
+      //
+      // PopupMenuButton Theme.
+      popupMenuTheme: useSubThemes
+          ? FlexSubThemes.popupMenuTheme(
+              radius: subTheme.popupMenuRadius ??
+                  (subTheme.defaultRadius == null
+                      ? null
+                      : math.min(subTheme.defaultRadius!, 10.0)),
+              elevation: popupMenuElevation,
+              color: popupMenuColor,
+            )
+          : null,
+      //
+      // progressIndicatorTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
+      // Radio Theme.
+      radioTheme: useSubThemes
+          ? FlexSubThemes.radioTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.radioSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
+            )
+          : FlexSubThemes.radioTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+            ),
+      //
+      // SegmentedButton Theme.
+      segmentedButtonTheme: useSubThemes
+          ? FlexSubThemes.segmentedButtonTheme(
+              colorScheme: colorScheme,
+              selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
+              unselectedSchemeColor:
+                  subTheme.segmentedButtonUnselectedSchemeColor,
+              borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
+              borderWidth: subTheme.segmentedButtonBorderWidth ??
+                  subTheme.thinBorderWidth,
+              radius: subTheme.segmentedButtonRadius ?? subTheme.defaultRadius,
+            )
+          : null,
+      //
+      // Slider theme.
+      sliderTheme: useSubThemes
+          ? FlexSubThemes.sliderTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.sliderBaseSchemeColor,
+              trackHeight: subTheme.sliderTrackHeight,
+              valueIndicatorColor: sliderValueIndicator,
+              valueIndicatorTextStyle: sliderValueStyle,
+              valueIndicatorType: subTheme.sliderValueIndicatorType,
+              showValueIndicator: subTheme.sliderShowValueIndicator,
+              useMaterial3: useMaterial3,
+            )
+          : null,
+      //
+      // SnackBar Theme.
+      snackBarTheme: useSubThemes
+          ? FlexSubThemes.snackBarTheme(
+              elevation: subTheme.snackBarElevation,
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
+              backgroundColor: tintedBackground(
+                background: colorScheme.onSurface,
+                blend: colorScheme.primary,
+                brightness: colorScheme.brightness,
+              ),
+            )
+          : null,
+      //
+      // Switch theme.
+      switchTheme: useSubThemes
+          ? FlexSubThemes.switchTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.switchSchemeColor,
+              thumbSchemeColor: subTheme.switchThumbSchemeColor,
+              unselectedIsColored: subTheme.unselectedToggleIsColored,
+              useMaterial3: useMaterial3,
+            )
+          : FlexSubThemes.switchTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor:
+                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
+              unselectedIsColored: false,
+              useMaterial3: useMaterial3,
+            ),
+      //
+      // TabBar Theme.
+      // Defines the TabBar theme that will fit nicely in an AppBar
+      // (default) or on background color for use eg in a Scaffold, the choice
+      // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
+      // `FlexTabBarStyle.forAppBar`. Using different theme styles for intended
+      // target usage avoids this challenge:
+      // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
+      // That still has some issue related to it, is using default is used, we
+      // pass in `null` and let ThemeData use default sub-theme for TabBarTheme.
+      tabBarTheme: FlexSubThemes.tabBarTheme(
+        colorScheme: colorScheme,
+        indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
+            ? selectedTabColor()
+            : FlexSubThemes.schemeColor(
+                subTheme.tabBarIndicatorSchemeColor!, colorScheme),
+        labelStyle: effectiveTextTheme.bodyLarge,
+        labelColor: subTheme.tabBarItemSchemeColor == null
+            ? selectedTabColor()
+            : FlexSubThemes.schemeColor(
+                subTheme.tabBarItemSchemeColor!, colorScheme),
+        unselectedLabelStyle: effectiveTextTheme.bodyLarge,
+        unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
+            ? unselectedTabColor()
+            : FlexSubThemes.schemeColor(
+                    subTheme.tabBarItemSchemeColor!, colorScheme)
+                .withAlpha(0x99), // 60%,
+        useMaterial3: useMaterial3,
+      ),
+      //
+      // TextButton Theme.
+      textButtonTheme: useSubThemes
+          ? FlexSubThemes.textButtonTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.textButtonSchemeColor,
+              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              padding: subTheme.buttonPadding,
+              minButtonSize: subTheme.buttonMinSize,
+              textStyle: subTheme.textButtonTextStyle,
+              useMaterial3: useMaterial3,
+            )
+          : null,
+      //
+      // TextSelection Theme.
+      // In TextSelectionThemeData, the standard for selectionColor is
+      // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
+      // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
+      // mode. The standard selectionHandleColor is colorScheme.primary,
+      // here we use the slightly darker shade primaryColorDark instead.
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: isDark
+            ? colorScheme.primary.withAlpha(0xB2) // 50%
+            : colorScheme.primary.withAlpha(0x4C), // 30%
+        selectionHandleColor: primaryColorDark,
+      ),
+      //
+      // TimePicker Theme.
+      timePickerTheme: useSubThemes
+          ? FlexSubThemes.timePickerTheme(
+              backgroundColor: dialogBackground,
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              elevation: subTheme.dialogElevation,
+              radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
+              elementRadius:
+                  subTheme.timePickerElementRadius ?? subTheme.defaultRadius,
+              inputDecorationTheme: effectiveInputDecorationTheme)
+          : null,
+      //
+      // ToggleButtons Theme.
+      toggleButtonsTheme: useSubThemes
+          ? FlexSubThemes.toggleButtonsTheme(
+              colorScheme: colorScheme,
+              baseSchemeColor: subTheme.toggleButtonsSchemeColor,
+              unselectedSchemeColor:
+                  subTheme.toggleButtonsUnselectedSchemeColor,
+              borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,
+              borderWidth:
+                  subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
+              radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
+              minButtonSize: subTheme.buttonMinSize,
+              visualDensity: visualDensity,
+              useMaterial3: useMaterial3,
+            )
+          : null,
+      //
+      // Tooltip theme
+      tooltipTheme: !useSubThemes && !tooltipsMatchBackground
+          ? null
+          : FlexSubThemes.tooltipTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.tooltipSchemeColor,
+              backgroundColor: tooltipBackground(),
+              backgroundAlpha: tooltipAlpha(),
+              foregroundColor: tooltipForeground(),
+              textStyle: effectiveTextTheme.bodyMedium!.copyWith(
+                fontSize: tooltipFontSize(),
+              ),
+              borderRadius: tooltipBorderRadius(),
+              borderColor: dividerColor,
+              waitDuration: subTheme.tooltipWaitDuration,
+              showDuration: subTheme.tooltipShowDuration,
+            ),
     );
   }
 

@@ -9,12 +9,6 @@ class DialogSettings extends StatelessWidget {
   const DialogSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _fcsFlutterIssues = Uri(
-    scheme: 'https',
-    host: 'docs.flexcolorscheme.com',
-    path: 'known_issues',
-  );
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
