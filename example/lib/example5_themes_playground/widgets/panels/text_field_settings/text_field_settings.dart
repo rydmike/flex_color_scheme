@@ -100,7 +100,7 @@ class TextFieldSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ListTile(
             enabled: useMaterial3,
-            title: const Text('Use Material 3 style TextField?'),
+            title: const Text('Use Material 3 default TextField style?'),
             subtitle: const Text('Update settings below to match M3 default '
                 'values'),
             trailing: FilledButton(

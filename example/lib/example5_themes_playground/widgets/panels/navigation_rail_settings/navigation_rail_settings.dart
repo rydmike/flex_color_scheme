@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../dialogs/set_navigation_rail_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_rail_label_type_list_tile.dart';
 
@@ -10,9 +11,22 @@ class NavigationRailSettings extends StatelessWidget {
   const NavigationRailSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetNavigationRailToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setNavigationRailToM3();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -106,6 +120,22 @@ class NavigationRailSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        ListTile(
+            enabled: useMaterial3,
+            title: const Text('Use Material 3 default NavigationRail style?'),
+            subtitle: const Text('Update settings below to match M3 default '
+                'values'),
+            trailing: FilledButton(
+              onPressed: useMaterial3
+                  ? () async {
+                      await _handleSetToM3(context);
+                    }
+                  : null,
+              child: const Text('Set to M3'),
+            ),
+            onTap: () async {
+              await _handleSetToM3(context);
+            }),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: !controller.useSubThemes ||

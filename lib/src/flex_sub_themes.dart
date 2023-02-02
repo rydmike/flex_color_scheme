@@ -2697,10 +2697,11 @@ class FlexSubThemes {
 
     /// Height of the container for the Material 3 [NavigationBar].
     ///
-    /// In undefined, defaults to [kNavigationBarHeight] which is 62 dp.
+    /// If undefined, and M2 used defaults to [kNavigationBarHeight] which
+    /// is 62 dp.
     ///
-    /// If [useFlutterDefaults] true, and this property is undefined, it
-    /// defaults to 80.
+    /// If [useFlutterDefaults] true, and this property is undefined, or
+    /// [useMaterial3 is true] and height is undefined it defaults to 80.
     final double? height,
 
     /// Specifies when each [NavigationDestination]'s label should appear.
@@ -2780,7 +2781,7 @@ class FlexSubThemes {
     /// - background       background     surface with      surface with
     ///                                   onSurface overlay primary overlay
     ///                                   elev 3.           elev 3.
-    /// - height           62             80                80
+    /// - height           M2:62 M3:80    80                80
     /// - indicator        primary op24%  secondary op24%   secondaryContainer
     /// - selected icon    primary        onSurface         onSecondaryContainer
     /// - unselected icon  onSurface      onSurface         onSurfaceVariant
@@ -2852,7 +2853,8 @@ class FlexSubThemes {
             .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     return NavigationBarThemeData(
-      height: height ?? (useFlutterDefaults ? null : kNavigationBarHeight),
+      height: height ??
+          (useFlutterDefaults || useMaterial3 ? null : kNavigationBarHeight),
       elevation: elevation,
       backgroundColor: backgroundSchemeColor == null
           ? useFlutterDefaults || useMaterial3

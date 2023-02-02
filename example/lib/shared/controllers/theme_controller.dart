@@ -960,6 +960,37 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
+  // Set NavigationBar values to Flutter M3 defaults.
+  Future<void> setNavigationBarToM3() async {
+    setNavBarBackgroundSchemeColor(null, false);
+    setNavBarIndicatorOpacity(1, false);
+    setNavigationBarElevation(null, false);
+    setNavBarHeight(null, false);
+    setNavBarIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
+    setNavBarIndicatorOpacity(1, false);
+    setNavBarMuteUnselected(false, false);
+    setNavBarSelectedSchemeColor(SchemeColor.onSurface, false);
+    setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
+    setNavBarLabelBehavior(
+        NavigationDestinationLabelBehavior.alwaysShow, false);
+    notifyListeners();
+  }
+
+  // Set NavigationRail values to Flutter M3 defaults.
+  Future<void> setNavigationRailToM3() async {
+    setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
+    setNavRailOpacity(1, false);
+    setNavigationRailElevation(0, false);
+    setNavigationRailElevation(null, false);
+    setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
+    setNavRailIndicatorOpacity(1, false);
+    setNavRailMuteUnselected(false, false);
+    setNavRailSelectedSchemeColor(SchemeColor.onSurface, false);
+    setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
+    setNavRailLabelType(NavigationRailLabelType.none, false);
+    notifyListeners();
+  }
+
   // GENERAL SETTINGS.
   // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
   // ===========================================================================

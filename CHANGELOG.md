@@ -8,8 +8,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **CHANGE**
 
-**THEMES PLAYGROUND**
+- Style breaking: When using Material 3, changed the default `NavigationBar` height from 62dp to 80dp, the 62 default style is kept when using M2 in order to not break past default styles for M2 themes. The 80dp height is also the default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme a bit less opinionated compared to M3 spec. 
+  - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Sadly the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
 
+**THEMES PLAYGROUND**
+- Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
@@ -36,7 +39,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
 
-- Add more "Set to M3 design" buttons like on **Text Field** panel, e.g. to Navigation Bar and Navigation Rail panels.
 - Add some theming options for the new NavigationDrawer theme.
 - Add some theming options for the new MenuBar theme.
 - Add more sub-theme component color presentations to the Playground's **Component Themes** panel.

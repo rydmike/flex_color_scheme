@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../dialogs/set_navigation_bar_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
@@ -11,8 +12,28 @@ class NavigationBarSettings extends StatelessWidget {
   const NavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetNavigationBarToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setNavigationBarToM3();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
     // Logic for default elevation label.
     final String elevationDefaultLabel =
         controller.navigationBarElevation == null
@@ -20,13 +41,6 @@ class NavigationBarSettings extends StatelessWidget {
                 ? 'default 3'
                 : 'default 0'
             : 'global ${controller.navigationBarElevation!.toStringAsFixed(1)}';
-
-    final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     // Logic for background color label.
     String backgroundColorLabel() {
@@ -118,6 +132,22 @@ class NavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        ListTile(
+            enabled: useMaterial3,
+            title: const Text('Use Material 3 default NavigationBar style?'),
+            subtitle: const Text('Update settings below to match M3 default '
+                'values'),
+            trailing: FilledButton(
+              onPressed: useMaterial3
+                  ? () async {
+                      await _handleSetToM3(context);
+                    }
+                  : null,
+              child: const Text('Set to M3'),
+            ),
+            onTap: () async {
+              await _handleSetToM3(context);
+            }),
         const NavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
@@ -241,7 +271,7 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarHeight == null ||
                         (controller.navBarHeight ?? 54) < 55
-                    ? controller.useFlutterDefaults
+                    ? controller.useFlutterDefaults || useMaterial3
                         ? 'default 80'
                         : 'default 62'
                     : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
@@ -269,7 +299,7 @@ class NavigationBarSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navBarHeight == null ||
                               (controller.navBarHeight ?? 54) < 55
-                          ? controller.useFlutterDefaults
+                          ? controller.useFlutterDefaults || useMaterial3
                               ? 'default 80'
                               : 'default 62'
                           : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
