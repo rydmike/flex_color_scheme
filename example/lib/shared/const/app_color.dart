@@ -235,16 +235,13 @@ class AppColor {
   ///
   /// This application contains a toggle `useCustomDarkColorsForSeed' that can
   /// be set to true or false depending on the design need.
+  ///
   static FlexSchemeData schemeAtIndex(
       final int index, final ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
           dark: controller.useKeyColors
-              ? controller.useDarkColorsForSeed &&
-                      (index == 0 ||
-                          index == 1 ||
-                          index == 2 ||
-                          index == AppColor.schemes.length - 1)
+              ? controller.useDarkColorsForSeed
                   ? controller.customScheme.dark
                   : controller.customScheme.light
               : controller.useToDarkMethod
@@ -254,19 +251,11 @@ class AppColor {
                   : null);
     }
     return schemes[index].copyWith(
-        dark: controller.useKeyColors
-            ? controller.useDarkColorsForSeed &&
-                    (index == 0 ||
-                        index == 1 ||
-                        index == 2 ||
-                        index == AppColor.schemes.length - 1)
-                ? schemes[index].dark
-                : schemes[index].light
-            : controller.useToDarkMethod
-                ? schemes[index].light.defaultError.toDark(
-                    controller.darkMethodLevel,
-                    controller.toDarkSwapPrimaryAndContainer)
-                : null);
+        dark: controller.useToDarkMethod
+            ? schemes[index].light.defaultError.toDark(
+                controller.darkMethodLevel,
+                controller.toDarkSwapPrimaryAndContainer)
+            : null);
   }
 
   /// Used by example 5, the Themes Playground.
