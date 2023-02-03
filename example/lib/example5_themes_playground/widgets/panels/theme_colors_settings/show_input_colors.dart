@@ -425,7 +425,7 @@ class ShowInputColors extends StatelessWidget {
             height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
+              elevation: 0,
               clipBehavior: Clip.antiAlias,
               child: Material(
                 color: colorScheme.error,
@@ -447,7 +447,7 @@ class ShowInputColors extends StatelessWidget {
             height: boxHeight,
             child: Card(
               margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
+              elevation: 0,
               clipBehavior: Clip.antiAlias,
               child: Material(
                 color: colorScheme.errorContainer,
