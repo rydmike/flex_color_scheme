@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/pages/app_examples/app_example.dart';
 import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
+import '../panels/app_examples/app_example.dart';
 import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
@@ -410,6 +410,7 @@ class SecondPanelPopupMenu extends StatelessWidget {
   }
 }
 
+// Used to show selected panel on the right side.
 class SecondPanel extends StatelessWidget {
   const SecondPanel({super.key, required this.controller});
   final ThemeController controller;

@@ -58,6 +58,11 @@ class Store {
   // Default value for the sideViewIndex, also used to reset settings.
   static const int defaultSideViewIndex = 31;
 
+  // Key used to read and save the deviceSize value.
+  static const String keyDeviceSize = 'deviceSize';
+  // Default value for the deviceSize, also used to reset settings.
+  static const double defaultDeviceSize = 200;
+
   // Key used to read and save the useTextTheme value.
   static const String keyUseTextTheme = 'useTextTheme';
   // Default value for the useSubThemes, also used to reset settings.

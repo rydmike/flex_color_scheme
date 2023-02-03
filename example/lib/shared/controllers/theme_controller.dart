@@ -72,6 +72,9 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _sideViewIndex = await _themeService.load(
         Store.keySideViewIndex, Store.defaultSideViewIndex);
+    _deviceSize =
+        await _themeService.load(Store.keyDeviceSize, Store.defaultDeviceSize);
+    //
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
     _useM2StyleDividerInM3 = await _themeService.load(
@@ -1085,6 +1088,16 @@ class ThemeController with ChangeNotifier {
     _sideViewIndex = value;
     notifyListeners();
     unawaited(_themeService.save(Store.keySideViewIndex, value));
+  }
+
+  late double _deviceSize;
+  double get deviceSize => _deviceSize;
+  void setDeviceSize(double? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _deviceSize) return;
+    _deviceSize = value;
+    notifyListeners();
+    unawaited(_themeService.save(Store.keyDeviceSize, value));
   }
 
   late bool _useTextTheme;
