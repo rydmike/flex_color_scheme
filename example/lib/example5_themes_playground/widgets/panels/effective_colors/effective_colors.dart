@@ -72,7 +72,7 @@ class EffectiveColors extends StatelessWidget {
         const ListTile(
           dense: true,
           subtitle: Text('Above ThemeData colors are still important in '
-              'Flutter 3.3 and earlier. Some widgets still depend on them for '
+              'Flutter 3.7 and earlier. Some widgets still depend on them for '
               'their default colors, especially when using M2. FlexColorScheme '
               'keeps them in sync with ColorScheme to produce an app with '
               'consistent colors '

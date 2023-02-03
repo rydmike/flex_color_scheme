@@ -108,6 +108,9 @@ class ShowSubThemeColors extends StatelessWidget {
             (theme.useMaterial3
                 ? colorScheme.primaryContainer
                 : colorScheme.secondary);
+    final Color onFloatingActionButtonColor = useMaterial3
+        ? theme.colorScheme.onPrimaryContainer
+        : _onColor(floatingActionButtonColor, background);
     final Color switchColor = theme.switchTheme.thumbColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
@@ -117,8 +120,14 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
-    final Color circleAvatarColor =
-        isDark ? theme.primaryColorLight : theme.primaryColorDark;
+    final Color circleAvatarColor = useMaterial3
+        ? theme.colorScheme.primaryContainer
+        : isDark
+            ? theme.primaryColorLight
+            : theme.primaryColorDark;
+    final Color onCircleAvatarColor = useMaterial3
+        ? theme.colorScheme.onPrimaryContainer
+        : _onColor(circleAvatarColor, background);
     final Color chipColor =
         theme.chipTheme.backgroundColor ?? colorScheme.primary;
     final Color inputDecoratorColor =
@@ -264,12 +273,12 @@ class ShowSubThemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Floating\nAction\nButton',
                 color: floatingActionButtonColor,
-                textColor: _onColor(floatingActionButtonColor, background),
+                textColor: onFloatingActionButtonColor,
               ),
               ColorCard(
                 label: 'Circle\nAvatar',
                 color: circleAvatarColor,
-                textColor: _onColor(circleAvatarColor, background),
+                textColor: onCircleAvatarColor,
               ),
               ColorCard(
                 label: 'Chips',
