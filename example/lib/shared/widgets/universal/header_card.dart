@@ -22,6 +22,7 @@ class HeaderCard extends StatelessWidget {
     this.leading,
     this.title,
     this.subtitle,
+    this.secondHeader,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
     this.elevation = 0,
@@ -54,6 +55,10 @@ class HeaderCard extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? subtitle;
+
+  /// An additional optional secondary header to display in the title after
+  /// the main/ header.
+  final Widget? secondHeader;
 
   /// The margins around the entire reveal list tile card.
   ///
@@ -201,23 +206,30 @@ class HeaderCard extends StatelessWidget {
             Material(
               type: MaterialType.card,
               color: headerColor,
-              child: ListTile(
-                tileColor: Colors.transparent,
-                contentPadding: headerPadding,
-                leading: leading,
-                title: cardTitle,
-                subtitle: subtitle,
-                trailing: (enabled && onTap != null)
-                    ? ExpandIcon(
-                        size: 32,
-                        isExpanded: isOpen,
-                        padding: EdgeInsets.zero,
-                        onPressed: (_) {
-                          onTap?.call();
-                        },
-                      )
-                    : null,
-                onTap: onTap?.call,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: ListTile(
+                      tileColor: Colors.transparent,
+                      contentPadding: headerPadding,
+                      leading: leading,
+                      title: cardTitle,
+                      subtitle: subtitle,
+                      trailing: (enabled && onTap != null)
+                          ? ExpandIcon(
+                              size: 32,
+                              isExpanded: isOpen,
+                              padding: EdgeInsets.zero,
+                              onPressed: (_) {
+                                onTap?.call();
+                              },
+                            )
+                          : null,
+                      onTap: onTap?.call,
+                    ),
+                  ),
+                  if (secondHeader != null) Expanded(child: secondHeader!),
+                ],
               ),
             ),
           AnimatedSwitcher(

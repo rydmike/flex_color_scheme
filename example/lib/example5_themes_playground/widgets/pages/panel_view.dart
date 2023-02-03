@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
+import '../../../shared/pages/app_examples/app_example.dart';
 import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
@@ -39,6 +40,7 @@ import '../panels/theme_selector.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
 import '../panels/widget_showcase/widget_showcase.dart';
+import '../shared/color_scheme_box.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -237,6 +239,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(PrimaryTextThemeSettings(themeCtrl), pageIndex,
                       themeCtrl),
+                  PanelPage(
+                      AppExample(controller: themeCtrl), pageIndex, themeCtrl),
                   PanelPage(PageExamples(controller: themeCtrl), pageIndex,
                       themeCtrl),
                   PanelPage(const WidgetShowcase(), pageIndex, themeCtrl),
@@ -275,6 +279,8 @@ class PanelPage extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
+    final int secondPage = controller.sideViewIndex;
+
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // A custom breakpoint, when the layout width is larger than 1200dp
@@ -285,6 +291,16 @@ class PanelPage extends StatelessWidget {
               panelPage < panelItems.length - 3;
       final double margins =
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
+      // The second header
+      final Widget secondHeader = ListTile(
+        leading: Icon(panelItems[secondPage].icon, color: iconColor),
+        title: Text(panelItems[secondPage].panelLabel),
+        trailing: SecondPanelPopupMenu(
+          index: secondPage,
+          onChanged: controller.setSideViewIndex,
+          iconColor: iconColor,
+        ),
+      );
 
       // We get double implicit scrollbars and that causes issues with the
       // scroll controller, this scroll config removes it.
@@ -305,13 +321,14 @@ class PanelPage extends StatelessWidget {
             HeaderCard(
               title: Text(panelItems[panelPage].panelLabel),
               leading: Icon(panelItems[panelPage].icon, color: iconColor),
+              secondHeader: showCodeSideBySide ? secondHeader : null,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(child: child),
                   if (showCodeSideBySide)
                     Expanded(
-                      child: ThemeCode(controller),
+                      child: SecondPanel(controller: controller),
                     ),
                 ],
               ),
@@ -320,5 +337,124 @@ class PanelPage extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+/// Widget used to select used side-by-side second panel with a popup menu.
+class SecondPanelPopupMenu extends StatelessWidget {
+  const SecondPanelPopupMenu({
+    super.key,
+    required this.index,
+    this.onChanged,
+    this.contentPadding,
+    required this.iconColor,
+  });
+  final int index;
+  final ValueChanged<int>? onChanged;
+  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final Color iconColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme scheme = theme.colorScheme;
+    final TextStyle txtStyle = theme.textTheme.labelLarge!;
+    final bool enabled = onChanged != null;
+    final IconThemeData selectedIconTheme =
+        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
+    final IconThemeData unSelectedIconTheme =
+        theme.iconTheme.copyWith(color: iconColor);
+
+    return PopupMenuButton<int>(
+      initialValue: index,
+      tooltip: '',
+      padding: EdgeInsets.zero,
+      onSelected: (int index) {
+        onChanged?.call(index);
+      },
+      enabled: enabled,
+      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+        for (int i = 0; i < panelItems.length; i++)
+          PopupMenuItem<int>(
+            value: i,
+            child: ListTile(
+              tileColor: Colors.transparent,
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: index == i
+                  ? IconTheme(
+                      data: selectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: iconColor,
+                        borderColor: Colors.transparent,
+                        child: Icon(panelItems[i].icon),
+                      ),
+                    )
+                  : IconTheme(
+                      data: unSelectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: Colors.transparent,
+                        borderColor: iconColor,
+                        child: Icon(panelItems[i].icon),
+                      ),
+                    ),
+              title: Text(panelItems[i].panelLabel, style: txtStyle),
+            ),
+          )
+      ],
+      icon: Icon(
+        Icons.more_vert,
+        color: iconColor,
+      ),
+    );
+  }
+}
+
+class SecondPanel extends StatelessWidget {
+  const SecondPanel({super.key, required this.controller});
+  final ThemeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData media = MediaQuery.of(context);
+    // Flag used to hide some blend mode options that wont fit when
+    // using toggle buttons on small media.
+    final bool showAllBlends = media.size.width > 445;
+
+    final int page = controller.sideViewIndex;
+    return <Widget>[
+      IntroductionPanel(controller),
+      ThemeColorsSettings(controller),
+      SeededColorSchemeSettings(controller),
+      SurfaceBlendSettings(controller, allBlends: showAllBlends),
+      EffectiveColors(controller),
+      ComponentSettings(controller),
+      TextFieldSettings(controller),
+      AppBarSettings(controller),
+      TabBarSettings(controller),
+      BottomNavigationBarSettings(controller),
+      NavigationBarSettings(controller),
+      NavigationRailSettings(controller),
+      DrawerSettings(controller),
+      AndroidNavigationBarSettings(controller),
+      ButtonsSettings(controller),
+      ToggleButtonsSettings(controller),
+      FabChipSettings(controller),
+      MenuSettings(controller),
+      TooltipIconButtonAvatarDropdownSettings(controller),
+      SwitchesSettings(controller),
+      SliderSettings(controller),
+      ListTileSettings(controller),
+      DialogSettings(controller),
+      BottomSheetBannerSnackSettings(controller),
+      const MaterialPanel(),
+      CardSettings(controller),
+      TextThemeSettings(controller),
+      PrimaryTextThemeSettings(controller),
+      AppExample(controller: controller),
+      PageExamples(controller: controller),
+      const WidgetShowcase(),
+      ThemeCode(controller),
+    ].elementAt(page);
   }
 }

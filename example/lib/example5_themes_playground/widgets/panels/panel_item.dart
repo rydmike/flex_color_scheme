@@ -158,6 +158,11 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.font_download,
   ),
   PanelItem(
+    panelLabel: 'App Example',
+    buttonLabel: 'App\nExample',
+    icon: Icons.phone_iphone,
+  ),
+  PanelItem(
     panelLabel: 'Page Examples',
     buttonLabel: 'Page\nExamples',
     icon: Icons.article_outlined,

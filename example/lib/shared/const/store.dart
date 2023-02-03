@@ -53,6 +53,11 @@ class Store {
   // Default value for the viewIndex, also used to reset settings.
   static const int defaultViewIndex = 0;
 
+  // Key used to read and save the sideViewIndex value.
+  static const String keySideViewIndex = 'sideViewIndex';
+  // Default value for the sideViewIndex, also used to reset settings.
+  static const int defaultSideViewIndex = 31;
+
   // Key used to read and save the useTextTheme value.
   static const String keyUseTextTheme = 'useTextTheme';
   // Default value for the useSubThemes, also used to reset settings.

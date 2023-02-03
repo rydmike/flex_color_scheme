@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 2, 2023**
+**Feb 3, 2023**
 
 **NEW**
 
@@ -18,14 +18,16 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Sadly the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
 
 **THEMES PLAYGROUND**
-- Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
 
+- Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
+- Added a feature to select which panel is shown in page view as the second panel. It is no longer locked to the code-view panel, it can be any of the available panels, enabling studying chosen panels side by side.
+- Added an example themed-app panel view with a few screens. Can be used as a side screen to show what an app using the theme might look like. Screens still need demo content.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - Add BottomAppBarColor background color theming.
 - Add NavigationDrawer width and selected item colors. 
-- Playground: Select other than code page as side-by-side panel in page view.
+- Add some theming options for the new MenuBar theme.  
 - Playground: Hide input color. Make it default to hide them.  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage. Test new colors too.
@@ -34,24 +36,13 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Changelog.
   - ListTile transparent added to core defaults, may not be needed. Review before release.
   - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
-  - Info section (plus article later) about what is still missing in Flutter 3.7 from M3.
+  - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
 - After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
-  - New color scheme images
+  - New color scheme images.
   - Review and update older screenshots and GIFs.
   - Use image zoom feature in docs.page more on current images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
-
-Postponed TODOs, that were planned for FCS stable 7.0, but moved forward to 7.1 or later.
-
-- Add some theming options for the new NavigationDrawer theme.
-- Add some theming options for the new MenuBar theme.
-- Add more sub-theme component color presentations to the Playground's **Component Themes** panel.
-- Make tinted disabled controls apply consistently to all controls when applied.
-- Make tinted interaction effect apply consistently to all controls. New M3 widgets need to define it in their own sub-themes to get them. They don't use the hover, focus, highlight color from ThemeData for their defaults.  
-- To TabBar theming, add unselected color, not selected dim/undim and custom bottom borderline color.
-- Playground: Custom FlexTones. Maybe 7.2 or 7.3.
-- Playground: Image based colors. Maybe 7.x.
 
 ## 7.0.0-dev.2
 

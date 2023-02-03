@@ -12,9 +12,13 @@ dependencies:
   # https://pub.dev/packages/cupertino_icons
   cupertino_icons: ^1.0.5
 
+  # Simulated device frames package by aloisdeniel.com.
+  # https://pub.dev/packages/device_frame
+  device_frame: ^1.1.0
+
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^3.0.2
+  flex_color_picker: ^3.1.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -35,7 +39,7 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.1
 
   # Hive local storage, by Simon Leir.
   # https://pub.dev/packages/hive
@@ -55,7 +59,7 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.0.11
+  path_provider: ^2.0.12
 
   # Store value pair shared preference data, by Google flutter.dev.
   # https://pub.dev/packages/shared_preferences

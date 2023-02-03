@@ -70,6 +70,8 @@ class ThemeController with ChangeNotifier {
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _viewIndex =
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
+    _sideViewIndex = await _themeService.load(
+        Store.keySideViewIndex, Store.defaultSideViewIndex);
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
     _useM2StyleDividerInM3 = await _themeService.load(
@@ -1073,6 +1075,16 @@ class ThemeController with ChangeNotifier {
     _viewIndex = value;
     notifyListeners();
     unawaited(_themeService.save(Store.keyViewIndex, value));
+  }
+
+  late int _sideViewIndex;
+  int get sideViewIndex => _sideViewIndex;
+  void setSideViewIndex(int? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _sideViewIndex) return;
+    _sideViewIndex = value;
+    notifyListeners();
+    unawaited(_themeService.save(Store.keySideViewIndex, value));
   }
 
   late bool _useTextTheme;
