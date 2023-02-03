@@ -110,9 +110,11 @@ class SurfaceBlendSettings extends StatelessWidget {
             'When using a surface blend mode with a high factor on Scaffold '
             'background, the design intent is to not place any controls and '
             'text on it directly, but to always use them on other surfaces '
-            'with less surface tint. For example in Cards, like this '
-            'application does. The Scaffold background is then only used as a '
-            'background effect.',
+            'with less surface tint, for example in Cards. The Scaffold '
+            'background is then only used as a background color effect. If '
+            'your app places controls directly on Scaffold with its default '
+            'background color, these blend modes may not be a good fit. Choose '
+            'one with lower color blends on Scaffold background.',
           ),
         ),
         if (isLight) ...<Widget>[
