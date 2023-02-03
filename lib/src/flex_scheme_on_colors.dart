@@ -242,7 +242,7 @@ class FlexSchemeOnColors with Diagnosticable {
     if (color == FlexColor.materialDarkErrorHc) return Brightness.light;
     // Might as well do this as quick return too, estimateBrightnessForColor
     // returns same value for this color, but since we will be using this logic
-    // for error colors we might as well include other fixed error color
+    // for error colors we might as well use results for other hard coded color
     // values and not call ThemeData.estimateBrightnessForColor
     if (color == FlexColor.materialLightError) return Brightness.dark;
     if (color == FlexColor.materialLightErrorHc) return Brightness.dark;

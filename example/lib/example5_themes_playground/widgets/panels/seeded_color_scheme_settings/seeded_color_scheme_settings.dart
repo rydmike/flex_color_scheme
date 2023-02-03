@@ -156,18 +156,17 @@ class SeededColorSchemeSettings extends StatelessWidget {
           title: Text('Want to keep a theme color when using seeds?'),
           subtitle: Text('With the switches on the colors above you can lock '
               'primary, secondary, tertiary and their container colors to '
-              'their theme colors instead of using the color from seeded tonal '
-              'palette. Switches have separate states for light and dark '
-              'theme. '),
+              'their scheme input defined colors instead of using the color '
+              'from the seeded tonal palette. The switches have separate '
+              'states for light and dark theme. '),
         ),
         if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
           SwitchListTile(
               dense: true,
               title: const Text('Custom dark scheme uses its own key colors'),
               subtitle: const Text(
-                'This option is only available on the custom dark schemes. If '
-                'you "keep" dark input colors with custom dark schemes, '
-                'turn this ON to use its own input color definition.',
+                'This option is only available on the custom dark scheme. Turn '
+                'ON this option to use its dark input colors as seed keys.',
               ),
               value: controller.useDarkColorsForSeed &&
                   controller.useKeyColors &&

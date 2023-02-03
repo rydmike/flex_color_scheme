@@ -75,6 +75,9 @@ class ShowInputColors extends StatelessWidget {
             : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
 
+    // Show the input color values
+    final bool showInputColor = controller.showSchemeInput;
+
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
@@ -155,6 +158,7 @@ class ShowInputColors extends StatelessWidget {
                     color: primary,
                     textColor: colorScheme.onPrimary,
                     label: 'primary',
+                    showInputColor: showInputColor,
                     inputColor: inputColor.primary,
                     inputTextColor: _onColor(inputColor.primary),
                     showMaterialName: true,
@@ -210,6 +214,7 @@ class ShowInputColors extends StatelessWidget {
                     color: primaryContainer,
                     textColor: colorScheme.onPrimaryContainer,
                     label: 'primary\nContainer',
+                    showInputColor: showInputColor,
                     inputColor: inputColor.primaryContainer,
                     inputTextColor: _onColor(inputColor.primaryContainer),
                     showMaterialName: true,
@@ -260,6 +265,7 @@ class ShowInputColors extends StatelessWidget {
                   child: ColorNameValue(
                     color: secondary,
                     textColor: colorScheme.onSecondary,
+                    showInputColor: showInputColor,
                     label: 'secondary',
                     inputColor: inputColor.secondary,
                     inputTextColor: _onColor(inputColor.secondary),
@@ -316,6 +322,7 @@ class ShowInputColors extends StatelessWidget {
                     color: secondaryContainer,
                     textColor: colorScheme.onSecondaryContainer,
                     label: 'secondary\nContainer',
+                    showInputColor: showInputColor,
                     inputColor: inputColor.secondaryContainer,
                     inputTextColor: _onColor(inputColor.secondaryContainer),
                     showMaterialName: true,
@@ -359,6 +366,7 @@ class ShowInputColors extends StatelessWidget {
                     color: tertiary,
                     textColor: colorScheme.onTertiary,
                     label: 'tertiary',
+                    showInputColor: showInputColor,
                     inputColor: inputColor.tertiary,
                     inputTextColor: _onColor(inputColor.tertiary),
                     showMaterialName: true,
@@ -402,6 +410,7 @@ class ShowInputColors extends StatelessWidget {
                     color: tertiaryContainer,
                     textColor: colorScheme.onTertiaryContainer,
                     label: 'tertiary\nContainer',
+                    showInputColor: showInputColor,
                     inputColor: inputColor.tertiaryContainer,
                     inputTextColor: _onColor(inputColor.tertiaryContainer),
                     showMaterialName: true,
@@ -424,6 +433,7 @@ class ShowInputColors extends StatelessWidget {
                   color: colorScheme.error,
                   textColor: colorScheme.onError,
                   label: 'error',
+                  showInputColor: showInputColor,
                   inputColor: inputErrorColor,
                   inputTextColor: inputOnErrorColor,
                   showMaterialName: true,
@@ -445,6 +455,7 @@ class ShowInputColors extends StatelessWidget {
                   color: colorScheme.errorContainer,
                   textColor: colorScheme.onErrorContainer,
                   label: 'error\nContainer',
+                  showInputColor: showInputColor,
                   inputColor: inputErrorContainerColor,
                   inputTextColor: inputOnErrorContainerColor,
                   showMaterialName: true,

@@ -17,6 +17,7 @@ class ColorNameValue extends StatefulWidget {
     this.fontSize = 12,
     this.tone,
     this.showTone = false,
+    this.showInputColor = true,
     this.inputColor,
     this.inputTextColor,
     this.showMaterialName = false,
@@ -30,6 +31,12 @@ class ColorNameValue extends StatefulWidget {
   final double fontSize;
   final int? tone;
   final bool showTone;
+
+  /// If showInputColor is set to false the input color is not shown even if both
+  /// inputColor and inputTextColor are defined.
+  ///
+  /// Defaults to true.
+  final bool showInputColor;
   final Color? inputColor;
   final Color? inputTextColor;
   final bool showMaterialName;
@@ -180,8 +187,11 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   ),
                 ],
               ),
-              // Show input color only if both are defined
-              if (widget.inputColor != null && widget.inputTextColor != null)
+              // Show input color only if both are defined and showInput color
+              // is enabled.
+              if (widget.inputColor != null &&
+                  widget.inputTextColor != null &&
+                  widget.showInputColor)
                 Card(
                   margin: const EdgeInsets.only(top: 8.0),
                   color: widget.inputColor,
@@ -195,13 +205,15 @@ class _ColorNameValueState extends State<ColorNameValue> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Scheme defined',
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                                color: widget.inputTextColor,
-                                fontSize: widget.fontSize - 1,
-                                fontWeight: FontWeight.w500)),
+                        Text(
+                          'Scheme input',
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                              color: widget.inputTextColor,
+                              fontSize: widget.fontSize - 1,
+                              fontWeight: FontWeight.w500),
+                        ),
                         Row(
                           children: <Widget>[
                             Expanded(

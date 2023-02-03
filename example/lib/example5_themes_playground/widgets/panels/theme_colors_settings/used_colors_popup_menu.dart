@@ -25,11 +25,11 @@ class UsedColorsPopupMenu extends StatelessWidget {
       return 'Only scheme defined primary color used, other colors are '
           'computed by FlexColorScheme. Easy harmonious theme where all '
           'colors are different shades and variants of a single used '
-          'primary color';
+          'primary color.';
     }
     if (colors == 2) {
       return 'Scheme defined primary and secondary colors used, other colors '
-          'are computed by FlexColorScheme';
+          'are computed by FlexColorScheme.';
     }
     if (colors == 3) {
       return 'Scheme defined primary, secondary and primary container colors '
@@ -37,15 +37,19 @@ class UsedColorsPopupMenu extends StatelessWidget {
     }
     if (colors == 4) {
       return 'Scheme defined primary, secondary, plus primary and secondary '
-          'container colors used, other colors are computed by FlexColorScheme';
+          'container colors used, other colors are computed by FlexColorScheme.';
     }
     if (colors == 5) {
       return 'Scheme defined primary, secondary, tertiary, plus primary and '
           'secondary container colors used, only tertiary container color '
-          'computed by FlexColorScheme';
+          'computed by FlexColorScheme.';
     }
-    return 'All scheme defined colors defined in FlexColorScheme are using '
-        'their defined values to make the theme';
+    if (colors == 7) {
+      return 'Scheme defined primary, secondary and tertiary colors are used, '
+          'their container colors are computed by FlexColorScheme.';
+    }
+    return 'All main scheme colors defined in FlexColorScheme are using '
+        'their defined values to make the theme.';
   }
 
   String _selectColors(int colors) {
@@ -64,7 +68,17 @@ class UsedColorsPopupMenu extends StatelessWidget {
     if (colors == 5) {
       return 'Primary, secondary and containers plus tertiary';
     }
+    if (colors == 7) {
+      return 'Primary, secondary and tertiary';
+    }
     return 'Primary, secondary, tertiary and containers';
+  }
+
+  String _avText(int colors) {
+    if (colors == 7) {
+      return 'PST';
+    }
+    return '$colors';
   }
 
   @override
@@ -87,7 +101,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
             child: ListTile(
               dense: true,
               tileColor: Colors.transparent,
-              leading: CircleAvatar(child: Text('$i')),
+              leading: CircleAvatar(child: Text(_avText(i))),
               title: Text(_selectColors(i), style: txtStyle),
             ),
           )
@@ -100,7 +114,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
         subtitle: Text(_describeUsedColors(index)),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 10.0),
-          child: CircleAvatar(child: Text('$index')),
+          child: CircleAvatar(child: Text(_avText(index))),
         ),
       ),
     );

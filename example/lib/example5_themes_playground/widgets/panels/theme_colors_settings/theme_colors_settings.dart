@@ -52,10 +52,11 @@ class ThemeColorsSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final bool useSeed = controller.useKeyColors;
     final String explainSeed = useSeed
-        ? 'Adjust the seed generated theme further with the "Seeded '
-            'ColorScheme" feature'
-        : 'Seeded ColorSchemes use at least the scheme defined primary color '
-            'as key to seed ColorSchemes for light and dark theme';
+        ? 'You can adjust the seed generated theme further with the "Seeded '
+            'ColorScheme" feature.'
+        : "Seeded ColorSchemes use at least the scheme's defined primary color "
+            'as input key color to seed generate ColorSchemes for the light '
+            'and dark themes.';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,16 +87,17 @@ class ThemeColorsSettings extends StatelessWidget {
             (AppColor.schemes.length - 1)) ...<Widget>[
           ListTile(
             title: const Text('Use a custom theme?'),
-            subtitle: const Text('Tap here to active the customizable theme'),
+            subtitle: const Text('Tap here to active the customizable theme. '
+                'If you tap a color code above, it is copied it to the '
+                'clipboard.'),
             onTap: () {
               controller.setSchemeIndex(AppColor.schemes.length - 1);
             },
           ),
           ListTile(
-            title: const Text('Copy current colors to the customizable '
-                'theme?'),
-            subtitle:
-                const Text('Tap a color code to copy it to the clipboard'),
+            title: const Text('Copy above colors to the customizable theme'),
+            subtitle: const Text('This theme then becomes a starting template '
+                'for your own custom theme.'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -108,13 +110,13 @@ class ThemeColorsSettings extends StatelessWidget {
           )
         ] else ...<Widget>[
           const ListTile(
-            title: Text('This is the customizable theme'),
-            subtitle: Text('Tap on colors above to modify theme colors'),
+            title: Text('This theme is customizable!'),
+            subtitle: Text('Tap on the colors above to modify them with a '
+                'color picker. You can copy/paste values to and from the '
+                'color picker.'),
           ),
           ListTile(
-            title: const Text('Reset custom theme to its default colors?'),
-            subtitle: const Text('With a predefined theme selected, you can '
-                'copy it as a custom theme starting point'),
+            title: const Text('Reset the custom theme to its default colors?'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);
@@ -126,14 +128,12 @@ class ThemeColorsSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('Theme Color Modifiers'),
-          subtitle: Text('Use the modifiers below to change the '
-              'effective theme colors '
-              "that define the theme's ColorScheme. The scheme defined color "
-              'values show the colors before input modifiers, surrounding '
-              "color is the effective theme's ColorScheme"),
+          subtitle: Text('Use the modifiers below to change how the input '
+              "scheme colors are used to define the effective theme's "
+              'ColorScheme.'),
         ),
         SwitchListTile(
-          title: const Text('Use Material 3 color system seed generated '
+          title: const Text('Use a Material 3 color system seed generated '
               'ColorScheme'),
           subtitle: Text(explainSeed),
           value: useSeed,
@@ -143,7 +143,7 @@ class ThemeColorsSettings extends StatelessWidget {
           title: const Text('Use Material 3 error colors'),
           subtitle: const Text('Override default M2 error colors and use M3 '
               'error colors, when not using seeded ColorSchemes. Seed '
-              'generated ColorSchemes always use M3 error colors'),
+              'generated ColorSchemes always use M3 error colors.'),
           value: controller.useM3ErrorColors &&
               controller.useFlexColorScheme &&
               !controller.useKeyColors,
@@ -152,7 +152,7 @@ class ThemeColorsSettings extends StatelessWidget {
               : null,
         ),
         UsedColorsPopupMenu(
-          title: const Text('Reduce amount of used scheme colors'),
+          title: const Text('Change amount of used scheme input colors'),
           index: controller.usedColors,
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,
@@ -162,8 +162,8 @@ class ThemeColorsSettings extends StatelessWidget {
               'and tertiary'),
           subtitle: const Text(
             'Only applies to built-in M2 designed schemes that benefit from '
-            'it. Prefer ON when using M3. You can try OFF when using seeded '
-            'ColorScheme with only primary seed key',
+            'it. Prefer ON when using M3. You can also use OFF when using '
+            'seeded ColorScheme without enabling secondary seed key.',
           ),
           value: controller.swapLegacyColors && controller.useMaterial3,
           onChanged:
@@ -175,7 +175,7 @@ class ThemeColorsSettings extends StatelessWidget {
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'Material 3 mode secondary and tertiary swap, is done '
-              'first when used',
+              'first when used.',
             ),
             value: controller.swapLightColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -188,7 +188,7 @@ class ThemeColorsSettings extends StatelessWidget {
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'Material 3 mode secondary and tertiary swap, is done '
-              'first when used',
+              'first when used.',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -205,7 +205,7 @@ class ThemeColorsSettings extends StatelessWidget {
               SwitchListTile(
                 title: const Text('Compute dark theme'),
                 subtitle: const Text('Compute dark theme from light color '
-                    'values, instead of using predefined dark colors'),
+                    'values, instead of using predefined dark colors.'),
                 value: controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
@@ -261,6 +261,29 @@ class ThemeColorsSettings extends StatelessWidget {
                   ),
                 ),
               ),
+              const Divider(),
+              SwitchListTile(
+                dense: true,
+                title: const Text('Show scheme input color values'),
+                subtitle: const Text(
+                    'Turn ON this option to show the FlexColorScheme scheme '
+                    'input color values. This shows the used color values '
+                    'before any input modifiers are used on them. Like, seed '
+                    'generation, swapping legacy colors, swapping primary and '
+                    'secondary colors, seed generation, input color limiters, '
+                    'computed dark theme and using M3 error colors on legacy '
+                    'M2 schemes. In older versions the scheme input color '
+                    'values were always shown. This may be confusing and they '
+                    'are now hidden by default. Showing them may be useful to '
+                    'understand how the scheme defined input colors are '
+                    'being modified by input modifiers, but it is cluttered. '
+                    'If ON, scheme input color values show the colors before '
+                    'input modifiers, and the surrounding '
+                    "color is the effective theme's ColorScheme."),
+                value: controller.showSchemeInput,
+                onChanged: controller.setShowSchemeInput,
+              ),
+              const SizedBox(height: 8),
             ],
           ),
         ),

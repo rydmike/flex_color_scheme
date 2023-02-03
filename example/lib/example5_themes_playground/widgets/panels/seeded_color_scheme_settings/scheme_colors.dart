@@ -22,7 +22,7 @@ class SchemeColors extends StatelessWidget {
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
   Color _onColor(final Color color) =>
@@ -87,6 +87,9 @@ class SchemeColors extends StatelessWidget {
             ? FlexColor.lightErrorContainer(inputErrorColor)
             : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
+
+    // Show the input color values
+    final bool showInputColor = tc.showSchemeInput;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -183,6 +186,7 @@ class SchemeColors extends StatelessWidget {
                             color: primary,
                             textColor: colorScheme.onPrimary,
                             label: 'primary',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.primary,
                             inputTextColor: _onColor(inputColor.primary),
                             tone: tones.primaryTone,
@@ -290,6 +294,7 @@ class SchemeColors extends StatelessWidget {
                             color: primaryContainer,
                             textColor: colorScheme.onPrimaryContainer,
                             label: 'primary\u200BContainer',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.primaryContainer,
                             inputTextColor:
                                 _onColor(inputColor.primaryContainer),
@@ -395,6 +400,7 @@ class SchemeColors extends StatelessWidget {
                             color: secondary,
                             textColor: colorScheme.onSecondary,
                             label: 'secondary',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.secondary,
                             inputTextColor: _onColor(inputColor.secondary),
                             tone: tones.secondaryTone,
@@ -503,6 +509,7 @@ class SchemeColors extends StatelessWidget {
                             color: secondaryContainer,
                             textColor: colorScheme.onSecondaryContainer,
                             label: 'secondary\u200BContainer',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.secondaryContainer,
                             inputTextColor:
                                 _onColor(inputColor.secondaryContainer),
@@ -604,6 +611,7 @@ class SchemeColors extends StatelessWidget {
                             color: tertiary,
                             textColor: colorScheme.onTertiary,
                             label: 'tertiary',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.tertiary,
                             inputTextColor: _onColor(inputColor.tertiary),
                             tone: tones.tertiaryTone,
@@ -700,6 +708,7 @@ class SchemeColors extends StatelessWidget {
                             color: tertiaryContainer,
                             textColor: colorScheme.onTertiaryContainer,
                             label: 'tertiary\u200BContainer',
+                            showInputColor: showInputColor,
                             inputColor: inputColor.tertiaryContainer,
                             inputTextColor:
                                 _onColor(inputColor.tertiaryContainer),
@@ -776,6 +785,7 @@ class SchemeColors extends StatelessWidget {
                           color: colorScheme.error,
                           textColor: colorScheme.onError,
                           label: 'error',
+                          showInputColor: showInputColor,
                           inputColor: inputErrorColor,
                           inputTextColor: inputOnErrorColor,
                           tone: tones.errorTone,
@@ -839,6 +849,7 @@ class SchemeColors extends StatelessWidget {
                           color: colorScheme.errorContainer,
                           textColor: colorScheme.onErrorContainer,
                           label: 'error\nContainer',
+                          showInputColor: showInputColor,
                           inputColor: inputErrorContainerColor,
                           inputTextColor: inputOnErrorContainerColor,
                           tone: tones.errorContainerTone,
@@ -886,6 +897,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.background);
@@ -909,6 +921,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onBackground);
@@ -946,6 +959,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.surface);
@@ -968,6 +982,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onSurface);
@@ -1005,6 +1020,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.surfaceVariant);
@@ -1027,6 +1043,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onSurfaceVariant);
@@ -1064,6 +1081,7 @@ class SchemeColors extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
+                    flex: 3,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.inverseSurface);
@@ -1086,6 +1104,7 @@ class SchemeColors extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: MouseRegion(
                       onEnter: (PointerEvent details) {
                         tc.setHoverColor(colorScheme.onInverseSurface);

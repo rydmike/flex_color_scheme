@@ -74,6 +74,8 @@ class ThemeController with ChangeNotifier {
         Store.keySideViewIndex, Store.defaultSideViewIndex);
     _deviceSize =
         await _themeService.load(Store.keyDeviceSize, Store.defaultDeviceSize);
+    _showSchemeInput = await _themeService.load(
+        Store.keyShowSchemeInput, Store.defaultShowSchemeInput);
     //
     _useTextTheme = await _themeService.load(
         Store.keyUseTextTheme, Store.defaultUseTextTheme);
@@ -1098,6 +1100,16 @@ class ThemeController with ChangeNotifier {
     _deviceSize = value;
     notifyListeners();
     unawaited(_themeService.save(Store.keyDeviceSize, value));
+  }
+
+  late bool _showSchemeInput;
+  bool get showSchemeInput => _showSchemeInput;
+  void setShowSchemeInput(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _showSchemeInput) return;
+    _showSchemeInput = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyShowSchemeInput, value));
   }
 
   late bool _useTextTheme;
