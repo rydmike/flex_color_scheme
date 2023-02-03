@@ -262,6 +262,9 @@ class FlexSchemeColor with Diagnosticable {
   ///   and [tertiary] in [colors] and compute [tertiaryContainer] for returned
   ///   [FlexSchemeColor].
   /// * 6: Use all 6 [colors] in passed in FlexColorsScheme as they are.
+  /// * 7: Use [primary], [secondary] and [tertiary] in [colors] and compute
+  ///   [primaryContainer], [secondaryContainer] and [tertiaryContainer]
+  ///   for returned [FlexSchemeColor].
   ///
   /// If [swapColors] is true, [primary] and [secondary], as well as
   /// [primaryContainer] and [secondaryContainer] are swapped, before being
@@ -286,7 +289,7 @@ class FlexSchemeColor with Diagnosticable {
     final bool swapColors = false,
     final Brightness? brightness,
   }) {
-    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
+    assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
 
     // Swap legacy M2 designed secondary and tertiary colors.
     final FlexSchemeColor fixColors = swapLegacy
@@ -311,13 +314,13 @@ class FlexSchemeColor with Diagnosticable {
     if (brightness == Brightness.light) {
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
-        primaryContainer: usedColors > 2
+        primaryContainer: (usedColors > 2 && usedColors != 7)
             ? effectiveColors.primaryContainer
             : effectiveColors.primary.blend(Colors.white, 60),
-        secondary: usedColors > 1
+        secondary: (usedColors > 1 || usedColors == 7)
             ? effectiveColors.secondary
             : effectiveColors.primary.darken().brighten(20),
-        secondaryContainer: usedColors > 3
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
             ? effectiveColors.secondaryContainer
             : usedColors > 1
                 ? effectiveColors.secondary.blend(Colors.white, 60)
@@ -325,10 +328,10 @@ class FlexSchemeColor with Diagnosticable {
                     .darken()
                     .brighten(20)
                     .blend(Colors.white, 60),
-        tertiary: usedColors > 4
+        tertiary: (usedColors > 4 || usedColors == 7)
             ? effectiveColors.tertiary
             : effectiveColors.primary.brighten(15),
-        tertiaryContainer: usedColors > 5
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
             ? effectiveColors.tertiaryContainer
             : usedColors > 4
                 ? effectiveColors.tertiary.blend(Colors.white, 80)
@@ -345,13 +348,13 @@ class FlexSchemeColor with Diagnosticable {
     } else if (brightness == Brightness.dark) {
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
-        primaryContainer: usedColors > 2
+        primaryContainer: (usedColors > 2 && usedColors != 7)
             ? effectiveColors.primaryContainer
             : effectiveColors.primary.blend(Colors.black, 60),
-        secondary: usedColors > 1
+        secondary: (usedColors > 1 || usedColors == 7)
             ? effectiveColors.secondary
             : effectiveColors.primary.darken().brighten(20),
-        secondaryContainer: usedColors > 3
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
             ? effectiveColors.secondaryContainer
             : usedColors > 1
                 ? effectiveColors.secondary.blend(Colors.black, 60)
@@ -359,10 +362,10 @@ class FlexSchemeColor with Diagnosticable {
                     .darken()
                     .brighten(20)
                     .blend(Colors.black, 40),
-        tertiary: usedColors > 4
+        tertiary: (usedColors > 4 || usedColors == 7)
             ? effectiveColors.tertiary
             : effectiveColors.primary.brighten(15),
-        tertiaryContainer: usedColors > 5
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
             ? effectiveColors.tertiaryContainer
             : usedColors > 4
                 ? effectiveColors.tertiary.blend(Colors.black, 80)
@@ -381,22 +384,22 @@ class FlexSchemeColor with Diagnosticable {
       // not break version 4 API.
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
-        primaryContainer: usedColors > 2
+        primaryContainer: (usedColors > 2 && usedColors != 7)
             ? effectiveColors.primaryContainer
             : effectiveColors.primary.darken(kDarkenPrimaryContainer),
-        secondary: usedColors > 1
+        secondary: (usedColors > 1 || usedColors == 7)
             ? effectiveColors.secondary
             : effectiveColors.primary.darken(kDarkenSecondary),
-        secondaryContainer: usedColors > 3
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
             ? effectiveColors.secondaryContainer
             : usedColors > 1
                 ? effectiveColors.secondary
                     .darken(kDarkenSecondaryContainerFromSecondary)
                 : effectiveColors.primary.darken(kDarkenSecondaryContainer),
-        tertiary: usedColors > 4
+        tertiary: (usedColors > 4 || usedColors == 7)
             ? effectiveColors.tertiary
             : effectiveColors.primary.lighten(kDarkenPrimaryContainer),
-        tertiaryContainer: usedColors > 5
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
             ? effectiveColors.tertiaryContainer
             : usedColors > 4
                 ? effectiveColors.tertiary.lighten(kDarkenSecondaryContainer)

@@ -1244,7 +1244,7 @@ class FlexColorScheme with Diagnosticable {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the six main scheme colors to be used when creating
+    /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
@@ -1258,22 +1258,27 @@ class FlexColorScheme with Diagnosticable {
     /// * 4 = Primary + container & Secondary + container
     /// * 5 = Primary + container & Secondary + container & tertiary colors
     /// * 6 = Primary + container & Secondary + container & tertiary + container
+    /// * 7 = Primary, Secondary and tertiary, container colors computed.
     ///
     /// By default the value is 6 and all main scheme colors in
     /// `FlexSchemeColor` are used.
+    ///
+    /// The integer value is not a very obvious property to use to configure
+    /// this feature. Future version may improve it. However with the Themes
+    /// Playground you don't have to remember what number does what.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
     /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
-    /// the colors. If your used [FlexColorScheme] `colors` was actually created
-    /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
-    /// effective scheme as the computed values will be the same as the
-    /// [FlexSchemeColor.from] is using to compute any main missing scheme
-    /// color values.
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+    /// the color selection. If your used [FlexColorScheme] `colors` was
+    /// actually created with [FlexSchemeColor.from] with only the primary
+    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+    /// all produce the same effective scheme as the computed values will be
+    /// the same as the [FlexSchemeColor.from] is using to compute any main
+    /// missing scheme color values.
     final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds.
@@ -2347,7 +2352,7 @@ class FlexColorScheme with Diagnosticable {
     final Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // LIGHT: Check valid inputs
-    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6');
+    assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(
@@ -3001,7 +3006,7 @@ class FlexColorScheme with Diagnosticable {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the six main scheme colors to be used when creating
+    /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
@@ -3015,22 +3020,27 @@ class FlexColorScheme with Diagnosticable {
     /// * 4 = Primary + container & Secondary + container
     /// * 5 = Primary + container & Secondary + container & tertiary colors
     /// * 6 = Primary + container & Secondary + container & tertiary + container
+    /// * 7 = Primary, Secondary and tertiary, container colors computed.
     ///
     /// By default the value is 6 and all main scheme colors in
     /// `FlexSchemeColor` are used.
+    ///
+    /// The integer value is not a very obvious property to use to configure
+    /// this feature. Future version may improve it. However with the Themes
+    /// Playground you don't have to remember what number does what.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
     /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
-    /// the colors. If your used [FlexColorScheme] `colors` was actually created
-    /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
-    /// effective scheme as the computed values will be the same as the
-    /// [FlexSchemeColor.from] is using to compute any main missing scheme
-    /// color values.
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+    /// the color selection. If your used [FlexColorScheme] `colors` was
+    /// actually created with [FlexSchemeColor.from] with only the primary
+    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+    /// all produce the same effective scheme as the computed values will be
+    /// the same as the [FlexSchemeColor.from] is using to compute any main
+    /// missing scheme color values.
     final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds.
@@ -4104,7 +4114,7 @@ class FlexColorScheme with Diagnosticable {
     final Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // DARK: Check valid inputs
-    assert(usedColors >= 1 && usedColors <= 6, 'usedColors must be 1 to 6.');
+    assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
     assert(appBarOpacity >= 0 && appBarOpacity <= 1,
         'appBarOpacity must be 0 to 1');
     assert(

@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 3, 2023**
+**Feb 4, 2023**
 
 **FIX**
 
@@ -13,20 +13,23 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **NEW**
 
 - Added `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`. It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
+- In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColors` now accepts value 7. When used, the `primary`, `secondary` and `tertiary` colors in the used input scheme, are used as defined, but `primaryContainer`, `secondaryContainer` and `tertiaryContainer` are computed. This is FlexColorScheme's own more Material2 version of seed generation of the container colors by using their main colors as input colors. 
+  
 
 **CHANGE**
 
 - The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. Flutter 3.7.1 and earlier via a bug defaults to `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color that Flutter uses as default, which looks quite nice. 
 
 - Style breaking: When using Material 3, changed the default `NavigationBar` height from 62dp to 80dp, the 62 default style is kept when using M2 in order to not break past default styles for M2 themes. The 80dp height is also the default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme a bit less opinionated compared to M3 spec. 
-  - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Sadly the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
+  - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Unfortunately, the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
 
 **THEMES PLAYGROUND**
 
 - Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
 - Added a feature to select which panel is shown in page view as the second panel. It is no longer locked to the code-view panel, it can be any of the available panels, enabling studying chosen panels side by side.
 - Added an example themed-app panel view with a few screens. Can be used as a side screen to show what an app using the theme might look like. Screens still need demo content.
-- Hides scheme input color definitions by default. You can turn it back ON if so desired. Showing input scheme color values shows the used color values before any input modifiers are used on them. Like, seed generation, swapping legacy colors, swapping primary and secondary colors, seed generation, input color limiters, computed dark theme and using M3 error colors on legacy M2 schemes. In older versions of FCS, the scheme input color values were always shown. This may be confusing and they are now hidden by default. Showing them may be useful to understand how the scheme defined input colors are being modified by input modifiers, but it is cluttered and confusing. If ON, scheme input color values show the colors before input modifiers, and the surrounding color shows the effective theme's ColorScheme. 
+- Hides scheme input color definitions by default. You can turn it back ON if so desired. Showing input scheme color values shows the used color values before any input modifiers are used on them. Like, seed generation, swapping legacy colors, swapping primary and secondary colors, seed generation, input color limiters, computed dark theme and using M3 error colors on legacy M2 schemes. In older versions of FCS, the scheme input color values were always shown. This may be confusing, so they are now hidden by default. Showing them may be useful to understand how the scheme defined input colors are being modified by input modifiers, but it is cluttered and confusing. If ON, scheme input color values show the colors before input modifiers, and the surrounding color shows the effective theme's ColorScheme.
+- Added option to use the `usedColors` value 7 to the "Theme Colors" panel. It is presented more logically in the UI than a number, to make it more understandable. 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
@@ -35,7 +38,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Add BottomAppBarColor background color theming.
 - Add NavigationDrawer width and selected item colors. 
 - Maybe: Add some theming options for the new MenuBar theme.  
-  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage. Test new colors too.
 - MUST DO: Review and test all tutorial examples.

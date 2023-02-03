@@ -95,7 +95,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
       onSelected: onChanged,
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 1; i < 6 + 1; i++)
+        for (int i = 1; i < 7 + 1; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
