@@ -126,9 +126,9 @@ class AppColor {
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Custom Midnight',
-      description: 'Midnight blue theme, created by using custom color values '
-          'for all colors in the scheme',
+      name: 'Example Midnight',
+      description: 'Midnight blue theme, created as an in code example by '
+          'using custom color values for all colors in the scheme',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -138,18 +138,18 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Custom Greens',
-      description: 'Vivid green theme, created from one primary color in light '
-          'mode and another primary for dark mode',
+      name: 'Example Greens',
+      description: 'Vivid green theme, created as an in code example from one '
+          'primary color in light mode and another primary for dark mode',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
     ),
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Custom Red & Blue',
-      description: 'Classic red and blue, created from only light theme mode '
-          'primary and secondary colors',
+      name: 'Example Red & Blue',
+      description: 'Classic red and blue, created as an in code example from '
+          'only light theme mode primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
       // The `swapColors` parameter is `true` here. It is new in version 5. It

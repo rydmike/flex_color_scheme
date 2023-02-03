@@ -60,7 +60,7 @@ class SchemeColors extends StatelessWidget {
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
-    // Grab active tons and chroma setup.
+    // Grab active tones and chroma setup.
     final FlexTones tones = FlexTone.values[tc.usedFlexToneSetup]
         .tones(theme.brightness)
         .onMainsUseBW(isLight ? tc.onMainsUseBWLight : tc.onMainsUseBWDark)

@@ -6,6 +6,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **Feb 3, 2023**
 
+**FIX**
+
+- Fixed a **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
+
 **NEW**
 
 - Added `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`. It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.

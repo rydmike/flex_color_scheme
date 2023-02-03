@@ -4188,6 +4188,7 @@ class FlexColorScheme with Diagnosticable {
       final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
         withPassedColors,
         usedColors,
+        swapLegacy: swapLegacy,
         swapColors: swapColors,
         brightness: Brightness.dark,
       );
