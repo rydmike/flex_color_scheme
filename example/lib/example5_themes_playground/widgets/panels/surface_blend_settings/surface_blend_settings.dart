@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
-import '../theme_colors_settings/use_seeded_color_scheme_switch.dart';
+import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';

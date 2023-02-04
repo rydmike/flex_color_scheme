@@ -7,9 +7,9 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
+import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
-import 'use_seeded_color_scheme_switch.dart';
 import 'used_colors_popup_menu.dart';
 
 class ThemeColorsSettings extends StatelessWidget {

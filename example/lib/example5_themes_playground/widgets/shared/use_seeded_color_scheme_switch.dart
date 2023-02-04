@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/controllers/theme_controller.dart';
+import '../../../shared/controllers/theme_controller.dart';
 
 class UseSeededColorSchemeSwitch extends StatelessWidget {
   const UseSeededColorSchemeSwitch({super.key, required this.controller});

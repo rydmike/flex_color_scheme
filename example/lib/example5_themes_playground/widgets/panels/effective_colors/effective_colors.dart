@@ -5,7 +5,7 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
-import '../theme_colors_settings/use_seeded_color_scheme_switch.dart';
+import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// Used to show effective theme colors.
 ///
