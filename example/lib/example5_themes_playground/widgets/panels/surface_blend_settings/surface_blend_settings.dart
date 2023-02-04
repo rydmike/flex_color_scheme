@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
+import '../theme_colors_settings/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';
 import 'light_surface_mode_popup_menu.dart';
+import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
@@ -95,48 +97,46 @@ class SurfaceBlendSettings extends StatelessWidget {
         const ListTile(
           title: Text('Blended surfaces and backgrounds'),
           isThreeLine: true,
+          subtitle: Text('Material Design 2 guide mentions using surfaces with '
+              'primary color alpha blends. FlexColorScheme surface blends '
+              'does it for you. '
+              'Material Design 3 has a new color system where a hint of primary '
+              'color is also used on surfaces. It is done via its neutral tonal '
+              'palettes that are shifted slightly towards the primary color. '
+              'If you use M3 seeded ColorSchemes, set blend level to zero '
+              'to get the pure M3 design. With surface blends, you can further '
+              'strengthen the effect and vary blend levels by surface type.'),
+        ),
+        UseSeededColorSchemeSwitch(controller: controller),
+        const ListTile(
+          isThreeLine: true,
           subtitle: Text(
-            'Material Design 2 guide mentions using surfaces with '
-            'primary color alpha blends. FlexColorScheme surface blends '
-            'does it for you.\n'
-            '\n'
-            'Material Design 3 has a new color system where a hint of primary '
-            'color is also used on surfaces. It is done via its neutral tonal '
-            'palettes that are shifted slightly towards the primary color. '
-            'If you use M3 seeded ColorSchemes, set blend level to zero '
-            'to get the pure M3 design. With surface blends, you can further '
-            'strengthen the effect and vary blend levels by surface type.\n'
-            '\n'
             'When using a surface blend mode with a high factor on Scaffold '
             'background, the design intent is to not place any controls and '
             'text on it directly, but to always use them on other surfaces '
             'with less surface tint, for example in Cards. The Scaffold '
             'background is then only used as a background color effect. If '
             'your app places controls directly on Scaffold with its default '
-            'background color, these blend modes may not be a good fit. Choose '
-            'one with lower color blends on Scaffold background.',
+            'background color, high blend factor on Scaffold background color '
+            'may not be a good fit. Choose one with lower color blend factor '
+            'on Scaffold background.',
           ),
         ),
         if (isLight) ...<Widget>[
           LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
-          ListTile(
-            enabled: controller.surfaceTintLight != null,
-            title: const Text('Set light blend and tint color back to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color'),
-            trailing: FilledButton(
-              onPressed: controller.surfaceTintLight != null
-                  ? () {
-                      controller.setSurfaceTintLight(null);
-                    }
-                  : null,
-              child: const Text('Default'),
-            ),
-            onTap: () {
-              controller.setSurfaceTintLight(null);
-            },
-          ),
+        ] else ...<Widget>[
+          DarkSurfaceModePopupMenu(controller: controller),
+          DarkSurfaceModeListTile(controller: controller),
+        ],
+        const SizedBox(height: 8),
+        // Show all the surface colors to show what is done to them.
+        SurfaceColors(controller: controller),
+        const SizedBox(height: 8),
+        //
+        // Light mode widgets
+        //
+        if (isLight) ...<Widget>[
           ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
@@ -159,6 +159,23 @@ class SurfaceBlendSettings extends StatelessWidget {
                     controller.surfaceTintLight ?? colorScheme.primary,
               ),
             ),
+          ),
+          ListTile(
+            enabled: controller.surfaceTintLight != null,
+            title: const Text('Set light blend and tint color back to default'),
+            subtitle: const Text('Sets custom blend and tint color back '
+                'to primary color'),
+            trailing: FilledButton(
+              onPressed: controller.surfaceTintLight != null
+                  ? () {
+                      controller.setSurfaceTintLight(null);
+                    }
+                  : null,
+              child: const Text('Default'),
+            ),
+            onTap: () {
+              controller.setSurfaceTintLight(null);
+            },
           ),
           const ListTile(
             title: Text('Light theme blend level'),
@@ -281,25 +298,6 @@ class SurfaceBlendSettings extends StatelessWidget {
         // ELSE Dark mode widgets
         //
         else ...<Widget>[
-          DarkSurfaceModePopupMenu(controller: controller),
-          DarkSurfaceModeListTile(controller: controller),
-          ListTile(
-            enabled: controller.surfaceTintDark != null,
-            title: const Text('Set dark blend and tint color back to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color'),
-            trailing: FilledButton(
-              onPressed: controller.surfaceTintDark != null
-                  ? () {
-                      controller.setSurfaceTintDark(null);
-                    }
-                  : null,
-              child: const Text('Default'),
-            ),
-            onTap: () {
-              controller.setSurfaceTintDark(null);
-            },
-          ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
@@ -322,6 +320,23 @@ class SurfaceBlendSettings extends StatelessWidget {
                     controller.surfaceTintDark ?? colorScheme.primary,
               ),
             ),
+          ),
+          ListTile(
+            enabled: controller.surfaceTintDark != null,
+            title: const Text('Set dark blend and tint color back to default'),
+            subtitle: const Text('Sets custom blend and tint color back '
+                'to primary color'),
+            trailing: FilledButton(
+              onPressed: controller.surfaceTintDark != null
+                  ? () {
+                      controller.setSurfaceTintDark(null);
+                    }
+                  : null,
+              child: const Text('Default'),
+            ),
+            onTap: () {
+              controller.setSurfaceTintDark(null);
+            },
           ),
           const ListTile(
             title: Text('Dark theme blend level'),
@@ -433,13 +448,15 @@ class SurfaceBlendSettings extends StatelessWidget {
           SwitchListTile(
             title: const Text('True black'),
             subtitle: const Text(
-              'Black Scaffold in all blend modes, '
-              'other surfaces become 5% darker',
+              'For an ink black dark mode, use True Black. Always uses a black '
+              'Scaffold background in all blend modes, plus other surfaces '
+              'become 5% darker',
             ),
             value: controller.darkIsTrueBlack,
             onChanged: controller.setDarkIsTrueBlack,
           ),
         ],
+        const SizedBox(height: 8),
       ],
     );
   }

@@ -9,6 +9,7 @@ import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
 import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
+import 'use_seeded_color_scheme_switch.dart';
 import 'used_colors_popup_menu.dart';
 
 class ThemeColorsSettings extends StatelessWidget {
@@ -50,13 +51,6 @@ class ThemeColorsSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final bool useSeed = controller.useKeyColors;
-    final String explainSeed = useSeed
-        ? 'You can adjust the seed generated theme further with the "Seeded '
-            'ColorScheme" feature.'
-        : "Seeded ColorSchemes use at least the scheme's defined primary color "
-            'as input key color to seed generate ColorSchemes for the light '
-            'and dark themes.';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,12 +127,27 @@ class ThemeColorsSettings extends StatelessWidget {
               'ColorScheme.'),
         ),
         SwitchListTile(
-          title: const Text('Use a Material 3 color system seed generated '
-              'ColorScheme'),
-          subtitle: Text(explainSeed),
-          value: useSeed,
-          onChanged: controller.setUseKeyColors,
+          dense: true,
+          title: const Text('Show scheme input color values'),
+          subtitle: const Text(
+              'Turn ON this option to show the FlexColorScheme scheme '
+              'input color values. This shows the used color values '
+              'before any input modifiers are used on them. This includes seed '
+              'generation, swapping legacy colors, swapping primary and '
+              'secondary colors, seed generation, input color limiters, '
+              'computed dark theme and using M3 error colors on legacy '
+              'M2 schemes. In older versions the scheme input color '
+              'values were always shown. This may be confusing and they '
+              'are now hidden by default. Showing them may be useful to '
+              'understand how the scheme defined input colors are '
+              'being modified by input modifiers, but it is cluttered. '
+              'If ON, scheme input color values show the colors before '
+              'input modifiers, and the surrounding '
+              "color is the effective theme's ColorScheme."),
+          value: controller.showSchemeInput,
+          onChanged: controller.setShowSchemeInput,
         ),
+        UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTile(
           title: const Text('Use Material 3 error colors'),
           subtitle: const Text('Override default M2 error colors and use M3 '
@@ -263,28 +272,6 @@ class ThemeColorsSettings extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        const Divider(),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Show scheme input color values'),
-          subtitle: const Text(
-              'Turn ON this option to show the FlexColorScheme scheme '
-              'input color values. This shows the used color values '
-              'before any input modifiers are used on them. Like, seed '
-              'generation, swapping legacy colors, swapping primary and '
-              'secondary colors, seed generation, input color limiters, '
-              'computed dark theme and using M3 error colors on legacy '
-              'M2 schemes. In older versions the scheme input color '
-              'values were always shown. This may be confusing and they '
-              'are now hidden by default. Showing them may be useful to '
-              'understand how the scheme defined input colors are '
-              'being modified by input modifiers, but it is cluttered. '
-              'If ON, scheme input color values show the colors before '
-              'input modifiers, and the surrounding '
-              "color is the effective theme's ColorScheme."),
-          value: controller.showSchemeInput,
-          onChanged: controller.setShowSchemeInput,
         ),
         const SizedBox(height: 8),
       ],

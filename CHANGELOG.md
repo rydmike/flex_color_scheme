@@ -30,9 +30,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added an example themed-app panel view with a few screens. Can be used as a side screen to show what an app using the theme might look like. Screens still need demo content.
 - Hides scheme input color definitions by default. You can turn it back ON if so desired. Showing input scheme color values shows the used color values before any input modifiers are used on them. Like, seed generation, swapping legacy colors, swapping primary and secondary colors, seed generation, input color limiters, computed dark theme and using M3 error colors on legacy M2 schemes. In older versions of FCS, the scheme input color values were always shown. This may be confusing, so they are now hidden by default. Showing them may be useful to understand how the scheme defined input colors are being modified by input modifiers, but it is cluttered and confusing. If ON, scheme input color values show the colors before input modifiers, and the surrounding color shows the effective theme's ColorScheme.
 - Added option to use the `usedColors` value 7 to the "Theme Colors" panel. It is presented more logically in the UI than a number, to make it more understandable. 
+- Added visualizations of surface colors to the **Surface blends** panel.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
+- Check set to M3 and set both light and dark themes to it if sep props.
 - Add TextFiled Demo setting example(s).
 - Add TextField prefixIcon color, M2 default to base, M3 Default to onSurface.
 - Add BottomAppBarColor background color theming.

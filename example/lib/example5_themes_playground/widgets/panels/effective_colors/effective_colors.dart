@@ -5,6 +5,7 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
+import '../theme_colors_settings/use_seeded_color_scheme_switch.dart';
 
 /// Used to show effective theme colors.
 ///
@@ -31,6 +32,8 @@ class EffectiveColors extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        const SizedBox(height: 8),
+        UseSeededColorSchemeSwitch(controller: controller),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowColorSchemeColors(),

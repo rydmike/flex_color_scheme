@@ -1131,7 +1131,7 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Outline, OutlineVariant, shadow and scrim colors presentation
+          // Outline and outlineVariant colors presentation.
           SizedBox(
             width: boxWidth,
             height: boxHeight,
@@ -1189,7 +1189,7 @@ class SchemeColors extends StatelessWidget {
               ),
             ),
           ),
-          // Outline, OutlineVariant, shadow and scrim colors presentation
+          // Shadow and scrim colors presentation.
           SizedBox(
             width: boxWidth,
             height: boxHeight,
