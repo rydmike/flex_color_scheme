@@ -724,8 +724,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
-              .bottomNavigationBarElevation !=
-          0
+                  .bottomNavigationBarElevation !=
+              null &&
+          controller.bottomNavigationBarElevation != 0
       ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation.toStringAsFixed(1)},\n'
       : '';
   final String bottomNavigationBarShowSelectedLabels = controller
@@ -788,6 +789,10 @@ String generateThemeDartCode(ThemeController controller) {
           !(controller.navBarBackgroundSchemeColor == null &&
               controller.useFlutterDefaults)
       ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
+      : '';
+  final String navigationBarElevation = controller.navigationBarElevation !=
+          null
+      ? '    navigationBarElevation: ${controller.navigationBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationBarHeight = controller.navBarHeight != null
       ? '    navigationBarHeight: ${controller.navBarHeight!.toStringAsFixed(1)},\n'
@@ -860,8 +865,10 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
       : '';
-  final String navigationRailElevation = controller.navigationRailElevation != 0
-      ? '    navigationRailElevation: ${controller.navigationRailElevation.toStringAsFixed(1)},\n'
+  final String navigationRailElevation = controller.navigationRailElevation !=
+              null &&
+          controller.navigationRailElevation != 0
+      ? '    navigationRailElevation: ${controller.navigationRailElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationRailLabelType =
       controller.navRailLabelType != NavigationRailLabelType.all
@@ -1011,6 +1018,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarIndicatorOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
           //
@@ -1170,6 +1178,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarIndicatorOpacity'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
           //

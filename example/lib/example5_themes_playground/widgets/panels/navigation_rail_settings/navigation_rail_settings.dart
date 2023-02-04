@@ -114,8 +114,13 @@ class NavigationRailSettings extends StatelessWidget {
         : -0.01;
     final double navRailElevation =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationRailElevation
+            ? controller.navigationRailElevation ?? 0
             : 0;
+    // Logic for default elevation label.
+    final String elevationDefaultLabel =
+        controller.navigationRailElevation == null
+            ? 'default 0'
+            : controller.navigationRailElevation!.toStringAsFixed(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -194,12 +199,30 @@ class NavigationRailSettings extends StatelessWidget {
         ListTile(
           title: const Text('Elevation'),
           subtitle: Slider(
+            min: -1,
             max: 24,
-            divisions: 48,
-            label: navRailElevation.toStringAsFixed(1),
-            value: navRailElevation,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setNavigationRailElevation
+            divisions: 25,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationRailElevation == null ||
+                        (controller.navigationRailElevation ?? -1) < 0
+                    ? elevationDefaultLabel
+                    : (controller.navigationRailElevation?.toStringAsFixed(1) ??
+                        '')
+                : 'default 0',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navigationRailElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? (double value) {
+                    controller.setNavigationRailElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
                 : null,
           ),
           trailing: Padding(
@@ -212,7 +235,16 @@ class NavigationRailSettings extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(
-                  navRailElevation.toStringAsFixed(1),
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          !controller.useFlutterDefaults
+                      ? controller.navigationRailElevation == null ||
+                              (controller.navigationRailElevation ?? -1) < 0
+                          ? elevationDefaultLabel
+                          : (controller.navigationRailElevation
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 0',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!

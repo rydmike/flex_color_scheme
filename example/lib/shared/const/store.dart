@@ -773,7 +773,7 @@ class Store {
   // Key used to read and save the navigationRailElevation value.
   static const String keyNavigationRailElevation = 'navigationRailElevation';
   // Default value for the navigationRailElevation, also reset settings.
-  static const double defaultNavigationRailElevation = 0;
+  static const double? defaultNavigationRailElevation = null;
 
   // Key used to read and save the navRailSelectedItemSchemeColor value.
   static const String keyNavRailSelectedItemSchemeColor =

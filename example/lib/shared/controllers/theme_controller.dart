@@ -949,7 +949,7 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Set TextField values to Flutter M3 defaults.
+  /// Set TextField values to Flutter M3 defaults.
   Future<void> setTextFieldToM3() async {
     setInputDecoratorSchemeColorLight(null, false);
     setInputDecoratorSchemeColorDark(null, false);
@@ -972,7 +972,7 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Set NavigationBar values to Flutter M3 defaults.
+  /// Set NavigationBar values to Flutter M3 defaults.
   Future<void> setNavigationBarToM3() async {
     setNavBarBackgroundSchemeColor(null, false);
     setNavBarIndicatorOpacity(1, false);
@@ -988,11 +988,10 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Set NavigationRail values to Flutter M3 defaults.
+  /// Set NavigationRail values to Flutter M3 defaults.
   Future<void> setNavigationRailToM3() async {
     setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
     setNavRailOpacity(1, false);
-    setNavigationRailElevation(0, false);
     setNavigationRailElevation(null, false);
     setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavRailIndicatorOpacity(1, false);
@@ -2322,10 +2321,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavRailOpacity, value));
   }
 
-  late double _navigationRailElevation;
-  double get navigationRailElevation => _navigationRailElevation;
+  late double? _navigationRailElevation;
+  double? get navigationRailElevation => _navigationRailElevation;
   void setNavigationRailElevation(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _navigationRailElevation) return;
     _navigationRailElevation = value;
     if (notify) notifyListeners();
