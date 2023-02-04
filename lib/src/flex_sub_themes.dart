@@ -173,10 +173,11 @@ enum SchemeColor {
 /// These component themes are available:
 ///
 /// * [AppBarTheme] for [AppBar] via [appBarTheme].
-/// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
+/// * [BottomAppBarTheme] for [BottomAppBar] via [bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
+/// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
 /// * [CardTheme] for [Card] via [cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
@@ -443,7 +444,7 @@ class FlexSubThemes {
   ///
   /// The [FlexColorScheme.toTheme] needs some of the properties, like fore-
   /// and background colors used here, for other component theme definitions as
-  /// well, and has already computed them once, so they are reused here.
+  /// well, and has already computed them once, so they are only reused here.
   ///
   /// At the moment the [FlexSubThemes.appBarTheme] is mostly included to
   /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
@@ -526,99 +527,64 @@ class FlexSubThemes {
     );
   }
 
-  /// An opinionated [ButtonThemeData] theme.
+  // TODO(rymdike): Monitor BottomAppBar M3 background issue.
+  /// An opinionated [BottomAppBarTheme] theme.
   ///
-  /// The `ButtonThemeData` is marked as **obsolete** in Flutter SDK
-  /// documentation, but not yet deprecated in Flutter stable SDK 3.3.x.
+  /// The [BottomAppBarTheme] allows setting only of background color in FCS.
+  /// Other properties are not used by FCS at this stage.
+  /// The [BottomAppBarTheme] has no properties for foreground color. If you use
+  /// a background color that requires different contrast color than the
+  /// active theme's surface colors, you will need to set their colors on
+  /// widget level.
   ///
-  /// This sub-theme will be removed in FCS when Flutter SDK deprecates
-  /// [ButtonThemeData].
-  ///
-  /// This theme is used to provide the same opinionated theme and style on
-  /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
-  /// Button theme has more limited theming capability and cannot match
-  /// the Material style buttons fully, this is an approximation.
-  ///
-  /// The adjustable button corner [radius] defaults to 20. This was an early
-  /// default in M3 for buttons, it was later changed to stadium border.
-  /// Flutter SDK M2 defaults to 4.
-  ///
-  /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
-  /// It is used to make the buttons match the padding on the newer buttons.
-  ///
-  /// The above legacy buttons this sub theme is for, will be completely
-  /// removed in Flutter stable version. The `ButtonThemeData` this helper uses
-  /// will however remain available after that, because widgets
-  /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
-  /// obsolete in SDK docs though) still use this theme. It is thus kept around
-  /// in FlexColorScheme package as long as it might have some use and exists
-  /// in Flutter stable SDK.
-  static ButtonThemeData buttonTheme({
+  /// Due to an issue in Flutter 3.7 and 3.7.1 that has been resolved in
+  /// master channel. The background color of the [BottomAppBar] cannot
+  /// be changed when using M3. See issue:
+  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
+  /// https://github.com/rydmike/flex_color_scheme/issues/115.
+  static BottomAppBarTheme bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the button.
+    /// Selects which color from the passed in colorScheme to use as the
+    /// background color for the bottomAppBar.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
+    /// If not defined, [colorScheme.surface] will be used via default M2 and
+    /// M3 behaviour.
+    final SchemeColor? backgroundSchemeColor,
 
-    /// The button corner radius.
+    /// Overrides the default value for [BottomAppBar.elevation].
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
-    /// based on earlier M3 specification, that was later changed to stadium.
-    /// https://m3.material.io/components/buttons/specs
-    final double? radius,
+    /// If this is null, in M2 the default value is the minimum in relation to
+    /// the content, if M3 it defaults to 80.0.
+    final double? elevation,
 
-    /// Padding for legacy button.
+    /// Overrides the default value for [BottomAppBar.shape].
+    final NotchedShape? shape,
+
+    /// Overrides the default value for [BottomAppBar.height].
     ///
-    /// If not defined,
-    /// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
-    /// This makes the legacy buttons same size as default margin on new ones.
+    /// If null, [BottomAppBar] height will be the 80 in M3 and
+    final double? height,
+
+    /// Overrides the default value for [BottomAppBar.padding].
+    ///
+    /// In M3 the padding will default to
+    /// `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`
+    /// In M2 the value will default to EdgeInsets.zero.
     final EdgeInsetsGeometry? padding,
-
-    /// Minimum button size.
-    ///
-    /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
-    final Size? minButtonSize,
   }) {
-    // Get selected color, defaults to primary.
-    final Color baseColor =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    // Effective color, if null, keep null for M2/M3 defaults via widget.
+    final Color backgroundColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color? effectiveColor =
+        backgroundSchemeColor == null ? null : backgroundColor;
 
-    // Effective minimum button size.
-    final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
-
-    return ButtonThemeData(
-      colorScheme: colorScheme,
-      minWidth: effectiveMinButtonSize.width,
-      height: effectiveMinButtonSize.height,
-      padding: padding ?? kButtonPadding,
-      layoutBehavior: ButtonBarLayoutBehavior.constrained,
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      hoverColor: baseColor
-          .blendAlpha(Colors.white, kHoverAlphaBlend)
-          .withAlpha(kHoverAlpha),
-      focusColor: baseColor
-          .blendAlpha(Colors.white, kFocusAlphaBlend)
-          .withAlpha(kFocusAlpha),
-      highlightColor: baseColor
-          .blendAlpha(Colors.white, kHighlightAlphaBlend)
-          .withAlpha(kHighlightAlpha),
-      splashColor: baseColor
-          .blendAlpha(Colors.white, kSplashAlphaBlend)
-          .withAlpha(kSplashAlpha),
-      disabledColor: baseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kButtonRadius),
-        ),
-      ),
-      textTheme: ButtonTextTheme.primary,
+    return BottomAppBarTheme(
+      color: effectiveColor,
+      elevation: elevation,
+      height: height,
+      padding: padding,
     );
   }
 
@@ -1061,6 +1027,102 @@ class FlexSubThemes {
         clipBehavior: clipBehavior,
         constraints: constraints,
       );
+
+  /// An opinionated [ButtonThemeData] theme.
+  ///
+  /// The `ButtonThemeData` is marked as **obsolete** in Flutter SDK
+  /// documentation, but not yet deprecated in Flutter stable SDK 3.7.x.
+  ///
+  /// This sub-theme will be removed in FCS when Flutter SDK deprecates
+  /// [ButtonThemeData].
+  ///
+  /// This theme is used to provide the same opinionated theme and style on
+  /// the deprecated buttons `RaisedButton`, `OutlineButtons` and `FlatButton`.
+  /// Button theme has more limited theming capability and cannot match
+  /// the Material style buttons fully, this is an approximation.
+  ///
+  /// The adjustable button corner [radius] defaults to 20. This was an early
+  /// default in M3 for buttons, it was later changed to stadium border.
+  /// Flutter SDK M2 defaults to 4.
+  ///
+  /// The button `padding` defaults to: EdgeInsets.symmetric(horizontal: 16).
+  /// It is used to make the buttons match the padding on the newer buttons.
+  ///
+  /// The above legacy buttons this sub theme is for, will be completely
+  /// removed in Flutter stable version. The `ButtonThemeData` this helper uses
+  /// will however remain available after that, because widgets
+  /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
+  /// obsolete in SDK docs though) still use this theme. It is thus kept around
+  /// in FlexColorScheme package as long as it might have some use and exists
+  /// in Flutter stable SDK.
+  static ButtonThemeData buttonTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Selects which color from the passed in colorScheme to use as the main
+    /// color for the button.
+    ///
+    /// All colors in the color scheme are not good choices, but some work well.
+    ///
+    /// If not defined, [colorScheme.primary] will be used.
+    final SchemeColor? baseSchemeColor,
+
+    /// The button corner radius.
+    ///
+    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// based on earlier M3 specification, that was later changed to stadium.
+    /// https://m3.material.io/components/buttons/specs
+    final double? radius,
+
+    /// Padding for legacy button.
+    ///
+    /// If not defined,
+    /// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
+    /// This makes the legacy buttons same size as default margin on new ones.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
+    final Size? minButtonSize,
+  }) {
+    // Get selected color, defaults to primary.
+    final Color baseColor =
+        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Effective minimum button size.
+    final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
+
+    return ButtonThemeData(
+      colorScheme: colorScheme,
+      minWidth: effectiveMinButtonSize.width,
+      height: effectiveMinButtonSize.height,
+      padding: padding ?? kButtonPadding,
+      layoutBehavior: ButtonBarLayoutBehavior.constrained,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      hoverColor: baseColor
+          .blendAlpha(Colors.white, kHoverAlphaBlend)
+          .withAlpha(kHoverAlpha),
+      focusColor: baseColor
+          .blendAlpha(Colors.white, kFocusAlphaBlend)
+          .withAlpha(kFocusAlpha),
+      highlightColor: baseColor
+          .blendAlpha(Colors.white, kHighlightAlphaBlend)
+          .withAlpha(kHighlightAlpha),
+      splashColor: baseColor
+          .blendAlpha(Colors.white, kSplashAlphaBlend)
+          .withAlpha(kSplashAlpha),
+      disabledColor: baseColor
+          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+          .withAlpha(kDisabledBackgroundAlpha),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kButtonRadius),
+        ),
+      ),
+      textTheme: ButtonTextTheme.primary,
+    );
+  }
 
   /// An opinionated [CardTheme] with custom corner radius and elevation.
   ///
@@ -1636,7 +1698,7 @@ class FlexSubThemes {
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
-    // We are using FCS M2 buttons, styled in M3 fashion.
+    // We are using FCS M2 buttons, styled in M3 fashion by FCS.
     if (!useMaterial3) {
       return ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -1743,7 +1805,7 @@ class FlexSubThemes {
 
       // If elevation is null, we use widget defaults, otherwise we define a
       // custom elevation behavior that is based on how M3 elevation works,
-      // but where we can modify the base degree. If elevation 1, is passed
+      // but where we can modify the base level. If elevation 1, is passed
       // the result is the same as M3 elevation behavior.
       final MaterialStateProperty<double?>? elevationM3 = elevation == null
           ? null

@@ -56,7 +56,8 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.pin_outlined,
   ),
   PanelItem(
-    panelLabel: 'AppBar',
+    panelLabel: 'AppBar and BottomAppBar',
+    buttonLabel: 'AppBar\nBottomAppBar',
     icon: Icons.web_asset_outlined,
   ),
   PanelItem(

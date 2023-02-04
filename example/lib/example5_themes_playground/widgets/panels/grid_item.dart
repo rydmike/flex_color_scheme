@@ -61,7 +61,8 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.pin_outlined,
   ),
   GridItem(
-    panelLabel: 'AppBar',
+    panelLabel: 'AppBar and BottomAppBar',
+    buttonLabel: 'AppBar\nBottomAppBar',
     icon: Icons.web_asset_outlined,
   ),
   GridItem(

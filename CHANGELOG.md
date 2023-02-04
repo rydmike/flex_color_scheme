@@ -14,7 +14,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Added `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`. It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
 - In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColors` now accepts value 7. When used, the `primary`, `secondary` and `tertiary` colors in the used input scheme, are used as defined, but `primaryContainer`, `secondaryContainer` and `tertiaryContainer` are computed. This is FlexColorScheme's own more Material2 version of seed generation of the container colors by using their main colors as input colors. 
-  
+- Added `bottomAppBarTheme` to `FlexSubThemes`.
+
 
 **CHANGE**
 

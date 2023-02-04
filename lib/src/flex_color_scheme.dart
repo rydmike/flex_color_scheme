@@ -5637,9 +5637,9 @@ class FlexColorScheme with Diagnosticable {
               ? Colors.black87
               : Colors.white;
         case FlexTabBarStyle.universal:
-          // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo.
-          //   Try a contrasting color from tonal palettes, will work if using
-          //   seeded color scheme, but not necessarily otherwise.
+          // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo?
+          //   Maybe try a contrasting color from tonal palettes? Might work if
+          //   using seeded color scheme, but not necessarily otherwise.
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -5719,7 +5719,7 @@ class FlexColorScheme with Diagnosticable {
       return null;
     }
 
-    // Tooltip foregrounds defaults logic.
+    // Tooltip foreground colors, defaults logic.
     Color? tooltipForeground() {
       if (useSubThemes && subTheme.tooltipSchemeColor != null) return null;
       if (tooltipsMatchBackground) {
@@ -5731,7 +5731,7 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // Tooltip opacity via alpha values defaults logic.
+    // Tooltip opacity via alpha values, defaults logic.
     int? tooltipAlpha() {
       if (useSubThemes && subTheme.tooltipSchemeColor != null) {
         return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 1);
@@ -5797,7 +5797,7 @@ class FlexColorScheme with Diagnosticable {
     // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // In M3 mode we use the new dividerColor colorScheme.outlineVariant,
     // unless useM2StyleDividerInM3 is set to true, if it is true
-    // we use the the M2 style also in M3.
+    // we use the M2 style also in M3.
     // If no sub theme usage and not M3 we use same style as in ThemeData.
     // The resulting Color is used by the old ThemeData.DividerColor and by
     // the newer DividerTheme. The tooltip theme also uses it for a discrete
@@ -5817,8 +5817,8 @@ class FlexColorScheme with Diagnosticable {
 
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre v4 version as before. This decoration
-    // theme is also passed into the TimePickerTheme, so we get the same
-    // style used there too.
+    // theme is also passed into the TimePickerTheme, and DropdownMenu so we
+    // get the same style used on them too.
     final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
         // FCS V4 and later sub-theme based input decorator used.
         ? FlexSubThemes.inputDecorationTheme(
@@ -5915,7 +5915,7 @@ class FlexColorScheme with Diagnosticable {
       // A correct Material 2 design should use it.
       applyElevationOverlayColor: isDark && applyElevationOverlayColor,
       extensions: extensions,
-      // Input decorator theme.
+      // Input decoration theme.
       inputDecorationTheme: effectiveInputDecorationTheme,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
@@ -6107,7 +6107,7 @@ class FlexColorScheme with Diagnosticable {
       // https://github.com/flutter/flutter/issues/50606.
       // A new feature in Flutter 2.0.0 implemented via:
       // https://github.com/flutter/flutter/pull/71184 made doing this easier.
-      // FlexColorScheme has uses the SDK supported way since it was launched.
+      // FlexColorScheme has used the SDK supported way since it was launched.
       appBarTheme: FlexSubThemes.appBarTheme(
         colorScheme: colorScheme,
         centerTitle: subTheme.appBarCenterTitle,
@@ -6123,8 +6123,9 @@ class FlexColorScheme with Diagnosticable {
       // bannerTheme:  NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // BottomAppBar Theme.
-      bottomAppBarTheme: BottomAppBarTheme(
-        color: colorScheme.surface,
+      bottomAppBarTheme: FlexSubThemes.bottomAppBarTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: null,
         elevation:
             bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
       ),

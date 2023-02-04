@@ -58,12 +58,14 @@ import 'flex_sub_themes.dart';
 /// [FlexSubThemes] as static theming helpers:
 ///
 /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
-/// * [ButtonThemeData] for old deprecated buttons, via
-///   [FlexSubThemes.buttonTheme].
+/// * [BottomAppBarTheme] for [BottomAppBar] via
+///   [FlexSubThemes.bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [FlexSubThemes.bottomNavigationBar].
 /// * [BottomSheetThemeData] for [BottomSheet] via
 ///   [FlexSubThemes.bottomSheetTheme].
+/// * [ButtonThemeData] for old deprecated buttons, via
+///   [FlexSubThemes.buttonTheme].
 /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
