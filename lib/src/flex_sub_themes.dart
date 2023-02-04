@@ -527,7 +527,7 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rymdike): Monitor BottomAppBar M3 background issue.
+  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
   /// An opinionated [BottomAppBarTheme] theme.
   ///
   /// The [BottomAppBarTheme] allows setting only of background color in FCS.
@@ -537,8 +537,8 @@ class FlexSubThemes {
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
   ///
-  /// Due to an issue in Flutter 3.7 and 3.7.1 that has been resolved in
-  /// master channel. The background color of the [BottomAppBar] cannot
+  /// Due to an issue in Flutter 3.7 and 3.7.1, that has been resolved in
+  /// master channel, the background color of the [BottomAppBar] cannot
   /// be changed when using M3. See issue:
   /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
   /// https://github.com/rydmike/flex_color_scheme/issues/115.
@@ -550,13 +550,15 @@ class FlexSubThemes {
     /// background color for the bottomAppBar.
     ///
     /// If not defined, [colorScheme.surface] will be used via default M2 and
-    /// M3 behaviour.
+    /// M3 widget behaviour.
     final SchemeColor? backgroundSchemeColor,
 
     /// Overrides the default value for [BottomAppBar.elevation].
     ///
-    /// If this is null, in M2 the default value is the minimum in relation to
-    /// the content, if M3 it defaults to 80.0.
+    /// If this is null, default 3 in M3 and in M2 to 8.
+    /// In FCS M2 it default to 0, or same elevation as AppBar if it is defined
+    /// to another elevation than 0. This logic is handled by
+    /// [FlexColorScheme.toTheme] that passes in the elevation here.
     final double? elevation,
 
     /// Overrides the default value for [BottomAppBar.shape].
@@ -564,7 +566,8 @@ class FlexSubThemes {
 
     /// Overrides the default value for [BottomAppBar.height].
     ///
-    /// If null, [BottomAppBar] height will be the 80 in M3 and
+    /// If this is null, then in M2 the default value is the minimum in relation
+    /// to the content, in M3 defaults to 80.0.
     final double? height,
 
     /// Overrides the default value for [BottomAppBar.padding].

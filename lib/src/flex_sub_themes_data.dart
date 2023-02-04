@@ -200,6 +200,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorUnfocusedBorderIsColored = true,
     this.inputDecoratorBorderWidth,
     this.inputDecoratorFocusedBorderWidth,
+    this.inputDecoratorPrefixIconSchemeColor,
     //
     this.fabRadius,
     this.fabUseShape = false,
@@ -238,12 +239,18 @@ class FlexSubThemesData with Diagnosticable {
     this.appBarCenterTitle,
     this.appBarScrolledUnderElevation,
     //
+    this.bottomAppBarSchemeColor,
+    //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
     //
     this.drawerRadius,
     this.drawerElevation,
     this.drawerBackgroundSchemeColor,
+    this.drawerWidth,
+    this.drawerIndicatorBorderRadius,
+    this.drawerIndicatorWidth,
+    this.drawerIndicatorSchemeColor,
     //
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
@@ -1200,6 +1207,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [thickBorderWidth];
   final double? inputDecoratorFocusedBorderWidth;
 
+  /// The icon color of the prefixIcon in a focused [InputDecoration].
+  ///
+  /// If not defined defaults to [SchemeColor.primary] in FCS M2 and to
+  /// [SchemeColor.onSurface] in FCS M3.
+  final SchemeColor? inputDecoratorPrefixIconSchemeColor;
+
   /// Border radius value for [FloatingActionButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -1575,6 +1588,22 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 3.
   final double? appBarScrolledUnderElevation;
 
+  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
+  /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
+  /// uses as background color.
+  ///
+  /// The [BottomAppBarTheme] has no properties for foreground color. If you use
+  /// a background color that requires different contrast color than the
+  /// active theme's surface colors, you will need to set their colors on
+  /// widget level.
+  ///
+  /// Due to an issue in Flutter 3.7 and 3.7.1, that has been resolved in
+  /// master channel, the background color of the [BottomAppBar] cannot
+  /// be changed when using M3. See issue:
+  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
+  /// https://github.com/rydmike/flex_color_scheme/issues/115.
+  final SchemeColor? bottomAppBarSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
@@ -1621,6 +1650,38 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.surface] in M3 and to
   /// [SchemeColor.background] in M2.
   final SchemeColor? drawerBackgroundSchemeColor;
+
+  /// Defines the width of [Drawer] and [NavigationDrawer].
+  ///
+  /// If not defined, defaults to 304dp via Flutter SDK defaults for M2, for
+  /// [Drawer] widget. M3 spec has it at 360dp for [NavigationDrawer].
+  final double? drawerWidth;
+
+  /// Defines the width of [NavigationDrawer]'s indicator.
+  ///
+  /// If [drawerWidth] is defined and [drawerIndicatorWidth] is not, then
+  /// [drawerIndicatorWidth] will be [drawerWidth] - 2 * 12, where 12dp is the
+  /// M3 padding spec around the indicator.
+  ///
+  /// If not defined, and [drawerWidth] is not defined it defaults to 336dp
+  /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
+  /// from the M3 padding spec of 12dp around both sides of the indicator.
+  final double? drawerIndicatorWidth;
+
+  /// Border radius value for [BottomSheet].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [StadiumBorder].
+  ///
+  /// FCS default, follows the Material M3 guide:
+  /// https://m3.material.io/components/navigation-drawer/specs
+  final double? drawerIndicatorBorderRadius;
+
+  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// uses as as its background color on the selection indicator.
+  ///
+  /// If undefined, defaults to [SchemeColor.secondaryContainer].
+  final SchemeColor? drawerIndicatorSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
   /// [BottomSheet] uses as background color when presented as a none modal
@@ -2373,6 +2434,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? inputDecoratorUnfocusedBorderIsColored,
     final double? inputDecoratorBorderWidth,
     final double? inputDecoratorFocusedBorderWidth,
+    final SchemeColor? inputDecoratorPrefixIconSchemeColor,
     //
     final double? fabRadius,
     final bool? fabUseShape,
@@ -2410,6 +2472,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? appBarBackgroundSchemeColor,
     final bool? appBarCenterTitle,
     final double? appBarScrolledUnderElevation,
+    final SchemeColor? bottomAppBarSchemeColor,
     //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
@@ -2417,6 +2480,10 @@ class FlexSubThemesData with Diagnosticable {
     final double? drawerRadius,
     final double? drawerElevation,
     final SchemeColor? drawerBackgroundSchemeColor,
+    final double? drawerWidth,
+    final double? drawerIndicatorWidth,
+    final double? drawerIndicatorBorderRadius,
+    final SchemeColor? drawerIndicatorSchemeColor,
     //
     final SchemeColor? bottomSheetBackgroundColor,
     final SchemeColor? bottomSheetModalBackgroundColor,
@@ -2615,6 +2682,9 @@ class FlexSubThemesData with Diagnosticable {
           inputDecoratorBorderWidth ?? this.inputDecoratorBorderWidth,
       inputDecoratorFocusedBorderWidth: inputDecoratorFocusedBorderWidth ??
           this.inputDecoratorFocusedBorderWidth,
+      inputDecoratorPrefixIconSchemeColor:
+          inputDecoratorPrefixIconSchemeColor ??
+              this.inputDecoratorPrefixIconSchemeColor,
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
@@ -2661,6 +2731,9 @@ class FlexSubThemesData with Diagnosticable {
       appBarScrolledUnderElevation:
           appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
       //
+      bottomAppBarSchemeColor:
+          bottomAppBarSchemeColor ?? this.bottomAppBarSchemeColor,
+      //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
@@ -2670,6 +2743,12 @@ class FlexSubThemesData with Diagnosticable {
       drawerElevation: drawerElevation ?? this.drawerElevation,
       drawerBackgroundSchemeColor:
           drawerBackgroundSchemeColor ?? this.drawerBackgroundSchemeColor,
+      drawerWidth: drawerWidth ?? this.drawerWidth,
+      drawerIndicatorWidth: drawerIndicatorWidth ?? this.drawerIndicatorWidth,
+      drawerIndicatorBorderRadius:
+          drawerIndicatorBorderRadius ?? this.drawerIndicatorBorderRadius,
+      drawerIndicatorSchemeColor:
+          drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
       //
       bottomSheetBackgroundColor:
           bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
@@ -2917,6 +2996,8 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorBorderWidth == inputDecoratorBorderWidth &&
         other.inputDecoratorFocusedBorderWidth ==
             inputDecoratorFocusedBorderWidth &&
+        other.inputDecoratorPrefixIconSchemeColor ==
+            inputDecoratorPrefixIconSchemeColor &&
         //
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
@@ -2955,12 +3036,18 @@ class FlexSubThemesData with Diagnosticable {
         other.appBarCenterTitle == appBarCenterTitle &&
         other.appBarScrolledUnderElevation == appBarScrolledUnderElevation &&
         //
+        other.bottomAppBarSchemeColor == bottomAppBarSchemeColor &&
+        //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         //
         other.drawerRadius == drawerRadius &&
         other.drawerElevation == drawerElevation &&
         other.drawerBackgroundSchemeColor == drawerBackgroundSchemeColor &&
+        other.drawerWidth == drawerWidth &&
+        other.drawerIndicatorWidth == drawerIndicatorWidth &&
+        other.drawerIndicatorBorderRadius == drawerIndicatorBorderRadius &&
+        other.drawerIndicatorSchemeColor == drawerIndicatorSchemeColor &&
         //
         other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
         other.bottomSheetModalBackgroundColor ==
@@ -3153,6 +3240,7 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorUnfocusedBorderIsColored,
         inputDecoratorBorderWidth,
         inputDecoratorFocusedBorderWidth,
+        inputDecoratorPrefixIconSchemeColor,
         //
         fabRadius,
         fabUseShape,
@@ -3191,12 +3279,18 @@ class FlexSubThemesData with Diagnosticable {
         appBarCenterTitle,
         appBarScrolledUnderElevation,
         //
+        bottomAppBarSchemeColor,
+        //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
         //
         drawerRadius,
         drawerElevation,
         drawerBackgroundSchemeColor,
+        drawerWidth,
+        drawerIndicatorWidth,
+        drawerIndicatorBorderRadius,
+        drawerIndicatorSchemeColor,
         //
         bottomSheetBackgroundColor,
         bottomSheetModalBackgroundColor,
@@ -3416,6 +3510,9 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorBorderWidth', inputDecoratorBorderWidth));
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorFocusedBorderWidth', inputDecoratorFocusedBorderWidth));
+    properties.add(EnumProperty<SchemeColor>(
+        'inputDecoratorPrefixIconSchemeColor',
+        inputDecoratorPrefixIconSchemeColor));
     //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
@@ -3476,6 +3573,9 @@ class FlexSubThemesData with Diagnosticable {
         'appBarScrolledUnderElevation', appBarScrolledUnderElevation));
     //
     properties.add(EnumProperty<SchemeColor>(
+        'bottomAppBarSchemeColor', bottomAppBarSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
@@ -3485,6 +3585,13 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<double>('drawerElevation', drawerElevation));
     properties.add(EnumProperty<SchemeColor>(
         'drawerBackgroundSchemeColor', drawerBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>('drawerWidth', drawerWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'drawerIndicatorWidth', drawerIndicatorWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'drawerIndicatorBorderRadius', drawerIndicatorBorderRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
