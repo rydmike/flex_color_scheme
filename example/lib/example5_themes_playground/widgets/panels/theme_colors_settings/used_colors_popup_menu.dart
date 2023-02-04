@@ -37,7 +37,8 @@ class UsedColorsPopupMenu extends StatelessWidget {
     }
     if (colors == 4) {
       return 'Scheme defined primary, secondary, plus primary and secondary '
-          'container colors used, other colors are computed by FlexColorScheme.';
+          'container colors used, other colors are computed by '
+          'FlexColorScheme.';
     }
     if (colors == 5) {
       return 'Scheme defined primary, secondary, tertiary, plus primary and '

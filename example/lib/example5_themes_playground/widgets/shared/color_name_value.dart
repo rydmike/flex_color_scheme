@@ -32,8 +32,8 @@ class ColorNameValue extends StatefulWidget {
   final int? tone;
   final bool showTone;
 
-  /// If showInputColor is set to false the input color is not shown even if both
-  /// inputColor and inputTextColor are defined.
+  /// If showInputColor is set to false the input color is not shown even if
+  /// both inputColor and inputTextColor are defined.
   ///
   /// Defaults to true.
   final bool showInputColor;

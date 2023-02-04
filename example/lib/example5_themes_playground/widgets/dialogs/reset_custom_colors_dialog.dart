@@ -7,7 +7,7 @@ class ResetCustomColorsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Reset Custom Colors'),
+      title: const Text('Reset custom colors'),
       content: const Text('Set custom color definitions back to their '
           'default values?'),
       actions: <Widget>[

@@ -97,15 +97,17 @@ class SurfaceBlendSettings extends StatelessWidget {
         const ListTile(
           title: Text('Blended surfaces and backgrounds'),
           isThreeLine: true,
-          subtitle: Text('Material Design 2 guide mentions using surfaces with '
-              'primary color alpha blends. FlexColorScheme surface blends '
-              'does it for you. '
-              'Material Design 3 has a new color system where a hint of primary '
-              'color is also used on surfaces. It is done via its neutral tonal '
-              'palettes that are shifted slightly towards the primary color. '
-              'If you use M3 seeded ColorSchemes, set blend level to zero '
-              'to get the pure M3 design. With surface blends, you can further '
-              'strengthen the effect and vary blend levels by surface type.'),
+          subtitle: Text(
+            'Material Design 2 guide mentions using surfaces with '
+            'primary color alpha blends. FlexColorScheme surface blends '
+            'does it for you. '
+            'Material Design 3 has a new color system where a hint of primary '
+            'color is also used on surfaces. It is done via its neutral tonal '
+            'palettes that are shifted slightly towards the primary color. '
+            'If you use M3 seeded ColorSchemes, set blend level to zero '
+            'to get the pure M3 design. With surface blends, you can further '
+            'strengthen the effect and vary blend levels by surface type.',
+          ),
         ),
         UseSeededColorSchemeSwitch(controller: controller),
         const ListTile(

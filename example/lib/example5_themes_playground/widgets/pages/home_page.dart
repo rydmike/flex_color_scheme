@@ -149,7 +149,6 @@ class _HomePageState extends State<HomePage> {
           }
           // Copy theme setup code
           else if (index == 2) {
-            // ignore: use_build_context_synchronously
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
