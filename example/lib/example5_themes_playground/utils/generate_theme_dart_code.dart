@@ -153,11 +153,13 @@ String generateThemeDartCode(ThemeController controller) {
   final String transparentStatusBar = controller.transparentStatusBar
       ? ''
       : '  transparentStatusBar: ${controller.transparentStatusBar},\n';
-  final String appBarElevationLight = controller.appBarElevationLight != 0
-      ? '  appBarElevation: ${controller.appBarElevationLight.toStringAsFixed(1)},\n'
+  final String appBarElevationLight = controller.appBarElevationLight != 0 &&
+          controller.appBarElevationLight != null
+      ? '  appBarElevation: ${controller.appBarElevationLight!.toStringAsFixed(1)},\n'
       : '';
-  final String appBarElevationDark = controller.appBarElevationDark != 0
-      ? '  appBarElevation: ${controller.appBarElevationDark.toStringAsFixed(1)},\n'
+  final String appBarElevationDark = controller.appBarElevationDark != 0 &&
+          controller.appBarElevationDark != null
+      ? '  appBarElevation: ${controller.appBarElevationDark!.toStringAsFixed(1)},\n'
       : '';
   final String bottomAppBarElevationLight = controller
               .bottomAppBarElevationLight !=
@@ -731,7 +733,7 @@ String generateThemeDartCode(ThemeController controller) {
                   .bottomNavigationBarElevation !=
               null &&
           controller.bottomNavigationBarElevation != 0
-      ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation.toStringAsFixed(1)},\n'
+      ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String bottomNavigationBarShowSelectedLabels = controller
           .bottomNavShowSelectedLabels

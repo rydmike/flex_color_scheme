@@ -2048,7 +2048,7 @@ void main() {
         //
         tabBarStyle: FlexTabBarStyle.forBackground,
         appBarBackground: const Color(0xfffaf3f3),
-        appBarElevation: 0,
+        appBarElevation: null,
         bottomAppBarElevation: null,
         tooltipsMatchBackground: false,
         transparentStatusBar: true,
@@ -2179,8 +2179,6 @@ void main() {
         appBarBackground: Color(0xff191313),
         dialogBackground: Color(0xff0e0c0c),
         tabBarStyle: FlexTabBarStyle.forBackground,
-        appBarElevation: 0,
-        bottomAppBarElevation: 0,
         tooltipsMatchBackground: false,
         transparentStatusBar: true,
         visualDensity: null,
@@ -2761,26 +2759,24 @@ void main() {
     // AppBar test null style, not using M3.
     test(
         'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
-        'and using M3 EXPECT app bar background surface ', () {
+        'and using M3 EXPECT app bar background null ', () {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(
-          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
+      expect(theme.appBarTheme.backgroundColor, equals(null));
     });
     // AppBar test null style, using M3.
     test(
         'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
-        ' using M3 EXPECT app bar background surface ', () {
+        ' using M3 EXPECT app bar background null ', () {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(
-          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
+      expect(theme.appBarTheme.backgroundColor, equals(null));
     });
     // AppBar test null style, not using M3.
     test(

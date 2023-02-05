@@ -262,8 +262,9 @@ extension FlexThemeData on ThemeData {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -278,12 +279,14 @@ extension FlexThemeData on ThemeData {
     /// bar area.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///
@@ -1508,8 +1511,9 @@ extension FlexThemeData on ThemeData {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to true, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1524,12 +1528,14 @@ extension FlexThemeData on ThemeData {
     /// bar area.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///

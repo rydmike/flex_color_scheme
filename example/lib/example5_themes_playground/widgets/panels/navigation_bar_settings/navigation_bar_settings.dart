@@ -133,21 +133,23 @@ class NavigationBarSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         ListTile(
-            enabled: useMaterial3,
-            title: const Text('Use Material 3 default NavigationBar style?'),
-            subtitle: const Text('Update settings below to match M3 default '
-                'values'),
-            trailing: FilledButton(
-              onPressed: useMaterial3
-                  ? () async {
-                      await _handleSetToM3(context);
-                    }
-                  : null,
-              child: const Text('Set to M3'),
-            ),
-            onTap: () async {
-              await _handleSetToM3(context);
-            }),
+          enabled: useMaterial3,
+          title: const Text('Use Material 3 default NavigationBar style?'),
+          subtitle: const Text('Update settings below to match M3 default '
+              'values'),
+          trailing: FilledButton(
+            onPressed: useMaterial3
+                ? () async {
+                    await _handleSetToM3(context);
+                  }
+                : null,
+            child: const Text('Set to M3'),
+          ),
+          onTap: () async {
+            await _handleSetToM3(context);
+          },
+        ),
+        const SizedBox(height: 8),
         const NavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),

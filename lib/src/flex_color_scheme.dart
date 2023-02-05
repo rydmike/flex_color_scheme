@@ -297,7 +297,7 @@ class FlexColorScheme with Diagnosticable {
     this.onError,
     this.surfaceTint,
     this.tabBarStyle,
-    this.appBarElevation = 0,
+    this.appBarElevation,
     this.bottomAppBarElevation,
     this.tooltipsMatchBackground = false,
     this.transparentStatusBar = true,
@@ -315,7 +315,8 @@ class FlexColorScheme with Diagnosticable {
     this.subThemesData,
     this.useMaterial3 = false,
     this.extensions,
-  })  : assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.'),
+  })  : assert(appBarElevation == null || appBarElevation >= 0.0,
+            'AppBar elevation must be >= 0 or null.'),
         assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0 or null.');
 
@@ -608,16 +609,17 @@ class FlexColorScheme with Diagnosticable {
 
   /// The themed elevation for the [AppBar].
   ///
-  /// Defaults to 0, cannot be null.
+  /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+  /// spec default).
   ///
-  /// The 0 elevation is an iOs style influenced opinionated choice, but it
-  /// can easily be adjusted for the theme with this property.
-  final double appBarElevation;
+  /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+  /// choice, it can easily be adjusted for the theme with this property.
+  final double? appBarElevation;
 
   /// The themed elevation for the bottom app bar.
   ///
   /// If null, defaults to [appBarElevation] in M2. So it matches the themed
-  /// app bar elevation. In M3 it is kept null to default to M3's default
+  /// app bar elevation. In M3 it is kept null, to default to M3's default
   /// elevation of 3, to always get elevation tint.
   final double? bottomAppBarElevation;
 
@@ -1389,8 +1391,9 @@ class FlexColorScheme with Diagnosticable {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1403,19 +1406,30 @@ class FlexColorScheme with Diagnosticable {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
+    ///
+    /// In standard Material 2 this would be false, FCS uses an opinionated
+    /// style and sets it true. In Material 3 the style you get when setting
+    /// this to true is used by default. In M3 mode FCS will thus not create
+    /// an AppBar sub theme to adjust this,if it is true and it is not needed
+    /// for any other direct AppBar impacting properties in FlexColorScheme
+    /// constructor. In M2 mode an AppBar theme will always be created, also
+    /// when not opting in on the actual sub-themes feature, this per its
+    /// opinionated and legacy styling for M2 mode.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///
     /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// themed app bar elevation. In M3 it is kept null, to default to M3's
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
@@ -2353,14 +2367,15 @@ class FlexColorScheme with Diagnosticable {
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7');
-    assert(appBarOpacity >= 0 && appBarOpacity <= 1,
-        'appBarOpacity must be 0 to 1');
+    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1,
+        'appBarOpacity must be 0 to 1, or null');
     assert(
       blendLevel >= 0 && blendLevel <= 40,
       'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
-    assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
+    assert(appBarElevation == null || appBarElevation >= 0.0,
+        'AppBar elevation must be >= 0 or null.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
     // Use color seeding based on passed in keyColors or make one where
@@ -2692,10 +2707,6 @@ class FlexColorScheme with Diagnosticable {
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
-    // Determine effective AppBar style, passed in or default based on M2 or M3.
-    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
-        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.primary);
-
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
@@ -2707,30 +2718,45 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (effectiveAppBarStyle) {
+      switch (appBarStyle) {
         case FlexAppBarStyle.primary:
-          effectiveAppBarColor = effectiveColors.primary;
+          effectiveAppBarColor =
+              effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.material:
-          effectiveAppBarColor = FlexColor.materialLightSurface;
+          effectiveAppBarColor =
+              FlexColor.materialLightSurface.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.surface:
-          effectiveAppBarColor = effectiveSurfaceColor;
+          effectiveAppBarColor =
+              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.background:
-          effectiveAppBarColor = effectiveBackgroundColor;
+          effectiveAppBarColor =
+              effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.scaffoldBackground:
-          effectiveAppBarColor = effectiveScaffoldColor;
+          effectiveAppBarColor =
+              effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
-              effectiveColors.appBarColor ?? effectiveColors.primary;
+              effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
+                  effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
+          break;
+        case null:
+          // Style was null, if Opacity used, apply to use M2/M3 mode default.
+          if (appBarOpacity != null && appBarOpacity != 1.0) {
+            effectiveAppBarColor = useMaterial3
+                ? effectiveSurfaceColor.withOpacity(appBarOpacity)
+                : effectiveColors.primary.withOpacity(appBarOpacity);
+          }
           break;
       }
     }
-    // Apply specified opacity on on the resulting color.
-    effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+    // The resulting effectiveAppBarColor may remain null if default values
+    // are used, this used to avoid creating any AppBar theme in M3 mode if
+    // using no sub-theme and only default FCS.light direct AppBar properties.
 
     return FlexColorScheme(
       colorScheme: effectiveColorScheme,
@@ -3151,8 +3177,9 @@ class FlexColorScheme with Diagnosticable {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to true, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -3165,19 +3192,30 @@ class FlexColorScheme with Diagnosticable {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
+    ///
+    /// In standard Material 2 this would be false, FCS uses an opinionated
+    /// style and sets it true. In Material 3 the style you get when setting
+    /// this to true is used by default. In M3 mode FCS will thus not create
+    /// an AppBar sub theme to adjust this,if it is true and it is not needed
+    /// for any other direct AppBar impacting properties in FlexColorScheme
+    /// constructor. In M2 mode an AppBar theme will always be created, also
+    /// when not opting in on the actual sub-themes feature, this per its
+    /// opinionated and legacy styling for M2 mode.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///
     /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// themed app bar elevation. In M3 it is kept null, to default to M3's
     /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
@@ -4115,14 +4153,15 @@ class FlexColorScheme with Diagnosticable {
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
-    assert(appBarOpacity >= 0 && appBarOpacity <= 1,
-        'appBarOpacity must be 0 to 1');
+    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1,
+        'appBarOpacity must be 0 to 1, or null');
     assert(
       blendLevel >= 0 && blendLevel <= 40,
       'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
-    assert(appBarElevation >= 0.0, 'AppBar elevation must be >= 0.');
+    assert(appBarElevation == null || appBarElevation >= 0.0,
+        'AppBar elevation must be >= 0 or null.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
 
@@ -4483,10 +4522,6 @@ class FlexColorScheme with Diagnosticable {
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
-    // Determine effective AppBar style, passed in or default based on M2 or M3.
-    final FlexAppBarStyle effectiveAppBarStyle = appBarStyle ??
-        (useMaterial3 ? FlexAppBarStyle.surface : FlexAppBarStyle.material);
-
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
@@ -4498,30 +4533,43 @@ class FlexColorScheme with Diagnosticable {
             : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
-      switch (effectiveAppBarStyle) {
+      switch (appBarStyle) {
         case FlexAppBarStyle.primary:
-          effectiveAppBarColor = effectiveColors.primary;
+          effectiveAppBarColor =
+              effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.material:
-          effectiveAppBarColor = FlexColor.materialDarkSurface;
+          effectiveAppBarColor =
+              FlexColor.materialDarkSurface.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.surface:
-          effectiveAppBarColor = effectiveSurfaceColor;
+          effectiveAppBarColor =
+              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.background:
-          effectiveAppBarColor = effectiveBackgroundColor;
+          effectiveAppBarColor =
+              effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.scaffoldBackground:
-          effectiveAppBarColor = effectiveScaffoldColor;
+          effectiveAppBarColor =
+              effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
           break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
               effectiveColors.appBarColor ?? effectiveColors.primary;
           break;
+        case null:
+          // Style was null, if Opacity used, apply to surface for M2 & M3 mode.
+          if (appBarOpacity != null && appBarOpacity != 1.0) {
+            effectiveAppBarColor =
+                effectiveSurfaceColor.withOpacity(appBarOpacity);
+          }
+          break;
       }
     }
-    // Apply specified opacity on the resulting color.
-    effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+    // The resulting effectiveAppBarColor may remain null if default values
+    // are used, this used to avoid creating any AppBar theme in M3 mode if
+    // using no sub-theme and only default FCS.dark direct AppBar properties.
 
     return FlexColorScheme(
       colorScheme: effectiveColorScheme,
@@ -5168,13 +5216,10 @@ class FlexColorScheme with Diagnosticable {
   ///    better. FlexColorScheme's implementation has been changed to use this
   ///    new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
   ///
-  ///  * The `AppBarTheme` elevation defaults to 0, an iOs style influenced
+  ///  * The `AppBarTheme` M2 elevation defaults to 0, an iOs style influenced
   ///    opinionated choice. It can easily be adjusted directly in the
   ///    `FlexColorScheme` definition with property value `appBarElevation`
   ///    without creating a sub theme or using `copyWith`.
-  ///    For the main less used constructor of `FlexColorScheme` it is required
-  ///    and cannot be null. The `FlexColorScheme` `light` and `dark` factories
-  ///    can be null but it will default to 0 if null.
   ///
   ///  * The `bottomAppBarColor` uses color scheme background color to match the
   ///    background color of the drawer, bottom navigation bar, possible side
@@ -5533,18 +5578,24 @@ class FlexColorScheme with Diagnosticable {
         : colorScheme.primary.blend(Colors.white, 80);
 
     // AppBar background color:
-    // - If a color is passed in, that is used first.
-    // - If we use sub-themes, we use its scheme based color.
-    // - If neither was given we use the surface color in dark mode and
+    // - If a color is passed in, that is used first. If light/dark factory
+    //   created a none default background or with transparency, this will
+    //   be the case
+    // - If we use sub-themes, with this raw constructor, we use its scheme
+    //   based color.
+    // - If neither was given and M2 we use the surface color in dark mode and
     //   primary color in light mode, the same logic that Flutter SDK
-    //   ThemeData.from factory sets the AppBar background color to.
+    //   ThemeData.from factory sets the AppBar background color in M2, in
+    //   M3 we always use surface color.
     final Color effectiveAppBarBackgroundColor = appBarBackground ??
         (useSubThemes && subTheme.appBarBackgroundSchemeColor != null
             ? FlexSubThemes.schemeColor(
                 subTheme.appBarBackgroundSchemeColor!, colorScheme)
-            : isDark
+            : useMaterial3
                 ? colorScheme.surface
-                : colorScheme.primary);
+                : isDark
+                    ? colorScheme.surface
+                    : colorScheme.primary);
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(effectiveAppBarBackgroundColor);
     Color appBarForeground =
@@ -5819,7 +5870,7 @@ class FlexColorScheme with Diagnosticable {
     // if opted in, otherwise use pre v4 version as before. This decoration
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
     // get the same style used on them too.
-    final InputDecorationTheme effectiveInputDecorationTheme = useSubThemes
+    final InputDecorationTheme? effectiveInputDecorationTheme = useSubThemes
         // FCS V4 and later sub-theme based input decorator used.
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
@@ -5843,16 +5894,19 @@ class FlexColorScheme with Diagnosticable {
             tintedDisabled: tintedDisabled,
             useMaterial3: useMaterial3,
           )
-        // Default decorator is also a bit opinionated, this is the FCS
-        // default one in all previous versions before version 4.0.0.
-        // Kept for backwards defaults compatibility. Used when not using
-        // opinionated component sub-themes.
-        : InputDecorationTheme(
-            filled: subTheme.inputDecoratorIsFilled,
-            fillColor: isDark
-                ? colorScheme.primary.withAlpha(0x0F) // 6%
-                : colorScheme.primary.withAlpha(0x09), // 3.5%
-          );
+        : useMaterial3
+            // In M3 if not using sub themes, use default InputDecorationTheme.
+            ? null
+            // Default decorator in M2 is also a bit opinionated, this is the
+            // FCS default one in all previous versions before version 4.0.0.
+            // Kept for backwards defaults compatibility. Used when not using
+            // opinionated component sub-themes in M2.
+            : InputDecorationTheme(
+                filled: subTheme.inputDecoratorIsFilled,
+                fillColor: isDark
+                    ? colorScheme.primary.withAlpha(0x0F) // 6%
+                    : colorScheme.primary.withAlpha(0x09), // 3.5%
+              );
 
     // BottomSheet Colors and elevations.
     final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
@@ -6109,29 +6163,71 @@ class FlexColorScheme with Diagnosticable {
       // A new feature in Flutter 2.0.0 implemented via:
       // https://github.com/flutter/flutter/pull/71184 made doing this easier.
       // FlexColorScheme has used the SDK supported way since it was launched.
-      appBarTheme: FlexSubThemes.appBarTheme(
-        colorScheme: colorScheme,
-        centerTitle: subTheme.appBarCenterTitle,
-        backgroundColor: effectiveAppBarBackgroundColor,
-        foregroundColor: appBarForeground,
-        elevation: appBarElevation,
-        scrolledUnderElevation: subTheme.appBarScrolledUnderElevation,
-        iconTheme: IconThemeData(color: appBarIconColor),
-        actionsIconTheme: IconThemeData(color: appBarIconColor),
-        systemOverlayStyle: systemOverlayStyle,
-      ),
+      appBarTheme: useSubThemes
+          ? FlexSubThemes.appBarTheme(
+              colorScheme: colorScheme,
+              centerTitle: subTheme.appBarCenterTitle,
+              backgroundColor: effectiveAppBarBackgroundColor,
+              foregroundColor: appBarForeground,
+              elevation: appBarElevation ?? 0,
+              scrolledUnderElevation: subTheme.appBarScrolledUnderElevation,
+              iconTheme: IconThemeData(color: appBarIconColor),
+              actionsIconTheme: IconThemeData(color: appBarIconColor),
+              systemOverlayStyle: systemOverlayStyle,
+            )
+          : useMaterial3
+              ? (appBarElevation != null && appBarElevation != 0) ||
+                      !transparentStatusBar ||
+                      (appBarBackground != null)
+                  ? FlexSubThemes.appBarTheme(
+                      colorScheme: colorScheme,
+                      backgroundColor: effectiveAppBarBackgroundColor,
+                      foregroundColor: appBarForeground,
+                      elevation: appBarElevation,
+                      iconTheme: IconThemeData(color: appBarIconColor),
+                      actionsIconTheme: IconThemeData(color: appBarIconColor),
+                      systemOverlayStyle: systemOverlayStyle,
+                    )
+                  : null
+              : FlexSubThemes.appBarTheme(
+                  colorScheme: colorScheme,
+                  backgroundColor: effectiveAppBarBackgroundColor,
+                  foregroundColor: appBarForeground,
+                  elevation: appBarElevation ?? 0,
+                  iconTheme: IconThemeData(color: appBarIconColor),
+                  actionsIconTheme: IconThemeData(color: appBarIconColor),
+                  systemOverlayStyle: systemOverlayStyle,
+                ),
       //
       // badgeTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // bannerTheme:  NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // BottomAppBar Theme.
-      bottomAppBarTheme: FlexSubThemes.bottomAppBarTheme(
-        colorScheme: colorScheme,
-        backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
-        elevation:
-            bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
-      ),
+      bottomAppBarTheme: useSubThemes
+          ? FlexSubThemes.bottomAppBarTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
+              elevation: bottomAppBarElevation ??
+                  (useMaterial3 ? null : appBarElevation ?? 0),
+              useMaterial3: useMaterial3,
+            )
+          : useMaterial3
+              // In M3 if we define a none null bottomAppBarElevation, we get
+              // BottomAppBarTheme sub-theme with it defined, otherwise not.
+              ? bottomAppBarElevation != null
+                  ? FlexSubThemes.bottomAppBarTheme(
+                      colorScheme: colorScheme,
+                      elevation: bottomAppBarElevation,
+                    )
+                  : null
+              // In M2 if we define a none null bottomAppBarElevation
+              // or appBarElevation, we get BottomAppBarTheme sub-theme
+              // with its elevation defined and fallback to appBarElevation.
+              : FlexSubThemes.bottomAppBarTheme(
+                  colorScheme: colorScheme,
+                  elevation: bottomAppBarElevation ?? appBarElevation ?? 0,
+                ),
       //
       // BottomNavigationBar Theme.
       // Opinionated default theming for it:
@@ -6181,12 +6277,20 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlpha: kUnselectedAlphaBlend,
               useFlutterDefaults: subTheme.useFlutterDefaults,
             )
-          : BottomNavigationBarThemeData(
-              selectedIconTheme: IconThemeData(
-                color: colorScheme.primary,
-              ),
-              selectedItemColor: colorScheme.primary,
-            ),
+          : useMaterial3
+              ? null
+              // Opinionated FCS M2 legacy style sub-theme for
+              // BottomNavigationBarThemeData that we get without
+              // opting in on sub-themes. This is a nice fix for dark mode
+              // BottomNavigationBar, but decided to not do it in M3 when not
+              // opting in on sub-themes. If you opt-in, you get the "fix",
+              // You are supposed to use the NavigationBar in M3 anyway.
+              : BottomNavigationBarThemeData(
+                  selectedIconTheme: IconThemeData(
+                    color: colorScheme.primary,
+                  ),
+                  selectedItemColor: colorScheme.primary,
+                ),
       //
       // BottomSheet Theme.
       bottomSheetTheme: useSubThemes
@@ -6232,12 +6336,18 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
             )
-          : ButtonThemeData(
-              colorScheme: colorScheme,
-              textTheme: ButtonTextTheme.primary,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-            ),
+          : useMaterial3
+              ? null
+              // Opinionated FCS M2 legacy style sub-theme for ButtonThemeData,
+              // that we get without opting in on sub-themes. In M3 mode you
+              // get these fixes only when you opt-in on syb-themes. This
+              // theme will should soon be deprecated in Flutter SDK.
+              : ButtonThemeData(
+                  colorScheme: colorScheme,
+                  textTheme: ButtonTextTheme.primary,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                ),
       //
       // Card Theme.
       cardTheme: useSubThemes
@@ -6254,12 +6364,7 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.checkboxSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : FlexSubThemes.checkboxTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-            ),
+          : null,
       //
       // Chip Theme.
       // The default chip theme in Flutter does not work correctly with dark
@@ -6281,6 +6386,8 @@ class FlexColorScheme with Diagnosticable {
             )
           : useMaterial3
               ? null
+              // Opinionated FCS M2 legacy style sub-theme for Chips,
+              // that we get without opting in on sub-themes.
               : ChipThemeData.fromDefaults(
                   secondaryColor: colorScheme.primary,
                   brightness: colorScheme.brightness,
@@ -6303,7 +6410,7 @@ class FlexColorScheme with Diagnosticable {
       //
       // Divider Theme.
       // Create a Divider theme only when sub themes is used and we want M2
-      // style in M3. Otherwise we keep the theme as default.
+      // style in M3. Otherwise we keep the theme as default, with null props.
       dividerTheme:
           useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
               ? DividerThemeData(color: dividerColor)
@@ -6323,11 +6430,13 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // DropDownMenu Theme.
-      dropdownMenuTheme: FlexSubThemes.dropdownMenuTheme(
-        colorScheme: colorScheme,
-        // Style match its InputDecoration to same as TextField.
-        inputDecorationTheme: effectiveInputDecorationTheme,
-      ),
+      dropdownMenuTheme: useSubThemes
+          ? FlexSubThemes.dropdownMenuTheme(
+              colorScheme: colorScheme,
+              // Style match its InputDecoration to same as TextField.
+              inputDecorationTheme: effectiveInputDecorationTheme,
+            )
+          : null,
       //
       // ElevatedButton Theme.
       elevatedButtonTheme: useSubThemes
@@ -6527,12 +6636,7 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.radioSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
             )
-          : FlexSubThemes.radioTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-            ),
+          : null,
       //
       // SegmentedButton Theme.
       segmentedButtonTheme: useSubThemes
@@ -6587,13 +6691,7 @@ class FlexColorScheme with Diagnosticable {
               unselectedIsColored: subTheme.unselectedToggleIsColored,
               useMaterial3: useMaterial3,
             )
-          : FlexSubThemes.switchTheme(
-              colorScheme: colorScheme,
-              baseSchemeColor:
-                  useMaterial3 ? SchemeColor.primary : SchemeColor.secondary,
-              unselectedIsColored: false,
-              useMaterial3: useMaterial3,
-            ),
+          : null,
       //
       // TabBar Theme.
       // Defines the TabBar theme that will fit nicely in an AppBar
@@ -6643,12 +6741,16 @@ class FlexColorScheme with Diagnosticable {
       // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
       // mode. The standard selectionHandleColor is colorScheme.primary,
       // here we use the slightly darker shade primaryColorDark instead.
-      textSelectionTheme: TextSelectionThemeData(
-        selectionColor: isDark
-            ? colorScheme.primary.withAlpha(0xB2) // 50%
-            : colorScheme.primary.withAlpha(0x4C), // 30%
-        selectionHandleColor: primaryColorDark,
-      ),
+      textSelectionTheme: useSubThemes || !useMaterial3
+          ? TextSelectionThemeData(
+              selectionColor: isDark
+                  ? colorScheme.primary.withAlpha(0xB2) // 50%
+                  : colorScheme.primary.withAlpha(0x4C), // 30%
+              selectionHandleColor: primaryColorDark,
+            )
+          // If we don't use sub themes and useMaterial3 we get no
+          // opinionated style.
+          : null,
       //
       // TimePicker Theme.
       timePickerTheme: useSubThemes
@@ -6681,6 +6783,8 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // Tooltip theme
+      // If we don't use subThemes and don't change tooltipsMatchBackground from
+      // default, we get default un-opinionated styles.
       tooltipTheme: !useSubThemes && !tooltipsMatchBackground
           ? null
           : FlexSubThemes.tooltipTheme(

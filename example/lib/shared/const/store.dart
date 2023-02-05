@@ -487,12 +487,12 @@ class Store {
   // Key used to read and save the appBarElevationLight value.
   static const String keyAppBarElevationLight = 'appBarElevation';
   // Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevationLight = 0.0;
+  static const double? defaultAppBarElevationLight = null;
 
   // Key used to read and save the appBarElevationDark value.
   static const String keyAppBarElevationDark = 'appBarElevationDark';
   // Default value for the appBarElevationDark, also used to reset settings.
-  static const double defaultAppBarElevationDark = 0.0;
+  static const double? defaultAppBarElevationDark = null;
 
   // Key used to read and save the appBarScrolledUnderElevationLight value.
   static const String keyAppBarScrolledUnderElevationLight =
@@ -705,7 +705,7 @@ class Store {
   static const String keyBottomNavigationBarElevation =
       'bottomNavigationBarElevation';
   // Default value for the bottomNavigationBarElevation, also reset settings.
-  static const double defaultBottomNavigationBarElevation = 0;
+  static const double? defaultBottomNavigationBarElevation = null;
 
   // Key used to read and save the bottomNavBarSelectedItemSchemeColor value.
   static const String keyBottomNavBarSelectedItemSchemeColor =

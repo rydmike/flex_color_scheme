@@ -88,7 +88,8 @@ class TabBarStylePopupMenu extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
-    final bool useDefault = index < 0 || index >= FlexTabBarStyle.values.length;
+    final bool useDefault =
+        index < 0 || index >= FlexTabBarStyle.values.length || !enabled;
     final String styleName = !useDefault
         ? _explainTabStyle(FlexTabBarStyle.values[index], useM3)
         : _explainTabStyle(null, useM3);

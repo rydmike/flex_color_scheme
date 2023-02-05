@@ -1890,20 +1890,18 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyAppBarOpacityDark, value));
   }
 
-  late double _appBarElevationLight;
-  double get appBarElevationLight => _appBarElevationLight;
+  late double? _appBarElevationLight;
+  double? get appBarElevationLight => _appBarElevationLight;
   void setAppBarElevationLight(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _appBarElevationLight) return;
     _appBarElevationLight = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAppBarElevationLight, value));
   }
 
-  late double _appBarElevationDark;
-  double get appBarElevationDark => _appBarElevationDark;
+  late double? _appBarElevationDark;
+  double? get appBarElevationDark => _appBarElevationDark;
   void setAppBarElevationDark(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _appBarElevationDark) return;
     _appBarElevationDark = value;
     if (notify) notifyListeners();
@@ -2220,10 +2218,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyBottomNavigationBarOpacity, value));
   }
 
-  late double _bottomNavigationBarElevation;
-  double get bottomNavigationBarElevation => _bottomNavigationBarElevation;
+  late double? _bottomNavigationBarElevation;
+  double? get bottomNavigationBarElevation => _bottomNavigationBarElevation;
   void setBottomNavigationBarElevation(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _bottomNavigationBarElevation) return;
     _bottomNavigationBarElevation = value;
     if (notify) notifyListeners();

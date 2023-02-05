@@ -568,12 +568,17 @@ class FlexSubThemes {
     /// `EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0)`
     /// In M2 the value will default to EdgeInsets.zero.
     final EdgeInsetsGeometry? padding,
+
+    /// Set to true to opt in on Material 3 styled chips.
+    ///
+    /// If false widgets will use more opinionated FlexColorScheme defaults.
+    final bool useMaterial3 = false,
   }) {
-    // Effective color, if null, keep null for M2/M3 defaults via widget.
+    // Effective color, if null, keep null for M3 defaults via widget.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color? effectiveColor =
-        backgroundSchemeColor == null ? null : backgroundColor;
+        backgroundSchemeColor == null && useMaterial3 ? null : backgroundColor;
 
     return BottomAppBarTheme(
       color: effectiveColor,
@@ -3914,17 +3919,17 @@ class FlexSubThemes {
             return onSelectedColor;
           } else {
             if (states.contains(MaterialState.pressed)) {
-              return unselectedSchemeColor == null
+              return unselectedForegroundSchemeColor == null
                   ? colorScheme.onSurface
                   : onUnselectedColor;
             }
             if (states.contains(MaterialState.hovered)) {
-              return unselectedSchemeColor == null
+              return unselectedForegroundSchemeColor == null
                   ? colorScheme.onSurface
                   : onUnselectedColor;
             }
             if (states.contains(MaterialState.focused)) {
-              return unselectedSchemeColor == null
+              return unselectedForegroundSchemeColor == null
                   ? colorScheme.onSurface
                   : onUnselectedColor;
             }

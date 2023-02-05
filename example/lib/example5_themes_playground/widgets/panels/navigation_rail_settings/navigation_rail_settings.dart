@@ -112,10 +112,6 @@ class NavigationRailSettings extends StatelessWidget {
     final double navRailIndicatorOpacity = navRailIndicatorOpacityEnabled
         ? (controller.navRailIndicatorOpacity ?? -0.01)
         : -0.01;
-    final double navRailElevation =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationRailElevation ?? 0
-            : 0;
     // Logic for default elevation label.
     final String elevationDefaultLabel =
         controller.navigationRailElevation == null

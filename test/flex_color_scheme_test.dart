@@ -304,6 +304,42 @@ void main() {
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
+      dialogBackground: FlexColor.materialLightBackground,
+      onPrimary: Colors.white,
+      onPrimaryContainer: Colors.black,
+      onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
+      onTertiary: Colors.white,
+      onTertiaryContainer: Colors.black,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
+      onError: Colors.white,
+    );
+    test(
+        'FCS1.04a1: GIVEN a FlexColorScheme.light() created object '
+        'EXPECT equality when made by matching .light() overrides.', () {
+      expect(FlexColorScheme.light(), equals(m1e2));
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            m1e2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+
+    final FlexColorScheme m1e22 = FlexColorScheme.light(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      tertiary: FlexColor.materialLightTertiary,
+      tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
       dialogBackground: FlexColor.materialLightBackground,
       onPrimary: Colors.white,
@@ -317,9 +353,13 @@ void main() {
       onError: Colors.white,
     );
     test(
-        'FCS1.04a: GIVEN a FlexColorScheme.light() created object '
+        'FCS1.04a2: GIVEN a FlexColorScheme.light() created object '
         'EXPECT equality when made by matching .light() overrides.', () {
-      expect(FlexColorScheme.light(), equals(m1e2));
+      expect(
+          FlexColorScheme.light(
+            appBarStyle: FlexAppBarStyle.primary,
+          ),
+          equals(m1e22));
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.light()
@@ -398,7 +438,6 @@ void main() {
       background: FlexColor.materialDarkBackground,
       error: FlexColor.materialDarkError,
       scaffoldBackground: FlexColor.materialDarkBackground,
-      appBarBackground: FlexColor.materialDarkSurface,
       dialogBackground: FlexColor.materialDarkBackground,
       onPrimary: Colors.black,
       onPrimaryContainer: Colors.white,
@@ -478,6 +517,48 @@ void main() {
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
             m1e3.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+
+    final FlexColorScheme m05a2 = FlexColorScheme.dark(
+      primary: FlexColor.materialDarkPrimary,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
+      secondary: FlexColor.materialDarkSecondary,
+      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      tertiary: FlexColor.materialDarkTertiary,
+      tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      error: FlexColor.materialDarkError,
+      scaffoldBackground: FlexColor.materialDarkBackground,
+      appBarBackground: FlexColor.materialDarkSurface,
+      dialogBackground: FlexColor.materialDarkBackground,
+      onPrimary: Colors.black,
+      onPrimaryContainer: Colors.white,
+      onSecondary: Colors.black,
+      onTertiary: Colors.black,
+      onSecondaryContainer: Colors.white,
+      onTertiaryContainer: Colors.white,
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      onError: Colors.black,
+    );
+    test(
+        'FCS1.05a2: GIVEN a FlexColorScheme.dark created object '
+        'EXPECT equality when made by matching .dark(surface) overrides', () {
+      expect(
+        FlexColorScheme.dark(
+          appBarStyle: FlexAppBarStyle.surface,
+        ),
+        equals(m05a2),
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.dark(
+          appBarStyle: FlexAppBarStyle.surface,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            m05a2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 

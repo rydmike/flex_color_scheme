@@ -49,11 +49,13 @@ class BottomNavigationBarSettings extends StatelessWidget {
             controller.useFlutterDefaults);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.bottomNavigationBarOpacity : 1;
-
-    final double navBarElevation =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.bottomNavigationBarElevation
-            : 8;
+    // Logic for default elevation label.
+    final String elevationDefaultLabel = controller
+                .bottomNavigationBarElevation ==
+            null
+        ? 'default 0'
+        : 'global '
+            '${controller.bottomNavigationBarElevation!.toStringAsFixed(1)}';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -95,14 +97,12 @@ class BottomNavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
                   '${(navBarOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -110,15 +110,34 @@ class BottomNavigationBarSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              !controller.useFlutterDefaults,
           title: const Text('Elevation'),
           subtitle: Slider(
+            min: -1,
             max: 24,
-            divisions: 48,
-            label: navBarElevation.toStringAsFixed(1),
-            value: navBarElevation,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBottomNavigationBarElevation
+            divisions: 25,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.bottomNavigationBarElevation == null ||
+                        (controller.bottomNavigationBarElevation ?? -1) < 0
+                    ? elevationDefaultLabel
+                    : (controller.bottomNavigationBarElevation
+                            ?.toStringAsFixed(1) ??
+                        '')
+                : 'default 8',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.bottomNavigationBarElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? (double value) {
+                    controller.setBottomNavigationBarElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
                 : null,
           ),
           trailing: Padding(
@@ -128,13 +147,21 @@ class BottomNavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'ELEV',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  navBarElevation.toStringAsFixed(1),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          !controller.useFlutterDefaults
+                      ? controller.bottomNavigationBarElevation == null ||
+                              (controller.bottomNavigationBarElevation ?? -1) <
+                                  0
+                          ? elevationDefaultLabel
+                          : (controller.bottomNavigationBarElevation
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 8',
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

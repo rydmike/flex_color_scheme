@@ -53,7 +53,7 @@ class TabBarSettings extends StatelessWidget {
           labelForDefault:
               useMaterial3 ? 'Default (flutterDefault)' : 'Default (forAppBar)',
           index: controller.tabBarStyle?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= FlexTabBarStyle.values.length) {
                     controller.setTabBarStyle(null);
