@@ -245,6 +245,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorFocusedBorderWidth = await _themeService.load(
         Store.keyInputDecoratorFocusedBorderWidth,
         Store.defaultInputDecoratorFocusedBorderWidth);
+    _inputDecoratorPrefixIconSchemeColor = await _themeService.load(
+        Store.keyInputDecoratorPrefixIconSchemeColor,
+        Store.defaultInputDecoratorPrefixIconSchemeColor);
     //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
@@ -280,6 +283,10 @@ class ThemeController with ChangeNotifier {
         Store.keyAppBarBackgroundSchemeColorDark,
         Store.defaultAppBarBackgroundSchemeColorDark);
     //
+    // BottomAppBar SETTINGS.
+    _bottomAppBarSchemeColor = await _themeService.load(
+        Store.keyBottomAppBarSchemeColor, Store.defaultBottomAppBarSchemeColor);
+    //
     // TabBar SETTINGS.
     _tabBarStyle = await _themeService.load(
         Store.keyTabBarStyle, Store.defaultTabBarStyle);
@@ -302,6 +309,16 @@ class ThemeController with ChangeNotifier {
     _drawerBackgroundSchemeColor = await _themeService.load(
         Store.keyDrawerBackgroundSchemeColor,
         Store.defaultDrawerBackgroundSchemeColor);
+    _drawerWidth = await _themeService.load(
+        Store.keyDrawerWidth, Store.defaultDrawerWidth);
+    _drawerIndicatorWidth = await _themeService.load(
+        Store.keyDrawerIndicatorWidth, Store.defaultDrawerIndicatorWidth);
+    _drawerIndicatorBorderRadius = await _themeService.load(
+        Store.keyDrawerIndicatorBorderRadius,
+        Store.defaultDrawerIndicatorBorderRadius);
+    _drawerIndicatorSchemeColor = await _themeService.load(
+        Store.keyDrawerIndicatorSchemeColor,
+        Store.defaultDrawerIndicatorSchemeColor);
     //
     // BottomSheet SETTINGS.
     _bottomSheetSchemeColor = await _themeService.load(
@@ -718,6 +735,8 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
     setInputDecoratorFocusedBorderWidth(
         Store.defaultInputDecoratorFocusedBorderWidth, false);
+    setInputDecoratorPrefixIconSchemeColor(
+        Store.defaultInputDecoratorPrefixIconSchemeColor, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -739,6 +758,9 @@ class ThemeController with ChangeNotifier {
     setAppBarBackgroundSchemeColorDark(
         Store.defaultAppBarBackgroundSchemeColorDark, false);
     //
+    // BottomAppBar SETTINGS.
+    setBottomAppBarSchemeColor(Store.defaultBottomAppBarSchemeColor, false);
+    //
     // TabBar SETTINGS.
     setTabBarStyle(Store.defaultTabBarStyle, false);
     setTabBarIndicatorLight(Store.defaultTabBarIndicatorLight, false);
@@ -751,6 +773,12 @@ class ThemeController with ChangeNotifier {
     setDrawerBorderRadius(Store.defaultDrawerBorderRadius, false);
     setDrawerElevation(Store.defaultDrawerElevation, false);
     setDrawerBackgroundSchemeColor(
+        Store.defaultDrawerBackgroundSchemeColor, false);
+    setDrawerWidth(Store.defaultDrawerWidth, false);
+    setDrawerIndicatorWidth(Store.defaultDrawerIndicatorWidth, false);
+    setDrawerIndicatorBorderRadius(
+        Store.defaultDrawerIndicatorBorderRadius, false);
+    setDrawerIndicatorSchemeColor(
         Store.defaultDrawerBackgroundSchemeColor, false);
     //
     // BottomSheet SETTINGS.
@@ -1807,6 +1835,18 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyInputDecoratorFocusedBorderWidth, value));
   }
 
+  late SchemeColor? _inputDecoratorPrefixIconSchemeColor;
+  SchemeColor? get inputDecoratorPrefixIconSchemeColor =>
+      _inputDecoratorPrefixIconSchemeColor;
+  void setInputDecoratorPrefixIconSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorPrefixIconSchemeColor) return;
+    _inputDecoratorPrefixIconSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorPrefixIconSchemeColor, value));
+  }
+
   // AppBar SETTINGS.
   // ===========================================================================
 
@@ -1946,6 +1986,18 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAppBarBackgroundSchemeColorDark, value));
   }
 
+  // BottomAppBar SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _bottomAppBarSchemeColor;
+  SchemeColor? get bottomAppBarSchemeColor => _bottomAppBarSchemeColor;
+  void setBottomAppBarSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _bottomAppBarSchemeColor) return;
+    _bottomAppBarSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarSchemeColor, value));
+  }
+
   // TabBar SETTINGS.
   // ===========================================================================
 
@@ -2023,6 +2075,42 @@ class ThemeController with ChangeNotifier {
     _drawerBackgroundSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDrawerBackgroundSchemeColor, value));
+  }
+
+  late double? _drawerWidth;
+  double? get drawerWidth => _drawerWidth;
+  void setDrawerWidth(double? value, [bool notify = true]) {
+    if (value == _drawerWidth) return;
+    _drawerWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerWidth, value));
+  }
+
+  late double? _drawerIndicatorWidth;
+  double? get drawerIndicatorWidth => _drawerIndicatorWidth;
+  void setDrawerIndicatorWidth(double? value, [bool notify = true]) {
+    if (value == _drawerIndicatorWidth) return;
+    _drawerIndicatorWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerIndicatorWidth, value));
+  }
+
+  late double? _drawerIndicatorBorderRadius;
+  double? get drawerIndicatorBorderRadius => _drawerIndicatorBorderRadius;
+  void setDrawerIndicatorBorderRadius(double? value, [bool notify = true]) {
+    if (value == _drawerIndicatorBorderRadius) return;
+    _drawerIndicatorBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerIndicatorBorderRadius, value));
+  }
+
+  late SchemeColor? _drawerIndicatorSchemeColor;
+  SchemeColor? get drawerIndicatorSchemeColor => _drawerIndicatorSchemeColor;
+  void setDrawerIndicatorSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _drawerIndicatorSchemeColor) return;
+    _drawerIndicatorSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerIndicatorSchemeColor, value));
   }
 
   // BottomSheet SETTINGS.

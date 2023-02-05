@@ -452,6 +452,13 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultInputDecoratorFocusedBorderWidth = null;
 
+  // Key used to read and save the inputDecoratorPrefixIconSchemeColor value.
+  static const String keyInputDecoratorPrefixIconSchemeColor =
+      'inputDecoratorPrefixIconSchemeColor';
+  // Default value for the inputDecoratorPrefixIconSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorPrefixIconSchemeColor = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
@@ -532,6 +539,15 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultAppBarBackgroundSchemeColorDark = null;
 
+  // BottomAppBar SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the bottomAppBarSchemeColor value.
+  static const String keyBottomAppBarSchemeColor = 'bottomAppBarSchemeColor';
+  // Default value for the bottomAppBarSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomAppBarSchemeColor = null;
+
   // TabBar SETTINGS.
   // ===========================================================================
 
@@ -587,6 +603,33 @@ class Store {
   // Default value for the drawerBackgroundSchemeColor, also used to
   // reset settings.
   static const SchemeColor? defaultDrawerBackgroundSchemeColor = null;
+
+  // Key used to read and save the drawerWidth value.
+  static const String keyDrawerWidth = 'drawerWidth';
+  // Default value for the drawerWidth, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerWidth = null;
+
+  // Key used to read and save the drawerIndicatorWidth value.
+  static const String keyDrawerIndicatorWidth = 'drawerIndicatorWidth';
+  // Default value for the drawerIndicatorWidth, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorWidth = null;
+
+  // Key used to read and save the drawerIndicatorBorderRadius value.
+  static const String keyDrawerIndicatorBorderRadius =
+      'drawerIndicatorBorderRadius';
+  // Default value for the drawerIndicatorBorderRadius, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorBorderRadius = null;
+
+  // Key used to read and save the drawerIndicatorSchemeColor value.
+  static const String keyDrawerIndicatorSchemeColor =
+      'drawerIndicatorSchemeColor';
+  // Default value for the drawerIndicatorSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerIndicatorSchemeColor = null;
 
   // BottomSheet SETTINGS.
   // ===========================================================================

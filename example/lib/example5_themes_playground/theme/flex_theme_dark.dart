@@ -190,6 +190,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,
+            inputDecoratorPrefixIconSchemeColor:
+                controller.inputDecoratorPrefixIconSchemeColor,
             // FAB settings.
             fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,
@@ -230,6 +232,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.appBarBackgroundSchemeColorDark,
             appBarScrolledUnderElevation:
                 controller.appBarScrolledUnderElevationDark,
+            // BottomAppBarSettings.
+            bottomAppBarSchemeColor: controller.bottomAppBarSchemeColor,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
@@ -237,6 +241,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             drawerRadius: controller.drawerBorderRadius,
             drawerElevation: controller.drawerElevation,
             drawerBackgroundSchemeColor: controller.drawerBackgroundSchemeColor,
+            drawerWidth: controller.drawerWidth,
+            drawerIndicatorWidth: controller.drawerIndicatorWidth,
+            drawerIndicatorBorderRadius: controller.drawerBorderRadius,
+            drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetModalBackgroundColor:

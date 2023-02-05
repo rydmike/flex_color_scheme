@@ -412,14 +412,6 @@ class FlexSubThemes {
 
   // TODO(rydmike): Placeholder for more new M3 sub-themes to be added.
   //
-  // /// An opinionated [NavigationDrawerThemeData] theme.
-  // static NavigationDrawerThemeData navigationDrawerTheme({
-  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
-  //   required final ColorScheme colorScheme,
-  // }) {
-  //   return NavigationDrawerThemeData();
-  // }
-  //
   // /// An opinionated [MenuBarThemeData] theme.
   // static MenuBarThemeData menuBarTheme({
   // // Typically the same [ColorScheme] that is also used for your [ThemeData].
@@ -1524,8 +1516,8 @@ class FlexSubThemes {
     /// [Drawer] background color.
     ///
     /// If not defined, defaults to [SchemeColor.surface]. Flutter
-    /// SDK uses surface color as default in M3 and background in M3.
-    /// FCS keeps uses surface in both modes..
+    /// SDK uses surface color as default in M3, and background in M2.
+    /// FCS uses surface in both modes.
     final SchemeColor? backgroundSchemeColor,
 
     /// Corner radius of the [Drawer]'s visible edge.
@@ -2146,6 +2138,12 @@ class FlexSubThemes {
     /// The border [inputDecoratorBorderSchemeColor] can be used to define the
     /// border color separately, but it defaults to this color if not defined.
     final int? backgroundAlpha,
+
+    /// The icon color of the prefixIcon in a focused [InputDecoration].
+    ///
+    /// If not defined defaults to [SchemeColor.primary] in FCS M2 and to
+    /// [SchemeColor.onSurface] in FCS M3.
+    final SchemeColor? prefixIconSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the border
     /// color of the input decorator.
@@ -2974,6 +2972,53 @@ class FlexSubThemes {
             ),
       labelBehavior: labelBehavior,
     );
+  }
+
+  /// An opinionated [NavigationDrawerThemeData] theme with simpler API.
+  ///
+  /// Can set [indocatorWidth], [indicatorBorderRadius] and
+  /// [indicatorSchemeColor]
+  static NavigationDrawerThemeData navigationDrawerTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Defines which [Theme] based [ColorScheme] based background color
+    /// of [NavigationDrawer].
+    ///
+    /// If not defined will default to [Drawer] theme
+    /// background color. If it is not defined, then Flutter default uses
+    /// uses surface color as default in M3, and background in M2.
+    /// FCS uses surface in both modes.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Defines the width of [NavigationDrawer]'s indicator.
+    ///
+    /// If [drawerWidth] is defined and [drawerIndicatorWidth] is not, then
+    /// [drawerIndicatorWidth] will be [drawerWidth] - 2 * 12, where 12dp is the
+    /// M3 padding spec around the indicator.
+    ///
+    /// If not defined, and [drawerWidth] is not defined it defaults to 336dp
+    /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
+    /// from the M3 padding spec of 12dp around both sides of the indicator.
+    final double? indicatorWidth,
+
+    /// Border radius value for [BottomSheet].
+    ///
+    /// If not defined and [defaultRadius] is undefined, defaults to
+    /// [StadiumBorder].
+    ///
+    /// FCS default, follows the Material M3 guide:
+    /// https://m3.material.io/components/navigation-drawer/specs
+    final double? indicatorBorderRadius,
+
+    /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+    /// uses as as its background color on the selection indicator.
+    ///
+    /// If undefined, defaults to [SchemeColor.secondaryContainer].
+    final SchemeColor? indicatorSchemeColor,
+  }) {
+    // TODO(rydmike): Add theming for NavigationDrawerThemeData.
+    return const NavigationDrawerThemeData();
   }
 
   /// An opinionated [NavigationRailThemeData] with simpler API.

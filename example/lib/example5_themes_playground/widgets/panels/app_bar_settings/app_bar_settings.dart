@@ -571,6 +571,33 @@ class AppBarSettings extends StatelessWidget {
             ),
           ),
         ],
+        ColorSchemePopupMenu(
+          title: const Text('Background color for light and dark mode'),
+          labelForDefault: 'default (surface)',
+          index: controller.bottomAppBarSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setBottomAppBarSchemeColor(null);
+                  } else {
+                    controller
+                        .setBottomAppBarSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        // TODO(rydmike): Add M3 bug info link.
+        const ListTile(
+          isThreeLine: true,
+          dense: true,
+          title: Text('Background color issue'),
+          subtitle: Text('In Flutter 3.7 and 3.7.1 the BottomAppBar color '
+              'cannot be changed due to the issue described in FIX PR #117082. '
+              'The fix has not landed in Flutter 3.7.1 stable.\n'
+              'The color of items in a BottomAppBar cannot be themed, if you '
+              'select a color that requires other contrast color than surface '
+              'color, you will have to color content on widget level.'),
+        ),
         const BottomAppBarShowcase(),
         const SizedBox(height: 16),
       ],

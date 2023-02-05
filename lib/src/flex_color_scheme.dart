@@ -5830,6 +5830,7 @@ class FlexColorScheme with Diagnosticable {
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
             backgroundAlpha: subTheme.inputDecoratorBackgroundAlpha,
+            prefixIconSchemeColor: subTheme.inputDecoratorPrefixIconSchemeColor,
             focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
                 subTheme.thickBorderWidth,
             focusedHasBorder: subTheme.inputDecoratorFocusedHasBorder,
@@ -6119,13 +6120,15 @@ class FlexColorScheme with Diagnosticable {
         actionsIconTheme: IconThemeData(color: appBarIconColor),
         systemOverlayStyle: systemOverlayStyle,
       ),
+      //
       // badgeTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      //
       // bannerTheme:  NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // BottomAppBar Theme.
       bottomAppBarTheme: FlexSubThemes.bottomAppBarTheme(
         colorScheme: colorScheme,
-        backgroundSchemeColor: null,
+        backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
         elevation:
             bottomAppBarElevation ?? (useMaterial3 ? null : appBarElevation),
       ),
@@ -6307,13 +6310,12 @@ class FlexColorScheme with Diagnosticable {
               : null,
       //
       // Drawer Theme.
-      // TODO(rydmike): Add width as a themed property.
       drawerTheme: useSubThemes
           ? FlexSubThemes.drawerTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
               radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
-              // width: 450,
+              width: subTheme.drawerWidth,
               elevation: subTheme.drawerElevation,
               // TODO(rydmike): check it is not needed, resolve happens later?
               // directionality: Directionality.of(context),
@@ -6434,10 +6436,16 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // NavigationDrawerTheme Theme.
-      // TODO(rydmike): Width of indicator to match Drawer width by default.
-      navigationDrawerTheme: const NavigationDrawerThemeData(
-        indicatorSize: Size(double.infinity, 56),
-      ),
+      navigationDrawerTheme: useSubThemes
+          ? FlexSubThemes.navigationDrawerTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
+              indicatorWidth: subTheme.drawerIndicatorWidth,
+              indicatorBorderRadius:
+                  subTheme.drawerRadius ?? subTheme.defaultRadius,
+              indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
+            )
+          : null,
       //
       // NavigationRail Theme.
       navigationRailTheme: useSubThemes

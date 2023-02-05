@@ -245,6 +245,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,
+            inputDecoratorPrefixIconSchemeColor:
+                controller.inputDecoratorPrefixIconSchemeColor,
             // FAB settings.
             // Set to false to keep using M2 style FAB and ignore
             // M3 type default and global radius on the FAB, it thus
@@ -288,6 +290,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.appBarBackgroundSchemeColorLight,
             appBarScrolledUnderElevation:
                 controller.appBarScrolledUnderElevationLight,
+            // BottomAppBarSettings.
+            bottomAppBarSchemeColor: controller.bottomAppBarSchemeColor,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
@@ -295,6 +299,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             drawerRadius: controller.drawerBorderRadius,
             drawerElevation: controller.drawerElevation,
             drawerBackgroundSchemeColor: controller.drawerBackgroundSchemeColor,
+            drawerWidth: controller.drawerWidth,
+            drawerIndicatorWidth: controller.drawerIndicatorWidth,
+            drawerIndicatorBorderRadius: controller.drawerBorderRadius,
+            drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
             // BottomSheet settings.
             bottomSheetElevation: controller.bottomSheetElevation,
             bottomSheetModalElevation: controller.bottomSheetModalElevation,

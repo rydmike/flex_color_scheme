@@ -1589,7 +1589,8 @@ class BottomAppBarShowcase extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Text(
               'Flutter M2 past default color is ThemeData.bottomAppBarColor '
-              '(deprecated) now colorScheme.surface and elevation 8. '
+              '(deprecated in Flutter 3.7) now colorScheme.surface and '
+              'elevation 8. '
               'In M3 it defaults to to colorScheme.surface color, elevation 3, '
               'no shadow, but with surface elevation tint.',
               style: denseBody,
