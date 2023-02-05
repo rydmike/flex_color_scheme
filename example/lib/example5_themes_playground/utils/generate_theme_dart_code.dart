@@ -169,9 +169,13 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '  bottomAppBarElevation: ${controller.bottomAppBarElevationDark!.toStringAsFixed(1)},\n'
       : '';
-  final String tabBarStyle = controller.tabBarStyle != FlexTabBarStyle.forAppBar
-      ? '  tabBarStyle: ${controller.tabBarStyle},\n'
-      : '';
+  final String tabBarStyle = controller.tabBarStyle == null ||
+          (controller.tabBarStyle == FlexTabBarStyle.forAppBar &&
+              !controller.useMaterial3) ||
+          (controller.tabBarStyle == FlexTabBarStyle.flutterDefault &&
+              controller.useMaterial3)
+      ? ''
+      : '  tabBarStyle: ${controller.tabBarStyle},\n';
   final String lightIsWhite = controller.lightIsWhite
       ? '  lightIsWhite: ${controller.lightIsWhite},\n'
       : '';

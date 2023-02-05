@@ -296,7 +296,7 @@ class FlexColorScheme with Diagnosticable {
     this.onBackground,
     this.onError,
     this.surfaceTint,
-    this.tabBarStyle = FlexTabBarStyle.forAppBar,
+    this.tabBarStyle,
     this.appBarElevation = 0,
     this.bottomAppBarElevation,
     this.tooltipsMatchBackground = false,
