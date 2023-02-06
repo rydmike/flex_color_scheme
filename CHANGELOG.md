@@ -44,7 +44,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Add NavigationDrawer width and selected item colors. 
 - Maybe: Add some theming options for the new MenuBar theme.  
 - MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Review and fix test coverage. Test new colors too.
+- MUST DO: Review and fix test coverage.
+  - All new sub-themes and new states.  
+  - Test new colors.
+  - Test usedColors 7.
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.

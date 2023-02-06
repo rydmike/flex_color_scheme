@@ -725,6 +725,21 @@ void main() {
     });
 
     test(
+        'FSC1.17-7: GIVEN a FlexSchemeColor.effective(SchemeColors, 7) '
+        'EXPECT equal to SchemeColors with primary container, '
+        'Secondary container and tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 7),
+        m1Full.copyWith(
+          primaryContainer: m1Full.primary.darken(kDarkenPrimaryContainer),
+          secondaryContainer:
+              m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
+          tertiaryContainer: m1Full.tertiary.lighten(kDarkenSecondaryContainer),
+        ),
+      );
+    });
+
+    test(
         'FSC1.18: GIVEN a FlexSchemeColor.effective(SchemeColors, 6) '
         'with brightness:light for M3 like scheme '
         'EXPECT it to be equal to SchemeColors ', () {
@@ -808,6 +823,21 @@ void main() {
           tertiary: m1Full.primary.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.23-7: GIVEN a FlexSchemeColor.effective(SchemeColors, 7) '
+        'with brightness:light for M3 like scheme '
+        'EXPECT equal to SchemeColors with primary container, '
+        'Secondary container and tertiaryContainer computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1Full, 7, brightness: Brightness.light),
+        m1Full.copyWith(
+          primaryContainer: m1Full.primary.blend(Colors.white, 60),
+          secondaryContainer: m1Full.secondary.blend(Colors.white, 60),
+          tertiaryContainer: m1Full.tertiary.blend(Colors.white, 80),
         ),
       );
     });
@@ -911,6 +941,21 @@ void main() {
           tertiary: m1FullD.primary.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
+        ),
+      );
+    });
+
+    test(
+        'FSC1.29-7: GIVEN a FlexSchemeColor.effective(SchemeColors, 7) '
+        'with brightness:dark for M3 like scheme '
+        'EXPECT equal to SchemeColors with primary container, '
+        'Secondary container and tertiaryContainer M3 computed.', () {
+      expect(
+        FlexSchemeColor.effective(m1FullD, 7, brightness: Brightness.dark),
+        m1FullD.copyWith(
+          primaryContainer: m1FullD.primary.blend(Colors.black, 60),
+          secondaryContainer: m1FullD.secondary.blend(Colors.black, 60),
+          tertiaryContainer: m1FullD.tertiary.blend(Colors.black, 80),
         ),
       );
     });
