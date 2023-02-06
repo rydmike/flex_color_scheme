@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// An example that show what an app using the theme might look like
-/*
-Flutter UI
-flutterui.design
-----------------
-lib/apps/simple_ecommerce.dart
-*/
+// An example shop that show what an app using the theme might look like.
+//
+// This UI I slight modification and modernization of of Flutter UI
+// E-Commerce application https://flutterui.design/components/ecommerce
+// Original version made by Zachery Gentry, zach@flutterui.design @zacherygentry
+// Thanks, rights and credits belong to Zachery for letting me use the shop
+// example app in the Themes Playground.
 
 const String manLookRightImageUrl =
     'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
