@@ -42,7 +42,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Add TextFiled Demo setting example(s).
 - Add TextField prefixIcon color, M2 default to base, M3 Default to onSurface.
 - Add NavigationDrawer width and selected item colors. 
-- Maybe: Add some theming options for the new MenuBar theme.  
+- Maybe: Add some theming options for the new MenuBar theme.
+- ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - All new sub-themes and new states.  
@@ -51,7 +52,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
-  - ListTile transparent added to core defaults, may not be needed. Review before release.
+
   - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
   - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
 - After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
