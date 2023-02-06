@@ -6,8 +6,8 @@ import '../../../../shared/widgets/universal/svg_asset_image.dart';
 import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 
 /// An example that show what an app using the theme might look like
-class AppExampleHome extends StatelessWidget {
-  const AppExampleHome({super.key, required this.controller});
+class AppExampleChat extends StatelessWidget {
+  const AppExampleChat({super.key, required this.controller});
 
   final ThemeController controller;
 
@@ -15,7 +15,7 @@ class AppExampleHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme Demo'),
+        title: const Text('Chatter'),
       ),
       drawer: AppExampleDrawer(controller: controller),
       bottomNavigationBar: const AppExampleNavigationBar(),
@@ -57,7 +57,7 @@ class _AppExampleDrawerState extends State<AppExampleDrawer> {
         ),
         Center(
           child: Text(
-            'Plants Inc',
+            'Chatter',
             style:
                 textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold),
           ),
@@ -72,12 +72,12 @@ class _AppExampleDrawerState extends State<AppExampleDrawer> {
         ),
         const NavigationDrawerDestination(
           icon: Icon(Icons.beenhere),
-          label: Text('Tasks'),
+          label: Text('Notifications'),
         ),
         const Divider(),
         const NavigationDrawerDestination(
-          icon: Icon(Icons.create_new_folder),
-          label: Text('Folder'),
+          icon: Icon(Icons.image),
+          label: Text('Images'),
         ),
         const NavigationDrawerDestination(
           icon: Icon(Icons.logout),
@@ -135,11 +135,11 @@ class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
         ),
         NavigationDestination(
           icon: Icon(Icons.beenhere),
-          label: 'Tasks',
+          label: 'Notifications',
         ),
         NavigationDestination(
-          icon: Icon(Icons.create_new_folder),
-          label: 'Folder',
+          icon: Icon(Icons.image),
+          label: 'Images',
         ),
       ],
     );

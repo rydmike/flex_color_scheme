@@ -2,8 +2,9 @@ import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import 'app_example_home.dart';
+import 'app_example_chat.dart';
 import 'app_example_login.dart';
+import 'app_example_shop.dart';
 
 /// An example that show what an app using the theme might look like
 class AppExample extends StatelessWidget {
@@ -62,11 +63,11 @@ class AppExample extends StatelessWidget {
             ),
             AppExampleFrame(
               width: controller.deviceSize,
-              child: AppExampleHome(controller: controller),
+              child: const AppExampleShop(),
             ),
             AppExampleFrame(
               width: controller.deviceSize,
-              child: AppExampleHome(controller: controller),
+              child: AppExampleChat(controller: controller),
             ),
           ],
         ),

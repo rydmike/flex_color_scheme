@@ -159,8 +159,8 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.font_download,
   ),
   PanelItem(
-    panelLabel: 'App Example',
-    buttonLabel: 'App\nExample',
+    panelLabel: 'Theme Simulator',
+    buttonLabel: 'Theme\nSimulator',
     icon: Icons.phone_iphone,
   ),
   PanelItem(
