@@ -4556,7 +4556,8 @@ class FlexColorScheme with Diagnosticable {
           break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
-              effectiveColors.appBarColor ?? effectiveColors.primary;
+              effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
+                  effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
           break;
         case null:
           // Style was null, if Opacity used, apply to surface for M2 & M3 mode.

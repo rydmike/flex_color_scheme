@@ -4376,4 +4376,136 @@ void main() {
       equals(colorScheme.primaryContainer),
     );
   });
+  test(
+      'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using not using subTheme but bottomAppBarElevation 2 '
+      'EXPECT bottom appbar theme with elevation 2', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      bottomAppBarElevation: 2,
+    );
+    final ThemeData theme = fcs.toTheme;
+    expect(
+      theme.bottomAppBarTheme.elevation,
+      equals(2),
+    );
+  });
+  test(
+      'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using not using subTheme and bottomAppBar elevation none', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+    );
+    final ThemeData theme = fcs.toTheme;
+    expect(
+      theme.bottomAppBarTheme.elevation,
+      equals(null),
+    );
+  });
+  test(
+      'FCS7.111a GIVEN a FlexColorScheme.light with useMaterial3:true '
+      'and using not using subTheme but appBarOpacity 0.5 '
+      'EXPECT bottom appbar background with surface opacity 0.5', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      appBarOpacity: 0.5,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.surface.withOpacity(0.5)),
+    );
+  });
+  test(
+      'FCS7.111b GIVEN a FlexColorScheme.light with useMaterial3:false '
+      'and using not using subTheme but appBarOpacity 0.5 '
+      'EXPECT bottom appbar background with primary opacity 0.5', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: false,
+      appBarOpacity: 0.5,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.primary.withOpacity(0.5)),
+    );
+  });
+  test(
+      'FCS7.111c GIVEN a FlexColorScheme.dark with useMaterial3:true '
+      'and using not using subTheme but appBarOpacity 0.5 '
+      'EXPECT bottom appbar background with surface opacity 0.5', () {
+    final FlexColorScheme fcs = FlexColorScheme.dark(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: true,
+      appBarOpacity: 0.5,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.surface.withOpacity(0.5)),
+    );
+  });
+  test(
+      'FCS7.111d GIVEN a FlexColorScheme.dark with useMaterial3:true '
+      'and using not using subTheme but appBarOpacity 0.5 '
+      'EXPECT bottom appbar background with surface opacity 0.5', () {
+    final FlexColorScheme fcs = FlexColorScheme.dark(
+      scheme: FlexScheme.materialBaseline,
+      useMaterial3: false,
+      appBarOpacity: 0.5,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.surface.withOpacity(0.5)),
+    );
+  });
+  test(
+      'FCS7.111e GIVEN a FlexColorScheme.light with useMaterial3:false '
+      'and using not using subTheme but appBarOpacity 0.5 '
+      'EXPECT bottom appbar background with primary opacity 0.5', () {
+    final FlexColorScheme fcs = FlexColorScheme.light(
+      colors: const FlexSchemeColor(
+        primary: Colors.blue,
+        secondary: Colors.red,
+      ),
+      useMaterial3: false,
+      appBarOpacity: 0.5,
+      appBarStyle: FlexAppBarStyle.custom,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.primary.withOpacity(0.5)),
+    );
+  });
+  test(
+      'FCS7.111f GIVEN a FlexColorScheme.dark with useMaterial3:false '
+      'and using not using subTheme but appBarOpacity 0.6 '
+      'EXPECT bottom appbar background with primary opacity 0.6', () {
+    final FlexColorScheme fcs = FlexColorScheme.dark(
+      colors: const FlexSchemeColor(
+        primary: Colors.blue,
+        secondary: Colors.red,
+      ),
+      useMaterial3: false,
+      appBarOpacity: 0.6,
+      appBarStyle: FlexAppBarStyle.custom,
+    );
+    final ThemeData theme = fcs.toTheme;
+    final ColorScheme colorScheme = fcs.toScheme;
+    expect(
+      theme.appBarTheme.backgroundColor,
+      equals(colorScheme.primary.withOpacity(0.6)),
+    );
+  });
 }
