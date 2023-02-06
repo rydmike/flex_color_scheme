@@ -459,6 +459,14 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputDecoratorPrefixIconSchemeColor = null;
 
+  // Key used to read and save inputDecoratorPrefixIconDarkSchemeColor value.
+  static const String keyInputDecoratorPrefixIconDarkSchemeColor =
+      'inputDecoratorPrefixIconDarkSchemeColor';
+  // Default for the inputDecoratorPrefixIconDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorPrefixIconDarkSchemeColor =
+      null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 

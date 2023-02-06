@@ -2146,7 +2146,7 @@ class FlexSubThemes {
 
     /// The icon color of the prefixIcon in a focused [InputDecoration].
     ///
-    /// If not defined defaults to [SchemeColor.primary] in FCS M2 and to
+    /// If not defined defaults to [baseSchemeColor] in FCS M2 and to
     /// [SchemeColor.onSurface] in FCS M3.
     final SchemeColor? prefixIconSchemeColor,
 
@@ -2280,6 +2280,13 @@ class FlexSubThemes {
               ? colorScheme.surfaceVariant.withAlpha(effectiveAlpha)
               : baseColor.withAlpha(effectiveAlpha);
         });
+
+    // PrefixIconColor
+    final SchemeColor prefixFallback = useMaterial3
+        ? SchemeColor.onSurface
+        : baseSchemeColor ?? SchemeColor.primary;
+    final Color prefixIconColor =
+        schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
 
     // Some Flutter "magic" theme colors from ThemeData.
     final Color hintColor =
@@ -2441,7 +2448,7 @@ class FlexSubThemes {
               : colorScheme.onSurface.withOpacity(0.38);
         }
         if (states.contains(MaterialState.focused)) {
-          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+          return prefixIconColor;
         }
         return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),

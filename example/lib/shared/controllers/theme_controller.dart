@@ -248,6 +248,9 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorPrefixIconSchemeColor = await _themeService.load(
         Store.keyInputDecoratorPrefixIconSchemeColor,
         Store.defaultInputDecoratorPrefixIconSchemeColor);
+    _inputDecoratorPrefixIconDarkSchemeColor = await _themeService.load(
+        Store.keyInputDecoratorPrefixIconDarkSchemeColor,
+        Store.defaultInputDecoratorPrefixIconDarkSchemeColor);
     //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
@@ -737,6 +740,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorFocusedBorderWidth, false);
     setInputDecoratorPrefixIconSchemeColor(
         Store.defaultInputDecoratorPrefixIconSchemeColor, false);
+    setInputDecoratorPrefixIconDarkSchemeColor(
+        Store.defaultInputDecoratorPrefixIconDarkSchemeColor, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -997,6 +1002,9 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorFocusedHasBorder(true, false);
     setInputDecoratorUnfocusedHasBorder(true, false);
     setInputDecoratorUnfocusedBorderIsColored(false, false);
+
+    setInputDecoratorPrefixIconSchemeColor(null, false);
+    setInputDecoratorPrefixIconDarkSchemeColor(null, false);
     notifyListeners();
   }
 
@@ -1845,6 +1853,18 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keyInputDecoratorPrefixIconSchemeColor, value));
+  }
+
+  late SchemeColor? _inputDecoratorPrefixIconDarkSchemeColor;
+  SchemeColor? get inputDecoratorPrefixIconDarkSchemeColor =>
+      _inputDecoratorPrefixIconDarkSchemeColor;
+  void setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorPrefixIconDarkSchemeColor) return;
+    _inputDecoratorPrefixIconDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorPrefixIconDarkSchemeColor, value));
   }
 
   // AppBar SETTINGS.

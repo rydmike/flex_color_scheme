@@ -191,7 +191,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,
             inputDecoratorPrefixIconSchemeColor:
-                controller.inputDecoratorPrefixIconSchemeColor,
+                controller.inputDecoratorPrefixIconDarkSchemeColor,
             // FAB settings.
             fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,

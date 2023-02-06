@@ -166,6 +166,44 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorIsFilled
               : null,
         ),
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme focused prefix icon color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (onSurface)'
+                : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
+            index: controller.inputDecoratorPrefixIconSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorPrefixIconSchemeColor(null);
+                    } else {
+                      controller.setInputDecoratorPrefixIconSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme focused prefix icon color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (onSurface)'
+                : 'default (primary)',
+            index:
+                controller.inputDecoratorPrefixIconDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller
+                          .setInputDecoratorPrefixIconDarkSchemeColor(null);
+                    } else {
+                      controller.setInputDecoratorPrefixIconDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,

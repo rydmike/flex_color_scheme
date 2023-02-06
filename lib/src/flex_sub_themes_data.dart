@@ -1209,7 +1209,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The icon color of the prefixIcon in a focused [InputDecoration].
   ///
-  /// If not defined defaults to [SchemeColor.primary] in FCS M2 and to
+  /// If not defined, defaults to [inputDecoratorSchemeColor] in FCS M2 and to
   /// [SchemeColor.onSurface] in FCS M3.
   final SchemeColor? inputDecoratorPrefixIconSchemeColor;
 

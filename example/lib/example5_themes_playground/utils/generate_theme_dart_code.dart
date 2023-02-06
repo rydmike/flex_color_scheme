@@ -530,6 +530,16 @@ String generateThemeDartCode(ThemeController controller) {
           controller.inputDecoratorFocusedHasBorder
       ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
+  final String inputDecoratorPrefixIconSchemeColor = controller
+              .inputDecoratorPrefixIconSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconSchemeColor},\n';
+  final String inputDecoratorPrefixIconDarkSchemeColor = controller
+              .inputDecoratorPrefixIconDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconDarkSchemeColor},\n';
   //
   // Fab and chip, snack, card, and popup setup CODE
   //
@@ -964,6 +974,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderWidth'
           '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
+          '$inputDecoratorPrefixIconSchemeColor'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
@@ -1126,6 +1137,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBorderWidth'
           '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
+          '$inputDecoratorPrefixIconDarkSchemeColor'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
