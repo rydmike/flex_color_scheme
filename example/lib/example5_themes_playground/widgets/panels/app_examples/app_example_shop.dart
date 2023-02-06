@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../shared/utils/app_scroll_behavior.dart';
+
 // An example shop that show what an app using the theme might look like.
 //
 // This UI I slight modification and modernization of of Flutter UI
@@ -54,51 +56,54 @@ class _AppExampleShopState extends State<AppExampleShop> {
           .toList();
     }
     final ThemeData theme = Theme.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.scaffoldBackgroundColor,
-        title: SearchBar(
-          onChanged: setSearchString,
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: theme.scaffoldBackgroundColor,
+          title: SearchBar(
+            onChanged: setSearchString,
+          ),
+          actions: const <Widget>[
+            CartAppBarAction(),
+          ],
         ),
-        actions: const <Widget>[
-          CartAppBarAction(),
-        ],
+        body: searchString.isNotEmpty
+            ? GridView.count(
+                padding: listViewPadding,
+                crossAxisCount: 2,
+                mainAxisSpacing: 24,
+                crossAxisSpacing: 24,
+                childAspectRatio: .75,
+                children: searchResultTiles,
+              )
+            : ListView(
+                padding: listViewPadding,
+                children: <Widget>[
+                  Text(
+                    'Shop by Category',
+                    style: theme.textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 16),
+                  CategoryTile(
+                    imageUrl: manLookRightImageUrl,
+                    category: mensCategory,
+                    imageAlignment: Alignment.topCenter,
+                  ),
+                  const SizedBox(height: 16),
+                  CategoryTile(
+                    imageUrl: womanLookLeftImageUrl,
+                    category: womensCategory,
+                    imageAlignment: Alignment.topCenter,
+                  ),
+                  const SizedBox(height: 16),
+                  CategoryTile(
+                    imageUrl: dogImageUrl,
+                    category: petsCategory,
+                  ),
+                ],
+              ),
       ),
-      body: searchString.isNotEmpty
-          ? GridView.count(
-              padding: listViewPadding,
-              crossAxisCount: 2,
-              mainAxisSpacing: 24,
-              crossAxisSpacing: 24,
-              childAspectRatio: .75,
-              children: searchResultTiles,
-            )
-          : ListView(
-              padding: listViewPadding,
-              children: <Widget>[
-                Text(
-                  'Shop by Category',
-                  style: theme.textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 16),
-                CategoryTile(
-                  imageUrl: manLookRightImageUrl,
-                  category: mensCategory,
-                  imageAlignment: Alignment.topCenter,
-                ),
-                const SizedBox(height: 16),
-                CategoryTile(
-                  imageUrl: womanLookLeftImageUrl,
-                  category: womensCategory,
-                  imageAlignment: Alignment.topCenter,
-                ),
-                const SizedBox(height: 16),
-                CategoryTile(
-                  imageUrl: dogImageUrl,
-                  category: petsCategory,
-                ),
-              ],
-            ),
     );
   }
 }
@@ -416,12 +421,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
           CartAppBarAction(),
         ],
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 18),
-        itemCount: productRows.length,
-        itemBuilder: (_, int index) => productRows[index],
-        separatorBuilder: (_, int index) => const SizedBox(
-          height: 18,
+      body: ScrollConfiguration(
+        behavior: const DragScrollBehavior(),
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 18),
+          itemCount: productRows.length,
+          itemBuilder: (_, int index) => productRows[index],
+          separatorBuilder: (_, int index) => const SizedBox(
+            height: 18,
+          ),
         ),
       ),
     );
@@ -640,13 +648,16 @@ class _CartScreenState extends State<CartScreen> {
         children: <Widget>[
           if (orderItemRows.isNotEmpty)
             Expanded(
-              child: ListView.separated(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                itemCount: orderItemRows.length,
-                itemBuilder: (_, int index) => orderItemRows[index],
-                separatorBuilder: (_, int index) => const SizedBox(
-                  height: 16,
+              child: ScrollConfiguration(
+                behavior: const DragScrollBehavior(),
+                child: ListView.separated(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  itemCount: orderItemRows.length,
+                  itemBuilder: (_, int index) => orderItemRows[index],
+                  separatorBuilder: (_, int index) => const SizedBox(
+                    height: 16,
+                  ),
                 ),
               ),
             )
