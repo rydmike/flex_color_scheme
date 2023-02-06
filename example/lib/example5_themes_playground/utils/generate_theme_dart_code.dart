@@ -700,6 +700,19 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    drawerBackgroundSchemeColor: ${controller.drawerBackgroundSchemeColor},\n'
       : '';
+  final String drawerWidth = controller.drawerWidth != null
+      ? '    drawerWidth: ${controller.drawerWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerIndicatorBorderRadius = controller
+              .drawerIndicatorBorderRadius !=
+          null
+      ? '    drawerIndicatorBorderRadius: ${controller.drawerIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerIndicatorSchemeColor = controller
+              .drawerIndicatorSchemeColor !=
+          null
+      ? '    drawerIndicatorSchemeColor: ${controller.drawerIndicatorSchemeColor},\n'
+      : '';
   //
   // BottomNavigationBar setup CODE
   //
@@ -1018,6 +1031,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$drawerBorderRadius'
           '$drawerElevation'
           '$drawerBackgroundSchemeColor'
+          '$drawerWidth'
+          '$drawerIndicatorBorderRadius'
+          '$drawerIndicatorSchemeColor'
           //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'
@@ -1181,6 +1197,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$drawerBorderRadius'
           '$drawerElevation'
           '$drawerBackgroundSchemeColor'
+          '$drawerWidth'
+          '$drawerIndicatorBorderRadius'
+          '$drawerIndicatorSchemeColor'
           //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'

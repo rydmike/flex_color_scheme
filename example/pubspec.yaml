@@ -7,6 +7,10 @@ environment:
   flutter: '>=3.7.0'
 
 dependencies:
+  # Prebuilt transition animations (by Google, flutter.dev).
+  # https://pub.dev/packages/animations
+  animations: ^2.0.7
+
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
   # https://pub.dev/packages/cupertino_icons

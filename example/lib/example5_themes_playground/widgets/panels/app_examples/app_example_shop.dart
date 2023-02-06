@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -490,39 +491,49 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return GestureDetector(
-      onTap: () {
-        unawaited(SystemSound.play(SystemSoundType.click));
-        _pushScreen(
-          context: context,
-          screen: ProductScreen(product: product),
+    return OpenContainer(
+      tappable: false,
+      closedElevation: 0,
+      openElevation: 0,
+      closedColor: Colors.transparent,
+      openColor: Colors.transparent,
+      closedShape: const RoundedRectangleBorder(),
+      closedBuilder: (BuildContext context, void Function() openContainer) {
+        return GestureDetector(
+          onTap: () {
+            unawaited(SystemSound.play(SystemSoundType.click));
+            openContainer();
+          },
+          child: SizedBox(
+            width: 150,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ProductImage(product: product),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  product.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleSmall,
+                ),
+                const Spacer(),
+                Text(
+                  '\$${product.cost}',
+                  style: theme.textTheme.titleMedium!.copyWith(
+                      color: theme.colorScheme.tertiary,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ),
         );
       },
-      child: SizedBox(
-        width: 150,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ProductImage(product: product),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              product.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.titleSmall,
-            ),
-            const Spacer(),
-            Text(
-              '\$${product.cost}',
-              style: theme.textTheme.titleMedium!.copyWith(
-                  color: theme.colorScheme.tertiary,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-      ),
+      openBuilder: (BuildContext context, void Function() action) =>
+          ProductScreen(product: product),
+      // ),
     );
   }
 }
@@ -894,8 +905,6 @@ Category petsCategory = Category(title: 'Pets', selections: <String>[
   'Toys',
   'Treats',
 ]);
-
-final Color kGreyBackground = Colors.grey[200]!;
 
 List<Product> products = <Product>[
   Product(
