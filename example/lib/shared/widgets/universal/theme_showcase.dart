@@ -23,6 +23,7 @@ class ThemeShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         const TextInputField(),
@@ -2543,6 +2544,27 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final DrawerThemeData drawerTheme = theme.drawerTheme;
+    final double drawerWidth = drawerTheme.width ??
+        (useMaterial3
+            ? drawerTheme.width == null
+                ? 304
+                : 360
+            : 304);
+    final double indicatorSize =
+        (theme.navigationDrawerTheme.indicatorSize?.width ??
+                (drawerWidth - 2 * 12)) -
+            76;
+    // The value 76 comes from M3 specs
+    // https://m3.material.io/components/navigation-drawer/specs where
+    // * 16, space before first icon
+    // * 24, icon width
+    // * 12, space after icon
+    // * 24, space after text in indicator
+
+    debugPrint('indicatorSize: $indicatorSize');
+
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -2551,6 +2573,7 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -2567,54 +2590,52 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
             style: denseBody,
           ),
         ),
-        SizedBox(
-          height: 280,
-          child: Row(
-            children: <Widget>[
-              MediaQuery.removePadding(
-                context: context,
-                removeBottom: true,
-                removeTop: true,
-                child: NavigationDrawer(
-                  selectedIndex: selectedIndex,
-                  onDestinationSelected: (int value) {
-                    setState(() {
-                      selectedIndex = value;
-                    });
-                  },
-                  children: <Widget>[
-                    const SizedBox(height: 16),
-                    const NavigationDrawerDestination(
-                      icon: Badge(
-                        label: Text('26'),
-                        child: Icon(Icons.chat_bubble),
-                      ),
-                      label: Text('Chat'),
-                    ),
-                    const NavigationDrawerDestination(
-                      icon: Icon(Icons.beenhere),
-                      label: Text('Tasks'),
-                    ),
-                    const Divider(),
-                    NavigationDrawerDestination(
-                      icon: const Icon(Icons.create_new_folder),
-                      label: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 200),
-                        child: const Text(
-                          'Folder, item with long text truncated with ellipses',
-                          softWrap: false,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                    const NavigationDrawerDestination(
-                      icon: Icon(Icons.logout),
-                      label: Text('Logout'),
-                    ),
-                  ],
+        MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
+          removeTop: true,
+          removeLeft: true,
+          removeRight: true,
+          child: SizedBox(
+            height: 280,
+            child: NavigationDrawer(
+              selectedIndex: selectedIndex,
+              onDestinationSelected: (int value) {
+                setState(() {
+                  selectedIndex = value;
+                });
+              },
+              children: <Widget>[
+                const SizedBox(height: 16),
+                const NavigationDrawerDestination(
+                  icon: Badge(
+                    label: Text('26'),
+                    child: Icon(Icons.chat_bubble),
+                  ),
+                  label: Text('Chat'),
                 ),
-              ),
-            ],
+                const NavigationDrawerDestination(
+                  icon: Icon(Icons.beenhere),
+                  label: Text('Tasks'),
+                ),
+                const Divider(),
+                NavigationDrawerDestination(
+                  icon: const Icon(Icons.create_new_folder),
+                  label: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: indicatorSize),
+                    child: const Text(
+                      'Folder, item with long text truncated with ellipses',
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                const NavigationDrawerDestination(
+                  icon: Icon(Icons.logout),
+                  label: Text('Logout'),
+                ),
+              ],
+            ),
           ),
         ),
       ],

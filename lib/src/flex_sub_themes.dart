@@ -1550,7 +1550,7 @@ class FlexSubThemes {
     // /// Defaults to LTR if not defined.
     // final TextDirection? direction,
   }) {
-    // Get selected background color, defaults to primary.
+    // Get selected background color, defaults to surface.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
@@ -2649,7 +2649,7 @@ class FlexSubThemes {
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
+    /// blend and opacity, if [mutedUnselectedLabel] is true.
     ///
     /// If [useFlutterDefaults] is true, and this property and all other
     /// label modifying properties are undefined, including the text style,
@@ -3023,14 +3023,64 @@ class FlexSubThemes {
     /// https://m3.material.io/components/navigation-drawer/specs
     final double? indicatorBorderRadius,
 
+    /// The TextStyle of the labels.
+    ///
+    /// You would pass in Theme.of(context).textTheme.labelLarge
+    /// for correct M3 style.
+    final TextStyle? textStyle,
+
     /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
     /// uses as as its background color on the selection indicator.
     ///
     /// If undefined, defaults to [SchemeColor.secondaryContainer].
     final SchemeColor? indicatorSchemeColor,
   }) {
-    // TODO(rydmike): Add theming for NavigationDrawerThemeData.
-    return const NavigationDrawerThemeData();
+    // Get selected background color, defaults to surface.
+    final Color backgroundColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onBackgroundColor = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surfaceVariant, colorScheme);
+
+    // Selected indicator color
+    final Color indicatorColor = schemeColor(
+        indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
+    final Color onIndicatorColor = schemeColorPair(
+        indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
+
+    // Indicator size based on provided width
+    final Size indicatorSize = Size(indicatorWidth ?? 336, 56);
+
+    // TextStyle
+    final TextStyle style = textStyle ?? const TextStyle();
+
+    return NavigationDrawerThemeData(
+      backgroundColor: backgroundColor,
+      indicatorColor: indicatorColor,
+      indicatorSize: indicatorSize,
+      indicatorShape: indicatorBorderRadius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(indicatorBorderRadius),
+              ),
+            ),
+      labelTextStyle:
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        return style.apply(
+          color: states.contains(MaterialState.selected)
+              ? onIndicatorColor
+              : onBackgroundColor,
+        );
+      }),
+      iconTheme: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        return IconThemeData(
+          size: 24.0,
+          color: states.contains(MaterialState.selected)
+              ? onIndicatorColor
+              : onBackgroundColor,
+        );
+      }),
+    );
   }
 
   /// An opinionated [NavigationRailThemeData] with simpler API.

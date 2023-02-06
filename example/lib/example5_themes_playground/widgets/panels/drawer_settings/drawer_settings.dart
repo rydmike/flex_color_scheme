@@ -22,7 +22,18 @@ class DrawerSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
+    final String drawerIndicatorRadiusDefaultLabel =
+        controller.drawerIndicatorBorderRadius == null &&
+                controller.drawerIndicatorBorderRadius == null
+            ? 'default stadium'
+            : controller.drawerIndicatorBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                : '';
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
@@ -52,6 +63,60 @@ class DrawerSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Width'),
+          subtitle: Slider(
+            min: 199,
+            max: 500,
+            divisions: 301,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerWidth == null ||
+                        (controller.drawerWidth ?? 199) < 200
+                    ? useMaterial3
+                        ? 'default 360'
+                        : 'default 304'
+                    : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
+                : useMaterial3
+                    ? 'default 360'
+                    : 'default 304',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerWidth ?? 199
+                : 199,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDrawerWidth(
+                        value < 200 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'HEIGHT',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.drawerWidth == null ||
+                              (controller.drawerWidth ?? 199) < 200
+                          ? useMaterial3
+                              ? 'default 360'
+                              : 'default 304'
+                          : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
+                      : useMaterial3
+                          ? 'default 360'
+                          : 'default 304',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -85,7 +150,7 @@ class DrawerSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -98,9 +163,7 @@ class DrawerSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 16'
                           : 'default 0',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -155,6 +218,71 @@ class DrawerSettings extends StatelessWidget {
                       : useMaterial3
                           ? 'default 1'
                           : 'default 16',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Drawer indicator color'),
+          labelForDefault: 'default (secondaryContainer)',
+          index: controller.drawerIndicatorSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDrawerIndicatorSchemeColor(null);
+                  } else {
+                    controller.setDrawerIndicatorSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorBorderRadius == null ||
+                        (controller.drawerIndicatorBorderRadius ?? -1) < 0
+                    ? drawerIndicatorRadiusDefaultLabel
+                    : (controller.drawerIndicatorBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default (stadium)',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDrawerIndicatorBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.drawerIndicatorBorderRadius == null ||
+                              (controller.drawerIndicatorBorderRadius ?? -1) < 0
+                          ? drawerIndicatorRadiusDefaultLabel
+                          : (controller.drawerIndicatorBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default (stadium)',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

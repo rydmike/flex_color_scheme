@@ -6422,7 +6422,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
               radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
-              width: subTheme.drawerWidth,
+              width: subTheme.drawerWidth ?? (useMaterial3 ? 360 : 304),
               elevation: subTheme.drawerElevation,
               // TODO(rydmike): check it is not needed, resolve happens later?
               // directionality: Directionality.of(context),
@@ -6549,10 +6549,13 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.navigationDrawerTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
-              indicatorWidth: subTheme.drawerIndicatorWidth,
-              indicatorBorderRadius:
-                  subTheme.drawerRadius ?? subTheme.defaultRadius,
+              indicatorWidth: subTheme.drawerIndicatorWidth ??
+                  ((subTheme.drawerWidth ?? (useMaterial3 ? 360 : 304)) -
+                      2 * 12),
+              indicatorBorderRadius: subTheme.drawerIndicatorBorderRadius ??
+                  subTheme.defaultRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
+              textStyle: effectiveTextTheme.bodyLarge,
             )
           : null,
       //

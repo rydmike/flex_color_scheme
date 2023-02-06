@@ -187,13 +187,11 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   '${(navBarOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -295,7 +293,7 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'HEIGHT',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -306,9 +304,7 @@ class NavigationBarSettings extends StatelessWidget {
                               : 'default 62'
                           : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                       : 'default 80',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -360,7 +356,7 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   navBarHighlightOpacityEnabled
@@ -372,9 +368,7 @@ class NavigationBarSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 100%'
                           : 'default 24%',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

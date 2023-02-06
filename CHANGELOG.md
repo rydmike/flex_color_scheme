@@ -37,11 +37,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added visualizations of surface colors to the **Surface blends** panel.
 - Added color theming of BottomAppBar background color.
 - Added theming of InputDecorator prefixIcon color.
+- Added theming of Drawer, NavigationDrawer and indicator width, as well as indicator border radius and indicator item color. 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - Add TextFiled Demo setting example(s).
-- Add NavigationDrawer width and selected item colors. 
 - Maybe: Add some theming options for the new MenuBar theme.
 - ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
 - MUST DO: Review and do actionable TODOs in the code.
