@@ -171,6 +171,7 @@ class TextFieldSettings extends StatelessWidget {
             title: const Text('Light theme focused prefix icon color'),
             labelForDefault: controller.useMaterial3
                 ? 'default (onSurface)'
+                // ignore: lines_longer_than_80_chars
                 : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
             index: controller.inputDecoratorPrefixIconSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -189,7 +190,8 @@ class TextFieldSettings extends StatelessWidget {
             title: const Text('Dark theme focused prefix icon color'),
             labelForDefault: controller.useMaterial3
                 ? 'default (onSurface)'
-                : 'default (primary)',
+                // ignore: lines_longer_than_80_chars
+                : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
             index:
                 controller.inputDecoratorPrefixIconDarkSchemeColor?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
