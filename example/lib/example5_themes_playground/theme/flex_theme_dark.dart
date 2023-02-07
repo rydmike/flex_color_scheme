@@ -55,7 +55,14 @@ ThemeData flexThemeDark(ThemeController controller) {
       flexColorSchemeDark(controller, Colors.black).toScheme.surfaceTint;
   // Now we can use a function that takes our ThemeController and source color,
   // which is the effective primary color, the get the effective ThemeData.
-  return flexColorSchemeDark(controller, source).toTheme;
+  return flexColorSchemeDark(controller, source).toTheme.copyWith(
+        // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
+        // This is a fix to avoid the Flutter Drawer width bug and overflow bug
+        // when it animates via zero width in null default to widget default.
+        drawerTheme: controller.useSubThemes
+            ? null
+            : DrawerThemeData(width: controller.useMaterial3 ? 360 : 304),
+      );
 }
 
 /// Create the FlexColorScheme object represented by our current

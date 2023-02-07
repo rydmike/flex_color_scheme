@@ -45,14 +45,21 @@ ThemeData themeDataDark(ThemeController controller) {
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
     colorScheme: colorScheme,
+    // Use the colorScheme to make a nicer light theme.
+    primaryColor: colorScheme.primary,
+    canvasColor: colorScheme.background,
+    scaffoldBackgroundColor: colorScheme.background,
+    cardColor: colorScheme.surface,
+    dividerColor: colorScheme.outlineVariant,
+    dialogBackgroundColor: colorScheme.background,
+    indicatorColor: colorScheme.onSurface,
+
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
-    // ThemeData. We do this so created themes will be using the same features.
+    // ThemeData. We do this so created theme will be using the same features
+    // in the Playground app
     visualDensity: AppData.visualDensity,
     platform: controller.platform,
-    // The Flutter SDK new `useMaterial3` flag that is available in the UI,
-    // still does very little in Flutter 2.10.x, but in later versions we can
-    // use it to see what it changes.
     useMaterial3: controller.useMaterial3,
     typography: controller.useTextTheme
         ? Typography.material2021(platform: controller.platform)
@@ -61,5 +68,9 @@ ThemeData themeDataDark(ThemeController controller) {
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(colorScheme.surfaceTint, Brightness.dark),
     },
+    // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
+    // This is fix to avoid the Flutter Drawer width bug and overflow bug
+    // when it animates via zero width in null default to widget default.
+    drawerTheme: DrawerThemeData(width: controller.useMaterial3 ? 360 : 304),
   );
 }

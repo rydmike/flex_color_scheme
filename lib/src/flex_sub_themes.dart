@@ -1558,6 +1558,7 @@ class FlexSubThemes {
       backgroundColor: backgroundColor,
       elevation: elevation,
       width: width,
+      shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusDirectional.horizontal(
           end: Radius.circular(radius ?? kDrawerRadius),

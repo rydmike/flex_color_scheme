@@ -20,14 +20,16 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **CHANGE**
 
-- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. Flutter 3.7.1 and earlier via a bug defaults to `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color that Flutter uses as default, which looks quite nice. 
+- **Style breaking**: The FCS built-in computed none seeded values for `ColorScheme.outline` and `ColorScheme.outlineVariant` were modified. The new values are more in line with what you get with the M3 default seed algorithm, but plain grey-scale variants of them without any primary color blend. Technically light mode color for `outline` was changed from 30% lighten of light mode `onBackground` color to 45%, and `outlineVariant` from 60% lighten of `onBackground` to 75%. Likewise for the dark mode, but with darkening of the `onBackground` with the same percentage changes. The new values match the M3 design intent better. 
 
 - **Style breaking**: When enabling Material 3 and not enabling FCS sub-themes, and if no direct properties in FlexColorScheme raw constructor or its light and dark factories are defined in a way that requires creating a sub-theme to deliver the result, FlexColorScheme no longer creates any component sub-themes with none null properties in M3 mode. In previous versions, it did so in a few cases. This is no longer required to deliver the target starting point theme now that M3 is almost fully supported in Flutter 3.7. When using FlexColorScheme with Material3 set to true and its other properties at default values, and not enabling sub-themes, all component sub-theme will have null by default properties. When using Material 2, FlexColorScheme as before even when not enabling sub-themes, still creates the core component themes listed under core default in the documentation. This is done for FCS legacy reasons, to be able to deliver the default style it had before component sub-themes were a part of its offering. When `theme.scaffoldBackgroundColor` and maybe also some other color in current `ThemeData` are deprecated, FlexColorscheme will need to set those colors in their own sub-theme also in M3 mode to be able to continue to deliver e.g. surface blends that impacts scaffold background separately from ColorScheme colors, like it does today via `theme.scaffoldBackgroundColor` without using a component theme. Overall from this style breaking change there is only a visible change on the Material 2 type `BottomNavigationBar` in dark mode. When using the M3 mode, its dark mode icons have changed to the Flutter default style. When you opt in on FCS sub-themes in the M3 mode, it gets the same icon color as before, and as it still gets in the M2 FCS style, with or without sub-themes enabled.
 
 - **Style breaking**: When using Material 3, changed the default `NavigationBar` height from 62dp to 80dp, the 62dp default style is kept when using M2 in order to not break past default styles for M2 themes. The 80dp height is also the default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme a bit less opinionated compared to M3 spec. 
   - The new default also avoids on issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553) to be included in a future hot-fix for Flutter 3.7. Unfortunately, the fix did not arrive with the first hotfix 3.7.1. Maybe it will make it into the next one (3.7.2). The issue applies to M2 mode as well, thus as long as it is in effect the only way to get rid of it is to set the height to 80dp.
 
-**THEMES PLAYGROUND**
+- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. Flutter 3.7.1 and earlier via a bug defaults to `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color that Flutter uses as default, which looks quite nice.
+  
+  **THEMES PLAYGROUND**
 
 - Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
 - Added a feature to select which panel is shown in page view as the second panel. It is no longer locked to the code-view panel, it can be any of the available panels, enabling studying chosen panels side by side.
@@ -41,6 +43,14 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
+- FIX: Shortcut entry bug on MenuAnchor.
+- Playground: Bug workaround for width: Fallback to a theme with 3o4 to avoid Widget issue.   
+- Drawer indicator opacity.
+- Drawer indicator width to UI.
+- NavigationBar: Separate label and icon color in Playground. API already supports it.  
+- NEW: Bring shadows back (Default, None, Custom) ?
+- NEW: Remove tint elevation (Default, None, Custom) ?  
+- FIX: Drawer indicator radius, default not showing global default when using it.
 - Add TextFiled Demo setting example(s).
 - Maybe: Add some theming options for the new MenuBar theme.
 - ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  

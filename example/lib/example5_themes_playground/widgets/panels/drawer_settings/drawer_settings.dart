@@ -291,9 +291,9 @@ class DrawerSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const DrawerShowcase(),
-        const SizedBox(height: 16),
         const NavigationDrawerShowcase(),
+        const SizedBox(height: 16),
+        const DrawerShowcase(),
         const SizedBox(height: 32),
       ],
     );

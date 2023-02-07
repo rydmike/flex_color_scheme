@@ -88,8 +88,8 @@ void main() {
       onSurface: Color(0xff000000),
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xff4d4d4d),
-      outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
@@ -183,8 +183,8 @@ void main() {
       onSurface: Color(0xffffffff),
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Color(0xffffffff),
-      outline: Color(0xffb3b3b3),
-      outlineVariant: Color(0xff666666),
+      outline: Color(0xFF8C8C8C),
+      outlineVariant: Color(0xFF404040),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
@@ -248,8 +248,8 @@ void main() {
         onErrorContainer: Color(0xff000000),
         surfaceVariant: Color(0xffffffff),
         onSurfaceVariant: Color(0xff000000),
-        outline: Color(0xff4d4d4d),
-        outlineVariant: Color(0xff999999),
+        outline: Color(0xFF737373),
+        outlineVariant: Color(0xFFBFBFBF),
         shadow: Color(0xff000000),
         scrim: Color(0xff000000),
         inverseSurface: Color(0xff121212),
@@ -442,8 +442,8 @@ void main() {
       onErrorContainer: Color(0xff000000),
       surfaceVariant: Color(0xffffffff),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xff4d4d4d),
-      outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
@@ -535,8 +535,8 @@ void main() {
         onSurface: Colors.white,
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
-        outline: Color(0xffb3b3b3),
-        outlineVariant: Color(0xff666666),
+        outline: Color(0xFF8C8C8C),
+        outlineVariant: Color(0xFF404040),
         shadow: Color(0xff000000),
         scrim: Color(0xff000000),
       ),
@@ -613,8 +613,8 @@ void main() {
         onSurface: Colors.white,
         background: Color(0xff121212),
         onBackground: Colors.white,
-        outline: Color(0xffb3b3b3),
-        outlineVariant: Color(0xff666666),
+        outline: Color(0xFF8C8C8C),
+        outlineVariant: Color(0xFF404040),
         shadow: Color(0xff000000),
         scrim: Color(0xff000000),
         inverseSurface: Color(0xffffffff),
@@ -689,8 +689,8 @@ void main() {
       onErrorContainer: Colors.white,
       surfaceVariant: Color(0xff121212),
       onSurfaceVariant: Colors.white,
-      outline: Color(0xffb3b3b3),
-      outlineVariant: Color(0xff666666),
+      outline: Color(0xFF8C8C8C),
+      outlineVariant: Color(0xFF404040),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
@@ -785,8 +785,8 @@ void main() {
             onBackground: Colors.white,
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
             scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
@@ -843,8 +843,8 @@ void main() {
             onBackground: Colors.white,
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
             scrim: Color(0xff000000),
             onInverseSurface: Color(0xff000000),
@@ -1212,8 +1212,8 @@ void main() {
       onBackground: Colors.black,
       surface: Colors.white,
       onSurface: Colors.black,
-      outline: Color(0xff4d4d4d),
-      outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -1271,8 +1271,8 @@ void main() {
             onSurface: Color(0xffffffff),
             surfaceVariant: Color(0xff121212),
             onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -1322,28 +1322,6 @@ void main() {
     // scheme compliance gaps.
     //**************************************************************************
 
-    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
-    // This property is deprecated in Flutter SDK and now excluded from test
-    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
-    //
-    // test(
-    //     'FCS7.07: GIVEN a FlexColorScheme theme with Material scheme light '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeLight.toggleableActiveColor,
-    //     equals(themeLight.colorScheme.secondary),
-    //   );
-    // });
-    // test(
-    //     'FCS7.08: GIVEN a FlexColorScheme theme with Material scheme dark '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeDark.toggleableActiveColor,
-    //     equals(themeDark.colorScheme.secondary),
-    //   );
-    // });
     test(
         'FCS7.09: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -2017,8 +1995,8 @@ void main() {
           onErrorContainer: Color(0xff000000),
           surfaceVariant: Color(0xfff7e9e9),
           onSurfaceVariant: Color(0xff000000),
-          outline: Color(0xff4d4d4d),
-          outlineVariant: Color(0xff999999),
+          outline: Color(0xFF737373),
+          outlineVariant: Color(0xFFBFBFBF),
           shadow: Color(0xff000000),
           scrim: Color(0xff000000),
           inverseSurface: Color(0xff1b1414),
@@ -2148,8 +2126,8 @@ void main() {
           onErrorContainer: Color(0xffffffff),
           surfaceVariant: Color(0xff191313),
           onSurfaceVariant: Color(0xffffffff),
-          outline: Color(0xffb3b3b3),
-          outlineVariant: Color(0xff666666),
+          outline: Color(0xFF8C8C8C),
+          outlineVariant: Color(0xFF404040),
           shadow: Color(0xff000000),
           scrim: Color(0xff000000),
           inverseSurface: Color(0xffffffff),
@@ -4234,278 +4212,278 @@ void main() {
       expect(scheme.onSurfaceVariant, Colors.white);
       expect(scheme.onInverseSurface, Colors.black);
     });
-  });
-  test(
-      'FCS7.107a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and a using M2 style divider '
-      'EXPECT M2 divider theme color in M3', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      subThemesData: const FlexSubThemesData(
-        useM2StyleDividerInM3: true,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    expect(
-      theme.dividerTheme.color,
-      equals(const Color(0x1F000000)),
-    );
-    expect(
-      theme.dividerColor,
-      equals(const Color(0x1F000000)),
-    );
-  });
-  test(
-      'FCS7.107b GIVEN a FlexColorScheme.dark with useMaterial3:true '
-      'and a using M2 style divider '
-      'EXPECT M2 divider theme color in M3', () {
-    final FlexColorScheme fcs = FlexColorScheme.dark(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      subThemesData: const FlexSubThemesData(
-        useM2StyleDividerInM3: true,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    expect(
-      theme.dividerTheme.color,
-      equals(const Color(0x1FFFFFFF)),
-    );
-    expect(
-      theme.dividerColor,
-      equals(const Color(0x1FFFFFFF)),
-    );
-  });
-  test(
-      'FCS7.107c GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and a using M2 style divider '
-      'EXPECT M2 divider theme color in M3', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      subThemesData: const FlexSubThemesData(
-        useM2StyleDividerInM3: false,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.dividerTheme.color,
-      equals(null),
-    );
-    expect(
-      theme.dividerColor,
-      equals(colorScheme.outlineVariant),
-    );
-  });
-  test(
-      'FCS7.108a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using Flutter default TabBar '
-      'EXPECT M2 divider theme color in M3', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      tabBarStyle: FlexTabBarStyle.flutterDefault,
-      subThemesData: const FlexSubThemesData(
-        useM2StyleDividerInM3: true,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.tabBarTheme.unselectedLabelColor,
-      equals(colorScheme.onSurface),
-    );
-    expect(
-      theme.tabBarTheme.labelColor,
-      equals(colorScheme.primary),
-    );
-  });
-  test(
-      'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using Flutter Slider with baseSchemeColor secondaryContainer '
-      'EXPECT slider and indicator of secondaryContainer', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      subThemesData: const FlexSubThemesData(
-        sliderBaseSchemeColor: SchemeColor.secondaryContainer,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.sliderTheme.valueIndicatorColor,
-      equals(colorScheme.secondaryContainer),
-    );
-    expect(
-      theme.sliderTheme.activeTrackColor,
-      equals(colorScheme.secondaryContainer),
-    );
-    expect(
-      theme.sliderTheme.thumbColor,
-      equals(colorScheme.secondaryContainer),
-    );
-  });
-  test(
-      'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using Flutter Slider with baseSchemeColor primaryContainer '
-      'and sliderIndicatorSchemeColor inversePrimary '
-      'EXPECT slider primaryContainer and indicator of inversePrimary', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      subThemesData: const FlexSubThemesData(
-        sliderBaseSchemeColor: SchemeColor.primaryContainer,
-        sliderIndicatorSchemeColor: SchemeColor.inversePrimary,
-      ),
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.sliderTheme.valueIndicatorColor,
-      equals(colorScheme.inversePrimary),
-    );
-    expect(
-      theme.sliderTheme.activeTrackColor,
-      equals(colorScheme.primaryContainer),
-    );
-    expect(
-      theme.sliderTheme.thumbColor,
-      equals(colorScheme.primaryContainer),
-    );
-  });
-  test(
-      'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using not using subTheme but bottomAppBarElevation 2 '
-      'EXPECT bottom appbar theme with elevation 2', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      bottomAppBarElevation: 2,
-    );
-    final ThemeData theme = fcs.toTheme;
-    expect(
-      theme.bottomAppBarTheme.elevation,
-      equals(2),
-    );
-  });
-  test(
-      'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using not using subTheme and bottomAppBar elevation none', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-    );
-    final ThemeData theme = fcs.toTheme;
-    expect(
-      theme.bottomAppBarTheme.elevation,
-      equals(null),
-    );
-  });
-  test(
-      'FCS7.111a GIVEN a FlexColorScheme.light with useMaterial3:true '
-      'and using not using subTheme but appBarOpacity 0.5 '
-      'EXPECT bottom appbar background with surface opacity 0.5', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      appBarOpacity: 0.5,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.surface.withOpacity(0.5)),
-    );
-  });
-  test(
-      'FCS7.111b GIVEN a FlexColorScheme.light with useMaterial3:false '
-      'and using not using subTheme but appBarOpacity 0.5 '
-      'EXPECT bottom appbar background with primary opacity 0.5', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: false,
-      appBarOpacity: 0.5,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.primary.withOpacity(0.5)),
-    );
-  });
-  test(
-      'FCS7.111c GIVEN a FlexColorScheme.dark with useMaterial3:true '
-      'and using not using subTheme but appBarOpacity 0.5 '
-      'EXPECT bottom appbar background with surface opacity 0.5', () {
-    final FlexColorScheme fcs = FlexColorScheme.dark(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
-      appBarOpacity: 0.5,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.surface.withOpacity(0.5)),
-    );
-  });
-  test(
-      'FCS7.111d GIVEN a FlexColorScheme.dark with useMaterial3:true '
-      'and using not using subTheme but appBarOpacity 0.5 '
-      'EXPECT bottom appbar background with surface opacity 0.5', () {
-    final FlexColorScheme fcs = FlexColorScheme.dark(
-      scheme: FlexScheme.materialBaseline,
-      useMaterial3: false,
-      appBarOpacity: 0.5,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.surface.withOpacity(0.5)),
-    );
-  });
-  test(
-      'FCS7.111e GIVEN a FlexColorScheme.light with useMaterial3:false '
-      'and using not using subTheme but appBarOpacity 0.5 '
-      'EXPECT bottom appbar background with primary opacity 0.5', () {
-    final FlexColorScheme fcs = FlexColorScheme.light(
-      colors: const FlexSchemeColor(
-        primary: Colors.blue,
-        secondary: Colors.red,
-      ),
-      useMaterial3: false,
-      appBarOpacity: 0.5,
-      appBarStyle: FlexAppBarStyle.custom,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.primary.withOpacity(0.5)),
-    );
-  });
-  test(
-      'FCS7.111f GIVEN a FlexColorScheme.dark with useMaterial3:false '
-      'and using not using subTheme but appBarOpacity 0.6 '
-      'EXPECT bottom appbar background with primary opacity 0.6', () {
-    final FlexColorScheme fcs = FlexColorScheme.dark(
-      colors: const FlexSchemeColor(
-        primary: Colors.blue,
-        secondary: Colors.red,
-      ),
-      useMaterial3: false,
-      appBarOpacity: 0.6,
-      appBarStyle: FlexAppBarStyle.custom,
-    );
-    final ThemeData theme = fcs.toTheme;
-    final ColorScheme colorScheme = fcs.toScheme;
-    expect(
-      theme.appBarTheme.backgroundColor,
-      equals(colorScheme.primary.withOpacity(0.6)),
-    );
+    test(
+        'FCS7.107a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(const Color(0x1F000000)),
+      );
+      expect(
+        theme.dividerColor,
+        equals(const Color(0x1F000000)),
+      );
+    });
+    test(
+        'FCS7.107b GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(const Color(0x1FFFFFFF)),
+      );
+      expect(
+        theme.dividerColor,
+        equals(const Color(0x1FFFFFFF)),
+      );
+    });
+    test(
+        'FCS7.107c GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: false,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(null),
+      );
+      expect(
+        theme.dividerColor,
+        equals(colorScheme.outlineVariant),
+      );
+    });
+    test(
+        'FCS7.108a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter default TabBar '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        tabBarStyle: FlexTabBarStyle.flutterDefault,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        theme.tabBarTheme.labelColor,
+        equals(colorScheme.primary),
+      );
+    });
+    test(
+        'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter Slider with baseSchemeColor secondaryContainer '
+        'EXPECT slider and indicator of secondaryContainer', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          sliderBaseSchemeColor: SchemeColor.secondaryContainer,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(colorScheme.secondaryContainer),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(colorScheme.secondaryContainer),
+      );
+      expect(
+        theme.sliderTheme.thumbColor,
+        equals(colorScheme.secondaryContainer),
+      );
+    });
+    test(
+        'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter Slider with baseSchemeColor primaryContainer '
+        'and sliderIndicatorSchemeColor inversePrimary '
+        'EXPECT slider primaryContainer and indicator of inversePrimary', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          sliderBaseSchemeColor: SchemeColor.primaryContainer,
+          sliderIndicatorSchemeColor: SchemeColor.inversePrimary,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(colorScheme.inversePrimary),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(colorScheme.primaryContainer),
+      );
+      expect(
+        theme.sliderTheme.thumbColor,
+        equals(colorScheme.primaryContainer),
+      );
+    });
+    test(
+        'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme but bottomAppBarElevation 2 '
+        'EXPECT bottom appbar theme with elevation 2', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        bottomAppBarElevation: 2,
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.bottomAppBarTheme.elevation,
+        equals(2),
+      );
+    });
+    test(
+        'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme and bottomAppBar elevation none', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.bottomAppBarTheme.elevation,
+        equals(null),
+      );
+    });
+    test(
+        'FCS7.111a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111b GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with primary opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111c GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111d GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111e GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with primary opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        colors: const FlexSchemeColor(
+          primary: Colors.blue,
+          secondary: Colors.red,
+        ),
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+        appBarStyle: FlexAppBarStyle.custom,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111f GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.6 '
+        'EXPECT bottom appbar background with primary opacity 0.6', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        colors: const FlexSchemeColor(
+          primary: Colors.blue,
+          secondary: Colors.red,
+        ),
+        useMaterial3: false,
+        appBarOpacity: 0.6,
+        appBarStyle: FlexAppBarStyle.custom,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.6)),
+      );
+    });
   });
 }
