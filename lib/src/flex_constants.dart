@@ -187,6 +187,22 @@ const double kNavigationBarHeight = 62;
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
 
+/// The width of a Material 2 Drawer.
+///
+/// Found in Flutter source code.
+const double kNavigationDrawerM2Width = 304;
+
+/// The width of a Material 3 Drawer.
+///
+/// From M3 spec https://m3.material.io/components/navigation-drawer/specs
+const double kNavigationDrawerM3Width = 360;
+
+/// The edge padding on start and end side of the indicator of
+/// the indicator in a Material 3 Drawer.
+///
+/// From M3 spec https://m3.material.io/components/navigation-drawer/specs
+const double kNavigationDrawerIndicatorPadding = 12;
+
 /// Default for elevation of [NavigationRail].
 ///
 /// M3 based https://m3.material.io/components/snackbar/specs

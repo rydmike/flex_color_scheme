@@ -62,6 +62,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
+  - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.
   - All new sub-themes and new states.  
   - Test new colors.
   - Test usedColors 7.

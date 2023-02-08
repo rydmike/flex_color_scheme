@@ -1543,12 +1543,6 @@ class FlexSubThemes {
     /// Currently not available as a property in [FlexSubThemesData], may be
     /// added later.
     final double? width,
-
-    // TODO(rydmike): Confirm this is not needed, resolve happens later.
-    // /// You would typically pass in `Directionality.of(context)`].
-    // ///
-    // /// Defaults to LTR if not defined.
-    // final TextDirection? direction,
   }) {
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
@@ -1562,12 +1556,12 @@ class FlexSubThemes {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusDirectional.horizontal(
           end: Radius.circular(radius ?? kDrawerRadius),
-        ), //.resolve(direction ?? TextDirection.ltr),
+        ),
       ),
       endShape: RoundedRectangleBorder(
         borderRadius: BorderRadiusDirectional.horizontal(
           end: Radius.circular(radius ?? kDrawerRadius),
-        ), //.resolve(direction ?? TextDirection.ltr),
+        ),
       ),
     );
   }

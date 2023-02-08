@@ -6527,7 +6527,10 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
               radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
-              width: subTheme.drawerWidth ?? (useMaterial3 ? 360 : 304),
+              width: subTheme.drawerWidth ??
+                  (useMaterial3
+                      ? kNavigationDrawerM3Width
+                      : kNavigationDrawerM2Width),
               elevation: subTheme.drawerElevation,
               // TODO(rydmike): check it is not needed, resolve happens later?
               // directionality: Directionality.of(context),
@@ -6655,8 +6658,11 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
               indicatorWidth: subTheme.drawerIndicatorWidth ??
-                  ((subTheme.drawerWidth ?? (useMaterial3 ? 360 : 304)) -
-                      2 * 12),
+                  ((subTheme.drawerWidth ??
+                          (useMaterial3
+                              ? kNavigationDrawerM3Width
+                              : kNavigationDrawerM2Width)) -
+                      2 * kNavigationDrawerIndicatorPadding),
               indicatorBorderRadius: subTheme.drawerIndicatorBorderRadius ??
                   subTheme.defaultRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,

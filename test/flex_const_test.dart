@@ -102,6 +102,15 @@ void main() {
     test('FCT kNavigationBarIndicatorAlpha is 0x3D', () {
       expect(kNavigationBarIndicatorAlpha, 0x3D);
     });
+    test('FCT kNavigationDrawerM2Width is 304', () {
+      expect(kNavigationDrawerM2Width, 304);
+    });
+    test('FCT kNavigationDrawerM3Width is 360', () {
+      expect(kNavigationDrawerM3Width, 360);
+    });
+    test('FCT kNavigationDrawerIndicatorPadding is 12', () {
+      expect(kNavigationDrawerIndicatorPadding, 12);
+    });
     test('FCT kNavigationRailElevation is 0', () {
       expect(kNavigationRailElevation, 0);
     });
