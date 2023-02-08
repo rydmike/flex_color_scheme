@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 import '../controllers/theme_controller.dart';
@@ -27,8 +25,8 @@ class PageExamples extends StatelessWidget {
               'surface, you should check this out. You might want to '
               'reduce the blend on your Scaffold in such a use case.'),
           trailing: const Icon(Icons.arrow_forward_ios),
-          onTap: () {
-            unawaited(SubpageDemo.show(context, controller));
+          onTap: () async {
+            await SubpageDemo.show(context, controller);
           },
         ),
         ListTile(
@@ -38,8 +36,8 @@ class PageExamples extends StatelessWidget {
             'Using themedSystemNavigationBar (noAppBar:true)',
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
-          onTap: () {
-            unawaited(SplashPageOne.show(context, false));
+          onTap: () async {
+            await SplashPageOne.show(context, false);
           },
         ),
         ListTile(
@@ -50,8 +48,8 @@ class PageExamples extends StatelessWidget {
             'invertStatusIcons:true)',
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
-          onTap: () {
-            unawaited(SplashPageOne.show(context, true));
+          onTap: () async {
+            await SplashPageOne.show(context, true);
           },
         ),
         ListTile(
@@ -61,8 +59,8 @@ class PageExamples extends StatelessWidget {
             'Using setEnabledSystemUIMode',
           ),
           trailing: const Icon(Icons.arrow_forward_ios),
-          onTap: () {
-            unawaited(SplashPageTwo.show(context));
+          onTap: () async {
+            await SplashPageTwo.show(context);
           },
         ),
       ],

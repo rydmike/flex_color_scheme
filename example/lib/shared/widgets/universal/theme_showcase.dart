@@ -2742,17 +2742,10 @@ class TimePickerDialogShowcase extends StatelessWidget {
     // The TimePickerDialog pops the context with its buttons, clicking them
     // pops the page when not used in a showDialog. We just need to see it, no
     // need to use it to visually see what it looks like, so absorbing pointers.
-
-    // TODO(rydmike): There must be away other than absorb pointer!
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Builder(builder: (BuildContext context) {
-        return TimePickerDialog(
-          initialTime: TimeOfDay.now(),
-        );
-      }),
+    return AbsorbPointer(
+      child: TimePickerDialog(
+        initialTime: TimeOfDay.now(),
+      ),
     );
   }
 }
