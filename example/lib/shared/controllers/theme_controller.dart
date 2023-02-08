@@ -408,9 +408,12 @@ class ThemeController with ChangeNotifier {
         Store.keyNavRailOpacity, Store.defaultNavRailOpacity);
     _navigationRailElevation = await _themeService.load(
         Store.keyNavigationRailElevation, Store.defaultNavigationRailElevation);
-    _navRailSelectedSchemeColor = await _themeService.load(
-        Store.keyNavRailSelectedItemSchemeColor,
-        Store.defaultNavRailSelectedItemSchemeColor);
+    _navRailSelectedIconSchemeColor = await _themeService.load(
+        Store.keyNavRailSelectedIconSchemeColor,
+        Store.defaultNavRailSelectedIconSchemeColor);
+    _navRailSelectedLabelSchemeColor = await _themeService.load(
+        Store.keyNavRailSelectedLabelSchemeColor,
+        Store.defaultNavRailSelectedLabelSchemeColor);
     _navRailUnselectedSchemeColor = await _themeService.load(
         Store.keyNavRailUnselectedSchemeColor,
         Store.defaultNavRailUnselectedSchemeColor);
@@ -843,8 +846,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavRailBackgroundSchemeColor, false);
     setNavRailOpacity(Store.defaultNavRailOpacity, false);
     setNavigationRailElevation(Store.defaultNavigationRailElevation, false);
-    setNavRailSelectedSchemeColor(
-        Store.defaultNavRailSelectedItemSchemeColor, false);
+    setNavRailSelectedIconSchemeColor(
+        Store.defaultNavRailSelectedIconSchemeColor, false);
+    setNavRailSelectedLabelSchemeColor(
+        Store.defaultNavRailSelectedLabelSchemeColor, false);
     setNavRailUnselectedSchemeColor(
         Store.defaultNavRailUnselectedSchemeColor, false);
     setNavRailMuteUnselected(Store.defaultNavRailMuteUnselected, false);
@@ -1037,7 +1042,7 @@ class ThemeController with ChangeNotifier {
     setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavRailIndicatorOpacity(1, false);
     setNavRailMuteUnselected(false, false);
-    setNavRailSelectedSchemeColor(SchemeColor.onSurface, false);
+    setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
     setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavRailLabelType(NavigationRailLabelType.none, false);
     notifyListeners();
@@ -2454,14 +2459,28 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavigationRailElevation, value));
   }
 
-  late SchemeColor? _navRailSelectedSchemeColor;
-  SchemeColor? get navRailSelectedSchemeColor => _navRailSelectedSchemeColor;
-  void setNavRailSelectedSchemeColor(SchemeColor? value, [bool notify = true]) {
-    if (value == _navRailSelectedSchemeColor) return;
-    _navRailSelectedSchemeColor = value;
+  late SchemeColor? _navRailSelectedIconSchemeColor;
+  SchemeColor? get navRailSelectedIconSchemeColor =>
+      _navRailSelectedIconSchemeColor;
+  void setNavRailSelectedIconSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _navRailSelectedIconSchemeColor) return;
+    _navRailSelectedIconSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(
-        _themeService.save(Store.keyNavRailSelectedItemSchemeColor, value));
+        _themeService.save(Store.keyNavRailSelectedIconSchemeColor, value));
+  }
+
+  late SchemeColor? _navRailSelectedLabelSchemeColor;
+  SchemeColor? get navRailSelectedLabelSchemeColor =>
+      _navRailSelectedLabelSchemeColor;
+  void setNavRailSelectedLabelSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _navRailSelectedLabelSchemeColor) return;
+    _navRailSelectedLabelSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavRailSelectedLabelSchemeColor, value));
   }
 
   late SchemeColor? _navRailUnselectedSchemeColor;

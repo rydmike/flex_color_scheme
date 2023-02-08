@@ -50,9 +50,9 @@ class NavigationRailSettings extends StatelessWidget {
       return 'default (secondaryContainer)';
     }
 
-    // Logic for selected item color label default value,
+    // Logic for selected icon color label default value,
     // custom color selection overrides default label and value.
-    String selectedItemColorLabel() {
+    String selectedIconColorLabel() {
       // Use FCS component default, primary.
       if (!controller.useFlutterDefaults &&
           controller.useFlexColorScheme &&
@@ -64,14 +64,31 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (primary)';
       }
       // All other cases will use M3 style.
-      return 'default (icon onSecondaryContainer, label onSurface)';
+      return 'default (onSecondaryContainer)';
+    }
+
+    // Logic for selected icon color label default value,
+    // custom color selection overrides default label and value.
+    String selectedLabelColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (primary)';
+      }
+      // All other cases will use M3 style.
+      return 'default (onSurface)';
     }
 
     // const String labelForDefaultSelectedItem = 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
-            controller.navRailSelectedSchemeColor == null &&
+            controller.navRailSelectedIconSchemeColor == null &&
             controller.navRailUnselectedSchemeColor == null);
 
     // Logic for unselected item color label default value,
@@ -333,18 +350,32 @@ class NavigationRailSettings extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ColorSchemePopupMenu(
-                title: const Text('Selected item color'),
-                subtitle:
-                    const Text('Label and icon, but own properties in API'),
-                labelForDefault: selectedItemColorLabel(),
-                index: controller.navRailSelectedSchemeColor?.index ?? -1,
+                title: const Text('Selected icon color'),
+                labelForDefault: selectedIconColorLabel(),
+                index: controller.navRailSelectedIconSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setNavRailSelectedSchemeColor(null);
+                          controller.setNavRailSelectedIconSchemeColor(null);
                         } else {
-                          controller.setNavRailSelectedSchemeColor(
+                          controller.setNavRailSelectedIconSchemeColor(
+                              SchemeColor.values[index]);
+                        }
+                      }
+                    : null,
+              ),
+              ColorSchemePopupMenu(
+                title: const Text('Selected label color'),
+                labelForDefault: selectedLabelColorLabel(),
+                index: controller.navRailSelectedLabelSchemeColor?.index ?? -1,
+                onChanged: controller.useSubThemes &&
+                        controller.useFlexColorScheme
+                    ? (int index) {
+                        if (index < 0 || index >= SchemeColor.values.length) {
+                          controller.setNavRailSelectedLabelSchemeColor(null);
+                        } else {
+                          controller.setNavRailSelectedLabelSchemeColor(
                               SchemeColor.values[index]);
                         }
                       }

@@ -303,13 +303,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings.
             navigationRailSelectedLabelSchemeColor:
-                controller.navRailSelectedSchemeColor,
+                controller.navRailSelectedLabelSchemeColor,
             navigationRailUnselectedLabelSchemeColor:
                 controller.navRailUnselectedSchemeColor,
             navigationRailMutedUnselectedLabel:
                 controller.navRailMuteUnselected,
             navigationRailSelectedIconSchemeColor:
-                controller.navRailSelectedSchemeColor,
+                controller.navRailSelectedIconSchemeColor,
             navigationRailUnselectedIconSchemeColor:
                 controller.navRailUnselectedSchemeColor,
             navigationRailMutedUnselectedIcon: controller.navRailMuteUnselected,

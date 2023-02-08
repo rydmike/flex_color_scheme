@@ -44,6 +44,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added theming of Drawer, NavigationDrawer and indicator width, as well as indicator border radius and indicator item color.
 - Added workaround for NavigationDrawer Flutter width and resize bugs. Bugs are still there, only worked around the cases to avoid them impacting the Playground.
 - Added theme simulator with **Themed Components**.
+- Separated the settings for `NavigationBar` icon and label colors. API already existed in FCS.
+- Separated the settings for `NavigationRail` icon and label colors. API already existed in FCS.
 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**

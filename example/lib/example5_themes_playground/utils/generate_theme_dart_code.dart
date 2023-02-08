@@ -847,9 +847,9 @@ String generateThemeDartCode(ThemeController controller) {
   // NavigationRail setup CODE
   //
   final String navigationRailSelectedLabelSchemeColor = controller
-              .navRailSelectedSchemeColor !=
+              .navRailSelectedLabelSchemeColor !=
           null
-      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navRailSelectedLabelSchemeColor},\n'
       : '';
   final String navigationRailUnselectedLabelSchemeColor = controller
               .navRailUnselectedSchemeColor !=
@@ -859,14 +859,14 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationRailMutedUnselectedLabel = controller
               .navRailMuteUnselected ||
           (controller.useFlutterDefaults &&
-              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
   final String navigationRailSelectedIconSchemeColor = controller
-              .navRailSelectedSchemeColor !=
+              .navRailSelectedIconSchemeColor !=
           null
-      ? '    navigationRailSelectedIconSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedIconSchemeColor: ${controller.navRailSelectedIconSchemeColor},\n'
       : '';
   final String navigationRailUnselectedIconSchemeColor = controller
               .navRailUnselectedSchemeColor !=
@@ -876,7 +876,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationRailMutedUnselectedIcon = controller
               .navRailMuteUnselected ||
           (controller.useFlutterDefaults &&
-              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
