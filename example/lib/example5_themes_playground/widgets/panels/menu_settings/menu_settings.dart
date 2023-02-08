@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
@@ -244,10 +243,7 @@ class MenuSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Shortcuts(shortcuts: <ShortcutActivator, Intent>{
-            SingleActivator(LogicalKeyboardKey.keyT, control: true):
-                VoidCallbackIntent(debugDumpApp),
-          }, child: MenuBarShowcase(explainUsage: false)),
+          child: MenuBarShowcase(explainUsage: false),
         ),
         const SizedBox(height: 16),
         const ListTile(

@@ -85,14 +85,9 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.view_sidebar_outlined,
   ),
   GridItem(
-    panelLabel: 'Drawer and NavigationDrawer',
-    buttonLabel: 'Drawer',
+    panelLabel: 'NavigationDrawer and Drawer',
+    buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
-  ),
-  GridItem(
-    panelLabel: 'Android System Navigation Bar',
-    buttonLabel: 'AndroidBar',
-    icon: Icons.android_outlined,
   ),
   GridItem(
     panelLabel: 'Material Buttons',
@@ -160,8 +155,13 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.font_download,
   ),
   GridItem(
-    panelLabel: 'Page Examples',
-    buttonLabel: 'Page\nExamples',
+    panelLabel: 'Android system navigation bar',
+    buttonLabel: 'Android\nSystem Nav',
+    icon: Icons.android_outlined,
+  ),
+  GridItem(
+    panelLabel: 'Page examples',
+    buttonLabel: 'Page\nexamples',
     icon: Icons.article_outlined,
   ),
 ];

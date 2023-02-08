@@ -7,7 +7,6 @@ import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
-import '../panels/app_examples/app_example.dart';
 import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
@@ -37,6 +36,7 @@ import '../panels/text_theme_settings/text_theme_settings.dart';
 import '../panels/theme_code/theme_code.dart';
 import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
+import '../panels/theme_simulator/theme_simulator.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
 import '../panels/widget_showcase/widget_showcase.dart';
@@ -219,8 +219,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(
                       NavigationRailSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(DrawerSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
-                      themeCtrl),
                   PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(
                       ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl),
@@ -239,8 +237,10 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl),
                   PanelPage(PrimaryTextThemeSettings(themeCtrl), pageIndex,
                       themeCtrl),
-                  PanelPage(
-                      AppExample(controller: themeCtrl), pageIndex, themeCtrl),
+                  PanelPage(ThemeSimulator(controller: themeCtrl), pageIndex,
+                      themeCtrl),
+                  PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
+                      themeCtrl),
                   PanelPage(PageExamples(controller: themeCtrl), pageIndex,
                       themeCtrl),
                   PanelPage(const WidgetShowcase(), pageIndex, themeCtrl),
@@ -285,10 +285,10 @@ class PanelPage extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints constraints) {
       // A custom breakpoint, when the layout width is larger than 1200dp
       // we show the code panel in a side-by side view, but only if we are not
-      // on the last 3 pages, there we do not want it.
+      // on the last 2 pages, there we do not want it.
       final bool showCodeSideBySide =
           constraints.maxWidth >= AppData.codeViewWidthBreakpoint &&
-              panelPage < panelItems.length - 3;
+              panelPage < panelItems.length - 2;
       final double margins =
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
       // The second header
@@ -437,7 +437,6 @@ class SecondPanel extends StatelessWidget {
       NavigationBarSettings(controller),
       NavigationRailSettings(controller),
       DrawerSettings(controller),
-      AndroidNavigationBarSettings(controller),
       ButtonsSettings(controller),
       ToggleButtonsSettings(controller),
       FabChipSettings(controller),
@@ -452,7 +451,8 @@ class SecondPanel extends StatelessWidget {
       CardSettings(controller),
       TextThemeSettings(controller),
       PrimaryTextThemeSettings(controller),
-      AppExample(controller: controller),
+      ThemeSimulator(controller: controller),
+      AndroidNavigationBarSettings(controller),
       PageExamples(controller: controller),
       const WidgetShowcase(),
       ThemeCode(controller),

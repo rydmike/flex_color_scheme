@@ -77,17 +77,12 @@ const List<PanelItem> panelItems = <PanelItem>[
   PanelItem(
     panelLabel: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
-    icon: Icons.view_sidebar_outlined,
+    icon: Icons.view_sidebar,
   ),
   PanelItem(
-    panelLabel: 'Drawer and NavigationDrawer',
-    buttonLabel: 'Drawer',
+    panelLabel: 'NavigationDrawer',
+    buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
-  ),
-  PanelItem(
-    panelLabel: 'Android System Navigation Bar',
-    buttonLabel: 'AndroidBar',
-    icon: Icons.android_outlined,
   ),
   PanelItem(
     panelLabel: 'Material Buttons',
@@ -159,13 +154,18 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.font_download,
   ),
   PanelItem(
-    panelLabel: 'Theme Simulator',
-    buttonLabel: 'Theme\nSimulator',
+    panelLabel: 'Theme simulator',
+    buttonLabel: 'Theme\nsimulator',
     icon: Icons.phone_iphone,
   ),
   PanelItem(
-    panelLabel: 'Page Examples',
-    buttonLabel: 'Page\nExamples',
+    panelLabel: 'Android system navigation bar',
+    buttonLabel: 'Android\nSystem Nav',
+    icon: Icons.android_outlined,
+  ),
+  PanelItem(
+    panelLabel: 'Page examples',
+    buttonLabel: 'Page\nexamples',
     icon: Icons.article_outlined,
   ),
   PanelItem(
@@ -174,7 +174,7 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.flutter_dash,
   ),
   PanelItem(
-    panelLabel: 'Theme Code',
+    panelLabel: 'Theme code',
     buttonLabel: 'Theme\ncode',
     icon: Icons.integration_instructions_outlined,
   ),

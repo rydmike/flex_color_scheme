@@ -93,10 +93,7 @@ class ThemeShowcase extends StatelessWidget {
         const BottomNavigationBarShowcase(),
         const SizedBox(height: 8),
         const Divider(),
-        const Shortcuts(shortcuts: <ShortcutActivator, Intent>{
-          SingleActivator(LogicalKeyboardKey.keyT, control: true):
-              VoidCallbackIntent(debugDumpApp),
-        }, child: MenuBarShowcase()),
+        const MenuBarShowcase(),
         const SizedBox(height: 8),
         const MenuAnchorShowcase(),
         const SizedBox(height: 8),
@@ -490,14 +487,12 @@ class FabShowcase extends StatelessWidget {
         FloatingActionButton.small(
           heroTag: 'FAB small',
           onPressed: () {},
-          tooltip: 'Tooltip on small\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
         FloatingActionButton.extended(
           heroTag: 'FAB extended false',
           isExtended: false,
           onPressed: () {},
-          tooltip: 'Tooltip on extended:false\nFloatingActionButton.extended',
           icon: const Icon(Icons.accessibility),
           label: const Text('Extended'),
         ),
@@ -505,20 +500,17 @@ class FabShowcase extends StatelessWidget {
           heroTag: 'FAB extended true',
           isExtended: true,
           onPressed: () {},
-          tooltip: 'Tooltip on extended:true\nFloatingActionButton.extended',
           icon: const Icon(Icons.accessibility),
           label: const Text('Extended'),
         ),
         FloatingActionButton(
           heroTag: 'FAB standard',
           onPressed: () {},
-          tooltip: 'Tooltip on default\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
         FloatingActionButton.large(
           heroTag: 'FAB large',
           onPressed: () {},
-          tooltip: 'Tooltip on large\nFloatingActionButton',
           child: const Icon(Icons.accessibility),
         ),
       ],
@@ -2083,150 +2075,155 @@ class MenuBarShowcase extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        if (explainUsage)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text(
-              'MenuBar',
-              style: denseHeader,
-            ),
-          ),
-        if (explainUsage)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'The new M3 menus can be used in a MenuBar via SubMenuButton and '
-              'its MenuItemButton, but they can also be used in a '
-              'MenuAnchor anywhere.',
-              style: denseBody,
-            ),
-          ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: MenuBar(
-                children: <Widget>[
-                  SubmenuButton(
-                    menuChildren: <Widget>[
-                      MenuItemButton(
-                        onPressed: () {
-                          showAboutDialog(
-                            context: context,
-                            applicationName: 'MenuBar Demo',
-                            applicationVersion: '1.0.0',
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&About'),
-                      ),
-                      SubmenuButton(
-                        menuChildren: <Widget>[
-                          MenuItemButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Saved!'),
-                                ),
-                              );
-                            },
-                            child: const MenuAcceleratorLabel('&Save now'),
-                          ),
-                          MenuItemButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Load!'),
-                                ),
-                              );
-                            },
-                            child: const MenuAcceleratorLabel('&Load now'),
-                          ),
-                        ],
-                        child: const Text('File'),
-                      ),
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Quit!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&Quit'),
-                      ),
-                    ],
-                    child: const MenuAcceleratorLabel('&File'),
-                  ),
-                  SubmenuButton(
-                    menuChildren: <Widget>[
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Bold!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&Bold'),
-                      ),
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Italic!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&Italic'),
-                      ),
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Underline!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&Underline'),
-                      ),
-                    ],
-                    child: const MenuAcceleratorLabel('&Style'),
-                  ),
-                  SubmenuButton(
-                    menuChildren: <Widget>[
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Magnify!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('&Magnify'),
-                      ),
-                      MenuItemButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Minify!'),
-                            ),
-                          );
-                        },
-                        child: const MenuAcceleratorLabel('Mi&nify'),
-                      ),
-                    ],
-                    child: const MenuAcceleratorLabel('&View'),
-                  ),
-                ],
+    return Shortcuts(
+      shortcuts: const <ShortcutActivator, Intent>{
+        SingleActivator(LogicalKeyboardKey.keyT, control: true):
+            VoidCallbackIntent(debugDumpApp),
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          if (explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                'MenuBar',
+                style: denseHeader,
               ),
             ),
-          ],
-        ),
-      ],
+          if (explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'The new M3 menus can be used in a MenuBar via SubMenuButton and '
+                'its MenuItemButton, but they can also be used in a '
+                'MenuAnchor anywhere.',
+                style: denseBody,
+              ),
+            ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: MenuBar(
+                  children: <Widget>[
+                    SubmenuButton(
+                      menuChildren: <Widget>[
+                        MenuItemButton(
+                          onPressed: () {
+                            showAboutDialog(
+                              context: context,
+                              applicationName: 'MenuBar Demo',
+                              applicationVersion: '1.0.0',
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&About'),
+                        ),
+                        SubmenuButton(
+                          menuChildren: <Widget>[
+                            MenuItemButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Saved!'),
+                                  ),
+                                );
+                              },
+                              child: const MenuAcceleratorLabel('&Save now'),
+                            ),
+                            MenuItemButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Load!'),
+                                  ),
+                                );
+                              },
+                              child: const MenuAcceleratorLabel('&Load now'),
+                            ),
+                          ],
+                          child: const Text('File'),
+                        ),
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Quit!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&Quit'),
+                        ),
+                      ],
+                      child: const MenuAcceleratorLabel('&File'),
+                    ),
+                    SubmenuButton(
+                      menuChildren: <Widget>[
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Bold!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&Bold'),
+                        ),
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Italic!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&Italic'),
+                        ),
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Underline!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&Underline'),
+                        ),
+                      ],
+                      child: const MenuAcceleratorLabel('&Style'),
+                    ),
+                    SubmenuButton(
+                      menuChildren: <Widget>[
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Magnify!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('&Magnify'),
+                        ),
+                        MenuItemButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Minify!'),
+                              ),
+                            );
+                          },
+                          child: const MenuAcceleratorLabel('Mi&nify'),
+                        ),
+                      ],
+                      child: const MenuAcceleratorLabel('&View'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2544,27 +2541,6 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool useMaterial3 = theme.useMaterial3;
-    final DrawerThemeData drawerTheme = theme.drawerTheme;
-    final double drawerWidth = drawerTheme.width ??
-        (useMaterial3
-            ? drawerTheme.width == null
-                ? 304
-                : 360
-            : 304);
-    final double indicatorSize =
-        (theme.navigationDrawerTheme.indicatorSize?.width ??
-                (drawerWidth - 2 * 12)) -
-            76;
-    // The value 76 comes from M3 specs
-    // https://m3.material.io/components/navigation-drawer/specs where
-    // * 16, space before first icon
-    // * 24, icon width
-    // * 12, space after icon
-    // * 24, space after text in indicator
-
-    debugPrint('indicatorSize: $indicatorSize');
-
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -2605,32 +2581,25 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
                   selectedIndex = value;
                 });
               },
-              children: <Widget>[
-                const SizedBox(height: 16),
-                const NavigationDrawerDestination(
+              children: const <Widget>[
+                SizedBox(height: 16),
+                NavigationDrawerDestination(
                   icon: Badge(
                     label: Text('26'),
                     child: Icon(Icons.chat_bubble),
                   ),
                   label: Text('Chat'),
                 ),
-                const NavigationDrawerDestination(
+                NavigationDrawerDestination(
                   icon: Icon(Icons.beenhere),
                   label: Text('Tasks'),
                 ),
-                const Divider(),
+                Divider(),
                 NavigationDrawerDestination(
-                  icon: const Icon(Icons.create_new_folder),
-                  label: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: indicatorSize),
-                    child: const Text(
-                      'Folder, item with long text truncated with ellipses',
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                  icon: Icon(Icons.create_new_folder),
+                  label: Text('Folder'),
                 ),
-                const NavigationDrawerDestination(
+                NavigationDrawerDestination(
                   icon: Icon(Icons.logout),
                   label: Text('Logout'),
                 ),

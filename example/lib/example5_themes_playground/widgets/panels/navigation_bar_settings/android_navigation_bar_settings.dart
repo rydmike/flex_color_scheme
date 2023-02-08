@@ -30,7 +30,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
       case FlexSystemNavBarStyle.scaffoldBackground:
         return 'Scaffold background, with opacity & alpha blend';
       case FlexSystemNavBarStyle.transparent:
-        return 'Fully transparent regardless of opacity value';
+        return 'Fully transparent';
     }
   }
 
@@ -42,7 +42,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Themed Android system navigation bar'),
+          title: Text('Theme following Android system navigation bar'),
           subtitle: Text('This feature only has any effect if you '
               'build this application for an Android device. It '
               'demonstrates the usage of the AnnotatedRegion helper '
@@ -56,14 +56,22 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           subtitle: Text('System navigation bar opacity'),
         ),
         ListTile(
+          enabled:
+              controller.sysNavBarStyle != FlexSystemNavBarStyle.transparent,
           title: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
-            value: navBarOpacity * 100,
-            onChanged: (double value) {
-              controller.setSysBarOpacity(value / 100);
-            },
+            value:
+                controller.sysNavBarStyle == FlexSystemNavBarStyle.transparent
+                    ? 0
+                    : navBarOpacity * 100,
+            onChanged:
+                controller.sysNavBarStyle != FlexSystemNavBarStyle.transparent
+                    ? (double value) {
+                        controller.setSysBarOpacity(value / 100);
+                      }
+                    : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -76,7 +84,9 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
-                  '${(navBarOpacity * 100).toStringAsFixed(0)} %',
+                  controller.sysNavBarStyle == FlexSystemNavBarStyle.transparent
+                      ? '0 %'
+                      : '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!

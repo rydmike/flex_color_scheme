@@ -7,8 +7,8 @@ import 'app_example_login.dart';
 import 'app_example_shop.dart';
 
 /// An example that show what an app using the theme might look like
-class AppExample extends StatelessWidget {
-  const AppExample({required this.controller, super.key});
+class ThemeSimulator extends StatelessWidget {
+  const ThemeSimulator({required this.controller, super.key});
 
   final ThemeController controller;
 
@@ -57,15 +57,15 @@ class AppExample extends StatelessWidget {
           spacing: 16,
           runSpacing: 16,
           children: <Widget>[
-            AppExampleFrame(
+            SimulatorFrame(
               width: controller.deviceSize,
               child: const AppExampleLogin(),
             ),
-            AppExampleFrame(
+            SimulatorFrame(
               width: controller.deviceSize,
               child: const AppExampleShop(),
             ),
-            AppExampleFrame(
+            SimulatorFrame(
               width: controller.deviceSize,
               child: AppExampleChat(controller: controller),
             ),
@@ -77,8 +77,8 @@ class AppExample extends StatelessWidget {
   }
 }
 
-class AppExampleFrame extends StatelessWidget {
-  const AppExampleFrame({super.key, required this.child, required this.width});
+class SimulatorFrame extends StatelessWidget {
+  const SimulatorFrame({super.key, required this.child, required this.width});
 
   final Widget child;
   final double width;
