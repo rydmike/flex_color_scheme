@@ -703,6 +703,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String drawerWidth = controller.drawerWidth != null
       ? '    drawerWidth: ${controller.drawerWidth!.toStringAsFixed(1)},\n'
       : '';
+  final String drawerIndicatorWidth = controller.drawerIndicatorWidth != null
+      ? '    drawerIndicatorWidth: ${controller.drawerIndicatorWidth!.toStringAsFixed(1)},\n'
+      : '';
   final String drawerIndicatorBorderRadius = controller
               .drawerIndicatorBorderRadius !=
           null
@@ -1032,6 +1035,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$drawerElevation'
           '$drawerBackgroundSchemeColor'
           '$drawerWidth'
+          '$drawerIndicatorWidth'
           '$drawerIndicatorBorderRadius'
           '$drawerIndicatorSchemeColor'
           //
@@ -1198,6 +1202,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$drawerElevation'
           '$drawerBackgroundSchemeColor'
           '$drawerWidth'
+          '$drawerIndicatorWidth'
           '$drawerIndicatorBorderRadius'
           '$drawerIndicatorSchemeColor'
           //

@@ -11,6 +11,9 @@ dependencies:
   # https://pub.dev/packages/animations
   animations: ^2.0.7
 
+  # Cached network image from baseflow.com.
+  cached_network_image: ^3.2.3
+
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
   # https://pub.dev/packages/cupertino_icons

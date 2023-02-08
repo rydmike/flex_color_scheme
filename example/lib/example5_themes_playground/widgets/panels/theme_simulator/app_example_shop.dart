@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:animations/animations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -555,22 +556,30 @@ class ProductImage extends StatelessWidget {
         : theme.colorScheme.inverseSurface;
     return AspectRatio(
       aspectRatio: .95,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: background,
+      child: CachedNetworkImage(
+        imageUrl: product.imageUrls.first,
+        imageBuilder:
+            (BuildContext context, ImageProvider<Object> imageProvider) =>
+                Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(background, BlendMode.multiply),
+            ),
+          ),
         ),
-        clipBehavior: Clip.hardEdge,
-        child: Image.network(
-          product.imageUrls.first,
-          loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) =>
-              loadingProgress == null
-                  ? child
-                  : const Center(child: CircularProgressIndicator()),
-          color: background,
-          colorBlendMode: BlendMode.multiply,
-        ),
+        placeholder: (BuildContext context, String url) => ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxHeight: 50,
+              minHeight: 50,
+            ),
+            child: CircularProgressIndicator(
+              strokeWidth: 8,
+              color: theme.colorScheme.secondaryContainer,
+            )),
+        errorWidget: (BuildContext context, String url, dynamic error) =>
+            const Icon(Icons.error, size: 50),
       ),
     );
   }
@@ -746,12 +755,24 @@ class CategoryTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Image.network(
-              imageUrl,
-              color: background,
-              colorBlendMode: BlendMode.multiply,
-              alignment: imageAlignment,
-              fit: BoxFit.cover,
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              imageBuilder:
+                  (BuildContext context, ImageProvider<Object> imageProvider) =>
+                      Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                    colorFilter:
+                        ColorFilter.mode(background, BlendMode.multiply),
+                  ),
+                ),
+              ),
+              placeholder: (BuildContext context, String url) => const SizedBox(
+                  width: 150, height: 150, child: CircularProgressIndicator()),
+              errorWidget: (BuildContext context, String url, dynamic error) =>
+                  const Icon(Icons.error, size: 50),
             ),
             Align(
               alignment: Alignment.center,
