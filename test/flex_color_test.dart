@@ -59,6 +59,11 @@ void main() {
       expect(FlexColor.materialLightSurface, ml.surface);
     });
     test(
+        'FC1.05b: GIVEN FlexColor is lightSurfaceVariant '
+        'EXPECT color is Color(0xFFEEEEEE)', () {
+      expect(FlexColor.lightSurfaceVariant, const Color(0xFFEEEEEE));
+    });
+    test(
         'FC1.06: GIVEN FlexColor is materialLightBackground '
         'EXPECT color is ColorScheme.light().background', () {
       expect(FlexColor.materialLightBackground, ml.background);
@@ -117,6 +122,11 @@ void main() {
         'FC2.05: GIVEN FlexColor is materialDarkSurface '
         'EXPECT color is ColorScheme.dark().surface', () {
       expect(FlexColor.materialDarkSurface, md.surface);
+    });
+    test(
+        'FC2.05b: GIVEN FlexColor is darkSurfaceVariant '
+        'EXPECT color is Color(0xFF323232)', () {
+      expect(FlexColor.darkSurfaceVariant, const Color(0xFF323232));
     });
     test(
         'FC2.06: GIVEN FlexColor is materialDarkBackground '

@@ -86,7 +86,7 @@ void main() {
       onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
-      surfaceVariant: Color(0xffffffff),
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xFF737373),
       outlineVariant: Color(0xFFBFBFBF),
@@ -136,9 +136,9 @@ void main() {
         'EXPECT its STRING ThemeData to be equal to one made with light '
         'factory and ColorScheme.light v4.2.0 test case.', () {
       expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          const FlexColorScheme(colorScheme: ColorScheme.light())
+              .toScheme
+              .toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
@@ -149,9 +149,9 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and ColorScheme.light v4.2.0 test case.', () {
       expect(
-        const FlexColorScheme(
-          colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
-        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        const FlexColorScheme(colorScheme: ColorScheme.light())
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
@@ -181,7 +181,7 @@ void main() {
       onBackground: Color(0xffffffff),
       surface: Color(0xff121212),
       onSurface: Color(0xffffffff),
-      surfaceVariant: Color(0xff121212),
+      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xFF8C8C8C),
       outlineVariant: Color(0xFF404040),
@@ -246,7 +246,7 @@ void main() {
       colorScheme: ColorScheme(
         errorContainer: Color(0xfff1d8d8),
         onErrorContainer: Color(0xff000000),
-        surfaceVariant: Color(0xffffffff),
+        surfaceVariant: Color(0xFFEEEEEE),
         onSurfaceVariant: Color(0xff000000),
         outline: Color(0xFF737373),
         outlineVariant: Color(0xFFBFBFBF),
@@ -440,7 +440,7 @@ void main() {
       // but cannot be overridden via passed in properties to raw constructor.
       errorContainer: Color(0xfff1d8d8),
       onErrorContainer: Color(0xff000000),
-      surfaceVariant: Color(0xffffffff),
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xFF737373),
       outlineVariant: Color(0xFFBFBFBF),
@@ -532,6 +532,7 @@ void main() {
         background: Color(0xff121212),
         onBackground: Colors.white,
         surface: Color(0xff121212),
+        surfaceVariant: Color(0xFF323232),
         onSurface: Colors.white,
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
@@ -610,6 +611,7 @@ void main() {
         errorContainer: Color(0xff632331),
         onErrorContainer: Colors.white,
         surface: Color(0xff121212),
+        surfaceVariant: Color(0xFF323232),
         onSurface: Colors.white,
         background: Color(0xff121212),
         onBackground: Colors.white,
@@ -687,7 +689,7 @@ void main() {
       // but cannot be overridden via passed in properties to raw constructor.
       errorContainer: Color(0xff632331),
       onErrorContainer: Colors.white,
-      surfaceVariant: Color(0xff121212),
+      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Colors.white,
       outline: Color(0xFF8C8C8C),
       outlineVariant: Color(0xFF404040),
@@ -774,6 +776,7 @@ void main() {
             tertiary: Color(0xff03dac6),
             tertiaryContainer: Color(0xff03dac6),
             surface: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             background: Color(0xff121212),
             error: Color(0xff9b374d),
             errorContainer: Color(0xff632331),
@@ -789,6 +792,8 @@ void main() {
             outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
             scrim: Color(0xff000000),
+            surfaceTint: Color(0xffefb7ff),
+            inverseSurface: Colors.white,
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -815,7 +820,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FCS7.19-ThemeData-hc-dark: GIVEN FlexColorScheme() made with '
         'raw high contrast dark color scheme '
@@ -832,6 +836,7 @@ void main() {
             tertiary: Color(0xff03dac6),
             tertiaryContainer: Color(0xff03dac6),
             surface: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             background: Color(0xff121212),
             error: Color(0xff9b374d),
             errorContainer: Color(0xff632331),
@@ -847,6 +852,8 @@ void main() {
             outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
             scrim: Color(0xff000000),
+            surfaceTint: Color(0xffefb7ff),
+            inverseSurface: Colors.white,
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -1211,6 +1218,7 @@ void main() {
       background: Colors.white,
       onBackground: Colors.black,
       surface: Colors.white,
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurface: Colors.black,
       outline: Color(0xFF737373),
       outlineVariant: Color(0xFFBFBFBF),
@@ -1269,7 +1277,7 @@ void main() {
             onBackground: Color(0xffffffff),
             surface: Color(0xff121212),
             onSurface: Color(0xffffffff),
-            surfaceVariant: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             onSurfaceVariant: Color(0xffffffff),
             outline: Color(0xFF8C8C8C),
             outlineVariant: Color(0xFF404040),
@@ -1993,7 +2001,7 @@ void main() {
           //
           errorContainer: Color(0xfff1d8d8),
           onErrorContainer: Color(0xff000000),
-          surfaceVariant: Color(0xfff7e9e9),
+          surfaceVariant: Color(0xffeadcdc),
           onSurfaceVariant: Color(0xff000000),
           outline: Color(0xFF737373),
           outlineVariant: Color(0xFFBFBFBF),
@@ -2004,7 +2012,9 @@ void main() {
           inversePrimary: Color(0xfffff0f0),
         ),
         surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
-        blendLevel: 30,
+        // The 30 blend level will be produced by the colors given here
+        // with 0 blend level
+        blendLevel: 0,
         primary: const Color(0xffcd5758),
         onPrimary: const Color(0xffffffff),
         primaryContainer: const Color(0xffebbbbc),
@@ -2062,12 +2072,82 @@ void main() {
         ),
       );
     });
+    const FlexColorScheme fcsLightH2RealRaw = FlexColorScheme(
+        colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xffcd5758),
+            onPrimary: Color(0xffffffff),
+            primaryContainer: Color(0xffebbbbc),
+            onPrimaryContainer: Color(0xff000000),
+            secondary: Color(0xff57c8d3),
+            onSecondary: Color(0xff000000),
+            secondaryContainer: Color(0xffbbe9ed),
+            onSecondaryContainer: Color(0xff000000),
+            tertiary: Color(0xfff37d7e),
+            onTertiary: Color(0xff000000),
+            tertiaryContainer: Color(0xfffdf0f0),
+            onTertiaryContainer: Color(0xff000000),
+            error: Color(0xff790000),
+            onError: Color(0xffffffff),
+            background: Color(0xfffaf3f3),
+            onBackground: Color(0xff000000),
+            surface: Color(0xfffaf3f3),
+            onSurface: Color(0xff000000),
+            //
+            errorContainer: Color(0xfff1d8d8),
+            onErrorContainer: Color(0xff000000),
+            surfaceVariant: Color(0xffeadcdc),
+            onSurfaceVariant: Color(0xff000000),
+            outline: Color(0xFF737373),
+            outlineVariant: Color(0xFFBFBFBF),
+            shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
+            inverseSurface: Color(0xff1b1414),
+            onInverseSurface: Color(0xffffffff),
+            inversePrimary: Color(0xfffff0f0),
+            surfaceTint: Color(0xffcd5758)),
+        primary: Color(0xffcd5758),
+        onPrimary: Color(0xffffffff),
+        primaryContainer: Color(0xffebbbbc),
+        onPrimaryContainer: Color(0xff000000),
+        secondary: Color(0xff57c8d3),
+        onSecondary: Color(0xff000000),
+        secondaryContainer: Color(0xffbbe9ed),
+        onSecondaryContainer: Color(0xff000000),
+        tertiary: Color(0xfff37d7e),
+        onTertiary: Color(0xff000000),
+        tertiaryContainer: Color(0xfffdf0f0),
+        onTertiaryContainer: Color(0xff000000),
+        error: Color(0xff790000),
+        onError: Color(0xffffffff),
+        background: Color(0xfffaf3f3),
+        onBackground: Color(0xff000000),
+        surface: Color(0xfffaf3f3),
+        onSurface: Color(0xff000000),
+        //
+        brightness: Brightness.light,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarBackground: Color(0xfffaf3f3),
+        dialogBackground: Color(0xfffaf3f3),
+        scaffoldBackground: Color(0xffecc2c2),
+        appBarElevation: null,
+        bottomAppBarElevation: null,
+        tooltipsMatchBackground: false,
+        transparentStatusBar: true,
+        visualDensity: null,
+        textTheme: null,
+        primaryTextTheme: null,
+        fontFamily: null,
+        platform: null,
+        typography: null,
+        applyElevationOverlayColor: true,
+        subThemesData: null);
     test(
         'FCS7.79c-string: GIVEN a Equal Raw and FlexColorScheme.light with '
         'heavy branding and 2 colors EXPECT equal toStrings.', () {
       expect(
         fcsLightH2.toString(),
-        equalsIgnoringHashCodes(fcsLightH2Raw.toString()),
+        equalsIgnoringHashCodes(fcsLightH2RealRaw.toString()),
       );
     });
     test(
@@ -2075,7 +2155,7 @@ void main() {
         'heavy branding and 2 colors EXPECT equal objects.', () {
       expect(
         fcsLightH2,
-        equals(fcsLightH2Raw),
+        equals(fcsLightH2RealRaw),
       );
     });
     test(
@@ -2084,7 +2164,7 @@ void main() {
       expect(
         fcsLightH2.toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-            fcsLightH2Raw.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+            fcsLightH2RealRaw.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -2124,7 +2204,7 @@ void main() {
           //
           errorContainer: Color(0xffb1384e),
           onErrorContainer: Color(0xffffffff),
-          surfaceVariant: Color(0xff191313),
+          surfaceVariant: Color(0xff372f2f),
           onSurfaceVariant: Color(0xffffffff),
           outline: Color(0xFF8C8C8C),
           outlineVariant: Color(0xFF404040),
@@ -3097,7 +3177,7 @@ void main() {
       final ColorScheme scheme = theme.colorScheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
       final Color bottomSheetColor = refTheme.colorScheme.surface;
-      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      final Color bottomSheetModalColor = refTheme.colorScheme.surfaceVariant;
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3148,7 +3228,7 @@ void main() {
       );
       final ColorScheme scheme = theme.colorScheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
-      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      final Color bottomSheetModalColor = refTheme.colorScheme.surfaceVariant;
       expect(
         theme.bottomSheetTheme.modalBackgroundColor,
         equals(bottomSheetModalColor),

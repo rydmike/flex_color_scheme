@@ -43,6 +43,9 @@ class FlexColor {
   /// FlexColors standard for light surface, same as material.
   static const Color lightSurface = Color(0xFFFFFFFF);
 
+  /// FlexColors standard color for light surfaceVariant.
+  static const Color lightSurfaceVariant = Color(0xFFEEEEEE);
+
   /// FlexColors standard for light background.
   ///
   /// A very light grey, lighter than grey50, used for better blend effect when
@@ -57,6 +60,9 @@ class FlexColor {
   /// Slightly darker than its Material counter part, so we can blend in
   /// more primary color without getting too light too soon.
   static const Color darkSurface = Color(0xFF111111);
+
+  /// FlexColors standard color for dark surfaceVariant.
+  static const Color darkSurfaceVariant = Color(0xFF323232);
 
   /// FlexColors standard for dark background.
   ///

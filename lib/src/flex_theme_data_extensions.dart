@@ -78,8 +78,7 @@ extension FlexThemeData on ThemeData {
     /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
     /// you already have a custom [ColorScheme] based color definition that
     /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities. This will become particularly useful when using Material 3
-    /// based design and its seed generated color schemes.
+    /// capabilities.
     ///
     /// If you provide both a [ColorScheme] and some individual direct property
     /// values that also exist in a [ColorScheme], the individual property
@@ -92,15 +91,15 @@ extension FlexThemeData on ThemeData {
     /// is the light theme mode factory. Make sure the colors used in your color
     /// scheme are intended for a light theme.
     ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
-    /// and [background] colors in the provided [colorScheme] will be overridden
-    /// by the computed color branded surfaces. If your [colorScheme] already
-    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
-    /// using them.
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
+    /// [surfaceVariant], [background] and [inverseSurface] colors in the
+    /// provided [colorScheme] will be overridden by the computed color branded
+    /// surfaces. If your [colorScheme] already contains branded surface colors,
+    /// then keep [blendLevel] = 0 to continue using them.
     ///
     /// If you use [lightIsWhite] factory feature, it will also override your
-    /// [colorScheme] based [surface] and [background] properties and make them
-    /// 8% lighter.
+    /// [colorScheme] based mentioned color properties above and make them
+    /// 5% lighter.
     ///
     /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
@@ -1115,44 +1114,83 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
+    /// If true, then widgets that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3. If false,
+    /// they will use the Material 2 look and feel.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app as some widgets are migrated
+    /// while others have yet to be.
+    ///
+    /// Defaults to false. When the Material 3 specification is complete
+    /// and all widgets are migrated on stable, we will change this flag to be
+    /// true by default. After that change has landed on stable, we will
+    /// deprecate this flag and remove all uses of it. At that point, the
+    /// `material` library will aim to only support Material 3.
+    ///
+    /// ## Defaults
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
     /// some properties will get updated defaults. Please note that
     /// [ThemeData.copyWith] with [useMaterial3] set to true will
     /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// ```
-    /// Property      | Material 3 default          | Material 2 default      |
-    /// ------------- | --------------------------  | ----------------------  |
-    /// typography]   | Typography.material2021]    | Typography.material2014]|
-    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
-    /// ```
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+    ///
+    /// | Property        | M3 default                 | M2 default           |
+    /// | :-------------- | :------------------------- | :------------------- |
+    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
+    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// If [brightness] is [Brightness.dark] then the default color scheme will
+    /// be either the M3 baseline dark color scheme or the M2 baseline dark
+    /// color scheme depending on [useMaterial3].
     ///
     /// ## Affected widgets
     ///
     /// This flag affects styles and components.
     ///
     /// ### Styles
-    ///   * Color: [ColorScheme], [Material]
+    ///   * Color: [ColorScheme], [Material] (see table above)
     ///   * Shape: (see components below)
-    ///   * Typography: `typography` (see table above)
+    ///   * Typography: [Typography] (see table above)
     ///
     /// ### Components
-    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
-    ///   * FAB: [FloatingActionButton]
-    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Badges: [Badge]
+    ///   * Bottom app bar: [BottomAppBar]
+    ///   * Bottom sheets: [BottomSheet]
+    ///   * Buttons
+    ///     - Common buttons: [ElevatedButton], [FilledButton],
+    ///       [OutlinedButton], [TextButton]
+    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+    ///     - Icon buttons: [IconButton]
+    ///     - Segmented buttons: [SegmentedButton]
     ///   * Cards: [Card]
+    ///   * Checkbox: [Checkbox]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
     ///     - [InputChip]
     ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Divider: [Divider]
     ///   * Lists: [ListTile]
-    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
-    ///   * [NavigationRail]
+    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation rail: [NavigationRail]
+    ///   * Progress indicators: [CircularProgressIndicator],
+    ///     [LinearProgressIndicator]
+    ///   * Radio button: [Radio]
+    ///   * Snack bar: [SnackBar]
+    ///   * Slider: [Slider]
+    ///   * Switch: [Switch]
+    ///   * Tabs: [TabBar]
+    ///   * TextFields: [TextField] together with its [InputDecoration]
     ///   * Top app bar: [AppBar]
     ///
     /// In addition, this flag enables features introduced in Android 12.
@@ -1161,17 +1199,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// See also:
     ///
-    ///   * [Material Design 3](https://m3.material.io).
-    ///
-    /// --------------------------------------------------------
-    ///
-    /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, using [FlexColorScheme] sub-themes will produce widget
-    /// sub-themes, using current Flutter Material 2 theming limitations, that
-    /// by default also implement the Material 3 design and look when it is
-    /// possible within current SDK limits. During SDK transition to full M3
-    /// support, keeping useMaterial3 false and just using the FlexColorScheme
-    /// sub-theming, may be preferred since it has fewer transitional issues.
+    ///   * [Material 3 specification](https://m3.material.io/)
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
@@ -1327,8 +1355,7 @@ extension FlexThemeData on ThemeData {
     /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
     /// you already have a custom [ColorScheme] based color definition that
     /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities. This will become particularly useful when using Material 3
-    /// based design and its seed generated color schemes.
+    /// capabilities.
     ///
     /// If you provide both a [ColorScheme] and some individual direct property
     /// values that also exist in a [ColorScheme], the individual property
@@ -1341,15 +1368,15 @@ extension FlexThemeData on ThemeData {
     /// is the light theme mode factory. Make sure the colors used in your color
     /// scheme are intended for a light theme.
     ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
-    /// and [background] colors in the provided [colorScheme] will be overridden
-    /// by the computed color branded surfaces. If your [colorScheme] already
-    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
-    /// using them.
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
+    /// [surfaceVariant], [background] and [inverseSurface] colors in the
+    /// provided [colorScheme] will be overridden by the computed color branded
+    /// surfaces. If your [colorScheme] already contains branded surface colors,
+    /// then keep [blendLevel] = 0 to continue using them.
     ///
-    /// If you use [lightIsWhite] factory feature, it will also override your
-    /// [colorScheme] based [surface] and [background] properties and make them
-    /// 8% lighter.
+    /// If you use [darkIsTrueBlack] factory feature, it will also override your
+    /// [colorScheme] based mentioned color properties above and make them
+    /// 5% darker.
     ///
     /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
@@ -2362,44 +2389,83 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
+    /// If true, then widgets that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3. If false,
+    /// they will use the Material 2 look and feel.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app as some widgets are migrated
+    /// while others have yet to be.
+    ///
+    /// Defaults to false. When the Material 3 specification is complete
+    /// and all widgets are migrated on stable, we will change this flag to be
+    /// true by default. After that change has landed on stable, we will
+    /// deprecate this flag and remove all uses of it. At that point, the
+    /// `material` library will aim to only support Material 3.
+    ///
+    /// ## Defaults
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
     /// some properties will get updated defaults. Please note that
     /// [ThemeData.copyWith] with [useMaterial3] set to true will
     /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// ```
-    /// Property      | Material 3 default          | Material 2 default      |
-    /// ------------- | --------------------------  | ----------------------  |
-    /// typography]   | Typography.material2021]    | Typography.material2014]|
-    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
-    /// ```
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+    ///
+    /// | Property        | M3 default                 | M2 default           |
+    /// | :-------------- | :------------------------- | :------------------- |
+    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
+    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// If [brightness] is [Brightness.dark] then the default color scheme will
+    /// be either the M3 baseline dark color scheme or the M2 baseline dark
+    /// color scheme depending on [useMaterial3].
     ///
     /// ## Affected widgets
     ///
     /// This flag affects styles and components.
     ///
     /// ### Styles
-    ///   * Color: [ColorScheme], [Material]
+    ///   * Color: [ColorScheme], [Material] (see table above)
     ///   * Shape: (see components below)
-    ///   * Typography: `typography` (see table above)
+    ///   * Typography: [Typography] (see table above)
     ///
     /// ### Components
-    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
-    ///   * FAB: [FloatingActionButton]
-    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Badges: [Badge]
+    ///   * Bottom app bar: [BottomAppBar]
+    ///   * Bottom sheets: [BottomSheet]
+    ///   * Buttons
+    ///     - Common buttons: [ElevatedButton], [FilledButton],
+    ///       [OutlinedButton], [TextButton]
+    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+    ///     - Icon buttons: [IconButton]
+    ///     - Segmented buttons: [SegmentedButton]
     ///   * Cards: [Card]
+    ///   * Checkbox: [Checkbox]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
     ///     - [InputChip]
     ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Divider: [Divider]
     ///   * Lists: [ListTile]
-    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
-    ///   * [NavigationRail]
+    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation rail: [NavigationRail]
+    ///   * Progress indicators: [CircularProgressIndicator],
+    ///     [LinearProgressIndicator]
+    ///   * Radio button: [Radio]
+    ///   * Snack bar: [SnackBar]
+    ///   * Slider: [Slider]
+    ///   * Switch: [Switch]
+    ///   * Tabs: [TabBar]
+    ///   * TextFields: [TextField] together with its [InputDecoration]
     ///   * Top app bar: [AppBar]
     ///
     /// In addition, this flag enables features introduced in Android 12.
@@ -2408,17 +2474,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// See also:
     ///
-    ///   * [Material Design 3](https://m3.material.io).
-    ///
-    /// --------------------------------------------------------
-    ///
-    /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, using [FlexColorScheme] sub-themes will produce widget
-    /// sub-themes, using current Flutter Material 2 theming limitations, that
-    /// by default also implement the Material 3 design and look when it is
-    /// possible within current SDK limits. During SDK transition to full M3
-    /// support, keeping useMaterial3 false and just using the FlexColorScheme
-    /// sub-theming, may be preferred since it has fewer transitional issues.
+    ///   * [Material 3 specification](https://m3.material.io/)
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on

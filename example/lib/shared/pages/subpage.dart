@@ -1,4 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../const/app_data.dart';
 import '../controllers/theme_controller.dart';
@@ -47,106 +49,116 @@ class _SubpageDemoState extends State<SubpageDemo> {
     final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
     final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        // For scrolling behind the app bar.
-        extendBodyBehindAppBar: true,
-        // For scrolling behind the bottom nav bar, if there is one.
-        extendBody: true,
-        appBar: AppBar(
-          title: const Text('Subpage Demo'),
-          actions: const <Widget>[AboutIconButton()],
-          bottom: const TabBar(
-            tabs: <Widget>[
-              Tab(text: 'Home'),
-              Tab(text: 'Feed'),
-              Tab(text: 'Settings'),
-            ],
-          ),
-        ),
-        body: PageBody(
-          child: ListView(
-            primary: true,
-            padding: EdgeInsets.fromLTRB(
-              sideMargin,
-              topPadding + AppData.edgeInsetsTablet,
-              sideMargin,
-              AppData.edgeInsetsTablet + bottomPadding,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: FlexColorScheme.themedSystemNavigationBar(
+        context,
+        systemNavBarStyle: widget.controller?.sysNavBarStyle ??
+            FlexSystemNavBarStyle.background,
+        useDivider: widget.controller?.useSysNavDivider ?? false,
+        opacity: widget.controller?.sysNavBarOpacity ?? 1,
+      ),
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          // For scrolling behind the app bar.
+          extendBodyBehindAppBar: true,
+          // For scrolling behind the bottom nav bar, if there is one.
+          extendBody: true,
+          appBar: AppBar(
+            title: const Text('Subpage Demo'),
+            actions: const <Widget>[AboutIconButton()],
+            bottom: const TabBar(
+              tabs: <Widget>[
+                Tab(text: 'Home'),
+                Tab(text: 'Feed'),
+                Tab(text: 'Settings'),
+              ],
             ),
-            children: <Widget>[
-              Text('Subpage Demo', style: headlineMedium),
-              const Text(
-                'This screen shows an example page with the same '
-                'FlexColorScheme based ThemeData inherited theme being used. '
-                'It also has a NavigationBar and TabBar in the AppBar.',
+          ),
+          body: PageBody(
+            child: ListView(
+              primary: true,
+              padding: EdgeInsets.fromLTRB(
+                sideMargin,
+                topPadding + AppData.edgeInsetsTablet,
+                sideMargin,
+                AppData.edgeInsetsTablet + bottomPadding,
               ),
-              const SizedBox(height: 8),
-              if (widget.controller != null)
-                ListTile(
-                  title: const Text('Theme mode'),
-                  subtitle: Text('Theme ${widget.controller!.themeMode.name}'),
-                  trailing: ThemeModeSwitch(
-                    themeMode: widget.controller!.themeMode,
-                    onChanged: widget.controller!.setThemeMode,
-                  ),
-                  // Toggle theme mode also via the ListTile tap.
-                  onTap: () {
-                    if (theme.brightness == Brightness.light) {
-                      widget.controller!.setThemeMode(ThemeMode.dark);
-                    } else {
-                      widget.controller!.setThemeMode(ThemeMode.light);
-                    }
-                  },
+              children: <Widget>[
+                Text('Subpage Demo', style: headlineMedium),
+                const Text(
+                  'This screen shows an example page with the same '
+                  'FlexColorScheme based ThemeData inherited theme being used. '
+                  'It also has a NavigationBar and TabBar in the AppBar.',
                 ),
-              const Divider(),
-              // Show all key active theme colors.
-              Text('Theme Colors', style: headlineMedium),
-              const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
-                child: ShowColorSchemeColors(),
+                const SizedBox(height: 8),
+                if (widget.controller != null)
+                  ListTile(
+                    title: const Text('Theme mode'),
+                    subtitle:
+                        Text('Theme ${widget.controller!.themeMode.name}'),
+                    trailing: ThemeModeSwitch(
+                      themeMode: widget.controller!.themeMode,
+                      onChanged: widget.controller!.setThemeMode,
+                    ),
+                    // Toggle theme mode also via the ListTile tap.
+                    onTap: () {
+                      if (theme.brightness == Brightness.light) {
+                        widget.controller!.setThemeMode(ThemeMode.dark);
+                      } else {
+                        widget.controller!.setThemeMode(ThemeMode.light);
+                      }
+                    },
+                  ),
+                const Divider(),
+                // Show all key active theme colors.
+                Text('Theme Colors', style: headlineMedium),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppData.edgeInsetsTablet),
+                  child: ShowColorSchemeColors(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppData.edgeInsetsTablet),
+                  child: ShowThemeDataColors(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppData.edgeInsetsTablet),
+                  child: ShowSubThemeColors(),
+                ),
+                const Divider(),
+                Text('Theme Showcase', style: headlineMedium),
+                const ThemeShowcase(),
+              ],
+            ),
+          ),
+          bottomNavigationBar: NavigationBar(
+            onDestinationSelected: (int value) {
+              setState(() {
+                _buttonIndex = value;
+              });
+            },
+            selectedIndex: _buttonIndex,
+            destinations: const <NavigationDestination>[
+              NavigationDestination(
+                icon: Icon(Icons.chat_bubble),
+                label: 'Chat',
+                tooltip: '',
               ),
-              const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
-                child: ShowThemeDataColors(),
+              NavigationDestination(
+                icon: Icon(Icons.beenhere),
+                label: 'Tasks',
+                tooltip: '',
               ),
-              const Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: AppData.edgeInsetsTablet),
-                child: ShowSubThemeColors(),
+              NavigationDestination(
+                icon: Icon(Icons.create_new_folder),
+                label: 'Archive',
+                tooltip: '',
               ),
-              const Divider(),
-              Text('Theme Showcase', style: headlineMedium),
-              const ThemeShowcase(),
             ],
           ),
-        ),
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int value) {
-            setState(() {
-              _buttonIndex = value;
-            });
-          },
-          selectedIndex: _buttonIndex,
-          destinations: const <NavigationDestination>[
-            NavigationDestination(
-              icon: Icon(Icons.chat_bubble),
-              label: 'Chat',
-              tooltip: '',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.beenhere),
-              label: 'Tasks',
-              tooltip: '',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.create_new_folder),
-              label: 'Archive',
-              tooltip: '',
-            ),
-          ],
         ),
       ),
     );

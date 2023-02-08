@@ -113,8 +113,8 @@ class FlexSchemeColor with Diagnosticable {
   /// if the secondary and tertiary colors, including their containers, are
   /// swapped.
   ///
-  /// Most FlexColorScheme color schemes were designed with M2 usage in mind and
-  /// have this flag set to true. If this flag is false (default) it may mean
+  /// Many legacy FlexColorScheme color schemes were designed for M2 and have
+  /// this flag set to true. If this flag is false (default) it may mean
   /// that its [FlexSchemeColor] was designed for M3 or that it won't benefit
   /// from swapping secondary and tertiary colors.
   ///

@@ -24,7 +24,7 @@ class DrawerSettings extends StatelessWidget {
                 : '';
     final String drawerIndicatorRadiusDefaultLabel =
         controller.drawerIndicatorBorderRadius == null &&
-                controller.drawerIndicatorBorderRadius == null
+                controller.defaultRadius == null
             ? 'default stadium'
             : controller.drawerIndicatorBorderRadius == null &&
                     controller.defaultRadius != null

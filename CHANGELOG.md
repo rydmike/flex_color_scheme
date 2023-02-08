@@ -22,6 +22,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - **Style breaking**: The FCS built-in computed none seeded values for `ColorScheme.outline` and `ColorScheme.outlineVariant` were modified. The new values are more in line with what you get with the M3 default seed algorithm, but plain grey-scale variants of them without any primary color blend. Technically light mode color for `outline` was changed from 30% lighten of light mode `onBackground` color to 45%, and `outlineVariant` from 60% lighten of `onBackground` to 75%. Likewise for the dark mode, but with darkening of the `onBackground` with the same percentage changes. The new values match the M3 design intent better. 
 
+- **Style breaking**: FCS v7 introduces `FlexColor.lightSurfaceVariant` and `FlexColor.darkSurfaceVariant` colors that are used when making none-seeded ColorSchemes. The colors are plain not tinted light and greys, matching the grey level of the tinted versions you get with seed-generated M3 colors. The colors are used as defaults for light and dark `surfaceVariant` color in none-seeded versions of generated FlexColorScheme color schemes. In previous versions `surfaceVariant` was just white and black in light and dark theme mode. To be able to better match the M3 color system, without using seed generation, this surface color should not be just white or black. The new `surfaceVariant` corrects this past design to improve compatibility with the M3 color system when not using seed generated color schemes.
+  
 - **Style breaking**: When enabling Material 3 and not enabling FCS sub-themes, and if no direct properties in FlexColorScheme raw constructor or its light and dark factories are defined in a way that requires creating a sub-theme to deliver the result, FlexColorScheme no longer creates any component sub-themes with none null properties in M3 mode. In previous versions, it did so in a few cases. This is no longer required to deliver the target starting point theme now that M3 is almost fully supported in Flutter 3.7. When using FlexColorScheme with Material3 set to true and its other properties at default values, and not enabling sub-themes, all component sub-theme will have null by default properties. When using Material 2, FlexColorScheme as before even when not enabling sub-themes, still creates the core component themes listed under core default in the documentation. This is done for FCS legacy reasons, to be able to deliver the default style it had before component sub-themes were a part of its offering. When `theme.scaffoldBackgroundColor` and maybe also some other color in current `ThemeData` are deprecated, FlexColorscheme will need to set those colors in their own sub-theme also in M3 mode to be able to continue to deliver e.g. surface blends that impacts scaffold background separately from ColorScheme colors, like it does today via `theme.scaffoldBackgroundColor` without using a component theme. Overall from this style breaking change there is only a visible change on the Material 2 type `BottomNavigationBar` in dark mode. When using the M3 mode, its dark mode icons have changed to the Flutter default style. When you opt in on FCS sub-themes in the M3 mode, it gets the same icon color as before, and as it still gets in the M2 FCS style, with or without sub-themes enabled.
 
 - **Style breaking**: When using Material 3, changed the default `NavigationBar` height from 62dp to 80dp, the 62dp default style is kept when using M2 in order to not break past default styles for M2 themes. The 80dp height is also the default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme a bit less opinionated compared to M3 spec. 
@@ -39,21 +41,24 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Added visualizations of surface colors to the **Surface blends** panel.
 - Added color theming of BottomAppBar background color.
 - Added theming of InputDecorator prefixIcon color.
-- Added theming of Drawer, NavigationDrawer and indicator width, as well as indicator border radius and indicator item color. 
+- Added theming of Drawer, NavigationDrawer and indicator width, as well as indicator border radius and indicator item color.
+- Added workaround for NavigationDrawer Flutter width and resize bugs. Bugs are still there, only worked around the cases to avoid them impacting the Playground.
+
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- FIX: Shortcut entry bug on MenuAnchor.
-- Playground: Bug workaround for width: Fallback to a theme with 3o4 to avoid Widget issue.   
-- Drawer indicator opacity.
-- Drawer indicator width to UI.
-- NavigationBar: Separate label and icon color in Playground. API already supports it.  
-- NEW: Bring shadows back (Default, None, Custom) ?
-- NEW: Remove tint elevation (Default, None, Custom) ?  
-- FIX: Drawer indicator radius, default not showing global default when using it.
-- Add TextFiled Demo setting example(s).
-- Maybe: Add some theming options for the new MenuBar theme.
-- ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
+- REPORT: Found NavigationDrawer issues to Flutter repo.
+- FIX: Shortcut entry bug on MenuAnchor showcase.
+- ADD: Drawer indicator opacity.
+- ADD: Drawer indicator width to UI.
+- ADD: All navigation bars: Separate label and icon color in the Playground. API already supports it.
+- ADD: Better info about Android System Navigation Bar, plus link to docs, improve its docs.  
+- NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
+- NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
+- MAYBE ADD: TextFiled Demo setting example(s)
+- MAYBE ADD: Page with example theming configs.  
+- MAYBE ADD: Some initial theming options for the new MenuBar theme.
+- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - All new sub-themes and new states.  
@@ -62,8 +67,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Changelog.
-
-  - Update known Flutter M3 and theming impacting issues. Remove fixed ones, add new known ones. (Slider update issue, not yet reported.)
+  - Update known Flutter M3 and theming impacting issues. (Slider update issue, not yet reported.)
   - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
 - After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
   - New color scheme images.
