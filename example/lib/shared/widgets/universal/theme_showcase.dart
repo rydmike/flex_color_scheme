@@ -2096,8 +2096,8 @@ class MenuBarShowcase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Text(
-                'The new M3 menus can be used in a MenuBar via SubMenuButton and '
-                'its MenuItemButton, but they can also be used in a '
+                'The new M3 menus can be used in a MenuBar via SubMenuButton '
+                'and its MenuItemButton, but they can also be used in a '
                 'MenuAnchor anywhere.',
                 style: denseBody,
               ),
