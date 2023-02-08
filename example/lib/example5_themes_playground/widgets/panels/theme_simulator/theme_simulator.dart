@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import 'app_example_chat.dart';
 import 'app_example_login.dart';
 import 'app_example_shop.dart';
+import 'app_example_widgets.dart';
 
 /// An example that show what an app using the theme might look like
 class ThemeSimulator extends StatelessWidget {
@@ -68,6 +69,10 @@ class ThemeSimulator extends StatelessWidget {
             SimulatorFrame(
               width: controller.deviceSize,
               child: AppExampleChat(controller: controller),
+            ),
+            SimulatorFrame(
+              width: controller.deviceSize,
+              child: AppExampleWidgets(controller: controller),
             ),
           ],
         ),

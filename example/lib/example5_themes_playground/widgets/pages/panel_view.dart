@@ -294,7 +294,10 @@ class PanelPage extends StatelessWidget {
       // The second header
       final Widget secondHeader = ListTile(
         leading: Icon(panelItems[secondPage].icon, color: iconColor),
-        title: Text(panelItems[secondPage].panelLabel),
+        title: Text(
+          panelItems[secondPage].panelLabel,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         trailing: SecondPanelPopupMenu(
           index: secondPage,
           onChanged: controller.setSideViewIndex,

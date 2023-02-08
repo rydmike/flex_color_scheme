@@ -62,6 +62,11 @@ class ThemeShowcase extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Divider(),
+        const MenuBarShowcase(),
+        const SizedBox(height: 8),
+        const MenuAnchorShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         const SizedBox(height: 8),
         const TooltipShowcase(),
         const SizedBox(height: 16),
@@ -91,11 +96,6 @@ class ThemeShowcase extends StatelessWidget {
         const SizedBox(height: 8),
         const Divider(),
         const BottomNavigationBarShowcase(),
-        const SizedBox(height: 8),
-        const Divider(),
-        const MenuBarShowcase(),
-        const SizedBox(height: 8),
-        const MenuAnchorShowcase(),
         const SizedBox(height: 8),
         const NavigationBarShowcase(),
         const SizedBox(height: 8),
@@ -2113,6 +2113,7 @@ class MenuBarShowcase extends StatelessWidget {
                           onPressed: () {
                             showAboutDialog(
                               context: context,
+                              useRootNavigator: false,
                               applicationName: 'MenuBar Demo',
                               applicationVersion: '1.0.0',
                             );
@@ -2439,6 +2440,7 @@ class _MyContextMenuState extends State<MyContextMenu> {
       case MenuEntry.about:
         showAboutDialog(
           context: context,
+          useRootNavigator: false,
           applicationName: 'MenuAnchor Demo',
           applicationVersion: '1.0.0',
         );

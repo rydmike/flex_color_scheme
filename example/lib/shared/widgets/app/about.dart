@@ -6,19 +6,22 @@ import '../../utils/link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
-  const AboutIconButton({super.key, this.color});
+  const AboutIconButton({super.key, this.color, this.useRootNavigator = true});
 
   /// The color used on the icon button.
   ///
   /// If null, default to Icon() class default color.
   final Color? color;
 
+  /// Use root navigator?
+  final bool useRootNavigator;
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.info, color: color),
       onPressed: () {
-        showAppAboutDialog(context);
+        showAppAboutDialog(context, useRootNavigator);
       },
     );
   }
@@ -26,7 +29,7 @@ class AboutIconButton extends StatelessWidget {
 
 // This [showAppAboutDialog] function is based on the [AboutDialog] example
 // that exist(ed) in the Flutter Gallery App.
-void showAppAboutDialog(BuildContext context) {
+void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
@@ -53,6 +56,7 @@ void showAppAboutDialog(BuildContext context) {
     context: context,
     applicationName: AppData.title(context),
     applicationVersion: AppData.version,
+    useRootNavigator: useRootNavigator,
     applicationIcon: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
