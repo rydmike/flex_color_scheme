@@ -283,12 +283,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.bottomNavShowUnselectedLabels,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navBarSelectedLabelSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
             navigationBarSelectedIconSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navBarSelectedIconSchemeColor,
             navigationBarUnselectedIconSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,

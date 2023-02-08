@@ -770,11 +770,17 @@ class Store {
   // Default value for the navBarHeight, also reset settings.
   static const double? defaultNavBarHeight = null;
 
-  // Key used to read and save the navBarSelectedItemSchemeColor value.
-  static const String keyNavBarSelectedItemSchemeColor =
+  // Key used to read and save the navBarSelectedIconSchemeColor icon value.
+  static const String keyNavBarSelectedIconSchemeColor =
       'navBarSelectedItemSchemeColor';
+  // Default value for the navBarSelectedIconSchemeColor.
+  static const SchemeColor? defaultNavBarSelectedIconSchemeColor = null;
+
+  // Key used to read and save the navBarSelectedLabelSchemeColor icon value.
+  static const String keyNavBarSelectedLabelSchemeColor =
+      'navBarSelectedLabelSchemeColor';
   // Default value for the navBarSelectedItemSchemeColor.
-  static const SchemeColor? defaultNavBarSelectedItemSchemeColor = null;
+  static const SchemeColor? defaultNavBarSelectedLabelSchemeColor = null;
 
   // Key used to read and save the navBarUnselectedItemSchemeColor value.
   static const String keyNavBarUnselectedSchemeColor =

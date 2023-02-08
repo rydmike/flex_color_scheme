@@ -51,9 +51,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - REPORT: Found NavigationDrawer issues to Flutter repo.
 - FIX: Shortcut entry bug on MenuAnchor showcase.
 - ADD: Drawer indicator opacity.
-- ADD: Drawer indicator width to UI.
 - ADD: All navigation bars: Separate label and icon color in the Playground. API already supports it.
-- ADD: Better info about Android System Navigation Bar, plus link to docs, improve its docs.  
 - NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
 - NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
 - MAYBE ADD: TextFiled settings examples.

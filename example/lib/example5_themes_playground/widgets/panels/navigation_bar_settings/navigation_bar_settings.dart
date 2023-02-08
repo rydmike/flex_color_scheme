@@ -74,9 +74,9 @@ class NavigationBarSettings extends StatelessWidget {
       return 'default (secondaryContainer)';
     }
 
-    // Logic for selected item color label default value,
+    // Logic for selected icon color default value,
     // custom color selection overrides default label and value.
-    String selectedItemColorLabel() {
+    String selectedIconColorLabel() {
       // Use FCS component default, primary.
       if (!controller.useFlutterDefaults &&
           controller.useFlexColorScheme &&
@@ -88,13 +88,30 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
-      return 'default (icon onSecondaryContainer, label onSurface)';
+      return 'default (onSecondaryContainer)';
+    }
+
+    // Logic for selected icon color default value,
+    // custom color selection overrides default label and value.
+    String selectedLabelColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (onSurface)';
+      }
+      // All other cases will use M3 style.
+      return 'default (onSurface)';
     }
 
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
-            controller.navBarSelectedSchemeColor == null &&
+            controller.navBarSelectedIconSchemeColor == null &&
             controller.navBarUnselectedSchemeColor == null);
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
@@ -373,16 +390,30 @@ class NavigationBarSettings extends StatelessWidget {
           ),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Selected item color'),
-          subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: selectedItemColorLabel(),
-          index: controller.navBarSelectedSchemeColor?.index ?? -1,
+          title: const Text('Selected icon color'),
+          labelForDefault: selectedIconColorLabel(),
+          index: controller.navBarSelectedIconSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarSelectedSchemeColor(null);
+                    controller.setNavBarSelectedIconSchemeColor(null);
                   } else {
-                    controller.setNavBarSelectedSchemeColor(
+                    controller.setNavBarSelectedIconSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Selected label color'),
+          labelForDefault: selectedLabelColorLabel(),
+          index: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setNavBarSelectedLabelSchemeColor(null);
+                  } else {
+                    controller.setNavBarSelectedLabelSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }

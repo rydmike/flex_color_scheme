@@ -381,9 +381,12 @@ class ThemeController with ChangeNotifier {
         Store.keyNavigationBarElevation, Store.defaultNavigationBarElevation);
     _navBarHeight = await _themeService.load(
         Store.keyNavBarHeight, Store.defaultNavBarHeight);
-    _navBarSelectedSchemeColor = await _themeService.load(
-        Store.keyNavBarSelectedItemSchemeColor,
-        Store.defaultNavBarSelectedItemSchemeColor);
+    _navBarSelectedIconSchemeColor = await _themeService.load(
+        Store.keyNavBarSelectedIconSchemeColor,
+        Store.defaultNavBarSelectedIconSchemeColor);
+    _navBarSelectedLabelSchemeColor = await _themeService.load(
+        Store.keyNavBarSelectedLabelSchemeColor,
+        Store.defaultNavBarSelectedLabelSchemeColor);
     _navBarUnselectedSchemeColor = await _themeService.load(
         Store.keyNavBarUnselectedSchemeColor,
         Store.defaultNavBarUnselectedSchemeColor);
@@ -823,8 +826,10 @@ class ThemeController with ChangeNotifier {
     setNavBarOpacity(Store.defaultNavBarOpacity, false);
     setNavigationBarElevation(Store.defaultNavigationBarElevation, false);
     setNavBarHeight(Store.defaultNavBarHeight, false);
-    setNavBarSelectedSchemeColor(
-        Store.defaultNavBarSelectedItemSchemeColor, false);
+    setNavBarSelectedIconSchemeColor(
+        Store.defaultNavBarSelectedIconSchemeColor, false);
+    setNavBarSelectedLabelSchemeColor(
+        Store.defaultNavBarSelectedLabelSchemeColor, false);
     setNavBarUnselectedSchemeColor(
         Store.defaultNavBarUnselectedSchemeColor, false);
     setNavBarMuteUnselected(Store.defaultNavBarMuteUnselected, false);
@@ -1017,7 +1022,7 @@ class ThemeController with ChangeNotifier {
     setNavBarIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavBarIndicatorOpacity(1, false);
     setNavBarMuteUnselected(false, false);
-    setNavBarSelectedSchemeColor(SchemeColor.onSurface, false);
+    setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
     setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavBarLabelBehavior(
         NavigationDestinationLabelBehavior.alwaysShow, false);
@@ -2343,14 +2348,28 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavBarHeight, value));
   }
 
-  late SchemeColor? _navBarSelectedSchemeColor;
-  SchemeColor? get navBarSelectedSchemeColor => _navBarSelectedSchemeColor;
-  void setNavBarSelectedSchemeColor(SchemeColor? value, [bool notify = true]) {
-    if (value == _navBarSelectedSchemeColor) return;
-    _navBarSelectedSchemeColor = value;
+  late SchemeColor? _navBarSelectedIconSchemeColor;
+  SchemeColor? get navBarSelectedIconSchemeColor =>
+      _navBarSelectedIconSchemeColor;
+  void setNavBarSelectedIconSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _navBarSelectedIconSchemeColor) return;
+    _navBarSelectedIconSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(
-        _themeService.save(Store.keyNavBarSelectedItemSchemeColor, value));
+        _themeService.save(Store.keyNavBarSelectedIconSchemeColor, value));
+  }
+
+  late SchemeColor? _navBarSelectedLabelSchemeColor;
+  SchemeColor? get navBarSelectedLabelSchemeColor =>
+      _navBarSelectedLabelSchemeColor;
+  void setNavBarSelectedLabelSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _navBarSelectedLabelSchemeColor) return;
+    _navBarSelectedLabelSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavBarSelectedLabelSchemeColor, value));
   }
 
   late SchemeColor? _navBarUnselectedSchemeColor;

@@ -783,9 +783,9 @@ String generateThemeDartCode(ThemeController controller) {
   // NavigationBar setup CODE
   //
   final String navigationBarSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navBarSelectedLabelSchemeColor !=
           null
-      ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedLabelSchemeColor},\n'
       : '';
   final String navigationBarUnselectedLabelSchemeColor = controller
               .navBarUnselectedSchemeColor !=
@@ -797,9 +797,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
   final String navigationBarSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navBarSelectedIconSchemeColor !=
           null
-      ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedIconSchemeColor},\n'
       : '';
   final String navigationBarUnselectedIconSchemeColor = controller
               .navBarUnselectedSchemeColor !=
