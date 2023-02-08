@@ -49,6 +49,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - REPORT: Found NavigationDrawer issues to Flutter repo.
 - FIX: Shortcut entry bug on MenuAnchor showcase.
+- INVESTIGATE: Playground NavigationBar seen to sometimes use wrong background default color label.  
 - ADD: Drawer indicator opacity.
 - ADD: Drawer indicator width to UI.
 - ADD: All navigation bars: Separate label and icon color in the Playground. API already supports it.
