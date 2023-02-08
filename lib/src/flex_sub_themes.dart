@@ -1538,6 +1538,12 @@ class FlexSubThemes {
     /// and in M3 (1) via SDK defaults.
     final double? elevation,
 
+    /// Drawer elevation shadow color.
+    ///
+    /// In M2 defaults to [Colors.black] and elevation casts a shadow.
+    /// In M3 it defaults [Colors.transparent] and there is no shadow.
+    final Color? shadowColor,
+
     /// Themes the default width of the [Drawer].
     ///
     /// Currently not available as a property in [FlexSubThemesData], may be
@@ -1552,7 +1558,7 @@ class FlexSubThemes {
       backgroundColor: backgroundColor,
       elevation: elevation,
       width: width,
-      shadowColor: Colors.black,
+      shadowColor: shadowColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusDirectional.horizontal(
           end: Radius.circular(radius ?? kDrawerRadius),
@@ -2995,13 +3001,10 @@ class FlexSubThemes {
 
     /// Defines the width of [NavigationDrawer]'s indicator.
     ///
-    /// If [drawerWidth] is defined and [drawerIndicatorWidth] is not, then
-    /// [drawerIndicatorWidth] will be [drawerWidth] - 2 * 12, where 12dp is the
-    /// M3 padding spec around the indicator.
-    ///
-    /// If not defined, and [drawerWidth] is not defined it defaults to 336dp
+    /// If not defined, defaults to 336dp
     /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
-    /// from the M3 padding spec of 12dp around both sides of the indicator.
+    /// from the M3 padding spec of 12dp around both sides of the M3 drawers
+    /// default width of 360dp.
     final double? indicatorWidth,
 
     /// Border radius value for [BottomSheet].

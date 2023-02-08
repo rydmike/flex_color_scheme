@@ -31,6 +31,9 @@ class DrawerSettings extends StatelessWidget {
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
 
+    final double derivedIndicatorWidth =
+        (controller.drawerWidth ?? (useMaterial3 ? 360 : 304)) - 2 * 12;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -97,7 +100,7 @@ class DrawerSettings extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'HEIGHT',
+                  'WIDTH',
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
@@ -300,14 +303,12 @@ class DrawerSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerIndicatorWidth == null ||
                         (controller.drawerIndicatorWidth ?? 199) < 200
-                    ? useMaterial3
-                        ? 'default 360'
-                        : 'default 304'
+                    ? 'computed $derivedIndicatorWidth'
                     : (controller.drawerIndicatorWidth?.toStringAsFixed(0) ??
                         '')
                 : useMaterial3
-                    ? 'default 360'
-                    : 'default 304',
+                    ? 'default ${360 - 2 * 12}'
+                    : 'default ${304 - 2 * 12}',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerIndicatorWidth ?? 199
                 : 199,
@@ -324,22 +325,20 @@ class DrawerSettings extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'HEIGHT',
+                  'WIDTH',
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.drawerIndicatorWidth == null ||
                               (controller.drawerIndicatorWidth ?? 199) < 200
-                          ? useMaterial3
-                              ? 'default 360'
-                              : 'default 304'
+                          ? 'computed $derivedIndicatorWidth'
                           : (controller.drawerIndicatorWidth
                                   ?.toStringAsFixed(0) ??
                               '')
                       : useMaterial3
-                          ? 'default 360'
-                          : 'default 304',
+                          ? 'default ${360 - 2 * 12}'
+                          : 'default ${304 - 2 * 12}',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
