@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../shared/const/app_data.dart';
+
 //Function that returns the passed in Flutter ColorScheme object as Dart code
 String generateColorSchemeDartCode(ColorScheme scheme) {
   final String schemeName = scheme.brightness == Brightness.light
       ? 'flexSchemeLight'
       : 'flexSchemeDark';
   final String code = '''
+// ColorScheme made by FlexColorScheme version ${AppData.packageVersion}.
+// This ColorScheme object requires Flutter 3.7 or later.
 const ColorScheme $schemeName = ColorScheme(
   brightness: ${scheme.brightness},
   primary: ${scheme.primary},

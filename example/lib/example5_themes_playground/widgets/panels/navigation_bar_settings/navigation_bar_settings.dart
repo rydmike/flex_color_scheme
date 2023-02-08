@@ -46,7 +46,7 @@ class NavigationBarSettings extends StatelessWidget {
     String backgroundColorLabel() {
       if (controller.useMaterial3 &&
           controller.navBarBackgroundSchemeColor == null) {
-        return 'default (surface with primary overlay)';
+        return 'default (surface with elevation tint)';
       }
       if (!controller.useSubThemes ||
           !controller.useFlexColorScheme ||
@@ -54,7 +54,7 @@ class NavigationBarSettings extends StatelessWidget {
               controller.navBarBackgroundSchemeColor == null)) {
         return 'default (surface with onSurface overlay)';
       }
-      return 'default (background)';
+      return 'default (surfaceVariant)';
     }
 
     // Logic for indicator color label default value,
@@ -271,9 +271,7 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarHeight == null ||
                         (controller.navBarHeight ?? 54) < 55
-                    ? controller.useFlutterDefaults || useMaterial3
-                        ? 'default 80'
-                        : 'default 62'
+                    ? 'default 80'
                     : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                 : 'default 80',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -299,9 +297,7 @@ class NavigationBarSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navBarHeight == null ||
                               (controller.navBarHeight ?? 54) < 55
-                          ? controller.useFlutterDefaults || useMaterial3
-                              ? 'default 80'
-                              : 'default 62'
+                          ? 'default 80'
                           : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                       : 'default 80',
                   style: theme.textTheme.bodySmall!

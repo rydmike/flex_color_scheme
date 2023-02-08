@@ -472,16 +472,20 @@ class FlexSubThemesData with Diagnosticable {
   /// Impact on [NavigationBarThemeData] sub-theming:
   ///
   /// ```
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     surface, with onSurface overlay elev 3.
-  /// - height           62             80
-  /// - indicator        primary op24%  secondary op24%
-  /// - selected icon    primary        onSurface
-  /// - Selected label   primary        onSurface
-  /// - unselected icon  onSurface      onSurface
-  /// - unSelected label onSurface      onSurface
-  /// - TextTheme        FCS.labelSmall default.caption
+  ///                    FCS defaults   M2 defaults       useMaterial3:true
+  /// useFlutterDefaults false          true              true
+  /// results in:
+  ///
+  /// - background       surfaceVariant surface with      surface with
+  ///                                   onSurface overlay primary overlay
+  ///                    elev 0         elev 3            elev 3
+  /// - height           80             80                80
+  /// - indicator        primary op24%  secondary op24%   secondaryContainer
+  /// - selected icon    primary        onSurface         onSecondaryContainer
+  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
+  /// - Selected label   primary        onSurface         onSurface
+  /// - unSelected label onSurface      onSurface         onSurfaceVariant
+  /// - TextTheme        labelMedium    overline          labelMedium
   /// ```
   /// FCS further applies both an alpha blend and slight opacity to
   /// unselected icon and unselected label, but only if

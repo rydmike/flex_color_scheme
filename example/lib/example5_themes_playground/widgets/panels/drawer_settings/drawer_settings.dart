@@ -290,6 +290,63 @@ class DrawerSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator width'),
+          subtitle: Slider(
+            min: 199,
+            max: 500,
+            divisions: 301,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorWidth == null ||
+                        (controller.drawerIndicatorWidth ?? 199) < 200
+                    ? useMaterial3
+                        ? 'default 360'
+                        : 'default 304'
+                    : (controller.drawerIndicatorWidth?.toStringAsFixed(0) ??
+                        '')
+                : useMaterial3
+                    ? 'default 360'
+                    : 'default 304',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorWidth ?? 199
+                : 199,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDrawerIndicatorWidth(
+                        value < 200 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'HEIGHT',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.drawerIndicatorWidth == null ||
+                              (controller.drawerIndicatorWidth ?? 199) < 200
+                          ? useMaterial3
+                              ? 'default 360'
+                              : 'default 304'
+                          : (controller.drawerIndicatorWidth
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : useMaterial3
+                          ? 'default 360'
+                          : 'default 304',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         const NavigationDrawerShowcase(),
         const SizedBox(height: 16),

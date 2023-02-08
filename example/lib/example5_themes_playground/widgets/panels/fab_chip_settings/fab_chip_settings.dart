@@ -16,6 +16,12 @@ class FabChipSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/115827',
   );
 
+  static final Uri _fcsFlutterIssue107946 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/107946',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -159,6 +165,31 @@ class FabChipSettings extends StatelessWidget {
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Current Flutter SDK FAB theming has limitations. '
+                      'You cannot make themed FABs where the radius varies '
+                      'by FAB type, like the M3 defaults do. See '
+                      'Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue107946,
+                  text: 'issue #107946',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more info.',
+                ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Chip blend color'),
@@ -274,7 +305,7 @@ class FabChipSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'Current Flutter SDK Chip theming has many limitations '
-                      'and M3 styling gaps. For example You cannot make themed '
+                      'and M3 styling gaps. You cannot make themed '
                       'Chips where Selected chips require different text '
                       'contrast than the normal Chips, there is no way to '
                       'define different Chip text styles for such a setup. See '

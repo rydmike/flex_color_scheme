@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import 'system_nav_bar_style_toggle_buttons.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
@@ -16,6 +17,25 @@ import 'system_nav_bar_style_toggle_buttons.dart';
 class AndroidNavigationBarSettings extends StatelessWidget {
   const AndroidNavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
+
+  static final Uri _fcsFlutterIssue100027 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/100027',
+  );
+
+  static final Uri _fcsFlutterIssue112301 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/112301',
+  );
+
+  static final Uri _fcsSysNavDocs = Uri(
+    scheme: 'https',
+    host: 'docs.flexcolorscheme.com',
+    path: 'deep_dives',
+    fragment: 'themed-system-navigation-bar-in-android',
+  );
 
   String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
     switch (style) {
@@ -36,7 +56,11 @@ class AndroidNavigationBarSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     final double navBarOpacity = controller.sysNavBarOpacity;
     return Column(
       children: <Widget>[
@@ -50,6 +74,49 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               'settings do not have any impact on generated theme setup code. '
               'You have to implement the AnnotatedRegion with the helper '
               'separately.'),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'You can read more about how to use FlexColorScheme '
+                      'annotated region helper in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsSysNavDocs,
+                  text: 'documentation',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There are also many Android version limitations '
+                      'and issues concerning stying the system navigation bar. '
+                      'You can read more about them in Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue100027,
+                  text: 'umbrella issue #100027',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue112301,
+                  text: 'issue #112301',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' impacts the FlexColorScheme annotated region helper.',
+                ),
+              ],
+            ),
+          ),
         ),
         const ListTile(
           title: Text('Background opacity'),

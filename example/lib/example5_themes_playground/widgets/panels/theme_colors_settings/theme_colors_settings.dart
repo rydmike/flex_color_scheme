@@ -171,8 +171,8 @@ class ThemeColorsSettings extends StatelessWidget {
               'and tertiary'),
           subtitle: const Text(
             'Only applies to built-in M2 designed schemes that benefit from '
-            'it. Prefer ON when using M3. You can also use OFF when using '
-            'seeded ColorScheme without enabling secondary seed key.',
+            'it. Prefer ON when using M3. You can turn it OFF when using '
+            'seeded ColorScheme if you do not use the secondary seed key.',
           ),
           value: controller.swapLegacyColors && controller.useMaterial3,
           onChanged:

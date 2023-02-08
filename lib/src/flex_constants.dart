@@ -172,12 +172,6 @@ const double kInputDecoratorRadius = 16;
 /// https://m3.material.io/components/menus/specs
 const double kMenuRadius = 4;
 
-/// Default height of [NavigationBar].
-///
-/// The Material 3 default design is 80dp, this is an opinionated reduced
-/// container height default.
-const double kNavigationBarHeight = 62;
-
 /// Alpha value for the indicator color on the [NavigationBar] and
 /// [NavigationRail].
 ///

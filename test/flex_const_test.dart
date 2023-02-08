@@ -96,9 +96,6 @@ void main() {
     test('FCT kBottomNavigationBarElevation is 0', () {
       expect(kBottomNavigationBarElevation, 0);
     });
-    test('FCT kNavigationBarHeight is 62', () {
-      expect(kNavigationBarHeight, 62);
-    });
     test('FCT kNavigationBarIndicatorAlpha is 0x3D', () {
       expect(kNavigationBarIndicatorAlpha, 0x3D);
     });

@@ -2767,11 +2767,7 @@ class FlexSubThemes {
 
     /// Height of the container for the Material 3 [NavigationBar].
     ///
-    /// If undefined, and M2 used defaults to [kNavigationBarHeight] which
-    /// is 62 dp.
-    ///
-    /// If [useFlutterDefaults] true, and this property is undefined, or
-    /// [useMaterial3 is true] and height is undefined it defaults to 80.
+    /// If undefined defaults to M3 spec 80dp.
     final double? height,
 
     /// Specifies when each [NavigationDestination]'s label should appear.
@@ -2848,10 +2844,10 @@ class FlexSubThemes {
     /// useFlutterDefaults false          true              true
     /// results in:
     ///
-    /// - background       background     surface with      surface with
+    /// - background       surfaceVariant surface with      surface with
     ///                                   onSurface overlay primary overlay
-    ///                                   elev 3.           elev 3.
-    /// - height           M2:62 M3:80    80                80
+    ///                    elev 0         elev 3            elev 3
+    /// - height           80             80                80
     /// - indicator        primary op24%  secondary op24%   secondaryContainer
     /// - selected icon    primary        onSurface         onSecondaryContainer
     /// - unselected icon  onSurface      onSurface         onSurfaceVariant
@@ -2914,7 +2910,7 @@ class FlexSubThemes {
 
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+            backgroundSchemeColor ?? SchemeColor.surfaceVariant, colorScheme)
         .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to primary.
@@ -2923,8 +2919,7 @@ class FlexSubThemes {
             .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     return NavigationBarThemeData(
-      height: height ??
-          (useFlutterDefaults || useMaterial3 ? null : kNavigationBarHeight),
+      height: height,
       elevation: elevation,
       backgroundColor: backgroundSchemeColor == null
           ? useFlutterDefaults || useMaterial3

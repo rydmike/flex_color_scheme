@@ -77,7 +77,7 @@ const List<PanelItem> panelItems = <PanelItem>[
   PanelItem(
     panelLabel: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
-    icon: Icons.view_sidebar,
+    icon: Icons.view_sidebar_rounded,
   ),
   PanelItem(
     panelLabel: 'NavigationDrawer',
