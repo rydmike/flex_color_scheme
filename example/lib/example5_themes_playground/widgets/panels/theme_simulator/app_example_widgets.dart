@@ -20,7 +20,7 @@ class AppExampleWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 11,
+        length: 12,
         child: ScrollConfiguration(
           behavior: const DragScrollBehavior(),
           child: Scaffold(
@@ -36,7 +36,8 @@ class AppExampleWidgets extends StatelessWidget {
                   Tab(text: 'Buttons'),
                   Tab(text: 'Input'),
                   Tab(text: 'Menus'),
-                  Tab(text: 'Switches'),
+                  Tab(text: 'Toggles'),
+                  Tab(text: 'ListTile'),
                   Tab(text: 'Slider'),
                   Tab(text: 'AppBar'),
                   Tab(text: 'Navigation'),
@@ -53,6 +54,7 @@ class AppExampleWidgets extends StatelessWidget {
                 const ShowcaseInput(),
                 const ShowcaseMenus(),
                 const ShowcaseSwitches(),
+                const ShowcaseListTile(),
                 const ShowcaseSlider(),
                 const ShowcaseAppBar(),
                 const ShowcaseNavigation(),
@@ -254,7 +256,41 @@ class ShowcaseSwitches extends StatelessWidget {
         SizedBox(height: 8),
         RadioShowcase(),
         SizedBox(height: 8),
+        Divider(height: 1),
+        SwitchTileShowcase(),
+        Divider(height: 1),
+        CheckboxTileShowcase(),
+        Divider(height: 1),
+        RadioTileShowcase(),
+      ],
+    );
+  }
+}
+
+class ShowcaseListTile extends StatelessWidget {
+  const ShowcaseListTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData media = MediaQuery.of(context);
+    final double topPadding = media.padding.top;
+    final double bottomPadding = media.padding.bottom;
+    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
+    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
+    return ListView(
+      padding: EdgeInsets.fromLTRB(
+        sideMargin,
+        topPadding + AppData.edgeInsetsTablet,
+        sideMargin,
+        AppData.edgeInsetsTablet + bottomPadding,
+      ),
+      children: const <Widget>[
+        SizedBox(height: 8),
         ListTileShowcase(),
+        Divider(),
+        ExpansionTileShowcase(),
+        Divider(),
+        ExpansionPanelListShowcase(),
       ],
     );
   }

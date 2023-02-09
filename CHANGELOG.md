@@ -232,6 +232,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
 - Added settings for `Slider` value indicator color, visibility and value indicator type.
 - Added setting for time picker input element border radius to pane **Dialogs**.
+- Added presentation of `ExpansionTile` and `ExpansionPanelList` to panel **ListTile** and **Widget Showcase**. 
 
 
 **FIX**

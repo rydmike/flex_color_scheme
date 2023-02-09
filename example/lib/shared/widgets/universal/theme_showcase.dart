@@ -83,7 +83,11 @@ class ThemeShowcase extends StatelessWidget {
         const RangeSliderShowcase(),
         const SizedBox(height: 8),
         const Divider(),
-        const ListTileShowcase(),
+        const ListTileAllShowcase(),
+        const Divider(),
+        const ExpansionTileShowcase(),
+        const Divider(),
+        const ExpansionPanelListShowcase(),
         const Divider(),
         const AppBarShowcase(),
         const Divider(),
@@ -2614,6 +2618,25 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   }
 }
 
+class ListTileAllShowcase extends StatelessWidget {
+  const ListTileAllShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const <Widget>[
+        ListTileShowcase(),
+        Divider(height: 1),
+        SwitchTileShowcase(),
+        Divider(height: 1),
+        CheckboxTileShowcase(),
+        Divider(height: 1),
+        RadioTileShowcase(),
+      ],
+    );
+  }
+}
+
 class ListTileShowcase extends StatelessWidget {
   const ListTileShowcase({super.key});
 
@@ -2644,7 +2667,18 @@ class ListTileShowcase extends StatelessWidget {
           trailing: const Text('Trailing'),
           onTap: () {},
         ),
-        const Divider(height: 1),
+      ],
+    );
+  }
+}
+
+class SwitchTileShowcase extends StatelessWidget {
+  const SwitchTileShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
         SwitchListTile(
           secondary: const Icon(Icons.info),
           title: const Text('SwitchListTile'),
@@ -2666,7 +2700,18 @@ class ListTileShowcase extends StatelessWidget {
           value: true,
           onChanged: null,
         ),
-        const Divider(height: 1),
+      ],
+    );
+  }
+}
+
+class CheckboxTileShowcase extends StatelessWidget {
+  const CheckboxTileShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
         CheckboxListTile(
           secondary: const Icon(Icons.info),
           title: const Text('CheckboxListTile'),
@@ -2697,7 +2742,18 @@ class ListTileShowcase extends StatelessWidget {
           value: true,
           onChanged: (bool? value) {},
         ),
-        const Divider(height: 1),
+      ],
+    );
+  }
+}
+
+class RadioTileShowcase extends StatelessWidget {
+  const RadioTileShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
         RadioListTile<int>(
           secondary: const Icon(Icons.info),
           title: const Text('RadioListTile'),
@@ -2733,6 +2789,136 @@ class ListTileShowcase extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class ExpansionTileShowcase extends StatefulWidget {
+  const ExpansionTileShowcase({super.key});
+
+  @override
+  State<ExpansionTileShowcase> createState() => _ExpansionTileShowcaseState();
+}
+
+class _ExpansionTileShowcaseState extends State<ExpansionTileShowcase> {
+  bool _customTileExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        const ExpansionTile(
+          title: Text('ExpansionTile 1'),
+          subtitle: Text('Trailing expansion arrow icon'),
+          children: <Widget>[
+            ListTile(title: Text('This is tile number 1')),
+          ],
+        ),
+        ExpansionTile(
+          title: const Text('ExpansionTile 2'),
+          subtitle: const Text('Custom expansion arrow icon'),
+          trailing: Icon(
+            _customTileExpanded
+                ? Icons.arrow_drop_down_circle
+                : Icons.arrow_drop_down,
+          ),
+          children: const <Widget>[
+            ListTile(title: Text('This is tile number 2')),
+          ],
+          onExpansionChanged: (bool expanded) {
+            setState(() => _customTileExpanded = expanded);
+          },
+        ),
+        const ExpansionTile(
+          title: Text('ExpansionTile 3'),
+          subtitle: Text('Leading expansion arrow icon'),
+          controlAffinity: ListTileControlAffinity.leading,
+          children: <Widget>[
+            ListTile(title: Text('This is tile number 3')),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class ExpansionPanelListShowcase extends StatefulWidget {
+  const ExpansionPanelListShowcase({super.key});
+
+  @override
+  State<ExpansionPanelListShowcase> createState() =>
+      _ExpansionPanelListShowcaseState();
+}
+
+class _ExpansionPanelListShowcaseState
+    extends State<ExpansionPanelListShowcase> {
+  final List<ExpansionPanelShowcaseItems> _items =
+      ExpansionPanelShowcaseItems.generateItems(6);
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          _items[index].isExpanded = !isExpanded;
+        });
+      },
+      children: _items.map<ExpansionPanel>((ExpansionPanelShowcaseItems item) {
+        return ExpansionPanel(
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            return ListTile(
+              title: Text(item.headerValue),
+            );
+          },
+          body: ListTile(
+            title: Text(item.expandedValue),
+            subtitle: item.id > 2
+                ? const Text('To delete this panel, tap the trash can icon')
+                : const Text(
+                    'This panel is fixed here and cannot be removed. Items '
+                    'numbered 3 and higher can be removed.'),
+            trailing: item.id > 2
+                ? IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      setState(() {
+                        _items.removeWhere(
+                            (ExpansionPanelShowcaseItems currentItem) =>
+                                item == currentItem);
+                      });
+                    },
+                  )
+                : null,
+          ),
+          isExpanded: item.isExpanded,
+        );
+      }).toList(),
+    );
+  }
+}
+
+// Stores ExpansionPanel state information
+class ExpansionPanelShowcaseItems {
+  ExpansionPanelShowcaseItems({
+    required this.id,
+    required this.expandedValue,
+    required this.headerValue,
+    this.isExpanded = false,
+  });
+
+  final int id;
+  final String expandedValue;
+  final String headerValue;
+  bool isExpanded;
+
+  static List<ExpansionPanelShowcaseItems> generateItems(int numberOfItems) {
+    return List<ExpansionPanelShowcaseItems>.generate(numberOfItems,
+        (int index) {
+      return ExpansionPanelShowcaseItems(
+        id: index,
+        headerValue: 'ExpansionPanelList tile $index',
+        expandedValue: 'This is ExpansionPanel item number $index',
+      );
+    });
   }
 }
 

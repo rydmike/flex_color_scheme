@@ -332,7 +332,7 @@ class _ListTileShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTile'),
-      child: const ListTileShowcase(),
+      child: const ListTileAllShowcase(),
     );
   }
 }

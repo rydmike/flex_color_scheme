@@ -13,9 +13,9 @@ class ListTileSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Themed List tiles'),
+          title: Text('Themed ListTile'),
           subtitle: Text(
-            'There are four different ListTile types in Flutter. They '
+            'There are many different ListTile types in Flutter. They '
             'are useful widgets for settings and options. '
             'In FSC you can theme them by theming the colors of the '
             'switches, checkboxes and radio buttons they use.',
@@ -32,7 +32,24 @@ class ListTileSettings extends StatelessWidget {
               : null,
         ),
         const Divider(height: 1),
-        const ListTileShowcase(),
+        const ListTileAllShowcase(),
+        const Divider(),
+        const ListTile(
+          title: Text('Themed ExpansionTile'),
+          subtitle:
+              Text('No theme properties in current FCS, shown to visualize it '
+                  'with current color scheme.'),
+        ),
+        const ExpansionTileShowcase(),
+        const Divider(),
+        const ListTile(
+          title: Text('Themed ExpansionPanelList'),
+          subtitle:
+              Text('No theme properties in current FCS, shown to visualize it '
+                  'with current color scheme.'),
+        ),
+        const ExpansionPanelListShowcase(),
+        const SizedBox(height: 8),
       ],
     );
   }

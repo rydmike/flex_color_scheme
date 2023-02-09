@@ -108,9 +108,11 @@ class ShowSubThemeColors extends StatelessWidget {
             (theme.useMaterial3
                 ? colorScheme.primaryContainer
                 : colorScheme.secondary);
-    final Color onFloatingActionButtonColor = useMaterial3
-        ? theme.colorScheme.onPrimaryContainer
-        : _onColor(floatingActionButtonColor, background);
+    final Color onFloatingActionButtonColor =
+        theme.floatingActionButtonTheme.foregroundColor ??
+            (useMaterial3
+                ? theme.colorScheme.onPrimaryContainer
+                : _onColor(floatingActionButtonColor, background));
     final Color switchColor = theme.switchTheme.thumbColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
