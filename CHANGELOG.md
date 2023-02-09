@@ -65,6 +65,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theme simulator with **Themed Components**.
 - Separated the settings for `NavigationBar` icon and label colors. API already existed in FCS.
 - Separated the settings for `NavigationRail` icon and label colors. API already existed in FCS.
+- Added presentation of `ExpansionTile` and `ExpansionPanelList` to panel **ListTile** and **Widget Showcase**.
 - For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
 
 
@@ -73,7 +74,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - REPORT: Found NavigationDrawer issues to Flutter repo.
 - FIX: Shortcut entry bug on MenuAnchor showcase.
 - ADD: Drawer indicator opacity.
-- ADD: All navigation bars: Separate label and icon color in the Playground. API already supports it.
 - NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
 - NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
 - MAYBE ADD: TextFiled settings examples.
@@ -233,7 +233,6 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing `RangeSlider` in panel **Slider** and to **Widget Showcase**.
 - Added settings for `Slider` value indicator color, visibility and value indicator type.
 - Added setting for time picker input element border radius to pane **Dialogs**.
-- Added presentation of `ExpansionTile` and `ExpansionPanelList` to panel **ListTile** and **Widget Showcase**. 
 
 
 **FIX**
