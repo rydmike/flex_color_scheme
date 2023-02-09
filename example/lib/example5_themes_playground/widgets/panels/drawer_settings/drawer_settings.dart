@@ -245,6 +245,58 @@ class DrawerSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator opacity'),
+          subtitle: Slider(
+            min: -1,
+            max: 100,
+            divisions: 101,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorOpacity == null ||
+                        (controller.drawerIndicatorOpacity ?? -1) < 0
+                    ? 'default (100%)'
+                    : ((controller.drawerIndicatorOpacity! * 100)
+                            .toStringAsFixed(0) ??
+                        '')
+                : 'default (100%)',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerIndicatorOpacity != null
+                    ? controller.drawerIndicatorOpacity! * 100
+                    : -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDrawerIndicatorOpacity(
+                        value < 0 ? null : value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.drawerIndicatorOpacity == null ||
+                              (controller.drawerIndicatorOpacity ?? -1) < 0
+                          ? 'default (100%)'
+                          : ((controller.drawerIndicatorOpacity! * 100)
+                                  .toStringAsFixed(0) ??
+                              '')
+                      : 'default (100%)',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Indicator border radius'),
           subtitle: Slider(
             min: -1,

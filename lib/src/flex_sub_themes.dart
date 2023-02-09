@@ -3027,6 +3027,11 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to [SchemeColor.secondaryContainer].
     final SchemeColor? indicatorSchemeColor,
+
+    /// The opacity of the used indicator.
+    ///
+    /// Defaults to 1, fully opaque if not defined.
+    final double? indicatorOpacity,
   }) {
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
@@ -3048,7 +3053,7 @@ class FlexSubThemes {
 
     return NavigationDrawerThemeData(
       backgroundColor: backgroundColor,
-      indicatorColor: indicatorColor,
+      indicatorColor: indicatorColor.withOpacity(indicatorOpacity ?? 1.0),
       indicatorSize: indicatorSize,
       indicatorShape: indicatorBorderRadius == null
           ? null

@@ -251,6 +251,7 @@ class FlexSubThemesData with Diagnosticable {
     this.drawerIndicatorBorderRadius,
     this.drawerIndicatorWidth,
     this.drawerIndicatorSchemeColor,
+    this.drawerIndicatorOpacity,
     //
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
@@ -1687,6 +1688,11 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.secondaryContainer].
   final SchemeColor? drawerIndicatorSchemeColor;
 
+  /// Defines the opacity used on the `NavigationDrawer`'s indicator color.
+  ///
+  /// If not defined, default to 1, fully opaque.
+  final double? drawerIndicatorOpacity;
+
   /// Defines which [Theme] based [ColorScheme] based color that the
   /// [BottomSheet] uses as background color when presented as a none modal
   /// bottom sheet.
@@ -2488,6 +2494,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? drawerIndicatorWidth,
     final double? drawerIndicatorBorderRadius,
     final SchemeColor? drawerIndicatorSchemeColor,
+    final double? drawerIndicatorOpacity,
     //
     final SchemeColor? bottomSheetBackgroundColor,
     final SchemeColor? bottomSheetModalBackgroundColor,
@@ -2753,6 +2760,8 @@ class FlexSubThemesData with Diagnosticable {
           drawerIndicatorBorderRadius ?? this.drawerIndicatorBorderRadius,
       drawerIndicatorSchemeColor:
           drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
+      drawerIndicatorOpacity:
+          drawerIndicatorOpacity ?? this.drawerIndicatorOpacity,
       //
       bottomSheetBackgroundColor:
           bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
@@ -3052,6 +3061,7 @@ class FlexSubThemesData with Diagnosticable {
         other.drawerIndicatorWidth == drawerIndicatorWidth &&
         other.drawerIndicatorBorderRadius == drawerIndicatorBorderRadius &&
         other.drawerIndicatorSchemeColor == drawerIndicatorSchemeColor &&
+        other.drawerIndicatorOpacity == drawerIndicatorOpacity &&
         //
         other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
         other.bottomSheetModalBackgroundColor ==
@@ -3295,6 +3305,7 @@ class FlexSubThemesData with Diagnosticable {
         drawerIndicatorWidth,
         drawerIndicatorBorderRadius,
         drawerIndicatorSchemeColor,
+        drawerIndicatorOpacity,
         //
         bottomSheetBackgroundColor,
         bottomSheetModalBackgroundColor,
@@ -3596,6 +3607,8 @@ class FlexSubThemesData with Diagnosticable {
         'drawerIndicatorBorderRadius', drawerIndicatorBorderRadius));
     properties.add(EnumProperty<SchemeColor>(
         'drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'drawerIndicatorOpacity', drawerIndicatorOpacity));
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomSheetBackgroundColor', bottomSheetBackgroundColor));

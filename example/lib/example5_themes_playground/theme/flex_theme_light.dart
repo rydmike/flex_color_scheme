@@ -310,6 +310,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             drawerIndicatorWidth: controller.drawerIndicatorWidth,
             drawerIndicatorBorderRadius: controller.drawerIndicatorBorderRadius,
             drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
+            drawerIndicatorOpacity: controller.drawerIndicatorOpacity,
             // BottomSheet settings.
             bottomSheetElevation: controller.bottomSheetElevation,
             bottomSheetModalElevation: controller.bottomSheetModalElevation,

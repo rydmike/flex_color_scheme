@@ -639,6 +639,12 @@ class Store {
   // reset settings.
   static const SchemeColor? defaultDrawerIndicatorSchemeColor = null;
 
+  // Key used to read and save the drawerIndicatorOpacity value.
+  static const String keyDrawerIndicatorOpacity = 'drawerIndicatorOpacity';
+  // Default value for the drawerIndicatorOpacity, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorOpacity = null;
+
   // BottomSheet SETTINGS.
   // ===========================================================================
 

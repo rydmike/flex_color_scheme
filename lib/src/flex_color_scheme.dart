@@ -6666,6 +6666,7 @@ class FlexColorScheme with Diagnosticable {
               indicatorBorderRadius: subTheme.drawerIndicatorBorderRadius ??
                   subTheme.defaultRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
+              indicatorOpacity: subTheme.drawerIndicatorOpacity,
               textStyle: effectiveTextTheme.bodyLarge,
             )
           : null,

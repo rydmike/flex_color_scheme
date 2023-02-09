@@ -252,6 +252,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             drawerIndicatorWidth: controller.drawerIndicatorWidth,
             drawerIndicatorBorderRadius: controller.drawerIndicatorBorderRadius,
             drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
+            drawerIndicatorOpacity: controller.drawerIndicatorOpacity,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetModalBackgroundColor:

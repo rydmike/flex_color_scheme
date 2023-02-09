@@ -322,6 +322,8 @@ class ThemeController with ChangeNotifier {
     _drawerIndicatorSchemeColor = await _themeService.load(
         Store.keyDrawerIndicatorSchemeColor,
         Store.defaultDrawerIndicatorSchemeColor);
+    _drawerIndicatorOpacity = await _themeService.load(
+        Store.keyDrawerIndicatorOpacity, Store.defaultDrawerIndicatorOpacity);
     //
     // BottomSheet SETTINGS.
     _bottomSheetSchemeColor = await _themeService.load(
@@ -790,7 +792,8 @@ class ThemeController with ChangeNotifier {
     setDrawerIndicatorBorderRadius(
         Store.defaultDrawerIndicatorBorderRadius, false);
     setDrawerIndicatorSchemeColor(
-        Store.defaultDrawerBackgroundSchemeColor, false);
+        Store.defaultDrawerIndicatorSchemeColor, false);
+    setDrawerIndicatorOpacity(Store.defaultDrawerIndicatorOpacity, false);
     //
     // BottomSheet SETTINGS.
     setBottomSheetSchemeColor(Store.defaultBottomSheetSchemeColor, false);
@@ -2139,6 +2142,15 @@ class ThemeController with ChangeNotifier {
     _drawerIndicatorSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDrawerIndicatorSchemeColor, value));
+  }
+
+  late double? _drawerIndicatorOpacity;
+  double? get drawerIndicatorOpacity => _drawerIndicatorOpacity;
+  void setDrawerIndicatorOpacity(double? value, [bool notify = true]) {
+    if (value == _drawerIndicatorOpacity) return;
+    _drawerIndicatorOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDrawerIndicatorOpacity, value));
   }
 
   // BottomSheet SETTINGS.

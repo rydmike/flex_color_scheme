@@ -12,6 +12,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
+- **Added**: `drawerIndicatorOpacity` to `FlexSubThemesData`.   
+  It controls the `indicatorOpacity` property in the `FlexSubThemes.navigationDrawerTheme` used to customize the opacity of used color on the `NavigationDrawer` indicator.
+
 - **Added**: `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`.   
   It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
   
@@ -65,13 +68,14 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added presentation of `ExpansionTile` and `ExpansionPanelList` to panel **ListTile** and **Widget Showcase**.
 - For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
 - FIX: Shortcut entry bug on MenuAnchor widget showcase. Needed a workaround for this type of use case.
+- Added control for indicator opacity in `NavigationDrawer` to panel **NavigationDrawer**.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - REPORT: Found NavigationDrawer issues to Flutter repo.
-- ADD: Drawer indicator opacity.
 - NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
 - NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
+- MAYBE ADD: Device selections to DeviceSimulator.
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.  
 - MAYBE ADD: Some initial theming options for the new MenuBar theme.
