@@ -2287,7 +2287,7 @@ enum MenuEntry {
   showMessage(
       'Show Message', SingleActivator(LogicalKeyboardKey.keyS, control: true)),
   hideMessage(
-      'Hide Message', SingleActivator(LogicalKeyboardKey.keyS, control: true)),
+      'Hide Message', SingleActivator(LogicalKeyboardKey.keyH, control: true)),
   colorMenu('Color Menu'),
   colorRed('Red', SingleActivator(LogicalKeyboardKey.keyR, control: true)),
   colorGreen('Green', SingleActivator(LogicalKeyboardKey.keyG, control: true)),
@@ -2339,7 +2339,21 @@ class _MyContextMenuState extends State<MyContextMenu> {
     };
     // Register the shortcuts with the ShortcutRegistry so that they are
     // available to the entire application.
-    _shortcutsEntry = ShortcutRegistry.of(context).addAll(shortcuts);
+    final Map<ShortcutActivator, Intent>? entries =
+        ShortcutRegistry.maybeOf(context)?.shortcuts;
+    // TODO(rydmike): Potential issue with ShortcutRegistry? Investigate.
+    // Hack to avoid issue of entries being added multiple times, the dispose
+    // of them does not seem to work all the time. This widget is in this app
+    // potentially shown in places, the only shortcut entries we should have are
+    // the same ones, if it exists and has not been disposed when this is called
+    // we can add it, if it exists it is the one we want already. We could also
+    // check for the specific entries, but for this workaround this works.
+    // The ShortcutRegistry is intended to be used as one global setting in the
+    // app, it should be higher up in the tree, then we would not have this
+    // issue.
+    if (entries?.isEmpty ?? false) {
+      _shortcutsEntry = ShortcutRegistry.of(context).addAll(shortcuts);
+    }
   }
 
   @override

@@ -8,21 +8,18 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **FIX**
 
-- Fixed a **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
+- Fixed **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
 
 **NEW**
 
 - **Added**: `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`.   
   It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
   
-
 - **Added**:  `usedColors` value 7.
 In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColors` now accepts value 7. When used, the `primary`, `secondary` and `tertiary` colors in the used input scheme, are used as defined, but `primaryContainer`, `secondaryContainer` and `tertiaryContainer` are computed. This is FlexColorScheme's own more Material2 version of seed generation of the container colors by using their main colors as input colors. 
 
-
 - **Added**: `bottomAppBarTheme` to `FlexSubThemes`.
   
-
 - **Added**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorBorderRadius`, `drawerIndicatorSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
 
 
@@ -67,12 +64,11 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Separated the settings for `NavigationRail` icon and label colors. API already existed in FCS.
 - Added presentation of `ExpansionTile` and `ExpansionPanelList` to panel **ListTile** and **Widget Showcase**.
 - For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
-
+- FIX: Shortcut entry bug on MenuAnchor widget showcase. Needed a workaround for this type of use case.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - REPORT: Found NavigationDrawer issues to Flutter repo.
-- FIX: Shortcut entry bug on MenuAnchor showcase.
 - ADD: Drawer indicator opacity.
 - NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
 - NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
