@@ -40,7 +40,7 @@ class AppData {
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.1';
+  static const String flutterVersion = '3.7.2';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
