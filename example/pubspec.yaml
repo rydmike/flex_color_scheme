@@ -11,8 +11,11 @@ dependencies:
   # https://pub.dev/packages/animations
   animations: ^2.0.7
 
-  # Cached network image from baseflow.com.
+  # Cached network image (by baseflow.com).
   cached_network_image: ^3.2.3
+
+  # Confetti for some fun on the demo (by funwith.app).
+  confetti: ^0.7.0
 
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.

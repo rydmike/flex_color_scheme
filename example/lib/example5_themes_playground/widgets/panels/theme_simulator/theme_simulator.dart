@@ -60,6 +60,10 @@ class ThemeSimulator extends StatelessWidget {
           children: <Widget>[
             SimulatorFrame(
               width: controller.deviceSize,
+              child: AppExampleWidgets(controller: controller),
+            ),
+            SimulatorFrame(
+              width: controller.deviceSize,
               child: const AppExampleLogin(),
             ),
             SimulatorFrame(
@@ -69,10 +73,6 @@ class ThemeSimulator extends StatelessWidget {
             SimulatorFrame(
               width: controller.deviceSize,
               child: AppExampleChat(controller: controller),
-            ),
-            SimulatorFrame(
-              width: controller.deviceSize,
-              child: AppExampleWidgets(controller: controller),
             ),
           ],
         ),
