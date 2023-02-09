@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 8, 2023**
+**Feb 9, 2023**
 
 **FIX**
 
@@ -65,6 +65,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theme simulator with **Themed Components**.
 - Separated the settings for `NavigationBar` icon and label colors. API already existed in FCS.
 - Separated the settings for `NavigationRail` icon and label colors. API already existed in FCS.
+- For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
