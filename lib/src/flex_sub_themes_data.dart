@@ -2451,8 +2451,8 @@ class FlexSubThemesData with Diagnosticable {
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
     //
-    final FlexTint? useElevationTint,
-    final FlexShadow? useElevationShadow,
+    final FlexTint? elevationTint,
+    final FlexShadow? elevationShadow,
     //
     final bool? blendTextTheme,
     final bool? useTextTheme,
@@ -2656,8 +2656,8 @@ class FlexSubThemesData with Diagnosticable {
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
       //
-      elevationTint: useElevationTint ?? this.elevationTint,
-      elevationShadow: useElevationShadow ?? this.elevationShadow,
+      elevationTint: elevationTint ?? this.elevationTint,
+      elevationShadow: elevationShadow ?? this.elevationShadow,
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,

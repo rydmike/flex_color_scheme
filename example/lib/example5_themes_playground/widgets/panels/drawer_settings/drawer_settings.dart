@@ -254,9 +254,8 @@ class DrawerSettings extends StatelessWidget {
                 ? controller.drawerIndicatorOpacity == null ||
                         (controller.drawerIndicatorOpacity ?? -1) < 0
                     ? 'default (100%)'
-                    : ((controller.drawerIndicatorOpacity! * 100)
-                            .toStringAsFixed(0) ??
-                        '')
+                    : (controller.drawerIndicatorOpacity! * 100)
+                        .toStringAsFixed(0)
                 : 'default (100%)',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerIndicatorOpacity != null
@@ -284,9 +283,8 @@ class DrawerSettings extends StatelessWidget {
                       ? controller.drawerIndicatorOpacity == null ||
                               (controller.drawerIndicatorOpacity ?? -1) < 0
                           ? 'default (100%)'
-                          : ((controller.drawerIndicatorOpacity! * 100)
-                                  .toStringAsFixed(0) ??
-                              '')
+                          : (controller.drawerIndicatorOpacity! * 100)
+                              .toStringAsFixed(0)
                       : 'default (100%)',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),

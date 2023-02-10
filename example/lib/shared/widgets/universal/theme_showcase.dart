@@ -3211,7 +3211,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 1, '
-                  'with surfaceTint and no shadow',
+                  'assigned surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -3231,7 +3231,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 1, '
-                  'with surfaceTint, and shadow',
+                  'assigned surfaceTint, and shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3270,7 +3270,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
-                  'with surfaceTint and no shadow',
+                  'assigned surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3291,7 +3291,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type canvas, elevation 6, '
-                  'with surfaceTint and shadow',
+                  'assigned surfaceTint and shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3358,7 +3358,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
-                  'with surfaceTint and no shadow',
+                  'assigned surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3379,7 +3379,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 1, '
-                  'with surfaceTint and shadow',
+                  'assigned surfaceTint and shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3418,7 +3418,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
-                  'with surfaceTint and no shadow',
+                  'assigned surfaceTint and no shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3439,7 +3439,7 @@ class MaterialShowcase extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Material type card, elevation 6, '
-                  'with surfaceTint and shadow',
+                  'assigned surfaceTint and shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3492,7 +3492,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 0, with surfaceTint and default shadow',
+                  'Card, elevation 0, assigned surfaceTint and default shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3526,7 +3526,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 1, with surfaceTint and default shadow',
+                  'Card, elevation 1, assigned surfaceTint and default shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3545,7 +3545,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 1, with surfaceTint and '
+                  'Card, elevation 1, assigned surfaceTint and '
                   'transparent shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
@@ -3579,7 +3579,7 @@ class CardShowcase extends StatelessWidget {
             height: 60,
             child: Center(
               child: Text(
-                'Card, elevation 4, with surfaceTint and default shadow',
+                'Card, elevation 4, assigned surfaceTint and default shadow',
                 textAlign: TextAlign.center,
                 style: denseHeader,
               ),
@@ -3597,7 +3597,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 4, with surfaceTint and '
+                  'Card, elevation 4, assigned surfaceTint and '
                   'transparent shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
@@ -3633,7 +3633,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'Card, elevation 10, with surfaceTint and default shadow',
+                  'Card, elevation 10, assigned surfaceTint and default shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
@@ -3652,7 +3652,7 @@ class CardShowcase extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                   child: Text(
-                'Card, elevation 10, with surfaceTint and '
+                'Card, elevation 10, assigned surfaceTint and '
                 'transparent shadow',
                 textAlign: TextAlign.center,
                 style: denseHeader,

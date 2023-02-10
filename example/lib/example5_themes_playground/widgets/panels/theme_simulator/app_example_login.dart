@@ -1,10 +1,18 @@
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_images.dart';
 import '../../../../shared/widgets/universal/svg_asset_image.dart';
+
+// Set the bool flag to true to show debug prints. Even if it is forgotten
+// to set it to false, debug prints will not show in release builds.
+// The handy part is that if it gets in the way in debugging, it is an easy
+// toggle to turn it off here too. Often I just leave them true if it is one
+// I want to see in dev mode, unless it is too chatty.
+const bool _debug = !kReleaseMode && false;
 
 /// An example that show what an app using the theme might look like
 class AppExampleLogin extends StatelessWidget {
@@ -72,7 +80,8 @@ class _LoginColumnState extends State<LoginColumn> {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final MediaQueryData media = MediaQuery.of(context);
-    debugPrint('Media size ${media.size}');
+
+    if (_debug) debugPrint('Media size ${media.size}');
 
     return SafeArea(
       child: Padding(
