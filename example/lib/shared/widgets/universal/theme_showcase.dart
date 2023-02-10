@@ -2047,7 +2047,6 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                       ],
                     ),
                   ),
-                  const VerticalDivider(width: 1),
                   Expanded(
                     child: Column(
                       children: <Widget>[

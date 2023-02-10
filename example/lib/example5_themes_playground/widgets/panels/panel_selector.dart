@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
-import 'panel_item.dart';
+import 'theme_topic.dart';
 
 // PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
 //
@@ -172,7 +172,7 @@ class _PanelButton extends StatelessWidget {
     required this.selected,
     required this.onSelect,
   });
-  final PanelItem item;
+  final ThemeTopic item;
   final bool selected;
   final VoidCallback onSelect;
 

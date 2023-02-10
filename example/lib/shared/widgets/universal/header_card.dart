@@ -22,7 +22,7 @@ class HeaderCard extends StatelessWidget {
     this.leading,
     this.title,
     this.subtitle,
-    this.secondHeader,
+    this.trailing,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
     this.elevation = 0,
@@ -56,9 +56,16 @@ class HeaderCard extends StatelessWidget {
   /// Typically a [Text] widget.
   final Widget? subtitle;
 
-  /// An additional optional secondary header to display in the title after
-  /// the main/ header.
-  final Widget? secondHeader;
+  /// A widget to display after the title.
+  ///
+  /// Typically an [Icon] widget.
+  ///
+  /// To show right-aligned metadata (assuming left-to-right reading order;
+  /// left-aligned for right-to-left reading order), consider using a [Row] with
+  /// [CrossAxisAlignment.baseline] alignment whose first item is [Expanded] and
+  /// whose second child is the metadata text, instead of using the [trailing]
+  /// property.
+  final Widget? trailing;
 
   /// The margins around the entire reveal list tile card.
   ///
@@ -206,30 +213,24 @@ class HeaderCard extends StatelessWidget {
             Material(
               type: MaterialType.card,
               color: headerColor,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      tileColor: Colors.transparent,
-                      contentPadding: headerPadding,
-                      leading: leading,
-                      title: cardTitle,
-                      subtitle: subtitle,
-                      trailing: (enabled && onTap != null)
-                          ? ExpandIcon(
-                              size: 32,
-                              isExpanded: isOpen,
-                              padding: EdgeInsets.zero,
-                              onPressed: (_) {
-                                onTap?.call();
-                              },
-                            )
-                          : null,
-                      onTap: onTap?.call,
-                    ),
-                  ),
-                  if (secondHeader != null) Expanded(child: secondHeader!),
-                ],
+              child: ListTile(
+                tileColor: Colors.transparent,
+                contentPadding: headerPadding,
+                leading: leading,
+                title: cardTitle,
+                subtitle: subtitle,
+                trailing: trailing ??
+                    ((enabled && onTap != null)
+                        ? ExpandIcon(
+                            size: 32,
+                            isExpanded: isOpen,
+                            padding: EdgeInsets.zero,
+                            onPressed: (_) {
+                              onTap?.call();
+                            },
+                          )
+                        : null),
+                onTap: onTap?.call,
               ),
             ),
           AnimatedSwitcher(

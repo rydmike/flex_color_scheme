@@ -4,39 +4,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/pages/page_examples.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/android_navigation_bar_settings/android_navigation_bar_settings.dart';
-import '../panels/app_bar_settings/app_bar_settings.dart';
-import '../panels/bottom_navigation_bar_settings/bottom_navigation_bar_settings.dart';
-import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
-import '../panels/buttons_settings/buttons_settings.dart';
-import '../panels/card_settings/card_settings.dart';
-import '../panels/component_settings/component_settings.dart';
-import '../panels/dialog_settings/dialog_settings.dart';
-import '../panels/drawer_settings/drawer_settings.dart';
-import '../panels/effective_colors/effective_colors.dart';
-import '../panels/fab_chip_settings/fab_chip_settings.dart';
-import '../panels/grid_item.dart';
-import '../panels/introduction/introduction_panel.dart';
-import '../panels/list_tile_settings/list_tile_settings.dart';
-import '../panels/material_panel/material_panel.dart';
-import '../panels/menu_settings/menu_settings.dart';
-import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
-import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
-import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
-import '../panels/slider_settings/slider_settings.dart';
-import '../panels/surface_blend_settings/surface_blend_settings.dart';
-import '../panels/switch_settings/switch_settings.dart';
-import '../panels/tab_bar_settings/tab_bar_settings.dart';
-import '../panels/text_field_settings/text_field_settings.dart';
-import '../panels/text_theme_settings/primary_text_theme_settings.dart';
-import '../panels/text_theme_settings/text_theme_settings.dart';
-import '../panels/theme_code/theme_code.dart';
-import '../panels/theme_colors_settings/theme_colors_settings.dart';
+import '../panels/panel_content.dart';
 import '../panels/theme_selector.dart';
-import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
-import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
+import '../panels/theme_topic.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -47,9 +18,13 @@ const bool _debug = !kReleaseMode && false;
 
 /// This is the super large masonry grid view layout of the Themes Playground.
 ///
-/// It is nice on a 4k screen where you can see a lot of settings in one glance.
+/// It is somewhat useful on a 4k screen where you can see a lot of settings
+/// in one glance.
+///
 /// It works thanks to collapsible panels and responsive layout down to
 /// phone size too, but a page view may be more convenient on eg tablet size.
+///
+/// Considering removing this view from the Themes Playground.
 class LargeGridView extends StatefulWidget {
   const LargeGridView({
     super.key,
@@ -131,15 +106,12 @@ class _LargeGridViewState extends State<LargeGridView>
             theme.colorScheme.onBackground)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
-    final ThemeController themeCtrl = widget.controller;
+    final ThemeController controller = widget.controller;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // Just a suitable breakpoint for when we want to have more
       // than one column in the body with this particular content.
       final int columns = constraints.maxWidth ~/ 860 + 1;
-      // Flag used to hide some blend mode options that wont fit when
-      // using toggle buttons on small media.
-      final bool showAllBlends = constraints.maxWidth / columns > 445;
       final double margins = AppData.responsiveInsets(media.size.width);
       // The intrinsic height diff of the switch = dense - normal.
       final double phoneSwitchReduce =
@@ -170,57 +142,30 @@ class _LargeGridViewState extends State<LargeGridView>
             delegate: ThemeSelectorHeaderDelegate(
               vsync: this,
               extent: headerExtent,
-              controller: themeCtrl,
+              controller: controller,
               updateDelegate: updateDelegate,
             ),
           ),
           SliverPadding(
             padding: EdgeInsets.fromLTRB(
-                margins, margins, margins, margins + media.padding.bottom),
+              margins,
+              margins,
+              margins,
+              margins + media.padding.bottom,
+            ),
             sliver: SliverMasonryGrid.count(
               crossAxisCount: columns,
               mainAxisSpacing: margins,
               crossAxisSpacing: margins,
               childCount: widget.isCardOpen.length,
-              itemBuilder: (BuildContext context, int itemIndex) => HeaderCard(
-                title: Text(gridItems[itemIndex].panelLabel),
-                leading: Icon(gridItems[itemIndex].icon, color: iconColor),
-                isOpen: widget.isCardOpen[itemIndex],
+              itemBuilder: (BuildContext context, int index) => HeaderCard(
+                title: Text(panelItems[index].heading),
+                leading: Icon(panelItems[index].icon, color: iconColor),
+                isOpen: widget.isCardOpen[index],
                 onTap: () {
-                  widget.toggleCard(itemIndex);
+                  widget.toggleCard(index);
                 },
-                child: <Widget>[
-                  IntroductionPanel(themeCtrl),
-                  ThemeCode(themeCtrl),
-                  ThemeColorsSettings(themeCtrl),
-                  SeededColorSchemeSettings(themeCtrl),
-                  SurfaceBlendSettings(themeCtrl, allBlends: showAllBlends),
-                  EffectiveColors(themeCtrl),
-                  ComponentSettings(themeCtrl),
-                  TextFieldSettings(themeCtrl),
-                  AppBarSettings(themeCtrl),
-                  TabBarSettings(themeCtrl),
-                  BottomNavigationBarSettings(themeCtrl),
-                  NavigationBarSettings(themeCtrl),
-                  NavigationRailSettings(themeCtrl),
-                  DrawerSettings(themeCtrl),
-                  ButtonsSettings(themeCtrl),
-                  ToggleButtonsSettings(themeCtrl),
-                  FabChipSettings(themeCtrl),
-                  MenuSettings(themeCtrl),
-                  TooltipIconButtonAvatarDropdownSettings(themeCtrl),
-                  SwitchesSettings(themeCtrl),
-                  SliderSettings(themeCtrl),
-                  ListTileSettings(themeCtrl),
-                  DialogSettings(themeCtrl),
-                  BottomSheetBannerSnackSettings(themeCtrl),
-                  const MaterialPanel(),
-                  CardSettings(themeCtrl),
-                  TextThemeSettings(themeCtrl),
-                  PrimaryTextThemeSettings(themeCtrl),
-                  AndroidNavigationBarSettings(themeCtrl),
-                  PageExamples(controller: themeCtrl),
-                ].elementAt(itemIndex),
+                child: PanelContent(index, controller),
               ),
             ),
           ),

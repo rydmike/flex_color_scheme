@@ -3,43 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/pages/page_examples.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/android_navigation_bar_settings/android_navigation_bar_settings.dart';
-import '../panels/app_bar_settings/app_bar_settings.dart';
-import '../panels/bottom_navigation_bar_settings/bottom_navigation_bar_settings.dart';
-import '../panels/bottom_sheet_banner_snack_settings/bottom_sheet_banner_snack_settings.dart';
-import '../panels/buttons_settings/buttons_settings.dart';
-import '../panels/card_settings/card_settings.dart';
-import '../panels/component_settings/component_settings.dart';
-import '../panels/dialog_settings/dialog_settings.dart';
-import '../panels/drawer_settings/drawer_settings.dart';
-import '../panels/effective_colors/effective_colors.dart';
-import '../panels/fab_chip_settings/fab_chip_settings.dart';
-import '../panels/introduction/introduction_panel.dart';
-import '../panels/list_tile_settings/list_tile_settings.dart';
-import '../panels/material_panel/material_panel.dart';
-import '../panels/menu_settings/menu_settings.dart';
-import '../panels/navigation_bar_settings/navigation_bar_settings.dart';
-import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
-import '../panels/panel_item.dart';
+import '../panels/panel_content.dart';
 import '../panels/panel_selector.dart';
-import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
-import '../panels/slider_settings/slider_settings.dart';
-import '../panels/surface_blend_settings/surface_blend_settings.dart';
-import '../panels/switch_settings/switch_settings.dart';
-import '../panels/tab_bar_settings/tab_bar_settings.dart';
-import '../panels/text_field_settings/text_field_settings.dart';
-import '../panels/text_theme_settings/primary_text_theme_settings.dart';
-import '../panels/text_theme_settings/text_theme_settings.dart';
-import '../panels/theme_code/theme_code.dart';
-import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_selector.dart';
-import '../panels/theme_simulator/theme_simulator.dart';
-import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
-import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
-import '../panels/widget_showcase/widget_showcase.dart';
+import '../panels/theme_topic.dart';
 import '../shared/color_scheme_box.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
@@ -116,9 +85,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ThemeController themeCtrl = widget.themeController;
     final MediaQueryData media = MediaQuery.of(context);
-    // Flag used to hide some blend mode options that wont fit when
-    // using toggle buttons on small media.
-    final bool showAllBlends = media.size.width > 445;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
@@ -196,55 +162,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               scale: scaleAnimation,
               child: FadeTransition(
                 opacity: fadeAnimation,
-                child: <Widget>[
-                  PanelPage(IntroductionPanel(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(
-                      ThemeColorsSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(SeededColorSchemeSettings(themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(
-                      SurfaceBlendSettings(themeCtrl, allBlends: showAllBlends),
-                      pageIndex,
-                      themeCtrl),
-                  PanelPage(EffectiveColors(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(ComponentSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(TextFieldSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(AppBarSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(TabBarSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(BottomNavigationBarSettings(themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(
-                      NavigationBarSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(
-                      NavigationRailSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(DrawerSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(ButtonsSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(
-                      ToggleButtonsSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(FabChipSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(MenuSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(TooltipIconButtonAvatarDropdownSettings(themeCtrl),
-                      pageIndex, themeCtrl),
-                  PanelPage(SwitchesSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(SliderSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(ListTileSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(DialogSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(BottomSheetBannerSnackSettings(themeCtrl),
-                      pageIndex, themeCtrl),
-                  PanelPage(const MaterialPanel(), pageIndex, themeCtrl),
-                  PanelPage(CardSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(TextThemeSettings(themeCtrl), pageIndex, themeCtrl),
-                  PanelPage(PrimaryTextThemeSettings(themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(ThemeSimulator(controller: themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(AndroidNavigationBarSettings(themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(PageExamples(controller: themeCtrl), pageIndex,
-                      themeCtrl),
-                  PanelPage(const WidgetShowcase(), pageIndex, themeCtrl),
-                  PanelPage(ThemeCode(themeCtrl), pageIndex, themeCtrl),
-                ].elementAt(pageIndex),
+                child: PanelPage(pageIndex, themeCtrl),
               ),
             );
           },
@@ -259,13 +177,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 // inside the page in the PageView.
 class PanelPage extends StatelessWidget {
   const PanelPage(
-    this.child,
-    this.panelPage,
+    this.leftPageIndex,
     this.controller, {
     super.key,
   });
-  final Widget child;
-  final int panelPage;
+  final int leftPageIndex;
   final ThemeController controller;
 
   @override
@@ -278,73 +194,83 @@ class PanelPage extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
-    final int secondPage = controller.sideViewIndex;
+    final int rightPageIndex = controller.sideViewIndex;
 
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // A custom breakpoint, when the layout width is larger than 1200dp
       // we show the code panel in a side-by side view, but only if we are not
       // on the last 2 pages, there we do not want it.
-      final bool showCodeSideBySide =
-          constraints.maxWidth >= AppData.codeViewWidthBreakpoint &&
-              panelPage < panelItems.length - 2;
+      // final bool showSecondPage =
+      //     constraints.maxWidth >= AppData.codeViewWidthBreakpoint &&
+      //         firstPageIndex < panelItems.length - 2;
+      final bool showSecondPage =
+          constraints.maxWidth >= AppData.codeViewWidthBreakpoint;
       final double margins =
           AppData.responsiveInsets(MediaQuery.of(context).size.width);
-      // The second header
-      final Widget secondHeader = ListTile(
-        leading: Icon(panelItems[secondPage].icon, color: iconColor),
-        title: Text(
-          panelItems[secondPage].panelLabel,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        trailing: SecondPanelPopupMenu(
-          index: secondPage,
-          onChanged: controller.setSideViewIndex,
-          iconColor: iconColor,
-        ),
-      );
 
       // We get double implicit scrollbars and that causes issues with the
       // scroll controller, this scroll config removes it.
-      return ScrollConfiguration(
-        behavior: const NoScrollbarBehavior(),
-        // This ListView allows the content in the PageView to scroll
-        // vertically as apart of the NestedScroll view the PageView is
-        // included in, but by itself, but we need the ListView to allow
-        // its page content to grow beyond the visible page.
-        child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            margins,
-            0,
-            margins,
-            margins + MediaQuery.of(context).padding.bottom,
-          ),
-          children: <Widget>[
-            HeaderCard(
-              title: Text(panelItems[panelPage].panelLabel),
-              leading: Icon(panelItems[panelPage].icon, color: iconColor),
-              secondHeader: showCodeSideBySide ? secondHeader : null,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return Row(
+        children: <Widget>[
+          ScrollConfiguration(
+            behavior: const NoScrollbarBehavior(),
+            // This ListView allows the content in the PageView to scroll
+            // vertically as apart of the NestedScroll view the PageView is
+            // included in, but by itself, but we need the ListView to allow
+            // its page content to grow beyond the visible page.
+            child: Expanded(
+              child: ListView(
+                padding: EdgeInsetsDirectional.fromSTEB(
+                  margins,
+                  0,
+                  margins / 2,
+                  margins + MediaQuery.of(context).padding.bottom,
+                ),
                 children: <Widget>[
-                  Expanded(child: child),
-                  if (showCodeSideBySide)
-                    Expanded(
-                      child: SecondPanel(controller: controller),
-                    ),
+                  HeaderCard(
+                    title: Text(panelItems[leftPageIndex].heading),
+                    leading:
+                        Icon(panelItems[leftPageIndex].icon, color: iconColor),
+                    child: PanelContent(leftPageIndex, controller),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          if (showSecondPage)
+            Expanded(
+              child: ListView(
+                  controller: ScrollController(),
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                    margins / 2,
+                    0,
+                    margins,
+                    margins + MediaQuery.of(context).padding.bottom,
+                  ),
+                  children: <Widget>[
+                    HeaderCard(
+                      title: Text(panelItems[rightPageIndex].heading),
+                      leading: Icon(panelItems[rightPageIndex].icon,
+                          color: iconColor),
+                      trailing: SelectSecondPage(
+                        index: rightPageIndex,
+                        onChanged: controller.setSideViewIndex,
+                        iconColor: iconColor,
+                      ),
+                      child: PanelContent(rightPageIndex, controller),
+                    ),
+                  ]),
+            )
+        ],
       );
     });
   }
 }
 
 /// Widget used to select used side-by-side second panel with a popup menu.
-class SecondPanelPopupMenu extends StatelessWidget {
-  const SecondPanelPopupMenu({
+class SelectSecondPage extends StatelessWidget {
+  const SelectSecondPage({
     super.key,
     required this.index,
     this.onChanged,
@@ -400,7 +326,7 @@ class SecondPanelPopupMenu extends StatelessWidget {
                         child: Icon(panelItems[i].icon),
                       ),
                     ),
-              title: Text(panelItems[i].panelLabel, style: txtStyle),
+              title: Text(panelItems[i].heading, style: txtStyle),
             ),
           )
       ],
@@ -409,55 +335,5 @@ class SecondPanelPopupMenu extends StatelessWidget {
         color: iconColor,
       ),
     );
-  }
-}
-
-// Used to show selected panel on the right side.
-class SecondPanel extends StatelessWidget {
-  const SecondPanel({super.key, required this.controller});
-  final ThemeController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    // Flag used to hide some blend mode options that wont fit when
-    // using toggle buttons on small media.
-    final bool showAllBlends = media.size.width > 445;
-
-    final int page = controller.sideViewIndex;
-    return <Widget>[
-      IntroductionPanel(controller),
-      ThemeColorsSettings(controller),
-      SeededColorSchemeSettings(controller),
-      SurfaceBlendSettings(controller, allBlends: showAllBlends),
-      EffectiveColors(controller),
-      ComponentSettings(controller),
-      TextFieldSettings(controller),
-      AppBarSettings(controller),
-      TabBarSettings(controller),
-      BottomNavigationBarSettings(controller),
-      NavigationBarSettings(controller),
-      NavigationRailSettings(controller),
-      DrawerSettings(controller),
-      ButtonsSettings(controller),
-      ToggleButtonsSettings(controller),
-      FabChipSettings(controller),
-      MenuSettings(controller),
-      TooltipIconButtonAvatarDropdownSettings(controller),
-      SwitchesSettings(controller),
-      SliderSettings(controller),
-      ListTileSettings(controller),
-      DialogSettings(controller),
-      BottomSheetBannerSnackSettings(controller),
-      const MaterialPanel(),
-      CardSettings(controller),
-      TextThemeSettings(controller),
-      PrimaryTextThemeSettings(controller),
-      ThemeSimulator(controller: controller),
-      AndroidNavigationBarSettings(controller),
-      PageExamples(controller: controller),
-      const WidgetShowcase(),
-      ThemeCode(controller),
-    ].elementAt(page);
   }
 }

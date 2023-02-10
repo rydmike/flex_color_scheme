@@ -85,7 +85,7 @@ class Store {
   // Key used to read and save the deviceSize value.
   static const String keyDeviceSize = 'deviceSize';
   // Default value for the deviceSize, also used to reset settings.
-  static const double defaultDeviceSize = 200;
+  static const double defaultDeviceSize = 1000;
 
   // Key used to read and save the showSchemeInput value.
   static const String keyShowSchemeInput = 'showSchemeInput';

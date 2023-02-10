@@ -11,7 +11,7 @@ import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
-import '../panels/grid_item.dart';
+import '../panels/theme_topic.dart';
 import 'large_grid_view.dart';
 import 'panel_view.dart';
 
@@ -69,15 +69,8 @@ class _HomePageState extends State<HomePage> {
     // The panels can only be opened/closed on the large masonry grid view.
     // Since by default users will start with the page view, they will have
     // seen the "intro" panel already, so by default we close it here.
-    // The code view panel can also be opened on demand in the grid view.
-    isPanelOpen = List<bool>.generate(gridItems.length, (int i) {
-      if (i == 1 || i == 0) {
-        // Always start with info and code view panel closed.
-        return false;
-      } else {
-        return true;
-      }
-    });
+    // And keep them all closed at start. New in V7, maybe phasing out grid.
+    isPanelOpen = List<bool>.generate(panelItems.length, (int i) => false);
   }
 
   @override

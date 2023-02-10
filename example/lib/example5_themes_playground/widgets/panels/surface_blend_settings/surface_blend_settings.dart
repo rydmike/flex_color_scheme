@@ -22,10 +22,10 @@ class SurfaceBlendSettings extends StatelessWidget {
   const SurfaceBlendSettings(
     this.controller, {
     super.key,
-    required this.allBlends,
+    // required this.allBlends,
   });
   final ThemeController controller;
-  final bool allBlends;
+  // final bool allBlends;
 
   String explainMode(final FlexSurfaceMode mode) {
     switch (mode) {

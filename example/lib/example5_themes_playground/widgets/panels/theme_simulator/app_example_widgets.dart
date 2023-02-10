@@ -77,20 +77,15 @@ class ShowcaseColors extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top; // + kToolbarHeight * 2;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: <Widget>[
         ListTile(
-          contentPadding: EdgeInsets.zero,
           title: const Text('Theme mode'),
           subtitle: Text('Theme ${controller.themeMode.name}'),
           trailing: ThemeModeSwitch(
@@ -107,12 +102,18 @@ class ShowcaseColors extends StatelessWidget {
           },
         ),
         // Show all key active theme colors.
-        const SizedBox(height: 8),
-        const ShowColorSchemeColors(),
-        const SizedBox(height: 8),
-        const ShowThemeDataColors(),
-        const SizedBox(height: 8),
-        const ShowSubThemeColors(),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: ShowColorSchemeColors(),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: ShowThemeDataColors(),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: ShowSubThemeColors(),
+        ),
       ],
     );
   }
@@ -124,16 +125,12 @@ class ShowcaseButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        16,
+        media.padding.top + AppData.edgeInsetsTablet,
+        16,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -166,16 +163,12 @@ class ShowcaseInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        16,
+        media.padding.top + AppData.edgeInsetsTablet,
+        16,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -198,34 +191,34 @@ class ShowcaseMenus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: <Widget>[
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: const <Widget>[
-            PopupMenuButtonShowcase(),
-            SizedBox(width: 8),
-            PopupMenuButtonTilesShowcase(),
-          ],
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Wrap(
+            spacing: 4,
+            runSpacing: 8,
+            children: const <Widget>[
+              PopupMenuButtonShowcase(),
+              SizedBox(width: 8),
+              PopupMenuButtonTilesShowcase(),
+            ],
+          ),
         ),
-        const SizedBox(height: 8),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: DropDownMenuShowcase(),
+        ),
         const MenuBarShowcase(),
-        const SizedBox(height: 8),
         const MenuAnchorShowcase(),
-        const SizedBox(height: 8),
       ],
     );
   }
@@ -237,25 +230,27 @@ class ShowcaseSwitches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
-        SwitchShowcase(),
-        SizedBox(height: 8),
-        CheckboxShowcase(),
-        SizedBox(height: 8),
-        RadioShowcase(),
-        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: SwitchShowcase(),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: CheckboxShowcase(),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: RadioShowcase(),
+        ),
         Divider(height: 1),
         SwitchTileShowcase(),
         Divider(height: 1),
@@ -273,19 +268,14 @@ class ShowcaseListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
-        SizedBox(height: 8),
         ListTileShowcase(),
         Divider(),
         ExpansionTileShowcase(),
@@ -302,16 +292,12 @@ class ShowcaseSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -335,20 +321,17 @@ class ShowcaseAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
         AppBarShowcase(),
+        SizedBox(height: 8),
         Divider(),
         BottomAppBarShowcase(),
         Divider(),
@@ -367,16 +350,12 @@ class ShowcaseNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -402,16 +381,12 @@ class ShowcaseDialogs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -434,23 +409,24 @@ class ShowcaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
-        CardShowcase(),
+        Padding(
+          padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+          child: CardShowcase(),
+        ),
         Divider(height: 32),
-        MaterialShowcase(),
-        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: MaterialShowcase(),
+        ),
       ],
     );
   }
@@ -463,26 +439,24 @@ class ShowcaseText extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top;
-    final double bottomPadding = media.padding.bottom;
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        sideMargin,
-        topPadding + AppData.edgeInsetsTablet,
-        sideMargin,
-        AppData.edgeInsetsTablet + bottomPadding,
+        0,
+        media.padding.top + AppData.edgeInsetsTablet,
+        0,
+        media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: <Widget>[
         const SizedBox(height: 8),
-        const TooltipShowcase(),
-        const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: TooltipShowcase(),
+        ),
         Card(
           elevation: 0,
           color: theme.scaffoldBackgroundColor,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -501,7 +475,7 @@ class ShowcaseText extends StatelessWidget {
           elevation: 0,
           color: theme.colorScheme.primary,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
