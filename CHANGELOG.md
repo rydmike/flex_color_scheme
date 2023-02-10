@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 9, 2023**
+**Feb 10, 2023**
 
 **FIX**
 
@@ -79,11 +79,11 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - REPORT: Found NavigationDrawer issues to Flutter repo.
+- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.
+- MAYBE ADD: Some initial theming options for the new MenuBar theme.
 - MAYBE ADD: Device selections to DeviceSimulator.
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.  
-- MAYBE ADD: Some initial theming options for the new MenuBar theme.
-- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.
