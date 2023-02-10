@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'app_bar_style_popup_menu.dart';
@@ -11,10 +12,24 @@ class AppBarSettings extends StatelessWidget {
   const AppBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterFix117082 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/117082',
+  );
+  static final Uri _fcsFlutterIssue110951 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/110951',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     return Column(
       children: <Widget>[
         const AppBarShowcase(),
@@ -621,21 +636,57 @@ class AppBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        // TODO(rydmike): Add M3 bug info link.
+        const BottomAppBarShowcase(),
         const ListTile(
           isThreeLine: true,
           dense: true,
-          title: Text('Background color issue'),
-          subtitle: Text('In Flutter 3.7 and 3.7.1 the BottomAppBar color '
-              'cannot be changed due to the issue described in FIX PR #117082. '
-              'The fix has not landed in Flutter 3.7.1 stable.\n'
-              'The color of items in a BottomAppBar cannot be themed, if you '
-              'select a color that requires other contrast color than surface '
-              'color, you will have to color content on widget level.'),
+          title: Text('Color issues'),
+          subtitle: Text(
+              'The color of items in a BottomAppBar cannot be themed. If you '
+              'use a background color that requires other contrasting color '
+              'than what works on surface and background color, you will have '
+              'to color its content on widget level.'),
         ),
-        const BottomAppBarShowcase(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.7 to 3.7.2 the BottomAppBar color '
+                      'cannot be changed due to the issue described in ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterFix117082,
+                  text: 'FIX PR #117082.',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. When using SliverAppBar.large or '
+                      'SliverAppBar.medium, the foreground color cannot be '
+                      'changed with widget or theme, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterFix117082,
+                  text: 'Issue #117082',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There are fixes for both these issues in master '
+                      'channel, but they have not landed in Flutter 3.7.2 '
+                      'stable.',
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
       ],
     );
   }
 }
+
+// _fcsFlutterIssue110951

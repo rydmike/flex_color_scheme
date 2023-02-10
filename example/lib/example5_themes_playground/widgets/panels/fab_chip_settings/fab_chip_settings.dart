@@ -325,6 +325,7 @@ class FabChipSettings extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }

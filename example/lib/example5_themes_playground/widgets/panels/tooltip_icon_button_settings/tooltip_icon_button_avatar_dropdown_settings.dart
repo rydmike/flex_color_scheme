@@ -4,6 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -11,10 +12,29 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
   const TooltipIconButtonAvatarDropdownSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsM3IconButtonGuide = Uri(
+    scheme: 'https',
+    host: 'm3.material.io',
+    path: 'components/icon-buttons/overview',
+  );
+  static final Uri _fcsFlutterIssue111800 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/111800',
+  );
+  static final Uri _fcsFlutterIconButtonDoc = Uri(
+    scheme: 'https',
+    host: 'api.flutter.dev',
+    path: 'flutter/material/IconButton-class.html',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
@@ -276,17 +296,78 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          title: Text('IconButton, CircleAvatar and DropdownButton'),
+          title: Text('Icon, IconButton, CircleAvatar and DropdownButton'),
           subtitle: Text('Included to show their themes with '
-              'current ColorScheme.\n\n'
+              'current ColorScheme. '
               'They have no adjustable component theme properties in current '
               'version of FCS. Use "copyWith" on FCS returned ThemeData to '
-              'add your custom component theming to them.'),
+              'add your custom theming to them.'),
         ),
         const Padding(
           padding: EdgeInsets.all(16),
           child: IconButtonCircleAvatarDropdownShowcase(),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Icons and IconButtons by default use same foreground '
+                      'color as active text theme. Some components change '
+                      'their colors automatically when they use them, but '
+                      'not all do. Their usage is very versatile it is '
+                      'difficult to give them any single more universally '
+                      'applicable color than same as text. Flutter SDK does '
+                      'so in both M2 and M3 mode, and so the FCS. If FCS '
+                      'tinted text typography is used, it is also applied to '
+                      'the iconography.\n'
+                      '\n'
+                      'The M3 style IconButtons shown in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsM3IconButtonGuide,
+                  text: 'M3 guide here',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ', are not yet available as direct factories in '
+                      'Flutter. With current IconButton theming, only one '
+                      'style is offered and thus only of them could be made. '
+                      'Therefore the default style is kept as it is.\n'
+                      '\n'
+                      'The is proposal in Flutter issues to bring the M3 '
+                      'styled IconButtons to Flutter. If you like to see that '
+                      'happen you can go an upvote ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue111800,
+                  text: 'issue #111800',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. Currently you have to create those buttons as '
+                      'custom widgets using styleFrom. There is example code '
+                      'on how to do it correctly in the Flutter ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIconButtonDoc,
+                  text: 'IconButton API docs',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. It is a bit tedious to configure such buttons, '
+                      'but very doable.',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

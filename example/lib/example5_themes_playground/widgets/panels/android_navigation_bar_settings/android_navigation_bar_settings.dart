@@ -75,49 +75,6 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               'You have to implement the AnnotatedRegion with the helper '
               'separately.'),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'You can read more about how to use FlexColorScheme '
-                      'annotated region helper in the ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsSysNavDocs,
-                  text: 'documentation',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. There are also many Android version limitations '
-                      'and issues concerning stying the system navigation bar. '
-                      'You can read more about them in Flutter SDK ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue100027,
-                  text: 'umbrella issue #100027',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. This ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue112301,
-                  text: 'issue #112301',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' impacts the FlexColorScheme annotated region helper.',
-                ),
-              ],
-            ),
-          ),
-        ),
         const ListTile(
           title: Text('Background opacity'),
           subtitle: Text('System navigation bar opacity'),
@@ -198,6 +155,49 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         //   value: controller.useNavDivider,
         //   onChanged: controller.setUseNavDivider,
         // ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'You can read more about how to use FlexColorScheme '
+                      'annotated region helper in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsSysNavDocs,
+                  text: 'documentation',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There are also many Android version limitations '
+                      'and issues concerning stying the system navigation bar. '
+                      'You can read more about them in Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue100027,
+                  text: 'umbrella issue #100027',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue112301,
+                  text: 'issue #112301',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' impacts the FlexColorScheme annotated region helper.',
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 8),
       ],
     );

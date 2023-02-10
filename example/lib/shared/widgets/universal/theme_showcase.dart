@@ -1110,11 +1110,19 @@ class _IconButtonCircleAvatarDropdownShowcaseState
       spacing: 16,
       runSpacing: 4,
       children: <Widget>[
+        const Tooltip(
+          message: 'This is\nan Icon',
+          child: Icon(Icons.add_circle),
+        ),
+        const Tooltip(
+          message: 'This is\nan Icon',
+          child: Icon(Icons.flutter_dash),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: IconButton(
             icon: const Icon(Icons.accessibility),
-            tooltip: 'Tooltip on\nIconButton',
+            tooltip: 'This is an\nIconButton',
             onPressed: () {},
           ),
         ),
@@ -1123,7 +1131,9 @@ class _IconButtonCircleAvatarDropdownShowcaseState
           child: IconButton(
             icon: const Icon(Icons.lock_outlined),
             selectedIcon: const Icon(Icons.lock_open_outlined),
-            tooltip: isLockOpen ? 'In M3 tap to close' : 'In M3 tap to open',
+            tooltip: isLockOpen
+                ? 'This is an IconButton\nIn M3 tap to close lock'
+                : 'This is an IconButton\nIn M3 tap to open lock',
             isSelected: isLockOpen,
             onPressed: () {
               setState(() {
@@ -1133,9 +1143,9 @@ class _IconButtonCircleAvatarDropdownShowcaseState
           ),
         ),
         const Tooltip(
-          message: 'Tooltip on\nCircleAvatar',
+          message: 'This is a\nCircleAvatar',
           child: CircleAvatar(
-            child: Text('AV'),
+            child: Text('CA'),
           ),
         ),
         const _DropDownButton(),
@@ -2410,10 +2420,7 @@ class _MyContextMenuState extends State<MyContextMenu> {
           ),
         ],
         child: Card(
-          shadowColor: Colors.transparent,
-          elevation: 12,
-          // alignment: Alignment.center,
-          color: theme.colorScheme.surfaceVariant,
+          elevation: 1,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
