@@ -253,6 +253,26 @@ String generateThemeDartCode(ThemeController controller) {
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
+  final String elevationTint = controller.elevationTint != null &&
+          controller.elevationTint != FlexTint.defaults &&
+          controller.useMaterial3
+      ? '    elevationTint: ${controller.elevationTint},\n'
+      : '';
+  final String elevationShadow = controller.elevationShadow != null &&
+          controller.elevationShadow != FlexShadow.defaults &&
+          controller.useMaterial3
+      ? '    elevationShadow: ${controller.elevationShadow},\n'
+      : '';
+  final String elevationTintDark = controller.elevationTintDark != null &&
+          controller.elevationTintDark != FlexTint.defaults &&
+          controller.useMaterial3
+      ? '    elevationTint: ${controller.elevationTintDark},\n'
+      : '';
+  final String elevationShadowDark = controller.elevationShadowDark != null &&
+          controller.elevationShadowDark != FlexShadow.defaults &&
+          controller.useMaterial3
+      ? '    elevationShadow: ${controller.elevationShadowDark},\n'
+      : '';
   final String defRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -933,6 +953,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendLightOnColors'
           '$useFlutterDefaults'
           //
+          '$elevationTint'
+          '$elevationShadow'
+          //
           '$blendLightTextTheme'
           '$useTextTheme'
           '$useM2StyleDividerInM3'
@@ -1100,6 +1123,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendOnLevelDark'
           '$blendDarkOnColors'
           '$useFlutterDefaults'
+          //
+          '$elevationTintDark'
+          '$elevationShadowDark'
           //
           '$blendDarkTextTheme'
           '$useTextTheme'

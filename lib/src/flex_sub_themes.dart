@@ -503,6 +503,14 @@ class FlexSubThemes {
     ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
     final IconThemeData? actionsIconTheme,
 
+    /// Overrides the default value of [AppBar.shadowColor] in all
+    /// descendant [AppBar] widgets.
+    final Color? shadowColor,
+
+    /// Overrides the default value of [AppBar.surfaceTintColor] in all
+    /// descendant [AppBar] widgets.
+    final Color? surfaceTintColor,
+
     /// Overrides the default value of [AppBar.systemOverlayStyle]
     /// property in all descendant [AppBar] widgets.
     final SystemUiOverlayStyle? systemOverlayStyle,
@@ -516,6 +524,8 @@ class FlexSubThemes {
       iconTheme: iconTheme,
       actionsIconTheme: actionsIconTheme,
       systemOverlayStyle: systemOverlayStyle,
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
     );
   }
 
@@ -569,6 +579,13 @@ class FlexSubThemes {
     /// In M2 the value will default to EdgeInsets.zero.
     final EdgeInsetsGeometry? padding,
 
+    /// Overrides the default value for [BottomAppBar.surfaceTintColor].
+    ///
+    /// If null, [BottomAppBar] will not display an overlay color.
+    ///
+    /// See [Material.surfaceTintColor] for more details.
+    final Color? surfaceTintColor,
+
     /// Set to true to opt in on Material 3 styled chips.
     ///
     /// If false widgets will use more opinionated FlexColorScheme defaults.
@@ -585,6 +602,7 @@ class FlexSubThemes {
       elevation: elevation,
       height: height,
       padding: padding,
+      surfaceTintColor: surfaceTintColor,
     );
   }
 
@@ -1012,6 +1030,13 @@ class FlexSubThemes {
     ///
     /// If null, the bottom sheet's size will be unconstrained.
     final BoxConstraints? constraints,
+
+    /// Overrides the default value for surfaceTintColor.
+    ///
+    /// If null, [BottomSheet] will not display an overlay color.
+    ///
+    /// See [Material.surfaceTintColor] for more details.
+    final Color? surfaceTintColor,
   }) =>
       BottomSheetThemeData(
         backgroundColor: backgroundColor,
@@ -1026,6 +1051,7 @@ class FlexSubThemes {
         ),
         clipBehavior: clipBehavior,
         constraints: constraints,
+        surfaceTintColor: surfaceTintColor,
       );
 
   /// An opinionated [ButtonThemeData] theme.
@@ -1144,6 +1170,18 @@ class FlexSubThemes {
     /// If not defined, defaults to [kCardElevation] = 0dp.
     final double? elevation,
 
+    /// Overrides the default value for [Card.shadowColor].
+    ///
+    /// If null, [Card] defaults to fully opaque black.
+    final Color? shadowColor,
+
+    /// Overrides the default value for [Card.surfaceTintColor].
+    ///
+    /// If null, [Card] will not display an overlay color.
+    ///
+    /// See [Material.surfaceTintColor] for more details.
+    final Color? surfaceTintColor,
+
     /// The clipBehavior of the card theme, defaults to
     /// [Clip.antiAlias] for smooth clipping when using rounded corners.
     ///
@@ -1154,6 +1192,8 @@ class FlexSubThemes {
       CardTheme(
         clipBehavior: clipBehavior,
         elevation: elevation ?? kCardElevation,
+        shadowColor: shadowColor,
+        surfaceTintColor: surfaceTintColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius ?? kCardRadius),
@@ -1291,6 +1331,14 @@ class FlexSubThemes {
     /// https://m3.material.io/components/chips/specs
     final double? radius,
 
+    /// Overrides the default for [ChipAttributes.surfaceTintColor], the
+    /// Color of the chip's surface tint overlay when its elevation is
+    /// greater than 0.
+    ///
+    /// This property applies to [ActionChip], [Chip], [ChoiceChip],
+    /// [FilterChip], [InputChip], [RawChip].
+    final Color? surfaceTintColor,
+
     /// Set to true to opt in on Material 3 styled chips.
     ///
     /// If false widgets will use more opinionated FlexColorScheme defaults.
@@ -1393,7 +1441,8 @@ class FlexSubThemes {
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      surfaceTintColor: useM3Defaults ? null : colorScheme.surfaceTint,
+      surfaceTintColor:
+          useM3Defaults ? surfaceTintColor : colorScheme.surfaceTint,
 
       // Applies to [FilterChip], [InputChip], [RawChip].
       checkmarkColor: onSelectedColor,
@@ -1477,6 +1526,12 @@ class FlexSubThemes {
     /// If not defined, defaults to [kDialogElevation] = 6.
     final double? elevation,
 
+    /// Overrides the default value for [Dialog.shadowColor].
+    final Color? shadowColor,
+
+    /// Overrides the default value for [Dialog.surfaceTintColor].
+    final Color? surfaceTintColor,
+
     /// Padding around the set of [actions] at the bottom of the dialog.
     ///
     /// Typically used to provide padding to the button bar between the button
@@ -1506,6 +1561,8 @@ class FlexSubThemes {
           Radius.circular(radius ?? kDialogRadius),
         ),
       ),
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
     );
   }
 
@@ -1544,6 +1601,9 @@ class FlexSubThemes {
     /// In M3 it defaults [Colors.transparent] and there is no shadow.
     final Color? shadowColor,
 
+    /// Overrides the default value for [Drawer.surfaceTintColor].
+    final Color? surfaceTintColor,
+
     /// Themes the default width of the [Drawer].
     ///
     /// Currently not available as a property in [FlexSubThemesData], may be
@@ -1559,6 +1619,7 @@ class FlexSubThemes {
       elevation: elevation,
       width: width,
       shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusDirectional.horizontal(
           end: Radius.circular(radius ?? kDrawerRadius),
@@ -1580,10 +1641,18 @@ class FlexSubThemes {
     /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
     /// Typically you want it to match the input decorator on your TextField.
     final InputDecorationTheme? inputDecorationTheme,
+
+    /// Overrides the default value for DropdownMenuThemeData
+    /// [menuStyle.surfaceTintColor].
+    final Color? surfaceTintColor,
   }) {
     return DropdownMenuThemeData(
-      inputDecorationTheme: inputDecorationTheme,
-    );
+        inputDecorationTheme: inputDecorationTheme,
+        menuStyle: MenuStyle(
+          surfaceTintColor: surfaceTintColor == null
+              ? null
+              : MaterialStatePropertyAll<Color>(surfaceTintColor),
+        ));
   }
 
   /// An opinionated [ElevatedButtonThemeData] theme.
@@ -2550,6 +2619,10 @@ class FlexSubThemes {
     /// Usually they are the same.
     final double? elevation,
 
+    /// Overrides the default value for MenuThemeData
+    /// [menuStyle.surfaceTintColor].
+    final Color? surfaceTintColor,
+
     /// The background color of the popup menu.
     ///
     /// If not defined, then if [useMaterial3] is:
@@ -2562,6 +2635,9 @@ class FlexSubThemes {
       style: MenuStyle(
         elevation: MaterialStatePropertyAll<double?>(elevation),
         backgroundColor: MaterialStatePropertyAll<Color?>(backgroundColor),
+        surfaceTintColor: surfaceTintColor == null
+            ? null
+            : MaterialStatePropertyAll<Color>(surfaceTintColor),
         shape: MaterialStatePropertyAll<OutlinedBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -2771,6 +2847,12 @@ class FlexSubThemes {
     ///  - If [useMaterial] if false, is 0 dp.
     final double? elevation,
 
+    /// Overrides the default value of [NavigationBar.surfaceTintColor].
+    final Color? surfaceTintColor,
+
+    /// Overrides the default value of [NavigationBar.shadowColor].
+    final Color? shadowColor,
+
     /// Height of the container for the Material 3 [NavigationBar].
     ///
     /// If undefined defaults to M3 spec 80dp.
@@ -2932,6 +3014,8 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
+      surfaceTintColor: surfaceTintColor,
+      shadowColor: shadowColor,
       indicatorColor: indicatorSchemeColor == null
           ? useFlutterDefaults
               ? null
@@ -3032,6 +3116,12 @@ class FlexSubThemes {
     ///
     /// Defaults to 1, fully opaque if not defined.
     final double? indicatorOpacity,
+
+    /// Overrides the default value of [NavigationDrawer.shadowColor].
+    final Color? shadowColor,
+
+    /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
+    final Color? surfaceTintColor,
   }) {
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
@@ -3055,6 +3145,8 @@ class FlexSubThemes {
       backgroundColor: backgroundColor,
       indicatorColor: indicatorColor.withOpacity(indicatorOpacity ?? 1.0),
       indicatorSize: indicatorSize,
+      surfaceTintColor: surfaceTintColor,
+      shadowColor: shadowColor,
       indicatorShape: indicatorBorderRadius == null
           ? null
           : RoundedRectangleBorder(
@@ -3812,6 +3904,9 @@ class FlexSubThemes {
     /// Usually they are the same.
     final double? elevation,
 
+    /// The color used as an overlay on [color] of the popup menu.
+    final Color? surfaceTintColor,
+
     /// The background color of the popup menu.
     ///
     /// If not defined, then if [useMaterial3] is:
@@ -3823,6 +3918,7 @@ class FlexSubThemes {
       PopupMenuThemeData(
         elevation: elevation,
         color: color,
+        surfaceTintColor: surfaceTintColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(radius ?? kMenuRadius),

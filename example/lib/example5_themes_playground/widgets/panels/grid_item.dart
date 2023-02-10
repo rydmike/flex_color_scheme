@@ -27,32 +27,32 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.info_outlined,
   ),
   GridItem(
-    panelLabel: 'Theme Code',
+    panelLabel: 'Theme code',
     buttonLabel: 'Theme\ncode',
     icon: Icons.integration_instructions_outlined,
   ),
   GridItem(
-    panelLabel: 'Theme Colors',
+    panelLabel: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
   GridItem(
-    panelLabel: 'Seeded ColorScheme',
+    panelLabel: 'Seeded colorScheme',
     buttonLabel: 'Seeded\nColorScheme',
     icon: Icons.colorize_outlined,
   ),
   GridItem(
-    panelLabel: 'Surface Blends',
+    panelLabel: 'Surface blends',
     buttonLabel: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
   ),
   GridItem(
-    panelLabel: 'Effective Colors',
+    panelLabel: 'Effective bolors',
     buttonLabel: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
   ),
   GridItem(
-    panelLabel: 'Component Themes',
+    panelLabel: 'Component bhemes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
   ),
@@ -90,13 +90,13 @@ const List<GridItem> gridItems = <GridItem>[
     icon: Icons.featured_video_outlined,
   ),
   GridItem(
-    panelLabel: 'Material Buttons',
-    buttonLabel: 'Material\nButtons',
+    panelLabel: 'Material buttons',
+    buttonLabel: 'Material\nbuttons',
     icon: Icons.crop_16_9_outlined,
   ),
   GridItem(
-    panelLabel: 'Selection Buttons',
-    buttonLabel: 'Selection\nButtons',
+    panelLabel: 'Selection buttons',
+    buttonLabel: 'Selection\nbuttons',
     icon: Icons.view_week_outlined,
   ),
   GridItem(

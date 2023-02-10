@@ -7,13 +7,11 @@
 // made public widget and put into their own files if there would be a need
 // to use them on other other screens too.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../dialogs/show_copy_setup_code_dialog.dart';
-import 'platform_popup_menu.dart';
 
 /// Show the main panel with introduction information.
 ///
@@ -228,23 +226,6 @@ class IntroductionPanel extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        const Divider(),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        ListTile(
-          subtitle: const Text('Set back to actual platform'),
-          trailing: FilledButton(
-            onPressed: () {
-              controller.setPlatform(defaultTargetPlatform);
-            },
-            child: const Text('Actual'),
-          ),
-          onTap: () {
-            controller.setPlatform(defaultTargetPlatform);
-          },
         ),
         const SizedBox(height: 8),
       ],

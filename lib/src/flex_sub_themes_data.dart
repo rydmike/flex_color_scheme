@@ -123,6 +123,9 @@ class FlexSubThemesData with Diagnosticable {
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
     //
+    this.elevationTint = FlexTint.removeTint,
+    this.elevationShadow = FlexShadow.useShadow,
+    //
     this.blendTextTheme = true,
     this.useTextTheme = true,
     this.useM2StyleDividerInM3 = false,
@@ -518,6 +521,87 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to false.
   final bool useFlutterDefaults;
+
+  /// Controls elevation tint color usage in Material 3 theming.
+  ///
+  /// Material 3 introduces elevation tint on elevated surface. With the
+  /// [elevationTint] control you can control if it is used.
+  ///
+  /// - Use value [FlexTint.defaults] for default elevation tints in M3.
+  /// - Use value [FlexTint.removeTint] to remove elevation tint in M3.
+  /// - Use value [FlexTint.adaptive] to remove elevation tint in M3 on
+  ///   iOS and macOS platforms.
+  ///
+  /// The [elevationTint] feature has no impact in M2 mode. It only impacts
+  /// component themes in FCS where Flutter SDK also support elevation
+  /// tints in its theme. Currently this applies to:
+  ///
+  /// - [AppBar]
+  /// - [BottomAppBar]
+  /// - [BottomSheet]
+  /// - [Card]
+  /// - [Chip]
+  /// - [Dialog]
+  /// - [Drawer]
+  /// - [DropDownMenu]
+  /// - [MenuAnchor]
+  /// - [MenuBar]
+  /// - [NavigationBar]
+  /// - [NavigationDrawer]
+  /// - [PopupMenuButton]
+  ///
+  /// Not supported in Flutter theming on:
+  /// - [BottomNavigationBar], does not have tint in M3 in Flutter 3.7.
+  /// - [NavigationRail], does not have elevation tint in Flutter 3.7, probably
+  ///   should have when elevated. Default M3 design does not elevate it.
+  ///
+  /// If you want to totally remove elevation tint from all widgets and on all
+  /// platforms when using Material 3, you can set
+  /// [FlexColorScheme.surfaceTint] color to [Colors.transparent]. This also
+  /// works with vanilla [ThemeData.colorScheme] by setting its
+  /// [ColorScheme.surfaceTint] to [Colors.transparent].
+  ///
+  /// If not defined, defaults to [FlexTint.defaults].
+  final FlexTint? elevationTint;
+
+  /// Controls shadow usage on elevated surfaces in Material 3 theming.
+  ///
+  /// Material 3 removes elevation shadows on some elevated surfaces. With this
+  /// control you can bring it back.
+  ///
+  /// - Use value [FlexShadow.defaults] for default elevation shadows in M3.
+  /// - Use value [FlexShadow.useShadow] to bring back shadows in M3.
+  /// - Use value [FlexShadow.adaptive] to only bring back elevation shadows on
+  ///   iOS and macOS platforms.
+  ///
+  /// The [elevationShadow] feature has no impact in M2 mode. It only impacts
+  /// component themes in FCS where Flutter SDK also support adding elevation
+  /// shadows back in M3 mode. Currently this applies to:
+  ///
+  /// - [AppBar]
+  /// - [BottomAppBar]
+  /// - [Dialog]
+  /// - [Drawer]
+  /// - [NavigationDrawer]
+  /// - [NavigationBar]
+  ///
+  /// These components already have shadows in M3:
+  /// - [BottomNavigationBar], has shadow in M3 and no tint, is M2 Widget.
+  /// - [BottomSheet],
+  /// - [Card]
+  /// - [Chip]
+  /// - [DropDownMenu]
+  /// - [MenuAnchor]
+  /// - [MenuBar], might be a mistake that the bar has shadow in M3 by default.
+  ///   The menus from the bar should have shadow and do, but probably not the
+  ///   menu bar itself. In design in M3 web guide it is not elevated.
+  /// - [NavigationRail], has shadow in M3 if elevated, probably should not.
+  ///   Also does not have elevation tint in Flutter 3.7, probably should have
+  ///   when elevated. Default M3 design calls for it not being elevated.
+  /// - [PopupMenuButton]
+  ///
+  /// If not defined, defaults to [FlexShadow.defaults].
+  final FlexShadow? elevationShadow;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -2367,6 +2451,9 @@ class FlexSubThemesData with Diagnosticable {
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
     //
+    final FlexTint? useElevationTint,
+    final FlexShadow? useElevationShadow,
+    //
     final bool? blendTextTheme,
     final bool? useTextTheme,
     final bool? useM2StyleDividerInM3,
@@ -2568,6 +2655,9 @@ class FlexSubThemesData with Diagnosticable {
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
+      //
+      elevationTint: useElevationTint ?? this.elevationTint,
+      elevationShadow: useElevationShadow ?? this.elevationShadow,
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
@@ -2920,6 +3010,9 @@ class FlexSubThemesData with Diagnosticable {
         other.useFlutterDefaults == useFlutterDefaults &&
         //
         other.blendTextTheme == blendTextTheme &&
+        other.elevationTint == elevationTint &&
+        other.elevationShadow == elevationShadow &&
+        //
         other.useTextTheme == useTextTheme &&
         other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
@@ -3177,6 +3270,9 @@ class FlexSubThemesData with Diagnosticable {
         blendOnColors,
         useFlutterDefaults,
         //
+        elevationTint,
+        elevationShadow,
+        //
         blendTextTheme,
         useTextTheme,
         useM2StyleDividerInM3,
@@ -3384,6 +3480,10 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     properties.add(
         DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
+    //
+    properties.add(EnumProperty<FlexTint>('useElevationTint', elevationTint));
+    properties
+        .add(EnumProperty<FlexShadow>('useElevationShadow', elevationShadow));
     //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));

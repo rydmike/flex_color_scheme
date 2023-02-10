@@ -173,6 +173,36 @@ enum FlexTabBarStyle {
   universal,
 }
 
+/// Enum used to select if surface elevation tint is used in Material 3 mode.
+enum FlexTint {
+  /// Surface tint is used if, it is used by default design in M3 mode.
+  defaults,
+
+  /// Surface tint is removed in M3 mode.
+  removeTint,
+
+  /// Surface tint is platform adaptive.
+  ///
+  /// Adaptive, means surface tint is not used on iOS and macOS in M3 mode,
+  /// but on other platforms it is still used in M3 mode.
+  adaptive,
+}
+
+/// Enum used to select if elevation shadow is used in Material 3 mode.
+enum FlexShadow {
+  /// Elevation shadow is used, if it is used by default design in M3 mode.
+  defaults,
+
+  /// Elevation shadows are added in M3 mode, when possible.
+  useShadow,
+
+  /// Elevation shadows additions are platform adaptive.
+  ///
+  /// Adaptive, means elevation shadows are added on iOS and macOS in M3 mode,
+  /// but on other platforms shadows are not added back in M3 mode.
+  adaptive,
+}
+
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
 /// colors. Get the resulting [ThemeData] with the [toTheme] method.
 ///
@@ -5519,6 +5549,23 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
+    // Use elevation tint in M3?
+    final FlexTint subTint = subTheme.elevationTint ?? FlexTint.defaults;
+    final bool removeTint = useMaterial3 &&
+        (subTint == FlexTint.removeTint ||
+            (subTint == FlexTint.adaptive &&
+                (effectivePlatform == TargetPlatform.iOS ||
+                    effectivePlatform == TargetPlatform.macOS)));
+
+    // Use elevation shadow in M3?
+    final FlexShadow subShadow =
+        subTheme.elevationShadow ?? FlexShadow.defaults;
+    final bool useShadow = useMaterial3 &&
+        (subShadow == FlexShadow.useShadow ||
+            (subShadow == FlexShadow.adaptive &&
+                (effectivePlatform == TargetPlatform.iOS ||
+                    effectivePlatform == TargetPlatform.macOS)));
+
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
     // as default, if one is not provided. We use the Material 2 correct 2018
@@ -6279,6 +6326,8 @@ class FlexColorScheme with Diagnosticable {
               iconTheme: IconThemeData(color: appBarIconColor),
               actionsIconTheme: IconThemeData(color: appBarIconColor),
               systemOverlayStyle: systemOverlayStyle,
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : useMaterial3
               ? (appBarElevation != null && appBarElevation != 0) ||
@@ -6315,6 +6364,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
               elevation: bottomAppBarElevation ??
                   (useMaterial3 ? null : appBarElevation ?? 0),
+              surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
           : useMaterial3
@@ -6405,6 +6455,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6459,6 +6510,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.cardTheme(
               radius: subTheme.cardRadius ?? subTheme.defaultRadius,
               elevation: subTheme.cardElevation,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6487,6 +6539,7 @@ class FlexColorScheme with Diagnosticable {
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
           : useMaterial3
@@ -6510,6 +6563,8 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
               elevation: subTheme.dialogElevation,
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6532,8 +6587,8 @@ class FlexColorScheme with Diagnosticable {
                       ? kNavigationDrawerM3Width
                       : kNavigationDrawerM2Width),
               elevation: subTheme.drawerElevation,
-              // TODO(rydmike): check it is not needed, resolve happens later?
-              // directionality: Directionality.of(context),
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6543,6 +6598,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6609,6 +6665,7 @@ class FlexColorScheme with Diagnosticable {
                       : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: popupMenuElevation,
               backgroundColor: popupMenuColor,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //
@@ -6649,6 +6706,8 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
               useFlutterDefaults: subTheme.useFlutterDefaults,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
+              shadowColor: useShadow ? colorScheme.shadow : null,
             )
           : null,
       //
@@ -6668,6 +6727,8 @@ class FlexColorScheme with Diagnosticable {
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
               textStyle: effectiveTextTheme.bodyLarge,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
+              shadowColor: useShadow ? colorScheme.shadow : null,
             )
           : null,
       //
@@ -6739,6 +6800,7 @@ class FlexColorScheme with Diagnosticable {
                       : math.min(subTheme.defaultRadius!, 10.0)),
               elevation: popupMenuElevation,
               color: popupMenuColor,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
       //

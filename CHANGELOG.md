@@ -12,6 +12,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
+- **Added**: Enums `FlexTint` and `FlexShadow` they are used to control elevation tint and elevation shadow in Material 3 themes. Tint can be taken away from elevated surface, or be adaptive and only taken away on iOS and macOS platforms via theme level settings. Shadows can be put back in Material 3 theming or done so only platform adaptively on iOS and macOS platforms.
+  
+- **Added**: `elevationTint` a `FlexTint` enum property value and `elevationShadow` a `FlexShadow` property value to `FlexSubThemesData`. With them the elevation surface tint usage and shadow appearance, in the Material3 mode can be controlled when opting in on using FlexColorScheme sub theming. 
+
 - **Added**: `drawerIndicatorOpacity` to `FlexSubThemesData`.   
   It controls the `indicatorOpacity` property in the `FlexSubThemes.navigationDrawerTheme` used to customize the opacity of used color on the `NavigationDrawer` indicator.
 
@@ -69,12 +73,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
 - FIX: Shortcut entry bug on MenuAnchor widget showcase. Needed a workaround for this type of use case.
 - Added control for indicator opacity in `NavigationDrawer` to panel **NavigationDrawer**.
+- Added controls for elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode.
+- Add an option to set surface tint and blend color to transparent color, using it remove surface tint in all theming modes on all platforms. It also makes surface blends very light in dark mode and greyscale in light mode. Quite an interesting effect in light mode.  
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - REPORT: Found NavigationDrawer issues to Flutter repo.
-- NEW: Bring shadows back in M3, maybe (Default, Adaptive, None, Custom).
-- NEW: Remove tint elevation in M3, maybe (Default, Adaptive, None, Custom).  
 - MAYBE ADD: Device selections to DeviceSimulator.
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.  

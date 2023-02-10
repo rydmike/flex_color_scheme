@@ -22,7 +22,10 @@ class LightSurfaceModeListTile extends StatelessWidget {
     return ListTile(
       title: title,
       subtitle: subtitle,
-      trailing: LightSurfaceModeToggleButtons(controller: controller),
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 10.0),
+        child: LightSurfaceModeToggleButtons(controller: controller),
+      ),
       onTap: () {
         // We skip the last custom item and go to start again before it.
         if (mode.index + 1 >= FlexSurfaceMode.values.length - 1) {

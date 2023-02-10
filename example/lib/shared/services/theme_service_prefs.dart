@@ -528,6 +528,50 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= ShowValueIndicator.values.length) return defaultValue;
         return ShowValueIndicator.values[value] as T;
       }
+      // T is FlexTint nullable value.
+      if (sameTypes<T, FlexTint?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexTint?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexTint.values.length) return defaultValue;
+        return FlexTint.values[value] as T;
+      }
+      // T is FlexTint none nullable value.
+      if (sameTypes<T, FlexTint>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexTint : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= FlexTint.values.length) return defaultValue;
+        return FlexTint.values[value] as T;
+      }
+      // T is FlexShadow nullable value.
+      if (sameTypes<T, FlexShadow?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexShadow?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexShadow.values.length) return defaultValue;
+        return FlexShadow.values[value] as T;
+      }
+      // T is FlexShadow none nullable value.
+      if (sameTypes<T, FlexShadow>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexShadow : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= FlexShadow.values.length) return defaultValue;
+        return FlexShadow.values[value] as T;
+      }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');

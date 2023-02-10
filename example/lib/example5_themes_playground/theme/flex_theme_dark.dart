@@ -119,6 +119,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
             useFlutterDefaults: controller.useFlutterDefaults,
+            // Control if tint and shadows are used in M3 mode.
+            elevationTint: controller.elevationTintDark,
+            elevationShadow: controller.elevationShadowDark,
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,

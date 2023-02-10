@@ -139,7 +139,6 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
     }
     return Scrollbar(
       controller: scrollCtrl,
-      // interactive: false,
       child: NestedScrollView(
         controller: scrollCtrl,
         headerSliverBuilder: (BuildContext context, bool value) {

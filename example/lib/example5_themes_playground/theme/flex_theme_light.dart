@@ -164,12 +164,16 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Prefer Flutter SDK null default behavior for navigator themes,
             // when possible.
             useFlutterDefaults: controller.useFlutterDefaults,
+            // Control if tint and shadows are used in M3 mode.
+            elevationTint: controller.elevationTint,
+            elevationShadow: controller.elevationShadow,
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
             // If null, it defaults to Material3 (You) design
             // guide values, when available: https://m3.material.io/
             // If you give it value, "all" Flutter built-in widgets
             // supporting border radius will use the give radius.
+
             defaultRadius: controller.defaultRadius,
             // Border radius can be customized per widget too, it overrides
             // M3 default and global default setting.

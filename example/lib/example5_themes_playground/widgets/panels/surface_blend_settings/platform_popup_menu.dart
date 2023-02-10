@@ -109,7 +109,7 @@ class PlatformPopupMenu extends StatelessWidget {
             size: 40,
           ),
         ),
-        title: const Text('Select platform. For testing purposes only'),
+        title: const Text('Select platform, for testing purposes only'),
         subtitle: Text(subtitle),
       ),
     );

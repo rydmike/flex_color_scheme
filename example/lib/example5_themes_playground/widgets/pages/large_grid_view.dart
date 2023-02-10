@@ -56,8 +56,6 @@ class LargeGridView extends StatefulWidget {
     required this.controller,
     required this.isCardOpen,
     required this.toggleCard,
-    // required this.scrollPosition,
-    // required this.onScrollChanged,
   });
   final ThemeController controller;
   final List<bool> isCardOpen;
@@ -78,7 +76,6 @@ class _LargeGridViewState extends State<LargeGridView>
   @override
   void initState() {
     super.initState();
-    // debugPrint('Init GRID MasonryGridScroll pos: ${widget.scrollPosition}');
     scrollController = ScrollController(
       keepScrollOffset: true,
       debugLabel: 'masonryGridScrollController',

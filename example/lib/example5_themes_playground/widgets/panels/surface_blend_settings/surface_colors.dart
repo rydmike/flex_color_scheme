@@ -15,6 +15,14 @@ class SurfaceColors extends StatelessWidget {
 
   final ThemeController controller;
 
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  static bool _isLight(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+
+  // On color used when a theme color property does not have a theme onColor.
+  static Color _onColor(final Color color, final Color bg) =>
+      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
+
   @override
   Widget build(BuildContext context) {
     // Used to enable & disable color selection on the color boxes.
@@ -278,6 +286,49 @@ class SurfaceColors extends StatelessWidget {
                         textColor: colorScheme.inverseSurface,
                         label: 'onInverse\u200BSurface',
                         tone: tones.onInverseSurfaceTone,
+                        showTone: showTones,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          //
+          // Shadow color and surface tint color presenatation
+          SizedBox(
+            width: boxWidth,
+            height: boxHeight,
+            child: Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: Material(
+                      color: colorScheme.shadow,
+                      child: ColorNameValue(
+                        color: colorScheme.shadow,
+                        textColor:
+                            _onColor(colorScheme.shadow, colorScheme.surface),
+                        label: 'shadow',
+                        tone: tones.shadowTone,
+                        showTone: showTones,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Material(
+                      color: colorScheme.surfaceTint,
+                      child: ColorNameValue(
+                        color: colorScheme.surfaceTint,
+                        textColor: _onColor(
+                            colorScheme.surfaceTint, colorScheme.surface),
+                        label: 'surfaceTint',
+                        tone: tones.surfaceTintTone,
                         showTone: showTones,
                       ),
                     ),

@@ -30,7 +30,10 @@ class DarkSurfaceModeListTile extends StatelessWidget {
           controller.setSurfaceModeDark(FlexSurfaceMode.values[mode.index + 1]);
         }
       },
-      trailing: DarkSurfaceModeToggleButtons(controller: controller),
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 10.0),
+        child: DarkSurfaceModeToggleButtons(controller: controller),
+      ),
     );
   }
 }

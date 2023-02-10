@@ -27,7 +27,7 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.info_outlined,
   ),
   PanelItem(
-    panelLabel: 'Theme Colors',
+    panelLabel: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
   ),
@@ -37,17 +37,17 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.colorize_outlined,
   ),
   PanelItem(
-    panelLabel: 'Surface Blends',
+    panelLabel: 'Surface blends',
     buttonLabel: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
   ),
   PanelItem(
-    panelLabel: 'Effective Colors',
+    panelLabel: 'Effective colors',
     buttonLabel: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
   ),
   PanelItem(
-    panelLabel: 'Component Themes',
+    panelLabel: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
   ),
@@ -85,13 +85,13 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.featured_video_outlined,
   ),
   PanelItem(
-    panelLabel: 'Material Buttons',
-    buttonLabel: 'Material\nButtons',
+    panelLabel: 'Material buttons',
+    buttonLabel: 'Material\nbuttons',
     icon: Icons.crop_16_9_outlined,
   ),
   PanelItem(
-    panelLabel: 'Selection Buttons',
-    buttonLabel: 'Selection\nButtons',
+    panelLabel: 'Selection buttons',
+    buttonLabel: 'Selection\nbuttons',
     icon: Icons.view_week_outlined,
   ),
   PanelItem(
@@ -169,7 +169,7 @@ const List<PanelItem> panelItems = <PanelItem>[
     icon: Icons.article_outlined,
   ),
   PanelItem(
-    panelLabel: 'Widget Showcase',
+    panelLabel: 'Widget showcase',
     buttonLabel: 'Widget\nshowcase',
     icon: Icons.flutter_dash,
   ),
