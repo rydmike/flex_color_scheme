@@ -50,9 +50,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   void initState() {
     super.initState();
     schemeIndex = widget.controller.schemeIndex;
+    final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+        widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
     scrollOffset =
         (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
             schemeIndex;
@@ -72,9 +74,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (widget.controller.schemeIndex != schemeIndex) {
+      final bool isCompact = widget.controller.compactMode;
       final double phoneReduce =
-          widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-      final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+          widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+      final double phoneButtonsSpacingReduce =
+          widget.isPhone || isCompact ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
       scrollOffset =
           (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
@@ -101,9 +105,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
+    final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+        widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
     return SizedBox(
       height: _kHeightOfScrollItem + phoneReduce,
       child: Row(

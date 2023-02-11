@@ -54,8 +54,9 @@ class _HomePageState extends State<HomePage> {
     // Set enabled menu items.
     menuItemsEnabled =
         List<bool>.generate(AppData.menuItems.length, (int i) => true);
-    menuItemsEnabled[4] = widget.controller.isLargeGridView;
-    menuItemsEnabled[5] = widget.controller.isLargeGridView;
+    menuItemsEnabled[8] = widget.controller.isLargeGridView;
+    menuItemsEnabled[9] = widget.controller.isLargeGridView;
+    menuItemsEnabled[5] = widget.controller.useFlexColorScheme;
 
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
@@ -78,9 +79,28 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[1] = isLight
+    menuItemsIconState[2] = isLight
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[3] = theme.useMaterial3
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[4] = widget.controller.useFlexColorScheme
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[5] = widget.controller.useSubThemes
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsEnabled[5] = widget.controller.useFlexColorScheme;
+  }
+
+  void updateMenuState(int index) {
+    setState(() {
+      menuItemsIconState[index] =
+          menuItemsIconState[index] == ResponsiveMenuItemIconState.primary
+              ? ResponsiveMenuItemIconState.secondary
+              : ResponsiveMenuItemIconState.primary;
+    });
   }
 
   @override
@@ -92,6 +112,7 @@ class _HomePageState extends State<HomePage> {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
+    final String materialType = theme.useMaterial3 ? 'M3 - ' : 'M2 - ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -106,8 +127,10 @@ class _HomePageState extends State<HomePage> {
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
         title: isPhone
-            ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
-            : Text('${AppData.title(context)} - '
+            ? Text('$materialType '
+                '${AppColor.schemes[widget.controller.schemeIndex].name}')
+            : Text('${AppData.title(context)} '
+                '$materialType'
                 '${AppColor.schemes[widget.controller.schemeIndex].name}'),
         menuTitle: const Text(AppData.packageName),
         menuLeadingTitle: Text(
@@ -124,28 +147,58 @@ class _HomePageState extends State<HomePage> {
           // Toggle grid view mode true/false.
           if (index == 0) {
             widget.controller
-                .setAdvancedView(!widget.controller.isLargeGridView);
-            menuItemsEnabled[4] = !menuItemsEnabled[4];
-            menuItemsEnabled[5] = !menuItemsEnabled[5];
-            menuItemsIconState[index] = widget.controller.isLargeGridView
-                ? ResponsiveMenuItemIconState.secondary
-                : ResponsiveMenuItemIconState.primary;
-            setState(() {});
+                .setLargeGridView(!widget.controller.isLargeGridView);
+            menuItemsEnabled[8] = !menuItemsEnabled[8];
+            menuItemsEnabled[9] = !menuItemsEnabled[9];
+            updateMenuState(index);
+          }
+          // Toggle compact/standard mode.
+          else if (index == 1) {
+            widget.controller.setCompactMode(!widget.controller.compactMode);
+            updateMenuState(index);
           }
           // Set theme-mode light/dark
-          else if (index == 1) {
+          else if (index == 2) {
             if (isDark) {
               widget.controller.setThemeMode(ThemeMode.light);
             } else {
               widget.controller.setThemeMode(ThemeMode.dark);
             }
+            updateMenuState(index);
+          }
+          // Set M3 ON/OFF
+          else if (index == 3) {
+            if (widget.controller.useMaterial3) {
+              widget.controller.setUseMaterial3(false);
+            } else {
+              widget.controller.setUseMaterial3(true);
+            }
+            updateMenuState(index);
+          }
+          // Set FCS ON/OFF
+          else if (index == 4) {
+            if (widget.controller.useFlexColorScheme) {
+              widget.controller.setUseFlexColorScheme(false);
+            } else {
+              widget.controller.setUseFlexColorScheme(true);
+            }
+            updateMenuState(index);
+          }
+          // Set Sub-themes ON/OFF
+          else if (index == 5) {
+            if (widget.controller.useSubThemes) {
+              widget.controller.setUseSubThemes(false);
+            } else {
+              widget.controller.setUseSubThemes(true);
+            }
+            updateMenuState(index);
           }
           // Copy theme setup code
-          else if (index == 2) {
+          else if (index == 6) {
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
-          else if (index == 3) {
+          else if (index == 7) {
             final String code = generateColorSchemeDartCode(colorScheme);
             await showResponsiveDialog<void>(
               context: context,
@@ -158,21 +211,21 @@ class _HomePageState extends State<HomePage> {
             );
           }
           // Open all cards
-          else if (index == 4) {
+          else if (index == 8) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = true;
             }
             setState(() {});
           }
           // Close all cards
-          else if (index == 5) {
+          else if (index == 9) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = false;
             }
             setState(() {});
           }
           // Reset theme settings.
-          else if (index == 6) {
+          else if (index == 10) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {

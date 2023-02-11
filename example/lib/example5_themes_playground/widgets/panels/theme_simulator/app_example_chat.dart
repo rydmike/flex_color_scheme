@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app_images.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/svg_asset_image.dart';
-import '../../../../shared/widgets/universal/theme_mode_switch.dart';
+import '../../shared/theme_mode_switch_list_tile.dart';
 
 /// An example that show what an app using the theme might look like
 class AppExampleChat extends StatelessWidget {
@@ -84,22 +84,7 @@ class _AppExampleDrawerState extends State<AppExampleDrawer> {
           label: Text('Logout'),
         ),
         const SizedBox(height: 16),
-        ListTile(
-          title: const Text('Theme mode'),
-          subtitle: Text('Theme ${widget.controller.themeMode.name}'),
-          trailing: ThemeModeSwitch(
-            themeMode: widget.controller.themeMode,
-            onChanged: widget.controller.setThemeMode,
-          ),
-          // Toggle theme mode also via the ListTile tap.
-          onTap: () {
-            if (theme.brightness == Brightness.light) {
-              widget.controller.setThemeMode(ThemeMode.dark);
-            } else {
-              widget.controller.setThemeMode(ThemeMode.light);
-            }
-          },
-        ),
+        ThemeModeSwitchListTile(controller: widget.controller),
       ],
     );
   }

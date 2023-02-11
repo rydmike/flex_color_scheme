@@ -20,6 +20,7 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.page,
     required this.previousPage,
     required this.onSelect,
+    required this.isCompact,
   });
   @override
   final TickerProvider vsync;
@@ -27,6 +28,7 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   final int page;
   final int previousPage;
   final ValueChanged<int> onSelect;
+  final bool isCompact;
 
   @override
   Widget build(
@@ -34,6 +36,7 @@ class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
     return PanelSelector(
       page: page,
       onSelect: onSelect,
+      isCompact: isCompact,
     );
   }
 
@@ -61,9 +64,11 @@ class PanelSelector extends StatefulWidget {
     super.key,
     required this.page,
     required this.onSelect,
+    required this.isCompact,
   });
   final int page;
   final ValueChanged<int> onSelect;
+  final bool isCompact;
 
   @override
   State<PanelSelector> createState() => _PanelSelectorState();
@@ -99,7 +104,8 @@ class _PanelSelectorState extends State<PanelSelector> {
       selectedPage = widget.page;
       final MediaQueryData media = MediaQuery.of(context);
       final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-          media.size.height < AppData.phoneHeightBreakpoint;
+          media.size.height < AppData.phoneHeightBreakpoint ||
+          widget.isCompact;
       final double effectiveWidth = AppData.panelButtonWidth +
           (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
       scrollOffset = effectiveWidth * selectedPage;
@@ -113,8 +119,10 @@ class _PanelSelectorState extends State<PanelSelector> {
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
-    final double margins = AppData.responsiveInsets(media.size.width);
+        media.size.height < AppData.phoneHeightBreakpoint ||
+        widget.isCompact;
+    final double margins =
+        AppData.responsiveInsets(media.size.width, widget.isCompact);
     final double effectiveHeight = AppData.panelButtonHeight +
         margins * 2 +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
@@ -151,6 +159,7 @@ class _PanelSelectorState extends State<PanelSelector> {
                               });
                             },
                             selected: selectedPage == index,
+                            isCompact: widget.isCompact,
                           );
                         },
                       ),
@@ -171,16 +180,19 @@ class _PanelButton extends StatelessWidget {
     required this.item,
     required this.selected,
     required this.onSelect,
+    required this.isCompact,
   });
   final ThemeTopic item;
   final bool selected;
   final VoidCallback onSelect;
+  final bool isCompact;
 
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+        media.size.height < AppData.phoneHeightBreakpoint ||
+        isCompact;
     final double effectiveWidth = AppData.panelButtonWidth +
         (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;

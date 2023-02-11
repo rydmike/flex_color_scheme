@@ -76,10 +76,17 @@ class ThemeController with ChangeNotifier {
         Store.keyElevationShadowDark, Store.defaultElevationShadowDark);
     _isLargeGridView = await _themeService.load(
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
+    _compactMode = await _themeService.load(
+        Store.keyCompactMode, Store.defaultCompactMode);
     _viewIndex =
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _sideViewIndex = await _themeService.load(
         Store.keySideViewIndex, Store.defaultSideViewIndex);
+    _simulatorAppIndex = await _themeService.load(
+        Store.keySimulatorAppIndex, Store.defaultSimulatorAppIndex);
+    _simulatorComponentsIndex = await _themeService.load(
+        Store.keySimulatorComponentsIndex,
+        Store.defaultSimulatorComponentsIndex);
     _deviceSize =
         await _themeService.load(Store.keyDeviceSize, Store.defaultDeviceSize);
     _showSchemeInput = await _themeService.load(
@@ -407,6 +414,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarIndicatorSchemeColor);
     _navBarIndicatorOpacity = await _themeService.load(
         Store.keyNavBarIndicatorOpacity, Store.defaultNavBarIndicatorOpacity);
+    _navBarIndicatorBorderRadius = await _themeService.load(
+        Store.keyNavBarIndicatorBorderRadius,
+        Store.defaultNavBarIndicatorBorderRadius);
     _navBarLabelBehavior = await _themeService.load(
         Store.keyNavBarLabelBehavior, Store.defaultNavBarLabelBehavior);
     //
@@ -438,6 +448,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavRailIndicatorSchemeColor);
     _navRailIndicatorOpacity = await _themeService.load(
         Store.keyNavRailIndicatorOpacity, Store.defaultNavRailIndicatorOpacity);
+    _navRailIndicatorBorderRadius = await _themeService.load(
+        Store.keyNavRailIndicatorBorderRadius,
+        Store.defaultNavRailIndicatorBorderRadius);
     //
     // Button SETTINGS.
     _textButtonSchemeColor = await _themeService.load(
@@ -854,6 +867,8 @@ class ThemeController with ChangeNotifier {
     setNavBarIndicatorSchemeColor(
         Store.defaultNavBarIndicatorSchemeColor, false);
     setNavBarIndicatorOpacity(Store.defaultNavBarIndicatorOpacity, false);
+    setNavBarIndicatorBorderRadius(
+        Store.defaultNavBarIndicatorBorderRadius, false);
     setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
     //
     // NavigationRail SETTINGS.
@@ -873,6 +888,8 @@ class ThemeController with ChangeNotifier {
     setNavRailIndicatorSchemeColor(
         Store.defaultNavRailIndicatorSchemeColor, false);
     setNavRailIndicatorOpacity(Store.defaultNavRailIndicatorOpacity, false);
+    setNavRailIndicatorBorderRadius(
+        Store.defaultNavRailIndicatorBorderRadius, false);
     //
     // Button SETTINGS.
     setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
@@ -1160,12 +1177,22 @@ class ThemeController with ChangeNotifier {
 
   late bool _isLargeGridView;
   bool get isLargeGridView => _isLargeGridView;
-  void setAdvancedView(bool? value, [bool notify = true]) {
+  void setLargeGridView(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _isLargeGridView) return;
     _isLargeGridView = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyIsLargeGridView, value));
+  }
+
+  late bool _compactMode;
+  bool get compactMode => _compactMode;
+  void setCompactMode(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _compactMode) return;
+    _compactMode = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCompactMode, value));
   }
 
   late int _viewIndex;
@@ -1176,6 +1203,26 @@ class ThemeController with ChangeNotifier {
     _viewIndex = value;
     notifyListeners();
     unawaited(_themeService.save(Store.keyViewIndex, value));
+  }
+
+  late int _simulatorAppIndex;
+  int get simulatorAppIndex => _simulatorAppIndex;
+  void setSimulatorAppIndex(int? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _simulatorAppIndex) return;
+    _simulatorAppIndex = value;
+    notifyListeners();
+    unawaited(_themeService.save(Store.keySimulatorAppIndex, value));
+  }
+
+  late int _simulatorComponentsIndex;
+  int get simulatorComponentsIndex => _simulatorComponentsIndex;
+  void setSimulatorComponentsIndex(int? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _simulatorComponentsIndex) return;
+    _simulatorComponentsIndex = value;
+    notifyListeners();
+    unawaited(_themeService.save(Store.keySimulatorComponentsIndex, value));
   }
 
   late int _sideViewIndex;
@@ -2475,6 +2522,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavBarIndicatorOpacity, value));
   }
 
+  late double? _navBarIndicatorBorderRadius;
+  double? get navBarIndicatorBorderRadius => _navBarIndicatorBorderRadius;
+  void setNavBarIndicatorBorderRadius(double? value, [bool notify = true]) {
+    if (value == _navBarIndicatorBorderRadius) return;
+    _navBarIndicatorBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNavBarIndicatorBorderRadius, value));
+  }
+
   late NavigationDestinationLabelBehavior _navBarLabelBehavior;
   NavigationDestinationLabelBehavior get navBarLabelBehavior =>
       _navBarLabelBehavior;
@@ -2601,6 +2657,15 @@ class ThemeController with ChangeNotifier {
     _navRailIndicatorOpacity = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyNavRailIndicatorOpacity, value));
+  }
+
+  late double? _navRailIndicatorBorderRadius;
+  double? get navRailIndicatorBorderRadius => _navRailIndicatorBorderRadius;
+  void setNavRailIndicatorBorderRadius(double? value, [bool notify = true]) {
+    if (value == _navRailIndicatorBorderRadius) return;
+    _navRailIndicatorBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNavRailIndicatorBorderRadius, value));
   }
 
   // Button SETTINGS.

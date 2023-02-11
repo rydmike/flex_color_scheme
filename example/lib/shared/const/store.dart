@@ -72,6 +72,11 @@ class Store {
   // Default value for the isLargeGridView, also used to reset settings.
   static const bool defaultIsLargeGridView = false;
 
+  // Key used to read and save the compactMode value.
+  static const String keyCompactMode = 'compactMode';
+  // Default value for the compactMode, also used to reset settings.
+  static const bool defaultCompactMode = false;
+
   // Key used to read and save the viewIndex value.
   static const String keyViewIndex = 'viewIndex';
   // Default value for the viewIndex, also used to reset settings.
@@ -81,6 +86,16 @@ class Store {
   static const String keySideViewIndex = 'sideViewIndex';
   // Default value for the sideViewIndex, also used to reset settings.
   static const int defaultSideViewIndex = 31;
+
+  // Key used to read and save the simulatorAppIndex value.
+  static const String keySimulatorAppIndex = 'simulatorAppIndex';
+  // Default value for the simulatorAppIndex, also used to reset settings.
+  static const int defaultSimulatorAppIndex = 0;
+
+  // Key used to read and save the simulatorComponentsIndex value.
+  static const String keySimulatorComponentsIndex = 'simulatorComponentsIndex';
+  // Default value for the simulatorComponentsIndex, also to reset settings.
+  static const int defaultSimulatorComponentsIndex = 0;
 
   // Key used to read and save the deviceSize value.
   static const String keyDeviceSize = 'deviceSize';
@@ -835,6 +850,12 @@ class Store {
   // Default value for the navBarIndicatorOpacity, also to reset settings.
   static const double? defaultNavBarIndicatorOpacity = null;
 
+  // Key used to read and save the navBarIndicatorBorderRadius value.
+  static const String keyNavBarIndicatorBorderRadius =
+      'navBarIndicatorBorderRadius';
+  // Default value for the navBarIndicatorBorderRadius, also to reset settings.
+  static const double? defaultNavBarIndicatorBorderRadius = null;
+
   // Key used to read and save the navBarLabelBehavior value.
   static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';
   // Default value for the navBarLabelBehavior, also used to
@@ -908,6 +929,12 @@ class Store {
   static const String keyNavRailIndicatorOpacity = 'navRailIndicatorOpacity';
   // Default value for the navigationRailIndicatorOpacity, also reset settings.
   static const double? defaultNavRailIndicatorOpacity = null;
+
+  // Key used to read and save the navRailIndicatorBorderRadius value.
+  static const String keyNavRailIndicatorBorderRadius =
+      'navRailIndicatorBorderRadius';
+  // Default value for the navRailIndicatorBorderRadius, also to reset settings.
+  static const double? defaultNavRailIndicatorBorderRadius = null;
 
   // Button SETTINGS.
   // ===========================================================================

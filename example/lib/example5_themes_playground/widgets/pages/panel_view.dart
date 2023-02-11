@@ -85,10 +85,13 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ThemeController themeCtrl = widget.themeController;
     final MediaQueryData media = MediaQuery.of(context);
+    final bool isCompact = widget.themeController.compactMode;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
-    final double margins = AppData.responsiveInsets(media.size.width);
+        media.size.height < AppData.phoneHeightBreakpoint ||
+        isCompact;
+    final double margins =
+        AppData.responsiveInsets(media.size.width, isCompact);
     final double buttonHeight = AppData.panelButtonHeight +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
     final double headerExtent = buttonHeight + media.padding.top + margins * 2;
@@ -117,6 +120,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                   extent: headerExtent,
                   page: themeCtrl.viewIndex,
                   previousPage: previousPage,
+                  isCompact: isCompact,
                   onSelect: (int index) {
                     if (previousPage != index) {
                       setState(() {
@@ -194,23 +198,21 @@ class PanelPage extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
-    final int rightPageIndex = controller.sideViewIndex;
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isCompact = controller.compactMode;
+    final double margins =
+        AppData.responsiveInsets(media.size.width, isCompact);
+    final double bottomPadding = media.padding.bottom;
 
+    final int rightPageIndex = controller.sideViewIndex;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      // A custom breakpoint, when the layout width is larger than 1200dp
-      // we show the code panel in a side-by side view, but only if we are not
-      // on the last 2 pages, there we do not want it.
-      // final bool showSecondPage =
-      //     constraints.maxWidth >= AppData.codeViewWidthBreakpoint &&
-      //         firstPageIndex < panelItems.length - 2;
+      // A custom breakpoint, when the layout width is larger than breakpoint
+      // we show the code panel in a side-by side view.
       final bool showSecondPage =
           constraints.maxWidth >= AppData.codeViewWidthBreakpoint;
-      final double margins =
-          AppData.responsiveInsets(MediaQuery.of(context).size.width);
-
       // We get double implicit scrollbars and that causes issues with the
-      // scroll controller, this scroll config removes it.
+      // scroll controller, this removes it, we don't need one here.
       return Row(
         children: <Widget>[
           ScrollConfiguration(
@@ -224,8 +226,8 @@ class PanelPage extends StatelessWidget {
                 padding: EdgeInsetsDirectional.fromSTEB(
                   margins,
                   0,
-                  margins / 2,
-                  margins + MediaQuery.of(context).padding.bottom,
+                  margins / (showSecondPage ? 2 : 1),
+                  margins + bottomPadding,
                 ),
                 children: <Widget>[
                   HeaderCard(
@@ -246,7 +248,7 @@ class PanelPage extends StatelessWidget {
                     margins / 2,
                     0,
                     margins,
-                    margins + MediaQuery.of(context).padding.bottom,
+                    margins + bottomPadding,
                   ),
                   children: <Widget>[
                     HeaderCard(

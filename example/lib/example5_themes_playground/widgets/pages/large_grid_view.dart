@@ -95,8 +95,11 @@ class _LargeGridViewState extends State<LargeGridView>
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
+    final bool isCompact = widget.controller.compactMode;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+        media.size.height < AppData.phoneHeightBreakpoint ||
+        isCompact;
+
     final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final ThemeData theme = Theme.of(context);
@@ -112,15 +115,19 @@ class _LargeGridViewState extends State<LargeGridView>
       // Just a suitable breakpoint for when we want to have more
       // than one column in the body with this particular content.
       final int columns = constraints.maxWidth ~/ 860 + 1;
-      final double margins = AppData.responsiveInsets(media.size.width);
-      // The intrinsic height diff of the switch = dense - normal.
+      final double margins =
+          AppData.responsiveInsets(media.size.width, isCompact);
+      // The height diff of the switch = dense - normal.
       final double phoneSwitchReduce =
           isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
+      // The height diff with switches removed.
+      final double switchRemove = isCompact ? -_kHeightDenseListTile : 0;
       final double headerExtent = _kHeightSelector +
           media.padding.top +
           margins * 3 +
           phoneReduce +
-          phoneSwitchReduce;
+          phoneSwitchReduce +
+          switchRemove;
       if (_debug) {
         debugPrint('headerExtent ............ : $headerExtent');
         debugPrint('margins ................. : $margins');

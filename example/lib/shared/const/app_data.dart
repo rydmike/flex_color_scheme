@@ -92,8 +92,8 @@ class AppData {
   static const double edgeInsetsBigDesktop = 24;
   // Responsive insets based on width. The width may be from LayoutBuilder or
   // MediaQuery, depending on what is appropriate for the use case.
-  static double responsiveInsets(double width) {
-    if (width < phoneWidthBreakpoint) return edgeInsetsPhone;
+  static double responsiveInsets(double width, [bool isCompact = false]) {
+    if (width < phoneWidthBreakpoint || isCompact) return edgeInsetsPhone;
     if (width < desktopWidthBreakpoint) return edgeInsetsTablet;
     if (width < bigDesktopWidthBreakpoint) return edgeInsetsDesktop;
     return edgeInsetsBigDesktop;
@@ -120,54 +120,55 @@ class AppData {
   static VisualDensity get visualDensity =>
       FlexColorScheme.comfortablePlatformDensity;
 
-  // TODO(rydmike): Commented to see what breaks, nothing? => Remove it!
-  // We define a custom text theme for our app. This is just for demo purposes
-  // on how to setup a custom text theme. This works just as well with normal
-  // ThemeData and ThemeData.from btw. FlexColorScheme does the TextTheme
-  // setup same way as ThemeData, but injects the primary color blends if you
-  // use the new text theme blend mode option when you opt in on sub themes.
-  //
-  // In this example we decided that:
-  //
-  // Headline1...4 are too big to be useful on mobile, so we make them smaller.
-  // The used sizes for them below are actually from Material Guide M3/You.
-  // https://m3.material.io/styles/typography/overview
-  //
-  // We also think that overline is a bit too small and have weird letter
-  // spacing, so we change it too.
-  // static const TextTheme textTheme = TextTheme(
-  //   displayLarge: TextStyle(
-  //     fontSize: 57, // Same as M3, defaults to 96 in Material2018 Typography.
-  //   ),
-  //   displayMedium: TextStyle(
-  //     fontSize: 45, // Same as M3, defaults to 60 in Material2018 Typography.
-  //   ),
-  //   displaySmall: TextStyle(
-  //     fontSize: 36, // Same as M3, defaults to 48 in Material2018 Typography.
-  //   ),
-  //   headlineMedium: TextStyle(
-  //     fontSize: 28, // Same as M3, defaults to 34 in Material2018 Typography.
-  //   ),
-  //   // I chose this, I later saw it happened to match new M3 style too - cool!
-  //   labelSmall: TextStyle(
-  //     fontSize: 11, // Defaults to 10 in Material2018 Typography.
-  //     letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
-  //   ),
-  // );
-
   // The menu items that we use on the responsive side menu.
   static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[
     ResponsiveMenuItems(
       label: 'Grid view',
       labelSecondary: 'Page view',
-      icon: Icons.calendar_view_month_outlined,
-      iconSecondary: Icons.view_array_outlined,
+      tooltip: 'Set to grid view',
+      tooltipSecondary: 'Set to page view',
+      icon: Icons.view_array_outlined,
+      iconSecondary: Icons.calendar_view_month_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'Standard',
+      labelSecondary: 'Compact',
+      tooltip: 'Set to standard UI',
+      tooltipSecondary: 'Set to compact UI',
+      icon: Icons.view_compact_alt_rounded,
+      iconSecondary: Icons.view_compact_alt_outlined,
     ),
     ResponsiveMenuItems(
       label: 'Dark mode',
       labelSecondary: 'Light mode',
-      icon: Icons.bedtime,
-      iconSecondary: Icons.wb_sunny,
+      tooltip: 'Set to dark mode',
+      tooltipSecondary: 'Set to light mode',
+      icon: Icons.wb_sunny,
+      iconSecondary: Icons.bedtime,
+    ),
+    ResponsiveMenuItems(
+      label: 'Material 2',
+      labelSecondary: 'Material 3',
+      tooltip: 'Set to Material 2',
+      tooltipSecondary: 'Set to Material 3',
+      icon: Icons.looks_3_outlined,
+      iconSecondary: Icons.looks_two_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'No FlexColorScheme',
+      labelSecondary: 'Use FlexColorScheme',
+      tooltip: 'Turn off FlexColorScheme',
+      tooltipSecondary: 'Turn on FlexColorScheme',
+      icon: Icons.blur_on_outlined,
+      iconSecondary: Icons.blur_off_outlined,
+    ),
+    ResponsiveMenuItems(
+      label: 'No sub themes',
+      labelSecondary: 'Use sub themes',
+      tooltip: 'Turn off sub themes',
+      tooltipSecondary: 'Turn on sub themes',
+      icon: Icons.subtitles_outlined,
+      iconSecondary: Icons.subtitles_off_outlined,
     ),
     ResponsiveMenuItems(
       label: 'Copy theme code',

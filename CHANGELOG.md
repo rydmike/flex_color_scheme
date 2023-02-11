@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 10, 2023**
+**Feb 12, 2023**
 
 **FIX**
 
@@ -74,7 +74,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - FIX: Shortcut entry bug on MenuAnchor widget showcase. Needed a workaround for this type of use case.
 - Added control for indicator opacity in `NavigationDrawer` to panel **NavigationDrawer**.
 - Added controls for elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode.
-- Add an option to set surface tint and blend color to transparent color, using it remove surface tint in all theming modes on all platforms. It also makes surface blends very light in dark mode and greyscale in light mode. Quite an interesting effect in light mode.  
+- Add an option to set surface tint and blend color to transparent color. Using it removes surface tint in all theming modes on all platforms. It also makes surface blends very light in dark mode and greyscale in light mode. Quite an interesting effect in light mode.  
+- Added M3/M2, FCS ON/OFF, Sub themes ON/OFF to the custom side drawer/menu/rail.
+- Added possibility to toggle between standard and compact UI mode. The compact mode is the same view mode as the smallest responsive view, with the addition that the switches under the horizontal theme color selector are also removed. When the compact-mode is on, it is used in all responsive sizes. The compact mode gives a larger view area for app controls. This is also useful on smaller desktops. In the compact-mode, settings controlled by the removed switches can be operated via the new optional controls on the rail/side menu. 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 

@@ -7,64 +7,103 @@ import '../../../../shared/widgets/app/about.dart';
 import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
-import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../shared/theme_mode_switch_list_tile.dart';
 
-/// An example that show what the Widget Showcase widgets in a
-/// mobile frame.
-class AppExampleWidgets extends StatelessWidget {
-  const AppExampleWidgets({super.key, required this.controller});
+/// An example that show what the Widget Showcase component look like in a
+/// simulated mobile device frame.
+class AppExampleComponents extends StatefulWidget {
+  const AppExampleComponents({super.key, required this.controller});
 
   final ThemeController controller;
 
   @override
+  State<AppExampleComponents> createState() => _AppExampleComponentsState();
+}
+
+class _AppExampleComponentsState extends State<AppExampleComponents>
+    with TickerProviderStateMixin {
+  late int currentPage;
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPage = widget.controller.simulatorComponentsIndex;
+    tabController = TabController(
+      initialIndex: currentPage,
+      length: 12,
+      vsync: this,
+    );
+    // Update stored tab page info also if swiped to new page.
+    tabController.addListener(() {
+      if (tabController.index != currentPage) {
+        currentPage = tabController.index;
+        widget.controller.setSimulatorComponentsIndex(currentPage);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 12,
-        child: ScrollConfiguration(
-          behavior: const DragScrollBehavior(),
-          child: Scaffold(
-            extendBodyBehindAppBar: true,
-            extendBody: true,
-            appBar: AppBar(
-              title: const Text('Themed Components'),
-              actions: const <Widget>[AboutIconButton(useRootNavigator: false)],
-              bottom: const TabBar(
-                isScrollable: true,
-                tabs: <Widget>[
-                  Tab(text: 'Colors'),
-                  Tab(text: 'Buttons'),
-                  Tab(text: 'Input'),
-                  Tab(text: 'Menus'),
-                  Tab(text: 'Toggles'),
-                  Tab(text: 'ListTile'),
-                  Tab(text: 'Slider'),
-                  Tab(text: 'AppBar'),
-                  Tab(text: 'Navigation'),
-                  Tab(text: 'Dialogs'),
-                  Tab(text: 'Card'),
-                  Tab(text: 'Text'),
-                ],
-              ),
-            ),
-            body: TabBarView(
-              children: <Widget>[
-                ShowcaseColors(controller: controller),
-                const ShowcaseButtons(),
-                const ShowcaseInput(),
-                const ShowcaseMenus(),
-                const ShowcaseSwitches(),
-                const ShowcaseListTile(),
-                const ShowcaseSlider(),
-                const ShowcaseAppBar(),
-                const ShowcaseNavigation(),
-                const ShowcaseDialogs(),
-                const ShowcaseCard(),
-                const ShowcaseText(),
-              ],
-            ),
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          title: const Text('Themed Components'),
+          actions: const <Widget>[AboutIconButton(useRootNavigator: false)],
+          bottom: TabBar(
+            controller: tabController,
+            onTap: (int newPage) {
+              setState(() {
+                currentPage = newPage;
+                widget.controller.setSimulatorComponentsIndex(currentPage);
+              });
+            },
+            isScrollable: true,
+            tabs: const <Widget>[
+              Tab(text: 'Colors'),
+              Tab(text: 'Buttons'),
+              Tab(text: 'Input'),
+              Tab(text: 'Menus'),
+              Tab(text: 'Toggles'),
+              Tab(text: 'ListTile'),
+              Tab(text: 'Slider'),
+              Tab(text: 'AppBar'),
+              Tab(text: 'Navigation'),
+              Tab(text: 'Dialogs'),
+              Tab(text: 'Card'),
+              Tab(text: 'Text'),
+            ],
           ),
-        ));
+        ),
+        body: TabBarView(
+          controller: tabController,
+          children: <Widget>[
+            ShowcaseColors(controller: widget.controller),
+            const ShowcaseButtons(),
+            const ShowcaseInput(),
+            const ShowcaseMenus(),
+            const ShowcaseSwitches(),
+            const ShowcaseListTile(),
+            const ShowcaseSlider(),
+            const ShowcaseAppBar(),
+            const ShowcaseNavigation(),
+            const ShowcaseDialogs(),
+            const ShowcaseCard(),
+            const ShowcaseText(),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -75,7 +114,6 @@ class ShowcaseColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final MediaQueryData media = MediaQuery.of(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
@@ -85,22 +123,7 @@ class ShowcaseColors extends StatelessWidget {
         media.padding.bottom + AppData.edgeInsetsTablet,
       ),
       children: <Widget>[
-        ListTile(
-          title: const Text('Theme mode'),
-          subtitle: Text('Theme ${controller.themeMode.name}'),
-          trailing: ThemeModeSwitch(
-            themeMode: controller.themeMode,
-            onChanged: controller.setThemeMode,
-          ),
-          // Toggle theme mode also via the ListTile tap.
-          onTap: () {
-            if (theme.brightness == Brightness.light) {
-              controller.setThemeMode(ThemeMode.dark);
-            } else {
-              controller.setThemeMode(ThemeMode.light);
-            }
-          },
-        ),
+        ThemeModeSwitchListTile(controller: controller),
         // Show all key active theme colors.
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 8),

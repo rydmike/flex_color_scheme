@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_mode_switch.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
+import '../../shared/theme_mode_switch_list_tile.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
@@ -56,22 +56,7 @@ class ThemeColorsSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTile(
-          title: const Text('Theme mode'),
-          subtitle: Text('Theme ${controller.themeMode.name}'),
-          trailing: ThemeModeSwitch(
-            themeMode: controller.themeMode,
-            onChanged: controller.setThemeMode,
-          ),
-          // Toggle theme mode also via the ListTile tap.
-          onTap: () {
-            if (theme.brightness == Brightness.light) {
-              controller.setThemeMode(ThemeMode.dark);
-            } else {
-              controller.setThemeMode(ThemeMode.light);
-            }
-          },
-        ),
+        ThemeModeSwitchListTile(controller: controller),
         InputColorsPopupMenu(controller: controller),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),

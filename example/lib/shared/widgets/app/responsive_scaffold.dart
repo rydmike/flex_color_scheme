@@ -54,7 +54,8 @@ class ResponsiveMenuItems {
 
   String get tooltip => _tooltip ?? label;
   String get labelSecondary => _labelSecondary ?? label;
-  String get tooltipSecondary => _tooltipSecondary ?? tooltip;
+  String get tooltipSecondary =>
+      _tooltipSecondary ?? _labelSecondary ?? tooltip;
   IconData get iconSecondary => _iconSecondary ?? icon;
 }
 

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import 'app_example_chat.dart';
+import 'app_example_components.dart';
 import 'app_example_login.dart';
 import 'app_example_shop.dart';
-import 'app_example_widgets.dart';
 
 /// An example that show what an app using the theme might look like
 class ThemeSimulator extends StatefulWidget {
@@ -20,14 +20,25 @@ class ThemeSimulator extends StatefulWidget {
 
 class _ThemeSimulatorState extends State<ThemeSimulator>
     with TickerProviderStateMixin {
-  late int currentPage = 1;
+  late int currentPage;
   late TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    currentPage = 1;
-    tabController = TabController(length: 4, vsync: this);
+    currentPage = widget.controller.simulatorAppIndex;
+    tabController = TabController(
+      initialIndex: currentPage,
+      length: 4,
+      vsync: this,
+    );
+    // Update stored page info also if swiped to new page.
+    tabController.addListener(() {
+      if (tabController.index != currentPage) {
+        currentPage = tabController.index;
+        widget.controller.setSimulatorAppIndex(currentPage);
+      }
+    });
   }
 
   @override
@@ -38,6 +49,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Column(
@@ -47,10 +59,14 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
             SizedBox(
               height: 50,
               child: TabBar(
+                indicatorColor: theme.colorScheme.primary,
+                labelColor: theme.colorScheme.primary,
+                unselectedLabelColor: theme.colorScheme.onSurface,
                 controller: tabController,
                 onTap: (int newPage) {
                   setState(() {
                     currentPage = newPage;
+                    widget.controller.setSimulatorAppIndex(currentPage);
                   });
                 },
                 tabs: const <Widget>[
@@ -67,8 +83,8 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               subtitle: Text('Select device device: iPhone 13 Max Pro'),
             ),
             ListTile(
-              title: const Text('Device size'),
-              subtitle: Slider(
+              leading: const Text('Size'),
+              title: Slider(
                 min: 400,
                 max: 1400,
                 divisions: 100,
@@ -87,7 +103,8 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                   controller: tabController,
                   children: <Widget>[
                     SimulatorFrame(
-                      child: AppExampleWidgets(controller: widget.controller),
+                      child:
+                          AppExampleComponents(controller: widget.controller),
                     ),
                     const SimulatorFrame(
                       child: AppExampleLogin(),
