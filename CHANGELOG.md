@@ -77,15 +77,16 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Add an option to set surface tint and blend color to transparent color. Using it removes surface tint in all theming modes on all platforms. It also makes surface blends very light in dark mode and greyscale in light mode. Quite an interesting effect in light mode.  
 - Added M3/M2, FCS ON/OFF, Sub themes ON/OFF to the custom side drawer/menu/rail.
 - Added possibility to toggle between standard and compact UI mode. The compact mode is the same view mode as the smallest responsive view, with the addition that the switches under the horizontal theme color selector are also removed. When the compact-mode is on, it is used in all responsive sizes. The compact mode gives a larger view area for app controls. This is also useful on smaller desktops. In the compact-mode, settings controlled by the removed switches can be operated via the new optional controls on the rail/side menu. 
+- Added device selection capability to device theme simulator.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- REPORT: Found NavigationDrawer issues to Flutter repo.
-- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily needed in master, but should not be needed in stable 3.7, if not remove it before release.
 - MAYBE ADD: Some initial theming options for the new MenuBar theme.
-- MAYBE ADD: Device selections to DeviceSimulator.
 - MAYBE ADD: TextFiled settings examples.
-- MAYBE ADD: Page with example theming configs.  
+- MAYBE ADD: Page with example theming configs.
+- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily
+  needed in master, but should not be needed in stable 3.7, if not remove it before release.
+- REPORT: Found NavigationDrawer issues to Flutter repo.
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.

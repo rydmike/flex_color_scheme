@@ -79,6 +79,9 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    menuItemsIconState[1] = widget.controller.compactMode
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
     menuItemsIconState[2] = isLight
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;

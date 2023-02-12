@@ -87,6 +87,11 @@ class Store {
   // Default value for the sideViewIndex, also used to reset settings.
   static const int defaultSideViewIndex = 31;
 
+  // Key used to read and save the simulatorDeviceIndex value.
+  static const String keySimulatorDeviceIndex = 'simulatorDeviceIndex';
+  // Default value for the simulatorDeviceIndex, also used to reset settings.
+  static const int defaultSimulatorDeviceIndex = 0;
+
   // Key used to read and save the simulatorAppIndex value.
   static const String keySimulatorAppIndex = 'simulatorAppIndex';
   // Default value for the simulatorAppIndex, also used to reset settings.

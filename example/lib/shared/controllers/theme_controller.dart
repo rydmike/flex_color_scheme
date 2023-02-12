@@ -82,6 +82,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _sideViewIndex = await _themeService.load(
         Store.keySideViewIndex, Store.defaultSideViewIndex);
+    _simulatorDeviceIndex = await _themeService.load(
+        Store.keySimulatorDeviceIndex, Store.defaultSimulatorDeviceIndex);
     _simulatorAppIndex = await _themeService.load(
         Store.keySimulatorAppIndex, Store.defaultSimulatorAppIndex);
     _simulatorComponentsIndex = await _themeService.load(
@@ -1203,6 +1205,16 @@ class ThemeController with ChangeNotifier {
     _viewIndex = value;
     notifyListeners();
     unawaited(_themeService.save(Store.keyViewIndex, value));
+  }
+
+  late int _simulatorDeviceIndex;
+  int get simulatorDeviceIndex => _simulatorDeviceIndex;
+  void setSimulatorDeviceIndex(int? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _simulatorDeviceIndex) return;
+    _simulatorDeviceIndex = value;
+    notifyListeners();
+    unawaited(_themeService.save(Store.keySimulatorDeviceIndex, value));
   }
 
   late int _simulatorAppIndex;

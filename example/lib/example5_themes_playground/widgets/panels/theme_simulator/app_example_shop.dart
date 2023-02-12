@@ -76,7 +76,7 @@ class _AppExampleShopState extends State<AppExampleShop> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 24,
                 crossAxisSpacing: 24,
-                childAspectRatio: .75,
+                childAspectRatio: .70,
                 children: searchResultTiles,
               )
             : ListView(
@@ -511,22 +511,20 @@ class ProductTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ProductImage(product: product),
-                const SizedBox(
-                  height: 8,
-                ),
+                const SizedBox(height: 8),
                 Text(
                   product.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.titleSmall,
                 ),
-                const Spacer(),
                 Text(
                   '\$${product.cost}',
                   style: theme.textTheme.titleMedium!.copyWith(
                       color: theme.colorScheme.tertiary,
                       fontWeight: FontWeight.bold),
-                )
+                ),
+                const Spacer(),
               ],
             ),
           ),
@@ -552,7 +550,7 @@ class ProductImage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color background = isLight
-        ? theme.colorScheme.onInverseSurface
+        ? theme.scaffoldBackgroundColor
         : theme.colorScheme.inverseSurface;
     return AspectRatio(
       aspectRatio: .95,
@@ -579,7 +577,7 @@ class ProductImage extends StatelessWidget {
               color: theme.colorScheme.secondaryContainer,
             )),
         errorWidget: (BuildContext context, String url, dynamic error) =>
-            const Icon(Icons.error, size: 50),
+            const Icon(Icons.image_not_supported_outlined, size: 50),
       ),
     );
   }
@@ -772,7 +770,7 @@ class CategoryTile extends StatelessWidget {
               placeholder: (BuildContext context, String url) => const SizedBox(
                   width: 150, height: 150, child: CircularProgressIndicator()),
               errorWidget: (BuildContext context, String url, dynamic error) =>
-                  const Icon(Icons.error, size: 50),
+                  const Icon(Icons.image_not_supported_outlined, size: 50),
             ),
             Align(
               alignment: Alignment.center,
