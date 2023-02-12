@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
-import 'app_example_chat.dart';
 import 'app_example_components.dart';
 import 'app_example_login.dart';
+import 'app_example_material3.dart';
 import 'app_example_shop.dart';
+import 'app_example_undraw.dart';
 
 /// An example that show what an app using the theme might look like
 class ThemeSimulator extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
     currentPage = widget.controller.simulatorAppIndex;
     tabController = TabController(
       initialIndex: currentPage,
-      length: 4,
+      length: 5,
       vsync: this,
     );
     // Update stored page info also if swiped to new page.
@@ -86,7 +87,8 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                   Tab(text: 'Components'),
                   Tab(text: 'Login'),
                   Tab(text: 'Shop'),
-                  Tab(text: 'Chat'),
+                  Tab(text: 'Material'),
+                  Tab(text: 'Undraw'),
                 ],
               ),
             ),
@@ -136,7 +138,11 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                     ),
                     SimulatorFrame(
                       device: device,
-                      child: AppExampleChat(controller: widget.controller),
+                      child: const AppExampleMaterial3(),
+                    ),
+                    SimulatorFrame(
+                      device: device,
+                      child: AppExampleUndraw(controller: widget.controller),
                     ),
                   ],
                 ),

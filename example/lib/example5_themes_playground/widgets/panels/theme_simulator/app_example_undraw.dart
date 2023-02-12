@@ -6,8 +6,8 @@ import '../../../../shared/widgets/universal/svg_asset_image.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 
 /// An example that show what an app using the theme might look like
-class AppExampleChat extends StatelessWidget {
-  const AppExampleChat({super.key, required this.controller});
+class AppExampleUndraw extends StatelessWidget {
+  const AppExampleUndraw({super.key, required this.controller});
 
   final ThemeController controller;
 
