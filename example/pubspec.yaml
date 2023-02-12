@@ -12,7 +12,7 @@ dependencies:
   animations: ^2.0.7
 
   # Cached network image (by baseflow.com).
-  cached_network_image: ^3.2.3
+  #  cached_network_image: ^3.2.3
 
   # Confetti for some fun on the demo (by funwith.app).
   confetti: ^0.7.0

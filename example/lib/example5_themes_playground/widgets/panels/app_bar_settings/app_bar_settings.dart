@@ -654,7 +654,7 @@ class AppBarSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7 to 3.7.2 the BottomAppBar color '
+                  text: 'In Flutter 3.7.0 to 3.7.3 the BottomAppBar color '
                       'cannot be changed due to the issue described in ',
                 ),
                 LinkTextSpan(
@@ -670,14 +670,14 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterFix117082,
+                  uri: _fcsFlutterIssue110951,
                   text: 'Issue #117082',
                 ),
                 TextSpan(
                   style: spanTextStyle,
                   text: '. There are fixes for both these issues in master '
-                      'channel, but they have not landed in Flutter 3.7.2 '
-                      'stable.',
+                      'channel, but they have not landed in Flutter 3.7.3 '
+                      'stable or earlier versions.',
                 ),
               ],
             ),

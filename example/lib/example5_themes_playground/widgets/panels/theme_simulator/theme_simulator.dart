@@ -92,7 +92,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
             ),
             ListTile(
               title: Text('${SelectDevice.devices[device].name} '
-                  ' (${SelectDevice.devices[device].identifier.platform.name})'),
+                  '(${SelectDevice.devices[device].identifier.platform.name})'),
               subtitle: Text(_phoneInfo(device)),
               trailing: SelectDevice(
                 index: device,

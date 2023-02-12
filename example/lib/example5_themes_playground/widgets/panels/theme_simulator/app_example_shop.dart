@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:animations/animations.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../shared/const/app_data.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
+import '../../../../shared/utils/link_text_span.dart';
 
 // An example shop that show what an app using the theme might look like.
 //
@@ -14,13 +15,6 @@ import '../../../../shared/utils/app_scroll_behavior.dart';
 // Original version made by Zachery Gentry, zach@flutterui.design @zacherygentry
 // Thanks, rights and credits belong to Zachery for letting me use the shop
 // example app in the Themes Playground.
-
-const String manLookRightImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
-const String dogImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/pet.jpg';
-const String womanLookLeftImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/woman-look-left.jpg';
 
 Cart cart = Cart();
 
@@ -66,8 +60,17 @@ class _AppExampleShopState extends State<AppExampleShop> {
           title: SearchBar(
             onChanged: setSearchString,
           ),
-          actions: const <Widget>[
-            CartAppBarAction(),
+          actions: <Widget>[
+            Theme(
+                data: theme.copyWith(
+                  iconTheme: IconThemeData(color: theme.colorScheme.onSurface),
+                ),
+                child: Row(
+                  children: const <Widget>[
+                    CartAppBarAction(),
+                    ShopAbout(useRootNavigator: false)
+                  ],
+                )),
           ],
         ),
         body: searchString.isNotEmpty
@@ -88,20 +91,20 @@ class _AppExampleShopState extends State<AppExampleShop> {
                   ),
                   const SizedBox(height: 16),
                   CategoryTile(
-                    imageUrl: manLookRightImageUrl,
-                    category: mensCategory,
+                    imageUrl: _manLookRightImageUrl,
+                    category: _mensCategory,
                     imageAlignment: Alignment.topCenter,
                   ),
                   const SizedBox(height: 16),
                   CategoryTile(
-                    imageUrl: womanLookLeftImageUrl,
-                    category: womensCategory,
+                    imageUrl: _womanLookLeftImageUrl,
+                    category: _womensCategory,
                     imageAlignment: Alignment.topCenter,
                   ),
                   const SizedBox(height: 16),
                   CategoryTile(
-                    imageUrl: dogImageUrl,
-                    category: petsCategory,
+                    imageUrl: _dogImageUrl,
+                    category: _petsCategory,
                   ),
                 ],
               ),
@@ -191,6 +194,12 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final Color background = isLight
+        ? theme.colorScheme.surfaceVariant
+        : theme.colorScheme.onSurface;
+    final Color iconColor = isLight
+        ? theme.colorScheme.secondary.withOpacity(0.8)
+        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
     final List<Widget> imagePreviews = product.imageUrls
         .map(
           (String url) => Padding(
@@ -210,6 +219,17 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 child: Image.network(
                   url,
+                  loadingBuilder: (_, Widget child,
+                          ImageChunkEvent? loadingProgress) =>
+                      loadingProgress == null
+                          ? child
+                          : const Center(child: CircularProgressIndicator()),
+                  errorBuilder: (_, Object child, StackTrace? trace) => Icon(
+                    Icons.image_not_supported_outlined,
+                    size: 30,
+                    color: iconColor,
+                  ),
+                  cacheHeight: 100,
                 ),
               ),
             ),
@@ -255,9 +275,6 @@ class _ProductScreenState extends State<ProductScreen> {
             .toList() ??
         <Widget>[];
 
-    final Color background = isLight
-        ? theme.colorScheme.surfaceVariant
-        : theme.colorScheme.onSurface;
     return Scaffold(
       appBar: AppBar(
         actions: const <Widget>[
@@ -277,6 +294,17 @@ class _ProductScreenState extends State<ProductScreen> {
                 Expanded(
                   child: Image.network(
                     selectedImageUrl!,
+                    loadingBuilder: (_, Widget child,
+                            ImageChunkEvent? loadingProgress) =>
+                        loadingProgress == null
+                            ? child
+                            : const Center(child: CircularProgressIndicator()),
+                    errorBuilder: (_, Object child, StackTrace? trace) => Icon(
+                      Icons.image_not_supported_outlined,
+                      size: 200,
+                      color: iconColor,
+                    ),
+                    cacheHeight: 500,
                     fit: BoxFit.cover,
                     color: background,
                     colorBlendMode: BlendMode.multiply,
@@ -315,8 +343,8 @@ class _ProductScreenState extends State<ProductScreen> {
                     product.description ??
                         'Lorem ipsum dolor sit amet, consectetur adipiscing '
                             'elit. Integer quis purus laoreet, efficitur '
-                            'libero '
-                            'vel, feugiat ante. Vestibulum tempor, ligula.',
+                            'libero ferto vel, feugiat ante. Vestibulum '
+                            'tempor, ligula.',
                     style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
                   ),
                   const SizedBox(
@@ -395,12 +423,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Category get category => widget.category;
   Filters filterValue = Filters.popular;
   String? selection;
-  late List<Product> _products;
+  late List<Product> categoryProducts;
 
   @override
   void initState() {
     selection = category.selections.first;
-    _products = products.where((Product p) => p.category == category).toList();
+    categoryProducts =
+        products.where((Product p) => p.category == category).toList();
     super.initState();
   }
 
@@ -409,7 +438,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final List<ProductRow> productRows = category.selections
         .map((String s) => ProductRow(
               productType: s,
-              products: _products
+              products: categoryProducts
                   .where((Product p) =>
                       p.productType.toLowerCase() == s.toLowerCase())
                   .toList(),
@@ -552,32 +581,33 @@ class ProductImage extends StatelessWidget {
     final Color background = isLight
         ? theme.scaffoldBackgroundColor
         : theme.colorScheme.inverseSurface;
+    final Color iconColor = isLight
+        ? theme.colorScheme.secondary.withOpacity(0.8)
+        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
     return AspectRatio(
       aspectRatio: .95,
-      child: CachedNetworkImage(
-        imageUrl: product.imageUrls.first,
-        imageBuilder:
-            (BuildContext context, ImageProvider<Object> imageProvider) =>
-                Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(background, BlendMode.multiply),
-            ),
-          ),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          color: background,
         ),
-        placeholder: (BuildContext context, String url) => ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxHeight: 50,
-              minHeight: 50,
-            ),
-            child: CircularProgressIndicator(
-              strokeWidth: 8,
-              color: theme.colorScheme.secondaryContainer,
-            )),
-        errorWidget: (BuildContext context, String url, dynamic error) =>
-            const Icon(Icons.image_not_supported_outlined, size: 50),
+        clipBehavior: Clip.hardEdge,
+        child: Image.network(
+          product.imageUrls.first,
+          loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) =>
+              loadingProgress == null
+                  ? child
+                  : const Center(child: CircularProgressIndicator()),
+          errorBuilder: (_, Object child, StackTrace? trace) => Icon(
+            Icons.image_not_supported_outlined,
+            size: 80,
+            color: iconColor,
+          ),
+          cacheHeight: 500,
+          color: background,
+          colorBlendMode: BlendMode.multiply,
+        ),
       ),
     );
   }
@@ -737,6 +767,9 @@ class CategoryTile extends StatelessWidget {
     final Color background = isLight
         ? theme.colorScheme.onInverseSurface
         : theme.colorScheme.inverseSurface;
+    final Color iconColor = isLight
+        ? theme.colorScheme.secondary.withOpacity(0.8)
+        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
     return InkWell(
       onTap: () => _pushScreen(
         context: context,
@@ -753,24 +786,28 @@ class CategoryTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            CachedNetworkImage(
-              imageUrl: imageUrl,
-              imageBuilder:
-                  (BuildContext context, ImageProvider<Object> imageProvider) =>
-                      Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                    colorFilter:
-                        ColorFilter.mode(background, BlendMode.multiply),
-                  ),
+            Image.network(
+              imageUrl,
+              loadingBuilder:
+                  (_, Widget child, ImageChunkEvent? loadingProgress) =>
+                      loadingProgress == null
+                          ? child
+                          : const Center(child: CircularProgressIndicator()),
+              errorBuilder: (_, Object child, StackTrace? trace) => ColoredBox(
+                color: isLight
+                    ? theme.colorScheme.surfaceVariant
+                    : theme.colorScheme.onSurfaceVariant,
+                child: Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 180,
+                  color: iconColor,
                 ),
               ),
-              placeholder: (BuildContext context, String url) => const SizedBox(
-                  width: 150, height: 150, child: CircularProgressIndicator()),
-              errorWidget: (BuildContext context, String url, dynamic error) =>
-                  const Icon(Icons.image_not_supported_outlined, size: 50),
+              cacheHeight: 500,
+              color: background,
+              colorBlendMode: BlendMode.darken,
+              alignment: imageAlignment,
+              fit: BoxFit.cover,
             ),
             Align(
               alignment: Alignment.center,
@@ -819,7 +856,7 @@ class _SearchBarState extends State<SearchBar> {
         prefixIcon: const Icon(
           Icons.search,
         ),
-        hintText: 'Search for a product',
+        hintText: 'Search...',
         suffixIcon: IconButton(
           constraints: const BoxConstraints(
             minHeight: 36,
@@ -901,6 +938,100 @@ class Cart extends ChangeNotifier {
   }
 }
 
+/// An about icon button used on the example's app app bar.
+class ShopAbout extends StatelessWidget {
+  const ShopAbout({super.key, this.color, this.useRootNavigator = true});
+
+  /// The color used on the icon button.
+  ///
+  /// If null, default to Icon() class default color.
+  final Color? color;
+
+  /// Use root navigator?
+  final bool useRootNavigator;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.info, color: color),
+      onPressed: () {
+        showAppAboutDialog(context, useRootNavigator);
+      },
+    );
+  }
+}
+
+// This [showAppAboutDialog] function is based on the [AboutDialog] example
+// that exist(ed) in the Flutter Gallery App.
+void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
+  final ThemeData theme = Theme.of(context);
+  final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
+  final TextStyle footerStyle = theme.textTheme.bodySmall!;
+  final TextStyle linkStyle =
+      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+
+  final MediaQueryData media = MediaQuery.of(context);
+  final double width = media.size.width;
+  final double height = media.size.height;
+
+  final Uri sourceLink = Uri(
+    scheme: 'https',
+    host: 'flutterui.design',
+    path: 'components/ecommerce',
+  );
+
+  showAboutDialog(
+    context: context,
+    applicationName: 'Shop',
+    applicationVersion: '1.0',
+    useRootNavigator: useRootNavigator,
+    applicationIcon: const Icon(Icons.star, size: 40),
+    applicationLegalese: '© Zachery Gentry',
+    children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                style: aboutTextStyle,
+                text: 'This app is included to illustrate used theme on '
+                    'a compact shop app. It is a minor modification '
+                    'of the open source shop app available at ',
+              ),
+              LinkTextSpan(
+                style: linkStyle,
+                uri: sourceLink,
+                text: 'flutterui.design',
+              ),
+              TextSpan(
+                style: aboutTextStyle,
+                text: '. Included here with permission. Credits and '
+                    'thanks to its author Zachery Gentry.\n\n',
+              ),
+              TextSpan(
+                style: footerStyle,
+                text: 'Built with Flutter ${AppData.flutterVersion}, '
+                    'using ${AppData.packageName} '
+                    '${AppData.packageVersion}\n'
+                    'Media size (w:${width.toStringAsFixed(0)}, '
+                    'h:${height.toStringAsFixed(0)})\n\n',
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+const String _manLookRightImageUrl =
+    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
+const String _dogImageUrl =
+    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/pet.jpg';
+const String _womanLookLeftImageUrl =
+    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/woman-look-left.jpg';
+
 class OrderItem {
   Product product;
   // Selected size of product; This can be null
@@ -910,17 +1041,17 @@ class OrderItem {
   OrderItem({required this.product, this.selectedSize, this.selectedColor});
 }
 
-Category mensCategory = Category(title: 'Men', selections: <String>[
+Category _mensCategory = Category(title: 'Men', selections: <String>[
   'Shirts',
   'Jeans',
   'Shorts',
   'Jackets',
 ]);
-Category womensCategory = Category(title: 'Women', selections: <String>[
+Category _womensCategory = Category(title: 'Women', selections: <String>[
   'Shirts',
   'Jeans',
 ]);
-Category petsCategory = Category(title: 'Pets', selections: <String>[
+Category _petsCategory = Category(title: 'Pets', selections: <String>[
   'Toys',
   'Treats',
 ]);
@@ -929,197 +1060,208 @@ List<Product> products = <Product>[
   Product(
       name: '2-Pack Crewneck T-Shirts - Black',
       imageUrls: <String>[
-        'https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL._AC_UX569_.jpg',
-        'https://m.media-amazon.com/images/I/716CJVk6FLS._AC_UY500_.jpg',
-        'https://m.media-amazon.com/images/I/81AVnzFKUqS._AC_UY500_.jpg',
+        'https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL.jpg',
+        'https://m.media-amazon.com/images/I/716CJVk6FLS.jpg',
+        'https://m.media-amazon.com/images/I/81AVnzFKUqS.jpg',
       ],
       cost: 12.99,
-      category: mensCategory,
+      category: _mensCategory,
       productType: 'shirts',
       sizes: <String>['S', 'M', 'L', 'XL']),
   Product(
     name: 'Short Sleeve Henley - Blue',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/81tpGc13OgL._AC_UX522_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/81oNSlos2tL._AC_UY679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/819ea2vQIjL._AC_UY679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/91SH0RB-8dL._AC_UY606_.jpg'
+      'https://images-na.ssl-images-amazon.com/images/I/81tpGc13OgL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81oNSlos2tL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/819ea2vQIjL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91SH0RB-8dL.jpg'
     ],
     cost: 17.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: 'Polo RL V-Neck',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/61m68nuygSL._AC_UX522_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/61URnzIoCPL._AC_UX522_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/61m68nuygSL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/61URnzIoCPL.jpg',
     ],
     cost: 24.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: 'Athletic-Fit Stretch Jeans',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/91SIuLNN%2BlL._AC_UY679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/91Qpp%2BRPLtL._AC_UX522_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91SIuLNN%2BlL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91Qpp%2BRPLtL.jpg',
     ],
     cost: 29.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: "Levi's Original Jeans",
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/91L4zjZKF-L._AC_UX522_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/91Mf37jbSvL._AC_UX522_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91L4zjZKF-L.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91Mf37jbSvL.jpg',
     ],
     cost: 39.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: '2-Pack Performance Shorts',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/A1lTY32j6gL._AC_UX679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/71JYOHJ%2BS-L._AC_UX522_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/A1lTY32j6gL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/71JYOHJ%2BS-L.jpg',
     ],
     cost: 19.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'shorts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: "Levi's Cargo Shorts",
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/915Io2JEUPL._AC_UX679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/91WJgn0FNkL._AC_UX679_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/915Io2JEUPL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91WJgn0FNkL.jpg',
     ],
     cost: 29.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'shorts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: 'Full-Zip Polar Fleece Jacket',
     imageUrls: <String>[
-      'https://m.media-amazon.com/images/I/81McI2xG3NS._AC_UY500_.jpg',
-      'https://m.media-amazon.com/images/I/81JkH4LbxnS._AC_UY500_.jpg',
+      'https://m.media-amazon.com/images/I/81McI2xG3NS.jpg',
+      'https://m.media-amazon.com/images/I/81JkH4LbxnS.jpg',
     ],
     cost: 15.80,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'jackets',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: "Columbia Men's Watertight Ii Jacket",
     imageUrls: <String>[
-      'https://m.media-amazon.com/images/I/6142UY8xXeS._AC_UX466_.jpg',
-      'https://m.media-amazon.com/images/I/61cdxXOfjvS._AC_UX466_.jpg',
+      'https://m.media-amazon.com/images/I/6142UY8xXeS.jpg',
+      'https://m.media-amazon.com/images/I/61cdxXOfjvS.jpg',
     ],
     cost: 54.99,
-    category: mensCategory,
+    category: _mensCategory,
     productType: 'jackets',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: '2-Pack Short-Sleeve Crewneck',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/911mb8PkHSL._AC_UX522_.jpg',
-      'https://m.media-amazon.com/images/I/71R4QBliLPL._AC_UY500_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/911mb8PkHSL.jpg',
+      'https://m.media-amazon.com/images/I/71R4QBliLPL.jpg',
     ],
     cost: 16.99,
-    category: womensCategory,
+    category: _womensCategory,
     productType: 'shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: 'Waffle Knit Tunic Blouse',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/71lDML8KDQL._AC_UX522_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/61Ojm-DnojL._AC_UY679_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/71lDML8KDQL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/61Ojm-DnojL.jpg',
     ],
     cost: 22.99,
-    category: womensCategory,
+    category: _womensCategory,
+    productType: 'shirts',
+    sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
+  ),
+  Product(
+    name: 'Women’s Long Sleeve Tops',
+    imageUrls: <String>[
+      'https://m.media-amazon.com/images/I/81dmPaYpNnL.jpg',
+      'https://m.media-amazon.com/images/I/71BqfxMdeDL.jpg',
+    ],
+    cost: 25.99,
+    category: _womensCategory,
     productType: 'shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: 'Mid-Rise Skinny Jeans',
     imageUrls: <String>[
-      'https://m.media-amazon.com/images/I/61HiJeSL51L._AC_SX466._SX._UX._SY._UY_.jpg',
-      'https://m.media-amazon.com/images/I/61j2mpdFRqL._AC_SX466._SX._UX._SY._UY_.jpg',
+      'https://m.media-amazon.com/images/I/61HiJeSL51L.jpg',
+      'https://m.media-amazon.com/images/I/61j2mpdFRqL.jpg',
     ],
     cost: 28.99,
-    category: womensCategory,
+    category: _womensCategory,
     productType: 'jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: "Levi's Straight 505 Jeans",
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/51D4eXuwKaL._AC_UX679_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/51sHwN6mDzL._AC_UX679_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/51D4eXuwKaL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/51sHwN6mDzL.jpg',
     ],
     cost: 34.99,
-    category: womensCategory,
+    category: _womensCategory,
     productType: 'jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: "Levi's 715 Bootcut Jeans",
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/81QwSgeXHTL._AC_UX522_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/81qmkt1Be0L._AC_UY679_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81QwSgeXHTL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81qmkt1Be0L.jpg',
     ],
     cost: 34.99,
-    category: womensCategory,
+    category: _womensCategory,
     productType: 'jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
     name: '3-Pack - Squeaky Plush Dog Toy',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/712YaF31-3L._AC_SL1000_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/71K1NzmHCfL._AC_SL1000_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/712YaF31-3L.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/71K1NzmHCfL.jpg',
     ],
     cost: 9.99,
-    category: petsCategory,
+    category: _petsCategory,
     productType: 'toys',
   ),
   Product(
     name: 'Wobble Wag Giggle Ball',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/81XyqDXVwCL._AC_SX355_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/81Ye9KrP3pL._AC_SY355_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81XyqDXVwCL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81Ye9KrP3pL.jpg',
     ],
     cost: 11.99,
-    category: petsCategory,
+    category: _petsCategory,
     productType: 'toys',
   ),
   Product(
     name: 'Duck Hide Twists',
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/51dS9c0xIdL._SX342_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/81z4lvRtc5L._SL1500_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/51dS9c0xIdL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81z4lvRtc5L.jpg',
     ],
     cost: 8.99,
-    category: petsCategory,
+    category: _petsCategory,
     productType: 'treats',
   ),
   Product(
     name: "Zuke's Mini Training Treats",
     imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/81LV2CHtGKL._AC_SY355_.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/81K30Bs9C6L._AC_SY355_.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81LV2CHtGKL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/81K30Bs9C6L.jpg',
     ],
     cost: 10.99,
-    category: petsCategory,
+    category: _petsCategory,
     productType: 'treats',
   ),
 ];
