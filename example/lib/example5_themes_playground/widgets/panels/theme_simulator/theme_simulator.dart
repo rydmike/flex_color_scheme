@@ -45,14 +45,14 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
   }
 
   String _phoneInfo(int phoneIndex) {
-    final DeviceInfo di = SelectDevice.devices[phoneIndex];
-    final double resWidth = di.screenSize.width * di.pixelRatio;
-    final double resHeight = di.screenSize.height * di.pixelRatio;
-    return 'Device pixels ${di.screenSize.width.toStringAsFixed(0)}x'
-        '${di.screenSize.height.toStringAsFixed(0)}  '
+    final SimDevice di = Simulator.devs[phoneIndex];
+    final double resWidth = di.info.screenSize.width * di.info.pixelRatio;
+    final double resHeight = di.info.screenSize.height * di.info.pixelRatio;
+    return 'Device pixels ${di.info.screenSize.width.toStringAsFixed(0)}x'
+        '${di.info.screenSize.height.toStringAsFixed(0)}  '
         'Screen resolution ${resWidth.toStringAsFixed(0)}x'
         '${resHeight.toStringAsFixed(0)}  '
-        'Pixel ratio ${di.pixelRatio.toStringAsFixed(2)}';
+        'Pixel ratio ${di.info.pixelRatio.toStringAsFixed(2)}';
   }
 
   @override
@@ -93,10 +93,10 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               ),
             ),
             ListTile(
-              title: Text('${SelectDevice.devices[device].name} '
-                  '(${SelectDevice.devices[device].identifier.platform.name})'),
+              title: Text('${Simulator.devs[device].name} '
+                  '(${Simulator.devs[device].info.identifier.platform.name})'),
               subtitle: Text(_phoneInfo(device)),
-              trailing: SelectDevice(
+              trailing: Simulator(
                 index: device,
                 onChanged: (int index) {
                   setState(() {
@@ -166,7 +166,7 @@ class SimulatorFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DeviceFrame(
-      device: SelectDevice.devices[device],
+      device: Simulator.devs[device].info,
       orientation: Orientation.portrait,
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
@@ -180,9 +180,27 @@ class SimulatorFrame extends StatelessWidget {
   }
 }
 
+// Simulator device, we add some more to DeviceInfo so we can get better name
+// and icons.
+class SimDevice {
+  const SimDevice({
+    String? name,
+    this.icon = Icons.phone_iphone,
+    this.size = 24,
+    required this.info,
+  }) : _name = name;
+
+  final String? _name;
+  final IconData icon;
+  final double size;
+  final DeviceInfo info;
+
+  String get name => _name ?? info.name;
+}
+
 /// Widget used to select used simulation device.
-class SelectDevice extends StatelessWidget {
-  const SelectDevice({
+class Simulator extends StatelessWidget {
+  const Simulator({
     super.key,
     required this.index,
     this.onChanged,
@@ -190,32 +208,119 @@ class SelectDevice extends StatelessWidget {
   final int index;
   final ValueChanged<int>? onChanged;
 
-  static List<DeviceInfo> devices = <DeviceInfo>[
-    Devices.ios.iPhone13ProMax,
-    Devices.ios.iPhone13,
-    Devices.ios.iPhone13Mini,
-    Devices.ios.iPhone12ProMax,
-    Devices.ios.iPhone12Mini,
-    Devices.ios.iPhoneSE,
+  static List<SimDevice> devs = <SimDevice>[
+    SimDevice(
+      info: Devices.ios.iPhone13ProMax,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone13,
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone13Mini,
+      size: 22,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone12ProMax,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone12Mini,
+      size: 22,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhoneSE,
+      size: 20,
+    ),
     //
-    Devices.android.samsungGalaxyNote20Ultra,
-    Devices.android.samsungGalaxyNote20,
-    Devices.android.samsungGalaxyS20,
-    Devices.android.samsungGalaxyA50,
-    Devices.android.onePlus8Pro,
-    Devices.android.sonyXperia1II,
-    Devices.android.bigPhone,
-    Devices.android.mediumPhone,
-    Devices.android.smallPhone,
+    SimDevice(
+      info: Devices.android.samsungGalaxyNote20Ultra,
+      icon: Icons.smartphone_outlined,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyNote20,
+      icon: Icons.smartphone_outlined,
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyS20,
+      icon: Icons.smartphone_outlined,
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyA50,
+      icon: Icons.smartphone_outlined,
+    ),
+    SimDevice(
+      info: Devices.android.onePlus8Pro,
+      icon: Icons.smartphone_outlined,
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.sonyXperia1II,
+      icon: Icons.smartphone_outlined,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.bigPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Big Android phone',
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.mediumPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Medium Android phone',
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.android.smallPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Small Android phone',
+      size: 22,
+    ),
     //
-    Devices.ios.iPad,
-    Devices.ios.iPadAir4,
-    Devices.ios.iPadPro11Inches,
-    Devices.ios.iPad12InchesGen4,
+    SimDevice(
+      info: Devices.ios.iPad,
+      icon: Icons.tablet_mac_outlined,
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.ios.iPadAir4,
+      icon: Icons.tablet_mac_outlined,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.ios.iPadPro11Inches,
+      icon: Icons.tablet_mac_outlined,
+      size: 32,
+    ),
+    SimDevice(
+      info: Devices.ios.iPad12InchesGen4,
+      icon: Icons.tablet_mac_outlined,
+      size: 36,
+    ),
     //
-    Devices.android.smallTablet,
-    Devices.android.mediumTablet,
-    Devices.android.largeTablet,
+    SimDevice(
+      info: Devices.android.smallTablet,
+      icon: Icons.tablet_android_outlined,
+      name: 'Small Android tablet',
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.mediumTablet,
+      icon: Icons.tablet_android_outlined,
+      name: 'Medium Android tablet',
+      size: 32,
+    ),
+    SimDevice(
+      info: Devices.android.largeTablet,
+      icon: Icons.tablet_android_outlined,
+      name: 'Big Android tablet',
+      size: 34,
+    ),
   ];
 
   @override
@@ -227,37 +332,39 @@ class SelectDevice extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
     return PopupMenuButton<int>(
-      initialValue: index,
-      tooltip: '',
-      padding: EdgeInsets.zero,
-      onSelected: (int index) {
-        onChanged?.call(index);
-      },
-      enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < devices.length; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: index == i
-                  ? Icon(
-                      Icons.phone_iphone,
-                      color: iconColor,
-                    )
-                  : Icon(
-                      Icons.phone_iphone,
-                      color: unselectedIconColor,
-                    ),
-              title: Text(devices[i].name, style: txtStyle),
-            ),
-          )
-      ],
-      icon: Icon(
-        Icons.phone_iphone,
-        color: iconColor,
-      ),
-    );
+        initialValue: index,
+        tooltip: '',
+        padding: EdgeInsets.zero,
+        onSelected: (int index) {
+          onChanged?.call(index);
+        },
+        enabled: enabled,
+        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+              for (int i = 0; i < devs.length; i++)
+                PopupMenuItem<int>(
+                  value: i,
+                  child: ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    leading: index == i
+                        ? Icon(
+                            devs[i].icon,
+                            size: devs[i].size,
+                            color: iconColor,
+                          )
+                        : Icon(
+                            devs[i].icon,
+                            size: devs[i].size,
+                            color: unselectedIconColor,
+                          ),
+                    title: Text(devs[i].name, style: txtStyle),
+                  ),
+                )
+            ],
+        icon: Icon(
+          devs[index].icon,
+          size: devs[index].size,
+          color: iconColor,
+        ));
   }
 }

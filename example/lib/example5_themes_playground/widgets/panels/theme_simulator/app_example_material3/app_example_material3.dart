@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../shared/const/app_data.dart';
+import '../../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../../shared/utils/link_text_span.dart';
 import 'color_palettes_screen.dart';
 import 'component_screen.dart';
@@ -41,20 +42,6 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
   bool controllerInitialized = false;
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
-
-  // bool useMaterial3 = true;
-  // ThemeMode themeMode = ThemeMode.system;
-  // bool get useLightMode {
-  //   switch (themeMode) {
-  //     case ThemeMode.system:
-  //       return SchedulerBinding.instance.window.platformBrightness ==
-  //           Brightness.light;
-  //     case ThemeMode.light:
-  //       return true;
-  //     case ThemeMode.dark:
-  //       return false;
-  //   }
-  // }
 
   // ColorSeed colorSelected = ColorSeed.baseColor;
   int screenIndex = ScreenSelected.component.value;
@@ -117,18 +104,6 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
     });
   }
 
-  // void handleBrightnessChange(bool useLightMode) {
-  //   setState(() {
-  //     themeMode = useLightMode ? ThemeMode.light : ThemeMode.dark;
-  //   });
-  // }
-  //
-  // void handleMaterialVersionChange() {
-  //   setState(() {
-  //     useMaterial3 = !useMaterial3;
-  //   });
-  // }
-
   Widget createScreenFor(
       ScreenSelected screenSelected, bool showNavBarExample) {
     switch (screenSelected) {
@@ -168,121 +143,13 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
       leading: const Material3About(useRootNavigator: false),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? null
-          // <Widget>[
-          // const Material3About(useRootNavigator: false),
-          // _BrightnessButton(
-          //   handleBrightnessChange: handleBrightnessChange,
-          // ),
-          // _Material3Button(
-          //   handleMaterialVersionChange: handleMaterialVersionChange,
-          // ),
-          // _ColorSeedButton(
-          //   handleColorSelect: handleColorSelect,
-          //   colorSelected: colorSelected,
-          // ),
-          // ]
           : <Widget>[const SizedBox.shrink()],
     );
   }
 
-  // Widget _expandedTrailingActions() => Container(
-  //       constraints: const BoxConstraints.tightFor(width: 250),
-  //       padding: const EdgeInsets.symmetric(horizontal: 30),
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.end,
-  //         crossAxisAlignment: CrossAxisAlignment.stretch,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               const Text('Brightness'),
-  //               Expanded(child: Container()),
-  //               Switch(
-  //                   value: useLightMode,
-  //                   onChanged: (value) {
-  //                     handleBrightnessChange(value);
-  //                   })
-  //             ],
-  //           ),
-  //           Row(
-  //             children: [
-  //               useMaterial3
-  //                   ? const Text('Material 3')
-  //                   : const Text('Material 2'),
-  //               Expanded(child: Container()),
-  //               Switch(
-  //                   value: useMaterial3,
-  //                   onChanged: (_) {
-  //                     handleMaterialVersionChange();
-  //                   })
-  //             ],
-  //           ),
-  //           const Divider(),
-  //           ConstrainedBox(
-  //             constraints: const BoxConstraints(maxHeight: 200.0),
-  //             child: GridView.count(
-  //               crossAxisCount: 3,
-  //               children: List.generate(
-  //                   ColorSeed.values.length,
-  //                   (i) => IconButton(
-  //                         icon: const Icon(Icons.radio_button_unchecked),
-  //                         color: ColorSeed.values[i].color,
-  //                         isSelected:
-  //                          colorSelected.color == ColorSeed.values[i].color,
-  //                         selectedIcon: const Icon(Icons.circle),
-  //                         onPressed: () {
-  //                           handleColorSelect(i);
-  //                         },
-  //                       )),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  // Widget _trailingActions() => Column(
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       children: [
-  //         Flexible(
-  //           child: _BrightnessButton(
-  //             handleBrightnessChange: handleBrightnessChange,
-  //             showTooltipBelow: false,
-  //           ),
-  //         ),
-  //         Flexible(
-  //           child: _Material3Button(
-  //             handleMaterialVersionChange: handleMaterialVersionChange,
-  //             showTooltipBelow: false,
-  //           ),
-  //         ),
-  //         // Flexible(
-  //         //   child: _ColorSeedButton(
-  //         //     handleColorSelect: handleColorSelect,
-  //         //     colorSelected: colorSelected,
-  //         //   ),
-  //         // ),
-  //       ],
-  //     );
-
   @override
   Widget build(BuildContext context) {
-    return
-        // return MaterialApp(
-        //   debugShowCheckedModeBanner: false,
-        //   title: 'Material 3',
-        //   // themeMode: themeMode,
-        //   // theme: ThemeData(
-        //   //   colorSchemeSeed: colorSelected.color,
-        //   //   useMaterial3: useMaterial3,
-        //   //   brightness: Brightness.light,
-        //   // ),
-        //   // darkTheme: ThemeData(
-        //   //   colorSchemeSeed: colorSelected.color,
-        //   //   useMaterial3: useMaterial3,
-        //   //   brightness: Brightness.dark,
-        //   // ),
-        //   home:
-
-        AnimatedBuilder(
+    return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, Widget? child) {
         return NavigationTransition(
@@ -302,15 +169,6 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
                 handleScreenChanged(screenIndex);
               });
             },
-            //   trailing: const Expanded(
-            //     child: Material3About(useRootNavigator: false),
-            //     // Padding(
-            //     //   padding: const EdgeInsets.only(bottom: 20),
-            //     //   child: showLargeSizeLayout
-            //     //       ? _expandedTrailingActions()
-            //     //       : _trailingActions(),
-            //     // ),
-            //   ),
           ),
           navigationBar: NavigationBars(
             onSelectItem: (int index) {
@@ -324,110 +182,9 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
           ),
         );
       },
-      // ),
     );
   }
 }
-
-// class _BrightnessButton extends StatelessWidget {
-//   const _BrightnessButton({
-//     required this.handleBrightnessChange,
-//     this.showTooltipBelow = true,
-//   });
-//
-//   final Function handleBrightnessChange;
-//   final bool showTooltipBelow;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final isBright = Theme.of(context).brightness == Brightness.light;
-//     return Tooltip(
-//       preferBelow: showTooltipBelow,
-//       message: 'Toggle brightness',
-//       child: IconButton(
-//         icon: isBright
-//             ? const Icon(Icons.dark_mode_outlined)
-//             : const Icon(Icons.light_mode_outlined),
-//         onPressed: () => handleBrightnessChange(!isBright),
-//       ),
-//     );
-//   }
-// }
-
-// class _Material3Button extends StatelessWidget {
-//   const _Material3Button({
-//     required this.handleMaterialVersionChange,
-//     this.showTooltipBelow = true,
-//   });
-//
-//   final void Function() handleMaterialVersionChange;
-//   final bool showTooltipBelow;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final useMaterial3 = Theme.of(context).useMaterial3;
-//     return Tooltip(
-//       preferBelow: showTooltipBelow,
-//       message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
-//       child: IconButton(
-//         icon: useMaterial3
-//             ? const Icon(Icons.filter_2)
-//             : const Icon(Icons.filter_3),
-//         onPressed: handleMaterialVersionChange,
-//       ),
-//     );
-//   }
-// }
-
-// class _ColorSeedButton extends StatelessWidget {
-//   const _ColorSeedButton({
-//     required this.handleColorSelect,
-//     required this.colorSelected,
-//   });
-//
-//   final void Function(int) handleColorSelect;
-//   // final ColorSeed colorSelected;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return PopupMenuButton(
-//       icon: Icon(
-//         Icons.palette_outlined,
-//         color: Theme.of(context).colorScheme.onSurfaceVariant,
-//       ),
-//       tooltip: 'Select a seed color',
-//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-//       itemBuilder: (context) {
-//         return List.generate(ColorSeed.values.length, (index) {
-//           ColorSeed currentColor = ColorSeed.values[index];
-//
-//           return PopupMenuItem(
-//             value: index,
-//             enabled: currentColor != colorSelected,
-//             child: Wrap(
-//               children: [
-//                 Padding(
-//                   padding: const EdgeInsets.only(left: 10),
-//                   child: Icon(
-//                     currentColor == colorSelected
-//                         ? Icons.color_lens
-//                         : Icons.color_lens_outlined,
-//                     color: currentColor.color,
-//                   ),
-//                 ),
-//                 Padding(
-//                   padding: const EdgeInsets.only(left: 20),
-//                   child: Text(currentColor.label),
-//                 ),
-//               ],
-//             ),
-//           );
-//         });
-//       },
-//       onSelected: handleColorSelect,
-//     );
-//   }
-// }
 
 class NavigationTransition extends StatefulWidget {
   const NavigationTransition(
@@ -478,25 +235,28 @@ class _NavigationTransitionState extends State<NavigationTransition> {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
-      key: widget.scaffoldKey,
-      appBar: widget.appBar,
-      body: Row(
-        children: <Widget>[
-          RailTransition(
-            animation: railAnimation,
-            backgroundColor: colorScheme.surface,
-            child: widget.navigationRail,
-          ),
-          widget.body,
-        ],
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Scaffold(
+        key: widget.scaffoldKey,
+        appBar: widget.appBar,
+        body: Row(
+          children: <Widget>[
+            RailTransition(
+              animation: railAnimation,
+              backgroundColor: colorScheme.surface,
+              child: widget.navigationRail,
+            ),
+            widget.body,
+          ],
+        ),
+        bottomNavigationBar: BarTransition(
+          animation: barAnimation,
+          backgroundColor: colorScheme.surface,
+          child: widget.navigationBar,
+        ),
+        endDrawer: const NavigationDrawerSection(),
       ),
-      bottomNavigationBar: BarTransition(
-        animation: barAnimation,
-        backgroundColor: colorScheme.surface,
-        child: widget.navigationBar,
-      ),
-      endDrawer: const NavigationDrawerSection(),
     );
   }
 }
@@ -718,12 +478,7 @@ class _OneTwoTransitionState extends State<OneTwoTransition> {
 
 /// An about icon button used on the example's app app bar.
 class Material3About extends StatelessWidget {
-  const Material3About({super.key, this.color, this.useRootNavigator = true});
-
-  /// The color used on the icon button.
-  ///
-  /// If null, default to Icon() class default color.
-  final Color? color;
+  const Material3About({super.key, this.useRootNavigator = true});
 
   /// Use root navigator?
   final bool useRootNavigator;
@@ -731,7 +486,7 @@ class Material3About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.info, color: color),
+      icon: const Icon(Icons.info),
       onPressed: () {
         showMaterial3AboutDialog(context, useRootNavigator);
       },
