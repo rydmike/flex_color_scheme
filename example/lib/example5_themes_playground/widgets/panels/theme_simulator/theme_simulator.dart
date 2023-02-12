@@ -5,7 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import 'app_example_components.dart';
 import 'app_example_login.dart';
-import 'app_example_material3.dart';
+import 'app_example_material3/app_example_material3.dart';
 import 'app_example_shop.dart';
 import 'app_example_undraw.dart';
 

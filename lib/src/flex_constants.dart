@@ -99,17 +99,6 @@ const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 /// By default FCS uses Stadium on buttons in M3 mode if not specified.
 const double kButtonRadius = 20;
 
-/// Default elevation on [Card] widgets.
-///
-/// Based on https://m3.material.io/components/cards/specs
-/// and https://m3.material.io/styles/elevation/tokens
-///
-/// In M3 Elevated Card is level 1, 1 dp, the other Cards
-/// Filled, Tonal and Outlined are Level 0 (0 dp). Since there in
-/// Flutter is no constructor for the different types of Card
-/// we default them all to 0 dp.
-const double kCardElevation = 0;
-
 /// Default border radius on Card.
 ///
 /// Follows Material M3 guide.

@@ -1167,7 +1167,7 @@ class FlexSubThemes {
 
     /// Card elevation.
     ///
-    /// If not defined, defaults to [kCardElevation] = 0dp.
+    /// If not defined, defaults to 1 via M2 and M3 defaults.
     final double? elevation,
 
     /// Overrides the default value for [Card.shadowColor].
@@ -1191,7 +1191,7 @@ class FlexSubThemes {
   }) =>
       CardTheme(
         clipBehavior: clipBehavior,
-        elevation: elevation ?? kCardElevation,
+        elevation: elevation,
         shadowColor: shadowColor,
         surfaceTintColor: surfaceTintColor,
         shape: RoundedRectangleBorder(

@@ -32,6 +32,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **CHANGE**
 
+- **Style breaking**: The `Card` opinionated sub-theme now defaults to null elevation, resulting in
+  same default of 1dp elevation as Flutter SDK in both M2 and M3 mode. Previously, FCS defaulted to 
+  elevation 0 do on Cards when opting in on sub-themes.
+
 - **Style breaking**: `ColorScheme.outline` and `ColorScheme.outlineVariant`.  
   The FCS built-in computed none seeded values for `ColorScheme.outline` and `ColorScheme.outlineVariant` were modified. The new values are more in line with what you get with the M3 default seed algorithm, but plain grey-scale variants of them without any primary color blend. Technically light mode color for `outline` was changed from 30% lighten of light mode `onBackground` color to 45%, and `outlineVariant` from 60% lighten of `onBackground` to 75%. Likewise for the dark mode, but with darkening of the `onBackground` with the same percentage changes. The new values match the M3 design intent better. 
   
@@ -81,6 +85,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
+- MUST DO: Resolve End Drawer, show it on screen to see.
+- MUST DO: Review SnackBar theme in M3, add button color. tweak background, use default in M3?  
 - MAYBE ADD: Some initial theming options for the new MenuBar theme.
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.

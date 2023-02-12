@@ -66,9 +66,6 @@ void main() {
     test('FCT kMenuRadius is 4', () {
       expect(kMenuRadius, 4);
     });
-    test('FCT kCardElevation is 0', () {
-      expect(kCardElevation, 0);
-    });
     test('FCT kElevatedButtonElevation is 1', () {
       expect(kElevatedButtonElevation, 1);
     });

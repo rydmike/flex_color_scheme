@@ -320,7 +320,6 @@ void main() {
         equals(
           const CardTheme(
             clipBehavior: Clip.antiAlias,
-            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(12),

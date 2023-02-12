@@ -1062,6 +1062,7 @@ class ThemeController with ChangeNotifier {
     setNavBarIndicatorOpacity(1, false);
     setNavBarMuteUnselected(false, false);
     setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
+    setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
     setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavBarLabelBehavior(
         NavigationDestinationLabelBehavior.alwaysShow, false);
@@ -1077,6 +1078,7 @@ class ThemeController with ChangeNotifier {
     setNavRailIndicatorOpacity(1, false);
     setNavRailMuteUnselected(false, false);
     setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
+    setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
     setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavRailLabelType(NavigationRailLabelType.none, false);
     notifyListeners();

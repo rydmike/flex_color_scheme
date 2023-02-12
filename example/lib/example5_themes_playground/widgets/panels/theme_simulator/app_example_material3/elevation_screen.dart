@@ -151,7 +151,7 @@ class _ElevationCardState extends State<ElevationCard> {
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               Text(
-                '${widget.info.level} dp',
+                '${widget.info.elevation.toStringAsFixed(0)} dp',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               if (widget.surfaceTint != null)

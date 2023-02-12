@@ -3,12 +3,12 @@
 // found in the LICENSE file.
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app_data.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import 'app_example_material3/color_palettes_screen.dart';
-import 'app_example_material3/component_screen.dart';
-import 'app_example_material3/elevation_screen.dart';
-import 'app_example_material3/typography_screen.dart';
+import '../../../../../shared/const/app_data.dart';
+import '../../../../../shared/utils/link_text_span.dart';
+import 'color_palettes_screen.dart';
+import 'component_screen.dart';
+import 'elevation_screen.dart';
+import 'typography_screen.dart';
 
 // NavigationRail shows if the screen width is greater or equal to
 // screenWidthThreshold; otherwise, NavigationBar is used for navigation.
@@ -765,8 +765,8 @@ void showMaterial3AboutDialog(BuildContext context,
     applicationVersion: '1.0',
     useRootNavigator: useRootNavigator,
     applicationIcon: Icon(
-      Icons.star,
-      size: 45,
+      Icons.looks_3_outlined,
+      size: 55,
       color: theme.colorScheme.primary,
     ),
     applicationLegalese: '© 2021-2023 The Flutter Team\nBSD-style license.',
@@ -784,7 +784,7 @@ void showMaterial3AboutDialog(BuildContext context,
               LinkTextSpan(
                 style: linkStyle,
                 uri: sourceLink,
-                text: 'flutter/sample',
+                text: 'flutter/samples',
               ),
               TextSpan(
                 style: aboutTextStyle,

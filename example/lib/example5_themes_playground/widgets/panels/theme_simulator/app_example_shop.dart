@@ -985,7 +985,11 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
     applicationName: 'Shop',
     applicationVersion: '1.0',
     useRootNavigator: useRootNavigator,
-    applicationIcon: const Icon(Icons.star, size: 40),
+    applicationIcon: Icon(
+      Icons.star,
+      size: 50,
+      color: theme.colorScheme.primary,
+    ),
     applicationLegalese: '© Zachery Gentry',
     children: <Widget>[
       Padding(
