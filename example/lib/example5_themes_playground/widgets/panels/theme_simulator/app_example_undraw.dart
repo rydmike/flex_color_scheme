@@ -50,7 +50,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
       bottomNavigationBar: const AppExampleNavigationBar(),
       body: BreakpointBuilder(
         type: BreakType.large,
-        minColumnSize: 200,
+        minColumnSize: 204,
         builder: (BuildContext context, Breakpoint breakpoint) {
           return CustomScrollView(
             primary: false,
@@ -69,25 +69,23 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                       const Divider(),
                       const PageIntro(
                         introTop: Text(
-                          'This demo does not do much, it only '
-                          'shows many Undraw SVG images '
+                          'This demo shows Undraw SVG images '
                           'in a grid and then randomly '
                           'animates in a new one.\n'
                           '\n'
                           'Each image has its own random wait before it '
                           'switches and also a random switch animation time. '
-                          'Each time the screen is built, each image box gets '
-                          'a random colored border and a less saturated '
-                          'version of it is calculated for dark mode. When you '
-                          'switch to dark mode, it still has the same color '
-                          "hue based on the light theme's random color.\n",
+                          'Each time the screen is built, every image box gets '
+                          'a new random colored border, with good contrast in '
+                          'light theme mode and a less saturated '
+                          'version of same color in dark mode.\n',
                         ),
                         introBottom: Text(
-                          'Every image is colored dynamically to match '
+                          'Each image is colored dynamically to match '
                           'the color of its border. This is done by changing '
-                          'a color text string in the SVG file image data. '
-                          'This demo is only a '
-                          'stress test for Flutter, especially for Web builds. '
+                          'a color text string in the image SVG file. '
+                          'This demo is mostly a stress test for Flutter, '
+                          'especially for Web builds. '
                           'We could make the grid of switching images '
                           'infinite, but this demo stops at $_maxTiles '
                           'images in the grid.\n',
@@ -103,8 +101,8 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                 sliver: SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: breakpoint.columns,
-                    mainAxisSpacing: breakpoint.gutters,
-                    crossAxisSpacing: breakpoint.gutters,
+                    mainAxisSpacing: breakpoint.gutters / 2,
+                    crossAxisSpacing: breakpoint.gutters / 2,
                     childAspectRatio: 1.5,
                   ),
                   delegate: SliverChildBuilderDelegate(
@@ -113,8 +111,8 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                           builder: (BuildContext context, BoxConstraints size) {
                         return RandomImageWidget(
                           imageColor: imageColors[index],
-                          borderRadius: size.maxWidth / 25,
-                          borderWidth: size.maxWidth / 45,
+                          borderRadius: size.maxWidth / 20,
+                          borderWidth: size.maxWidth / 35,
                         );
                       });
                     },
@@ -163,15 +161,13 @@ class RandomImageWidget extends StatelessWidget {
           Radius.circular(borderRadius),
         ),
       ),
-      elevation: 0,
+      shadowColor: Colors.transparent,
+      elevation: isLight ? 0.5 : 2,
       child: Container(
         decoration: BoxDecoration(
-          color: isLight
-              ? imageColor[300]!.withAlpha(0x33)
-              : imageColor[50]!.withAlpha(0xAA),
           border: Border.all(
               width: borderWidth,
-              color: isLight ? imageColor[700]! : imageColor[400]!),
+              color: isLight ? imageColor[700]! : imageColor[200]!),
           borderRadius: BorderRadius.all(
             Radius.circular(borderRadius),
           ),
@@ -180,7 +176,7 @@ class RandomImageWidget extends StatelessWidget {
         child: SvgAssetImageSwitcher(
           assetNames: AppImages.allImages,
           color: isLight ? imageColor[700]! : imageColor[400]!,
-          padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+          padding: const EdgeInsets.fromLTRB(4, 8, 4, 4),
           fit: BoxFit.contain,
           switchType: ImageSwitchType.random,
           showDuration: Duration(milliseconds: 2000 + random.nextInt(2000)),
