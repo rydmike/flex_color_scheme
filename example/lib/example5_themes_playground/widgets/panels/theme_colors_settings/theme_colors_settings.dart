@@ -111,27 +111,6 @@ class ThemeColorsSettings extends StatelessWidget {
               "scheme colors are used to define the effective theme's "
               'ColorScheme.'),
         ),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Show scheme input color values'),
-          subtitle: const Text(
-              'Turn ON this option to show the FlexColorScheme scheme '
-              'input color values. This shows the used color values '
-              'before any input modifiers are used on them. This includes seed '
-              'generation, swapping legacy colors, swapping primary and '
-              'secondary colors, seed generation, input color limiters, '
-              'computed dark theme and using M3 error colors on legacy '
-              'M2 schemes. In older versions the scheme input color '
-              'values were always shown. This may be confusing and they '
-              'are now hidden by default. Showing them may be useful to '
-              'understand how the scheme defined input colors are '
-              'being modified by input modifiers, but it is cluttered. '
-              'If ON, scheme input color values show the colors before '
-              'input modifiers, and the surrounding '
-              "color is the effective theme's ColorScheme."),
-          value: controller.showSchemeInput,
-          onChanged: controller.setShowSchemeInput,
-        ),
         UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTile(
           title: const Text('Use Material 3 error colors'),
@@ -191,9 +170,9 @@ class ThemeColorsSettings extends StatelessWidget {
           ),
         Visibility(
           visible: !isLight,
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
+          // maintainSize: true,
+          // maintainAnimation: true,
+          // maintainState: true,
           child: Column(
             children: <Widget>[
               SwitchListTile(
@@ -257,6 +236,27 @@ class ThemeColorsSettings extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        SwitchListTile(
+          dense: true,
+          title: const Text('Show scheme input color values'),
+          subtitle: const Text(
+              'Turn ON this option to show the FlexColorScheme scheme '
+              'input color values. This shows the used color values '
+              'before any input modifiers are used on them. This includes seed '
+              'generation, swapping legacy colors, swapping primary and '
+              'secondary colors, seed generation, input color limiters, '
+              'computed dark theme and using M3 error colors on legacy '
+              'M2 schemes. In older versions the scheme input color '
+              'values were always shown. This may be confusing and they '
+              'are now hidden by default. Showing them may be useful to '
+              'understand how the scheme defined input colors are '
+              'being modified by input modifiers, but it is cluttered. '
+              'If ON, scheme input color values show the colors before '
+              'input modifiers, and the surrounding '
+              "color is the effective theme's ColorScheme."),
+          value: controller.showSchemeInput,
+          onChanged: controller.setShowSchemeInput,
         ),
         const SizedBox(height: 8),
       ],
