@@ -49,7 +49,7 @@ dependencies:
 
   # SVG file drawing, used for Undraw Asset Images (by dnfield.dev).
   # https://pub.dev/packages/flutter_svg (by dnfield.dev)
-  flutter_svg: ^2.0.0
+  flutter_svg: ^1.1.6
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts

@@ -961,8 +961,8 @@ class ShopAbout extends StatelessWidget {
   }
 }
 
-// This [showAppAboutDialog] function is based on the [AboutDialog] example
-// that exist(ed) in the Flutter Gallery App.
+/// This [showAppAboutDialog] function is based on the [AboutDialog] example
+/// that exist(ed) in the Flutter Gallery App.
 void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
