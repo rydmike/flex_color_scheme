@@ -191,6 +191,7 @@ enum SchemeColor {
 ///   [floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
+/// * [MenuButtonThemeData] for [MenuButton] via [menuButtonTheme].
 /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
 ///   [menuTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
@@ -2641,7 +2642,7 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Placeholder for more new M3 sub-themes to be added.
+  // TODO(rydmike): Finalize MenuButtonTheme.
   //
   /// An opinionated [MenuButtonThemeData] theme.
   static MenuButtonThemeData menuButtonTheme({
