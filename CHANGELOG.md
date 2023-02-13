@@ -82,6 +82,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added M3/M2, FCS ON/OFF, Sub themes ON/OFF to the custom side drawer/menu/rail.
 - Added possibility to toggle between standard and compact UI mode. The compact mode is the same view mode as the smallest responsive view, with the addition that the switches under the horizontal theme color selector are also removed. When the compact-mode is on, it is used in all responsive sizes. The compact mode gives a larger view area for app controls. This is also useful on smaller desktops. In the compact-mode, settings controlled by the removed switches can be operated via the new optional controls on the rail/side menu. 
 - Added device selection capability to device theme simulator.
+- Added theming of indicator border radius to `NavigationDrawer` to panel **Navigation Drawer**.  
+- Added theming of indicator border radius to `NavigationBar` to panel **Navigation Bar**.
+- Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 

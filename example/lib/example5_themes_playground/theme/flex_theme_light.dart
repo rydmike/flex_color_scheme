@@ -358,6 +358,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             navigationBarIndicatorSchemeColor:
                 controller.navBarIndicatorSchemeColor,
             navigationBarIndicatorOpacity: controller.navBarIndicatorOpacity,
+            navigationBarIndicatorRadius:
+                controller.navBarIndicatorBorderRadius,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
             navigationBarOpacity: controller.navBarOpacity,
@@ -380,6 +382,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             navigationRailIndicatorSchemeColor:
                 controller.navRailIndicatorSchemeColor,
             navigationRailIndicatorOpacity: controller.navRailIndicatorOpacity,
+            navigationRailIndicatorRadius:
+                controller.navRailIndicatorBorderRadius,
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,

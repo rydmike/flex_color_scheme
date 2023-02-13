@@ -2976,6 +2976,14 @@ class FlexSubThemes {
     /// its M2 mode.
     final int? indicatorAlpha,
 
+    /// Border radius of the selection indicator on the [NavigationBar].
+    ///
+    /// If not defined, defaults to [StadiumBorder].
+    ///
+    /// FCS default, follows the Material M3 guide:
+    /// https://m3.material.io/components/navigation-bar/specs
+    final double? indicatorRadius,
+
     /// The icon color alpha blend value for unselected items, used on icon when
     /// [mutedUnselectedIcon] is true and on label when
     /// [mutedUnselectedLabel] is true.
@@ -3120,6 +3128,13 @@ class FlexSubThemes {
               ? null
               : indicatorColor
           : indicatorColor,
+      indicatorShape: indicatorRadius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(indicatorRadius),
+              ),
+            ),
       labelTextStyle: useDefaultTextStyle
           ? null
           : MaterialStateProperty.resolveWith<TextStyle>(
@@ -3192,8 +3207,7 @@ class FlexSubThemes {
 
     /// Border radius of the selection indicator on the [NavigationDrawer].
     ///
-    /// If not defined and [defaultRadius] is undefined, defaults to
-    /// [StadiumBorder].
+    /// If not defined, defaults to [StadiumBorder].
     ///
     /// FCS default, follows the Material M3 guide:
     /// https://m3.material.io/components/navigation-drawer/specs
@@ -3516,6 +3530,16 @@ class FlexSubThemes {
     /// needed later.
     final int? indicatorAlpha,
 
+    /// Border radius of the selection indicator on the [NavigationBar].
+    ///
+    /// In M2 mode and when rail is extended, the indicator is always circular.
+    ///
+    /// If not defined, defaults to [StadiumBorder].
+    ///
+    /// FCS default, follows the Material M3 guide:
+    /// https://m3.material.io/components/navigation-rail/specs.
+    final double? indicatorRadius,
+
     /// The icon color alpha blend value for unselected items, used on icon when
     /// [mutedUnselectedIcon] is true and on label when
     /// [mutedUnselectedLabel] is true.
@@ -3705,11 +3729,19 @@ class FlexSubThemes {
             ),
       groupAlignment: groupAlignment,
       labelType: labelType,
+      // TODO(rydmike): This hack used to be needed, but is it still F3.7?
       // Logic to avoid SDKs over eager asserts and get same result.
       useIndicator: true,
       indicatorColor: effectiveUseIndicator
           ? effectiveIndicatorColor
           : Colors.black.withAlpha(0x00),
+      indicatorShape: indicatorRadius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(indicatorRadius),
+              ),
+            ),
     );
   }
 

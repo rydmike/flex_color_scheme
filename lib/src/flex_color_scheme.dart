@@ -6719,6 +6719,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.navigationBarElevation,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
+              indicatorRadius: subTheme.navigationBarIndicatorRadius,
               indicatorAlpha: subTheme.navigationBarIndicatorOpacity != null
                   ? Color.getAlphaFromOpacity(
                       subTheme.navigationBarIndicatorOpacity!)
@@ -6786,6 +6787,7 @@ class FlexColorScheme with Diagnosticable {
                   ? Color.getAlphaFromOpacity(
                       subTheme.navigationRailIndicatorOpacity!)
                   : null,
+              indicatorRadius: subTheme.navigationRailIndicatorRadius,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,

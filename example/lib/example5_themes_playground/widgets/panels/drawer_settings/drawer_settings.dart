@@ -22,14 +22,6 @@ class DrawerSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
-    final String drawerIndicatorRadiusDefaultLabel =
-        controller.drawerIndicatorBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default stadium'
-            : controller.drawerIndicatorBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
-                : '';
 
     final double derivedIndicatorWidth =
         (controller.drawerWidth ?? (useMaterial3 ? 360 : 304)) - 2 * 12;
@@ -44,9 +36,7 @@ class DrawerSettings extends StatelessWidget {
           subtitle: Text('Flutter SDK default background is '
               'colorScheme.background for Drawer in M2, but '
               'colorScheme.surface in M3. FlexColorScheme component '
-              'sub-themes use surface as default for both modes. The '
-              'NavigationDrawer will get more quick theming settings, '
-              'similar to NavigationRail in a future FCS version.'),
+              'sub-themes use surface as default for both modes.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
@@ -303,7 +293,7 @@ class DrawerSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerIndicatorBorderRadius == null ||
                         (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                    ? drawerIndicatorRadiusDefaultLabel
+                    ? 'default (stadium)'
                     : (controller.drawerIndicatorBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
@@ -331,7 +321,7 @@ class DrawerSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.drawerIndicatorBorderRadius == null ||
                               (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                          ? drawerIndicatorRadiusDefaultLabel
+                          ? 'default (stadium)'
                           : (controller.drawerIndicatorBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')

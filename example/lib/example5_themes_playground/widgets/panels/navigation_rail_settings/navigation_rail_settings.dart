@@ -343,6 +343,57 @@ class NavigationRailSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navRailIndicatorBorderRadius == null ||
+                        (controller.navRailIndicatorBorderRadius ?? -1) < 0
+                    ? 'default (stadium)'
+                    : (controller.navRailIndicatorBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default (stadium)',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navRailIndicatorBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setNavRailIndicatorBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.navRailIndicatorBorderRadius == null ||
+                              (controller.navRailIndicatorBorderRadius ?? -1) <
+                                  0
+                          ? 'default (stadium)'
+                          : (controller.navRailIndicatorBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default (stadium)',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         NavigationRailLabelBehaviorListTile(controller: controller),
         NavigationRailShowcase(
           height: 700,

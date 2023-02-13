@@ -1060,6 +1060,7 @@ class ThemeController with ChangeNotifier {
     setNavBarHeight(null, false);
     setNavBarIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavBarIndicatorOpacity(1, false);
+    setNavBarIndicatorBorderRadius(null, false);
     setNavBarMuteUnselected(false, false);
     setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
     setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
@@ -1076,6 +1077,7 @@ class ThemeController with ChangeNotifier {
     setNavigationRailElevation(null, false);
     setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavRailIndicatorOpacity(1, false);
+    setNavRailIndicatorBorderRadius(null, false);
     setNavRailMuteUnselected(false, false);
     setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
     setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);

@@ -847,6 +847,11 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationBarIndicatorOpacity: ${controller.navBarIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
+  final String navigationBarIndicatorRadius = controller
+              .navBarIndicatorBorderRadius !=
+          null
+      ? '    navigationBarIndicatorRadius: ${controller.navBarIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor !=
           null
@@ -921,6 +926,11 @@ String generateThemeDartCode(ThemeController controller) {
               controller.navRailUseIndicator &&
               controller.useFlutterDefaults)
       ? '    navigationRailIndicatorOpacity: ${controller.navRailIndicatorOpacity!.toStringAsFixed(2)},\n'
+      : '';
+  final String navigationRailIndicatorRadius = controller
+              .navRailIndicatorBorderRadius !=
+          null
+      ? '    navigationRailIndicatorRadius: ${controller.navRailIndicatorBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String navigationRailBackgroundSchemeColor = controller
               .navRailBackgroundSchemeColor !=
@@ -1094,6 +1104,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarIndicatorSchemeColor'
           '$navigationBarIndicatorOpacity'
+          '$navigationBarIndicatorRadius'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarElevation'
@@ -1109,6 +1120,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
           '$navigationRailIndicatorOpacity'
+          '$navigationRailIndicatorRadius'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
@@ -1265,6 +1277,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarIndicatorSchemeColor'
           '$navigationBarIndicatorOpacity'
+          '$navigationBarIndicatorRadius'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
           '$navigationBarElevation'
@@ -1280,6 +1293,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
           '$navigationRailIndicatorOpacity'
+          '$navigationRailIndicatorRadius'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
