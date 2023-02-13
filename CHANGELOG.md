@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 12, 2023**
+**Feb 13, 2023**
 
 **FIX**
 
@@ -85,9 +85,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- MUST DO: Resolve End Drawer, show it on screen to see.
+- MUST DO: Finalize all the menu theming options.
+- MUST DO: Resolve EndDrawer directionality issue, but how without context?
 - MUST DO: Review SnackBar theme in M3, add button color. tweak background, use default in M3?  
-- MAYBE ADD: Some initial theming options for the new MenuBar theme.
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.
 - MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily

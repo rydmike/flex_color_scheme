@@ -6078,10 +6078,10 @@ class FlexColorScheme with Diagnosticable {
                 ? kBottomSheetModalElevation
                 : kBottomSheetModalElevationM2);
 
-    // Popupmenu background Color and elevation.
-    final double popupMenuElevation = subTheme.popupMenuElevation ??
+    // Popupmenu, ManuAnchor, DropDown menu background Color and elevation.
+    final double menuElevation = subTheme.popupMenuElevation ??
         (useMaterial3 ? kPopupMenuElevation : kPopupMenuElevationFCS);
-    final Color? popupMenuColor = subTheme.popupMenuOpacity == null
+    final Color? menuBackgroundColor = subTheme.popupMenuOpacity == null
         ? subTheme.popupMenuSchemeColor == null
             ? null
             : FlexSubThemes.schemeColor(
@@ -6651,10 +6651,31 @@ class FlexColorScheme with Diagnosticable {
       listTileTheme: useMaterial3
           ? const ListTileThemeData(tileColor: Colors.transparent)
           : null,
-      //
-      // menuBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      // menuButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      //
+
+      // TODO(rydmike): Finalize MenuBarTheme for v7.
+      // MenuBar theme.
+      menuBarTheme: useSubThemes
+          ? FlexSubThemes.menuBarTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.popupMenuSchemeColor,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
+              shadowColor: Colors.transparent,
+              radius: 0,
+              elevation: 10,
+            )
+          : null,
+
+      menuButtonTheme: useSubThemes
+          ? FlexSubThemes.menuButtonTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.popupMenuSchemeColor,
+              // surfaceTintColor: removeTint ? Colors.transparent : null,
+              // shadowColor: Colors.transparent,
+              // radius: 0,
+              // elevation: 10,
+            )
+          : null,
+
       // MenuTheme theme.
       // Used for menu container by MenuBar, MenuAnchor and DropDownMenu.
       menuTheme: useSubThemes
@@ -6663,8 +6684,8 @@ class FlexColorScheme with Diagnosticable {
                   (subTheme.defaultRadius == null
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: popupMenuElevation,
-              backgroundColor: popupMenuColor,
+              elevation: menuElevation,
+              backgroundColor: menuBackgroundColor,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
@@ -6791,15 +6812,20 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
+      // TODO(rydmike): Make foreground color auto contrast with background.
       // PopupMenuButton Theme.
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(
+              colorScheme: colorScheme,
               radius: subTheme.popupMenuRadius ??
                   (subTheme.defaultRadius == null
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: popupMenuElevation,
-              color: popupMenuColor,
+              textStyle: effectiveTextTheme.labelLarge,
+              elevation: menuElevation,
+              color: menuBackgroundColor,
+              backgroundSchemeColor: subTheme.popupMenuSchemeColor,
+              foregroundSchemeColor: SchemeColor.surface,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,

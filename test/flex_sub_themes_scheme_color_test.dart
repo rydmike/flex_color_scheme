@@ -410,9 +410,9 @@ void main() {
     });
     test(
         'FST.sCP-24: GIVEN SchemeColor.outlineVariant '
-        'EXPECT background color to be returned', () {
+        'EXPECT onBackground color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.outlineVariant, scheme),
-          equals(background));
+          equals(onBackground));
     });
     test(
         'FST.sCP-25: GIVEN SchemeColor.shadow '
@@ -441,9 +441,9 @@ void main() {
     });
     test(
         'FST.sCP-29: GIVEN SchemeColor.inversePrimary '
-        'EXPECT primary color to be returned', () {
+        'EXPECT onSurface color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.inversePrimary, scheme),
-          equals(primary));
+          equals(onSurface));
     });
     test(
         'FST.sCP-30: GIVEN SchemeColor.surfaceTint '

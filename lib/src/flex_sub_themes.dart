@@ -190,6 +190,7 @@ enum SchemeColor {
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
+/// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
 /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
 ///   [menuTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
@@ -396,7 +397,7 @@ class FlexSubThemes {
       case SchemeColor.outline:
         return colorScheme.background;
       case SchemeColor.outlineVariant:
-        return colorScheme.background;
+        return colorScheme.onBackground;
       case SchemeColor.shadow:
         return colorScheme.background;
       case SchemeColor.scrim:
@@ -406,27 +407,9 @@ class FlexSubThemes {
       case SchemeColor.onInverseSurface:
         return colorScheme.inverseSurface;
       case SchemeColor.inversePrimary:
-        return colorScheme.primary;
+        return colorScheme.onSurface;
     }
   }
-
-  // TODO(rydmike): Placeholder for more new M3 sub-themes to be added.
-  //
-  // /// An opinionated [MenuBarThemeData] theme.
-  // static MenuBarThemeData menuBarTheme({
-  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
-  //   required final ColorScheme colorScheme,
-  // }) {
-  //   return MenuBarThemeData();
-  // }
-  //
-  // /// An opinionated [MenuButtonThemeData] theme.
-  // static MenuButtonThemeData menuButtonTheme({
-  // // Typically the same [ColorScheme] that is also used for your [ThemeData].
-  //   required final ColorScheme colorScheme,
-  // }) {
-  //   return MenuButtonThemeData();
-  // }
 
   /// An opinionated [AppBarTheme] theme.
   ///
@@ -2601,6 +2584,121 @@ class FlexSubThemes {
     );
   }
 
+  /// An opinionated [MenuBarThemeData] theme.
+  ///
+  /// Only offers scheme color and elevation theming at the moment.
+  static MenuBarThemeData menuBarTheme({
+    // Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the MenuBar background color.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// The shadow color of the MenuBar's [Material].
+    ///
+    /// The material's elevation shadow can be difficult to see for dark themes,
+    /// so by default the menu classes add a semi-transparent overlay to
+    /// indicate elevation. See [ThemeData.applyElevationOverlayColor].
+    final Color? shadowColor,
+
+    /// The surface tint color of the MnuBar's [Material].
+    ///
+    /// See [Material.surfaceTintColor] for more details.
+    final Color? surfaceTintColor,
+
+    /// The elevation of the MenuBar's [Material].
+    final double? elevation,
+
+    /// MenuBar corner radius.
+    ///
+    /// If not defined, defaults to [kMenuRadius] = 4, M3 specification.
+    final double? radius,
+  }) {
+    final Color surface =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onSurface = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    return MenuBarThemeData(
+      style: MenuStyle(
+        backgroundColor: MaterialStatePropertyAll<Color?>(surface),
+        surfaceTintColor: surfaceTintColor != null
+            ? MaterialStatePropertyAll<Color?>(surfaceTintColor)
+            : null,
+        shadowColor: shadowColor != null
+            ? MaterialStatePropertyAll<Color?>(shadowColor)
+            : null,
+        elevation: MaterialStatePropertyAll<double?>(elevation),
+        shape: MaterialStatePropertyAll<OutlinedBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(radius ?? kMenuRadius),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // TODO(rydmike): Placeholder for more new M3 sub-themes to be added.
+  //
+  /// An opinionated [MenuButtonThemeData] theme.
+  static MenuButtonThemeData menuButtonTheme({
+    // Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the MenuButton background color.
+    final SchemeColor? backgroundSchemeColor,
+  }) {
+    final Color surface =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onSurface = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    return MenuButtonThemeData(
+      style: ButtonStyle(
+        // Foreground color, use same for icon.
+        foregroundColor: MaterialStateProperty.resolveWith(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return onSurface.withOpacity(0.38);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return onSurface;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return onSurface;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return onSurface;
+            }
+            return onSurface;
+          },
+        ),
+        // icon foreground color.
+        iconColor: MaterialStateProperty.resolveWith(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return onSurface.withOpacity(0.38);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              return onSurface;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return onSurface;
+            }
+            if (states.contains(MaterialState.focused)) {
+              return onSurface;
+            }
+            return onSurface;
+          },
+        ),
+      ),
+    );
+  }
+
   /// An opinionated [MenuThemeData] theme.
   ///
   /// This theme is used by the menu for the [DropDownMenu], [MenuBar] and
@@ -3891,6 +3989,42 @@ class FlexSubThemes {
   /// also stay below the usable max rounding automatically at higher global
   /// border radius values.
   static PopupMenuThemeData popupMenuTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    final ColorScheme? colorScheme,
+
+    /// Defines which [Theme] based [ColorScheme] based background color
+    /// of [NavigationDrawer].
+    ///
+    /// If not defined will default to [Drawer] theme
+    /// background color. If it is not defined, then Flutter default uses
+    /// uses surface color as default in M3, and background in M2.
+    /// FCS uses surface in both modes.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Defines which [Theme] based [ColorScheme] based background color
+    /// of [NavigationDrawer].
+    ///
+    /// If not defined will default to [Drawer] theme
+    /// background color. If it is not defined, then Flutter default uses
+    /// uses surface color as default in M3, and background in M2.
+    /// FCS uses surface in both modes.
+    final SchemeColor? foregroundSchemeColor,
+
+    /// The background color of the popup menu.
+    ///
+    /// If not defined, and [colorScheme] is undefined, then if
+    /// [useMaterial3] is:
+    /// - false : defaults to theme.cardColor.
+    /// - true  : defaults to theme.colorScheme.surface.
+    /// Usually they are the same.
+    final Color? color,
+
+    /// The TextStyle of the labels.
+    ///
+    /// You would pass in Theme.of(context).textTheme.labelLarge
+    /// for correct M3 style.
+    final TextStyle? textStyle,
+
     /// Popup menu corner radius.
     ///
     /// Defaults to [kMenuRadius] = 4, M3 specification.
@@ -3906,25 +4040,43 @@ class FlexSubThemes {
 
     /// The color used as an overlay on [color] of the popup menu.
     final Color? surfaceTintColor,
+  }) {
+    // Get selected background color, defaults to surface.
+    final Color? backgroundColor = color ??
+        (colorScheme != null && backgroundSchemeColor != null
+            ? schemeColor(backgroundSchemeColor, colorScheme)
+            : null);
+    final Color? onBackgroundColor =
+        colorScheme != null && backgroundSchemeColor != null
+            ? schemeColorPair(backgroundSchemeColor, colorScheme)
+            : null;
 
-    /// The background color of the popup menu.
-    ///
-    /// If not defined, then if [useMaterial3] is:
-    /// - false : defaults to theme.cardColor.
-    /// - true  : defaults to theme.colorScheme.surface.
-    /// Usually they are the same.
-    final Color? color,
-  }) =>
-      PopupMenuThemeData(
-        elevation: elevation,
-        color: color,
-        surfaceTintColor: surfaceTintColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kMenuRadius),
-          ),
+    final Color? foregroundColor =
+        colorScheme != null && foregroundSchemeColor != null
+            ? schemeColor(foregroundSchemeColor, colorScheme)
+            : onBackgroundColor;
+
+    return PopupMenuThemeData(
+      elevation: elevation,
+      color: backgroundColor,
+      surfaceTintColor: surfaceTintColor,
+      textStyle: textStyle?.apply(color: foregroundColor),
+      labelTextStyle: textStyle != null
+          ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return textStyle.apply(
+                    color: foregroundColor?.withOpacity(0.38));
+              }
+              return textStyle.apply(color: foregroundColor);
+            })
+          : null,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kMenuRadius),
         ),
-      );
+      ),
+    );
+  }
 
   /// An opinionated [RadioThemeData] theme.
   ///
@@ -4304,6 +4456,13 @@ class FlexSubThemes {
     /// [backgroundColor] will be used, which may be null too and SnackBar then
     /// falls back Flutter defaults.
     final SchemeColor? backgroundSchemeColor,
+
+    // TODO(rydmike): Implement action scheme color support and default.
+    /// Overrides the default value for [SnackBarAction.textColor].
+    ///
+    /// If null, [SnackBarAction] defaults to [ColorScheme.secondary] of
+    /// [ThemeData.colorScheme] .
+    final SchemeColor? actionTextSchemeColor,
   }) {
     final Color? background =
         (colorScheme == null || backgroundSchemeColor == null)

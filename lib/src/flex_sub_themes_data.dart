@@ -81,6 +81,7 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.floatingActionButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via
 ///   [FlexSubThemes.inputDecorationTheme].
+/// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
 /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
 ///   [FlexSubThemes.menuTheme].
 /// * [ListTileThemeData] for [ListTile] via
