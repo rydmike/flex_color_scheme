@@ -6743,8 +6743,7 @@ class FlexColorScheme with Diagnosticable {
                               ? kNavigationDrawerM3Width
                               : kNavigationDrawerM2Width)) -
                       2 * kNavigationDrawerIndicatorPadding),
-              indicatorBorderRadius: subTheme.drawerIndicatorBorderRadius ??
-                  subTheme.defaultRadius,
+              indicatorRadius: subTheme.drawerIndicatorRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
               textStyle: effectiveTextTheme.bodyLarge,
@@ -6821,7 +6820,7 @@ class FlexColorScheme with Diagnosticable {
                   (subTheme.defaultRadius == null
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
-              textStyle: effectiveTextTheme.labelLarge,
+              // textStyle: effectiveTextTheme.labelLarge,
               elevation: menuElevation,
               color: menuBackgroundColor,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,

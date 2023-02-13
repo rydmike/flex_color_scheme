@@ -226,6 +226,10 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuSchemeColor,
     this.popupMenuOpacity,
     //
+    this.menuBarRadius,
+    this.menuBarElevation,
+    this.menuBarShadowColor,
+    //
     this.tooltipRadius,
     this.tooltipWaitDuration,
     this.tooltipShowDuration,
@@ -240,6 +244,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
+    this.snackBarActionSchemeColor,
     //
     this.appBarBackgroundSchemeColor,
     this.appBarCenterTitle,
@@ -254,7 +259,7 @@ class FlexSubThemesData with Diagnosticable {
     this.drawerElevation,
     this.drawerBackgroundSchemeColor,
     this.drawerWidth,
-    this.drawerIndicatorBorderRadius,
+    this.drawerIndicatorRadius,
     this.drawerIndicatorWidth,
     this.drawerIndicatorSchemeColor,
     this.drawerIndicatorOpacity,
@@ -297,6 +302,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarMutedUnselectedIcon = true,
     this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
+    this.navigationBarIndicatorRadius,
     this.navigationBarBackgroundSchemeColor,
     this.navigationBarOpacity,
     this.navigationBarElevation,
@@ -317,6 +323,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailUseIndicator = true,
     this.navigationRailIndicatorSchemeColor,
     this.navigationRailIndicatorOpacity,
+    this.navigationRailIndicatorRadius,
     this.navigationRailBackgroundSchemeColor,
     this.navigationRailOpacity,
     this.navigationRailElevation,
@@ -679,27 +686,45 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius used on all widgets when [FlexColorScheme] use its
   /// [FlexSubThemesData] to configure sub-themes with [FlexSubThemes].
   ///
-  /// These widgets will get their shape border radius from [defaultRadius]
-  /// if it is defined:
+  /// These widgets will get their container shape border radius
+  /// from [defaultRadius] if it is defined:
   ///
-  /// * [TextButton]
-  /// * [ElevatedButton]
-  /// * [OutlinedButton]
-  /// * Older deprecated buttons using `ButtonThemeData`
-  /// * [ToggleButtons]
-  /// * [FloatingActionButton]
-  /// * [InputDecoration]
+  /// * [BottomSheet]
   /// * [Card]
   /// * [Chip]
-  /// * [PopupMenuButton]
   /// * [Dialog]
+  /// * [Drawer]
+  /// * [DropdownMenu]
+  /// * [ElevatedButton]
+  /// * [FloatingActionButton]
+  /// * [InputDecoration]
+  /// * [MenuAnchor]
+  /// * [OutlinedButton]
+  /// * [PopupMenuButton]
+  /// * [SegmentedButton]
+  /// * [TextButton]
+  /// * [ToggleButtons]
   /// * [TimePickerDialog]
-  /// * [BottomSheet]
+  /// * Older deprecated buttons using `ButtonThemeData`
+  ///
+  /// For clarity the following small, or element roundings are not affect
+  /// by [defaultRadius] value, but may be set via own themes or properties.
+  ///
+  /// * Indicator on [NavigationBar], bu can be set via
+  ///   [navigationBarIndicatorRadius].
+  /// * Indicator on [NavigationDrawer], but can be set via
+  ///   [drawerIndicatorRadius].
+  /// * Indicator on [NavigationRail], can be set via
+  ///   [navigationRailIndicatorRadius].
+  /// * Border radius on [MenuBar] container, can be set via
+  ///   [menuBarRadius].
+  /// * Tooltip container shape.
+  /// * Rounding on scrollbar edges.
   ///
   /// Defaults to null.
   ///
   /// When it is null, the sub-themes will use their null default behavior
-  /// that follow the Material 3 standard for all widgets it includes.
+  /// that follow the Material 3 standard for widgets it includes.
   ///
   /// When you set [defaultRadius] to a value, it will override the defaults
   /// with this global default. You can still set and lock each individual
@@ -1509,6 +1534,26 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, produced result is same as 1, fully opaque.
   final double? popupMenuOpacity;
 
+  /// The border radius of the [MenuBar] container.
+  ///
+  /// If not defined, defaults to 4 via Flutter SDK default.
+  final double? menuBarRadius;
+
+  /// The elevation of the [MenuBar] container.
+  ///
+  /// If not defined, defaults to 3 via Flutter SDK default.
+  ///
+  /// Based on designs shown visually in the M3 guide, it should probably
+  /// not be elevated by default in M3.
+  /// https://m3.material.io/components/menus/guidelines
+  final double? menuBarElevation;
+
+  /// The shadow color of the [MenuBar] container.
+  ///
+  /// If not defined, defaults toe [ColorScheme.shadow] via Flutter SDK
+  /// defaults and the [MenuBar] gets elevation shadow.
+  final Color? menuBarShadowColor;
+
   // TODO(rydmike): Define all default for tooltips, see old FCS style.
   /// Border radius value for [Tooltips].
   ///
@@ -1648,6 +1693,13 @@ class FlexSubThemesData with Diagnosticable {
   /// which you can assign by selecting that as its property here too.
   final SchemeColor? snackBarBackgroundSchemeColor;
 
+// TODO(rydmike): Review SnackBar the defaults.
+  /// Defines which [Theme] based [ColorScheme] based color the SnackBar actions
+  /// use as their color.
+  ///
+  /// If not defined default to: TBD.
+  final SchemeColor? snackBarActionSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
   /// background uses.
   ///
@@ -1760,14 +1812,13 @@ class FlexSubThemesData with Diagnosticable {
   /// from the M3 padding spec of 12dp around both sides of the indicator.
   final double? drawerIndicatorWidth;
 
-  /// Border radius value for [BottomSheet].
+  /// Border radius of the selection indicator on the [NavigationDrawer].
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [StadiumBorder].
+  /// If not defined, defaults to [StadiumBorder].
   ///
   /// FCS default, follows the Material M3 guide:
   /// https://m3.material.io/components/navigation-drawer/specs
-  final double? drawerIndicatorBorderRadius;
+  final double? drawerIndicatorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its background color on the selection indicator.
@@ -2165,6 +2216,14 @@ class FlexSubThemesData with Diagnosticable {
   /// moves towards M3 designs. It might become 1.0.
   final double? navigationBarIndicatorOpacity;
 
+  /// Border radius of the selection indicator on the [NavigationBar].
+  ///
+  /// If not defined, defaults to [StadiumBorder].
+  ///
+  /// FCS default, follows the Material M3 guide:
+  /// https://m3.material.io/components/navigation-bar/specs.
+  final double? navigationBarIndicatorRadius;
+
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationBar].
   ///
@@ -2361,7 +2420,7 @@ class FlexSubThemesData with Diagnosticable {
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If undefined, defaults to [SchemeColor.primary], additionally
-  /// a default [navigationBarIndicatorOpacity] is applied.
+  /// a default [navigationRailIndicatorOpacity] is applied.
   ///
   /// If [useFlutterDefaults] true, and this property is undefined,
   /// the effective background color will also be [ColorScheme.secondary]
@@ -2379,6 +2438,14 @@ class FlexSubThemesData with Diagnosticable {
   /// The default value of this property may be adjusted later as Flutter
   /// moves towards M3 designs. It might become 1.0.
   final double? navigationRailIndicatorOpacity;
+
+  /// Border radius of the selection indicator on the [NavigationRail].
+  ///
+  /// If not defined, defaults to [StadiumBorder].
+  ///
+  /// FCS default, follows the Material M3 guide:
+  /// https://m3.material.io/components/navigation-rail/specs.
+  final double? navigationRailIndicatorRadius;
 
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationRail].
@@ -2554,6 +2621,10 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? popupMenuSchemeColor,
     final double? popupMenuOpacity,
     //
+    final double? menuBarRadius,
+    final double? menuBarElevation,
+    final Color? menuBarShadowColor,
+    //
     final double? tooltipRadius,
     final Duration? tooltipWaitDuration,
     final Duration? tooltipShowDuration,
@@ -2568,6 +2639,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
+    final SchemeColor? snackBarActionSchemeColor,
     //
     final SchemeColor? appBarBackgroundSchemeColor,
     final bool? appBarCenterTitle,
@@ -2582,7 +2654,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? drawerBackgroundSchemeColor,
     final double? drawerWidth,
     final double? drawerIndicatorWidth,
-    final double? drawerIndicatorBorderRadius,
+    final double? drawerIndicatorRadius,
     final SchemeColor? drawerIndicatorSchemeColor,
     final double? drawerIndicatorOpacity,
     //
@@ -2625,6 +2697,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? navigationBarMutedUnselectedIcon,
     final SchemeColor? navigationBarIndicatorSchemeColor,
     final double? navigationBarIndicatorOpacity,
+    final double? navigationBarIndicatorRadius,
     final SchemeColor? navigationBarBackgroundSchemeColor,
     final double? navigationBarOpacity,
     final double? navigationBarElevation,
@@ -2645,6 +2718,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? navigationRailUseIndicator,
     final SchemeColor? navigationRailIndicatorSchemeColor,
     final double? navigationRailIndicatorOpacity,
+    final double? navigationRailIndicatorRadius,
     final SchemeColor? navigationRailBackgroundSchemeColor,
     final double? navigationRailOpacity,
     final double? navigationRailElevation,
@@ -2819,6 +2893,10 @@ class FlexSubThemesData with Diagnosticable {
       popupMenuSchemeColor: popupMenuSchemeColor ?? this.popupMenuSchemeColor,
       popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
       //
+      menuBarRadius: menuBarRadius ?? this.menuBarRadius,
+      menuBarElevation: menuBarElevation ?? this.menuBarElevation,
+      menuBarShadowColor: menuBarShadowColor ?? this.menuBarShadowColor,
+      //
       tooltipRadius: tooltipRadius ?? this.tooltipRadius,
       tooltipWaitDuration: tooltipWaitDuration ?? this.tooltipWaitDuration,
       tooltipShowDuration: tooltipShowDuration ?? this.tooltipShowDuration,
@@ -2828,6 +2906,8 @@ class FlexSubThemesData with Diagnosticable {
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       snackBarBackgroundSchemeColor:
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
+      snackBarActionSchemeColor:
+          snackBarActionSchemeColor ?? this.snackBarActionSchemeColor,
       //
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
@@ -2849,8 +2929,8 @@ class FlexSubThemesData with Diagnosticable {
           drawerBackgroundSchemeColor ?? this.drawerBackgroundSchemeColor,
       drawerWidth: drawerWidth ?? this.drawerWidth,
       drawerIndicatorWidth: drawerIndicatorWidth ?? this.drawerIndicatorWidth,
-      drawerIndicatorBorderRadius:
-          drawerIndicatorBorderRadius ?? this.drawerIndicatorBorderRadius,
+      drawerIndicatorRadius:
+          drawerIndicatorRadius ?? this.drawerIndicatorRadius,
       drawerIndicatorSchemeColor:
           drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
       drawerIndicatorOpacity:
@@ -2945,6 +3025,8 @@ class FlexSubThemesData with Diagnosticable {
           this.navigationBarIndicatorSchemeColor,
       navigationBarIndicatorOpacity:
           navigationBarIndicatorOpacity ?? this.navigationBarIndicatorOpacity,
+      navigationBarIndicatorRadius:
+          navigationBarIndicatorRadius ?? this.navigationBarIndicatorRadius,
       navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
           this.navigationBarBackgroundSchemeColor,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
@@ -2986,6 +3068,8 @@ class FlexSubThemesData with Diagnosticable {
           this.navigationRailIndicatorSchemeColor,
       navigationRailIndicatorOpacity:
           navigationRailIndicatorOpacity ?? this.navigationRailIndicatorOpacity,
+      navigationRailIndicatorRadius:
+          navigationRailIndicatorRadius ?? this.navigationRailIndicatorRadius,
       navigationRailBackgroundSchemeColor:
           navigationRailBackgroundSchemeColor ??
               this.navigationRailBackgroundSchemeColor,
@@ -3126,6 +3210,10 @@ class FlexSubThemesData with Diagnosticable {
         other.popupMenuSchemeColor == popupMenuSchemeColor &&
         other.popupMenuOpacity == popupMenuOpacity &&
         //
+        other.menuBarRadius == menuBarRadius &&
+        other.menuBarElevation == menuBarElevation &&
+        other.menuBarShadowColor == menuBarShadowColor &&
+        //
         other.tooltipRadius == tooltipRadius &&
         other.tooltipWaitDuration == tooltipWaitDuration &&
         other.tooltipShowDuration == tooltipShowDuration &&
@@ -3140,6 +3228,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
+        other.snackBarActionSchemeColor == snackBarActionSchemeColor &&
         //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
         other.appBarCenterTitle == appBarCenterTitle &&
@@ -3155,7 +3244,7 @@ class FlexSubThemesData with Diagnosticable {
         other.drawerBackgroundSchemeColor == drawerBackgroundSchemeColor &&
         other.drawerWidth == drawerWidth &&
         other.drawerIndicatorWidth == drawerIndicatorWidth &&
-        other.drawerIndicatorBorderRadius == drawerIndicatorBorderRadius &&
+        other.drawerIndicatorRadius == drawerIndicatorRadius &&
         other.drawerIndicatorSchemeColor == drawerIndicatorSchemeColor &&
         other.drawerIndicatorOpacity == drawerIndicatorOpacity &&
         //
@@ -3223,6 +3312,7 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationBarIndicatorSchemeColor ==
             navigationBarIndicatorSchemeColor &&
         other.navigationBarIndicatorOpacity == navigationBarIndicatorOpacity &&
+        other.navigationBarIndicatorRadius == navigationBarIndicatorRadius &&
         other.navigationBarBackgroundSchemeColor ==
             navigationBarBackgroundSchemeColor &&
         other.navigationBarOpacity == navigationBarOpacity &&
@@ -3256,6 +3346,7 @@ class FlexSubThemesData with Diagnosticable {
             navigationRailIndicatorSchemeColor &&
         other.navigationRailIndicatorOpacity ==
             navigationRailIndicatorOpacity &&
+        other.navigationRailIndicatorRadius == navigationRailIndicatorRadius &&
         other.navigationRailBackgroundSchemeColor ==
             navigationRailBackgroundSchemeColor &&
         other.navigationRailOpacity == navigationRailOpacity &&
@@ -3373,6 +3464,10 @@ class FlexSubThemesData with Diagnosticable {
         popupMenuSchemeColor,
         popupMenuOpacity,
         //
+        menuBarRadius,
+        menuBarElevation,
+        menuBarShadowColor,
+        //
         tooltipRadius,
         tooltipWaitDuration,
         tooltipShowDuration,
@@ -3387,6 +3482,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         snackBarElevation,
         snackBarBackgroundSchemeColor,
+        snackBarActionSchemeColor,
         //
         appBarBackgroundSchemeColor,
         appBarCenterTitle,
@@ -3402,7 +3498,7 @@ class FlexSubThemesData with Diagnosticable {
         drawerBackgroundSchemeColor,
         drawerWidth,
         drawerIndicatorWidth,
-        drawerIndicatorBorderRadius,
+        drawerIndicatorRadius,
         drawerIndicatorSchemeColor,
         drawerIndicatorOpacity,
         //
@@ -3444,6 +3540,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarMutedUnselectedIcon,
         navigationBarIndicatorSchemeColor,
         navigationBarIndicatorOpacity,
+        navigationBarIndicatorRadius,
         navigationBarBackgroundSchemeColor,
         navigationBarOpacity,
         navigationBarElevation,
@@ -3464,6 +3561,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationRailUseIndicator,
         navigationRailIndicatorSchemeColor,
         navigationRailIndicatorOpacity,
+        navigationRailIndicatorRadius,
         navigationRailBackgroundSchemeColor,
         navigationRailOpacity,
         navigationRailElevation,
@@ -3658,6 +3756,11 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
     //
+    properties.add(DiagnosticsProperty<double>('menuBarRadius', menuBarRadius));
+    properties
+        .add(DiagnosticsProperty<double>('menuBarElevation', menuBarElevation));
+    properties.add(ColorProperty('menuBarShadowColor', menuBarShadowColor));
+    //
     properties.add(DiagnosticsProperty<double>('tooltipRadius', tooltipRadius));
     properties.add(DiagnosticsProperty<Duration>(
         'tooltipWaitDuration', tooltipWaitDuration));
@@ -3682,6 +3785,8 @@ class FlexSubThemesData with Diagnosticable {
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
     properties.add(EnumProperty<SchemeColor>(
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'snackBarActionSchemeColor', snackBarActionSchemeColor));
     //
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
@@ -3707,7 +3812,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>(
         'drawerIndicatorWidth', drawerIndicatorWidth));
     properties.add(DiagnosticsProperty<double>(
-        'drawerIndicatorBorderRadius', drawerIndicatorBorderRadius));
+        'drawerIndicatorRadius', drawerIndicatorRadius));
     properties.add(EnumProperty<SchemeColor>(
         'drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<double>(
@@ -3805,7 +3910,9 @@ class FlexSubThemesData with Diagnosticable {
         'navigationBarIndicatorSchemeColor',
         navigationBarIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<double>(
-        'navigationBarHighlightOpacity', navigationBarIndicatorOpacity));
+        'navigationBarIndicatorOpacity', navigationBarIndicatorOpacity));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationBarIndicatorRadius', navigationBarIndicatorRadius));
     properties.add(EnumProperty<SchemeColor>(
         'navigationBarBackgroundSchemeColor',
         navigationBarBackgroundSchemeColor));
@@ -3854,6 +3961,8 @@ class FlexSubThemesData with Diagnosticable {
         navigationRailIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'navigationRailIndicatorOpacity', navigationRailIndicatorOpacity));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailIndicatorRadius', navigationRailIndicatorRadius));
     properties.add(DiagnosticsProperty<SchemeColor>(
         'navigationRailBackgroundSchemeColor',
         navigationRailBackgroundSchemeColor));

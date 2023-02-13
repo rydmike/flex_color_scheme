@@ -729,7 +729,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String drawerIndicatorBorderRadius = controller
               .drawerIndicatorBorderRadius !=
           null
-      ? '    drawerIndicatorBorderRadius: ${controller.drawerIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      ? '    drawerIndicatorRadius: ${controller.drawerIndicatorBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String drawerIndicatorSchemeColor = controller
               .drawerIndicatorSchemeColor !=

@@ -25,9 +25,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - **Added**:  `usedColors` value 7.
 In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColors` now accepts value 7. When used, the `primary`, `secondary` and `tertiary` colors in the used input scheme, are used as defined, but `primaryContainer`, `secondaryContainer` and `tertiaryContainer` are computed. This is FlexColorScheme's own more Material2 version of seed generation of the container colors by using their main colors as input colors. 
 
-- **Added**: `bottomAppBarTheme` to `FlexSubThemes`.
+- **Added**: `bottomAppBarTheme`, `menuBarTheme` and `menuButtonTheme` to `FlexSubThemes`.
   
-- **Added**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorBorderRadius`, `drawerIndicatorSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
+- **Added**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorRadius`, `drawerIndicatorSchemeColor`, `navigationBarIndicatorRadius`, `navigationRailIndicatorRadius`, `menuBarRadius`, `menuBarElevation`, `menuBarShadowColor`, `snackBarActionSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
 
 
 **CHANGE**

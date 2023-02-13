@@ -3167,7 +3167,7 @@ class FlexSubThemes {
 
   /// An opinionated [NavigationDrawerThemeData] theme with simpler API.
   ///
-  /// Can set [indocatorWidth], [indicatorBorderRadius] and
+  /// Can set [indocatorWidth], [indicatorRadius] and
   /// [indicatorSchemeColor]
   static NavigationDrawerThemeData navigationDrawerTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
@@ -3190,14 +3190,14 @@ class FlexSubThemes {
     /// default width of 360dp.
     final double? indicatorWidth,
 
-    /// Border radius value for [BottomSheet].
+    /// Border radius of the selection indicator on the [NavigationDrawer].
     ///
     /// If not defined and [defaultRadius] is undefined, defaults to
     /// [StadiumBorder].
     ///
     /// FCS default, follows the Material M3 guide:
     /// https://m3.material.io/components/navigation-drawer/specs
-    final double? indicatorBorderRadius,
+    final double? indicatorRadius,
 
     /// The TextStyle of the labels.
     ///
@@ -3246,11 +3246,11 @@ class FlexSubThemes {
       indicatorSize: indicatorSize,
       surfaceTintColor: surfaceTintColor,
       shadowColor: shadowColor,
-      indicatorShape: indicatorBorderRadius == null
+      indicatorShape: indicatorRadius == null
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(indicatorBorderRadius),
+                Radius.circular(indicatorRadius),
               ),
             ),
       labelTextStyle:
