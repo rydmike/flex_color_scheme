@@ -390,6 +390,14 @@ class ThemeController with ChangeNotifier {
         Store.keyBottomNavShowUnselectedLabels,
         Store.defaultBottomNavShowUnselectedLabels);
     //
+    // MenuBar and MenuButton SETTINGS.
+    _menuBarRadius = await _themeService.load(
+        Store.keyMenuBarRadius, Store.defaultMenuBarRadius);
+    _menuBarElevation = await _themeService.load(
+        Store.keyMenuBarElevation, Store.defaultMenuBarElevation);
+    _menuBarShadowColor = await _themeService.load(
+        Store.keyMenuBarShadowColor, Store.defaultMenuBarShadowColor);
+    //
     // NavigationBar SETTINGS.
     _navBarBackgroundSchemeColor = await _themeService.load(
         Store.keyNavBarBackgroundSchemeColor,
@@ -581,6 +589,9 @@ class ThemeController with ChangeNotifier {
     // SnackBar SETTINGS.
     _snackBarSchemeColor = await _themeService.load(
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
+    _snackBarActionSchemeColor = await _themeService.load(
+        Store.keySnackBarActionSchemeColor,
+        Store.defaultSnackBarActionSchemeColor);
     //
     // PopupMenuButton SETTINGS.
     _popupMenuSchemeColor = await _themeService.load(
@@ -853,6 +864,11 @@ class ThemeController with ChangeNotifier {
     setBottomNavShowUnselectedLabels(
         Store.defaultBottomNavShowUnselectedLabels, false);
     //
+    // MenuBar and MenuButton SETTINGS.
+    setMenuBarRadius(Store.defaultMenuBarRadius, false);
+    setMenuBarElevation(Store.defaultMenuBarRadius, false);
+    setMenuBarShadowColor(Store.defaultMenuBarShadowColor, false);
+    //
     // NavigationBar SETTINGS.
     setNavBarBackgroundSchemeColor(
         Store.defaultNavBarBackgroundSchemeColor, false);
@@ -966,6 +982,7 @@ class ThemeController with ChangeNotifier {
     //
     // SnackBar SETTINGS.
     setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
+    setSnackBarActionSchemeColor(Store.defaultSnackBarActionSchemeColor, false);
     //
     // PopupMenuButton SETTINGS.
     setPopupMenuSchemeColor(Store.defaultPopupMenuSchemeColor, false);
@@ -2435,6 +2452,36 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyBottomNavShowUnselectedLabels, value));
   }
 
+  // MenuBar and MenuButton SETTINGS.
+  // ===========================================================================
+
+  late double? _menuBarRadius;
+  double? get menuBarRadius => _menuBarRadius;
+  void setMenuBarRadius(double? value, [bool notify = true]) {
+    if (value == _menuBarRadius) return;
+    _menuBarRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuBarRadius, value));
+  }
+
+  late double? _menuBarElevation;
+  double? get menuBarElevation => _menuBarElevation;
+  void setMenuBarElevation(double? value, [bool notify = true]) {
+    if (value == _menuBarElevation) return;
+    _menuBarElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuBarElevation, value));
+  }
+
+  late Color? _menuBarShadowColor;
+  Color? get menuBarShadowColor => _menuBarShadowColor;
+  void setMenuBarShadowColor(Color? value, [bool notify = true]) {
+    if (value == _menuBarShadowColor) return;
+    _menuBarShadowColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuBarShadowColor, value));
+  }
+
   // NavigationBar SETTINGS.
   // ===========================================================================
 
@@ -3118,6 +3165,15 @@ class ThemeController with ChangeNotifier {
     _snackBarSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySnackBarSchemeColor, value));
+  }
+
+  late SchemeColor? _snackBarActionSchemeColor;
+  SchemeColor? get snackBarActionSchemeColor => _snackBarActionSchemeColor;
+  void setSnackBarActionSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _snackBarActionSchemeColor) return;
+    _snackBarActionSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySnackBarActionSchemeColor, value));
   }
 
   late SchemeColor? _popupMenuSchemeColor;

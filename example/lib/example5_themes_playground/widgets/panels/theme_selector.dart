@@ -8,11 +8,11 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import 'theme_colors_settings/input_colors_selector.dart';
 
-// ThemeSelectorHeaderDelegate for our custom SliverPersistentHeader.
-//
-// Used to keep a part of our nested scroll view pinned to the top
-// (in tablet desktop view), and floating on phone and snapping
-// back when scrolling back just a bit.
+/// [ThemeSelectorHeaderDelegate] for our custom SliverPersistentHeader.
+///
+/// Used to keep a part of our nested scroll view pinned to the top
+/// (in tablet desktop view), and floating on phone and snapping
+/// back when scrolling back just a bit.
 class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   ThemeSelectorHeaderDelegate({
     required this.vsync,
@@ -50,12 +50,12 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       FloatingHeaderSnapConfiguration();
 }
 
-// A wrapper for the ThemeSelector when it is used via a persistent header
-// delegate.
-//
-// The wrapper is used to add the correct padding and frosted glass effect
-// when it is used as a SliverPersistentHeaderDelegate in the Masonry grid
-// in a custom scroll view.
+/// A wrapper for the [ThemeSelector] when it is used via a persistent header
+/// delegate.
+///
+/// The wrapper is used to add the correct padding and frosted glass effect
+/// when it is used as a SliverPersistentHeaderDelegate in the Masonry grid
+/// in a custom scroll view.
 class ThemeSelectorDelegateWrapper extends StatelessWidget {
   const ThemeSelectorDelegateWrapper({
     super.key,
@@ -86,12 +86,11 @@ class ThemeSelectorDelegateWrapper extends StatelessWidget {
   }
 }
 
-// A header card wrapped, without heading. Used to select them colors using
-// the Theme Selector and can also turn ON/OFF FlexColorScheme and component
-// themes.
-//
-// Used at the top of the Masonry grid view and between page and panel page
-// selector on the page view.
+/// Used to select theme colors using, can also turn ON/OFF FlexColorScheme
+/// and component themes.
+///
+/// Used at the top of the Masonry grid view and between page and panel page
+/// selector on the page view.
 class ThemeSelector extends StatelessWidget {
   const ThemeSelector({super.key, required this.controller});
 

@@ -4456,45 +4456,45 @@ class FlexSubThemes {
     /// The background color of the themed SnackBar. Typically one of inverse
     /// brightness compared to theme's surface color brightness.
     ///
-    /// If null, then FlexColorScheme (FCS) sets own default when used via
-    /// FlexSubThemesData as follows, the SDK default is used if this is not
-    /// used via FlexSubThemesData:
+    /// If null then it default to Flutter SDK theme defaults below.
     ///
-    /// * In light theme mode:
-    ///   * FCS: onSurface with primary blend at 45% opacity, with
+    /// When FlexColorScheme sub themes are used and [backgroundSchemeColor]
+    /// has not been defined, it defaults to FCS default shown below:
+    ///
+    /// * Default in light theme mode:
+    ///   * Via FCS: onSurface with primary blend at 45% opacity, with
     ///     total opacity 95%
-    ///   * Flutter SDK uses: onSurface with surface at opacity 80%, blended on
-    ///     top of surface.
+    ///   * Flutter SDK M2 uses: colorScheme.onSurface with opacity 80%,
+    ///     alpha blended on top of colorScheme.surface.
+    ///   * Flutter SDK M3 uses: colorScheme.inverseSurface.
     ///
     /// * In dark theme mode:
     ///   * FCS: onSurface with primary blend at 39% opacity, with total
     ///     opacity 93%
-    ///   * Flutter SDK uses: colorScheme.onSurface
+    ///   * Flutter SDK M2 uses: colorScheme.onSurface
+    ///   * Flutter SDK M2 uses: colorScheme.inverseSurface
     ///
-    /// SnackBar uses ColorScheme.inverseSurface in M3 schemes.
-    /// While FlexColorScheme has own custom default primary tinted SnackBar
-    /// color, it can also easily be themed also to [ColorScheme.inverseSurface]
-    /// via the [backgroundSchemeColor].
+    ///  If a [colorScheme] is passed in and [backgroundSchemeColor] is defined,
+    ///  it will override [backgroundColor] and be used instead.
     final Color? backgroundColor,
 
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     final ColorScheme? colorScheme,
 
     /// Selects which color from the passed in [colorScheme] to use as
-    /// dialog background color.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// [SnackBar] background color.
     ///
     /// If not defined or [colorScheme] is not defined, then the passed in
     /// [backgroundColor] will be used, which may be null too and SnackBar then
-    /// falls back Flutter defaults.
+    /// falls back Flutter SDK defaults, or to FCS default if this is used by
+    /// FCS that passes in its one custom default.
     final SchemeColor? backgroundSchemeColor,
 
-    // TODO(rydmike): Implement action scheme color support and default.
     /// Overrides the default value for [SnackBarAction.textColor].
     ///
-    /// If null, [SnackBarAction] defaults to [ColorScheme.secondary] of
-    /// [ThemeData.colorScheme] .
+    /// If null, [SnackBarAction] and [colorScheme] is defined, defaults to
+    /// [ColorScheme.inversePrimary], if a [colorScheme] was not defined, then
+    /// defaults to effective foreground color with alpha 0xDD.
     final SchemeColor? actionTextSchemeColor,
   }) {
     final Color? background =
@@ -4512,6 +4512,11 @@ class FlexSubThemes {
                     : Colors.white
                 : null;
 
+    final Color? actionForeground = colorScheme != null
+        ? schemeColor(
+            actionTextSchemeColor ?? SchemeColor.inversePrimary, colorScheme)
+        : null;
+
     final TextStyle? snackTextStyle = foreground != null
         ? ThemeData(brightness: Brightness.light)
             .textTheme
@@ -4519,16 +4524,21 @@ class FlexSubThemes {
             .copyWith(color: foreground)
         : null;
 
-    // TODO(rydmike): Maybe add customization of action and close colors.
     return SnackBarThemeData(
       elevation: elevation ?? kSnackBarElevation,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
       actionTextColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
-        return foreground?.withAlpha(0xDD) ?? Colors.grey;
+        return actionForeground ?? foreground?.withAlpha(0xDD) ?? Colors.grey;
       }),
-      disabledActionTextColor: foreground?.withAlpha(0x11),
+      disabledActionTextColor:
+          actionForeground?.withAlpha(0x11) ?? foreground?.withAlpha(0x11),
+
+      // This is using same foreground as the text, but slightly muted from it
+      // as the default should be, this just works with any resulting foreground
+      // color and does not rely on M3 default onInverseSurface for similar
+      // result, that only works on inverseSurface.
       closeIconColor: foreground?.withAlpha(0xAA),
     );
   }

@@ -21,10 +21,27 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
     final String snackDefaultColorLabel = isDark
         ? (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default (light primary, 93% opacity)'
-            : 'default (Light grey)'
+            : useMaterial3
+                ? 'default (inverseSurface)'
+                : 'default (onSurface)'
         : (controller.useSubThemes && controller.useFlexColorScheme)
             ? 'default (dark primary, 95% opacity)'
-            : 'default (dark grey)';
+            : useMaterial3
+                ? 'default (inverseSurface)'
+                : 'default (onSurface.op80%, alphaBlend surface)';
+
+    final String snackActionDefaultColorLabel = isDark
+        ? (controller.useSubThemes && controller.useFlexColorScheme)
+            ? 'default (inversePrimary)'
+            : useMaterial3
+                ? 'default (inversePrimary)'
+                : 'default (secondary)'
+        : (controller.useSubThemes && controller.useFlexColorScheme)
+            ? 'default (inversePrimary)'
+            : useMaterial3
+                ? 'default (inversePrimary)'
+                : 'default (secondary)';
+
     final String sheetDefaultColorLabel =
         controller.useSubThemes && controller.useFlexColorScheme
             ? 'default (surface)'
@@ -258,22 +275,10 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
               : null,
         ),
         const SizedBox(height: 16),
-        const MaterialBannerSnackBarShowcase(),
-        const SizedBox(height: 8),
-        ListTile(
-          title: const Text('Show a real test SnackBar'),
-          trailing: FilledButton(
-            onPressed: () {
-              unawaited(_showDemoSnackBar(context));
-            },
-            child: const Text('show'),
-          ),
-          onTap: () {
-            unawaited(_showDemoSnackBar(context));
-          },
-        ),
+        const Divider(),
         ColorSchemePopupMenu(
           title: const Text('SnackBar background color'),
+          subtitle: const Text('Set to inverseSurface for default M3 style'),
           labelForDefault: snackDefaultColorLabel,
           index: controller.snackBarSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -287,17 +292,65 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('SnackBar action button text color'),
+          labelForDefault: snackActionDefaultColorLabel,
+          index: controller.snackBarActionSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setSnackBarActionSchemeColor(null);
+                  } else {
+                    controller.setSnackBarActionSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          title: const Text('Show a fixed test SnackBar'),
+          trailing: FilledButton(
+            onPressed: () {
+              unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
+                  'A SnackBar with SnackBarBehavior.fixed'));
+            },
+            child: const Text('Fixed Snack'),
+          ),
+          onTap: () {
+            unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
+                'A SnackBar with SnackBarBehavior.fixed'));
+          },
+        ),
+        ListTile(
+          title: const Text('Show a floating test SnackBar'),
+          trailing: FilledButton(
+            onPressed: () {
+              unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
+                  'A SnackBar with SnackBarBehavior.floating'));
+            },
+            child: const Text('Float Snack'),
+          ),
+          onTap: () {
+            unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
+                'A SnackBar with SnackBarBehavior.floating'));
+          },
+        ),
+        const SizedBox(height: 8),
+        const MaterialBannerSnackBarShowcase(),
+        const SizedBox(height: 8),
       ],
     );
   }
 
-  Future<void> _showDemoSnackBar(BuildContext context) async {
+  Future<void> _showDemoSnackBar(
+      BuildContext context, SnackBarBehavior style, String message) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('A SnackBar example'),
+        content: Text(message),
+        behavior: style,
         showCloseIcon: true,
         action: SnackBarAction(
-          label: 'Undo',
+          label: 'Close',
           onPressed: () {},
         ),
         duration: const Duration(milliseconds: 3000),

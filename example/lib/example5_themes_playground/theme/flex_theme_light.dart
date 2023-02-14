@@ -296,6 +296,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             dialogElevation: controller.dialogElevation,
             // SnackBar settings.
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            snackBarActionSchemeColor: controller.snackBarActionSchemeColor,
             // AppBar settings.
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorLight,
@@ -344,6 +345,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
+            // MenuBar and MenuButton settings.
+            menuBarRadius: controller.menuBarRadius,
+            menuBarElevation: controller.menuBarElevation,
+            menuBarShadowColor: controller.menuBarShadowColor,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedLabelSchemeColor,

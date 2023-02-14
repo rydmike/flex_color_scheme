@@ -3079,34 +3079,74 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
 
     final Color defaultBackgroundColor = isLight
-        ? Color.alphaBlend(
-            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface)
+        ? useMaterial3
+            ? colorScheme.inverseSurface
+            : Color.alphaBlend(
+                colorScheme.onSurface.withOpacity(0.80), colorScheme.surface)
         : colorScheme.onSurface;
     final Color snackBackground =
         theme.snackBarTheme.backgroundColor ?? defaultBackgroundColor;
+
     final Color snackForeground =
         ThemeData.estimateBrightnessForColor(snackBackground) ==
                 Brightness.light
             ? Colors.black
             : Colors.white;
+
+    final Color defaultActionColor =
+        useMaterial3 ? colorScheme.inversePrimary : colorScheme.secondary;
+    final Color snackActionColor =
+        theme.snackBarTheme.actionTextColor ?? defaultActionColor;
+
     final TextStyle snackStyle = theme.snackBarTheme.contentTextStyle ??
         ThemeData(brightness: Brightness.light)
             .textTheme
             .titleMedium!
             .copyWith(color: snackForeground);
+    final TextStyle snackActionStyle = theme.snackBarTheme.contentTextStyle
+            ?.copyWith(color: snackActionColor) ??
+        ThemeData(brightness: Brightness.light)
+            .textTheme
+            .titleMedium!
+            .copyWith(color: snackActionColor);
     final double snackElevation = theme.snackBarTheme.elevation ?? 6;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Material(
+          color: snackBackground,
+          elevation: snackElevation,
+          surfaceTintColor: colorScheme.surfaceTint,
+          shadowColor: colorScheme.shadow,
+          child: SizedBox(
+            height: 48,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              child: Row(
+                children: <Widget>[
+                  const SizedBox(width: 24),
+                  Text('A fixed SnackBar (style simulation)',
+                      style: snackStyle),
+                  const Spacer(),
+                  Text('Close', style: snackActionStyle),
+                  const SizedBox(width: 24),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
         const Divider(height: 1),
         MaterialBanner(
           padding: const EdgeInsets.all(20),
-          content: const Text('Hello, I am a Material Banner'),
+          content: const Text('Hello, I am a MaterialBanner'),
           leading: const Icon(Icons.agriculture_outlined),
           actions: <Widget>[
             TextButton(
@@ -3120,19 +3160,6 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        Material(
-          color: snackBackground,
-          elevation: snackElevation,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: SizedBox(
-            height: 40,
-            child: Center(
-              child: Text('Material SnackBar (style simulation only)',
-                  style: snackStyle),
-            ),
-          ),
-        ),
       ],
     );
   }

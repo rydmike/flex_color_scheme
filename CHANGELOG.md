@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 13, 2023**
+**Feb 14, 2023**
 
 **FIX**
 
@@ -55,7 +55,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   **Note**: Later when `theme.scaffoldBackgroundColor` and maybe also some other colors in current `ThemeData` are deprecated, FlexColorscheme will need to set those colors in their own sub-theme, also in M3 mode to be able to continue to deliver e.g. surface blends that impacts the scaffold background color separately from ColorScheme colors. Currently, it does this via `theme.scaffoldBackgroundColor` without using a component theme. 
 
 
-- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. This is a change from 7.0.0-dev.2 and not considered style breaking. Flutter 3.7.2 and earlier, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter uses as default, which actually looks quite nice.
+- **Style breaking**: The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It default to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.     
+
+
+- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
   
   **THEMES PLAYGROUND**
@@ -85,12 +88,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of indicator border radius to `NavigationDrawer` to panel **Navigation Drawer**.  
 - Added theming of indicator border radius to `NavigationBar` to panel **Navigation Bar**.
 - Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
+- Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes. 
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - MUST DO: Finalize all the menu theming options.
 - MUST DO: Resolve EndDrawer directionality issue, but how without context?
-- MUST DO: Review SnackBar theme in M3, add button color. tweak background, use default in M3?  
 - MAYBE ADD: TextFiled settings examples.
 - MAYBE ADD: Page with example theming configs.
 - MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily
@@ -185,7 +188,7 @@ Requires Flutter beta 3.7.0-1.4.pre or later.
 
 **CHANGE**
 
-- **Style breaking**: Tinted disbaled components style.   
+- **Style breaking**: Tinted disabled components style.   
   Style change on tinted disabled components when opting in on `tintedDisabledControls`. It is visually breaking, but subtle. Disable opacity alpha and alpha blend constants where tuned, kDisabledAlphaBlend from 0xAA (67%) to 0xCC (80%) and kDisabledBackgroundAlpha from 0x31 (19%) to 0x26 (15%). The new tinted disable colors look better. They are close in style to default grey ones, with a subtle primary tint, while still being more legible than in previous versions. Opting in on tinted disabled components is still not yet available on all components. It is more available in M2 mode. In upcoming minor releases, tinted disabled components will be made available on all themed components and consistently applied in both M2 and M3 mode. More visual tuning of this feature may be required in later releases.
 
 

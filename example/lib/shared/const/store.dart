@@ -795,6 +795,25 @@ class Store {
   // Default value for bottomNavShowUnselectedLabels, also to reset settings.
   static const bool defaultBottomNavShowUnselectedLabels = true;
 
+  // MenuBar and MenuButton SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the menuBarRadius value.
+  static const String keyMenuBarRadius = 'menuBarRadius';
+  // Default value for the menuBarRadius, also reset settings.
+  static const double? defaultMenuBarRadius = null;
+
+  // Key used to read and save the menuBarElevation value.
+  static const String keyMenuBarElevation = 'menuBarElevation';
+  // Default value for the menuBarElevation, also reset settings.
+  static const double? defaultMenuBarElevation = null;
+
+  // Key used to read and save the menuBarShadowColor color value.
+  static const String keyMenuBarShadowColor = 'menuBarShadowColor';
+  // Default value for the menuBarShadowColor color, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const Color? defaultMenuBarShadowColor = null;
+
   // NavigationBar SETTINGS.
   // ===========================================================================
 
@@ -1198,7 +1217,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultSliderTrackHeight = null;
 
-  // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
+  // Fab, Chip SnackBar, Popup, Card and Dialog SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the fabUseShape value.
@@ -1253,6 +1272,13 @@ class Store {
   // Default value for the snackBarSchemeColor, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSnackBarSchemeColor = null;
+
+  // Key used to read and save the snackBarActionSchemeColor value.
+  static const String keySnackBarActionSchemeColor =
+      'snackBarBackgroundSchemeColor';
+  // Default value for the snackBarActionSchemeColor, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSnackBarActionSchemeColor = null;
 
   // Key used to read and save the popupMenuSchemeColor value.
   static const String keyPopupMenuSchemeColor = 'popupMenuSchemeColor';

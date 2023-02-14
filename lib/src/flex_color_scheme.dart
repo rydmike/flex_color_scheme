@@ -6651,7 +6651,7 @@ class FlexColorScheme with Diagnosticable {
       listTileTheme: useMaterial3
           ? const ListTileThemeData(tileColor: Colors.transparent)
           : null,
-
+      //
       // TODO(rydmike): Finalize MenuBarTheme for v7.
       // MenuBar theme.
       menuBarTheme: useSubThemes
@@ -6664,7 +6664,9 @@ class FlexColorScheme with Diagnosticable {
               elevation: 10,
             )
           : null,
-
+      //
+      // TODO(rydmike): Finalize MenuBarTheme for v7.
+      // MenuButton theme.
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
@@ -6675,9 +6677,9 @@ class FlexColorScheme with Diagnosticable {
               // elevation: 10,
             )
           : null,
-
-      // MenuTheme theme.
-      // Used for menu container by MenuBar, MenuAnchor and DropDownMenu.
+      //
+      // Menu content theme.
+      // Used by the menu container for MenuBar, MenuAnchor and DropDownMenu.
       menuTheme: useSubThemes
           ? FlexSubThemes.menuTheme(
               radius: subTheme.popupMenuRadius ??
@@ -6878,6 +6880,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.snackBarElevation,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,
+              actionTextSchemeColor: subTheme.snackBarActionSchemeColor,
               backgroundColor: tintedBackground(
                 background: colorScheme.onSurface,
                 blend: colorScheme.primary,
