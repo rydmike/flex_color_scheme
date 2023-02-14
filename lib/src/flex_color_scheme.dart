@@ -6646,13 +6646,6 @@ class FlexColorScheme with Diagnosticable {
       //
       // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
-
-      // TODO(rydmike): Remove ListTile, tileColor transparent when SDK fixed.
-      // Set tileColor to transparent when using M3 to avoid issue:
-      // https://github.com/flutter/flutter/issues/117700.
-      // listTileTheme: useMaterial3
-      //     ? const ListTileThemeData(tileColor: Colors.transparent)
-      //     : null,
       //
       // TODO(rydmike): Finalize MenuBarTheme for v7.
       // MenuBar theme.
