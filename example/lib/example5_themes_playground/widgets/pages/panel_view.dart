@@ -73,6 +73,15 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // pageController = PageController(
+    //   initialPage: widget.themeController.viewIndex,
+    // );
+    previousPage = widget.themeController.viewIndex;
+  }
+
+  @override
   void dispose() {
     pageController.dispose();
     scrollCtrl.dispose();
