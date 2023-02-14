@@ -108,24 +108,31 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TASKS DONE**
 - Added value tests for all new color definitions.
 
+**TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
+
+- MUST DO: Finalize all menu theming options. Three props remaining.
+- MAYBE ADD: TextField settings examples.
+- MAYBE ADD: Page with pre-made example theme configurations.
+
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- MUST DO: Finalize all the menu theming options.
-- MAYBE ADD: TextField settings examples.
-- MAYBE ADD: Page with example theming configs.
-- CHECK: Drawer M3 actual default. Show the buggy result in default or the fixed one?  
+- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or the fixed one?  
 - MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Review and fix test coverage.
+- MUST DO: Fix test coverage.
   - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 82% tested now.
   - All new sub-themes and new states.  
   - Test usedColors 7.
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
-  - Changelog.
-  - Update known Flutter M3 and theming impacting issues. (Slider update issue, not yet reported.)
-  - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
+  - Change summary update.
+  - Update known Flutter M3 and theming impacting issues. 
+
+**TODO AFTER FCS STABLE 7.0 RELEASE**
+
 - After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
+  - Tweet series about what is new.
   - New color scheme images.
+  - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
   - Review and update older screenshots and GIFs.
   - Use image zoom feature in docs.page more on current images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
