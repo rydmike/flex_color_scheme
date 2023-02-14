@@ -2,7 +2,7 @@
 
 # FlexColorScheme
 
-> This is FlexColorScheme release 7.0.0-dev.2 (beta). It is intended for Flutter stable 3.7.0 or later. Themes Playground 7.0.0-dev.2 (beta) is available as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v7).
+> This is FlexColorScheme **beta** release 7.0.0-dev.3. It is intended for Flutter stable 3.7.0 or later. Themes Playground **beta** 7.0.0-dev.3 is available as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v7). This is the last beta release before the stable v7 release. It is currently undergoing quality assurance testing. If you notice any issues with it or with the related Playground version, please report them in the [repo here](https://github.com/rydmike/flex_color_scheme/issues). For information about what has changed in this release see the [changelog](https://pub.dev/packages/flex_color_scheme/versions/7.0.0-dev.3/changelog). The FlexColorScheme documentation site has not yet been updated to cover this beta release. It does however contain a summary of [new features](https://docs.flexcolorscheme.com/whats_new) and list of [know Flutter issues](https://docs.flexcolorscheme.com/known_issues), that impact Flutter theming and via that FlexColorScheme.  
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
@@ -25,7 +25,7 @@ You can opt in on using opinionated component sub-themes. By doing so, you can, 
 
 When you opt in on using the component sub-themes in Material 2 mode, border radius on widgets defaults to the new Material 3 rounded corner design. In it, the radius varies by widget type, as specified by the [Material 3 guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 like defaults or the global radius value you defined. 
 
-You can also opt in on using Material 3. The Material 3 mode component sub-theming is far less opinionated, using mostly Material 3 defaults. One could say that opting in on using FlexColorScheme component sub themes, is a way of getting a Material 2 mode design, of Material 3, in Flutter. In Flutter 3.3 and earlier, using Material 3 design is still incomplete and also has many issues. Please refer to the docs for more information on the status of known problematic [Material 3 issues](https://docs.flexcolorscheme.com/known_issues) in Flutter.
+You can also opt in on using Material 3. The Material 3 mode component sub-theming is far less opinionated, using mostly Material 3 defaults, offering easy quick settings to customize Material 3 to suit your design goals.
 
 <table>
   <tr>
@@ -38,7 +38,9 @@ You can also opt in on using Material 3. The Material 3 mode component sub-themi
 
 With **FlexColorScheme** component themes, you use simple flat property values. No need for verbose Flutter SDK component sub-themes, with `ShapeBorder` definitions on multiple widget themes to change their border radius. The component theming provides a large number of easy to configure options via simple flat properties. In many cases you can avoid the both complicated and confusing `MaterialState` theming properties.
 
-**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from key colors. Customization features that are currently not available in Flutter. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
+**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from key colors. You can use this to make more saturated seed generated themes and themes with higher contrast. These seeded color scheme features are currently not available in Flutter. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors. 
+
+In Material 3 you can also easily disable surface elevation tint in Material 3 mode and even bring back elevation shadows where they have been removed in M3. You can also choose to do this only on iOS and macOS platforms, where surface tint elevation may seem foreign, while still keeping the M3 tinted styles when the app is used on Android and other platforms.
 
 ## Getting Started
 
@@ -131,7 +133,7 @@ The **Themes Playground** application is open source and bundled with the `FlexC
 
 The Playground app is also the last step in the package tutorial series. The [tutorial](https://docs.flexcolorscheme.com/tutorial1) goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights. It is on purposes a bit excessively commented. The tutorial also briefly talks about its background, design choices and limitations.
 
-### Older versions of Themes Playground
+### Older versions of the Themes Playground
 
 If you are using **FlexColorScheme version 6**, you can go here to use [**Themes Playground V6**](https://rydmike.com/flexcolorscheme/themesplayground-v6), to generate API setup code for version 6. It supports FlexColorScheme version 6.1, you can also use this version of the Playground with FlexColorScheme version 6.0. If you do, you may have to delete some generated API config setup code for properties only available in version 6.1 that are not supported by FlexColorScheme 6.0. You will see those as unsupported API errors when you copy/paste the Themes Playground code to Flutter if you use 6.0 and not 6.1. Delete such rows, or you can of course upgrade the package to 6.1 to get those features. 
 
