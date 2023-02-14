@@ -2419,7 +2419,7 @@ class _MyContextMenuState extends State<MyContextMenu> {
           ),
         ],
         child: Card(
-          elevation: 1,
+          elevation: 0.5,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

@@ -2623,13 +2623,12 @@ class FlexSubThemes {
 
     /// MenuBar corner radius.
     ///
-    /// If not defined, defaults to [kMenuRadius] = 4, M3 specification.
+    /// If not defined, defaults to 4, the M3 specification, via Flutter SDK
+    /// widget default values.
     final double? radius,
   }) {
     final Color surface =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
-    final Color onSurface = schemeColorPair(
-        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
     return MenuBarThemeData(
       style: MenuStyle(
@@ -2641,19 +2640,19 @@ class FlexSubThemes {
             ? MaterialStatePropertyAll<Color?>(shadowColor)
             : null,
         elevation: MaterialStatePropertyAll<double?>(elevation),
-        shape: MaterialStatePropertyAll<OutlinedBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kMenuRadius),
-            ),
-          ),
-        ),
+        shape: radius != null
+            ? MaterialStatePropertyAll<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius),
+                  ),
+                ),
+              )
+            : null,
       ),
     );
   }
 
-  // TODO(rydmike): Finalize MenuButtonTheme.
-  //
   /// An opinionated [MenuButtonThemeData] theme.
   static MenuButtonThemeData menuButtonTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
@@ -2661,10 +2660,14 @@ class FlexSubThemes {
 
     /// Select which color from the passed in [colorScheme] parameter to use as
     /// the MenuButton background color.
+    ///
+    /// If not defined, default to surface.
+    ///
+    /// Currently in FCS the [backgroundSchemeColor] is only used to set
+    /// foreground color based on its color pair. The background is actually
+    /// controlled via [MenuThemeData] in [menuTheme].
     final SchemeColor? backgroundSchemeColor,
   }) {
-    final Color surface =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color onSurface = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 

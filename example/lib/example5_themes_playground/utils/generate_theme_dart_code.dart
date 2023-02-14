@@ -811,6 +811,18 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    bottomNavigationBarShowUnselectedLabels: ${controller.bottomNavShowUnselectedLabels},\n';
   //
+  // MenuBar setup CODE
+  //
+  final String menuBarRadius = controller.menuBarRadius != null
+      ? '    menuBarRadius: ${controller.menuBarRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuBarElevation = controller.menuBarElevation != null
+      ? '    menuBarElevation: ${controller.menuBarElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuBarShadowColor = controller.menuBarShadowColor != null
+      ? '    menuBarShadowColor: ${controller.menuBarShadowColor},\n'
+      : '';
+  //
   // NavigationBar setup CODE
   //
   final String navigationBarSelectedLabelSchemeColor = controller
@@ -1103,6 +1115,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
           //
+          '$menuBarRadius'
+          '$menuBarElevation'
+          '$menuBarShadowColor'
+          //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
           '$navigationBarMutedUnselectedLabel'
@@ -1276,6 +1292,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarElevation'
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
+          //
+          '$menuBarRadius'
+          '$menuBarElevation'
+          '$menuBarShadowColor'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'

@@ -6643,34 +6643,27 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // iconButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // IconButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
-      //
-      // TODO(rydmike): Finalize MenuBarTheme for v7.
       // MenuBar theme.
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,
               surfaceTintColor: removeTint ? Colors.transparent : null,
-              shadowColor: Colors.transparent,
-              radius: 0,
-              elevation: 10,
+              shadowColor: subTheme.menuBarShadowColor,
+              radius: subTheme.menuBarRadius,
+              elevation: subTheme.menuBarElevation,
             )
           : null,
       //
-      // TODO(rydmike): Finalize MenuBarTheme for v7.
       // MenuButton theme.
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,
-              // surfaceTintColor: removeTint ? Colors.transparent : null,
-              // shadowColor: Colors.transparent,
-              // radius: 0,
-              // elevation: 10,
             )
           : null,
       //

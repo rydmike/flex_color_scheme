@@ -103,14 +103,15 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of indicator border radius to `NavigationDrawer` to panel **Navigation Drawer**.  
 - Added theming of indicator border radius to `NavigationBar` to panel **Navigation Bar**.
 - Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
-- Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes. 
+- Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes.
+- Added controls for theming all the menus consistently to the **Menu** panel.
 
 **TASKS DONE**
 - Added value tests for all new color definitions.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- MUST DO: Finalize all menu theming options. Three props remaining.
+- MAYBE ADD: Own Themedata props for background scheme color, elevation and radius for DropdownMenuThemeData, MenuBarThemeData and MenuThemeData. As now share controls in UI controls. This is cleaner going forward. UI and theming work now, but need to setup and use them via these new props, that UI sets values to. Hmm, this makes a total of 9 more `FlexSubThemesData` properties. Worth it?
 - MAYBE ADD: TextField settings examples.
 - MAYBE ADD: Page with pre-made example theme configurations.
 

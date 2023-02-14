@@ -3528,7 +3528,6 @@ class ThemeController with ChangeNotifier {
 
   // Helper ChangeNotifiers tucked into ThemeController because I'm lazy.
   // ===========================================================================
-  // TODO(rydmike): Future app version, consider own inherited widget.
 
   // This is just a controller prop for hovered color on Colorscheme.
   Color? _hoverColor;
