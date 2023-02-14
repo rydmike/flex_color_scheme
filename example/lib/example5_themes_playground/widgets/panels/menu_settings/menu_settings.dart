@@ -251,9 +251,9 @@ class MenuSettings extends StatelessWidget {
         // const SizedBox(height: 16),
         const ListTile(
           title: Text('DropdownMenu'),
-          subtitle: Text('Text input area uses the themed '
+          subtitle: Text('The text input area uses the themed '
               'InputDecoration settings. Other theming properties are '
-              'shared with the PopupMenuButton.'),
+              'here shared with the PopupMenuButton.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -263,9 +263,9 @@ class MenuSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('MenuBar'),
-          subtitle: Text('THe MenuBar is made up of SubMenuButtons that have '
+          subtitle: Text('The MenuBar is made up of SubMenuButtons that have '
               'MenuItemButtons. You can construct arbitrary deep nested '
-              'sub-menus and items can have keyboard shortcuts.'),
+              'sub-menus. Menu items can have keyboard shortcuts.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -273,9 +273,9 @@ class MenuSettings extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text('For a nice edge-to-edge look, consider using 0 dp. '
+              const Text('For an edge-to-edge design use 0 dp. '
                   'The M3 guide depicts MenuBar as edge-to-edge with no '
-                  'corner rounding, but Flutter M3 defaults to 4 dp.'),
+                  'corner rounding. Flutter M3 defaults to 4 dp.'),
               Slider(
                 min: -1,
                 max: 30,
@@ -372,9 +372,9 @@ class MenuSettings extends StatelessWidget {
         SwitchListTile(
             title: const Text('Remove elevation shadow'),
             subtitle: const Text('The M3 guide depicts MenuBars with no '
-                'shadow and optional elevation with tint. Flutter defaults '
-                'has shadow in M3. To be able to use elevation with only '
-                'elevation tint in M3, turn ON to remove the shadow.'),
+                'shadow and optional elevation with tint. Flutter default '
+                'control has shadow in M3. To be able to use elevation with '
+                'only elevation tint in M3, turn ON to remove the shadow.'),
             value: controller.menuBarShadowColor == Colors.transparent,
             onChanged: (bool removeShadow) {
               if (removeShadow) {
