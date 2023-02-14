@@ -1672,32 +1672,34 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [kSnackBarElevation] = 4.
   final double? snackBarElevation;
 
-  // TODO(rydmike): Review the FCS defaults, is doc below still correct?
   /// Defines which [Theme] based [ColorScheme] based color the SnackBars
   /// use as their base color. Typically one of inverse brightness compared
   /// to theme's surface color brightness.
   ///
-  /// If not defined, it defaults to the opinionated color FlexColorScheme (FCS)
-  /// choices below, when used via [FlexSubThemesData].
+  /// If not defined, defaults to the opinionated color FlexColorScheme (FCS)
+  /// choices below.
   ///
-  /// * In light theme mode:
-  ///   * FCS: onSurface with primary blend at 45% opacity, with tot opacity 95%
-  ///   * Flutter M2 SDK uses: onSurface with surface at opacity 80%, blended
-  ///     on top of surface.
+  /// * Default in light theme mode:
+  ///   * FCS: onSurface with primary blend at 45% opacity, with
+  ///     total opacity 95%
+  ///   * Flutter SDK M2 uses: colorScheme.onSurface with opacity 80%,
+  ///     alpha blended on top of colorScheme.surface.
+  ///   * Flutter SDK M3 uses: colorScheme.inverseSurface.
   ///
   /// * In dark theme mode:
-  ///   * FCS: onSurface with primary blend at 39% opacity, with tot opacity 93%
-  ///   * Flutter M2 SDK uses: colorScheme.onSurface
+  ///   * FCS: onSurface with primary blend at 39% opacity, with total
+  ///     opacity 93%
+  ///   * Flutter SDK M2 uses: colorScheme.onSurface
+  ///   * Flutter SDK M2 uses: colorScheme.inverseSurface
   ///
   /// In M3 design the default is [ColorScheme.inverseSurface],
   /// which you can assign by selecting that as its property here too.
   final SchemeColor? snackBarBackgroundSchemeColor;
 
-// TODO(rydmike): Review SnackBar the defaults.
   /// Defines which [Theme] based [ColorScheme] based color the SnackBar actions
   /// use as their color.
   ///
-  /// If not defined default to: TBD.
+  /// If null, defaults to [ColorScheme.inversePrimary].
   final SchemeColor? snackBarActionSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the [AppBar]

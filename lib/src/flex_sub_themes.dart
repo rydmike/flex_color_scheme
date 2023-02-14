@@ -4457,7 +4457,6 @@ class FlexSubThemes {
     /// brightness compared to theme's surface color brightness.
     ///
     /// If null then it default to Flutter SDK theme defaults below.
-    ///
     /// When FlexColorScheme sub themes are used and [backgroundSchemeColor]
     /// has not been defined, it defaults to FCS default shown below:
     ///
