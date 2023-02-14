@@ -238,11 +238,11 @@ String generateThemeDartCode(ThemeController controller) {
           ? ''
           : '    blendOnColors: ${controller.blendDarkOnColors},\n';
   final String blendLightTextTheme = controller.blendLightTextTheme
-      ? ''
-      : '    blendTextTheme: ${controller.blendLightTextTheme},\n';
+      ? '    blendTextTheme: ${controller.blendLightTextTheme},\n'
+      : '';
   final String blendDarkTextTheme = controller.blendDarkTextTheme
-      ? ''
-      : '    blendTextTheme: ${controller.blendDarkTextTheme},\n';
+      ? '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
+      : '';
   final String useTextTheme = controller.useTextTheme
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';

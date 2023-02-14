@@ -129,7 +129,7 @@ class FlexSubThemesData with Diagnosticable {
     this.elevationTint = FlexTint.removeTint,
     this.elevationShadow = FlexShadow.useShadow,
     //
-    this.blendTextTheme = true,
+    this.blendTextTheme = false,
     this.useTextTheme = true,
     this.useM2StyleDividerInM3 = false,
     //
@@ -374,7 +374,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
-  // TODO(rydmike): Add tintedDisabledControls feature in version 7.0?
+  // TODO(rydmike): Add more tintedDisabledControls support in v7.0 or 7.1?
   /// Use primary tint on disabled controls.
   ///
   /// Set to true to make disabled controls use a shared slightly
@@ -635,7 +635,12 @@ class FlexSubThemesData with Diagnosticable {
   /// when using this option in future versions when actual Material 3 text
   /// theme Typography becomes available.
   ///
-  /// Defaults to true.
+  /// Defaults to false.
+  ///
+  /// **Style break info**: In FCS before version 7, the default was true, and
+  /// blended text themes were used by default. Going forward if you want it,
+  /// and also if you had not defined earlier and don't want to break your
+  /// apps past style, set [blendTextTheme] to true.
   final bool blendTextTheme;
 
   /// Use Material 3 TextTheme and Typography
@@ -652,7 +657,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [FlexColorScheme.useMaterial3].
   ///
   /// When using [FlexColorScheme], and [ThemeData.useMaterial3] is true and
-  /// sub themes ar not used, or if used and [useTextTheme] is false, then
+  /// sub themes are not used, or if used and [useTextTheme] is false, then
   /// default typography is [Typography.material2018]. If [FlexColorScheme] is
   /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
   /// then Flutter defaults to using very old poor [Typography.material2014].
@@ -662,11 +667,6 @@ class FlexSubThemesData with Diagnosticable {
   /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
   /// like ThemeData. You apply and use them just as you would with ThemeData.
   /// This text theme is just a custom predefined TextTheme.
-  ///
-  /// If you dynamically change the Theme Typography in application, Flutter
-  /// SDK throws an assert error in debug mode, this is a Flutter limitation
-  /// and not FlexColorScheme related, for more info see issue:
-  /// https://github.com/flutter/flutter/issues/103864.
   final bool useTextTheme;
 
   /// Determines if M2 style opacity based divider is used in Material 3.

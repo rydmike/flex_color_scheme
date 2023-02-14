@@ -34,9 +34,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **CHANGE**
 
-- **Style breaking**: The `Card` opinionated sub-theme now defaults to null elevation, resulting in
-  same default of 1 dp elevation as Flutter SDK in both M2 and M3 mode. Previously, FCS defaulted to 
-  elevation 0 dp on `Cards` when opting in on sub-themes.
+- **Style breaking**:  `FlexSubThemes.blendTextTheme` defaults to false.   
+  In FCS before version 7, the default for `blendTextTheme` in `FlexSubThemes` was true, and blended text themes were used by default. Going forward if you want it, and also if you had not defined earlier and don't want to break your apps past style, set `blendTextTheme` to true.
+
+
+- **Style breaking**: `Card` elevation default 1 dp.   
+  The `Card` opinionated sub-theme now defaults to null elevation, resulting in same default of 1 dp elevation as Flutter SDK in both M2 and M3 mode. Previously, FCS defaulted to elevation 0 dp on `Cards` when opting in on sub-themes.
   
 
 - **Style breaking**: `ColorScheme.outline` and `ColorScheme.outlineVariant`.  
@@ -58,10 +61,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   **Note**: Later when `theme.scaffoldBackgroundColor` and maybe also some other colors in current `ThemeData` are deprecated, FlexColorscheme will need to set those colors in their own sub-theme, also in M3 mode to be able to continue to deliver e.g. surface blends that impacts the scaffold background color separately from ColorScheme colors. Currently, it does this via `theme.scaffoldBackgroundColor` without using a component theme. 
 
 
-- **Style breaking**: The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It default to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.     
+- **Style breaking**: The `SnackBar` action button defaults to `inversePrimary`.   
+  The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.     
 
 
-- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
+- The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`.  
+  This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
 
 - The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases they were used to hide the issue in M3 mode of the app when FCS was not used.  
