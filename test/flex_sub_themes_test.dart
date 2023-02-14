@@ -276,15 +276,15 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: Colors.black,
                 ),
-            actionTextColor: Colors.black.withAlpha(0xDD),
-            disabledActionTextColor: Colors.black.withAlpha(0x11),
+            actionTextColor: colorScheme.inversePrimary,
+            disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: Colors.black.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
     test(
-        'FST1.03-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
+        'FST1.03a-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with scheme color.', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -302,8 +302,36 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
                 ),
-            actionTextColor: colorScheme.onError.withAlpha(0xDD),
-            disabledActionTextColor: colorScheme.onError.withAlpha(0x11),
+            actionTextColor: colorScheme.inversePrimary,
+            disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
+            closeIconColor: colorScheme.onError.withAlpha(0xAA),
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+    test(
+        'FST1.03b-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
+        'colorScheme, backgroundSchemeColor and backgroundColor and '
+        'actionTextSchemeColor'
+        'EXPECT equal to SnackBarThemeData with scheme colors.', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.snackBarTheme(
+          elevation: 0,
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFF763370),
+          backgroundSchemeColor: SchemeColor.error,
+          actionTextSchemeColor: SchemeColor.tertiary,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          SnackBarThemeData(
+            backgroundColor: colorScheme.error,
+            elevation: 0,
+            contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
+                  color: colorScheme.onError,
+                ),
+            actionTextColor: colorScheme.tertiary,
+            disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
