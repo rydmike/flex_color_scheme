@@ -8,10 +8,13 @@ environment:
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
+  # Using the container transform navigation in mock Shop in Playground.
   # https://pub.dev/packages/animations
   animations: ^2.0.7
 
   # Confetti for some fun on the demo (by funwith.app).
+  # Just for fun on the mock login button in the simulator app in Playground.
+  # https://pub.dev/packages/confetti
   confetti: ^0.7.0
 
   # Adds the Cupertino Icons font to your application. Used by the
@@ -20,19 +23,22 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Simulated device frames package by aloisdeniel.com.
+  # Use for the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
   device_frame: ^1.1.0
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # Used for color selection in the Playground to make customized color schemes.
   # https://pub.dev/packages/flex_color_picker
   flex_color_picker: ^3.1.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
-  # https://pub.dev/packages/flex_color_scheme
+    # https://pub.dev/packages/flex_color_scheme
   flex_color_scheme:
     path: ../
 
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # Used directly by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
   flex_seed_scheme: ^1.2.0
 
@@ -41,26 +47,24 @@ dependencies:
     sdk: flutter
 
   # Masonry grid layout package, by Romain Rastel.
+  # Used by the grid page view in the Playground.
   # https://pub.dev/packages/flutter_staggered_grid_view
   flutter_staggered_grid_view: ^0.6.2
 
   # SVG file drawing, used for Undraw Asset Images (by dnfield.dev).
+  # Using version 1.x, had severe performance issues when switching to 2.x.
+  # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg (by dnfield.dev)
   flutter_svg: ^1.1.6
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^4.0.1
+  google_fonts: ^4.0.3
 
   # Hive local storage, by Simon Leir.
+  # Used as value-key pair persistence service in example 4 and 5 (Themes Playground).
   # https://pub.dev/packages/hive
   hive: ^2.2.3
-
-  # Color utilities by Google (material.io).
-  #
-  # Used to compute and create Tonal Palette theme colors.
-  # Flutter SDK from 2.10.0 stable also uses and depends on this package.
-  material_color_utilities: ^0.2.0
 
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
@@ -68,6 +72,7 @@ dependencies:
   path_provider: ^2.0.12
 
   # Store value pair shared preference data, by Google flutter.dev.
+  # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.17
 
@@ -93,7 +98,7 @@ flutter:
     # mdpi (1.0x), hdpi (1.5x), xhdpi (2.0x), xxhdpi (3.0x), xxxhdpi (4.0x)
     - assets/images/
 
-  # Custom icon font package with only needed icons.
+  # Custom icon font package with only needed and used icons.
   fonts:
     - family:  FlexIcons
       fonts:
