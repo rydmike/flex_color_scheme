@@ -65,6 +65,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.     
 
 
+- **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
+- **Label value breaking**: The `FlexColor.materialBaselineDescription` description string was changed from 'Material guide 3 baseline based theme' to 'Material 3 guide and default purple theme'.
+
+
 - The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`.  
   This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
@@ -101,6 +105,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
 - Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes. 
 
+**TASKS DONE**
+- Added value tests for all new color definitions.
+
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - MUST DO: Finalize all the menu theming options.
@@ -109,9 +116,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - CHECK: Drawer M3 actual default. Show the buggy result in default or the fixed one?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
-  - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.
+  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write.
   - All new sub-themes and new states.  
-  - Test new colors.
   - Test usedColors 7.
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:

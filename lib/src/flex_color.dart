@@ -2598,11 +2598,11 @@ class FlexColor {
   // This is the Material 3 baseline color scheme used in the M3 guide.
 
   /// English name of the materialBaseline theme.
-  static const String materialBaselineName = 'M3 baseline';
+  static const String materialBaselineName = 'Material 3 purple';
 
   /// English description of the Material 3 baseline theme.
   static const String materialBaselineDescription =
-      'Material guide 3 baseline based theme';
+      'Material 3 guide and default purple theme';
 
   /// MaterialBaseline theme color for light primary color.
   static const Color materialBaselineLightPrimary = Color(0xFF6750A4);
@@ -3145,10 +3145,10 @@ class FlexColor {
   /// Lime M3 theme color for dark tertiary container color.
   static const Color limeM3DarkTertiaryContainer = Color(0xFF224E43);
 
-  /// English name of the yukonGold M3 theme.
+  /// English name of the yellow M3 theme.
   static const String yellowM3Name = 'Yukon gold yellow';
 
-  /// English description of the yukonGold M3 theme.
+  /// English description of the yellow M3 theme.
   static const String yellowM3Description =
       'Yukon gold yellow based Material 3 theme';
 
