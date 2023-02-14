@@ -101,6 +101,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - MUST DO: Finalize all the menu theming options.
 - MAYBE ADD: TextField settings examples.
 - MAYBE ADD: Page with example theming configs.
+- CHECK: Drawer M3 actual default. Show the buggy result in default or the fixed one?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.
