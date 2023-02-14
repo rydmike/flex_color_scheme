@@ -6,7 +6,7 @@ import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/panel_content.dart';
-import '../panels/theme_selector.dart';
+import '../panels/theme_color_selector.dart';
 import '../panels/theme_topic.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
@@ -146,7 +146,7 @@ class _LargeGridViewState extends State<LargeGridView>
           SliverPersistentHeader(
             pinned: isPinned,
             floating: true,
-            delegate: ThemeSelectorHeaderDelegate(
+            delegate: ThemeColorSelectorHeaderDelegate(
               vsync: this,
               extent: headerExtent,
               controller: controller,

@@ -8,11 +8,11 @@ import '../../../shared/const/app_data.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import 'theme_topic.dart';
 
-// PanelSelectorHeaderDelegate for our custom SliverPersistentHeader.
-//
-// Used to keep a part of our nested scroll view pinned to the top
-// (in tablet desktop view), and floating on phone and snapping
-// back when scrolling back just a bit.
+/// [PanelSelectorHeaderDelegate] for the used custom [SliverPersistentHeader].
+///
+/// Used to keep a part of our nested scroll view pinned to the top
+/// (in tablet desktop view), and floating on phone and snapping
+/// back when scrolling back just a bit.
 class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   PanelSelectorHeaderDelegate({
     required this.vsync,

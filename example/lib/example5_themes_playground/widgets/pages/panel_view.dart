@@ -7,7 +7,7 @@ import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../panels/panel_content.dart';
 import '../panels/panel_selector.dart';
-import '../panels/theme_selector.dart';
+import '../panels/theme_color_selector.dart';
 import '../panels/theme_topic.dart';
 import '../shared/color_scheme_box.dart';
 
@@ -147,7 +147,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: margins),
-                child: ThemeSelector(controller: themeCtrl),
+                child: ThemeColorSelector(controller: themeCtrl),
               ),
             ),
           ];

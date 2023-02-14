@@ -124,8 +124,8 @@ const List<ThemeTopic> panelItems = <ThemeTopic>[
     icon: Icons.branding_watermark_outlined,
   ),
   ThemeTopic(
-    heading: 'BottomSheet, MaterialBanner and SnackBar',
-    buttonLabel: 'BottomSheet\nBanner, Snack',
+    heading: 'BottomSheet, SnackBar and MaterialBanner',
+    buttonLabel: 'BottomSheet\nSnack Banner',
     icon: Icons.call_to_action_outlined,
   ),
   ThemeTopic(

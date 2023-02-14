@@ -8,13 +8,13 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import 'theme_colors_settings/input_colors_selector.dart';
 
-/// [ThemeSelectorHeaderDelegate] for our custom SliverPersistentHeader.
+/// [ThemeColorSelectorHeaderDelegate] for used custom [SliverPersistentHeader].
 ///
 /// Used to keep a part of our nested scroll view pinned to the top
 /// (in tablet desktop view), and floating on phone and snapping
 /// back when scrolling back just a bit.
-class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
-  ThemeSelectorHeaderDelegate({
+class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
+  ThemeColorSelectorHeaderDelegate({
     required this.vsync,
     required this.extent,
     required this.controller,
@@ -29,7 +29,7 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ThemeSelectorDelegateWrapper(controller: controller);
+    return ThemeColorSelectorDelegateWrapper(controller: controller);
   }
 
   @override
@@ -50,14 +50,14 @@ class ThemeSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       FloatingHeaderSnapConfiguration();
 }
 
-/// A wrapper for the [ThemeSelector] when it is used via a persistent header
-/// delegate.
+/// A wrapper for the [ThemeColorSelector] when it is used via a persistent
+/// header delegate.
 ///
 /// The wrapper is used to add the correct padding and frosted glass effect
-/// when it is used as a SliverPersistentHeaderDelegate in the Masonry grid
+/// when it is used as a [SliverPersistentHeaderDelegate] in the Masonry grid
 /// in a custom scroll view.
-class ThemeSelectorDelegateWrapper extends StatelessWidget {
-  const ThemeSelectorDelegateWrapper({
+class ThemeColorSelectorDelegateWrapper extends StatelessWidget {
+  const ThemeColorSelectorDelegateWrapper({
     super.key,
     required this.controller,
   });
@@ -78,7 +78,7 @@ class ThemeSelectorDelegateWrapper extends StatelessWidget {
               top: media.padding.top + margins,
               bottom: margins,
             ),
-            child: ThemeSelector(controller: controller),
+            child: ThemeColorSelector(controller: controller),
           ),
         ),
       ),
@@ -91,8 +91,8 @@ class ThemeSelectorDelegateWrapper extends StatelessWidget {
 ///
 /// Used at the top of the Masonry grid view and between page and panel page
 /// selector on the page view.
-class ThemeSelector extends StatelessWidget {
-  const ThemeSelector({super.key, required this.controller});
+class ThemeColorSelector extends StatelessWidget {
+  const ThemeColorSelector({super.key, required this.controller});
 
   final ThemeController controller;
 
