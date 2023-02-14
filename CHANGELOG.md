@@ -73,7 +73,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
 
-- The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases they were used to hide the issue in M3 mode of the app when FCS was not used.  
+- The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
 
   
   **THEMES PLAYGROUND**
@@ -111,7 +111,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- MAYBE ADD: Own Themedata props for background scheme color, elevation and radius for DropdownMenuThemeData, MenuBarThemeData and MenuThemeData. As now share controls in UI controls. This is cleaner going forward. UI and theming work now, but need to setup and use them via these new props, that UI sets values to. Hmm, this makes a total of 9 more `FlexSubThemesData` properties. Worth it?
+- MAYBE: Add own `FlexSubThemesData` props for background SchemeColor, elevation and radius for DropdownMenuThemeData, MenuBarThemeData and MenuThemeData. They now share controls in UI controls and use the PopupMenuButton props from `FlexSubThemesData`. This would be cleaner going forward. UI and theming work as far as intended now, but need to setup and use them via own props, that shared UI sets values to. This makes a total of 9 more `FlexSubThemesData` properties. Worth it? Maybe make just 1 that we can use as shared for all, and popup can fall via it if null, and we can add more individual ones later if needed without breaking anything.
+  
 - MAYBE ADD: TextField settings examples.
 - MAYBE ADD: Page with pre-made example theme configurations.
 
