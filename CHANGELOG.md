@@ -100,8 +100,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - MUST DO: Resolve EndDrawer directionality issue, but how without context?
 - MAYBE ADD: TextField settings examples.
 - MAYBE ADD: Page with example theming configs.
-- MAYBE REMOVE: ListTile transparent added to core defaults, may not be needed. This was temporarily
-  needed in master, but should not be needed in stable 3.7, if not remove it before release.
 - REPORT: Found NavigationDrawer issues to Flutter repo.
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
