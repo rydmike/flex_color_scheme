@@ -636,6 +636,7 @@ class AppBarSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const SizedBox(height: 8),
         const BottomAppBarShowcase(),
         const ListTile(
           isThreeLine: true,
