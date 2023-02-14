@@ -102,7 +102,6 @@ class UseElevationTintPopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
-              tileColor: Colors.transparent,
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: index == i || (index < 0 && i == FlexTint.values.length)

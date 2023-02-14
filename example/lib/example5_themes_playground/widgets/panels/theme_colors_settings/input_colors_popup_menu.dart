@@ -42,7 +42,6 @@ class InputColorsPopupMenu extends StatelessWidget {
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
-              tileColor: Colors.transparent,
               contentPadding: EdgeInsets.zero,
               dense: true,
               title: Text(AppColor.schemes[i].name),

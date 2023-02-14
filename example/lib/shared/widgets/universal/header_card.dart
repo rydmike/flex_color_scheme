@@ -214,7 +214,6 @@ class HeaderCard extends StatelessWidget {
               type: MaterialType.card,
               color: headerColor,
               child: ListTile(
-                tileColor: Colors.transparent,
                 contentPadding: headerPadding,
                 leading: leading,
                 title: cardTitle,

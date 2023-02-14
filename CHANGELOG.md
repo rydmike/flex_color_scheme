@@ -61,6 +61,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`. This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
+
+- The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases they were used to hide the issue in M3 mode of the app when FCS was not used.  
+
   
   **THEMES PLAYGROUND**
 
