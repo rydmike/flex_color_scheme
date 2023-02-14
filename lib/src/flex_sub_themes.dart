@@ -1568,8 +1568,9 @@ class FlexSubThemes {
 
     /// Corner radius of the [Drawer]'s visible edge.
     ///
-    /// If not defined, defaults to [kDrawerRadius] 16 dp in both M2 and M3
-    /// mode, based on M3 Specification
+    /// If not defined, defaults to [kDrawerRadius] 16 dp in M2 mode,
+    /// in M3 mode, null is kept but gets 16 via M3 mode defaults.
+    /// The 16 dp values is based on M3 specification:
     /// https://m3.material.io/components/navigation-drawer/specs
     final double? radius,
 
@@ -1593,6 +1594,11 @@ class FlexSubThemes {
     /// Currently not available as a property in [FlexSubThemesData], may be
     /// added later.
     final double? width,
+
+    /// Set to true to opt in on Material 3 styled chips.
+    ///
+    /// If false widgets will use more opinionated FlexColorScheme defaults.
+    final bool? useMaterial3,
   }) {
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
@@ -1604,16 +1610,20 @@ class FlexSubThemes {
       width: width,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusDirectional.horizontal(
-          end: Radius.circular(radius ?? kDrawerRadius),
-        ),
-      ),
-      endShape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusDirectional.horizontal(
-          end: Radius.circular(radius ?? kDrawerRadius),
-        ),
-      ),
+      shape: (useMaterial3 ?? false) && radius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                end: Radius.circular(radius ?? kDrawerRadius),
+              ),
+            ),
+      endShape: (useMaterial3 ?? false) && radius == null
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                start: Radius.circular(radius ?? kDrawerRadius),
+              ),
+            ),
     );
   }
 

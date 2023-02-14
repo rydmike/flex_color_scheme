@@ -10,6 +10,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Fixed **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
 
+- Fixed **bug** where `FlexSubThemes.drawerTheme` was using `BorderRadiusDirectional.horizontal` with `end` radius instead of `start` radius as its `endShape`. This bug was introduced in version 7.0.0-dev.1. 
+
 **NEW**
 
 - **Added**: Enums `FlexTint` and `FlexShadow` they are used to control elevation tint and elevation shadow in Material 3 themes. Tint can be taken away from elevated surface, or be adaptive and only taken away on iOS and macOS platforms via theme level settings. Shadows can be put back in Material 3 theming or done so only platform adaptively on iOS and macOS platforms.
@@ -97,10 +99,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - MUST DO: Finalize all the menu theming options.
-- MUST DO: Resolve EndDrawer directionality issue, but how without context?
 - MAYBE ADD: TextField settings examples.
 - MAYBE ADD: Page with example theming configs.
-- REPORT: Found NavigationDrawer issues to Flutter repo.
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
   - Dow from 100% ro 96% now. Get it back to 100%. Not hard, just a lot of tests to write.

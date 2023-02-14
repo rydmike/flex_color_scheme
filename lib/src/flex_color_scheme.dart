@@ -6589,6 +6589,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.drawerElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
