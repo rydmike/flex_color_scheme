@@ -116,7 +116,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - CHECK: Drawer M3 actual default. Show the buggy result in default or the fixed one?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Review and fix test coverage.
-  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write.
+  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 82% tested now.
   - All new sub-themes and new states.  
   - Test usedColors 7.
 - MUST DO: Review and test all tutorial examples.
