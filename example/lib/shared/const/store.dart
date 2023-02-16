@@ -795,8 +795,23 @@ class Store {
   // Default value for bottomNavShowUnselectedLabels, also to reset settings.
   static const bool defaultBottomNavShowUnselectedLabels = true;
 
-  // MenuBar and MenuButton SETTINGS.
+  // Menu, MenuBar and MenuButton SETTINGS.
   // ===========================================================================
+
+  // Key used to read and save the menuRadius value.
+  static const String keyMenuRadius = 'menuRadius';
+  // Default value for the menuRadius, also reset settings.
+  static const double? defaultMenuRadius = null;
+
+  // Key used to read and save the menuElevation value.
+  static const String keyMenuElevation = 'menuElevation';
+  // Default value for the menuElevation, also reset settings.
+  static const double? defaultMenuElevation = null;
+
+  // Key used to read and save the menuSchemeColor value.
+  static const String keyMenuSchemeColor = 'menuSchemeColor';
+  // Default value for the menuSchemeColor, also used to reset settings.
+  static const SchemeColor? defaultMenuSchemeColor = null;
 
   // Key used to read and save the menuBarRadius value.
   static const String keyMenuBarRadius = 'menuBarRadius';

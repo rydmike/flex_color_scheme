@@ -390,7 +390,13 @@ class ThemeController with ChangeNotifier {
         Store.keyBottomNavShowUnselectedLabels,
         Store.defaultBottomNavShowUnselectedLabels);
     //
-    // MenuBar and MenuButton SETTINGS.
+    // Menu, MenuBar and MenuButton SETTINGS.
+    _menuRadius =
+        await _themeService.load(Store.keyMenuRadius, Store.defaultMenuRadius);
+    _menuElevation = await _themeService.load(
+        Store.keyMenuElevation, Store.defaultMenuElevation);
+    _menuSchemeColor = await _themeService.load(
+        Store.keyMenuSchemeColor, Store.defaultMenuSchemeColor);
     _menuBarRadius = await _themeService.load(
         Store.keyMenuBarRadius, Store.defaultMenuBarRadius);
     _menuBarElevation = await _themeService.load(
@@ -864,7 +870,10 @@ class ThemeController with ChangeNotifier {
     setBottomNavShowUnselectedLabels(
         Store.defaultBottomNavShowUnselectedLabels, false);
     //
-    // MenuBar and MenuButton SETTINGS.
+    // Menu, MenuBar and MenuButton SETTINGS.
+    setMenuRadius(Store.defaultMenuRadius, false);
+    setMenuElevation(Store.defaultMenuRadius, false);
+    setMenuSchemeColor(Store.defaultMenuSchemeColor, false);
     setMenuBarRadius(Store.defaultMenuBarRadius, false);
     setMenuBarElevation(Store.defaultMenuBarRadius, false);
     setMenuBarShadowColor(Store.defaultMenuBarShadowColor, false);
@@ -2454,6 +2463,33 @@ class ThemeController with ChangeNotifier {
 
   // MenuBar and MenuButton SETTINGS.
   // ===========================================================================
+
+  late double? _menuRadius;
+  double? get menuRadius => _menuRadius;
+  void setMenuRadius(double? value, [bool notify = true]) {
+    if (value == _menuRadius) return;
+    _menuRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuRadius, value));
+  }
+
+  late double? _menuElevation;
+  double? get menuElevation => _menuElevation;
+  void setMenuElevation(double? value, [bool notify = true]) {
+    if (value == _menuElevation) return;
+    _menuElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuElevation, value));
+  }
+
+  late SchemeColor? _menuSchemeColor;
+  SchemeColor? get menuSchemeColor => _menuSchemeColor;
+  void setMenuSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _menuSchemeColor) return;
+    _menuSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuSchemeColor, value));
+  }
 
   late double? _menuBarRadius;
   double? get menuBarRadius => _menuBarRadius;
