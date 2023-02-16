@@ -31,6 +31,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   
 - **Added**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorRadius`, `drawerIndicatorSchemeColor`, `navigationBarIndicatorRadius`, `navigationRailIndicatorRadius`, `menuBarRadius`, `menuBarElevation`, `menuBarShadowColor`, `snackBarActionSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
 
+- **Added**: `menuRadius`, `menuElevation`, `menuOpacity`, `menuSchemeColor`  and `dropdownMenuTextStyle` to `FlexSubThemesData`.
+
 
 **CHANGE**
 
@@ -111,9 +113,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
+- TODO: TintedDisabled and TintedEffect, needs review and implementations.
+- TODO: The menu props theming needs own props, and not reuse popup props.
 - TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
 - MAYBE: Add own `FlexSubThemesData` props for background SchemeColor, elevation and radius for DropdownMenuThemeData, MenuBarThemeData and MenuThemeData. They now share controls in UI controls and use the PopupMenuButton props from `FlexSubThemesData`. This would be cleaner going forward. UI and theming work as far as intended now, but need to setup and use them via own props, that shared UI sets values to. This makes a total of 9 more `FlexSubThemesData` properties. Worth it? Maybe make just 1 that we can use as shared for all, and popup can fall via it if null, and we can add more individual ones later if needed without breaking anything.
-
 
 - MAYBE ADD: Page with pre-made example theme configurations.
 - MAYBE ADD: TextField settings examples.

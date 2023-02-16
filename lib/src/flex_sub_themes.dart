@@ -1632,6 +1632,12 @@ class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// The [TextStyle] of the text entry in a [DropDownMenu].
+    ///
+    /// If not defined, defaults to Flutter SDK default via widget default
+    /// [TextTheme.labelLarge].
+    final TextStyle? textStyle,
+
     /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
     /// Typically you want it to match the input decorator on your TextField.
     final InputDecorationTheme? inputDecorationTheme,
@@ -1641,12 +1647,14 @@ class FlexSubThemes {
     final Color? surfaceTintColor,
   }) {
     return DropdownMenuThemeData(
-        inputDecorationTheme: inputDecorationTheme,
-        menuStyle: MenuStyle(
-          surfaceTintColor: surfaceTintColor == null
-              ? null
-              : MaterialStatePropertyAll<Color>(surfaceTintColor),
-        ));
+      inputDecorationTheme: inputDecorationTheme,
+      textStyle: textStyle,
+      menuStyle: MenuStyle(
+        surfaceTintColor: surfaceTintColor == null
+            ? null
+            : MaterialStatePropertyAll<Color>(surfaceTintColor),
+      ),
+    );
   }
 
   /// An opinionated [ElevatedButtonThemeData] theme.
@@ -5282,18 +5290,20 @@ class FlexSubThemes {
 
     /// Foreground color of the tooltip.
     ///
-    /// If backgroundSchemeColor is defined, its Scheme color pair will be
+    /// If backgroundSchemeColor is defined, its SchemeColor pair will be
     /// used instead.
     final Color? foregroundColor,
 
     /// Alpha value for the background color.
     ///
-    /// If not defined, default to 0xFF, fully opaque.
+    /// If not defined, defaults to 0xFF, fully opaque.
     final int? backgroundAlpha,
 
     /// The border radius of the tooltip.
     ///
-    /// If not defined, defaults to 4.
+    /// If not defined, defaults to 4 same as Flutter SDK default.
+    /// FCS sets it to 8 by default when using sub-themes and
+    /// passes it here.
     final double? borderRadius,
 
     /// The color of the tooltip border.
@@ -5322,8 +5332,8 @@ class FlexSubThemes {
     /// one to define how much space the tooltip must be inset from the edges
     /// of their display window.
     ///
-    /// If this property is null, the default margin is
-    /// 0.0 logical pixels on all sides.
+    /// If this property is null, the default margin is 0.0 logical
+    /// pixels on all sides.
     final EdgeInsetsGeometry? margin,
 
     /// The length of time that a pointer must hover over a tooltip's widget

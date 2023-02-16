@@ -5951,12 +5951,12 @@ class FlexColorScheme with Diagnosticable {
 
     // Tooltip border radius value;
     double? tooltipBorderRadius() {
-      if (!useSubThemes) return 4;
-      return subTheme.tooltipRadius ?? 8;
+      if (!useSubThemes) return 4; // Flutter SDK default
+      return subTheme.tooltipRadius ?? kTooltipRadius; // FCS default
     }
 
-    // FCS opinionated tinted semi transparent background color.
-    // Used as background on SnackBar (default) and as option on Slider value.
+    // FCS opinionated tinted semi transparent background color. Used as
+    // background on SnackBar (default) and as an option on Slider value.
     Color tintedBackground({
       required Color background,
       required Color blend,
@@ -6597,6 +6597,7 @@ class FlexColorScheme with Diagnosticable {
       dropdownMenuTheme: useSubThemes
           ? FlexSubThemes.dropdownMenuTheme(
               colorScheme: colorScheme,
+              textStyle: subTheme.dropdownMenuTextStyle,
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -6805,6 +6806,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // TODO(rydmike): Make foreground color auto contrast with background.
+      // --> Potential Flutter SDK issue, investigate.
       // PopupMenuButton Theme.
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(

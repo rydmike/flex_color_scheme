@@ -230,6 +230,14 @@ const double kThinBorderWidth = 1;
 /// https://m3.material.io/components/time-pickers/specs.
 const double kTimeElementRadius = 8;
 
+/// Default border radius on [Tooltip].
+///
+/// The border radius on tooltips when opting on on sub-themes.
+///
+/// Flutter SDK defaults to 4, FCS uses 8 as default.
+/// It can be changed via API.
+const double kTooltipRadius = 8;
+
 // Alpha, opacity and bland constant values.
 //
 // Used for disable, hover, focus and background color adjustments by menu

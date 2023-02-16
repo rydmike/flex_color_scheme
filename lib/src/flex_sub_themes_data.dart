@@ -23,7 +23,7 @@ import 'flex_sub_themes.dart';
 /// as choices and offered flat config options covers what you need.
 ///
 /// A common use case for [FlexSubThemes] and the [FlexSubThemesData] is for
-/// easy to use customization of default border radius on all Flutter SDK
+/// easy customization of default border radius on all Flutter SDK
 /// Widgets and elements that supports border radius, either via [ShapeBorder]
 /// or [BorderRadiusGeometry].
 ///
@@ -226,6 +226,13 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuSchemeColor,
     this.popupMenuOpacity,
     //
+    this.dropdownMenuTextStyle,
+    //
+    this.menuRadius,
+    this.menuElevation,
+    this.menuSchemeColor,
+    this.menuOpacity,
+    //
     this.menuBarRadius,
     this.menuBarElevation,
     this.menuBarShadowColor,
@@ -374,7 +381,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Defaults to true.
   final bool interactionEffects;
 
-  // TODO(rydmike): Add more tintedDisabledControls support in v7.0 or 7.1?
+  // TODO(rydmike): Add more tintedDisabledControls support in v7.1 or later.
   /// Use primary tint on disabled controls.
   ///
   /// Set to true to make disabled controls use a shared slightly
@@ -383,7 +390,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Set to false to use default grey only disabled controls.
   ///
   /// Impacts controls:
-  /// - To be added...
+  /// - [InputDecorator]
+  /// -
   ///
   /// Defaults to true.
   final bool tintedDisabledControls;
@@ -1462,8 +1470,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [kCardElevation] = 0dp.
   final double? cardElevation;
 
-  /// Border radius override value for the menu on [PopupMenuButton], [MenuBar]
-  /// [MenuAnchor] and [DropDownMenu].
+  /// Border radius override value for the menu on [PopupMenuButton].
   ///
   /// When used by [FlexColorScheme] the border radius of popup menus follows
   /// the [defaultRadius] until and including 10 dp. After which it stays at
@@ -1484,22 +1491,12 @@ class FlexSubThemesData with Diagnosticable {
   /// inherited default radius values, but to also stay below the usable max
   /// rounding automatically at higher global default border radius values.
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kMenuRadius] 4dp, based on M3 Specification
-  /// https://m3.material.io/components/menus/specs
-  ///
-  /// In versions before v5.0.0-dev.2 it defaulted to 10. The M3 spec for it
-  /// was not available when it was chosen originally. It was assumed to have
-  /// higher border radius like rest of designs. However, the spec has it
-  /// defined [here](https://m3.material.io/components/menus/specs) now, and it
-  /// is 4. Since border radius default values are stated in FlexColorScheme
-  /// sub-theme design goals to follow the M3 design specs, it was updated to
-  /// match the spec. A bit higher rounding, may actually fit better with
-  /// the very round M3 design, try 8 or 10.
+  /// If not defined and [defaultRadius] is undefined, defaults to 4dp based on
+  /// widget default behavior, that is based on M3 Specification
+  /// https://m3.material.io/components/menus/specs.
   final double? popupMenuRadius;
 
-  /// Default elevation of [PopupMenuButton], [MenuBar], [MenuAnchor] and
-  /// [DropDownMenu].
+  /// Default elevation of [PopupMenuButton].
   ///
   /// If not defined, then if [useMaterial3] is:
   ///
@@ -1507,8 +1504,7 @@ class FlexSubThemesData with Diagnosticable {
   /// - true  : defaults to [kPopupMenuElevation] = 3 dp.
   final double? popupMenuElevation;
 
-  /// The ColorScheme based color used as background color on [PopupMenuButton],
-  /// [MenuBar], [MenuAnchor] and [DropDownMenu].
+  /// The ColorScheme based color used as background color on [PopupMenuButton].
   ///
   /// If not defined, then if [useMaterial3] is:
   /// - false : defaults to theme.cardColor.
@@ -1518,21 +1514,61 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Popup menu background opacity.
   ///
-  /// Used by FlexColorScheme to modify the opacity on the effective
-  /// colorScheme.surface color used on the themed PopupMenu background color.
+  /// Defaults to undefined (null). If undefined, produced result is same as 1,
+  /// fully opaque.
+  final double? popupMenuOpacity;
+
+  /// The [TextStyle] of the text entry in a [DropDownMenu].
   ///
-  /// For opacity to be applied to the background a defined color also have
-  /// be passed. If opacity is not null, FlexColorScheme will apply it to its
-  /// [colorScheme.surface] and pass it to
-  /// [FlexSubThemes.popupMenuTheme]'s backgroundColor [color]. If it is null,
-  /// FlexColorScheme will not pass any color the sub-theme background color,
-  /// and widget then uses its default behavior background color, which also
-  /// defaults to use [ThemeData.colorscheme] and in it [ColorScheme.surface].
+  /// If not defined, defaults to Flutter SDK default via widget default
+  /// [TextTheme.labelLarge].
+  final TextStyle? dropdownMenuTextStyle;
+
+  /// The border radius of [Menu] containers.
+  ///
+  /// When used by [FlexColorScheme] the border radius of menus follows
+  /// the [defaultRadius] until and including 10 dp. After which it stays at
+  /// 10 dp. If you need a higher border radius on menus than 10 dp,
+  /// you will have to explicitly override it here. It will not look very
+  /// good, the highlight inside the menu will start to overflow the corners and
+  /// it is not clipped along the border radius. The underlying Widget is not
+  /// designed with this high border rounding in mind, which makes sense since
+  /// it does not look good with too much rounding on a typically small
+  /// phone menu, that the widget was designed for originally.
+  ///
+  /// It will still look fairly OK with a border radius of max 12, the selected
+  /// item highlight corner overflow at top and bottom is barely visible. If
+  /// you configure it manually, max 12 might still be considered usable.
+  /// To be on the safe side it only follows the [defaultBorder] to max 10.
+  ///
+  /// The built-in behavior in FlexColorScheme allows it to match at low
+  /// inherited default radius values, but to also stay below the usable max
+  /// rounding automatically at higher global default border radius values.
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to 4dp based on
+  /// widget default behavior, that is based on M3 Specification
+  /// https://m3.material.io/components/menus/specs.
+  final double? menuRadius;
+
+  /// The elevation of [Menu] containers.
+  ///
+  /// If not defined, defaults to 3 via Flutter SDK default.
+  final double? menuElevation;
+
+  /// The ColorScheme based color used as background color on [MenuBar],
+  /// [MenuAnchor] and [DropDownMenu].
+  ///
+  /// If not defined, defaults to theme.colorScheme.surface.
+  final SchemeColor? menuSchemeColor;
+
+  /// Menu background opacity.
+  ///
+  /// Used by FlexColorScheme to modify the opacity the themed [MenuBar],
+  /// [MenuAnchor] and [DropDownMenu] background color.
   ///
   /// Defaults to undefined (null).
-  ///
   /// If undefined, produced result is same as 1, fully opaque.
-  final double? popupMenuOpacity;
+  final double? menuOpacity;
 
   /// The border radius of the [MenuBar] container.
   ///
@@ -1554,22 +1590,21 @@ class FlexSubThemesData with Diagnosticable {
   /// defaults and the [MenuBar] gets elevation shadow.
   final Color? menuBarShadowColor;
 
-  // TODO(rydmike): Define all default for tooltips, see old FCS style.
   /// Border radius value for [Tooltips].
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kTooltipRadius].
+  /// If not defined and, defaults to [kTooltipRadius].
   final double? tooltipRadius;
 
   /// The length of time that a pointer must hover over a tooltip's widget
   /// before the tooltip will be shown.
   ///
-  /// If not defined, defaults to [kTooltipWaitDuration].
+  /// If not defined, defaults to 0ms via Flutter SDK default. Consider
+  /// adding some wait time, instant tooltips are not seldom desired.
   final Duration? tooltipWaitDuration;
 
   /// The length of time that the tooltip will be shown once it has appeared.
   ///
-  /// If not defined, defaults to [kTooltipShowDuration].
+  /// If not defined, defaults to Flutter SDK default 1500ms.
   final Duration? tooltipShowDuration;
 
   /// The ColorScheme based color used as background color on [Tooltips].
@@ -1603,7 +1638,7 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
-  // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+  // TODO(rydmike): Elevation does not exist in Flutter 3.7, enable later.
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
@@ -1620,10 +1655,9 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// NOTE:
   ///
-  /// Dialog elevation does not exist as a theme feature in Flutter
-  /// beta 3.7.0-1.4.pre yet. It probably wont land in next stable release after
-  /// Flutter stable 3.3 either. This feature has no function until it lands
-  /// in stable from from master channel where it exists.
+  /// Dialog elevation does not exist as a theme feature in Flutter 3.7.x
+  /// This property cannot be made to function until it lands in stable channel
+  /// from from master channel, where it exists. Did not land in Flutter 3.7.
   final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
@@ -2623,6 +2657,13 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? popupMenuSchemeColor,
     final double? popupMenuOpacity,
     //
+    final TextStyle? dropdownMenuTextStyle,
+    //
+    final double? menuRadius,
+    final double? menuElevation,
+    final double? menuOpacity,
+    final SchemeColor? menuSchemeColor,
+    //
     final double? menuBarRadius,
     final double? menuBarElevation,
     final Color? menuBarShadowColor,
@@ -2894,6 +2935,14 @@ class FlexSubThemesData with Diagnosticable {
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
       popupMenuSchemeColor: popupMenuSchemeColor ?? this.popupMenuSchemeColor,
       popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
+      //
+      dropdownMenuTextStyle:
+          dropdownMenuTextStyle ?? this.dropdownMenuTextStyle,
+      //
+      menuRadius: menuRadius ?? this.menuRadius,
+      menuElevation: menuElevation ?? this.menuElevation,
+      menuSchemeColor: menuSchemeColor ?? this.menuSchemeColor,
+      menuOpacity: menuOpacity ?? this.menuOpacity,
       //
       menuBarRadius: menuBarRadius ?? this.menuBarRadius,
       menuBarElevation: menuBarElevation ?? this.menuBarElevation,
@@ -3212,6 +3261,13 @@ class FlexSubThemesData with Diagnosticable {
         other.popupMenuSchemeColor == popupMenuSchemeColor &&
         other.popupMenuOpacity == popupMenuOpacity &&
         //
+        other.dropdownMenuTextStyle == dropdownMenuTextStyle &&
+        //
+        other.menuRadius == menuRadius &&
+        other.menuElevation == menuElevation &&
+        other.menuSchemeColor == menuSchemeColor &&
+        other.menuOpacity == menuOpacity &&
+        //
         other.menuBarRadius == menuBarRadius &&
         other.menuBarElevation == menuBarElevation &&
         other.menuBarShadowColor == menuBarShadowColor &&
@@ -3465,6 +3521,13 @@ class FlexSubThemesData with Diagnosticable {
         popupMenuElevation,
         popupMenuSchemeColor,
         popupMenuOpacity,
+        //
+        dropdownMenuTextStyle,
+        //
+        menuRadius,
+        menuElevation,
+        menuSchemeColor,
+        menuOpacity,
         //
         menuBarRadius,
         menuBarElevation,
@@ -3757,6 +3820,15 @@ class FlexSubThemesData with Diagnosticable {
         'popupMenuSchemeColor', popupMenuSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
+    //
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'dropdownMenuTextStyle', dropdownMenuTextStyle));
+    //
+    properties.add(DiagnosticsProperty<double>('menuRadius', menuRadius));
+    properties.add(DiagnosticsProperty<double>('menuElevation', menuElevation));
+    properties
+        .add(EnumProperty<SchemeColor>('menuSchemeColor', menuSchemeColor));
+    properties.add(DiagnosticsProperty<double>('menuOpacity', menuOpacity));
     //
     properties.add(DiagnosticsProperty<double>('menuBarRadius', menuBarRadius));
     properties

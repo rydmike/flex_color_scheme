@@ -60,8 +60,11 @@ void main() {
     test('FCT kCardRadius is 12', () {
       expect(kCardRadius, 12);
     });
-    test('FCT kCardRadius is 8', () {
+    test('FCT kTimeElementRadius is 8', () {
       expect(kTimeElementRadius, 8);
+    });
+    test('FCT kTooltipRadius is 8', () {
+      expect(kTooltipRadius, 8);
     });
     test('FCT kMenuRadius is 4', () {
       expect(kMenuRadius, 4);
