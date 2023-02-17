@@ -33,6 +33,7 @@ import '../panels/theme_simulator/theme_simulator.dart';
 import '../panels/toggle_buttons_settings/toggle_buttons_settings.dart';
 import '../panels/tooltip_icon_button_settings/tooltip_icon_button_avatar_dropdown_settings.dart';
 import '../panels/widget_showcase/widget_showcase.dart';
+import 'premade_designs/premade_designs_panel.dart';
 
 /// Used to select which one of all the panels used in the Theme Playground
 /// to show as content in grid and page builders.
@@ -45,6 +46,7 @@ class PanelContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return <Widget>[
       IntroductionPanel(controller),
+      PremadeDesignsPanel(controller),
       ThemeColorsSettings(controller),
       SeededColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),

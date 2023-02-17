@@ -691,11 +691,16 @@ class ThemeController with ChangeNotifier {
   /// Does not reset the custom colors to their default, only theme settings.
   /// We keep the custom colors at their specified values even if theme settings
   /// are reset. There is a separate function to reset the custom colors.
-  Future<void> resetAllToDefaults() async {
+  Future<void> resetAllToDefaults({
+    /// If false, theme mode & scheme index are not reset.
+    bool resetMode = true,
+    // If false, notifyListeners is not called.
+    bool doNotify = true,
+  }) async {
     //
     // GENERAL SETTINGS.
     // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
-    setThemeMode(Store.defaultThemeMode, false);
+    if (resetMode) setThemeMode(Store.defaultThemeMode, false);
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
     setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
@@ -709,7 +714,7 @@ class ThemeController with ChangeNotifier {
     setUseM2StyleDividerInM3(Store.defaultUseM2StyleDividerInM3, false);
     setUseAppFont(Store.defaultUseAppFont, false);
     setUsedScheme(Store.defaultUsedScheme, false);
-    setSchemeIndex(Store.defaultSchemeIndex, false);
+    if (resetMode) setSchemeIndex(Store.defaultSchemeIndex, false);
     setInteractionEffects(Store.defaultInteractionEffects, false);
     setTintedDisabledControls(Store.defaultTintedDisabledControls, false);
     setDefaultRadius(Store.defaultDefaultRadius, false);
@@ -1027,7 +1032,9 @@ class ThemeController with ChangeNotifier {
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
     setPlatform(defaultTargetPlatform, false);
-    notifyListeners();
+
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
   }
 
   /// Reset the custom color values to their default values.
@@ -1057,7 +1064,7 @@ class ThemeController with ChangeNotifier {
   }
 
   /// Set TextField values to Flutter M3 defaults.
-  Future<void> setTextFieldToM3() async {
+  Future<void> setTextFieldToM3([bool doNotify = true]) async {
     setInputDecoratorSchemeColorLight(null, false);
     setInputDecoratorSchemeColorDark(null, false);
 
@@ -1079,11 +1086,13 @@ class ThemeController with ChangeNotifier {
 
     setInputDecoratorPrefixIconSchemeColor(null, false);
     setInputDecoratorPrefixIconDarkSchemeColor(null, false);
-    notifyListeners();
+
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
   }
 
   /// Set NavigationBar values to Flutter M3 defaults.
-  Future<void> setNavigationBarToM3() async {
+  Future<void> setNavigationBarToM3([bool doNotify = true]) async {
     setNavBarBackgroundSchemeColor(null, false);
     setNavBarIndicatorOpacity(1, false);
     setNavigationBarElevation(null, false);
@@ -1097,11 +1106,13 @@ class ThemeController with ChangeNotifier {
     setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavBarLabelBehavior(
         NavigationDestinationLabelBehavior.alwaysShow, false);
-    notifyListeners();
+
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
   }
 
   /// Set NavigationRail values to Flutter M3 defaults.
-  Future<void> setNavigationRailToM3() async {
+  Future<void> setNavigationRailToM3([bool doNotify = true]) async {
     setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
     setNavRailOpacity(1, false);
     setNavigationRailElevation(null, false);
@@ -1113,6 +1124,46 @@ class ThemeController with ChangeNotifier {
     setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
     setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
     setNavRailLabelType(NavigationRailLabelType.none, false);
+
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
+  }
+
+  /// Set Playground settings and FCS theme to selected premade config.
+  Future<void> setToPremade({int settingsId = 0}) async {
+    // First reset all settings so we start with a clean slate.
+    // But we do not change theme mode, we keep it. Also we will not notify
+    // any listeners yet, we do that once when all settings have been set.
+    // If there is no matching ID settings are just rest to defaults.
+    await resetAllToDefaults(resetMode: false, doNotify: false);
+
+    // TODO(rydmike): Maybe change int ID to enum later.
+
+    // Set to Material 3 style
+    if (settingsId == 1) {
+      // No blends, basic keyColors, no interaction tints, no disable tint.
+      setBlendLevel(0, false);
+      setBlendLevelDark(0, false);
+      setBlendOnLevel(0, false);
+      setBlendOnLevelDark(0, false);
+      setUseKeyColors(true, false);
+      setUseM2StyleDividerInM3(false, false);
+      setInteractionEffects(false, false);
+      setTintedDisabledControls(false, false);
+      // Set TextField to
+      await setTextFieldToM3(false);
+      // Set Navigators to defaults
+      await setNavigationBarToM3(false);
+      await setNavigationRailToM3(false);
+      // Set tooltip
+      setTooltipRadius(4, false);
+      setTooltipOpacity(0.9, false);
+      // Not entirely correct match with defaults, but best we can do with
+      // ColorScheme based colors. Most likely this is what it should be in M3,
+      // but Flutter does not implement it yet, it still uses M2 defaults in M3.
+      setTooltipSchemeColor(SchemeColor.inverseSurface, false);
+    }
+    // All settings have been modified, now notify listeners.
     notifyListeners();
   }
 

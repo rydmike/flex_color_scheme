@@ -1,12 +1,3 @@
-// Each Card shown in the grid view is just its on little widget, typically
-// very simple and basic Column based layouts.
-// They all share a common custom wrapper widget, the HeaderCard.
-//
-// The widgets below are all private classes local to this file, since in this
-// demo they are only intended to be use in HomePage. The could of course be
-// made public widget and put into their own files if there would be a need
-// to use them on other other screens too.
-
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -169,17 +160,15 @@ class IntroductionPanel extends StatelessWidget {
               'Flutter app, import FlexColorScheme, and theming is done.'),
           trailing: FilledButton(
             onPressed: controller.useFlexColorScheme
-                ? () {
-                    // ignore: discarded_futures
-                    showCopySetupCodeDialog(context, controller);
+                ? () async {
+                    await showCopySetupCodeDialog(context, controller);
                   }
                 : null,
             child: const Text('Code'),
           ),
           onTap: controller.useFlexColorScheme
-              ? () {
-                  // ignore: discarded_futures
-                  showCopySetupCodeDialog(context, controller);
+              ? () async {
+                  await showCopySetupCodeDialog(context, controller);
                 }
               : null,
         ),

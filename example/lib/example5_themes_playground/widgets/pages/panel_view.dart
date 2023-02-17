@@ -20,7 +20,7 @@ const bool _debug = !kReleaseMode && false;
 
 /// This is the smaller more focused single panel view of the Themes Playground.
 ///
-/// It shows only one panel at a time as a PageView. This is a nice layout
+/// It shows one or two panel at a time as a PageView. This is a nice layout
 /// on mid size screen, like tablets, probably preferable on a phone too.
 class PanelView extends StatefulWidget {
   const PanelView({
@@ -75,9 +75,8 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // pageController = PageController(
-    //   initialPage: widget.themeController.viewIndex,
-    // );
+    // TODO(rydmike): Nasty switch screen bug on platform swap, maybe here?
+    // pageController.jumpToPage(widget.themeController.viewIndex);
     previousPage = widget.themeController.viewIndex;
   }
 
@@ -138,7 +137,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                     }
                     if (themeCtrl.viewIndex != index) {
                       themeCtrl.setViewIndex(index);
-                      // This is handmade scale and fade up animation
+                      // This is a handmade scale and fade up animation
                       // when user taps on header item. We use it instead
                       // animating to the page with the page controller.
                       // Instead we jump to the page and trigger a slight

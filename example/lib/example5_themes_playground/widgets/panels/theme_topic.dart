@@ -22,6 +22,11 @@ const List<ThemeTopic> panelItems = <ThemeTopic>[
     icon: Icons.info_outlined,
   ),
   ThemeTopic(
+    heading: 'Premade designs',
+    buttonLabel: 'Premade\ndesigns',
+    icon: Icons.design_services_outlined,
+  ),
+  ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
