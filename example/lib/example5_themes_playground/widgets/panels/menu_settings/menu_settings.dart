@@ -412,8 +412,8 @@ class MenuSettings extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text('For an edge-to-edge design use 0 dp. '
-                  'The M3 guide depicts MenuBar as edge-to-edge with no '
-                  'corner rounding. Flutter M3 defaults to 4 dp.'),
+                  'The M3 guide shows menu bar as edge-to-edge with no '
+                  'corner rounding, Flutter defaults to 4 dp.'),
               Slider(
                 min: -1,
                 max: 30,
