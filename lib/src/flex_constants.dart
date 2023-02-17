@@ -155,12 +155,6 @@ const double kInputDecoratorM3Radius = 4;
 /// https://m3.material.io/components/text-fields/specs
 const double kInputDecoratorRadius = 16;
 
-/// Default border radius on menus, typically small popup menus.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/menus/specs
-const double kMenuRadius = 4;
-
 /// Alpha value for the indicator color on the [NavigationBar] and
 /// [NavigationRail].
 ///
@@ -196,12 +190,12 @@ const double kNavigationRailElevation = 0;
 ///
 /// Based on https://m3.material.io/components/menus/specs
 /// and https://m3.material.io/styles/elevation/tokens
-const double kPopupMenuElevation = 3;
+const double kPopupMenuM3Elevation = 3;
 
 /// Default elevation of [PopupMenuButton] in Material 2 mode.
 ///
 /// Opinionated value, M2 spec is 8.
-const double kPopupMenuElevationFCS = 6;
+const double kPopupMenuM2Elevation = 6;
 
 /// Default for elevation of [SnackBar].
 ///

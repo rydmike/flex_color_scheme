@@ -66,17 +66,14 @@ void main() {
     test('FCT kTooltipRadius is 8', () {
       expect(kTooltipRadius, 8);
     });
-    test('FCT kMenuRadius is 4', () {
-      expect(kMenuRadius, 4);
-    });
     test('FCT kElevatedButtonElevation is 1', () {
       expect(kElevatedButtonElevation, 1);
     });
     test('FCT kPopupMenuElevation is 3', () {
-      expect(kPopupMenuElevation, 3);
+      expect(kPopupMenuM3Elevation, 3);
     });
     test('FCT kPopupMenuElevationFCS is 6', () {
-      expect(kPopupMenuElevationFCS, 6);
+      expect(kPopupMenuM2Elevation, 6);
     });
     test('FCT kDialogElevation is 6', () {
       expect(kDialogElevation, 6);

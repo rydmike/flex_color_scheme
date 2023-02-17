@@ -5523,7 +5523,7 @@ class FlexColorScheme with Diagnosticable {
   ///   > for the active theme.
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
-    // Return true if the color is dark, it needs light text for contrast.
+    // Returns true if the color is dark, it needs light text for contrast.
     bool isColorDark(final Color color) =>
         ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
@@ -5539,14 +5539,14 @@ class FlexColorScheme with Diagnosticable {
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
 
-    // Get the effective standard Flutter ColorScheme from the provided
-    // brightness and provided or computed or default colors.
+    // Get the effective ColorScheme from the provided brightness and
+    // provided or computed or default colors.
     final ColorScheme colorScheme = toScheme;
 
     // A convenience bool to check if this theme is for light or dark mode
     final bool isDark = colorScheme.brightness == Brightness.dark;
 
-    // Use passed in target platform, else actual host platform.
+    // Use passed in target platform, else use actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
     // Use elevation tint in M3?
@@ -6049,7 +6049,7 @@ class FlexColorScheme with Diagnosticable {
         : useMaterial3
             // In M3 if not using sub themes, use default InputDecorationTheme.
             ? null
-            // Default decorator in M2 is also a bit opinionated, this is the
+            // Default decorator in M2 is a bit opinionated, this is the
             // FCS default one in all previous versions before version 4.0.0.
             // Kept for backwards defaults compatibility. Used when not using
             // opinionated component sub-themes in M2.
@@ -6078,10 +6078,10 @@ class FlexColorScheme with Diagnosticable {
                 ? kBottomSheetModalElevation
                 : kBottomSheetModalElevationM2);
 
-    // Popupmenu, ManuAnchor, DropDown menu background Color and elevation.
-    final double menuElevation = subTheme.popupMenuElevation ??
-        (useMaterial3 ? kPopupMenuElevation : kPopupMenuElevationFCS);
-    final Color? menuBackgroundColor = subTheme.popupMenuOpacity == null
+    // Popupmenu menu background Color and elevation.
+    final double popupMenuElevation = subTheme.popupMenuElevation ??
+        (useMaterial3 ? kPopupMenuM3Elevation : kPopupMenuM2Elevation);
+    final Color? poupMenuBackgroundColor = subTheme.popupMenuOpacity == null
         ? subTheme.popupMenuSchemeColor == null
             ? null
             : FlexSubThemes.schemeColor(
@@ -6110,15 +6110,15 @@ class FlexColorScheme with Diagnosticable {
       // in FlexColorScheme as well.
       //
       // Not all properties in ThemeData are included, if you need to modify
-      // them, use copyWith on ThemeData returnd by FCS.
+      // them, use copyWith on ThemeData returned by FCS.
 
       // GENERAL CONFIGURATION
       //
       // Elevation overlay on dark material elevation is used on dark themes
-      // on surfaces when so requested, applyElevationOverlayColor defaults
-      // to true in FlexColorScheme themes, but you can turn it off.
+      // on surfaces when so requested in M2, applyElevationOverlayColor
+      // defaults to true in FlexColorScheme themes, but you can turn it off.
       // Flutter ThemeData.from ColorScheme based themes also uses this by
-      // default, but older ThemeData factories do not use it by default
+      // default, but older ThemeData factories do not use it by default.
       // A correct Material 2 design should use it.
       applyElevationOverlayColor: isDark && applyElevationOverlayColor,
       extensions: extensions,
@@ -6652,7 +6652,7 @@ class FlexColorScheme with Diagnosticable {
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.popupMenuSchemeColor,
+              backgroundSchemeColor: subTheme.menuSchemeColor,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: subTheme.menuBarShadowColor,
               radius: subTheme.menuBarRadius,
@@ -6661,10 +6661,15 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // MenuButton theme.
+      // TODO(rydmike): Add styling of the actual menu button, maybe in v7.1.
+      // The only styling used so far is to provide the selected background
+      // color of menus, so the buttons can use correct contrast paired
+      // foreground color. Should consider adding at least the
+      // tinted actions, tinted disabled, border radius and padding.
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.popupMenuSchemeColor,
+              backgroundSchemeColor: subTheme.menuSchemeColor,
             )
           : null,
       //
@@ -6672,12 +6677,14 @@ class FlexColorScheme with Diagnosticable {
       // Used by the menu container for MenuBar, MenuAnchor and DropDownMenu.
       menuTheme: useSubThemes
           ? FlexSubThemes.menuTheme(
-              radius: subTheme.popupMenuRadius ??
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.menuSchemeColor,
+              opacity: subTheme.menuOpacity,
+              radius: subTheme.menuRadius ??
                   (subTheme.defaultRadius == null
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
-              elevation: menuElevation,
-              backgroundColor: menuBackgroundColor,
+              elevation: subTheme.menuElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
@@ -6816,8 +6823,8 @@ class FlexColorScheme with Diagnosticable {
                       ? null
                       : math.min(subTheme.defaultRadius!, 10.0)),
               // textStyle: effectiveTextTheme.labelLarge,
-              elevation: menuElevation,
-              color: menuBackgroundColor,
+              elevation: popupMenuElevation,
+              color: poupMenuBackgroundColor,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,
               foregroundSchemeColor: SchemeColor.surface,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -7233,7 +7240,7 @@ class FlexColorScheme with Diagnosticable {
         );
   }
 
-  // TODO(rydmike): Consider improving FCS inversePrimary algorithm.
+  // TODO(rydmike): Improve FCS inversePrimary algorithm.
   /// FlexColorScheme default for inversePrimary color, when not using seeds.
   ///
   /// When using real M3 ColorScheme's that are seeded, this color is not used.
@@ -7249,7 +7256,7 @@ class FlexColorScheme with Diagnosticable {
     }
   }
 
-  /// FlexColorScheme default for outline color, when not using seeds.
+  /// FlexColorScheme default for outline color, when not using M3 seeds.
   static Color _outlineColor(
       Brightness brightness, Color onBackground, int amount) {
     if (brightness == Brightness.light) {

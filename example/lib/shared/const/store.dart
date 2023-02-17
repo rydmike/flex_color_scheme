@@ -808,6 +808,11 @@ class Store {
   // Default value for the menuElevation, also reset settings.
   static const double? defaultMenuElevation = null;
 
+  // Key used to read and save the menuOpacity value.
+  static const String keyMenuOpacity = 'menuOpacity';
+  // Default value for the menuOpacity, also reset settings.
+  static const double? defaultMenuOpacity = null;
+
   // Key used to read and save the menuSchemeColor value.
   static const String keyMenuSchemeColor = 'menuSchemeColor';
   // Default value for the menuSchemeColor, also used to reset settings.

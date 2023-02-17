@@ -2726,31 +2726,51 @@ class FlexSubThemes {
   /// This theme is used by the menu for the [DropDownMenu], [MenuBar] and
   /// [MenuAnchor].
   static MenuThemeData menuTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Defines which [Theme] based [ColorScheme] based background color
+    /// of [PopupMenuButton].
+    ///
+    /// If not defined, will remains null and via Flutter SDK defaults get
+    /// [ColorScheme.surface] color.
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Menu background opacity.
+    ///
+    /// Used by FlexColorScheme to modify the opacity the themed [MenuBar],
+    /// [MenuAnchor] and [DropDownMenu] background color.
+    ///
+    /// Defaults to undefined (null).
+    /// If undefined, produced result is same as 1, fully opaque.
+    ///
+    /// If opacity is defined and [backgroundSchemeColor] is undefined,
+    /// then [ColorScheme.surface] will be used as background color to
+    /// make a background color with opacity.
+    final double? opacity,
+
     /// Menu corner radius.
     ///
-    /// Defaults to [kMenuRadius] = 4, M3 specification.
+    /// If not defined, default to 4 via Menu widget Flutter SDK defaults.
     final double? radius,
 
     /// Popup menu elevation.
     ///
-    /// If not defined, then if [useMaterial3] is:
-    /// - false : defaults to 6 dp [kPopupMenuElevationFCS], FCS default.
-    /// - true  : defaults to 3 dp.
-    /// Usually they are the same.
+    /// If not defined, defaults to 3 dp via Flutter widget SDK defaults.
     final double? elevation,
 
     /// Overrides the default value for MenuThemeData
     /// [menuStyle.surfaceTintColor].
     final Color? surfaceTintColor,
-
-    /// The background color of the popup menu.
-    ///
-    /// If not defined, then if [useMaterial3] is:
-    /// - false : defaults to theme.cardColor.
-    /// - true  : defaults to theme.colorScheme.surface.
-    /// Usually they are the same.
-    final Color? backgroundColor,
   }) {
+    // Get effective background color.
+    final Color? backgroundColor = backgroundSchemeColor != null
+        ? schemeColor(backgroundSchemeColor, colorScheme)
+            .withOpacity(opacity ?? 1.0)
+        : opacity != null
+            ? colorScheme.surface.withOpacity(opacity)
+            : null;
+
     return MenuThemeData(
       style: MenuStyle(
         elevation: MaterialStatePropertyAll<double?>(elevation),
@@ -2758,13 +2778,15 @@ class FlexSubThemes {
         surfaceTintColor: surfaceTintColor == null
             ? null
             : MaterialStatePropertyAll<Color>(surfaceTintColor),
-        shape: MaterialStatePropertyAll<OutlinedBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kMenuRadius),
-            ),
-          ),
-        ),
+        shape: radius != null
+            ? MaterialStatePropertyAll<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius),
+                  ),
+                ),
+              )
+            : null,
       ),
     );
   }
@@ -4022,9 +4044,6 @@ class FlexSubThemes {
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
   ///
-  /// Corner [radius] defaults to [kMenuRadius] (4) and [elevation] to
-  /// [kPopupMenuElevation] (2), Flutter SDK default is (8).
-  ///
   /// When used by [FlexColorScheme] the corner radius of popup menus follows
   /// the global [FlexSubThemeData.defaultRadius] if defined, until and
   /// including 10 dp. After which it stays at 10 dp. If you need a higher
@@ -4046,56 +4065,63 @@ class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     final ColorScheme? colorScheme,
 
-    /// Defines which [Theme] based [ColorScheme] based background color
-    /// of [NavigationDrawer].
+    /// Defines which [Theme] based [ColorScheme] based color is use as
+    /// background color by [PopupMenuButton].
     ///
-    /// If not defined will default to [Drawer] theme
-    /// background color. If it is not defined, then Flutter default uses
-    /// uses surface color as default in M3, and background in M2.
-    /// FCS uses surface in both modes.
+    /// Any passed in background color via the [color] property
+    /// will override this [backgroundSchemeColor] value.
+    ///
+    /// If not defined, and [color] is undefined, then it defaults via Flutter
+    /// SDK defaults to:
+    /// - [useMaterial3] = false : defaults to theme.cardColor.
+    /// - [useMaterial3] = true  : defaults to theme.colorScheme.surface.
+    /// Usually they are the same.
     final SchemeColor? backgroundSchemeColor,
 
-    /// Defines which [Theme] based [ColorScheme] based background color
-    /// of [NavigationDrawer].
+    /// Defines which [Theme] based [ColorScheme] based color is use as
+    /// foreground color by [PopupMenuButton].
     ///
-    /// If not defined will default to [Drawer] theme
-    /// background color. If it is not defined, then Flutter default uses
-    /// uses surface color as default in M3, and background in M2.
-    /// FCS uses surface in both modes.
+    /// If not defined and [backgroundSchemeColor] is, then it will default to
+    /// the schemeColorPair for the [backgroundSchemeColor]. If
+    /// [backgroundSchemeColor] is also null, then it defaults to Flutter SDK
+    /// default foreground color [ColorScheme.onSurface].
     final SchemeColor? foregroundSchemeColor,
 
-    /// The background color of the popup menu.
+    /// The background color of [PopupMenuButton].
     ///
-    /// If not defined, and [colorScheme] is undefined, then if
-    /// [useMaterial3] is:
-    /// - false : defaults to theme.cardColor.
-    /// - true  : defaults to theme.colorScheme.surface.
+    /// If not defined, and [backgroundSchemeColor] is undefined, then it
+    /// defaults via Flutter SDK defaults to:
+    /// - [useMaterial3] = false : defaults to theme.cardColor.
+    /// - [useMaterial3] = true  : defaults to theme.colorScheme.surface.
     /// Usually they are the same.
     final Color? color,
 
-    /// The TextStyle of the labels.
+    /// The TextStyle of the selectable items on the [PopupMenuButton].
     ///
-    /// You would pass in Theme.of(context).textTheme.labelLarge
-    /// for correct M3 style.
+    /// The default is [textTheme.labelLarge], via Flutter SDK defaults.
     final TextStyle? textStyle,
 
     /// Popup menu corner radius.
     ///
-    /// Defaults to [kMenuRadius] = 4, M3 specification.
+    /// If not defined, defaults to 4 via Flutter SDK defaults.
     final double? radius,
 
-    /// Popup menu elevation.
+    /// The elevation of the [PopupMenuButton].
     ///
     /// If not defined, then if [useMaterial3] is:
-    /// - false : defaults to 6 dp [kPopupMenuElevationFCS], FCS default.
+    /// - false : defaults to 8 dp
     /// - true  : defaults to 3 dp.
-    /// Usually they are the same.
+    /// via Flutter SDK widget default values.
+    /// FCS will pass in [kPopupMenuM3Elevation] (3), if Material3 is true
+    /// and [kPopupMenuM2Elevation] (6), if it is false.
     final double? elevation,
 
-    /// The color used as an overlay on [color] of the popup menu.
+    /// The color used as an alpha overlay tint color on the effective
+    /// [PopupMenuButton] background color.
     final Color? surfaceTintColor,
   }) {
-    // Get selected background color, defaults to surface.
+    // Get selected background color, defaults to surface in M3 if not defined
+    // ands to theme.cardColor in M2, typically they are the same.
     final Color? backgroundColor = color ??
         (colorScheme != null && backgroundSchemeColor != null
             ? schemeColor(backgroundSchemeColor, colorScheme)
@@ -4124,11 +4150,13 @@ class FlexSubThemes {
               return textStyle.apply(color: foregroundColor);
             })
           : null,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(radius ?? kMenuRadius),
-        ),
-      ),
+      shape: radius != null
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius),
+              ),
+            )
+          : null,
     );
   }
 

@@ -345,7 +345,12 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
-            // MenuBar and MenuButton settings.
+            // Menu, MenuBar and MenuButton settings.
+            menuRadius: controller.menuRadius,
+            menuElevation: controller.menuElevation,
+            menuSchemeColor: controller.menuSchemeColor,
+            menuOpacity: controller.menuOpacity,
+            //
             menuBarRadius: controller.menuBarRadius,
             menuBarElevation: controller.menuBarElevation,
             menuBarShadowColor: controller.menuBarShadowColor,

@@ -515,7 +515,7 @@ void main() {
           popupMenuSchemeColor: SchemeColor.onErrorContainer,
           popupMenuOpacity: 0.95,
           //
-          dropdownMenuTextStyle: TextStyle(color: Colors.blue),
+          dropdownMenuTextStyle: const TextStyle(color: Colors.blue),
           //
           menuRadius: 7,
           menuElevation: 12,

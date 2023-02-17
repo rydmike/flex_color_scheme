@@ -395,6 +395,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyMenuRadius, Store.defaultMenuRadius);
     _menuElevation = await _themeService.load(
         Store.keyMenuElevation, Store.defaultMenuElevation);
+    _menuOpacity = await _themeService.load(
+        Store.keyMenuOpacity, Store.defaultMenuOpacity);
     _menuSchemeColor = await _themeService.load(
         Store.keyMenuSchemeColor, Store.defaultMenuSchemeColor);
     _menuBarRadius = await _themeService.load(
@@ -872,10 +874,12 @@ class ThemeController with ChangeNotifier {
     //
     // Menu, MenuBar and MenuButton SETTINGS.
     setMenuRadius(Store.defaultMenuRadius, false);
-    setMenuElevation(Store.defaultMenuRadius, false);
+    setMenuElevation(Store.defaultMenuElevation, false);
+    setMenuOpacity(Store.defaultMenuOpacity, false);
     setMenuSchemeColor(Store.defaultMenuSchemeColor, false);
+    //
     setMenuBarRadius(Store.defaultMenuBarRadius, false);
-    setMenuBarElevation(Store.defaultMenuBarRadius, false);
+    setMenuBarElevation(Store.defaultMenuBarElevation, false);
     setMenuBarShadowColor(Store.defaultMenuBarShadowColor, false);
     //
     // NavigationBar SETTINGS.
@@ -2480,6 +2484,15 @@ class ThemeController with ChangeNotifier {
     _menuElevation = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyMenuElevation, value));
+  }
+
+  late double? _menuOpacity;
+  double? get menuOpacity => _menuOpacity;
+  void setMenuOpacity(double? value, [bool notify = true]) {
+    if (value == _menuOpacity) return;
+    _menuOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuOpacity, value));
   }
 
   late SchemeColor? _menuSchemeColor;

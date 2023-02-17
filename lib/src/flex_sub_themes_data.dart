@@ -1500,8 +1500,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, then if [useMaterial3] is:
   ///
-  /// - false : defaults to [kPopupMenuElevationFCS] = 6 dp.
-  /// - true  : defaults to [kPopupMenuElevation] = 3 dp.
+  /// - false : defaults to [kPopupMenuM2Elevation] = 6 dp.
+  /// - true  : defaults to [kPopupMenuM3Elevation] = 3 dp.
   final double? popupMenuElevation;
 
   /// The ColorScheme based color used as background color on [PopupMenuButton].

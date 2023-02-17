@@ -51,19 +51,11 @@ class ThemeShowcase extends StatelessWidget {
         const ChipShowcase(),
         const Divider(),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: const <Widget>[
-            PopupMenuButtonShowcase(),
-            SizedBox(width: 8),
-            PopupMenuButtonTilesShowcase(),
-          ],
-        ),
+        const PopupMenuButtonsShowcase(),
         const SizedBox(height: 8),
         const Divider(),
+        const DropDownMenuShowcase(explainUsage: true),
         const MenuBarShowcase(),
-        const SizedBox(height: 8),
         const MenuAnchorShowcase(),
         const SizedBox(height: 8),
         const Divider(),
@@ -859,16 +851,56 @@ class _RangeSliderShowcaseState extends State<RangeSliderShowcase> {
   }
 }
 
+class PopupMenuButtonsShowcase extends StatelessWidget {
+  const PopupMenuButtonsShowcase({super.key, this.explainUsage = true});
+  final bool explainUsage;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          if (explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Text(
+                'PopupMenuButton',
+                style: denseHeader,
+              ),
+            ),
+          if (explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Text(
+                'The classic Material popup menu.',
+                style: denseBody,
+              ),
+            ),
+          Row(
+            children: const <Widget>[
+              PopupMenuButtonShowcase(),
+              SizedBox(width: 16),
+              PopupMenuButtonTilesShowcase(),
+            ],
+          ),
+        ]);
+  }
+}
+
 class PopupMenuButtonShowcase extends StatelessWidget {
   const PopupMenuButtonShowcase({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme scheme = theme.colorScheme;
     return PopupMenuButton<int>(
       onSelected: (_) {},
-      tooltip: 'Show menu',
       position: PopupMenuPosition.under,
       itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
         PopupMenuItem<int>(value: 1, child: Text('Option 1')),
@@ -877,22 +909,7 @@ class PopupMenuButtonShowcase extends StatelessWidget {
         PopupMenuItem<int>(value: 4, child: Text('Option 4')),
         PopupMenuItem<int>(value: 5, child: Text('Option 5')),
       ],
-      child: AbsorbPointer(
-        child: TextButton.icon(
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            backgroundColor: scheme.primary,
-            foregroundColor: scheme.onPrimary,
-            disabledForegroundColor: scheme.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-          ),
-          onPressed: () {},
-          icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('Show PopupMenu'),
-        ),
-      ),
+      icon: const Icon(Icons.more_vert),
     );
   }
 }
@@ -902,11 +919,8 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme scheme = theme.colorScheme;
     return PopupMenuButton<int>(
       onSelected: (_) {},
-      tooltip: 'Show menu',
       position: PopupMenuPosition.under,
       itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
         PopupMenuItem<int>(
@@ -927,22 +941,7 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
                 leading: Icon(Icons.water_damage),
                 title: Text('Water damage'))),
       ],
-      child: AbsorbPointer(
-        child: TextButton.icon(
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            backgroundColor: scheme.primary,
-            foregroundColor: scheme.onPrimary,
-            disabledForegroundColor: scheme.onSurface,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-          ),
-          onPressed: () {},
-          icon: const Icon(Icons.expand_more_outlined),
-          label: const Text('ListTile PopupMenu'),
-        ),
-      ),
+      icon: const Icon(Icons.more_horiz),
     );
   }
 }
@@ -1020,7 +1019,8 @@ class _DropDownButtonFormFieldState extends State<DropDownButtonFormField> {
 }
 
 class DropDownMenuShowcase extends StatefulWidget {
-  const DropDownMenuShowcase({super.key});
+  const DropDownMenuShowcase({super.key, this.explainUsage = false});
+  final bool explainUsage;
 
   @override
   State<DropDownMenuShowcase> createState() => _DropDownMenuShowcaseState();
@@ -1030,33 +1030,62 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
   String selectedItem = 'one';
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: selectedItem,
-      onSelected: (String? value) {
-        setState(() {
-          selectedItem = value ?? 'one';
-        });
-      },
-      dropdownMenuEntries: const <DropdownMenuEntry<String>>[
-        DropdownMenuEntry<String>(
-          label: 'Alarm settings',
-          leadingIcon: Icon(Icons.alarm),
-          value: 'one',
-        ),
-        DropdownMenuEntry<String>(
-          label: 'Cabin overview',
-          leadingIcon: Icon(Icons.cabin),
-          value: 'two',
-        ),
-        DropdownMenuEntry<String>(
-          label: 'Surveillance view',
-          leadingIcon: Icon(Icons.camera_outdoor_rounded),
-          value: 'three',
-        ),
-        DropdownMenuEntry<String>(
-          label: 'Water alert',
-          leadingIcon: Icon(Icons.water_damage),
-          value: 'four',
+    final ThemeData theme = Theme.of(context);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
+      fontSize: 13,
+    );
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        if (widget.explainUsage)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            child: Text(
+              'DropdownMenu',
+              style: denseHeader,
+            ),
+          ),
+        if (widget.explainUsage)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+            child: Text(
+              'The new M3 DropdownMenu shares building blocks with MenuBar and '
+              'MenuAnchor, also uses InputDecorator for text entry.',
+              style: denseBody,
+            ),
+          ),
+        DropdownMenu<String>(
+          initialSelection: selectedItem,
+          onSelected: (String? value) {
+            setState(() {
+              selectedItem = value ?? 'one';
+            });
+          },
+          dropdownMenuEntries: const <DropdownMenuEntry<String>>[
+            DropdownMenuEntry<String>(
+              label: 'Alarm settings',
+              leadingIcon: Icon(Icons.alarm),
+              value: 'one',
+            ),
+            DropdownMenuEntry<String>(
+              label: 'Cabin overview',
+              leadingIcon: Icon(Icons.cabin),
+              value: 'two',
+            ),
+            DropdownMenuEntry<String>(
+              label: 'Surveillance view',
+              leadingIcon: Icon(Icons.camera_outdoor_rounded),
+              value: 'three',
+            ),
+            DropdownMenuEntry<String>(
+              label: 'Water alert',
+              leadingIcon: Icon(Icons.water_damage),
+              value: 'four',
+            ),
+          ],
         ),
       ],
     );
@@ -2099,7 +2128,7 @@ class MenuBarShowcase extends StatelessWidget {
         children: <Widget>[
           if (explainUsage)
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Text(
                 'MenuBar',
                 style: denseHeader,
@@ -2107,7 +2136,7 @@ class MenuBarShowcase extends StatelessWidget {
             ),
           if (explainUsage)
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Text(
                 'The new M3 menus can be used in a MenuBar via SubMenuButton '
                 'and its MenuItemButton, but they can also be used in a '
@@ -2261,7 +2290,7 @@ class MenuAnchorShowcase extends StatelessWidget {
       children: <Widget>[
         if (explainUsage)
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
             child: Text(
               'MenuAnchor',
               style: denseHeader,
@@ -2269,16 +2298,18 @@ class MenuAnchorShowcase extends StatelessWidget {
           ),
         if (explainUsage)
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
             child: Text(
-              'The M3 MenuAnchor used on a Container as a context menu.',
+              'The new M3 MenuAnchor used on a Container as a context menu.',
               style: denseBody,
             ),
           ),
         Row(
           children: const <Widget>[
             Expanded(
-              child: MyContextMenu(message: 'The new M3 MenuAnchor is cool!'),
+              child: MenuAnchorContextMenu(
+                message: 'The new M3 MenuAnchor is cool!',
+              ),
             ),
           ],
         ),
@@ -2307,16 +2338,16 @@ enum MenuEntry {
   final MenuSerializableShortcut? shortcut;
 }
 
-class MyContextMenu extends StatefulWidget {
-  const MyContextMenu({super.key, required this.message});
+class MenuAnchorContextMenu extends StatefulWidget {
+  const MenuAnchorContextMenu({super.key, required this.message});
 
   final String message;
 
   @override
-  State<MyContextMenu> createState() => _MyContextMenuState();
+  State<MenuAnchorContextMenu> createState() => _MenuAnchorContextMenuState();
 }
 
-class _MyContextMenuState extends State<MyContextMenu> {
+class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
   MenuEntry? _lastSelection;
   final FocusNode _buttonFocusNode = FocusNode(debugLabel: 'Menu Button');
   final MenuController _menuController = MenuController();
@@ -2419,7 +2450,8 @@ class _MyContextMenuState extends State<MyContextMenu> {
           ),
         ],
         child: Card(
-          elevation: 0.5,
+          margin: EdgeInsets.zero,
+          elevation: 1,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

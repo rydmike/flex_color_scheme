@@ -334,27 +334,24 @@ class ShowcaseMenus extends StatelessWidget {
         0,
         media.padding.bottom + AppData.edgeInsetsTablet,
       ),
-      children: <Widget>[
-        const SizedBox(height: 8),
+      children: const <Widget>[
+        SizedBox(height: 8),
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Wrap(
-            spacing: 4,
-            runSpacing: 8,
-            children: const <Widget>[
-              PopupMenuButtonShowcase(),
-              SizedBox(width: 8),
-              PopupMenuButtonTilesShowcase(),
-            ],
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: PopupMenuButtonsShowcase(explainUsage: true),
         ),
-        const Divider(),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: DropDownMenuShowcase(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: DropDownMenuShowcase(explainUsage: true),
         ),
-        const MenuBarShowcase(),
-        const MenuAnchorShowcase(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: MenuBarShowcase(),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: MenuAnchorShowcase(),
+        ),
       ],
     );
   }

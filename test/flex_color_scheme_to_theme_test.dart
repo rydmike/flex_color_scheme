@@ -3277,13 +3277,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.shape,
-        equals(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-        ),
+        equals(null),
       );
     });
     // Test default PopupMenu theming, light M3
@@ -3311,13 +3305,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.shape,
-        equals(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-        ),
+        equals(null),
       );
     });
     // Test custom PopupMenu theming, with default background, light M2.

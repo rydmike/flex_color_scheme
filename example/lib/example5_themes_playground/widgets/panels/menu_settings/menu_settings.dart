@@ -36,20 +36,29 @@ class MenuSettings extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.popupMenuOpacity
             : 1;
+    final double menuOpacity =
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.menuOpacity ?? 1
+            : 1;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Menus'),
-          subtitle: Text('The menu theming properties are shared '
-              'in FCS across multiple component sub-themes to ensure a '
-              'consistent style on all menu components whenever possible.'),
+          title: Text('PopupMenuButton'),
+          subtitle: Text('The PopupMenuButton can be used on any kind of '
+              'widget, below it used on its typical icons. The '
+              'PopupMenuButton menu has a different implementation '
+              'than the newer M3 menus further below.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: PopupMenuButtonsShowcase(explainUsage: false),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Menu container border radius'),
+          title: const Text('Border radius'),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -108,38 +117,28 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Menu container elevation'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('Menu containers still have a drop shadow by default '
-                  'in M3. They also use surface elevation tint, which is '
-                  'useful in dark mode.'),
-              Slider(
-                min: -1,
-                max: 20,
-                divisions: 21,
-                label: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.popupMenuElevation == null ||
-                            (controller.popupMenuElevation ?? -1) < 0
-                        ? popupMenuElevationDefaultLabel
-                        : (controller.popupMenuElevation?.toStringAsFixed(0) ??
-                            '')
-                    : useMaterial3
-                        ? 'default 3'
-                        : 'default 8',
-                value: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.popupMenuElevation ?? -1
-                    : -1,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? (double value) {
-                            controller.setPopupMenuElevation(
-                                value < 0 ? null : value.roundToDouble());
-                          }
-                        : null,
-              ),
-            ],
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 20,
+            divisions: 21,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuElevation == null ||
+                        (controller.popupMenuElevation ?? -1) < 0
+                    ? popupMenuElevationDefaultLabel
+                    : (controller.popupMenuElevation?.toStringAsFixed(0) ?? '')
+                : useMaterial3
+                    ? 'default 3'
+                    : 'default 8',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setPopupMenuElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -169,14 +168,12 @@ class MenuSettings extends StatelessWidget {
           ),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Menu background color'),
+          title: const Text('Background color'),
           labelForDefault: 'default (surface)',
           subtitle: const Text(
-            'Correct contrast pair color will be used as foreground color '
-            'automatically for menu container content in DropDownMenu, '
-            'MenuBar and MenuAnchor. PopupMenuButton currently '
-            'only supports onSurface as content color. The cause is being '
-            'investigated, potential Flutter issue.',
+            'Correct contrast pair color should be used as foreground color, '
+            'but PopupMenuButton only gets onSurface color. The cause is being '
+            'investigated.',
           ),
           index: controller.popupMenuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -192,7 +189,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Menu container background opacity'),
+          title: const Text('Background opacity'),
           subtitle: Slider(
             max: 100,
             divisions: 100,
@@ -214,7 +211,6 @@ class MenuSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
                   '${(popupOpacity * 100).toStringAsFixed(0)} %',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
@@ -223,50 +219,192 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(height: 32),
+        const Divider(height: 16),
         const ListTile(
-          title: Text('PopupMenuButton'),
-          subtitle: Text('The PopupMenuButton can be used on any kind of '
-              'widget, below a custom TextButton is being used. The '
-              'PopupMenuButton has a different implementation in Flutter '
-              'than the newer M3 menus further below. The properties '
-              'originally used to only theme it, are now also used '
-              'to style equivalent properties in the newer menus.'),
+          title: Text('Menus'),
+          subtitle: Text('These menu properties are shared by the new M3 '
+              'DropdownMenu, MenuAnchor and MenuBar.'),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          // The button used in the PopupMenuShowcase to open the PopupMenu
-          // is not a native widget, only the menu is, and it is the one that
-          // is themed.
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: const <Widget>[
-              PopupMenuButtonShowcase(),
-              PopupMenuButtonTilesShowcase(),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border radius'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text('Respects global setting up to max 10. If higher '
+                  'than 10 is used, the selection indicator may '
+                  'overflow visibly in the rounded corners.'),
+              Slider(
+                min: -1,
+                max: 12,
+                divisions: 13,
+                label: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.menuRadius == null ||
+                            (controller.menuRadius ?? -1) < 0
+                        ? 'default 4'
+                        : (controller.menuRadius?.toStringAsFixed(0) ?? '')
+                    : 'default 4',
+                value: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.menuRadius ?? -1
+                    : -1,
+                onChanged:
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? (double value) {
+                            controller.setMenuRadius(
+                                value < 0 ? null : value.roundToDouble());
+                          }
+                        : null,
+              ),
             ],
           ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.menuRadius == null ||
+                              (controller.menuRadius ?? -1) < 0
+                          ? popupMenuDefaultRadiusLabel
+                          : (controller.menuRadius?.toStringAsFixed(0) ?? '')
+                      : 'default 4',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
-        const Divider(height: 32),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 20,
+            divisions: 21,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuElevation == null ||
+                        (controller.menuElevation ?? -1) < 0
+                    ? 'default 3'
+                    : (controller.menuElevation?.toStringAsFixed(0) ?? '')
+                : 'default 3',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setMenuElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.menuElevation == null ||
+                              (controller.menuElevation ?? -1) < 0
+                          ? 'default 3'
+                          : (controller.menuElevation?.toStringAsFixed(0) ?? '')
+                      : 'default 3',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Background color'),
+          labelForDefault: 'default (surface)',
+          index: controller.menuSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setMenuSchemeColor(null);
+                  } else {
+                    controller.setMenuSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Background opacity'),
+          subtitle: Slider(
+            max: 100,
+            divisions: 100,
+            label: (menuOpacity * 100).toStringAsFixed(0),
+            value: menuOpacity * 100,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setMenuOpacity(value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  '${(menuOpacity * 100).toStringAsFixed(0)} %',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+
         // const SizedBox(height: 16),
         const ListTile(
           title: Text('DropdownMenu'),
           subtitle: Text('The text input area uses the themed '
-              'InputDecoration settings. Other theming properties are '
-              'here shared with the PopupMenuButton.'),
+              'InputDecoration.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: DropDownMenuShowcase(),
         ),
         const SizedBox(height: 16),
-        const Divider(),
+        const ListTile(
+          title: Text('MenuAnchor'),
+          subtitle: Text('The MenuAnchor can be used to attach a menu to any '
+              'widget. It is based on same building blocks as the MenuBar, '
+              'using SubMenuButton with MenuItemButton. It can have sub-menus '
+              'and keyboard shortcuts.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: MenuAnchorShowcase(explainUsage: false),
+        ),
+        const SizedBox(height: 16),
         const ListTile(
           title: Text('MenuBar'),
           subtitle: Text('The MenuBar is made up of SubMenuButtons that have '
               'MenuItemButtons. You can construct arbitrary deep nested '
               'sub-menus. Menu items can have keyboard shortcuts.'),
         ),
+        const SizedBox(height: 8),
+        const MenuBarShowcase(explainUsage: false),
+        const SizedBox(height: 16),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('MenuBar border radius'),
@@ -312,7 +450,7 @@ class MenuSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.menuBarRadius == null ||
                               (controller.menuBarRadius ?? -1) < 0
-                          ? popupMenuDefaultRadiusLabel
+                          ? 'default 4'
                           : (controller.menuBarRadius?.toStringAsFixed(0) ?? '')
                       : 'default 4',
                   style: theme.textTheme.bodySmall!
@@ -372,8 +510,8 @@ class MenuSettings extends StatelessWidget {
         SwitchListTile(
             title: const Text('Remove elevation shadow'),
             subtitle: const Text('The M3 guide depicts MenuBars with no '
-                'shadow and optional elevation with tint. Flutter default '
-                'control has shadow in M3. To be able to use elevation with '
+                'shadow and optional elevation with tint. Flutter defaults '
+                'has shadow in M3. To be able to use elevation with '
                 'only elevation tint in M3, turn ON to remove the shadow.'),
             value: controller.menuBarShadowColor == Colors.transparent,
             onChanged: (bool removeShadow) {
@@ -384,23 +522,6 @@ class MenuSettings extends StatelessWidget {
               }
             }),
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuBarShowcase(explainUsage: false),
-        ),
-        const SizedBox(height: 16),
-        const ListTile(
-          title: Text('MenuAnchor'),
-          subtitle: Text('The MenuAnchor can be used to attach a menu to any '
-              'widget. It is based on same building blocks as the MenuBar by '
-              'using SubMenuButton with MenuItemButton. It can have sub-menus '
-              'and keyboard shortcuts, like the MenuBar.'),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuAnchorShowcase(explainUsage: false),
-        ),
-        const SizedBox(height: 16),
       ],
     );
   }

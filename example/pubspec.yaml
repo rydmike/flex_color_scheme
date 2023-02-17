@@ -66,6 +66,11 @@ dependencies:
   # https://pub.dev/packages/hive
   hive: ^2.2.3
 
+  # Color utilities by Google (material.io).
+  # Used in Playground by CodeTheme to harmonize colors against main theme colors.
+  # Flutter SDK from 2.10.0 stable also uses and depends on this package.
+  material_color_utilities: ^0.2.0
+
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider

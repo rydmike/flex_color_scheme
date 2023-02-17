@@ -509,15 +509,7 @@ void main() {
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(),
-        equals(
-          const PopupMenuThemeData(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(4),
-              ),
-            ),
-          ),
-        ),
+        equals(const PopupMenuThemeData()),
       );
     });
     test(
