@@ -9,8 +9,8 @@ import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/showcase_material.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
 import 'widgets/theme_select_buttons.dart';
 
 // -----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            const ShowcaseMaterial(),
           ],
         ),
       ),

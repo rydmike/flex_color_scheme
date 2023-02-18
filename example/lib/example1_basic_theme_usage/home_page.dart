@@ -6,7 +6,7 @@ import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
+import '../shared/widgets/universal/showcase_material.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 1 - Basic Theme Usage
@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            const ShowcaseMaterial(),
           ],
         ),
       ),

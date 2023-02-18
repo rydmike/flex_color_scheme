@@ -77,7 +77,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
     super.didChangeDependencies();
     // TODO(rydmike): Nasty switch screen bug on platform swap, maybe here?
     // pageController.jumpToPage(widget.themeController.viewIndex);
-    previousPage = widget.themeController.viewIndex;
+    // TODO(rydmike): Remove this debug print.
+    debugPrint('PanelView previous page: $previousPage');
+    debugPrint(
+        'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
+    // previousPage = widget.themeController.viewIndex;
   }
 
   @override
@@ -170,6 +174,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             themeCtrl.setViewIndex(pageIndex);
           },
           itemBuilder: (BuildContext context, int pageIndex) {
+            // TODO(rydmike): Remove this debug print.
+            debugPrint('PanelView itemBuilder index: $pageIndex');
+            debugPrint('PanelView itemBuilder previous page: $previousPage');
+            debugPrint('PanelView itemBuilder controller '
+                'viewIndex: ${widget.themeController.viewIndex}');
             return ScaleTransition(
               scale: scaleAnimation,
               child: FadeTransition(

@@ -11,8 +11,8 @@ import 'shared/widgets/app/show_sub_pages.dart';
 import 'shared/widgets/app/show_sub_theme_colors.dart';
 import 'shared/widgets/app/show_theme_data_colors.dart';
 import 'shared/widgets/universal/page_body.dart';
+import 'shared/widgets/universal/showcase_material.dart';
 import 'shared/widgets/universal/theme_mode_switch.dart';
-import 'shared/widgets/universal/theme_showcase.dart';
 
 /// DEFAULT EXAMPLE - Hot Reload Playground
 ///
@@ -923,7 +923,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(),
               Text('Theme Showcase', style: headlineMedium),
               const SizedBox(height: 8),
-              const ThemeShowcase(),
+              const ShowcaseMaterial(),
             ],
           ),
         ),

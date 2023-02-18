@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// Theme showcase for the current theme.
+/// Used to show the current theme on Material widgets.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
 /// how it looks with different Material widgets.
@@ -15,8 +15,8 @@ import 'package:flutter/services.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so useful, unless all you really want to do is to show what
 /// Flutter Widgets look like.
-class ThemeShowcase extends StatelessWidget {
-  const ThemeShowcase({super.key});
+class ShowcaseMaterial extends StatelessWidget {
+  const ShowcaseMaterial({super.key});
 
   @override
   Widget build(BuildContext context) {

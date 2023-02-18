@@ -7,8 +7,8 @@ import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/showcase_material.dart';
 import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 2 - Custom Theme
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            const ShowcaseMaterial(),
           ],
         ),
       ),

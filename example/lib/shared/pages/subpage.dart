@@ -9,8 +9,8 @@ import '../widgets/app/show_color_scheme_colors.dart';
 import '../widgets/app/show_sub_theme_colors.dart';
 import '../widgets/app/show_theme_data_colors.dart';
 import '../widgets/universal/page_body.dart';
+import '../widgets/universal/showcase_material.dart';
 import '../widgets/universal/theme_mode_switch.dart';
-import '../widgets/universal/theme_showcase.dart';
 
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
@@ -130,7 +130,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
                 ),
                 const Divider(),
                 Text('Theme Showcase', style: headlineMedium),
-                const ThemeShowcase(),
+                const ShowcaseMaterial(),
               ],
             ),
           ),
