@@ -35,12 +35,11 @@ class NavigationBarSettings extends StatelessWidget {
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     // Logic for default elevation label.
-    final String elevationDefaultLabel =
-        controller.navigationBarElevation == null
-            ? controller.useMaterial3
-                ? 'default 3'
-                : 'default 0'
-            : 'global ${controller.navigationBarElevation!.toStringAsFixed(1)}';
+    final String elevationDefaultLabel = controller.navBarElevation == null
+        ? controller.useMaterial3
+            ? 'default 3'
+            : 'default 0'
+        : 'global ${controller.navBarElevation!.toStringAsFixed(1)}';
 
     // Logic for background color label.
     String backgroundColorLabel() {
@@ -227,24 +226,23 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
-                ? controller.navigationBarElevation == null ||
-                        (controller.navigationBarElevation ?? -1) < 0
+                ? controller.navBarElevation == null ||
+                        (controller.navBarElevation ?? -1) < 0
                     ? elevationDefaultLabel
-                    : (controller.navigationBarElevation?.toStringAsFixed(1) ??
-                        '')
+                    : (controller.navBarElevation?.toStringAsFixed(1) ?? '')
                 : controller.useMaterial3
                     ? 'default 3'
                     : 'default 0',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
-                ? controller.navigationBarElevation ?? -1
+                ? controller.navBarElevation ?? -1
                 : -1,
             onChanged: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
                 ? (double value) {
-                    controller.setNavigationBarElevation(
+                    controller.setNavBarElevation(
                         value < 0 ? null : value.roundToDouble());
                   }
                 : null,
@@ -262,11 +260,10 @@ class NavigationBarSettings extends StatelessWidget {
                   controller.useSubThemes &&
                           controller.useFlexColorScheme &&
                           !controller.useFlutterDefaults
-                      ? controller.navigationBarElevation == null ||
-                              (controller.navigationBarElevation ?? -1) < 0
+                      ? controller.navBarElevation == null ||
+                              (controller.navBarElevation ?? -1) < 0
                           ? elevationDefaultLabel
-                          : (controller.navigationBarElevation
-                                  ?.toStringAsFixed(1) ??
+                          : (controller.navBarElevation?.toStringAsFixed(1) ??
                               '')
                       : controller.useMaterial3
                           ? 'default 3'

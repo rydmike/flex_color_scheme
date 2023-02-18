@@ -273,8 +273,8 @@ class DrawerSettings extends StatelessWidget {
                       ? controller.drawerIndicatorOpacity == null ||
                               (controller.drawerIndicatorOpacity ?? -1) < 0
                           ? 'default (100%)'
-                          : (controller.drawerIndicatorOpacity! * 100)
-                              .toStringAsFixed(0)
+                          // ignore: lines_longer_than_80_chars
+                          : '${(controller.drawerIndicatorOpacity! * 100).toStringAsFixed(0)}%'
                       : 'default (100%)',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),

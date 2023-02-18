@@ -412,8 +412,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarBackgroundSchemeColor);
     _navBarOpacity = await _themeService.load(
         Store.keyNavBarOpacity, Store.defaultNavBarOpacity);
-    _navigationBarElevation = await _themeService.load(
-        Store.keyNavigationBarElevation, Store.defaultNavigationBarElevation);
+    _navBarElevation = await _themeService.load(
+        Store.keyNavBarElevation, Store.defaultNavigationBarElevation);
     _navBarHeight = await _themeService.load(
         Store.keyNavBarHeight, Store.defaultNavBarHeight);
     _navBarSelectedIconSchemeColor = await _themeService.load(
@@ -891,7 +891,7 @@ class ThemeController with ChangeNotifier {
     setNavBarBackgroundSchemeColor(
         Store.defaultNavBarBackgroundSchemeColor, false);
     setNavBarOpacity(Store.defaultNavBarOpacity, false);
-    setNavigationBarElevation(Store.defaultNavigationBarElevation, false);
+    setNavBarElevation(Store.defaultNavigationBarElevation, false);
     setNavBarHeight(Store.defaultNavBarHeight, false);
     setNavBarSelectedIconSchemeColor(
         Store.defaultNavBarSelectedIconSchemeColor, false);
@@ -1095,7 +1095,7 @@ class ThemeController with ChangeNotifier {
   Future<void> setNavigationBarToM3([bool doNotify = true]) async {
     setNavBarBackgroundSchemeColor(null, false);
     setNavBarIndicatorOpacity(1, false);
-    setNavigationBarElevation(null, false);
+    setNavBarElevation(null, false);
     setNavBarHeight(null, false);
     setNavBarIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavBarIndicatorOpacity(1, false);
@@ -1134,34 +1134,407 @@ class ThemeController with ChangeNotifier {
     // First reset all settings so we start with a clean slate.
     // But we do not change theme mode, we keep it. Also we will not notify
     // any listeners yet, we do that once when all settings have been set.
-    // If there is no matching ID settings are just rest to defaults.
+    // If there is no matching ID, settings are just rest to defaults.
     await resetAllToDefaults(resetMode: false, doNotify: false);
 
-    // TODO(rydmike): Maybe change int ID to enum later.
-
-    // Set to Material 3 style
+    // Material 3 defaults (M3 Basic seed)
     if (settingsId == 1) {
-      // No blends, basic keyColors, no interaction tints, no disable tint.
+      // Blend mode and levels.
       setBlendLevel(0, false);
       setBlendLevelDark(0, false);
       setBlendOnLevel(0, false);
       setBlendOnLevelDark(0, false);
+      // Seed generation - Basic M3 default.
       setUseKeyColors(true, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(false, false);
       setInteractionEffects(false, false);
       setTintedDisabledControls(false, false);
-      // Set TextField to
+      // Set SnackBar to M3.
+      setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
+      // Set TextField to M3
       await setTextFieldToM3(false);
-      // Set Navigators to defaults
+      // Set Navigators to M3
       await setNavigationBarToM3(false);
       await setNavigationRailToM3(false);
-      // Set tooltip
+      // Set tooltip to M3 like
       setTooltipRadius(4, false);
       setTooltipOpacity(0.9, false);
-      // Not entirely correct match with defaults, but best we can do with
+      // Not entirely correct color with defaults, but best we can do with
       // ColorScheme based colors. Most likely this is what it should be in M3,
       // but Flutter does not implement it yet, it still uses M2 defaults in M3.
       setTooltipSchemeColor(SchemeColor.inverseSurface, false);
+    }
+    // Primary focused
+    else if (settingsId == 2) {
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setSurfaceModeDark(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setBlendLevel(5, false);
+      setBlendLevelDark(12, false);
+      setBlendOnLevel(20, false);
+      setBlendOnLevelDark(20, false);
+      // Seed generation - Turn it OFF.
+      setUseKeyColors(false, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(true, false);
+      // Text theme blends: ON
+      setBlendLightTextTheme(true, false);
+      setBlendDarkTextTheme(true, false);
+      // OutlinedButton settings
+      setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
+      setOutlinedButtonPressedBorderWidth(2, false);
+      // ToggleButtons settings
+      setToggleButtonsBorderSchemeColor(SchemeColor.primary, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      setSegmentedButtonBorderSchemeColor(SchemeColor.primary, false);
+      // Set toggles colored
+      setUnselectedToggleIsColored(true, false);
+      // Slider Settings
+      setSliderValueTinted(true, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBackgroundAlphaLight(21, false);
+      setInputDecoratorBackgroundAlphaDark(43, false);
+      setInputDecoratorPrefixIconSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorBorderRadius(12, false);
+      setInputDecoratorUnfocusedHasBorder(false, false);
+      // Menus and Popup
+      setPopupMenuBorderRadius(6, false);
+      setPopupMenuElevation(8, false);
+      setMenuRadius(6, false);
+      setMenuElevation(8, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(1, false);
+      // Drawer settings
+      setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
+      // BottomNavigationBar
+      setBottomNavBarMuteUnselected(false, false);
+      // NavigationBar settings
+      setNavBarMuteUnselected(false, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
+      // setNavBarUnselectedSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorOpacity(1.0, false);
+      // NavigationRail settings
+      setNavRailMuteUnselected(false, false);
+      setNavRailSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorOpacity(1.0, false);
+    }
+    // Fabulous 12
+    else if (settingsId == 3) {
+      // The default radius to 12 for all.
+      setDefaultRadius(12, false);
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setBlendLevel(3, false);
+      setBlendLevelDark(7, false);
+      // Seed generation - Turn it ON, use all 3 main seeds. Vivid algo.
+      setUseKeyColors(true, false);
+      setUseSecondary(true, false);
+      setUseTertiary(true, false);
+      setUsedFlexToneSetup(3, false); // Vivid
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(true, false);
+      // Text theme blends
+      setBlendLightTextTheme(false, false);
+      setBlendDarkTextTheme(false, false);
+      // OutlinedButton settings
+      setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
+      // ToggleButtons settings
+      setToggleButtonsBorderSchemeColor(SchemeColor.primary, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      setSegmentedButtonBorderSchemeColor(SchemeColor.primary, false);
+      // Set toggles colored
+      setUnselectedToggleIsColored(true, false);
+      // Slider Settings
+      setSliderValueTinted(true, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBackgroundAlphaLight(31, false);
+      setInputDecoratorBackgroundAlphaDark(43, false);
+      setInputDecoratorPrefixIconSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorUnfocusedHasBorder(false, false);
+      setInputDecoratorFocusedBorderWidth(1.0, false);
+      // FAB settings
+      setFabUseShape(true, false);
+      setFabAlwaysCircular(true, false);
+      // Menus and Popup
+      setPopupMenuBorderRadius(8, false);
+      setPopupMenuElevation(3, false);
+      setMenuRadius(8, false);
+      setMenuElevation(3, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(2, false);
+      setMenuBarShadowColor(Colors.transparent, false);
+      // Drawer settings
+      setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
+      setDrawerIndicatorBorderRadius(12, false);
+      // BottomNavigationBar
+      setBottomNavBarMuteUnselected(false, false);
+      // NavigationBar settings
+      setNavBarMuteUnselected(false, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorOpacity(1.0, false);
+      setNavBarIndicatorBorderRadius(12, false);
+      // NavigationRail settings
+      setNavRailMuteUnselected(false, false);
+      setNavRailBackgroundSchemeColor(SchemeColor.surface);
+      setNavRailSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorOpacity(1.0, false);
+      setNavRailIndicatorBorderRadius(12, false);
+    }
+    // Material 3 does Material 2
+    else if (settingsId == 4) {
+      // The default radius to 12 for all.
+      setDefaultRadius(4, false);
+      // No legacy swap, this is M2 emulation.
+      setSwapLegacyColors(false, false);
+      // Set blend modes and levels.
+      setBlendLightOnColors(false, false);
+      setBlendDarkOnColors(false, false);
+      setBlendLevel(0, false);
+      setBlendLevelDark(0, false);
+      setBlendOnLevel(0, false);
+      setBlendOnLevelDark(0, false);
+      // Elevation tint and shadows.
+      setElevationTint(FlexTint.removeTint, false);
+      setElevationShadow(FlexShadow.useShadow, false);
+      setElevationShadowDark(FlexShadow.useShadow, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(false, false);
+      setTintedDisabledControls(false, false);
+      // Text theme blends
+      setBlendLightTextTheme(false, false);
+      setBlendDarkTextTheme(false, false);
+      // AppBar settings
+      setAppBarStyleLight(FlexAppBarStyle.primary, false);
+      setAppBarStyleDark(FlexAppBarStyle.material, false);
+      setAppBarElevationLight(4, false);
+      setAppBarElevationDark(4, false);
+      setAppBarScrolledUnderElevationLight(4.0, false);
+      setAppBarScrolledUnderElevationDark(4.0, false);
+      setBottomAppBarElevationLight(8, false);
+      setBottomAppBarElevationDark(8, false);
+      // TabBar
+      setTabBarStyle(FlexTabBarStyle.forAppBar, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimary, false);
+      setElevatedButtonSecondarySchemeColor(SchemeColor.primary, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.onSurface, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.onSurface, false);
+      setInputDecoratorBackgroundAlphaLight(13, false);
+      setInputDecoratorBackgroundAlphaDark(20, false);
+      setInputDecoratorBorderSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorBorderSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorUnfocusedBorderIsColored(false, false);
+      // FAB settings
+      setFabUseShape(true, false);
+      setFabAlwaysCircular(true, false);
+      // Chip settings
+      setChipSchemeColor(SchemeColor.primary, false);
+      setChipBorderRadius(20, false);
+      // Menus and Popup
+      setPopupMenuElevation(8, false);
+      setMenuElevation(8, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(1, false);
+      // Dialog settings
+      setDialogElevation(24, false);
+      // Set SnackBar to M2/M3 style.
+      setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
+      // Drawer settings
+      setDrawerElevation(16, false);
+      setDrawerWidth(304, false);
+      // BottomSheet
+      setBottomSheetElevation(10, false);
+      setBottomSheetModalElevation(20, false);
+      // BottomNavigationBar
+      setBottomNavigationBarElevation(8, false);
+      setBottomNavBarSelectedSchemeColor(SchemeColor.primary, false);
+      setBottomNavBarMuteUnselected(true, false);
+      // NavigationBar settings
+      setNavBarIndicatorSchemeColor(SchemeColor.secondary, false);
+      setNavBarBackgroundSchemeColor(SchemeColor.surfaceVariant, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
+      setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
+      setNavBarMuteUnselected(true, false);
+      // NavigationRail settings
+      setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
+      setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.secondary, false);
+      setNavRailMuteUnselected(true, false);
+    }
+    // High contrast seeded, true black and white
+    else if (settingsId == 5) {
+      // Legacy swap
+      setSwapLegacyColors(true, false);
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setBlendLevel(22, false);
+      setBlendLevelDark(18, false);
+      setLightIsWhite(true, false);
+      setDarkIsTrueBlack(true, false);
+      // Seed generation - Turn it ON, use all 3 main seeds. Vivid algo.
+      setUseKeyColors(true, false);
+      setUseSecondary(true, false);
+      setUseTertiary(true, false);
+      setUsedFlexToneSetup(6, false); // Ultra contrast.
+      setKeepPrimary(true, false);
+      setKeepSecondary(true, false);
+      setKeepTertiary(true, false);
+      setOnMainsUseBWLight(true, false);
+      setOnMainsUseBWDark(false, false);
+      setOnSurfacesUseBWLight(true, false);
+      setOnSurfacesUseBWDark(false, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(true, false);
+      // AppBar settings
+      setAppBarStyleLight(FlexAppBarStyle.background, false);
+      setAppBarStyleDark(FlexAppBarStyle.background, false);
+      setBottomAppBarElevationLight(1, false);
+      setBottomAppBarElevationDark(2, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBackgroundAlphaLight(21, false);
+      setInputDecoratorBackgroundAlphaDark(43, false);
+      setInputDecoratorPrefixIconSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorBorderRadius(8, false);
+      setInputDecoratorUnfocusedHasBorder(false, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setElevatedButtonSecondarySchemeColor(
+          SchemeColor.primaryContainer, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      // Menus and Popup
+      setPopupMenuBorderRadius(6, false);
+      setPopupMenuElevation(4, false);
+      setMenuRadius(6, false);
+      setMenuElevation(4, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(1, false);
+      // Dialogs
+      setDialogElevation(3, false);
+      setDialogBorderRadius(20, false);
+      // SnackBar
+      setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
+      // BottomSheet
+      setBottomSheetElevation(2, false);
+      setBottomSheetModalElevation(3, false);
+      setBottomSheetBorderRadius(20, false);
+      // Drawer settings
+      setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
+      // BottomNavigationBar
+      setBottomNavBarMuteUnselected(false, false);
+      setBottomNavBarBackgroundSchemeColor(SchemeColor.surfaceVariant, false);
+      // NavigationBar settings
+      setNavBarBackgroundSchemeColor(SchemeColor.background, false);
+      setNavBarMuteUnselected(false, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.background, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavBarElevation(1, false);
+      setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorOpacity(1.0, false);
+      // NavigationRail settings
+      setNavRailMuteUnselected(false, false);
+      setNavRailSelectedIconSchemeColor(SchemeColor.background, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorOpacity(1.0, false);
+    }
+    // Primary shades only
+    else if (settingsId == 6) {
+      // Legacy swap
+      setSwapLegacyColors(false, false);
+      setUsedColors(1, false);
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setBlendLevel(2, false);
+      setBlendLevelDark(5, false);
+      setBlendOnLevel(10, false);
+      setBlendOnLevelDark(20, false);
+      // Seed generation - Turn it ON, use all 3 main seeds. Vivid algo.
+      setUseKeyColors(true, false);
+      setUseSecondary(true, false);
+      setUseTertiary(true, false);
+      setUsedFlexToneSetup(9, false); // One hue
+      setKeepPrimary(true, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(true, false);
+      // AppBar settings
+      setAppBarStyleLight(FlexAppBarStyle.background, false);
+      setAppBarStyleDark(FlexAppBarStyle.background, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBackgroundAlphaLight(21, false);
+      setInputDecoratorBackgroundAlphaDark(43, false);
+      setInputDecoratorPrefixIconSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorBorderRadius(8, false);
+      setInputDecoratorUnfocusedHasBorder(false, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      setSegmentedButtonUnselectedSchemeColor(SchemeColor.onPrimary, false);
+      // Menus and Popup
+      setPopupMenuBorderRadius(6, false);
+      setPopupMenuElevation(4, false);
+      setMenuRadius(6, false);
+      setMenuElevation(4, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(1, false);
+      // Dialogs
+      setDialogElevation(3, false);
+      setDialogBorderRadius(20, false);
+      // Drawer settings
+      setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
+      // BottomNavigationBar
+      setBottomNavBarMuteUnselected(false, false);
+      // NavigationBar settings
+      setNavBarBackgroundSchemeColor(SchemeColor.background, false);
+      setNavBarMuteUnselected(false, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavBarElevation(0, false);
+      // setNavBarUnselectedSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorOpacity(1.0, false);
+      // NavigationRail settings
+      setNavRailMuteUnselected(false, false);
+      setNavRailSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorOpacity(1.0, false);
     }
     // All settings have been modified, now notify listeners.
     notifyListeners();
@@ -2605,13 +2978,13 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavBarOpacity, value));
   }
 
-  late double? _navigationBarElevation;
-  double? get navigationBarElevation => _navigationBarElevation;
-  void setNavigationBarElevation(double? value, [bool notify = true]) {
-    if (value == _navigationBarElevation) return;
-    _navigationBarElevation = value;
+  late double? _navBarElevation;
+  double? get navBarElevation => _navBarElevation;
+  void setNavBarElevation(double? value, [bool notify = true]) {
+    if (value == _navBarElevation) return;
+    _navBarElevation = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNavigationBarElevation, value));
+    unawaited(_themeService.save(Store.keyNavBarElevation, value));
   }
 
   late double? _navBarHeight;

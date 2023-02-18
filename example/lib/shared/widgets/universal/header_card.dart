@@ -203,7 +203,6 @@ class HeaderCard extends StatelessWidget {
 
     return Card(
       margin: margin,
-      color: cardColor,
       shape: shapeBorder,
       elevation: elevation,
       clipBehavior: Clip.hardEdge,

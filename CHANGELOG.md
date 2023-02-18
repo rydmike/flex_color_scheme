@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 16, 2023**
+**Feb 18, 2023**
 
 **FIX**
 
@@ -114,6 +114,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
 - WIP ADD: Page with pre-made example theme configurations. Panel added, configs WIP.
+- TODO: ADD: Selected and unselected colors for Drawer items.
+- TODO: ADD: TabBar indicator style. (Add: New enum type to value-key service).  
+- TODO: ADD: TabBar bottom border config option.  
 - TODO: TintedDisabled and TintedEffect, needs review and implementations.
 - TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
 

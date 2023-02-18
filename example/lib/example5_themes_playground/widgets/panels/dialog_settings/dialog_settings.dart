@@ -122,8 +122,8 @@ class DialogSettings extends StatelessWidget {
           title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
-            max: 20,
-            divisions: 21,
+            max: 30,
+            divisions: 31,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.dialogElevation == null ||
                         (controller.dialogElevation ?? -1) < 0

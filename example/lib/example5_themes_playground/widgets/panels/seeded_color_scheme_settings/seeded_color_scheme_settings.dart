@@ -4,6 +4,7 @@ import '../../../../shared/const/app_color.dart';
 import '../../../../shared/const/flex_tone.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/use_key_colors_buttons.dart';
+import '../../shared/show_input_colors_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
@@ -195,6 +196,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
               ' FlexTones setup has CAM16 chroma:'),
           subtitle: Text(_flexToneSetup),
         ),
+        ShowInputColorsSwitch(controller: controller),
         const SizedBox(height: 8),
       ],
     );

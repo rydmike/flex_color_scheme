@@ -61,6 +61,7 @@ ThemeData themeDataDark(ThemeController controller) {
     visualDensity: AppData.visualDensity,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
+    applyElevationOverlayColor: true,
     typography: controller.useTextTheme
         ? Typography.material2021(platform: controller.platform)
         : Typography.material2018(platform: controller.platform),

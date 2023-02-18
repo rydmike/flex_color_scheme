@@ -34,7 +34,7 @@ String generateThemeDartCode(ThemeController controller) {
   ),
   darkTheme: ThemeData(
     brightness: Brightness.dark,
-    useMaterial3: true,$usedTypography
+    useMaterial3: true,$usedTypography    
   ),
   themeMode: ThemeMode.system,''';
     } else {
@@ -43,11 +43,12 @@ String generateThemeDartCode(ThemeController controller) {
   // Here is a default Material 2 starting point theme setup for you.
   //
   theme: ThemeData(
-    colorScheme: const ColorScheme.light(),
+    colorScheme: const ColorScheme.light(),    
   $usedTypography
   ),
   darkTheme: ThemeData(    
     colorScheme: const ColorScheme.dark(),
+    applyElevationOverlayColor: true,
   $usedTypography  
   ),
   themeMode: ThemeMode.system,''';
@@ -893,9 +894,8 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
       : '';
-  final String navigationBarElevation = controller.navigationBarElevation !=
-          null
-      ? '    navigationBarElevation: ${controller.navigationBarElevation!.toStringAsFixed(1)},\n'
+  final String navigationBarElevation = controller.navBarElevation != null
+      ? '    navigationBarElevation: ${controller.navBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationBarHeight = controller.navBarHeight != null
       ? '    navigationBarHeight: ${controller.navBarHeight!.toStringAsFixed(1)},\n'

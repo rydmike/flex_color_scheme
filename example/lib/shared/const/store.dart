@@ -850,7 +850,7 @@ class Store {
   static const double defaultNavBarOpacity = 1.0;
 
   // Key used to read and save the navigationBarElevation value.
-  static const String keyNavigationBarElevation = 'navigationBarElevation';
+  static const String keyNavBarElevation = 'navigationBarElevation';
   // Default value for the navigationBarElevation, also reset settings.
   static const double? defaultNavigationBarElevation = null;
 

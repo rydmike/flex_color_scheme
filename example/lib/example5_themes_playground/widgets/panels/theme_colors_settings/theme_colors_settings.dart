@@ -6,6 +6,7 @@ import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
+import '../../shared/show_input_colors_switch.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'input_colors_popup_menu.dart';
@@ -237,27 +238,7 @@ class ThemeColorsSettings extends StatelessWidget {
             ],
           ),
         ),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Show scheme input color values'),
-          subtitle: const Text(
-              'Turn ON this option to show the FlexColorScheme scheme '
-              'input color values. This shows the used color values '
-              'before any input modifiers are used on them. This includes seed '
-              'generation, swapping legacy colors, swapping primary and '
-              'secondary colors, seed generation, input color limiters, '
-              'computed dark theme and using M3 error colors on legacy '
-              'M2 schemes. In older versions the scheme input color '
-              'values were always shown. This may be confusing and they '
-              'are now hidden by default. Showing them may be useful to '
-              'understand how the scheme defined input colors are '
-              'being modified by input modifiers, but it is cluttered. '
-              'If ON, scheme input color values show the colors before '
-              'input modifiers, and the surrounding '
-              "color is the effective theme's ColorScheme."),
-          value: controller.showSchemeInput,
-          onChanged: controller.setShowSchemeInput,
-        ),
+        ShowInputColorsSwitch(controller: controller),
         const SizedBox(height: 8),
       ],
     );
