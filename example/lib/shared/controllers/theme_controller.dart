@@ -12,7 +12,6 @@ import '../services/theme_service.dart';
 /// Used to show which TonalPalette a hovered color belongs to.
 /// Tucking this ChangeNotifier into the ThemeController is not really kosher
 /// it should be in its own Provider/Riverpod or Inherited widget.
-///
 enum TonalPalettes {
   primary,
   secondary,
@@ -43,7 +42,6 @@ enum TonalPalettes {
 /// want to persist locally (or remotely), in that case this approach is also
 /// the simpler and more convenient one. In this particular case though, well
 /// maybe not with this amount of props.
-//
 // ignore:prefer_mixin
 class ThemeController with ChangeNotifier {
   ThemeController(this._themeService);
@@ -78,6 +76,8 @@ class ThemeController with ChangeNotifier {
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _compactMode = await _themeService.load(
         Store.keyCompactMode, Store.defaultCompactMode);
+    _confirmPremade = await _themeService.load(
+        Store.keyConfirmPremade, Store.defaultConfirmPremade);
     _viewIndex =
         await _themeService.load(Store.keyViewIndex, Store.defaultViewIndex);
     _sideViewIndex = await _themeService.load(
@@ -1287,7 +1287,7 @@ class ThemeController with ChangeNotifier {
       // FAB settings
       setFabUseShape(true, false);
       setFabAlwaysCircular(true, false);
-      setFabSchemeColor(SchemeColor.secondary, false);
+      setFabSchemeColor(SchemeColor.tertiary, false);
       // Menus and Popup
       setPopupMenuBorderRadius(8, false);
       setPopupMenuElevation(3, false);
@@ -1449,7 +1449,7 @@ class ThemeController with ChangeNotifier {
       setInputDecoratorBorderRadius(8, false);
       setInputDecoratorUnfocusedHasBorder(false, false);
       // FAB settings
-      setFabSchemeColor(SchemeColor.secondary, false);
+      setFabSchemeColor(SchemeColor.tertiary, false);
       // Elevated button
       setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
       setElevatedButtonSecondarySchemeColor(
@@ -1946,6 +1946,16 @@ class ThemeController with ChangeNotifier {
     _compactMode = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyCompactMode, value));
+  }
+
+  late bool _confirmPremade;
+  bool get confirmPremade => _confirmPremade;
+  void setConfirmPremade(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _confirmPremade) return;
+    _confirmPremade = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyConfirmPremade, value));
   }
 
   late int _viewIndex;

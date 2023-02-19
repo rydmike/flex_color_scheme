@@ -221,13 +221,15 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
 }
 
 class CCard extends StatelessWidget {
-  const CCard({super.key, this.padding, this.child});
+  const CCard({super.key, this.padding, this.color, this.child});
   final EdgeInsetsGeometry? padding;
+  final Color? color;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: color,
       margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
       elevation: 0,
       child: Padding(
@@ -333,21 +335,26 @@ class ShowcaseInput extends StatelessWidget {
     final MediaQueryData media = MediaQuery.of(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        16,
-        media.padding.top + AppData.edgeInsetsTablet,
-        16,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        0,
+        media.padding.top + 8,
+        0,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        TextInputField(),
-        SizedBox(height: 8),
-        DropDownButtonFormField(),
-        SizedBox(height: 8),
-        DropDownMenuShowcase(),
-        SizedBox(height: 16),
-        ChipShowcase(),
-        SizedBox(height: 8),
+      children: <Widget>[
+        const CCard(
+          child: TextInputField(),
+        ),
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              DropDownButtonFormField(),
+              SizedBox(height: 8),
+              DropDownMenuShowcase(),
+            ],
+          ),
+        ),
+        const CCard(child: ChipShowcase()),
       ],
     );
   }
@@ -362,25 +369,23 @@ class ShowcaseMenus extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: PopupMenuButtonsShowcase(explainUsage: true),
+      children: <Widget>[
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              PopupMenuButtonsShowcase(explainUsage: true),
+              SizedBox(height: 8),
+              DropDownMenuShowcase(explainUsage: true),
+            ],
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: DropDownMenuShowcase(explainUsage: true),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuBarShowcase(),
-        ),
-        Padding(
+        const MenuBarShowcase(explainUsage: true, explainIndent: 16),
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MenuAnchorShowcase(),
         ),
@@ -398,30 +403,34 @@ class ShowcaseSwitches extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: SwitchShowcase(),
+      children: <Widget>[
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              SwitchShowcase(),
+              CheckboxShowcase(),
+              RadioShowcase(),
+            ],
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: CheckboxShowcase(),
+        CCard(
+          padding: EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              SwitchTileShowcase(),
+              Divider(height: 1),
+              CheckboxTileShowcase(),
+              Divider(height: 1),
+              RadioTileShowcase(),
+            ],
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: RadioShowcase(),
-        ),
-        Divider(height: 1),
-        SwitchTileShowcase(),
-        Divider(height: 1),
-        CheckboxTileShowcase(),
-        Divider(height: 1),
-        RadioTileShowcase(),
       ],
     );
   }
@@ -436,16 +445,23 @@ class ShowcaseListTile extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        ListTileShowcase(),
-        Divider(),
-        ExpansionTileShowcase(),
-        Divider(),
-        ExpansionPanelListShowcase(),
+      children: <Widget>[
+        CCard(
+          padding: EdgeInsets.zero,
+          child: Column(
+            children: const <Widget>[
+              ListTileShowcase(),
+              Divider(),
+              ExpansionTileShowcase(),
+              Divider(),
+              ExpansionPanelListShowcase(),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -460,21 +476,23 @@ class ShowcaseSlider extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        SliderShowcase(),
-        SizedBox(height: 8),
-        Divider(),
-        RangeSliderShowcase(),
-        Divider(),
-        SizedBox(height: 8),
-        ListTile(title: Text('Progress indicators')),
-        Center(child: ProgressIndicatorShowcase()),
-        SizedBox(height: 16),
+      children: <Widget>[
+        const CCard(child: SliderShowcase()),
+        const CCard(child: RangeSliderShowcase()),
+        CCard(
+          padding: EdgeInsets.zero,
+          child: Column(
+            children: const <Widget>[
+              ListTile(title: Text('Progress indicators')),
+              Center(child: ProgressIndicatorShowcase()),
+              SizedBox(height: 16),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -489,9 +507,9 @@ class ShowcaseAppBar extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -518,9 +536,9 @@ class ShowcaseNavigation extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -549,20 +567,24 @@ class ShowcaseDialogs extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        AlertDialogShowcase(),
-        TimePickerDialogShowcase(),
-        DatePickerDialogShowcase(),
-        BottomSheetShowcase(),
-        SizedBox(height: 16),
-        BottomSheetModalShowcase(),
-        SizedBox(height: 32),
-        MaterialBannerSnackBarShowcase(),
+      children: <Widget>[
+        CCard(
+            child: Column(
+          children: const <Widget>[
+            AlertDialogShowcase(),
+            TimePickerDialogShowcase(),
+            DatePickerDialogShowcase(),
+          ],
+        )),
+        const BottomSheetShowcase(),
+        const SizedBox(height: 16),
+        const BottomSheetModalShowcase(),
+        const SizedBox(height: 32),
+        const MaterialBannerSnackBarShowcase(),
       ],
     );
   }
@@ -577,9 +599,9 @@ class ShowcaseCard extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -607,51 +629,40 @@ class ShowcaseText extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
       children: <Widget>[
-        const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+        const CCard(
           child: TooltipShowcase(),
         ),
-        Card(
-          elevation: 0,
-          color: theme.scaffoldBackgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text('Normal TextTheme',
-                      style: theme.textTheme.titleMedium),
-                ),
-                const TextThemeShowcase(),
-              ],
-            ),
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text('Normal TextTheme',
+                    style: theme.textTheme.titleMedium),
+              ),
+              const TextThemeShowcase(),
+            ],
           ),
         ),
         const SizedBox(height: 8),
-        Card(
-          elevation: 0,
+        CCard(
           color: theme.colorScheme.primary,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text('Primary TextTheme',
-                      style: theme.primaryTextTheme.titleMedium),
-                ),
-                const PrimaryTextThemeShowcase(),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text('Primary TextTheme',
+                    style: theme.primaryTextTheme.titleMedium),
+              ),
+              const PrimaryTextThemeShowcase(),
+            ],
           ),
         ),
       ],

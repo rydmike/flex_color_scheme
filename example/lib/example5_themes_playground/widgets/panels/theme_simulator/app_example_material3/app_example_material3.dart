@@ -72,8 +72,8 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
 
     final double width = MediaQuery.of(context).size.width;
     final AnimationStatus status = controller.status;
-    if (width > 1000) {
-      if (width > 1500) {
+    if (width > 820) {
+      if (width > 1200) {
         showMediumSizeLayout = false;
         showLargeSizeLayout = true;
       } else {
@@ -94,7 +94,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
     }
     if (!controllerInitialized) {
       controllerInitialized = true;
-      controller.value = width > 1000 ? 1 : 0;
+      controller.value = width > 820 ? 1 : 0;
     }
   }
 

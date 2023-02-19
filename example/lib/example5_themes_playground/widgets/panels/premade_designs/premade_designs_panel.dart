@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// A panel with ready premade design we can click on to use.
 class PremadeDesignsPanel extends StatelessWidget {
@@ -26,15 +27,16 @@ class PremadeDesignsPanel extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTile(
           title: Text('Premade FlexColorScheme designs'),
-          subtitle: Text('To get started with theming, try these '
-              'premade designs as starting points. You can use them as '
-              'inspiration and to see what FlexColorScheme can do. '
-              'These templates do no set colors, you choose them as desired. '
-              'Many choices use seeded M3 ColorScheme and they all use '
-              'Material 3 mode. '
+          subtitle: Text('To quick start your custom theming, try these '
+              'premade designs. You can use them as starting point '
+              'inspirations, and to see examples of what FlexColorScheme can '
+              'do. These templates do no set colors, you choose them as '
+              'desired. Many choices use seeded M3 ColorScheme and they all '
+              'use the new Material 3 mode. '
               'You can easily turn both off. In fact all configs are just '
               'starting points for you to explore and modify further.'),
         ),
+        UseSeededColorSchemeSwitch(controller: controller),
         const SizedBox(height: 8),
         const Divider(),
         SetupListTile(
@@ -67,8 +69,8 @@ class PremadeDesignsPanel extends StatelessWidget {
               'filled TextField using primary opacity, rounder corners and no '
               'unfocused border. '
               'Outlines on buttons with outline are also primary colored. '
-              'Also features light surface blends with tinted '
-              'TextTheme and tinted interactions. Does not use seed generated '
+              'It also has light surface blends with tinted TextTheme and '
+              'tinted interactions. It does not use seed generated '
               'ColorScheme, but you can turn it ON.',
           settingsId: 2,
           controller: controller,
@@ -77,11 +79,12 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Fabulous 12',
           seeded: true,
-          subtitle: 'Primary leaning theme, but with high scaffold blend, '
-              'a ColorScheme using 3 seed colors and the saturated Jolly '
-              'seed strategy. With a smooth looking border radius 12 on all '
+          subtitle: 'Primary color favoring theme, with a bit extra scaffold '
+              'primary blend. '
+              'ColorScheme uses 3 seed key colors and the saturated Jolly '
+              'seed strategy. It has a smooth looking border radius 12 on all '
               'widgets, except FAB, that is back in shape with its M2 circle '
-              'and secondary color.',
+              'and a hip tertiary color.',
           settingsId: 3,
           controller: controller,
         ),
@@ -89,14 +92,16 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Material 3 does M2',
           seeded: false,
-          subtitle: 'Shows how you can emulate Material 2 style '
-              'in Material 3 mode. It does not use surface blends or seeded '
+          subtitle: 'Shows how you can emulate Material 2 style in Material 3 '
+              'mode, with M3 components, since this is still M3 mode. It does '
+              'not use surface blends or seeded '
               'ColorScheme. It removes elevation tint in light mode, but '
               'keeps it in dark where it is useful. It brings back elevation '
-              'shadows in both light and dark mode if they were removed in M3. '
-              'It is not entirely default M2, it keeps some useful '
-              'consistency cleanups for a bit more refined M2 than Flutter '
-              'defaults. Need an M2 styled M3 to migrate? Here it is!',
+              'shadows in both light and dark mode, if they were removed in '
+              'M3. Not entirely default M2, it keeps some useful '
+              "consistency cleanups for a bit more refined M2 than Flutter's "
+              'defaults. Need an M2 styled M3 mode theme for legacy style '
+              'support? Here it is!',
           settingsId: 4,
           controller: controller,
         ),
@@ -105,12 +110,15 @@ class PremadeDesignsPanel extends StatelessWidget {
           title: 'High contrast',
           seeded: true,
           subtitle: 'A theme that looks like it is not seed generated, but '
-              'it is. Using the high contrast config and its three key colors '
-              'locked in light theme mode. It also uses black and white "on" '
+              'actually is. Uses the FCS ultra high contrast seed '
+              'configuration with three key colors, kept as locked brand '
+              'colors in light theme mode. It also uses black and white "on" '
               'colors in light mode. It has very high surface blends, but '
               'since true-black and plain-white setting is used, it is not '
               'very visible and we get an ink black scaffold in dark mode and '
-              'plain white in light mode.',
+              'plain white one in light mode. These theme demonstrates how to '
+              'configure a very high contrast version of used colors for '
+              'visual accessibility.',
           settingsId: 5,
           controller: controller,
         ),
@@ -124,7 +132,10 @@ class PremadeDesignsPanel extends StatelessWidget {
               'input primary color. Even if you turn off using seeds, '
               'FlexColorScheme computes all colors based on the primary '
               'input color, using the usedColor scheme colors set to just '
-              'one color.',
+              'one color. The used primary is locked as used brand color in '
+              'seeded color schemes. Need a theme where primary light theme '
+              'must have a fixed brand color and want rest of theme to be '
+              'derived from it? This delivers it!',
           settingsId: 6,
           controller: controller,
         ),
@@ -132,15 +143,15 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Platform agnostic',
           seeded: false,
-          subtitle: 'A more platform agnostic design with M3, '
-              'it is less rounded than M3 default to feel more at home on '
+          subtitle: 'A platform agnostic less opinionated design using M3. '
+              'It is rounded than M3 default to feel more at home on '
               'iOS and other platforms. It removes elevation tint in light '
               'mode, and puts shadows back in light and dark mode. This '
               'only happens on macOS and iOS, other platforms keep the M3 '
               'elevation tint. The config is not seeded, but it is '
               'preconfigured to also work well by just turning seeded '
               'ColorScheme ON. Try it, it will keep your primary brand color '
-              'and also use saturated colorful seed colors.',
+              'and also create saturated colorful seed generated colors.',
           settingsId: 7,
           controller: controller,
         ),
@@ -151,19 +162,20 @@ class PremadeDesignsPanel extends StatelessWidget {
           subtitle: 'Features a strong primary blend on '
               'the scaffold background color, and primary color on navigators, '
               'with filled TextField using primary opacity and rounded '
-              'corners. Uses tinted TextTheme and tinted interactions. Seed '
-              'generated ColorScheme is ON with primary and tertiary keys '
+              'corners. Has tinted TextTheme and tinted interactions. Seed '
+              'generated ColorScheme is ON, with primary and tertiary keys '
               'used. Primary and tertiary colors are locked to their given '
-              'design values in light mode, but only primary in dark.  '
-              'Themes with high blend on scaffold requires that UI '
+              'design values in light mode, but only primary is locked in '
+              'dark mode. '
+              'Using high blend on scaffold requires that UI '
               'widgets are placed in containers with lower blend, e.g. Cards. '
-              'The theme simulator apps Components and Material do that, as '
+              'The theme simulator apps Components and Material do this, as '
               'does the Playground app itself. This design is more common on '
               'desktop sized WEB apps. Earlier Playground versions defaulted '
-              'to this design, it can look impactful on desktop WEB apps, but '
-              'it requires extra care to use it on phone sized apps. This '
-              'config also work well if you turn OFF seeded color scheme, '
-              'it becomes less color tinted then.',
+              'to this design. It can look impactful on desktop WEB apps, but '
+              'it requires extra care to use it, especially on phone sized '
+              'apps. This example also work well if you turn OFF seeded color '
+              'scheme, it becomes less color tinted then.',
           settingsId: 8,
           controller: controller,
         ),
@@ -171,14 +183,29 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Computed dark theme',
           seeded: false,
-          subtitle: 'This theme is not seeded, but uses only three input '
-              'colors primary, secondary and tertiary from light mode and '
-              'computes all other colors, including all dark mode colors. If '
-              "you don't want to use seeded color and only want to specify "
-              'the main light theme colors, maybe 3 brand colors, and create '
-              'a full M3 ColorScheme based on them, this is an optional way.',
+          subtitle: 'This theme is not seeded, but still uses only three input '
+              'colors, primary, secondary and tertiary colors from light '
+              'theme mode and computes all other colors, including all dark '
+              'mode colors. If '
+              "you don't want to use seeded colors and only want to specify "
+              'the main light theme colors, primary, secondary and tertiary, '
+              'maybe 3 brand colors, and create '
+              'a full M3 ColorScheme based on them, this is an optional way. '
+              'Obviously the dark theme does not have the same fidelity as '
+              'hand tuned dark mode colors, but it it quick and easy way '
+              'to get a dark mode theme without defining its colors when not '
+              'using seed generated color schemes.',
           settingsId: 9,
           controller: controller,
+        ),
+        const Divider(),
+        SwitchListTile(
+          title: const Text('Confirm premade usage selection'),
+          subtitle: const Text('To toggle quickly between premade '
+              'configurations, turn OFF this option. It is ON by default to '
+              'prevent accidental activation of premade themes.'),
+          value: controller.confirmPremade,
+          onChanged: controller.setConfirmPremade,
         ),
         const Divider(),
         Padding(
@@ -226,13 +253,9 @@ class SetupListTile extends StatelessWidget {
   final bool seeded;
   final ThemeController controller;
 
-  Future<void> _handleSetToPreMade(
-    BuildContext context,
-    String title, [
-    bool confirm = true,
-  ]) async {
+  Future<void> _handleSetToPreMade(BuildContext context, String title) async {
     bool? setToPremadeDesign;
-    if (confirm) {
+    if (controller.confirmPremade) {
       setToPremadeDesign = await showDialog<bool?>(
         context: context,
         builder: (BuildContext context) {
@@ -271,13 +294,13 @@ class SetupListTile extends StatelessWidget {
           padding: const EdgeInsetsDirectional.only(end: 32.0),
           child: FilledButton(
             onPressed: () async {
-              await _handleSetToPreMade(context, title, false);
+              await _handleSetToPreMade(context, title);
             },
             child: const Text('Use'),
           ),
         ),
         onTap: () async {
-          await _handleSetToPreMade(context, title, false);
+          await _handleSetToPreMade(context, title);
         },
       ),
     );

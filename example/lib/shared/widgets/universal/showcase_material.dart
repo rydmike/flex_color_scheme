@@ -2106,8 +2106,13 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
 }
 
 class MenuBarShowcase extends StatelessWidget {
-  const MenuBarShowcase({super.key, this.explainUsage = true});
+  const MenuBarShowcase({
+    super.key,
+    this.explainUsage = true,
+    this.explainIndent = 0,
+  });
   final bool explainUsage;
+  final double explainIndent;
 
   @override
   Widget build(BuildContext context) {
@@ -2128,7 +2133,7 @@ class MenuBarShowcase extends StatelessWidget {
         children: <Widget>[
           if (explainUsage)
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(explainIndent, 16, 0, 0),
               child: Text(
                 'MenuBar',
                 style: denseHeader,
@@ -2136,7 +2141,7 @@ class MenuBarShowcase extends StatelessWidget {
             ),
           if (explainUsage)
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              padding: EdgeInsetsDirectional.fromSTEB(explainIndent, 0, 0, 8),
               child: Text(
                 'The new M3 menus can be used in a MenuBar via SubMenuButton '
                 'and its MenuItemButton, but they can also be used in a '

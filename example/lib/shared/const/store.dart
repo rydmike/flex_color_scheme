@@ -77,6 +77,11 @@ class Store {
   // Default value for the compactMode, also used to reset settings.
   static const bool defaultCompactMode = false;
 
+  // Key used to read and save the confirmPremade value.
+  static const String keyConfirmPremade = 'confirmPremade';
+  // Default value for the confirmPremade, also used to reset settings.
+  static const bool defaultConfirmPremade = true;
+
   // Key used to read and save the viewIndex value.
   static const String keyViewIndex = 'viewIndex';
   // Default value for the viewIndex, also used to reset settings.
