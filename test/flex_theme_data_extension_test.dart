@@ -397,29 +397,6 @@ void main() {
     // Test result of some customizations that fixes ThemeData.from color
     // scheme compliance gaps.
     //**************************************************************************
-
-    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
-    // This property is deprecated in Flutter SDK and now excluded from test
-    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
-    //
-    // test(
-    //    'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeLight.toggleableActiveColor,
-    //     themeLight.colorScheme.secondary,
-    //   );
-    // });
-    // test(
-    //     'FTD1.08: GIVEN a FlexThemeData.raw theme with Material scheme dark '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeDark.toggleableActiveColor,
-    //     themeDark.colorScheme.secondary,
-    //   );
-    // });
     test(
         'FTD1.09: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -2008,10 +1985,7 @@ void main() {
       );
       // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsLightTd,
@@ -2195,10 +2169,7 @@ void main() {
       );
       // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsLightTd,
@@ -2396,10 +2367,7 @@ void main() {
       );
       // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsTdDark,

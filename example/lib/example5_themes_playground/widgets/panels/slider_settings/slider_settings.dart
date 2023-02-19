@@ -153,13 +153,13 @@ class SliderSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(title: Text('Slider style demos')),
+        const ListTile(title: Text('Slider')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: SliderShowcase(),
         ),
         const Divider(),
-        const ListTile(title: Text('RangeSlider style demos')),
+        const ListTile(title: Text('RangeSlider')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RangeSliderShowcase(),
@@ -167,14 +167,14 @@ class SliderSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           dense: true,
-          subtitle:
-              Text('Flutter Slider and its theme is very configurable. It '
-                  'also has classes designed to be extended for complete '
-                  'customization capabilities. FCS and Playground offer a good '
-                  'starter set. Use copyWith on FCS generated theme if you '
-                  'need further customization of the Slider and extend its '
-                  'its classes.'),
+          subtitle: Text('Slider and its theme are very configurable. Slider '
+              'has classes designed to be extended for complete '
+              'customization capabilities. FCS and Playground offer a good '
+              'starter set. Use copyWith on FCS generated theme if you '
+              'need further customization of the Slider or extend '
+              'its classes.'),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }

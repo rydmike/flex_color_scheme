@@ -6326,8 +6326,14 @@ class FlexColorScheme with Diagnosticable {
               iconTheme: IconThemeData(color: appBarIconColor),
               actionsIconTheme: IconThemeData(color: appBarIconColor),
               systemOverlayStyle: systemOverlayStyle,
-              shadowColor: useShadow ? colorScheme.shadow : null,
-              surfaceTintColor: removeTint ? Colors.transparent : null,
+              // Special case, don't use shadow on AppBar with adaptive case.
+              shadowColor: useShadow && subShadow != FlexShadow.adaptive
+                  ? colorScheme.shadow
+                  : null,
+              // Special case, don't remove tint on AppBar with adaptive case.
+              surfaceTintColor: removeTint && subTint != FlexTint.adaptive
+                  ? Colors.transparent
+                  : null,
             )
           : useMaterial3
               ? (appBarElevation != null && appBarElevation != 0) ||

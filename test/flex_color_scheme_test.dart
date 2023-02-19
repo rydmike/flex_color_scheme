@@ -29,8 +29,7 @@ void main() {
       // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
       //   This is repeated for many test cases. It seems like ThemeData
       //   equality comparison cannot be guaranteed when using sub-themes that
-      //   uses MaterialState or MaterialStateProperty. Verify and report this.
-      //   Investigate first what SDK ThemeData test do, if they even attempt it
+      //   uses MaterialState or MaterialStateProperty.
       expect(
           fcsDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(fcsMaterialLight.toTheme
@@ -237,19 +236,28 @@ void main() {
         'EXPECT them to have identity', () {
       expect(identical(m1, m2), true);
     });
-    test(
-        'FCS1.01e: GIVEN two identical FlexColorScheme objects '
-        'EXPECT them to have equality with operator', () {
-      expect(m1 == m2, true);
-      // Expect toTheme from them to full-fill same condition.
-      // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
-      //   This is repeated for many test cases. It seems like ThemeData
-      //   equality comparison cannot be guaranteed when using sub-themes that
-      //   uses MaterialState or MaterialStateProperty. Verify and report this.
-      //   Investigate first what SDK ThemeData test do, if they even attempt
-      //   it. This is commented for now.
-      // expect(m1.toTheme == m2.toTheme, true);
-    });
+    try {
+      test(
+          'FCS1.01e: GIVEN two identical FlexColorScheme objects '
+          'EXPECT them to have equality with operator', () {
+        expect(m1 == m2, true);
+      });
+    } on Exception catch (e, s) {
+      print(s);
+    }
+    // Expect toTheme from them to full-fill same condition.
+    // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
+    //   This is repeated for many test cases. It seems like ThemeData
+    //   equality comparison cannot be guaranteed when using sub-themes that
+    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   Investigate first what SDK ThemeData tests do, if they even attempt
+    //   it. This is commented for now:
+    //
+    //   expect(m1.toTheme == m2.toTheme, true);
+    //
+    //   Instead we test isNot below to see if this ever changes, if it does
+    //   we can start doing the test on THemeData object instead of its
+    //   toString where the test works.
     test(
         'FCS1.02a: GIVEN none identical FlexColorScheme objects '
         'EXPECT them to be unequal', () {

@@ -26,21 +26,24 @@ class PremadeDesignsPanel extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTile(
           title: Text('Premade FlexColorScheme designs'),
-          subtitle: Text('To quickly get started with theming, try these '
+          subtitle: Text('To get started with theming, try these '
               'premade designs as starting points. You can use them as '
               'inspiration and to see what FlexColorScheme can do. '
               'These templates do no set colors, you choose them as desired. '
-              'Most choices use seeded M3 ColorScheme and Material 3 mode. '
+              'Many choices use seeded M3 ColorScheme and they all use '
+              'Material 3 mode. '
               'You can easily turn both off. In fact all configs are just '
               'starting points for you to explore and modify further.'),
         ),
+        const SizedBox(height: 8),
         const Divider(),
         SetupListTile(
           title: 'Playground default',
-          subtitle: 'Set settings back to their Themes Playground defaults. '
+          seeded: false,
+          subtitle: 'Set settings to their Themes Playground defaults. '
               'In Material 2 mode the default setup is quite opinionated, it '
-              'mimics M3 in M2 mode. The M3 mode is almost default M3 style, '
-              'with some minor tweaks. The NavigationBar and Rail use a '
+              'mimics M3 in M2 mode. The M3 mode is mostly M3 style, '
+              'with some minor tweaks. The NavigationBar and Rail use '
               'primary colored selected items with opacity based indicator.',
           settingsId: 0,
           controller: controller,
@@ -48,8 +51,9 @@ class PremadeDesignsPanel extends StatelessWidget {
         const Divider(),
         SetupListTile(
           title: 'Material 3 default',
+          seeded: true,
           subtitle: 'Set Playground settings to a configurations that '
-              'matches Material 3 defaults. Seeded color scheme is '
+              'matches the Material 3 defaults. Seeded color scheme is '
               'activated using the default Flutter Material 3 seeded '
               'ColorScheme algorithm.',
           settingsId: 1,
@@ -57,29 +61,34 @@ class PremadeDesignsPanel extends StatelessWidget {
         ),
         const Divider(),
         SetupListTile(
-          title: 'Primary focused',
-          subtitle: 'This theme features primary color on navigators, filled '
-              'text input with primary opacity, rounders corner and no '
+          title: 'Primary navigators',
+          seeded: false,
+          subtitle: 'This theme features primary color on navigators, with '
+              'filled TextField using primary opacity, rounder corners and no '
               'unfocused border. '
               'Outlines on buttons with outline are also primary colored. '
-              'Uses light surface blends with tinted texts and interactions. '
-              'It does not use seed generated ColorScheme',
+              'Also features light surface blends with tinted dark mode '
+              'TextTheme and tinted interactions. Does not use seed generated '
+              'ColorScheme, but you can turn it ON.',
           settingsId: 2,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
           title: 'Fabulous 12',
+          seeded: true,
           subtitle: 'Primary leaning theme, but with high scaffold blend, '
-              'a ColorScheme using 3 seed colors and the saturated Vivid '
-              'seed strategy. With smooth looking border radius 12 on all '
-              'widgets, except FAB, that is back in shape with its M2 circle.',
+              'a ColorScheme using 3 seed colors and the saturated Jolly '
+              'seed strategy. With a smooth looking border radius 12 on all '
+              'widgets, except FAB, that is back in shape with its M2 circle '
+              'and secondary color.',
           settingsId: 3,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'Material 3 does Material 2',
+          title: 'Material 3 does M2',
+          seeded: false,
           subtitle: 'Shows how you can emulate Material 2 style '
               'in Material 3 mode. It does not use surface blends or seeded '
               'ColorScheme. It removes elevation tint in light mode, but '
@@ -87,56 +96,65 @@ class PremadeDesignsPanel extends StatelessWidget {
               'shadows in both light and dark mode if they were removed in M3. '
               'It is not entirely default M2, it keeps some useful '
               'consistency cleanups for a bit more refined M2 than Flutter '
-              'defaults. Need an M2 style M3 to migrate? Here it is!',
+              'defaults. Need an M2 styled M3 to migrate? Here it is!',
           settingsId: 4,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'High contrast, locked keys',
+          title: 'High contrast',
+          seeded: true,
           subtitle: 'A theme that looks like it is not seed generated, but '
-              'it is, using the high contrast config and the three key colors '
-              'locked in light theme mode, also uses black and white on '
-              'colors in light mode. It has high surface blends, but since '
-              'true black and plain white setting is used, it is not very '
-              'visible and we have ink black scaffold in dart mode and '
-              'plain white one in light mode.',
+              'it is. Using the high contrast config and its three key colors '
+              'locked in light theme mode. It also uses black and white "on" '
+              'colors in light mode. It has very high surface blends, but '
+              'since true-black and plain-white setting is used, it is not '
+              'very visible and we get an ink black scaffold in dark mode and '
+              'plain white in light mode.',
           settingsId: 5,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'All primary based',
-          subtitle: 'This theme limits input colors to only the primary color, '
-              'It uses the One Hue seed generation to create a bright '
-              'ColorScheme where all colors are shades of the same primary '
-              'input. Even if you turn off using seeds, FlexColorScheme '
-              'computes all colors based on the primary input color.',
+          title: 'Primary based',
+          seeded: true,
+          subtitle: 'This theme limits input colors to only the primary color. '
+              'It uses the One Hue seed generation configuration to create '
+              'a bright ColorScheme where all colors are shades of the same '
+              'input primary color. Even if you turn off using seeds, '
+              'FlexColorScheme computes all colors based on the primary '
+              'input color, using the usedColor scheme colors set to just '
+              'one color.',
           settingsId: 6,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'Platform agnostic M3',
-          subtitle: 'This theme show a more platform agnostic design with M3, '
-              'it is less rounded then M3 default to feel more at home on '
-              'iOS but also it on Android ads brand expression. It removes '
-              'elevation tint in light mode, and puts shadows back in light '
-              'and dark mode, but this only happens on macOS and iOS, other '
-              'platforms keep the M3 surface tint.',
+          title: 'Platform agnostic',
+          seeded: false,
+          subtitle: 'A more platform agnostic design with M3, '
+              'it is less rounded than M3 default to feel more at home on '
+              'iOS and other platforms. It removes elevation tint in light '
+              'mode, and puts shadows back in light and dark mode. This '
+              'only happens on macOS and iOS, other platforms keep the M3 '
+              'elevation tint. The config is not seeded, but it is '
+              'preconfigured to also work well by just turning seeded '
+              'ColorScheme ON. Try it, it will keep your primary brand color '
+              'and also use saturated colorful seed colors.',
           settingsId: 7,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
           title: 'Computed dark theme',
+          seeded: false,
           subtitle: 'This theme is not seeded, but uses only three input '
               'colors primary, secondary and tertiary from light mode and '
               'computes all other colors, including all dark mode colors. If '
               "you don't want to use seeded color and only want to specify "
               'the main light theme colors, maybe 3 brand colors, and create '
               'a full M3 ColorScheme based on them, this is an optional way.',
-          settingsId: 7,
+          settingsId: 8,
           controller: controller,
         ),
         const Divider(),
@@ -176,11 +194,13 @@ class SetupListTile extends StatelessWidget {
     required this.controller,
     required this.title,
     required this.subtitle,
+    this.seeded = true,
     required this.settingsId,
   });
   final String title;
   final String subtitle;
   final int settingsId;
+  final bool seeded;
   final ThemeController controller;
 
   Future<void> _handleSetToPreMade(
@@ -206,18 +226,37 @@ class SetupListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subtitle),
-      trailing: FilledButton(
-        onPressed: () async {
+    final ThemeData theme = Theme.of(context);
+    final Color bgColor =
+        seeded ? theme.colorScheme.error : theme.colorScheme.primary;
+    final Color fgColor =
+        seeded ? theme.colorScheme.onError : theme.colorScheme.onPrimary;
+    final TextStyle style = theme.textTheme.labelSmall!.copyWith(
+      color: fgColor,
+      fontWeight: FontWeight.bold,
+    );
+
+    return Banner(
+      message: seeded ? 'Seeded' : 'Vanilla',
+      location: BannerLocation.topEnd,
+      color: bgColor,
+      textStyle: style,
+      child: ListTile(
+        title: Text(title),
+        subtitle: Text(subtitle),
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 32.0),
+          child: FilledButton(
+            onPressed: () async {
+              await _handleSetToPreMade(context, title, false);
+            },
+            child: const Text('Use'),
+          ),
+        ),
+        onTap: () async {
           await _handleSetToPreMade(context, title, false);
         },
-        child: const Text('Use'),
       ),
-      onTap: () async {
-        await _handleSetToPreMade(context, title, false);
-      },
     );
   }
 }

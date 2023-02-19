@@ -37,19 +37,19 @@ class ListTileSettings extends StatelessWidget {
         const ListTile(
           title: Text('Themed ExpansionTile'),
           subtitle:
-              Text('No theme properties in current FCS, shown to visualize it '
-                  'with current color scheme.'),
+              Text('No theming properties in current FCS, included to show it '
+                  'with current theme.'),
         ),
         const ExpansionTileShowcase(),
         const Divider(),
         const ListTile(
           title: Text('Themed ExpansionPanelList'),
           subtitle:
-              Text('No theme properties in current FCS, shown to visualize it '
-                  'with current color scheme.'),
+              Text('No theming properties in current FCS, included to show it '
+                  'with current theme.'),
         ),
         const ExpansionPanelListShowcase(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
       ],
     );
   }

@@ -1777,7 +1777,7 @@ class FlexSubThemesData with Diagnosticable {
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
   ///
-  /// Due to an issue in Flutter 3.7 and 3.7.1, that has been resolved in
+  /// Due to an issue in Flutter 3.7, that has been resolved in
   /// master channel, the background color of the [BottomAppBar] cannot
   /// be changed when using M3. See issue:
   /// https://github.com/flutter/flutter/pull/117082 and more explanation here:

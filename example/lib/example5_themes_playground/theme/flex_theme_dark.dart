@@ -338,7 +338,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,
-            navigationRailElevation: controller.navigationRailElevation,
+            navigationRailElevation: controller.navRailElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )
         : null,

@@ -973,10 +973,9 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
       : '';
-  final String navigationRailElevation = controller.navigationRailElevation !=
-              null &&
-          controller.navigationRailElevation != 0
-      ? '    navigationRailElevation: ${controller.navigationRailElevation!.toStringAsFixed(1)},\n'
+  final String navigationRailElevation = controller.navRailElevation != null &&
+          controller.navRailElevation != 0
+      ? '    navigationRailElevation: ${controller.navRailElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationRailLabelType =
       controller.navRailLabelType != NavigationRailLabelType.all

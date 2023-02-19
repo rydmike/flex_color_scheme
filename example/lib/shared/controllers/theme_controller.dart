@@ -444,8 +444,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavRailBackgroundSchemeColor);
     _navRailOpacity = await _themeService.load(
         Store.keyNavRailOpacity, Store.defaultNavRailOpacity);
-    _navigationRailElevation = await _themeService.load(
-        Store.keyNavigationRailElevation, Store.defaultNavigationRailElevation);
+    _navRailElevation = await _themeService.load(
+        Store.keyNavRailElevation, Store.defaultNavRailElevation);
     _navRailSelectedIconSchemeColor = await _themeService.load(
         Store.keyNavRailSelectedIconSchemeColor,
         Store.defaultNavRailSelectedIconSchemeColor);
@@ -911,7 +911,7 @@ class ThemeController with ChangeNotifier {
     setNavRailBackgroundSchemeColor(
         Store.defaultNavRailBackgroundSchemeColor, false);
     setNavRailOpacity(Store.defaultNavRailOpacity, false);
-    setNavigationRailElevation(Store.defaultNavigationRailElevation, false);
+    setNavRailElevation(Store.defaultNavRailElevation, false);
     setNavRailSelectedIconSchemeColor(
         Store.defaultNavRailSelectedIconSchemeColor, false);
     setNavRailSelectedLabelSchemeColor(
@@ -1115,7 +1115,7 @@ class ThemeController with ChangeNotifier {
   Future<void> setNavigationRailToM3([bool doNotify = true]) async {
     setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
     setNavRailOpacity(1, false);
-    setNavigationRailElevation(null, false);
+    setNavRailElevation(null, false);
     setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
     setNavRailIndicatorOpacity(1, false);
     setNavRailIndicatorBorderRadius(null, false);
@@ -1131,13 +1131,15 @@ class ThemeController with ChangeNotifier {
 
   /// Set Playground settings and FCS theme to selected premade config.
   Future<void> setToPremade({int settingsId = 0}) async {
+    // 0) Playground defaults.
+    //
     // First reset all settings so we start with a clean slate.
     // But we do not change theme mode, we keep it. Also we will not notify
     // any listeners yet, we do that once when all settings have been set.
     // If there is no matching ID, settings are just rest to defaults.
     await resetAllToDefaults(resetMode: false, doNotify: false);
 
-    // Material 3 defaults (M3 Basic seed)
+    // 1) Material 3 default.
     if (settingsId == 1) {
       // Blend mode and levels.
       setBlendLevel(0, false);
@@ -1165,23 +1167,27 @@ class ThemeController with ChangeNotifier {
       // but Flutter does not implement it yet, it still uses M2 defaults in M3.
       setTooltipSchemeColor(SchemeColor.inverseSurface, false);
     }
-    // Primary focused
+    // 2) Primary navigators.
     else if (settingsId == 2) {
+      // Legacy swap OFF.
+      setSwapLegacyColors(false, false);
       // Set blend modes and levels.
       setSurfaceModeLight(FlexSurfaceMode.highBackgroundLowScaffold, false);
       setSurfaceModeDark(FlexSurfaceMode.highBackgroundLowScaffold, false);
-      setBlendLevel(5, false);
-      setBlendLevelDark(12, false);
-      setBlendOnLevel(20, false);
-      setBlendOnLevelDark(20, false);
+      setBlendLevel(2, false);
+      setBlendLevelDark(8, false);
+      setBlendLightOnColors(false, false);
+      setBlendDarkOnColors(true, false);
+      setBlendOnLevel(10, false);
+      setBlendOnLevelDark(8, false);
       // Seed generation - Turn it OFF.
       setUseKeyColors(false, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // Text theme blends: ON
-      setBlendLightTextTheme(true, false);
+      // Text theme blends: OFF light, ON dark
+      setBlendLightTextTheme(false, false);
       setBlendDarkTextTheme(true, false);
       // OutlinedButton settings
       setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
@@ -1228,27 +1234,36 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
     }
-    // Fabulous 12
+    // 3) Fabulous 12.
     else if (settingsId == 3) {
       // The default radius to 12 for all.
       setDefaultRadius(12, false);
+      // Legacy swap OFF.
+      setSwapLegacyColors(false, false);
       // Set blend modes and levels.
       setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
       setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
-      setBlendLevel(3, false);
-      setBlendLevelDark(7, false);
+      setBlendLevel(1, false);
+      setBlendLevelDark(2, false);
+      setBlendOnLevel(8, false);
+      setBlendOnLevelDark(10, false);
       // Seed generation - Turn it ON, use all 3 main seeds. Vivid algo.
       setUseKeyColors(true, false);
       setUseSecondary(true, false);
       setUseTertiary(true, false);
-      setUsedFlexToneSetup(3, false); // Vivid
+      setKeepPrimary(true, false);
+      setUsedFlexToneSetup(7, false); // <== Jolly config.
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
       // Text theme blends
       setBlendLightTextTheme(false, false);
-      setBlendDarkTextTheme(false, false);
+      setBlendDarkTextTheme(true, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setElevatedButtonSecondarySchemeColor(
+          SchemeColor.primaryContainer, false);
       // OutlinedButton settings
       setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
       // ToggleButtons settings
@@ -1272,6 +1287,7 @@ class ThemeController with ChangeNotifier {
       // FAB settings
       setFabUseShape(true, false);
       setFabAlwaysCircular(true, false);
+      setFabSchemeColor(SchemeColor.secondary, false);
       // Menus and Popup
       setPopupMenuBorderRadius(8, false);
       setPopupMenuElevation(3, false);
@@ -1301,7 +1317,7 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorOpacity(1.0, false);
       setNavRailIndicatorBorderRadius(12, false);
     }
-    // Material 3 does Material 2
+    // 4) Material 3 does M2
     else if (settingsId == 4) {
       // The default radius to 12 for all.
       setDefaultRadius(4, false);
@@ -1336,7 +1352,7 @@ class ThemeController with ChangeNotifier {
       setBottomAppBarElevationDark(8, false);
       // TabBar
       setTabBarStyle(FlexTabBarStyle.forAppBar, false);
-      // Elevated button
+      // Elevated button - Make look like it used to in M2.
       setElevatedButtonSchemeColor(SchemeColor.onPrimary, false);
       setElevatedButtonSecondarySchemeColor(SchemeColor.primary, false);
       // Set TextField Settings via InputDecorator
@@ -1350,6 +1366,8 @@ class ThemeController with ChangeNotifier {
       // FAB settings
       setFabUseShape(true, false);
       setFabAlwaysCircular(true, false);
+      // With real M3 schemes this looks bad, but it is M2 color mapping.
+      setFabSchemeColor(SchemeColor.secondary, false);
       // Chip settings
       setChipSchemeColor(SchemeColor.primary, false);
       setChipBorderRadius(20, false);
@@ -1386,7 +1404,7 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.secondary, false);
       setNavRailMuteUnselected(true, false);
     }
-    // High contrast seeded, true black and white
+    // 5) High contrast
     else if (settingsId == 5) {
       // Legacy swap
       setSwapLegacyColors(true, false);
@@ -1401,7 +1419,7 @@ class ThemeController with ChangeNotifier {
       setUseKeyColors(true, false);
       setUseSecondary(true, false);
       setUseTertiary(true, false);
-      setUsedFlexToneSetup(6, false); // Ultra contrast.
+      setUsedFlexToneSetup(6, false); // <== Ultra contrast.
       setKeepPrimary(true, false);
       setKeepSecondary(true, false);
       setKeepTertiary(true, false);
@@ -1413,6 +1431,9 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
+      // Text theme blends
+      setBlendLightTextTheme(false, false);
+      setBlendDarkTextTheme(false, false);
       // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
@@ -1469,18 +1490,18 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
     }
-    // Primary shades only
+    // 6) Primary based
     else if (settingsId == 6) {
       // Legacy swap
       setSwapLegacyColors(false, false);
       setUsedColors(1, false);
       // Set blend modes and levels.
-      setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
-      setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
-      setBlendLevel(2, false);
-      setBlendLevelDark(5, false);
+      setSurfaceModeLight(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setSurfaceModeDark(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setBlendLevel(1, false);
+      setBlendLevelDark(4, false);
       setBlendOnLevel(10, false);
-      setBlendOnLevelDark(20, false);
+      setBlendOnLevelDark(10, false);
       // Seed generation - Turn it ON, use all 3 main seeds. Vivid algo.
       setUseKeyColors(true, false);
       setUseSecondary(true, false);
@@ -1491,6 +1512,9 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
+      // Text theme blends
+      setBlendLightTextTheme(false, false);
+      setBlendDarkTextTheme(true, false);
       // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
@@ -1503,9 +1527,12 @@ class ThemeController with ChangeNotifier {
       setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primary, false);
       setInputDecoratorBorderRadius(8, false);
       setInputDecoratorUnfocusedHasBorder(false, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setElevatedButtonSecondarySchemeColor(
+          SchemeColor.primaryContainer, false);
       // SegmentedButton settings
       setSegmentedButtonSchemeColor(SchemeColor.primary, false);
-      setSegmentedButtonUnselectedSchemeColor(SchemeColor.onPrimary, false);
       // Menus and Popup
       setPopupMenuBorderRadius(6, false);
       setPopupMenuElevation(4, false);
@@ -1535,6 +1562,110 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
+    }
+    // 7) Platform Agnostic.
+    else if (settingsId == 7) {
+      // The default radius to 10 for all.
+      setDefaultRadius(10, false);
+      // Legacy swap OFF.
+      setSwapLegacyColors(false, false);
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setSurfaceModeDark(FlexSurfaceMode.highBackgroundLowScaffold, false);
+      setBlendLevel(1, false);
+      setBlendLevelDark(2, false);
+      setBlendOnLevel(6, false);
+      setBlendOnLevelDark(8, false);
+      // Seed generation - Turn it OFF, use all 3 main seeds. Vivid algo.
+      setUseKeyColors(false, false);
+      setUseSecondary(true, false);
+      setUseTertiary(true, false);
+      setKeepPrimary(true, false);
+      setUsedFlexToneSetup(7, false); // <== Jolly config.
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(true, false);
+      // Elevation tint and shadows.
+      setElevationTint(FlexTint.adaptive, false);
+      setElevationShadow(FlexShadow.adaptive, false);
+      setElevationShadowDark(FlexShadow.adaptive, false);
+      // Text theme blends
+      setBlendLightTextTheme(false, false);
+      setBlendDarkTextTheme(false, false);
+      // AppBar settings
+      setAppBarStyleLight(FlexAppBarStyle.background, false);
+      setAppBarStyleDark(FlexAppBarStyle.background, false);
+      setBottomAppBarElevationLight(1, false);
+      setBottomAppBarElevationDark(1, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setElevatedButtonSecondarySchemeColor(
+          SchemeColor.primaryContainer, false);
+      // OutlinedButton settings
+      setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
+      // ToggleButtons settings
+      setToggleButtonsBorderSchemeColor(SchemeColor.primary, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      setSegmentedButtonBorderSchemeColor(SchemeColor.primary, false);
+      // Set toggles colored
+      setUnselectedToggleIsColored(true, false);
+      // Slider Settings
+      setSliderValueTinted(true, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBackgroundAlphaLight(19, false);
+      setInputDecoratorBackgroundAlphaDark(22, false);
+      setInputDecoratorPrefixIconSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primary, false);
+      setInputDecoratorUnfocusedHasBorder(false, false);
+      setInputDecoratorFocusedBorderWidth(1.0, false);
+      // FAB settings
+      setFabUseShape(true, false);
+      setFabAlwaysCircular(true, false);
+      setFabSchemeColor(SchemeColor.secondary, false);
+      // Menus and Popup
+      setPopupMenuBorderRadius(6, false);
+      setPopupMenuElevation(3, false);
+      setMenuRadius(6, false);
+      setMenuElevation(3, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(1, false);
+      setMenuBarShadowColor(Colors.transparent, false);
+      // Drawer settings
+      setDrawerElevation(1, false);
+      setDrawerBorderRadius(14, false);
+      setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
+      setDrawerIndicatorBorderRadius(10, false);
+      // BottomSheet
+      setBottomSheetBorderRadius(18, false);
+      setBottomSheetElevation(2, false);
+      setBottomSheetModalElevation(4, false);
+      // Card
+      setCardBorderRadius(14, false);
+      // Dialogs
+      setDialogBorderRadius(18, false);
+      // BottomNavigationBar
+      setBottomNavBarMuteUnselected(false, false);
+      // NavigationBar settings
+      setNavBarElevation(1, false);
+      setNavBarMuteUnselected(false, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavBarIndicatorOpacity(1.0, false);
+      setNavBarIndicatorBorderRadius(10, false);
+      // NavigationRail settings
+      setNavRailElevation(0, false);
+      setNavRailMuteUnselected(false, false);
+      setNavRailBackgroundSchemeColor(SchemeColor.surface);
+      setNavRailSelectedIconSchemeColor(SchemeColor.onPrimary, false);
+      setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
+      setNavRailIndicatorOpacity(1.0, false);
+      setNavRailIndicatorBorderRadius(10, false);
     }
     // All settings have been modified, now notify listeners.
     notifyListeners();
@@ -3102,13 +3233,13 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavRailOpacity, value));
   }
 
-  late double? _navigationRailElevation;
-  double? get navigationRailElevation => _navigationRailElevation;
-  void setNavigationRailElevation(double? value, [bool notify = true]) {
-    if (value == _navigationRailElevation) return;
-    _navigationRailElevation = value;
+  late double? _navRailElevation;
+  double? get navRailElevation => _navRailElevation;
+  void setNavRailElevation(double? value, [bool notify = true]) {
+    if (value == _navRailElevation) return;
+    _navRailElevation = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyNavigationRailElevation, value));
+    unawaited(_themeService.save(Store.keyNavRailElevation, value));
   }
 
   late SchemeColor? _navRailSelectedIconSchemeColor;

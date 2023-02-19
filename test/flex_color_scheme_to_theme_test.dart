@@ -3524,14 +3524,8 @@ void main() {
           popupMenuSchemeColor: SchemeColor.surfaceVariant,
         ),
       ).toTheme;
-      // TODO(rydmike): Clean out tint tests
       final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
       final Color background = refTheme.colorScheme.surfaceVariant;
-      // final Color background = ElevationOverlay.applySurfaceTint(
-      //   theme.colorScheme.surfaceVariant,
-      //   theme.colorScheme.surfaceTint,
-      //   2,
-      // );
       expect(
         theme.popupMenuTheme.color,
         equals(background),
