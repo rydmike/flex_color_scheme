@@ -220,6 +220,23 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   );
 }
 
+class CCard extends StatelessWidget {
+  const CCard({super.key, this.child});
+  final Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: child,
+      ),
+    );
+  }
+}
+
 class ShowcaseColors extends StatelessWidget {
   const ShowcaseColors({super.key, required this.controller});
 
@@ -231,25 +248,21 @@ class ShowcaseColors extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + AppData.edgeInsetsTablet,
+        media.padding.top + 8,
         0,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        media.padding.bottom + 8,
       ),
       children: <Widget>[
-        ThemeModeSwitchListTile(controller: controller),
+        CCard(
+          child: ThemeModeSwitchListTile(
+            controller: controller,
+            contentPadding: EdgeInsets.zero,
+          ),
+        ),
         // Show all key active theme colors.
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: ShowColorSchemeColors(),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: ShowThemeDataColors(),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: ShowSubThemeColors(),
-        ),
+        const CCard(child: ShowColorSchemeColors()),
+        const CCard(child: ShowThemeDataColors()),
+        const CCard(child: ShowSubThemeColors()),
       ],
     );
   }
@@ -263,31 +276,48 @@ class ShowcaseButtons extends StatelessWidget {
     final MediaQueryData media = MediaQuery.of(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
-        16,
-        media.padding.top + AppData.edgeInsetsTablet,
-        16,
-        media.padding.bottom + AppData.edgeInsetsTablet,
+        0,
+        media.padding.top + 8,
+        0,
+        media.padding.bottom + 8,
       ),
-      children: const <Widget>[
-        SizedBox(height: 8),
-        ElevatedButtonShowcase(),
-        SizedBox(height: 8),
-        FilledButtonShowcase(),
-        SizedBox(height: 8),
-        FilledButtonTonalShowcase(),
-        SizedBox(height: 8),
-        OutlinedButtonShowcase(),
-        SizedBox(height: 8),
-        TextButtonShowcase(),
-        SizedBox(height: 8),
-        ToggleButtonsShowcase(),
-        SizedBox(height: 8),
-        SegmentedButtonShowcase(),
-        SizedBox(height: 8),
-        FabShowcase(),
-        SizedBox(height: 8),
-        IconButtonCircleAvatarDropdownShowcase(),
-        SizedBox(height: 8),
+      children: <Widget>[
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              ElevatedButtonShowcase(),
+              SizedBox(height: 8),
+              FilledButtonShowcase(),
+              SizedBox(height: 8),
+              FilledButtonTonalShowcase(),
+              SizedBox(height: 8),
+              OutlinedButtonShowcase(),
+              SizedBox(height: 8),
+              TextButtonShowcase(),
+            ],
+          ),
+        ),
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              ToggleButtonsShowcase(),
+              SizedBox(height: 8),
+              SegmentedButtonShowcase(),
+            ],
+          ),
+        ),
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const <Widget>[
+              FabShowcase(),
+              SizedBox(height: 8),
+              IconButtonCircleAvatarDropdownShowcase(),
+            ],
+          ),
+        ),
       ],
     );
   }
