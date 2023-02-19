@@ -64,8 +64,30 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 
 - **Style breaking**: The `SnackBar` action button defaults to `inversePrimary`.   
-  The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.     
+  The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.
+  
 
+- **Style breaking**: Tinted TextTheme was made less obviously tinted. M3 seeded ColorSchemes brings much color tint, using strong tint on text in the optional tinted text theme may be a bit too much. It is now more subtle. The changes are:
+  - TextTheme light mode:
+    - Hi opacity style:  Blend 30% -> 20%, Opacity 75% -> 85%
+    - Medium opacity style: Blend 26% -> 20%, Opacity 95% -> 96%
+    - No opacity style: Unchanged.
+  - TextTheme dark mode:
+    - Hi opacity style:  Blend 25% -> 15%, Opacity 80% -> 92%
+    - Medium opacity style: Blend 20% -> 12%
+    - No opacity style:  Blend 18% -> 15%
+  
+
+- **Style breaking**: FlexColorSchemes own algorithm to compute light and dark theme container colors from their main colors, was modified to aligned better with expectation by the M3 color system. The changes are:
+  - In light theme mode: 
+    - Primary container: primary.blend(Colors.white, 60) -> primary.lighten(20).blend(Colors.white, 60)
+    - Secondary container: secondary.blend(Colors.white, 60) -> secondary.brighten(14).blend(Colors.white, 50)
+    - Tertiary container: tertiary.blend(Colors.white, 80) -> tertiary.brighten(18).blend(Colors.white, 50)
+  - In dark theme mode:
+    - Primary container: primary.blend(Colors.black, 60) -> primary.darken(5).blend(Colors.black, 55)
+    - Secondary container: secondary.blend(Colors.black, 60) ->  secondary.darken(25).blend(Colors.black, 50)
+    - Tertiary container: tertiary?.blend(Colors.black, 80) -> tertiary.darken(15).blend(Colors.black, 60)
+  
 
 - **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
 - **Label value breaking**: The `FlexColor.materialBaselineDescription` description string was changed from 'Material guide 3 baseline based theme' to 'Material 3 guide and default purple theme'.
@@ -78,7 +100,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
 
   
-  **THEMES PLAYGROUND**
+**THEMES PLAYGROUND**
 
 - Added "set to M3 default values" button to NavigationBar and NavigationRail settings.
 - Added a feature to select which panel is shown in page view as the second panel. It is no longer locked to the code-view panel, it can be any of the available panels, enabling studying chosen panels side by side.
@@ -107,13 +129,13 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
 - Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes.
 - Added controls to theme menus consistently to the **Menu** panel.
+- Added a panel with 10 pre-made example theme configurations.
 
 **TASKS DONE**
 - Added value tests for all new color definitions.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- WIP ADD: Page with pre-made example theme configurations. Panel added, configs WIP.
 - TODO: SegmentedButton unselected default color to transparent! Own bg color?   
 - TODO: ADD: Selected and unselected colors for Drawer items.
 - TODO: ADD: TabBar indicator style. (Add: New enum type to value-key service).  
@@ -123,12 +145,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or the fixed one?  
+- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the work around?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Fix test coverage.
-  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 82% tested now.
+  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 81% tested now.
   - All new sub-themes and new states.  
-  - Test usedColors 7.
+  - Tests for usedColors 7.
 - MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Change summary update.

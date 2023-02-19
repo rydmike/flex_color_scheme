@@ -67,7 +67,7 @@ class PremadeDesignsPanel extends StatelessWidget {
               'filled TextField using primary opacity, rounder corners and no '
               'unfocused border. '
               'Outlines on buttons with outline are also primary colored. '
-              'Also features light surface blends with tinted dark mode '
+              'Also features light surface blends with tinted '
               'TextTheme and tinted interactions. Does not use seed generated '
               'ColorScheme, but you can turn it ON.',
           settingsId: 2,
@@ -146,6 +146,29 @@ class PremadeDesignsPanel extends StatelessWidget {
         ),
         const Divider(),
         SetupListTile(
+          title: 'Colorful Scaffold',
+          seeded: true,
+          subtitle: 'Features a strong primary blend on '
+              'the scaffold background color, and primary color on navigators, '
+              'with filled TextField using primary opacity and rounded '
+              'corners. Uses tinted TextTheme and tinted interactions. Seed '
+              'generated ColorScheme is ON with primary and tertiary keys '
+              'used. Primary and tertiary colors are locked to their given '
+              'design values in light mode, but only primary in dark.  '
+              'Themes with high blend on scaffold requires that UI '
+              'widgets are placed in containers with lower blend, e.g. Cards. '
+              'The theme simulator apps Components and Material do that, as '
+              'does the Playground app itself. This design is more common on '
+              'desktop sized WEB apps. Earlier Playground versions defaulted '
+              'to this design, it can look impactful on desktop WEB apps, but '
+              'it requires extra care to use it on phone sized apps. This '
+              'config also work well if you turn OFF seeded color scheme, '
+              'it becomes less color tinted then.',
+          settingsId: 8,
+          controller: controller,
+        ),
+        const Divider(),
+        SetupListTile(
           title: 'Computed dark theme',
           seeded: false,
           subtitle: 'This theme is not seeded, but uses only three input '
@@ -154,7 +177,7 @@ class PremadeDesignsPanel extends StatelessWidget {
               "you don't want to use seeded color and only want to specify "
               'the main light theme colors, maybe 3 brand colors, and create '
               'a full M3 ColorScheme based on them, this is an optional way.',
-          settingsId: 8,
+          settingsId: 9,
           controller: controller,
         ),
         const Divider(),

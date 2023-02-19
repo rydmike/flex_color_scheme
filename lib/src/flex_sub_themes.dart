@@ -4265,8 +4265,11 @@ class FlexSubThemes {
         selectedSchemeColor ?? SchemeColor.secondaryContainer;
     final Color selectedColor = schemeColor(selectedScheme, colorScheme);
     final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
-    final Color unselectedColor =
-        schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // TODO(rydmike): Investigate unselected transparent color, not working?!
+    final Color unselectedColor = unselectedSchemeColor != null
+        ? schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme)
+        : Colors.transparent;
     final Color onUnselectedColor = schemeColor(
         unselectedForegroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
     final Color borderColor =
@@ -4284,7 +4287,7 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return selectedColor;
           }
-          return unselectedSchemeColor == null ? null : unselectedColor;
+          return unselectedColor;
         }),
         foregroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {

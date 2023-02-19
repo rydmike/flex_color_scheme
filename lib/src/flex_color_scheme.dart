@@ -5619,13 +5619,13 @@ class FlexColorScheme with Diagnosticable {
       // normally it defaults to primary, but if it is customized we should base
       // tinted text theme on it instead.
       final Color textHiOpacity = isDark // SDK dark 70%, light 54%
-          ? textBase.blend(colorScheme.surfaceTint, 26).withAlpha(0xCC) // 80%
-          : textBase.blend(colorScheme.surfaceTint, 30).withAlpha(0xBF); // 75%
+          ? textBase.blend(colorScheme.surfaceTint, 15).withAlpha(0xE2) // 92%
+          : textBase.blend(colorScheme.surfaceTint, 20).withAlpha(0xD8); // 85%
       final Color textMediumOpacity = isDark // SDK dark 0%, light 87%
-          ? textBase.blend(colorScheme.surfaceTint, 20)
-          : textBase.blend(colorScheme.surfaceTint, 26).withAlpha(0xF2); // 95%
+          ? textBase.blend(colorScheme.surfaceTint, 12)
+          : textBase.blend(colorScheme.surfaceTint, 20).withAlpha(0xF4); // 96%
       final Color textNoOpacity = isDark // SDK dark 0%, light 0%
-          ? textBase.blend(colorScheme.surfaceTint, 18)
+          ? textBase.blend(colorScheme.surfaceTint, 15)
           : textBase.blend(colorScheme.surfaceTint, 23);
       // Apply the computed colors. With this opt-in style, text gets a hint
       // of primary and less opacity than defaults. The primary tint may

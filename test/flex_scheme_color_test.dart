@@ -269,7 +269,7 @@ void main() {
           ),
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryContainer: const Color(0xffc099f8),
+            primaryContainer: const Color(0xffd7bbff),
             secondary: const Color(0xff8033ee),
             secondaryContainer: const Color(0xffccadf8),
             tertiary: const Color(0xff8826ff),
@@ -293,12 +293,12 @@ void main() {
           ),
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
-            primaryContainer: const Color(0xffc099f8),
+            primaryContainer: const Color(0xffd7bbff),
             secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: const Color(0xff9af0e8),
-            tertiary: const Color(0xff8826ff),
-            tertiaryContainer: const Color(0xffe5d1ff),
-            appBarColor: const Color(0xffe5d1ff),
+            secondaryContainer: Color(0xff92fef4),
+            tertiary: Color(0xff8826ff),
+            tertiaryContainer: Color(0xffe5d1ff),
+            appBarColor: Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
                 FlexColor.lightErrorContainer(FlexColor.materialLightError),
@@ -320,10 +320,10 @@ void main() {
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
             secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: const Color(0xff9af0e8),
-            tertiary: const Color(0xff8826ff),
-            tertiaryContainer: const Color(0xffe5d1ff),
-            appBarColor: const Color(0xffe5d1ff),
+            secondaryContainer: Color(0xff92fef4),
+            tertiary: Color(0xff8826ff),
+            tertiaryContainer: Color(0xffe5d1ff),
+            appBarColor: Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
                 FlexColor.lightErrorContainer(FlexColor.materialLightError),
@@ -376,7 +376,7 @@ void main() {
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: FlexColor.materialLightSecondaryContainer,
             tertiary: FlexColor.materialLightTertiary,
-            tertiaryContainer: const Color(0xffcce7e6),
+            tertiaryContainer: const Color(0xff96d9d9),
             appBarColor: FlexColor.materialLightTertiary,
             error: FlexColor.materialLightError,
             errorContainer:
@@ -452,12 +452,12 @@ void main() {
           ),
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
-            primaryContainer: const Color(0xff4a3564),
-            secondary: const Color(0xffd287ff),
-            secondaryContainer: const Color(0xff7e5199),
-            tertiary: const Color(0xffe1acff),
-            tertiaryContainer: const Color(0xff8331b3),
-            appBarColor: const Color(0xff8331b3),
+            primaryContainer: Color(0xff4e3171),
+            secondary: Color(0xffd287ff),
+            secondaryContainer: Color(0xff7e5199),
+            tertiary: Color(0xffe1acff),
+            tertiaryContainer: Color(0xff8331b3),
+            appBarColor: Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
                 FlexColor.darkErrorContainer(FlexColor.materialDarkError),
@@ -476,12 +476,12 @@ void main() {
           ),
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
-            primaryContainer: const Color(0xff4a3564),
+            primaryContainer: const Color(0xff4e3171),
             secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: const Color(0xff01574f),
-            tertiary: const Color(0xffe1acff),
-            tertiaryContainer: const Color(0xff8331b3),
-            appBarColor: const Color(0xff8331b3),
+            secondaryContainer: Color(0xff002e2a),
+            tertiary: Color(0xffe1acff),
+            tertiaryContainer: Color(0xff8331b3),
+            appBarColor: Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
                 FlexColor.darkErrorContainer(FlexColor.materialDarkError),
@@ -505,10 +505,10 @@ void main() {
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
-            secondaryContainer: const Color(0xff01574f),
-            tertiary: const Color(0xffe1acff),
-            tertiaryContainer: const Color(0xff8331b3),
-            appBarColor: const Color(0xff8331b3),
+            secondaryContainer: Color(0xff002e2a),
+            tertiary: Color(0xffe1acff),
+            tertiaryContainer: Color(0xff8331b3),
+            appBarColor: Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
                 FlexColor.darkErrorContainer(FlexColor.materialDarkError),
@@ -560,7 +560,7 @@ void main() {
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
             tertiary: FlexColor.materialDarkTertiary,
-            tertiaryContainer: const Color(0xff002b27),
+            tertiaryContainer: const Color(0xff003933),
             appBarColor: FlexColor.materialDarkTertiary,
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -756,7 +756,8 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1Full, 5, brightness: Brightness.light),
         m1Full.copyWith(
-            tertiaryContainer: m1Full.tertiary.blend(Colors.white, 80)),
+            tertiaryContainer:
+                m1Full.tertiary.brighten(18).blend(Colors.white, 50)),
       );
     });
 
@@ -783,7 +784,8 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1Full, 3, brightness: Brightness.light),
         m1Full.copyWith(
-          secondaryContainer: m1Full.secondary.blend(Colors.white, 60),
+          secondaryContainer:
+              m1Full.secondary.brighten(14).blend(Colors.white, 50),
           tertiary: m1Full.primary.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
@@ -799,8 +801,9 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1Full, 2, brightness: Brightness.light),
         m1Full.copyWith(
-          primaryContainer: m1Full.primary.blend(Colors.white, 60),
-          secondaryContainer: m1Full.secondary.blend(Colors.white, 60),
+          primaryContainer: m1Full.primary.lighten(20).blend(Colors.white, 60),
+          secondaryContainer:
+              m1Full.secondary.brighten(14).blend(Colors.white, 50),
           tertiary: m1Full.primary.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
@@ -816,7 +819,7 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1Full, 1, brightness: Brightness.light),
         m1Full.copyWith(
-          primaryContainer: m1Full.primary.blend(Colors.white, 60),
+          primaryContainer: m1Full.primary.lighten(20).blend(Colors.white, 60),
           secondary: m1Full.primary.darken().brighten(20),
           secondaryContainer:
               m1Full.primary.darken().brighten(20).blend(Colors.white, 60),
@@ -835,9 +838,11 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1Full, 7, brightness: Brightness.light),
         m1Full.copyWith(
-          primaryContainer: m1Full.primary.blend(Colors.white, 60),
-          secondaryContainer: m1Full.secondary.blend(Colors.white, 60),
-          tertiaryContainer: m1Full.tertiary.blend(Colors.white, 80),
+          primaryContainer: m1Full.primary.lighten(20).blend(Colors.white, 60),
+          secondaryContainer:
+              m1Full.secondary.brighten(14).blend(Colors.white, 50),
+          tertiaryContainer:
+              m1Full.tertiary.brighten(18).blend(Colors.white, 50),
         ),
       );
     });
@@ -874,7 +879,9 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1FullD, 5, brightness: Brightness.dark),
         m1FullD.copyWith(
-            tertiaryContainer: m1FullD.tertiary.blend(Colors.black, 80)),
+          tertiaryContainer:
+              m1FullD.tertiary.darken(15).blend(Colors.black, 60),
+        ),
       );
     });
 
@@ -901,7 +908,8 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1FullD, 3, brightness: Brightness.dark),
         m1FullD.copyWith(
-          secondaryContainer: m1FullD.secondary.blend(Colors.black, 60),
+          secondaryContainer:
+              m1FullD.secondary.darken(25).blend(Colors.black, 50),
           tertiary: m1FullD.primary.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
@@ -917,8 +925,9 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1FullD, 2, brightness: Brightness.dark),
         m1FullD.copyWith(
-          primaryContainer: m1FullD.primary.blend(Colors.black, 60),
-          secondaryContainer: m1FullD.secondary.blend(Colors.black, 60),
+          primaryContainer: m1FullD.primary.darken(5).blend(Colors.black, 55),
+          secondaryContainer:
+              m1FullD.secondary.darken(25).blend(Colors.black, 50),
           tertiary: m1FullD.primary.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
@@ -934,7 +943,7 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1FullD, 1, brightness: Brightness.dark),
         m1FullD.copyWith(
-          primaryContainer: m1FullD.primary.blend(Colors.black, 60),
+          primaryContainer: m1FullD.primary.darken(5).blend(Colors.black, 55),
           secondary: m1FullD.primary.darken().brighten(20),
           secondaryContainer:
               m1FullD.primary.darken().brighten(20).blend(Colors.black, 40),
@@ -953,9 +962,11 @@ void main() {
       expect(
         FlexSchemeColor.effective(m1FullD, 7, brightness: Brightness.dark),
         m1FullD.copyWith(
-          primaryContainer: m1FullD.primary.blend(Colors.black, 60),
-          secondaryContainer: m1FullD.secondary.blend(Colors.black, 60),
-          tertiaryContainer: m1FullD.tertiary.blend(Colors.black, 80),
+          primaryContainer: m1FullD.primary.darken(5).blend(Colors.black, 55),
+          secondaryContainer:
+              m1FullD.secondary.darken(25).blend(Colors.black, 50),
+          tertiaryContainer:
+              m1FullD.tertiary.darken(15).blend(Colors.black, 60),
         ),
       );
     });

@@ -7,15 +7,9 @@ class ThemeModeSwitchListTile extends StatelessWidget {
   const ThemeModeSwitchListTile(
       {super.key, required this.controller, this.contentPadding});
 
-  /// The tile's internal padding.
-  ///
-  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
-  /// and [trailing] widgets.
-  ///
-  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? contentPadding;
-
   final ThemeController controller;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(

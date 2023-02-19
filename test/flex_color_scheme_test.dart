@@ -243,7 +243,7 @@ void main() {
         expect(m1 == m2, true);
       });
     } on Exception catch (e, s) {
-      print(s);
+      debugPrint('$s');
     }
     // Expect toTheme from them to full-fill same condition.
     // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
