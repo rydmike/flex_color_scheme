@@ -3273,6 +3273,20 @@ class FlexSubThemes {
     /// Defaults to 1, fully opaque if not defined.
     final double? indicatorOpacity,
 
+    /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+    /// uses as as its selected item color.
+    ///
+    /// If undefined, defaults to correct contrast color pair
+    /// for [indicatorSchemeColor].
+    final SchemeColor? selectedItemSchemeColor,
+
+    /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+    /// uses as as its unselected item color.
+    ///
+    /// If undefined, defaults to correct contrast color pair for
+    /// [backgroundSchemeColor].
+    final SchemeColor? unselectedItemSchemeColor,
+
     /// Overrides the default value of [NavigationDrawer.shadowColor].
     final Color? shadowColor,
 
@@ -3282,14 +3296,20 @@ class FlexSubThemes {
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
-    final Color onBackgroundColor = schemeColorPair(
-        backgroundSchemeColor ?? SchemeColor.surfaceVariant, colorScheme);
+    final Color onBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color onBackgroundColor = unselectedItemSchemeColor != null
+        ? schemeColor(unselectedItemSchemeColor, colorScheme)
+        : onBackGroundColorFallback;
 
     // Selected indicator color
     final Color indicatorColor = schemeColor(
         indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
-    final Color onIndicatorColor = schemeColorPair(
+    final Color onIndicatorColorFallback = schemeColorPair(
         indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
+    final Color onIndicatorColor = selectedItemSchemeColor != null
+        ? schemeColor(selectedItemSchemeColor, colorScheme)
+        : onIndicatorColorFallback;
 
     // Indicator size based on provided width
     final Size indicatorSize = Size(indicatorWidth ?? 336, 56);
@@ -4266,10 +4286,8 @@ class FlexSubThemes {
     final Color selectedColor = schemeColor(selectedScheme, colorScheme);
     final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
 
-    // TODO(rydmike): Investigate unselected transparent color, not working?!
-    final Color unselectedColor = unselectedSchemeColor != null
-        ? schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme)
-        : Colors.transparent;
+    final Color unselectedColor =
+        schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color onUnselectedColor = schemeColor(
         unselectedForegroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
     final Color borderColor =
@@ -4287,7 +4305,8 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return selectedColor;
           }
-          return unselectedColor;
+          // TODO(rydmike): Report Flutter transparency bug on SegementedButton.
+          return unselectedSchemeColor == null ? null : unselectedColor;
         }),
         foregroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
@@ -4825,9 +4844,6 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.indicatorColor].
     final Color? indicatorColor,
 
-    /// Overrides the default value for [TabBar.dividerColor].
-    final Color? dividerColor,
-
     /// Overrides the default value for [TabBar.labelStyle].
     final TextStyle? labelStyle,
 
@@ -4839,6 +4855,15 @@ class FlexSubThemes {
 
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
+
+    // TODO(rydmike): This property does not work due to Flutter BUG. Report it.
+    /// The color of the divider.
+    ///
+    /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
+    /// color is used. If that is null and [useMaterial3] is true,
+    /// [ColorScheme.surfaceVariant] will be used,
+    /// otherwise divider will not be drawn.
+    final Color? dividerColor,
 
     /// A temporary flag used to opt-in to new Material 3 features.
     final bool useMaterial3 = false,

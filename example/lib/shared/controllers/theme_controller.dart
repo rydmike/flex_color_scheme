@@ -320,6 +320,10 @@ class ThemeController with ChangeNotifier {
     _tabBarItemSchemeColorDark = await _themeService.load(
         Store.keyTabBarItemSchemeColorDark,
         Store.defaultTabBarItemSchemeColorDark);
+    _tabBarIndicatorSize = await _themeService.load(
+        Store.keyTabBarIndicatorSize, Store.defaultTabBarIndicatorSize);
+    _tabBarDividerColor = await _themeService.load(
+        Store.keyTabBarDividerColor, Store.defaultTabBarDividerColor);
     //
     // Drawer SETTINGS.
     _drawerBorderRadius = await _themeService.load(
@@ -341,6 +345,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultDrawerIndicatorSchemeColor);
     _drawerIndicatorOpacity = await _themeService.load(
         Store.keyDrawerIndicatorOpacity, Store.defaultDrawerIndicatorOpacity);
+    _drawerSelectedItemSchemeColor = await _themeService.load(
+        Store.keyDrawerSelectedItemSchemeColor,
+        Store.defaultDrawerSelectedItemSchemeColor);
+    _drawerUnselectedItemSchemeColor = await _themeService.load(
+        Store.keyDrawerUnselectedItemSchemeColor,
+        Store.defaultDrawerUnselectedItemSchemeColor);
     //
     // BottomSheet SETTINGS.
     _bottomSheetSchemeColor = await _themeService.load(
@@ -832,6 +842,8 @@ class ThemeController with ChangeNotifier {
     setTabBarItemSchemeColorLight(
         Store.defaultTabBarItemSchemeColorLight, false);
     setTabBarItemSchemeColorDark(Store.defaultTabBarItemSchemeColorDark, false);
+    setTabBarIndicatorSize(Store.defaultTabBarIndicatorSize, false);
+    setTabBarDividerColor(Store.defaultTabBarDividerColor, false);
     //
     // Drawer SETTINGS.
     setDrawerBorderRadius(Store.defaultDrawerBorderRadius, false);
@@ -845,6 +857,10 @@ class ThemeController with ChangeNotifier {
     setDrawerIndicatorSchemeColor(
         Store.defaultDrawerIndicatorSchemeColor, false);
     setDrawerIndicatorOpacity(Store.defaultDrawerIndicatorOpacity, false);
+    setDrawerSelectedItemSchemeColor(
+        Store.defaultDrawerSelectedItemSchemeColor, false);
+    setDrawerUnselectedItemSchemeColor(
+        Store.defaultDrawerUnselectedItemSchemeColor, false);
     //
     // BottomSheet SETTINGS.
     setBottomSheetSchemeColor(Store.defaultBottomSheetSchemeColor, false);
@@ -1352,6 +1368,8 @@ class ThemeController with ChangeNotifier {
       setBottomAppBarElevationDark(8, false);
       // TabBar
       setTabBarStyle(FlexTabBarStyle.forAppBar, false);
+      setTabBarDividerColor(Colors.transparent, false);
+      setTabBarIndicatorSize(TabBarIndicatorSize.tab, false);
       // Elevated button - Make look like it used to in M2.
       setElevatedButtonSchemeColor(SchemeColor.onPrimary, false);
       setElevatedButtonSecondarySchemeColor(SchemeColor.primary, false);
@@ -2945,6 +2963,25 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTabBarItemSchemeColorDark, value));
   }
 
+  late TabBarIndicatorSize? _tabBarIndicatorSize;
+  TabBarIndicatorSize? get tabBarIndicatorSize => _tabBarIndicatorSize;
+  void setTabBarIndicatorSize(TabBarIndicatorSize? value,
+      [bool notify = true]) {
+    if (value == _tabBarIndicatorSize) return;
+    _tabBarIndicatorSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarIndicatorSize, value));
+  }
+
+  late Color? _tabBarDividerColor;
+  Color? get tabBarDividerColor => _tabBarDividerColor;
+  void setTabBarDividerColor(Color? value, [bool notify = true]) {
+    if (value == _tabBarDividerColor) return;
+    _tabBarDividerColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarDividerColor, value));
+  }
+
   // Drawer SETTINGS.
   // ===========================================================================
 
@@ -3019,6 +3056,30 @@ class ThemeController with ChangeNotifier {
     _drawerIndicatorOpacity = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDrawerIndicatorOpacity, value));
+  }
+
+  late SchemeColor? _drawerSelectedItemSchemeColor;
+  SchemeColor? get drawerSelectedItemSchemeColor =>
+      _drawerSelectedItemSchemeColor;
+  void setDrawerSelectedItemSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _drawerSelectedItemSchemeColor) return;
+    _drawerSelectedItemSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyDrawerSelectedItemSchemeColor, value));
+  }
+
+  late SchemeColor? _drawerUnselectedItemSchemeColor;
+  SchemeColor? get drawerUnselectedItemSchemeColor =>
+      _drawerUnselectedItemSchemeColor;
+  void setDrawerUnselectedItemSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _drawerUnselectedItemSchemeColor) return;
+    _drawerUnselectedItemSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyDrawerUnselectedItemSchemeColor, value));
   }
 
   // BottomSheet SETTINGS.

@@ -248,6 +248,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
+            tabBarIndicatorSize: controller.tabBarIndicatorSize,
+            tabBarDividerColor: controller.tabBarDividerColor,
             // Drawer Settings.
             drawerRadius: controller.drawerBorderRadius,
             drawerElevation: controller.drawerElevation,
@@ -257,6 +259,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             drawerIndicatorRadius: controller.drawerIndicatorBorderRadius,
             drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
             drawerIndicatorOpacity: controller.drawerIndicatorOpacity,
+            drawerSelectedItemSchemeColor:
+                controller.drawerSelectedItemSchemeColor,
+            drawerUnselectedItemSchemeColor:
+                controller.drawerUnselectedItemSchemeColor,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
             bottomSheetModalBackgroundColor:

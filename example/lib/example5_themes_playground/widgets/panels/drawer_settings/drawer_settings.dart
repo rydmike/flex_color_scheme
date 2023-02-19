@@ -23,6 +23,18 @@ class DrawerSettings extends StatelessWidget {
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
 
+    final String onIndicatorDefault = controller.drawerIndicatorSchemeColor ==
+            null
+        ? 'default (onSecondaryContainer)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (contrast to ${SchemeColor.values[controller.drawerIndicatorSchemeColor!.index].name})';
+
+    final String onBackgroundDefault = controller.drawerBackgroundSchemeColor ==
+            null
+        ? 'default (onSurfaceVariant)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (contrast to ${SchemeColor.values[controller.drawerBackgroundSchemeColor!.index].name})';
+
     final double derivedIndicatorWidth =
         (controller.drawerWidth ?? (useMaterial3 ? 360 : 304)) - 2 * 12;
 
@@ -385,6 +397,36 @@ class DrawerSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Selected item color'),
+          labelForDefault: onIndicatorDefault,
+          index: controller.drawerSelectedItemSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDrawerSelectedItemSchemeColor(null);
+                  } else {
+                    controller.setDrawerSelectedItemSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Unselected item color'),
+          labelForDefault: onBackgroundDefault,
+          index: controller.drawerUnselectedItemSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDrawerUnselectedItemSchemeColor(null);
+                  } else {
+                    controller.setDrawerUnselectedItemSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
         const Divider(),
         const NavigationDrawerShowcase(),

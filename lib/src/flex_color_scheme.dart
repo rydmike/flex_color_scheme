@@ -6752,6 +6752,9 @@ class FlexColorScheme with Diagnosticable {
               indicatorRadius: subTheme.drawerIndicatorRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
+              selectedItemSchemeColor: subTheme.drawerSelectedItemSchemeColor,
+              unselectedItemSchemeColor:
+                  subTheme.drawerUnselectedItemSchemeColor,
               textStyle: effectiveTextTheme.bodyLarge,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
@@ -6930,6 +6933,8 @@ class FlexColorScheme with Diagnosticable {
             : FlexSubThemes.schemeColor(
                     subTheme.tabBarItemSchemeColor!, colorScheme)
                 .withAlpha(0x99), // 60%,
+        dividerColor: subTheme.tabBarDividerColor,
+        indicatorSize: subTheme.tabBarIndicatorSize,
         useMaterial3: useMaterial3,
       ),
       //

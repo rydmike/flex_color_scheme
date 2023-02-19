@@ -1,16 +1,22 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/color_scheme_box.dart';
 
-/// Widget used to select used [FlexTabBarStyle] using a popup menu.
+/// Widget used to select used [TabBarIndicatorSize] using a popup menu.
 ///
-/// Uses index out out of range of [FlexTabBarStyle] to represent
-/// and select no selection of [FlexTabBarStyle] which sets its
+/// Uses index out out of range of [TabBarIndicatorSize] to represent
+/// and select no selection of [TabBarIndicatorSize] which sets its
 /// value to null in parent, so we can use a selectable item as null input,
 /// to represent default value via no value definition.
-class TabBarStylePopupMenu extends StatelessWidget {
-  const TabBarStylePopupMenu({
+class TabBarIndicatorSizePopupMenu extends StatelessWidget {
+  // TODO(rydmike): Add link to issue about dividerColor not working in theme.
+  // static final Uri _fcsFlutterIssue = Uri(
+  //   scheme: 'https',
+  //   host: 'github.com',
+  //   path: 'flutter/flutter/pull/117082',
+  // );
+
+  const TabBarIndicatorSizePopupMenu({
     super.key,
     required this.index,
     this.onChanged,
@@ -28,51 +34,30 @@ class TabBarStylePopupMenu extends StatelessWidget {
   final String labelForDefault;
   final String? popupLabelDefault;
 
-  String _explainTabStyle(
-    final FlexTabBarStyle? style,
+  String _explainTabSize(
+    final TabBarIndicatorSize? style,
     final bool useMaterial3,
   ) {
     switch (style) {
-      case FlexTabBarStyle.forAppBar:
-        return 'Style: forAppbar\n'
-            'Works with used AppBar style in both M2 and M3 mode. '
-            '(FCS default style in M2)';
-      case FlexTabBarStyle.forBackground:
-        return 'Style: forBackground\n'
-            'Works on surface colors, like Scaffold, but '
-            'also works on surface colored AppBar in M2 and M3';
-      case FlexTabBarStyle.flutterDefault:
-        return 'Style: flutterDefault\n'
-            'Flutter default style. In M2, works on primary color in '
-            'light mode and background color in dark mode. In M3 it '
-            'works on surface colors. (FCS default in M3)';
-      case FlexTabBarStyle.universal:
-        return 'Style: universal\n'
-            'Experimental universal style, has '
-            'low contrast. May change in future versions';
+      case TabBarIndicatorSize.tab:
+        return 'Size: tab\n'
+            'Indicator covers entire tab width';
+      case TabBarIndicatorSize.label:
+        return 'Size: label\n'
+            'Indicator only spans width of the tab label';
       case null:
-        return useMaterial3
-            ? 'Default (flutterDefault)'
-            : 'Default (forAppBar)';
+        return useMaterial3 ? 'Default (label)' : 'Default (tab)';
     }
   }
 
   static const List<Widget> _tabBarWidget = <Widget>[
     Tooltip(
-      message: 'To use in AppBar',
-      child: Icon(Icons.tab),
+      message: 'Width equals entire tab',
+      child: Icon(Icons.border_bottom_outlined),
     ),
     Tooltip(
-      message: 'To use on background color',
-      child: Icon(Icons.tab_unselected),
-    ),
-    Tooltip(
-      message: 'Flutter SDK default',
-      child: Icon(Icons.web_asset_outlined),
-    ),
-    Tooltip(
-      message: 'Universal style',
-      child: Icon(Icons.crop_3_2),
+      message: 'Width equals label',
+      child: Icon(Icons.format_underlined_outlined),
     ),
     Tooltip(
       message: 'Default',
@@ -89,17 +74,17 @@ class TabBarStylePopupMenu extends StatelessWidget {
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
     final bool useDefault =
-        index < 0 || index >= FlexTabBarStyle.values.length || !enabled;
+        index < 0 || index >= TabBarIndicatorSize.values.length || !enabled;
     final String styleName = !useDefault
-        ? _explainTabStyle(FlexTabBarStyle.values[index], useM3)
-        : _explainTabStyle(null, useM3);
+        ? _explainTabSize(TabBarIndicatorSize.values[index], useM3)
+        : _explainTabSize(null, useM3);
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
     final IconThemeData unSelectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
-      initialValue: useDefault ? FlexTabBarStyle.values.length : index,
+      initialValue: useDefault ? TabBarIndicatorSize.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -107,18 +92,19 @@ class TabBarStylePopupMenu extends StatelessWidget {
         // value will cause controller for a FlexAppBarStyle to be set to
         // "null", we need to be able to do that to input "null" property
         // value to FlexAppBarStyle configs.
-        onChanged?.call(index >= FlexTabBarStyle.values.length ? -1 : index);
+        onChanged
+            ?.call(index >= TabBarIndicatorSize.values.length ? -1 : index);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i <= FlexTabBarStyle.values.length; i++)
+        for (int i = 0; i <= TabBarIndicatorSize.values.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: index == i ||
-                      (index < 0 && i == FlexTabBarStyle.values.length)
+                      (index < 0 && i == TabBarIndicatorSize.values.length)
                   ? IconTheme(
                       data: selectedIconTheme,
                       child: ColorSchemeBox(
@@ -135,10 +121,10 @@ class TabBarStylePopupMenu extends StatelessWidget {
                         child: _tabBarWidget[i],
                       ),
                     ),
-              title: i >= FlexTabBarStyle.values.length
+              title: i >= TabBarIndicatorSize.values.length
                   // If we reached max length make default label.
                   ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
-                  : Text(FlexTabBarStyle.values[i].name, style: txtStyle),
+                  : Text(TabBarIndicatorSize.values[i].name, style: txtStyle),
             ),
           )
       ],
@@ -162,7 +148,7 @@ class TabBarStylePopupMenu extends StatelessWidget {
               backgroundColor: scheme.primary,
               borderColor: Colors.transparent,
               child: _tabBarWidget[
-                  useDefault ? FlexTabBarStyle.values.length : index],
+                  useDefault ? TabBarIndicatorSize.values.length : index],
             ),
           ),
         ),

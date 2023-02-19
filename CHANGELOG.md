@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 19, 2023**
+**Feb 20, 2023**
 
 **FIX**
 
@@ -132,21 +132,16 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes.
 - Added controls to theme menus consistently to the **Menu** panel.
 - Added a panel with 10 pre-made example theme configurations.
+- Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter, new TODO, report the issue.
+- Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
+- Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 
-**TASKS DONE**
-- Added value tests for all new color definitions.
-
-**TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
-
-- TODO: ADD: Selected and unselected colors for Drawer items.
-- TODO: ADD: TabBar indicator style. (Add: New enum type to value-key service).  
-- TODO: ADD: TabBar bottom border config option.  
-- TODO: SegmentedButton unselected default color to transparent! Own bg color? How? Issue?
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- TODO: TintedDisabled and TintedEffect, needs review and implementations.
+- TODO: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.  
 - TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
+- TODO: Investigate the Playground random panel change, cause is still elusive.
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Fix test coverage.

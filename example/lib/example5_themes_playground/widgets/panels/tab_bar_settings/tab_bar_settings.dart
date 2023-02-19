@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'tab_bar_indicator_size_popup_menu.dart';
 import 'tab_bar_style_popup_menu.dart';
 
 class TabBarSettings extends StatelessWidget {
@@ -37,6 +38,9 @@ class TabBarSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+    //     color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -136,7 +140,66 @@ class TabBarSettings extends StatelessWidget {
                   }
                 : null,
           )
-        ]
+        ],
+        TabBarIndicatorSizePopupMenu(
+          title: const Text('Select TabBar indicator style'),
+          labelForDefault: useMaterial3 ? 'Default (label)' : 'Default (tab)',
+          index: controller.tabBarIndicatorSize?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= TabBarIndicatorSize.values.length) {
+                    controller.setTabBarIndicatorSize(null);
+                  } else {
+                    controller.setTabBarIndicatorSize(
+                        TabBarIndicatorSize.values[index]);
+                  }
+                }
+              : null,
+        ),
+        SwitchListTile(
+          title: const Text('Remove bottom divider'),
+          subtitle: const Text('Removes the bottom divider on M3 TabBar, '
+              'does not have any effect on M2 mode TabBar.'),
+          value: controller.useFlexColorScheme &&
+              controller.useSubThemes &&
+              controller.tabBarDividerColor == Colors.transparent,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (bool removeDivider) {
+                  if (removeDivider) {
+                    controller.setTabBarDividerColor(Colors.transparent);
+                  } else {
+                    controller.setTabBarDividerColor(null);
+                  }
+                }
+              : null,
+        ),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.7 the TabBar dividerColor cannot be set '
+                      'via theme in Material 3 mode',
+                ),
+                // LinkTextSpan(
+                //   style: linkStyle,
+                //   uri: _fcsFlutterFix117082,
+                //   text: 'FIX PR #117082.',
+                // ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. It is bug and will reported. It has been left out '
+                      'in property fallthrough, it does widget and M3 '
+                      'defaults, but leaves out theme in between.',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }

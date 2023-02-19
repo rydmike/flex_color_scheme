@@ -639,6 +639,18 @@ class Store {
   // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
+  // Key used to read and save the tabBarIndicatorSize value.
+  static const String keyTabBarIndicatorSize = 'tabBarIndicatorSize';
+  // Default value for the tabBarIndicatorSize, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const TabBarIndicatorSize? defaultTabBarIndicatorSize = null;
+
+  // Key used to read and save the tabBarDividerColor value.
+  static const String keyTabBarDividerColor = 'tabBarDividerColor';
+  // Default value for the tabBarDividerColor, also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const Color? defaultTabBarDividerColor = null;
+
   // Drawer SETTINGS.
   // ===========================================================================
 
@@ -693,6 +705,20 @@ class Store {
   // Default value for the drawerIndicatorOpacity, also to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultDrawerIndicatorOpacity = null;
+
+  // Key used to read and save the drawerSelectedItemSchemeColor value.
+  static const String keyDrawerSelectedItemSchemeColor =
+      'drawerSelectedItemSchemeColor';
+  // Default value for the drawerSelectedItemSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerSelectedItemSchemeColor = null;
+
+  // Key used to read and save the drawerUnselectedItemSchemeColor value.
+  static const String keyDrawerUnselectedItemSchemeColor =
+      'drawerUnselectedItemSchemeColor';
+  // Default value for the drawerUnselectedItemSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerUnselectedItemSchemeColor = null;
 
   // BottomSheet SETTINGS.
   // ===========================================================================

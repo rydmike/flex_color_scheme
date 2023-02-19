@@ -1891,13 +1891,15 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its selected item color.
   ///
-  /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
+  /// If undefined, defaults to correct contrast color pair for
+  /// [drawerIndicatorSchemeColor].
   final SchemeColor? drawerSelectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its unselected item color.
   ///
-  /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
+  /// If undefined, defaults to correct contrast color pair for
+  /// [drawerBackgroundSchemeColor].
   final SchemeColor? drawerUnselectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the

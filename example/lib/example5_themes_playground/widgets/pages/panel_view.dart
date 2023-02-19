@@ -75,12 +75,14 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // TODO(rydmike): Nasty switch screen bug on platform swap, maybe here?
-    // pageController.jumpToPage(widget.themeController.viewIndex);
-    // TODO(rydmike): Remove this debug print.
-    debugPrint('PanelView previous page: $previousPage');
-    debugPrint(
-        'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
+    // TODO(rydmike): Strange screen switch bug on platform swap, maybe here?
+    //  seen it in a few rare cases on other actions too, but platform swap
+    //  seem to trigger it.
+    //
+    // debugPrint('PanelView previous page: $previousPage');
+    // debugPrint(
+    //  'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
+    //
     // previousPage = widget.themeController.viewIndex;
   }
 
@@ -174,11 +176,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
             themeCtrl.setViewIndex(pageIndex);
           },
           itemBuilder: (BuildContext context, int pageIndex) {
-            // TODO(rydmike): Remove this debug print.
-            debugPrint('PanelView itemBuilder index: $pageIndex');
-            debugPrint('PanelView itemBuilder previous page: $previousPage');
-            debugPrint('PanelView itemBuilder controller '
-                'viewIndex: ${widget.themeController.viewIndex}');
+            // TODO(rydmike): Part of screen switch bug investigation.
+            // debugPrint('PanelView itemBuilder index: $pageIndex');
+            // debugPrint('PanelView itemBuilder previous page: $previousPage');
+            // debugPrint('PanelView itemBuilder controller '
+            //    'viewIndex: ${widget.themeController.viewIndex}');
             return ScaleTransition(
               scale: scaleAnimation,
               child: FadeTransition(
