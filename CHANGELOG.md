@@ -33,6 +33,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Added**: `menuRadius`, `menuElevation`, `menuOpacity`, `menuSchemeColor`  and `dropdownMenuTextStyle` to `FlexSubThemesData`.
 
+- **Added**: `drawerSelectedItemSchemeColor`, `drawerUnselectedItemSchemeColor`, `tabBarIndicatorSize`, and `tabBarDividerColor` to `FlexSubThemesData`.
+
 
 **CHANGE**
 

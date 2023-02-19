@@ -261,6 +261,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.tabBarItemSchemeColor,
     this.tabBarIndicatorSchemeColor,
+    this.tabBarIndicatorSize,
+    this.tabBarDividerColor,
     //
     this.drawerRadius,
     this.drawerElevation,
@@ -270,6 +272,9 @@ class FlexSubThemesData with Diagnosticable {
     this.drawerIndicatorWidth,
     this.drawerIndicatorSchemeColor,
     this.drawerIndicatorOpacity,
+    this.drawerSelectedItemSchemeColor,
+    this.drawerUnselectedItemSchemeColor,
+
     //
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
@@ -1810,6 +1815,22 @@ class FlexSubThemesData with Diagnosticable {
   /// a color from the effective [ColorScheme].
   final SchemeColor? tabBarIndicatorSchemeColor;
 
+  /// Defines how the selected tab indicator's size is computed.
+  ///
+  /// The size of the selected tab indicator is defined relative to the
+  /// tab's overall bounds if [indicatorSize] is [TabBarIndicatorSize.tab]
+  /// (the default) or relative to the bounds of the tab's widget if
+  /// [indicatorSize] is [TabBarIndicatorSize.label].
+  final TabBarIndicatorSize? tabBarIndicatorSize;
+
+  /// The color of the divider.
+  ///
+  /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
+  /// color is used. If that is null and [ThemeData.useMaterial3] is true,
+  /// [ColorScheme.surfaceVariant] will be used, otherwise divider will
+  /// not be drawn.
+  final Color? tabBarDividerColor;
+
   /// Border radius value for [Drawer], also used by [NavigationDrawer].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -1866,6 +1887,18 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, default to 1, fully opaque.
   final double? drawerIndicatorOpacity;
+
+  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// uses as as its selected item color.
+  ///
+  /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
+  final SchemeColor? drawerSelectedItemSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// uses as as its unselected item color.
+  ///
+  /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
+  final SchemeColor? drawerUnselectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
   /// [BottomSheet] uses as background color when presented as a none modal
@@ -2691,6 +2724,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarIndicatorSchemeColor,
+    final TabBarIndicatorSize? tabBarIndicatorSize,
+    final Color? tabBarDividerColor,
     //
     final double? drawerRadius,
     final double? drawerElevation,
@@ -2700,6 +2735,8 @@ class FlexSubThemesData with Diagnosticable {
     final double? drawerIndicatorRadius,
     final SchemeColor? drawerIndicatorSchemeColor,
     final double? drawerIndicatorOpacity,
+    final SchemeColor? drawerSelectedItemSchemeColor,
+    final SchemeColor? drawerUnselectedItemSchemeColor,
     //
     final SchemeColor? bottomSheetBackgroundColor,
     final SchemeColor? bottomSheetModalBackgroundColor,
@@ -2973,6 +3010,8 @@ class FlexSubThemesData with Diagnosticable {
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
+      tabBarIndicatorSize: tabBarIndicatorSize ?? this.tabBarIndicatorSize,
+      tabBarDividerColor: tabBarDividerColor ?? this.tabBarDividerColor,
       //
       drawerRadius: drawerRadius ?? this.drawerRadius,
       drawerElevation: drawerElevation ?? this.drawerElevation,
@@ -2986,6 +3025,10 @@ class FlexSubThemesData with Diagnosticable {
           drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
       drawerIndicatorOpacity:
           drawerIndicatorOpacity ?? this.drawerIndicatorOpacity,
+      drawerSelectedItemSchemeColor:
+          drawerSelectedItemSchemeColor ?? this.drawerSelectedItemSchemeColor,
+      drawerUnselectedItemSchemeColor: drawerUnselectedItemSchemeColor ??
+          this.drawerUnselectedItemSchemeColor,
       //
       bottomSheetBackgroundColor:
           bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
@@ -3296,6 +3339,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
+        other.tabBarIndicatorSize == tabBarIndicatorSize &&
+        other.tabBarDividerColor == tabBarDividerColor &&
         //
         other.drawerRadius == drawerRadius &&
         other.drawerElevation == drawerElevation &&
@@ -3305,6 +3350,9 @@ class FlexSubThemesData with Diagnosticable {
         other.drawerIndicatorRadius == drawerIndicatorRadius &&
         other.drawerIndicatorSchemeColor == drawerIndicatorSchemeColor &&
         other.drawerIndicatorOpacity == drawerIndicatorOpacity &&
+        other.drawerSelectedItemSchemeColor == drawerSelectedItemSchemeColor &&
+        other.drawerUnselectedItemSchemeColor ==
+            drawerUnselectedItemSchemeColor &&
         //
         other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
         other.bottomSheetModalBackgroundColor ==
@@ -3557,6 +3605,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         tabBarItemSchemeColor,
         tabBarIndicatorSchemeColor,
+        tabBarIndicatorSize,
+        tabBarDividerColor,
         //
         drawerRadius,
         drawerElevation,
@@ -3566,6 +3616,8 @@ class FlexSubThemesData with Diagnosticable {
         drawerIndicatorRadius,
         drawerIndicatorSchemeColor,
         drawerIndicatorOpacity,
+        drawerSelectedItemSchemeColor,
+        drawerUnselectedItemSchemeColor,
         //
         bottomSheetBackgroundColor,
         bottomSheetModalBackgroundColor,
@@ -3876,6 +3928,9 @@ class FlexSubThemesData with Diagnosticable {
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    properties.add(EnumProperty<TabBarIndicatorSize>(
+        'tabBarIndicatorSize', tabBarIndicatorSize));
+    properties.add(ColorProperty('tabBarDividerColor', tabBarDividerColor));
     //
     properties.add(DiagnosticsProperty<double>('drawerRadius', drawerRadius));
     properties
@@ -3891,6 +3946,10 @@ class FlexSubThemesData with Diagnosticable {
         'drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'drawerIndicatorOpacity', drawerIndicatorOpacity));
+    properties.add(EnumProperty<SchemeColor>(
+        'drawerSelectedItemSchemeColor', drawerSelectedItemSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'drawerUnselectedItemSchemeColor', drawerUnselectedItemSchemeColor));
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
