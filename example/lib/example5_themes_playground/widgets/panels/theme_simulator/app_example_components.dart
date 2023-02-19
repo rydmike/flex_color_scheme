@@ -221,7 +221,8 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
 }
 
 class CCard extends StatelessWidget {
-  const CCard({super.key, this.child});
+  const CCard({super.key, this.padding, this.child});
+  final EdgeInsetsGeometry? padding;
   final Widget? child;
 
   @override
@@ -230,7 +231,7 @@ class CCard extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: padding ?? const EdgeInsets.all(12),
         child: child,
       ),
     );
@@ -254,9 +255,10 @@ class ShowcaseColors extends StatelessWidget {
       ),
       children: <Widget>[
         CCard(
+          padding: EdgeInsets.zero,
           child: ThemeModeSwitchListTile(
             controller: controller,
-            contentPadding: EdgeInsets.zero,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           ),
         ),
         // Show all key active theme colors.

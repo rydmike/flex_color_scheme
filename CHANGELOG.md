@@ -114,6 +114,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
 - WIP ADD: Page with pre-made example theme configurations. Panel added, configs WIP.
+- TODO: SegmentedButton unselected default color to transparent! Own bg color?   
 - TODO: ADD: Selected and unselected colors for Drawer items.
 - TODO: ADD: TabBar indicator style. (Add: New enum type to value-key service).  
 - TODO: ADD: TabBar bottom border config option.  
