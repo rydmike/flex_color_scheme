@@ -301,3 +301,27 @@ class FlexShadowAdapter extends TypeAdapter<FlexShadow?> {
   @override
   int get typeId => 164;
 }
+
+/// A Hive data type adapter for enum [TabBarIndicatorSize], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class TabBarIndicatorSizeAdapter extends TypeAdapter<TabBarIndicatorSize?> {
+  @override
+  TabBarIndicatorSize? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= TabBarIndicatorSize.values.length) {
+      return null;
+    } else {
+      return TabBarIndicatorSize.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TabBarIndicatorSize? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 165;
+}

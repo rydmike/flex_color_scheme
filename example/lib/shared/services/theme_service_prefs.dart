@@ -572,6 +572,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= FlexShadow.values.length) return defaultValue;
         return FlexShadow.values[value] as T;
       }
+      // T is TabBarIndicatorSize nullable value.
+      if (sameTypes<T, TabBarIndicatorSize?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded TabBarIndicatorSize?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= TabBarIndicatorSize.values.length) return defaultValue;
+        return TabBarIndicatorSize.values[value] as T;
+      }
+      // T is TabBarIndicatorSize none nullable value.
+      if (sameTypes<T, TabBarIndicatorSize>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded TabBarIndicatorSize : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= TabBarIndicatorSize.values.length) return defaultValue;
+        return TabBarIndicatorSize.values[value] as T;
+      }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');

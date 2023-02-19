@@ -136,16 +136,16 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- TODO: SegmentedButton unselected default color to transparent! Own bg color?   
 - TODO: ADD: Selected and unselected colors for Drawer items.
 - TODO: ADD: TabBar indicator style. (Add: New enum type to value-key service).  
 - TODO: ADD: TabBar bottom border config option.  
-- TODO: TintedDisabled and TintedEffect, needs review and implementations.
-- TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
+- TODO: SegmentedButton unselected default color to transparent! Own bg color? How? Issue?
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the work around?  
+- TODO: TintedDisabled and TintedEffect, needs review and implementations.
+- TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
+- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - MUST DO: Review and do actionable TODOs in the code.
 - MUST DO: Fix test coverage.
   - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 81% tested now.
