@@ -123,6 +123,7 @@ class DemoApp extends StatelessWidget {
             title: 'Custom Theme',
             // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
+              useMaterial3: themeController.useMaterial3,
               // We could have stored the light scheme in a FlexSchemeColor
               // and used it for the colors, but we will use both the light and
               // dark colors also on the HomePage for the theme switch widget
@@ -158,6 +159,7 @@ class DemoApp extends StatelessWidget {
             ),
             // Same setup for the dark theme, but using FlexThemeData.dark().
             darkTheme: FlexThemeData.dark(
+              useMaterial3: themeController.useMaterial3,
               colors: _myFlexScheme.dark,
               subThemesData: themeController.useSubThemes
                   ? const FlexSubThemesData()

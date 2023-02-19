@@ -12,7 +12,6 @@ import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/showcase_material.dart';
-import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'widgets/theme_popup_menu.dart';
 
 // -----------------------------------------------------------------------------
@@ -43,7 +42,7 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         const SizedBox(width: 0.01),
         Expanded(
-          // TODO(rydmike): Check if this old finding still applies.
+          // TODO(rydmike): INFO: Trick to move Popup to end of wrapped widget.
           // Wrapping the Scaffold in a Row, with an almost zero width SizedBox
           // before the Scaffold that is in an Expanded widget so it fills the
           // available screen, causes the PopupMenu to open up right aligned on
@@ -104,6 +103,12 @@ class HomePage extends StatelessWidget {
                             schemeIndex: controller.schemeIndex,
                             onChanged: controller.setSchemeIndex,
                           ),
+                          SwitchListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: const Text('Use Material 3'),
+                            value: controller.useMaterial3,
+                            onChanged: controller.setUseMaterial3,
+                          ),
                           // Active theme color indicators.
                           const ShowColorSchemeColors(),
                           const SizedBox(height: 8),
@@ -122,7 +127,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           if (isLight) ...<Widget>[
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep primary color'),
                               value: controller.useKeyColors &&
@@ -131,7 +136,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepPrimary
                                   : null,
                             ),
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep secondary color'),
                               value: controller.useKeyColors &&
@@ -140,7 +145,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepSecondary
                                   : null,
                             ),
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep tertiary color'),
                               value: controller.useKeyColors &&
@@ -150,7 +155,7 @@ class HomePage extends StatelessWidget {
                                   : null,
                             ),
                           ] else ...<Widget>[
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep primary color'),
                               value: controller.useKeyColors &&
@@ -159,7 +164,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepDarkPrimary
                                   : null,
                             ),
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep secondary color'),
                               value: controller.useKeyColors &&
@@ -168,7 +173,7 @@ class HomePage extends StatelessWidget {
                                   ? controller.setKeepDarkSecondary
                                   : null,
                             ),
-                            SwitchListTileAdaptive(
+                            SwitchListTile(
                               contentPadding: EdgeInsets.zero,
                               title: const Text('Keep tertiary color'),
                               value: controller.useKeyColors &&
@@ -185,7 +190,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 8),
                           const ShowSubThemeColors(),
                           const SizedBox(height: 8),
-                          SwitchListTileAdaptive(
+                          SwitchListTile(
                             contentPadding: EdgeInsets.zero,
                             title: const Text('Use component themes'),
                             subtitle: const Text(

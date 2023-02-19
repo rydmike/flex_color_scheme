@@ -120,6 +120,7 @@ class DemoApp extends StatelessWidget {
           // corresponding colors from the FlexColor.schemes map using the
           // enum value as key.
           theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.light
                 : FlexColor.schemes[themeController.usedScheme]!.light,
@@ -182,6 +183,7 @@ class DemoApp extends StatelessWidget {
           // We make an equivalent definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors instead.
           darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.dark
                 : FlexColor.schemes[themeController.usedScheme]!.dark,

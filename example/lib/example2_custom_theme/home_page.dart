@@ -8,7 +8,6 @@ import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/showcase_material.dart';
-import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 2 - Custom Theme
@@ -68,6 +67,13 @@ class HomePage extends StatelessWidget {
               optionButtonBorderRadius: controller.useSubThemes ? 12 : 4,
               buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
             ),
+            const SizedBox(height: 8),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Use Material 3'),
+              value: controller.useMaterial3,
+              onChanged: controller.setUseMaterial3,
+            ),
             // Show theme name and description.
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -82,7 +88,7 @@ class HomePage extends StatelessWidget {
             // https://github.com/flutter/flutter/issues/91772
             const ShowThemeDataColors(),
             const SizedBox(height: 8),
-            SwitchListTileAdaptive(
+            SwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: const Text('Use component themes'),
               subtitle: const Text('Enable opinionated widget sub themes'),

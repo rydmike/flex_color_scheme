@@ -99,6 +99,7 @@ class DemoApp extends StatelessWidget {
           title: 'All Themes',
           // Define the light theme for the app, using current scheme index.
           theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
             // We moved the definition of the list of color schemes to use into
             // a separate static class and list. We use the theme controller
             // to change the index of used color scheme from the list.
@@ -175,6 +176,7 @@ class DemoApp extends StatelessWidget {
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
           // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
             colors: AppColor.customSchemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // We go with a slightly stronger blend in dark mode.

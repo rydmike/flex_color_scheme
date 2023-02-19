@@ -10,7 +10,6 @@ import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/showcase_material.dart';
-import '../shared/widgets/universal/switch_list_tile_adaptive.dart';
 import 'widgets/theme_select_buttons.dart';
 
 // -----------------------------------------------------------------------------
@@ -86,6 +85,13 @@ class HomePage extends StatelessWidget {
                       buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                     ),
                     const SizedBox(height: 8),
+                    SwitchListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Use Material 3'),
+                      value: controller.useMaterial3,
+                      onChanged: controller.setUseMaterial3,
+                    ),
+                    const SizedBox(height: 8),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Select theme'),
@@ -120,7 +126,7 @@ class HomePage extends StatelessWidget {
                     // https://github.com/flutter/flutter/issues/91772
                     const ShowThemeDataColors(),
                     const SizedBox(height: 8),
-                    SwitchListTileAdaptive(
+                    SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Use component themes'),
                       subtitle:
