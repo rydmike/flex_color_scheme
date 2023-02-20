@@ -201,12 +201,11 @@ class _HomePageState extends State<HomePage> {
           }
           // Copy ColorScheme code
           else if (index == 7) {
-            final String code = generateColorSchemeDartCode(colorScheme);
+            final String code = generateColorSchemeDartCode(widget.controller);
             await showResponsiveDialog<void>(
               context: context,
               child: DartCodeDialogScreen(
-                dialogHeader: 'Copy Current ${isDark ? 'Dark' : 'Light'} '
-                    'ColorScheme Code',
+                dialogHeader: 'Copy light and dark ColorScheme code',
                 copyMessage: 'ColorScheme code copied to the clipboard!',
                 code: code,
               ),

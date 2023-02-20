@@ -34,7 +34,7 @@ class AppData {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '0';
-  static const String versionPatch = '0-dev.3 (beta)';
+  static const String versionPatch = '0-dev.3';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';

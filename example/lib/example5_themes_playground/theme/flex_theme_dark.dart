@@ -32,7 +32,7 @@ ThemeData flexThemeDark(ThemeController controller) {
   // effective ColorScheme and then grab the effective primary color. We then
   // proceed to make an almost identical FlexColorScheme, but with the effective
   // primary color we got as its color, and use it as source color to harmonize
-  // our out custom theme extension colors with it.
+  // our custom theme extension colors with it.
   //
   // The way the M3 seed based color algorithm and the harmonize color functions
   // work. We could actually use our ThemeController `controller` here and get
