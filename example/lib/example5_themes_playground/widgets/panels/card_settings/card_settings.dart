@@ -9,6 +9,7 @@ class CardSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final String cardRadiusDefaultLabel =
         controller.cardBorderRadius == null && controller.defaultRadius == null
             ? 'default 12'
@@ -61,7 +62,7 @@ class CardSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -73,9 +74,7 @@ class CardSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 12'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

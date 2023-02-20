@@ -443,7 +443,7 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final Color effectiveHoverColor = hoverColor ??
-        (Theme.of(context).brightness == Brightness.light
+        (theme.brightness == Brightness.light
             ? const Color(0x50BCBCBC)
             : const Color(0x99555555));
     return Padding(

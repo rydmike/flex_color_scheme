@@ -314,6 +314,7 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Row(
       children: <Widget>[
         Padding(
@@ -321,7 +322,7 @@ class PageHeader extends StatelessWidget {
           child: IconTheme(
             data: IconThemeData(
               size: 35,
-              color: Theme.of(context).colorScheme.primary,
+              color: theme.colorScheme.primary,
             ),
             child: icon,
           ),
@@ -329,7 +330,7 @@ class PageHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsetsDirectional.only(end: 8),
           child: DefaultTextStyle(
-            style: Theme.of(context).textTheme.headlineMedium!,
+            style: theme.textTheme.headlineMedium!,
             child: heading,
           ),
         ),
@@ -354,12 +355,13 @@ class PageIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final Widget styledIntroTop = DefaultTextStyle(
-      style: Theme.of(context).textTheme.bodyLarge!,
+      style: theme.textTheme.bodyLarge!,
       child: introTop ?? const Text(''),
     );
     final Widget styledIntroBottom = DefaultTextStyle(
-      style: Theme.of(context).textTheme.bodyLarge!,
+      style: theme.textTheme.bodyLarge!,
       child: introBottom ?? const Text(''),
     );
 

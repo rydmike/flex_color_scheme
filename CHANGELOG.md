@@ -136,6 +136,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 
+**TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
+
+- TODO: Playground: Fix menu regression issue.
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 

@@ -13,6 +13,7 @@ class SliderSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
             ? controller.useMaterial3
@@ -133,7 +134,7 @@ class SliderSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'HEIGHT',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -143,9 +144,7 @@ class SliderSettings extends StatelessWidget {
                           : (controller.sliderTrackHeight?.toStringAsFixed(0) ??
                               '')
                       : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

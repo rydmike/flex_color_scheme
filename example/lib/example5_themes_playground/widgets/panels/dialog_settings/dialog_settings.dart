@@ -95,7 +95,7 @@ class DialogSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -108,9 +108,7 @@ class DialogSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 28'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -203,7 +201,7 @@ class DialogSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -216,9 +214,7 @@ class DialogSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 8'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

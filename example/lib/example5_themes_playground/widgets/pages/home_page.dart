@@ -82,10 +82,11 @@ class _HomePageState extends State<HomePage> {
     menuItemsIconState[1] = widget.controller.compactMode
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[2] = isLight
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[3] = theme.useMaterial3
+    // menuItemsIconState[2] =
+    //     isLight //widget.controller.themeMode == Brightness.dark
+    //         ? ResponsiveMenuItemIconState.primary
+    //         : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[3] = widget.controller.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
     menuItemsIconState[4] = widget.controller.useFlexColorScheme

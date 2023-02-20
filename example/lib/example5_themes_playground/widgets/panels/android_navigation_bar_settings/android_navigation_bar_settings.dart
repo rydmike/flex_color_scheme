@@ -104,7 +104,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars

@@ -725,11 +725,11 @@ class _CartScreenState extends State<CartScreen> {
                   children: <Widget>[
                     Text(
                       'Total',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: theme.textTheme.bodySmall,
                     ),
                     Text(
                       '\$${cart.totalCost.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: theme.textTheme.titleSmall,
                     ),
                   ],
                 ),

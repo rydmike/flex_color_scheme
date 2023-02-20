@@ -34,7 +34,6 @@ class ShowCodeThemeColors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    // final ColorScheme colors = theme.colorScheme;
     final bool isDark = theme.brightness == Brightness.dark;
     final bool useMaterial3 = theme.useMaterial3;
     // Get our custom code view theme from the BrandTheme extension, with a

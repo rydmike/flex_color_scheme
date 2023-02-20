@@ -435,10 +435,10 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       // moving to landscape or none phone size. You can still open a very
       // narrow rail also in phone size, but if you resize the canvas at phone
       // sizes, it will auto close again, but as long as you keep media size the
-      // same it stays pen. So on a phone with fixed media size, you only see
+      // same it stays open. So on a phone with fixed media size, you only see
       // it appearing when you rotate the device, in a logical way.
       // On web/desktop you would no use it this small, but if/when you do the
-      // the auto-closing of the thin rail, might feel strange. I just call
+      // the auto-closing of the thin rail, might feel strange. I just
       // consider it as a "the UI knows it is too narrow" for even a rail case.
       if (isPhone) {
         isMenuClosed = true;
@@ -764,7 +764,7 @@ class _AppMenuState extends State<_AppMenu> {
                       ? BoxDecoration(
                           border: BorderDirectional(
                             end: BorderSide(
-                              color: Theme.of(context).dividerColor,
+                              color: theme.dividerColor,
                             ),
                           ),
                         )
