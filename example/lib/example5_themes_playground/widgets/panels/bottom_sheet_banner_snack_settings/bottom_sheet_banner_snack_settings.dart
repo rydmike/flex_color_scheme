@@ -73,9 +73,16 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTile(
+          title: Text('BottomSheet'),
+          subtitle: Text('The BottomSheet comes in two variants, normal and '
+              'modal version. Some of their properties can be themed '
+              'individually, but not all of them. The border radius only has '
+              'one the property shared by both variants.'),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('BottomSheet border radius (modal and none modal)'),
+          title: const Text('Border radius'),
           subtitle: Slider(
             min: -1,
             max: 50,
@@ -126,15 +133,10 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetShowcase(),
-        ),
-        const SizedBox(height: 16),
+        const ListTile(title: Text('Standard BottomSheet')),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('BottomSheet elevation'),
+          title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -186,7 +188,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           ),
         ),
         ColorSchemePopupMenu(
-          title: const Text('BottomSheet background color'),
+          title: const Text('Background color'),
           labelForDefault: sheetDefaultColorLabel,
           index: controller.bottomSheetSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -202,12 +204,12 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetModalShowcase(),
+          child: BottomSheetShowcase(),
         ),
-        const SizedBox(height: 16),
+        const ListTile(title: Text('Modal BottomSheet')),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Modal BottomSheet elevation'),
+          title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -260,7 +262,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           ),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Modal BottomSheet background color'),
+          title: const Text('Background color'),
           labelForDefault: sheetDefaultColorLabel,
           index: controller.bottomSheetModalSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -273,6 +275,10 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: BottomSheetModalShowcase(),
         ),
         const SizedBox(height: 16),
         const Divider(),

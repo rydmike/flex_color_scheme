@@ -58,7 +58,7 @@ class _DemoAppState extends State<DemoApp> {
       theme: FlexThemeData.light(
         useMaterial3: true,
         scheme: FlexScheme.flutterDash,
-        blendLevel: 5,
+        blendLevel: 2,
         appBarOpacity: 0.98,
         subThemesData: const FlexSubThemesData(
           inputDecoratorRadius: 8,
@@ -78,7 +78,7 @@ class _DemoAppState extends State<DemoApp> {
       darkTheme: FlexThemeData.dark(
         useMaterial3: true,
         scheme: FlexScheme.flutterDash,
-        blendLevel: 8,
+        blendLevel: 14,
         appBarStyle: FlexAppBarStyle.background,
         appBarOpacity: 0.96,
         subThemesData: const FlexSubThemesData(

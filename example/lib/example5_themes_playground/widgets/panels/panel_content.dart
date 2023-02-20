@@ -69,14 +69,14 @@ class PanelContent extends StatelessWidget {
       ListTileSettings(controller),
       DialogSettings(controller),
       BottomSheetBannerSnackSettings(controller),
-      const MaterialPanel(),
       CardSettings(controller),
       TextThemeSettings(controller),
       PrimaryTextThemeSettings(controller),
       ThemeSimulator(controller: controller),
-      AndroidNavigationBarSettings(controller),
-      PageExamples(controller: controller),
       const WidgetShowcase(),
+      PageExamples(controller: controller),
+      const MaterialPanel(),
+      AndroidNavigationBarSettings(controller),
       ThemeCode(controller),
     ].elementAt(page);
   }

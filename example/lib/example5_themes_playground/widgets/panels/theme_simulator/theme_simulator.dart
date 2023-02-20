@@ -114,37 +114,41 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               value: widget.controller.deviceSize,
               onChanged: widget.controller.setDeviceSize,
             ),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: widget.controller.deviceSize,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TabBarView(
-                  controller: tabController,
-                  children: <Widget>[
-                    SimulatorFrame(
-                      device: device,
-                      child:
-                          AppExampleComponents(controller: widget.controller),
-                    ),
-                    SimulatorFrame(
-                      device: device,
-                      child: const AppExampleLogin(),
-                    ),
-                    SimulatorFrame(
-                      device: device,
-                      child: const AppExampleShop(),
-                    ),
-                    SimulatorFrame(
-                      device: device,
-                      child: const AppExampleMaterial3(),
-                    ),
-                    SimulatorFrame(
-                      device: device,
-                      child: AppExampleUndraw(controller: widget.controller),
-                    ),
-                  ],
+            Material(
+              elevation: 0,
+              color: theme.colorScheme.surfaceVariant,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: widget.controller.deviceSize,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TabBarView(
+                    controller: tabController,
+                    children: <Widget>[
+                      SimulatorFrame(
+                        device: device,
+                        child:
+                            AppExampleComponents(controller: widget.controller),
+                      ),
+                      SimulatorFrame(
+                        device: device,
+                        child: const AppExampleLogin(),
+                      ),
+                      SimulatorFrame(
+                        device: device,
+                        child: const AppExampleShop(),
+                      ),
+                      SimulatorFrame(
+                        device: device,
+                        child: const AppExampleMaterial3(),
+                      ),
+                      SimulatorFrame(
+                        device: device,
+                        child: AppExampleUndraw(controller: widget.controller),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

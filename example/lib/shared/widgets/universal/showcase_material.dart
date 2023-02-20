@@ -3369,9 +3369,7 @@ class MaterialShowcase extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        const Divider(),
-        const SizedBox(height: 8),
+        const SizedBox(height: 32),
         Text('Material type card', style: denseHeader),
         Text(
           'Default background color is theme cardColor, and '

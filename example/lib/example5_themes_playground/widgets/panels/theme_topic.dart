@@ -134,11 +134,6 @@ const List<ThemeTopic> panelItems = <ThemeTopic>[
     icon: Icons.call_to_action_outlined,
   ),
   ThemeTopic(
-    heading: 'Material',
-    buttonLabel: 'Material',
-    icon: Icons.square,
-  ),
-  ThemeTopic(
     heading: 'Card',
     buttonLabel: 'Card',
     icon: Icons.picture_in_picture_alt_outlined,
@@ -159,9 +154,9 @@ const List<ThemeTopic> panelItems = <ThemeTopic>[
     icon: Icons.phone_iphone,
   ),
   ThemeTopic(
-    heading: 'Android system navigation bar',
-    buttonLabel: 'Android\nSystem Nav',
-    icon: Icons.android_outlined,
+    heading: 'Widget showcase',
+    buttonLabel: 'Widget\nshowcase',
+    icon: Icons.flutter_dash,
   ),
   ThemeTopic(
     heading: 'Page examples',
@@ -169,9 +164,14 @@ const List<ThemeTopic> panelItems = <ThemeTopic>[
     icon: Icons.article_outlined,
   ),
   ThemeTopic(
-    heading: 'Widget showcase',
-    buttonLabel: 'Widget\nshowcase',
-    icon: Icons.flutter_dash,
+    heading: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
+  ),
+  ThemeTopic(
+    heading: 'Android system navigation bar',
+    buttonLabel: 'Android\nSystem Nav',
+    icon: Icons.android_outlined,
   ),
   ThemeTopic(
     heading: 'Theme code',

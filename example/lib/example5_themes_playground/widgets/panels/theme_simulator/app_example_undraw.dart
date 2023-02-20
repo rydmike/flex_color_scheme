@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app_data.dart';
 import '../../../../shared/const/app_images.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/utils/breakpoint.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/utils/random_color.dart';
@@ -41,90 +42,93 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Undraw'),
-        actions: const <Widget>[UndrawAbout(useRootNavigator: false)],
-      ),
-      drawer: AppExampleDrawer(controller: widget.controller),
-      bottomNavigationBar: const AppExampleNavigationBar(),
-      body: BreakpointBuilder(
-        type: BreakType.large,
-        minColumnSize: 204,
-        builder: (BuildContext context, Breakpoint breakpoint) {
-          return CustomScrollView(
-            primary: false,
-            // controller: scrollController,
-            slivers: <Widget>[
-              SliverPadding(
-                padding: const EdgeInsetsDirectional.only(
-                    top: 16, start: 16, end: 16),
-                sliver: SliverList(
-                  delegate: SliverChildListDelegate(
-                    <Widget>[
-                      const PageHeader(
-                        icon: Icon(Icons.local_florist_outlined),
-                        heading: Text('Undraw Images'),
-                      ),
-                      const Divider(),
-                      const PageIntro(
-                        introTop: Text(
-                          'This demo shows Undraw SVG images '
-                          'in a grid and then randomly '
-                          'animates in a new one.\n'
-                          '\n'
-                          'Each image has its own random wait before it '
-                          'switches and also a random switch animation time. '
-                          'Each time the screen is built, every image box gets '
-                          'a new random colored border, with good contrast in '
-                          'light theme mode and a less saturated '
-                          'version of same color in dark mode.\n',
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Undraw'),
+          actions: const <Widget>[UndrawAbout(useRootNavigator: false)],
+        ),
+        drawer: AppExampleDrawer(controller: widget.controller),
+        bottomNavigationBar: const AppExampleNavigationBar(),
+        body: BreakpointBuilder(
+          type: BreakType.large,
+          minColumnSize: 204,
+          builder: (BuildContext context, Breakpoint breakpoint) {
+            return CustomScrollView(
+              primary: false,
+              // controller: scrollController,
+              slivers: <Widget>[
+                SliverPadding(
+                  padding: const EdgeInsetsDirectional.only(
+                      top: 16, start: 16, end: 16),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      <Widget>[
+                        const PageHeader(
+                          icon: Icon(Icons.local_florist_outlined),
+                          heading: Text('Undraw Images'),
                         ),
-                        introBottom: Text(
-                          'Each image is colored dynamically to match '
-                          'the color of its border. This is done by changing '
-                          'a color text string in the image SVG file. '
-                          'This demo is mostly a stress test for Flutter, '
-                          'especially for Web builds. '
-                          'We could make the grid of switching images '
-                          'infinite, but this demo stops at $_maxTiles '
-                          'images in the grid.\n',
+                        const Divider(),
+                        const PageIntro(
+                          introTop: Text(
+                            'This demo shows Undraw SVG images '
+                            'in a grid and then randomly '
+                            'animates in a new one.\n'
+                            '\n'
+                            'Each image has its own random wait before it '
+                            'switches and also a random switch animation time. '
+                            'Each time the screen is built, every image box '
+                            'gets a new random colored border, with good '
+                            'contrast in light theme mode and a less saturated '
+                            'version of same color in dark mode.\n',
+                          ),
+                          introBottom: Text(
+                            'Each image is colored dynamically to match '
+                            'the color of its border. This is done by changing '
+                            'a color text string in the image SVG file. '
+                            'This demo is mostly a stress test for Flutter, '
+                            'especially for Web builds. '
+                            'We could make the grid of switching images '
+                            'infinite, but this demo stops at $_maxTiles '
+                            'images in the grid.\n',
+                          ),
+                          imageAssets: AppImages.undraw,
                         ),
-                        imageAssets: AppImages.undraw,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: breakpoint.columns,
-                    mainAxisSpacing: breakpoint.gutters / 2,
-                    crossAxisSpacing: breakpoint.gutters / 2,
-                    childAspectRatio: 1.5,
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: breakpoint.columns,
+                      mainAxisSpacing: breakpoint.gutters / 2,
+                      crossAxisSpacing: breakpoint.gutters / 2,
+                      childAspectRatio: 1.5,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext ctx, int index) {
+                        return LayoutBuilder(builder:
+                            (BuildContext context, BoxConstraints size) {
+                          return RandomImageWidget(
+                            imageColor: imageColors[index],
+                            borderRadius: size.maxWidth / 20,
+                            borderWidth: size.maxWidth / 35,
+                          );
+                        });
+                      },
+                      childCount: imageColors.length,
+                    ),
                   ),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext ctx, int index) {
-                      return LayoutBuilder(
-                          builder: (BuildContext context, BoxConstraints size) {
-                        return RandomImageWidget(
-                          imageColor: imageColors[index],
-                          borderRadius: size.maxWidth / 20,
-                          borderWidth: size.maxWidth / 35,
-                        );
-                      });
-                    },
-                    childCount: imageColors.length,
-                  ),
-                ),
-              )
-              //SizedBox(height: MediaQuery.of(context).padding.bottom),
-            ],
-          );
-        },
-        // ),
+                )
+                //SizedBox(height: MediaQuery.of(context).padding.bottom),
+              ],
+            );
+          },
+          // ),
+        ),
       ),
     );
   }

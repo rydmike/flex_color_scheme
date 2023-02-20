@@ -69,9 +69,9 @@ class IntroductionPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' this Playground. Give it a read, it not '
-                      'only explains this application and FlexColorScheme API, '
-                      'using tutorial examples and API guide. It also '
+                  text: ' this Playground, give it a read! It not '
+                      'only explains this application and FlexColorScheme API '
+                      'using tutorial examples and an API guide, it also '
                       'contains general Flutter theming guidance and advice.',
                 ),
               ],
@@ -93,16 +93,21 @@ class IntroductionPanel extends StatelessWidget {
             'to generate your '
             'Material 3 ColorScheme. You can customize the tonal palette '
             'generation parameters. For branding purposes you can lock '
-            'selected main colors to their defined input values, while for '
-            'branding less relevant colors are still seed generated.\n'
+            'selected main colors to their defined input values, while '
+            'for branding less significant colors are seed generated.\n'
             '\n'
             'The theming settings and their impact on widgets are shown in '
-            'widget topic panels. The same panels are used on two screens '
-            'with different layouts. The default one is a page view, '
-            'where you see one topic at a time. The second screen is a '
+            'widget topic panels. There is also a theme simulator where you '
+            'can see your configured theme using some sample apps and '
+            'different mock devices.\n'
+            '\n'
+            'The same content is used in two different modes with very '
+            'different layouts. The default one is a page view, '
+            'where you see one, or in wider screens, two selectable topics '
+            'at a time. The second screen is a '
             'large masonry grid view, where you can see many topics at once '
-            'when using large screens. You can open and close topics to view '
-            'more or fewer of them at the same time. '
+            'if using a very large screens. You can open and close topics to '
+            'view more or fewer of them at the same time. '
             'This app works on phones, but is primarily intended to be used on '
             'web based desktop browsers, or as a native Windows, '
             'Mac or Linux desktop app, where it shines.\n'
@@ -111,7 +116,11 @@ class IntroductionPanel extends StatelessWidget {
             'schemes, made in the tutorials with the API, they are not '
             'built-in choices in the package. In the package tutorials '
             'you learn how to make your own custom color schemes and turn '
-            'them into advanced themes with FlexColorScheme. '
+            'them into advanced themes with FlexColorScheme. The last color '
+            'scheme is customizable, you can modify it as desired and also '
+            'copy any built-ibn scheme to it as a starting point for your own '
+            'colors.\n'
+            '\n'
             'All settings in this demo are persisted locally and can be reset '
             'back to default values at any time. Feel free to experiment with '
             'interesting theme styles. If you get lost in options, just reset '
@@ -146,16 +155,17 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const ListTile(
           subtitle: Text(
-            'When you enable component sub-themes you get '
-            'a theme that is inspired by Material 3, without using the '
-            'useMaterial3 toggle in ThemeData. All widgets are still Material '
-            '2 based, you can give them colors from the full Material 3 '
+            'When you enable component sub-themes you get an only slightly '
+            'opinionated Material 3 default setup. If you turn OFF Material 3, '
+            'you get a Material 2 theme that is inspired by Material 3, '
+            'without using the "useMaterial3" toggle in ThemeData. All widgets '
+            'are Material 2 based, you can give them colors from the M3 '
             'ColorScheme and also use a seeded ColorScheme with them. ',
           ),
         ),
         ListTile(
           subtitle: const Text(
-              'Want to use the FlexColorScheme theme you configured here in '
+              'Want to use a FlexColorScheme theme you configured here in '
               'your Flutter app? Then Copy the setup code, paste it into your '
               'Flutter app, import FlexColorScheme, and theming is done.'),
           trailing: FilledButton(
@@ -180,9 +190,10 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
-          subtitle: Text('In Flutter 3.7 there are only a few minor issues '
-              'with Material 3, with hardly any impact on an app using it. In '
-              'Flutter 3.3 and earlier, that are many issues '
+          subtitle: Text('In Flutter 3.7 there are only a minor issues '
+              'with Material 3, with low impact on apps using it. '
+              'FlexColorScheme is also able to work around and fix some of '
+              'them. In Flutter 3.3 and earlier, that are many severe issues '
               'related to enabling and using Material 3.'),
         ),
         Padding(
@@ -192,8 +203,9 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You can read more about M3 issues in '
-                      'FlexColorScheme docs, where they are being ',
+                  text: 'You can read more about M3 and theming related '
+                      'issues in FlexColorScheme docs, where the issues '
+                      'are being ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -204,13 +216,13 @@ class IntroductionPanel extends StatelessWidget {
                   style: spanTextStyle,
                   text: '. Due to the large number of issues and also '
                       'incomplete state of Material 3 implementation in '
-                      'Flutter 3.3 and earlier, resulting in mixed results, '
-                      'We do NOT recommend using M3 with these versions.\n'
+                      'Flutter 3.3 and earlier, we do NOT recommend using '
+                      'M3 with Flutter 3.3 or earlier versions.\n'
                       '\n'
-                      'In Flutter stable 3.7 and later, M3 is ready and can be '
+                      'In Flutter 3.7 and later, M3 is ready and can be '
                       'used in production. Some minor M3 fidelity and '
-                      'specification compliance issues still exists, but they '
-                      'are very minor.',
+                      'specification compliance issues still exists, they '
+                      'are minor and will be fixed in later releases.',
                 ),
               ],
             ),

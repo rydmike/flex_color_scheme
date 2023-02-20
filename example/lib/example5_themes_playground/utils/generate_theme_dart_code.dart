@@ -204,10 +204,10 @@ String generateThemeDartCode(ThemeController controller) {
           ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
           : '';
   final String tintLightColor = controller.surfaceTintLight != null
-      ? '  surfaceTint: ${controller.surfaceTintLight},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintLight},\n'
       : '';
   final String tintDarkColor = controller.surfaceTintDark != null
-      ? '  surfaceTint: ${controller.surfaceTintDark},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintDark},\n'
       : '';
   // Are we using Material3?
   final String useMaterial3 = controller.useMaterial3
@@ -1528,7 +1528,7 @@ String generateThemeDartCode(ThemeController controller) {
       '${AppData.packageVersion}. Make sure you\n'
       '// use same or higher package version, but still same major version.\n'
       '// If you use a lower version, some properties may not be supported.\n'
-      '// In that case remove them after copying the theme to your app.\n'
+      '// In that case remove them after copying this theme to your app.\n'
       'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'

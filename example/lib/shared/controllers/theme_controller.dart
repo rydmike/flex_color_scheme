@@ -1414,6 +1414,7 @@ class ThemeController with ChangeNotifier {
       setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
       setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
       setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
+      setNavBarElevation(0, false);
       setNavBarMuteUnselected(true, false);
       // NavigationRail settings
       setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
@@ -1510,7 +1511,7 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
     }
-    // 6) Primary based
+    // 6) One shade
     else if (settingsId == 6) {
       // Legacy swap
       setSwapLegacyColors(false, false);
@@ -1583,7 +1584,7 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
     }
-    // 7) Platform Agnostic.
+    // 7) Platform agnostic.
     else if (settingsId == 7) {
       // The default radius to 10 for all.
       setDefaultRadius(10, false);
@@ -1616,8 +1617,12 @@ class ThemeController with ChangeNotifier {
       // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
-      setBottomAppBarElevationLight(1, false);
-      setBottomAppBarElevationDark(1, false);
+      setAppBarElevationLight(0, false);
+      setAppBarElevationDark(0, false);
+      setAppBarScrolledUnderElevationLight(1, false);
+      setAppBarScrolledUnderElevationDark(3, false);
+      setBottomAppBarElevationLight(2, false);
+      setBottomAppBarElevationDark(2, false);
       // Elevated button
       setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
       setElevatedButtonSecondarySchemeColor(

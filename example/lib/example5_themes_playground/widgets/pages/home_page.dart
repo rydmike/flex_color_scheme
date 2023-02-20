@@ -69,23 +69,20 @@ class _HomePageState extends State<HomePage> {
 
     // The panels can only be opened/closed on the large masonry grid view.
     // Since by default users will start with the page view, they will have
-    // seen the "intro" panel already, so by default we close it here.
-    // And keep them all closed at start. New in V7, maybe phasing out grid.
+    // New in V7, keeping grid view panels all closed at start. Might
+    // phase out the grid view and remove it totally.
     isPanelOpen = List<bool>.generate(panelItems.length, (int i) => false);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
     menuItemsIconState[1] = widget.controller.compactMode
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    // menuItemsIconState[2] =
-    //     isLight //widget.controller.themeMode == Brightness.dark
-    //         ? ResponsiveMenuItemIconState.primary
-    //         : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[2] = Theme.of(context).brightness == Brightness.light
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
     menuItemsIconState[3] = widget.controller.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
@@ -168,7 +165,8 @@ class _HomePageState extends State<HomePage> {
             } else {
               widget.controller.setThemeMode(ThemeMode.dark);
             }
-            updateMenuState(index);
+            // On purpose no call to update menu change, it is handled by the
+            // didChangeDependencies called when the theme actually changes.
           }
           // Set M3 ON/OFF
           else if (index == 3) {

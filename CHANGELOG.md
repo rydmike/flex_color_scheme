@@ -130,7 +130,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of indicator border radius to `NavigationBar` to panel **Navigation Bar**.
 - Added theming of indicator border radius to `NavigationRail` to panel **Navigation Rail**.
 - Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes.
-- Added controls to theme menus consistently to the **Menu** panel.
+- Added controls to theme the new M3 menus consistently to the **Menu** panel.
 - Added a panel with 10 pre-made example theme configurations.
 - Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter, new TODO, report the issue.
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
@@ -138,20 +138,19 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- TODO: Playground: Fix menu regression issue.
+- TODO: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release at least.
+
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- TODO: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.  
-- TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.1
+- TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.3
 - TODO: Investigate the Playground random panel change, cause is still elusive.
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Fix test coverage.
+- MUST DO: Fix test coverage:
   - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 81% tested now.
   - All new sub-themes and new states.  
   - Tests for usedColors 7.
-- MUST DO: Review and test all tutorial examples.
 - MUST DO: Add important changes to docs.flexcolorscheme.com:
   - Change summary update.
   - Update known Flutter M3 and theming impacting issues. 

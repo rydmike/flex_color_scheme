@@ -59,9 +59,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[2] = isLight
+    menuItemsIconState[2] = Theme.of(context).brightness == Brightness.light
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }

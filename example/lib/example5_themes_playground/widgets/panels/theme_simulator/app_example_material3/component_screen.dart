@@ -352,6 +352,25 @@ class Cards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+
+    // (rydmike): To make the by Flutter team made custom outlined Card below
+    // that is a not a part of SDK configured Cards, actually follow M2/M3
+    // switch, as well as on higher prio any ambient themed border radius
+    // the Card theme has, we need to do something like this, to get
+    // the correct border radius that we can use in the custom constructor
+    // further below.
+    //
+    // Default starting point value based on M3 and M2 mode spec values.
+    double borderRadius = useMaterial3 ? 12 : 4;
+    // Is themed? Try to get the radius from the theme and used that if it was.
+    final ShapeBorder? cardShape = theme.cardTheme.shape;
+    if (cardShape != null && cardShape is RoundedRectangleBorder) {
+      final BorderRadius shape = cardShape.borderRadius as BorderRadius;
+      borderRadius = shape.bottomLeft.x;
+    }
+
     return ComponentDecoration(
       label: 'Cards',
       tooltipMessage: 'Use Card',
@@ -414,9 +433,9 @@ class Cards extends StatelessWidget {
               elevation: 0,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Theme.of(context).colorScheme.outline,
+                  color: theme.colorScheme.outline,
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               ),
               child: Container(
                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),

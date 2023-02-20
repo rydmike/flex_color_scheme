@@ -16,6 +16,10 @@ import '../panels/theme_topic.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
+// TODO(rydmike): Considering removing the grid view totally.
+//  Now that PageView can be set to view any two panels side-by-side, this
+//  grid view is not so useful anymore. Maybe we remove it totally?
+
 /// This is the super large masonry grid view layout of the Themes Playground.
 ///
 /// It is somewhat useful on a 4k screen where you can see a lot of settings

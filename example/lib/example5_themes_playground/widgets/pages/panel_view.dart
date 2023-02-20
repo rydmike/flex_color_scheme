@@ -18,10 +18,18 @@ import '../shared/color_scheme_box.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-/// This is the smaller more focused single panel view of the Themes Playground.
+// TODO(rydmike): Consider a new responsive large layout where both panels
+// have on left and right side their own panel selector and scroll
+// independently. This would be simpler on wide screen and more efficient
+// and provide even more usable vertical space than compact mode.
+// Compact toggle could still be kept.
+
+/// This is the task focused single and dual panel view of the Playground.
 ///
 /// It shows one or two panel at a time as a PageView. This is a nice layout
 /// on mid size screen, like tablets, probably preferable on a phone too.
+///
+/// On bigger screens it show two panel side-by-side.
 class PanelView extends StatefulWidget {
   const PanelView({
     super.key,
