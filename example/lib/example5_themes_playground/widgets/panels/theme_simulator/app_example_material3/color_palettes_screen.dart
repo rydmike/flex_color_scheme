@@ -6,6 +6,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../shared/controllers/theme_controller.dart';
+import '../../../../theme/flex_theme_dark.dart';
+import '../../../../theme/flex_theme_light.dart';
+
 const Widget divider = SizedBox(height: 10);
 
 // If screen content width is greater or equal to this value, the light and dark
@@ -14,19 +18,17 @@ const Widget divider = SizedBox(height: 10);
 const double narrowScreenWidthThreshold = 400;
 
 class ColorPalettesScreen extends StatelessWidget {
-  const ColorPalettesScreen({super.key});
+  const ColorPalettesScreen({super.key, required this.themeController});
+
+  final ThemeController themeController;
 
   @override
   Widget build(BuildContext context) {
-    final Color selectedColor = Theme.of(context).primaryColor;
-    final ThemeData lightTheme = ThemeData(
-      colorSchemeSeed: selectedColor,
-      brightness: Brightness.light,
-    );
-    final ThemeData darkTheme = ThemeData(
-      colorSchemeSeed: selectedColor,
-      brightness: Brightness.dark,
-    );
+    final ColorScheme lightScheme =
+        flexColorSchemeLight(themeController, Colors.black).toScheme;
+
+    final ColorScheme darkScheme =
+        flexColorSchemeDark(themeController, Colors.black).toScheme;
 
     Widget schemeLabel(String brightness) {
       return Padding(
@@ -38,11 +40,11 @@ class ColorPalettesScreen extends StatelessWidget {
       );
     }
 
-    Widget schemeView(ThemeData theme) {
+    Widget schemeView(ColorScheme colorScheme) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: ColorSchemeView(
-          colorScheme: theme.colorScheme,
+          colorScheme: colorScheme,
         ),
       );
     }
@@ -53,13 +55,8 @@ class ColorPalettesScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
             children: <TextSpan>[
               const TextSpan(
-                  text: 'This color presentation shows colors based on current '
-                      'primary color using the default Material 3 seed '
-                      'algorithm. It is not a correct color representation of '
-                      'used colors in the FlexColorScheme theme, unless you '
-                      'set it to seed generate the scheme from only primary '
-                      'color using the default Material 3 algorithm.\n'
-                      '\n'
+                  text: 'This color presentation shows colors from '
+                      'ThemesPlayground light and dark ColorScheme. '
                       'To create color schemes based on a '
                       "platform's implementation of dynamic color, "
                       'use the '),
@@ -89,16 +86,15 @@ class ColorPalettesScreen extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
                   child: dynamicColorNotice(),
                 ),
-                divider,
                 schemeLabel('Light ColorScheme'),
-                schemeView(lightTheme),
-                divider,
+                schemeView(lightScheme),
                 divider,
                 schemeLabel('Dark ColorScheme'),
-                schemeView(darkTheme),
+                schemeView(darkScheme),
               ],
             ),
           );
@@ -109,7 +105,8 @@ class ColorPalettesScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8),
                     child: dynamicColorNotice(),
                   ),
                   Row(
@@ -118,7 +115,7 @@ class ColorPalettesScreen extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             schemeLabel('Light ColorScheme'),
-                            schemeView(lightTheme),
+                            schemeView(lightScheme),
                           ],
                         ),
                       ),
@@ -126,7 +123,7 @@ class ColorPalettesScreen extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             schemeLabel('Dark ColorScheme'),
-                            schemeView(darkTheme),
+                            schemeView(darkScheme),
                           ],
                         ),
                       ),

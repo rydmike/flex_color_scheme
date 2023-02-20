@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../shared/const/app_data.dart';
+import '../../../../../shared/controllers/theme_controller.dart';
 import '../../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../../shared/utils/link_text_span.dart';
 import 'color_palettes_screen.dart';
@@ -18,7 +19,8 @@ const double narrowScreenWidthThreshold = 450;
 const double transitionLength = 500;
 
 class AppExampleMaterial3 extends StatefulWidget {
-  const AppExampleMaterial3({super.key});
+  const AppExampleMaterial3({super.key, required this.themeController});
+  final ThemeController themeController;
 
   @override
   State<AppExampleMaterial3> createState() => _AppExampleMaterial3State();
@@ -121,7 +123,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
           ),
         );
       case ScreenSelected.color:
-        return const ColorPalettesScreen();
+        return ColorPalettesScreen(themeController: widget.themeController);
       case ScreenSelected.typography:
         return const TypographyScreen();
       case ScreenSelected.elevation:

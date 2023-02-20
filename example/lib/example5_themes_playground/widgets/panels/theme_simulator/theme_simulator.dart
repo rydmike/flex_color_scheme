@@ -141,7 +141,8 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                       ),
                       SimulatorFrame(
                         device: device,
-                        child: const AppExampleMaterial3(),
+                        child: AppExampleMaterial3(
+                            themeController: widget.controller),
                       ),
                       SimulatorFrame(
                         device: device,
