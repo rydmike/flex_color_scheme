@@ -27,13 +27,13 @@ class DrawerSettings extends StatelessWidget {
             null
         ? 'default (onSecondaryContainer)'
         // ignore: lines_longer_than_80_chars
-        : 'default (contrast to ${SchemeColor.values[controller.drawerIndicatorSchemeColor!.index].name})';
+        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerIndicatorSchemeColor!).index].name})';
 
     final String onBackgroundDefault = controller.drawerBackgroundSchemeColor ==
             null
         ? 'default (onSurfaceVariant)'
         // ignore: lines_longer_than_80_chars
-        : 'default (contrast to ${SchemeColor.values[controller.drawerBackgroundSchemeColor!.index].name})';
+        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerBackgroundSchemeColor!).index].name})';
 
     final double derivedIndicatorWidth =
         (controller.drawerWidth ?? (useMaterial3 ? 360 : 304)) - 2 * 12;
