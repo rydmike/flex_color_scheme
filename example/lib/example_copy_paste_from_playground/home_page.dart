@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     // Set enabled menu items.
     menuItemsEnabled =
         List<bool>.generate(AppData.menuItems.length, (int i) => false);
-    menuItemsEnabled[1] = true;
+    menuItemsEnabled[2] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[1] = isLight
+    menuItemsIconState[2] = isLight
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 1) {
+          if (index == 2) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
@@ -143,6 +143,8 @@ class _HomePageState extends State<HomePage> {
               const _BottomBarShowCase(),
               const SizedBox(height: 8),
               const _NavigationRailShowCase(),
+              const SizedBox(height: 8),
+              const _NavigationDrawerShowCase(),
               const SizedBox(height: 8),
               const _DialogShowcase(),
               const SizedBox(height: 8),
@@ -246,6 +248,11 @@ class _MaterialButtonsShowcase extends StatelessWidget {
           children: const <Widget>[
             ElevatedButtonShowcase(),
             SizedBox(height: 8),
+            SizedBox(height: 8),
+            FilledButtonShowcase(),
+            SizedBox(height: 8),
+            FilledButtonTonalShowcase(),
+            SizedBox(height: 8),
             OutlinedButtonShowcase(),
             SizedBox(height: 8),
             TextButtonShowcase(),
@@ -281,11 +288,18 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             ChipShowcase(),
             SizedBox(height: 8),
             ToggleButtonsShowcase(),
+            SizedBox(height: 8),
+            SegmentedButtonShowcase(),
+            SizedBox(height: 8),
             SwitchShowcase(),
             CheckboxShowcase(),
             RadioShowcase(),
             SliderShowcase(),
-            PopupMenuButtonShowcase(),
+            RangeSliderShowcase(),
+            PopupMenuButtonsShowcase(),
+            DropDownMenuShowcase(explainUsage: true),
+            MenuBarShowcase(),
+            MenuAnchorShowcase(),
             SizedBox(height: 8),
             IconButtonCircleAvatarDropdownShowcase(),
             TooltipShowcase(),
@@ -310,9 +324,18 @@ class _TextInputFieldShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextField'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: TextInputField(),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const <Widget>[
+            TextInputField(),
+            SizedBox(height: 8),
+            DropDownButtonFormField(),
+            SizedBox(height: 8),
+            DropDownMenuShowcase(),
+          ],
+        ),
       ),
     );
   }
@@ -332,7 +355,16 @@ class _ListTileShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTile'),
-      child: const ListTileAllShowcase(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          ListTileAllShowcase(),
+          Divider(),
+          ExpansionTileShowcase(),
+          Divider(),
+          ExpansionPanelListShowcase(),
+        ],
+      ),
     );
   }
 }
@@ -351,14 +383,17 @@ class _TabBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
-      title: const Text('TabBar'),
+      title: const Text('AppBar TabBar BottomAppBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
+          AppBarShowcase(),
           SizedBox(height: 8),
           TabBarForAppBarShowcase(),
           SizedBox(height: 8),
           TabBarForBackgroundShowcase(),
+          SizedBox(height: 8),
+          BottomAppBarShowcase(),
         ],
       ),
     );
@@ -409,6 +444,33 @@ class _NavigationRailShowCase extends StatelessWidget {
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
       child: const NavigationRailShowcase(),
+    );
+  }
+}
+
+class _NavigationDrawerShowCase extends StatelessWidget {
+  const _NavigationDrawerShowCase();
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.featured_video_outlined, color: iconColor),
+      title: const Text('NavigationDrawer'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          NavigationDrawerShowcase(),
+          DrawerShowcase(),
+          SizedBox(height: 32),
+        ],
+      ),
     );
   }
 }

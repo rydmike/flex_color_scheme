@@ -29,7 +29,6 @@ class StatefulHeaderCard extends StatefulWidget {
     this.isOpen = true,
     this.duration = const Duration(milliseconds: 200),
     this.color,
-    this.boldTitle = true,
     this.child,
   });
 
@@ -82,12 +81,6 @@ class StatefulHeaderCard extends StatefulWidget {
 
   /// Define this color to override that automatic adaptive background color.
   final Color? color;
-
-  /// Make the title bold.
-  ///
-  /// The title Widget will be made bold if it is a [Text] widget,
-  /// regardless of used style it has.
-  final bool boldTitle;
 
   /// The child to be revealed.
   final Widget? child;
@@ -190,20 +183,6 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
       }
     }
 
-    // Force title widget for Card header to use opinionated bold style,
-    // if we have a title, boldTitle is true and title was a Text.
-    Widget? cardTitle = widget.title;
-    if (cardTitle != null && cardTitle is Text && widget.boldTitle) {
-      final Text textTitle = cardTitle;
-      final TextStyle? cardTitleStyle = cardTitle.style;
-      final String cardTitleText = textTitle.data ?? '';
-      cardTitle = Text(
-        cardTitleText,
-        style: cardTitleStyle?.copyWith(fontWeight: FontWeight.bold) ??
-            const TextStyle(fontWeight: FontWeight.bold),
-      );
-    }
-
     return Card(
       margin: widget.margin,
       color: cardColor,
@@ -218,7 +197,7 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
             child: ListTile(
               contentPadding: widget.headerPadding,
               leading: widget.leading,
-              title: cardTitle,
+              title: widget.title,
               subtitle: widget.subtitle,
               trailing: widget.enabled
                   ? ExpandIcon(

@@ -47,7 +47,7 @@ import 'widgets/pages/home_page.dart';
 // in AppColor.schemesCustom and many other options.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/themesplayground-v5
+// https://rydmike.com/flexcolorscheme/themesplayground-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

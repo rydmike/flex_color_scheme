@@ -801,7 +801,8 @@ class _HomePageState extends State<HomePage> {
     // Set enabled menu items.
     menuItemsEnabled =
         List<bool>.generate(AppData.menuItems.length, (int i) => false);
-    menuItemsEnabled[1] = true;
+    menuItemsEnabled[2] = true;
+    menuItemsEnabled[3] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
@@ -814,7 +815,10 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[1] = isLight
+    menuItemsIconState[2] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[3] = theme.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
@@ -889,11 +893,18 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 1) {
+          if (index == 2) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
               widget.onThemeModeChanged(ThemeMode.dark);
+            }
+          }
+          if (index == 3) {
+            if (widget.useMaterial3) {
+              widget.onMaterial3Changed(false);
+            } else {
+              widget.onMaterial3Changed(true);
             }
           }
         },
