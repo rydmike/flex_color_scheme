@@ -126,8 +126,8 @@ class FlexSubThemesData with Diagnosticable {
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
     //
-    this.elevationTint = FlexTint.removeTint,
-    this.elevationShadow = FlexShadow.useShadow,
+    this.elevationTint,
+    this.elevationShadow,
     //
     this.blendTextTheme = false,
     this.useTextTheme = true,

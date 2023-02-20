@@ -162,6 +162,7 @@ const bool _swapColors = false;
 // * 4 = Primary + container & Secondary + container
 // * 5 = Primary + container & Secondary + container & tertiary colors
 // * 6 = Primary + container & Secondary + container & tertiary + container
+// * 7 = PST, Primary, Secondary and Tertiary, containers computed.
 //
 // This can be a quick way to try what you theme looks like when using less
 // source colors and just different shades of the same color, that are still
@@ -395,6 +396,8 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
   inputDecoratorSchemeColor: SchemeColor.primary,
+  // Set some alpha channel opacity value input decorator.
+  inputDecoratorBackgroundAlpha: 20,
 
   // Some FAB (Floating Action Button) settings.
   //
@@ -419,8 +422,8 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Widgets that use outline borders can be easily adjusted via these
   // properties, they affect the outline input decorator, outlined button and
   // toggle buttons.
-  thickBorderWidth: 2, // Default is 2.0.
-  thinBorderWidth: 1.5, // Default is 1.0.
+  thickBorderWidth: 1.5, // Default is 2.0.
+  thinBorderWidth: 1, // Default is 1.0.
 
   // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.
@@ -549,6 +552,7 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   ThemeMode themeMode = ThemeMode.system;
+  bool useMaterial3 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -558,6 +562,8 @@ class _DemoAppState extends State<DemoApp> {
       // Define the light theme for the app, based on defined colors and
       // properties above.
       theme: FlexThemeData.light(
+        // Use local state to toggle usage of Material 3.
+        useMaterial3: useMaterial3,
         // Want to use a built in scheme? Don't assign any value to colors.
         // We just use the _useScheme bool toggle here from above, only for easy
         // switching via code params so you can try options handily.
@@ -614,7 +620,7 @@ class _DemoAppState extends State<DemoApp> {
         // You may often want a different style on the app bar in dark and
         // light theme mode, therefore it was not set via a shared value
         // above in this template.
-        appBarStyle: FlexAppBarStyle.primary,
+        appBarStyle: null, // Try different style, e.g.FlexAppBarStyle.primary,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
@@ -649,6 +655,8 @@ class _DemoAppState extends State<DemoApp> {
 
       // Define the corresponding dark theme for the app.
       darkTheme: FlexThemeData.dark(
+        // Use local state to toggle usage of Material 3.
+        useMaterial3: useMaterial3,
         // If you want to base the dark scheme on your light colors,
         // you can also compute it from the light theme's FlexSchemeColors.
         // Here you can do so by setting _computeDarkTheme above to true.
@@ -698,7 +706,7 @@ class _DemoAppState extends State<DemoApp> {
         // You may often want a different style on the AppBar in dark and light
         // theme mode, therefore it was not set via a shared value value
         // above in this template.
-        appBarStyle: FlexAppBarStyle.background,
+        appBarStyle: null, // Try styles like: FlexAppBarStyle.background,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
@@ -732,6 +740,12 @@ class _DemoAppState extends State<DemoApp> {
             themeMode = mode;
           });
         },
+        useMaterial3: useMaterial3,
+        onMaterial3Changed: (bool value) {
+          setState(() {
+            useMaterial3 = value;
+          });
+        },
       ),
     );
   }
@@ -759,10 +773,14 @@ class HomePage extends StatefulWidget {
     super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
+    required this.useMaterial3,
+    required this.onMaterial3Changed,
   });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
+  final bool useMaterial3;
+  final ValueChanged<bool> onMaterial3Changed;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -910,6 +928,15 @@ class _HomePageState extends State<HomePage> {
                   } else {
                     widget.onThemeModeChanged(ThemeMode.dark);
                   }
+                },
+              ),
+              const SizedBox(height: 8),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Use Material 3'),
+                value: widget.useMaterial3,
+                onChanged: (bool value) {
+                  widget.onMaterial3Changed(value);
                 },
               ),
               const SizedBox(height: 8),
