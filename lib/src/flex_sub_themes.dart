@@ -338,8 +338,74 @@ class FlexSubThemes {
     }
   }
 
+  /// Returns the correct [SchemeColor] to be used as contrasting on
+  /// [SchemeColor] pair for [SchemeColor] passed in via [value].
+  static SchemeColor onSchemeColor(SchemeColor value) {
+    switch (value) {
+      case SchemeColor.primary:
+      case SchemeColor.surfaceTint:
+        return SchemeColor.onPrimary;
+      case SchemeColor.onPrimary:
+        return SchemeColor.primary;
+      case SchemeColor.primaryContainer:
+        return SchemeColor.onPrimaryContainer;
+      case SchemeColor.onPrimaryContainer:
+        return SchemeColor.primaryContainer;
+      case SchemeColor.secondary:
+        return SchemeColor.onSecondary;
+      case SchemeColor.onSecondary:
+        return SchemeColor.secondary;
+      case SchemeColor.secondaryContainer:
+        return SchemeColor.onSecondaryContainer;
+      case SchemeColor.onSecondaryContainer:
+        return SchemeColor.secondaryContainer;
+      case SchemeColor.tertiary:
+        return SchemeColor.onTertiary;
+      case SchemeColor.onTertiary:
+        return SchemeColor.tertiary;
+      case SchemeColor.tertiaryContainer:
+        return SchemeColor.onTertiaryContainer;
+      case SchemeColor.onTertiaryContainer:
+        return SchemeColor.tertiaryContainer;
+      case SchemeColor.error:
+        return SchemeColor.onError;
+      case SchemeColor.onError:
+        return SchemeColor.error;
+      case SchemeColor.errorContainer:
+        return SchemeColor.onErrorContainer;
+      case SchemeColor.onErrorContainer:
+        return SchemeColor.errorContainer;
+      case SchemeColor.background:
+        return SchemeColor.onBackground;
+      case SchemeColor.onBackground:
+        return SchemeColor.background;
+      case SchemeColor.surface:
+        return SchemeColor.onSurface;
+      case SchemeColor.onSurface:
+        return SchemeColor.surface;
+      case SchemeColor.surfaceVariant:
+        return SchemeColor.onSurfaceVariant;
+      case SchemeColor.onSurfaceVariant:
+        return SchemeColor.surfaceVariant;
+      case SchemeColor.outline:
+        return SchemeColor.background;
+      case SchemeColor.outlineVariant:
+        return SchemeColor.onBackground;
+      case SchemeColor.shadow:
+        return SchemeColor.background;
+      case SchemeColor.scrim:
+        return SchemeColor.background;
+      case SchemeColor.inverseSurface:
+        return SchemeColor.onInverseSurface;
+      case SchemeColor.onInverseSurface:
+        return SchemeColor.inverseSurface;
+      case SchemeColor.inversePrimary:
+        return SchemeColor.onSurface;
+    }
+  }
+
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
-  /// that is the color pair corresponding to the [SchemeColor] enum
+  /// that is the "on" color pair corresponding to the [SchemeColor] enum
   /// value passed in via [value].
   ///
   /// This function is used to get the color value for the color pair to the
@@ -348,69 +414,8 @@ class FlexSubThemes {
   /// [SchemeColor.primary] enum value, will return the [ColorScheme.onPrimary].
   /// Wise versa, passing in [SchemeColor.onPrimary] will return the color
   /// [ColorScheme.primary].
-  static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) {
-    switch (value) {
-      case SchemeColor.primary:
-      case SchemeColor.surfaceTint:
-        return colorScheme.onPrimary;
-      case SchemeColor.onPrimary:
-        return colorScheme.primary;
-      case SchemeColor.primaryContainer:
-        return colorScheme.onPrimaryContainer;
-      case SchemeColor.onPrimaryContainer:
-        return colorScheme.primaryContainer;
-      case SchemeColor.secondary:
-        return colorScheme.onSecondary;
-      case SchemeColor.onSecondary:
-        return colorScheme.secondary;
-      case SchemeColor.secondaryContainer:
-        return colorScheme.onSecondaryContainer;
-      case SchemeColor.onSecondaryContainer:
-        return colorScheme.secondaryContainer;
-      case SchemeColor.tertiary:
-        return colorScheme.onTertiary;
-      case SchemeColor.onTertiary:
-        return colorScheme.tertiary;
-      case SchemeColor.tertiaryContainer:
-        return colorScheme.onTertiaryContainer;
-      case SchemeColor.onTertiaryContainer:
-        return colorScheme.tertiaryContainer;
-      case SchemeColor.error:
-        return colorScheme.onError;
-      case SchemeColor.onError:
-        return colorScheme.error;
-      case SchemeColor.errorContainer:
-        return colorScheme.onErrorContainer;
-      case SchemeColor.onErrorContainer:
-        return colorScheme.errorContainer;
-      case SchemeColor.background:
-        return colorScheme.onBackground;
-      case SchemeColor.onBackground:
-        return colorScheme.background;
-      case SchemeColor.surface:
-        return colorScheme.onSurface;
-      case SchemeColor.onSurface:
-        return colorScheme.surface;
-      case SchemeColor.surfaceVariant:
-        return colorScheme.onSurfaceVariant;
-      case SchemeColor.onSurfaceVariant:
-        return colorScheme.surfaceVariant;
-      case SchemeColor.outline:
-        return colorScheme.background;
-      case SchemeColor.outlineVariant:
-        return colorScheme.onBackground;
-      case SchemeColor.shadow:
-        return colorScheme.background;
-      case SchemeColor.scrim:
-        return colorScheme.background;
-      case SchemeColor.inverseSurface:
-        return colorScheme.onInverseSurface;
-      case SchemeColor.onInverseSurface:
-        return colorScheme.inverseSurface;
-      case SchemeColor.inversePrimary:
-        return colorScheme.onSurface;
-    }
-  }
+  static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
+      schemeColor(onSchemeColor(value), colorScheme);
 
   /// An opinionated [AppBarTheme] theme.
   ///
@@ -3225,8 +3230,10 @@ class FlexSubThemes {
 
   /// An opinionated [NavigationDrawerThemeData] theme with simpler API.
   ///
-  /// Can set [indocatorWidth], [indicatorRadius] and
-  /// [indicatorSchemeColor]
+  /// Can set [indicatorWidth], [indicatorRadius], [backgroundSchemeColor] and
+  /// [indicatorSchemeColor] plus its opacity [indicatorOpacity] and colors
+  /// for selected and unselected items [selectedItemSchemeColor],
+  /// [unselectedItemSchemeColor].
   static NavigationDrawerThemeData navigationDrawerTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4305,7 +4312,7 @@ class FlexSubThemes {
           if (states.contains(MaterialState.selected)) {
             return selectedColor;
           }
-          // TODO(rydmike): Report Flutter transparency bug on SegementedButton.
+          // TODO(rydmike): Report Flutter transparency bug on SegmentedButton.
           return unselectedSchemeColor == null ? null : unselectedColor;
         }),
         foregroundColor:

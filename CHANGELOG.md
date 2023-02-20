@@ -35,6 +35,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Added**: `drawerSelectedItemSchemeColor`, `drawerUnselectedItemSchemeColor`, `tabBarIndicatorSize`, and `tabBarDividerColor` to `FlexSubThemesData`.
 
+- **Added**: Static helper function `onSchemeColor` to `FlexSubThemes`.
+
 
 **CHANGE**
 
