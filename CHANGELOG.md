@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 20, 2023**
+**Feb 21, 2023**
 
 **FIX**
 
@@ -137,6 +137,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter, new TODO, report the issue.
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
+- Added a new theme topic view that comes into use on large desktops. It offers separate vertical theme topic selectors for the two side-by-side views. This results in even more height being available on e.g. a 1080p monitor, since the large horizontal theme topic selector, for the right panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for left and right side. The new compact mode is also available in this view mode, further enlarging avilable space to view more theme topic panel content on mid sized desktop monitors (1080p).
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
