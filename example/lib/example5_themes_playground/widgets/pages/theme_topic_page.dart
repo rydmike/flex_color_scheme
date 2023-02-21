@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/panel_content.dart';
-import '../panels/panel_selector.dart';
-import '../panels/theme_color_selector.dart';
-import '../panels/theme_topic.dart';
 import '../shared/color_scheme_box.dart';
+import 'theme_color_selector.dart';
+import 'theme_panel.dart';
+import 'theme_topic.dart';
+import 'theme_topic_selector.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -18,32 +19,30 @@ import '../shared/color_scheme_box.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-// TODO(rydmike): Consider a new responsive large layout where both panels
-// have on left and right side their own panel selector and scroll
-// independently. This would be simpler on wide screen and more efficient
-// and provide even more usable vertical space than compact mode.
-// Compact toggle could still be kept.
-
-/// This is the task focused single and dual panel view of the Playground.
+/// This is the single [ThemeTopic] PageView of the Playground.
 ///
-/// It shows one or two panel at a time as a PageView. This is a nice layout
-/// on mid size screen, like tablets, probably preferable on a phone too.
+/// It shows one or two panels at a time, in a single [PageView].
+/// This is a nice layout on mid size screen, like tablets,
+/// probably preferable on a phone too.
 ///
-/// On bigger screens it show two panel side-by-side.
-class PanelView extends StatefulWidget {
-  const PanelView({
+/// On bigger screens it show two panel side-by-side, where the left secondary
+/// one can be selected via a popup menu. This is a bit cumbersome, but takes
+/// up very little space.
+class ThemeTopicPage extends StatefulWidget {
+  const ThemeTopicPage({
     super.key,
-    required this.themeController,
+    required this.controller,
   });
-  final ThemeController themeController;
+  final ThemeController controller;
 
   @override
-  State<PanelView> createState() => _PanelViewState();
+  State<ThemeTopicPage> createState() => _ThemeTopicPageState();
 }
 
-class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
+class _ThemeTopicPageState extends State<ThemeTopicPage>
+    with TickerProviderStateMixin {
   late final PageController pageController;
-  late final ScrollController scrollCtrl;
+  late final ScrollController scrollController;
   late int previousPage;
 
   late final AnimationController scaleController = AnimationController(
@@ -72,10 +71,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     pageController = PageController(
-      initialPage: widget.themeController.viewIndex,
+      initialPage: widget.controller.viewIndex,
     );
-    previousPage = widget.themeController.viewIndex;
-    scrollCtrl = ScrollController(debugLabel: 'PanelViewScrollController');
+    previousPage = widget.controller.viewIndex;
+    scrollController =
+        ScrollController(debugLabel: 'PanelViewScrollController');
     scaleController.value = 1.0;
     fadeController.value = 1.0;
   }
@@ -85,19 +85,18 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
     super.didChangeDependencies();
     // TODO(rydmike): Strange screen switch bug on platform swap, maybe here?
     //  seen it in a few rare cases on other actions too, but platform swap
-    //  seem to trigger it.
-    //
+    //  seems to trigger it.
     // debugPrint('PanelView previous page: $previousPage');
     // debugPrint(
     //  'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
-    //
+    // This was one attempt to fix it, did not seem to work.
     // previousPage = widget.themeController.viewIndex;
   }
 
   @override
   void dispose() {
     pageController.dispose();
-    scrollCtrl.dispose();
+    scrollController.dispose();
     scaleController.dispose();
     fadeController.dispose();
     super.dispose();
@@ -105,9 +104,9 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeController themeCtrl = widget.themeController;
+    final ThemeController themeCtrl = widget.controller;
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isCompact = widget.themeController.compactMode;
+    final bool isCompact = widget.controller.compactMode;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint ||
@@ -129,15 +128,15 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
     return Scrollbar(
-      controller: scrollCtrl,
+      controller: scrollController,
       child: NestedScrollView(
-        controller: scrollCtrl,
+        controller: scrollController,
         headerSliverBuilder: (BuildContext context, bool value) {
           return <Widget>[
             SliverPersistentHeader(
               pinned: isPinned,
               floating: true,
-              delegate: PanelSelectorHeaderDelegate(
+              delegate: _ThemeTopicSelectorHeaderDelegate(
                   vsync: this,
                   extent: headerExtent,
                   page: themeCtrl.viewIndex,
@@ -153,10 +152,11 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
                       themeCtrl.setViewIndex(index);
                       // This is a handmade scale and fade up animation
                       // when user taps on header item. We use it instead
-                      // animating to the page with the page controller.
+                      // of animating to the page with the page controller.
                       // Instead we jump to the page and trigger a slight
-                      // fade and zoom in effect, without it it is hard too
-                      // notice that the page changed.
+                      // fade and zoom in effect, without this, it is hard too
+                      // notice that the page changed, and this fade-zoom-in
+                      // fits well on a tablet view.
                       scaleController.value = 0.7;
                       fadeController.value = 0.2;
                       scaleController.forward();
@@ -176,7 +176,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
         },
         body: PageView.builder(
           controller: pageController,
-          itemCount: panelItems.length,
+          itemCount: themeTopics.length,
           onPageChanged: (int pageIndex) {
             setState(() {
               previousPage = themeCtrl.viewIndex;
@@ -193,7 +193,7 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
               scale: scaleAnimation,
               child: FadeTransition(
                 opacity: fadeAnimation,
-                child: PanelPage(pageIndex, themeCtrl),
+                child: _ThemePanelView(pageIndex, themeCtrl),
               ),
             );
           },
@@ -203,15 +203,16 @@ class _PanelViewState extends State<PanelView> with TickerProviderStateMixin {
   }
 }
 
-// A PanelPage wrapper that puts the content of our panels, in a ListView
-// inside a HeaderCard. The ListView is needed so it grows as far as needed
-// inside the page in the PageView.
-class PanelPage extends StatelessWidget {
-  const PanelPage(
-    this.leftPageIndex,
-    this.controller, {
-    super.key,
-  });
+/// A [ThemePanel] wrapper that puts the content of them, in a [ListView]
+/// inside a [HeaderCard].
+///
+/// The view can show two panels side by side when the screen is wide enough,
+/// the second panel is selected with a popup menu.
+///
+/// The ListView is needed so it grows as far as needed inside the page
+/// in its PageView.
+class _ThemePanelView extends StatelessWidget {
+  const _ThemePanelView(this.leftPageIndex, this.controller);
   final int leftPageIndex;
   final ThemeController controller;
 
@@ -231,7 +232,7 @@ class PanelPage extends StatelessWidget {
         AppData.responsiveInsets(media.size.width, isCompact);
     final double bottomPadding = media.padding.bottom;
 
-    final int rightPageIndex = controller.sideViewIndex;
+    final int sideViewIndex = controller.sideViewIndex;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // A custom breakpoint, when the layout width is larger than breakpoint
@@ -245,8 +246,8 @@ class PanelPage extends StatelessWidget {
           ScrollConfiguration(
             behavior: const NoScrollbarBehavior(),
             // This ListView allows the content in the PageView to scroll
-            // vertically as apart of the NestedScroll view the PageView is
-            // included in, but by itself, but we need the ListView to allow
+            // vertically as a part of the NestedScroll view the PageView is
+            // included in, but by itself. We need the ListView to allow
             // its page content to grow beyond the visible page.
             child: Expanded(
               child: ListView(
@@ -258,10 +259,10 @@ class PanelPage extends StatelessWidget {
                 ),
                 children: <Widget>[
                   HeaderCard(
-                    title: Text(panelItems[leftPageIndex].heading),
+                    title: Text(themeTopics[leftPageIndex].heading),
                     leading:
-                        Icon(panelItems[leftPageIndex].icon, color: iconColor),
-                    child: PanelContent(leftPageIndex, controller),
+                        Icon(themeTopics[leftPageIndex].icon, color: iconColor),
+                    child: ThemePanel(leftPageIndex, controller),
                   ),
                 ],
               ),
@@ -271,6 +272,7 @@ class PanelPage extends StatelessWidget {
             Expanded(
               child: ListView(
                   controller: ScrollController(),
+                  primary: false,
                   padding: EdgeInsetsDirectional.fromSTEB(
                     margins / 2,
                     0,
@@ -279,15 +281,15 @@ class PanelPage extends StatelessWidget {
                   ),
                   children: <Widget>[
                     HeaderCard(
-                      title: Text(panelItems[rightPageIndex].heading),
-                      leading: Icon(panelItems[rightPageIndex].icon,
+                      title: Text(themeTopics[sideViewIndex].heading),
+                      leading: Icon(themeTopics[sideViewIndex].icon,
                           color: iconColor),
-                      trailing: SelectSecondPage(
-                        index: rightPageIndex,
+                      trailing: _SelectSideThemePanelView(
+                        index: sideViewIndex,
                         onChanged: controller.setSideViewIndex,
                         iconColor: iconColor,
                       ),
-                      child: PanelContent(rightPageIndex, controller),
+                      child: ThemePanel(sideViewIndex, controller),
                     ),
                   ]),
             )
@@ -297,18 +299,67 @@ class PanelPage extends StatelessWidget {
   }
 }
 
-/// Widget used to select used side-by-side second panel with a popup menu.
-class SelectSecondPage extends StatelessWidget {
-  const SelectSecondPage({
-    super.key,
+/// [_ThemeTopicSelectorHeaderDelegate] for the used custom
+/// [SliverPersistentHeader].
+///
+/// Used to keep a part of our nested scroll view pinned to the top
+/// (in tablet desktop view), and floating on phone and snapping
+/// back when scrolling back just a bit.
+class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
+  _ThemeTopicSelectorHeaderDelegate({
+    required this.vsync,
+    required this.extent,
+    required this.page,
+    required this.previousPage,
+    required this.onSelect,
+    required this.isCompact,
+  });
+  @override
+  final TickerProvider vsync;
+  final double extent;
+  final int page;
+  final int previousPage;
+  final ValueChanged<int> onSelect;
+  final bool isCompact;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return ThemeTopicSelectorHorizontal(
+      page: page,
+      onSelect: onSelect,
+      isCompact: isCompact,
+    );
+  }
+
+  @override
+  double get maxExtent => extent;
+
+  @override
+  double get minExtent => extent;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return oldDelegate.maxExtent != maxExtent ||
+        oldDelegate.minExtent != minExtent ||
+        previousPage != page;
+  }
+
+  @override
+  FloatingHeaderSnapConfiguration? get snapConfiguration =>
+      FloatingHeaderSnapConfiguration();
+}
+
+/// Widget used to select used side-by-side second [ThemePanel] using
+/// a popup menu.
+class _SelectSideThemePanelView extends StatelessWidget {
+  const _SelectSideThemePanelView({
     required this.index,
     this.onChanged,
-    this.contentPadding,
     required this.iconColor,
   });
   final int index;
   final ValueChanged<int>? onChanged;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
   final Color iconColor;
 
   @override
@@ -331,7 +382,7 @@ class SelectSecondPage extends StatelessWidget {
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < panelItems.length; i++)
+        for (int i = 0; i < themeTopics.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
@@ -343,7 +394,7 @@ class SelectSecondPage extends StatelessWidget {
                       child: ColorSchemeBox(
                         backgroundColor: iconColor,
                         borderColor: Colors.transparent,
-                        child: Icon(panelItems[i].icon),
+                        child: Icon(themeTopics[i].icon),
                       ),
                     )
                   : IconTheme(
@@ -351,10 +402,10 @@ class SelectSecondPage extends StatelessWidget {
                       child: ColorSchemeBox(
                         backgroundColor: Colors.transparent,
                         borderColor: iconColor,
-                        child: Icon(panelItems[i].icon),
+                        child: Icon(themeTopics[i].icon),
                       ),
                     ),
-              title: Text(panelItems[i].heading, style: txtStyle),
+              title: Text(themeTopics[i].heading, style: txtStyle),
             ),
           )
       ],

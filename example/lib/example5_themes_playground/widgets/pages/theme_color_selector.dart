@@ -6,87 +6,9 @@ import 'package:flutter/rendering.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import 'theme_colors_settings/input_colors_selector.dart';
+import '../panels/theme_colors_settings/input_colors_selector.dart';
 
-/// [ThemeColorSelectorHeaderDelegate] for used custom [SliverPersistentHeader].
-///
-/// Used to keep a part of our nested scroll view pinned to the top
-/// (in tablet desktop view), and floating on phone and snapping
-/// back when scrolling back just a bit.
-class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
-  ThemeColorSelectorHeaderDelegate({
-    required this.vsync,
-    required this.extent,
-    required this.controller,
-    required this.updateDelegate,
-  });
-  @override
-  final TickerProvider vsync;
-  final double extent;
-  final ThemeController controller;
-  final bool updateDelegate;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ThemeColorSelectorDelegateWrapper(controller: controller);
-  }
-
-  @override
-  double get maxExtent => extent;
-
-  @override
-  double get minExtent => extent;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return oldDelegate.maxExtent != maxExtent ||
-        oldDelegate.minExtent != minExtent ||
-        updateDelegate;
-  }
-
-  @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration =>
-      FloatingHeaderSnapConfiguration();
-}
-
-/// A wrapper for the [ThemeColorSelector] when it is used via a persistent
-/// header delegate.
-///
-/// The wrapper is used to add the correct padding and frosted glass effect
-/// when it is used as a [SliverPersistentHeaderDelegate] in the Masonry grid
-/// in a custom scroll view.
-class ThemeColorSelectorDelegateWrapper extends StatelessWidget {
-  const ThemeColorSelectorDelegateWrapper({
-    super.key,
-    required this.controller,
-  });
-  final ThemeController controller;
-  @override
-  Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isCompact = controller.compactMode;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
-    return Material(
-      color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: media.padding.top + margins,
-              bottom: margins,
-            ),
-            child: ThemeColorSelector(controller: controller),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Used to select theme colors using, can also turn ON/OFF FlexColorScheme
+/// Used to select used theme colors, can also turn ON/OFF FlexColorScheme
 /// and component themes.
 ///
 /// Used at the top of the Masonry grid view and between page and panel page
@@ -174,6 +96,81 @@ class ThemeColorSelector extends StatelessWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// [ThemeColorSelectorHeaderDelegate] for used custom [SliverPersistentHeader].
+///
+/// Used to keep a part of our nested scroll view pinned to the top
+/// (in tablet desktop view), and floating on phone and snapping
+/// back when scrolling back just a bit.
+class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
+  ThemeColorSelectorHeaderDelegate({
+    required this.vsync,
+    required this.extent,
+    required this.controller,
+    required this.updateDelegate,
+  });
+  @override
+  final TickerProvider vsync;
+  final double extent;
+  final ThemeController controller;
+  final bool updateDelegate;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return _ThemeColorSelectorDelegateWrapper(controller);
+  }
+
+  @override
+  double get maxExtent => extent;
+
+  @override
+  double get minExtent => extent;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return oldDelegate.maxExtent != maxExtent ||
+        oldDelegate.minExtent != minExtent ||
+        updateDelegate;
+  }
+
+  @override
+  FloatingHeaderSnapConfiguration? get snapConfiguration =>
+      FloatingHeaderSnapConfiguration();
+}
+
+/// A wrapper for the [ThemeColorSelector] when it is used via a
+/// [SliverPersistentHeaderDelegate].
+///
+/// The wrapper is used to add the correct padding and frosted glass effect
+/// when it is used as a [SliverPersistentHeaderDelegate] in the Masonry grid
+/// in a custom scroll view.
+class _ThemeColorSelectorDelegateWrapper extends StatelessWidget {
+  const _ThemeColorSelectorDelegateWrapper(this.controller);
+  final ThemeController controller;
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool isCompact = controller.compactMode;
+    final double margins =
+        AppData.responsiveInsets(media.size.width, isCompact);
+    return Material(
+      color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: media.padding.top + margins,
+              bottom: margins,
+            ),
+            child: ThemeColorSelector(controller: controller),
+          ),
+        ),
       ),
     );
   }

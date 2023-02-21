@@ -2,65 +2,17 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../../../shared/const/app_data.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
+import '../../../shared/utils/colors_are_close.dart';
 import 'theme_topic.dart';
 
-/// [PanelSelectorHeaderDelegate] for the used custom [SliverPersistentHeader].
+/// Horizontal panel selector of active theme topic to view.
 ///
-/// Used to keep a part of our nested scroll view pinned to the top
-/// (in tablet desktop view), and floating on phone and snapping
-/// back when scrolling back just a bit.
-class PanelSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
-  PanelSelectorHeaderDelegate({
-    required this.vsync,
-    required this.extent,
-    required this.page,
-    required this.previousPage,
-    required this.onSelect,
-    required this.isCompact,
-  });
-  @override
-  final TickerProvider vsync;
-  final double extent;
-  final int page;
-  final int previousPage;
-  final ValueChanged<int> onSelect;
-  final bool isCompact;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return PanelSelector(
-      page: page,
-      onSelect: onSelect,
-      isCompact: isCompact,
-    );
-  }
-
-  @override
-  double get maxExtent => extent;
-
-  @override
-  double get minExtent => extent;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return oldDelegate.maxExtent != maxExtent ||
-        oldDelegate.minExtent != minExtent ||
-        previousPage != page;
-  }
-
-  @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration =>
-      FloatingHeaderSnapConfiguration();
-}
-
-/// Horizontal panel selector of active panel page to view.
-class PanelSelector extends StatefulWidget {
-  const PanelSelector({
+/// Used in phone, tablet, small and medium desktop view.
+class ThemeTopicSelectorHorizontal extends StatefulWidget {
+  const ThemeTopicSelectorHorizontal({
     super.key,
     required this.page,
     required this.onSelect,
@@ -71,10 +23,12 @@ class PanelSelector extends StatefulWidget {
   final bool isCompact;
 
   @override
-  State<PanelSelector> createState() => _PanelSelectorState();
+  State<ThemeTopicSelectorHorizontal> createState() =>
+      _ThemeTopicSelectorHorizontalState();
 }
 
-class _PanelSelectorState extends State<PanelSelector> {
+class _ThemeTopicSelectorHorizontalState
+    extends State<ThemeTopicSelectorHorizontal> {
   late final ScrollController scrollController;
   late int selectedPage;
   late double scrollOffset;
@@ -97,7 +51,7 @@ class _PanelSelectorState extends State<PanelSelector> {
   }
 
   @override
-  void didUpdateWidget(covariant PanelSelector oldWidget) {
+  void didUpdateWidget(covariant ThemeTopicSelectorHorizontal oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (selectedPage != widget.page) {
@@ -148,10 +102,10 @@ class _PanelSelectorState extends State<PanelSelector> {
                         controller: scrollController,
                         physics: const ClampingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: panelItems.length,
+                        itemCount: themeTopics.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return _PanelButton(
-                            item: panelItems[index],
+                          return _ThemeTopicButton(
+                            item: themeTopics[index],
                             onSelect: () {
                               widget.onSelect(index);
                               setState(() {
@@ -175,8 +129,116 @@ class _PanelSelectorState extends State<PanelSelector> {
   }
 }
 
-class _PanelButton extends StatelessWidget {
-  const _PanelButton({
+/// Vertical theme topic selector used in two columns view.
+///
+/// Used only on large desktop views.
+class ThemeTopicSelectorVertical extends StatefulWidget {
+  const ThemeTopicSelectorVertical({
+    super.key,
+    required this.page,
+    required this.onSelect,
+    required this.isCompact,
+    this.isRight = false,
+  });
+  final int page;
+  final ValueChanged<int> onSelect;
+  final bool isCompact;
+  final bool isRight;
+
+  @override
+  State<ThemeTopicSelectorVertical> createState() =>
+      _ThemeTopicSelectorVerticalState();
+}
+
+class _ThemeTopicSelectorVerticalState
+    extends State<ThemeTopicSelectorVertical> {
+  late final ScrollController scrollController;
+  late int selectedPage;
+  late double scrollOffset;
+  static const double effectiveWidth =
+      AppData.panelButtonWidth + AppData.panelButtonPhoneWidthReduce;
+  static const double effectiveHeight = AppData.panelButtonHeight +
+      AppData.edgeInsetsPhone * 2 +
+      AppData.panelButtonPhoneHeightReduce;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedPage = widget.page;
+    scrollOffset = (effectiveHeight - 4 * 2) * selectedPage;
+    scrollController = ScrollController(
+      keepScrollOffset: true,
+      initialScrollOffset: scrollOffset,
+    );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant ThemeTopicSelectorVertical oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (selectedPage != widget.page) {
+      selectedPage = widget.page;
+      scrollOffset = (effectiveHeight - 4 * 2) * selectedPage;
+      unawaited(scrollController.animateTo(scrollOffset,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData media = MediaQuery.of(context);
+    final double margins =
+        AppData.responsiveInsets(media.size.width, widget.isCompact);
+
+    return ConstrainedBox(
+      constraints: BoxConstraints.tightFor(width: effectiveWidth + margins),
+      child: ScrollConfiguration(
+        behavior: const DragScrollBehavior(),
+        child: ListView.builder(
+          padding: EdgeInsets.only(
+            left: widget.isRight ? 0 : margins - 4,
+            right: widget.isRight ? margins - 4 : 0,
+            bottom: margins,
+          ),
+          controller: scrollController,
+          primary: false,
+          physics: const ClampingScrollPhysics(),
+          itemCount: themeTopics.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: SizedBox(
+                height: effectiveHeight - 4 * 3,
+                child: _ThemeTopicButton(
+                  item: themeTopics[index],
+                  onSelect: () {
+                    widget.onSelect(index);
+                    setState(() {
+                      selectedPage = index;
+                    });
+                  },
+                  selected: selectedPage == index,
+                  isCompact: true,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+/// A button with [ThemeTopic] button label and icon.
+class _ThemeTopicButton extends StatelessWidget {
+  const _ThemeTopicButton({
     required this.item,
     required this.selected,
     required this.onSelect,
@@ -203,15 +265,26 @@ class _PanelButton extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
-    final Color background =
-        Color.alphaBlend(scheme.surfaceTint.withAlpha(15), cardColor);
+
+    final Color scaffoldBackground = theme.scaffoldBackgroundColor;
+
     final bool isLight = theme.brightness == Brightness.light;
+    final Color background = Color.alphaBlend(
+        scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
+
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
             theme.colorScheme.onBackground)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
     final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
+
+    final Color unselectedColor =
+        colorsAreClose(background, scaffoldBackground, isLight) ||
+                colorsAreClose(cardColor, scaffoldBackground, isLight)
+            ? theme.dividerColor
+            : Colors.transparent;
+
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
     // Make a shape border if our background color is close in color
@@ -222,7 +295,7 @@ class _PanelButton extends StatelessWidget {
       shapeBorder = shapeBorder.copyWith(
         side: selected
             ? BorderSide(color: iconColor, width: borderWidth)
-            : BorderSide(color: theme.dividerColor),
+            : BorderSide(color: unselectedColor),
       );
       // If
     } else {
@@ -234,7 +307,7 @@ class _PanelButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
         side: selected
             ? BorderSide(color: iconColor, width: borderWidth)
-            : BorderSide(color: theme.dividerColor),
+            : BorderSide(color: unselectedColor),
       );
     }
     return SizedBox(

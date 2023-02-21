@@ -81,6 +81,10 @@ class AppData {
   // This breakpoint is only used to further increase margins and insets on
   // very large desktops.
   static const double bigDesktopWidthBreakpoint = 2800;
+  // A medium sized sized desktop, in panel view we switch to vertical
+  // topic selectors, left and right side, one for each panel.
+  static const double mediumDesktopWidthBreakpoint = 1800;
+
   // The minimum media width treated as a phone device in this demo.
   static const double phoneWidthBreakpoint = 600;
   // The minimum media height treated as a phone device in this demo.

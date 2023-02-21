@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// A class to hold the data we need to display on our page panel headers and
-/// buttons.
+// ignore_for_file: comment_references
+
+/// A class to hold the heading data we need to display in our [ThemePanel]
+/// topic panels headers and selection buttons.
 @immutable
 class ThemeTopic {
   const ThemeTopic({
@@ -16,7 +18,7 @@ class ThemeTopic {
   String get buttonLabel => _buttonLabel ?? heading;
 }
 
-const List<ThemeTopic> panelItems = <ThemeTopic>[
+const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ThemeTopic(
     heading: 'Introduction',
     icon: Icons.info_outlined,

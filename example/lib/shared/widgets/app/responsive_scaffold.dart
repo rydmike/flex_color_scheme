@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/app_data.dart';
+import '../../utils/colors_are_close.dart';
 import '../universal/maybe_tooltip.dart';
 import 'about.dart';
 
@@ -700,28 +701,6 @@ class _AppMenu extends StatefulWidget {
 class _AppMenuState extends State<_AppMenu> {
   int selectedItem = 0;
 
-  static bool _colorsAreClose(Color a, Color b, bool isLight) {
-    final int dR = a.red - b.red;
-    final int dG = a.green - b.green;
-    final int dB = a.blue - b.blue;
-    final int distance = dR * dR + dG * dG + dB * dB;
-    // Calculating orthogonal distance between colors should take the the
-    // square root as well, but we don't need that extra compute step.
-    // We just need a number to represents some relative closeness of the
-    // colors. We use this to determine a level when we should draw a border
-    // around our panel.
-    // These values were just determined by visually testing what was a good
-    // trigger for when the border appeared and disappeared during testing.
-    // We get better results if we use a different trigger value for light
-    // and dark mode.
-    final int closeTrigger = isLight ? 14 : 29;
-    if (distance < closeTrigger) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -729,7 +708,7 @@ class _AppMenuState extends State<_AppMenu> {
     final Color menuBackground = theme.canvasColor;
     final Color scaffoldBackground = theme.scaffoldBackgroundColor;
     final bool closeColors =
-        _colorsAreClose(menuBackground, scaffoldBackground, isLight);
+        colorsAreClose(menuBackground, scaffoldBackground, isLight);
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {
@@ -775,6 +754,7 @@ class _AppMenuState extends State<_AppMenu> {
                       minWidth: 0,
                       maxWidth: widget.maxWidth,
                       child: ListView(
+                        physics: const ClampingScrollPhysics(),
                         padding: EdgeInsets.zero, //  Removes all edge insets
                         children: <Widget>[
                           // A leading item the menu/rail.

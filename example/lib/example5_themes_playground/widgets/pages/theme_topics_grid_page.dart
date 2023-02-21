@@ -5,9 +5,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/panel_content.dart';
-import '../panels/theme_color_selector.dart';
-import '../panels/theme_topic.dart';
+import 'theme_color_selector.dart';
+import 'theme_panel.dart';
+import 'theme_topic.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -20,17 +20,17 @@ const bool _debug = !kReleaseMode && false;
 //  Now that PageView can be set to view any two panels side-by-side, this
 //  grid view is not so useful anymore. Maybe we remove it totally?
 
-/// This is the super large masonry grid view layout of the Themes Playground.
+/// This is the super large masonry grid layout of the Themes Playground.
 ///
-/// It is somewhat useful on a 4k screen where you can see a lot of settings
-/// in one glance.
+/// It is somewhat useful on a 4k screen, since  you can see and use a lot
+/// of settings in one view.
 ///
 /// It works thanks to collapsible panels and responsive layout down to
 /// phone size too, but a page view may be more convenient on eg tablet size.
 ///
 /// Considering removing this view from the Themes Playground.
-class LargeGridView extends StatefulWidget {
-  const LargeGridView({
+class ThemeTopicsGridPage extends StatefulWidget {
+  const ThemeTopicsGridPage({
     super.key,
     required this.controller,
     required this.isCardOpen,
@@ -41,10 +41,10 @@ class LargeGridView extends StatefulWidget {
   final ValueChanged<int> toggleCard;
 
   @override
-  State<LargeGridView> createState() => _LargeGridViewState();
+  State<ThemeTopicsGridPage> createState() => _ThemeTopicsGridPageState();
 }
 
-class _LargeGridViewState extends State<LargeGridView>
+class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
     with TickerProviderStateMixin {
   late final ScrollController scrollController;
   late int previousSchemeIndex;
@@ -170,13 +170,13 @@ class _LargeGridViewState extends State<LargeGridView>
               crossAxisSpacing: margins,
               childCount: widget.isCardOpen.length,
               itemBuilder: (BuildContext context, int index) => HeaderCard(
-                title: Text(panelItems[index].heading),
-                leading: Icon(panelItems[index].icon, color: iconColor),
+                title: Text(themeTopics[index].heading),
+                leading: Icon(themeTopics[index].icon, color: iconColor),
                 isOpen: widget.isCardOpen[index],
                 onTap: () {
                   widget.toggleCard(index);
                 },
-                child: PanelContent(index, controller),
+                child: ThemePanel(index, controller),
               ),
             ),
           ),

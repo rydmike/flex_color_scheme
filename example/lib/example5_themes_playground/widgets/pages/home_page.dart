@@ -11,9 +11,10 @@ import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
-import '../panels/theme_topic.dart';
-import 'large_grid_view.dart';
-import 'panel_view.dart';
+import 'theme_topic.dart';
+import 'theme_topic_page.dart';
+import 'theme_topics_grid_page.dart';
+import 'theme_two_topics_page.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 5 - Themes Playground
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     // Since by default users will start with the page view, they will have
     // New in V7, keeping grid view panels all closed at start. Might
     // phase out the grid view and remove it totally.
-    isPanelOpen = List<bool>.generate(panelItems.length, (int i) => false);
+    isPanelOpen = List<bool>.generate(themeTopics.length, (int i) => false);
   }
 
   @override
@@ -108,11 +109,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
-    final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isBigDesktop =
+        media.size.width > AppData.mediumDesktopWidthBreakpoint;
     final String materialType = theme.useMaterial3 ? 'M3 - ' : 'M2 - ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -239,12 +241,14 @@ class _HomePageState extends State<HomePage> {
           }
         },
         body: widget.controller.isLargeGridView
-            ? LargeGridView(
+            ? ThemeTopicsGridPage(
                 controller: widget.controller,
                 isCardOpen: isPanelOpen,
                 toggleCard: togglePanelOpenClose,
               )
-            : PanelView(themeController: widget.controller),
+            : isBigDesktop
+                ? ThemeTwoTopicsPage(controller: widget.controller)
+                : ThemeTopicPage(controller: widget.controller),
       ),
     );
   }
