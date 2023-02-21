@@ -16,12 +16,6 @@ import 'theme_topic_selector.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-// TODO(rydmike): Consider a new responsive large layout where both panels
-// have on left and right side their own panel selector and scroll
-// independently. This would be simpler on wide screen and more efficient
-// and provide even more usable vertical space than compact mode.
-// Compact toggle could still be kept.
-
 /// This is the two theme topics view of the Playground.
 ///
 /// Used only on big desktops.
