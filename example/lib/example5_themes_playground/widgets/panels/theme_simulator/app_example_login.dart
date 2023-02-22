@@ -84,94 +84,100 @@ class _LoginColumnState extends State<LoginColumn> {
     if (_debug) debugPrint('Media size ${media.size}');
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(48.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Sign In',
-              style: textTheme.headlineLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints.tightFor(width: 600),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                const Spacer(flex: 2),
                 Text(
-                  'No account?',
-                  style: textTheme.bodyLarge,
+                  'Sign In',
+                  style: textTheme.headlineLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'No account?',
+                      style: textTheme.bodyLarge,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Make account'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                const TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.mail),
+                    labelText: 'Email',
+                    hintText: 'Enter your email address',
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.key),
+                    labelText: 'Password',
+                    hintText: 'Minimum 8 chars',
+                  ),
+                ),
+                const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('Make account'),
+                  child: const Text('Forgot Password?'),
                 ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            const TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.mail),
-                labelText: 'Email',
-                hintText: 'Enter your email address',
-              ),
-            ),
-            const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.key),
-                labelText: 'Password',
-                hintText: 'Minimum 8 chars',
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Forgot Password?'),
-            ),
-            const SizedBox(height: 16),
-            Center(
-              child: SizedBox(
-                width: 200,
-                child: FilledButton(
-                  onPressed: () {
-                    _confettiController.play();
-                  },
-                  child: ConfettiWidget(
-                    confettiController: _confettiController,
-                    numberOfParticles: 20,
-                    blastDirectionality: BlastDirectionality.explosive,
-                    shouldLoop: false,
-                    colors: const <Color>[
-                      Colors.green,
-                      Colors.blue,
-                      Colors.pink,
-                      Colors.red,
-                      Colors.indigo,
-                      Colors.orange,
-                      Colors.purple
-                    ],
-                    createParticlePath: drawStar,
-                    canvas: Size.infinite,
-                    child: Text(
-                      'Sign In',
-                      style: textTheme.titleMedium!
-                          .copyWith(color: theme.colorScheme.onPrimary),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: 200,
+                    child: FilledButton(
+                      onPressed: () {
+                        _confettiController.play();
+                      },
+                      child: ConfettiWidget(
+                        confettiController: _confettiController,
+                        numberOfParticles: 20,
+                        blastDirectionality: BlastDirectionality.explosive,
+                        shouldLoop: false,
+                        colors: const <Color>[
+                          Colors.green,
+                          Colors.blue,
+                          Colors.pink,
+                          Colors.red,
+                          Colors.indigo,
+                          Colors.orange,
+                          Colors.purple
+                        ],
+                        createParticlePath: drawStar,
+                        canvas: Size.infinite,
+                        child: Text(
+                          'Sign In',
+                          style: textTheme.titleMedium!
+                              .copyWith(color: theme.colorScheme.onPrimary),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                const Spacer(flex: 1),
+                Expanded(
+                  flex: 10,
+                  child: SvgAssetImage(
+                    assetName: AppImages.verified,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                const Spacer(flex: 1),
+              ],
             ),
-            const Spacer(flex: 1),
-            Expanded(
-              flex: 5,
-              child: SvgAssetImage(
-                assetName: AppImages.verified,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-            const Spacer(flex: 1),
-          ],
+          ),
         ),
       ),
     );
