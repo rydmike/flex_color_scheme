@@ -137,35 +137,39 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter, new TODO, report the issue.
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
-- Added a new theme topic view that comes into use on large desktops. It offers separate vertical theme topic selectors for the two side-by-side views. This results in even more height being available on e.g. a 1080p monitor, since the large horizontal theme topic selector, for the right panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for left and right side. The new compact mode is also available in this view mode, further enlarging avilable space to view more theme topic panel content on mid sized desktop monitors (1080p).
+- Added a new theme topic view is used when desktop width is larger than 1779 dp. It offers separate vertical theme topic selectors for the two side-by-side them topic panel views. This results in even more usable height available on e.g. a 1080p monitor, since the large horizontal theme topic selector for the main left panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for the left and right side. The new compact mode is also available in this view mode. Using the compact view mode further enlarges available vertical space to see more theme topic panel content on mid-sized desktop monitors (1080p). The breakpoint 1779dp was chosen to get this view on 1780 dp, being a bit less than 1800dp, the device pixels available on a MacBook Pro 14" screen when using the "More space" option in Display settings, it of course also gets used on common full HD 1080p monitors that are 1920 dp wide. 
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- TODO: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release at least.
-
+- TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
+- TabBar props, muted, unselected color, indicator thickness.
+- Playground: Device order, iPhone, iPad, Android, Tablets
+- Playground: Material 3 demo, hookup ctrl for theme mode and M3.
+- Playground: Persist rail/drawer setting.
+- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.3
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- TODO: Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.3
-- TODO: Investigate the Playground random panel change, cause is still elusive.
+- Report all new found Flutter SDK theming bugs. Insert info in Playground where relevant.
+- Investigate the Playground random panel change, cause is still elusive.
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
-- MUST DO: Review and do actionable TODOs in the code.
-- MUST DO: Fix test coverage:
+- Review and do actionable TODOs in the code.
+- TESTS: Fix test coverage
   - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 81% tested now.
   - All new sub-themes and new states.  
   - Tests for usedColors 7.
-- MUST DO: Add important changes to docs.flexcolorscheme.com:
+- DOCS: Add important changes to docs.flexcolorscheme.com:
   - Change summary update.
   - Update known Flutter M3 and theming impacting issues. 
 
 **TODO AFTER FCS STABLE 7.0 RELEASE**
 
-- After release, more updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
+- More updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
   - Tweet series about what is new.
   - New color scheme images.
   - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
   - Review and update older screenshots and GIFs.
-  - Use image zoom feature in docs.page more on current images.
+  - Use image zoom feature in docs.page on new and old images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
 

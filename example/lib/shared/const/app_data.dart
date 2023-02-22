@@ -83,7 +83,7 @@ class AppData {
   static const double bigDesktopWidthBreakpoint = 2800;
   // A medium sized sized desktop, in panel view we switch to vertical
   // topic selectors, left and right side, one for each panel.
-  static const double mediumDesktopWidthBreakpoint = 1780;
+  static const double mediumDesktopWidthBreakpoint = 1779;
 
   // The minimum media width treated as a phone device in this demo.
   static const double phoneWidthBreakpoint = 600;
