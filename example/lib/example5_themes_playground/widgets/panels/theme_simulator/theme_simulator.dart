@@ -214,6 +214,8 @@ class Simulator extends StatelessWidget {
   final ValueChanged<int>? onChanged;
 
   static List<SimDevice> devs = <SimDevice>[
+    //
+    // iPhones here
     SimDevice(
       info: Devices.ios.iPhone13ProMax,
       size: 30,
@@ -239,54 +241,7 @@ class Simulator extends StatelessWidget {
       size: 20,
     ),
     //
-    SimDevice(
-      info: Devices.android.samsungGalaxyNote20Ultra,
-      icon: Icons.smartphone_outlined,
-      size: 30,
-    ),
-    SimDevice(
-      info: Devices.android.samsungGalaxyNote20,
-      icon: Icons.smartphone_outlined,
-      size: 28,
-    ),
-    SimDevice(
-      info: Devices.android.samsungGalaxyS20,
-      icon: Icons.smartphone_outlined,
-      size: 26,
-    ),
-    SimDevice(
-      info: Devices.android.samsungGalaxyA50,
-      icon: Icons.smartphone_outlined,
-    ),
-    SimDevice(
-      info: Devices.android.onePlus8Pro,
-      icon: Icons.smartphone_outlined,
-      size: 28,
-    ),
-    SimDevice(
-      info: Devices.android.sonyXperia1II,
-      icon: Icons.smartphone_outlined,
-      size: 30,
-    ),
-    SimDevice(
-      info: Devices.android.bigPhone,
-      icon: Icons.phone_android_outlined,
-      name: 'Big Android phone',
-      size: 30,
-    ),
-    SimDevice(
-      info: Devices.android.mediumPhone,
-      icon: Icons.phone_android_outlined,
-      name: 'Medium Android phone',
-      size: 26,
-    ),
-    SimDevice(
-      info: Devices.android.smallPhone,
-      icon: Icons.phone_android_outlined,
-      name: 'Small Android phone',
-      size: 22,
-    ),
-    //
+    // iPads here
     SimDevice(
       info: Devices.ios.iPad,
       icon: Icons.tablet_mac_outlined,
@@ -308,6 +263,59 @@ class Simulator extends StatelessWidget {
       size: 36,
     ),
     //
+    // Android brands here
+    SimDevice(
+      info: Devices.android.samsungGalaxyNote20Ultra,
+      icon: Icons.smartphone_outlined,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyNote20,
+      icon: Icons.smartphone_outlined,
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyS20,
+      icon: Icons.smartphone_outlined,
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.android.samsungGalaxyA50,
+      icon: Icons.smartphone_outlined,
+      size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.onePlus8Pro,
+      icon: Icons.smartphone_outlined,
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.android.sonyXperia1II,
+      icon: Icons.smartphone_outlined,
+      size: 30,
+    ),
+    //
+    // Android generic phones.
+    SimDevice(
+      info: Devices.android.bigPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Big Android phone',
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.mediumPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Medium Android phone',
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.android.smallPhone,
+      icon: Icons.phone_android_outlined,
+      name: 'Small Android phone',
+      size: 22,
+    ),
+    //
+    // Android generic tablets
     SimDevice(
       info: Devices.android.smallTablet,
       icon: Icons.tablet_android_outlined,
