@@ -144,10 +144,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
 - TabBar props, muted, unselected color, indicator thickness.
 - Playground: Material 3 demo, hookup ctrl for theme mode and M3.
-- Playground: Persist rail/drawer setting.
-- Playground: Make its in-app SnackBar use M3 style floating.
 - SnackBar border radius property. With warning.  
-- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.3
+- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.4
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 

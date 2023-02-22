@@ -168,26 +168,28 @@ class HeaderCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           if (useHeading)
-            Material(
-              type: MaterialType.card,
-              color: headerColor,
-              child: ListTile(
-                contentPadding: headerPadding,
-                leading: leading,
-                title: title,
-                subtitle: subtitle,
-                trailing: trailing ??
-                    ((enabled && onTap != null)
-                        ? ExpandIcon(
-                            size: 32,
-                            isExpanded: isOpen,
-                            padding: EdgeInsets.zero,
-                            onPressed: (_) {
-                              onTap?.call();
-                            },
-                          )
-                        : null),
-                onTap: onTap?.call,
+            RepaintBoundary(
+              child: Material(
+                type: MaterialType.card,
+                color: headerColor,
+                child: ListTile(
+                  contentPadding: headerPadding,
+                  leading: leading,
+                  title: title,
+                  subtitle: subtitle,
+                  trailing: trailing ??
+                      ((enabled && onTap != null)
+                          ? ExpandIcon(
+                              size: 32,
+                              isExpanded: isOpen,
+                              padding: EdgeInsets.zero,
+                              onPressed: (_) {
+                                onTap?.call();
+                              },
+                            )
+                          : null),
+                  onTap: onTap?.call,
+                ),
               ),
             ),
           AnimatedSwitcher(
@@ -198,7 +200,9 @@ class HeaderCard extends StatelessWidget {
                 child: child,
               );
             },
-            child: (isOpen && child != null) ? child : const SizedBox.shrink(),
+            child: (isOpen && child != null)
+                ? RepaintBoundary(child: child)
+                : const SizedBox.shrink(),
           ),
         ],
       ),

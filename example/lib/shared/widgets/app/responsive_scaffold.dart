@@ -739,15 +739,15 @@ class _AppMenuState extends State<_AppMenu> {
               Expanded(
                 child: Container(
                   width: size.maxWidth,
-                  decoration: closeColors
-                      ? BoxDecoration(
-                          border: BorderDirectional(
-                            end: BorderSide(
-                              color: theme.dividerColor,
-                            ),
-                          ),
-                        )
-                      : null,
+                  decoration: BoxDecoration(
+                    border: BorderDirectional(
+                      end: BorderSide(
+                        color: closeColors
+                            ? theme.dividerColor
+                            : Colors.transparent,
+                      ),
+                    ),
+                  ),
                   child: ClipRect(
                     child: OverflowBox(
                       alignment: AlignmentDirectional.topStart,

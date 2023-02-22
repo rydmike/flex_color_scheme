@@ -19,11 +19,15 @@ class ThemeCode extends StatelessWidget {
   final ThemeController controller;
 
   Future<void> _handleCopyCode(BuildContext context, String text) async {
+    final double? width = MediaQuery.of(context).size.width > 800 ? 700 : null;
     final ClipboardData data = ClipboardData(text: text);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('FlexColorScheme setup code copied to the clipboard!'),
-        duration: Duration(milliseconds: 2000),
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        width: width,
+        content:
+            const Text('FlexColorScheme setup code copied to the clipboard!'),
+        duration: const Duration(milliseconds: 2000),
       ),
     );
     await Clipboard.setData(data);

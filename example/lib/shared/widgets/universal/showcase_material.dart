@@ -696,60 +696,63 @@ class _SliderShowcaseState extends State<SliderShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          dense: true,
-          title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
-          subtitle: Slider(
-            max: 30,
-            divisions: 31,
-            label: value.toStringAsFixed(0),
-            value: value,
-            onChanged: (double newValue) {
-              setState(() {
-                value = newValue.roundToDouble();
-              });
-            },
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            title: Text('Slider stepped (${value.toStringAsFixed(0)})'),
+            subtitle: Slider(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue.roundToDouble();
+                });
+              },
+            ),
           ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
-          subtitle: Slider(
-            max: 30,
-            label: value.toStringAsFixed(0),
-            value: value,
-            onChanged: (double newValue) {
-              setState(() {
-                value = newValue;
-              });
-            },
+          ListTile(
+            dense: true,
+            title: Text('Slider continuous (${value.toStringAsFixed(2)})'),
+            subtitle: Slider(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue;
+                });
+              },
+            ),
           ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('Slider stepped disabled (${value.toStringAsFixed(0)})'),
-          subtitle: Slider(
-            max: 30,
-            divisions: 31,
-            label: value.toStringAsFixed(0),
-            value: value,
-            onChanged: null,
+          ListTile(
+            dense: true,
+            title:
+                Text('Slider stepped disabled (${value.toStringAsFixed(0)})'),
+            subtitle: Slider(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
           ),
-        ),
-        ListTile(
-          dense: true,
-          title:
-              Text('Slider continuous disabled (${value.toStringAsFixed(2)})'),
-          subtitle: Slider(
-            max: 30,
-            label: value.toStringAsFixed(0),
-            value: value,
-            onChanged: null,
+          ListTile(
+            dense: true,
+            title: Text(
+                'Slider continuous disabled (${value.toStringAsFixed(2)})'),
+            subtitle: Slider(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -766,87 +769,89 @@ class _RangeSliderShowcaseState extends State<RangeSliderShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          dense: true,
-          title: Text('RangeSlider stepped (${RangeLabels(
-            values.start.toStringAsFixed(0),
-            values.end.toStringAsFixed(0),
-          )})'),
-          subtitle: RangeSlider(
-            max: 30,
-            divisions: 31,
-            labels: RangeLabels(
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            title: Text('RangeSlider stepped (${RangeLabels(
               values.start.toStringAsFixed(0),
               values.end.toStringAsFixed(0),
+            )})'),
+            subtitle: RangeSlider(
+              max: 30,
+              divisions: 31,
+              labels: RangeLabels(
+                values.start.toStringAsFixed(0),
+                values.end.toStringAsFixed(0),
+              ),
+              values: values,
+              onChanged: (RangeValues newValues) {
+                setState(() {
+                  values = RangeValues(
+                    newValues.start.roundToDouble(),
+                    newValues.end.roundToDouble(),
+                  );
+                });
+              },
             ),
-            values: values,
-            onChanged: (RangeValues newValues) {
-              setState(() {
-                values = RangeValues(
-                  newValues.start.roundToDouble(),
-                  newValues.end.roundToDouble(),
-                );
-              });
-            },
           ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('RangeSlider continuous (${RangeLabels(
-            values.start.toStringAsFixed(2),
-            values.end.toStringAsFixed(2),
-          )})'),
-          subtitle: RangeSlider(
-            max: 30,
-            labels: RangeLabels(
+          ListTile(
+            dense: true,
+            title: Text('RangeSlider continuous (${RangeLabels(
               values.start.toStringAsFixed(2),
               values.end.toStringAsFixed(2),
+            )})'),
+            subtitle: RangeSlider(
+              max: 30,
+              labels: RangeLabels(
+                values.start.toStringAsFixed(2),
+                values.end.toStringAsFixed(2),
+              ),
+              values: values,
+              onChanged: (RangeValues newValues) {
+                setState(() {
+                  values = newValues;
+                });
+              },
             ),
-            values: values,
-            onChanged: (RangeValues newValues) {
-              setState(() {
-                values = newValues;
-              });
-            },
           ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('RangeSlider stepped disabled (${RangeLabels(
-            values.start.toStringAsFixed(0),
-            values.end.toStringAsFixed(0),
-          )})'),
-          subtitle: RangeSlider(
-            max: 30,
-            divisions: 31,
-            labels: RangeLabels(
+          ListTile(
+            dense: true,
+            title: Text('RangeSlider stepped disabled (${RangeLabels(
               values.start.toStringAsFixed(0),
               values.end.toStringAsFixed(0),
+            )})'),
+            subtitle: RangeSlider(
+              max: 30,
+              divisions: 31,
+              labels: RangeLabels(
+                values.start.toStringAsFixed(0),
+                values.end.toStringAsFixed(0),
+              ),
+              values: values,
+              onChanged: null,
             ),
-            values: values,
-            onChanged: null,
           ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('RangeSlider continuous disabled (${RangeLabels(
-            values.start.toStringAsFixed(2),
-            values.end.toStringAsFixed(2),
-          )})'),
-          subtitle: RangeSlider(
-            max: 30,
-            divisions: 31,
-            labels: RangeLabels(
+          ListTile(
+            dense: true,
+            title: Text('RangeSlider continuous disabled (${RangeLabels(
               values.start.toStringAsFixed(2),
               values.end.toStringAsFixed(2),
+            )})'),
+            subtitle: RangeSlider(
+              max: 30,
+              divisions: 31,
+              labels: RangeLabels(
+                values.start.toStringAsFixed(2),
+                values.end.toStringAsFixed(2),
+              ),
+              values: values,
+              onChanged: null,
             ),
-            values: values,
-            onChanged: null,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
