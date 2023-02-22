@@ -146,11 +146,13 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Playground: Device order, iPhone, iPad, Android, Tablets
 - Playground: Material 3 demo, hookup ctrl for theme mode and M3.
 - Playground: Persist rail/drawer setting.
+- Playground: Make its in-app SnackBar use M3 style floating.
+- SnackBar border radius property. With warning.  
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.3
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
-- Report all new found Flutter SDK theming bugs. Insert info in Playground where relevant.
+- Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
 - Investigate the Playground random panel change, cause is still elusive.
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - Review and do actionable TODOs in the code.
