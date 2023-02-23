@@ -1171,6 +1171,8 @@ class ThemeController with ChangeNotifier {
       setTintedDisabledControls(false, false);
       // Set SnackBar to M3.
       setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
+      // TODO(rydmike): Add elevation set to 6.
+
       // Set TextField to M3
       await setTextFieldToM3(false);
       // Set Navigators to M3

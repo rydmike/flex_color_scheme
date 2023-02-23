@@ -4531,6 +4531,18 @@ class FlexSubThemes {
     /// If undefined defaults to [kSnackBarElevation] = 4.
     final double? elevation,
 
+    /// Corner radius of the [SnackBar].
+    ///
+    /// If not defined, defaults to 4 dp, but only when
+    /// [SnackBar.behavior] style [SnackBarBehavior.floating] is used. This
+    /// default is based on SDK widget default behavior and is  based on
+    /// M3 Specification https://m3.material.io/components/snackbar/specs.
+    ///
+    /// NOTE: If this theme property is set, both SnackBars with behavior
+    /// fixed and floating will get the assigned radius. See issue:
+    /// https://github.com/flutter/flutter/issues/108539
+    final double? radius,
+
     /// The background color of the themed SnackBar. Typically one of inverse
     /// brightness compared to theme's surface color brightness.
     ///
@@ -4603,6 +4615,13 @@ class FlexSubThemes {
 
     return SnackBarThemeData(
       elevation: elevation ?? kSnackBarElevation,
+      shape: radius != null
+          ? RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius),
+              ),
+            )
+          : null,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
       actionTextColor:

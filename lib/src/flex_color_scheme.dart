@@ -6886,6 +6886,7 @@ class FlexColorScheme with Diagnosticable {
       // SnackBar Theme.
       snackBarTheme: useSubThemes
           ? FlexSubThemes.snackBarTheme(
+              radius: subTheme.snackBarRadius,
               elevation: subTheme.snackBarElevation,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.snackBarBackgroundSchemeColor,

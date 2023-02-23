@@ -249,6 +249,7 @@ class FlexSubThemesData with Diagnosticable {
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
     //
+    this.snackBarRadius,
     this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
     this.snackBarActionSchemeColor,
@@ -1706,6 +1707,28 @@ class FlexSubThemesData with Diagnosticable {
   /// [kTimeElementRadius] if not defined.
   final double? timePickerElementRadius;
 
+  /// Corner radius of the [SnackBar].
+  ///
+  /// If not defined, defaults to 4 dp, but only when
+  /// [SnackBar.behavior] style [SnackBarBehavior.floating] is used. This
+  /// default is based on SDK widget default behavior and is  based on
+  /// M3 Specification https://m3.material.io/components/snackbar/specs.
+  ///
+  /// NOTE: If this theme property is set both SnackBars with behavior
+  /// fixed and floating will get the assigned radius. See issue:
+  /// https://github.com/flutter/flutter/issues/108539.
+  ///
+  /// Due to this issue [snackBarRadius] does currently not follow the
+  /// [defaultRadius], additionally [SnackBar] is an element that based
+  /// on Material 2 and 3 design guide should avoid very rounded corners, in
+  /// particular fully stadium rounded corners. Set rounding with modesty and
+  /// be aware that it also affects the fixed style. If you use M3 mode, you
+  /// should prefer to use the floating style as depicted in the M3 guide, so
+  /// that the fixed style gets rounded is less critical then.
+  /// The simplest solution is to just keep [snackBarRadius] at its default and
+  /// get default behavior on it.
+  final double? snackBarRadius;
+
   /// Elevation of [SnackBar].
   ///
   /// If undefined, defaults to [kSnackBarElevation] = 4.
@@ -2715,6 +2738,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
     //
+    final double? snackBarRadius,
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
     final SchemeColor? snackBarActionSchemeColor,
@@ -2993,6 +3017,7 @@ class FlexSubThemesData with Diagnosticable {
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
       //
+      snackBarRadius: snackBarRadius ?? this.snackBarRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       snackBarBackgroundSchemeColor:
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
@@ -3329,6 +3354,7 @@ class FlexSubThemesData with Diagnosticable {
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
         //
+        other.snackBarRadius == snackBarRadius &&
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
         other.snackBarActionSchemeColor == snackBarActionSchemeColor &&
@@ -3595,6 +3621,7 @@ class FlexSubThemesData with Diagnosticable {
         timePickerDialogRadius,
         timePickerElementRadius,
         //
+        snackBarRadius,
         snackBarElevation,
         snackBarBackgroundSchemeColor,
         snackBarActionSchemeColor,
@@ -3909,6 +3936,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>(
         'timePickerElementRadius', timePickerElementRadius));
     //
+    properties
+        .add(DiagnosticsProperty<double>('snackBarRadius', snackBarRadius));
     properties.add(
         DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
     properties.add(EnumProperty<SchemeColor>(
