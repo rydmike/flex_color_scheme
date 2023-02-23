@@ -338,13 +338,14 @@ class FlexThemeModeSwitch extends StatelessWidget {
 /// The [FlexThemeModeOptionButton] offers a large number of customization
 /// options, see API reference for more info. This widget is typically used
 /// via the [FlexThemeModeSwitch] widget.
-class FlexThemeModeOptionButton extends StatelessWidget {
+class FlexThemeModeOptionButton extends StatefulWidget {
   /// Default constructor.
   const FlexThemeModeOptionButton({
     super.key,
     required this.flexSchemeColor,
     this.backgroundColor,
     this.label,
+    this.semanticLabel,
     this.labelStyle,
     this.labelAbove = true,
     required this.selected,
@@ -360,6 +361,8 @@ class FlexThemeModeOptionButton extends StatelessWidget {
     this.borderRadius = 4,
     this.padding,
     this.hoverColor,
+    this.focusColor,
+    this.setFocusOnTap,
   }) : assert(elevation >= 0.0, 'Elevation must be >= 0.0');
 
   /// The scheme colors used to colorize the option button's four colors.
@@ -372,6 +375,12 @@ class FlexThemeModeOptionButton extends StatelessWidget {
 
   /// Optional text label for the button, if null, the label is omitted.
   final String? label;
+
+  /// Optional semantic label for the button.
+  ///
+  /// If null, then defaults to [label], if it is also null, it defaults
+  /// to "Theme mode option button".
+  final String? semanticLabel;
 
   /// Optional text style for the [label].
   /// If null, default to Theme.of(context).textTheme.caption).
@@ -439,108 +448,187 @@ class FlexThemeModeOptionButton extends StatelessWidget {
   /// Theme.of(context).hoverColor.
   final Color? hoverColor;
 
+  /// The InkWell focus color for the option button.
+  ///
+  /// If not defined, default to Theme.of(context).focusColor.
+  final Color? focusColor;
+
+  /// If true, sets focus to the button when it is tapped.
+  ///
+  /// If not defined, default to false.
+  final bool? setFocusOnTap;
+
+  @override
+  State<FlexThemeModeOptionButton> createState() =>
+      _FlexThemeModeOptionButtonState();
+}
+
+class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Color effectiveHoverColor = hoverColor ??
+    final Color effectiveHoverColor = widget.hoverColor ??
         (theme.brightness == Brightness.light
             ? const Color(0x50BCBCBC)
             : const Color(0x99555555));
-    return Padding(
-      padding:
-          optionButtonPadding ?? const EdgeInsetsDirectional.only(start: 6),
-      child: Row(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              if (label != null && labelAbove)
-                Text(
-                  label!,
-                  style: labelStyle ?? theme.textTheme.bodySmall,
-                  semanticsLabel: '', // Is set on button instead
-                ),
-              Material(
-                elevation: elevation,
-                color: backgroundColor,
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(optionButtonBorderRadius),
+
+    // Need the size of the buttons so we can make a SizedBox with the Ink
+    // in a Sized transparent Material on top of the buttons.
+    //
+    // Default padding: 2* 3dp on all sides and two buttons with the padding.
+    double padX = 2 * 3 * 2;
+    double padY = 2 * 3 * 2;
+    // Customized padding can be via EdgeInsets or EdgeInsetsDirectional.
+    if (widget.padding != null) {
+      if (widget.padding is EdgeInsets) {
+        padX = ((widget.padding! as EdgeInsets).left +
+                (widget.padding! as EdgeInsets).right) *
+            2;
+        padY = ((widget.padding! as EdgeInsets).top +
+                (widget.padding! as EdgeInsets).bottom) *
+            2;
+      }
+      if (widget.padding is EdgeInsetsDirectional) {
+        padX = ((widget.padding! as EdgeInsetsDirectional).start +
+                (widget.padding! as EdgeInsetsDirectional).end) *
+            2;
+        padY = ((widget.padding! as EdgeInsetsDirectional).top +
+                (widget.padding! as EdgeInsetsDirectional).bottom) *
+            2;
+      }
+    }
+
+    return Semantics(
+      label: widget.semanticLabel ?? widget.label ?? 'Theme mode option button',
+      selected: widget.selected,
+      button: true,
+      enabled: true,
+      child: Padding(
+        padding: widget.optionButtonPadding ??
+            const EdgeInsetsDirectional.only(start: 6),
+        child: Row(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                if (widget.label != null && widget.labelAbove)
+                  Text(
+                    widget.label!,
+                    style: widget.labelStyle ?? theme.textTheme.bodySmall,
+                    semanticsLabel: '', // Is set on button instead
                   ),
-                  side: selected
-                      ? selectedBorder ??
-                          BorderSide(
-                            color: theme.colorScheme.primary,
-                            width: 4,
-                          )
-                      : unselectedBorder ??
-                          BorderSide(
-                            color: theme.dividerColor,
-                          ),
-                ),
-                child: Semantics(
-                  label: label ?? 'Theme mode option button',
-                  selected: selected,
-                  button: true,
-                  enabled: true,
-                  child: InkWell(
-                    hoverColor: effectiveHoverColor,
-                    onTap: onSelect,
-                    child: Padding(
-                      padding: optionButtonMargin ?? const EdgeInsets.all(4),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              _SchemeColorBox(
-                                color: flexSchemeColor.primary,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
-                                padding: padding,
-                              ),
-                              _SchemeColorBox(
-                                color: flexSchemeColor.secondary,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
-                                padding: padding,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              _SchemeColorBox(
-                                color: flexSchemeColor.primaryContainer,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
-                                padding: padding,
-                              ),
-                              _SchemeColorBox(
-                                color: flexSchemeColor.tertiary,
-                                height: height,
-                                width: width,
-                                borderRadius: borderRadius,
-                                padding: padding,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                Material(
+                  type: MaterialType.transparency,
+                  elevation: widget.elevation,
+                  color: widget.backgroundColor,
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(widget.optionButtonBorderRadius),
                     ),
+                    side: widget.selected
+                        ? widget.selectedBorder ??
+                            BorderSide(
+                              color: theme.colorScheme.primary,
+                              width: 4,
+                            )
+                        : widget.unselectedBorder ??
+                            BorderSide(
+                              color: theme.dividerColor,
+                            ),
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Padding(
+                        padding: widget.optionButtonMargin ??
+                            const EdgeInsets.all(4),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                _SchemeColorBox(
+                                  color: widget.flexSchemeColor.primary,
+                                  height: widget.height,
+                                  width: widget.width,
+                                  borderRadius: widget.borderRadius,
+                                  padding: widget.padding,
+                                ),
+                                _SchemeColorBox(
+                                  color: widget.flexSchemeColor.secondary,
+                                  height: widget.height,
+                                  width: widget.width,
+                                  borderRadius: widget.borderRadius,
+                                  padding: widget.padding,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                _SchemeColorBox(
+                                  color:
+                                      widget.flexSchemeColor.primaryContainer,
+                                  height: widget.height,
+                                  width: widget.width,
+                                  borderRadius: widget.borderRadius,
+                                  padding: widget.padding,
+                                ),
+                                _SchemeColorBox(
+                                  color: widget.flexSchemeColor.tertiary,
+                                  height: widget.height,
+                                  width: widget.width,
+                                  borderRadius: widget.borderRadius,
+                                  padding: widget.padding,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Material(
+                        type: MaterialType.transparency,
+                        child: InkWell(
+                          focusNode: _focusNode,
+                          hoverColor: effectiveHoverColor,
+                          focusColor: widget.focusColor,
+                          onTap: () {
+                            if (widget.setFocusOnTap ?? false) {
+                              _focusNode.requestFocus();
+                            }
+                            widget.onSelect?.call();
+                          },
+                          child: SizedBox(
+                            width: widget.width * 2 + padX,
+                            height: widget.height * 2 + padY,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ),
-              if (label != null && !labelAbove)
-                Text(
-                  label!,
-                  style: labelStyle ?? theme.textTheme.bodySmall,
-                  semanticsLabel: '', // Is set on button instead
-                ),
-            ],
-          ),
-        ],
+                // ),
+                if (widget.label != null && !widget.labelAbove)
+                  Text(
+                    widget.label!,
+                    style: widget.labelStyle ?? theme.textTheme.bodySmall,
+                    semanticsLabel: '', // Is set on button instead
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -113,18 +113,24 @@ class PlaygroundApp extends StatelessWidget {
               : themeDataDark(controller),
           // Use the dark or light theme based on controller setting.
           themeMode: controller.themeMode,
-          // Using SelectionArea here makes text selectable and copy enabled
-          // in entire app. How it actually behaves, depends on current
-          // platform.
-          //
-          // Taking it away for now
-          // home: SelectionArea(
-          // Pass the controller to the HomePage where we use it to change
-          // the theme settings that will cause themes above to change and
-          // rebuild the entire look of the app based on modified theme.
-          // child: HomePage(controller: controller),
-          // ),
-          home: HomePage(controller: controller),
+          // If wrapping the entire app content in a SelectionArea, would
+          // makes text selectable and copy enabled in entire app.
+          // How it actually behaves, depends on current
+          // platform. Not using it for now, I was not happy with its behavior:
+          // SelectionArea(child: ... );
+          home: GestureDetector(
+            // This allows us to un-focus a widget, typically a TextField
+            // with focus by tapping somewhere outside it. It is no longer
+            // needed on desktop builds, it is done automatically there for
+            // TextField, but not on tablet and phone app. In this app we
+            // want it on them too and to unfocus other widgets with focus
+            // on desktop too.
+            onTap: () => FocusScope.of(context).unfocus(),
+            // Pass the controller to the HomePage where we use it to change
+            // the theme settings that will cause themes above to change and
+            // rebuild the entire look of the app based on modified theme.
+            child: HomePage(controller: controller),
+          ),
         );
       },
     );

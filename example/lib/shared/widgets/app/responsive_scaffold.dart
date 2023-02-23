@@ -575,84 +575,86 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         // The actual page content is a normal Scaffold, in an Expanded Widget
         // in the 2nd part of the Row.
         Expanded(
-          child: Scaffold(
-            appBar: AppBar(
-              title: widget.title,
-              // We are using dynamic title content, we want it start aligned.
-              centerTitle: false,
-              actions: const <Widget>[AboutIconButton()],
-              // Some logic to show the implicit menu button on AppBar when
-              // there is no rail or menu.
-              automaticallyImplyLeading:
-                  !isDesktop && isMenuClosed && menuDoneClosing,
-            ),
-            // The menu content when used in the Drawer.
-            drawer: ConstrainedBox(
-              // We use the same size on the drawer that we have on our menu.
-              // We can do that by constraining the drawer een if it does not
-              // have a width size property.
-              constraints: BoxConstraints.expand(width: widget.menuWidth),
-              child: Drawer(
-                child: _AppMenu(
-                  title: widget.menuTitle,
-                  menuLeadingTitle: widget.menuLeadingTitle,
-                  menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                  menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
-                  menuItems: widget.menuItems,
-                  menuItemsEnabled: menuItemsEnabled,
-                  menuItemsIconState: menuItemsIconState,
-                  maxWidth: widget.menuWidth,
-                  railWidth: widget.railWidth,
-                  onSelect: (int index) {
-                    Navigator.of(context).pop();
-                    widget.onSelect?.call(index);
-                  },
-                  // User pushed menu button in Drawer, we close the Drawer and
-                  // set menu state to not be closed, it will open as a rail.
-                  onOperate: () {
-                    Navigator.of(context).pop();
-                    // If we do this, we can wait to complete the closing
-                    // drawer animation, before we trigger animating the
-                    // rail visible:
-                    Future<void>.delayed(_kMenuAnimationDuration, () {
-                      setState(() {
-                        isMenuClosed = false;
+          child: FocusTraversalGroup(
+            child: Scaffold(
+              appBar: AppBar(
+                title: widget.title,
+                // We are using dynamic title content, we want it start aligned.
+                centerTitle: false,
+                actions: const <Widget>[AboutIconButton()],
+                // Some logic to show the implicit menu button on AppBar when
+                // there is no rail or menu.
+                automaticallyImplyLeading:
+                    !isDesktop && isMenuClosed && menuDoneClosing,
+              ),
+              // The menu content when used in the Drawer.
+              drawer: ConstrainedBox(
+                // We use the same size on the drawer that we have on our menu.
+                // We can do that by constraining the drawer een if it does not
+                // have a width size property.
+                constraints: BoxConstraints.expand(width: widget.menuWidth),
+                child: Drawer(
+                  child: _AppMenu(
+                    title: widget.menuTitle,
+                    menuLeadingTitle: widget.menuLeadingTitle,
+                    menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                    menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
+                    menuItems: widget.menuItems,
+                    menuItemsEnabled: menuItemsEnabled,
+                    menuItemsIconState: menuItemsIconState,
+                    maxWidth: widget.menuWidth,
+                    railWidth: widget.railWidth,
+                    onSelect: (int index) {
+                      Navigator.of(context).pop();
+                      widget.onSelect?.call(index);
+                    },
+                    // User pushed menu button in Drawer, we close the Drawer and
+                    // set menu state to not be closed, it will open as a rail.
+                    onOperate: () {
+                      Navigator.of(context).pop();
+                      // If we do this, we can wait to complete the closing
+                      // drawer animation, before we trigger animating the
+                      // rail visible:
+                      Future<void>.delayed(_kMenuAnimationDuration, () {
+                        setState(() {
+                          isMenuClosed = false;
+                        });
                       });
-                    });
-                    // If we do this instead they both animate at the same time:
-                    // setState(() {
-                    //   isMenuClosed = false;
-                    // });
-                  },
+                      // If we do this instead they both animate at the same time:
+                      // setState(() {
+                      //   isMenuClosed = false;
+                      // });
+                    },
+                  ),
                 ),
               ),
+              //
+              // All the rest of the standard Scaffold properties that we
+              // pass along to the actual Scaffold Widget.
+              //
+              body: widget.body,
+              floatingActionButton: widget.floatingActionButton,
+              floatingActionButtonLocation: widget.floatingActionButtonLocation,
+              floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+              persistentFooterButtons: widget.persistentFooterButtons,
+              onDrawerChanged: widget.onDrawerChanged,
+              endDrawer: widget.endDrawer,
+              onEndDrawerChanged: widget.onEndDrawerChanged,
+              bottomNavigationBar: widget.bottomNavigationBar,
+              bottomSheet: widget.bottomSheet,
+              backgroundColor: widget.backgroundColor,
+              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+              primary: widget.primary,
+              drawerDragStartBehavior: widget.drawerDragStartBehavior,
+              extendBody: widget.extendBody,
+              extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+              drawerScrimColor: widget.drawerScrimColor,
+              drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+              drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
+              endDrawerEnableOpenDragGesture:
+                  widget.endDrawerEnableOpenDragGesture,
+              restorationId: widget.restorationId,
             ),
-            //
-            // All the rest of the standard Scaffold properties that we
-            // pass along to the actual Scaffold Widget.
-            //
-            body: widget.body,
-            floatingActionButton: widget.floatingActionButton,
-            floatingActionButtonLocation: widget.floatingActionButtonLocation,
-            floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-            persistentFooterButtons: widget.persistentFooterButtons,
-            onDrawerChanged: widget.onDrawerChanged,
-            endDrawer: widget.endDrawer,
-            onEndDrawerChanged: widget.onEndDrawerChanged,
-            bottomNavigationBar: widget.bottomNavigationBar,
-            bottomSheet: widget.bottomSheet,
-            backgroundColor: widget.backgroundColor,
-            resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-            primary: widget.primary,
-            drawerDragStartBehavior: widget.drawerDragStartBehavior,
-            extendBody: widget.extendBody,
-            extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-            drawerScrimColor: widget.drawerScrimColor,
-            drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-            drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
-            endDrawerEnableOpenDragGesture:
-                widget.endDrawerEnableOpenDragGesture,
-            restorationId: widget.restorationId,
           ),
         ),
       ],
@@ -719,88 +721,90 @@ class _AppMenuState extends State<_AppMenu> {
           alignment: AlignmentDirectional.topStart,
           minWidth: 0,
           maxWidth: widget.maxWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // We use an AppBar element as header in the menu too, a custom
-              // Widget would be less restrictive, but for simplicity, the
-              // AppBar has so many nice things built in to handle text style,
-              // size and scaling for the title that are tedious to replicate
-              AppBar(
-                title: widget.title,
-                titleSpacing: 0,
-                leadingWidth: widget.railWidth,
-                leading: IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.menu),
-                  onPressed: widget.onOperate,
+          child: FocusTraversalGroup(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // We use an AppBar element as header in the menu too, a custom
+                // Widget would be less restrictive, but for simplicity, the
+                // AppBar has so many nice things built in to handle text style,
+                // size and scaling for the title that are tedious to replicate
+                AppBar(
+                  title: widget.title,
+                  titleSpacing: 0,
+                  leadingWidth: widget.railWidth,
+                  leading: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(Icons.menu),
+                    onPressed: widget.onOperate,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  width: size.maxWidth,
-                  decoration: BoxDecoration(
-                    border: BorderDirectional(
-                      end: BorderSide(
-                        color: closeColors
-                            ? theme.dividerColor
-                            : Colors.transparent,
+                Expanded(
+                  child: Container(
+                    width: size.maxWidth,
+                    decoration: BoxDecoration(
+                      border: BorderDirectional(
+                        end: BorderSide(
+                          color: closeColors
+                              ? theme.dividerColor
+                              : Colors.transparent,
+                        ),
                       ),
                     ),
-                  ),
-                  child: ClipRect(
-                    child: OverflowBox(
-                      alignment: AlignmentDirectional.topStart,
-                      minWidth: 0,
-                      maxWidth: widget.maxWidth,
-                      child: ListView(
-                        physics: const ClampingScrollPhysics(),
-                        padding: EdgeInsets.zero, //  Removes all edge insets
-                        children: <Widget>[
-                          // A leading item the menu/rail.
-                          _MenuLeadingItem(
-                            railWidth: widget.railWidth,
-                            menuLeadingTitle: widget.menuLeadingTitle,
-                            menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                            menuLeadingAvatarLabel:
-                                widget.menuLeadingAvatarLabel,
-                          ),
-                          // Add all the menu items.
-                          for (int i = 0; i < widget.menuItems.length; i++)
-                            _MenuItem(
-                              width: size.maxWidth,
-                              menuWidth: widget.maxWidth,
-                              onTap: () {
-                                setState(() {
-                                  selectedItem = i;
-                                });
-                                widget.onSelect?.call(i);
-                              },
-                              selected: selectedItem == i,
-                              icon: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
-                                  ? widget.menuItems[i].icon
-                                  : widget.menuItems[i].iconSecondary,
-                              label: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
-                                  ? widget.menuItems[i].label
-                                  : widget.menuItems[i].labelSecondary,
-                              tooltip: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
-                                  ? widget.menuItems[i].tooltip
-                                  : widget.menuItems[i].tooltipSecondary,
-                              enabled: widget.menuItemsEnabled[i],
-                              showDivider: i.isEven,
+                    child: ClipRect(
+                      child: OverflowBox(
+                        alignment: AlignmentDirectional.topStart,
+                        minWidth: 0,
+                        maxWidth: widget.maxWidth,
+                        child: ListView(
+                          physics: const ClampingScrollPhysics(),
+                          padding: EdgeInsets.zero, //  Removes all edge insets
+                          children: <Widget>[
+                            // A leading item the menu/rail.
+                            _MenuLeadingItem(
                               railWidth: widget.railWidth,
+                              menuLeadingTitle: widget.menuLeadingTitle,
+                              menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                              menuLeadingAvatarLabel:
+                                  widget.menuLeadingAvatarLabel,
                             ),
-                          const Divider(thickness: 1, height: 1),
-                        ],
+                            // Add all the menu items.
+                            for (int i = 0; i < widget.menuItems.length; i++)
+                              _MenuItem(
+                                width: size.maxWidth,
+                                menuWidth: widget.maxWidth,
+                                onTap: () {
+                                  setState(() {
+                                    selectedItem = i;
+                                  });
+                                  widget.onSelect?.call(i);
+                                },
+                                selected: selectedItem == i,
+                                icon: widget.menuItemsIconState[i] ==
+                                        ResponsiveMenuItemIconState.primary
+                                    ? widget.menuItems[i].icon
+                                    : widget.menuItems[i].iconSecondary,
+                                label: widget.menuItemsIconState[i] ==
+                                        ResponsiveMenuItemIconState.primary
+                                    ? widget.menuItems[i].label
+                                    : widget.menuItems[i].labelSecondary,
+                                tooltip: widget.menuItemsIconState[i] ==
+                                        ResponsiveMenuItemIconState.primary
+                                    ? widget.menuItems[i].tooltip
+                                    : widget.menuItems[i].tooltipSecondary,
+                                enabled: widget.menuItemsEnabled[i],
+                                showDivider: i.isEven,
+                                railWidth: widget.railWidth,
+                              ),
+                            const Divider(thickness: 1, height: 1),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -809,7 +813,7 @@ class _AppMenuState extends State<_AppMenu> {
 }
 
 /// The items for the menu.
-class _MenuItem extends StatelessWidget {
+class _MenuItem extends StatefulWidget {
   const _MenuItem({
     required this.width,
     required this.menuWidth,
@@ -838,6 +842,25 @@ class _MenuItem extends StatelessWidget {
   static const double _itemHeight = 50;
 
   @override
+  State<_MenuItem> createState() => _MenuItemState();
+}
+
+class _MenuItemState extends State<_MenuItem> {
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
@@ -846,41 +869,41 @@ class _MenuItem extends StatelessWidget {
     // custom elements in your app they react to theme changes and use the theme
     // colors. You can make elaborate hues and opacities of the colors in the
     // theme's color schemes, like here:
-    final Color iconColor = enabled
+    final Color iconColor = widget.enabled
         ? isLight
             ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
                 theme.colorScheme.onSurface)
             : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
                 theme.colorScheme.onSurface)
         : theme.colorScheme.onSurface.withAlpha(0x55);
-    final Color textColor = enabled
+    final Color textColor = widget.enabled
         ? theme.colorScheme.onSurface.withAlpha(0xCC)
         : theme.colorScheme.onSurface.withAlpha(0x55);
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
     // have such a narrow rail for phone size, so at rail sizes we will make it
     // much smaller, even 2 different sizes.
-    final double endPadding = (width > railWidth + 10)
+    final double endPadding = (widget.width > widget.railWidth + 10)
         ? 12
         // If we use a really narrow rail rail, make padding even smaller-
-        : railWidth < 60
+        : widget.railWidth < 60
             ? 5
             : 8;
     // Remove the menu when it gets smaller than 4dp during animation.
-    if (width < 4) {
+    if (widget.width < 4) {
       return const SizedBox.shrink();
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (showDivider) const Divider(thickness: 1, height: 1),
+          if (widget.showDivider) const Divider(thickness: 1, height: 1),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 2, endPadding, 2),
             child: Material(
               clipBehavior: Clip.antiAlias,
               borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(_itemHeight / 2),
-                bottomRight: Radius.circular(_itemHeight / 2),
+                topRight: Radius.circular(_MenuItem._itemHeight / 2),
+                bottomRight: Radius.circular(_MenuItem._itemHeight / 2),
               ),
               // This is a tap command menu, so we keep selected item
               // transparent. We still get desktop/web hover and tap splash.
@@ -889,42 +912,49 @@ class _MenuItem extends StatelessWidget {
               // color: selected ? theme.focusColor : Colors.transparent,
               color: Colors.transparent,
               child: SizedBox(
-                height: _itemHeight,
-                width: math.max(width - endPadding, 0),
+                height: _MenuItem._itemHeight,
+                width: math.max(widget.width - endPadding, 0),
                 child: OverflowBox(
                   alignment: AlignmentDirectional.topStart,
                   minWidth: 0,
-                  maxWidth: math.max(menuWidth, 0),
+                  maxWidth: math.max(widget.menuWidth, 0),
                   child: InkWell(
-                    onTap: enabled ? onTap : null,
+                    onTap: widget.enabled
+                        ? () {
+                            _focusNode.requestFocus();
+                            widget.onTap.call();
+                          }
+                        : null,
+                    focusNode: _focusNode,
                     child: Row(
                       children: <Widget>[
                         MaybeTooltip(
                           // Show tooltips only at rail size or if
                           // the label and tooltip are different and when
                           // tooltip is not empty string and item is enabled.
-                          condition: (width == railWidth || label != tooltip) &&
-                              tooltip != '' &&
-                              enabled,
+                          condition: (widget.width == widget.railWidth ||
+                                  widget.label != widget.tooltip) &&
+                              widget.tooltip != '' &&
+                              widget.enabled,
                           // The item menu labels is a tooltip on rail size.
-                          message: tooltip,
+                          message: widget.tooltip,
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
                           // Constrain icon to min of rail width.
                           child: ConstrainedBox(
                             constraints: BoxConstraints.tightFor(
-                              width: railWidth,
-                              height: railWidth,
+                              width: widget.railWidth,
+                              height: widget.railWidth,
                             ),
-                            child: Icon(icon, color: iconColor),
+                            child: Icon(widget.icon, color: iconColor),
                           ),
                         ),
                         // Below width of 10dp we remove the label.
-                        if (width < railWidth + 10)
+                        if (widget.width < widget.railWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
-                            label,
+                            widget.label,
                             style: theme.textTheme.bodyLarge!
                                 .copyWith(color: textColor),
                           )
@@ -960,6 +990,19 @@ class _MenuLeadingItem extends StatefulWidget {
 
 class _MenuLeadingItemState extends State<_MenuLeadingItem> {
   bool _collapsed = true;
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -968,75 +1011,80 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
     final TextTheme primaryTextTheme = theme.primaryTextTheme;
     const double hPadding = 5;
 
-    return Column(
-      children: <Widget>[
-        ListTile(
-          visualDensity: VisualDensity.comfortable,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: hPadding,
-            vertical: hPadding,
-          ),
-          leading: CircleAvatar(
-            backgroundColor: theme.colorScheme.primary,
-            radius: widget.railWidth / 2 - hPadding,
-            child: Text(
-              widget.menuLeadingAvatarLabel,
-              style: primaryTextTheme.titleMedium!.copyWith(
-                  color: theme.colorScheme.onPrimary,
-                  fontWeight: FontWeight.w600),
+    return Focus(
+      focusNode: _focusNode,
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            visualDensity: VisualDensity.comfortable,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: hPadding,
+              vertical: hPadding,
             ),
-          ),
-          title: widget.menuLeadingTitle,
-          subtitle: widget.menuLeadingSubtitle,
-          trailing: ExpandIcon(
-            isExpanded: !_collapsed,
-            size: 32,
-            padding: EdgeInsets.zero,
-            onPressed: (_) {
+            leading: CircleAvatar(
+              backgroundColor: theme.colorScheme.primary,
+              radius: widget.railWidth / 2 - hPadding,
+              child: Text(
+                widget.menuLeadingAvatarLabel,
+                style: primaryTextTheme.titleMedium!.copyWith(
+                    color: theme.colorScheme.onPrimary,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            title: widget.menuLeadingTitle,
+            subtitle: widget.menuLeadingSubtitle,
+            trailing: ExpandIcon(
+              isExpanded: !_collapsed,
+              size: 32,
+              padding: EdgeInsets.zero,
+              onPressed: (_) {
+                _focusNode.requestFocus();
+                setState(() {
+                  _collapsed = !_collapsed;
+                });
+              },
+            ),
+            onTap: () {
+              _focusNode.requestFocus();
               setState(() {
                 _collapsed = !_collapsed;
               });
             },
           ),
-          onTap: () {
-            setState(() {
-              _collapsed = !_collapsed;
-            });
-          },
-        ),
-        // Add some expand actions for access to mock functionality.
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return SizeTransition(
-              sizeFactor: animation,
-              child: child,
-            );
-          },
-          child: _collapsed
-              ? const SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: <Widget>[
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          showAppAboutDialog(context);
-                        },
-                        child: Column(
-                          children: <Widget>[
-                            const Icon(Icons.info, size: 30),
-                            Text('About', style: textTheme.labelSmall),
-                          ],
+          // Add some expand actions for access to mock functionality.
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return SizeTransition(
+                sizeFactor: animation,
+                child: child,
+              );
+            },
+            child: _collapsed
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: <Widget>[
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {
+                            showAppAboutDialog(context);
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              const Icon(Icons.info, size: 30),
+                              Text('About', style: textTheme.labelSmall),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                    ],
+                        const SizedBox(width: 8),
+                      ],
+                    ),
                   ),
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

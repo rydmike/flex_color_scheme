@@ -82,44 +82,47 @@ class _ThemeTopicSelectorHorizontalState
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
     final double topPadding = media.padding.top;
 
-    return Material(
-      color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Padding(
-            padding:
-                EdgeInsets.only(top: topPadding + margins, bottom: margins),
-            child: SizedBox(
-              height: effectiveHeight - margins,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: const DragScrollBehavior(),
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: margins - 4),
-                        controller: scrollController,
-                        physics: const ClampingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: themeTopics.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _ThemeTopicButton(
-                            item: themeTopics[index],
-                            onSelect: () {
-                              widget.onSelect(index);
-                              setState(() {
-                                selectedPage = index;
-                              });
-                            },
-                            selected: selectedPage == index,
-                            isCompact: widget.isCompact,
-                          );
-                        },
+    return FocusTraversalGroup(
+      child: Material(
+        color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Padding(
+              padding:
+                  EdgeInsets.only(top: topPadding + margins, bottom: margins),
+              child: SizedBox(
+                height: effectiveHeight - margins,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: ScrollConfiguration(
+                        behavior: const DragScrollBehavior(),
+                        child: ListView.builder(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: margins - 4),
+                          controller: scrollController,
+                          physics: const ClampingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: themeTopics.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return _ThemeTopicButton(
+                              item: themeTopics[index],
+                              onSelect: () {
+                                widget.onSelect(index);
+                                setState(() {
+                                  selectedPage = index;
+                                });
+                              },
+                              selected: selectedPage == index,
+                              isCompact: widget.isCompact,
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -197,39 +200,41 @@ class _ThemeTopicSelectorVerticalState
     final double margins =
         AppData.responsiveInsets(media.size.width, widget.isCompact);
 
-    return ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: effectiveWidth + margins),
-      child: ScrollConfiguration(
-        behavior: const DragScrollBehavior(),
-        child: ListView.builder(
-          padding: EdgeInsets.only(
-            left: widget.isRight ? 0 : margins - 4,
-            right: widget.isRight ? margins - 4 : 0,
-            bottom: margins,
-          ),
-          controller: scrollController,
-          primary: false,
-          physics: const ClampingScrollPhysics(),
-          itemCount: themeTopics.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: SizedBox(
-                height: effectiveHeight - 4 * 3,
-                child: _ThemeTopicButton(
-                  item: themeTopics[index],
-                  onSelect: () {
-                    widget.onSelect(index);
-                    setState(() {
-                      selectedPage = index;
-                    });
-                  },
-                  selected: selectedPage == index,
-                  isCompact: true,
+    return FocusTraversalGroup(
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(width: effectiveWidth + margins),
+        child: ScrollConfiguration(
+          behavior: const DragScrollBehavior(),
+          child: ListView.builder(
+            padding: EdgeInsets.only(
+              left: widget.isRight ? 0 : margins - 4,
+              right: widget.isRight ? margins - 4 : 0,
+              bottom: margins,
+            ),
+            controller: scrollController,
+            primary: false,
+            physics: const ClampingScrollPhysics(),
+            itemCount: themeTopics.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: SizedBox(
+                  height: effectiveHeight - 4 * 3,
+                  child: _ThemeTopicButton(
+                    item: themeTopics[index],
+                    onSelect: () {
+                      widget.onSelect(index);
+                      setState(() {
+                        selectedPage = index;
+                      });
+                    },
+                    selected: selectedPage == index,
+                    isCompact: true,
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -237,7 +242,7 @@ class _ThemeTopicSelectorVerticalState
 }
 
 /// A button with [ThemeTopic] button label and icon.
-class _ThemeTopicButton extends StatelessWidget {
+class _ThemeTopicButton extends StatefulWidget {
   const _ThemeTopicButton({
     required this.item,
     required this.selected,
@@ -250,11 +255,30 @@ class _ThemeTopicButton extends StatelessWidget {
   final bool isCompact;
 
   @override
+  State<_ThemeTopicButton> createState() => _ThemeTopicButtonState();
+}
+
+class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint ||
-        isCompact;
+        widget.isCompact;
     final double effectiveWidth = AppData.panelButtonWidth +
         (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;
@@ -293,7 +317,7 @@ class _ThemeTopicButton extends StatelessWidget {
     // If we had one shape, copy in a border side to it.
     if (shapeBorder is RoundedRectangleBorder) {
       shapeBorder = shapeBorder.copyWith(
-        side: selected
+        side: widget.selected
             ? BorderSide(color: iconColor, width: borderWidth)
             : BorderSide(color: unselectedColor),
       );
@@ -305,7 +329,7 @@ class _ThemeTopicButton extends StatelessWidget {
       // RoundedRectangleBorder, we don't know what it was, just let it be.
       shapeBorder ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: selected
+        side: widget.selected
             ? BorderSide(color: iconColor, width: borderWidth)
             : BorderSide(color: unselectedColor),
       );
@@ -319,7 +343,11 @@ class _ThemeTopicButton extends StatelessWidget {
         color: background,
         shape: shapeBorder,
         child: InkWell(
-          onTap: onSelect,
+          focusNode: _focusNode,
+          onTap: () {
+            _focusNode.requestFocus();
+            widget.onSelect.call();
+          },
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
             child: Column(
@@ -327,12 +355,12 @@ class _ThemeTopicButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Icon(
-                  item.icon,
+                  widget.item.icon,
                   size: iconSize,
                   color: iconColor,
                 ),
                 Text(
-                  item.buttonLabel,
+                  widget.item.buttonLabel,
                   style: theme.textTheme.labelSmall!.copyWith(
                     color: textColor,
                     fontSize: textSize,

@@ -128,6 +128,18 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                     message: AppColor.schemes[index].name,
                     waitDuration: const Duration(milliseconds: 700),
                     child: FlexThemeModeOptionButton(
+                      semanticLabel: 'Set to color scheme '
+                          '${AppColor.schemes[index].name}',
+                      setFocusOnTap: true,
+                      // The buttons are so colorful they need custom light and
+                      // and dark mode focus and hover colors that don't depend
+                      // theme.
+                      hoverColor: isLight
+                          ? Colors.white.withAlpha(0x3F)
+                          : Colors.black.withAlpha(0x2F),
+                      focusColor: isLight
+                          ? Colors.white.withAlpha(0x5F)
+                          : Colors.black.withAlpha(0x4F),
                       optionButtonPadding: EdgeInsetsDirectional.only(
                           start: 6 + phoneButtonsSpacingReduce),
                       optionButtonBorderRadius: _borderRadius(useMaterial3),

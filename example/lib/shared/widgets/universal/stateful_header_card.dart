@@ -163,48 +163,50 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
       }
     }
 
-    return Card(
-      margin: widget.margin,
-      color: cardColor,
-      shape: shapeBorder,
-      elevation: widget.elevation,
-      clipBehavior: Clip.hardEdge,
-      child: Column(
-        children: <Widget>[
-          Material(
-            type: MaterialType.card,
-            color: headerColor,
-            child: ListTile(
-              contentPadding: widget.headerPadding,
-              leading: widget.leading,
-              title: widget.title,
-              subtitle: widget.subtitle,
-              trailing: widget.enabled
-                  ? ExpandIcon(
-                      size: 32,
-                      isExpanded: _isOpen,
-                      padding: EdgeInsets.zero,
-                      onPressed: (_) {
-                        _handleTap();
-                      },
-                    )
-                  : null,
-              onTap: widget.enabled ? _handleTap : null,
+    return FocusTraversalGroup(
+      child: Card(
+        margin: widget.margin,
+        color: cardColor,
+        shape: shapeBorder,
+        elevation: widget.elevation,
+        clipBehavior: Clip.hardEdge,
+        child: Column(
+          children: <Widget>[
+            Material(
+              type: MaterialType.card,
+              color: headerColor,
+              child: ListTile(
+                contentPadding: widget.headerPadding,
+                leading: widget.leading,
+                title: widget.title,
+                subtitle: widget.subtitle,
+                trailing: widget.enabled
+                    ? ExpandIcon(
+                        size: 32,
+                        isExpanded: _isOpen,
+                        padding: EdgeInsets.zero,
+                        onPressed: (_) {
+                          _handleTap();
+                        },
+                      )
+                    : null,
+                onTap: widget.enabled ? _handleTap : null,
+              ),
             ),
-          ),
-          AnimatedSwitcher(
-            duration: widget.duration,
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SizeTransition(
-                sizeFactor: animation,
-                child: child,
-              );
-            },
-            child: (_isOpen && widget.child != null)
-                ? widget.child
-                : const SizedBox.shrink(),
-          ),
-        ],
+            AnimatedSwitcher(
+              duration: widget.duration,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SizeTransition(
+                  sizeFactor: animation,
+                  child: child,
+                );
+              },
+              child: (_isOpen && widget.child != null)
+                  ? widget.child
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }

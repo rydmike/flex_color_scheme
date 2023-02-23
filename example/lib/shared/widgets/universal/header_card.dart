@@ -160,51 +160,53 @@ class HeaderCard extends StatelessWidget {
       }
     }
 
-    return Card(
-      margin: margin,
-      shape: shapeBorder,
-      elevation: elevation,
-      clipBehavior: Clip.hardEdge,
-      child: Column(
-        children: <Widget>[
-          if (useHeading)
-            RepaintBoundary(
-              child: Material(
-                type: MaterialType.card,
-                color: headerColor,
-                child: ListTile(
-                  contentPadding: headerPadding,
-                  leading: leading,
-                  title: title,
-                  subtitle: subtitle,
-                  trailing: trailing ??
-                      ((enabled && onTap != null)
-                          ? ExpandIcon(
-                              size: 32,
-                              isExpanded: isOpen,
-                              padding: EdgeInsets.zero,
-                              onPressed: (_) {
-                                onTap?.call();
-                              },
-                            )
-                          : null),
-                  onTap: onTap?.call,
+    return FocusTraversalGroup(
+      child: Card(
+        margin: margin,
+        shape: shapeBorder,
+        elevation: elevation,
+        clipBehavior: Clip.hardEdge,
+        child: Column(
+          children: <Widget>[
+            if (useHeading)
+              RepaintBoundary(
+                child: Material(
+                  type: MaterialType.card,
+                  color: headerColor,
+                  child: ListTile(
+                    contentPadding: headerPadding,
+                    leading: leading,
+                    title: title,
+                    subtitle: subtitle,
+                    trailing: trailing ??
+                        ((enabled && onTap != null)
+                            ? ExpandIcon(
+                                size: 32,
+                                isExpanded: isOpen,
+                                padding: EdgeInsets.zero,
+                                onPressed: (_) {
+                                  onTap?.call();
+                                },
+                              )
+                            : null),
+                    onTap: onTap?.call,
+                  ),
                 ),
               ),
+            AnimatedSwitcher(
+              duration: duration,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SizeTransition(
+                  sizeFactor: animation,
+                  child: child,
+                );
+              },
+              child: (isOpen && child != null)
+                  ? RepaintBoundary(child: child)
+                  : const SizedBox.shrink(),
             ),
-          AnimatedSwitcher(
-            duration: duration,
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SizeTransition(
-                sizeFactor: animation,
-                child: child,
-              );
-            },
-            child: (isOpen && child != null)
-                ? RepaintBoundary(child: child)
-                : const SizedBox.shrink(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
