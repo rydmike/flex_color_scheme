@@ -369,6 +369,92 @@ void main() {
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
     });
   });
+
+  group('FTMS4: WITH FlexThemeModeOptionButton', () {
+    debugDefaultTargetPlatformOverride = null;
+
+    testWidgets('FTMS4.01: Finds FlexThemeModeOptionButton with BUTTON sem',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ModeOptionButtonApp(
+        themeMode: ThemeMode.light,
+        label: 'BUTTON',
+        semanticLabel: null,
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That we find a button by semantic label
+      final Finder modeButton = find.bySemanticsLabel('BUTTON');
+      await tester.tap(modeButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(modeButton, findsOneWidget);
+
+      // EXPECT: That we correct Size on button.
+      // final Finder sizedBox =
+      //     find.byWidget(const SizedBox(width: 64, height: 64));
+      // await tester.pumpAndSettle();
+      // expect(sizedBox, findsOneWidget);
+    });
+    //
+    testWidgets('FTMS4.02: Finds FlexThemeModeOptionButton with BUTTON2 sem',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ModeOptionButtonApp(
+        themeMode: ThemeMode.light,
+        padding: EdgeInsets.all(5),
+        label: 'BUTTON',
+        semanticLabel: 'BUTTON2',
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That we a button by semantic label
+      final Finder modeButton = find.bySemanticsLabel('BUTTON2');
+      await tester.tap(modeButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(modeButton, findsOneWidget);
+    });
+    //
+    testWidgets('FTMS4.03: Finds FlexThemeModeOptionButton with BUTTON2 sem',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const ModeOptionButtonApp(
+        themeMode: ThemeMode.light,
+        padding: EdgeInsetsDirectional.fromSTEB(5, 6, 7, 8),
+        label: 'BUTTON',
+        semanticLabel: 'BUTTON3',
+        setFocusOnTap: true,
+      ));
+
+      // EXPECT: That we find the built MaterialApp.
+      final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
+      await tester.pump();
+      expect(theApp, findsOneWidget);
+
+      // EXPECT: That we a button by semantic label
+      final Finder modeButton = find.bySemanticsLabel('BUTTON3');
+      await tester.tap(modeButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(modeButton, findsOneWidget);
+
+      // EXPECT: That we find a single option button.
+      final Finder inkButton = find.byType(InkWell);
+      await tester.tap(inkButton, warnIfMissed: true);
+      await tester.pumpAndSettle();
+      expect(inkButton, findsOneWidget);
+
+      // EXPECT: That we find a single option button.
+      final Finder optionButton = find.byKey(const ValueKey<String>('option'));
+      await tester.tap(optionButton, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      expect(optionButton, findsOneWidget);
+    });
+    //
+  });
 }
 
 class ThemeSwitchApp extends StatefulWidget {
@@ -457,6 +543,76 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ModeOptionButtonApp extends StatefulWidget {
+  const ModeOptionButtonApp({
+    this.themeMode = ThemeMode.light,
+    this.setFocusOnTap,
+    this.padding,
+    this.selected = true,
+    this.label,
+    this.semanticLabel,
+    // this.onSelect,
+    super.key,
+  });
+  final ThemeMode themeMode;
+  final bool? setFocusOnTap;
+  final EdgeInsetsGeometry? padding;
+  final bool selected;
+  final String? label;
+  final String? semanticLabel;
+  // final VoidCallback? onSelect;
+
+  @override
+  State<ModeOptionButtonApp> createState() => _ModeOptionButtonAppState();
+}
+
+class _ModeOptionButtonAppState extends State<ModeOptionButtonApp> {
+  ThemeMode? mode;
+  late bool selected;
+
+  @override
+  void initState() {
+    super.initState();
+    mode = widget.themeMode;
+    selected = widget.selected;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    debugDefaultTargetPlatformOverride = null;
+    return MaterialApp(
+      key: const ValueKey<String>('theApp'),
+      title: 'Theme Switch',
+      theme: FlexColorScheme.light(
+              colors: FlexColor.schemes[FlexScheme.material]!.light)
+          .toTheme,
+      darkTheme: FlexColorScheme.dark(
+              colors: FlexColor.schemes[FlexScheme.material]!.dark)
+          .toTheme,
+      themeMode: mode,
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Theme Switch')),
+        body: Center(
+          child: FlexThemeModeOptionButton(
+            key: const ValueKey<String>('option'),
+            flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.light,
+            backgroundColor: Colors.white,
+            padding: widget.padding,
+            selected: selected,
+            label: widget.label,
+            semanticLabel: widget.semanticLabel,
+            onSelect: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
+          ),
         ),
       ),
     );

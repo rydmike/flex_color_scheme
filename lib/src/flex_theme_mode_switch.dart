@@ -436,7 +436,7 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
-  /// If null, default to `const EdgeInsets.all(3)`
+  /// If null, default to `const EdgeInsets.all(4)`
   final EdgeInsetsGeometry? padding;
 
   /// The InkWell hover color for the option button.
@@ -490,8 +490,8 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
     // in a Sized transparent Material on top of the buttons.
     //
     // Default padding: 2* 3dp on all sides and two buttons with the padding.
-    double padX = 2 * 3 * 2;
-    double padY = 2 * 3 * 2;
+    double padX = 2 * 4 * 2;
+    double padY = 2 * 4 * 2;
     // Customized padding can be via EdgeInsets or EdgeInsetsDirectional.
     if (widget.padding != null) {
       if (widget.padding is EdgeInsets) {
@@ -511,6 +511,10 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
             2;
       }
     }
+
+    // TODO(rydmike): Remove these debugPrints
+    // debugPrint('Size X: ${widget.width * 2 + padX} *******');
+    // debugPrint('Size Y: ${widget.height * 2 + padY} *******');
 
     return Semantics(
       label: widget.semanticLabel ?? widget.label ?? 'Theme mode option button',
