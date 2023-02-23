@@ -4,13 +4,15 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 21, 2023**
+**Feb 23, 2023**
 
 **FIX**
 
 - Fixed **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
 
 - Fixed **bug** where `FlexSubThemes.drawerTheme` was using `BorderRadiusDirectional.horizontal` with `end` radius instead of `start` radius as its `endShape`. This bug was introduced in version 7.0.0-dev.1. 
+
+- The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
 
 **NEW**
 
@@ -37,6 +39,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Added**: Static helper function `onSchemeColor` to `FlexSubThemes`.
 
+- **Added**: To `FlexThemeModeOptionButton` added properties `semanticLabel`, `focusColor` and `setFocusOnTap`. If `setFocusOnTap` is set to true, the button will request focus when it is tapped. Display of previously not shown hover and focus effects where fixed and they now correctly use `hoverColor` and the new `focusColor`.
 
 **CHANGE**
 
@@ -58,7 +61,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Style breaking**:  `NavigationBar`  
   Changed the default `NavigationBar` height from 62dp to 80dp. The 80dp height is also the M3 spec default height for a Material 3 `NavigationBar` in Flutter. This makes the FCS default `NavigationBar` theme less opinionated compared to M3 spec. The FCS default background color is now using `surfaceVariant` in M2 mode, and defaults in M3 to its spec `surface` with elevation tint. The FCS M2 `surfaceVariant` default makes it look a bit more like the M3 mode surface with elevation tint. Especially if you use a seed-generated ColorScheme or FCS surface blends. This makes the FCS difference in style between M2 and M3 mode less than before. Since M2 does not support surface tint, it cannot match it exactly.
-  - Using the M3 spec default height also avoids a Flutter SDK issue with using none default height. If you change the `NavigationBar` from M3 default value of 80dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7.0 and 3.7.1. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553). This fix landed in Flutter hot-fix 3.7.2. To avoid the bug, upgrade to Flutter 3.7.2 or later.
+  - Using the M3 spec default height also avoids a Flutter SDK issue with using none default height. If you change the `NavigationBar` from M3 default value of 80 dp, the ink level moves up or down with same amount as the deviation from the default 80dp height. See issue report and illustration here [FCS #114](https://github.com/rydmike/flex_color_scheme/issues/114) as well as in Flutter SDK issue [#117420](https://github.com/flutter/flutter/issues/117420). The issue is caused by a regression in Flutter 3.7.0 and 3.7.1. It does not exist in Flutter 3.3 and earlier. It is also fixed in the current master channel via [PR 117473](https://github.com/flutter/flutter/pull/117473). This fix has now been cherry-picked (CP) via [# 119553](https://github.com/flutter/flutter/pull/119553). This fix landed in Flutter hot-fix 3.7.2. To avoid the bug, upgrade to Flutter 3.7.2 or later.
   
 
 - **Style breaking**: All component themes have null properties in M3 mode.   
@@ -138,6 +141,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 - Added a new theme topic view is used when desktop width is larger than 1779 dp. It offers separate vertical theme topic selectors for the two side-by-side them topic panel views. This results in even more usable height available on e.g. a 1080p monitor, since the large horizontal theme topic selector for the main left panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for the left and right side. The new compact mode is also available in this view mode. Using the compact view mode further enlarges available vertical space to see more theme topic panel content on mid-sized desktop monitors (1080p). The breakpoint 1779dp was chosen to get this view on 1780 dp, being a bit less than 1800dp, the device pixels available on a MacBook Pro 14" screen when using the "More space" option in Display settings, it of course also gets used on common full HD 1080p monitors that are 1920 dp wide. 
+- Improved and added keyboard focus and navigation, by using `FocusTraversalGroup`:s and by letting important UI controls get focus on tap. This was done to make keyboard usage of the Playground easier. It's semantics were also improved.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 

@@ -8,7 +8,7 @@ import '../../../../shared/const/app_data.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 
-/// Horizontal theme selector of themes offered in our [AppColor.schemes].
+/// Horizontal color scheme selector of schemes in [AppColor.schemes].
 ///
 /// This example uses a StatefulWidget for the scroll controller and
 /// index to keep track of previously selected color scheme, so we can animate
