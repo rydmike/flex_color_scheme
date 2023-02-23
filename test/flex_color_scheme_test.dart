@@ -236,15 +236,11 @@ void main() {
         'EXPECT them to have identity', () {
       expect(identical(m1, m2), true);
     });
-    try {
-      test(
-          'FCS1.01e: GIVEN two identical FlexColorScheme objects '
-          'EXPECT them to have equality with operator', () {
-        expect(m1 == m2, true);
-      });
-    } on Exception catch (e, s) {
-      debugPrint('$s');
-    }
+    test(
+        'FCS1.01e: GIVEN two identical FlexColorScheme objects '
+        'EXPECT them to have equality with operator', () {
+      expect(m1 == m2, true);
+    });
     // Expect toTheme from them to full-fill same condition.
     // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
     //   This is repeated for many test cases. It seems like ThemeData

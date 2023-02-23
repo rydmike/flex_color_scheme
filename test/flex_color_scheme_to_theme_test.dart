@@ -12,7 +12,6 @@ void main() {
   // Below we test that its key properties as as expected.
   //****************************************************************************
   group('FCS7: WITH FlexColorScheme.toTheme ', () {
-    debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
@@ -4545,6 +4544,430 @@ void main() {
       expect(
         theme.appBarTheme.backgroundColor,
         equals(colorScheme.primary.withOpacity(0.6)),
+      );
+    });
+    test(
+        'FCS7.112a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and removing tint and adding shadows '
+        'EXPECT given sub themes with tint removed and shadow added on sub '
+        'themes', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.android,
+        subThemesData: const FlexSubThemesData(
+          elevationTint: FlexTint.removeTint,
+          elevationShadow: FlexShadow.useShadow,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint adaptive and shadow '
+        'adaptive on sub themes on iOS platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.iOS,
+        subThemesData: const FlexSubThemesData(
+          elevationTint: FlexTint.adaptive,
+          elevationShadow: FlexShadow.adaptive,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(null), // Tint is kept on AppBar also on iOS & MacOS
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(null), // Shadow is not added on AppBar in iOS & MacOS, they
+        // don't use it otherwise either on native AppBars
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112c GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint adaptive and shadow '
+        'adaptive on sub themes on macOS platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.macOS,
+        subThemesData: const FlexSubThemesData(
+          elevationTint: FlexTint.adaptive,
+          elevationShadow: FlexShadow.adaptive,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(null), // Tint is kept on AppBar also on iOS & MacOS
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(null), // Shadow is not added on AppBar in iOS & MacOS, they
+        // don't use it otherwise either on native AppBars
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint ADAPTIVE and shadow '
+        'ADAPTIVE on sub themes on ANDROID platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.android,
+        subThemesData: const FlexSubThemesData(
+          elevationTint: FlexTint.adaptive,
+          elevationShadow: FlexShadow.adaptive,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(null),
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(null),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(null),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle?.surfaceTintColor,
+        equals(null),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style?.surfaceTintColor,
+        equals(null),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style?.surfaceTintColor,
+        equals(null),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(null),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(null),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(null),
       );
     });
   });

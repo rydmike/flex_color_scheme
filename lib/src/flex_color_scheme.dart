@@ -6327,10 +6327,12 @@ class FlexColorScheme with Diagnosticable {
               actionsIconTheme: IconThemeData(color: appBarIconColor),
               systemOverlayStyle: systemOverlayStyle,
               // Special case, don't use shadow on AppBar with adaptive case.
+              // We keep the scroll-under effect, useful on iOS too.
               shadowColor: useShadow && subShadow != FlexShadow.adaptive
                   ? colorScheme.shadow
                   : null,
               // Special case, don't remove tint on AppBar with adaptive case.
+              // since AppBars do not have shadows anyway on them.
               surfaceTintColor: removeTint && subTint != FlexTint.adaptive
                   ? Colors.transparent
                   : null,
