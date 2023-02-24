@@ -813,7 +813,7 @@ class _AppMenuState extends State<_AppMenu> {
 }
 
 /// The items for the menu.
-class _MenuItem extends StatefulWidget {
+class _MenuItem extends StatelessWidget {
   const _MenuItem({
     required this.width,
     required this.menuWidth,
@@ -842,25 +842,6 @@ class _MenuItem extends StatefulWidget {
   static const double _itemHeight = 50;
 
   @override
-  State<_MenuItem> createState() => _MenuItemState();
-}
-
-class _MenuItemState extends State<_MenuItem> {
-  late final FocusNode _focusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
@@ -869,34 +850,34 @@ class _MenuItemState extends State<_MenuItem> {
     // custom elements in your app they react to theme changes and use the theme
     // colors. You can make elaborate hues and opacities of the colors in the
     // theme's color schemes, like here:
-    final Color iconColor = widget.enabled
+    final Color iconColor = enabled
         ? isLight
             ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
                 theme.colorScheme.onSurface)
             : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
                 theme.colorScheme.onSurface)
         : theme.colorScheme.onSurface.withAlpha(0x55);
-    final Color textColor = widget.enabled
+    final Color textColor = enabled
         ? theme.colorScheme.onSurface.withAlpha(0xCC)
         : theme.colorScheme.onSurface.withAlpha(0x55);
     // The M3 guide calls for 12dp padding after the selection indicator on
     // the menu highlight in a Drawer or side menu. We can do that, but we
     // have such a narrow rail for phone size, so at rail sizes we will make it
     // much smaller, even 2 different sizes.
-    final double endPadding = (widget.width > widget.railWidth + 10)
+    final double endPadding = (width > railWidth + 10)
         ? 12
         // If we use a really narrow rail rail, make padding even smaller-
-        : widget.railWidth < 60
+        : railWidth < 60
             ? 5
             : 8;
     // Remove the menu when it gets smaller than 4dp during animation.
-    if (widget.width < 4) {
+    if (width < 4) {
       return const SizedBox.shrink();
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (widget.showDivider) const Divider(thickness: 1, height: 1),
+          if (showDivider) const Divider(thickness: 1, height: 1),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 2, endPadding, 2),
             child: Material(
@@ -913,48 +894,41 @@ class _MenuItemState extends State<_MenuItem> {
               color: Colors.transparent,
               child: SizedBox(
                 height: _MenuItem._itemHeight,
-                width: math.max(widget.width - endPadding, 0),
+                width: math.max(width - endPadding, 0),
                 child: OverflowBox(
                   alignment: AlignmentDirectional.topStart,
                   minWidth: 0,
-                  maxWidth: math.max(widget.menuWidth, 0),
+                  maxWidth: math.max(menuWidth, 0),
                   child: InkWell(
-                    onTap: widget.enabled
-                        ? () {
-                            _focusNode.requestFocus();
-                            widget.onTap.call();
-                          }
-                        : null,
-                    focusNode: _focusNode,
+                    onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
                         MaybeTooltip(
                           // Show tooltips only at rail size or if
                           // the label and tooltip are different and when
                           // tooltip is not empty string and item is enabled.
-                          condition: (widget.width == widget.railWidth ||
-                                  widget.label != widget.tooltip) &&
-                              widget.tooltip != '' &&
-                              widget.enabled,
+                          condition: (width == railWidth || label != tooltip) &&
+                              tooltip != '' &&
+                              enabled,
                           // The item menu labels is a tooltip on rail size.
-                          message: widget.tooltip,
+                          message: tooltip,
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
                           // Constrain icon to min of rail width.
                           child: ConstrainedBox(
                             constraints: BoxConstraints.tightFor(
-                              width: widget.railWidth,
-                              height: widget.railWidth,
+                              width: railWidth,
+                              height: railWidth,
                             ),
-                            child: Icon(widget.icon, color: iconColor),
+                            child: Icon(icon, color: iconColor),
                           ),
                         ),
                         // Below width of 10dp we remove the label.
-                        if (widget.width < widget.railWidth + 10)
+                        if (width < railWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
-                            widget.label,
+                            label,
                             style: theme.textTheme.bodyLarge!
                                 .copyWith(color: textColor),
                           )
