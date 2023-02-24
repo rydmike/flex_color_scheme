@@ -581,6 +581,12 @@ String generateThemeDartCode(ThemeController controller) {
               controller.fabSchemeColor == null
           ? ''
           : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
+  final String snackBarRadius = controller.snackBarBorderRadius != null
+      ? '    snackBarRadius: ${controller.snackBarBorderRadius},\n'
+      : '';
+  final String snackBarElevation = controller.snackBarElevation != null
+      ? '    snackBarElevation: ${controller.snackBarElevation},\n'
+      : '';
   final String snackBarBackgroundSchemeColor = controller.snackBarSchemeColor !=
           null
       ? '    snackBarBackgroundSchemeColor: ${controller.snackBarSchemeColor},\n'
@@ -1105,6 +1111,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$timePickerElementRadius'
           '$dialogElevation'
           //
+          '$snackBarRadius'
+          '$snackBarElevation'
           '$snackBarBackgroundSchemeColor'
           '$snackBarActionSchemeColor'
           //
@@ -1291,6 +1299,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$timePickerElementRadius'
           '$dialogElevation'
           //
+          '$snackBarRadius'
+          '$snackBarElevation'
           '$snackBarBackgroundSchemeColor'
           '$snackBarActionSchemeColor'
           //

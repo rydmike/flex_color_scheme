@@ -146,12 +146,13 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 - Added a new theme topic view is used when desktop width is larger than 1779 dp. It offers separate vertical theme topic selectors for the two side-by-side them topic panel views. This results in even more usable height available on e.g. a 1080p monitor, since the large horizontal theme topic selector for the main left panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for the left and right side. The new compact mode is also available in this view mode. Using the compact view mode further enlarges available vertical space to see more theme topic panel content on mid-sized desktop monitors (1080p). The breakpoint 1779dp was chosen to get this view on 1780 dp, being a bit less than 1800dp, the device pixels available on a MacBook Pro 14" screen when using the "More space" option in Display settings, it of course also gets used on common full HD 1080p monitors that are 1920 dp wide. 
 - Improved and added keyboard focus and navigation, by using `FocusTraversalGroup`:s and by letting important UI controls get focus on tap. This was done to make keyboard usage of the Playground easier. It's semantics were also improved.
+- Added SnackBar controls for elevation and border radius to panel **BottomSheet Snack Banner**.
+
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
 - ADD: New TabBar properties unselected color, unselected opacity, indicator thickness.
 - Playground: ADD TabBar controls
-- Playground: ADD SnackBar controls for elevation and border radius.
 - NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
 - Playground: IMPROVE Material 3 demo, hookup ctrl for theme mode and M3 + update to latest.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5

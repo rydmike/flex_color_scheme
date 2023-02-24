@@ -605,6 +605,10 @@ class ThemeController with ChangeNotifier {
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
     //
     // SnackBar SETTINGS.
+    _snackBarElevation = await _themeService.load(
+        Store.keySnackBarElevation, Store.defaultSnackBarElevation);
+    _snackBarBorderRadius = await _themeService.load(
+        Store.keySnackBarBorderRadius, Store.defaultSnackBarBorderRadius);
     _snackBarSchemeColor = await _themeService.load(
         Store.keySnackBarSchemeColor, Store.defaultSnackBarSchemeColor);
     _snackBarActionSchemeColor = await _themeService.load(
@@ -1015,6 +1019,8 @@ class ThemeController with ChangeNotifier {
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     //
     // SnackBar SETTINGS.
+    setSnackBarElevation(Store.defaultSnackBarElevation, false);
+    setSnackBarBorderRadius(Store.defaultSnackBarBorderRadius, false);
     setSnackBarSchemeColor(Store.defaultSnackBarSchemeColor, false);
     setSnackBarActionSchemeColor(Store.defaultSnackBarActionSchemeColor, false);
     //
@@ -1171,8 +1177,7 @@ class ThemeController with ChangeNotifier {
       setTintedDisabledControls(false, false);
       // Set SnackBar to M3.
       setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
-      // TODO(rydmike): Add elevation set to 6.
-
+      setSnackBarElevation(6, false);
       // Set TextField to M3
       await setTextFieldToM3(false);
       // Set Navigators to M3
@@ -4000,6 +4005,24 @@ class ThemeController with ChangeNotifier {
     _chipBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipBorderRadius, value));
+  }
+
+  late double? _snackBarElevation;
+  double? get snackBarElevation => _snackBarElevation;
+  void setSnackBarElevation(double? value, [bool notify = true]) {
+    if (value == _snackBarElevation) return;
+    _snackBarElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySnackBarElevation, value));
+  }
+
+  late double? _snackBarBorderRadius;
+  double? get snackBarBorderRadius => _snackBarBorderRadius;
+  void setSnackBarBorderRadius(double? value, [bool notify = true]) {
+    if (value == _snackBarBorderRadius) return;
+    _snackBarBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySnackBarBorderRadius, value));
   }
 
   late SchemeColor? _snackBarSchemeColor;

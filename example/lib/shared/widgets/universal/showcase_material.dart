@@ -3120,6 +3120,23 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const <Widget>[
+        SnackBarShowcase(),
+        SizedBox(height: 16),
+        MaterialBannerShowcase(),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class SnackBarShowcase extends StatelessWidget {
+  const SnackBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
@@ -3158,16 +3175,56 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
             .copyWith(color: snackActionColor);
     final double snackElevation = theme.snackBarTheme.elevation ?? 6;
 
+    final ShapeBorder? shape = theme.snackBarTheme.shape;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Material(
+            color: snackBackground,
+            elevation: snackElevation,
+            // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
+            // Keep it away from the simulation to match spec!
+            // surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: colorScheme.shadow,
+            shape: shape ??
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4),
+                  ),
+                ),
+            child: SizedBox(
+              height: 46,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Row(
+                  children: <Widget>[
+                    const SizedBox(width: 24),
+                    Text('A floating SnackBar (style simulation)',
+                        style: snackStyle),
+                    const Spacer(),
+                    Text('Close', style: snackActionStyle),
+                    const SizedBox(width: 24),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
         Material(
           color: snackBackground,
           elevation: snackElevation,
-          surfaceTintColor: colorScheme.surfaceTint,
+          // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
+          // Keep it away from the simulation to match spec!
+          // surfaceTintColor: colorScheme.surfaceTint,
           shadowColor: colorScheme.shadow,
+          shape: shape,
           child: SizedBox(
-            height: 48,
+            height: 46,
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -3184,7 +3241,19 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class MaterialBannerShowcase extends StatelessWidget {
+  const MaterialBannerShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
         const Divider(height: 1),
         MaterialBanner(
           padding: const EdgeInsets.all(20),

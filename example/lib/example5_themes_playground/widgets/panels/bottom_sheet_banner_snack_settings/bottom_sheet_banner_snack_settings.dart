@@ -4,6 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -12,11 +13,20 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
 
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue108539 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/108539',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final bool isDark = theme.brightness == Brightness.dark;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String snackDefaultColorLabel = isDark
         ? (controller.useSubThemes && controller.useFlexColorScheme)
@@ -68,7 +78,6 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
                 : '';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -282,8 +291,139 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Divider(),
+        const ListTile(
+          title: Text('SnackBar'),
+          subtitle: Text('The SnackBar comes with two behaviors, fixed and '
+              'floating. When using M3, prefer using the floating behavior.'),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.7 and earlier the SnackBar border radius '
+                      'for fixed and floating behavior cannot be changed '
+                      'separately via themes. The fixed style should always '
+                      'by straight, the floating one may have border radius. '
+                      'If you set a border radius both variants will get it. '
+                      'See Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue108539,
+                  text: 'issue #108539',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more information.',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 30,
+            divisions: 31,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.snackBarBorderRadius == null ||
+                        (controller.snackBarBorderRadius ?? -1) < 0
+                    ? 'default fix 0, float 4'
+                    : (controller.snackBarBorderRadius?.toStringAsFixed(0) ??
+                        '')
+                : 'default fix 0, float 4',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.snackBarBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setSnackBarBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.snackBarBorderRadius == null ||
+                              (controller.snackBarBorderRadius ?? -1) < 0
+                          ? 'default\nfix 0, float 4'
+                          : (controller.snackBarBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default\nfix 0, float 4',
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Elevation'),
+          subtitle: Slider(
+            min: -1,
+            max: 20,
+            divisions: 21,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.snackBarElevation == null ||
+                        (controller.snackBarElevation ?? -1) < 0
+                    ? 'default 4'
+                    : (controller.snackBarElevation?.toStringAsFixed(0) ?? '')
+                : 'default 6',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.snackBarElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setSnackBarElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.snackBarElevation == null ||
+                              (controller.snackBarElevation ?? -1) < 0
+                          ? 'default 4'
+                          : (controller.snackBarElevation?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 6',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         ColorSchemePopupMenu(
-          title: const Text('SnackBar background color'),
+          title: const Text('Background color'),
           subtitle: const Text('Set to inverseSurface for default M3 style'),
           labelForDefault: snackDefaultColorLabel,
           index: controller.snackBarSchemeColor?.index ?? -1,
@@ -299,7 +439,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('SnackBar action button text color'),
+          title: const Text('Action button text color'),
           labelForDefault: snackActionDefaultColorLabel,
           index: controller.snackBarActionSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -342,7 +482,15 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           },
         ),
         const SizedBox(height: 8),
-        const MaterialBannerSnackBarShowcase(),
+        const SnackBarShowcase(),
+        const SizedBox(height: 16),
+        const Divider(),
+        const ListTile(
+          title: Text('MaterialBanner'),
+          subtitle: Text('No settings in FCS, only shown to demonstrates its '
+              'style with current ColorScheme.'),
+        ),
+        const MaterialBannerShowcase(),
         const SizedBox(height: 8),
       ],
     );

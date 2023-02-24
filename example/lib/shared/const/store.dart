@@ -1318,6 +1318,18 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultChipBorderRadius = null;
 
+  // Key used to read and save the snackBarBorderRadius value.
+  static const String keySnackBarBorderRadius = 'snackBarBorderRadius';
+  // Default value for the snackBarBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSnackBarBorderRadius = null;
+
+  // Key used to read and save the snackBarElevation value.
+  static const String keySnackBarElevation = 'snackBarElevation';
+  // Default value for the snackBarElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSnackBarElevation = null;
+
   // Key used to read and save the snackBarSchemeColor value.
   static const String keySnackBarSchemeColor = 'snackBarSchemeColor';
   // Default value for the snackBarSchemeColor, also used to reset settings.

@@ -295,6 +295,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             timePickerElementRadius: controller.timePickerElementRadius,
             dialogElevation: controller.dialogElevation,
             // SnackBar settings.
+            snackBarRadius: controller.snackBarBorderRadius,
+            snackBarElevation: controller.snackBarElevation,
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
             snackBarActionSchemeColor: controller.snackBarActionSchemeColor,
             // AppBar settings.
