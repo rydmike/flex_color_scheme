@@ -800,14 +800,13 @@ class _HomePageState extends State<HomePage> {
         ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
     menuItemsEnabled =
-        List<bool>.generate(AppData.menuItems.length, (int i) => false);
+        List<bool>.generate(App.menuItems.length, (int i) => false);
     menuItemsEnabled[2] = true;
     menuItemsEnabled[3] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        AppData.menuItems.length,
-        (int i) => ResponsiveMenuItemIconState.primary);
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
   }
 
   @override
@@ -832,11 +831,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double margins = AppData.responsiveInsets(media.size.width);
+    final double margins = App.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineSmall!;
@@ -876,20 +875,20 @@ class _HomePageState extends State<HomePage> {
         opacity: 0.60,
       ),
       child: ResponsiveScaffold(
-        title: Text(AppData.title(context)),
-        menuTitle: const Text(AppData.packageName),
+        title: Text(App.title(context)),
+        menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
-          AppData.title(context),
+          App.title(context),
           style:
               theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
         ),
-        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
-        menuItems: AppData.menuItems,
+        menuItems: App.menuItems,
         menuItemsEnabled: menuItemsEnabled,
         menuItemsIconState: menuItemsIconState,
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
+        breakpointShowFullMenu: App.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
@@ -910,7 +909,7 @@ class _HomePageState extends State<HomePage> {
         },
         body: PageBody(
           controller: scrollController,
-          constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+          constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
             padding: EdgeInsets.fromLTRB(

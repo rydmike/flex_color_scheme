@@ -26,7 +26,7 @@ class SurfaceModeToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool showAllModes = media.size.width > AppData.phoneWidthBreakpoint;
+    final bool showAllModes = media.size.width > App.phoneWidthBreakpoint;
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
     final List<bool> isSelected = <bool>[

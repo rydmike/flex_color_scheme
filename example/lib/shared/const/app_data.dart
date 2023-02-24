@@ -12,10 +12,10 @@ import '../widgets/app/responsive_scaffold.dart';
 /// classes that serves your application's usage. For these examples I
 /// put them all in the same class, except the colors that are in their
 /// own class.
-class AppData {
+class App {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  AppData._();
+  App._();
 
   // Info about the app.
 

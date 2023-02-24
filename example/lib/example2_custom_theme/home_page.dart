@@ -33,17 +33,17 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double margins =
-        AppData.responsiveInsets(MediaQuery.of(context).size.width);
+        App.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppData.title(context)),
+        title: Text(App.title(context)),
         actions: const <Widget>[AboutIconButton()],
       ),
       body: PageBody(
-        constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+        constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
           primary: true,
           padding: EdgeInsets.all(margins),

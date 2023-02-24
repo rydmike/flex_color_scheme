@@ -52,7 +52,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     schemeIndex = widget.controller.schemeIndex;
     final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce =
         widget.isPhone || isCompact ? -3 : 0;
     scrollOffset =
@@ -76,7 +76,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     if (widget.controller.schemeIndex != schemeIndex) {
       final bool isCompact = widget.controller.compactMode;
       final double phoneReduce =
-          widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+          widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
       final double phoneButtonsSpacingReduce =
           widget.isPhone || isCompact ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
@@ -107,7 +107,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     final bool useMaterial3 = theme.useMaterial3;
     final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone || isCompact ? AppData.colorButtonPhoneReduce : 0;
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce =
         widget.isPhone || isCompact ? -3 : 0;
     return SizedBox(

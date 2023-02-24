@@ -17,7 +17,7 @@ String generateColorSchemeDartCode(
       flexColorSchemeDark(controller, Colors.black).toScheme;
 
   final String code = '''
-// Light and dark ColorSchemes made by FlexColorScheme v${AppData.packageVersion}.
+// Light and dark ColorSchemes made by FlexColorScheme v${App.packageVersion}.
 // These ColorScheme objects require Flutter 3.7 or later.
 const ColorScheme flexSchemeLight = ColorScheme(
   brightness: ${lightScheme.brightness},

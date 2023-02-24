@@ -120,14 +120,13 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
     final ThemeController themeCtrl = widget.controller;
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = widget.controller.compactMode;
-    final bool isPinned = media.size.height >= AppData.pinnedSelector;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint ||
+    final bool isPinned = media.size.height >= App.pinnedSelector;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint ||
         isCompact;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
-    final double buttonHeight = AppData.panelButtonHeight +
-        (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
+    final double buttonHeight = App.panelButtonHeight +
+        (isPhone ? App.panelButtonPhoneHeightReduce : 0);
     // All the above is so we can below calculate how high the
     // [_ThemeTopicSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
@@ -245,8 +244,7 @@ class _ThemePanelView extends StatelessWidget {
 
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = controller.compactMode;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
     final double bottomPadding = media.padding.bottom;
 
     final int sideViewIndex = controller.sideViewIndex;
@@ -255,7 +253,7 @@ class _ThemePanelView extends StatelessWidget {
       // A custom breakpoint, when the layout width is larger than breakpoint
       // we show the code panel in a side-by side view.
       final bool showSecondPage =
-          constraints.maxWidth >= AppData.codeViewWidthBreakpoint;
+          constraints.maxWidth >= App.codeViewWidthBreakpoint;
       // We get double implicit scrollbars and that causes issues with the
       // scroll controller, this removes it, we don't need one here.
       return Row(

@@ -25,13 +25,11 @@ class ThemeColorSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
+    final bool isNarrow = media.size.width < App.phoneWidthBreakpoint;
     final bool isCompact = controller.compactMode;
-    final bool isPhone = isCompact ||
-        isNarrow ||
-        media.size.height < AppData.phoneHeightBreakpoint;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
+    final bool isPhone =
+        isCompact || isNarrow || media.size.height < App.phoneHeightBreakpoint;
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
     return RepaintBoundary(
       child: HeaderCard(
         margin: EdgeInsets.symmetric(horizontal: margins),
@@ -159,8 +157,7 @@ class _ThemeColorSelectorDelegateWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = controller.compactMode;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
     return Material(
       color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
       child: ClipRect(

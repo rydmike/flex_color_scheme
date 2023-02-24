@@ -431,7 +431,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       mediaSize = media.size;
       // On purpose not checking the the height here, we want to keep and auto
       // open the rail if this is possibly a phone in landscape mode.
-      final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint;
+      final bool isPhone = media.size.width < App.phoneWidthBreakpoint;
       // This make the rail menu auto-close on phone size and open back up if
       // moving to landscape or none phone size. You can still open a very
       // narrow rail also in phone size, but if you resize the canvas at phone

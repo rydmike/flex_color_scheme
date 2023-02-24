@@ -502,9 +502,9 @@ void showUndrawAboutDialog(BuildContext context,
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${AppData.flutterVersion}, '
-                    'using ${AppData.packageName} '
-                    '${AppData.packageVersion}\n'
+                text: 'Built with Flutter ${App.flutterVersion}, '
+                    'using ${App.packageName} '
+                    '${App.packageVersion}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
                     'h:${height.toStringAsFixed(0)})\n\n',
               ),

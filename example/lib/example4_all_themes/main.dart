@@ -164,8 +164,8 @@ class DemoApp extends StatelessWidget {
             ),
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
-            visualDensity: AppData.visualDensity,
-            fontFamily: AppData.font,
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
             // Use predefined M3 typography while this issue is in effect:
             // https://github.com/flutter/flutter/issues/103864
             typography: Typography.material2021(
@@ -195,8 +195,8 @@ class DemoApp extends StatelessWidget {
                     defaultRadius: themeController.defaultRadius,
                   )
                 : null,
-            visualDensity: AppData.visualDensity,
-            fontFamily: AppData.font,
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
             // Use predefined M3 typography while this issue is in effect:
             // https://github.com/flutter/flutter/issues/103864
             typography: Typography.material2021(

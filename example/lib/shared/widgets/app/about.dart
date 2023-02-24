@@ -54,8 +54,8 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
 
   showAboutDialog(
     context: context,
-    applicationName: AppData.title(context),
-    applicationVersion: AppData.version,
+    applicationName: App.title(context),
+    applicationVersion: App.version,
     useRootNavigator: useRootNavigator,
     applicationIcon: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -74,8 +74,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
         ),
       ],
     ),
-    applicationLegalese:
-        '${AppData.copyright}\n${AppData.author}\n${AppData.license}',
+    applicationLegalese: '${App.copyright}\n${App.author}\n${App.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -84,14 +83,14 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'The ${AppData.title(context)} application demonstrates '
-                    'features of the ${AppData.packageName} Flutter theming '
+                text: 'The ${App.title(context)} application demonstrates '
+                    'features of the ${App.packageName} Flutter theming '
                     'package.\n\n'
                     'To learn more, check out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
-                uri: AppData.packageUri,
+                uri: App.packageUri,
                 text: 'pub.dev',
               ),
               TextSpan(
@@ -101,9 +100,9 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${AppData.flutterVersion}, '
-                    'using ${AppData.packageName} '
-                    '${AppData.packageVersion}\n'
+                text: 'Built with Flutter ${App.flutterVersion}, '
+                    'using ${App.packageName} '
+                    '${App.packageVersion}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
                     'h:${height.toStringAsFixed(0)})\n\n',
               ),

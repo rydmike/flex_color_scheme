@@ -373,8 +373,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     surfaceTint: controller.surfaceTintDark,
     //
     // ThemeData properties passed along directly to ThemeData.
-    visualDensity: AppData.visualDensity,
-    fontFamily: controller.useAppFont ? AppData.font : null,
+    visualDensity: App.visualDensity,
+    fontFamily: controller.useAppFont ? App.font : null,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     typography: controller.useTextTheme

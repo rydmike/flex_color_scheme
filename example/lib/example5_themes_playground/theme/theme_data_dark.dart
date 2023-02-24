@@ -40,7 +40,7 @@ ThemeData themeDataDark(ThemeController controller) {
 
   return ThemeData(
     brightness: Brightness.dark,
-    fontFamily: controller.useAppFont ? AppData.font : null,
+    fontFamily: controller.useAppFont ? App.font : null,
     // The ColorScheme we get here is the same one you can also generate
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
@@ -58,7 +58,7 @@ ThemeData themeDataDark(ThemeController controller) {
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app
-    visualDensity: AppData.visualDensity,
+    visualDensity: App.visualDensity,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     applyElevationOverlayColor: true,

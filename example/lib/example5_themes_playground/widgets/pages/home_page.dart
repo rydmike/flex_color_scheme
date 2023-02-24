@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
 
     // Set enabled menu items.
     menuItemsEnabled =
-        List<bool>.generate(AppData.menuItems.length, (int i) => true);
+        List<bool>.generate(App.menuItems.length, (int i) => true);
     menuItemsEnabled[8] = widget.controller.isLargeGridView;
     menuItemsEnabled[9] = widget.controller.isLargeGridView;
     menuItemsEnabled[5] = widget.controller.useFlexColorScheme;
@@ -66,8 +66,7 @@ class _HomePageState extends State<HomePage> {
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        AppData.menuItems.length,
-        (int i) => ResponsiveMenuItemIconState.primary);
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
     menuItemsIconState[0] = widget.controller.isLargeGridView
         ? ResponsiveMenuItemIconState.secondary
         : ResponsiveMenuItemIconState.primary;
@@ -115,10 +114,10 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = theme.brightness == Brightness.dark;
     final TextTheme textTheme = theme.textTheme;
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final bool isBigDesktop =
-        media.size.width > AppData.mediumDesktopWidthBreakpoint;
+        media.size.width > App.mediumDesktopWidthBreakpoint;
     final String materialType = theme.useMaterial3 ? 'M3 - ' : 'M2 - ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -132,21 +131,21 @@ class _HomePageState extends State<HomePage> {
         extendBodyBehindAppBar: true,
         extendBody: true,
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
+        breakpointShowFullMenu: App.desktopWidthBreakpoint,
         title: isPhone
             ? Text('$materialType '
                 '${AppColor.schemes[widget.controller.schemeIndex].name}')
-            : Text('${AppData.title(context)} '
+            : Text('${App.title(context)} '
                 '$materialType'
                 '${AppColor.schemes[widget.controller.schemeIndex].name}'),
-        menuTitle: const Text(AppData.packageName),
+        menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
-          AppData.title(context),
+          App.title(context),
           style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
         ),
-        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
-        menuItems: AppData.menuItems,
+        menuItems: App.menuItems,
         menuItemsEnabled: menuItemsEnabled,
         menuItemsIconState: menuItemsIconState,
         // Callback from menu, using simple index based actions here.

@@ -21,7 +21,7 @@ const bool _debug = !kReleaseMode && false;
 /// This is the two theme topics view of the Playground.
 ///
 /// Used only on big desktops, when desktop size is over
-/// [AppData.mediumDesktopWidthBreakpoint] in width.
+/// [App.mediumDesktopWidthBreakpoint] in width.
 ///
 /// This view no longer like the [ThemeTopicPage] keep the content of the two
 /// side-by-side theme topic panels in a [PageView], in fact there is no
@@ -109,13 +109,12 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
     final MediaQueryData media = MediaQuery.of(context);
 
     final bool isCompact = widget.controller.compactMode;
-    final bool isPinned = media.size.height >= AppData.pinnedSelector;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint ||
+    final bool isPinned = media.size.height >= App.pinnedSelector;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint ||
         isCompact;
-    final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
+    final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
     // The height diff of the switch = dense - normal.
     final double phoneSwitchReduce =
         isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
@@ -238,8 +237,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
 
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = widget.controller.compactMode;
-    final double margins =
-        AppData.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(media.size.width, isCompact);
     final double bottomPadding = media.padding.bottom;
 
     return Expanded(

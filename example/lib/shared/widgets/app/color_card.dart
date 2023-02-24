@@ -43,8 +43,8 @@ class ColorCard extends StatelessWidget {
     final String nameThatColor = ColorTools.nameThatColor(color);
     final String space = materialName == '' ? '' : ' ';
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
     final Size effectiveSize =
         size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));

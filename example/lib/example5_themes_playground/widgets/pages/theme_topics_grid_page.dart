@@ -106,12 +106,12 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = widget.controller.compactMode;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint ||
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint ||
         isCompact;
 
-    final double phoneReduce = isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final bool isPinned = media.size.height >= AppData.pinnedSelector;
+    final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
+    final bool isPinned = media.size.height >= App.pinnedSelector;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
@@ -125,8 +125,7 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
       // Just a suitable breakpoint for when we want to have more
       // than one column in the body with this particular content.
       final int columns = constraints.maxWidth ~/ 860 + 1;
-      final double margins =
-          AppData.responsiveInsets(media.size.width, isCompact);
+      final double margins = App.responsiveInsets(media.size.width, isCompact);
       // The height diff of the switch = dense - normal.
       final double phoneSwitchReduce =
           isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;

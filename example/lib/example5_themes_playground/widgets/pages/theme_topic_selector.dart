@@ -37,7 +37,7 @@ class _ThemeTopicSelectorHorizontalState
   void initState() {
     super.initState();
     selectedPage = widget.page;
-    scrollOffset = AppData.panelButtonWidth * selectedPage;
+    scrollOffset = App.panelButtonWidth * selectedPage;
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
@@ -57,11 +57,11 @@ class _ThemeTopicSelectorHorizontalState
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
       final MediaQueryData media = MediaQuery.of(context);
-      final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-          media.size.height < AppData.phoneHeightBreakpoint ||
+      final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+          media.size.height < App.phoneHeightBreakpoint ||
           widget.isCompact;
-      final double effectiveWidth = AppData.panelButtonWidth +
-          (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
+      final double effectiveWidth = App.panelButtonWidth +
+          (isPhone ? App.panelButtonPhoneWidthReduce : 0);
       scrollOffset = effectiveWidth * selectedPage;
       unawaited(scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
@@ -72,14 +72,14 @@ class _ThemeTopicSelectorHorizontalState
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint ||
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint ||
         widget.isCompact;
     final double margins =
-        AppData.responsiveInsets(media.size.width, widget.isCompact);
-    final double effectiveHeight = AppData.panelButtonHeight +
+        App.responsiveInsets(media.size.width, widget.isCompact);
+    final double effectiveHeight = App.panelButtonHeight +
         margins * 2 +
-        (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
+        (isPhone ? App.panelButtonPhoneHeightReduce : 0);
     final double topPadding = media.padding.top;
 
     return FocusTraversalGroup(
@@ -159,10 +159,10 @@ class _ThemeTopicSelectorVerticalState
   late int selectedPage;
   late double scrollOffset;
   static const double effectiveWidth =
-      AppData.panelButtonWidth + AppData.panelButtonPhoneWidthReduce;
-  static const double effectiveHeight = AppData.panelButtonHeight +
-      AppData.edgeInsetsPhone * 2 +
-      AppData.panelButtonPhoneHeightReduce;
+      App.panelButtonWidth + App.panelButtonPhoneWidthReduce;
+  static const double effectiveHeight = App.panelButtonHeight +
+      App.edgeInsetsPhone * 2 +
+      App.panelButtonPhoneHeightReduce;
 
   @override
   void initState() {
@@ -198,7 +198,7 @@ class _ThemeTopicSelectorVerticalState
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
     final double margins =
-        AppData.responsiveInsets(media.size.width, widget.isCompact);
+        App.responsiveInsets(media.size.width, widget.isCompact);
 
     return FocusTraversalGroup(
       child: ConstrainedBox(
@@ -276,11 +276,11 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint ||
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint ||
         widget.isCompact;
-    final double effectiveWidth = AppData.panelButtonWidth +
-        (isPhone ? AppData.panelButtonPhoneWidthReduce : 0);
+    final double effectiveWidth =
+        App.panelButtonWidth + (isPhone ? App.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;
     final double iconSize = isPhone ? 28 : 45;
     final double borderWidth = isPhone ? 3 : 5;

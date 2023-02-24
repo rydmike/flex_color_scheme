@@ -46,8 +46,8 @@ class _SubpageDemoState extends State<SubpageDemo> {
     final double bottomPadding =
         media.padding.bottom + kBottomNavigationBarHeight;
 
-    final bool isNarrow = media.size.width < AppData.phoneWidthBreakpoint;
-    final double sideMargin = isNarrow ? 8 : AppData.edgeInsetsTablet;
+    final bool isNarrow = media.size.width < App.phoneWidthBreakpoint;
+    final double sideMargin = isNarrow ? 8 : App.edgeInsetsTablet;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -80,9 +80,9 @@ class _SubpageDemoState extends State<SubpageDemo> {
               primary: true,
               padding: EdgeInsets.fromLTRB(
                 sideMargin,
-                topPadding + AppData.edgeInsetsTablet,
+                topPadding + App.edgeInsetsTablet,
                 sideMargin,
-                AppData.edgeInsetsTablet + bottomPadding,
+                App.edgeInsetsTablet + bottomPadding,
               ),
               children: <Widget>[
                 Text('Subpage Demo', style: headlineMedium),
@@ -114,18 +114,18 @@ class _SubpageDemoState extends State<SubpageDemo> {
                 // Show all key active theme colors.
                 Text('Theme Colors', style: headlineMedium),
                 const Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppData.edgeInsetsTablet),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                   child: ShowColorSchemeColors(),
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppData.edgeInsetsTablet),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                   child: ShowThemeDataColors(),
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppData.edgeInsetsTablet),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                   child: ShowSubThemeColors(),
                 ),
                 const Divider(),
