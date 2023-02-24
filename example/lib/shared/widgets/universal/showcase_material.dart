@@ -3281,8 +3281,7 @@ class SnackBarShowcase extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       const SizedBox(width: 24),
-                      Text('A floating SnackBar (style simulation)',
-                          style: snackStyle),
+                      Text('A floating SnackBar', style: snackStyle),
                       const Spacer(),
                       Text('Close', style: snackActionStyle),
                       const SizedBox(width: 24),
@@ -3309,8 +3308,7 @@ class SnackBarShowcase extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     const SizedBox(width: 24),
-                    Text('A fixed SnackBar (style simulation)',
-                        style: snackStyle),
+                    Text('A fixed SnackBar', style: snackStyle),
                     const Spacer(),
                     Text('Close', style: snackActionStyle),
                     const SizedBox(width: 24),
