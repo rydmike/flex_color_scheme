@@ -15,7 +15,9 @@ bool colorsAreClose(Color a, Color b, bool isLight) {
   // We get better results if we use a different trigger value for light
   // and dark mode.
   final int distance = dR * dR + dG * dG + dB * dB;
-  final int closeTrigger = isLight ? 58 : 100;
+  final int closeTrigger = isLight ? 62 : 100;
+
+  // debugPrint('Closeness: $distance');
 
   if (distance < closeTrigger) {
     return true;

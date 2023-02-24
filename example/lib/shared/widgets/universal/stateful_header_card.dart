@@ -30,6 +30,8 @@ class StatefulHeaderCard extends StatefulWidget {
     this.enabled = true,
     this.isOpen = true,
     this.duration = const Duration(milliseconds: 200),
+    this.startStraight = false,
+    this.endStraight = false,
     this.color,
     this.child,
   });
@@ -81,6 +83,16 @@ class StatefulHeaderCard extends StatefulWidget {
   /// The duration of the show and hide animation of child.
   final Duration duration;
 
+  /// The start side should be straight, no border radius.
+  ///
+  /// Defaults to false.
+  final bool startStraight;
+
+  /// The end side should be straight, no border radius.
+  ///
+  /// Defaults to false.
+  final bool endStraight;
+
   /// Define this color to override that automatic adaptive background color.
   final Color? color;
 
@@ -127,41 +139,35 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     final Color cardColor = widget.color ?? theme.cardColor;
     // Compute a header color with fixed primary blend from the card color,
     final Color headerColor = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
-    // Get the card's ShapeBorder from the theme card shape
-    ShapeBorder? shapeBorder = theme.cardTheme.shape;
+        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+
     final bool useHeading = widget.title != null ||
         widget.subtitle != null ||
         widget.leading != null;
-    // Make a shape border if Card or its header color are close in color
-    // to the scaffold background color, because if that happens we want to
-    // separate the header card from the background with a border.
-    if (colorsAreClose(cardColor, background, isLight) ||
-        (colorsAreClose(headerColor, background, isLight) && useHeading)) {
-      // If we had one shape, copy in a border side to it.
-      if (shapeBorder is RoundedRectangleBorder) {
-        shapeBorder = shapeBorder.copyWith(
-          side: BorderSide(
-            color: theme.dividerColor,
-            width: 1,
-          ),
-        );
-        // If
-      } else {
-        // If border was null, make one matching Card default, but with a
-        // BorderSide, if it was not null, we leave it as it was, it means it
-        // has some other preexisting ShapeBorder, but it was not a
-        // RoundedRectangleBorder, we don't know what it was, just let it be.
-        shapeBorder ??= RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-          side: BorderSide(
-            color: theme.dividerColor,
-            width: 1,
-          ),
-        );
-      }
+
+    // Default starting point value based on M3 and M2 mode spec values.
+    double borderRadius = useMaterial3 ? 12 : 4;
+    // Is themed? Try to get the radius from the theme and used that if it was.
+    final ShapeBorder? cardShape = theme.cardTheme.shape;
+    if (cardShape != null && cardShape is RoundedRectangleBorder) {
+      final BorderRadius shape = cardShape.borderRadius as BorderRadius;
+      borderRadius = shape.bottomLeft.x;
     }
+    final bool useBorderSide = colorsAreClose(cardColor, background, isLight) ||
+        (useHeading && colorsAreClose(headerColor, background, isLight));
+    final ShapeBorder shapeBorder = RoundedRectangleBorder(
+      borderRadius: BorderRadiusDirectional.horizontal(
+        start:
+            widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
+        end: widget.endStraight ? Radius.zero : Radius.circular(borderRadius),
+      ),
+      side: useBorderSide
+          ? BorderSide(
+              color: theme.dividerColor,
+              width: 0, // This gives a hairline 1 pc border
+            )
+          : BorderSide.none,
+    );
 
     return FocusTraversalGroup(
       child: Card(

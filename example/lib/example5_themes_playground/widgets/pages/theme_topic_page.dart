@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import '../../../shared/const/app_data.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
+import '../../../shared/utils/colors_are_close.dart';
 import '../../../shared/widgets/universal/header_card.dart';
 import '../shared/color_scheme_box.dart';
 import 'theme_color_selector.dart';
@@ -242,6 +243,14 @@ class _ThemePanelView extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
+    // Logic to show divider
+    final Color background = theme.scaffoldBackgroundColor;
+    final Color cardColor = theme.cardColor;
+    final Color headerColor = Color.alphaBlend(
+        theme.colorScheme.surfaceTint.withAlpha(isLight ? 12 : 15), cardColor);
+    final bool showDivider = !(colorsAreClose(cardColor, background, isLight) ||
+        colorsAreClose(headerColor, background, isLight));
+
     final MediaQueryData media = MediaQuery.of(context);
     final bool isCompact = controller.compactMode;
     final double margins = App.responsiveInsets(media.size.width, isCompact);
@@ -269,11 +278,12 @@ class _ThemePanelView extends StatelessWidget {
                 padding: EdgeInsetsDirectional.fromSTEB(
                   margins,
                   0,
-                  margins / (showSecondPage ? 2 : 1),
+                  showSecondPage ? 0 : margins,
                   margins + bottomPadding,
                 ),
                 children: <Widget>[
                   HeaderCard(
+                    endStraight: showSecondPage,
                     title: Text(themeTopics[leftPageIndex].heading),
                     leading:
                         Icon(themeTopics[leftPageIndex].icon, color: iconColor),
@@ -283,19 +293,25 @@ class _ThemePanelView extends StatelessWidget {
               ),
             ),
           ),
+          if (showSecondPage && showDivider)
+            VerticalDivider(
+              width: 1,
+              color: background,
+            ),
           if (showSecondPage)
             Expanded(
               child: ListView(
                   controller: ScrollController(),
                   primary: false,
                   padding: EdgeInsetsDirectional.fromSTEB(
-                    margins / 2,
+                    0,
                     0,
                     margins,
                     margins + bottomPadding,
                   ),
                   children: <Widget>[
                     HeaderCard(
+                      startStraight: true,
                       title: Text(themeTopics[sideViewIndex].heading),
                       leading: Icon(themeTopics[sideViewIndex].icon,
                           color: iconColor),

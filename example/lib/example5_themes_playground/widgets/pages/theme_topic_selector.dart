@@ -297,7 +297,7 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
 
     final bool isLight = theme.brightness == Brightness.light;
     final Color background = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
+        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
 
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),

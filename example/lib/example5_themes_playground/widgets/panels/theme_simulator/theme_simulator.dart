@@ -115,7 +115,8 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               value: widget.controller.deviceSize,
               onChanged: widget.controller.setDeviceSize,
             ),
-            Material(
+            Card(
+              margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
               elevation: 0,
               color: theme.colorScheme.surfaceVariant,
               child: ConstrainedBox(
