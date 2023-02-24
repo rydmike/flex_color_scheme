@@ -45,7 +45,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
   }
 
   String _phoneInfo(int phoneIndex) {
-    final SimDevice di = Simulator.devs[phoneIndex];
+    final SimDevice di = Simulator.devices[phoneIndex];
     final double resWidth = di.info.screenSize.width * di.info.pixelRatio;
     final double resHeight = di.info.screenSize.height * di.info.pixelRatio;
     return 'Device pixels ${di.info.screenSize.width.toStringAsFixed(0)}x'
@@ -93,8 +93,9 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               ),
             ),
             ListTile(
-              title: Text('${Simulator.devs[device].name} '
-                  '(${Simulator.devs[device].info.identifier.platform.name})'),
+              title: Text('${Simulator.devices[device].name} ('
+                  '${Simulator.devices[device].info.identifier.platform.name}'
+                  ')'),
               subtitle: Text(_phoneInfo(device)),
               trailing: Simulator(
                 index: device,
@@ -172,7 +173,7 @@ class SimulatorFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     return FocusTraversalGroup(
       child: DeviceFrame(
-        device: Simulator.devs[device].info,
+        device: Simulator.devices[device].info,
         orientation: Orientation.portrait,
         screen: Builder(
           builder: (BuildContext deviceContext) => MaterialApp(
@@ -215,7 +216,7 @@ class Simulator extends StatelessWidget {
   final int index;
   final ValueChanged<int>? onChanged;
 
-  static List<SimDevice> devs = <SimDevice>[
+  static List<SimDevice> devices = <SimDevice>[
     //
     // iPhones here
     SimDevice(
@@ -355,7 +356,7 @@ class Simulator extends StatelessWidget {
         },
         enabled: enabled,
         itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-              for (int i = 0; i < devs.length; i++)
+              for (int i = 0; i < devices.length; i++)
                 PopupMenuItem<int>(
                   value: i,
                   child: ListTile(
@@ -363,22 +364,22 @@ class Simulator extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                     leading: index == i
                         ? Icon(
-                            devs[i].icon,
-                            size: devs[i].size,
+                            devices[i].icon,
+                            size: devices[i].size,
                             color: iconColor,
                           )
                         : Icon(
-                            devs[i].icon,
-                            size: devs[i].size,
+                            devices[i].icon,
+                            size: devices[i].size,
                             color: unselectedIconColor,
                           ),
-                    title: Text(devs[i].name, style: txtStyle),
+                    title: Text(devices[i].name, style: txtStyle),
                   ),
                 )
             ],
         icon: Icon(
-          devs[index].icon,
-          size: devs[index].size,
+          devices[index].icon,
+          size: devices[index].size,
           color: iconColor,
         ));
   }
