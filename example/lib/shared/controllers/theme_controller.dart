@@ -320,8 +320,22 @@ class ThemeController with ChangeNotifier {
     _tabBarItemSchemeColorDark = await _themeService.load(
         Store.keyTabBarItemSchemeColorDark,
         Store.defaultTabBarItemSchemeColorDark);
+    _tabBarUnselectedItemSchemeColorLight = await _themeService.load(
+        Store.keyTabBarUnselectedItemSchemeColorLight,
+        Store.defaultTabBarUnselectedItemSchemeColorLight);
+    _tabBarUnselectedItemSchemeColorDark = await _themeService.load(
+        Store.keyTabBarUnselectedItemSchemeColorDark,
+        Store.defaultTabBarUnselectedItemSchemeColorDark);
+    _tabBarUnselectedItemOpacity = await _themeService.load(
+        Store.keyTabBarUnselectedItemOpacity,
+        Store.defaultTabBarUnselectedItemOpacity);
     _tabBarIndicatorSize = await _themeService.load(
         Store.keyTabBarIndicatorSize, Store.defaultTabBarIndicatorSize);
+    _tabBarIndicatorWeight = await _themeService.load(
+        Store.keyTabBarIndicatorWeight, Store.defaultTabBarIndicatorWeight);
+    _tabBarIndicatorTopRadius = await _themeService.load(
+        Store.keyTabBarIndicatorTopRadius,
+        Store.defaultTabBarIndicatorTopRadius);
     _tabBarDividerColor = await _themeService.load(
         Store.keyTabBarDividerColor, Store.defaultTabBarDividerColor);
     //
@@ -846,7 +860,15 @@ class ThemeController with ChangeNotifier {
     setTabBarItemSchemeColorLight(
         Store.defaultTabBarItemSchemeColorLight, false);
     setTabBarItemSchemeColorDark(Store.defaultTabBarItemSchemeColorDark, false);
+    setTabBarUnselectedItemSchemeColorLight(
+        Store.defaultTabBarUnselectedItemSchemeColorLight, false);
+    setTabBarUnselectedItemSchemeColorDark(
+        Store.defaultTabBarUnselectedItemSchemeColorDark, false);
+    setTabBarUnselectedItemOpacity(
+        Store.defaultTabBarUnselectedItemOpacity, false);
     setTabBarIndicatorSize(Store.defaultTabBarIndicatorSize, false);
+    setTabBarIndicatorWeight(Store.defaultTabBarIndicatorWeight, false);
+    setTabBarIndicatorTopRadius(Store.defaultTabBarIndicatorTopRadius, false);
     setTabBarDividerColor(Store.defaultTabBarDividerColor, false);
     //
     // Drawer SETTINGS.
@@ -2975,6 +2997,39 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTabBarItemSchemeColorDark, value));
   }
 
+  late SchemeColor? _tabBarUnselectedItemSchemeColorLight;
+  SchemeColor? get tabBarUnselectedItemSchemeColorLight =>
+      _tabBarUnselectedItemSchemeColorLight;
+  void setTabBarUnselectedItemSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _tabBarUnselectedItemSchemeColorLight) return;
+    _tabBarUnselectedItemSchemeColorLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyTabBarUnselectedItemSchemeColorLight, value));
+  }
+
+  late SchemeColor? _tabBarUnselectedItemSchemeColorDark;
+  SchemeColor? get tabBarUnselectedItemSchemeColorDark =>
+      _tabBarUnselectedItemSchemeColorDark;
+  void setTabBarUnselectedItemSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _tabBarUnselectedItemSchemeColorDark) return;
+    _tabBarUnselectedItemSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyTabBarUnselectedItemSchemeColorDark, value));
+  }
+
+  late double? _tabBarUnselectedItemOpacity;
+  double? get tabBarUnselectedItemOpacity => _tabBarUnselectedItemOpacity;
+  void setTabBarUnselectedItemOpacity(double? value, [bool notify = true]) {
+    if (value == _tabBarUnselectedItemOpacity) return;
+    _tabBarUnselectedItemOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarUnselectedItemOpacity, value));
+  }
+
   late TabBarIndicatorSize? _tabBarIndicatorSize;
   TabBarIndicatorSize? get tabBarIndicatorSize => _tabBarIndicatorSize;
   void setTabBarIndicatorSize(TabBarIndicatorSize? value,
@@ -2983,6 +3038,24 @@ class ThemeController with ChangeNotifier {
     _tabBarIndicatorSize = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTabBarIndicatorSize, value));
+  }
+
+  late double? _tabBarIndicatorWeight;
+  double? get tabBarIndicatorWeight => _tabBarIndicatorWeight;
+  void setTabBarIndicatorWeight(double? value, [bool notify = true]) {
+    if (value == _tabBarIndicatorWeight) return;
+    _tabBarIndicatorWeight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarIndicatorWeight, value));
+  }
+
+  late double? _tabBarIndicatorTopRadius;
+  double? get tabBarIndicatorTopRadius => _tabBarIndicatorTopRadius;
+  void setTabBarIndicatorTopRadius(double? value, [bool notify = true]) {
+    if (value == _tabBarIndicatorTopRadius) return;
+    _tabBarIndicatorTopRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarIndicatorTopRadius, value));
   }
 
   late Color? _tabBarDividerColor;

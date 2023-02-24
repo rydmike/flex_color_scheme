@@ -308,8 +308,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             bottomAppBarSchemeColor: controller.bottomAppBarSchemeColor,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
+            tabBarUnselectedItemSchemeColor:
+                controller.tabBarUnselectedItemSchemeColorLight,
+            tabBarUnselectedItemOpacity: controller.tabBarUnselectedItemOpacity,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             tabBarIndicatorSize: controller.tabBarIndicatorSize,
+            tabBarIndicatorWeight: controller.tabBarIndicatorWeight,
+            tabBarIndicatorTopRadius: controller.tabBarIndicatorTopRadius,
             tabBarDividerColor: controller.tabBarDividerColor,
             // Drawer Settings.
             drawerRadius: controller.drawerBorderRadius,

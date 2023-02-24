@@ -639,11 +639,46 @@ class Store {
   // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
+  // Key used to read and save the tabBarUnselectedItemSchemeColor value.
+  static const String keyTabBarUnselectedItemSchemeColorLight =
+      'tabBarUnselectedItemSchemeColorLight';
+  // Default value for the tabBarUnselectedItemSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const SchemeColor? defaultTabBarUnselectedItemSchemeColorLight = null;
+
+  // Key used to read and save the tabBarUnselectedItemSchemeColorDark value.
+  static const String keyTabBarUnselectedItemSchemeColorDark =
+      'tabBarUnselectedItemSchemeColorDark';
+  // Default value for the tabBarUnselectedItemSchemeColorDark,
+  // also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const SchemeColor? defaultTabBarUnselectedItemSchemeColorDark = null;
+
+  // Key used to read and save the tabBarUnselectedItemOpacity value.
+  static const String keyTabBarUnselectedItemOpacity =
+      'tabBarUnselectedItemOpacity';
+  // Default value for the tabBarUnselectedItemOpacity, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const double? defaultTabBarUnselectedItemOpacity = null;
+
   // Key used to read and save the tabBarIndicatorSize value.
   static const String keyTabBarIndicatorSize = 'tabBarIndicatorSize';
   // Default value for the tabBarIndicatorSize, also to reset settings.
   // We use NULL as default, this nullable setting.
   static const TabBarIndicatorSize? defaultTabBarIndicatorSize = null;
+
+  // Key used to read and save the tabBarIndicatorWeight value.
+  static const String keyTabBarIndicatorWeight = 'tabBarIndicatorWeight';
+  // Default value for the tabBarIndicatorWeight, also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultTabBarIndicatorWeight = null;
+
+  // Key used to read and save the tabBarIndicatorTopRadius value.
+  static const String keyTabBarIndicatorTopRadius = 'tabBarIndicatorTopRadius';
+  // Default value for the tabBarIndicatorTopRadius, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultTabBarIndicatorTopRadius = null;
 
   // Key used to read and save the tabBarDividerColor value.
   static const String keyTabBarDividerColor = 'tabBarDividerColor';

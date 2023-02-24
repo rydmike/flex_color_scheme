@@ -6086,7 +6086,7 @@ class FlexColorScheme with Diagnosticable {
     // Popupmenu menu background Color and elevation.
     final double popupMenuElevation = subTheme.popupMenuElevation ??
         (useMaterial3 ? kPopupMenuM3Elevation : kPopupMenuM2Elevation);
-    final Color? poupMenuBackgroundColor = subTheme.popupMenuOpacity == null
+    final Color? popupMenuBackgroundColor = subTheme.popupMenuOpacity == null
         ? subTheme.popupMenuSchemeColor == null
             ? null
             : FlexSubThemes.schemeColor(
@@ -6840,7 +6840,7 @@ class FlexColorScheme with Diagnosticable {
                       : math.min(subTheme.defaultRadius!, 10.0)),
               // textStyle: effectiveTextTheme.labelLarge,
               elevation: popupMenuElevation,
-              color: poupMenuBackgroundColor,
+              color: popupMenuBackgroundColor,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,
               foregroundSchemeColor: SchemeColor.surface,
               surfaceTintColor: removeTint ? Colors.transparent : null,

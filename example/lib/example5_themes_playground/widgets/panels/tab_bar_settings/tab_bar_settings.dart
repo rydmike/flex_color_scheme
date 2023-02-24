@@ -41,6 +41,28 @@ class TabBarSettings extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
     //     color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
+    final bool unselectedOpacityEnabled = controller.useSubThemes &&
+        controller.useFlexColorScheme &&
+        controller.tabBarItemSchemeColorLight != null;
+    final double unselectedOpacity = unselectedOpacityEnabled
+        ? (controller.tabBarUnselectedItemOpacity ?? -0.01)
+        : -0.01;
+
+    // Logic for default indicator weight label.
+    final String weightDefaultLabel = controller.tabBarIndicatorWeight == null
+        ? controller.useMaterial3
+            ? 'default 3'
+            : 'default 2'
+        : controller.tabBarIndicatorWeight!.toStringAsFixed(1);
+    // Logic for default indicator top radius label.
+    final String topRadiusDefaultLabel =
+        controller.tabBarIndicatorTopRadius == null
+            ? controller.useMaterial3
+                ? 'default 3'
+                : 'default 0'
+            : controller.tabBarIndicatorTopRadius!.toStringAsFixed(1);
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -90,7 +112,7 @@ class TabBarSettings extends StatelessWidget {
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
-            title: const Text('Light TabBar items color'),
+            title: const Text('Light selected item color'),
             labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarItemSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -105,7 +127,22 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           ),
           ColorSchemePopupMenu(
-            title: const Text('Light TabBar indicator color'),
+            title: const Text('Light unselected items color'),
+            labelForDefault: 'default (TabBarStyle)',
+            index: controller.tabBarUnselectedItemSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarUnselectedItemSchemeColorLight(null);
+                    } else {
+                      controller.setTabBarUnselectedItemSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light indicator color'),
             labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarIndicatorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -121,7 +158,7 @@ class TabBarSettings extends StatelessWidget {
           )
         ] else ...<Widget>[
           ColorSchemePopupMenu(
-            title: const Text('Dark TabBar items color'),
+            title: const Text('Dark selected item color'),
             labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarItemSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -136,7 +173,22 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           ),
           ColorSchemePopupMenu(
-            title: const Text('Dark TabBar indicator color'),
+            title: const Text('Dark unselected items color'),
+            labelForDefault: 'default (TabBarStyle)',
+            index: controller.tabBarUnselectedItemSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setTabBarUnselectedItemSchemeColorDark(null);
+                    } else {
+                      controller.setTabBarUnselectedItemSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Dark indicator color'),
             labelForDefault: 'default (TabBarStyle)',
             index: controller.tabBarIndicatorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -151,8 +203,61 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           )
         ],
+        ListTile(
+          enabled: unselectedOpacityEnabled,
+          title: const Text('Unselected item opacity'),
+          subtitle: Slider(
+            min: -1,
+            max: 100,
+            divisions: 101,
+            label: unselectedOpacityEnabled
+                ? controller.tabBarUnselectedItemOpacity == null ||
+                        (controller.tabBarUnselectedItemOpacity ?? -1) < 0
+                    ? controller.useMaterial3
+                        ? 'default 100%'
+                        : 'default 70%'
+                    : (unselectedOpacity * 100).toStringAsFixed(0)
+                : controller.useMaterial3
+                    ? 'default 100%'
+                    : 'default 70%',
+            value: unselectedOpacity * 100,
+            onChanged: unselectedOpacityEnabled
+                ? (double value) {
+                    controller.setTabBarUnselectedItemOpacity(
+                        value < 0 ? null : value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  unselectedOpacityEnabled
+                      ? controller.tabBarUnselectedItemOpacity == null ||
+                              (controller.tabBarUnselectedItemOpacity ?? -1) < 0
+                          ? controller.useMaterial3
+                              ? 'default 100%'
+                              : 'default 70%'
+                          : '${(unselectedOpacity * 100).toStringAsFixed(0)} %'
+                      : controller.useMaterial3
+                          ? 'default 100%'
+                          : 'default 70%',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ),
         TabBarIndicatorSizePopupMenu(
-          title: const Text('Select TabBar indicator style'),
+          title: const Text('Select indicator style'),
           labelForDefault: useMaterial3 ? 'Default (label)' : 'Default (tab)',
           index: controller.tabBarIndicatorSize?.index ?? -1,
           onChanged: controller.useFlexColorScheme && controller.useSubThemes
@@ -165,6 +270,113 @@ class TabBarSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator weight'),
+          subtitle: Slider(
+            min: -1,
+            max: 10,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.tabBarIndicatorWeight == null ||
+                        (controller.tabBarIndicatorWeight ?? -1) < 0
+                    ? weightDefaultLabel
+                    : (controller.tabBarIndicatorWeight?.toStringAsFixed(1) ??
+                        '')
+                : controller.useMaterial3
+                    ? 'default 3'
+                    : 'default 2',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.tabBarIndicatorWeight ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setTabBarIndicatorWeight(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.tabBarIndicatorWeight == null ||
+                              (controller.tabBarIndicatorWeight ?? -1) < 0
+                          ? weightDefaultLabel
+                          : (controller.tabBarIndicatorWeight
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : controller.useMaterial3
+                          ? 'default 3'
+                          : 'default 2',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator top edge radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 10,
+            divisions: 11,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.tabBarIndicatorTopRadius == null ||
+                        (controller.tabBarIndicatorTopRadius ?? -1) < 0
+                    ? topRadiusDefaultLabel
+                    : (controller.tabBarIndicatorTopRadius
+                            ?.toStringAsFixed(1) ??
+                        '')
+                : controller.useMaterial3
+                    ? 'default 3'
+                    : 'default 0',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.tabBarIndicatorTopRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setTabBarIndicatorTopRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'ELEV',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.tabBarIndicatorTopRadius == null ||
+                              (controller.tabBarIndicatorTopRadius ?? -1) < 0
+                          ? topRadiusDefaultLabel
+                          : (controller.tabBarIndicatorTopRadius
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : controller.useMaterial3
+                          ? 'default 3'
+                          : 'default 0',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
         SwitchListTile(
           title: const Text('Remove bottom divider'),

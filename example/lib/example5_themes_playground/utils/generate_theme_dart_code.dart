@@ -704,6 +704,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorLight},\n'
       : '';
+  final String tabBarUnselectedItemSchemeColorLight = controller
+              .tabBarUnselectedItemSchemeColorLight !=
+          null
+      ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorLight},\n'
+      : '';
   final String tabBarIndicatorSchemeColorLight = controller
               .tabBarIndicatorLight !=
           null
@@ -714,13 +719,30 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorDark},\n'
       : '';
+  final String tabBarUnselectedItemSchemeColorDark = controller
+              .tabBarUnselectedItemSchemeColorDark !=
+          null
+      ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorDark},\n'
+      : '';
   final String tabBarIndicatorSchemeColorDark = controller
               .tabBarIndicatorDark !=
           null
       ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorDark},\n'
       : '';
+  final String tabBarUnselectedItemOpacity = controller
+              .tabBarUnselectedItemOpacity !=
+          null
+      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacity},\n'
+      : '';
   final String tabBarIndicatorSize = controller.tabBarIndicatorSize != null
       ? '    tabBarIndicatorSize: ${controller.tabBarIndicatorSize},\n'
+      : '';
+  final String tabBarIndicatorWeight = controller.tabBarIndicatorWeight != null
+      ? '    tabBarIndicatorWeight: ${controller.tabBarIndicatorWeight},\n'
+      : '';
+  final String tabBarIndicatorTopRadius = controller.tabBarIndicatorTopRadius !=
+          null
+      ? '    tabBarIndicatorTopRadius: ${controller.tabBarIndicatorTopRadius},\n'
       : '';
   final String tabBarDividerColor = controller.tabBarDividerColor != null
       ? '    tabBarDividerColor: ${controller.tabBarDividerColor},\n'
@@ -1123,7 +1145,11 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$tabBarItemSchemeColorLight'
           '$tabBarIndicatorSchemeColorLight'
+          '$tabBarUnselectedItemSchemeColorLight'
+          '$tabBarUnselectedItemOpacity'
           '$tabBarIndicatorSize'
+          '$tabBarIndicatorWeight'
+          '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
           //
           '$drawerBorderRadius'
@@ -1311,7 +1337,11 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$tabBarItemSchemeColorDark'
           '$tabBarIndicatorSchemeColorDark'
+          '$tabBarUnselectedItemSchemeColorDark'
+          '$tabBarUnselectedItemOpacity'
           '$tabBarIndicatorSize'
+          '$tabBarIndicatorWeight'
+          '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
           //
           '$drawerBorderRadius'

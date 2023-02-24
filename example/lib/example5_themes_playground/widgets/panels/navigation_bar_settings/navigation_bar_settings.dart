@@ -39,7 +39,7 @@ class NavigationBarSettings extends StatelessWidget {
         ? controller.useMaterial3
             ? 'default 3'
             : 'default 0'
-        : 'global ${controller.navBarElevation!.toStringAsFixed(1)}';
+        : controller.navBarElevation!.toStringAsFixed(1);
 
     // Logic for background color label.
     String backgroundColorLabel() {
