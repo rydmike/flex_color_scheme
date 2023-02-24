@@ -26,17 +26,17 @@ const bool _debug = !kReleaseMode && false;
 /// This view no longer like the [ThemeTopicPage] keep the content of the two
 /// side-by-side theme topic panels in a [PageView], in fact there is no
 /// [PageView] in this layout, it is a lot simpler that way.
-/// They however still in [NestedScrollView] body. The used
-/// [VerticalThemePanelView] are identical, they just use different index and
-/// have control that selects if the [ThemeTopicSelectorVertical] selector
-/// should be on the left o right side.
+/// It is just a [CustomScrollView] with a [SliverPersistentHeader] and the
+/// same [ThemeColorSelectorHeaderDelegate] that is used in the large masonry
+/// grid view.
 ///
-/// One advantage with this scroll vie is that the two side can scroll more
-/// independently from each other than in [ThemeTopicPage] where they are in
-/// the same [PageView]. Still debating if I should make them even more
-/// independent of each other by not having them in a [NestedScrollView] but
-/// just a [CustomScrollView] instead. Will try how it feels and works in
-/// practice later.
+/// The used [VerticalThemePanelView]s are identical, they just use different
+/// index and have control that selects if the [ThemeTopicSelectorVertical]
+/// selector should be on the left o right side.
+///
+/// One advantage with this scroll view is that the two sides scroll
+/// independently from each other, not as in the [ThemeTopicPage] where they
+/// are in the same [PageView] and partially scroll together.
 ///
 /// This view was a quick rework of [ThemeTopicPage] to create a totally
 /// new layout by mostly re-using already existing parts in the app.
@@ -64,7 +64,7 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
     super.initState();
     scrollController = ScrollController(
       keepScrollOffset: true,
-      debugLabel: 'PanelViewScrollController',
+      debugLabel: 'ThemeTwoTopicsPageScrollController',
     );
     previousSchemeIndex = widget.controller.schemeIndex;
     previousUseFlexColorScheme = widget.controller.useFlexColorScheme;
@@ -142,26 +142,20 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
       debugPrint('media.size.width ........ : ${media.size.width}');
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
-    return Scrollbar(
-      controller: scrollController,
-      child: NestedScrollView(
-        controller: scrollController,
-        headerSliverBuilder: (BuildContext context, bool value) {
-          return <Widget>[
-            SliverPersistentHeader(
-              pinned: isPinned,
-              floating: true,
-              delegate: ThemeColorSelectorHeaderDelegate(
-                vsync: this,
-                extent: headerExtent,
-                controller: controller,
-                updateDelegate: updateDelegate,
-              ),
-            ),
-          ];
-        },
-        body: Padding(
-          padding: EdgeInsets.only(top: margins),
+    return CustomScrollView(controller: scrollController, slivers: <Widget>[
+      SliverPersistentHeader(
+        pinned: isPinned,
+        floating: true,
+        delegate: ThemeColorSelectorHeaderDelegate(
+          vsync: this,
+          extent: headerExtent,
+          controller: controller,
+          updateDelegate: updateDelegate,
+        ),
+      ),
+      SliverPadding(
+        padding: EdgeInsets.only(top: margins),
+        sliver: SliverFillRemaining(
           child: Row(
             children: <Widget>[
               VerticalThemePanelView(
@@ -181,7 +175,7 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
           ),
         ),
       ),
-    );
+    ]);
   }
 }
 
@@ -216,6 +210,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
     super.initState();
     scrollController = ScrollController(
       keepScrollOffset: true,
+      debugLabel: widget.isRight ? 'Right panel' : 'Left panel',
     );
   }
 
@@ -257,6 +252,8 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
             child: ListView(
               primary: false,
               controller: scrollController,
+              // TODO(rydmike): Do we keep bounce or clamp it down. TBD.
+              // physics: const ClampingScrollPhysics(),
               padding: EdgeInsets.fromLTRB(
                 widget.isRight ? margins / 2 : 4,
                 0,
