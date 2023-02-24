@@ -24,7 +24,7 @@ class UseTinted3TextTheme extends StatelessWidget {
         : SwitchListTile(
             title: const Text('Dark mode TextTheme is tinted'),
             subtitle: const Text('A hint of tint color, typically primary, is '
-                'mixed into main and primary text theme This style divides '
+                'mixed into main and primary text theme. This style divides '
                 'opinions. Keep it OFF for default white and light grey text.'),
             value: controller.blendDarkTextTheme &&
                 controller.useSubThemes &&
