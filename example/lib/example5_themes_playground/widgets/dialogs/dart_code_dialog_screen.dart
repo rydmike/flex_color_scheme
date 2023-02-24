@@ -49,7 +49,9 @@ class DartCodeDialogScreen extends StatelessWidget {
     final Color background = theme.colorScheme.surface;
     final Color backgroundColor = theme.useMaterial3
         ? ElevationOverlay.applySurfaceTint(
-            background, theme.colorScheme.surfaceTint, elevation)
+            background,
+            theme.dialogTheme.surfaceTintColor ?? theme.colorScheme.surfaceTint,
+            elevation)
         : ElevationOverlay.applyOverlay(context, background, elevation);
 
     return ScaffoldMessenger(
