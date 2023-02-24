@@ -204,6 +204,15 @@ class ThemeColorsSettings extends StatelessWidget {
                     : null,
               ),
               ListTile(
+                enabled: controller.useToDarkMethod &&
+                    controller.useFlexColorScheme &&
+                    !controller.useKeyColors,
+                title: const Text('Blend level'),
+                subtitle: const Text('Adjust blend level to desaturate the '
+                    'the light mode colors to make them work better in your '
+                    'dark theme'),
+              ),
+              ListTile(
                 title: Slider(
                   max: 100,
                   divisions: 100,
