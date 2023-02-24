@@ -171,17 +171,15 @@ class SimulatorFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FocusTraversalGroup(
-      child: DeviceFrame(
-        device: Simulator.devices[device].info,
-        orientation: Orientation.portrait,
-        screen: Builder(
-          builder: (BuildContext deviceContext) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: true,
-            theme: Theme.of(context),
-            home: child,
-          ),
+    return DeviceFrame(
+      device: Simulator.devices[device].info,
+      orientation: Orientation.portrait,
+      screen: Builder(
+        builder: (BuildContext deviceContext) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          useInheritedMediaQuery: true,
+          theme: Theme.of(context),
+          home: child,
         ),
       ),
     );

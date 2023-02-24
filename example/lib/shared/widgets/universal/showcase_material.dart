@@ -159,25 +159,27 @@ class ElevatedButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Elevated button'),
-        ),
-        ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: const Text('Elevated icon'),
-        ),
-        const ElevatedButton(
-          onPressed: null,
-          child: Text('Elevated button'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Elevated button'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('Elevated icon'),
+          ),
+          const ElevatedButton(
+            onPressed: null,
+            child: Text('Elevated button'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -187,25 +189,27 @@ class FilledButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        FilledButton(
-          onPressed: () {},
-          child: const Text('Filled button'),
-        ),
-        FilledButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: const Text('Filled icon'),
-        ),
-        const FilledButton(
-          onPressed: null,
-          child: Text('Filled button'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          FilledButton(
+            onPressed: () {},
+            child: const Text('Filled button'),
+          ),
+          FilledButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('Filled icon'),
+          ),
+          const FilledButton(
+            onPressed: null,
+            child: Text('Filled button'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -215,25 +219,27 @@ class FilledButtonTonalShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        FilledButton.tonal(
-          onPressed: () {},
-          child: const Text('Filled tonal button'),
-        ),
-        FilledButton.tonalIcon(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: const Text('Filled tonal icon'),
-        ),
-        const FilledButton.tonal(
-          onPressed: null,
-          child: Text('Filled tonal button'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          FilledButton.tonal(
+            onPressed: () {},
+            child: const Text('Filled tonal button'),
+          ),
+          FilledButton.tonalIcon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('Filled tonal icon'),
+          ),
+          const FilledButton.tonal(
+            onPressed: null,
+            child: Text('Filled tonal button'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -243,25 +249,27 @@ class OutlinedButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        OutlinedButton(
-          onPressed: () {},
-          child: const Text('Outlined button'),
-        ),
-        OutlinedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: const Text('Outlined icon'),
-        ),
-        const OutlinedButton(
-          onPressed: null,
-          child: Text('Outlined button'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          OutlinedButton(
+            onPressed: () {},
+            child: const Text('Outlined button'),
+          ),
+          OutlinedButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('Outlined icon'),
+          ),
+          const OutlinedButton(
+            onPressed: null,
+            child: Text('Outlined button'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -271,25 +279,27 @@ class TextButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        TextButton(
-          onPressed: () {},
-          child: const Text('Text button'),
-        ),
-        TextButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-          label: const Text('Text icon'),
-        ),
-        const TextButton(
-          onPressed: null,
-          child: Text('Text button'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          TextButton(
+            onPressed: () {},
+            child: const Text('Text button'),
+          ),
+          TextButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('Text icon'),
+          ),
+          const TextButton(
+            onPressed: null,
+            child: Text('Text button'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -307,49 +317,51 @@ class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        ToggleButtons(
-          isSelected: selected,
-          onPressed: (int toggledIndex) {
-            setState(() {
-              selected[toggledIndex] = !selected[toggledIndex];
-            });
-          },
-          children: const <Widget>[
-            Icon(Icons.adb),
-            Icon(Icons.phone),
-            Icon(Icons.account_circle),
-          ],
-        ),
-        if (widget.compareButtons ?? false)
-          OutlinedButton(
-            onPressed: () {},
-            child: const Text('Outlined'),
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          ToggleButtons(
+            isSelected: selected,
+            onPressed: (int toggledIndex) {
+              setState(() {
+                selected[toggledIndex] = !selected[toggledIndex];
+              });
+            },
+            children: const <Widget>[
+              Icon(Icons.adb),
+              Icon(Icons.phone),
+              Icon(Icons.account_circle),
+            ],
           ),
-        if (widget.compareButtons ?? false)
-          FilledButton(
-            onPressed: () {},
-            child: const Text('Filled'),
-          ),
-        ToggleButtons(
-          isSelected: const <bool>[true, false, false],
-          onPressed: null,
-          children: const <Widget>[
-            Icon(Icons.adb),
-            Icon(Icons.phone),
-            Icon(Icons.account_circle),
-          ],
-        ),
-        if (widget.compareButtons ?? false)
-          const OutlinedButton(
+          if (widget.compareButtons ?? false)
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text('Outlined'),
+            ),
+          if (widget.compareButtons ?? false)
+            FilledButton(
+              onPressed: () {},
+              child: const Text('Filled'),
+            ),
+          ToggleButtons(
+            isSelected: const <bool>[true, false, false],
             onPressed: null,
-            child: Text('Outlined'),
+            children: const <Widget>[
+              Icon(Icons.adb),
+              Icon(Icons.phone),
+              Icon(Icons.account_circle),
+            ],
           ),
-      ],
+          if (widget.compareButtons ?? false)
+            const OutlinedButton(
+              onPressed: null,
+              child: Text('Outlined'),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -371,101 +383,103 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        SegmentedButton<Calendar>(
-          showSelectedIcon: false,
-          segments: const <ButtonSegment<Calendar>>[
-            ButtonSegment<Calendar>(
-              value: Calendar.day,
-              label: Text('Day'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.week,
-              label: Text('Week'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.month,
-              label: Text('Month'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.year,
-              label: Text('Year'),
-            ),
-          ],
-          selected: <Calendar>{_selected},
-          onSelectionChanged: (Set<Calendar> selected) {
-            setState(() {
-              _selected = selected.first;
-            });
-          },
-        ),
-        SegmentedButton<Calendar>(
-          segments: const <ButtonSegment<Calendar>>[
-            ButtonSegment<Calendar>(
-              value: Calendar.day,
-              label: Text('Day'),
-              icon: Icon(Icons.calendar_view_day),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.week,
-              icon: Icon(Icons.calendar_view_week),
-              label: Text('Week'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.month,
-              icon: Icon(Icons.calendar_view_month),
-              label: Text('Month'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.year,
-              icon: Icon(Icons.calendar_today),
-              label: Text('Year'),
-            ),
-          ],
-          selected: <Calendar>{_selected},
-          onSelectionChanged: (Set<Calendar> selected) {
-            setState(() {
-              _selected = selected.first;
-            });
-          },
-        ),
-        SegmentedButton<Calendar>(
-          segments: const <ButtonSegment<Calendar>>[
-            ButtonSegment<Calendar>(
-              value: Calendar.day,
-              label: Text('Day'),
-              icon: Icon(Icons.calendar_view_day),
-              enabled: false,
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.week,
-              icon: Icon(Icons.calendar_view_week),
-              label: Text('Week'),
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.month,
-              icon: Icon(Icons.calendar_view_month),
-              label: Text('Month'),
-              enabled: false,
-            ),
-            ButtonSegment<Calendar>(
-              value: Calendar.year,
-              icon: Icon(Icons.calendar_today),
-              label: Text('Year'),
-            ),
-          ],
-          selected: <Calendar>{_selected},
-          onSelectionChanged: (Set<Calendar> selected) {
-            setState(() {
-              _selected = selected.first;
-            });
-          },
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          SegmentedButton<Calendar>(
+            showSelectedIcon: false,
+            segments: const <ButtonSegment<Calendar>>[
+              ButtonSegment<Calendar>(
+                value: Calendar.day,
+                label: Text('Day'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.week,
+                label: Text('Week'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.month,
+                label: Text('Month'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.year,
+                label: Text('Year'),
+              ),
+            ],
+            selected: <Calendar>{_selected},
+            onSelectionChanged: (Set<Calendar> selected) {
+              setState(() {
+                _selected = selected.first;
+              });
+            },
+          ),
+          SegmentedButton<Calendar>(
+            segments: const <ButtonSegment<Calendar>>[
+              ButtonSegment<Calendar>(
+                value: Calendar.day,
+                label: Text('Day'),
+                icon: Icon(Icons.calendar_view_day),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.week,
+                icon: Icon(Icons.calendar_view_week),
+                label: Text('Week'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.month,
+                icon: Icon(Icons.calendar_view_month),
+                label: Text('Month'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.year,
+                icon: Icon(Icons.calendar_today),
+                label: Text('Year'),
+              ),
+            ],
+            selected: <Calendar>{_selected},
+            onSelectionChanged: (Set<Calendar> selected) {
+              setState(() {
+                _selected = selected.first;
+              });
+            },
+          ),
+          SegmentedButton<Calendar>(
+            segments: const <ButtonSegment<Calendar>>[
+              ButtonSegment<Calendar>(
+                value: Calendar.day,
+                label: Text('Day'),
+                icon: Icon(Icons.calendar_view_day),
+                enabled: false,
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.week,
+                icon: Icon(Icons.calendar_view_week),
+                label: Text('Week'),
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.month,
+                icon: Icon(Icons.calendar_view_month),
+                label: Text('Month'),
+                enabled: false,
+              ),
+              ButtonSegment<Calendar>(
+                value: Calendar.year,
+                icon: Icon(Icons.calendar_today),
+                label: Text('Year'),
+              ),
+            ],
+            selected: <Calendar>{_selected},
+            onSelectionChanged: (Set<Calendar> selected) {
+              setState(() {
+                _selected = selected.first;
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -475,41 +489,43 @@ class FabShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        FloatingActionButton.small(
-          heroTag: 'FAB small',
-          onPressed: () {},
-          child: const Icon(Icons.accessibility),
-        ),
-        FloatingActionButton.extended(
-          heroTag: 'FAB extended false',
-          isExtended: false,
-          onPressed: () {},
-          icon: const Icon(Icons.accessibility),
-          label: const Text('Extended'),
-        ),
-        FloatingActionButton.extended(
-          heroTag: 'FAB extended true',
-          isExtended: true,
-          onPressed: () {},
-          icon: const Icon(Icons.accessibility),
-          label: const Text('Extended'),
-        ),
-        FloatingActionButton(
-          heroTag: 'FAB standard',
-          onPressed: () {},
-          child: const Icon(Icons.accessibility),
-        ),
-        FloatingActionButton.large(
-          heroTag: 'FAB large',
-          onPressed: () {},
-          child: const Icon(Icons.accessibility),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          FloatingActionButton.small(
+            heroTag: 'FAB small',
+            onPressed: () {},
+            child: const Icon(Icons.accessibility),
+          ),
+          FloatingActionButton.extended(
+            heroTag: 'FAB extended false',
+            isExtended: false,
+            onPressed: () {},
+            icon: const Icon(Icons.accessibility),
+            label: const Text('Extended'),
+          ),
+          FloatingActionButton.extended(
+            heroTag: 'FAB extended true',
+            isExtended: true,
+            onPressed: () {},
+            icon: const Icon(Icons.accessibility),
+            label: const Text('Extended'),
+          ),
+          FloatingActionButton(
+            heroTag: 'FAB standard',
+            onPressed: () {},
+            child: const Icon(Icons.accessibility),
+          ),
+          FloatingActionButton.large(
+            heroTag: 'FAB large',
+            onPressed: () {},
+            child: const Icon(Icons.accessibility),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -527,52 +543,54 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        Switch(
-          value: isOn1,
-          onChanged: (bool value) {
-            setState(() {
-              isOn1 = value;
-            });
-          },
-        ),
-        Switch(
-          thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
-              return const Icon(Icons.check);
-            }
-            // All other states will use the default thumbIcon.
-            return const Icon(Icons.close);
-          }),
-          value: isOn1,
-          onChanged: (bool value) {
-            setState(() {
-              isOn1 = value;
-            });
-          },
-        ),
-        Switch(
-          value: isOn2,
-          onChanged: (bool value) {
-            setState(() {
-              isOn2 = value;
-            });
-          },
-        ),
-        const Switch(
-          value: true,
-          onChanged: null,
-        ),
-        const Switch(
-          value: false,
-          onChanged: null,
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          Switch(
+            value: isOn1,
+            onChanged: (bool value) {
+              setState(() {
+                isOn1 = value;
+              });
+            },
+          ),
+          Switch(
+            thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return const Icon(Icons.check);
+              }
+              // All other states will use the default thumbIcon.
+              return const Icon(Icons.close);
+            }),
+            value: isOn1,
+            onChanged: (bool value) {
+              setState(() {
+                isOn1 = value;
+              });
+            },
+          ),
+          Switch(
+            value: isOn2,
+            onChanged: (bool value) {
+              setState(() {
+                isOn2 = value;
+              });
+            },
+          ),
+          const Switch(
+            value: true,
+            onChanged: null,
+          ),
+          const Switch(
+            value: false,
+            onChanged: null,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -590,46 +608,48 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        Checkbox(
-          value: isSelected1,
-          onChanged: (bool? value) {
-            setState(() {
-              isSelected1 = value;
-            });
-          },
-        ),
-        Checkbox(
-          tristate: true,
-          value: isSelected2,
-          onChanged: (bool? value) {
-            setState(() {
-              isSelected2 = value;
-            });
-          },
-        ),
-        Checkbox(
-          value: false,
-          onChanged: (bool? value) {},
-        ),
-        const Checkbox(
-          value: true,
-          onChanged: null,
-        ),
-        const Checkbox(
-          value: null,
-          tristate: true,
-          onChanged: null,
-        ),
-        const Checkbox(
-          value: false,
-          onChanged: null,
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          Checkbox(
+            value: isSelected1,
+            onChanged: (bool? value) {
+              setState(() {
+                isSelected1 = value;
+              });
+            },
+          ),
+          Checkbox(
+            tristate: true,
+            value: isSelected2,
+            onChanged: (bool? value) {
+              setState(() {
+                isSelected2 = value;
+              });
+            },
+          ),
+          Checkbox(
+            value: false,
+            onChanged: (bool? value) {},
+          ),
+          const Checkbox(
+            value: true,
+            onChanged: null,
+          ),
+          const Checkbox(
+            value: null,
+            tristate: true,
+            onChanged: null,
+          ),
+          const Checkbox(
+            value: false,
+            onChanged: null,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -646,40 +666,42 @@ class _RadioShowcaseState extends State<RadioShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        Radio<bool>(
-          value: true,
-          groupValue: groupValue,
-          onChanged: (bool? value) {
-            setState(() {
-              groupValue = value;
-            });
-          },
-        ),
-        Radio<bool>(
-          value: false,
-          groupValue: groupValue,
-          onChanged: (bool? value) {
-            setState(() {
-              groupValue = value;
-            });
-          },
-        ),
-        Radio<bool>(
-          value: true,
-          groupValue: groupValue,
-          onChanged: null,
-        ),
-        Radio<bool>(
-          value: false,
-          groupValue: groupValue,
-          onChanged: null,
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          Radio<bool>(
+            value: true,
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+          ),
+          Radio<bool>(
+            value: false,
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+          ),
+          Radio<bool>(
+            value: true,
+            groupValue: groupValue,
+            onChanged: null,
+          ),
+          Radio<bool>(
+            value: false,
+            groupValue: groupValue,
+            onChanged: null,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -904,17 +926,19 @@ class PopupMenuButtonShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<int>(
-      onSelected: (_) {},
-      position: PopupMenuPosition.under,
-      itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
-        PopupMenuItem<int>(value: 1, child: Text('Option 1')),
-        PopupMenuItem<int>(value: 2, child: Text('Option 2')),
-        PopupMenuItem<int>(value: 3, child: Text('Option 3')),
-        PopupMenuItem<int>(value: 4, child: Text('Option 4')),
-        PopupMenuItem<int>(value: 5, child: Text('Option 5')),
-      ],
-      icon: const Icon(Icons.more_vert),
+    return RepaintBoundary(
+      child: PopupMenuButton<int>(
+        onSelected: (_) {},
+        position: PopupMenuPosition.under,
+        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
+          PopupMenuItem<int>(value: 1, child: Text('Option 1')),
+          PopupMenuItem<int>(value: 2, child: Text('Option 2')),
+          PopupMenuItem<int>(value: 3, child: Text('Option 3')),
+          PopupMenuItem<int>(value: 4, child: Text('Option 4')),
+          PopupMenuItem<int>(value: 5, child: Text('Option 5')),
+        ],
+        icon: const Icon(Icons.more_vert),
+      ),
     );
   }
 }
@@ -924,29 +948,32 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<int>(
-      onSelected: (_) {},
-      position: PopupMenuPosition.under,
-      itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
-        PopupMenuItem<int>(
-            value: 1,
-            child: ListTile(leading: Icon(Icons.alarm), title: Text('Alarm'))),
-        PopupMenuItem<int>(
-            value: 2,
-            child: ListTile(
-                leading: Icon(Icons.cabin), title: Text('Wood cabin'))),
-        PopupMenuItem<int>(
-            value: 3,
-            child: ListTile(
-                leading: Icon(Icons.camera_outdoor_rounded),
-                title: Text('Surveillance'))),
-        PopupMenuItem<int>(
-            value: 4,
-            child: ListTile(
-                leading: Icon(Icons.water_damage),
-                title: Text('Water damage'))),
-      ],
-      icon: const Icon(Icons.more_horiz),
+    return RepaintBoundary(
+      child: PopupMenuButton<int>(
+        onSelected: (_) {},
+        position: PopupMenuPosition.under,
+        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
+          PopupMenuItem<int>(
+              value: 1,
+              child:
+                  ListTile(leading: Icon(Icons.alarm), title: Text('Alarm'))),
+          PopupMenuItem<int>(
+              value: 2,
+              child: ListTile(
+                  leading: Icon(Icons.cabin), title: Text('Wood cabin'))),
+          PopupMenuItem<int>(
+              value: 3,
+              child: ListTile(
+                  leading: Icon(Icons.camera_outdoor_rounded),
+                  title: Text('Surveillance'))),
+          PopupMenuItem<int>(
+              value: 4,
+              child: ListTile(
+                  leading: Icon(Icons.water_damage),
+                  title: Text('Water damage'))),
+        ],
+        icon: const Icon(Icons.more_horiz),
+      ),
     );
   }
 }
@@ -962,28 +989,30 @@ class _DropDownButtonState extends State<_DropDownButton> {
   String selectedItem = 'Dropdown button 1';
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: selectedItem,
-      onChanged: (String? value) {
-        setState(() {
-          selectedItem = value ?? 'Dropdown button 1';
-        });
-      },
-      items: <String>[
-        'Dropdown button 1',
-        'Dropdown button 2',
-        'Dropdown button 3',
-        'Dropdown button 4',
-        'Dropdown button 5'
-      ].map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(value),
-          ),
-        );
-      }).toList(),
+    return RepaintBoundary(
+      child: DropdownButton<String>(
+        value: selectedItem,
+        onChanged: (String? value) {
+          setState(() {
+            selectedItem = value ?? 'Dropdown button 1';
+          });
+        },
+        items: <String>[
+          'Dropdown button 1',
+          'Dropdown button 2',
+          'Dropdown button 3',
+          'Dropdown button 4',
+          'Dropdown button 5'
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(value),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
@@ -1042,57 +1071,59 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        if (widget.explainUsage)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-            child: Text(
-              'DropdownMenu',
-              style: denseHeader,
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          if (widget.explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Text(
+                'DropdownMenu',
+                style: denseHeader,
+              ),
             ),
+          if (widget.explainUsage)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Text(
+                'The new M3 DropdownMenu shares building blocks with MenuBar '
+                'and MenuAnchor, also uses InputDecorator for text entry.',
+                style: denseBody,
+              ),
+            ),
+          DropdownMenu<String>(
+            initialSelection: selectedItem,
+            onSelected: (String? value) {
+              setState(() {
+                selectedItem = value ?? 'one';
+              });
+            },
+            dropdownMenuEntries: const <DropdownMenuEntry<String>>[
+              DropdownMenuEntry<String>(
+                label: 'Alarm settings',
+                leadingIcon: Icon(Icons.alarm),
+                value: 'one',
+              ),
+              DropdownMenuEntry<String>(
+                label: 'Cabin overview',
+                leadingIcon: Icon(Icons.cabin),
+                value: 'two',
+              ),
+              DropdownMenuEntry<String>(
+                label: 'Surveillance view',
+                leadingIcon: Icon(Icons.camera_outdoor_rounded),
+                value: 'three',
+              ),
+              DropdownMenuEntry<String>(
+                label: 'Water alert',
+                leadingIcon: Icon(Icons.water_damage),
+                value: 'four',
+              ),
+            ],
           ),
-        if (widget.explainUsage)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-            child: Text(
-              'The new M3 DropdownMenu shares building blocks with MenuBar and '
-              'MenuAnchor, also uses InputDecorator for text entry.',
-              style: denseBody,
-            ),
-          ),
-        DropdownMenu<String>(
-          initialSelection: selectedItem,
-          onSelected: (String? value) {
-            setState(() {
-              selectedItem = value ?? 'one';
-            });
-          },
-          dropdownMenuEntries: const <DropdownMenuEntry<String>>[
-            DropdownMenuEntry<String>(
-              label: 'Alarm settings',
-              leadingIcon: Icon(Icons.alarm),
-              value: 'one',
-            ),
-            DropdownMenuEntry<String>(
-              label: 'Cabin overview',
-              leadingIcon: Icon(Icons.cabin),
-              value: 'two',
-            ),
-            DropdownMenuEntry<String>(
-              label: 'Surveillance view',
-              leadingIcon: Icon(Icons.camera_outdoor_rounded),
-              value: 'three',
-            ),
-            DropdownMenuEntry<String>(
-              label: 'Water alert',
-              leadingIcon: Icon(Icons.water_damage),
-              value: 'four',
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -1102,25 +1133,27 @@ class TooltipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 16,
-      runSpacing: 4,
-      children: const <Widget>[
-        Tooltip(
-          message: 'Current tooltip theme',
-          child: Text('Text with tooltip'),
-        ),
-        Tooltip(
-          message: 'Current tooltip theme.\nThis a two row tooltip.',
-          child: Text('Text with two row tooltip'),
-        ),
-        Tooltip(
-          message: 'Current tooltip theme.\nThis tooltip is too long.\n'
-              'Try to keep them short.',
-          child: Text('Text with three row tooltip'),
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 16,
+        runSpacing: 4,
+        children: const <Widget>[
+          Tooltip(
+            message: 'Current tooltip theme',
+            child: Text('Text with tooltip'),
+          ),
+          Tooltip(
+            message: 'Current tooltip theme.\nThis a two row tooltip.',
+            child: Text('Text with two row tooltip'),
+          ),
+          Tooltip(
+            message: 'Current tooltip theme.\nThis tooltip is too long.\n'
+                'Try to keep them short.',
+            child: Text('Text with three row tooltip'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1139,51 +1172,53 @@ class _IconButtonCircleAvatarDropdownShowcaseState
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 16,
-      runSpacing: 4,
-      children: <Widget>[
-        const Tooltip(
-          message: 'This is\nan Icon',
-          child: Icon(Icons.add_circle),
-        ),
-        const Tooltip(
-          message: 'This is\nan Icon',
-          child: Icon(Icons.flutter_dash),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: IconButton(
-            icon: const Icon(Icons.accessibility),
-            tooltip: 'This is an\nIconButton',
-            onPressed: () {},
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 16,
+        runSpacing: 4,
+        children: <Widget>[
+          const Tooltip(
+            message: 'This is\nan Icon',
+            child: Icon(Icons.add_circle),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: IconButton(
-            icon: const Icon(Icons.lock_outlined),
-            selectedIcon: const Icon(Icons.lock_open_outlined),
-            tooltip: isLockOpen
-                ? 'This is an IconButton\nIn M3 tap to close lock'
-                : 'This is an IconButton\nIn M3 tap to open lock',
-            isSelected: isLockOpen,
-            onPressed: () {
-              setState(() {
-                isLockOpen = !isLockOpen;
-              });
-            },
+          const Tooltip(
+            message: 'This is\nan Icon',
+            child: Icon(Icons.flutter_dash),
           ),
-        ),
-        const Tooltip(
-          message: 'This is a\nCircleAvatar',
-          child: CircleAvatar(
-            child: Text('CA'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: IconButton(
+              icon: const Icon(Icons.accessibility),
+              tooltip: 'This is an\nIconButton',
+              onPressed: () {},
+            ),
           ),
-        ),
-        const _DropDownButton(),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: IconButton(
+              icon: const Icon(Icons.lock_outlined),
+              selectedIcon: const Icon(Icons.lock_open_outlined),
+              tooltip: isLockOpen
+                  ? 'This is an IconButton\nIn M3 tap to close lock'
+                  : 'This is an IconButton\nIn M3 tap to open lock',
+              isSelected: isLockOpen,
+              onPressed: () {
+                setState(() {
+                  isLockOpen = !isLockOpen;
+                });
+              },
+            ),
+          ),
+          const Tooltip(
+            message: 'This is a\nCircleAvatar',
+            child: CircleAvatar(
+              child: Text('CA'),
+            ),
+          ),
+          const _DropDownButton(),
+        ],
+      ),
     );
   }
 }
@@ -1193,18 +1228,20 @@ class ProgressIndicatorShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 16,
-      runSpacing: 16,
-      children: const <Widget>[
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: CircularProgressIndicator(),
-        ),
-        SizedBox(width: 200, child: LinearProgressIndicator()),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 16,
+        runSpacing: 16,
+        children: const <Widget>[
+          SizedBox(
+            width: 50,
+            height: 50,
+            child: CircularProgressIndicator(),
+          ),
+          SizedBox(width: 200, child: LinearProgressIndicator()),
+        ],
+      ),
     );
   }
 }
@@ -1214,94 +1251,96 @@ class ChipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 8,
-      runSpacing: 8,
-      children: <Widget>[
-        Chip(
-          label: const Text('Chip'),
-          onDeleted: () {},
-        ),
-        const Chip(
-          label: Text('Chip'),
-          avatar: FlutterLogo(),
-        ),
-        ActionChip(
-          label: const Text('ActionChip'),
-          avatar: const Icon(Icons.settings),
-          onPressed: () {},
-        ),
-        const ActionChip(
-          label: Text('ActionChip'),
-          avatar: Icon(Icons.settings),
-          onPressed: null,
-        ),
-        FilterChip(
-          label: const Text('FilterChip'),
-          selected: true,
-          onSelected: (bool value) {},
-        ),
-        const FilterChip(
-          label: Text('FilterChip'),
-          selected: true,
-          onSelected: null,
-        ),
-        FilterChip(
-          label: const Text('FilterChip'),
-          selected: false,
-          onSelected: (bool value) {},
-        ),
-        const FilterChip(
-          label: Text('FilterChip'),
-          selected: false,
-          onSelected: null,
-        ),
-        ChoiceChip(
-          label: const Text('ChoiceChip'),
-          selected: true,
-          onSelected: (bool value) {},
-        ),
-        const ChoiceChip(
-          label: Text('ChoiceChip'),
-          selected: true,
-        ),
-        ChoiceChip(
-          label: const Text('ChoiceChip'),
-          selected: false,
-          onSelected: (bool value) {},
-        ),
-        const ChoiceChip(
-          label: Text('ChoiceChip'),
-          selected: false,
-          onSelected: null,
-        ),
-        InputChip(
-          selected: true,
-          label: const Text('InputChip'),
-          onSelected: (bool value) {},
-          onDeleted: () {},
-        ),
-        InputChip(
-          selected: true,
-          label: const Text('InputChip'),
-          isEnabled: false,
-          onSelected: (bool value) {},
-          onDeleted: () {},
-        ),
-        InputChip(
-          label: const Text('InputChip'),
-          onSelected: (bool value) {},
-          onDeleted: () {},
-        ),
-        InputChip(
-          label: const Text('InputChip'),
-          isEnabled: false,
-          onSelected: (bool value) {},
-          onDeleted: () {},
-          // onDeleted: () {},
-        ),
-      ],
+    return RepaintBoundary(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 8,
+        runSpacing: 8,
+        children: <Widget>[
+          Chip(
+            label: const Text('Chip'),
+            onDeleted: () {},
+          ),
+          const Chip(
+            label: Text('Chip'),
+            avatar: FlutterLogo(),
+          ),
+          ActionChip(
+            label: const Text('ActionChip'),
+            avatar: const Icon(Icons.settings),
+            onPressed: () {},
+          ),
+          const ActionChip(
+            label: Text('ActionChip'),
+            avatar: Icon(Icons.settings),
+            onPressed: null,
+          ),
+          FilterChip(
+            label: const Text('FilterChip'),
+            selected: true,
+            onSelected: (bool value) {},
+          ),
+          const FilterChip(
+            label: Text('FilterChip'),
+            selected: true,
+            onSelected: null,
+          ),
+          FilterChip(
+            label: const Text('FilterChip'),
+            selected: false,
+            onSelected: (bool value) {},
+          ),
+          const FilterChip(
+            label: Text('FilterChip'),
+            selected: false,
+            onSelected: null,
+          ),
+          ChoiceChip(
+            label: const Text('ChoiceChip'),
+            selected: true,
+            onSelected: (bool value) {},
+          ),
+          const ChoiceChip(
+            label: Text('ChoiceChip'),
+            selected: true,
+          ),
+          ChoiceChip(
+            label: const Text('ChoiceChip'),
+            selected: false,
+            onSelected: (bool value) {},
+          ),
+          const ChoiceChip(
+            label: Text('ChoiceChip'),
+            selected: false,
+            onSelected: null,
+          ),
+          InputChip(
+            selected: true,
+            label: const Text('InputChip'),
+            onSelected: (bool value) {},
+            onDeleted: () {},
+          ),
+          InputChip(
+            selected: true,
+            label: const Text('InputChip'),
+            isEnabled: false,
+            onSelected: (bool value) {},
+            onDeleted: () {},
+          ),
+          InputChip(
+            label: const Text('InputChip'),
+            onSelected: (bool value) {},
+            onDeleted: () {},
+          ),
+          InputChip(
+            label: const Text('InputChip'),
+            isEnabled: false,
+            onSelected: (bool value) {},
+            onDeleted: () {},
+            // onDeleted: () {},
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1342,102 +1381,104 @@ class _TextInputFieldState extends State<TextInputField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextField(
-          onChanged: (String text) {
-            setState(() {
-              if (text.contains('a') | text.isEmpty) {
-                _errorState1 = false;
-              } else {
-                _errorState1 = true;
-              }
-            });
-          },
-          key: const Key('TextField1'),
-          controller: _textController1,
-          decoration: InputDecoration(
-            hintText: 'Hint: Write something...',
-            labelText: 'Label: Underline border by default if not defined',
-            errorText: _errorState1
-                ? "Any entry without an 'a' will trigger this error"
-                : null,
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          TextField(
+            onChanged: (String text) {
+              setState(() {
+                if (text.contains('a') | text.isEmpty) {
+                  _errorState1 = false;
+                } else {
+                  _errorState1 = true;
+                }
+              });
+            },
+            key: const Key('TextField1'),
+            controller: _textController1,
+            decoration: InputDecoration(
+              hintText: 'Hint: Write something...',
+              labelText: 'Label: Underline border by default if not defined',
+              errorText: _errorState1
+                  ? "Any entry without an 'a' will trigger this error"
+                  : null,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          onChanged: (String text) {
-            setState(() {
-              if (text.contains('a') | text.isEmpty) {
-                _errorState2 = false;
-              } else {
-                _errorState2 = true;
-              }
-            });
-          },
-          key: const Key('TextField2'),
-          controller: _textController2,
-          decoration: InputDecoration(
-            filled: true,
-            hintText: 'Hint: Write something...',
-            labelText: 'Label: Underline border by default if not defined, '
-                'filled set true by Widget',
-            errorText: _errorState2
-                ? "Any entry without an 'a' will trigger this error"
-                : null,
+          const SizedBox(height: 16),
+          TextField(
+            onChanged: (String text) {
+              setState(() {
+                if (text.contains('a') | text.isEmpty) {
+                  _errorState2 = false;
+                } else {
+                  _errorState2 = true;
+                }
+              });
+            },
+            key: const Key('TextField2'),
+            controller: _textController2,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: 'Hint: Write something...',
+              labelText: 'Label: Underline border by default if not defined, '
+                  'filled set true by Widget',
+              errorText: _errorState2
+                  ? "Any entry without an 'a' will trigger this error"
+                  : null,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          onChanged: (String text) {
-            setState(() {
-              if (text.contains('a') | text.isEmpty) {
-                _errorState3 = false;
-              } else {
-                _errorState3 = true;
-              }
-            });
-          },
-          key: const Key('TextField3'),
-          controller: _textController3,
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            hintText: 'Hint: Write something...',
-            labelText: 'Label: Outline border set by Widget if not defined',
-            prefixIcon: const Icon(Icons.search),
-            suffixIcon: const Icon(Icons.info),
-            errorText: _errorState3
-                ? "Any entry without an 'a' will trigger this error"
-                : null,
+          const SizedBox(height: 16),
+          TextField(
+            onChanged: (String text) {
+              setState(() {
+                if (text.contains('a') | text.isEmpty) {
+                  _errorState3 = false;
+                } else {
+                  _errorState3 = true;
+                }
+              });
+            },
+            key: const Key('TextField3'),
+            controller: _textController3,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: 'Hint: Write something...',
+              labelText: 'Label: Outline border set by Widget if not defined',
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: const Icon(Icons.info),
+              errorText: _errorState3
+                  ? "Any entry without an 'a' will trigger this error"
+                  : null,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          key: const Key('TextField4'),
-          controller: _textController4,
-          decoration: const InputDecoration.collapsed(
-            hintText: 'Hint: Collapsed TextField...',
+          const SizedBox(height: 16),
+          TextField(
+            key: const Key('TextField4'),
+            controller: _textController4,
+            decoration: const InputDecoration.collapsed(
+              hintText: 'Hint: Collapsed TextField...',
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          controller: TextEditingController(),
-          enabled: false,
-          decoration: const InputDecoration(
-            labelText: 'TextField - Disabled label',
+          const SizedBox(height: 16),
+          TextField(
+            controller: TextEditingController(),
+            enabled: false,
+            decoration: const InputDecoration(
+              labelText: 'TextField - Disabled label',
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          controller: TextEditingController(text: 'Disabled with text entry'),
-          enabled: false,
-          decoration: const InputDecoration(
-            labelText: 'TextField - Disabled label',
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: Icon(Icons.info),
+          const SizedBox(height: 16),
+          TextField(
+            controller: TextEditingController(text: 'Disabled with text entry'),
+            enabled: false,
+            decoration: const InputDecoration(
+              labelText: 'TextField - Disabled label',
+              prefixIcon: Icon(Icons.search),
+              suffixIcon: Icon(Icons.info),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -1447,108 +1488,110 @@ class AppBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.removePadding(
-      context: context,
-      removeBottom: true,
-      removeTop: true,
-      child: Column(
-        children: <Widget>[
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              const _BehindAppBar(),
-              AppBar(
-                leading: IconButton(
-                  icon: const Icon(Icons.menu),
-                  onPressed: () {},
-                ),
-                title: const Text('Standard AppBar'),
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.search),
+    return RepaintBoundary(
+      child: MediaQuery.removePadding(
+        context: context,
+        removeBottom: true,
+        removeTop: true,
+        child: Column(
+          children: <Widget>[
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const _BehindAppBar(),
+                AppBar(
+                  leading: IconButton(
+                    icon: const Icon(Icons.menu),
                     onPressed: () {},
                   ),
-                ],
-              ),
-            ],
-          ),
-          // A bit nasty usage of CustomScrollViews and Slivers and shrinkWraps,
-          // to show what the SliverAppBars look like, don't do this in a
-          // production app. With just a few widgets, we can get away with it.
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              const _BehindAppBar(),
-              CustomScrollView(
-                shrinkWrap: true,
-                slivers: <Widget>[
-                  SliverAppBar(
-                    leading: IconButton(
-                      icon: const Icon(Icons.menu),
+                  title: const Text('Standard AppBar'),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.search),
                       onPressed: () {},
                     ),
-                    title: const Text('SliverAppBar'),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.search),
+                  ],
+                ),
+              ],
+            ),
+            // A bit nasty usage of CustomScrollViews and Slivers and shrinkWraps,
+            // to show what the SliverAppBars look like, don't do this in a
+            // production app. With just a few widgets, we can get away with it.
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const _BehindAppBar(),
+                CustomScrollView(
+                  shrinkWrap: true,
+                  slivers: <Widget>[
+                    SliverAppBar(
+                      leading: IconButton(
+                        icon: const Icon(Icons.menu),
                         onPressed: () {},
                       ),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              const _BehindAppBar(),
-              CustomScrollView(
-                shrinkWrap: true,
-                slivers: <Widget>[
-                  SliverAppBar.medium(
-                    leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {},
-                    ),
-                    title: const Text('SliverAppBar.medium'),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.search),
+                      title: const Text('SliverAppBar'),
+                      actions: <Widget>[
+                        IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const _BehindAppBar(),
+                CustomScrollView(
+                  shrinkWrap: true,
+                  slivers: <Widget>[
+                    SliverAppBar.medium(
+                      leading: IconButton(
+                        icon: const Icon(Icons.menu),
                         onPressed: () {},
                       ),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              const _BehindAppBar(),
-              CustomScrollView(
-                shrinkWrap: true,
-                slivers: <Widget>[
-                  SliverAppBar.large(
-                    leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {},
-                    ),
-                    title: const Text('SliverAppBar.large'),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.search),
+                      title: const Text('SliverAppBar.medium'),
+                      actions: <Widget>[
+                        IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                const _BehindAppBar(),
+                CustomScrollView(
+                  shrinkWrap: true,
+                  slivers: <Widget>[
+                    SliverAppBar.large(
+                      leading: IconButton(
+                        icon: const Icon(Icons.menu),
                         onPressed: () {},
                       ),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+                      title: const Text('SliverAppBar.large'),
+                      actions: <Widget>[
+                        IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1590,54 +1633,56 @@ class BottomAppBarShowcase extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return MediaQuery.removePadding(
-      context: context,
-      removeBottom: true,
-      removeTop: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          BottomAppBar(
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  tooltip: 'Open navigation menu',
-                  icon: const Icon(Icons.menu),
-                  onPressed: () {},
-                ),
-                const Spacer(),
-                IconButton(
-                  tooltip: 'Search',
-                  icon: const Icon(Icons.search),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  tooltip: 'Favorite',
-                  icon: const Icon(Icons.favorite),
-                  onPressed: () {},
-                ),
-              ],
+    return RepaintBoundary(
+      child: MediaQuery.removePadding(
+        context: context,
+        removeBottom: true,
+        removeTop: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            BottomAppBar(
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    tooltip: 'Open navigation menu',
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {},
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    tooltip: 'Search',
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    tooltip: 'Favorite',
+                    icon: const Icon(Icons.favorite),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'BottomAppBar',
-              style: denseHeader,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'BottomAppBar',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Flutter M2 past default color is ThemeData.bottomAppBarColor '
-              '(deprecated in Flutter 3.7) now colorScheme.surface and '
-              'elevation 8. '
-              'In M3 it defaults to to colorScheme.surface color, elevation 3, '
-              'no shadow, but with surface elevation tint.',
-              style: denseBody,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'Flutter M2 past default color is ThemeData.bottomAppBarColor '
+                '(deprecated in Flutter 3.7) now colorScheme.surface and '
+                'elevation 8. '
+                'In M3 it defaults to to colorScheme.surface color, elevation 3, '
+                'no shadow, but with surface elevation tint.',
+                style: denseBody,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -1665,53 +1710,55 @@ class TabBarForAppBarShowcase extends StatelessWidget {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Material(
-            color: effectiveTabBackground,
-            child: const SizedBox(
-              height: 70,
-              child: TabBar(
-                tabs: <Widget>[
-                  Tab(
-                    text: 'Chat',
-                    icon: Badge(
-                      label: Text('18'),
-                      child: Icon(Icons.chat_bubble),
+    return RepaintBoundary(
+      child: DefaultTabController(
+        length: 3,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Material(
+              color: effectiveTabBackground,
+              child: const SizedBox(
+                height: 70,
+                child: TabBar(
+                  tabs: <Widget>[
+                    Tab(
+                      text: 'Chat',
+                      icon: Badge(
+                        label: Text('18'),
+                        child: Icon(Icons.chat_bubble),
+                      ),
                     ),
-                  ),
-                  Tab(
-                    text: 'Tasks',
-                    icon: Icon(Icons.beenhere),
-                  ),
-                  Tab(
-                    text: 'Folder',
-                    icon: Icon(Icons.create_new_folder),
-                  ),
-                ],
+                    Tab(
+                      text: 'Tasks',
+                      icon: Icon(Icons.beenhere),
+                    ),
+                    Tab(
+                      text: 'Folder',
+                      icon: Icon(Icons.create_new_folder),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'TabBar in an AppBar',
-              style: denseHeader,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'TabBar in an AppBar',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'If the TabBar will always be used in an AppBar, then use '
-              'style FlexTabBarStyle forAppBar (default), '
-              'it will fit contrast wise here',
-              style: denseBody,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'If the TabBar will always be used in an AppBar, then use '
+                'style FlexTabBarStyle forAppBar (default), '
+                'it will fit contrast wise here',
+                style: denseBody,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -1728,50 +1775,52 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(
-            height: 70,
-            child: TabBar(
-              tabs: <Widget>[
-                Tab(
-                  text: 'Chat',
-                  icon: Badge(
-                    label: Text('+99'),
-                    child: Icon(Icons.chat_bubble),
+    return RepaintBoundary(
+      child: DefaultTabController(
+        length: 3,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(
+              height: 70,
+              child: TabBar(
+                tabs: <Widget>[
+                  Tab(
+                    text: 'Chat',
+                    icon: Badge(
+                      label: Text('+99'),
+                      child: Icon(Icons.chat_bubble),
+                    ),
                   ),
-                ),
-                Tab(
-                  text: 'Tasks',
-                  icon: Icon(Icons.beenhere),
-                ),
-                Tab(
-                  text: 'Folder',
-                  icon: Icon(Icons.create_new_folder),
-                ),
-              ],
+                  Tab(
+                    text: 'Tasks',
+                    icon: Icon(Icons.beenhere),
+                  ),
+                  Tab(
+                    text: 'Folder',
+                    icon: Icon(Icons.create_new_folder),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'TabBar on a surface',
-              style: denseHeader,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'TabBar on a surface',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'If the TabBar will always be used on background and surface '
-              'colors, then use style FlexTabBarStyle forBackground, '
-              'it will fit contrast wise here',
-              style: denseBody,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'If the TabBar will always be used on background and surface '
+                'colors, then use style FlexTabBarStyle forBackground, '
+                'it will fit contrast wise here',
+                style: denseBody,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -1797,86 +1846,88 @@ class _BottomNavigationBarShowcaseState
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        MediaQuery.removePadding(
-          context: context,
-          removeBottom: true,
-          removeTop: true,
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: <Widget>[
-                    const Text('Behind Bottom'),
-                    FloatingActionButton.small(
-                      heroTag: 'Behind Bottom',
-                      onPressed: () {},
-                      child: const Icon(Icons.add),
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          MediaQuery.removePadding(
+            context: context,
+            removeBottom: true,
+            removeTop: true,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: <Widget>[
+                      const Text('Behind Bottom'),
+                      FloatingActionButton.small(
+                        heroTag: 'Behind Bottom',
+                        onPressed: () {},
+                        child: const Icon(Icons.add),
+                      ),
+                      InputChip(
+                        showCheckmark: true,
+                        selected: true,
+                        label: const Text('Chip check'),
+                        onSelected: (bool value) {},
+                      ),
+                    ],
+                  ),
+                ),
+                BottomNavigationBar(
+                  currentIndex: buttonIndex,
+                  onTap: (int value) {
+                    setState(() {
+                      buttonIndex = value;
+                    });
+                  },
+                  items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Badge(
+                        label: Text('3'),
+                        child: Icon(Icons.chat_bubble),
+                      ),
+                      label: 'Chat',
+                      // title: Text('Item 1'),
                     ),
-                    InputChip(
-                      showCheckmark: true,
-                      selected: true,
-                      label: const Text('Chip check'),
-                      onSelected: (bool value) {},
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.beenhere),
+                      label: 'Tasks',
+                      // title: Text('Item 2'),
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.create_new_folder),
+                      label: 'Folder',
+                      // title: Text('Item 3'),
                     ),
                   ],
                 ),
-              ),
-              BottomNavigationBar(
-                currentIndex: buttonIndex,
-                onTap: (int value) {
-                  setState(() {
-                    buttonIndex = value;
-                  });
-                },
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Badge(
-                      label: Text('3'),
-                      child: Icon(Icons.chat_bubble),
-                    ),
-                    label: 'Chat',
-                    // title: Text('Item 1'),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.beenhere),
-                    label: 'Tasks',
-                    // title: Text('Item 2'),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.create_new_folder),
-                    label: 'Folder',
-                    // title: Text('Item 3'),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-          child: Text(
-            'BottomNavigationBar (Material 2)',
-            style: denseHeader,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'BottomNavigationBar (Material 2)',
+              style: denseHeader,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
-            'Default SDK background color is theme canvasColor via Material. '
-            'The canvasColor is typically colorScheme.background, elevation '
-            'is 8. FCS sub-theme default is colorScheme.background and '
-            'elevation 0.',
-            style: denseBody,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme canvasColor via Material. '
+              'The canvasColor is typically colorScheme.background, elevation '
+              'is 8. FCS sub-theme default is colorScheme.background and '
+              'elevation 0.',
+              style: denseBody,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -1899,83 +1950,85 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        MediaQuery.removePadding(
-          context: context,
-          removeBottom: true,
-          removeTop: true,
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: <Widget>[
-                    const Text('Behind NavBar'),
-                    FloatingActionButton.small(
-                      heroTag: 'Behind NavBar',
-                      onPressed: () {},
-                      child: const Icon(Icons.add),
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          MediaQuery.removePadding(
+            context: context,
+            removeBottom: true,
+            removeTop: true,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: <Widget>[
+                      const Text('Behind NavBar'),
+                      FloatingActionButton.small(
+                        heroTag: 'Behind NavBar',
+                        onPressed: () {},
+                        child: const Icon(Icons.add),
+                      ),
+                      InputChip(
+                        showCheckmark: true,
+                        selected: true,
+                        label: const Text('Chip check'),
+                        onSelected: (bool value) {},
+                      ),
+                    ],
+                  ),
+                ),
+                NavigationBar(
+                  selectedIndex: buttonIndex,
+                  onDestinationSelected: (int value) {
+                    setState(() {
+                      buttonIndex = value;
+                    });
+                  },
+                  destinations: const <NavigationDestination>[
+                    NavigationDestination(
+                      icon: Badge(
+                        label: Text('12'),
+                        child: Icon(Icons.chat_bubble),
+                      ),
+                      label: 'Chat',
                     ),
-                    InputChip(
-                      showCheckmark: true,
-                      selected: true,
-                      label: const Text('Chip check'),
-                      onSelected: (bool value) {},
+                    NavigationDestination(
+                      icon: Icon(Icons.beenhere),
+                      label: 'Tasks',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.create_new_folder),
+                      label: 'Folder',
                     ),
                   ],
                 ),
-              ),
-              NavigationBar(
-                selectedIndex: buttonIndex,
-                onDestinationSelected: (int value) {
-                  setState(() {
-                    buttonIndex = value;
-                  });
-                },
-                destinations: const <NavigationDestination>[
-                  NavigationDestination(
-                    icon: Badge(
-                      label: Text('12'),
-                      child: Icon(Icons.chat_bubble),
-                    ),
-                    label: 'Chat',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.beenhere),
-                    label: 'Tasks',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.create_new_folder),
-                    label: 'Folder',
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-          child: Text(
-            'NavigationBar (Material 3)',
-            style: denseHeader,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Text(
+              'NavigationBar (Material 3)',
+              style: denseHeader,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
-            'Default background color is surface with an onSurface overlay '
-            'color in M2, and primary in M3, with elevation 3. '
-            'FlexColorScheme component theme default is color scheme '
-            'background, with used surface blend and elevation 0.',
-            style: denseBody,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default background color is surface with an onSurface overlay '
+              'color in M2, and primary in M3, with elevation 3. '
+              'FlexColorScheme component theme default is color scheme '
+              'background, with used surface blend and elevation 0.',
+              style: denseBody,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -2011,101 +2064,107 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Text(
-            'NavigationRail',
-            style: denseHeader,
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: Text(
+              'NavigationRail',
+              style: denseHeader,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
-            'Default SDK background color is theme.colorScheme.surface. '
-            'FlexColorScheme sub-theme default is colorScheme.background.',
-            style: denseBody,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is theme.colorScheme.surface. '
+              'FlexColorScheme sub-theme default is colorScheme.background.',
+              style: denseBody,
+            ),
           ),
-        ),
-        const Divider(height: 1),
-        SizedBox(
-          height: widget.height,
-          // If we expand the rail and have a very narrow screen, it will
-          // take up a lot of height, more than we want to give to the demo
-          // panel, just let it overflow then. This may happen when we place
-          // a lot of widgets in the child that no longer fits on a phone
-          // with expanded rail.
-          child: ClipRect(
-            child: OverflowBox(
-              alignment: AlignmentDirectional.topStart,
-              maxHeight: 1200,
-              child: Row(
-                children: <Widget>[
-                  MediaQuery.removePadding(
-                    context: context,
-                    removeBottom: true,
-                    removeTop: true,
-                    child: NavigationRail(
-                      extended: isExtended,
-                      minExtendedWidth: 150,
-                      labelType:
-                          isExtended ? NavigationRailLabelType.none : null,
-                      selectedIndex: buttonIndex,
-                      onDestinationSelected: (int value) {
-                        setState(() {
-                          buttonIndex = value;
-                        });
-                      },
-                      destinations: const <NavigationRailDestination>[
-                        NavigationRailDestination(
-                          icon: Badge(
-                            label: Text('5'),
-                            child: Icon(Icons.chat_bubble),
+          const Divider(height: 1),
+          SizedBox(
+            height: widget.height,
+            // If we expand the rail and have a very narrow screen, it will
+            // take up a lot of height, more than we want to give to the demo
+            // panel, just let it overflow then. This may happen when we place
+            // a lot of widgets in the child that no longer fits on a phone
+            // with expanded rail.
+            child: ClipRect(
+              child: OverflowBox(
+                alignment: AlignmentDirectional.topStart,
+                maxHeight: 1200,
+                child: Row(
+                  children: <Widget>[
+                    MediaQuery.removePadding(
+                      context: context,
+                      removeBottom: true,
+                      removeTop: true,
+                      child: NavigationRail(
+                        extended: isExtended,
+                        minExtendedWidth: 150,
+                        labelType:
+                            isExtended ? NavigationRailLabelType.none : null,
+                        selectedIndex: buttonIndex,
+                        onDestinationSelected: (int value) {
+                          setState(() {
+                            buttonIndex = value;
+                          });
+                        },
+                        destinations: const <NavigationRailDestination>[
+                          NavigationRailDestination(
+                            icon: Badge(
+                              label: Text('5'),
+                              child: Icon(Icons.chat_bubble),
+                            ),
+                            label: Text('Chat'),
                           ),
-                          label: Text('Chat'),
-                        ),
-                        NavigationRailDestination(
-                          icon: Icon(Icons.beenhere),
-                          label: Text('Tasks'),
-                        ),
-                        NavigationRailDestination(
-                          icon: Icon(Icons.create_new_folder),
-                          label: Text('Folder'),
-                        ),
-                        NavigationRailDestination(
-                          icon: Icon(Icons.logout),
-                          label: Text('Logout'),
-                        ),
-                      ],
+                          NavigationRailDestination(
+                            icon: Icon(Icons.beenhere),
+                            label: Text('Tasks'),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.create_new_folder),
+                            label: Text('Folder'),
+                          ),
+                          NavigationRailDestination(
+                            icon: Icon(Icons.logout),
+                            label: Text('Logout'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        SwitchListTile(
-                          title: const Text('Expand and collapse'),
-                          subtitle: const Text('ON to expand  OFF to collapse\n'
-                              'Only used for local control of Rail '
-                              'presentation.'),
-                          value: isExtended,
-                          onChanged: (bool value) {
-                            setState(() {
-                              isExtended = value;
-                            });
-                          },
-                        ),
-                        widget.child ?? const SizedBox.shrink(),
-                      ],
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          SwitchListTile(
+                            title: const Text('Expand and collapse'),
+                            subtitle:
+                                const Text('ON to expand  OFF to collapse\n'
+                                    'Only used for local control of Rail '
+                                    'presentation.'),
+                            value: isExtended,
+                            onChanged: (bool value) {
+                              setState(() {
+                                isExtended = value;
+                              });
+                            },
+                          ),
+                          if (widget.child != null)
+                            RepaintBoundary(child: widget.child)
+                          else
+                            const SizedBox.shrink(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -2615,67 +2674,69 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Text(
-            'NavigationDrawer',
-            style: denseHeader,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
-            'Default SDK background color is colorScheme.surface, '
-            'with elevation tint in M3.',
-            style: denseBody,
-          ),
-        ),
-        MediaQuery.removePadding(
-          context: context,
-          removeBottom: true,
-          removeTop: true,
-          removeLeft: true,
-          removeRight: true,
-          child: SizedBox(
-            height: 280,
-            child: NavigationDrawer(
-              selectedIndex: selectedIndex,
-              onDestinationSelected: (int value) {
-                setState(() {
-                  selectedIndex = value;
-                });
-              },
-              children: const <Widget>[
-                SizedBox(height: 16),
-                NavigationDrawerDestination(
-                  icon: Badge(
-                    label: Text('26'),
-                    child: Icon(Icons.chat_bubble),
-                  ),
-                  label: Text('Chat'),
-                ),
-                NavigationDrawerDestination(
-                  icon: Icon(Icons.beenhere),
-                  label: Text('Tasks'),
-                ),
-                Divider(),
-                NavigationDrawerDestination(
-                  icon: Icon(Icons.create_new_folder),
-                  label: Text('Folder'),
-                ),
-                NavigationDrawerDestination(
-                  icon: Icon(Icons.logout),
-                  label: Text('Logout'),
-                ),
-              ],
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: Text(
+              'NavigationDrawer',
+              style: denseHeader,
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              'Default SDK background color is colorScheme.surface, '
+              'with elevation tint in M3.',
+              style: denseBody,
+            ),
+          ),
+          MediaQuery.removePadding(
+            context: context,
+            removeBottom: true,
+            removeTop: true,
+            removeLeft: true,
+            removeRight: true,
+            child: SizedBox(
+              height: 280,
+              child: NavigationDrawer(
+                selectedIndex: selectedIndex,
+                onDestinationSelected: (int value) {
+                  setState(() {
+                    selectedIndex = value;
+                  });
+                },
+                children: const <Widget>[
+                  SizedBox(height: 16),
+                  NavigationDrawerDestination(
+                    icon: Badge(
+                      label: Text('26'),
+                      child: Icon(Icons.chat_bubble),
+                    ),
+                    label: Text('Chat'),
+                  ),
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.beenhere),
+                    label: Text('Tasks'),
+                  ),
+                  Divider(),
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.create_new_folder),
+                    label: Text('Folder'),
+                  ),
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.logout),
+                    label: Text('Logout'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2704,32 +2765,34 @@ class ListTileShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          leading: const Icon(Icons.info),
-          title: const Text('ListTile'),
-          subtitle: const Text('List tile sub title'),
-          trailing: const Text('Trailing'),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: const Icon(Icons.info),
-          title: const Text('ListTile selected'),
-          subtitle: const Text('Selected list tile sub title'),
-          trailing: const Text('Trailing'),
-          selected: true,
-          onTap: () {},
-        ),
-        ListTile(
-          enabled: false,
-          leading: const Icon(Icons.info),
-          title: const Text('ListTile disabled'),
-          subtitle: const Text('Selected list tile sub title'),
-          trailing: const Text('Trailing'),
-          onTap: () {},
-        ),
-      ],
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('ListTile'),
+            subtitle: const Text('List tile sub title'),
+            trailing: const Text('Trailing'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('ListTile selected'),
+            subtitle: const Text('Selected list tile sub title'),
+            trailing: const Text('Trailing'),
+            selected: true,
+            onTap: () {},
+          ),
+          ListTile(
+            enabled: false,
+            leading: const Icon(Icons.info),
+            title: const Text('ListTile disabled'),
+            subtitle: const Text('Selected list tile sub title'),
+            trailing: const Text('Trailing'),
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2739,30 +2802,32 @@ class SwitchTileShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        SwitchListTile(
-          secondary: const Icon(Icons.info),
-          title: const Text('SwitchListTile'),
-          subtitle: const Text('The switch list tile is OFF'),
-          value: false,
-          onChanged: (bool value) {},
-        ),
-        SwitchListTile(
-          secondary: const Icon(Icons.info),
-          title: const Text('SwitchListTile'),
-          subtitle: const Text('The switch list tile is ON'),
-          value: true,
-          onChanged: (bool value) {},
-        ),
-        const SwitchListTile(
-          secondary: Icon(Icons.info),
-          title: Text('SwitchListTile disabled'),
-          subtitle: Text('The switch list tile is ON'),
-          value: true,
-          onChanged: null,
-        ),
-      ],
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          SwitchListTile(
+            secondary: const Icon(Icons.info),
+            title: const Text('SwitchListTile'),
+            subtitle: const Text('The switch list tile is OFF'),
+            value: false,
+            onChanged: (bool value) {},
+          ),
+          SwitchListTile(
+            secondary: const Icon(Icons.info),
+            title: const Text('SwitchListTile'),
+            subtitle: const Text('The switch list tile is ON'),
+            value: true,
+            onChanged: (bool value) {},
+          ),
+          const SwitchListTile(
+            secondary: Icon(Icons.info),
+            title: Text('SwitchListTile disabled'),
+            subtitle: Text('The switch list tile is ON'),
+            value: true,
+            onChanged: null,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2772,39 +2837,41 @@ class CheckboxTileShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        CheckboxListTile(
-          secondary: const Icon(Icons.info),
-          title: const Text('CheckboxListTile'),
-          subtitle: const Text('The checkbox list tile is unchecked'),
-          value: false,
-          onChanged: (bool? value) {},
-        ),
-        CheckboxListTile(
-          secondary: const Icon(Icons.info),
-          title: const Text('CheckboxListTile'),
-          subtitle: const Text('The checkbox list tile is checked'),
-          value: true,
-          onChanged: (bool? value) {},
-        ),
-        CheckboxListTile(
-          secondary: const Icon(Icons.info),
-          title: const Text('CheckboxListTile'),
-          subtitle: const Text('The checkbox list tile is null in tristate'),
-          tristate: true,
-          value: null,
-          onChanged: (bool? value) {},
-        ),
-        CheckboxListTile(
-          enabled: false,
-          secondary: const Icon(Icons.info),
-          title: const Text('CheckboxListTile disabled'),
-          subtitle: const Text('The checkbox list tile is checked'),
-          value: true,
-          onChanged: (bool? value) {},
-        ),
-      ],
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          CheckboxListTile(
+            secondary: const Icon(Icons.info),
+            title: const Text('CheckboxListTile'),
+            subtitle: const Text('The checkbox list tile is unchecked'),
+            value: false,
+            onChanged: (bool? value) {},
+          ),
+          CheckboxListTile(
+            secondary: const Icon(Icons.info),
+            title: const Text('CheckboxListTile'),
+            subtitle: const Text('The checkbox list tile is checked'),
+            value: true,
+            onChanged: (bool? value) {},
+          ),
+          CheckboxListTile(
+            secondary: const Icon(Icons.info),
+            title: const Text('CheckboxListTile'),
+            subtitle: const Text('The checkbox list tile is null in tristate'),
+            tristate: true,
+            value: null,
+            onChanged: (bool? value) {},
+          ),
+          CheckboxListTile(
+            enabled: false,
+            secondary: const Icon(Icons.info),
+            title: const Text('CheckboxListTile disabled'),
+            subtitle: const Text('The checkbox list tile is checked'),
+            value: true,
+            onChanged: (bool? value) {},
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2814,42 +2881,44 @@ class RadioTileShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        RadioListTile<int>(
-          secondary: const Icon(Icons.info),
-          title: const Text('RadioListTile'),
-          subtitle: const Text('The radio option is unselected'),
-          value: 0,
-          onChanged: (_) {},
-          groupValue: 1,
-        ),
-        RadioListTile<int>(
-          secondary: const Icon(Icons.info),
-          title: const Text('RadioListTile'),
-          subtitle: const Text('The radio option is selected'),
-          value: 1,
-          onChanged: (_) {},
-          groupValue: 1,
-        ),
-        RadioListTile<int>(
-          secondary: const Icon(Icons.info),
-          title: const Text('RadioListTile'),
-          subtitle: const Text('The radio option and list tile is selected'),
-          value: 1,
-          selected: true,
-          onChanged: (_) {},
-          groupValue: 1,
-        ),
-        const RadioListTile<int>(
-          secondary: Icon(Icons.info),
-          title: Text('RadioListTile disabled'),
-          subtitle: Text('The radio option is selected'),
-          value: 1,
-          onChanged: null,
-          groupValue: 1,
-        ),
-      ],
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          RadioListTile<int>(
+            secondary: const Icon(Icons.info),
+            title: const Text('RadioListTile'),
+            subtitle: const Text('The radio option is unselected'),
+            value: 0,
+            onChanged: (_) {},
+            groupValue: 1,
+          ),
+          RadioListTile<int>(
+            secondary: const Icon(Icons.info),
+            title: const Text('RadioListTile'),
+            subtitle: const Text('The radio option is selected'),
+            value: 1,
+            onChanged: (_) {},
+            groupValue: 1,
+          ),
+          RadioListTile<int>(
+            secondary: const Icon(Icons.info),
+            title: const Text('RadioListTile'),
+            subtitle: const Text('The radio option and list tile is selected'),
+            value: 1,
+            selected: true,
+            onChanged: (_) {},
+            groupValue: 1,
+          ),
+          const RadioListTile<int>(
+            secondary: Icon(Icons.info),
+            title: Text('RadioListTile disabled'),
+            subtitle: Text('The radio option is selected'),
+            value: 1,
+            onChanged: null,
+            groupValue: 1,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2866,39 +2935,41 @@ class _ExpansionTileShowcaseState extends State<ExpansionTileShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const ExpansionTile(
-          title: Text('ExpansionTile 1'),
-          subtitle: Text('Trailing expansion arrow icon'),
-          children: <Widget>[
-            ListTile(title: Text('This is tile number 1')),
-          ],
-        ),
-        ExpansionTile(
-          title: const Text('ExpansionTile 2'),
-          subtitle: const Text('Custom expansion arrow icon'),
-          trailing: Icon(
-            _customTileExpanded
-                ? Icons.arrow_drop_down_circle
-                : Icons.arrow_drop_down,
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          const ExpansionTile(
+            title: Text('ExpansionTile 1'),
+            subtitle: Text('Trailing expansion arrow icon'),
+            children: <Widget>[
+              ListTile(title: Text('This is tile number 1')),
+            ],
           ),
-          children: const <Widget>[
-            ListTile(title: Text('This is tile number 2')),
-          ],
-          onExpansionChanged: (bool expanded) {
-            setState(() => _customTileExpanded = expanded);
-          },
-        ),
-        const ExpansionTile(
-          title: Text('ExpansionTile 3'),
-          subtitle: Text('Leading expansion arrow icon'),
-          controlAffinity: ListTileControlAffinity.leading,
-          children: <Widget>[
-            ListTile(title: Text('This is tile number 3')),
-          ],
-        ),
-      ],
+          ExpansionTile(
+            title: const Text('ExpansionTile 2'),
+            subtitle: const Text('Custom expansion arrow icon'),
+            trailing: Icon(
+              _customTileExpanded
+                  ? Icons.arrow_drop_down_circle
+                  : Icons.arrow_drop_down,
+            ),
+            children: const <Widget>[
+              ListTile(title: Text('This is tile number 2')),
+            ],
+            onExpansionChanged: (bool expanded) {
+              setState(() => _customTileExpanded = expanded);
+            },
+          ),
+          const ExpansionTile(
+            title: Text('ExpansionTile 3'),
+            subtitle: Text('Leading expansion arrow icon'),
+            controlAffinity: ListTileControlAffinity.leading,
+            children: <Widget>[
+              ListTile(title: Text('This is tile number 3')),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -2918,42 +2989,45 @@ class _ExpansionPanelListShowcaseState
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _items[index].isExpanded = !isExpanded;
-        });
-      },
-      children: _items.map<ExpansionPanel>((ExpansionPanelShowcaseItems item) {
-        return ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              title: Text(item.headerValue),
-            );
-          },
-          body: ListTile(
-            title: Text(item.expandedValue),
-            subtitle: item.id > 2
-                ? const Text('To delete this panel, tap the trash can icon')
-                : const Text(
-                    'This panel is fixed here and cannot be removed. Items '
-                    'numbered 3 and higher can be removed.'),
-            trailing: item.id > 2
-                ? IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      setState(() {
-                        _items.removeWhere(
-                            (ExpansionPanelShowcaseItems currentItem) =>
-                                item == currentItem);
-                      });
-                    },
-                  )
-                : null,
-          ),
-          isExpanded: item.isExpanded,
-        );
-      }).toList(),
+    return RepaintBoundary(
+      child: ExpansionPanelList(
+        expansionCallback: (int index, bool isExpanded) {
+          setState(() {
+            _items[index].isExpanded = !isExpanded;
+          });
+        },
+        children:
+            _items.map<ExpansionPanel>((ExpansionPanelShowcaseItems item) {
+          return ExpansionPanel(
+            headerBuilder: (BuildContext context, bool isExpanded) {
+              return ListTile(
+                title: Text(item.headerValue),
+              );
+            },
+            body: ListTile(
+              title: Text(item.expandedValue),
+              subtitle: item.id > 2
+                  ? const Text('To delete this panel, tap the trash can icon')
+                  : const Text(
+                      'This panel is fixed here and cannot be removed. Items '
+                      'numbered 3 and higher can be removed.'),
+              trailing: item.id > 2
+                  ? IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        setState(() {
+                          _items.removeWhere(
+                              (ExpansionPanelShowcaseItems currentItem) =>
+                                  item == currentItem);
+                        });
+                      },
+                    )
+                  : null,
+            ),
+            isExpanded: item.isExpanded,
+          );
+        }).toList(),
+      ),
     );
   }
 }
@@ -3027,14 +3101,16 @@ class AlertDialogShowcase extends StatelessWidget {
     final String cancel = useMaterial3 ? 'Cancel' : 'CANCEL';
     final String allow = useMaterial3 ? 'Allow' : 'ALLOW';
 
-    return AlertDialog(
-      title: const Text('Allow location services'),
-      content: const Text('Let us help determine location. This means '
-          'sending anonymous location data to us'),
-      actions: <Widget>[
-        TextButton(onPressed: () {}, child: Text(cancel)),
-        TextButton(onPressed: () {}, child: Text(allow)),
-      ],
+    return RepaintBoundary(
+      child: AlertDialog(
+        title: const Text('Allow location services'),
+        content: const Text('Let us help determine location. This means '
+            'sending anonymous location data to us'),
+        actions: <Widget>[
+          TextButton(onPressed: () {}, child: Text(cancel)),
+          TextButton(onPressed: () {}, child: Text(allow)),
+        ],
+      ),
     );
   }
 }
@@ -3177,24 +3253,53 @@ class SnackBarShowcase extends StatelessWidget {
 
     final ShapeBorder? shape = theme.snackBarTheme.shape;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Material(
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Material(
+              color: snackBackground,
+              elevation: snackElevation,
+              // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
+              // Keep it away from the simulation to match spec!
+              // surfaceTintColor: colorScheme.surfaceTint,
+              shadowColor: colorScheme.shadow,
+              shape: shape ??
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+              child: SizedBox(
+                height: 46,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: Row(
+                    children: <Widget>[
+                      const SizedBox(width: 24),
+                      Text('A floating SnackBar (style simulation)',
+                          style: snackStyle),
+                      const Spacer(),
+                      Text('Close', style: snackActionStyle),
+                      const SizedBox(width: 24),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Material(
             color: snackBackground,
             elevation: snackElevation,
             // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
             // Keep it away from the simulation to match spec!
             // surfaceTintColor: colorScheme.surfaceTint,
             shadowColor: colorScheme.shadow,
-            shape: shape ??
-                const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(4),
-                  ),
-                ),
+            shape: shape,
             child: SizedBox(
               height: 46,
               width: double.infinity,
@@ -3203,7 +3308,7 @@ class SnackBarShowcase extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     const SizedBox(width: 24),
-                    Text('A floating SnackBar (style simulation)',
+                    Text('A fixed SnackBar (style simulation)',
                         style: snackStyle),
                     const Spacer(),
                     Text('Close', style: snackActionStyle),
@@ -3213,35 +3318,8 @@ class SnackBarShowcase extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          color: snackBackground,
-          elevation: snackElevation,
-          // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
-          // Keep it away from the simulation to match spec!
-          // surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          shape: shape,
-          child: SizedBox(
-            height: 46,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: Row(
-                children: <Widget>[
-                  const SizedBox(width: 24),
-                  Text('A fixed SnackBar (style simulation)',
-                      style: snackStyle),
-                  const Spacer(),
-                  Text('Close', style: snackActionStyle),
-                  const SizedBox(width: 24),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -3251,27 +3329,29 @@ class MaterialBannerShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Divider(height: 1),
-        MaterialBanner(
-          padding: const EdgeInsets.all(20),
-          content: const Text('Hello, I am a MaterialBanner'),
-          leading: const Icon(Icons.agriculture_outlined),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OPEN'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('DISMISS'),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-      ],
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Divider(height: 1),
+          MaterialBanner(
+            padding: const EdgeInsets.all(20),
+            content: const Text('Hello, I am a MaterialBanner'),
+            leading: const Icon(Icons.agriculture_outlined),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OPEN'),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: const Text('DISMISS'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 }
@@ -3289,308 +3369,310 @@ class MaterialShowcase extends StatelessWidget {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Material elevation and tint', style: denseHeader),
-        Text(
-          'Material can also specify surfaceTintColor, which is applied when '
-          'Material is elevated and useMaterial3 is true. ',
-          style: denseBody,
-        ),
-        const SizedBox(height: 12),
-        Text('Material type canvas', style: denseHeader),
-        Text(
-          'Default background color is theme canvasColor, and '
-          'theme canvasColor is set to theme colorScheme background. The '
-          'color canvasColor is going to be deprecated in Flutter SDK',
-          style: denseBody,
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 0,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 0, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Material elevation and tint', style: denseHeader),
+          Text(
+            'Material can also specify surfaceTintColor, which is applied when '
+            'Material is elevated and useMaterial3 is true. ',
+            style: denseBody,
+          ),
+          const SizedBox(height: 12),
+          Text('Material type canvas', style: denseHeader),
+          Text(
+            'Default background color is theme canvasColor, and '
+            'theme canvasColor is set to theme colorScheme background. The '
+            'color canvasColor is going to be deprecated in Flutter SDK',
+            style: denseBody,
+          ),
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 0,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 0, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 1,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 1, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 1,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 1, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: const SizedBox(
-            height: 60,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 1, '
-                  'assigned surfaceTint and no shadow',
-                  textAlign: TextAlign.center,
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: const SizedBox(
+              height: 60,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 1, '
+                    'assigned surfaceTint and no shadow',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 1, '
-                  'assigned surfaceTint, and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: colorScheme.shadow,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 1, '
+                    'assigned surfaceTint, and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 6,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 6, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 6,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 6, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 6,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 6, '
-                  'assigned surfaceTint and no shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 6,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 6, '
+                    'assigned surfaceTint and no shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.canvas,
-          elevation: 6,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type canvas, elevation 6, '
-                  'assigned surfaceTint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.canvas,
+            elevation: 6,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: colorScheme.shadow,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type canvas, elevation 6, '
+                    'assigned surfaceTint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 32),
-        Text('Material type card', style: denseHeader),
-        Text(
-          'Default background color is theme cardColor, and '
-          'theme cardColor is set to theme colorScheme surface. The '
-          'color cardColor is going to be deprecated in Flutter SDK',
-          style: denseBody,
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.card,
-          elevation: 0,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 0, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 32),
+          Text('Material type card', style: denseHeader),
+          Text(
+            'Default background color is theme cardColor, and '
+            'theme cardColor is set to theme colorScheme surface. The '
+            'color cardColor is going to be deprecated in Flutter SDK',
+            style: denseBody,
+          ),
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.card,
+            elevation: 0,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 0, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.card,
-          elevation: 1,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 1, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.card,
+            elevation: 1,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 1, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.card,
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 1, '
-                  'assigned surfaceTint and no shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.card,
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 1, '
+                    'assigned surfaceTint and no shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Material(
-          type: MaterialType.card,
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 1, '
-                  'assigned surfaceTint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 8),
+          Material(
+            type: MaterialType.card,
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: colorScheme.shadow,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 1, '
+                    'assigned surfaceTint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.card,
-          elevation: 6,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 6, default tint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.card,
+            elevation: 6,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 6, default tint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.card,
-          elevation: 6,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 6, '
-                  'assigned surfaceTint and no shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.card,
+            elevation: 6,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 6, '
+                    'assigned surfaceTint and no shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Material(
-          type: MaterialType.card,
-          elevation: 6,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: colorScheme.shadow,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Material type card, elevation 6, '
-                  'assigned surfaceTint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
+          const SizedBox(height: 16),
+          Material(
+            type: MaterialType.card,
+            elevation: 6,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: colorScheme.shadow,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Material type card, elevation 6, '
+                    'assigned surfaceTint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-      ],
+          const SizedBox(height: 8),
+        ],
+      ),
     );
   }
 }
@@ -3607,202 +3689,204 @@ class CardShowcase extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text('Card', style: denseHeader),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            'Default background color comes from Material of type card, which '
-            'by default is set to theme colorScheme surface. '
-            'When useMaterial3 is true, Card gets elevation based '
-            'surfaceTint. When it is false, surfaceTint has no '
-            'effect even if specified.',
-            style: denseBody,
+    return RepaintBoundary(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text('Card', style: denseHeader),
           ),
-        ),
-        Card(
-          elevation: 0,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 0, assigned surfaceTint and default shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
-                ),
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'Default background color comes from Material of type card, which '
+              'by default is set to theme colorScheme surface. '
+              'When useMaterial3 is true, Card gets elevation based '
+              'surfaceTint. When it is false, surfaceTint has no '
+              'effect even if specified.',
+              style: denseBody,
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Card(
-          elevation: 1,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
+          Card(
+            elevation: 0,
+            surfaceTintColor: colorScheme.surfaceTint,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
                   child: Text(
-                'Card, elevation 1, default surfaceTint and shadow',
-                textAlign: TextAlign.center,
-                style: denseHeader,
-              )),
+                    'Card, elevation 0, assigned surfaceTint and default shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Card(
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+          const SizedBox(height: 10),
+          Card(
+            elevation: 1,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                    child: Text(
+                  'Card, elevation 1, default surfaceTint and shadow',
+                  textAlign: TextAlign.center,
+                  style: denseHeader,
+                )),
+              ),
+            ),
+          ),
+          const SizedBox(height: 2),
+          Card(
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 1, assigned surfaceTint and default shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 2),
+          Card(
+            elevation: 1,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 1, assigned surfaceTint and '
+                    'transparent shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Divider(),
+          Card(
+            elevation: 4,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 4, default surfaceTint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Card(
+            elevation: 4,
+            surfaceTintColor: colorScheme.surfaceTint,
+            child: SizedBox(
+              height: 60,
               child: Center(
                 child: Text(
-                  'Card, elevation 1, assigned surfaceTint and default shadow',
+                  'Card, elevation 4, assigned surfaceTint and default shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Card(
-          elevation: 1,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 1, assigned surfaceTint and '
+          const SizedBox(height: 4),
+          Card(
+            elevation: 4,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 4, assigned surfaceTint and '
+                    'transparent shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Divider(),
+          Card(
+            elevation: 10,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 10, default surfaceTint and shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            elevation: 10,
+            surfaceTintColor: colorScheme.surfaceTint,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Card, elevation 10, assigned surfaceTint and default shadow',
+                    textAlign: TextAlign.center,
+                    style: denseHeader,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            elevation: 10,
+            surfaceTintColor: colorScheme.surfaceTint,
+            shadowColor: Colors.transparent,
+            child: SizedBox(
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                    child: Text(
+                  'Card, elevation 10, assigned surfaceTint and '
                   'transparent shadow',
                   textAlign: TextAlign.center,
                   style: denseHeader,
-                ),
+                )),
               ),
             ),
           ),
-        ),
-        const Divider(),
-        Card(
-          elevation: 4,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 4, default surfaceTint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        Card(
-          elevation: 4,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: SizedBox(
-            height: 60,
-            child: Center(
-              child: Text(
-                'Card, elevation 4, assigned surfaceTint and default shadow',
-                textAlign: TextAlign.center,
-                style: denseHeader,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        Card(
-          elevation: 4,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 4, assigned surfaceTint and '
-                  'transparent shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const Divider(),
-        Card(
-          elevation: 10,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 10, default surfaceTint and shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Card(
-          elevation: 10,
-          surfaceTintColor: colorScheme.surfaceTint,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  'Card, elevation 10, assigned surfaceTint and default shadow',
-                  textAlign: TextAlign.center,
-                  style: denseHeader,
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Card(
-          elevation: 10,
-          surfaceTintColor: colorScheme.surfaceTint,
-          shadowColor: Colors.transparent,
-          child: SizedBox(
-            height: 60,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                  child: Text(
-                'Card, elevation 10, assigned surfaceTint and '
-                'transparent shadow',
-                textAlign: TextAlign.center,
-                style: denseHeader,
-              )),
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

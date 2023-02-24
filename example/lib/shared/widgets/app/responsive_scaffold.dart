@@ -510,64 +510,66 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       children: <Widget>[
         // The menu content when used as a menu or rail is in a constrained
         // box set to the maximum width of the menu.
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: widget.menuWidth),
-          // Material is used for proper surface, and it gives us the "right"
-          // theme behaving container background.
-          child: Material(
-            // This simple implicit animation AnimatedContainer is what
-            // animates the entire side menu from 0, to rail to menu width.
-            // The default type, canvas, makes Material use theme.CanvasColor,
-            // which in FlexThemeData and in ThemeData.from is set to
-            // theme.colorScheme.background. So our menu will be background
-            // colored by default, including any color branding our theme
-            // in FlexColorScheme has applied to it, just like a Drawer.
-            child: AnimatedContainer(
-              duration: _kMenuAnimationDuration,
-              onEnd: () {
-                setState(() {
-                  // This state was added to not get the automatically implied
-                  // leading widget to show up before the menu rail completed
-                  // sliding out of visibility, looked better that way.
-                  // Otherwise it jumps into visibility when the menu rail
-                  // starts its closing animation, and heading jumps to right.
-                  if (isMenuClosed) {
-                    menuDoneClosing = true;
-                  } else {
-                    menuDoneClosing = false;
-                  }
-                });
-              },
-              width: activeMenuWidth,
-              child: _AppMenu(
-                title: widget.menuTitle,
-                menuLeadingTitle: widget.menuLeadingTitle,
-                menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
-                menuItems: widget.menuItems,
-                menuItemsEnabled: menuItemsEnabled,
-                menuItemsIconState: menuItemsIconState,
-                maxWidth: widget.menuWidth,
-                railWidth: widget.railWidth,
-                onSelect: widget.onSelect,
-                // User pushed the menu button, change menu state, on desktop
-                // we toggle the the menuExpanded and not menuExpanded state.
-                // On not desktop size (phone or tablet) we toggle the state
-                // isMenuClosed or not.
-                onOperate: () {
+        FocusTraversalGroup(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: widget.menuWidth),
+            // Material is used for proper surface, and it gives us the "right"
+            // theme behaving container background.
+            child: Material(
+              // This simple implicit animation AnimatedContainer is what
+              // animates the entire side menu from 0, to rail to menu width.
+              // The default type, canvas, makes Material use theme.CanvasColor,
+              // which in FlexThemeData and in ThemeData.from is set to
+              // theme.colorScheme.background. So our menu will be background
+              // colored by default, including any color branding our theme
+              // in FlexColorScheme has applied to it, just like a Drawer.
+              child: AnimatedContainer(
+                duration: _kMenuAnimationDuration,
+                onEnd: () {
                   setState(() {
-                    // Desktop case, we can only expand or collapse the menu.
-                    if (isDesktop) {
-                      // So we toggle its state.
-                      isMenuExpanded = !isMenuExpanded;
+                    // This state was added to not get the automatically implied
+                    // leading widget to show up before the menu rail completed
+                    // sliding out of visibility, looked better that way.
+                    // Otherwise it jumps into visibility when the menu rail
+                    // starts its closing animation, and heading jumps to right.
+                    if (isMenuClosed) {
+                      menuDoneClosing = true;
                     } else {
-                      // Tablet or phone case, we can only close the menu, it
-                      // will then be in the Drawer, from where it can be
-                      // opened again as a drawer with the menu button.
-                      isMenuClosed = true;
+                      menuDoneClosing = false;
                     }
                   });
                 },
+                width: activeMenuWidth,
+                child: _AppMenu(
+                  title: widget.menuTitle,
+                  menuLeadingTitle: widget.menuLeadingTitle,
+                  menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                  menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
+                  menuItems: widget.menuItems,
+                  menuItemsEnabled: menuItemsEnabled,
+                  menuItemsIconState: menuItemsIconState,
+                  maxWidth: widget.menuWidth,
+                  railWidth: widget.railWidth,
+                  onSelect: widget.onSelect,
+                  // User pushed the menu button, change menu state, on desktop
+                  // we toggle the the menuExpanded and not menuExpanded state.
+                  // On not desktop size (phone or tablet) we toggle the state
+                  // isMenuClosed or not.
+                  onOperate: () {
+                    setState(() {
+                      // Desktop case, we can only expand or collapse the menu.
+                      if (isDesktop) {
+                        // So we toggle its state.
+                        isMenuExpanded = !isMenuExpanded;
+                      } else {
+                        // Tablet or phone case, we can only close the menu, it
+                        // will then be in the Drawer, from where it can be
+                        // opened again as a drawer with the menu button.
+                        isMenuClosed = true;
+                      }
+                    });
+                  },
+                ),
               ),
             ),
           ),
@@ -721,90 +723,88 @@ class _AppMenuState extends State<_AppMenu> {
           alignment: AlignmentDirectional.topStart,
           minWidth: 0,
           maxWidth: widget.maxWidth,
-          child: FocusTraversalGroup(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // We use an AppBar element as header in the menu too, a custom
-                // Widget would be less restrictive, but for simplicity, the
-                // AppBar has so many nice things built in to handle text style,
-                // size and scaling for the title that are tedious to replicate
-                AppBar(
-                  title: widget.title,
-                  titleSpacing: 0,
-                  leadingWidth: widget.railWidth,
-                  leading: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: const Icon(Icons.menu),
-                    onPressed: widget.onOperate,
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // We use an AppBar element as header in the menu too, a custom
+              // Widget would be less restrictive, but for simplicity, the
+              // AppBar has so many nice things built in to handle text style,
+              // size and scaling for the title that are tedious to replicate
+              AppBar(
+                title: widget.title,
+                titleSpacing: 0,
+                leadingWidth: widget.railWidth,
+                leading: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(Icons.menu),
+                  onPressed: widget.onOperate,
                 ),
-                Expanded(
-                  child: Container(
-                    width: size.maxWidth,
-                    decoration: BoxDecoration(
-                      border: BorderDirectional(
-                        end: BorderSide(
-                          color: closeColors
-                              ? theme.dividerColor
-                              : Colors.transparent,
-                        ),
+              ),
+              Expanded(
+                child: Container(
+                  width: size.maxWidth,
+                  decoration: BoxDecoration(
+                    border: BorderDirectional(
+                      end: BorderSide(
+                        color: closeColors
+                            ? theme.dividerColor
+                            : Colors.transparent,
                       ),
                     ),
-                    child: ClipRect(
-                      child: OverflowBox(
-                        alignment: AlignmentDirectional.topStart,
-                        minWidth: 0,
-                        maxWidth: widget.maxWidth,
-                        child: ListView(
-                          physics: const ClampingScrollPhysics(),
-                          padding: EdgeInsets.zero, //  Removes all edge insets
-                          children: <Widget>[
-                            // A leading item the menu/rail.
-                            _MenuLeadingItem(
+                  ),
+                  child: ClipRect(
+                    child: OverflowBox(
+                      alignment: AlignmentDirectional.topStart,
+                      minWidth: 0,
+                      maxWidth: widget.maxWidth,
+                      child: ListView(
+                        physics: const ClampingScrollPhysics(),
+                        padding: EdgeInsets.zero, //  Removes all edge insets
+                        children: <Widget>[
+                          // A leading item the menu/rail.
+                          _MenuLeadingItem(
+                            railWidth: widget.railWidth,
+                            menuLeadingTitle: widget.menuLeadingTitle,
+                            menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                            menuLeadingAvatarLabel:
+                                widget.menuLeadingAvatarLabel,
+                          ),
+                          // Add all the menu items.
+                          for (int i = 0; i < widget.menuItems.length; i++)
+                            _MenuItem(
+                              width: size.maxWidth,
+                              menuWidth: widget.maxWidth,
+                              onTap: () {
+                                setState(() {
+                                  selectedItem = i;
+                                });
+                                widget.onSelect?.call(i);
+                              },
+                              selected: selectedItem == i,
+                              icon: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].icon
+                                  : widget.menuItems[i].iconSecondary,
+                              label: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].label
+                                  : widget.menuItems[i].labelSecondary,
+                              tooltip: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].tooltip
+                                  : widget.menuItems[i].tooltipSecondary,
+                              enabled: widget.menuItemsEnabled[i],
+                              showDivider: i.isEven,
                               railWidth: widget.railWidth,
-                              menuLeadingTitle: widget.menuLeadingTitle,
-                              menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                              menuLeadingAvatarLabel:
-                                  widget.menuLeadingAvatarLabel,
                             ),
-                            // Add all the menu items.
-                            for (int i = 0; i < widget.menuItems.length; i++)
-                              _MenuItem(
-                                width: size.maxWidth,
-                                menuWidth: widget.maxWidth,
-                                onTap: () {
-                                  setState(() {
-                                    selectedItem = i;
-                                  });
-                                  widget.onSelect?.call(i);
-                                },
-                                selected: selectedItem == i,
-                                icon: widget.menuItemsIconState[i] ==
-                                        ResponsiveMenuItemIconState.primary
-                                    ? widget.menuItems[i].icon
-                                    : widget.menuItems[i].iconSecondary,
-                                label: widget.menuItemsIconState[i] ==
-                                        ResponsiveMenuItemIconState.primary
-                                    ? widget.menuItems[i].label
-                                    : widget.menuItems[i].labelSecondary,
-                                tooltip: widget.menuItemsIconState[i] ==
-                                        ResponsiveMenuItemIconState.primary
-                                    ? widget.menuItems[i].tooltip
-                                    : widget.menuItems[i].tooltipSecondary,
-                                enabled: widget.menuItemsEnabled[i],
-                                showDivider: i.isEven,
-                                railWidth: widget.railWidth,
-                              ),
-                            const Divider(thickness: 1, height: 1),
-                          ],
-                        ),
+                          const Divider(thickness: 1, height: 1),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

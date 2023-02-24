@@ -91,249 +91,261 @@ class SurfaceColors extends StatelessWidget {
         children: <Widget>[
           //
           // ScaffoldBackground colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: theme.scaffoldBackgroundColor,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: theme.scaffoldBackgroundColor,
-                        textColor: colorScheme.onBackground,
-                        label: 'Scaffold\nbackground',
-                        tone: tones.backgroundTone,
-                        showTone: false,
+                        child: ColorNameValue(
+                          color: theme.scaffoldBackgroundColor,
+                          textColor: colorScheme.onBackground,
+                          label: 'Scaffold\nbackground',
+                          tone: tones.backgroundTone,
+                          showTone: false,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.onBackground,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.onBackground,
-                        textColor: colorScheme.background,
-                        label: 'onBackground',
-                        tone: tones.onBackgroundTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.onBackground,
+                          textColor: colorScheme.background,
+                          label: 'onBackground',
+                          tone: tones.onBackgroundTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           //
           // Background colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: colorScheme.background,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: colorScheme.background,
-                        textColor: colorScheme.onBackground,
-                        label: 'background',
-                        tone: tones.backgroundTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.background,
+                          textColor: colorScheme.onBackground,
+                          label: 'background',
+                          tone: tones.backgroundTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.onBackground,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.onBackground,
-                        textColor: colorScheme.background,
-                        label: 'onBackground',
-                        tone: tones.onBackgroundTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.onBackground,
+                          textColor: colorScheme.background,
+                          label: 'onBackground',
+                          tone: tones.onBackgroundTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           //
           // Surface colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: colorScheme.surface,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: colorScheme.surface,
-                        textColor: colorScheme.onSurface,
-                        label: 'surface',
-                        tone: tones.surfaceTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.surface,
+                          textColor: colorScheme.onSurface,
+                          label: 'surface',
+                          tone: tones.surfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.onSurface,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.onSurface,
-                        textColor: colorScheme.surface,
-                        label: 'onSurface',
-                        tone: tones.onSurfaceTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
+                          label: 'onSurface',
+                          tone: tones.onSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           //
           // SurfaceVariant colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: colorScheme.surfaceVariant,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: colorScheme.surfaceVariant,
-                        textColor: colorScheme.onSurfaceVariant,
-                        label: 'surface\u200BVariant',
-                        tone: tones.surfaceVariantTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.surfaceVariant,
+                          textColor: colorScheme.onSurfaceVariant,
+                          label: 'surface\u200BVariant',
+                          tone: tones.surfaceVariantTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.onSurfaceVariant,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.onSurfaceVariant,
-                        textColor: colorScheme.surfaceVariant,
-                        label: 'onSurface\u200BVariant',
-                        tone: tones.onSurfaceVariantTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.onSurfaceVariant,
+                          textColor: colorScheme.surfaceVariant,
+                          label: 'onSurface\u200BVariant',
+                          tone: tones.onSurfaceVariantTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           //
           // InverseSurface colors presentation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: colorScheme.inverseSurface,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: colorScheme.inverseSurface,
-                        textColor: colorScheme.onInverseSurface,
-                        label: 'inverse\u200BSurface',
-                        tone: tones.inverseSurfaceTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.inverseSurface,
+                          textColor: colorScheme.onInverseSurface,
+                          label: 'inverse\u200BSurface',
+                          tone: tones.inverseSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.onInverseSurface,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.onInverseSurface,
-                        textColor: colorScheme.inverseSurface,
-                        label: 'onInverse\u200BSurface',
-                        tone: tones.onInverseSurfaceTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.onInverseSurface,
+                          textColor: colorScheme.inverseSurface,
+                          label: 'onInverse\u200BSurface',
+                          tone: tones.onInverseSurfaceTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           //
           // Shadow color and surface tint color presenatation
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: 0,
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Material(
-                      color: colorScheme.shadow,
-                      child: ColorNameValue(
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
                         color: colorScheme.shadow,
-                        textColor:
-                            _onColor(colorScheme.shadow, colorScheme.surface),
-                        label: 'shadow',
-                        tone: tones.shadowTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.shadow,
+                          textColor:
+                              _onColor(colorScheme.shadow, colorScheme.surface),
+                          label: 'shadow',
+                          tone: tones.shadowTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Material(
-                      color: colorScheme.surfaceTint,
-                      child: ColorNameValue(
+                    Expanded(
+                      flex: 6,
+                      child: Material(
                         color: colorScheme.surfaceTint,
-                        textColor: _onColor(
-                            colorScheme.surfaceTint, colorScheme.surface),
-                        label: 'surfaceTint',
-                        tone: tones.surfaceTintTone,
-                        showTone: showTones,
+                        child: ColorNameValue(
+                          color: colorScheme.surfaceTint,
+                          textColor: _onColor(
+                              colorScheme.surfaceTint, colorScheme.surface),
+                          label: 'surfaceTint',
+                          tone: tones.surfaceTintTone,
+                          showTone: showTones,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

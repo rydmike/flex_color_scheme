@@ -49,28 +49,30 @@ class ColorCard extends StatelessWidget {
     final Size effectiveSize =
         size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
 
-    return SizedBox(
-      width: effectiveSize.width,
-      height: effectiveSize.height,
-      child: Tooltip(
-        waitDuration: const Duration(milliseconds: 700),
-        message: 'Color #${color.hexCode} $nameThatColor$space$materialName.'
-            '\nTap box to copy RGB value to Clipboard.',
-        child: Card(
-          elevation: elevation ?? 0,
-          shadowColor: shadowColor,
-          margin: EdgeInsets.zero,
-          clipBehavior: Clip.antiAlias,
-          color: color,
-          child: InkWell(
-            onTap: () {
-              unawaited(copyColorToClipboard(context, color));
-            },
-            child: Center(
-              child: Text(
-                label,
-                style: TextStyle(color: textColor, fontSize: fontSize),
-                textAlign: TextAlign.center,
+    return RepaintBoundary(
+      child: SizedBox(
+        width: effectiveSize.width,
+        height: effectiveSize.height,
+        child: Tooltip(
+          waitDuration: const Duration(milliseconds: 700),
+          message: 'Color #${color.hexCode} $nameThatColor$space$materialName.'
+              '\nTap box to copy RGB value to Clipboard.',
+          child: Card(
+            elevation: elevation ?? 0,
+            shadowColor: shadowColor,
+            margin: EdgeInsets.zero,
+            clipBehavior: Clip.antiAlias,
+            color: color,
+            child: InkWell(
+              onTap: () {
+                unawaited(copyColorToClipboard(context, color));
+              },
+              child: Center(
+                child: Text(
+                  label,
+                  style: TextStyle(color: textColor, fontSize: fontSize),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
