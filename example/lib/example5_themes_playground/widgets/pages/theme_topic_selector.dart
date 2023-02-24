@@ -103,6 +103,7 @@ class _ThemeTopicSelectorHorizontalState
                           padding:
                               EdgeInsets.symmetric(horizontal: margins - 4),
                           controller: scrollController,
+                          primary: false,
                           physics: const ClampingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemCount: themeTopics.length,

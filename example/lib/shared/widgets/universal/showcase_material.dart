@@ -1514,9 +1514,10 @@ class AppBarShowcase extends StatelessWidget {
                 ),
               ],
             ),
-            // A bit nasty usage of CustomScrollViews and Slivers and shrinkWraps,
-            // to show what the SliverAppBars look like, don't do this in a
-            // production app. With just a few widgets, we can get away with it.
+            // A bit nasty usage of CustomScrollViews and Slivers and
+            // shrinkWraps, to show what the SliverAppBars look like, don't
+            // do this in a production app. With just a few widgets,
+            // we can get away with it.
             Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -1675,9 +1676,9 @@ class BottomAppBarShowcase extends StatelessWidget {
               child: Text(
                 'Flutter M2 past default color is ThemeData.bottomAppBarColor '
                 '(deprecated in Flutter 3.7) now colorScheme.surface and '
-                'elevation 8. '
-                'In M3 it defaults to to colorScheme.surface color, elevation 3, '
-                'no shadow, but with surface elevation tint.',
+                'elevation 8. In M3 it defaults to to colorScheme.surface '
+                'color, elevation 3, no shadow, but with surface elevation '
+                'tint.',
                 style: denseBody,
               ),
             ),
@@ -3397,7 +3398,8 @@ class MaterialShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Material type canvas, elevation 0, default tint and shadow',
+                    'Material type canvas, elevation 0, default '
+                    'tint and shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
@@ -3415,7 +3417,8 @@ class MaterialShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Material type canvas, elevation 1, default tint and shadow',
+                    'Material type canvas, elevation 1, default tint '
+                    'and shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
@@ -3474,7 +3477,8 @@ class MaterialShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Material type canvas, elevation 6, default tint and shadow',
+                    'Material type canvas, elevation 6, default tint '
+                    'and shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
@@ -3700,8 +3704,8 @@ class CardShowcase extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'Default background color comes from Material of type card, which '
-              'by default is set to theme colorScheme surface. '
+              'Default background color comes from Material of type card, '
+              'which by default is set to theme colorScheme surface. '
               'When useMaterial3 is true, Card gets elevation based '
               'surfaceTint. When it is false, surfaceTint has no '
               'effect even if specified.',
@@ -3717,7 +3721,8 @@ class CardShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Card, elevation 0, assigned surfaceTint and default shadow',
+                    'Card, elevation 0, assigned surfaceTint and '
+                    'default shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
@@ -3751,7 +3756,8 @@ class CardShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Card, elevation 1, assigned surfaceTint and default shadow',
+                    'Card, elevation 1, assigned surfaceTint and '
+                    'default shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
@@ -3858,7 +3864,8 @@ class CardShowcase extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Card, elevation 10, assigned surfaceTint and default shadow',
+                    'Card, elevation 10, assigned surfaceTint and '
+                    'default shadow',
                     textAlign: TextAlign.center,
                     style: denseHeader,
                   ),
