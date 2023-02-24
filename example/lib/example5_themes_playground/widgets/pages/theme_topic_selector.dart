@@ -172,6 +172,7 @@ class _ThemeTopicSelectorVerticalState
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
+      debugLabel: widget.isRight ? 'Right theme topics' : 'Left theme topics',
     );
   }
 
