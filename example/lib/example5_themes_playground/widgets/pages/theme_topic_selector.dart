@@ -41,6 +41,7 @@ class _ThemeTopicSelectorHorizontalState
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
+      debugLabel: 'Horizontal topic selector',
     );
   }
 
