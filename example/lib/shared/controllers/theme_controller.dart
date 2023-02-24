@@ -1399,6 +1399,8 @@ class ThemeController with ChangeNotifier {
       setTabBarStyle(FlexTabBarStyle.forAppBar, false);
       setTabBarDividerColor(Colors.transparent, false);
       setTabBarIndicatorSize(TabBarIndicatorSize.tab, false);
+      setTabBarIndicatorWeight(2, false);
+      setTabBarIndicatorTopRadius(0, false);
       // Elevated button - Make look like it used to in M2.
       setElevatedButtonSchemeColor(SchemeColor.onPrimary, false);
       setElevatedButtonSecondarySchemeColor(SchemeColor.primary, false);
