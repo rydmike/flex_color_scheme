@@ -12,6 +12,8 @@ import 'theme_panel.dart';
 import 'theme_topic.dart';
 import 'theme_topic_selector.dart';
 
+// ignore_for_file: comment_references
+
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
 // The handy part is that if it gets in the way in debugging, it is an easy
@@ -23,11 +25,21 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// It shows one or two panels at a time, in a single [PageView].
 /// This is a nice layout on mid size screen, like tablets,
-/// probably preferable on a phone too.
+/// and it works really well on phones too as it features a sliver persistent
+/// header delegate that scrolls away the topic panel selections.
 ///
-/// On bigger screens it show two panel side-by-side, where the left secondary
+/// The vertical scrolling of the two side-by-side panels are a bit
+/// interlinked, since:
+/// a) They are in the same PageView.
+/// b) They are in the same sliver custom scroll scroll view
+/// Despite this they do scroll semin independently as the one that has nothing
+/// more to scroll, will say put showing most of its content while the other
+/// side still scroll ups.
+///
+/// On bigger screens it shows two panels side-by-side, where the left secondary
 /// one can be selected via a popup menu. This is a bit cumbersome, but takes
-/// up very little space.
+/// up very little space. See the [ThemeTwoTopicsPage] for one that features
+/// own vertical topic selectors for each panel.
 class ThemeTopicPage extends StatefulWidget {
   const ThemeTopicPage({
     super.key,
@@ -85,11 +97,12 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
     super.didChangeDependencies();
     // TODO(rydmike): Strange screen switch bug on platform swap, maybe here?
     //  seen it in a few rare cases on other actions too, but platform swap
-    //  seems to trigger it.
+    //  seems to trigger it. Debug print helpers below if I see it again.
     // debugPrint('PanelView previous page: $previousPage');
     // debugPrint(
     //  'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
-    // This was one attempt to fix it, did not seem to work.
+    //
+    // This was one attempt to fix it, did not work.
     // previousPage = widget.themeController.viewIndex;
   }
 
@@ -115,7 +128,11 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
         AppData.responsiveInsets(media.size.width, isCompact);
     final double buttonHeight = AppData.panelButtonHeight +
         (isPhone ? AppData.panelButtonPhoneHeightReduce : 0);
+    // All the above is so we can below calculate how high the
+    // [_ThemeTopicSelectorHeaderDelegate] extent should be in different modes,
+    // compact and phone responsive layouts.
     final double headerExtent = buttonHeight + media.padding.top + margins * 2;
+    // It was tricky to figure out all the extent details, these helped.
     if (_debug) {
       debugPrint('headerExtent ............ : $headerExtent');
       debugPrint('margins ................. : $margins');

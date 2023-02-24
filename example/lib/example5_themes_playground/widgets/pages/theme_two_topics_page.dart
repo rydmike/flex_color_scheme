@@ -9,6 +9,8 @@ import 'theme_panel.dart';
 import 'theme_topic.dart';
 import 'theme_topic_selector.dart';
 
+// ignore_for_file: comment_references
+
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
 // The handy part is that if it gets in the way in debugging, it is an easy
@@ -18,7 +20,26 @@ const bool _debug = !kReleaseMode && false;
 
 /// This is the two theme topics view of the Playground.
 ///
-/// Used only on big desktops.
+/// Used only on big desktops, when desktop size is over
+/// [AppData.mediumDesktopWidthBreakpoint] in width.
+///
+/// This view no longer like the [ThemeTopicPage] keep the content of the two
+/// side-by-side theme topic panels in a [PageView], in fact there is no
+/// [PageView] in this layout, it is a lot simpler that way.
+/// They however still in [NestedScrollView] body. The used
+/// [VerticalThemePanelView] are identical, they just use different index and
+/// have control that selects if the [ThemeTopicSelectorVertical] selector
+/// should be on the left o right side.
+///
+/// One advantage with this scroll vie is that the two side can scroll more
+/// independently from each other than in [ThemeTopicPage] where they are in
+/// the same [PageView]. Still debating if I should make them even more
+/// independent of each other by not having them in a [NestedScrollView] but
+/// just a [CustomScrollView] instead. Will try how it feels and works in
+/// practice later.
+///
+/// This view was a quick rework of [ThemeTopicPage] to create a totally
+/// new layout by mostly re-using already existing parts in the app.
 class ThemeTwoTopicsPage extends StatefulWidget {
   const ThemeTwoTopicsPage({
     super.key,
@@ -33,7 +54,6 @@ class ThemeTwoTopicsPage extends StatefulWidget {
 class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
     with TickerProviderStateMixin {
   late final ScrollController scrollController;
-  // late int previousPage;
   late int previousSchemeIndex;
   late bool previousUseFlexColorScheme;
   late bool previousUseSubThemes;
@@ -42,7 +62,6 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
   @override
   void initState() {
     super.initState();
-    // previousPage = widget.controller.viewIndex;
     scrollController = ScrollController(
       keepScrollOffset: true,
       debugLabel: 'PanelViewScrollController',
@@ -88,6 +107,7 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
   Widget build(BuildContext context) {
     final ThemeController controller = widget.controller;
     final MediaQueryData media = MediaQuery.of(context);
+
     final bool isCompact = widget.controller.compactMode;
     final bool isPinned = media.size.height >= AppData.pinnedSelector;
     final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
@@ -101,12 +121,16 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
         isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
     // The height diff with switches removed.
     final double switchRemove = isCompact ? -_kHeightDenseListTile : 0;
+    // All the above is so we can below calculate how high the
+    // [ThemeColorSelectorHeaderDelegate] extent should be in different modes,
+    // compact and phone responsive layouts.
     final double headerExtent = _kHeightSelector +
         media.padding.top +
         margins * 3 +
         phoneReduce +
         phoneSwitchReduce +
         switchRemove;
+    // It was tricky to figure out all the extent details, these helped.
     if (_debug) {
       debugPrint('headerExtent ............ : $headerExtent');
       debugPrint('margins ................. : $margins');

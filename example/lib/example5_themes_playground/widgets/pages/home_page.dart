@@ -16,9 +16,13 @@ import 'theme_topic_page.dart';
 import 'theme_topics_grid_page.dart';
 import 'theme_two_topics_page.dart';
 
-// -----------------------------------------------------------------------------
-// Home Page for EXAMPLE 5 - Themes Playground
-// -----------------------------------------------------------------------------
+/// Home Page for FlexColorScheme EXAMPLE 5 - Themes Playground.
+///
+/// The learn more about using this app see the docs at:
+/// - https://docs.flexcolorscheme.com/playground
+///
+/// The learn more about its history and design see docs at:
+/// - https://docs.flexcolorscheme.com/tutorial5
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,

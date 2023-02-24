@@ -608,7 +608,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                       Navigator.of(context).pop();
                       widget.onSelect?.call(index);
                     },
-                    // User pushed menu button in Drawer, we close the Drawer and
+                    // User pushed menu button in Drawer, close the Drawer and
                     // set menu state to not be closed, it will open as a rail.
                     onOperate: () {
                       Navigator.of(context).pop();
@@ -620,7 +620,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                           isMenuClosed = false;
                         });
                       });
-                      // If we do this instead they both animate at the same time:
+                      // If we do this instead, both animate at the same time:
                       // setState(() {
                       //   isMenuClosed = false;
                       // });

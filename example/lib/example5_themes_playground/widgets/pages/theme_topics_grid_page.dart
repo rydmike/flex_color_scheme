@@ -9,6 +9,8 @@ import 'theme_color_selector.dart';
 import 'theme_panel.dart';
 import 'theme_topic.dart';
 
+// ignore_for_file: comment_references
+
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
 // The handy part is that if it gets in the way in debugging, it is an easy
@@ -17,18 +19,22 @@ import 'theme_topic.dart';
 const bool _debug = !kReleaseMode && false;
 
 // TODO(rydmike): Considering removing the grid view totally.
-//  Now that PageView can be set to view any two panels side-by-side, this
+//  Now that ThemeTopicPage can be set to view any two panels side-by-side, this
 //  grid view is not so useful anymore. Maybe we remove it totally?
+//  Do Twitter and GitHub discussions poll about it later.
 
 /// This is the super large masonry grid layout of the Themes Playground.
 ///
-/// It is somewhat useful on a 4k screen, since  you can see and use a lot
+/// It is somewhat useful on a 4k screen, since you can see and use a lot
 /// of settings in one view.
 ///
 /// It works thanks to collapsible panels and responsive layout down to
-/// phone size too, but a page view may be more convenient on eg tablet size.
+/// phone size too, but the [ThemeTopicPage] is more convenient on phone and
+/// tablet sizes.
 ///
-/// Considering removing this view from the Themes Playground.
+/// Considering removing this view from the Themes Playground. If you happen
+/// to read this let me know in the repo discussions poll here:
+///
 class ThemeTopicsGridPage extends StatefulWidget {
   const ThemeTopicsGridPage({
     super.key,
