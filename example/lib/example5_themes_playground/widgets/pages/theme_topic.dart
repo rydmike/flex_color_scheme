@@ -29,6 +29,11 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.design_services_outlined,
   ),
   ThemeTopic(
+    heading: 'Theme simulator',
+    buttonLabel: 'Theme\nsimulator',
+    icon: Icons.phone_iphone,
+  ),
+  ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
@@ -149,11 +154,6 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
     icon: Icons.font_download,
-  ),
-  ThemeTopic(
-    heading: 'Theme simulator',
-    buttonLabel: 'Theme\nsimulator',
-    icon: Icons.phone_iphone,
   ),
   ThemeTopic(
     heading: 'Widget showcase',

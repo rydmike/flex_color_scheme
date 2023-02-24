@@ -84,13 +84,13 @@ class Store {
 
   // Key used to read and save the viewIndex value.
   static const String keyViewIndex = 'viewIndex';
-  // Default value for the viewIndex, also used to reset settings.
+  // Default value for the viewIndex.
   static const int defaultViewIndex = 0;
 
   // Key used to read and save the sideViewIndex value.
   static const String keySideViewIndex = 'sideViewIndex';
-  // Default value for the sideViewIndex, also used to reset settings.
-  static const int defaultSideViewIndex = 31;
+  // Default value for the sideViewIndex.
+  static const int defaultSideViewIndex = 2;
 
   // Key used to read and save the simulatorDeviceIndex value.
   static const String keySimulatorDeviceIndex = 'simulatorDeviceIndex';

@@ -53,6 +53,7 @@ class ThemePanel extends StatelessWidget {
     return <Widget>[
       IntroductionPanel(controller),
       PremadeDesignsPanel(controller),
+      ThemeSimulator(controller: controller),
       ThemeColorsSettings(controller),
       SeededColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
@@ -78,7 +79,6 @@ class ThemePanel extends StatelessWidget {
       CardSettings(controller),
       TextThemeSettings(controller),
       PrimaryTextThemeSettings(controller),
-      ThemeSimulator(controller: controller),
       const WidgetShowcase(),
       PageExamples(controller: controller),
       const MaterialPanel(),
