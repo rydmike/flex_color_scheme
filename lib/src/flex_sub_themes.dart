@@ -4852,23 +4852,12 @@ class FlexSubThemes {
   /// function, this one is only a sub-set of the original and does not do or
   /// contain any feature shortcuts.
   ///
-  /// The [FlexColorScheme.toTheme] needs some the properties, like fore-
+  /// The [FlexColorScheme.toTheme] needs some of the properties, like fore-
   /// and background colors used here, for other component theme definitions as
   /// well and has already computed them once, so they are reused here.
-  ///
-  /// At the moment the [FlexSubThemes.tabBarTheme] is mostly included to
-  /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
-  /// class. Actual convenience features may be added to
-  /// [FlexSubThemes.tabBarTheme] later.
   static TabBarTheme tabBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
-
-    /// Overrides the default value for [TabBar.indicatorSize].
-    final TabBarIndicatorSize? indicatorSize,
-
-    /// Overrides the default value for [TabBar.indicatorColor].
-    final Color? indicatorColor,
 
     /// Overrides the default value for [TabBar.labelStyle].
     final TextStyle? labelStyle,
@@ -4878,6 +4867,23 @@ class FlexSubThemes {
 
     /// Overrides the default value for [TabBar.unselectedLabelColor].
     final Color? unselectedLabelColor,
+
+    /// Overrides the default value for [TabBar.indicatorSize].
+    final TabBarIndicatorSize? indicatorSize,
+
+    /// The thickness of the underline border indicator on the [TabBar].
+    ///
+    /// If not defined, defaults to 2 in M2 and to 3 in M3.
+    final double? indicatorWeight,
+
+    /// The top left and right corner radius of the underline border
+    /// indicator on the [TabBar].
+    ///
+    /// If not defined, defaults to 0 in M2 and to 3 in M3.
+    final double? indicatorTopRadius,
+
+    /// Overrides the default value for [TabBar.indicatorColor].
+    final Color? indicatorColor,
 
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
@@ -4894,15 +4900,37 @@ class FlexSubThemes {
     /// A temporary flag used to opt-in to new Material 3 features.
     final bool useMaterial3 = false,
   }) {
+    final double weight = indicatorWeight ?? (useMaterial3 ? 3 : 2);
+    final double radius = indicatorTopRadius ?? (useMaterial3 ? 3 : 0);
+
+    final Decoration indicator = UnderlineTabIndicator(
+      borderRadius: useMaterial3 || indicatorWeight != null
+          ? BorderRadius.only(
+              topLeft: Radius.circular(radius),
+              topRight: Radius.circular(radius),
+            )
+          : null,
+      borderSide: BorderSide(
+        width: weight,
+        color: indicatorColor ??
+            (useMaterial3 ? colorScheme.primary : colorScheme.onSurface),
+      ),
+    );
+
     return TabBarTheme(
-      indicatorSize: indicatorSize ??
-          (useMaterial3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
-      indicatorColor: indicatorColor,
-      dividerColor: dividerColor,
       labelStyle: labelStyle,
       labelColor: labelColor,
       unselectedLabelStyle: unselectedLabelStyle,
       unselectedLabelColor: unselectedLabelColor,
+      //
+      indicatorSize: indicatorSize ??
+          (useMaterial3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
+      indicatorColor: indicatorColor,
+      indicator: (indicatorWeight != null || indicatorTopRadius != null)
+          ? indicator
+          : null,
+      //
+      dividerColor: dividerColor,
     );
   }
 

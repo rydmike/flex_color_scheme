@@ -5882,6 +5882,11 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
+    // TabBar unselected alpha based opacity, effective value;
+    final int tabBarUnselectedAlpha = Color.getAlphaFromOpacity(useMaterial3
+        ? subTheme.tabBarUnselectedItemOpacity ?? 1
+        : subTheme.tabBarUnselectedItemOpacity ?? 0.7);
+
     // Platform adjusting font size for tooltips.
     double tooltipFontSize() {
       switch (effectivePlatform) {
@@ -6933,11 +6938,21 @@ class FlexColorScheme with Diagnosticable {
         unselectedLabelStyle: effectiveTextTheme.bodyLarge,
         unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
             ? unselectedTabColor()
-            : FlexSubThemes.schemeColor(
-                    subTheme.tabBarItemSchemeColor!, colorScheme)
-                .withAlpha(0x99), // 60%,
-        dividerColor: subTheme.tabBarDividerColor,
+            : subTheme.tabBarUnselectedItemSchemeColor == null
+                ? useMaterial3
+                    ? FlexSubThemes.schemeColor(
+                            SchemeColor.surfaceVariant, colorScheme)
+                        .withAlpha(tabBarUnselectedAlpha)
+                    : FlexSubThemes.schemeColor(
+                            subTheme.tabBarItemSchemeColor!, colorScheme)
+                        .withAlpha(tabBarUnselectedAlpha)
+                : FlexSubThemes.schemeColor(
+                        subTheme.tabBarUnselectedItemSchemeColor!, colorScheme)
+                    .withAlpha(tabBarUnselectedAlpha),
         indicatorSize: subTheme.tabBarIndicatorSize,
+        indicatorWeight: subTheme.tabBarIndicatorWeight,
+        indicatorTopRadius: subTheme.tabBarIndicatorTopRadius,
+        dividerColor: subTheme.tabBarDividerColor,
         useMaterial3: useMaterial3,
       ),
       //

@@ -44,6 +44,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - **Added**: Property `snackBarRadius` to `FlexSubThemesData`, it controls the border radius via `FlexSubThemes.snackBarTheme` by using its `radius` property.  
   - NOTE: If this property is set, both SnackBars with behavior fixed and floating will get the assigned radius. See Flutter issue: https://github.com/flutter/flutter/issues/108539 
 
+- **Added**: Properties `tabBarUnselectedItemSchemeColor`, `tabBarUnselectedItemOpacity`, `tabBarIndicatorWeight` and `tabBarIndicatorTopRadius` to `FlexSubThemesData`.
+
 
 **CHANGE**
 
@@ -151,8 +153,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- ADD: New TabBar properties unselected color, unselected opacity, indicator thickness.
-- Playground: ADD TabBar controls
+- Playground: ADD TabBar controls for unselected color, unselected opacity, indicator thickness and top radius.
 - NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
 - Playground: IMPROVE Material 3 demo, hookup ctrl for theme mode and M3 + update to latest.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5

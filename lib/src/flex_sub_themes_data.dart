@@ -261,8 +261,12 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomAppBarSchemeColor,
     //
     this.tabBarItemSchemeColor,
+    this.tabBarUnselectedItemSchemeColor,
+    this.tabBarUnselectedItemOpacity,
     this.tabBarIndicatorSchemeColor,
     this.tabBarIndicatorSize,
+    this.tabBarIndicatorWeight,
+    this.tabBarIndicatorTopRadius,
     this.tabBarDividerColor,
     //
     this.drawerRadius,
@@ -1815,18 +1819,47 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
-  /// If not defined, TabBar items uses the factories
-  /// [FlexColorScheme.light] or [FlexColorScheme.dark] with the enum value
+  /// If not defined and [bottomAppBarSchemeColor] is not defined, them TabBar
+  /// items uses the factories [FlexColorScheme.light] or
+  /// [FlexColorScheme.dark] with the enum value
   /// [FlexTabBarStyle] with property [tabBarStyle], to determine
-  /// the [TabBar] item color.
+  /// the [TabBar] unselected items color.
   ///
-  /// The themed [TabBar] background color is typically defined by
+  /// If not defined and [bottomAppBarSchemeColor] is defined and we use
+  /// M2, then defaults to [bottomAppBarSchemeColor], if we use M3 then it
+  /// defaults to [SchemeColor.onSurfaceVariant].
+  ///
+  /// The themed [TabBar] item color is typically defined by
   /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
   /// This property is an override that offers more quick config options by
   /// allowing picking any color from the effective [ColorScheme], instead of
   /// just the options in the [FlexColorScheme.light] and [FlexColorScheme.dark]
   /// (tabBarStyle) factory parameter.
   final SchemeColor? tabBarItemSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
+  /// unselected items use.
+  ///
+  /// If not defined, TabBar items uses the factories
+  /// [FlexColorScheme.light] or [FlexColorScheme.dark] with the enum value
+  /// [FlexTabBarStyle] with property [tabBarStyle], to determine
+  /// the color of unselected [TabBar] items.
+  ///
+  /// The themed [TabBar] unselected item color is typically defined by
+  /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
+  /// This property is an override that offers more quick config options by
+  /// allowing picking any color from the effective [ColorScheme], instead of
+  /// just the options in the [FlexColorScheme.light] and [FlexColorScheme.dark]
+  /// (tabBarStyle) factory parameter.
+  final SchemeColor? tabBarUnselectedItemSchemeColor;
+
+  /// Defines the opacity used on the [TabBar] unselected items.
+  ///
+  /// Only has any effect when the [tabBarUnselectedItemSchemeColor] is defined.
+  ///
+  /// If not defined, and M3 is used, defaults to 1 (100%), fully opaque. If
+  /// M2 is used, defaults to 0.7 (70%) opacity.
+  final double? tabBarUnselectedItemOpacity;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// indicator uses.
@@ -1845,6 +1878,17 @@ class FlexSubThemesData with Diagnosticable {
   /// (the default) or relative to the bounds of the tab's widget if
   /// [indicatorSize] is [TabBarIndicatorSize.label].
   final TabBarIndicatorSize? tabBarIndicatorSize;
+
+  /// The thickness of the underline border indicator on the [TabBar].
+  ///
+  /// If not defined, defaults to 2 in M2 and to 3 in M3.
+  final double? tabBarIndicatorWeight;
+
+  /// The top left and right corner radius of the underline border
+  /// indicator on the [TabBar].
+  ///
+  /// If not defined, defaults to 0 in M2 and to 3 in M3.
+  final double? tabBarIndicatorTopRadius;
 
   /// The color of the divider.
   ///
@@ -2749,8 +2793,12 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? bottomAppBarSchemeColor,
     //
     final SchemeColor? tabBarItemSchemeColor,
+    final SchemeColor? tabBarUnselectedItemSchemeColor,
+    final double? tabBarUnselectedItemOpacity,
     final SchemeColor? tabBarIndicatorSchemeColor,
     final TabBarIndicatorSize? tabBarIndicatorSize,
+    final double? tabBarIndicatorWeight,
+    final double? tabBarIndicatorTopRadius,
     final Color? tabBarDividerColor,
     //
     final double? drawerRadius,
@@ -3035,9 +3083,17 @@ class FlexSubThemesData with Diagnosticable {
       //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
+      tabBarUnselectedItemSchemeColor: tabBarUnselectedItemSchemeColor ??
+          this.tabBarUnselectedItemSchemeColor,
+      tabBarUnselectedItemOpacity:
+          tabBarUnselectedItemOpacity ?? this.tabBarUnselectedItemOpacity,
       tabBarIndicatorSchemeColor:
           tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
       tabBarIndicatorSize: tabBarIndicatorSize ?? this.tabBarIndicatorSize,
+      tabBarIndicatorWeight:
+          tabBarIndicatorWeight ?? this.tabBarIndicatorWeight,
+      tabBarIndicatorTopRadius:
+          tabBarIndicatorTopRadius ?? this.tabBarIndicatorTopRadius,
       tabBarDividerColor: tabBarDividerColor ?? this.tabBarDividerColor,
       //
       drawerRadius: drawerRadius ?? this.drawerRadius,
@@ -3366,8 +3422,13 @@ class FlexSubThemesData with Diagnosticable {
         other.bottomAppBarSchemeColor == bottomAppBarSchemeColor &&
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
+        other.tabBarUnselectedItemSchemeColor ==
+            tabBarUnselectedItemSchemeColor &&
+        other.tabBarUnselectedItemOpacity == tabBarUnselectedItemOpacity &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         other.tabBarIndicatorSize == tabBarIndicatorSize &&
+        other.tabBarIndicatorWeight == tabBarIndicatorWeight &&
+        other.tabBarIndicatorTopRadius == tabBarIndicatorTopRadius &&
         other.tabBarDividerColor == tabBarDividerColor &&
         //
         other.drawerRadius == drawerRadius &&
@@ -3633,8 +3694,12 @@ class FlexSubThemesData with Diagnosticable {
         bottomAppBarSchemeColor,
         //
         tabBarItemSchemeColor,
+        tabBarUnselectedItemSchemeColor,
+        tabBarUnselectedItemOpacity,
         tabBarIndicatorSchemeColor,
         tabBarIndicatorSize,
+        tabBarIndicatorWeight,
+        tabBarIndicatorTopRadius,
         tabBarDividerColor,
         //
         drawerRadius,
@@ -3958,9 +4023,17 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
+        'tabBarUnselectedItemSchemeColor', tabBarUnselectedItemSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'tabBarUnselectedItemOpacity', tabBarUnselectedItemOpacity));
+    properties.add(EnumProperty<SchemeColor>(
         'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
     properties.add(EnumProperty<TabBarIndicatorSize>(
         'tabBarIndicatorSize', tabBarIndicatorSize));
+    properties.add(DiagnosticsProperty<double>(
+        'tabBarIndicatorWeight', tabBarIndicatorWeight));
+    properties.add(DiagnosticsProperty<double>(
+        'tabBarIndicatorTopRadius', tabBarIndicatorTopRadius));
     properties.add(ColorProperty('tabBarDividerColor', tabBarDividerColor));
     //
     properties.add(DiagnosticsProperty<double>('drawerRadius', drawerRadius));

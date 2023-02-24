@@ -44,16 +44,17 @@ class TabBarSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForAppBarShowcase(),
+        const ListTile(
+          title: Text('TabBar'),
+          subtitle: Text('FlexColorscheme comes with a quick TabBar styling '
+              'options where you can choose if it should always fit in '
+              'your AppBar, regardless of what theme you set for it, usually '
+              'you want this, but sometimes surface might be preferred or '
+              'just the Flutter SDK default style.'),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForBackgroundShowcase(),
-        ),
+        const SizedBox(height: 8),
         TabBarStylePopupMenu(
-          title: const Text('Choose TabBarStyle that fits your use case'),
+          title: const Text('Select TabBarStyle that fits your use case'),
           labelForDefault:
               useMaterial3 ? 'Default (flutterDefault)' : 'Default (forAppBar)',
           index: controller.tabBarStyle?.index ?? -1,
@@ -67,9 +68,18 @@ class TabBarSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const SizedBox(height: 24),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForAppBarShowcase(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TabBarForBackgroundShowcase(),
+        ),
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Custom colors'),
+          title: Text('Custom TabBar colors and styles'),
           subtitle: Text('With component themes enabled you can select '
               'scheme color for the tab items and indicator separately. '
               'Using TabBarStyle conveniently syncs the TabBar to active '
