@@ -31,8 +31,10 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// The vertical scrolling of the two side-by-side panels are a bit
 /// interlinked, since:
+///
 /// a) They are in the same PageView.
 /// b) They are in the same sliver custom scroll scroll view
+///
 /// Despite this they do scroll semin independently as the one that has nothing
 /// more to scroll, will say put showing most of its content while the other
 /// side still scroll ups.
