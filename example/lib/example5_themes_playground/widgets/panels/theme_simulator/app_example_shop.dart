@@ -4,7 +4,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../shared/const/app_data.dart';
+import '../../../../shared/const/app.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/utils/link_text_span.dart';
 

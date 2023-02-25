@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/const/app_data.dart';
+import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../theme/flex_theme_dark.dart';
 import '../theme/flex_theme_light.dart';

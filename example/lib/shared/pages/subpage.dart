@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../const/app_data.dart';
+import '../const/app.dart';
 import '../controllers/theme_controller.dart';
 import '../widgets/app/about.dart';
 import '../widgets/app/show_color_scheme_colors.dart';

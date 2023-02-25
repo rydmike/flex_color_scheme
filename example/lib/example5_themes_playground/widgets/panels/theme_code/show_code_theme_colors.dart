@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app_data.dart';
+import '../../../../shared/const/app.dart';
 import '../../../../shared/widgets/app/color_card.dart';
 import '../../../theme/code_theme.dart';
 
