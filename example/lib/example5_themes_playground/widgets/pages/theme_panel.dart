@@ -58,6 +58,7 @@ class ThemePanel extends StatelessWidget {
       SeededColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
       EffectiveColors(controller),
+      ThemeCode(controller),
       ComponentSettings(controller),
       TextFieldSettings(controller),
       AppBarSettings(controller),
@@ -83,7 +84,6 @@ class ThemePanel extends StatelessWidget {
       PageExamples(controller: controller),
       const MaterialPanel(),
       AndroidNavigationBarSettings(controller),
-      ThemeCode(controller),
     ].elementAt(page);
   }
 }

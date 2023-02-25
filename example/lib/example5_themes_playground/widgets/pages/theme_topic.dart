@@ -54,6 +54,11 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.gradient_outlined,
   ),
   ThemeTopic(
+    heading: 'Theme code',
+    buttonLabel: 'Theme\ncode',
+    icon: Icons.integration_instructions_outlined,
+  ),
+  ThemeTopic(
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
@@ -174,10 +179,5 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Android system navigation bar',
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
-  ),
-  ThemeTopic(
-    heading: 'Theme code',
-    buttonLabel: 'Theme\ncode',
-    icon: Icons.integration_instructions_outlined,
   ),
 ];
