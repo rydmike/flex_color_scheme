@@ -417,6 +417,92 @@ class FlexSubThemes {
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
       schemeColor(onSchemeColor(value), colorScheme);
 
+  /// Returns the FCS opinionated tinted hover color of a passed in color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedHover(Color tint, Color overlay, Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return tint
+            .blendAlpha(overlay, kHoverAlphaBlend)
+            .withAlpha(kHoverAlpha);
+      case Brightness.dark:
+        return tint
+            .blendAlpha(overlay, kHoverAlphaBlend)
+            .withAlpha(kHoverAlpha);
+    }
+  }
+
+  /// Returns the FCS opinionated tinted focus color of a passed in color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedFocus(Color tint, Color overlay, Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return tint
+            .blendAlpha(Colors.white, kFocusAlphaBlend)
+            .withAlpha(kFocusAlpha);
+      case Brightness.dark:
+        return tint
+            .blendAlpha(Colors.white, kFocusAlphaBlend)
+            .withAlpha(kFocusAlpha);
+    }
+  }
+
+  /// Returns the FCS opinionated tinted splash color of a passed in color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedSplash(Color tint, Color overlay, Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return tint
+            .blendAlpha(overlay, kSplashAlphaBlend)
+            .withAlpha(kSplashAlpha);
+      case Brightness.dark:
+        return tint
+            .blendAlpha(overlay, kSplashAlphaBlend)
+            .withAlpha(kSplashAlpha);
+    }
+  }
+
+  /// Returns the FCS opinionated tinted highlight color of a passed in color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedHighlight(
+      Color tint, Color overlay, Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return tint
+            .blendAlpha(Colors.white, kHighlightAlphaBlend)
+            .withAlpha(kHighlightAlpha);
+      case Brightness.dark:
+        return tint
+            .blendAlpha(Colors.white, kHighlightAlphaBlend)
+            .withAlpha(kHighlightAlpha);
+    }
+  }
+
+  /// Returns the FCS opinionated tinted disabled color of a passed in color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedDisable(Color tint, Color overlay, Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return tint
+            .blendAlpha(overlay, kDisabledAlphaBlend)
+            .withAlpha(kDisabledForegroundAlpha);
+      case Brightness.dark:
+        return tint
+            .blendAlpha(overlay, kDisabledAlphaBlend)
+            .withAlpha(kDisabledForegroundAlpha);
+    }
+  }
+
   /// An opinionated [AppBarTheme] theme.
   ///
   /// Contrary to the other opinionated static [FlexSubThemes] sub-theme

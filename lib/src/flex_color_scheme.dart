@@ -6180,9 +6180,8 @@ class FlexColorScheme with Diagnosticable {
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 =  ThemeData default.
       disabledColor: tintedDisabled
-          ? colorScheme.primary
-              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-              .withAlpha(kDisabledForegroundAlpha)
+          ? FlexSubThemes.tintedDisable(colorScheme.primary,
+              colorScheme.onSurface, colorScheme.brightness)
           : isDark
               ? Colors.white38
               : Colors.black38,
@@ -6198,15 +6197,13 @@ class FlexColorScheme with Diagnosticable {
       // and letting it assign its values.
       // TODO(rydmike): Monitor Flutter SDK deprecation of focusColor.
       focusColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kFocusAlphaBlend)
-              .withAlpha(kFocusAlpha)
+          ? FlexSubThemes.tintedFocus(
+              colorScheme.primary, Colors.white, colorScheme.brightness)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of highlightColor.
       highlightColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kHighlightAlphaBlend)
-              .withAlpha(kHighlightAlpha)
+          ? FlexSubThemes.tintedHighlight(
+              colorScheme.primary, Colors.white, colorScheme.brightness)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
       // Same as ThemeData SDK, hintColor is only used by DropdownButton
@@ -6214,9 +6211,8 @@ class FlexColorScheme with Diagnosticable {
       hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
       // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
       hoverColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kHoverAlphaBlend)
-              .withAlpha(kHoverAlpha)
+          ? FlexSubThemes.tintedHover(
+              colorScheme.primary, Colors.white, colorScheme.brightness)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
@@ -6269,9 +6265,8 @@ class FlexColorScheme with Diagnosticable {
       secondaryHeaderColor: secondaryHeaderColor,
       // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
       splashColor: tintedInteractions
-          ? colorScheme.primary
-              .blendAlpha(Colors.white, kSplashAlphaBlend)
-              .withAlpha(kSplashAlpha)
+          ? FlexSubThemes.tintedSplash(
+              colorScheme.primary, Colors.white, colorScheme.brightness)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
       // See: https://github.com/flutter/flutter/pull/95870
