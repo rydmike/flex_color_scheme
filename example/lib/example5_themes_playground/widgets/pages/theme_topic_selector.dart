@@ -161,10 +161,11 @@ class _ThemeTopicSelectorVerticalState
   late int selectedPage;
   late double scrollOffset;
   static const double effectiveWidth =
-      App.panelButtonWidth + App.panelButtonPhoneWidthReduce;
+      App.panelButtonWidth + App.panelButtonPhoneWidthReduce - 8;
   static const double effectiveHeight = App.panelButtonHeight +
       App.edgeInsetsPhone * 2 +
-      App.panelButtonPhoneHeightReduce;
+      App.panelButtonPhoneHeightReduce -
+      4;
 
   @override
   void initState() {
