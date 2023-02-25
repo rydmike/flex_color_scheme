@@ -1223,23 +1223,48 @@ class _IconButtonCircleAvatarDropdownShowcaseState
   }
 }
 
-class ProgressIndicatorShowcase extends StatelessWidget {
+class ProgressIndicatorShowcase extends StatefulWidget {
   const ProgressIndicatorShowcase({super.key});
 
   @override
+  State<ProgressIndicatorShowcase> createState() =>
+      _ProgressIndicatorShowcaseState();
+}
+
+class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
+  bool playProgressIndicator = false;
+  @override
   Widget build(BuildContext context) {
+    final double? progressValue = playProgressIndicator ? null : 0.75;
+
     return RepaintBoundary(
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 16,
         runSpacing: 16,
-        children: const <Widget>[
+        children: <Widget>[
+          IconButton(
+            isSelected: playProgressIndicator,
+            selectedIcon: const Icon(Icons.pause),
+            icon: const Icon(Icons.play_arrow),
+            onPressed: () {
+              setState(() {
+                playProgressIndicator = !playProgressIndicator;
+              });
+            },
+          ),
           SizedBox(
             width: 50,
             height: 50,
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              value: progressValue,
+            ),
           ),
-          SizedBox(width: 200, child: LinearProgressIndicator()),
+          SizedBox(
+              width: 200,
+              child: LinearProgressIndicator(
+                value: progressValue,
+              )),
         ],
       ),
     );

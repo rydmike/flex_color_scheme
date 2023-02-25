@@ -452,6 +452,7 @@ class ShowcaseListTile extends StatelessWidget {
         CCard(
           padding: EdgeInsets.zero,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: const <Widget>[
               ListTileShowcase(),
               Divider(),
@@ -485,9 +486,13 @@ class ShowcaseSlider extends StatelessWidget {
         CCard(
           padding: EdgeInsets.zero,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: const <Widget>[
               ListTile(title: Text('Progress indicators')),
-              Center(child: ProgressIndicatorShowcase()),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: ProgressIndicatorShowcase(),
+              ),
               SizedBox(height: 16),
             ],
           ),
