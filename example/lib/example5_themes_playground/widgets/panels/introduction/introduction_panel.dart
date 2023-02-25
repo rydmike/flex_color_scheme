@@ -98,15 +98,16 @@ class IntroductionPanel extends StatelessWidget {
             '\n'
             'The theming settings and their impact on widgets are shown in '
             'widget topic panels. There is also a theme simulator where you '
-            'can see your configured theme using some sample apps and '
-            'different mock devices.\n'
+            'can see your configured theme using a few sample apps, including '
+            'the Flutter official M3 demo app, on many different '
+            'mock devices.\n'
             '\n'
             'The same content is used in two different modes with very '
             'different layouts. The default one is a page view, '
             'where you see one, or in wider screens, two selectable topics '
             'at a time. The second screen is a '
             'large masonry grid view, where you can see many topics at once '
-            'if using a very large screens. You can open and close topics to '
+            'when using very large screens. You can open and close topics to '
             'view more or fewer of them at the same time. '
             'This app works on phones, but is primarily intended to be used on '
             'web based desktop browsers, or as a native Windows, '
@@ -132,7 +133,7 @@ class IntroductionPanel extends StatelessWidget {
           title: Text('FlexColorScheme Theming'),
           subtitle: Text('You can turn OFF FlexColorScheme to see what a '
               'theme looks like when using vanilla Flutter '
-              'ThemeData() factory, using the same ColorScheme '
+              'ThemeData factory, using the same ColorScheme '
               'as shown when FlexColorScheme is active.'),
         ),
         SwitchListTile(
@@ -148,7 +149,7 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: const Text('The opinionated component sub '
               'theming is ON by default in this app, but OFF by default in '
               'the API. By using them you get pre-styled components that you '
-              'can adjust further.'),
+              'can adjust.'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -159,15 +160,15 @@ class IntroductionPanel extends StatelessWidget {
             'opinionated Material 3 default setup. If you turn OFF Material 3, '
             'you get a Material 2 theme that is inspired by Material 3, '
             'without using the "useMaterial3" toggle in ThemeData. All widgets '
-            'are Material 2 based, you can give them colors from the M3 '
-            'ColorScheme and also use a seeded ColorScheme with them. ',
+            'are then M2 based, you can still give them colors from the M3 '
+            'ColorScheme and also use M3 style seeded ColorScheme. ',
           ),
         ),
         ListTile(
           subtitle: const Text(
               'Want to use a FlexColorScheme theme you configured here in '
               'your Flutter app? Then Copy the setup code, paste it into your '
-              'Flutter app, import FlexColorScheme, and theming is done.'),
+              'Flutter app, import FlexColorScheme and your theme is done.'),
           trailing: FilledButton(
             onPressed: controller.useFlexColorScheme
                 ? () async {
@@ -190,10 +191,10 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
-          subtitle: Text('In Flutter 3.7 there are only a minor issues '
+          subtitle: Text('In Flutter 3.7 there are only minor issues '
               'with Material 3, with low impact on apps using it. '
               'FlexColorScheme is also able to work around and fix some of '
-              'them. In Flutter 3.3 and earlier, that are many severe issues '
+              'them. In Flutter 3.3 and earlier, there are many severe issues '
               'related to enabling and using Material 3.'),
         ),
         Padding(
@@ -204,7 +205,7 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'You can read more about M3 and theming related '
-                      'issues in FlexColorScheme docs, where the issues '
+                      'issues in the FlexColorScheme docs, where these issues '
                       'are being ',
                 ),
                 LinkTextSpan(
@@ -221,7 +222,7 @@ class IntroductionPanel extends StatelessWidget {
                       '\n'
                       'In Flutter 3.7 and later, M3 is ready and can be '
                       'used in production. Some minor M3 fidelity and '
-                      'specification compliance issues still exists, they '
+                      'specification compliance issues still exists. They '
                       'are minor and will be fixed in later releases.',
                 ),
               ],

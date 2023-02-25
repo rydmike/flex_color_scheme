@@ -34,7 +34,10 @@ class PremadeDesignsPanel extends StatelessWidget {
               'desired. Many choices use seeded Material 3 ColorScheme and '
               'they all use Material 3 mode. You can easily turn both off. '
               'In fact all configs are just starting points for you to '
-              'explore and modify further.'),
+              'explore and modify further.\n'
+              'In a two panels view, try the Theme simulator as 2nd panel '
+              'with the official Material 3 demo app, using 11" or 12" iPad, '
+              'to experience how these examples impact the theme.'),
         ),
         UseSeededColorSchemeSwitch(controller: controller),
         const SizedBox(height: 8),
