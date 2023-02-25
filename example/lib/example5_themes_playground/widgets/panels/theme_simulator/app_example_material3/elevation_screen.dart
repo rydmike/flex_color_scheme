@@ -4,6 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'constants.dart';
+
 class ElevationScreen extends StatelessWidget {
   const ElevationScreen({super.key});
 
@@ -63,8 +65,6 @@ class ElevationScreen extends StatelessWidget {
   }
 }
 
-const double narrowScreenWidthThreshold = 450;
-
 class ElevationGrid extends StatelessWidget {
   const ElevationGrid({super.key, this.shadowColor, this.surfaceTintColor});
 
@@ -90,7 +90,7 @@ class ElevationGrid extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       sliver: SliverLayoutBuilder(
           builder: (BuildContext context, SliverConstraints constraints) {
-        if (constraints.crossAxisExtent < narrowScreenWidthThreshold) {
+        if (constraints.crossAxisExtent < kNarrowScreenWidthThreshold) {
           return SliverGrid.count(
             crossAxisCount: 3,
             children: elevationCards(shadowColor, surfaceTintColor),

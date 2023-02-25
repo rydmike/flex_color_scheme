@@ -5,18 +5,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../shared/const/app.dart';
 import '../../../../../shared/controllers/theme_controller.dart';
-import '../../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../../shared/utils/link_text_span.dart';
 import 'color_palettes_screen.dart';
 import 'component_screen.dart';
+import 'constants.dart';
 import 'elevation_screen.dart';
 import 'typography_screen.dart';
-
-// NavigationRail shows if the screen width is greater or equal to
-// screenWidthThreshold; otherwise, NavigationBar is used for navigation.
-const double narrowScreenWidthThreshold = 450;
-
-const double transitionLength = 500;
 
 class AppExampleMaterial3 extends StatefulWidget {
   const AppExampleMaterial3({super.key, required this.themeController});
@@ -26,45 +20,46 @@ class AppExampleMaterial3 extends StatefulWidget {
   State<AppExampleMaterial3> createState() => _AppExampleMaterial3State();
 }
 
-enum ScreenSelected {
-  component(0),
-  color(1),
-  typography(2),
-  elevation(3);
-
-  const ScreenSelected(this.value);
-  final int value;
-}
-
 class _AppExampleMaterial3State extends State<AppExampleMaterial3>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late final AnimationController controller;
+  late final AnimationController oneTwoController;
+  late final CurvedAnimation oneTwoAnimation;
+  late final AnimationController railController;
   late final CurvedAnimation railAnimation;
-  bool controllerInitialized = false;
+  bool oneTwoControllerInitialized = false;
+  bool railControllerInitialized = false;
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
 
-  // ColorSeed colorSelected = ColorSeed.baseColor;
   int screenIndex = ScreenSelected.component.value;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      duration: Duration(milliseconds: transitionLength.toInt() * 2),
+    oneTwoController = AnimationController(
+      duration: Duration(milliseconds: kTransitionLength.toInt() * 2),
+      value: 0,
+      vsync: this,
+    );
+    oneTwoAnimation = CurvedAnimation(
+      parent: oneTwoController,
+      curve: const Interval(0.5, 1.0),
+    );
+    railController = AnimationController(
+      duration: Duration(milliseconds: kTransitionLength.toInt() * 2),
       value: 0,
       vsync: this,
     );
     railAnimation = CurvedAnimation(
-      parent: controller,
+      parent: railController,
       curve: const Interval(0.5, 1.0),
     );
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    oneTwoController.dispose();
     super.dispose();
   }
 
@@ -73,31 +68,54 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
     super.didChangeDependencies();
 
     final double width = MediaQuery.of(context).size.width;
-    final AnimationStatus status = controller.status;
-    if (width > 820) {
-      if (width > 1200) {
+    final AnimationStatus oneTwoStatus = oneTwoController.status;
+    final AnimationStatus railStatus = railController.status;
+    // Use rail or navigation bar
+    if (width > kNarrowScreenWidthThreshold) {
+      showMediumSizeLayout = false;
+      showLargeSizeLayout = false;
+      if (railStatus != AnimationStatus.forward &&
+          railStatus != AnimationStatus.completed) {
+        railController.forward();
+      }
+    } else {
+      showMediumSizeLayout = false;
+      showLargeSizeLayout = false;
+      if (railStatus != AnimationStatus.reverse &&
+          railStatus != AnimationStatus.dismissed) {
+        railController.reverse();
+      }
+    }
+    if (!railControllerInitialized) {
+      railControllerInitialized = true;
+      railController.value = width > kNarrowScreenWidthThreshold ? 1 : 0;
+    }
+    // One or Two colum with rail
+    if (width > kMediumWidthBreakpoint) {
+      if (width > kLargeWidthBreakpoint) {
         showMediumSizeLayout = false;
         showLargeSizeLayout = true;
       } else {
         showMediumSizeLayout = true;
         showLargeSizeLayout = false;
       }
-      if (status != AnimationStatus.forward &&
-          status != AnimationStatus.completed) {
-        controller.forward();
+      if (oneTwoStatus != AnimationStatus.forward &&
+          oneTwoStatus != AnimationStatus.completed) {
+        oneTwoController.forward();
       }
     } else {
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
-      if (status != AnimationStatus.reverse &&
-          status != AnimationStatus.dismissed) {
-        controller.reverse();
+      if (oneTwoStatus != AnimationStatus.reverse &&
+          oneTwoStatus != AnimationStatus.dismissed) {
+        oneTwoController.reverse();
       }
     }
-    if (!controllerInitialized) {
-      controllerInitialized = true;
-      controller.value = width > 820 ? 1 : 0;
+    if (!oneTwoControllerInitialized) {
+      oneTwoControllerInitialized = true;
+      oneTwoController.value = width > kMediumWidthBreakpoint ? 1 : 0;
     }
+    setState(() {});
   }
 
   void handleScreenChanged(int screenSelected) {
@@ -112,14 +130,12 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
       case ScreenSelected.component:
         return Expanded(
           child: OneTwoTransition(
-            animation: railAnimation,
+            animation: oneTwoAnimation,
             one: FirstComponentList(
                 showNavBottomBar: showNavBarExample,
                 scaffoldKey: scaffoldKey,
                 showSecondList: showMediumSizeLayout || showLargeSizeLayout),
-            two: SecondComponentList(
-              scaffoldKey: scaffoldKey,
-            ),
+            two: SecondComponentList(scaffoldKey: scaffoldKey),
           ),
         );
       case ScreenSelected.color:
@@ -144,46 +160,175 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
           : const Text('Material 2'),
       leading: const Material3About(useRootNavigator: false),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
-          ? null
+          ? <Widget>[
+              _BrightnessButton(controller: widget.themeController),
+              _Material3Button(controller: widget.themeController),
+            ]
           : <Widget>[const SizedBox.shrink()],
     );
   }
 
+  Widget _expandedTrailingActions() => Container(
+        constraints: const BoxConstraints.tightFor(width: kRailExpandedWidth),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                const Text('Light'),
+                const Spacer(),
+                Switch(
+                    value: Theme.of(context).brightness == Brightness.light,
+                    onChanged: (bool value) {
+                      if (value) {
+                        widget.themeController.setThemeMode(ThemeMode.light);
+                      } else {
+                        widget.themeController.setThemeMode(ThemeMode.dark);
+                      }
+                    })
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                const Text('Material 3'),
+                const Spacer(),
+                Switch(
+                  value: widget.themeController.useMaterial3,
+                  onChanged: widget.themeController.setUseMaterial3,
+                )
+              ],
+            ),
+          ],
+        ),
+      );
+
+  Widget _trailingActions() => Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Flexible(
+            child: _BrightnessButton(
+              controller: widget.themeController,
+              showTooltipBelow: false,
+            ),
+          ),
+          Flexible(
+            child: _Material3Button(
+              controller: widget.themeController,
+              showTooltipBelow: false,
+            ),
+          ),
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: controller,
+      animation: oneTwoController,
       builder: (BuildContext context, Widget? child) {
-        return NavigationTransition(
-          scaffoldKey: scaffoldKey,
-          animationController: controller,
-          railAnimation: railAnimation,
-          appBar: createAppBar(),
-          body: createScreenFor(
-              ScreenSelected.values[screenIndex], controller.value == 1),
-          navigationRail: NavigationRail(
-            extended: showLargeSizeLayout,
-            destinations: navRailDestinations,
-            selectedIndex: screenIndex,
-            onDestinationSelected: (int index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-          ),
-          navigationBar: NavigationBars(
-            onSelectItem: (int index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-            selectedIndex: screenIndex,
-            isExampleBar: false,
-          ),
-        );
+        return AnimatedBuilder(
+            animation: railAnimation,
+            builder: (BuildContext context, Widget? child) {
+              return NavigationTransition(
+                scaffoldKey: scaffoldKey,
+                animationController: railController,
+                railAnimation: railAnimation,
+                appBar: createAppBar(),
+                body: createScreenFor(ScreenSelected.values[screenIndex],
+                    railController.value == 1),
+                navigationRail: NavigationRail(
+                  minExtendedWidth: kRailExpandedWidth,
+                  extended: showLargeSizeLayout,
+                  // The Rail is silly, it does not expand if type is something
+                  // else than none, e.g. via FCS themes.
+                  labelType:
+                      showLargeSizeLayout ? NavigationRailLabelType.none : null,
+                  destinations: navRailDestinations,
+                  selectedIndex: screenIndex,
+                  onDestinationSelected: (int index) {
+                    setState(() {
+                      screenIndex = index;
+                      handleScreenChanged(screenIndex);
+                    });
+                  },
+                  trailing: Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: showLargeSizeLayout
+                          ? _expandedTrailingActions()
+                          : _trailingActions(),
+                    ),
+                  ),
+                ),
+                navigationBar: NavigationBars(
+                  onSelectItem: (int index) {
+                    setState(() {
+                      screenIndex = index;
+                      handleScreenChanged(screenIndex);
+                    });
+                  },
+                  selectedIndex: screenIndex,
+                  isExampleBar: false,
+                ),
+              );
+            });
       },
+    );
+  }
+}
+
+class _BrightnessButton extends StatelessWidget {
+  const _BrightnessButton({
+    this.showTooltipBelow = true,
+    required this.controller,
+  });
+  final bool showTooltipBelow;
+  final ThemeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isBright = Theme.of(context).brightness == Brightness.light;
+    return Tooltip(
+      preferBelow: showTooltipBelow,
+      message: isBright ? 'Set to dark' : 'Set to light',
+      child: IconButton(
+        icon: isBright
+            ? const Icon(Icons.dark_mode_outlined)
+            : const Icon(Icons.light_mode_outlined),
+        onPressed: () {
+          if (isBright) {
+            controller.setThemeMode(ThemeMode.dark);
+          } else {
+            controller.setThemeMode(ThemeMode.light);
+          }
+        },
+      ),
+    );
+  }
+}
+
+class _Material3Button extends StatelessWidget {
+  const _Material3Button({
+    this.showTooltipBelow = true,
+    required this.controller,
+  });
+  final bool showTooltipBelow;
+  final ThemeController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool useMaterial3 = Theme.of(context).useMaterial3;
+    return Tooltip(
+      preferBelow: showTooltipBelow,
+      message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
+      child: IconButton(
+          icon: useMaterial3
+              ? const Icon(Icons.looks_two_outlined)
+              : const Icon(Icons.looks_3_outlined),
+          onPressed: () {
+            controller.setUseMaterial3(!controller.useMaterial3);
+          }),
     );
   }
 }
@@ -237,28 +382,25 @@ class _NavigationTransitionState extends State<NavigationTransition> {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    return ScrollConfiguration(
-      behavior: const DragScrollBehavior(),
-      child: Scaffold(
-        key: widget.scaffoldKey,
-        appBar: widget.appBar,
-        body: Row(
-          children: <Widget>[
-            RailTransition(
-              animation: railAnimation,
-              backgroundColor: colorScheme.surface,
-              child: widget.navigationRail,
-            ),
-            widget.body,
-          ],
-        ),
-        bottomNavigationBar: BarTransition(
-          animation: barAnimation,
-          backgroundColor: colorScheme.surface,
-          child: widget.navigationBar,
-        ),
-        endDrawer: const NavigationDrawerSection(),
+    return Scaffold(
+      key: widget.scaffoldKey,
+      appBar: widget.appBar,
+      body: Row(
+        children: <Widget>[
+          RailTransition(
+            animation: railAnimation,
+            backgroundColor: colorScheme.surface,
+            child: widget.navigationRail,
+          ),
+          widget.body,
+        ],
       ),
+      bottomNavigationBar: BarTransition(
+        animation: barAnimation,
+        backgroundColor: colorScheme.surface,
+        child: widget.navigationBar,
+      ),
+      endDrawer: const NavigationDrawerSection(),
     );
   }
 }

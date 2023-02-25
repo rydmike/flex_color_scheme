@@ -155,7 +155,6 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                 ),
               ),
             ),
-            // const Spacer(),
           ]),
     );
   }
