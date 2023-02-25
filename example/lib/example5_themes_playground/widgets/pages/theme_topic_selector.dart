@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -7,6 +6,8 @@ import '../../../shared/const/app.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/utils/colors_are_close.dart';
 import 'theme_topic.dart';
+
+// ignore_for_file: comment_references
 
 /// Horizontal panel selector of active theme topic to view.
 ///
@@ -17,10 +18,12 @@ class ThemeTopicSelectorHorizontal extends StatefulWidget {
     required this.page,
     required this.onSelect,
     required this.isCompact,
+    required this.buttonWidth,
   });
   final int page;
   final ValueChanged<int> onSelect;
   final bool isCompact;
+  final double buttonWidth;
 
   @override
   State<ThemeTopicSelectorHorizontal> createState() =>
@@ -32,12 +35,13 @@ class _ThemeTopicSelectorHorizontalState
   late final ScrollController scrollController;
   late int selectedPage;
   late double scrollOffset;
+  late double buttonWidth;
 
   @override
   void initState() {
     super.initState();
     selectedPage = widget.page;
-    scrollOffset = App.panelButtonWidth * selectedPage;
+    scrollOffset = widget.buttonWidth * selectedPage;
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
@@ -57,16 +61,8 @@ class _ThemeTopicSelectorHorizontalState
 
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
-      final MediaQueryData media = MediaQuery.of(context);
-      final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-          media.size.height < App.phoneHeightBreakpoint ||
-          widget.isCompact;
-      final double effectiveWidth = App.panelButtonWidth +
-          (isPhone ? App.panelButtonPhoneWidthReduce : 0);
-      scrollOffset = effectiveWidth * selectedPage;
-      unawaited(scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic));
+      scrollOffset = widget.buttonWidth * selectedPage;
+      scrollController.jumpTo(scrollOffset);
     }
   }
 
@@ -82,6 +78,7 @@ class _ThemeTopicSelectorHorizontalState
         margins * 2 +
         (isPhone ? App.panelButtonPhoneHeightReduce : 0);
     final double topPadding = media.padding.top;
+    final double buttonHorizontalMargin = isPhone ? 2 : 4;
 
     return FocusTraversalGroup(
       child: Material(
@@ -100,8 +97,9 @@ class _ThemeTopicSelectorHorizontalState
                       child: ScrollConfiguration(
                         behavior: const DragScrollBehavior(),
                         child: ListView.builder(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: margins - 4),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: margins - buttonHorizontalMargin,
+                          ),
                           controller: scrollController,
                           primary: false,
                           physics: const ClampingScrollPhysics(),
@@ -118,6 +116,8 @@ class _ThemeTopicSelectorHorizontalState
                               },
                               selected: selectedPage == index,
                               isCompact: widget.isCompact,
+                              width: widget.buttonWidth,
+                              buttonHorizontalMargin: buttonHorizontalMargin,
                             );
                           },
                         ),
@@ -134,9 +134,9 @@ class _ThemeTopicSelectorHorizontalState
   }
 }
 
-/// Vertical theme topic selector used in two columns view.
+/// Vertical theme topic selector used in the two columns view.
 ///
-/// Used only on large desktop views.
+/// Used only on large desktop views via [ThemeTwoTopicsPage].
 class ThemeTopicSelectorVertical extends StatefulWidget {
   const ThemeTopicSelectorVertical({
     super.key,
@@ -160,18 +160,20 @@ class _ThemeTopicSelectorVerticalState
   late final ScrollController scrollController;
   late int selectedPage;
   late double scrollOffset;
-  static const double effectiveWidth =
-      App.panelButtonWidth + App.panelButtonPhoneWidthReduce - 8;
-  static const double effectiveHeight = App.panelButtonHeight +
+
+  static const double buttonWidth =
+      App.panelButtonWidth + App.panelButtonPhoneWidthReduce - 4;
+  static const double buttonHeight = App.panelButtonHeight +
       App.edgeInsetsPhone * 2 +
       App.panelButtonPhoneHeightReduce -
-      4;
+      12;
+  static const double buttonMargin = 4;
 
   @override
   void initState() {
     super.initState();
     selectedPage = widget.page;
-    scrollOffset = (effectiveHeight - 4 * 2) * selectedPage;
+    scrollOffset = buttonHeight * selectedPage;
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
@@ -188,13 +190,10 @@ class _ThemeTopicSelectorVerticalState
   @override
   void didUpdateWidget(covariant ThemeTopicSelectorVertical oldWidget) {
     super.didUpdateWidget(oldWidget);
-
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
-      scrollOffset = (effectiveHeight - 4 * 2) * selectedPage;
-      unawaited(scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic));
+      scrollOffset = buttonHeight * selectedPage;
+      scrollController.jumpTo(scrollOffset);
     }
   }
 
@@ -206,13 +205,13 @@ class _ThemeTopicSelectorVerticalState
 
     return FocusTraversalGroup(
       child: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(width: effectiveWidth + margins),
+        constraints: BoxConstraints.tightFor(width: buttonWidth + margins),
         child: ScrollConfiguration(
           behavior: const DragScrollBehavior(),
           child: ListView.builder(
             padding: EdgeInsets.only(
-              left: widget.isRight ? 0 : margins - 4,
-              right: widget.isRight ? margins - 4 : 0,
+              left: widget.isRight ? 0 : margins - buttonMargin,
+              right: widget.isRight ? margins - buttonMargin : 0,
               bottom: margins,
             ),
             controller: scrollController,
@@ -221,9 +220,9 @@ class _ThemeTopicSelectorVerticalState
             itemCount: themeTopics.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                padding: const EdgeInsets.only(bottom: 4),
+                padding: const EdgeInsets.only(bottom: buttonMargin),
                 child: SizedBox(
-                  height: effectiveHeight - 4 * 3,
+                  height: buttonHeight - buttonMargin,
                   child: _ThemeTopicButton(
                     item: themeTopics[index],
                     onSelect: () {
@@ -234,6 +233,8 @@ class _ThemeTopicSelectorVerticalState
                     },
                     selected: selectedPage == index,
                     isCompact: true,
+                    width: buttonWidth,
+                    buttonHorizontalMargin: buttonMargin,
                   ),
                 ),
               );
@@ -252,11 +253,15 @@ class _ThemeTopicButton extends StatefulWidget {
     required this.selected,
     required this.onSelect,
     required this.isCompact,
+    required this.width,
+    this.buttonHorizontalMargin = 4,
   });
   final ThemeTopic item;
   final bool selected;
   final VoidCallback onSelect;
   final bool isCompact;
+  final double width;
+  final double buttonHorizontalMargin;
 
   @override
   State<_ThemeTopicButton> createState() => _ThemeTopicButtonState();
@@ -283,8 +288,6 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
     final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
         media.size.height < App.phoneHeightBreakpoint ||
         widget.isCompact;
-    final double effectiveWidth =
-        App.panelButtonWidth + (isPhone ? App.panelButtonPhoneWidthReduce : 0);
     final double textSize = isPhone ? 10 : 11;
     final double iconSize = isPhone ? 28 : 45;
     final double borderWidth = isPhone ? 3 : 5;
@@ -339,11 +342,11 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
       );
     }
     return SizedBox(
-      width: effectiveWidth,
+      width: widget.width,
       child: Card(
         elevation: 0,
         clipBehavior: Clip.antiAlias,
-        margin: const EdgeInsets.symmetric(horizontal: 4),
+        margin: EdgeInsets.symmetric(horizontal: widget.buttonHorizontalMargin),
         color: background,
         shape: shapeBorder,
         child: InkWell(

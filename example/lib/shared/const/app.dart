@@ -155,7 +155,7 @@ class App {
   /// breakpoints, when the compact view mode is selected.
   static const double panelButtonWidth = 115;
   static const double panelButtonHeight = 100;
-  static const double panelButtonPhoneWidthReduce = -16;
+  static const double panelButtonPhoneWidthReduce = -20;
   static const double panelButtonPhoneHeightReduce = -30;
 
   /// The width and height reduction of input color selection box in phone size.

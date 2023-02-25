@@ -130,6 +130,8 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
     final double margins = App.responsiveInsets(media.size.width, isCompact);
     final double buttonHeight = App.panelButtonHeight +
         (isPhone ? App.panelButtonPhoneHeightReduce : 0);
+    final double buttonWidth =
+        App.panelButtonWidth + (isPhone ? App.panelButtonPhoneWidthReduce : 0);
     // All the above is so we can below calculate how high the
     // [_ThemeTopicSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
@@ -161,6 +163,7 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
                   page: themeCtrl.viewIndex,
                   previousPage: previousPage,
                   isCompact: isCompact,
+                  buttonWidth: buttonWidth,
                   onSelect: (int index) {
                     if (previousPage != index) {
                       setState(() {
@@ -347,6 +350,7 @@ class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.previousPage,
     required this.onSelect,
     required this.isCompact,
+    required this.buttonWidth,
   });
   @override
   final TickerProvider vsync;
@@ -355,6 +359,7 @@ class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   final int previousPage;
   final ValueChanged<int> onSelect;
   final bool isCompact;
+  final double buttonWidth;
 
   @override
   Widget build(
@@ -363,6 +368,7 @@ class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       page: page,
       onSelect: onSelect,
       isCompact: isCompact,
+      buttonWidth: buttonWidth,
     );
   }
 

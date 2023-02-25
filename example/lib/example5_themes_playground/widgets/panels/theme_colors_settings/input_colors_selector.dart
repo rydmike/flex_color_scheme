@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -83,15 +81,13 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
       scrollOffset =
           (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
               schemeIndex;
-      unawaited(scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeOutCubic));
+      scrollController.jumpTo(scrollOffset);
     }
   }
 
   double _borderRadius(bool useMaterial3) =>
       widget.controller.useSubThemes && widget.controller.useFlexColorScheme
-          // M3 default for Card is 12.
+          // FCS default for Card is 12.
           ? (widget.controller.cardBorderRadius ??
               widget.controller.defaultRadius ??
               12)
