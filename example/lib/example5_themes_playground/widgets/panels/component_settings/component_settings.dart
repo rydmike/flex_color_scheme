@@ -20,10 +20,11 @@ class ComponentSettings extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTile(
           title: const Text('Use component sub themes'),
-          subtitle: const Text('M2 mode components are very opinionated, they '
-              'look almost like M3. The component themes for M3 mode are only '
-              'slightly opinionated and mostly have subtle nuance diffs or '
-              'fixes to Flutter M3 spec style bugs.'),
+          subtitle: const Text("FlexColorScheme's M2 mode is very opinionated. "
+              'Components look almost like M3, but done in M2 mode. '
+              'In M3 mode there are only a few subtle nuance differences to '
+              'default M3 style, and some fixes to Flutter M3 '
+              'specification styling bugs.'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -49,12 +50,11 @@ class ComponentSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Global border radius on components'),
-          subtitle: const Text('Default setting uses mostly Material 3 design '
-              'values, where radius spec varies per component. '
-              'Material 2 design uses 4 on all components. '
-              'If you set a value, all components will use it. '
-              'You can set radius per component too, it will then use its own '
-              'setting, regardless of what is set here'),
+          subtitle: const Text('By default M3 radius is used, where radius '
+              'specification varies per component. M2 design used 4 dp on all '
+              'components. If you set a value, all components will use it. '
+              'You can also set radius per component, they will then use their '
+              'own value, regardless of what is defined here.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
