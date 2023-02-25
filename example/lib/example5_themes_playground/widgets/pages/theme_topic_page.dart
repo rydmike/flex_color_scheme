@@ -170,12 +170,13 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
                     if (themeCtrl.viewIndex != index) {
                       themeCtrl.setViewIndex(index);
                       // This is a handmade scale and fade up animation
-                      // when user taps on header item. We use it instead
+                      // when user taps on ThemeTopic, we use this instead
                       // of animating to the page with the page controller.
-                      // Instead we jump to the page and trigger a slight
-                      // fade and zoom in effect, without this, it is hard too
+                      // We jump to the page and trigger a slight
+                      // fade and zoom in effect. Without this, it is hard too
                       // notice that the page changed, and this fade-zoom-in
-                      // fits well on a tablet view.
+                      // fits well on a tablet view. If we animate to page with
+                      // the page view controller, it also looks very confusing.
                       scaleController.value = 0.7;
                       fadeController.value = 0.2;
                       scaleController.forward();
