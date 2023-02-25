@@ -116,10 +116,13 @@ class TabBarSettings extends StatelessWidget {
         const ListTile(
           title: Text('TabBar'),
           subtitle: Text('FlexColorscheme comes with a quick TabBar styling '
-              'options where you can choose if it should always fit in '
-              'your AppBar, regardless of what theme you set for it, usually '
-              'you want this, but sometimes surface might be preferred or '
-              'just the Flutter SDK default style.'),
+              'option, where you can choose if it should always fit in '
+              'your AppBar, regardless of what theme you set for the AppBar. '
+              'Usually you want this, but sometimes surface might be preferred '
+              'or the Flutter SDK default style. In M2 mode Flutter default '
+              'does not work well on surface colored AppBar and in M3 mode '
+              'the default does not work with primary colored AppBar. By using '
+              'the forAppBar style, the TabBar always fits with the AppBar.'),
         ),
         const SizedBox(height: 8),
         TabBarStylePopupMenu(

@@ -190,6 +190,14 @@ class IntroductionPanel extends StatelessWidget {
           onChanged: controller.setUseMaterial3,
         ),
         const ListTile(
+          subtitle: Text('Like Flutter, FlexColorScheme also uses different '
+              'theming defaults for some properties in M2 and M3 mode. '
+              'If a value has not been set, it will show you what the default '
+              'is, if you toggle M2/M3 it will also change. The Playground '
+              'app also shows what the default values are in Flutter SDK '
+              'in both M2/M3 mode, when FCS or its sub-themes are not used.'),
+        ),
+        const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
           subtitle: Text('In Flutter 3.7 there are only minor issues '
               'with Material 3, with low impact on apps using it. '
