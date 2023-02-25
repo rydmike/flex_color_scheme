@@ -87,7 +87,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                   Tab(text: 'Components'),
                   Tab(text: 'Login'),
                   Tab(text: 'Shop'),
-                  Tab(text: 'Material'),
+                  Tab(text: 'Material3'),
                   Tab(text: 'Undraw'),
                 ],
               ),
@@ -109,7 +109,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
             ),
             Slider(
               min: 400,
-              max: 1400,
+              max: 1600,
               divisions: 100,
               label: widget.controller.deviceSize.toStringAsFixed(0),
               value: widget.controller.deviceSize,

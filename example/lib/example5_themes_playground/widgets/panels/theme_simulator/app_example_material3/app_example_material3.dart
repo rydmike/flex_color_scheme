@@ -241,7 +241,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
                   minExtendedWidth: kRailExpandedWidth,
                   extended: showLargeSizeLayout,
                   // The Rail is silly, it does not expand if type is something
-                  // else than none, e.g. via FCS themes.
+                  // else than none, e.g. set via themes.
                   labelType:
                       showLargeSizeLayout ? NavigationRailLabelType.none : null,
                   destinations: navRailDestinations,
