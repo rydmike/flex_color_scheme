@@ -154,9 +154,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- Playground: Review TabBar defaults and control dependency interlocks.
 - NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
-- Playground: IMPROVE Material 3 demo, hookup ctrl for theme mode and M3 + update to latest.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
