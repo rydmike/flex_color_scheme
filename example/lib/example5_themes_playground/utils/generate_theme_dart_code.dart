@@ -705,8 +705,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorLight},\n'
       : '';
   final String tabBarUnselectedItemSchemeColorLight = controller
-              .tabBarUnselectedItemSchemeColorLight !=
-          null
+                  .tabBarUnselectedItemSchemeColorLight !=
+              null &&
+          controller.tabBarItemSchemeColorLight != null
       ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorLight},\n'
       : '';
   final String tabBarIndicatorSchemeColorLight = controller
@@ -720,8 +721,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorDark},\n'
       : '';
   final String tabBarUnselectedItemSchemeColorDark = controller
-              .tabBarUnselectedItemSchemeColorDark !=
-          null
+                  .tabBarUnselectedItemSchemeColorDark !=
+              null &&
+          controller.tabBarItemSchemeColorDark != null
       ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorDark},\n'
       : '';
   final String tabBarIndicatorSchemeColorDark = controller
@@ -729,10 +731,15 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorDark},\n'
       : '';
-  final String tabBarUnselectedItemOpacity = controller
-              .tabBarUnselectedItemOpacity !=
+  final String tabBarUnselectedItemOpacityLight = controller
+              .tabBarUnselectedItemOpacityLight !=
           null
-      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacity},\n'
+      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacityLight!.toStringAsFixed(2)},\n'
+      : '';
+  final String tabBarUnselectedItemOpacityDark = controller
+              .tabBarUnselectedItemOpacityDark !=
+          null
+      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacityDark!.toStringAsFixed(2)},\n'
       : '';
   final String tabBarIndicatorSize = controller.tabBarIndicatorSize != null
       ? '    tabBarIndicatorSize: ${controller.tabBarIndicatorSize},\n'
@@ -1144,9 +1151,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomAppBarSchemeColor'
           //
           '$tabBarItemSchemeColorLight'
-          '$tabBarIndicatorSchemeColorLight'
           '$tabBarUnselectedItemSchemeColorLight'
-          '$tabBarUnselectedItemOpacity'
+          '$tabBarUnselectedItemOpacityLight'
+          '$tabBarIndicatorSchemeColorLight'
           '$tabBarIndicatorSize'
           '$tabBarIndicatorWeight'
           '$tabBarIndicatorTopRadius'
@@ -1336,9 +1343,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomAppBarSchemeColor'
           //
           '$tabBarItemSchemeColorDark'
-          '$tabBarIndicatorSchemeColorDark'
           '$tabBarUnselectedItemSchemeColorDark'
-          '$tabBarUnselectedItemOpacity'
+          '$tabBarUnselectedItemOpacityDark'
+          '$tabBarIndicatorSchemeColorDark'
           '$tabBarIndicatorSize'
           '$tabBarIndicatorWeight'
           '$tabBarIndicatorTopRadius'

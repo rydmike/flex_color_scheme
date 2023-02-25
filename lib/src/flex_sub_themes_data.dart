@@ -1819,19 +1819,15 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
-  /// If not defined and [bottomAppBarSchemeColor] is not defined, them TabBar
-  /// items uses the factories [FlexColorScheme.light] or
-  /// [FlexColorScheme.dark] with the enum value
-  /// [FlexTabBarStyle] with property [tabBarStyle], to determine
-  /// the [TabBar] unselected items color.
-  ///
-  /// If not defined and [bottomAppBarSchemeColor] is defined and we use
-  /// M2, then defaults to [bottomAppBarSchemeColor], if we use M3 then it
-  /// defaults to [SchemeColor.onSurfaceVariant].
+  /// If not defined, then [TabBar] uses the enum [FlexTabBarStyle] property
+  /// [tabBarStyle] in factories [FlexColorScheme.light] or
+  /// [FlexColorScheme.dark] to determine the [TabBar] selected and
+  /// unselected item color.
   ///
   /// The themed [TabBar] item color is typically defined by
   /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
-  /// This property is an override that offers more quick config options by
+  ///
+  /// This property is an override that offers more config options by
   /// allowing picking any color from the effective [ColorScheme], instead of
   /// just the options in the [FlexColorScheme.light] and [FlexColorScheme.dark]
   /// (tabBarStyle) factory parameter.
@@ -1840,14 +1836,21 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// unselected items use.
   ///
-  /// If not defined, TabBar items uses the factories
-  /// [FlexColorScheme.light] or [FlexColorScheme.dark] with the enum value
-  /// [FlexTabBarStyle] with property [tabBarStyle], to determine
-  /// the color of unselected [TabBar] items.
+  /// If not defined, but [tabBarItemSchemeColor] is defined, then in M2
+  /// uses [tabBarItemSchemeColor] with [tabBarUnselectedItemOpacity] applied.
+  /// In M3 mode uses [SchemeColor.onSurfaceVariant] with
+  /// [tabBarUnselectedItemOpacity] applied.
   ///
-  /// The themed [TabBar] unselected item color is typically defined by
+  /// if not defined and [tabBarItemSchemeColor] is also not defined,
+  /// then [TabBar] uses the enum [FlexTabBarStyle] property
+  /// [tabBarStyle] in factories [FlexColorScheme.light] or
+  /// [FlexColorScheme.dark] to determine the [TabBar] selected and
+  /// unselected item color.
+  ///
+  /// The themed [TabBar] item color is typically defined by
   /// [FlexTabBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
-  /// This property is an override that offers more quick config options by
+  ///
+  /// This property is an override that offers more config options by
   /// allowing picking any color from the effective [ColorScheme], instead of
   /// just the options in the [FlexColorScheme.light] and [FlexColorScheme.dark]
   /// (tabBarStyle) factory parameter.
@@ -1855,7 +1858,13 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Defines the opacity used on the [TabBar] unselected items.
   ///
-  /// Only has any effect when the [tabBarUnselectedItemSchemeColor] is defined.
+  /// Only has any effect when the [tabBarItemSchemeColor] is defined, if
+  /// it is not defined then we are using [FlexTabBarStyle] based styling
+  /// set via factories [FlexColorScheme.light] or [FlexColorScheme.dark]
+  /// directly and this property cannot impact its settings.
+  /// First define a custom [tabBarItemSchemeColor] and optionally also
+  /// [tabBarUnselectedItemSchemeColor] to be able to use opacity
+  /// on the unselected TabBar item.
   ///
   /// If not defined, and M3 is used, defaults to 1 (100%), fully opaque. If
   /// M2 is used, defaults to 0.7 (70%) opacity.

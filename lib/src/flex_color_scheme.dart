@@ -5825,7 +5825,7 @@ class FlexColorScheme with Diagnosticable {
         (useMaterial3
             ? FlexTabBarStyle.flutterDefault
             : FlexTabBarStyle.forAppBar);
-    Color selectedTabColor() {
+    Color tabBarStyleColor() {
       switch (effectiveTabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
@@ -5856,7 +5856,7 @@ class FlexColorScheme with Diagnosticable {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
               ? colorScheme.onSurface
-              : selectedTabColor().withAlpha(0xB2); // 70%
+              : tabBarStyleColor().withAlpha(0xB2); // 70%
         case FlexTabBarStyle.forBackground:
           return useSubThemes
               ? colorScheme.onSurface
@@ -5870,7 +5870,7 @@ class FlexColorScheme with Diagnosticable {
                       effectiveAppBarBackgroundColor == colorScheme.surface ||
                       effectiveAppBarBackgroundColor == colorScheme.background))
               ? colorScheme.onSurface.withAlpha(0x99) // 60%
-              : selectedTabColor().withAlpha(0xB2); // 70% alpha
+              : tabBarStyleColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
           return isDark
               ? colorScheme.primary
@@ -6223,7 +6223,7 @@ class FlexColorScheme with Diagnosticable {
       // Use TabBar style dependent function for selected Tab as indicatorColor
       // if no color scheme selection for it is made.
       indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
-          ? selectedTabColor()
+          ? tabBarStyleColor()
           : FlexSubThemes.schemeColor(
               subTheme.tabBarIndicatorSchemeColor!, colorScheme),
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
@@ -6927,12 +6927,12 @@ class FlexColorScheme with Diagnosticable {
       tabBarTheme: FlexSubThemes.tabBarTheme(
         colorScheme: colorScheme,
         indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
-            ? selectedTabColor()
+            ? tabBarStyleColor()
             : FlexSubThemes.schemeColor(
                 subTheme.tabBarIndicatorSchemeColor!, colorScheme),
         labelStyle: effectiveTextTheme.bodyLarge,
         labelColor: subTheme.tabBarItemSchemeColor == null
-            ? selectedTabColor()
+            ? tabBarStyleColor()
             : FlexSubThemes.schemeColor(
                 subTheme.tabBarItemSchemeColor!, colorScheme),
         unselectedLabelStyle: effectiveTextTheme.bodyLarge,
@@ -6941,7 +6941,7 @@ class FlexColorScheme with Diagnosticable {
             : subTheme.tabBarUnselectedItemSchemeColor == null
                 ? useMaterial3
                     ? FlexSubThemes.schemeColor(
-                            SchemeColor.surfaceVariant, colorScheme)
+                            SchemeColor.onSurfaceVariant, colorScheme)
                         .withAlpha(tabBarUnselectedAlpha)
                     : FlexSubThemes.schemeColor(
                             subTheme.tabBarItemSchemeColor!, colorScheme)

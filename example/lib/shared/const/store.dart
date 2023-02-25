@@ -655,12 +655,19 @@ class Store {
   // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarUnselectedItemSchemeColorDark = null;
 
-  // Key used to read and save the tabBarUnselectedItemOpacity value.
-  static const String keyTabBarUnselectedItemOpacity =
-      'tabBarUnselectedItemOpacity';
-  // Default value for the tabBarUnselectedItemOpacity, also to reset settings.
+  // Key used to read and save the tabBarUnselectedItemOpacityLight value.
+  static const String keyTabBarUnselectedItemOpacityLight =
+      'tabBarUnselectedItemOpacityLight';
+  // Default value for the tabBarUnselectedItemOpacityLight, to reset settings.
   // We use NULL as default, this nullable setting.
-  static const double? defaultTabBarUnselectedItemOpacity = null;
+  static const double? defaultTabBarUnselectedItemOpacityLight = null;
+
+  // Key used to read and save the tabBarUnselectedItemOpacityDark value.
+  static const String keyTabBarUnselectedItemOpacityDark =
+      'tabBarUnselectedItemOpacityDark';
+  // Default value for the tabBarUnselectedItemOpacityDark, to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const double? defaultTabBarUnselectedItemOpacityDark = null;
 
   // Key used to read and save the tabBarIndicatorSize value.
   static const String keyTabBarIndicatorSize = 'tabBarIndicatorSize';

@@ -251,7 +251,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarUnselectedItemSchemeColor:
                 controller.tabBarUnselectedItemSchemeColorDark,
-            tabBarUnselectedItemOpacity: controller.tabBarUnselectedItemOpacity,
+            tabBarUnselectedItemOpacity:
+                controller.tabBarUnselectedItemOpacityDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
             tabBarIndicatorSize: controller.tabBarIndicatorSize,
             tabBarIndicatorWeight: controller.tabBarIndicatorWeight,

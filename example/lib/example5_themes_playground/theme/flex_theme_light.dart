@@ -310,7 +310,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorLight,
             tabBarUnselectedItemSchemeColor:
                 controller.tabBarUnselectedItemSchemeColorLight,
-            tabBarUnselectedItemOpacity: controller.tabBarUnselectedItemOpacity,
+            tabBarUnselectedItemOpacity:
+                controller.tabBarUnselectedItemOpacityLight,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorLight,
             tabBarIndicatorSize: controller.tabBarIndicatorSize,
             tabBarIndicatorWeight: controller.tabBarIndicatorWeight,
