@@ -202,8 +202,31 @@ class VerticalThemePanelView extends StatefulWidget {
   State<VerticalThemePanelView> createState() => _VerticalThemePanelViewState();
 }
 
-class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
+class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
+    with TickerProviderStateMixin {
   late final ScrollController scrollController;
+
+  late final AnimationController scaleController = AnimationController(
+    duration: const Duration(milliseconds: 200),
+    lowerBound: 0.80,
+    upperBound: 1.0,
+    vsync: this,
+  );
+  late final Animation<double> scaleAnimation = CurvedAnimation(
+    parent: scaleController,
+    curve: Curves.fastOutSlowIn,
+  );
+
+  late final AnimationController fadeController = AnimationController(
+    duration: const Duration(milliseconds: 200),
+    lowerBound: 0.1,
+    upperBound: 1.0,
+    vsync: this,
+  );
+  late final Animation<double> fadeAnimation = CurvedAnimation(
+    parent: fadeController,
+    curve: Curves.fastOutSlowIn,
+  );
 
   @override
   void initState() {
@@ -212,11 +235,15 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
       keepScrollOffset: true,
       debugLabel: widget.isRight ? 'Right panel' : 'Left panel',
     );
+    scaleController.value = 1.0;
+    fadeController.value = 1.0;
   }
 
   @override
   void dispose() {
     scrollController.dispose();
+    scaleController.dispose();
+    fadeController.dispose();
     super.dispose();
   }
 
@@ -244,6 +271,12 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
               page: widget.panel,
               onSelect: (int newIndex) {
                 widget.onPanelChanged?.call(newIndex);
+                // A scale and fade up animation when user taps on them topic
+                // item, we trigger a slight fade and zoom in effect.
+                scaleController.value = 0.7;
+                fadeController.value = 0.2;
+                scaleController.forward();
+                fadeController.forward();
               },
               isCompact: isCompact,
               isRight: widget.isRight,
@@ -261,11 +294,17 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
                 margins + bottomPadding,
               ),
               children: <Widget>[
-                HeaderCard(
-                  title: Text(themeTopics[widget.panel].heading),
-                  leading:
-                      Icon(themeTopics[widget.panel].icon, color: iconColor),
-                  child: ThemePanel(widget.panel, widget.controller),
+                ScaleTransition(
+                  scale: scaleAnimation,
+                  child: FadeTransition(
+                    opacity: fadeAnimation,
+                    child: HeaderCard(
+                      title: Text(themeTopics[widget.panel].heading),
+                      leading: Icon(themeTopics[widget.panel].icon,
+                          color: iconColor),
+                      child: ThemePanel(widget.panel, widget.controller),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -276,6 +315,12 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView> {
               page: widget.panel,
               onSelect: (int newIndex) {
                 widget.onPanelChanged?.call(newIndex);
+                // A scale and fade up animation when user taps on them topic
+                // item, we trigger a slight fade and zoom in effect.
+                scaleController.value = 0.7;
+                fadeController.value = 0.2;
+                scaleController.forward();
+                fadeController.forward();
               },
               isCompact: isCompact,
               isRight: widget.isRight,
