@@ -2,6 +2,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/const/adaptive_theme.dart';
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
@@ -254,8 +255,18 @@ String generateThemeDartCode(ThemeController controller) {
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
-  final String defRadius = controller.defaultRadius != null
+  final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String defaultRadiusAdaptive = controller.defaultRadiusAdaptive !=
+              null &&
+          controller.adaptiveRadius != null &&
+          controller.adaptiveRadius != AdaptiveTheme.off
+      ? '    defaultRadiusAdaptive: ${controller.defaultRadiusAdaptive!.toStringAsFixed(1)},\n'
+      : '';
+  final String adaptiveRadius = controller.adaptiveRadius != null &&
+          controller.adaptiveRadius != AdaptiveTheme.off
+      ? '    adaptiveRadius: ${controller.adaptiveRadius!.code},\n'
       : '';
   final String thinBorderWidth = controller.thinBorderWidth != null
       ? '    thinBorderWidth: ${controller.thinBorderWidth!.toStringAsFixed(1)},\n'
@@ -1031,7 +1042,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$defRadius'
+          '$defaultRadius'
+          '$defaultRadiusAdaptive'
+          '$adaptiveRadius'
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
@@ -1217,7 +1230,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$useTextTheme'
           '$useM2StyleDividerInM3'
           //
-          '$defRadius'
+          '$defaultRadius'
+          '$defaultRadiusAdaptive'
+          '$adaptiveRadius'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
