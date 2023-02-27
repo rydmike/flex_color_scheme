@@ -2,7 +2,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../controllers/theme_controller.dart';
 import '../widgets/app/responsive_scaffold.dart';
+import 'adaptive_theme.dart';
 
 // ignore_for_file: comment_references
 
@@ -175,6 +177,28 @@ class App {
   /// default one. The default Flutter one is too dense imo.
   static VisualDensity get visualDensity =>
       FlexColorScheme.comfortablePlatformDensity;
+
+  // TODO(rydmike): Add mock web setting usage.
+  /// Return the correct platform effective global border radius setting.
+  ///
+  /// Depends on platform, its mock version and web and its mock version
+  /// and config for if standard or adaptive radius is used on this
+  /// mocked platform and mocked web, or actual ones.
+  static double? effectiveRadius(ThemeController controller) {
+    // Get standard border radius value
+    final double? normalRadius = controller.defaultRadius;
+    // Get adaptive border radius value
+    final double? adaptiveRadius = controller.defaultRadiusAdaptive;
+    // Get effective platform
+    final TargetPlatform platform = controller.platform;
+    // Get Adaptive Settings usage.
+    final AdaptiveTheme adaptiveConfig =
+        controller.adaptiveRadius ?? AdaptiveTheme.off;
+    // Should we use adaptive radius or not?
+    final bool adapt = adaptiveConfig.setting().adapt(platform);
+    // Return the effective platform default radius, may be null.
+    return adapt ? adaptiveRadius : normalRadius;
+  }
 
   /// The menu items that we use on the responsive side menu.
   ///

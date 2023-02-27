@@ -166,12 +166,12 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
             adaptiveRemoveElevationTint:
-                controller.adaptiveRemoveElevationTintLight,
+                controller.adaptiveRemoveElevationTintLight?.setting(),
             adaptiveElevationShadowsBack:
-                controller.adaptiveElevationShadowsBackLight,
+                controller.adaptiveElevationShadowsBackLight?.setting(),
             adaptiveAppBarScrollUnderOff:
-                controller.adaptiveAppBarScrollUnderOffLight,
-            adaptiveRadius: controller.adaptiveRadius,
+                controller.adaptiveAppBarScrollUnderOffLight?.setting(),
+            adaptiveRadius: controller.adaptiveRadius?.setting(),
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
             // If null, it defaults to Material 3 design guide

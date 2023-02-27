@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -70,14 +71,16 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 ? 'default 2'
                 : 'default 8'
             : '';
-    final String sheetRadiusDefaultLabel =
-        controller.bottomSheetBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 28'
-            : controller.bottomSheetBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
-                : '';
+
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
+    final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
+                null &&
+            effectiveRadius == null
+        ? 'default 28'
+        : controller.bottomSheetBorderRadius == null && effectiveRadius != null
+            ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+            : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -211,6 +214,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: BottomSheetShowcase(),
@@ -285,6 +289,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: BottomSheetModalShowcase(),
@@ -317,7 +322,10 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information.',
+                  text: ' for more information. Due to this issue and because '
+                      'the M3 design spec states one should avoid large '
+                      'border radius on on SnackBars, it does not use '
+                      'global radius override.',
                 ),
               ],
             ),

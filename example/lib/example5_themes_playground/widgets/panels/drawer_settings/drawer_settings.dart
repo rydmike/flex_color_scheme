@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -14,13 +15,21 @@ class DrawerSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String drawerRadiusDefaultLabel =
-        controller.drawerBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.drawerBorderRadius == null && effectiveRadius == null
             ? 'default 16'
-            : controller.drawerBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            : controller.drawerBorderRadius == null && effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+                : '';
+    final String indicatorDefaultLabel =
+        controller.drawerIndicatorBorderRadius == null &&
+                effectiveRadius == null
+            ? 'default (stadium)'
+            : controller.drawerIndicatorBorderRadius == null &&
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
     final String onIndicatorDefault = controller.drawerIndicatorSchemeColor ==
@@ -305,7 +314,7 @@ class DrawerSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerIndicatorBorderRadius == null ||
                         (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                    ? 'default (stadium)'
+                    ? indicatorDefaultLabel
                     : (controller.drawerIndicatorBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
@@ -333,7 +342,7 @@ class DrawerSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.drawerIndicatorBorderRadius == null ||
                               (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                          ? 'default (stadium)'
+                          ? indicatorDefaultLabel
                           : (controller.drawerIndicatorBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')

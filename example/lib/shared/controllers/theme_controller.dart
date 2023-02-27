@@ -4,6 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../const/adaptive_theme.dart';
 import '../const/store.dart';
 import '../services/theme_service.dart';
 
@@ -1974,10 +1975,10 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseFlutterDefaults, value));
   }
 
-  late FlexAdaptive? _adaptiveRemoveElevationTintLight;
-  FlexAdaptive? get adaptiveRemoveElevationTintLight =>
+  late AdaptiveTheme? _adaptiveRemoveElevationTintLight;
+  AdaptiveTheme? get adaptiveRemoveElevationTintLight =>
       _adaptiveRemoveElevationTintLight;
-  void setAdaptiveRemoveElevationTintLight(FlexAdaptive? value,
+  void setAdaptiveRemoveElevationTintLight(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintLight) return;
     _adaptiveRemoveElevationTintLight = value;
@@ -1986,10 +1987,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveRemoveElevationTintLight, value));
   }
 
-  late FlexAdaptive? _adaptiveElevationShadowsBackLight;
-  FlexAdaptive? get adaptiveElevationShadowsBackLight =>
+  late AdaptiveTheme? _adaptiveElevationShadowsBackLight;
+  AdaptiveTheme? get adaptiveElevationShadowsBackLight =>
       _adaptiveElevationShadowsBackLight;
-  void setAdaptiveElevationShadowsBackLight(FlexAdaptive? value,
+  void setAdaptiveElevationShadowsBackLight(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackLight) return;
     _adaptiveElevationShadowsBackLight = value;
@@ -1998,10 +1999,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveElevationShadowsBackLight, value));
   }
 
-  late FlexAdaptive? _adaptiveAppBarScrollUnderOffLight;
-  FlexAdaptive? get adaptiveAppBarScrollUnderOffLight =>
+  late AdaptiveTheme? _adaptiveAppBarScrollUnderOffLight;
+  AdaptiveTheme? get adaptiveAppBarScrollUnderOffLight =>
       _adaptiveAppBarScrollUnderOffLight;
-  void setAdaptiveAppBarScrollUnderOffLight(FlexAdaptive? value,
+  void setAdaptiveAppBarScrollUnderOffLight(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffLight) return;
     _adaptiveAppBarScrollUnderOffLight = value;
@@ -2010,10 +2011,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffLight, value));
   }
 
-  late FlexAdaptive? _adaptiveRemoveElevationTintDark;
-  FlexAdaptive? get adaptiveRemoveElevationTintDark =>
+  late AdaptiveTheme? _adaptiveRemoveElevationTintDark;
+  AdaptiveTheme? get adaptiveRemoveElevationTintDark =>
       _adaptiveRemoveElevationTintDark;
-  void setAdaptiveRemoveElevationTintDark(FlexAdaptive? value,
+  void setAdaptiveRemoveElevationTintDark(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintDark) return;
     _adaptiveRemoveElevationTintDark = value;
@@ -2022,10 +2023,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveRemoveElevationTintDark, value));
   }
 
-  late FlexAdaptive? _adaptiveElevationShadowsBackDark;
-  FlexAdaptive? get adaptiveElevationShadowsBackDark =>
+  late AdaptiveTheme? _adaptiveElevationShadowsBackDark;
+  AdaptiveTheme? get adaptiveElevationShadowsBackDark =>
       _adaptiveElevationShadowsBackDark;
-  void setAdaptiveElevationShadowsBackDark(FlexAdaptive? value,
+  void setAdaptiveElevationShadowsBackDark(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackDark) return;
     _adaptiveElevationShadowsBackDark = value;
@@ -2034,10 +2035,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveElevationShadowsBackDark, value));
   }
 
-  late FlexAdaptive? _adaptiveAppBarScrollUnderOffDark;
-  FlexAdaptive? get adaptiveAppBarScrollUnderOffDark =>
+  late AdaptiveTheme? _adaptiveAppBarScrollUnderOffDark;
+  AdaptiveTheme? get adaptiveAppBarScrollUnderOffDark =>
       _adaptiveAppBarScrollUnderOffDark;
-  void setAdaptiveAppBarScrollUnderOffDark(FlexAdaptive? value,
+  void setAdaptiveAppBarScrollUnderOffDark(AdaptiveTheme? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffDark) return;
     _adaptiveAppBarScrollUnderOffDark = value;
@@ -2046,9 +2047,9 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffDark, value));
   }
 
-  late FlexAdaptive? _adaptiveRadius;
-  FlexAdaptive? get adaptiveRadius => _adaptiveRadius;
-  void setAdaptiveRadius(FlexAdaptive? value, [bool notify = true]) {
+  late AdaptiveTheme? _adaptiveRadius;
+  AdaptiveTheme? get adaptiveRadius => _adaptiveRadius;
+  void setAdaptiveRadius(AdaptiveTheme? value, [bool notify = true]) {
     if (value == _adaptiveRadius) return;
     _adaptiveRadius = value;
     if (notify) notifyListeners();

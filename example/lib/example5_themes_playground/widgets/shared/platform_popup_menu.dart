@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/widgets/universal/flex_icons.dart';
+import '../../../shared/widgets/universal/flex_icons.dart';
 
 // A popup menu that allows us to select the Flutter platform we want to use.
 //
@@ -88,11 +88,11 @@ class PlatformPopupMenu extends StatelessWidget {
     const Map<TargetPlatform, IconData> platformIcon =
         <TargetPlatform, IconData>{
       TargetPlatform.android: Icons.android,
-      TargetPlatform.iOS: Icons.phone_iphone, // MdiIcons.appleIos,
-      TargetPlatform.windows: FlexIcons.windows, // MdiIcons.microsoftWindows,
-      TargetPlatform.macOS: FlexIcons.apple, // MdiIcons.appleFinder,
-      TargetPlatform.linux: FlexIcons.linux, // MdiIcons.linux,
-      TargetPlatform.fuchsia: FlexIcons.infinity, // MdiIcons.allInclusive,
+      TargetPlatform.iOS: Icons.phone_iphone,
+      TargetPlatform.windows: FlexIcons.windows,
+      TargetPlatform.macOS: FlexIcons.apple,
+      TargetPlatform.linux: FlexIcons.linux,
+      TargetPlatform.fuchsia: FlexIcons.infinity,
     };
 
     String subtitle = 'Now set to ${platformString[platform]}';
@@ -115,8 +115,14 @@ class PlatformPopupMenu extends StatelessWidget {
             size: 40,
           ),
         ),
-        title: const Text('Select platform, for testing purposes only'),
-        subtitle: Text(subtitle),
+        title: const Text('Select platform'),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Text('For testing purposes only, not persisted.'),
+            Text(subtitle),
+          ],
+        ),
       ),
     );
   }

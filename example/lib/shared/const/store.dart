@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import 'adaptive_theme.dart';
 import 'app_color.dart';
 
 // A simple const class for holding storage keys and default value for each
@@ -49,7 +50,7 @@ class Store {
   // Default value for the adaptiveRemoveElevationTintLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveRemoveElevationTintLight = null;
+  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintLight = null;
 
   // Key used to read and save the keyAdaptiveElevationShadowsBackLight value.
   static const String keyAdaptiveElevationShadowsBackLight =
@@ -57,7 +58,7 @@ class Store {
   // Default value for the adaptiveElevationShadowsBackLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveElevationShadowsBackLight = null;
+  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackLight = null;
 
   // Key used to read and save the keyAdaptiveAppBarScrollUnderOffLight value.
   static const String keyAdaptiveAppBarScrollUnderOffLight =
@@ -65,7 +66,7 @@ class Store {
   // Default value for the adaptiveAppBarScrollUnderOffLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveAppBarScrollUnderOffLight = null;
+  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffLight = null;
 
   // Key used to read and save the keyAdaptiveRemoveElevationTintDark value.
   static const String keyAdaptiveRemoveElevationTintDark =
@@ -73,7 +74,7 @@ class Store {
   // Default value for the adaptiveRemoveElevationTintDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveRemoveElevationTintDark = null;
+  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintDark = null;
 
   // Key used to read and save the keyAdaptiveElevationShadowsBackDark value.
   static const String keyAdaptiveElevationShadowsBackDark =
@@ -81,7 +82,7 @@ class Store {
   // Default value for the adaptiveElevationShadowsBackDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveElevationShadowsBackDark = null;
+  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackDark = null;
 
   // Key used to read and save the keyAdaptiveAppBarScrollUnderOffDark value.
   static const String keyAdaptiveAppBarScrollUnderOffDark =
@@ -89,13 +90,13 @@ class Store {
   // Default value for the adaptiveAppBarScrollUnderOffDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveAppBarScrollUnderOffDark = null;
+  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffDark = null;
 
   // Key used to read and save the keyAdaptiveRadius value.
   static const String keyAdaptiveRadius = 'adaptiveRadius';
   // Default value for the adaptiveRadius, also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const FlexAdaptive? defaultAdaptiveRadius = null;
+  static const AdaptiveTheme? defaultAdaptiveRadius = null;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';

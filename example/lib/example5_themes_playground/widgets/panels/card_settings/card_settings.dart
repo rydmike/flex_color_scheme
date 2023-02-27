@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 
@@ -10,13 +11,16 @@ class CardSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
-        controller.cardBorderRadius == null && controller.defaultRadius == null
+        controller.cardBorderRadius == null && effectiveRadius == null
             ? 'default 12'
-            : controller.cardBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            : controller.cardBorderRadius == null && effectiveRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

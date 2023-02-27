@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -29,11 +30,13 @@ class FabChipSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
             controller.defaultRadius == null
         ? 'default 16'
         : controller.fabBorderRadius == null && controller.defaultRadius != null
-            ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
             : '';
 
     final String chipRadiusDefaultLabel =
@@ -41,7 +44,7 @@ class FabChipSettings extends StatelessWidget {
             ? 'default 8'
             : controller.chipBorderRadius == null &&
                     controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

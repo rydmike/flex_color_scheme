@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -14,21 +15,13 @@ class DialogSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String dialogRadiusDefaultLabel =
-        controller.dialogBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.dialogBorderRadius == null && effectiveRadius == null
             ? 'default 28'
-            : controller.dialogBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
-                : '';
-    final String dialogElementRadiusDefaultLabel =
-        controller.timePickerElementRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 8'
-            : controller.timePickerElementRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            : controller.dialogBorderRadius == null && effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
     return Column(
@@ -171,14 +164,19 @@ class DialogSettings extends StatelessWidget {
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Time picker time input elements border radius'),
-          subtitle: Slider(
+          subtitle: const Text('Does not use global radius override. '
+              'Avoid large border radius on the input elements.'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
             min: -1,
             max: 50,
             divisions: 51,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.timePickerElementRadius == null ||
                         (controller.timePickerElementRadius ?? -1) < 0
-                    ? dialogElementRadiusDefaultLabel
+                    ? 'default 8'
                     : (controller.timePickerElementRadius?.toStringAsFixed(0) ??
                         '')
                 : controller.useMaterial3
@@ -207,7 +205,7 @@ class DialogSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.timePickerElementRadius == null ||
                               (controller.timePickerElementRadius ?? -1) < 0
-                          ? dialogElementRadiusDefaultLabel
+                          ? 'default 8'
                           : (controller.timePickerElementRadius
                                   ?.toStringAsFixed(0) ??
                               '')

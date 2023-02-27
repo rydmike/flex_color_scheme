@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
@@ -45,15 +46,16 @@ class TextFieldSettings extends StatelessWidget {
                 ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
                 : '';
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String decoratorRadiusDefaultLabel =
-        controller.inputDecoratorBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.inputDecoratorBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default 4'
                 : 'default 16'
             : controller.inputDecoratorBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
     // Default decorator alpha values and labels

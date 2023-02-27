@@ -3,54 +3,55 @@ import 'package:flutter/material.dart';
 
 enum AdaptiveTheme {
   off(
-    label: 'Feature off',
-    describe: 'Adaptive feature is not used.',
+    label: 'Off',
+    describe: 'Not used.',
     code: 'FlexAdaptive.off()',
-    icon: Icons.radio_button_unchecked,
+    icon: Icons.hide_source_outlined,
   ),
   all(
     label: 'All platforms',
-    describe: 'Adaptive feature is used on all native platforms and on web '
-        'on all platforms.',
+    describe: 'Used on all native platforms and on web on all platforms. '
+        'Use this to turn of an M3 feature that does not fit your design '
+        'requirements.',
     code: 'FlexAdaptive.all()',
     icon: Icons.radio_button_checked,
   ),
   apple(
     label: 'Apple devices',
-    describe: 'Adaptive feature is used on native iOS and macOS builds and '
-        'when using the app on a web browser on these devices.',
+    describe: 'Used on native iOS and macOS builds and when using a web build '
+        'of the app on iOS and macOS.',
     code: 'FlexAdaptive.apple()',
     icon: Icons.tablet_mac_outlined,
   ),
   desktop(
     label: 'Desktops',
-    describe: 'The adaptive feature is used on all native desktop operating '
-        'system builds and when using the app on a web browser on them.',
+    describe: 'Used on all native desktop operating system builds and when '
+        'using a web build of the app on them.',
     code: 'FlexAdaptive.desktop()',
     icon: Icons.desktop_mac_outlined,
   ),
   iOSAndDesktop(
     label: 'Desktops and iOS',
-    describe: 'The adaptive feature is used on desktops and on iOS, including '
-        'web when used in a browser on them.',
+    describe: 'Used on native desktops and iOS builds, including '
+        'when using a web build of the app on them.',
     code: 'FlexAdaptive.iOSAndDesktop()',
     icon: Icons.devices_outlined,
   ),
   excludeAndroidFuchsia(
     label: 'No Android/Fuchsia',
-    describe: 'The adaptive theme feature is used on all platforms, except on '
-        'Android and Fuchsia native builds, their web browsers use the '
-        'adaptive feature. Only native Android and Fuchsia builds keep the '
-        'standard feature.',
+    describe: 'Used on all platforms, except on Android and Fuchsia native '
+        'builds, but when a web build of the app app is used on them, the '
+        'adaptive feature is used. Only native Android and Fuchsia builds '
+        'keep the standard feature.',
     code: 'FlexAdaptive.excludeAndroidFuchsia()',
     icon: Icons.mobile_off_outlined,
   ),
   excludeWebAndroidFuchsia(
     label: 'No Web Android/Fuchsia',
-    describe: 'The adaptive theme feature is used on all platforms, except on '
-        'Android and Fuchsia native builds and their web usage. Web on '
-        'Android/Fuchsia also keep standard feature for a native look on '
-        'progressive web apps.',
+    describe: 'Used on all platforms, except on Android and Fuchsia native '
+        'builds and their web build usage of the app. Web usage on '
+        'Android/Fuchsia platform also keep the standard feature. Use this '
+        'to keep a native Android look on progressive web apps.',
     code: 'FlexAdaptive.excludeWebAndroidFuchsia()',
     icon: Icons.no_cell_outlined,
   );

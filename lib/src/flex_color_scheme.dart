@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
@@ -6659,10 +6658,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.menuSchemeColor,
               opacity: subTheme.menuOpacity,
-              radius: subTheme.menuRadius ??
-                  (platformRadius == null
-                      ? null
-                      : math.min(platformRadius, 10.0)),
+              radius: subTheme.menuRadius,
               elevation: subTheme.menuElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
@@ -6722,7 +6718,7 @@ class FlexColorScheme with Diagnosticable {
                               ? kNavigationDrawerM3Width
                               : kNavigationDrawerM2Width)) -
                       2 * kNavigationDrawerIndicatorPadding),
-              indicatorRadius: subTheme.drawerIndicatorRadius,
+              indicatorRadius: subTheme.drawerIndicatorRadius ?? platformRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
               selectedItemSchemeColor: subTheme.drawerSelectedItemSchemeColor,
@@ -6800,10 +6796,7 @@ class FlexColorScheme with Diagnosticable {
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(
               colorScheme: colorScheme,
-              radius: subTheme.popupMenuRadius ??
-                  (platformRadius == null
-                      ? null
-                      : math.min(platformRadius, 10.0)),
+              radius: subTheme.popupMenuRadius,
               // textStyle: effectiveTextTheme.labelLarge,
               elevation: popupMenuElevation,
               color: popupMenuBackgroundColor,
@@ -6960,7 +6953,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.timePickerDialogRadius ?? platformRadius,
-              elementRadius: subTheme.timePickerElementRadius ?? platformRadius,
+              elementRadius: subTheme.timePickerElementRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
           : null,
       //

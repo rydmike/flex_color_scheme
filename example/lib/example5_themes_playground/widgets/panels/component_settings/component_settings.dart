@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
+import '../../shared/back_to_actual_platform.dart';
+import '../../shared/platform_popup_menu.dart';
 import '../../shared/use_tinted_text_theme.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
@@ -50,16 +54,34 @@ class ComponentSettings extends StatelessWidget {
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Global corner radius on components'),
-          subtitle: const Text('By default M3 border radius is used. Its '
-              'specification varies per component. M2 design used 4 dp on all '
-              'components. If you set a value, all components will use it. '
-              'You can also set radius per component, they will then use their '
-              'own value, regardless of what is defined here.'),
+          title: const Text('Border radius override on all Material '
+              'UI components'),
+          subtitle: const Text('By default border radius follows the Material '
+              '3 design guide in both M2 and M3 mode. Radius specification in '
+              'M3 varies per component. Material 2 design used 4 dp on all '
+              'components. '
+              'If you set a value, all major Material UI components will use '
+              'it. You can also set radius per component, they will then use '
+              'their own value, regardless of what is defined here.'),
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text(
+            'Radius on very small elements or components where changing it '
+            'to a high radius is a bad idea are not included in the global '
+            'radius override. This includes PopupMenuButton, Menus, '
+            'MenuBar, ToolTip, the small indicators on NavigationBar and '
+            'NavigationRail, as well as FloatingActionButton. Radius on these '
+            'elements can still be themed, but only individually. '
+            'The indicator on NavigationDrawer is button sized and is '
+            'considered large and thus included in the global border '
+            'radius override.',
+          ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
+          title: const Text('Default radius override'),
+          subtitle: Slider(
             min: -1,
             max: 60,
             divisions: 61,
@@ -106,6 +128,111 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Platform adaptive border radius override'),
+          subtitle: const Text('You can define a separate default global '
+              'border radius override that gets used adaptively on selected '
+              'platforms. You can do this if you for example want to keep '
+              'default M3 radius on Android/Fuchsia platforms, but want a '
+              'less rounded design on other platforms.'),
+        ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Adaptive default border radius usage'),
+          index: controller.adaptiveRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme &&
+                  controller.useSubThemes &&
+                  controller.useMaterial3
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveRadius(null);
+                  } else {
+                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Adaptive radius override value'),
+          subtitle: Slider(
+            min: -1,
+            max: 60,
+            divisions: 61,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.defaultRadiusAdaptive == null ||
+                        (controller.defaultRadiusAdaptive ?? -1) < 0 ||
+                        controller.adaptiveRadius == null ||
+                        controller.adaptiveRadius == AdaptiveTheme.off
+                    ? 'M3 defaults'
+                    : (controller.defaultRadiusAdaptive?.toStringAsFixed(0) ??
+                        '')
+                : useMaterial3
+                    ? 'M3 defaults'
+                    : 'M2 default 4',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.adaptiveRadius != null &&
+                    controller.adaptiveRadius != AdaptiveTheme.off
+                ? controller.defaultRadiusAdaptive ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.adaptiveRadius != null &&
+                    controller.adaptiveRadius != AdaptiveTheme.off
+                ? (double value) {
+                    controller.setDefaultRadiusAdaptive(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.adaptiveRadius != null &&
+                          controller.adaptiveRadius != AdaptiveTheme.off
+                      ? controller.defaultRadiusAdaptive == null ||
+                              (controller.defaultRadiusAdaptive ?? -1) < 0
+                          ? 'M3 defaults'
+                          : (controller.defaultRadiusAdaptive
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : useMaterial3
+                          ? 'M3 defaults'
+                          : 'M2 default 4',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text(
+            'With the API you can define which platform an adaptive '
+            'feature is used on, including separate definitions when '
+            'using the app in a web build on each platform. The above '
+            'selections are using built-in preconfigured constructors, they '
+            'probably cover most use cases.',
+          ),
+        ),
+        PlatformPopupMenu(
+          platform: controller.platform,
+          onChanged: controller.setPlatform,
+        ),
+        BackToActualPlatform(controller: controller),
+        const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border width'),
@@ -210,7 +337,6 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
         SwitchListTile(
           title: const Text('Tinted interaction effects'),
           subtitle: const Text('Hover, focus, highlight and splash '

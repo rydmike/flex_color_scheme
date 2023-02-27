@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -28,45 +29,43 @@ class ButtonsSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String elevatedButtonRadiusDefaultLabel =
-        controller.elevatedButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.elevatedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.elevatedButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
     final String outlinedButtonRadiusDefaultLabel =
-        controller.outlinedButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.outlinedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.outlinedButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
     final String textButtonRadiusDefaultLabel =
-        controller.textButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.textButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.textButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
     final String filledButtonRadiusDefaultLabel =
-        controller.filledButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.filledButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.filledButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
     final String thinBorderDefaultLabel =
         controller.outlinedButtonBorderWidth == null &&

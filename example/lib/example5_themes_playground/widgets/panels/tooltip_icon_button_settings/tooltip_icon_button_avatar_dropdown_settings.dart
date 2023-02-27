@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -56,16 +54,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     ? 'default (Grey700 op90%)'
                     : 'default (White op90%)';
 
-    final double tooltipEffectiveRadius = controller.tooltipRadius ??
-        math.min(controller.defaultRadius ?? 4.0, 20.0);
-    final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null &&
-            controller.defaultRadius == null
+    final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
             ? 'default 8'
             : 'default 4'
-        : controller.tooltipRadius == null && controller.defaultRadius != null
-            ? 'global ${tooltipEffectiveRadius.toStringAsFixed(0)}'
-            : '';
+        : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,8 +142,13 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Tooltip border radius, follows global to max 20'),
-          subtitle: Slider(
+          title: const Text('Tooltip border radius'),
+          subtitle: const Text('Does not use global radius override. '
+              'Avoid large border radius on tooltips.'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
             min: -1,
             max: 30,
             divisions: 31,

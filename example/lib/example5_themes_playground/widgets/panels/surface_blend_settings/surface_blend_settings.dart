@@ -1,17 +1,17 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
+import '../../shared/platform_popup_menu.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';
 import 'light_surface_mode_popup_menu.dart';
-import 'platform_popup_menu.dart';
 import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
@@ -317,7 +317,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           // UseElevationShadowPopupMenu(
           //   title: const Text('M3 elevation shadow theming in light theme'),
-          //   labelForDefault: 'Not defined (defaults, no shadows as designed)',
+          //  labelForDefault: 'Not defined (defaults, no shadows as designed)',
           //   index: controller.elevationShadow?.index ?? -1,
           //   onChanged: controller.useFlexColorScheme &&
           //           controller.useSubThemes &&
@@ -326,7 +326,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           //           if (index < 0 || index >= FlexShadow.values.length) {
           //             controller.setElevationShadow(null);
           //           } else {
-          //             controller.setElevationShadow(FlexShadow.values[index]);
+          //            controller.setElevationShadow(FlexShadow.values[index]);
           //           }
           //         }
           //       : null,
@@ -418,7 +418,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           //           if (index < 0 || index >= FlexTint.values.length) {
           //             controller.setElevationTintDark(null);
           //           } else {
-          //             controller.setElevationTintDark(FlexTint.values[index]);
+          //           controller.setElevationTintDark(FlexTint.values[index]);
           //           }
           //         }
           //       : null,
@@ -489,7 +489,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           // UseElevationShadowPopupMenu(
           //   title: const Text('M3 elevation shadow theming in dark theme'),
-          //   labelForDefault: 'Not defined (defaults, no shadows as designed)',
+          // labelForDefault: 'Not defined (defaults, no shadows as designed)',
           //   index: controller.elevationShadowDark?.index ?? -1,
           //   onChanged: controller.useFlexColorScheme &&
           //           controller.useSubThemes &&
@@ -581,18 +581,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           platform: controller.platform,
           onChanged: controller.setPlatform,
         ),
-        ListTile(
-          subtitle: const Text('Set back to actual platform'),
-          trailing: FilledButton(
-            onPressed: () {
-              controller.setPlatform(defaultTargetPlatform);
-            },
-            child: const Text('Actual'),
-          ),
-          onTap: () {
-            controller.setPlatform(defaultTargetPlatform);
-          },
-        ),
+        BackToActualPlatform(controller: controller),
       ],
     );
   }

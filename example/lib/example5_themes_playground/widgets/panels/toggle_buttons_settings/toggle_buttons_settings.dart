@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -11,13 +12,14 @@ class ToggleButtonsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String toggleButtonsRadiusDefaultLabel =
-        controller.toggleButtonsBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.toggleButtonsBorderRadius == null && effectiveRadius == null
             ? 'default 20'
             : controller.toggleButtonsBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String toggleBorderWidthDefaultLabel =
         controller.toggleButtonsBorderWidth == null &&
@@ -29,11 +31,11 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : '';
     final String segmentedButtonsRadiusDefaultLabel =
         controller.segmentedButtonBorderRadius == null &&
-                controller.defaultRadius == null
+                effectiveRadius == null
             ? 'default stadium'
             : controller.segmentedButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String segmentedBorderWidthDefaultLabel =
         controller.segmentedButtonBorderWidth == null &&

@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,16 +14,6 @@ class MenuSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
 
-    final double popupEffectiveRadius = controller.popupMenuBorderRadius ??
-        math.min(controller.defaultRadius ?? 4.0, 10.0);
-    final String popupMenuDefaultRadiusLabel =
-        controller.popupMenuBorderRadius == null &&
-                controller.defaultRadius == null
-            ? 'default 4'
-            : controller.popupMenuBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${popupEffectiveRadius.toStringAsFixed(0)}'
-                : '';
     final String popupMenuElevationDefaultLabel =
         controller.popupMenuElevation == null
             ? useMaterial3
@@ -62,9 +50,8 @@ class MenuSettings extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text('Respects global setting up to max 10. If higher '
-                  'than 10 is used, the selection indicator on '
-                  'PopupMenuButton overflows visibly in the rounded corners.'),
+              const Text('Does not use global radius override. '
+                  'Avoid large border radius on menus.'),
               Slider(
                 min: -1,
                 max: 12,
@@ -72,7 +59,7 @@ class MenuSettings extends StatelessWidget {
                 label: controller.useSubThemes && controller.useFlexColorScheme
                     ? controller.popupMenuBorderRadius == null ||
                             (controller.popupMenuBorderRadius ?? -1) < 0
-                        ? popupMenuDefaultRadiusLabel
+                        ? 'default 4'
                         : (controller.popupMenuBorderRadius
                                 ?.toStringAsFixed(0) ??
                             '')
@@ -103,7 +90,7 @@ class MenuSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.popupMenuBorderRadius == null ||
                               (controller.popupMenuBorderRadius ?? -1) < 0
-                          ? popupMenuDefaultRadiusLabel
+                          ? 'default 4'
                           : (controller.popupMenuBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
@@ -231,9 +218,8 @@ class MenuSettings extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text('Respects global setting up to max 10. If higher '
-                  'than 10 is used, the selection indicator may '
-                  'overflow visibly in the rounded corners.'),
+              const Text('Does not use global radius override. '
+                  'Avoid large border radius on menus.'),
               Slider(
                 min: -1,
                 max: 12,
@@ -270,7 +256,7 @@ class MenuSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.menuRadius == null ||
                               (controller.menuRadius ?? -1) < 0
-                          ? popupMenuDefaultRadiusLabel
+                          ? 'default 4'
                           : (controller.menuRadius?.toStringAsFixed(0) ?? '')
                       : 'default 4',
                   style: theme.textTheme.bodySmall!
