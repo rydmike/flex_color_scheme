@@ -71,10 +71,11 @@ class ComponentSettings extends StatelessWidget {
             'to a high radius is a bad idea are not included in the global '
             'radius override. This includes PopupMenuButton, Menus, '
             'MenuBar, ToolTip, the small indicators on NavigationBar and '
-            'NavigationRail, as well as FloatingActionButton. Radius on these '
-            'elements can still be themed, but only individually. '
-            'The indicator on NavigationDrawer is button sized and is '
-            'considered large and thus included in the global border '
+            'NavigationRail, as well as the SnackBar. The very distinct '
+            'FloatingActionButton can be included, but is not by default. '
+            'The radius on these elements can still be themed, but only '
+            'individually. The indicator on NavigationDrawer is button sized '
+            'and considered large, it is thus included in the global border '
             'radius override.',
           ),
         ),
