@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 26, 2023**
+**Feb 27, 2023**
 
 **FIX**
 
@@ -16,35 +16,37 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **NEW**
 
-- **Added**: Enums `FlexTint` and `FlexShadow` they are used to control elevation tint and elevation shadow in Material 3 themes. Tint can be taken away from elevated surface, or be adaptive and only taken away on iOS and macOS platforms via theme level settings. Shadows can be put back in Material 3 theming or done so only platform adaptively on iOS and macOS platforms.
+- **Add**: Enums `FlexTint` and `FlexShadow` they are used to control elevation tint and elevation shadow in Material 3 themes. Tint can be taken away from elevated surface, or be adaptive and only taken away on iOS and macOS platforms via theme level settings. Shadows can be put back in Material 3 theming or done so only platform adaptively on iOS and macOS platforms.
   
-- **Added**: `elevationTint` a `FlexTint` enum property value and `elevationShadow` a `FlexShadow` property value to `FlexSubThemesData`. With them the elevation surface tint usage and shadow appearance, in the Material3 mode can be controlled when opting in on using FlexColorScheme sub theming. 
+- **Add**: `elevationTint` a `FlexTint` enum property value and `elevationShadow` a `FlexShadow` property value to `FlexSubThemesData`. With them the elevation surface tint usage and shadow appearance, in the Material3 mode can be controlled when opting in on using FlexColorScheme sub theming. 
 
-- **Added**: `drawerIndicatorOpacity` to `FlexSubThemesData`.   
+- **Add**: `drawerIndicatorOpacity` to `FlexSubThemesData`.   
   It controls the `indicatorOpacity` property in the `FlexSubThemes.navigationDrawerTheme` used to customize the opacity of used color on the `NavigationDrawer` indicator.
 
-- **Added**: `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`.   
+- **Add**: `segmentedButtonUnselectedForegroundSchemeColor` to `FlexSubThemesData`.   
   It controls the `unselectedForegroundSchemeColor` property in the new `FlexSubThemes.segmentedButtonTheme` used to customize the `SegmentedButton`.
   
-- **Added**:  `usedColors` value 7.
+- **Add**:  `usedColors` value 7.
 In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColors` now accepts value 7. When used, the `primary`, `secondary` and `tertiary` colors in the used input scheme, are used as defined, but `primaryContainer`, `secondaryContainer` and `tertiaryContainer` are computed. This is FlexColorScheme's own more Material2 version of seed generation of the container colors by using their main colors as input colors. 
 
-- **Added**: `bottomAppBarTheme`, `menuBarTheme` and `menuButtonTheme` to `FlexSubThemes`.
+- **Add**: `bottomAppBarTheme`, `menuBarTheme` and `menuButtonTheme` to `FlexSubThemes`.
   
-- **Added**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorRadius`, `drawerIndicatorSchemeColor`, `navigationBarIndicatorRadius`, `navigationRailIndicatorRadius`, `menuBarRadius`, `menuBarElevation`, `menuBarShadowColor`, `snackBarActionSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
+- **Add**: `inputDecoratorPrefixIconSchemeColor`, `drawerWidth`, `drawerIndicatorWidth`, `drawerIndicatorRadius`, `drawerIndicatorSchemeColor`, `navigationBarIndicatorRadius`, `navigationRailIndicatorRadius`, `menuBarRadius`, `menuBarElevation`, `menuBarShadowColor`, `snackBarActionSchemeColor` and `bottomAppBarSchemeColor` to `FlexSubThemesData`.
 
-- **Added**: `menuRadius`, `menuElevation`, `menuOpacity`, `menuSchemeColor`  and `dropdownMenuTextStyle` to `FlexSubThemesData`.
+- **Add**: `menuRadius`, `menuElevation`, `menuOpacity`, `menuSchemeColor`  and `dropdownMenuTextStyle` to `FlexSubThemesData`.
 
-- **Added**: `drawerSelectedItemSchemeColor`, `drawerUnselectedItemSchemeColor`, `tabBarIndicatorSize`, and `tabBarDividerColor` to `FlexSubThemesData`.
+- **Add**: `drawerSelectedItemSchemeColor`, `drawerUnselectedItemSchemeColor`, `tabBarIndicatorSize`, and `tabBarDividerColor` to `FlexSubThemesData`.
 
-- **Added**: Static helper function `onSchemeColor` to `FlexSubThemes`.
+- **Add**: Static helper function `onSchemeColor` to `FlexSubThemes`.
 
-- **Added**: To `FlexThemeModeOptionButton` added properties `semanticLabel`, `focusColor` and `setFocusOnTap`. If `setFocusOnTap` is set to true, the button will request focus when it is tapped. Display of previously not shown hover and focus effects where fixed, they now correctly use `hoverColor` and the new `focusColor`.
+- **Add**: To `FlexThemeModeOptionButton` added properties `semanticLabel`, `focusColor` and `setFocusOnTap`. If `setFocusOnTap` is set to true, the button will request focus when it is tapped. Display of previously not shown hover and focus effects where fixed, they now correctly use `hoverColor` and the new `focusColor`.
 
-- **Added**: Property `snackBarRadius` to `FlexSubThemesData`, it controls the border radius via `FlexSubThemes.snackBarTheme` by using its `radius` property.  
+- **Add**: Property `snackBarRadius` to `FlexSubThemesData`, it controls the border radius via `FlexSubThemes.snackBarTheme` by using its `radius` property.  
   - NOTE: If this property is set, both SnackBars with behavior fixed and floating will get the assigned radius. See Flutter issue: https://github.com/flutter/flutter/issues/108539 
 
-- **Added**: Properties `tabBarUnselectedItemSchemeColor`, `tabBarUnselectedItemOpacity`, `tabBarIndicatorWeight` and `tabBarIndicatorTopRadius` to `FlexSubThemesData`.
+- **Add**: Properties `tabBarUnselectedItemSchemeColor`, `tabBarUnselectedItemOpacity`, `tabBarIndicatorWeight` and `tabBarIndicatorTopRadius` to `FlexSubThemesData`.
+
+- **Add**: New configuration class `FlexAdaptive` used to configure on which platforms adaptive theming features are used. Including 100% unit test coverage for the new class.
 
 
 **CHANGE**

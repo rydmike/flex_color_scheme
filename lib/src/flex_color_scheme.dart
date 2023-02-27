@@ -175,7 +175,7 @@ enum FlexTabBarStyle {
 
 /// Enum used to select if surface elevation tint is used in Material 3 mode.
 enum FlexTint {
-  /// Surface tint is used if, it is used by default design in M3 mode.
+  /// Surface tint is used, if it is used by default design in M3 mode.
   defaults,
 
   /// Surface tint is removed in M3 mode.
