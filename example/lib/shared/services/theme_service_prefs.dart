@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../const/adaptive_theme.dart';
 import '../utils/same_types.dart';
 import 'theme_service.dart';
 // ignore_for_file: comment_references
@@ -528,50 +529,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= ShowValueIndicator.values.length) return defaultValue;
         return ShowValueIndicator.values[value] as T;
       }
-      // // T is FlexTint nullable value.
-      // if (sameTypes<T, FlexTint?>()) {
-      //   final int? value = _prefs.getInt(key);
-      //   if (_debug) {
-      //     debugPrint('SharedPrefs loaded FlexTint?: $key as $value');
-      //   }
-      //   if (value == null) return defaultValue;
-      //   if (value < 0) return null as T;
-      //   if (value >= FlexTint.values.length) return defaultValue;
-      //   return FlexTint.values[value] as T;
-      // }
-      // // T is FlexTint none nullable value.
-      // if (sameTypes<T, FlexTint>()) {
-      //   final int? value = _prefs.getInt(key);
-      //   if (_debug) {
-      //     debugPrint('SharedPrefs loaded FlexTint : $key as $value');
-      //   }
-      //   if (value == null) return defaultValue;
-      //   if (value < 0) return defaultValue;
-      //   if (value >= FlexTint.values.length) return defaultValue;
-      //   return FlexTint.values[value] as T;
-      // }
-      // // T is FlexShadow nullable value.
-      // if (sameTypes<T, FlexShadow?>()) {
-      //   final int? value = _prefs.getInt(key);
-      //   if (_debug) {
-      //     debugPrint('SharedPrefs loaded FlexShadow?: $key as $value');
-      //   }
-      //   if (value == null) return defaultValue;
-      //   if (value < 0) return null as T;
-      //   if (value >= FlexShadow.values.length) return defaultValue;
-      //   return FlexShadow.values[value] as T;
-      // }
-      // // T is FlexShadow none nullable value.
-      // if (sameTypes<T, FlexShadow>()) {
-      //   final int? value = _prefs.getInt(key);
-      //   if (_debug) {
-      //     debugPrint('SharedPrefs loaded FlexShadow : $key as $value');
-      //   }
-      //   if (value == null) return defaultValue;
-      //   if (value < 0) return defaultValue;
-      //   if (value >= FlexShadow.values.length) return defaultValue;
-      //   return FlexShadow.values[value] as T;
-      // }
       // T is TabBarIndicatorSize nullable value.
       if (sameTypes<T, TabBarIndicatorSize?>()) {
         final int? value = _prefs.getInt(key);
@@ -593,6 +550,27 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= TabBarIndicatorSize.values.length) return defaultValue;
         return TabBarIndicatorSize.values[value] as T;
+      }
+      if (sameTypes<T, AdaptiveTheme?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded AdaptiveTheme?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= AdaptiveTheme.values.length) return defaultValue;
+        return AdaptiveTheme.values[value] as T;
+      }
+      // T is AdaptiveTheme none nullable value.
+      if (sameTypes<T, AdaptiveTheme>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded AdaptiveTheme : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= AdaptiveTheme.values.length) return defaultValue;
+        return AdaptiveTheme.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');

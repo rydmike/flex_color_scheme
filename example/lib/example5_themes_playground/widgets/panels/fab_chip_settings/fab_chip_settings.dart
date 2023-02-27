@@ -139,7 +139,7 @@ class FabChipSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes &&
@@ -156,9 +156,7 @@ class FabChipSettings extends StatelessWidget {
                           : controller.useMaterial3
                               ? 'M3 rounded'
                               : 'circular',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -275,7 +273,7 @@ class FabChipSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -287,9 +285,7 @@ class FabChipSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 8'
                           : 'stadium',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

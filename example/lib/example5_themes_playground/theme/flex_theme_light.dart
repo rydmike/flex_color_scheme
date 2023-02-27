@@ -165,18 +165,21 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // when possible.
             useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
-            adaptiveRemoveElevationTint: const FlexAdaptive.iOSAndDesktop(),
-            adaptiveElevationShadowsBack: const FlexAdaptive.apple(),
-            adaptiveAppBarScrollUnderOff: const FlexAdaptive.iOSAndDesktop(),
-            adaptiveRadius: const FlexAdaptive.iOSAndDesktop(),
+            adaptiveRemoveElevationTint:
+                controller.adaptiveRemoveElevationTintLight,
+            adaptiveElevationShadowsBack:
+                controller.adaptiveElevationShadowsBackLight,
+            adaptiveAppBarScrollUnderOff:
+                controller.adaptiveAppBarScrollUnderOffLight,
+            adaptiveRadius: controller.adaptiveRadius,
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
-            // If null, it defaults to Material3 (You) design
-            // guide values, when available: https://m3.material.io/
+            // If null, it defaults to Material 3 design guide
+            // values, when available: https://m3.material.io/
             // If you give it value, "all" Flutter built-in widgets
             // supporting border radius will use the give radius.
             defaultRadius: controller.defaultRadius,
-            defaultRadiusAdaptive: 10,
+            defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
             // Border radius can be customized per widget too, it overrides
             // M3 default and global default setting.
             //

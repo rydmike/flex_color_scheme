@@ -64,14 +64,28 @@ class ThemeController with ChangeNotifier {
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
     _useFlutterDefaults = await _themeService.load(
         Store.keyUseFlutterDefaults, Store.defaultUseFlutterDefaults);
-    // _elevationTint = await _themeService.load(
-    //     Store.keyElevationTint, Store.defaultElevationTint);
-    // _elevationShadow = await _themeService.load(
-    //     Store.keyElevationShadow, Store.defaultElevationShadow);
-    // _elevationTintDark = await _themeService.load(
-    //     Store.keyElevationTintDark, Store.defaultElevationTintDark);
-    // _elevationShadowDark = await _themeService.load(
-    //     Store.keyElevationShadowDark, Store.defaultElevationShadowDark);
+    //
+    _adaptiveRemoveElevationTintLight = await _themeService.load(
+        Store.keyAdaptiveRemoveElevationTintLight,
+        Store.defaultAdaptiveRemoveElevationTintLight);
+    _adaptiveElevationShadowsBackLight = await _themeService.load(
+        Store.keyAdaptiveElevationShadowsBackLight,
+        Store.defaultAdaptiveElevationShadowsBackLight);
+    _adaptiveAppBarScrollUnderOffLight = await _themeService.load(
+        Store.keyAdaptiveAppBarScrollUnderOffLight,
+        Store.defaultAdaptiveAppBarScrollUnderOffLight);
+    _adaptiveRemoveElevationTintDark = await _themeService.load(
+        Store.keyAdaptiveRemoveElevationTintDark,
+        Store.defaultAdaptiveRemoveElevationTintDark);
+    _adaptiveElevationShadowsBackDark = await _themeService.load(
+        Store.keyAdaptiveElevationShadowsBackDark,
+        Store.defaultAdaptiveElevationShadowsBackDark);
+    _adaptiveAppBarScrollUnderOffDark = await _themeService.load(
+        Store.keyAdaptiveAppBarScrollUnderOffDark,
+        Store.defaultAdaptiveAppBarScrollUnderOffDark);
+    _adaptiveRadius = await _themeService.load(
+        Store.keyAdaptiveRadius, Store.defaultAdaptiveRadius);
+    //
     _isLargeGridView = await _themeService.load(
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _compactMode = await _themeService.load(
@@ -109,13 +123,9 @@ class ThemeController with ChangeNotifier {
     _tintedDisabledControls = await _themeService.load(
         Store.keyTintedDisabledControls, Store.defaultTintedDisabledControls);
     _defaultRadius = await _themeService.load(
-      Store.keyDefaultRadius,
-      Store.defaultDefaultRadius,
-    );
-    _defaultRadius = await _themeService.load(
-      Store.keyDefaultRadius,
-      Store.defaultDefaultRadius,
-    );
+        Store.keyDefaultRadius, Store.defaultDefaultRadius);
+    _defaultRadiusAdaptive = await _themeService.load(
+        Store.keyDefaultRadiusAdaptive, Store.defaultDefaultRadiusAdaptive);
     _thinBorderWidth = await _themeService.load(
       Store.keyThinBorderWidth,
       Store.defaultThinBorderWidth,
@@ -735,10 +745,21 @@ class ThemeController with ChangeNotifier {
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
     setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
-    // setElevationTint(Store.defaultElevationTint, false);
-    // setElevationShadow(Store.defaultElevationShadow, false);
-    // setElevationTintDark(Store.defaultElevationTintDark, false);
-    // setElevationShadowDark(Store.defaultElevationShadowDark, false);
+    //
+    setAdaptiveRemoveElevationTintLight(
+        Store.defaultAdaptiveRemoveElevationTintLight, false);
+    setAdaptiveElevationShadowsBackLight(
+        Store.defaultAdaptiveElevationShadowsBackLight, false);
+    setAdaptiveAppBarScrollUnderOffLight(
+        Store.defaultAdaptiveAppBarScrollUnderOffLight, false);
+    setAdaptiveRemoveElevationTintDark(
+        Store.defaultAdaptiveRemoveElevationTintDark, false);
+    setAdaptiveElevationShadowsBackDark(
+        Store.defaultAdaptiveElevationShadowsBackDark, false);
+    setAdaptiveAppBarScrollUnderOffDark(
+        Store.defaultAdaptiveAppBarScrollUnderOffDark, false);
+    setAdaptiveRadius(Store.defaultAdaptiveRadius, false);
+    //
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
     setUseTextTheme(Store.defaultUseTextTheme, false);
@@ -748,7 +769,9 @@ class ThemeController with ChangeNotifier {
     if (resetMode) setSchemeIndex(Store.defaultSchemeIndex, false);
     setInteractionEffects(Store.defaultInteractionEffects, false);
     setTintedDisabledControls(Store.defaultTintedDisabledControls, false);
+    //
     setDefaultRadius(Store.defaultDefaultRadius, false);
+    setDefaultRadiusAdaptive(Store.defaultDefaultRadiusAdaptive, false);
     setThinBorderWidth(Store.defaultThinBorderWidth, false);
     setThickBorderWidth(Store.defaultThickBorderWidth, false);
     setTooltipsMatchBackground(Store.defaultTooltipsMatchBackground, false);
@@ -1951,41 +1974,86 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseFlutterDefaults, value));
   }
 
-  // late FlexTint? _elevationTint;
-  // FlexTint? get elevationTint => _elevationTint;
-  // void setElevationTint(FlexTint? value, [bool notify = true]) {
-  //   if (value == _elevationTint) return;
-  //   _elevationTint = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyElevationTint, value));
-  // }
-  //
-  // late FlexShadow? _elevationShadow;
-  // FlexShadow? get elevationShadow => _elevationShadow;
-  // void setElevationShadow(FlexShadow? value, [bool notify = true]) {
-  //   if (value == _elevationShadow) return;
-  //   _elevationShadow = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyElevationShadow, value));
-  // }
-  //
-  // late FlexTint? _elevationTintDark;
-  // FlexTint? get elevationTintDark => _elevationTintDark;
-  // void setElevationTintDark(FlexTint? value, [bool notify = true]) {
-  //   if (value == _elevationTintDark) return;
-  //   _elevationTintDark = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyElevationTintDark, value));
-  // }
-  //
-  // late FlexShadow? _elevationShadowDark;
-  // FlexShadow? get elevationShadowDark => _elevationShadowDark;
-  // void setElevationShadowDark(FlexShadow? value, [bool notify = true]) {
-  //   if (value == _elevationShadowDark) return;
-  //   _elevationShadowDark = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyElevationShadowDark, value));
-  // }
+  late FlexAdaptive? _adaptiveRemoveElevationTintLight;
+  FlexAdaptive? get adaptiveRemoveElevationTintLight =>
+      _adaptiveRemoveElevationTintLight;
+  void setAdaptiveRemoveElevationTintLight(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveRemoveElevationTintLight) return;
+    _adaptiveRemoveElevationTintLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveRemoveElevationTintLight, value));
+  }
+
+  late FlexAdaptive? _adaptiveElevationShadowsBackLight;
+  FlexAdaptive? get adaptiveElevationShadowsBackLight =>
+      _adaptiveElevationShadowsBackLight;
+  void setAdaptiveElevationShadowsBackLight(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveElevationShadowsBackLight) return;
+    _adaptiveElevationShadowsBackLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveElevationShadowsBackLight, value));
+  }
+
+  late FlexAdaptive? _adaptiveAppBarScrollUnderOffLight;
+  FlexAdaptive? get adaptiveAppBarScrollUnderOffLight =>
+      _adaptiveAppBarScrollUnderOffLight;
+  void setAdaptiveAppBarScrollUnderOffLight(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveAppBarScrollUnderOffLight) return;
+    _adaptiveAppBarScrollUnderOffLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffLight, value));
+  }
+
+  late FlexAdaptive? _adaptiveRemoveElevationTintDark;
+  FlexAdaptive? get adaptiveRemoveElevationTintDark =>
+      _adaptiveRemoveElevationTintDark;
+  void setAdaptiveRemoveElevationTintDark(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveRemoveElevationTintDark) return;
+    _adaptiveRemoveElevationTintDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveRemoveElevationTintDark, value));
+  }
+
+  late FlexAdaptive? _adaptiveElevationShadowsBackDark;
+  FlexAdaptive? get adaptiveElevationShadowsBackDark =>
+      _adaptiveElevationShadowsBackDark;
+  void setAdaptiveElevationShadowsBackDark(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveElevationShadowsBackDark) return;
+    _adaptiveElevationShadowsBackDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveElevationShadowsBackDark, value));
+  }
+
+  late FlexAdaptive? _adaptiveAppBarScrollUnderOffDark;
+  FlexAdaptive? get adaptiveAppBarScrollUnderOffDark =>
+      _adaptiveAppBarScrollUnderOffDark;
+  void setAdaptiveAppBarScrollUnderOffDark(FlexAdaptive? value,
+      [bool notify = true]) {
+    if (value == _adaptiveAppBarScrollUnderOffDark) return;
+    _adaptiveAppBarScrollUnderOffDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffDark, value));
+  }
+
+  late FlexAdaptive? _adaptiveRadius;
+  FlexAdaptive? get adaptiveRadius => _adaptiveRadius;
+  void setAdaptiveRadius(FlexAdaptive? value, [bool notify = true]) {
+    if (value == _adaptiveRadius) return;
+    _adaptiveRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAdaptiveRadius, value));
+  }
 
   late bool _isLargeGridView;
   bool get isLargeGridView => _isLargeGridView;
@@ -2164,6 +2232,15 @@ class ThemeController with ChangeNotifier {
     _defaultRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDefaultRadius, value));
+  }
+
+  late double? _defaultRadiusAdaptive;
+  double? get defaultRadiusAdaptive => _defaultRadiusAdaptive;
+  void setDefaultRadiusAdaptive(double? value, [bool notify = true]) {
+    if (value == _defaultRadiusAdaptive) return;
+    _defaultRadiusAdaptive = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDefaultRadiusAdaptive, value));
   }
 
   late double? _thinBorderWidth;

@@ -130,7 +130,8 @@ class _ElevationCardState extends State<ElevationCard> {
   @override
   Widget build(BuildContext context) {
     const BorderRadius borderRadius = BorderRadius.all(Radius.circular(4.0));
-    final Color color = Theme.of(context).colorScheme.surface;
+    final ThemeData theme = Theme.of(context);
+    final Color color = theme.colorScheme.surface;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -148,11 +149,11 @@ class _ElevationCardState extends State<ElevationCard> {
             children: <Widget>[
               Text(
                 'Level ${widget.info.level}',
-                style: Theme.of(context).textTheme.labelMedium,
+                style: theme.textTheme.labelMedium,
               ),
               Text(
                 '${widget.info.elevation.toStringAsFixed(0)} dp',
-                style: Theme.of(context).textTheme.labelMedium,
+                style: theme.textTheme.labelMedium,
               ),
               if (widget.surfaceTint != null)
                 Expanded(
@@ -160,7 +161,7 @@ class _ElevationCardState extends State<ElevationCard> {
                     alignment: Alignment.bottomRight,
                     child: Text(
                       '${widget.info.overlayPercent}%',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: theme.textTheme.bodySmall,
                     ),
                   ),
                 ),

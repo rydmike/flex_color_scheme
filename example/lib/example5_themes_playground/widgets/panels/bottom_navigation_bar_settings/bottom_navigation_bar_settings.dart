@@ -18,7 +18,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isDark = theme.brightness == Brightness.dark;
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
                 (controller.useFlutterDefaults &&

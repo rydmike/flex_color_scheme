@@ -111,8 +111,6 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-
-        // const SizedBox(height: 8),
         const Divider(height: 1),
         SwitchListTile(
           title: const Text('Unselected toggle is colored'),

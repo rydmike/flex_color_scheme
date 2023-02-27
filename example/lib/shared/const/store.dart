@@ -43,29 +43,59 @@ class Store {
   // Default value for the useFlutterDefaults, also to reset settings.
   static const bool defaultUseFlutterDefaults = false;
 
-  // // Key used to read and save the elevationTint value.
-  // static const String keyElevationTint = 'elevationTint';
-  // // Default value for the elevationTint, also to reset settings.
-  // // We use NULL as default, on nullable settings.
-  // static const FlexTint? defaultElevationTint = null;
-  //
-  // // Key used to read and save the elevationShadow value.
-  // static const String keyElevationShadow = 'elevationShadow';
-  // // Default value for the elevationShadow, also to reset settings.
-  // // We use NULL as default, on nullable settings.
-  // static const FlexShadow? defaultElevationShadow = null;
-  //
-  // // Key used to read and save the elevationTintDark value.
-  // static const String keyElevationTintDark = 'elevationTintDark';
-  // // Default value for the elevationTintDark, also to reset settings.
-  // // We use NULL as default, on nullable settings.
-  // static const FlexTint? defaultElevationTintDark = null;
-  //
-  // // Key used to read and save the elevationShadowDark value.
-  // static const String keyElevationShadowDark = 'elevationShadowDark';
-  // // Default value for the elevationShadowDark, also to reset settings.
-  // // We use NULL as default, on nullable settings.
-  // static const FlexShadow? defaultElevationShadowDark = null;
+  // Key used to read and save the keyAdaptiveRemoveElevationTintLight value.
+  static const String keyAdaptiveRemoveElevationTintLight =
+      'adaptiveRemoveElevationTintLight';
+  // Default value for the adaptiveRemoveElevationTintLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveRemoveElevationTintLight = null;
+
+  // Key used to read and save the keyAdaptiveElevationShadowsBackLight value.
+  static const String keyAdaptiveElevationShadowsBackLight =
+      'adaptiveElevationShadowsBackLight';
+  // Default value for the adaptiveElevationShadowsBackLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveElevationShadowsBackLight = null;
+
+  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffLight value.
+  static const String keyAdaptiveAppBarScrollUnderOffLight =
+      'adaptiveAppBarScrollUnderOffLight';
+  // Default value for the adaptiveAppBarScrollUnderOffLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveAppBarScrollUnderOffLight = null;
+
+  // Key used to read and save the keyAdaptiveRemoveElevationTintDark value.
+  static const String keyAdaptiveRemoveElevationTintDark =
+      'adaptiveRemoveElevationTintDark';
+  // Default value for the adaptiveRemoveElevationTintDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveRemoveElevationTintDark = null;
+
+  // Key used to read and save the keyAdaptiveElevationShadowsBackDark value.
+  static const String keyAdaptiveElevationShadowsBackDark =
+      'adaptiveElevationShadowsBackDark';
+  // Default value for the adaptiveElevationShadowsBackDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveElevationShadowsBackDark = null;
+
+  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffDark value.
+  static const String keyAdaptiveAppBarScrollUnderOffDark =
+      'adaptiveAppBarScrollUnderOffDark';
+  // Default value for the adaptiveAppBarScrollUnderOffDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveAppBarScrollUnderOffDark = null;
+
+  // Key used to read and save the keyAdaptiveRadius value.
+  static const String keyAdaptiveRadius = 'adaptiveRadius';
+  // Default value for the adaptiveRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexAdaptive? defaultAdaptiveRadius = null;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';
@@ -158,6 +188,11 @@ class Store {
   static const String keyDefaultRadius = 'defaultRadius';
   // Default value for the defaultRadius, also used to reset settings.
   static const double? defaultDefaultRadius = null;
+
+  // Key used to read and save the defaultRadiusAdaptive value.
+  static const String keyDefaultRadiusAdaptive = 'defaultRadiusAdaptive';
+  // Default value for the defaultRadiusAdaptive, also used to reset settings.
+  static const double? defaultDefaultRadiusAdaptive = null;
 
   // Key used to read and save the thinBorderWidth value.
   static const String keyThinBorderWidth = 'thinBorderWidth';

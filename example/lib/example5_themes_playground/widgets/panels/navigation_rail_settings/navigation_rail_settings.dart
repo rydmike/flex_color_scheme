@@ -194,13 +194,11 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   '${(navRailOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -243,7 +241,7 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'ELEV',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes &&
@@ -255,9 +253,7 @@ class NavigationRailSettings extends StatelessWidget {
                           : (controller.navRailElevation?.toStringAsFixed(1) ??
                               '')
                       : 'default 0',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -320,7 +316,7 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   navRailIndicatorOpacityEnabled
@@ -330,9 +326,7 @@ class NavigationRailSettings extends StatelessWidget {
                           // ignore: lines_longer_than_80_chars
                           : '${(navRailIndicatorOpacity * 100).toStringAsFixed(0)} %'
                       : 'default 24%',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),

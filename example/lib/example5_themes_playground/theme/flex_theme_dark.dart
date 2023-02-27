@@ -120,10 +120,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             blendOnColors: controller.blendDarkOnColors,
             useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
-            adaptiveRemoveElevationTint: const FlexAdaptive.off(),
-            adaptiveElevationShadowsBack: const FlexAdaptive.iOSAndDesktop(),
-            adaptiveAppBarScrollUnderOff: const FlexAdaptive.iOSAndDesktop(),
-            adaptiveRadius: const FlexAdaptive.iOSAndDesktop(),
+            adaptiveRemoveElevationTint:
+                controller.adaptiveRemoveElevationTintDark,
+            adaptiveElevationShadowsBack:
+                controller.adaptiveElevationShadowsBackDark,
+            adaptiveAppBarScrollUnderOff:
+                controller.adaptiveAppBarScrollUnderOffDark,
+            adaptiveRadius: controller.adaptiveRadius,
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,
@@ -134,7 +137,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             thickBorderWidth: controller.thickBorderWidth,
             // Default radius for all widgets, if not null.
             defaultRadius: controller.defaultRadius,
-            defaultRadiusAdaptive: 6,
+            defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
             // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
             textButtonSchemeColor: controller.textButtonSchemeColor,

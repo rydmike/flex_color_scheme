@@ -14,6 +14,7 @@ class ComponentSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -49,8 +50,8 @@ class ComponentSettings extends StatelessWidget {
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Global border radius on components'),
-          subtitle: const Text('By default M3 radius is used, where radius '
+          title: const Text('Global corner radius on components'),
+          subtitle: const Text('By default M3 border radius is used. Its '
               'specification varies per component. M2 design used 4 dp on all '
               'components. If you set a value, all components will use it. '
               'You can also set radius per component, they will then use their '
@@ -65,9 +66,11 @@ class ComponentSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.defaultRadius == null ||
                         (controller.defaultRadius ?? -1) < 0
-                    ? 'default'
+                    ? 'M3 defaults'
                     : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
-                : 'default 4',
+                : useMaterial3
+                    ? 'M3 defaults'
+                    : 'M2 default 4',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.defaultRadius ?? -1
                 : -1,
@@ -85,18 +88,18 @@ class ComponentSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.defaultRadius == null ||
                               (controller.defaultRadius ?? -1) < 0
-                          ? 'default'
+                          ? 'M3 defaults'
                           : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
-                      : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                      : useMaterial3
+                          ? 'M3 defaults'
+                          : 'M2 default 4',
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

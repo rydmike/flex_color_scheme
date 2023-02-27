@@ -410,7 +410,7 @@ class Cards extends StatelessWidget {
           SizedBox(
             width: cardWidth,
             child: Card(
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: theme.colorScheme.surfaceVariant,
               elevation: 0,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
@@ -1842,6 +1842,7 @@ class _NavigationDrawerSectionState extends State<NavigationDrawerSection> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return NavigationDrawer(
       onDestinationSelected: (int selectedIndex) {
         setState(() {
@@ -1854,7 +1855,7 @@ class _NavigationDrawerSectionState extends State<NavigationDrawerSection> {
           padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
           child: Text(
             'Mail',
-            style: Theme.of(context).textTheme.titleSmall,
+            style: theme.textTheme.titleSmall,
           ),
         ),
         ...destinations.map((ExampleDestination destination) {
@@ -1869,7 +1870,7 @@ class _NavigationDrawerSectionState extends State<NavigationDrawerSection> {
           padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
           child: Text(
             'Labels',
-            style: Theme.of(context).textTheme.titleSmall,
+            style: theme.textTheme.titleSmall,
           ),
         ),
         ...labelDestinations.map((ExampleDestination destination) {
@@ -2259,6 +2260,7 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return RepaintBoundary(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: smallSpacing),
@@ -2267,8 +2269,7 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(widget.label,
-                    style: Theme.of(context).textTheme.titleSmall),
+                Text(widget.label, style: theme.textTheme.titleSmall),
                 Tooltip(
                   message: widget.tooltipMessage,
                   child: const Padding(
@@ -2294,7 +2295,7 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
-                        color: Theme.of(context).colorScheme.outlineVariant,
+                        color: theme.colorScheme.outlineVariant,
                       ),
                       borderRadius: const BorderRadius.all(Radius.circular(12)),
                     ),
@@ -2325,18 +2326,19 @@ class ComponentGroupDecoration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     // Fully traverse this component group before moving on
     return FocusTraversalGroup(
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0,
-        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+        color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Center(
             child: Column(
               children: <Widget>[
-                Text(label, style: Theme.of(context).textTheme.titleLarge),
+                Text(label, style: theme.textTheme.titleLarge),
                 colDivider,
                 ...children
               ],

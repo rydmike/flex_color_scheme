@@ -134,15 +134,13 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
                   '${(controller.useFlexColorScheme && controller.useSubThemes && controller.tooltipSchemeColor != null ? controller.tooltipOpacity * 100 : 100).toStringAsFixed(0)}'
                   ' %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -179,7 +177,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -188,9 +186,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                           ? tooltipDefaultRadiusLabel
                           : (controller.tooltipRadius?.toStringAsFixed(0) ?? '')
                       : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

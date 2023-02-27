@@ -111,9 +111,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                   controller.sysNavBarStyle == FlexSystemNavBarStyle.transparent
                       ? '0 %'
                       : '${(navBarOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],

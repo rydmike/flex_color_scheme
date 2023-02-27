@@ -13,8 +13,9 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme scheme = Theme.of(context).colorScheme;
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    // final ColorScheme scheme = theme.colorScheme;
+    final bool isLight = theme.brightness == Brightness.light;
 
     final List<bool> isSelected = <bool>[
       style == FlexSystemNavBarStyle.system,
@@ -36,17 +37,18 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
         ),
         Tooltip(
           message: 'Themed surface color',
-          child: Icon(Icons.lens, color: scheme.surface.darken(5)),
+          child: Icon(Icons.lens, color: theme.colorScheme.surface.darken(5)),
         ),
         Tooltip(
           message: 'Themed background color',
-          child: Icon(Icons.lens, color: scheme.background.darken(5)),
+          child:
+              Icon(Icons.lens, color: theme.colorScheme.background.darken(5)),
         ),
         Tooltip(
           message: 'Themed scaffold background color',
           child: Icon(
             Icons.lens,
-            color: Theme.of(context).scaffoldBackgroundColor.darken(5),
+            color: theme.scaffoldBackgroundColor.darken(5),
           ),
         ),
         const Tooltip(
