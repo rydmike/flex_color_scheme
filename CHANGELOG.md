@@ -48,6 +48,8 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Add**: New configuration class `FlexAdaptive` used to configure on which platforms adaptive theming features are used. Including 100% unit test coverage for the new class.
 
+- **Add**: New `FlexSubThemesData` that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
+
 
 **CHANGE**
 
@@ -156,6 +158,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
+- Playground: Add controls and codegen for new platform adaptive theming features.
 - NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5
 
@@ -166,7 +169,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
-  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 81% tested now.
+  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 80% tested now.
   - All new sub-themes and new states.  
   - Tests for usedColors 7.
 - DOCS: Add important changes to docs.flexcolorscheme.com:

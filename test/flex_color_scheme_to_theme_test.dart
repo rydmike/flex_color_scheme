@@ -4556,8 +4556,9 @@ void main() {
         useMaterial3: true,
         platform: TargetPlatform.android,
         subThemesData: const FlexSubThemesData(
-          elevationTint: FlexTint.removeTint,
-          elevationShadow: FlexShadow.useShadow,
+          adaptiveRemoveElevationTint: FlexAdaptive.all(),
+          adaptiveElevationShadowsBack: FlexAdaptive.all(),
+          adaptiveAppBarScrollUnderOff: FlexAdaptive.all(),
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -4662,8 +4663,8 @@ void main() {
         useMaterial3: true,
         platform: TargetPlatform.iOS,
         subThemesData: const FlexSubThemesData(
-          elevationTint: FlexTint.adaptive,
-          elevationShadow: FlexShadow.adaptive,
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -4674,11 +4675,12 @@ void main() {
       // AppBar
       expect(
         theme.appBarTheme.surfaceTintColor,
-        equals(null), // Tint is kept on AppBar also on iOS & MacOS
+        // Tint is kept on AppBar when using adaptiveRemoveElevationTint
+        equals(null),
       );
       expect(
         theme.appBarTheme.shadowColor,
-        equals(null), // Shadow is not added on AppBar in iOS & MacOS, they
+        equals(colorScheme.shadow),
         // don't use it otherwise either on native AppBars
       );
       // BottomAppBar
@@ -4769,8 +4771,9 @@ void main() {
         useMaterial3: true,
         platform: TargetPlatform.macOS,
         subThemesData: const FlexSubThemesData(
-          elevationTint: FlexTint.adaptive,
-          elevationShadow: FlexShadow.adaptive,
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
+          adaptiveAppBarScrollUnderOff: FlexAdaptive.iOSAndDesktop(),
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -4781,12 +4784,11 @@ void main() {
       // AppBar
       expect(
         theme.appBarTheme.surfaceTintColor,
-        equals(null), // Tint is kept on AppBar also on iOS & MacOS
+        equals(Colors.transparent),
       );
       expect(
         theme.appBarTheme.shadowColor,
-        equals(null), // Shadow is not added on AppBar in iOS & MacOS, they
-        // don't use it otherwise either on native AppBars
+        equals(colorScheme.shadow),
       );
       // BottomAppBar
       expect(
@@ -4876,8 +4878,8 @@ void main() {
         useMaterial3: true,
         platform: TargetPlatform.android,
         subThemesData: const FlexSubThemesData(
-          elevationTint: FlexTint.adaptive,
-          elevationShadow: FlexShadow.adaptive,
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
         ),
       );
       final ThemeData theme = fcs.toTheme;

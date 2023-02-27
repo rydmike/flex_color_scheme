@@ -43,29 +43,29 @@ class Store {
   // Default value for the useFlutterDefaults, also to reset settings.
   static const bool defaultUseFlutterDefaults = false;
 
-  // Key used to read and save the elevationTint value.
-  static const String keyElevationTint = 'elevationTint';
-  // Default value for the elevationTint, also to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const FlexTint? defaultElevationTint = null;
-
-  // Key used to read and save the elevationShadow value.
-  static const String keyElevationShadow = 'elevationShadow';
-  // Default value for the elevationShadow, also to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const FlexShadow? defaultElevationShadow = null;
-
-  // Key used to read and save the elevationTintDark value.
-  static const String keyElevationTintDark = 'elevationTintDark';
-  // Default value for the elevationTintDark, also to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const FlexTint? defaultElevationTintDark = null;
-
-  // Key used to read and save the elevationShadowDark value.
-  static const String keyElevationShadowDark = 'elevationShadowDark';
-  // Default value for the elevationShadowDark, also to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const FlexShadow? defaultElevationShadowDark = null;
+  // // Key used to read and save the elevationTint value.
+  // static const String keyElevationTint = 'elevationTint';
+  // // Default value for the elevationTint, also to reset settings.
+  // // We use NULL as default, on nullable settings.
+  // static const FlexTint? defaultElevationTint = null;
+  //
+  // // Key used to read and save the elevationShadow value.
+  // static const String keyElevationShadow = 'elevationShadow';
+  // // Default value for the elevationShadow, also to reset settings.
+  // // We use NULL as default, on nullable settings.
+  // static const FlexShadow? defaultElevationShadow = null;
+  //
+  // // Key used to read and save the elevationTintDark value.
+  // static const String keyElevationTintDark = 'elevationTintDark';
+  // // Default value for the elevationTintDark, also to reset settings.
+  // // We use NULL as default, on nullable settings.
+  // static const FlexTint? defaultElevationTintDark = null;
+  //
+  // // Key used to read and save the elevationShadowDark value.
+  // static const String keyElevationShadowDark = 'elevationShadowDark';
+  // // Default value for the elevationShadowDark, also to reset settings.
+  // // We use NULL as default, on nullable settings.
+  // static const FlexShadow? defaultElevationShadowDark = null;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';

@@ -64,14 +64,14 @@ class ThemeController with ChangeNotifier {
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
     _useFlutterDefaults = await _themeService.load(
         Store.keyUseFlutterDefaults, Store.defaultUseFlutterDefaults);
-    _elevationTint = await _themeService.load(
-        Store.keyElevationTint, Store.defaultElevationTint);
-    _elevationShadow = await _themeService.load(
-        Store.keyElevationShadow, Store.defaultElevationShadow);
-    _elevationTintDark = await _themeService.load(
-        Store.keyElevationTintDark, Store.defaultElevationTintDark);
-    _elevationShadowDark = await _themeService.load(
-        Store.keyElevationShadowDark, Store.defaultElevationShadowDark);
+    // _elevationTint = await _themeService.load(
+    //     Store.keyElevationTint, Store.defaultElevationTint);
+    // _elevationShadow = await _themeService.load(
+    //     Store.keyElevationShadow, Store.defaultElevationShadow);
+    // _elevationTintDark = await _themeService.load(
+    //     Store.keyElevationTintDark, Store.defaultElevationTintDark);
+    // _elevationShadowDark = await _themeService.load(
+    //     Store.keyElevationShadowDark, Store.defaultElevationShadowDark);
     _isLargeGridView = await _themeService.load(
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _compactMode = await _themeService.load(
@@ -735,10 +735,10 @@ class ThemeController with ChangeNotifier {
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
     setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
-    setElevationTint(Store.defaultElevationTint, false);
-    setElevationShadow(Store.defaultElevationShadow, false);
-    setElevationTintDark(Store.defaultElevationTintDark, false);
-    setElevationShadowDark(Store.defaultElevationShadowDark, false);
+    // setElevationTint(Store.defaultElevationTint, false);
+    // setElevationShadow(Store.defaultElevationShadow, false);
+    // setElevationTintDark(Store.defaultElevationTintDark, false);
+    // setElevationShadowDark(Store.defaultElevationShadowDark, false);
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
     setUseTextTheme(Store.defaultUseTextTheme, false);
@@ -1380,10 +1380,10 @@ class ThemeController with ChangeNotifier {
       setBlendLevelDark(0, false);
       setBlendOnLevel(0, false);
       setBlendOnLevelDark(0, false);
-      // Elevation tint and shadows.
-      setElevationTint(FlexTint.removeTint, false);
-      setElevationShadow(FlexShadow.useShadow, false);
-      setElevationShadowDark(FlexShadow.useShadow, false);
+      // // Elevation tint and shadows.
+      // setElevationTint(FlexTint.removeTint, false);
+      // setElevationShadow(FlexShadow.useShadow, false);
+      // setElevationShadowDark(FlexShadow.useShadow, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(false, false);
@@ -1643,10 +1643,10 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // Elevation tint and shadows.
-      setElevationTint(FlexTint.adaptive, false);
-      setElevationShadow(FlexShadow.adaptive, false);
-      setElevationShadowDark(FlexShadow.adaptive, false);
+      // // Elevation tint and shadows.
+      // setElevationTint(FlexTint.adaptive, false);
+      // setElevationShadow(FlexShadow.adaptive, false);
+      // setElevationShadowDark(FlexShadow.adaptive, false);
       // Text theme blends
       setBlendLightTextTheme(false, false);
       setBlendDarkTextTheme(false, false);
@@ -1951,41 +1951,41 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseFlutterDefaults, value));
   }
 
-  late FlexTint? _elevationTint;
-  FlexTint? get elevationTint => _elevationTint;
-  void setElevationTint(FlexTint? value, [bool notify = true]) {
-    if (value == _elevationTint) return;
-    _elevationTint = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyElevationTint, value));
-  }
-
-  late FlexShadow? _elevationShadow;
-  FlexShadow? get elevationShadow => _elevationShadow;
-  void setElevationShadow(FlexShadow? value, [bool notify = true]) {
-    if (value == _elevationShadow) return;
-    _elevationShadow = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyElevationShadow, value));
-  }
-
-  late FlexTint? _elevationTintDark;
-  FlexTint? get elevationTintDark => _elevationTintDark;
-  void setElevationTintDark(FlexTint? value, [bool notify = true]) {
-    if (value == _elevationTintDark) return;
-    _elevationTintDark = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyElevationTintDark, value));
-  }
-
-  late FlexShadow? _elevationShadowDark;
-  FlexShadow? get elevationShadowDark => _elevationShadowDark;
-  void setElevationShadowDark(FlexShadow? value, [bool notify = true]) {
-    if (value == _elevationShadowDark) return;
-    _elevationShadowDark = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyElevationShadowDark, value));
-  }
+  // late FlexTint? _elevationTint;
+  // FlexTint? get elevationTint => _elevationTint;
+  // void setElevationTint(FlexTint? value, [bool notify = true]) {
+  //   if (value == _elevationTint) return;
+  //   _elevationTint = value;
+  //   if (notify) notifyListeners();
+  //   unawaited(_themeService.save(Store.keyElevationTint, value));
+  // }
+  //
+  // late FlexShadow? _elevationShadow;
+  // FlexShadow? get elevationShadow => _elevationShadow;
+  // void setElevationShadow(FlexShadow? value, [bool notify = true]) {
+  //   if (value == _elevationShadow) return;
+  //   _elevationShadow = value;
+  //   if (notify) notifyListeners();
+  //   unawaited(_themeService.save(Store.keyElevationShadow, value));
+  // }
+  //
+  // late FlexTint? _elevationTintDark;
+  // FlexTint? get elevationTintDark => _elevationTintDark;
+  // void setElevationTintDark(FlexTint? value, [bool notify = true]) {
+  //   if (value == _elevationTintDark) return;
+  //   _elevationTintDark = value;
+  //   if (notify) notifyListeners();
+  //   unawaited(_themeService.save(Store.keyElevationTintDark, value));
+  // }
+  //
+  // late FlexShadow? _elevationShadowDark;
+  // FlexShadow? get elevationShadowDark => _elevationShadowDark;
+  // void setElevationShadowDark(FlexShadow? value, [bool notify = true]) {
+  //   if (value == _elevationShadowDark) return;
+  //   _elevationShadowDark = value;
+  //   if (notify) notifyListeners();
+  //   unawaited(_themeService.save(Store.keyElevationShadowDark, value));
+  // }
 
   late bool _isLargeGridView;
   bool get isLargeGridView => _isLargeGridView;

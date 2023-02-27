@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'flex_adaptive.dart';
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_sub_themes.dart';
@@ -126,14 +127,17 @@ class FlexSubThemesData with Diagnosticable {
     this.blendOnColors = true,
     this.useFlutterDefaults = false,
     //
-    this.elevationTint,
-    this.elevationShadow,
+    this.adaptiveRemoveElevationTint,
+    this.adaptiveElevationShadowsBack,
+    this.adaptiveAppBarScrollUnderOff,
+    this.adaptiveRadius,
     //
     this.blendTextTheme = false,
     this.useTextTheme = true,
     this.useM2StyleDividerInM3 = false,
     //
     this.defaultRadius,
+    this.defaultRadiusAdaptive,
     this.buttonMinSize,
     this.buttonPadding,
     //
@@ -550,21 +554,22 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to false.
   final bool useFlutterDefaults;
 
-  /// Controls elevation tint color usage in Material 3 theming.
+  /// Controls adaptive elevation tint color usage in Material 3 theming.
   ///
   /// Material 3 introduces elevation tint on elevated surface. With the
-  /// [elevationTint] control you can control if it is used.
+  /// [adaptiveRemoveElevationTint] property you can define on which platforms
+  /// elevation tint is used when using Material 3.
   ///
-  /// - Use value [FlexTint.defaults] for default elevation tints in M3.
-  /// - Use value [FlexTint.removeTint] to remove elevation tint in M3.
-  /// - Use value [FlexTint.adaptive] to remove elevation tint in M3 on
-  ///   iOS and macOS platforms.
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms.
   ///
-  /// The [elevationTint] feature has no impact in M2 mode. It only impacts
-  /// component themes in FCS where Flutter SDK also support elevation
-  /// tints in its theme. Currently this applies to:
+  /// The [adaptiveRemoveElevationTint] feature has no impact in M2 mode.
+  /// It only impacts component themes in FCS where Flutter SDK also support
+  /// elevation tints in its theme. Currently this applies to:
   ///
-  /// - [AppBar]
   /// - [BottomAppBar]
   /// - [BottomSheet]
   /// - [Card]
@@ -579,32 +584,35 @@ class FlexSubThemesData with Diagnosticable {
   /// - [PopupMenuButton]
   ///
   /// Not supported in Flutter theming on:
-  /// - [BottomNavigationBar], does not have tint in M3 in Flutter 3.7.
+  /// - [BottomNavigationBar], does not have elevation tint in M3 in
+  ///   Flutter 3.7, since it is an M2 component it does not support it.
   /// - [NavigationRail], does not have elevation tint in Flutter 3.7, probably
   ///   should have when elevated. Default M3 design does not elevate it.
   ///
   /// If you want to totally remove elevation tint from all widgets and on all
-  /// platforms when using Material 3, you can set
+  /// platforms when using Material 3, you can optionally set
   /// [FlexColorScheme.surfaceTint] color to [Colors.transparent]. This also
   /// works with vanilla [ThemeData.colorScheme] by setting its
   /// [ColorScheme.surfaceTint] to [Colors.transparent].
   ///
-  /// If not defined, defaults to [FlexTint.defaults].
-  final FlexTint? elevationTint;
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveRemoveElevationTint;
 
   /// Controls shadow usage on elevated surfaces in Material 3 theming.
   ///
   /// Material 3 removes elevation shadows on some elevated surfaces. With this
-  /// control you can bring it back.
+  /// property you can bring it back.
   ///
-  /// - Use value [FlexShadow.defaults] for default elevation shadows in M3.
-  /// - Use value [FlexShadow.useShadow] to bring back shadows in M3.
-  /// - Use value [FlexShadow.adaptive] to only bring back elevation shadows on
-  ///   iOS and macOS platforms.
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms.
   ///
-  /// The [elevationShadow] feature has no impact in M2 mode. It only impacts
-  /// component themes in FCS where Flutter SDK also support adding elevation
-  /// shadows back in M3 mode. Currently this applies to:
+  /// The [adaptiveElevationShadowsBack] property has no impact in M2 mode. It
+  /// only impacts component themes in FlexColorScheme where Flutter SDK also
+  /// support adding elevation shadows back in M3 mode.
+  /// Currently this applies to:
   ///
   /// - [AppBar]
   /// - [BottomAppBar]
@@ -614,7 +622,9 @@ class FlexSubThemesData with Diagnosticable {
   /// - [NavigationBar]
   ///
   /// These components already have shadows in M3:
-  /// - [BottomNavigationBar], has shadow in M3 and no tint, is M2 Widget.
+  ///
+  /// - [BottomNavigationBar], has shadow in M3 and no tint, is an M2 style
+  ///   only Widget.
   /// - [BottomSheet],
   /// - [Card]
   /// - [Chip]
@@ -622,14 +632,84 @@ class FlexSubThemesData with Diagnosticable {
   /// - [MenuAnchor]
   /// - [MenuBar], might be a mistake that the bar has shadow in M3 by default.
   ///   The menus from the bar should have shadow and do, but probably not the
-  ///   menu bar itself. In design in M3 web guide it is not elevated.
-  /// - [NavigationRail], has shadow in M3 if elevated, probably should not.
+  ///   menu bar itself. In designs in M3 web guide, the bar is not elevated.
+  /// - [NavigationRail], has shadow in M3 if elevated, probably should not,
+  ///   since this is a combined M2/M3 widget like most widgets are.
   ///   Also does not have elevation tint in Flutter 3.7, probably should have
-  ///   when elevated. Default M3 design calls for it not being elevated.
-  /// - [PopupMenuButton]
+  ///   when elevated. Default M3 design calls for it not being elevated, so
+  ///   the spec does not offer any final word on it.
+  /// - [PopupMenuButton], all menus have shadows in M3 design too.
   ///
-  /// If not defined, defaults to [FlexShadow.defaults].
-  final FlexShadow? elevationShadow;
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveElevationShadowsBack;
+
+  /// Controls if the [AppBar] scroll under elevation tint feature is used
+  /// in Material 3 theming on the [AppBar].
+  ///
+  /// The [adaptiveRemoveElevationTint] will not remove elevation tint or the
+  /// scroll under elevation tint from the [AppBar]. It is done via this
+  /// separate property instead. You may want to use the visually quite useful
+  /// scroll under elevation tint of the AppBar, having it as a separate
+  /// property from the general [adaptiveRemoveElevationTint] allows you to
+  /// do so.
+  ///
+  /// In Material 3, when you scroll content under an [AppBar], it changes color
+  /// slightly to make it distinct from the background color it has by default
+  /// in M3 design. It equals the background color of the Scaffold by default.
+  ///
+  /// Having a color equal on the [AppBar] as the background is a design style
+  /// used for a long time on iOS. The tint when you scroll under is quite nice,
+  /// but not a style commonly used on other platforms. With the
+  /// [adaptiveAppBarScrollUnderOff] property you can remove the scroll under
+  /// elevation tint effect on selected platforms. Recommend keeping it used
+  /// though, it is quite useful and elegant.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms.
+  ///
+  /// The [AppBar] still changes its elevation to [appBarScrolledUnderElevation]
+  /// when you scroll things under it. However, with
+  /// [adaptiveAppBarScrollUnderOff] there is no tint change as a result of it.
+  ///
+  /// If you use [adaptiveElevationShadowsBack] the shadows will change to the
+  /// shadow level for used [appBarScrolledUnderElevation]. If you don't want
+  /// any visible change in the shadows when you scroll under the [AppBar], you
+  /// should set the [appBarScrolledUnderElevation] equal to the used elevation
+  /// on the [AppBar], typically set via [FlexColorScheme.appBarElevation].
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveAppBarScrollUnderOff;
+
+  /// Controls if the [defaultRadiusAdaptive] is used instead of [defaultRadius]
+  /// on configured platforms.
+  ///
+  /// With this feature you can have another configured border radius on
+  /// components with a [ShapeBorder] than the what you have defined in
+  /// [defaultRadius] as default.
+  ///
+  /// If you keep [defaultRadius] undefined and define [defaultRadiusAdaptive],
+  /// you can get the M3 by radius that varies by widget on platforms not
+  /// included in your [adaptiveRadius] and use shared global
+  /// [defaultRadiusAdaptive] on all widgets in the platforms included in the
+  /// [adaptiveRadius] configuration. When setting a high radius value on
+  /// [defaultRadiusAdaptive] you may want to reduce radius on e.g. menus
+  /// to something lower, like 2 to 8.
+  ///
+  /// With this feature you can let components use their default very round
+  /// border radius on Android, but set it e.g. to 10 dp on iOS and macOS, and
+  /// why not desktop platforms as well.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveRadius;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -728,7 +808,7 @@ class FlexSubThemesData with Diagnosticable {
   /// For clarity the following small, or element roundings are not affect
   /// by [defaultRadius] value, but may be set via own themes or properties.
   ///
-  /// * Indicator on [NavigationBar], bu can be set via
+  /// * Indicator on [NavigationBar], but can be set via
   ///   [navigationBarIndicatorRadius].
   /// * Indicator on [NavigationDrawer], but can be set via
   ///   [drawerIndicatorRadius].
@@ -739,7 +819,7 @@ class FlexSubThemesData with Diagnosticable {
   /// * Tooltip container shape.
   /// * Rounding on scrollbar edges.
   ///
-  /// Defaults to null.
+  /// Defaults to null, M3 defaults are used per widget.
   ///
   /// When it is null, the sub-themes will use their null default behavior
   /// that follow the Material 3 standard for widgets it includes.
@@ -749,11 +829,23 @@ class FlexSubThemesData with Diagnosticable {
   /// border radius back for individual widget sub-themes to some specific
   /// value, or set it back to its Material 3 standard.
   ///
-  /// Flutter current SDK general border radius is 4, as defined by the
+  /// Flutter M2 SDK general border radius is 4, as defined by the
   /// Material 2 design guide. Material 3 uses much higher border radius, and
   /// it varies by UI component type. You can find the
   /// specifications [here](https://m3.material.io).
   final double? defaultRadius;
+
+  /// The [defaultRadiusAdaptive] has the same definition and usage
+  /// [defaultRadius], but is used as default radius on platforms as configured
+  /// by [adaptiveRadius].
+  ///
+  /// If you keep [defaultRadius] null for M3 default, try setting
+  /// [defaultRadiusAdaptive] to 10 dp and [adaptiveRadius] to
+  /// [FlexAdaptive.iOSAndDesktop], for a more platform agnotic design on
+  /// other platforms and Android and Fuchsia.
+  ///
+  /// Defaults to null, M3 defaults are used per widget.
+  final double? defaultRadiusAdaptive;
 
   /// Minimum button size for all buttons.
   ///
@@ -786,7 +878,7 @@ class FlexSubThemesData with Diagnosticable {
   ///   * `2 < textScaleFactor <= 3` - lerp(horizontal(8), horizontal(4))
   ///   * `3 < textScaleFactor` - horizontal(4)
   ///
-  /// This default is same in both Material 2 and Material 3 theme mode.
+  /// This default is the same in both Material 2 and Material 3 theme mode.
   final EdgeInsetsGeometry? buttonPadding;
 
   /// Default for thicker border width state of Widgets with an outline border.
@@ -2668,14 +2760,17 @@ class FlexSubThemesData with Diagnosticable {
     final bool? blendOnColors,
     final bool? useFlutterDefaults,
     //
-    final FlexTint? elevationTint,
-    final FlexShadow? elevationShadow,
+    final FlexAdaptive? adaptiveRemoveElevationTint,
+    final FlexAdaptive? adaptiveElevationShadowsBack,
+    final FlexAdaptive? adaptiveAppBarScrollUnderOff,
+    final FlexAdaptive? adaptiveRadius,
     //
     final bool? blendTextTheme,
     final bool? useTextTheme,
     final bool? useM2StyleDividerInM3,
     //
     final double? defaultRadius,
+    final double? defaultRadiusAdaptive,
     final Size? buttonMinSize,
     final EdgeInsetsGeometry? buttonPadding,
     //
@@ -2896,8 +2991,13 @@ class FlexSubThemesData with Diagnosticable {
       blendOnColors: blendOnColors ?? this.blendOnColors,
       useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
       //
-      elevationTint: elevationTint ?? this.elevationTint,
-      elevationShadow: elevationShadow ?? this.elevationShadow,
+      adaptiveRemoveElevationTint:
+          adaptiveRemoveElevationTint ?? this.adaptiveRemoveElevationTint,
+      adaptiveElevationShadowsBack:
+          adaptiveElevationShadowsBack ?? this.adaptiveElevationShadowsBack,
+      adaptiveAppBarScrollUnderOff:
+          adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
+      adaptiveRadius: adaptiveRadius ?? this.adaptiveRadius,
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
@@ -2905,6 +3005,8 @@ class FlexSubThemesData with Diagnosticable {
           useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
       //
       defaultRadius: defaultRadius ?? this.defaultRadius,
+      defaultRadiusAdaptive:
+          defaultRadiusAdaptive ?? this.defaultRadiusAdaptive,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
       buttonPadding: buttonPadding ?? this.buttonPadding,
       //
@@ -3282,14 +3384,17 @@ class FlexSubThemesData with Diagnosticable {
         other.blendOnColors == blendOnColors &&
         other.useFlutterDefaults == useFlutterDefaults &&
         //
-        other.blendTextTheme == blendTextTheme &&
-        other.elevationTint == elevationTint &&
-        other.elevationShadow == elevationShadow &&
+        other.adaptiveRemoveElevationTint == adaptiveRemoveElevationTint &&
+        other.adaptiveElevationShadowsBack == adaptiveElevationShadowsBack &&
+        other.adaptiveAppBarScrollUnderOff == adaptiveAppBarScrollUnderOff &&
+        other.adaptiveRadius == adaptiveRadius &&
         //
+        other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
         other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
         other.defaultRadius == defaultRadius &&
+        other.defaultRadiusAdaptive == defaultRadiusAdaptive &&
         other.buttonMinSize == buttonMinSize &&
         other.buttonPadding == buttonPadding &&
         //
@@ -3568,14 +3673,17 @@ class FlexSubThemesData with Diagnosticable {
         blendOnColors,
         useFlutterDefaults,
         //
-        elevationTint,
-        elevationShadow,
+        adaptiveRemoveElevationTint,
+        adaptiveElevationShadowsBack,
+        adaptiveAppBarScrollUnderOff,
+        adaptiveRadius,
         //
         blendTextTheme,
         useTextTheme,
         useM2StyleDividerInM3,
         //
         defaultRadius,
+        defaultRadiusAdaptive,
         buttonMinSize,
         buttonPadding,
         //
@@ -3802,9 +3910,14 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
     //
-    properties.add(EnumProperty<FlexTint>('useElevationTint', elevationTint));
+    properties.add(EnumProperty<FlexAdaptive>(
+        'adaptiveRemoveElevationTint', adaptiveRemoveElevationTint));
+    properties.add(EnumProperty<FlexAdaptive>(
+        'adaptiveElevationShadowsBack', adaptiveElevationShadowsBack));
+    properties.add(EnumProperty<FlexAdaptive>(
+        'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
     properties
-        .add(EnumProperty<FlexShadow>('useElevationShadow', elevationShadow));
+        .add(EnumProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
     //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
@@ -3812,6 +3925,8 @@ class FlexSubThemesData with Diagnosticable {
         'useM2StyleDividerInM3', useM2StyleDividerInM3));
     //
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'defaultRadiusAdaptive', defaultRadiusAdaptive));
     properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
         'buttonPadding', buttonPadding));

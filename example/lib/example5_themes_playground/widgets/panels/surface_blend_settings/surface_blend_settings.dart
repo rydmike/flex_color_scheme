@@ -13,8 +13,6 @@ import 'light_surface_mode_list_tile.dart';
 import 'light_surface_mode_popup_menu.dart';
 import 'platform_popup_menu.dart';
 import 'surface_colors.dart';
-import 'use_elevation_shadow_popup_menu.dart';
-import 'use_elevation_tint_popup_menu.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
@@ -236,22 +234,22 @@ class SurfaceBlendSettings extends StatelessWidget {
         // Light mode widgets
         //
         if (isLight) ...<Widget>[
-          UseElevationTintPopupMenu(
-            title: const Text('M3 elevation tint theming in light theme'),
-            labelForDefault: 'Not defined (defaults, tint as designed)',
-            index: controller.elevationTint?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= FlexTint.values.length) {
-                      controller.setElevationTint(null);
-                    } else {
-                      controller.setElevationTint(FlexTint.values[index]);
-                    }
-                  }
-                : null,
-          ),
+          // UseElevationTintPopupMenu(
+          //   title: const Text('M3 elevation tint theming in light theme'),
+          //   labelForDefault: 'Not defined (defaults, tint as designed)',
+          //   index: controller.elevationTint?.index ?? -1,
+          //   onChanged: controller.useFlexColorScheme &&
+          //           controller.useSubThemes &&
+          //           controller.useMaterial3
+          //       ? (int index) {
+          //           if (index < 0 || index >= FlexTint.values.length) {
+          //             controller.setElevationTint(null);
+          //           } else {
+          //             controller.setElevationTint(FlexTint.values[index]);
+          //           }
+          //         }
+          //       : null,
+          // ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
@@ -317,22 +315,22 @@ class SurfaceBlendSettings extends StatelessWidget {
               controller.setSurfaceTintLight(null);
             },
           ),
-          UseElevationShadowPopupMenu(
-            title: const Text('M3 elevation shadow theming in light theme'),
-            labelForDefault: 'Not defined (defaults, no shadows as designed)',
-            index: controller.elevationShadow?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= FlexShadow.values.length) {
-                      controller.setElevationShadow(null);
-                    } else {
-                      controller.setElevationShadow(FlexShadow.values[index]);
-                    }
-                  }
-                : null,
-          ),
+          // UseElevationShadowPopupMenu(
+          //   title: const Text('M3 elevation shadow theming in light theme'),
+          //   labelForDefault: 'Not defined (defaults, no shadows as designed)',
+          //   index: controller.elevationShadow?.index ?? -1,
+          //   onChanged: controller.useFlexColorScheme &&
+          //           controller.useSubThemes &&
+          //           controller.useMaterial3
+          //       ? (int index) {
+          //           if (index < 0 || index >= FlexShadow.values.length) {
+          //             controller.setElevationShadow(null);
+          //           } else {
+          //             controller.setElevationShadow(FlexShadow.values[index]);
+          //           }
+          //         }
+          //       : null,
+          // ),
           const Divider(),
           ListTile(
             enabled: controller.useSubThemes &&
@@ -409,22 +407,22 @@ class SurfaceBlendSettings extends StatelessWidget {
         // ELSE Dark mode widgets
         //
         else ...<Widget>[
-          UseElevationTintPopupMenu(
-            title: const Text('M3 elevation tint theming in dark theme'),
-            labelForDefault: 'Not defined (defaults, tint as designed)',
-            index: controller.elevationTintDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= FlexTint.values.length) {
-                      controller.setElevationTintDark(null);
-                    } else {
-                      controller.setElevationTintDark(FlexTint.values[index]);
-                    }
-                  }
-                : null,
-          ),
+          // UseElevationTintPopupMenu(
+          //   title: const Text('M3 elevation tint theming in dark theme'),
+          //   labelForDefault: 'Not defined (defaults, tint as designed)',
+          //   index: controller.elevationTintDark?.index ?? -1,
+          //   onChanged: controller.useFlexColorScheme &&
+          //           controller.useSubThemes &&
+          //           controller.useMaterial3
+          //       ? (int index) {
+          //           if (index < 0 || index >= FlexTint.values.length) {
+          //             controller.setElevationTintDark(null);
+          //           } else {
+          //             controller.setElevationTintDark(FlexTint.values[index]);
+          //           }
+          //         }
+          //       : null,
+          // ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
@@ -489,23 +487,23 @@ class SurfaceBlendSettings extends StatelessWidget {
               controller.setSurfaceTintDark(null);
             },
           ),
-          UseElevationShadowPopupMenu(
-            title: const Text('M3 elevation shadow theming in dark theme'),
-            labelForDefault: 'Not defined (defaults, no shadows as designed)',
-            index: controller.elevationShadowDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= FlexShadow.values.length) {
-                      controller.setElevationShadowDark(null);
-                    } else {
-                      controller
-                          .setElevationShadowDark(FlexShadow.values[index]);
-                    }
-                  }
-                : null,
-          ),
+          // UseElevationShadowPopupMenu(
+          //   title: const Text('M3 elevation shadow theming in dark theme'),
+          //   labelForDefault: 'Not defined (defaults, no shadows as designed)',
+          //   index: controller.elevationShadowDark?.index ?? -1,
+          //   onChanged: controller.useFlexColorScheme &&
+          //           controller.useSubThemes &&
+          //           controller.useMaterial3
+          //       ? (int index) {
+          //           if (index < 0 || index >= FlexShadow.values.length) {
+          //             controller.setElevationShadowDark(null);
+          //           } else {
+          //             controller
+          //                 .setElevationShadowDark(FlexShadow.values[index]);
+          //           }
+          //         }
+          //       : null,
+          // ),
           const Divider(),
           ListTile(
             enabled: controller.useSubThemes &&

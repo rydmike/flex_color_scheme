@@ -490,7 +490,7 @@ class ShowcaseSlider extends StatelessWidget {
             children: const <Widget>[
               ListTile(title: Text('Progress indicators')),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: ProgressIndicatorShowcase(),
               ),
               SizedBox(height: 16),

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'flex_adaptive.dart';
 import 'flex_alpha_values.dart';
 import 'flex_color.dart';
 import 'flex_constants.dart';
@@ -171,36 +172,6 @@ enum FlexTabBarStyle {
   /// Prefer using [forAppBar] or [forBackground] depending on where you
   /// primarily intend to use your tab bars.
   universal,
-}
-
-/// Enum used to select if surface elevation tint is used in Material 3 mode.
-enum FlexTint {
-  /// Surface tint is used, if it is used by default design in M3 mode.
-  defaults,
-
-  /// Surface tint is removed in M3 mode.
-  removeTint,
-
-  /// Surface tint is platform adaptive.
-  ///
-  /// Adaptive, means surface tint is not used on iOS and macOS in M3 mode,
-  /// but on other platforms it is still used in M3 mode.
-  adaptive,
-}
-
-/// Enum used to select if elevation shadow is used in Material 3 mode.
-enum FlexShadow {
-  /// Elevation shadow is used, if it is used by default design in M3 mode.
-  defaults,
-
-  /// Elevation shadows are added in M3 mode, when possible.
-  useShadow,
-
-  /// Elevation shadows additions are platform adaptive.
-  ///
-  /// Adaptive, means elevation shadows are added on iOS and macOS in M3 mode,
-  /// but on other platforms shadows are not added back in M3 mode.
-  adaptive,
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
@@ -5549,22 +5520,29 @@ class FlexColorScheme with Diagnosticable {
     // Use passed in target platform, else use actual host platform.
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
-    // Use elevation tint in M3?
-    final FlexTint subTint = subTheme.elevationTint ?? FlexTint.defaults;
-    final bool removeTint = useMaterial3 &&
-        (subTint == FlexTint.removeTint ||
-            (subTint == FlexTint.adaptive &&
-                (effectivePlatform == TargetPlatform.iOS ||
-                    effectivePlatform == TargetPlatform.macOS)));
+    // Remove elevation tint in M3?
+    final FlexAdaptive subTint =
+        subTheme.adaptiveRemoveElevationTint ?? const FlexAdaptive.off();
+    final bool removeTint = useMaterial3 && subTint.adapt(effectivePlatform);
 
     // Use elevation shadow in M3?
-    final FlexShadow subShadow =
-        subTheme.elevationShadow ?? FlexShadow.defaults;
-    final bool useShadow = useMaterial3 &&
-        (subShadow == FlexShadow.useShadow ||
-            (subShadow == FlexShadow.adaptive &&
-                (effectivePlatform == TargetPlatform.iOS ||
-                    effectivePlatform == TargetPlatform.macOS)));
+    final FlexAdaptive subShadow =
+        subTheme.adaptiveElevationShadowsBack ?? const FlexAdaptive.off();
+    final bool useShadow = useMaterial3 && subShadow.adapt(effectivePlatform);
+
+    // No AppBar scroll under elevation tint
+    final FlexAdaptive scrollUnderOff =
+        subTheme.adaptiveAppBarScrollUnderOff ?? const FlexAdaptive.off();
+    final bool noScrollUnder =
+        useMaterial3 && scrollUnderOff.adapt(effectivePlatform);
+
+    // Use defaultRadiusAdaptive instead of defaultRadius?
+    final FlexAdaptive adaptiveRadius =
+        subTheme.adaptiveRadius ?? const FlexAdaptive.off();
+    // Get the correct platform default radius.
+    final double? platformRadius = adaptiveRadius.adapt(effectivePlatform)
+        ? subTheme.defaultRadiusAdaptive
+        : subTheme.defaultRadius;
 
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
@@ -6033,7 +6011,7 @@ class FlexColorScheme with Diagnosticable {
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
             borderSchemeColor: subTheme.inputDecoratorBorderSchemeColor,
-            radius: subTheme.inputDecoratorRadius ?? subTheme.defaultRadius,
+            radius: subTheme.inputDecoratorRadius ?? platformRadius,
             borderType: subTheme.inputDecoratorBorderType,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,
@@ -6326,16 +6304,9 @@ class FlexColorScheme with Diagnosticable {
               iconTheme: IconThemeData(color: appBarIconColor),
               actionsIconTheme: IconThemeData(color: appBarIconColor),
               systemOverlayStyle: systemOverlayStyle,
-              // Special case, don't use shadow on AppBar with adaptive case.
-              // We keep the scroll-under effect, useful on iOS too.
-              shadowColor: useShadow && subShadow != FlexShadow.adaptive
-                  ? colorScheme.shadow
-                  : null,
-              // Special case, don't remove tint on AppBar with adaptive case.
-              // since AppBars do not have shadows anyway on them.
-              surfaceTintColor: removeTint && subTint != FlexTint.adaptive
-                  ? Colors.transparent
-                  : null,
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              // Surface tint on AppBar is removed via the scroll under setting.
+              surfaceTintColor: noScrollUnder ? Colors.transparent : null,
             )
           : useMaterial3
               ? (appBarElevation != null && appBarElevation != 0) ||
@@ -6462,7 +6433,7 @@ class FlexColorScheme with Diagnosticable {
               modalBackgroundColor: bottomSheetModalColor,
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
-              radius: subTheme.bottomSheetRadius ?? subTheme.defaultRadius,
+              radius: subTheme.bottomSheetRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
@@ -6496,7 +6467,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.buttonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.materialButtonSchemeColor,
-              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.textButtonRadius ?? platformRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
             )
@@ -6516,7 +6487,7 @@ class FlexColorScheme with Diagnosticable {
       // Card Theme.
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(
-              radius: subTheme.cardRadius ?? subTheme.defaultRadius,
+              radius: subTheme.cardRadius ?? platformRadius,
               elevation: subTheme.cardElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
@@ -6546,7 +6517,7 @@ class FlexColorScheme with Diagnosticable {
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               labelStyle: effectiveTextTheme.labelLarge!,
-              radius: subTheme.chipRadius ?? subTheme.defaultRadius,
+              radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
@@ -6569,7 +6540,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: dialogBackground,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              radius: subTheme.dialogRadius ?? subTheme.defaultRadius,
+              radius: subTheme.dialogRadius ?? platformRadius,
               elevation: subTheme.dialogElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -6589,7 +6560,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.drawerTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
-              radius: subTheme.drawerRadius ?? subTheme.defaultRadius,
+              radius: subTheme.drawerRadius ?? platformRadius,
               width: subTheme.drawerWidth ??
                   (useMaterial3
                       ? kNavigationDrawerM3Width
@@ -6618,7 +6589,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.elevatedButtonSchemeColor,
               onBaseSchemeColor: subTheme.elevatedButtonSecondarySchemeColor,
-              radius: subTheme.elevatedButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.elevatedButtonRadius ?? platformRadius,
               elevation: subTheme.elevatedButtonElevation,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
@@ -6634,7 +6605,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.filledButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.filledButtonSchemeColor,
-              radius: subTheme.filledButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.filledButtonRadius ?? platformRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.filledButtonTextStyle,
@@ -6646,7 +6617,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.floatingActionButtonTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.fabSchemeColor,
-              radius: subTheme.fabRadius ?? subTheme.defaultRadius,
+              radius: subTheme.fabRadius ?? platformRadius,
               useShape: subTheme.fabUseShape,
               alwaysCircular: subTheme.fabAlwaysCircular,
             )
@@ -6689,9 +6660,9 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.menuSchemeColor,
               opacity: subTheme.menuOpacity,
               radius: subTheme.menuRadius ??
-                  (subTheme.defaultRadius == null
+                  (platformRadius == null
                       ? null
-                      : math.min(subTheme.defaultRadius!, 10.0)),
+                      : math.min(platformRadius, 10.0)),
               elevation: subTheme.menuElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
@@ -6811,7 +6782,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.outlinedButtonSchemeColor,
               outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
-              radius: subTheme.outlinedButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.outlinedButtonRadius ?? platformRadius,
               pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ??
                   subTheme.thickBorderWidth,
               outlineWidth: subTheme.outlinedButtonBorderWidth ??
@@ -6830,9 +6801,9 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.popupMenuTheme(
               colorScheme: colorScheme,
               radius: subTheme.popupMenuRadius ??
-                  (subTheme.defaultRadius == null
+                  (platformRadius == null
                       ? null
-                      : math.min(subTheme.defaultRadius!, 10.0)),
+                      : math.min(platformRadius, 10.0)),
               // textStyle: effectiveTextTheme.labelLarge,
               elevation: popupMenuElevation,
               color: popupMenuBackgroundColor,
@@ -6865,7 +6836,7 @@ class FlexColorScheme with Diagnosticable {
               borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
               borderWidth: subTheme.segmentedButtonBorderWidth ??
                   subTheme.thinBorderWidth,
-              radius: subTheme.segmentedButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.segmentedButtonRadius ?? platformRadius,
             )
           : null,
       //
@@ -6956,7 +6927,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.textButtonTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.textButtonSchemeColor,
-              radius: subTheme.textButtonRadius ?? subTheme.defaultRadius,
+              radius: subTheme.textButtonRadius ?? platformRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.textButtonTextStyle,
@@ -6988,9 +6959,8 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
-              radius: subTheme.timePickerDialogRadius ?? subTheme.defaultRadius,
-              elementRadius:
-                  subTheme.timePickerElementRadius ?? subTheme.defaultRadius,
+              radius: subTheme.timePickerDialogRadius ?? platformRadius,
+              elementRadius: subTheme.timePickerElementRadius ?? platformRadius,
               inputDecorationTheme: effectiveInputDecorationTheme)
           : null,
       //
@@ -7004,7 +6974,7 @@ class FlexColorScheme with Diagnosticable {
               borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,
               borderWidth:
                   subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
-              radius: subTheme.toggleButtonsRadius ?? subTheme.defaultRadius,
+              radius: subTheme.toggleButtonsRadius ?? platformRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,
               useMaterial3: useMaterial3,

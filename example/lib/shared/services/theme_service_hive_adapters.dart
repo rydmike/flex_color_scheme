@@ -254,53 +254,53 @@ class ShowValueIndicatorAdapter extends TypeAdapter<ShowValueIndicator?> {
   int get typeId => 162;
 }
 
-/// A Hive data type adapter for enum [FlexTint], nullable.
-///
-/// Handles storing <null> value as -1 and returns anything out of enum
-/// index range as null value.
-class FlexTintAdapter extends TypeAdapter<FlexTint?> {
-  @override
-  FlexTint? read(BinaryReader reader) {
-    final int index = reader.readInt();
-    if (index < 0 || index >= FlexTint.values.length) {
-      return null;
-    } else {
-      return FlexTint.values[index];
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, FlexTint? obj) {
-    writer.writeInt(obj?.index ?? -1);
-  }
-
-  @override
-  int get typeId => 163;
-}
-
-/// A Hive data type adapter for enum [FlexShadow], nullable.
-///
-/// Handles storing <null> value as -1 and returns anything out of enum
-/// index range as null value.
-class FlexShadowAdapter extends TypeAdapter<FlexShadow?> {
-  @override
-  FlexShadow? read(BinaryReader reader) {
-    final int index = reader.readInt();
-    if (index < 0 || index >= FlexShadow.values.length) {
-      return null;
-    } else {
-      return FlexShadow.values[index];
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, FlexShadow? obj) {
-    writer.writeInt(obj?.index ?? -1);
-  }
-
-  @override
-  int get typeId => 164;
-}
+// /// A Hive data type adapter for enum [FlexTint], nullable.
+// ///
+// /// Handles storing <null> value as -1 and returns anything out of enum
+// /// index range as null value.
+// class FlexTintAdapter extends TypeAdapter<FlexTint?> {
+//   @override
+//   FlexTint? read(BinaryReader reader) {
+//     final int index = reader.readInt();
+//     if (index < 0 || index >= FlexTint.values.length) {
+//       return null;
+//     } else {
+//       return FlexTint.values[index];
+//     }
+//   }
+//
+//   @override
+//   void write(BinaryWriter writer, FlexTint? obj) {
+//     writer.writeInt(obj?.index ?? -1);
+//   }
+//
+//   @override
+//   int get typeId => 163;
+// }
+//
+// /// A Hive data type adapter for enum [FlexShadow], nullable.
+// ///
+// /// Handles storing <null> value as -1 and returns anything out of enum
+// /// index range as null value.
+// class FlexShadowAdapter extends TypeAdapter<FlexShadow?> {
+//   @override
+//   FlexShadow? read(BinaryReader reader) {
+//     final int index = reader.readInt();
+//     if (index < 0 || index >= FlexShadow.values.length) {
+//       return null;
+//     } else {
+//       return FlexShadow.values[index];
+//     }
+//   }
+//
+//   @override
+//   void write(BinaryWriter writer, FlexShadow? obj) {
+//     writer.writeInt(obj?.index ?? -1);
+//   }
+//
+//   @override
+//   int get typeId => 164;
+// }
 
 /// A Hive data type adapter for enum [TabBarIndicatorSize], nullable.
 ///

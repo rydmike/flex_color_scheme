@@ -27,10 +27,10 @@ import 'package:flutter/foundation.dart';
 /// - [FlexSubThemesData.adaptiveElevationShadowsBack] to adaptively bring
 ///   elevation shadows back where they were removed in Material 3, when
 ///   Material 3 mode is used.
-/// - [FlexSubThemesData.adaptiveAppBarScrollUnder] to adaptively remove the
+/// - [FlexSubThemesData.adaptiveAppBarScrollUnderOff] to adaptively remove the
 ///   [AppBar] scroll under elevation tint when Material 3 mode is used.
-/// - [FlexSubThemesData.adaptiveBorderRadius] to adaptively use global
-///   [adaptiveDefaultBorderRadius] instead of [defaultBorderRadius] in both
+/// - [FlexSubThemesData.adaptiveRadius] to adaptively use global
+///   [defaultRadiusAdaptive] instead of [defaultRadius] in both
 ///   Material 2 and Material 3 mode.
 ///
 /// A planned **future** feature is to introduce the Squircle or super-ellipses
