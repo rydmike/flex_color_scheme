@@ -2,7 +2,9 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
@@ -126,11 +128,18 @@ class SurfaceBlendSettings extends StatelessWidget {
             'on Scaffold background.',
           ),
         ),
+        const ListTile(
+          title: Text('Surface blends and elevation tint controls'),
+          subtitle: Text('All settings below have separate control values '
+              'in the Playground for light and dark mode. Typically different '
+              'settings in light and dark mode, may be a part of the desired '
+              'design.'),
+        ),
         if (isLight) ...<Widget>[
           LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
           const ListTile(
-            title: Text('Light theme blend level'),
+            title: Text('Blend level'),
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces always include '
@@ -179,7 +188,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           DarkSurfaceModePopupMenu(controller: controller),
           DarkSurfaceModeListTile(controller: controller),
           const ListTile(
-            title: Text('Dark theme blend level'),
+            title: Text('Blend level'),
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces already include '
@@ -234,110 +243,13 @@ class SurfaceBlendSettings extends StatelessWidget {
         // Light mode widgets
         //
         if (isLight) ...<Widget>[
-          // UseElevationTintPopupMenu(
-          //   title: const Text('M3 elevation tint theming in light theme'),
-          //   labelForDefault: 'Not defined (defaults, tint as designed)',
-          //   index: controller.elevationTint?.index ?? -1,
-          //   onChanged: controller.useFlexColorScheme &&
-          //           controller.useSubThemes &&
-          //           controller.useMaterial3
-          //       ? (int index) {
-          //           if (index < 0 || index >= FlexTint.values.length) {
-          //             controller.setElevationTint(null);
-          //           } else {
-          //             controller.setElevationTint(FlexTint.values[index]);
-          //           }
-          //         }
-          //       : null,
-          // ),
-          ColorPickerInkWellDialog(
-            color: controller.surfaceTintLight ?? colorScheme.primary,
-            onChanged: controller.setSurfaceTintLight,
-            recentColors: controller.recentColors,
-            onRecentColorsChanged: controller.setRecentColors,
-            wasCancelled: (bool cancelled) {
-              if (cancelled) {
-                controller.setSurfaceTintLight(previousTintLight);
-              }
-            },
-            enabled: true,
-            child: ListTile(
-              title: const Text('Light theme blend and surface tint color'),
-              subtitle: Text('Color$defaultTintLightLabel '
-                  '$nameThatColorLight $materialNameLight$spaceLight'
-                  '#${effectiveTintLight.hexCode}'),
-              trailing: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 10.0),
-                child: ColorSchemeBox(
-                  borderColor: Colors.transparent,
-                  backgroundColor:
-                      controller.surfaceTintLight ?? colorScheme.primary,
-                ),
-              ),
-            ),
-          ),
-          ListTile(
-            title: const Text('Remove all surface tinting in light theme'),
-            subtitle: const Text('Sets custom blend and surface tint color '
-                'to transparent. Removes all tint for all widgets in all modes '
-                'and platforms, and makes any used surface blends greyscale.'),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 10.0),
-              child: FilledButton(
-                onPressed: () {
-                  controller.setSurfaceTintLight(Colors.transparent);
-                },
-                child: const Text('Never tint'),
-              ),
-            ),
-            onTap: () {
-              controller.setSurfaceTintLight(Colors.transparent);
-            },
-          ),
-          ListTile(
-            enabled: controller.surfaceTintLight != null,
-            title: const Text('Set light theme blend and tint color back '
-                'to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color'),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 10.0),
-              child: FilledButton(
-                onPressed: controller.surfaceTintLight != null
-                    ? () {
-                        controller.setSurfaceTintLight(null);
-                      }
-                    : null,
-                child: const Text('Default'),
-              ),
-            ),
-            onTap: () {
-              controller.setSurfaceTintLight(null);
-            },
-          ),
-          // UseElevationShadowPopupMenu(
-          //   title: const Text('M3 elevation shadow theming in light theme'),
-          //  labelForDefault: 'Not defined (defaults, no shadows as designed)',
-          //   index: controller.elevationShadow?.index ?? -1,
-          //   onChanged: controller.useFlexColorScheme &&
-          //           controller.useSubThemes &&
-          //           controller.useMaterial3
-          //       ? (int index) {
-          //           if (index < 0 || index >= FlexShadow.values.length) {
-          //             controller.setElevationShadow(null);
-          //           } else {
-          //            controller.setElevationShadow(FlexShadow.values[index]);
-          //           }
-          //         }
-          //       : null,
-          // ),
-          const Divider(),
           ListTile(
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
-            title: const Text('Light theme onColors blend level'),
-            subtitle: const Text('The onColor blending mixes in its own color, '
+            title: const Text('Contrast colors blend level'),
+            subtitle: const Text('The contrast onColor blending mixes in its '
+                'own main color, '
                 'into the onColor, when seed/M3 colors are not used. This '
                 'affects onContainers, onSurface and onBackground. When the '
                 'main onColor blending switch is ON, it also affects on colors '
@@ -385,7 +297,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             ),
           ),
           SwitchListTile(
-            title: const Text('Light theme main colors use onColor blending'),
+            title: const Text('Main colors use onColor blending'),
             subtitle:
                 const Text('In M3 design, only container colors use color '
                     'pair tinted onColor. Main colors use black or white. '
@@ -402,119 +314,119 @@ class SurfaceBlendSettings extends StatelessWidget {
                 ? controller.setBlendLightOnColors
                 : null,
           ),
-        ]
-        //
-        // ELSE Dark mode widgets
-        //
-        else ...<Widget>[
-          // UseElevationTintPopupMenu(
-          //   title: const Text('M3 elevation tint theming in dark theme'),
-          //   labelForDefault: 'Not defined (defaults, tint as designed)',
-          //   index: controller.elevationTintDark?.index ?? -1,
-          //   onChanged: controller.useFlexColorScheme &&
-          //           controller.useSubThemes &&
-          //           controller.useMaterial3
-          //       ? (int index) {
-          //           if (index < 0 || index >= FlexTint.values.length) {
-          //             controller.setElevationTintDark(null);
-          //           } else {
-          //           controller.setElevationTintDark(FlexTint.values[index]);
-          //           }
-          //         }
-          //       : null,
-          // ),
+          const Divider(),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive M3 elevation tint removal'),
+            index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveElevationTintLight(null);
+                    } else {
+                      controller.setAdaptiveRemoveElevationTintLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive elevation shadows back in M3'),
+            index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveElevationShadowsBackLight(null);
+                    } else {
+                      controller.setAdaptiveElevationShadowsBackLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(null);
+                    } else {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
           ColorPickerInkWellDialog(
-            color: controller.surfaceTintDark ?? colorScheme.primary,
-            onChanged: controller.setSurfaceTintDark,
+            color: controller.surfaceTintLight ?? colorScheme.primary,
+            onChanged: controller.setSurfaceTintLight,
             recentColors: controller.recentColors,
             onRecentColorsChanged: controller.setRecentColors,
             wasCancelled: (bool cancelled) {
               if (cancelled) {
-                controller.setSurfaceTintDark(previousTintDark);
+                controller.setSurfaceTintLight(previousTintLight);
               }
             },
             enabled: true,
             child: ListTile(
-              title: const Text('Dark theme blend and surface tint color'),
-              subtitle: Text('Color$defaultTintDarkLabel '
-                  '$nameThatColorDark $materialNameDark$spaceDark'
-                  '#${effectiveTintDark.hexCode}'),
+              title: const Text('Light mode blend and surface tint color'),
+              subtitle: Text('Color$defaultTintLightLabel '
+                  '$nameThatColorLight $materialNameLight$spaceLight'
+                  '#${effectiveTintLight.hexCode}'),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 10.0),
                 child: ColorSchemeBox(
                   borderColor: Colors.transparent,
                   backgroundColor:
-                      controller.surfaceTintDark ?? colorScheme.primary,
+                      controller.surfaceTintLight ?? colorScheme.primary,
                 ),
               ),
             ),
           ),
           ListTile(
-            title: const Text('Remove all surface tinting in dark theme'),
-            subtitle: const Text('Sets custom blend and surface tint color '
-                'to transparent. Removes all tint for all widgets in all modes '
-                'and platforms, and makes any used surface blends greyscale.'),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 10.0),
-              child: FilledButton(
-                onPressed: () {
-                  controller.setSurfaceTintDark(Colors.transparent);
-                },
-                child: const Text('Never tint'),
-              ),
-            ),
-            onTap: () {
-              controller.setSurfaceTintDark(Colors.transparent);
-            },
-          ),
-          ListTile(
-            enabled: controller.surfaceTintDark != null,
-            title: const Text('Set dark blend and tint color back to default'),
+            enabled: controller.surfaceTintLight != null,
+            title: const Text('Set light theme blend and tint color back '
+                'to default'),
             subtitle: const Text('Sets custom blend and tint color back '
                 'to primary color'),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 10.0),
               child: FilledButton(
-                onPressed: controller.surfaceTintDark != null
+                onPressed: controller.surfaceTintLight != null
                     ? () {
-                        controller.setSurfaceTintDark(null);
+                        controller.setSurfaceTintLight(null);
                       }
                     : null,
                 child: const Text('Default'),
               ),
             ),
             onTap: () {
-              controller.setSurfaceTintDark(null);
+              controller.setSurfaceTintLight(null);
             },
           ),
-          // UseElevationShadowPopupMenu(
-          //   title: const Text('M3 elevation shadow theming in dark theme'),
-          // labelForDefault: 'Not defined (defaults, no shadows as designed)',
-          //   index: controller.elevationShadowDark?.index ?? -1,
-          //   onChanged: controller.useFlexColorScheme &&
-          //           controller.useSubThemes &&
-          //           controller.useMaterial3
-          //       ? (int index) {
-          //           if (index < 0 || index >= FlexShadow.values.length) {
-          //             controller.setElevationShadowDark(null);
-          //           } else {
-          //             controller
-          //                 .setElevationShadowDark(FlexShadow.values[index]);
-          //           }
-          //         }
-          //       : null,
-          // ),
-          const Divider(),
+        ]
+        //
+        // ELSE Dark mode widgets
+        //
+        else ...<Widget>[
           ListTile(
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
-            title: const Text('Dark theme onColors blend level'),
-            subtitle: const Text('The onColor blending mixes in its own color, '
-                'into the onColor, when seed/M3 colors are not used. This '
-                'affects onContainers, onSurface and onBackground. When the '
-                'main onColor blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.'),
+            title: const Text('Contrast colors blend level'),
+            subtitle: const Text('The contrast onColor blending mixes in its '
+                'own main color, into the onColor, when seed/M3 colors are '
+                'not used. This affects onContainers, onSurface and '
+                'onBackground. When the main onColor blending switch is ON, '
+                'it also affects on colors for primary, secondary, '
+                'tertiary and error.'),
           ),
           ListTile(
             enabled: controller.useSubThemes &&
@@ -558,7 +470,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             ),
           ),
           SwitchListTile(
-            title: const Text('Dark theme main colors use onColor blending'),
+            title: const Text('Main colors use onColor blending'),
             subtitle: const Text(
                 'In M3 dark design, not only container colors use '
                 'color pair tinted onColor, but also main colors do. '
@@ -574,6 +486,102 @@ class SurfaceBlendSettings extends StatelessWidget {
                     !controller.useKeyColors
                 ? controller.setBlendDarkOnColors
                 : null,
+          ),
+          const Divider(),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive M3 elevation tint removal'),
+            index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveElevationTintDark(null);
+                    } else {
+                      controller.setAdaptiveRemoveElevationTintDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive elevation shadows back in M3'),
+            index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveElevationShadowsBackDark(null);
+                    } else {
+                      controller.setAdaptiveElevationShadowsBackDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffDark(null);
+                    } else {
+                      controller.setAdaptiveAppBarScrollUnderOffDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorPickerInkWellDialog(
+            color: controller.surfaceTintDark ?? colorScheme.primary,
+            onChanged: controller.setSurfaceTintDark,
+            recentColors: controller.recentColors,
+            onRecentColorsChanged: controller.setRecentColors,
+            wasCancelled: (bool cancelled) {
+              if (cancelled) {
+                controller.setSurfaceTintDark(previousTintDark);
+              }
+            },
+            enabled: true,
+            child: ListTile(
+              title: const Text('Dark mode blend and surface tint color'),
+              subtitle: Text('Color$defaultTintDarkLabel '
+                  '$nameThatColorDark $materialNameDark$spaceDark'
+                  '#${effectiveTintDark.hexCode}'),
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 10.0),
+                child: ColorSchemeBox(
+                  borderColor: Colors.transparent,
+                  backgroundColor:
+                      controller.surfaceTintDark ?? colorScheme.primary,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            enabled: controller.surfaceTintDark != null,
+            title: const Text('Set dark blend and tint color back to default'),
+            subtitle: const Text('Sets custom blend and tint color back '
+                'to primary color'),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 10.0),
+              child: FilledButton(
+                onPressed: controller.surfaceTintDark != null
+                    ? () {
+                        controller.setSurfaceTintDark(null);
+                      }
+                    : null,
+                child: const Text('Default'),
+              ),
+            ),
+            onTap: () {
+              controller.setSurfaceTintDark(null);
+            },
           ),
         ],
         const Divider(),

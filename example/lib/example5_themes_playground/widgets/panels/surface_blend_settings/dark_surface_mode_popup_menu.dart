@@ -13,7 +13,7 @@ class DarkSurfaceModePopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SurfaceModePopupMenu(
-        title: const Text('Dark theme surface mode'),
+        title: const Text('Surface blend mode'),
         index: controller.surfaceModeDark.index,
         onChanged: (int index) {
           controller.setSurfaceModeDark(FlexSurfaceMode.values[index]);

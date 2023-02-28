@@ -255,6 +255,52 @@ String generateThemeDartCode(ThemeController controller) {
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
+
+  // Adaptive themes.
+  final String adaptiveRemoveElevationTintLight = controller
+                  .adaptiveRemoveElevationTintLight !=
+              null &&
+          controller.adaptiveRemoveElevationTintLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintLight!.code},\n'
+      : '';
+  final String adaptiveElevationShadowsBackLight = controller
+                  .adaptiveElevationShadowsBackLight !=
+              null &&
+          controller.adaptiveElevationShadowsBackLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackLight!.code},\n'
+      : '';
+  final String adaptiveAppBarScrollUnderOffLight = controller
+                  .adaptiveAppBarScrollUnderOffLight !=
+              null &&
+          controller.adaptiveAppBarScrollUnderOffLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffLight!.code},\n'
+      : '';
+  final String adaptiveRemoveElevationTintDark = controller
+                  .adaptiveRemoveElevationTintDark !=
+              null &&
+          controller.adaptiveRemoveElevationTintDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintDark!.code},\n'
+      : '';
+  final String adaptiveElevationShadowsBackDark = controller
+                  .adaptiveElevationShadowsBackDark !=
+              null &&
+          controller.adaptiveElevationShadowsBackDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackDark!.code},\n'
+      : '';
+  final String adaptiveAppBarScrollUnderOffDark = controller
+                  .adaptiveAppBarScrollUnderOffDark !=
+              null &&
+          controller.adaptiveAppBarScrollUnderOffDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffDark!.code},\n'
+      : '';
+
+  // Default radius, it adaptive variant and border widths.
   final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1042,6 +1088,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
+          '$adaptiveRemoveElevationTintLight'
+          '$adaptiveElevationShadowsBackLight'
+          '$adaptiveAppBarScrollUnderOffLight'
+          //
           '$defaultRadius'
           '$defaultRadiusAdaptive'
           '$adaptiveRadius'
@@ -1229,6 +1279,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendDarkTextTheme'
           '$useTextTheme'
           '$useM2StyleDividerInM3'
+          //
+          '$adaptiveRemoveElevationTintDark'
+          '$adaptiveElevationShadowsBackDark'
+          '$adaptiveAppBarScrollUnderOffDark'
           //
           '$defaultRadius'
           '$defaultRadiusAdaptive'

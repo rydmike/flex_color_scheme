@@ -133,7 +133,7 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // Background colors presentation
+          // Background colors presentation.
           RepaintBoundary(
             child: SizedBox(
               width: boxWidth,
@@ -176,7 +176,7 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // Surface colors presentation
+          // Surface colors presentation.
           RepaintBoundary(
             child: SizedBox(
               width: boxWidth,
@@ -219,7 +219,7 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // SurfaceVariant colors presentation
+          // SurfaceVariant colors presentation.
           RepaintBoundary(
             child: SizedBox(
               width: boxWidth,
@@ -262,7 +262,7 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // InverseSurface colors presentation
+          // InverseSurface colors presentation.
           RepaintBoundary(
             child: SizedBox(
               width: boxWidth,
@@ -305,7 +305,7 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // Shadow color and surface tint color presenatation
+          // Shadow color and surface tint color presentation.
           RepaintBoundary(
             child: SizedBox(
               width: boxWidth,
@@ -340,6 +340,178 @@ class SurfaceColors extends StatelessWidget {
                               colorScheme.surfaceTint, colorScheme.surface),
                           label: 'surfaceTint',
                           tone: tones.surfaceTintTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // onPrimaryContainer and onPrimary color presentation.
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
+                        color: colorScheme.onPrimaryContainer,
+                        child: ColorNameValue(
+                          color: colorScheme.onPrimaryContainer,
+                          textColor: colorScheme.primaryContainer,
+                          label: 'onPrimaryContainer',
+                          tone: tones.onPrimaryContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Material(
+                        color: colorScheme.onPrimary,
+                        child: ColorNameValue(
+                          color: colorScheme.onPrimary,
+                          textColor: colorScheme.primary,
+                          label: 'onPrimary',
+                          tone: tones.onPrimaryTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // onSecondaryContainer and onSecondary color presentation.
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
+                        color: colorScheme.onSecondaryContainer,
+                        child: ColorNameValue(
+                          color: colorScheme.onSecondaryContainer,
+                          textColor: colorScheme.secondaryContainer,
+                          label: 'onSecondaryContainer',
+                          tone: tones.onSecondaryContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Material(
+                        color: colorScheme.onSecondary,
+                        child: ColorNameValue(
+                          color: colorScheme.onSecondary,
+                          textColor: colorScheme.secondary,
+                          label: 'onSecondary',
+                          tone: tones.onSecondaryTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // onTertiaryContainer and onTertiary color presentation.
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
+                        color: colorScheme.onTertiaryContainer,
+                        child: ColorNameValue(
+                          color: colorScheme.onTertiaryContainer,
+                          textColor: colorScheme.tertiaryContainer,
+                          label: 'onTertiaryContainer',
+                          tone: tones.onTertiaryContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Material(
+                        color: colorScheme.onTertiary,
+                        child: ColorNameValue(
+                          color: colorScheme.onTertiary,
+                          textColor: colorScheme.tertiary,
+                          label: 'onTertiary',
+                          tone: tones.onTertiaryTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // onErrorContainer and onError color presentation.
+          RepaintBoundary(
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 7,
+                      child: Material(
+                        color: colorScheme.onErrorContainer,
+                        child: ColorNameValue(
+                          color: colorScheme.onErrorContainer,
+                          textColor: colorScheme.errorContainer,
+                          label: 'onErrorContainer',
+                          tone: tones.onErrorContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Material(
+                        color: colorScheme.onError,
+                        child: ColorNameValue(
+                          color: colorScheme.onError,
+                          textColor: colorScheme.error,
+                          label: 'onError',
+                          tone: tones.onErrorTone,
                           showTone: showTones,
                         ),
                       ),

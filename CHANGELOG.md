@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 27, 2023**
+**Feb 28, 2023**
 
 **FIX**
 
@@ -15,10 +15,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
 
 **NEW**
-
-- **Add**: Enums `FlexTint` and `FlexShadow` they are used to control elevation tint and elevation shadow in Material 3 themes. Tint can be taken away from elevated surface, or be adaptive and only taken away on iOS and macOS platforms via theme level settings. Shadows can be put back in Material 3 theming or done so only platform adaptively on iOS and macOS platforms.
-  
-- **Add**: `elevationTint` a `FlexTint` enum property value and `elevationShadow` a `FlexShadow` property value to `FlexSubThemesData`. With them the elevation surface tint usage and shadow appearance, in the Material3 mode can be controlled when opting in on using FlexColorScheme sub theming. 
 
 - **Add**: `drawerIndicatorOpacity` to `FlexSubThemesData`.   
   It controls the `indicatorOpacity` property in the `FlexSubThemes.navigationDrawerTheme` used to customize the opacity of used color on the `NavigationDrawer` indicator.
@@ -104,7 +100,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
     - Primary container: primary.blend(Colors.black, 60) -> primary.darken(5).blend(Colors.black, 55)
     - Secondary container: secondary.blend(Colors.black, 60) ->  secondary.darken(25).blend(Colors.black, 50)
     - Tertiary container: tertiary?.blend(Colors.black, 80) -> tertiary.darken(15).blend(Colors.black, 60)
-  
+
+
+- **Style breaking**: The border radius on `ToolTip`, `PopupMenuButton`, `DropDownMenu` and `Menu` no longer follow the global override for `defaultRadius`. These items should generally not be themed together with a large general radius override. They can still be modified individually. 
+
 
 - **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
 - **Label value breaking**: The `FlexColor.materialBaselineDescription` description string was changed from 'Material guide 3 baseline based theme' to 'Material 3 guide and default purple theme'.
@@ -136,8 +135,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - For fun: Added confetti to sign in button on theme simulator mock sign-in screen.
 - FIX: Shortcut entry bug on MenuAnchor widget showcase. Needed a workaround for this type of use case.
 - Added control for indicator opacity in `NavigationDrawer` to panel **NavigationDrawer**.
-- Added controls for elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode.
-- Add an option to set surface tint and blend color to transparent color. Using it removes surface tint in all theming modes on all platforms. It also makes surface blends very light in dark mode and greyscale in light mode. Quite an interesting effect in light mode.  
 - Added M3/M2, FCS ON/OFF, Sub themes ON/OFF to the custom side drawer/menu/rail.
 - Added possibility to toggle between standard and compact UI mode. The compact mode is the same view mode as the smallest responsive view, with the addition that the switches under the horizontal theme color selector are also removed. When the compact-mode is on, it is used in all responsive sizes. The compact mode gives a larger view area for app controls. This is also useful on smaller desktops. In the compact-mode, settings controlled by the removed switches can be operated via the new optional controls on the rail/side menu. 
 - Added device selection capability to device theme simulator.
@@ -155,10 +152,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Improved and added keyboard focus and navigation, by using `FocusTraversalGroup`:s and by letting important UI controls get focus on tap. This was done to make keyboard usage of the Playground easier. It's semantics were also improved, by adding the scheme names in the color selector to semantics.
 - Added SnackBar controls for elevation and border radius to panel **BottomSheet Snack Banner**.
 - Added TabBar controls for unselected item color, own controls for light and dark mode, unselected item opacity, indicator thickness and top radius to panel **TabBar**.
+- Added controls for `defaultRadiusAdaptive` and `adaptiveRadius` to panel **Component themes**. They are used to define to make a platform adaptive override to the global border radius override value.
+- Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. Playground excludes them from code gen when they have no effect.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- Playground: Add controls and codegen for new platform adaptive theming features.
+- TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7.   
 - NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5
 
