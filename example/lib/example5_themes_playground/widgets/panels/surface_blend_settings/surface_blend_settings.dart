@@ -8,6 +8,7 @@ import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
+import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
@@ -589,6 +590,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           platform: controller.platform,
           onChanged: controller.setPlatform,
         ),
+        IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
       ],
     );

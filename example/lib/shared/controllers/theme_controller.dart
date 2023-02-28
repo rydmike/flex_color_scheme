@@ -715,6 +715,7 @@ class ThemeController with ChangeNotifier {
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
     _platform = defaultTargetPlatform;
+    _fakeIsWeb = null;
 
     notifyListeners();
   }
@@ -1105,6 +1106,7 @@ class ThemeController with ChangeNotifier {
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
     setPlatform(defaultTargetPlatform, false);
+    setFakeIsWeb(null, false);
 
     // Only notify at end, if asked to do so, to do so is default.
     if (doNotify) notifyListeners();
@@ -1404,10 +1406,13 @@ class ThemeController with ChangeNotifier {
       setBlendLevelDark(0, false);
       setBlendOnLevel(0, false);
       setBlendOnLevelDark(0, false);
-      // // Elevation tint and shadows.
-      // setElevationTint(FlexTint.removeTint, false);
-      // setElevationShadow(FlexShadow.useShadow, false);
-      // setElevationShadowDark(FlexShadow.useShadow, false);
+      // Elevation tint and shadows, we keep it in dark mode.
+      setAdaptiveRemoveElevationTintLight(AdaptiveTheme.all, false);
+      setAdaptiveElevationShadowsBackLight(AdaptiveTheme.all, false);
+      setAdaptiveAppBarScrollUnderOffLight(AdaptiveTheme.all, false);
+      setAdaptiveRemoveElevationTintDark(AdaptiveTheme.off, false);
+      setAdaptiveElevationShadowsBackDark(AdaptiveTheme.all, false);
+      setAdaptiveAppBarScrollUnderOffDark(AdaptiveTheme.all, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(false, false);
@@ -1644,10 +1649,12 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
     }
-    // 7) Platform agnostic.
+    // 7) Platform adaptive.
     else if (settingsId == 7) {
-      // The default radius to 10 for all.
-      setDefaultRadius(10, false);
+      // The default radius to default for standard and 10 for adaptive.
+      setDefaultRadius(null, false);
+      setDefaultRadiusAdaptive(10, false);
+      setAdaptiveRadius(AdaptiveTheme.excludeWebAndroidFuchsia, false);
       // Legacy swap OFF.
       setSwapLegacyColors(false, false);
       // Set blend modes and levels.
@@ -1667,10 +1674,20 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // // Elevation tint and shadows.
-      // setElevationTint(FlexTint.adaptive, false);
-      // setElevationShadow(FlexShadow.adaptive, false);
-      // setElevationShadowDark(FlexShadow.adaptive, false);
+      // Elevation tint and shadows, we keep elevation tint in dark mode, it
+      // is very useful there. We also add elevation shadows back in dark
+      // mode on all platforms, they are barely visible there anyway but
+      // may help with contrast a bit.
+      setAdaptiveRemoveElevationTintLight(
+          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+      setAdaptiveElevationShadowsBackLight(
+          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+      setAdaptiveAppBarScrollUnderOffLight(
+          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+      setAdaptiveRemoveElevationTintDark(AdaptiveTheme.off, false);
+      setAdaptiveElevationShadowsBackDark(AdaptiveTheme.all, false);
+      setAdaptiveAppBarScrollUnderOffDark(
+          AdaptiveTheme.excludeWebAndroidFuchsia, false);
       // Text theme blends
       setBlendLightTextTheme(false, false);
       setBlendDarkTextTheme(false, false);
@@ -1710,7 +1727,7 @@ class ThemeController with ChangeNotifier {
       // FAB settings
       setFabUseShape(true, false);
       setFabAlwaysCircular(true, false);
-      setFabSchemeColor(SchemeColor.secondary, false);
+      setFabSchemeColor(SchemeColor.tertiary, false);
       // Menus and Popup
       setPopupMenuBorderRadius(6, false);
       setPopupMenuElevation(3, false);
@@ -1721,9 +1738,7 @@ class ThemeController with ChangeNotifier {
       setMenuBarShadowColor(Colors.transparent, false);
       // Drawer settings
       setDrawerElevation(1, false);
-      setDrawerBorderRadius(14, false);
       setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
-      setDrawerIndicatorBorderRadius(10, false);
       // BottomSheet
       setBottomSheetBorderRadius(18, false);
       setBottomSheetElevation(2, false);
@@ -1741,7 +1756,6 @@ class ThemeController with ChangeNotifier {
       setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
       setNavBarIndicatorOpacity(1.0, false);
-      setNavBarIndicatorBorderRadius(10, false);
       // NavigationRail settings
       setNavRailElevation(0, false);
       setNavRailMuteUnselected(false, false);
@@ -1750,7 +1764,6 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
-      setNavRailIndicatorBorderRadius(10, false);
     }
     // 8) Colorful Scaffold.
     else if (settingsId == 8) {
@@ -4537,13 +4550,23 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // This is just a controller prop for the Platform menu control.
-  // It is used as input to the theme, but never persisted so it always
-  // defaults to the actual target platform when starting the app.
-  // Being able to toggle it during demos and development is a handy feature.
-  //
-  // This is OK to be in ThemeController, if this is changed, the entire app
-  // theme must update too, and yes it is a part of ThemeData.
+  // Rest both fake target paltform and fake web setting.
+  void resetFakePlatform() {
+    setFakeIsWeb(null, false);
+    setPlatform(defaultTargetPlatform, false);
+    // Notify listeners, after all individual values have been set.
+    notifyListeners();
+  }
+
+  /// A controller prop for the Platform menu control.
+  ///
+  /// It is used as input to the theme, but never persisted so it always
+  /// defaults to the actual target platform when starting the app.
+  /// Being able to toggle it during demos and development is a handy feature,
+  /// to use to test platform adaptive theming features with.
+  ///
+  /// This is OK to be in ThemeController, if this is changed, the entire app
+  /// theme must update too, and yes it is a part of ThemeData.
   late TargetPlatform _platform;
   TargetPlatform get platform => _platform;
   void setPlatform(TargetPlatform? value, [bool notify = true]) {
@@ -4553,9 +4576,21 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
   }
 
+  // Control for faking kIsWeb in-app to test platform adaptive web theme
+  // settings. It is no persisted. This control only impacts the FCS
+  // theming properties and will use mock web input to them instead of
+  // actual kIsWeb.
+  late bool? _fakeIsWeb;
+  bool? get fakeIsWeb => _fakeIsWeb;
+  void setFakeIsWeb(bool? value, [bool notify = true]) {
+    if (value == _fakeIsWeb) return;
+    _fakeIsWeb = value;
+    if (notify) notifyListeners();
+  }
+
   // Recently used colors, we keep the list of recently used colors in the
-  // color picker for custom colors only during the session we don't persist.
-  // It is of course possible to persist, but not needed in this demo.
+  // color picker for custom colors only during the session we don't persist it.
+  // It is of course possible to persist, but not needed in this app.
   //
   // This is OK to be in ThemeController, these colors change as we change
   // custom colors for the theme, that needs to update the entire app anyway.

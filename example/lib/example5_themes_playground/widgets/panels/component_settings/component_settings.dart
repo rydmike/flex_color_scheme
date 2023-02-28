@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
+import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 import '../../shared/use_tinted_text_theme.dart';
 
@@ -232,6 +233,7 @@ class ComponentSettings extends StatelessWidget {
           platform: controller.platform,
           onChanged: controller.setPlatform,
         ),
+        IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
         const Divider(),
         ListTile(

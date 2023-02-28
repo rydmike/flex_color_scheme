@@ -191,11 +191,13 @@ class App {
     final double? adaptiveRadius = controller.defaultRadiusAdaptive;
     // Get effective platform
     final TargetPlatform platform = controller.platform;
+    // Get fake web platform
+    final bool? isWeb = controller.fakeIsWeb;
     // Get Adaptive Settings usage.
     final AdaptiveTheme adaptiveConfig =
         controller.adaptiveRadius ?? AdaptiveTheme.off;
     // Should we use adaptive radius or not?
-    final bool adapt = adaptiveConfig.setting().adapt(platform);
+    final bool adapt = adaptiveConfig.setting().adapt(platform, isWeb);
     // Return the effective platform default radius, may be null.
     return adapt ? adaptiveRadius : normalRadius;
   }

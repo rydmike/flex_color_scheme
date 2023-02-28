@@ -98,7 +98,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
         enabled: enabled,
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
-        title: Row(
+        title: Wrap(
           children: <Widget>[
             if (title != null) title!,
             Text(' - $tileLabel'),

@@ -144,14 +144,20 @@ class PremadeDesignsPanel extends StatelessWidget {
         ),
         const Divider(),
         SetupListTile(
-          title: 'Platform agnostic',
+          title: 'Platform adaptive',
           seeded: false,
-          subtitle: 'A platform agnostic less opinionated design using M3. '
-              'It is less rounded than M3 default to feel more at home on '
-              'iOS and other platforms. It removes elevation tint in light '
-              'mode, and puts shadows back in light and dark mode. This '
-              'only happens on macOS and iOS, other platforms keep the M3 '
-              'elevation tint. The config is not seeded, but it is '
+          subtitle: 'A platform adaptive less opinionated design using M3. '
+              'On other platforms than Android and Fuchsia it is less rounded '
+              'and uses 10 dp as default platform adaptive border radius. '
+              'Android and Fuchsia still keep M3 default, also on web builds. '
+              'The less rounded design may feel more at home on other '
+              'platforms. It also removes elevation tint in light '
+              'mode, and puts shadows back in light mode. This '
+              'adaptive change again happens on all platforms except Android '
+              'and Fuchsia. For good measure we add shadows back on all '
+              'platforms in dark mode, it is barely visible anyway, but may '
+              'sometimes increase edge layer separation. '
+              'The config is not seeded, but it is '
               'preconfigured to also work well by just turning seeded '
               'ColorScheme ON. Try it, it will keep your primary brand color '
               'and also create saturated colorful seed generated colors.',
