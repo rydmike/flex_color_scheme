@@ -84,7 +84,9 @@ class PremadeDesignsPanel extends StatelessWidget {
           seeded: true,
           subtitle: 'Primary color favoring theme, with a bit extra blend '
               'blend on Scaffold background. ColorScheme uses 3 seed '
-              'key-colors and the more saturated Jolly seed strategy. '
+              'key-colors and the more saturated Jolly seed strategy. It of '
+              'course works great without using seed generated Colorscheme '
+              'too, turn it OFF to compare and see what you prefer. '
               'It has a smooth looking border radius 12 on all '
               'widgets, except FAB, that is back in shape with its M2 circle '
               'and a hip tertiary color.',
@@ -135,10 +137,11 @@ class PremadeDesignsPanel extends StatelessWidget {
               'input primary color. Even if you turn off using seeds, '
               'FlexColorScheme computes all colors based on the primary '
               'input color. This is done by setting "usedColors" to one. '
-              'The used primary is also locked in as used brand color with '
-              'seeded color schemes. Need a theme where primary light theme '
-              'must have a fixed brand color and want the rest of theme to be '
-              'just shades derived from it? This delivers it!',
+              'The primary color is also locked in and as used as a fixed '
+              'brand color even with seeded color schemes. Need a theme where '
+              'primary light theme must have a fixed brand color and '
+              'want the rest of theme to be nice color shades derived from it? '
+              'This delivers it!',
           settingsId: 6,
           controller: controller,
         ),
@@ -146,21 +149,33 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Platform adaptive',
           seeded: false,
-          subtitle: 'A platform adaptive less opinionated design using M3. '
-              'On other platforms than Android and Fuchsia it is less rounded '
-              'and uses 10 dp as default platform adaptive border radius. '
-              'Android and Fuchsia still keep M3 default, also on web builds. '
-              'The less rounded design may feel more at home on other '
-              'platforms. It also removes elevation tint in light '
-              'mode, and puts shadows back in light mode. This '
-              'adaptive change again happens on all platforms except Android '
-              'and Fuchsia. For good measure we add shadows back on all '
-              'platforms in dark mode, it is barely visible anyway, but may '
-              'sometimes increase edge layer separation. '
-              'The config is not seeded, but it is '
-              'preconfigured to also work well by just turning seeded '
-              'ColorScheme ON. Try it, it will keep your primary brand color '
-              'and also create saturated colorful seed generated colors.',
+          subtitle: 'A Material 3 platform adaptive theme. '
+              'On platforms other than Android and Fuchsia, it uses a less '
+              'opinionated M3 based theme. Where components are less rounded '
+              'and use 10dp as default platform adaptive border radius '
+              'override. '
+              'Android and Fuchsia still keep M3 very rounded default design, '
+              'also on web builds. A less rounded design may feel more at '
+              'home on none Google platforms. This platform adaptive theme '
+              'also removes elevation tint in light mode, and puts shadows '
+              'back. These adaptive theme changes happens on all '
+              'platforms, except Android and Fuchsia.\n'
+              '\n'
+              'As an example, it adds '
+              'elevation shadows back on all platforms in dark mode, '
+              'including Android and Fuchsia. Elevation shadows are barely '
+              'visible in dark mode anyway, but can '
+              'sometimes increase edge layer separation. The elevation tint is '
+              'kept in dark mode on all platforms, as it is typically needed '
+              'there for popup menu color separation from background color. '
+              'Grey elevation overlay color in dark mode existed back in M2 '
+              'design as well.\n'
+              '\n'
+              'This theme is not key color seeded by default, but it is '
+              'preconfigured to work well by just turning seeded '
+              'ColorScheme ON. Try it! It is setup to keep your primary '
+              'brand color and to create saturated colorful seed '
+              'generated colors, instead of the more pastel M3 defaults.',
           settingsId: 7,
           controller: controller,
         ),

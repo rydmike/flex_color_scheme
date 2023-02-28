@@ -6,25 +6,28 @@ import 'package:flutter/foundation.dart';
 /// [FlexColorScheme] generated [ThemeData] platform adaptive theming
 /// features are used.
 ///
-/// [FlexColorScheme] provides some platform adaptive theming features, where
-/// you can opt-in and out of if a certain theme feature, based on device
-/// platform and device web platform.
+/// [FlexColorScheme] provides platform adaptive theming features, where
+/// you can opt-in and out of theming features and use different settings,
+/// based on device platform and platform specific web usage of a web build
+/// of your FlexColorScheme themed application.
 ///
-/// The aim of these features is to enable different Material design based
-/// themes that are adjusted differently based on used platform. A typical
+/// The purpose of this feature is to enable using Material design based
+/// themes, that are adjusted differently based on the used platform. A typical
 /// use case is removing Material 3 design features that may be too opinionated
 /// on e.g. iOS and desktop platforms, but you may want to keep them on Android.
 ///
-/// For each of these features you can configure what platform each adaptive
-/// features is used on. You can have different configuration on the
-/// device native app platform and when using a web build of the app, per
-/// platform.
+/// For all platform adaptive theming features you can configure what
+/// platform each adaptive feature is used on. You can even define it so that
+/// you get a different theme on the device native and when using a web build
+/// of the same app. This swapping between the default standard theme and the
+/// adaptive theme version, can be done per platform and web usage per platform.
 ///
-/// The following adaptive theme settings are available in [FlexColorScheme].
+/// The following adaptive theme settings are available in [FlexColorScheme]
+/// from version 7.0.0:
 ///
 /// - [FlexSubThemesData.adaptiveRemoveElevationTint] to adaptively remove
 ///   elevation tint when Material 3 mode is used.
-/// - [FlexSubThemesData.adaptiveElevationShadowsBack] to adaptively bring
+/// - [FlexSubThemesData.adaptiveElevationShadowsBack] to adaptively brings
 ///   elevation shadows back where they were removed in Material 3, when
 ///   Material 3 mode is used.
 /// - [FlexSubThemesData.adaptiveAppBarScrollUnderOff] to adaptively remove the
@@ -33,15 +36,20 @@ import 'package:flutter/foundation.dart';
 ///   [defaultRadiusAdaptive] instead of [defaultRadius] in both
 ///   Material 2 and Material 3 mode.
 ///
-/// A planned **future** feature is to introduce the Squircle or super-ellipses
-/// as the curvature of the border radius, that can be adaptively configured to
-/// be used on desired platforms. When this adaptive feature is enabled
+/// More platform adaptive theming features may be added in future versions,
+/// depending on feedback and requests. One planned **future** platform
+/// adaptive feature is to introduce the Squircle or super-ellipses
+/// as the curvature of the border radius. It would then be possible to use it
+/// adaptively on desired platforms. When this adaptive feature is enabled
 /// all Material components that use [ShapeBorder] will use Squircle curvature
-/// instead of circular borer radius. The Squircle is the border curvature
-/// shape used on Apple devices.
+/// instead of circular borer radius, on selected platforms. The Squircle is
+/// the border curvature shape used on Apple devices. Adding this feature
+/// is a bit on hold since there is currently no consensus or built-in support
+/// in Flutter to draw an iOS correct Squircle. See issue:
+/// https://github.com/flutter/flutter/issues/91523
 ///
-/// - **FUTURE**: [FlexSubThemesData.adaptiveSquircle] use Squircle as
-///   [ShapeBorder] shape instead of Circular, will be available in
+/// - **FUTURE PLAN**: [FlexSubThemesData.adaptiveSquircle] use Squircle as
+///   [ShapeBorder] shape instead of Circular, when added, will be available in
 ///   both Material 2 and Material 3 mode.
 ///
 /// By default all adaptive features use the [FlexAdaptive.off] setting and
@@ -68,16 +76,34 @@ import 'package:flutter/foundation.dart';
 ///  - [FlexAdaptive.excludeAndroidFuchsia]
 ///  - [FlexAdaptive.excludeWebAndroidFuchsia]
 ///
-/// You can easily make your own custom configuration for each feature, if
-/// the above ones do not fit your needs.
+/// You can easily make your own custom configuration, if the above ones do
+/// not fit your needs.
+///
+/// This platform aware adaptive theming in [FlexColorScheme] is not a
+/// replacement for using actual platform aware and adaptive widgets, either
+/// built-in ones in Flutter or custom/package made ones.
+///
+/// You may want to combine the platform adaptive theming features
+/// with selected platform adaptive widgets. The platform adaptive theming can
+/// help you remove certain features of Material 3 default theming that may
+/// look out of place if you use [MaterialApp] with [ThemeData.useMaterial3]
+/// enabled, to build a cross platform apps and with or without platform
+/// adaptive UI widgets.
+///
+/// Additionally you may want to use some Material design widgets in your cross
+/// platform app. Using the platform aware theming features can make them
+/// look more platform agnostic, rather than using just default Material 3.
+/// On Android you may prefer them to still use their native platform
+/// design. The adaptive theming features in [FlexColorScheme] are intended
+/// to help you achieve these design goals.
 @immutable
 class FlexAdaptive with Diagnosticable {
   /// Default constructor for making platform adaptive features apply only
   /// on selected platforms.
   ///
   /// Default constructor requires all properties. Prefer using other
-  /// constructors with suitable defaults, and only overriding the properties
-  /// you want to change something in them.
+  /// constructors with suitable defaults, and overriding properties
+  /// you want to change.
   const FlexAdaptive({
     required this.android,
     required this.androidWeb,
@@ -116,7 +142,8 @@ class FlexAdaptive with Diagnosticable {
   /// The adaptive feature is used on all platforms.
   ///
   /// Use this configuration it you want to use the adaptive feature on all
-  /// platforms. The effectively removes the Material 3
+  /// platforms. This is typically used to totally remove Material 3 design
+  /// features that do not fit your custom design requirements.
   const FlexAdaptive.all({
     this.android = true,
     this.androidWeb = true,
@@ -173,16 +200,19 @@ class FlexAdaptive with Diagnosticable {
     this.overrideIsWeb,
   });
 
-  /// Use adaptive feature on iOS and all desktop operating systems Windows,
-  /// macOS and linux, also when using the app in their web browsers.
+  /// Use adaptive feature on iOS and all desktop operating systems (Windows,
+  /// macOS and linux), also when using the app in their web browsers.
   ///
   /// Rationale for this configuration, you only want to retain the default
   /// none adaptive theme feature setup on Android and Fuchsia platforms on
-  /// both device and their web behavior. Great for changing M3 opinionated
-  /// style on everything else than Android and Fuchsia, while also keeping
-  /// it for web usage on Android and Fuchsia builds for that device
-  /// correctly platform styled progressive WEB app. But using the adaptive
-  /// style on everything else where M3 opinionated styles will be removed.
+  /// both device and their web behavior.
+  ///
+  /// Useful for changing M3 opinionated styles on everything else than
+  /// Android and Fuchsia, while also keeping it for web usage on Android
+  /// and Fuchsia builds. Consider using it for correct platform styled
+  /// progressive WEB apps on Android and Fuchsia. While the adaptive style
+  /// is used on everything else, where the typical use case is to replace
+  /// Material 3 opinionated styles with this platform adaptive design feature.
   const FlexAdaptive.iOSAndDesktop({
     this.android = false,
     this.androidWeb = false,
@@ -203,13 +233,13 @@ class FlexAdaptive with Diagnosticable {
   /// except Android and Fuchsia devices.
   ///
   /// Rationale for this configuration, you only want to retain the default
-  /// Material 3 theme feature setup on Android and Fuchsia device
-  /// platforms, but on Web and all other platforms you want the adaptive less
+  /// Material 3 theme feature setup on Android and Fuchsia platform device
+  /// builds, but on Web and all other platforms, you want the adaptive less
   /// opinionated feature.
   ///
   /// The rationale for Web being same on all, it should look the same
   /// regardless of platform and it should use the less opinionated adaptive
-  /// config. This is a good choice if you are not ready to use the Google
+  /// config. This is a suitable option if you are not ready to use the Google
   /// opinionated Material 3 design on any platform on web.
   const FlexAdaptive.excludeAndroidFuchsia({
     this.android = false,
@@ -232,15 +262,16 @@ class FlexAdaptive with Diagnosticable {
   ///
   /// Rationale for this configuration, you want to retain the default
   /// Material 3 theme feature setup on Android and Fuchsia device
-  /// platforms, and also use it on Web on all platforms, on all other device
+  /// platforms, and also use it on Web on all platforms. On all other device
   /// platforms you want the adaptive less opinionated design feature.
   ///
   /// The rationale for Web being same on all, it should look the same
   /// regardless of platform and it should use the Google opinionated
-  /// Material 3 design, not the adaptive config where some of those features
-  /// are removed. Basically you want Material 3 styles on web on all platforms
-  /// and on Android and Fuchsia devices, but not on any other native device
-  /// build.
+  /// Material 3 design, on web you always want to use Google's Material
+  /// design, not the adaptive config where some of those features
+  /// are removed. With this option you typically use Material 3 styles on
+  /// web on all platforms and on Android and Fuchsia devices, but not on
+  /// any other device build.
   const FlexAdaptive.excludeWebAndroidFuchsia({
     this.android = false,
     this.androidWeb = false,
@@ -298,22 +329,23 @@ class FlexAdaptive with Diagnosticable {
   ///
   /// Typically only used for testing and apps that want to fake
   /// [kIsWeb] to simulate the result of the app being run in a web build or
-  /// not concerning the adaptive feature in question.
-  /// Used by the Themes Playground.
+  /// not, for this the adaptive feature.
+  ///
+  /// Used by the Themes Playground app. Unless you are building something
+  /// similar to the Themes Playground (example 5 in the package repo) app,
+  /// you do not and should not use this property.
   final bool? overrideIsWeb;
 
   /// Using the current [FlexAdaptive] configuration, should the theme
-  /// feature use the adaptive configuration?
+  /// feature use this adaptive configuration?
   ///
   /// Returns true if the adaptive theme feature should be used.
   ///
   /// You can provide a [platformOverride] and web override [isWebOverride] for
   /// development and testing purposes.
   bool adapt([TargetPlatform? platformOverride, bool? isWebOverride]) {
-    final TargetPlatform platform = platformOverride ?? defaultTargetPlatform;
-
     if (isWebOverride ?? overrideIsWeb ?? kIsWeb) {
-      switch (platform) {
+      switch (platformOverride ?? defaultTargetPlatform) {
         case TargetPlatform.android:
           return androidWeb;
         case TargetPlatform.fuchsia:
@@ -328,7 +360,7 @@ class FlexAdaptive with Diagnosticable {
           return windowsWeb;
       }
     } else {
-      switch (platform) {
+      switch (platformOverride ?? defaultTargetPlatform) {
         case TargetPlatform.android:
           return android;
         case TargetPlatform.fuchsia:

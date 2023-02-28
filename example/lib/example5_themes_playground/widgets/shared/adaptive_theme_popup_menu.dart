@@ -40,7 +40,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
 
     final String styleName = !useDefault
         ? AdaptiveTheme.values[index].describe
-        : '(Default) ${AdaptiveTheme.off.describe}';
+        : AdaptiveTheme.off.describe;
 
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
@@ -87,7 +87,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
               title: i >= AdaptiveTheme.values.length
                   // If we reached max length make default label.
                   ? Text(
-                      '(Default) ${AdaptiveTheme.off.label}',
+                      '${AdaptiveTheme.off.label} (Default)',
                       style: txtStyle,
                     )
                   : Text(AdaptiveTheme.values[i].label, style: txtStyle),
@@ -98,10 +98,11 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
         enabled: enabled,
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
-        title: Wrap(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (title != null) title!,
-            Text(' - $tileLabel'),
+            Text(tileLabel),
           ],
         ),
         subtitle: Column(
@@ -135,8 +136,8 @@ class _TooltipIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String message = index < 0 || index >= AdaptiveTheme.values.length
-        ? '(Default) ${AdaptiveTheme.off.describe}'
-        : AdaptiveTheme.values[index].describe;
+        ? '${AdaptiveTheme.off.label} (Default)'
+        : AdaptiveTheme.values[index].label;
 
     final IconData icon = index < 0 || index >= AdaptiveTheme.values.length
         ? Icons.texture_outlined

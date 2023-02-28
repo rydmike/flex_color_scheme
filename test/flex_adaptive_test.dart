@@ -186,8 +186,16 @@ void main() {
       expect(m.adapt(TargetPlatform.macOS, true), false);
       expect(m.adapt(TargetPlatform.windows, false), false);
       expect(m.adapt(TargetPlatform.windows, true), false);
-      // For coverage, let's hit with no overrides.
+      // For coverage, let's hit with mix of overrides and no overrides.
       expect(m.adapt(), false);
+      expect(m.adapt(TargetPlatform.android, null), false);
+      expect(m.adapt(TargetPlatform.fuchsia, null), false);
+      expect(m.adapt(TargetPlatform.iOS, null), false);
+      expect(m.adapt(TargetPlatform.linux, null), false);
+      expect(m.adapt(TargetPlatform.macOS, null), false);
+      expect(m.adapt(TargetPlatform.windows, null), false);
+      expect(m.adapt(null, true), false);
+      expect(m.adapt(null, false), false);
     });
     test('FA1.015: Verify FlexAdaptive.all definition. ', () {
       const FlexAdaptive m = FlexAdaptive.all();
@@ -222,8 +230,16 @@ void main() {
       expect(m.adapt(TargetPlatform.macOS, true), true);
       expect(m.adapt(TargetPlatform.windows, false), true);
       expect(m.adapt(TargetPlatform.windows, true), true);
-      // For coverage, let's hit with no overrides.
+      // For coverage, let's hit with mix of overrides and no overrides.
       expect(m.adapt(), true);
+      expect(m.adapt(TargetPlatform.android, null), true);
+      expect(m.adapt(TargetPlatform.fuchsia, null), true);
+      expect(m.adapt(TargetPlatform.iOS, null), true);
+      expect(m.adapt(TargetPlatform.linux, null), true);
+      expect(m.adapt(TargetPlatform.macOS, null), true);
+      expect(m.adapt(TargetPlatform.windows, null), true);
+      expect(m.adapt(null, true), true);
+      expect(m.adapt(null, false), true);
     });
     test('FA1.016: Verify FlexAdaptive.apple definition. ', () {
       const FlexAdaptive m = FlexAdaptive.apple();

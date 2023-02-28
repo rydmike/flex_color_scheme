@@ -4552,7 +4552,7 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Rest both fake target paltform and fake web setting.
+  // Rest both fake target platform and fake web setting.
   void resetFakePlatform() {
     setFakeIsWeb(null, false);
     setPlatform(defaultTargetPlatform, false);
