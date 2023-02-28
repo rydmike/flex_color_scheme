@@ -1459,6 +1459,8 @@ class ThemeController with ChangeNotifier {
       setMenuElevation(8, false);
       setMenuBarRadius(0, false);
       setMenuBarElevation(1, false);
+      // Tooltips
+      setTooltipRadius(4, false);
       // Dialog settings
       setDialogElevation(24, false);
       // Set SnackBar to M2/M3 style.
