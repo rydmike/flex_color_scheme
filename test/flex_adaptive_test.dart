@@ -23,13 +23,17 @@ void main() {
       macOSWeb: false,
       windows: false,
       windowsWeb: false,
+      overrideIsWeb: false,
     );
     // m2, has same definition as m1, but via off constructor
-    const FlexAdaptive m2 = FlexAdaptive.off();
+    const FlexAdaptive m2 = FlexAdaptive.off(overrideIsWeb: false);
     // m3, has same definition as m1, but one value is different.
-    const FlexAdaptive m3 = FlexAdaptive.off(android: true);
+    const FlexAdaptive m3 = FlexAdaptive.off(
+      android: true,
+      overrideIsWeb: false,
+    );
     // m4, has all values different from m1
-    const FlexAdaptive m4 = FlexAdaptive.all();
+    const FlexAdaptive m4 = FlexAdaptive.all(overrideIsWeb: true);
     // Do identity tests
     test(
         'FA1.01: GIVEN same FlexAdaptive objects '
@@ -106,6 +110,7 @@ void main() {
           macOSWeb: false,
           windows: false,
           windowsWeb: false,
+          overrideIsWeb: false,
         ),
         equals(m1),
       );
@@ -125,7 +130,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexAdaptive#00000(android: false, androidWeb: false, fuchsia: false, fuchsiaWeb: false, iOS: false, iOSWeb: false, linux: false, linuxWeb: false, macOS: false, macOSWeb: false, windows: false, windowsWeb: false)'));
+              'FlexAdaptive#00000(android: false, androidWeb: false, fuchsia: false, fuchsiaWeb: false, iOS: false, iOSWeb: false, linux: false, linuxWeb: false, macOS: false, macOSWeb: false, windows: false, windowsWeb: false, overrideIsWeb: false)'));
     });
     test(
         'FA1.11: Test toStringShort implemented via debugFillProperties '
@@ -390,6 +395,69 @@ void main() {
       expect(m.adapt(TargetPlatform.macOS, true), false);
       expect(m.adapt(TargetPlatform.windows, false), true);
       expect(m.adapt(TargetPlatform.windows, true), false);
+    });
+    test(
+        'FA1.021: Verify FlexAdaptive.excludeWebAndroidFuchsia definition. '
+        'with passed in web FALSE override ', () {
+      const FlexAdaptive m =
+          FlexAdaptive.excludeWebAndroidFuchsia(overrideIsWeb: false);
+      expect(
+        m,
+        equals(
+          const FlexAdaptive(
+            android: false,
+            androidWeb: false,
+            fuchsia: false,
+            fuchsiaWeb: false,
+            iOS: true,
+            iOSWeb: false,
+            linux: true,
+            linuxWeb: false,
+            macOS: true,
+            macOSWeb: false,
+            windows: true,
+            windowsWeb: false,
+            overrideIsWeb: false,
+          ),
+        ),
+      );
+      expect(m.adapt(TargetPlatform.android), false);
+      expect(m.adapt(TargetPlatform.fuchsia), false);
+      expect(m.adapt(TargetPlatform.iOS), true);
+      expect(m.adapt(TargetPlatform.linux), true);
+      expect(m.adapt(TargetPlatform.macOS), true);
+      expect(m.adapt(TargetPlatform.windows), true);
+    });
+    test(
+        'FA1.022: Verify FlexAdaptive.desktop definition. '
+        'with passed in web TRUE override ', () {
+      const FlexAdaptive m = FlexAdaptive.desktop(overrideIsWeb: true);
+      expect(
+        m,
+        equals(
+          const FlexAdaptive(
+            android: false,
+            androidWeb: false,
+            fuchsia: false,
+            fuchsiaWeb: false,
+            iOS: false,
+            iOSWeb: false,
+            linux: true,
+            linuxWeb: true,
+            macOS: true,
+            macOSWeb: true,
+            windows: true,
+            windowsWeb: true,
+            overrideIsWeb: true,
+          ),
+        ),
+      );
+      expect(m.adapt(TargetPlatform.android), false);
+      expect(m.adapt(TargetPlatform.fuchsia), false);
+      expect(m.adapt(TargetPlatform.iOS), false);
+      expect(m.adapt(TargetPlatform.linux), true);
+      expect(m.adapt(TargetPlatform.macOS), true);
+      expect(m.adapt(TargetPlatform.windows), true);
     });
   });
 }

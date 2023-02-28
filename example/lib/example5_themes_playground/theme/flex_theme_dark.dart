@@ -120,13 +120,17 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             blendOnColors: controller.blendDarkOnColors,
             useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
-            adaptiveRemoveElevationTint:
-                controller.adaptiveRemoveElevationTintDark?.setting(),
-            adaptiveElevationShadowsBack:
-                controller.adaptiveElevationShadowsBackDark?.setting(),
-            adaptiveAppBarScrollUnderOff:
-                controller.adaptiveAppBarScrollUnderOffDark?.setting(),
-            adaptiveRadius: controller.adaptiveRadius?.setting(),
+            adaptiveRemoveElevationTint: controller
+                .adaptiveRemoveElevationTintDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveElevationShadowsBack: controller
+                .adaptiveElevationShadowsBackDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveAppBarScrollUnderOff: controller
+                .adaptiveAppBarScrollUnderOffDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveRadius:
+                controller.adaptiveRadius?.setting(controller.fakeIsWeb),
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,

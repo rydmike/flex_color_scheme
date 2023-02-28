@@ -91,6 +91,7 @@ class FlexAdaptive with Diagnosticable {
     required this.macOSWeb,
     required this.windows,
     required this.windowsWeb,
+    this.overrideIsWeb,
   });
 
   /// The adaptive feature is not used.
@@ -109,6 +110,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = false,
     this.windows = false,
     this.windowsWeb = false,
+    this.overrideIsWeb,
   });
 
   /// The adaptive feature is used on all platforms.
@@ -128,6 +130,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = true,
     this.windows = true,
     this.windowsWeb = true,
+    this.overrideIsWeb,
   });
 
   /// Use the adaptive feature on Apple operating system iOS and macOS, but
@@ -149,6 +152,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = false,
     this.windows = false,
     this.windowsWeb = false,
+    this.overrideIsWeb,
   });
 
   /// Use adaptive feature on desktop operating systems Windows, macOS and
@@ -166,6 +170,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = true,
     this.windows = true,
     this.windowsWeb = true,
+    this.overrideIsWeb,
   });
 
   /// Use adaptive feature on iOS and all desktop operating systems Windows,
@@ -191,6 +196,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = true,
     this.windows = true,
     this.windowsWeb = true,
+    this.overrideIsWeb,
   });
 
   /// Use adaptive feature on all platforms on web and on all devices,
@@ -218,6 +224,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = true,
     this.windows = true,
     this.windowsWeb = true,
+    this.overrideIsWeb,
   });
 
   /// Don't use adaptive feature on any web platform, also exclude Android and
@@ -247,6 +254,7 @@ class FlexAdaptive with Diagnosticable {
     this.macOSWeb = false,
     this.windows = true,
     this.windowsWeb = false,
+    this.overrideIsWeb,
   });
 
   /// Set to true if adaptive feature should be used on Android.
@@ -285,6 +293,15 @@ class FlexAdaptive with Diagnosticable {
   /// Set to true if adaptive feature should be used on web in Windows.
   final bool windowsWeb;
 
+  /// This property should only be used if you wish to override the
+  /// actual value of [kIsWeb].
+  ///
+  /// Typically only used for testing and apps that want to fake
+  /// [kIsWeb] to simulate the result of the app being run in a web build or
+  /// not concerning the adaptive feature in question.
+  /// Used by the Themes Playground.
+  final bool? overrideIsWeb;
+
   /// Using the current [FlexAdaptive] configuration, should the theme
   /// feature use the adaptive configuration?
   ///
@@ -295,7 +312,7 @@ class FlexAdaptive with Diagnosticable {
   bool adapt([TargetPlatform? platformOverride, bool? isWebOverride]) {
     final TargetPlatform platform = platformOverride ?? defaultTargetPlatform;
 
-    if (isWebOverride ?? kIsWeb) {
+    if (isWebOverride ?? overrideIsWeb ?? kIsWeb) {
       switch (platform) {
         case TargetPlatform.android:
           return androidWeb;
@@ -342,6 +359,7 @@ class FlexAdaptive with Diagnosticable {
     bool? macOSWeb,
     bool? windows,
     bool? windowsWeb,
+    bool? overrideIsWeb,
   }) {
     return FlexAdaptive(
       android: android ?? this.android,
@@ -356,6 +374,7 @@ class FlexAdaptive with Diagnosticable {
       macOSWeb: macOSWeb ?? this.macOSWeb,
       windows: windows ?? this.windows,
       windowsWeb: windowsWeb ?? this.windowsWeb,
+      overrideIsWeb: overrideIsWeb ?? this.overrideIsWeb,
     );
   }
 
@@ -376,7 +395,8 @@ class FlexAdaptive with Diagnosticable {
         other.macOS == macOS &&
         other.macOSWeb == macOSWeb &&
         other.windows == windows &&
-        other.windowsWeb == windowsWeb;
+        other.windowsWeb == windowsWeb &&
+        other.overrideIsWeb == overrideIsWeb;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -394,6 +414,7 @@ class FlexAdaptive with Diagnosticable {
         macOSWeb,
         windows,
         windowsWeb,
+        overrideIsWeb,
       ]);
 
   /// Flutter debug properties override, includes toString.
@@ -412,5 +433,6 @@ class FlexAdaptive with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('macOSWeb', macOSWeb));
     properties.add(DiagnosticsProperty<bool>('windows', windows));
     properties.add(DiagnosticsProperty<bool>('windowsWeb', windowsWeb));
+    properties.add(DiagnosticsProperty<bool>('overrideIsWeb', overrideIsWeb));
   }
 }

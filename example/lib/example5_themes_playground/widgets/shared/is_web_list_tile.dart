@@ -14,13 +14,13 @@ class IsWebListTile extends StatelessWidget {
   String _explainLabelStyle(final bool? isWeb) {
     switch (isWeb) {
       case true:
-        return 'Fake web platform used by adaptive theming features';
+        return 'Fake is web platform used by adaptive theming features';
       case false:
-        return 'Fake not web platform is used by adaptive theming features';
+        return 'Fake is not web platform is used by adaptive theming features';
       case null:
-        return 'Actual web platform status kIsWeb = $kIsWeb is used';
+        return 'Actual web platform status (kIsWeb=$kIsWeb) is used';
     }
-    return 'Actual web platform status kIsWeb = $kIsWeb is used';
+    return 'Actual web platform status (kIsWeb=$kIsWeb) is used';
   }
 
   @override

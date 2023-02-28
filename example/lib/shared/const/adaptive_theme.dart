@@ -68,22 +68,23 @@ enum AdaptiveTheme {
   final String code;
   final IconData icon;
 
-  FlexAdaptive setting() {
+  FlexAdaptive setting([bool? overrideIsWeb]) {
     switch (this) {
       case AdaptiveTheme.off:
-        return const FlexAdaptive.off();
+        return FlexAdaptive.off(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.all:
-        return const FlexAdaptive.all();
+        return FlexAdaptive.all(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.apple:
-        return const FlexAdaptive.apple();
+        return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.desktop:
-        return const FlexAdaptive.desktop();
+        return FlexAdaptive.desktop(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.iOSAndDesktop:
-        return const FlexAdaptive.iOSAndDesktop();
+        return FlexAdaptive.iOSAndDesktop(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.excludeAndroidFuchsia:
-        return const FlexAdaptive.excludeAndroidFuchsia();
+        return FlexAdaptive.excludeAndroidFuchsia(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.excludeWebAndroidFuchsia:
-        return const FlexAdaptive.excludeWebAndroidFuchsia();
+        return FlexAdaptive.excludeWebAndroidFuchsia(
+            overrideIsWeb: overrideIsWeb);
     }
   }
 }

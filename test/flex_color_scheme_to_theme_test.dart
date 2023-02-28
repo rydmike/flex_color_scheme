@@ -2364,11 +2364,13 @@ void main() {
       expect(tLightHb.indicatorColor, tLightHb.colorScheme.secondary);
     });
 
-    final RoundedRectangleBorder shapeL =
-        tLightHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+    final RoundedRectangleBorder? shapeL =
+        tLightHb.popupMenuTheme.shape as RoundedRectangleBorder?;
 
-    test('FCS7.82-3L shape: Expect border radius 8', () {
-      expect(shapeL.borderRadius, BorderRadius.circular(8.0));
+    test(
+        'FCS7.82-3L shape: Expect border radius null on popup menu does not '
+        'follow default radius', () {
+      expect(shapeL?.borderRadius, null);
     });
 
     final ThemeData tDarkHb = FlexColorScheme.dark(
@@ -2400,15 +2402,15 @@ void main() {
       expect(tDarkHb.indicatorColor, tDarkHb.colorScheme.error);
     });
 
-    final RoundedRectangleBorder shapeD =
-        tDarkHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+    final RoundedRectangleBorder? shapeD =
+        tDarkHb.popupMenuTheme.shape as RoundedRectangleBorder?;
     final RoundedRectangleBorder shapeD2 =
         tDarkHb.cardTheme.shape! as RoundedRectangleBorder;
 
     test(
-        'FCS7.82-3D shape: Expect border radius 10 on popup, it '
-        'does not higher via default parameter', () {
-      expect(shapeD.borderRadius, BorderRadius.circular(10.0));
+        'FCS7.82-3D shape: Expect border radius null on popup, it '
+        'does not follow default radius', () {
+      expect(shapeD?.borderRadius, null);
     });
     test('FCS7.82-4D shape: Expect border radius 12 on card', () {
       expect(shapeD2.borderRadius, BorderRadius.circular(12.0));
