@@ -80,6 +80,8 @@ class _LoginColumnState extends State<LoginColumn> {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final MediaQueryData media = MediaQuery.of(context);
+    final bool useTwoColumns = media.size.height < 500;
+    final double spaceFactor = useTwoColumns ? 0.5 : 1;
 
     if (_debug) debugPrint('Media size ${media.size}');
 
@@ -88,93 +90,114 @@ class _LoginColumnState extends State<LoginColumn> {
         child: ConstrainedBox(
           constraints: const BoxConstraints.tightFor(width: 600),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.all(24.0 * spaceFactor),
+            child: Row(
               children: <Widget>[
-                const Spacer(flex: 2),
-                Text(
-                  'Sign In',
-                  style: textTheme.headlineLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'No account?',
-                      style: textTheme.bodyLarge,
+                if (useTwoColumns) ...<Widget>[
+                  const SizedBox(height: 32),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.tightFor(width: 300),
+                    child: SvgAssetImage(
+                      assetName: AppImages.verified,
+                      color: theme.colorScheme.primary,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('Make account'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                const TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.mail),
-                    labelText: 'Email',
-                    hintText: 'Enter your email address',
                   ),
-                ),
-                const SizedBox(height: 16),
-                const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.key),
-                    labelText: 'Password',
-                    hintText: 'Minimum 8 chars',
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot Password?'),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: 200,
-                    child: FilledButton(
-                      onPressed: () {
-                        _confettiController.play();
-                      },
-                      child: ConfettiWidget(
-                        confettiController: _confettiController,
-                        numberOfParticles: 20,
-                        blastDirectionality: BlastDirectionality.explosive,
-                        shouldLoop: false,
-                        colors: const <Color>[
-                          Colors.green,
-                          Colors.blue,
-                          Colors.pink,
-                          Colors.red,
-                          Colors.indigo,
-                          Colors.orange,
-                          Colors.purple
+                ] else
+                  const SizedBox.shrink(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Spacer(flex: useTwoColumns ? 1 : 2),
+                      Text(
+                        'Sign In',
+                        style: textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'No account?',
+                            style: textTheme.bodyLarge,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Make account'),
+                          ),
                         ],
-                        createParticlePath: drawStar,
-                        canvas: Size.infinite,
-                        child: Text(
-                          'Sign In',
-                          style: textTheme.titleMedium!
-                              .copyWith(color: theme.colorScheme.onPrimary),
+                      ),
+                      SizedBox(height: 8 * spaceFactor),
+                      const TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.mail),
+                          labelText: 'Email',
+                          hintText: 'Enter your email address',
                         ),
                       ),
-                    ),
+                      SizedBox(height: 16 * spaceFactor),
+                      const TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.key),
+                          labelText: 'Password',
+                          hintText: 'Minimum 8 chars',
+                        ),
+                      ),
+                      SizedBox(height: 8 * spaceFactor),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Forgot Password?'),
+                      ),
+                      SizedBox(height: 16 * spaceFactor),
+                      Center(
+                        child: SizedBox(
+                          width: 200,
+                          child: FilledButton(
+                            onPressed: () {
+                              _confettiController.play();
+                            },
+                            child: ConfettiWidget(
+                              confettiController: _confettiController,
+                              numberOfParticles: 20,
+                              blastDirectionality:
+                                  BlastDirectionality.explosive,
+                              shouldLoop: false,
+                              colors: const <Color>[
+                                Colors.green,
+                                Colors.blue,
+                                Colors.pink,
+                                Colors.red,
+                                Colors.indigo,
+                                Colors.orange,
+                                Colors.purple
+                              ],
+                              createParticlePath: drawStar,
+                              canvas: Size.infinite,
+                              child: Text(
+                                'Sign In',
+                                style: textTheme.titleMedium!.copyWith(
+                                    color: theme.colorScheme.onPrimary),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (!useTwoColumns) ...<Widget>[
+                        const Spacer(),
+                        Expanded(
+                          flex: 10,
+                          child: SvgAssetImage(
+                            assetName: AppImages.verified,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        const Spacer(),
+                      ] else
+                        const Spacer(),
+                    ],
                   ),
                 ),
-                const Spacer(flex: 1),
-                Expanded(
-                  flex: 10,
-                  child: SvgAssetImage(
-                    assetName: AppImages.verified,
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-                const Spacer(flex: 1),
               ],
             ),
           ),

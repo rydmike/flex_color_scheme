@@ -73,41 +73,43 @@ class _AppExampleShopState extends State<AppExampleShop> {
                 )),
           ],
         ),
-        body: searchString.isNotEmpty
-            ? GridView.count(
-                padding: listViewPadding,
-                crossAxisCount: 2,
-                mainAxisSpacing: 24,
-                crossAxisSpacing: 24,
-                childAspectRatio: .70,
-                children: searchResultTiles,
-              )
-            : ListView(
-                padding: listViewPadding,
-                children: <Widget>[
-                  Text(
-                    'Shop by Category',
-                    style: theme.textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 16),
-                  CategoryTile(
-                    imageUrl: _manLookRightImageUrl,
-                    category: _mensCategory,
-                    imageAlignment: Alignment.topCenter,
-                  ),
-                  const SizedBox(height: 16),
-                  CategoryTile(
-                    imageUrl: _womanLookLeftImageUrl,
-                    category: _womensCategory,
-                    imageAlignment: Alignment.topCenter,
-                  ),
-                  const SizedBox(height: 16),
-                  CategoryTile(
-                    imageUrl: _dogImageUrl,
-                    category: _petsCategory,
-                  ),
-                ],
-              ),
+        body: SafeArea(
+          child: searchString.isNotEmpty
+              ? GridView.count(
+                  padding: listViewPadding,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 24,
+                  crossAxisSpacing: 24,
+                  childAspectRatio: .70,
+                  children: searchResultTiles,
+                )
+              : ListView(
+                  padding: listViewPadding,
+                  children: <Widget>[
+                    Text(
+                      'Shop by Category',
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: _manLookRightImageUrl,
+                      category: _mensCategory,
+                      imageAlignment: Alignment.topCenter,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: _womanLookLeftImageUrl,
+                      category: _womensCategory,
+                      imageAlignment: Alignment.topCenter,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: _dogImageUrl,
+                      category: _petsCategory,
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
@@ -281,102 +283,106 @@ class _ProductScreenState extends State<ProductScreen> {
           CartAppBarAction(),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height * .35,
-            color: background,
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Image.network(
-                    selectedImageUrl!,
-                    loadingBuilder: (_, Widget child,
-                            ImageChunkEvent? loadingProgress) =>
-                        loadingProgress == null
-                            ? child
-                            : const Center(child: CircularProgressIndicator()),
-                    errorBuilder: (_, Object child, StackTrace? trace) => Icon(
-                      Icons.image_not_supported_outlined,
-                      size: 200,
-                      color: iconColor,
-                    ),
-                    cacheHeight: 500,
-                    fit: BoxFit.cover,
-                    color: background,
-                    colorBlendMode: BlendMode.multiply,
-                  ),
-                ),
-                const SizedBox(height: 18),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: imagePreviews,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * .35,
+              color: background,
+              padding: const EdgeInsets.symmetric(vertical: 18),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    product.name,
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    '\$${product.cost}',
-                    style: theme.textTheme.titleMedium!.copyWith(
-                      color: theme.colorScheme.tertiary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    product.description ??
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing '
-                            'elit. Integer quis purus laoreet, efficitur '
-                            'libero ferto vel, feugiat ante. Vestibulum '
-                            'tempor, ligula.',
-                    style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
-                  ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  if (sizeSelectionWidgets.isNotEmpty) ...<Widget>[
-                    Text(
-                      'Size',
-                      style: theme.textTheme.titleSmall,
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: sizeSelectionWidgets,
-                    ),
-                  ],
-                  const Spacer(),
-                  Center(
-                    child: CallToActionButton(
-                      onPressed: () => cart.add(
-                        OrderItem(
-                          product: product,
-                          selectedSize: selectedSize,
-                        ),
+                  Expanded(
+                    child: Image.network(
+                      selectedImageUrl!,
+                      loadingBuilder:
+                          (_, Widget child, ImageChunkEvent? loadingProgress) =>
+                              loadingProgress == null
+                                  ? child
+                                  : const Center(
+                                      child: CircularProgressIndicator()),
+                      errorBuilder: (_, Object child, StackTrace? trace) =>
+                          Icon(
+                        Icons.image_not_supported_outlined,
+                        size: 200,
+                        color: iconColor,
                       ),
-                      labelText: 'Add to Cart',
+                      cacheHeight: 500,
+                      fit: BoxFit.cover,
+                      color: background,
+                      colorBlendMode: BlendMode.multiply,
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imagePreviews,
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      product.name,
+                      style: theme.textTheme.titleLarge,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      '\$${product.cost}',
+                      style: theme.textTheme.titleMedium!.copyWith(
+                        color: theme.colorScheme.tertiary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      product.description ??
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing '
+                              'elit. Integer quis purus laoreet, efficitur '
+                              'libero ferto vel, feugiat ante. Vestibulum '
+                              'tempor, ligula.',
+                      style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    if (sizeSelectionWidgets.isNotEmpty) ...<Widget>[
+                      Text(
+                        'Size',
+                        style: theme.textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: sizeSelectionWidgets,
+                      ),
+                    ],
+                    const Spacer(),
+                    Center(
+                      child: CallToActionButton(
+                        onPressed: () => cart.add(
+                          OrderItem(
+                            product: product,
+                            selectedSize: selectedSize,
+                          ),
+                        ),
+                        labelText: 'Add to Cart',
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -452,14 +458,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
           CartAppBarAction(),
         ],
       ),
-      body: ScrollConfiguration(
-        behavior: const DragScrollBehavior(),
-        child: ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 18),
-          itemCount: productRows.length,
-          itemBuilder: (_, int index) => productRows[index],
-          separatorBuilder: (_, int index) => const SizedBox(
-            height: 18,
+      body: SafeArea(
+        child: ScrollConfiguration(
+          behavior: const DragScrollBehavior(),
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 18),
+            itemCount: productRows.length,
+            itemBuilder: (_, int index) => productRows[index],
+            separatorBuilder: (_, int index) => const SizedBox(
+              height: 18,
+            ),
           ),
         ),
       ),
@@ -1062,7 +1070,7 @@ Category _petsCategory = Category(title: 'Pets', selections: <String>[
 
 List<Product> products = <Product>[
   Product(
-      name: '2-Pack Crewneck T-Shirts - Black',
+      name: 'Crewneck T-Shirts',
       imageUrls: <String>[
         'https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL.jpg',
         'https://m.media-amazon.com/images/I/716CJVk6FLS.jpg',
@@ -1073,7 +1081,7 @@ List<Product> products = <Product>[
       productType: 'shirts',
       sizes: <String>['S', 'M', 'L', 'XL']),
   Product(
-    name: 'Short Sleeve Henley - Blue',
+    name: 'Short Sleeve Henley',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/81tpGc13OgL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/81oNSlos2tL.jpg',
@@ -1108,7 +1116,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: "Levi's Original Jeans",
+    name: "Levi's Jeans",
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/91L4zjZKF-L.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/91Mf37jbSvL.jpg',
@@ -1119,7 +1127,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: '2-Pack Performance Shorts',
+    name: 'Performance Shorts',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/A1lTY32j6gL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/71JYOHJ%2BS-L.jpg',
@@ -1141,7 +1149,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: 'Full-Zip Polar Fleece Jacket',
+    name: 'Polar Fleece Jacket',
     imageUrls: <String>[
       'https://m.media-amazon.com/images/I/81McI2xG3NS.jpg',
       'https://m.media-amazon.com/images/I/81JkH4LbxnS.jpg',
@@ -1152,7 +1160,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: "Columbia Men's Watertight Ii Jacket",
+    name: "Columbia Ii Jacket",
     imageUrls: <String>[
       'https://m.media-amazon.com/images/I/6142UY8xXeS.jpg',
       'https://m.media-amazon.com/images/I/61cdxXOfjvS.jpg',
@@ -1163,7 +1171,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: '2-Pack Short-Sleeve Crewneck',
+    name: 'Short-Sleeve Crewneck',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/911mb8PkHSL.jpg',
       'https://m.media-amazon.com/images/I/71R4QBliLPL.jpg',
@@ -1174,7 +1182,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: 'Waffle Knit Tunic Blouse',
+    name: 'Knit Tunic Blouse',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/71lDML8KDQL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/61Ojm-DnojL.jpg',
@@ -1185,7 +1193,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: 'Women’s Long Sleeve Tops',
+    name: 'Long Sleeve Tops',
     imageUrls: <String>[
       'https://m.media-amazon.com/images/I/81dmPaYpNnL.jpg',
       'https://m.media-amazon.com/images/I/71BqfxMdeDL.jpg',
@@ -1207,7 +1215,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: "Levi's Straight 505 Jeans",
+    name: "Levi's 505 Jeans",
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/51D4eXuwKaL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/51sHwN6mDzL.jpg',
@@ -1229,7 +1237,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: '3-Pack - Squeaky Plush Dog Toy',
+    name: 'Squeaky Plush Dog Toy',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/712YaF31-3L.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/71K1NzmHCfL.jpg',
@@ -1259,7 +1267,7 @@ List<Product> products = <Product>[
     productType: 'treats',
   ),
   Product(
-    name: "Zuke's Mini Training Treats",
+    name: "Zuke's Training Treats",
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/81LV2CHtGKL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/81K30Bs9C6L.jpg',

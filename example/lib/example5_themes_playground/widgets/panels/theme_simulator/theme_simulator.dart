@@ -23,12 +23,16 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
     with TickerProviderStateMixin {
   late int currentPage;
   late int device;
+  late Orientation orientation;
+  late double turns;
   late TabController tabController;
 
   @override
   void initState() {
     super.initState();
     device = widget.controller.simulatorDeviceIndex;
+    orientation = Orientation.portrait;
+    turns = 1 / 8;
     currentPage = widget.controller.simulatorAppIndex;
     tabController = TabController(
       initialIndex: currentPage,
@@ -93,6 +97,28 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               ),
             ),
             ListTile(
+              leading: IconButton(
+                icon: AnimatedRotation(
+                  turns: turns,
+                  duration: const Duration(milliseconds: 200),
+                  child: Icon(
+                    Icons.screen_rotation_outlined,
+                    color: theme.colorScheme.primary,
+                    size: 36,
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (orientation == Orientation.portrait) {
+                      orientation = Orientation.landscape;
+                      turns = 3 / 8;
+                    } else {
+                      orientation = Orientation.portrait;
+                      turns = 1 / 8;
+                    }
+                  });
+                },
+              ),
               title: Text('${Simulator.devices[device].name} ('
                   '${Simulator.devices[device].info.identifier.platform.name}'
                   ')'),
@@ -130,24 +156,29 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                     children: <Widget>[
                       SimulatorFrame(
                         device: device,
+                        orientation: orientation,
                         child:
                             AppExampleComponents(controller: widget.controller),
                       ),
                       SimulatorFrame(
                         device: device,
+                        orientation: orientation,
                         child: const AppExampleLogin(),
                       ),
                       SimulatorFrame(
                         device: device,
+                        orientation: orientation,
                         child: const AppExampleShop(),
                       ),
                       SimulatorFrame(
                         device: device,
+                        orientation: orientation,
                         child: AppExampleMaterial3(
                             themeController: widget.controller),
                       ),
                       SimulatorFrame(
                         device: device,
+                        orientation: orientation,
                         child: AppExampleUndraw(controller: widget.controller),
                       ),
                     ],
@@ -164,16 +195,18 @@ class SimulatorFrame extends StatelessWidget {
   const SimulatorFrame({
     super.key,
     required this.device,
+    required this.orientation,
     required this.child,
   });
   final int device;
+  final Orientation orientation;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return DeviceFrame(
       device: Simulator.devices[device].info,
-      orientation: Orientation.portrait,
+      orientation: orientation,
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
           debugShowCheckedModeBanner: false,
