@@ -89,7 +89,7 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
       widget.controller.useSubThemes && widget.controller.useFlexColorScheme
           // FCS default for Card is 12.
           ? (widget.controller.cardBorderRadius ??
-              widget.controller.defaultRadius ??
+              App.effectiveRadius(widget.controller) ??
               12)
           // M3 or M2 default for Card.
           : useMaterial3
