@@ -311,10 +311,10 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                   text: 'Icons and IconButtons by default use same foreground '
                       'color as active text theme. Some components change '
                       'their colors automatically when they use them, but '
-                      'not all do. Their usage is very versatile it is '
+                      'not all do. Icon usage is very varied, it is '
                       'difficult to give them any single more universally '
                       'applicable color than same as text. Flutter SDK does '
-                      'so in both M2 and M3 mode, and so the FCS. If FCS '
+                      'so in both M2 and M3 mode, and so does FCS. If FCS '
                       'tinted text typography is used, it is also applied to '
                       'the iconography.\n'
                       '\n'
@@ -329,12 +329,13 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: ', are not yet available as direct factories in '
                       'Flutter. With current IconButton theming, only one '
-                      'style is offered and thus only of them could be made. '
-                      'Therefore the default style is kept as it is.\n'
+                      'style is offered and thus only of the M3 style can be '
+                      'made with theming, therefore the default style is '
+                      'kept as it is.\n'
                       '\n'
-                      'The is proposal in Flutter issues to bring the M3 '
-                      'styled IconButtons to Flutter. If you like to see that '
-                      'happen you can go an upvote ',
+                      'There is a proposal in Flutter issues to bring the M3 '
+                      'styled IconButtons to Flutter, with own themes. If '
+                      'you like to see that happen you can go and thumbs up ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -343,9 +344,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Currently you have to create those buttons as '
-                      'custom widgets using styleFrom. There is example code '
-                      'on how to do it correctly in the Flutter ',
+                  text: '. Currently you have to create these M3 IconButtons '
+                      'as custom widgets using styleFrom. There is example '
+                      'code on how to do it correctly in the Flutter ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -354,8 +355,8 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. It is a bit tedious to configure such buttons, '
-                      'but very doable.',
+                  text: '. It is a bit tedious to set them up them, '
+                      'but at least doable, but not with themes.',
                 ),
               ],
             ),

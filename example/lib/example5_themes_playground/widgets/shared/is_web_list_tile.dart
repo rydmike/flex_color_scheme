@@ -14,19 +14,19 @@ class IsWebListTile extends StatelessWidget {
   String _explainLabelStyle(final bool? isWeb) {
     switch (isWeb) {
       case true:
-        return 'Fake is web platform used by adaptive theming features';
+        return 'Mock web platform info (kIsWeb=true) is used';
       case false:
-        return 'Fake is not web platform is used by adaptive theming features';
+        return 'Mock web platform info (kIsWeb=false) is used';
       case null:
-        return 'Actual web platform status (kIsWeb=$kIsWeb) is used';
+        return 'Actual web platform info (kIsWeb=$kIsWeb) is used';
     }
-    return 'Actual web platform status (kIsWeb=$kIsWeb) is used';
+    return 'Actual web platform info (kIsWeb=$kIsWeb) is used';
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text('Set fake web platform for adaptive theming testing'),
+      title: const Text('Set mock web platform for adaptive theming testing'),
       subtitle: Text(_explainLabelStyle(controller.fakeIsWeb)),
       trailing: IsWebToggleButtons(
         isWeb: controller.fakeIsWeb,
