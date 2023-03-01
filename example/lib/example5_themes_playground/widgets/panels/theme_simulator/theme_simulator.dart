@@ -88,10 +88,10 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                   });
                 },
                 tabs: const <Widget>[
-                  Tab(text: 'Components'),
+                  Tab(text: 'Widgets'),
                   Tab(text: 'Login'),
                   Tab(text: 'Shop'),
-                  Tab(text: 'Material3'),
+                  Tab(text: 'Material'),
                   Tab(text: 'Undraw'),
                 ],
               ),

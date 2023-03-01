@@ -268,7 +268,7 @@ class _ThemePanelView extends StatelessWidget {
       // A custom breakpoint, when the layout width is larger than breakpoint
       // we show the code panel in a side-by side view.
       final bool showSecondPage =
-          constraints.maxWidth >= App.codeViewWidthBreakpoint;
+          constraints.maxWidth >= App.sideBySideViewBreakpoint;
       // We get double implicit scrollbars and that causes issues with the
       // scroll controller, this removes it, we don't need one here.
       return Row(

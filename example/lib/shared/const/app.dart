@@ -67,7 +67,7 @@ class App {
   /// typically via the [PageBody] screen content wrapper widget.
   static const double maxBodyWidth = 1000;
 
-  /// Breakpoint needed to show code view side by side breakpoint for the
+  /// Breakpoint needed to show second panel in side-by-side view for the
   /// [ThemeTopicPage] page view.
   ///
   /// This is available content layout width, not media size!
@@ -75,7 +75,7 @@ class App {
   /// This min width was chosen because it gives at least the primary, secondary
   /// and tertiary colors in one Wrap row on panels Input Colors and Seeded
   /// ColorScheme, also when the side-by-side code view appears.
-  static const double codeViewWidthBreakpoint = 1024;
+  static const double sideBySideViewBreakpoint = 955;
 
   /// The minimum media size needed for desktop/large tablet menu view,
   /// this is media size.
