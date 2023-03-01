@@ -1871,7 +1871,7 @@ class ThemeController with ChangeNotifier {
       // Set computed dark theme
       setUseToDarkMethod(true, false);
       setToDarkSwapPrimaryAndContainer(false, false);
-      setDarkMethodLevel(60, false);
+      setDarkMethodLevel(40, false);
       setUseM3ErrorColors(true, true);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
