@@ -5004,8 +5004,15 @@ class FlexSubThemes {
         thumbColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
+              if (states.contains(MaterialState.selected)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, baseColor);
+                }
+                return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+              }
               if (tintDisable) {
-                return tintedDisable(colorScheme.surfaceVariant, baseColor);
+                return tintedDisable(colorScheme.onSurface, baseColor)
+                    .withAlpha(0x3D);
               }
               return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
             }
@@ -5035,9 +5042,38 @@ class FlexSubThemes {
             return isLight ? const Color(0x52000000) : Colors.white30;
           },
         ),
+        overlayColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            if (states.contains(MaterialState.pressed)) {
+              return baseColor.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withOpacity(0.12);
+            }
+            return null;
+          }
+          if (states.contains(MaterialState.pressed)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          if (states.contains(MaterialState.hovered)) {
+            if (tintInteract) return baseColor.withOpacity(0.08);
+            return colorScheme.onSurface.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return null;
+        }),
       );
     } else {
       return SwitchThemeData(
+        splashRadius: splashRadius,
         thumbColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
@@ -5131,7 +5167,6 @@ class FlexSubThemes {
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
-              if (tintInteract) return baseColor.withOpacity(0.12);
               return baseColor.withOpacity(0.12);
             }
             if (states.contains(MaterialState.hovered)) {
