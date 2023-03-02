@@ -417,91 +417,50 @@ class FlexSubThemes {
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
       schemeColor(onSchemeColor(value), colorScheme);
 
-  /// Returns the FCS opinionated tinted hover color of a passed in color.
+  /// Returns the FCS opinionated tinted hover color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedHover(Color tint, Color overlay, Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return tint
-            .blendAlpha(overlay, kHoverAlphaBlend)
-            .withAlpha(kHoverAlpha);
-      case Brightness.dark:
-        return tint
-            .blendAlpha(overlay, kHoverAlphaBlend)
-            .withAlpha(kHoverAlpha);
-    }
-  }
+  static Color tintedHover(Color overlay, Color tint) =>
+      // Tint color alpha blend into overlay #99 60%
+      // Opacity of result #14 8%, same as M3 opacity on hover.
+      overlay.blendAlpha(tint, 0x99).withAlpha(0x14);
 
-  /// Returns the FCS opinionated tinted focus color of a passed in color.
+  /// Returns the FCS opinionated tinted highlight color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedFocus(Color tint, Color overlay, Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return tint
-            .blendAlpha(Colors.white, kFocusAlphaBlend)
-            .withAlpha(kFocusAlpha);
-      case Brightness.dark:
-        return tint
-            .blendAlpha(Colors.white, kFocusAlphaBlend)
-            .withAlpha(kFocusAlpha);
-    }
-  }
+  static Color tintedHighlight(Color overlay, Color tint) =>
+      // Tint color alpha blend into overlay #A5 65%
+      // Opacity of result #14 8%, same as M3 opacity on hover.
+      overlay.blendAlpha(tint, 0xA5).withAlpha(0x14);
 
-  /// Returns the FCS opinionated tinted splash color of a passed in color.
+  /// Returns the FCS opinionated tinted splash color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedSplash(Color tint, Color overlay, Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return tint
-            .blendAlpha(overlay, kSplashAlphaBlend)
-            .withAlpha(kSplashAlpha);
-      case Brightness.dark:
-        return tint
-            .blendAlpha(overlay, kSplashAlphaBlend)
-            .withAlpha(kSplashAlpha);
-    }
-  }
+  static Color tintedSplash(Color overlay, Color tint) =>
+      // Tint color alpha blend into overlay #B2 70%
+      // Opacity of result #1E 12%, same as M3 opacity on pressed.
+      overlay.blendAlpha(tint, 0xA5).withAlpha(0x1E); // 12%
 
-  /// Returns the FCS opinionated tinted highlight color of a passed in color.
+  /// Returns the FCS opinionated tinted focus color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedHighlight(
-      Color tint, Color overlay, Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return tint
-            .blendAlpha(Colors.white, kHighlightAlphaBlend)
-            .withAlpha(kHighlightAlpha);
-      case Brightness.dark:
-        return tint
-            .blendAlpha(Colors.white, kHighlightAlphaBlend)
-            .withAlpha(kHighlightAlpha);
-    }
-  }
+  static Color tintedFocus(Color overlay, Color tint) =>
+      // Tint color alpha blend into overlay #B2 70%
+      // Opacity of result #1E 12%, same as M3 opacity on pressed.
+      overlay.blendAlpha(tint, 0xB2).withAlpha(0x1E);
 
-  /// Returns the FCS opinionated tinted disabled color of a passed in color.
+  /// Returns the FCS opinionated tinted disabled color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedDisable(Color tint, Color overlay, Brightness brightness) {
-    switch (brightness) {
-      case Brightness.light:
-        return tint
-            .blendAlpha(overlay, kDisabledAlphaBlend)
-            .withAlpha(kDisabledForegroundAlpha);
-      case Brightness.dark:
-        return tint
-            .blendAlpha(overlay, kDisabledAlphaBlend)
-            .withAlpha(kDisabledForegroundAlpha);
-    }
-  }
+  static Color tintedDisable(Color overlay, Color tint) =>
+      // Tint color alpha blend into overlay #66 40%
+      // Opacity of result #60 38%, same as M3 opacity on disable.
+      overlay.blendAlpha(tint, 0x66).withAlpha(0x60);
 
   /// An opinionated [AppBarTheme] theme.
   ///
@@ -1305,42 +1264,159 @@ class FlexSubThemes {
 
     /// Defines if unselected [Checkbox] is also themed to be [baseSchemeColor].
     ///
-    /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
+    /// If false, it is grey like in Flutter SDK.
+    ///
+    /// If undefined, defaults to false.
+    final bool? unselectedIsColored,
+
+    /// Defines it the theme uses on tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines it the theme uses on tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool? useMaterial3,
   }) {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
+    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+    final bool useM3 = useMaterial3 ?? false;
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
       checkColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade200 : Colors.grey.shade600;
+          if (useM3) {
+            if (states.contains(MaterialState.disabled)) {
+              if (states.contains(MaterialState.selected)) {
+                return colorScheme.surface;
+              }
+              return Colors.transparent;
+            }
+            if (states.contains(MaterialState.selected)) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.onError;
+              }
+              return onBaseColor;
+            }
+            return Colors.transparent;
+          } else {
+            if (states.contains(MaterialState.disabled)) {
+              return isLight ? Colors.grey.shade200 : Colors.grey.shade900;
+            }
+            if (states.contains(MaterialState.selected)) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.onError;
+              }
+              return onBaseColor;
+            }
+            return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
           }
-          if (states.contains(MaterialState.selected)) {
-            return onBaseColor;
-          }
-          return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
         },
       ),
       fillColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          if (useM3) {
+            if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
+              return colorScheme.onSurface.withOpacity(0.38);
+            }
+            if (states.contains(MaterialState.error)) {
+              return colorScheme.error;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return baseColor;
+            }
+            if (states.contains(MaterialState.pressed)) {
+              if (unselectedColored) return baseColor;
+              return colorScheme.onSurface;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              if (unselectedColored) return baseColor;
+              return colorScheme.onSurface;
+            }
+            if (states.contains(MaterialState.focused)) {
+              if (unselectedColored) return baseColor;
+              return colorScheme.onSurface;
+            }
+            if (unselectedColored) return baseColor.withAlpha(0xDD);
+            return colorScheme.onSurfaceVariant;
+          } else {
+            if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
+              return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return baseColor;
+            }
+            // Opinionated color on unselected checkbox.
+            if (unselectedColored) {
+              return baseColor.withAlpha(0xDD);
+            }
+            // This is M2 SDK default.
+            return isLight ? Colors.black54 : Colors.white70;
+          }
+        },
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.error)) {
+            if (states.contains(MaterialState.pressed)) {
+              return colorScheme.error.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return colorScheme.error.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return colorScheme.error.withOpacity(0.12);
+            }
           }
           if (states.contains(MaterialState.selected)) {
-            return baseColor;
+            if (states.contains(MaterialState.pressed)) {
+              if (tintInteract) return baseColor.withOpacity(0.12);
+              return colorScheme.onSurface.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withOpacity(0.12);
+            }
+            return Colors.transparent;
           }
-          // Opinionated color on unselected checkbox.
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0xDD);
+          if (states.contains(MaterialState.pressed)) {
+            return baseColor.withOpacity(0.12);
           }
-          // This is SDK default.
-          return isLight ? Colors.black54 : Colors.white70;
+          if (states.contains(MaterialState.hovered)) {
+            if (tintInteract) return baseColor.withOpacity(0.08);
+            return colorScheme.onSurface.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return Colors.transparent;
         },
       ),
     );
@@ -3975,11 +4051,11 @@ class FlexSubThemes {
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated defaults values.
+    /// own opinionated default values.
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
@@ -4303,29 +4379,128 @@ class FlexSubThemes {
     /// Defines if unselected [Radio] is also themed to be [baseSchemeColor].
     ///
     /// If false, it is grey like in Flutter SDK. Defaults to true.
-    final bool unselectedIsColored = true,
+    ///
+    /// If undefined, defaults to false.
+    final bool? unselectedIsColored,
+
+    /// Defines it the theme uses on tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines it the theme uses on tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool? useMaterial3,
   }) {
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
 
+    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+    final bool useM3 = useMaterial3 ?? false;
+
     return RadioThemeData(
       splashRadius: splashRadius,
       fillColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+          if (useM3) {
+            if (states.contains(MaterialState.selected)) {
+              if (states.contains(MaterialState.disabled)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, baseColor);
+                }
+                return colorScheme.onSurface.withOpacity(0.38);
+              }
+              if (states.contains(MaterialState.pressed)) {
+                return baseColor;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return baseColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return baseColor;
+              }
+              return baseColor;
+            }
+            if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
+              return colorScheme.onSurface.withOpacity(0.38);
+            }
+            if (states.contains(MaterialState.pressed)) {
+              if (unselectedColored) return baseColor.withAlpha(0xDD);
+              return colorScheme.onSurface;
+            }
+            if (states.contains(MaterialState.hovered)) {
+              if (unselectedColored) return baseColor.withAlpha(0xDD);
+              return colorScheme.onSurface;
+            }
+            if (states.contains(MaterialState.focused)) {
+              if (unselectedColored) return baseColor.withAlpha(0xDD);
+              return colorScheme.onSurface;
+            }
+            if (unselectedColored) return baseColor.withAlpha(0xDD);
+            return colorScheme.onSurfaceVariant;
+          } else {
+            if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
+              return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return baseColor;
+            }
+            if (unselectedColored) {
+              return baseColor.withAlpha(0xDD);
+            }
+            // This is SDK default.
+            return isLight ? Colors.black54 : Colors.white70;
           }
+        },
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
-            return baseColor;
+            if (states.contains(MaterialState.pressed)) {
+              if (tintInteract) return baseColor.withOpacity(0.12);
+              return colorScheme.onSurface.withOpacity(0.12);
+            }
+            if (states.contains(MaterialState.hovered)) {
+              return baseColor.withOpacity(0.08);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return baseColor.withOpacity(0.12);
+            }
+            return Colors.transparent;
           }
-          // Opinionated color on unselected checkbox.
-          if (unselectedIsColored) {
-            return baseColor.withAlpha(0xDD);
+          if (states.contains(MaterialState.pressed)) {
+            return baseColor.withOpacity(0.12);
           }
-          // This is SDK default.
-          return isLight ? Colors.black54 : Colors.white70;
+          if (states.contains(MaterialState.hovered)) {
+            if (tintInteract) return baseColor.withOpacity(0.08);
+            return colorScheme.onSurface.withOpacity(0.08);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return Colors.transparent;
         },
       ),
     );
@@ -4776,10 +4951,28 @@ class FlexSubThemes {
     /// If false, it is grey like in Flutter SDK.
     ///
     /// Defaults to false.
-    final bool unselectedIsColored = false,
+    /// If undefined, defaults to false.
+    final bool? unselectedIsColored,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
-    final bool useMaterial3 = false,
+    /// Defines it the theme uses on tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines it the theme uses on tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    final bool? useMaterial3,
   }) {
     // Get colorScheme brightness.
     final bool isLight = colorScheme.brightness == Brightness.light;
@@ -4790,22 +4983,30 @@ class FlexSubThemes {
     final Color onBaseColor =
         schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+    final bool useM3 = useMaterial3 ?? false;
+
     // Get selected thumb color, and its pair, defaults to
     // M2: primary and onPrimary.
     // M3: primaryContainer and onPrimaryContainer
     final Color thumbColor = schemeColor(
         thumbSchemeColor ??
-            (useMaterial3
+            (useM3
                 ? SchemeColor.primaryContainer
                 : baseSchemeColor ?? SchemeColor.primary),
         colorScheme);
 
-    if (!useMaterial3) {
+    if (!useM3) {
       return SwitchThemeData(
         splashRadius: splashRadius,
         thumbColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.surfaceVariant, baseColor);
+              }
               return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
             }
             if (states.contains(MaterialState.selected)) {
@@ -4817,13 +5018,17 @@ class FlexSubThemes {
         trackColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor)
+                    .withAlpha(0x1E);
+              }
               return isLight ? Colors.black12 : Colors.white10;
             }
             if (states.contains(MaterialState.selected)) {
               return baseColor.withAlpha(isLight ? 0x70 : 0x80);
             }
             // Opinionated color on track when not selected
-            if (unselectedIsColored) {
+            if (unselectedColored) {
               return baseColor.withAlpha(isLight ? 0x50 : 0x65);
             }
             // This is SDK default.
@@ -4837,7 +5042,10 @@ class FlexSubThemes {
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             if (states.contains(MaterialState.selected)) {
-              return colorScheme.surface.withOpacity(1.0);
+              return colorScheme.surface;
+            }
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withOpacity(0.38);
           }
@@ -4868,6 +5076,9 @@ class FlexSubThemes {
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             if (states.contains(MaterialState.selected)) {
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
               return colorScheme.onSurface.withOpacity(0.12);
             }
             return colorScheme.surfaceVariant.withOpacity(0.12);
@@ -4885,28 +5096,42 @@ class FlexSubThemes {
             return baseColor;
           }
           if (states.contains(MaterialState.pressed)) {
-            return unselectedIsColored
+            return unselectedColored
                 ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
                 : colorScheme.surfaceVariant;
           }
           if (states.contains(MaterialState.hovered)) {
-            return unselectedIsColored
+            return unselectedColored
                 ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
                 : colorScheme.surfaceVariant;
           }
           if (states.contains(MaterialState.focused)) {
-            return unselectedIsColored
+            return unselectedColored
                 ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
                 : colorScheme.surfaceVariant;
           }
-          return unselectedIsColored
+          return unselectedColored
               ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
               : colorScheme.surfaceVariant;
+        }),
+        trackOutlineColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.transparent;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, baseColor);
+            }
+            return colorScheme.onSurface.withOpacity(0.12);
+          }
+          return colorScheme.outline;
         }),
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
+              if (tintInteract) return baseColor.withOpacity(0.12);
               return baseColor.withOpacity(0.12);
             }
             if (states.contains(MaterialState.hovered)) {
@@ -4918,12 +5143,15 @@ class FlexSubThemes {
             return null;
           }
           if (states.contains(MaterialState.pressed)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
             return colorScheme.onSurface.withOpacity(0.12);
           }
           if (states.contains(MaterialState.hovered)) {
+            if (tintInteract) return baseColor.withOpacity(0.08);
             return colorScheme.onSurface.withOpacity(0.08);
           }
           if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return baseColor.withOpacity(0.12);
             return colorScheme.onSurface.withOpacity(0.12);
           }
           return null;

@@ -5763,6 +5763,7 @@ class FlexColorScheme with Diagnosticable {
       statusBarIconBrightness: appBarBrightness == Brightness.dark
           ? Brightness.light
           : Brightness.dark,
+
       // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
       //   Would be useful it could set system navbar properties too and not
       //   only status bar properties. While it might be odd to do so, it
@@ -5979,7 +5980,6 @@ class FlexColorScheme with Diagnosticable {
                 .copyWith(color: sliderValueStyleOnColor)
             : null;
 
-    // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
     // In M3 mode we use the new dividerColor colorScheme.outlineVariant,
     // unless useM2StyleDividerInM3 is set to true, if it is true
     // we use the M2 style also in M3.
@@ -6122,15 +6122,10 @@ class FlexColorScheme with Diagnosticable {
       // Most color definitions below are very close to the ones used by the
       // Flutter factory ThemeData.from() for creating a theme from a
       // ColorScheme and TextTheme.
-      // TODO(rydmike): Monitor Flutter SDK deprecation of backgroundColor.
-      // backgroundColor: colorScheme.background,
       brightness: colorScheme.brightness,
-      // TODO(rydmike): BottomAppBarColor deprecated after v3.3.0-0.6.pre
-      // bottomAppBarColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
       canvasColor: colorScheme.background,
       // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
-      // Card, divider and background colors are same as in ThemeData.from.
       cardColor: colorScheme.surface,
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
       // colorScheme. Newer standard Flutter sub-themes use the colorScheme
@@ -6147,7 +6142,7 @@ class FlexColorScheme with Diagnosticable {
       // may also be any other other color.
       // If using surface blends that are not equal for all Material surface
       // backgrounds colors. There will be no elevation overlay color in dark
-      // mode, even if so configured.
+      // M2 mode, even if so configured.
       // Use dialogs with background color that equals theme
       // colorScheme.surface to ensure it gets elevation overlay color applied
       // in dark mode. See : https://github.com/flutter/flutter/issues/90353
@@ -6155,18 +6150,14 @@ class FlexColorScheme with Diagnosticable {
       dialogBackgroundColor: dialogBackground ?? colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using tinted disabled.
-      // effects, if not opted in same as before v4.0.0 =  ThemeData default.
+      // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled
-          ? FlexSubThemes.tintedDisable(colorScheme.primary,
-              colorScheme.onSurface, colorScheme.brightness)
-          : isDark
-              ? Colors.white38
-              : Colors.black38,
+          ? FlexSubThemes.tintedDisable(
+              isDark ? Colors.white : Colors.black, colorScheme.primary)
+          : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of errorColor.
-      // Define errorColor via color scheme error color.
-      // errorColor: colorScheme.error,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of interaction colors.
       // See: https://github.com/flutter/flutter/issues/91772
       // Special theming on hover, focus, highlight and splash, if opting in on
@@ -6175,26 +6166,28 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of focusColor.
       focusColor: tintedInteractions
           ? FlexSubThemes.tintedFocus(
-              colorScheme.primary, Colors.white, colorScheme.brightness)
+              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of highlightColor.
       highlightColor: tintedInteractions
           ? FlexSubThemes.tintedHighlight(
-              colorScheme.primary, Colors.white, colorScheme.brightness)
+              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
+      // TODO(rydmike): Clean out hint color, let ThemeData handle it. TEST!
       // Same as ThemeData SDK, hintColor is only used by DropdownButton
       // and InputDecorator in SDK.
-      hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99), // 60%
+      // hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99),
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
       hoverColor: tintedInteractions
           ? FlexSubThemes.tintedHover(
-              colorScheme.primary, Colors.white, colorScheme.brightness)
+              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
-      // Use TabBar style dependent function for selected Tab as indicatorColor
-      // if no color scheme selection for it is made.
+      // Use TabBar style dependent function for selected Tab as indicatorColor,
+      // if no SchemeColor color selection for it is made.
       indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
           ? tabBarStyleColor()
           : FlexSubThemes.schemeColor(
@@ -6243,23 +6236,8 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
       splashColor: tintedInteractions
           ? FlexSubThemes.tintedSplash(
-              colorScheme.primary, Colors.white, colorScheme.brightness)
+              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of toggleableActive.
-      // See: https://github.com/flutter/flutter/pull/95870
-      // This color is still important, if it is not set we get a teal color for
-      // it in dark mode, and not actually the secondary color that we want for
-      // our color scheme based theme. The Flutter color scheme based theme
-      // does not include this, in our opinion for correct application of the
-      // color scheme based theme, it should really do the same as below.
-      // See issue: https://github.com/flutter/flutter/issues/65782
-      // When using sub-themes, or Material 3 style, we use primary color
-      // instead, because it is the best match for M3 ColorDesign for the M2
-      // components using M3 Colors.
-      // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
-      // toggleableActiveColor: useSubThemes || useMaterial3
-      //     ? colorScheme.primary
-      //     : colorScheme.secondary,
 
       // TYPOGRAPHY & ICONOGRAPHY
       //
@@ -6498,6 +6476,9 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.checkboxSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
@@ -6814,6 +6795,9 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.radioSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
@@ -6870,6 +6854,8 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.switchSchemeColor,
               thumbSchemeColor: subTheme.switchThumbSchemeColor,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,

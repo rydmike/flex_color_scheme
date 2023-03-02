@@ -78,18 +78,19 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                               'animates in a new one.\n'
                               '\n'
                               'Each image has its own random wait before it '
-                              'switches and also a random switch animation time. '
-                              'Each time the screen is built, every image box '
-                              'gets a new random colored border, with good '
-                              'contrast in light theme mode and a less saturated '
-                              'version of same color in dark mode.\n',
+                              'switches and also a random switch animation '
+                              'time. Each time the screen is built, every '
+                              'image box gets a new random colored border, '
+                              'with good contrast in light theme mode and a '
+                              'less saturated version of same color in dark '
+                              'mode.\n',
                             ),
                             introBottom: Text(
                               'Each image is colored dynamically to match '
-                              'the color of its border. This is done by changing '
-                              'a color text string in the image SVG file. '
-                              'This demo is mostly a stress test for Flutter, '
-                              'especially for Web builds. '
+                              'the color of its border. This is done by '
+                              'changing a color text string in the image SVG '
+                              'file. This demo is mostly a stress test for '
+                              'Flutter, especially for Web builds. '
                               'We could make the grid of switching images '
                               'infinite, but this demo stops at $_maxTiles '
                               'images in the grid.\n',
@@ -124,7 +125,6 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                       ),
                     ),
                   )
-                  //SizedBox(height: MediaQuery.of(context).padding.bottom),
                 ],
               );
             },
