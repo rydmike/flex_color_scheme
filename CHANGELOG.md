@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Feb 28, 2023**
+**Mar 3, 2023**
 
 **FIX**
 
@@ -157,8 +157,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7.   
-- NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
+- IN PROGRESS :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
+  
+- TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
+
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**

@@ -403,3 +403,18 @@ const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kUnselectedAlphaBlend = 0xA5;
+
+// The v7 new tinted interactions effects and disable constants start here.
+
+/// The amount of alpha blend used on tinted hover effect that is blended
+/// into overlay color.
+///
+/// Value: 0x99 = 153 = 60%
+const int kTintHover = 0x99;
+
+/// The amount of alpha based opacity used on tinted hover effect.
+///
+/// Same value as used on Hover opacity on control in M3.
+///
+/// Value: 0x14 = 20 = 8%
+const int kAlphaHover = 0x14;

@@ -422,9 +422,9 @@ class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedHover(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #99 60%
-      // Opacity of result #14 8%, same as M3 opacity on hover.
-      overlay.blendAlpha(tint, 0x99).withAlpha(0x14);
+      // Tint color alpha blend into overlay #99=60%
+      // Opacity of result #14=8%, same as M3 opacity on hover.
+      overlay.blendAlpha(tint, kTintHover).withAlpha(kAlphaHover);
 
   /// Returns the FCS opinionated tinted highlight color on an overlay color.
   ///
