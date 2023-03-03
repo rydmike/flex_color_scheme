@@ -91,7 +91,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
     - No opacity style:  Blend 18% -> 15%
   
 
-- **Style breaking**: FlexColorSchemes own algorithm to compute light and dark theme container colors from their main colors, was modified to aligned better with expectation by the M3 color system. The changes are:
+- **Style breaking**: FlexColorSchemes own algorithm to compute light and dark theme container colors from their main colors, was modified to align better with expectation by the M3 color system. The changes are:
   - In light theme mode: 
     - Primary container: primary.blend(Colors.white, 60) -> primary.lighten(20).blend(Colors.white, 60)
     - Secondary container: secondary.blend(Colors.white, 60) -> secondary.brighten(14).blend(Colors.white, 50)
@@ -102,7 +102,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
     - Tertiary container: tertiary?.blend(Colors.black, 80) -> tertiary.darken(15).blend(Colors.black, 60)
 
 
-- **Style breaking**: The border radius on `ToolTip`, `PopupMenuButton`, `DropDownMenu` and `Menu` no longer follow the global override for `defaultRadius`. These items should generally not be themed together with a large general radius override. They can still be modified individually. 
+- **Style breaking**: The border radius on `ToolTip`, `PopupMenuButton`, `DropDownMenu` and `Menu` no longer follow the global override for `defaultRadius`. These items should generally not be themed together with a large general radius override. They can still be modified individually.
+
+
+- **Default value breaking**: The `unselectedIsColored` parameters in `FlexSubThemes` functions `switchTheme`, `checkboxTheme` and `radioTheme` was changed to be nullable and to default to `false` if not defined. Previously, they were not nullable and defaulted to `true`. If you have not used these `FlexSubThemes` functions directly, typically they are not used directly, then this change has no impact on resulting themes, since `FlexSubThemedata.unselectedToggleIsColored` defaulted to `false` earlier as well, and set these sub-theme theme values to false by default, or true when so defined.
 
 
 - **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
@@ -157,7 +160,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before stable 7.0 release.
+- IN PROGRESS (About 20% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
   
 - TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
 
@@ -170,7 +173,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
-  - Down from 100% to 95% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 80% tested now.
+  - Down from 100% to 94% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 76% tested now, and will drop much lower with all the interaction effects added, that is not even half-way done.
   - All new sub-themes and new states.  
   - Tests for usedColors 7.
 - DOCS: Add important changes to docs.flexcolorscheme.com:
