@@ -1991,12 +1991,19 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 0 in M2 and to 3 in M3.
   final double? tabBarIndicatorTopRadius;
 
+  // TODO(rydmike): Monitor when dividerColor bug fix lands in stable.
   /// The color of the divider.
   ///
   /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.surfaceVariant] will be used, otherwise divider will
   /// not be drawn.
+  ///
+  /// This feature does not work in Flutter 3.7 stable, at least not up until
+  /// version 3.7.6. It is caused by a bug in Flutter SDK. The issue has
+  /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
+  /// master channel, but until the fix lands in Flutter stable, this
+  /// feature does not work.
   final Color? tabBarDividerColor;
 
   /// Border radius value for [Drawer], also used by [NavigationDrawer].

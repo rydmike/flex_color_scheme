@@ -5298,14 +5298,25 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
 
-    // TODO(rydmike): This property does not work due to Flutter BUG. Report it.
+    // TODO(rydmike): Monitor when dividerColor bug fix lands in stable.
     /// The color of the divider.
     ///
     /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
     /// color is used. If that is null and [useMaterial3] is true,
     /// [ColorScheme.surfaceVariant] will be used,
     /// otherwise divider will not be drawn.
+    ///
+    /// This feature does not work in Flutter 3.7 stable, at least not up until
+    /// version 3.7.6. It is caused by a bug in Flutter SDK. The issue has
+    /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
+    /// master channel, but until the fix lands in Flutter stable, this
+    /// feature does not work.
     final Color? dividerColor,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
 
     /// A temporary flag used to opt-in to Material 3 features.
     ///
@@ -5320,6 +5331,7 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
     final double weight = indicatorWeight ?? (useM3 ? 3 : 2);
     final double radius = indicatorTopRadius ?? (useM3 ? 3 : 0);
 
@@ -5337,6 +5349,15 @@ class FlexSubThemes {
       ),
     );
 
+    final Color overlayBase =
+        labelColor ?? (useM3 ? colorScheme.primary : colorScheme.onPrimary);
+
+    // TODO(rydmike): Report TabBar overlayColor bug around row 1395 in TabBar.
+    // This is a work-around to TabBar overlay theme bug in SDK.
+    final bool useCustomOverlay = tintInteract ||
+        (useM3 && labelColor != colorScheme.primary && labelColor != null) ||
+        (!useM3 && labelColor != colorScheme.onPrimary && labelColor != null);
+
     return TabBarTheme(
       labelStyle: labelStyle,
       labelColor: labelColor,
@@ -5349,37 +5370,37 @@ class FlexSubThemes {
       indicator: (indicatorWeight != null || indicatorTopRadius != null)
           ? indicator
           : null,
-      //
       dividerColor: dividerColor,
       //
-      // overlayColor:
-      //     MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      //   if (states.contains(MaterialState.selected)) {
-      //     if (states.contains(MaterialState.pressed)) {
-      //       return labelColor.withAlpha(kAlphaPressed);
-      //     }
-      //     if (states.contains(MaterialState.hovered)) {
-      //       return labelColor.withAlpha(kAlphaHover);
-      //     }
-      //     if (states.contains(MaterialState.focused)) {
-      //       return labelColor.withAlpha(kAlphaFocus);
-      //     }
-      //     return null;
-      //   }
-      //   if (states.contains(MaterialState.pressed)) {
-      //     if (tintInteract) return baseColor.withAlpha(kAlphaPressed);
-      //     return colorScheme.onSurface.withAlpha(kAlphaPressed);
-      //   }
-      //   if (states.contains(MaterialState.hovered)) {
-      //     if (tintInteract) return baseColor.withAlpha(kAlphaHover);
-      //     return colorScheme.onSurface.withAlpha(kAlphaHover);
-      //   }
-      //   if (states.contains(MaterialState.focused)) {
-      //     if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
-      //     return colorScheme.onSurface.withAlpha(kAlphaFocus);
-      //   }
-      //   return null;
-      // }),
+      overlayColor: useCustomOverlay
+          ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                if (states.contains(MaterialState.hovered)) {
+                  return overlayBase.withAlpha(kAlphaHover);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return overlayBase.withAlpha(kAlphaFocus);
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return overlayBase.withAlpha(kAlphaPressed);
+                }
+                return null;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                if (tintInteract) return overlayBase.withAlpha(kAlphaHover);
+                return colorScheme.onSurface.withAlpha(kAlphaHover);
+              }
+              if (states.contains(MaterialState.focused)) {
+                if (tintInteract) return overlayBase.withAlpha(kAlphaFocus);
+                return colorScheme.onSurface.withAlpha(kAlphaFocus);
+              }
+              if (states.contains(MaterialState.pressed)) {
+                if (tintInteract) return overlayBase.withAlpha(kAlphaPressed);
+                return overlayBase.withAlpha(kAlphaPressed);
+              }
+              return null;
+            })
+          : null,
     );
   }
 

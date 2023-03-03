@@ -6898,6 +6898,7 @@ class FlexColorScheme with Diagnosticable {
         indicatorWeight: subTheme.tabBarIndicatorWeight,
         indicatorTopRadius: subTheme.tabBarIndicatorTopRadius,
         dividerColor: subTheme.tabBarDividerColor,
+        useTintedInteraction: subTheme.interactionEffects,
         useMaterial3: useMaterial3,
       ),
       //

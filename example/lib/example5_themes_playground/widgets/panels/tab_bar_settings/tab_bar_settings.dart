@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'tab_bar_indicator_size_popup_menu.dart';
@@ -10,6 +11,12 @@ import 'tab_bar_style_popup_menu.dart';
 class TabBarSettings extends StatelessWidget {
   const TabBarSettings(this.controller, {super.key});
   final ThemeController controller;
+
+  static final Uri _fcsFlutterPr119690 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/119690',
+  );
 
   String explainTabStyle(final FlexTabBarStyle style) {
     switch (style) {
@@ -39,8 +46,8 @@ class TabBarSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-    //     color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     // Logic to enable unselected light opacity value
     final bool unselectedLightOpacityEnabled = controller.useSubThemes &&
@@ -518,18 +525,18 @@ class TabBarSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'In Flutter 3.7 the TabBar dividerColor cannot be set '
-                      'via theme in Material 3 mode',
+                      'via theme in Material 3 mode. It is a bug, that has '
+                      'been fixed in master channel via ',
                 ),
-                // LinkTextSpan(
-                //   style: linkStyle,
-                //   uri: _fcsFlutterFix117082,
-                //   text: 'FIX PR #117082.',
-                // ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterPr119690,
+                  text: 'FIX PR #119690',
+                ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. It is a bug and will be fixed. It has been left out '
-                      'in property fallthrough, it does widget and M3 '
-                      'defaults, but leaves out theme value in between them.',
+                  text: '. This feature will work when the fix lands in '
+                      'Flutter stable channel.',
                 ),
               ],
             ),
