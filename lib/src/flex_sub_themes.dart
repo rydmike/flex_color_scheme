@@ -441,7 +441,7 @@ class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedSplash(Color overlay, Color tint) =>
       // Tint color alpha blend into overlay #A5=65%
-      // Opacity of result #1E=12%, same as M3 opacity on pressed.
+      // Opacity of result #1F=12%, same as M3 opacity on pressed.
       overlay.blendAlpha(tint, kTintSplash).withAlpha(kAlphaSplash);
 
   /// Returns the FCS opinionated tinted focus color on an overlay color.
@@ -450,7 +450,7 @@ class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedFocus(Color overlay, Color tint) =>
       // Tint color alpha blend into overlay #B2=70%
-      // Opacity of result #1E=12%, same as M3 opacity on pressed.
+      // Opacity of result #1F=12%, same as M3 opacity on pressed.
       overlay.blendAlpha(tint, kTintFocus).withAlpha(kAlphaFocus);
 
   /// Returns the FCS opinionated tinted disabled color on an overlay color.
@@ -459,7 +459,7 @@ class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedDisable(Color overlay, Color tint) =>
       // Tint color alpha blend into overlay #66=40%
-      // Opacity of result #60=38%, same as M3 opacity on disable.
+      // Opacity of result #61=38%, same as M3 opacity on disable.
       overlay.blendAlpha(tint, kTintDisabled).withAlpha(kAlphaDisabled);
 
   /// An opinionated [AppBarTheme] theme.
@@ -5012,7 +5012,7 @@ class FlexSubThemes {
               }
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor)
-                    .withAlpha(0x3D);
+                    .withAlpha(kAlphaLowDisabled);
               }
               return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
             }
@@ -5027,46 +5027,48 @@ class FlexSubThemes {
             if (states.contains(MaterialState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor)
-                    .withAlpha(0x1E);
+                    .withAlpha(kAlphaVeryLowDisabled);
               }
               return isLight ? Colors.black12 : Colors.white10;
             }
             if (states.contains(MaterialState.selected)) {
+              // TODO(rydmike): Add these alpha values as constants.
               return baseColor.withAlpha(isLight ? 0x70 : 0x80);
             }
             // Opinionated color on track when not selected
             if (unselectedColored) {
+              // TODO(rydmike): Add these alpha values as constants.
               return baseColor.withAlpha(isLight ? 0x50 : 0x65);
             }
-            // This is SDK default.
-            return isLight ? const Color(0x52000000) : Colors.white30;
+            // This is SDK default, yes that value is hard coded in SDK too.
+            return isLight ? kSwitchM2LightTrackColor : Colors.white30;
           },
         ),
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
-              return baseColor.withOpacity(0.12);
+              return baseColor.withAlpha(kAlphaPressed);
             }
             if (states.contains(MaterialState.hovered)) {
-              return baseColor.withOpacity(0.08);
+              return baseColor.withAlpha(kAlphaHover);
             }
             if (states.contains(MaterialState.focused)) {
-              return baseColor.withOpacity(0.12);
+              return baseColor.withAlpha(kAlphaFocus);
             }
             return null;
           }
           if (states.contains(MaterialState.pressed)) {
-            if (tintInteract) return baseColor.withOpacity(0.12);
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintInteract) return baseColor.withAlpha(kAlphaPressed);
+            return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
           if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return baseColor.withOpacity(0.08);
-            return colorScheme.onSurface.withOpacity(0.08);
+            if (tintInteract) return baseColor.withAlpha(kAlphaHover);
+            return colorScheme.onSurface.withAlpha(kAlphaHover);
           }
           if (states.contains(MaterialState.focused)) {
-            if (tintInteract) return baseColor.withOpacity(0.12);
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
+            return colorScheme.onSurface.withAlpha(kAlphaFocus);
           }
           return null;
         }),
@@ -5085,7 +5087,7 @@ class FlexSubThemes {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, baseColor);
             }
-            return colorScheme.onSurface.withOpacity(0.38);
+            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
@@ -5117,9 +5119,9 @@ class FlexSubThemes {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor);
               }
-              return colorScheme.onSurface.withOpacity(0.12);
+              return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
             }
-            return colorScheme.surfaceVariant.withOpacity(0.12);
+            return colorScheme.surfaceVariant.withAlpha(kAlphaVeryLowDisabled);
           }
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
@@ -5135,6 +5137,7 @@ class FlexSubThemes {
           }
           if (states.contains(MaterialState.pressed)) {
             return unselectedColored
+                // TODO(rydmike): Add these alpha values as constants.
                 ? baseColor.withAlpha(isLight ? 0x33 : 0x44)
                 : colorScheme.surfaceVariant;
           }
@@ -5161,7 +5164,7 @@ class FlexSubThemes {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, baseColor);
             }
-            return colorScheme.onSurface.withOpacity(0.12);
+            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
           return colorScheme.outline;
         }),
@@ -5169,27 +5172,27 @@ class FlexSubThemes {
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
-              return baseColor.withOpacity(0.12);
+              return baseColor.withAlpha(kAlphaPressed);
             }
             if (states.contains(MaterialState.hovered)) {
-              return baseColor.withOpacity(0.08);
+              return baseColor.withAlpha(kAlphaHover);
             }
             if (states.contains(MaterialState.focused)) {
-              return baseColor.withOpacity(0.12);
+              return baseColor.withAlpha(kAlphaFocus);
             }
             return null;
           }
           if (states.contains(MaterialState.pressed)) {
-            if (tintInteract) return baseColor.withOpacity(0.12);
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintInteract) return baseColor.withAlpha(kAlphaPressed);
+            return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
           if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return baseColor.withOpacity(0.08);
-            return colorScheme.onSurface.withOpacity(0.08);
+            if (tintInteract) return baseColor.withAlpha(kAlphaHover);
+            return colorScheme.onSurface.withAlpha(kAlphaHover);
           }
           if (states.contains(MaterialState.focused)) {
-            if (tintInteract) return baseColor.withOpacity(0.12);
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
+            return colorScheme.onSurface.withAlpha(kAlphaFocus);
           }
           return null;
         }),

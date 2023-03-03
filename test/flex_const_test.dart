@@ -217,26 +217,35 @@ void main() {
     test('FCT kTintPressed is 0xA5', () {
       expect(kTintPressed, 0xA5);
     });
-    test('FCT kAlphaPressed is 0x1E', () {
-      expect(kAlphaPressed, 0x1E);
+    test('FCT kAlphaPressed is 0x1F', () {
+      expect(kAlphaPressed, 0x1F);
     });
     test('FCT kTintSplash is 0xA5', () {
       expect(kTintSplash, 0xA5);
     });
-    test('FCT kAlphaSplash is 0x1E', () {
-      expect(kAlphaSplash, 0x1E);
+    test('FCT kAlphaSplash is 0x1F', () {
+      expect(kAlphaSplash, 0x1F);
     });
     test('FCT kTintFocus is 0xB2', () {
       expect(kTintFocus, 0xB2);
     });
-    test('FCT kAlphaFocus is 0x1E', () {
-      expect(kAlphaFocus, 0x1E);
+    test('FCT kAlphaFocus is 0x1F', () {
+      expect(kAlphaFocus, 0x1F);
     });
     test('FCT kTintDisabled is 0x66', () {
       expect(kTintDisabled, 0x66);
     });
-    test('FCT kAlphaDisabled is 0x60', () {
-      expect(kAlphaDisabled, 0x60);
+    test('FCT kAlphaDisabled is 0x61', () {
+      expect(kAlphaDisabled, 0x61);
+    });
+    test('FCT kAlphaLowDisabled is 0x3D', () {
+      expect(kAlphaLowDisabled, 0x3D);
+    });
+    test('FCT kAlphaVeryLowDisabled is 0x1F', () {
+      expect(kAlphaVeryLowDisabled, 0x1F);
+    });
+    test('FCT kSwitchM2LightTrackColor is Color(0x52000000)', () {
+      expect(kSwitchM2LightTrackColor, const Color(0x52000000));
     });
   });
 }

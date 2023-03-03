@@ -442,8 +442,8 @@ const int kTintPressed = 0xA5;
 ///
 /// Same value as used on pressed opacity on controls in M3, given as alpha.
 ///
-/// Value: 0x1E = 30 = 12%
-const int kAlphaPressed = 0x1E;
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaPressed = 0x1F;
 
 /// The amount of alpha blend used on tinted splash effect that is blended
 /// into overlay color.
@@ -455,8 +455,8 @@ const int kTintSplash = 0xA5;
 ///
 /// Same value as used on pressed opacity on controls in M3, given as alpha.
 ///
-/// Value: 0x1E = 30 = 12%
-const int kAlphaSplash = 0x1E;
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaSplash = 0x1F;
 
 /// The amount of alpha blend used on tinted focus effect that is blended
 /// into overlay color.
@@ -468,8 +468,8 @@ const int kTintFocus = 0xB2;
 ///
 /// Same value as used on focused opacity on controls in M3, given as alpha.
 ///
-/// Value: 0x1E = 30 = 12%
-const int kAlphaFocus = 0x1E;
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaFocus = 0x1F;
 
 /// The amount of alpha blend used on tinted disabled effect that is blended
 /// into overlay color.
@@ -481,5 +481,28 @@ const int kTintDisabled = 0x66;
 ///
 /// Same value as used on focused opacity on controls in M3, given as alpha.
 ///
-/// Value: 0x60 = 96 = 38%
-const int kAlphaDisabled = 0x60;
+/// Value: 0x61 = 97 = 38.04%
+const int kAlphaDisabled = 0x61;
+
+/// An optional lower amount of alpha based opacity used on tinted disabled
+/// effect.
+///
+/// This is used on M2 switch thumb color.
+///
+/// Value: 0x3D = 61 = 24%
+const int kAlphaLowDisabled = 0x3D;
+
+/// An optional lower amount of alpha based opacity used on tinted disabled
+/// effect.
+///
+/// This is used on disabled M2 switch track color, and M3 disabled track and
+/// disabled trackOutline color.
+///
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaVeryLowDisabled = 0x1F;
+
+/// Default Color of disabled M2 Switch track color in M2
+///
+/// This is hard coded in the SDK, but adding a const for it for easier
+/// mod if it would ever change.
+const Color kSwitchM2LightTrackColor = Color(0x52000000);

@@ -4393,17 +4393,57 @@ void main() {
         ),
       );
     });
-    test('FST1.19-light-states: Does Switch have right material states', () {
+    test('FST1.19-light-states: Does Switch have right M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
       // Disabled colors
+      // Disabled thumb colors
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
             .thumbColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme).thumbColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).thumbColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).thumbColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+                  colorScheme.onSurface, colorScheme.primary)
+              .withAlpha(kAlphaLowDisabled),
+        ),
+      );
+      // Disabled track colors
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).trackColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+                  colorScheme.onSurface, colorScheme.primary)
+              .withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
@@ -4424,6 +4464,72 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary.withAlpha(0x70)),
       );
+      // Interaction states - Using test with Opacity based SDK values on
+      // purpose, to confirm results match alpha based ones used by FCS.
+      // Non tinted interactions
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      // Non tinted interactions - selected
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      // Tinted interactions
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+
       // Default states
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
@@ -4444,7 +4550,7 @@ void main() {
           colorScheme: colorScheme,
           unselectedIsColored: false,
         ).trackColor!.resolve(<MaterialState>{}),
-        equals(const Color(0x52000000)),
+        equals(kSwitchM2LightTrackColor),
       );
     });
 
@@ -4515,7 +4621,7 @@ void main() {
         ),
       );
     });
-    test('FST1.19-dark-states: Does Switch have right material states', () {
+    test('FST1.19-dark-states: Does Switch have right M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
@@ -4526,6 +4632,33 @@ void main() {
             .thumbColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(Colors.grey.shade800),
+      );
+      expect(
+        FlexSubThemes.switchTheme(colorScheme: colorScheme).thumbColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(Colors.grey.shade800),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).thumbColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).thumbColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+                  colorScheme.onSurface, colorScheme.primary)
+              .withAlpha(kAlphaLowDisabled),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
@@ -4652,12 +4785,27 @@ void main() {
       expect(
         switchTheme.thumbColor!.resolve(
             <MaterialState>{MaterialState.disabled, MaterialState.selected}),
-        equals(colorScheme.surface.withOpacity(1.0)),
+        equals(colorScheme.surface),
       );
       expect(
         switchTheme.thumbColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).thumbColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
       );
       // Disabled track colors
       expect(
@@ -4670,6 +4818,35 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.surfaceVariant.withOpacity(0.12)),
       );
+      expect(
+        switchTheme.trackOutlineColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
+
       // Selected thumb colors
       expect(
         switchTheme.thumbColor!.resolve(
@@ -4713,6 +4890,149 @@ void main() {
         switchTheme.thumbColor!.resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.onSurfaceVariant),
       );
+
+      // Interaction states - Using test with Opacity based SDK values on
+      // purpose, to confirm results match alpha based ones used by FCS.
+      // Non tinted interactions
+      // Overlay colors
+      expect(
+        switchTheme.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        switchTheme.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withOpacity(0.08)),
+      );
+      expect(
+        switchTheme.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      // trackColor
+      expect(
+        switchTheme.trackColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.surfaceVariant),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.surfaceVariant),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.surfaceVariant),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.surfaceVariant),
+      );
+
+      expect(
+        switchTheme.trackColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primary),
+      );
+      // Non tinted interactions - selected
+      expect(
+        switchTheme.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        switchTheme.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        switchTheme.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        switchTheme.trackColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Tinted interactions
+      // Overlay color
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+
+      // Unselected is colored
+      // trackColor color
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withAlpha(0x33)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withAlpha(0x33)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withAlpha(0x33)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x33)),
+      );
+
       // Default states
       expect(
         switchTheme.thumbColor!.resolve(<MaterialState>{}),
@@ -4721,6 +5041,10 @@ void main() {
       expect(
         switchTheme.trackColor!.resolve(<MaterialState>{}),
         equals(colorScheme.surfaceVariant),
+      );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -4731,6 +5055,7 @@ void main() {
         ).trackColor!.resolve(<MaterialState>{}),
         equals(colorScheme.surfaceVariant),
       );
+      // Default state for trackColor when unselectedIsColored, is true
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -4961,6 +5286,44 @@ void main() {
             .fillColor!
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
+      );
+      // Unselected is colored
+      // trackColor color
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withAlpha(0x44)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withAlpha(0x44)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withAlpha(0x44)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                unselectedIsColored: true,
+                useMaterial3: true)
+            .trackColor!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0x44)),
       );
       // Default states
       expect(
