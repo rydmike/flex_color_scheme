@@ -14,6 +14,7 @@ class SliderSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
             ? controller.useMaterial3
@@ -61,7 +62,8 @@ class SliderSettings extends StatelessWidget {
         ),
         SwitchListTile(
           title: const Text('Tinted value indicator'),
-          subtitle: const Text('Uses scrim and opacity, makes it darker than '
+          subtitle: Text('Uses scrim and opacity, makes it '
+              '${isLight ? 'darker' : 'lighter'} than '
               'selected color, but with some opacity. The value indicator by '
               'default only shows on a stepped Slider'),
           value: controller.sliderValueTinted &&
