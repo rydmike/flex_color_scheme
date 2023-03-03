@@ -431,36 +431,36 @@ class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedHighlight(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #A5 65%
-      // Opacity of result #14 8%, same as M3 opacity on hover.
-      overlay.blendAlpha(tint, 0xA5).withAlpha(0x14);
+      // Tint color alpha blend into overlay #A5=65%
+      // Opacity of result #14=8%, same as M3 opacity on hover.
+      overlay.blendAlpha(tint, kTintHighlight).withAlpha(kAlphaHighlight);
 
   /// Returns the FCS opinionated tinted splash color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedSplash(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #B2 70%
-      // Opacity of result #1E 12%, same as M3 opacity on pressed.
-      overlay.blendAlpha(tint, 0xA5).withAlpha(0x1E); // 12%
+      // Tint color alpha blend into overlay #A5=65%
+      // Opacity of result #1E=12%, same as M3 opacity on pressed.
+      overlay.blendAlpha(tint, kTintSplash).withAlpha(kAlphaSplash);
 
   /// Returns the FCS opinionated tinted focus color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedFocus(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #B2 70%
-      // Opacity of result #1E 12%, same as M3 opacity on pressed.
-      overlay.blendAlpha(tint, 0xB2).withAlpha(0x1E);
+      // Tint color alpha blend into overlay #B2=70%
+      // Opacity of result #1E=12%, same as M3 opacity on pressed.
+      overlay.blendAlpha(tint, kTintFocus).withAlpha(kAlphaFocus);
 
   /// Returns the FCS opinionated tinted disabled color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedDisable(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #66 40%
-      // Opacity of result #60 38%, same as M3 opacity on disable.
-      overlay.blendAlpha(tint, 0x66).withAlpha(0x60);
+      // Tint color alpha blend into overlay #66=40%
+      // Opacity of result #60=38%, same as M3 opacity on disable.
+      overlay.blendAlpha(tint, kTintDisabled).withAlpha(kAlphaDisabled);
 
   /// An opinionated [AppBarTheme] theme.
   ///

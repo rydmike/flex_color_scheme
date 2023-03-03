@@ -195,5 +195,38 @@ void main() {
     test('FCT kUnselectedAlphaBlend is 0xA5', () {
       expect(kUnselectedAlphaBlend, 0xA5);
     });
+    //
+    // New FCS V7 constants
+    //
+    test('FCT kTintHover is 0x99', () {
+      expect(kTintHover, 0x99);
+    });
+    test('FCT kAlphaHover is 0x14', () {
+      expect(kAlphaHover, 0x14);
+    });
+    test('FCT kTintHighlight is 0xA5', () {
+      expect(kTintHighlight, 0xA5);
+    });
+    test('FCT kAlphaHighlight is 0x14', () {
+      expect(kAlphaHighlight, 0x14);
+    });
+    test('FCT kTintSplash is 0xA5', () {
+      expect(kTintSplash, 0xA5);
+    });
+    test('FCT kAlphaSplash is 0x1E', () {
+      expect(kAlphaSplash, 0x1E);
+    });
+    test('FCT kTintFocus is 0xB2', () {
+      expect(kTintFocus, 0xB2);
+    });
+    test('FCT kAlphaFocus is 0x1E', () {
+      expect(kAlphaFocus, 0x1E);
+    });
+    test('FCT kTintDisabled is 0x66', () {
+      expect(kTintDisabled, 0x66);
+    });
+    test('FCT kAlphaDisabled is 0x60', () {
+      expect(kAlphaDisabled, 0x60);
+    });
   });
 }
