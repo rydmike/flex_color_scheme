@@ -1322,9 +1322,6 @@ class FlexSubThemes {
               return isLight ? Colors.grey.shade200 : Colors.grey.shade900;
             }
             if (states.contains(MaterialState.selected)) {
-              if (states.contains(MaterialState.error)) {
-                return colorScheme.onError;
-              }
               return onBaseColor;
             }
             return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
@@ -1381,7 +1378,8 @@ class FlexSubThemes {
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.error)) {
+          // Error state only exists in M3 mode.
+          if (states.contains(MaterialState.error) && useM3) {
             if (states.contains(MaterialState.pressed)) {
               return colorScheme.error.withOpacity(0.12);
             }
@@ -4950,7 +4948,6 @@ class FlexSubThemes {
     ///
     /// If false, it is grey like in Flutter SDK.
     ///
-    /// Defaults to false.
     /// If undefined, defaults to false.
     final bool? unselectedIsColored,
 
@@ -4970,8 +4967,10 @@ class FlexSubThemes {
     /// properties are undefined, if false defaults will use FlexColorScheme's
     /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
     // Get colorScheme brightness.
@@ -4998,6 +4997,7 @@ class FlexSubThemes {
                 : baseSchemeColor ?? SchemeColor.primary),
         colorScheme);
 
+    // Material 2 style Switch
     if (!useM3) {
       return SwitchThemeData(
         splashRadius: splashRadius,
@@ -5071,7 +5071,9 @@ class FlexSubThemes {
           return null;
         }),
       );
-    } else {
+    }
+    // Material 3 style Switch
+    else {
       return SwitchThemeData(
         splashRadius: splashRadius,
         thumbColor:

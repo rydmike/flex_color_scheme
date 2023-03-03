@@ -4332,7 +4332,10 @@ void main() {
     test(
         'FST1.19-light: GIVEN a light default FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -4360,12 +4363,41 @@ void main() {
                 return colorScheme.primary.withAlpha(0x30);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return null;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return null;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.19-light-states: Does Switch have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       // Disabled colors
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
@@ -4419,9 +4451,15 @@ void main() {
     test(
         'FST1.19-dark: GIVEN a dark default FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
             thumbColor: MaterialStateProperty.resolveWith<Color>(
@@ -4447,12 +4485,41 @@ void main() {
                 return colorScheme.secondary.withAlpha(0x25);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return null;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return null;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.19-dark-states: Does Switch have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       // Disabled colors
       expect(
         FlexSubThemes.switchTheme(colorScheme: colorScheme)
@@ -4505,7 +4572,10 @@ void main() {
     test(
         'FST1.19-custom-light: GIVEN a light custom FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -4539,12 +4609,41 @@ void main() {
                 return colorScheme.tertiary.withAlpha(0x30);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return null;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return null;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.19-light-M3-states: Does Switch have right M3 states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final SwitchThemeData switchTheme = FlexSubThemes.switchTheme(
         colorScheme: colorScheme,
         useMaterial3: true,
@@ -4647,9 +4746,15 @@ void main() {
     test(
         'FST1.20-light: GIVEN a light default FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
             checkColor: MaterialStateProperty.resolveWith<Color>(
@@ -4675,12 +4780,41 @@ void main() {
                 return colorScheme.primary.withAlpha(0xDD);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.20-light-states: Does CheckBox have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       // Disabled colors
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
@@ -4715,7 +4849,8 @@ void main() {
         equals(Colors.grey.shade50),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+        FlexSubThemes.checkboxTheme(
+                colorScheme: colorScheme, unselectedIsColored: true)
             .fillColor!
             .resolve(<MaterialState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
@@ -4733,9 +4868,14 @@ void main() {
     test(
         'FST1.20-dark: GIVEN a dark default FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.checkboxTheme(
+                colorScheme: colorScheme, unselectedIsColored: true)
+            .toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
             checkColor: MaterialStateProperty.resolveWith<Color>(
@@ -4761,18 +4901,47 @@ void main() {
                 return colorScheme.primary.withAlpha(0xDD);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.20-dark-states: Does CheckBox have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       // Disabled colors
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(Colors.grey.shade600),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).checkColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade900),
       );
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
@@ -4801,16 +4970,17 @@ void main() {
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<MaterialState>{}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).fillColor!.resolve(<MaterialState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
-          unselectedIsColored: false,
+          // unselectedIsColored: false, Is false by default.
         ).fillColor!.resolve(<MaterialState>{}),
         equals(Colors.white70),
       );
@@ -4818,7 +4988,10 @@ void main() {
     test(
         'FST1.20-custom-light: GIVEN a light custom FlexSubTheme.checkboxTheme '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
@@ -4851,6 +5024,32 @@ void main() {
                 return Colors.black54;
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.tertiary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.tertiary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.tertiary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
+              },
+            ),
           ).toString(),
         ),
       );
@@ -4861,7 +5060,10 @@ void main() {
     test(
         'FST1.21-light: GIVEN a light default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -4878,12 +5080,41 @@ void main() {
                 return colorScheme.primary.withAlpha(0xDD);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.21-light-states: Does CheckBox have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       // Disabled colors
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
@@ -4900,16 +5131,17 @@ void main() {
       );
       // Default states
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<MaterialState>{}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).fillColor!.resolve(<MaterialState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
-          unselectedIsColored: false,
+          // unselectedIsColored: false,  <- False by default
         ).fillColor!.resolve(<MaterialState>{}),
         equals(Colors.black54),
       );
@@ -4918,7 +5150,10 @@ void main() {
     test(
         'FST1.21-dark: GIVEN a dark default FlexSubTheme.radioTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -4935,12 +5170,41 @@ void main() {
                 return colorScheme.primary.withAlpha(0xDD);
               },
             ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
+              },
+            ),
           ).toString(),
         ),
       );
     });
     test('FST1.21-dark-states: Does CheckBox have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       // Disabled colors
       expect(
         FlexSubThemes.radioTheme(colorScheme: colorScheme)
@@ -4957,16 +5221,17 @@ void main() {
       );
       // Default states
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<MaterialState>{}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).fillColor!.resolve(<MaterialState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
-          unselectedIsColored: false,
+          // unselectedIsColored: false, <- False by default
         ).fillColor!.resolve(<MaterialState>{}),
         equals(Colors.white70),
       );
@@ -4974,7 +5239,10 @@ void main() {
     test(
         'FST1.21-custom-light: GIVEN a light custom FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
@@ -4994,6 +5262,32 @@ void main() {
                   return colorScheme.tertiary;
                 }
                 return Colors.black54;
+              },
+            ),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSurface.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.primary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.primary.withOpacity(0.12);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  return colorScheme.primary.withOpacity(0.12);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return colorScheme.onSurface.withOpacity(0.08);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  return colorScheme.onSurface.withOpacity(0.12);
+                }
+                return Colors.transparent;
               },
             ),
           ).toString(),

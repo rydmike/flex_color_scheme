@@ -123,6 +123,9 @@ void main() {
     test('FCT kThinBorderWidth is 1', () {
       expect(kThinBorderWidth, 1);
     });
+    //
+    // Alpha, opacity and blend values
+    //
     test('FCT kFillColorAlphaLight is 0x0D', () {
       expect(kFillColorAlphaLight, 0x0D);
     });
@@ -195,6 +198,7 @@ void main() {
     test('FCT kUnselectedAlphaBlend is 0xA5', () {
       expect(kUnselectedAlphaBlend, 0xA5);
     });
+    // TODO(rydmike): Remove old constants when migration to new done.
     //
     // New FCS V7 constants
     //
@@ -209,6 +213,12 @@ void main() {
     });
     test('FCT kAlphaHighlight is 0x14', () {
       expect(kAlphaHighlight, 0x14);
+    });
+    test('FCT kTintPressed is 0xA5', () {
+      expect(kTintPressed, 0xA5);
+    });
+    test('FCT kAlphaPressed is 0x1E', () {
+      expect(kAlphaPressed, 0x1E);
     });
     test('FCT kTintSplash is 0xA5', () {
       expect(kTintSplash, 0xA5);
