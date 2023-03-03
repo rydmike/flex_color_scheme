@@ -1277,12 +1277,12 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? unselectedIsColored,
 
-    /// Defines it the theme uses on tinted interaction effects.
+    /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
-    /// Defines it the theme uses on tinted disabled color.
+    /// Defines if the theme uses tinted disabled color.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
@@ -4424,12 +4424,12 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? unselectedIsColored,
 
-    /// Defines it the theme uses on tinted interaction effects.
+    /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
-    /// Defines it the theme uses on tinted disabled color.
+    /// Defines if the theme uses tinted disabled color.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
@@ -5006,12 +5006,12 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? unselectedIsColored,
 
-    /// Defines it the theme uses on tinted interaction effects.
+    /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
-    /// Defines it the theme uses on tinted disabled color.
+    /// Defines if the theme uses tinted disabled color.
     ///
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
