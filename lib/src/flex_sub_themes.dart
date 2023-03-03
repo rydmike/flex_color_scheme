@@ -620,16 +620,24 @@ class FlexSubThemes {
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
 
-    /// Set to true to opt in on Material 3 styled chips.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
-    /// If false widgets will use more opinionated FlexColorScheme defaults.
-    final bool useMaterial3 = false,
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Effective color, if null, keep null for M3 defaults via widget.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color? effectiveColor =
-        backgroundSchemeColor == null && useMaterial3 ? null : backgroundColor;
+        backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 
     return BottomAppBarTheme(
       color: effectiveColor,
@@ -1285,10 +1293,13 @@ class FlexSubThemes {
     /// properties are undefined, if false defaults will use FlexColorScheme's
     /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
@@ -1297,7 +1308,6 @@ class FlexSubThemes {
     final bool unselectedColored = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
-    final bool useM3 = useMaterial3 ?? false;
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
@@ -1488,9 +1498,16 @@ class FlexSubThemes {
     /// [FilterChip], [InputChip], [RawChip].
     final Color? surfaceTintColor,
 
-    /// Set to true to opt in on Material 3 styled chips.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
-    /// If false widgets will use more opinionated FlexColorScheme defaults.
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
     // Function used to increase icon color for selections resulting in poor
@@ -1513,6 +1530,7 @@ class FlexSubThemes {
 
     // Used to toggle between different defaults from M2 and M3.
     final bool useM3 = useMaterial3 ?? false;
+
     // Flag for not using any defined color values in M3 mode, but instead
     // falling back to M3 theme defaults, when using Material 3.
     // We do this when no Scheme colors are selected to get the exact M3
@@ -1760,11 +1778,19 @@ class FlexSubThemes {
     /// added later.
     final double? width,
 
-    /// Set to true to opt in on Material 3 styled chips.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
-    /// If false widgets will use more opinionated FlexColorScheme defaults.
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
@@ -1775,14 +1801,14 @@ class FlexSubThemes {
       width: width,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      shape: (useMaterial3 ?? false) && radius == null
+      shape: useM3 && radius == null
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadiusDirectional.horizontal(
                 end: Radius.circular(radius ?? kDrawerRadius),
               ),
             ),
-      endShape: (useMaterial3 ?? false) && radius == null
+      endShape: useM3 && radius == null
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadiusDirectional.horizontal(
@@ -1915,28 +1941,31 @@ class FlexSubThemes {
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated defaults values.
+    /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     // On color logic with M3 reversal of roles.
     final Color onBaseColor = onBaseSchemeColor == null
-        ? useMaterial3
+        ? useM3
             ? schemeColor(SchemeColor.surface, colorScheme)
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
     // We are using FCS M2 buttons, styled in M3 fashion by FCS.
-    if (!useMaterial3) {
+    if (!useM3) {
       return ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           minimumSize: minButtonSize ?? kButtonMinSize,
@@ -2472,16 +2501,19 @@ class FlexSubThemes {
     /// Defaults to true.
     final bool tintedDisabled = true,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated defaults values.
+    /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Used color scheme is for dark mode.
     final bool isDark = colorScheme.brightness == Brightness.dark;
 
@@ -2496,7 +2528,7 @@ class FlexSubThemes {
 
     // Get effective alpha value for background color.
     final int effectiveAlpha = backgroundAlpha?.clamp(0, 255) ??
-        (useMaterial3
+        (useM3
             ? 0xFF
             : isDark
                 ? kFillColorAlphaDark
@@ -2513,15 +2545,14 @@ class FlexSubThemes {
                     .withAlpha(0x08)
                 : colorScheme.onSurface.withOpacity(0.04); // M3 spec
           }
-          return baseSchemeColor == null && useMaterial3
+          return baseSchemeColor == null && useM3
               ? colorScheme.surfaceVariant.withAlpha(effectiveAlpha)
               : baseColor.withAlpha(effectiveAlpha);
         });
 
     // PrefixIconColor
-    final SchemeColor prefixFallback = useMaterial3
-        ? SchemeColor.onSurface
-        : baseSchemeColor ?? SchemeColor.primary;
+    final SchemeColor prefixFallback =
+        useM3 ? SchemeColor.onSurface : baseSchemeColor ?? SchemeColor.primary;
     final Color prefixIconColor =
         schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
 
@@ -2533,15 +2564,15 @@ class FlexSubThemes {
 
     final Color enabledBorder = unfocusedBorderIsColored
         ? borderColor.withAlpha(kEnabledBorderAlpha)
-        : useMaterial3
+        : useM3
             ? borderType == FlexInputBorderType.underline
                 ? colorScheme.onSurfaceVariant
                 : colorScheme.outline
             : colorScheme.onSurface.withOpacity(0.38);
 
     // Default border radius.
-    final double effectiveRadius = radius ??
-        (useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+    final double effectiveRadius =
+        radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
 
     // Default outline widths.
     final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
@@ -2590,7 +2621,7 @@ class FlexSubThemes {
               : TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
         }
         return TextStyle(
-            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
       }),
       floatingLabelStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -2602,7 +2633,7 @@ class FlexSubThemes {
           if (states.contains(MaterialState.hovered)) {
             return
                 // TODO(rydmike): Default M3, excluding it. FCS opinionated.
-                // useMaterial3
+                // useM3
                 //   ? TextStyle(color: colorScheme.onErrorContainer)
                 //   :
                 TextStyle(
@@ -2626,12 +2657,12 @@ class FlexSubThemes {
                       .withAlpha(kDisabledBackgroundAlpha),
                 )
               : TextStyle(
-                  color: useMaterial3
+                  color: useM3
                       ? colorScheme.onSurface.withOpacity(0.38)
                       : disabledColor);
         }
         return TextStyle(
-            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
       }),
       helperStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -2643,12 +2674,12 @@ class FlexSubThemes {
                       .withAlpha(kDisabledBackgroundAlpha),
                 )
               : TextStyle(
-                  color: useMaterial3
+                  color: useM3
                       ? colorScheme.onSurface.withOpacity(0.38)
                       : Colors.transparent);
         }
         return TextStyle(
-            color: useMaterial3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
       }),
       hintStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -2671,9 +2702,9 @@ class FlexSubThemes {
               : colorScheme.onSurface.withOpacity(0.38);
         }
         if (states.contains(MaterialState.focused)) {
-          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+          return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
-        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
       prefixIconColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -2687,7 +2718,7 @@ class FlexSubThemes {
         if (states.contains(MaterialState.focused)) {
           return prefixIconColor;
         }
-        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
       suffixIconColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -2706,9 +2737,9 @@ class FlexSubThemes {
               : colorScheme.onSurface.withOpacity(0.38);
         }
         if (states.contains(MaterialState.focused)) {
-          return useMaterial3 ? colorScheme.onSurfaceVariant : baseColor;
+          return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
-        return useMaterial3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
       filled: filled,
       fillColor: usedFillColor,
@@ -2760,7 +2791,7 @@ class FlexSubThemes {
         borderSide: focusedHasBorder
             ? BorderSide(
                 color: colorScheme.error
-                    .withAlpha(useMaterial3 ? 0xFF : kEnabledBorderAlpha),
+                    .withAlpha(useM3 ? 0xFF : kEnabledBorderAlpha),
                 width: unfocusedWidth,
               )
             : BorderSide.none,
@@ -3229,7 +3260,9 @@ class FlexSubThemes {
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationBar]
     /// theme when its properties are undefined (null), instead of using
@@ -3265,6 +3298,8 @@ class FlexSubThemes {
     /// also applies to undefined color inputs.
     final bool useFlutterDefaults = false,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
+
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultTextStyle = labelTextStyle == null &&
@@ -3325,7 +3360,7 @@ class FlexSubThemes {
       height: height,
       elevation: elevation,
       backgroundColor: backgroundSchemeColor == null
-          ? useFlutterDefaults || useMaterial3
+          ? useFlutterDefaults || useM3
               ? null
               : backgroundColor
           : backgroundColor,
@@ -3804,7 +3839,9 @@ class FlexSubThemes {
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationRail]
     /// theme when its properties are undefined (null) instead of using
@@ -3842,6 +3879,8 @@ class FlexSubThemes {
     /// Defaults to false.
     final bool useFlutterDefaults = false,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
+
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultTextStyle = labelTextStyle == null &&
@@ -3896,19 +3935,19 @@ class FlexSubThemes {
     final Color effectiveIndicatorColor = schemeColor(
             indicatorSchemeColor ??
                 (useFlutterDefaults
-                    ? useMaterial3
+                    ? useM3
                         ? SchemeColor.secondaryContainer
                         : SchemeColor.secondary
                     : SchemeColor.primary),
             colorScheme)
         .withAlpha(indicatorAlpha ??
-            ((useMaterial3 && useFlutterDefaults)
+            ((useM3 && useFlutterDefaults)
                 ? 0xFF
                 : kNavigationBarIndicatorAlpha));
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator =
-        (useMaterial3 && useIndicator == null) || (useIndicator ?? false);
+        (useM3 && useIndicator == null) || (useIndicator ?? false);
 
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
@@ -4055,17 +4094,21 @@ class FlexSubThemes {
     /// properties are undefined, if false defaults will use FlexColorScheme's
     /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
+
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Outline color logic with different M2 and M3 defaults.
     final Color outlineColor = outlineSchemeColor == null
-        ? useMaterial3
+        ? useM3
             ? schemeColor(SchemeColor.outline, colorScheme)
             : baseColor
         : schemeColor(outlineSchemeColor, colorScheme);
@@ -4073,10 +4116,10 @@ class FlexSubThemes {
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
     final double pressedWidth =
-        pressedOutlineWidth ?? (useMaterial3 ? 1 : kThickBorderWidth);
+        pressedOutlineWidth ?? (useM3 ? 1 : kThickBorderWidth);
 
     // We are using FCS M2 buttons, styled in M3 fashion.
-    if (!useMaterial3) {
+    if (!useM3) {
       return OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           minimumSize: minButtonSize ?? kButtonMinSize,
@@ -4397,10 +4440,13 @@ class FlexSubThemes {
     /// properties are undefined, if false defaults will use FlexColorScheme's
     /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
@@ -4409,7 +4455,6 @@ class FlexSubThemes {
     final bool unselectedColored = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
-    final bool useM3 = useMaterial3 ?? false;
 
     return RadioThemeData(
       splashRadius: splashRadius,
@@ -4715,9 +4760,19 @@ class FlexSubThemes {
     /// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
     final TextStyle? valueIndicatorTextStyle,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
-    final bool useMaterial3 = false,
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
@@ -4726,7 +4781,7 @@ class FlexSubThemes {
 
     SliderComponentShape effectiveIndicatorShape() {
       if (valueIndicatorType == null) {
-        return useMaterial3
+        return useM3
             ? const DropSliderValueIndicatorShape()
             : const RectangularSliderValueIndicatorShape();
       } else {
@@ -4973,6 +5028,8 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
+
     // Get colorScheme brightness.
     final bool isLight = colorScheme.brightness == Brightness.light;
     // Get selected base color, and its pair, defaults to primary and onPrimary.
@@ -4985,7 +5042,6 @@ class FlexSubThemes {
     final bool unselectedColored = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
-    final bool useM3 = useMaterial3 ?? false;
 
     // Get selected thumb color, and its pair, defaults to
     // M2: primary and onPrimary.
@@ -5251,14 +5307,24 @@ class FlexSubThemes {
     /// otherwise divider will not be drawn.
     final Color? dividerColor,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
-    final bool useMaterial3 = false,
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
-    final double weight = indicatorWeight ?? (useMaterial3 ? 3 : 2);
-    final double radius = indicatorTopRadius ?? (useMaterial3 ? 3 : 0);
+    final bool useM3 = useMaterial3 ?? false;
+    final double weight = indicatorWeight ?? (useM3 ? 3 : 2);
+    final double radius = indicatorTopRadius ?? (useM3 ? 3 : 0);
 
     final Decoration indicator = UnderlineTabIndicator(
-      borderRadius: useMaterial3 || indicatorWeight != null
+      borderRadius: useM3 || indicatorWeight != null
           ? BorderRadius.only(
               topLeft: Radius.circular(radius),
               topRight: Radius.circular(radius),
@@ -5267,7 +5333,7 @@ class FlexSubThemes {
       borderSide: BorderSide(
         width: weight,
         color: indicatorColor ??
-            (useMaterial3 ? colorScheme.primary : colorScheme.onSurface),
+            (useM3 ? colorScheme.primary : colorScheme.onSurface),
       ),
     );
 
@@ -5278,13 +5344,42 @@ class FlexSubThemes {
       unselectedLabelColor: unselectedLabelColor,
       //
       indicatorSize: indicatorSize ??
-          (useMaterial3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
+          (useM3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
       indicatorColor: indicatorColor,
       indicator: (indicatorWeight != null || indicatorTopRadius != null)
           ? indicator
           : null,
       //
       dividerColor: dividerColor,
+      //
+      // overlayColor:
+      //     MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+      //   if (states.contains(MaterialState.selected)) {
+      //     if (states.contains(MaterialState.pressed)) {
+      //       return labelColor.withAlpha(kAlphaPressed);
+      //     }
+      //     if (states.contains(MaterialState.hovered)) {
+      //       return labelColor.withAlpha(kAlphaHover);
+      //     }
+      //     if (states.contains(MaterialState.focused)) {
+      //       return labelColor.withAlpha(kAlphaFocus);
+      //     }
+      //     return null;
+      //   }
+      //   if (states.contains(MaterialState.pressed)) {
+      //     if (tintInteract) return baseColor.withAlpha(kAlphaPressed);
+      //     return colorScheme.onSurface.withAlpha(kAlphaPressed);
+      //   }
+      //   if (states.contains(MaterialState.hovered)) {
+      //     if (tintInteract) return baseColor.withAlpha(kAlphaHover);
+      //     return colorScheme.onSurface.withAlpha(kAlphaHover);
+      //   }
+      //   if (states.contains(MaterialState.focused)) {
+      //     if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
+      //     return colorScheme.onSurface.withAlpha(kAlphaFocus);
+      //   }
+      //   return null;
+      // }),
     );
   }
 
@@ -5340,22 +5435,25 @@ class FlexSubThemes {
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated defaults values.
+    /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // We are using FCS M2 buttons, styled in M3 fashion.
-    if (!useMaterial3) {
+    if (!useM3) {
       return TextButtonThemeData(
         style: TextButton.styleFrom(
           minimumSize: minButtonSize ?? kButtonMinSize,
@@ -5653,24 +5751,26 @@ class FlexSubThemes {
     /// being used, which is same as null default in ThemeData.
     final VisualDensity? visualDensity,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
+    /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated defaults values.
+    /// own opinionated default values.
     ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
+    /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
-    final bool useMaterial3 = false,
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color unselectedColor =
         schemeColor(unselectedSchemeColor ?? baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
-    final SchemeColor borderDefault =
-        useMaterial3 ? SchemeColor.outline : baseScheme;
+    final SchemeColor borderDefault = useM3 ? SchemeColor.outline : baseScheme;
     final Color borderColor =
         schemeColor(borderSchemeColor ?? borderDefault, colorScheme);
 
@@ -5678,7 +5778,7 @@ class FlexSubThemes {
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
     // Effective border width.
     final double effectiveWidth =
-        borderWidth ?? (useMaterial3 ? 1.0 : kThinBorderWidth);
+        borderWidth ?? (useM3 ? 1.0 : kThinBorderWidth);
     // Effective visual density.
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
@@ -5687,10 +5787,9 @@ class FlexSubThemes {
       selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
       color: unselectedColor,
       fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      borderColor: useMaterial3
-          ? borderColor
-          : borderColor.withAlpha(kEnabledBorderAlpha),
-      selectedBorderColor: useMaterial3
+      borderColor:
+          useM3 ? borderColor : borderColor.withAlpha(kEnabledBorderAlpha),
+      selectedBorderColor: useM3
           ? borderColor
           : borderColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
       hoverColor: baseColor

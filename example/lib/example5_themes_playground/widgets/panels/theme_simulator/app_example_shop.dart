@@ -1160,7 +1160,7 @@ List<Product> products = <Product>[
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
-    name: "Columbia Ii Jacket",
+    name: '"Columbia Ii Jacket',
     imageUrls: <String>[
       'https://m.media-amazon.com/images/I/6142UY8xXeS.jpg',
       'https://m.media-amazon.com/images/I/61cdxXOfjvS.jpg',
