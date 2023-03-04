@@ -3831,7 +3831,9 @@ void main() {
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
-        FlexSubThemes.floatingActionButtonTheme(),
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: const ColorScheme.light(),
+        ),
         equals(
           const FloatingActionButtonThemeData(
             shape: RoundedRectangleBorder(
@@ -3847,6 +3849,7 @@ void main() {
         'with same values', () {
       expect(
         FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: const ColorScheme.light(),
           radius: 30,
         ),
         equals(
@@ -3864,6 +3867,7 @@ void main() {
         'with same Shape', () {
       expect(
         FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: const ColorScheme.light(),
           radius: 30,
           alwaysCircular: true,
         ),
@@ -3876,14 +3880,18 @@ void main() {
         'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
           radius: 30,
           backgroundSchemeColor: SchemeColor.primaryContainer,
         ),
         equals(
-          const FloatingActionButtonThemeData(
-            shape: RoundedRectangleBorder(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.primaryContainer,
+            foregroundColor: colorScheme.onPrimaryContainer,
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
           ),
