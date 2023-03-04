@@ -417,42 +417,79 @@ class FlexSubThemes {
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
       schemeColor(onSchemeColor(value), colorScheme);
 
+  /// A factor used on by tinted interactions to increase the alpha based
+  /// opacity Material 3 baseline based opacity values for hover, focus and
+  /// splash.
+  ///
+  /// Used by some component theming. The factor is different depending on
+  /// if the color is light or dark. This factor increase the opacity of
+  /// the overlay color compared to the opacity used by M3 default. It only
+  /// works because the overlay color is also alpha blend colored. This extra
+  /// factor is used for interaction effects on colored widgets, when
+  /// using interactions on surface colors factor 1 is used.
+  static double _tintAlphaFactor(Color color, [bool surfaceMode = false]) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+          ? surfaceMode
+              ? 1.5
+              : 3.0
+          : surfaceMode
+              ? 3
+              : 1.5;
+
   /// Returns the FCS opinionated tinted hover color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedHover(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #99=60%
-      // Opacity of result #14=8%, same as M3 opacity on hover.
-      overlay.blendAlpha(tint, kTintHover).withAlpha(kAlphaHover);
+  static Color tintedHover(Color overlay, Color tint, [double factor = 1]) {
+    // Starting kAlphaHover 0x14=20=8%, same as M3 opacity on hover.
+    final int usedAlpha = (kAlphaHover * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintHover  0x99=153= 60%
+    return overlay.blendAlpha(tint, kTintHover).withAlpha(usedAlpha);
+  }
 
   /// Returns the FCS opinionated tinted highlight color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedHighlight(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #A5=65%
-      // Opacity of result #14=8%, same as M3 opacity on hover.
-      overlay.blendAlpha(tint, kTintHighlight).withAlpha(kAlphaHighlight);
+  static Color tintedHighlight(Color overlay, Color tint, [double factor = 1]) {
+    // Starting kAlphaHighlight 0x14 = 20 = 8%, same as M3 opacity on hover.
+    final int usedAlpha = (kAlphaHighlight * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintHighlight 0xA5 = 165 = 65%
+    return overlay.blendAlpha(tint, kTintHighlight).withAlpha(usedAlpha);
+  }
 
   /// Returns the FCS opinionated tinted splash color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedSplash(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #A5=65%
-      // Opacity of result #1F=12%, same as M3 opacity on pressed.
-      overlay.blendAlpha(tint, kTintSplash).withAlpha(kAlphaSplash);
-  // overlay.blendAlpha(tint, 165).withAlpha(62);
+  static Color tintedSplash(Color overlay, Color tint, [double factor = 1]) {
+    // Starting kAlphaSplash 0x1F = 31 = 12.16%, same as M3 opacity on pressed.
+    final int usedAlpha = (kAlphaSplash * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintSplash 0xA5 = 165 = 65%
+    return overlay.blendAlpha(tint, kTintSplash).withAlpha(usedAlpha);
+  }
+
+  /// Returns the FCS opinionated tinted splash color on an overlay color.
+  ///
+  /// Typically the primary color is the color used as tint base.
+  /// The tint effect is different for light and dark mode.
+  static Color tintedPress(Color overlay, Color tint, [double factor = 1]) {
+    // Starting kAlphaPressed 0x1F = 31 = 12.16%, same as M3 opacity on pressed.
+    final int usedAlpha = (kAlphaPressed * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintPressed 0xA5 = 165 = 65%
+    return overlay.blendAlpha(tint, kTintPressed).withAlpha(usedAlpha);
+  }
 
   /// Returns the FCS opinionated tinted focus color on an overlay color.
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedFocus(Color overlay, Color tint) =>
-      // Tint color alpha blend into overlay #B2=70%
-      // Opacity of result #1F=12%, same as M3 opacity on pressed.
-      overlay.blendAlpha(tint, kTintFocus).withAlpha(kAlphaFocus);
+  static Color tintedFocus(Color overlay, Color tint, [double factor = 1]) {
+    // Starting kAlphaFocus 0x1F = 31 = 12.16%, same as M3 opacity on focus.
+    final int usedAlpha = (kAlphaFocus * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintFocus 0xB2 = 178 = 70%.
+    return overlay.blendAlpha(tint, kTintFocus).withAlpha(usedAlpha);
+  }
 
   /// Returns the FCS opinionated tinted disabled color on an overlay color.
   ///
@@ -1301,14 +1338,14 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
     final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
-    final bool unselectedColored = unselectedIsColored ?? false;
-    final bool tintInteract = useTintedInteraction ?? false;
-    final bool tintDisable = useTintedDisable ?? false;
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
@@ -1942,6 +1979,16 @@ class FlexSubThemes {
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
 
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -1955,6 +2002,8 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
@@ -2163,46 +2212,97 @@ class FlexSubThemes {
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
-    // Get selected color, defaults to primary.
-    final Color baseColor =
+    final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+
+    // Get background color, defaults to primary.
+    final Color background =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // Get selected color, defaults to primary.
-    final Color onBaseColor =
+    // Get right foreground on color for background, defaults to onPrimary.
+    final Color foreground =
         schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = foreground;
+    final Color tint = background;
+    final double factor = _tintAlphaFactor(tint);
 
     MaterialStateProperty<Color?>? backgroundColor;
     MaterialStateProperty<Color?>? foregroundColor;
     MaterialStateProperty<Color?>? overlayColor;
 
+    // TODO(rydmike): Monitor FilledButton no variants theming issue.
+    // We only define theme props if we have some settings the default
+    // widget behavior does not do.
+    // We Should do this:
+    // if (baseSchemeColor != null || tintInteract || tintDisable) {
+    // But due to the theming issue
+    // https://github.com/flutter/flutter/issues/118063
+    // we only apply the tintInteract and tintDisable if we have a custom
+    // color that anyway kills their separate designs.
     if (baseSchemeColor != null) {
       backgroundColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
+          if (tintDisable) {
+            return tintedDisable(colorScheme.onSurface, background)
+                .withAlpha(kAlphaVeryLowDisabled);
+          }
           return colorScheme.onSurface.withOpacity(0.12);
         }
-        return baseColor;
+        return background;
       });
 
       foregroundColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
+          if (tintDisable) {
+            return tintedDisable(colorScheme.onSurface, background);
+          }
           return colorScheme.onSurface.withOpacity(0.38);
         }
-        return onBaseColor;
+        return foreground;
       });
 
       overlayColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          return onBaseColor.withOpacity(0.08);
+          if (tintInteract) return tintedHover(overlay, tint, factor);
+          return foreground.withOpacity(0.08);
         }
         if (states.contains(MaterialState.focused)) {
-          return onBaseColor.withOpacity(0.12);
+          if (tintInteract) return tintedFocus(overlay, tint, factor);
+          return foreground.withOpacity(0.12);
         }
         if (states.contains(MaterialState.pressed)) {
-          return onBaseColor.withOpacity(0.12);
+          if (tintInteract) return tintedPress(overlay, tint, factor);
+          return foreground.withOpacity(0.12);
         }
         return null;
       });
@@ -2214,14 +2314,15 @@ class FlexSubThemes {
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
         overlayColor: overlayColor,
-        minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
+        minimumSize: ButtonStyleButton.allOrNull<Size>(
+            minButtonSize ?? (useM3 ? null : kButtonMinSize)),
         padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-        shape: radius == null
+        shape: radius == null && useM3
             ? null
             : ButtonStyleButton.allOrNull<OutlinedBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(radius),
+                    Radius.circular(radius ?? kButtonRadius),
                   ),
                 ),
               ),
@@ -2325,12 +2426,25 @@ class FlexSubThemes {
     final Color tint = background ??
         (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
 
+    final double factor = _tintAlphaFactor(tint);
+
+    // TODO(rydmike): Remove these commented debug prints.
+    // final bool tintIsDark =
+    //     ThemeData.estimateBrightnessForColor(tint) == Brightness.dark;
+    //
+    // debugPrint('--------------------------------------------------');
+    // debugPrint('ThemeMode                   : ${colorScheme.brightness}');
+    // debugPrint('Tint and background is dark : $tintIsDark');
+    // debugPrint('Tint alpha factor is        : $factor');
+    // debugPrint('Overlay color               : $overlay');
+    // debugPrint('Tint color                  : $tint');
+
     return FloatingActionButtonThemeData(
       foregroundColor: foreground,
       backgroundColor: background,
-      splashColor: tintInteract ? tintedSplash(overlay, tint) : null,
-      focusColor: tintInteract ? tintedFocus(overlay, tint) : null,
-      hoverColor: tintInteract ? tintedHover(overlay, tint) : null,
+      splashColor: tintInteract ? tintedSplash(overlay, tint, factor) : null,
+      focusColor: tintInteract ? tintedFocus(overlay, tint, factor) : null,
+      hoverColor: tintInteract ? tintedHover(overlay, tint, factor) : null,
       shape: useShape
           ? alwaysCircular
               ? const StadiumBorder()
@@ -4090,7 +4204,7 @@ class FlexSubThemes {
 
     /// Minimum button size.
     ///
-    /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+    /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
     /// [useMaterial3] is true.
     final Size? minButtonSize,
@@ -4100,6 +4214,16 @@ class FlexSubThemes {
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
 
     /// A temporary flag used to opt-in to Material 3 features.
     ///
@@ -4114,6 +4238,8 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
 
     // Get selected color, defaults to primary.
     final Color baseColor =
@@ -4126,163 +4252,115 @@ class FlexSubThemes {
             : baseColor
         : schemeColor(outlineSchemeColor, colorScheme);
 
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = colorScheme.surface;
+    final Color tint = baseColor;
+    final double factor =
+        _tintAlphaFactor(tint, colorScheme.brightness == Brightness.light);
+
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
     final double pressedWidth =
         pressedOutlineWidth ?? (useM3 ? 1 : kThickBorderWidth);
 
-    // We are using FCS M2 buttons, styled in M3 fashion.
-    if (!useM3) {
-      return OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          minimumSize: minButtonSize ?? kButtonMinSize,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kButtonRadius),
-            ),
-          ), //buttonShape,
-          padding: padding,
-        ).copyWith(
-          textStyle: textStyle,
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
-              }
-              return baseColor;
-            },
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return baseColor.withAlpha(kHoverBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.focused)) {
-                return baseColor.withAlpha(kFocusBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return baseColor.withAlpha(kPressedBackgroundAlpha);
-              }
-              return Colors.transparent;
-            },
-          ),
-          side: MaterialStateProperty.resolveWith<BorderSide?>(
-            (final Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return BorderSide(
-                  color: outlineColor
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                  width: normalWidth,
-                );
-              }
-              if (states.contains(MaterialState.error)) {
-                return BorderSide(
-                  color: colorScheme.error,
-                  width: pressedWidth,
-                );
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return BorderSide(
-                  color: outlineColor,
-                  width: pressedWidth,
-                );
-              }
-              return BorderSide(
-                color: outlineColor.withAlpha(kEnabledBorderAlpha),
-                width: normalWidth,
-              );
-            },
-          ),
-        ),
-      );
-    } else {
-      // We are using M3 style buttons, with potentially custom radius,
-      // foregroundColor, outlineColor, overlayColor, padding
-      // and minButtonSize.
-      MaterialStateProperty<Color?>? foregroundColor;
-      MaterialStateProperty<Color?>? overlayColor;
-      // If a baseSchemeColor was given we need to define all M3 color in
-      // all states, if it was not defined, we can keeping them all null
-      // and let M3 widget defaults handle the colors.
-      if (baseSchemeColor != null) {
-        foregroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.38);
+    // We only define theme props for foregroundColor and overlayColor, if we
+    // have some settings the default widget behavior does not handle.
+    MaterialStateProperty<Color?>? foregroundColor;
+    MaterialStateProperty<Color?>? overlayColor;
+    if (baseSchemeColor != null || tintInteract || tintDisable) {
+      foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          if (tintDisable) {
+            return tintedDisable(colorScheme.onSurface, baseColor);
           }
-          return baseColor;
-        });
+          return colorScheme.onSurface.withOpacity(0.38);
+        }
+        return baseColor;
+      });
 
-        overlayColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
-            return baseColor.withOpacity(0.08);
-          }
-          if (states.contains(MaterialState.focused)) {
-            return baseColor.withOpacity(0.12);
-          }
-          if (states.contains(MaterialState.pressed)) {
-            return baseColor.withOpacity(0.12);
-          }
-          return null;
-        });
-      }
+      overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          if (tintInteract) return tintedHover(overlay, tint, factor);
+          return baseColor.withOpacity(0.08);
+        }
+        if (states.contains(MaterialState.focused)) {
+          if (tintInteract) return tintedFocus(overlay, tint, factor);
+          return baseColor.withOpacity(0.12);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          if (tintInteract) return tintedPress(overlay, tint, factor);
+          return baseColor.withOpacity(0.12);
+        }
+        return null;
+      });
+    }
 
-      MaterialStateProperty<BorderSide>? side;
-      // Define side it its widths or color has any custom definition,
-      // If not we fall back to default theme.
-      if (outlineSchemeColor != null ||
-          outlineWidth != null ||
-          pressedOutlineWidth != null) {
-        side = MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+    // Define side if its widths or color has any custom definition, if not
+    // we fall back to default theme.
+    MaterialStateProperty<BorderSide>? side;
+    if (outlineSchemeColor != null ||
+        outlineWidth != null ||
+        pressedOutlineWidth != null ||
+        tintDisable ||
+        !useM3) {
+      side = MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          if (tintDisable) {
             return BorderSide(
-              color: colorScheme.onSurface.withOpacity(0.12),
+              color: tintedDisable(colorScheme.onSurface, outlineColor)
+                  .withAlpha(kAlphaLowDisabled),
               width: normalWidth,
             );
           }
-          if (states.contains(MaterialState.error)) {
-            return BorderSide(
-              color: colorScheme.error,
-              width: pressedWidth,
-            );
-          }
-          if (states.contains(MaterialState.pressed)) {
-            return BorderSide(
-              color: outlineColor,
-              width: pressedWidth,
-            );
-          }
           return BorderSide(
-            color: outlineColor,
+            color: colorScheme.onSurface.withOpacity(0.12),
             width: normalWidth,
           );
-        });
-      }
+        }
+        if (states.contains(MaterialState.error)) {
+          return BorderSide(
+            color: colorScheme.error,
+            width: pressedWidth,
+          );
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return BorderSide(
+            color: outlineColor,
+            width: pressedWidth,
+          );
+        }
+        return BorderSide(
+          color: outlineColor,
+          width: normalWidth,
+        );
+      });
+    }
 
-      return OutlinedButtonThemeData(
-        style: ButtonStyle(
-          textStyle: textStyle,
-          foregroundColor: foregroundColor,
-          overlayColor: overlayColor,
-          minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
-          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          side: side,
-          shape: radius == null
-              ? null
-              : ButtonStyleButton.allOrNull<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(radius),
-                    ),
+    return OutlinedButtonThemeData(
+      style: ButtonStyle(
+        textStyle: textStyle,
+        foregroundColor: foregroundColor,
+        overlayColor: overlayColor,
+        minimumSize: ButtonStyleButton.allOrNull<Size>(
+          minButtonSize ?? (useM3 ? null : kButtonMinSize),
+        ),
+        padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+        side: side,
+        shape: radius == null && useM3
+            ? null
+            : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius ?? kButtonRadius),
                   ),
                 ),
-        ),
-      );
-    }
+              ),
+      ),
+    );
+    // }
   }
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
@@ -5469,6 +5547,16 @@ class FlexSubThemes {
     /// [foregroundColor] is used instead.
     final MaterialStateProperty<TextStyle?>? textStyle,
 
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -5482,6 +5570,8 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);

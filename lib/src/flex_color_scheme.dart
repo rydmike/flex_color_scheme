@@ -6574,6 +6574,8 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.elevatedButtonTextStyle,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -6589,6 +6591,9 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.filledButtonTextStyle,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
@@ -6769,6 +6774,8 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.outlinedButtonTextStyle,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -6913,6 +6920,8 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.textButtonTextStyle,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,
