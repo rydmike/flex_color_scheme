@@ -74,7 +74,7 @@ class FabChipSettings extends StatelessWidget {
           title: const Text('Use themed shape'),
           subtitle: const Text('OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
-              'setting. It is like "useFlutterDefaults", but only for the FAB'),
+              'setting.'),
           value: controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

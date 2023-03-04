@@ -6600,6 +6600,8 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.fabRadius ?? platformRadius,
               useShape: subTheme.fabUseShape,
               alwaysCircular: subTheme.fabAlwaysCircular,
+              useTintedInteraction: subTheme.interactionEffects,
+              useMaterial3: useMaterial3,
             )
           : null,
       //

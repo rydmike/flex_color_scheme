@@ -443,6 +443,7 @@ class FlexSubThemes {
       // Tint color alpha blend into overlay #A5=65%
       // Opacity of result #1F=12%, same as M3 opacity on pressed.
       overlay.blendAlpha(tint, kTintSplash).withAlpha(kAlphaSplash);
+  // overlay.blendAlpha(tint, 165).withAlpha(62);
 
   /// Returns the FCS opinionated tinted focus color on an overlay color.
   ///
@@ -2243,27 +2244,15 @@ class FlexSubThemes {
   /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
   /// The circular M2 FAB goes well with those designs too and is more familiar.
   static FloatingActionButtonThemeData floatingActionButtonTheme({
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    ///
-    /// Unlike most other sub-themes that can use a passed in [ColorScheme],
-    /// this one is optional. If not provided, the FABs default themed
-    /// foreground and background colors are used. If a [colorScheme] is given,
-    /// the color to use as FAB background color can be selected with the
-    /// [backgroundSchemeColor] parameter.
-    ///
-    /// The optional colorScheme and its behavior was used to keep the API of
-    /// this function backwards compatible with previous versions.
-    final ColorScheme? colorScheme,
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
     /// the floating action button background color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, or if passed in `colorScheme` is null, then if
-    /// `ThemeData.useMaterial3` is false `theme.colorScheme.secondary` will be
-    /// used, but if `ThemeData.useMaterial3` is true, then
-    /// `ThemeData.colorScheme.primaryContainer` will be used.
+    /// If not defined, then if [useMaterial3] `colorScheme.secondary` will
+    /// be. If [useMaterial3] is true, then `colorScheme.primaryContainer`
+    /// will be used.
     ///
     /// The foreground color automatically uses the selected background
     /// color's contrast color pair in the passed in [colorScheme] property.
@@ -2304,20 +2293,44 @@ class FlexSubThemes {
     ///
     /// Defaults to false.
     final bool alwaysCircular = false,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
-    final Color? background = colorScheme == null
+    final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final Color? background = backgroundSchemeColor == null
         ? null
-        : backgroundSchemeColor == null
-            ? null
-            : schemeColor(backgroundSchemeColor, colorScheme);
-    final Color? foreground = background == null ||
-            colorScheme == null ||
-            backgroundSchemeColor == null
+        : schemeColor(backgroundSchemeColor, colorScheme);
+    final Color? foreground = backgroundSchemeColor == null
         ? null
         : schemeColorPair(backgroundSchemeColor, colorScheme);
+
+    final Color overlay = foreground ??
+        (useM3 ? colorScheme.onPrimaryContainer : colorScheme.onSecondary);
+    final Color tint = background ??
+        (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
+
     return FloatingActionButtonThemeData(
       foregroundColor: foreground,
       backgroundColor: background,
+      splashColor: tintInteract ? tintedSplash(overlay, tint) : null,
+      focusColor: tintInteract ? tintedFocus(overlay, tint) : null,
+      hoverColor: tintInteract ? tintedHover(overlay, tint) : null,
       shape: useShape
           ? alwaysCircular
               ? const StadiumBorder()
