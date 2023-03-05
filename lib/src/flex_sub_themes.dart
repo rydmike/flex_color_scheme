@@ -4300,7 +4300,7 @@ class FlexSubThemes {
 
     // Define side if its widths or color has any custom definition, if not
     // we fall back to default theme.
-    MaterialStateProperty<BorderSide>? side;
+    MaterialStateProperty<BorderSide?>? side;
     if (outlineSchemeColor != null ||
         outlineWidth != null ||
         pressedOutlineWidth != null ||
