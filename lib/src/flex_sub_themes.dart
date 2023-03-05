@@ -427,14 +427,26 @@ class FlexSubThemes {
   /// works because the overlay color is also alpha blend colored. This extra
   /// factor is used for interaction effects on colored widgets, when
   /// using interactions on surface colors factor 1 is used.
-  static double _tintAlphaFactor(Color color, [bool surfaceMode = false]) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-          ? surfaceMode
+  static double _tintAlphaFactor(Color color, Brightness mode,
+      [bool surfaceMode = false]) {
+    if (mode == Brightness.light) {
+      return surfaceMode
+          ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
               ? 1.5
               : 3.0
-          : surfaceMode
-              ? 3
-              : 1.5;
+          : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 5.0
+              : 2.0;
+    } else {
+      return surfaceMode
+          ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 4.0
+              : 2.0
+          : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 5.0
+              : 4.0;
+    }
+  }
 
   /// Returns the FCS opinionated tinted hover color on an overlay color.
   ///
@@ -2251,7 +2263,7 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = foreground;
     final Color tint = background;
-    final double factor = _tintAlphaFactor(tint);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     MaterialStateProperty<Color?>? backgroundColor;
     MaterialStateProperty<Color?>? foregroundColor;
@@ -2426,7 +2438,7 @@ class FlexSubThemes {
     final Color tint = background ??
         (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
 
-    final double factor = _tintAlphaFactor(tint);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // TODO(rydmike): Remove these commented debug prints.
     // final bool tintIsDark =
@@ -4256,8 +4268,7 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor =
-        _tintAlphaFactor(tint, colorScheme.brightness == Brightness.light);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
@@ -5579,8 +5590,7 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor =
-        _tintAlphaFactor(tint, colorScheme.brightness == Brightness.light);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // We only define theme props for foregroundColor and overlayColor, if we
     // have some settings the default widget behavior does not handle.

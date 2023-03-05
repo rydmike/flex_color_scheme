@@ -419,17 +419,17 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 5.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 5.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 5.0)),
       );
       expect(
         button.style!.overlayColor!
@@ -544,17 +544,83 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 5.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 5.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 5.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+          ));
+    });
+    test(
+        'FilledButton FST1.11-M3-custom-tint-states: Does '
+        'FilledButton have right material tinted states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.onTertiary;
+      final Color tint = colorScheme.tertiary;
+      // Disabled foreground/background,
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+            .withAlpha(kAlphaVeryLowDisabled)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      // Default state colors
+      expect(
+        button.style!.backgroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.foregroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 4.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 4.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!
@@ -3707,7 +3773,63 @@ void main() {
       );
     });
     test(
-        'TextButton FST1.11-M3-custom-states: Does '
+        'TextButton FST1.11-M3-custom-states: Does light '
+        'TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primaryContainer,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.primaryContainer;
+      // Disabled foreground
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primaryContainer),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+          ));
+    });
+    test(
+        'TextButton FST1.11-M3-custom-states: Does light '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -3760,6 +3882,120 @@ void main() {
           equals(
             const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
+          ));
+    });
+    test(
+        'TextButton FST1.11-M3-custom-states: Does dark '
+        'TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.tertiary;
+      // Disabled foreground
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 2)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 2)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 2)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+          ));
+    });
+    test(
+        'TextButton FST1.11-M3-custom-states: Does dark '
+        'TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primaryContainer,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.primaryContainer;
+      // Disabled foreground
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primaryContainer),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 4)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 4)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 4)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
           ));
     });
   });
