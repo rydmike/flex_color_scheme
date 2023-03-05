@@ -206,7 +206,7 @@ void main() {
       expect(kTintHover, 0x99);
     });
     test('FCT kAlphaHover is 0x14', () {
-      expect(kAlphaHover, 0x14);
+      expect(kAlphaHovered, 0x14);
     });
     test('FCT kTintHighlight is 0xA5', () {
       expect(kTintHighlight, 0xA5);
@@ -230,7 +230,7 @@ void main() {
       expect(kTintFocus, 0xB2);
     });
     test('FCT kAlphaFocus is 0x1F', () {
-      expect(kAlphaFocus, 0x1F);
+      expect(kAlphaFocused, 0x1F);
     });
     test('FCT kTintDisabled is 0x66', () {
       expect(kTintDisabled, 0x66);

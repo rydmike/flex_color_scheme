@@ -417,7 +417,7 @@ const int kTintHover = 0x99;
 /// Same value as used on Hover opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x14 = 20 = 8%
-const int kAlphaHover = 0x14;
+const int kAlphaHovered = 0x14;
 
 /// The amount of alpha blend used on tinted highlight effect that is blended
 /// into overlay color.
@@ -469,7 +469,7 @@ const int kTintFocus = 0xB2;
 /// Same value as used on focused opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x1F = 31 = 12.16%
-const int kAlphaFocus = 0x1F;
+const int kAlphaFocused = 0x1F;
 
 /// The amount of alpha blend used on tinted disabled effect that is blended
 /// into overlay color.

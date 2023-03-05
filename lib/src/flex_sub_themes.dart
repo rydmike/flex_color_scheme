@@ -440,9 +440,9 @@ class FlexSubThemes {
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedHover(Color overlay, Color tint, [double factor = 1]) {
+  static Color tintedHovered(Color overlay, Color tint, [double factor = 1]) {
     // Starting kAlphaHover 0x14=20=8%, same as M3 opacity on hover.
-    final int usedAlpha = (kAlphaHover * factor).round().clamp(0x00, 0xFF);
+    final int usedAlpha = (kAlphaHovered * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintHover  0x99=153= 60%
     return overlay.blendAlpha(tint, kTintHover).withAlpha(usedAlpha);
   }
@@ -473,7 +473,7 @@ class FlexSubThemes {
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedPress(Color overlay, Color tint, [double factor = 1]) {
+  static Color tintedPressed(Color overlay, Color tint, [double factor = 1]) {
     // Starting kAlphaPressed 0x1F = 31 = 12.16%, same as M3 opacity on pressed.
     final int usedAlpha = (kAlphaPressed * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintPressed 0xA5 = 165 = 65%
@@ -484,9 +484,9 @@ class FlexSubThemes {
   ///
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
-  static Color tintedFocus(Color overlay, Color tint, [double factor = 1]) {
+  static Color tintedFocused(Color overlay, Color tint, [double factor = 1]) {
     // Starting kAlphaFocus 0x1F = 31 = 12.16%, same as M3 opacity on focus.
-    final int usedAlpha = (kAlphaFocus * factor).round().clamp(0x00, 0xFF);
+    final int usedAlpha = (kAlphaFocused * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintFocus 0xB2 = 178 = 70%.
     return overlay.blendAlpha(tint, kTintFocus).withAlpha(usedAlpha);
   }
@@ -2274,7 +2274,7 @@ class FlexSubThemes {
             return tintedDisable(colorScheme.onSurface, background)
                 .withAlpha(kAlphaVeryLowDisabled);
           }
-          return colorScheme.onSurface.withOpacity(0.12);
+          return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
         }
         return background;
       });
@@ -2285,7 +2285,7 @@ class FlexSubThemes {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, background);
           }
-          return colorScheme.onSurface.withOpacity(0.38);
+          return colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         return foreground;
       });
@@ -2293,16 +2293,16 @@ class FlexSubThemes {
       overlayColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          if (tintInteract) return tintedHover(overlay, tint, factor);
-          return foreground.withOpacity(0.08);
+          if (tintInteract) return tintedHovered(overlay, tint, factor);
+          return foreground.withAlpha(kAlphaHovered);
         }
         if (states.contains(MaterialState.focused)) {
-          if (tintInteract) return tintedFocus(overlay, tint, factor);
-          return foreground.withOpacity(0.12);
+          if (tintInteract) return tintedFocused(overlay, tint, factor);
+          return foreground.withAlpha(kAlphaFocused);
         }
         if (states.contains(MaterialState.pressed)) {
-          if (tintInteract) return tintedPress(overlay, tint, factor);
-          return foreground.withOpacity(0.12);
+          if (tintInteract) return tintedPressed(overlay, tint, factor);
+          return foreground.withAlpha(kAlphaPressed);
         }
         return null;
       });
@@ -2443,8 +2443,8 @@ class FlexSubThemes {
       foregroundColor: foreground,
       backgroundColor: background,
       splashColor: tintInteract ? tintedSplash(overlay, tint, factor) : null,
-      focusColor: tintInteract ? tintedFocus(overlay, tint, factor) : null,
-      hoverColor: tintInteract ? tintedHover(overlay, tint, factor) : null,
+      focusColor: tintInteract ? tintedFocused(overlay, tint, factor) : null,
+      hoverColor: tintInteract ? tintedHovered(overlay, tint, factor) : null,
       shape: useShape
           ? alwaysCircular
               ? const StadiumBorder()
@@ -4252,7 +4252,7 @@ class FlexSubThemes {
             : baseColor
         : schemeColor(outlineSchemeColor, colorScheme);
 
-    // Using these tinted overlay variable in all themes for ease of
+    // Using these tinted overlay variables in all themes for ease of
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
@@ -4262,7 +4262,7 @@ class FlexSubThemes {
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
     final double pressedWidth =
-        pressedOutlineWidth ?? (useM3 ? 1 : kThickBorderWidth);
+        pressedOutlineWidth ?? (useM3 ? kThinBorderWidth : kThickBorderWidth);
 
     // We only define theme props for foregroundColor and overlayColor, if we
     // have some settings the default widget behavior does not handle.
@@ -4275,7 +4275,7 @@ class FlexSubThemes {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, baseColor);
           }
-          return colorScheme.onSurface.withOpacity(0.38);
+          return colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         return baseColor;
       });
@@ -4283,16 +4283,16 @@ class FlexSubThemes {
       overlayColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
-          if (tintInteract) return tintedHover(overlay, tint, factor);
-          return baseColor.withOpacity(0.08);
+          if (tintInteract) return tintedHovered(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaHovered);
         }
         if (states.contains(MaterialState.focused)) {
-          if (tintInteract) return tintedFocus(overlay, tint, factor);
-          return baseColor.withOpacity(0.12);
+          if (tintInteract) return tintedFocused(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaFocused);
         }
         if (states.contains(MaterialState.pressed)) {
-          if (tintInteract) return tintedPress(overlay, tint, factor);
-          return baseColor.withOpacity(0.12);
+          if (tintInteract) return tintedPressed(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaPressed);
         }
         return null;
       });
@@ -4316,7 +4316,7 @@ class FlexSubThemes {
             );
           }
           return BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12),
+            color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
             width: normalWidth,
           );
         }
@@ -4360,7 +4360,6 @@ class FlexSubThemes {
               ),
       ),
     );
-    // }
   }
 
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
@@ -5198,10 +5197,10 @@ class FlexSubThemes {
               return baseColor.withAlpha(kAlphaPressed);
             }
             if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kAlphaHover);
+              return baseColor.withAlpha(kAlphaHovered);
             }
             if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kAlphaFocus);
+              return baseColor.withAlpha(kAlphaFocused);
             }
             return null;
           }
@@ -5210,12 +5209,12 @@ class FlexSubThemes {
             return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
           if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return baseColor.withAlpha(kAlphaHover);
-            return colorScheme.onSurface.withAlpha(kAlphaHover);
+            if (tintInteract) return baseColor.withAlpha(kAlphaHovered);
+            return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
           if (states.contains(MaterialState.focused)) {
-            if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
-            return colorScheme.onSurface.withAlpha(kAlphaFocus);
+            if (tintInteract) return baseColor.withAlpha(kAlphaFocused);
+            return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
           return null;
         }),
@@ -5322,10 +5321,10 @@ class FlexSubThemes {
               return baseColor.withAlpha(kAlphaPressed);
             }
             if (states.contains(MaterialState.hovered)) {
-              return baseColor.withAlpha(kAlphaHover);
+              return baseColor.withAlpha(kAlphaHovered);
             }
             if (states.contains(MaterialState.focused)) {
-              return baseColor.withAlpha(kAlphaFocus);
+              return baseColor.withAlpha(kAlphaFocused);
             }
             return null;
           }
@@ -5334,12 +5333,12 @@ class FlexSubThemes {
             return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
           if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return baseColor.withAlpha(kAlphaHover);
-            return colorScheme.onSurface.withAlpha(kAlphaHover);
+            if (tintInteract) return baseColor.withAlpha(kAlphaHovered);
+            return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
           if (states.contains(MaterialState.focused)) {
-            if (tintInteract) return baseColor.withAlpha(kAlphaFocus);
-            return colorScheme.onSurface.withAlpha(kAlphaFocus);
+            if (tintInteract) return baseColor.withAlpha(kAlphaFocused);
+            return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
           return null;
         }),
@@ -5467,10 +5466,10 @@ class FlexSubThemes {
           ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
                 if (states.contains(MaterialState.hovered)) {
-                  return overlayBase.withAlpha(kAlphaHover);
+                  return overlayBase.withAlpha(kAlphaHovered);
                 }
                 if (states.contains(MaterialState.focused)) {
-                  return overlayBase.withAlpha(kAlphaFocus);
+                  return overlayBase.withAlpha(kAlphaFocused);
                 }
                 if (states.contains(MaterialState.pressed)) {
                   return overlayBase.withAlpha(kAlphaPressed);
@@ -5478,12 +5477,12 @@ class FlexSubThemes {
                 return null;
               }
               if (states.contains(MaterialState.hovered)) {
-                if (tintInteract) return overlayBase.withAlpha(kAlphaHover);
-                return colorScheme.onSurface.withAlpha(kAlphaHover);
+                if (tintInteract) return overlayBase.withAlpha(kAlphaHovered);
+                return colorScheme.onSurface.withAlpha(kAlphaHovered);
               }
               if (states.contains(MaterialState.focused)) {
-                if (tintInteract) return overlayBase.withAlpha(kAlphaFocus);
-                return colorScheme.onSurface.withAlpha(kAlphaFocus);
+                if (tintInteract) return overlayBase.withAlpha(kAlphaFocused);
+                return colorScheme.onSurface.withAlpha(kAlphaFocused);
               }
               if (states.contains(MaterialState.pressed)) {
                 if (tintInteract) return overlayBase.withAlpha(kAlphaPressed);
@@ -5576,97 +5575,66 @@ class FlexSubThemes {
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // We are using FCS M2 buttons, styled in M3 fashion.
-    if (!useM3) {
-      return TextButtonThemeData(
-        style: TextButton.styleFrom(
-          minimumSize: minButtonSize ?? kButtonMinSize,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? kButtonRadius),
-            ),
-          ), // buttonShape,
-          padding: padding,
-        ).copyWith(
-          textStyle: textStyle,
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
-              }
-              return baseColor;
-            },
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
-                return baseColor.withAlpha(kHoverBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.focused)) {
-                return baseColor.withAlpha(kFocusBackgroundAlpha);
-              }
-              if (states.contains(MaterialState.pressed)) {
-                return baseColor.withAlpha(kPressedBackgroundAlpha);
-              }
-              return Colors.transparent;
-            },
-          ),
-        ),
-      );
-    } else {
-      // We are using M3 style buttons, with potentially custom radius,
-      // foregroundColor, overlayColor, padding and minButtonSize.
-      MaterialStateProperty<Color?>? foregroundColor;
-      MaterialStateProperty<Color?>? overlayColor;
+    // Using these tinted overlay variables in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = colorScheme.surface;
+    final Color tint = baseColor;
+    final double factor =
+        _tintAlphaFactor(tint, colorScheme.brightness == Brightness.light);
 
-      // If a baseSchemeColor was given we need to define all M3 color in
-      // all states, if it was not defined, we can keeping them all null
-      // and let M3 widget defaults handle the colors.
-      if (baseSchemeColor != null) {
-        foregroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.38);
+    // We only define theme props for foregroundColor and overlayColor, if we
+    // have some settings the default widget behavior does not handle.
+    MaterialStateProperty<Color?>? foregroundColor;
+    MaterialStateProperty<Color?>? overlayColor;
+    if (baseSchemeColor != null || tintInteract || tintDisable) {
+      foregroundColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          if (tintDisable) {
+            return tintedDisable(colorScheme.onSurface, baseColor);
           }
-          return baseColor;
-        });
+          return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+        }
+        return baseColor;
+      });
 
-        overlayColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
-            return baseColor.withOpacity(0.08);
-          }
-          if (states.contains(MaterialState.focused)) {
-            return baseColor.withOpacity(0.12);
-          }
-          if (states.contains(MaterialState.pressed)) {
-            return baseColor.withOpacity(0.12);
-          }
-          return null;
-        });
-      }
+      overlayColor =
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          if (tintInteract) return tintedHovered(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaHovered);
+        }
+        if (states.contains(MaterialState.focused)) {
+          if (tintInteract) return tintedFocused(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaFocused);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          if (tintInteract) return tintedPressed(overlay, tint, factor);
+          return baseColor.withAlpha(kAlphaPressed);
+        }
+        return null;
+      });
+    }
 
-      return TextButtonThemeData(
-        style: ButtonStyle(
-          textStyle: textStyle,
-          foregroundColor: foregroundColor,
-          overlayColor: overlayColor,
-          minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
-          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          shape: radius == null
-              ? null
-              : ButtonStyleButton.allOrNull<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(radius),
-                    ),
+    return TextButtonThemeData(
+      style: ButtonStyle(
+        textStyle: textStyle,
+        foregroundColor: foregroundColor,
+        overlayColor: overlayColor,
+        minimumSize: ButtonStyleButton.allOrNull<Size>(
+            minButtonSize ?? (useM3 ? null : kButtonMinSize)),
+        padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
+        shape: radius == null && useM3
+            ? null
+            : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius ?? kButtonRadius),
                   ),
                 ),
-        ),
-      );
-    }
+              ),
+      ),
+    );
   }
 
   /// An opinionated [TimePickerThemeData] with custom corner radius.

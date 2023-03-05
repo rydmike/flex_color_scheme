@@ -10,12 +10,12 @@ void main() {
   // Tests that the static sub theme methods create intended defined sub
   // ThemeData when matching ons, matching with FlexSubTheme defaults.
   //****************************************************************************
-  group('FST1: WITH FlexSubTheme ', () {
+  group('WITH: FlexSubTheme.bottomSheetTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomSheet tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.01: GIVEN a default FlexSubTheme.bottomSheetTheme() '
+        'BottomSheet FST1.01:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
         FlexSubThemes.bottomSheetTheme(),
@@ -35,7 +35,8 @@ void main() {
       );
     });
     test(
-        'FST1.01custom: GIVEN a custom FlexSubTheme.bottomSheetTheme() '
+        'BottomSheet FST1.01custom: GIVEN a custom '
+        'FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
         FlexSubThemes.bottomSheetTheme(
@@ -59,11 +60,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.bottomNavigationBar ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.02-flutter-default-light: GIVEN a LIGHT default '
+        'BottomNavigationBar FST1.02 flutter-default-light: GIVEN a LIGHT '
+        'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -81,7 +85,7 @@ void main() {
       );
     });
     test(
-        'FST1.02-flutter-default-dark: GIVEN a DARK default '
+        'BottomNavigationBar FST1.02-flutter-default-dark: GIVEN a DARK default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -99,7 +103,7 @@ void main() {
       );
     });
     test(
-        'FST1.02-fcs-default-light: GIVEN a default LIGHT '
+        'BottomNavigationBar FST1.02-fcs-default-light: GIVEN a default LIGHT '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -128,7 +132,7 @@ void main() {
       );
     });
     test(
-        'FST1.02-fcs-default-dark: GIVEN a default DARK '
+        'BottomNavigationBar FST1.02-fcs-default-dark: GIVEN a default DARK '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -158,7 +162,8 @@ void main() {
       );
     });
     test(
-        'FST1.02custom: GIVEN a custom FlexSubTheme.bottomNavigationBar() '
+        'BottomNavigationBar FST1.02custom: GIVEN a custom '
+        'FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -215,11 +220,362 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.filledButtonTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes FilledButton tests
+    // -------------------------------------------------------------------------
+    test(
+        'FilledButton FST1.11-M2: GIVEN a default M2 '
+        'FlexSubTheme.filledButtonTheme() '
+        'EXPECT equal to FilledButtonThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.filledButtonTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          FilledButtonThemeData(
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+              ), // buttonShape,
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M2-base: GIVEN a custom '
+        'FlexSubTheme.filledButtonTheme() '
+        'EXPECT equal to FilledButtonThemeData() version with same color', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.filledButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+        ).toString(),
+        equalsIgnoringHashCodes(
+          FilledButtonThemeData(
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+              ), // buttonShape,
+              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.38);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return colorScheme.onSurface.withOpacity(0.38);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return colorScheme.onSecondary.withOpacity(0.08);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    return colorScheme.onSecondary.withOpacity(0.12);
+                  }
+                  if (states.contains(MaterialState.pressed)) {
+                    return colorScheme.onSecondary.withOpacity(0.12);
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ).toString(),
+        ),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M3: GIVEN a default M3 '
+        'FlexSubTheme.filledButtonTheme() '
+        'EXPECT equal to FilledButtonThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      expect(
+        FlexSubThemes.filledButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          const FilledButtonThemeData(
+            style: ButtonStyle(),
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M2-states: Does FilledButton '
+        'have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primary,
+      );
+      // Disabled colors
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      // Default state
+      expect(
+        button.style!.backgroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        button.style!.foregroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onPrimary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onPrimary.withOpacity(0.08)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onPrimary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onPrimary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M2-tint-states: Does M2 '
+        'FilledButton have right tinted material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.onTertiary;
+      final Color tint = colorScheme.tertiary;
+      // Disabled foreground/background,
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+            .withAlpha(kAlphaVeryLowDisabled)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      // Default state colors
+      expect(
+        button.style!.backgroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.foregroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M3-states: Does '
+        'FilledButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primary,
+        radius: 15,
+        useMaterial3: true,
+      );
+      // Disabled colors
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      // Default state
+      expect(
+        button.style!.backgroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        button.style!.foregroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onPrimary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onPrimary.withOpacity(0.08)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onPrimary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onPrimary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+        button.style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FilledButton FST1.11-M3-custom-tint-states: Does '
+        'FilledButton have right material tinted states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.onTertiary;
+      final Color tint = colorScheme.tertiary;
+      // Disabled foreground/background,
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+            .withAlpha(kAlphaVeryLowDisabled)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      // Default state colors
+      expect(
+        button.style!.backgroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.foregroundColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      // Custom shape test
+      expect(
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+          ));
+    });
+  });
+  group('WITH: FlexSubTheme.snackBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes SnackBar tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.03: GIVEN a default FlexSubTheme.snackBarTheme '
+        'SnackBar FST1.03: GIVEN a default FlexSubTheme.snackBarTheme '
         'EXPECT equal to SnackBarThemeData() version '
         'with same values', () {
       expect(
@@ -233,7 +589,8 @@ void main() {
       );
     });
     test(
-        'FST1.03-background-based-a: GIVEN a FlexSubTheme.snackBarTheme with '
+        'SnackBar FST1.03-background-based-a: GIVEN a '
+        'FlexSubTheme.snackBarTheme with '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
       expect(
@@ -258,7 +615,8 @@ void main() {
       );
     });
     test(
-        'FST1.03-background-based-b: GIVEN a FlexSubTheme.snackBarTheme with '
+        'SnackBar FST1.03-background-based-b: GIVEN a '
+        'FlexSubTheme.snackBarTheme with '
         'no colorScheme, no backgroundSchemeColor, but with backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -284,7 +642,8 @@ void main() {
       );
     });
     test(
-        'FST1.03a-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
+        'SnackBar FST1.03a-scheme-based: GIVEN a '
+        'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with scheme color.', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -310,7 +669,8 @@ void main() {
       );
     });
     test(
-        'FST1.03b-scheme-based: GIVEN a FlexSubTheme.snackBarTheme with '
+        'SnackBar FST1.03b-scheme-based: GIVEN a '
+        'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor and '
         'actionTextSchemeColor'
         'EXPECT equal to SnackBarThemeData with scheme colors.', () {
@@ -337,11 +697,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.cardTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Card tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.04: GIVEN a default FlexSubTheme.cardTheme() '
+        'Card FST1.04: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(),
@@ -358,7 +720,7 @@ void main() {
       );
     });
     test(
-        'FST1.04custom: GIVEN a custom FlexSubTheme.cardTheme() '
+        'Card FST1.04custom: GIVEN a custom FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(
@@ -379,11 +741,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.05: GIVEN a default FlexSubTheme.dialogTheme() '
+        'Dialog FST1.05: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(),
@@ -402,7 +766,7 @@ void main() {
       );
     });
     test(
-        'FST1.05-background-based-a: GIVEN a FlexSubTheme.dialogTheme with no '
+        'Dialog FST1.05-background-based-a: GIVEN a FlexSubTheme.dialogTheme with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
       expect(
@@ -426,7 +790,7 @@ void main() {
       );
     });
     test(
-        'FST1.05-background-based-b: GIVEN a FlexSubTheme.dialogTheme '
+        'Dialog FST1.05-background-based-b: GIVEN a FlexSubTheme.dialogTheme '
         'with no backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -452,7 +816,7 @@ void main() {
       );
     });
     test(
-        'FST1.05-scheme-based: GIVEN a FlexSubTheme.dialogTheme '
+        'Dialog FST1.05-scheme-based: GIVEN a FlexSubTheme.dialogTheme '
         'with backgroundSchemeColor and no backgroundColor '
         'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -478,7 +842,7 @@ void main() {
       );
     });
     test(
-        'FST1.05custom: GIVEN a custom FlexSubTheme.dialogTheme() '
+        'Dialog FST1.05custom: GIVEN a custom FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(
@@ -501,11 +865,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.popupMenuTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes PopupMenu tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.06: GIVEN a default FlexSubTheme.popupMenuTheme() '
+        'PopupMenu FST1.06: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(),
@@ -513,7 +879,7 @@ void main() {
       );
     });
     test(
-        'FST1.06custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
+        'PopupMenu FST1.06custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
@@ -532,11 +898,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.timePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.07-default: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'TimePicker FST1.07-default: GIVEN a default '
+        'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
         FlexSubThemes.timePickerTheme(),
@@ -569,7 +938,8 @@ void main() {
     });
 
     test(
-        'FST1.07.scheme-based: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'TimePicker FST1.07.scheme-based: GIVEN a default '
+        'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -610,7 +980,8 @@ void main() {
     });
 
     test(
-        'FST1.07.background-a: GIVEN a default FlexSubTheme.timePickerTheme() '
+        'TimePicker FST1.07.background-a: GIVEN a default '
+        'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -651,7 +1022,8 @@ void main() {
     });
 
     test(
-        'FST1.07.background-b: GIVEN a custom FlexSubTheme.timePickerTheme() '
+        'TimePicker FST1.07.background-b: GIVEN a custom '
+        'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       expect(
         FlexSubThemes.timePickerTheme(
@@ -689,12 +1061,14 @@ void main() {
         ),
       );
     });
-
+  });
+  group('WITH: FlexSubTheme.inputDecorationTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.08a.light: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'InputDecoration FST1.08a.light: GIVEN a default '
+        'FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -862,7 +1236,8 @@ void main() {
       );
     });
     test(
-        'FST1.08b.light: GIVEN a FlexSubTheme.inputDecorationTheme( '
+        'InputDecoration FST1.08b.light: GIVEN a '
+        'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1032,7 +1407,8 @@ void main() {
       );
     });
     test(
-        'FST1.08a.dark: GIVEN a default FlexSubTheme.inputDecorationTheme() '
+        'InputDecoration FST1.08a.dark: GIVEN a default '
+        'FlexSubTheme.inputDecorationTheme() '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
@@ -1200,7 +1576,8 @@ void main() {
       );
     });
     test(
-        'FST1.08b.dark: GIVEN a default FlexSubTheme.inputDecorationTheme( '
+        'InputDecoration FST1.08b.dark: GIVEN a default '
+        'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -1367,7 +1744,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
       );
     });
-    test('FST1.08a-states: Does Decorator have right material states', () {
+    test(
+        'InputDecoration FST1.08a-states: Does Decorator '
+        'have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Floating label focused error style
       expect(
@@ -1429,7 +1808,7 @@ void main() {
           ));
     });
     test(
-        'FST1.08b-light: GIVEN a default '
+        'InputDecoration FST1.08b-light: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.underline, usedSchemeColor: '
         'FlexUsedColor.secondary) '
@@ -1617,7 +1996,9 @@ void main() {
         ),
       );
     });
-    test('FST1.08b-states: Does Decorator have right material states', () {
+    test(
+        'InputDecoration FST1.08b-states: Does Decorator '
+        'have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Floating label focused error style
       expect(
@@ -1683,11 +2064,14 @@ void main() {
             TextStyle(color: Colors.black.withAlpha(0x99)),
           ));
     });
+  });
+  group('WITH: FlexSubTheme.elevatedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.09-M2: GIVEN a default M2 FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09-M2: GIVEN a default M2 '
+        'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1744,7 +2128,8 @@ void main() {
       );
     });
     test(
-        'FST1.09-M3: GIVEN a default M3 FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09-M3: GIVEN a default M3 '
+        'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'defaults', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1761,7 +2146,8 @@ void main() {
       );
     });
     test(
-        'FST1.09-secondary: GIVEN a default FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09-secondary: GIVEN a default '
+        'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as base color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -1822,7 +2208,7 @@ void main() {
       );
     });
     test(
-        'FST1.09-secondary-onBase: GIVEN a default '
+        'ElevatedButton FST1.09-secondary-onBase: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as onBase color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -1883,8 +2269,9 @@ void main() {
         ),
       );
     });
-    test('FST1.09-M2-states: Does ElevatedButton have right Material 2 states',
-        () {
+    test(
+        'ElevatedButton FST1.09-M2-states: Does '
+        'ElevatedButton have right Material 2 states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Disabled foreground, default, M2
       expect(
@@ -1984,8 +2371,9 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test('FST1.09-M3-states: Does ElevatedButton have right Material 3 states',
-        () {
+    test(
+        'ElevatedButton FST1.09-M3-states: Does '
+        'ElevatedButton have right Material 3 states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Disabled foreground, default, M3
       expect(
@@ -2168,7 +2556,8 @@ void main() {
       );
     });
     test(
-        'FST1.09custom-1: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09custom-1: GIVEN a '
+        'custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2232,7 +2621,8 @@ void main() {
       );
     });
     test(
-        'FST1.09custom-2: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09custom-2: GIVEN a custom '
+        'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2298,7 +2688,8 @@ void main() {
       );
     });
     test(
-        'FST1.09custom-1-M3: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09custom-1-M3: GIVEN a custom '
+        'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2314,33 +2705,6 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ButtonStyle(
-              // foregroundColor: MaterialStateProperty.resolveWith(
-              //     (Set<MaterialState> states) {
-              //   if (states.contains(MaterialState.disabled)) {
-              //     return colorScheme.onSurface.withOpacity(0.38);
-              //   }
-              //   return colorScheme.primary;
-              // }),
-              // backgroundColor: MaterialStateProperty.resolveWith(
-              //     (Set<MaterialState> states) {
-              //   if (states.contains(MaterialState.disabled)) {
-              //     return colorScheme.onSurface.withOpacity(0.12);
-              //   }
-              //   return colorScheme.onPrimary;
-              // }),
-              // overlayColor: MaterialStateProperty.resolveWith(
-              //     (Set<MaterialState> states) {
-              //   if (states.contains(MaterialState.hovered)) {
-              //     return colorScheme.primary.withOpacity(0.08);
-              //   }
-              //   if (states.contains(MaterialState.focused)) {
-              //     return colorScheme.primary.withOpacity(0.12);
-              //   }
-              //   if (states.contains(MaterialState.pressed)) {
-              //     return colorScheme.primary.withOpacity(0.12);
-              //   }
-              //   return null;
-              // }),
               minimumSize:
                   ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
@@ -2374,7 +2738,8 @@ void main() {
       );
     });
     test(
-        'FST1.09custom-2-M3: GIVEN a custom FlexSubTheme.elevatedButtonTheme() '
+        'ElevatedButton FST1.09custom-2-M3: GIVEN a custom '
+        'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2451,11 +2816,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.outlinedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes OutlinedButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.10-M2: GIVEN a default M2 FlexSubTheme.outlinedButtonTheme() '
+        'OutlinedButton FST1.10-M2: GIVEN a default M2 '
+        'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2505,7 +2873,8 @@ void main() {
       );
     });
     test(
-        'FST1.10-custom-M2: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'OutlinedButton FST1.10-custom-M2: GIVEN a custom '
+        'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -2588,7 +2957,8 @@ void main() {
       );
     });
     test(
-        'FST1.10-M3: GIVEN a default FlexSubTheme.outlinedButtonTheme() EXPECT '
+        'OutlinedButton FST1.10-M3: GIVEN a default '
+        'FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -2607,7 +2977,8 @@ void main() {
       );
     });
     test(
-        'FST1.10-outline-M2: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'OutlinedButton FST1.10-outline-M2: GIVEN a custom '
+        'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2685,7 +3056,8 @@ void main() {
     });
 
     test(
-        'FST1.10-outline-M3: GIVEN a custom FlexSubTheme.outlinedButtonTheme() '
+        'OutlinedButton  FST1.10-outline-M3: GIVEN a custom '
+        'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -2772,8 +3144,9 @@ void main() {
       );
     });
 
-    test('FST1.10-states-M2: Does OutlinedButton have right material states',
-        () {
+    test(
+        'OutlinedButton FST1.10-states-M2: Does '
+        'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -2848,7 +3221,9 @@ void main() {
         )),
       );
     });
-    test('FST1.10-states-custom-M2: Does OutlinedButton have right states', () {
+    test(
+        'OutlinedButton FST1.10-states-custom-M2: Does '
+        'OutlinedButton have right states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
         brightness: Brightness.light,
@@ -2878,17 +3253,17 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHover(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocus(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPress(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!
@@ -2926,8 +3301,9 @@ void main() {
         )),
       );
     });
-    test('FST1.10-states-M3: Does OutlinedButton have right material states',
-        () {
+    test(
+        'OutlinedButton FST1.10-states-M3: Does '
+        'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -2999,7 +3375,8 @@ void main() {
       );
     });
     test(
-        'FST1.10-states-M3-custom: Does OutlinedButton have right material '
+        'OutlinedButton FST1.10-states-M3-custom: Does '
+        'OutlinedButton have right material '
         'custom states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -3087,12 +3464,14 @@ void main() {
         ),
       );
     });
-
+  });
+  group('WITH: FlexSubTheme.textButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.11-M2: GIVEN a default FlexSubTheme.textButtonTheme() '
+        'TextButton FST1.11-M2: GIVEN a default M2 '
+        'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -3106,38 +3485,14 @@ void main() {
                   Radius.circular(20),
                 ),
               ), // buttonShape,
-            ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.primary.withAlpha(0x0D);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.primary.withAlpha(0x26);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.primary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
             ),
           ).toString(),
         ),
       );
     });
     test(
-        'FST1.11-M2-base: GIVEN a custom FlexSubTheme.textButtonTheme() '
+        'TextButton FST1.11-M2-base: GIVEN a custom '
+        'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same color', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -3155,28 +3510,26 @@ void main() {
                 ),
               ), // buttonShape,
             ).copyWith(
-              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
+                    return colorScheme.onSurface.withOpacity(0.38);
                   }
                   return colorScheme.secondary;
                 },
               ),
-              overlayColor: MaterialStateProperty.resolveWith<Color>(
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.secondary.withAlpha(0x0D);
+                    return colorScheme.secondary.withOpacity(0.08);
                   }
                   if (states.contains(MaterialState.focused)) {
-                    return colorScheme.secondary.withAlpha(0x26);
+                    return colorScheme.secondary.withOpacity(0.12);
                   }
                   if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.secondary.withAlpha(0x33);
+                    return colorScheme.secondary.withOpacity(0.12);
                   }
-                  return Colors.transparent;
+                  return null;
                 },
               ),
             ),
@@ -3185,7 +3538,8 @@ void main() {
       );
     });
     test(
-        'FST1.11-M3: GIVEN a default M3 FlexSubTheme.textButtonTheme() '
+        'TextButton FST1.11-M3: GIVEN a default M3 '
+        'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -3203,124 +3557,146 @@ void main() {
         ),
       );
     });
-    test('FST1.11-M2-states: Does TextButton have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      // Disabled foreground
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .foregroundColor!
-            .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.primary
-            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-            .withAlpha(kDisabledForegroundAlpha)),
-      );
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .foregroundColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.primary),
-      );
-      // Overlay color states
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.primary.withAlpha(kHoverBackgroundAlpha)),
-      );
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.primary.withAlpha(kFocusBackgroundAlpha)),
-      );
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.primary.withAlpha(kPressedBackgroundAlpha)),
-      );
-      expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(Colors.transparent),
-      );
-    });
-    test('FST1.11-M3-states: Does TextButton have right material states', () {
+    test(
+        'TextButton FST1.11-M2-states: Does TextButton '
+        'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFF79E742),
+        seedColor: const Color(0xFF7142E7),
         brightness: Brightness.light,
       );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primary,
+      );
       // Disabled foreground
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        )
-            .style!
-            .foregroundColor!
+        button.style!.foregroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        )
-            .style!
-            .foregroundColor!
+        button.style!.foregroundColor!
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
       // Overlay color states
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
         equals(colorScheme.primary.withOpacity(0.08)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
         equals(colorScheme.primary.withOpacity(0.12)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
         equals(colorScheme.primary.withOpacity(0.12)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+    });
+    test(
+        'TextButton FST1.11-M2-tint-states: Does M2 '
+        'TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF7142E7),
+        brightness: Brightness.light,
+      );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.tertiary;
+      // Disabled foreground
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+    });
+    test(
+        'TextButton FST1.11-M3-states: Does '
+        'TextButton have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.primary,
+        radius: 15,
+        useMaterial3: true,
+      );
+      // Disabled foreground
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.38)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Overlay color states
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withOpacity(0.08)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withOpacity(0.12)),
+      );
+      expect(
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
       );
       // Custom shape test
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
-          radius: 15,
-        ).style!.shape!.resolve(<MaterialState>{}),
+        button.style!.shape!.resolve(<MaterialState>{}),
         equals(
           const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -3331,92 +3707,69 @@ void main() {
       );
     });
     test(
-        'FST1.11-M3-custom-states: Does TextButton have right material '
-        'states', () {
+        'TextButton FST1.11-M3-custom-states: Does '
+        'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
       );
+      final TextButtonThemeData button = FlexSubThemes.textButtonTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        radius: 5,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.tertiary;
       // Disabled foreground
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        )
-            .style!
-            .foregroundColor!
+        button.style!.foregroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        )
-            .style!
-            .foregroundColor!
+        button.style!.foregroundColor!
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.tertiary),
       );
       // Overlay color states
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.tertiary.withOpacity(0.08)),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.tertiary.withOpacity(0.12)),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.tertiary.withOpacity(0.12)),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-        ).style!.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        button.style!.overlayColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
         equals(null),
       );
       // Custom shape test
       expect(
-        FlexSubThemes.textButtonTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.tertiary,
-          useMaterial3: true,
-          radius: 1,
-        ).style!.shape!.resolve(<MaterialState>{}),
-        equals(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(1),
-            ),
-          ),
-        ),
-      );
+          button.style!.shape!.resolve(<MaterialState>{}),
+          equals(
+            const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+          ));
     });
-
+  });
+  group('WITH: FlexSubTheme.buttonTheme ', () {
     // TODO(rydmike): Monitor Flutter SDK deprecation of ButtonThemeData.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
+        'ButtonTheme FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -3455,7 +3808,7 @@ void main() {
       );
     });
     test(
-        'FST1.12d: GIVEN a custom FlexSubTheme.buttonTheme() '
+        'ButtonTheme FST1.12d: GIVEN a custom FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
@@ -3499,7 +3852,8 @@ void main() {
       );
     });
     test(
-        'FST1.12-base-color: GIVEN a default FlexSubTheme.buttonTheme() '
+        'ButtonTheme FST1.12-base-color: GIVEN a default '
+        'FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -3540,11 +3894,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.toggleButtonsTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.13: GIVEN a default FlexSubTheme.toggleButtonsTheme() EXPECT '
+        'ToggleButtons FST1.13: GIVEN a default '
+        'FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
@@ -3587,7 +3944,8 @@ void main() {
       );
     });
     test(
-        'FST1.13-base-color: GIVEN a default FlexSubTheme.toggleButtonsTheme() '
+        'ToggleButtons FST1.13-base-color: GIVEN a default '
+        'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3633,11 +3991,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.floatingActionButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.14a: GIVEN a default FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14a: GIVEN a default '
+        'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -3672,7 +4033,8 @@ void main() {
       );
     });
     test(
-        'FST1.14c: GIVEN a circular FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14c: GIVEN a circular '
+        'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same Shape', () {
       expect(
@@ -3687,7 +4049,7 @@ void main() {
       );
     });
     test(
-        'FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14d: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3709,7 +4071,7 @@ void main() {
       );
     });
     test(
-        'FST1.14e: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14e: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3728,7 +4090,8 @@ void main() {
       );
     });
     test(
-        'FST1.14f: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14f: GIVEN a null shape '
+        'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with default shape values and colors', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -3770,7 +4133,7 @@ void main() {
       );
     });
     test(
-        'FST1.14g: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'FAB FST1.14g: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3793,11 +4156,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.chipTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Chip tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
+        'Chip FST1.15: GIVEN a default FlexSubTheme.chipTheme() '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3836,7 +4201,8 @@ void main() {
       );
     });
     test(
-        'FST1.15-M3: GIVEN a default FlexSubTheme.chipTheme(M3 no-null scheme) '
+        'Chip FST1.15-M3: GIVEN a default '
+        'FlexSubTheme.chipTheme(M3 no-null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3871,7 +4237,8 @@ void main() {
       );
     });
     test(
-        'FST1.15-M3-n: GIVEN a default FlexSubTheme.chipTheme(M3 null scheme) '
+        'Chip FST1.15-M3-n: GIVEN a default '
+        'FlexSubTheme.chipTheme(M3 null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -3892,7 +4259,8 @@ void main() {
       );
     });
     test(
-        'FST1.16: GIVEN a FlexSubTheme.chipTheme() with usedSchemeColor '
+        'Chip FST1.16: GIVEN a '
+        'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3931,11 +4299,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.navigationBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationBar tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.17: GIVEN a default FlexSubTheme.navigationBarTheme() '
+        'Chip FST1.17: GIVEN a default '
+        'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3958,7 +4329,8 @@ void main() {
       );
     });
     test(
-        'FST1.18custom1: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
+        'Chip FST1.18custom1: GIVEN a custom1 '
+        'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4052,7 +4424,8 @@ void main() {
       );
     });
     test(
-        'FST1.18custom2: GIVEN a custom1 FlexSubTheme.navigationBarTheme() '
+        'Chip FST1.18custom2: GIVEN a custom1 '
+        'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4144,11 +4517,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.switchTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Switch tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.19-light: GIVEN a light default FlexSubTheme.switchTheme() '
+        'Switch FST1.19-light: GIVEN a light default '
+        'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -4211,7 +4587,9 @@ void main() {
         ),
       );
     });
-    test('FST1.19-light-states: Does Switch have right M2 material states', () {
+    test(
+        'Switch FST1.19-light-states: Does Switch have right '
+        'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -4373,7 +4751,7 @@ void main() {
     });
 
     test(
-        'FST1.19-dark: GIVEN a dark default FlexSubTheme.switchTheme() '
+        'Switch FST1.19-dark: GIVEN a dark default FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -4439,7 +4817,9 @@ void main() {
         ),
       );
     });
-    test('FST1.19-dark-states: Does Switch have right M2 material states', () {
+    test(
+        'Switch FST1.19-dark-states: Does Switch have right '
+        'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
@@ -4521,7 +4901,8 @@ void main() {
       );
     });
     test(
-        'FST1.19-custom-light: GIVEN a light custom FlexSubTheme.switchTheme() '
+        'Switch FST1.19-custom-light: GIVEN a light custom '
+        'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -4590,7 +4971,9 @@ void main() {
         ),
       );
     });
-    test('FST1.19-light-M3-states: Does Switch have right M3 states', () {
+    test(
+        'Switch FST1.19-light-M3-states: '
+        'Does Switch have right M3 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -4883,11 +5266,14 @@ void main() {
         equals(colorScheme.primary.withAlpha(0x33)),
       );
     });
+  });
+  group('WITH: FlexSubTheme.checkboxTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes CheckBox tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.20-light: GIVEN a light default FlexSubTheme.checkboxTheme() '
+        'CheckBox FST1.20-light: GIVEN a light default '
+        'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -4953,7 +5339,9 @@ void main() {
         ),
       );
     });
-    test('FST1.20-light-states: Does CheckBox have right material states', () {
+    test(
+        'CheckBox FST1.20-light-states: Does '
+        'CheckBox have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -5009,7 +5397,8 @@ void main() {
     });
 
     test(
-        'FST1.20-dark: GIVEN a dark default FlexSubTheme.checkboxTheme() '
+        'CheckBox FST1.20-dark: GIVEN a dark default '
+        'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -5074,7 +5463,9 @@ void main() {
         ),
       );
     });
-    test('FST1.20-dark-states: Does CheckBox have right material states', () {
+    test(
+        'CheckBox FST1.20-dark-states: Does CheckBox have '
+        'right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
@@ -5167,7 +5558,8 @@ void main() {
       );
     });
     test(
-        'FST1.20-custom-light: GIVEN a light custom FlexSubTheme.checkboxTheme '
+        'CheckBox FST1.20-custom-light: GIVEN a light '
+        'custom FlexSubTheme.checkboxTheme '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -5235,11 +5627,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.radioTheme ', () {
     // -------------------------------------------------------------------------
-    // FlexSubThemes CheckBox tests
+    // FlexSubThemes Radio tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.21-light: GIVEN a light default FlexSubTheme.radioTheme() '
+        'Radio FST1.21-light: GIVEN a light default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -5291,7 +5685,9 @@ void main() {
         ),
       );
     });
-    test('FST1.21-light-states: Does CheckBox have right material states', () {
+    test(
+        'Radio FST1.21-light-states: Does Radio '
+        'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -5329,8 +5725,8 @@ void main() {
     });
 
     test(
-        'FST1.21-dark: GIVEN a dark default FlexSubTheme.radioTheme() '
-        'EXPECT equal to CheckboxThemeData() version with same values', () {
+        'Radio FST1.21-dark: GIVEN a dark default FlexSubTheme.radioTheme() '
+        'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
@@ -5381,7 +5777,9 @@ void main() {
         ),
       );
     });
-    test('FST1.21-dark-states: Does CheckBox have right material states', () {
+    test(
+        'Radio FST1.21-dark-states: Does '
+        'Radio have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
@@ -5418,7 +5816,8 @@ void main() {
       );
     });
     test(
-        'FST1.21-custom-light: GIVEN a light custom FlexSubTheme.radioTheme() '
+        'Radio FST1.21-custom-light: GIVEN a light custom '
+        'FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -5475,11 +5874,13 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.navigationRailTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationRail tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.22-light-flutter default: GIVEN a default '
+        'NavigationRail FST1.22-light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -5499,7 +5900,7 @@ void main() {
       );
     });
     test(
-        'FST1.22-dark-flutter default: GIVEN a default '
+        'NavigationRail FST1.22-dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -5519,7 +5920,7 @@ void main() {
       );
     });
     test(
-        'FST1.22-light-flutter default: GIVEN a default '
+        'NavigationRail FST1.22-light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -5548,7 +5949,7 @@ void main() {
       );
     });
     test(
-        'FST1.22-dark-flutter default: GIVEN a default '
+        'NavigationRail FST1.22-dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -5577,7 +5978,8 @@ void main() {
       );
     });
     test(
-        'FST1.22custom: GIVEN a custom FlexSubTheme.navigationRailTheme() '
+        'NavigationRail FST1.22custom: GIVEN a custom '
+        'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -5633,7 +6035,8 @@ void main() {
       );
     });
     test(
-        'FST1.23custom: GIVEN a custom FlexSubTheme.navigationRailTheme() '
+        'NavigationRail FST1.23custom: GIVEN a custom '
+        'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values Icons Size test', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -5690,11 +6093,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.sliderTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Slider tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.24a-light: GIVEN a light default FlexSubTheme.sliderTheme() '
+        'Slider FST1.24a-light: GIVEN a light default '
+        'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -5718,7 +6124,8 @@ void main() {
       );
     });
     test(
-        'FST1.24b-light: GIVEN a light custom FlexSubTheme.sliderTheme() '
+        'Slider FST1.24b-light: GIVEN a light custom '
+        'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -5751,11 +6158,14 @@ void main() {
         ),
       );
     });
+  });
+  group('WITH: FlexSubTheme.tooltipTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Tooltip tests
     // -------------------------------------------------------------------------
     test(
-        'FST1.25a-light: GIVEN a light default FlexSubTheme.tooltipTheme() '
+        'Tooltip FST1.25a-light: GIVEN a light default '
+        'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -5778,7 +6188,8 @@ void main() {
       );
     });
     test(
-        'FST1.25b-light: GIVEN a light custom FlexSubTheme.tooltipTheme() '
+        'Tooltip FST1.25b-light: GIVEN a light custom '
+        'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -5816,7 +6227,8 @@ void main() {
       );
     });
     test(
-        'FST1.25b-light: GIVEN a light custom FlexSubTheme.tooltipTheme() '
+        'Tooltip FST1.25b-light: GIVEN a light custom '
+        'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(

@@ -6165,7 +6165,7 @@ class FlexColorScheme with Diagnosticable {
       // and letting it assign its values.
       // TODO(rydmike): Monitor Flutter SDK deprecation of focusColor.
       focusColor: tintedInteractions
-          ? FlexSubThemes.tintedFocus(
+          ? FlexSubThemes.tintedFocused(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of highlightColor.
@@ -6181,7 +6181,7 @@ class FlexColorScheme with Diagnosticable {
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
       hoverColor: tintedInteractions
-          ? FlexSubThemes.tintedHover(
+          ? FlexSubThemes.tintedHovered(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
