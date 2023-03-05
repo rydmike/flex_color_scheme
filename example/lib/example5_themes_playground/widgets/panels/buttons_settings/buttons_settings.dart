@@ -278,11 +278,14 @@ class ButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Until it is fixed, we recommend not changing its '
-                      'color at all and only using its default Colorscheme '
-                      'colors. Separate colors and border radius for the two '
-                      'variants will be offered when the current limitation is '
-                      'removed.',
+                  text: '. Due to this issue, if you change theme color, the '
+                      'FilledButton and FilledButton.tonal will get the same '
+                      'color. For same reason the tinted interactions and '
+                      'tinted disable are NOT set unless its color is changed. '
+                      'If they would be set the different colors of the '
+                      'buttons will also be lost. Separate colors and border '
+                      'radius for the two variants will be offered when the '
+                      'current limitation is removed. Go thumbs-up the issue!',
                 ),
               ],
             ),
