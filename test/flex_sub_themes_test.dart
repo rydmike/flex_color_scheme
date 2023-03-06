@@ -3803,17 +3803,17 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 3.0)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!
@@ -3972,17 +3972,17 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 4)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 4)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 4)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!
@@ -4945,21 +4945,51 @@ void main() {
                 colorScheme: colorScheme, useTintedInteraction: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
                 colorScheme: colorScheme, useTintedInteraction: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
                 colorScheme: colorScheme, useTintedInteraction: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme, useTintedInteraction: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
 
       // Default states
@@ -5410,7 +5440,8 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -5419,7 +5450,8 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -5428,7 +5460,41 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        FlexSubThemes.switchTheme(
+                colorScheme: colorScheme,
+                useTintedInteraction: true,
+                useMaterial3: true)
+            .overlayColor!
+            .resolve(
+                <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
       );
 
       // Unselected is colored
@@ -6340,7 +6406,8 @@ void main() {
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.sliderTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.sliderTheme(colorScheme: colorScheme)
+            .toString(minLevel: DiagnosticLevel.debug),
         equalsIgnoringHashCodes(
           const SliderThemeData(
             activeTrackColor: Color(0xff6200ee),
@@ -6353,9 +6420,9 @@ void main() {
             disabledInactiveTickMarkColor: Color(0x1f000000),
             thumbColor: Color(0xff6200ee),
             disabledThumbColor: Color(0xff9e9e9e),
-            overlayColor: Color(0x1f6200ee),
+            overlayColor: Color(0x00000000),
             valueIndicatorShape: RectangularSliderValueIndicatorShape(),
-          ).toString(),
+          ).toString(minLevel: DiagnosticLevel.debug),
         ),
       );
     });
@@ -6371,7 +6438,7 @@ void main() {
           trackHeight: 6,
           valueIndicatorColor: const Color(0xFF342342),
           valueIndicatorTextStyle: const TextStyle(color: Colors.white12),
-        ).toString(),
+        ).toString(minLevel: DiagnosticLevel.debug),
         equalsIgnoringHashCodes(
           const SliderThemeData(
             trackHeight: 6.0,
@@ -6385,12 +6452,12 @@ void main() {
             disabledInactiveTickMarkColor: Color(0x1f000000),
             thumbColor: Color(0xff03dac6),
             disabledThumbColor: Color(0xff9e9e9e),
-            overlayColor: Color(0x1f03dac6),
+            overlayColor: Color(0x00000000),
             valueIndicatorColor: Color(0xff342342),
             valueIndicatorShape: RectangularSliderValueIndicatorShape(),
             valueIndicatorTextStyle:
                 TextStyle(inherit: true, color: Color(0x1fffffff)),
-          ).toString(),
+          ).toString(minLevel: DiagnosticLevel.debug),
         ),
       );
     });

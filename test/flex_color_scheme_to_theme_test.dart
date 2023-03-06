@@ -3936,22 +3936,22 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       expect(
-          theme.sliderTheme,
-          equals(
+          theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
+          equalsIgnoringHashCodes(
             const SliderThemeData(
               activeTrackColor: Color(0xff6750a4),
               inactiveTrackColor: Color(0x3d6750a4),
-              disabledActiveTrackColor: Color(0x52000000),
+              disabledActiveTrackColor: Color(0x61292041),
               disabledInactiveTrackColor: Color(0x1f000000),
               activeTickMarkColor: Color(0x8affffff),
               inactiveTickMarkColor: Color(0x8a6750a4),
               disabledActiveTickMarkColor: Color(0x1fffffff),
               disabledInactiveTickMarkColor: Color(0x1f000000),
               thumbColor: Color(0xff6750a4),
-              disabledThumbColor: Color(0xff9e9e9e),
-              overlayColor: Color(0x1f6750a4),
+              disabledThumbColor: Color(0xffadaab6),
+              overlayColor: Color(0x00000000),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
-            ),
+            ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
     // Test default Slider theming, dark M2
@@ -3965,22 +3965,22 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       expect(
-          theme.sliderTheme,
-          equals(
+          theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
+          equalsIgnoringHashCodes(
             const SliderThemeData(
               activeTrackColor: Color(0xffd0bcff),
               inactiveTrackColor: Color(0x3dd0bcff),
-              disabledActiveTrackColor: Color(0x52ffffff),
+              disabledActiveTrackColor: Color(0x61ece4ff),
               disabledInactiveTrackColor: Color(0x1fffffff),
               activeTickMarkColor: Color(0x8a000000),
               inactiveTickMarkColor: Color(0x8ad0bcff),
               disabledActiveTickMarkColor: Color(0x1f000000),
               disabledInactiveTickMarkColor: Color(0x1fffffff),
               thumbColor: Color(0xffd0bcff),
-              disabledThumbColor: Color(0xff6c6c6c),
-              overlayColor: Color(0x1fd0bcff),
+              disabledThumbColor: Color(0xff64616c),
+              overlayColor: Color(0x00000000),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
-            ),
+            ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
     test(

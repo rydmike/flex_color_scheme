@@ -238,6 +238,9 @@ void main() {
     test('FCT kAlphaDisabled is 0x61', () {
       expect(kAlphaDisabled, 0x61);
     });
+    test('FCT kAlphaMediumDisabled is 0x52', () {
+      expect(kAlphaMediumDisabled, 0x52);
+    });
     test('FCT kAlphaLowDisabled is 0x3D', () {
       expect(kAlphaLowDisabled, 0x3D);
     });
@@ -246,6 +249,30 @@ void main() {
     });
     test('FCT kSwitchM2LightTrackColor is Color(0x52000000)', () {
       expect(kSwitchM2LightTrackColor, const Color(0x52000000));
+    });
+    test('FCT kAlphaUnselect is 0xDD', () {
+      expect(kAlphaUnselect, 0xDD);
+    });
+    test('FCT kAlphaM2SwitchTrackLight is 0x70', () {
+      expect(kAlphaM2SwitchTrackLight, 0x70);
+    });
+    test('FCT kAlphaM2SwitchTrackDark is 0x80', () {
+      expect(kAlphaM2SwitchTrackDark, 0x80);
+    });
+    test('FCT kAlphaM2SwitchUnselectTrackLight is 0x50', () {
+      expect(kAlphaM2SwitchUnselectTrackLight, 0x50);
+    });
+    test('FCT kAlphaM2SwitchUnselectTrackDark is 0x65', () {
+      expect(kAlphaM2SwitchUnselectTrackDark, 0x65);
+    });
+    test('FCT kAlphaM3SwitchUnselectTrackLight is 0x33', () {
+      expect(kAlphaM3SwitchUnselectTrackLight, 0x33);
+    });
+    test('FCT kAlphaM3SwitchUnselectTrackDark is 0x44', () {
+      expect(kAlphaM3SwitchUnselectTrackDark, 0x44);
+    });
+    test('FCT kAlphaSliderTickMark is 0x8A', () {
+      expect(kAlphaSliderTickMark, 0x8A);
     });
   });
 }

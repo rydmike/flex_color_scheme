@@ -405,6 +405,7 @@ const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
 const int kUnselectedAlphaBlend = 0xA5;
 
 // The v7 new tinted interactions effects and disable constants start here.
+// -----------------------------------------------------------------------------
 
 /// The amount of alpha blend used on tinted hover effect that is blended
 /// into overlay color.
@@ -484,10 +485,17 @@ const int kTintDisabled = 0x66;
 /// Value: 0x61 = 97 = 38.04%
 const int kAlphaDisabled = 0x61;
 
-/// An optional lower amount of alpha based opacity used on tinted disabled
-/// effect.
+/// An optional medium amount of alpha based opacity used on disabled
+/// components.
 ///
-/// This is used on M2 switch thumb color.
+/// This is used e.g. on Slider disabledActiveTrackColor.
+///
+/// Value: 0x52 = 82 = 32.16%
+const int kAlphaMediumDisabled = 0x52;
+
+/// An optional lower amount of alpha based opacity used on disabled components.
+///
+/// This is used e.g. on M2 switch thumb color.
 ///
 /// Value: 0x3D = 61 = 24%
 const int kAlphaLowDisabled = 0x3D;
@@ -495,8 +503,8 @@ const int kAlphaLowDisabled = 0x3D;
 /// An optional lower amount of alpha based opacity used on tinted disabled
 /// effect.
 ///
-/// This is used on disabled M2 switch track color, and M3 disabled track and
-/// disabled trackOutline color.
+/// This is used e.g. on disabled M2 switch track color, and M3 disabled track
+/// and disabled trackOutline color.
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaVeryLowDisabled = 0x1F;
@@ -506,3 +514,43 @@ const int kAlphaVeryLowDisabled = 0x1F;
 /// This is hard coded in the SDK, but adding a const for it for easier
 /// mod if it would ever change.
 const Color kSwitchM2LightTrackColor = Color(0x52000000);
+
+/// Unselected colored Checkbox, Radio alpha value.
+///
+/// Value: 0xDD = 221 = 86.67%
+const int kAlphaUnselect = 0xDD;
+
+/// Switch in M2 mode selected light mode alpha.
+///
+/// Value: 0x70 = 112 = 43.92%
+const int kAlphaM2SwitchTrackLight = 0x70;
+
+/// Switch in M2 mode selected dark mode alpha.
+///
+/// Value: 0x80 = 128 = 50.20%
+const int kAlphaM2SwitchTrackDark = 0x80;
+
+/// Switch in M2 mode unselected light mode alpha.
+///
+/// Value: 0x50 = 80 = 31.37%
+const int kAlphaM2SwitchUnselectTrackLight = 0x50;
+
+/// Switch in M2 mode unselected dark mode alpha.
+///
+/// Value: 0x65 = 101 = 39.61%
+const int kAlphaM2SwitchUnselectTrackDark = 0x65;
+
+/// Switch in M3 mode unselected light mode alpha.
+///
+/// Value: 0x33 = 51 = 20.00%
+const int kAlphaM3SwitchUnselectTrackLight = 0x33;
+
+/// Switch in M3 mode unselected dark mode alpha.
+///
+/// Value: 0x44 = 68 = 26.67%
+const int kAlphaM3SwitchUnselectTrackDark = 0x44;
+
+/// Tick mark alpha for Slider and RangeSlider.
+///
+/// Value: 0x8A = 138 = 54.12%
+const int kAlphaSliderTickMark = 0x8A;

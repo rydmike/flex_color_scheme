@@ -6836,6 +6836,8 @@ class FlexColorScheme with Diagnosticable {
               valueIndicatorTextStyle: sliderValueStyle,
               valueIndicatorType: subTheme.sliderValueIndicatorType,
               showValueIndicator: subTheme.sliderShowValueIndicator,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,
