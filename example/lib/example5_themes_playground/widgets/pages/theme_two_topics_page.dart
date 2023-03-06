@@ -270,11 +270,12 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
               key: const ValueKey<String>('Left Selector'),
               page: widget.panel,
               onSelect: (int newIndex) {
+                if (newIndex == widget.panel) return;
                 widget.onPanelChanged?.call(newIndex);
                 // A scale and fade up animation when user taps on them topic
                 // item, we trigger a slight fade and zoom in effect.
-                scaleController.value = 0.7;
-                fadeController.value = 0.2;
+                scaleController.value = 0.9;
+                fadeController.value = 0.3;
                 scaleController.forward();
                 fadeController.forward();
               },
@@ -314,11 +315,12 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
               key: const ValueKey<String>('Right Selector'),
               page: widget.panel,
               onSelect: (int newIndex) {
+                if (newIndex == widget.panel) return;
                 widget.onPanelChanged?.call(newIndex);
                 // A scale and fade up animation when user taps on them topic
                 // item, we trigger a slight fade and zoom in effect.
-                scaleController.value = 0.7;
-                fadeController.value = 0.2;
+                scaleController.value = 0.9;
+                fadeController.value = 0.3;
                 scaleController.forward();
                 fadeController.forward();
               },
