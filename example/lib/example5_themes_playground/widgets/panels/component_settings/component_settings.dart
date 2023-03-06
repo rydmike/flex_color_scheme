@@ -56,7 +56,7 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTile(
           title: const Text('Tinted disabled components'),
           subtitle: const Text('Disabled controls get a slight primary color '
-              'tint.\n'
+              'tint or tint of its own color, if it is not primary colored.\n'
               'Turn OFF for Flutter partially transparent defaults'),
           value: controller.tintedDisabledControls &&
               controller.useSubThemes &&
@@ -65,9 +65,10 @@ class ComponentSettings extends StatelessWidget {
               ? controller.setTintedDisabledControls
               : null,
         ),
-        const ListTile(
+        ListTile(
           dense: true,
-          subtitle: Text(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: const Text(
             'Sets ThemeData.disabledColor, but also disabled state color on '
             'individual widgets. Material 3 widgets typically ignore the '
             'ThemeData.disabledColor, disabled styling is set by component '
@@ -77,8 +78,8 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTile(
           title: const Text('Tinted interaction effects'),
           subtitle: const Text('Hover, focus, highlight, pressed and splash '
-              'colors get a slight primary color tint or tint of its '
-              'own color if it is not primary colored.\n'
+              'colors get a slight primary color tint,or tint of its '
+              'own color, if it is not primary colored.\n'
               'Turn OFF for Flutter partially transparent grey defaults.'),
           value: controller.interactionEffects &&
               controller.useSubThemes &&
@@ -87,15 +88,16 @@ class ComponentSettings extends StatelessWidget {
               ? controller.setInteractionEffects
               : null,
         ),
-        const ListTile(
+        ListTile(
           dense: true,
-          subtitle: Text(
-            'Sets ThemeData hover, focus, highlight and splash. Material 3 '
-            'components implement their own interaction effects, this '
-            'setting styles all of them on component theme level as well. '
-            'While most sub-themes are covered, some may not be supported yet. '
-            'Their implementations will be reported as new features '
-            'going forward, not as style breaking.',
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: const Text(
+            'Impacts ThemeData hover, focus, highlight and splash colors. '
+            'Material 3 components typically implement their own interaction '
+            'effects. This setting also styles all of them on component theme '
+            'level. Most sub-themes are covered, a few cases may not be '
+            'supported yet. Their later inclusion in this setting will be '
+            'reported as new features going forward, not as style breaking.',
           ),
         ),
         const Divider(),
@@ -111,9 +113,10 @@ class ComponentSettings extends StatelessWidget {
               'it. You can also set radius per component, they will then use '
               'their own value, regardless of what is defined here.'),
         ),
-        const ListTile(
+        ListTile(
           dense: true,
-          subtitle: Text(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: const Text(
             'Radius on very small elements or components where changing it '
             'to a high radius is a bad idea are not included in the global '
             'radius override. This includes PopupMenuButton, Menus, '
@@ -264,9 +267,10 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
-        const ListTile(
+        ListTile(
           dense: true,
-          subtitle: Text(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: const Text(
             'With the API you can define which platform an adaptive '
             'feature is used on, including separate definitions when '
             'using the app in a web build on each platform. The above '
