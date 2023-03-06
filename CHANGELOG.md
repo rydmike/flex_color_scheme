@@ -80,7 +80,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.
   
 
-- **Style breaking**: Tinted TextTheme was made less obviously tinted. M3-seeded ColorSchemes brings color tint to themes, if then also using strong tint on text, in the optional tinted TextTheme, is a bit too much. It is now more subtle and usable also with seeded ColorSchemes. The changes are:
+- **Style breaking**: Tinted TextTheme was made less obviously tinted. M3-seeded ColorSchemes brings color tint to themes, if then also using tinted text, in the optional tinted TextTheme, is becomes too much. It is now more subtle and more usable also with seeded ColorSchemes. The changes are:
   - TextTheme light mode:
     - Hi opacity style:  Blend 30% -> 20%, Opacity 75% -> 85%
     - Medium opacity style: Blend 26% -> 20%, Opacity 95% -> 96%
@@ -156,11 +156,11 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added SnackBar controls for elevation and border radius to panel **BottomSheet Snack Banner**.
 - Added TabBar controls for unselected item color, own controls for light and dark mode, unselected item opacity, indicator thickness and top radius to panel **TabBar**.
 - Added controls for `defaultRadiusAdaptive` and `adaptiveRadius` to panel **Component themes**. They are used to define to make a platform adaptive override to the global border radius override value.
-- Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. Playground excludes them from code gen when they have no effect.
+- Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 56% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
+- IN PROGRESS (About 60% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
   
 - TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
 

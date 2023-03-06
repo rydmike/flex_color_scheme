@@ -191,9 +191,7 @@ class ComponentSettings extends StatelessWidget {
         AdaptiveThemePopupMenu(
           title: const Text('Adaptive default border radius usage'),
           index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  controller.useMaterial3
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
               ? (int index) {
                   if (index < 0 || index >= AdaptiveTheme.values.length) {
                     controller.setAdaptiveRadius(null);
