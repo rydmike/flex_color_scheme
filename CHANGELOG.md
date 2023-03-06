@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 5, 2023**
+**Mar 6, 2023**
 
 **FIX**
 
@@ -160,7 +160,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 35% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
+- IN PROGRESS (About 56% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
   
 - TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
 
