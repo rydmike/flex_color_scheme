@@ -4951,7 +4951,7 @@ class FlexSubThemes {
       disabledInactiveTrackColor:
           colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
       activeTickMarkColor: onBaseColor.withAlpha(kAlphaSliderTickMark),
-      inactiveTickMarkColor: baseColor.withOpacity(0.54),
+      inactiveTickMarkColor: baseColor.withAlpha(kAlphaSliderTickMark),
       disabledActiveTickMarkColor: onBaseColor.withAlpha(kAlphaVeryLowDisabled),
       disabledInactiveTickMarkColor:
           colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
