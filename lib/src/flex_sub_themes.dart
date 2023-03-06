@@ -2037,6 +2037,20 @@ class FlexSubThemes {
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = onBaseColor;
+    final Color tint = baseColor;
+    final bool surfaceMode = useM3 &&
+        ThemeData.estimateBrightnessForColor(overlay) == colorScheme.brightness;
+    final double factor =
+        _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
+
+    // debugPrint('---------------------------------');
+    // debugPrint('ThemeMode   : ${colorScheme.brightness}');
+    // debugPrint('SurfaceMode : $surfaceMode');
+    // debugPrint('factor      : $factor');
+
     // We are using FCS M2 buttons, styled in M3 fashion by FCS.
     if (!useM3) {
       return ElevatedButtonThemeData(
@@ -2054,9 +2068,10 @@ class FlexSubThemes {
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledForegroundAlpha);
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, tint);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaDisabled);
               }
               return onBaseColor;
             },
@@ -2064,9 +2079,11 @@ class FlexSubThemes {
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return baseColor
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, tint)
+                      .withAlpha(kAlphaVeryLowDisabled);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
               }
               return baseColor;
             },
@@ -2074,12 +2091,15 @@ class FlexSubThemes {
           overlayColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.hovered)) {
+                if (tintInteract) return tintedHovered(overlay, tint, factor);
                 return onBaseColor.withAlpha(kHoverBackgroundAlpha);
               }
               if (states.contains(MaterialState.focused)) {
+                if (tintInteract) return tintedFocused(overlay, tint, factor);
                 return onBaseColor.withAlpha(kFocusBackgroundAlpha);
               }
               if (states.contains(MaterialState.pressed)) {
+                if (tintInteract) return tintedPressed(overlay, tint, factor);
                 return onBaseColor.withAlpha(kPressedBackgroundAlpha);
               }
               return Colors.transparent;
@@ -2099,32 +2119,41 @@ class FlexSubThemes {
       // If a baseSchemeColor was given we need to define all M3 color in
       // all states, if it was not defined, we can keeping them all null
       // and let M3 widget defaults handle the colors.
-      if (baseSchemeColor != null) {
+      if (baseSchemeColor != null || tintInteract || tintDisable) {
         foregroundColor =
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.38);
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, tint);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
           return baseColor;
         });
-
         overlayColor =
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.hovered)) {
-            return baseColor.withOpacity(0.08);
+            if (tintInteract) return tintedHovered(overlay, tint, factor);
+            return baseColor.withAlpha(kAlphaHovered);
           }
           if (states.contains(MaterialState.focused)) {
-            return baseColor.withOpacity(0.12);
+            if (tintInteract) return tintedFocused(overlay, tint, factor);
+            return baseColor.withAlpha(kAlphaFocused);
           }
           if (states.contains(MaterialState.pressed)) {
-            return baseColor.withOpacity(0.12);
+            if (tintInteract) return tintedPressed(overlay, tint, factor);
+            return baseColor.withAlpha(kAlphaPressed);
           }
           return null;
         });
         backgroundColor =
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, tint)
+                  .withAlpha(kAlphaVeryLowDisabled);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
           return onBaseColor;
         });
@@ -2136,7 +2165,11 @@ class FlexSubThemes {
         backgroundColor =
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.12);
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, tint)
+                  .withAlpha(kAlphaVeryLowDisabled);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
           return onBaseColor;
         });

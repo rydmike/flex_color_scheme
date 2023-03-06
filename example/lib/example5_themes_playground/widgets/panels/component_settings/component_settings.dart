@@ -35,7 +35,6 @@ class ComponentSettings extends StatelessWidget {
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
-        UseTinted3TextTheme(controller: controller),
         SwitchListTile(
           title: const Text('Use Material 2 style divider in Material 3'),
           subtitle: const Text('In M3 the primary color tinted outlineVariant '
@@ -51,6 +50,53 @@ class ComponentSettings extends StatelessWidget {
                   controller.useMaterial3
               ? controller.setUseM2StyleDividerInM3
               : null,
+        ),
+        const Divider(),
+        UseTinted3TextTheme(controller: controller),
+        SwitchListTile(
+          title: const Text('Tinted disabled components'),
+          subtitle: const Text('Disabled controls get a slight primary color '
+              'tint.\n'
+              'Turn OFF for Flutter partially transparent defaults'),
+          value: controller.tintedDisabledControls &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setTintedDisabledControls
+              : null,
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text(
+            'Sets ThemeData.disabledColor, but also disabled state color on '
+            'individual widgets. Material 3 widgets typically ignore the '
+            'ThemeData.disabledColor, disabled styling is set by component '
+            'themes.',
+          ),
+        ),
+        SwitchListTile(
+          title: const Text('Tinted interaction effects'),
+          subtitle: const Text('Hover, focus, highlight, pressed and splash '
+              'colors get a slight primary color tint or tint of its '
+              'own color if it is not primary colored.\n'
+              'Turn OFF for Flutter partially transparent grey defaults.'),
+          value: controller.interactionEffects &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInteractionEffects
+              : null,
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text(
+            'Sets ThemeData hover, focus, highlight and splash. Material 3 '
+            'components implement their own interaction effects, this '
+            'setting styles all of them on component theme level as well. '
+            'While most sub-themes are covered, some may not be supported yet. '
+            'Their implementations will be reported as new features '
+            'going forward, not as style breaking.',
+          ),
         ),
         const Divider(),
         ListTile(
@@ -130,7 +176,6 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Platform adaptive border radius override'),
@@ -229,6 +274,7 @@ class ComponentSettings extends StatelessWidget {
             'probably cover most use cases.',
           ),
         ),
+        const Divider(),
         PlatformPopupMenu(
           platform: controller.platform,
           onChanged: controller.setPlatform,
@@ -342,44 +388,6 @@ class ComponentSettings extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-        SwitchListTile(
-          title: const Text('Tinted interaction effects'),
-          subtitle: const Text('Hover, focus, highlight and splash '
-              'colors get a slight primary color tint.\n'
-              'Turn OFF for Flutter transparent grey defaults'),
-          value: controller.interactionEffects &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setInteractionEffects
-              : null,
-        ),
-        SwitchListTile(
-          title: const Text('Tinted disabled components'),
-          subtitle: const Text('Disabled controls get a slight primary color '
-              'tint.\n'
-              'Turn OFF for Flutter partially transparent defaults'),
-          value: controller.tintedDisabledControls &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setTintedDisabledControls
-              : null,
-        ),
-        const ListTile(
-          dense: true,
-          subtitle: Text(
-            'The tinted interaction effects and tinted disabled '
-            'components apply to components that use hover, focus, '
-            'highlight and splash colors as well as disabledColor in '
-            'ThemeData and to button themes. Most newer M3 components '
-            'implement their own interaction and disabled styles, like '
-            'the buttons do. These tint features have not yet been included '
-            'in all sub-themes. They will be in later '
-            'versions. Their implementations will be reported as new features '
-            'going forward, not as style breaking.',
           ),
         ),
         const Divider(),

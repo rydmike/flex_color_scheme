@@ -2338,28 +2338,30 @@ void main() {
     test(
         'ElevatedButton FST1.09-M2-states: Does '
         'ElevatedButton have right Material 2 states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF42AEE7),
+        brightness: Brightness.light,
+      );
       // Disabled foreground, default, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
             .foregroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.primary
-            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-            .withAlpha(kDisabledForegroundAlpha)),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
-      // Disabled foreground, default, M2
+      // Disabled foreground, custom, M2, with tint
       expect(
         FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                baseSchemeColor: SchemeColor.secondary)
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useTintedDisable: true,
+        )
             .style!
             .foregroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.secondary
-            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-            .withAlpha(kDisabledForegroundAlpha)),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.secondary)),
       );
       // Selected foreground, M2
       expect(
@@ -2390,15 +2392,26 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.tertiary),
       );
-      // Disabled background, M2
+      // Disabled background, M2, default
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
             .backgroundColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.primary
-            .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-            .withAlpha(kDisabledBackgroundAlpha)),
+        equals(colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useTintedDisable: true,
+        )
+            .style!
+            .backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+                colorScheme.onSurface, colorScheme.secondary)
+            .withAlpha(kAlphaVeryLowDisabled)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
