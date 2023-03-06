@@ -304,9 +304,11 @@ class ComponentSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.thickBorderWidth == null ||
                         (controller.thickBorderWidth ?? 0) < 0
-                    ? 'default 2'
+                    ? useMaterial3
+                        ? 'default 1'
+                        : 'default 2'
                     : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
-                : 'default 2',
+                : 'default 1',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.thickBorderWidth ?? 0
                 : 0,
@@ -329,10 +331,12 @@ class ComponentSettings extends StatelessWidget {
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.thickBorderWidth == null ||
                               (controller.thickBorderWidth ?? 0) <= 0
-                          ? 'default 2'
+                          ? useMaterial3
+                              ? 'default 1'
+                              : 'default 2'
                           : (controller.thickBorderWidth?.toStringAsFixed(1) ??
                               '')
-                      : 'default 2',
+                      : 'default 1',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
