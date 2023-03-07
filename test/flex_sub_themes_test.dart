@@ -983,8 +983,12 @@ void main() {
         'TimePicker FST1.07-default: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
       expect(
-        FlexSubThemes.timePickerTheme(),
+        FlexSubThemes.timePickerTheme(colorScheme: colorScheme),
         equals(
           TimePickerThemeData(
             // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
@@ -1030,7 +1034,7 @@ void main() {
             // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
             // elevation: 6,
             backgroundColor: colorScheme.tertiary,
-            dialBackgroundColor: colorScheme.surfaceVariant,
+            // dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -1071,7 +1075,6 @@ void main() {
             // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
             // elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
-            dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -1101,8 +1104,13 @@ void main() {
         'TimePicker FST1.07.background-b: GIVEN a custom '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
       expect(
         FlexSubThemes.timePickerTheme(
+          colorScheme: colorScheme,
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(filled: true),
@@ -1112,7 +1120,7 @@ void main() {
           TimePickerThemeData(
             // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
             // elevation: 6,
-            backgroundColor: const Color(0xFFDDDDDD),
+            backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),

@@ -6036,7 +6036,7 @@ class FlexSubThemes {
     return TimePickerThemeData(
       backgroundColor: background,
       // TODO(rydmike): This elevation does not exist in beta 3.7.0-1.4.pre
-      elevation: elevation ?? kDialogElevation,
+      // elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
