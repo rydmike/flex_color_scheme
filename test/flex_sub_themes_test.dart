@@ -258,7 +258,7 @@ void main() {
       expect(
         FlexSubThemes.filledButtonTheme(
           colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
+          backgroundSchemeColor: SchemeColor.secondary,
         ).toString(),
         equalsIgnoringHashCodes(
           FilledButtonThemeData(
@@ -288,20 +288,23 @@ void main() {
                   return colorScheme.onSecondary;
                 },
               ),
-              overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.hovered)) {
-                    return colorScheme.onSecondary.withOpacity(0.08);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    return colorScheme.onSecondary.withOpacity(0.12);
-                  }
-                  if (states.contains(MaterialState.pressed)) {
-                    return colorScheme.onSecondary.withOpacity(0.12);
-                  }
-                  return null;
-                },
-              ),
+              // No custom Overlay unless tinted version is used!
+              // Temp design due to:
+              // https://github.com/flutter/flutter/issues/118063
+              // overlayColor: MaterialStateProperty.resolveWith<Color?>(
+              //   (Set<MaterialState> states) {
+              //     if (states.contains(MaterialState.hovered)) {
+              //       return colorScheme.onSecondary.withOpacity(0.08);
+              //     }
+              //     if (states.contains(MaterialState.focused)) {
+              //       return colorScheme.onSecondary.withOpacity(0.12);
+              //     }
+              //     if (states.contains(MaterialState.pressed)) {
+              //       return colorScheme.onSecondary.withOpacity(0.12);
+              //     }
+              //     return null;
+              //   },
+              // ),
             ),
           ).toString(),
         ),
@@ -336,7 +339,8 @@ void main() {
       );
       final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
         colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.primary,
+        backgroundSchemeColor: SchemeColor.primary,
+        useTintedInteraction: true,
       );
       // Disabled colors
       expect(
@@ -358,27 +362,29 @@ void main() {
         button.style!.foregroundColor!.resolve(<MaterialState>{}),
         equals(colorScheme.onPrimary),
       );
-      // Overlay color states
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.onPrimary.withOpacity(0.08)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.onPrimary.withOpacity(0.12)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.onPrimary.withOpacity(0.12)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(null),
-      );
+      // No custom Overlay unless tinted version is used!
+      // Temp design due to: https://github.com/flutter/flutter/issues/118063
+      // // Overlay color states
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.hovered}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.08)),
+      // );
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.focused}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      // );
+      // expect(
+      //   button.style?.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.pressed}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      // );
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.selected}),
+      //   equals(null),
+      // );
     });
     test(
         'FilledButton FST1.11-M2-tint-states: Does M2 '
@@ -389,7 +395,7 @@ void main() {
       );
       final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
         colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.tertiary,
+        backgroundSchemeColor: SchemeColor.tertiary,
         useTintedDisable: true,
         useTintedInteraction: true,
       );
@@ -447,7 +453,7 @@ void main() {
       );
       final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
         colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.primary,
+        backgroundSchemeColor: SchemeColor.primary,
         radius: 15,
         useMaterial3: true,
       );
@@ -471,27 +477,29 @@ void main() {
         button.style!.foregroundColor!.resolve(<MaterialState>{}),
         equals(colorScheme.onPrimary),
       );
-      // Overlay color states
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.onPrimary.withOpacity(0.08)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.onPrimary.withOpacity(0.12)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.onPrimary.withOpacity(0.12)),
-      );
-      expect(
-        button.style!.overlayColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(null),
-      );
+      // No custom Overlay unless tinted version is used!
+      // Temp design due to: https://github.com/flutter/flutter/issues/118063
+      // // Overlay color states
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.hovered}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.08)),
+      // );
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.focused}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      // );
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.pressed}),
+      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      // );
+      // expect(
+      //   button.style!.overlayColor!
+      //       .resolve(<MaterialState>{MaterialState.selected}),
+      //   equals(null),
+      // );
       // Custom shape test
       expect(
         button.style!.shape!.resolve(<MaterialState>{}),
@@ -513,7 +521,7 @@ void main() {
       );
       final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
         colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.tertiary,
+        backgroundSchemeColor: SchemeColor.tertiary,
         radius: 5,
         useTintedDisable: true,
         useTintedInteraction: true,
@@ -579,7 +587,7 @@ void main() {
       );
       final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
         colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.tertiary,
+        backgroundSchemeColor: SchemeColor.tertiary,
         radius: 5,
         useTintedDisable: true,
         useTintedInteraction: true,

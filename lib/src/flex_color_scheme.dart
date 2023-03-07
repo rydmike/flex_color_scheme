@@ -6244,13 +6244,17 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily,
       fontFamilyFallback: fontFamilyFallback,
       package: package,
+
+      // TODO(rydmike): Blended icon theme removal!
       // Set colors for icons in opted in sub themes.
-      iconTheme: useSubThemes
-          ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
-          : null,
-      primaryIconTheme: useSubThemes
-          ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
-          : null,
+
+      // iconTheme: useSubThemes && subTheme.blendTextTheme
+      //     ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
+      //     : null,
+      // primaryIconTheme: useSubThemes && subTheme.blendTextTheme
+      //     ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
+      //     : null,
+
       // TextTheme properties use the same logic as in ThemeData, allowing us
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.
@@ -6586,7 +6590,7 @@ class FlexColorScheme with Diagnosticable {
       filledButtonTheme: useSubThemes
           ? FlexSubThemes.filledButtonTheme(
               colorScheme: colorScheme,
-              baseSchemeColor: subTheme.filledButtonSchemeColor,
+              backgroundSchemeColor: subTheme.filledButtonSchemeColor,
               radius: subTheme.filledButtonRadius ?? platformRadius,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
@@ -6610,7 +6614,20 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // IconButtonTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // IconButton theme.
+      // Supports new coming IconButton styles (filled, filledTonal, outlined)
+      // with interaction effects, but tinted disable is not supported due
+      // to issue:
+      // https://github.com/flutter/flutter/pull/121884#issuecomment-1458505977
+      // Nor is any custom theming supported due to same issue.
+      iconButtonTheme: useSubThemes
+          ? FlexSubThemes.iconButtonTheme(
+              colorScheme: colorScheme,
+              useTintedInteraction: subTheme.interactionEffects,
+              // Not available in FCS v7, see issue above.
+              // useTintedDisable: subTheme.tintedDisabledControls,
+            )
+          : null,
       //
       // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //

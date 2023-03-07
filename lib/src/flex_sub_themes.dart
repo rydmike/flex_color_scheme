@@ -189,6 +189,7 @@ enum SchemeColor {
 ///   [FlexSubThemes.filledButtonTheme].
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [floatingActionButtonTheme].
+/// * [IconButtonThemeData] for [IconButton] via [iconButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
 /// * [MenuButtonThemeData] for [MenuButton] via [menuButtonTheme].
@@ -2232,13 +2233,16 @@ class FlexSubThemes {
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
 
-    /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the button.
+    /// Selects which color from the passed in colorScheme to use as the
+    /// background  color for the filled button.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
+    /// The foreground color automatically uses the contrast complementary color
+    /// from the SchemeColor.
+    ///
     /// If not defined, [colorScheme.primary] will be used.
-    final SchemeColor? baseSchemeColor,
+    final SchemeColor? backgroundSchemeColor,
 
     /// If not defined, defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
@@ -2297,11 +2301,11 @@ class FlexSubThemes {
 
     // Get background color, defaults to primary.
     final Color background =
-        schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+        schemeColor(backgroundSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get right foreground on color for background, defaults to onPrimary.
-    final Color foreground =
-        schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+    final Color foreground = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
@@ -2322,7 +2326,7 @@ class FlexSubThemes {
     // https://github.com/flutter/flutter/issues/118063
     // we only apply the tintInteract and tintDisable if we have a custom
     // color that anyway kills their separate designs.
-    if (baseSchemeColor != null) {
+    if (backgroundSchemeColor != null) {
       backgroundColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
@@ -2345,7 +2349,9 @@ class FlexSubThemes {
         }
         return foreground;
       });
-
+    }
+    // Temp if, so we get pure default style when tint interact is false.
+    if (tintInteract) {
       overlayColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {
@@ -2500,6 +2506,110 @@ class FlexSubThemes {
                 )
           : null,
     );
+  }
+
+  /// An opinionated [IconButtonThemeData].
+  ///
+  /// Current only used to set tinted interaction and disable style on
+  /// [IconButtonThemeData] when these feature are opted in on in FCS.
+  static IconButtonThemeData iconButtonTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+  }) {
+    final bool tintInteract = useTintedInteraction ?? false;
+
+    // Due to issue:
+    // https://github.com/flutter/flutter/pull/121884#issuecomment-1458505977
+    // Only supports default colors for now, the colors below are only used
+    // for default color matching tinted ink effects.
+
+    // Get right foreground on color for background, defaults to primary.
+    final Color foreground = schemeColor(SchemeColor.primary, colorScheme);
+    // Get background color, defaults to onPrimary.
+    final Color background = schemeColorPair(SchemeColor.primary, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = background;
+    final Color tint = foreground;
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
+
+    return tintInteract
+        ? IconButtonThemeData(style: ButtonStyle(
+            // backgroundColor:
+            //   MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            //   if (states.contains(MaterialState.disabled)) {
+            //     if (tintDisable) {
+            //       return tintedDisable(colorScheme.onSurface, tint);
+            //     }
+            //     if (states.contains(MaterialState.selected)) {
+            //       return colorScheme.onSurface.withOpacity(0.12);
+            //     }
+            //     return Colors.transparent;
+            //   }
+            //   if (states.contains(MaterialState.selected)) {
+            //     return colorScheme.inverseSurface;
+            //   }
+            //   return Colors.transparent;
+            // }),
+            // foregroundColor:
+            //   MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            //   if (states.contains(MaterialState.disabled)) {
+            //     if (tintDisable) {
+            //       return tintedDisable(colorScheme.onSurface, tint);
+            //     }
+            //     return colorScheme.onSurface.withOpacity(0.38);
+            //   }
+            //   if (states.contains(MaterialState.selected)) {
+            //     return colorScheme.onInverseSurface;
+            //   }
+            //   return colorScheme.onSurfaceVariant;
+            // }),
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  if (states.contains(MaterialState.pressed)) {
+                    if (tintInteract) {
+                      return tintedPressed(overlay, tint, factor);
+                    }
+                    return colorScheme.onSurface.withAlpha(kAlphaPressed);
+                  }
+                  if (states.contains(MaterialState.hovered)) {
+                    if (tintInteract) {
+                      return tintedHovered(overlay, tint, factor);
+                    }
+                    return foreground.withAlpha(kAlphaHovered);
+                  }
+                  if (states.contains(MaterialState.focused)) {
+                    if (tintInteract) {
+                      return tintedFocused(overlay, tint, factor);
+                    }
+                    return foreground.withAlpha(kAlphaFocused);
+                  }
+                  return Colors.transparent;
+                }
+                if (states.contains(MaterialState.pressed)) {
+                  if (tintInteract) return tintedPressed(overlay, tint, factor);
+                  return foreground.withAlpha(kAlphaPressed);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  if (tintInteract) return tintedHovered(overlay, tint, factor);
+                  return colorScheme.onSurface.withAlpha(kAlphaHovered);
+                }
+                if (states.contains(MaterialState.focused)) {
+                  if (tintInteract) return tintedFocused(overlay, tint, factor);
+                  return colorScheme.onSurface.withAlpha(kAlphaFocused);
+                }
+                return Colors.transparent;
+              },
+            ),
+          ))
+        : const IconButtonThemeData();
   }
 
   /// An opinionated [OutlineInputBorder] or [UnderlineInputBorder] using
@@ -3667,6 +3777,9 @@ class FlexSubThemes {
     /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
     final Color? surfaceTintColor,
   }) {
+    // TODO(rydmike): Removed tint, not supported in Flutter yet.
+    // final bool tintInteract = useTintedInteraction ?? true;
+
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
@@ -3690,6 +3803,53 @@ class FlexSubThemes {
 
     // TextStyle
     final TextStyle style = textStyle ?? const TextStyle();
+
+    // TODO(rydmike): Removed tint, not supported in Flutter yet.
+    //
+    // // Using these tinted overlay variable in all themes for ease of
+    // // reasoning and duplication.
+    // final Color overlay = backgroundColor;
+    // final Color tint = indicatorColor;
+    // final double factor =
+    // _tintAlphaFactor(tint, colorScheme.brightness, true);
+
+    // TODO(rydmike): Would need something like for tinted indicator.
+    //  This does not work due to limitations in Flutter SDK implementation.
+    //  All we can get it ThemeData based themed hover, press, focus
+    //  Report this limitation!
+
+    // Color? indicatorStateColor() =>
+    //     MaterialStateColor.resolveWith((Set<MaterialState> states) {
+    //       if (states.contains(MaterialState.selected)) {
+    //         if (states.contains(MaterialState.pressed)) {
+    //           if (tintInteract) return tintedPressed(overlay, tint, factor);
+    //           return indicatorColor.withAlpha(kAlphaPressed);
+    //         }
+    //         if (states.contains(MaterialState.hovered)) {
+    //           if (tintInteract) return tintedHovered(overlay, tint, factor);
+    //           return indicatorColor.withAlpha(kAlphaHovered);
+    //         }
+    //         if (states.contains(MaterialState.focused)) {
+    //           if (tintInteract) return tintedFocused(overlay, tint, factor);
+    //           return indicatorColor.withAlpha(kAlphaFocused);
+    //         }
+    //         return indicatorColor;
+    //       }
+    //
+    //       if (states.contains(MaterialState.hovered)) {
+    //         if (tintInteract) return tintedPressed(overlay, tint, factor);
+    //         return colorScheme.primary.withAlpha(kAlphaPressed);
+    //       }
+    //       if (states.contains(MaterialState.hovered)) {
+    //         if (tintInteract) return tintedHovered(overlay, tint, factor);
+    //         return colorScheme.onSurface.withAlpha(kAlphaHovered);
+    //       }
+    //       if (states.contains(MaterialState.focused)) {
+    //         if (tintInteract) return tintedHovered(overlay, tint, factor);
+    //         return colorScheme.primary.withAlpha(kAlphaHovered);
+    //       }
+    //       return Colors.transparent;
+    //     });
 
     return NavigationDrawerThemeData(
       backgroundColor: backgroundColor,
