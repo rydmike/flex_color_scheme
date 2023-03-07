@@ -85,7 +85,8 @@ void main() {
       );
     });
     test(
-        'BottomNavigationBar FST1.02-flutter-default-dark: GIVEN a DARK default '
+        'BottomNavigationBar FST1.02-flutter-default-dark: GIVEN a DARK '
+        'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -832,7 +833,8 @@ void main() {
       );
     });
     test(
-        'Dialog FST1.05-background-based-a: GIVEN a FlexSubTheme.dialogTheme with no '
+        'Dialog FST1.05-background-based-a: GIVEN a FlexSubTheme.dialogTheme '
+        'with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
       expect(

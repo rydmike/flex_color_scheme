@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../shared/const/app.dart';
+import '../../../../shared/const/app_images.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/utils/link_text_span.dart';
 
@@ -92,19 +93,19 @@ class _AppExampleShopState extends State<AppExampleShop> {
                     ),
                     const SizedBox(height: 16),
                     CategoryTile(
-                      imageUrl: _manLookRightImageUrl,
+                      imageUrl: AppImages.shopMen,
                       category: _mensCategory,
                       imageAlignment: Alignment.topCenter,
                     ),
                     const SizedBox(height: 16),
                     CategoryTile(
-                      imageUrl: _womanLookLeftImageUrl,
+                      imageUrl: AppImages.shopWomen,
                       category: _womensCategory,
                       imageAlignment: Alignment.topCenter,
                     ),
                     const SizedBox(height: 16),
                     CategoryTile(
-                      imageUrl: _dogImageUrl,
+                      imageUrl: AppImages.shopPets,
                       category: _petsCategory,
                     ),
                   ],
@@ -764,70 +765,47 @@ class CategoryTile extends StatelessWidget {
       super.key});
   final String imageUrl;
   final Category category;
-
-  /// Which part of the image to prefer
-  final Alignment imageAlignment;
+  final Alignment imageAlignment; // Which part of the image to prefer
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    final Color background = isLight
-        ? theme.colorScheme.onInverseSurface
-        : theme.colorScheme.inverseSurface;
-    final Color iconColor = isLight
-        ? theme.colorScheme.secondary.withOpacity(0.8)
-        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
-    return InkWell(
-      onTap: () => _pushScreen(
-        context: context,
-        screen: CategoryScreen(
-          category: category,
+    return Card(
+      margin: EdgeInsets.zero,
+      elevation: 0,
+      child: InkWell(
+        onTap: () => _pushScreen(
+          context: context,
+          screen: CategoryScreen(
+            category: category,
+          ),
         ),
-      ),
-      child: Container(
-        height: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Image.network(
-              imageUrl,
-              loadingBuilder:
-                  (_, Widget child, ImageChunkEvent? loadingProgress) =>
-                      loadingProgress == null
-                          ? child
-                          : const Center(child: CircularProgressIndicator()),
-              errorBuilder: (_, Object child, StackTrace? trace) => ColoredBox(
-                color: isLight
-                    ? theme.colorScheme.surfaceVariant
-                    : theme.colorScheme.onSurfaceVariant,
-                child: Icon(
-                  Icons.image_not_supported_outlined,
-                  size: 180,
-                  color: iconColor,
+        child: Container(
+          height: 200,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Ink.image(
+                image: AssetImage(imageUrl),
+                alignment: imageAlignment,
+                fit: BoxFit.cover,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  category.title.toUpperCase(),
+                  style: theme.textTheme.displayMedium!.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
-              cacheHeight: 500,
-              color: background,
-              colorBlendMode: BlendMode.darken,
-              alignment: imageAlignment,
-              fit: BoxFit.cover,
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                category.title.toUpperCase(),
-                style: theme.textTheme.displayMedium!.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -1036,13 +1014,6 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
     ],
   );
 }
-
-const String _manLookRightImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
-const String _dogImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/pet.jpg';
-const String _womanLookLeftImageUrl =
-    'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/woman-look-left.jpg';
 
 class OrderItem {
   Product product;

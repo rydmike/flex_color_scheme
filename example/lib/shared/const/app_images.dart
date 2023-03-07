@@ -45,6 +45,11 @@ class AppImages {
   static const String walkingAround = 'assets/images/walking_around.svg';
   static const String walkingOutside = 'assets/images/walking_outside.svg';
 
+  // The main 3 images for demo shop, bundling them, don't want them to break.
+  static const String shopMen = 'assets/images/man-look-right.jpg';
+  static const String shopWomen = 'assets/images/woman-look-left.jpg';
+  static const String shopPets = 'assets/images/pet.jpg';
+
   // There are 16 images above, only 9 actually used in this setup.
   static const List<String> undraw = <String>[
     healthyOptions,

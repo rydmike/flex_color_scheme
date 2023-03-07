@@ -17,7 +17,7 @@ import '../../const/app.dart';
 ///
 /// When you tap the ColorCard the color value is copied to the clipboard
 /// in Dart format.
-class ColorCard extends StatelessWidget {
+class ColorCard extends StatefulWidget {
   const ColorCard({
     super.key,
     required this.label,
@@ -38,16 +38,47 @@ class ColorCard extends StatelessWidget {
   final double? elevation;
 
   @override
+  State<ColorCard> createState() => _ColorCardState();
+}
+
+class _ColorCardState extends State<ColorCard> {
+  late String materialName;
+  late String nameThatColor;
+  late String space;
+  late String hexCode;
+
+  // The nameThatColor and materialName lookups are expensive, especially
+  // nameThatColor. Widget stores them as stateful values to avoid computing
+  // them every time the widget rebuilds.
+  @override
+  void initState() {
+    super.initState();
+    materialName = ColorTools.materialName(widget.color);
+    nameThatColor = ColorTools.nameThatColor(widget.color);
+    space = materialName == '' ? '' : ' ';
+    hexCode = widget.color.hexCode;
+  }
+
+  @override
+  void didUpdateWidget(covariant ColorCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.color != oldWidget.color) {
+      materialName = ColorTools.materialName(widget.color);
+      nameThatColor = ColorTools.nameThatColor(widget.color);
+      space = materialName == '' ? '' : ' ';
+      hexCode = widget.color.hexCode;
+    }
+  }
+
+  // late String materialName;
+  @override
   Widget build(BuildContext context) {
-    final String materialName = ColorTools.materialName(color);
-    final String nameThatColor = ColorTools.nameThatColor(color);
-    final String space = materialName == '' ? '' : ' ';
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
         media.size.height < App.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
     final Size effectiveSize =
-        size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
+        widget.size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
 
     return RepaintBoundary(
       child: SizedBox(
@@ -55,22 +86,22 @@ class ColorCard extends StatelessWidget {
         height: effectiveSize.height,
         child: Tooltip(
           waitDuration: const Duration(milliseconds: 700),
-          message: 'Color #${color.hexCode} $nameThatColor$space$materialName.'
+          message: 'Color #$hexCode $nameThatColor$space$materialName.'
               '\nTap box to copy RGB value to Clipboard.',
           child: Card(
-            elevation: elevation ?? 0,
-            shadowColor: shadowColor,
+            elevation: widget.elevation ?? 0,
+            shadowColor: widget.shadowColor,
             margin: EdgeInsets.zero,
             clipBehavior: Clip.antiAlias,
-            color: color,
+            color: widget.color,
             child: InkWell(
               onTap: () {
-                unawaited(copyColorToClipboard(context, color));
+                unawaited(copyColorToClipboard(context, widget.color));
               },
               child: Center(
                 child: Text(
-                  label,
-                  style: TextStyle(color: textColor, fontSize: fontSize),
+                  widget.label,
+                  style: TextStyle(color: widget.textColor, fontSize: fontSize),
                   textAlign: TextAlign.center,
                 ),
               ),

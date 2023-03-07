@@ -89,9 +89,9 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                 },
                 tabs: const <Widget>[
                   Tab(text: 'Widgets'),
+                  Tab(text: 'Material'),
                   Tab(text: 'Login'),
                   Tab(text: 'Shop'),
-                  Tab(text: 'Material'),
                   Tab(text: 'Undraw'),
                 ],
               ),
@@ -163,18 +163,18 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                       SimulatorFrame(
                         device: device,
                         orientation: orientation,
+                        child: AppExampleMaterial3(
+                            themeController: widget.controller),
+                      ),
+                      SimulatorFrame(
+                        device: device,
+                        orientation: orientation,
                         child: const AppExampleLogin(),
                       ),
                       SimulatorFrame(
                         device: device,
                         orientation: orientation,
                         child: const AppExampleShop(),
-                      ),
-                      SimulatorFrame(
-                        device: device,
-                        orientation: orientation,
-                        child: AppExampleMaterial3(
-                            themeController: widget.controller),
                       ),
                       SimulatorFrame(
                         device: device,
