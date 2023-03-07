@@ -320,10 +320,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: IconButtonShowcase(),
         ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: IconButtonM3Showcase(),
-        ),
+        // TODO(rydmike): Add variant IconButtons when available in stable.
+        // const Padding(
+        //   padding: EdgeInsets.all(16.0),
+        //   child: IconButtonM3Showcase(),
+        // ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RichText(

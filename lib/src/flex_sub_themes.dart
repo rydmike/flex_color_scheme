@@ -1560,6 +1560,16 @@ class FlexSubThemes {
     /// [FilterChip], [InputChip], [RawChip].
     final Color? surfaceTintColor,
 
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -1572,6 +1582,11 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useMaterial3,
   }) {
+    // Used to toggle between different defaults from M2 and M3.
+    final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+
     // Function used to increase icon color for selections resulting in poor
     // icon color.
     Color fixContrast(Color color) {
@@ -1589,9 +1604,6 @@ class FlexSubThemes {
         }
       }
     }
-
-    // Used to toggle between different defaults from M2 and M3.
-    final bool useM3 = useMaterial3 ?? false;
 
     // Flag for not using any defined color values in M3 mode, but instead
     // falling back to M3 theme defaults, when using Material 3.
@@ -3153,9 +3165,31 @@ class FlexSubThemes {
     /// foreground color based on its color pair. The background is actually
     /// controlled via [MenuThemeData] in [menuTheme].
     final SchemeColor? backgroundSchemeColor,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
   }) {
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+
+    final Color buttonColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
     final Color onSurface = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = colorScheme.surface;
+    final Color tint = buttonColor;
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     return MenuButtonThemeData(
       style: ButtonStyle(
@@ -4741,14 +4775,14 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
     final bool isLight = colorScheme.brightness == Brightness.light;
-
-    final bool unselectedColored = unselectedIsColored ?? false;
-    final bool tintInteract = useTintedInteraction ?? false;
-    final bool tintDisable = useTintedDisable ?? false;
 
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
@@ -4893,7 +4927,33 @@ class FlexSubThemes {
     ///
     /// If null, defaults to [kThinBorderWidth] = 1.0.
     final double? borderWidth,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
+    final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
+
     // Get selected color, defaults to primary.
     final SchemeColor selectedScheme =
         selectedSchemeColor ?? SchemeColor.secondaryContainer;
@@ -4904,6 +4964,18 @@ class FlexSubThemes {
         schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color onUnselectedColor = schemeColor(
         unselectedForegroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = onSelectedColor;
+    final Color tint = selectedColor;
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
+
+    final Color unOverlay = unselectedColor;
+    final Color unTint = onUnselectedColor;
+    final double unFactor =
+        _tintAlphaFactor(unTint, colorScheme.brightness, true);
+
     final Color borderColor =
         schemeColor(borderSchemeColor ?? SchemeColor.outline, colorScheme);
     // Effective border width.
@@ -5573,19 +5645,20 @@ class FlexSubThemes {
                   : kAlphaM3SwitchUnselectTrackDark)
               : colorScheme.surfaceVariant;
         }),
-        trackOutlineColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return Colors.transparent;
-          }
-          if (states.contains(MaterialState.disabled)) {
-            if (tintDisable) {
-              return tintedDisable(colorScheme.onSurface, baseColor);
-            }
-            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-          }
-          return colorScheme.outline;
-        }),
+        // TODO(rydmike): Add trackOutlineColor when available in stable.
+        // trackOutlineColor:
+        //     MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        //   if (states.contains(MaterialState.selected)) {
+        //     return Colors.transparent;
+        //   }
+        //   if (states.contains(MaterialState.disabled)) {
+        //     if (tintDisable) {
+        //       return tintedDisable(colorScheme.onSurface, baseColor);
+        //     }
+        //     return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+        //   }
+        //   return colorScheme.outline;
+        // }),
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
@@ -6176,6 +6249,16 @@ class FlexSubThemes {
     /// being used, which is same as null default in ThemeData.
     final VisualDensity? visualDensity,
 
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -6198,6 +6281,12 @@ class FlexSubThemes {
     final SchemeColor borderDefault = useM3 ? SchemeColor.outline : baseScheme;
     final Color borderColor =
         schemeColor(borderSchemeColor ?? borderDefault, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = colorScheme.surface;
+    final Color tint = baseColor;
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;

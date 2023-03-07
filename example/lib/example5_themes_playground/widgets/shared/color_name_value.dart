@@ -277,18 +277,19 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       widget.color.withAlpha(0xAA), widget.textColor),
                   inactiveThumbColor: Color.alphaBlend(
                       widget.color.withAlpha(0xCC), widget.textColor),
-                  trackOutlineColor: theme.useMaterial3
-                      ? MaterialStateProperty.resolveWith(
-                          (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Colors.transparent;
-                          }
-                          if (states.contains(MaterialState.disabled)) {
-                            return theme.colorScheme.onSurface.withAlpha(0x1F);
-                          }
-                          return widget.textColor.withAlpha(0x26);
-                        })
-                      : null,
+                  // TODO(rydmike): Add trackOutlineColor when available.
+                  // trackOutlineColor: theme.useMaterial3
+                  //     ? MaterialStateProperty.resolveWith(
+                  //         (Set<MaterialState> states) {
+                  //         if (states.contains(MaterialState.selected)) {
+                  //           return Colors.transparent;
+                  //         }
+                  //         if (states.contains(MaterialState.disabled)) {
+                  //         return theme.colorScheme.onSurface.withAlpha(0x1F);
+                  //         }
+                  //         return widget.textColor.withAlpha(0x26);
+                  //       })
+                  //     : null,
                   onChanged: widget.onLocked?.call,
                   // materialTapTargetSize: MaterialTapTargetSize.padded,
                 ),

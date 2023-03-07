@@ -5290,10 +5290,11 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
       );
-      expect(
-        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.outline),
-      );
+      // TODO(rydmike): Add trackOutlineColor when available in stable.
+      // expect(
+      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+      //   equals(colorScheme.outline),
+      // );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -5316,11 +5317,12 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.surfaceVariant.withOpacity(0.12)),
       );
-      expect(
-        switchTheme.trackOutlineColor!
-            .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
-      );
+      // TODO(rydmike): Add trackOutlineColor when available in stable.
+      // expect(
+      //   switchTheme.trackOutlineColor!
+      //       .resolve(<MaterialState>{MaterialState.disabled}),
+      //   equals(colorScheme.onSurface.withOpacity(0.12)),
+      // );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -5333,17 +5335,18 @@ void main() {
               colorScheme.onSurface, colorScheme.primary),
         ),
       );
-      expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useTintedDisable: true,
-          useMaterial3: true,
-        ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
-        equals(
-          FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
-        ),
-      );
+      // TODO(rydmike): Add trackOutlineColor when available in stable.
+      // expect(
+      //   FlexSubThemes.switchTheme(
+      //     colorScheme: colorScheme,
+      //     useTintedDisable: true,
+      //     useMaterial3: true,
+      //  ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
+      //   equals(
+      //     FlexSubThemes.tintedDisable(
+      //         colorScheme.onSurface, colorScheme.primary),
+      //   ),
+      // );
 
       // Selected thumb colors
       expect(
@@ -5576,10 +5579,11 @@ void main() {
         switchTheme.trackColor!.resolve(<MaterialState>{}),
         equals(colorScheme.surfaceVariant),
       );
-      expect(
-        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.outline),
-      );
+      // TODO(rydmike): Add trackOutlineColor when available in stable.
+      // expect(
+      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+      //   equals(colorScheme.outline),
+      // );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.switchTheme(

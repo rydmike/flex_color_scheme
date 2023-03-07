@@ -6494,6 +6494,8 @@ class FlexColorScheme with Diagnosticable {
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : useMaterial3
@@ -6509,8 +6511,8 @@ class FlexColorScheme with Diagnosticable {
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       // datePickerTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
-      // TODO(Rydmike): Maybe: Add date picker Themedata for tint and elevation.
-      datePickerTheme: DatePickerThemeData(),
+      // TODO(Rydmike): Add DatePicker Themedata when available in stable.
+      // datePickerTheme: DatePickerThemeData(),
       //
       // Dialog Theme.
       dialogTheme: useSubThemes
@@ -6647,6 +6649,8 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.menuSchemeColor,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
             )
           : null,
       //
@@ -6834,6 +6838,9 @@ class FlexColorScheme with Diagnosticable {
               borderWidth: subTheme.segmentedButtonBorderWidth ??
                   subTheme.thinBorderWidth,
               radius: subTheme.segmentedButtonRadius ?? platformRadius,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
@@ -6984,6 +6991,8 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.toggleButtonsRadius ?? platformRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,
+              useTintedInteraction: subTheme.interactionEffects,
+              useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
           : null,

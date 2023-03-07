@@ -38,7 +38,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 'default 20'
             : controller.elevatedButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null && effectiveRadius == null
@@ -47,7 +47,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 'default 20'
             : controller.outlinedButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String textButtonRadiusDefaultLabel =
         controller.textButtonBorderRadius == null && effectiveRadius == null
@@ -56,7 +56,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 'default 20'
             : controller.textButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String filledButtonRadiusDefaultLabel =
         controller.filledButtonBorderRadius == null && effectiveRadius == null
@@ -65,7 +65,7 @@ class ButtonsSettings extends StatelessWidget {
                 : 'default 20'
             : controller.filledButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String thinBorderDefaultLabel =
         controller.outlinedButtonBorderWidth == null &&

@@ -1244,7 +1244,7 @@ class IconButtonShowcase extends StatelessWidget {
                 isEnabled: true,
                 tooltip: 'Standard',
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Standard (disabled)',
@@ -1259,7 +1259,7 @@ class IconButtonShowcase extends StatelessWidget {
                 tooltip: 'Filled',
                 getDefaultStyle: enabledFilledButtonStyle,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Filled (disabled)',
@@ -1275,7 +1275,7 @@ class IconButtonShowcase extends StatelessWidget {
                 tooltip: 'Filled tonal',
                 getDefaultStyle: enabledFilledTonalButtonStyle,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Filled tonal (disabled)',
@@ -1291,7 +1291,7 @@ class IconButtonShowcase extends StatelessWidget {
                 tooltip: 'Outlined',
                 getDefaultStyle: enabledOutlinedButtonStyle,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Outlined (disabled)',
@@ -1305,161 +1305,164 @@ class IconButtonShowcase extends StatelessWidget {
   }
 }
 
-class IconButtonM3Showcase extends StatelessWidget {
-  const IconButtonM3Showcase({super.key});
+// TODO(rydmike): Add variant IconButtons when available in stable.
+// class IconButtonM3Showcase extends StatelessWidget {
+//   const IconButtonM3Showcase({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return RepaintBoundary(
+//       child: Wrap(
+//         crossAxisAlignment: WrapCrossAlignment.center,
+//         spacing: 16,
+//         runSpacing: 4,
+//         children: <Widget>[
+//           Column(
+//             // Standard IconButton
+//             children: const <Widget>[
+//               _IconM3ToggleButton(
+//                 isEnabled: true,
+//                 tooltip: 'Standard',
+//                 variant: _IconButtonVariant.standard,
+//               ),
+//               const SizedBox(height: 8),
+//               _IconM3ToggleButton(
+//                 isEnabled: false,
+//                 tooltip: 'Standard (disabled)',
+//                 variant: _IconButtonVariant.standard,
+//               ),
+//             ],
+//           ),
+//           Column(
+//             children: const <Widget>[
+//               // Filled IconButton
+//               _IconM3ToggleButton(
+//                 isEnabled: true,
+//                 tooltip: 'Filled',
+//                 variant: _IconButtonVariant.filled,
+//               ),
+//               const SizedBox(height: 8),
+//               _IconM3ToggleButton(
+//                 isEnabled: false,
+//                 tooltip: 'Filled (disabled)',
+//                 variant: _IconButtonVariant.filled,
+//               ),
+//             ],
+//           ),
+//           Column(
+//             children: const <Widget>[
+//               // Filled Tonal IconButton
+//               _IconM3ToggleButton(
+//                 isEnabled: true,
+//                 tooltip: 'Filled tonal',
+//                 variant: _IconButtonVariant.filledTonal,
+//               ),
+//               const SizedBox(height: 8),
+//               _IconM3ToggleButton(
+//                 isEnabled: false,
+//                 tooltip: 'Filled tonal (disabled)',
+//                 variant: _IconButtonVariant.filledTonal,
+//               ),
+//             ],
+//           ),
+//           Column(
+//             children: const <Widget>[
+//               // Outlined IconButton
+//               _IconM3ToggleButton(
+//                 isEnabled: true,
+//                 tooltip: 'Outlined',
+//                 variant: _IconButtonVariant.outlined,
+//               ),
+//               const SizedBox(height: 8),
+//               _IconM3ToggleButton(
+//                 isEnabled: false,
+//                 tooltip: 'Outlined (disabled)',
+//                 variant: _IconButtonVariant.outlined,
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 16,
-        runSpacing: 4,
-        children: <Widget>[
-          Column(
-            // Standard IconButton
-            children: const <Widget>[
-              _IconM3ToggleButton(
-                isEnabled: true,
-                tooltip: 'Standard',
-                variant: _IconButtonVariant.standard,
-              ),
-              const SizedBox(height: 8),
-              _IconM3ToggleButton(
-                isEnabled: false,
-                tooltip: 'Standard (disabled)',
-                variant: _IconButtonVariant.standard,
-              ),
-            ],
-          ),
-          Column(
-            children: const <Widget>[
-              // Filled IconButton
-              _IconM3ToggleButton(
-                isEnabled: true,
-                tooltip: 'Filled',
-                variant: _IconButtonVariant.filled,
-              ),
-              const SizedBox(height: 8),
-              _IconM3ToggleButton(
-                isEnabled: false,
-                tooltip: 'Filled (disabled)',
-                variant: _IconButtonVariant.filled,
-              ),
-            ],
-          ),
-          Column(
-            children: const <Widget>[
-              // Filled Tonal IconButton
-              _IconM3ToggleButton(
-                isEnabled: true,
-                tooltip: 'Filled tonal',
-                variant: _IconButtonVariant.filledTonal,
-              ),
-              const SizedBox(height: 8),
-              _IconM3ToggleButton(
-                isEnabled: false,
-                tooltip: 'Filled tonal (disabled)',
-                variant: _IconButtonVariant.filledTonal,
-              ),
-            ],
-          ),
-          Column(
-            children: const <Widget>[
-              // Outlined IconButton
-              _IconM3ToggleButton(
-                isEnabled: true,
-                tooltip: 'Outlined',
-                variant: _IconButtonVariant.outlined,
-              ),
-              const SizedBox(height: 8),
-              _IconM3ToggleButton(
-                isEnabled: false,
-                tooltip: 'Outlined (disabled)',
-                variant: _IconButtonVariant.outlined,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-enum _IconButtonVariant { standard, filled, filledTonal, outlined }
-
-class _IconM3ToggleButton extends StatefulWidget {
-  const _IconM3ToggleButton({
-    required this.isEnabled,
-    required this.tooltip,
-    required this.variant,
-  });
-
-  final bool isEnabled;
-  final String tooltip;
-  final _IconButtonVariant variant;
-
-  @override
-  State<_IconM3ToggleButton> createState() => _IconM3ToggleButtonState();
-}
-
-class _IconM3ToggleButtonState extends State<_IconM3ToggleButton> {
-  bool selected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final VoidCallback? onPressed = widget.isEnabled
-        ? () {
-            setState(() {
-              selected = !selected;
-            });
-          }
-        : null;
-
-    switch (widget.variant) {
-      case _IconButtonVariant.standard:
-        {
-          return IconButton(
-            isSelected: selected,
-            tooltip: widget.tooltip,
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            onPressed: onPressed,
-          );
-        }
-      case _IconButtonVariant.filled:
-        {
-          return IconButton.filled(
-            isSelected: selected,
-            tooltip: widget.tooltip,
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            onPressed: onPressed,
-          );
-        }
-      case _IconButtonVariant.filledTonal:
-        {
-          return IconButton.filledTonal(
-            isSelected: selected,
-            tooltip: widget.tooltip,
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            onPressed: onPressed,
-          );
-        }
-      case _IconButtonVariant.outlined:
-        {
-          return IconButton.outlined(
-            isSelected: selected,
-            tooltip: widget.tooltip,
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: const Icon(Icons.settings),
-            onPressed: onPressed,
-          );
-        }
-    }
-  }
-}
+// TODO(rydmike): Add variant IconButtons when available in stable.
+//
+// enum _IconButtonVariant { standard, filled, filledTonal, outlined }
+//
+// class _IconM3ToggleButton extends StatefulWidget {
+//   const _IconM3ToggleButton({
+//     required this.isEnabled,
+//     required this.tooltip,
+//     required this.variant,
+//   });
+//
+//   final bool isEnabled;
+//   final String tooltip;
+//   final _IconButtonVariant variant;
+//
+//   @override
+//   State<_IconM3ToggleButton> createState() => _IconM3ToggleButtonState();
+// }
+//
+// class _IconM3ToggleButtonState extends State<_IconM3ToggleButton> {
+//   bool selected = false;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final VoidCallback? onPressed = widget.isEnabled
+//         ? () {
+//             setState(() {
+//               selected = !selected;
+//             });
+//           }
+//         : null;
+//
+//     switch (widget.variant) {
+//       case _IconButtonVariant.standard:
+//         {
+//           return IconButton(
+//             isSelected: selected,
+//             tooltip: widget.tooltip,
+//             icon: const Icon(Icons.settings_outlined),
+//             selectedIcon: const Icon(Icons.settings),
+//             onPressed: onPressed,
+//           );
+//         }
+//       case _IconButtonVariant.filled:
+//         {
+//           return IconButton.filled(
+//             isSelected: selected,
+//             tooltip: widget.tooltip,
+//             icon: const Icon(Icons.settings_outlined),
+//             selectedIcon: const Icon(Icons.settings),
+//             onPressed: onPressed,
+//           );
+//         }
+//       case _IconButtonVariant.filledTonal:
+//         {
+//           return IconButton.filledTonal(
+//             isSelected: selected,
+//             tooltip: widget.tooltip,
+//             icon: const Icon(Icons.settings_outlined),
+//             selectedIcon: const Icon(Icons.settings),
+//             onPressed: onPressed,
+//           );
+//         }
+//       case _IconButtonVariant.outlined:
+//         {
+//           return IconButton.outlined(
+//             isSelected: selected,
+//             tooltip: widget.tooltip,
+//             icon: const Icon(Icons.settings_outlined),
+//             selectedIcon: const Icon(Icons.settings),
+//             onPressed: onPressed,
+//           );
+//         }
+//     }
+//   }
+// }
 
 class IconToggleButton extends StatefulWidget {
   const IconToggleButton({
