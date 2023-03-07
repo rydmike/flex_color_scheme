@@ -166,9 +166,15 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 76% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
+- IN PROGRESS (About 76% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Must implement them properly before 7.0.0-dev.3 release.
   
-- TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
+- Maybe add DatePicker theme.
+
+- Document info about colorScheme now being required in FAB and TimePicker FlexSubThemes.
+  
+- Document FilledButton API name change (baseSchemeColor -> backgroundSchemeColor), not breaking, just breaking between dev releases.
+
+- Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
 
 - Maybe add support for MenButton, the selected item styling in menus.
 
