@@ -6509,6 +6509,9 @@ class FlexColorScheme with Diagnosticable {
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       // datePickerTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
+      // TODO(Rydmike): Maybe: Add date picker Themedata for tint and elevation.
+      datePickerTheme: DatePickerThemeData(),
+      //
       // Dialog Theme.
       dialogTheme: useSubThemes
           ? FlexSubThemes.dialogTheme(
@@ -6956,13 +6959,16 @@ class FlexColorScheme with Diagnosticable {
       // TimePicker Theme.
       timePickerTheme: useSubThemes
           ? FlexSubThemes.timePickerTheme(
-              backgroundColor: dialogBackground,
               colorScheme: colorScheme,
+              backgroundColor: dialogBackground,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.timePickerDialogRadius ?? platformRadius,
               elementRadius: subTheme.timePickerElementRadius,
-              inputDecorationTheme: effectiveInputDecorationTheme)
+              // TODO(Rydmike): Is this a good idea with M3? Maybe own style?
+              inputDecorationTheme: effectiveInputDecorationTheme,
+              useMaterial3: useMaterial3,
+            )
           : null,
       //
       // ToggleButtons Theme.

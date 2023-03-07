@@ -5921,32 +5921,25 @@ class FlexSubThemes {
   /// that matches the main input decoration style and corner rounding it
   /// will be used on the data entry elements in the picker.
   static TimePickerThemeData timePickerTheme({
-    /// Pass in value you will you in your ThemeData use for your main
-    /// [DialogTheme], if you let
-    ///
-    /// If null and [colorScheme] and [backgroundSchemeColor] are also not
-    /// defined, this dialog defaults to using [ColorScheme.surface] color and
-    /// it may not match dialog color used by other dialogs that use
-    /// [ColorScheme.background] by default, this is a peculiar default behavior
-    /// in Flutter SDK.
-    final Color? backgroundColor,
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
 
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
+    /// A completely custom color for your main [DialogTheme] color.
+    ///
+    /// If null and [backgroundSchemeColor] are also not
+    /// defined, this dialog defaults to using [ColorScheme.surface] .
+    final Color? backgroundColor,
 
     /// Selects which color from the passed in colorScheme to use as the dialog
     /// background color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to Flutter SDK value for TimePickerDialog, which is
-    /// [colorScheme.surface].
+    /// If not defined, then the passed in [backgroundColor] will be used,
+    /// which may be null too and dialog then falls back to Flutter SDK default
+    /// value for TimePickerDialog, which is [colorScheme.surface].
     ///
     /// FlexColorScheme sub-theming uses this property to match the background
     /// color of this dialog to other standard dialogs. It sets it via
-    /// [FlexSubThemesData] to [SchemeColor.background].
+    /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
     // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
@@ -5984,17 +5977,66 @@ class FlexSubThemes {
     /// no need to add those in the passed in InputDecorationTheme. Just pass
     /// in your overall used app InputDecorationTheme.
     final InputDecorationTheme? inputDecorationTheme,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
   }) {
-    final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
-            ? backgroundColor // might be null, then SDK theme defaults.
-            : schemeColor(backgroundSchemeColor, colorScheme);
+    final bool useM3 = useMaterial3 ?? false;
+
+    final Color? background = (backgroundSchemeColor == null)
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : schemeColor(backgroundSchemeColor, colorScheme);
+
+    MaterialStateProperty<Color> dayPeriodForegroundColor() {
+      return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        Color? textColor;
+        if (states.contains(MaterialState.selected)) {
+          if (states.contains(MaterialState.pressed)) {
+            textColor = colorScheme.onTertiaryContainer;
+          } else {
+            // not pressed
+            if (states.contains(MaterialState.focused)) {
+              textColor = colorScheme.onTertiaryContainer;
+            } else {
+              // not focused
+              if (states.contains(MaterialState.hovered)) {
+                textColor = colorScheme.onTertiaryContainer;
+              }
+            }
+          }
+        } else {
+          // unselected
+          if (states.contains(MaterialState.pressed)) {
+            textColor = colorScheme.onSurfaceVariant;
+          } else {
+            // not pressed
+            if (states.contains(MaterialState.focused)) {
+              textColor = colorScheme.onSurfaceVariant;
+            } else {
+              // not focused
+              if (states.contains(MaterialState.hovered)) {
+                textColor = colorScheme.onSurfaceVariant;
+              }
+            }
+          }
+        }
+        return textColor ?? colorScheme.onTertiaryContainer;
+      });
+    }
 
     return TimePickerThemeData(
       backgroundColor: background,
-      dialBackgroundColor: colorScheme?.surfaceVariant,
       // TODO(rydmike): This elevation does not exist in beta 3.7.0-1.4.pre
-      // elevation: elevation ?? kDialogElevation,
+      elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
@@ -6010,6 +6052,23 @@ class FlexSubThemes {
           Radius.circular(elementRadius ?? kTimeElementRadius),
         ),
       ),
+      //
+      // M3 styling Flutter 3.7 does not do yet, but we can du in M3 mode.
+      dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
+      dayPeriodColor: useM3
+          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return colorScheme.tertiaryContainer;
+              }
+              return Colors.transparent;
+            })
+          : null,
+      dayPeriodTextColor: useM3
+          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              return dayPeriodForegroundColor().resolve(states);
+            })
+          : null,
+      //
       // Custom additions the Widget does internally, but for some reason
       // only does to null default theme. If you use a custom decorator
       // you are supposed to know that you have to add these shenanigans
