@@ -246,7 +246,7 @@ class ButtonsWithoutIcon extends StatelessWidget {
             colDivider,
             FilledButton.tonal(
               onPressed: isDisabled ? null : () {},
-              child: const Text('Filled tonal'),
+              child: const Text('Tonal'),
             ),
             colDivider,
             OutlinedButton(

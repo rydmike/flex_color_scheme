@@ -8,7 +8,7 @@
 //            needed another animation controller with own AnimationBuilder.
 const double kNarrowScreenWidthThreshold = 600;
 // Setting these breakpoints so the show and get used on tablets in demo.
-const double kMediumWidthBreakpoint = 819; // iPad is 810, iPad Air is 820
+const double kMediumWidthBreakpoint = 830; // iPad 810, Air 820, Pro11 834
 const double kLargeWidthBreakpoint = 1023; // iPad 12" is 1024
 // Added this to make the expanded rail a bit more narrow.
 const double kRailExpandedWidth = 180;

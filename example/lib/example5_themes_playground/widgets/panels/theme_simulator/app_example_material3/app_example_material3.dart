@@ -603,7 +603,7 @@ class _OneTwoTransitionState extends State<OneTwoTransition> {
     return Row(
       children: <Widget>[
         Flexible(
-          flex: 1000,
+          flex: 1100,
           child: widget.one,
         ),
         if (widthAnimation.value.toInt() > 0) ...<Widget>[
