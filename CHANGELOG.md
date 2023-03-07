@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 6, 2023**
+**Mar 7, 2023**
 
 **FIX**
 
@@ -46,6 +46,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Add**: New `FlexSubThemesData` that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
 
+- **Add**: 
 
 **CHANGE**
 
@@ -116,7 +117,12 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
 
 
-- The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
+- **Remove**: The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
+
+
+- **Remove**: The creation of `IconTheme` and `primaryIconTheme` when opting in on sub themes, was removed. Previously, their colors were set to be equal to the color of same typography color as 
+  used on `TextTheme` nad `PrimaryTextTheme`, by style `TitleLarge`. This is no longer needed and also got in te way of getting the undefined default behavior for `IconTheme` in some widgets. Like new `IconButtonThemeData` in master channel.
+  
 
   
 **THEMES PLAYGROUND**
@@ -160,11 +166,13 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 60% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
+- IN PROGRESS (About 76% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Should implement them properly before 7.0.0-dev.3 release.
   
 - TimePicker needs a theme review. Dial and other elements are not M3 correct. It is not M3 supported yet in 3.7, but we can make it match it anyway.   
 
-- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.5
+- Maybe add support for MenButton, the selected item styling in menus.
+
+- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.6
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 

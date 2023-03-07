@@ -5276,14 +5276,6 @@ class FlexColorScheme with Diagnosticable {
   ///    was selected that should work on current AppBar background color,
   ///    or on surface/background colors.
   ///
-  ///  * For `toggleableActiveColor` the `ColorScheme.secondary` color is used.
-  ///    The Flutter SDK uses the default `ThemeData` colors and
-  ///    not the actual colors you define in the `ColorScheme` you create your
-  ///    theme from. Perhaps an oversight in Flutter?
-  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///    This color property will be deprecated in Flutter, see issue
-  ///    [91772](https://github.com/flutter/flutter/issues/91772).
-  ///
   ///  * Flutter themes created with `ThemeData.from` does not define any color
   ///    scheme related color for the `primaryColorDark` color, FCS does.
   ///    See issue: https:///github.com/flutter/flutter/issues/65782.
@@ -6247,7 +6239,6 @@ class FlexColorScheme with Diagnosticable {
 
       // TODO(rydmike): Blended icon theme removal!
       // Set colors for icons in opted in sub themes.
-
       // iconTheme: useSubThemes && subTheme.blendTextTheme
       //     ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
       //     : null,
