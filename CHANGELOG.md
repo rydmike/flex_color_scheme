@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 7, 2023**
+**Mar 9, 2023**
 
 **FIX**
 
@@ -184,7 +184,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
 - Investigate the Playground random panel change, cause is still elusive.
-- DECIDE: Use Drawer M3 actual default and show the SDK 3.7 bug result in showcase or used the fixed one using the workaround?  
 - Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
   - Down from 100% to 94% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 76% tested now, and will drop much lower with all the interaction effects added, that is not even half-way done.

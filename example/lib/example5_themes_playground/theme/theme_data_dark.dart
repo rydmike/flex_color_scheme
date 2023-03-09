@@ -72,6 +72,6 @@ ThemeData themeDataDark(ThemeController controller) {
     // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
     // This is fix to avoid the Flutter Drawer width bug and overflow bug
     // when it animates via zero width in null default to widget default.
-    drawerTheme: DrawerThemeData(width: controller.useMaterial3 ? 360 : 304),
+    drawerTheme: const DrawerThemeData(width: 304),
   );
 }

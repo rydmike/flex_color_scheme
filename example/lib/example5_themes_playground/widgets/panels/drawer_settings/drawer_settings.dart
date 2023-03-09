@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -10,10 +11,19 @@ class DrawerSettings extends StatelessWidget {
   const DrawerSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _drawerM3Spec = Uri(
+    scheme: 'https',
+    host: 'm3.material.io',
+    path: 'components/navigation-drawer/specs',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
@@ -78,6 +88,7 @@ class DrawerSettings extends StatelessWidget {
                 }
               : null,
         ),
+        // TODO(rydmike): Change M3 Drawer width default info when SDK is fixed.
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Width'),
@@ -93,7 +104,7 @@ class DrawerSettings extends StatelessWidget {
                         : 'default 304'
                     : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
                 : useMaterial3
-                    ? 'default 360'
+                    ? 'default 304' // Should be 360, but is 304, SDK BUG.
                     : 'default 304',
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.drawerWidth ?? 199
@@ -123,10 +134,42 @@ class DrawerSettings extends StatelessWidget {
                               : 'default 304'
                           : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
                       : useMaterial3
-                          ? 'default 360'
+                          ? 'default 304' // Should be 360, but is 304, SDK BUG.
                           : 'default 304',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Based on Material 3 '
+                      ,
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _drawerM3Spec,
+                  text: 'specification of NavigationDrawer',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' it should be 360 dp wide, while Material 2 is '
+                      '304 dp. '
+                      'Due to a bug in Flutter, it defaults to 304 dp in both '
+                      'modes in Flutter 3.7. '
+                      'FCS corrects this spec deviation in its defaults. '
+                      'Please note that a 360 dp wide Drawer may be too wide '
+                      'for smaller or older phones and the Drawer may '
+                      'cover the entire width of the phone. This may not be '
+                      'desired, if so adjust the width down. The 304 dp M2 '
+                      'spec width is not bad choice in M3 either.',
                 ),
               ],
             ),
