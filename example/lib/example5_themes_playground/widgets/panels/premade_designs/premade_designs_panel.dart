@@ -26,7 +26,7 @@ class PremadeDesignsPanel extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         const ListTile(
-          title: Text('Premade FlexColorScheme designs'),
+          title: Text('Premade FlexColorScheme Theme Designs'),
           subtitle: Text('To quick start your theming try these '
               'premade designs. You can use them as starting points, for '
               'inspiration and to see examples of what FlexColorScheme can '
@@ -34,19 +34,49 @@ class PremadeDesignsPanel extends StatelessWidget {
               'desired. Many choices use seeded Material 3 ColorScheme and '
               'they all use Material 3 mode. You can easily turn both off. '
               'In fact all configs are just starting points for you to '
-              'explore and modify further.\n'
-              'In a two panels view, try the Theme simulator as 2nd panel '
+              'explore and modify further. '
+              'In the two panels view, try the Theme simulator as 2nd panel '
               'with the official Material 3 demo app, using 11" or 12" iPad, '
               'to experience how these examples impact the theme.'),
         ),
+        SwitchListTile(
+          title: const Text('Confirm premade theme usage selection'),
+          subtitle: const Text('To toggle quickly between premade '
+              'configurations, turn OFF this option. It is ON by default to '
+              'prevent accidental activation of premade themes.'),
+          value: controller.confirmPremade,
+          onChanged: controller.setConfirmPremade,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Learn more about Material 3 design in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _materialDocs,
+                  text: 'Material 3 guide',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. ',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
         UseSeededColorSchemeSwitch(controller: controller),
-        const SizedBox(height: 8),
         const Divider(),
         SetupListTile(
-          title: 'Playground default',
+          title: 'Themes Playground default',
           seeded: false,
-          subtitle: 'Set settings to their Themes Playground defaults. '
-              'In Material 2 mode the default setup is quite opinionated, it '
+          subtitle: 'Set settings to their Themes Playground defaults. In '
+              'Material 2 mode the FCS default setup is quite opinionated, it '
               'mimics M3 in M2 mode. The M3 mode is mostly M3 style, '
               'with some minor tweaks. The NavigationBar and Rail use '
               'primary colored selected items with opacity based indicators, '
@@ -160,17 +190,15 @@ class PremadeDesignsPanel extends StatelessWidget {
               'also removes elevation tint in light mode, and puts shadows '
               'back. These adaptive theme changes happens on all '
               'platforms, except Android and Fuchsia.\n'
-              '\n'
-              'As an example, it adds '
+              'It also adds '
               'elevation shadows back on all platforms in dark mode, '
               'including Android and Fuchsia. Elevation shadows are barely '
-              'visible in dark mode anyway, but can '
+              'visible in dark mode, but can '
               'sometimes increase edge layer separation. The elevation tint is '
               'kept in dark mode on all platforms, as it is typically needed '
               'there for popup menu color separation from background color. '
               'Grey elevation overlay color in dark mode existed back in M2 '
               'design as well.\n'
-              '\n'
               'This theme is not key color seeded by default, but it is '
               'preconfigured to work well by just turning seeded '
               'ColorScheme ON. Try it! It is setup to keep your primary '
@@ -221,38 +249,6 @@ class PremadeDesignsPanel extends StatelessWidget {
               'using seed generated ColorSchemes.',
           settingsId: 9,
           controller: controller,
-        ),
-        const Divider(),
-        SwitchListTile(
-          title: const Text('Confirm premade usage selection'),
-          subtitle: const Text('To toggle quickly between premade '
-              'configurations, turn OFF this option. It is ON by default to '
-              'prevent accidental activation of premade themes.'),
-          value: controller.confirmPremade,
-          onChanged: controller.setConfirmPremade,
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'Learn more about Material 3 design in the ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _materialDocs,
-                  text: 'Material 3 guide',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. ',
-                ),
-              ],
-            ),
-          ),
         ),
         const SizedBox(height: 8),
       ],

@@ -31,6 +31,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
   bool railControllerInitialized = false;
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
+  bool showRail = false;
 
   int screenIndex = ScreenSelected.component.value;
 
@@ -72,6 +73,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
     final AnimationStatus railStatus = railController.status;
     // Use rail or navigation bar
     if (width > kNarrowScreenWidthThreshold) {
+      showRail = true;
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
       if (railStatus != AnimationStatus.forward &&
@@ -79,6 +81,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
         railController.forward();
       }
     } else {
+      showRail = false;
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
       if (railStatus != AnimationStatus.reverse &&
@@ -159,7 +162,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
           ? const Text('Material 3')
           : const Text('Material 2'),
       leading: const Material3About(useRootNavigator: false),
-      actions: !showMediumSizeLayout && !showLargeSizeLayout
+      actions: !showRail
           ? <Widget>[
               _BrightnessButton(controller: widget.themeController),
               _Material3Button(controller: widget.themeController),
