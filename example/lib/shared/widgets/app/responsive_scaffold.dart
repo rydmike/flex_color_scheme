@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../../const/app.dart';
 import '../../utils/colors_are_close.dart';
-import '../universal/maybe_tooltip.dart';
 import 'about.dart';
 
 // ignore_for_file: comment_references
@@ -82,11 +81,10 @@ enum ResponsiveMenuItemIconState { primary, secondary }
 /// an interesting experiment.
 ///
 /// This is not really a Flutter "Universal" Widget that only depends on the
-/// SDK, it also depends on another widget in the project the universal
-/// `MaybeTooltip`. It of course also contains code that may not be 100%
-/// reusable since it is a bit app specific. Hence the 'app' level widget
-/// classification. This widget could however easily be made "universal"
-/// and become quite useful.
+/// SDK, it also depends on a few other project consts and utilities. It
+/// contains some code that is not be 100% reusable since it is a bit app
+/// specific. Hence the 'app' level widget classification. This widget
+/// could easily be made "universal" and become quite useful.
 ///
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
@@ -903,17 +901,14 @@ class _MenuItem extends StatelessWidget {
                     onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
-                        MaybeTooltip(
-                          // Show tooltips only at rail size or if
-                          // the label and tooltip are different and when
-                          // tooltip is not empty string and item is enabled.
-                          condition: (width == railWidth || label != tooltip) &&
-                              tooltip != '' &&
-                              enabled,
-                          // The item menu labels is a tooltip on rail size.
-                          message: tooltip,
+                        Tooltip(
+                          // Show tooltips only at rail size and if enabled.
+                          // Setting message to empty never shows tooltip.
+                          message: width == railWidth &&
+                              enabled ? tooltip : '',
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
+                          waitDuration: const Duration(milliseconds: 500),
                           // Constrain icon to min of rail width.
                           child: ConstrainedBox(
                             constraints: BoxConstraints.tightFor(

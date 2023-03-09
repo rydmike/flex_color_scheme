@@ -30,73 +30,71 @@ class ThemeColorSelector extends StatelessWidget {
     final bool isPhone =
         isCompact || isNarrow || media.size.height < App.phoneHeightBreakpoint;
     final double margins = App.responsiveInsets(media.size.width, isCompact);
-    return RepaintBoundary(
-      child: HeaderCard(
-        margin: EdgeInsets.symmetric(horizontal: margins),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
-              child: InputColorsSelector(
-                controller: controller,
-                isPhone: isPhone,
+    return HeaderCard(
+      margin: EdgeInsets.symmetric(horizontal: margins),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, margins, 0, 0),
+            child: InputColorsSelector(
+              controller: controller,
+              isPhone: isPhone,
+            ),
+          ),
+          if (!isCompact)
+            SizedBox(
+              height: isPhone ? _kHeightDenseListTile : _kHeightNormaListTile,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: SwitchListTile(
+                      contentPadding: isPhone
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : null,
+                      dense: isPhone,
+                      title: isNarrow
+                          ? const Text('M3')
+                          : const Text('Use Material3'),
+                      value: controller.useMaterial3,
+                      onChanged: controller.setUseMaterial3,
+                    ),
+                  ),
+                  Expanded(
+                    child: SwitchListTile(
+                      contentPadding: isPhone
+                          ? const EdgeInsetsDirectional.only(
+                              start: 16, end: 0)
+                          : null,
+                      title: isNarrow
+                          ? const Text('FCS')
+                          : const Text('Use Flex\u200BColor\u200BScheme'),
+                      dense: isPhone,
+                      value: controller.useFlexColorScheme,
+                      onChanged: controller.setUseFlexColorScheme,
+                    ),
+                  ),
+                  Expanded(
+                    child: SwitchListTile(
+                      contentPadding: isPhone
+                          ? const EdgeInsets.symmetric(horizontal: 8)
+                          : null,
+                      dense: isPhone,
+                      title: isNarrow
+                          ? const Text('Sub')
+                          : const Text('Use sub themes'),
+                      value: controller.useSubThemes &&
+                          controller.useFlexColorScheme,
+                      onChanged: controller.useFlexColorScheme
+                          ? controller.setUseSubThemes
+                          : null,
+                    ),
+                  ),
+                ],
               ),
             ),
-            if (!isCompact)
-              SizedBox(
-                height: isPhone ? _kHeightDenseListTile : _kHeightNormaListTile,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      child: SwitchListTile(
-                        contentPadding: isPhone
-                            ? const EdgeInsets.symmetric(horizontal: 8)
-                            : null,
-                        dense: isPhone,
-                        title: isNarrow
-                            ? const Text('M3')
-                            : const Text('Use Material3'),
-                        value: controller.useMaterial3,
-                        onChanged: controller.setUseMaterial3,
-                      ),
-                    ),
-                    Expanded(
-                      child: SwitchListTile(
-                        contentPadding: isPhone
-                            ? const EdgeInsetsDirectional.only(
-                                start: 16, end: 0)
-                            : null,
-                        title: isNarrow
-                            ? const Text('FCS')
-                            : const Text('Use Flex\u200BColor\u200BScheme'),
-                        dense: isPhone,
-                        value: controller.useFlexColorScheme,
-                        onChanged: controller.setUseFlexColorScheme,
-                      ),
-                    ),
-                    Expanded(
-                      child: SwitchListTile(
-                        contentPadding: isPhone
-                            ? const EdgeInsets.symmetric(horizontal: 8)
-                            : null,
-                        dense: isPhone,
-                        title: isNarrow
-                            ? const Text('Sub')
-                            : const Text('Use sub themes'),
-                        value: controller.useSubThemes &&
-                            controller.useFlexColorScheme,
-                        onChanged: controller.useFlexColorScheme
-                            ? controller.setUseSubThemes
-                            : null,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }

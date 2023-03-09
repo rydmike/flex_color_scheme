@@ -43,47 +43,92 @@ import '../panels/widget_showcase/widget_showcase.dart';
 /// The panes are used as content in the [SliverMasonryGrid.count] builder based
 /// page [ThemeTopicsGridPage] and the [PageView.builder] based view used
 /// by the [ThemeTopicPage] and in the [ThemeTwoTopicsPage].
-class ThemePanel extends StatelessWidget {
+class ThemePanel extends StatefulWidget {
   const ThemePanel(this.page, this.controller, {super.key});
   final int page;
   final ThemeController controller;
 
   @override
+  State<ThemePanel> createState() => _ThemePanelState();
+}
+
+class _ThemePanelState extends State<ThemePanel> {
+  @override
   Widget build(BuildContext context) {
     return <Widget>[
-      IntroductionPanel(controller),
-      PremadeDesignsPanel(controller),
-      ThemeSimulator(controller: controller),
-      ThemeColorsSettings(controller),
-      SeededColorSchemeSettings(controller),
-      SurfaceBlendSettings(controller),
-      EffectiveColors(controller),
-      ThemeCode(controller),
-      ComponentSettings(controller),
-      TextFieldSettings(controller),
-      AppBarSettings(controller),
-      TabBarSettings(controller),
-      BottomNavigationBarSettings(controller),
-      NavigationBarSettings(controller),
-      NavigationRailSettings(controller),
-      DrawerSettings(controller),
-      ButtonsSettings(controller),
-      ToggleButtonsSettings(controller),
-      FabChipSettings(controller),
-      MenuSettings(controller),
-      TooltipIconButtonAvatarDropdownSettings(controller),
-      SwitchesSettings(controller),
-      SliderSettings(controller),
-      ListTileSettings(controller),
-      DialogSettings(controller),
-      BottomSheetBannerSnackSettings(controller),
-      CardSettings(controller),
-      TextThemeSettings(controller),
-      PrimaryTextThemeSettings(controller),
+      IntroductionPanel(widget.controller),
+      PremadeDesignsPanel(widget.controller),
+      ThemeSimulator(controller: widget.controller),
+      ThemeColorsSettings(widget.controller),
+      SeededColorSchemeSettings(widget.controller),
+      SurfaceBlendSettings(widget.controller),
+      EffectiveColors(widget.controller),
+      ThemeCode(widget.controller),
+      ComponentSettings(widget.controller),
+      TextFieldSettings(widget.controller),
+      AppBarSettings(widget.controller),
+      TabBarSettings(widget.controller),
+      BottomNavigationBarSettings(widget.controller),
+      NavigationBarSettings(widget.controller),
+      NavigationRailSettings(widget.controller),
+      DrawerSettings(widget.controller),
+      ButtonsSettings(widget.controller),
+      ToggleButtonsSettings(widget.controller),
+      FabChipSettings(widget.controller),
+      MenuSettings(widget.controller),
+      TooltipIconButtonAvatarDropdownSettings(widget.controller),
+      SwitchesSettings(widget.controller),
+      SliderSettings(widget.controller),
+      ListTileSettings(widget.controller),
+      DialogSettings(widget.controller),
+      BottomSheetBannerSnackSettings(widget.controller),
+      CardSettings(widget.controller),
+      TextThemeSettings(widget.controller),
+      PrimaryTextThemeSettings(widget.controller),
       const WidgetShowcase(),
-      PageExamples(controller: controller),
+      PageExamples(controller: widget.controller),
       const MaterialPanel(),
-      AndroidNavigationBarSettings(controller),
-    ].elementAt(page);
+      AndroidNavigationBarSettings(widget.controller),
+    ].elementAt(widget.page);
   }
 }
+
+
+// // Performance experiment to return above Widget function
+// //
+// // Tried it feels more sluggish, or?
+// Widget themePanel(int page, ThemeController controller) => <Widget>[
+//   IntroductionPanel(controller),
+//   PremadeDesignsPanel(controller),
+//   ThemeSimulator(controller: controller),
+//   ThemeColorsSettings(controller),
+//   SeededColorSchemeSettings(controller),
+//   SurfaceBlendSettings(controller),
+//   EffectiveColors(controller),
+//   ThemeCode(controller),
+//   ComponentSettings(controller),
+//   TextFieldSettings(controller),
+//   AppBarSettings(controller),
+//   TabBarSettings(controller),
+//   BottomNavigationBarSettings(controller),
+//   NavigationBarSettings(controller),
+//   NavigationRailSettings(controller),
+//   DrawerSettings(controller),
+//   ButtonsSettings(controller),
+//   ToggleButtonsSettings(controller),
+//   FabChipSettings(controller),
+//   MenuSettings(controller),
+//   TooltipIconButtonAvatarDropdownSettings(controller),
+//   SwitchesSettings(controller),
+//   SliderSettings(controller),
+//   ListTileSettings(controller),
+//   DialogSettings(controller),
+//   BottomSheetBannerSnackSettings(controller),
+//   CardSettings(controller),
+//   TextThemeSettings(controller),
+//   PrimaryTextThemeSettings(controller),
+//   const WidgetShowcase(),
+//   PageExamples(controller: controller),
+//   const MaterialPanel(),
+//   AndroidNavigationBarSettings(controller),
+// ].elementAt(page);
