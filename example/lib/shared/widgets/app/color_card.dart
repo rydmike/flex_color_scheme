@@ -90,11 +90,13 @@ class _ColorCardState extends State<ColorCard> {
               '\nTap box to copy RGB value to Clipboard.',
           child: Card(
             elevation: widget.elevation ?? 0,
+            surfaceTintColor: Colors.transparent,
             shadowColor: widget.shadowColor,
             margin: EdgeInsets.zero,
             clipBehavior: Clip.antiAlias,
             color: widget.color,
             child: InkWell(
+              hoverColor: Colors.transparent,
               onTap: () {
                 unawaited(copyColorToClipboard(context, widget.color));
               },

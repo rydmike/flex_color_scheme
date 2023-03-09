@@ -107,17 +107,19 @@ class ShowInputColors extends StatelessWidget {
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,
+          surfaceTintColor: Colors.transparent,
         ),
       ),
-      child: RepaintBoundary(
-        child: Wrap(
-          alignment: WrapAlignment.start,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 6,
-          runSpacing: 6,
-          children: <Widget>[
-            // Primary color
-            SizedBox(
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 6,
+        runSpacing: 6,
+        children: <Widget>[
+          // Primary color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_primary'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -168,8 +170,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // PrimaryContainer color
-            SizedBox(
+          ),
+          // PrimaryContainer color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_primaryContainer'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -224,8 +229,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // Secondary color
-            SizedBox(
+          ),
+          // Secondary color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_secondary'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -276,8 +284,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // SecondaryContainer color
-            SizedBox(
+          ),
+          // SecondaryContainer color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_secondaryContainer'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -332,8 +343,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // Tertiary color
-            SizedBox(
+          ),
+          // Tertiary color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_tertiary'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -376,8 +390,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // TertiaryContainer color
-            SizedBox(
+          ),
+          // TertiaryContainer color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_tertiaryContainer'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -422,8 +439,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // Error color
-            SizedBox(
+          ),
+          // Error color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_error'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -444,8 +464,11 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-            // ErrorContainer color
-            SizedBox(
+          ),
+          // ErrorContainer color
+          RepaintBoundary(
+            key: const ValueKey<String>('input_errorContainer'),
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Card(
@@ -466,8 +489,8 @@ class ShowInputColors extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

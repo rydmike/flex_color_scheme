@@ -196,6 +196,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   margin: const EdgeInsets.only(top: 8.0),
                   color: widget.inputColor,
                   elevation: 0,
+                  surfaceTintColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     side: BorderSide(color: theme.dividerColor, width: 1),

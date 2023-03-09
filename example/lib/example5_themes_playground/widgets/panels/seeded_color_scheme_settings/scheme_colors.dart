@@ -120,6 +120,7 @@ class SchemeColors extends StatelessWidget {
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,
+          surfaceTintColor: Colors.transparent,
         ),
       ),
       child: Wrap(
@@ -131,6 +132,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Primary colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('primary'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -238,6 +240,7 @@ class SchemeColors extends StatelessWidget {
           //
           // PrimaryContainer colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('primaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -353,6 +356,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Secondary colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('secondary'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -460,6 +464,7 @@ class SchemeColors extends StatelessWidget {
           //
           // SecondaryContainer colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('secondaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -578,6 +583,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Tertiary colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('tertiary'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -677,6 +683,7 @@ class SchemeColors extends StatelessWidget {
           //
           // TertiaryContainer colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('tertiaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -784,6 +791,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Error colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('error'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -850,6 +858,7 @@ class SchemeColors extends StatelessWidget {
           //
           // ErrorContainer colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('errorContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -916,6 +925,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Background colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('background'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -980,6 +990,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Surface colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('surface'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1043,6 +1054,7 @@ class SchemeColors extends StatelessWidget {
           //
           // SurfaceVariant colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('surfaceVariant'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1106,6 +1118,7 @@ class SchemeColors extends StatelessWidget {
           //
           // InverseSurface colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('inverseSurface'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1169,6 +1182,7 @@ class SchemeColors extends StatelessWidget {
           //
           // Outline and outlineVariant colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('outline'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1229,6 +1243,7 @@ class SchemeColors extends StatelessWidget {
           ),
           // Shadow and scrim colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('Shadow'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1291,6 +1306,7 @@ class SchemeColors extends StatelessWidget {
           //
           // InversePrimary and surfaceTint colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('inversePrimary'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,

@@ -65,6 +65,8 @@ class TonalPaletteColors extends StatelessWidget {
           for (int i = 0; i < tonalPalette.length; i++)
             Expanded(
               child: PaletteColorBox(
+                // TODO(rydmike): An attempt to help the SDK with an issue.
+                key: ValueKey<String>('$name${_toneLabel(i)}'),
                 name: name,
                 tone: _toneLabel(i),
                 color: Color(tonalPalette[i]),
