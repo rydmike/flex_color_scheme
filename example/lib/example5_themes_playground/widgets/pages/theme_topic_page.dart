@@ -73,7 +73,7 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
 
   late final AnimationController fadeController = AnimationController(
     duration: const Duration(milliseconds: 260),
-    lowerBound: 0.1,
+    lowerBound: 0.2,
     upperBound: 1.0,
     vsync: this,
   );
@@ -180,7 +180,7 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
                       // notice that the page changed, and this fade-zoom-in
                       // fits well on a tablet view. If we animate to page with
                       // the page view controller, it also looks very confusing.
-                      scaleController.value = 0.7;
+                      scaleController.value = 0.8;
                       fadeController.value = 0.2;
                       scaleController.forward();
                       fadeController.forward();

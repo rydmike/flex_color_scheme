@@ -207,8 +207,8 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
   late final ScrollController scrollController;
 
   late final AnimationController scaleController = AnimationController(
-    duration: const Duration(milliseconds: 200),
-    lowerBound: 0.80,
+    duration: const Duration(milliseconds: 180),
+    lowerBound: 0.90,
     upperBound: 1.0,
     vsync: this,
   );
@@ -218,8 +218,8 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
   );
 
   late final AnimationController fadeController = AnimationController(
-    duration: const Duration(milliseconds: 200),
-    lowerBound: 0.1,
+    duration: const Duration(milliseconds: 180),
+    lowerBound: 0.2,
     upperBound: 1.0,
     vsync: this,
   );
@@ -275,7 +275,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
                 // A scale and fade up animation when user taps on them topic
                 // item, we trigger a slight fade and zoom in effect.
                 scaleController.value = 0.9;
-                fadeController.value = 0.3;
+                fadeController.value = 0.2;
                 scaleController.forward();
                 fadeController.forward();
               },
@@ -320,7 +320,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
                 // A scale and fade up animation when user taps on them topic
                 // item, we trigger a slight fade and zoom in effect.
                 scaleController.value = 0.9;
-                fadeController.value = 0.3;
+                fadeController.value = 0.2;
                 scaleController.forward();
                 fadeController.forward();
               },
