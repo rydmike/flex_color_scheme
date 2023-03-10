@@ -179,7 +179,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Document FilledButton API name change (baseSchemeColor -> backgroundSchemeColor), not breaking, just breaking between dev releases.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
 - Maybe add support for MenButton, the selected item styling in menus.
-- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.6
+- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
