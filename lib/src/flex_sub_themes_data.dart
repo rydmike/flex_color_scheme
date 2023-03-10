@@ -10,30 +10,61 @@ import 'flex_sub_themes.dart';
 
 /// Parameters used by [FlexColorScheme] to configure its used [FlexSubThemes].
 ///
-/// To enable the optional component theming feature in FlexColorScheme pass in
-/// at least a default [FlexSubThemesData] () to its [subThemesData] property.
-/// This gives you the default opinionated component theme setup.
+/// To enable the optional component theming feature in FlexColorScheme, pass in
+/// at least a default [FlexSubThemesData] to its [subThemesData] property.
+/// This gives you the default opinionated component theming setup.
 ///
-/// The list of properties in the flat configuration class has grown very large.
-/// While it can be a bit tricky to maintain it, using it is easy and quite
-/// a convenient way to adjust commonly used properties on UI component
-/// widgets using simple "flat" property values.
+/// The list of properties in the flat configuration class is very large.
+/// While it can be a bit tricky to maintain it, using it is easy and a
+/// convenient way to adjust commonly used properties on UI component
+/// widgets, by using a simple flat list of property values.
 ///
-/// No need for deep [ShapeBorder] definitions for simple border radius change,
-/// nor for the complex [MaterialState] properties. Well, not as long
-/// as choices and offered flat config options covers what you need.
+/// No need for deep [ShapeBorder] definitions for a simple border radius
+/// change, nor for the complex [MaterialState] properties. Well, not as long
+/// as the offered config options covers what you need.
 ///
-/// A common use case for [FlexSubThemes] and the [FlexSubThemesData] is for
+/// A common use case for [FlexSubThemes] and [FlexSubThemesData] is
 /// easy customization of default border radius on all Flutter SDK
-/// Widgets and elements that supports border radius, either via [ShapeBorder]
-/// or [BorderRadiusGeometry].
+/// Widgets and elements that supports border radius, typically via
+/// [ShapeBorder] but also some via [BorderRadiusGeometry]. The global border
+/// radius used by all widgets can be adjusted by giving [defaultRadius] the
+/// desired radius.
+///
+/// The following widgets have rounded corners, but are excluded from the
+/// global border radius impact:
+///
+/// * [Tooltip], generally so small that larger prominent rounding is
+///   not a good fit.
+/// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
+/// * The [AppBar] and [BottomAppBar] shape properties are left to defaults.
+/// * The floating [SnackBar] can be themed to also include border radius, but
+///   the none floating one should remain straight. This separation cannot
+///   can be done via current flutter theming features. If you use Material 3
+///   this may not be problem since an M3 app is not supposed to use the
+///   fixed style [SnackBar], so if you only use the floating one, you can
+///   modify its border radius. The M3 guide mentions it should never be
+///   stadium shaped, so consider keeping the radiuos modest, e.g. 10 or lower.
+/// * [PopupMenuButton], menus in general like [DropdownMenu] and [MenuAnchor],
+///   can get a border radius, but not via global default. Values above 10 are
+///   not a good idea, but up to 8 still works pretty well.
+/// * The selected item indicators on [NavigationBar] and [NavigationRail] are
+///   not impacted by global border radius setting, but can be modified via
+///   own properties.
+/// * The selected item indicator on [NavigationDrawer] is large and is thus
+///   included in elements impacted by the global border radius setting.
+/// * By default the very distinct [FloatingActionButton] is not impacted by the
+///   global border radius, but there is flag that can be set to include it.
 ///
 /// By design the shape border radius rounding on included and
 /// supported sub-themes that use shapes, default to the border radius
 /// defined by the Material 3 guide per widget,
-/// [see Material 3 Design guide](https://m3.material.io).
+/// [see Material 3 Design guide](https://m3.material.io). This is done also
+/// in Material 2 mode. This can give your Material 2 app a more modern look
+/// without using the Material 3 mode in Flutter [ThemeData]. If you
+/// want the actual border radius used in Material 2 for a Material 2 using
+/// application, set [defaultRadius] to 4 dp.
 ///
-/// Additionally the sub-theming offers a consistent button design on all
+/// Additionally, the sub-theming offers a consistent button design on all
 /// buttons, including [ToggleButtons] that is styled to match size of
 /// [OutlinedButton] concerning the outline and the selected button color to
 /// [ElevatedButton] color. Hover and Focus colors are also matched. It is also
@@ -41,21 +72,25 @@ import 'flex_sub_themes.dart';
 /// that makes it implement [VisualDensity], which it does not do out of the box
 /// in the SDK.
 ///
-/// On many sub-themes the used default colors from the theme's colorScheme for
-/// one or more of each component's color properties can be changed with an
-/// enum [SchemeColor] selection value.
+/// On most sub-themes the used default colors from the theme's colorScheme for
+/// each component's color properties can be changed with an enum based
+/// [SchemeColor] selection value.
 ///
-/// You can also modify any [FlexColorScheme] produced [ThemeData]
-/// object with [ThemeData.copyWith], just as you can with normal ThemeData,
-/// to add custom component sub-themes designs that FlexColorScheme does
-/// not include or support directly.
+/// If the options included in [FlexColorScheme] are not enough, you can always
+/// modify any [FlexColorScheme] produced [ThemeData] object with
+/// [ThemeData.copyWith] to add custom component sub-theme designs that
+/// [FlexColorScheme] does not include or support directly.
 ///
 /// It is not in-scope to provide every option possible via Flutter SDK
 /// component sub-themes to be configurable via [FlexSubThemesData]. Only a
 /// sub-set of commonly used properties are available as convenient sub-theme
 /// settings via this flat and easy to use configuration class.
 ///
-/// There are custom and opinionated component themes available in
+/// Feel free to suggest additional sub-theming features in the repo
+/// https://github.com/rydmike/flex_color_scheme/issues as a new feature
+/// proposal.
+///
+/// These are the current custom and opinionated component themes available in
 /// [FlexSubThemes] as static theming helpers:
 ///
 /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
@@ -114,11 +149,11 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.toggleButtonsTheme].
 /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
 ///
-/// The custom `ButtonThemeData` can still provides matching styling
-/// for the deprecated legacy buttons if they are used.
-/// Please consider phasing out the legacy buttons, as they are deprecated
-/// and will be removed from the Flutter SDK. Their theme `ButtonThemeData`
-/// will also soon be deprecated and later removed.
+/// [FlexColorScheme] uses the [FlexSubThemesData] class to configure the
+/// opt-in sub-themes, based on the setup information provided via
+/// [FlexColorScheme.subThemesData] by passing properties defined in it to
+/// the above helpers that are then used to define the component sub-themes for
+/// the produced [ThemeData].
 @immutable
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.

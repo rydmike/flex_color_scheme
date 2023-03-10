@@ -150,10 +150,9 @@ enum SchemeColor {
   surfaceTint,
 }
 
-/// Contains static sub-theme helpers used by opt-in widget sub theming
-/// in [FlexColorScheme].
+/// Static sub-theme helpers used by widget sub theming in [FlexColorScheme].
 ///
-/// [FlexSubTheme] offers optional opinionated static theme helpers. You can
+/// [FlexSubThemes] offers optional opinionated static theme helpers. You can
 /// change many properties of the the opt-in setup by defining custom
 /// configuration values in the [FlexSubThemesData] configuration class,
 /// and passing it to the [FlexColorScheme.subThemesData] property.
@@ -162,15 +161,19 @@ enum SchemeColor {
 /// default constructor [FlexSubThemesData] to [FlexColorScheme.subThemesData].
 ///
 /// The configuration class [FlexSubThemesData] offers easy to use configuration
-/// properties for using these sub-themes in FlexColorScheme.
+/// properties for using these sub-themes in [FlexColorScheme].
 ///
-/// You can if you wish, also the static sub-themes without even using
-/// FlexColorScheme based theming. The [FlexSubThemesData] configuration has
-/// no direct impact on these static helpers. It is [FlexColorScheme] that uses
-/// the [FlexSubThemesData] class to configure the opt-in sub-themes based on
-/// the setup information provided via [FlexColorScheme.subThemesData].
+/// It is also possible to use the [FlexSubThemes] static sub-theming helpers
+/// without even using [FlexColorScheme] based theming.
 ///
-/// These component themes are available:
+/// The [FlexSubThemesData] configuration class does not use these static
+/// helpers. It is [FlexColorScheme] that uses the [FlexSubThemesData] class
+/// to configure the opt-in sub-themes, based on the setup information provided
+/// via [FlexColorScheme.subThemesData], by passing properties defined in it, to
+/// the sub-theme helpers below, that are then used to define the component
+/// sub-themes for the produced [ThemeData].
+///
+/// These component themes are currently available:
 ///
 /// * [AppBarTheme] for [AppBar] via [appBarTheme].
 /// * [BottomAppBarTheme] for [BottomAppBar] via [bottomAppBarTheme].
@@ -213,48 +216,12 @@ enum SchemeColor {
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
 /// * [TooltipThemeData] for [Tooltip] via [tooltipTheme].
 ///
-/// In [ToggleButtons] hover, press, selected and focus states are not
-/// an exact match for the main buttons. It does not have as flexible styling
-/// as the main buttons. The theme mimics the style of the [OutlinedButton] for
-/// not selected buttons and the style of [ElevatedButton] for selected
-/// button. It does not support [MaterialStateProperty] and has only
-/// one state for different parts of the button. The selected and not selected,
-/// states would need different property values to be able to match the general
-/// buttons. It can therefore not fully match the same theme style as the
-/// Material states used on two different [ButtonStyleButton] buttons that
-/// it should match.
-///
-/// The theme `ButtonThemeData` is included to provide a very similar
-/// theme style on the deprecated legacy buttons `RaisedButton`,
-/// `OutlineButton` and `FlatButton` as on the current main buttons. It is not
-/// an exact match, since the legacy buttons do not offer as flexible
-/// styling as the newer buttons. They do follow and match the styling on
-/// [ToggleButtons] when it comes to hover, press, selected and focus.
-/// Please consider phasing out the legacy buttons, as they are deprecated and
-/// will be removed from the Flutter SDK. Their theme
-/// the `ButtonThemeData` will also soon be deprecated and later removed.
-///
-/// The following widgets that have rounded corners, but are excluded from the
-/// component theming for now:
-///
-/// * [Tooltip], generally so small that larger prominent rounding the
-///   opinionated sub-theming is designed for, is not a good fit.
-///   FlexColorScheme does include out of the box theming options for tooltips,
-///   that also adapts to color branding when opting in on sub themes,
-///   it also gets a bit more rounded than when not opting in on sub themes.
-/// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
-/// * The `AppBar` and `BottomAppBar` shape properties are left to defaults.
-/// * `SnackBar` the floating SnackBar should be themed to also include
-///   border radius, but the none floating one should remain
-///   straight. This cannot can be done via current theming features.
-/// * `Drawer` should have have rounding on shown side edge, it is in recent
-///   version (2.8.0) possible to assign a Shape in the drawer theme. But
-///   Drawer uses same theme, when used as Drawer and EndDrawer and the rounding
-///   should be on end edge on Drawer and start edge in EndDrawer. It seem we
-///   cannot do   this without having two Shapes in its theme or other usage
-///   behavior modifying it. A default behavior in SDK can implement it by
-///   looking up if the Drawer is being used in Scaffold as Drawer or EndDrawer,
-///   but support via theme is needed too.
+/// While it is possible to use them without [FlexColorScheme] it may not be
+/// ideal, as they are designed with the features used and needed by
+/// [FlexColorScheme] and its configuration class [FlexSubThemesData] in mind.
+/// The [FlexSubThemes] may have more frequent breaking changes than
+/// [FlexColorScheme] and [FlexSubThemesData] as it is a more secondary level.
+/// It was still decided to keep their APIs public.
 class FlexSubThemes {
   /// Private constructor for the FlexSubThemes static class to prevent it from
   /// being instantiated or extended.
