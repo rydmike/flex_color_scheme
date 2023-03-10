@@ -1977,8 +1977,8 @@ class FlexColorScheme with Diagnosticable {
     /// By default, if a `defaultRadius` is not specified, each widgets corner
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
-    /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// defaults when it is possible to do so in Flutter SDK theming when using
+    /// Material2 mode and via defaults also in Material 3 mode.
     ///
     /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
@@ -1986,24 +1986,45 @@ class FlexColorScheme with Diagnosticable {
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// Opinionated sub themes are provided for:
+    /// Customizable sub-themes are available for:
     ///
+    /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+    /// * [BottomAppBarTheme] for [BottomAppBar] via
+    ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [FlexSubThemes.bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [ButtonThemeData] for old deprecated buttons, via
+    ///   [FlexSubThemes.buttonTheme].
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+    /// * [DropdownMenuThemeData] for [DropDownMenu] via
+    ///   [FlexSubThemes.dropdownMenuTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
     ///   [FlexSubThemes.elevatedButtonTheme].
+    /// * [FilledButtonThemeData] for [FilledButton] via
+    ///   [FlexSubThemes.filledButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
     ///   [FlexSubThemes.floatingActionButtonTheme].
+    /// * [IconButtonThemeData] for [IconButton] via
+    ///   [FlexSubThemes.iconButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+    /// * [MenuButtonThemeData] for [MenuButton] via
+    ///   [FlexSubThemes.menuButtonTheme].
+    /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+    ///   [FlexSubThemes.menuTheme].
+    /// * [ListTileThemeData] for [ListTile] via
+    ///   [FlexSubThemes.listTileTheme].
     /// * [NavigationBarThemeData] for [NavigationBar] via
     ///   [FlexSubThemes.navigationBarTheme].
+    /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+    ///   [FlexSubThemes.navigationDrawerTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
     ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
@@ -2011,9 +2032,10 @@ class FlexColorScheme with Diagnosticable {
     /// * [PopupMenuThemeData] for [PopupMenuButton] via
     ///   [FlexSubThemes.popupMenuTheme].
     /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
@@ -2021,9 +2043,6 @@ class FlexColorScheme with Diagnosticable {
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
     ///   [FlexSubThemes.toggleButtonsTheme].
     /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
-    ///
-    /// * The custom `ButtonThemeData` even still provides matching styling to
-    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
