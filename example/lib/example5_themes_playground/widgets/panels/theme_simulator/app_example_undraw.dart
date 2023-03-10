@@ -116,7 +116,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                               (BuildContext context, BoxConstraints size) {
                             return RandomImageWidget(
                               imageColor: imageColors[index],
-                              borderRadius: size.maxWidth / 20,
+                              // borderRadius: size.maxWidth / 20,
                               borderWidth: size.maxWidth / 35,
                             );
                           });
@@ -147,47 +147,54 @@ class RandomImageWidget extends StatelessWidget {
   const RandomImageWidget({
     super.key,
     required this.imageColor,
-    this.borderRadius = 10.0,
+    this.borderRadius,
     this.borderWidth = 10.0,
   });
 
   final MaterialColor imageColor;
-  final double borderRadius;
+  // Defaults to theme radius of Card if not defined.
+  final double? borderRadius;
   final double borderWidth;
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight = Theme.of(context).brightness == Brightness.light;
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool isLight = theme.brightness == Brightness.light;
     final Random random = Random();
 
+    // Default starting point value based on M3 and M2 mode spec values
+    double radius = useMaterial3 ? 12 : 4;
+    if (borderRadius == null) {
+      // Is themed? Try to get the radius from the theme and used that if it was.
+      final ShapeBorder? cardShape = theme.cardTheme.shape;
+      if (cardShape != null && cardShape is RoundedRectangleBorder) {
+        final BorderRadius shape = cardShape.borderRadius as BorderRadius;
+        radius = shape.bottomLeft.x;
+      }
+    } else {
+      // If a passed value was used we use that
+      radius = borderRadius!;
+    }
     return Card(
+      color: theme.colorScheme.onInverseSurface,
+      shadowColor: Colors.transparent,
+      elevation: 0,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(borderRadius),
-        ),
+        side: BorderSide(
+            color: isLight ? imageColor[700]! : imageColor[200]!,
+            width: borderWidth),
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
       ),
-      shadowColor: Colors.transparent,
-      elevation: isLight ? 0.5 : 2,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-              width: borderWidth,
-              color: isLight ? imageColor[700]! : imageColor[200]!),
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
-        ),
-        padding: const EdgeInsets.all(10),
-        child: SvgAssetImageSwitcher(
-          assetNames: AppImages.allImages,
-          color: isLight ? imageColor[700]! : imageColor[400]!,
-          padding: const EdgeInsets.fromLTRB(4, 8, 4, 4),
-          fit: BoxFit.contain,
-          switchType: ImageSwitchType.random,
-          showDuration: Duration(milliseconds: 2000 + random.nextInt(2000)),
-          switchDuration: Duration(milliseconds: 200 + random.nextInt(250)),
-        ),
+      child: SvgAssetImageSwitcher(
+        assetNames: AppImages.allImages,
+        color: isLight ? imageColor[700]! : imageColor[400]!,
+        padding: EdgeInsets.all(borderWidth * 4),
+        fit: BoxFit.contain,
+        switchType: ImageSwitchType.random,
+        showDuration: Duration(milliseconds: 2000 + random.nextInt(2000)),
+        switchDuration: Duration(milliseconds: 200 + random.nextInt(250)),
       ),
     );
   }

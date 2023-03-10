@@ -44,20 +44,25 @@ class SvgAssetImage extends StatefulWidget {
 }
 
 class _SvgAssetImageState extends State<SvgAssetImage> {
-  late final Future<SvgPicture> svgImage;
+  // late Future<SvgPicture> svgImage;
+  // late String svgString;
 
   Future<SvgPicture> _coloredUndrawImage(
       final String name, final Color color) async {
-    String image = await rootBundle.loadString(widget.assetName);
+    String svgString = await rootBundle.loadString(widget.assetName);
     String valueString = color.toString().split('(0x')[1].split(')')[0];
     valueString = valueString.substring(2, valueString.length);
 
     // Find the default image 'theme' color in the Undraw SVG, and replace
     // the color with another color string value we want to use instead.
-    image = image.replaceAll('#6c63ff', '#$valueString');
+    svgString = svgString.replaceAll('#6c63ff', '#$valueString');
     return SvgPicture.string(
-      key: ValueKey<String>('${widget.assetName}$color'),
-      image,
+      // On purpose using only asset name as its ValueKey, if we add color to
+      // it we get a flash on the drawing, when the new color is applied,
+      // this just replaces it and it animates if it is a theme color and we
+      // change theme.
+      key: ValueKey<String>(widget.assetName),
+      svgString,
       height: widget.height,
       width: widget.width,
       alignment: widget.alignment,
@@ -67,17 +72,11 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    // False positive, see: https://github.com/dart-lang/linter/issues/3739
-    // ignore: discarded_futures
-    svgImage = _coloredUndrawImage(widget.assetName, widget.color);
-  }
-
-  @override
   Widget build(final BuildContext context) {
     return FutureBuilder<SvgPicture>(
-      future: svgImage,
+      // False positive, see: https://github.com/dart-lang/linter/issues/3739
+      // ignore: discarded_futures
+      future: _coloredUndrawImage(widget.assetName, widget.color),
       builder:
           (final BuildContext context, final AsyncSnapshot<Widget> snapshot) {
         if (snapshot.hasData) {
