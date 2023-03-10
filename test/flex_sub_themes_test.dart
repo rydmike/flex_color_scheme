@@ -3350,17 +3350,17 @@ void main() {
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedFocused(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
+        equals(FlexSubThemes.tintedPressed(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!

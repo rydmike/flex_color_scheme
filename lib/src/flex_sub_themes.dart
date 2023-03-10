@@ -4494,7 +4494,7 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
