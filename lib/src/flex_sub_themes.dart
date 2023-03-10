@@ -1560,11 +1560,6 @@ class FlexSubThemes {
     /// [FilterChip], [InputChip], [RawChip].
     final Color? surfaceTintColor,
 
-    /// Defines if the theme uses tinted interaction effects.
-    ///
-    /// If undefined, defaults to false.
-    final bool? useTintedInteraction,
-
     /// Defines if the theme uses tinted disabled color.
     ///
     /// If undefined, defaults to false.
@@ -1584,7 +1579,6 @@ class FlexSubThemes {
   }) {
     // Used to toggle between different defaults from M2 and M3.
     final bool useM3 = useMaterial3 ?? false;
-    final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
     // Function used to increase icon color for selections resulting in poor
@@ -1636,6 +1630,10 @@ class FlexSubThemes {
     final Color deleteIconColor = schemeColor(
         deleteIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color tint = selectedColor;
+
     // Icon color.
     final Color iconColor;
     if (blendColor == colorScheme.surface ||
@@ -1667,11 +1665,12 @@ class FlexSubThemes {
 
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       // Same formula as on FCS Elevated button and ToggleButtons.
-      disabledColor: useM3Defaults
+      disabledColor: useM3Defaults && !tintDisable
           ? null
-          : blendColor
-              .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-              .withAlpha(kDisabledBackgroundAlpha),
+          : tintDisable
+              ? tintedDisable(colorScheme.onSurface, tint)
+                  .withAlpha(kAlphaVeryLowDisabled)
+              : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
 
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       selectedColor: useM3Defaults ? null : selectedColor,
@@ -6128,6 +6127,8 @@ class FlexSubThemes {
       //
       // M3 styling Flutter 3.7 does not do yet, but we can du in M3 mode.
       dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
+      // TODO(rydmike): Check TimePicker on master again.
+      // Does not seem to work in 3.7
       dayPeriodColor: useM3
           ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
@@ -6272,6 +6273,8 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
@@ -6286,7 +6289,7 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
@@ -6298,33 +6301,32 @@ class FlexSubThemes {
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
       borderWidth: effectiveWidth,
-      selectedColor: onBaseColor.withAlpha(kSelectedAlpha),
+      selectedColor: onBaseColor,
       color: unselectedColor,
-      fillColor: baseColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      borderColor:
-          useM3 ? borderColor : borderColor.withAlpha(kEnabledBorderAlpha),
-      selectedBorderColor: useM3
-          ? borderColor
-          : borderColor.blendAlpha(Colors.white, kAltPrimaryAlphaBlend),
-      hoverColor: baseColor
-          .blendAlpha(Colors.white, kHoverAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kHoverAlpha),
-      focusColor: baseColor
-          .blendAlpha(Colors.white, kFocusAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kFocusAlpha),
-      highlightColor: baseColor
-          .blendAlpha(
-              Colors.white, kHighlightAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kHighlightAlpha),
-      splashColor: baseColor
-          .blendAlpha(Colors.white, kSplashAlphaBlend + kAltPrimaryAlphaBlend)
-          .withAlpha(kSplashAlpha),
-      disabledColor: baseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledForegroundAlpha),
-      disabledBorderColor: borderColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
+      fillColor: baseColor,
+      // TODO(rydmike): Maybe add border opacity, default M2 withAlpha(0xA7).
+      borderColor: borderColor,
+      selectedBorderColor: borderColor,
+      hoverColor: tintInteract
+          ? tintedHovered(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaHovered),
+      focusColor: tintInteract
+          ? tintedFocused(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaFocused),
+      highlightColor: tintInteract
+          ? tintedHighlight(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaHighlight),
+      splashColor: tintInteract
+          ? tintedSplash(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaSplash),
+      disabledColor: tintDisable
+          ? tintedDisable(colorScheme.onSurface, tint)
+              .withAlpha(kAlphaLowDisabled)
+          : colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+      disabledBorderColor: tintDisable
+          ? tintedDisable(colorScheme.onSurface, borderColor)
+              .withAlpha(kAlphaLowDisabled)
+          : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
       borderRadius: BorderRadius.circular(radius ?? kButtonRadius),
       constraints: BoxConstraints(
         // ToggleButtons draws its border outside its constraints, the

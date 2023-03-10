@@ -6478,6 +6478,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // Chip Theme.
+      // TODO(rydmike): Monitor Chip theming improvements in Flutter SDK.
       // The default chip theme in Flutter does not work correctly with dark
       // themes. See issue: https://github.com/flutter/flutter/issues/65663
       // The chip theme below fixes it by using the colorScheme.primary color.
@@ -6494,7 +6495,6 @@ class FlexColorScheme with Diagnosticable {
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
-              useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
               useMaterial3: useMaterial3,
             )
@@ -6509,7 +6509,6 @@ class FlexColorScheme with Diagnosticable {
                 ),
       //
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      // datePickerTheme: NOT YET DEFINED BY FCS. USE: .copyWith
       //
       // TODO(Rydmike): Add DatePicker Themedata when available in stable.
       // datePickerTheme: DatePickerThemeData(),

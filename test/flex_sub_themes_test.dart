@@ -4177,30 +4177,18 @@ void main() {
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1,
-            selectedColor: colorScheme.onPrimary.withAlpha(0xE5),
+            selectedColor: colorScheme.onPrimary,
             color: colorScheme.primary,
-            fillColor: colorScheme.primary.blendAlpha(Colors.white, 0x19),
-            borderColor: colorScheme.primary.withAlpha(0xA7),
-            selectedBorderColor:
-                colorScheme.primary.blendAlpha(Colors.white, 0x19),
-            hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C + 0x19)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F + 0x19)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x5E),
-            disabledBorderColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x26),
+            fillColor: colorScheme.primary,
+            borderColor: colorScheme.primary,
+            selectedBorderColor: colorScheme.primary,
+            hoverColor: colorScheme.primary.withAlpha(kAlphaHovered),
+            focusColor: colorScheme.primary.withAlpha(kAlphaFocused),
+            highlightColor: colorScheme.primary.withAlpha(kAlphaHighlight),
+            splashColor: colorScheme.primary.withAlpha(kAlphaSplash),
+            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+            disabledBorderColor:
+                colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
             borderRadius: BorderRadius.circular(20),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -4221,35 +4209,70 @@ void main() {
         FlexSubThemes.toggleButtonsTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
+          borderWidth: 2,
+        ),
+        equals(
+          ToggleButtonsThemeData(
+            borderWidth: 2,
+            selectedColor: colorScheme.onSecondary,
+            color: colorScheme.secondary,
+            fillColor: colorScheme.secondary,
+            borderColor: colorScheme.secondary,
+            selectedBorderColor: colorScheme.secondary,
+            hoverColor: colorScheme.secondary.withAlpha(kAlphaHovered),
+            focusColor: colorScheme.secondary.withAlpha(kAlphaFocused),
+            highlightColor: colorScheme.secondary.withAlpha(kAlphaHighlight),
+            splashColor: colorScheme.secondary.withAlpha(kAlphaSplash),
+            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+            disabledBorderColor:
+                colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+            borderRadius: BorderRadius.circular(20),
+            constraints: BoxConstraints(
+              minWidth: 40 - 2 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 2 * 2 + visualDensity.baseSizeAdjustment.dy,
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'ToggleButtons FST1.13M3-base-color: GIVEN a tinted interact disable '
+        'and default M3 outline border FlexSubTheme.toggleButtonsTheme() '
+        'EXPECT '
+        'equal to ToggleButtonsThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.secondary;
+      expect(
+        FlexSubThemes.toggleButtonsTheme(
+          colorScheme: colorScheme,
+          radius: 14,
+          baseSchemeColor: SchemeColor.secondary,
+          unselectedSchemeColor: SchemeColor.error,
+          useTintedDisable: true,
+          useTintedInteraction: true,
+          useMaterial3: true,
         ),
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1,
-            selectedColor: colorScheme.onSecondary.withAlpha(0xE5),
-            color: colorScheme.secondary,
-            fillColor: colorScheme.secondary.blendAlpha(Colors.white, 0x19),
-            borderColor: colorScheme.secondary.withAlpha(0xA7),
-            selectedBorderColor:
-                colorScheme.secondary.blendAlpha(Colors.white, 0x19),
-            hoverColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            focusColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x4C + 0x19)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x40 + 0x19)
-                .withAlpha(0x19),
-            splashColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x1F + 0x19)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x5E),
-            disabledBorderColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x26),
-            borderRadius: BorderRadius.circular(20),
+            selectedColor: colorScheme.onSecondary,
+            color: colorScheme.error,
+            fillColor: colorScheme.secondary,
+            borderColor: colorScheme.outline,
+            selectedBorderColor: colorScheme.outline,
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, 2),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, 2),
+            highlightColor: FlexSubThemes.tintedHighlight(overlay, tint, 2),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, 2),
+            disabledColor:
+                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+                    .withAlpha(kAlphaLowDisabled),
+            disabledBorderColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, colorScheme.outline)
+                .withAlpha(kAlphaLowDisabled),
+            borderRadius: BorderRadius.circular(14),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
               minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
@@ -4258,7 +4281,56 @@ void main() {
         ),
       );
     });
+    test(
+        'ToggleButtons FST1.13M3-base-color: GIVEN a tinted interact disable '
+        'FlexSubTheme.toggleButtonsTheme() '
+        'EXPECT '
+        'equal to ToggleButtonsThemeData() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.secondary;
+      expect(
+        FlexSubThemes.toggleButtonsTheme(
+          colorScheme: colorScheme,
+          radius: 16,
+          borderWidth: 1.5,
+          baseSchemeColor: SchemeColor.secondary,
+          unselectedSchemeColor: SchemeColor.tertiary,
+          borderSchemeColor: SchemeColor.error,
+          useTintedDisable: true,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ),
+        equals(
+          ToggleButtonsThemeData(
+            borderWidth: 1.5,
+            selectedColor: colorScheme.onSecondary,
+            color: colorScheme.tertiary,
+            fillColor: colorScheme.secondary,
+            borderColor: colorScheme.error,
+            selectedBorderColor: colorScheme.error,
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, 2),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, 2),
+            highlightColor: FlexSubThemes.tintedHighlight(overlay, tint, 2),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, 2),
+            disabledColor:
+                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+                    .withAlpha(kAlphaLowDisabled),
+            disabledBorderColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, colorScheme.error)
+                .withAlpha(kAlphaLowDisabled),
+            borderRadius: BorderRadius.circular(16),
+            constraints: BoxConstraints(
+              minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
+              minHeight: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dy,
+            ),
+          ),
+        ),
+      );
+    });
   });
+
   group('WITH: FlexSubTheme.floatingActionButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes FloatingActionButton tests
@@ -4439,6 +4511,7 @@ void main() {
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge!,
+          useTintedDisable: false, // Default
         ),
         equals(
           ChipThemeData(
@@ -4449,7 +4522,47 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x2613002f),
+            disabledColor: const Color(0x1f000000),
+            selectedColor: const Color(0xffbe96f8),
+            secondarySelectedColor: const Color(0xffbe96f8),
+            checkmarkColor: const Color(0xff000000),
+            surfaceTintColor: const Color(0xff6200ee),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Chip FST1.15: GIVEN a FlexSubTheme.chipTheme(tint disable) '
+        'EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          labelStyle: textTheme.labelLarge!,
+          useTintedDisable: true,
+        ),
+        equals(
+          ChipThemeData(
+            padding: const EdgeInsets.all(4),
+            labelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            secondaryLabelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            backgroundColor: const Color(0xffdfccfb),
+            deleteIconColor: const Color(0xff000000),
+            disabledColor: const Color(0x1f4c3c63),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: const Color(0xff000000),
@@ -4490,7 +4603,44 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffdfccfb),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x2613002f),
+            disabledColor: const Color(0x1f000000),
+            selectedColor: const Color(0xff03dac6),
+            secondarySelectedColor: const Color(0xff03dac6),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
+            iconTheme: const IconThemeData(
+              color: Color(0xff6200ee),
+              size: 18.0,
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Chip FST1.15-M3: GIVEN a '
+        'FlexSubTheme.chipTheme(M3 no-null scheme with disable tint) '
+        'EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          labelStyle: textTheme.labelLarge!,
+          baseSchemeColor: SchemeColor.primary,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ),
+        equals(
+          ChipThemeData(
+            labelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            secondaryLabelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            backgroundColor: const Color(0xffdfccfb),
+            deleteIconColor: const Color(0xff000000),
+            disabledColor: const Color(0x1f01574f),
             selectedColor: const Color(0xff03dac6),
             secondarySelectedColor: const Color(0xff03dac6),
             surfaceTintColor: const Color(0xff6200ee),
@@ -4548,7 +4698,7 @@ void main() {
                 textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
             backgroundColor: const Color(0xffccf7f3),
             deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x26002b27),
+            disabledColor: const Color(0x1f000000),
             selectedColor: const Color(0xff97efe7),
             secondarySelectedColor: const Color(0xff97efe7),
             surfaceTintColor: const Color(0xff6200ee),
@@ -4566,6 +4716,48 @@ void main() {
         ),
       );
     });
+  });
+  test(
+      'Chip FST1.16: GIVEN a '
+      'FlexSubTheme.chipTheme() with usedSchemeColor '
+      'Secondary and disable tint EXPECT equal to ChipThemeData() version '
+      'with same values', () {
+    const ColorScheme colorScheme = ColorScheme.light();
+    final TextTheme textTheme =
+        Typography.material2018(platform: TargetPlatform.android).black;
+    expect(
+      FlexSubThemes.chipTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.secondary,
+        labelStyle: textTheme.labelLarge!,
+        useTintedDisable: true,
+      ),
+      equals(
+        ChipThemeData(
+          padding: const EdgeInsets.all(4),
+          labelStyle:
+              textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+          secondaryLabelStyle:
+              textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+          backgroundColor: const Color(0xffccf7f3),
+          deleteIconColor: const Color(0xff000000),
+          disabledColor: const Color(0x1f3c5f5c),
+          selectedColor: const Color(0xff97efe7),
+          secondarySelectedColor: const Color(0xff97efe7),
+          surfaceTintColor: const Color(0xff6200ee),
+          checkmarkColor: const Color(0xff000000),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+          iconTheme: const IconThemeData(
+            color: Color(0xff015c54),
+            size: 18.0,
+          ),
+        ),
+      ),
+    );
   });
   group('WITH: FlexSubTheme.navigationBarTheme ', () {
     // -------------------------------------------------------------------------
