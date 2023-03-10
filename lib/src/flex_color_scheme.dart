@@ -70,8 +70,8 @@ enum FlexAppBarStyle {
   /// The built-in color schemes have the same color value that is assigned to
   /// [FlexSchemeColor.tertiary] also assigned to
   /// [FlexSchemeColor.appBarColor]. With them, the custom choice always
-  /// results in the [FlexSchemeColor.tertiaryContainer] color, which is same
-  /// as output [ColorScheme.tertiaryContainer], being used as the [AppBar]
+  /// results in the [FlexSchemeColor.tertiary] color, which is same
+  /// as output [ColorScheme.tertiary], being used as the [AppBar]
   /// color when using the [custom] choice with them.
   ///
   /// FlexColorSchemes using custom [FlexSchemeColor] can assign any color
