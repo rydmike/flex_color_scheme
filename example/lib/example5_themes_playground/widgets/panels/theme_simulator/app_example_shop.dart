@@ -11,11 +11,11 @@ import '../../../../shared/utils/link_text_span.dart';
 
 // An example shop that show what an app using the theme might look like.
 //
-// This UI I slight modification and modernization of of Flutter UI
-// E-Commerce application https://flutterui.design/components/ecommerce
-// Original version made by Zachery Gentry, zach@flutterui.design @zacherygentry
+// This UI is a slight modification and modernization of Flutter UI e-Commerce
+// application https://flutterui.design/components/ecommerce. The original
+// version made by Zachery Gentry, zach@flutterui.design @zacherygentry.
 // Thanks, rights and credits belong to Zachery for letting me use the shop
-// example app in the Themes Playground.
+// example application in the Themes Playground.
 
 Cart cart = Cart();
 
