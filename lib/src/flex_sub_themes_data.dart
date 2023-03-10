@@ -52,8 +52,8 @@ import 'flex_sub_themes.dart';
 ///
 /// It is not in-scope to provide every option possible via Flutter SDK
 /// component sub-themes to be configurable via [FlexSubThemesData]. Only a
-/// small sub-set of commonly used properties are available as convenient
-/// quick sub-theme settings via this flat and easy to use configuration class.
+/// sub-set of commonly used properties are available as convenient sub-theme
+/// settings via this flat and easy to use configuration class.
 ///
 /// There are custom and opinionated component themes available in
 /// [FlexSubThemes] as static theming helpers:
@@ -80,6 +80,8 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.filledButtonTheme].
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [FlexSubThemes.floatingActionButtonTheme].
+/// * [IconButtonThemeData] for [IconButton] via
+///   [FlexSubThemes.iconButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via
 ///   [FlexSubThemes.inputDecorationTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
