@@ -28,7 +28,7 @@ enum BreakType { material, large }
 
 /// This class provides a breakpoint system for your Flutter app.
 ///
-/// Material Design provides responsive layouts based on Layouts using
+/// Material 2 Design specifies responsive layouts based on Layouts using
 /// 4-column, 8-column, and 12-column grids that are available for use across
 /// different screens, devices, and orientations.
 ///
@@ -36,8 +36,8 @@ enum BreakType { material, large }
 /// breakpoint package: https://pub.dev/packages/breakpoint. It also fixes that
 /// the orientation was not considered correctly for the returned layout class.
 ///
-/// The default type [BreakType.material] follows the Material Design Guide
-/// [https://material.io/design/layout/responsive-layout-grid.html#grid-behavior]
+/// The default type [BreakType.material] follows the Material 2 Design Guide
+/// https://material.io/design/layout/responsive-layout-grid.html#grid-behavior
 ///
 /// This version also provides another layout type called [BreakType.large],
 /// that has more even column spread over the width and it is using

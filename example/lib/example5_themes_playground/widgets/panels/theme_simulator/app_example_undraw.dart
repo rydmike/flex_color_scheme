@@ -54,11 +54,9 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
         body: SafeArea(
           child: BreakpointBuilder(
             type: BreakType.large,
-            minColumnSize: 204,
             builder: (BuildContext context, Breakpoint breakpoint) {
               return CustomScrollView(
                 primary: false,
-                // controller: scrollController,
                 slivers: <Widget>[
                   SliverPadding(
                     padding: const EdgeInsetsDirectional.only(
@@ -105,21 +103,17 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     sliver: SliverGrid(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: breakpoint.columns,
+                        crossAxisCount: breakpoint.columns ~/ 2,
                         mainAxisSpacing: breakpoint.gutters / 2,
                         crossAxisSpacing: breakpoint.gutters / 2,
-                        childAspectRatio: 1.5,
+                        childAspectRatio: 1.4,
                       ),
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext ctx, int index) {
-                          return LayoutBuilder(builder:
-                              (BuildContext context, BoxConstraints size) {
-                            return RandomImageWidget(
-                              imageColor: imageColors[index],
-                              // borderRadius: size.maxWidth / 20,
-                              borderWidth: size.maxWidth / 35,
-                            );
-                          });
+                          return RandomImageWidget(
+                            imageColor: imageColors[index],
+                            borderWidth: breakpoint.columns.toDouble() / 2 + 4,
+                          );
                         },
                         childCount: imageColors.length,
                       ),
