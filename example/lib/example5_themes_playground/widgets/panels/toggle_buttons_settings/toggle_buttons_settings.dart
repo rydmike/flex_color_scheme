@@ -10,6 +10,13 @@ class ToggleButtonsSettings extends StatelessWidget {
   const ToggleButtonsSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  // TODO(rydmike): Add links to SegmentedButton issues.
+  // static final Uri _fcsFlutterPr119690 = Uri(
+  //   scheme: 'https',
+  //   host: 'github.com',
+  //   path: 'flutter/flutter/pull/119690',
+  // );
+
   @override
   Widget build(BuildContext context) {
     // Get effective platform default global radius.
@@ -45,8 +52,21 @@ class ToggleButtonsSettings extends StatelessWidget {
                     controller.thinBorderWidth != null
                 ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)}'
                 : '';
+
+    final String segmentedUnselectedForegroundDefault = controller
+                .segmentedButtonUnselectedSchemeColor ==
+            null
+        ? controller.useSubThemes && controller.useFlexColorScheme
+            ? 'default (onSurface) (M3 spec)'
+            : 'default (primary) (Flutter M3 bug, correct spec is onSurface)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.segmentedButtonUnselectedSchemeColor!).index].name})';
+
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+    //     color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,7 +254,12 @@ class ToggleButtonsSettings extends StatelessWidget {
           title: const Text('SegmentedButton background color'),
           subtitle: const Text('Selected foreground automatically uses the '
               'color pair of used background color'),
-          labelForDefault: 'default (secondaryContainer)',
+          labelForDefault:
+              controller.useSubThemes && controller.useFlexColorScheme
+                  ? useMaterial3
+                      ? 'default (secondaryContainer)'
+                      : 'default (primary)'
+                  : 'default (secondaryContainer)',
           index: controller.segmentedButtonSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -266,7 +291,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('SegmentedButton unselected button foreground '
               'color'),
-          labelForDefault: 'default (onSurface)',
+          labelForDefault: segmentedUnselectedForegroundDefault,
           index: controller
                   .segmentedButtonUnselectedForegroundSchemeColor?.index ??
               -1,
@@ -286,14 +311,15 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('SegmentedButton border color'),
-          labelForDefault: useMaterial3
-              ? 'default (outline)'
-              : controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      controller.segmentedButtonBorderSchemeColor == null
+          labelForDefault: controller.useSubThemes &&
+                  controller.useFlexColorScheme
+              ? controller.segmentedButtonBorderSchemeColor == null
+                  ? useMaterial3
+                      ? 'default (outline)'
+                      : 'default (primary)'
                   // ignore: lines_longer_than_80_chars
-                  ? 'default (${controller.segmentedButtonSchemeColor?.name ?? SchemeColor.primary.name})'
-                  : 'default (primary)',
+                  : 'default (${controller.segmentedButtonSchemeColor?.name ?? SchemeColor.primary.name})'
+              : 'default (outline)',
           index: controller.segmentedButtonBorderSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -402,6 +428,34 @@ class ToggleButtonsSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.7 the SegmentedButton has a number of '
+                      'small issues. Background is not transparent, min height '
+                      'or size cannot be set, selectedOverlay state does not '
+                      'work and its default unselected foreground color does '
+                      'not follow M3 spec.',
+                ),
+                // LinkTextSpan(
+                //   style: linkStyle,
+                //   uri: _fcsFlutterPr119690,
+                //   text: 'FIX PR #119690',
+                // ),
+                // TextSpan(
+                //   style: spanTextStyle,
+                //   text: '. This feature will work when the fix lands in '
+                //       'Flutter stable channel.',
+                // ),
               ],
             ),
           ),

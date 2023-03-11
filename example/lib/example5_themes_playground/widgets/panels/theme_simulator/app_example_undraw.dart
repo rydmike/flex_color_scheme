@@ -160,7 +160,7 @@ class RandomImageWidget extends StatelessWidget {
     // Default starting point value based on M3 and M2 mode spec values
     double radius = useMaterial3 ? 12 : 4;
     if (borderRadius == null) {
-      // Is themed? Try to get the radius from the theme and used that if it was.
+      // Is themed? Get the radius from the theme and used it, if it was.
       final ShapeBorder? cardShape = theme.cardTheme.shape;
       if (cardShape != null && cardShape is RoundedRectangleBorder) {
         final BorderRadius shape = cardShape.borderRadius as BorderRadius;

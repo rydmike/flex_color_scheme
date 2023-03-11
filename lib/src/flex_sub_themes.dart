@@ -360,9 +360,9 @@ class FlexSubThemes {
       case SchemeColor.outlineVariant:
         return SchemeColor.onBackground;
       case SchemeColor.shadow:
-        return SchemeColor.background;
+        return SchemeColor.outline;
       case SchemeColor.scrim:
-        return SchemeColor.background;
+        return SchemeColor.outline;
       case SchemeColor.inverseSurface:
         return SchemeColor.onInverseSurface;
       case SchemeColor.onInverseSurface:
@@ -604,7 +604,7 @@ class FlexSubThemes {
     /// background color for the bottomAppBar.
     ///
     /// If not defined, [colorScheme.surface] will be used via default M2 and
-    /// M3 widget behaviour.
+    /// M3 widget behavior.
     final SchemeColor? backgroundSchemeColor,
 
     /// Overrides the default value for [BottomAppBar.elevation].
@@ -2242,7 +2242,7 @@ class FlexSubThemes {
     ///
     /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-    /// [useMaterial3] is true.
+    /// [useMaterial3] is true, via M3 built in defaults.
     final Size? minButtonSize,
 
     /// The style for the button's [Text] widget descendants.
@@ -2519,6 +2519,10 @@ class FlexSubThemes {
 
     return tintInteract
         ? IconButtonThemeData(style: ButtonStyle(
+            // TODO(rydmike): Add tinted disable support when doable in SDK.
+            // Due to above mentioned issue it cannot be added now without
+            // destroying the different styles.
+            //
             // backgroundColor:
             //   MaterialStateProperty.resolveWith((Set<MaterialState> states) {
             //   if (states.contains(MaterialState.disabled)) {
@@ -2794,7 +2798,7 @@ class FlexSubThemes {
                 ? kFillColorAlphaDark
                 : kFillColorAlphaLight);
 
-    // TODO(rydmike): Decide and define consts for tinted disabled TextField.
+    // TODO(rydmike): Define constants for tinted disabled TextField.
     // Effective used fill color, can also be a totally custom color value.
     final Color usedFillColor = fillColor?.withAlpha(effectiveAlpha) ??
         MaterialStateColor.resolveWith((Set<MaterialState> states) {
@@ -4894,6 +4898,18 @@ class FlexSubThemes {
     /// If null, defaults to [kThinBorderWidth] = 1.0.
     final double? borderWidth,
 
+    /// Padding for the individual segment buttons.
+    ///
+    /// Defaults to null and uses M3's default scaled padding function.
+    final EdgeInsetsGeometry? padding,
+
+    /// Minimum button size.
+    ///
+    /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
+    /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+    /// [useMaterial3] is true, via M3 built in defaults.
+    final Size? minButtonSize,
+
     /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
@@ -4920,16 +4936,18 @@ class FlexSubThemes {
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
-    // Get selected color, defaults to primary.
-    final SchemeColor selectedScheme =
-        selectedSchemeColor ?? SchemeColor.secondaryContainer;
+    // Get selected background color, defaults to secondaryContainer.
+    final SchemeColor selectedScheme = selectedSchemeColor ??
+        (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
     final Color selectedColor = schemeColor(selectedScheme, colorScheme);
     final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
 
     final Color unselectedColor =
         schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color onUnselectedColor = schemeColor(
-        unselectedForegroundSchemeColor ?? SchemeColor.onSurface, colorScheme);
+        unselectedForegroundSchemeColor ??
+            onSchemeColor(unselectedSchemeColor ?? SchemeColor.surface),
+        colorScheme);
 
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
@@ -4938,17 +4956,36 @@ class FlexSubThemes {
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     final Color unOverlay = unselectedColor;
-    final Color unTint = onUnselectedColor;
+    final Color unTint = unselectedSchemeColor == null ||
+            unselectedSchemeColor == SchemeColor.surface
+        ? selectedColor
+        : onUnselectedColor;
     final double unFactor =
         _tintAlphaFactor(unTint, colorScheme.brightness, true);
 
-    final Color borderColor =
-        schemeColor(borderSchemeColor ?? SchemeColor.outline, colorScheme);
+    final Color disableTint = unselectedSchemeColor == null ||
+            unselectedSchemeColor == SchemeColor.surface
+        ? selectedColor
+        : onUnselectedColor;
+
+    final Color borderColor = schemeColor(
+        borderSchemeColor ??
+            (useM3 ? SchemeColor.outline : SchemeColor.primary),
+        colorScheme);
     // Effective border width.
     final double effectiveWidth = borderWidth ?? kThinBorderWidth;
 
+    final Color disableBorderTint = (borderSchemeColor == null && useM3) ||
+            unselectedSchemeColor == SchemeColor.outline
+        ? selectedColor
+        : borderColor;
+
     return SegmentedButtonThemeData(
       style: ButtonStyle(
+        // TODO(rydmike): Report issue, minimumSize property does nothing.
+        minimumSize: ButtonStyleButton.allOrNull<Size>(
+            minButtonSize ?? (useM3 ? null : kButtonMinSize)),
+        padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
@@ -4963,7 +5000,10 @@ class FlexSubThemes {
         foregroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return colorScheme.onSurface.withOpacity(0.38);
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, disableTint);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
@@ -4977,59 +5017,75 @@ class FlexSubThemes {
             }
             return onSelectedColor;
           } else {
-            if (states.contains(MaterialState.pressed)) {
-              return unselectedForegroundSchemeColor == null
-                  ? colorScheme.onSurface
-                  : onUnselectedColor;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return unselectedForegroundSchemeColor == null
-                  ? colorScheme.onSurface
-                  : onUnselectedColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return unselectedForegroundSchemeColor == null
-                  ? colorScheme.onSurface
-                  : onUnselectedColor;
-            }
             return onUnselectedColor;
           }
         }),
+        // TODO(Rydmike): Report Flutter SDK SegmentedButton overlayColor bug.
+        // SegmentedButton triggers overlay 3 times in Selected mode, 1st
+        // time it is selected, next two times it is no longer selected,
+        // even it if actually is. This results in that we never see the
+        // selected overlay state. It is also triggered 3 times when not
+        // selected, but there we get the unselected mode all times, so
+        // it is not noticed, still one call would be enough.
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          // This nicer overlay for selected overlay never gets seen due
+          // to above mentioned Flutter SDK bug. But if it is ever fixed it
+          // will get used automatically, via code below.
           if (states.contains(MaterialState.selected)) {
+            debugPrint('Themed Segmented button selected overlay');
             if (states.contains(MaterialState.hovered)) {
-              return unselectedColor.withOpacity(0.08);
+              if (tintInteract) return tintedHovered(overlay, tint, factor);
+              return unselectedColor.withAlpha(kAlphaHovered);
             }
             if (states.contains(MaterialState.focused)) {
-              return unselectedColor.withOpacity(0.12);
+              if (tintInteract) return tintedFocused(overlay, tint, factor);
+              return unselectedColor.withAlpha(kAlphaFocused);
             }
             if (states.contains(MaterialState.pressed)) {
-              return unselectedColor.withOpacity(0.12);
+              if (tintInteract) return tintedPressed(overlay, tint, factor);
+              return unselectedColor.withAlpha(kAlphaPressed);
             }
           } else {
+            debugPrint('Themed Segmented button NOT selected overlay');
             if (states.contains(MaterialState.hovered)) {
+              if (tintInteract) {
+                return tintedHovered(unOverlay, unTint, unFactor);
+              }
               return unselectedSchemeColor == null
-                  ? colorScheme.onSurface.withOpacity(0.08)
-                  : onUnselectedColor.withOpacity(0.08);
+                  ? colorScheme.onSurface.withAlpha(kAlphaHovered)
+                  : onUnselectedColor.withAlpha(kAlphaHovered);
             }
             if (states.contains(MaterialState.focused)) {
+              if (tintInteract) {
+                return tintedFocused(unOverlay, unTint, unFactor);
+              }
               return unselectedSchemeColor == null
-                  ? colorScheme.onSurface.withOpacity(0.12)
-                  : onUnselectedColor.withOpacity(0.12);
+                  ? colorScheme.onSurface.withAlpha(kAlphaFocused)
+                  : onUnselectedColor.withAlpha(kAlphaFocused);
             }
             if (states.contains(MaterialState.pressed)) {
+              if (tintInteract) {
+                return tintedPressed(unOverlay, unTint, unFactor);
+              }
               return unselectedSchemeColor == null
-                  ? colorScheme.onSurface.withOpacity(0.12)
-                  : onUnselectedColor.withOpacity(0.12);
+                  ? colorScheme.onSurface.withAlpha(kAlphaPressed)
+                  : onUnselectedColor.withAlpha(kAlphaPressed);
             }
           }
           return null;
         }),
         side: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return BorderSide(
+                color: tintedDisable(colorScheme.onSurface, disableBorderTint)
+                    .withAlpha(kAlphaLowDisabled),
+                width: effectiveWidth,
+              );
+            }
             return BorderSide(
-              color: colorScheme.onSurface.withOpacity(0.12),
+              color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
               width: effectiveWidth,
             );
           }
@@ -5837,21 +5893,14 @@ class FlexSubThemes {
 
     /// Padding for the button theme.
     ///
-    /// Defaults to null and uses `styleFrom` constructors default padding.
-    ///
-    /// M3 has more horizontal padding 24dp, but the tighter default padding
-    /// in M2 that is 16dp looks fine as well when using stadium borders
-    /// as in M3.
-    ///
-    /// If null and [useMaterial3] is true in the context, the correct M3
-    /// button theme default computed button padding for M3 will be used.
+    /// Defaults to null and uses M3's default scaled padding function.
     final EdgeInsetsGeometry? padding,
 
     /// Minimum button size.
     ///
     /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
     /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-    /// [useMaterial3] is true.
+    /// [useMaterial3] is true via widget defaults.
     final Size? minButtonSize,
 
     /// The style for the button's [Text] widget descendants.

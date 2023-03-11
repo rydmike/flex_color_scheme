@@ -416,15 +416,15 @@ void main() {
     });
     test(
         'FST.sCP-25: GIVEN SchemeColor.shadow '
-        'EXPECT background color to be returned', () {
+        'EXPECT outline color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.shadow, scheme),
-          equals(background));
+          equals(outline));
     });
     test(
         'FST.sCP-26: GIVEN SchemeColor.scrim '
-        'EXPECT background color to be returned', () {
+        'EXPECT outline color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.scrim, scheme),
-          equals(background));
+          equals(outline));
     });
     test(
         'FST.sCP-27: GIVEN SchemeColor.inverseSurface '
