@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 10, 2023**
+**Mar 11, 2023**
 
 **FIX**
 
@@ -174,7 +174,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 84% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Must implement them properly before 7.0.0-dev.3 release.
+- IN PROGRESS (About 88% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Must implement them properly before 7.0.0-dev.3 release.
 - Document info about colorScheme now being required in FAB and TimePicker FlexSubThemes.
 - Document FilledButton API name change (baseSchemeColor -> backgroundSchemeColor), not breaking, just breaking between dev releases.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
@@ -184,7 +184,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 **TODO BEFORE FCS STABLE 7.0 RELEASE**
 
 - Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
-- Investigate the Playground random panel change, cause is still elusive.
+- Investigate the Playground random panel change, cause is still elusive. => Not seen it anymore! Remove TODO?
 - Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
   - Down from 100% to 94% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 76% tested now, and will drop much lower with all the interaction effects added, that is not even half-way done.

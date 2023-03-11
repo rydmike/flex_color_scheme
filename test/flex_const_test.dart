@@ -144,20 +144,11 @@ void main() {
     test('FCT kDisabledBackgroundAlpha is 0x26', () {
       expect(kDisabledBackgroundAlpha, 0x26);
     });
-    test('FCT kDisabledForegroundAlpha is 0x5E', () {
-      expect(kDisabledForegroundAlpha, 0x5E);
-    });
     test('FCT kDisabledAlphaBlend is 0xCC', () {
       expect(kDisabledAlphaBlend, 0xCC);
     });
     test('FCT kEnabledBorderAlpha is 0xA7', () {
       expect(kEnabledBorderAlpha, 0xA7);
-    });
-    test('FCT kSelectedAlpha is 0xE5', () {
-      expect(kSelectedAlpha, 0xE5);
-    });
-    test('FCT kAltPrimaryAlphaBlend is 0x19', () {
-      expect(kAltPrimaryAlphaBlend, 0x19);
     });
     test('FCT kHoverAlphaBlend is 0x40', () {
       expect(kHoverAlphaBlend, 0x40);
@@ -246,6 +237,9 @@ void main() {
     });
     test('FCT kAlphaVeryLowDisabled is 0x1F', () {
       expect(kAlphaVeryLowDisabled, 0x1F);
+    });
+    test('FCT kAlphaUltraLowDisabled is 0x0A', () {
+      expect(kAlphaUltraLowDisabled, 0x0A);
     });
     test('FCT kSwitchM2LightTrackColor is Color(0x52000000)', () {
       expect(kSwitchM2LightTrackColor, const Color(0x52000000));

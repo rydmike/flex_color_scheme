@@ -2751,19 +2751,15 @@ class FlexSubThemes {
     /// Defaults to true.
     final bool unfocusedBorderIsColored = true,
 
-    /// Use [baseSchemeColor] color tint on disabled state.
+    /// Defines if the theme uses tinted interaction effects.
     ///
-    /// Set to false to use default grey only disabled controls.
-    ///
-    /// Defaults to true.
-    final bool tintedInteractions = true,
+    /// If undefined, defaults to false.
+    final bool? tintedInteractions,
 
-    /// Use [baseSchemeColor] color tint on disabled state.
+    /// Defines if the theme uses tinted disabled color.
     ///
-    /// Set to false to use default grey only disabled controls.
-    ///
-    /// Defaults to true.
-    final bool tintedDisabled = true,
+    /// If undefined, defaults to false.
+    final bool? tintedDisabled,
 
     /// A temporary flag used to opt-in to Material 3 features.
     ///
@@ -2778,6 +2774,8 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool tintInteract = tintedInteractions ?? false;
+    final bool tintDisable = tintedDisabled ?? false;
     // Used color scheme is for dark mode.
     final bool isDark = colorScheme.brightness == Brightness.dark;
 
@@ -2798,21 +2796,38 @@ class FlexSubThemes {
                 ? kFillColorAlphaDark
                 : kFillColorAlphaLight);
 
-    // TODO(rydmike): Define constants for tinted disabled TextField.
+    // Tinted disabled colors
+    final Color tintDisabledColor =
+        tintedDisable(colorScheme.onSurface, fillColor ?? baseColor);
+    final Color tintDisabledUltraLowColor =
+        tintedDisable(colorScheme.onSurface, fillColor ?? baseColor)
+            .withAlpha(kAlphaUltraLowDisabled);
+
     // Effective used fill color, can also be a totally custom color value.
-    final Color usedFillColor = fillColor?.withAlpha(effectiveAlpha) ??
-        MaterialStateColor.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return tintedDisabled
-                ? baseColor
-                    .blendAlpha(colorScheme.onSurface, 0x30)
-                    .withAlpha(0x08)
-                : colorScheme.onSurface.withOpacity(0.04); // M3 spec
-          }
-          return baseSchemeColor == null && useM3
-              ? colorScheme.surfaceVariant.withAlpha(effectiveAlpha)
-              : baseColor.withAlpha(effectiveAlpha);
-        });
+    final Color usedFillColor = fillColor != null
+        ? Color.alphaBlend(
+            fillColor.withAlpha(effectiveAlpha), colorScheme.surface)
+        : MaterialStateColor.resolveWith((Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return tintDisable
+                  ? tintDisabledUltraLowColor
+                  : colorScheme.onSurface
+                      .withAlpha(kAlphaUltraLowDisabled); // M43 spec, 4%, 0x0A
+            }
+            return baseSchemeColor == null && useM3
+                ? Color.alphaBlend(
+                    colorScheme.surfaceVariant.withAlpha(effectiveAlpha),
+                    colorScheme.surface)
+                : Color.alphaBlend(
+                    baseColor.withAlpha(effectiveAlpha), colorScheme.surface);
+          });
+
+    // Using these tinted overlay variables in all themes for ease of
+    // reasoning and duplication.
+    final Color tintedHover =
+        ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+            ? usedFillColor.darken(3)
+            : usedFillColor.lighten(5);
 
     // PrefixIconColor
     final SchemeColor prefixFallback =
@@ -2820,19 +2835,20 @@ class FlexSubThemes {
     final Color prefixIconColor =
         schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
 
-    // Some Flutter "magic" theme colors from ThemeData.
-    final Color hintColor =
-        isDark ? Colors.white60 : Colors.black.withAlpha(0x99); // 60%
+    // Some Flutter "magic" theme colors from ThemeData, with old M1/M2 roots.
+    final Color hintColorM2 =
+        isDark ? Colors.white60 : Colors.black.withAlpha(kTintHover); // 60%
     final Color suffixIconColorM2 = isDark ? Colors.white70 : Colors.black45;
-    final Color disabledColor = isDark ? Colors.white38 : Colors.black38;
+    final Color disabledColorM2 = isDark ? Colors.white38 : Colors.black38;
 
+    // Enabled border color.
     final Color enabledBorder = unfocusedBorderIsColored
         ? borderColor.withAlpha(kEnabledBorderAlpha)
         : useM3
             ? borderType == FlexInputBorderType.underline
                 ? colorScheme.onSurfaceVariant
                 : colorScheme.outline
-            : colorScheme.onSurface.withOpacity(0.38);
+            : colorScheme.onSurface.withAlpha(kAlphaDisabled);
 
     // Default border radius.
     final double effectiveRadius =
@@ -2876,16 +2892,13 @@ class FlexSubThemes {
           return TextStyle(color: colorScheme.onSurfaceVariant);
         }
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? TextStyle(
-                  color: baseColor
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                )
-              : TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+          return tintDisable
+              ? TextStyle(color: tintDisabledColor)
+              : TextStyle(
+                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
         }
         return TextStyle(
-            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
       floatingLabelStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -2895,75 +2908,58 @@ class FlexSubThemes {
           }
 
           if (states.contains(MaterialState.hovered)) {
-            return
-                // TODO(rydmike): Default M3, excluding it. FCS opinionated.
-                // useM3
-                //   ? TextStyle(color: colorScheme.onErrorContainer)
-                //   :
-                TextStyle(
+            // TODO(rydmike): Info: M3 uses onErrorContainer.
+            // TextStyle(color: colorScheme.onErrorContainer)
+            // Excluding it, prefer error as float label color, FCS opinionated.
+            return TextStyle(
               color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
             );
           }
           return TextStyle(color: colorScheme.error);
         }
         if (states.contains(MaterialState.focused)) {
-          // TODO(rydmike): Verify that border color usage is correct here.
           return TextStyle(color: borderColor);
         }
         if (states.contains(MaterialState.hovered)) {
           return TextStyle(color: colorScheme.onSurfaceVariant);
         }
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? TextStyle(
-                  color: baseColor
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                )
+          return tintDisable
+              ? TextStyle(color: tintDisabledColor)
               : TextStyle(
                   color: useM3
-                      ? colorScheme.onSurface.withOpacity(0.38)
-                      : disabledColor);
+                      ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
+                      : disabledColorM2);
         }
         return TextStyle(
-            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
       helperStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? TextStyle(
-                  color: baseColor
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                )
+          return tintDisable
+              ? TextStyle(color: tintDisabledColor)
               : TextStyle(
                   color: useM3
-                      ? colorScheme.onSurface.withOpacity(0.38)
+                      ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
                       : Colors.transparent);
         }
         return TextStyle(
-            color: useM3 ? colorScheme.onSurfaceVariant : hintColor);
+            color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
       hintStyle:
           MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
           return TextStyle(
-              color: tintedDisabled
-                  ? baseColor
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha)
-                  : disabledColor);
+              color: tintDisable ? tintDisabledColor : disabledColorM2);
         }
-        return TextStyle(color: hintColor);
+        return TextStyle(color: hintColorM2);
       }),
       iconColor: MaterialStateColor.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha)
-              : colorScheme.onSurface.withOpacity(0.38);
+          return tintDisable
+              ? tintDisabledColor
+              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         if (states.contains(MaterialState.focused)) {
           return useM3 ? colorScheme.onSurfaceVariant : baseColor;
@@ -2973,11 +2969,13 @@ class FlexSubThemes {
       prefixIconColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha)
-              : colorScheme.onSurface.withOpacity(0.38);
+          return tintDisable
+              ? tintDisabledColor
+
+              // baseColor
+              //         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
+              //         .withAlpha(kDisabledBackgroundAlpha)
+              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         if (states.contains(MaterialState.focused)) {
           return prefixIconColor;
@@ -2994,11 +2992,9 @@ class FlexSubThemes {
           return colorScheme.error;
         }
         if (states.contains(MaterialState.disabled)) {
-          return tintedDisabled
-              ? baseColor
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha)
-              : colorScheme.onSurface.withOpacity(0.38);
+          return tintDisable
+              ? tintDisabledColor
+              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         if (states.contains(MaterialState.focused)) {
           return useM3 ? colorScheme.onSurfaceVariant : baseColor;
@@ -3007,12 +3003,7 @@ class FlexSubThemes {
       }),
       filled: filled,
       fillColor: usedFillColor,
-      hoverColor: tintedInteractions
-          ? (fillColor ?? baseColor).withAlpha(kHoverBackgroundAlpha)
-          : null,
-      focusColor: tintedInteractions
-          ? (fillColor ?? baseColor).withAlpha(kFocusBackgroundAlpha)
-          : null,
+      hoverColor: tintInteract ? tintedHover : null,
       focusedBorder: effectiveInputBorder.copyWith(
         borderSide: focusedHasBorder
             ? BorderSide(
@@ -3032,13 +3023,12 @@ class FlexSubThemes {
       disabledBorder: effectiveInputBorder.copyWith(
         borderSide: unfocusedHasBorder
             ? BorderSide(
-                color: tintedDisabled
-                    ? borderColor
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha)
+                color: tintDisable
+                    ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
                     : borderType == FlexInputBorderType.underline
-                        ? colorScheme.onSurface.withOpacity(0.38)
-                        : colorScheme.onSurface.withOpacity(0.12),
+                        ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
+                        : colorScheme.onSurface
+                            .withAlpha(kAlphaVeryLowDisabled),
                 width: unfocusedWidth,
               )
             : BorderSide.none,

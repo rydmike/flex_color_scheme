@@ -243,29 +243,27 @@ const double kTooltipRadius = 8;
 // These are the values I settled on for the opinionated themes.
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
-/// in light theme.
+/// in light theme for M2 defaults.
 ///
 /// Value: 0x0D = 13 = 5%
 const int kFillColorAlphaLight = 0x0D;
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
-/// in dark theme.
+/// in dark theme for M2 defaults.
 ///
 /// Value: 0x14 = 20 = 8%
 const int kFillColorAlphaDark = 0x14;
 
 /// Hover state alpha value on background.
 ///
-/// Used on opt in sub-themes by [InputDecorator],
-/// [ElevatedButton], [OutlinedButton] and [TextButton].
+/// Used on opt in sub-themes by [InputDecorator].
 ///
 /// Value: 0x0D = 13 = 5%
 const int kHoverBackgroundAlpha = 0x0D;
 
 /// Focus state alpha value on background.
 ///
-/// Used on opt in sub-themes by [InputDecorator],
-/// [ElevatedButton], [OutlinedButton] and [TextButton].
+/// Used on opt in sub-themes by [InputDecorator].
 ///
 /// Value: 0x26 = 38 = 15%
 const int kFocusBackgroundAlpha = 0x26;
@@ -277,96 +275,79 @@ const int kFocusBackgroundAlpha = 0x26;
 /// Value: 0x33 = 51 = 20%
 const int kPressedBackgroundAlpha = 0x33;
 
-// TODO(rydmike): Add M3 mode tinted disable support to buttons.
 /// Disabled state alpha value on background elements.
 ///
-/// Used on opt in sub-themes by [InputDecorator], [ElevatedButton],
-/// [OutlinedButton], [TextButton], `ButtonThemeData` for legacy buttons and
-/// by [ToggleButtons], but current only in M2 mode.
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0x26 = 38 = 15%
 const int kDisabledBackgroundAlpha = 0x26;
 
-/// Disabled state alpha value on foreground elements.
-///
-/// Used on opt in sub-themes by [ElevatedButton], [OutlinedButton] and by
-/// [ToggleButtons] as well as by [ThemeData.disabledColor] when opting in
-/// on sub-theme tinted disable colors.
-///
-/// Value: 0x5E = 94 = 37%
-const int kDisabledForegroundAlpha = 0x5E;
-
 /// Disabled alpha blend value for background elements.
 ///
-/// Typically used together with onSurface, to make the disabled color in
-/// combination with [kDisabledBackgroundAlpha]. For example:
-///
-/// ```
-/// Color disable = colorScheme.primary
-///                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-///                  .withAlpha(kDisabledBackgroundAlpha);
-/// ```
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0xCC = 204 = 80%
 const int kDisabledAlphaBlend = 0xCC;
 
 /// Enabled border alpha value on border sides.
 ///
-/// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
-/// [ToggleButtons].
+/// Used on opt in sub-themes by [InputDecorator] in M2 mode.
 ///
 /// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
 
-/// Alpha value, for transparency on selected onPrimary color on
-/// [ToggleButtons].
-///
-/// Value: 0xE5 = 229 = 90%
-const int kSelectedAlpha = 0xE5;
-
-/// White alpha blend, for alternative less saturated primary color.
-///
-/// Used by selected button and selected border color on [ToggleButtons].
-///
-/// Value: 0x19 = 25 = 10%
-const int kAltPrimaryAlphaBlend = 0x19;
-
 /// White alpha blend, for primary colored hover FCS opt-in effects theming.
+///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0x40 = 64 = 25%
 const int kHoverAlphaBlend = 0x40;
 
 /// White alpha blend, for primary colored focus FCS opt-in effects theming.
 ///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
+///
 /// Value: 0x4C = 76 = 30%
 const int kFocusAlphaBlend = 0x4C;
 
 /// White alpha blend, for primary colored highlight FCS opt-in effects theming.
+///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0x40 = 64 = 25%
 const int kHighlightAlphaBlend = 0x40;
 
 /// White alpha blend, for primary colored splash FCS opt-in theming.
 ///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
+///
 /// Value: 0x1F = 31 = 12%
 const int kSplashAlphaBlend = 0x1F;
 
 /// Alpha value for hover on the custom FCS opt-in effects.
+///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0x19 = 25 = 10%
 const int kHoverAlpha = 0x19;
 
 /// Alpha value for focus on the custom FCS opt-in effects.
 ///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
+///
 /// Value: 0x4C = 76 = 30%
 const int kFocusAlpha = 0x4C;
 
 /// Alpha value for highlight on the custom FCS opt-in effects.
 ///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
+///
 /// Value: 0x19 = 25 = 10%
 const int kHighlightAlpha = 0x19;
 
 /// Alpha value for splash on the custom FCS opt-in effects.
+///
+/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
 ///
 /// Value: 0x33 = 51 = 20%
 const int kSplashAlpha = 0x33;
@@ -508,6 +489,14 @@ const int kAlphaLowDisabled = 0x3D;
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaVeryLowDisabled = 0x1F;
+
+/// An optional ultra low amount of alpha based opacity used on tinted disabled
+/// effect.
+///
+/// This is used e.g. on disabled M3 spec InputDecorator fill.
+///
+/// Value: 0x0A = 10 = 3.92%%
+const int kAlphaUltraLowDisabled = 0x0A;
 
 /// Default Color of disabled M2 Switch track color in M2
 ///

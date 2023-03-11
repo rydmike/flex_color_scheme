@@ -1151,12 +1151,16 @@ void main() {
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
-        'InputDecoration FST1.08a.light: GIVEN a default '
-        'FlexSubTheme.inputDecorationTheme() '
+        'InputDecoration FST1.08a.light: GIVEN a '
+        'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
       expect(
-        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
+        FlexSubThemes.inputDecorationTheme(
+                colorScheme: colorScheme, tintedDisabled: true)
             .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -1179,9 +1183,7 @@ void main() {
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1207,9 +1209,7 @@ void main() {
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1218,9 +1218,7 @@ void main() {
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1228,19 +1226,14 @@ void main() {
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha));
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1250,9 +1243,7 @@ void main() {
             prefixIconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1265,9 +1256,7 @@ void main() {
                 return colorScheme.error;
               }
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1295,9 +1284,7 @@ void main() {
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26),
+                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
                 width: 1,
               ),
             ),
@@ -1322,12 +1309,18 @@ void main() {
     test(
         'InputDecoration FST1.08b.light: GIVEN a '
         'FlexSubTheme.inputDecorationTheme( '
-        'unfocusedBorderIsColored: false) '
+        'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
-                colorScheme: colorScheme, unfocusedBorderIsColored: false)
+                colorScheme: colorScheme,
+                unfocusedBorderIsColored: false,
+                tintedDisabled: true)
             .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -1350,9 +1343,7 @@ void main() {
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1378,9 +1369,7 @@ void main() {
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1389,9 +1378,7 @@ void main() {
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
@@ -1399,19 +1386,14 @@ void main() {
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha));
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1421,9 +1403,7 @@ void main() {
             prefixIconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1436,9 +1416,7 @@ void main() {
                 return colorScheme.error;
               }
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1466,9 +1444,7 @@ void main() {
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26),
+                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
                 width: 1,
               ),
             ),
@@ -1491,13 +1467,18 @@ void main() {
       );
     });
     test(
-        'InputDecoration FST1.08a.dark: GIVEN a default '
-        'FlexSubTheme.inputDecorationTheme() '
+        'InputDecoration FST1.08a.dark: GIVEN a '
+        'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
       expect(
-        FlexSubThemes.inputDecorationTheme(colorScheme: colorScheme)
-            .toString(minLevel: DiagnosticLevel.fine),
+        FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
             labelStyle:
@@ -1519,9 +1500,7 @@ void main() {
               }
               if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
+                  color: tintDisabledColor,
                 );
               }
               return const TextStyle(color: Colors.white60);
@@ -1546,41 +1525,28 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return const TextStyle(color: Colors.white60);
             }),
             helperStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return const TextStyle(color: Colors.white60);
             }),
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha));
+                return TextStyle(color: tintDisabledColor);
               }
               return const TextStyle(color: Colors.white60);
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1590,9 +1556,7 @@ void main() {
             prefixIconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1605,9 +1569,7 @@ void main() {
                 return colorScheme.error;
               }
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.primary;
@@ -1635,9 +1597,7 @@ void main() {
             disabledBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26),
+                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
                 width: 1,
               ),
             ),
@@ -1662,13 +1622,19 @@ void main() {
     test(
         'InputDecoration FST1.08b.dark: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme( '
-        'unfocusedBorderIsColored: false) '
+        'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
-                colorScheme: colorScheme, unfocusedBorderIsColored: false)
-            .toString(minLevel: DiagnosticLevel.fine),
+          colorScheme: colorScheme,
+          unfocusedBorderIsColored: false,
+          tintedDisabled: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
         InputDecorationTheme(
           labelStyle:
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
@@ -1689,9 +1655,7 @@ void main() {
             }
             if (states.contains(MaterialState.disabled)) {
               return TextStyle(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
+                color: tintDisabledColor,
               );
             }
             return const TextStyle(color: Colors.white60);
@@ -1717,9 +1681,7 @@ void main() {
             }
             if (states.contains(MaterialState.disabled)) {
               return TextStyle(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
+                color: tintDisabledColor,
               );
             }
             return const TextStyle(color: Colors.white60);
@@ -1728,9 +1690,7 @@ void main() {
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
               return TextStyle(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha),
+                color: tintDisabledColor,
               );
             }
             return const TextStyle(color: Colors.white60);
@@ -1738,19 +1698,14 @@ void main() {
           hintStyle:
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                  color: colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha));
+              return TextStyle(color: tintDisabledColor);
             }
             return const TextStyle(color: Colors.white60);
           }),
           iconColor:
               MaterialStateColor.resolveWith((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return colorScheme.primary
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha);
+              return tintDisabledColor;
             }
             if (states.contains(MaterialState.focused)) {
               return colorScheme.primary;
@@ -1760,9 +1715,7 @@ void main() {
           prefixIconColor:
               MaterialStateColor.resolveWith((Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return colorScheme.primary
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha);
+              return tintDisabledColor;
             }
             if (states.contains(MaterialState.focused)) {
               return colorScheme.primary;
@@ -1775,9 +1728,7 @@ void main() {
               return colorScheme.error;
             }
             if (states.contains(MaterialState.disabled)) {
-              return colorScheme.primary
-                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                  .withAlpha(kDisabledBackgroundAlpha);
+              return tintDisabledColor;
             }
             if (states.contains(MaterialState.focused)) {
               return colorScheme.primary;
@@ -1805,9 +1756,7 @@ void main() {
           disabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             borderSide: BorderSide(
-              color: colorScheme.primary
-                  .blendAlpha(colorScheme.onSurface, 0xCC)
-                  .withAlpha(0x26),
+              color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
               width: 1,
             ),
           ),
@@ -1832,10 +1781,15 @@ void main() {
         'InputDecoration FST1.08a-states: Does Decorator '
         'have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
+
       // Floating label focused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            tintedDisabled: true,
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{
             MaterialState.error,
@@ -1871,15 +1825,13 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            tintedDisabled: true,
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{
             MaterialState.disabled,
           }),
           equals(
-            TextStyle(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26)),
+            TextStyle(color: tintDisabledColor),
           ));
       // Floating label default style
       expect(
@@ -1895,7 +1847,7 @@ void main() {
         'InputDecoration FST1.08b-light: GIVEN a default '
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.underline, usedSchemeColor: '
-        'FlexUsedColor.secondary) '
+        'FlexUsedColor.secondary, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -1903,6 +1855,7 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           borderType: FlexInputBorderType.underline,
+          tintedDisabled: true,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -2084,11 +2037,15 @@ void main() {
         'InputDecoration FST1.08b-states: Does Decorator '
         'have right material states', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
       // Floating label focused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             borderType: FlexInputBorderType.underline,
+            tintedDisabled: true,
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{
             MaterialState.error,
@@ -2127,15 +2084,13 @@ void main() {
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             borderType: FlexInputBorderType.underline,
+            tintedDisabled: true,
           ).floatingLabelStyle as MaterialStateTextStyle?)!
               .resolve(<MaterialState>{
             MaterialState.disabled,
           }),
           equals(
-            TextStyle(
-                color: colorScheme.primary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26)),
+            TextStyle(color: tintDisabledColor),
           ));
       // Floating label default style
       expect(
