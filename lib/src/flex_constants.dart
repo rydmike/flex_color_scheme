@@ -142,18 +142,19 @@ const double kElevatedButtonElevation = 1;
 /// https://m3.material.io/components/floating-action-button/specs
 const double kFabRadius = 16;
 
-/// Default border radius on input decoration when opting in on M3.
+/// Default border radius on input decoration when using
+/// opinionated component themes in M3 mode.
 ///
 /// Follows Material M3 guide.
 /// https://m3.material.io/components/text-fields/specs
 const double kInputDecoratorM3Radius = 4;
 
 /// Default border radius on input decoration when using
-/// opinionated component themes.
+/// opinionated component themes in M2 mode.
 ///
-/// Using a more rounded design 16dp, instead of 4dp which is M3's default.
+/// Using a more rounded design 10dp, instead of 4dp which is M3's default.
 /// https://m3.material.io/components/text-fields/specs
-const double kInputDecoratorRadius = 16;
+const double kInputDecoratorRadius = 10;
 
 /// Alpha value for the indicator color on the [NavigationBar] and
 /// [NavigationRail].

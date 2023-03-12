@@ -52,7 +52,7 @@ class TextFieldSettings extends StatelessWidget {
         controller.inputDecoratorBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default 4'
-                : 'default 16'
+                : 'default 10'
             : controller.inputDecoratorBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
