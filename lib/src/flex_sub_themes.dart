@@ -2800,6 +2800,11 @@ class FlexSubThemes {
             .withAlpha(kAlphaUltraLowDisabled);
 
     // Effective used fill color, can also be a totally custom color value.
+    // These alpha blends remove the actual opacity and create a none opaque
+    // color of the result of as if InputDecorator was used on surface color.
+    // Usually this is close enough. This operations makes it possible to
+    // use a simple lighter and dark color color of this net effect for
+    // the hover effect, which is also actually not transparent.
     final Color usedFillColor = fillColor != null
         ? Color.alphaBlend(
             fillColor.withAlpha(effectiveAlpha), colorScheme.surface)
@@ -2818,8 +2823,12 @@ class FlexSubThemes {
                     baseColor.withAlpha(effectiveAlpha), colorScheme.surface);
           });
 
-    // Using these tinted overlay variables in all themes for ease of
-    // reasoning and duplication.
+    // A custom lighter and darker version of the effective background
+    // color on the input decorator as hover color. This is a different formula
+    // than otherwise used for the overall based hover colors by FCS. It was the
+    // only way it was possible to make a nice tinted version that worked well
+    // with any config that it is possible to create for the background on
+    // the InputDecorator.
     final Color tintedHover =
         ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
             ? usedFillColor.darken(kInputDecoratorLightBgDarken)
@@ -2967,10 +2976,6 @@ class FlexSubThemes {
         if (states.contains(MaterialState.disabled)) {
           return tintDisable
               ? tintDisabledColor
-
-              // baseColor
-              //         .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-              //         .withAlpha(kDisabledBackgroundAlpha)
               : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         if (states.contains(MaterialState.focused)) {
@@ -2981,10 +2986,11 @@ class FlexSubThemes {
       suffixIconColor:
           MaterialStateColor.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.error)) {
-          // TODO(rydmike): Default M3 does this, excluding it. FCS Opinionated.
+          // TODO(rydmike): Info: M3 uses onErrorContainer.
           // if (states.contains(MaterialState.hovered)) {
           //   return colorScheme.onErrorContainer;
           // }
+          // Excluding it, prefer suffix icon as error color, FCS opinionated.
           return colorScheme.error;
         }
         if (states.contains(MaterialState.disabled)) {
@@ -3038,14 +3044,13 @@ class FlexSubThemes {
             : BorderSide.none,
       ),
       errorBorder: effectiveInputBorder.copyWith(
-        borderSide: focusedHasBorder
-            ? BorderSide(
-                color: colorScheme.error
-                    .withAlpha(useM3 ? 0xFF : kEnabledBorderAlpha),
-                width: unfocusedWidth,
-              )
-            : BorderSide.none,
-      ),
+          borderSide: focusedHasBorder
+              ? BorderSide(
+                  color: colorScheme.error
+                      .withAlpha(useM3 ? 0xFF : kEnabledBorderAlpha),
+                  width: unfocusedWidth,
+                )
+              : BorderSide.none),
     );
   }
 
