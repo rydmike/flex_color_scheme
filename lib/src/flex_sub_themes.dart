@@ -1171,10 +1171,28 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
     final Size? minButtonSize,
+
+    /// Defines if the theme uses tinted interaction effects.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
   }) {
+    final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
     final Color baseColor =
         schemeColor(baseSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Using these tinted overlay variable in all themes for ease of
+    // reasoning and duplication.
+    final Color overlay = colorScheme.surface;
+    final Color tint = baseColor;
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
@@ -1186,21 +1204,22 @@ class FlexSubThemes {
       padding: padding ?? kButtonPadding,
       layoutBehavior: ButtonBarLayoutBehavior.constrained,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      hoverColor: baseColor
-          .blendAlpha(Colors.white, kHoverAlphaBlend)
-          .withAlpha(kHoverAlpha),
-      focusColor: baseColor
-          .blendAlpha(Colors.white, kFocusAlphaBlend)
-          .withAlpha(kFocusAlpha),
-      highlightColor: baseColor
-          .blendAlpha(Colors.white, kHighlightAlphaBlend)
-          .withAlpha(kHighlightAlpha),
-      splashColor: baseColor
-          .blendAlpha(Colors.white, kSplashAlphaBlend)
-          .withAlpha(kSplashAlpha),
-      disabledColor: baseColor
-          .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-          .withAlpha(kDisabledBackgroundAlpha),
+      hoverColor: tintInteract
+          ? tintedHovered(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaHovered),
+      focusColor: tintInteract
+          ? tintedFocused(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaFocused),
+      highlightColor: tintInteract
+          ? tintedHighlight(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaHighlight),
+      splashColor: tintInteract
+          ? tintedSplash(overlay, tint, factor)
+          : baseColor.withAlpha(kAlphaSplash),
+      disabledColor: tintDisable
+          ? tintedDisable(colorScheme.onSurface, tint)
+              .withAlpha(kAlphaLowDisabled)
+          : colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kButtonRadius),
@@ -6334,7 +6353,6 @@ class FlexSubThemes {
       selectedColor: onBaseColor,
       color: unselectedColor,
       fillColor: baseColor,
-      // TODO(rydmike): Maybe add border opacity, default M2 withAlpha(0xA7).
       borderColor: borderColor,
       selectedBorderColor: borderColor,
       hoverColor: tintInteract

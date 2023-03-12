@@ -4001,9 +4001,19 @@ void main() {
     test(
         'ButtonTheme FST1.12: GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.primary;
+      const double factor = 5.0;
       expect(
-        FlexSubThemes.buttonTheme(colorScheme: colorScheme),
+        FlexSubThemes.buttonTheme(
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useTintedDisable: true,
+        ),
         equals(
           ButtonThemeData(
             colorScheme: colorScheme,
@@ -4012,21 +4022,14 @@ void main() {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             layoutBehavior: ButtonBarLayoutBehavior.constrained,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x26),
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
+            highlightColor:
+                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
+            disabledColor:
+                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+                    .withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
@@ -4040,13 +4043,21 @@ void main() {
     test(
         'ButtonTheme FST1.12d: GIVEN a custom FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.primary;
+      const double factor = 4.0;
       expect(
         FlexSubThemes.buttonTheme(
           colorScheme: colorScheme,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           minButtonSize: const Size(45, 44),
           radius: 10,
+          useTintedInteraction: true,
+          useTintedDisable: true,
         ),
         equals(
           ButtonThemeData(
@@ -4056,21 +4067,14 @@ void main() {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             layoutBehavior: ButtonBarLayoutBehavior.constrained,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            hoverColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            focusColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x4C)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            splashColor: colorScheme.primary
-                .blendAlpha(Colors.white, 0x1F)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.primary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x26),
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
+            highlightColor:
+                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
+            disabledColor:
+                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+                    .withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
@@ -4085,11 +4089,19 @@ void main() {
         'ButtonTheme FST1.12-base-color: GIVEN a default '
         'FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final Color overlay = colorScheme.surface;
+      final Color tint = colorScheme.secondary;
+      const double factor = 5.0;
       expect(
         FlexSubThemes.buttonTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
+          useTintedInteraction: true,
+          useTintedDisable: true,
         ),
         equals(
           ButtonThemeData(
@@ -4099,21 +4111,14 @@ void main() {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             layoutBehavior: ButtonBarLayoutBehavior.constrained,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            hoverColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            focusColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x4C)
-                .withAlpha(0x4C),
-            highlightColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x40)
-                .withAlpha(0x19),
-            splashColor: colorScheme.secondary
-                .blendAlpha(Colors.white, 0x1F)
-                .withAlpha(0x33),
-            disabledColor: colorScheme.secondary
-                .blendAlpha(colorScheme.onSurface, 0xCC)
-                .withAlpha(0x26),
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
+            highlightColor:
+                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
+            disabledColor:
+                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+                    .withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
