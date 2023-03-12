@@ -259,7 +259,9 @@ class ComponentSettings extends StatelessWidget {
                           : (controller.defaultRadiusAdaptive
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : useMaterial3
+                      : useMaterial3 ||
+                              (controller.useSubThemes &&
+                                  controller.useFlexColorScheme)
                           ? 'M3 defaults'
                           : 'M2 default 4',
                   style: theme.textTheme.bodySmall!
