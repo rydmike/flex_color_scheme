@@ -81,6 +81,7 @@ class SurfaceColors extends StatelessWidget {
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,
+          surfaceTintColor: Colors.transparent,
         ),
       ),
       child: Wrap(
@@ -92,6 +93,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // ScaffoldBackground colors presentation
           RepaintBoundary(
+            key: const ValueKey<String>('surf scaffold'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -135,6 +137,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // Background colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf background'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -178,6 +181,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // Surface colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf surface'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -221,6 +225,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // SurfaceVariant colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf surfaceVariant'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -264,6 +269,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // InverseSurface colors presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf inversesurface'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -307,6 +313,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // Shadow color and surface tint color presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf shadow'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -352,6 +359,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // onPrimaryContainer and onPrimary color presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf onPrimaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -395,6 +403,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // onSecondaryContainer and onSecondary color presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf onSecondaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -438,6 +447,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // onTertiaryContainer and onTertiary color presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf onTertiaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -481,6 +491,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // onErrorContainer and onError color presentation.
           RepaintBoundary(
+            key: const ValueKey<String>('surf onErrorContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
