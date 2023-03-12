@@ -6061,10 +6061,10 @@ class FlexColorScheme with Diagnosticable {
         : useMaterial3
             // In M3 if not using sub themes, use default InputDecorationTheme.
             ? null
-            // Default decorator in M2 is a bit opinionated, this is the
+            // Default decorator in M2 is a bit opinionated, this is the legacy
             // FCS default one in all previous versions before version 4.0.0.
             // Kept for backwards defaults compatibility. Used when not using
-            // opinionated component sub-themes in M2.
+            // opinionated component sub-themes in M2 mode.
             : InputDecorationTheme(
                 filled: subTheme.inputDecoratorIsFilled,
                 fillColor: isDark
