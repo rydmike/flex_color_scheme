@@ -6677,15 +6677,19 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // MenuButton theme.
-      // TODO(rydmike): Add styling of the actual menu button, maybe in v7.1.
-      // The only styling used so far is to provide the selected background
-      // color of menus, so the buttons can use correct contrast paired
-      // foreground color. Should consider adding at least the
-      // tinted actions, tinted disabled, border radius and padding.
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
+              // TODO(rydmike): Add SubThemesData.menuItemBackgroundSchemeColor.
               backgroundSchemeColor: subTheme.menuSchemeColor,
+              // TODO(rydmike): Add SubThemesData.menuItemForegroundSchemeColor.
+              // foregroundSchemeColor: SchemeColor.primary,
+              // TODO(rydmike): SubThemesData.menuIndicatorBackgroundSchemeColor
+              // indicatorBackgroundSchemeColor: SchemeColor.secondary,
+              // TODO(rydmike): SubThemesData.menuIndicatorForegroundSchemeColor
+              // indicatorForegroundSchemeColor: SchemeColor.errorContainer,
+              // TODO(rydmike): Add SubThemesData.menuIndicatorRadius.
+              // radius: 8,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
             )
@@ -6700,6 +6704,8 @@ class FlexColorScheme with Diagnosticable {
               opacity: subTheme.menuOpacity,
               radius: subTheme.menuRadius,
               elevation: subTheme.menuElevation,
+              // TODO(rydmike): Add MenuPadding SubThemesData.
+              // padding: const EdgeInsets.all(8),
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,

@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 11, 2023**
+**Mar 12, 2023**
 
 **FIX**
 
@@ -112,17 +112,24 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
 - **Label value breaking**: The `FlexColor.materialBaselineDescription` description string was changed from 'Material guide 3 baseline based theme' to 'Material 3 guide and default purple theme'.
 
-- **Style breaking**: The boolean `FlexSubThemesData.interactionEffects` now correctly control if color-tinted interaction effects for hover, focus, highlight, pressed and splash are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK support changing their interactions effects. 
+- **Style breaking**: The boolean `FlexSubThemesData.interactionEffects` now correctly control if color-tinted interaction effects for hover, focus, highlight, pressed and splash are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK supports changing their interaction effects. All components have new tinted interaction effects, that are used when setting this property to true. When it is false, all components use Flutter SDK default grey styles.
 
 
-- **Style breaking**: The boolean `FlexSubThemesData.tintedDisabledControls` now correctly control if color-tinted disabled widgets are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK support changing their disabled color..
+- **Style breaking**: The boolean `FlexSubThemesData.tintedDisabledControls` now correctly control if color-tinted disabled widgets are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK supports changing their disabled color. All components have new tinted disabled styles, that are used when setting this property to true. When it is false, all components use Flutter SDK default disabled grey styles.
+
 
 
 - **Style breaking**: The `ToggleButtons` theme has a slightly changed style in both M2 and M3 mode. It now also correctly reacts to `FlexSubThemesData.interactionEffects` and `FlexSubThemesData.tintedDisabledControls`. The slight change of past theme was needed to support this. 
 
 
+- **API breaking**: In `FlexSubThemes` the `floatingActionButtonTheme` and `timePickerTheme` now require the `colorScheme`, previously it was optional in both. Unless you have used `FlexSubThemes.floatingActionButtonTheme` or `FlexSubThemes.timePickerTheme` directly as helpers to make custom component themes with them, and not as typically used via `FlexSubThemesData`, you will not notice this breaking API change. 
+
+
 - The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`.  
   This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.
+  
+
+- In `FlexSubThemes` the `filledButtonTheme` property `baseSchemecolor` was renamed to `backgroundSchemeColor`. This is a change from 7.0.0-dev.2, but not considered breaking since it has not existed in previous stable versions.
 
 
 - **Remove**: The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
@@ -174,11 +181,11 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- IN PROGRESS (About 88% done) :: NEW and IMPROVE: TintedDisabled and TintedEffect, needs review and implementations. Must implement them properly before 7.0.0-dev.3 release.
-- Document info about colorScheme now being required in FAB and TimePicker FlexSubThemes.
-- Document FilledButton API name change (baseSchemeColor -> backgroundSchemeColor), not breaking, just breaking between dev releases.
+- In progress: Add support for MenButton, advanced selected item styling in menus.
+  - Done for sub-themes.
+  - TODO: Add 7 new SubThemesData properties: menuBarBackgroundSchemeColor, menuItemBackgroundSchemeColor, menuItemForegroundSchemeColor,     menuIndicatorBackgroundSchemeColor, menuIndicatorForegroundSchemeColor, menuIndicatorRadius, menuPadding.
+  - TODO: Add these new properties to Playground and codegen.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
-- Maybe add support for MenButton, the selected item styling in menus.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 
 **TODO BEFORE FCS STABLE 7.0 RELEASE**

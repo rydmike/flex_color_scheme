@@ -3155,19 +3155,42 @@ class FlexSubThemes {
   }
 
   /// An opinionated [MenuButtonThemeData] theme.
+  ///
+  /// Provides complex styling of menu button items with simple SchemeColor
+  /// inputs. Also border radius on the indicator.
   static MenuButtonThemeData menuButtonTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the MenuButton background color.
+    /// the MenuButton background color for unselected (not hovered) items.
     ///
-    /// If not defined, default to surface.
-    ///
-    /// Currently in FCS the [backgroundSchemeColor] is only used to set
-    /// foreground color based on its color pair. The background is actually
-    /// controlled via [MenuThemeData] in [menuTheme].
+    /// If not defined, defaults to surface.
     final SchemeColor? backgroundSchemeColor,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the MenuButton foreground color.
+    ///
+    /// If not defined, defaults to the contrast pair for backgroundSchemeColor.
+    final SchemeColor? foregroundSchemeColor,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the highlighted MenuButton indicator background color.
+    ///
+    /// If not defined, defaults to backgroundSchemeColor.
+    final SchemeColor? indicatorBackgroundSchemeColor,
+
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the highlighted MenuButton indicator foreground color.
+    ///
+    /// If not defined, defaults to the contrast pair for
+    /// indicatorBackgroundSchemeColor.
+    final SchemeColor? indicatorForegroundSchemeColor,
+
+    /// The MenuButton corner border radius.
+    ///
+    /// If not defined, defaults to 0 via Widget default behavior.
+    final double? radius,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -3182,17 +3205,50 @@ class FlexSubThemes {
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
-    final Color buttonColor =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    // // Get background color of menu.
+    // final Color backgroundColor =
+    //  schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
-    final Color onSurface = schemeColorPair(
-        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    // Get foreground color used on not active menu item, contrast to
+    // menu background color.
+    final SchemeColor fgScheme = foregroundSchemeColor ??
+        onSchemeColor(backgroundSchemeColor ?? SchemeColor.surface);
+    final Color foregroundColor = schemeColor(fgScheme, colorScheme);
 
+    // Get background color of highlighted menu.
+    final SchemeColor indBgScheme = indicatorBackgroundSchemeColor ??
+        backgroundSchemeColor ??
+        SchemeColor.surface;
+    final Color indicatorBgColor = schemeColor(indBgScheme, colorScheme);
+    final SchemeColor indFgScheme =
+        indicatorForegroundSchemeColor ?? onSchemeColor(indBgScheme);
+    final Color indicatorFgColor = schemeColor(indFgScheme, colorScheme);
+
+    // If foreground is plain contrast to a standard surface, we cannot use it
+    // for tint, in that case we will use primary color for tint.
+    final bool fgIsPlain = fgScheme == SchemeColor.onSurface ||
+        fgScheme == SchemeColor.onSurfaceVariant ||
+        fgScheme == SchemeColor.onBackground;
+    final bool indFgIsPlain = indFgScheme == SchemeColor.onSurface ||
+        indFgScheme == SchemeColor.onSurfaceVariant ||
+        indFgScheme == SchemeColor.onBackground;
+    // We are using a light colorScheme.
+    final bool isLight = colorScheme.brightness == Brightness.light;
+    // Get brightness of background color.
+    final bool bgIsLight =
+        ThemeData.estimateBrightnessForColor(indicatorBgColor) ==
+            Brightness.light;
+    // We use surface mode tint factor, if it is light theme and background
+    // is light OR if it is a dark theme and background is dark.
+    final bool surfaceMode = (isLight && bgIsLight) || (!isLight && !bgIsLight);
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
-    final Color overlay = colorScheme.surface;
-    final Color tint = buttonColor;
-    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
+    final Color overlay = indicatorBgColor;
+    final Color tint = indFgIsPlain ? colorScheme.primary : indicatorFgColor;
+    final Color disabledTint =
+        fgIsPlain ? colorScheme.primary : foregroundColor;
+    // Custom factor for menu buttons.
+    final double factor = surfaceMode ? 1 : 2;
 
     return MenuButtonThemeData(
       style: ButtonStyle(
@@ -3200,38 +3256,97 @@ class FlexSubThemes {
         foregroundColor: MaterialStateProperty.resolveWith(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return onSurface.withOpacity(0.38);
+              if (tintDisable) {
+                return tintedDisable(foregroundColor, disabledTint);
+              }
+              return foregroundColor.withAlpha(kAlphaDisabled);
             }
             if (states.contains(MaterialState.pressed)) {
-              return onSurface;
+              return indicatorFgColor;
             }
             if (states.contains(MaterialState.hovered)) {
-              return onSurface;
+              return indicatorFgColor;
             }
             if (states.contains(MaterialState.focused)) {
-              return onSurface;
+              return indicatorFgColor;
             }
-            return onSurface;
+            return foregroundColor;
           },
         ),
         // icon foreground color.
         iconColor: MaterialStateProperty.resolveWith(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return onSurface.withOpacity(0.38);
+              if (tintDisable) {
+                return tintedDisable(foregroundColor, disabledTint);
+              }
+              return foregroundColor.withAlpha(kAlphaDisabled);
             }
             if (states.contains(MaterialState.pressed)) {
-              return onSurface;
+              return indicatorFgColor;
             }
             if (states.contains(MaterialState.hovered)) {
-              return onSurface;
+              return indicatorFgColor;
             }
             if (states.contains(MaterialState.focused)) {
-              return onSurface;
+              return indicatorFgColor;
             }
-            return onSurface;
+            return foregroundColor;
           },
         ),
+        backgroundColor: MaterialStateProperty.resolveWith(
+          (Set<MaterialState> states) {
+            if (indicatorBackgroundSchemeColor != null) {
+              if (states.contains(MaterialState.pressed)) {
+                return indicatorBgColor;
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return indicatorBgColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return indicatorBgColor;
+              }
+            }
+            return Colors.transparent;
+          },
+        ),
+        overlayColor: MaterialStateProperty.resolveWith(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              if (tintInteract) return tintedPressed(overlay, tint, factor);
+              return foregroundColor.withAlpha(kAlphaPressed);
+            }
+            if (states.contains(MaterialState.selected)) {
+              if (tintInteract) return tintedSplash(overlay, tint, factor);
+              return foregroundColor.withAlpha(kAlphaSplash);
+            }
+            if (states.contains(MaterialState.focused)) {
+              if (indicatorBackgroundSchemeColor != null) {
+                return Colors.transparent;
+              }
+              if (tintInteract) return tintedFocused(overlay, tint, factor);
+              return foregroundColor.withAlpha(kAlphaFocused);
+            }
+
+            if (states.contains(MaterialState.hovered)) {
+              if (indicatorBackgroundSchemeColor != null) {
+                return Colors.transparent;
+              }
+              if (tintInteract) return tintedFocused(overlay, tint, factor);
+              return foregroundColor.withAlpha(kAlphaFocused);
+            }
+            return Colors.transparent;
+          },
+        ),
+        shape: radius == null
+            ? null
+            : ButtonStyleButton.allOrNull<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius),
+                  ),
+                ),
+              ),
       ),
     );
   }
@@ -3269,6 +3384,9 @@ class FlexSubThemes {
     /// If not defined, default to 4 via Menu widget Flutter SDK defaults.
     final double? radius,
 
+    /// The padding between the menu's boundary and its child.
+    final EdgeInsetsGeometry? padding,
+
     /// Popup menu elevation.
     ///
     /// If not defined, defaults to 3 dp via Flutter widget SDK defaults.
@@ -3290,6 +3408,7 @@ class FlexSubThemes {
       style: MenuStyle(
         elevation: MaterialStatePropertyAll<double?>(elevation),
         backgroundColor: MaterialStatePropertyAll<Color?>(backgroundColor),
+        padding: MaterialStatePropertyAll<EdgeInsetsGeometry?>(padding),
         surfaceTintColor: surfaceTintColor == null
             ? null
             : MaterialStatePropertyAll<Color>(surfaceTintColor),
@@ -5986,7 +6105,7 @@ class FlexSubThemes {
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
           if (tintDisable) {
-            return tintedDisable(colorScheme.onSurface, baseColor);
+            return tintedDisable(colorScheme.onSurface, tint);
           }
           return colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }

@@ -1110,19 +1110,25 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
                 value: 'one',
               ),
               DropdownMenuEntry<String>(
+                label: 'Disabled settings',
+                leadingIcon: Icon(Icons.settings),
+                value: 'two',
+                enabled: false,
+              ),
+              DropdownMenuEntry<String>(
                 label: 'Cabin overview',
                 leadingIcon: Icon(Icons.cabin),
-                value: 'two',
+                value: 'three',
               ),
               DropdownMenuEntry<String>(
                 label: 'Surveillance view',
                 leadingIcon: Icon(Icons.camera_outdoor_rounded),
-                value: 'three',
+                value: 'four',
               ),
               DropdownMenuEntry<String>(
                 label: 'Water alert',
                 leadingIcon: Icon(Icons.water_damage),
-                value: 'four',
+                value: 'five',
               ),
             ],
           ),
@@ -2703,15 +2709,9 @@ class MenuBarShowcase extends StatelessWidget {
                     ),
                     SubmenuButton(
                       menuChildren: <Widget>[
-                        MenuItemButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Magnify!'),
-                              ),
-                            );
-                          },
-                          child: const MenuAcceleratorLabel('&Magnify'),
+                        const MenuItemButton(
+                          onPressed: null,
+                          child: MenuAcceleratorLabel('&Disabled item'),
                         ),
                         MenuItemButton(
                           onPressed: () {
@@ -2881,6 +2881,9 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
           MenuItemButton(
             child: Text(MenuEntry.about.label),
             onPressed: () => _activate(MenuEntry.about),
+          ),
+          const MenuItemButton(
+            child: Text('Disabled item'),
           ),
           if (_showingMessage)
             MenuItemButton(
