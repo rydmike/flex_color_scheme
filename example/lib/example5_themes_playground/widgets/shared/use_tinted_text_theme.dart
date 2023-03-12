@@ -10,7 +10,7 @@ class UseTinted3TextTheme extends StatelessWidget {
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return isLight
         ? SwitchListTile(
-            title: const Text('Light mode TextTheme is tinted'),
+            title: const Text('Light mode TextTheme tint'),
             subtitle: const Text('A hint of tint color, typically primary, is '
                 'mixed into main and primary text theme. This style divides '
                 'opinions. Keep it OFF for default black and dark grey text.'),
@@ -22,7 +22,7 @@ class UseTinted3TextTheme extends StatelessWidget {
                 : null,
           )
         : SwitchListTile(
-            title: const Text('Dark mode TextTheme is tinted'),
+            title: const Text('Dark mode TextTheme is tint'),
             subtitle: const Text('A hint of tint color, typically primary, is '
                 'mixed into main and primary text theme. This style divides '
                 'opinions. Keep it OFF for default white and light grey text.'),

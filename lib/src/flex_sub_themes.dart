@@ -2594,19 +2594,18 @@ class FlexSubThemes {
         : const IconButtonThemeData();
   }
 
-  /// An opinionated [OutlineInputBorder] or [UnderlineInputBorder] using
-  /// [InputDecorationTheme], with optional fill color and adjustable
-  /// corner radius.
+  /// An opinionated [InputDecorationTheme], with optional fill color and
+  /// adjustable corner radius.
   ///
   /// Requires a [ColorScheme] in [colorScheme]. The color
   /// scheme would typically be equal the color scheme also used to define the
   /// color scheme for your app theme.
   ///
-  /// The corner [radius] can be adjusted, it defaults to
-  /// [kInputDecoratorRadius] (20), which currently matches the border radius
-  /// default used used on buttons in M3 specification. This value is not
-  /// specified in the M3 design guide, and this default border radius may be
-  /// changed later to match the M3 spec when it is known.
+  /// Comes with many parameters to adjust the style of the input decorator.
+  /// For example the the corner [radius] can be adjusted. In Material 2 mode
+  /// it defaults to [kInputDecoratorRadius] which is 16, in Material 3 mode it
+  /// defaults to [kInputDecoratorM3Radius] which is 4, following the Material
+  /// 3 design specification.
   static InputDecorationTheme inputDecorationTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2629,10 +2628,10 @@ class FlexSubThemes {
 
     /// The decorated input fields corner border radius.
     ///
-    /// If not defined, defaults to [kInputDecoratorRadius] 16dp.
-    /// When opting in on using Material3 with `useMaterial3` set to true,
-    /// FlexColorScheme will [kInputDecoratorM3Radius] is value is not
-    /// otherwise specified.
+    /// If not defined, in Material 2 mode defaults to [kInputDecoratorRadius]
+    /// which is 16, in Material 3 mode it defaults to
+    /// [kInputDecoratorM3Radius] which is 4, following the Material
+    /// 3 design specification.
     final double? radius,
 
     /// Selects input border type.
@@ -2664,14 +2663,11 @@ class FlexSubThemes {
     /// [InputDecorator] background color.
     ///
     /// If defined, the valid range is 0 to 255 (0x00 to 0xFF), if out of bounds
-    /// it is capped at closer value.
+    /// it is capped to closest valid value.
     ///
     /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
     /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme
     /// and to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
-    ///
-    /// The border [inputDecoratorBorderSchemeColor] can be used to define the
-    /// border color separately, but it defaults to this color if not defined.
     final int? backgroundAlpha,
 
     /// The icon color of the prefixIcon in a focused [InputDecoration].
@@ -2835,7 +2831,7 @@ class FlexSubThemes {
     final Color prefixIconColor =
         schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
 
-    // Some Flutter "magic" theme colors from ThemeData, with old M1/M2 roots.
+    // Flutter SDK "magic" theme colors from ThemeData, with old M1/M2 roots.
     final Color hintColorM2 =
         isDark ? Colors.white60 : Colors.black.withAlpha(kTintHover); // 60%
     final Color suffixIconColorM2 = isDark ? Colors.white70 : Colors.black45;

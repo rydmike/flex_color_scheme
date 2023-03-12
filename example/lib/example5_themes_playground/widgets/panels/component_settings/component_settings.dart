@@ -38,7 +38,7 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTile(
           title: const Text('Use Material 2 style divider in Material 3'),
           subtitle: const Text('In M3 the primary color tinted outlineVariant '
-              'does not fit on all background colors. The M2 style based on '
+              'may not fit on all background colors. The M2 style based on '
               'black or white with opacity does. It is also less prominent '
               'than the M3 style and may be preferred.'),
           value: controller.useM2StyleDividerInM3 &&
@@ -56,8 +56,8 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTile(
           title: const Text('Tinted disabled components'),
           subtitle: const Text('Disabled controls get a slight primary color '
-              'tint or tint of its own color, if it is not primary colored.\n'
-              'Turn OFF for Flutter partially transparent defaults'),
+              'tint or tint of its own color, if it is not primary colored. '
+              'Turn OFF for Flutter grey defaults'),
           value: controller.tintedDisabledControls &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -69,18 +69,19 @@ class ComponentSettings extends StatelessWidget {
           dense: true,
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           subtitle: const Text(
-            'Sets ThemeData.disabledColor, but also disabled state color on '
-            'individual widgets. Material 3 widgets typically ignore the '
-            'ThemeData.disabledColor, disabled styling is set by component '
-            'themes.',
+            'Impacts ThemeData disabledColor, but also disabled state color on '
+            'all individual components. Material 3 UI components typically '
+            'ignore the ThemeData disabledColor. Their disabled styling is '
+            'defined on component themes. This settings also applies disabled '
+            'tint on all components that supports it.',
           ),
         ),
         SwitchListTile(
           title: const Text('Tinted interaction effects'),
           subtitle: const Text('Hover, focus, highlight, pressed and splash '
-              'colors get a slight primary color tint,or tint of its '
-              'own color, if it is not primary colored.\n'
-              'Turn OFF for Flutter partially transparent grey defaults.'),
+              'colors get a slight primary color tint, or tint of its '
+              'own color, if it is not primary colored. '
+              'Turn OFF for Flutter grey defaults.'),
           value: controller.interactionEffects &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -93,46 +94,25 @@ class ComponentSettings extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           subtitle: const Text(
             'Impacts ThemeData hover, focus, highlight and splash colors. '
-            'Material 3 components typically implement their own interaction '
+            'Material 3 components implement their own interaction '
             'effects. This setting also styles all of them on component theme '
-            'level. Most sub-themes are covered, a few cases may not be '
-            'supported yet. Their later inclusion in this setting will be '
-            'reported as new features going forward, not as style breaking.',
+            'level. Most components are covered, a few cases may not be fully '
+            'supported due to lacking support in the Flutter framework. Their '
+            'later inclusion in this setting will be reported as new features, '
+            'not as style breaking.',
           ),
         ),
         const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius override on all Material '
-              'UI components'),
-          subtitle: const Text('By default border radius follows the Material '
-              '3 design guide in both M2 and M3 mode. Radius specification in '
-              'M3 varies per component. Material 2 design used 4 dp on all '
-              'components. '
-              'If you set a value, all major Material UI components will use '
-              'it. You can also set radius per component, they will then use '
-              'their own value, regardless of what is defined here.'),
-        ),
-        ListTile(
-          dense: true,
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitle: const Text(
-            'Radius on very small elements or components where changing it '
-            'to a high radius is a bad idea are not included in the global '
-            'radius override. This includes PopupMenuButton, Menus, '
-            'MenuBar, ToolTip, the small indicators on NavigationBar and '
-            'NavigationRail, as well as the SnackBar. The very distinct '
-            'FloatingActionButton can be included, but is not by default. '
-            'The radius on these elements can still be themed, but only '
-            'individually. The indicator on NavigationDrawer is button sized '
-            'and considered large, it is thus included in the global border '
-            'radius override.',
-          ),
+          title: const Text('Border radius on all components'),
+          subtitle: const Text('By default border radius on all Material UI '
+              'components follow the Material 3 design guide in M3 mode. The '
+              'defaults used by FCS for M2 mode are also mostly M3 inspired.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Default radius override'),
-          subtitle: Slider(
+          title: Slider(
             min: -1,
             max: 60,
             divisions: 61,
@@ -180,12 +160,35 @@ class ComponentSettings extends StatelessWidget {
           ),
         ),
         ListTile(
+          dense: true,
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitle: const Text(
+            'Radius specification in M3 varies per component. '
+            'Material 2 specification used 4 dp on all components. To use M2 '
+            'specification, set this value to 4. '
+            'If you set a value, all major Material UI components will use '
+            'it as their border radius. You can also set radius per '
+            'component, they will then use their own value, regardless of '
+            'what is defined here.\n'
+            'Radius on very small elements or components where changing it '
+            'to a high radius is a bad idea are not included in the default '
+            'radius override. This includes PopupMenuButton, Menus, '
+            'MenuBar, ToolTip, the small indicators on NavigationBar and '
+            'NavigationRail, as well as the SnackBar. The very distinct '
+            'FloatingActionButton can be included, but is not by default. '
+            'The radius on these elements can still be themed, but only '
+            'individually. The indicator on NavigationDrawer is button sized '
+            'and considered large, it is thus included in the global border '
+            'radius override.',
+          ),
+        ),
+        ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Platform adaptive border radius override'),
-          subtitle: const Text('You can define a separate default global '
+          subtitle: const Text('You can define a separate global '
               'border radius override that gets used adaptively on selected '
-              'platforms. You can do this if you for example want to keep '
-              'default M3 radius on Android/Fuchsia platforms, but want a '
+              'platforms. Useful if you for example want to keep '
+              'M3 design radius on Android platform, but want a '
               'less rounded design on other platforms.'),
         ),
         AdaptiveThemePopupMenu(
@@ -203,7 +206,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Adaptive radius override value'),
+          title: const Text('Adaptive default border radius override'),
           subtitle: Slider(
             min: -1,
             max: 60,
