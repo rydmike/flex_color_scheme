@@ -132,50 +132,8 @@ void main() {
     test('FCT kFillColorAlphaDark is 0x14', () {
       expect(kFillColorAlphaDark, 0x14);
     });
-    test('FCT kHoverBackgroundAlpha is 0x0D', () {
-      expect(kHoverBackgroundAlpha, 0x0D);
-    });
-    test('FCT kFocusBackgroundAlpha is 0x26', () {
-      expect(kFocusBackgroundAlpha, 0x26);
-    });
-    test('FCT kPressedBackgroundAlpha is 0x33', () {
-      expect(kPressedBackgroundAlpha, 0x33);
-    });
-    test('FCT kDisabledBackgroundAlpha is 0x26', () {
-      expect(kDisabledBackgroundAlpha, 0x26);
-    });
-    test('FCT kDisabledAlphaBlend is 0xCC', () {
-      expect(kDisabledAlphaBlend, 0xCC);
-    });
     test('FCT kEnabledBorderAlpha is 0xA7', () {
       expect(kEnabledBorderAlpha, 0xA7);
-    });
-    test('FCT kHoverAlphaBlend is 0x40', () {
-      expect(kHoverAlphaBlend, 0x40);
-    });
-    test('FCT kFocusAlphaBlend is 0x4C', () {
-      expect(kFocusAlphaBlend, 0x4C);
-    });
-    test('FCT kHighlightAlphaBlend is 0x40', () {
-      expect(kHighlightAlphaBlend, 0x40);
-    });
-    test('FCT kSplashAlphaBlend is 0x1F', () {
-      expect(kSplashAlphaBlend, 0x1F);
-    });
-    test('FCT kHoverAlpha is 0x19', () {
-      expect(kHoverAlpha, 0x19);
-    });
-    test('FCT kFocusAlpha is 0x4C', () {
-      expect(kFocusAlpha, 0x4C);
-    });
-    test('FCT kHighlightAlpha is 0x19', () {
-      expect(kHighlightAlpha, 0x19);
-    });
-    test('FCT kSplashAlpha is 0x33', () {
-      expect(kSplashAlpha, 0x33);
-    });
-    test('FCT kChipForegroundAlphaBlend is 0x7F', () {
-      expect(kChipForegroundAlphaBlend, 0x7F);
     });
     test('FCT kChipBackgroundAlphaBlend is 0xCC', () {
       expect(kChipBackgroundAlphaBlend, 0xCC);

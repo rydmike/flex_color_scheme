@@ -1857,6 +1857,9 @@ void main() {
         'FlexUsedColor.secondary, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.secondary);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
@@ -1885,11 +1888,7 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                  color: colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
@@ -1913,41 +1912,28 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                  color: colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                  color: colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                      .withAlpha(kDisabledBackgroundAlpha),
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return TextStyle(
-                    color: colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                        .withAlpha(kDisabledBackgroundAlpha));
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.secondary;
@@ -1957,9 +1943,7 @@ void main() {
             prefixIconColor:
                 MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.secondary;
@@ -1972,9 +1956,7 @@ void main() {
                 return colorScheme.error;
               }
               if (states.contains(MaterialState.disabled)) {
-                return colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-                    .withAlpha(kDisabledBackgroundAlpha);
+                return tintDisabledColor;
               }
               if (states.contains(MaterialState.focused)) {
                 return colorScheme.secondary;

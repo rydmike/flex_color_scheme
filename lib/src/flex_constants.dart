@@ -254,110 +254,12 @@ const int kFillColorAlphaLight = 0x0D;
 /// Value: 0x14 = 20 = 8%
 const int kFillColorAlphaDark = 0x14;
 
-/// Hover state alpha value on background.
-///
-/// Used on opt in sub-themes by [InputDecorator].
-///
-/// Value: 0x0D = 13 = 5%
-const int kHoverBackgroundAlpha = 0x0D;
-
-/// Focus state alpha value on background.
-///
-/// Used on opt in sub-themes by [InputDecorator].
-///
-/// Value: 0x26 = 38 = 15%
-const int kFocusBackgroundAlpha = 0x26;
-
-/// Pressed state alpha value on background.
-///
-/// Used on opt in sub-themes by [OutlinedButton] and [TextButton].
-///
-/// Value: 0x33 = 51 = 20%
-const int kPressedBackgroundAlpha = 0x33;
-
-/// Disabled state alpha value on background elements.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x26 = 38 = 15%
-const int kDisabledBackgroundAlpha = 0x26;
-
-/// Disabled alpha blend value for background elements.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0xCC = 204 = 80%
-const int kDisabledAlphaBlend = 0xCC;
-
 /// Enabled border alpha value on border sides.
 ///
 /// Used on opt in sub-themes by [InputDecorator] in M2 mode.
 ///
 /// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
-
-/// White alpha blend, for primary colored hover FCS opt-in effects theming.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x40 = 64 = 25%
-const int kHoverAlphaBlend = 0x40;
-
-/// White alpha blend, for primary colored focus FCS opt-in effects theming.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x4C = 76 = 30%
-const int kFocusAlphaBlend = 0x4C;
-
-/// White alpha blend, for primary colored highlight FCS opt-in effects theming.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x40 = 64 = 25%
-const int kHighlightAlphaBlend = 0x40;
-
-/// White alpha blend, for primary colored splash FCS opt-in theming.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x1F = 31 = 12%
-const int kSplashAlphaBlend = 0x1F;
-
-/// Alpha value for hover on the custom FCS opt-in effects.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x19 = 25 = 10%
-const int kHoverAlpha = 0x19;
-
-/// Alpha value for focus on the custom FCS opt-in effects.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x4C = 76 = 30%
-const int kFocusAlpha = 0x4C;
-
-/// Alpha value for highlight on the custom FCS opt-in effects.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x19 = 25 = 10%
-const int kHighlightAlpha = 0x19;
-
-/// Alpha value for splash on the custom FCS opt-in effects.
-///
-/// Only used by [ButtonThemeData] in [FlexSubThemes.buttonTheme].
-///
-/// Value: 0x33 = 51 = 20%
-const int kSplashAlpha = 0x33;
-
-/// The OnSurface color alpha blend, for primary colored Chip foreground.
-///
-/// Used in FCS opinionated M2 mode Chip design, a mix of M2 and M3 look.
-///
-/// Value: 0x7F = 127 = 50%
-const int kChipForegroundAlphaBlend = 0x7F;
 
 /// The surface color alpha blend, for primary colored Chip background.
 ///
