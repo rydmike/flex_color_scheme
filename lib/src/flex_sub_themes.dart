@@ -2822,8 +2822,8 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color tintedHover =
         ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
-            ? usedFillColor.darken(3)
-            : usedFillColor.lighten(5);
+            ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+            : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
     // PrefixIconColor
     final SchemeColor prefixFallback =

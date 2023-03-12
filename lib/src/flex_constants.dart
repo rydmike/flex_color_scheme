@@ -543,3 +543,15 @@ const int kAlphaM3SwitchUnselectTrackDark = 0x44;
 ///
 /// Value: 0x8A = 138 = 54.12%
 const int kAlphaSliderTickMark = 0x8A;
+
+/// Input decorator light color decorator background color, hover mode
+/// darken level percentage.
+///
+/// Value: 3
+const int kInputDecoratorLightBgDarken = 3;
+
+/// Input decorator dark color decorator background color, hover mode
+/// lighten level percentage.
+///
+/// Value: 3
+const int kInputDecoratorDarkBgLighten = 5;

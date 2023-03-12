@@ -268,5 +268,11 @@ void main() {
     test('FCT kAlphaSliderTickMark is 0x8A', () {
       expect(kAlphaSliderTickMark, 0x8A);
     });
+    test('FCT kInputDecoratorLightBgDarken is 3', () {
+      expect(kInputDecoratorLightBgDarken, 3);
+    });
+    test('FCT kInputDecoratorDarkBgLighten is 5', () {
+      expect(kInputDecoratorDarkBgLighten, 5);
+    });
   });
 }

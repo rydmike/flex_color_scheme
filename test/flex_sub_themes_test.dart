@@ -1160,8 +1160,10 @@ void main() {
           colorScheme.onSurface, colorScheme.primary);
       expect(
         FlexSubThemes.inputDecorationTheme(
-                colorScheme: colorScheme, tintedDisabled: true)
-            .toString(minLevel: DiagnosticLevel.fine),
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+          tintedInteractions: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
             labelStyle:
@@ -1264,9 +1266,9 @@ void main() {
               return Colors.black45;
             }),
             filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x0D),
-            hoverColor: colorScheme.primary.withAlpha(0x0D),
-            focusColor: colorScheme.primary.withAlpha(0x26),
+            fillColor: const Color(0xfff6f2fe),
+            hoverColor: const Color(0xffece4fd),
+            focusColor: null,
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
@@ -1318,10 +1320,11 @@ void main() {
 
       expect(
         FlexSubThemes.inputDecorationTheme(
-                colorScheme: colorScheme,
-                unfocusedBorderIsColored: false,
-                tintedDisabled: true)
-            .toString(minLevel: DiagnosticLevel.fine),
+          colorScheme: colorScheme,
+          unfocusedBorderIsColored: false,
+          tintedDisabled: true,
+          tintedInteractions: true,
+        ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
             labelStyle:
@@ -1424,9 +1427,9 @@ void main() {
               return Colors.black45;
             }),
             filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x0D),
-            hoverColor: colorScheme.primary.withAlpha(0x0D),
-            focusColor: colorScheme.primary.withAlpha(0x26),
+            fillColor: const Color(0xfff6f2fe),
+            hoverColor: const Color(0xffece4fd),
+            focusColor: null,
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
@@ -1478,6 +1481,7 @@ void main() {
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
           tintedDisabled: true,
+          tintedInteractions: true,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -1577,9 +1581,9 @@ void main() {
               return Colors.white70;
             }),
             filled: true,
-            fillColor: colorScheme.primary.withAlpha(0x14),
-            hoverColor: colorScheme.primary.withAlpha(0x0D),
-            focusColor: colorScheme.primary.withAlpha(0x26),
+            fillColor: const Color(0xff1f1b24),
+            hoverColor: const Color(0xff2c2633),
+            focusColor: null,
             focusedBorder: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
@@ -1634,147 +1638,150 @@ void main() {
           colorScheme: colorScheme,
           unfocusedBorderIsColored: false,
           tintedDisabled: true,
+          tintedInteractions: true,
         ).toString(minLevel: DiagnosticLevel.fine),
-        InputDecorationTheme(
-          labelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error)) {
-              if (states.contains(MaterialState.focused)) {
+        equalsIgnoringHashCodes(
+          InputDecorationTheme(
+            labelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
                 return TextStyle(color: colorScheme.error);
               }
-              if (states.contains(MaterialState.hovered)) {
-                return TextStyle(color: colorScheme.onErrorContainer);
-              }
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.primary);
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return TextStyle(color: colorScheme.onSurfaceVariant);
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: tintDisabledColor,
-              );
-            }
-            return const TextStyle(color: Colors.white60);
-          }),
-          floatingLabelStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error)) {
               if (states.contains(MaterialState.focused)) {
-                return TextStyle(color: colorScheme.error);
+                return TextStyle(color: colorScheme.primary);
               }
               if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
                 return TextStyle(
-                  color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  color: tintDisabledColor,
                 );
               }
-              return TextStyle(color: colorScheme.error);
-            }
-            if (states.contains(MaterialState.focused)) {
-              return TextStyle(color: colorScheme.primary);
-            }
-            if (states.contains(MaterialState.hovered)) {
-              return TextStyle(color: colorScheme.onSurfaceVariant);
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: tintDisabledColor,
-              );
-            }
-            return const TextStyle(color: Colors.white60);
-          }),
-          helperStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(
-                color: tintDisabledColor,
-              );
-            }
-            return const TextStyle(color: Colors.white60);
-          }),
-          hintStyle:
-              MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return TextStyle(color: tintDisabledColor);
-            }
-            return const TextStyle(color: Colors.white60);
-          }),
-          iconColor:
-              MaterialStateColor.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return tintDisabledColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return colorScheme.primary;
-            }
-            return Colors.white70;
-          }),
-          prefixIconColor:
-              MaterialStateColor.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return tintDisabledColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return colorScheme.primary;
-            }
-            return Colors.white70;
-          }),
-          suffixIconColor:
-              MaterialStateColor.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.error)) {
-              return colorScheme.error;
-            }
-            if (states.contains(MaterialState.disabled)) {
-              return tintDisabledColor;
-            }
-            if (states.contains(MaterialState.focused)) {
-              return colorScheme.primary;
-            }
-            return Colors.white70;
-          }),
-          filled: true,
-          fillColor: colorScheme.primary.withAlpha(0x14),
-          hoverColor: colorScheme.primary.withAlpha(0x0D),
-          focusColor: colorScheme.primary.withAlpha(0x26),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(
-              color: colorScheme.primary,
-              width: 2,
+              return const TextStyle(color: Colors.white60);
+            }),
+            floatingLabelStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                if (states.contains(MaterialState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(MaterialState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(MaterialState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(MaterialState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            helperStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            hintStyle:
+                MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return TextStyle(color: tintDisabledColor);
+              }
+              return const TextStyle(color: Colors.white60);
+            }),
+            iconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
+            }),
+            prefixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
+            }),
+            suffixIconColor:
+                MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(MaterialState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(MaterialState.focused)) {
+                return colorScheme.primary;
+              }
+              return Colors.white70;
+            }),
+            filled: true,
+            fillColor: const Color(0xff1f1b24),
+            hoverColor: const Color(0xff2c2633),
+            focusColor: null,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderSide: BorderSide(
+                color: colorScheme.primary,
+                width: 2,
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(
-              color: colorScheme.onSurface.withOpacity(0.38),
-              width: 1,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderSide: BorderSide(
+                color: colorScheme.onSurface.withOpacity(0.38),
+                width: 1,
+              ),
             ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(
-              color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-              width: 1,
+            disabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderSide: BorderSide(
+                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                width: 1,
+              ),
             ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: 2,
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderSide: BorderSide(
+                color: colorScheme.error,
+                width: 2,
+              ),
             ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(0xA7),
-              width: 1,
+            errorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              borderSide: BorderSide(
+                color: colorScheme.error.withAlpha(0xA7),
+                width: 1,
+              ),
             ),
-          ),
-        ).toString(minLevel: DiagnosticLevel.fine),
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -1856,6 +1863,7 @@ void main() {
           baseSchemeColor: SchemeColor.secondary,
           borderType: FlexInputBorderType.underline,
           tintedDisabled: true,
+          tintedInteractions: true,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -1974,9 +1982,9 @@ void main() {
               return Colors.black45;
             }),
             filled: true,
-            fillColor: colorScheme.secondary.withAlpha(0x0D),
-            hoverColor: colorScheme.secondary.withAlpha(0x0D),
-            focusColor: colorScheme.secondary.withAlpha(0x26),
+            fillColor: const Color(0xfff2fdfc),
+            hoverColor: const Color(0xffe5fbf9),
+            focusColor: null,
             focusedBorder: UnderlineInputBorder(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
