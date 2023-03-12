@@ -2407,21 +2407,21 @@ void main() {
             .style!
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.onPrimary.withAlpha(kHoverBackgroundAlpha)),
+        equals(colorScheme.onSecondary.withAlpha(kAlphaHovered)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.onPrimary.withAlpha(kFocusBackgroundAlpha)),
+        equals(colorScheme.onSecondary.withAlpha(kAlphaFocused)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
             .style!
             .overlayColor!
             .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.onPrimary.withAlpha(kPressedBackgroundAlpha)),
+        equals(colorScheme.onSecondary.withAlpha(kAlphaPressed)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)

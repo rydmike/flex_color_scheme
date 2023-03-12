@@ -2009,26 +2009,49 @@ class FlexSubThemes {
     // Get selected color, defaults to primary.
     final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
     final Color baseColor = schemeColor(baseScheme, colorScheme);
-    // On color logic with M3 reversal of roles.
+    // On color logic for M2 and M3 are different. Elevated button is a mess.
     final Color onBaseColor = onBaseSchemeColor == null
         ? useM3
             ? schemeColor(SchemeColor.surface, colorScheme)
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
-    // Using these tinted overlay variable in all themes for ease of
-    // reasoning and duplication.
-    final Color overlay = onBaseColor;
-    final Color tint = baseColor;
-    final bool surfaceMode = useM3 &&
-        ThemeData.estimateBrightnessForColor(overlay) == colorScheme.brightness;
+    // To not mess up let's define foreground and background colors.
+    final Color background = useM3 ? onBaseColor : baseColor;
+    final Color foreground = useM3 ? baseColor : onBaseColor;
+
+    // The logic below is used to give a nice tinted interaction and disable
+    // color regardless of how we customize the foreground and background
+    // of the elevated button. Due to its role reversal of coloring in M2
+    // versus M3, we need to provide a good tint for both use cases.
+    // With the logic below, this is doable for bot styles.
+    //
+    // We are using a light colorScheme.
+    final bool isLight = colorScheme.brightness == Brightness.light;
+    // Get brightness of background color.
+    final bool bgIsLight =
+        ThemeData.estimateBrightnessForColor(background) == Brightness.light;
+    // For tint color use the one that is more likely to give a colored effect.
+    final Color tint = isLight
+        ? bgIsLight
+            ? foreground
+            : background
+        : bgIsLight
+            ? background
+            : foreground;
+    // The reverse color is used for overlay
+    final Color overlay = isLight
+        ? bgIsLight
+            ? background
+            : foreground
+        : bgIsLight
+            ? foreground
+            : background;
+    // We use surface mode tint factor, if it is light theme and background
+    // is light OR if it is a dark theme and background is dark.
+    final bool surfaceMode = (isLight && bgIsLight) || (!isLight && !bgIsLight);
     final double factor =
         _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
-
-    // debugPrint('---------------------------------');
-    // debugPrint('ThemeMode   : ${colorScheme.brightness}');
-    // debugPrint('SurfaceMode : $surfaceMode');
-    // debugPrint('factor      : $factor');
 
     // We are using FCS M2 buttons, styled in M3 fashion by FCS.
     if (!useM3) {
@@ -2052,7 +2075,7 @@ class FlexSubThemes {
                 }
                 return colorScheme.onSurface.withAlpha(kAlphaDisabled);
               }
-              return onBaseColor;
+              return foreground;
             },
           ),
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -2064,22 +2087,22 @@ class FlexSubThemes {
                 }
                 return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
               }
-              return baseColor;
+              return background;
             },
           ),
           overlayColor: MaterialStateProperty.resolveWith<Color>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.hovered)) {
                 if (tintInteract) return tintedHovered(overlay, tint, factor);
-                return onBaseColor.withAlpha(kHoverBackgroundAlpha);
+                return overlay.withAlpha(kAlphaHovered);
               }
               if (states.contains(MaterialState.focused)) {
                 if (tintInteract) return tintedFocused(overlay, tint, factor);
-                return onBaseColor.withAlpha(kFocusBackgroundAlpha);
+                return overlay.withAlpha(kAlphaFocused);
               }
               if (states.contains(MaterialState.pressed)) {
                 if (tintInteract) return tintedPressed(overlay, tint, factor);
-                return onBaseColor.withAlpha(kPressedBackgroundAlpha);
+                return overlay.withAlpha(kAlphaPressed);
               }
               return Colors.transparent;
             },
@@ -2134,7 +2157,7 @@ class FlexSubThemes {
             }
             return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
-          return onBaseColor;
+          return background;
         });
       }
       // If the baseSchemeColor was null, but onBaseSchemeColor was not,
@@ -2150,7 +2173,7 @@ class FlexSubThemes {
             }
             return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
-          return onBaseColor;
+          return foreground;
         });
       }
 
