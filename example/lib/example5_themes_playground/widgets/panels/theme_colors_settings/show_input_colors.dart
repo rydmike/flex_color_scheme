@@ -158,6 +158,7 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>('ipc primary $primary'),
                       color: primary,
                       textColor: colorScheme.onPrimary,
                       label: 'primary',
@@ -217,6 +218,8 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>('ipc primaryContainer '
+                          '$primaryContainer'),
                       color: primaryContainer,
                       textColor: colorScheme.onPrimaryContainer,
                       label: 'primary\nContainer',
@@ -272,6 +275,7 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>('ipc secondary $secondary'),
                       color: secondary,
                       textColor: colorScheme.onSecondary,
                       showInputColor: showInputColor,
@@ -331,6 +335,8 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>(
+                          'ipc secondaryContainer $secondaryContainer'),
                       color: secondaryContainer,
                       textColor: colorScheme.onSecondaryContainer,
                       label: 'secondary\nContainer',
@@ -378,6 +384,7 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>('ipc tertiary $tertiary'),
                       color: tertiary,
                       textColor: colorScheme.onTertiary,
                       label: 'tertiary',
@@ -427,6 +434,8 @@ class ShowInputColors extends StatelessWidget {
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
+                      key: ValueKey<String>(
+                          'ipc tertiaryContainer $tertiaryContainer'),
                       color: tertiaryContainer,
                       textColor: colorScheme.onTertiaryContainer,
                       label: 'tertiary\nContainer',
@@ -453,6 +462,7 @@ class ShowInputColors extends StatelessWidget {
                 child: Material(
                   color: colorScheme.error,
                   child: ColorNameValue(
+                    key: ValueKey<String>('ipc error ${colorScheme.error}'),
                     color: colorScheme.error,
                     textColor: colorScheme.onError,
                     label: 'error',
@@ -478,6 +488,8 @@ class ShowInputColors extends StatelessWidget {
                 child: Material(
                   color: colorScheme.errorContainer,
                   child: ColorNameValue(
+                    key: ValueKey<String>('ipc errorContainer '
+                        '${colorScheme.errorContainer}'),
                     color: colorScheme.errorContainer,
                     textColor: colorScheme.onErrorContainer,
                     label: 'error\nContainer',

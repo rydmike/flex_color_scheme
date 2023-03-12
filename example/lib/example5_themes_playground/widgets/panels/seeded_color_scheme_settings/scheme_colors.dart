@@ -186,6 +186,7 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv primary $primary'),
                               color: primary,
                               textColor: colorScheme.onPrimary,
                               label: 'primary',
@@ -222,6 +223,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimary,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv onPrimary ${colorScheme.onPrimary}'),
                             color: colorScheme.onPrimary,
                             textColor: colorScheme.primary,
                             label: 'onPrimary',
@@ -297,6 +300,8 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv primaryContainer '
+                                  '$primaryContainer'),
                               color: primaryContainer,
                               textColor: colorScheme.onPrimaryContainer,
                               label: 'primary\u200BContainer',
@@ -338,6 +343,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimaryContainer,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onPrimaryContainer '
+                                '${colorScheme.onPrimaryContainer}'),
                             color: colorScheme.onPrimaryContainer,
                             textColor: colorScheme.primaryContainer,
                             label: 'onPrimary\u200BContainer',
@@ -410,6 +417,7 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv secondary $secondary'),
                               color: secondary,
                               textColor: colorScheme.onSecondary,
                               label: 'secondary',
@@ -446,6 +454,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondary,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv onSecondary ${colorScheme.onSecondary}'),
                             color: colorScheme.onSecondary,
                             textColor: colorScheme.secondary,
                             label: 'onSecondary',
@@ -522,6 +532,8 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv secondaryContainer '
+                                  '$secondaryContainer'),
                               color: secondaryContainer,
                               textColor: colorScheme.onSecondaryContainer,
                               label: 'secondary\u200BContainer',
@@ -563,6 +575,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondaryContainer,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onSecondaryContainer '
+                                '${colorScheme.onSecondaryContainer}'),
                             color: colorScheme.onSecondaryContainer,
                             textColor: secondaryContainer,
                             label: 'onSecondary\u200BContainer',
@@ -629,6 +643,7 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv tertiary $tertiary'),
                               color: tertiary,
                               textColor: colorScheme.onTertiary,
                               label: 'tertiary',
@@ -665,6 +680,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiary,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv onTertiary ${colorScheme.onTertiary}'),
                             color: colorScheme.onTertiary,
                             textColor: tertiary,
                             label: 'onTertiary',
@@ -731,6 +748,8 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
+                              key: ValueKey<String>('cnv tertiaryContainer '
+                                  '$tertiaryContainer'),
                               color: tertiaryContainer,
                               textColor: colorScheme.onTertiaryContainer,
                               label: 'tertiary\u200BContainer',
@@ -771,6 +790,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiaryContainer,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onTertiaryContainer '
+                                '${colorScheme.onTertiaryContainer}'),
                             color: colorScheme.onTertiaryContainer,
                             textColor: tertiaryContainer,
                             label: 'onTertiary\u200BContainer',
@@ -815,6 +836,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.error,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv error ${colorScheme.error}'),
                             color: colorScheme.error,
                             textColor: colorScheme.onError,
                             label: 'error',
@@ -841,6 +864,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onError,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv onError ${colorScheme.onError}'),
                             color: colorScheme.onError,
                             textColor: colorScheme.error,
                             label: 'onError',
@@ -882,6 +907,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.errorContainer,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv errorContainer '
+                                '${colorScheme.errorContainer}'),
                             color: colorScheme.errorContainer,
                             textColor: colorScheme.onErrorContainer,
                             label: 'error\nContainer',
@@ -908,6 +935,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onErrorContainer,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onErrorContainer '
+                                '${colorScheme.onErrorContainer}'),
                             color: colorScheme.onErrorContainer,
                             textColor: colorScheme.errorContainer,
                             label: 'onError\u200BContainer',
@@ -950,6 +979,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.background,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv background ${colorScheme.background}'),
                             color: colorScheme.background,
                             textColor: colorScheme.onBackground,
                             label: 'background',
@@ -973,6 +1004,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onBackground,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onBackground '
+                                '${colorScheme.onBackground}'),
                             color: colorScheme.onBackground,
                             textColor: colorScheme.background,
                             label: 'onBackground',
@@ -1014,6 +1047,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surface,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv surface ${colorScheme.surface}'),
                             color: colorScheme.surface,
                             textColor: colorScheme.onSurface,
                             label: 'surface',
@@ -1037,6 +1072,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSurface,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv onSurface ${colorScheme.onSurface}'),
                             color: colorScheme.onSurface,
                             textColor: colorScheme.surface,
                             label: 'onSurface',
@@ -1078,6 +1115,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceVariant,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceVariant '
+                                '${colorScheme.surfaceVariant}'),
                             color: colorScheme.surfaceVariant,
                             textColor: colorScheme.onSurfaceVariant,
                             label: 'surface\u200BVariant',
@@ -1101,6 +1140,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSurfaceVariant,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onSurfaceVariant '
+                                '${colorScheme.onSurfaceVariant}'),
                             color: colorScheme.onSurfaceVariant,
                             textColor: colorScheme.surfaceVariant,
                             label: 'onSurface\u200BVariant',
@@ -1142,6 +1183,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.inverseSurface,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv inverseSurface '
+                                '${colorScheme.inverseSurface}'),
                             color: colorScheme.inverseSurface,
                             textColor: colorScheme.onInverseSurface,
                             label: 'inverse\u200BSurface',
@@ -1165,6 +1208,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onInverseSurface,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv onInverseSurface '
+                                '${colorScheme.onInverseSurface}'),
                             color: colorScheme.onInverseSurface,
                             textColor: colorScheme.inverseSurface,
                             label: 'onInverse\u200BSurface',
@@ -1205,6 +1250,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.outline,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv outline ${colorScheme.outline}'),
                             color: colorScheme.outline,
                             textColor: _onColor(colorScheme.outline),
                             label: 'outline',
@@ -1227,6 +1274,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.outlineVariant,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv outlineVariant '
+                                '${colorScheme.outlineVariant}'),
                             color: colorScheme.outlineVariant,
                             textColor: _onColor(colorScheme.outlineVariant),
                             label: 'outline\u200BVariant',
@@ -1266,6 +1315,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.shadow,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv shadow ${colorScheme.shadow}'),
                             color: colorScheme.shadow,
                             textColor: _onColor(colorScheme.shadow),
                             label: 'shadow',
@@ -1289,6 +1340,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.scrim,
                           child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv scrim ${colorScheme.scrim}'),
                             color: colorScheme.scrim,
                             textColor: _onColor(colorScheme.scrim),
                             label: 'scrim',
@@ -1329,6 +1382,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.inversePrimary,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv inversePrimary '
+                                '${colorScheme.inversePrimary}'),
                             color: colorScheme.inversePrimary,
                             textColor: colorScheme.inverseSurface,
                             label: 'inverse\u200BPrimary',
@@ -1351,6 +1406,8 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceTint,
                           child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceTint '
+                                '${colorScheme.surfaceTint}'),
                             color: colorScheme.surfaceTint,
                             textColor: _onColor(colorScheme.surfaceTint),
                             label: 'surfaceTint',
