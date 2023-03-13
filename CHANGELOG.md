@@ -183,7 +183,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - In progress: Add support for MenButton, advanced selected item styling in menus.
   - Done for sub-themes.
+  - Done for FlexSubThemesData  
   - TODO: Add the 7 new properties (menuBarBackgroundSchemeColor, menuItemBackgroundSchemeColor, menuItemForegroundSchemeColor, menuIndicatorBackgroundSchemeColor, menuIndicatorForegroundSchemeColor, menuIndicatorRadius, menuPadding) to Playground and codegen.
+- Review TimePicker once more, number entry, unselected seemed wrong, may it can be fixed, maybe not, theme does not have M3 support yet in stable.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 
