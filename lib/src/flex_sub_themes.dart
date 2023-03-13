@@ -3156,40 +3156,53 @@ class FlexSubThemes {
 
   /// An opinionated [MenuButtonThemeData] theme.
   ///
-  /// Provides complex styling of menu button items with simple SchemeColor
-  /// inputs. Also border radius on the indicator.
+  /// Provides complex styling for themed [SubmenuButton]s and [MenuItemButton]s
+  /// with [SchemeColor] selections. Border radius on the indicator, highlighted
+  /// menu item.
+  ///
+  /// If highlight colors are not defined, the highlighted item uses default
+  /// [MaterialState] property response os overlay for highlighted item.
+  /// These states can optionally also use FlexColorScheme tinted style.
+  /// Disabled items can also to use the optional FCS tinted style.
   static MenuButtonThemeData menuButtonTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the MenuButton background color for unselected (not hovered) items.
+    /// the [SubmenuButton]s and [MenuItemButton]s background color for
+    /// unselected, i.e. not highlighted via hover, focus or pressed state.
     ///
-    /// If not defined, defaults to surface.
+    /// If not defined, defaults to [colorScheme.surface].
     final SchemeColor? backgroundSchemeColor,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the MenuButton foreground color.
+    /// the [SubmenuButton]s and [MenuItemButton]s foreground color.
     ///
-    /// If not defined, defaults to the contrast pair for backgroundSchemeColor.
+    /// If not defined, defaults to the contrast pair for
+    /// [backgroundSchemeColor].
     final SchemeColor? foregroundSchemeColor,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the highlighted MenuButton indicator background color.
+    /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
+    /// background color.
     ///
-    /// If not defined, defaults to backgroundSchemeColor.
+    /// If not defined, defaults to [backgroundSchemeColor] and the indicator
+    /// only get overlay color hover, focus and press states.
     final SchemeColor? indicatorBackgroundSchemeColor,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
-    /// the highlighted MenuButton indicator foreground color.
+    /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
+    /// foreground color.
     ///
     /// If not defined, defaults to the contrast pair for
-    /// indicatorBackgroundSchemeColor.
+    /// [indicatorBackgroundSchemeColor], without its overlay color.
+    /// If [indicatorBackgroundSchemeColor] is not defined the result of
+    /// this is same color as [foregroundSchemeColor].
     final SchemeColor? indicatorForegroundSchemeColor,
 
     /// The MenuButton corner border radius.
     ///
-    /// If not defined, defaults to 0 via Widget default behavior.
+    /// If not defined, defaults to 0 via Widget's default behavior.
     final double? radius,
 
     /// Defines if the theme uses tinted interaction effects.
@@ -3205,12 +3218,12 @@ class FlexSubThemes {
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
-    // // Get background color of menu.
-    // final Color backgroundColor =
-    //  schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
-
-    // Get foreground color used on not active menu item, contrast to
-    // menu background color.
+    // Get foreground color used on not active menu item, by default
+    // contrast to menu background color, which default to surface.
+    // FCS passes in the generally defined menu background, if it has been
+    // defined, to ensure buttons are based on their background color.
+    // The buttons can have another un-highlighted background color than the
+    // menu container, but it is probably not a very useful design.
     final SchemeColor fgScheme = foregroundSchemeColor ??
         onSchemeColor(backgroundSchemeColor ?? SchemeColor.surface);
     final Color foregroundColor = schemeColor(fgScheme, colorScheme);

@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 12, 2023**
+**Mar 13, 2023**
 
 **FIX**
 
@@ -44,9 +44,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Add**: New configuration class `FlexAdaptive` used to configure on which platforms adaptive theming features are used. Including 100% unit test coverage for the new class.
 
-- **Add**: New `FlexSubThemesData` that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
+- **Add**: Four new `FlexSubThemesData` properties that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
 
-- **Add**: 
+- **Add**: Six new `FlexSubThemesData` properties `menuPadding`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor` and  `menuIndicatorRadius`.
 
 **CHANGE**
 

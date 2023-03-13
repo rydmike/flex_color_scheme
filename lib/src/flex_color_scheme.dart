@@ -22,7 +22,7 @@ import 'flex_surface_mode.dart';
 // ignore_for_file: comment_references
 
 /// Enum to select the used AppBarTheme style in [FlexColorScheme] based themes
-/// when using its `light` and `dark` factories.
+/// when using its [FlexColorScheme.light] and [FlexColorScheme.dark] factories.
 enum FlexAppBarStyle {
   /// Use the scheme primary color as the AppBar's themed background color.
   ///
@@ -6546,7 +6546,7 @@ class FlexColorScheme with Diagnosticable {
                   labelStyle: effectiveTextTheme.bodyLarge!,
                 ),
       //
-      // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
       // TODO(Rydmike): Add DatePicker Themedata when available in stable.
       // datePickerTheme: DatePickerThemeData(),
@@ -6617,7 +6617,7 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // expansionTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // expansionTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
       // FilledButton Theme.
       filledButtonTheme: useSubThemes
@@ -6662,9 +6662,9 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
-      // MenuBar theme.
+      // MenuBar theme, used by MenuBar.
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
               colorScheme: colorScheme,
@@ -6676,20 +6676,18 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // MenuButton theme.
+      // MenuButton theme, used by SubmenuButton and MenuItemButton.
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
-              // TODO(rydmike): Add SubThemesData.menuItemBackgroundSchemeColor.
-              backgroundSchemeColor: subTheme.menuSchemeColor,
-              // TODO(rydmike): Add SubThemesData.menuItemForegroundSchemeColor.
-              // foregroundSchemeColor: SchemeColor.primary,
-              // TODO(rydmike): SubThemesData.menuIndicatorBackgroundSchemeColor
-              // indicatorBackgroundSchemeColor: SchemeColor.secondary,
-              // TODO(rydmike): SubThemesData.menuIndicatorForegroundSchemeColor
-              // indicatorForegroundSchemeColor: SchemeColor.errorContainer,
-              // TODO(rydmike): Add SubThemesData.menuIndicatorRadius.
-              // radius: 8,
+              backgroundSchemeColor: subTheme.menuItemBackgroundSchemeColor ??
+                  subTheme.menuSchemeColor,
+              foregroundSchemeColor: subTheme.menuItemForegroundSchemeColor,
+              indicatorBackgroundSchemeColor:
+                  subTheme.menuIndicatorBackgroundSchemeColor,
+              indicatorForegroundSchemeColor:
+                  subTheme.menuIndicatorForegroundSchemeColor,
+              radius: subTheme.menuIndicatorRadius,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
             )
@@ -6704,8 +6702,7 @@ class FlexColorScheme with Diagnosticable {
               opacity: subTheme.menuOpacity,
               radius: subTheme.menuRadius,
               elevation: subTheme.menuElevation,
-              // TODO(rydmike): Add MenuPadding SubThemesData.
-              // padding: const EdgeInsets.all(8),
+              padding: subTheme.menuPadding,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
@@ -6845,6 +6842,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.popupMenuTheme(
               colorScheme: colorScheme,
               radius: subTheme.popupMenuRadius,
+              // This did not work! See issue above.
               // textStyle: effectiveTextTheme.labelLarge,
               elevation: popupMenuElevation,
               color: popupMenuBackgroundColor,

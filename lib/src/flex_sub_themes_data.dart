@@ -273,10 +273,17 @@ class FlexSubThemesData with Diagnosticable {
     this.menuElevation,
     this.menuSchemeColor,
     this.menuOpacity,
+    this.menuPadding,
     //
     this.menuBarRadius,
     this.menuBarElevation,
     this.menuBarShadowColor,
+    //
+    this.menuItemBackgroundSchemeColor,
+    this.menuItemForegroundSchemeColor,
+    this.menuIndicatorBackgroundSchemeColor,
+    this.menuIndicatorForegroundSchemeColor,
+    this.menuIndicatorRadius,
     //
     this.tooltipRadius,
     this.tooltipWaitDuration,
@@ -1709,6 +1716,14 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, produced result is same as 1, fully opaque.
   final double? menuOpacity;
 
+  /// The padding between the menu's boundary and its child.
+  ///
+  /// Affect theme for menu container for [MenuAnchor], [MenuBar] menus and
+  /// [DropdownMenu].
+  ///
+  /// If not defined, default to 0, no padding.
+  final EdgeInsetsGeometry? menuPadding;
+
   /// The border radius of the [MenuBar] container.
   ///
   /// If not defined, defaults to 4 via Flutter SDK default.
@@ -1728,6 +1743,46 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults toe [ColorScheme.shadow] via Flutter SDK
   /// defaults and the [MenuBar] gets elevation shadow.
   final Color? menuBarShadowColor;
+
+  /// Select which color from active [ColorScheme] to use as
+  /// [SubmenuButton]s and [MenuItemButton]s background color for
+  /// unselected, not hovered, menu items.
+  ///
+  /// If not defined, defaults to [menuSchemeColor].
+  final SchemeColor? menuItemBackgroundSchemeColor;
+
+  /// Select which color from active [ColorScheme] to use as [SubmenuButton]s
+  /// and [MenuItemButton]s foreground color.
+  ///
+  /// If not defined, defaults to the contrast pair for [SchemeColor]
+  /// [menuItemBackgroundSchemeColor] via [FlexSubThemes.onSchemeColor].
+  final SchemeColor? menuItemForegroundSchemeColor;
+
+  /// Select which color from the active [ColorScheme] to use as
+  /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
+  /// background color.
+  ///
+  /// If not defined, defaults to [backgroundSchemeColor] and the indicator
+  /// only get overlay color for hover, focus and press states.
+  ///
+  /// The overlay style can be tinted using [interactionEffects].
+  final SchemeColor? menuIndicatorBackgroundSchemeColor;
+
+  /// Select which color from active [ColorScheme] use as
+  /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
+  /// foreground color.
+  ///
+  /// If not defined, defaults to the contrast pair for
+  /// [menuIndicatorBackgroundSchemeColor], via [FlexSubThemes.onSchemeColor].
+  /// If [menuIndicatorBackgroundSchemeColor] is not defined the default result
+  /// is same color as [menuItemForegroundSchemeColor].
+  final SchemeColor? menuIndicatorForegroundSchemeColor;
+
+  /// The themed corner border radius of [SubmenuButton]s and [MenuItemButton]s.
+  ///
+  /// If not defined, defaults to 0 via [SubmenuButton]s and [MenuItemButton]s
+  /// default behavior.
+  final double? menuIndicatorRadius;
 
   /// Border radius value for [Tooltips].
   ///
@@ -2911,12 +2966,19 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? menuRadius,
     final double? menuElevation,
-    final double? menuOpacity,
     final SchemeColor? menuSchemeColor,
+    final double? menuOpacity,
+    final EdgeInsetsGeometry? menuPadding,
     //
     final double? menuBarRadius,
     final double? menuBarElevation,
     final Color? menuBarShadowColor,
+    //
+    final SchemeColor? menuItemBackgroundSchemeColor,
+    final SchemeColor? menuItemForegroundSchemeColor,
+    final SchemeColor? menuIndicatorBackgroundSchemeColor,
+    final SchemeColor? menuIndicatorForegroundSchemeColor,
+    final double? menuIndicatorRadius,
     //
     final double? tooltipRadius,
     final Duration? tooltipWaitDuration,
@@ -3209,10 +3271,21 @@ class FlexSubThemesData with Diagnosticable {
       menuElevation: menuElevation ?? this.menuElevation,
       menuSchemeColor: menuSchemeColor ?? this.menuSchemeColor,
       menuOpacity: menuOpacity ?? this.menuOpacity,
+      menuPadding: menuPadding ?? this.menuPadding,
       //
       menuBarRadius: menuBarRadius ?? this.menuBarRadius,
       menuBarElevation: menuBarElevation ?? this.menuBarElevation,
       menuBarShadowColor: menuBarShadowColor ?? this.menuBarShadowColor,
+      //
+      menuItemBackgroundSchemeColor:
+          menuItemBackgroundSchemeColor ?? this.menuItemBackgroundSchemeColor,
+      menuItemForegroundSchemeColor:
+          menuItemForegroundSchemeColor ?? this.menuItemForegroundSchemeColor,
+      menuIndicatorBackgroundSchemeColor: menuIndicatorBackgroundSchemeColor ??
+          this.menuIndicatorBackgroundSchemeColor,
+      menuIndicatorForegroundSchemeColor: menuIndicatorForegroundSchemeColor ??
+          this.menuIndicatorForegroundSchemeColor,
+      menuIndicatorRadius: menuIndicatorRadius ?? this.menuIndicatorRadius,
       //
       tooltipRadius: tooltipRadius ?? this.tooltipRadius,
       tooltipWaitDuration: tooltipWaitDuration ?? this.tooltipWaitDuration,
@@ -3551,10 +3624,19 @@ class FlexSubThemesData with Diagnosticable {
         other.menuElevation == menuElevation &&
         other.menuSchemeColor == menuSchemeColor &&
         other.menuOpacity == menuOpacity &&
+        other.menuPadding == menuPadding &&
         //
         other.menuBarRadius == menuBarRadius &&
         other.menuBarElevation == menuBarElevation &&
         other.menuBarShadowColor == menuBarShadowColor &&
+        //
+        other.menuItemBackgroundSchemeColor == menuItemBackgroundSchemeColor &&
+        other.menuItemForegroundSchemeColor == menuItemForegroundSchemeColor &&
+        other.menuIndicatorBackgroundSchemeColor ==
+            menuIndicatorBackgroundSchemeColor &&
+        other.menuIndicatorForegroundSchemeColor ==
+            menuIndicatorForegroundSchemeColor &&
+        other.menuIndicatorRadius == menuIndicatorRadius &&
         //
         other.tooltipRadius == tooltipRadius &&
         other.tooltipWaitDuration == tooltipWaitDuration &&
@@ -3826,10 +3908,17 @@ class FlexSubThemesData with Diagnosticable {
         menuElevation,
         menuSchemeColor,
         menuOpacity,
+        menuPadding,
         //
         menuBarRadius,
         menuBarElevation,
         menuBarShadowColor,
+        //
+        menuItemBackgroundSchemeColor,
+        menuItemForegroundSchemeColor,
+        menuIndicatorBackgroundSchemeColor,
+        menuIndicatorForegroundSchemeColor,
+        menuIndicatorRadius,
         //
         tooltipRadius,
         tooltipWaitDuration,
@@ -4143,11 +4232,26 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(EnumProperty<SchemeColor>('menuSchemeColor', menuSchemeColor));
     properties.add(DiagnosticsProperty<double>('menuOpacity', menuOpacity));
+    properties.add(
+        DiagnosticsProperty<EdgeInsetsGeometry>('menuPadding', menuPadding));
     //
     properties.add(DiagnosticsProperty<double>('menuBarRadius', menuBarRadius));
     properties
         .add(DiagnosticsProperty<double>('menuBarElevation', menuBarElevation));
     properties.add(ColorProperty('menuBarShadowColor', menuBarShadowColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'menuItemBackgroundSchemeColor', menuItemBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'menuItemForegroundSchemeColor', menuItemForegroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'menuIndicatorBackgroundSchemeColor',
+        menuIndicatorBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'menuIndicatorForegroundSchemeColor',
+        menuIndicatorForegroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'menuIndicatorRadius', menuIndicatorRadius));
     //
     properties.add(DiagnosticsProperty<double>('tooltipRadius', tooltipRadius));
     properties.add(DiagnosticsProperty<Duration>(
