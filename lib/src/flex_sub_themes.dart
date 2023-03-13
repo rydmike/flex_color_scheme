@@ -3105,6 +3105,10 @@ class FlexSubThemes {
 
     /// Select which color from the passed in [colorScheme] parameter to use as
     /// the MenuBar background color.
+    ///
+    /// If not defined, default to [colorScheme.surface]. FlexColorScheme
+    /// passes in [FlexSubThemesData.menuBarBackgroundSchemeColor] first uses
+    /// [FlexSubThemesData.menuSchemeColor] as fallback, that can also be null.
     final SchemeColor? backgroundSchemeColor,
 
     /// The shadow color of the MenuBar's [Material].
