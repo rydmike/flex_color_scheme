@@ -66,8 +66,13 @@ dependencies:
   hive: ^2.2.3
 
   # Color utilities by Google (material.io).
+  #
   # Used in Playground by CodeTheme to harmonize colors against main theme colors.
+  #
   # Flutter SDK from 2.10.0 stable also uses and depends on this package.
+  # Version 0.3.0 contains many new features, but Flutter stable and master are
+  # locked to version 0.2.0, so we cannot use it, also 0-ver does not
+  # upgrade from version ^0.2.0 to 0.3.x, only to 0.2.x.
   material_color_utilities: ^0.2.0
 
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
