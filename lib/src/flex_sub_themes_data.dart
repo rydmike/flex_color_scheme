@@ -275,6 +275,7 @@ class FlexSubThemesData with Diagnosticable {
     this.menuOpacity,
     this.menuPadding,
     //
+    this.menuBarBackgroundSchemeColor,
     this.menuBarRadius,
     this.menuBarElevation,
     this.menuBarShadowColor,
@@ -1724,6 +1725,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, default to 0, no padding.
   final EdgeInsetsGeometry? menuPadding;
 
+  /// Select which color from active [ColorScheme] to use as background color
+  /// for the [MenuBar].
+  ///
+  /// If not defined, defaults to [menuSchemeColor].
+  final SchemeColor? menuBarBackgroundSchemeColor;
+
   /// The border radius of the [MenuBar] container.
   ///
   /// If not defined, defaults to 4 via Flutter SDK default.
@@ -2970,6 +2977,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? menuOpacity,
     final EdgeInsetsGeometry? menuPadding,
     //
+    final SchemeColor? menuBarBackgroundSchemeColor,
     final double? menuBarRadius,
     final double? menuBarElevation,
     final Color? menuBarShadowColor,
@@ -3273,6 +3281,8 @@ class FlexSubThemesData with Diagnosticable {
       menuOpacity: menuOpacity ?? this.menuOpacity,
       menuPadding: menuPadding ?? this.menuPadding,
       //
+      menuBarBackgroundSchemeColor:
+          menuBarBackgroundSchemeColor ?? this.menuBarBackgroundSchemeColor,
       menuBarRadius: menuBarRadius ?? this.menuBarRadius,
       menuBarElevation: menuBarElevation ?? this.menuBarElevation,
       menuBarShadowColor: menuBarShadowColor ?? this.menuBarShadowColor,
@@ -3626,6 +3636,7 @@ class FlexSubThemesData with Diagnosticable {
         other.menuOpacity == menuOpacity &&
         other.menuPadding == menuPadding &&
         //
+        other.menuBarBackgroundSchemeColor == menuBarBackgroundSchemeColor &&
         other.menuBarRadius == menuBarRadius &&
         other.menuBarElevation == menuBarElevation &&
         other.menuBarShadowColor == menuBarShadowColor &&
@@ -3910,6 +3921,7 @@ class FlexSubThemesData with Diagnosticable {
         menuOpacity,
         menuPadding,
         //
+        menuBarBackgroundSchemeColor,
         menuBarRadius,
         menuBarElevation,
         menuBarShadowColor,
@@ -4235,6 +4247,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<EdgeInsetsGeometry>('menuPadding', menuPadding));
     //
+    properties.add(EnumProperty<SchemeColor>(
+        'menuBarBackgroundSchemeColor', menuBarBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>('menuBarRadius', menuBarRadius));
     properties
         .add(DiagnosticsProperty<double>('menuBarElevation', menuBarElevation));

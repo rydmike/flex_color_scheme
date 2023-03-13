@@ -6668,7 +6668,8 @@ class FlexColorScheme with Diagnosticable {
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.menuSchemeColor,
+              backgroundSchemeColor: subTheme.menuBarBackgroundSchemeColor ??
+                  subTheme.menuSchemeColor,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: subTheme.menuBarShadowColor,
               radius: subTheme.menuBarRadius,

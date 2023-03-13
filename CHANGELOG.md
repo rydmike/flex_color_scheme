@@ -46,7 +46,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Add**: Four new `FlexSubThemesData` properties that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
 
-- **Add**: Six new `FlexSubThemesData` properties `menuPadding`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor` and  `menuIndicatorRadius`.
+- **Add**: Seven new `FlexSubThemesData` properties `menuBarBackgroundSchemeColor`, `menuPadding`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor` and  `menuIndicatorRadius`.
 
 **CHANGE**
 
@@ -183,8 +183,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - In progress: Add support for MenButton, advanced selected item styling in menus.
   - Done for sub-themes.
-  - TODO: Add 7 new SubThemesData properties: menuBarBackgroundSchemeColor, menuItemBackgroundSchemeColor, menuItemForegroundSchemeColor,     menuIndicatorBackgroundSchemeColor, menuIndicatorForegroundSchemeColor, menuIndicatorRadius, menuPadding.
-  - TODO: Add these new properties to Playground and codegen.
+  - TODO: Add the 7 new properties (menuBarBackgroundSchemeColor, menuItemBackgroundSchemeColor, menuItemForegroundSchemeColor, menuIndicatorBackgroundSchemeColor, menuIndicatorForegroundSchemeColor, menuIndicatorRadius, menuPadding) to Playground and codegen.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 
