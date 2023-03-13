@@ -178,6 +178,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added TabBar controls for unselected item color, own controls for light and dark mode, unselected item opacity, indicator thickness and top radius to panel **TabBar**.
 - Added controls for `defaultRadiusAdaptive` and `adaptiveRadius` to panel **Component themes**. They are used to define to make a platform adaptive override to the global border radius override value.
 - Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
+- Version 2.0.3 of package flutter_svg fixed its cache issue in version 2.0.0, 2.0.1 and 2.0.2, upgrade to version 2 was now (13.3.2023) possible and done.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
