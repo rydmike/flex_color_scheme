@@ -3489,7 +3489,7 @@ class AlertDialogShowcase extends StatelessWidget {
 }
 
 class _AlertDialogExample extends StatelessWidget {
-  const _AlertDialogExample({super.key});
+  const _AlertDialogExample();
 
   @override
   Widget build(BuildContext context) {
