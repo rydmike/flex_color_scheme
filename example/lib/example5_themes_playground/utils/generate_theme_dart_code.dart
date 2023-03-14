@@ -690,6 +690,10 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n'
       : '';
+  final String useInputDecoratorThemeInDialogs = controller
+          .useInputDecoratorThemeInDialogs
+      ? '    useInputDecoratorThemeInDialogs: ${controller.useInputDecoratorThemeInDialogs},\n'
+      : '';
   final String dialogBorderRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1216,9 +1220,10 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
+          '$dialogElevation'
+          '$useInputDecoratorThemeInDialogs'
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
-          '$dialogElevation'
           //
           '$snackBarRadius'
           '$snackBarElevation'
@@ -1420,9 +1425,10 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
+          '$dialogElevation'
+          '$useInputDecoratorThemeInDialogs'
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
-          '$dialogElevation'
           //
           '$snackBarRadius'
           '$snackBarElevation'

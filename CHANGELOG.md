@@ -6,7 +6,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO BEFORE BETA 7.0.0-dev.3 RELEASE**
 
-- Add a feature to opt-in on using app level `InputDecorator` theme as input decorator style in `TimerPicker`. It currently does this by default. This will make it an opt-in feature.  
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 - A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
 - Since web release mode build-issue is preventing me from moving forward with a new release, maybe consider some more changes:
@@ -43,7 +42,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Fixed **bug** in legacy theme secondary and tertiary color swapping when using seed generated ColorScheme. In dark mode, combining legacy swapping and seed generation did not swap secondary and tertiary colors for schemes where it should do so. This is now fixed. If seed generation was not used, the swapping worked correctly in dark mode. In light mode it worked correctly also when seed generated schemes were used. This `swapLegacyOnMaterial3` feature was introduced in version 6.1.0. It has had this bug for this case since it was introduced in 6.1.0.
 
-- Fixed **bug** where `FlexSubThemes.drawerTheme` was using `BorderRadiusDirectional.horizontal` with `end` radius instead of `start` radius as its `endShape`. This bug was introduced in version 7.0.0-dev.1. 
+- Fixed **bug** where `FlexSubThemes.drawerTheme` was using `BorderRadiusDirectional.horizontal` with `end` radius instead of `start` radius as its `endShape`. This bug was introduced by version 7.0.0-dev.1. 
 
 - The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
 
@@ -80,6 +79,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - **Add**: Four new `FlexSubThemesData` properties that uses the `FlexAdaptive` configuration class, to configure the features `adaptiveRemoveElevationTint`, `adaptiveElevationShadowsBack`, `adaptiveAppBarScrollUnderOff` and `adaptiveRadius`. The `adaptiveRadius` controls if the `defaultRadiusAdaptive` is used as value for effective global border radius instead of `defaultRadius`.
 
 - **Add**: Seven new `FlexSubThemesData` properties `menuBarBackgroundSchemeColor`, `menuPadding`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor` and  `menuIndicatorRadius`.
+
+- **Add**: Boolean property `useInputDecoratorThemeInDialogs` to `FlexSubThemesData`. Used to control if the application's themed input decoration is used or not, on time picker dialog theme text input fields. If not used, the time picker dialog uses null as input to its input decorator, in order to get the Flutter time picker default style. This toggle will also be used on date picker when/if it gets supported.
+
 
 **CHANGE**
 

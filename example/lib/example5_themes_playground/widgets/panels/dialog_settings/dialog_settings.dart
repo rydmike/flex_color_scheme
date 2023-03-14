@@ -222,6 +222,25 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        SwitchListTile(
+          title: const Text('Use InputDecoration theme in dialog text entry'),
+          subtitle: const Text('Turn ON to use the themed InputDecoration '
+              'style on time entry fields.'),
+          value: controller.useInputDecoratorThemeInDialogs &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseInputDecoratorThemeInDialogs
+              : null,
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('Keeping it OFF uses null as InputDecoration for '
+              'TimePicker sub-theme in order to get widget default decorator '
+              'style. Despite this, for some reason the app level themed '
+              'InputDecoration background style still gets used. A potential '
+              'Flutter SDK theming issue to revisit later.'),
+        ),
         const TimePickerDialogShowcase(),
         const ListTile(
           dense: true,

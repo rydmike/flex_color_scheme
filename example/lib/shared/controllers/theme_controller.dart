@@ -688,6 +688,9 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = await _themeService.load(
         Store.keyDialogBackgroundSchemeColor,
         Store.defaultDialogBackgroundSchemeColor);
+    _useInputDecoratorThemeInDialogs = await _themeService.load(
+        Store.keyUseInputDecoratorThemeInDialogs,
+        Store.defaultUseInputDecoratorThemeInDialogs);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
     _timePickerElementRadius = await _themeService.load(
@@ -1131,6 +1134,8 @@ class ThemeController with ChangeNotifier {
     // Dialog SETTINGS.
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
+    setUseInputDecoratorThemeInDialogs(
+        Store.defaultUseInputDecoratorThemeInDialogs, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
     setTimePickerElementRadius(Store.defaultTimePickerElementRadius, false);
     setDialogElevation(Store.defaultDialogElevation, false);
@@ -4431,6 +4436,17 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDialogBackgroundSchemeColor, value));
+  }
+
+  late bool _useInputDecoratorThemeInDialogs;
+  bool get useInputDecoratorThemeInDialogs => _useInputDecoratorThemeInDialogs;
+  void setUseInputDecoratorThemeInDialogs(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useInputDecoratorThemeInDialogs) return;
+    _useInputDecoratorThemeInDialogs = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyUseInputDecoratorThemeInDialogs, value));
   }
 
   late double? _dialogBorderRadius;

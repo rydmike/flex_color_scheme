@@ -1517,6 +1517,13 @@ class Store {
   // reset settings.
   static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
 
+  // Key used to read and save the useInputDecoratorThemeInDialogs value.
+  static const String keyUseInputDecoratorThemeInDialogs =
+      'useInputDecoratorThemeInDialogs';
+  // Default value for the useInputDecoratorThemeInDialogs, also
+  // used to reset settings.
+  static const bool defaultUseInputDecoratorThemeInDialogs = false;
+
   // Key used to read and save the dialogBorderRadius value.
   static const String keyDialogBorderRadius = 'dialogBorderRadius';
   // Default value for the dialogBorderRadius, also used to reset settings.

@@ -6249,6 +6249,19 @@ class FlexSubThemes {
     /// in your overall used app InputDecorationTheme.
     final InputDecorationTheme? inputDecorationTheme,
 
+    /// Set to true to not use the provided [inputDecorationTheme].
+    ///
+    /// If this flag is false, the provided [inputDecorationTheme] is not used,
+    /// additionally the theme fix this theme helper does internally is
+    /// not applied and pure null value is passed. This enables getting the
+    /// default widget behavior input decorator, or opting in on getting the
+    /// provided inputDecorationTheme with the internal style fix for issue
+    /// https://github.com/flutter/flutter/issues/54104 applied automatically
+    /// to the provided inputDecorationTheme.
+    ///
+    /// If not defined, defaults to false.
+    final bool? useInputDecoratorTheme,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -6262,6 +6275,7 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
+    final bool useDecorator = useInputDecoratorTheme ?? false;
 
     final Color? background = (backgroundSchemeColor == null)
         ? backgroundColor // might be null, then SDK theme defaults.
@@ -6374,18 +6388,20 @@ class FlexSubThemes {
       // only does to null default theme. If you use a custom decorator
       // you are supposed to know that you have to add these shenanigans
       // for it to work and look right.
-      inputDecorationTheme: inputDecorationTheme?.copyWith(
-            contentPadding: EdgeInsets.zero,
-            // Prevent the error text from appearing.
-            // See https://github.com/flutter/flutter/issues/54104
-            errorStyle: const TextStyle(fontSize: 0, height: 0),
-          ) ??
-          const InputDecorationTheme().copyWith(
-            contentPadding: EdgeInsets.zero,
-            // Prevent the error text from appearing.
-            // See https://github.com/flutter/flutter/issues/54104
-            errorStyle: const TextStyle(fontSize: 0, height: 0),
-          ),
+      inputDecorationTheme: useDecorator
+          ? inputDecorationTheme?.copyWith(
+                contentPadding: EdgeInsets.zero,
+                // Prevent the error text from appearing.
+                // See https://github.com/flutter/flutter/issues/54104
+                errorStyle: const TextStyle(fontSize: 0, height: 0),
+              ) ??
+              const InputDecorationTheme().copyWith(
+                contentPadding: EdgeInsets.zero,
+                // Prevent the error text from appearing.
+                // See https://github.com/flutter/flutter/issues/54104
+                errorStyle: const TextStyle(fontSize: 0, height: 0),
+              )
+          : null, //const InputDecorationTheme(),
     );
   }
 

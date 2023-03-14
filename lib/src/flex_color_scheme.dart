@@ -7014,8 +7014,8 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.dialogElevation,
               radius: subTheme.timePickerDialogRadius ?? platformRadius,
               elementRadius: subTheme.timePickerElementRadius,
-              // TODO(Rydmike): Is this a good idea with M3? Maybe own style?
               inputDecorationTheme: effectiveInputDecorationTheme,
+              useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
               useMaterial3: useMaterial3,
             )
           : null,
