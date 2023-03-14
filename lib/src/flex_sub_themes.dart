@@ -3172,11 +3172,20 @@ class FlexSubThemes {
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Provide info on which color from the passed in [colorScheme] parameter
+    /// that is used as background color of menu containers defined by
+    /// [FlexSubThemes.menuTheme] and [FlexSubThemes.menuBarTheme]. The menu
+    /// container is used by [MenuAnchor], [DropDownMenu] and menus on
+    /// [MenuBar].
+    ///
+    /// If not defined, defaults to [colorScheme.surface].
+    final SchemeColor? menuBackgroundSchemeColor,
+
     /// Select which color from the passed in [colorScheme] parameter to use as
     /// the [SubmenuButton]s and [MenuItemButton]s background color for
     /// unselected, i.e. not highlighted via hover, focus or pressed state.
     ///
-    /// If not defined, defaults to [colorScheme.surface].
+    /// If not defined, defaults to [menuBackgroundSchemeColor].
     final SchemeColor? backgroundSchemeColor,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
@@ -3228,18 +3237,23 @@ class FlexSubThemes {
     // defined, to ensure buttons are based on their background color.
     // The buttons can have another un-highlighted background color than the
     // menu container, but it is probably not a very useful design.
-    final SchemeColor fgScheme = foregroundSchemeColor ??
-        onSchemeColor(backgroundSchemeColor ?? SchemeColor.surface);
+    final SchemeColor menuBgScheme =
+        menuBackgroundSchemeColor ?? SchemeColor.surface;
+    final SchemeColor bgScheme = backgroundSchemeColor ?? menuBgScheme;
+    final Color backgroundColor = schemeColor(bgScheme, colorScheme);
+    final SchemeColor fgScheme =
+        foregroundSchemeColor ?? onSchemeColor(bgScheme);
     final Color foregroundColor = schemeColor(fgScheme, colorScheme);
 
-    // Get background color of highlighted menu.
-    final SchemeColor indBgScheme = indicatorBackgroundSchemeColor ??
-        backgroundSchemeColor ??
-        SchemeColor.surface;
+    // Get background color of highlighted menu item.
+    final SchemeColor indBgScheme = indicatorBackgroundSchemeColor ?? bgScheme;
     final Color indicatorBgColor = schemeColor(indBgScheme, colorScheme);
     final SchemeColor indFgScheme =
         indicatorForegroundSchemeColor ?? onSchemeColor(indBgScheme);
     final Color indicatorFgColor = schemeColor(indFgScheme, colorScheme);
+
+    final bool transparentBackground =
+        backgroundSchemeColor == null || menuBgScheme == bgScheme;
 
     // If foreground is plain contrast to a standard surface, we cannot use it
     // for tint, in that case we will use primary color for tint.
@@ -3324,7 +3338,7 @@ class FlexSubThemes {
                 return indicatorBgColor;
               }
             }
-            return Colors.transparent;
+            return transparentBackground ? Colors.transparent : backgroundColor;
           },
         ),
         overlayColor: MaterialStateProperty.resolveWith(

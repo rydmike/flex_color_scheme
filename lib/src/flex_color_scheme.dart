@@ -6681,8 +6681,8 @@ class FlexColorScheme with Diagnosticable {
       menuButtonTheme: useSubThemes
           ? FlexSubThemes.menuButtonTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.menuItemBackgroundSchemeColor ??
-                  subTheme.menuSchemeColor,
+              menuBackgroundSchemeColor: subTheme.menuSchemeColor,
+              backgroundSchemeColor: subTheme.menuItemBackgroundSchemeColor,
               foregroundSchemeColor: subTheme.menuItemForegroundSchemeColor,
               indicatorBackgroundSchemeColor:
                   subTheme.menuIndicatorBackgroundSchemeColor,

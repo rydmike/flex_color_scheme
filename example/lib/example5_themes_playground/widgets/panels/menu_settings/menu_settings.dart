@@ -29,6 +29,47 @@ class MenuSettings extends StatelessWidget {
             ? controller.menuOpacity ?? 1
             : 1;
 
+    final String menuBarDefault = controller.menuSchemeColor == null
+        ? 'default (surface)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
+
+    final String menuItemDefault = controller.menuSchemeColor == null
+        ? 'default (surface)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
+
+    final String menuOnItemDefault = controller.menuSchemeColor == null
+        ? 'default (onSurface)'
+        // ignore: lines_longer_than_80_chars
+        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name})';
+
+    final String overlayStyle = controller.interactionEffects
+        ? ' with tinted overlay'
+        : ' with default overlay';
+
+    final String menuIndicatorDefault = controller.menuSchemeColor == null &&
+            controller.menuItemBackgroundSchemeColor == null
+        ? 'default (surface$overlayStyle)'
+        : controller.menuItemBackgroundSchemeColor == null
+            // ignore: lines_longer_than_80_chars
+            ? 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name}$overlayStyle)'
+            // ignore: lines_longer_than_80_chars
+            : 'default (${SchemeColor.values[controller.menuItemBackgroundSchemeColor!.index].name}$overlayStyle)';
+
+    final String menuOnIndicatorDefault = controller.menuSchemeColor == null &&
+            controller.menuItemBackgroundSchemeColor == null &&
+            controller.menuIndicatorBackgroundSchemeColor == null
+        ? 'default (onSurface)'
+        : controller.menuIndicatorBackgroundSchemeColor == null
+            ? controller.menuItemBackgroundSchemeColor == null
+                // ignore: lines_longer_than_80_chars
+                ? 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name})'
+                // ignore: lines_longer_than_80_chars
+                : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuItemBackgroundSchemeColor!).index].name})'
+            // ignore: lines_longer_than_80_chars
+            : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuIndicatorBackgroundSchemeColor!).index].name})';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -36,17 +77,72 @@ class MenuSettings extends StatelessWidget {
         const ListTile(
           title: Text('PopupMenuButton'),
           subtitle: Text('The PopupMenuButton can be used on any kind of '
-              'widget, below it used on its typical icons. The '
-              'PopupMenuButton menu has a different implementation '
-              'than the newer M3 menus further below.'),
+              'widget, below it used on its typical icons. The Flutter '
+              'PopupMenuButton menu implementation differs from the '
+              'Material 3 menus below.'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: PopupMenuButtonsShowcase(explainUsage: false),
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Background color of popup menu container'),
+          labelForDefault: 'default (surface)',
+          index: controller.popupMenuSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setPopupMenuSchemeColor(null);
+                  } else {
+                    controller
+                        .setPopupMenuSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('FCS tries to use correct contrast pair color as '
+              'foreground color, but PopupMenuButton only uses onSurface '
+              'color. The cause is being investigated, potentially a theming '
+              'bug in Flutter SDK. For now only background colors with '
+              'same brightness as surface color are usable.'),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
+          title: const Text('Opacity of popup menu container'),
+          subtitle: Slider(
+            max: 100,
+            divisions: 100,
+            label: (popupOpacity * 100).toStringAsFixed(0),
+            value: popupOpacity * 100,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setPopupMenuOpacity(value / 100);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Text(
+                  'OPACITY',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  '${(popupOpacity * 100).toStringAsFixed(0)} %',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border radius of popup menu container'),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -104,7 +200,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Elevation'),
+          title: const Text('Elevation of popup menu container'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -154,37 +250,41 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(height: 16),
+        //
+        // Menu
+        //
+        const ListTile(
+          title: Text('Menus'),
+          subtitle: Text('These menu theming properties are shared by '
+              'DropdownMenu, MenuAnchor and MenuBar. You can see applied menu '
+              'container styles when you open test menus further below.'),
+        ),
         ColorSchemePopupMenu(
-          title: const Text('Background color'),
+          title: const Text('Background color of menu container'),
           labelForDefault: 'default (surface)',
-          subtitle: const Text(
-            'Correct contrast pair color should be used as foreground color, '
-            'but PopupMenuButton only gets onSurface color. The cause is being '
-            'investigated.',
-          ),
-          index: controller.popupMenuSchemeColor?.index ?? -1,
+          index: controller.menuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setPopupMenuSchemeColor(null);
+                    controller.setMenuSchemeColor(null);
                   } else {
-                    controller
-                        .setPopupMenuSchemeColor(SchemeColor.values[index]);
+                    controller.setMenuSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Background opacity'),
+          title: const Text('Opacity of menu container'),
           subtitle: Slider(
             max: 100,
             divisions: 100,
-            label: (popupOpacity * 100).toStringAsFixed(0),
-            value: popupOpacity * 100,
+            label: (menuOpacity * 100).toStringAsFixed(0),
+            value: menuOpacity * 100,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
-                    controller.setPopupMenuOpacity(value / 100);
+                    controller.setMenuOpacity(value / 100);
                   }
                 : null,
           ),
@@ -198,7 +298,7 @@ class MenuSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  '${(popupOpacity * 100).toStringAsFixed(0)} %',
+                  '${(menuOpacity * 100).toStringAsFixed(0)} %',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -206,15 +306,9 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(height: 16),
-        const ListTile(
-          title: Text('Menus'),
-          subtitle: Text('These menu properties are shared by the new M3 '
-              'DropdownMenu, MenuAnchor and MenuBar.'),
-        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
+          title: const Text('Border radius of menu container'),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -222,8 +316,8 @@ class MenuSettings extends StatelessWidget {
                   'Avoid large border radius on menus.'),
               Slider(
                 min: -1,
-                max: 12,
-                divisions: 13,
+                max: 24,
+                divisions: 25,
                 label: controller.useSubThemes && controller.useFlexColorScheme
                     ? controller.menuRadius == null ||
                             (controller.menuRadius ?? -1) < 0
@@ -268,7 +362,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Elevation'),
+          title: const Text('Elevation of menu container'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -312,45 +406,372 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
+
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Padding of menu container content'),
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsetsDirectional.only(start: 16),
+                enabled:
+                    controller.useSubThemes && controller.useFlexColorScheme,
+                title: Slider(
+                  min: -1,
+                  max: 32,
+                  divisions: 33,
+                  label: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? controller.menuPaddingStart == null ||
+                              (controller.menuPaddingStart ?? -1) < 0
+                          ? 'default 0'
+                          : (controller.menuPaddingStart?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  value:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? controller.menuPaddingStart ?? -1
+                          : -1,
+                  onChanged:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? (double value) {
+                              controller.setMenuPaddingStart(
+                                  value < 0 ? null : value.roundToDouble());
+                            }
+                          : null,
+                ),
+                trailing: SizedBox(
+                  width: 58,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'START',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      Text(
+                        controller.useSubThemes && controller.useFlexColorScheme
+                            ? controller.menuPaddingStart == null ||
+                                    (controller.menuPaddingStart ?? -1) < 0
+                                ? 'default 0'
+                                : (controller.menuPaddingStart
+                                        ?.toStringAsFixed(0) ??
+                                    '')
+                            : 'default 0',
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsetsDirectional.only(end: 16),
+                enabled:
+                    controller.useSubThemes && controller.useFlexColorScheme,
+                title: Slider(
+                  min: -1,
+                  max: 32,
+                  divisions: 33,
+                  label: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? controller.menuPaddingEnd == null ||
+                              (controller.menuPaddingEnd ?? -1) < 0
+                          ? 'default 0'
+                          : (controller.menuPaddingEnd?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  value:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? controller.menuPaddingEnd ?? -1
+                          : -1,
+                  onChanged:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? (double value) {
+                              controller.setMenuPaddingEnd(
+                                  value < 0 ? null : value.roundToDouble());
+                            }
+                          : null,
+                ),
+                trailing: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  child: SizedBox(
+                    width: 58,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'END',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        Text(
+                          controller.useSubThemes &&
+                                  controller.useFlexColorScheme
+                              ? controller.menuPaddingEnd == null ||
+                                      (controller.menuPaddingEnd ?? -1) < 0
+                                  ? 'default 0'
+                                  : (controller.menuPaddingEnd
+                                          ?.toStringAsFixed(0) ??
+                                      '')
+                              : 'default 0',
+                          style: theme.textTheme.bodySmall!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsetsDirectional.only(start: 16),
+                enabled:
+                    controller.useSubThemes && controller.useFlexColorScheme,
+                title: Slider(
+                  min: -1,
+                  max: 32,
+                  divisions: 33,
+                  label: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? controller.menuPaddingTop == null ||
+                              (controller.menuPaddingTop ?? -1) < 0
+                          ? 'default 0'
+                          : (controller.menuPaddingTop?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  value:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? controller.menuPaddingTop ?? -1
+                          : -1,
+                  onChanged:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? (double value) {
+                              controller.setMenuPaddingTop(
+                                  value < 0 ? null : value.roundToDouble());
+                            }
+                          : null,
+                ),
+                trailing: SizedBox(
+                  width: 58,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'TOP',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      Text(
+                        controller.useSubThemes && controller.useFlexColorScheme
+                            ? controller.menuPaddingTop == null ||
+                                    (controller.menuPaddingTop ?? -1) < 0
+                                ? 'default 0'
+                                : (controller.menuPaddingTop
+                                        ?.toStringAsFixed(0) ??
+                                    '')
+                            : 'default 0',
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsetsDirectional.only(end: 16),
+                enabled:
+                    controller.useSubThemes && controller.useFlexColorScheme,
+                title: Slider(
+                  min: -1,
+                  max: 32,
+                  divisions: 33,
+                  label: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? controller.menuPaddingBottom == null ||
+                              (controller.menuPaddingBottom ?? -1) < 0
+                          ? 'default 0'
+                          : (controller.menuPaddingBottom?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
+                  value:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? controller.menuPaddingBottom ?? -1
+                          : -1,
+                  onChanged:
+                      controller.useSubThemes && controller.useFlexColorScheme
+                          ? (double value) {
+                              controller.setMenuPaddingBottom(
+                                  value < 0 ? null : value.roundToDouble());
+                            }
+                          : null,
+                ),
+                trailing: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  child: SizedBox(
+                    width: 58,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'BOTTOM',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                        Text(
+                          controller.useSubThemes &&
+                                  controller.useFlexColorScheme
+                              ? controller.menuPaddingBottom == null ||
+                                      (controller.menuPaddingBottom ?? -1) < 0
+                                  ? 'default 0'
+                                  : (controller.menuPaddingBottom
+                                          ?.toStringAsFixed(0) ??
+                                      '')
+                              : 'default 0',
+                          style: theme.textTheme.bodySmall!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        //
+        // Menu items
+        //
+        const Divider(),
+        const ListTile(
+          title: Text('Menu items'),
+          subtitle: Text('Styling of menu items are used by SubmenuButton and '
+              'MenuItemButton, that are used in DropdownMenu, MenuAnchor and '
+              'MenuBar. You can see applied menu item styles when you open '
+              'test menus further below.'),
+        ),
         ColorSchemePopupMenu(
-          title: const Text('Background color'),
-          labelForDefault: 'default (surface)',
-          index: controller.menuSchemeColor?.index ?? -1,
+          title: const Text('Menu item background color'),
+          labelForDefault: menuItemDefault,
+          index: controller.menuItemBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setMenuSchemeColor(null);
+                    controller.setMenuItemBackgroundSchemeColor(null);
                   } else {
-                    controller.setMenuSchemeColor(SchemeColor.values[index]);
+                    controller.setMenuItemBackgroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Menu item foreground color'),
+          labelForDefault: menuOnItemDefault,
+          index: controller.menuItemForegroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setMenuItemForegroundSchemeColor(null);
+                  } else {
+                    controller.setMenuItemForegroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Highlighted menu item background color'),
+          labelForDefault: menuIndicatorDefault,
+          index: controller.menuIndicatorBackgroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setMenuIndicatorBackgroundSchemeColor(null);
+                  } else {
+                    controller.setMenuIndicatorBackgroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Highlighted menu item foreground color'),
+          labelForDefault: menuOnIndicatorDefault,
+          index: controller.menuIndicatorForegroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setMenuIndicatorForegroundSchemeColor(null);
+                  } else {
+                    controller.setMenuIndicatorForegroundSchemeColor(
+                        SchemeColor.values[index]);
                   }
                 }
               : null,
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Background opacity'),
-          subtitle: Slider(
-            max: 100,
-            divisions: 100,
-            label: (menuOpacity * 100).toStringAsFixed(0),
-            value: menuOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setMenuOpacity(value / 100);
-                  }
-                : null,
+          title: const Text('Border radius of menu item highlight '
+              'and indicator'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text('Does not use global radius override.'),
+              Slider(
+                min: -1,
+                max: 24,
+                divisions: 25,
+                label: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.menuIndicatorRadius == null ||
+                            (controller.menuIndicatorRadius ?? -1) < 0
+                        ? 'default 0'
+                        : (controller.menuIndicatorRadius?.toStringAsFixed(0) ??
+                            '')
+                    : 'default 0',
+                value: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.menuIndicatorRadius ?? -1
+                    : -1,
+                onChanged:
+                    controller.useSubThemes && controller.useFlexColorScheme
+                        ? (double value) {
+                            controller.setMenuIndicatorRadius(
+                                value < 0 ? null : value.roundToDouble());
+                          }
+                        : null,
+              ),
+            ],
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'OPACITY',
+                  'RADIUS',
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  '${(menuOpacity * 100).toStringAsFixed(0)} %',
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.menuIndicatorRadius == null ||
+                              (controller.menuIndicatorRadius ?? -1) < 0
+                          ? 'default 0'
+                          : (controller.menuIndicatorRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default 0',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -358,8 +779,7 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
-
-        // const SizedBox(height: 16),
+        const Divider(),
         const ListTile(
           title: Text('DropdownMenu'),
           subtitle: Text('The text input area uses the themed '
@@ -370,6 +790,8 @@ class MenuSettings extends StatelessWidget {
           child: DropDownMenuShowcase(),
         ),
         const SizedBox(height: 16),
+        const Divider(),
+        // const SizedBox(height: 16),
         const ListTile(
           title: Text('MenuAnchor'),
           subtitle: Text('The MenuAnchor can be used to attach a menu to any '
@@ -382,18 +804,34 @@ class MenuSettings extends StatelessWidget {
           child: MenuAnchorShowcase(explainUsage: false),
         ),
         const SizedBox(height: 16),
+        const Divider(),
         const ListTile(
           title: Text('MenuBar'),
           subtitle: Text('The MenuBar is made up of SubMenuButtons that have '
               'MenuItemButtons. You can construct arbitrary deep nested '
               'sub-menus. Menu items can have keyboard shortcuts.'),
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Background color of MenuBar container'),
+          labelForDefault: menuBarDefault,
+          index: controller.menuBarBackgroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setMenuBarBackgroundSchemeColor(null);
+                  } else {
+                    controller.setMenuBarBackgroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         const SizedBox(height: 8),
         const MenuBarShowcase(explainUsage: false),
         const SizedBox(height: 16),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('MenuBar border radius'),
+          title: const Text('Border radius of MenuBar container'),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -448,7 +886,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('MenuBar elevation'),
+          title: const Text('Elevation of MenuBar container'),
           subtitle: Slider(
             min: -1,
             max: 30,

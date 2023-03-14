@@ -983,7 +983,7 @@ class ThemeController with ChangeNotifier {
     setMenuPaddingStart(Store.defaultMenuPaddingStart, false);
     setMenuPaddingEnd(Store.defaultMenuPaddingEnd, false);
     setMenuPaddingTop(Store.defaultMenuPaddingTop, false);
-    setMenuPaddingEnd(Store.defaultMenuPaddingEnd, false);
+    setMenuPaddingBottom(Store.defaultMenuPaddingBottom, false);
     setMenuSchemeColor(Store.defaultMenuSchemeColor, false);
     //
     setMenuBarBackgroundSchemeColor(
