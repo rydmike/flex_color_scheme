@@ -4,7 +4,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**Mar 13, 2023**
+**Mar 14, 2023**
 
 **FIX**
 
@@ -173,19 +173,16 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 - Added a new theme topic view is used when desktop width is larger than 1779 dp. 
   - It offers separate vertical theme topic selectors for the two side-by-side theme topic panel views. This results in even more usable height available on e.g. a 1080p monitor, since the large horizontal theme topic selector for the main left panel is no longer on top of the screen. It is also quicker and easier to individually select the viewed theme topic for the left and right side. The new compact mode is also available in this view mode. Using the compact view mode further enlarges available vertical space to see more theme topic panel content on mid-sized desktop monitors (1080p). The breakpoint 1779 dp was chosen to get this view on 1780 dp, being a bit less than 1800 dp, the device pixels available on a MacBook Pro 14" screen when using the "More space" option in Display settings. It also gets used on common full HD 1080p monitors that are 1920 dp wide. 
-- Improved and added keyboard focus and navigation, by using `FocusTraversalGroup`:s and by letting important UI controls get focus on tap. This was done to make keyboard usage of the Playground easier. It's semantics were also improved, by adding the scheme names in the color selector to semantics.
+- Improved and added keyboard focus and navigation, by using `FocusTraversalGroup`:s and by letting important UI controls get focus on tap. This was done to make keyboard usage of the Playground easier. Its semantics were also improved, by adding the scheme names in the color selector to semantics.
 - Added SnackBar controls for elevation and border radius to panel **BottomSheet Snack Banner**.
 - Added TabBar controls for unselected item color, own controls for light and dark mode, unselected item opacity, indicator thickness and top radius to panel **TabBar**.
 - Added controls for `defaultRadiusAdaptive` and `adaptiveRadius` to panel **Component themes**. They are used to define to make a platform adaptive override to the global border radius override value.
 - Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
 - Version 2.0.3 of package flutter_svg fixed its cache issue in version 2.0.0, 2.0.1 and 2.0.2, upgrade to version 2 was now (13.3.2023) possible and done.
+- Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values panel **Menus** and codegen for same props.
 
 **TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
 
-- In progress: Add support for MenButton, advanced selected item styling in menus.
-  - Done for sub-themes.
-  - Done for FlexSubThemesData  
-  - TODO: Add the 7 new properties (menuBarBackgroundSchemeColor, menuItemBackgroundSchemeColor, menuItemForegroundSchemeColor, menuIndicatorBackgroundSchemeColor, menuIndicatorForegroundSchemeColor, menuIndicatorRadius, menuPadding) to Playground and codegen.
 - Review TimePicker once more, number entry, unselected seemed wrong, may it can be fixed, maybe not, theme does not have M3 support yet in stable.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7

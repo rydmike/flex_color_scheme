@@ -255,9 +255,9 @@ class MenuSettings extends StatelessWidget {
         // Menu
         //
         const ListTile(
-          title: Text('Menus'),
-          subtitle: Text('These menu theming properties are shared by '
-              'DropdownMenu, MenuAnchor and MenuBar. You can see applied menu '
+          title: Text('Menu containers'),
+          subtitle: Text('Menu container theming properties are shared by '
+              'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
               'container styles when you open test menus further below.'),
         ),
         ColorSchemePopupMenu(
