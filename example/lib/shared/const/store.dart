@@ -922,10 +922,37 @@ class Store {
   // Default value for the menuOpacity, also reset settings.
   static const double? defaultMenuOpacity = null;
 
+  // Key used to read and save the menuPaddingStart value.
+  static const String keyMenuPaddingStart = 'menuPaddingStart';
+  // Default value for the menuPaddingStart, also reset settings.
+  static const double? defaultMenuPaddingStart = null;
+
+  // Key used to read and save the menuPaddingEnd value.
+  static const String keyMenuPaddingEnd = 'menuPaddingEnd';
+  // Default value for the menuPaddingEnd, also reset settings.
+  static const double? defaultMenuPaddingEnd = null;
+
+  // Key used to read and save the menuPaddingTop value.
+  static const String keyMenuPaddingTop = 'menuPaddingTop';
+  // Default value for the menuPaddingTop, also reset settings.
+  static const double? defaultMenuPaddingTop = null;
+
+  // Key used to read and save the menuPaddingBottom value.
+  static const String keyMenuPaddingBottom = 'menuPaddingBottom';
+  // Default value for the menuPaddingBottom, also reset settings.
+  static const double? defaultMenuPaddingBottom = null;
+
   // Key used to read and save the menuSchemeColor value.
   static const String keyMenuSchemeColor = 'menuSchemeColor';
   // Default value for the menuSchemeColor, also used to reset settings.
   static const SchemeColor? defaultMenuSchemeColor = null;
+
+  // Key used to read and save the menuBarBackgroundSchemeColor value.
+  static const String keyMenuBarBackgroundSchemeColor =
+      'menuBarBackgroundSchemeColor';
+  // Default value for the menuBarBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuBarBackgroundSchemeColor = null;
 
   // Key used to read and save the menuBarRadius value.
   static const String keyMenuBarRadius = 'menuBarRadius';
@@ -942,6 +969,39 @@ class Store {
   // Default value for the menuBarShadowColor color, also to reset settings.
   // We use NULL as default, on nullable settings.
   static const Color? defaultMenuBarShadowColor = null;
+
+  // Key used to read and save the menuItemBackgroundSchemeColor value.
+  static const String keyMenuItemBackgroundSchemeColor =
+      'menuItemBackgroundSchemeColor';
+  // Default value for the menuItemBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuItemBackgroundSchemeColor = null;
+
+  // Key used to read and save the menuItemForegroundSchemeColor value.
+  static const String keyMenuItemForegroundSchemeColor =
+      'menuItemForegroundSchemeColor';
+  // Default value for the menuItemForegroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuItemForegroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorBackgroundSchemeColor value.
+  static const String keyMenuIndicatorBackgroundSchemeColor =
+      'menuIndicatorBackgroundSchemeColor';
+  // Default value for the menuIndicatorBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuIndicatorBackgroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorForegroundSchemeColor value.
+  static const String keyMenuIndicatorForegroundSchemeColor =
+      'menuIndicatorForegroundSchemeColor';
+  // Default value for the menuIndicatorForegroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuIndicatorForegroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorRadius value.
+  static const String keyMenuIndicatorRadius = 'menuIndicatorRadius';
+  // Default value for the menuIndicatorRadius, also reset settings.
+  static const double? defaultMenuIndicatorRadius = null;
 
   // NavigationBar SETTINGS.
   // ===========================================================================

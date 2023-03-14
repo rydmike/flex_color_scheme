@@ -373,10 +373,28 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             menuElevation: controller.menuElevation,
             menuSchemeColor: controller.menuSchemeColor,
             menuOpacity: controller.menuOpacity,
+            menuPadding: EdgeInsetsDirectional.fromSTEB(
+              controller.menuPaddingStart ?? 0,
+              controller.menuPaddingTop ?? 0,
+              controller.menuPaddingEnd ?? 0,
+              controller.menuPaddingBottom ?? 0,
+            ),
             //
+            menuBarBackgroundSchemeColor:
+                controller.menuBarBackgroundSchemeColor,
             menuBarRadius: controller.menuBarRadius,
             menuBarElevation: controller.menuBarElevation,
             menuBarShadowColor: controller.menuBarShadowColor,
+            //
+            menuItemBackgroundSchemeColor:
+                controller.menuItemBackgroundSchemeColor,
+            menuItemForegroundSchemeColor:
+                controller.menuItemForegroundSchemeColor,
+            menuIndicatorBackgroundSchemeColor:
+                controller.menuIndicatorBackgroundSchemeColor,
+            menuIndicatorForegroundSchemeColor:
+                controller.menuIndicatorForegroundSchemeColor,
+            menuIndicatorRadius: controller.menuIndicatorRadius,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedLabelSchemeColor,

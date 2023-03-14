@@ -435,14 +435,41 @@ class ThemeController with ChangeNotifier {
         Store.keyMenuElevation, Store.defaultMenuElevation);
     _menuOpacity = await _themeService.load(
         Store.keyMenuOpacity, Store.defaultMenuOpacity);
+    _menuPaddingStart = await _themeService.load(
+        Store.keyMenuPaddingStart, Store.defaultMenuPaddingStart);
+    _menuPaddingEnd = await _themeService.load(
+        Store.keyMenuPaddingEnd, Store.defaultMenuPaddingEnd);
+    _menuPaddingTop = await _themeService.load(
+        Store.keyMenuPaddingTop, Store.defaultMenuPaddingTop);
+    _menuPaddingBottom = await _themeService.load(
+        Store.keyMenuPaddingBottom, Store.defaultMenuPaddingBottom);
     _menuSchemeColor = await _themeService.load(
         Store.keyMenuSchemeColor, Store.defaultMenuSchemeColor);
+    //
+    _menuBarBackgroundSchemeColor = await _themeService.load(
+        Store.keyMenuBarBackgroundSchemeColor,
+        Store.defaultMenuBarBackgroundSchemeColor);
     _menuBarRadius = await _themeService.load(
         Store.keyMenuBarRadius, Store.defaultMenuBarRadius);
     _menuBarElevation = await _themeService.load(
         Store.keyMenuBarElevation, Store.defaultMenuBarElevation);
     _menuBarShadowColor = await _themeService.load(
         Store.keyMenuBarShadowColor, Store.defaultMenuBarShadowColor);
+    //
+    _menuItemBackgroundSchemeColor = await _themeService.load(
+        Store.keyMenuItemBackgroundSchemeColor,
+        Store.defaultMenuItemBackgroundSchemeColor);
+    _menuItemForegroundSchemeColor = await _themeService.load(
+        Store.keyMenuItemForegroundSchemeColor,
+        Store.defaultMenuItemForegroundSchemeColor);
+    _menuIndicatorBackgroundSchemeColor = await _themeService.load(
+        Store.keyMenuIndicatorBackgroundSchemeColor,
+        Store.defaultMenuIndicatorBackgroundSchemeColor);
+    _menuIndicatorForegroundSchemeColor = await _themeService.load(
+        Store.keyMenuIndicatorForegroundSchemeColor,
+        Store.defaultMenuIndicatorForegroundSchemeColor);
+    _menuIndicatorRadius = await _themeService.load(
+        Store.keyMenuIndicatorRadius, Store.defaultMenuIndicatorRadius);
     //
     // NavigationBar SETTINGS.
     _navBarBackgroundSchemeColor = await _themeService.load(
@@ -953,11 +980,27 @@ class ThemeController with ChangeNotifier {
     setMenuRadius(Store.defaultMenuRadius, false);
     setMenuElevation(Store.defaultMenuElevation, false);
     setMenuOpacity(Store.defaultMenuOpacity, false);
+    setMenuPaddingStart(Store.defaultMenuPaddingStart, false);
+    setMenuPaddingEnd(Store.defaultMenuPaddingEnd, false);
+    setMenuPaddingTop(Store.defaultMenuPaddingTop, false);
+    setMenuPaddingEnd(Store.defaultMenuPaddingEnd, false);
     setMenuSchemeColor(Store.defaultMenuSchemeColor, false);
     //
+    setMenuBarBackgroundSchemeColor(
+        Store.defaultMenuBarBackgroundSchemeColor, false);
     setMenuBarRadius(Store.defaultMenuBarRadius, false);
     setMenuBarElevation(Store.defaultMenuBarElevation, false);
     setMenuBarShadowColor(Store.defaultMenuBarShadowColor, false);
+    //
+    setMenuItemBackgroundSchemeColor(
+        Store.defaultMenuItemBackgroundSchemeColor, false);
+    setMenuItemForegroundSchemeColor(
+        Store.defaultMenuItemForegroundSchemeColor, false);
+    setMenuIndicatorBackgroundSchemeColor(
+        Store.defaultMenuIndicatorBackgroundSchemeColor, false);
+    setMenuIndicatorForegroundSchemeColor(
+        Store.defaultMenuIndicatorForegroundSchemeColor, false);
+    setMenuIndicatorRadius(Store.defaultMenuIndicatorRadius, false);
     //
     // NavigationBar SETTINGS.
     setNavBarBackgroundSchemeColor(
@@ -3482,6 +3525,42 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyMenuOpacity, value));
   }
 
+  late double? _menuPaddingStart;
+  double? get menuPaddingStart => _menuPaddingStart;
+  void setMenuPaddingStart(double? value, [bool notify = true]) {
+    if (value == _menuPaddingStart) return;
+    _menuPaddingStart = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuPaddingStart, value));
+  }
+
+  late double? _menuPaddingEnd;
+  double? get menuPaddingEnd => _menuPaddingEnd;
+  void setMenuPaddingEnd(double? value, [bool notify = true]) {
+    if (value == _menuPaddingEnd) return;
+    _menuPaddingEnd = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuPaddingEnd, value));
+  }
+
+  late double? _menuPaddingTop;
+  double? get menuPaddingTop => _menuPaddingTop;
+  void setMenuPaddingTop(double? value, [bool notify = true]) {
+    if (value == _menuPaddingTop) return;
+    _menuPaddingTop = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuPaddingTop, value));
+  }
+
+  late double? _menuPaddingBottom;
+  double? get menuPaddingBottom => _menuPaddingBottom;
+  void setMenuPaddingBottom(double? value, [bool notify = true]) {
+    if (value == _menuPaddingBottom) return;
+    _menuPaddingBottom = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuPaddingBottom, value));
+  }
+
   late SchemeColor? _menuSchemeColor;
   SchemeColor? get menuSchemeColor => _menuSchemeColor;
   void setMenuSchemeColor(SchemeColor? value, [bool notify = true]) {
@@ -3489,6 +3568,17 @@ class ThemeController with ChangeNotifier {
     _menuSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyMenuSchemeColor, value));
+  }
+
+  late SchemeColor? _menuBarBackgroundSchemeColor;
+  SchemeColor? get menuBarBackgroundSchemeColor =>
+      _menuBarBackgroundSchemeColor;
+  void setMenuBarBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _menuBarBackgroundSchemeColor) return;
+    _menuBarBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuBarBackgroundSchemeColor, value));
   }
 
   late double? _menuBarRadius;
@@ -3516,6 +3606,63 @@ class ThemeController with ChangeNotifier {
     _menuBarShadowColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyMenuBarShadowColor, value));
+  }
+
+  late SchemeColor? _menuItemBackgroundSchemeColor;
+  SchemeColor? get menuItemBackgroundSchemeColor =>
+      _menuItemBackgroundSchemeColor;
+  void setMenuItemBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _menuItemBackgroundSchemeColor) return;
+    _menuItemBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyMenuItemBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _menuItemForegroundSchemeColor;
+  SchemeColor? get menuItemForegroundSchemeColor =>
+      _menuItemForegroundSchemeColor;
+  void setMenuItemForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _menuItemForegroundSchemeColor) return;
+    _menuItemForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyMenuItemForegroundSchemeColor, value));
+  }
+
+  late SchemeColor? _menuIndicatorBackgroundSchemeColor;
+  SchemeColor? get menuIndicatorBackgroundSchemeColor =>
+      _menuIndicatorBackgroundSchemeColor;
+  void setMenuIndicatorBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _menuIndicatorBackgroundSchemeColor) return;
+    _menuIndicatorBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyMenuIndicatorBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _menuIndicatorForegroundSchemeColor;
+  SchemeColor? get menuIndicatorForegroundSchemeColor =>
+      _menuIndicatorForegroundSchemeColor;
+  void setMenuIndicatorForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _menuIndicatorForegroundSchemeColor) return;
+    _menuIndicatorForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyMenuIndicatorForegroundSchemeColor, value));
+  }
+
+  late double? _menuIndicatorRadius;
+  double? get menuIndicatorRadius => _menuIndicatorRadius;
+  void setMenuIndicatorRadius(double? value, [bool notify = true]) {
+    if (value == _menuIndicatorRadius) return;
+    _menuIndicatorRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyMenuIndicatorRadius, value));
   }
 
   // NavigationBar SETTINGS.

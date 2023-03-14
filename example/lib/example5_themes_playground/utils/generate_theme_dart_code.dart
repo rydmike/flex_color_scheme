@@ -915,6 +915,22 @@ String generateThemeDartCode(ThemeController controller) {
       controller.menuOpacity != null && controller.menuOpacity != 1
           ? '    menuOpacity: ${controller.menuOpacity!.toStringAsFixed(2)},\n'
           : '';
+  final String menuPadding = controller.menuPaddingStart != null ||
+          controller.menuPaddingEnd != null ||
+          controller.menuPaddingTop != null ||
+          controller.menuPaddingBottom != null
+      ? '    menuPadding: EdgeInsetsDirectional.fromSTEB('
+          '${controller.menuPaddingStart ?? 0}, '
+          '${controller.menuPaddingTop ?? 0}, '
+          '${controller.menuPaddingEnd ?? 0}, '
+          '${controller.menuPaddingBottom ?? 0}),\n'
+      : '';
+  //
+  final String menuBarBackgroundSchemeColor = controller
+              .menuBarBackgroundSchemeColor !=
+          null
+      ? '    menuBarBackgroundSchemeColor: ${controller.menuBarBackgroundSchemeColor},\n'
+      : '';
   final String menuBarRadius = controller.menuBarRadius != null
       ? '    menuBarRadius: ${controller.menuBarRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -923,6 +939,30 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String menuBarShadowColor = controller.menuBarShadowColor != null
       ? '    menuBarShadowColor: ${controller.menuBarShadowColor},\n'
+      : '';
+  //
+  final String menuItemBackgroundSchemeColor = controller
+              .menuItemBackgroundSchemeColor !=
+          null
+      ? '    menuItemBackgroundSchemeColor: ${controller.menuItemBackgroundSchemeColor},\n'
+      : '';
+  final String menuItemForegroundSchemeColor = controller
+              .menuItemForegroundSchemeColor !=
+          null
+      ? '    menuItemForegroundSchemeColor: ${controller.menuItemForegroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorBackgroundSchemeColor = controller
+              .menuIndicatorBackgroundSchemeColor !=
+          null
+      ? '    menuIndicatorBackgroundSchemeColor: ${controller.menuIndicatorBackgroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorForegroundSchemeColor = controller
+              .menuIndicatorForegroundSchemeColor !=
+          null
+      ? '    menuIndicatorForegroundSchemeColor: ${controller.menuIndicatorForegroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorRadius = controller.menuIndicatorRadius != null
+      ? '    menuIndicatorRadius: ${controller.menuIndicatorRadius!.toStringAsFixed(1)},\n'
       : '';
   //
   // NavigationBar setup CODE
@@ -1232,9 +1272,18 @@ String generateThemeDartCode(ThemeController controller) {
           '$menuElevation'
           '$menuSchemeColor'
           '$menuOpacity'
+          '$menuPadding'
+          //
+          '$menuBarBackgroundSchemeColor'
           '$menuBarRadius'
           '$menuBarElevation'
           '$menuBarShadowColor'
+          //
+          '$menuItemBackgroundSchemeColor'
+          '$menuItemForegroundSchemeColor'
+          '$menuIndicatorBackgroundSchemeColor'
+          '$menuIndicatorForegroundSchemeColor'
+          '$menuIndicatorRadius'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
@@ -1427,9 +1476,18 @@ String generateThemeDartCode(ThemeController controller) {
           '$menuElevation'
           '$menuSchemeColor'
           '$menuOpacity'
+          '$menuPadding'
+          //
+          '$menuBarBackgroundSchemeColor'
           '$menuBarRadius'
           '$menuBarElevation'
           '$menuBarShadowColor'
+          //
+          '$menuItemBackgroundSchemeColor'
+          '$menuItemForegroundSchemeColor'
+          '$menuIndicatorBackgroundSchemeColor'
+          '$menuIndicatorForegroundSchemeColor'
+          '$menuIndicatorRadius'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
