@@ -7,16 +7,18 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 **TODO BEFORE BETA 7.0.0-dev.3 RELEASE**
 
 - Review TimePicker once more, number entry, unselected is wrong in M3. Maybe it can be fixed in FCS, or maybe not. TimePicker theme does not have M3 support in stable 3.7.
-- Playground: Add showDialog, showTimePicker, showDatePickers, to show them as actual dialogs and not just fixed ones the background. User can then see and test the operation of them as well.
+- Add a feature to opt-in on using app level `InputDecorator` theme as input decorator style in `TimerPicker`. It currently does this by default. This will make it an opt-in feature.  
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
-- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like web release mode compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
+- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
 - Since web release mode build-issue is preventing me from moving forward with a new release, maybe consider some more changes:
   - Consider some breaking changes, to make sub-themes less opinionated and not opt-in on some features (tinted interactions, tinted disable, etc.) by default and also make all booleans in FlexSubThemesData nullable and null by default while doing that.
-  - 
+  
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
 
-- Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
+- Report all found Flutter SDK theming issues. 
+  - Insert issue info in Themes Playground app where relevant.
+  - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
 - Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
   - Down from 100% to 92% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 72% tested now.
@@ -212,6 +214,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
 - Version 2.0.3 of package flutter_svg fixed its cache issue in version 2.0.0, 2.0.1 and 2.0.2, upgrade to version 2 was now (13.3.2023) possible and done.
 - Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values panel **Menus** and codegen for same props.
+- Added buttons to show actual `AlertDialog`, `TimePicker` and `DatePicker` dialogs to panel **Dialogs** and **Widget showcase**.
 
 
 ## 7.0.0-dev.2

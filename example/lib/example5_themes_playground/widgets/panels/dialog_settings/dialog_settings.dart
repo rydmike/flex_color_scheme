@@ -161,6 +161,8 @@ class DialogSettings extends StatelessWidget {
         ),
         const Divider(),
         const AlertDialogShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Time picker time input elements border radius'),
@@ -220,7 +222,24 @@ class DialogSettings extends StatelessWidget {
           ),
         ),
         const TimePickerDialogShowcase(),
+        const ListTile(
+          dense: true,
+          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
+              'Material 3 styling of the TimePicker. FlexColorScheme adds '
+              'some M3 styling based on M3 specification, when it is '
+              'supported by its current theme.'),
+        ),
+        const SizedBox(height: 8),
+        const Divider(),
         const DatePickerDialogShowcase(),
+        const ListTile(
+          dense: true,
+          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
+              'Material 3 styling of the DatePicker, there is not even a '
+              'theme for DatePicker in Flutter 3.7. It has a theme in master '
+              'channel, so it will come to a later Flutter stable version.'),
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }

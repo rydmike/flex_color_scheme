@@ -108,6 +108,9 @@ class ShowcaseMaterial extends StatelessWidget {
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
+        const SizedBox(height: 8),
+        const Divider(),
+        const SizedBox(height: 16),
         const BottomSheetShowcase(),
         const SizedBox(height: 16),
         const BottomSheetModalShowcase(),
@@ -3458,42 +3461,35 @@ class ExpansionPanelShowcaseItems {
   }
 }
 
-class TimePickerDialogShowcase extends StatelessWidget {
-  const TimePickerDialogShowcase({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // The TimePickerDialog pops the context with its buttons, clicking them
-    // pops the page when not used in a showDialog. We just need to see it, no
-    // need to use it to visually see what it looks like, so absorbing pointers.
-    return AbsorbPointer(
-      child: TimePickerDialog(
-        initialTime: TimeOfDay.now(),
-      ),
-    );
-  }
-}
-
-class DatePickerDialogShowcase extends StatelessWidget {
-  const DatePickerDialogShowcase({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // The DatePickerDialog pops the context with its buttons, clicking them
-    // pops the page when not used in a showDialog. We just need to see it, no
-    // need to use it to visually see what it looks like, so absorbing pointers.
-    return AbsorbPointer(
-      child: DatePickerDialog(
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1930),
-        lastDate: DateTime(2050),
-      ),
-    );
-  }
-}
-
 class AlertDialogShowcase extends StatelessWidget {
   const AlertDialogShowcase({super.key});
+
+  Future<void> _openDialog(BuildContext context) async {
+    await showDialog<void>(
+        context: context,
+        useRootNavigator: false,
+        builder: (BuildContext context) => const _AlertDialogExample());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        const AbsorbPointer(child: _AlertDialogExample()),
+        TextButton(
+          child: const Text(
+            'Show AlertDialog',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onPressed: () async => _openDialog(context),
+        ),
+      ],
+    );
+  }
+}
+
+class _AlertDialogExample extends StatelessWidget {
+  const _AlertDialogExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -3501,16 +3497,88 @@ class AlertDialogShowcase extends StatelessWidget {
     final String cancel = useMaterial3 ? 'Cancel' : 'CANCEL';
     final String allow = useMaterial3 ? 'Allow' : 'ALLOW';
 
-    return RepaintBoundary(
-      child: AlertDialog(
-        title: const Text('Allow location services'),
-        content: const Text('Let us help determine location. This means '
-            'sending anonymous location data to us'),
-        actions: <Widget>[
-          TextButton(onPressed: () {}, child: Text(cancel)),
-          TextButton(onPressed: () {}, child: Text(allow)),
-        ],
+    return AlertDialog(
+      title: const Text('Allow location services'),
+      content: const Text('Let us help determine location. This means '
+          'sending anonymous location data to us'),
+      actions: <Widget>[
+        TextButton(
+            onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
+        TextButton(
+            onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
+      ],
+    );
+  }
+}
+
+class TimePickerDialogShowcase extends StatelessWidget {
+  const TimePickerDialogShowcase({super.key});
+
+  Future<void> _openDialog(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) => TimePickerDialog(
+        initialTime: TimeOfDay.now(),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        AbsorbPointer(
+          child: TimePickerDialog(
+            initialTime: TimeOfDay.now(),
+          ),
+        ),
+        TextButton(
+          child: const Text(
+            'Show TimePickerDialog',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onPressed: () async => _openDialog(context),
+        ),
+      ],
+    );
+  }
+}
+
+class DatePickerDialogShowcase extends StatelessWidget {
+  const DatePickerDialogShowcase({super.key});
+
+  Future<void> _openDialog(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) => DatePickerDialog(
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1930),
+        lastDate: DateTime(2050),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        AbsorbPointer(
+          child: DatePickerDialog(
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1930),
+            lastDate: DateTime(2050),
+          ),
+        ),
+        TextButton(
+          child: const Text(
+            'Show DatePickerDialog',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onPressed: () async => _openDialog(context),
+        ),
+      ],
     );
   }
 }
