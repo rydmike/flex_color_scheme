@@ -789,6 +789,25 @@ class MenuSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: DropDownMenuShowcase(),
         ),
+        const SizedBox(height: 8),
+        // TODO(rydmike): Add refs to reported menu issues when reported.
+        const ListTile(
+          dense: true,
+          subtitle: Text('The selected style of and item found in the '
+              'DropdownMenu and selected as found item, cannot be themed. '
+              'If it would use the selected state in the ButtonStyleButton '
+              'items it would be possible to style it correctly. This feature '
+              'gap is an oversight in Flutter SDK.'),
+        ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('The foreground color of text of overlay highlighted '
+              'menu items animate its color change if its color if different '
+              'from none highlighted state. This is incorrect behavior by '
+              'Flutter SDK. It does not happen on e.g. icons with same color '
+              'change. This issue applies to all menu types. To see it, use '
+              'defaults and set highlighted menu item background to primary.'),
+        ),
         const SizedBox(height: 16),
         const Divider(),
         // const SizedBox(height: 16),
