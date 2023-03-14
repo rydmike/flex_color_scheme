@@ -36,8 +36,9 @@ class DialogSettings extends StatelessWidget {
               'that they have the same background by default and that '
               'elevation overlay color works in dark mode when it is another '
               'color than background.\n\n'
-              'You can theme them to a shared color scheme based color too, '
-              'with M3 colors, surface variant is an interesting option.'),
+              'You can theme them to a shared color scheme based color too. '
+              'With seeded M3 colors, surfaceVariant, primaryContainer and '
+              'inversePrimary are some possible options.'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),

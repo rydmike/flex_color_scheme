@@ -6324,10 +6324,8 @@ class FlexSubThemes {
         ),
       ),
       //
-      // M3 styling Flutter 3.7 does not do yet, but we can du in M3 mode.
+      // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
       dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
-      // TODO(rydmike): Check TimePicker on master again.
-      // Does not seem to work in 3.7
       dayPeriodColor: useM3
           ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
@@ -6339,6 +6337,36 @@ class FlexSubThemes {
       dayPeriodTextColor: useM3
           ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
               return dayPeriodForegroundColor().resolve(states);
+            })
+          : null,
+      // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
+      hourMinuteColor: useM3
+          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                Color overlayColor = colorScheme.primaryContainer;
+                if (states.contains(MaterialState.pressed)) {
+                  overlayColor = colorScheme.onPrimaryContainer;
+                } else if (states.contains(MaterialState.focused)) {
+                  overlayColor =
+                      colorScheme.onPrimaryContainer.withAlpha(kAlphaFocused);
+                } else if (states.contains(MaterialState.hovered)) {
+                  overlayColor =
+                      colorScheme.onPrimaryContainer.withAlpha(kAlphaHovered);
+                }
+                return Color.alphaBlend(
+                    overlayColor, colorScheme.primaryContainer);
+              } else {
+                Color overlayColor = colorScheme.surfaceVariant;
+                if (states.contains(MaterialState.pressed)) {
+                  overlayColor = colorScheme.onSurface;
+                } else if (states.contains(MaterialState.focused)) {
+                  overlayColor = colorScheme.onSurface.withAlpha(kAlphaFocused);
+                } else if (states.contains(MaterialState.hovered)) {
+                  overlayColor = colorScheme.onSurface.withAlpha(kAlphaHovered);
+                }
+                return Color.alphaBlend(
+                    overlayColor, colorScheme.surfaceVariant);
+              }
             })
           : null,
       //

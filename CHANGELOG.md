@@ -6,7 +6,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 **TODO BEFORE BETA 7.0.0-dev.3 RELEASE**
 
-- Review TimePicker once more, number entry, unselected is wrong in M3. Maybe it can be fixed in FCS, or maybe not. TimePicker theme does not have M3 support in stable 3.7.
 - Add a feature to opt-in on using app level `InputDecorator` theme as input decorator style in `TimerPicker`. It currently does this by default. This will make it an opt-in feature.  
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
 - A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
@@ -155,6 +154,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 
 - **Style breaking**: The `ToggleButtons` theme has a slightly changed style in both M2 and M3 mode. It now also correctly reacts to `FlexSubThemesData.interactionEffects` and `FlexSubThemesData.tintedDisabledControls`. The slight change of past theme was needed to support this. 
+
+
+- **Minor style breaking**: The FlexColorScheme `TimePicker` dialog style in M3 mode was changed. It is now styled closer to the Material 3 specification. It is also much closer to correct M3 style than Flutter is in version 3.7. When Flutter fully supports `TimePicker` M3 theming in the stable channel, FCS will use its native styling as default too.
 
 
 - **API breaking**: In `FlexSubThemes` the `floatingActionButtonTheme` and `timePickerTheme` now require the `colorScheme`, previously it was optional in both. Unless you have used `FlexSubThemes.floatingActionButtonTheme` or `FlexSubThemes.timePickerTheme` directly as helpers to make custom component themes with them, and not as typically used via `FlexSubThemesData`, you will not notice this breaking API change. 
