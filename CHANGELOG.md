@@ -9,7 +9,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Review TimePicker once more, number entry, unselected is wrong in M3. Maybe it can be fixed in FCS, or maybe not. TimePicker theme does not have M3 support in stable 3.7.
 - Playground: Add showDialog, showTimePicker, showDatePickers, to show them as actual dialogs and not just fixed ones the background. User can then see and test the operation of them as well.
 - Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
-- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. Don't know how, what and when yet. The issue seems like web release mode compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
+- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like web release mode compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
+- Since web release mode build-issue is preventing me from moving forward with a new release, maybe consider some more changes:
+  - Consider some breaking changes, to make sub-themes less opinionated and not opt-in on some features (tinted interactions, tinted disable, etc.) by default and also make all booleans in FlexSubThemesData nullable and null by default while doing that.
+  - 
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
 
