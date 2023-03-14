@@ -4,6 +4,35 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
+**TODO BEFORE BETA 7.0.0-dev.3 RELEASE**
+
+- Review TimePicker once more, number entry, unselected is wrong in M3. Maybe it can be fixed in FCS, or maybe not. TimePicker theme does not have M3 support in stable 3.7.
+- Playground: Add showDialog, showTimePicker, showDatePickers, to show them as actual dialogs and not just fixed ones the background. User can then see and test the operation of them as well.
+- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
+- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. Don't know how, what and when yet. The issue seems like web release mode compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
+
+**TODO BEFORE FCS STABLE 7.0.0 RELEASE**
+
+- Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
+- Review and do actionable TODOs in the code.
+- TESTS: Fix test coverage
+  - Down from 100% to 92% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 72% tested now.
+  - Add tests for all new sub-themes and used material states.
+  - Tests for usedColors 7.
+- DOCS: Add important changes to docs.flexcolorscheme.com:
+  - Change summary update.
+  - Update known Flutter M3 and theming impacting issues.
+
+**TODO AFTER FCS STABLE 7.0 RELEASE**
+
+- More updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
+  - Tweet series about what is new.
+  - New color scheme images.
+  - Info section, about what is still missing in Flutter 3.7 from M3.
+  - Review and update old screenshots and GIFs.
+  - Use image zoom feature in docs.page on new and old images.
+  - Use new highlight banners feature, in the docs.page tool when appropriate.
+
 **Mar 14, 2023**
 
 **FIX**
@@ -72,16 +101,16 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
   
 
 - **Style breaking**: All component themes have null properties in M3 mode.   
-  When enabling Material 3 and not enabling FCS sub-themes, and if no direct properties in FlexColorScheme raw constructor, or its light and dark factories are set in a way that requires creating a sub-theme to deliver the result, FlexColorScheme no longer creates any component sub-themes with none-null properties in Material 3 mode. In previous versions, it did so in a few cases. This is no longer required to deliver a nice starting point M3 theme, thanks to M3 now being almost fully supported in Flutter 3.7. When using FlexColorScheme with Material3 set to true and its other properties at default values, and not enabling sub-themes, all component sub-themes will have null by default properties in FCS just like in plain `ThemeData`. When using Material 2, FlexColorScheme as before even when not enabling sub-themes, still creates core component themes listed under core default in the documentation. This is done for FCS legacy reasons, and to be able to deliver the default slightly opinionated M2 style it had before component sub-themes were a part of its offering.  
-  **Impact**: The impact of this style breaking change is only visible on the Material 2 type `BottomNavigationBar` in dark mode. When using the M3 mode, its dark mode icons have changed to the Flutter default style. When you opt in on FCS sub-themes in the M3 mode, it gets the same icon color as before, like it still gets in the M2 FCS style, with or without sub-themes enabled. Since the `BottomNavigationBar` is a Material2 component, this should be less relevant in the M3 mode. With component themes on, it looks as before.  
+  When enabling Material 3 and not enabling FCS sub-themes, and if no direct properties in FlexColorScheme raw constructor, or its light and dark factories are set in a way that requires creating a sub-theme to deliver the result, FlexColorScheme no longer creates any component sub-themes with none-null properties in Material 3 mode. In previous versions, it did so in a few cases. This is no longer required to deliver a nice starting point M3 theme, thanks to M3 now being almost fully supported in Flutter 3.7. When using FlexColorScheme with `useMaterial3` set to true and its other properties at default values, and not enabling sub-themes, all component sub-themes will have null by default properties in FCS, just like in plain `ThemeData`. When using Material 2, FlexColorScheme as before even when not enabling sub-themes, still creates core component themes listed under core default in the documentation. This is done for FCS legacy reasons, and to be able to deliver the default slightly opinionated M2 style it had before component sub-themes were a part of its offering.  
+  **Impact**: The impact of this style breaking change is only visible on the Material 2 type `BottomNavigationBar` in dark mode. When using the M3 mode, its dark mode icons have changed to the Flutter default style. When you opt in on FCS sub-themes in the M3 mode, it gets the same icon color as before, like it still gets in the M2 FCS style, with or without sub-themes enabled. Since the `BottomNavigationBar` is a Material 2 component, this should be less relevant in the M3 mode. With component themes on, it looks as before.  
   **Note**: Later when `theme.scaffoldBackgroundColor` and maybe also some other colors in current `ThemeData` are deprecated, FlexColorscheme will need to set those colors in their own sub-theme, also in M3 mode to be able to continue to deliver e.g. surface blends that impacts the scaffold background color separately from ColorScheme colors. Currently, it does this via `theme.scaffoldBackgroundColor` without using a component theme. 
 
 
 - **Style breaking**: The `SnackBar` action button defaults to `inversePrimary`.   
-  The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaultd to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD to make the action button text color. Flutter's M2 defaults are very poor designs, not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 default set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.
+  The `SnackBar` theming got property `snackBarActionSchemeColor` in `FlexSubThemes`. It defaults to M3 default `inversePrimary`. Earlier FCS used its foreground color with alpha 0xDD for the action button text color. Flutter's M2 defaults are poor designs and not very usable, but new Flutter M3 defaults are fine. As before, FCS uses a custom default style to fix M2 when using sub-themes. The M3 mode default is also opinionated, to make it match M3 defaults, set `FlexSubThemes.snackBarBackgroundSchemeColor` to `SchemeColor.inverseSurface`. By default, it uses the same style as its opinionated M2 style, which is `onSurface` alpha blended with primary and opacity, both alpha blend and opacity are different in light and dark theme mode. This was kept as the default also in M3 mode, so it can be used as option there as well. If you want the pure M3 style select `inverseSurface` instead. This part of the style is same as before so not style breaking, only `SnackBar` action button got a new default text color, that can be themed to any `ColorScheme` based color.
   
 
-- **Style breaking**: Tinted TextTheme was made less obviously tinted. M3-seeded ColorSchemes brings color tint to themes, if then also using tinted text, in the optional tinted TextTheme, is becomes too much. It is now more subtle and more usable also with seeded ColorSchemes. The changes are:
+- **Style breaking**: Tinted TextTheme was made less obviously tinted. M3-seeded ColorSchemes brings color tint to themes, if then also using tinted text, via the optional tinted TextTheme, is becomes too much. It is now more subtle and more usable also with seeded ColorSchemes. The changes are:
   - TextTheme light mode:
     - Hi opacity style:  Blend 30% -> 20%, Opacity 75% -> 85%
     - Medium opacity style: Blend 26% -> 20%, Opacity 95% -> 96%
@@ -106,7 +135,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - **Style breaking**: The border radius on `ToolTip`, `PopupMenuButton`, `DropDownMenu` and `Menu` no longer follow the global override for `defaultRadius`. These items should generally not be themed together with a large general radius override. They can still be modified individually.
 
 
-- **Default value breaking**: The `unselectedIsColored` parameters in `FlexSubThemes` functions `switchTheme`, `checkboxTheme` and `radioTheme` was changed to be nullable and to default to `false` if not defined. Previously, they were not nullable and defaulted to `true`. If you have not used these `FlexSubThemes` functions directly, typically they are not used directly, then this change has no impact on resulting themes, since `FlexSubThemedata.unselectedToggleIsColored` defaulted to `false` earlier as well, and set these sub-theme theme values to false by default, or true when so defined.
+- **Default value breaking**: The `unselectedIsColored` parameters in `FlexSubThemes` functions `switchTheme`, `checkboxTheme` and `radioTheme` was changed to be nullable and to default to `false` if not defined. Previously, they were not nullable and defaulted to `true`. If you have not used these `FlexSubThemes` functions directly, typically they are not used directly, then this change has no impact on resulting themes, since `FlexSubThemedata.unselectedToggleIsColored` defaulted to `false` earlier as well, and set these sub-theme values to false by default, or true when so defined.
 
 
 - **Label value breaking**: The `FlexColor.materialBaselineName` name string was changed from 'M3 baseline' to 'Material 3 purple'. 
@@ -114,9 +143,10 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **Style breaking**: The boolean `FlexSubThemesData.interactionEffects` now correctly control if color-tinted interaction effects for hover, focus, highlight, pressed and splash are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK supports changing their interaction effects. All components have new tinted interaction effects, that are used when setting this property to true. When it is false, all components use Flutter SDK default grey styles.
 
+- **Style breaking**: In Material 2 mode the `InputDecorator`'s border radius default value was changed from 16 to 10, to be less rounded by default.
+
 
 - **Style breaking**: The boolean `FlexSubThemesData.tintedDisabledControls` now correctly control if color-tinted disabled widgets are used. The setting affects both M2 and M3 mode, and all in FCS covered component themes, to the extent that the Flutter SDK supports changing their disabled color. All components have new tinted disabled styles, that are used when setting this property to true. When it is false, all components use Flutter SDK default disabled grey styles.
-
 
 
 - **Style breaking**: The `ToggleButtons` theme has a slightly changed style in both M2 and M3 mode. It now also correctly reacts to `FlexSubThemesData.interactionEffects` and `FlexSubThemesData.tintedDisabledControls`. The slight change of past theme was needed to support this. 
@@ -138,7 +168,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - **Remove**: The creation of `IconTheme` and `primaryIconTheme` when opting in on sub themes, was removed. Previously, their colors were set to be equal to the color of same typography color as 
   used on `TextTheme` nad `PrimaryTextTheme`, by style `TitleLarge`. This is no longer needed and also got in te way of getting the undefined default behavior for `IconTheme` in some widgets. Like new `IconButtonThemeData` in master channel.
   
-
   
 **THEMES PLAYGROUND**
 
@@ -180,35 +209,6 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
 - Version 2.0.3 of package flutter_svg fixed its cache issue in version 2.0.0, 2.0.1 and 2.0.2, upgrade to version 2 was now (13.3.2023) possible and done.
 - Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values panel **Menus** and codegen for same props.
-
-**TODO BEFORE FCS BETA 7.0.0-dev.3 RELEASE**
-
-- Review TimePicker once more, number entry, unselected seemed wrong, may it can be fixed, maybe not, theme does not have M3 support yet in stable.
-- Playground: Add showDialog, showTimePicker, showDatePickers, to show real dialogs.
-- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
-
-**TODO BEFORE FCS STABLE 7.0 RELEASE**
-
-- Report all found Flutter SDK theming bugs. Insert info in Playground where relevant.
-- Investigate the Playground random panel change, cause is still elusive. => Not seen it anymore! Remove TODO?
-- Review and do actionable TODOs in the code.
-- TESTS: Fix test coverage
-  - Down from 100% to 94% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 76% tested now, and will drop much lower with all the interaction effects added, that is not even half-way done.
-  - All new sub-themes and new states.  
-  - Tests for usedColors 7.
-- DOCS: Add important changes to docs.flexcolorscheme.com:
-  - Change summary update.
-  - Update known Flutter M3 and theming impacting issues. 
-
-**TODO AFTER FCS STABLE 7.0 RELEASE**
-
-- More updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
-  - Tweet series about what is new.
-  - New color scheme images.
-  - Info section, plus maybe an article later, about what is still missing in Flutter 3.7 from M3.
-  - Review and update older screenshots and GIFs.
-  - Use image zoom feature in docs.page on new and old images.
-  - Use new highlight banners feature, in the docs.page tool when appropriate.
 
 
 ## 7.0.0-dev.2
