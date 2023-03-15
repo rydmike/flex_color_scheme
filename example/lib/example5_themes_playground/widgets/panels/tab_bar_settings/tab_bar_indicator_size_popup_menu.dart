@@ -9,13 +9,6 @@ import '../../shared/color_scheme_box.dart';
 /// value to null in parent, so we can use a selectable item as null input,
 /// to represent default value via no value definition.
 class TabBarIndicatorSizePopupMenu extends StatelessWidget {
-  // TODO(rydmike): Add link to issue about dividerColor not working in theme.
-  // static final Uri _fcsFlutterIssue = Uri(
-  //   scheme: 'https',
-  //   host: 'github.com',
-  //   path: 'flutter/flutter/pull/117082',
-  // );
-
   const TabBarIndicatorSizePopupMenu({
     super.key,
     required this.index,

@@ -4,12 +4,11 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 ## 7.0.0-dev.3
 
-**TODO BEFORE BETA 7.0.0-dev.3 RELEASE**
+**TODO BEFORE FINAL BETA 7.0.0-dev.3 RELEASE**
 
-- Check status of issue https://github.com/flutter/flutter/issues/100027 in Flutter 3.7.7
-- A fix for observed Flutter issue and crash of the WEB release mode build, is needed before 7.0.0 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189.
-- Since web release mode build-issue is preventing me from moving forward with a new release, maybe consider some more changes:
-  - Consider some breaking changes, to make sub-themes less opinionated and not opt-in on some features (tinted interactions, tinted disable, etc.) by default and also make all booleans in FlexSubThemesData nullable and null by default while doing that.
+- Finished all features planned for final beta 7.0.0-dev.3 release. 
+  
+- However, a fix for observed Flutter issue and crash of the WEB release mode build is needed before 7.0.0-dev.3 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug or some other web release mode only specific bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189 that might be related to the observed issue.
   
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
@@ -17,7 +16,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Report all found Flutter SDK theming issues. 
   - Insert issue info in Themes Playground app where relevant.
   - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
-- Review and do actionable TODOs in the code.
 - TESTS: Fix test coverage
   - Down from 100% to 92% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 72% tested now.
   - Add tests for all new sub-themes and used material states.
@@ -26,17 +24,18 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Change summary update.
   - Update known Flutter M3 and theming impacting issues.
 
-**TODO AFTER FCS STABLE 7.0 RELEASE**
+**TODO AFTER FCS STABLE 7.0.0 RELEASE**
 
-- More updates to [FlexColorScheme docs](https://docs.flexcolorscheme.com):
-  - Tweet series about what is new.
-  - New color scheme images.
+- Tweet series about what is new.
+- Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), among other things:
+  - Guides on how to use all the advanced new features in the Playground.
+  - Add device thumbs and screenshots of all new built-in color schemes.
   - Info section, about what is still missing in Flutter 3.7 from M3.
   - Review and update old screenshots and GIFs.
   - Use image zoom feature in docs.page on new and old images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
-**Mar 14, 2023**
+**Mar 15, 2023**
 
 **FIX**
 
@@ -45,6 +44,9 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - Fixed **bug** where `FlexSubThemes.drawerTheme` was using `BorderRadiusDirectional.horizontal` with `end` radius instead of `start` radius as its `endShape`. This bug was introduced by version 7.0.0-dev.1. 
 
 - The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
+
+- The [systemNavigationBarDividerColor issue #100027](https://github.com/flutter/flutter/issues/100027) in Flutter that in FCS v5 forced removing support for divider on the system navigation bar in Android via `FlexColorScheme.themedSystemNavigationBar` has been fixed. The issue could no longer be observed on Android versions 8 to 13 on Flutter 3.7.7 stable. The divider has been enabled again, and itd test setting is also available in the Themes Playground app again. The extra `SystemUiOverlayStyle` used as a work-around for past issue on Android 11 has also been removed, it was no longer needed. 
+
 
 **NEW**
 

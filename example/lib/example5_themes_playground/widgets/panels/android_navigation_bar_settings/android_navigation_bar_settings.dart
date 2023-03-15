@@ -139,20 +139,13 @@ class AndroidNavigationBarSettings extends StatelessWidget {
             }
           },
         ),
-        // TODO(rydmike): Put back when issue #100027 is resolved.
-        // This switch is removed from demo until issue:
-        // https://github.com/flutter/flutter/issues/100027
-        // Has been resolved and landed in Flutter stable.
-        //
-        // SwitchListTile(
-        //   title: const Text('Android navigation bar divider'),
-        //   subtitle: const Text('There is also an extra system built-in '
-        //       'scrim on the nav bar when it is enabled. Recommend not '
-        //       'enabling it '
-        //       'if using opacity or fully transparent version.'),
-        //   value: controller.useNavDivider,
-        //   onChanged: controller.setUseNavDivider,
-        // ),
+        SwitchListTile(
+          title: const Text('Android navigation bar divider'),
+          subtitle: const Text('There is an extra system built-in scrim on '
+              'the system navigation bar when the divider is enabled.'),
+          value: controller.useSysNavDivider,
+          onChanged: controller.setUseSysNavDivider,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RichText(
@@ -170,27 +163,30 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There are also many Android version limitations '
+                  text: '. There are some Android version limitations '
                       'and issues concerning stying the system navigation bar. '
                       'You can read more about them in Flutter SDK ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterIssue100027,
-                  text: 'umbrella issue #100027',
+                  uri: _fcsFlutterIssue112301,
+                  text: 'umbrella issue #112301',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This ',
+                  text: '. In earlier versions ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterIssue112301,
-                  text: 'issue #112301',
+                  uri: _fcsFlutterIssue100027,
+                  text: 'issue #100027',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' impacts the FlexColorScheme annotated region helper.',
+                  text: ' impacted the FlexColorScheme annotated region helper '
+                      'to the degree that divider support was removed. The '
+                      'issue has been solved and the divider feature restored '
+                      'in FCS v7 and later.',
                 ),
               ],
             ),

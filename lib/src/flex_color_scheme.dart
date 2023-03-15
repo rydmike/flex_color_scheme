@@ -4825,7 +4825,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// By default when calling [themedSystemNavigationBar] with context, it
   /// creates a [SystemUiOverlayStyle] where the system navigator bar uses
-  /// current theme's ´colorScheme.background´ as its background color and
+  /// current theme's [ColorScheme.background] as its background color and
   /// icon colors that match this background, without any divider.
   ///
   /// The background color can be modified with [systemNavBarStyle] that
@@ -4833,27 +4833,26 @@ class FlexColorScheme with Diagnosticable {
   /// options as background color options. It defaults to background.
   /// See [FlexSystemNavBarStyle] for more info.
   ///
-  /// In standard Flutter themes, the surface, background, scaffoldBackground
+  /// In default Flutter M2 themes, the surface, background, scaffoldBackground
   /// and in light theme, even system are all the same color. For such themes
   /// this convenience property does not make so much sense. However, if you use
-  /// FlexColorScheme and its primary color surface branding, these colors are
-  /// not the same. This then offers a convenient way to switch the
-  /// background color of your system navigation bar in a way that matches
-  /// your theme's surface branded background color and to choose which one
-  /// to use.
+  /// FlexColorScheme and its primary color surface blending, or M3 kye color
+  /// seed generated ColorSchemes, these colors may not be the same. This
+  /// offers a convenient way to switch the background color of your system
+  /// navigation bar in a way that matches your theme's surface branded
+  /// background color and to choose which one of them to use.
   ///
-  /// The always sets `systemNavigationBarContrastEnforced: false` to try to
-  /// avoid the system scrim on Android version where it is supported. This
-  /// is done because the selected background color is the scrim itself when
-  /// used with the opacity parameter and we never want an extra scrim. If we
-  /// set opacity very low and loose contrast due to that, it is because it is
-  /// our intent.
+  /// This helper always sets [systemNavigationBarContrastEnforced] to false,
+  /// to try to avoid the system scrim on Android version where it is supported.
+  /// This is done because the selected background color is the scrim itself
+  /// when used with the opacity parameter and we never want an extra scrim.
+  /// If we set opacity very low and loose contrast due to that, it is because
+  /// it is the usage intent.
   ///
   /// An optional divider on the navigation bar is also available.
-  /// Based on Flutter SDK docs, the divider on the navigation bar, is on
-  /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
-  /// based on our findings it does not work until Android 10 (SDK29 or
-  /// higher. The divider can be turned on by setting [useDivider] to true.
+  /// Based on Flutter SDK docs, the divider on the navigation bar, is only
+  /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. The
+  /// divider can be turned on by setting [useDivider] to true.
   /// This produces a divider on top of the system navigation bar that in
   /// light theme mode uses color 0xFF2C2C2C and in dark mode and 0xFFDDDDDD.
   ///
@@ -4861,6 +4860,7 @@ class FlexColorScheme with Diagnosticable {
   /// [systemNavigationBarDividerColor]. The call to set and use the divider
   /// color is only made once a none null or true value has been given to
   /// [useDivider].
+  ///
   /// Android SDK < 29 does not respect provided alpha value on the color of
   /// the divider color, and calling it with null again will not remove it.
   ///
@@ -4868,21 +4868,20 @@ class FlexColorScheme with Diagnosticable {
   /// there is no convenient way to get rid of it. You can set the value
   /// to false, but that will just make the divider same color as your current
   /// nav bar background color to make it invisible, it is still there, but
-  /// still this implementation trick works well.
+  /// this implementation trick works well.
   ///
   /// Important: The divider is actually a layer behind the system navigation
-  /// bar background, that is 1dp higher. When using colors with opacity on
+  /// bar background, that is 1 dp higher. When using colors with opacity on
   /// the background and the divider, one have to consider the sum of the
   /// opacity for both colors to get the effective translucent color.
   ///
   /// Use and support for the [opacity] value on the system navigation bar
-  /// is supported starting from Flutter 2.5. This PR once it lands in
-  /// stable will also for more predictable and consistent behavior limit its
-  /// functionality to SDK >= 29: https://github.com/flutter/engine/pull/28616
+  /// is supported starting from Flutter 2.5.
   ///
   /// By default [themedSystemNavigationBar] does not set any system overlay
   /// for the status bar. In Flutter SDK the top status bar has its own built in
   /// [SystemUiOverlayStyle] as a part of [AppBar] and [AppBarTheme].
+  ///
   /// [FlexColorScheme] also manages the [SystemUiOverlayStyle] for the status
   /// bar via it. However, if your screen has no [AppBar] you can use the
   /// property [noAppBar] and [invertStatusIcons] to affect the look of the
@@ -4892,12 +4891,12 @@ class FlexColorScheme with Diagnosticable {
     BuildContext? context, {
     /// Use a divider line on the top edge of the system navigation bar.
     ///
-    /// On Android 11 (SDK30) there is an issue when using the system
+    /// On Android 11 (SDK30) there was an issue when using the system
     /// divider, see: https://github.com/flutter/flutter/issues/100027
-    /// Recommend avoiding trying to remove or enable the system navbar
-    /// divider with this feature until this issue is solved.
-    /// When you use fully transparent system navigation bar the divider is
-    /// removed, so at least that works OK.
+    /// This issue was found to be resolved on in tests onFlutter 3.7.7
+    /// 15.3.2023. Keeping this references around to the issue in case some
+    /// related issues appear. The system navigation bar on different Android
+    /// versions is a complicated topic.
     ///
     /// Based on Flutter SDK docs, the divider on the navigation bar, is on
     /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
@@ -4923,8 +4922,8 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to 1, fully opaque.
     ///
     /// This feature is supported starting from Flutter 2.5.
-    /// Be aware that it only works on Android SDK >= 29. There may be
-    /// some issues on Android SDK < 29 until this PR lands in stable:
+    /// Be aware that it only works on Android SDK >= 29. Earlier there were
+    /// some issues on Android SDK < 29 before this PR landed in stable:
     /// https://github.com/flutter/engine/pull/28616
     ///
     /// This issue is a good source for more information on current state
@@ -4935,16 +4934,16 @@ class FlexColorScheme with Diagnosticable {
     /// Set this to true if you do not use a Material AppBar and want
     /// a uniform background where the status bar's icon region is.
     ///
-    /// If you page does not have an [AppBar] you can also use this
-    /// [AnnotatedRegion] helper remove the top status bar scrim color
-    /// on the top icon status bar. set this to true to do soe.
+    /// If your page does not have an [AppBar] you can also use this
+    /// [AnnotatedRegion] helper to remove the top status bar scrim color
+    /// on the top icon status bar, set [noAppBar] to true to do so.
     ///
     /// A typical use case would be pages like splash screens and intro
     /// screens that don't use an AppBar. The Material AppBar uses its own
-    /// `SystemUiOverlayStyle` so don't use this with an AppBar, set the style
-    /// on the AppBar theme instead. However, if you don't have an [AppBar] this
-    /// is a convenient way of to remove the top system icon scrim for a more
-    /// clean full screen look on Android.
+    /// [SystemUiOverlayStyle] so don't use this with an AppBar, set the style
+    /// on the AppBar or its theme instead. However, if you don't have an
+    /// [AppBar] on screen, this is a convenient way of to remove the top
+    /// system icon scrim for a more clean full screen look on Android.
     final bool noAppBar = false,
 
     /// Set to true to invert top status bar icons like, battery, network,
@@ -4953,7 +4952,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to false.
     ///
-    /// This setting works well together with the `noAppBar` flag to make an
+    /// This setting works well together with the [noAppBar] flag to make an
     /// even cleaner looking splash screen by making the
     /// top status bar icons less visible or even invisible.
     ///
@@ -5065,11 +5064,6 @@ class FlexColorScheme with Diagnosticable {
     // If it is not given, we use above flexBackground.
     final Color background = systemNavigationBarColor ?? flexBackground;
 
-    // TODO(rydmike): Remove SysNavBar workaround when issue #100027 solved.
-    // See issue: https://github.com/flutter/flutter/issues/100027
-    // Remove the workaround below when the solution to the issue has landed in
-    // in Flutter stable channel.
-    //
     // A divider will be applied if `useDivider` is true and it will
     // use provided `systemNavigationBarDividerColor` if a value was given,
     // or fallback to suitable theme mode default divider colors if no
@@ -5090,23 +5084,17 @@ class FlexColorScheme with Diagnosticable {
     // if you are using transparent system navigation bar on Android API30 or
     // higher it does work, and it looks nicer when it has some transparency
     // if the navbar is also transparent.
-    //
-    // Also some of the crazy hoops are designed to work around this issue for
-    // Android 11: https://github.com/flutter/flutter/issues/100027
     Color? dividerColor;
     // If we have opacity on the navbar, we should have some on the divider too
     // when we have a divider, we use some, but not a lot, we do want to keep
-    // visible and not fade a way with background opacity, since a divider was
+    // visible and not fade away with background opacity, since a divider was
     // requested.
     final double dividerOpacity = usedOpacity < 1 ? 0.5 : 1;
     if (useDivider == null || !useDivider) {
-      // The dividerColor is already null from declaration above with no value,
-      // here we are just being explicit that this is the case where we want a
-      // null color value for the divider as well in order to not include it
-      // in the `SystemUiOverlayStyle` at all.
-      dividerColor = Colors.transparent; //background.withAlpha(1);
+      // To be able to take away the divider wi have to make it transparent.
+      dividerColor = Colors.transparent;
     } else {
-      // We should have a divider, but have no given color, use defaults.
+      // Requested a divider, but have no given color, use defaults.
       if (systemNavigationBarDividerColor == null) {
         dividerColor = isDark
             ? const Color(0xFF2C2C2C).withOpacity(dividerOpacity)
@@ -5118,12 +5106,13 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
-    // Need to determine effective AppBar background color, so we can compute
-    // its brightness need for status icons. Used partially for workarounds to
-    // https://github.com/flutter/flutter/issues/100027
+    // Determine effective AppBar background color, so we can compute
+    // its brightness need for status icons. This was used earlier as
+    // workarounds to https://github.com/flutter/flutter/issues/100027
+    // It may no longer be needed.
     late Color appBarColor;
     if (context == null) {
-      // This is for testing we set it to same as navbar.
+      // This is for testing, we set it to same as navbar.
       appBarColor = background;
     } else {
       final ThemeData theme = Theme.of(context);
@@ -5137,12 +5126,14 @@ class FlexColorScheme with Diagnosticable {
     final Brightness appBarBrightness =
         ThemeData.estimateBrightnessForColor(appBarColor);
 
-    // First make finals for each property, so we can modify the logic just
-    // once when needed. Used this to experiment with work around for:
+    // Making finals for each SystemUiOverlayStyle property, these were used
+    // to modify the logic when needed to experiment with work around for:
     // https://github.com/flutter/flutter/issues/100027
-    // Nothing worked satisfactory, Android 11 will just have to wait for fix!
-    final Color? statusBarColor =
-        noAppBar ? Colors.transparent : null; //const Color(0x40000000);
+    // The issue has now been solved and we could potentially remove some
+    // of this, but keeping it place for now as everything finally worked
+    // as intended on Android 9 to 13 in tests 15.3.20222 on Flutter 3.7.7.
+    // Also it makes the returned SystemUiOverlayStyle call look very clean.
+    final Color? statusBarColor = noAppBar ? Colors.transparent : null;
     final Brightness? statusBarBrightness =
         noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null;
     final Brightness? statusBarIconBrightness = noAppBar
@@ -5159,22 +5150,6 @@ class FlexColorScheme with Diagnosticable {
         ? (isDark ? Brightness.dark : Brightness.light)
         : (isDark ? Brightness.light : Brightness.dark);
 
-    // Tried work around for A11 issue, including calling SystemUiOverlayStyle
-    // with different styles, but nothing worked OK, this
-    // double SystemUiOverlayStyle call is the best option for now.
-    SystemUiOverlayStyle(
-      // The top status bar settings.
-      systemStatusBarContrastEnforced: false,
-      statusBarColor: statusBarColor,
-      statusBarBrightness: statusBarBrightness,
-      statusBarIconBrightness: statusBarIconBrightness,
-      // The bottom navigation bar settings.
-      systemNavigationBarContrastEnforced: false,
-      systemNavigationBarColor: sysNavigationBarColor,
-      systemNavigationBarDividerColor: sysNavigationBarDividerColor,
-      systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
-    );
-    //
     return SystemUiOverlayStyle(
       // The top status bar settings.
       systemStatusBarContrastEnforced: false,
@@ -5184,8 +5159,9 @@ class FlexColorScheme with Diagnosticable {
       // The bottom navigation bar settings.
       systemNavigationBarContrastEnforced: false,
       systemNavigationBarColor: sysNavigationBarColor,
-      // Important for the workaround that this is removed in 2nd call.
-      // systemNavigationBarDividerColor: sysNavigationBarDividerColor,
+      // Divider setting.
+      systemNavigationBarDividerColor: sysNavigationBarDividerColor,
+      // Bottom system navigation bar icon or swipe bar navigator color.
       systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
     );
   }
@@ -6203,12 +6179,6 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.tintedHighlight(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of hintColor.
-      // TODO(rydmike): Clean out hint color, let ThemeData handle it. TEST!
-      // Same as ThemeData SDK, hintColor is only used by DropdownButton
-      // and InputDecorator in SDK.
-      // hintColor: isDark ? Colors.white60 : Colors.black.withAlpha(0x99),
-
       // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
       hoverColor: tintedInteractions
           ? FlexSubThemes.tintedHovered(
@@ -6274,16 +6244,6 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily,
       fontFamilyFallback: fontFamilyFallback,
       package: package,
-
-      // TODO(rydmike): Blended icon theme removal!
-      // Set colors for icons in opted in sub themes.
-      // iconTheme: useSubThemes && subTheme.blendTextTheme
-      //     ? IconThemeData(color: effectiveTextTheme.titleLarge!.color)
-      //     : null,
-      // primaryIconTheme: useSubThemes && subTheme.blendTextTheme
-      //     ? IconThemeData(color: effectivePrimaryTextTheme.titleLarge!.color)
-      //     : null,
-
       // TextTheme properties use the same logic as in ThemeData, allowing us
       // to optionally define them. AccentTextTheme is omitted since it has
       // been deprecated in Flutter 2.5.0.
@@ -6836,7 +6796,7 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // TODO(rydmike): Make foreground color auto contrast with background.
+      // TODO(rydmike): popupMenuTheme foreground auto contrast with background.
       // --> Potential Flutter SDK issue, investigate.
       // PopupMenuButton Theme.
       popupMenuTheme: useSubThemes

@@ -398,60 +398,102 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailGroupAlignment,
   });
 
-  /// Opt-in on using color branded hover, focus, highlight and splash
-  /// interaction state effects.
+  /// Flag used to enable color tinted hover, focus, highlight, selected,
+  /// pressed and splash interaction state effects.
   ///
-  /// The standard colors on hover, focus, highlight and splash effects use
-  /// greys, i.e. white or black with different opacity levels.
+  /// The standard Flutter colors in both M2 and M3 mode for hover, focus,
+  /// highlight, selected, pressed and splash state effects often look grey.
+  /// They typically use surface or onSurface color with opacity. Often this is
+  /// white or black with different opacity levels. This is not very
+  /// color expressive and sometimes even look out of character in M3 mode.
   ///
-  /// To get a color themed effect, set [interactionEffects] to true, and to
-  /// false for the Flutter SDK Material 2 default [ThemeData] values.
+  /// For some widgets and their colors, the default Flutter interaction effects
+  /// in M3 mode work pretty well. However, when theming widgets with different
+  /// colors than default M3 values, especially if the color is off a different
+  /// brightness, the effects often break down and become to grey heavy or
+  /// almost invisible.
   ///
-  /// These effects apply to all Widgets that get them from [ThemeData].
+  /// To get a color themed effect, set [interactionEffects] to true. The
+  /// used tint color depends on the UI control's main themed color, or
+  /// element color being used in a widget many colors. Not on surface or
+  /// onSurface colors, that to their defence in M3 mode contain a slight tint
+  /// of primary color.
   ///
-  /// The buttons [ElevatedButton], [OutlinedButton] and [TextButton] define
-  /// theme styles that by default use their own themed Material state
-  /// effects for hover, focus, highlight and splash. These already include
-  /// primary color blends and own different opacity values by default.
-  /// The defaults on SDK overall [ThemeData] hover, focus, highlight and
-  /// splash do not match this newer design, and they look out of place,
-  /// especially in an otherwise primary color, alpha blended theme.
+  /// This design makes all the interaction effects work with the UI components
+  /// color matching effects, regardless of how it is themed. It delivers more
+  /// color expressiveness than Flutter's default M2 and M3 styles.
   ///
-  /// When you opt-in on [interactionEffects] it makes the overall hover, focus,
-  /// highlight and splash effects in [ThemeData] visually consistent with the
-  /// style the buttons [ElevatedButton], [OutlinedButton] and [TextButton]
-  /// with their own state effects use by default. It is not an exact
-  /// match with the [ButtonStyleButton] buttons, the common class for the newer
-  /// buttons, but very close. Because of for example the white opacity
-  /// overlay used on primary colored button [ElevatedButton], it cannot be
-  /// matched exactly in all situations. It is still visually very similar on
-  /// most widgets, and does not stick out like the grey splashes do otherwise
-  /// when using primary color blended themes.
+  /// This feature is implemented by always in all sub-themes' [MaterialState]
+  /// overlay states using the helper functions:
   ///
-  /// For [ToggleButtons] and legacy buttons `RaisedButton`, `OutlineButton`
-  /// and `FlatButton` to always match the style the new buttons use,
-  /// even when [interactionEffects] style is disabled, they also always use the
-  /// same effect as [interactionEffects] provides on overall theme, so that
-  /// they always match the [ButtonStyleButton] buttons as closely as possible.
+  /// - [FlexSubThemes.tintedHovered],
+  /// - [FlexSubThemes.tintedHighlight]
+  /// - [FlexSubThemes.tintedSplash]
+  /// - [FlexSubThemes.tintedPressed]
+  /// - [FlexSubThemes.tintedFocused]
+  //
+  /// In combination with internal function [FlexSubThemes._tintAlphaFactor],
+  /// to vary the strengths depending on light/dark theme mode and brightness
+  /// of color on the tinted widget. The effect is also different for primarily
+  /// surface colored widgets.
   ///
-  /// The effects provided by [interactionEffects] are more visible on large
-  /// surface ink effects, like e.g. on the ListTile and SwitchListTile taps,
-  /// focus and hover.
+  /// This feature also sets [ThemeData.focusColor], [ThemeData.hoverColor],
+  /// [ThemeData.highlightColor] and [ThemeData.splashColor] in same styles.
+  /// However, these colors are used less and less by widgets, and no full
+  /// Material 3 mode supporting widgets use them, starting from Flutter 3.7.
+  /// These [ThemeData] colors might eventually be added back to the
+  /// deprecation roadmap, see Material
+  /// [ThemeData issue](https://github.com/flutter/flutter/issues/91772), but
+  /// probably not very soon. Regardless, this feature in FlexColorScheme is
+  /// well prepared for any such deprecations.
   ///
+  /// Implementing this theming feature manually on all widgets, is very tedious
+  /// and requires a large number of theming definitions on every used control.
+  /// It is sometimes also quite complex and requires understanding of how
+  /// overlay colors work and are used by widgets.
+  ///
+  /// Some widget's in Flutter still have gaps or bugs in their implementation
+  /// of MaterialState and only works partially. Compromises had to be made in
+  /// some cases. These cases will be improved when support for them in
+  /// Flutter is corrected. The status of these issues and gaps are tracked
+  /// in FlexColorScheme docs
+  /// [known issues](https://docs.flexcolorscheme.com/known_issues) chapter.
+  ///
+  /// Set to false to opt-out and use Flutter's default interactions effects.
+  //
   /// Defaults to true.
   final bool interactionEffects;
 
-  // TODO(rydmike): Add more tintedDisabledControls support in v7.1 or later.
-  /// Use primary tint on disabled controls.
+  /// Use color tint on disabled controls.
   ///
-  /// Set to true to make disabled controls use a shared slightly
-  /// primary color tint on their disabled state.
+  /// Set to true to make disabled controls use a slight color tint of their own
+  /// main enabled color on their disabled state. Enabling this feature makes
+  /// the theme even more color expressive than Material 3 is by default.
   ///
-  /// Set to false to use default grey only disabled controls.
+  /// This setting impacts disabled state of all UI widgets that can be disabled
+  /// and can be themed to have a different disable color than the widget
+  /// default disabled color. Some widgets even have two different tinted colors
+  /// for their disabled state. Starting from FlexColorScheme version 7 a
+  /// consistent tinted style is used an all widgets when opting in on this f
+  /// feature.
   ///
-  /// Impacts controls:
-  /// - [InputDecorator]
-  /// -
+  /// The feature is implemented by always in all sub-themes' [MaterialState]
+  /// disabled states using the [FlexSubThemes.tintedDisable] function.
+  /// Sometimes with a different alpha value than the default one, to deliver
+  /// the two tones of tinted disabled colors.
+  ///
+  /// This feature also set [ThemeData.disabledColor] in same style, however
+  /// this color is used by very few widgets in Material 3 mode starting in
+  /// Flutter 3.7. The [ThemeData.disabledColor] might eventually be added
+  /// back to the deprecation roadmap, see Material
+  /// [ThemeData issue](https://github.com/flutter/flutter/issues/91772), but
+  /// probably not very soon. Regardless, this feature in FlexColorScheme is
+  /// well prepared for any such deprecation.
+  ///
+  /// Implementing this theming feature manually on all widgets, is tedious
+  /// and requires a large number of theming definitions on every used control.
+  ///
+  /// Set to false to opt-out and use Flutter's default grey disabled controls.
   ///
   /// Defaults to true.
   final bool tintedDisabledControls;

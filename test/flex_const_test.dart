@@ -147,7 +147,6 @@ void main() {
     test('FCT kUnselectedAlphaBlend is 0xA5', () {
       expect(kUnselectedAlphaBlend, 0xA5);
     });
-    // TODO(rydmike): Remove old constants when migration to new done.
     //
     // New FCS V7 constants
     //

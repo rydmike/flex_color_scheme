@@ -385,16 +385,16 @@ class FlexSubThemes {
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
       schemeColor(onSchemeColor(value), colorScheme);
 
-  /// A factor used on by tinted interactions to increase the alpha based
+  /// A factor used by tinted interactions to increase the alpha based
   /// opacity Material 3 baseline based opacity values for hover, focus and
-  /// splash.
+  /// splash under certain conditions.
   ///
-  /// Used by some component theming. The factor is different depending on
-  /// if the color is light or dark. This factor increase the opacity of
-  /// the overlay color compared to the opacity used by M3 default. It only
-  /// works because the overlay color is also alpha blend colored. This extra
+  /// Used by component themes. The factor is different depending on
+  /// if the color is light or dark. This factor increases the opacity of
+  /// the overlay color compared to the opacity used by M3 default. It works
+  /// well because the overlay color is also alpha blend colored. This extra
   /// factor is used for interaction effects on colored widgets, when
-  /// using interactions on surface colors factor 1 is used.
+  /// using interactions on surface colors a lower factor is used.
   static double _tintAlphaFactor(Color color, Brightness mode,
       [bool surfaceMode = false]) {
     if (mode == Brightness.light) {
@@ -3964,7 +3964,7 @@ class FlexSubThemes {
     /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
     final Color? surfaceTintColor,
   }) {
-    // TODO(rydmike): Removed tint, not supported in Flutter yet.
+    // TODO(rydmike): Drawer indicator tint effect, not supported in Flutter yet
     // final bool tintInteract = useTintedInteraction ?? true;
 
     // Get selected background color, defaults to surface.
@@ -3991,7 +3991,7 @@ class FlexSubThemes {
     // TextStyle
     final TextStyle style = textStyle ?? const TextStyle();
 
-    // TODO(rydmike): Removed tint, not supported in Flutter yet.
+    // TODO(rydmike): Removed interaction tint, not supported in Flutter yet.
     //
     // // Using these tinted overlay variable in all themes for ease of
     // // reasoning and duplication.
@@ -4000,9 +4000,9 @@ class FlexSubThemes {
     // final double factor =
     // _tintAlphaFactor(tint, colorScheme.brightness, true);
 
-    // TODO(rydmike): Would need something like for tinted indicator.
+    // TODO(rydmike): Would need something like this for tinted indicator.
     //  This does not work due to limitations in Flutter SDK implementation.
-    //  All we can get it ThemeData based themed hover, press, focus
+    //  All we can get is ThemeData based themed hover, press, focus
     //  Report this limitation!
 
     // Color? indicatorStateColor() =>
@@ -4517,7 +4517,7 @@ class FlexSubThemes {
             ),
       groupAlignment: groupAlignment,
       labelType: labelType,
-      // TODO(rydmike): This hack used to be needed, but is it still F3.7?
+      // TODO(rydmike): This hack used to be needed, but is it still in F3.7?
       // Logic to avoid SDKs over eager asserts and get same result.
       useIndicator: true,
       indicatorColor: effectiveUseIndicator

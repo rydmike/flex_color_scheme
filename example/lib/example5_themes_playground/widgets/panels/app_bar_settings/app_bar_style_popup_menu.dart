@@ -182,7 +182,6 @@ class AppBarStylePopupMenu extends StatelessWidget {
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 10.0),
           child: ColorSchemeBox(
-            // TODO(rydmike): Consider colorScheme.outlineVariant when it lands.
             borderColor: theme.dividerColor,
             backgroundColor: enabled && !useDefault
                 ? _appBarStyleColor(

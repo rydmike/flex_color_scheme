@@ -2853,10 +2853,11 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
     // TODO(rydmike): Potential issue with ShortcutRegistry? Investigate.
     // Hack to avoid issue of entries being added multiple times, the dispose
     // of them does not seem to work all the time. This widget is in this app
-    // potentially shown in places, the only shortcut entries we should have are
-    // the same ones, if it exists and has not been disposed when this is called
-    // we can add it, if it exists it is the one we want already. We could also
-    // check for the specific entries, but for this workaround this works.
+    // potentially shown in many places, the only shortcut entries we should
+    // have are the same ones, if it exists and has not been disposed when
+    // this is called we can add it, if it exists it is the one we want already.
+    // We could also check for the specific entries, but for this workaround
+    // this works.
     // The ShortcutRegistry is intended to be used as one global setting in the
     // app, it should be higher up in the tree, then we would not have this
     // issue.
@@ -3730,9 +3731,6 @@ class SnackBarShowcase extends StatelessWidget {
             child: Material(
               color: snackBackground,
               elevation: snackElevation,
-              // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
-              // Keep it away from the simulation to match spec!
-              // surfaceTintColor: colorScheme.surfaceTint,
               shadowColor: colorScheme.shadow,
               shape: shape ??
                   const RoundedRectangleBorder(
@@ -3762,9 +3760,6 @@ class SnackBarShowcase extends StatelessWidget {
           Material(
             color: snackBackground,
             elevation: snackElevation,
-            // TODO(rydmike): SnackBar in Flutter does not get tint in M3!
-            // Keep it away from the simulation to match spec!
-            // surfaceTintColor: colorScheme.surfaceTint,
             shadowColor: colorScheme.shadow,
             shape: shape,
             child: SizedBox(

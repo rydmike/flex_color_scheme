@@ -127,8 +127,6 @@ class Containment extends StatelessWidget {
         Cards(),
         Dialogs(),
         Dividers(),
-        // TODO(nn): Add Lists, https://github.com/flutter/flutter/issues/114006
-        // TODO(nn): Add Side sheets, https://github.com/flutter/flutter/issues/119328
       ],
     );
   }
@@ -151,7 +149,6 @@ class Navigation extends StatelessWidget {
         ),
         NavigationDrawers(scaffoldKey: scaffoldKey),
         const NavigationRails(),
-        // TODO(nn): Add Search https://github.com/flutter/flutter/issues/117483
         const Tabs(),
         const TopAppBars(),
       ],
@@ -169,12 +166,10 @@ class Selection extends StatelessWidget {
       children: <Widget>[
         Checkboxes(),
         Chips(),
-        // TODO(nn): Add Date pickers https://github.com/flutter/flutter/issues/101481
         Menus(),
         Radios(),
         Sliders(),
         Switches(),
-        // TODO(nn): Add Time pickers https://github.com/flutter/flutter/issues/101480
       ],
     );
   }
@@ -775,7 +770,6 @@ class _SwitchRowState extends State<SwitchRow> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        // TODO(nn): use SwitchListTile when thumbIcon is available https://github.com/flutter/flutter/issues/118616
         Switch(
           value: value0,
           onChanged: widget.isEnabled
@@ -845,7 +839,6 @@ class _CheckboxesState extends State<Checkboxes> {
             tristate: true,
             value: isChecked2,
             title: const Text('Option 3'),
-            // TODO(nn): showcase error state https://github.com/flutter/flutter/issues/118616
             onChanged: (bool? value) {
               setState(() {
                 isChecked2 = value;
@@ -1601,7 +1594,6 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
             onPressed: () async {
               await showModalBottomSheet<void>(
                 context: context,
-                // TODO(nn): Remove when this is in the framework https://github.com/flutter/flutter/issues/118619
                 constraints: const BoxConstraints(maxWidth: 640),
                 builder: (BuildContext context) {
                   return SizedBox(
@@ -1642,7 +1634,6 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
               _nonModalBottomSheetController = showBottomSheet<void>(
                 elevation: 8.0,
                 context: context,
-                // TODO(nn): Remove when this is in the framework https://github.com/flutter/flutter/issues/118619
                 constraints: const BoxConstraints(maxWidth: 640),
                 builder: (BuildContext context) {
                   return SizedBox(
@@ -2005,7 +1996,6 @@ class _TabsState extends State<Tabs> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            // TODO(nn): Showcase secondary tab bar https://github.com/flutter/flutter/issues/111962
           ),
         ),
       ),

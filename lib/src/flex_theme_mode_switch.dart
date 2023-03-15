@@ -511,11 +511,6 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
             2;
       }
     }
-
-    // TODO(rydmike): Remove these debugPrints
-    // debugPrint('Size X: ${widget.width * 2 + padX} *******');
-    // debugPrint('Size Y: ${widget.height * 2 + padY} *******');
-
     return Semantics(
       label: widget.semanticLabel ?? widget.label ?? 'Theme mode option button',
       selected: widget.selected,

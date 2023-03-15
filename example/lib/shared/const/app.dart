@@ -178,7 +178,6 @@ class App {
   static VisualDensity get visualDensity =>
       FlexColorScheme.comfortablePlatformDensity;
 
-  // TODO(rydmike): Add mock web setting usage.
   /// Return the correct platform effective global border radius setting.
   ///
   /// Depends on platform, its mock version and web and its mock version

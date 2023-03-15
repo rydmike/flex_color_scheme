@@ -790,7 +790,7 @@ class MenuSettings extends StatelessWidget {
           child: DropDownMenuShowcase(),
         ),
         const SizedBox(height: 8),
-        // TODO(rydmike): Add refs to reported menu issues when reported.
+        // TODO(rydmike): Add links to reported menu issues when reported.
         const ListTile(
           dense: true,
           subtitle: Text('The selected style of and item found in the '

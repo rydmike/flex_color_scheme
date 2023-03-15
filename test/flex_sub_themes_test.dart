@@ -979,6 +979,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
+    // TimePickerThemeData:<TimePickerThemeData#5fb74(shape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(28.0)), hourMinuteShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), dayPeriodShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), inputDecorationTheme: InputDecorationTheme#857aa(errorStyle: TextStyle(inherit: true, size: 0.0, height: 0.0x), contentPadding: EdgeInsets.zero))>
+    // TimePickerThemeData:<TimePickerThemeData#7f4c4(shape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(28.0)), hourMinuteShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), dayPeriodShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)))>
     test(
         'TimePicker FST1.07-default: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '
@@ -988,7 +990,10 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.timePickerTheme(colorScheme: colorScheme),
+        FlexSubThemes.timePickerTheme(
+          colorScheme: colorScheme,
+          useInputDecoratorTheme: true,
+        ),
         equals(
           TimePickerThemeData(
             // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
@@ -1028,6 +1033,7 @@ void main() {
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(),
+          useInputDecoratorTheme: true,
         ),
         equals(
           TimePickerThemeData(
@@ -1069,6 +1075,7 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFFDDDDDD),
           inputDecorationTheme: const InputDecorationTheme(filled: true),
+          useInputDecoratorTheme: true,
         ),
         equals(
           TimePickerThemeData(
@@ -1115,6 +1122,7 @@ void main() {
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(filled: true),
           elementRadius: 12,
+          useInputDecoratorTheme: true,
         ),
         equals(
           TimePickerThemeData(
@@ -4666,48 +4674,48 @@ void main() {
         ),
       );
     });
-  });
-  test(
-      'Chip FST1.16: GIVEN a '
-      'FlexSubTheme.chipTheme() with usedSchemeColor '
-      'Secondary and disable tint EXPECT equal to ChipThemeData() version '
-      'with same values', () {
-    const ColorScheme colorScheme = ColorScheme.light();
-    final TextTheme textTheme =
-        Typography.material2018(platform: TargetPlatform.android).black;
-    expect(
-      FlexSubThemes.chipTheme(
-        colorScheme: colorScheme,
-        baseSchemeColor: SchemeColor.secondary,
-        labelStyle: textTheme.labelLarge!,
-        useTintedDisable: true,
-      ),
-      equals(
-        ChipThemeData(
-          padding: const EdgeInsets.all(4),
-          labelStyle:
-              textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-          secondaryLabelStyle:
-              textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-          backgroundColor: const Color(0xffccf7f3),
-          deleteIconColor: const Color(0xff000000),
-          disabledColor: const Color(0x1f3c5f5c),
-          selectedColor: const Color(0xff97efe7),
-          secondarySelectedColor: const Color(0xff97efe7),
-          surfaceTintColor: const Color(0xff6200ee),
-          checkmarkColor: const Color(0xff000000),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(8),
+    test(
+        'Chip FST1.16: GIVEN a '
+        'FlexSubTheme.chipTheme() with usedSchemeColor '
+        'Secondary and disable tint EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      final TextTheme textTheme =
+          Typography.material2018(platform: TargetPlatform.android).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          labelStyle: textTheme.labelLarge!,
+          useTintedDisable: true,
+        ),
+        equals(
+          ChipThemeData(
+            padding: const EdgeInsets.all(4),
+            labelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            secondaryLabelStyle:
+                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            backgroundColor: const Color(0xffccf7f3),
+            deleteIconColor: const Color(0xff000000),
+            disabledColor: const Color(0x1f3c5f5c),
+            selectedColor: const Color(0xff97efe7),
+            secondarySelectedColor: const Color(0xff97efe7),
+            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: const Color(0xff000000),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color(0xff015c54),
+              size: 18.0,
             ),
           ),
-          iconTheme: const IconThemeData(
-            color: Color(0xff015c54),
-            size: 18.0,
-          ),
         ),
-      ),
-    );
+      );
+    });
   });
   group('WITH: FlexSubTheme.navigationBarTheme ', () {
     // -------------------------------------------------------------------------

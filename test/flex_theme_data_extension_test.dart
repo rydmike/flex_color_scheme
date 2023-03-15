@@ -32,11 +32,11 @@ void main() {
         ThemeData,
       );
     });
-    // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+    // TODO(rydmike): toString on ThemeData match, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
     //   uses MaterialState or MaterialStateProperty. Verify and report this.
-    //   Investigate first what SDK ThemeData test do, if they even attempt it
+    //   Investigate first what SDK ThemeData tests do, if they even attempt it.
     test(
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
@@ -1983,7 +1983,7 @@ void main() {
           ftdLight.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
       // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
@@ -2167,7 +2167,7 @@ void main() {
           ftdLight.toString(),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
       // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
@@ -2365,7 +2365,7 @@ void main() {
           fcsDarkTd.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
       // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
