@@ -800,7 +800,7 @@ class CategoryTile extends StatelessWidget {
                   category.title.toUpperCase(),
                   style: theme.textTheme.displayMedium!.copyWith(
                     color: Colors.white,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

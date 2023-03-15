@@ -10,7 +10,7 @@ import 'about.dart';
 // ignore_for_file: comment_references
 
 // The default width of the side menu when expanded to full menu.
-const double _kMenuWidth = 275;
+const double _kMenuWidth = 280;
 
 // The default width of the side menu when collapsed to a rail.
 // We make it extra compact to not be so intrusive on phones. It looks a bit
@@ -904,8 +904,7 @@ class _MenuItem extends StatelessWidget {
                         Tooltip(
                           // Show tooltips only at rail size and if enabled.
                           // Setting message to empty never shows tooltip.
-                          message: width == railWidth &&
-                              enabled ? tooltip : '',
+                          message: width == railWidth && enabled ? tooltip : '',
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
                           waitDuration: const Duration(milliseconds: 500),
@@ -997,7 +996,7 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
                 widget.menuLeadingAvatarLabel,
                 style: primaryTextTheme.titleMedium!.copyWith(
                     color: theme.colorScheme.onPrimary,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.bold),
               ),
             ),
             title: widget.menuLeadingTitle,

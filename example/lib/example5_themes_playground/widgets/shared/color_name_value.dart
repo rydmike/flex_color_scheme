@@ -51,35 +51,30 @@ class _ColorNameValueState extends State<ColorNameValue> {
   late String materialName;
   late String nameThatColor;
 
-  // This widget is stateful because the ColorTools methods may be a bit
-  // expensive so we try to avoid calling them when not needed, by keeping
+  // This widget is stateful because the ColorTools methods are
+  // expensive, so we try to avoid calling them when not needed, by keeping
   // their values in state and only updating them when the Material they
   // describe actually change color. Which happens quite a bit still during
   // theme changes when the theme change goes through its color lerp to new
   // theme colors.
   @override
   void initState() {
+    super.initState();
     materialName = ColorTools.materialName(widget.color);
     nameThatColor = ColorTools.nameThatColor(widget.color);
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant ColorNameValue oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.color != oldWidget.color) {
       materialName = ColorTools.materialName(widget.color);
       nameThatColor = ColorTools.nameThatColor(widget.color);
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Alpha value for opacity on some text further below. Experimented with
-    // the look of some opacity on the text on the color code values and names.
-    // Decided it was better to just use the actual on colors to better show
-    // what they actually look like.
-    const int alpha = 0xFF;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     return Padding(
@@ -87,15 +82,11 @@ class _ColorNameValueState extends State<ColorNameValue> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Text(
-            widget.label,
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.clip,
-            style: TextStyle(
-                color: widget.textColor,
-                fontSize: widget.fontSize,
-                fontWeight: FontWeight.w600),
-          ),
+          Text(widget.label,
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                  color: widget.textColor, fontSize: widget.fontSize + 1)),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -111,9 +102,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
-                            fontSize: widget.fontSize - 1,
-                            fontWeight: FontWeight.w400),
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -127,9 +117,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.end,
                       style: TextStyle(
-                          color: widget.textColor.withAlpha(alpha),
-                          fontSize: widget.fontSize - 1,
-                          fontWeight: FontWeight.w400),
+                          color: widget.textColor,
+                          fontSize: widget.fontSize - 1),
                     ),
                   ),
                 ],
@@ -146,9 +135,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
-                            fontSize: widget.fontSize - 1,
-                            fontWeight: FontWeight.w400),
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -176,9 +164,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
+                            color: widget.textColor,
                             fontSize: widget.fontSize,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.bold),
                       ),
                       onTap: () async {
                         await copyColorToClipboard(context, widget.color);
@@ -212,8 +200,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                           overflow: TextOverflow.clip,
                           style: TextStyle(
                               color: widget.inputTextColor,
-                              fontSize: widget.fontSize - 1,
-                              fontWeight: FontWeight.w500),
+                              fontSize: widget.fontSize - 1),
                         ),
                         Row(
                           children: <Widget>[
@@ -237,10 +224,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                                   overflow: TextOverflow.clip,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: widget.inputTextColor
-                                          ?.withAlpha(alpha),
-                                      fontSize: widget.fontSize - 1,
-                                      fontWeight: FontWeight.w600),
+                                      color: widget.inputTextColor,
+                                      fontSize: widget.fontSize - 1),
                                 ),
                                 onTap: () async {
                                   await copyColorToClipboard(

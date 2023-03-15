@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
           App.title(context),
-          style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
+          style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
         ),
         menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
