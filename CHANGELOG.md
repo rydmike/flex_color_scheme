@@ -45,7 +45,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
 
-- The [systemNavigationBarDividerColor issue #100027](https://github.com/flutter/flutter/issues/100027) in Flutter that in FCS v5 forced removing support for divider on the system navigation bar in Android via `FlexColorScheme.themedSystemNavigationBar` has been fixed. The issue could no longer be observed on Android versions 8 to 13 on Flutter 3.7.7 stable. The divider has been enabled again, and itd test setting is also available in the Themes Playground app again. The extra `SystemUiOverlayStyle` used as a work-around for past issue on Android 11 has also been removed, it was no longer needed. 
+- The [systemNavigationBarDividerColor issue #100027](https://github.com/flutter/flutter/issues/100027) in Flutter that in FCS v5 forced removing support for divider on the system navigation bar in Android via `FlexColorScheme.themedSystemNavigationBar` has been fixed. The issue could no longer be observed on Android versions 8 to 13 on Flutter 3.7.7 stable. The divider has been enabled again, and its test setting is also available in the Themes Playground app again. The extra `SystemUiOverlayStyle` used as a work-around for same issue on Android 11 has also been removed. Workaround was no longer needed. 
 
 
 **NEW**
