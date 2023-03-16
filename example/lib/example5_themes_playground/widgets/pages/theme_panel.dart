@@ -93,8 +93,7 @@ class _ThemePanelState extends State<ThemePanel> {
   }
 }
 
-
-// // Performance experiment to return above Widget function
+// // Performance experiment to return above Widget as a function
 // //
 // // Tried it feels more sluggish, or?
 // Widget themePanel(int page, ThemeController controller) => <Widget>[

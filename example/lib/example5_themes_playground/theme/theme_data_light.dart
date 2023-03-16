@@ -61,7 +61,7 @@ ThemeData themeDataLight(ThemeController controller) {
     visualDensity: App.visualDensity,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
-    typography: controller.useTextTheme
+    typography: controller.useMaterial3
         ? Typography.material2021(platform: controller.platform)
         : Typography.material2018(platform: controller.platform),
     // Add a custom theme extension with light mode code highlight colors.

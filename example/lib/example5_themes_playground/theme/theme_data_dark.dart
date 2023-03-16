@@ -53,16 +53,15 @@ ThemeData themeDataDark(ThemeController controller) {
     dividerColor: colorScheme.outlineVariant,
     dialogBackgroundColor: colorScheme.background,
     indicatorColor: colorScheme.onSurface,
-
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
-    // in the Playground app
+    // in the Playground app.
     visualDensity: App.visualDensity,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     applyElevationOverlayColor: true,
-    typography: controller.useTextTheme
+    typography: controller.useMaterial3
         ? Typography.material2021(platform: controller.platform)
         : Typography.material2018(platform: controller.platform),
     // Add a custom theme extension with light mode code highlight colors.

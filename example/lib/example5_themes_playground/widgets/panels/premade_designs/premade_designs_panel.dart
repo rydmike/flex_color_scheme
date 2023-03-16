@@ -47,6 +47,7 @@ class PremadeDesignsPanel extends StatelessWidget {
           value: controller.confirmPremade,
           onChanged: controller.setConfirmPremade,
         ),
+        UseSeededColorSchemeSwitch(controller: controller),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RichText(
@@ -69,8 +70,6 @@ class PremadeDesignsPanel extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
-        UseSeededColorSchemeSwitch(controller: controller),
         const Divider(),
         SetupListTile(
           title: 'Themes Playground default',

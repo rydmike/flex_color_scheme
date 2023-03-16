@@ -5549,24 +5549,45 @@ class FlexColorScheme with Diagnosticable {
         ? subTheme.defaultRadiusAdaptive
         : subTheme.defaultRadius;
 
+    // Logic to determine the default Typography to use.
+    //
     // Used Typography deviates from the Flutter standard that _still_ uses the
     // old Typography.material2014 in favor of the newer Typography.material2018
-    // as default, if one is not provided. We use the Material 2 correct 2018
-    // as the default when not using M3. If using M3 or opting-in
-    // via sub-themes on using M3 TextTheme geometry, the new 2021 Typography
-    // is used that was released in Flutter 3.0.0.
-    final Typography effectiveTypography = typography ??
-        (((useSubThemes && subTheme.useTextTheme) || useMaterial3)
-            ? Typography.material2021(platform: effectivePlatform)
-            : Typography.material2018(platform: effectivePlatform));
+    // as default in M2, if one is not provided. We use the Material 2 correct
+    // 2018 typography as the default when not using M3. If using M3 or
+    // opting-in via sub-themes on using M3 TextTheme geometry, the new 2021
+    // Typography is used that was released in Flutter 3.0.0.
+    //
+    // A little know thing Typography.material2021 factory also needs the used
+    // M3 colorscheme for a correct style.
+    Typography defaultTypography() {
+      // ignore: use_if_null_to_convert_nulls_to_bools
+      if (useSubThemes && subTheme.useTextTheme == true) {
+        return Typography.material2021(
+            platform: effectivePlatform, colorScheme: colorScheme);
+      }
+      if (useSubThemes && subTheme.useTextTheme == null && useMaterial3) {
+        return Typography.material2021(
+            platform: effectivePlatform, colorScheme: colorScheme);
+      }
+      if (!useSubThemes && useMaterial3) {
+        return Typography.material2021(
+            platform: effectivePlatform, colorScheme: colorScheme);
+      }
+      return Typography.material2018(platform: effectivePlatform);
+    }
+
+    final Typography effectiveTypography = typography ?? defaultTypography();
 
     // We need the text themes locally for the theming, so we must form them
     // fully using the same process that the ThemeData() factory uses.
     TextTheme defText =
         isDark ? effectiveTypography.white : effectiveTypography.black;
+    final TextTheme typoColor = defText;
     final bool primaryIsDark = isColorDark(colorScheme.primary);
     TextTheme defPrimaryText =
         primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
+    final TextTheme typoPrimColor = defPrimaryText;
 
     // ThemeData uses this to apply a font from fontFamily, fontFamilyFallback
     // and package in this order to default text theme and primary text theme.
@@ -5591,6 +5612,86 @@ class FlexColorScheme with Diagnosticable {
       defText = defText.apply(package: package);
       defPrimaryText = defPrimaryText.apply(package: package);
     }
+    // Make default TextThemes, by also merging in the two TextThemes
+    // passed in via the constructor. The 2nd copyWith, ensures putting back
+    // correct contrast color on any passed in text theme. FCS does not
+    // require defining correct contrast colors for light/dark mode text theme,
+    // nor for the primary color contrast text theme. It always fixes them
+    // to be correct and also uses correct opacities on M2 typography, and
+    // opaque ones on M3 typography, regardless of used M2/M3 mode.
+    defText = defText.merge(textTheme);
+    defText = defText.copyWith(
+      // The textHiOpacity color style group.
+      displayLarge:
+          defText.displayLarge!.copyWith(color: typoColor.displayLarge!.color),
+      displayMedium: defText.displayMedium!
+          .copyWith(color: typoColor.displayMedium!.color),
+      displaySmall:
+          defText.displaySmall!.copyWith(color: typoColor.displaySmall!.color),
+      headlineLarge: defText.headlineLarge!
+          .copyWith(color: typoColor.headlineLarge!.color),
+      headlineMedium: defText.headlineMedium!
+          .copyWith(color: typoColor.headlineMedium!.color),
+      bodySmall: defText.bodySmall!.copyWith(color: typoColor.bodySmall!.color),
+      // The textMediumOpacity color style group.
+      headlineSmall: defText.headlineSmall!
+          .copyWith(color: typoColor.headlineSmall!.color),
+      titleLarge:
+          defText.titleLarge!.copyWith(color: typoColor.titleLarge!.color),
+      titleMedium:
+          defText.titleMedium!.copyWith(color: typoColor.titleMedium!.color),
+      bodyLarge: defText.bodyLarge!.copyWith(color: typoColor.bodyLarge!.color),
+      bodyMedium:
+          defText.bodyMedium!.copyWith(color: typoColor.bodyMedium!.color),
+      labelLarge:
+          defText.labelLarge!.copyWith(color: typoColor.labelLarge!.color),
+      // The textNoOpacity color style group.
+      titleSmall:
+          defText.titleSmall!.copyWith(color: typoColor.titleSmall!.color),
+      labelMedium:
+          defText.labelMedium!.copyWith(color: typoColor.labelMedium!.color),
+      labelSmall:
+          defText.labelSmall!.copyWith(color: typoColor.labelSmall!.color),
+    );
+    // Equivalent text theme and color correct for primary Text Theme that will
+    // always get correct contrast color to be used on primary color.
+    defPrimaryText = defPrimaryText.merge(primaryTextTheme);
+    defPrimaryText = defPrimaryText.copyWith(
+      // The primeHiOpacity color style group.
+      displayLarge: defPrimaryText.displayLarge!
+          .copyWith(color: typoPrimColor.displayLarge!.color),
+      displayMedium: defPrimaryText.displayMedium!
+          .copyWith(color: typoPrimColor.displayMedium!.color),
+      displaySmall: defPrimaryText.displaySmall!
+          .copyWith(color: typoPrimColor.displaySmall!.color),
+      headlineLarge: defPrimaryText.headlineLarge!
+          .copyWith(color: typoPrimColor.headlineLarge!.color),
+      headlineMedium: defPrimaryText.headlineMedium!
+          .copyWith(color: typoPrimColor.headlineMedium!.color),
+      bodySmall: defPrimaryText.bodySmall!
+          .copyWith(color: typoPrimColor.bodySmall!.color),
+      // The primeMediumOpacity color style group.
+      headlineSmall: defPrimaryText.headlineSmall!
+          .copyWith(color: typoPrimColor.headlineSmall!.color),
+      titleLarge: defPrimaryText.titleLarge!
+          .copyWith(color: typoPrimColor.titleLarge!.color),
+      titleMedium: defPrimaryText.titleMedium!
+          .copyWith(color: typoPrimColor.titleMedium!.color),
+      bodyLarge: defPrimaryText.bodyLarge!
+          .copyWith(color: typoPrimColor.bodyLarge!.color),
+      bodyMedium: defPrimaryText.bodyMedium!
+          .copyWith(color: typoPrimColor.bodyMedium!.color),
+      labelLarge: defPrimaryText.labelLarge!
+          .copyWith(color: typoPrimColor.labelLarge!.color),
+      // The primeNoOpacity color style group.
+      titleSmall: defPrimaryText.titleSmall!
+          .copyWith(color: typoPrimColor.titleSmall!.color),
+      labelMedium: defPrimaryText.labelMedium!
+          .copyWith(color: typoPrimColor.labelMedium!.color),
+      labelSmall: defPrimaryText.labelSmall!
+          .copyWith(color: typoPrimColor.labelSmall!.color),
+    );
+
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
@@ -5693,11 +5794,13 @@ class FlexColorScheme with Diagnosticable {
         labelSmall: defPrimaryText.labelSmall!.copyWith(color: primeNoOpacity),
       );
     }
-    // Make our final complete TextTheme, by also merging in the two TextThemes
-    // passed in via the constructor, adding any custom text theme definitions.
-    final TextTheme effectiveTextTheme = defText.merge(textTheme);
-    final TextTheme effectivePrimaryTextTheme =
-        defPrimaryText.merge(primaryTextTheme);
+    // Assigning results to effective text themes. In older versions a merge
+    // of original text themes were done here, but that is incorrect. It should
+    // be earlier above, where it is now. In principle we could use the "def"
+    // text themes further below in the code. But using the past final copies
+    // for now to indicate nothing more can or should be done to them.
+    final TextTheme effectiveTextTheme = defText;
+    final TextTheme effectivePrimaryTextTheme = defPrimaryText;
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
@@ -5771,17 +5874,17 @@ class FlexColorScheme with Diagnosticable {
           : Brightness.dark,
 
       // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
-      //   Would be useful it could set system navbar properties too and not
-      //   only status bar properties. While it might be odd to do so, it
-      //   seems even more odd that a part of the SystemUiOverlayStyle has
-      //   no effect when used here.
-      //   See https://github.com/flutter/flutter/issues/104410
-      //   and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
-      //   PR: https://github.com/flutter/flutter/pull/104827
+      // It would be useful if we could set system navbar properties too and not
+      // only status bar properties. While it might be odd to do so, it
+      // seems even more odd that a part of the SystemUiOverlayStyle has
+      // no effect when used here.
+      // See https://github.com/flutter/flutter/issues/104410
+      // and https://github.com/flutter/flutter/issues/100027#issuecomment-1077697819
+      // PR: https://github.com/flutter/flutter/pull/104827
       // The systemNavigationBarColor used by default AppBar in SDK is
       // always black, like so:
       // systemNavigationBarColor: const Color(0xFF000000),
-      // We try to set it to scheme background instead in AppBar theme,
+      // If we try to set it to scheme background instead in AppBar theme, it
       // does not do anything, result will be black anyway.
       systemNavigationBarColor: colorScheme.background,
       // The systemNavigationBarIconBrightness used by the AppBar in SDK, is

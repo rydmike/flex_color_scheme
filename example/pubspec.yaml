@@ -54,7 +54,7 @@ dependencies:
   # SVG file drawing, used for Undraw Asset Images (by dnfield.dev).
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg (by dnfield.dev)
-  flutter_svg: ^2.0.3
+  flutter_svg: ^2.0.4
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
@@ -106,9 +106,11 @@ flutter:
     # images contains all different resolutions:
     # mdpi (1.0x), hdpi (1.5x), xhdpi (2.0x), xxhdpi (3.0x), xxxhdpi (4.0x)
     - assets/images/
+    # Google fonts, font assets
+    - assets/google_fonts/
 
   # Custom icon font package with only needed and used icons.
   fonts:
-    - family:  FlexIcons
+    - family: FlexIcons
       fonts:
         - asset: assets/fonts/FlexIcons.ttf

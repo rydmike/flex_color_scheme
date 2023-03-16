@@ -151,6 +151,11 @@ class Store {
   // Key used to read and save the useTextTheme value.
   static const String keyUseTextTheme = 'useTextTheme';
   // Default value for the useSubThemes, also used to reset settings.
+  // The controller uses a nullable bool with different defaults in
+  // M2 and M3 mode if it is set to null. The API use null as default for this
+  // property and it can be set to null in Playground, but playground is
+  // a bit opinionated and defaults to always uing M3 typography since it is
+  // much much better than M2.
   static const bool defaultUseTextTheme = true;
 
   // Key used to read and save the useM2StyleDividerInM3 value.

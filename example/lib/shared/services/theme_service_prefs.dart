@@ -76,22 +76,17 @@ class ThemeServicePrefs implements ThemeService {
   // To be able to also use SharedPreferences as a persistence service for
   // this app, we use a few simple rules.
   //
-  // bool   : Null is not supported, null can be sent to 'save', but is stored
-  //          as false and returned as false when loaded.
-  // int    : Any loaded negative number is returned as null.
-  // double : Any loaded negative number is returned as null.
-  // String : String value <NULL> is returned as null.
-  // Color  : Any loaded negative number is returned as null, and any loaded
+  // bool   : Is stored as int, but returned as bool
+  //          Null is saved is int -1, false as 0, true as 1.
+  //          Any loaded negative number is returned as bool null.
+  //          Any loaded positive number is returned as true, 0 as false.
+  // int    : Any loaded negative number is returned as int null.
+  // double : Any loaded negative number is returned as double null.
+  // String : String value <NULL> is returned as String null.
+  // Color  : Any loaded negative number is returned as Color null, any loaded
   //          value higher than 0xFFFFFFFF is returned as default value.
   // Enum   : Any loaded negative value is returned as null, and any over bounds
   //          of enum range, for the enum type, is returned as default value.
-  //
-  // We can do this because this app does not need to persist any negative
-  // values, nor any null bool. Sure Flutter SDK has many bool inputs that can
-  // be "null", but it defaults to true/false when that is the case. So
-  // selecting the value that gives you the default SDK behavior for bool
-  // inputs is not a problem, you just have to know what the default fallback
-  // is.
   //
   // For now this works OK for the use cases for this application.
   // Generally though, prefer using Hive for key-value pair storage, it handles
@@ -106,28 +101,46 @@ class ThemeServicePrefs implements ThemeService {
       }
       // T is boolean nullable value.
       if (sameTypes<T, bool?>()) {
-        final bool? value = _prefs.getBool(key);
+        final int? value = _prefs.getInt(key);
         if (_debug) {
           debugPrint('SharedPrefs loaded type bool?   : $key as $value');
+          if (value == null) {
+            debugPrint('      Returned as default value : $defaultValue');
+          }
         }
         // If value is null, we had no key for it, we should return the
         // default value, that may also be null, but it might not be too,
         // but it will be of nullable bool type.
         if (value == null) return defaultValue;
-        // else we return the value.
-        return value as T;
-        // return Future<T>(() => value as T);
+        bool? result;
+        if (value == 0) result = false;
+        if (value >= 1) result = true;
+        return result as T; // Returns null if value was less than zero
       }
       // T is boolean none nullable value.
       if (sameTypes<T, bool>()) {
         // For a non nullable, we can just use the defaultValue as fallback if
         // a key did not exist.
-        final bool value = _prefs.getBool(key) ?? defaultValue as bool;
+        final int? value = _prefs.getInt(key);
         if (_debug) {
           debugPrint('SharedPrefs loaded type bool    : $key as $value');
+          if (value == null) {
+            debugPrint('      Returned as default value : $defaultValue');
+          }
         }
-        return value as T;
-        // return Future<T>(() => value as T);
+        // If value is null, we had no key for it, we should return the
+        // default value, that always has a value that is never null.
+        if (value == null) {
+          return defaultValue;
+        } else {
+          bool result;
+          if (value == 0) {
+            result = false;
+          } else {
+            result = true;
+          }
+          return result as T;
+        }
       }
       // T is integer nullable value.
       if (sameTypes<T, int?>()) {
@@ -144,7 +157,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return null as T;
         // else we return the value.
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is integer none nullable value.
       if (sameTypes<T, int>()) {
@@ -156,7 +168,6 @@ class ThemeServicePrefs implements ThemeService {
         }
         // else we return the value.
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is double nullable value.
       if (sameTypes<T, double?>()) {
@@ -167,7 +178,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value == null) return defaultValue;
         if (value < 0.0) return null as T;
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is double none nullable value.
       if (sameTypes<T, double>()) {
@@ -176,7 +186,6 @@ class ThemeServicePrefs implements ThemeService {
           debugPrint('SharedPrefs loaded type double  : $key as $value');
         }
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is String nullable value.
       if (sameTypes<T, String?>()) {
@@ -187,7 +196,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value == null) return defaultValue;
         if (value == '<NULL>') return null as T;
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is String none nullable value.
       if (sameTypes<T, String>()) {
@@ -196,7 +204,6 @@ class ThemeServicePrefs implements ThemeService {
           debugPrint('SharedPrefs loaded type String  : $key as $value');
         }
         return value as T;
-        // return Future<T>(() => value as T);
       }
       // T is Color nullable value.
       if (sameTypes<T, Color?>()) {
@@ -214,7 +221,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value > 0xFFFFFFFF) return defaultValue;
         // else we return the value as a Color of type T.
         return Color(value) as T;
-        // return Future<T>(() => Color(value) as T);
       }
       // T is Color none nullable value.
       if (sameTypes<T, Color>()) {
@@ -231,7 +237,6 @@ class ThemeServicePrefs implements ThemeService {
         if (value > 0xFFFFFFFF) return defaultValue;
         // else we return the value as a Color of type T.
         return Color(value) as T;
-        // return Future<T>(() => Color(value) as T);
       }
       // We have to explicitly handle each Enum type we have stored to be able
       // to convert it back to its type, which we have in its type parameter.
@@ -599,36 +604,33 @@ class ThemeServicePrefs implements ThemeService {
   // String : Null is saved as string <NULL>
   // Enum   : Null is saved as -1
   // Color  : Null is saved as -1
-  // bool   : Null is not supported, but allowed, but saved as false.
-  //
-  // The app does not need to persist any negative values, nor any null bool,
-  // so for now this works OK for the use case in this scenario.
-  // Generally though, just use Hive for key-value pair storage, it handles
-  // this better and is faster.
+  // bool   : Is passed as bool, but stored as int, and load returns bool.
+  //          Null is stored is int -1, false as 0, true as 1.
   @override
   Future<void> save<T>(String key, T value) async {
     try {
       // Save a nullable bool value.
       if (sameTypes<T, bool?>()) {
         if (value == null) {
-          await _prefs.setBool(key, false);
+          await _prefs.setInt(key, -1);
           if (_debug) {
-            debugPrint('SharedPrefs saved type bool?    : $key NULL as $value');
+            debugPrint(
+                'SharedPrefs saved type bool? as int: $key NULL as $value');
           }
           return;
         } else {
-          await _prefs.setBool(key, value as bool);
+          await _prefs.setInt(key, (value as bool) ? 1 : 0);
           if (_debug) {
-            debugPrint('SharedPrefs saved type bool?    : $key as $value');
+            debugPrint('SharedPrefs saved type bool? int: $key as $value');
           }
           return;
         }
       }
       // Save a none nullable bool value.
       if (sameTypes<T, bool>()) {
-        await _prefs.setBool(key, value as bool);
+        await _prefs.setInt(key, (value as bool) ? 1 : 0);
         if (_debug) {
-          debugPrint('SharedPrefs saved type bool     : $key as $value');
+          debugPrint('SharedPrefs saved type bool as int : $key as $value');
         }
         return;
       }

@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
@@ -60,6 +63,16 @@ Future<void> main() async {
   // Load preferred theme settings, while the app is loading, before MaterialApp
   // is created, this prevents a theme change when the app is first displayed.
   await themeController.loadAll();
+
+  // Only use Google fonts via asset provided fonts.
+  GoogleFonts.config.allowRuntimeFetching = false;
+  // Add font license info for used fonts from Google fonts.
+  LicenseRegistry.addLicense(() async* {
+    final String license =
+        await rootBundle.loadString('assets/google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(<String>['google_fonts'], license);
+  });
+
   // Run the app and pass in the ThemeController. The app listens to the
   // ThemeController for changes. The same ThemeController as used in example 4
   // controls all the myriad of Theme settings and the ThemeService also

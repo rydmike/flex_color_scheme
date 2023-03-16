@@ -170,7 +170,7 @@ class FlexSubThemesData with Diagnosticable {
     this.adaptiveRadius,
     //
     this.blendTextTheme = false,
-    this.useTextTheme = true,
+    this.useTextTheme,
     this.useM2StyleDividerInM3 = false,
     //
     this.defaultRadius,
@@ -829,22 +829,23 @@ class FlexSubThemesData with Diagnosticable {
   /// apps past style, set [blendTextTheme] to true.
   final bool blendTextTheme;
 
-  /// Use Material 3 TextTheme and Typography
+  /// Determines if Material 3 TextTheme and Typography is used.
   ///
   /// When opting in on using the sub-theming, this flag controls if the
   /// TextTheme will use the new Material 3 [Typography.material2021]
   /// as specified in the [Material 3 Design Guide](https://m3.material.io).
   ///
-  /// Defaults to true.
+  /// If not defined, and [ThemeData.useMaterial3] is true, then it defaults
+  /// to true. If [ThemeData.useMaterial3] is false, then it defaults to
+  /// false.
   ///
-  /// If set to true [Typography.material2021] is used.
-  /// Note that [Typography.material2021] will also be used, even if this flag
-  /// is false if [ThemeData.useMaterial3] is true, which can also be set via
-  /// [FlexColorScheme.useMaterial3].
+  /// This toggle works as an override toggle for using
+  /// Typography.material2021] in Material 2 mode and for using
+  /// [Typography.material2018] in Material 3 mode.
   ///
-  /// When using [FlexColorScheme], and [ThemeData.useMaterial3] is true and
-  /// sub themes are not used, or if used and [useTextTheme] is false, then
-  /// default typography is [Typography.material2018]. If [FlexColorScheme] is
+  /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
+  /// sub themes are not used, then default typography is
+  /// [Typography.material2018]. Note that if [FlexColorScheme] is
   /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
   /// then Flutter defaults to using very old poor [Typography.material2014].
   /// In such cases consider defining your typography manually to
@@ -853,7 +854,18 @@ class FlexSubThemesData with Diagnosticable {
   /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
   /// like ThemeData. You apply and use them just as you would with ThemeData.
   /// This text theme is just a custom predefined TextTheme.
-  final bool useTextTheme;
+  ///
+  /// If you specify a custom [typography] to [FlexColorScheme] or
+  /// [FlexThemeData], this property has no impact on used typography.
+  ///
+  /// This property was originally used in [FlexColorScheme] to opt-in on using
+  /// a custom text theme defined internally by [FlexColorScheme] to look like
+  /// the typography and text theme used in Material 3, before such a text theme
+  /// and typography existed in Flutter. When Flutter started providing M3
+  /// text theme and typography, this property was converted into toggle to opt
+  /// in and out of using the th text theme. Typically you do not want to
+  /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
+  final bool? useTextTheme;
 
   /// Determines if M2 style opacity based divider is used in Material 3.
   ///

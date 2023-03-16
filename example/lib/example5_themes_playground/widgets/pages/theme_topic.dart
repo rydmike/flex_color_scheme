@@ -69,7 +69,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     heading: 'AppBar and BottomAppBar',
-    buttonLabel: 'AppBar\nBottomAppBar',
+    buttonLabel: 'AppBar',
     icon: Icons.web_asset_outlined,
   ),
   ThemeTopic(

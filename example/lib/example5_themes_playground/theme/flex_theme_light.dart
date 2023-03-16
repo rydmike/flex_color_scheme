@@ -473,23 +473,33 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintLight,
     //
-    // ThemeData properties passed along directly to ThemeData.
-    //
-    // Modify the value in the AppData class to change it.
+    // Modify the value in the App class to change it.
     visualDensity: App.visualDensity,
-    // Custom font, modify in AppData class to change it.
+    //
+    // Custom font, modify in App class to change it.
+    // For demonstration purposes the custom font is defined via Google fonts
+    // both as its fontFamily name and its TextTheme. In the playground we pass
+    // the textTheme to fontFamily and the textTheme to both textTheme and
+    // primaryTextTheme. You can remove either the fontFamily or the
+    // textTheme/primaryTextTheme usage and it will still work fine.
+    // FlexColorScheme will also sort out the right text theme contrasts for
+    // light and dark themes and for the primaryTextTheme to always have right
+    // contrast for whatever primary color is used. FlexColorScheme also retains
+    // the correct opacities on text style if M2 Typography is used, and removes
+    // it from style when M3 Typography is used.
     fontFamily: controller.useAppFont ? App.font : null,
+    textTheme: controller.useAppFont ? App.textTheme : null,
+    primaryTextTheme: controller.useAppFont ? App.textTheme : null,
+    //
+    // To test manual typography override use this:
+    // typography: Typography.material2021(platform: controller.platform),
+    // Or the one below, the selection will correctly override the via
+    // sub themes "useTextTheme" value.
+    // typography: Typography.material2018(platform: controller.platform),
+    //
     // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
-    // Opt-in/out of using Flutter SDK Material3 based theming
-    // features. In Flutter SDK 2.10 and earlier it has almost no
-    // effect, but it will later and then we can use this toggle
-    // with FlexColorScheme too, and in this demo we can see its
-    // impact easily.
     useMaterial3: controller.useMaterial3,
-    typography: controller.useTextTheme
-        ? Typography.material2021(platform: controller.platform)
-        : Typography.material2018(platform: controller.platform),
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(source, Brightness.light),

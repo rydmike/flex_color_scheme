@@ -979,8 +979,6 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
-    // TimePickerThemeData:<TimePickerThemeData#5fb74(shape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(28.0)), hourMinuteShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), dayPeriodShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), inputDecorationTheme: InputDecorationTheme#857aa(errorStyle: TextStyle(inherit: true, size: 0.0, height: 0.0x), contentPadding: EdgeInsets.zero))>
-    // TimePickerThemeData:<TimePickerThemeData#7f4c4(shape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(28.0)), hourMinuteShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)), dayPeriodShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(8.0)))>
     test(
         'TimePicker FST1.07-default: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '

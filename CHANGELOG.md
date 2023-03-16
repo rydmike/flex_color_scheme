@@ -35,7 +35,7 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Use image zoom feature in docs.page on new and old images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
-**Mar 15, 2023**
+**Mar 16, 2023**
 
 **FIX**
 
@@ -46,6 +46,8 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 - The `FlexThemeModeOptionButton` now correctly display its `hoverColor`, previously it was obscured by the colored boxes inside it.
 
 - The [systemNavigationBarDividerColor issue #100027](https://github.com/flutter/flutter/issues/100027) in Flutter that in FCS v5 forced removing support for divider on the system navigation bar in Android via `FlexColorScheme.themedSystemNavigationBar` has been fixed. The issue could no longer be observed on Android versions 8 to 13 on Flutter 3.7.7 stable. The divider has been enabled again, and its test setting is also available in the Themes Playground app again. The extra `SystemUiOverlayStyle` used as a work-around for same issue on Android 11 has also been removed. Workaround was no longer needed. 
+
+- Fixed a **bug** where when passing in a custom `textTheme` or `primaryTextTheme`, instead of just defining text theme via `fontFamily`, that FCS tinted text feature via `subThemesData.blendTextTheme` was not being correctly applied to the custom text themes. This is now working correctly. If `subThemesData.blendTextTheme` is not being used, then the used Typography, either via `subThemesData.useTextTheme`, or by using a custom `FlexColorScheme.typography` override, always gets correct brightness for both `textTheme` and `primaryTextTheme`, regardless of brightness on passed in text themes. They also get the used Typography appropriate opacities on their text styles. In practice, this means that M2 style 2018 typography has opacity on some text styles, while M3 style 2021 typography, is fully opaque for all text styles.    
 
 
 **NEW**
@@ -165,6 +167,13 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 
 - **API breaking**: In `FlexSubThemes` the `floatingActionButtonTheme` and `timePickerTheme` now require the `colorScheme`, previously it was optional in both. Unless you have used `FlexSubThemes.floatingActionButtonTheme` or `FlexSubThemes.timePickerTheme` directly as helpers to make custom component themes with them, and not as typically used via `FlexSubThemesData`, you will not notice this breaking API change. 
 
+
+- **API breaking**: The `FlexSubThemesData` property `useTextTheme`, is now nullable and defaults to null. Previosuly it was not nullable and defaulted to false. As before, this boolean toggle determines if the Material 3 TextTheme and Typography is used. 
+  - When opted in on using FCS sub-themes, this flag controls if TextTheme uses the new Material `Typography.material2021`. 
+  - If not defined, and `ThemeData.useMaterial3` is true, then `useTextTheme` defaults to true and `Typography.material2021` is used. If `ThemeData.useMaterial3` is false, then `useTextTheme` defaults to false, and `Typography.material2018` is used.
+  - This toggle works as a quick override toggle for using `Typography.material2021` in Material 2 mode, and for using `Typography.material2018` in Material 3 mode.
+  - When using FlexColorScheme and `ThemeData.useMaterial3` is false and sub themes are not used, then default typography is `Typography.material2018`. Note that if FlexColorScheme is not used at all, and your `ThemeData` has `ThemeData.useMaterial3` set to false, then Flutter defaults to using obsolete `Typography.material2014`. In such a case, consider defining your typography manually to `Typography.material2018` or why not even `Typography.material2021`.
+  - If you specify a custom `typography` for `FlexColorScheme` or `FlexThemeData`, the `useTextTheme` property has no impact on used typography at all.
 
 - The `SegmentedButton` unselected button foreground color defaults to the correct M3 spec color `onSurface`.  
   This is a change from 7.0.0-dev.2, but not considered style breaking since it has not existed in previous stable versions. Flutter 3.7.3 and earlier versions, via a bug defaults to using `primary` color. See issue [#119733](https://github.com/flutter/flutter/issues/119733) for more information. Using the new `segmentedButtonUnselectedForegroundSchemeColor` we can still also define it to use the faulty `primary` color, that Flutter for now uses as default, which actually looks quite nice.

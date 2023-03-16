@@ -4,6 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/use_material3_text_theme.dart';
 import '../../shared/use_tinted_text_theme.dart';
+import 'use_app_font_switch_list_tile.dart';
 
 class TextThemeSettings extends StatelessWidget {
   const TextThemeSettings(this.controller, {super.key});
@@ -17,15 +18,7 @@ class TextThemeSettings extends StatelessWidget {
         const SizedBox(height: 8),
         UseMaterial3TextTheme(controller: controller),
         UseTinted3TextTheme(controller: controller),
-        SwitchListTile(
-          title: const Text("Use the application's font Noto Sans"),
-          subtitle: const Text('You can turn OFF using any app font definition '
-              'here to see what the TextTheme looks like on each platform with '
-              'its default. This is an app toggle, not a FlexColorScheme '
-              'theming toggle.'),
-          value: controller.useAppFont,
-          onChanged: controller.setUseAppFont,
-        ),
+        UseAppFontSwitchLisTile(controller: controller),
         const Padding(
           padding: EdgeInsets.all(16),
           child: TextThemeShowcase(),

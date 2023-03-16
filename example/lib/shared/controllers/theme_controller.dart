@@ -2219,10 +2219,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyShowSchemeInput, value));
   }
 
-  late bool _useTextTheme;
-  bool get useTextTheme => _useTextTheme;
+  late bool? _useTextTheme;
+  bool? get useTextTheme => _useTextTheme;
   void setUseTextTheme(bool? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _useTextTheme) return;
     _useTextTheme = value;
     if (notify) notifyListeners();

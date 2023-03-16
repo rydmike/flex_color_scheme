@@ -81,7 +81,7 @@ class DartCodeDialogScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: Container(
+          body: ConstrainedBox(
             constraints: const BoxConstraints.expand(),
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),

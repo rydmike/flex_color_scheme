@@ -168,7 +168,18 @@ class App {
 
   // Get the main font that is used in some of the examples.
   // Feel free to try different fonts.
+  // For demonstration purposes the custom font is defined via Google fonts
+  // both as its fontFamily name and its TextTheme. In the playground we pass
+  // the textTheme to fontFamily and the textTheme to both textTheme and
+  // primaryTextTheme. You can remove either the fontFamily or the
+  // textTheme/primaryTextTheme usage and it will still work fine.
+  // FlexColorScheme will also sort out the right text theme contrasts for
+  // light and dark themes and for the primaryTextTheme to always have right
+  // contrast for whatever primary color is used. FlexColorScheme also retains
+  // the correct opacities on text style if M2 Typography is used, and removes
+  // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
+  static TextTheme get textTheme => GoogleFonts.notoSansTextTheme();
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.
