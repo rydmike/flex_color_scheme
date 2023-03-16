@@ -22,7 +22,7 @@ class UseTinted3TextTheme extends StatelessWidget {
                 : null,
           )
         : SwitchListTile(
-            title: const Text('Dark mode TextTheme is tint'),
+            title: const Text('Dark mode TextTheme tint'),
             subtitle: const Text('A hint of tint color, typically primary, is '
                 'mixed into main and primary text theme. This style divides '
                 'opinions. Keep it OFF for default white and light grey text.'),

@@ -67,13 +67,13 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTile(
           title: Text('Theme following Android system navigation bar'),
-          subtitle: Text('This feature only has any effect if you '
-              'build this application for an Android device. It '
-              'demonstrates the usage of the AnnotatedRegion helper '
-              'FlexColorScheme themedSystemNavigationBar. These '
+          subtitle: Text('The settings below only have any effect if you '
+              'build this application for an Android device. They then '
+              'demonstrates the usage and effects of the AnnotatedRegion '
+              'helper "FlexColorScheme.themedSystemNavigationBar". These '
               'settings do not have any impact on generated theme setup code. '
               'You have to implement the AnnotatedRegion with the helper '
-              'separately.'),
+              'separately in your application.'),
         ),
         const ListTile(
           title: Text('Background opacity'),
@@ -154,7 +154,8 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'You can read more about how to use FlexColorScheme '
-                      'annotated region helper in the ',
+                      'annotated region helper "themedSystemNavigationBar" '
+                      'in the ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -185,7 +186,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: ' impacted the FlexColorScheme annotated region helper '
                       'to the degree that divider support was removed. The '
-                      'issue has been solved and the divider feature restored '
+                      'issue has been fixed and the divider feature restored '
                       'in FCS v7 and later.',
                 ),
               ],
