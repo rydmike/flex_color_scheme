@@ -70,7 +70,6 @@ class _ColorCardState extends State<ColorCard> {
     }
   }
 
-  // late String materialName;
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
