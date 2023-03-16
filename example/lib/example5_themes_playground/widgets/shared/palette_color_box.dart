@@ -1,11 +1,11 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
+// import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// A Material widget used as a color indicator to show a color in the
 /// TonalPalette.
 @immutable
-class PaletteColorBox extends StatefulWidget {
+class PaletteColorBox extends StatelessWidget {
   /// Default const constructor for the color indicator.
   const PaletteColorBox(
       {super.key,
@@ -42,61 +42,27 @@ class PaletteColorBox extends StatefulWidget {
   final Widget? child;
 
   @override
-  State<PaletteColorBox> createState() => _PaletteColorBoxState();
-}
-
-class _PaletteColorBoxState extends State<PaletteColorBox> {
-  late String materialName;
-  late String nameThatColor;
-  late String space;
-  late String hexCode;
-  late bool colorIsLight;
-
-  // The nameThatColor and materialName lookups are expensive, especially
-  // nameThatColor. Widget stores them as stateful values to avoid computing
-  // them every time the widget rebuilds.
-  @override
-  void initState() {
-    super.initState();
-    materialName = ColorTools.materialName(widget.color);
-    nameThatColor = ColorTools.nameThatColor(widget.color);
-    space = materialName == '' ? '' : ' ';
-    hexCode = widget.color.hexCode;
-    colorIsLight =
-        ThemeData.estimateBrightnessForColor(widget.color) == Brightness.light;
-  }
-
-  @override
-  void didUpdateWidget(covariant PaletteColorBox oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.color != oldWidget.color) {
-      materialName = ColorTools.materialName(widget.color);
-      nameThatColor = ColorTools.nameThatColor(widget.color);
-      space = materialName == '' ? '' : ' ';
-      hexCode = widget.color.hexCode;
-      colorIsLight = ThemeData.estimateBrightnessForColor(widget.color) ==
-          Brightness.light;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final bool colorIsLight =
+        ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+    final String hexCode = color.hexCode;
+
     return Tooltip(
       waitDuration: const Duration(milliseconds: 700),
-      message: '${widget.name} tone ${widget.tone}\n'
-          '#$hexCode $nameThatColor$space$materialName\n'
+      message: '$name tone $tone\n'
+          'Color #$hexCode\n'
           'Tap to copy to Clipboard',
       child: Material(
         type: MaterialType.canvas,
-        color: widget.color,
+        color: color,
         clipBehavior: Clip.none,
         child: SizedBox(
-          height: widget.height,
+          height: height,
           child: InkWell(
             focusColor: colorIsLight ? Colors.black26 : Colors.white30,
             hoverColor: colorIsLight ? Colors.black26 : Colors.white30,
-            onTap: widget.onTap?.call,
-            child: widget.child,
+            onTap: onTap?.call,
+            child: child,
           ),
         ),
       ),

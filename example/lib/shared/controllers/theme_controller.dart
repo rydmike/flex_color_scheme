@@ -4765,24 +4765,38 @@ class ThemeController with ChangeNotifier {
     _recentColors = colors;
   }
 
-  // Helper ChangeNotifiers tucked into ThemeController because I'm lazy.
-  // ===========================================================================
+  // Helper ChangeNotifiers tucked into ThemeController.
+  // The ChangeNotifiers below should be in its own controller.
+  // Maybe that it is not is what started to cause issues on WEB builds?
+  // TODO(rydmike): Try own hover controller and see if it fixes the issue.
 
-  // This is just a controller prop for hovered color on Colorscheme.
-  Color? _hoverColor;
-  Color? get hoverColor => _hoverColor;
-  void setHoverColor(Color? value, [bool notify = true]) {
-    if (value == _hoverColor) return;
-    _hoverColor = value;
-    if (notify) notifyListeners();
-  }
+  // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+  // For some reason tone hover feature started causing issues in WEB release
+  // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
+  // why that happens only on web release mode and not in its debug mode or
+  // any mode VM mode build.
+  // Removal of this feature has removed commented code in:
+  // - theme_controller.dart
+  // - scheme_colors.dart
+  // - show_tonal_palette.dart
+  // - seeded_color_scheme_settings.dart
+  // ------- Commented controller below ------
 
-  // This is just a controller prop for hovered palette on Colorscheme.
-  TonalPalettes? _hoverTonalPalette;
-  TonalPalettes? get hoverTonalPalette => _hoverTonalPalette;
-  void setHoverTonalPalette(TonalPalettes? value, [bool notify = true]) {
-    if (value == _hoverTonalPalette) return;
-    _hoverTonalPalette = value;
-    if (notify) notifyListeners();
-  }
+  // // This is just a controller prop for hovered color on Colorscheme.
+  // Color? _hoverColor;
+  // Color? get hoverColor => _hoverColor;
+  // void setHoverColor(Color? value, [bool notify = true]) {
+  //   if (value == _hoverColor) return;
+  //   _hoverColor = value;
+  //   if (notify) notifyListeners();
+  // }
+  //
+  // // This is just a controller prop for hovered palette on Colorscheme.
+  // TonalPalettes? _hoverTonalPalette;
+  // TonalPalettes? get hoverTonalPalette => _hoverTonalPalette;
+  // void setHoverTonalPalette(TonalPalettes? value, [bool notify = true]) {
+  //   if (value == _hoverTonalPalette) return;
+  //   _hoverTonalPalette = value;
+  //   if (notify) notifyListeners();
+  // }
 }

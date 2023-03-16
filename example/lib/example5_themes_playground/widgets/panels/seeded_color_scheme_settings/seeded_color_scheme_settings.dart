@@ -130,11 +130,13 @@ class SeededColorSchemeSettings extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'Tap a color code to copy it to the clipboard.\n'
+              'Tap a color code to copy it to the clipboard.',
+              // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+              //'\n'
               // ignore: lines_longer_than_80_chars
-              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
+              // "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
-              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
+              // "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: theme.textTheme.labelSmall,
             ),
           ),
