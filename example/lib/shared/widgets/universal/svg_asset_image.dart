@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-// ignore_for_file: prefer_asserts_with_message
-
 /// Displays an Undraw SVG image provided in the applications asset bundle.
 ///
 /// The [assetName] is the path and name of the SVG file in the asset bundle.
@@ -44,24 +42,30 @@ class SvgAssetImage extends StatefulWidget {
 }
 
 class _SvgAssetImageState extends State<SvgAssetImage> {
-  // late Future<SvgPicture> svgImage;
-  // late String svgString;
+  late Future<SvgPicture> svgImage;
+  // The SVG asset as loaded from the asset bundle.
+  late String assetSvgString;
 
-  Future<SvgPicture> _coloredUndrawImage(
-      final String name, final Color color) async {
-    String svgString = await rootBundle.loadString(widget.assetName);
+  // The SVG asset with its color changed.
+  late String svgString;
+
+  Future<SvgPicture> _coloredUndrawImage(bool load, Color color) async {
+    if (load) assetSvgString = await rootBundle.loadString(widget.assetName);
     String valueString = color.toString().split('(0x')[1].split(')')[0];
     valueString = valueString.substring(2, valueString.length);
-
     // Find the default image 'theme' color in the Undraw SVG, and replace
     // the color with another color string value we want to use instead.
-    svgString = svgString.replaceAll('#6c63ff', '#$valueString');
+    // We store the original bundle asset and change colors on the original
+    // if the same asset is re-used but with new color. We could use previous
+    // color as the one to replace on next go and save some memory. However,
+    // the color we changed to earlier, might be same as some other color in
+    // SVG that is not a part of the original source color designed in these
+    // SVGs to be swapped out for a new one. If we then do th with random colors
+    // long enough, the SVG will eventually become monochromatic and all colors
+    // equal to the new color.
+    svgString = assetSvgString.replaceAll('#6c63ff', '#$valueString');
     return SvgPicture.string(
-      // On purpose using only asset name as its ValueKey, if we add color to
-      // it we get a flash on the drawing, when the new color is applied,
-      // this just replaces it and it animates if it is a theme color and we
-      // change theme.
-      key: ValueKey<String>(widget.assetName),
+      key: ValueKey<String>('SVG:${widget.assetName}-$color'),
       svgString,
       height: widget.height,
       width: widget.width,
@@ -72,11 +76,29 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   }
 
   @override
-  Widget build(final BuildContext context) {
-    return FutureBuilder<SvgPicture>(
+  void initState() {
+    super.initState();
+    // False positive, see: https://github.com/dart-lang/linter/issues/3739
+    // ignore: discarded_futures
+    svgImage = _coloredUndrawImage(true, widget.color);
+  }
+
+  @override
+  void didUpdateWidget(covariant SvgAssetImage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.color != oldWidget.color ||
+        widget.assetName != oldWidget.assetName) {
+      final bool loadSvgAsset = widget.assetName != oldWidget.assetName;
       // False positive, see: https://github.com/dart-lang/linter/issues/3739
       // ignore: discarded_futures
-      future: _coloredUndrawImage(widget.assetName, widget.color),
+      svgImage = _coloredUndrawImage(loadSvgAsset, widget.color);
+    }
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    return FutureBuilder<SvgPicture>(
+      future: svgImage,
       builder:
           (final BuildContext context, final AsyncSnapshot<Widget> snapshot) {
         if (snapshot.hasData) {
