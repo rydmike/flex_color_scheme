@@ -28,9 +28,9 @@ class ComponentSettings extends StatelessWidget {
           title: const Text('Use component sub themes'),
           subtitle: const Text("FlexColorScheme's M2 mode is very opinionated. "
               'Components look almost like M3, but done in M2 mode. '
-              'In M3 mode there are only a few subtle nuance differences to '
-              'default M3 style, and some fixes to Flutter M3 '
-              'specification styling bugs.'),
+              'When using M3 there are only a few nuance differences to '
+              'default M3 style, and some fixes to a few Flutter Material 3 '
+              'specification deviations.'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -38,9 +38,9 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTile(
           title: const Text('Use Material 2 style divider in Material 3'),
           subtitle: const Text('In M3 the primary color tinted outlineVariant '
-              'may not fit on all background colors. The M2 style based on '
-              'black or white with opacity does. It is also less prominent '
-              'than the M3 style and may be preferred.'),
+              'Divider may not fit on all background colors. The M2 style '
+              'based on black or white, with opacity always fits. It is also '
+              'less prominent than the M3 style and may be preferred.'),
           value: controller.useM2StyleDividerInM3 &&
               controller.useSubThemes &&
               controller.useMaterial3 &&

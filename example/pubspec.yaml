@@ -12,8 +12,8 @@ dependencies:
   # https://pub.dev/packages/animations
   animations: ^2.0.7
 
-  # Confetti for some fun on the demo (by funwith.app).
-  # Just for fun on the mock login button in the simulator app in Playground.
+  # Confetti for some fun in the demo (by funwith.app).
+  # Used for fun on the mock login button in the simulator app in the Playground.
   # https://pub.dev/packages/confetti
   confetti: ^0.7.0
 
@@ -23,7 +23,7 @@ dependencies:
   cupertino_icons: ^1.0.5
 
   # Simulated device frames package by aloisdeniel.com.
-  # Use for the theme simulator in the Playground.
+  # Used by the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
   device_frame: ^1.1.0
 
@@ -38,7 +38,7 @@ dependencies:
     path: ../
 
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
-  # Used directly by the playground app to compute and display tonal palettes.
+  # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
   flex_seed_scheme: ^1.2.0
 
@@ -51,9 +51,9 @@ dependencies:
   # https://pub.dev/packages/flutter_staggered_grid_view
   flutter_staggered_grid_view: ^0.6.2
 
-  # SVG file drawing, used for Undraw Asset Images (by dnfield.dev).
+  # SVG file drawing, used by Asset Images, by dnfield.dev.
   # Used to display undraw SVG image in Playground simulated mock apps.
-  # https://pub.dev/packages/flutter_svg (by dnfield.dev)
+  # https://pub.dev/packages/flutter_svg
   flutter_svg: ^2.0.4
 
   # Google fonts, by Google material.io.

@@ -40,10 +40,24 @@ class ThemeCode extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTile(
+          title: Text('FlexColorScheme theme configuration code'),
+          subtitle: Text('This is the setup code for the light and dark theme '
+              'you have configured. It changes as you adjust theme settings in '
+              'the Playground. Use this view as a side panel to see and learn '
+              'what API properties each setting modifies. FlexColorScheme '
+              'works like an advanced ThemeData factory. It returns a very '
+              'elaborate Flutter ThemeData object, with a lot less setup '
+              'needed. Some of its possible setups would require over 2000 '
+              'rows of code to reproduce with the ThemeData factory.'),
+        ),
         ListTile(
-          title: const Text('FlexColorScheme API Code'),
-          subtitle: const Text('This is the setup code for the light and dark '
-              'theme you have configured. It changes as you adjust settings.'),
+          title: const Text('Copy the theme code'),
+          subtitle: const Text(
+              'When you are happy with your theme design, you can copy the '
+              'produced API configuration code. Paste it into your Flutter app '
+              'and when used together with the FlexColorScheme package, your '
+              'app gets the same theme.'),
           trailing: FilledButton(
             onPressed: () {
               unawaited(_handleCopyCode(context, code));

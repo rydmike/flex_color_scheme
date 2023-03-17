@@ -96,6 +96,11 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                 ],
               ),
             ),
+            const SizedBox(height: 8),
+            const ListTile(
+                subtitle: Text('Use theme simulator devices in a side view '
+                    'as you change theme settings, and see how the changes '
+                    'modify the look and feel of included demo apps.')),
             ListTile(
               leading: IconButton(
                 icon: AnimatedRotation(
@@ -385,6 +390,7 @@ class Simulator extends StatelessWidget {
         onSelected: (int index) {
           onChanged?.call(index);
         },
+        splashRadius: 36,
         enabled: enabled,
         itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
               for (int i = 0; i < devices.length; i++)

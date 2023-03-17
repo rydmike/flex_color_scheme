@@ -1257,7 +1257,7 @@ class ThemeController with ChangeNotifier {
     //
     // 0) Playground defaults.
     //
-    // First reset all settings t defaults so we start with a clean slate.
+    // First reset all settings to defaults so we start with a clean slate.
     // But we do not change theme mode, we keep it. Also we will not notify
     // any listeners yet, we do that once when all settings have been set.
     // If there is no matching settings ID, settings are just rest to defaults.

@@ -8,7 +8,10 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Finished all features planned for final beta 7.0.0-dev.3 release. 
   
-- However, a fix for observed Flutter issue and crash of the WEB release mode build is needed before 7.0.0-dev.3 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug or some other web release mode only specific bug. For initial info and findings, see https://github.com/flutter/flutter/issues/122189 that might be related to the observed issue.
+- A fix for observed Flutter issue and crash of the WEB release mode build is needed before 7.0.0-dev.3 can be released. I do not know how, what and when yet. The issue seems like it might be a web-build release-mode related compiler bug or some other web release mode SKIA only specific bug. For initial info and findings, see issue https://github.com/flutter/flutter/issues/122189 that might be related to the observed issue.
+
+**Edit 17.3.2023**
+- After removal of tonal palette hover indicator, the html render web build of the Themes Playground app appears to be functional and stable. At the moment it is even faster than the buggy and crashing SKIA build. It is not as snappy as a correctly working SKIA build would be, and some of its svg graphics and scaled texts in the theme simulator, are a bit fuzzy. This is just typical Flutter html renderer style. But the app works well enough for the 7.0.0-dev.3 beta release. I will soon try to publish the 7.0.0-dev.3 release, plus build, and release the accompanying Themes Playground app using the html render. This will allow public testing of the v7.0.0-dev.3 package final beta, for maybe a week, before the stable 7.0.0 version is released.
   
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
@@ -18,7 +21,6 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
   - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
 - TESTS: Fix test coverage
   - Down from 100% to 92% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 72% tested now.
-  - Add tests for all new sub-themes and used material states.
   - Tests for usedColors 7.
 - DOCS: Add important changes to docs.flexcolorscheme.com:
   - Change summary update.
@@ -28,14 +30,14 @@ All notable changes to the **FlexColorScheme** (FCS) package are documented here
 
 - Tweet series about what is new.
 - Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), among other things:
-  - Guides on how to use all the advanced new features in the Playground.
+  - Guides on how to use all the advanced new features of FCS in the Playground.
   - Add device thumbs and screenshots of all new built-in color schemes.
   - Info section, about what is still missing in Flutter 3.7 from M3.
   - Review and update old screenshots and GIFs.
   - Use image zoom feature in docs.page on new and old images.
   - Use new highlight banners feature, in the docs.page tool when appropriate.
 
-**Mar 16, 2023**
+**Mar 17, 2023**
 
 **FIX**
 
@@ -182,7 +184,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - In `FlexSubThemes` the `filledButtonTheme` property `baseSchemecolor` was renamed to `backgroundSchemeColor`. This is a change from 7.0.0-dev.2, but not considered breaking since it has not existed in previous stable versions.
 
 
-- **Remove**: The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode of the app when FCS was not used.  
+- **Remove**: The `ListTileThemeData` workaround added in version 7.0.0-dev.2 was removed from core defaults. The issue https://github.com/flutter/flutter/issues/117700 never landed in Flutter 3.7 and its workaround is not needed. Extra setting of property value of `tileColor: Colors.transparent` in `ListTile`s used in elevated popupmenus were also removed from the **Playground** app. In previous dev releases, they were used to hide the issue in M3 mode in the app, when FCS was not used.  
 
 
 - **Remove**: The creation of `IconTheme` and `primaryIconTheme` when opting in on sub themes, was removed. Previously, their colors were set to be equal to the color of same typography color as 
@@ -217,7 +219,7 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added theming of action color to `SnackBar` action button to panel **BottomSheet, Snack Banner**. The UI also got better testing feature of both fixed and floating `SnackBar` and correct defaults info for different settings and modes.
 - Added controls to theme the new M3 menus consistently to the **Menu** panel.
 - Added a panel with 10 pre-made example theme configurations.
-- Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter, new TODO, report the issue.
+- Added an option to remove divider on `TabBar` in M3 to panel **TabBar**. Unfortunately, the feature does not work due to a bug in Flutter. The issue has been fixed in the master channel via [PR #119690](https://github.com/flutter/flutter/pull/119690, but is not available in latest stable (3.7.7).
 - Added an option to set the tab indicator size of the `TabBar` to panel **TabBar**.
 - Added options to set the color of selected and unselected items in `NavigationDrawer` to panel **Navigation Drawer**.
 - Added a new theme topic view is used when desktop width is larger than 1779 dp. 
@@ -228,9 +230,9 @@ In `FlexColorScheme` and `FlexThemeData` light/dark constructors, the `usedColor
 - Added controls for `defaultRadiusAdaptive` and `adaptiveRadius` to panel **Component themes**. They are used to define to make a platform adaptive override to the global border radius override value.
 - Added controls for new platform adaptive elevation tinting and shadows in M3 mode to panel **Surface blends**. Settings are separate for light and dark mode and can only be used in M3-mode, they also only impact M3 mode themes even if used in API in M2-mode. The Themes Playground excludes them from code gen when they have no effect.
 - Version 2.0.3 of package flutter_svg fixed its cache issue in version 2.0.0, 2.0.1 and 2.0.2, upgrade to version 2 was now (13.3.2023) possible and done.
-- Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values panel **Menus** and codegen for same props.
+- Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values to panel **Menus** and codegen for same props.
 - Added buttons to show actual `AlertDialog`, `TimePicker` and `DatePicker` dialogs to panel **Dialogs** and **Widget showcase**.
-
+- **Removed**: The tonal palette tone indication feature was removed. This refers to a small not essential feature with an indicator appearing on the color tone, of a ColorScheme color below, on the **SeededColorScheme** page, when you hover over the ColorScheme color. This feature started showing strange side effects on web release mode builds, but only on web release mode builds (both skia and html renderer). The issue was not seen on web debug mode builds or any native VM builds, AOT or JIT compiled. The cause will be investigated further. This feature will be added back to the Playground when a reason and workaround for it is found, or when the root cause in the release web mode build is fixed. 
 
 ## 7.0.0-dev.2
 
@@ -357,7 +359,7 @@ primary color as seed-key for the neutral colors. This limitation in Flutter mak
 - Added showing new M3 `DropdownMenu` in panel **Text Field**, **Menu** and to **Widget Showcase**.
 - Added showing new M3 `MenuBar` in panel **Menu** and to **Widget Showcase**.
 - Added showing new M3 `MenuAnchor` in panel **Menu** and to **Widget Showcase**.
-- In panel **Menu** the previous controls for `PopuMenuButton`  not also control the menu style of `DropdownMenu`, `MenuBar` and `MenuAnchor`. 
+- In panel **Menu** the previous controls for `PopuMenuButton` now also control the menu style of `DropdownMenu`, `MenuBar` and `MenuAnchor`. 
 - Added setting for focused `TextField` has a border to panel **Text Field**.   
 - Added setting for border color selection of `TextField` to panel **Text Field**.
 - Added setting for alpha control of `TextField` background color to panel **Text Field**.

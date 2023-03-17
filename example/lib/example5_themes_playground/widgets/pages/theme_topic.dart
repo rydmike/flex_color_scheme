@@ -34,6 +34,16 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.phone_iphone,
   ),
   ThemeTopic(
+    heading: 'Theme code',
+    buttonLabel: 'Theme\ncode',
+    icon: Icons.integration_instructions_outlined,
+  ),
+  ThemeTopic(
+    heading: 'Component themes',
+    buttonLabel: 'Component\nthemes',
+    icon: Icons.widgets_outlined,
+  ),
+  ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
@@ -52,16 +62,6 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Effective colors',
     buttonLabel: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
-  ),
-  ThemeTopic(
-    heading: 'Theme code',
-    buttonLabel: 'Theme\ncode',
-    icon: Icons.integration_instructions_outlined,
-  ),
-  ThemeTopic(
-    heading: 'Component themes',
-    buttonLabel: 'Component\nthemes',
-    icon: Icons.widgets_outlined,
   ),
   ThemeTopic(
     heading: 'TextField',

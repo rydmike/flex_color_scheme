@@ -241,7 +241,7 @@ void main() {
       expect(m.adapt(null, true), true);
       expect(m.adapt(null, false), true);
     });
-    test('FA1.016: Verify FlexAdaptive.apple definition. ', () {
+    test('FA1.016a: Verify FlexAdaptive.apple definition. ', () {
       const FlexAdaptive m = FlexAdaptive.apple();
       expect(
         m,
@@ -272,6 +272,40 @@ void main() {
       expect(m.adapt(TargetPlatform.linux, true), false);
       expect(m.adapt(TargetPlatform.macOS, false), true);
       expect(m.adapt(TargetPlatform.macOS, true), false);
+      expect(m.adapt(TargetPlatform.windows, false), false);
+      expect(m.adapt(TargetPlatform.windows, true), false);
+    });
+    test('FA1.016b: Verify FlexAdaptive.appleWeb definition. ', () {
+      const FlexAdaptive m = FlexAdaptive.appleWeb();
+      expect(
+        m,
+        equals(
+          const FlexAdaptive(
+            android: false,
+            androidWeb: false,
+            fuchsia: false,
+            fuchsiaWeb: false,
+            iOS: true,
+            iOSWeb: true,
+            linux: false,
+            linuxWeb: false,
+            macOS: true,
+            macOSWeb: true,
+            windows: false,
+            windowsWeb: false,
+          ),
+        ),
+      );
+      expect(m.adapt(TargetPlatform.android, false), false);
+      expect(m.adapt(TargetPlatform.android, true), false);
+      expect(m.adapt(TargetPlatform.fuchsia, false), false);
+      expect(m.adapt(TargetPlatform.fuchsia, true), false);
+      expect(m.adapt(TargetPlatform.iOS, false), true);
+      expect(m.adapt(TargetPlatform.iOS, true), true);
+      expect(m.adapt(TargetPlatform.linux, false), false);
+      expect(m.adapt(TargetPlatform.linux, true), false);
+      expect(m.adapt(TargetPlatform.macOS, false), true);
+      expect(m.adapt(TargetPlatform.macOS, true), true);
       expect(m.adapt(TargetPlatform.windows, false), false);
       expect(m.adapt(TargetPlatform.windows, true), false);
     });

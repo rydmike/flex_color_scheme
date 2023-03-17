@@ -985,7 +985,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This app is included to illustrate used theme on '
+                text: 'This app is included to show the used theme on '
                     'a compact shop app. It is a minor modification '
                     'of the open source shop app available at ',
               ),

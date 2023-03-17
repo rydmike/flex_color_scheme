@@ -10,18 +10,33 @@ enum AdaptiveTheme {
   ),
   all(
     label: 'All platforms',
-    describe: 'Used on all native platforms and on web on all platforms. '
-        'Use this option to turn off, typically a Material 3 design feature, '
-        'that does not fit your design requirements at all.',
+    describe: 'This platform adaptive is used on all native platforms and '
+        'on web on all platforms. '
+        'Use this option to disable, typically a Material 3 design feature, '
+        'that does not fit your design requirements.',
     code: 'FlexAdaptive.all()',
     icon: Icons.radio_button_checked,
   ),
   apple(
     label: 'Apple devices',
-    describe: 'Used on iOS and macOS device builds and when using a web build '
-        'of the app on iOS and macOS.',
+    describe: 'Only use this adaptive feature on iOS and macOS device builds, '
+        'but not on any web builds, not even in browsers on iOS and macOS. '
+        'Use this option if you only want this platform adaptive feature '
+        'on Apple device builds, and want to the keep the none adaptive '
+        'designs on all other platforms.',
     code: 'FlexAdaptive.apple()',
     icon: Icons.tablet_mac_outlined,
+  ),
+  appleWeb(
+    label: 'Apple devices and web',
+    describe: 'Use this adaptive feature on iOS and macOS device, plus web '
+        'usage on iOS and macOS. Use this option if you always want this '
+        'platform adaptive on usage on Apple devices usage, and want to the '
+        'keep the none adaptive designs on all other platforms. This option is '
+        'useful for getting a progressive web style on Apple devices that '
+        'matches their device based adaptive style.',
+    code: 'FlexAdaptive.appleWeb()',
+    icon: Icons.important_devices_outlined,
   ),
   desktop(
     label: 'Desktops',
@@ -42,21 +57,21 @@ enum AdaptiveTheme {
   ),
   excludeAndroidFuchsia(
     label: 'Exclude Android/Fuchsia',
-    describe: 'Use the adaptive feature on all platforms and on web when '
-        'used from any platform. Except on Android and Fuchsia device builds, '
-        'they keep the standard theme feature. Use this option '
-        'to keep standard theme on Android/Fuchsia, but a web design that is '
+    describe: 'Use this adaptive feature on all platforms and on web when '
+        'used from any platform, except on Android and Fuchsia device builds. '
+        'They keep the none adaptive setting. Use this option to keep standard '
+        'theme, often M3 design, on Android/Fuchsia, but a web design that is '
         'equal on all platforms and using the platform adaptive design.',
     code: 'FlexAdaptive.excludeAndroidFuchsia()',
     icon: Icons.mobile_off_outlined,
   ),
   excludeWebAndroidFuchsia(
     label: 'Exclude Android/Fuchsia and all Web usage',
-    describe: 'Used on all platforms, except on native Android and Fuchsia '
-        'device builds. Web usage on all platforms retains the standard '
-        'theme feature. Use this option to go all-in on Material design on '
-        'Google platforms and on web usage on all platform, but to use the '
-        'platform adaptive style on all other device builds.',
+    describe: 'Use this adaptive feature on all platforms, except on native '
+        'Android and Fuchsia device builds. Web usage on all platforms also '
+        'retains the standard theme feature. Use this option to go all-in on '
+        'Material design on Google platforms and web usage on all platforms, '
+        'but use the platform adaptive style on all other device builds.',
     code: 'FlexAdaptive.excludeWebAndroidFuchsia()',
     icon: Icons.no_cell_outlined,
   );
@@ -80,6 +95,8 @@ enum AdaptiveTheme {
       case AdaptiveTheme.all:
         return FlexAdaptive.all(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.apple:
+        return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
+      case AdaptiveTheme.appleWeb:
         return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.desktop:
         return FlexAdaptive.desktop(overrideIsWeb: overrideIsWeb);
