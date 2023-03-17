@@ -5965,7 +5965,7 @@ class FlexColorScheme with Diagnosticable {
                   .withAlpha(0xB2) // 70% alpha
               : colorScheme.primary
                   .blendAlpha(Colors.white, 0x7F)
-                  .withAlpha(0x7F); // 50%a
+                  .withAlpha(0x7F); // 50%
       }
     }
 

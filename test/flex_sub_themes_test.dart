@@ -5880,6 +5880,69 @@ void main() {
         equals(Colors.black54),
       );
     });
+    test(
+        'CheckBox FST1.20-light-M3-states: Does '
+        'CheckBox have right material states', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
+      final CheckboxThemeData m = FlexSubThemes.checkboxTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+      );
+      // Disabled colors
+      expect(
+        m.checkColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.transparent),
+      );
+      expect(
+        m.checkColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(colorScheme.surface),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      // Error state
+      expect(
+        m.checkColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.error}),
+        equals(colorScheme.onError),
+      );
+      // Selected background
+      expect(
+        m.checkColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      // Default states
+      expect(
+        m.checkColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.primary.withAlpha(0xDD)),
+      );
+      // Default state for trackColor when unselectedIsColored, is false
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: false,
+          useMaterial3: true,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+    });
 
     test(
         'CheckBox FST1.20-dark: GIVEN a dark default '

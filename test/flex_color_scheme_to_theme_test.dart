@@ -4776,10 +4776,24 @@ void main() {
           adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
           adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
           adaptiveAppBarScrollUnderOff: FlexAdaptive.iOSAndDesktop(),
+          adaptiveRadius: FlexAdaptive.iOSAndDesktop(),
+          defaultRadiusAdaptive: 8,
         ),
       );
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
+
+      // Expect CardRadius to be 10 with mock macOS target
+      expect(
+        theme.cardTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+        ),
+      );
       // Sub-themes that should get transparent surface tint with remove tint.
       // and sub-theme, that should get shadow color, with shadows back.
       //
@@ -4972,6 +4986,63 @@ void main() {
       expect(
         theme.popupMenuTheme.surfaceTintColor,
         equals(null),
+      );
+    });
+  });
+
+  group('FCS8: New v7 tests WITH FlexColorScheme.toTheme ', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    test(
+        'FCS8:1 GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and use textTheme and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          useMaterial3: true,
+          subThemesData: const FlexSubThemesData(
+              useTextTheme: true,
+              tabBarItemSchemeColor: SchemeColor.secondary));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.typography,
+        equals(Typography.material2021(
+            platform: defaultTargetPlatform, colorScheme: scheme)),
+      );
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.onSurfaceVariant),
+      );
+    });
+    test(
+        'FCS8:2 GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          subThemesData: const FlexSubThemesData(
+              tabBarItemSchemeColor: SchemeColor.tertiary));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.tertiary.withOpacity(0.7)),
+      );
+    });
+    test(
+        'FCS8:3 GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          subThemesData: const FlexSubThemesData(
+            tabBarItemSchemeColor: SchemeColor.tertiary,
+            tabBarUnselectedItemSchemeColor: SchemeColor.tertiaryContainer,
+            tabBarUnselectedItemOpacity: 0.45,
+          ));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.tertiaryContainer.withOpacity(0.45)),
       );
     });
   });

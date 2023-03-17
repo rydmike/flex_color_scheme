@@ -606,6 +606,7 @@ class _ModeOptionButtonAppState extends State<ModeOptionButtonApp> {
             padding: widget.padding,
             selected: selected,
             label: widget.label,
+            setFocusOnTap: true,
             semanticLabel: widget.semanticLabel,
             onSelect: () {
               setState(() {
