@@ -150,8 +150,7 @@ class DrawerSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Based on Material 3 '
-                      ,
+                  text: 'Based on Material 3 ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
