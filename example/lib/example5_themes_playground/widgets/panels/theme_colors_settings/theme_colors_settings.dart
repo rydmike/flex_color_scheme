@@ -52,6 +52,8 @@ class ThemeColorsSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle denseBody = theme.textTheme.bodyMedium!
+        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,16 +62,21 @@ class ThemeColorsSettings extends StatelessWidget {
         ThemeModeSwitchListTile(controller: controller),
         InputColorsPopupMenu(controller: controller),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
           child: ShowInputColors(controller: controller),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: Text(
+            'Tap a color code to copy it to the clipboard.',
+            style: denseBody,
+          ),
         ),
         if (controller.schemeIndex !=
             (AppColor.schemes.length - 1)) ...<Widget>[
           ListTile(
             title: const Text('Use a custom theme?'),
-            subtitle: const Text('Tap here to active the customizable theme. '
-                'If you tap a color code above, it is copied it to the '
-                'clipboard.'),
+            subtitle: const Text('Tap here to active the customizable theme.'),
             onTap: () {
               controller.setSchemeIndex(AppColor.schemes.length - 1);
             },
