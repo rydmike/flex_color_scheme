@@ -264,7 +264,7 @@ Despite **Themes Playground** not having any formal guarantees, it is extensivel
 
 **Jan 23, 2023**
 
-* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_1.md)
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_1.md)
 
 **Jan 23, 2023**
 
