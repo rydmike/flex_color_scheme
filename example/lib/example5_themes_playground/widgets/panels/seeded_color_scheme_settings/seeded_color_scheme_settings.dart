@@ -144,13 +144,15 @@ class SeededColorSchemeSettings extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'This is the custom color theme, you can tap primary, '
-              'secondary or tertiary, plus their container colors to '
-              'change them.\n'
+              'This is the custom color theme, you can tap on primary, '
+              'secondary or tertiary colors, plus their container colors to '
+              'change them.',
+              // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+              //'\n'
               // ignore: lines_longer_than_80_chars
-              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+              // "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
-              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
+              // "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: theme.textTheme.labelSmall,
             ),
           ),
