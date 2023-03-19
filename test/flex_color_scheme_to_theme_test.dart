@@ -5052,7 +5052,83 @@ void main() {
     // https://github.com/rydmike/flex_color_scheme/issues/118
     TestWidgetsFlutterBinding.ensureInitialized();
     test(
-        'FCS-ISSUE-118-Light: GIVEN a FlexColorScheme.light with defined '
+        'FCS-ISSUE-118-Light-M2: GIVEN a FlexColorScheme.light with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeLight = ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        colorScheme: schemeLight,
+        tooltipsMatchBackground: true,
+        useMaterial3: false,
+        scaffoldBackground: schemeLight.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        scheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeLight.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+    test(
+        'FCS-ISSUE-118-Dark-M2: GIVEN a FlexColorScheme.dark with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeDark = ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        colorScheme: schemeDark,
+        tooltipsMatchBackground: true,
+        useMaterial3: false,
+        scaffoldBackground: schemeDark.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        scheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeDark.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+    test(
+        'FCS-ISSUE-118-Light-M3: GIVEN a FlexColorScheme.light with defined '
         'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
         'provided that no seeding or surface blend is used.', () {
       // Make a full ColorScheme from a SeedColor, and also override
@@ -5090,7 +5166,7 @@ void main() {
       );
     });
     test(
-        'FCS-ISSUE-118-Dark: GIVEN a FlexColorScheme.dark with defined '
+        'FCS-ISSUE-118-Dark-M3: GIVEN a FlexColorScheme.dark with defined '
         'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
         'provided that no seeding or surface blend is used.', () {
       // Make a full ColorScheme from a SeedColor, and also override
@@ -5109,7 +5185,10 @@ void main() {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
       );
       final ColorScheme scheme = fcs.toScheme;
-      final ThemeData theme = fcs.toTheme;
+      final ThemeData theme = fcs.toTheme.copyWith(
+          colorScheme: schemeDark.copyWith(
+        surfaceVariant: schemeDark.surfaceVariant,
+      ));
       expect(
         scheme,
         equals(schemeDark),
