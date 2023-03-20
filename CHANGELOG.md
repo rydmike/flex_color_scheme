@@ -2,11 +2,39 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.0 (WIP)
+
+**Mar 20, 2023**
+
+**TODO BEFORE FCS STABLE 7.0.0 RELEASE**
+
+- TESTS: Fix test coverage
+  - Down from 100% to 93% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 75% tested now, all other package files have 100% test coverage.
+- Report all found Flutter SDK theming issues.
+  - Insert issue info in Themes Playground app where relevant.
+  - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
+- DOCS: Add important changes to docs.flexcolorscheme.com:
+  - Change summary update. Done 98% with 7.0.0-dev.3 release.
+  - Remove v6 web example links from most places in docs, v7 links already added with 7.0.0-dev.3 release. 
+
+**TODO AFTER FCS STABLE 7.0.0 RELEASE**
+
+- Tweet thread about release.
+- Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), with among other things:
+  - Guides on how to use all the advanced new features of FCS in the Playground.
+  - Add device thumbs and screenshots of all new built-in color schemes.
+  - Info section, about what is still missing in Flutter 3.7 from M3.
+  - Review and update old screenshots and GIFs.
+  - General review of the entire site to ensure it is all up to date.  
+  - Use image zoom feature in docs.page on new and old images.
+  - Use new highlight banners feature, in the docs.page tool when appropriate.
+
+
 ## 7.0.0-dev.3
 
 **Mar 18, 2023**
 
-This is the final beta v7 release before stable v7. There will be no new features or API changes in the FlexColorScheme package from this version to stable version 7.0.0. The only changes to stable will be potential bug fixes, typo corrections, API doc comment improvements and adding more tests.
+This is **the final beta v7** release before **stable v7**. There will be no new features or API changes in the FlexColorScheme package from this version to stable version 7.0.0. The only changes to stable will be potential bug fixes, typo corrections, API doc comment improvements and adding more tests.
 
 The companion app **Themes Playground**, may get label improvements plus spelling and grammar corrections. Layouts in it may also be modified and improved as needed. It will not get any new features, but it may of course receive bug fixes.
 
@@ -215,29 +243,6 @@ Despite **Themes Playground** not having any formal guarantees, it is extensivel
 - Added controls `menuBarBackgroundSchemeColor`, `menuItemBackgroundSchemeColor`, `menuItemForegroundSchemeColor`, `menuIndicatorBackgroundSchemeColor`, `menuIndicatorForegroundSchemeColor`, `menuIndicatorRadius` and for `menuPadding` properties via start, end, top, bottom values to panel **Menus** and codegen for same props.
 - Added buttons to show actual `AlertDialog`, `TimePicker` and `DatePicker` dialogs to panel **Dialogs** and **Widget showcase**.
 - **Removed**: The tonal palette tone indication feature was removed. This refers to a small not essential feature with an indicator appearing on the color tone, of a ColorScheme color below, on the **SeededColorScheme** page, when you hover over the ColorScheme color. This feature started showing strange side effects on web release mode builds, but only on web release mode builds (both skia and html renderer). The issue was not seen on web debug mode builds or any native VM builds, AOT or JIT compiled. The cause will be investigated further. This feature will be added back to the Playground when a reason and workaround for it is found, or when the root cause in the release web mode build is fixed. 
-
-
-**TODO BEFORE FCS STABLE 7.0.0 RELEASE**
-
-- Report all found Flutter SDK theming issues.
-  - Insert issue info in Themes Playground app where relevant.
-  - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
-- TESTS: Fix test coverage
-  - Down from 100% to 93% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 73% tested now, all other package files have 100% test coverage.
-- DOCS: Add important changes to docs.flexcolorscheme.com:
-  - Change summary update.
-  - Update known Flutter M3 and theming impacting issues.
-
-**TODO AFTER FCS STABLE 7.0.0 RELEASE**
-
-- Tweet series about what is new.
-- Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), among other things:
-  - Guides on how to use all the advanced new features of FCS in the Playground.
-  - Add device thumbs and screenshots of all new built-in color schemes.
-  - Info section, about what is still missing in Flutter 3.7 from M3.
-  - Review and update old screenshots and GIFs.
-  - Use image zoom feature in docs.page on new and old images.
-  - Use new highlight banners feature, in the docs.page tool when appropriate.
 
 
 ## 7.0.0-dev.2
