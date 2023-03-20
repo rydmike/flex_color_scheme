@@ -2985,16 +2985,67 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'IconButton FST1: GIVEN a FlexSubTheme.iconButtonTheme() '
-        'EXPECT equal to ...',
-        () {});
+        'EXPECT equal to ...', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final IconButtonThemeData bDef = FlexSubThemes.iconButtonTheme(
+        colorScheme: colorScheme,
+        // useTintedInteraction: false,  <- Expect false as default
+      );
+      expect(bDef, equals(const IconButtonThemeData()));
+      final IconButtonThemeData b = FlexSubThemes.iconButtonTheme(
+        colorScheme: colorScheme,
+        useTintedInteraction: true,
+      );
+      // Overlay color states
+      expect(
+        b.style!.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+      );
+      expect(
+        b.style!.overlayColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+    });
   });
-  group('WITH: FlexSubTheme.inputDecorationTheme ', () {
+  group('WITH: FlexSubThemes.inputDecorationTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
         'InputDecoration FST1.08a.light: GIVEN a '
-        'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
+        'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Tinted disabled colors
