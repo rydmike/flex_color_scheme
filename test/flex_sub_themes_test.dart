@@ -5885,6 +5885,10 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes PopupMenu tests
     // -------------------------------------------------------------------------
+    final ColorScheme colorScheme = ColorScheme.fromSeed(
+      seedColor: const Color(0xFF42AEE7),
+      brightness: Brightness.light,
+    );
     test(
         'PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
@@ -5898,19 +5902,46 @@ void main() {
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.primary,
+          surfaceTintColor: Colors.transparent,
           elevation: 8,
           radius: 8,
         ),
         equals(
-          const PopupMenuThemeData(
+          PopupMenuThemeData(
+            color: colorScheme.primary,
+            surfaceTintColor: Colors.transparent,
             elevation: 8,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
             ),
           ),
         ),
+      );
+      final PopupMenuThemeData m = FlexSubThemes.popupMenuTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: SchemeColor.tertiary,
+        foregroundSchemeColor: SchemeColor.tertiaryContainer,
+        textStyle: const TextStyle(),
+        surfaceTintColor: colorScheme.onTertiary,
+        elevation: 9,
+        radius: 9,
+      );
+      expect(
+        m.textStyle,
+        equals(TextStyle(color: colorScheme.tertiaryContainer)),
+      );
+      expect(
+        m.labelTextStyle!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(TextStyle(
+            color: colorScheme.tertiaryContainer.withAlpha(kAlphaDisabled))),
+      );
+      expect(
+        m.labelTextStyle!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: colorScheme.tertiaryContainer)),
       );
     });
   });
