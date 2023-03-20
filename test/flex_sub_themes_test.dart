@@ -4311,6 +4311,7 @@ void main() {
         unselectedLabelSchemeColor: SchemeColor.onSurface,
         backgroundSchemeColor: null,
         indicatorSchemeColor: SchemeColor.secondaryContainer,
+        indicatorRadius: 12,
         height: 80,
         opacity: 0.9,
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
@@ -4329,6 +4330,11 @@ void main() {
             backgroundColor: colorScheme.background.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
+            indicatorShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
             labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.selected)) {
@@ -4616,6 +4622,7 @@ void main() {
           unselectedAlpha: 0x45,
           labelType: NavigationRailLabelType.all,
           groupAlignment: 0,
+          indicatorRadius: 13,
         ),
         equals(
           NavigationRailThemeData(
@@ -4644,6 +4651,11 @@ void main() {
               opacity: 1,
             ),
             useIndicator: true,
+            indicatorShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(13),
+              ),
+            ),
             indicatorColor: const Color(0x00000000),
             labelType: NavigationRailLabelType.all,
             groupAlignment: 0,
