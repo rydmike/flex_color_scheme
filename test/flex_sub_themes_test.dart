@@ -6123,7 +6123,7 @@ void main() {
         ).fillColor!.resolve(<MaterialState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
-      // Default state for trackColor when unselectedIsColored, is false
+      // Default state for fillColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
@@ -6189,6 +6189,214 @@ void main() {
             ),
           ).toString(),
         ),
+      );
+      // M2 tinted disable case.
+      RadioThemeData m = FlexSubThemes.radioTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        splashRadius: 30,
+        unselectedIsColored: false,
+        useTintedDisable: true,
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.tertiary)),
+      );
+      m = FlexSubThemes.radioTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        splashRadius: 25,
+        unselectedIsColored: false,
+        useTintedDisable: false,
+        useMaterial3: true,
+      );
+      //
+      // fillColor
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      //
+      // overlayColor
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(Colors.transparent),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      m = FlexSubThemes.radioTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.tertiary,
+        splashRadius: 25,
+        unselectedIsColored: true,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+        useMaterial3: true,
+      );
+      //
+      // fillColor
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.tertiary),
+        ),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.tertiary),
+        ),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaUnselect)),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaUnselect)),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaUnselect)),
+      );
+      expect(
+        m.fillColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaUnselect)),
+      );
+      //
+      // overlayColor
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(Colors.transparent),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.tertiary, 1.5)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
       );
     });
   });
