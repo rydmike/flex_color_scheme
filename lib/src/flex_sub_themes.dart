@@ -2871,7 +2871,7 @@ class FlexSubThemes {
               return tintDisable
                   ? tintDisabledUltraLowColor
                   : colorScheme.onSurface
-                      .withAlpha(kAlphaUltraLowDisabled); // M43 spec, 4%, 0x0A
+                      .withAlpha(kAlphaUltraLowDisabled); // M3 spec, 4%, 0x0A
             }
             return baseSchemeColor == null && useM3
                 ? Color.alphaBlend(

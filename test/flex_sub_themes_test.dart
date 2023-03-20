@@ -3919,7 +3919,10 @@ void main() {
     test(
         'InputDecoration FST16.7 states: Does Decorator '
         'have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
@@ -3985,6 +3988,338 @@ void main() {
           equals(
             TextStyle(color: Colors.black.withAlpha(0x99)),
           ));
+      //
+      // Various v7 new theme combinations.
+      //
+      InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        borderType: FlexInputBorderType.outline,
+        backgroundAlpha: 0xAA,
+        fillColor: colorScheme.secondaryContainer,
+        unfocusedBorderIsColored: false,
+        unfocusedHasBorder: true,
+        unfocusedBorderWidth: 3,
+        focusedBorderWidth: 4,
+        useMaterial3: true,
+      );
+      expect(
+        m.fillColor,
+        equals(
+          Color.alphaBlend(colorScheme.secondaryContainer.withAlpha(0xAA),
+              colorScheme.surface),
+        ),
+      );
+      expect(
+        m.enabledBorder,
+        equals(
+          OutlineInputBorder(
+            gapPadding: 4,
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.outline,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      m = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        borderType: FlexInputBorderType.underline,
+        backgroundAlpha: 0xCC,
+        unfocusedBorderIsColored: false,
+        unfocusedHasBorder: true,
+        unfocusedBorderWidth: 3,
+        focusedBorderWidth: 4,
+        tintedDisabled: false,
+        useMaterial3: true,
+      );
+      //
+      // fillColor
+      expect(
+        (m.fillColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled)),
+      );
+      expect(
+        (m.fillColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Color.alphaBlend(
+            colorScheme.surfaceVariant.withAlpha(0xCC), colorScheme.surface)),
+      );
+      //
+      // labelStyle
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.error,
+          MaterialState.focused,
+        }),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.error,
+          MaterialState.hovered,
+        }),
+        equals(TextStyle(color: colorScheme.onErrorContainer)),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.error,
+        }),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.focused,
+        }),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.hovered,
+        }),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.disabled,
+        }),
+        equals(
+            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      //
+      // floatingLabelStyle
+      expect(
+        (m.floatingLabelStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{
+          MaterialState.focused,
+        }),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        (m.floatingLabelStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{
+          MaterialState.hovered,
+        }),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        (m.floatingLabelStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{
+          MaterialState.disabled,
+        }),
+        equals(
+            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+      );
+      expect(
+        (m.floatingLabelStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      //
+      // helperStyle
+      expect(
+        (m.helperStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+      );
+      expect(
+        (m.helperStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      //
+      // hintStyle
+      expect(
+        (m.hintStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(const TextStyle(color: Colors.black38)),
+      );
+      expect(
+        (m.hintStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
+      //
+      // iconColor
+      expect(
+        (m.iconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        (m.iconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        (m.iconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      //
+      // prefixIconColor
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      //
+      // suffixIconColor
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.error}),
+        equals(colorScheme.error),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      //
+      // borders
+      expect(
+        m.enabledBorder,
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.onSurfaceVariant,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      m = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        borderType: FlexInputBorderType.underline,
+        backgroundAlpha: 0xCC,
+        unfocusedBorderIsColored: false,
+        unfocusedHasBorder: true,
+        unfocusedBorderWidth: 3,
+        focusedBorderWidth: 4,
+        tintedDisabled: true,
+        tintedInteractions: true,
+        useMaterial3: false,
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{
+          MaterialState.disabled,
+        }),
+        equals(TextStyle(
+            color: FlexSubThemes.tintedDisable(
+                colorScheme.onSurface, colorScheme.primary))),
+      );
+      expect(
+        (m.labelStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
+      expect(
+        (m.floatingLabelStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
+      //
+      // helperStyle
+
+      expect(
+        (m.helperStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(TextStyle(
+            color: FlexSubThemes.tintedDisable(
+                colorScheme.onSurface, colorScheme.primary))),
+      );
+      expect(
+        (m.helperStyle as MaterialStateTextStyle?)!.resolve(<MaterialState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
+      //
+      // hintStyle
+      expect(
+        (m.hintStyle as MaterialStateTextStyle?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(TextStyle(
+            color: FlexSubThemes.tintedDisable(
+                colorScheme.onSurface, colorScheme.primary))),
+      );
+      //
+      // iconColor
+      expect(
+        (m.iconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        (m.iconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        (m.iconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.black45),
+      );
+      //
+      // prefixIconColor
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        (m.prefixIconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.black45),
+      );
+      //
+      // suffixIconColor
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.error}),
+        equals(colorScheme.error),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        (m.suffixIconColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.black45),
+      );
     });
   });
   group('WITH: FlexSubTheme.menuBarTheme ', () {
