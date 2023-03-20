@@ -3462,24 +3462,39 @@ class FlexSubThemes {
             ? colorScheme.surface.withOpacity(opacity)
             : null;
 
+    final bool allDefaults = backgroundSchemeColor == null &&
+        opacity == null &&
+        radius == null &&
+        padding == null &&
+        elevation == null &&
+        surfaceTintColor == null;
+
     return MenuThemeData(
-      style: MenuStyle(
-        elevation: MaterialStatePropertyAll<double?>(elevation),
-        backgroundColor: MaterialStatePropertyAll<Color?>(backgroundColor),
-        padding: MaterialStatePropertyAll<EdgeInsetsGeometry?>(padding),
-        surfaceTintColor: surfaceTintColor == null
-            ? null
-            : MaterialStatePropertyAll<Color>(surfaceTintColor),
-        shape: radius != null
-            ? MaterialStatePropertyAll<OutlinedBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(radius),
-                  ),
-                ),
-              )
-            : null,
-      ),
+      style: allDefaults
+          ? null
+          : MenuStyle(
+              elevation: elevation == null
+                  ? null
+                  : MaterialStatePropertyAll<double?>(elevation),
+              backgroundColor: backgroundSchemeColor == null && opacity == null
+                  ? null
+                  : MaterialStatePropertyAll<Color?>(backgroundColor),
+              padding: padding == null
+                  ? null
+                  : MaterialStatePropertyAll<EdgeInsetsGeometry?>(padding),
+              surfaceTintColor: surfaceTintColor == null
+                  ? null
+                  : MaterialStatePropertyAll<Color>(surfaceTintColor),
+              shape: radius == null
+                  ? null
+                  : MaterialStatePropertyAll<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(radius),
+                        ),
+                      ),
+                    ),
+            ),
     );
   }
 

@@ -4262,8 +4262,90 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'MenuAnchor FST20.1: GIVEN a FlexSubTheme.menuTheme() '
-        'EXPECT equal to ...',
-        () {});
+        'EXPECT equal to MenuThemeData() with same values.', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final MenuThemeData menuDefault = FlexSubThemes.menuTheme(
+        colorScheme: colorScheme,
+      );
+      expect(menuDefault, equals(const MenuThemeData()));
+      //
+      MenuThemeData menu = FlexSubThemes.menuTheme(
+        colorScheme: colorScheme,
+        radius: 11,
+      );
+      expect(
+        menu.style!.elevation?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      expect(
+        menu.style!.backgroundColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      expect(
+        menu.style!.padding?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      expect(
+        menu.style!.surfaceTintColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      expect(
+        menu.style!.shape!.resolve(<MaterialState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(11),
+            ),
+          ),
+        ),
+      );
+      menu = FlexSubThemes.menuTheme(
+        colorScheme: colorScheme,
+        elevation: 3,
+        opacity: 0.8,
+        surfaceTintColor: colorScheme.tertiary,
+        padding: const EdgeInsets.all(7),
+      );
+      expect(
+        menu.style!.elevation?.resolve(<MaterialState>{}),
+        equals(3),
+      );
+      expect(
+        menu.style!.backgroundColor?.resolve(<MaterialState>{}),
+        equals(colorScheme.surface.withOpacity(0.8)),
+      );
+      expect(
+        menu.style!.padding?.resolve(<MaterialState>{}),
+        equals(const EdgeInsets.all(7)),
+      );
+      expect(
+        menu.style!.surfaceTintColor?.resolve(<MaterialState>{}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        menu.style!.shape?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      menu = FlexSubThemes.menuTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: SchemeColor.surfaceVariant,
+      );
+      expect(
+        menu.style!.backgroundColor?.resolve(<MaterialState>{}),
+        equals(colorScheme.surfaceVariant),
+      );
+      menu = FlexSubThemes.menuTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.secondaryContainer,
+          opacity: 0.9);
+      expect(
+        menu.style!.backgroundColor?.resolve(<MaterialState>{}),
+        equals(colorScheme.secondaryContainer.withOpacity(0.9)),
+      );
+    });
   });
   group('WITH: FlexSubTheme.navigationBarTheme ', () {
     // -------------------------------------------------------------------------
@@ -4494,7 +4576,7 @@ void main() {
     // FlexSubThemes navigationDrawerTheme tests
     // -------------------------------------------------------------------------
     test(
-        'NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme() '
+        'NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme '
         'EXPECT equal to ...',
         () {});
   });
