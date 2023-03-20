@@ -3151,26 +3151,38 @@ class FlexSubThemes {
     final Color surface =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
+    final bool allDefault = backgroundSchemeColor == null &&
+        shadowColor == null &&
+        surfaceTintColor == null &&
+        elevation == null &&
+        radius == null;
+
     return MenuBarThemeData(
-      style: MenuStyle(
-        backgroundColor: MaterialStatePropertyAll<Color?>(surface),
-        surfaceTintColor: surfaceTintColor != null
-            ? MaterialStatePropertyAll<Color?>(surfaceTintColor)
-            : null,
-        shadowColor: shadowColor != null
-            ? MaterialStatePropertyAll<Color?>(shadowColor)
-            : null,
-        elevation: MaterialStatePropertyAll<double?>(elevation),
-        shape: radius != null
-            ? MaterialStatePropertyAll<OutlinedBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(radius),
-                  ),
-                ),
-              )
-            : null,
-      ),
+      style: allDefault
+          ? null
+          : MenuStyle(
+              backgroundColor: backgroundSchemeColor != null
+                  ? MaterialStatePropertyAll<Color?>(surface)
+                  : null,
+              surfaceTintColor: surfaceTintColor != null
+                  ? MaterialStatePropertyAll<Color?>(surfaceTintColor)
+                  : null,
+              shadowColor: shadowColor != null
+                  ? MaterialStatePropertyAll<Color?>(shadowColor)
+                  : null,
+              elevation: elevation != null
+                  ? MaterialStatePropertyAll<double?>(elevation)
+                  : null,
+              shape: radius != null
+                  ? MaterialStatePropertyAll<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(radius),
+                        ),
+                      ),
+                    )
+                  : null,
+            ),
     );
   }
 
@@ -3248,7 +3260,7 @@ class FlexSubThemes {
     final bool tintDisable = useTintedDisable ?? false;
 
     // Get foreground color used on not active menu item, by default
-    // contrast to menu background color, which default to surface.
+    // contrast to menu background color, which defaults to surface.
     // FCS passes in the generally defined menu background, if it has been
     // defined, to ensure buttons are based on their background color.
     // The buttons can have another un-highlighted background color than the
@@ -3374,12 +3386,11 @@ class FlexSubThemes {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return foregroundColor.withAlpha(kAlphaFocused);
             }
-
             if (states.contains(MaterialState.hovered)) {
               if (indicatorBackgroundSchemeColor != null) {
                 return Colors.transparent;
               }
-              if (tintInteract) return tintedFocused(overlay, tint, factor);
+              if (tintInteract) return tintedHovered(overlay, tint, factor);
               return foregroundColor.withAlpha(kAlphaFocused);
             }
             return Colors.transparent;
