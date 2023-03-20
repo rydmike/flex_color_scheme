@@ -496,7 +496,7 @@ class FlexSubThemes {
   /// [FlexSubThemes.appBarTheme] later.
   static AppBarTheme appBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-    required final ColorScheme colorScheme,
+    final ColorScheme? colorScheme,
 
     /// Whether the AppBar title should be centered.
     ///
@@ -2035,7 +2035,7 @@ class FlexSubThemes {
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
-    // To not mess up let's define foreground and background colors.
+    // To not mess up let's define button foreground and background colors.
     final Color background = useM3 ? onBaseColor : baseColor;
     final Color foreground = useM3 ? baseColor : onBaseColor;
 
@@ -2043,32 +2043,33 @@ class FlexSubThemes {
     // color regardless of how we customize the foreground and background
     // of the elevated button. Due to its role reversal of coloring in M2
     // versus M3, we need to provide a good tint for both use cases.
-    // With the logic below, this is doable for bot styles.
+    // With the logic below, this is doable for both modes.
     //
     // We are using a light colorScheme.
     final bool isLight = colorScheme.brightness == Brightness.light;
-    // Get brightness of background color.
-    final bool bgIsLight =
+    // Get brightness of button background color.
+    final bool buttonBgIsLight =
         ThemeData.estimateBrightnessForColor(background) == Brightness.light;
     // For tint color use the one that is more likely to give a colored effect.
     final Color tint = isLight
-        ? bgIsLight
+        ? buttonBgIsLight
             ? foreground
             : background
-        : bgIsLight
+        : buttonBgIsLight
             ? background
             : foreground;
     // The reverse color is used for overlay
     final Color overlay = isLight
-        ? bgIsLight
+        ? buttonBgIsLight
             ? background
             : foreground
-        : bgIsLight
+        : buttonBgIsLight
             ? foreground
             : background;
     // We use surface mode tint factor, if it is light theme and background
     // is light OR if it is a dark theme and background is dark.
-    final bool surfaceMode = (isLight && bgIsLight) || (!isLight && !bgIsLight);
+    final bool surfaceMode =
+        (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
     final double factor =
         _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
 
@@ -2149,23 +2150,7 @@ class FlexSubThemes {
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
-          return baseColor;
-        });
-        overlayColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return tintedHovered(overlay, tint, factor);
-            return baseColor.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(MaterialState.focused)) {
-            if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return baseColor.withAlpha(kAlphaFocused);
-          }
-          if (states.contains(MaterialState.pressed)) {
-            if (tintInteract) return tintedPressed(overlay, tint, factor);
-            return baseColor.withAlpha(kAlphaPressed);
-          }
-          return null;
+          return foreground;
         });
         backgroundColor =
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
@@ -2178,9 +2163,25 @@ class FlexSubThemes {
           }
           return background;
         });
+        overlayColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.hovered)) {
+            if (tintInteract) return tintedHovered(overlay, tint, factor);
+            return foreground.withAlpha(kAlphaHovered);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return tintedFocused(overlay, tint, factor);
+            return foreground.withAlpha(kAlphaFocused);
+          }
+          if (states.contains(MaterialState.pressed)) {
+            if (tintInteract) return tintedPressed(overlay, tint, factor);
+            return foreground.withAlpha(kAlphaPressed);
+          }
+          return null;
+        });
       }
       // If the baseSchemeColor was null, but onBaseSchemeColor was not,
-      // we ned to define background color. Otherwise it will have value from
+      // we need to define background color. Otherwise it will have value from
       // above or be left at defaults and let widget default define it.
       if (baseSchemeColor == null && onBaseSchemeColor != null) {
         backgroundColor =
