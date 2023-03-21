@@ -82,9 +82,10 @@ class ToggleButtonsSettings extends StatelessWidget {
           child: ToggleButtonsShowcase(compareButtons: true),
         ),
         ColorSchemePopupMenu(
-          title: const Text('ToggleButtons color'),
+          title: const Text('Main color'),
           subtitle: const Text('Always used as selected button background, '
-              'but also as unselected button foreground if it is not defined.'),
+              'color, but also as unselected button foreground color, if it '
+              'is not defined.'),
           index: controller.toggleButtonsSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -98,8 +99,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('ToggleButtons unselected button color'),
-          subtitle: const Text('Unselected button foreground'),
+          title: const Text('Unselected foreground color'),
           labelForDefault: controller.useSubThemes &&
                   controller.useFlexColorScheme &&
                   controller.toggleButtonsUnselectedSchemeColor == null
@@ -119,7 +119,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('ToggleButtons border color'),
+          title: const Text('Border color'),
           labelForDefault: useMaterial3
               ? 'default (outline)'
               : controller.useSubThemes &&
@@ -243,15 +243,18 @@ class ToggleButtonsSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
           title: Text('SegmentedButton'),
-          subtitle: Text('New in Material 3, starts with default M3 style '
-              'and you can modify key design elements.'),
+          subtitle: Text('Material 3, replacement for ToggleButtons. '
+              'ToggleButtons looks better with when using only icons and it is '
+              'similarly styled by FCS sub themes. SegmentedButton '
+              'is better if you also have text, and optionally also want '
+              'a checkmark icon to mark selected button.'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: SegmentedButtonShowcase(),
         ),
         ColorSchemePopupMenu(
-          title: const Text('SegmentedButton background color'),
+          title: const Text('Background color'),
           subtitle: const Text('Selected foreground automatically uses the '
               'color pair of used background color'),
           labelForDefault:
@@ -273,8 +276,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('SegmentedButton unselected button background '
-              'color'),
+          title: const Text('Unselected button background color'),
           labelForDefault: 'default (surface)',
           index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -289,8 +291,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('SegmentedButton unselected button foreground '
-              'color'),
+          title: const Text('Unselected button foreground color'),
           labelForDefault: segmentedUnselectedForegroundDefault,
           index: controller
                   .segmentedButtonUnselectedForegroundSchemeColor?.index ??
@@ -310,7 +311,7 @@ class ToggleButtonsSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('SegmentedButton border color'),
+          title: const Text('Border color'),
           labelForDefault: controller.useSubThemes &&
                   controller.useFlexColorScheme
               ? controller.segmentedButtonBorderSchemeColor == null
