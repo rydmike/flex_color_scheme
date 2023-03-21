@@ -6406,7 +6406,7 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
-        'EXPECT equal to ...', () {
+        'EXPECT equal to SegmentedButtonThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -6702,6 +6702,97 @@ void main() {
                 TextStyle(inherit: true, color: Color(0x1fffffff)),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
+      );
+    });
+    test(
+        'Slider FST27.3: GIVEN a FlexSubTheme.sliderTheme '
+        'EXPECT equal to SliderThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      SliderThemeData m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(const DropSliderValueIndicatorShape()),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const PaddleRangeSliderValueIndicatorShape()),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.dragged}),
+        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        valueIndicatorType: FlexSliderIndicatorType.rectangular,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+        useMaterial3: true,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(const RectangularSliderValueIndicatorShape()),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(null),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.dragged}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.primary, 1.5)),
+      );
+      expect(
+        (m.overlayColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        valueIndicatorType: FlexSliderIndicatorType.drop,
+        useTintedDisable: true,
+        useTintedInteraction: true,
+        useMaterial3: true,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(const DropSliderValueIndicatorShape()),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const PaddleRangeSliderValueIndicatorShape()),
       );
     });
   });

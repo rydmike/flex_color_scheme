@@ -5453,12 +5453,12 @@ class FlexSubThemes {
     Color? overlayColor() =>
         MaterialStateColor.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.hovered)) {
-            if (tintInteract) return tintedPressed(overlay, tint, factor);
-            return colorScheme.primary.withAlpha(kAlphaPressed);
-          }
-          if (states.contains(MaterialState.focused)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.primary.withAlpha(kAlphaHovered);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (tintInteract) return tintedFocused(overlay, tint, factor);
+            return colorScheme.primary.withAlpha(kAlphaFocused);
           }
           if (states.contains(MaterialState.dragged)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
