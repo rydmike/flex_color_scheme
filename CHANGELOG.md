@@ -8,23 +8,20 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
 
-- TESTS: 
-  - Coverage is now back to 100% - Yee!
-  - TODO: Add more test cases for raw FlexColorScheme. 
 - Report all found Flutter SDK theming issues.
   - Insert issue info in Themes Playground app where relevant.
   - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
-- DOCS: Add important changes to docs.flexcolorscheme.com:
+- Make key updates to [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com/).
   - Change summary update. Done 98% with 7.0.0-dev.3 release.
+  - Add device thumbs and screenshots of all new built-in color schemes.  
   - Remove v6 web example links from most places in docs, v7 links already added with 7.0.0-dev.3 release. 
 
 **TODO AFTER FCS STABLE 7.0.0 RELEASE**
 
-- Tweet thread about release.
+- Tweet thread about v7.0.0 stable release.
 - Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), with among other things:
-  - Guides on how to use all the advanced new features of FCS in the Playground.
-  - Add device thumbs and screenshots of all new built-in color schemes.
-  - Info section, about what is still missing in Flutter 3.7 from M3.
+  - Guides on how to use major new features of FCS in the Playground.
+  - Info section about what is still missing in Flutter 3.7 from M3.
   - Review and update old screenshots and GIFs.
   - General review of the entire site to ensure it is all up to date.  
   - Use image zoom feature in docs.page on new and old images.
