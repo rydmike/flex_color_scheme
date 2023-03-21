@@ -264,6 +264,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   inactiveThumbColor: Color.alphaBlend(
                       widget.color.withAlpha(0xCC), widget.textColor),
                   // TODO(rydmike): Add trackOutlineColor when available.
+                  // The below works on master 3.8 and 3.9, where it was
+                  // developed and used.
+                  //
                   // trackOutlineColor: theme.useMaterial3
                   //     ? MaterialStateProperty.resolveWith(
                   //         (Set<MaterialState> states) {

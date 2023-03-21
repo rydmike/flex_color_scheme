@@ -27,9 +27,9 @@ void main() {
       expect(fcsDefault.toScheme, equals(fcsMaterialLight.toScheme));
       // Expect toTheme to be equal
       // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
-      //   This is repeated for many test cases. It seems like ThemeData
-      //   equality comparison cannot be guaranteed when using sub-themes that
-      //   uses MaterialState or MaterialStateProperty.
+      // This is repeated for many test cases. It seems like ThemeData
+      // equality comparison cannot be guaranteed when using sub-themes that
+      // uses MaterialState or MaterialStateProperty.
       expect(
           fcsDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(fcsMaterialLight.toTheme

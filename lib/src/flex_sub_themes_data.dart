@@ -2154,7 +2154,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 0 in M2 and to 3 in M3.
   final double? tabBarIndicatorTopRadius;
 
-  // TODO(rydmike): Monitor when dividerColor bug fix lands in stable.
+  // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix landing in stable.
   /// The color of the divider.
   ///
   /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]

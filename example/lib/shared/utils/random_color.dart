@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const bool _kDebugMe = kDebugMode && false;
+const bool _debug = kDebugMode && false;
 
 /// Generate random colors that are visually appealing.
 ///
@@ -121,7 +121,7 @@ class RandomColor {
   }
 
   void _log(String s) {
-    if (_kDebugMe) {
+    if (_debug) {
       debugPrint('RandomColor: $s');
     }
   }

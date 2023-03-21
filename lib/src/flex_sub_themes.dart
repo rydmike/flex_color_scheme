@@ -1585,13 +1585,15 @@ class FlexSubThemes {
       }
     }
 
+    // TODO(rydmike): Monitor Chip issue #115364
+    // https://github.com/flutter/flutter/issues/115364
+    //
     // Flag for not using any defined color values in M3 mode, but instead
     // falling back to M3 theme defaults, when using Material 3.
     // We do this when no Scheme colors are selected to get the exact M3
     // theme default. It is not possible due to SDK Chip theming issues
     // and limitations to recreate the exact M3 Chip themes with any other
     // theme colors than the default built-in ones.
-    // TODO(rydmike): Chip https://github.com/flutter/flutter/issues/115364
     final bool useM3Defaults =
         useM3 && baseSchemeColor == null && selectedSchemeColor == null;
 
@@ -2567,7 +2569,7 @@ class FlexSubThemes {
     final Color tint = foreground;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
-    // TODO(rydmike): The tintInteract branch added due to Flutter SDK issue.
+    // TODO(rydmike): The tintInteract condition added due to Flutter SDK issue.
     // https://github.com/flutter/flutter/pull/121884#issuecomment-1458505977
     return tintInteract
         ? IconButtonThemeData(style: ButtonStyle(
@@ -5999,7 +6001,7 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
 
-    // TODO(rydmike): Monitor when dividerColor bug fix lands in stable.
+    // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix arrive in stable.
     /// The color of the divider.
     ///
     /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
@@ -6008,7 +6010,7 @@ class FlexSubThemes {
     /// otherwise divider will not be drawn.
     ///
     /// This feature does not work in Flutter 3.7 stable, at least not up until
-    /// version 3.7.6. It is caused by a bug in Flutter SDK. The issue has
+    /// version 3.7.7. It is caused by a bug in Flutter SDK. The issue has
     /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
     /// master channel, but until the fix lands in Flutter stable, this
     /// feature does not work.
@@ -6271,16 +6273,17 @@ class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
-    // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
-    // Probably wont exist in next stable after 3.3 either.
+    // TODO(rydmike): TimePickerThemeData elevation not in Flutter 3.7.x.
+    // Exist in master, monitor when it lands in stable and add it.
     /// Dialog elevation.
     ///
     /// If not defined, defaults to [kDialogElevation] = 6.
     ///
     /// NOTE:
     ///
-    /// This elevation does not exist in beta 3.7.0-1.4.pre. It has no
-    /// function until support from master lands.
+    /// This elevation does not exist yet in Flutter 3.7. It has no function
+    /// until support from master lands and it is added to updated API in this
+    /// [TimePickerThemeData.timePickerTheme] function.
     final double? elevation,
 
     /// Outer corner radius.

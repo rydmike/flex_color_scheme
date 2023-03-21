@@ -8380,7 +8380,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // TODO(rydmike): Elevation does not exist in 3.7,
             // elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -8421,7 +8421,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // TODO(rydmike): Elevation does not exist in 3.7.
             // elevation: 6,
             backgroundColor: colorScheme.tertiary,
             // dialBackgroundColor: colorScheme.surfaceVariant,
@@ -8463,7 +8463,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // TODO(rydmike): Elevation does not exist in 3.7.
             // elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
@@ -8510,7 +8510,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in beta 3.7.0-1.4.pre.
+            // TODO(rydmike): Elevation does not exist in 3.7.
             // elevation: 6,
             backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(

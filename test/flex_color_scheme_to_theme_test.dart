@@ -2333,8 +2333,6 @@ void main() {
     // highBackgroundLowScaffold to hit background red color less than surface.
     //**************************************************************************
 
-    // TODO(rydmike): Improve tests by adding more results verification checks.
-
     final ThemeData tLightHb = FlexColorScheme.light(
       scheme: FlexScheme.red,
       surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,

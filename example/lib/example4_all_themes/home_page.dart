@@ -50,6 +50,7 @@ class HomePage extends StatelessWidget {
           // is always left aligned on the ListTile and would require a
           // computed offset. This trick, or maybe a bit of a hack, does it
           // automatically. No idea why, just something I noticed by accident.
+          // Tested also in v7 of FCS, still works date (21.3.2023).
           child: Scaffold(
             appBar: AppBar(
               title: Text(App.title(context)),

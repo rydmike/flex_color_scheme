@@ -118,7 +118,9 @@ class SchemeColors extends StatelessWidget {
     // For some reason tone hover feature started causing issues in WEB release
     // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
     // why that happens only on web release mode and not in its debug mode or
-    // any mode VM mode build.
+    // any mode VM mode build. JS compiler optimization bug in release mode
+    // is my  suspected cause.
+    //
     // Removal of this feature has removed commented code in:
     // - theme_controller.dart
     // - scheme_colors.dart

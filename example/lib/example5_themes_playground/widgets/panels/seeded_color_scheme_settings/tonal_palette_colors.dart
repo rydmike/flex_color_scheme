@@ -65,7 +65,13 @@ class TonalPaletteColors extends StatelessWidget {
           for (int i = 0; i < tonalPalette.length; i++)
             Expanded(
               child: PaletteColorBox(
-                // TODO(rydmike): An attempt to help the SDK with an issue.
+                // TODO(rydmike): Attempt to help compiler with JS release issue
+                // Related to tone hover indication feature issue 16.3.2023.
+                // That did not work properly anymore on JS release mode builds
+                // regardless of html/canvaskit renderer. The feature still
+                // worked in web debug builds and any VM build mode for all
+                // other platforms. Weird JS compiler optimization bug is my
+                // suspected cause.
                 key: ValueKey<String>('$name${_toneLabel(i)}'),
                 name: name,
                 tone: _toneLabel(i),

@@ -2622,6 +2622,7 @@ class FlexColorScheme with Diagnosticable {
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
     final Color inputSurfaceVariant = surfaceSchemeColors.surfaceVariant;
     final Color inputBackground = background ?? surfaceSchemeColors.background;
+
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
@@ -7354,7 +7355,6 @@ class FlexColorScheme with Diagnosticable {
         );
   }
 
-  // TODO(rydmike): Improve FCS inversePrimary algorithm.
   /// FlexColorScheme default for inversePrimary color, when not using seeds.
   ///
   /// When using real M3 ColorScheme's that are seeded, this color is not used.

@@ -96,20 +96,6 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // TODO(rydmike): Strange screen switch bug on platform swap, maybe here?
-    //  seen it in a few rare cases on other actions too, but platform swap
-    //  seems to trigger it. Debug print helpers below if I see it again.
-    // debugPrint('PanelView previous page: $previousPage');
-    // debugPrint(
-    //  'PanelView controller viewIndex: ${widget.themeController.viewIndex}');
-    //
-    // This was one attempt to fix it, did not work.
-    // previousPage = widget.themeController.viewIndex;
-  }
-
-  @override
   void dispose() {
     pageController.dispose();
     scrollController.dispose();
@@ -207,11 +193,6 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
             themeCtrl.setViewIndex(pageIndex);
           },
           itemBuilder: (BuildContext context, int pageIndex) {
-            // TODO(rydmike): Part of screen switch bug investigation.
-            // debugPrint('PanelView itemBuilder index: $pageIndex');
-            // debugPrint('PanelView itemBuilder previous page: $previousPage');
-            // debugPrint('PanelView itemBuilder controller '
-            //    'viewIndex: ${widget.themeController.viewIndex}');
             return ScaleTransition(
               scale: scaleAnimation,
               child: FadeTransition(
