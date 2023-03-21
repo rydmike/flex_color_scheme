@@ -43,9 +43,10 @@ class SeededColorSchemeSettings extends StatelessWidget {
         ? 'Theme is based on seed generated ColorScheme below'
         : 'Theme is based on selected FlexColorScheme defined colors';
     final String schemeMode = useSeed ? 'Seeded' : 'Selected';
-    final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
-            (!isLight && controller.blendLevelDark > 0)) &&
-        controller.useKeyColors;
+    // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+    // final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
+    //         (!isLight && controller.blendLevelDark > 0)) &&
+    //     controller.useKeyColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

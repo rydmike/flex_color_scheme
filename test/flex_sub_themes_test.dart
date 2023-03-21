@@ -5898,7 +5898,7 @@ void main() {
       );
     });
     test(
-        'PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme() '
+        'PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
@@ -7755,7 +7755,7 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
-        'EXPECT equal to ...', () {
+        'EXPECT equal to TabBarTheme with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -8535,6 +8535,118 @@ void main() {
             ),
           ),
         ),
+      );
+    });
+    test(
+        'TimePicker FST32.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
+        'EXPECT equal to TimePickerThemeData() with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
+      final TimePickerThemeData m = FlexSubThemes.timePickerTheme(
+        colorScheme: colorScheme,
+        inputDecorationTheme: const InputDecorationTheme(filled: true),
+        useInputDecoratorTheme: true,
+        useMaterial3: true,
+      );
+      //
+      // dayPeriodColor
+      expect(
+        (m.dayPeriodColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.tertiaryContainer),
+      );
+      expect(
+        (m.dayPeriodColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      //
+      // dayPeriodTextColor
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.onTertiaryContainer),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.onTertiaryContainer),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.onTertiaryContainer),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        (m.dayPeriodTextColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{}),
+        equals(colorScheme.onTertiaryContainer),
+      );
+      //
+      // hourMinuteColor
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.onPrimaryContainer),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(Color.alphaBlend(
+            colorScheme.onPrimaryContainer.withAlpha(kAlphaFocused),
+            colorScheme.primaryContainer)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(Color.alphaBlend(
+            colorScheme.onPrimaryContainer.withAlpha(kAlphaHovered),
+            colorScheme.primaryContainer)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(Color.alphaBlend(
+            colorScheme.primaryContainer, colorScheme.primaryContainer)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(Color.alphaBlend(
+            colorScheme.onSurface, colorScheme.surfaceVariant)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaFocused),
+            colorScheme.surfaceVariant)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaHovered),
+            colorScheme.surfaceVariant)),
+      );
+      expect(
+        (m.hourMinuteColor as MaterialStateColor?)!.resolve(<MaterialState>{}),
+        equals(Color.alphaBlend(
+            colorScheme.surfaceVariant, colorScheme.surfaceVariant)),
       );
     });
   });
