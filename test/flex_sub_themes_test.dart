@@ -6908,11 +6908,17 @@ void main() {
           backgroundColor: const Color(0xFF763370),
           backgroundSchemeColor: SchemeColor.error,
           actionTextSchemeColor: SchemeColor.tertiary,
+          radius: 7,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           SnackBarThemeData(
             backgroundColor: colorScheme.error,
             elevation: 0,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(7),
+              ),
+            ),
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
                 ),
