@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 7.0.0-dev.3
+version: 7.0.0
 publish_to: 'none'
 environment:
   sdk: '>=2.19.0 <4.0.0'
@@ -78,12 +78,12 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.0.13
+  path_provider: ^2.0.14
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.18
+  shared_preferences: ^2.0.20
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
