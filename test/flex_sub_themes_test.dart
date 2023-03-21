@@ -6406,8 +6406,238 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
-        'EXPECT equal to ...',
-        () {});
+        'EXPECT equal to ...', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      //
+      // Baseline test, M2 and defaults
+      SegmentedButtonThemeData m = FlexSubThemes.segmentedButtonTheme(
+        colorScheme: colorScheme,
+        borderWidth: 2,
+      );
+      expect(
+        m.style?.minimumSize?.resolve(<MaterialState>{}),
+        equals(const Size(40, 40)),
+      );
+      expect(
+        m.style?.padding?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      //
+      // background color
+      expect(
+        m.style?.backgroundColor
+            ?.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(null),
+      );
+      expect(
+        m.style?.backgroundColor
+            ?.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        m.style?.backgroundColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      //
+      // foregroundColor color
+      expect(
+        m.style?.foregroundColor
+            ?.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
+        m.style?.foregroundColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.foregroundColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.foregroundColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.foregroundColor
+            ?.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.foregroundColor?.resolve(<MaterialState>{}),
+        equals(colorScheme.onSurface),
+      );
+      //
+      // overlayColor color
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.surface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.surface.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.surface.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      //
+      // side
+      expect(
+        m.style?.side?.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+          width: 2,
+        )),
+      );
+      expect(
+        m.style?.side?.resolve(<MaterialState>{}),
+        equals(BorderSide(
+          color: colorScheme.primary,
+          width: 2,
+        )),
+      );
+      //
+      // Baseline test, M3 and tints
+      m = FlexSubThemes.segmentedButtonTheme(
+        colorScheme: colorScheme,
+        useTintedInteraction: true,
+        useTintedDisable: true,
+        useMaterial3: true,
+      );
+      //
+      // foregroundColor
+      expect(
+        m.style?.foregroundColor
+            ?.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.secondaryContainer)),
+      );
+      //
+      // overlayColor color
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(FlexSubThemes.tintedHovered(
+            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.focused}),
+        equals(FlexSubThemes.tintedFocused(
+            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(FlexSubThemes.tintedPressed(
+            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      // side
+      expect(
+        m.style?.side?.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          color: FlexSubThemes.tintedDisable(
+                  colorScheme.onSurface, colorScheme.secondaryContainer)
+              .withAlpha(kAlphaLowDisabled),
+          width: 1,
+        )),
+      );
+      // Baseline test, M3 and tints
+      m = FlexSubThemes.segmentedButtonTheme(
+        colorScheme: colorScheme,
+        selectedSchemeColor: SchemeColor.tertiary,
+        unselectedSchemeColor: SchemeColor.primaryContainer,
+        unselectedForegroundSchemeColor: SchemeColor.onSecondaryContainer,
+        borderSchemeColor: SchemeColor.primaryContainer,
+        useTintedInteraction: false,
+        useTintedDisable: true,
+        useMaterial3: true,
+      );
+      //
+      // overlayColor color
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primaryContainer.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primaryContainer.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primaryContainer.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSecondaryContainer.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSecondaryContainer.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.onSecondaryContainer.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.style?.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      expect(
+        m.style?.side?.resolve(<MaterialState>{}),
+        equals(BorderSide(
+          color: colorScheme.primaryContainer,
+          width: 1,
+        )),
+      );
+    });
   });
   group('WITH: FlexSubTheme.sliderTheme ', () {
     // -------------------------------------------------------------------------

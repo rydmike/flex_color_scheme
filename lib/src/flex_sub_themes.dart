@@ -5160,6 +5160,8 @@ class FlexSubThemes {
     final bool useM3 = useMaterial3 ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
+    // We are using a light colorScheme.
+    final bool isLight = colorScheme.brightness == Brightness.light;
 
     // Get selected background color, defaults to secondaryContainer.
     final SchemeColor selectedScheme = selectedSchemeColor ??
@@ -5178,15 +5180,31 @@ class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = onSelectedColor;
     final Color tint = selectedColor;
-    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
+    // Get brightness of selectedColor color.
+    final bool selectedBgIsLight =
+        ThemeData.estimateBrightnessForColor(selectedColor) == Brightness.light;
+    // We use surface mode tint factor, if it is light theme and selectedColor
+    // is light OR if it is a dark theme and background is dark.
+    final bool selectedSurfaceMode =
+        (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
+    final double factor =
+        _tintAlphaFactor(tint, colorScheme.brightness, selectedSurfaceMode);
 
     final Color unOverlay = unselectedColor;
     final Color unTint = unselectedSchemeColor == null ||
             unselectedSchemeColor == SchemeColor.surface
         ? selectedColor
         : onUnselectedColor;
+    // Get brightness of unselectedColor color.
+    final bool unSelectedBgIsLight =
+        ThemeData.estimateBrightnessForColor(unselectedColor) ==
+            Brightness.light;
+    // We use surface mode tint factor, if it is light theme and unselectedColor
+    // is light OR if it is a dark theme and background is dark.
+    final bool unSelectedSurfaceMode =
+        (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
     final double unFactor =
-        _tintAlphaFactor(unTint, colorScheme.brightness, true);
+        _tintAlphaFactor(unTint, colorScheme.brightness, unSelectedSurfaceMode);
 
     final Color disableTint = unselectedSchemeColor == null ||
             unselectedSchemeColor == SchemeColor.surface
@@ -5258,7 +5276,6 @@ class FlexSubThemes {
           // to above mentioned Flutter SDK bug. But if it is ever fixed it
           // will get used automatically, via code below.
           if (states.contains(MaterialState.selected)) {
-            debugPrint('Themed Segmented button selected overlay');
             if (states.contains(MaterialState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return unselectedColor.withAlpha(kAlphaHovered);
@@ -5272,7 +5289,6 @@ class FlexSubThemes {
               return unselectedColor.withAlpha(kAlphaPressed);
             }
           } else {
-            debugPrint('Themed Segmented button NOT selected overlay');
             if (states.contains(MaterialState.hovered)) {
               if (tintInteract) {
                 return tintedHovered(unOverlay, unTint, unFactor);
