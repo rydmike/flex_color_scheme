@@ -4,12 +4,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.0.0 (WIP)
 
-**Mar 20, 2023**
+**Mar 21, 2023**
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
 
 - TESTS: Fix test coverage
-  - Down from 100% to 93% now. Get it back to 100%. Not hard, just a lot of tests to write. The class `FlexSubThemes` with all its new component themes is only 75% tested now, all other package files have 100% test coverage.
+  - Getting close to 100% again, now at 99% test coverage. Only a few tests left to write. The class `FlexSubThemes` with all its new component themes is 96% tested now. All other package files have 100% test coverage.
 - Report all found Flutter SDK theming issues.
   - Insert issue info in Themes Playground app where relevant.
   - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
