@@ -8,8 +8,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO BEFORE FCS STABLE 7.0.0 RELEASE**
 
-- TESTS: Fix test coverage
-  - Getting close to 100% again, now at 99% test coverage. Only a few tests left to write. The class `FlexSubThemes` with all its new component themes is 96% tested now. All other package files have 100% test coverage.
+- TESTS: 
+  - Coverage is now back to 100% - Yee!
+  - TODO: Add more test cases for raw FlexColorScheme. 
 - Report all found Flutter SDK theming issues.
   - Insert issue info in Themes Playground app where relevant.
   - Update [FlexColorScheme docs known issues](https://docs.flexcolorscheme.com/known_issues), with summary of issues.
