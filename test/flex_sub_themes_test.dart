@@ -7755,8 +7755,143 @@ void main() {
     // -------------------------------------------------------------------------
     test(
         'TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
-        'EXPECT equal to ...',
-        () {});
+        'EXPECT equal to ...', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
+      TabBarTheme m = FlexSubThemes.tabBarTheme(
+        colorScheme: colorScheme,
+        labelColor: colorScheme.tertiary,
+        dividerColor: colorScheme.outline,
+        useMaterial3: true,
+      );
+      expect(
+        m.dividerColor,
+        equals(colorScheme.outline),
+      );
+      // Overlay color
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.tertiary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      m = FlexSubThemes.tabBarTheme(
+        colorScheme: colorScheme,
+        dividerColor: colorScheme.outline,
+        indicatorColor: colorScheme.tertiary,
+        useTintedInteraction: true,
+        useMaterial3: true,
+      );
+      // Overlay color
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.primary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.primary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.primary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.primary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+      m = FlexSubThemes.tabBarTheme(
+        colorScheme: colorScheme,
+        dividerColor: colorScheme.outline,
+        labelColor: colorScheme.secondary,
+        useTintedInteraction: false,
+      );
+      // Overlay color
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.hovered}),
+        equals(colorScheme.secondary.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.focused}),
+        equals(colorScheme.secondary.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.pressed}),
+        equals(colorScheme.secondary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{MaterialState.selected}),
+        equals(null),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.hovered}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.focused}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+      );
+      expect(
+        m.overlayColor!.resolve(<MaterialState>{MaterialState.pressed}),
+        equals(colorScheme.secondary.withAlpha(kAlphaPressed)),
+      );
+      expect(
+        m.overlayColor?.resolve(<MaterialState>{}),
+        equals(null),
+      );
+    });
   });
   group('WITH: FlexSubTheme.textButtonTheme ', () {
     // -------------------------------------------------------------------------
