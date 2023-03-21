@@ -5207,4 +5207,135 @@ void main() {
       );
     });
   });
+  group('FCS9: Pass-through features WITH FlexColorScheme.toTheme ', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    test(
+        'FCS9.1: GIVEN a FlexColorScheme test materialTapTargetSize '
+        'pass-through.', () {
+      ThemeData theme = FlexColorScheme.light(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ).toTheme;
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.padded),
+      );
+      theme = FlexThemeData.light(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.shrinkWrap),
+      );
+      theme = FlexColorScheme.dark(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ).toTheme;
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.padded),
+      );
+      theme = FlexThemeData.dark(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.shrinkWrap),
+      );
+    });
+    test(
+        'FCS9.2: GIVEN a FlexColorScheme test pageTransitionsTheme '
+        'pass-through.', () {
+      const PageTransitionsTheme transitionsTheme = PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.linux: _NoPageTransitionsBuilder(),
+          TargetPlatform.macOS: _NoPageTransitionsBuilder(),
+          TargetPlatform.windows: _NoPageTransitionsBuilder(),
+        },
+      );
+
+      ThemeData theme = FlexColorScheme.light(
+        pageTransitionsTheme: transitionsTheme,
+      ).toTheme;
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexThemeData.light(
+        pageTransitionsTheme: transitionsTheme,
+      );
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexColorScheme.dark(
+        pageTransitionsTheme: transitionsTheme,
+      ).toTheme;
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexThemeData.dark(
+        pageTransitionsTheme: transitionsTheme,
+      );
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+    });
+  });
+  group('FCS10: Raw and minimal FlexColorScheme COLOR promise tests', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    test('FCS10.1: GIVEN a raw default FlexColorScheme test default colors.',
+        () {
+      final ThemeData theme = const FlexColorScheme(
+        primary: Colors.red,
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(Colors.white));
+      expect(theme.colorScheme.primaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onPrimaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.secondary, equals(Colors.red));
+      expect(theme.colorScheme.onSecondary, equals(Colors.white));
+      expect(theme.colorScheme.secondaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onSecondaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.tertiary, equals(Colors.red));
+      expect(theme.colorScheme.onTertiary, equals(Colors.white));
+      expect(theme.colorScheme.tertiaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onTertiaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.error, equals(FlexColor.materialLightError));
+      expect(theme.colorScheme.onError, equals(Colors.white));
+      expect(theme.colorScheme.errorContainer,
+          equals(FlexColor.lightErrorContainer(FlexColor.materialLightError)));
+      expect(theme.colorScheme.onErrorContainer, equals(Colors.black));
+      expect(theme.colorScheme.surface, equals(FlexColor.materialLightSurface));
+      expect(theme.colorScheme.onSurface, equals(Colors.black));
+      expect(theme.colorScheme.background,
+          equals(FlexColor.materialLightBackground));
+      expect(theme.colorScheme.onBackground, equals(Colors.black));
+      expect(theme.scaffoldBackgroundColor,
+          equals(FlexColor.materialLightBackground));
+      expect(
+          theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
+      expect(theme.colorScheme.surfaceTint, equals(Colors.red));
+    });
+  });
+}
+
+// Custom page transition with no transition.
+class _NoPageTransitionsBuilder extends PageTransitionsBuilder {
+  const _NoPageTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
+  }
 }

@@ -371,7 +371,6 @@ class FlexColorScheme with Diagnosticable {
   /// is [Brightness.dark] it defaults to [FlexColor.materialDarkPrimary].
   final Color? primary;
 
-  // TODO(rydmike): These seem to come from ".from" factory now. Test & docs!
   /// A color used for elements needing less emphasis than [primary].
   ///
   /// If not defined, and if there is no [colorScheme] defined, the default
