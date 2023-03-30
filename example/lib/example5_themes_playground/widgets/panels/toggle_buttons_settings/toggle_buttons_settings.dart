@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -10,12 +11,26 @@ class ToggleButtonsSettings extends StatelessWidget {
   const ToggleButtonsSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  // TODO(rydmike): Add links to SegmentedButton issues.
-  // static final Uri _fcsFlutterPr119690 = Uri(
-  //   scheme: 'https',
-  //   host: 'github.com',
-  //   path: 'flutter/flutter/pull/119690',
-  // );
+  static final Uri _segmentNotTransparentIssue123292 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/123292',
+  );
+  static final Uri _segmentWrongHeightIssue121493 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/121493',
+  );
+  static final Uri _segmentWrongOverlayIssue123308 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/123308',
+  );
+  static final Uri _segmentNotM3SpecIssue119733 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/119733',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +80,8 @@ class ToggleButtonsSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-    //     color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -442,21 +457,45 @@ class ToggleButtonsSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'In Flutter 3.7 the SegmentedButton has a number of '
-                      'small issues. Background is not transparent, min height '
-                      'or size cannot be set, selectedOverlay state does not '
-                      'work and its default unselected foreground color does '
-                      'not follow M3 spec.',
+                      'small issues. Background is not transparent ',
                 ),
-                // LinkTextSpan(
-                //   style: linkStyle,
-                //   uri: _fcsFlutterPr119690,
-                //   text: 'FIX PR #119690',
-                // ),
-                // TextSpan(
-                //   style: spanTextStyle,
-                //   text: '. This feature will work when the fix lands in '
-                //       'Flutter stable channel.',
-                // ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentNotTransparentIssue123292,
+                  text: '(#123292)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ', min height or size cannot be set, ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentWrongHeightIssue121493,
+                  text: '(#121493)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ', selectedOverlay state does not work ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentWrongOverlayIssue123308,
+                  text: '(#123308)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' and its default unselected foreground color does '
+                      'not follow M3 spec ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentNotM3SpecIssue119733,
+                  text: '(#119733)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.',
+                ),
               ],
             ),
           ),

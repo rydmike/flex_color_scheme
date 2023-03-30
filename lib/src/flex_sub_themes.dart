@@ -4881,9 +4881,13 @@ class FlexSubThemes {
         (colorScheme != null && backgroundSchemeColor != null
             ? schemeColor(backgroundSchemeColor, colorScheme)
             : null);
-    final Color? onBackgroundColor =
-        colorScheme != null && backgroundSchemeColor != null
-            ? schemeColorPair(backgroundSchemeColor, colorScheme)
+    final Color? onBackgroundColor = colorScheme != null &&
+            backgroundSchemeColor != null
+        ? schemeColorPair(backgroundSchemeColor, colorScheme)
+        : color != null
+            ? ThemeData.estimateBrightnessForColor(color) == Brightness.light
+                ? Colors.black
+                : Colors.white
             : null;
 
     final Color? foregroundColor =
@@ -4891,18 +4895,24 @@ class FlexSubThemes {
             ? schemeColor(foregroundSchemeColor, colorScheme)
             : onBackgroundColor;
 
+    final bool inputsNull =
+        color == null && backgroundColor == null && foregroundColor == null;
+
+    final TextStyle? effectiveTextStyle =
+        inputsNull ? null : textStyle ?? const TextStyle();
+
     return PopupMenuThemeData(
       elevation: elevation,
       color: backgroundColor,
       surfaceTintColor: surfaceTintColor,
-      textStyle: textStyle?.apply(color: foregroundColor),
-      labelTextStyle: textStyle != null
+      textStyle: effectiveTextStyle?.apply(color: foregroundColor),
+      labelTextStyle: effectiveTextStyle != null
           ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
-                return textStyle.apply(
+                return effectiveTextStyle.apply(
                     color: foregroundColor?.withAlpha(kAlphaDisabled));
               }
-              return textStyle.apply(color: foregroundColor);
+              return effectiveTextStyle.apply(color: foregroundColor);
             })
           : null,
       shape: radius != null

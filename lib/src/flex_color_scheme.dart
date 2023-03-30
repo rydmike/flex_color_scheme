@@ -6899,19 +6899,14 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // TODO(rydmike): popupMenuTheme foreground auto contrast with background.
-      // --> Potential Flutter SDK issue, investigate.
       // PopupMenuButton Theme.
       popupMenuTheme: useSubThemes
           ? FlexSubThemes.popupMenuTheme(
               colorScheme: colorScheme,
               radius: subTheme.popupMenuRadius,
-              // This did not work! See issue above.
-              // textStyle: effectiveTextTheme.labelLarge,
               elevation: popupMenuElevation,
               color: popupMenuBackgroundColor,
               backgroundSchemeColor: subTheme.popupMenuSchemeColor,
-              foregroundSchemeColor: SchemeColor.surface,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,

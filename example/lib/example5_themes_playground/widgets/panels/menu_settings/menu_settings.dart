@@ -117,11 +117,17 @@ class MenuSettings extends StatelessWidget {
         ),
         const ListTile(
           dense: true,
-          subtitle: Text('FCS tries to use correct contrast pair color as '
-              'foreground color, but PopupMenuButton only uses onSurface '
-              'color. The cause is being investigated, potentially a theming '
-              'bug in Flutter SDK. For now only background colors with '
-              'same brightness as surface color are usable.'),
+          subtitle: Text('FCS theme foreground color by default to correct '
+              'contrast pair for selected background color. This works well '
+              'if your PopupMenuItems only contain Text widgets. If they '
+              'contain e.g. ListTiles, like the second PopupMenuButton above, '
+              'the items will not use the contrasting foreground color via the '
+              "PopupMenuTheme's foreground color. You will have to define the "
+              'correct foreground color for your items used by PopupMenuItems. '
+              'Recommend avoiding theme mode reverse brightness as background '
+              'on PopupMenuButton to avoid this limitation. Such color choices '
+              'are not very useful design anyway, so it should not be a big '
+              'limitation.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

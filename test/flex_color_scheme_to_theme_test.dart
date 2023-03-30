@@ -3330,8 +3330,8 @@ void main() {
         equals(5.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.black),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3369,8 +3369,8 @@ void main() {
         equals(6.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.black),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3409,8 +3409,8 @@ void main() {
         equals(12),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3452,8 +3452,8 @@ void main() {
         equals(2.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3493,8 +3493,8 @@ void main() {
         equals(12),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3534,8 +3534,8 @@ void main() {
         equals(2.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,

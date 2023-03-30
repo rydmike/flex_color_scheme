@@ -5907,20 +5907,33 @@ void main() {
           surfaceTintColor: Colors.transparent,
           elevation: 8,
           radius: 8,
-        ),
-        equals(
+        ).toString(minLevel: DiagnosticLevel.debug),
+        equalsIgnoringHashCodes(
           PopupMenuThemeData(
             color: colorScheme.primary,
             surfaceTintColor: Colors.transparent,
             elevation: 8,
+            textStyle: const TextStyle().apply(color: Colors.white),
+            labelTextStyle:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return const TextStyle()
+                    .apply(color: Colors.white.withAlpha(kAlphaDisabled));
+              }
+              return const TextStyle().apply(color: Colors.white);
+            }),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
             ),
-          ),
+          ).toString(minLevel: DiagnosticLevel.debug),
         ),
       );
+    });
+    test(
+        'PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+        'EXPECT equal to PopupMenuThemeData() version with same values', () {
       final PopupMenuThemeData m = FlexSubThemes.popupMenuTheme(
         colorScheme: colorScheme,
         backgroundSchemeColor: SchemeColor.tertiary,

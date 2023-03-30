@@ -56,6 +56,7 @@ ThemeData flexThemeLight(ThemeController controller) {
   // which is the effective primary color, the get the effective ThemeData.
   return flexColorSchemeLight(controller, source).toTheme.copyWith(
         // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
+        // See: https://github.com/flutter/flutter/issues/123507
         // This is a fix to avoid the Flutter Drawer width bug and overflow bug
         // when it animates via zero width in null default to widget default.
         drawerTheme: controller.useSubThemes
