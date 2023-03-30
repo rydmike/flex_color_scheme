@@ -98,12 +98,11 @@ class ThemeColorsSettings extends StatelessWidget {
         ] else ...<Widget>[
           const ListTile(
             title: Text('This theme is customizable!'),
-            subtitle: Text('Tap on the colors above to modify them with a '
-                'color picker. You can copy/paste values to and from the '
-                'color picker.'),
+            subtitle: Text('Tap on main colors above to modify them. You can '
+                'copy/paste values to and from the color picker.'),
           ),
           ListTile(
-            title: const Text('Reset the custom theme to its default colors?'),
+            title: const Text('Reset custom theme to its default colors?'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);

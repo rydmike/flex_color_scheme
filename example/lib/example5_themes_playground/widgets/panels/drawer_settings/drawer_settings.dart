@@ -16,6 +16,16 @@ class DrawerSettings extends StatelessWidget {
     host: 'm3.material.io',
     path: 'components/navigation-drawer/specs',
   );
+  static final Uri _drawerWidthIssue123380 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/123380',
+  );
+  static final Uri _drawerUmbrellaIssue123507 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/123507',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -161,14 +171,25 @@ class DrawerSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: ' it should be 360 dp wide, while Material 2 is '
                       '304 dp. '
-                      'Due to a bug in Flutter, it defaults to 304 dp in both '
+                      'Due to a bug in Flutter, it defaults to 304dp in both '
                       'modes in Flutter 3.7. '
                       'FCS corrects this spec deviation in its defaults. '
                       'Please note that a 360 dp wide Drawer may be too wide '
                       'for smaller or older phones and the Drawer may '
                       'cover the entire width of the phone. This may not be '
-                      'desired, if so adjust the width down. The 304 dp M2 '
-                      'spec width is not bad choice in M3 either.',
+                      'desired, if so adjust the width down. The 304dp M2 '
+                      'spec width is not bad choice in M3 either, maybe a bit '
+                      'wider but below 360dp. Please see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _drawerWidthIssue123380,
+                  text: 'issue #123380',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more information and an analysis of suitable '
+                      'Drawer width on different sized phones.',
                 ),
               ],
             ),
@@ -478,6 +499,31 @@ class DrawerSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The NavigationDrawer and its Indicator styling has a '
+                      'fair amount of minor issues in Flutter 3.7 that limits '
+                      'useful styling capabilities options. You can find '
+                      'an overview of them and their status in ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _drawerUmbrellaIssue123507,
+                  text: 'issue #123507',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.',
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(),
         const NavigationDrawerShowcase(),

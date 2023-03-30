@@ -5267,8 +5267,8 @@ class FlexSubThemes {
         }),
         // TODO(Rydmike): Report Flutter SDK SegmentedButton overlayColor bug.
         // SegmentedButton triggers overlay 3 times in Selected mode, 1st
-        // time it is selected, next two times it is no longer selected,
-        // even it if actually is. This results in that we never see the
+        // time it is selected, next time it is no longer selected,
+        // even it if actually is. This results is that we never see the
         // selected overlay state. It is also triggered 3 times when not
         // selected, but there we get the unselected mode all times, so
         // it is not noticed, still one call would be enough.
