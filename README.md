@@ -121,7 +121,7 @@ The most useful and popular feature of the **Themes Playground** is that it can 
 
 The latest **Themes Playground v7** build can be used as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-v7).
 
-For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available on the documentation site.
+For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available in the documentation site.
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v7)
 
