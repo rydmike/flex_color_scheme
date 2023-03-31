@@ -20,11 +20,10 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/issues/111800',
   );
-  static final Uri _fcsFlutterPull121884 = Uri(
+  static final Uri _fcsFlutterIssue123829 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/pull/121884',
-    fragment: 'issuecomment-1458505977',
+    path: 'flutter/flutter/pull/123829',
   );
   static final Uri _fcsFlutterIconButtonDoc = Uri(
     scheme: 'https',
@@ -360,11 +359,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     text: ' and its referenced PR brought the new styled '
                         'IconButton constructors. These new IconButtons have '
                         'the same theming limitation as .e.g the FilledButton, '
-                        'for more information about it, see '),
+                        'for more information about it, see issue '),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterPull121884,
-                  text: '#121884/comment',
+                  uri: _fcsFlutterIssue123829,
+                  text: '#123829',
                 ),
                 TextSpan(
                   style: spanTextStyle,
@@ -380,8 +379,8 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. It is a bit tedious to set them up them, '
-                      'but at least doable, just not with any '
-                      'built-in constructors, yet.',
+                      'but at least doable, but not with any '
+                      'built-in constructors yet, nor any theming.',
                 ),
               ],
             ),
