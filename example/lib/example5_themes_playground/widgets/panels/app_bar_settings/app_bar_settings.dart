@@ -24,6 +24,11 @@ class AppBarSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/issues/110951',
   );
+  static final Uri _fcsFlutterIssue123943 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/123943',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -510,6 +515,8 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+
+        //
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: RichText(
@@ -527,10 +534,20 @@ class AppBarSettings extends StatelessWidget {
                   text: 'issue #117082',
                 ),
                 TextSpan(
+                    style: spanTextStyle,
+                    text:
+                        '. The theming and defaults are also incorrect for the '
+                        'action icons in master channel, see '),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue123943,
+                  text: 'issue #123943',
+                ),
+                TextSpan(
                   style: spanTextStyle,
-                  text: '. There are fixes for this and related issues '
-                      'in master channel, but they have not landed in '
-                      'Flutter 3.7.9 stable or earlier versions.',
+                  text: '. There are partial fixes to this and many other '
+                      'related issues in master channel, but they have not '
+                      'landed in Flutter 3.7.9 stable or earlier versions.',
                 ),
               ],
             ),
@@ -704,8 +721,8 @@ class AppBarSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7.0 to 3.7.5 the BottomAppBar color '
-                      'cannot be changed due to the issue described in ',
+                  text: 'In Flutter 3.7.0 to at least 3.7.9 the BottomAppBar '
+                      'color cannot be changed due to the issue described in ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
