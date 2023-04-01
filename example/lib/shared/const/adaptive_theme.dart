@@ -31,10 +31,9 @@ enum AdaptiveTheme {
     label: 'Apple devices and web',
     describe: 'Use this adaptive feature on iOS and macOS device, plus web '
         'usage on iOS and macOS. Use this option if you always want this '
-        'platform adaptive on usage on Apple devices usage, and want to the '
-        'keep the none adaptive designs on all other platforms. This option is '
-        'useful for getting a progressive web style on Apple devices that '
-        'matches their device based adaptive style.',
+        'feature used on Apple devices and want to the keep the none adaptive '
+        'default on all other platforms. This option is useful for making a '
+        'progressive web app that on Apple devices matches its devices style.',
     code: 'FlexAdaptive.appleWeb()',
     icon: Icons.important_devices_outlined,
   ),
@@ -61,7 +60,8 @@ enum AdaptiveTheme {
         'used from any platform, except on Android and Fuchsia device builds. '
         'They keep the none adaptive setting. Use this option to keep standard '
         'theme, often M3 design, on Android/Fuchsia, but a web design that is '
-        'equal on all platforms and using the platform adaptive design.',
+        'equal on all platforms and using the less opinionated adaptive '
+        'settings.',
     code: 'FlexAdaptive.excludeAndroidFuchsia()',
     icon: Icons.mobile_off_outlined,
   ),
@@ -70,7 +70,7 @@ enum AdaptiveTheme {
     describe: 'Use this adaptive feature on all platforms, except on native '
         'Android and Fuchsia device builds. Web usage on all platforms also '
         'retains the standard theme feature. Use this option to go all-in on '
-        'Material design on Google platforms and web usage on all platforms, '
+        'Material 3 design on Google platforms and web usage on all platforms, '
         'but use the platform adaptive style on all other device builds.',
     code: 'FlexAdaptive.excludeWebAndroidFuchsia()',
     icon: Icons.no_cell_outlined,

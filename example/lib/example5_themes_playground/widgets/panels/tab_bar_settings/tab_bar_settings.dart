@@ -424,7 +424,7 @@ class TabBarSettings extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'ELEV',
+                  'WEIGHT',
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
@@ -478,7 +478,7 @@ class TabBarSettings extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'ELEV',
+                  'RADIUS',
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(

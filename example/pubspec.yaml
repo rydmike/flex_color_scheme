@@ -83,7 +83,7 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.20
+  shared_preferences: ^2.1.0
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev

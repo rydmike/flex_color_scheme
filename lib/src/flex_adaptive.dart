@@ -266,7 +266,7 @@ class FlexAdaptive with Diagnosticable {
   ///
   /// Rationale for this configuration, you only want to retain the default
   /// Material 3 theme feature setup on Android and Fuchsia platform device
-  /// builds, but on Web and all other platforms, you want the adaptive less
+  /// builds, but on Web and all other platforms, you want the adaptive, less
   /// opinionated feature.
   ///
   /// The rationale for Web being same on all, it should look the same
@@ -299,11 +299,11 @@ class FlexAdaptive with Diagnosticable {
   ///
   /// The rationale for Web being same on all, it should look the same
   /// regardless of platform and it should use the Google opinionated
-  /// Material 3 design, on web you always want to use Google's Material
-  /// design, not the adaptive config where some of those features
-  /// are removed. With this option you typically use Material 3 styles on
-  /// web on all platforms and on Android and Fuchsia devices, but not on
-  /// any other device build.
+  /// Material 3 design. This is useful fi you on web always want to use
+  /// Google's Material design, not the adaptive config, where some of those
+  /// features are removed. With this option you typically use Material 3
+  /// styles on web on all platforms and on Android and Fuchsia devices, but
+  /// not on any other device build.
   const FlexAdaptive.excludeWebAndroidFuchsia({
     this.android = false,
     this.androidWeb = false,

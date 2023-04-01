@@ -1,10 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'app_bar_style_popup_menu.dart';
 
@@ -31,16 +33,16 @@ class AppBarSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const AppBarShowcase(),
         const ListTile(
+          title: Text('AppBar'),
           subtitle: Text(
             'Material 2 uses primary colored AppBar in light mode and almost '
-            'black in dark mode. Material 3 defaults to surface '
-            'color in both light and dark theme mode. '
-            'With FCS you can use select '
-            'Primary, Material2 surface, background and surface colors '
-            'with their surfaceTint blends, or use a custom color.',
+            'black in dark mode. Material 3 defaults to surface color in both '
+            'light and dark theme mode. With FCS you can use select if you '
+            'want Primary, Material2 surface, background, scaffoldBackground '
+            'colors with their surfaceTint and blends, or use a custom color.',
           ),
         ),
         if (isLight)
@@ -94,7 +96,7 @@ class AppBarSettings extends StatelessWidget {
           title: const Text('One colored AppBar on Android'),
           subtitle: const Text(
             'ON  No scrim on the top status bar\n'
-            'OFF Default two toned status bar',
+            'OFF Use a two toned AppBar with a scrim on top status bar',
           ),
           value:
               controller.transparentStatusBar && controller.useFlexColorScheme,
@@ -102,6 +104,7 @@ class AppBarSettings extends StatelessWidget {
               ? controller.setTransparentStatusBar
               : null,
         ),
+        const AppBarShowcase(),
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
@@ -442,6 +445,23 @@ class AppBarSettings extends StatelessWidget {
             ),
           ),
         ],
+        AdaptiveThemePopupMenu(
+          title: const Text('Platform adaptive M3 AppBar scroll '
+              'under tint removal'),
+          index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
+          onChanged: controller.useFlexColorScheme &&
+                  controller.useSubThemes &&
+                  controller.useMaterial3
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveAppBarScrollUnderOffDark(null);
+                  } else {
+                    controller.setAdaptiveAppBarScrollUnderOffDark(
+                        AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
         const ListTile(
           title: Text('Background color'),
           subtitle: Text('With component themes enabled you can select scheme '
@@ -449,7 +469,10 @@ class AppBarSettings extends StatelessWidget {
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
               'Selecting a color overrides used AppBarStyle, set it back '
-              'to default to use AppBarStyle again.'),
+              'to default to use AppBarStyle again. Using AppBarStyle also '
+              'offers Scaffold background color as AppBar color, which when '
+              'using FCS surface blends can be different from ColorScheme '
+              'surface and background colors.'),
         ),
         if (isLight)
           ColorSchemePopupMenu(
@@ -487,11 +510,38 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'When using SliverAppBar.large or '
+                      'SliverAppBar.medium, the foreground color cannot be '
+                      'changed with widget or theme, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue110951,
+                  text: 'issue #117082',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There are fixes for this and related issues '
+                      'in master channel, but they have not landed in '
+                      'Flutter 3.7.9 stable or earlier versions.',
+                ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         const ListTile(
           title: Text('BottomAppBar'),
-          subtitle: Text('Typically used with Scaffold.bottomNavigationBar. '
-              'Elevation in FCS defaults to AppBar elevation in M2, '
+          subtitle: Text('A BottomAppBar is typically used with '
+              'Scaffold.bottomNavigationBar. '
+              'Its elevation in FCS defaults to AppBar elevation in M2 mode, '
               'when using M3 it defaults to 3 and gets elevation tint.'),
         ),
         if (isLight) ...<Widget>[
@@ -640,12 +690,12 @@ class AppBarSettings extends StatelessWidget {
         const ListTile(
           isThreeLine: true,
           dense: true,
-          title: Text('Color issues'),
+          title: Text('Theming limitations'),
           subtitle: Text(
-              'The color of items in a BottomAppBar cannot be themed. If you '
-              'use a background color that requires other contrasting color '
-              'than what works on surface and background color, you will have '
-              'to color its content on widget level.'),
+              'The color of the items in a BottomAppBar cannot be themed. If '
+              'you use a background color that requires other contrasting '
+              'color than what works on surface and background color, you will '
+              'have to color its content on widget level.'),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -664,20 +714,7 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. When using SliverAppBar.large or '
-                      'SliverAppBar.medium, the foreground color cannot be '
-                      'changed with widget or theme, see ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue110951,
-                  text: 'Issue #117082',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. There are fixes for both these issues in master '
-                      'channel, but they have not landed in Flutter 3.7.5 '
-                      'stable or earlier versions.',
+                  text: '.',
                 ),
               ],
             ),

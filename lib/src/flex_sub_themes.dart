@@ -4037,7 +4037,7 @@ class FlexSubThemes {
 
     // TODO(rydmike): Removed interaction tint, not supported in Flutter yet.
     //
-    // // Using these tinted overlay variable in all themes for ease of
+    // // Using these tinted overlay variables in all themes for ease of
     // // reasoning and duplication.
     // final Color overlay = backgroundColor;
     // final Color tint = indicatorColor;
@@ -6065,6 +6065,7 @@ class FlexSubThemes {
     final Color overlayBase =
         labelColor ?? (useM3 ? colorScheme.primary : colorScheme.onPrimary);
 
+    // TODO(rydmike): Instead of no theme, consider color based overlay factor.
     // TODO(rydmike): Report TabBar overlayColor bug around row 1395 in TabBar.
     // This is a work-around to TabBar overlay theme bug in SDK.
     final bool useCustomOverlay = tintInteract ||
