@@ -12,7 +12,7 @@ This is a major update to the **FlexColorScheme** package and substantial leap f
 
 * [Changes from 7.0.0-dev.1 to 7.0.0-dev.2](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_2.md)
 
-* [Changes from 7.0.0-dev.2 to 7.0.0-dev.3 (final beta)](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_2.md)
+* [Changes from 7.0.0-dev.2 to 7.0.0-dev.3 (final beta)](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_3.md)
 
 * Changes from 7.0.0-dev.3 to 7.0.0
   - Package: Only tests and documentation additions and updates.
