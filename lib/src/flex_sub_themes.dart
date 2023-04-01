@@ -6065,9 +6065,7 @@ class FlexSubThemes {
     final Color overlayBase =
         labelColor ?? (useM3 ? colorScheme.primary : colorScheme.onPrimary);
 
-    // TODO(rydmike): Instead of no theme, consider color based overlay factor.
-    // TODO(rydmike): Report TabBar overlayColor bug around row 1395 in TabBar.
-    // This is a work-around to TabBar overlay theme bug in SDK.
+    // Only make a custom overlay when we have settings that require it.
     final bool useCustomOverlay = tintInteract ||
         (useM3 && labelColor != colorScheme.primary && labelColor != null) ||
         (!useM3 && labelColor != colorScheme.onPrimary && labelColor != null);
