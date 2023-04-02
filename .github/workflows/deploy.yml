@@ -25,11 +25,11 @@ on:
     paths-ignore:
      - "**.md"
   pull_request:
-    branches: [master]
+    branches: [none]
     paths-ignore:
       - "**.md"
   release:
-    branches: [none]
+    branches: [master]
     types: [publish]
     paths-ignore:
       - "**.md"
