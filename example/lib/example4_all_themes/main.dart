@@ -43,7 +43,7 @@ import 'home_page.dart';
 // in AppColor.schemes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/allthemes-v5
+// https://rydmike.com/flexcolorscheme/allthemes-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -166,8 +166,7 @@ class DemoApp extends StatelessWidget {
             // from a single static source, so we can change it easily there.
             visualDensity: App.visualDensity,
             fontFamily: App.font,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),
@@ -197,8 +196,7 @@ class DemoApp extends StatelessWidget {
                 : null,
             visualDensity: App.visualDensity,
             fontFamily: App.font,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),

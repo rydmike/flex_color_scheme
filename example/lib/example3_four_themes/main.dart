@@ -29,7 +29,7 @@ import 'home_page.dart';
 // with the enum related color scheme.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/fourthemes-v5
+// https://rydmike.com/flexcolorscheme/fourthemes-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -174,8 +174,7 @@ class DemoApp extends StatelessWidget {
             // not as large as on hand held devices.
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),
@@ -205,8 +204,7 @@ class DemoApp extends StatelessWidget {
             ),
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),
