@@ -2,44 +2,23 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 7.0.0 (WIP)
+## 7.0.0
 
-**Apr 1, 2023**
+**Apr 2, 2023**
 
-This is a major update to the **FlexColorScheme** package and substantial leap for the companion app **Themes Playground**. For a detailed list of all changes, please refer to the incremental log from its development release.
+This is a major update to the **FlexColorScheme** package and a substantial leap for the companion app **Themes Playground**. For a detailed list of all changes, please refer to the incremental log from its development release linked below.
 
-* [Changes from 6.1.2 to 7.0.0-dev.1](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_1.md)
+* [Changes from 6.1.2 to 7.0.0-dev.1](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_1.md)
 
-* [Changes from 7.0.0-dev.1 to 7.0.0-dev.2](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_2.md)
+* [Changes from 7.0.0-dev.1 to 7.0.0-dev.2](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_2.md)
 
-* [Changes from 7.0.0-dev.2 to 7.0.0-dev.3 (final beta)](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_3.md)
+* [Changes from 7.0.0-dev.2 to 7.0.0-dev.3 (final beta)](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_3.md)
 
 * Changes from 7.0.0-dev.3 to 7.0.0
   - Package: Only tests and documentation additions and updates.
   - Playground: Label and layout corrections.
 
-
 The [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-v7/) app built for this release is unfortunately not a SKIA renderer build, it is using the HTML renderer. This makes it less performant than the app would otherwise be. Additionally, scaled content, like the **Themes Simulator** panel in the **Playground**, is also fuzzier than it would be with the SKIA renderer. Due to an issue in Flutter stable 3.7.0 to at least 3.7.9, builds made with the SKIA renderer performs very poorly and crash quickly. For more information, see Flutter [issue #122189](https://github.com/flutter/flutter/issues/122189). A new build using the same package version will be made later and released when a fix for the SKIA issues are available on the Flutter stable channel.
-
-**TODO BEFORE FCS STABLE 7.0.0 RELEASE**
-
-- Report all found Flutter SDK theming issues.
-  - Insert issue info in Themes Playground app where relevant.
-- Make key updates to [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com/).
-  - Change summary update. Done 98% with 7.0.0-dev.3 release.
-  - Remove v6 web example links from most places in docs, v7 links already added with 7.0.0-dev.3 release. 
-
-**TODO AFTER FCS STABLE 7.0.0 RELEASE**
-
-- Tweet thread about v7.0.0 stable release.
-- Update [FlexColorScheme docs](https://docs.flexcolorscheme.com), with among other things:
-  - Guides on how to use major new features of FCS in the Playground.
-  - Info section about what is still missing in Flutter 3.7 from M3.
-  - Review and update old screenshots and GIFs.
-  - General review of the entire site to ensure it is all up to date.  
-  - Use image zoom feature in docs.page on new and old images.
-  - Use new highlight banners feature, in the docs.page tool when appropriate.
-
 
 ## 7.0.0-dev.3
 
@@ -49,19 +28,19 @@ This is **the final beta v7** release before **stable v7**. There will be no new
 
 The companion app **Themes Playground**, may get label improvements plus spelling and grammar corrections. Layouts in it may also be modified and improved as needed. It will not get any new features, but it may of course receive bug fixes.
 
-* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_3.md)
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_3.md)
 
 ## 7.0.0-dev.2
 
 **Jan 25, 2023**
 
-* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_2.md)
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_2.md)
 
 ## 7.0.0-dev.1
 
 **Jan 23, 2023**
 
-* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/m3-master-channel/changelog/changelog_7_0_0_dev_1.md)
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_1.md)
 
 **Jan 23, 2023**
 
