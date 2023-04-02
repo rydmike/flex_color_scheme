@@ -26,6 +26,8 @@ class DemoApp extends StatefulWidget {
 class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme, start with system mode.
   ThemeMode themeMode = ThemeMode.system;
+  // Opt in/out on Material 3
+  bool useMaterial3 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,22 +43,20 @@ class _DemoAppState extends State<DemoApp> {
         scheme: usedScheme,
         // Use very subtly themed app bar elevation in light mode.
         appBarElevation: 0.5,
-        // Use predefined M3 typography while this issue is in effect:
-        // https://github.com/flutter/flutter/issues/103864
-        typography: Typography.material2021(
-          platform: defaultTargetPlatform,
-        ),
+        // Opt in/out of using Material 3.
+        useMaterial3: useMaterial3,
+        // We use the nicer Material 3 Typography in both M2 and M3 mode.
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
       // Same definition for the dark theme, but using FlexThemeData.dark().
       darkTheme: FlexThemeData.dark(
         scheme: usedScheme,
         // Use a bit more themed elevated app bar in dark mode.
         appBarElevation: 2,
-        // Use predefined M3 typography while this issue is in effect:
-        // https://github.com/flutter/flutter/issues/103864
-        typography: Typography.material2021(
-          platform: defaultTargetPlatform,
-        ),
+        // Opt in/out of using Material 3.
+        useMaterial3: useMaterial3,
+        // We use the nicer Material 3 Typography in both M2 and M3 mode.
+        typography: Typography.material2021(platform: defaultTargetPlatform),
       ),
       // Use the above dark or light theme based on active themeMode.
       themeMode: themeMode,
@@ -67,6 +67,14 @@ class _DemoAppState extends State<DemoApp> {
         onThemeModeChanged: (ThemeMode mode) {
           setState(() {
             themeMode = mode;
+          });
+        },
+        // We pass it the current material mode.
+        useMaterial3: useMaterial3,
+        // On the home page we can toggle theme Material 2/3 mode.
+        onUseMaterial3Changed: (bool material3) {
+          setState(() {
+            useMaterial3 = material3;
           });
         },
         // Pass in the FlexSchemeData we used for the active theme. Not

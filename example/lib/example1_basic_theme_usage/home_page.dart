@@ -21,10 +21,14 @@ class HomePage extends StatelessWidget {
     super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
+    required this.useMaterial3,
+    required this.onUseMaterial3Changed,
     required this.flexSchemeData,
   });
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
+  final bool useMaterial3;
+  final ValueChanged<bool> onUseMaterial3Changed;
   final FlexSchemeData flexSchemeData;
 
   @override
@@ -37,7 +41,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(App.title(context)),
-        actions: const <Widget>[AboutIconButton()],
+        actions: <Widget>[
+          IconButton(
+            icon: useMaterial3
+                ? const Icon(Icons.filter_3)
+                : const Icon(Icons.filter_2),
+            onPressed: () {
+              onUseMaterial3Changed(!useMaterial3);
+            },
+            tooltip: '"Switch to Material ${useMaterial3 ? 2 : 3}',
+          ),
+          const AboutIconButton(),
+        ],
       ),
       body: PageBody(
         constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
@@ -74,7 +89,7 @@ class HomePage extends StatelessWidget {
             // Show all active ColorScheme colors.
             const ShowColorSchemeColors(),
             const SizedBox(height: 8),
-            // Show all active colors in ThemeData, these will all be
+            // Show all active colors in ThemeData, most of these will be
             // deprecated in Flutter SDK, for more info see
             // https://github.com/flutter/flutter/issues/91772
             const ShowThemeDataColors(),
