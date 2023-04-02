@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../const/app_data.dart';
+import '../../const/app.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -54,8 +54,8 @@ class ShowThemeDataColors extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
@@ -155,23 +155,6 @@ class ShowThemeDataColors extends StatelessWidget {
                 color: theme.secondaryHeaderColor,
                 textColor: _onColor(theme.secondaryHeaderColor, background),
               ),
-              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
-              // Sill included in Flutter 3.3 though, so we keep it in.
-              ColorCard(
-                label: 'Toggleable\nActive',
-                color: theme.toggleableActiveColor,
-                textColor: _onColor(theme.toggleableActiveColor, background),
-              ),
-              ColorCard(
-                label: 'Bottom\nAppBar',
-                color: theme.bottomAppBarColor,
-                textColor: _onColor(theme.bottomAppBarColor, background),
-              ),
-              ColorCard(
-                label: 'Error\nColor',
-                color: theme.errorColor,
-                textColor: colorScheme.onError,
-              ),
               ColorCard(
                 label: 'Canvas$backTooHigh',
                 color: theme.canvasColor,
@@ -236,13 +219,6 @@ class ShowThemeDataColors extends StatelessWidget {
                 label: 'Hint\nColor',
                 color: theme.hintColor,
                 textColor: _onColor(theme.hintColor, background),
-              ),
-              // TODO(rydmike): Flutter deprecated after v3.1.0-0.0.pre.
-              // Sill included in Flutter 3.3 though, so we keep it in.
-              ColorCard(
-                label: 'Selected\nRow',
-                color: theme.selectedRowColor,
-                textColor: _onColor(theme.selectedRowColor, background),
               ),
               ColorCard(
                 label: 'Unselected\nWidget',

@@ -3,14 +3,14 @@ import 'dart:math' as math;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../const/app_data.dart';
-import '../universal/maybe_tooltip.dart';
+import '../../const/app.dart';
+import '../../utils/colors_are_close.dart';
 import 'about.dart';
 
 // ignore_for_file: comment_references
 
 // The default width of the side menu when expanded to full menu.
-const double _kMenuWidth = 275;
+const double _kMenuWidth = 280;
 
 // The default width of the side menu when collapsed to a rail.
 // We make it extra compact to not be so intrusive on phones. It looks a bit
@@ -54,7 +54,8 @@ class ResponsiveMenuItems {
 
   String get tooltip => _tooltip ?? label;
   String get labelSecondary => _labelSecondary ?? label;
-  String get tooltipSecondary => _tooltipSecondary ?? tooltip;
+  String get tooltipSecondary =>
+      _tooltipSecondary ?? _labelSecondary ?? tooltip;
   IconData get iconSecondary => _iconSecondary ?? icon;
 }
 
@@ -80,11 +81,10 @@ enum ResponsiveMenuItemIconState { primary, secondary }
 /// an interesting experiment.
 ///
 /// This is not really a Flutter "Universal" Widget that only depends on the
-/// SDK, it also depends on another widget in the project the universal
-/// `MaybeTooltip`. It of course also contains code that may not be 100%
-/// reusable since it is a bit app specific. Hence the 'app' level widget
-/// classification. This widget could however easily be made "universal"
-/// and become quite useful.
+/// SDK, it also depends on a few other project consts and utilities. It
+/// contains some code that is not be 100% reusable since it is a bit app
+/// specific. Hence the 'app' level widget classification. This widget
+/// could easily be made "universal" and become quite useful.
 ///
 /// (c) BSD 3-clause - Mike Rydstrom (@RydMike)
 class ResponsiveScaffold extends StatefulWidget {
@@ -429,15 +429,15 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       mediaSize = media.size;
       // On purpose not checking the the height here, we want to keep and auto
       // open the rail if this is possibly a phone in landscape mode.
-      final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint;
+      final bool isPhone = media.size.width < App.phoneWidthBreakpoint;
       // This make the rail menu auto-close on phone size and open back up if
       // moving to landscape or none phone size. You can still open a very
       // narrow rail also in phone size, but if you resize the canvas at phone
       // sizes, it will auto close again, but as long as you keep media size the
-      // same it stays pen. So on a phone with fixed media size, you only see
+      // same it stays open. So on a phone with fixed media size, you only see
       // it appearing when you rotate the device, in a logical way.
       // On web/desktop you would no use it this small, but if/when you do the
-      // the auto-closing of the thin rail, might feel strange. I just call
+      // the auto-closing of the thin rail, might feel strange. I just
       // consider it as a "the UI knows it is too narrow" for even a rail case.
       if (isPhone) {
         isMenuClosed = true;
@@ -508,89 +508,36 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
       children: <Widget>[
         // The menu content when used as a menu or rail is in a constrained
         // box set to the maximum width of the menu.
-        ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: widget.menuWidth),
-          // Material is used for proper surface, and it gives us the "right"
-          // theme behaving container background.
-          child: Material(
-            // This simple implicit animation AnimatedContainer is what
-            // animates the entire side menu from 0, to rail to menu width.
-            // The default type, canvas, makes Material use theme.CanvasColor,
-            // which in FlexThemeData and in ThemeData.from is set to
-            // theme.colorScheme.background. So our menu will be background
-            // colored by default, including any color branding our theme
-            // in FlexColorScheme has applied to it, just like a Drawer.
-            child: AnimatedContainer(
-              duration: _kMenuAnimationDuration,
-              onEnd: () {
-                setState(() {
-                  // This state was added to not get the automatically implied
-                  // leading widget to show up before the menu rail completed
-                  // sliding out of visibility, looked better that way.
-                  // Otherwise it jumps into visibility when the menu rail
-                  // starts its closing animation, and heading jumps to right.
-                  if (isMenuClosed) {
-                    menuDoneClosing = true;
-                  } else {
-                    menuDoneClosing = false;
-                  }
-                });
-              },
-              width: activeMenuWidth,
-              child: _AppMenu(
-                title: widget.menuTitle,
-                menuLeadingTitle: widget.menuLeadingTitle,
-                menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
-                menuItems: widget.menuItems,
-                menuItemsEnabled: menuItemsEnabled,
-                menuItemsIconState: menuItemsIconState,
-                maxWidth: widget.menuWidth,
-                railWidth: widget.railWidth,
-                onSelect: widget.onSelect,
-                // User pushed the menu button, change menu state, on desktop
-                // we toggle the the menuExpanded and not menuExpanded state.
-                // On not desktop size (phone or tablet) we toggle the state
-                // isMenuClosed or not.
-                onOperate: () {
+        FocusTraversalGroup(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: widget.menuWidth),
+            // Material is used for proper surface, and it gives us the "right"
+            // theme behaving container background.
+            child: Material(
+              // This simple implicit animation AnimatedContainer is what
+              // animates the entire side menu from 0, to rail to menu width.
+              // The default type, canvas, makes Material use theme.CanvasColor,
+              // which in FlexThemeData and in ThemeData.from is set to
+              // theme.colorScheme.background. So our menu will be background
+              // colored by default, including any color branding our theme
+              // in FlexColorScheme has applied to it, just like a Drawer.
+              child: AnimatedContainer(
+                duration: _kMenuAnimationDuration,
+                onEnd: () {
                   setState(() {
-                    // Desktop case, we can only expand or collapse the menu.
-                    if (isDesktop) {
-                      // So we toggle its state.
-                      isMenuExpanded = !isMenuExpanded;
+                    // This state was added to not get the automatically implied
+                    // leading widget to show up before the menu rail completed
+                    // sliding out of visibility, looked better that way.
+                    // Otherwise it jumps into visibility when the menu rail
+                    // starts its closing animation, and heading jumps to right.
+                    if (isMenuClosed) {
+                      menuDoneClosing = true;
                     } else {
-                      // Tablet or phone case, we can only close the menu, it
-                      // will then be in the Drawer, from where it can be
-                      // opened again as a drawer with the menu button.
-                      isMenuClosed = true;
+                      menuDoneClosing = false;
                     }
                   });
                 },
-              ),
-            ),
-          ),
-        ),
-        // The actual page content is a normal Scaffold, in an Expanded Widget
-        // in the 2nd part of the Row.
-        Expanded(
-          child: Scaffold(
-            appBar: AppBar(
-              title: widget.title,
-              // We are using dynamic title content, we want it start aligned.
-              centerTitle: false,
-              actions: const <Widget>[AboutIconButton()],
-              // Some logic to show the implicit menu button on AppBar when
-              // there is no rail or menu.
-              automaticallyImplyLeading:
-                  !isDesktop && isMenuClosed && menuDoneClosing,
-            ),
-            // The menu content when used in the Drawer.
-            drawer: ConstrainedBox(
-              // We use the same size on the drawer that we have on our menu.
-              // We can do that by constraining the drawer een if it does not
-              // have a width size property.
-              constraints: BoxConstraints.expand(width: widget.menuWidth),
-              child: Drawer(
+                width: activeMenuWidth,
                 child: _AppMenu(
                   title: widget.menuTitle,
                   menuLeadingTitle: widget.menuLeadingTitle,
@@ -601,56 +548,113 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                   menuItemsIconState: menuItemsIconState,
                   maxWidth: widget.menuWidth,
                   railWidth: widget.railWidth,
-                  onSelect: (int index) {
-                    Navigator.of(context).pop();
-                    widget.onSelect?.call(index);
-                  },
-                  // User pushed menu button in Drawer, we close the Drawer and
-                  // set menu state to not be closed, it will open as a rail.
+                  onSelect: widget.onSelect,
+                  // User pushed the menu button, change menu state, on desktop
+                  // we toggle the the menuExpanded and not menuExpanded state.
+                  // On not desktop size (phone or tablet) we toggle the state
+                  // isMenuClosed or not.
                   onOperate: () {
-                    Navigator.of(context).pop();
-                    // If we do this, we can wait to complete the closing
-                    // drawer animation, before we trigger animating the
-                    // rail visible:
-                    Future<void>.delayed(_kMenuAnimationDuration, () {
-                      setState(() {
-                        isMenuClosed = false;
-                      });
+                    setState(() {
+                      // Desktop case, we can only expand or collapse the menu.
+                      if (isDesktop) {
+                        // So we toggle its state.
+                        isMenuExpanded = !isMenuExpanded;
+                      } else {
+                        // Tablet or phone case, we can only close the menu, it
+                        // will then be in the Drawer, from where it can be
+                        // opened again as a drawer with the menu button.
+                        isMenuClosed = true;
+                      }
                     });
-                    // If we do this instead they both animate at the same time:
-                    // setState(() {
-                    //   isMenuClosed = false;
-                    // });
                   },
                 ),
               ),
             ),
-            //
-            // All the rest of the standard Scaffold properties that we
-            // pass along to the actual Scaffold Widget.
-            //
-            body: widget.body,
-            floatingActionButton: widget.floatingActionButton,
-            floatingActionButtonLocation: widget.floatingActionButtonLocation,
-            floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-            persistentFooterButtons: widget.persistentFooterButtons,
-            onDrawerChanged: widget.onDrawerChanged,
-            endDrawer: widget.endDrawer,
-            onEndDrawerChanged: widget.onEndDrawerChanged,
-            bottomNavigationBar: widget.bottomNavigationBar,
-            bottomSheet: widget.bottomSheet,
-            backgroundColor: widget.backgroundColor,
-            resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-            primary: widget.primary,
-            drawerDragStartBehavior: widget.drawerDragStartBehavior,
-            extendBody: widget.extendBody,
-            extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-            drawerScrimColor: widget.drawerScrimColor,
-            drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-            drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
-            endDrawerEnableOpenDragGesture:
-                widget.endDrawerEnableOpenDragGesture,
-            restorationId: widget.restorationId,
+          ),
+        ),
+        // The actual page content is a normal Scaffold, in an Expanded Widget
+        // in the 2nd part of the Row.
+        Expanded(
+          child: FocusTraversalGroup(
+            child: Scaffold(
+              appBar: AppBar(
+                title: widget.title,
+                // We are using dynamic title content, we want it start aligned.
+                centerTitle: false,
+                actions: const <Widget>[AboutIconButton()],
+                // Some logic to show the implicit menu button on AppBar when
+                // there is no rail or menu.
+                automaticallyImplyLeading:
+                    !isDesktop && isMenuClosed && menuDoneClosing,
+              ),
+              // The menu content when used in the Drawer.
+              drawer: ConstrainedBox(
+                // We use the same size on the drawer that we have on our menu.
+                // We can do that by constraining the drawer een if it does not
+                // have a width size property.
+                constraints: BoxConstraints.expand(width: widget.menuWidth),
+                child: Drawer(
+                  child: _AppMenu(
+                    title: widget.menuTitle,
+                    menuLeadingTitle: widget.menuLeadingTitle,
+                    menuLeadingSubtitle: widget.menuLeadingSubtitle,
+                    menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
+                    menuItems: widget.menuItems,
+                    menuItemsEnabled: menuItemsEnabled,
+                    menuItemsIconState: menuItemsIconState,
+                    maxWidth: widget.menuWidth,
+                    railWidth: widget.railWidth,
+                    onSelect: (int index) {
+                      Navigator.of(context).pop();
+                      widget.onSelect?.call(index);
+                    },
+                    // User pushed menu button in Drawer, close the Drawer and
+                    // set menu state to not be closed, it will open as a rail.
+                    onOperate: () {
+                      Navigator.of(context).pop();
+                      // If we do this, we can wait to complete the closing
+                      // drawer animation, before we trigger animating the
+                      // rail visible:
+                      Future<void>.delayed(_kMenuAnimationDuration, () {
+                        setState(() {
+                          isMenuClosed = false;
+                        });
+                      });
+                      // If we do this instead, both animate at the same time:
+                      // setState(() {
+                      //   isMenuClosed = false;
+                      // });
+                    },
+                  ),
+                ),
+              ),
+              //
+              // All the rest of the standard Scaffold properties that we
+              // pass along to the actual Scaffold Widget.
+              //
+              body: widget.body,
+              floatingActionButton: widget.floatingActionButton,
+              floatingActionButtonLocation: widget.floatingActionButtonLocation,
+              floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+              persistentFooterButtons: widget.persistentFooterButtons,
+              onDrawerChanged: widget.onDrawerChanged,
+              endDrawer: widget.endDrawer,
+              onEndDrawerChanged: widget.onEndDrawerChanged,
+              bottomNavigationBar: widget.bottomNavigationBar,
+              bottomSheet: widget.bottomSheet,
+              backgroundColor: widget.backgroundColor,
+              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+              primary: widget.primary,
+              drawerDragStartBehavior: widget.drawerDragStartBehavior,
+              extendBody: widget.extendBody,
+              extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
+              drawerScrimColor: widget.drawerScrimColor,
+              drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
+              drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
+              endDrawerEnableOpenDragGesture:
+                  widget.endDrawerEnableOpenDragGesture,
+              restorationId: widget.restorationId,
+            ),
           ),
         ),
       ],
@@ -701,6 +705,13 @@ class _AppMenuState extends State<_AppMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color menuBackground = theme.canvasColor;
+    final Color scaffoldBackground = theme.scaffoldBackgroundColor;
+    final bool closeColors =
+        colorsAreClose(menuBackground, scaffoldBackground, isLight);
+
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {
         // The overflow box is not the prettiest approach, but has some
@@ -733,7 +744,9 @@ class _AppMenuState extends State<_AppMenu> {
                   decoration: BoxDecoration(
                     border: BorderDirectional(
                       end: BorderSide(
-                        color: Theme.of(context).dividerColor,
+                        color: closeColors
+                            ? theme.dividerColor
+                            : Colors.transparent,
                       ),
                     ),
                   ),
@@ -743,6 +756,7 @@ class _AppMenuState extends State<_AppMenu> {
                       minWidth: 0,
                       maxWidth: widget.maxWidth,
                       child: ListView(
+                        physics: const ClampingScrollPhysics(),
                         padding: EdgeInsets.zero, //  Removes all edge insets
                         children: <Widget>[
                           // A leading item the menu/rail.
@@ -867,8 +881,8 @@ class _MenuItem extends StatelessWidget {
             child: Material(
               clipBehavior: Clip.antiAlias,
               borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(_itemHeight / 2),
-                bottomRight: Radius.circular(_itemHeight / 2),
+                topRight: Radius.circular(_MenuItem._itemHeight / 2),
+                bottomRight: Radius.circular(_MenuItem._itemHeight / 2),
               ),
               // This is a tap command menu, so we keep selected item
               // transparent. We still get desktop/web hover and tap splash.
@@ -877,7 +891,7 @@ class _MenuItem extends StatelessWidget {
               // color: selected ? theme.focusColor : Colors.transparent,
               color: Colors.transparent,
               child: SizedBox(
-                height: _itemHeight,
+                height: _MenuItem._itemHeight,
                 width: math.max(width - endPadding, 0),
                 child: OverflowBox(
                   alignment: AlignmentDirectional.topStart,
@@ -887,17 +901,13 @@ class _MenuItem extends StatelessWidget {
                     onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
-                        MaybeTooltip(
-                          // Show tooltips only at rail size or if
-                          // the label and tooltip are different and when
-                          // tooltip is not empty string and item is enabled.
-                          condition: (width == railWidth || label != tooltip) &&
-                              tooltip != '' &&
-                              enabled,
-                          // The item menu labels is a tooltip on rail size.
-                          message: tooltip,
+                        Tooltip(
+                          // Show tooltips only at rail size and if enabled.
+                          // Setting message to empty never shows tooltip.
+                          message: width == railWidth && enabled ? tooltip : '',
                           // Just to get the tooltip outside the rail.
                           margin: const EdgeInsetsDirectional.only(start: 50),
+                          waitDuration: const Duration(milliseconds: 500),
                           // Constrain icon to min of rail width.
                           child: ConstrainedBox(
                             constraints: BoxConstraints.tightFor(
@@ -948,6 +958,19 @@ class _MenuLeadingItem extends StatefulWidget {
 
 class _MenuLeadingItemState extends State<_MenuLeadingItem> {
   bool _collapsed = true;
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -956,75 +979,80 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
     final TextTheme primaryTextTheme = theme.primaryTextTheme;
     const double hPadding = 5;
 
-    return Column(
-      children: <Widget>[
-        ListTile(
-          visualDensity: VisualDensity.comfortable,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: hPadding,
-            vertical: hPadding,
-          ),
-          leading: CircleAvatar(
-            backgroundColor: theme.colorScheme.primary,
-            radius: widget.railWidth / 2 - hPadding,
-            child: Text(
-              widget.menuLeadingAvatarLabel,
-              style: primaryTextTheme.titleMedium!.copyWith(
-                  color: theme.colorScheme.onPrimary,
-                  fontWeight: FontWeight.w600),
+    return Focus(
+      focusNode: _focusNode,
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            visualDensity: VisualDensity.comfortable,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: hPadding,
+              vertical: hPadding,
             ),
-          ),
-          title: widget.menuLeadingTitle,
-          subtitle: widget.menuLeadingSubtitle,
-          trailing: ExpandIcon(
-            isExpanded: !_collapsed,
-            size: 32,
-            padding: EdgeInsets.zero,
-            onPressed: (_) {
+            leading: CircleAvatar(
+              backgroundColor: theme.colorScheme.primary,
+              radius: widget.railWidth / 2 - hPadding,
+              child: Text(
+                widget.menuLeadingAvatarLabel,
+                style: primaryTextTheme.titleMedium!.copyWith(
+                    color: theme.colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            title: widget.menuLeadingTitle,
+            subtitle: widget.menuLeadingSubtitle,
+            trailing: ExpandIcon(
+              isExpanded: !_collapsed,
+              size: 32,
+              padding: EdgeInsets.zero,
+              onPressed: (_) {
+                _focusNode.requestFocus();
+                setState(() {
+                  _collapsed = !_collapsed;
+                });
+              },
+            ),
+            onTap: () {
+              _focusNode.requestFocus();
               setState(() {
                 _collapsed = !_collapsed;
               });
             },
           ),
-          onTap: () {
-            setState(() {
-              _collapsed = !_collapsed;
-            });
-          },
-        ),
-        // Add some expand actions for access to mock functionality.
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return SizeTransition(
-              sizeFactor: animation,
-              child: child,
-            );
-          },
-          child: _collapsed
-              ? const SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: <Widget>[
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          showAppAboutDialog(context);
-                        },
-                        child: Column(
-                          children: <Widget>[
-                            const Icon(Icons.info, size: 30),
-                            Text('About', style: textTheme.labelSmall),
-                          ],
+          // Add some expand actions for access to mock functionality.
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return SizeTransition(
+                sizeFactor: animation,
+                child: child,
+              );
+            },
+            child: _collapsed
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: <Widget>[
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {
+                            showAppAboutDialog(context);
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              const Icon(Icons.info, size: 30),
+                              Text('About', style: textTheme.labelSmall),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                    ],
+                        const SizedBox(width: 8),
+                      ],
+                    ),
                   ),
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

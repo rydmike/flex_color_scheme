@@ -2,8 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../shared/const/app.dart';
 import '../shared/const/app_color.dart';
-import '../shared/const/app_data.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
@@ -43,7 +43,7 @@ import 'home_page.dart';
 // in AppColor.schemes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/allthemes-v5
+// https://rydmike.com/flexcolorscheme/allthemes-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -99,6 +99,7 @@ class DemoApp extends StatelessWidget {
           title: 'All Themes',
           // Define the light theme for the app, using current scheme index.
           theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
             // We moved the definition of the list of color schemes to use into
             // a separate static class and list. We use the theme controller
             // to change the index of used color scheme from the list.
@@ -163,10 +164,9 @@ class DemoApp extends StatelessWidget {
             ),
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
-            visualDensity: AppData.visualDensity,
-            fontFamily: AppData.font,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),
@@ -175,6 +175,7 @@ class DemoApp extends StatelessWidget {
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
           // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
             colors: AppColor.customSchemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // We go with a slightly stronger blend in dark mode.
@@ -193,10 +194,9 @@ class DemoApp extends StatelessWidget {
                     defaultRadius: themeController.defaultRadius,
                   )
                 : null,
-            visualDensity: AppData.visualDensity,
-            fontFamily: AppData.font,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),

@@ -1,18 +1,40 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
-version: 6.1.2
+version: 7.0.0
 homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues
 documentation: https://docs.flexcolorscheme.com
+screenshots:
+  - description: 'Example of FlexColorScheme light theme colors in Themes Playground theme simulator'
+    path: example/screenshots/fcs_colors_light.png
+  - description: 'Example of FlexColorScheme dark theme colors in Themes Playground theme simulator'
+    path: example/screenshots/fcs_colors_dark.png
+  - description: 'FlexColorScheme light theme applied to a mock login screen in Themes Playground'
+    path: example/screenshots/fcs_login_light.png
+  - description: 'FlexColorScheme dark theme applied to a mock login screen in Themes Playground'
+    path: example/screenshots/fcs_login_dark.png
+  - description: 'FlexColorScheme light theme applied to a mock shop app in Themes Playground'
+    path: example/screenshots/fcs_shop_light.png
+  - description: 'FlexColorScheme dark theme applied to a mock shop app in Themes Playground'
+    path: example/screenshots/fcs_shop_dark.png
+  - description: 'A FlexColorScheme pink light theme applied on the Flutter M3 demo app in Themes Playground'
+    path: example/screenshots/fcs_pad_light.png
+  - description: 'A FlexColorScheme pink dark theme applied on the Flutter M3 demo app in Themes Playground'
+    path: example/screenshots/fcs_pad_dark.png
+  - description: 'A FlexColorScheme blue light theme applied on the Flutter M3 demo app in Themes Playground'
+    path: example/screenshots/fcs_big_pad_light.png
+  - description: 'A FlexColorScheme blue dark theme applied on the Flutter M3 demo app in Themes Playground'
+    path: example/screenshots/fcs_big_pad_dark.png
+
 environment:
-  sdk: '>=2.18.0 <3.0.0'
-  flutter: '>=3.3.0'
+  sdk: '>=2.19.0 <4.0.0'
+  flutter: '>=3.7.0'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.1.0
+  flex_seed_scheme: ^1.2.3
 
   flutter:
     sdk: flutter
@@ -29,17 +51,13 @@ dev_dependencies:
     sdk: flutter
 
   # Color utilities by Google (material.io).
+  #
   # Used to compute and create Tonal Palette theme colors.
+  #
   # Flutter SDK from 2.10.0 stable also uses and depends on this package.
-  #
-  # Use ^0.1.3 for Flutter stable 2.10.x, that uses 0.1.3
-  # Use ^0.1.3 for Flutter stable 3.0.x, that uses 0.1.4.
-  # Use ^0.1.3 for Flutter rel candidates 3.1, 3.2, 3.4, that uses 0.1.5, beware that
-  # version 0.1.5 has a new faster algo compared to 0.1.4 that changes some seed colors slightly.
-  # Use ^0.2.0 for Flutter master 3.1.0-x, that uses 0.2.0 after 5.8.2022.
-  #
-  # This is an unusual range since 0.2.0 is a breaking semver step over 0.1.x, but it works for this
-  # case, and was also observed as range used by Google package dynamic_color.
-  material_color_utilities: '>=0.1.5 <=0.2.0'
+  # Version 0.3.0 contains many new features, but Flutter stable and master are
+  # locked to version 0.2.0, so we cannot use it, also 0-ver does not
+  # upgrade from version ^0.2.0 to 0.3.x, only to 0.2.x.
+  material_color_utilities: ^0.2.0
 
   test:

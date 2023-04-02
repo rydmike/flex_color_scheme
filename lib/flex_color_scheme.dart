@@ -7,6 +7,9 @@ library flex_color_scheme;
 /// 6.0.0, but were moved to their own package starting from version 6.0.0.
 export 'package:flex_seed_scheme/flex_seed_scheme.dart' hide Cam16;
 
+/// Configuration class for adaptive theming features.
+export 'src/flex_adaptive.dart';
+
 /// Offers built-in reusable color schemes and color values.
 ///
 /// Can also be used to bundle custom color definitions into color schemes that

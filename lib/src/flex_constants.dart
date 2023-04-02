@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: comment_references
 
+// Constants used when FCS computes generated colors from primary color.
+//
+// This is FCS way of creating "seed generated" ColorSchemes, it was used before
+// the seed generation algorithm existed in Flutter. It still works well as an
+// alternative look. It creates a more M2 colored look, but applied to M3
+// ColorScheme, in a way compatible with both M2 and M3 color system.
+
 /// The percentage amount the primary container color is darkened from the
 /// primary color when primary container color is not given.
 const int kDarkenPrimaryContainer = 10;
@@ -20,42 +27,9 @@ const int kDarkenSecondaryContainerFromSecondary = 10;
 /// given.
 const int kDarkenSecondaryContainer = 14;
 
-/// Default border radius on Navigation drawer menu.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/navigation-drawer/specs
-const double kDrawerRadius = 16;
-
-/// Default border radius on Floating Action Buttons.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/floating-action-button/specs
-const double kFabRadius = 16;
-
-/// Default border radius on Chips.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/chips/specs
-const double kChipRadius = 8;
-
-/// Default border radius on all buttons.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/buttons/specs
-const double kButtonRadius = 20;
-
-/// Default border radius on input decoration when using
-/// opinionated component themes.
-///
-/// Using a more rounded design 16dp, instead of 4dp which is M3's default.
-/// https://m3.material.io/components/text-fields/specs
-const double kInputDecoratorRadius = 16;
-
-/// Default border radius on input decoration when opting in on M3.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/text-fields/specs
-const double kInputDecoratorM3Radius = 4;
+// Component defaults, typically elevation and radius.
+//
+// Listed in alphabetical order.
 
 /// Default border radius on top edge of bottom sheet.
 ///
@@ -63,59 +37,8 @@ const double kInputDecoratorM3Radius = 4;
 /// https://m3.material.io/components/bottom-sheets/specs
 const double kBottomSheetBorderRadius = 28;
 
-/// Default border radius on dialogs.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/dialogs/specs
-const double kDialogRadius = 28;
-
-/// Default border radius on dialogs.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/cards/specs
-const double kCardRadius = 12;
-
-/// Default border radius on menus, typically small popup menus.
-/// Drawer menu has its own default.
-///
-/// Follows Material M3 guide.
-/// https://m3.material.io/components/menus/specs
-const double kMenuRadius = 4;
-
-/// Default elevation on [Card] widgets.
-///
-/// Based on https://m3.material.io/components/cards/specs
-/// and https://m3.material.io/styles/elevation/tokens
-///
-/// In M3 Elevated Card is level 1, 1 dp, the other Cards
-/// Filled, Tonal and Outlined are Level 0 (0 dp). Since there in
-/// Flutter is no constructor for the different types of Card
-/// we default them all to 0 dp.
-const double kCardElevation = 0;
-
-/// Default for elevation of [ElevatedButton].
-///
-/// Based on https://m3.material.io/components/buttons/specs
-/// and https://m3.material.io/styles/elevation/tokens
-const double kElevatedButtonElevation = 1;
-
-/// Default elevation of [PopupMenuButton] in Material 3.
-///
-/// Based on https://m3.material.io/components/menus/specs
-/// and https://m3.material.io/styles/elevation/tokens
-const double kPopupMenuElevation = 3;
-
-/// Default elevation of [PopupMenuButton] in Material 2 mode.
-///
-/// Opinionated value, M2 spec is 8.
-const double kPopupMenuElevationFCS = 6;
-
-/// Default elevation of [Dialog].
-///
-/// Based on https://m3.material.io/components/dialogs/specs
-/// and https://m3.material.io/styles/elevation/tokens
-/// and Flutter M3 implementation.
-const double kDialogElevation = 6;
+/// Default for elevation of [BottomNavigationBar].
+const double kBottomNavigationBarElevation = 0;
 
 /// Default elevation of none modal Material 3 [BottomSheet].
 ///
@@ -126,6 +49,12 @@ const double kDialogElevation = 6;
 /// and uses 2 for modal version to make them different.
 const double kBottomSheetElevation = 1;
 
+/// Default elevation of none modal Material 2 [BottomSheet].
+///
+/// This is FCS default when opting in on opinionated component sub-themes
+/// but not opting in on using Material 3.
+const double kBottomSheetElevationM2 = 4;
+
 /// Default elevation of modal Material 3 [BottomSheet].
 ///
 /// Based https://m3.material.io/components/bottom-sheets/specs
@@ -135,49 +64,11 @@ const double kBottomSheetElevation = 1;
 /// version.
 const double kBottomSheetModalElevation = 2;
 
-/// Default elevation of none modal Material 2 [BottomSheet].
-///
-/// This is FCS default when opting in on opinionated component sub-themes
-/// but not opting in on using Material 3.
-const double kBottomSheetElevationM2 = 4;
-
 /// Default for elevation of modal Material 2 [BottomSheet].
 ///
 /// This is FCS default when opting in on opinionated component sub-themes
 /// but not opting in on using Material 3.
 const double kBottomSheetModalElevationM2 = 8;
-
-/// Default for elevation of [BottomNavigationBar].
-const double kBottomNavigationBarElevation = 0;
-
-/// Default for elevation of [NavigationRail].
-///
-/// M3 based https://m3.material.io/components/snackbar/specs
-/// and https://m3.material.io/styles/elevation/tokens.
-const double kNavigationRailElevation = 0;
-
-/// Default for elevation of [SnackBar].
-///
-/// M3 uses https://m3.material.io/components/snackbar/specs
-/// and https://m3.material.io/styles/elevation/tokens.
-///
-/// FCS thinks it is too high and uses opinionated style 4.
-const double kSnackBarElevation = 4;
-
-/// Default height of [NavigationBar].
-///
-/// The Material 3 default design is 80dp, this is an opinionated reduced
-/// container height default.
-const double kNavigationBarHeight = 62;
-
-/// Alpha value for the indicator color on the [NavigationBar] and
-/// [NavigationRail].
-///
-/// The value is the same as Flutter SDK uses in Material 2. Material 3 may
-/// often use no alpha and just different solid color hue instead.
-///
-/// Value: 0x3D = 61 = 24%
-const int kNavigationBarIndicatorAlpha = 0x3D;
 
 /// Default minimum button size.
 ///
@@ -198,6 +89,123 @@ const Size kButtonMinSize =
 /// whe style with `styleFrom`.
 const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 
+/// Default border radius on all buttons.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/buttons/specs
+///
+/// The 20dp was is from older M3 spec version when it was using 20dp instead
+/// of Stadium. FCS M2 uses this as an M3 visual matching default for buttons.
+/// By default FCS uses Stadium on buttons in M3 mode if not specified.
+const double kButtonRadius = 20;
+
+/// Default border radius on Card.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/cards/specs
+const double kCardRadius = 12;
+
+/// Default border radius on Chips.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/chips/specs
+const double kChipRadius = 8;
+
+/// Default elevation of [Dialog].
+///
+/// Based on https://m3.material.io/components/dialogs/specs
+/// and https://m3.material.io/styles/elevation/tokens
+/// and Flutter M3 implementation.
+const double kDialogElevation = 6;
+
+/// Default border radius on dialogs.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/dialogs/specs
+const double kDialogRadius = 28;
+
+/// Default border radius on Navigation drawer menu.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/navigation-drawer/specs
+const double kDrawerRadius = 16;
+
+/// Default for elevation of [ElevatedButton].
+///
+/// Based on https://m3.material.io/components/buttons/specs
+/// and https://m3.material.io/styles/elevation/tokens
+const double kElevatedButtonElevation = 1;
+
+/// Default border radius on Floating Action Buttons.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/floating-action-button/specs
+const double kFabRadius = 16;
+
+/// Default border radius on input decoration when using
+/// opinionated component themes in M3 mode.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/text-fields/specs
+const double kInputDecoratorM3Radius = 4;
+
+/// Default border radius on input decoration when using
+/// opinionated component themes in M2 mode.
+///
+/// Using a more rounded design 10dp, instead of 4dp which is M3's default.
+/// https://m3.material.io/components/text-fields/specs
+const double kInputDecoratorRadius = 10;
+
+/// Alpha value for the indicator color on the [NavigationBar] and
+/// [NavigationRail].
+///
+/// The value is the same as Flutter SDK uses in Material 2. Material 3 may
+/// often use no alpha and just different solid color hue instead.
+///
+/// Value: 0x3D = 61 = 24%
+const int kNavigationBarIndicatorAlpha = 0x3D;
+
+/// The width of a Material 2 Drawer.
+///
+/// Found in Flutter source code.
+const double kNavigationDrawerM2Width = 304;
+
+/// The width of a Material 3 Drawer.
+///
+/// From M3 spec https://m3.material.io/components/navigation-drawer/specs
+const double kNavigationDrawerM3Width = 360;
+
+/// The edge padding on start and end side of the indicator of
+/// the indicator in a Material 3 Drawer.
+///
+/// From M3 spec https://m3.material.io/components/navigation-drawer/specs
+const double kNavigationDrawerIndicatorPadding = 12;
+
+/// Default for elevation of [NavigationRail].
+///
+/// M3 based https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens.
+const double kNavigationRailElevation = 0;
+
+/// Default elevation of [PopupMenuButton] in Material 3.
+///
+/// Based on https://m3.material.io/components/menus/specs
+/// and https://m3.material.io/styles/elevation/tokens
+const double kPopupMenuM3Elevation = 3;
+
+/// Default elevation of [PopupMenuButton] in Material 2 mode.
+///
+/// Opinionated value, M2 spec is 8.
+const double kPopupMenuM2Elevation = 6;
+
+/// Default for elevation of [SnackBar].
+///
+/// M3 uses https://m3.material.io/components/snackbar/specs
+/// and https://m3.material.io/styles/elevation/tokens, level 3 which is 6 dp.
+///
+/// FCS thinks it is too high and uses opinionated style 4.
+const double kSnackBarElevation = 4;
+
 /// Default width of thick outline borders.
 ///
 /// Applies to pressed [OutlinedButton] border and selected
@@ -211,149 +219,59 @@ const double kThickBorderWidth = 2;
 /// [ToggleButtons].
 const double kThinBorderWidth = 1;
 
-// The values below for all the effects opacities and alpha blends are tricky.
-// Getting them just right is magic and dark arts plus some pixie dust.
+/// Default border radius on time entry elements in [TimePicker] dialog.
+///
+/// Follows Material M3 guide.
+/// https://m3.material.io/components/time-pickers/specs.
+const double kTimeElementRadius = 8;
+
+/// Default border radius on [Tooltip].
+///
+/// The border radius on tooltips when opting on on sub-themes.
+///
+/// Flutter SDK defaults to 4, FCS uses 8 as default.
+/// It can be changed via API.
+const double kTooltipRadius = 8;
+
+// Alpha, opacity and bland constant values.
+//
+// Used for disable, hover, focus and background color adjustments by menu
+// components. Values are based on values from M2 and M3 as used
+// in Flutter, but in some cases FCS also uses own opinionated values.
+//
+// Some of the values below for all the effects opacities and alpha blends are
+// tricky. Getting them just right is magic and dark arts plus some pixie dust.
 // These are the values I settled on for the opinionated themes.
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
-/// in light theme.
+/// in light theme for M2 defaults.
 ///
 /// Value: 0x0D = 13 = 5%
 const int kFillColorAlphaLight = 0x0D;
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
-/// in dark theme.
+/// in dark theme for M2 defaults.
 ///
 /// Value: 0x14 = 20 = 8%
 const int kFillColorAlphaDark = 0x14;
 
-/// Hover state alpha value on background.
-///
-/// Used on opt in sub-themes by [InputDecorator],
-/// [ElevatedButton], [OutlinedButton] and [TextButton].
-///
-/// Value: 0x0D = 13 = 5%
-const int kHoverBackgroundAlpha = 0x0D;
-
-/// Focus state alpha value on background.
-///
-/// Used on opt in sub-themes by [InputDecorator],
-/// [ElevatedButton], [OutlinedButton] and [TextButton].
-///
-/// Value: 0x26 = 38 = 15%
-const int kFocusBackgroundAlpha = 0x26;
-
-/// Pressed state alpha value on background.
-///
-/// Used on opt in sub-themes by [OutlinedButton] and [TextButton].
-///
-/// Value: 0x33 = 51 = 20%
-const int kPressedBackgroundAlpha = 0x33;
-
-/// Disabled state alpha value on background elements.
-///
-/// Used on opt in sub-themes by [InputDecorator], [ElevatedButton],
-/// [OutlinedButton], [TextButton], `ButtonThemeData` for legacy buttons and
-/// by [ToggleButtons].
-///
-/// Value: 0x31 = 49 = 19%
-const int kDisabledBackgroundAlpha = 0x31;
-
-/// Disabled state alpha value on foreground elements.
-///
-/// Used on opt in sub-themes by [ElevatedButton], [OutlinedButton] and by
-/// [ToggleButtons] as well as by [ThemeData.disabledColor] when opting in
-/// on sub-theme effects, for consistent disable colors.
-///
-/// Value: 0x5E = 94 = 37%
-const int kDisabledForegroundAlpha = 0x5E;
-
-/// Disabled alpha blend value for background elements.
-///
-/// Typically used together with onSurface, to make the disabled color in
-/// combination with [kDisabledBackgroundAlpha]. For example:
-///
-/// ```
-/// Color disable = colorScheme.primary
-///                  .blendAlpha(colorScheme.onSurface, kDisabledAlphaBlend)
-///                  .withAlpha(kDisabledBackgroundAlpha);
-/// ```
-///
-/// Value: 0x66 = 102 = 40%
-const int kDisabledAlphaBlend = 0x66;
-
 /// Enabled border alpha value on border sides.
 ///
-/// Used on opt in sub-themes by [InputDecorator], [OutlinedButton] and by
-/// [ToggleButtons].
+/// Used on opt in sub-themes by [InputDecorator] in M2 mode.
 ///
 /// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
 
-/// Alpha value, for transparency on selected onPrimary color on
-/// [ToggleButtons].
-///
-/// Value: 0xE5 = 229 = 90%
-const int kSelectedAlpha = 0xE5;
-
-/// White alpha blend, for alternative less saturated primary color.
-///
-/// Used by selected button and selected border color on [ToggleButtons].
-///
-/// Value: 0x19 = 25 = 10%
-const int kAltPrimaryAlphaBlend = 0x19;
-
-/// White alpha blend, for primary colored hover opt-in effects theming.
-///
-/// Value: 0x40 = 64 = 25%
-const int kHoverAlphaBlend = 0x40;
-
-/// White alpha blend, for primary colored focus opt-in effects theming.
-///
-/// Value: 0x4C = 76 = 30%
-const int kFocusAlphaBlend = 0x4C;
-
-/// White alpha blend, for primary colored highlight opt-in effects theming.
-///
-/// Value: 0x40 = 64 = 25%
-const int kHighlightAlphaBlend = 0x40;
-
-/// White alpha blend, for primary colored splash opt-in theming.
-///
-/// Value: 0x1F = 31 = 12%
-const int kSplashAlphaBlend = 0x1F;
-
-/// Alpha value for hover on the custom opt-in effects.
-///
-/// Value: 0x19 = 25 = 10%
-const int kHoverAlpha = 0x19;
-
-/// Alpha value for focus on the custom opt-in effects.
-///
-/// Value: 0x4C = 76 = 30%
-const int kFocusAlpha = 0x4C;
-
-/// Alpha value for highlight on the custom opt-in effects.
-///
-/// Value: 0x19 = 25 = 10%
-const int kHighlightAlpha = 0x19;
-
-/// Alpha value for splash on the custom opt-in effects.
-///
-/// Value: 0x33 = 51 = 20%
-const int kSplashAlpha = 0x33;
-
-/// The OnSurface color alpha blend, for primary colored Chip foreground.
-///
-/// Value: 0x7F = 127 = 50%
-const int kChipForegroundAlphaBlend = 0x7F;
-
 /// The surface color alpha blend, for primary colored Chip background.
+///
+/// Used in FCS opinionated M2 mode Chip design, a mix of M2 and M3 look.
 ///
 /// Value: 0xCC = 204 = 80%
 const int kChipBackgroundAlphaBlend = 0xCC;
 
 /// The surface color alpha blend, for primary colored selected Chip background.
+///
+/// Used in FCS opinionated M2 mode Chip design, a mix of M2 and M3 look.
 ///
 /// Value: 0x96 = 150 = 59%
 const int kChipSelectedBackgroundAlphaBlend = 0x96;
@@ -369,3 +287,174 @@ const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kUnselectedAlphaBlend = 0xA5;
+
+// The v7 new tinted interactions effects and disable constants start here.
+// -----------------------------------------------------------------------------
+
+/// The amount of alpha blend used on tinted hover effect that is blended
+/// into overlay color.
+///
+/// Value: 0x99 = 153 = 60%
+const int kTintHover = 0x99;
+
+/// The amount of alpha based opacity used on tinted hover effect.
+///
+/// Same value as used on Hover opacity on controls in M3, given as alpha.
+///
+/// Value: 0x14 = 20 = 8%
+const int kAlphaHovered = 0x14;
+
+/// The amount of alpha blend used on tinted highlight effect that is blended
+/// into overlay color.
+///
+/// Value: 0xA5 = 165 = 65%
+const int kTintHighlight = 0xA5;
+
+/// The amount of alpha based opacity used on tinted highlight effect.
+///
+/// Same value as used on Hover opacity on controls in M3, given as alpha.
+///
+/// Value: 0x14 = 20 = 8%
+const int kAlphaHighlight = 0x14;
+
+/// The amount of alpha blend used on tinted pressed effect that is blended
+/// into overlay color.
+///
+/// Value: 0xA5 = 165 = 65%
+const int kTintPressed = 0xA5;
+
+/// The amount of alpha based opacity used on tinted pressed effect.
+///
+/// Same value as used on pressed opacity on controls in M3, given as alpha.
+///
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaPressed = 0x1F;
+
+/// The amount of alpha blend used on tinted splash effect that is blended
+/// into overlay color.
+///
+/// Value: 0xA5 = 165 = 65%
+const int kTintSplash = 0xA5;
+
+/// The amount of alpha based opacity used on tinted splash effect.
+///
+/// Same value as used on pressed opacity on controls in M3, given as alpha.
+///
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaSplash = 0x1F;
+
+/// The amount of alpha blend used on tinted focus effect that is blended
+/// into overlay color.
+///
+/// Value: 0xB2 = 178 = 70%
+const int kTintFocus = 0xB2;
+
+/// The amount of alpha based opacity used on tinted focus effect.
+///
+/// Same value as used on focused opacity on controls in M3, given as alpha.
+///
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaFocused = 0x1F;
+
+/// The amount of alpha blend used on tinted disabled effect that is blended
+/// into overlay color.
+///
+/// Value: 0x66 = 102 = 40%
+const int kTintDisabled = 0x66;
+
+/// The amount of alpha based opacity used on tinted disabled effect.
+///
+/// Same value as used on focused opacity on controls in M3, given as alpha.
+///
+/// Value: 0x61 = 97 = 38.04%
+const int kAlphaDisabled = 0x61;
+
+/// An optional medium amount of alpha based opacity used on disabled
+/// components.
+///
+/// This is used e.g. on Slider disabledActiveTrackColor.
+///
+/// Value: 0x52 = 82 = 32.16%
+const int kAlphaMediumDisabled = 0x52;
+
+/// An optional lower amount of alpha based opacity used on disabled components.
+///
+/// This is used e.g. on M2 switch thumb color.
+///
+/// Value: 0x3D = 61 = 24%
+const int kAlphaLowDisabled = 0x3D;
+
+/// An optional lower amount of alpha based opacity used on tinted disabled
+/// effect.
+///
+/// This is used e.g. on disabled M2 switch track color, and M3 disabled track
+/// and disabled trackOutline color.
+///
+/// Value: 0x1F = 31 = 12.16%
+const int kAlphaVeryLowDisabled = 0x1F;
+
+/// An optional ultra low amount of alpha based opacity used on tinted disabled
+/// effect.
+///
+/// This is used e.g. on disabled M3 spec InputDecorator fill.
+///
+/// Value: 0x0A = 10 = 3.92%%
+const int kAlphaUltraLowDisabled = 0x0A;
+
+/// Default Color of disabled M2 Switch track color in M2
+///
+/// This is hard coded in the SDK, but adding a const for it for easier
+/// mod if it would ever change.
+const Color kSwitchM2LightTrackColor = Color(0x52000000);
+
+/// Unselected colored Checkbox, Radio alpha value.
+///
+/// Value: 0xDD = 221 = 86.67%
+const int kAlphaUnselect = 0xDD;
+
+/// Switch in M2 mode selected light mode alpha.
+///
+/// Value: 0x70 = 112 = 43.92%
+const int kAlphaM2SwitchTrackLight = 0x70;
+
+/// Switch in M2 mode selected dark mode alpha.
+///
+/// Value: 0x80 = 128 = 50.20%
+const int kAlphaM2SwitchTrackDark = 0x80;
+
+/// Switch in M2 mode unselected light mode alpha.
+///
+/// Value: 0x50 = 80 = 31.37%
+const int kAlphaM2SwitchUnselectTrackLight = 0x50;
+
+/// Switch in M2 mode unselected dark mode alpha.
+///
+/// Value: 0x65 = 101 = 39.61%
+const int kAlphaM2SwitchUnselectTrackDark = 0x65;
+
+/// Switch in M3 mode unselected light mode alpha.
+///
+/// Value: 0x33 = 51 = 20.00%
+const int kAlphaM3SwitchUnselectTrackLight = 0x33;
+
+/// Switch in M3 mode unselected dark mode alpha.
+///
+/// Value: 0x44 = 68 = 26.67%
+const int kAlphaM3SwitchUnselectTrackDark = 0x44;
+
+/// Tick mark alpha for Slider and RangeSlider.
+///
+/// Value: 0x8A = 138 = 54.12%
+const int kAlphaSliderTickMark = 0x8A;
+
+/// Input decorator light color decorator background color, hover mode
+/// darken level percentage.
+///
+/// Value: 3
+const int kInputDecoratorLightBgDarken = 3;
+
+/// Input decorator dark color decorator background color, hover mode
+/// lighten level percentage.
+///
+/// Value: 3
+const int kInputDecoratorDarkBgLighten = 5;

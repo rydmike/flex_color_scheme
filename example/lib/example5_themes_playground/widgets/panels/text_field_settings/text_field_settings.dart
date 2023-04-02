@@ -1,16 +1,34 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TextFieldSettings extends StatelessWidget {
   const TextFieldSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetTextFieldToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setTextFieldToM3();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool isLight = theme.brightness == Brightness.light;
+
     final String thinBorderDefaultLabel =
         controller.inputDecoratorBorderWidth == null &&
                 controller.thinBorderWidth == null
@@ -28,34 +46,86 @@ class TextFieldSettings extends StatelessWidget {
                 ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)}'
                 : '';
 
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String decoratorRadiusDefaultLabel =
-        controller.inputDecoratorBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.inputDecoratorBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default 4'
-                : 'default 16'
+                : 'default 10'
             : controller.inputDecoratorBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
-    final bool? isFilled =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.inputDecoratorIsFilled
-            : null;
+    // Default decorator alpha values and labels
+    final double defaultBackgroundAlpha = useMaterial3
+        ? 0xFF // Light M3 default
+        : isLight
+            ? 0x0D // Light FCS own M2 default
+            : 0x14; // Dark FCS own M2 default
+
+    final String lightBackgroundLabel = (controller
+                        .inputDecoratorBackgroundAlphaLight ??
+                    -1) >=
+                0 &&
+            controller.useSubThemes &&
+            controller.useFlexColorScheme
+        // ignore: lines_longer_than_80_chars
+        ? '0x${controller.inputDecoratorBackgroundAlphaLight?.toRadixString(16).toUpperCase()}'
+        : 'Default 0x'
+            '${defaultBackgroundAlpha.toInt().toRadixString(16).toUpperCase()}';
+    final String lightBackgroundLabelOpacity =
+        controller.inputDecoratorBackgroundAlphaLight != null
+            ? (controller.inputDecoratorBackgroundAlphaLight! / 255 * 100)
+                .toStringAsFixed(1)
+            : (defaultBackgroundAlpha / 255 * 100).toStringAsFixed(1);
+
+    final String darkBackgroundLabel = (controller
+                    .inputDecoratorBackgroundAlphaDark ??
+                -1) <
+            0
+        ? useMaterial3
+            ? 'Default (0xFF)' // Dark M3 default
+            : 'Default (0x14)' // Dark FCS own M2 default
+        // ignore: lines_longer_than_80_chars
+        : '0x${controller.inputDecoratorBackgroundAlphaDark?.toRadixString(16).toUpperCase()}';
+    final String darkBackgroundLabelOpacity =
+        controller.inputDecoratorBackgroundAlphaDark != null
+            ? (controller.inputDecoratorBackgroundAlphaDark! / 255 * 100)
+                .toStringAsFixed(1)
+            : (defaultBackgroundAlpha / 255 * 100).toStringAsFixed(1);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: TextInputField(filled: isFilled),
+        const SizedBox(height: 8),
+        ListTile(
+            enabled: useMaterial3,
+            title: const Text('Use Material 3 default TextField style?'),
+            subtitle: const Text('Update settings below to match M3 default '
+                'values'),
+            trailing: FilledButton(
+              onPressed: useMaterial3
+                  ? () async {
+                      await _handleSetToM3(context);
+                    }
+                  : null,
+              child: const Text('Set to M3'),
+            ),
+            onTap: () async {
+              await _handleSetToM3(context);
+            }),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: TextInputField(),
         ),
         if (isLight)
           ColorSchemePopupMenu(
-            title: const Text('Light theme TextField color base'),
+            title: const Text('Light theme base color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (primary & surfaceVariant)'
+                : 'default (primary)',
             index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -70,7 +140,10 @@ class TextFieldSettings extends StatelessWidget {
           )
         else
           ColorSchemePopupMenu(
-            title: const Text('Dark theme TextField color base'),
+            title: const Text('Dark theme base color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (primary & surfaceVariant)'
+                : 'default (primary)',
             index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
@@ -84,9 +157,10 @@ class TextFieldSettings extends StatelessWidget {
                 : null,
           ),
         SwitchListTile(
-          title: const Text(
-            'TextField has fill color',
-          ),
+          title: const Text('Use base color as background fill'),
+          subtitle: const Text('TIP: If you leave this OFF, you can still '
+              'theme the fill color and turn it ON using widget level '
+              "'filled: true' property, and wise versa."),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -94,6 +168,135 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorIsFilled
               : null,
         ),
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme focused prefix icon color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (onSurface)'
+                // ignore: lines_longer_than_80_chars
+                : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
+            index: controller.inputDecoratorPrefixIconSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorPrefixIconSchemeColor(null);
+                    } else {
+                      controller.setInputDecoratorPrefixIconSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme focused prefix icon color'),
+            labelForDefault: controller.useMaterial3
+                ? 'default (onSurface)'
+                // ignore: lines_longer_than_80_chars
+                : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
+            index:
+                controller.inputDecoratorPrefixIconDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller
+                          .setInputDecoratorPrefixIconDarkSchemeColor(null);
+                    } else {
+                      controller.setInputDecoratorPrefixIconDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        if (isLight) ...<Widget>[
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Light theme background alpha'),
+            subtitle: Text('Current alpha as opacity is '
+                '$lightBackgroundLabelOpacity%'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: -1,
+              max: 255,
+              divisions: 256,
+              label: lightBackgroundLabel,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.inputDecoratorBackgroundAlphaLight?.toDouble() ??
+                      -1
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputDecoratorBackgroundAlphaLight(
+                              value < 0 ? null : value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALPHA',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    lightBackgroundLabel,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Dark theme background alpha'),
+            subtitle: Text('Current alpha as opacity is '
+                '$darkBackgroundLabelOpacity%'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: -1,
+              max: 255,
+              divisions: 256,
+              label: darkBackgroundLabel,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.inputDecoratorBackgroundAlphaDark?.toDouble() ??
+                      -1
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputDecoratorBackgroundAlphaDark(
+                              value < 0 ? null : value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALPHA',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    darkBackgroundLabel,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
         SwitchListTile(
           title: const Text(
             'Border style',
@@ -117,14 +320,6 @@ class TextFieldSettings extends StatelessWidget {
                 }
               : null,
         ),
-        // TODO(rydmike): Report Flutter bug on UnderlineInputBorder.
-        // When using UnderlineInputBorder the border radius does not update
-        // when ThemeData has changed to a new version with different
-        // underline input border radius. This is because UnderlineInputBorder
-        // does not implement correctly where as OutlineInputBorder does.
-        // Issue is here:
-        // https://github.com/flutter/flutter/blob/0b97874895eb3e14c1cf0e65bd7fca3a17c62b02/packages/flutter/lib/src/material/input_border.dart#L244
-        // It needs border radius as a part of its equality and hashcode.
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
@@ -196,25 +391,77 @@ class TextFieldSettings extends StatelessWidget {
               ? controller.setInputDecoratorUnfocusedBorderIsColored
               : null,
         ),
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorLight(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorDark(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         ListTile(
           title: const Text('Unfocused border width'),
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.inputDecoratorUnfocusedHasBorder,
           subtitle: Slider(
             min: 0,
             max: 5,
             divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? controller.inputDecoratorBorderWidth == null ||
                         (controller.inputDecoratorBorderWidth ?? 0) <= 0
                     ? thinBorderDefaultLabel
                     : (controller.inputDecoratorBorderWidth
                             ?.toStringAsFixed(1) ??
                         '')
-                : 'default 1',
-            value: controller.useSubThemes && controller.useFlexColorScheme
+                : controller.inputDecoratorUnfocusedHasBorder ||
+                        !controller.useSubThemes ||
+                        !controller.useFlexColorScheme
+                    ? 'default 1'
+                    : 'none',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? controller.inputDecoratorBorderWidth ?? 0
                 : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
                 ? (double value) {
                     controller.setInputDecoratorBorderWidth(
                         value <= 0 ? null : value);
@@ -231,14 +478,20 @@ class TextFieldSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.inputDecoratorUnfocusedHasBorder
                       ? controller.inputDecoratorBorderWidth == null ||
                               (controller.inputDecoratorBorderWidth ?? 0) <= 0
                           ? thinBorderDefaultLabel
                           : (controller.inputDecoratorBorderWidth
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : 'default 1',
+                      : controller.inputDecoratorUnfocusedHasBorder ||
+                              !controller.useSubThemes ||
+                              !controller.useFlexColorScheme
+                          ? 'default 1'
+                          : 'none',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -246,25 +499,46 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ),
         ),
+        SwitchListTile(
+          title: const Text('Focused field has a border'),
+          value: controller.inputDecoratorFocusedHasBorder &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInputDecoratorFocusedHasBorder
+              : null,
+        ),
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.inputDecoratorFocusedHasBorder,
           title: const Text('Focused border width'),
           subtitle: Slider(
             min: 0,
             max: 5,
             divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? controller.inputDecoratorFocusedBorderWidth == null ||
                         (controller.inputDecoratorFocusedBorderWidth ?? 0) <= 0
                     ? thickBorderDefaultLabel
                     : (controller.inputDecoratorFocusedBorderWidth
                             ?.toStringAsFixed(1) ??
                         '')
-                : 'default 2',
-            value: controller.useSubThemes && controller.useFlexColorScheme
+                : controller.inputDecoratorFocusedHasBorder ||
+                        !controller.useSubThemes ||
+                        !controller.useFlexColorScheme
+                    ? 'default 2'
+                    : 'none',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? controller.inputDecoratorFocusedBorderWidth ?? 0
                 : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorFocusedHasBorder
                 ? (double value) {
                     controller.setInputDecoratorFocusedBorderWidth(
                         value <= 0 ? null : value);
@@ -281,7 +555,9 @@ class TextFieldSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.inputDecoratorFocusedHasBorder
                       ? controller.inputDecoratorFocusedBorderWidth == null ||
                               (controller.inputDecoratorFocusedBorderWidth ??
                                       0) <=
@@ -290,7 +566,11 @@ class TextFieldSettings extends StatelessWidget {
                           : (controller.inputDecoratorFocusedBorderWidth
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : 'default 2',
+                      : controller.inputDecoratorFocusedHasBorder ||
+                              !controller.useSubThemes ||
+                              !controller.useFlexColorScheme
+                          ? 'default 2'
+                          : 'none',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -298,6 +578,29 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const ListTile(
+          title: Text('DropdownMenu'),
+          subtitle: Text('The DropDownMenu has a text entry used to select '
+              'an option in a dropdown menu by typing in the selection. '
+              'The text entry part matches the used input decoration '
+              'in FCS by default.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: DropDownMenuShowcase(),
+        ),
+        const ListTile(
+          title: Text('DropdownButtonFormField'),
+          subtitle: Text('An older Material widget, it also uses the text '
+              'input decoration theme, it does not work well with high '
+              'border radius.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: DropDownButtonFormField(),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

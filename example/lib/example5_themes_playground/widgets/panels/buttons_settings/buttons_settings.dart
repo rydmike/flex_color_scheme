@@ -1,8 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 // Settings for the standard Material buttons.
@@ -13,40 +15,57 @@ class ButtonsSettings extends StatelessWidget {
   });
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue118063 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/118063',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String elevatedButtonRadiusDefaultLabel =
-        controller.elevatedButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.elevatedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.elevatedButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String outlinedButtonRadiusDefaultLabel =
-        controller.outlinedButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.outlinedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.outlinedButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String textButtonRadiusDefaultLabel =
-        controller.textButtonBorderRadius == null &&
-                controller.defaultRadius == null
+        controller.textButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
                 : 'default 20'
             : controller.textButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+                : '';
+    final String filledButtonRadiusDefaultLabel =
+        controller.filledButtonBorderRadius == null && effectiveRadius == null
+            ? controller.useMaterial3
+                ? 'default stadium'
+                : 'default 20'
+            : controller.filledButtonBorderRadius == null &&
+                    effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String thinBorderDefaultLabel =
         controller.outlinedButtonBorderWidth == null &&
@@ -166,6 +185,185 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FilledButtonShowcase(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FilledButtonTonalShowcase(),
+        ),
+        ColorSchemePopupMenu(
+          labelForDefault: 'default (primary or secondaryContainer)',
+          title: const Text('FilledButton color'),
+          index: controller.filledButtonSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setFilledButtonSchemeColor(null);
+                  } else {
+                    controller
+                        .setFilledButtonSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('FilledButton border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 40,
+            divisions: 41,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.filledButtonBorderRadius == null ||
+                        (controller.filledButtonBorderRadius ?? -1) < 0
+                    ? filledButtonRadiusDefaultLabel
+                    : (controller.filledButtonBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default stadium',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.filledButtonBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setFilledButtonBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.filledButtonBorderRadius == null ||
+                              (controller.filledButtonBorderRadius ?? -1) < 0
+                          ? filledButtonRadiusDefaultLabel
+                          : (controller.filledButtonBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default stadium',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Current Flutter SDK FilledButton theming has a '
+                      'limitation where the FilledButton.tonal variant cannot '
+                      'be themed differently from FilledButton. See '
+                      'Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue118063,
+                  text: 'issue #118063',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. Due to this issue, if you change theme color, the '
+                      'FilledButton and FilledButton.tonal will get the same '
+                      'color. For same reason the tinted disable colors are '
+                      'NOT set unless its main color is changed. If disabled '
+                      'colors would be set, the different colors of the '
+                      'buttons will also be lost. Separate colors and border '
+                      'radius for the two variants will be offered when the '
+                      'current limitation is removed. Go upvote the issue '
+                      'by giving it thumbs-up!',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+        // TODO(rydmike): To be uses when FilledButton tonal has own theme.
+        // ColorSchemePopupMenu(
+        //   title: const Text('FilledButton.tonal color'),
+        //   index: controller.filledButtonSchemeColor?.index ?? -1,
+        //   onChanged: controller.useSubThemes && controller.useFlexColorScheme
+        //       ? (int index) {
+        //           if (index < 0 || index >= SchemeColor.values.length) {
+        //             controller.setFilledButtonSchemeColor(null);
+        //           } else {
+        //             controller
+        //              .setFilledButtonSchemeColor(SchemeColor.values[index]);
+        //           }
+        //         }
+        //       : null,
+        // ),
+        // ListTile(
+        //   enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        //   title: const Text('FilledButton.tonal border radius'),
+        //   subtitle: Slider(
+        //     min: -1,
+        //     max: 40,
+        //     divisions: 41,
+        //     label: controller.useSubThemes && controller.useFlexColorScheme
+        //         ? controller.filledButtonBorderRadius == null ||
+        //                 (controller.filledButtonBorderRadius ?? -1) < 0
+        //             ? filledButtonRadiusDefaultLabel
+        //             : (controller.filledButtonBorderRadius
+        //                     ?.toStringAsFixed(0) ??
+        //                 '')
+        //         : controller.useMaterial3
+        //             ? 'default stadium'
+        //             : 'default 4',
+        //     value: controller.useSubThemes && controller.useFlexColorScheme
+        //         ? controller.filledButtonBorderRadius ?? -1
+        //         : -1,
+        //   nChanged: controller.useSubThemes && controller.useFlexColorScheme
+        //         ? (double value) {
+        //             controller.setFilledButtonBorderRadius(
+        //                 value < 0 ? null : value.roundToDouble());
+        //           }
+        //         : null,
+        //   ),
+        //   trailing: Padding(
+        //     padding: const EdgeInsetsDirectional.only(end: 12),
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: <Widget>[
+        //         Text(
+        //           'RADIUS',
+        //           style: theme.textTheme.bodySmall,
+        //         ),
+        //         Text(
+        //           controller.useSubThemes && controller.useFlexColorScheme
+        //               ? controller.filledButtonBorderRadius == null ||
+        //                       (controller.filledButtonBorderRadius ?? -1) < 0
+        //                   ? filledButtonRadiusDefaultLabel
+        //                   : (controller.filledButtonBorderRadius
+        //                           ?.toStringAsFixed(0) ??
+        //                       '')
+        //               : controller.useMaterial3
+        //                   ? 'default stadium'
+        //                   : 'default 4',
+        //           style: theme.textTheme.bodySmall!
+        //               .copyWith(fontWeight: FontWeight.bold),
+        //         ),
+        //         const SizedBox(height: 8),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        // const Divider(),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: OutlinedButtonShowcase(),

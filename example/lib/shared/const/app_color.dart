@@ -126,9 +126,9 @@ class AppColor {
     // to a list of FlexSchemeData, where we can bundle each light and dark
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
-      name: 'Custom Midnight',
-      description: 'Midnight blue theme, created by using custom color values '
-          'for all colors in the scheme',
+      name: 'Example Midnight',
+      description: 'Midnight blue theme, created as an in code example by '
+          'using custom color values for all colors in the scheme',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
       // saturated versions of their than light counter parts. Using the same
@@ -138,18 +138,18 @@ class AppColor {
     ),
     // Do the same for our second custom scheme.
     FlexSchemeData(
-      name: 'Custom Greens',
-      description: 'Vivid green theme, created from one primary color in light '
-          'mode and another primary for dark mode',
+      name: 'Example Greens',
+      description: 'Vivid green theme, created as an in code example from one '
+          'primary color in light mode and another primary for dark mode',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
     ),
     // We also do the same for our 3rd custom scheme, BUT we create its matching
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
-      name: 'Custom Red & Blue',
-      description: 'Classic red and blue, created from only light theme mode '
-          'primary and secondary colors',
+      name: 'Example Red & Blue',
+      description: 'Classic red and blue, created as an in code example from '
+          'only light theme mode primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
       // The `swapColors` parameter is `true` here. It is new in version 5. It
@@ -212,41 +212,18 @@ class AppColor {
   /// when controller says we are using that as well, instead of the defined
   /// dark mode scheme. This simplifies our logic in the MaterialApp
   /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
-  ///
-  /// It also handles the case when we are using a seeded color scheme in dark
-  /// theme mode. When using a color scheme and getting the FlexSchemeColor
-  /// `colors` at an index, we should like the `useToDarkMethod` case base the
-  /// input colors for that on the same light colors.
-  ///
-  /// This is of course more of a design and use case choice. However,
-  /// the seed algorithm is based on using the same
-  /// seed colors for light and dark mode and thus use the same resulting
-  /// tonal palettes to make the ColorScheme.
-  ///
-  /// On the other hand, if you have custom color values also for your dark
-  /// theme, that you want to lock down down when using seeded colors, you
-  /// cannot really use the light scheme as input for your dark colors then,
-  /// since only the dark scheme holds those color value you want to keep.
-  /// If you base your seeded dark color scheme on light mode colors, and
-  /// lock some value down to their input colors, you get the light theme
-  /// mode colors if you base your seeded dark mode color scheme on same
-  /// colors as for the light mode. So for that use case, you may want keep
-  /// using the defined dark mode colors also when using seeded color schemes.
-  ///
-  /// This application contains a toggle `useCustomDarkColorsForSeed' that can
-  /// be set to true or false depending on the design need.
   static FlexSchemeData schemeAtIndex(
       final int index, final ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
+          // TODO(rydmike): Something fishy here! On copy dark to custom.
           dark: controller.useKeyColors
-              ? controller.useDarkColorsForSeed &&
-                      (index == 0 ||
-                          index == 1 ||
-                          index == 2 ||
-                          index == AppColor.schemes.length - 1)
-                  ? controller.customScheme.dark
-                  : controller.customScheme.light
+              ?
+              // controller.useDarkColorsForSeed
+              //     ?
+              controller.customScheme.dark
+              //     :
+              // controller.customScheme.light
               : controller.useToDarkMethod
                   ? controller.customScheme.light.defaultError.toDark(
                       controller.darkMethodLevel,
@@ -254,19 +231,11 @@ class AppColor {
                   : null);
     }
     return schemes[index].copyWith(
-        dark: controller.useKeyColors
-            ? controller.useDarkColorsForSeed &&
-                    (index == 0 ||
-                        index == 1 ||
-                        index == 2 ||
-                        index == AppColor.schemes.length - 1)
-                ? schemes[index].dark
-                : schemes[index].light
-            : controller.useToDarkMethod
-                ? schemes[index].light.defaultError.toDark(
-                    controller.darkMethodLevel,
-                    controller.toDarkSwapPrimaryAndContainer)
-                : null);
+        dark: controller.useToDarkMethod
+            ? schemes[index].light.defaultError.toDark(
+                controller.darkMethodLevel,
+                controller.toDarkSwapPrimaryAndContainer)
+            : null);
   }
 
   /// Used by example 5, the Themes Playground.

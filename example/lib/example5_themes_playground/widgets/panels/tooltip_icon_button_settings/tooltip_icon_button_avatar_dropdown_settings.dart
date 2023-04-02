@@ -1,20 +1,43 @@
-import 'dart:math' as math;
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
   const TooltipIconButtonAvatarDropdownSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsM3IconButtonGuide = Uri(
+    scheme: 'https',
+    host: 'm3.material.io',
+    path: 'components/icon-buttons/overview',
+  );
+  static final Uri _fcsFlutterIssue111800 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/111800',
+  );
+  static final Uri _fcsFlutterIssue123829 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/123829',
+  );
+  static final Uri _fcsFlutterIconButtonDoc = Uri(
+    scheme: 'https',
+    host: 'api.flutter.dev',
+    path: 'flutter/material/IconButton-class.html',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
@@ -36,16 +59,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     ? 'default (Grey700 op90%)'
                     : 'default (White op90%)';
 
-    final double tooltipEffectiveRadius = controller.tooltipRadius ??
-        math.min(controller.defaultRadius ?? 4.0, 20.0);
-    final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null &&
-            controller.defaultRadius == null
+    final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
             ? 'default 8'
             : 'default 4'
-        : controller.tooltipRadius == null && controller.defaultRadius != null
-            ? 'global ${tooltipEffectiveRadius.toStringAsFixed(0)}'
-            : '';
+        : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,15 +132,13 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
                   '${(controller.useFlexColorScheme && controller.useSubThemes && controller.tooltipSchemeColor != null ? controller.tooltipOpacity * 100 : 100).toStringAsFixed(0)}'
                   ' %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -131,8 +147,13 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Tooltip border radius, follows global to max 20'),
-          subtitle: Slider(
+          title: const Text('Tooltip border radius'),
+          subtitle: const Text('Does not use global radius override. '
+              'Avoid large border radius on tooltips.'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
             min: -1,
             max: 30,
             divisions: 31,
@@ -159,7 +180,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -168,9 +189,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                           ? tooltipDefaultRadiusLabel
                           : (controller.tooltipRadius?.toStringAsFixed(0) ?? '')
                       : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -276,13 +295,98 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          title: Text('IconButton, CircleAvatar and DropdownButton'),
-          subtitle: Text('Included to show their themed styles'),
+          title: Text('Icon, IconButton, CircleAvatar and DropdownButton'),
+          subtitle: Text('Included to show their themes with '
+              'current ColorScheme. '
+              'They have no adjustable component theme properties in current '
+              'version of FCS. Use "copyWith" on FCS returned ThemeData to '
+              'add your custom theming to them.'),
         ),
         const Padding(
           padding: EdgeInsets.all(16),
           child: IconButtonCircleAvatarDropdownShowcase(),
         ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('Icons and IconButtons by default use same foreground '
+              'color as active text theme. Some components change '
+              'their colors automatically when they use them, but '
+              'not all do. Icon usage is very varied, it is '
+              'difficult to give them any single more universally '
+              'applicable color than same as text.'),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: IconButtonShowcase(),
+        ),
+        // TODO(rydmike): Add variant IconButtons when available in stable.
+        // const Padding(
+        //   padding: EdgeInsets.all(16.0),
+        //   child: IconButtonM3Showcase(),
+        // ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The new M3 style toggleable IconButtons, shown '
+                      'above and in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsM3IconButtonGuide,
+                  text: 'M3 guide here',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ', are not yet available via direct constructors in '
+                      'Flutter 3.7. With current IconButton theming, only one '
+                      'style is offered and thus only of the M3 style can be '
+                      'made with theming, the default style is kept as it is.\n'
+                      '\n'
+                      'The constructors for above IconButtons are available in '
+                      'the master channel, but not yet in Flutter 3.7. This ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue111800,
+                  text: 'proposal #111800',
+                ),
+                TextSpan(
+                    style: spanTextStyle,
+                    text: ' and its referenced PR brought the new styled '
+                        'IconButton constructors. These new IconButtons have '
+                        'the same theming limitation as .e.g the FilledButton, '
+                        'for more information about it, see issue '),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue123829,
+                  text: '#123829',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. Currently you have to create these M3 IconButtons '
+                      'as custom widgets using styleFrom. There is example '
+                      'code showing how to do it correctly in the Flutter ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIconButtonDoc,
+                  text: 'IconButton API docs',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. It is a bit tedious to set them up them, '
+                      'but at least doable, but not with any '
+                      'built-in constructors yet, nor any theming.',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

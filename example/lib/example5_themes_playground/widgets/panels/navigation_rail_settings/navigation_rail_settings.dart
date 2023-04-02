@@ -2,7 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../dialogs/set_navigation_rail_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_rail_label_type_list_tile.dart';
 
@@ -10,9 +11,22 @@ class NavigationRailSettings extends StatelessWidget {
   const NavigationRailSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetNavigationRailToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setNavigationRailToM3();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
@@ -36,9 +50,9 @@ class NavigationRailSettings extends StatelessWidget {
       return 'default (secondaryContainer)';
     }
 
-    // Logic for selected item color label default value,
+    // Logic for selected icon color label default value,
     // custom color selection overrides default label and value.
-    String selectedItemColorLabel() {
+    String selectedIconColorLabel() {
       // Use FCS component default, primary.
       if (!controller.useFlutterDefaults &&
           controller.useFlexColorScheme &&
@@ -50,14 +64,31 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (primary)';
       }
       // All other cases will use M3 style.
-      return 'default (icon onSecondaryContainer, label onSurface)';
+      return 'default (onSecondaryContainer)';
+    }
+
+    // Logic for selected icon color label default value,
+    // custom color selection overrides default label and value.
+    String selectedLabelColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (primary)';
+      }
+      // All other cases will use M3 style.
+      return 'default (onSurface)';
     }
 
     // const String labelForDefaultSelectedItem = 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
-            controller.navRailSelectedSchemeColor == null &&
+            controller.navRailSelectedIconSchemeColor == null &&
             controller.navRailUnselectedSchemeColor == null);
 
     // Logic for unselected item color label default value,
@@ -98,14 +129,30 @@ class NavigationRailSettings extends StatelessWidget {
     final double navRailIndicatorOpacity = navRailIndicatorOpacityEnabled
         ? (controller.navRailIndicatorOpacity ?? -0.01)
         : -0.01;
-    final double navRailElevation =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationRailElevation
-            : 0;
+    // Logic for default elevation label.
+    final String elevationDefaultLabel = controller.navRailElevation == null
+        ? 'default 0'
+        : controller.navRailElevation!.toStringAsFixed(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        ListTile(
+            enabled: useMaterial3,
+            title: const Text('Use Material 3 default NavigationRail style?'),
+            subtitle: const Text('Update settings below to match M3 default '
+                'values'),
+            trailing: FilledButton(
+              onPressed: useMaterial3
+                  ? () async {
+                      await _handleSetToM3(context);
+                    }
+                  : null,
+              child: const Text('Set to M3'),
+            ),
+            onTap: () async {
+              await _handleSetToM3(context);
+            }),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: !controller.useSubThemes ||
@@ -147,13 +194,11 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   '${(navRailOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -164,12 +209,29 @@ class NavigationRailSettings extends StatelessWidget {
         ListTile(
           title: const Text('Elevation'),
           subtitle: Slider(
+            min: -1,
             max: 24,
-            divisions: 48,
-            label: navRailElevation.toStringAsFixed(1),
-            value: navRailElevation,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setNavigationRailElevation
+            divisions: 25,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navRailElevation == null ||
+                        (controller.navRailElevation ?? -1) < 0
+                    ? elevationDefaultLabel
+                    : (controller.navRailElevation?.toStringAsFixed(1) ?? '')
+                : 'default 0',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? controller.navRailElevation ?? -1
+                : -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !controller.useFlutterDefaults
+                ? (double value) {
+                    controller.setNavRailElevation(
+                        value < 0 ? null : value.roundToDouble());
+                  }
                 : null,
           ),
           trailing: Padding(
@@ -179,13 +241,19 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'ELEV',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  navRailElevation.toStringAsFixed(1),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          !controller.useFlutterDefaults
+                      ? controller.navRailElevation == null ||
+                              (controller.navRailElevation ?? -1) < 0
+                          ? elevationDefaultLabel
+                          : (controller.navRailElevation?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 0',
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -248,7 +316,7 @@ class NavigationRailSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   navRailIndicatorOpacityEnabled
@@ -258,12 +326,61 @@ class NavigationRailSettings extends StatelessWidget {
                           // ignore: lines_longer_than_80_chars
                           : '${(navRailIndicatorOpacity * 100).toStringAsFixed(0)} %'
                       : 'default 24%',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navRailIndicatorBorderRadius == null ||
+                        (controller.navRailIndicatorBorderRadius ?? -1) < 0
+                    ? 'default (stadium)'
+                    : (controller.navRailIndicatorBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default (stadium)',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navRailIndicatorBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setNavRailIndicatorBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.navRailIndicatorBorderRadius == null ||
+                              (controller.navRailIndicatorBorderRadius ?? -1) <
+                                  0
+                          ? 'default (stadium)'
+                          : (controller.navRailIndicatorBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default (stadium)',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -275,18 +392,32 @@ class NavigationRailSettings extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ColorSchemePopupMenu(
-                title: const Text('Selected item color'),
-                subtitle:
-                    const Text('Label and icon, but own properties in API'),
-                labelForDefault: selectedItemColorLabel(),
-                index: controller.navRailSelectedSchemeColor?.index ?? -1,
+                title: const Text('Selected icon color'),
+                labelForDefault: selectedIconColorLabel(),
+                index: controller.navRailSelectedIconSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setNavRailSelectedSchemeColor(null);
+                          controller.setNavRailSelectedIconSchemeColor(null);
                         } else {
-                          controller.setNavRailSelectedSchemeColor(
+                          controller.setNavRailSelectedIconSchemeColor(
+                              SchemeColor.values[index]);
+                        }
+                      }
+                    : null,
+              ),
+              ColorSchemePopupMenu(
+                title: const Text('Selected label color'),
+                labelForDefault: selectedLabelColorLabel(),
+                index: controller.navRailSelectedLabelSchemeColor?.index ?? -1,
+                onChanged: controller.useSubThemes &&
+                        controller.useFlexColorScheme
+                    ? (int index) {
+                        if (index < 0 || index >= SchemeColor.values.length) {
+                          controller.setNavRailSelectedLabelSchemeColor(null);
+                        } else {
+                          controller.setNavRailSelectedLabelSchemeColor(
                               SchemeColor.values[index]);
                         }
                       }

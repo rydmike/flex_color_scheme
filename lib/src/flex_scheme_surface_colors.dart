@@ -82,11 +82,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// [FlexSurfaceMode] property `surfaceMode` or make totally custom color
   /// blended surfaces.
   ///
-  /// [FlexSchemeSurfaceColors] were in versions before 4.0 created with
-  /// the [FlexSchemeSurfaceColors.from] factory. Version 4.0 and later
-  /// recommends using the [FlexSchemeSurfaceColors.blend] factory for even
-  /// more nuanced surface color branding options and control.
-  ///
   /// This kind of surface branding is based on the Material guide found
   /// under "Accessibility and contrast"
   /// https://material.io/design/color/dark-theme.html#properties
@@ -118,7 +113,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// The the blend level strength used for the mode.
     final int blendLevel = 0,
 
-    /// An int divisor for surfaceVariant used to reduce it blend strength.
+    /// An int divisor for surfaceVariant used to reduce its blend strength.
     ///
     /// Used when seedSchemes are used to lessen the blend on surfaceVariant
     /// so it does not get too much, since it already has a strong start blend.
@@ -143,8 +138,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// color.
     ///
     /// If it is null, then `schemeColors.primary` will be assigned to all
-    /// surfaces. The used `surfaceMode` does in some modes override this and
-    /// also uses other color from `schemeColors` to be blended into some
     /// surfaces.
     FlexSchemeSurfaceColors? blendColors,
 
@@ -153,12 +146,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// If null, then Material default surface colors will be used for all
     /// surfaces, that we then mix in the `blendColors` into, unless the
     /// `surfaceMode` defines surface starting colors otherwise.
-    ///
-    /// In some modes the `surfaceMode` defines and overwrites `surfaceColors`
-    /// with its own mode based starting surface colors for each surface.
-    /// To ensure that the passed in `surfaceColors` are kept when using
-    /// custom surface colors, use the mode [FlexSurfaceMode.custom]
-    /// to construct surface colors with custom base surface colors.
     FlexSchemeSurfaceColors? surfaceColors,
   }) {
     assert(
@@ -202,7 +189,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         (isLight
             ? const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.materialDarkSurface,
                 background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -210,7 +197,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
               )
             : const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.materialLightSurface,
                 background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -235,7 +222,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.materialDarkSurface,
                 background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -245,7 +232,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.materialLightSurface,
                 background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -263,7 +250,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightSurface,
-                surfaceVariant: FlexColor.lightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.darkSurface,
                 background: FlexColor.lightBackground,
                 scaffoldBackground: FlexColor.lightScaffoldBackground,
@@ -273,7 +260,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkSurface,
-                surfaceVariant: FlexColor.darkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.lightSurface,
                 background: FlexColor.darkBackground,
                 scaffoldBackground: FlexColor.darkScaffoldBackground,
@@ -293,7 +280,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.materialDarkSurface,
                 background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -303,7 +290,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.materialLightSurface,
                 background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -315,7 +302,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightSurface,
-                surfaceVariant: FlexColor.lightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.darkSurface,
                 background: FlexColor.lightSurface,
                 scaffoldBackground: FlexColor.lightSurface,
@@ -325,7 +312,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkSurface,
-                surfaceVariant: FlexColor.darkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.lightSurface,
                 background: FlexColor.darkSurface,
                 scaffoldBackground: FlexColor.darkSurface,
@@ -346,7 +333,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.materialLightSurface,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.materialDarkSurface,
                 background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -356,7 +343,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.materialDarkSurface,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.materialLightSurface,
                 background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -368,7 +355,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightBackground,
-                surfaceVariant: FlexColor.lightBackground,
+                surfaceVariant: FlexColor.lightSurfaceVariant,
                 inverseSurface: FlexColor.darkBackground,
                 background: FlexColor.lightBackground,
                 scaffoldBackground: FlexColor.lightBackground,
@@ -378,7 +365,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkBackground,
-                surfaceVariant: FlexColor.darkBackground,
+                surfaceVariant: FlexColor.darkSurfaceVariant,
                 inverseSurface: FlexColor.lightBackground,
                 background: FlexColor.darkBackground,
                 scaffoldBackground: FlexColor.darkBackground,

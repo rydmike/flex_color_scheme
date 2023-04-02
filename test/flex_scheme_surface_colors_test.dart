@@ -152,7 +152,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -172,7 +172,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -188,7 +188,7 @@ void main() {
         FlexSchemeSurfaceColors.blend(brightness: Brightness.dark),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -209,7 +209,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -232,7 +232,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -252,7 +252,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -272,7 +272,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -292,7 +292,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -312,7 +312,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -332,7 +332,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -352,7 +352,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -372,7 +372,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
+          surfaceVariant: FlexColor.lightSurfaceVariant,
           inverseSurface: FlexColor.materialDarkSurface,
           background: FlexColor.materialLightBackground,
           scaffoldBackground: FlexColor.materialLightScaffoldBackground,
@@ -395,7 +395,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -415,7 +415,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -435,7 +435,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -455,7 +455,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -475,7 +475,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -495,7 +495,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -515,7 +515,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -535,7 +535,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: FlexColor.materialDarkSurface,
-          surfaceVariant: FlexColor.materialDarkSurface,
+          surfaceVariant: FlexColor.darkSurfaceVariant,
           inverseSurface: FlexColor.materialLightSurface,
           background: FlexColor.materialDarkBackground,
           scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
@@ -558,7 +558,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xffece1fd),
-          surfaceVariant: Color(0xffe3d2fc),
+          surfaceVariant: Color(0xffd5c4ee),
           inverseSurface: Color(0xff1a0f2b),
           background: Color(0xfff0e9fb),
           scaffoldBackground: Color(0xfff8f5fe),
@@ -578,7 +578,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
-          surfaceVariant: Color(0xffe6d7fc),
+          surfaceVariant: Color(0xffd8c8ee),
           inverseSurface: Color(0xff170f22),
           background: Color(0xffeadffb),
           scaffoldBackground: Color(0xffdac3fb),
@@ -598,7 +598,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff8f5fe),
-          surfaceVariant: Color(0xfff2ebfd),
+          surfaceVariant: Color(0xffe3dbee),
           inverseSurface: Color(0xff141019),
           background: Color(0xfff2ebfd),
           scaffoldBackground: Color(0xffdac3fb),
@@ -618,7 +618,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
-          surfaceVariant: Color(0xffe6d7fc),
+          surfaceVariant: Color(0xffd8c8ee),
           inverseSurface: Color(0xff170f22),
           background: Color(0xfff2ebfd),
           scaffoldBackground: Color(0xfff2ebfd),
@@ -638,7 +638,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
-          surfaceVariant: Color(0xffe6d7fc),
+          surfaceVariant: Color(0xffd8c8ee),
           inverseSurface: Color(0xff170f22),
           background: Color(0xfff2ebfd),
           scaffoldBackground: Color(0xfff8f5fe),
@@ -658,7 +658,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff2ebfd),
-          surfaceVariant: Color(0xffe6d7fc),
+          surfaceVariant: Color(0xffd8c8ee),
           inverseSurface: Color(0xff170f22),
           background: Color(0xfff2ebfd),
           scaffoldBackground: Color(0xfff8f5fe),
@@ -678,7 +678,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff6f3fc),
-          surfaceVariant: Color(0xfff0e9fb),
+          surfaceVariant: Color(0xffe3dbee),
           inverseSurface: Color(0xff130f18),
           background: Color(0xfff6f3fc),
           scaffoldBackground: Color(0xffd8c1f9),
@@ -698,7 +698,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xfff6f3fc),
-          surfaceVariant: Color(0xfff0e9fb),
+          surfaceVariant: Color(0xffe3dbee),
           inverseSurface: Color(0xff130f18),
           background: Color(0xfff6f3fc),
           scaffoldBackground: Color(0xffd8c1f9),
@@ -721,7 +721,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff251e2c),
-          surfaceVariant: Color(0xff2f253a),
+          surfaceVariant: Color(0xff4a4055),
           inverseSurface: Color(0xfff7f0fe),
           background: Color(0xff1d1922),
           scaffoldBackground: Color(0xff18161b),
@@ -741,7 +741,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff1e1a23),
-          surfaceVariant: Color(0xff2b2335),
+          surfaceVariant: Color(0xff473f51),
           inverseSurface: Color(0xfff9f5fe),
           background: Color(0xff241d2b),
           scaffoldBackground: Color(0xff392d49),
@@ -761,7 +761,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff17151a),
-          surfaceVariant: Color(0xff1e1a23),
+          surfaceVariant: Color(0xff3c3841),
           inverseSurface: Color(0xfffcfafe),
           background: Color(0xff1e1a23),
           scaffoldBackground: Color(0xff392c48),
@@ -781,7 +781,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff1e1a23),
-          surfaceVariant: Color(0xff2b2335),
+          surfaceVariant: Color(0xff473f51),
           inverseSurface: Color(0xfff9f5fe),
           background: Color(0xff1e1a23),
           scaffoldBackground: Color(0xff1e1a23),
@@ -801,7 +801,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff1e1a23),
-          surfaceVariant: Color(0xff2b2335),
+          surfaceVariant: Color(0xff473f51),
           inverseSurface: Color(0xfff9f5fe),
           background: Color(0xff1e1a23),
           scaffoldBackground: Color(0xff17151a),
@@ -821,7 +821,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff1e1a23),
-          surfaceVariant: Color(0xff2b2335),
+          surfaceVariant: Color(0xff473f51),
           inverseSurface: Color(0xfff9f5fe),
           background: Color(0xff1e1a23),
           scaffoldBackground: Color(0xff17151a),
@@ -841,7 +841,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff161419),
-          surfaceVariant: Color(0xff1d1922),
+          surfaceVariant: Color(0xff3c3841),
           inverseSurface: Color(0xfffaf8fc),
           background: Color(0xff161419),
           scaffoldBackground: Color(0xff382b47),
@@ -861,7 +861,7 @@ void main() {
         ),
         equals(const FlexSchemeSurfaceColors(
           surface: Color(0xff161419),
-          surfaceVariant: Color(0xff1d1922),
+          surfaceVariant: Color(0xff3c3841),
           inverseSurface: Color(0xfffaf8fc),
           background: Color(0xff161419),
           scaffoldBackground: Color(0xff382b47),

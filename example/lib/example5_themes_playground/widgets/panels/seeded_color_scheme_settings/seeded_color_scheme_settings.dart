@@ -4,6 +4,7 @@ import '../../../../shared/const/app_color.dart';
 import '../../../../shared/const/flex_tone.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/app/use_key_colors_buttons.dart';
+import '../../shared/show_input_colors_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
 import 'show_tonal_palette.dart';
@@ -42,9 +43,10 @@ class SeededColorSchemeSettings extends StatelessWidget {
         ? 'Theme is based on seed generated ColorScheme below'
         : 'Theme is based on selected FlexColorScheme defined colors';
     final String schemeMode = useSeed ? 'Seeded' : 'Selected';
-    final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
-            (!isLight && controller.blendLevelDark > 0)) &&
-        controller.useKeyColors;
+    // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+    // final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
+    //         (!isLight && controller.blendLevelDark > 0)) &&
+    //     controller.useKeyColors;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -129,11 +131,13 @@ class SeededColorSchemeSettings extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'Tap a color code to copy it to the clipboard.\n'
+              'Tap a color code to copy it to the clipboard.',
+              // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+              //'\n'
               // ignore: lines_longer_than_80_chars
-              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
+              // "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
-              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
+              // "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: theme.textTheme.labelSmall,
             ),
           ),
@@ -141,13 +145,15 @@ class SeededColorSchemeSettings extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              'This is the custom color theme, you can tap primary, '
-              'secondary or tertiary, plus their container colors to '
-              'change them.\n'
+              'This is the custom color theme, you can tap on primary, '
+              'secondary or tertiary colors, plus their container colors to '
+              'change them.',
+              // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+              //'\n'
               // ignore: lines_longer_than_80_chars
-              "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color below. ' : ''}"
+              // "${controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
               // ignore: lines_longer_than_80_chars
-              "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
+              // "${showBlendInfo ? 'Surface blend is used, it modifies surface and background colors, they may not be found in palettes when hovered.' : '\n'}",
               style: theme.textTheme.labelSmall,
             ),
           ),
@@ -156,18 +162,17 @@ class SeededColorSchemeSettings extends StatelessWidget {
           title: Text('Want to keep a theme color when using seeds?'),
           subtitle: Text('With the switches on the colors above you can lock '
               'primary, secondary, tertiary and their container colors to '
-              'their theme colors instead of using the color from seeded tonal '
-              'palette. Switches have separate states for light and dark '
-              'theme. '),
+              'their scheme input defined colors instead of using the color '
+              'from the seeded tonal palette. The switches have separate '
+              'states for light and dark theme. '),
         ),
         if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
           SwitchListTile(
               dense: true,
               title: const Text('Custom dark scheme uses its own key colors'),
               subtitle: const Text(
-                'This option is only available on the custom dark schemes. If '
-                'you "keep" dark input colors with custom dark schemes, '
-                'turn this ON to use its own input color definition.',
+                'This option is only available on the custom dark scheme. Turn '
+                'ON this option to use its dark input colors as seed keys.',
               ),
               value: controller.useDarkColorsForSeed &&
                   controller.useKeyColors &&
@@ -196,6 +201,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
               ' FlexTones setup has CAM16 chroma:'),
           subtitle: Text(_flexToneSetup),
         ),
+        ShowInputColorsSwitch(controller: controller),
         const SizedBox(height: 8),
       ],
     );

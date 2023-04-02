@@ -13,7 +13,7 @@ Future<void> showCopySetupCodeDialog(
   await showResponsiveDialog<void>(
     context: context,
     child: DartCodeDialogScreen(
-        dialogHeader: 'Copy Theme Setup Code',
+        dialogHeader: 'Copy ThemeData setup code',
         copyMessage: 'FlexColorScheme setup code copied to the clipboard!',
         code: code),
   );

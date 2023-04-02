@@ -45,8 +45,8 @@ void main() {
     test('FCT kButtonRadius is 20', () {
       expect(kButtonRadius, 20);
     });
-    test('FCT kInputDecoratorRadius is 16', () {
-      expect(kInputDecoratorRadius, 16);
+    test('FCT kInputDecoratorRadius is 10', () {
+      expect(kInputDecoratorRadius, 10);
     });
     test('FCT kInputDecoratorM3Radius is 4', () {
       expect(kInputDecoratorM3Radius, 4);
@@ -60,20 +60,20 @@ void main() {
     test('FCT kCardRadius is 12', () {
       expect(kCardRadius, 12);
     });
-    test('FCT kMenuRadius is 4', () {
-      expect(kMenuRadius, 4);
+    test('FCT kTimeElementRadius is 8', () {
+      expect(kTimeElementRadius, 8);
     });
-    test('FCT kCardElevation is 0', () {
-      expect(kCardElevation, 0);
+    test('FCT kTooltipRadius is 8', () {
+      expect(kTooltipRadius, 8);
     });
     test('FCT kElevatedButtonElevation is 1', () {
       expect(kElevatedButtonElevation, 1);
     });
     test('FCT kPopupMenuElevation is 3', () {
-      expect(kPopupMenuElevation, 3);
+      expect(kPopupMenuM3Elevation, 3);
     });
     test('FCT kPopupMenuElevationFCS is 6', () {
-      expect(kPopupMenuElevationFCS, 6);
+      expect(kPopupMenuM2Elevation, 6);
     });
     test('FCT kDialogElevation is 6', () {
       expect(kDialogElevation, 6);
@@ -93,11 +93,17 @@ void main() {
     test('FCT kBottomNavigationBarElevation is 0', () {
       expect(kBottomNavigationBarElevation, 0);
     });
-    test('FCT kNavigationBarHeight is 62', () {
-      expect(kNavigationBarHeight, 62);
-    });
     test('FCT kNavigationBarIndicatorAlpha is 0x3D', () {
       expect(kNavigationBarIndicatorAlpha, 0x3D);
+    });
+    test('FCT kNavigationDrawerM2Width is 304', () {
+      expect(kNavigationDrawerM2Width, 304);
+    });
+    test('FCT kNavigationDrawerM3Width is 360', () {
+      expect(kNavigationDrawerM3Width, 360);
+    });
+    test('FCT kNavigationDrawerIndicatorPadding is 12', () {
+      expect(kNavigationDrawerIndicatorPadding, 12);
     });
     test('FCT kNavigationRailElevation is 0', () {
       expect(kNavigationRailElevation, 0);
@@ -117,65 +123,17 @@ void main() {
     test('FCT kThinBorderWidth is 1', () {
       expect(kThinBorderWidth, 1);
     });
+    //
+    // Alpha, opacity and blend values
+    //
     test('FCT kFillColorAlphaLight is 0x0D', () {
       expect(kFillColorAlphaLight, 0x0D);
     });
     test('FCT kFillColorAlphaDark is 0x14', () {
       expect(kFillColorAlphaDark, 0x14);
     });
-    test('FCT kHoverBackgroundAlpha is 0x0D', () {
-      expect(kHoverBackgroundAlpha, 0x0D);
-    });
-    test('FCT kFocusBackgroundAlpha is 0x26', () {
-      expect(kFocusBackgroundAlpha, 0x26);
-    });
-    test('FCT kPressedBackgroundAlpha is 0x33', () {
-      expect(kPressedBackgroundAlpha, 0x33);
-    });
-    test('FCT kDisabledBackgroundAlpha is 0x31', () {
-      expect(kDisabledBackgroundAlpha, 0x31);
-    });
-    test('FCT kDisabledForegroundAlpha is 0x5E', () {
-      expect(kDisabledForegroundAlpha, 0x5E);
-    });
-    test('FCT kDisabledAlphaBlend is 0x66', () {
-      expect(kDisabledAlphaBlend, 0x66);
-    });
     test('FCT kEnabledBorderAlpha is 0xA7', () {
       expect(kEnabledBorderAlpha, 0xA7);
-    });
-    test('FCT kSelectedAlpha is 0xE5', () {
-      expect(kSelectedAlpha, 0xE5);
-    });
-    test('FCT kAltPrimaryAlphaBlend is 0x19', () {
-      expect(kAltPrimaryAlphaBlend, 0x19);
-    });
-    test('FCT kHoverAlphaBlend is 0x40', () {
-      expect(kHoverAlphaBlend, 0x40);
-    });
-    test('FCT kFocusAlphaBlend is 0x4C', () {
-      expect(kFocusAlphaBlend, 0x4C);
-    });
-    test('FCT kHighlightAlphaBlend is 0x40', () {
-      expect(kHighlightAlphaBlend, 0x40);
-    });
-    test('FCT kSplashAlphaBlend is 0x1F', () {
-      expect(kSplashAlphaBlend, 0x1F);
-    });
-    test('FCT kHoverAlpha is 0x19', () {
-      expect(kHoverAlpha, 0x19);
-    });
-    test('FCT kFocusAlpha is 0x4C', () {
-      expect(kFocusAlpha, 0x4C);
-    });
-    test('FCT kHighlightAlpha is 0x19', () {
-      expect(kHighlightAlpha, 0x19);
-    });
-    test('FCT kSplashAlpha is 0x33', () {
-      expect(kSplashAlpha, 0x33);
-    });
-    test('FCT kChipForegroundAlphaBlend is 0x7F', () {
-      expect(kChipForegroundAlphaBlend, 0x7F);
     });
     test('FCT kChipBackgroundAlphaBlend is 0xCC', () {
       expect(kChipBackgroundAlphaBlend, 0xCC);
@@ -188,6 +146,90 @@ void main() {
     });
     test('FCT kUnselectedAlphaBlend is 0xA5', () {
       expect(kUnselectedAlphaBlend, 0xA5);
+    });
+    //
+    // New FCS V7 constants
+    //
+    test('FCT kTintHover is 0x99', () {
+      expect(kTintHover, 0x99);
+    });
+    test('FCT kAlphaHover is 0x14', () {
+      expect(kAlphaHovered, 0x14);
+    });
+    test('FCT kTintHighlight is 0xA5', () {
+      expect(kTintHighlight, 0xA5);
+    });
+    test('FCT kAlphaHighlight is 0x14', () {
+      expect(kAlphaHighlight, 0x14);
+    });
+    test('FCT kTintPressed is 0xA5', () {
+      expect(kTintPressed, 0xA5);
+    });
+    test('FCT kAlphaPressed is 0x1F', () {
+      expect(kAlphaPressed, 0x1F);
+    });
+    test('FCT kTintSplash is 0xA5', () {
+      expect(kTintSplash, 0xA5);
+    });
+    test('FCT kAlphaSplash is 0x1F', () {
+      expect(kAlphaSplash, 0x1F);
+    });
+    test('FCT kTintFocus is 0xB2', () {
+      expect(kTintFocus, 0xB2);
+    });
+    test('FCT kAlphaFocus is 0x1F', () {
+      expect(kAlphaFocused, 0x1F);
+    });
+    test('FCT kTintDisabled is 0x66', () {
+      expect(kTintDisabled, 0x66);
+    });
+    test('FCT kAlphaDisabled is 0x61', () {
+      expect(kAlphaDisabled, 0x61);
+    });
+    test('FCT kAlphaMediumDisabled is 0x52', () {
+      expect(kAlphaMediumDisabled, 0x52);
+    });
+    test('FCT kAlphaLowDisabled is 0x3D', () {
+      expect(kAlphaLowDisabled, 0x3D);
+    });
+    test('FCT kAlphaVeryLowDisabled is 0x1F', () {
+      expect(kAlphaVeryLowDisabled, 0x1F);
+    });
+    test('FCT kAlphaUltraLowDisabled is 0x0A', () {
+      expect(kAlphaUltraLowDisabled, 0x0A);
+    });
+    test('FCT kSwitchM2LightTrackColor is Color(0x52000000)', () {
+      expect(kSwitchM2LightTrackColor, const Color(0x52000000));
+    });
+    test('FCT kAlphaUnselect is 0xDD', () {
+      expect(kAlphaUnselect, 0xDD);
+    });
+    test('FCT kAlphaM2SwitchTrackLight is 0x70', () {
+      expect(kAlphaM2SwitchTrackLight, 0x70);
+    });
+    test('FCT kAlphaM2SwitchTrackDark is 0x80', () {
+      expect(kAlphaM2SwitchTrackDark, 0x80);
+    });
+    test('FCT kAlphaM2SwitchUnselectTrackLight is 0x50', () {
+      expect(kAlphaM2SwitchUnselectTrackLight, 0x50);
+    });
+    test('FCT kAlphaM2SwitchUnselectTrackDark is 0x65', () {
+      expect(kAlphaM2SwitchUnselectTrackDark, 0x65);
+    });
+    test('FCT kAlphaM3SwitchUnselectTrackLight is 0x33', () {
+      expect(kAlphaM3SwitchUnselectTrackLight, 0x33);
+    });
+    test('FCT kAlphaM3SwitchUnselectTrackDark is 0x44', () {
+      expect(kAlphaM3SwitchUnselectTrackDark, 0x44);
+    });
+    test('FCT kAlphaSliderTickMark is 0x8A', () {
+      expect(kAlphaSliderTickMark, 0x8A);
+    });
+    test('FCT kInputDecoratorLightBgDarken is 3', () {
+      expect(kInputDecoratorLightBgDarken, 3);
+    });
+    test('FCT kInputDecoratorDarkBgLighten is 5', () {
+      expect(kInputDecoratorDarkBgLighten, 5);
     });
   });
 }

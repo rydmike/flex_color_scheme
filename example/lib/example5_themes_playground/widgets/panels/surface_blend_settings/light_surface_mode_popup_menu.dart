@@ -13,7 +13,7 @@ class LightSurfaceModePopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SurfaceModePopupMenu(
-        title: const Text('Light theme surface mode'),
+        title: const Text('Surface blend mode'),
         index: controller.surfaceModeLight.index,
         onChanged: (int index) {
           controller.setSurfaceModeLight(FlexSurfaceMode.values[index]);

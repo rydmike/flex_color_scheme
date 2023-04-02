@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/colors_are_close.dart';
+
 /// A [Card] with a [ListTile] header that can be toggled via its trailing
 /// widget to open and reveal more content provided via [child] in the card.
 ///
@@ -28,8 +30,9 @@ class StatefulHeaderCard extends StatefulWidget {
     this.enabled = true,
     this.isOpen = true,
     this.duration = const Duration(milliseconds: 200),
+    this.startStraight = false,
+    this.endStraight = false,
     this.color,
-    this.boldTitle = true,
     this.child,
   });
 
@@ -80,14 +83,18 @@ class StatefulHeaderCard extends StatefulWidget {
   /// The duration of the show and hide animation of child.
   final Duration duration;
 
+  /// The start side should be straight, no border radius.
+  ///
+  /// Defaults to false.
+  final bool startStraight;
+
+  /// The end side should be straight, no border radius.
+  ///
+  /// Defaults to false.
+  final bool endStraight;
+
   /// Define this color to override that automatic adaptive background color.
   final Color? color;
-
-  /// Make the title bold.
-  ///
-  /// The title Widget will be made bold if it is a [Text] widget,
-  /// regardless of used style it has.
-  final bool boldTitle;
 
   /// The child to be revealed.
   final Widget? child;
@@ -117,28 +124,6 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     });
   }
 
-  static bool _colorsAreClose(Color a, Color b, bool isLight) {
-    final int dR = a.red - b.red;
-    final int dG = a.green - b.green;
-    final int dB = a.blue - b.blue;
-    final int distance = dR * dR + dG * dG + dB * dB;
-    // Calculating orthogonal distance between colors should take the the
-    // square root as well, but we don't need that extra compute step.
-    // We just need a number to represents some relative closeness of the
-    // colors. We use this to determine a level when we should draw a border
-    // around our panel.
-    // These values were just determined by visually testing what was a good
-    // trigger for when the border appeared and disappeared during testing.
-    // We get better results if we use a different trigger value for light
-    // and dark mode.
-    final int closeTrigger = isLight ? 14 : 29;
-    if (distance < closeTrigger) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -146,102 +131,88 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
+    // TODO(rydmike): Monitor deprecation of cardColor.
     // Use passed in color for the Card, or scheme surface, used for Card.
-    final Color cardColor = widget.color ?? theme.colorScheme.surface;
+    // As long as cardColor exist in ThemeData, we use it here, to demonstrate
+    // the effect it has on an app using Card with default background in M2,
+    // if it does not have correct ColorScheme assignment in the theme.
+    final Color cardColor = widget.color ?? theme.cardColor;
     // Compute a header color with fixed primary blend from the card color,
     final Color headerColor = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 12 : 30), cardColor);
-    // Get the card's ShapeBorder from the theme card shape
-    ShapeBorder? shapeBorder = theme.cardTheme.shape;
+        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+
     final bool useHeading = widget.title != null ||
         widget.subtitle != null ||
         widget.leading != null;
-    // Make a shape border if Card or its header color are close in color
-    // to the scaffold background color, because if that happens we want to
-    // separate the header card from the background with a border.
-    if (_colorsAreClose(cardColor, background, isLight) ||
-        (_colorsAreClose(headerColor, background, isLight) && useHeading)) {
-      // If we had one shape, copy in a border side to it.
-      if (shapeBorder is RoundedRectangleBorder) {
-        shapeBorder = shapeBorder.copyWith(
-          side: BorderSide(
-            color: theme.dividerColor,
-            width: 1,
-          ),
-        );
-        // If
-      } else {
-        // If border was null, make one matching Card default, but with a
-        // BorderSide, if it was not null, we leave it as it was, it means it
-        // has some other preexisting ShapeBorder, but it was not a
-        // RoundedRectangleBorder, we don't know what it was, just let it be.
-        shapeBorder ??= RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-          side: BorderSide(
-            color: theme.dividerColor,
-            width: 1,
-          ),
-        );
-      }
-    }
 
-    // Force title widget for Card header to use opinionated bold style,
-    // if we have a title, boldTitle is true and title was a Text.
-    Widget? cardTitle = widget.title;
-    if (cardTitle != null && cardTitle is Text && widget.boldTitle) {
-      final Text textTitle = cardTitle;
-      final TextStyle? cardTitleStyle = cardTitle.style;
-      final String cardTitleText = textTitle.data ?? '';
-      cardTitle = Text(
-        cardTitleText,
-        style: cardTitleStyle?.copyWith(fontWeight: FontWeight.bold) ??
-            const TextStyle(fontWeight: FontWeight.bold),
-      );
+    // Default starting point value based on M3 and M2 mode spec values.
+    double borderRadius = useMaterial3 ? 12 : 4;
+    // Is themed? Try to get the radius from the theme and used that if it was.
+    final ShapeBorder? cardShape = theme.cardTheme.shape;
+    if (cardShape != null && cardShape is RoundedRectangleBorder) {
+      final BorderRadius shape = cardShape.borderRadius as BorderRadius;
+      borderRadius = shape.bottomLeft.x;
     }
+    final bool useBorderSide = colorsAreClose(cardColor, background, isLight) ||
+        (useHeading && colorsAreClose(headerColor, background, isLight));
+    final ShapeBorder shapeBorder = RoundedRectangleBorder(
+      borderRadius: BorderRadiusDirectional.horizontal(
+        start:
+            widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
+        end: widget.endStraight ? Radius.zero : Radius.circular(borderRadius),
+      ),
+      side: useBorderSide
+          ? BorderSide(
+              color: theme.dividerColor,
+              width: 0, // This gives a hairline 1 pc border
+            )
+          : BorderSide.none,
+    );
 
-    return Card(
-      margin: widget.margin,
-      color: cardColor,
-      shape: shapeBorder,
-      elevation: widget.elevation,
-      clipBehavior: Clip.hardEdge,
-      child: Column(
-        children: <Widget>[
-          Material(
-            type: MaterialType.card,
-            color: headerColor,
-            child: ListTile(
-              contentPadding: widget.headerPadding,
-              leading: widget.leading,
-              title: cardTitle,
-              subtitle: widget.subtitle,
-              trailing: widget.enabled
-                  ? ExpandIcon(
-                      size: 32,
-                      isExpanded: _isOpen,
-                      padding: EdgeInsets.zero,
-                      onPressed: (_) {
-                        _handleTap();
-                      },
-                    )
-                  : null,
-              onTap: widget.enabled ? _handleTap : null,
+    return FocusTraversalGroup(
+      child: Card(
+        margin: widget.margin,
+        color: cardColor,
+        shape: shapeBorder,
+        elevation: widget.elevation,
+        clipBehavior: Clip.hardEdge,
+        child: Column(
+          children: <Widget>[
+            Material(
+              type: MaterialType.card,
+              color: headerColor,
+              child: ListTile(
+                contentPadding: widget.headerPadding,
+                leading: widget.leading,
+                title: widget.title,
+                subtitle: widget.subtitle,
+                trailing: widget.enabled
+                    ? ExpandIcon(
+                        size: 32,
+                        isExpanded: _isOpen,
+                        padding: EdgeInsets.zero,
+                        onPressed: (_) {
+                          _handleTap();
+                        },
+                      )
+                    : null,
+                onTap: widget.enabled ? _handleTap : null,
+              ),
             ),
-          ),
-          AnimatedSwitcher(
-            duration: widget.duration,
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SizeTransition(
-                sizeFactor: animation,
-                child: child,
-              );
-            },
-            child: (_isOpen && widget.child != null)
-                ? widget.child
-                : const SizedBox.shrink(),
-          ),
-        ],
+            AnimatedSwitcher(
+              duration: widget.duration,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return SizeTransition(
+                  sizeFactor: animation,
+                  child: child,
+                );
+              },
+              child: (_isOpen && widget.child != null)
+                  ? widget.child
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }

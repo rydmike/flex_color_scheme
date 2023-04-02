@@ -37,7 +37,7 @@ class PageBody extends StatelessWidget {
 
   /// The constraints for the constrained layout.
   ///
-  /// Default to max width constraint, with a value of 900 dp.
+  /// Default to max width constraint, with a value of 1000 dp.
   final BoxConstraints constraints;
 
   /// Padding around the page body.

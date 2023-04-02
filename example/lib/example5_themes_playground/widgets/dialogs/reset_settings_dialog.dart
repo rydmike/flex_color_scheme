@@ -7,7 +7,7 @@ class ResetSettingsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Reset Theme Settings'),
+      title: const Text('Reset theme settings'),
       content: const Text('Reset all theme settings back to their default '
           'values? Persisted theme settings will also be updated to default '
           'values. Your custom theme colors will not be reset.'),

@@ -3,15 +3,15 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../shared/const/app_data.dart';
+import '../shared/const/app.dart';
 import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/showcase_material.dart';
 import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for the Copy Paste Playground
@@ -47,21 +47,18 @@ class _HomePageState extends State<HomePage> {
         ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
     menuItemsEnabled =
-        List<bool>.generate(AppData.menuItems.length, (int i) => false);
-    menuItemsEnabled[1] = true;
+        List<bool>.generate(App.menuItems.length, (int i) => false);
+    menuItemsEnabled[2] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        AppData.menuItems.length,
-        (int i) => ResponsiveMenuItemIconState.primary);
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[1] = isLight
+    menuItemsIconState[2] = Theme.of(context).brightness == Brightness.light
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
@@ -75,11 +72,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double margins = AppData.responsiveInsets(media.size.width);
+    final double margins = App.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -87,27 +84,27 @@ class _HomePageState extends State<HomePage> {
         systemNavBarStyle: FlexSystemNavBarStyle.transparent,
       ),
       child: ResponsiveScaffold(
-        title: Text(AppData.title(context)),
-        menuTitle: const Text(AppData.packageName),
+        title: Text(App.title(context)),
+        menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
-          AppData.title(context),
+          App.title(context),
           style: Theme.of(context)
               .textTheme
               .titleSmall!
               .copyWith(fontWeight: FontWeight.w600),
         ),
-        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
-        menuItems: AppData.menuItems,
+        menuItems: App.menuItems,
         menuItemsEnabled: menuItemsEnabled,
         menuItemsIconState: menuItemsIconState,
         // Make Rail width larger when using it on tablet or desktop.
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
+        breakpointShowFullMenu: App.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 1) {
+          if (index == 2) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
@@ -117,7 +114,7 @@ class _HomePageState extends State<HomePage> {
         },
         body: PageBody(
           controller: scrollController,
-          constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+          constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
             padding: EdgeInsets.fromLTRB(
@@ -143,6 +140,8 @@ class _HomePageState extends State<HomePage> {
               const _BottomBarShowCase(),
               const SizedBox(height: 8),
               const _NavigationRailShowCase(),
+              const SizedBox(height: 8),
+              const _NavigationDrawerShowCase(),
               const SizedBox(height: 8),
               const _DialogShowcase(),
               const SizedBox(height: 8),
@@ -246,6 +245,11 @@ class _MaterialButtonsShowcase extends StatelessWidget {
           children: const <Widget>[
             ElevatedButtonShowcase(),
             SizedBox(height: 8),
+            SizedBox(height: 8),
+            FilledButtonShowcase(),
+            SizedBox(height: 8),
+            FilledButtonTonalShowcase(),
+            SizedBox(height: 8),
             OutlinedButtonShowcase(),
             SizedBox(height: 8),
             TextButtonShowcase(),
@@ -281,11 +285,18 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             ChipShowcase(),
             SizedBox(height: 8),
             ToggleButtonsShowcase(),
+            SizedBox(height: 8),
+            SegmentedButtonShowcase(),
+            SizedBox(height: 8),
             SwitchShowcase(),
             CheckboxShowcase(),
             RadioShowcase(),
             SliderShowcase(),
-            PopupMenuButtonShowcase(),
+            RangeSliderShowcase(),
+            PopupMenuButtonsShowcase(),
+            DropDownMenuShowcase(explainUsage: true),
+            MenuBarShowcase(),
+            MenuAnchorShowcase(),
             SizedBox(height: 8),
             IconButtonCircleAvatarDropdownShowcase(),
             TooltipShowcase(),
@@ -310,9 +321,18 @@ class _TextInputFieldShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextField'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: TextInputField(),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const <Widget>[
+            TextInputField(),
+            SizedBox(height: 8),
+            DropDownButtonFormField(),
+            SizedBox(height: 8),
+            DropDownMenuShowcase(),
+          ],
+        ),
       ),
     );
   }
@@ -332,7 +352,16 @@ class _ListTileShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTile'),
-      child: const ListTileShowcase(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          ListTileAllShowcase(),
+          Divider(),
+          ExpansionTileShowcase(),
+          Divider(),
+          ExpansionPanelListShowcase(),
+        ],
+      ),
     );
   }
 }
@@ -351,14 +380,17 @@ class _TabBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
-      title: const Text('TabBar'),
+      title: const Text('AppBar TabBar BottomAppBar'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const <Widget>[
+          AppBarShowcase(),
           SizedBox(height: 8),
           TabBarForAppBarShowcase(),
           SizedBox(height: 8),
           TabBarForBackgroundShowcase(),
+          SizedBox(height: 8),
+          BottomAppBarShowcase(),
         ],
       ),
     );
@@ -409,6 +441,33 @@ class _NavigationRailShowCase extends StatelessWidget {
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
       child: const NavigationRailShowcase(),
+    );
+  }
+}
+
+class _NavigationDrawerShowCase extends StatelessWidget {
+  const _NavigationDrawerShowCase();
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.featured_video_outlined, color: iconColor),
+      title: const Text('NavigationDrawer'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const <Widget>[
+          NavigationDrawerShowcase(),
+          DrawerShowcase(),
+          SizedBox(height: 32),
+        ],
+      ),
     );
   }
 }

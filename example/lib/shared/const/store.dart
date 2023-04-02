@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import 'adaptive_theme.dart';
 import 'app_color.dart';
 
 // A simple const class for holding storage keys and default value for each
@@ -38,25 +39,129 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseSubThemes = true;
 
-  // Key used to read and save the useFlutterDefaults  value.
+  // Key used to read and save the useFlutterDefaults value.
   static const String keyUseFlutterDefaults = 'useFlutterDefaults';
   // Default value for the useFlutterDefaults, also to reset settings.
   static const bool defaultUseFlutterDefaults = false;
+
+  // Key used to read and save the keyAdaptiveRemoveElevationTintLight value.
+  static const String keyAdaptiveRemoveElevationTintLight =
+      'adaptiveRemoveElevationTintLight';
+  // Default value for the adaptiveRemoveElevationTintLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintLight = null;
+
+  // Key used to read and save the keyAdaptiveElevationShadowsBackLight value.
+  static const String keyAdaptiveElevationShadowsBackLight =
+      'adaptiveElevationShadowsBackLight';
+  // Default value for the adaptiveElevationShadowsBackLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackLight = null;
+
+  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffLight value.
+  static const String keyAdaptiveAppBarScrollUnderOffLight =
+      'adaptiveAppBarScrollUnderOffLight';
+  // Default value for the adaptiveAppBarScrollUnderOffLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffLight = null;
+
+  // Key used to read and save the keyAdaptiveRemoveElevationTintDark value.
+  static const String keyAdaptiveRemoveElevationTintDark =
+      'adaptiveRemoveElevationTintDark';
+  // Default value for the adaptiveRemoveElevationTintDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintDark = null;
+
+  // Key used to read and save the keyAdaptiveElevationShadowsBackDark value.
+  static const String keyAdaptiveElevationShadowsBackDark =
+      'adaptiveElevationShadowsBackDark';
+  // Default value for the adaptiveElevationShadowsBackDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackDark = null;
+
+  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffDark value.
+  static const String keyAdaptiveAppBarScrollUnderOffDark =
+      'adaptiveAppBarScrollUnderOffDark';
+  // Default value for the adaptiveAppBarScrollUnderOffDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffDark = null;
+
+  // Key used to read and save the keyAdaptiveRadius value.
+  static const String keyAdaptiveRadius = 'adaptiveRadius';
+  // Default value for the adaptiveRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveRadius = null;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';
   // Default value for the isLargeGridView, also used to reset settings.
   static const bool defaultIsLargeGridView = false;
 
+  // Key used to read and save the compactMode value.
+  static const String keyCompactMode = 'compactMode';
+  // Default value for the compactMode, also used to reset settings.
+  static const bool defaultCompactMode = false;
+
+  // Key used to read and save the confirmPremade value.
+  static const String keyConfirmPremade = 'confirmPremade';
+  // Default value for the confirmPremade, also used to reset settings.
+  static const bool defaultConfirmPremade = true;
+
   // Key used to read and save the viewIndex value.
   static const String keyViewIndex = 'viewIndex';
-  // Default value for the viewIndex, also used to reset settings.
+  // Default value for the viewIndex.
   static const int defaultViewIndex = 0;
+
+  // Key used to read and save the sideViewIndex value.
+  static const String keySideViewIndex = 'sideViewIndex';
+  // Default value for the sideViewIndex.
+  static const int defaultSideViewIndex = 2;
+
+  // Key used to read and save the simulatorDeviceIndex value.
+  static const String keySimulatorDeviceIndex = 'simulatorDeviceIndex';
+  // Default value for the simulatorDeviceIndex, also used to reset settings.
+  static const int defaultSimulatorDeviceIndex = 0;
+
+  // Key used to read and save the simulatorAppIndex value.
+  static const String keySimulatorAppIndex = 'simulatorAppIndex';
+  // Default value for the simulatorAppIndex, also used to reset settings.
+  static const int defaultSimulatorAppIndex = 0;
+
+  // Key used to read and save the simulatorComponentsIndex value.
+  static const String keySimulatorComponentsIndex = 'simulatorComponentsIndex';
+  // Default value for the simulatorComponentsIndex, also to reset settings.
+  static const int defaultSimulatorComponentsIndex = 0;
+
+  // Key used to read and save the deviceSize value.
+  static const String keyDeviceSize = 'deviceSize';
+  // Default value for the deviceSize, also used to reset settings.
+  static const double defaultDeviceSize = 1000;
+
+  // Key used to read and save the showSchemeInput value.
+  static const String keyShowSchemeInput = 'showSchemeInput';
+  // Default value for the showSchemeInput, also used to reset settings.
+  static const bool defaultShowSchemeInput = false;
 
   // Key used to read and save the useTextTheme value.
   static const String keyUseTextTheme = 'useTextTheme';
   // Default value for the useSubThemes, also used to reset settings.
+  // The controller uses a nullable bool with different defaults in
+  // M2 and M3 mode if it is set to null. The API use null as default for this
+  // property and it can be set to null in Playground, but playground is
+  // a bit opinionated and defaults to always uing M3 typography since it is
+  // much much better than M2.
   static const bool defaultUseTextTheme = true;
+
+  // Key used to read and save the useM2StyleDividerInM3 value.
+  static const String keyUseM2StyleDividerInM3 = 'useM2StyleDividerInM3';
+  // Default value for the useM2StyleDividerInM3, also used to reset settings.
+  static const bool defaultUseM2StyleDividerInM3 = true;
 
   // Key used to read and save the useAppFont value.
   static const String keyUseAppFont = 'useAppFont';
@@ -66,24 +171,34 @@ class Store {
   // Key used to read and save the usedScheme value.
   static const String keyUsedScheme = 'usedScheme';
   // Default value for the usedScheme, also used to reset settings.
-  static const FlexScheme defaultUsedScheme = FlexScheme.hippieBlue;
+  static const FlexScheme defaultUsedScheme = FlexScheme.materialBaseline;
 
   // Key used to read and save the schemeIndex value.
   static const String keySchemeIndex = 'schemeIndex';
   // Default value for the schemeIndex, also used to reset settings.
   // Defaults to 35, in examples 4 & 5 where this is used it will make
-  // the default theme based on the [FlexColor.flutterDash] color scheme.
-  static const int defaultSchemeIndex = 39;
+  // the default theme based on the [FlexColor.materialBaseline] color scheme.
+  static const int defaultSchemeIndex = 40;
 
   // Key used to read and save the interactionEffects value.
   static const String keyInteractionEffects = 'interactionEffects';
   // Default value for the interactionEffects, also used to reset settings.
   static const bool defaultInteractionEffects = true;
 
+  // Key used to read and save the tintedDisabledControls value.
+  static const String keyTintedDisabledControls = 'tintedDisabledControls';
+  // Default value for the tintedDisabledControls, also used to reset settings.
+  static const bool defaultTintedDisabledControls = true;
+
   // Key used to read and save the defaultRadius value.
   static const String keyDefaultRadius = 'defaultRadius';
   // Default value for the defaultRadius, also used to reset settings.
   static const double? defaultDefaultRadius = null;
+
+  // Key used to read and save the defaultRadiusAdaptive value.
+  static const String keyDefaultRadiusAdaptive = 'defaultRadiusAdaptive';
+  // Default value for the defaultRadiusAdaptive, also used to reset settings.
+  static const double? defaultDefaultRadiusAdaptive = null;
 
   // Key used to read and save the thinBorderWidth value.
   static const String keyThinBorderWidth = 'thinBorderWidth';
@@ -118,14 +233,14 @@ class Store {
   // Key used to read and save the blendLevel value.
   static const String keyBlendLevel = 'blendLevel';
   // Default value for the blendLevel, also used to reset settings.
-  // Defaults to 9.
-  static const int defaultBlendLevel = 9;
+  // Defaults to 7.
+  static const int defaultBlendLevel = 7;
 
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
-  // Defaults to 15.
-  static const int defaultBlendLevelDark = 15;
+  // Defaults to 13.
+  static const int defaultBlendLevelDark = 13;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
@@ -205,12 +320,12 @@ class Store {
   // Key used to read and save the blendLightTextTheme value.
   static const String keyBlendLightTextTheme = 'blendLightTextTheme';
   // Default value for the blendLightTextTheme, also to reset settings.
-  static const bool defaultBlendLightTextTheme = true;
+  static const bool defaultBlendLightTextTheme = false;
 
   // Key used to read and save the blendDarkTextTheme value.
   static const String keyBlendDarkTextTheme = 'blendDarkTextTheme';
   // Default value for the blendDarkTextTheme, also to reset settings.
-  static const bool defaultBlendDarkTextTheme = true;
+  static const bool defaultBlendDarkTextTheme = false;
 
   // Material 3 and Seed ColorScheme SETTINGS.
   // ===========================================================================
@@ -218,7 +333,7 @@ class Store {
   // Key used to read and save the useMaterial3 value.
   static const String keyUseMaterial3 = 'useMaterial3';
   // Default value for the useMaterial3, also to reset settings.
-  static const bool defaultUseMaterial3 = false;
+  static const bool defaultUseMaterial3 = true;
 
   // Key used to read and save the useKeyColors value.
   static const String keyUseKeyColors = 'useKeyColors';
@@ -348,10 +463,38 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputDecoratorSchemeColorDark = null;
 
+  // Key used to read and save the inputDecoratorBorderSchemeColorLight value.
+  static const String keyInputDecoratorBorderSchemeColorLight =
+      'inputDecoratorBorderSchemeColorLight';
+  // Default value for the inputDecoratorBorderSchemeColorLight, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorBorderSchemeColorLight = null;
+
+  // Key used to read and save the inputDecoratorBorderSchemeColorDark value.
+  static const String keyInputDecoratorBorderSchemeColorDark =
+      'inputDecoratorBorderSchemeColorDark';
+  // Default value for the inputDecoratorBorderSchemeColorDark, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorBorderSchemeColorDark = null;
+
   // Key used to read and save the inputDecoratorIsFilled value.
   static const String keyInputDecoratorIsFilled = 'inputDecoratorIsFilled';
   // Default value for the inputDecoratorIsFilled, also used to reset settings.
   static const bool defaultInputDecoratorIsFilled = true;
+
+  // Key used to read and save the inputDecoratorBackgroundAlphaLight value.
+  static const String keyInputDecoratorBackgroundAlphaLight =
+      'inputDecoratorBackgroundAlphaLight';
+  // Default value for the inputDecoratorBackgroundAlphaLight,
+  // and to reset settings.
+  static const int? defaultInputDecoratorBackgroundAlphaLight = null;
+
+  // Key used to read and save the inputDecoratorBackgroundAlphaDark value.
+  static const String keyInputDecoratorBackgroundAlphaDark =
+      'inputDecoratorBackgroundAlphaDark';
+  // Default value for the inputDecoratorBackgroundAlphaDark,
+  // and to reset settings.
+  static const int? defaultInputDecoratorBackgroundAlphaDark = null;
 
   // Key used to read and save the inputDecoratorBorderType value.
   static const String keyInputDecoratorBorderType = 'inputDecoratorBorderType';
@@ -371,6 +514,12 @@ class Store {
       'inputDecoratorUnfocusedHasBorder';
   // Default value for the inputDecoratorUnfocusedHasBorder, reset settings.
   static const bool defaultInputDecoratorUnfocusedHasBorder = true;
+
+  // Key used to read and save the inputDecoratorFocusedHasBorder value.
+  static const String keyInputDecoratorFocusedHasBorder =
+      'inputDecoratorFocusedHasBorder';
+  // Default value for the inputDecoratorUnfocusedHasBorder, reset settings.
+  static const bool defaultInputDecoratorFocusedHasBorder = true;
 
   // Key used to read and save the inputDecoratorUnfocusedBorderIsColored value.
   static const String keyInputDecoratorUnfocusedBorderIsColored =
@@ -392,6 +541,21 @@ class Store {
   // Default value for the inputDecoratorFocusedBorderWidth, to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultInputDecoratorFocusedBorderWidth = null;
+
+  // Key used to read and save the inputDecoratorPrefixIconSchemeColor value.
+  static const String keyInputDecoratorPrefixIconSchemeColor =
+      'inputDecoratorPrefixIconSchemeColor';
+  // Default value for the inputDecoratorPrefixIconSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorPrefixIconSchemeColor = null;
+
+  // Key used to read and save inputDecoratorPrefixIconDarkSchemeColor value.
+  static const String keyInputDecoratorPrefixIconDarkSchemeColor =
+      'inputDecoratorPrefixIconDarkSchemeColor';
+  // Default for the inputDecoratorPrefixIconDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorPrefixIconDarkSchemeColor =
+      null;
 
   // AppBar SETTINGS.
   // ===========================================================================
@@ -418,15 +582,39 @@ class Store {
   // Default value for the appBarOpacityDark, also used to reset settings.
   static const double defaultAppBarOpacityDark = 1.0;
 
-  // Key used to read and save the appBarElevation value.
+  // Key used to read and save the appBarElevationLight value.
   static const String keyAppBarElevationLight = 'appBarElevation';
   // Default value for the appBarElevation, also used to reset settings.
-  static const double defaultAppBarElevationLight = 0.0;
+  static const double? defaultAppBarElevationLight = null;
 
   // Key used to read and save the appBarElevationDark value.
   static const String keyAppBarElevationDark = 'appBarElevationDark';
   // Default value for the appBarElevationDark, also used to reset settings.
-  static const double defaultAppBarElevationDark = 0.0;
+  static const double? defaultAppBarElevationDark = null;
+
+  // Key used to read and save the appBarScrolledUnderElevationLight value.
+  static const String keyAppBarScrolledUnderElevationLight =
+      'appBarScrolledUnderElevationLight';
+  // Default value for the appBarScrolledUnderElevation, used to reset settings.
+  static const double? defaultAppBarScrolledUnderElevationLight = null;
+
+  // Key used to read and save the appBarScrolledUnderElevationDark value.
+  static const String keyAppBarScrolledUnderElevationDark =
+      'appBarScrolledUnderElevationDark';
+  // Default value for the appBarScrolledUnderElevationDark, reset settings.
+  static const double? defaultAppBarScrolledUnderElevationDark = null;
+
+  // Key used to read and save the bottomAppBarElevation value.
+  static const String keyBottomAppBarElevationLight =
+      'bottomAppBarElevationLight';
+  // Default value for the bottomAppBarElevation, also used to reset settings.
+  static const double? defaultBottomAppBarElevationLight = null;
+
+  // Key used to read and save the bottomAppBarElevationDark value.
+  static const String keyBottomAppBarElevationDark =
+      'bottomAppBarElevationDark';
+  // Default value for the bottomAppBarElevationDark, also to reset settings.
+  static const double? defaultBottomAppBarElevationDark = null;
 
   // Key used to read and save the transparentStatusBar value.
   static const String keyTransparentStatusBar = 'transparentStatusBar';
@@ -449,13 +637,22 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultAppBarBackgroundSchemeColorDark = null;
 
+  // BottomAppBar SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the bottomAppBarSchemeColor value.
+  static const String keyBottomAppBarSchemeColor = 'bottomAppBarSchemeColor';
+  // Default value for the bottomAppBarSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomAppBarSchemeColor = null;
+
   // TabBar SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the tabBarStyle value.
   static const String keyTabBarStyle = 'tabBarStyle';
   // Default value for the tabBarStyle, also used to reset settings.
-  static const FlexTabBarStyle defaultTabBarStyle = FlexTabBarStyle.forAppBar;
+  static const FlexTabBarStyle? defaultTabBarStyle = null;
 
   // Key used to read and save the tabBarIndicatorLight value.
   static const String keyTabBarIndicatorLight = 'tabBarIndicatorLight';
@@ -483,6 +680,129 @@ class Store {
   // We use NULL as default, this nullable setting.
   static const SchemeColor? defaultTabBarItemSchemeColorDark = null;
 
+  // Key used to read and save the tabBarUnselectedItemSchemeColor value.
+  static const String keyTabBarUnselectedItemSchemeColorLight =
+      'tabBarUnselectedItemSchemeColorLight';
+  // Default value for the tabBarUnselectedItemSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const SchemeColor? defaultTabBarUnselectedItemSchemeColorLight = null;
+
+  // Key used to read and save the tabBarUnselectedItemSchemeColorDark value.
+  static const String keyTabBarUnselectedItemSchemeColorDark =
+      'tabBarUnselectedItemSchemeColorDark';
+  // Default value for the tabBarUnselectedItemSchemeColorDark,
+  // also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const SchemeColor? defaultTabBarUnselectedItemSchemeColorDark = null;
+
+  // Key used to read and save the tabBarUnselectedItemOpacityLight value.
+  static const String keyTabBarUnselectedItemOpacityLight =
+      'tabBarUnselectedItemOpacityLight';
+  // Default value for the tabBarUnselectedItemOpacityLight, to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const double? defaultTabBarUnselectedItemOpacityLight = null;
+
+  // Key used to read and save the tabBarUnselectedItemOpacityDark value.
+  static const String keyTabBarUnselectedItemOpacityDark =
+      'tabBarUnselectedItemOpacityDark';
+  // Default value for the tabBarUnselectedItemOpacityDark, to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const double? defaultTabBarUnselectedItemOpacityDark = null;
+
+  // Key used to read and save the tabBarIndicatorSize value.
+  static const String keyTabBarIndicatorSize = 'tabBarIndicatorSize';
+  // Default value for the tabBarIndicatorSize, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const TabBarIndicatorSize? defaultTabBarIndicatorSize = null;
+
+  // Key used to read and save the tabBarIndicatorWeight value.
+  static const String keyTabBarIndicatorWeight = 'tabBarIndicatorWeight';
+  // Default value for the tabBarIndicatorWeight, also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultTabBarIndicatorWeight = null;
+
+  // Key used to read and save the tabBarIndicatorTopRadius value.
+  static const String keyTabBarIndicatorTopRadius = 'tabBarIndicatorTopRadius';
+  // Default value for the tabBarIndicatorTopRadius, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultTabBarIndicatorTopRadius = null;
+
+  // Key used to read and save the tabBarDividerColor value.
+  static const String keyTabBarDividerColor = 'tabBarDividerColor';
+  // Default value for the tabBarDividerColor, also used to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const Color? defaultTabBarDividerColor = null;
+
+  // Drawer SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the drawerBorderRadius value.
+  static const String keyDrawerBorderRadius = 'drawerBorderRadius';
+  // Default value for the drawerBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerBorderRadius = null;
+
+  // Key used to read and save the drawerElevation value.
+  static const String keyDrawerElevation = 'drawerElevation';
+  // Default value for the drawerElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerElevation = null;
+
+  // Key used to read and save the drawerBackgroundSchemeColor value.
+  static const String keyDrawerBackgroundSchemeColor =
+      'drawerBackgroundSchemeColor';
+  // Default value for the drawerBackgroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerBackgroundSchemeColor = null;
+
+  // Key used to read and save the drawerWidth value.
+  static const String keyDrawerWidth = 'drawerWidth';
+  // Default value for the drawerWidth, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerWidth = null;
+
+  // Key used to read and save the drawerIndicatorWidth value.
+  static const String keyDrawerIndicatorWidth = 'drawerIndicatorWidth';
+  // Default value for the drawerIndicatorWidth, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorWidth = null;
+
+  // Key used to read and save the drawerIndicatorBorderRadius value.
+  static const String keyDrawerIndicatorBorderRadius =
+      'drawerIndicatorBorderRadius';
+  // Default value for the drawerIndicatorBorderRadius, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorBorderRadius = null;
+
+  // Key used to read and save the drawerIndicatorSchemeColor value.
+  static const String keyDrawerIndicatorSchemeColor =
+      'drawerIndicatorSchemeColor';
+  // Default value for the drawerIndicatorSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerIndicatorSchemeColor = null;
+
+  // Key used to read and save the drawerIndicatorOpacity value.
+  static const String keyDrawerIndicatorOpacity = 'drawerIndicatorOpacity';
+  // Default value for the drawerIndicatorOpacity, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDrawerIndicatorOpacity = null;
+
+  // Key used to read and save the drawerSelectedItemSchemeColor value.
+  static const String keyDrawerSelectedItemSchemeColor =
+      'drawerSelectedItemSchemeColor';
+  // Default value for the drawerSelectedItemSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerSelectedItemSchemeColor = null;
+
+  // Key used to read and save the drawerUnselectedItemSchemeColor value.
+  static const String keyDrawerUnselectedItemSchemeColor =
+      'drawerUnselectedItemSchemeColor';
+  // Default value for the drawerUnselectedItemSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDrawerUnselectedItemSchemeColor = null;
+
   // BottomSheet SETTINGS.
   // ===========================================================================
 
@@ -492,11 +812,25 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultBottomSheetSchemeColor = null;
 
+  // Key used to read and save the bottomSheetModalSchemeColor value.
+  static const String keyBottomSheetModalSchemeColor =
+      'bottomSheetModalSchemeColor';
+  // Default value for the bottomSheetModalSchemeColor, also used to reset
+  // settings. We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomSheetModalSchemeColor = null;
+
   // Key used to read and save the bottomSheetElevation value.
   static const String keyBottomSheetElevation = 'bottomSheetElevation';
   // Default value for the bottomSheetElevation, also to reset settings.
   // We use NULL as default, on this nullable setting.
   static const double? defaultBottomSheetElevation = null;
+
+  // Key used to read and save the bottomSheetModalElevation value.
+  static const String keyBottomSheetModalElevation =
+      'bottomSheetModalElevation';
+  // Default value for the bottomSheetModalElevation, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const double? defaultBottomSheetModalElevation = null;
 
   // Key used to read and save the bottomSheetBorderRadius value.
   static const String keyBottomSheetBorderRadius = 'bottomSheetBorderRadius';
@@ -543,7 +877,7 @@ class Store {
   static const String keyBottomNavigationBarElevation =
       'bottomNavigationBarElevation';
   // Default value for the bottomNavigationBarElevation, also reset settings.
-  static const double defaultBottomNavigationBarElevation = 0;
+  static const double? defaultBottomNavigationBarElevation = null;
 
   // Key used to read and save the bottomNavBarSelectedItemSchemeColor value.
   static const String keyBottomNavBarSelectedItemSchemeColor =
@@ -575,6 +909,105 @@ class Store {
   // Default value for bottomNavShowUnselectedLabels, also to reset settings.
   static const bool defaultBottomNavShowUnselectedLabels = true;
 
+  // Menu, MenuBar and MenuButton SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the menuRadius value.
+  static const String keyMenuRadius = 'menuRadius';
+  // Default value for the menuRadius, also reset settings.
+  static const double? defaultMenuRadius = null;
+
+  // Key used to read and save the menuElevation value.
+  static const String keyMenuElevation = 'menuElevation';
+  // Default value for the menuElevation, also reset settings.
+  static const double? defaultMenuElevation = null;
+
+  // Key used to read and save the menuOpacity value.
+  static const String keyMenuOpacity = 'menuOpacity';
+  // Default value for the menuOpacity, also reset settings.
+  static const double? defaultMenuOpacity = null;
+
+  // Key used to read and save the menuPaddingStart value.
+  static const String keyMenuPaddingStart = 'menuPaddingStart';
+  // Default value for the menuPaddingStart, also reset settings.
+  static const double? defaultMenuPaddingStart = null;
+
+  // Key used to read and save the menuPaddingEnd value.
+  static const String keyMenuPaddingEnd = 'menuPaddingEnd';
+  // Default value for the menuPaddingEnd, also reset settings.
+  static const double? defaultMenuPaddingEnd = null;
+
+  // Key used to read and save the menuPaddingTop value.
+  static const String keyMenuPaddingTop = 'menuPaddingTop';
+  // Default value for the menuPaddingTop, also reset settings.
+  static const double? defaultMenuPaddingTop = null;
+
+  // Key used to read and save the menuPaddingBottom value.
+  static const String keyMenuPaddingBottom = 'menuPaddingBottom';
+  // Default value for the menuPaddingBottom, also reset settings.
+  static const double? defaultMenuPaddingBottom = null;
+
+  // Key used to read and save the menuSchemeColor value.
+  static const String keyMenuSchemeColor = 'menuSchemeColor';
+  // Default value for the menuSchemeColor, also used to reset settings.
+  static const SchemeColor? defaultMenuSchemeColor = null;
+
+  // Key used to read and save the menuBarBackgroundSchemeColor value.
+  static const String keyMenuBarBackgroundSchemeColor =
+      'menuBarBackgroundSchemeColor';
+  // Default value for the menuBarBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuBarBackgroundSchemeColor = null;
+
+  // Key used to read and save the menuBarRadius value.
+  static const String keyMenuBarRadius = 'menuBarRadius';
+  // Default value for the menuBarRadius, also reset settings.
+  static const double? defaultMenuBarRadius = null;
+
+  // Key used to read and save the menuBarElevation value.
+  static const String keyMenuBarElevation = 'menuBarElevation';
+  // Default value for the menuBarElevation, also reset settings.
+  static const double? defaultMenuBarElevation = null;
+
+  // Key used to read and save the menuBarShadowColor color value.
+  static const String keyMenuBarShadowColor = 'menuBarShadowColor';
+  // Default value for the menuBarShadowColor color, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const Color? defaultMenuBarShadowColor = null;
+
+  // Key used to read and save the menuItemBackgroundSchemeColor value.
+  static const String keyMenuItemBackgroundSchemeColor =
+      'menuItemBackgroundSchemeColor';
+  // Default value for the menuItemBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuItemBackgroundSchemeColor = null;
+
+  // Key used to read and save the menuItemForegroundSchemeColor value.
+  static const String keyMenuItemForegroundSchemeColor =
+      'menuItemForegroundSchemeColor';
+  // Default value for the menuItemForegroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuItemForegroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorBackgroundSchemeColor value.
+  static const String keyMenuIndicatorBackgroundSchemeColor =
+      'menuIndicatorBackgroundSchemeColor';
+  // Default value for the menuIndicatorBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuIndicatorBackgroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorForegroundSchemeColor value.
+  static const String keyMenuIndicatorForegroundSchemeColor =
+      'menuIndicatorForegroundSchemeColor';
+  // Default value for the menuIndicatorForegroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultMenuIndicatorForegroundSchemeColor = null;
+
+  // Key used to read and save the menuIndicatorRadius value.
+  static const String keyMenuIndicatorRadius = 'menuIndicatorRadius';
+  // Default value for the menuIndicatorRadius, also reset settings.
+  static const double? defaultMenuIndicatorRadius = null;
+
   // NavigationBar SETTINGS.
   // ===========================================================================
 
@@ -591,7 +1024,7 @@ class Store {
   static const double defaultNavBarOpacity = 1.0;
 
   // Key used to read and save the navigationBarElevation value.
-  static const String keyNavigationBarElevation = 'navigationBarElevation';
+  static const String keyNavBarElevation = 'navigationBarElevation';
   // Default value for the navigationBarElevation, also reset settings.
   static const double? defaultNavigationBarElevation = null;
 
@@ -600,11 +1033,17 @@ class Store {
   // Default value for the navBarHeight, also reset settings.
   static const double? defaultNavBarHeight = null;
 
-  // Key used to read and save the navBarSelectedItemSchemeColor value.
-  static const String keyNavBarSelectedItemSchemeColor =
+  // Key used to read and save the navBarSelectedIconSchemeColor icon value.
+  static const String keyNavBarSelectedIconSchemeColor =
       'navBarSelectedItemSchemeColor';
+  // Default value for the navBarSelectedIconSchemeColor.
+  static const SchemeColor? defaultNavBarSelectedIconSchemeColor = null;
+
+  // Key used to read and save the navBarSelectedLabelSchemeColor icon value.
+  static const String keyNavBarSelectedLabelSchemeColor =
+      'navBarSelectedLabelSchemeColor';
   // Default value for the navBarSelectedItemSchemeColor.
-  static const SchemeColor? defaultNavBarSelectedItemSchemeColor = null;
+  static const SchemeColor? defaultNavBarSelectedLabelSchemeColor = null;
 
   // Key used to read and save the navBarUnselectedItemSchemeColor value.
   static const String keyNavBarUnselectedSchemeColor =
@@ -629,6 +1068,12 @@ class Store {
   // Default value for the navBarIndicatorOpacity, also to reset settings.
   static const double? defaultNavBarIndicatorOpacity = null;
 
+  // Key used to read and save the navBarIndicatorBorderRadius value.
+  static const String keyNavBarIndicatorBorderRadius =
+      'navBarIndicatorBorderRadius';
+  // Default value for the navBarIndicatorBorderRadius, also to reset settings.
+  static const double? defaultNavBarIndicatorBorderRadius = null;
+
   // Key used to read and save the navBarLabelBehavior value.
   static const String keyNavBarLabelBehavior = 'navBarLabelBehavior';
   // Default value for the navBarLabelBehavior, also used to
@@ -652,15 +1097,21 @@ class Store {
   static const double defaultNavRailOpacity = 1.0;
 
   // Key used to read and save the navigationRailElevation value.
-  static const String keyNavigationRailElevation = 'navigationRailElevation';
+  static const String keyNavRailElevation = 'navigationRailElevation';
   // Default value for the navigationRailElevation, also reset settings.
-  static const double defaultNavigationRailElevation = 0;
+  static const double? defaultNavRailElevation = null;
 
-  // Key used to read and save the navRailSelectedItemSchemeColor value.
-  static const String keyNavRailSelectedItemSchemeColor =
+  // Key used to read and save the navRailSelectedIconSchemeColor value.
+  static const String keyNavRailSelectedIconSchemeColor =
       'navRailSelectedItemSchemeColor';
-  // Default value for the navRailSelectedItemSchemeColor.
-  static const SchemeColor? defaultNavRailSelectedItemSchemeColor = null;
+  // Default value for the navRailSelectedIconSchemeColor.
+  static const SchemeColor? defaultNavRailSelectedIconSchemeColor = null;
+
+  // Key used to read and save the navRailSelectedLabelSchemeColor value.
+  static const String keyNavRailSelectedLabelSchemeColor =
+      'navRailSelectedLabelSchemeColor';
+  // Default value for the navRailSelectedLabelSchemeColor.
+  static const SchemeColor? defaultNavRailSelectedLabelSchemeColor = null;
 
   // Key used to read and save the navRailUnselectedItemSchemeColor value.
   static const String keyNavRailUnselectedSchemeColor =
@@ -697,6 +1148,12 @@ class Store {
   // Default value for the navigationRailIndicatorOpacity, also reset settings.
   static const double? defaultNavRailIndicatorOpacity = null;
 
+  // Key used to read and save the navRailIndicatorBorderRadius value.
+  static const String keyNavRailIndicatorBorderRadius =
+      'navRailIndicatorBorderRadius';
+  // Default value for the navRailIndicatorBorderRadius, also to reset settings.
+  static const double? defaultNavRailIndicatorBorderRadius = null;
+
   // Button SETTINGS.
   // ===========================================================================
 
@@ -711,6 +1168,18 @@ class Store {
   // Default value for the textButtonBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultTextButtonBorderRadius = null;
+
+  // Key used to read and save the filledButtonSchemeColor value.
+  static const String keyFilledButtonSchemeColor = 'filledButtonSchemeColor';
+  // Default value for the filledButtonSchemeColor, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultFilledButtonSchemeColor = null;
+
+  // Key used to read and save the filledButtonBorderRadius value.
+  static const String keyFilledButtonBorderRadius = 'filledButtonBorderRadius';
+  // Default value for the filledButtonBorderRadius, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultFilledButtonBorderRadius = null;
 
   // Key used to read and save the elevatedButtonSchemeColor value.
   static const String keyElevatedButtonSchemeColor =
@@ -776,12 +1245,31 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultOutlinedButtonPressedBorderWidth = null;
 
+  // ToggleButtons SETTINGS.
+  // ===========================================================================
+
   // Key used to read and save the toggleButtonsSchemeColor value.
   static const String keyToggleButtonsSchemeColor = 'toggleButtonsSchemeColor';
   // Default value for the toggleButtonsSchemeColor, also used to
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultToggleButtonsSchemeColor = null;
+
+  // Key used to read and save the toggleButtonsUnselectedSchemeColor value.
+  static const String keyToggleButtonsUnselectedSchemeColor =
+      'toggleButtonsUnselectedSchemeColor';
+  // Default value for the toggleButtonsUnselectedSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsUnselectedSchemeColor = null;
+
+  // Key used to read and save the toggleButtonsBorderSchemeColor value.
+  static const String keyToggleButtonsBorderSchemeColor =
+      'toggleButtonsBorderSchemeColor';
+  // Default value for the toggleButtonsBorderSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsBorderSchemeColor = null;
 
   // Key used to read and save the toggleButtonsBorderRadius value.
   static const String keyToggleButtonsBorderRadius =
@@ -797,6 +1285,59 @@ class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultToggleButtonsBorderWidth = null;
+
+  // SegmentedButton SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the segmentedButtonSchemeColor value.
+  static const String keySegmentedButtonSchemeColor =
+      'segmentedButtonSchemeColor';
+  // Default value for the segmentedButtonSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonUnselectedSchemeColor value.
+  static const String keySegmentedButtonUnselectedSchemeColor =
+      'segmentedButtonUnselectedSchemeColor';
+  // Default value for the segmentedButtonUnselectedSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonUnselectedSchemeColor = null;
+
+  // Key used to read and save the
+  // segmentedButtonUnselectedForegroundSchemeColor value.
+  static const String keySegmentedButtonUnselectedForegroundSchemeColor =
+      'segmentedButtonUnselectedForegroundSchemeColor';
+  // Default value for the segmentedButtonUnselectedForegroundSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor?
+      defaultSegmentedButtonUnselectedForegroundSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonBorderSchemeColor value.
+  static const String keySegmentedButtonBorderSchemeColor =
+      'segmentedButtonBorderSchemeColor';
+  // Default value for the segmentedButtonBorderSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSegmentedButtonBorderSchemeColor = null;
+
+  // Key used to read and save the segmentedButtonBorderRadius value.
+  static const String keySegmentedButtonBorderRadius =
+      'segmentedButtonBorderRadius';
+  // Default value for the segmentedButtonBorderRadius, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSegmentedButtonBorderRadius = null;
+
+  // Key used to read and save the segmentedButtonBorderWidth value.
+  static const String keySegmentedButtonBorderWidth =
+      'segmentedButtonBorderWidth';
+  // Default value for the segmentedButtonBorderWidth, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSegmentedButtonBorderWidth = null;
 
   // Switch, CheckBox and Radio SETTINGS.
   // ===========================================================================
@@ -840,10 +1381,29 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSliderBaseSchemeColor = null;
 
+  // Key used to read and save the sliderIndicatorSchemeColor value.
+  static const String keySliderIndicatorSchemeColor =
+      'sliderIndicatorSchemeColor';
+  // Default value for the sliderIndicatorSchemeColor, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSliderIndicatorSchemeColor = null;
+
   // Key used to read and save the sliderValueTinted value.
   static const String keySliderValueTinted = 'sliderValueTinted';
   // Default value for the sliderValueTinted, also to reset settings.
   static const bool defaultSliderValueTinted = false;
+
+  // Key used to read and save the sliderValueIndicatorType value.
+  static const String keySliderValueIndicatorType = 'sliderValueIndicatorType';
+  // Default value for the sliderValueIndicatorType, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const FlexSliderIndicatorType? defaultSliderValueIndicatorType = null;
+
+  // Key used to read and save the sliderShowValueIndicator value.
+  static const String keySliderShowValueIndicator = 'sliderShowValueIndicator';
+  // Default value for the sliderShowValueIndicator, used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const ShowValueIndicator? defaultSliderShowValueIndicator = null;
 
   // Key used to read and save the sliderTrackHeight value.
   static const String keySliderTrackHeight = 'sliderTrackHeight';
@@ -851,7 +1411,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultSliderTrackHeight = null;
 
-  // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
+  // Fab, Chip SnackBar, Popup, Card and Dialog SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the fabUseShape value.
@@ -901,11 +1461,30 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultChipBorderRadius = null;
 
+  // Key used to read and save the snackBarBorderRadius value.
+  static const String keySnackBarBorderRadius = 'snackBarBorderRadius';
+  // Default value for the snackBarBorderRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSnackBarBorderRadius = null;
+
+  // Key used to read and save the snackBarElevation value.
+  static const String keySnackBarElevation = 'snackBarElevation';
+  // Default value for the snackBarElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultSnackBarElevation = null;
+
   // Key used to read and save the snackBarSchemeColor value.
   static const String keySnackBarSchemeColor = 'snackBarSchemeColor';
   // Default value for the snackBarSchemeColor, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSnackBarSchemeColor = null;
+
+  // Key used to read and save the snackBarActionSchemeColor value.
+  static const String keySnackBarActionSchemeColor =
+      'snackBarBackgroundSchemeColor';
+  // Default value for the snackBarActionSchemeColor, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultSnackBarActionSchemeColor = null;
 
   // Key used to read and save the popupMenuSchemeColor value.
   static const String keyPopupMenuSchemeColor = 'popupMenuSchemeColor';
@@ -943,11 +1522,24 @@ class Store {
   // reset settings.
   static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
 
+  // Key used to read and save the useInputDecoratorThemeInDialogs value.
+  static const String keyUseInputDecoratorThemeInDialogs =
+      'useInputDecoratorThemeInDialogs';
+  // Default value for the useInputDecoratorThemeInDialogs, also
+  // used to reset settings.
+  static const bool defaultUseInputDecoratorThemeInDialogs = false;
+
   // Key used to read and save the dialogBorderRadius value.
   static const String keyDialogBorderRadius = 'dialogBorderRadius';
   // Default value for the dialogBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadius = null;
+
+  // Key used to read and save the timePickerElementRadius value.
+  static const String keyTimePickerElementRadius = 'timePickerElementRadius';
+  // Default value for the timePickerElementRadius, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTimePickerElementRadius = null;
 
   // Key used to read and save the dialogElevation value.
   static const String keyDialogElevation = 'dialogElevation';

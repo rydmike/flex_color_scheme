@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app_data.dart';
+import '../../../../shared/const/app.dart';
 import '../../shared/color_scheme_box.dart';
 
 // ignore_for_file: comment_references
@@ -26,7 +26,7 @@ class SurfaceModeToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool showAllModes = media.size.width > AppData.phoneWidthBreakpoint;
+    final bool showAllModes = media.size.width > App.phoneWidthBreakpoint;
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
     final List<bool> isSelected = <bool>[
@@ -150,6 +150,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
+      initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -205,12 +206,15 @@ class SurfaceModePopupMenu extends StatelessWidget {
             Text(styleName),
           ],
         ),
-        trailing: IconTheme(
-          data: selectedIconTheme,
-          child: ColorSchemeBox(
-            backgroundColor: scheme.primary,
-            borderColor: scheme.primary,
-            child: modeWidgets[index],
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: IconTheme(
+            data: selectedIconTheme,
+            child: ColorSchemeBox(
+              backgroundColor: scheme.primary,
+              borderColor: scheme.primary,
+              child: modeWidgets[index],
+            ),
           ),
         ),
       ),

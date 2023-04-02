@@ -32,11 +32,11 @@ void main() {
         ThemeData,
       );
     });
-    // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+    // TODO(rydmike): toString on ThemeData match, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
     //   uses MaterialState or MaterialStateProperty. Verify and report this.
-    //   Investigate first what SDK ThemeData test do, if they even attempt it
+    //   Investigate first what SDK ThemeData tests do, if they even attempt it.
     test(
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
@@ -314,14 +314,12 @@ void main() {
             onBackground: Color(0xff000000),
             surface: Color(0xffffffff),
             onSurface: Color(0xff000000),
-            surfaceVariant: Color(0xffffffff),
+            surfaceVariant: Color(0xFFEEEEEE),
             onSurfaceVariant: Color(0xff000000),
-            outline: Color(0xff4d4d4d),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff999999),
+            outline: Color(0xFF737373),
+            outlineVariant: Color(0xFFBFBFBF),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
             inverseSurface: Color(0xff121212),
             onInverseSurface: Color(0xffffffff),
             inversePrimary: Color(0xffda99ff),
@@ -354,14 +352,12 @@ void main() {
             onBackground: Color(0xffffffff),
             surface: Color(0xff121212),
             onSurface: Color(0xffffffff),
-            surfaceVariant: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -401,29 +397,6 @@ void main() {
     // Test result of some customizations that fixes ThemeData.from color
     // scheme compliance gaps.
     //**************************************************************************
-
-    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
-    // This property is deprecated in Flutter SDK and now excluded from test
-    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
-    //
-    // test(
-    //    'FTD1.07: GIVEN a FlexThemeData.raw theme with Material scheme light '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeLight.toggleableActiveColor,
-    //     themeLight.colorScheme.secondary,
-    //   );
-    // });
-    // test(
-    //     'FTD1.08: GIVEN a FlexThemeData.raw theme with Material scheme dark '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeDark.toggleableActiveColor,
-    //     themeDark.colorScheme.secondary,
-    //   );
-    // });
     test(
         'FTD1.09: GIVEN a FlexThemeData.raw theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -2010,12 +1983,9 @@ void main() {
           ftdLight.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsLightTd,
@@ -2084,6 +2054,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2126,6 +2098,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2179,6 +2153,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2191,12 +2167,9 @@ void main() {
           ftdLight.toString(),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsLightTd,
@@ -2285,6 +2258,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2325,6 +2300,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2374,6 +2351,8 @@ void main() {
         textTheme: myTextTheme,
         primaryTextTheme: myTextTheme,
         fontFamily: 'Roboto',
+        fontFamilyFallback: const <String>['Roboto', 'Arial'],
+        package: 'SansSerif',
         platform: TargetPlatform.android,
         typography: Typography.material2018(platform: TargetPlatform.android),
         applyElevationOverlayColor: true,
@@ -2386,12 +2365,9 @@ void main() {
           fcsDarkTd.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData!
+      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
       // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed. Before there was this issue, but it has
-      // been fixed and landed too:
-      // https://github.com/flutter/flutter/issues/91587
-      //
+      // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
       expect(
         fcsTdDark,
@@ -2640,7 +2616,7 @@ void main() {
       expect(tDAppBarNull.appBarTheme.backgroundColor,
           equals(tDAppBarNull.colorScheme.surface));
     });
-    // AppBar test null style, not using M3.
+    // AppBar test null style, using M3.
     final ThemeData tLAppBarNullM3 = FlexThemeData.light(
       scheme: FlexScheme.flutterDash,
       // appBarStyle: null, // Default value
@@ -2648,9 +2624,8 @@ void main() {
     );
     test(
         'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
-        'and using M3 EXPECT app bar background surface ', () {
-      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
-          equals(tLAppBarNullM3.colorScheme.surface));
+        'and using M3 EXPECT app bar background null ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor, equals(null));
     });
     final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
@@ -2659,9 +2634,8 @@ void main() {
     );
     test(
         'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
-        ' using M3 EXPECT app bar background surface ', () {
-      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
-          equals(tDAppBarNullM3.colorScheme.surface));
+        ' using M3 EXPECT app bar background null ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor, equals(null));
     });
 
     // Test swapLegacyOnMaterial3 when using Material 3 - No swap result

@@ -2,8 +2,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/const/adaptive_theme.dart';
+import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
-import '../../shared/const/app_data.dart';
 import '../../shared/controllers/theme_controller.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
@@ -11,21 +12,47 @@ import '../../shared/controllers/theme_controller.dart';
 ///
 /// The properties are typically in the order they are in the classes.
 String generateThemeDartCode(ThemeController controller) {
-  // If FlexColorsScheme is not in use, return a default M2 ColorScheme based
+  // If FlexColorsScheme is not in use, return a default M3/M2 ColorScheme based
   // theme as a starting point suggestion.
   if (!controller.useFlexColorScheme) {
-    return '''
+    // Are we using Typography 2021 or 2018? M3 defaults to Typo2021 so no need
+    // specify it, but M2 default to even older typ2014 if not specifying 2018.
+    final String usedTypography = controller.useMaterial3
+        ? ''
+        : '  typography: Typography.material2018(platform: defaultTargetPlatform),';
+    if (controller.useMaterial3) {
+      return '''
+  // FlexColorScheme is not in use!
+  // Here is a default Material 3 starting point theme setup for you.
+  //
+  theme: ThemeData(    
+    useMaterial3: true,
+  $usedTypography 
+  ),
+  darkTheme: ThemeData(
+    brightness: Brightness.dark,
+    useMaterial3: true,
+  $usedTypography    
+  ),
+  themeMode: ThemeMode.system,''';
+    } else {
+      return '''
   // FlexColorScheme is not in use!
   // Here is a default Material 2 starting point theme setup for you.
   //
-  theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
-    typography: Typography.material2021(platform: defaultTargetPlatform),
+  theme: ThemeData(
+    colorScheme: const ColorScheme.light(),    
+  $usedTypography
   ),
-  darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()).copyWith(
-    typography: Typography.material2021(platform: defaultTargetPlatform),
+  darkTheme: ThemeData(    
+    colorScheme: const ColorScheme.dark(),
+    applyElevationOverlayColor: true,
+  $usedTypography  
   ),
   themeMode: ThemeMode.system,''';
+    }
   }
+
   // Code for main theme setup, the effective colors setup.
   final FlexSchemeData scheme = AppColor.scheme(controller);
   // Get the enum index of scheme
@@ -115,15 +142,31 @@ String generateThemeDartCode(ThemeController controller) {
   final String transparentStatusBar = controller.transparentStatusBar
       ? ''
       : '  transparentStatusBar: ${controller.transparentStatusBar},\n';
-  final String appBarElevationLight = controller.appBarElevationLight != 0
-      ? '  appBarElevation: ${controller.appBarElevationLight.toStringAsFixed(1)},\n'
+  final String appBarElevationLight = controller.appBarElevationLight != 0 &&
+          controller.appBarElevationLight != null
+      ? '  appBarElevation: ${controller.appBarElevationLight!.toStringAsFixed(1)},\n'
       : '';
-  final String appBarElevationDark = controller.appBarElevationDark != 0
-      ? '  appBarElevation: ${controller.appBarElevationDark.toStringAsFixed(1)},\n'
+  final String appBarElevationDark = controller.appBarElevationDark != 0 &&
+          controller.appBarElevationDark != null
+      ? '  appBarElevation: ${controller.appBarElevationDark!.toStringAsFixed(1)},\n'
       : '';
-  final String tabBarStyle = controller.tabBarStyle != FlexTabBarStyle.forAppBar
-      ? '  tabBarStyle: ${controller.tabBarStyle},\n'
+  final String bottomAppBarElevationLight = controller
+              .bottomAppBarElevationLight !=
+          null
+      ? '  bottomAppBarElevation: ${controller.bottomAppBarElevationLight!.toStringAsFixed(1)},\n'
       : '';
+  final String bottomAppBarElevationDark = controller
+              .bottomAppBarElevationDark !=
+          null
+      ? '  bottomAppBarElevation: ${controller.bottomAppBarElevationDark!.toStringAsFixed(1)},\n'
+      : '';
+  final String tabBarStyle = controller.tabBarStyle == null ||
+          (controller.tabBarStyle == FlexTabBarStyle.forAppBar &&
+              !controller.useMaterial3) ||
+          (controller.tabBarStyle == FlexTabBarStyle.flutterDefault &&
+              controller.useMaterial3)
+      ? ''
+      : '  tabBarStyle: ${controller.tabBarStyle},\n';
   final String lightIsWhite = controller.lightIsWhite
       ? '  lightIsWhite: ${controller.lightIsWhite},\n'
       : '';
@@ -148,14 +191,15 @@ String generateThemeDartCode(ThemeController controller) {
       controller.useM3ErrorColors && !controller.useKeyColors
           ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
           : '';
-  final String useMaterial3 = controller.useMaterial3
-      ? '  useMaterial3: ${controller.useMaterial3},\n'
-      : '';
   final String tintLightColor = controller.surfaceTintLight != null
-      ? '  surfaceTint: ${controller.surfaceTintLight},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintLight},\n'
       : '';
   final String tintDarkColor = controller.surfaceTintDark != null
-      ? '  surfaceTint: ${controller.surfaceTintDark},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintDark},\n'
+      : '';
+  // Are we using Material3?
+  final String useMaterial3 = controller.useMaterial3
+      ? '  useMaterial3: ${controller.useMaterial3},\n'
       : '';
   //
   // Code for FlexSubThemesData setup.
@@ -163,6 +207,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String interactionEffects = controller.interactionEffects
       ? ''
       : '    interactionEffects: ${controller.interactionEffects},\n';
+  final String tintedDisabledControls = controller.tintedDisabledControls
+      ? ''
+      : '    tintedDisabledControls: ${controller.tintedDisabledControls},\n';
   final String blendOnLevelLight =
       controller.blendOnLevel > 0 && !controller.useKeyColors
           ? '    blendOnLevel: ${controller.blendOnLevel},\n'
@@ -180,19 +227,82 @@ String generateThemeDartCode(ThemeController controller) {
           ? ''
           : '    blendOnColors: ${controller.blendDarkOnColors},\n';
   final String blendLightTextTheme = controller.blendLightTextTheme
-      ? ''
-      : '    blendTextTheme: ${controller.blendLightTextTheme},\n';
+      ? '    blendTextTheme: ${controller.blendLightTextTheme},\n'
+      : '';
   final String blendDarkTextTheme = controller.blendDarkTextTheme
-      ? ''
-      : '    blendTextTheme: ${controller.blendDarkTextTheme},\n';
-  final String useTextTheme = controller.useTextTheme
+      ? '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
+      : '';
+  final String useTextTheme = controller.useTextTheme == null ||
+          // ignore: use_if_null_to_convert_nulls_to_bools
+          (controller.useTextTheme == true && controller.useMaterial3) ||
+          (controller.useTextTheme == false && !controller.useMaterial3)
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
+  final String useM2StyleDividerInM3 =
+      controller.useM2StyleDividerInM3 && controller.useMaterial3
+          ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
+          : '';
   final String useFlutterDefaults = controller.useFlutterDefaults
       ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
       : '';
-  final String defRadius = controller.defaultRadius != null
+
+  // Adaptive themes.
+  final String adaptiveRemoveElevationTintLight = controller
+                  .adaptiveRemoveElevationTintLight !=
+              null &&
+          controller.adaptiveRemoveElevationTintLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintLight!.code},\n'
+      : '';
+  final String adaptiveElevationShadowsBackLight = controller
+                  .adaptiveElevationShadowsBackLight !=
+              null &&
+          controller.adaptiveElevationShadowsBackLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackLight!.code},\n'
+      : '';
+  final String adaptiveAppBarScrollUnderOffLight = controller
+                  .adaptiveAppBarScrollUnderOffLight !=
+              null &&
+          controller.adaptiveAppBarScrollUnderOffLight != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffLight!.code},\n'
+      : '';
+  final String adaptiveRemoveElevationTintDark = controller
+                  .adaptiveRemoveElevationTintDark !=
+              null &&
+          controller.adaptiveRemoveElevationTintDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintDark!.code},\n'
+      : '';
+  final String adaptiveElevationShadowsBackDark = controller
+                  .adaptiveElevationShadowsBackDark !=
+              null &&
+          controller.adaptiveElevationShadowsBackDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackDark!.code},\n'
+      : '';
+  final String adaptiveAppBarScrollUnderOffDark = controller
+                  .adaptiveAppBarScrollUnderOffDark !=
+              null &&
+          controller.adaptiveAppBarScrollUnderOffDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffDark!.code},\n'
+      : '';
+
+  // Default radius, it adaptive variant and border widths.
+  final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String defaultRadiusAdaptive = controller.defaultRadiusAdaptive !=
+              null &&
+          controller.adaptiveRadius != null &&
+          controller.adaptiveRadius != AdaptiveTheme.off
+      ? '    defaultRadiusAdaptive: ${controller.defaultRadiusAdaptive!.toStringAsFixed(1)},\n'
+      : '';
+  final String adaptiveRadius = controller.adaptiveRadius != null &&
+          controller.adaptiveRadius != AdaptiveTheme.off
+      ? '    adaptiveRadius: ${controller.adaptiveRadius!.code},\n'
       : '';
   final String thinBorderWidth = controller.thinBorderWidth != null
       ? '    thinBorderWidth: ${controller.thinBorderWidth!.toStringAsFixed(1)},\n'
@@ -208,9 +318,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetElevation = controller.bottomSheetElevation != null
       ? '    bottomSheetElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
       : '';
-  final String bottomSheetModalElevation = controller.bottomSheetElevation !=
+  final String bottomSheetModalElevation = controller
+              .bottomSheetModalElevation !=
           null
-      ? '    bottomSheetModalElevation: ${controller.bottomSheetElevation!.toStringAsFixed(1)},\n'
+      ? '    bottomSheetModalElevation: ${controller.bottomSheetModalElevation!.toStringAsFixed(1)},\n'
       : '';
   final String bottomSheetBackgroundColor = controller.bottomSheetSchemeColor !=
           null
@@ -219,7 +330,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomSheetModalBackgroundColor = controller
               .bottomSheetSchemeColor !=
           null
-      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetSchemeColor},\n'
+      ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetModalSchemeColor},\n'
       : '';
   //
   // Material button sub themes border radius setup CODE.
@@ -227,6 +338,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String textButtonBorderRadius = controller.textButtonBorderRadius !=
           null
       ? '    textButtonRadius: ${controller.textButtonBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String filledButtonBorderRadius = controller.filledButtonBorderRadius !=
+          null
+      ? '    filledButtonRadius: ${controller.filledButtonBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String elevatedButtonBorderRadius = controller
               .elevatedButtonBorderRadius !=
@@ -238,19 +353,19 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    outlinedButtonRadius: ${controller.outlinedButtonBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String toggleButtonsBorderRadius = controller
-              .toggleButtonsBorderRadius !=
-          null
-      ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
-      : '';
   //
-  // Material button sub themes scheme colors setup CODE.
+  // Material buttons sub themes setup CODE.
   //
   final String textButtonSchemeColor =
       controller.textButtonSchemeColor == SchemeColor.primary ||
               controller.textButtonSchemeColor == null
           ? ''
           : '    textButtonSchemeColor: ${controller.textButtonSchemeColor},\n';
+  final String filledButtonSchemeColor = controller.filledButtonSchemeColor ==
+              SchemeColor.primary ||
+          controller.filledButtonSchemeColor == null
+      ? ''
+      : '    filledButtonSchemeColor: ${controller.filledButtonSchemeColor},\n';
   final String elevatedButtonSchemeColor = controller
                   .elevatedButtonSchemeColor ==
               SchemeColor.primary ||
@@ -284,14 +399,64 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    outlinedButtonPressedBorderWidth: ${controller.outlinedButtonPressedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // ToggleButtons sub themes setup CODE.
+  //
   final String toggleButtonsSchemeColor = controller.toggleButtonsSchemeColor ==
-              SchemeColor.primary ||
-          controller.toggleButtonsSchemeColor == null
+          null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
+  final String toggleButtonsUnselectedSchemeColor = controller
+              .toggleButtonsUnselectedSchemeColor ==
+          null
+      ? ''
+      : '    toggleButtonsUnselectedSchemeColor: ${controller.toggleButtonsUnselectedSchemeColor},\n';
+  final String toggleButtonsBorderSchemeColor = controller
+              .toggleButtonsBorderSchemeColor ==
+          null
+      ? ''
+      : '    toggleButtonsBorderSchemeColor: ${controller.toggleButtonsBorderSchemeColor},\n';
+  final String toggleButtonsBorderRadius = controller
+              .toggleButtonsBorderRadius !=
+          null
+      ? '    toggleButtonsRadius: ${controller.toggleButtonsBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String toggleButtonsBorderWidth = controller.toggleButtonsBorderWidth !=
           null
       ? '    toggleButtonsBorderWidth: ${controller.toggleButtonsBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  //
+  // SegmentedButton sub themes setup CODE.
+  //
+  final String segmentedButtonSchemeColor = controller
+              .segmentedButtonSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonSchemeColor: ${controller.segmentedButtonSchemeColor},\n';
+  final String segmentedButtonUnselectedSchemeColor = controller
+              .segmentedButtonUnselectedSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonUnselectedSchemeColor: ${controller.segmentedButtonUnselectedSchemeColor},\n';
+  final String segmentedButtonUnselectedForegroundSchemeColor = controller
+              .segmentedButtonUnselectedForegroundSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonUnselectedForegroundSchemeColor: ${controller.segmentedButtonUnselectedForegroundSchemeColor},\n';
+  final String segmentedButtonBorderSchemeColor = controller
+              .segmentedButtonBorderSchemeColor ==
+          null
+      ? ''
+      : '    segmentedButtonBorderSchemeColor: ${controller.segmentedButtonBorderSchemeColor},\n';
+  final String segmentedButtonBorderRadius = controller
+              .segmentedButtonBorderRadius !=
+          null
+      ? '    segmentedButtonRadius: ${controller.segmentedButtonBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String segmentedButtonBorderWidth = controller
+              .segmentedButtonBorderWidth !=
+          null
+      ? '    segmentedButtonBorderWidth: ${controller.segmentedButtonBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   //
   // Switches, CheckBox and radio sub themes setup CODE.
@@ -318,9 +483,22 @@ String generateThemeDartCode(ThemeController controller) {
   final String sliderBaseSchemeColor = controller.sliderBaseSchemeColor == null
       ? ''
       : '    sliderBaseSchemeColor: ${controller.sliderBaseSchemeColor},\n';
+  final String sliderIndicatorSchemeColor = controller
+              .sliderIndicatorSchemeColor ==
+          null
+      ? ''
+      : '    sliderIndicatorSchemeColor: ${controller.sliderIndicatorSchemeColor},\n';
   final String sliderValueTinted = controller.sliderValueTinted == false
       ? ''
       : '    sliderValueTinted: ${controller.sliderValueTinted},\n';
+  final String sliderValueIndicatorType = controller.sliderValueIndicatorType ==
+          null
+      ? ''
+      : '    sliderValueIndicatorType: ${controller.sliderValueIndicatorType},\n';
+  final String sliderShowValueIndicator = controller.sliderShowValueIndicator ==
+          null
+      ? ''
+      : '    sliderShowValueIndicator: ${controller.sliderShowValueIndicator},\n';
   final String sliderTrackHeight = controller.sliderTrackHeight == null
       ? ''
       : '    sliderTrackHeight: ${controller.sliderTrackHeight},\n';
@@ -328,20 +506,44 @@ String generateThemeDartCode(ThemeController controller) {
   // Input decorator setup CODE.
   //
   final String inputDecoratorSchemeColorLight = controller
-                  .inputDecoratorSchemeColorLight ==
-              SchemeColor.primary ||
-          controller.inputDecoratorSchemeColorLight == null
+              .inputDecoratorSchemeColorLight ==
+          null
       ? ''
       : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorLight},\n';
   final String inputDecoratorSchemeColorDark = controller
-                  .inputDecoratorSchemeColorDark ==
-              SchemeColor.primary ||
-          controller.inputDecoratorSchemeColorDark == null
+              .inputDecoratorSchemeColorDark ==
+          null
       ? ''
       : '    inputDecoratorSchemeColor: ${controller.inputDecoratorSchemeColorDark},\n';
+  final String inputDecoratorBorderSchemeColorLight = controller
+                  .inputDecoratorBorderSchemeColorLight ==
+              null ||
+          (!controller.inputDecoratorFocusedHasBorder &&
+              (!controller.inputDecoratorUnfocusedHasBorder ||
+                  !controller.inputDecoratorUnfocusedBorderIsColored))
+      ? ''
+      : '    inputDecoratorBorderSchemeColor: ${controller.inputDecoratorBorderSchemeColorLight},\n';
+  final String inputDecoratorBorderSchemeColorDark = controller
+                  .inputDecoratorBorderSchemeColorDark ==
+              null ||
+          (!controller.inputDecoratorFocusedHasBorder &&
+              (!controller.inputDecoratorUnfocusedHasBorder ||
+                  !controller.inputDecoratorUnfocusedBorderIsColored))
+      ? ''
+      : '    inputDecoratorBorderSchemeColor: ${controller.inputDecoratorBorderSchemeColorDark},\n';
   final String inputDecoratorIsFilled = controller.inputDecoratorIsFilled
       ? ''
       : '    inputDecoratorIsFilled: ${controller.inputDecoratorIsFilled},\n';
+  final String inputDecoratorBackgroundAlphaLight = controller
+              .inputDecoratorBackgroundAlphaLight ==
+          null
+      ? ''
+      : '    inputDecoratorBackgroundAlpha: ${controller.inputDecoratorBackgroundAlphaLight},\n';
+  final String inputDecoratorBackgroundAlphaDark = controller
+              .inputDecoratorBackgroundAlphaDark ==
+          null
+      ? ''
+      : '    inputDecoratorBackgroundAlpha: ${controller.inputDecoratorBackgroundAlphaDark},\n';
   final String inputDecoratorBorderType = controller.inputDecoratorBorderType ==
           FlexInputBorderType.outline
       ? ''
@@ -355,21 +557,37 @@ String generateThemeDartCode(ThemeController controller) {
           .inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedHasBorder: ${controller.inputDecoratorUnfocusedHasBorder},\n';
+  final String inputDecoratorFocusedHasBorder = controller
+          .inputDecoratorFocusedHasBorder
+      ? ''
+      : '    inputDecoratorFocusedHasBorder: ${controller.inputDecoratorFocusedHasBorder},\n';
   final String inputDecoratorUnfocusedBorderIsColored = controller
               .inputDecoratorUnfocusedBorderIsColored ||
           !controller.inputDecoratorUnfocusedHasBorder
       ? ''
       : '    inputDecoratorUnfocusedBorderIsColored: ${controller.inputDecoratorUnfocusedBorderIsColored},\n';
   final String inputDecoratorBorderWidth = controller
-              .inputDecoratorBorderWidth !=
-          null
+                  .inputDecoratorBorderWidth !=
+              null &&
+          controller.inputDecoratorUnfocusedHasBorder
       ? '    inputDecoratorBorderWidth: ${controller.inputDecoratorBorderWidth!.toStringAsFixed(1)},\n'
       : '';
   final String inputDecoratorFocusedBorderWidth = controller
-              .inputDecoratorFocusedBorderWidth !=
-          null
+                  .inputDecoratorFocusedBorderWidth !=
+              null &&
+          controller.inputDecoratorFocusedHasBorder
       ? '    inputDecoratorFocusedBorderWidth: ${controller.inputDecoratorFocusedBorderWidth!.toStringAsFixed(1)},\n'
       : '';
+  final String inputDecoratorPrefixIconSchemeColor = controller
+              .inputDecoratorPrefixIconSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconSchemeColor},\n';
+  final String inputDecoratorPrefixIconDarkSchemeColor = controller
+              .inputDecoratorPrefixIconDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconDarkSchemeColor},\n';
   //
   // Fab and chip, snack, card, and popup setup CODE
   //
@@ -390,8 +608,20 @@ String generateThemeDartCode(ThemeController controller) {
               controller.fabSchemeColor == null
           ? ''
           : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
-  final String snackSchemeColor = controller.snackBarSchemeColor != null
+  final String snackBarRadius = controller.snackBarBorderRadius != null
+      ? '    snackBarRadius: ${controller.snackBarBorderRadius},\n'
+      : '';
+  final String snackBarElevation = controller.snackBarElevation != null
+      ? '    snackBarElevation: ${controller.snackBarElevation},\n'
+      : '';
+  final String snackBarBackgroundSchemeColor = controller.snackBarSchemeColor !=
+          null
       ? '    snackBarBackgroundSchemeColor: ${controller.snackBarSchemeColor},\n'
+      : '';
+  final String snackBarActionSchemeColor = controller
+              .snackBarActionSchemeColor !=
+          null
+      ? '    snackBarActionSchemeColor: ${controller.snackBarActionSchemeColor},\n'
       : '';
   final String chipSchemeColor = controller.chipSchemeColor != null
       ? '    chipSchemeColor: ${controller.chipSchemeColor},\n'
@@ -443,12 +673,16 @@ String generateThemeDartCode(ThemeController controller) {
           ? ''
           : '    tooltipOpacity: ${controller.tooltipOpacity},\n';
   //
-  // Dialog, AppBar and TabBar setup CODE
+  // Dialogs setup CODE
   //
   final String dialogBackgroundSchemeColor = controller
               .dialogBackgroundSchemeColor !=
           null
       ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n'
+      : '';
+  final String useInputDecoratorThemeInDialogs = controller
+          .useInputDecoratorThemeInDialogs
+      ? '    useInputDecoratorThemeInDialogs: ${controller.useInputDecoratorThemeInDialogs},\n'
       : '';
   final String dialogBorderRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
@@ -456,9 +690,16 @@ String generateThemeDartCode(ThemeController controller) {
   final String timePickerDialogRadius = controller.dialogBorderRadius != null
       ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String timePickerElementRadius = controller.timePickerElementRadius !=
+          null
+      ? '    timePickerElementRadius: ${controller.timePickerElementRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String dialogElevation = controller.dialogElevation != null
       ? '    dialogElevation: ${controller.dialogElevation!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // AppBar setup CODE
+  //
   final String appBarBackgroundSchemeColorLight = controller
               .appBarBackgroundSchemeColorLight !=
           null
@@ -469,10 +710,36 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    appBarBackgroundSchemeColor: ${controller.appBarBackgroundSchemeColorDark},\n'
       : '';
+  final String appBarScrolledUnderElevationLight = controller
+              .appBarScrolledUnderElevationLight !=
+          null
+      ? '    appBarScrolledUnderElevation: ${controller.appBarScrolledUnderElevationLight!.toStringAsFixed(1)},\n'
+      : '';
+  final String appBarScrolledUnderElevationDark = controller
+              .appBarScrolledUnderElevationDark !=
+          null
+      ? '    appBarScrolledUnderElevation: ${controller.appBarScrolledUnderElevationDark!.toStringAsFixed(1)},\n'
+      : '';
+  //
+  // BottomAppBar setup CODE
+  //
+  final String bottomAppBarSchemeColor = controller.bottomAppBarSchemeColor !=
+          null
+      ? '    bottomAppBarSchemeColor: ${controller.bottomAppBarSchemeColor},\n'
+      : '';
+  //
+  // TabBar setup CODE
+  //
   final String tabBarItemSchemeColorLight = controller
               .tabBarItemSchemeColorLight !=
           null
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorLight},\n'
+      : '';
+  final String tabBarUnselectedItemSchemeColorLight = controller
+                  .tabBarUnselectedItemSchemeColorLight !=
+              null &&
+          controller.tabBarItemSchemeColorLight != null
+      ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorLight},\n'
       : '';
   final String tabBarIndicatorSchemeColorLight = controller
               .tabBarIndicatorLight !=
@@ -484,10 +751,84 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    tabBarItemSchemeColor: ${controller.tabBarItemSchemeColorDark},\n'
       : '';
+  final String tabBarUnselectedItemSchemeColorDark = controller
+                  .tabBarUnselectedItemSchemeColorDark !=
+              null &&
+          controller.tabBarItemSchemeColorDark != null
+      ? '    tabBarUnselectedItemSchemeColor: ${controller.tabBarUnselectedItemSchemeColorDark},\n'
+      : '';
   final String tabBarIndicatorSchemeColorDark = controller
               .tabBarIndicatorDark !=
           null
       ? '    tabBarIndicatorSchemeColor: ${controller.tabBarIndicatorDark},\n'
+      : '';
+  final String tabBarUnselectedItemOpacityLight = controller
+              .tabBarUnselectedItemOpacityLight !=
+          null
+      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacityLight!.toStringAsFixed(2)},\n'
+      : '';
+  final String tabBarUnselectedItemOpacityDark = controller
+              .tabBarUnselectedItemOpacityDark !=
+          null
+      ? '    tabBarUnselectedItemOpacity: ${controller.tabBarUnselectedItemOpacityDark!.toStringAsFixed(2)},\n'
+      : '';
+  final String tabBarIndicatorSize = controller.tabBarIndicatorSize != null
+      ? '    tabBarIndicatorSize: ${controller.tabBarIndicatorSize},\n'
+      : '';
+  final String tabBarIndicatorWeight = controller.tabBarIndicatorWeight != null
+      ? '    tabBarIndicatorWeight: ${controller.tabBarIndicatorWeight},\n'
+      : '';
+  final String tabBarIndicatorTopRadius = controller.tabBarIndicatorTopRadius !=
+          null
+      ? '    tabBarIndicatorTopRadius: ${controller.tabBarIndicatorTopRadius},\n'
+      : '';
+  final String tabBarDividerColor = controller.tabBarDividerColor != null
+      ? '    tabBarDividerColor: ${controller.tabBarDividerColor},\n'
+      : '';
+  //
+  // Drawers setup CODE
+  //
+  final String drawerBorderRadius = controller.drawerBorderRadius != null
+      ? '    drawerRadius: ${controller.drawerBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerElevation = controller.drawerElevation != null
+      ? '    drawerElevation: ${controller.drawerElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerBackgroundSchemeColor = controller
+              .drawerBackgroundSchemeColor !=
+          null
+      ? '    drawerBackgroundSchemeColor: ${controller.drawerBackgroundSchemeColor},\n'
+      : '';
+  final String drawerWidth = controller.drawerWidth != null
+      ? '    drawerWidth: ${controller.drawerWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerIndicatorWidth = controller.drawerIndicatorWidth != null
+      ? '    drawerIndicatorWidth: ${controller.drawerIndicatorWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerIndicatorBorderRadius = controller
+              .drawerIndicatorBorderRadius !=
+          null
+      ? '    drawerIndicatorRadius: ${controller.drawerIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerIndicatorSchemeColor = controller
+              .drawerIndicatorSchemeColor !=
+          null
+      ? '    drawerIndicatorSchemeColor: ${controller.drawerIndicatorSchemeColor},\n'
+      : '';
+  final String drawerIndicatorOpacity = controller.drawerIndicatorOpacity !=
+              null &&
+          controller.drawerIndicatorOpacity != 1.0
+      ? '    drawerIndicatorOpacity: ${controller.drawerIndicatorOpacity!.toStringAsFixed(1)},\n'
+      : '';
+  final String drawerSelectedItemSchemeColor = controller
+              .drawerSelectedItemSchemeColor !=
+          null
+      ? '    drawerSelectedItemSchemeColor: ${controller.drawerSelectedItemSchemeColor},\n'
+      : '';
+  final String drawerUnselectedItemSchemeColor = controller
+              .drawerUnselectedItemSchemeColor !=
+          null
+      ? '    drawerUnselectedItemSchemeColor: ${controller.drawerUnselectedItemSchemeColor},\n'
       : '';
   //
   // BottomNavigationBar setup CODE
@@ -539,9 +880,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
-              .bottomNavigationBarElevation !=
-          0
-      ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation.toStringAsFixed(1)},\n'
+                  .bottomNavigationBarElevation !=
+              null &&
+          controller.bottomNavigationBarElevation != 0
+      ? '    bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String bottomNavigationBarShowSelectedLabels = controller
           .bottomNavShowSelectedLabels
@@ -552,12 +894,77 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    bottomNavigationBarShowUnselectedLabels: ${controller.bottomNavShowUnselectedLabels},\n';
   //
+  // Menu and MenuBar setup CODE
+  //
+  final String menuRadius = controller.menuRadius != null
+      ? '    menuRadius: ${controller.menuRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuElevation = controller.menuElevation != null
+      ? '    menuElevation: ${controller.menuElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuSchemeColor = controller.menuSchemeColor != null
+      ? '    menuSchemeColor: ${controller.menuSchemeColor},\n'
+      : '';
+  final String menuOpacity =
+      controller.menuOpacity != null && controller.menuOpacity != 1
+          ? '    menuOpacity: ${controller.menuOpacity!.toStringAsFixed(2)},\n'
+          : '';
+  final String menuPadding = controller.menuPaddingStart != null ||
+          controller.menuPaddingEnd != null ||
+          controller.menuPaddingTop != null ||
+          controller.menuPaddingBottom != null
+      ? '    menuPadding: EdgeInsetsDirectional.fromSTEB('
+          '${controller.menuPaddingStart ?? 0}, '
+          '${controller.menuPaddingTop ?? 0}, '
+          '${controller.menuPaddingEnd ?? 0}, '
+          '${controller.menuPaddingBottom ?? 0}),\n'
+      : '';
+  //
+  final String menuBarBackgroundSchemeColor = controller
+              .menuBarBackgroundSchemeColor !=
+          null
+      ? '    menuBarBackgroundSchemeColor: ${controller.menuBarBackgroundSchemeColor},\n'
+      : '';
+  final String menuBarRadius = controller.menuBarRadius != null
+      ? '    menuBarRadius: ${controller.menuBarRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuBarElevation = controller.menuBarElevation != null
+      ? '    menuBarElevation: ${controller.menuBarElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String menuBarShadowColor = controller.menuBarShadowColor != null
+      ? '    menuBarShadowColor: ${controller.menuBarShadowColor},\n'
+      : '';
+  //
+  final String menuItemBackgroundSchemeColor = controller
+              .menuItemBackgroundSchemeColor !=
+          null
+      ? '    menuItemBackgroundSchemeColor: ${controller.menuItemBackgroundSchemeColor},\n'
+      : '';
+  final String menuItemForegroundSchemeColor = controller
+              .menuItemForegroundSchemeColor !=
+          null
+      ? '    menuItemForegroundSchemeColor: ${controller.menuItemForegroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorBackgroundSchemeColor = controller
+              .menuIndicatorBackgroundSchemeColor !=
+          null
+      ? '    menuIndicatorBackgroundSchemeColor: ${controller.menuIndicatorBackgroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorForegroundSchemeColor = controller
+              .menuIndicatorForegroundSchemeColor !=
+          null
+      ? '    menuIndicatorForegroundSchemeColor: ${controller.menuIndicatorForegroundSchemeColor},\n'
+      : '';
+  final String menuIndicatorRadius = controller.menuIndicatorRadius != null
+      ? '    menuIndicatorRadius: ${controller.menuIndicatorRadius!.toStringAsFixed(1)},\n'
+      : '';
+  //
   // NavigationBar setup CODE
   //
   final String navigationBarSelectedLabelSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navBarSelectedLabelSchemeColor !=
           null
-      ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationBarSelectedLabelSchemeColor: ${controller.navBarSelectedLabelSchemeColor},\n'
       : '';
   final String navigationBarUnselectedLabelSchemeColor = controller
               .navBarUnselectedSchemeColor !=
@@ -569,9 +976,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
   final String navigationBarSelectedIconSchemeColor = controller
-              .navBarSelectedSchemeColor !=
+              .navBarSelectedIconSchemeColor !=
           null
-      ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedSchemeColor},\n'
+      ? '    navigationBarSelectedIconSchemeColor: ${controller.navBarSelectedIconSchemeColor},\n'
       : '';
   final String navigationBarUnselectedIconSchemeColor = controller
               .navBarUnselectedSchemeColor !=
@@ -594,6 +1001,11 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationBarIndicatorOpacity: ${controller.navBarIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
+  final String navigationBarIndicatorRadius = controller
+              .navBarIndicatorBorderRadius !=
+          null
+      ? '    navigationBarIndicatorRadius: ${controller.navBarIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String navigationBarBackgroundSchemeColor = controller
               .navBarBackgroundSchemeColor !=
           null
@@ -603,6 +1015,9 @@ String generateThemeDartCode(ThemeController controller) {
           !(controller.navBarBackgroundSchemeColor == null &&
               controller.useFlutterDefaults)
       ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
+      : '';
+  final String navigationBarElevation = controller.navBarElevation != null
+      ? '    navigationBarElevation: ${controller.navBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationBarHeight = controller.navBarHeight != null
       ? '    navigationBarHeight: ${controller.navBarHeight!.toStringAsFixed(1)},\n'
@@ -615,9 +1030,9 @@ String generateThemeDartCode(ThemeController controller) {
   // NavigationRail setup CODE
   //
   final String navigationRailSelectedLabelSchemeColor = controller
-              .navRailSelectedSchemeColor !=
+              .navRailSelectedLabelSchemeColor !=
           null
-      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedLabelSchemeColor: ${controller.navRailSelectedLabelSchemeColor},\n'
       : '';
   final String navigationRailUnselectedLabelSchemeColor = controller
               .navRailUnselectedSchemeColor !=
@@ -627,14 +1042,14 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationRailMutedUnselectedLabel = controller
               .navRailMuteUnselected ||
           (controller.useFlutterDefaults &&
-              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
   final String navigationRailSelectedIconSchemeColor = controller
-              .navRailSelectedSchemeColor !=
+              .navRailSelectedIconSchemeColor !=
           null
-      ? '    navigationRailSelectedIconSchemeColor: ${controller.navRailSelectedSchemeColor},\n'
+      ? '    navigationRailSelectedIconSchemeColor: ${controller.navRailSelectedIconSchemeColor},\n'
       : '';
   final String navigationRailUnselectedIconSchemeColor = controller
               .navRailUnselectedSchemeColor !=
@@ -644,7 +1059,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationRailMutedUnselectedIcon = controller
               .navRailMuteUnselected ||
           (controller.useFlutterDefaults &&
-              controller.navRailSelectedSchemeColor == null &&
+              controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
@@ -665,6 +1080,11 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationRailIndicatorOpacity: ${controller.navRailIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
+  final String navigationRailIndicatorRadius = controller
+              .navRailIndicatorBorderRadius !=
+          null
+      ? '    navigationRailIndicatorRadius: ${controller.navRailIndicatorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String navigationRailBackgroundSchemeColor = controller
               .navRailBackgroundSchemeColor !=
           null
@@ -675,8 +1095,9 @@ String generateThemeDartCode(ThemeController controller) {
               controller.useFlutterDefaults)
       ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
       : '';
-  final String navigationRailElevation = controller.navigationRailElevation != 0
-      ? '    navigationRailElevation: ${controller.navigationRailElevation.toStringAsFixed(1)},\n'
+  final String navigationRailElevation = controller.navRailElevation != null &&
+          controller.navRailElevation != 0
+      ? '    navigationRailElevation: ${controller.navRailElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationRailLabelType =
       controller.navRailLabelType != NavigationRailLabelType.all
@@ -689,20 +1110,31 @@ String generateThemeDartCode(ThemeController controller) {
   String lightSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$interactionEffects'
+          '$tintedDisabledControls'
           '$blendOnLevelLight'
           '$blendLightOnColors'
           '$useFlutterDefaults'
           //
           '$blendLightTextTheme'
           '$useTextTheme'
+          '$useM2StyleDividerInM3'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
-          '$defRadius'
+          '$adaptiveRemoveElevationTintLight'
+          '$adaptiveElevationShadowsBackLight'
+          '$adaptiveAppBarScrollUnderOffLight'
+          //
+          '$defaultRadius'
+          '$defaultRadiusAdaptive'
+          '$adaptiveRadius'
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
+          //
+          '$filledButtonBorderRadius'
+          '$filledButtonSchemeColor'
           //
           '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
@@ -716,7 +1148,16 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsUnselectedSchemeColor'
+          '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
+          //
+          '$segmentedButtonBorderRadius'
+          '$segmentedButtonSchemeColor'
+          '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonUnselectedForegroundSchemeColor'
+          '$segmentedButtonBorderSchemeColor'
+          '$segmentedButtonBorderWidth'
           //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
@@ -725,17 +1166,24 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
+          '$sliderValueIndicatorType'
+          '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
+          '$inputDecoratorBackgroundAlphaLight'
+          '$inputDecoratorBorderSchemeColorLight'
           '$inputDecoratorBorderType'
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
+          '$inputDecoratorPrefixIconSchemeColor'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
@@ -762,15 +1210,40 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
-          '$timePickerDialogRadius'
           '$dialogElevation'
+          '$useInputDecoratorThemeInDialogs'
+          '$timePickerDialogRadius'
+          '$timePickerElementRadius'
           //
-          '$snackSchemeColor'
+          '$snackBarRadius'
+          '$snackBarElevation'
+          '$snackBarBackgroundSchemeColor'
+          '$snackBarActionSchemeColor'
           //
           '$appBarBackgroundSchemeColorLight'
+          '$appBarScrolledUnderElevationLight'
+          //
+          '$bottomAppBarSchemeColor'
           //
           '$tabBarItemSchemeColorLight'
+          '$tabBarUnselectedItemSchemeColorLight'
+          '$tabBarUnselectedItemOpacityLight'
           '$tabBarIndicatorSchemeColorLight'
+          '$tabBarIndicatorSize'
+          '$tabBarIndicatorWeight'
+          '$tabBarIndicatorTopRadius'
+          '$tabBarDividerColor'
+          //
+          '$drawerBorderRadius'
+          '$drawerElevation'
+          '$drawerBackgroundSchemeColor'
+          '$drawerWidth'
+          '$drawerIndicatorWidth'
+          '$drawerIndicatorBorderRadius'
+          '$drawerIndicatorSchemeColor'
+          '$drawerIndicatorOpacity'
+          '$drawerSelectedItemSchemeColor'
+          '$drawerUnselectedItemSchemeColor'
           //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'
@@ -790,6 +1263,23 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
           //
+          '$menuRadius'
+          '$menuElevation'
+          '$menuSchemeColor'
+          '$menuOpacity'
+          '$menuPadding'
+          //
+          '$menuBarBackgroundSchemeColor'
+          '$menuBarRadius'
+          '$menuBarElevation'
+          '$menuBarShadowColor'
+          //
+          '$menuItemBackgroundSchemeColor'
+          '$menuItemForegroundSchemeColor'
+          '$menuIndicatorBackgroundSchemeColor'
+          '$menuIndicatorForegroundSchemeColor'
+          '$menuIndicatorRadius'
+          //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
           '$navigationBarMutedUnselectedLabel'
@@ -798,8 +1288,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarIndicatorSchemeColor'
           '$navigationBarIndicatorOpacity'
+          '$navigationBarIndicatorRadius'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
           //
@@ -812,6 +1304,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
           '$navigationRailIndicatorOpacity'
+          '$navigationRailIndicatorRadius'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
@@ -822,20 +1315,31 @@ String generateThemeDartCode(ThemeController controller) {
   String darkSubTheme = controller.useSubThemes
       ? '  subThemesData: const FlexSubThemesData(\n'
           '$interactionEffects'
+          '$tintedDisabledControls'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
           '$useFlutterDefaults'
           //
           '$blendDarkTextTheme'
           '$useTextTheme'
+          '$useM2StyleDividerInM3'
           //
-          '$defRadius'
+          '$adaptiveRemoveElevationTintDark'
+          '$adaptiveElevationShadowsBackDark'
+          '$adaptiveAppBarScrollUnderOffDark'
+          //
+          '$defaultRadius'
+          '$defaultRadiusAdaptive'
+          '$adaptiveRadius'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
+          //
+          '$filledButtonBorderRadius'
+          '$filledButtonSchemeColor'
           //
           '$elevatedButtonBorderRadius'
           '$elevatedButtonSchemeColor'
@@ -849,7 +1353,16 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsUnselectedSchemeColor'
+          '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
+          //
+          '$segmentedButtonBorderRadius'
+          '$segmentedButtonSchemeColor'
+          '$segmentedButtonUnselectedSchemeColor'
+          '$segmentedButtonUnselectedForegroundSchemeColor'
+          '$segmentedButtonBorderSchemeColor'
+          '$segmentedButtonBorderWidth'
           //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
@@ -858,17 +1371,24 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
+          '$sliderValueIndicatorType'
+          '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
+          '$inputDecoratorBackgroundAlphaDark'
+          '$inputDecoratorBorderSchemeColorDark'
           '$inputDecoratorBorderType'
           '$inputDecoratorBorderRadius'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
+          '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
+          '$inputDecoratorPrefixIconDarkSchemeColor'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
@@ -895,15 +1415,40 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundSchemeColor'
           '$dialogBorderRadius'
-          '$timePickerDialogRadius'
           '$dialogElevation'
+          '$useInputDecoratorThemeInDialogs'
+          '$timePickerDialogRadius'
+          '$timePickerElementRadius'
           //
-          '$snackSchemeColor'
+          '$snackBarRadius'
+          '$snackBarElevation'
+          '$snackBarBackgroundSchemeColor'
+          '$snackBarActionSchemeColor'
           //
           '$appBarBackgroundSchemeColorDark'
+          '$appBarScrolledUnderElevationDark'
+          //
+          '$bottomAppBarSchemeColor'
           //
           '$tabBarItemSchemeColorDark'
+          '$tabBarUnselectedItemSchemeColorDark'
+          '$tabBarUnselectedItemOpacityDark'
           '$tabBarIndicatorSchemeColorDark'
+          '$tabBarIndicatorSize'
+          '$tabBarIndicatorWeight'
+          '$tabBarIndicatorTopRadius'
+          '$tabBarDividerColor'
+          //
+          '$drawerBorderRadius'
+          '$drawerElevation'
+          '$drawerBackgroundSchemeColor'
+          '$drawerWidth'
+          '$drawerIndicatorWidth'
+          '$drawerIndicatorBorderRadius'
+          '$drawerIndicatorSchemeColor'
+          '$drawerIndicatorOpacity'
+          '$drawerSelectedItemSchemeColor'
+          '$drawerUnselectedItemSchemeColor'
           //
           '$bottomSheetBackgroundColor'
           '$bottomSheetModalBackgroundColor'
@@ -923,6 +1468,23 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
           //
+          '$menuRadius'
+          '$menuElevation'
+          '$menuSchemeColor'
+          '$menuOpacity'
+          '$menuPadding'
+          //
+          '$menuBarBackgroundSchemeColor'
+          '$menuBarRadius'
+          '$menuBarElevation'
+          '$menuBarShadowColor'
+          //
+          '$menuItemBackgroundSchemeColor'
+          '$menuItemForegroundSchemeColor'
+          '$menuIndicatorBackgroundSchemeColor'
+          '$menuIndicatorForegroundSchemeColor'
+          '$menuIndicatorRadius'
+          //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
           '$navigationBarMutedUnselectedLabel'
@@ -931,8 +1493,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarMutedUnselectedIcon'
           '$navigationBarIndicatorSchemeColor'
           '$navigationBarIndicatorOpacity'
+          '$navigationBarIndicatorRadius'
           '$navigationBarBackgroundSchemeColor'
           '$navigationBarOpacity'
+          '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
           //
@@ -945,6 +1509,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailUseIndicator'
           '$navigationRailIndicatorSchemeColor'
           '$navigationRailIndicatorOpacity'
+          '$navigationRailIndicatorRadius'
           '$navigationRailBackgroundSchemeColor'
           '$navigationRailOpacity'
           '$navigationRailElevation'
@@ -1103,12 +1668,11 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = '// This theme was made for FlexColorScheme version '
-      '${AppData.packageVersion}. Make sure\n'
-      '// you use same or higher version, but still same major version. If\n'
-      '// you use a lower version, some properties may not be supported. In\n'
-      '// that case you can also remove them after copying the theme to '
-      'your app.\n'
+  final String code = '// Made for FlexColorScheme version '
+      '${App.packageVersion}. Make sure you\n'
+      '// use same or higher package version, but still same major version.\n'
+      '// If you use a lower version, some properties may not be supported.\n'
+      '// In that case remove them after copying this theme to your app.\n'
       'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
@@ -1118,6 +1682,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarOpacityLight'
       '$transparentStatusBar'
       '$appBarElevationLight'
+      '$bottomAppBarElevationLight'
       '$tabBarStyle'
       '$lightIsWhite'
       '$swapLightColors'
@@ -1142,6 +1707,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$appBarOpacityDark'
       '$transparentStatusBar'
       '$appBarElevationDark'
+      '$bottomAppBarElevationDark'
       '$tabBarStyle'
       '$darkIsTrueBlack'
       '$swapDarkColors'

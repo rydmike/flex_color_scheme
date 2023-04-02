@@ -16,6 +16,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
     this.onChanged,
     this.title,
     this.subtitle,
+    this.colorPrefix = '',
     this.contentPadding,
     this.labelForDefault = 'default (primary)',
     this.popupLabelDefault,
@@ -24,6 +25,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
+  final String colorPrefix;
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
   final String labelForDefault;
   final String? popupLabelDefault;
@@ -43,7 +45,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
         : labelForDefault;
 
     return PopupMenuButton<int>(
-      initialValue: index,
+      initialValue: useDefault ? SchemeColor.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
@@ -70,10 +72,12 @@ class ColorSchemePopupMenu extends StatelessWidget {
                         SchemeColor.values[i],
                         colorScheme,
                       ),
-                selected: i == index,
-                borderColor: i == index
-                    ? theme.colorScheme.onSurface
-                    : theme.dividerColor,
+                selected:
+                    i == index || (index < 0 && i == SchemeColor.values.length),
+                borderColor:
+                    i == index || (index < 0 && i == SchemeColor.values.length)
+                        ? theme.colorScheme.onSurface
+                        : theme.dividerColor,
                 defaultOption: i >= SchemeColor.values.length,
               ),
               title: i >= SchemeColor.values.length
@@ -91,17 +95,20 @@ class ColorSchemePopupMenu extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Color $colorName'),
+            Text('Color $colorPrefix$colorName'),
             if (subtitle != null) subtitle!,
           ],
         ),
-        trailing: ColorSchemeBox(
-          backgroundColor: enabled && !useDefault
-              ? FlexSubThemes.schemeColor(
-                  SchemeColor.values[index], colorScheme)
-              : colorScheme.surface,
-          borderColor: theme.dividerColor,
-          defaultOption: useDefault,
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          child: ColorSchemeBox(
+            backgroundColor: enabled && !useDefault
+                ? FlexSubThemes.schemeColor(
+                    SchemeColor.values[index], colorScheme)
+                : colorScheme.surface,
+            borderColor: theme.dividerColor,
+            defaultOption: useDefault,
+          ),
         ),
       ),
     );

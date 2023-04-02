@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../const/app_data.dart';
+import '../../const/app.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
@@ -48,8 +48,8 @@ class ShowColorSchemeColors extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
@@ -235,25 +235,23 @@ class ShowColorSchemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Outline',
                 color: colorScheme.outline,
-                textColor: colorScheme.background,
+                textColor: _onColor(colorScheme.outline, background),
               ),
-              // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
-              // ColorCard(
-              //   label: 'Outline\nVariant',
-              //   color: colorScheme.outlineVariant,
-              //   textColor: colorScheme.background,
-              // ),
+              ColorCard(
+                label: 'Outline\nVariant',
+                color: colorScheme.outlineVariant,
+                textColor: _onColor(colorScheme.outlineVariant, background),
+              ),
               ColorCard(
                 label: 'Shadow',
                 color: colorScheme.shadow,
                 textColor: _onColor(colorScheme.shadow, background),
               ),
-              // TODO(rydmike): Temporarily removed, not yet in Flutter 3.3.
-              // ColorCard(
-              //   label: 'Scrim',
-              //   color: colorScheme.scrim,
-              //   textColor: _onColor(colorScheme.shadow, background),
-              // ),
+              ColorCard(
+                label: 'Scrim',
+                color: colorScheme.scrim,
+                textColor: _onColor(colorScheme.shadow, background),
+              ),
               ColorCard(
                 label: 'Inverse\nSurface',
                 color: colorScheme.inverseSurface,

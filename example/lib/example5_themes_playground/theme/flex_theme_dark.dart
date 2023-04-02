@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
-import '../../shared/const/app_data.dart';
 import '../../shared/const/flex_tone.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
@@ -32,7 +32,7 @@ ThemeData flexThemeDark(ThemeController controller) {
   // effective ColorScheme and then grab the effective primary color. We then
   // proceed to make an almost identical FlexColorScheme, but with the effective
   // primary color we got as its color, and use it as source color to harmonize
-  // our out custom theme extension colors with it.
+  // our custom theme extension colors with it.
   //
   // The way the M3 seed based color algorithm and the harmonize color functions
   // work. We could actually use our ThemeController `controller` here and get
@@ -55,7 +55,14 @@ ThemeData flexThemeDark(ThemeController controller) {
       flexColorSchemeDark(controller, Colors.black).toScheme.surfaceTint;
   // Now we can use a function that takes our ThemeController and source color,
   // which is the effective primary color, the get the effective ThemeData.
-  return flexColorSchemeDark(controller, source).toTheme;
+  return flexColorSchemeDark(controller, source).toTheme.copyWith(
+        // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
+        // This is a fix to avoid the Flutter Drawer width bug and overflow bug
+        // when it animates via zero width in null default to widget default.
+        drawerTheme: controller.useSubThemes
+            ? null
+            : DrawerThemeData(width: controller.useMaterial3 ? 360 : 304),
+      );
 }
 
 /// Create the FlexColorScheme object represented by our current
@@ -83,17 +90,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
   final int flexScheme = controller.schemeIndex - 3;
   final bool useScheme = useBuiltIn && !controller.useToDarkMethod;
 
-  // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-  // Workaround for issue https://github.com/flutter/flutter/issues/103864.
-  final bool useFakeTypo2018 =
-      (controller.useSubThemes && !controller.useTextTheme) ||
-          (!controller.useSubThemes && !controller.useMaterial3);
-  final TextTheme? fakeM2TypographyTextTheme =
-      useFakeTypo2018 ? AppData.m2TextTheme : null;
-  final Typography alwaysM3Typography =
-      Typography.material2021(platform: controller.platform);
-  // End of fix variables for issue #10386
-
   return FlexColorScheme.dark(
     // Use scheme based config, when we are using a built-in `FlexScheme`
     // based schemes.
@@ -108,6 +104,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     appBarOpacity: controller.appBarOpacityDark,
     transparentStatusBar: controller.transparentStatusBar,
     appBarElevation: controller.appBarElevationDark,
+    bottomAppBarElevation: controller.bottomAppBarElevationDark,
     tabBarStyle: controller.tabBarStyle,
     darkIsTrueBlack: controller.darkIsTrueBlack,
     swapLegacyOnMaterial3: controller.swapLegacyColors,
@@ -118,20 +115,39 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
         ? FlexSubThemesData(
             // Overall effect settings.
             interactionEffects: controller.interactionEffects,
+            tintedDisabledControls: controller.tintedDisabledControls,
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
             useFlutterDefaults: controller.useFlutterDefaults,
+            // Platform adaptive theming feature settings.
+            adaptiveRemoveElevationTint: controller
+                .adaptiveRemoveElevationTintDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveElevationShadowsBack: controller
+                .adaptiveElevationShadowsBackDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveAppBarScrollUnderOff: controller
+                .adaptiveAppBarScrollUnderOffDark
+                ?.setting(controller.fakeIsWeb),
+            adaptiveRadius:
+                controller.adaptiveRadius?.setting(controller.fakeIsWeb),
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,
+            // Divider settings
+            useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
             // Outline default thickness settings.
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
             // Default radius for all widgets, if not null.
             defaultRadius: controller.defaultRadius,
+            defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
             // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
             textButtonSchemeColor: controller.textButtonSchemeColor,
+            // FilledButton settings.
+            filledButtonRadius: controller.filledButtonBorderRadius,
+            filledButtonSchemeColor: controller.filledButtonSchemeColor,
             // ElevatedButton settings.
             elevatedButtonRadius: controller.elevatedButtonBorderRadius,
             elevatedButtonSchemeColor: controller.elevatedButtonSchemeColor,
@@ -148,7 +164,21 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            toggleButtonsUnselectedSchemeColor:
+                controller.toggleButtonsUnselectedSchemeColor,
+            toggleButtonsBorderSchemeColor:
+                controller.toggleButtonsBorderSchemeColor,
             toggleButtonsBorderWidth: controller.toggleButtonsBorderWidth,
+            // SegmentedButtons settings.
+            segmentedButtonRadius: controller.segmentedButtonBorderRadius,
+            segmentedButtonSchemeColor: controller.segmentedButtonSchemeColor,
+            segmentedButtonUnselectedSchemeColor:
+                controller.segmentedButtonUnselectedSchemeColor,
+            segmentedButtonUnselectedForegroundSchemeColor:
+                controller.segmentedButtonUnselectedForegroundSchemeColor,
+            segmentedButtonBorderSchemeColor:
+                controller.segmentedButtonBorderSchemeColor,
+            segmentedButtonBorderWidth: controller.segmentedButtonBorderWidth,
             // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             switchThumbSchemeColor: controller.switchThumbSchemeColor,
@@ -157,20 +187,31 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
             // Slider settings.
             sliderBaseSchemeColor: controller.sliderBaseSchemeColor,
+            sliderIndicatorSchemeColor: controller.sliderIndicatorSchemeColor,
             sliderValueTinted: controller.sliderValueTinted,
+            sliderValueIndicatorType: controller.sliderValueIndicatorType,
+            sliderShowValueIndicator: controller.sliderShowValueIndicator,
             sliderTrackHeight: controller.sliderTrackHeight,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
+            inputDecoratorBorderSchemeColor:
+                controller.inputDecoratorBorderSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
+            inputDecoratorBackgroundAlpha:
+                controller.inputDecoratorBackgroundAlphaDark,
+            inputDecoratorFocusedHasBorder:
+                controller.inputDecoratorFocusedHasBorder,
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,
+            inputDecoratorPrefixIconSchemeColor:
+                controller.inputDecoratorPrefixIconDarkSchemeColor,
             // FAB settings.
             fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,
@@ -201,22 +242,54 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
+            useInputDecoratorThemeInDialogs:
+                controller.useInputDecoratorThemeInDialogs,
             timePickerDialogRadius: controller.dialogBorderRadius,
+            timePickerElementRadius: controller.timePickerElementRadius,
             dialogElevation: controller.dialogElevation,
             // SnackBar settings.
+            snackBarRadius: controller.snackBarBorderRadius,
+            snackBarElevation: controller.snackBarElevation,
             snackBarBackgroundSchemeColor: controller.snackBarSchemeColor,
+            snackBarActionSchemeColor: controller.snackBarActionSchemeColor,
             // AppBar settings.
             appBarBackgroundSchemeColor:
                 controller.appBarBackgroundSchemeColorDark,
+            appBarScrolledUnderElevation:
+                controller.appBarScrolledUnderElevationDark,
+            // BottomAppBarSettings.
+            bottomAppBarSchemeColor: controller.bottomAppBarSchemeColor,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
+            tabBarUnselectedItemSchemeColor:
+                controller.tabBarUnselectedItemSchemeColorDark,
+            tabBarUnselectedItemOpacity:
+                controller.tabBarUnselectedItemOpacityDark,
             tabBarIndicatorSchemeColor: controller.tabBarIndicatorDark,
+            tabBarIndicatorSize: controller.tabBarIndicatorSize,
+            tabBarIndicatorWeight: controller.tabBarIndicatorWeight,
+            tabBarIndicatorTopRadius: controller.tabBarIndicatorTopRadius,
+            tabBarDividerColor: controller.tabBarDividerColor,
+            // Drawer Settings.
+            drawerRadius: controller.drawerBorderRadius,
+            drawerElevation: controller.drawerElevation,
+            drawerBackgroundSchemeColor: controller.drawerBackgroundSchemeColor,
+            drawerWidth: controller.drawerWidth,
+            drawerIndicatorWidth: controller.drawerIndicatorWidth,
+            drawerIndicatorRadius: controller.drawerIndicatorBorderRadius,
+            drawerIndicatorSchemeColor: controller.drawerIndicatorSchemeColor,
+            drawerIndicatorOpacity: controller.drawerIndicatorOpacity,
+            drawerSelectedItemSchemeColor:
+                controller.drawerSelectedItemSchemeColor,
+            drawerUnselectedItemSchemeColor:
+                controller.drawerUnselectedItemSchemeColor,
             // BottomSheet settings.
             bottomSheetBackgroundColor: controller.bottomSheetSchemeColor,
-            bottomSheetModalBackgroundColor: controller.bottomSheetSchemeColor,
+            bottomSheetModalBackgroundColor:
+                controller.bottomSheetModalSchemeColor,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
             bottomSheetElevation: controller.bottomSheetElevation,
-            bottomSheetModalElevation: controller.bottomSheetElevation,
+            bottomSheetModalElevation: controller.bottomSheetModalElevation,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavBarSelectedSchemeColor,
@@ -239,35 +312,64 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
+            // Menu, MenuBar and MenuButton settings.
+            menuRadius: controller.menuRadius,
+            menuElevation: controller.menuElevation,
+            menuSchemeColor: controller.menuSchemeColor,
+            menuOpacity: controller.menuOpacity,
+            menuPadding: EdgeInsetsDirectional.fromSTEB(
+              controller.menuPaddingStart ?? 0,
+              controller.menuPaddingTop ?? 0,
+              controller.menuPaddingEnd ?? 0,
+              controller.menuPaddingBottom ?? 0,
+            ),
+            //
+            menuBarBackgroundSchemeColor:
+                controller.menuBarBackgroundSchemeColor,
+            menuBarRadius: controller.menuBarRadius,
+            menuBarElevation: controller.menuBarElevation,
+            menuBarShadowColor: controller.menuBarShadowColor,
+            //
+            menuItemBackgroundSchemeColor:
+                controller.menuItemBackgroundSchemeColor,
+            menuItemForegroundSchemeColor:
+                controller.menuItemForegroundSchemeColor,
+            menuIndicatorBackgroundSchemeColor:
+                controller.menuIndicatorBackgroundSchemeColor,
+            menuIndicatorForegroundSchemeColor:
+                controller.menuIndicatorForegroundSchemeColor,
+            menuIndicatorRadius: controller.menuIndicatorRadius,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navBarSelectedLabelSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
             navigationBarSelectedIconSchemeColor:
-                controller.navBarSelectedSchemeColor,
+                controller.navBarSelectedIconSchemeColor,
             navigationBarUnselectedIconSchemeColor:
                 controller.navBarUnselectedSchemeColor,
             navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
             navigationBarIndicatorSchemeColor:
                 controller.navBarIndicatorSchemeColor,
             navigationBarIndicatorOpacity: controller.navBarIndicatorOpacity,
+            navigationBarIndicatorRadius:
+                controller.navBarIndicatorBorderRadius,
             navigationBarBackgroundSchemeColor:
                 controller.navBarBackgroundSchemeColor,
             navigationBarOpacity: controller.navBarOpacity,
-            navigationBarElevation: controller.navigationBarElevation,
+            navigationBarElevation: controller.navBarElevation,
             navigationBarHeight: controller.navBarHeight,
             navigationBarLabelBehavior: controller.navBarLabelBehavior,
             // NavigationRail settings.
             navigationRailSelectedLabelSchemeColor:
-                controller.navRailSelectedSchemeColor,
+                controller.navRailSelectedLabelSchemeColor,
             navigationRailUnselectedLabelSchemeColor:
                 controller.navRailUnselectedSchemeColor,
             navigationRailMutedUnselectedLabel:
                 controller.navRailMuteUnselected,
             navigationRailSelectedIconSchemeColor:
-                controller.navRailSelectedSchemeColor,
+                controller.navRailSelectedIconSchemeColor,
             navigationRailUnselectedIconSchemeColor:
                 controller.navRailUnselectedSchemeColor,
             navigationRailMutedUnselectedIcon: controller.navRailMuteUnselected,
@@ -275,10 +377,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationRailIndicatorSchemeColor:
                 controller.navRailIndicatorSchemeColor,
             navigationRailIndicatorOpacity: controller.navRailIndicatorOpacity,
+            navigationRailIndicatorRadius:
+                controller.navRailIndicatorBorderRadius,
             navigationRailBackgroundSchemeColor:
                 controller.navRailBackgroundSchemeColor,
             navigationRailOpacity: controller.navRailOpacity,
-            navigationRailElevation: controller.navigationRailElevation,
+            navigationRailElevation: controller.navRailElevation,
             navigationRailLabelType: controller.navRailLabelType,
           )
         : null,
@@ -304,18 +408,33 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //
-    // ThemeData properties passed along directly to ThemeData.
-    visualDensity: AppData.visualDensity,
-    fontFamily: controller.useAppFont ? AppData.font : null,
+    // Modify the value in the App class to change it.
+    visualDensity: App.visualDensity,
+    //
+    // Custom font, modify in App class to change it.
+    // For demonstration purposes the custom font is defined via Google fonts
+    // both as its fontFamily name and its TextTheme. In the playground we pass
+    // the textTheme to fontFamily and the textTheme to both textTheme and
+    // primaryTextTheme. You can remove either the fontFamily or the
+    // textTheme/primaryTextTheme usage and it will still work fine.
+    // FlexColorScheme will also sort out the right text theme contrasts for
+    // light and dark themes and for the primaryTextTheme to always have right
+    // contrast for whatever primary color is used. FlexColorScheme also retains
+    // the correct opacities on text style if M2 Typography is used, and removes
+    // it from style when M3 Typography is used.
+    fontFamily: controller.useAppFont ? App.font : null,
+    textTheme: controller.useAppFont ? App.textTheme : null,
+    primaryTextTheme: controller.useAppFont ? App.textTheme : null,
+    //
+    // To test manual typography override use this:
+    // typography: Typography.material2021(platform: controller.platform),
+    // Or the one below, the selection will correctly override the via
+    // sub themes "useTextTheme" value.
+    // typography: Typography.material2018(platform: controller.platform),
+    //
+    // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
-    // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-    typography: alwaysM3Typography,
-    // Workaround for issue: https://github.com/flutter/flutter/issues/103864.
-    // TODO(rydmike): Remove when fix for issue #10386 has landed in stable.
-    textTheme: fakeM2TypographyTextTheme,
-    primaryTextTheme: fakeM2TypographyTextTheme,
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(source, Brightness.dark),

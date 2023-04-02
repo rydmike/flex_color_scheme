@@ -12,7 +12,6 @@ void main() {
   // Below we test that its key properties as as expected.
   //****************************************************************************
   group('FCS7: WITH FlexColorScheme.toTheme ', () {
-    debugDefaultTargetPlatformOverride = null;
     TestWidgetsFlutterBinding.ensureInitialized();
 
     test(
@@ -86,14 +85,12 @@ void main() {
       onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
-      surfaceVariant: Color(0xffffffff),
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -138,9 +135,9 @@ void main() {
         'EXPECT its STRING ThemeData to be equal to one made with light '
         'factory and ColorScheme.light v4.2.0 test case.', () {
       expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+          const FlexColorScheme(colorScheme: ColorScheme.light())
+              .toScheme
+              .toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
@@ -151,9 +148,9 @@ void main() {
         'EXPECT its ThemeData to be equal to one made with light factory '
         'and ColorScheme.light v4.2.0 test case.', () {
       expect(
-        const FlexColorScheme(
-          colorScheme: ColorScheme.light(inverseSurface: Color(0xff121212)),
-        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        const FlexColorScheme(colorScheme: ColorScheme.light())
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
             colorScheme: const ColorScheme.light(),
@@ -183,14 +180,12 @@ void main() {
       onBackground: Color(0xffffffff),
       surface: Color(0xff121212),
       onSurface: Color(0xffffffff),
-      surfaceVariant: Color(0xff121212),
+      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Color(0xffffffff),
-      outline: Color(0xffb3b3b3),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outline: Color(0xFF8C8C8C),
+      outlineVariant: Color(0xFF404040),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -250,14 +245,12 @@ void main() {
       colorScheme: ColorScheme(
         errorContainer: Color(0xfff1d8d8),
         onErrorContainer: Color(0xff000000),
-        surfaceVariant: Color(0xffffffff),
+        surfaceVariant: Color(0xFFEEEEEE),
         onSurfaceVariant: Color(0xff000000),
-        outline: Color(0xff4d4d4d),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff999999),
+        outline: Color(0xFF737373),
+        outlineVariant: Color(0xFFBFBFBF),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xff121212),
         onInverseSurface: Color(0xffffffff),
         inversePrimary: Color(0xff9999ff),
@@ -446,14 +439,12 @@ void main() {
       // but cannot be overridden via passed in properties to raw constructor.
       errorContainer: Color(0xfff1d8d8),
       onErrorContainer: Color(0xff000000),
-      surfaceVariant: Color(0xffffffff),
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xff9999ff),
@@ -540,15 +531,14 @@ void main() {
         background: Color(0xff121212),
         onBackground: Colors.white,
         surface: Color(0xff121212),
+        surfaceVariant: Color(0xFF323232),
         onSurface: Colors.white,
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
-        outline: Color(0xffb3b3b3),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff666666),
+        outline: Color(0xFF8C8C8C),
+        outlineVariant: Color(0xFF404040),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
       ),
     );
 
@@ -620,15 +610,14 @@ void main() {
         errorContainer: Color(0xff632331),
         onErrorContainer: Colors.white,
         surface: Color(0xff121212),
+        surfaceVariant: Color(0xFF323232),
         onSurface: Colors.white,
         background: Color(0xff121212),
         onBackground: Colors.white,
-        outline: Color(0xffb3b3b3),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // outlineVariant: Color(0xff666666),
+        outline: Color(0xFF8C8C8C),
+        outlineVariant: Color(0xFF404040),
         shadow: Color(0xff000000),
-        // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-        // scrim: Color(0xff000000),
+        scrim: Color(0xff000000),
         inverseSurface: Color(0xffffffff),
         onInverseSurface: Color(0xff000000),
         inversePrimary: Color(0xff6f5970),
@@ -699,14 +688,12 @@ void main() {
       // but cannot be overridden via passed in properties to raw constructor.
       errorContainer: Color(0xff632331),
       onErrorContainer: Colors.white,
-      surfaceVariant: Color(0xff121212),
+      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Colors.white,
-      outline: Color(0xffb3b3b3),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outline: Color(0xFF8C8C8C),
+      outlineVariant: Color(0xFF404040),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff6f5970),
@@ -788,6 +775,7 @@ void main() {
             tertiary: Color(0xff03dac6),
             tertiaryContainer: Color(0xff03dac6),
             surface: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             background: Color(0xff121212),
             error: Color(0xff9b374d),
             errorContainer: Color(0xff632331),
@@ -799,12 +787,12 @@ void main() {
             onBackground: Colors.white,
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
+            surfaceTint: Color(0xffefb7ff),
+            inverseSurface: Colors.white,
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -831,7 +819,6 @@ void main() {
         ),
       );
     });
-
     test(
         'FCS7.19-ThemeData-hc-dark: GIVEN FlexColorScheme() made with '
         'raw high contrast dark color scheme '
@@ -848,6 +835,7 @@ void main() {
             tertiary: Color(0xff03dac6),
             tertiaryContainer: Color(0xff03dac6),
             surface: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             background: Color(0xff121212),
             error: Color(0xff9b374d),
             errorContainer: Color(0xff632331),
@@ -859,12 +847,12 @@ void main() {
             onBackground: Colors.white,
             onError: Colors.white,
             onErrorContainer: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             shadow: Color(0xff000000),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // scrim: Color(0xff000000),
+            scrim: Color(0xff000000),
+            surfaceTint: Color(0xffefb7ff),
+            inverseSurface: Colors.white,
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff6f5970),
           ),
@@ -1229,10 +1217,10 @@ void main() {
       background: Colors.white,
       onBackground: Colors.black,
       surface: Colors.white,
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurface: Colors.black,
-      outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -1288,11 +1276,10 @@ void main() {
             onBackground: Color(0xffffffff),
             surface: Color(0xff121212),
             onSurface: Color(0xffffffff),
-            surfaceVariant: Color(0xff121212),
+            surfaceVariant: Color(0xFF323232),
             onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xffb3b3b3),
-            // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-            // outlineVariant: Color(0xff666666),
+            outline: Color(0xFF8C8C8C),
+            outlineVariant: Color(0xFF404040),
             inverseSurface: Color(0xffffffff),
             onInverseSurface: Color(0xff000000),
             inversePrimary: Color(0xff5a4570),
@@ -1342,28 +1329,6 @@ void main() {
     // scheme compliance gaps.
     //**************************************************************************
 
-    // TODO(rydmike): May need new tests for deprecated toggleableActiveColor.
-    // This property is deprecated in Flutter SDK and now excluded from test
-    // [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972)
-    //
-    // test(
-    //     'FCS7.07: GIVEN a FlexColorScheme theme with Material scheme light '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeLight.toggleableActiveColor,
-    //     equals(themeLight.colorScheme.secondary),
-    //   );
-    // });
-    // test(
-    //     'FCS7.08: GIVEN a FlexColorScheme theme with Material scheme dark '
-    //     'colors EXPECT toggleableActiveColor equality with '
-    //     'colorScheme.secondary.', () {
-    //   expect(
-    //     themeDark.toggleableActiveColor,
-    //     equals(themeDark.colorScheme.secondary),
-    //   );
-    // });
     test(
         'FCS7.09: GIVEN a FlexColorScheme theme with Material scheme light '
         'colors EXPECT primaryColorDark equality with '
@@ -2016,11 +1981,11 @@ void main() {
           brightness: Brightness.light,
           primary: Color(0xffcd5758),
           onPrimary: Color(0xffffffff),
-          primaryContainer: Color(0xffebbbbc),
+          primaryContainer: Color(0xfff4dbdb),
           onPrimaryContainer: Color(0xff000000),
           secondary: Color(0xff57c8d3),
           onSecondary: Color(0xff000000),
-          secondaryContainer: Color(0xffbbe9ed),
+          secondaryContainer: Color(0xffbcf5fa),
           onSecondaryContainer: Color(0xff000000),
           tertiary: Color(0xfff37d7e),
           onTertiary: Color(0xff000000),
@@ -2035,27 +2000,27 @@ void main() {
           //
           errorContainer: Color(0xfff1d8d8),
           onErrorContainer: Color(0xff000000),
-          surfaceVariant: Color(0xfff7e9e9),
+          surfaceVariant: Color(0xffeadcdc),
           onSurfaceVariant: Color(0xff000000),
-          outline: Color(0xff4d4d4d),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff999999),
+          outline: Color(0xFF737373),
+          outlineVariant: Color(0xFFBFBFBF),
           shadow: Color(0xff000000),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xff1b1414),
           onInverseSurface: Color(0xffffffff),
           inversePrimary: Color(0xfffff0f0),
         ),
         surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
-        blendLevel: 30,
+        // The 30 blend level will be produced by the colors given here
+        // with 0 blend level
+        blendLevel: 0,
         primary: const Color(0xffcd5758),
         onPrimary: const Color(0xffffffff),
-        primaryContainer: const Color(0xffebbbbc),
+        primaryContainer: const Color(0xfff4dbdb),
         onPrimaryContainer: const Color(0xff000000),
         secondary: const Color(0xff57c8d3),
         onSecondary: const Color(0xff000000),
-        secondaryContainer: const Color(0xffbbe9ed),
+        secondaryContainer: const Color(0xffbcf5fa),
         onSecondaryContainer: const Color(0xff000000),
         tertiary: const Color(0xfff37d7e),
         onTertiary: const Color(0xff000000),
@@ -2070,8 +2035,8 @@ void main() {
         //
         tabBarStyle: FlexTabBarStyle.forBackground,
         appBarBackground: const Color(0xfffaf3f3),
-        appBarElevation: 0,
-        bottomAppBarElevation: 0,
+        appBarElevation: null,
+        bottomAppBarElevation: null,
         tooltipsMatchBackground: false,
         transparentStatusBar: true,
         visualDensity: null,
@@ -2106,12 +2071,82 @@ void main() {
         ),
       );
     });
+    const FlexColorScheme fcsLightH2RealRaw = FlexColorScheme(
+        colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xffcd5758),
+            onPrimary: Color(0xffffffff),
+            primaryContainer: Color(0xfff4dbdb),
+            onPrimaryContainer: Color(0xff000000),
+            secondary: Color(0xff57c8d3),
+            onSecondary: Color(0xff000000),
+            secondaryContainer: Color(0xffbcf5fa),
+            onSecondaryContainer: Color(0xff000000),
+            tertiary: Color(0xfff37d7e),
+            onTertiary: Color(0xff000000),
+            tertiaryContainer: Color(0xfffdf0f0),
+            onTertiaryContainer: Color(0xff000000),
+            error: Color(0xff790000),
+            onError: Color(0xffffffff),
+            background: Color(0xfffaf3f3),
+            onBackground: Color(0xff000000),
+            surface: Color(0xfffaf3f3),
+            onSurface: Color(0xff000000),
+            //
+            errorContainer: Color(0xfff1d8d8),
+            onErrorContainer: Color(0xff000000),
+            surfaceVariant: Color(0xffeadcdc),
+            onSurfaceVariant: Color(0xff000000),
+            outline: Color(0xFF737373),
+            outlineVariant: Color(0xFFBFBFBF),
+            shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
+            inverseSurface: Color(0xff1b1414),
+            onInverseSurface: Color(0xffffffff),
+            inversePrimary: Color(0xfffff0f0),
+            surfaceTint: Color(0xffcd5758)),
+        primary: Color(0xffcd5758),
+        onPrimary: Color(0xffffffff),
+        primaryContainer: Color(0xfff4dbdb),
+        onPrimaryContainer: Color(0xff000000),
+        secondary: Color(0xff57c8d3),
+        onSecondary: Color(0xff000000),
+        secondaryContainer: Color(0xffbcf5fa),
+        onSecondaryContainer: Color(0xff000000),
+        tertiary: Color(0xfff37d7e),
+        onTertiary: Color(0xff000000),
+        tertiaryContainer: Color(0xfffdf0f0),
+        onTertiaryContainer: Color(0xff000000),
+        error: Color(0xff790000),
+        onError: Color(0xffffffff),
+        background: Color(0xfffaf3f3),
+        onBackground: Color(0xff000000),
+        surface: Color(0xfffaf3f3),
+        onSurface: Color(0xff000000),
+        //
+        brightness: Brightness.light,
+        tabBarStyle: FlexTabBarStyle.forBackground,
+        appBarBackground: Color(0xfffaf3f3),
+        dialogBackground: Color(0xfffaf3f3),
+        scaffoldBackground: Color(0xffecc2c2),
+        appBarElevation: null,
+        bottomAppBarElevation: null,
+        tooltipsMatchBackground: false,
+        transparentStatusBar: true,
+        visualDensity: null,
+        textTheme: null,
+        primaryTextTheme: null,
+        fontFamily: null,
+        platform: null,
+        typography: null,
+        applyElevationOverlayColor: true,
+        subThemesData: null);
     test(
         'FCS7.79c-string: GIVEN a Equal Raw and FlexColorScheme.light with '
         'heavy branding and 2 colors EXPECT equal toStrings.', () {
       expect(
         fcsLightH2.toString(),
-        equalsIgnoringHashCodes(fcsLightH2Raw.toString()),
+        equalsIgnoringHashCodes(fcsLightH2RealRaw.toString()),
       );
     });
     test(
@@ -2119,7 +2154,7 @@ void main() {
         'heavy branding and 2 colors EXPECT equal objects.', () {
       expect(
         fcsLightH2,
-        equals(fcsLightH2Raw),
+        equals(fcsLightH2RealRaw),
       );
     });
     test(
@@ -2128,7 +2163,7 @@ void main() {
       expect(
         fcsLightH2.toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-            fcsLightH2Raw.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+            fcsLightH2RealRaw.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -2149,11 +2184,11 @@ void main() {
           brightness: Brightness.dark,
           primary: Color(0xffda8585),
           onPrimary: Color(0xffffffff),
-          primaryContainer: Color(0xff573535),
+          primaryContainer: Color(0xff5f3232),
           onPrimaryContainer: Color(0xffffffff),
           secondary: Color(0xff68cdd7),
           onSecondary: Color(0xff000000),
-          secondaryContainer: Color(0xff295256),
+          secondaryContainer: Color(0xff14464b),
           onSecondaryContainer: Color(0xffffffff),
           tertiary: Color(0xffffabab),
           onTertiary: Color(0xff000000),
@@ -2168,25 +2203,23 @@ void main() {
           //
           errorContainer: Color(0xffb1384e),
           onErrorContainer: Color(0xffffffff),
-          surfaceVariant: Color(0xff191313),
+          surfaceVariant: Color(0xff372f2f),
           onSurfaceVariant: Color(0xffffffff),
-          outline: Color(0xffb3b3b3),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff666666),
+          outline: Color(0xFF8C8C8C),
+          outlineVariant: Color(0xFF404040),
           shadow: Color(0xff000000),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Color(0xff000000),
+          scrim: Color(0xff000000),
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Color(0xff000000),
           inversePrimary: Color(0xff644141),
         ),
         primary: Color(0xffda8585),
         onPrimary: Color(0xffffffff),
-        primaryContainer: Color(0xff573535),
+        primaryContainer: Color(0xff5f3232),
         onPrimaryContainer: Color(0xffffffff),
         secondary: Color(0xff68cdd7),
         onSecondary: Color(0xff000000),
-        secondaryContainer: Color(0xff295256),
+        secondaryContainer: Color(0xff14464b),
         onSecondaryContainer: Color(0xffffffff),
         tertiary: Color(0xffffabab),
         onTertiary: Color(0xff000000),
@@ -2203,8 +2236,6 @@ void main() {
         appBarBackground: Color(0xff191313),
         dialogBackground: Color(0xff0e0c0c),
         tabBarStyle: FlexTabBarStyle.forBackground,
-        appBarElevation: 0,
-        bottomAppBarElevation: 0,
         tooltipsMatchBackground: false,
         transparentStatusBar: true,
         visualDensity: null,
@@ -2302,8 +2333,6 @@ void main() {
     // highBackgroundLowScaffold to hit background red color less than surface.
     //**************************************************************************
 
-    // TODO(rydmike): Improve tests by adding more results verification checks.
-
     final ThemeData tLightHb = FlexColorScheme.light(
       scheme: FlexScheme.red,
       surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
@@ -2333,11 +2362,13 @@ void main() {
       expect(tLightHb.indicatorColor, tLightHb.colorScheme.secondary);
     });
 
-    final RoundedRectangleBorder shapeL =
-        tLightHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+    final RoundedRectangleBorder? shapeL =
+        tLightHb.popupMenuTheme.shape as RoundedRectangleBorder?;
 
-    test('FCS7.82-3L shape: Expect border radius 8', () {
-      expect(shapeL.borderRadius, BorderRadius.circular(8.0));
+    test(
+        'FCS7.82-3L shape: Expect border radius null on popup menu does not '
+        'follow default radius', () {
+      expect(shapeL?.borderRadius, null);
     });
 
     final ThemeData tDarkHb = FlexColorScheme.dark(
@@ -2369,15 +2400,15 @@ void main() {
       expect(tDarkHb.indicatorColor, tDarkHb.colorScheme.error);
     });
 
-    final RoundedRectangleBorder shapeD =
-        tDarkHb.popupMenuTheme.shape! as RoundedRectangleBorder;
+    final RoundedRectangleBorder? shapeD =
+        tDarkHb.popupMenuTheme.shape as RoundedRectangleBorder?;
     final RoundedRectangleBorder shapeD2 =
         tDarkHb.cardTheme.shape! as RoundedRectangleBorder;
 
     test(
-        'FCS7.82-3D shape: Expect border radius 10 on popup, it '
-        'does not higher via default parameter', () {
-      expect(shapeD.borderRadius, BorderRadius.circular(10.0));
+        'FCS7.82-3D shape: Expect border radius null on popup, it '
+        'does not follow default radius', () {
+      expect(shapeD?.borderRadius, null);
     });
     test('FCS7.82-4D shape: Expect border radius 12 on card', () {
       expect(shapeD2.borderRadius, BorderRadius.circular(12.0));
@@ -2785,26 +2816,24 @@ void main() {
     // AppBar test null style, not using M3.
     test(
         'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
-        'and using M3 EXPECT app bar background surface ', () {
+        'and using M3 EXPECT app bar background null ', () {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(
-          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
+      expect(theme.appBarTheme.backgroundColor, equals(null));
     });
     // AppBar test null style, using M3.
     test(
         'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
-        ' using M3 EXPECT app bar background surface ', () {
+        ' using M3 EXPECT app bar background null ', () {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(
-          theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
+      expect(theme.appBarTheme.backgroundColor, equals(null));
     });
     // AppBar test null style, not using M3.
     test(
@@ -3040,10 +3069,9 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 1);
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surface, scheme.surfaceTint, 2);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      final Color bottomSheetColor = refTheme.colorScheme.surface;
+      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3146,10 +3174,9 @@ void main() {
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetColor = ElevationOverlay.applySurfaceTint(
-          scheme.onPrimary, scheme.surfaceTint, 6);
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      final Color bottomSheetColor = refTheme.colorScheme.surface;
+      final Color bottomSheetModalColor = refTheme.colorScheme.surfaceVariant;
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3199,8 +3226,8 @@ void main() {
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
-      final Color bottomSheetModalColor = ElevationOverlay.applySurfaceTint(
-          scheme.surfaceVariant, scheme.surfaceTint, 10);
+      final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
+      final Color bottomSheetModalColor = refTheme.colorScheme.surfaceVariant;
       expect(
         theme.bottomSheetTheme.modalBackgroundColor,
         equals(bottomSheetModalColor),
@@ -3249,13 +3276,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.shape,
-        equals(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-        ),
+        equals(null),
       );
     });
     // Test default PopupMenu theming, light M3
@@ -3269,12 +3290,9 @@ void main() {
         useMaterial3: true,
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
-      // TODO(rydmike): Temp M3 tint fix, will be null when M3 supported by SDK.
-      final Color background = ElevationOverlay.applySurfaceTint(
-          theme.colorScheme.surface, theme.colorScheme.surfaceTint, 3);
       expect(
         theme.popupMenuTheme.color,
-        equals(background),
+        equals(null),
       );
       expect(
         theme.popupMenuTheme.elevation,
@@ -3286,13 +3304,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.shape,
-        equals(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(4.0),
-            ),
-          ),
-        ),
+        equals(null),
       );
     });
     // Test custom PopupMenu theming, with default background, light M2.
@@ -3318,8 +3330,8 @@ void main() {
         equals(5.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.black),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3346,11 +3358,8 @@ void main() {
           popupMenuOpacity: 0.9,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surface.withOpacity(0.9),
-        theme.colorScheme.surfaceTint,
-        6,
-      );
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      final Color background = refTheme.colorScheme.surface.withOpacity(0.9);
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3360,8 +3369,8 @@ void main() {
         equals(6.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.black),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3400,8 +3409,8 @@ void main() {
         equals(12),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3431,11 +3440,9 @@ void main() {
           popupMenuSchemeColor: SchemeColor.surfaceVariant,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surfaceVariant.withOpacity(0.8),
-        theme.colorScheme.surfaceTint,
-        2,
-      );
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      final Color background =
+          refTheme.colorScheme.surfaceVariant.withOpacity(0.8);
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3445,8 +3452,8 @@ void main() {
         equals(2.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3475,17 +3482,19 @@ void main() {
           popupMenuSchemeColor: SchemeColor.primaryContainer,
         ),
       ).toTheme;
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      final Color background = refTheme.colorScheme.primaryContainer;
       expect(
         theme.popupMenuTheme.color,
-        equals(theme.colorScheme.primaryContainer),
+        equals(background),
       );
       expect(
         theme.popupMenuTheme.elevation,
         equals(12),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3514,11 +3523,8 @@ void main() {
           popupMenuSchemeColor: SchemeColor.surfaceVariant,
         ),
       ).toTheme;
-      final Color background = ElevationOverlay.applySurfaceTint(
-        theme.colorScheme.surfaceVariant,
-        theme.colorScheme.surfaceTint,
-        2,
-      );
+      final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
+      final Color background = refTheme.colorScheme.surfaceVariant;
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3528,8 +3534,8 @@ void main() {
         equals(2.0),
       );
       expect(
-        theme.popupMenuTheme.textStyle,
-        equals(null),
+        theme.popupMenuTheme.textStyle?.color,
+        equals(Colors.white),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3679,7 +3685,7 @@ void main() {
             ?.resolve(<MaterialState>{MaterialState.focused})?.width,
         equals(1),
       );
-      // OutlinedButton thick widths, Material 3 has own default of 1!!
+      // OutlinedButton thick widths.
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<MaterialState>{MaterialState.error})?.width,
@@ -3928,22 +3934,22 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       expect(
-          theme.sliderTheme,
-          equals(
+          theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
+          equalsIgnoringHashCodes(
             const SliderThemeData(
               activeTrackColor: Color(0xff6750a4),
               inactiveTrackColor: Color(0x3d6750a4),
-              disabledActiveTrackColor: Color(0x52000000),
+              disabledActiveTrackColor: Color(0x61292041),
               disabledInactiveTrackColor: Color(0x1f000000),
               activeTickMarkColor: Color(0x8affffff),
               inactiveTickMarkColor: Color(0x8a6750a4),
               disabledActiveTickMarkColor: Color(0x1fffffff),
               disabledInactiveTickMarkColor: Color(0x1f000000),
               thumbColor: Color(0xff6750a4),
-              disabledThumbColor: Color(0xff9e9e9e),
-              overlayColor: Color(0x1f6750a4),
+              disabledThumbColor: Color(0xffadaab6),
+              overlayColor: Color(0x00000000),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
-            ),
+            ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
     // Test default Slider theming, dark M2
@@ -3957,22 +3963,22 @@ void main() {
         subThemesData: const FlexSubThemesData(),
       ).toTheme;
       expect(
-          theme.sliderTheme,
-          equals(
+          theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
+          equalsIgnoringHashCodes(
             const SliderThemeData(
               activeTrackColor: Color(0xffd0bcff),
               inactiveTrackColor: Color(0x3dd0bcff),
-              disabledActiveTrackColor: Color(0x52ffffff),
+              disabledActiveTrackColor: Color(0x61ece4ff),
               disabledInactiveTrackColor: Color(0x1fffffff),
               activeTickMarkColor: Color(0x8a000000),
               inactiveTickMarkColor: Color(0x8ad0bcff),
               disabledActiveTickMarkColor: Color(0x1f000000),
               disabledInactiveTickMarkColor: Color(0x1fffffff),
               thumbColor: Color(0xffd0bcff),
-              disabledThumbColor: Color(0xff6c6c6c),
-              overlayColor: Color(0x1fd0bcff),
+              disabledThumbColor: Color(0xff64616c),
+              overlayColor: Color(0x00000000),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
-            ),
+            ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
     test(
@@ -4041,23 +4047,22 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color:
-                  FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.light)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4074,23 +4079,22 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color:
-                  FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.black)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.black),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.black),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4108,24 +4112,24 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color: FlexColor.darkSurface
-                  .blendAlpha(colorScheme.primary, 0x28)
-                  .withAlpha(0xF2),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface
+                .blendAlpha(colorScheme.primary, 0x28)
+                .withAlpha(0xF2),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4144,24 +4148,24 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            decoration: BoxDecoration(
-              color: FlexColor.darkSurface
-                  .blendAlpha(colorScheme.primary, 0x28)
-                  .withAlpha(0xF2),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.white)
-                .copyWith(fontSize: 14)
-                .copyWith(color: Colors.white),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: FlexColor.darkSurface
+                .blendAlpha(colorScheme.primary, 0x28)
+                .withAlpha(0xF2),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
       );
     });
     test(
@@ -4183,25 +4187,31 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
-        theme.tooltipTheme.toString(),
-        equalsIgnoringHashCodes(
-          TooltipThemeData(
-            waitDuration: const Duration(seconds: 1),
-            showDuration: const Duration(milliseconds: 2500),
-            decoration: BoxDecoration(
-              color: colorScheme.tertiaryContainer
-                  .withAlpha(Color.getAlphaFromOpacity(0.5)),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: Border.all(color: theme.dividerColor),
-            ),
-            textStyle: ThemeData(brightness: Brightness.dark)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: colorScheme.onTertiaryContainer)
-                .copyWith(fontSize: 14)
-                .copyWith(color: colorScheme.onTertiaryContainer),
-          ).toString(),
+        theme.tooltipTheme.decoration,
+        equals(
+          BoxDecoration(
+            color: colorScheme.tertiaryContainer
+                .withAlpha(Color.getAlphaFromOpacity(0.5)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            border: Border.all(color: theme.dividerColor),
+          ),
         ),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.color,
+        equals(Colors.white),
+      );
+      expect(
+        theme.tooltipTheme.textStyle!.fontSize,
+        equals(14),
+      );
+      expect(
+        theme.tooltipTheme.waitDuration,
+        const Duration(seconds: 1),
+      );
+      expect(
+        theme.tooltipTheme.showDuration,
+        const Duration(milliseconds: 2500),
       );
     });
     // Test FlexKeys noOnMainsTint and noOnSurfacesTint
@@ -4263,5 +4273,1067 @@ void main() {
       expect(scheme.onSurfaceVariant, Colors.white);
       expect(scheme.onInverseSurface, Colors.black);
     });
+    test(
+        'FCS7.107a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(const Color(0x1F000000)),
+      );
+      expect(
+        theme.dividerColor,
+        equals(const Color(0x1F000000)),
+      );
+    });
+    test(
+        'FCS7.107b GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(const Color(0x1FFFFFFF)),
+      );
+      expect(
+        theme.dividerColor,
+        equals(const Color(0x1FFFFFFF)),
+      );
+    });
+    test(
+        'FCS7.107c GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and a using M2 style divider '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: false,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.dividerTheme.color,
+        equals(null),
+      );
+      expect(
+        theme.dividerColor,
+        equals(colorScheme.outlineVariant),
+      );
+    });
+    test(
+        'FCS7.108a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter default TabBar '
+        'EXPECT M2 divider theme color in M3', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        tabBarStyle: FlexTabBarStyle.flutterDefault,
+        subThemesData: const FlexSubThemesData(
+          useM2StyleDividerInM3: true,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        theme.tabBarTheme.labelColor,
+        equals(colorScheme.primary),
+      );
+    });
+    test(
+        'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter Slider with baseSchemeColor secondaryContainer '
+        'EXPECT slider and indicator of secondaryContainer', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          sliderBaseSchemeColor: SchemeColor.secondaryContainer,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(colorScheme.secondaryContainer),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(colorScheme.secondaryContainer),
+      );
+      expect(
+        theme.sliderTheme.thumbColor,
+        equals(colorScheme.secondaryContainer),
+      );
+    });
+    test(
+        'FCS7.109a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using Flutter Slider with baseSchemeColor primaryContainer '
+        'and sliderIndicatorSchemeColor inversePrimary '
+        'EXPECT slider primaryContainer and indicator of inversePrimary', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        subThemesData: const FlexSubThemesData(
+          sliderBaseSchemeColor: SchemeColor.primaryContainer,
+          sliderIndicatorSchemeColor: SchemeColor.inversePrimary,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.sliderTheme.valueIndicatorColor,
+        equals(colorScheme.inversePrimary),
+      );
+      expect(
+        theme.sliderTheme.activeTrackColor,
+        equals(colorScheme.primaryContainer),
+      );
+      expect(
+        theme.sliderTheme.thumbColor,
+        equals(colorScheme.primaryContainer),
+      );
+    });
+    test(
+        'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme but bottomAppBarElevation 2 '
+        'EXPECT bottom appbar theme with elevation 2', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        bottomAppBarElevation: 2,
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.bottomAppBarTheme.elevation,
+        equals(2),
+      );
+    });
+    test(
+        'FCS7.110a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme and bottomAppBar elevation none', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+      );
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.bottomAppBarTheme.elevation,
+        equals(null),
+      );
+    });
+    test(
+        'FCS7.111a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111b GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with primary opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111c GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111d GIVEN a FlexColorScheme.dark with useMaterial3:true '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with surface opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.surface.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111e GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.5 '
+        'EXPECT bottom appbar background with primary opacity 0.5', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        colors: const FlexSchemeColor(
+          primary: Colors.blue,
+          secondary: Colors.red,
+        ),
+        useMaterial3: false,
+        appBarOpacity: 0.5,
+        appBarStyle: FlexAppBarStyle.custom,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+    });
+    test(
+        'FCS7.111f GIVEN a FlexColorScheme.dark with useMaterial3:false '
+        'and using not using subTheme but appBarOpacity 0.6 '
+        'EXPECT bottom appbar background with primary opacity 0.6', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        colors: const FlexSchemeColor(
+          primary: Colors.blue,
+          secondary: Colors.red,
+        ),
+        useMaterial3: false,
+        appBarOpacity: 0.6,
+        appBarStyle: FlexAppBarStyle.custom,
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      expect(
+        theme.appBarTheme.backgroundColor,
+        equals(colorScheme.primary.withOpacity(0.6)),
+      );
+    });
+    test(
+        'FCS7.112a GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and removing tint and adding shadows '
+        'EXPECT given sub themes with tint removed and shadow added on sub '
+        'themes', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.android,
+        subThemesData: const FlexSubThemesData(
+          adaptiveRemoveElevationTint: FlexAdaptive.all(),
+          adaptiveElevationShadowsBack: FlexAdaptive.all(),
+          adaptiveAppBarScrollUnderOff: FlexAdaptive.all(),
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112b GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint adaptive and shadow '
+        'adaptive on sub themes on iOS platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.iOS,
+        subThemesData: const FlexSubThemesData(
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        // Tint is kept on AppBar when using adaptiveRemoveElevationTint
+        equals(null),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+        // don't use it otherwise either on native AppBars
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112c GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint adaptive and shadow '
+        'adaptive on sub themes on macOS platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.macOS,
+        subThemesData: const FlexSubThemesData(
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
+          adaptiveAppBarScrollUnderOff: FlexAdaptive.iOSAndDesktop(),
+          adaptiveRadius: FlexAdaptive.iOSAndDesktop(),
+          defaultRadiusAdaptive: 8,
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      final ColorScheme colorScheme = fcs.toScheme;
+
+      // Expect CardRadius to be 10 with mock macOS target
+      expect(
+        theme.cardTheme.shape,
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
+        ),
+      );
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
+            .resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(colorScheme.shadow),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'FCS7.112d GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and adaptive removing tint and adding shadows '
+        'EXPECT given sub themes with tint ADAPTIVE and shadow '
+        'ADAPTIVE on sub themes on ANDROID platform', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.materialBaseline,
+        useMaterial3: true,
+        platform: TargetPlatform.android,
+        subThemesData: const FlexSubThemesData(
+          adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
+        ),
+      );
+      final ThemeData theme = fcs.toTheme;
+      // Sub-themes that should get transparent surface tint with remove tint.
+      // and sub-theme, that should get shadow color, with shadows back.
+      //
+      // AppBar
+      expect(
+        theme.appBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.appBarTheme.shadowColor,
+        equals(null),
+      );
+      // BottomAppBar
+      expect(
+        theme.bottomAppBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      // BottomSheet
+      expect(
+        theme.bottomSheetTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Card
+      expect(
+        theme.cardTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Chip
+      expect(
+        theme.chipTheme.surfaceTintColor,
+        equals(null),
+      );
+      // Dialog
+      expect(
+        theme.dialogTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.dialogTheme.shadowColor,
+        equals(null),
+      );
+      // Drawer
+      expect(
+        theme.drawerTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.drawerTheme.shadowColor,
+        equals(null),
+      );
+      // DropDownMenu
+      expect(
+        theme.dropdownMenuTheme.menuStyle?.surfaceTintColor,
+        equals(null),
+      );
+      // MenuBar
+      expect(
+        theme.menuBarTheme.style?.surfaceTintColor,
+        equals(null),
+      );
+      // Menu
+      expect(
+        theme.menuTheme.style?.surfaceTintColor,
+        equals(null),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.navigationBarTheme.shadowColor,
+        equals(null),
+      );
+      // NavigationDrawer
+      expect(
+        theme.navigationDrawerTheme.surfaceTintColor,
+        equals(null),
+      );
+      expect(
+        theme.navigationDrawerTheme.shadowColor,
+        equals(null),
+      );
+      // PopupMenuButton
+      expect(
+        theme.popupMenuTheme.surfaceTintColor,
+        equals(null),
+      );
+    });
   });
+
+  group('FCS8: New v7 tests WITH FlexColorScheme.toTheme ', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    test(
+        'FCS8:1 GIVEN a FlexColorScheme.light with useMaterial3:true '
+        'and use textTheme and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          useMaterial3: true,
+          subThemesData: const FlexSubThemesData(
+              useTextTheme: true,
+              tabBarItemSchemeColor: SchemeColor.secondary));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.typography,
+        equals(Typography.material2021(
+            platform: defaultTargetPlatform, colorScheme: scheme)),
+      );
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.onSurfaceVariant),
+      );
+    });
+    test(
+        'FCS8:2 GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          subThemesData: const FlexSubThemesData(
+              tabBarItemSchemeColor: SchemeColor.tertiary));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.tertiary.withOpacity(0.7)),
+      );
+    });
+    test(
+        'FCS8:3 GIVEN a FlexColorScheme.light with useMaterial3:false '
+        'and a custom tabBar theme', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+          scheme: FlexScheme.materialBaseline,
+          subThemesData: const FlexSubThemesData(
+            tabBarItemSchemeColor: SchemeColor.tertiary,
+            tabBarUnselectedItemSchemeColor: SchemeColor.tertiaryContainer,
+            tabBarUnselectedItemOpacity: 0.45,
+          ));
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        theme.tabBarTheme.unselectedLabelColor,
+        equals(scheme.tertiaryContainer.withOpacity(0.45)),
+      );
+    });
+  });
+
+  group('FCS8: ISSUE-118-Light WITH FlexColorScheme.toTheme ', () {
+    // Tests for issue:
+    // https://github.com/rydmike/flex_color_scheme/issues/118
+    TestWidgetsFlutterBinding.ensureInitialized();
+    test(
+        'FCS-ISSUE-118-Light-M2: GIVEN a FlexColorScheme.light with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeLight = ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        colorScheme: schemeLight,
+        tooltipsMatchBackground: true,
+        useMaterial3: false,
+        scaffoldBackground: schemeLight.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        scheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeLight.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+    test(
+        'FCS-ISSUE-118-Dark-M2: GIVEN a FlexColorScheme.dark with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeDark = ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        colorScheme: schemeDark,
+        tooltipsMatchBackground: true,
+        useMaterial3: false,
+        scaffoldBackground: schemeDark.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        scheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeDark.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+    test(
+        'FCS-ISSUE-118-Light-M3: GIVEN a FlexColorScheme.light with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeLight = ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        colorScheme: schemeLight,
+        tooltipsMatchBackground: true,
+        useMaterial3: true,
+        scaffoldBackground: schemeLight.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme;
+      expect(
+        scheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeLight),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeLight.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+    test(
+        'FCS-ISSUE-118-Dark-M3: GIVEN a FlexColorScheme.dark with defined '
+        'colorScheme, expect toScheme and toTheme to contain the ColorScheme, '
+        'provided that no seeding or surface blend is used.', () {
+      // Make a full ColorScheme from a SeedColor, and also override
+      // surfaceVariant with pure red.
+      final ColorScheme schemeDark = ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: const Color(0xffffcf33),
+      ).copyWith(
+        surfaceVariant: const Color(0xffff0000),
+      );
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        colorScheme: schemeDark,
+        tooltipsMatchBackground: true,
+        useMaterial3: true,
+        scaffoldBackground: schemeDark.background,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      );
+      final ColorScheme scheme = fcs.toScheme;
+      final ThemeData theme = fcs.toTheme.copyWith(
+          colorScheme: schemeDark.copyWith(
+        surfaceVariant: schemeDark.surfaceVariant,
+      ));
+      expect(
+        scheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme,
+        equals(schemeDark),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(schemeDark.surfaceVariant),
+      );
+      expect(
+        theme.colorScheme.surfaceVariant,
+        equals(const Color(0xffff0000)),
+      );
+    });
+  });
+  group('FCS9: Pass-through features WITH FlexColorScheme.toTheme ', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    test(
+        'FCS9.1: GIVEN a FlexColorScheme test materialTapTargetSize '
+        'pass-through.', () {
+      ThemeData theme = FlexColorScheme.light(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ).toTheme;
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.padded),
+      );
+      theme = FlexThemeData.light(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.shrinkWrap),
+      );
+      theme = FlexColorScheme.dark(
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ).toTheme;
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.padded),
+      );
+      theme = FlexThemeData.dark(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      );
+      expect(
+        theme.materialTapTargetSize,
+        equals(MaterialTapTargetSize.shrinkWrap),
+      );
+    });
+    test(
+        'FCS9.2: GIVEN a FlexColorScheme test pageTransitionsTheme '
+        'pass-through.', () {
+      const PageTransitionsTheme transitionsTheme = PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.linux: _NoPageTransitionsBuilder(),
+          TargetPlatform.macOS: _NoPageTransitionsBuilder(),
+          TargetPlatform.windows: _NoPageTransitionsBuilder(),
+        },
+      );
+
+      ThemeData theme = FlexColorScheme.light(
+        pageTransitionsTheme: transitionsTheme,
+      ).toTheme;
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexThemeData.light(
+        pageTransitionsTheme: transitionsTheme,
+      );
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexColorScheme.dark(
+        pageTransitionsTheme: transitionsTheme,
+      ).toTheme;
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+      theme = FlexThemeData.dark(
+        pageTransitionsTheme: transitionsTheme,
+      );
+      expect(
+        theme.pageTransitionsTheme,
+        equals(transitionsTheme),
+      );
+    });
+  });
+  group('FCS10: Raw and minimal FlexColorScheme COLOR promise tests', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    test('FCS10.1: GIVEN a raw default FlexColorScheme test default colors.',
+        () {
+      final ThemeData theme = const FlexColorScheme(
+        primary: Colors.red,
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(Colors.white));
+      expect(theme.colorScheme.primaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onPrimaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.secondary, equals(Colors.red));
+      expect(theme.colorScheme.onSecondary, equals(Colors.white));
+      expect(theme.colorScheme.secondaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onSecondaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.tertiary, equals(Colors.red));
+      expect(theme.colorScheme.onTertiary, equals(Colors.white));
+      expect(theme.colorScheme.tertiaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onTertiaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.error, equals(FlexColor.materialLightError));
+      expect(theme.colorScheme.onError, equals(Colors.white));
+      expect(theme.colorScheme.errorContainer,
+          equals(FlexColor.lightErrorContainer(FlexColor.materialLightError)));
+      expect(theme.colorScheme.onErrorContainer, equals(Colors.black));
+      expect(theme.colorScheme.surface, equals(FlexColor.materialLightSurface));
+      expect(theme.colorScheme.onSurface, equals(Colors.black));
+      expect(theme.colorScheme.background,
+          equals(FlexColor.materialLightBackground));
+      expect(theme.colorScheme.onBackground, equals(Colors.black));
+      expect(theme.scaffoldBackgroundColor,
+          equals(FlexColor.materialLightBackground));
+      expect(
+          theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
+      expect(theme.colorScheme.surfaceTint, equals(Colors.red));
+    });
+  });
+}
+
+// Custom page transition with no transition.
+class _NoPageTransitionsBuilder extends PageTransitionsBuilder {
+  const _NoPageTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
+  }
 }

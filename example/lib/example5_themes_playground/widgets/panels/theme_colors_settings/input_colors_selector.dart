@@ -1,14 +1,12 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/const/app_color.dart';
-import '../../../../shared/const/app_data.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 
-/// Horizontal theme selector of themes offered in our [AppColor.schemes].
+/// Horizontal color scheme selector of schemes in [AppColor.schemes].
 ///
 /// This example uses a StatefulWidget for the scroll controller and
 /// index to keep track of previously selected color scheme, so we can animate
@@ -50,9 +48,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   void initState() {
     super.initState();
     schemeIndex = widget.controller.schemeIndex;
+    final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
     scrollOffset =
         (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
             schemeIndex;
@@ -72,24 +72,24 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (widget.controller.schemeIndex != schemeIndex) {
+      final bool isCompact = widget.controller.compactMode;
       final double phoneReduce =
-          widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-      final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+          widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+      final double phoneButtonsSpacingReduce =
+          widget.isPhone || isCompact ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
       scrollOffset =
           (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
               schemeIndex;
-      unawaited(scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeOutCubic));
+      scrollController.jumpTo(scrollOffset);
     }
   }
 
   double _borderRadius(bool useMaterial3) =>
       widget.controller.useSubThemes && widget.controller.useFlexColorScheme
-          // M3 default for Card is 12.
+          // FCS default for Card is 12.
           ? (widget.controller.cardBorderRadius ??
-              widget.controller.defaultRadius ??
+              App.effectiveRadius(widget.controller) ??
               12)
           // M3 or M2 default for Card.
           : useMaterial3
@@ -101,9 +101,11 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
+    final bool isCompact = widget.controller.compactMode;
     final double phoneReduce =
-        widget.isPhone ? AppData.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone ? -3 : 0;
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
     return SizedBox(
       height: _kHeightOfScrollItem + phoneReduce,
       child: Row(
@@ -122,6 +124,18 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
                     message: AppColor.schemes[index].name,
                     waitDuration: const Duration(milliseconds: 700),
                     child: FlexThemeModeOptionButton(
+                      semanticLabel: 'Set to color scheme '
+                          '${AppColor.schemes[index].name}',
+                      setFocusOnTap: true,
+                      // The buttons are so colorful they need custom light and
+                      // and dark mode focus and hover colors that don't depend
+                      // theme.
+                      hoverColor: isLight
+                          ? Colors.white.withAlpha(0x3F)
+                          : Colors.black.withAlpha(0x2F),
+                      focusColor: isLight
+                          ? Colors.white.withAlpha(0x5F)
+                          : Colors.black.withAlpha(0x4F),
                       optionButtonPadding: EdgeInsetsDirectional.only(
                           start: 6 + phoneButtonsSpacingReduce),
                       optionButtonBorderRadius: _borderRadius(useMaterial3),

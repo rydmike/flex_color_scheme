@@ -75,6 +75,9 @@ class ShowInputColors extends StatelessWidget {
             : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
 
+    // Show the input color values
+    final bool showInputColor = controller.showSchemeInput;
+
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
@@ -104,6 +107,7 @@ class ShowInputColors extends StatelessWidget {
         cardTheme: CardTheme.of(context).copyWith(
           elevation: 0,
           shape: border,
+          surfaceTintColor: Colors.transparent,
         ),
       ),
       child: Wrap(
@@ -113,341 +117,387 @@ class ShowInputColors extends StatelessWidget {
         runSpacing: 6,
         children: <Widget>[
           // Primary color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: primary,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_primary'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: primary,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      swapLight
-                          ? controller.setSecondaryLight(color)
-                          : controller.setPrimaryLight(color);
-                    } else {
-                      swapDark
-                          ? controller.setSecondaryDark(color)
-                          : controller.setPrimaryDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
+                  child: ColorPickerInkWellDialog(
+                    color: primary,
+                    onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setSecondaryLight(primary)
-                            : controller.setPrimaryLight(primary);
+                            ? controller.setSecondaryLight(color)
+                            : controller.setPrimaryLight(color);
                       } else {
                         swapDark
-                            ? controller.setSecondaryDark(primary)
-                            : controller.setPrimaryDark(primary);
+                            ? controller.setSecondaryDark(color)
+                            : controller.setPrimaryDark(color);
                       }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
-                    color: primary,
-                    textColor: colorScheme.onPrimary,
-                    label: 'primary',
-                    inputColor: inputColor.primary,
-                    inputTextColor: _onColor(inputColor.primary),
-                    showMaterialName: true,
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          swapLight
+                              ? controller.setSecondaryLight(primary)
+                              : controller.setPrimaryLight(primary);
+                        } else {
+                          swapDark
+                              ? controller.setSecondaryDark(primary)
+                              : controller.setPrimaryDark(primary);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>('ipc primary $primary'),
+                      color: primary,
+                      textColor: colorScheme.onPrimary,
+                      label: 'primary',
+                      showInputColor: showInputColor,
+                      inputColor: inputColor.primary,
+                      inputTextColor: _onColor(inputColor.primary),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // PrimaryContainer color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: primaryContainer,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_primaryContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: primaryContainer,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      swapLight
-                          ? controller.setSecondaryContainerLight(color)
-                          : controller.setPrimaryContainerLight(color);
-                    } else {
-                      swapDark
-                          ? controller.setSecondaryContainerDark(color)
-                          : controller.setPrimaryContainerDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
+                  child: ColorPickerInkWellDialog(
+                    color: primaryContainer,
+                    onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller
-                                .setSecondaryContainerLight(primaryContainer)
-                            : controller
-                                .setPrimaryContainerLight(primaryContainer);
+                            ? controller.setSecondaryContainerLight(color)
+                            : controller.setPrimaryContainerLight(color);
                       } else {
                         swapDark
-                            ? controller
-                                .setSecondaryContainerDark(primaryContainer)
-                            : controller
-                                .setPrimaryContainerDark(primaryContainer);
+                            ? controller.setSecondaryContainerDark(color)
+                            : controller.setPrimaryContainerDark(color);
                       }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
-                    color: primaryContainer,
-                    textColor: colorScheme.onPrimaryContainer,
-                    label: 'primary\nContainer',
-                    inputColor: inputColor.primaryContainer,
-                    inputTextColor: _onColor(inputColor.primaryContainer),
-                    showMaterialName: true,
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          swapLight
+                              ? controller
+                                  .setSecondaryContainerLight(primaryContainer)
+                              : controller
+                                  .setPrimaryContainerLight(primaryContainer);
+                        } else {
+                          swapDark
+                              ? controller
+                                  .setSecondaryContainerDark(primaryContainer)
+                              : controller
+                                  .setPrimaryContainerDark(primaryContainer);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>('ipc primaryContainer '
+                          '$primaryContainer'),
+                      color: primaryContainer,
+                      textColor: colorScheme.onPrimaryContainer,
+                      label: 'primary\nContainer',
+                      showInputColor: showInputColor,
+                      inputColor: inputColor.primaryContainer,
+                      inputTextColor: _onColor(inputColor.primaryContainer),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // Secondary color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: secondary,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_secondary'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: secondary,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      swapLight
-                          ? controller.setPrimaryLight(color)
-                          : controller.setSecondaryLight(color);
-                    } else {
-                      swapDark
-                          ? controller.setPrimaryDark(color)
-                          : controller.setSecondaryDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
+                  child: ColorPickerInkWellDialog(
+                    color: secondary,
+                    onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setPrimaryLight(secondary)
-                            : controller.setSecondaryLight(secondary);
+                            ? controller.setPrimaryLight(color)
+                            : controller.setSecondaryLight(color);
                       } else {
                         swapDark
-                            ? controller.setPrimaryDark(secondary)
-                            : controller.setSecondaryDark(secondary);
+                            ? controller.setPrimaryDark(color)
+                            : controller.setSecondaryDark(color);
                       }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
-                    color: secondary,
-                    textColor: colorScheme.onSecondary,
-                    label: 'secondary',
-                    inputColor: inputColor.secondary,
-                    inputTextColor: _onColor(inputColor.secondary),
-                    showMaterialName: true,
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          swapLight
+                              ? controller.setPrimaryLight(secondary)
+                              : controller.setSecondaryLight(secondary);
+                        } else {
+                          swapDark
+                              ? controller.setPrimaryDark(secondary)
+                              : controller.setSecondaryDark(secondary);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>('ipc secondary $secondary'),
+                      color: secondary,
+                      textColor: colorScheme.onSecondary,
+                      showInputColor: showInputColor,
+                      label: 'secondary',
+                      inputColor: inputColor.secondary,
+                      inputTextColor: _onColor(inputColor.secondary),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // SecondaryContainer color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: secondaryContainer,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_secondaryContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: secondaryContainer,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      swapLight
-                          ? controller.setPrimaryContainerLight(color)
-                          : controller.setSecondaryContainerLight(color);
-                    } else {
-                      swapDark
-                          ? controller.setPrimaryContainerDark(color)
-                          : controller.setSecondaryContainerDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
+                  child: ColorPickerInkWellDialog(
+                    color: secondaryContainer,
+                    onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller
-                                .setPrimaryContainerLight(secondaryContainer)
-                            : controller
-                                .setSecondaryContainerLight(secondaryContainer);
+                            ? controller.setPrimaryContainerLight(color)
+                            : controller.setSecondaryContainerLight(color);
                       } else {
                         swapDark
-                            ? controller
-                                .setPrimaryContainerDark(secondaryContainer)
-                            : controller
-                                .setSecondaryContainerDark(secondaryContainer);
+                            ? controller.setPrimaryContainerDark(color)
+                            : controller.setSecondaryContainerDark(color);
                       }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
-                    color: secondaryContainer,
-                    textColor: colorScheme.onSecondaryContainer,
-                    label: 'secondary\nContainer',
-                    inputColor: inputColor.secondaryContainer,
-                    inputTextColor: _onColor(inputColor.secondaryContainer),
-                    showMaterialName: true,
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          swapLight
+                              ? controller
+                                  .setPrimaryContainerLight(secondaryContainer)
+                              : controller.setSecondaryContainerLight(
+                                  secondaryContainer);
+                        } else {
+                          swapDark
+                              ? controller
+                                  .setPrimaryContainerDark(secondaryContainer)
+                              : controller.setSecondaryContainerDark(
+                                  secondaryContainer);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>(
+                          'ipc secondaryContainer $secondaryContainer'),
+                      color: secondaryContainer,
+                      textColor: colorScheme.onSecondaryContainer,
+                      label: 'secondary\nContainer',
+                      showInputColor: showInputColor,
+                      inputColor: inputColor.secondaryContainer,
+                      inputTextColor: _onColor(inputColor.secondaryContainer),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // Tertiary color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: tertiary,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_tertiary'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: tertiary,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      controller.setTertiaryLight(color);
-                    } else {
-                      controller.setTertiaryDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
-                      if (isLight) {
-                        controller.setTertiaryLight(tertiary);
-                      } else {
-                        controller.setTertiaryDark(tertiary);
-                      }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
+                  child: ColorPickerInkWellDialog(
                     color: tertiary,
-                    textColor: colorScheme.onTertiary,
-                    label: 'tertiary',
-                    inputColor: inputColor.tertiary,
-                    inputTextColor: _onColor(inputColor.tertiary),
-                    showMaterialName: true,
+                    onChanged: (Color color) {
+                      if (isLight) {
+                        controller.setTertiaryLight(color);
+                      } else {
+                        controller.setTertiaryDark(color);
+                      }
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          controller.setTertiaryLight(tertiary);
+                        } else {
+                          controller.setTertiaryDark(tertiary);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>('ipc tertiary $tertiary'),
+                      color: tertiary,
+                      textColor: colorScheme.onTertiary,
+                      label: 'tertiary',
+                      showInputColor: showInputColor,
+                      inputColor: inputColor.tertiary,
+                      inputTextColor: _onColor(inputColor.tertiary),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // TertiaryContainer color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: tertiaryContainer,
-                child: ColorPickerInkWellDialog(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_tertiaryContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: isCustomTheme ? 2 : 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: tertiaryContainer,
-                  onChanged: (Color color) {
-                    if (isLight) {
-                      controller.setTertiaryContainerLight(color);
-                    } else {
-                      controller.setTertiaryContainerDark(color);
-                    }
-                  },
-                  recentColors: controller.recentColors,
-                  onRecentColorsChanged: controller.setRecentColors,
-                  wasCancelled: (bool cancelled) {
-                    if (cancelled) {
-                      if (isLight) {
-                        controller.setTertiaryContainerLight(tertiaryContainer);
-                      } else {
-                        controller.setTertiaryContainerDark(tertiaryContainer);
-                      }
-                    }
-                  },
-                  enabled: isCustomTheme,
-                  child: ColorNameValue(
+                  child: ColorPickerInkWellDialog(
                     color: tertiaryContainer,
-                    textColor: colorScheme.onTertiaryContainer,
-                    label: 'tertiary\nContainer',
-                    inputColor: inputColor.tertiaryContainer,
-                    inputTextColor: _onColor(inputColor.tertiaryContainer),
-                    showMaterialName: true,
+                    onChanged: (Color color) {
+                      if (isLight) {
+                        controller.setTertiaryContainerLight(color);
+                      } else {
+                        controller.setTertiaryContainerDark(color);
+                      }
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          controller
+                              .setTertiaryContainerLight(tertiaryContainer);
+                        } else {
+                          controller
+                              .setTertiaryContainerDark(tertiaryContainer);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>(
+                          'ipc tertiaryContainer $tertiaryContainer'),
+                      color: tertiaryContainer,
+                      textColor: colorScheme.onTertiaryContainer,
+                      label: 'tertiary\nContainer',
+                      showInputColor: showInputColor,
+                      inputColor: inputColor.tertiaryContainer,
+                      inputTextColor: _onColor(inputColor.tertiaryContainer),
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           // Error color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: colorScheme.error,
-                child: ColorNameValue(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_error'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: colorScheme.error,
-                  textColor: colorScheme.onError,
-                  label: 'error',
-                  inputColor: inputErrorColor,
-                  inputTextColor: inputOnErrorColor,
-                  showMaterialName: true,
+                  child: ColorNameValue(
+                    key: ValueKey<String>('ipc error ${colorScheme.error}'),
+                    color: colorScheme.error,
+                    textColor: colorScheme.onError,
+                    label: 'error',
+                    showInputColor: showInputColor,
+                    inputColor: inputErrorColor,
+                    inputTextColor: inputOnErrorColor,
+                    showMaterialName: true,
+                  ),
                 ),
               ),
             ),
           ),
           // ErrorContainer color
-          SizedBox(
-            width: boxWidth,
-            height: boxHeight,
-            child: Card(
-              margin: EdgeInsets.zero,
-              elevation: isCustomTheme ? 2 : 0,
-              clipBehavior: Clip.antiAlias,
-              child: Material(
-                color: colorScheme.errorContainer,
-                child: ColorNameValue(
+          RepaintBoundary(
+            key: const ValueKey<String>('input_errorContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Material(
                   color: colorScheme.errorContainer,
-                  textColor: colorScheme.onErrorContainer,
-                  label: 'error\nContainer',
-                  inputColor: inputErrorContainerColor,
-                  inputTextColor: inputOnErrorContainerColor,
-                  showMaterialName: true,
+                  child: ColorNameValue(
+                    key: ValueKey<String>('ipc errorContainer '
+                        '${colorScheme.errorContainer}'),
+                    color: colorScheme.errorContainer,
+                    textColor: colorScheme.onErrorContainer,
+                    label: 'error\nContainer',
+                    showInputColor: showInputColor,
+                    inputColor: inputErrorContainerColor,
+                    inputTextColor: inputOnErrorContainerColor,
+                    showMaterialName: true,
+                  ),
                 ),
               ),
             ),

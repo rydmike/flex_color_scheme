@@ -1,12 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/const/app_data.dart';
+import '../shared/const/app.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/universal/page_body.dart';
-import '../shared/widgets/universal/theme_showcase.dart';
+import '../shared/widgets/universal/showcase_material.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 1 - Basic Theme Usage
@@ -21,26 +21,41 @@ class HomePage extends StatelessWidget {
     super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
+    required this.useMaterial3,
+    required this.onUseMaterial3Changed,
     required this.flexSchemeData,
   });
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
+  final bool useMaterial3;
+  final ValueChanged<bool> onUseMaterial3Changed;
   final FlexSchemeData flexSchemeData;
 
   @override
   Widget build(BuildContext context) {
     final double margins =
-        AppData.responsiveInsets(MediaQuery.of(context).size.width);
+        App.responsiveInsets(MediaQuery.of(context).size.width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppData.title(context)),
-        actions: const <Widget>[AboutIconButton()],
+        title: Text(App.title(context)),
+        actions: <Widget>[
+          IconButton(
+            icon: useMaterial3
+                ? const Icon(Icons.filter_3)
+                : const Icon(Icons.filter_2),
+            onPressed: () {
+              onUseMaterial3Changed(!useMaterial3);
+            },
+            tooltip: '"Switch to Material ${useMaterial3 ? 2 : 3}',
+          ),
+          const AboutIconButton(),
+        ],
       ),
       body: PageBody(
-        constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+        constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
           primary: true,
           padding: EdgeInsets.all(margins),
@@ -74,7 +89,7 @@ class HomePage extends StatelessWidget {
             // Show all active ColorScheme colors.
             const ShowColorSchemeColors(),
             const SizedBox(height: 8),
-            // Show all active colors in ThemeData, these will all be
+            // Show all active colors in ThemeData, most of these will be
             // deprecated in Flutter SDK, for more info see
             // https://github.com/flutter/flutter/issues/91772
             const ShowThemeDataColors(),
@@ -82,7 +97,7 @@ class HomePage extends StatelessWidget {
             const Divider(),
             Text('Theme Showcase', style: headlineMedium),
             const SizedBox(height: 8),
-            const ThemeShowcase(),
+            const ShowcaseMaterial(),
           ],
         ),
       ),

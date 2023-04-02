@@ -1,24 +1,27 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../const/app_data.dart';
+import '../../const/app.dart';
 import '../../utils/link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
-  const AboutIconButton({super.key, this.color});
+  const AboutIconButton({super.key, this.color, this.useRootNavigator = true});
 
   /// The color used on the icon button.
   ///
   /// If null, default to Icon() class default color.
   final Color? color;
 
+  /// Use root navigator?
+  final bool useRootNavigator;
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.info, color: color),
       onPressed: () {
-        showAppAboutDialog(context);
+        showAppAboutDialog(context, useRootNavigator);
       },
     );
   }
@@ -26,7 +29,7 @@ class AboutIconButton extends StatelessWidget {
 
 // This [showAppAboutDialog] function is based on the [AboutDialog] example
 // that exist(ed) in the Flutter Gallery App.
-void showAppAboutDialog(BuildContext context) {
+void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
@@ -51,8 +54,9 @@ void showAppAboutDialog(BuildContext context) {
 
   showAboutDialog(
     context: context,
-    applicationName: AppData.title(context),
-    applicationVersion: AppData.version,
+    applicationName: App.title(context),
+    applicationVersion: App.version,
+    useRootNavigator: useRootNavigator,
     applicationIcon: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -70,8 +74,7 @@ void showAppAboutDialog(BuildContext context) {
         ),
       ],
     ),
-    applicationLegalese:
-        '${AppData.copyright}\n${AppData.author}\n${AppData.license}',
+    applicationLegalese: '${App.copyright}\n${App.author}\n${App.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -80,14 +83,14 @@ void showAppAboutDialog(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'The ${AppData.title(context)} application demonstrates '
-                    'features of the ${AppData.packageName} Flutter theming '
+                text: 'The ${App.title(context)} application demonstrates '
+                    'features of the ${App.packageName} Flutter theming '
                     'package.\n\n'
                     'To learn more, check out the package on ',
               ),
               LinkTextSpan(
                 style: linkStyle,
-                uri: AppData.packageUri,
+                uri: App.packageUri,
                 text: 'pub.dev',
               ),
               TextSpan(
@@ -97,9 +100,9 @@ void showAppAboutDialog(BuildContext context) {
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${AppData.flutterVersion}, '
-                    'using ${AppData.packageName} '
-                    '${AppData.packageVersion}\n'
+                text: 'Built with Flutter ${App.flutterVersion}, '
+                    'using ${App.packageName} '
+                    '${App.packageVersion}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
                     'h:${height.toStringAsFixed(0)})\n\n',
               ),

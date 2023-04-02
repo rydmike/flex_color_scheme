@@ -619,12 +619,14 @@ void main() {
       colors: m3Baseline,
       colorScheme: keySchemeLight,
       primary: FlexColor.sakuraLightPrimary,
+      // The only main prop that matter is the seed key, these wont do anything.
       primaryContainer: FlexColor.sakuraLightPrimaryContainer,
       secondary: FlexColor.sakuraLightSecondary,
       secondaryContainer: FlexColor.sakuraLightSecondaryContainer,
       tertiary: FlexColor.sakuraLightTertiary,
       tertiaryContainer: FlexColor.sakuraLightTertiaryContainer,
       error: FlexColor.redLightPrimary,
+      // Relevant for seed result
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       keyColors: const FlexKeyColors(
@@ -636,14 +638,16 @@ void main() {
       colors: m3Baseline,
       // We need to pass a color scheme with same primary color as in light that
       // will be used as seed color for to get desired/expected result.
-      colorScheme: keySchemeDark.copyWith(primary: keySchemeLight.primary),
+      colorScheme: keySchemeDark,
       primary: FlexColor.sakuraDarkPrimary,
+      // The only main prop that matter is the seed key, these wont do anything.
       primaryContainer: FlexColor.sakuraDarkPrimaryContainer,
       secondary: FlexColor.sakuraDarkSecondary,
       secondaryContainer: FlexColor.sakuraDarkSecondaryContainer,
       tertiary: FlexColor.sakuraDarkTertiary,
       tertiaryContainer: FlexColor.sakuraDarkTertiaryContainer,
       error: FlexColor.redDarkPrimary,
+      // Relevant for seed result
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       keyColors: const FlexKeyColors(

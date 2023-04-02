@@ -2,7 +2,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-/// A Hive data type adapter for enum ThemeMode.
+import '../const/adaptive_theme.dart';
+
+/// A Hive data type adapter for enum [ThemeMode].
 class ThemeModeAdapter extends TypeAdapter<ThemeMode> {
   @override
   ThemeMode read(BinaryReader reader) {
@@ -19,7 +21,7 @@ class ThemeModeAdapter extends TypeAdapter<ThemeMode> {
   int get typeId => 150;
 }
 
-/// A Hive data type adapter for class Color.
+/// A Hive data type adapter for class [Color].
 class ColorAdapter extends TypeAdapter<Color> {
   @override
   Color read(BinaryReader reader) {
@@ -36,7 +38,7 @@ class ColorAdapter extends TypeAdapter<Color> {
   int get typeId => 151;
 }
 
-/// A Hive data type adapter for enum FlexSurface.
+/// A Hive data type adapter for enum [FlexScheme].
 class FlexSchemeAdapter extends TypeAdapter<FlexScheme> {
   @override
   FlexScheme read(BinaryReader reader) {
@@ -53,7 +55,7 @@ class FlexSchemeAdapter extends TypeAdapter<FlexScheme> {
   int get typeId => 152;
 }
 
-/// A Hive data type adapter for enum FlexSurfaceMode.
+/// A Hive data type adapter for enum [FlexSurfaceMode].
 class FlexSurfaceModeAdapter extends TypeAdapter<FlexSurfaceMode> {
   @override
   FlexSurfaceMode read(BinaryReader reader) {
@@ -70,7 +72,7 @@ class FlexSurfaceModeAdapter extends TypeAdapter<FlexSurfaceMode> {
   int get typeId => 153;
 }
 
-/// A Hive data type adapter for enum FlexTabBarStyle.
+/// A Hive data type adapter for enum [FlexInputBorderType].
 class FlexInputBorderTypeAdapter extends TypeAdapter<FlexInputBorderType> {
   @override
   FlexInputBorderType read(BinaryReader reader) {
@@ -87,7 +89,7 @@ class FlexInputBorderTypeAdapter extends TypeAdapter<FlexInputBorderType> {
   int get typeId => 154;
 }
 
-/// A Hive data type adapter for enum FlexAppBarStyle.
+/// A Hive data type adapter for enum [FlexAppBarStyle].
 class FlexAppBarStyleAdapter extends TypeAdapter<FlexAppBarStyle> {
   @override
   FlexAppBarStyle read(BinaryReader reader) {
@@ -104,24 +106,31 @@ class FlexAppBarStyleAdapter extends TypeAdapter<FlexAppBarStyle> {
   int get typeId => 155;
 }
 
-/// A Hive data type adapter for enum FlexTabBarStyle.
-class FlexTabBarStyleAdapter extends TypeAdapter<FlexTabBarStyle> {
+/// A Hive data type adapter for enum [FlexTabBarStyle], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexTabBarStyleAdapter extends TypeAdapter<FlexTabBarStyle?> {
   @override
-  FlexTabBarStyle read(BinaryReader reader) {
+  FlexTabBarStyle? read(BinaryReader reader) {
     final int index = reader.readInt();
-    return FlexTabBarStyle.values[index];
+    if (index < 0 || index >= FlexTabBarStyle.values.length) {
+      return null;
+    } else {
+      return FlexTabBarStyle.values[index];
+    }
   }
 
   @override
-  void write(BinaryWriter writer, FlexTabBarStyle obj) {
-    writer.writeInt(obj.index);
+  void write(BinaryWriter writer, FlexTabBarStyle? obj) {
+    writer.writeInt(obj?.index ?? -1);
   }
 
   @override
   int get typeId => 156;
 }
 
-/// A Hive data type adapter for enum FlexSystemNavBarStyle.
+/// A Hive data type adapter for enum [FlexSystemNavBarStyle].
 class FlexSystemNavBarStyleAdapter extends TypeAdapter<FlexSystemNavBarStyle> {
   @override
   FlexSystemNavBarStyle read(BinaryReader reader) {
@@ -138,7 +147,7 @@ class FlexSystemNavBarStyleAdapter extends TypeAdapter<FlexSystemNavBarStyle> {
   int get typeId => 157;
 }
 
-/// A Hive data type adapter for enum SchemeColor, nullable.
+/// A Hive data type adapter for enum [SchemeColor], nullable.
 ///
 /// Handles storing <null> value as -1 and returns anything out of enum
 /// index range as null value.
@@ -162,7 +171,7 @@ class FlexSchemeColorAdapter extends TypeAdapter<SchemeColor?> {
   int get typeId => 158;
 }
 
-/// A Hive data type adapter for enum NavigationDestinationLabelBehavior.
+/// A Hive data type adapter for enum [NavigationDestinationLabelBehavior].
 class NavigationDestinationLabelBehaviorAdapter
     extends TypeAdapter<NavigationDestinationLabelBehavior> {
   @override
@@ -180,7 +189,7 @@ class NavigationDestinationLabelBehaviorAdapter
   int get typeId => 159;
 }
 
-/// A Hive data type adapter for enum NavigationRailLabelType.
+/// A Hive data type adapter for enum [NavigationRailLabelType].
 class NavigationRailLabelTypeAdapter
     extends TypeAdapter<NavigationRailLabelType> {
   @override
@@ -196,4 +205,105 @@ class NavigationRailLabelTypeAdapter
 
   @override
   int get typeId => 160;
+}
+
+/// A Hive data type adapter for enum [FlexSliderIndicatorType], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexSliderIndicatorTypeAdapter
+    extends TypeAdapter<FlexSliderIndicatorType?> {
+  @override
+  FlexSliderIndicatorType? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= FlexSliderIndicatorType.values.length) {
+      return null;
+    } else {
+      return FlexSliderIndicatorType.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, FlexSliderIndicatorType? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 161;
+}
+
+/// A Hive data type adapter for enum [ShowValueIndicator], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class ShowValueIndicatorAdapter extends TypeAdapter<ShowValueIndicator?> {
+  @override
+  ShowValueIndicator? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= ShowValueIndicator.values.length) {
+      return null;
+    } else {
+      return ShowValueIndicator.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ShowValueIndicator? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 162;
+}
+
+// Value typeId => 163 was used before for enum FlexTint that was removed.
+// Value typeId => 164 was used before for enum FlexShadow that was removed.
+// Not using them to avoid type conversion issues with previous file data.
+
+/// A Hive data type adapter for enum [TabBarIndicatorSize], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class TabBarIndicatorSizeAdapter extends TypeAdapter<TabBarIndicatorSize?> {
+  @override
+  TabBarIndicatorSize? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= TabBarIndicatorSize.values.length) {
+      return null;
+    } else {
+      return TabBarIndicatorSize.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TabBarIndicatorSize? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 165;
+}
+
+/// A Hive data type adapter for enum [AdaptiveTheme], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveTheme?> {
+  @override
+  AdaptiveTheme? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= AdaptiveTheme.values.length) {
+      return null;
+    } else {
+      return AdaptiveTheme.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, AdaptiveTheme? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 166;
 }

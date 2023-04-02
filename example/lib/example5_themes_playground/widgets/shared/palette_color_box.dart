@@ -1,4 +1,4 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
+// import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -43,16 +43,14 @@ class PaletteColorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLight =
+    final bool colorIsLight =
         ThemeData.estimateBrightnessForColor(color) == Brightness.light;
-    final String materialName = ColorTools.materialName(color);
-    final String nameThatColor = ColorTools.nameThatColor(color);
-    final String space = materialName == '' ? '' : ' ';
+    final String hexCode = color.hexCode;
 
     return Tooltip(
       waitDuration: const Duration(milliseconds: 700),
       message: '$name tone $tone\n'
-          '#${color.hexCode} $nameThatColor$space$materialName\n'
+          'Color #$hexCode\n'
           'Tap to copy to Clipboard',
       child: Material(
         type: MaterialType.canvas,
@@ -61,8 +59,8 @@ class PaletteColorBox extends StatelessWidget {
         child: SizedBox(
           height: height,
           child: InkWell(
-            focusColor: isLight ? Colors.black26 : Colors.white30,
-            hoverColor: isLight ? Colors.black26 : Colors.white30,
+            focusColor: colorIsLight ? Colors.black26 : Colors.white30,
+            hoverColor: colorIsLight ? Colors.black26 : Colors.white30,
             onTap: onTap?.call,
             child: child,
           ),

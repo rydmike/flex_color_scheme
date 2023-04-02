@@ -29,7 +29,7 @@ import 'home_page.dart';
 // with the enum related color scheme.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/fourthemes-v5
+// https://rydmike.com/flexcolorscheme/fourthemes-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -120,6 +120,7 @@ class DemoApp extends StatelessWidget {
           // corresponding colors from the FlexColor.schemes map using the
           // enum value as key.
           theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.light
                 : FlexColor.schemes[themeController.usedScheme]!.light,
@@ -173,8 +174,7 @@ class DemoApp extends StatelessWidget {
             // not as large as on hand held devices.
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),
@@ -182,6 +182,7 @@ class DemoApp extends StatelessWidget {
           // We make an equivalent definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors instead.
           darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
             colors: themeController.usedScheme == FlexScheme.custom
                 ? _myFlexScheme.dark
                 : FlexColor.schemes[themeController.usedScheme]!.dark,
@@ -203,8 +204,7 @@ class DemoApp extends StatelessWidget {
             ),
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
-            // Use predefined M3 typography while this issue is in effect:
-            // https://github.com/flutter/flutter/issues/103864
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),

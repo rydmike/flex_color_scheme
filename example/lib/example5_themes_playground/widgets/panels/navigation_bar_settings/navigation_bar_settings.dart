@@ -2,7 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../dialogs/set_navigation_bar_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
@@ -11,28 +12,40 @@ class NavigationBarSettings extends StatelessWidget {
   const NavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  Future<void> _handleSetToM3(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetNavigationBarToM3Dialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setNavigationBarToM3();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Logic for default elevation label.
-    final String elevationDefaultLabel =
-        controller.navigationBarElevation == null
-            ? controller.useMaterial3
-                ? 'default 3'
-                : 'default 0'
-            : 'global ${controller.navigationBarElevation!.toStringAsFixed(1)}';
-
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
       fontSize: 13,
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
+    // Logic for default elevation label.
+    final String elevationDefaultLabel = controller.navBarElevation == null
+        ? controller.useMaterial3
+            ? 'default 3'
+            : 'default 0'
+        : controller.navBarElevation!.toStringAsFixed(1);
+
     // Logic for background color label.
     String backgroundColorLabel() {
       if (controller.useMaterial3 &&
           controller.navBarBackgroundSchemeColor == null) {
-        return 'default (surface with primary overlay)';
+        return 'default (surface with elevation tint)';
       }
       if (!controller.useSubThemes ||
           !controller.useFlexColorScheme ||
@@ -40,7 +53,7 @@ class NavigationBarSettings extends StatelessWidget {
               controller.navBarBackgroundSchemeColor == null)) {
         return 'default (surface with onSurface overlay)';
       }
-      return 'default (background)';
+      return 'default (surfaceVariant)';
     }
 
     // Logic for indicator color label default value,
@@ -60,9 +73,9 @@ class NavigationBarSettings extends StatelessWidget {
       return 'default (secondaryContainer)';
     }
 
-    // Logic for selected item color label default value,
+    // Logic for selected icon color default value,
     // custom color selection overrides default label and value.
-    String selectedItemColorLabel() {
+    String selectedIconColorLabel() {
       // Use FCS component default, primary.
       if (!controller.useFlutterDefaults &&
           controller.useFlexColorScheme &&
@@ -74,13 +87,30 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
-      return 'default (icon onSecondaryContainer, label onSurface)';
+      return 'default (onSecondaryContainer)';
+    }
+
+    // Logic for selected icon color default value,
+    // custom color selection overrides default label and value.
+    String selectedLabelColorLabel() {
+      // Use FCS component default, primary.
+      if (!controller.useFlutterDefaults &&
+          controller.useFlexColorScheme &&
+          controller.useSubThemes) {
+        return 'default (primary)';
+      }
+      // Use M2 default color
+      if (!controller.useMaterial3) {
+        return 'default (onSurface)';
+      }
+      // All other cases will use M3 style.
+      return 'default (onSurface)';
     }
 
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
         !(controller.useFlutterDefaults &&
-            controller.navBarSelectedSchemeColor == null &&
+            controller.navBarSelectedIconSchemeColor == null &&
             controller.navBarUnselectedSchemeColor == null);
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
@@ -117,6 +147,24 @@ class NavigationBarSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        const SizedBox(height: 8),
+        ListTile(
+          enabled: useMaterial3,
+          title: const Text('Use Material 3 default NavigationBar style?'),
+          subtitle: const Text('Update settings below to match M3 default '
+              'values'),
+          trailing: FilledButton(
+            onPressed: useMaterial3
+                ? () async {
+                    await _handleSetToM3(context);
+                  }
+                : null,
+            child: const Text('Set to M3'),
+          ),
+          onTap: () async {
+            await _handleSetToM3(context);
+          },
+        ),
         const SizedBox(height: 8),
         const NavigationBarShowcase(),
         ColorSchemePopupMenu(
@@ -155,13 +203,11 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   '${(navBarOpacity * 100).toStringAsFixed(0)} %',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -180,24 +226,23 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
-                ? controller.navigationBarElevation == null ||
-                        (controller.navigationBarElevation ?? -1) < 0
+                ? controller.navBarElevation == null ||
+                        (controller.navBarElevation ?? -1) < 0
                     ? elevationDefaultLabel
-                    : (controller.navigationBarElevation?.toStringAsFixed(1) ??
-                        '')
+                    : (controller.navBarElevation?.toStringAsFixed(1) ?? '')
                 : controller.useMaterial3
                     ? 'default 3'
                     : 'default 0',
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
-                ? controller.navigationBarElevation ?? -1
+                ? controller.navBarElevation ?? -1
                 : -1,
             onChanged: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     !controller.useFlutterDefaults
                 ? (double value) {
-                    controller.setNavigationBarElevation(
+                    controller.setNavBarElevation(
                         value < 0 ? null : value.roundToDouble());
                   }
                 : null,
@@ -215,11 +260,10 @@ class NavigationBarSettings extends StatelessWidget {
                   controller.useSubThemes &&
                           controller.useFlexColorScheme &&
                           !controller.useFlutterDefaults
-                      ? controller.navigationBarElevation == null ||
-                              (controller.navigationBarElevation ?? -1) < 0
+                      ? controller.navBarElevation == null ||
+                              (controller.navBarElevation ?? -1) < 0
                           ? elevationDefaultLabel
-                          : (controller.navigationBarElevation
-                                  ?.toStringAsFixed(1) ??
+                          : (controller.navBarElevation?.toStringAsFixed(1) ??
                               '')
                       : controller.useMaterial3
                           ? 'default 3'
@@ -241,9 +285,7 @@ class NavigationBarSettings extends StatelessWidget {
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarHeight == null ||
                         (controller.navBarHeight ?? 54) < 55
-                    ? controller.useFlutterDefaults
-                        ? 'default 80'
-                        : 'default 62'
+                    ? 'default 80'
                     : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                 : 'default 80',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -263,20 +305,16 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'HEIGHT',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navBarHeight == null ||
                               (controller.navBarHeight ?? 54) < 55
-                          ? controller.useFlutterDefaults
-                              ? 'default 80'
-                              : 'default 62'
+                          ? 'default 80'
                           : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
                       : 'default 80',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -328,7 +366,7 @@ class NavigationBarSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'OPACITY',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   navBarHighlightOpacityEnabled
@@ -340,9 +378,7 @@ class NavigationBarSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 100%'
                           : 'default 24%',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -350,17 +386,81 @@ class NavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Indicator border radius'),
+          subtitle: Slider(
+            min: -1,
+            max: 50,
+            divisions: 51,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navBarIndicatorBorderRadius == null ||
+                        (controller.navBarIndicatorBorderRadius ?? -1) < 0
+                    ? 'default (stadium)'
+                    : (controller.navBarIndicatorBorderRadius
+                            ?.toStringAsFixed(0) ??
+                        '')
+                : 'default (stadium)',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navBarIndicatorBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setNavBarIndicatorBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'RADIUS',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.navBarIndicatorBorderRadius == null ||
+                              (controller.navBarIndicatorBorderRadius ?? -1) < 0
+                          ? 'default (stadium)'
+                          : (controller.navBarIndicatorBorderRadius
+                                  ?.toStringAsFixed(0) ??
+                              '')
+                      : 'default (stadium)',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         ColorSchemePopupMenu(
-          title: const Text('Selected item color'),
-          subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: selectedItemColorLabel(),
-          index: controller.navBarSelectedSchemeColor?.index ?? -1,
+          title: const Text('Selected icon color'),
+          labelForDefault: selectedIconColorLabel(),
+          index: controller.navBarSelectedIconSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarSelectedSchemeColor(null);
+                    controller.setNavBarSelectedIconSchemeColor(null);
                   } else {
-                    controller.setNavBarSelectedSchemeColor(
+                    controller.setNavBarSelectedIconSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Selected label color'),
+          labelForDefault: selectedLabelColorLabel(),
+          index: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setNavBarSelectedLabelSchemeColor(null);
+                  } else {
+                    controller.setNavBarSelectedLabelSchemeColor(
                         SchemeColor.values[index]);
                   }
                 }

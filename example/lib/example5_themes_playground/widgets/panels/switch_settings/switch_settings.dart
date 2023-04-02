@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
@@ -30,9 +30,8 @@ class SwitchesSettings extends StatelessWidget {
                 ? 'default (tealAccent[200])'
                 : 'default (secondary)';
 
-    const String explainThumb = 'selected';
-    // TODO(rydmike): Commented code for Flutter 3.3, will be in next Flutter.
-    // controller.useMaterial3 ? 'pressed/hovered/focused' : 'selected';
+    final String explainThumb =
+        controller.useMaterial3 ? ' pressed/hovered/focused' : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +56,7 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('Switch $explainThumb thumb color'),
+          title: Text('Switch ON state$explainThumb thumb color'),
           labelForDefault: labelForDefaultThumbColor,
           index: controller.switchThumbSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -112,8 +111,6 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-
-        // const SizedBox(height: 8),
         const Divider(height: 1),
         SwitchListTile(
           title: const Text('Unselected toggle is colored'),

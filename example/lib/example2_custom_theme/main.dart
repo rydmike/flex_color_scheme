@@ -27,7 +27,7 @@ import 'home_page.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/customtheme-v5
+// https://rydmike.com/flexcolorscheme/customtheme-v7
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -123,6 +123,7 @@ class DemoApp extends StatelessWidget {
             title: 'Custom Theme',
             // Define FlexThemeData.light() theme using above custom colors.
             theme: FlexThemeData.light(
+              useMaterial3: themeController.useMaterial3,
               // We could have stored the light scheme in a FlexSchemeColor
               // and used it for the colors, but we will use both the light and
               // dark colors also on the HomePage for the theme switch widget
@@ -150,14 +151,14 @@ class DemoApp extends StatelessWidget {
               // textTheme and primaryTextTheme in FlexThemeData. This is
               // just how you would use it with ThemeData too.
               fontFamily: GoogleFonts.notoSans().fontFamily,
-              // Use predefined M3 typography while this issue is in effect:
-              // https://github.com/flutter/flutter/issues/103864
+              // We use the nicer Material 3 Typography in both M2 and M3 mode.
               typography: Typography.material2021(
                 platform: defaultTargetPlatform,
               ),
             ),
             // Same setup for the dark theme, but using FlexThemeData.dark().
             darkTheme: FlexThemeData.dark(
+              useMaterial3: themeController.useMaterial3,
               colors: _myFlexScheme.dark,
               subThemesData: themeController.useSubThemes
                   ? const FlexSubThemesData()
@@ -165,8 +166,7 @@ class DemoApp extends StatelessWidget {
               appBarElevation: 1,
               visualDensity: VisualDensity.standard,
               fontFamily: GoogleFonts.notoSans().fontFamily,
-              // Use predefined M3 typography while this issue is in effect:
-              // https://github.com/flutter/flutter/issues/103864
+              // We use the nicer Material 3 Typography in both M2 and M3 mode.
               typography: Typography.material2021(
                 platform: defaultTargetPlatform,
               ),

@@ -85,11 +85,11 @@ class ColorSchemeBox extends StatelessWidget {
     final Color foreground =
         foregroundColor ?? _onColor(backgroundColor ?? scheme.background);
     final double width =
-        size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 45;
+        size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 38;
     final double height =
-        size?.height ?? theme.toggleButtonsTheme.constraints?.minHeight ?? 35;
+        size?.height ?? theme.toggleButtonsTheme.constraints?.minHeight ?? 34;
     final BorderRadius borderRadius = theme.toggleButtonsTheme.borderRadius ??
-        const BorderRadius.all(Radius.circular(12));
+        const BorderRadius.all(Radius.circular(20));
 
     return SizedBox(
       width: width + 16,

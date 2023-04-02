@@ -27,10 +27,9 @@ void main() {
       expect(fcsDefault.toScheme, equals(fcsMaterialLight.toScheme));
       // Expect toTheme to be equal
       // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
-      //   This is repeated for many test cases. It seems like ThemeData
-      //   equality comparison cannot be guaranteed when using sub-themes that
-      //   uses MaterialState or MaterialStateProperty. Verify and report this.
-      //   Investigate first what SDK ThemeData test do, if they even attempt it
+      // This is repeated for many test cases. It seems like ThemeData
+      // equality comparison cannot be guaranteed when using sub-themes that
+      // uses MaterialState or MaterialStateProperty.
       expect(
           fcsDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(fcsMaterialLight.toTheme
@@ -241,15 +240,20 @@ void main() {
         'FCS1.01e: GIVEN two identical FlexColorScheme objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
-      // Expect toTheme from them to full-fill same condition.
-      // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
-      //   This is repeated for many test cases. It seems like ThemeData
-      //   equality comparison cannot be guaranteed when using sub-themes that
-      //   uses MaterialState or MaterialStateProperty. Verify and report this.
-      //   Investigate first what SDK ThemeData test do, if they even attempt
-      //   it. This is commented for now.
-      // expect(m1.toTheme == m2.toTheme, true);
     });
+    // Expect toTheme from them to full-fill same condition.
+    // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
+    //   This is repeated for many test cases. It seems like ThemeData
+    //   equality comparison cannot be guaranteed when using sub-themes that
+    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   Investigate first what SDK ThemeData tests do, if they even attempt
+    //   it. This is commented for now:
+    //
+    //   expect(m1.toTheme == m2.toTheme, true);
+    //
+    //   Instead we test isNot below to see if this ever changes, if it does
+    //   we can start doing the test on THemeData object instead of its
+    //   toString where the test works.
     test(
         'FCS1.02a: GIVEN none identical FlexColorScheme objects '
         'EXPECT them to be unequal', () {
@@ -304,6 +308,42 @@ void main() {
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
+      dialogBackground: FlexColor.materialLightBackground,
+      onPrimary: Colors.white,
+      onPrimaryContainer: Colors.black,
+      onSecondary: Colors.black,
+      onSecondaryContainer: Colors.black,
+      onTertiary: Colors.white,
+      onTertiaryContainer: Colors.black,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
+      onError: Colors.white,
+    );
+    test(
+        'FCS1.04a1: GIVEN a FlexColorScheme.light() created object '
+        'EXPECT equality when made by matching .light() overrides.', () {
+      expect(FlexColorScheme.light(), equals(m1e2));
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.light()
+            .toTheme
+            .toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            m1e2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+
+    final FlexColorScheme m1e22 = FlexColorScheme.light(
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
+      secondary: FlexColor.materialLightSecondary,
+      secondaryContainer: FlexColor.materialLightSecondaryContainer,
+      tertiary: FlexColor.materialLightTertiary,
+      tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+      surface: FlexColor.materialLightSurface,
+      background: FlexColor.materialLightBackground,
+      error: FlexColor.materialLightError,
+      scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
       dialogBackground: FlexColor.materialLightBackground,
       onPrimary: Colors.white,
@@ -317,9 +357,13 @@ void main() {
       onError: Colors.white,
     );
     test(
-        'FCS1.04a: GIVEN a FlexColorScheme.light() created object '
+        'FCS1.04a2: GIVEN a FlexColorScheme.light() created object '
         'EXPECT equality when made by matching .light() overrides.', () {
-      expect(FlexColorScheme.light(), equals(m1e2));
+      expect(
+          FlexColorScheme.light(
+            appBarStyle: FlexAppBarStyle.primary,
+          ),
+          equals(m1e22));
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.light()
@@ -398,7 +442,6 @@ void main() {
       background: FlexColor.materialDarkBackground,
       error: FlexColor.materialDarkError,
       scaffoldBackground: FlexColor.materialDarkBackground,
-      appBarBackground: FlexColor.materialDarkSurface,
       dialogBackground: FlexColor.materialDarkBackground,
       onPrimary: Colors.black,
       onPrimaryContainer: Colors.white,
@@ -478,6 +521,48 @@ void main() {
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
             m1e3.toTheme.toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+
+    final FlexColorScheme m05a2 = FlexColorScheme.dark(
+      primary: FlexColor.materialDarkPrimary,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
+      secondary: FlexColor.materialDarkSecondary,
+      secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+      tertiary: FlexColor.materialDarkTertiary,
+      tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+      surface: FlexColor.materialDarkSurface,
+      background: FlexColor.materialDarkBackground,
+      error: FlexColor.materialDarkError,
+      scaffoldBackground: FlexColor.materialDarkBackground,
+      appBarBackground: FlexColor.materialDarkSurface,
+      dialogBackground: FlexColor.materialDarkBackground,
+      onPrimary: Colors.black,
+      onPrimaryContainer: Colors.white,
+      onSecondary: Colors.black,
+      onTertiary: Colors.black,
+      onSecondaryContainer: Colors.white,
+      onTertiaryContainer: Colors.white,
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      onError: Colors.black,
+    );
+    test(
+        'FCS1.05a2: GIVEN a FlexColorScheme.dark created object '
+        'EXPECT equality when made by matching .dark(surface) overrides', () {
+      expect(
+        FlexColorScheme.dark(
+          appBarStyle: FlexAppBarStyle.surface,
+        ),
+        equals(m05a2),
+      );
+      // Expect toTheme from them to full-fill same condition.
+      expect(
+        FlexColorScheme.dark(
+          appBarStyle: FlexAppBarStyle.surface,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            m05a2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
 
@@ -567,6 +652,27 @@ void main() {
         'EXPECT equal when fixing un-equal value', () {
       expect(m5, equals(m5copy.copyWith(fontFamily: 'Roboto')));
     });
+
+    test(
+        'FCS1.06-b-CopyWith: Test copyWith on complex object '
+        'EXPECT equal when fixing un-equal value WITH '
+        'fontFamily and package additions', () {
+      expect(
+        m5.copyWith(
+          fontFamilyFallback: <String>['Roboto', 'Arial'],
+          package: 'SansSerif',
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          m5copy
+              .copyWith(
+                fontFamily: 'Roboto',
+                fontFamilyFallback: <String>['Roboto', 'Arial'],
+                package: 'SansSerif',
+              )
+              .toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
     test(
         'FCS1.06a: Test toString implemented via debugFillProperties '
         'EXPECT some kind of working data print.', () {
@@ -580,7 +686,7 @@ void main() {
           // ignore: lines_longer_than_80_chars
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexColorScheme#00000(colorScheme: null, brightness: light, primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xffcefaf8), tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), error: Color(0xffb00020), surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff), appBarBackground: Color(0xff6200ee), dialogBackground: Color(0xffffffff), onPrimary: Color(0xffffffff), onPrimaryContainer: Color(0xffffffff), onSecondary: Color(0xff000000), onSecondaryContainer: Color(0xff000000), onTertiary: Color(0xffffffff), onTertiaryContainer: Color(0xff000000), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff), surfaceTint: null, tabBarStyle: forAppBar, appBarElevation: 1.0, bottomAppBarElevation: 2.0, tooltipsMatchBackground: true, transparentStatusBar: false, visualDensity: 0, v: 0.0), textTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), primaryTextTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), fontFamily: Roboto, materialTapTargetSize: null, pageTransitionsTheme: null, platform: android, typography: Typography#00000(englishLike: TextTheme#00000(displayLarge: TextStyle(debugLabel: englishLike displayLarge 2018, inherit: true, size: 96.0, weight: 300, letterSpacing: -1.5, baseline: alphabetic), displayMedium: TextStyle(debugLabel: englishLike displayMedium 2018, inherit: true, size: 60.0, weight: 300, letterSpacing: -0.5, baseline: alphabetic), displaySmall: TextStyle(debugLabel: englishLike displaySmall 2018, inherit: true, size: 48.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: englishLike headlineLarge 2018, inherit: true, size: 40.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: englishLike headlineMedium 2018, inherit: true, size: 34.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: englishLike headlineSmall 2018, inherit: true, size: 24.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), titleLarge: TextStyle(debugLabel: englishLike titleLarge 2018, inherit: true, size: 20.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), titleMedium: TextStyle(debugLabel: englishLike titleMedium 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.1, baseline: alphabetic), titleSmall: TextStyle(debugLabel: englishLike titleSmall 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: englishLike bodyLarge 2018, inherit: true, size: 16.0, weight: 400, letterSpacing: 0.5, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: englishLike bodyMedium 2018, inherit: true, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), bodySmall: TextStyle(debugLabel: englishLike bodySmall 2018, inherit: true, size: 12.0, weight: 400, letterSpacing: 0.4, baseline: alphabetic), labelLarge: TextStyle(debugLabel: englishLike labelLarge 2018, inherit: true, size: 14.0, weight: 500, letterSpacing: 1.3, baseline: alphabetic), labelMedium: TextStyle(debugLabel: englishLike labelMedium 2018, inherit: true, size: 11.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic), labelSmall: TextStyle(debugLabel: englishLike labelSmall 2018, inherit: true, size: 10.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic)), dense: TextTheme#00000(displayLarge: TextStyle(debugLabel: dense displayLarge 2018, inherit: true, size: 96.0, weight: 100, baseline: ideographic), displayMedium: TextStyle(debugLabel: dense displayMedium 2018, inherit: true, size: 60.0, weight: 100, baseline: ideographic), displaySmall: TextStyle(debugLabel: dense displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: ideographic), headlineLarge: TextStyle(debugLabel: dense headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: ideographic), headlineMedium: TextStyle(debugLabel: dense headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: ideographic), headlineSmall: TextStyle(debugLabel: dense headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: ideographic), titleLarge: TextStyle(debugLabel: dense titleLarge 2018, inherit: true, size: 21.0, weight: 500, baseline: ideographic), titleMedium: TextStyle(debugLabel: dense titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), titleSmall: TextStyle(debugLabel: dense titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), bodyLarge: TextStyle(debugLabel: dense bodyLarge 2018, inherit: true, size: 17.0, weight: 400, baseline: ideographic), bodyMedium: TextStyle(debugLabel: dense bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: ideographic), bodySmall: TextStyle(debugLabel: dense bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: ideographic), labelLarge: TextStyle(debugLabel: dense labelLarge 2018, inherit: true, size: 15.0, weight: 500, baseline: ideographic), labelMedium: TextStyle(debugLabel: dense labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: ideographic), labelSmall: TextStyle(debugLabel: dense labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: ideographic)), tall: TextTheme#00000(displayLarge: TextStyle(debugLabel: tall displayLarge 2018, inherit: true, size: 96.0, weight: 400, baseline: alphabetic), displayMedium: TextStyle(debugLabel: tall displayMedium 2018, inherit: true, size: 60.0, weight: 400, baseline: alphabetic), displaySmall: TextStyle(debugLabel: tall displaySmall 2018, inherit: true, size: 48.0, weight: 400, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: tall headlineLarge 2018, inherit: true, size: 40.0, weight: 400, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: tall headlineMedium 2018, inherit: true, size: 34.0, weight: 400, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: tall headlineSmall 2018, inherit: true, size: 24.0, weight: 400, baseline: alphabetic), titleLarge: TextStyle(debugLabel: tall titleLarge 2018, inherit: true, size: 21.0, weight: 700, baseline: alphabetic), titleMedium: TextStyle(debugLabel: tall titleMedium 2018, inherit: true, size: 17.0, weight: 400, baseline: alphabetic), titleSmall: TextStyle(debugLabel: tall titleSmall 2018, inherit: true, size: 15.0, weight: 500, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: tall bodyLarge 2018, inherit: true, size: 17.0, weight: 700, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: tall bodyMedium 2018, inherit: true, size: 15.0, weight: 400, baseline: alphabetic), bodySmall: TextStyle(debugLabel: tall bodySmall 2018, inherit: true, size: 13.0, weight: 400, baseline: alphabetic), labelLarge: TextStyle(debugLabel: tall labelLarge 2018, inherit: true, size: 15.0, weight: 700, baseline: alphabetic), labelMedium: TextStyle(debugLabel: tall labelMedium 2018, inherit: true, size: 12.0, weight: 400, baseline: alphabetic), labelSmall: TextStyle(debugLabel: tall labelSmall 2018, inherit: true, size: 11.0, weight: 400, baseline: alphabetic))), applyElevationOverlayColor: false, subThemesData: FlexSubThemesData#00000(interactionEffects: true, blendOnLevel : null, blendOnColors: true, useFlutterDefaults: false, blendTextTheme: true, useTextTheme: true, defaultRadius: 20.0, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, textButtonRadius: null, textButtonSchemeColor: null, textButtonTextStyle: null, elevatedButtonRadius: null, elevatedButtonElevation: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, elevatedButtonTextStyle: null, outlinedButtonRadius: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, outlinedButtonBorderWidth: null, outlinedButtonPressedBorderWidth: null, outlinedButtonTextStyle: null, toggleButtonsRadius: null, toggleButtonsSchemeColor: null, toggleButtonsBorderWidth: null, materialButtonSchemeColor: null, switchSchemeColor: null, switchThumbSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, sliderBaseSchemeColor: null, sliderValueTinted: false, sliderTrackHeight: null, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBorderType: null, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, inputDecoratorBorderWidth: null, inputDecoratorFocusedBorderWidth: null, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, chipSelectedSchemeColor: null, chipDeleteIconSchemeColor: null, cardRadius: null, cardElevation: null, popupMenuRadius: null, popupMenuElevation: null, popupMenuSchemeColor: null, popupMenuOpacity: null, tooltipRadius: null, tooltipWaitDuration: null, tooltipShowDuration: null, tooltipSchemeColor: null, tooltipOpacity: null, dialogRadius: null, dialogElevation: null, dialogBackgroundSchemeColor: null, timePickerDialogRadius: null, snackBarElevation: null, snackBarBackgroundSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, tabBarItemSchemeColor: null, tabBarIndicatorSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: null, bottomNavigationBarElevation: null, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: null, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarHighlightOpacity: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: null, navigationBarElevation: null, navigationBarHeight: null, navigationBarLabelBehavior: null, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: null, navigationRailElevation: null, navigationRailLabelType: null, navigationRailGroupAlignment: null), useMaterial3: false, extensions: null)'));
+              'FlexColorScheme#00000(colorScheme: null, brightness: light, primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xffcefaf8), tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), error: Color(0xffb00020), surface: Color(0xffffffff), background: Color(0xffffffff), scaffoldBackground: Color(0xffffffff), appBarBackground: Color(0xff6200ee), dialogBackground: Color(0xffffffff), onPrimary: Color(0xffffffff), onPrimaryContainer: Color(0xffffffff), onSecondary: Color(0xff000000), onSecondaryContainer: Color(0xff000000), onTertiary: Color(0xffffffff), onTertiaryContainer: Color(0xff000000), onSurface: Color(0xff000000), onBackground: Color(0xff000000), onError: Color(0xffffffff), surfaceTint: null, tabBarStyle: forAppBar, appBarElevation: 1.0, bottomAppBarElevation: 2.0, tooltipsMatchBackground: true, transparentStatusBar: false, visualDensity: 0, v: 0.0), textTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), primaryTextTheme: TextTheme#00000(displayLarge: TextStyle(inherit: true, size: 80.0), displayMedium: null, displaySmall: null, headlineLarge: null, headlineMedium: null, headlineSmall: null, titleLarge: null, titleMedium: null, titleSmall: null, bodyLarge: null, bodyMedium: null, bodySmall: null, labelLarge: null, labelMedium: null, labelSmall: null), fontFamily: Roboto, fontFamilyFallback: null, package: null, materialTapTargetSize: null, pageTransitionsTheme: null, platform: android, typography: Typography#00000(englishLike: TextTheme#00000(displayLarge: TextStyle(debugLabel: englishLike displayLarge 2018, inherit: false, size: 96.0, weight: 300, letterSpacing: -1.5, baseline: alphabetic), displayMedium: TextStyle(debugLabel: englishLike displayMedium 2018, inherit: false, size: 60.0, weight: 300, letterSpacing: -0.5, baseline: alphabetic), displaySmall: TextStyle(debugLabel: englishLike displaySmall 2018, inherit: false, size: 48.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: englishLike headlineLarge 2018, inherit: false, size: 40.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: englishLike headlineMedium 2018, inherit: false, size: 34.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: englishLike headlineSmall 2018, inherit: false, size: 24.0, weight: 400, letterSpacing: 0.0, baseline: alphabetic), titleLarge: TextStyle(debugLabel: englishLike titleLarge 2018, inherit: false, size: 20.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), titleMedium: TextStyle(debugLabel: englishLike titleMedium 2018, inherit: false, size: 16.0, weight: 400, letterSpacing: 0.1, baseline: alphabetic), titleSmall: TextStyle(debugLabel: englishLike titleSmall 2018, inherit: false, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: englishLike bodyLarge 2018, inherit: false, size: 16.0, weight: 400, letterSpacing: 0.5, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: englishLike bodyMedium 2018, inherit: false, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic), bodySmall: TextStyle(debugLabel: englishLike bodySmall 2018, inherit: false, size: 12.0, weight: 400, letterSpacing: 0.4, baseline: alphabetic), labelLarge: TextStyle(debugLabel: englishLike labelLarge 2018, inherit: false, size: 14.0, weight: 500, letterSpacing: 1.3, baseline: alphabetic), labelMedium: TextStyle(debugLabel: englishLike labelMedium 2018, inherit: false, size: 11.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic), labelSmall: TextStyle(debugLabel: englishLike labelSmall 2018, inherit: false, size: 10.0, weight: 400, letterSpacing: 1.5, baseline: alphabetic)), dense: TextTheme#00000(displayLarge: TextStyle(debugLabel: dense displayLarge 2018, inherit: false, size: 96.0, weight: 100, baseline: ideographic), displayMedium: TextStyle(debugLabel: dense displayMedium 2018, inherit: false, size: 60.0, weight: 100, baseline: ideographic), displaySmall: TextStyle(debugLabel: dense displaySmall 2018, inherit: false, size: 48.0, weight: 400, baseline: ideographic), headlineLarge: TextStyle(debugLabel: dense headlineLarge 2018, inherit: false, size: 40.0, weight: 400, baseline: ideographic), headlineMedium: TextStyle(debugLabel: dense headlineMedium 2018, inherit: false, size: 34.0, weight: 400, baseline: ideographic), headlineSmall: TextStyle(debugLabel: dense headlineSmall 2018, inherit: false, size: 24.0, weight: 400, baseline: ideographic), titleLarge: TextStyle(debugLabel: dense titleLarge 2018, inherit: false, size: 21.0, weight: 500, baseline: ideographic), titleMedium: TextStyle(debugLabel: dense titleMedium 2018, inherit: false, size: 17.0, weight: 400, baseline: ideographic), titleSmall: TextStyle(debugLabel: dense titleSmall 2018, inherit: false, size: 15.0, weight: 500, baseline: ideographic), bodyLarge: TextStyle(debugLabel: dense bodyLarge 2018, inherit: false, size: 17.0, weight: 400, baseline: ideographic), bodyMedium: TextStyle(debugLabel: dense bodyMedium 2018, inherit: false, size: 15.0, weight: 400, baseline: ideographic), bodySmall: TextStyle(debugLabel: dense bodySmall 2018, inherit: false, size: 13.0, weight: 400, baseline: ideographic), labelLarge: TextStyle(debugLabel: dense labelLarge 2018, inherit: false, size: 15.0, weight: 500, baseline: ideographic), labelMedium: TextStyle(debugLabel: dense labelMedium 2018, inherit: false, size: 12.0, weight: 400, baseline: ideographic), labelSmall: TextStyle(debugLabel: dense labelSmall 2018, inherit: false, size: 11.0, weight: 400, baseline: ideographic)), tall: TextTheme#00000(displayLarge: TextStyle(debugLabel: tall displayLarge 2018, inherit: false, size: 96.0, weight: 400, baseline: alphabetic), displayMedium: TextStyle(debugLabel: tall displayMedium 2018, inherit: false, size: 60.0, weight: 400, baseline: alphabetic), displaySmall: TextStyle(debugLabel: tall displaySmall 2018, inherit: false, size: 48.0, weight: 400, baseline: alphabetic), headlineLarge: TextStyle(debugLabel: tall headlineLarge 2018, inherit: false, size: 40.0, weight: 400, baseline: alphabetic), headlineMedium: TextStyle(debugLabel: tall headlineMedium 2018, inherit: false, size: 34.0, weight: 400, baseline: alphabetic), headlineSmall: TextStyle(debugLabel: tall headlineSmall 2018, inherit: false, size: 24.0, weight: 400, baseline: alphabetic), titleLarge: TextStyle(debugLabel: tall titleLarge 2018, inherit: false, size: 21.0, weight: 700, baseline: alphabetic), titleMedium: TextStyle(debugLabel: tall titleMedium 2018, inherit: false, size: 17.0, weight: 400, baseline: alphabetic), titleSmall: TextStyle(debugLabel: tall titleSmall 2018, inherit: false, size: 15.0, weight: 500, baseline: alphabetic), bodyLarge: TextStyle(debugLabel: tall bodyLarge 2018, inherit: false, size: 17.0, weight: 700, baseline: alphabetic), bodyMedium: TextStyle(debugLabel: tall bodyMedium 2018, inherit: false, size: 15.0, weight: 400, baseline: alphabetic), bodySmall: TextStyle(debugLabel: tall bodySmall 2018, inherit: false, size: 13.0, weight: 400, baseline: alphabetic), labelLarge: TextStyle(debugLabel: tall labelLarge 2018, inherit: false, size: 15.0, weight: 700, baseline: alphabetic), labelMedium: TextStyle(debugLabel: tall labelMedium 2018, inherit: false, size: 12.0, weight: 400, baseline: alphabetic), labelSmall: TextStyle(debugLabel: tall labelSmall 2018, inherit: false, size: 11.0, weight: 400, baseline: alphabetic))), applyElevationOverlayColor: false, subThemesData: FlexSubThemesData#00000(interactionEffects: true, tintedDisabledControls: true, blendOnLevel : null, blendOnColors: true, useFlutterDefaults: false, adaptiveRemoveElevationTint: null, adaptiveElevationShadowsBack: null, adaptiveAppBarScrollUnderOff: null, adaptiveRadius: null, blendTextTheme: false, useTextTheme: null, useM2StyleDividerInM3: false, defaultRadius: 20.0, defaultRadiusAdaptive: null, buttonMinSize: null, buttonPadding: null, thickBorderWidth: null, thinBorderWidth: null, textButtonRadius: null, textButtonSchemeColor: null, textButtonTextStyle: null, filledButtonRadius: null, filledButtonSchemeColor: null, filledButtonTextStyle: null, elevatedButtonRadius: null, elevatedButtonElevation: null, elevatedButtonSchemeColor: null, elevatedButtonSecondarySchemeColor: null, elevatedButtonTextStyle: null, outlinedButtonRadius: null, outlinedButtonSchemeColor: null, outlinedButtonOutlineSchemeColor: null, outlinedButtonBorderWidth: null, outlinedButtonPressedBorderWidth: null, outlinedButtonTextStyle: null, toggleButtonsRadius: null, toggleButtonsSchemeColor: null, toggleButtonsUnselectedSchemeColor: null, toggleButtonsBorderSchemeColor: null, toggleButtonsBorderWidth: null, segmentedButtonRadius: null, segmentedButtonSchemeColor: null, segmentedButtonUnselectedSchemeColor: null, segmentedButtonUnselectedForegroundSchemeColor: null, segmentedButtonBorderSchemeColor: null, segmentedButtonBorderWidth: null, materialButtonSchemeColor: null, switchSchemeColor: null, switchThumbSchemeColor: null, checkboxSchemeColor: null, radioSchemeColor: null, unselectedToggleIsColored: false, sliderBaseSchemeColor: null, sliderIndicatorSchemeColor: null, sliderValueTinted: false, sliderValueIndicatorType: null, sliderShowValueIndicator: null, sliderTrackHeight: null, inputDecoratorRadius: null, inputDecoratorSchemeColor: null, inputDecoratorIsFilled: true, inputDecoratorFillColor: null, inputDecoratorBackgroundAlpha: null, inputDecoratorBorderSchemeColor: null, inputDecoratorBorderType: null, inputDecoratorFocusedHasBorder: true, inputDecoratorUnfocusedHasBorder: true, inputDecoratorUnfocusedBorderIsColored: true, inputDecoratorBorderWidth: null, inputDecoratorFocusedBorderWidth: null, inputDecoratorPrefixIconSchemeColor: null, fabRadius: null, fabUseShape: false, fabAlwaysCircular: false, fabSchemeColor: null, chipRadius: null, chipSchemeColor: null, chipSelectedSchemeColor: null, chipDeleteIconSchemeColor: null, cardRadius: null, cardElevation: null, popupMenuRadius: null, popupMenuElevation: null, popupMenuSchemeColor: null, popupMenuOpacity: null, dropdownMenuTextStyle: null, menuRadius: null, menuElevation: null, menuSchemeColor: null, menuOpacity: null, menuPadding: null, menuBarBackgroundSchemeColor: null, menuBarRadius: null, menuBarElevation: null, menuBarShadowColor: null, menuItemBackgroundSchemeColor: null, menuItemForegroundSchemeColor: null, menuIndicatorBackgroundSchemeColor: null, menuIndicatorForegroundSchemeColor: null, menuIndicatorRadius: null, tooltipRadius: null, tooltipWaitDuration: null, tooltipShowDuration: null, tooltipSchemeColor: null, tooltipOpacity: null, dialogRadius: null, dialogElevation: null, dialogBackgroundSchemeColor: null, useInputDecoratorThemeInDialogs: null, timePickerDialogRadius: null, timePickerElementRadius: null, snackBarRadius: null, snackBarElevation: null, snackBarBackgroundSchemeColor: null, snackBarActionSchemeColor: null, appBarBackgroundSchemeColor: null, appBarCenterTitle: null, appBarScrolledUnderElevation: null, bottomAppBarSchemeColor: null, tabBarItemSchemeColor: null, tabBarUnselectedItemSchemeColor: null, tabBarUnselectedItemOpacity: null, tabBarIndicatorSchemeColor: null, tabBarIndicatorSize: null, tabBarIndicatorWeight: null, tabBarIndicatorTopRadius: null, tabBarDividerColor: null, drawerRadius: null, drawerElevation: null, drawerBackgroundSchemeColor: null, drawerWidth: null, drawerIndicatorWidth: null, drawerIndicatorRadius: null, drawerIndicatorSchemeColor: null, drawerIndicatorOpacity: null, drawerSelectedItemSchemeColor: null, drawerUnselectedItemSchemeColor: null, bottomSheetBackgroundColor: null, bottomSheetModalBackgroundColor: null, bottomSheetRadius: null, bottomSheetElevation: null, bottomSheetModalElevation: null, bottomNavigationBarLabelTextStyle: null, bottomNavigationBarSelectedLabelSize: null, bottomNavigationBarUnselectedLabelSize: null, bottomNavigationBarSelectedLabelSchemeColor: null, bottomNavigationBarUnselectedLabelSchemeColor: null, bottomNavigationBarMutedUnselectedLabel: true, bottomNavigationBarSelectedIconSize: null, bottomNavigationBarUnselectedIconSize: null, bottomNavigationBarSelectedIconSchemeColor: null, bottomNavigationBarUnselectedIconSchemeColor: null, bottomNavigationBarMutedUnselectedIcon: true, bottomNavigationBarBackgroundSchemeColor: null, bottomNavigationBarOpacity: null, bottomNavigationBarElevation: null, bottomNavigationBarShowSelectedLabels: true, bottomNavigationBarShowUnselectedLabels: true, bottomNavigationBarType: null, bottomNavigationBarLandscapeLayout: null, navigationBarLabelTextStyle: null, navigationBarSelectedLabelSize: null, navigationBarUnselectedLabelSize: null, navigationBarSelectedLabelSchemeColor: null, navigationBarUnselectedLabelSchemeColor: null, navigationBarMutedUnselectedLabel: true, navigationBarSelectedIconSize: null, navigationBarUnselectedIconSize: null, navigationBarSelectedIconSchemeColor: null, navigationBarUnselectedIconSchemeColor: null, navigationBarMutedUnselectedIcon: true, navigationBarIndicatorSchemeColor: null, navigationBarIndicatorOpacity: null, navigationBarIndicatorRadius: null, navigationBarBackgroundSchemeColor: null, navigationBarOpacity: null, navigationBarElevation: null, navigationBarHeight: null, navigationBarLabelBehavior: null, navigationRailLabelTextStyle: null, navigationRailSelectedLabelSize: null, navigationRailUnselectedLabelSize: null, navigationRailSelectedLabelSchemeColor: null, navigationRailUnselectedLabelSchemeColor: null, navigationRailMutedUnselectedLabel: true, navigationRailSelectedIconSize: null, navigationRailUnselectedIconSize: null, navigationRailSelectedIconSchemeColor: null, navigationRailUnselectedIconSchemeColor: null, navigationRailMutedUnselectedIcon: true, navigationRailUseIndicator: true, navigationRailIndicatorSchemeColor: null, navigationRailIndicatorOpacity: null, navigationRailIndicatorRadius: null, navigationRailBackgroundSchemeColor: null, navigationRailOpacity: null, navigationRailElevation: null, navigationRailLabelType: null, navigationRailGroupAlignment: null), useMaterial3: false, extensions: null)'));
     });
     test(
         'FCS1.07a: Test toStringShort implemented via debugFillProperties '
@@ -632,14 +738,12 @@ void main() {
       onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
-      surfaceVariant: Color(0xffffffff),
+      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xff4d4d4d),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff999999),
+      outline: Color(0xFF737373),
+      outlineVariant: Color(0xFFBFBFBF),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
@@ -708,14 +812,12 @@ void main() {
       onBackground: Color(0xffffffff),
       surface: Color(0xff121212),
       onSurface: Color(0xffffffff),
-      surfaceVariant: Color(0xff121212),
+      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Color(0xffffffff),
-      outline: Color(0xffb3b3b3),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // outlineVariant: Color(0xff666666),
+      outline: Color(0xFF8C8C8C),
+      outlineVariant: Color(0xFF404040),
       shadow: Color(0xff000000),
-      // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-      // scrim: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xffffffff),
       onInverseSurface: Color(0xff000000),
       inversePrimary: Color(0xff5a4570),
@@ -779,17 +881,15 @@ void main() {
           onBackground: Colors.black,
           surface: Colors.white,
           onSurface: Colors.black,
-          surfaceVariant: Colors.white,
+          surfaceVariant: Color(0xFFEEEEEE),
           onSurfaceVariant: Colors.black,
           inverseSurface: Color(0xff121212),
           onInverseSurface: Colors.white,
           inversePrimary: Color(0xff9999ff),
-          outline: Color(0xff4d4d4d),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff999999),
+          outline: Color(0xFF737373),
+          outlineVariant: Color(0xFFBFBFBF),
           shadow: Colors.black,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
         )),
       );
     });
@@ -832,17 +932,15 @@ void main() {
           onBackground: Colors.white,
           surface: Color(0xff121212),
           onSurface: Colors.white,
-          surfaceVariant: Color(0xff121212),
+          surfaceVariant: Color(0xFF323232),
           onSurfaceVariant: Colors.white,
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Colors.black,
           inversePrimary: Color(0xff6f5970),
-          outline: Color(0xffb3b3b3),
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // outlineVariant: Color(0xff666666),
+          outline: Color(0xFF8C8C8C),
+          outlineVariant: Color(0xFF404040),
           shadow: Colors.black,
-          // TODO(rydmike): Temporarily removed, not available in Flutter 3.3.
-          // scrim: Colors.black,
+          scrim: Colors.black,
         )),
       );
     });
@@ -1029,12 +1127,6 @@ void main() {
   // SystemUiOverlayStyle to be used in an AnnotatedRegion.
   // The test uses null context and run as plain unit tests.
   //****************************************************************************
-
-  // TODO(rydmike): Divider color removed due to issue, put back when resolved.
-  // The commented lines in these are temporary and should be put back when
-  // the issue below is solved and has landed in stable channel.
-  // https://github.com/flutter/flutter/issues/100027
-  //
   group('FCS5: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
 
@@ -1047,6 +1139,7 @@ void main() {
           const SystemUiOverlayStyle(
               systemStatusBarContrastEnforced: false,
               systemNavigationBarColor: Colors.white,
+              systemNavigationBarDividerColor: Colors.transparent,
               systemNavigationBarIconBrightness: Brightness.dark,
               systemNavigationBarContrastEnforced: false),
         ),
@@ -1064,7 +1157,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.white,
-            // systemNavigationBarDividerColor: Colors.white,
+            systemNavigationBarDividerColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1084,7 +1177,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFFCCCCCC),
-            // systemNavigationBarDividerColor: Color(0xFFDDDDDD),
+            systemNavigationBarDividerColor: Color(0xFFDDDDDD),
             systemNavigationBarIconBrightness: Brightness.dark,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1104,7 +1197,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.black,
-            // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+            systemNavigationBarDividerColor: Color(0xFF2C2C2C),
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1124,7 +1217,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Colors.black,
-            // systemNavigationBarDividerColor: Colors.black,
+            systemNavigationBarDividerColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1146,7 +1239,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFF202020),
-            // systemNavigationBarDividerColor: Color(0xFF202020),
+            systemNavigationBarDividerColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1167,7 +1260,7 @@ void main() {
           const SystemUiOverlayStyle(
             systemStatusBarContrastEnforced: false,
             systemNavigationBarColor: Color(0xFF202020),
-            // systemNavigationBarDividerColor: Color(0xFF202020),
+            systemNavigationBarDividerColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.light,
             systemNavigationBarContrastEnforced: false,
           ),
@@ -1207,7 +1300,7 @@ void main() {
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1227,7 +1320,7 @@ void main() {
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF4545F3),
-          // systemNavigationBarDividerColor: Color(0xFF4545F3),
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1248,7 +1341,7 @@ void main() {
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          // systemNavigationBarDividerColor: Color(0xFF202020),
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1269,7 +1362,7 @@ void main() {
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1290,7 +1383,7 @@ void main() {
         const SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: Color(0xFF202020),
-          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1311,9 +1404,9 @@ void main() {
         SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
-          // Divider has opacity 0.8, when there is opacity on navbar.
-          // systemNavigationBarDividerColor:
-          //     const Color(0xFF2C2C2C).withOpacity(0.8),
+          // Divider has opacity 0.5, when there is opacity on navbar.
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0.5),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1334,9 +1427,9 @@ void main() {
         SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0.5),
-          // Divider has opacity 0.8, when there is opacity on navbar.
-          // systemNavigationBarDividerColor:
-          //     const Color(0xFF2C2C2C).withOpacity(0.8),
+          // Divider has opacity 0.5, when there is opacity on navbar.
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0.5),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1357,9 +1450,9 @@ void main() {
         SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: false,
           systemNavigationBarColor: const Color(0x00202020).withOpacity(0),
-          // Divider has opacity 0.8, when there is opacity on navbar.
-          // systemNavigationBarDividerColor:
-          //     const Color(0xFF2C2C2C).withOpacity(0.8),
+          // Divider has opacity 0.5, when there is opacity on navbar.
+          systemNavigationBarDividerColor:
+              const Color(0xFF2C2C2C).withOpacity(0.5),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1383,7 +1476,7 @@ void main() {
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.black,
-          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarDividerColor: Color(0xFF2C2C2C),
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1409,7 +1502,7 @@ void main() {
           statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Colors.black,
-          // systemNavigationBarDividerColor: Color(0xFF2C2C2C),
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1433,7 +1526,7 @@ void main() {
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Colors.white,
-          // systemNavigationBarDividerColor: Colors.white,
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1459,7 +1552,7 @@ void main() {
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: Colors.white,
-          // systemNavigationBarDividerColor: Colors.white,
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.light,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1488,7 +1581,7 @@ void main() {
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: Color(0xFFF44336),
-          // systemNavigationBarDividerColor: Color(0xFFF44336),
+          systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1519,9 +1612,9 @@ void main() {
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFFF44336).withOpacity(0.5),
-          // Divider has opacity 0.8, when there is opacity on navbar.
-          // systemNavigationBarDividerColor:
-          //     const Color(0xFF2196F3).withOpacity(0.8),
+          // Divider has opacity 0.5, when there is opacity on navbar.
+          systemNavigationBarDividerColor:
+              const Color(0xFF2196F3).withOpacity(0.5),
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
         ),
@@ -1549,7 +1642,7 @@ void main() {
           statusBarColor: Colors.transparent,
           statusBarBrightness: Brightness.light,
           statusBarIconBrightness: Brightness.dark,
-          // systemNavigationBarDividerColor: Color(0xFF2196F3),
+          systemNavigationBarDividerColor: Color(0xFF2196F3),
           systemNavigationBarColor: Color(0xFFF44336),
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarContrastEnforced: false,
@@ -1564,11 +1657,6 @@ void main() {
   // SystemUiOverlayStyle to be used in an AnnotatedRegion, when it is used
   // as a Widget, with a BuildContext and a Theme present.
   //****************************************************************************
-  // TODO(rydmike): Divider color removed due to issue, put back when resolved.
-  // The commented lines in these are temporary and should be put back when
-  // the issue below is solved and has landed in stable channel.
-  // https://github.com/flutter/flutter/issues/100027
-  //
   group('FCS6: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
 
@@ -1599,6 +1687,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.white,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarContrastEnforced: false,
                 ),
               );
@@ -1637,7 +1726,7 @@ void main() {
                 const SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.white,
-                  // systemNavigationBarDividerColor: Colors.white,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1678,6 +1767,7 @@ void main() {
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
                   systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarContrastEnforced: false,
                 ),
               );
@@ -1717,8 +1807,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).scaffoldBackgroundColor,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1758,6 +1847,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1798,8 +1888,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.surface,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1839,6 +1928,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1879,8 +1969,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.background,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1921,7 +2010,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  // systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
+                  systemNavigationBarDividerColor: const Color(0xFFDDDDDD),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -1963,9 +2052,9 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  // Divider has opacity 0.8, when there is opacity on navbar.
-                  // systemNavigationBarDividerColor:
-                  //     const Color(0xFFDDDDDD).withOpacity(0.8),
+                  // Divider has opacity 0.5, when there is opacity on navbar.
+                  systemNavigationBarDividerColor:
+                      const Color(0xFFDDDDDD).withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2007,8 +2096,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2051,9 +2139,7 @@ void main() {
                   systemNavigationBarColor: Theme.of(context)
                       .scaffoldBackgroundColor
                       .withOpacity(0.0),
-                  // systemNavigationBarDividerColor: Theme.of(context)
-                  //     .scaffoldBackgroundColor
-                  //     .withOpacity(0.01),
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2094,6 +2180,7 @@ void main() {
                 const SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.black,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2133,7 +2220,7 @@ void main() {
                 const SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor: Colors.black,
-                  // systemNavigationBarDividerColor: Colors.black,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2173,6 +2260,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2213,8 +2301,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).scaffoldBackgroundColor,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2254,6 +2341,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2294,8 +2382,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.surface,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2335,6 +2422,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2375,8 +2463,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.background,
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.background,
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2417,7 +2504,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface,
-                  // systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
+                  systemNavigationBarDividerColor: const Color(0xFF2C2C2C),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2459,9 +2546,9 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  // Divider has opacity 0.8, when there is opacity on navbar.
-                  // systemNavigationBarDividerColor:
-                  //     const Color(0xFF2C2C2C).withOpacity(0.8),
+                  // Divider has opacity 0.5, when there is opacity on navbar.
+                  systemNavigationBarDividerColor:
+                      const Color(0xFF2C2C2C).withOpacity(0.5),
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2503,8 +2590,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).colorScheme.surface.withOpacity(0.5),
-                  // systemNavigationBarDividerColor:
-                  //     Theme.of(context).colorScheme.surface.withOpacity(0.5),
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),
@@ -2546,9 +2632,7 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-                  // systemNavigationBarDividerColor: Theme.of(context)
-                  //     .scaffoldBackgroundColor
-                  //     .withOpacity(0.01),
+                  systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
                 ),

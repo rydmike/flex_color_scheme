@@ -43,6 +43,13 @@ class ShowTonalPalette extends StatelessWidget {
       // Pass in null if set to not secondary or tertiary colors seed keys.
       secondary: controller.useSecondary ? colors.secondary.value : null,
       tertiary: controller.useTertiary ? colors.tertiary.value : null,
+      // If custom surfaceTint is not null, use it as key for neutrals.
+      neutral: isLight
+          ? controller.surfaceTintLight?.value
+          : controller.surfaceTintDark?.value,
+      neutralVariant: isLight
+          ? controller.surfaceTintLight?.value
+          : controller.surfaceTintDark?.value,
       // Tone config details we get from active FlexTones.
       primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
       primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
@@ -57,55 +64,66 @@ class ShowTonalPalette extends StatelessWidget {
       neutralVariantChroma:
           controller.useKeyColors ? tones.neutralVariantChroma : 0,
     );
+    // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
+    // For some reason tone hover feature started causing issues in WEB release
+    // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
+    // why that happens only on web release mode and not in its debug mode or
+    // any mode VM mode build.
+    // Removal of this feature has removed commented code in:
+    // - theme_controller.dart
+    // - scheme_colors.dart
+    // - show_tonal_palette.dart
+    // - seeded_color_scheme_settings.dart
+    // ------- Commented hover setters below ------
     return Column(
       children: <Widget>[
         TonalPaletteColors(
           name: 'Primary',
           tonalPalette: palettes.primary.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.primary
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //         controller.hoverTonalPalette == TonalPalettes.primary
+          //     ? controller.hoverColor
+          //     : null,
         ),
         TonalPaletteColors(
           name: 'Secondary',
           tonalPalette: palettes.secondary.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.secondary
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //         controller.hoverTonalPalette == TonalPalettes.secondary
+          //     ? controller.hoverColor
+          //     : null,
         ),
         TonalPaletteColors(
           name: 'Tertiary',
           tonalPalette: palettes.tertiary.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.tertiary
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //         controller.hoverTonalPalette == TonalPalettes.tertiary
+          //     ? controller.hoverColor
+          //     : null,
         ),
         TonalPaletteColors(
           name: 'Error',
           tonalPalette: palettes.error.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.error
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //         controller.hoverTonalPalette == TonalPalettes.error
+          //     ? controller.hoverColor
+          //     : null,
         ),
         TonalPaletteColors(
           name: 'Neutral',
           tonalPalette: palettes.neutral.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.neutral
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //         controller.hoverTonalPalette == TonalPalettes.neutral
+          //     ? controller.hoverColor
+          //     : null,
         ),
         TonalPaletteColors(
           name: 'Neutral variant',
           tonalPalette: palettes.neutralVariant.asList,
-          selectedColor: controller.useKeyColors &&
-                  controller.hoverTonalPalette == TonalPalettes.neutralVariant
-              ? controller.hoverColor
-              : null,
+          // selectedColor: controller.useKeyColors &&
+          //       controller.hoverTonalPalette == TonalPalettes.neutralVariant
+          //     ? controller.hoverColor
+          //     : null,
         ),
       ],
     );

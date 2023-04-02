@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../const/app_data.dart';
+import '../../const/app.dart';
 import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key sub theme color properties
@@ -47,8 +47,8 @@ class ShowSubThemeColors extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Get effective background color.
@@ -81,7 +81,19 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color elevatedButtonColor = theme
             .elevatedButtonTheme.style?.backgroundColor
             ?.resolve(<MaterialState>{}) ??
+        (useMaterial3 ? colorScheme.surface : colorScheme.primary);
+    final Color elevatedForegroundButtonColor = theme
+            .elevatedButtonTheme.style?.foregroundColor
+            ?.resolve(<MaterialState>{}) ??
+        (useMaterial3 ? colorScheme.primary : colorScheme.onPrimary);
+    final Color filledButtonColor = theme
+            .filledButtonTheme.style?.backgroundColor
+            ?.resolve(<MaterialState>{}) ??
         colorScheme.primary;
+    final Color tonalButtonColor = theme
+            .filledButtonTheme.style?.backgroundColor
+            ?.resolve(<MaterialState>{}) ??
+        colorScheme.secondaryContainer;
     final Color outlinedButtonColor = theme
             .outlinedButtonTheme.style?.foregroundColor
             ?.resolve(<MaterialState>{}) ??
@@ -96,6 +108,11 @@ class ShowSubThemeColors extends StatelessWidget {
             (theme.useMaterial3
                 ? colorScheme.primaryContainer
                 : colorScheme.secondary);
+    final Color onFloatingActionButtonColor =
+        theme.floatingActionButtonTheme.foregroundColor ??
+            (useMaterial3
+                ? theme.colorScheme.onPrimaryContainer
+                : _onColor(floatingActionButtonColor, background));
     final Color switchColor = theme.switchTheme.thumbColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
@@ -105,8 +122,14 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<MaterialState>{MaterialState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
-    final Color circleAvatarColor =
-        isDark ? theme.primaryColorLight : theme.primaryColorDark;
+    final Color circleAvatarColor = useMaterial3
+        ? theme.colorScheme.primaryContainer
+        : isDark
+            ? theme.primaryColorLight
+            : theme.primaryColorDark;
+    final Color onCircleAvatarColor = useMaterial3
+        ? theme.colorScheme.onPrimaryContainer
+        : _onColor(circleAvatarColor, background);
     final Color chipColor =
         theme.chipTheme.backgroundColor ?? colorScheme.primary;
     final Color inputDecoratorColor =
@@ -192,7 +215,7 @@ class ShowSubThemeColors extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              'Component Colors',
+              'Component sub theme and interaction effect colors',
               style: theme.textTheme.titleMedium,
             ),
           ),
@@ -205,17 +228,29 @@ class ShowSubThemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Elevated\nButton',
                 color: elevatedButtonColor,
-                textColor: _onColor(elevatedButtonColor, background),
+                textColor: elevatedForegroundButtonColor,
+                elevation: useMaterial3 ? 2 : null,
+                shadowColor: Colors.transparent,
+              ),
+              ColorCard(
+                label: 'Filled\nButton',
+                color: filledButtonColor,
+                textColor: _onColor(filledButtonColor, background),
+              ),
+              ColorCard(
+                label: 'Tonal\nButton',
+                color: tonalButtonColor,
+                textColor: _onColor(tonalButtonColor, background),
               ),
               ColorCard(
                 label: 'Outlined\nButton',
-                color: outlinedButtonColor,
-                textColor: _onColor(outlinedButtonColor, background),
+                color: colorScheme.surface,
+                textColor: outlinedButtonColor,
               ),
               ColorCard(
                 label: 'Text\nButton',
-                color: textButtonColor,
-                textColor: _onColor(textButtonColor, background),
+                color: colorScheme.surface,
+                textColor: textButtonColor,
               ),
               ColorCard(
                 label: 'Toggle\nButtons',
@@ -240,12 +275,12 @@ class ShowSubThemeColors extends StatelessWidget {
               ColorCard(
                 label: 'Floating\nAction\nButton',
                 color: floatingActionButtonColor,
-                textColor: _onColor(floatingActionButtonColor, background),
+                textColor: onFloatingActionButtonColor,
               ),
               ColorCard(
                 label: 'Circle\nAvatar',
                 color: circleAvatarColor,
-                textColor: _onColor(circleAvatarColor, background),
+                textColor: onCircleAvatarColor,
               ),
               ColorCard(
                 label: 'Chips',

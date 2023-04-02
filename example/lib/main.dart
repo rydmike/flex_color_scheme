@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'shared/const/app_data.dart';
+import 'shared/const/app.dart';
 import 'shared/widgets/app/responsive_scaffold.dart';
 import 'shared/widgets/app/show_color_scheme_colors.dart';
 import 'shared/widgets/app/show_sub_pages.dart';
 import 'shared/widgets/app/show_sub_theme_colors.dart';
 import 'shared/widgets/app/show_theme_data_colors.dart';
 import 'shared/widgets/universal/page_body.dart';
+import 'shared/widgets/universal/showcase_material.dart';
 import 'shared/widgets/universal/theme_mode_switch.dart';
-import 'shared/widgets/universal/theme_showcase.dart';
 
 /// DEFAULT EXAMPLE - Hot Reload Playground
 ///
@@ -162,6 +162,7 @@ const bool _swapColors = false;
 // * 4 = Primary + container & Secondary + container
 // * 5 = Primary + container & Secondary + container & tertiary colors
 // * 6 = Primary + container & Secondary + container & tertiary + container
+// * 7 = PST, Primary, Secondary and Tertiary, containers computed.
 //
 // This can be a quick way to try what you theme looks like when using less
 // source colors and just different shades of the same color, that are still
@@ -390,11 +391,13 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   inputDecoratorIsFilled: true,
   // If you do not want any underline/outline on the input decorator when it is
   // not in focus, then set this to false.
-  inputDecoratorUnfocusedHasBorder: true,
+  inputDecoratorUnfocusedHasBorder: false,
   // Select the ColorScheme color used for input decoration border.
   // Primary is default so no need to set that, used here as placeholder to
   // enable easy selection of other options.
   inputDecoratorSchemeColor: SchemeColor.primary,
+  // Set some alpha channel opacity value input decorator.
+  inputDecoratorBackgroundAlpha: 20,
 
   // Some FAB (Floating Action Button) settings.
   //
@@ -419,8 +422,8 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Widgets that use outline borders can be easily adjusted via these
   // properties, they affect the outline input decorator, outlined button and
   // toggle buttons.
-  thickBorderWidth: 2, // Default is 2.0.
-  thinBorderWidth: 1.5, // Default is 1.0.
+  thickBorderWidth: 1.5, // Default is 2.0.
+  thinBorderWidth: 1, // Default is 1.0.
 
   // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.
@@ -549,6 +552,7 @@ class DemoApp extends StatefulWidget {
 
 class _DemoAppState extends State<DemoApp> {
   ThemeMode themeMode = ThemeMode.system;
+  bool useMaterial3 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -558,6 +562,8 @@ class _DemoAppState extends State<DemoApp> {
       // Define the light theme for the app, based on defined colors and
       // properties above.
       theme: FlexThemeData.light(
+        // Use local state to toggle usage of Material 3.
+        useMaterial3: useMaterial3,
         // Want to use a built in scheme? Don't assign any value to colors.
         // We just use the _useScheme bool toggle here from above, only for easy
         // switching via code params so you can try options handily.
@@ -614,7 +620,7 @@ class _DemoAppState extends State<DemoApp> {
         // You may often want a different style on the app bar in dark and
         // light theme mode, therefore it was not set via a shared value
         // above in this template.
-        appBarStyle: FlexAppBarStyle.primary,
+        appBarStyle: null, // Try different style, e.g.FlexAppBarStyle.primary,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
@@ -649,6 +655,8 @@ class _DemoAppState extends State<DemoApp> {
 
       // Define the corresponding dark theme for the app.
       darkTheme: FlexThemeData.dark(
+        // Use local state to toggle usage of Material 3.
+        useMaterial3: useMaterial3,
         // If you want to base the dark scheme on your light colors,
         // you can also compute it from the light theme's FlexSchemeColors.
         // Here you can do so by setting _computeDarkTheme above to true.
@@ -698,7 +706,7 @@ class _DemoAppState extends State<DemoApp> {
         // You may often want a different style on the AppBar in dark and light
         // theme mode, therefore it was not set via a shared value value
         // above in this template.
-        appBarStyle: FlexAppBarStyle.background,
+        appBarStyle: null, // Try styles like: FlexAppBarStyle.background,
         appBarElevation: _appBarElevation,
         appBarOpacity: _appBarOpacity,
         transparentStatusBar: _transparentStatusBar,
@@ -732,6 +740,12 @@ class _DemoAppState extends State<DemoApp> {
             themeMode = mode;
           });
         },
+        useMaterial3: useMaterial3,
+        onMaterial3Changed: (bool value) {
+          setState(() {
+            useMaterial3 = value;
+          });
+        },
       ),
     );
   }
@@ -759,10 +773,14 @@ class HomePage extends StatefulWidget {
     super.key,
     required this.themeMode,
     required this.onThemeModeChanged,
+    required this.useMaterial3,
+    required this.onMaterial3Changed,
   });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
+  final bool useMaterial3;
+  final ValueChanged<bool> onMaterial3Changed;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -782,13 +800,13 @@ class _HomePageState extends State<HomePage> {
         ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
     menuItemsEnabled =
-        List<bool>.generate(AppData.menuItems.length, (int i) => false);
-    menuItemsEnabled[1] = true;
+        List<bool>.generate(App.menuItems.length, (int i) => false);
+    menuItemsEnabled[2] = true;
+    menuItemsEnabled[3] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        AppData.menuItems.length,
-        (int i) => ResponsiveMenuItemIconState.primary);
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
   }
 
   @override
@@ -796,7 +814,10 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[1] = isLight
+    menuItemsIconState[2] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[3] = theme.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
@@ -810,11 +831,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final double margins = AppData.responsiveInsets(media.size.width);
+    final double margins = App.responsiveInsets(media.size.width);
     final double topPadding = media.padding.top + kToolbarHeight + margins;
     final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
-        media.size.height < AppData.phoneHeightBreakpoint;
+    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineSmall!;
@@ -854,34 +875,41 @@ class _HomePageState extends State<HomePage> {
         opacity: 0.60,
       ),
       child: ResponsiveScaffold(
-        title: Text(AppData.title(context)),
-        menuTitle: const Text(AppData.packageName),
+        title: Text(App.title(context)),
+        menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
-          AppData.title(context),
+          App.title(context),
           style:
-              theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
+              theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
         ),
-        menuLeadingSubtitle: const Text('Version ${AppData.versionMajor}'),
+        menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
-        menuItems: AppData.menuItems,
+        menuItems: App.menuItems,
         menuItemsEnabled: menuItemsEnabled,
         menuItemsIconState: menuItemsIconState,
         railWidth: isPhone ? 52 : 66,
-        breakpointShowFullMenu: AppData.desktopWidthBreakpoint,
+        breakpointShowFullMenu: App.desktopWidthBreakpoint,
         extendBodyBehindAppBar: true,
         extendBody: true,
         onSelect: (int index) {
-          if (index == 1) {
+          if (index == 2) {
             if (isDark) {
               widget.onThemeModeChanged(ThemeMode.light);
             } else {
               widget.onThemeModeChanged(ThemeMode.dark);
             }
           }
+          if (index == 3) {
+            if (widget.useMaterial3) {
+              widget.onMaterial3Changed(false);
+            } else {
+              widget.onMaterial3Changed(true);
+            }
+          }
         },
         body: PageBody(
           controller: scrollController,
-          constraints: const BoxConstraints(maxWidth: AppData.maxBodyWidth),
+          constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
             padding: EdgeInsets.fromLTRB(
@@ -913,6 +941,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 8),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Use Material 3'),
+                value: widget.useMaterial3,
+                onChanged: (bool value) {
+                  widget.onMaterial3Changed(value);
+                },
+              ),
+              const SizedBox(height: 8),
               const ShowColorSchemeColors(),
               const SizedBox(height: 8),
               const ShowThemeDataColors(),
@@ -923,7 +960,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(),
               Text('Theme Showcase', style: headlineMedium),
               const SizedBox(height: 8),
-              const ThemeShowcase(),
+              const ShowcaseMaterial(),
             ],
           ),
         ),

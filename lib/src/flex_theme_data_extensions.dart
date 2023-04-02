@@ -78,8 +78,7 @@ extension FlexThemeData on ThemeData {
     /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
     /// you already have a custom [ColorScheme] based color definition that
     /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities. This will become particularly useful when using Material 3
-    /// based design and its seed generated color schemes.
+    /// capabilities.
     ///
     /// If you provide both a [ColorScheme] and some individual direct property
     /// values that also exist in a [ColorScheme], the individual property
@@ -92,15 +91,15 @@ extension FlexThemeData on ThemeData {
     /// is the light theme mode factory. Make sure the colors used in your color
     /// scheme are intended for a light theme.
     ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
-    /// and [background] colors in the provided [colorScheme] will be overridden
-    /// by the computed color branded surfaces. If your [colorScheme] already
-    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
-    /// using them.
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
+    /// [surfaceVariant], [background] and [inverseSurface] colors in the
+    /// provided [colorScheme] will be overridden by the computed color branded
+    /// surfaces. If your [colorScheme] already contains branded surface colors,
+    /// then keep [blendLevel] = 0 to continue using them.
     ///
     /// If you use [lightIsWhite] factory feature, it will also override your
-    /// [colorScheme] based [surface] and [background] properties and make them
-    /// 8% lighter.
+    /// [colorScheme] based mentioned color properties above and make them
+    /// 5% lighter.
     ///
     /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
@@ -121,7 +120,7 @@ extension FlexThemeData on ThemeData {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the six main scheme colors to be used when creating
+    /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
@@ -135,27 +134,27 @@ extension FlexThemeData on ThemeData {
     /// * 4 = Primary + container & Secondary + container
     /// * 5 = Primary + container & Secondary + container & tertiary colors
     /// * 6 = Primary + container & Secondary + container & tertiary + container
+    /// * 7 = Primary, Secondary and tertiary, container colors computed.
     ///
     /// By default the value is 6 and all main scheme colors in
     /// `FlexSchemeColor` are used.
     ///
+    /// The integer value is not a very obvious property to use to configure
+    /// this feature. Future version may improve it. However with the Themes
+    /// Playground you don't have to remember what number does what.
+    ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
-    /// required primary color.
-    ///
-    /// With 2, it is equivalent to as if we would have
+    /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
-    ///
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
-    /// the colors in a [FlexSchemeColor.from].
-    ///
-    /// If your used [FlexColorScheme] `colors` was actually created
-    /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
-    /// effective scheme as the computed values will be the same as the
-    /// [FlexSchemeColor.from] is using to compute any main missing scheme
-    /// color values.
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+    /// the color selection. If your used [FlexColorScheme] `colors` was
+    /// actually created with [FlexSchemeColor.from] with only the primary
+    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+    /// all produce the same effective scheme as the computed values will be
+    /// the same as the [FlexSchemeColor.from] is using to compute any main
+    /// missing scheme color values.
     final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds.
@@ -262,8 +261,9 @@ extension FlexThemeData on ThemeData {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -278,22 +278,28 @@ extension FlexThemeData on ThemeData {
     /// bar area.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -301,7 +307,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -474,6 +480,10 @@ extension FlexThemeData on ThemeData {
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
+    ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
@@ -665,18 +675,25 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
-    /// A color used as an overlay on a surface color to indicate a component's
-    /// elevation.
+    /// A custom color used as an overlay on a surface color to indicate a
+    /// component's elevation and surface color branding or tinting.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via this extension behavior.
     /// If a [colorScheme] was provided where this corresponding color is
     /// defined, this color property will override the same color in it.
     ///
-    /// This color is used by M3 for colored elevation, it is also used as the
-    /// blend color for FlexColorScheme surface blends.
+    /// This color is used by Material 3 for colored elevation, it is also used
+    /// as the blend color for FlexColorScheme surface blends. Additionally
+    /// this color is if provided used as key color for seeding
+    /// the neutral color palettes, when seed generated color schemes are used.
+    /// It is important that all these properties use the same color.
     ///
-    /// If undefined it defaults to [primary] color.
+    /// Typically this color is not customized, most designs use the default
+    /// where the theme primary color is used for slightly mixing it into the
+    /// neutral background and surface colors, when seeding is used. As well as
+    /// using it for the the elevation tint in Material 3, plus for the
+    /// surface blends that can optionally be added with FlexColorScheme.
+    ///
+    /// If undefined, [primary] color is used.
     final Color? surfaceTint,
 
     /// Makes the light theme backgrounds lighter or even white.
@@ -792,8 +809,8 @@ extension FlexThemeData on ThemeData {
     /// By default, if a `defaultRadius` is not specified, each widgets corner
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
-    /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// defaults when it is possible to do so in Flutter SDK theming when using
+    /// Material2 mode and via defaults also in Material 3 mode.
     ///
     /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
@@ -801,24 +818,45 @@ extension FlexThemeData on ThemeData {
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// Opinionated sub themes are provided for:
+    /// Customizable sub-themes are available for:
     ///
+    /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+    /// * [BottomAppBarTheme] for [BottomAppBar] via
+    ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [FlexSubThemes.bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [ButtonThemeData] for old deprecated buttons, via
+    ///   [FlexSubThemes.buttonTheme].
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+    /// * [DropdownMenuThemeData] for [DropDownMenu] via
+    ///   [FlexSubThemes.dropdownMenuTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
     ///   [FlexSubThemes.elevatedButtonTheme].
+    /// * [FilledButtonThemeData] for [FilledButton] via
+    ///   [FlexSubThemes.filledButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
     ///   [FlexSubThemes.floatingActionButtonTheme].
+    /// * [IconButtonThemeData] for [IconButton] via
+    ///   [FlexSubThemes.iconButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+    /// * [MenuButtonThemeData] for [MenuButton] via
+    ///   [FlexSubThemes.menuButtonTheme].
+    /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+    ///   [FlexSubThemes.menuTheme].
+    /// * [ListTileThemeData] for [ListTile] via
+    ///   [FlexSubThemes.listTileTheme].
     /// * [NavigationBarThemeData] for [NavigationBar] via
     ///   [FlexSubThemes.navigationBarTheme].
+    /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+    ///   [FlexSubThemes.navigationDrawerTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
     ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
@@ -826,9 +864,10 @@ extension FlexThemeData on ThemeData {
     /// * [PopupMenuThemeData] for [PopupMenuButton] via
     ///   [FlexSubThemes.popupMenuTheme].
     /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
@@ -836,9 +875,6 @@ extension FlexThemeData on ThemeData {
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
     ///   [FlexSubThemes.toggleButtonsTheme].
     /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
-    ///
-    /// * The custom `ButtonThemeData` even still provides matching styling to
-    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -945,10 +981,27 @@ extension FlexThemeData on ThemeData {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -1080,44 +1133,83 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
+    /// If true, then widgets that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3. If false,
+    /// they will use the Material 2 look and feel.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app as some widgets are migrated
+    /// while others have yet to be.
+    ///
+    /// Defaults to false. When the Material 3 specification is complete
+    /// and all widgets are migrated on stable, we will change this flag to be
+    /// true by default. After that change has landed on stable, we will
+    /// deprecate this flag and remove all uses of it. At that point, the
+    /// `material` library will aim to only support Material 3.
+    ///
+    /// ## Defaults
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
     /// some properties will get updated defaults. Please note that
     /// [ThemeData.copyWith] with [useMaterial3] set to true will
     /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// ```
-    /// Property      | Material 3 default          | Material 2 default      |
-    /// ------------- | --------------------------  | ----------------------  |
-    /// typography]   | Typography.material2021]    | Typography.material2014]|
-    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
-    /// ```
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+    ///
+    /// | Property        | M3 default                 | M2 default           |
+    /// | :-------------- | :------------------------- | :------------------- |
+    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
+    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// If [brightness] is [Brightness.dark] then the default color scheme will
+    /// be either the M3 baseline dark color scheme or the M2 baseline dark
+    /// color scheme depending on [useMaterial3].
     ///
     /// ## Affected widgets
     ///
     /// This flag affects styles and components.
     ///
     /// ### Styles
-    ///   * Color: [ColorScheme], [Material]
+    ///   * Color: [ColorScheme], [Material] (see table above)
     ///   * Shape: (see components below)
-    ///   * Typography: `typography` (see table above)
+    ///   * Typography: [Typography] (see table above)
     ///
     /// ### Components
-    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
-    ///   * FAB: [FloatingActionButton]
-    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Badges: [Badge]
+    ///   * Bottom app bar: [BottomAppBar]
+    ///   * Bottom sheets: [BottomSheet]
+    ///   * Buttons
+    ///     - Common buttons: [ElevatedButton], [FilledButton],
+    ///       [OutlinedButton], [TextButton]
+    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+    ///     - Icon buttons: [IconButton]
+    ///     - Segmented buttons: [SegmentedButton]
     ///   * Cards: [Card]
+    ///   * Checkbox: [Checkbox]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
     ///     - [InputChip]
     ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Divider: [Divider]
     ///   * Lists: [ListTile]
-    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
-    ///   * [NavigationRail]
+    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation rail: [NavigationRail]
+    ///   * Progress indicators: [CircularProgressIndicator],
+    ///     [LinearProgressIndicator]
+    ///   * Radio button: [Radio]
+    ///   * Snack bar: [SnackBar]
+    ///   * Slider: [Slider]
+    ///   * Switch: [Switch]
+    ///   * Tabs: [TabBar]
+    ///   * TextFields: [TextField] together with its [InputDecoration]
     ///   * Top app bar: [AppBar]
     ///
     /// In addition, this flag enables features introduced in Android 12.
@@ -1126,17 +1218,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// See also:
     ///
-    ///   * [Material Design 3](https://m3.material.io).
-    ///
-    /// --------------------------------------------------------
-    ///
-    /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, using [FlexColorScheme] sub-themes will produce widget
-    /// sub-themes, using current Flutter Material 2 theming limitations, that
-    /// by default also implement the Material 3 design and look when it is
-    /// possible within current SDK limits. During SDK transition to full M3
-    /// support, keeping useMaterial3 false and just using the FlexColorScheme
-    /// sub-theming, may be preferred since it has fewer transitional issues.
+    ///   * [Material 3 specification](https://m3.material.io/)
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
@@ -1248,6 +1330,8 @@ extension FlexThemeData on ThemeData {
         materialTapTargetSize: materialTapTargetSize,
         pageTransitionsTheme: pageTransitionsTheme,
         fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
@@ -1290,8 +1374,7 @@ extension FlexThemeData on ThemeData {
     /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
     /// you already have a custom [ColorScheme] based color definition that
     /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities. This will become particularly useful when using Material 3
-    /// based design and its seed generated color schemes.
+    /// capabilities.
     ///
     /// If you provide both a [ColorScheme] and some individual direct property
     /// values that also exist in a [ColorScheme], the individual property
@@ -1304,15 +1387,15 @@ extension FlexThemeData on ThemeData {
     /// is the light theme mode factory. Make sure the colors used in your color
     /// scheme are intended for a light theme.
     ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
-    /// and [background] colors in the provided [colorScheme] will be overridden
-    /// by the computed color branded surfaces. If your [colorScheme] already
-    /// contains branded surface colors, then keep [blendLevel] = 0 to continue
-    /// using them.
+    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
+    /// [surfaceVariant], [background] and [inverseSurface] colors in the
+    /// provided [colorScheme] will be overridden by the computed color branded
+    /// surfaces. If your [colorScheme] already contains branded surface colors,
+    /// then keep [blendLevel] = 0 to continue using them.
     ///
-    /// If you use [lightIsWhite] factory feature, it will also override your
-    /// [colorScheme] based [surface] and [background] properties and make them
-    /// 8% lighter.
+    /// If you use [darkIsTrueBlack] factory feature, it will also override your
+    /// [colorScheme] based mentioned color properties above and make them
+    /// 5% darker.
     ///
     /// If you opt in on using sub themes with and have set
     /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
@@ -1333,7 +1416,7 @@ extension FlexThemeData on ThemeData {
     /// default color assignments from the color scheme.
     final ColorScheme? colorScheme,
 
-    /// The number of the six main scheme colors to be used when creating
+    /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
     ///
     /// This is a convenience property that allows you to vary which colors to
@@ -1347,22 +1430,27 @@ extension FlexThemeData on ThemeData {
     /// * 4 = Primary + container & Secondary + container
     /// * 5 = Primary + container & Secondary + container & tertiary colors
     /// * 6 = Primary + container & Secondary + container & tertiary + container
+    /// * 7 = Primary, Secondary and tertiary, container colors computed.
     ///
     /// By default the value is 6 and all main scheme colors in
     /// `FlexSchemeColor` are used.
+    ///
+    /// The integer value is not a very obvious property to use to configure
+    /// this feature. Future version may improve it. However with the Themes
+    /// Playground you don't have to remember what number does what.
     ///
     /// When the value is 1, the result is the same as if we would have
     /// created the colors with [FlexSchemeColor.from] by only giving it the
     /// required primary color. With 2, it is equivalent to as if we would have
     /// given it only the primary and secondary colors, and so on.
     /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 6 of
-    /// the colors. If your used [FlexColorScheme] `colors` was actually created
-    /// with [FlexSchemeColor.from] with only the primary color defined, then
-    /// changing the value from 6 ... 3, 2 or 1, will all produce the same
-    /// effective scheme as the computed values will be the same as the
-    /// [FlexSchemeColor.from] is using to compute any main missing scheme
-    /// color values.
+    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+    /// the color selection. If your used [FlexColorScheme] `colors` was
+    /// actually created with [FlexSchemeColor.from] with only the primary
+    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+    /// all produce the same effective scheme as the computed values will be
+    /// the same as the [FlexSchemeColor.from] is using to compute any main
+    /// missing scheme color values.
     final int usedColors = 6,
 
     /// Blends theme colors into surfaces and backgrounds.
@@ -1469,8 +1557,9 @@ extension FlexThemeData on ThemeData {
     /// Frosted glass UI effect is thus beyond the scope of what
     /// FlexColorScheme can do alone as it only affects ThemeData.
     ///
-    /// Defaults to 1, fully opaque, no transparency. Must be from 0 to 1.
-    final double appBarOpacity = 1,
+    /// If null, defaults to 1, fully opaque, no transparency.
+    /// If not null, must be from 0 to 1.
+    final double? appBarOpacity,
 
     /// When set to true, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1485,22 +1574,28 @@ extension FlexThemeData on ThemeData {
     /// bar area.
     final bool transparentStatusBar = true,
 
-    /// The themed elevation for the app bar.
+    /// The themed elevation for the [AppBar].
     ///
-    /// Default to 0. The 0 elevation is an iOs style
-    /// influenced opinionated choice, but it can easily be adjusted for the
-    /// theme with this property.
-    final double appBarElevation = 0,
+    /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+    /// spec default).
+    ///
+    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+    /// choice, it can easily be adjusted for the theme with this property.
+    final double? appBarElevation,
 
     /// The themed elevation for the bottom app bar.
     ///
-    /// If null, defaults to the value given to the `appBarElevation` elevation.
+    /// If null, effective result is [appBarElevation] in M2. So it matches the
+    /// themed app bar elevation. In M3 it is kept null to default to M3's
+    /// default elevation of 3, to always get elevation tint.
     final double? bottomAppBarElevation,
 
-    /// Select preferred themed style for the [TabBarTheme].
+    /// Select preferred style for the default [TabBarTheme].
     ///
-    /// By default the [TabBarTheme] is made to fit with the style of the
-    /// [AppBar], via default value [FlexTabBarStyle.forAppBar].
+    /// By default the TabBarTheme is made to fit with the style of the AppBar.
+    /// In M2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
@@ -1508,7 +1603,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarTheme style is useful if you primarily intended to use the
     /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
     /// colors.
-    final FlexTabBarStyle tabBarStyle = FlexTabBarStyle.forAppBar,
+    final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -1682,6 +1777,10 @@ extension FlexThemeData on ThemeData {
     /// The background color of [Dialog] elements.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor].
+    ///
+    /// It is also applied to dialog themes:
+    /// * DialogTheme
+    /// * TimePickerThemeData
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on mode defined by property
@@ -1873,18 +1972,25 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
-    /// A color used as an overlay on a surface color to indicate a component's
-    /// elevation.
+    /// A custom color used as an overlay on a surface color to indicate a
+    /// component's elevation and surface color branding or tinting.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via this extension behavior.
     /// If a [colorScheme] was provided where this corresponding color is
     /// defined, this color property will override the same color in it.
     ///
-    /// This color is used by M3 for colored elevation, it is also used as the
-    /// blend color for FlexColorScheme surface blends.
+    /// This color is used by Material 3 for colored elevation, it is also used
+    /// as the blend color for FlexColorScheme surface blends. Additionally
+    /// this color is if provided used as key color for seeding
+    /// the neutral color palettes, when seed generated color schemes are used.
+    /// It is important that all these properties use the same color.
     ///
-    /// If undefined it defaults to [primary] color.
+    /// Typically this color is not customized, most designs use the default
+    /// where the theme primary color is used for slightly mixing it into the
+    /// neutral background and surface colors, when seeding is used. As well as
+    /// using it for the the elevation tint in Material 3, plus for the
+    /// surface blends that can optionally be added with FlexColorScheme.
+    ///
+    /// If undefined, [primary] color is used.
     final Color? surfaceTint,
 
     /// Makes the dark theme backgrounds darker or even black.
@@ -2000,8 +2106,8 @@ extension FlexThemeData on ThemeData {
     /// By default, if a `defaultRadius` is not specified, each widgets corner
     /// radius and some other styling take inspiration from the Material 3 (M3)
     /// specification https://m3.material.io/ and uses its specifications as
-    /// defaults when it is possible to do so in Flutter SDK theming, within
-    /// its current Material 2 (M2) design limitations.
+    /// defaults when it is possible to do so in Flutter SDK theming when using
+    /// Material2 mode and via defaults also in Material 3 mode.
     ///
     /// Starting from version 5, by opting in via a default [subThemesData] you
     /// get an extensive set of widget component sub themes applied.
@@ -2009,24 +2115,45 @@ extension FlexThemeData on ThemeData {
     /// quick and flat sub theme configuration values in the data class
     /// [FlexSubThemesData].
     ///
-    /// Opinionated sub themes are provided for:
+    /// Customizable sub-themes are available for:
     ///
+    /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+    /// * [BottomAppBarTheme] for [BottomAppBar] via
+    ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
     ///   [FlexSubThemes.bottomNavigationBar].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
+    /// * [ButtonThemeData] for old deprecated buttons, via
+    ///   [FlexSubThemes.buttonTheme].
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+    /// * [DropdownMenuThemeData] for [DropDownMenu] via
+    ///   [FlexSubThemes.dropdownMenuTheme].
     /// * [ElevatedButtonThemeData] for [ElevatedButton] via
     ///   [FlexSubThemes.elevatedButtonTheme].
+    /// * [FilledButtonThemeData] for [FilledButton] via
+    ///   [FlexSubThemes.filledButtonTheme].
     /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
     ///   [FlexSubThemes.floatingActionButtonTheme].
+    /// * [IconButtonThemeData] for [IconButton] via
+    ///   [FlexSubThemes.iconButtonTheme].
     /// * [InputDecorationTheme] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
+    /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+    /// * [MenuButtonThemeData] for [MenuButton] via
+    ///   [FlexSubThemes.menuButtonTheme].
+    /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+    ///   [FlexSubThemes.menuTheme].
+    /// * [ListTileThemeData] for [ListTile] via
+    ///   [FlexSubThemes.listTileTheme].
     /// * [NavigationBarThemeData] for [NavigationBar] via
     ///   [FlexSubThemes.navigationBarTheme].
+    /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+    ///   [FlexSubThemes.navigationDrawerTheme].
     /// * [NavigationRailThemeData] for [NavigationRail] via
     ///   [FlexSubThemes.navigationRailTheme].
     /// * [OutlinedButtonThemeData] for [OutlinedButton] via
@@ -2034,9 +2161,10 @@ extension FlexThemeData on ThemeData {
     /// * [PopupMenuThemeData] for [PopupMenuButton] via
     ///   [FlexSubThemes.popupMenuTheme].
     /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
@@ -2044,9 +2172,6 @@ extension FlexThemeData on ThemeData {
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
     ///   [FlexSubThemes.toggleButtonsTheme].
     /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
-    ///
-    /// * The custom `ButtonThemeData` even still provides matching styling to
-    ///   the deprecated legacy buttons if they are used.
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
@@ -2150,10 +2275,27 @@ extension FlexThemeData on ThemeData {
     /// A text theme that contrasts with the primary color.
     final TextTheme? primaryTextTheme,
 
-    /// Same property as in [ThemeData] factory, it is just passed along to it.
+    /// Name of the font family to use as default font for the text theme in
+    /// created theme.
     ///
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// name to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
     final String? fontFamily,
+
+    /// Name of the font families to use as fallback to main font family.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font family
+    /// fallback to default text theme and primary text theme, also passed
+    /// along to [ThemeData],
+    final List<String>? fontFamilyFallback,
+
+    /// Name of the font package to use with font fallback.
+    ///
+    /// Same feature as in [ThemeData] factory. Used to apply the font package
+    /// to default text theme and primary text theme, also passed along
+    /// to [ThemeData],
+    final String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
@@ -2285,44 +2427,83 @@ extension FlexThemeData on ThemeData {
 
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
-    /// Flutter SDK master channel [useMaterial3] documentation:
+    /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
+    /// If true, then widgets that have been migrated to Material 3 will
+    /// use new colors, typography and other features of Material 3. If false,
+    /// they will use the Material 2 look and feel.
+    ///
+    /// During the migration to Material 3, turning this on may yield
+    /// inconsistent look and feel in your app as some widgets are migrated
+    /// while others have yet to be.
+    ///
+    /// Defaults to false. When the Material 3 specification is complete
+    /// and all widgets are migrated on stable, we will change this flag to be
+    /// true by default. After that change has landed on stable, we will
+    /// deprecate this flag and remove all uses of it. At that point, the
+    /// `material` library will aim to only support Material 3.
+    ///
+    /// ## Defaults
     /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
     /// some properties will get updated defaults. Please note that
     /// [ThemeData.copyWith] with [useMaterial3] set to true will
     /// not change any of these properties in the resulting [ThemeData].
     ///
-    /// ```
-    /// Property      | Material 3 default          | Material 2 default      |
-    /// ------------- | --------------------------  | ----------------------  |
-    /// typography]   | Typography.material2021]    | Typography.material2014]|
-    /// splashFactory | InkSparkle]* or [InkRipple] | [InkSplash]             |
-    /// ```
+    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+    ///
+    /// | Property        | M3 default                 | M2 default           |
+    /// | :-------------- | :------------------------- | :------------------- |
+    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
+    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
+    ///
+    /// If [brightness] is [Brightness.dark] then the default color scheme will
+    /// be either the M3 baseline dark color scheme or the M2 baseline dark
+    /// color scheme depending on [useMaterial3].
     ///
     /// ## Affected widgets
     ///
     /// This flag affects styles and components.
     ///
     /// ### Styles
-    ///   * Color: [ColorScheme], [Material]
+    ///   * Color: [ColorScheme], [Material] (see table above)
     ///   * Shape: (see components below)
-    ///   * Typography: `typography` (see table above)
+    ///   * Typography: [Typography] (see table above)
     ///
     /// ### Components
-    ///   * Common buttons: [TextButton], [OutlinedButton], [ElevatedButton]
-    ///   * FAB: [FloatingActionButton]
-    ///   * Extended FAB: [FloatingActionButton.extended]
+    ///   * Badges: [Badge]
+    ///   * Bottom app bar: [BottomAppBar]
+    ///   * Bottom sheets: [BottomSheet]
+    ///   * Buttons
+    ///     - Common buttons: [ElevatedButton], [FilledButton],
+    ///       [OutlinedButton], [TextButton]
+    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+    ///     - Icon buttons: [IconButton]
+    ///     - Segmented buttons: [SegmentedButton]
     ///   * Cards: [Card]
+    ///   * Checkbox: [Checkbox]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single selection chips),
+    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
     ///     - [InputChip]
     ///   * Dialogs: [Dialog], [AlertDialog]
+    ///   * Divider: [Divider]
     ///   * Lists: [ListTile]
-    ///   * Navigation bar: [NavigationBar] (new, replaces BottomNavigationBar)
-    ///   * [NavigationRail]
+    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation rail: [NavigationRail]
+    ///   * Progress indicators: [CircularProgressIndicator],
+    ///     [LinearProgressIndicator]
+    ///   * Radio button: [Radio]
+    ///   * Snack bar: [SnackBar]
+    ///   * Slider: [Slider]
+    ///   * Switch: [Switch]
+    ///   * Tabs: [TabBar]
+    ///   * TextFields: [TextField] together with its [InputDecoration]
     ///   * Top app bar: [AppBar]
     ///
     /// In addition, this flag enables features introduced in Android 12.
@@ -2331,17 +2512,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// See also:
     ///
-    ///   * [Material Design 3](https://m3.material.io).
-    ///
-    /// --------------------------------------------------------
-    ///
-    /// While the migration of Flutter SDK to the Material 3 design spec is
-    /// in progress, using [FlexColorScheme] sub-themes will produce widget
-    /// sub-themes, using current Flutter Material 2 theming limitations, that
-    /// by default also implement the Material 3 design and look when it is
-    /// possible within current SDK limits. During SDK transition to full M3
-    /// support, keeping useMaterial3 false and just using the FlexColorScheme
-    /// sub-theming, may be preferred since it has fewer transitional issues.
+    ///   * [Material 3 specification](https://m3.material.io/)
     final bool useMaterial3 = false,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
@@ -2451,6 +2622,8 @@ extension FlexThemeData on ThemeData {
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
         fontFamily: fontFamily,
+        fontFamilyFallback: fontFamilyFallback,
+        package: package,
         materialTapTargetSize: materialTapTargetSize,
         pageTransitionsTheme: pageTransitionsTheme,
         platform: platform,

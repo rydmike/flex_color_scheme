@@ -1,20 +1,36 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 6.1.2
+version: 7.0.0
 publish_to: 'none'
 environment:
-  sdk: '>=2.18.0 <3.0.0'
-  flutter: '>=3.3.0'
+  sdk: '>=2.19.0 <4.0.0'
+  flutter: '>=3.7.0'
 
 dependencies:
+  # Prebuilt transition animations (by Google, flutter.dev).
+  # Using the container transform navigation in mock Shop in Playground.
+  # https://pub.dev/packages/animations
+  animations: ^2.0.7
+
+  # Confetti for some fun in the demo (by funwith.app).
+  # Used for fun on the mock login button in the simulator app in the Playground.
+  # https://pub.dev/packages/confetti
+  confetti: ^0.7.0
+
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
   # https://pub.dev/packages/cupertino_icons
   cupertino_icons: ^1.0.5
 
+  # Simulated device frames package by aloisdeniel.com.
+  # Used by the theme simulator in the Playground.
+  # https://pub.dev/packages/device_frame
+  device_frame: ^1.1.0
+
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # Used for color selection in the Playground to make customized color schemes.
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^2.6.1
+  flex_color_picker: ^3.1.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -22,61 +38,61 @@ dependencies:
     path: ../
 
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.1.0
+  flex_seed_scheme: ^1.2.3
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
     sdk: flutter
 
   # Masonry grid layout package, by Romain Rastel.
+  # Used by the grid page view in the Playground.
   # https://pub.dev/packages/flutter_staggered_grid_view
   flutter_staggered_grid_view: ^0.6.2
 
+  # SVG file drawing, used by Asset Images, by dnfield.dev.
+  # Used to display undraw SVG image in Playground simulated mock apps.
+  # https://pub.dev/packages/flutter_svg
+  flutter_svg: ^2.0.4
+
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.3
 
   # Hive local storage, by Simon Leir.
+  # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
   # https://pub.dev/packages/hive
   hive: ^2.2.3
 
   # Color utilities by Google (material.io).
-  # Used to compute and create Tonal Palette theme colors.
+  #
+  # Used in Playground by CodeTheme to harmonize colors against main theme colors.
+  #
   # Flutter SDK from 2.10.0 stable also uses and depends on this package.
-  #
-  # Use ^0.1.3 for Flutter stable 2.10.x, that uses 0.1.3
-  # Use ^0.1.3 for Flutter stable 3.0.x, that uses 0.1.4.
-  # Use ^0.1.3 for Flutter rel candidates 3.1, 3.2, 3.4, that uses 0.1.5, beware that
-  # version 0.1.5 has a new faster algo compared to 0.1.4, that changes some seed colors slightly.
-  # Use ^0.2.0 for Flutter master 3.1.0-x, that uses 0.2.0 after 5.8.2022.
-  #
-  # This is an unusual range since 0.2.0 is a breaking semver step over 0.1.x, but it works for this
-  # case, and was also observed as range used by Google package dynamic_color.
-  material_color_utilities: '>=0.1.5 <=0.2.0'
-
-  # Material Design Icons, community designed. Used for
-  # icons in the Platform selection popup menu.
-  # https://materialdesignicons.com/
-  material_design_icons_flutter: ^6.0.7096
+  # Version 0.3.0 contains many new features, but Flutter stable and master are
+  # locked to version 0.2.0, so we cannot use it, also 0-ver does not
+  # upgrade from version ^0.2.0 to 0.3.x, only to 0.2.x.
+  material_color_utilities: ^0.2.0
 
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.0.11
+  path_provider: ^2.0.14
 
   # Store value pair shared preference data, by Google flutter.dev.
+  # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.1.0
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   # https://pub.dev/packages/string_scanner
-  string_scanner: ^1.1.0
+  string_scanner: ^1.2.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.1.6
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
@@ -84,3 +100,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  # all image assets used by the program.
+  assets:
+    # images contains all different resolutions:
+    # mdpi (1.0x), hdpi (1.5x), xhdpi (2.0x), xxhdpi (3.0x), xxxhdpi (4.0x)
+    - assets/images/
+    # Google fonts, font assets
+    - assets/google_fonts/
+
+  # Custom icon font package with only needed and used icons.
+  fonts:
+    - family: FlexIcons
+      fonts:
+        - asset: assets/fonts/FlexIcons.ttf

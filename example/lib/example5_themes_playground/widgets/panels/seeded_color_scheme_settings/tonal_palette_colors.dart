@@ -59,48 +59,58 @@ class TonalPaletteColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        for (int i = 0; i < tonalPalette.length; i++)
-          Expanded(
-            child: PaletteColorBox(
-              name: name,
-              tone: _toneLabel(i),
-              color: Color(tonalPalette[i]),
-              height: height,
-              onTap: () {
-                unawaited(
-                    copyColorToClipboard(context, Color(tonalPalette[i])));
-              },
-              child: Center(
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Text(
-                        _toneLabel(i),
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: _onColor(Color(tonalPalette[i])),
-                        ),
-                      ),
-                    ),
-                    if (selectedColor == Color(tonalPalette[i]))
+    return RepaintBoundary(
+      child: Row(
+        children: <Widget>[
+          for (int i = 0; i < tonalPalette.length; i++)
+            Expanded(
+              child: PaletteColorBox(
+                // TODO(rydmike): Attempt to help compiler with JS release issue
+                // Related to tone hover indication feature issue 16.3.2023.
+                // That did not work properly anymore on JS release mode builds
+                // regardless of html/canvaskit renderer. The feature still
+                // worked in web debug builds and any VM build mode for all
+                // other platforms. Weird JS compiler optimization bug is my
+                // suspected cause.
+                key: ValueKey<String>('$name${_toneLabel(i)}'),
+                name: name,
+                tone: _toneLabel(i),
+                color: Color(tonalPalette[i]),
+                height: height,
+                onTap: () {
+                  unawaited(
+                      copyColorToClipboard(context, Color(tonalPalette[i])));
+                },
+                child: Center(
+                  child: Stack(
+                    children: <Widget>[
                       Center(
-                        child: Icon(
-                          Icons.circle,
-                          size: height,
-                          color: _onColor(
-                            Color(tonalPalette[i]),
-                          ).withAlpha(0x33),
+                        child: Text(
+                          _toneLabel(i),
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: _onColor(Color(tonalPalette[i])),
+                          ),
                         ),
                       ),
-                  ],
+                      if (selectedColor == Color(tonalPalette[i]))
+                        Center(
+                          child: Icon(
+                            Icons.circle,
+                            size: height,
+                            color: _onColor(
+                              Color(tonalPalette[i]),
+                            ).withAlpha(0x33),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

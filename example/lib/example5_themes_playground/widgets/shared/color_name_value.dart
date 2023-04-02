@@ -17,6 +17,7 @@ class ColorNameValue extends StatefulWidget {
     this.fontSize = 12,
     this.tone,
     this.showTone = false,
+    this.showInputColor = true,
     this.inputColor,
     this.inputTextColor,
     this.showMaterialName = false,
@@ -30,6 +31,12 @@ class ColorNameValue extends StatefulWidget {
   final double fontSize;
   final int? tone;
   final bool showTone;
+
+  /// If showInputColor is set to false the input color is not shown even if
+  /// both inputColor and inputTextColor are defined.
+  ///
+  /// Defaults to true.
+  final bool showInputColor;
   final Color? inputColor;
   final Color? inputTextColor;
   final bool showMaterialName;
@@ -44,35 +51,30 @@ class _ColorNameValueState extends State<ColorNameValue> {
   late String materialName;
   late String nameThatColor;
 
-  // This widget is stateful because the ColorTools methods may be a bit
-  // expensive so we try to avoid calling them when not needed, by keeping
+  // This widget is stateful because the ColorTools methods are
+  // expensive, so we try to avoid calling them when not needed, by keeping
   // their values in state and only updating them when the Material they
   // describe actually change color. Which happens quite a bit still during
   // theme changes when the theme change goes through its color lerp to new
   // theme colors.
   @override
   void initState() {
+    super.initState();
     materialName = ColorTools.materialName(widget.color);
     nameThatColor = ColorTools.nameThatColor(widget.color);
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant ColorNameValue oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.color != oldWidget.color) {
       materialName = ColorTools.materialName(widget.color);
       nameThatColor = ColorTools.nameThatColor(widget.color);
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Alpha value for opacity on some text further below. Experimented with
-    // the look of some opacity on the text on the color code values and names.
-    // Decided it was better to just use the actual on colors to better show
-    // what they actually look like.
-    const int alpha = 0xFF;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     return Padding(
@@ -80,15 +82,11 @@ class _ColorNameValueState extends State<ColorNameValue> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Text(
-            widget.label,
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.clip,
-            style: TextStyle(
-                color: widget.textColor,
-                fontSize: widget.fontSize,
-                fontWeight: FontWeight.w600),
-          ),
+          Text(widget.label,
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                  color: widget.textColor, fontSize: widget.fontSize + 1)),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -104,9 +102,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
-                            fontSize: widget.fontSize - 1,
-                            fontWeight: FontWeight.w400),
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -120,9 +117,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.end,
                       style: TextStyle(
-                          color: widget.textColor.withAlpha(alpha),
-                          fontSize: widget.fontSize - 1,
-                          fontWeight: FontWeight.w400),
+                          color: widget.textColor,
+                          fontSize: widget.fontSize - 1),
                     ),
                   ),
                 ],
@@ -139,9 +135,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
-                            fontSize: widget.fontSize - 1,
-                            fontWeight: FontWeight.w400),
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -169,9 +164,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         style: TextStyle(
-                            color: widget.textColor.withAlpha(alpha),
+                            color: widget.textColor,
                             fontSize: widget.fontSize,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.bold),
                       ),
                       onTap: () async {
                         await copyColorToClipboard(context, widget.color);
@@ -180,12 +175,16 @@ class _ColorNameValueState extends State<ColorNameValue> {
                   ),
                 ],
               ),
-              // Show input color only if both are defined
-              if (widget.inputColor != null && widget.inputTextColor != null)
+              // Show input color only if both are defined and showInput color
+              // is enabled.
+              if (widget.inputColor != null &&
+                  widget.inputTextColor != null &&
+                  widget.showInputColor)
                 Card(
                   margin: const EdgeInsets.only(top: 8.0),
                   color: widget.inputColor,
                   elevation: 0,
+                  surfaceTintColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     side: BorderSide(color: theme.dividerColor, width: 1),
@@ -195,13 +194,14 @@ class _ColorNameValueState extends State<ColorNameValue> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Scheme defined',
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                                color: widget.inputTextColor,
-                                fontSize: widget.fontSize - 1,
-                                fontWeight: FontWeight.w500)),
+                        Text(
+                          'Scheme input',
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                              color: widget.inputTextColor,
+                              fontSize: widget.fontSize - 1),
+                        ),
                         Row(
                           children: <Widget>[
                             Expanded(
@@ -224,10 +224,8 @@ class _ColorNameValueState extends State<ColorNameValue> {
                                   overflow: TextOverflow.clip,
                                   maxLines: 1,
                                   style: TextStyle(
-                                      color: widget.inputTextColor
-                                          ?.withAlpha(alpha),
-                                      fontSize: widget.fontSize - 1,
-                                      fontWeight: FontWeight.w600),
+                                      color: widget.inputTextColor,
+                                      fontSize: widget.fontSize - 1),
                                 ),
                                 onTap: () async {
                                   await copyColorToClipboard(
@@ -251,18 +249,39 @@ class _ColorNameValueState extends State<ColorNameValue> {
               textDirection: Directionality.of(context),
               top: 14,
               start: 0,
-              child: Switch(
-                value: widget.isLocked!,
-                activeColor: Color.alphaBlend(
-                    widget.color.withAlpha(0x25), widget.textColor),
-                activeTrackColor: Color.alphaBlend(
-                    widget.color.withAlpha(0x60), widget.textColor),
-                inactiveTrackColor: Color.alphaBlend(
-                    widget.color.withAlpha(0xAA), widget.textColor),
-                inactiveThumbColor: Color.alphaBlend(
-                    widget.color.withAlpha(0xDD), widget.textColor),
-                onChanged: widget.onLocked?.call,
-                // materialTapTargetSize: MaterialTapTargetSize.padded,
+              child: Theme(
+                data: theme.copyWith(
+                    colorScheme: theme.colorScheme
+                        .copyWith(outline: widget.color.withAlpha(0x77))),
+                child: Switch(
+                  value: widget.isLocked!,
+                  activeColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x44), widget.textColor),
+                  activeTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x99), widget.textColor),
+                  inactiveTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xAA), widget.textColor),
+                  inactiveThumbColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xCC), widget.textColor),
+                  // TODO(rydmike): Add trackOutlineColor when available.
+                  // The below works on master 3.8 and 3.9, where it was
+                  // developed and used.
+                  //
+                  // trackOutlineColor: theme.useMaterial3
+                  //     ? MaterialStateProperty.resolveWith(
+                  //         (Set<MaterialState> states) {
+                  //         if (states.contains(MaterialState.selected)) {
+                  //           return Colors.transparent;
+                  //         }
+                  //         if (states.contains(MaterialState.disabled)) {
+                  //         return theme.colorScheme.onSurface.withAlpha(0x1F);
+                  //         }
+                  //         return widget.textColor.withAlpha(0x26);
+                  //       })
+                  //     : null,
+                  onChanged: widget.onLocked?.call,
+                  // materialTapTargetSize: MaterialTapTargetSize.padded,
+                ),
               ),
             ),
         ],

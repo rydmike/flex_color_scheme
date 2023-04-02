@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/theme_showcase.dart';
+import '../../../../shared/widgets/universal/showcase_material.dart';
 
 class CardSettings extends StatelessWidget {
   const CardSettings(this.controller, {super.key});
@@ -9,13 +10,17 @@ class CardSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    // Get effective platform default global radius.
+    final double? effectiveRadius = App.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
-        controller.cardBorderRadius == null && controller.defaultRadius == null
+        controller.cardBorderRadius == null && effectiveRadius == null
             ? 'default 12'
-            : controller.cardBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+            : controller.cardBorderRadius == null && effectiveRadius != null
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -61,7 +66,7 @@ class CardSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'RADIUS',
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: theme.textTheme.bodySmall,
                 ),
                 Text(
                   controller.useSubThemes && controller.useFlexColorScheme
@@ -73,9 +78,7 @@ class CardSettings extends StatelessWidget {
                       : controller.useMaterial3
                           ? 'default 12'
                           : 'default 4',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
+                  style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
