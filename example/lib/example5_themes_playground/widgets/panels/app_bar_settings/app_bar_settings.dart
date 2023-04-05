@@ -92,6 +92,7 @@ class AppBarSettings extends StatelessWidget {
           ),
         SwitchListTileReveal(
           title: const Text('One colored AppBar on Android'),
+          subtitleDense: true,
           subtitle: const Text(
             'ON  No scrim on the top status bar\n'
             'OFF Use a two toned AppBar with a scrim on top status bar\n',
@@ -167,6 +168,7 @@ class AppBarSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Light opacity'),
+            subtitleDense: true,
             subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
           ),
           ListTile(
@@ -254,6 +256,7 @@ class AppBarSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Dark opacity'),
+            subtitleDense: true,
             subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
           ),
           ListTile(

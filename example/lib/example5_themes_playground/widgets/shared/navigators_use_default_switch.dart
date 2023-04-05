@@ -13,6 +13,7 @@ class NavigatorsUseDefaultsSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
+      enabled: controller.useSubThemes && controller.useFlexColorScheme,
       dense: true,
       title: const Text('Navigators use Flutter defaults'),
       subtitle: const Text('Undefined sub-theme values will fall '

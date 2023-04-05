@@ -2,9 +2,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/set_navigation_bar_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/navigators_use_default_switch.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
@@ -28,11 +31,6 @@ class NavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     // Logic for default elevation label.
     final String elevationDefaultLabel = controller.navBarElevation == null
@@ -148,11 +146,12 @@ class NavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTile(
+        ListTileReveal(
           enabled: useMaterial3,
           title: const Text('Use Material 3 default NavigationBar style?'),
-          subtitle: const Text('Update settings below to match M3 default '
-              'values'),
+          subtitleDense: true,
+          subtitle: const Text('Updates settings below to match M3 default '
+              'values.\n'),
           trailing: FilledButton(
             onPressed: useMaterial3
                 ? () async {
@@ -165,8 +164,6 @@ class NavigationBarSettings extends StatelessWidget {
             await _handleSetToM3(context);
           },
         ),
-        const SizedBox(height: 8),
-        const NavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: backgroundColorLabel(),
@@ -273,6 +270,15 @@ class NavigationBarSettings extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ),
+        const Card(
+          elevation: 0.7,
+          shadowColor: Colors.transparent,
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: NavigationBarShowcase(explain: false),
           ),
         ),
         ListTile(
@@ -482,8 +488,9 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Mute unselected items'),
+          subtitleDense: true,
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
               'in API'),
@@ -492,43 +499,20 @@ class NavigationBarSettings extends StatelessWidget {
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
         ),
         NavigationBarLabelBehaviorListTile(controller: controller),
-        const Divider(height: 1),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Text(
-            'More settings with the API',
-            style: denseHeader,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
+        const Divider(),
+        NavigatorsUseDefaultsSwitch(controller: controller),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitle: Text(
             'With the API you can also set the font and icon size individually '
             'on selected and unselected items. Use FlexSubThemesData '
-            'properties: bottomNavigationBarSelectedLabelSize, '
-            'bottomNavigationBarUnselectedLabelSize, '
-            'bottomNavigationBarSelectedIconSize and '
-            'bottomNavigationBarUnselectedIconSize.',
-            style: denseBody,
+            'properties: navigationBarSelectedLabelSize, '
+            'navigationBarUnselectedLabelSize, '
+            'navigationBarSelectedIconSize and '
+            'navigationBarUnselectedIconSize.\n',
           ),
         ),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Navigators use Flutter defaults'),
-          subtitle: const Text('Undefined values fall back to '
-              'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Both selected and unselected color have to be null before '
-              'the item colors can fall back to Flutter defaults. '
-              'This setting affects navigation bars and rail. '
-              'See API docs for more info.'),
-          value: controller.useFlutterDefaults &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseFlutterDefaults
-              : null,
-        ),
-        const SizedBox(height: 8),
       ],
     );
   }

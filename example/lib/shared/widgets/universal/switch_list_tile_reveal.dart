@@ -41,20 +41,6 @@ class SwitchListTileReveal extends StatefulWidget {
   /// The callback provided to [onChanged] should update the state of the parent
   /// [StatefulWidget] using the [State.setState] method, so that the parent
   /// gets rebuilt; for example:
-  ///
-  /// {@tool snippet}
-  /// ```dart
-  /// SwitchListTile(
-  ///   value: _isSelected,
-  ///   onChanged: (bool newValue) {
-  ///     setState(() {
-  ///       _isSelected = newValue;
-  ///     });
-  ///   },
-  ///   title: const Text('Selection'),
-  /// )
-  /// ```
-  /// {@end-tool}
   final ValueChanged<bool>? onChanged;
 
   /// The primary content of the list tile.
@@ -72,8 +58,8 @@ class SwitchListTileReveal extends StatefulWidget {
 
   /// The [SwitchListTileReveal]'s internal padding.
   ///
-  /// Insets a [SwitchListTileReveal]'s contents: its [leading], [title],
-  /// [subtitle] and [trailing] widgets.
+  /// Insets a [SwitchListTileReveal]'s contents: its [title],
+  /// [subtitle] widgets.
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? contentPadding;
@@ -154,7 +140,7 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
                 isSelected: widget.enabled ? _isOpen : false,
                 icon: const Icon(Icons.info_outlined),
                 selectedIcon: const Icon(Icons.info),
-                onPressed: _handleTap,
+                onPressed: widget.enabled ? _handleTap : null,
               ),
             ],
           ),
@@ -172,7 +158,7 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
                   dense: (widget.dense ?? false) ||
                       (widget.subtitleDense ?? false),
                   subtitle: widget.subtitle,
-                  onTap: _handleTap,
+                  onTap: widget.enabled ? _handleTap : null,
                 )
               : const SizedBox.shrink(),
         ),

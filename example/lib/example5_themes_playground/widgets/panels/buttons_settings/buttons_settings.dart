@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -259,9 +260,10 @@ class ButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues and limitations'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -286,7 +288,7 @@ class ButtonsSettings extends StatelessWidget {
                       'buttons will also be lost. Separate colors and border '
                       'radius for the two variants will be offered when the '
                       'current limitation is removed. Go upvote the issue '
-                      'by giving it thumbs-up!',
+                      'by giving it thumbs-up!\n',
                 ),
               ],
             ),

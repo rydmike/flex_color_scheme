@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -72,13 +73,6 @@ class DrawerSettings extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Themed Drawer and NavigationDrawer'),
-          subtitle: Text('Flutter SDK default background is '
-              'colorScheme.background for Drawer in M2, but '
-              'colorScheme.surface in M3. FlexColorScheme component '
-              'sub-themes use surface as default for both modes.'),
-        ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
@@ -153,9 +147,10 @@ class DrawerSettings extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          title: const Text('Known width issue'),
+          dense: true,
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -189,7 +184,7 @@ class DrawerSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: ' for more information and an analysis of suitable '
-                      'Drawer width on different sized phones.',
+                      'Drawer width on different sized phones.\n',
                 ),
               ],
             ),
@@ -500,9 +495,10 @@ class DrawerSettings extends StatelessWidget {
                 }
               : null,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known indicator issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -519,7 +515,7 @@ class DrawerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
+                  text: '.\n',
                 ),
               ],
             ),

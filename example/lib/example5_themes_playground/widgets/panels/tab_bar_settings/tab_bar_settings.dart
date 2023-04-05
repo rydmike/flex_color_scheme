@@ -139,8 +139,9 @@ class TabBarSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Card(
-          elevation: 0,
-          color: theme.colorScheme.surfaceVariant,
+          elevation: 0.7,
+          shadowColor: Colors.transparent,
+          // color: theme.colorScheme.surfaceVariant,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -156,6 +157,7 @@ class TabBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Custom TabBar colors and styles'),
+          subtitleDense: true,
           subtitle: Text('With component themes enabled you can select '
               'scheme color for the tab items and indicator separately. '
               'Using TabBarStyle conveniently syncs the TabBar to active '
@@ -498,6 +500,7 @@ class TabBarSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Remove bottom divider'),
+          subtitleDense: true,
           subtitle: const Text('Removes the bottom divider on M3 TabBar, '
               'does not have any effect on M2 mode TabBar.\n'),
           value: controller.useFlexColorScheme &&

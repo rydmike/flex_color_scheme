@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/navigators_use_default_switch.dart';
 
@@ -15,11 +16,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     final bool isDark = theme.brightness == Brightness.dark;
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
@@ -62,7 +58,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const BottomNavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: 'default (background)',
@@ -170,6 +165,16 @@ class BottomNavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          elevation: 0,
+          color: theme.colorScheme.surfaceVariant,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: BottomNavigationBarShowcase(explain: false),
+          ),
+        ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
@@ -202,11 +207,12 @@ class BottomNavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Mute unselected items'),
+          subtitleDense: true,
           subtitle: const Text('Unselected icon and text are less bright. '
-              'Shared setting for icon and text, but separate properties '
-              'in API'),
+              'Shared setting for icon and text in the Playground, but '
+              'separate properties are used by the API.\n'),
           value: muteUnselectedEnabled
               ? controller.bottomNavBarMuteUnselected
               : !muteUnselectedEnabled,

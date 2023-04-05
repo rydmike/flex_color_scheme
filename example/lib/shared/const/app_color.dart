@@ -268,6 +268,7 @@ class AppColor {
           'computed from Primary color';
     }
     return 'Light scheme defined Primary, Secondary and Tertiary colors are '
-        'used as keys, to generate tonal palettes that define the ColorScheme';
+        'used as key colors to generate tonal palettes that define '
+        'the ColorScheme';
   }
 }

@@ -43,6 +43,7 @@ class ThemeCode extends StatelessWidget {
         const SizedBox(height: 8),
         ListTileReveal(
           title: const Text('Copy the theme code'),
+          subtitleDense: true,
           subtitle: const Text(
               'When you are happy with your theme design, you can copy the '
               'produced API configuration code. Paste it into your Flutter app '

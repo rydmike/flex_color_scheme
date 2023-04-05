@@ -18,10 +18,10 @@ class UseSeededColorSchemeSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String explainSeed = controller.useKeyColors
-        ? 'Using seeded ColorScheme'
+        ? 'Seeded ColorScheme is used'
         : 'Selected ColorScheme is used';
     final String explainMoreString = explainMore && controller.useKeyColors
-        ? 'You can adjust the seed generated theme further with the Seeded '
+        ? 'You can adjust the seed generated colors further with the Seeded '
             'ColorScheme feature.'
         : '';
     return ListTileReveal(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -86,11 +87,12 @@ class ToggleButtonsSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const ListTile(
+        const ListTileReveal(
           title: Text('ToggleButtons'),
+          subtitleDense: true,
           subtitle: Text('By default ToggleButtons are themed to style and '
               'height align with OutlinedButton and FilledButton, shown '
-              'here for comparison.'),
+              'here for comparison.\n'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -256,13 +258,14 @@ class ToggleButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('SegmentedButton'),
+          subtitleDense: true,
           subtitle: Text('Material 3, replacement for ToggleButtons. '
-              'ToggleButtons looks better with when using only icons and it is '
+              'ToggleButtons may work better when using only icons and it is '
               'similarly styled by FCS sub themes. SegmentedButton '
               'is better if you also have text, and optionally also want '
-              'a checkmark icon to mark selected button.'),
+              'a checkmark icon to mark selected button.\n'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -448,10 +451,10 @@ class ToggleButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -494,7 +497,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
+                  text: '.\n',
                 ),
               ],
             ),

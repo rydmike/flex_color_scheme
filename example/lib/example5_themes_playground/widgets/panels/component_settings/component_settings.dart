@@ -284,6 +284,7 @@ class ComponentSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border width'),
+          subtitleDense: true,
           subtitle: const Text('Default border width for InputDecorator, '
               'OutlinedButton, ToggleButtons and SegmentedButton.\n'),
         ),
@@ -337,6 +338,7 @@ class ComponentSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Thick border width'),
+          subtitleDense: true,
           subtitle: const Text('Default border width for focused '
               'InputDecorator and pressed or error OutlinedButton.\n'),
         ),

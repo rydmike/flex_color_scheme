@@ -105,6 +105,7 @@ class TextFieldSettings extends StatelessWidget {
         ListTileReveal(
             enabled: useMaterial3,
             title: const Text('Use Material 3 default TextField style?'),
+            subtitleDense: true,
             subtitle: const Text('Update settings below to match M3 default '
                 'values.\n'),
             trailing: FilledButton(
@@ -160,6 +161,7 @@ class TextFieldSettings extends StatelessWidget {
           ),
         SwitchListTileReveal(
           title: const Text('Use base color as background fill'),
+          subtitleDense: true,
           subtitle: const Text('TIP: If you leave this OFF, you can still '
               'theme the fill color and turn it ON using widget level '
               "'filled: true' property, and wise versa.\n"),
@@ -583,6 +585,7 @@ class TextFieldSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('DropdownMenu'),
+          subtitleDense: true,
           subtitle: Text('The DropDownMenu has a text entry used to select '
               'an option in a dropdown menu by typing in the selection. '
               'The text entry part matches the used input decoration '
@@ -594,6 +597,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         const ListTileReveal(
           title: Text('DropdownButtonFormField'),
+          subtitleDense: true,
           subtitle: Text('An older Material widget, it also uses the text '
               'input decoration theme. Tt does not work well with high '
               'border radius. Prefer using the DropdownMenu widget instead.\n'),

@@ -102,35 +102,29 @@ class SurfaceBlendSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         UseSeededColorSchemeSwitch(controller: controller),
-        const ListTileReveal(
-          title: Text('Surface blends and elevation tint controls'),
-          subtitle: Text(
-            'All settings below have separate control values '
-            'in the Playground for light and dark mode. Typically different '
-            'settings in light and dark mode, may be a part of the desired '
-            'design.\n'
-            '\n'
-            'When using a surface blend mode with a high factor on Scaffold '
-            'background, the design intent is to not place any controls and '
-            'text on it directly, but to always use them on other surfaces '
-            'with less surface tint, for example in Cards. The Scaffold '
-            'background is then only used as a background color effect. If '
-            'your app places controls directly on Scaffold with its default '
-            'background color, high blend factor on Scaffold background color '
-            'may not be a good fit. Choose one with lower color blend factor '
-            'on Scaffold background.\n',
-          ),
-        ),
         if (isLight) ...<Widget>[
           LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Blend level'),
-            subtitle: Text('Adjust the surface, background, scaffold and '
-                'dialog blend level. Also impacts surfaces when '
-                'seed colors are used. Seed based surfaces always include '
-                'a touch of primary, but you can make it stronger with '
-                'surface blends.\n'),
+            subtitleDense: true,
+            subtitle: Text(
+              'Adjust the surface, background, scaffold and '
+              'dialog blend level. Also impacts surfaces when '
+              'seed colors are used. Seed based surfaces always include '
+              'a touch of primary, but you can make it stronger with '
+              'surface blends. To use default M3 surface colors, set '
+              'blend level to zero.\n'
+              'When using a surface blend mode with a high factor on Scaffold '
+              'background, the design intent is to not place any controls and '
+              'text on it directly, but to always use them on other surfaces '
+              'with less surface tint, for example in Cards. The Scaffold '
+              'background is then only used as a background color effect. If '
+              'your app places controls directly on Scaffold with its default '
+              'background color, high blend factor on Scaffold background '
+              'color may not be a good fit. Choose one with lower color blend '
+              'factor on Scaffold background.',
+            ),
           ),
           ListTile(
             title: Slider(
@@ -166,6 +160,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           DarkSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Blend level'),
+            subtitleDense: true,
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces already include '
@@ -218,6 +213,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
             title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
                 'own main color, '
                 'into the onColor, when seed/M3 colors are not used. This '
@@ -268,6 +264,10 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Main colors use onColor blending'),
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
+            subtitleDense: true,
             subtitle:
                 const Text('In M3 design, only container colors use color '
                     'pair tinted onColor. Main colors use black or white. '
@@ -286,6 +286,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Plain white'),
+            subtitleDense: true,
             subtitle: const Text(
               'Plain white uses white Scaffold background color in all blend '
               'modes, other surfaces also become 5% less blended.\n',
@@ -373,6 +374,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             enabled: controller.surfaceTintLight != null,
             title: const Text('Set light theme blend and tint color back '
                 'to default'),
+            subtitleDense: true,
             subtitle: const Text('Sets custom blend and tint color back '
                 'to primary color.\n'),
             trailing: Padding(
@@ -400,6 +402,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
             title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
                 'own main color, into the onColor, when seed/M3 colors are '
                 'not used. This affects onContainers, onSurface and '
@@ -449,7 +452,11 @@ class SurfaceBlendSettings extends StatelessWidget {
             ),
           ),
           SwitchListTileReveal(
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: const Text('Main colors use onColor blending'),
+            subtitleDense: true,
             subtitle: const Text(
                 'In M3 dark design, not only container colors use '
                 'color pair tinted onColor, but also main colors do. '
@@ -468,6 +475,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('True black'),
+            subtitleDense: true,
             subtitle: const Text(
               'For an ink black dark mode, use True Black. It uses a totally '
               'black Scaffold background in all blend modes, other surfaces '

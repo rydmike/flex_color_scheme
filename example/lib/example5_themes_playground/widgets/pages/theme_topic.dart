@@ -111,7 +111,11 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'If you use M3 seeded ColorSchemes, set blend level to zero to get the '
         'pure M3 design. With surface blends, you can further strengthen the '
         'M3 effect. You can vary blend levels by surface type in both M2 and '
-        'M3 mode, regardless of if you use seeded ColorScheme or not.\n',
+        'M3 mode, regardless of if you use seeded ColorScheme or not.\n'
+        'Surface blend settings have separate control values '
+        'in the Playground for light and dark mode. Typically different '
+        'settings in light and dark mode, may be a part of the desired '
+        'design.\n',
   ),
   ThemeTopic(
     heading: 'Effective colors',
@@ -121,8 +125,9 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ThemeTopic(
     heading: 'TextField',
     icon: Icons.pin_outlined,
-    info: 'TextField theming is done via the InputDecorator theme, it is as '
-        'very complex theme with mixed legacy and MaterialState properties.\n',
+    info: 'TextField theming is done via the InputDecorator theme, it is a '
+        'fairly complex theme with mixed legacy and MaterialState '
+        'properties.\n',
   ),
   ThemeTopic(
     heading: 'AppBar and BottomAppBar',
@@ -150,31 +155,68 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavigationBar',
     icon: Icons.video_label,
+    info: 'The BottomNavigationBar is used for top level destination '
+        'navigation on mobile phones in Material 2 design. In Material 3 it '
+        'has been replaced with NavigationBar, prefer using it instead.\n'
+        '\n'
+        'Default SDK background color is theme canvasColor via Material. '
+        'The canvasColor is typically colorScheme.background, elevation '
+        'is 8. FCS sub-theme default is colorScheme.background and '
+        'elevation 0.\n',
   ),
   ThemeTopic(
     heading: 'NavigationBar',
     buttonLabel: 'Navigation\nBar',
     icon: Icons.call_to_action,
+    info: 'The NavigationBar is used for top level destination '
+        'navigation on phones in Material 3 design.\n'
+        '\n'
+        'Default background color is surface with an onSurface overlay '
+        'color in M2. In M3 default background color is surface with '
+        'elevation 3, using M3 elevation tint. '
+        'FlexColorScheme M2 theme default is color scheme '
+        'background, with active surface blend and elevation 0. FCS M3 mode '
+        'background is same as M3 default.\n',
   ),
   ThemeTopic(
     heading: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
     icon: Icons.view_sidebar_rounded,
+    info: 'The NavigationRail is typically used for top level destination '
+        'navigation on tablets. It supports both Material 2 and 3, style '
+        'rails. Flutter default background color is colorScheme.surface. '
+        'FlexColorScheme sub-theme default is colorScheme.background.\n',
   ),
   ThemeTopic(
     heading: 'NavigationDrawer',
     buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
+    info: 'A drawer is used on phones to hide navigation destinations in a '
+        'side drawer. On desktop media sizes, a navigation drawer can also be '
+        'used as pinned side menu. Flutter default background is '
+        'colorScheme.background for Drawer in M2, but '
+        'colorScheme.surface in M3. FlexColorScheme component '
+        'sub-themes use surface as default for both modes.\n',
   ),
   ThemeTopic(
     heading: 'Material buttons',
     buttonLabel: 'Material\nbuttons',
     icon: Icons.crop_16_9_outlined,
+    info: 'Material buttons refer to the stander Flutter push buttons '
+        'implemented using ButtonStyleButton. The buttons are ElevatedButton, '
+        'FilledButton, FilledButton.tonal, OutlinedButton and TextButton. '
+        'They are quite versatile when it comes to their theming capabilities. '
+        'With all the styles offered, they often also work well as they are.\n',
   ),
   ThemeTopic(
     heading: 'Selection buttons',
     buttonLabel: 'Selection\nbuttons',
     icon: Icons.view_week_outlined,
+    info: 'Selection buttons includes both Material 2 style ToggleButtons and '
+        'Material 3 SegmentedButton. FlexColorsScheme uses a sophisticated '
+        'theme on to modernize it, for some use cases, like dense icons only '
+        'buttons, it may still fit and work better than the new M3 '
+        'SegmentedButton.\n',
   ),
   ThemeTopic(
     heading: 'FloatingActionButton and Chip',

@@ -2088,8 +2088,9 @@ class BottomAppBarShowcase extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Text(
-                  'Flutter M2 past default color is ThemeData.bottomAppBarColor '
-                  '(deprecated in Flutter 3.7) now colorScheme.surface and '
+                  'Flutter M2 past default color was '
+                  'ThemeData.bottomAppBarColor. It was deprecated in '
+                  'Flutter 3.7. New default is colorScheme.surface and '
                   'elevation 8. In M3 it defaults to colorScheme.surface '
                   'color, elevation 3, no shadow, but with surface elevation '
                   'tint.',
@@ -2242,7 +2243,9 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
 }
 
 class BottomNavigationBarShowcase extends StatefulWidget {
-  const BottomNavigationBarShowcase({super.key});
+  const BottomNavigationBarShowcase({super.key, this.explain = true});
+
+  final bool explain;
 
   @override
   State<BottomNavigationBarShowcase> createState() =>
@@ -2324,23 +2327,25 @@ class _BottomNavigationBarShowcaseState
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'BottomNavigationBar (Material 2)',
-              style: denseHeader,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'BottomNavigationBar (Material 2)',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme canvasColor via Material. '
-              'The canvasColor is typically colorScheme.background, elevation '
-              'is 8. FCS sub-theme default is colorScheme.background and '
-              'elevation 0.',
-              style: denseBody,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'Default SDK background color is theme canvasColor via Material. '
+                'The canvasColor is typically colorScheme.background, elevation '
+                'is 8. FCS sub-theme default is colorScheme.background and '
+                'elevation 0.',
+                style: denseBody,
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -2348,7 +2353,8 @@ class _BottomNavigationBarShowcaseState
 }
 
 class NavigationBarShowcase extends StatefulWidget {
-  const NavigationBarShowcase({super.key});
+  const NavigationBarShowcase({super.key, this.explain = true});
+  final bool explain;
 
   @override
   State<NavigationBarShowcase> createState() => _NavigationBarShowcaseState();
@@ -2425,23 +2431,25 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-            child: Text(
-              'NavigationBar (Material 3)',
-              style: denseHeader,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'NavigationBar (Material 3)',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default background color is surface with an onSurface overlay '
-              'color in M2, and primary in M3, with elevation 3. '
-              'FlexColorScheme component theme default is color scheme '
-              'background, with used surface blend and elevation 0.',
-              style: denseBody,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'Default background color is surface with an onSurface overlay '
+                'color in M2, and primary in M3, with elevation 3. '
+                'FlexColorScheme component theme default is color scheme '
+                'background, with used surface blend and elevation 0.',
+                style: denseBody,
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -2453,6 +2461,7 @@ class NavigationRailShowcase extends StatefulWidget {
     super.key,
     this.child,
     this.height = 400,
+    this.explain = true,
   });
 
   /// A child widget that we can use to place controls on the
@@ -2461,6 +2470,8 @@ class NavigationRailShowcase extends StatefulWidget {
 
   /// The vertical space for the navigation bar.
   final double height;
+
+  final bool explain;
 
   @override
   State<NavigationRailShowcase> createState() => _NavigationRailShowcaseState();
@@ -2483,21 +2494,23 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text(
-              'NavigationRail',
-              style: denseHeader,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                'NavigationRail',
+                style: denseHeader,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Text(
-              'Default SDK background color is theme.colorScheme.surface. '
-              'FlexColorScheme sub-theme default is colorScheme.background.',
-              style: denseBody,
+          if (widget.explain)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: Text(
+                'Flutter default background color is colorScheme.surface. '
+                'FlexColorScheme sub-theme default is colorScheme.background.',
+                style: denseBody,
+              ),
             ),
-          ),
           const Divider(height: 1),
           SizedBox(
             height: widget.height,

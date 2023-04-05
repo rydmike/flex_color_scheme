@@ -296,6 +296,7 @@ class SetupListTile extends StatelessWidget {
       textStyle: style,
       child: ListTileReveal(
         title: Text(title),
+        subtitleDense: true,
         subtitle: Text(subtitle),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 32.0),

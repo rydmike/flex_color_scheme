@@ -141,7 +141,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
                   isSelected: widget.enabled ? _isOpen : false,
                   icon: const Icon(Icons.info_outlined),
                   selectedIcon: const Icon(Icons.info),
-                  onPressed: _handleTap,
+                  onPressed: widget.enabled ? _handleTap : null,
                 ),
             ],
           ),
@@ -161,7 +161,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
                   dense: (widget.dense ?? false) ||
                       (widget.subtitleDense ?? false),
                   subtitle: widget.subtitle,
-                  onTap: _handleTap,
+                  onTap: widget.enabled ? _handleTap : null,
                 )
               : const SizedBox.shrink(),
         ),

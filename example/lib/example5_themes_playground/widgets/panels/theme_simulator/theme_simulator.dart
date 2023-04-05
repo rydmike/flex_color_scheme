@@ -123,6 +123,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               title: Text('${Simulator.devices[device].name} ('
                   '${Simulator.devices[device].info.identifier.platform.name}'
                   ')'),
+              subtitleDense: true,
               subtitle: Text('${_phoneInfo(device)}\n'),
               trailing: Simulator(
                 index: device,
