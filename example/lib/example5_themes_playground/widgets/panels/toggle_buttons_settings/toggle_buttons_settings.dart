@@ -100,9 +100,8 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Main color'),
-          subtitle: const Text('Always used as selected button background, '
-              'color, but also as unselected button foreground color, if it '
-              'is not defined.'),
+          subtitle: const Text('Selected background color, also unselected '
+              'foreground color, if not defined.'),
           index: controller.toggleButtonsSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

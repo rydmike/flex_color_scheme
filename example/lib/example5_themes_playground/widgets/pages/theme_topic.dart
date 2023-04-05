@@ -70,10 +70,10 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
     info: "FlexColorScheme's M2 mode component themes are very opinionated. "
-        'Components look almost like M3, but done in M2 mode. '
-        'When using M3, there are only a few nuance differences to '
-        'default M3 styles, and some fixes to a few Flutter Material-3 '
-        'specification deviations.\n',
+        'Components look almost like Material 3 components, but done in M2 '
+        'mode. When using Material 3, there are only a few nuance differences '
+        'to compared to default M3 styles, plus some minor fixes to a few '
+        'Flutter Material 3 specification deviations.\n',
   ),
   ThemeTopic(
     heading: 'Theme colors',

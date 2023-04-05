@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class FabChipSettings extends StatelessWidget {
@@ -70,11 +72,13 @@ class FabChipSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: FabShowcase(),
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Use themed shape'),
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitleDense: true,
           subtitle: const Text('OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
-              'setting.'),
+              'setting.\n'),
           value: controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -82,10 +86,14 @@ class FabChipSettings extends StatelessWidget {
               ? controller.setFabUseShape
               : null,
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
+          enabled: controller.fabUseShape &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
           title: const Text('Always circular'),
+          subtitleDense: true,
           subtitle: const Text('Turn on to always use circular and stadium '
-              'shaped FAB, also in Material 3'),
+              'shaped FAB, also in Material 3.\n'),
           value: controller.fabAlwaysCircular &&
               controller.fabUseShape &&
               controller.useSubThemes &&
@@ -166,9 +174,10 @@ class FabChipSettings extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues and limitations'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -185,7 +194,7 @@ class FabChipSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more info.',
+                  text: ' for more info.\n',
                 ),
               ],
             ),
@@ -295,10 +304,10 @@ class FabChipSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues and limitations'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -318,13 +327,12 @@ class FabChipSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. Until it is fixed, stick to theme colors that needs '
-                      'and work with the default Chip text contrast.',
+                      'and work with the default Chip text contrast.\n',
                 ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }

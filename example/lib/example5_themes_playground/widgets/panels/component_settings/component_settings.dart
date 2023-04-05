@@ -38,7 +38,7 @@ class ComponentSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: const Text('In Material-3 the primary color tinted '
               'outlineVariant Divider may not fit on all background colors. '
-              'The Material-2 style based on black or white, with opacity '
+              'The Material-2 style based on black or white, with opacity, '
               'always fits. It is also '
               'less prominent than the M3 style and may be preferred.\n'),
           value: controller.useM2StyleDividerInM3 &&
