@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'tab_bar_indicator_size_popup_menu.dart';
 import 'tab_bar_style_popup_menu.dart';
@@ -120,18 +122,6 @@ class TabBarSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('TabBar'),
-          subtitle: Text('FlexColorscheme comes with a quick TabBar styling '
-              'option, where you can choose if it should always fit in '
-              'your AppBar, regardless of what theme you set for the AppBar. '
-              'Usually you want this, but sometimes surface might be preferred '
-              'or the Flutter SDK default style. In M2 mode Flutter default '
-              'does not work well on surface colored AppBar and in M3 mode '
-              'the default does not work with primary colored AppBar. By using '
-              'the forAppBar style, the TabBar always fits with the AppBar.'),
-        ),
-        const SizedBox(height: 8),
         TabBarStylePopupMenu(
           title: const Text('Select TabBarStyle that fits your use case'),
           labelForDefault:
@@ -147,17 +137,24 @@ class TabBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const SizedBox(height: 24),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForAppBarShowcase(),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: TabBarForBackgroundShowcase(),
+        const SizedBox(height: 8),
+        Card(
+          elevation: 0,
+          color: theme.colorScheme.surfaceVariant,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: const <Widget>[
+                TabBarForAppBarShowcase(),
+                SizedBox(height: 16),
+                TabBarForBackgroundShowcase(),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 8),
-        const ListTile(
+        const ListTileReveal(
           title: Text('Custom TabBar colors and styles'),
           subtitle: Text('With component themes enabled you can select '
               'scheme color for the tab items and indicator separately. '
@@ -165,7 +162,7 @@ class TabBarSettings extends StatelessWidget {
               'AppBar or surface theme, but this offers more '
               'options if that is needed. '
               'These settings override used TabBarStyle, set them '
-              'back to default to use TabBarStyle again.'),
+              'back to default to use TabBarStyle again.\n'),
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
@@ -499,10 +496,10 @@ class TabBarSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Remove bottom divider'),
           subtitle: const Text('Removes the bottom divider on M3 TabBar, '
-              'does not have any effect on M2 mode TabBar.'),
+              'does not have any effect on M2 mode TabBar.\n'),
           value: controller.useFlexColorScheme &&
               controller.useSubThemes &&
               controller.tabBarDividerColor == Colors.transparent,
@@ -516,33 +513,36 @@ class TabBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'In Flutter 3.7 the TabBar dividerColor cannot be set '
-                      'via theme in Material 3 mode. It is a bug, that has '
-                      'been fixed in master channel via ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterPr119690,
-                  text: 'FIX PR #119690',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. This feature will work when the fix lands in '
-                      'Flutter stable channel.',
-                ),
-              ],
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    style: spanTextStyle,
+                    text:
+                        'In Flutter 3.7 the TabBar dividerColor cannot be set '
+                        'via theme in Material 3 mode. It is a bug, that has '
+                        'been fixed in master channel via ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterPr119690,
+                    text: 'FIX PR #119690',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '. This feature will work when the fix lands in '
+                        'Flutter stable channel.\n',
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 16),
       ],
     );
   }

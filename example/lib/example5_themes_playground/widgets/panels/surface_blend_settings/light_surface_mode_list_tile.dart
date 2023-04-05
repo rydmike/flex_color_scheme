@@ -23,7 +23,7 @@ class LightSurfaceModeListTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: Padding(
-        padding: const EdgeInsetsDirectional.only(end: 10.0),
+        padding: const EdgeInsetsDirectional.only(end: 5.0),
         child: LightSurfaceModeToggleButtons(controller: controller),
       ),
       onTap: () {

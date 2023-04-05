@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/colors_are_close.dart';
+import 'list_tile_reveal.dart';
 
 /// A [Card] with a [ListTile] header that can be toggled via its trailing
 /// widget to open and reveal more content provided via [child] in the card.
@@ -24,6 +25,7 @@ class HeaderCard extends StatelessWidget {
     this.leading,
     this.title,
     this.subtitle,
+    this.info,
     this.trailing,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
@@ -58,6 +60,12 @@ class HeaderCard extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? subtitle;
+
+  /// Optional expanding info text that can be used to describe content in
+  /// this header card.
+  ///
+  /// If null or empty string, there is no info icon and expand feature.
+  final String? info;
 
   /// A widget to display after the title.
   ///
@@ -177,11 +185,11 @@ class HeaderCard extends StatelessWidget {
               Material(
                 type: MaterialType.card,
                 color: headerColor,
-                child: ListTile(
+                child: ListTileReveal(
                   contentPadding: headerPadding,
                   leading: leading,
                   title: title,
-                  subtitle: subtitle,
+                  subtitle: info != null && info != '' ? Text(info!) : null,
                   trailing: trailing ??
                       ((enabled && onTap != null)
                           ? ExpandIcon(

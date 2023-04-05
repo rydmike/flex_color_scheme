@@ -2,8 +2,10 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/navigators_use_default_switch.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarSettings extends StatelessWidget {
@@ -230,41 +232,19 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavShowUnselectedLabels
               : null,
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-          child: Text(
-            'More settings with the API',
-            style: denseHeader,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
+        NavigatorsUseDefaultsSwitch(controller: controller),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitle: Text(
             'With the API you can also set the font and icon size '
             'individually on selected and unselected items. Use '
             'FlexSubThemesData properties: '
             'bottomNavigationBarSelectedLabelSize, '
             'bottomNavigationBarUnselectedLabelSize, '
             'bottomNavigationBarSelectedIconSize and '
-            'bottomNavigationBarUnselectedIconSize.',
-            style: denseBody,
+            'bottomNavigationBarUnselectedIconSize.\n',
           ),
-        ),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Navigators use Flutter defaults'),
-          subtitle: const Text('Undefined values fall back to '
-              'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Both selected and unselected color have to be null before '
-              'the item colors can fall back to Flutter defaults. '
-              'This setting affects navigation bars and rail. '
-              'See API docs for more info.'),
-          value: controller.useFlutterDefaults &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseFlutterDefaults
-              : null,
         ),
       ],
     );

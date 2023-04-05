@@ -142,40 +142,44 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
       debugPrint('media.size.width ........ : ${media.size.width}');
       debugPrint('media.size.height ....... : ${media.size.height}');
     }
-    return CustomScrollView(controller: scrollController, slivers: <Widget>[
-      SliverPersistentHeader(
-        pinned: isPinned,
-        floating: true,
-        delegate: ThemeColorSelectorHeaderDelegate(
-          vsync: this,
-          extent: headerExtent,
-          controller: controller,
-          updateDelegate: updateDelegate,
-        ),
-      ),
-      SliverPadding(
-        padding: EdgeInsets.only(top: margins),
-        sliver: SliverFillRemaining(
-          child: Row(
-            children: <Widget>[
-              VerticalThemePanelView(
-                key: const ValueKey<String>('Left Panel'),
-                panel: controller.viewIndex,
-                onPanelChanged: controller.setViewIndex,
-                controller: controller,
-              ),
-              VerticalThemePanelView(
-                key: const ValueKey<String>('Right Panel'),
-                isRight: true,
-                panel: controller.sideViewIndex,
-                onPanelChanged: controller.setSideViewIndex,
-                controller: controller,
-              ),
-            ],
+    return CustomScrollView(
+      controller: scrollController,
+      physics: const ClampingScrollPhysics(),
+      slivers: <Widget>[
+        SliverPersistentHeader(
+          pinned: isPinned,
+          floating: true,
+          delegate: ThemeColorSelectorHeaderDelegate(
+            vsync: this,
+            extent: headerExtent,
+            controller: controller,
+            updateDelegate: updateDelegate,
           ),
         ),
-      ),
-    ]);
+        SliverPadding(
+          padding: EdgeInsets.only(top: margins),
+          sliver: SliverFillRemaining(
+            child: Row(
+              children: <Widget>[
+                VerticalThemePanelView(
+                  key: const ValueKey<String>('Left Panel'),
+                  panel: controller.viewIndex,
+                  onPanelChanged: controller.setViewIndex,
+                  controller: controller,
+                ),
+                VerticalThemePanelView(
+                  key: const ValueKey<String>('Right Panel'),
+                  isRight: true,
+                  panel: controller.sideViewIndex,
+                  onPanelChanged: controller.setSideViewIndex,
+                  controller: controller,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -286,8 +290,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
             child: ListView(
               primary: false,
               controller: scrollController,
-              // TODO(rydmike): Do we keep bounce or clamp it down. TBD.
-              // physics: const ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               padding: EdgeInsets.fromLTRB(
                 widget.isRight ? margins / 2 : 4,
                 0,
@@ -303,6 +306,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
                       title: Text(themeTopics[widget.panel].heading),
                       leading: Icon(themeTopics[widget.panel].icon,
                           color: iconColor),
+                      info: themeTopics[widget.panel].info,
                       child: ThemePanel(widget.panel, widget.controller),
                     ),
                   ),

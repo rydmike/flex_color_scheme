@@ -21,6 +21,7 @@ class ShowThemeDataColors extends StatelessWidget {
   const ShowThemeDataColors({
     super.key,
     this.onBackgroundColor,
+    this.showTitle = true,
   });
 
   /// The color of the background the color widget are being drawn on.
@@ -31,6 +32,11 @@ class ShowThemeDataColors extends StatelessWidget {
   /// color it is drawn on for that. If not passed in from parent, it is
   /// assumed to be drawn on card color, which usually is close enough.
   final Color? onBackgroundColor;
+
+  /// Show the title.
+  ///
+  /// Defaults to true.
+  final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -122,14 +128,14 @@ class ShowThemeDataColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              'ThemeData Colors',
-              style: theme.textTheme.titleMedium,
+          if (showTitle)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                'ThemeData Colors',
+                style: theme.textTheme.titleMedium,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
           Wrap(
             spacing: spacing,
             runSpacing: spacing,

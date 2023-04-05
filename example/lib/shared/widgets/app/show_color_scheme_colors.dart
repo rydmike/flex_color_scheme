@@ -17,7 +17,11 @@ import 'color_card.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowColorSchemeColors extends StatelessWidget {
-  const ShowColorSchemeColors({super.key, this.onBackgroundColor});
+  const ShowColorSchemeColors({
+    super.key,
+    this.onBackgroundColor,
+    this.showTitle = true,
+  });
 
   /// The color of the background the color widget are being drawn on.
   ///
@@ -27,6 +31,11 @@ class ShowColorSchemeColors extends StatelessWidget {
   /// color it is drawn on for that. If not passed in from parent, it is
   /// assumed to be drawn on card color, which usually is close enough.
   final Color? onBackgroundColor;
+
+  /// Show the title.
+  ///
+  /// Defaults to true.
+  final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -109,13 +118,14 @@ class ShowColorSchemeColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              'ColorScheme Colors',
-              style: theme.textTheme.titleMedium,
+          if (showTitle)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                'ColorScheme colors',
+                style: theme.textTheme.titleMedium,
+              ),
             ),
-          ),
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,

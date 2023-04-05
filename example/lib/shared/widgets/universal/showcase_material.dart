@@ -1919,6 +1919,7 @@ class AppBarShowcase extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 8),
             // A bit nasty usage of CustomScrollViews and Slivers and
             // shrinkWraps, to show what the SliverAppBars look like, don't
             // do this in a production app. With just a few widgets,
@@ -1947,6 +1948,7 @@ class AppBarShowcase extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 8),
             Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2009,7 +2011,7 @@ class _BehindAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       child: Wrap(
         spacing: 8,
         runSpacing: 8,
@@ -2029,7 +2031,12 @@ class _BehindAppBar extends StatelessWidget {
 }
 
 class BottomAppBarShowcase extends StatelessWidget {
-  const BottomAppBarShowcase({super.key});
+  const BottomAppBarShowcase({
+    super.key,
+    this.explain = true,
+  });
+
+  final bool explain;
 
   @override
   Widget build(BuildContext context) {
@@ -2069,24 +2076,26 @@ class BottomAppBarShowcase extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: Text(
-                'BottomAppBar',
-                style: denseHeader,
+            if (explain)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: Text(
+                  'BottomAppBar',
+                  style: denseHeader,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: Text(
-                'Flutter M2 past default color is ThemeData.bottomAppBarColor '
-                '(deprecated in Flutter 3.7) now colorScheme.surface and '
-                'elevation 8. In M3 it defaults to to colorScheme.surface '
-                'color, elevation 3, no shadow, but with surface elevation '
-                'tint.',
-                style: denseBody,
+            if (explain)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text(
+                  'Flutter M2 past default color is ThemeData.bottomAppBarColor '
+                  '(deprecated in Flutter 3.7) now colorScheme.surface and '
+                  'elevation 8. In M3 it defaults to colorScheme.surface '
+                  'color, elevation 3, no shadow, but with surface elevation '
+                  'tint.',
+                  style: denseBody,
+                ),
               ),
-            ),
           ],
         ),
       ),

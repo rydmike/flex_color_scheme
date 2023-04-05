@@ -100,7 +100,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
           ],
         ),
         trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
             backgroundColor: enabled && !useDefault
                 ? FlexSubThemes.schemeColor(

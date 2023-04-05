@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'app_example_components.dart';
 import 'app_example_login.dart';
 import 'app_example_material3/app_example_material3.dart';
@@ -96,12 +97,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                 ],
               ),
             ),
-            const SizedBox(height: 8),
-            const ListTile(
-                subtitle: Text('Use theme simulator devices in a side view '
-                    'as you change theme settings, and see how the changes '
-                    'modify the look and feel of included demo apps.')),
-            ListTile(
+            ListTileReveal(
               leading: IconButton(
                 icon: AnimatedRotation(
                   turns: turns,
@@ -127,7 +123,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
               title: Text('${Simulator.devices[device].name} ('
                   '${Simulator.devices[device].info.identifier.platform.name}'
                   ')'),
-              subtitle: Text(_phoneInfo(device)),
+              subtitle: Text('${_phoneInfo(device)}\n'),
               trailing: Simulator(
                 index: device,
                 onChanged: (int index) {

@@ -5,7 +5,9 @@ import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'app_bar_style_popup_menu.dart';
@@ -40,16 +42,7 @@ class AppBarSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const ListTile(
-          title: Text('AppBar'),
-          subtitle: Text(
-            'Material 2 uses primary colored AppBar in light mode and almost '
-            'black in dark mode. Material 3 defaults to surface color in both '
-            'light and dark theme mode. With FCS you can use select if you '
-            'want Primary, Material2 surface, background, scaffoldBackground '
-            'colors with their surfaceTint and blends, or use a custom color.',
-          ),
-        ),
+        const SizedBox(height: 8),
         if (isLight)
           AppBarStylePopupMenu(
             title: const Text('Light AppBarStyle'),
@@ -97,11 +90,11 @@ class AppBarSettings extends StatelessWidget {
                 : null,
             customAppBarColor: AppColor.scheme(controller).dark.appBarColor,
           ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('One colored AppBar on Android'),
           subtitle: const Text(
             'ON  No scrim on the top status bar\n'
-            'OFF Use a two toned AppBar with a scrim on top status bar',
+            'OFF Use a two toned AppBar with a scrim on top status bar\n',
           ),
           value:
               controller.transparentStatusBar && controller.useFlexColorScheme,
@@ -109,11 +102,20 @@ class AppBarSettings extends StatelessWidget {
               ? controller.setTransparentStatusBar
               : null,
         ),
-        const AppBarShowcase(),
+        const SizedBox(height: 8),
+        Card(
+          elevation: 0,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          color: theme.colorScheme.surfaceVariant,
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: AppBarShowcase(),
+          ),
+        ),
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light AppBar elevation'),
+            title: const Text('Light mode elevation'),
             subtitle: Slider(
               min: -0.5,
               max: 20,
@@ -162,10 +164,10 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Light opacity'),
-            subtitle: const Text('To use themed opacity, try 85% to 98%'),
+            subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
           ),
           ListTile(
             title: Slider(
@@ -201,7 +203,7 @@ class AppBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark AppBar elevation'),
+            title: const Text('Dark mode elevation'),
             subtitle: Slider(
               min: -0.5,
               max: 20,
@@ -249,10 +251,10 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Dark opacity'),
-            subtitle: const Text('To use themed opacity, try 85% to 98%'),
+            subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
           ),
           ListTile(
             title: Slider(
@@ -291,7 +293,7 @@ class AppBarSettings extends StatelessWidget {
             enabled: controller.useFlexColorScheme &&
                 controller.useSubThemes &&
                 controller.useMaterial3,
-            title: const Text('Light AppBar scrolled under elevation'),
+            title: const Text('Light mode scrolled under elevation'),
             subtitle: Slider(
               min: -0.5,
               max: 20,
@@ -372,7 +374,7 @@ class AppBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme && controller.useSubThemes,
-            title: const Text('Dark AppBar scrolled under elevation'),
+            title: const Text('Dark mode scrolled under elevation'),
             subtitle: Slider(
               min: -0.5,
               max: 20,
@@ -467,18 +469,6 @@ class AppBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const ListTile(
-          title: Text('Background color'),
-          subtitle: Text('With component themes enabled you can select scheme '
-              'color for the AppBar background color. '
-              'Using AppBarStyle is convenient and does not require activating '
-              'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color overrides used AppBarStyle, set it back '
-              'to default to use AppBarStyle again. Using AppBarStyle also '
-              'offers Scaffold background color as AppBar color, which when '
-              'using FCS surface blends can be different from ColorScheme '
-              'surface and background colors.'),
-        ),
         if (isLight)
           ColorSchemePopupMenu(
             title: const Text('Light custom background color'),
@@ -515,11 +505,23 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
-
-        //
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RichText(
+        const ListTileReveal(
+          dense: true,
+          title: Text('Background color'),
+          subtitle: Text('With component themes enabled you can select scheme '
+              'color for the AppBar background color. '
+              'Using AppBarStyle is convenient and does not require activating '
+              'FlexColorScheme component themes, but this offers more choices. '
+              'Selecting a color overrides used AppBarStyle, set it back '
+              'to default to use AppBarStyle again. Using AppBarStyle also '
+              'offers Scaffold background color as AppBar color, which when '
+              'using FCS surface blends can be different from ColorScheme '
+              'surface and background colors.\n'),
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -554,12 +556,12 @@ class AppBarSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('BottomAppBar'),
           subtitle: Text('A BottomAppBar is typically used with '
               'Scaffold.bottomNavigationBar. '
               'Its elevation in FCS defaults to AppBar elevation in M2 mode, '
-              'when using M3 it defaults to 3 and gets elevation tint.'),
+              'when using M3 it defaults to 3 and gets elevation tint.\n'),
         ),
         if (isLight) ...<Widget>[
           ListTile(
@@ -703,20 +705,34 @@ class AppBarSettings extends StatelessWidget {
               : null,
         ),
         const SizedBox(height: 8),
-        const BottomAppBarShowcase(),
-        const ListTile(
-          isThreeLine: true,
+        Card(
+          elevation: 0,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          color: theme.colorScheme.surfaceVariant,
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: BottomAppBarShowcase(explain: false),
+          ),
+        ),
+        const ListTileReveal(
           dense: true,
-          title: Text('Theming limitations'),
+          title: Text('Theming info'),
           subtitle: Text(
+              'Flutter M2 past default color is ThemeData.bottomAppBarColor '
+              '(deprecated in Flutter 3.7) now colorScheme.surface and '
+              'elevation 8. In M3 it defaults to colorScheme.surface '
+              'color, elevation 3, no shadow, but with surface elevation '
+              'tint.\n'
+              '\n'
               'The color of the items in a BottomAppBar cannot be themed. If '
               'you use a background color that requires other contrasting '
-              'color than what works on surface and background color, you will '
-              'have to color its content on widget level.'),
+              'color than what works on surface and background colors, you '
+              'will have to color its content on widget level.\n'),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -731,13 +747,12 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
+                  text: '.\n',
                 ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 16),
       ],
     );
   }

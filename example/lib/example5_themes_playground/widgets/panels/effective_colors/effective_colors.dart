@@ -5,6 +5,8 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../shared/component_colors_reveal.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// Used to show effective theme colors.
@@ -30,37 +32,32 @@ class EffectiveColors extends StatelessWidget {
         theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         UseSeededColorSchemeSwitch(controller: controller),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: ShowColorSchemeColors(),
-        ),
-        const SizedBox(height: 8),
-        const ListTile(
-          dense: true,
-          subtitle: Text('The effective ColorScheme colors '
-              'are presented above in the order they appear in the '
+        const ListTileReveal(
+          title: Text('ColorScheme colors'),
+          subtitleDense: true,
+          subtitle: Text('The themed and effective ColorScheme colors '
+              'are presented below in the order they appear in the '
               'ColorScheme class. Deprecated colors primaryVariant and '
-              'secondaryVariant are excluded.'),
+              'secondaryVariant are excluded.\n'),
         ),
-        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: ShowThemeDataColors(),
+          child: ShowColorSchemeColors(showTitle: false),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          title: const Text('ThemeData colors'),
+          subtitleDense: true,
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Effective color properties in ThemeData class. '
-                      'All direct color properties in ThemeData are planned '
-                      'to be deprecated and removed from Flutter. '
+                  text: 'Most direct color properties in ThemeData are '
+                      'planned to be deprecated and removed from Flutter. '
                       'More info in ',
                 ),
                 LinkTextSpan(
@@ -68,29 +65,35 @@ class EffectiveColors extends StatelessWidget {
                   uri: _githubIssueUri,
                   text: 'issue #91772',
                 ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n'
+                      'ThemeData colors are still important in Flutter 3.7 '
+                      'and earlier. Some widgets still depend on them for '
+                      'their default colors, especially when using M2. '
+                      'FlexColorScheme keeps them in sync with ColorScheme to '
+                      'produce an app with consistent colors on all widgets. '
+                      'It will do so as long as the colors exist in ThemeData. '
+                      'If you turn FlexColorScheme OFF, you can see that some '
+                      'colors in ThemeData loose their relation to active '
+                      'ColorScheme. Widgets in the SDK that still get their '
+                      'default colors from those ThemeData color properties '
+                      'will then no longer get ColorScheme based colors. '
+                      'FlexColorScheme assigns correct ColorScheme based '
+                      'colors to still relevant ThemeData colors.\n',
+                ),
               ],
             ),
           ),
         ),
-        const ListTile(
-          dense: true,
-          subtitle: Text('Above ThemeData colors are still important in '
-              'Flutter 3.7 and earlier. Some widgets still depend on them for '
-              'their default colors, especially when using M2. FlexColorScheme '
-              'keeps them in sync with ColorScheme to produce an app with '
-              'consistent colors '
-              'on all widgets. It will do so as long as the colors exist '
-              'in ThemeData. If you turn FlexColorScheme OFF, you can see '
-              'that the colors in ThemeData loose their relation to active '
-              'ColorScheme. Widgets in the SDK that still get their default '
-              'colors from those ThemeData color properties will then no '
-              'longer get ColorScheme based colors. FlexColorScheme assigns '
-              'correct ColorScheme based colors to still relevant ThemeData '
-              'colors.'),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: ShowThemeDataColors(showTitle: false),
         ),
+        const ComponentColorsReveal(),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-          child: ShowSubThemeColors(showSubtitle: true),
+          child: ShowSubThemeColors(showTitle: false),
         ),
       ],
     );
