@@ -29,7 +29,10 @@ class UseSeededColorSchemeSwitch extends StatelessWidget {
       subtitleDense: true,
       subtitle: Text('${AppColor.explainUsedColors(controller)}. '
           '$explainMoreString\n'),
-      trailing: UseKeyColorsButtons(controller: controller),
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 5.0),
+        child: UseKeyColorsButtons(controller: controller),
+      ),
     );
   }
 }

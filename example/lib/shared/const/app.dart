@@ -75,7 +75,7 @@ class App {
   /// This min width was chosen because it gives at least the primary, secondary
   /// and tertiary colors in one Wrap row on panels Input Colors and Seeded
   /// ColorScheme, also when the side-by-side code view appears.
-  static const double sideBySideViewBreakpoint = 955;
+  static const double sideBySideViewBreakpoint = 860;
 
   /// The minimum media size needed for desktop/large tablet menu view,
   /// this is media size.
@@ -90,11 +90,13 @@ class App {
   /// code in side-by-side view. We could do lower the desktop width breakpoint,
   /// but then that view switches temporarily to now showing the code view,
   /// and it is just to much dynamic changes happening, it does not nice.
-  static const double desktopWidthBreakpoint = 1350;
+  static const double desktopWidthBreakpoint = 1700;
 
   /// A medium sized desktop, in panel view we switch to vertical
   /// topic selector page [ThemeTwoTopicsPage], with topic selector on
   /// left and right side, one for each theme topic panel.
+  ///
+  /// This is a media size breakpoint.
   ///
   /// It offers separate vertical theme topic selectors for the two s
   /// ide-by-side theme topic panel views. This results in even more usable
@@ -109,7 +111,7 @@ class App {
   /// than 1800dp, the device pixels available on a MacBook Pro 14" screen
   /// when using the "More space" option in Display settings. It of course
   /// also gets used on common full HD 1080p monitors that are 1920 dp wide.
-  static const double mediumDesktopWidthBreakpoint = 1779;
+  static const double mediumDesktopWidthBreakpoint = 1500;
 
   /// This breakpoint is only used to further increase margins and insets on
   /// very large desktops.
@@ -148,7 +150,7 @@ class App {
 
   /// The height when we want to pin the panel or color selector, instead of
   /// letting it float and snap back.
-  static const double pinnedSelector = 1000;
+  static const double pinnedSelector = 980;
 
   /// The width, and height of the scrolling panel buttons in Themes Playground
   /// page view, and how much it shrinks when we go to phone size.

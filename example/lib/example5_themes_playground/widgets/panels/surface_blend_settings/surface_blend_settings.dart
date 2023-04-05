@@ -99,31 +99,37 @@ class SurfaceBlendSettings extends StatelessWidget {
     final String spaceDark = materialNameDark == '' ? '' : ' ';
     //
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         UseSeededColorSchemeSwitch(controller: controller),
         if (isLight) ...<Widget>[
-          LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
+          LightSurfaceModePopupMenu(controller: controller),
           const ListTileReveal(
             title: Text('Blend level'),
             subtitleDense: true,
             subtitle: Text(
-              'Adjust the surface, background, scaffold and '
-              'dialog blend level. Also impacts surfaces when '
-              'seed colors are used. Seed based surfaces always include '
-              'a touch of primary, but you can make it stronger with '
-              'surface blends. To use default M3 surface colors, set '
-              'blend level to zero.\n'
+              'Surface blend uses alpha blend, to mix in the surface '
+              'tint color into surfaces and backgrounds. The blend '
+              'level is the used alpha value in an alpha blend. The mode '
+              'changes used factor of this alpha blend value differently '
+              'for different surface colors, like surface, background, '
+              'scaffold background and dialog background colors.\n'
+              '\n'
+              'Blends also applies to surfaces when M3 seeded ColorSchemes are '
+              'used. Seed based M3 surfaces already include a touch of '
+              'primary color, you can make it stronger with surface blends. '
+              'To use default M3 surface color results, use blend level zero.\n'
+              '\n'
               'When using a surface blend mode with a high factor on Scaffold '
-              'background, the design intent is to not place any controls and '
+              'background, the design intent is to not place any controls or '
               'text on it directly, but to always use them on other surfaces '
               'with less surface tint, for example in Cards. The Scaffold '
               'background is then only used as a background color effect. If '
-              'your app places controls directly on Scaffold with its default '
-              'background color, high blend factor on Scaffold background '
-              'color may not be a good fit. Choose one with lower color blend '
-              'factor on Scaffold background.',
+              'your app places controls directly on Scaffold, a high blend '
+              'factor on Scaffold background color may not be a good fit. '
+              'Choose one where it has a lower color blend factor.',
             ),
           ),
           ListTile(
@@ -156,8 +162,8 @@ class SurfaceBlendSettings extends StatelessWidget {
             ),
           ),
         ] else ...<Widget>[
-          DarkSurfaceModePopupMenu(controller: controller),
           DarkSurfaceModeListTile(controller: controller),
+          DarkSurfaceModePopupMenu(controller: controller),
           const ListTileReveal(
             title: Text('Blend level'),
             subtitleDense: true,
@@ -200,7 +206,7 @@ class SurfaceBlendSettings extends StatelessWidget {
         const SizedBox(height: 8),
         // Show all the surface colors to show what is done to them.
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SurfaceColors(controller: controller),
         ),
         const SizedBox(height: 8),

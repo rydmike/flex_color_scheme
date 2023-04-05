@@ -104,18 +104,19 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.invert_colors_outlined,
     info: 'Material 2 design demonstrates using surfaces with primary color '
         'alpha blends in dark mode. FlexColorScheme surface blends '
-        'can do it for you in both light and dark mode. '
+        'provides it for both light and dark mode. '
         'Material 3 design has a new color system where a hint of primary '
         'color is also used on surfaces. It is done via its neutral tonal '
-        'palettes, that are shifted slightly towards the primary color. '
-        'If you use M3 seeded ColorSchemes, set blend level to zero to get the '
+        'palettes, that are shifted slightly towards the primary color.\n'
+        '\n'
+        'When using M3 seeded ColorSchemes, set blend level to zero to get the '
         'pure M3 design. With surface blends, you can further strengthen the '
         'M3 effect. You can vary blend levels by surface type in both M2 and '
         'M3 mode, regardless of if you use seeded ColorScheme or not.\n'
-        'Surface blend settings have separate control values '
-        'in the Playground for light and dark mode. Typically different '
-        'settings in light and dark mode, may be a part of the desired '
-        'design.\n',
+        '\n'
+        'Surface blend settings have separate control values in the '
+        'Playground for light and dark mode. Different values for blends in '
+        'light and dark mode, are often a part of the desired design.\n',
   ),
   ThemeTopic(
     heading: 'Effective colors',

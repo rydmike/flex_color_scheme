@@ -2339,10 +2339,10 @@ class _BottomNavigationBarShowcaseState
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Text(
-                'Default SDK background color is theme canvasColor via Material. '
-                'The canvasColor is typically colorScheme.background, elevation '
-                'is 8. FCS sub-theme default is colorScheme.background and '
-                'elevation 0.',
+                'Default SDK background color is theme canvasColor via '
+                'Material. The canvasColor is typically '
+                'colorScheme.background, elevation is 8. FCS sub-theme default '
+                'is colorScheme.background and elevation 0.',
                 style: denseBody,
               ),
             ),

@@ -84,10 +84,10 @@ class ThemeColorsSettings extends StatelessWidget {
             },
           ),
           ListTileReveal(
-            title: const Text('Copy this theme to the customizable theme?'),
+            title: const Text('Copy to custom theme?'),
             subtitleDense: true,
             subtitle: const Text("When you copy a built-in theme's colors "
-                'to the customizable theme, it becomes a start template '
+                'to the customizable theme, it becomes a starting point '
                 'for your own custom theme colors.\n'),
             trailing: FilledButton(
               onPressed: () async {
@@ -149,13 +149,18 @@ class ThemeColorsSettings extends StatelessWidget {
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
         SwitchListTileReveal(
-          title: const Text('On M3, swap secondary '
-              'and tertiary inputs'),
+          title: const Text('Swap secondary '
+              'and tertiary'),
           subtitleDense: true,
           subtitle: const Text(
-            'Only applies to built-in M2 designed schemes that benefit from '
-            'it. Prefer ON when using M3. You can turn it OFF when using '
-            'seeded ColorScheme if you do not use the secondary seed key.\n',
+            'Only applies when using M3, and only to built-in FCS M2 '
+            'designed schemes that benefit from this swap for a better fit '
+            'with the M3 color system design intent. '
+            'Prefer ON when using M3 and legacy FCS color schemes to get a '
+            'theme result with them, that is more in-line with M3 color '
+            'system color expectations. You can turn it OFF if that is not '
+            'important and also when using seeded ColorScheme, especially '
+            'if you do not use the secondary color as a seed key.\n',
           ),
           value: controller.swapLegacyColors && controller.useMaterial3,
           onChanged:
@@ -163,7 +168,7 @@ class ThemeColorsSettings extends StatelessWidget {
         ),
         if (isLight)
           SwitchListTileReveal(
-            title: const Text('Light theme, swap primary and secondary'),
+            title: const Text('Swap light primary and secondary'),
             subtitleDense: true,
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
@@ -177,7 +182,7 @@ class ThemeColorsSettings extends StatelessWidget {
           )
         else
           SwitchListTileReveal(
-            title: const Text('Dark theme, swap primary and secondary'),
+            title: const Text('Swap dark primary and secondary'),
             subtitleDense: true,
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
