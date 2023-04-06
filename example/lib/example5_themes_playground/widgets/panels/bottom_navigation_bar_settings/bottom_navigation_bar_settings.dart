@@ -166,7 +166,8 @@ class BottomNavigationBarSettings extends StatelessWidget {
           ),
         ),
         Card(
-          elevation: 0,
+          elevation: 0.7,
+          shadowColor: Colors.transparent,
           color: theme.colorScheme.surfaceVariant,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: const Padding(

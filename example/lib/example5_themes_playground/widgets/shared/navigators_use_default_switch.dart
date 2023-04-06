@@ -19,7 +19,7 @@ class NavigatorsUseDefaultsSwitch extends StatelessWidget {
       subtitle: const Text('Undefined sub-theme values will fall '
           'back to Flutter SDK defaults. Prefer OFF to use FCS defaults. '
           'This setting affects BottomNavigationBar, NavigationBar and '
-          'NavigationRail. See API docs for more info.'),
+          'NavigationRail. See API docs for more info.\n'),
       value: controller.useFlutterDefaults &&
           controller.useSubThemes &&
           controller.useFlexColorScheme,

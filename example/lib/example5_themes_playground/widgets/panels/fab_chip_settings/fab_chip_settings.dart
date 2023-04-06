@@ -25,6 +25,12 @@ class FabChipSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/107946',
   );
 
+  static final Uri _fcsChipUmbrellaIssue115364 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/115364',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -324,10 +330,18 @@ class FabChipSettings extends StatelessWidget {
                   uri: _fcsFlutterIssue115827,
                   text: 'issue #115827',
                 ),
+                // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
                   text: '. Until it is fixed, stick to theme colors that needs '
-                      'and work with the default Chip text contrast.\n',
+                      'and work with the default Chip text contrast. '
+                      'The Chip has many other known issues, for a list and '
+                      'status of check the umbrella ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsChipUmbrellaIssue115364,
+                  text: 'issue #115364.',
                 ),
               ],
             ),

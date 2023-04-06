@@ -105,7 +105,8 @@ class AppBarSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Card(
-          elevation: 0,
+          elevation: 0.7,
+          shadowColor: Colors.transparent,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           color: theme.colorScheme.surfaceVariant,
           child: const Padding(

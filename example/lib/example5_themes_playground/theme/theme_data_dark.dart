@@ -46,7 +46,7 @@ ThemeData themeDataDark(ThemeController controller) {
     // effective scheme in the Playground app.
     colorScheme: colorScheme,
     // Use the colorScheme to make a nicer light theme.
-    primaryColor: colorScheme.primary,
+    primaryColor: colorScheme.surface,
     canvasColor: colorScheme.background,
     scaffoldBackgroundColor: colorScheme.background,
     cardColor: colorScheme.surface,

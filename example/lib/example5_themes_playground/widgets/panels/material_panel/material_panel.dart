@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 
 class MaterialPanel extends StatelessWidget {
@@ -11,16 +12,16 @@ class MaterialPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const <Widget>[
         SizedBox(height: 8),
-        ListTile(
+        ListTileReveal(
           title: Text('Material'),
-          subtitle: Text('The Material widget is a lower level building block. '
-              'It cannot be themed, but has theme dependent default behaviour '
-              'shown below. Material is responsible for clipping, elevation '
-              'and ink effects below its children.'),
+          subtitleDense: true,
+          subtitle: Text('Material can also specify surfaceTint color, '
+              'which is applied when Material is elevated, but only in '
+              'Material 3 mode.\n'),
         ),
         Padding(
-          padding: EdgeInsets.all(16),
-          child: MaterialShowcase(),
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: MaterialShowcase(explain: false),
         ),
       ],
     );

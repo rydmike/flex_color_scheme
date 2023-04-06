@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
@@ -69,13 +71,14 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text(
             'Tooltip background brightness',
           ),
+          subtitleDense: true,
           subtitle: const Text(
             'OFF theme mode inverted, common on Web\n'
-            'ON theme mode brightness, like Windows',
+            'ON theme mode brightness, like Windows\n',
           ),
           value: controller.tooltipsMatchBackground &&
               controller.useFlexColorScheme &&
@@ -145,11 +148,14 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(
+        ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Tooltip border radius'),
-          subtitle: const Text('Does not use global radius override. '
-              'Avoid large border radius on tooltips.'),
+          title: const Text('Tooltip radius'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Does not use the global border radius setting. '
+            'Avoid using large border radius on tooltip containers.\n',
+          ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -197,7 +203,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: const Text('Tooltip wait duration before show'),
+          title: const Text('Wait duration before shown'),
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           subtitle: Slider(
             min: 0,
@@ -243,7 +249,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          title: const Text('Tooltip show duration, after tap, long press or '
+          title: const Text('Show duration, after tap, long press or '
               'mouse exit'),
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           subtitle: Slider(
@@ -294,20 +300,27 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           child: TooltipShowcase(),
         ),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('Icon, IconButton, CircleAvatar and DropdownButton'),
-          subtitle: Text('Included to show their themes with '
-              'current ColorScheme. '
-              'They have no adjustable component theme properties in current '
+          subtitleDense: true,
+          subtitle: Text('Included to show their styles with '
+              'current theme and ColorScheme.\n'
+              '\n'
+              'These components have no adjustable theme properties in current '
               'version of FCS. Use "copyWith" on FCS returned ThemeData to '
-              'add your custom theming to them.'),
+              'add your custom theming to them.\n'
+              '\n'
+              'The DropdownButton is an old Material 2 widget in Flutter, '
+              'prefer using newer M3 DropdownMenu or MenuAnchor, depending on '
+              'use case.\n'),
         ),
         const Padding(
           padding: EdgeInsets.all(16),
           child: IconButtonCircleAvatarDropdownShowcase(),
         ),
-        const ListTile(
+        const ListTileReveal(
           dense: true,
+          title: Text('Icon info'),
           subtitle: Text('Icons and IconButtons by default use same foreground '
               'color as active text theme. Some components change '
               'their colors automatically when they use them, but '
@@ -324,9 +337,10 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         //   padding: EdgeInsets.all(16.0),
         //   child: IconButtonM3Showcase(),
         // ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('IconButton info, known issues and limitations'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -341,10 +355,11 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', are not yet available via direct constructors in '
+                  text: ', are not yet available via own constructors in '
                       'Flutter 3.7. With current IconButton theming, only one '
-                      'style is offered and thus only of the M3 style can be '
-                      'made with theming, the default style is kept as it is.\n'
+                      'style is offered and thus only one of the M3 styles '
+                      'can be made with theming, the default style is '
+                      'therefore kept as it is.\n'
                       '\n'
                       'The constructors for above IconButtons are available in '
                       'the master channel, but not yet in Flutter 3.7. This ',
@@ -358,7 +373,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     style: spanTextStyle,
                     text: ' and its referenced PR brought the new styled '
                         'IconButton constructors. These new IconButtons have '
-                        'the same theming limitation as .e.g the FilledButton, '
+                        'the same theming limitation as the FilledButton, '
                         'for more information about it, see issue '),
                 LinkTextSpan(
                   style: linkStyle,
@@ -378,15 +393,14 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. It is a bit tedious to set them up them, '
-                      'but at least doable, but not with any '
-                      'built-in constructors yet, nor any theming.',
+                  text: '. It is a bit tedious to construct them, '
+                      'but at least doable, but not with any built-in '
+                      'constructors yet, nor is theming them possible.\n',
                 ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }

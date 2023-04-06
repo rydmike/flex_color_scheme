@@ -32,7 +32,9 @@ class UseMaterial3TextTheme extends StatelessWidget {
         value: controller.useFlexColorScheme && controller.useSubThemes
             ? controller.useTextTheme
             : null,
-        onChanged: controller.setUseTextTheme,
+        onChanged: controller.useFlexColorScheme && controller.useSubThemes
+            ? controller.setUseTextTheme
+            : null,
       ),
       onTap: () {
         if (controller.useTextTheme == false) {

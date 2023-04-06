@@ -141,7 +141,7 @@ class TabBarSettings extends StatelessWidget {
         Card(
           elevation: 0.7,
           shadowColor: Colors.transparent,
-          // color: theme.colorScheme.surfaceVariant,
+          color: theme.colorScheme.surface,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Padding(
             padding: const EdgeInsets.all(16.0),

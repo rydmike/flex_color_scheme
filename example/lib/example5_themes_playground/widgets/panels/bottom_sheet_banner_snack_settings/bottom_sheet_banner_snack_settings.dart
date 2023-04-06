@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -85,12 +86,13 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
+        const ListTileReveal(
           title: Text('BottomSheet'),
+          subtitleDense: true,
           subtitle: Text('The BottomSheet comes in two variants, normal and '
               'modal version. Some of their properties can be themed '
               'individually, but not all of them. The border radius only has '
-              'one the property shared by both variants.'),
+              'one the property shared by both variants.\n'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -296,14 +298,17 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('SnackBar'),
+          subtitleDense: true,
           subtitle: Text('The SnackBar comes with two behaviors, fixed and '
-              'floating. When using M3, prefer using the floating behavior.'),
+              'floating. When using M3, prefer using the floating '
+              'behavior.\n'),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues and limitations'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -463,12 +468,15 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         ),
         ListTile(
           title: const Text('Show a fixed test SnackBar'),
-          trailing: FilledButton(
-            onPressed: () {
-              unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
-                  'A SnackBar with SnackBarBehavior.fixed'));
-            },
-            child: const Text('Fixed Snack'),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5.0),
+            child: FilledButton(
+              onPressed: () {
+                unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
+                    'A SnackBar with SnackBarBehavior.fixed'));
+              },
+              child: const Text('Fixed Snack'),
+            ),
           ),
           onTap: () {
             unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
@@ -477,12 +485,15 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         ),
         ListTile(
           title: const Text('Show a floating test SnackBar'),
-          trailing: FilledButton(
-            onPressed: () {
-              unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
-                  'A SnackBar with SnackBarBehavior.floating'));
-            },
-            child: const Text('Float Snack'),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5.0),
+            child: FilledButton(
+              onPressed: () {
+                unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
+                    'A SnackBar with SnackBarBehavior.floating'));
+              },
+              child: const Text('Float Snack'),
+            ),
           ),
           onTap: () {
             unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
@@ -493,10 +504,12 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         const SnackBarShowcase(),
         const SizedBox(height: 16),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('MaterialBanner'),
-          subtitle: Text('No settings in FCS, only shown to demonstrates its '
-              'style with current ColorScheme.'),
+          subtitleDense: true,
+          subtitle: Text('No theme settings in current version of '
+              'FlexColorScheme. Included to demonstrates its style with '
+              'current theme and used ColorScheme.\n'),
         ),
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),

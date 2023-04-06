@@ -272,11 +272,14 @@ class NavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Card(
+        Card(
           elevation: 0.7,
           shadowColor: Colors.transparent,
-          margin: EdgeInsets.symmetric(horizontal: 16),
-          child: Padding(
+          color: useMaterial3
+              ? theme.colorScheme.surfaceVariant
+              : theme.colorScheme.onInverseSurface,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
             padding: EdgeInsets.all(16.0),
             child: NavigationBarShowcase(explain: false),
           ),
@@ -493,7 +496,7 @@ class NavigationBarSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
-              'in API'),
+              'in API./n'),
           value: controller.navBarMuteUnselected && muteUnselectedEnabled,
           onChanged:
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,

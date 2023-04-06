@@ -17,18 +17,18 @@ class PageExamples extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         ListTile(
-          title: const Text('Sub page example with all widgets'),
-          subtitle: const Text('Uses the same color scheme and theme. '
-              'However, widgets are presented on Scaffold with its themed '
-              'background color. They are not in Cards like on this page. '
-              'If you plan to place controls directly on the Scaffold '
-              'surface, you should check this out. You might want to '
-              'reduce the blend on your Scaffold in such a use case.'),
+          title: const Text('Example sub page with all widgets'),
+          subtitle: const Text(
+            'Uses active ColorScheme and Theme. '
+            'Widgets are presented on Scaffold with its themed '
+            'background color, they are not in Cards like in this app.',
+          ),
           trailing: const Icon(Icons.arrow_forward_ios),
           onTap: () async {
             await SubpageDemo.show(context, controller);
           },
         ),
+        const Divider(),
         ListTile(
           title: const Text('Splash page demo 1a'),
           subtitle: const Text(
@@ -40,6 +40,7 @@ class PageExamples extends StatelessWidget {
             await SplashPageOne.show(context, false);
           },
         ),
+        const Divider(),
         ListTile(
           title: const Text('Splash page demo 1b'),
           subtitle: const Text(
@@ -52,6 +53,7 @@ class PageExamples extends StatelessWidget {
             await SplashPageOne.show(context, true);
           },
         ),
+        const Divider(),
         ListTile(
           title: const Text('Splash page demo 2'),
           subtitle: const Text(

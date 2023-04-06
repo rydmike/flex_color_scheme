@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class MenuSettings extends StatelessWidget {
@@ -89,19 +91,38 @@ class MenuSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
+        const ListTileReveal(
           title: Text('PopupMenuButton'),
+          subtitleDense: true,
           subtitle: Text('The PopupMenuButton can be used on any kind of '
               'widget, below it used on its typical icons. The Flutter '
               'PopupMenuButton menu implementation differs from the '
-              'Material 3 menus below.'),
+              'Material 3 menus below.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: PopupMenuButtonsShowcase(explainUsage: false),
         ),
+        const ListTileReveal(
+          title: Text('Known limitations'),
+          dense: true,
+          subtitle: Text('FCS themes foreground color by default to correct '
+              'contrast pair for selected background color. This works well '
+              'if your PopupMenuItems only contain Text widgets. If they '
+              'contain e.g. ListTiles, like the second PopupMenuButton above, '
+              'the items will not use the contrasting foreground color via the '
+              "PopupMenuTheme's foreground color. You will have to define the "
+              'correct foreground color for your items used by '
+              'PopupMenuItems.\n'
+              '\n'
+              'Recommend avoiding theme mode reverse brightness as background '
+              'on PopupMenuButton to avoid this limitation. Such color choices '
+              'are not very useful design anyway, so it should not be a big '
+              'limitation.'),
+        ),
+
         ColorSchemePopupMenu(
-          title: const Text('Background color of popup menu container'),
+          title: const Text('Background color of container'),
           labelForDefault: 'default (surface)',
           index: controller.popupMenuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -115,23 +136,10 @@ class MenuSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const ListTile(
-          dense: true,
-          subtitle: Text('FCS theme foreground color by default to correct '
-              'contrast pair for selected background color. This works well '
-              'if your PopupMenuItems only contain Text widgets. If they '
-              'contain e.g. ListTiles, like the second PopupMenuButton above, '
-              'the items will not use the contrasting foreground color via the '
-              "PopupMenuTheme's foreground color. You will have to define the "
-              'correct foreground color for your items used by PopupMenuItems. '
-              'Recommend avoiding theme mode reverse brightness as background '
-              'on PopupMenuButton to avoid this limitation. Such color choices '
-              'are not very useful design anyway, so it should not be a big '
-              'limitation.'),
-        ),
+
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Opacity of popup menu container'),
+          title: const Text('Opacity of container'),
           subtitle: Slider(
             max: 100,
             divisions: 100,
@@ -161,38 +169,37 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Container radius'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Does not use the global border radius setting. '
+            'Avoid using large border radius on menu container.\n',
+          ),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius of popup menu container'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('Does not use global radius override. '
-                  'Avoid large border radius on menus.'),
-              Slider(
-                min: -1,
-                max: 12,
-                divisions: 13,
-                label: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.popupMenuBorderRadius == null ||
-                            (controller.popupMenuBorderRadius ?? -1) < 0
-                        ? 'default 4'
-                        : (controller.popupMenuBorderRadius
-                                ?.toStringAsFixed(0) ??
-                            '')
-                    : 'default 4',
-                value: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.popupMenuBorderRadius ?? -1
-                    : -1,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? (double value) {
-                            controller.setPopupMenuBorderRadius(
-                                value < 0 ? null : value.roundToDouble());
-                          }
-                        : null,
-              ),
-            ],
+          subtitle: Slider(
+            min: -1,
+            max: 12,
+            divisions: 13,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuBorderRadius == null ||
+                        (controller.popupMenuBorderRadius ?? -1) < 0
+                    ? 'default 4'
+                    : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ??
+                        '')
+                : 'default 4',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.popupMenuBorderRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setPopupMenuBorderRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -221,7 +228,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Elevation of popup menu container'),
+          title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -275,14 +282,15 @@ class MenuSettings extends StatelessWidget {
         //
         // Menu
         //
-        const ListTile(
+        const ListTileReveal(
           title: Text('Menu containers'),
+          subtitleDense: true,
           subtitle: Text('Menu container theming properties are shared by '
               'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
-              'container styles when you open test menus further below.'),
+              'container styles when you open test menus further below.\n'),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Background color of menu container'),
+          title: const Text('Background color of containers'),
           labelForDefault: 'default (surface)',
           index: controller.menuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -297,7 +305,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Opacity of menu container'),
+          title: const Text('Opacity of containers'),
           subtitle: Slider(
             max: 100,
             divisions: 100,
@@ -327,36 +335,36 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Container radius'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Does not use the global border radius setting. '
+            'Avoid using large border radius on menu container.\n',
+          ),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius of menu container'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('Does not use global radius override. '
-                  'Avoid large border radius on menus.'),
-              Slider(
-                min: -1,
-                max: 24,
-                divisions: 25,
-                label: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuRadius == null ||
-                            (controller.menuRadius ?? -1) < 0
-                        ? 'default 4'
-                        : (controller.menuRadius?.toStringAsFixed(0) ?? '')
-                    : 'default 4',
-                value: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuRadius ?? -1
-                    : -1,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? (double value) {
-                            controller.setMenuRadius(
-                                value < 0 ? null : value.roundToDouble());
-                          }
-                        : null,
-              ),
-            ],
+          subtitle: Slider(
+            min: -1,
+            max: 24,
+            divisions: 25,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuRadius == null ||
+                        (controller.menuRadius ?? -1) < 0
+                    ? 'default 4'
+                    : (controller.menuRadius?.toStringAsFixed(0) ?? '')
+                : 'default 4',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setMenuRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -383,7 +391,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Elevation of menu container'),
+          title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
             max: 20,
@@ -430,7 +438,7 @@ class MenuSettings extends StatelessWidget {
 
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Padding of menu container content'),
+          title: const Text('Padding of container content'),
         ),
         Row(
           children: <Widget>[
@@ -676,15 +684,16 @@ class MenuSettings extends StatelessWidget {
         // Menu items
         //
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('Menu items'),
+          subtitleDense: true,
           subtitle: Text('Styling of menu items are used by SubmenuButton and '
               'MenuItemButton, that are used in DropdownMenu, MenuAnchor and '
               'MenuBar. You can see applied menu item styles when you open '
-              'test menus further below.'),
+              'test menus further below.\n'),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Menu item background color'),
+          title: const Text('Item background color'),
           labelForDefault: menuItemDefault,
           index: controller.menuItemBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -699,7 +708,7 @@ class MenuSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('Menu item foreground color'),
+          title: const Text('Item foreground color'),
           labelForDefault: menuOnItemDefault,
           index: controller.menuItemForegroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -714,7 +723,7 @@ class MenuSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('Highlighted menu item background color'),
+          title: const Text('Highlighted item background color'),
           labelForDefault: menuIndicatorDefault,
           index: controller.menuIndicatorBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -729,7 +738,7 @@ class MenuSettings extends StatelessWidget {
               : null,
         ),
         ColorSchemePopupMenu(
-          title: const Text('Highlighted menu item foreground color'),
+          title: const Text('Highlighted item foreground color'),
           labelForDefault: menuOnIndicatorDefault,
           index: controller.menuIndicatorForegroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -743,37 +752,36 @@ class MenuSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Highlight radius'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Does not use the global border radius setting. '
+            'Avoid using large border radius on menu container.\n',
+          ),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius of menu item highlight '
-              'and indicator'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('Does not use global radius override.'),
-              Slider(
-                min: -1,
-                max: 24,
-                divisions: 25,
-                label: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuIndicatorRadius == null ||
-                            (controller.menuIndicatorRadius ?? -1) < 0
-                        ? 'default 0'
-                        : (controller.menuIndicatorRadius?.toStringAsFixed(0) ??
-                            '')
-                    : 'default 0',
-                value: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuIndicatorRadius ?? -1
-                    : -1,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? (double value) {
-                            controller.setMenuIndicatorRadius(
-                                value < 0 ? null : value.roundToDouble());
-                          }
-                        : null,
-              ),
-            ],
+          title: Slider(
+            min: -1,
+            max: 24,
+            divisions: 25,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuIndicatorRadius == null ||
+                        (controller.menuIndicatorRadius ?? -1) < 0
+                    ? 'default 0'
+                    : (controller.menuIndicatorRadius?.toStringAsFixed(0) ?? '')
+                : 'default 0',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuIndicatorRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setMenuIndicatorRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -801,19 +809,21 @@ class MenuSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('DropdownMenu'),
+          subtitleDense: true,
           subtitle: Text('The text input area uses the themed '
-              'InputDecoration.'),
+              'InputDecoration as its style.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: DropDownMenuShowcase(),
         ),
         const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -829,27 +839,16 @@ class MenuSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'The foreground color of text of overlay highlighted '
+                  text: '.\n'
+                      '\n'
+                      'The foreground color of text of overlay highlighted '
                       'menu items animate its color change if its color if '
                       'different from none highlighted state. This is '
                       'incorrect behavior by Flutter SDK. It does not happen '
                       'on e.g. icons with same color change. This issue '
                       'applies to all menu types. To see it, use defaults and '
                       'set highlighted menu item background to primary. For '
-                      'more information see Flutter ',
+                      'more information see Flutter.\n',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -864,15 +863,17 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
         const Divider(),
         // const SizedBox(height: 16),
-        const ListTile(
+        const ListTileReveal(
           title: Text('MenuAnchor'),
-          subtitle: Text('The MenuAnchor can be used to attach a menu to any '
-              'widget. It is based on same building blocks as the MenuBar, '
-              'using SubMenuButton with MenuItemButton. It can have sub-menus '
-              'and keyboard shortcuts.'),
+          subtitleDense: true,
+          subtitle: Text(
+            'The MenuAnchor can be used to attach a menu to any '
+            'widget. It is based on same building blocks as the MenuBar, '
+            'using SubMenuButton with MenuItemButton. It can have sub-menus '
+            'and keyboard shortcuts.\n',
+          ),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -880,14 +881,20 @@ class MenuSettings extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('MenuBar'),
-          subtitle: Text('The MenuBar is made up of SubMenuButtons that have '
-              'MenuItemButtons. You can construct arbitrary deep nested '
-              'sub-menus. Menu items can have keyboard shortcuts.'),
+          subtitleDense: true,
+          subtitle: Text(
+            'The MenuBar is made up of SubMenuButtons that have '
+            'MenuItemButtons. You can construct arbitrary deep nested '
+            'sub-menus. Menu items can have keyboard shortcuts.\n',
+          ),
         ),
+
+        const MenuBarShowcase(explainUsage: false),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
-          title: const Text('Background color of MenuBar container'),
+          title: const Text('Background color'),
           labelForDefault: menuBarDefault,
           index: controller.menuBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -901,40 +908,37 @@ class MenuSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const SizedBox(height: 8),
-        const MenuBarShowcase(explainUsage: false),
-        const SizedBox(height: 16),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Container radius'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'For an edge-to-edge MenuBar design, use 0 dp. '
+            'The M3 guide shows MenuBar as edge-to-edge with no '
+            'corner rounding, but Flutter defaults to 4 dp.\n',
+          ),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius of MenuBar container'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('For an edge-to-edge design use 0 dp. '
-                  'The M3 guide shows menu bar as edge-to-edge with no '
-                  'corner rounding, Flutter defaults to 4 dp.'),
-              Slider(
-                min: -1,
-                max: 30,
-                divisions: 31,
-                label: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuBarRadius == null ||
-                            (controller.menuBarRadius ?? -1) < 0
-                        ? 'default 4'
-                        : (controller.menuBarRadius?.toStringAsFixed(0) ?? '')
-                    : 'default 4',
-                value: controller.useSubThemes && controller.useFlexColorScheme
-                    ? controller.menuBarRadius ?? -1
-                    : -1,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? (double value) {
-                            controller.setMenuBarRadius(
-                                value < 0 ? null : value.roundToDouble());
-                          }
-                        : null,
-              ),
-            ],
+          title: Slider(
+            min: -1,
+            max: 30,
+            divisions: 31,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuBarRadius == null ||
+                        (controller.menuBarRadius ?? -1) < 0
+                    ? 'default 4'
+                    : (controller.menuBarRadius?.toStringAsFixed(0) ?? '')
+                : 'default 4',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.menuBarRadius ?? -1
+                : -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setMenuBarRadius(
+                        value < 0 ? null : value.roundToDouble());
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12),
@@ -961,7 +965,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Elevation of MenuBar container'),
+          title: const Text('Elevation of container'),
           subtitle: Slider(
             min: -1,
             max: 30,
@@ -1006,12 +1010,15 @@ class MenuSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
             title: const Text('Remove elevation shadow'),
-            subtitle: const Text('The M3 guide depicts MenuBars with no '
-                'shadow and optional elevation with tint. Flutter defaults '
-                'has shadow in M3. To be able to use elevation with '
-                'only elevation tint in M3, turn ON to remove the shadow.'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'The M3 guide depicts MenuBars with no shadow and optional '
+              'elevation with tint. Flutter defaults has shadow in M3. To be '
+              'able to use elevation with only elevation tint in M3, turn '
+              'this setting ON, to remove the shadow.\n',
+            ),
             value: controller.menuBarShadowColor == Colors.transparent,
             onChanged: (bool removeShadow) {
               if (removeShadow) {
@@ -1020,7 +1027,6 @@ class MenuSettings extends StatelessWidget {
                 controller.setMenuBarShadowColor(null);
               }
             }),
-        const SizedBox(height: 8),
       ],
     );
   }
