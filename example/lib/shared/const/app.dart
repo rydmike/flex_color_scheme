@@ -41,13 +41,13 @@ class App {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '0';
-  static const String versionPatch = '0';
+  static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.9 (html renderer)';
+  static const String flutterVersion = '3.7.10 (html renderer)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -97,20 +97,6 @@ class App {
   /// left and right side, one for each theme topic panel.
   ///
   /// This is a media size breakpoint.
-  ///
-  /// It offers separate vertical theme topic selectors for the two s
-  /// ide-by-side theme topic panel views. This results in even more usable
-  /// height available on e.g. a 1080p monitor, since the large horizontal
-  /// theme topic selector for the main left panel is no longer on top of
-  /// the screen. It is also quicker and easier to individually select the
-  /// viewed theme topic for the left and right side. The new compact mode
-  /// is also available in this view mode. Using the compact view mode
-  /// further enlarges available vertical space to see more theme topic
-  /// panel content on mid-sized desktop monitors (1080p). The breakpoint
-  /// 1779dp was chosen to get this view on 1780 dp, being a bit less
-  /// than 1800dp, the device pixels available on a MacBook Pro 14" screen
-  /// when using the "More space" option in Display settings. It of course
-  /// also gets used on common full HD 1080p monitors that are 1920 dp wide.
   static const double mediumDesktopWidthBreakpoint = 1079;
 
   /// This breakpoint is only used to further increase margins and insets on
@@ -122,8 +108,6 @@ class App {
 
   /// The minimum media height treated as a phone device in this app.
   static const double phoneHeightBreakpoint = 700;
-
-  // Edge insets and margins for content at above breakpoints.
 
   /// Edge insets and margins for phone breakpoint size.
   static const double edgeInsetsPhone = 8;
