@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/const/adaptive_theme.dart';
+import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
 /// Widget used to select used AdaptiveTheme using a popup menu.
@@ -38,7 +39,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
         ? AdaptiveTheme.values[index].label
         : '${AdaptiveTheme.off.label} (Default)';
 
-    final String styleName = !useDefault
+    final String styleDescribe = !useDefault
         ? AdaptiveTheme.values[index].describe
         : AdaptiveTheme.off.describe;
 
@@ -94,7 +95,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
             ),
           )
       ],
-      child: ListTile(
+      child: ListTileReveal(
         enabled: enabled,
         contentPadding:
             contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
@@ -105,15 +106,16 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
             Text(tileLabel),
           ],
         ),
+        subtitleDense: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text(styleName),
+            Text(styleDescribe),
           ],
         ),
         trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: IconTheme(
             data: selectedIconTheme,
             child: ColorSchemeBox(

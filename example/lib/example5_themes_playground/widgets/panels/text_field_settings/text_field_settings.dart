@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -100,11 +102,12 @@ class TextFieldSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTile(
+        ListTileReveal(
             enabled: useMaterial3,
             title: const Text('Use Material 3 default TextField style?'),
+            subtitleDense: true,
             subtitle: const Text('Update settings below to match M3 default '
-                'values'),
+                'values.\n'),
             trailing: FilledButton(
               onPressed: useMaterial3
                   ? () async {
@@ -156,11 +159,12 @@ class TextFieldSettings extends StatelessWidget {
                   }
                 : null,
           ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Use base color as background fill'),
+          subtitleDense: true,
           subtitle: const Text('TIP: If you leave this OFF, you can still '
               'theme the fill color and turn it ON using widget level '
-              "'filled: true' property, and wise versa."),
+              "'filled: true' property, and wise versa.\n"),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -579,22 +583,24 @@ class TextFieldSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(
+        const ListTileReveal(
           title: Text('DropdownMenu'),
+          subtitleDense: true,
           subtitle: Text('The DropDownMenu has a text entry used to select '
               'an option in a dropdown menu by typing in the selection. '
               'The text entry part matches the used input decoration '
-              'in FCS by default.'),
+              'in FCS by default.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: DropDownMenuShowcase(),
         ),
-        const ListTile(
+        const ListTileReveal(
           title: Text('DropdownButtonFormField'),
+          subtitleDense: true,
           subtitle: Text('An older Material widget, it also uses the text '
-              'input decoration theme, it does not work well with high '
-              'border radius.'),
+              'input decoration theme. Tt does not work well with high '
+              'border radius. Prefer using the DropdownMenu widget instead.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

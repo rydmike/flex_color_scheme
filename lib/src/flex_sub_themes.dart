@@ -2570,7 +2570,7 @@ class FlexSubThemes {
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
     // TODO(rydmike): The tintInteract condition added due to Flutter SDK issue.
-    // https://github.com/flutter/flutter/pull/121884#issuecomment-1458505977
+    // See https://github.com/flutter/flutter/issues/123829
     return tintInteract
         ? IconButtonThemeData(style: ButtonStyle(
             // TODO(rydmike): Add tinted disable support when doable in SDK.

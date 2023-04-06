@@ -16,7 +16,7 @@ class ShowSubThemeColors extends StatelessWidget {
   const ShowSubThemeColors({
     super.key,
     this.onBackgroundColor,
-    this.showSubtitle = true,
+    this.showTitle = true,
   });
 
   /// The color of the background the color widget are being drawn on.
@@ -28,8 +28,8 @@ class ShowSubThemeColors extends StatelessWidget {
   /// assumed to be drawn on card color, which usually is close enough.
   final Color? onBackgroundColor;
 
-  /// Show sub-title for the sub-theme colors
-  final bool showSubtitle;
+  /// Show title for the sub-theme colors
+  final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   static bool _isLight(final Color color) =>
@@ -212,13 +212,14 @@ class ShowSubThemeColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              'Component sub theme and interaction effect colors',
-              style: theme.textTheme.titleMedium,
+          if (showTitle)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                'Component colors',
+                style: theme.textTheme.titleMedium,
+              ),
             ),
-          ),
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,

@@ -37,9 +37,12 @@ class ShowInputColors extends StatelessWidget {
     // Are colors swapped?
     final bool swapLight = controller.swapLightColors;
     final bool swapDark = controller.swapDarkColors;
+    // Show the input color values
+    final bool showInputColor = controller.showSchemeInput;
+
     // Size of theme color presentation boxes
-    const double boxWidth = 152; // Was 155, 150 OK on Android
-    const double boxHeight = 140;
+    const double boxWidth = 152;
+    final double boxHeight = showInputColor ? 130 : 78;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -74,9 +77,6 @@ class ShowInputColors extends StatelessWidget {
             ? FlexColor.lightErrorContainer(inputErrorColor)
             : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
-
-    // Show the input color values
-    final bool showInputColor = controller.showSchemeInput;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -222,7 +222,7 @@ class ShowInputColors extends StatelessWidget {
                           '$primaryContainer'),
                       color: primaryContainer,
                       textColor: colorScheme.onPrimaryContainer,
-                      label: 'primary\nContainer',
+                      label: 'primaryContainer',
                       showInputColor: showInputColor,
                       inputColor: inputColor.primaryContainer,
                       inputTextColor: _onColor(inputColor.primaryContainer),
@@ -339,7 +339,7 @@ class ShowInputColors extends StatelessWidget {
                           'ipc secondaryContainer $secondaryContainer'),
                       color: secondaryContainer,
                       textColor: colorScheme.onSecondaryContainer,
-                      label: 'secondary\nContainer',
+                      label: 'secondaryContainer',
                       showInputColor: showInputColor,
                       inputColor: inputColor.secondaryContainer,
                       inputTextColor: _onColor(inputColor.secondaryContainer),
@@ -438,7 +438,7 @@ class ShowInputColors extends StatelessWidget {
                           'ipc tertiaryContainer $tertiaryContainer'),
                       color: tertiaryContainer,
                       textColor: colorScheme.onTertiaryContainer,
-                      label: 'tertiary\nContainer',
+                      label: 'tertiaryContainer',
                       showInputColor: showInputColor,
                       inputColor: inputColor.tertiaryContainer,
                       inputTextColor: _onColor(inputColor.tertiaryContainer),
@@ -492,7 +492,7 @@ class ShowInputColors extends StatelessWidget {
                         '${colorScheme.errorContainer}'),
                     color: colorScheme.errorContainer,
                     textColor: colorScheme.onErrorContainer,
-                    label: 'error\nContainer',
+                    label: 'errorContainer',
                     showInputColor: showInputColor,
                     inputColor: inputErrorContainerColor,
                     inputTextColor: inputOnErrorContainerColor,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/universal/flex_icons.dart';
+import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 // A popup menu that allows us to select the Flutter platform we want to use.
 //
@@ -95,31 +96,32 @@ class PlatformPopupMenu extends StatelessWidget {
       TargetPlatform.fuchsia: FlexIcons.infinity,
     };
 
-    String subtitle = 'Now set to ${platformString[platform]}';
+    String subtitle = 'Now set to ${platformString[platform]}.\n';
 
     return PopupMenuButton<TargetPlatform>(
       tooltip: '',
       padding: const EdgeInsets.all(10),
       onSelected: (TargetPlatform value) {
-        subtitle = 'Now set to ${platformString[value]}';
+        subtitle = 'Now set to ${platformString[value]}.\n';
         onChanged(value);
       },
       itemBuilder: (BuildContext context) =>
           <PopupMenuItem<TargetPlatform>>[...platformItems.values],
-      child: ListTile(
+      child: ListTileReveal(
         trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 12),
+          padding: const EdgeInsetsDirectional.only(end: 5),
           child: Icon(
             platformIcon[platform],
             color: iconColor,
             size: 40,
           ),
         ),
-        title: const Text('Set mock platform'),
+        title: const Text('Mock platform'),
+        subtitleDense: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text('For adaptive theming testing purposes only.'),
+            const Text('Use mock platform for adaptive theming testing.'),
             Text(subtitle),
           ],
         ),

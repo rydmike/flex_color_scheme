@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/syntax_highlighter.dart';
 import '../../../utils/generate_theme_dart_code.dart';
 import 'show_code_theme_colors.dart';
@@ -40,24 +41,14 @@ class ThemeCode extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('FlexColorScheme theme configuration code'),
-          subtitle: Text('This is the setup code for the light and dark theme '
-              'you have configured. It changes as you adjust theme settings in '
-              'the Playground. Use this view as a side panel to see and learn '
-              'what API properties each setting modifies. FlexColorScheme '
-              'works like an advanced ThemeData factory. It returns a very '
-              'elaborate Flutter ThemeData object, with a lot less setup '
-              'needed. Some of its possible setups would require over 2000 '
-              'rows of code to reproduce with the ThemeData factory.'),
-        ),
-        ListTile(
+        ListTileReveal(
           title: const Text('Copy the theme code'),
+          subtitleDense: true,
           subtitle: const Text(
               'When you are happy with your theme design, you can copy the '
               'produced API configuration code. Paste it into your Flutter app '
               'and when used together with the FlexColorScheme package, your '
-              'app gets the same theme.'),
+              'app gets the same theme.\n'),
           trailing: FilledButton(
             onPressed: () {
               unawaited(_handleCopyCode(context, code));
@@ -87,7 +78,7 @@ class ThemeCode extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowCodeThemeColors(),
         ),
-        const ListTile(
+        const ListTileReveal(
           dense: true,
           title: Text('CodeTheme is a ThemeData ThemeExtension'),
           subtitle: Text('The above colors have been added as a custom theme '
@@ -99,7 +90,7 @@ class ThemeCode extends StatelessWidget {
               'slightly adjusted towards the overall theme colors. '
               'This CodeTheme is used as a ThemeExtension example in the '
               'Themes Playground app. It also demonstrates how to use M3 color '
-              'harmonization of custom theme colors in Flutter.'),
+              'harmonization of custom theme colors in Flutter.\n'),
         ),
         const SizedBox(height: 8),
       ],

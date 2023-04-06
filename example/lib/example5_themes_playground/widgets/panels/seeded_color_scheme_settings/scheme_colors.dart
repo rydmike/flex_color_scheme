@@ -42,9 +42,13 @@ class SchemeColors extends StatelessWidget {
     // Are colors swapped?
     final bool swapLight = tc.swapLightColors;
     final bool swapDark = tc.swapDarkColors;
+
+    // Show the input color values
+    final bool showInputColor = tc.showSchemeInput;
+
     // Size of the color presentation boxes
     const double boxWidth = 152;
-    const double boxHeight = 230;
+    final double boxHeight = showInputColor ? 230 : 200;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -87,9 +91,6 @@ class SchemeColors extends StatelessWidget {
             ? FlexColor.lightErrorContainer(inputErrorColor)
             : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
-
-    // Show the input color values
-    final bool showInputColor = tc.showSchemeInput;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;

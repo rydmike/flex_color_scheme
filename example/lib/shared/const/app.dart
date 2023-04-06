@@ -41,13 +41,13 @@ class App {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '0';
-  static const String versionPatch = '0';
+  static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.9 (html renderer)';
+  static const String flutterVersion = '3.7.10 (html renderer)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -75,7 +75,7 @@ class App {
   /// This min width was chosen because it gives at least the primary, secondary
   /// and tertiary colors in one Wrap row on panels Input Colors and Seeded
   /// ColorScheme, also when the side-by-side code view appears.
-  static const double sideBySideViewBreakpoint = 955;
+  static const double sideBySideViewBreakpoint = 760;
 
   /// The minimum media size needed for desktop/large tablet menu view,
   /// this is media size.
@@ -90,26 +90,14 @@ class App {
   /// code in side-by-side view. We could do lower the desktop width breakpoint,
   /// but then that view switches temporarily to now showing the code view,
   /// and it is just to much dynamic changes happening, it does not nice.
-  static const double desktopWidthBreakpoint = 1350;
+  static const double desktopWidthBreakpoint = 1700;
 
   /// A medium sized desktop, in panel view we switch to vertical
   /// topic selector page [ThemeTwoTopicsPage], with topic selector on
   /// left and right side, one for each theme topic panel.
   ///
-  /// It offers separate vertical theme topic selectors for the two s
-  /// ide-by-side theme topic panel views. This results in even more usable
-  /// height available on e.g. a 1080p monitor, since the large horizontal
-  /// theme topic selector for the main left panel is no longer on top of
-  /// the screen. It is also quicker and easier to individually select the
-  /// viewed theme topic for the left and right side. The new compact mode
-  /// is also available in this view mode. Using the compact view mode
-  /// further enlarges available vertical space to see more theme topic
-  /// panel content on mid-sized desktop monitors (1080p). The breakpoint
-  /// 1779dp was chosen to get this view on 1780 dp, being a bit less
-  /// than 1800dp, the device pixels available on a MacBook Pro 14" screen
-  /// when using the "More space" option in Display settings. It of course
-  /// also gets used on common full HD 1080p monitors that are 1920 dp wide.
-  static const double mediumDesktopWidthBreakpoint = 1779;
+  /// This is a media size breakpoint.
+  static const double mediumDesktopWidthBreakpoint = 1079;
 
   /// This breakpoint is only used to further increase margins and insets on
   /// very large desktops.
@@ -120,8 +108,6 @@ class App {
 
   /// The minimum media height treated as a phone device in this app.
   static const double phoneHeightBreakpoint = 700;
-
-  // Edge insets and margins for content at above breakpoints.
 
   /// Edge insets and margins for phone breakpoint size.
   static const double edgeInsetsPhone = 8;
@@ -148,7 +134,7 @@ class App {
 
   /// The height when we want to pin the panel or color selector, instead of
   /// letting it float and snap back.
-  static const double pinnedSelector = 1000;
+  static const double pinnedSelector = 1090;
 
   /// The width, and height of the scrolling panel buttons in Themes Playground
   /// page view, and how much it shrinks when we go to phone size.
@@ -216,23 +202,9 @@ class App {
   ///
   /// These could well be defined somewhere else too, but they kind of fit here.
   static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[
+    // Item 0
     ResponsiveMenuItems(
-      label: 'Grid view',
-      labelSecondary: 'Page view',
-      tooltip: 'Set to grid view',
-      tooltipSecondary: 'Set to page view',
-      icon: Icons.calendar_view_month_outlined,
-      iconSecondary: Icons.view_array_outlined,
-    ),
-    ResponsiveMenuItems(
-      label: 'Standard UI',
-      labelSecondary: 'Compact UI',
-      tooltip: 'Set to standard UI',
-      tooltipSecondary: 'Set to compact UI',
-      icon: Icons.view_compact_alt_rounded,
-      iconSecondary: Icons.view_compact_alt_outlined,
-    ),
-    ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Dark mode',
       labelSecondary: 'Light mode',
       tooltip: 'Set to dark mode',
@@ -240,6 +212,7 @@ class App {
       icon: Icons.bedtime,
       iconSecondary: Icons.wb_sunny,
     ),
+    // Item 1
     ResponsiveMenuItems(
       label: 'Use Material 2',
       labelSecondary: 'Use Material 3',
@@ -248,7 +221,9 @@ class App {
       icon: Icons.looks_two_outlined,
       iconSecondary: Icons.looks_3_outlined,
     ),
+    // Item 2
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'No FlexColorScheme',
       labelSecondary: 'Use FlexColorScheme',
       tooltip: 'Turn off FlexColorScheme',
@@ -256,6 +231,7 @@ class App {
       icon: Icons.blur_off_outlined,
       iconSecondary: Icons.blur_on_outlined,
     ),
+    // Item 3
     ResponsiveMenuItems(
       label: 'No sub themes',
       labelSecondary: 'Use sub themes',
@@ -264,25 +240,63 @@ class App {
       icon: Icons.subtitles_off_outlined,
       iconSecondary: Icons.subtitles_outlined,
     ),
+    // Item 4
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Copy theme code',
       icon: Icons.integration_instructions_outlined,
     ),
+    // Item 5
     ResponsiveMenuItems(
       label: 'Copy ColorScheme',
       icon: Icons.palette_outlined,
     ),
+    // Item 6
     ResponsiveMenuItems(
+      dividerAbove: true,
+      label: 'Grid view',
+      labelSecondary: 'Page view',
+      tooltip: 'Set to grid view',
+      tooltipSecondary: 'Set to page view',
+      icon: Icons.calendar_view_month_outlined,
+      iconSecondary: Icons.view_array_outlined,
+    ),
+    // Item 7
+    ResponsiveMenuItems(
+      label: 'Large UI',
+      labelSecondary: 'Compact UI',
+      tooltip: 'Set to large UI',
+      tooltipSecondary: 'Set to compact UI',
+      icon: Icons.view_compact_alt_rounded,
+      iconSecondary: Icons.view_compact_alt_outlined,
+    ),
+    // Item 8
+    ResponsiveMenuItems(
+      label: 'Colors on top',
+      labelSecondary: 'Colors on side',
+      tooltip: 'Colors on top\non large screens',
+      tooltipSecondary: 'Colors on side\non large screens',
+      icon: Icons.view_sidebar,
+      turns: 3,
+      iconSecondary: Icons.view_sidebar,
+    ),
+    // Item 9
+    ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Expand all',
       icon: Icons.open_in_full_outlined,
     ),
+    // Item 10
     ResponsiveMenuItems(
       label: 'Close all',
       icon: Icons.close_fullscreen_outlined,
     ),
+    // Item 11
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Reset settings',
       icon: Icons.replay_outlined,
+      dividerBelow: true,
     ),
   ];
 }

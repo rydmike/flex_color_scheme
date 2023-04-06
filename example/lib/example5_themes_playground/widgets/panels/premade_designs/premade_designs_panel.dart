@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// A panel with ready premade design we can click on to use.
@@ -12,6 +14,7 @@ class PremadeDesignsPanel extends StatelessWidget {
   static final Uri _materialDocs = Uri(
     scheme: 'https',
     host: 'm3.material.io',
+    path: 'styles/color/the-color-system/key-colors-tones',
   );
 
   @override
@@ -23,54 +26,9 @@ class PremadeDesignsPanel extends StatelessWidget {
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Premade FlexColorScheme Theme Designs'),
-          subtitle: Text('To quick start your theming try these '
-              'premade designs. You can use them as starting points, for '
-              'inspiration and to see examples of what FlexColorScheme can '
-              'do. These templates do no set colors, you choose them as '
-              'desired. Many choices use seeded Material 3 ColorScheme and '
-              'they all use Material 3 mode. You can easily turn both off. '
-              'In fact all configs are just starting points for you to '
-              'explore and modify further. '
-              'In the two panels view, try the Theme simulator as 2nd panel '
-              'with the official Material 3 demo app, using 11" or 12" iPad, '
-              'to experience how these examples impact the theme.'),
-        ),
-        SwitchListTile(
-          title: const Text('Confirm premade theme usage selection'),
-          subtitle: const Text('To toggle quickly between premade '
-              'configurations, turn OFF this option. It is ON by default to '
-              'prevent accidental activation of premade themes.'),
-          value: controller.confirmPremade,
-          onChanged: controller.setConfirmPremade,
-        ),
-        UseSeededColorSchemeSwitch(controller: controller),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'Learn more about Material 3 design in the ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _materialDocs,
-                  text: 'Material 3 guide',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. ',
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Divider(),
+        const SizedBox(height: 16),
         SetupListTile(
           title: 'Themes Playground default',
           seeded: false,
@@ -248,7 +206,38 @@ class PremadeDesignsPanel extends StatelessWidget {
           settingsId: 9,
           controller: controller,
         ),
-        const SizedBox(height: 8),
+        const Divider(),
+        UseSeededColorSchemeSwitch(controller: controller),
+        SwitchListTileReveal(
+          title: const Text('Confirm premade theme usage selection'),
+          subtitle: const Text('To toggle quickly between premade '
+              'configurations, turn OFF this option. It is ON by default to '
+              'prevent accidental activation of premade themes.'),
+          value: controller.confirmPremade,
+          onChanged: controller.setConfirmPremade,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Learn more about key color seeded ColorScheme in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _materialDocs,
+                  text: 'Material 3 design guide',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. ',
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -305,8 +294,9 @@ class SetupListTile extends StatelessWidget {
       location: BannerLocation.topEnd,
       color: bgColor,
       textStyle: style,
-      child: ListTile(
+      child: ListTileReveal(
         title: Text(title),
+        subtitleDense: true,
         subtitle: Text(subtitle),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 32.0),

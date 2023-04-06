@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'system_nav_bar_style_toggle_buttons.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
@@ -65,15 +67,62 @@ class AndroidNavigationBarSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Theme following Android system navigation bar'),
-          subtitle: Text('The settings below only have any effect if you '
-              'build this application for an Android device. They then '
-              'demonstrates the usage and effects of the AnnotatedRegion '
-              'helper "FlexColorScheme.themedSystemNavigationBar". These '
-              'settings do not have any impact on generated theme setup code. '
-              'You have to implement the AnnotatedRegion with the helper '
-              'separately in your application.'),
+        ListTileReveal(
+          title: const Text('Theme following Android system navigation bar'),
+          subtitleDense: true,
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Settings below only have any effect if you '
+                      'build this application for an Android device. They then '
+                      'demonstrates the usage and effects of the '
+                      'AnnotatedRegion helper '
+                      '"FlexColorScheme.themedSystemNavigationBar". These '
+                      'settings do not have any impact on generated theme '
+                      'setup code. You have to implement the AnnotatedRegion '
+                      'with the helper separately in your application.\n'
+                      '\n'
+                      'You can read more about how to use FlexColorScheme '
+                      'annotated region helper "themedSystemNavigationBar" '
+                      'in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsSysNavDocs,
+                  text: 'documentation',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There are some Android version limitations '
+                      'and issues concerning stying the system navigation bar. '
+                      'You can read more about them in Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue112301,
+                  text: 'umbrella issue #112301',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. In earlier versions ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue100027,
+                  text: 'issue #100027',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' impacted the FlexColorScheme annotated region helper '
+                      'to the degree that divider support was removed. The '
+                      'issue has been fixed and the divider feature restored '
+                      'in FCS v7 and later.',
+                ),
+              ],
+            ),
+          ),
         ),
         const ListTile(
           title: Text('Background opacity'),
@@ -139,61 +188,20 @@ class AndroidNavigationBarSettings extends StatelessWidget {
             }
           },
         ),
-        SwitchListTile(
-          title: const Text('Android navigation bar divider'),
+        SwitchListTileReveal(
+          title: const Text('System navigation bar divider'),
+          subtitleDense: true,
           subtitle: const Text('There is an extra system built-in scrim on '
-              'the system navigation bar when the divider is enabled.'),
+              'the system navigation bar when the divider is enabled.\n'
+              '\n'
+              'The divider is actually not a divider, it is another colored '
+              'partially transparent black color that is behind the system '
+              'navigation bar that is one pixel taller than the foreground '
+              'bar. This then also becomes a scrim when using transparent '
+              'color on the foreground.\n'),
           value: controller.useSysNavDivider,
           onChanged: controller.setUseSysNavDivider,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'You can read more about how to use FlexColorScheme '
-                      'annotated region helper "themedSystemNavigationBar" '
-                      'in the ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsSysNavDocs,
-                  text: 'documentation',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. There are some Android version limitations '
-                      'and issues concerning stying the system navigation bar. '
-                      'You can read more about them in Flutter SDK ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue112301,
-                  text: 'umbrella issue #112301',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. In earlier versions ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue100027,
-                  text: 'issue #100027',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' impacted the FlexColorScheme annotated region helper '
-                      'to the degree that divider support was removed. The '
-                      'issue has been fixed and the divider feature restored '
-                      'in FCS v7 and later.',
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
       ],
     );
   }

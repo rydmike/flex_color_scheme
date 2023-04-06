@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/controllers/theme_controller.dart';
+import '../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 
 class ShowInputColorsSwitch extends StatelessWidget {
   const ShowInputColorsSwitch({
@@ -12,9 +13,9 @@ class ShowInputColorsSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-      dense: true,
+    return SwitchListTileReveal(
       title: const Text('Show scheme input color values'),
+      subtitleDense: true,
       subtitle:
           const Text('Turn ON this option to show the FlexColorScheme scheme '
               'input color values. This shows the used color values '
@@ -29,7 +30,7 @@ class ShowInputColorsSwitch extends StatelessWidget {
               'being modified by input modifiers, but it is cluttered. '
               'If ON, scheme input color values show the colors before '
               'input modifiers, and the surrounding '
-              "color is the effective theme's ColorScheme."),
+              "color is the effective theme's ColorScheme.\n"),
       value: controller.showSchemeInput,
       onChanged: controller.setShowSchemeInput,
     );

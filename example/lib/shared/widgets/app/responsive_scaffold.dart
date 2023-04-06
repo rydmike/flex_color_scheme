@@ -36,6 +36,10 @@ class ResponsiveMenuItems {
   const ResponsiveMenuItems({
     this.label = '',
     this.icon = Icons.info,
+    this.dividerAbove = false,
+    this.dividerBelow = false,
+    this.turns = 0,
+    this.turnsSecondary = 0,
     String? tooltip,
     String? labelSecondary,
     String? tooltipSecondary,
@@ -51,6 +55,10 @@ class ResponsiveMenuItems {
   final String? _labelSecondary;
   final String? _tooltipSecondary;
   final IconData? _iconSecondary;
+  final bool dividerAbove;
+  final bool dividerBelow;
+  final int turns;
+  final int turnsSecondary;
 
   String get tooltip => _tooltip ?? label;
   String get labelSecondary => _labelSecondary ?? label;
@@ -783,6 +791,10 @@ class _AppMenuState extends State<_AppMenu> {
                                       ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].icon
                                   : widget.menuItems[i].iconSecondary,
+                              turns: widget.menuItemsIconState[i] ==
+                                      ResponsiveMenuItemIconState.primary
+                                  ? widget.menuItems[i].turns
+                                  : widget.menuItems[i].turnsSecondary,
                               label: widget.menuItemsIconState[i] ==
                                       ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].label
@@ -792,7 +804,8 @@ class _AppMenuState extends State<_AppMenu> {
                                   ? widget.menuItems[i].tooltip
                                   : widget.menuItems[i].tooltipSecondary,
                               enabled: widget.menuItemsEnabled[i],
-                              showDivider: i.isEven,
+                              dividerAbove: widget.menuItems[i].dividerAbove,
+                              dividerBelow: widget.menuItems[i].dividerBelow,
                               railWidth: widget.railWidth,
                             ),
                           const Divider(thickness: 1, height: 1),
@@ -818,9 +831,11 @@ class _MenuItem extends StatelessWidget {
     required this.onTap,
     this.selected = false,
     required this.icon,
+    required this.turns,
     required this.label,
     required this.tooltip,
-    this.showDivider = false,
+    this.dividerAbove = false,
+    this.dividerBelow = false,
     required this.railWidth,
     this.enabled = true,
   });
@@ -830,9 +845,11 @@ class _MenuItem extends StatelessWidget {
   final VoidCallback onTap;
   final bool selected;
   final IconData icon;
+  final int turns;
   final String label;
   final String tooltip;
-  final bool showDivider;
+  final bool dividerAbove;
+  final bool dividerBelow;
   final double railWidth;
   final bool enabled;
 
@@ -875,7 +892,7 @@ class _MenuItem extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (showDivider) const Divider(thickness: 1, height: 1),
+          if (dividerAbove) const Divider(thickness: 1, height: 1),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 2, endPadding, 2),
             child: Material(
@@ -914,7 +931,12 @@ class _MenuItem extends StatelessWidget {
                               width: railWidth,
                               height: railWidth,
                             ),
-                            child: Icon(icon, color: iconColor),
+                            child: turns == 0
+                                ? Icon(icon, color: iconColor)
+                                : RotatedBox(
+                                    quarterTurns: turns,
+                                    child: Icon(icon, color: iconColor),
+                                  ),
                           ),
                         ),
                         // Below width of 10dp we remove the label.
@@ -933,6 +955,7 @@ class _MenuItem extends StatelessWidget {
               ),
             ),
           ),
+          if (dividerBelow) const Divider(thickness: 1, height: 1),
         ],
       );
     }

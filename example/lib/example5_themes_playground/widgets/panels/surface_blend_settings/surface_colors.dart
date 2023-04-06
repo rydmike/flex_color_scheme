@@ -450,7 +450,7 @@ class SurfaceColors extends StatelessWidget {
                               '${colorScheme.onSecondaryContainer}'),
                           color: colorScheme.onSecondaryContainer,
                           textColor: colorScheme.secondaryContainer,
-                          label: 'onSecondaryContainer',
+                          label: 'onSecondary\nContainer',
                           tone: tones.onSecondaryContainerTone,
                           showTone: showTones,
                         ),

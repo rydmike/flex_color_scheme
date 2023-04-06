@@ -62,7 +62,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         title: Text('$title ${FlexTone.values[index].tone}'),
         subtitle: Text(FlexTone.values[index].describe),
         trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
             backgroundColor:
                 disabled ? colorScheme.surfaceVariant : colorScheme.primary,

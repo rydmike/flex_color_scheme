@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/is_web_toggle_buttons.dart';
+import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 class IsWebListTile extends StatelessWidget {
   const IsWebListTile({
@@ -25,12 +26,17 @@ class IsWebListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: const Text('Set mock web platform for adaptive theming testing'),
-      subtitle: Text(_explainLabelStyle(controller.fakeIsWeb)),
-      trailing: IsWebToggleButtons(
-        isWeb: controller.fakeIsWeb,
-        onChanged: controller.setFakeIsWeb,
+    return ListTileReveal(
+      title: const Text('Mock web'),
+      subtitleDense: true,
+      subtitle: Text('Use mock web setting for adaptive theming testing.\n'
+          '${_explainLabelStyle(controller.fakeIsWeb)}.\n'),
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 5.0),
+        child: IsWebToggleButtons(
+          isWeb: controller.fakeIsWeb,
+          onChanged: controller.setFakeIsWeb,
+        ),
       ),
       onTap: () {
         if (controller.fakeIsWeb ?? false) {

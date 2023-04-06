@@ -2,6 +2,18 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.1
+
+**Apr 6, 2023**
+
+* **Package**
+  * No changes.
+* **Themes Playground**
+  * Less chatty UI
+  * Revised media size breakpoints. 
+  * Vertical color selector mode. 
+  * More compact UI options for smaller laptop displays and tablets.
+
 ## 7.0.0
 
 **Apr 2, 2023**

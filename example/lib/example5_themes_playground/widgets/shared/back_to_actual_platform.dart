@@ -12,10 +12,13 @@ class BackToActualPlatform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text('Set back to actual platform'),
-      trailing: FilledButton(
-        onPressed: controller.resetFakePlatform,
-        child: const Text('Actual'),
+      title: const Text('Set to actual platform'),
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 5.0),
+        child: FilledButton(
+          onPressed: controller.resetFakePlatform,
+          child: const Text('Actual'),
+        ),
       ),
       onTap: controller.resetFakePlatform,
     );

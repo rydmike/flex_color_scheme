@@ -2,9 +2,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/set_navigation_rail_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/navigators_use_default_switch.dart';
 import 'navigation_rail_label_type_list_tile.dart';
 
 class NavigationRailSettings extends StatelessWidget {
@@ -27,12 +30,6 @@ class NavigationRailSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
-
     // Logic for indicator color label default value,
     // custom color selection overrides default label and value.
     String indicatorColorLabel() {
@@ -137,11 +134,12 @@ class NavigationRailSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTile(
+        ListTileReveal(
             enabled: useMaterial3,
             title: const Text('Use Material 3 default NavigationRail style?'),
+            subtitleDense: true,
             subtitle: const Text('Update settings below to match M3 default '
-                'values'),
+                'values.\n'),
             trailing: FilledButton(
               onPressed: useMaterial3
                   ? () async {
@@ -260,10 +258,12 @@ class NavigationRailSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Use selection indicator'),
+          subtitleDense: true,
           subtitle: const Text('On by default when useMaterial3 '
-              'is true, turn OFF component themes to see this'),
+              'is true, turn OFF component themes to see this.\n'),
           value: controller.navRailUseIndicator &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -387,6 +387,7 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         NavigationRailLabelBehaviorListTile(controller: controller),
         NavigationRailShowcase(
+          explain: false,
           height: 700,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -441,12 +442,15 @@ class NavigationRailSettings extends StatelessWidget {
                       }
                     : null,
               ),
-              SwitchListTile(
+              SwitchListTileReveal(
+                enabled:
+                    controller.useSubThemes && controller.useFlexColorScheme,
                 title: const Text('Mute unselected items'),
+                subtitleDense: true,
                 subtitle: const Text(
                     'Unselected icon and text are less bright. Shared '
                     'setting for icon and text, but separate properties '
-                    'in API'),
+                    'in API.\n'),
                 value: muteUnselectedEnabled
                     ? controller.navRailMuteUnselected
                     : !muteUnselectedEnabled,
@@ -454,45 +458,21 @@ class NavigationRailSettings extends StatelessWidget {
                     ? controller.setNavRailMuteUnselected
                     : null,
               ),
-              const Divider(height: 16),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: Text(
-                  'More settings with the API',
-                  style: denseHeader,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                child: Text(
+              const Divider(),
+              NavigatorsUseDefaultsSwitch(controller: controller),
+              const ListTileReveal(
+                dense: true,
+                title: Text('More settings with the API'),
+                subtitle: Text(
                   'With the API you can also set the font and icon size '
                   'individually on selected and unselected items. Use '
                   'FlexSubThemesData properties: '
                   'navigationRailSelectedLabelSize, '
                   'navigationRailUnselectedLabelSize, '
                   'navigationRailSelectedIconSize and '
-                  'navigationRailUnselectedIconSize.',
-                  style: denseBody,
+                  'navigationRailUnselectedIconSize.\n',
                 ),
               ),
-              SwitchListTile(
-                dense: true,
-                title: const Text('Navigators use Flutter defaults'),
-                subtitle: const Text('Undefined values fall back to '
-                    'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-                    'Both selected and unselected color have to be null before '
-                    'the item colors can fall back to Flutter defaults. '
-                    'This setting affects navigation bars and rail. '
-                    'See API docs for more info.'),
-                value: controller.useFlutterDefaults &&
-                    controller.useSubThemes &&
-                    controller.useFlexColorScheme,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setUseFlutterDefaults
-                        : null,
-              ),
-              const SizedBox(height: 8),
             ],
           ),
         ),

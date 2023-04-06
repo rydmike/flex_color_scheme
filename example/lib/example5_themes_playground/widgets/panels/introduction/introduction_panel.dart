@@ -47,11 +47,7 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Use Themes Playground to try features and themes '
-                      'of FlexColorScheme. Find a theme you like, experiment '
-                      'with surface blends and try Material 3.\n'
-                      '\n'
-                      'Check out the FlexColorScheme ',
+                  text: 'Check out the FlexColorScheme ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,

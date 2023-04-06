@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class DialogSettings extends StatelessWidget {
@@ -27,18 +29,23 @@ class DialogSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Themed dialog'),
-          subtitle: Text('Flutter SDK default background is '
-              'colorScheme.background for Dialog and DatePickerDialog, but '
-              'colorScheme.surface for TimePickerDialog. FlexColorScheme '
-              'sub-themes use surface as default for all dialogs to ensure '
-              'that they have the same background by default and that '
-              'elevation overlay color works in dark mode when it is another '
-              'color than background.\n\n'
-              'You can theme them to a shared color scheme based color too. '
-              'With seeded M3 colors, surfaceVariant, primaryContainer and '
-              'inversePrimary are some possible options.'),
+        const ListTileReveal(
+          title: Text('Dialog'),
+          subtitle: Text('In Flutter M2 the default dialog background '
+              'color is colorScheme.background for Dialog and '
+              'DatePickerDialog, but colorScheme.surface for '
+              'TimePickerDialog. M3 mode will default them all to '
+              'colorScheme.surface when fully implemented.\n'
+              '\n'
+              'FlexColorScheme sub-themes use surface as default for all '
+              'dialogs in both M2 and M3 mode, to ensure that they have the '
+              'same background by default and that elevation overlay '
+              'color works in M2 dark mode when it is another '
+              'color than background.\n'
+              '\n'
+              'You can theme them to a color scheme based color. With '
+              'seeded M3 colors, surfaceVariant, primaryContainer and '
+              'inversePrimary are some possible options.\n'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
@@ -161,14 +168,30 @@ class DialogSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        const ListTileReveal(
+          title: Text('AlertDialog'),
+          subtitleDense: true,
+          subtitle: Text('The Alertdialog works well in both M2 and '
+              'M3 mode.\n'),
+        ),
         const AlertDialogShowcase(),
         const SizedBox(height: 8),
         const Divider(),
-        ListTile(
+        const ListTileReveal(
+          title: Text('TimePicker'),
+          subtitleDense: true,
+          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
+              'Material 3 styling of the TimePicker. FlexColorScheme adds '
+              'some M3 styling based on M3 specification, where it is already '
+              'supported by its current theming capabilities.\n'),
+        ),
+        ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Time picker time input elements border radius'),
-          subtitle: const Text('Does not use global radius override. '
-              'Avoid large border radius on the input elements.'),
+          title: const Text("Time input elements' border radius"),
+          subtitleDense: true,
+          subtitle: const Text('Time input elements do not use the global '
+              'radius override setting. '
+              'Avoid large border radius on the time input elements.\n'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -222,10 +245,20 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Use InputDecoration theme in dialog text entry'),
-          subtitle: const Text('Turn ON to use the themed InputDecoration '
-              'style on time entry fields.'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Turn ON to use the themed InputDecoration '
+            'style on time entry fields.\n'
+            '\n'
+            'Keeping it OFF uses null as InputDecoration for '
+            'TimePicker sub-theme in order to get widget default decorator '
+            'style. Despite this, for some reason the app level themed '
+            'InputDecoration background style still gets used. A potential '
+            'Flutter SDK theming issue to revisit later.\n',
+          ),
           value: controller.useInputDecoratorThemeInDialogs &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -233,32 +266,18 @@ class DialogSettings extends StatelessWidget {
               ? controller.setUseInputDecoratorThemeInDialogs
               : null,
         ),
-        const ListTile(
-          dense: true,
-          subtitle: Text('Keeping it OFF uses null as InputDecoration for '
-              'TimePicker sub-theme in order to get widget default decorator '
-              'style. Despite this, for some reason the app level themed '
-              'InputDecoration background style still gets used. A potential '
-              'Flutter SDK theming issue to revisit later.'),
-        ),
         const TimePickerDialogShowcase(),
-        const ListTile(
-          dense: true,
-          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
-              'Material 3 styling of the TimePicker. FlexColorScheme adds '
-              'some M3 styling based on M3 specification, when it is '
-              'supported by its current theme.'),
-        ),
         const SizedBox(height: 8),
         const Divider(),
-        const DatePickerDialogShowcase(),
-        const ListTile(
-          dense: true,
+        const ListTileReveal(
+          title: Text('DatePicker'),
+          subtitleDense: true,
           subtitle: Text('Flutter 3.7 does not yet implement or fully support '
               'Material 3 styling of the DatePicker, there is not even a '
               'theme for DatePicker in Flutter 3.7. It has a theme in master '
-              'channel, so it will come to a later Flutter stable version.'),
+              'channel, so it will come to a later Flutter stable version.\n'),
         ),
+        const DatePickerDialogShowcase(),
         const SizedBox(height: 16),
       ],
     );

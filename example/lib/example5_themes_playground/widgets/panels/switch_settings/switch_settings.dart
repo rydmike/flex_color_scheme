@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
@@ -112,10 +113,10 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         const Divider(height: 1),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Unselected toggle is colored'),
-          subtitle: const Text(
-              'ON: Use main theme color   OFF: default grey/surface'),
+          subtitle: const Text('ON: Use main color on unselected toggle\n'
+              'OFF: Use default grey/surface style on unselected toggle\n'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

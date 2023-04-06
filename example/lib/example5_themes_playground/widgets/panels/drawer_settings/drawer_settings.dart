@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -72,12 +73,19 @@ class DrawerSettings extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Themed Drawer and NavigationDrawer'),
-          subtitle: Text('Flutter SDK default background is '
-              'colorScheme.background for Drawer in M2, but '
-              'colorScheme.surface in M3. FlexColorScheme component '
-              'sub-themes use surface as default for both modes.'),
+        const ListTileReveal(
+          title: Text('Drawer'),
+          subtitleDense: true,
+          subtitle: Text('The Drawer comes in two variants, the vanilla '
+              'Drawer, which is an empty Drawer container. You provide '
+              'the content. Its theme also control how the '
+              'NavigationDrawer looks, since the NavigationDrawer builds '
+              'on the Drawer.\n'
+              '\n'
+              'Default Flutter background color in M3 is colorScheme.surface, '
+              'with elevation tint and no shadow. In M2 it has shadow and '
+              'uses color theme.canvasColor, that is typically set '
+              'to colorScheme.background.\n'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
@@ -97,103 +105,6 @@ class DrawerSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        // TODO(rydmike): Change M3 Drawer width default info when SDK is fixed.
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Width'),
-          subtitle: Slider(
-            min: 199,
-            max: 500,
-            divisions: 301,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerWidth == null ||
-                        (controller.drawerWidth ?? 199) < 200
-                    ? useMaterial3
-                        ? 'default 360'
-                        : 'default 304'
-                    : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'default 304' // Should be 360, but is 304, SDK BUG.
-                    : 'default 304',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerWidth ?? 199
-                : 199,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerWidth(
-                        value < 200 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerWidth == null ||
-                              (controller.drawerWidth ?? 199) < 200
-                          ? useMaterial3
-                              ? 'default 360'
-                              : 'default 304'
-                          : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
-                      : useMaterial3
-                          ? 'default 304' // Should be 360, but is 304, SDK BUG.
-                          : 'default 304',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'Based on Material 3 ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _drawerM3Spec,
-                  text: 'specification of NavigationDrawer',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' it should be 360 dp wide, while Material 2 is '
-                      '304 dp. '
-                      'Due to a bug in Flutter, it defaults to 304dp in both '
-                      'modes in Flutter 3.7. '
-                      'FCS corrects this spec deviation in its defaults. '
-                      'Please note that a 360 dp wide Drawer may be too wide '
-                      'for smaller or older phones and the Drawer may '
-                      'cover the entire width of the phone. This may not be '
-                      'desired, if so adjust the width down. The 304dp M2 '
-                      'spec width is not bad choice in M3 either, maybe a bit '
-                      'wider but below 360dp. Please see ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _drawerWidthIssue123380,
-                  text: 'issue #123380',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' for more information and an analysis of suitable '
-                      'Drawer width on different sized phones.',
-                ),
-              ],
-            ),
-          ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -302,6 +213,122 @@ class DrawerSettings extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        const DrawerShowcase(explain: false),
+        const SizedBox(height: 16),
+        // TODO(rydmike): Change M3 Drawer width default info when SDK is fixed.
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Width'),
+          subtitle: Slider(
+            min: 199,
+            max: 500,
+            divisions: 301,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerWidth == null ||
+                        (controller.drawerWidth ?? 199) < 200
+                    ? useMaterial3
+                        ? 'default 360'
+                        : 'default 304'
+                    : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
+                : useMaterial3
+                    ? 'default 304' // Should be 360, but is 304, SDK BUG.
+                    : 'default 304',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.drawerWidth ?? 199
+                : 199,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setDrawerWidth(
+                        value < 200 ? null : value.roundToDouble());
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.drawerWidth == null ||
+                              (controller.drawerWidth ?? 199) < 200
+                          ? useMaterial3
+                              ? 'default 360'
+                              : 'default 304'
+                          : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
+                      : useMaterial3
+                          ? 'default 304' // Should be 360, but is 304, SDK BUG.
+                          : 'default 304',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTileReveal(
+          title: const Text('Width issue'),
+          dense: true,
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Based on Material 3 ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _drawerM3Spec,
+                  text: 'specification of NavigationDrawer',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' it should be 360dp wide, while Material 2 is '
+                      '304dp in Flutter. '
+                      'Due to a bug in Flutter, it defaults to 304dp in both '
+                      'modes in Flutter 3.7. '
+                      'FCS corrects this spec deviation in its defaults.\n'
+                      '\n'
+                      'Please note that a 360dp wide Drawer may be too wide '
+                      'for smaller or older phones and the Drawer may '
+                      'cover the entire width of the phone. This may not be '
+                      'desired, if so adjust the width down. The 304dp M2 '
+                      'spec width is not bad choice in M3 either, maybe a bit '
+                      'wider but below 360dp. Please see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _drawerWidthIssue123380,
+                  text: 'issue #123380',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more information and an analysis of suitable '
+                      'Drawer width on different sized phones.\n',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+        const ListTileReveal(
+          title: Text('NavigationDrawer'),
+          subtitleDense: true,
+          subtitle: Text('The NavigationDrawer is new starting Flutter 3.7, '
+              'it provides an easy way to make a Material 3 specification '
+              'matching Drawer with built in top level navigation items '
+              'and a selected destination indicator.\n'
+              '\n'
+              'Default Flutter background color is colorScheme.surface, '
+              'with addition of elevation tint in Material 3 mode.\n'),
+        ),
+        const NavigationDrawerShowcase(explain: false),
+        const SizedBox(height: 16),
         ColorSchemePopupMenu(
           title: const Text('Drawer indicator color'),
           labelForDefault: 'default (secondaryContainer)',
@@ -500,9 +527,10 @@ class DrawerSettings extends StatelessWidget {
                 }
               : null,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RichText(
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known indicator issues'),
+          subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -519,17 +547,12 @@ class DrawerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
+                  text: '.\n',
                 ),
               ],
             ),
           ),
         ),
-        const Divider(),
-        const NavigationDrawerShowcase(),
-        const SizedBox(height: 16),
-        const DrawerShowcase(),
-        const SizedBox(height: 32),
       ],
     );
   }

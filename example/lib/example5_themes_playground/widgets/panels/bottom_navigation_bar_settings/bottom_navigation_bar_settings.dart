@@ -2,8 +2,11 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/navigators_use_default_switch.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarSettings extends StatelessWidget {
@@ -13,11 +16,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     final bool isDark = theme.brightness == Brightness.dark;
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
@@ -60,7 +58,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const BottomNavigationBarShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: 'default (background)',
@@ -168,6 +165,17 @@ class BottomNavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          elevation: 0.7,
+          shadowColor: Colors.transparent,
+          color: theme.colorScheme.surfaceVariant,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: BottomNavigationBarShowcase(explain: false),
+          ),
+        ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
@@ -200,11 +208,12 @@ class BottomNavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SwitchListTile(
+        SwitchListTileReveal(
           title: const Text('Mute unselected items'),
+          subtitleDense: true,
           subtitle: const Text('Unselected icon and text are less bright. '
-              'Shared setting for icon and text, but separate properties '
-              'in API'),
+              'Shared setting for icon and text in the Playground, but '
+              'separate properties are used by the API.\n'),
           value: muteUnselectedEnabled
               ? controller.bottomNavBarMuteUnselected
               : !muteUnselectedEnabled,
@@ -230,41 +239,19 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavShowUnselectedLabels
               : null,
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-          child: Text(
-            'More settings with the API',
-            style: denseHeader,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text(
+        NavigatorsUseDefaultsSwitch(controller: controller),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitle: Text(
             'With the API you can also set the font and icon size '
             'individually on selected and unselected items. Use '
             'FlexSubThemesData properties: '
             'bottomNavigationBarSelectedLabelSize, '
             'bottomNavigationBarUnselectedLabelSize, '
             'bottomNavigationBarSelectedIconSize and '
-            'bottomNavigationBarUnselectedIconSize.',
-            style: denseBody,
+            'bottomNavigationBarUnselectedIconSize.\n',
           ),
-        ),
-        SwitchListTile(
-          dense: true,
-          title: const Text('Navigators use Flutter defaults'),
-          subtitle: const Text('Undefined values fall back to '
-              'Flutter SDK defaults. Prefer OFF to use FCS defaults. '
-              'Both selected and unselected color have to be null before '
-              'the item colors can fall back to Flutter defaults. '
-              'This setting affects navigation bars and rail. '
-              'See API docs for more info.'),
-          value: controller.useFlutterDefaults &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseFlutterDefaults
-              : null,
         ),
       ],
     );

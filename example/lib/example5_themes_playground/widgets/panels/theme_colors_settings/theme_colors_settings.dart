@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../../dialogs/reset_custom_colors_dialog.dart';
 import '../../shared/show_input_colors_switch.dart';
@@ -81,10 +83,12 @@ class ThemeColorsSettings extends StatelessWidget {
               controller.setSchemeIndex(AppColor.schemes.length - 1);
             },
           ),
-          ListTile(
-            title: const Text('Copy above colors to the customizable theme'),
-            subtitle: const Text('This theme then becomes a starting template '
-                'for your own custom theme.'),
+          ListTileReveal(
+            title: const Text('Copy to custom theme?'),
+            subtitleDense: true,
+            subtitle: const Text("When you copy a built-in theme's colors "
+                'to the customizable theme, it becomes a starting point '
+                'for your own custom theme colors.\n'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -111,19 +115,26 @@ class ThemeColorsSettings extends StatelessWidget {
             ),
           )
         ],
+        ShowInputColorsSwitch(controller: controller),
         const Divider(),
-        const ListTile(
-          title: Text('Theme Color Modifiers'),
-          subtitle: Text('Use the modifiers below to change how the input '
-              "scheme colors are used to define the effective theme's "
-              'ColorScheme.'),
+        const ListTileReveal(
+          title: Text('Theme color modifiers:'),
+          subtitleDense: true,
+          subtitle: Text('Use the theme color modifiers below to change how '
+              'the input scheme colors are used to define the effective '
+              "theme's ColorScheme.\n"),
         ),
         UseSeededColorSchemeSwitch(controller: controller),
-        SwitchListTile(
+        SwitchListTileReveal(
+          enabled: controller.useFlexColorScheme && !controller.useKeyColors,
           title: const Text('Use Material 3 error colors'),
-          subtitle: const Text('Override default M2 error colors and use M3 '
-              'error colors, when not using seeded ColorSchemes. Seed '
-              'generated ColorSchemes always use M3 error colors.'),
+          subtitleDense: true,
+          subtitle: const Text('Override scheme defined used legacy M2 error '
+              'colors and use M3 error colors instead. This applies when not '
+              'using seeded ColorSchemes. Seed generated ColorSchemes always '
+              'use M3 error colors. Newer built-in schemes also use the M3 '
+              'error colors by default, this setting has no impact on '
+              'them.\n'),
           value: controller.useM3ErrorColors &&
               controller.useFlexColorScheme &&
               !controller.useKeyColors,
@@ -132,30 +143,37 @@ class ThemeColorsSettings extends StatelessWidget {
               : null,
         ),
         UsedColorsPopupMenu(
-          title: const Text('Change amount of used scheme input colors'),
+          title: const Text('Used input colors'),
           index: controller.usedColors,
           onChanged:
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
-        SwitchListTile(
-          title: const Text('When using Material 3 swap secondary '
+        SwitchListTileReveal(
+          title: const Text('Swap secondary '
               'and tertiary'),
+          subtitleDense: true,
           subtitle: const Text(
-            'Only applies to built-in M2 designed schemes that benefit from '
-            'it. Prefer ON when using M3. You can turn it OFF when using '
-            'seeded ColorScheme if you do not use the secondary seed key.',
+            'Only applies when using M3, and only to built-in FCS M2 '
+            'designed schemes that benefit from this swap for a better fit '
+            'with the M3 color system design intent. '
+            'Prefer ON when using M3 and legacy FCS color schemes to get a '
+            'theme result with them, that is more in-line with M3 color '
+            'system color expectations. You can turn it OFF if that is not '
+            'important and also when using seeded ColorScheme, especially '
+            'if you do not use the secondary color as a seed key.\n',
           ),
           value: controller.swapLegacyColors && controller.useMaterial3,
           onChanged:
               controller.useMaterial3 ? controller.setSwapLegacyColors : null,
         ),
         if (isLight)
-          SwitchListTile(
-            title: const Text('Light theme swap primary and secondary'),
+          SwitchListTileReveal(
+            title: const Text('Swap light primary and secondary'),
+            subtitleDense: true,
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'Material 3 mode secondary and tertiary swap, is done '
-              'first when used.',
+              'first when used.\n',
             ),
             value: controller.swapLightColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -163,12 +181,13 @@ class ThemeColorsSettings extends StatelessWidget {
                 : null,
           )
         else
-          SwitchListTile(
-            title: const Text('Dark theme swap primary and secondary'),
+          SwitchListTileReveal(
+            title: const Text('Swap dark primary and secondary'),
+            subtitleDense: true,
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'Material 3 mode secondary and tertiary swap, is done '
-              'first when used.',
+              'first when used.\n',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -177,15 +196,13 @@ class ThemeColorsSettings extends StatelessWidget {
           ),
         Visibility(
           visible: !isLight,
-          // maintainSize: true,
-          // maintainAnimation: true,
-          // maintainState: true,
           child: Column(
             children: <Widget>[
-              SwitchListTile(
+              SwitchListTileReveal(
                 title: const Text('Compute dark theme'),
+                subtitleDense: true,
                 subtitle: const Text('Compute dark theme from light color '
-                    'values, instead of using predefined dark colors.'),
+                    'values, instead of using predefined dark colors.\n'),
                 value: controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
@@ -194,11 +211,12 @@ class ThemeColorsSettings extends StatelessWidget {
                         ? controller.setUseToDarkMethod
                         : null,
               ),
-              SwitchListTile(
+              SwitchListTileReveal(
                 title: const Text('Computed dark swaps main and container'),
+                subtitleDense: true,
                 subtitle: const Text('If swapped, you can often use them '
                     'as they are with no white blend level, if light colors '
-                    'use M3 design intent.'),
+                    'use M3 design intent.\n'),
                 value: controller.toDarkSwapPrimaryAndContainer &&
                     controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
@@ -209,14 +227,15 @@ class ThemeColorsSettings extends StatelessWidget {
                     ? controller.setToDarkSwapPrimaryAndContainer
                     : null,
               ),
-              ListTile(
+              ListTileReveal(
                 enabled: controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
                 title: const Text('Blend level'),
+                subtitleDense: true,
                 subtitle: const Text('Adjust blend level to desaturate the '
                     'the light mode colors to make them work better in your '
-                    'dark theme'),
+                    'dark theme\n'),
               ),
               ListTile(
                 title: Slider(
@@ -253,8 +272,6 @@ class ThemeColorsSettings extends StatelessWidget {
             ],
           ),
         ),
-        ShowInputColorsSwitch(controller: controller),
-        const SizedBox(height: 8),
       ],
     );
   }

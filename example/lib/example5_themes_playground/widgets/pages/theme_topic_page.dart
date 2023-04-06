@@ -272,6 +272,7 @@ class _ThemePanelView extends StatelessWidget {
                   HeaderCard(
                     endStraight: showSecondPage,
                     title: Text(themeTopics[leftPageIndex].heading),
+                    info: themeTopics[leftPageIndex].info,
                     leading:
                         Icon(themeTopics[leftPageIndex].icon, color: iconColor),
                     child: ThemePanel(leftPageIndex, controller),
@@ -300,6 +301,7 @@ class _ThemePanelView extends StatelessWidget {
                     HeaderCard(
                       startStraight: true,
                       title: Text(themeTopics[sideViewIndex].heading),
+                      info: themeTopics[sideViewIndex].info,
                       leading: Icon(themeTopics[sideViewIndex].icon,
                           color: iconColor),
                       trailing: _SelectSideThemePanelView(

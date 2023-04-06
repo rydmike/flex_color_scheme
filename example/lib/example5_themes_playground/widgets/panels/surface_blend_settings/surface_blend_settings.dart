@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_picker_inkwell.dart';
@@ -97,55 +99,38 @@ class SurfaceBlendSettings extends StatelessWidget {
     final String spaceDark = materialNameDark == '' ? '' : ' ';
     //
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Blended surfaces and backgrounds'),
-          isThreeLine: true,
-          subtitle: Text(
-            'Material Design 2 guide mentions using surfaces with '
-            'primary color alpha blends. FlexColorScheme surface blends '
-            'does it for you. '
-            'Material Design 3 has a new color system where a hint of primary '
-            'color is also used on surfaces. It is done via its neutral tonal '
-            'palettes that are shifted slightly towards the primary color. '
-            'If you use M3 seeded ColorSchemes, set blend level to zero '
-            'to get the pure M3 design. With surface blends, you can further '
-            'strengthen the effect and vary blend levels by surface type.',
-          ),
-        ),
         UseSeededColorSchemeSwitch(controller: controller),
-        const ListTile(
-          isThreeLine: true,
-          subtitle: Text(
-            'When using a surface blend mode with a high factor on Scaffold '
-            'background, the design intent is to not place any controls and '
-            'text on it directly, but to always use them on other surfaces '
-            'with less surface tint, for example in Cards. The Scaffold '
-            'background is then only used as a background color effect. If '
-            'your app places controls directly on Scaffold with its default '
-            'background color, high blend factor on Scaffold background color '
-            'may not be a good fit. Choose one with lower color blend factor '
-            'on Scaffold background.',
-          ),
-        ),
-        const ListTile(
-          title: Text('Surface blends and elevation tint controls'),
-          subtitle: Text('All settings below have separate control values '
-              'in the Playground for light and dark mode. Typically different '
-              'settings in light and dark mode, may be a part of the desired '
-              'design.'),
-        ),
         if (isLight) ...<Widget>[
-          LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
-          const ListTile(
+          LightSurfaceModePopupMenu(controller: controller),
+          const ListTileReveal(
             title: Text('Blend level'),
-            subtitle: Text('Adjust the surface, background, scaffold and '
-                'dialog blend level. Also impacts surfaces when '
-                'seed colors are used. Seed based surfaces always include '
-                'a touch of primary, but you can make it stronger with '
-                'surface blends'),
+            subtitleDense: true,
+            subtitle: Text(
+              'Surface blend uses alpha blend, to mix in the surface '
+              'tint color into surfaces and backgrounds. The blend '
+              'level is the used alpha value in an alpha blend. The mode '
+              'changes used factor of this alpha blend value differently '
+              'for different surface colors, like surface, background, '
+              'scaffold background and dialog background colors.\n'
+              '\n'
+              'Blends also applies to surfaces when M3 seeded ColorSchemes are '
+              'used. Seed based M3 surfaces already include a touch of '
+              'primary color, you can make it stronger with surface blends. '
+              'To use default M3 surface color results, use blend level zero.\n'
+              '\n'
+              'When using a surface blend mode with a high factor on Scaffold '
+              'background, the design intent is to not place any controls or '
+              'text on it directly, but to always use them on other surfaces '
+              'with less surface tint, for example in Cards. The Scaffold '
+              'background is then only used as a background color effect. If '
+              'your app places controls directly on Scaffold, a high blend '
+              'factor on Scaffold background color may not be a good fit. '
+              'Choose one where it has a lower color blend factor.',
+            ),
           ),
           ListTile(
             title: Slider(
@@ -176,25 +161,17 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTile(
-            title: const Text('Plain white'),
-            subtitle: const Text(
-              'Use white Scaffold background color in all blend modes, '
-              'other surfaces become 5% lighter',
-            ),
-            value: controller.lightIsWhite,
-            onChanged: controller.setLightIsWhite,
-          ),
         ] else ...<Widget>[
-          DarkSurfaceModePopupMenu(controller: controller),
           DarkSurfaceModeListTile(controller: controller),
-          const ListTile(
+          DarkSurfaceModePopupMenu(controller: controller),
+          const ListTileReveal(
             title: Text('Blend level'),
+            subtitleDense: true,
             subtitle: Text('Adjust the surface, background, scaffold and '
                 'dialog blend level. Also impacts surfaces when '
                 'seed colors are used. Seed based surfaces already include '
                 'a touch of primary, but you can make it stronger with '
-                'surface blends'),
+                'surface blends.\n'),
           ),
           ListTile(
             title: Slider(
@@ -225,36 +202,30 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTile(
-            title: const Text('True black'),
-            subtitle: const Text(
-              'For an ink black dark mode, use True Black. Always uses a black '
-              'Scaffold background in all blend modes, plus other surfaces '
-              'become 5% darker',
-            ),
-            value: controller.darkIsTrueBlack,
-            onChanged: controller.setDarkIsTrueBlack,
-          ),
         ],
         const SizedBox(height: 8),
         // Show all the surface colors to show what is done to them.
-        SurfaceColors(controller: controller),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SurfaceColors(controller: controller),
+        ),
         const SizedBox(height: 8),
         //
         // Light mode widgets
         //
         if (isLight) ...<Widget>[
-          ListTile(
+          ListTileReveal(
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
             title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
                 'own main color, '
                 'into the onColor, when seed/M3 colors are not used. This '
                 'affects onContainers, onSurface and onBackground. When the '
                 'main onColor blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.'),
+                'for primary, secondary, tertiary and error.\n'),
           ),
           ListTile(
             enabled: controller.useSubThemes &&
@@ -297,14 +268,18 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTile(
+          SwitchListTileReveal(
             title: const Text('Main colors use onColor blending'),
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
+            subtitleDense: true,
             subtitle:
                 const Text('In M3 design, only container colors use color '
                     'pair tinted onColor. Main colors use black or white. '
                     'Keep this OFF to do so. Set to ON to use it with '
                     'onPrimary, onSecondary, onTertiary and onError, when seed '
-                    'colors are not used'),
+                    'colors are not used.\n'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme &&
@@ -315,9 +290,19 @@ class SurfaceBlendSettings extends StatelessWidget {
                 ? controller.setBlendLightOnColors
                 : null,
           ),
+          SwitchListTileReveal(
+            title: const Text('Plain white'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'Plain white uses white Scaffold background color in all blend '
+              'modes, other surfaces also become 5% less blended.\n',
+            ),
+            value: controller.lightIsWhite,
+            onChanged: controller.setLightIsWhite,
+          ),
           const Divider(),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 elevation tint removal'),
+            title: const Text('Adaptive M3 elevation tint removal'),
             index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -333,7 +318,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive elevation shadows back in M3'),
+            title: const Text('Adaptive shadows back in M3'),
             index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -349,8 +334,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 AppBar scroll '
-                'under tint removal'),
+            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
             index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -377,12 +361,12 @@ class SurfaceBlendSettings extends StatelessWidget {
             },
             enabled: true,
             child: ListTile(
-              title: const Text('Light mode blend and surface tint color'),
+              title: const Text('Light blend and surface tint color'),
               subtitle: Text('Color$defaultTintLightLabel '
                   '$nameThatColorLight $materialNameLight$spaceLight'
                   '#${effectiveTintLight.hexCode}'),
               trailing: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 10.0),
+                padding: const EdgeInsetsDirectional.only(end: 5.0),
                 child: ColorSchemeBox(
                   borderColor: Colors.transparent,
                   backgroundColor:
@@ -391,14 +375,14 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          ListTileReveal(
             enabled: controller.surfaceTintLight != null,
-            title: const Text('Set light theme blend and tint color back '
-                'to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color'),
+            title: const Text('Use default blend and tint color'),
+            subtitleDense: true,
+            subtitle: const Text('Sets light theme mode custom blend and '
+                'tint color back to primary color.\n'),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 10.0),
+              padding: const EdgeInsetsDirectional.only(end: 5.0),
               child: FilledButton(
                 onPressed: controller.surfaceTintLight != null
                     ? () {
@@ -417,17 +401,18 @@ class SurfaceBlendSettings extends StatelessWidget {
         // ELSE Dark mode widgets
         //
         else ...<Widget>[
-          ListTile(
+          ListTileReveal(
             enabled: controller.useSubThemes &&
                 controller.useFlexColorScheme &&
                 !controller.useKeyColors,
             title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
                 'own main color, into the onColor, when seed/M3 colors are '
                 'not used. This affects onContainers, onSurface and '
                 'onBackground. When the main onColor blending switch is ON, '
                 'it also affects on colors for primary, secondary, '
-                'tertiary and error.'),
+                'tertiary and error.\n'),
           ),
           ListTile(
             enabled: controller.useSubThemes &&
@@ -470,14 +455,18 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          SwitchListTile(
+          SwitchListTileReveal(
+            enabled: controller.useSubThemes &&
+                controller.useFlexColorScheme &&
+                !controller.useKeyColors,
             title: const Text('Main colors use onColor blending'),
+            subtitleDense: true,
             subtitle: const Text(
                 'In M3 dark design, not only container colors use '
                 'color pair tinted onColor, but also main colors do. '
                 'Keep this ON to also use it with onPrimary, onSecondary, '
                 'onTertiary and onError colors in dark mode, when seed colors '
-                'are not used'),
+                'are not used.\n'),
             value: controller.blendDarkOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme &&
@@ -488,9 +477,20 @@ class SurfaceBlendSettings extends StatelessWidget {
                 ? controller.setBlendDarkOnColors
                 : null,
           ),
+          SwitchListTileReveal(
+            title: const Text('True black'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'For an ink black dark mode, use True Black. It uses a totally '
+              'black Scaffold background in all blend modes, other surfaces '
+              'also become 5% less blended.\n',
+            ),
+            value: controller.darkIsTrueBlack,
+            onChanged: controller.setDarkIsTrueBlack,
+          ),
           const Divider(),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 elevation tint removal'),
+            title: const Text('Adaptive M3 elevation tint removal'),
             index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -506,7 +506,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive elevation shadows back in M3'),
+            title: const Text('Adaptive shadows back in M3'),
             index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -522,8 +522,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 AppBar scroll '
-                'under tint removal'),
+            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
             index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -550,12 +549,12 @@ class SurfaceBlendSettings extends StatelessWidget {
             },
             enabled: true,
             child: ListTile(
-              title: const Text('Dark mode blend and surface tint color'),
+              title: const Text('Dark blend and surface tint color'),
               subtitle: Text('Color$defaultTintDarkLabel '
                   '$nameThatColorDark $materialNameDark$spaceDark'
                   '#${effectiveTintDark.hexCode}'),
               trailing: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 10.0),
+                padding: const EdgeInsetsDirectional.only(end: 5.0),
                 child: ColorSchemeBox(
                   borderColor: Colors.transparent,
                   backgroundColor:
@@ -564,13 +563,14 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          ListTileReveal(
             enabled: controller.surfaceTintDark != null,
-            title: const Text('Set dark blend and tint color back to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color'),
+            title: const Text('Use default blend and tint color'),
+            subtitleDense: true,
+            subtitle: const Text('Sets dark theme mode custom blend and '
+                'tint color back to primary color.\n'),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 10.0),
+              padding: const EdgeInsetsDirectional.only(end: 5.0),
               child: FilledButton(
                 onPressed: controller.surfaceTintDark != null
                     ? () {

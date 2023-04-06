@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 
 class ListTileSettings extends StatelessWidget {
@@ -10,46 +11,49 @@ class ListTileSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        const SizedBox(height: 8),
-        const ListTile(
-          title: Text('Themed ListTile'),
+      children: const <Widget>[
+        SizedBox(height: 8),
+        ListTileReveal(
+          title: Text('List tiles'),
+          subtitleDense: true,
           subtitle: Text(
-            'There are many different ListTile types in Flutter. They '
-            'are useful widgets for settings and options. '
-            'In FSC you can theme them by theming the colors of the '
-            'switches, checkboxes and radio buttons they use.',
+            'There are many different types of ListTiles in Flutter. They '
+            'are useful widgets for showing lists of items, for '
+            'settings and options.\n'
+            '\n'
+            'FlexColorScheme does not currently offer any theming of ListTile '
+            'properties. However, if you theme the colors of Switch, Checkbox '
+            'or Radio the corresponding ListTiles will use these colors as '
+            'well.\n'
+            '\n'
+            'Below you can find a presentation of what all the different '
+            'ListTile types look like with current theme and colors applied '
+            'on them.\n',
           ),
         ),
-        SwitchListTile(
-          title: const Text('Unselected toggle color'),
-          subtitle: const Text('ON: Use theme color   OFF: default grey'),
-          value: controller.unselectedToggleIsColored &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUnselectedToggleIsColored
-              : null,
+        Divider(height: 1),
+        ListTileAllShowcase(),
+        Divider(),
+        ListTileReveal(
+          title: Text('ExpansionTile'),
+          subtitleDense: true,
+          subtitle: Text(
+            'No theming properties in current FCS version, only '
+            'included to show it with current theme.\n',
+          ),
         ),
-        const Divider(height: 1),
-        const ListTileAllShowcase(),
-        const Divider(),
-        const ListTile(
-          title: Text('Themed ExpansionTile'),
-          subtitle:
-              Text('No theming properties in current FCS, included to show it '
-                  'with current theme.'),
+        ExpansionTileShowcase(),
+        Divider(),
+        ListTileReveal(
+          title: Text('ExpansionPanelList'),
+          subtitleDense: true,
+          subtitle: Text(
+            'No theming properties in current FCS version, only '
+            'included to show it with current theme.\n',
+          ),
         ),
-        const ExpansionTileShowcase(),
-        const Divider(),
-        const ListTile(
-          title: Text('Themed ExpansionPanelList'),
-          subtitle:
-              Text('No theming properties in current FCS, included to show it '
-                  'with current theme.'),
-        ),
-        const ExpansionPanelListShowcase(),
-        const SizedBox(height: 16),
+        ExpansionPanelListShowcase(),
+        SizedBox(height: 16),
       ],
     );
   }

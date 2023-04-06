@@ -176,6 +176,7 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
               childCount: widget.isCardOpen.length,
               itemBuilder: (BuildContext context, int index) => HeaderCard(
                 title: Text(themeTopics[index].heading),
+                info: themeTopics[index].info,
                 leading: Icon(themeTopics[index].icon, color: iconColor),
                 isOpen: widget.isCardOpen[index],
                 onTap: () {
