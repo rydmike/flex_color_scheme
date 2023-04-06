@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -62,7 +63,9 @@ class _ThemeTopicSelectorHorizontalState
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
       scrollOffset = widget.buttonWidth * selectedPage;
-      scrollController.jumpTo(scrollOffset);
+      unawaited(scrollController.animateTo(scrollOffset,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic));
     }
   }
 
@@ -136,7 +139,8 @@ class _ThemeTopicSelectorHorizontalState
 
 /// Vertical theme topic selector used in the two columns view.
 ///
-/// Used only on large desktop views via [ThemeTwoTopicsPage].
+/// Used only on desktop views via [ThemeTwoTopicsPage] and
+/// [ThemeTwoTopicsVerticalPage].
 class ThemeTopicSelectorVertical extends StatefulWidget {
   const ThemeTopicSelectorVertical({
     super.key,
@@ -183,7 +187,7 @@ class _ThemeTopicSelectorVerticalState
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
-      debugLabel: widget.isRight ? 'Right theme topics' : 'Left theme topics',
+      debugLabel: widget.isRight ? 'Right v topics' : 'Left v topics',
     );
   }
 
@@ -201,8 +205,11 @@ class _ThemeTopicSelectorVerticalState
       final double compactHeight = widget.isCompact ? heightReduce : 0;
       scrollOffset = (buttonHeight - compactHeight) * selectedPage;
       scrollOffset = buttonHeight * selectedPage;
-      scrollController.jumpTo(scrollOffset);
+      // scrollController.jumpTo(scrollOffset);
       // scrollController.animateTo(scrollOffset, curve: );
+      unawaited(scrollController.animateTo(scrollOffset,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCubic));
     }
   }
 
