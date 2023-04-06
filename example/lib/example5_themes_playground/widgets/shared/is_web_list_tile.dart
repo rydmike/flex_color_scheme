@@ -27,9 +27,9 @@ class IsWebListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTileReveal(
-      title: const Text('Set mock web platform'),
+      title: const Text('Mock web'),
       subtitleDense: true,
-      subtitle: Text('Use it for adaptive theming testing.\n'
+      subtitle: Text('Use mock web setting for adaptive theming testing.\n'
           '${_explainLabelStyle(controller.fakeIsWeb)}.\n'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),

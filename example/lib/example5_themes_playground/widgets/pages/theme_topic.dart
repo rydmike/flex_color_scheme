@@ -10,11 +10,13 @@ class ThemeTopic {
     required this.heading,
     String? buttonLabel,
     required this.icon,
+    this.iconTurns = 0,
     this.info,
   }) : _buttonLabel = buttonLabel;
 
   final String heading;
   final IconData icon;
+  final int iconTurns;
   final String? _buttonLabel;
   final String? info;
   String get buttonLabel => _buttonLabel ?? heading;
@@ -208,6 +210,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
     icon: Icons.view_sidebar_rounded,
+    iconTurns: 2,
     info: 'The NavigationRail is typically used for top level destination '
         'navigation on tablets and sometimes also on desktops. It supports '
         'both Material 2 and 3, styles rails. Flutter default background '

@@ -3063,19 +3063,15 @@ class DrawerShowcase extends StatelessWidget {
           ),
         SizedBox(
           height: 280,
-          child: Row(
-            children: <Widget>[
-              MediaQuery.removePadding(
-                context: context,
-                removeBottom: true,
-                removeTop: true,
-                child: const Drawer(
-                  child: Center(
-                    child: Text('Drawer'),
-                  ),
-                ),
+          child: MediaQuery.removePadding(
+            context: context,
+            removeBottom: true,
+            removeTop: true,
+            child: const Drawer(
+              child: Center(
+                child: Text('Drawer'),
               ),
-            ],
+            ),
           ),
         ),
       ],

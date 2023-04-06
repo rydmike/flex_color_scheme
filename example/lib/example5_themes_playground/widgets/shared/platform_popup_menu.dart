@@ -116,12 +116,12 @@ class PlatformPopupMenu extends StatelessWidget {
             size: 40,
           ),
         ),
-        title: const Text('Set mock platform'),
+        title: const Text('Mock platform'),
         subtitleDense: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text('Use it for adaptive theming testing.'),
+            const Text('Use mock platform for adaptive theming testing.'),
             Text(subtitle),
           ],
         ),

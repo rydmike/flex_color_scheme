@@ -15,6 +15,7 @@ import 'theme_topic.dart';
 import 'theme_topic_page.dart';
 import 'theme_topics_grid_page.dart';
 import 'theme_two_topics_page.dart';
+import 'theme_two_topics_vertical_page.dart';
 
 /// Home Page for FlexColorScheme EXAMPLE 5 - Themes Playground.
 ///
@@ -59,15 +60,15 @@ class _HomePageState extends State<HomePage> {
     // Set enabled menu items.
     menuItemsEnabled =
         List<bool>.generate(App.menuItems.length, (int i) => true);
-    menuItemsEnabled[8] = widget.controller.isLargeGridView;
     menuItemsEnabled[9] = widget.controller.isLargeGridView;
-    menuItemsEnabled[5] = widget.controller.useFlexColorScheme;
+    menuItemsEnabled[10] = widget.controller.isLargeGridView;
+    menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
 
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
         App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
-    menuItemsIconState[0] = widget.controller.isLargeGridView
+    menuItemsIconState[6] = widget.controller.isLargeGridView
         ? ResponsiveMenuItemIconState.secondary
         : ResponsiveMenuItemIconState.primary;
 
@@ -81,22 +82,26 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    menuItemsIconState[1] = widget.controller.compactMode
+
+    menuItemsIconState[0] = Theme.of(context).brightness == Brightness.light
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[2] = Theme.of(context).brightness == Brightness.light
+    menuItemsIconState[1] = widget.controller.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[3] = widget.controller.useMaterial3
+    menuItemsIconState[2] = widget.controller.useFlexColorScheme
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[4] = widget.controller.useFlexColorScheme
+    menuItemsIconState[3] = widget.controller.useSubThemes
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[5] = widget.controller.useSubThemes
+    menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
+    menuItemsIconState[7] = widget.controller.compactMode
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsEnabled[5] = widget.controller.useFlexColorScheme;
+    menuItemsIconState[8] = widget.controller.verticalMode
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   void updateMenuState(int index) {
@@ -119,6 +124,9 @@ class _HomePageState extends State<HomePage> {
     final bool isBigDesktop =
         media.size.width > App.mediumDesktopWidthBreakpoint;
     final String materialType = theme.useMaterial3 ? 'M3 - ' : 'M2 - ';
+
+    // Disable vertical/horizontal setting when it has no effect.
+    menuItemsEnabled[8] = isBigDesktop && !widget.controller.isLargeGridView;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -150,21 +158,8 @@ class _HomePageState extends State<HomePage> {
         menuItemsIconState: menuItemsIconState,
         // Callback from menu, using simple index based actions here.
         onSelect: (int index) async {
-          // Toggle grid view mode true/false.
-          if (index == 0) {
-            widget.controller
-                .setLargeGridView(!widget.controller.isLargeGridView);
-            menuItemsEnabled[8] = !menuItemsEnabled[8];
-            menuItemsEnabled[9] = !menuItemsEnabled[9];
-            updateMenuState(index);
-          }
-          // Toggle compact/standard mode.
-          else if (index == 1) {
-            widget.controller.setCompactMode(!widget.controller.compactMode);
-            updateMenuState(index);
-          }
           // Set theme-mode light/dark
-          else if (index == 2) {
+          if (index == 0) {
             if (isDark) {
               widget.controller.setThemeMode(ThemeMode.light);
             } else {
@@ -174,7 +169,7 @@ class _HomePageState extends State<HomePage> {
             // didChangeDependencies called when the theme actually changes.
           }
           // Set M3 ON/OFF
-          else if (index == 3) {
+          else if (index == 1) {
             if (widget.controller.useMaterial3) {
               widget.controller.setUseMaterial3(false);
             } else {
@@ -183,7 +178,7 @@ class _HomePageState extends State<HomePage> {
             updateMenuState(index);
           }
           // Set FCS ON/OFF
-          else if (index == 4) {
+          else if (index == 2) {
             if (widget.controller.useFlexColorScheme) {
               widget.controller.setUseFlexColorScheme(false);
             } else {
@@ -192,7 +187,7 @@ class _HomePageState extends State<HomePage> {
             updateMenuState(index);
           }
           // Set Sub-themes ON/OFF
-          else if (index == 5) {
+          else if (index == 3) {
             if (widget.controller.useSubThemes) {
               widget.controller.setUseSubThemes(false);
             } else {
@@ -201,11 +196,11 @@ class _HomePageState extends State<HomePage> {
             updateMenuState(index);
           }
           // Copy theme setup code
-          else if (index == 6) {
+          else if (index == 4) {
             await showCopySetupCodeDialog(context, widget.controller);
           }
           // Copy ColorScheme code
-          else if (index == 7) {
+          else if (index == 5) {
             final String code = generateColorSchemeDartCode(widget.controller);
             await showResponsiveDialog<void>(
               context: context,
@@ -216,22 +211,40 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }
-          // Open all cards
+          // Toggle grid view mode true/false.
+          else if (index == 6) {
+            widget.controller
+                .setLargeGridView(!widget.controller.isLargeGridView);
+            menuItemsEnabled[9] = !menuItemsEnabled[9];
+            menuItemsEnabled[10] = !menuItemsEnabled[10];
+            updateMenuState(index);
+          }
+          // Toggle compact/standard mode.
+          else if (index == 7) {
+            widget.controller.setCompactMode(!widget.controller.compactMode);
+            updateMenuState(index);
+          }
+          // Toggle horizontal/vertical mode.
           else if (index == 8) {
+            widget.controller.setVerticalMode(!widget.controller.verticalMode);
+            updateMenuState(index);
+          }
+          // Open all cards
+          else if (index == 9) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = true;
             }
             setState(() {});
           }
           // Close all cards
-          else if (index == 9) {
+          else if (index == 10) {
             for (int i = 0; i < isPanelOpen.length; i++) {
               isPanelOpen[i] = false;
             }
             setState(() {});
           }
           // Reset theme settings.
-          else if (index == 10) {
+          else if (index == 11) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
@@ -250,7 +263,9 @@ class _HomePageState extends State<HomePage> {
                 toggleCard: togglePanelOpenClose,
               )
             : isBigDesktop
-                ? ThemeTwoTopicsPage(controller: widget.controller)
+                ? widget.controller.verticalMode
+                    ? ThemeTwoTopicsVerticalPage(controller: widget.controller)
+                    : ThemeTwoTopicsPage(controller: widget.controller)
                 : ThemeTopicPage(controller: widget.controller),
       ),
     );

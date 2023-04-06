@@ -144,11 +144,13 @@ class ThemeTopicSelectorVertical extends StatefulWidget {
     required this.onSelect,
     required this.isCompact,
     this.isRight = false,
+    this.addTopPadding = false,
   });
   final int page;
   final ValueChanged<int> onSelect;
   final bool isCompact;
   final bool isRight;
+  final bool addTopPadding;
 
   @override
   State<ThemeTopicSelectorVertical> createState() =>
@@ -169,11 +171,15 @@ class _ThemeTopicSelectorVerticalState
       12;
   static const double buttonMargin = 4;
 
+  static const double heightReduce = 10;
+  static const double widthReduce = 14;
+
   @override
   void initState() {
     super.initState();
     selectedPage = widget.page;
-    scrollOffset = buttonHeight * selectedPage;
+    final double compactHeight = widget.isCompact ? heightReduce : 0;
+    scrollOffset = (buttonHeight - compactHeight) * selectedPage;
     scrollController = ScrollController(
       keepScrollOffset: true,
       initialScrollOffset: scrollOffset,
@@ -192,8 +198,11 @@ class _ThemeTopicSelectorVerticalState
     super.didUpdateWidget(oldWidget);
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
+      final double compactHeight = widget.isCompact ? heightReduce : 0;
+      scrollOffset = (buttonHeight - compactHeight) * selectedPage;
       scrollOffset = buttonHeight * selectedPage;
       scrollController.jumpTo(scrollOffset);
+      // scrollController.animateTo(scrollOffset, curve: );
     }
   }
 
@@ -202,16 +211,22 @@ class _ThemeTopicSelectorVerticalState
     final MediaQueryData media = MediaQuery.of(context);
     final double margins =
         App.responsiveInsets(media.size.width, widget.isCompact);
+    final double topPadding =
+        widget.addTopPadding ? media.padding.top + margins : 0;
+    final double compactWidth = widget.isCompact ? widthReduce : 0;
+    final double compactHeight = widget.isCompact ? heightReduce : 0;
 
     return FocusTraversalGroup(
       child: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(width: buttonWidth + margins),
+        constraints: BoxConstraints.tightFor(
+            width: buttonWidth + margins - compactWidth),
         child: ScrollConfiguration(
           behavior: const DragScrollBehavior(),
           child: ListView.builder(
             padding: EdgeInsets.only(
               left: widget.isRight ? 0 : margins - buttonMargin,
               right: widget.isRight ? margins - buttonMargin : 0,
+              top: topPadding,
               bottom: margins,
             ),
             controller: scrollController,
@@ -222,7 +237,7 @@ class _ThemeTopicSelectorVerticalState
               return Padding(
                 padding: const EdgeInsets.only(bottom: buttonMargin),
                 child: SizedBox(
-                  height: buttonHeight - buttonMargin,
+                  height: buttonHeight - buttonMargin - compactHeight,
                   child: _ThemeTopicButton(
                     item: themeTopics[index],
                     onSelect: () {
@@ -233,7 +248,8 @@ class _ThemeTopicSelectorVerticalState
                     },
                     selected: selectedPage == index,
                     isCompact: true,
-                    width: buttonWidth,
+                    isSmall: widget.isCompact,
+                    width: buttonWidth - compactWidth,
                     buttonHorizontalMargin: buttonMargin,
                   ),
                 ),
@@ -253,6 +269,7 @@ class _ThemeTopicButton extends StatefulWidget {
     required this.selected,
     required this.onSelect,
     required this.isCompact,
+    this.isSmall,
     required this.width,
     this.buttonHorizontalMargin = 4,
   });
@@ -260,6 +277,7 @@ class _ThemeTopicButton extends StatefulWidget {
   final bool selected;
   final VoidCallback onSelect;
   final bool isCompact;
+  final bool? isSmall;
   final double width;
   final double buttonHorizontalMargin;
 
@@ -285,11 +303,19 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint ||
-        widget.isCompact;
-    final double textSize = isPhone ? 10 : 11;
-    final double iconSize = isPhone ? 28 : 45;
+    final bool isPhoneSize = media.size.width < App.phoneWidthBreakpoint ||
+        media.size.height < App.phoneHeightBreakpoint;
+    final bool isPhone = isPhoneSize || widget.isCompact;
+    final double textSize = isPhoneSize || widget.isCompact
+        ? widget.isSmall ?? false
+            ? 8
+            : 10
+        : 11;
+    final double iconSize = isPhoneSize || widget.isCompact
+        ? widget.isSmall ?? false
+            ? 24
+            : 28
+        : 45;
     final double borderWidth = isPhone ? 3 : 5;
     final double verticalPadding = isPhone ? 6 : 10;
     final ThemeData theme = Theme.of(context);
@@ -361,11 +387,21 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Icon(
-                  widget.item.icon,
-                  size: iconSize,
-                  color: iconColor,
-                ),
+                if (widget.item.iconTurns == 0)
+                  Icon(
+                    widget.item.icon,
+                    size: iconSize,
+                    color: iconColor,
+                  )
+                else
+                  RotatedBox(
+                    quarterTurns: widget.item.iconTurns,
+                    child: Icon(
+                      widget.item.icon,
+                      size: iconSize,
+                      color: iconColor,
+                    ),
+                  ),
                 Text(
                   widget.item.buttonLabel,
                   style: theme.textTheme.labelSmall!.copyWith(

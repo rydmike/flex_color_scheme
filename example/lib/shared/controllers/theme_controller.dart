@@ -91,6 +91,8 @@ class ThemeController with ChangeNotifier {
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _compactMode = await _themeService.load(
         Store.keyCompactMode, Store.defaultCompactMode);
+    _verticalMode = await _themeService.load(
+        Store.keyVerticalMode, Store.defaultVerticalMode);
     _confirmPremade = await _themeService.load(
         Store.keyConfirmPremade, Store.defaultConfirmPremade);
     _viewIndex =
@@ -2137,6 +2139,16 @@ class ThemeController with ChangeNotifier {
     _compactMode = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyCompactMode, value));
+  }
+
+  late bool _verticalMode;
+  bool get verticalMode => _verticalMode;
+  void setVerticalMode(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _verticalMode) return;
+    _verticalMode = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyVerticalMode, value));
   }
 
   late bool _confirmPremade;

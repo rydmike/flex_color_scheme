@@ -74,7 +74,7 @@ class ComponentSettings extends StatelessWidget {
               : null,
         ),
         SwitchListTileReveal(
-          title: const Text('Tinted interaction effects'),
+          title: const Text('Tinted interactions'),
           subtitleDense: true,
           subtitle: const Text(
             'Hover, focus, highlight, pressed and splash '
@@ -99,7 +99,7 @@ class ComponentSettings extends StatelessWidget {
         const Divider(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius on all components'),
+          title: const Text('Components border radius'),
           subtitleDense: true,
           subtitle: const Text(
             'By default, the border radius on all Material '
@@ -178,7 +178,7 @@ class ComponentSettings extends StatelessWidget {
           ),
         ),
         AdaptiveThemePopupMenu(
-          title: const Text('Platform adaptive radius'),
+          title: const Text('Adaptive radius'),
           index: controller.adaptiveRadius?.index ?? -1,
           onChanged: controller.useFlexColorScheme && controller.useSubThemes
               ? (int index) {
@@ -195,7 +195,7 @@ class ComponentSettings extends StatelessWidget {
               controller.useFlexColorScheme &&
               controller.adaptiveRadius != AdaptiveTheme.off &&
               controller.adaptiveRadius != null,
-          title: const Text('Adaptive radius value'),
+          title: const Text('Adaptive border radius'),
           subtitleDense: true,
           subtitle: const Text('You can define a separate global '
               'border radius override that gets used adaptively on above '

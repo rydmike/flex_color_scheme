@@ -106,7 +106,12 @@ class Store {
   // Key used to read and save the compactMode value.
   static const String keyCompactMode = 'compactMode';
   // Default value for the compactMode, also used to reset settings.
-  static const bool defaultCompactMode = false;
+  static const bool defaultCompactMode = true;
+
+  // Key used to read and save the verticalMode value.
+  static const String keyVerticalMode = 'verticalMode';
+  // Default value for the verticalMode, also used to reset settings.
+  static const bool defaultVerticalMode = true;
 
   // Key used to read and save the confirmPremade value.
   static const String keyConfirmPremade = 'confirmPremade';
@@ -1676,7 +1681,4 @@ class Store {
   // Default value for the tertiaryDark color, also to reset settings.
   static const Color defaultTertiaryContainerDark =
       AppColor.customTertiaryContainerDark;
-
-  // Not yet implemented SETTINGS.
-  // ===========================================================================
 }

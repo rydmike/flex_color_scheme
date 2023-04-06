@@ -302,7 +302,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           const Divider(),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 elevation tint removal'),
+            title: const Text('Adaptive M3 elevation tint removal'),
             index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -318,7 +318,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive elevation shadows back in M3'),
+            title: const Text('Adaptive shadows back in M3'),
             index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -334,8 +334,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 AppBar scroll '
-                'under tint removal'),
+            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
             index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -362,7 +361,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             },
             enabled: true,
             child: ListTile(
-              title: const Text('Light mode blend and surface tint color'),
+              title: const Text('Light blend and surface tint color'),
               subtitle: Text('Color$defaultTintLightLabel '
                   '$nameThatColorLight $materialNameLight$spaceLight'
                   '#${effectiveTintLight.hexCode}'),
@@ -378,11 +377,10 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           ListTileReveal(
             enabled: controller.surfaceTintLight != null,
-            title: const Text('Set light theme blend and tint color back '
-                'to default'),
+            title: const Text('Use default blend and tint color'),
             subtitleDense: true,
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color.\n'),
+            subtitle: const Text('Sets light theme mode custom blend and '
+                'tint color back to primary color.\n'),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5.0),
               child: FilledButton(
@@ -492,7 +490,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           const Divider(),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 elevation tint removal'),
+            title: const Text('Adaptive M3 elevation tint removal'),
             index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -508,7 +506,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive elevation shadows back in M3'),
+            title: const Text('Adaptive shadows back in M3'),
             index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -524,8 +522,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                 : null,
           ),
           AdaptiveThemePopupMenu(
-            title: const Text('Platform adaptive M3 AppBar scroll '
-                'under tint removal'),
+            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
             index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -552,7 +549,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             },
             enabled: true,
             child: ListTile(
-              title: const Text('Dark mode blend and surface tint color'),
+              title: const Text('Dark blend and surface tint color'),
               subtitle: Text('Color$defaultTintDarkLabel '
                   '$nameThatColorDark $materialNameDark$spaceDark'
                   '#${effectiveTintDark.hexCode}'),
@@ -566,11 +563,12 @@ class SurfaceBlendSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          ListTileReveal(
             enabled: controller.surfaceTintDark != null,
-            title: const Text('Set dark blend and tint color back to default'),
-            subtitle: const Text('Sets custom blend and tint color back '
-                'to primary color.\n'),
+            title: const Text('Use default blend and tint color'),
+            subtitleDense: true,
+            subtitle: const Text('Sets dark theme mode custom blend and '
+                'tint color back to primary color.\n'),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5.0),
               child: FilledButton(

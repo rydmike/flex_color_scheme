@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../shared/color_scheme_box.dart';
 
 // ignore_for_file: comment_references
@@ -25,48 +24,51 @@ class SurfaceModeToggleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool showAllModes = media.size.width > App.phoneWidthBreakpoint;
     final ColorScheme scheme = Theme.of(context).colorScheme;
 
-    final List<bool> isSelected = <bool>[
-      mode == FlexSurfaceMode.level,
-      mode == FlexSurfaceMode.highBackgroundLowScaffold,
-      mode == FlexSurfaceMode.highSurfaceLowScaffold,
-      mode == FlexSurfaceMode.highScaffoldLowSurface,
-      // Only show this blend option if show all set, not enough room.
-      if (showAllModes) mode == FlexSurfaceMode.highScaffoldLevelSurface,
-      mode == FlexSurfaceMode.levelSurfacesLowScaffold,
-      mode == FlexSurfaceMode.highScaffoldLowSurfaces,
-      // Only have these blend options if show all set, not enough room.
-      if (showAllModes)
-        mode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
-      if (showAllModes)
-        mode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
-    ];
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      final bool showAllModes = constraints.maxWidth > 380;
+      // debugPrint('Max size is: ${constraints.maxWidth}');
+      final List<bool> isSelected = <bool>[
+        mode == FlexSurfaceMode.level,
+        mode == FlexSurfaceMode.highBackgroundLowScaffold,
+        mode == FlexSurfaceMode.highSurfaceLowScaffold,
+        mode == FlexSurfaceMode.highScaffoldLowSurface,
+        // Only show this blend option if show all set, not enough room.
+        if (showAllModes) mode == FlexSurfaceMode.highScaffoldLevelSurface,
+        mode == FlexSurfaceMode.levelSurfacesLowScaffold,
+        mode == FlexSurfaceMode.highScaffoldLowSurfaces,
+        // Only have these blend options if show all set, not enough room.
+        if (showAllModes)
+          mode == FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
+        if (showAllModes)
+          mode == FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      ];
 
-    // On small media we exclude more exotic options, that will not fit
-    // in a toggle buttons presentation.
-    final List<FlexSurfaceMode> option = <FlexSurfaceMode>[
-      FlexSurfaceMode.level,
-      FlexSurfaceMode.highBackgroundLowScaffold,
-      FlexSurfaceMode.highSurfaceLowScaffold,
-      FlexSurfaceMode.highScaffoldLowSurface,
-      // Only have this blend option if show all set, not enough room.
-      if (showAllModes) FlexSurfaceMode.highScaffoldLevelSurface,
-      FlexSurfaceMode.levelSurfacesLowScaffold,
-      FlexSurfaceMode.highScaffoldLowSurfaces,
-      // Only have these blend options if show all set, not enough room.
-      if (showAllModes) FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
-      if (showAllModes) FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
-    ];
-    return ToggleButtons(
-      isSelected: isSelected,
-      onPressed: (int newIndex) {
-        onChanged?.call(option[newIndex]);
-      },
-      children: _getModeWidget(scheme, showAllModes),
-    );
+      // On small media we exclude more exotic options, that will not fit
+      // in a toggle buttons presentation.
+      final List<FlexSurfaceMode> option = <FlexSurfaceMode>[
+        FlexSurfaceMode.level,
+        FlexSurfaceMode.highBackgroundLowScaffold,
+        FlexSurfaceMode.highSurfaceLowScaffold,
+        FlexSurfaceMode.highScaffoldLowSurface,
+        // Only have this blend option if show all set, not enough room.
+        if (showAllModes) FlexSurfaceMode.highScaffoldLevelSurface,
+        FlexSurfaceMode.levelSurfacesLowScaffold,
+        FlexSurfaceMode.highScaffoldLowSurfaces,
+        // Only have these blend options if show all set, not enough room.
+        if (showAllModes) FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog,
+        if (showAllModes) FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
+      ];
+      return ToggleButtons(
+        isSelected: isSelected,
+        onPressed: (int newIndex) {
+          onChanged?.call(option[newIndex]);
+        },
+        children: _getModeWidget(scheme, showAllModes),
+      );
+    });
   }
 }
 

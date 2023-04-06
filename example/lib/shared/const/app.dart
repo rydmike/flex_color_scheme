@@ -75,7 +75,7 @@ class App {
   /// This min width was chosen because it gives at least the primary, secondary
   /// and tertiary colors in one Wrap row on panels Input Colors and Seeded
   /// ColorScheme, also when the side-by-side code view appears.
-  static const double sideBySideViewBreakpoint = 860;
+  static const double sideBySideViewBreakpoint = 760;
 
   /// The minimum media size needed for desktop/large tablet menu view,
   /// this is media size.
@@ -111,7 +111,7 @@ class App {
   /// than 1800dp, the device pixels available on a MacBook Pro 14" screen
   /// when using the "More space" option in Display settings. It of course
   /// also gets used on common full HD 1080p monitors that are 1920 dp wide.
-  static const double mediumDesktopWidthBreakpoint = 1500;
+  static const double mediumDesktopWidthBreakpoint = 1079;
 
   /// This breakpoint is only used to further increase margins and insets on
   /// very large desktops.
@@ -150,7 +150,7 @@ class App {
 
   /// The height when we want to pin the panel or color selector, instead of
   /// letting it float and snap back.
-  static const double pinnedSelector = 980;
+  static const double pinnedSelector = 1090;
 
   /// The width, and height of the scrolling panel buttons in Themes Playground
   /// page view, and how much it shrinks when we go to phone size.
@@ -218,23 +218,9 @@ class App {
   ///
   /// These could well be defined somewhere else too, but they kind of fit here.
   static const List<ResponsiveMenuItems> menuItems = <ResponsiveMenuItems>[
+    // Item 0
     ResponsiveMenuItems(
-      label: 'Grid view',
-      labelSecondary: 'Page view',
-      tooltip: 'Set to grid view',
-      tooltipSecondary: 'Set to page view',
-      icon: Icons.calendar_view_month_outlined,
-      iconSecondary: Icons.view_array_outlined,
-    ),
-    ResponsiveMenuItems(
-      label: 'Standard UI',
-      labelSecondary: 'Compact UI',
-      tooltip: 'Set to standard UI',
-      tooltipSecondary: 'Set to compact UI',
-      icon: Icons.view_compact_alt_rounded,
-      iconSecondary: Icons.view_compact_alt_outlined,
-    ),
-    ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Dark mode',
       labelSecondary: 'Light mode',
       tooltip: 'Set to dark mode',
@@ -242,6 +228,7 @@ class App {
       icon: Icons.bedtime,
       iconSecondary: Icons.wb_sunny,
     ),
+    // Item 1
     ResponsiveMenuItems(
       label: 'Use Material 2',
       labelSecondary: 'Use Material 3',
@@ -250,7 +237,9 @@ class App {
       icon: Icons.looks_two_outlined,
       iconSecondary: Icons.looks_3_outlined,
     ),
+    // Item 2
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'No FlexColorScheme',
       labelSecondary: 'Use FlexColorScheme',
       tooltip: 'Turn off FlexColorScheme',
@@ -258,6 +247,7 @@ class App {
       icon: Icons.blur_off_outlined,
       iconSecondary: Icons.blur_on_outlined,
     ),
+    // Item 3
     ResponsiveMenuItems(
       label: 'No sub themes',
       labelSecondary: 'Use sub themes',
@@ -266,25 +256,63 @@ class App {
       icon: Icons.subtitles_off_outlined,
       iconSecondary: Icons.subtitles_outlined,
     ),
+    // Item 4
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Copy theme code',
       icon: Icons.integration_instructions_outlined,
     ),
+    // Item 5
     ResponsiveMenuItems(
       label: 'Copy ColorScheme',
       icon: Icons.palette_outlined,
     ),
+    // Item 6
     ResponsiveMenuItems(
+      dividerAbove: true,
+      label: 'Grid view',
+      labelSecondary: 'Page view',
+      tooltip: 'Set to grid view',
+      tooltipSecondary: 'Set to page view',
+      icon: Icons.calendar_view_month_outlined,
+      iconSecondary: Icons.view_array_outlined,
+    ),
+    // Item 7
+    ResponsiveMenuItems(
+      label: 'Large UI',
+      labelSecondary: 'Compact UI',
+      tooltip: 'Set to large UI',
+      tooltipSecondary: 'Set to compact UI',
+      icon: Icons.view_compact_alt_rounded,
+      iconSecondary: Icons.view_compact_alt_outlined,
+    ),
+    // Item 8
+    ResponsiveMenuItems(
+      label: 'Colors on top',
+      labelSecondary: 'Colors on side',
+      tooltip: 'Colors on top\non large screens',
+      tooltipSecondary: 'Colors on side\non large screens',
+      icon: Icons.view_sidebar,
+      turns: 3,
+      iconSecondary: Icons.view_sidebar,
+    ),
+    // Item 9
+    ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Expand all',
       icon: Icons.open_in_full_outlined,
     ),
+    // Item 10
     ResponsiveMenuItems(
       label: 'Close all',
       icon: Icons.close_fullscreen_outlined,
     ),
+    // Item 11
     ResponsiveMenuItems(
+      dividerAbove: true,
       label: 'Reset settings',
       icon: Icons.replay_outlined,
+      dividerBelow: true,
     ),
   ];
 }

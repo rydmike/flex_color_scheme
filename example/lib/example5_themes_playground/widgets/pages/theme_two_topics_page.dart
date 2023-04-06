@@ -191,16 +191,18 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
 /// [ThemeTopicSelectorVertical] goes on left or right side of the [ThemePanel].
 class VerticalThemePanelView extends StatefulWidget {
   const VerticalThemePanelView({
+    super.key,
     required this.panel,
     this.isRight = false,
     required this.onPanelChanged,
     required this.controller,
-    super.key,
+    this.addTopPadding = false,
   });
   final int panel;
   final bool isRight;
   final ThemeController controller;
   final ValueChanged<int>? onPanelChanged;
+  final bool addTopPadding;
 
   @override
   State<VerticalThemePanelView> createState() => _VerticalThemePanelViewState();
@@ -265,6 +267,8 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
     final bool isCompact = widget.controller.compactMode;
     final double margins = App.responsiveInsets(media.size.width, isCompact);
     final double bottomPadding = media.padding.bottom;
+    final double topPadding =
+        widget.addTopPadding ? media.padding.top + margins : 0;
 
     return Expanded(
       child: Row(
@@ -285,6 +289,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
               },
               isCompact: isCompact,
               isRight: widget.isRight,
+              addTopPadding: widget.addTopPadding,
             ),
           Expanded(
             child: ListView(
@@ -293,7 +298,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
               physics: const ClampingScrollPhysics(),
               padding: EdgeInsets.fromLTRB(
                 widget.isRight ? margins / 2 : 4,
-                0,
+                topPadding,
                 widget.isRight ? 4 : margins / 2,
                 margins + bottomPadding,
               ),
@@ -330,6 +335,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
               },
               isCompact: isCompact,
               isRight: widget.isRight,
+              addTopPadding: widget.addTopPadding,
             ),
         ],
       ),

@@ -96,31 +96,35 @@ class SeededColorSchemeSettings extends StatelessWidget {
             ),
           ),
         const ListTileReveal(
-          title: Text('Keep a theme brand color when using seeds?'),
+          title: Text('Keep brand color when using seeds?'),
           subtitleDense: true,
           subtitle: Text('With the switches on the colors above you can lock '
               'primary, secondary, tertiary and their container colors to '
-              'their scheme input defined colors instead of using the color '
+              'their scheme input defined colors, instead of using the color '
               'from the seeded tonal palette. The switches have separate '
-              'states for light and dark theme.\n'),
+              'states for light and dark theme mode.\n'),
         ),
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
-            title: const Text('Use black and white as onColors on main colors'),
+            title: const Text('Black & white main onColors'),
             subtitleDense: true,
             subtitle:
                 const Text('Main colors are primary, secondary, tertiary, '
-                    'error and their container colors.\n'),
+                    'error and their container colors. Using black and white '
+                    'as on colors on the main colors may improve '
+                    'contrast.\n'),
             value: controller.onMainsUseBWLight && controller.useKeyColors,
             onChanged: controller.useKeyColors
                 ? controller.setOnMainsUseBWLight
                 : null,
           ),
           SwitchListTileReveal(
-            title: const Text('Use black and white as onColors on surfaces'),
+            title: const Text('Black & white surface onColors'),
             subtitleDense: true,
             subtitle: const Text('Surfaces are background, surface, '
-                'surfaceVariant and inverseSurface colors.\n'),
+                'surfaceVariant and inverseSurface colors. '
+                'Using black and white as on colors on surfaces '
+                'may improve contrast.\n'),
             value: controller.onSurfacesUseBWLight && controller.useKeyColors,
             onChanged: controller.useKeyColors
                 ? controller.setOnSurfacesUseBWLight
@@ -128,20 +132,24 @@ class SeededColorSchemeSettings extends StatelessWidget {
           ),
         ] else ...<Widget>[
           SwitchListTileReveal(
-            title: const Text('Use black and white as onColors on main colors'),
+            title: const Text('Black & white main onColors'),
             subtitleDense: true,
             subtitle:
                 const Text('Main colors are primary, secondary, tertiary, '
-                    'error and their container colors.\n'),
+                    'error and their container colors. Using black and white '
+                    'as on colors on the main colors may improve '
+                    'contrast.\n'),
             value: controller.onMainsUseBWDark && controller.useKeyColors,
             onChanged:
                 controller.useKeyColors ? controller.setOnMainsUseBWDark : null,
           ),
           SwitchListTileReveal(
-            title: const Text('Use black and white as onColors on surfaces'),
+            title: const Text('Black & white surface onColors'),
             subtitleDense: true,
             subtitle: const Text('Surfaces are background, surface, '
-                'surfaceVariant and inverseSurface colors.\n'),
+                'surfaceVariant and inverseSurface colors. '
+                'Using black and white as on colors on surfaces '
+                'may improve contrast.\n'),
             value: controller.onSurfacesUseBWDark && controller.useKeyColors,
             onChanged: controller.useKeyColors
                 ? controller.setOnSurfacesUseBWDark
