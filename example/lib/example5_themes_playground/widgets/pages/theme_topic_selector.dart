@@ -205,8 +205,6 @@ class _ThemeTopicSelectorVerticalState
       final double compactHeight = widget.isCompact ? heightReduce : 0;
       scrollOffset = (buttonHeight - compactHeight) * selectedPage;
       scrollOffset = buttonHeight * selectedPage;
-      // scrollController.jumpTo(scrollOffset);
-      // scrollController.animateTo(scrollOffset, curve: );
       unawaited(scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCubic));
