@@ -94,6 +94,9 @@ dependencies:
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.1.10
 
+dependency_overrides:
+  material_color_utilities: ^0.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
