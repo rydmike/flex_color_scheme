@@ -143,10 +143,10 @@ class TabBarSettings extends StatelessWidget {
           shadowColor: Colors.transparent,
           color: theme.colorScheme.surface,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 TabBarForAppBarShowcase(),
                 SizedBox(height: 16),
                 TabBarForBackgroundShowcase(),

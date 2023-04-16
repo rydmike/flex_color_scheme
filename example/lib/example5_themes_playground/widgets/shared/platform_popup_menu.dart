@@ -39,7 +39,6 @@ class PlatformPopupMenu extends StatelessWidget {
         value: TargetPlatform.iOS,
         child: ListTile(
           leading: Icon(Icons.phone_iphone, color: iconColor),
-          // leading: Icon(MdiIcons.appleIos, color: iconColor),
           title: const Text(labelApple),
         ),
       ),
@@ -47,7 +46,6 @@ class PlatformPopupMenu extends StatelessWidget {
         value: TargetPlatform.windows,
         child: ListTile(
           leading: Icon(FlexIcons.windows, color: iconColor),
-          // leading: Icon(MdiIcons.microsoftWindows, color: iconColor),
           title: const Text(labelWindows),
         ),
       ),
@@ -55,7 +53,6 @@ class PlatformPopupMenu extends StatelessWidget {
         value: TargetPlatform.macOS,
         child: ListTile(
           leading: Icon(FlexIcons.apple, color: iconColor),
-          // leading: Icon(MdiIcons.appleFinder, color: iconColor),
           title: const Text(labelMacOs),
         ),
       ),
@@ -63,7 +60,6 @@ class PlatformPopupMenu extends StatelessWidget {
         value: TargetPlatform.linux,
         child: ListTile(
           leading: Icon(FlexIcons.linux, color: iconColor),
-          // leading: Icon(MdiIcons.linux, color: iconColor),
           title: const Text(labelLinux),
         ),
       ),
@@ -71,7 +67,6 @@ class PlatformPopupMenu extends StatelessWidget {
         value: TargetPlatform.fuchsia,
         child: ListTile(
           leading: Icon(FlexIcons.infinity, color: iconColor),
-          // leading: Icon(MdiIcons.allInclusive, color: iconColor),
           title: const Text(labelFuchsia),
         ),
       ),
