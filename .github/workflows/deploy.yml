@@ -21,7 +21,7 @@
 name: Deploy_Web
 on:
   push:
-    branches: [master]
+    branches: [none]
     paths-ignore:
      - "**.md"
   pull_request:
@@ -30,8 +30,7 @@ on:
       - "**.md"
   release:
     types: [publish]
-    paths-ignore:
-      - "**.md"
+
 jobs:
   flutter_tests:
     name: "Analyze and test package, then build and deploy 5 web apps"
