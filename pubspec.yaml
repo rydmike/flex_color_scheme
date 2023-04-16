@@ -34,7 +34,7 @@ environment:
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.2.3
+  flex_seed_scheme: ^1.2.4
 
   flutter:
     sdk: flutter
@@ -46,18 +46,25 @@ dependencies:
   # import the package.
   meta: ^1.8.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # Color utilities by Google (material.io).
   #
-  # Used to compute and create Tonal Palette theme colors.
+  # Used to compute and create Tonal Palette theme colors in tests.
+  # Chore: consider removing those tests, they are already covered by
+  # tests in flex_seed_scheme.
   #
-  # Flutter SDK from 2.10.0 stable also uses and depends on this package.
-  # Version 0.3.0 contains many new features, but Flutter stable and master are
-  # locked to version 0.2.0, so we cannot use it, also 0-ver does not
-  # upgrade from version ^0.2.0 to 0.3.x, only to 0.2.x.
-  material_color_utilities: ^0.2.0
+  # Flutter SDK from 2.10.0 stable also depends on this package.
+  #
+  # Flutter stable 3.7 uses 0.2.0, and Flutter beta 3.10.x and master are
+  # locked to version 0.3.0. Since it is using 0-ver, it does not upgrade with
+  # constraint ^0.2.0 to 0.3.x, only to 0.2.x. We must use this deviant constraint
+  # to be able to use it with Flutter stable, beta and master. It works well because
+  # version 0.3.0 is actually not breaking any 0.2.0 APIs, it only contains new
+  # features and fixes.
+  material_color_utilities: '>=0.2.0 <0.4.0'
 
   test:
