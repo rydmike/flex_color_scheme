@@ -41,13 +41,13 @@ class App {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '0';
-  static const String versionPatch = '1';
+  static const String versionPatch = '3';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.10 (html renderer)';
+  static const String flutterVersion = '3.7.11 (html renderer)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';

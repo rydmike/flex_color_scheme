@@ -2,6 +2,12 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.3
+
+**Apr 19, 2023**
+
+- Fix [#136](https://github.com/rydmike/flex_color_scheme/issues/136) default background color regression on `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+
 ## 7.0.2
 
 **Apr 16, 2023**
