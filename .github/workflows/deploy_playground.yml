@@ -18,7 +18,7 @@
 #    - Use rpl to fix/modify the index.html file to give it the correct
 #      href deployment sub-folder.
 #    - Deploy each built Web App to GitHub pages.
-name: Deploy Playground
+name: Deploy_Playground
 on:
   push:
     branches: [none]

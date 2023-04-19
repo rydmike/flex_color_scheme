@@ -212,7 +212,6 @@ class SimulatorFrame extends StatelessWidget {
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          useInheritedMediaQuery: true,
           theme: Theme.of(context),
           home: child,
         ),

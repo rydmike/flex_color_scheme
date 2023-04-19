@@ -66,8 +66,8 @@ class _AppExampleShopState extends State<AppExampleShop> {
                 data: theme.copyWith(
                   iconTheme: IconThemeData(color: theme.colorScheme.onSurface),
                 ),
-                child: Row(
-                  children: const <Widget>[
+                child: const Row(
+                  children: <Widget>[
                     CartAppBarAction(),
                     ShopAbout(useRootNavigator: false)
                   ],

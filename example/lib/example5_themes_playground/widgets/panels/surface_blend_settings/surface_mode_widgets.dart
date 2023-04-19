@@ -242,11 +242,11 @@ List<Widget> _getModeWidget(ColorScheme scheme, [bool allModes = true]) =>
         message: 'High surface\nlow scaffold',
         child: Icon(Icons.layers),
       ),
-      Tooltip(
+      const Tooltip(
         message: 'High scaffold\nlow surface',
         child: Stack(
           alignment: Alignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: Icon(Icons.layers_outlined),
