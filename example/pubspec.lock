@@ -127,7 +127,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "7.0.2"
+    version: "7.0.3"
   flex_seed_scheme:
     dependency: "direct main"
     description:
@@ -153,10 +153,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: "12006889e2987c549c4c1ec1a5ba4ec4b24d34d2469ee5f9476c926dcecff266"
+      sha256: f991fdb1533c3caeee0cdc14b04f50f0c3916f0dbcbc05237ccbe4e3c6b93f3f
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter

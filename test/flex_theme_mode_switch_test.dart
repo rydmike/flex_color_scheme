@@ -161,11 +161,28 @@ void main() {
       await tester.pumpAndSettle();
       expect(lightSwitch, findsOneWidget);
 
+      // EXPECT: Light switch has default white background and type canvas.
+      final Finder lightSwitchMaterial = find
+          .descendant(of: lightSwitch, matching: find.byType(Material))
+          .first;
+      final Material lightMaterial =
+          tester.widget<Material>(lightSwitchMaterial);
+      expect(lightMaterial.type, MaterialType.canvas);
+      expect(lightMaterial.color, Colors.white);
+
       // EXPECT: That we find a dark theme mode button
       final Finder darkSwitch = find.bySemanticsLabel('DARK');
       await tester.tap(darkSwitch);
       await tester.pumpAndSettle();
       expect(darkSwitch, findsOneWidget);
+
+      // EXPECT: Dark switch has default grey850 background and type canvas.
+      final Finder darkSwitchMaterial = find
+          .descendant(of: darkSwitch, matching: find.byType(Material))
+          .first;
+      final Material darkMaterial = tester.widget<Material>(darkSwitchMaterial);
+      expect(darkMaterial.type, MaterialType.canvas);
+      expect(darkMaterial.color, Colors.grey[850]);
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
@@ -178,6 +195,15 @@ void main() {
       await tester.tap(systemSwitch);
       await tester.pumpAndSettle();
       expect(systemSwitch, findsOneWidget);
+
+      // EXPECT: Dark switch has default grey850 background and type canvas.
+      final Finder systemSwitchMaterial = find
+          .descendant(of: systemSwitch, matching: find.byType(Material))
+          .first;
+      final Material systemMaterial =
+          tester.widget<Material>(systemSwitchMaterial);
+      expect(systemMaterial.type, MaterialType.canvas);
+      expect(systemMaterial.color, Colors.grey[500]);
 
       // EXPECT: That we find a single option button.
       final Finder optionButton = find.byKey(const ValueKey<String>('option'));
