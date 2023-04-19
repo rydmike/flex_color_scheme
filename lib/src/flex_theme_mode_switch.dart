@@ -530,7 +530,6 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                     semanticsLabel: '', // Is set on button instead
                   ),
                 Material(
-                  type: MaterialType.transparency,
                   elevation: widget.elevation,
                   color: widget.backgroundColor,
                   clipBehavior: Clip.antiAlias,
