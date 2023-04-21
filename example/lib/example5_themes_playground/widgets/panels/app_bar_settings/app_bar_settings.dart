@@ -203,6 +203,122 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
+          ListTile(
+            enabled: controller.useFlexColorScheme &&
+                controller.useSubThemes &&
+                controller.useMaterial3,
+            title: const Text('Light mode scrolled under elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 20,
+              divisions: 41,
+              label: controller.useFlexColorScheme && controller.useSubThemes
+                  ? controller.appBarScrolledUnderElevationLight == null ||
+                          (controller.appBarScrolledUnderElevationLight ??
+                                  -0.5) <
+                              0
+                      ? controller.useMaterial3
+                          ? 'default 3'
+                          : controller.useSubThemes
+                              // ignore: lines_longer_than_80_chars
+                              ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
+                              : 'default 4'
+                      : (controller.appBarScrolledUnderElevationLight
+                              ?.toStringAsFixed(1) ??
+                          '')
+                  : controller.useMaterial3
+                      ? 'default 3'
+                      : !controller.useSubThemes
+                          // ignore: lines_longer_than_80_chars
+                          ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
+                          : 'default 4',
+              value: controller.useFlexColorScheme &&
+                      controller.useSubThemes &&
+                      controller.useMaterial3
+                  ? controller.appBarScrolledUnderElevationLight ?? -0.5
+                  : -0.5,
+              onChanged: controller.useFlexColorScheme &&
+                      controller.useSubThemes &&
+                      controller.useMaterial3
+                  ? (double value) {
+                      controller.setAppBarScrolledUnderElevationLight(
+                          value < 0 ? null : value);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme && controller.useSubThemes
+                        ? controller.appBarScrolledUnderElevationLight ==
+                                    null ||
+                                (controller.appBarScrolledUnderElevationLight ??
+                                        -0.5) <
+                                    0
+                            ? controller.useMaterial3
+                                ? 'default 3'
+                                // ignore: lines_longer_than_80_chars
+                                : 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
+                            : !controller.useMaterial3
+                                // ignore: lines_longer_than_80_chars
+                                ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
+                                : controller.appBarScrolledUnderElevationLight
+                                        ?.toStringAsFixed(1) ??
+                                    ''
+                        : controller.useMaterial3
+                            ? 'default 3'
+                            : !controller.useSubThemes
+                                // ignore: lines_longer_than_80_chars
+                                ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
+                                : 'default 4',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Light mode platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(null);
+                    } else {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light custom background color'),
+            labelForDefault: controller.useFlexColorScheme
+                ? 'default (AppBarStyle)'
+                : 'default (primary)',
+            index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setAppBarBackgroundSchemeColorLight(null);
+                    } else {
+                      controller.setAppBarBackgroundSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
         ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
@@ -291,91 +407,6 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-        ],
-        if (isLight) ...<Widget>[
-          ListTile(
-            enabled: controller.useFlexColorScheme &&
-                controller.useSubThemes &&
-                controller.useMaterial3,
-            title: const Text('Light mode scrolled under elevation'),
-            subtitle: Slider(
-              min: -0.5,
-              max: 20,
-              divisions: 41,
-              label: controller.useFlexColorScheme && controller.useSubThemes
-                  ? controller.appBarScrolledUnderElevationLight == null ||
-                          (controller.appBarScrolledUnderElevationLight ??
-                                  -0.5) <
-                              0
-                      ? controller.useMaterial3
-                          ? 'default 3'
-                          : controller.useSubThemes
-                              // ignore: lines_longer_than_80_chars
-                              ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                              : 'default 4'
-                      : (controller.appBarScrolledUnderElevationLight
-                              ?.toStringAsFixed(1) ??
-                          '')
-                  : controller.useMaterial3
-                      ? 'default 3'
-                      : !controller.useSubThemes
-                          // ignore: lines_longer_than_80_chars
-                          ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                          : 'default 4',
-              value: controller.useFlexColorScheme &&
-                      controller.useSubThemes &&
-                      controller.useMaterial3
-                  ? controller.appBarScrolledUnderElevationLight ?? -0.5
-                  : -0.5,
-              onChanged: controller.useFlexColorScheme &&
-                      controller.useSubThemes &&
-                      controller.useMaterial3
-                  ? (double value) {
-                      controller.setAppBarScrolledUnderElevationLight(
-                          value < 0 ? null : value);
-                    }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'ELEV',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    controller.useFlexColorScheme && controller.useSubThemes
-                        ? controller.appBarScrolledUnderElevationLight ==
-                                    null ||
-                                (controller.appBarScrolledUnderElevationLight ??
-                                        -0.5) <
-                                    0
-                            ? controller.useMaterial3
-                                ? 'default 3'
-                                // ignore: lines_longer_than_80_chars
-                                : 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                            : !controller.useMaterial3
-                                // ignore: lines_longer_than_80_chars
-                                ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                                : controller.appBarScrolledUnderElevationLight
-                                        ?.toStringAsFixed(1) ??
-                                    ''
-                        : controller.useMaterial3
-                            ? 'default 3'
-                            : !controller.useSubThemes
-                                // ignore: lines_longer_than_80_chars
-                                ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                                : 'default 4',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ] else ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme && controller.useSubThemes,
             title: const Text('Dark mode scrolled under elevation'),
@@ -455,43 +486,23 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-        ],
-        AdaptiveThemePopupMenu(
-          title: const Text('Platform adaptive M3 AppBar scroll '
-              'under tint removal'),
-          index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  controller.useMaterial3
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveAppBarScrollUnderOffDark(null);
-                  } else {
-                    controller.setAdaptiveAppBarScrollUnderOffDark(
-                        AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
-        ),
-        if (isLight)
-          ColorSchemePopupMenu(
-            title: const Text('Light custom background color'),
-            labelForDefault: controller.useFlexColorScheme
-                ? 'default (AppBarStyle)'
-                : 'default (primary)',
-            index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          AdaptiveThemePopupMenu(
+            title: const Text('Dark mode platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
                 ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setAppBarBackgroundSchemeColorLight(null);
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffDark(null);
                     } else {
-                      controller.setAppBarBackgroundSchemeColorLight(
-                          SchemeColor.values[index]);
+                      controller.setAdaptiveAppBarScrollUnderOffDark(
+                          AdaptiveTheme.values[index]);
                     }
                   }
                 : null,
-          )
-        else
+          ),
           ColorSchemePopupMenu(
             title: const Text('Dark custom background color'),
             labelForDefault: controller.useFlexColorScheme
@@ -509,6 +520,7 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+        ],
         const ListTileReveal(
           dense: true,
           title: Text('Background color'),
@@ -761,5 +773,3 @@ class AppBarSettings extends StatelessWidget {
     );
   }
 }
-
-// _fcsFlutterIssue110951

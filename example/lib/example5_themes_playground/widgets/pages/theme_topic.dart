@@ -43,17 +43,17 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'In fact all configs are just starting points for you to '
         'explore and modify further.\n'
         '\n'
-        'In a two panels view, try the Theme simulator as 2nd panel '
-        'with the official Material 3 demo app, using 11" or 12" iPad, '
+        'In two panels view, try the Theme simulator as 2nd panel '
+        'with the official Material 3 demo app. Use the 11" or 12" iPad, '
         'to experience how these examples impact the design of the app '
-        'and components.\n',
+        'and Material components.\n',
   ),
   ThemeTopic(
     heading: 'Theme simulator',
     buttonLabel: 'Theme\nsimulator',
     icon: Icons.phone_iphone,
     info: 'Use the theme simulator and its devices in a side view '
-        'as you change theme settings, and see how the changes '
+        'as you change theme settings, to see how the changes '
         'modify the look and feel of included demo apps.\n',
   ),
   ThemeTopic(
@@ -76,21 +76,22 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
-    info: "FlexColorScheme's Material 2 mode component themes are very "
-        'opinionated. Components look almost like Material 3 mode components, '
+    info: "FlexColorScheme's Material 2 mode component themes are opinionated. "
+        'They look almost like Material 3 mode default components, '
         'but done in Material 2 mode.\n'
         '\n'
         'When using Material 3, there are only a few nuance differences '
         'compared to default M3 styles, plus some minor fixes to a few '
-        'Flutter Material 3 specification deviations.\n',
+        'Flutter Material 3 specification deviations, that Flutter may also '
+        'fix in later versions.\n',
   ),
   ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
     info: 'Theme colors show the color values defined for the selected '
-        'color scheme. You can use any predefined scheme as a starting point '
-        'for your own custom colors.\n',
+        'color scheme. You can also use any predefined scheme as a starting '
+        'point for your own custom colors.\n',
   ),
   ThemeTopic(
     heading: 'Seeded ColorScheme',

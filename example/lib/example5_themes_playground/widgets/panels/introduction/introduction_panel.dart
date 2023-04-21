@@ -189,13 +189,14 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: Text('Like Flutter, FlexColorScheme also uses different '
               'theming defaults for some properties in M2 and M3 mode. '
               'If a value has not been set, it will show you what the default '
-              'is, if you toggle M2/M3 it will also change. The Playground '
-              'app also shows what the default values are in Flutter SDK '
-              'in both M2/M3 mode, when FCS or its sub-themes are not used.'),
+              'is, if you toggle M2/M3 it will change to show the default for '
+              'the used mode. The Playground also shows what the default '
+              'values are in Flutter SDK in both M2 and M3 mode, when FCS or '
+              'its sub-themes are not being used.'),
         ),
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
-          subtitle: Text('In Flutter 3.7 there are only minor issues '
+          subtitle: Text('In Flutter 3.7 and later there are only minor issues '
               'with Material 3, with low impact on apps using it. '
               'FlexColorScheme is also able to work around and fix some of '
               'them. In Flutter 3.3 and earlier, there are many severe issues '
@@ -209,7 +210,7 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'You can read more about M3 and theming related '
-                      'issues in the FlexColorScheme docs, where these issues '
+                      'issues in the FlexColorScheme docs, where theming issues '
                       'are being ',
                 ),
                 LinkTextSpan(
