@@ -6612,7 +6612,7 @@ class FlexColorScheme with Diagnosticable {
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
       // TODO(Rydmike): Add DatePicker Themedata when available in stable.
-      // datePickerTheme: DatePickerThemeData(),
+      datePickerTheme: const DatePickerThemeData(),
       //
       // Dialog Theme.
       dialogTheme: useSubThemes

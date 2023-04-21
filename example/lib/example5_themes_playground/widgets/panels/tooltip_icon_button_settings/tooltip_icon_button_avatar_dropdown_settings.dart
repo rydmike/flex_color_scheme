@@ -320,8 +320,8 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         const ListTileReveal(
           subtitleDense: true,
-          title: Text('Icon and IconButton info'),
-          subtitle: Text('Icons and IconButtons by default use same foreground '
+          title: Text('IconButton'),
+          subtitle: Text('IconButtons and Icons by default use same foreground '
               'color as active text theme. Some components change '
               'their colors automatically when they use them, but '
               'not all do. Icon usage is very varied, it is '
@@ -334,7 +334,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('IconButton info, known issues and limitations'),
+          title: const Text('Known issues and limitations'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
