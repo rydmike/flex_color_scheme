@@ -149,7 +149,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
