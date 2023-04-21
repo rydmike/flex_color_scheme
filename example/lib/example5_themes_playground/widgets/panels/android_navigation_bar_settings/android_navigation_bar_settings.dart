@@ -147,7 +147,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
                     : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
@@ -174,9 +174,12 @@ class AndroidNavigationBarSettings extends StatelessWidget {
               '${explainStyle(controller.sysNavBarStyle, isLight)}'),
         ),
         ListTile(
-          trailing: SystemNavBarStyleToggleButtons(
-            style: controller.sysNavBarStyle,
-            onChanged: controller.setSysNavBarStyle,
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 4.0),
+            child: SystemNavBarStyleToggleButtons(
+              style: controller.sysNavBarStyle,
+              onChanged: controller.setSysNavBarStyle,
+            ),
           ),
           onTap: () {
             if (controller.sysNavBarStyle.index + 1 >=

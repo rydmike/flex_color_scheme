@@ -152,9 +152,9 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
@@ -202,7 +202,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -252,7 +252,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -318,9 +318,9 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
@@ -367,7 +367,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -413,7 +413,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -528,7 +528,7 @@ class MenuSettings extends StatelessWidget {
                           : null,
                 ),
                 trailing: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  padding: const EdgeInsetsDirectional.only(end: 5),
                   child: SizedBox(
                     width: 58,
                     child: Column(
@@ -648,7 +648,7 @@ class MenuSettings extends StatelessWidget {
                           : null,
                 ),
                 trailing: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  padding: const EdgeInsetsDirectional.only(end: 5),
                   child: SizedBox(
                     width: 58,
                     child: Column(
@@ -784,7 +784,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -941,7 +941,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -987,7 +987,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[

@@ -37,11 +37,16 @@ class IntroductionPanel extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    final EdgeInsetsGeometry listTilePadding = theme.useMaterial3
+        ? const EdgeInsetsDirectional.only(
+            start: 16.0, end: 24.0, top: 8, bottom: 8)
+        : const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: listTilePadding,
           child: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -203,15 +208,15 @@ class IntroductionPanel extends StatelessWidget {
               'related to enabling and using Material 3.'),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: listTilePadding,
           child: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
                   text: 'You can read more about M3 and theming related '
-                      'issues in the FlexColorScheme docs, where theming issues '
-                      'are being ',
+                      'issues in the FlexColorScheme docs, where theming '
+                      'issues are being ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,

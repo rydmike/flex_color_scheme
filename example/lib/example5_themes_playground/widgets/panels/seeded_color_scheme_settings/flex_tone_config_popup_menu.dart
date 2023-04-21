@@ -57,8 +57,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
       ],
       child: ListTile(
         enabled: !disabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: Text('$title ${FlexTone.values[index].tone}'),
         subtitle: Text(FlexTone.values[index].describe),
         trailing: Padding(

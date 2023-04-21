@@ -122,8 +122,6 @@ class _ListTileRevealState extends State<ListTileReveal> {
 
   @override
   Widget build(BuildContext context) {
-    // final ThemeData theme = Theme.of(context);
-
     return Column(
       children: <Widget>[
         ListTile(

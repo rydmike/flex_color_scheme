@@ -28,13 +28,16 @@ class UseMaterial3TextTheme extends StatelessWidget {
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Typography and default TextTheme'),
       subtitle: Text(_explainLabelStyle(controller.useTextTheme)),
-      trailing: NullableBoolToggleButtons(
-        value: controller.useFlexColorScheme && controller.useSubThemes
-            ? controller.useTextTheme
-            : null,
-        onChanged: controller.useFlexColorScheme && controller.useSubThemes
-            ? controller.setUseTextTheme
-            : null,
+      trailing: Padding(
+        padding: const EdgeInsetsDirectional.only(end: 5.0),
+        child: NullableBoolToggleButtons(
+          value: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.useTextTheme
+              : null,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.setUseTextTheme
+              : null,
+        ),
       ),
       onTap: () {
         if (controller.useTextTheme == false) {

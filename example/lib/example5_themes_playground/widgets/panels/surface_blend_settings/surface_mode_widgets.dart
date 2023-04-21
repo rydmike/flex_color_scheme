@@ -94,7 +94,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final EdgeInsetsGeometry? contentPadding;
   final String labelForDefault;
   final String? popupLabelDefault;
 
@@ -198,8 +198,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
       },
       child: ListTile(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
