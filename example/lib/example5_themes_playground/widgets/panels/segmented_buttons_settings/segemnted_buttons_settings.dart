@@ -72,9 +72,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
     final String segmentedUnselectedForegroundDefault = controller
                 .segmentedButtonUnselectedSchemeColor ==
             null
-        ? controller.useSubThemes && controller.useFlexColorScheme
-            ? 'default (onSurface) (M3 spec)'
-            : 'default (primary) (Flutter M3 bug, correct spec is onSurface)'
+        ? 'default (onSurface)'
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.segmentedButtonUnselectedSchemeColor!).index].name})';
 
@@ -294,7 +292,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected button background color'),
-          labelForDefault: 'default (surface)',
+          labelForDefault: 'default (transparent)',
           index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -468,7 +466,8 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', min height or size cannot be set, ',
+                  text: ', this is fixed in beta 3.10. Min height or size '
+                      'cannot be set, ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -496,7 +495,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: ', this is fixed in beta 3.10.\n',
                 ),
               ],
             ),

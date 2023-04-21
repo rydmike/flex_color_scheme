@@ -90,10 +90,7 @@ class ButtonsSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ElevatedButtonShowcase(),
-        ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('ElevatedButton main color'),
           subtitle: controller.useMaterial3
@@ -110,6 +107,10 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: ElevatedButtonShowcase(),
         ),
         ColorSchemePopupMenu(
           title: const Text('ElevatedButton secondary color'),
@@ -186,14 +187,6 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FilledButtonShowcase(),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FilledButtonTonalShowcase(),
-        ),
         ColorSchemePopupMenu(
           labelForDefault: 'default (primary or secondaryContainer)',
           title: const Text('FilledButton color'),
@@ -208,6 +201,14 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FilledButtonShowcase(),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: FilledButtonTonalShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -366,10 +367,6 @@ class ButtonsSettings extends StatelessWidget {
         //   ),
         // ),
         // const Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: OutlinedButtonShowcase(),
-        ),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton foreground color'),
           index: controller.outlinedButtonSchemeColor?.index ?? -1,
@@ -383,6 +380,10 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: OutlinedButtonShowcase(),
         ),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton outline color'),
@@ -560,10 +561,7 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: TextButtonShowcase(),
-        ),
+
         ColorSchemePopupMenu(
           title: const Text('TextButton color'),
           index: controller.textButtonSchemeColor?.index ?? -1,
@@ -577,6 +575,10 @@ class ButtonsSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: TextButtonShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

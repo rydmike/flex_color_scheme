@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../theme/flex_theme_dark.dart';
+import '../../../theme/flex_theme_light.dart';
+import '../../../theme/theme_data_dark.dart';
+import '../../../theme/theme_data_light.dart';
 import 'app_example_components.dart';
 import 'app_example_login.dart';
 import 'app_example_material3/app_example_material3.dart';
@@ -157,28 +161,33 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                     controller: tabController,
                     children: <Widget>[
                       SimulatorFrame(
+                        controller: widget.controller,
                         device: device,
                         orientation: orientation,
                         child:
                             AppExampleComponents(controller: widget.controller),
                       ),
                       SimulatorFrame(
+                        controller: widget.controller,
                         device: device,
                         orientation: orientation,
                         child: AppExampleMaterial3(
                             themeController: widget.controller),
                       ),
                       SimulatorFrame(
+                        controller: widget.controller,
                         device: device,
                         orientation: orientation,
                         child: const AppExampleLogin(),
                       ),
                       SimulatorFrame(
+                        controller: widget.controller,
                         device: device,
                         orientation: orientation,
                         child: const AppExampleShop(),
                       ),
                       SimulatorFrame(
+                        controller: widget.controller,
                         device: device,
                         orientation: orientation,
                         child: AppExampleUndraw(controller: widget.controller),
@@ -196,10 +205,12 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
 class SimulatorFrame extends StatelessWidget {
   const SimulatorFrame({
     super.key,
+    required this.controller,
     required this.device,
     required this.orientation,
     required this.child,
   });
+  final ThemeController controller;
   final int device;
   final Orientation orientation;
   final Widget child;
@@ -212,7 +223,21 @@ class SimulatorFrame extends StatelessWidget {
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: Theme.of(context),
+          // TODO(rydmike): Experiment, simulator app uses theme directly.
+          // Instead of theming simulator via inherited theme.of(context), let's
+          // try this version where use same theme function as the main app.
+          // It will be more costly, since now new theme computed twice, but
+          // the advantage is that its change happens at the same time as main
+          // app theme changes, and not after it has concluded its change. This
+          // feels "faster", or more concurrent and imo offers better UX.
+          theme: controller.useFlexColorScheme
+              ? flexThemeLight(controller)
+              : themeDataLight(controller),
+          darkTheme: controller.useFlexColorScheme
+              ? flexThemeDark(controller)
+              : themeDataDark(controller),
+          // Use the dark or light theme based on controller setting.
+          themeMode: controller.themeMode,
           home: child,
         ),
       ),

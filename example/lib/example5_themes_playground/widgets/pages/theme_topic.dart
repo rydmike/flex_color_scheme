@@ -143,7 +143,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.pin_outlined,
     info: 'Text fields allow users to enter text into a UI. They typically '
         'appear in forms and dialogs. TextField theming is done via the '
-        'InputDecorator theme, it is a fairly complex theme with mixed '
+        'InputDecorator theme. It is a very complex theme, with mixed '
         'legacy and MaterialState properties.\n',
   ),
   ThemeTopic(
@@ -170,7 +170,9 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'option, where you can choose if it should always fit in '
         'your AppBar, regardless of what theme you set for the AppBar. '
         'Usually you want this, but sometimes surface might be preferred '
-        'or the Flutter SDK default style. In M2 mode Flutter default '
+        'or the Flutter SDK default style.\n'
+        '\n'
+        'In M2 mode Flutter default '
         'does not work well on surface colored AppBar, and in M3 mode '
         'the default does not work with primary colored AppBar. By using '
         'the FCS forAppBar style, the TabBar always fits with selected '
@@ -178,7 +180,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     heading: 'BottomNavigationBar',
-    buttonLabel: 'Bottom\nNavigationBar',
+    buttonLabel: 'Bottom\nNavBar',
     icon: Icons.video_label,
     info: 'Navigation bars offer a persistent and convenient way to switch '
         'between primary destinations in an app. '

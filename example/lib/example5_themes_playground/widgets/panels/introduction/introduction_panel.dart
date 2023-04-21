@@ -70,9 +70,9 @@ class IntroductionPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' this Playground, give it a read! It not '
-                      'only explains this application and FlexColorScheme API '
-                      'using tutorial examples and an API guide, it also '
+                  text: ' this Playground, give it a read. It not '
+                      'only explains this application and FlexColorScheme API, '
+                      'with tutorial examples and an API guide, it also '
                       'contains general Flutter theming guidance and advice.',
                 ),
               ],
@@ -83,12 +83,12 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: Text(
             'This application does not adjust any individual widget '
             'properties. The theme is adjusted interactively and all Flutter '
-            "widgets in it change as the application's theme is modified "
-            'interactively.\n'
+            "widgets in it change as the application's overall theme is "
+            'modified interactively.\n'
             '\n'
             'Material 3 ColorScheme is supported and can be '
             'generated using built-in '
-            'scheme colors as ColorScheme seed keys. Like with '
+            'scheme colors, as ColorScheme seed keys. Like with '
             'ColorScheme.fromSeed, you can use the primary color as seed key. '
             'You can also include secondary and tertiary colors as key colors '
             'to generate your '

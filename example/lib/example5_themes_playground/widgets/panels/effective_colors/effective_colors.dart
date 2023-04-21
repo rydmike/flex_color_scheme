@@ -47,14 +47,16 @@ class EffectiveColors extends StatelessWidget {
             '\n'
             'When you make custom components are assign custom colors '
             'the component themes, prefer using colors that are '
-            "'available in the application's ColorScheme. Flutter Material "
+            "available in the application's ColorScheme. Flutter Material "
             'widget are still bing transitioned to using only ColorScheme '
             'based colors. In M3 mode this migration is well on the way, '
             'but in M2 mode some components still use colors defined '
             'directly in ThemeData. Avoid using colors directly from '
-            'ThemeData going forward.\n',
+            'ThemeData going forward. See more info via the ThemeData info '
+            'expand below.\n',
           ),
         ),
+        const SizedBox(height: 4),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowColorSchemeColors(showTitle: false),
@@ -85,26 +87,29 @@ class EffectiveColors extends StatelessWidget {
                       'their default colors, especially when using M2. '
                       'FlexColorScheme keeps them in sync with ColorScheme to '
                       'produce an app with consistent colors on all widgets. '
-                      'It will do so as long as the colors exist in ThemeData. '
+                      'It will do so as long as the colors exist in ThemeData.'
+                      '\n\n'
                       'If you turn FlexColorScheme OFF, you can see that some '
                       'colors in ThemeData loose their relation to active '
                       'ColorScheme. Widgets in the SDK that still get their '
                       'default colors from those ThemeData color properties '
                       'will then no longer get ColorScheme based colors. '
-                      'FlexColorScheme assigns correct ColorScheme based '
-                      'colors to still relevant ThemeData colors.\n',
+                      'FlexColorScheme automatically assigns correct '
+                      'ColorScheme based '
+                      'colors to such still relevant ThemeData colors.\n',
                 ),
               ],
             ),
           ),
         ),
+        const SizedBox(height: 4),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowThemeDataColors(showTitle: false),
         ),
         const ComponentColorsReveal(),
         const Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+          padding: EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: ShowSubThemeColors(showTitle: false),
         ),
       ],

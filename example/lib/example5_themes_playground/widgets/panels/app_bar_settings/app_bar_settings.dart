@@ -187,7 +187,7 @@ class AppBarSettings extends StatelessWidget {
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'OPACITY',
@@ -391,7 +391,7 @@ class AppBarSettings extends StatelessWidget {
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'OPACITY',
@@ -528,7 +528,7 @@ class AppBarSettings extends StatelessWidget {
               'color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color overrides used AppBarStyle, set it back '
+              'Selecting a color, overrides used AppBarStyle. Set it back '
               'to default to use AppBarStyle again. Using AppBarStyle also '
               'offers Scaffold background color as AppBar color, which when '
               'using FCS surface blends can be different from ColorScheme '
@@ -554,8 +554,9 @@ class AppBarSettings extends StatelessWidget {
                 TextSpan(
                     style: spanTextStyle,
                     text:
-                        '. The theming and defaults are also incorrect for the '
-                        'action icons in master channel, see '),
+                        '. This is fixed in 3.10 beta, but not in stable 3.7. '
+                        'The theming and defaults are also incorrect for the '
+                        'action icons, see '),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssue123943,
@@ -563,9 +564,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There are partial fixes to this and many other '
-                      'related issues in master channel, but they have not '
-                      'landed in Flutter 3.7.9 stable or earlier versions.',
+                  text: '. There is a fix in master, but it not available in '
+                      '3.10 beta or Flutter stable 3.7, or earlier versions.',
                 ),
               ],
             ),
@@ -753,7 +753,7 @@ class AppBarSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7.0 to at least 3.7.9 the BottomAppBar '
+                  text: 'In Flutter 3.7 the BottomAppBar '
                       'color cannot be changed due to the issue described in ',
                 ),
                 LinkTextSpan(
@@ -763,7 +763,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. It has a fix in latest beta 3.10 and will land in '
+                      'next stable release.\n',
                 ),
               ],
             ),

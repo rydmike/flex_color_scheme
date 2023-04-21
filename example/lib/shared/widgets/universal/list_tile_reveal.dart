@@ -125,6 +125,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
     return Column(
       children: <Widget>[
         ListTile(
+          enabled: widget.enabled,
           contentPadding: widget.contentPadding,
           leading: widget.leading,
           dense: widget.dense,

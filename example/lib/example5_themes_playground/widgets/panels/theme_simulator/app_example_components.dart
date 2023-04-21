@@ -320,6 +320,7 @@ class ShowcaseButtons extends StatelessWidget {
               FabShowcase(),
               SizedBox(height: 8),
               IconButtonCircleAvatarDropdownShowcase(),
+              IconButtonShowcase(),
             ],
           ),
         ),
