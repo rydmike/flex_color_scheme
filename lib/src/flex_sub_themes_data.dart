@@ -1894,7 +1894,6 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
-  // TODO(rydmike): Elevation does not exist in Flutter 3.7, enable later.
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
@@ -1908,12 +1907,6 @@ class FlexSubThemesData with Diagnosticable {
   /// as FCS opinionated default.
   ///
   /// If not defined, defaults to [kDialogElevation] = 6.
-  ///
-  /// NOTE:
-  ///
-  /// Dialog elevation does not exist as a theme feature in Flutter 3.7.x
-  /// This property cannot be made to function until it lands in stable channel
-  /// from from master channel, where it exists. Did not land in Flutter 3.7.
   final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
@@ -2055,7 +2048,6 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 3.
   final double? appBarScrolledUnderElevation;
 
-  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
   /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
   /// uses as background color.
   ///
@@ -2063,12 +2055,6 @@ class FlexSubThemesData with Diagnosticable {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
-  ///
-  /// Due to an issue in Flutter 3.7, that has been resolved in
-  /// master channel, the background color of the [BottomAppBar] cannot
-  /// be changed when using M3. See issue:
-  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
-  /// https://github.com/rydmike/flex_color_scheme/issues/115.
   final SchemeColor? bottomAppBarSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
@@ -2154,19 +2140,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 0 in M2 and to 3 in M3.
   final double? tabBarIndicatorTopRadius;
 
-  // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix landing in stable.
   /// The color of the divider.
   ///
   /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.surfaceVariant] will be used, otherwise divider will
   /// not be drawn.
-  ///
-  /// This feature does not work in Flutter 3.7 stable, at least not up until
-  /// version 3.7.6. It is caused by a bug in Flutter SDK. The issue has
-  /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
-  /// master channel, but until the fix lands in Flutter stable, this
-  /// feature does not work.
   final Color? tabBarDividerColor;
 
   /// Border radius value for [Drawer], also used by [NavigationDrawer].

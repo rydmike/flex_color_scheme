@@ -508,8 +508,8 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           title: Text('MaterialBanner'),
           subtitleDense: true,
           subtitle: Text('No theme settings in current version of '
-              'FlexColorScheme. Included to demonstrates its style with '
-              'current theme and used ColorScheme.\n'),
+              'FlexColorScheme. Only included here to demonstrates its style '
+              'with current theme and used ColorScheme.\n'),
         ),
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),

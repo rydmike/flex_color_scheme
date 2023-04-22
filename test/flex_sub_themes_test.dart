@@ -7448,11 +7448,10 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-      //   equals(colorScheme.outline),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -7475,12 +7474,11 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.surfaceVariant.withOpacity(0.12)),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!
-      //       .resolve(<MaterialState>{MaterialState.disabled}),
-      //   equals(colorScheme.onSurface.withOpacity(0.12)),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -7493,18 +7491,17 @@ void main() {
               colorScheme.onSurface, colorScheme.primary),
         ),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   FlexSubThemes.switchTheme(
-      //     colorScheme: colorScheme,
-      //     useTintedDisable: true,
-      //     useMaterial3: true,
-      //  ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
-      //   equals(
-      //     FlexSubThemes.tintedDisable(
-      //         colorScheme.onSurface, colorScheme.primary),
-      //   ),
-      // );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
 
       // Selected thumb colors
       expect(
@@ -7737,11 +7734,10 @@ void main() {
         switchTheme.trackColor!.resolve(<MaterialState>{}),
         equals(colorScheme.surfaceVariant),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-      //   equals(colorScheme.outline),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.switchTheme(
@@ -8393,8 +8389,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7,
-            // elevation: 6,
+            elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -8434,8 +8429,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: colorScheme.tertiary,
             // dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
@@ -8476,8 +8470,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -8523,8 +8516,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

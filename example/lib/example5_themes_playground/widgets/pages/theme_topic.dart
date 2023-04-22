@@ -343,8 +343,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'A SnackBar is used to provide brief messages about app processes '
         'at the bottom of the screen.\n'
         '\n'
-        'Banners are similar, but at the top of '
-        'the screen and often used to provide more information on '
+        'Banners are similar to SnackBars, but at the top of '
+        'the screen and typically used to provide more information on '
         'topics related to content in the application.\n',
   ),
   ThemeTopic(
@@ -359,11 +359,15 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     buttonLabel: 'Text\nTheme',
     icon: Icons.font_download_outlined,
     info: 'The default typeface for Android is Roboto. Flutter uses platform '
-        'specific default typefaces. The Typography (2021)  introduced with '
-        'Material 3 is better than past Material 2 typography '
-        '(2018 in Flutter) or even older (2014), the default on used in '
-        'Flutter when using M2, even if 2018 is the correct M2 typography. '
-        'Recommend using the nicer M3 Typography in both M2 and M3 mode.\n'
+        'specific default typefaces. The Typography (2021) introduced with '
+        'Material-3 is better than past Material-2 typography '
+        '(2018 in Flutter) or even older (2014). Typography 2014 is the '
+        'default one used in Flutter when using M2 theme mode, even if 2018 is '
+        'the correct M2 typography. Few devs knew you had to specify it '
+        'separately to get correct Typography in M2 mode. In M3 mode you '
+        'automatically get the correct M3 Typography by default. '
+        'Recommend using the nicer and much better M3 Typography in both '
+        'M2 and M3 mode.\n'
         '\n'
         "Material's default type scale includes contrasting and flexible "
         'styles to support a wide range of use cases. You can modify '

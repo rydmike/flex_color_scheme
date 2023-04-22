@@ -19,9 +19,9 @@ import 'theme_topic.dart';
 const bool _debug = !kReleaseMode && false;
 
 // TODO(rydmike): Considering removing the grid view totally.
-//  Now that ThemeTopicPage can be set to view any two panels side-by-side, this
-//  grid view is not so useful anymore. Maybe we remove it totally?
-//  Do Twitter and GitHub discussions poll about it later.
+//  Now that ThemeTopicPage can be set to view any two panels side-by-side,
+//  this grid view is not so useful anymore. Maybe we remove it totally?
+//  Do a Tweet and GitHub discussions poll about it later.
 
 /// This is the super large masonry grid layout of the Themes Playground.
 ///

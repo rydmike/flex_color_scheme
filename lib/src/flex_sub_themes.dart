@@ -581,7 +581,6 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
   /// An opinionated [BottomAppBarTheme] theme.
   ///
   /// The [BottomAppBarTheme] allows setting only of background color in FCS.
@@ -590,12 +589,6 @@ class FlexSubThemes {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
-  ///
-  /// Due to an issue in Flutter 3.7 and 3.7.1, that has been resolved in
-  /// master channel, the background color of the [BottomAppBar] cannot
-  /// be changed when using M3. See issue:
-  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
-  /// https://github.com/rydmike/flex_color_scheme/issues/115.
   static BottomAppBarTheme bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2569,7 +2562,7 @@ class FlexSubThemes {
     final Color tint = foreground;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
-    // TODO(rydmike): The tintInteract condition added due to Flutter SDK issue.
+    // TODO(rydmike): Skip tintInteract condition added due to Flutter issue.
     // See https://github.com/flutter/flutter/issues/123829
     return tintInteract
         ? IconButtonThemeData(style: ButtonStyle(
@@ -4561,7 +4554,7 @@ class FlexSubThemes {
             ),
       groupAlignment: groupAlignment,
       labelType: labelType,
-      // TODO(rydmike): This hack used to be needed, but is it still in F3.7?
+      // TODO(rydmike): This hack used to be needed, but is it still in > F3.7?
       // Logic to avoid SDKs over eager asserts and get same result.
       useIndicator: true,
       indicatorColor: effectiveUseIndicator
@@ -5925,20 +5918,19 @@ class FlexSubThemes {
                   : kAlphaM3SwitchUnselectTrackDark)
               : colorScheme.surfaceVariant;
         }),
-        // TODO(rydmike): Add trackOutlineColor when available in stable.
-        // trackOutlineColor:
-        //     MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        //   if (states.contains(MaterialState.selected)) {
-        //     return Colors.transparent;
-        //   }
-        //   if (states.contains(MaterialState.disabled)) {
-        //     if (tintDisable) {
-        //       return tintedDisable(colorScheme.onSurface, baseColor);
-        //     }
-        //     return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-        //   }
-        //   return colorScheme.outline;
-        // }),
+        trackOutlineColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.transparent;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, baseColor);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+          }
+          return colorScheme.outline;
+        }),
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
@@ -6016,19 +6008,12 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
 
-    // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix arrive in stable.
     /// The color of the divider.
     ///
     /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
     /// color is used. If that is null and [useMaterial3] is true,
     /// [ColorScheme.surfaceVariant] will be used,
     /// otherwise divider will not be drawn.
-    ///
-    /// This feature does not work in Flutter 3.7 stable, at least not up until
-    /// version 3.7.7. It is caused by a bug in Flutter SDK. The issue has
-    /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
-    /// master channel, but until the fix lands in Flutter stable, this
-    /// feature does not work.
     final Color? dividerColor,
 
     /// Defines if the theme uses tinted interaction effects.
@@ -6287,8 +6272,6 @@ class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
-    // TODO(rydmike): TimePickerThemeData elevation not in Flutter 3.7.x.
-    // Exist in master, monitor when it lands in stable and add it.
     /// Dialog elevation.
     ///
     /// If not defined, defaults to [kDialogElevation] = 6.
@@ -6395,8 +6378,7 @@ class FlexSubThemes {
 
     return TimePickerThemeData(
       backgroundColor: background,
-      // TODO(rydmike): This elevation does not exist in beta 3.7.0-1.4.pre
-      // elevation: elevation ?? kDialogElevation,
+      elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
@@ -6413,7 +6395,8 @@ class FlexSubThemes {
         ),
       ),
       //
-      // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
+      // TODO(rydmike): Fixes for clock dial background color issue in M3.
+      // https://github.com/flutter/flutter/issues/118657
       dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
       dayPeriodColor: useM3
           ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
