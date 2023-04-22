@@ -1763,7 +1763,7 @@ class FlexSubThemes {
     return DatePickerThemeData(
       backgroundColor: background,
       // TODO(rydmike): Consider adding header color support to date picker.
-      headerBackgroundColor: colorScheme.surfaceVariant,
+      // headerBackgroundColor: colorScheme.primary,
       // headerForegroundColor: colorScheme.onPrimary,
       elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
