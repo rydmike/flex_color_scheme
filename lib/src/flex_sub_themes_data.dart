@@ -296,6 +296,7 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.useInputDecoratorThemeInDialogs,
+    this.datePickerDialogRadius,
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
     //
@@ -1936,6 +1937,7 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
+  // TODO(rydmike): V7.1 add also to DatePickerDialog theme.
   /// Set to true to use the app overall app [InputDecoration] theme in
   /// dialogs themes.
   ///
@@ -1944,6 +1946,13 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to false.
   final bool? useInputDecoratorThemeInDialogs;
+
+  /// Border radius value for [DatePickerDialog].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
+  final double? datePickerDialogRadius;
 
   /// Border radius value for [TimePickerDialog].
   ///
@@ -3041,6 +3050,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? dialogRadius,
     final SchemeColor? dialogBackgroundSchemeColor,
     final bool? useInputDecoratorThemeInDialogs,
+    final double? datePickerDialogRadius,
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
     //
@@ -3308,6 +3318,8 @@ class FlexSubThemesData with Diagnosticable {
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
       useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
           this.useInputDecoratorThemeInDialogs,
+      datePickerDialogRadius:
+          datePickerDialogRadius ?? this.datePickerDialogRadius,
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
       timePickerElementRadius:
@@ -3706,6 +3718,7 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.useInputDecoratorThemeInDialogs ==
             useInputDecoratorThemeInDialogs &&
+        other.datePickerDialogRadius == datePickerDialogRadius &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
         //
@@ -3990,6 +4003,7 @@ class FlexSubThemesData with Diagnosticable {
         dialogElevation,
         dialogBackgroundSchemeColor,
         useInputDecoratorThemeInDialogs,
+        datePickerDialogRadius,
         timePickerDialogRadius,
         timePickerElementRadius,
         //
@@ -4333,6 +4347,8 @@ class FlexSubThemesData with Diagnosticable {
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
+    properties.add(DiagnosticsProperty<double>(
+        'datePickerDialogRadius', datePickerDialogRadius));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(DiagnosticsProperty<double>(

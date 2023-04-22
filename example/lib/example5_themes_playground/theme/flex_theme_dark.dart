@@ -246,6 +246,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             dialogRadius: controller.dialogBorderRadius,
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
+            datePickerDialogRadius: controller.dialogBorderRadius,
             timePickerDialogRadius: controller.dialogBorderRadius,
             timePickerElementRadius: controller.timePickerElementRadius,
             dialogElevation: controller.dialogElevation,

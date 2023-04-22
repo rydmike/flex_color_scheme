@@ -1699,6 +1699,83 @@ class FlexSubThemes {
     );
   }
 
+  /// An opinionated [DatePickerThemeData] with custom corner radius.
+  ///
+  /// Corner [radius] defaults to [kDialogRadius] 28dp.
+  static DatePickerThemeData datePickerTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// A completely custom color for your main [DialogTheme] color.
+    ///
+    /// If null and [backgroundSchemeColor] are also not
+    /// defined, this dialog defaults to using [ColorScheme.surface] .
+    final Color? backgroundColor,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// If not defined, then the passed in [backgroundColor] will be used,
+    /// which may be null too and dialog then falls back to Flutter SDK default
+    /// value for TimePickerDialog, which is [colorScheme.surface].
+    ///
+    /// FlexColorScheme sub-theming uses this property to match the background
+    /// color of this dialog to other standard dialogs. It sets it via
+    /// [FlexSubThemesData] to [SchemeColor.surface].
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Dialog elevation.
+    ///
+    /// If not defined, defaults to [kDialogElevation] = 6.
+    final double? elevation,
+
+    /// Outer corner radius.
+    ///
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
+    final double? radius,
+
+    /// Overrides the default value of [Dialog.shadowColor].
+    final Color? shadowColor,
+
+    /// Overrides the default value of [Dialog.surfaceTintColor].
+    final Color? surfaceTintColor,
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    // final bool? useMaterial3,
+  }) {
+    // final bool useM3 = useMaterial3 ?? false;
+
+    final Color? background = (backgroundSchemeColor == null)
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : schemeColor(backgroundSchemeColor, colorScheme);
+
+    return DatePickerThemeData(
+      backgroundColor: background,
+      // TODO(rydmike): Consider adding header color support to date picker.
+      headerBackgroundColor: colorScheme.surfaceVariant,
+      // headerForegroundColor: colorScheme.onPrimary,
+      elevation: elevation ?? kDialogElevation,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
+        ),
+      ),
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+    );
+  }
+
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
@@ -6275,12 +6352,6 @@ class FlexSubThemes {
     /// Dialog elevation.
     ///
     /// If not defined, defaults to [kDialogElevation] = 6.
-    ///
-    /// NOTE:
-    ///
-    /// This elevation does not exist yet in Flutter 3.7. It has no function
-    /// until support from master lands and it is added to updated API in this
-    /// [TimePickerThemeData.timePickerTheme] function.
     final double? elevation,
 
     /// Outer corner radius.

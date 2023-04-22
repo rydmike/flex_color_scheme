@@ -687,6 +687,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String dialogBorderRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String datePickerDialogRadius = controller.dialogBorderRadius != null
+      ? '    datePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String timePickerDialogRadius = controller.dialogBorderRadius != null
       ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1212,6 +1215,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogBorderRadius'
           '$dialogElevation'
           '$useInputDecoratorThemeInDialogs'
+          '$datePickerDialogRadius'
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
           //
@@ -1417,6 +1421,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogBorderRadius'
           '$dialogElevation'
           '$useInputDecoratorThemeInDialogs'
+          '$datePickerDialogRadius'
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
           //

@@ -6611,8 +6611,19 @@ class FlexColorScheme with Diagnosticable {
       //
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
-      // TODO(Rydmike): Add DatePicker Themedata when available in stable.
-      datePickerTheme: const DatePickerThemeData(),
+      // DatePicker theme
+      datePickerTheme: useSubThemes
+          ? FlexSubThemes.datePickerTheme(
+              colorScheme: colorScheme,
+              backgroundColor: dialogBackground,
+              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              elevation: subTheme.dialogElevation,
+              radius: subTheme.datePickerDialogRadius ?? platformRadius,
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
+              // useMaterial3: useMaterial3,
+            )
+          : null,
       //
       // Dialog Theme.
       dialogTheme: useSubThemes
