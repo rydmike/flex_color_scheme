@@ -4,41 +4,64 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful color scheme based Flutter Material design themes. Apply optional surface blends, and use Material 3 style seeded color schemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from numerous pre-made designs or make your own. You can also use optional component sub theming, that are quick and easy to configure.
+Use **FlexColorScheme** to make beautiful Flutter Material Design based themes. Apply optional surface blends, and use Material-3 style seeded color schemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from numerous pre-made designs or make your own. You can also use optional component sub theming, that are quick and easy to configure.
 
 <table>
   <tr>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-l-37.png?raw=true" alt="Dash light" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-d-37.png?raw=true" alt="Dash dark" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-l-38.png?raw=true" alt="M3 baseline light" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-d-38.png?raw=true" alt="M3 baseline dark" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-l-37.png" alt="Dash light" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-d-37.png" alt="Dash dark" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-l-38.png" alt="M3 baseline light" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-d-38.png" alt="M3 baseline dark" width="220"/></td>
   </tr>
 </table>
 
-When you theme a Flutter application correctly, all built-in widgets use the colors of the `ColorScheme` in your theme. At least in theory, and it is almost so if you defined your `ThemeData` by using the `ThemeData.from` factory, but it misses a few details. This applies in particular when you use Material 2 design in Flutter, which is the default. When you opt in on using Material 3, the results are much more consistent by default. 
+When you theme a Flutter application correctly, all built-in widgets use the colors of the `ColorScheme` in your theme. At least in theory, and it is almost so if you defined your `ThemeData` by using the `ThemeData.from` factory, but it misses a few details. This applies in particular when you use Material-2 design in Flutter, which is the default. When you opt in on using Material-3, the results are much more consistent by default. 
 
-**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its color scheme and custom colors you provide. It applies effective `ColorScheme` colors to all color properties in `ThemeData`. This ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprising colors in `ThemeData` legacy colors that do not match your `ColorScheme`. This applies regardless of if you use Material 2 or Material 3 mode.
+**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its color scheme and custom colors you provide. It applies effective `ColorScheme` colors to all color properties in `ThemeData`. This ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprising colors in `ThemeData` legacy colors that do not match your `ColorScheme`. This applies regardless of if you use Material-2 or Material-3 mode.
 
-You can opt in on using opinionated component sub-themes. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. Flutter's Material UI widgets still default to the Material 2 design, and thus use 4 dp corner radius on most widgets.
-
-When you opt in on using the component sub-themes in Material 2 mode, border radius on widgets defaults to the new Material 3 rounded corner design. In it, the radius varies by widget type, as specified by the [Material 3 guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material 3 like defaults or the global radius value you defined. 
-
-You can also opt in on using Material 3. The Material 3 mode component sub-theming is far less opinionated, using mostly Material 3 defaults, offering easy quick settings to customize Material 3 to suit your design goals.
+You can opt in on using opinionated component sub-themes. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. Flutter's Material UI widgets still default to Material-2 design, and thus use 4dp corner radius on most widgets.
 
 <table>
   <tr>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-l-39.png?raw=true" alt="Verdun green light" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-d-39.png?raw=true" alt="Verdun green dark" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-l-40.png?raw=true" alt="Dell genoa light" width="220"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-d-40.png?raw=true" alt="Dell genoa dark" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-l-39.png" alt="Verdun green light" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-d-39.png" alt="Verdun green dark" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-l-40.png" alt="Dell genoa light" width="220"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-d-40.png" alt="Dell genoa dark" width="220"/></td>
+  </tr>
+</table>
+
+When you opt in on using the component sub-themes in Material-2 mode, border radius on widgets defaults to the new Material-3 rounded corner design. In it, the radius varies by widget type, as specified by the [Material-3 Guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also easily set the themed border radius per widget, and override the Material-3 like defaults or the global radius value you defined. 
+
+### Material 3 Support
+
+You can also opt in on using Material-3. The Material-3 mode component sub-theming is far less opinionated, using mostly Material-3 defaults. It offers many quick settings to customize Material-3 to fit your custom design goals.
+
+In Flutter 3.7 and later, using Material-3 design is ready for production use. Some minor issues still exist, please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on status of known **theming** issues in Flutter.
+
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-l-50.png" alt="Yukon gold light" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-d-50.png" alt="Yukon gold dark" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-l-52.png" alt="Rust light" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-d-52.png" alt="Rust dark" /> </td>
+  </tr>
+</table>
+
+**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from key colors. You can use this to make more saturated seed generated themes and themes with higher contrast. The advanced seeded `ColorScheme` features are currently not available in Flutter directly. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
+
+In Material-3 mode theming you can disable its surface elevation tint and even bring back elevation shadows where they are removed in M3. You can choose to do this adaptively on only selected platforms, like iOS and macOS, where surface tint elevation may seem foreign, while still keeping the M3 tinted elevation styles when the app is used on Android.
+
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-l-44.png" alt="Indigo San Marino light" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-d-44.png" alt="Indigo San Marino dark" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-l-42.png" alt="Lipstick pink light" /> </td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v7-d-42.png" alt="Lipstick pink dark" /> </td>
   </tr>
 </table>
 
 With **FlexColorScheme** component themes, you use simple flat property values. No need for verbose Flutter SDK component sub-themes, for example `ShapeBorder` definitions on multiple widget themes to change their border radius. The component theming provides a large number of easy to configure options via direct properties. In many cases you can avoid complicated and sometimes confusing `MaterialState` theming properties.
 
-**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material 3 based color schemes, including seed generated `ColorSchemes`. It offers different configuration options that you can use when you generate your `ColorScheme` from key colors. You can use this to make more saturated seed generated themes and themes with higher contrast. The advanced seeded `ColorScheme` features are currently not available in Flutter directly. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors. 
-
-In Material 3 mode theming you can disable its surface elevation tint and even bring back elevation shadows where they are removed in M3. You can choose to do this adaptively on only selected platforms, like iOS and macOS, where surface tint elevation may seem foreign, while still keeping the M3 tinted elevation styles when the app is used on Android.
 
 ## Getting Started
 
@@ -52,7 +75,7 @@ Import the package to use it:
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 ```
 
-You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so, is to try one of the **52** built-in color schemes. They have enum values that you use to select which one to use as the theme of your application.
+You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so is to try one of the **52** built-in color schemes. They have enum values that you use to select which one to use as the theme of your application.
 
 The package **default example** offers a heavily commented code guide on how to use key features in FlexColorScheme. The [**Examples**](https://docs.flexcolorscheme.com/examples) chapter shows you how to try it. In the [**Tutorial**](https://docs.flexcolorscheme.com/tutorial1) you can learn more via five additional examples of increasing complexity.
 
@@ -91,8 +114,8 @@ This gives us a counter application that looks like this:
 
 <table>
   <tr>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-01.png?raw=true" alt="Counter light" width="280"/></td>
-    <td><img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-counter-02.png?raw=true" alt="Counter dark" width="280"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-counter-01.png" alt="Counter light" width="280"/></td>
+    <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-counter-02.png" alt="Counter dark" width="280"/></td>
   </tr>
 </table>
 
@@ -109,7 +132,7 @@ For more information and tutorials on how to use **FlexColorScheme**, please see
 
 Please refer to it for more information and guidance on its usage and features. The documentation site is powered by [docs.page](https://docs.page/) from [Invertase](https://invertase.io/).
 
-Complete generated package [**API documentation**](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html) is also available. The API docs are very thorough as well.
+Complete generated package [**API documentation**](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html) is also available. The API docs are very thorough.
 
 ## Themes Playground
 
@@ -123,7 +146,7 @@ The latest **Themes Playground v7** build can be used as a [web app here](https:
 
 For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available in the documentation site.
 
-[<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/fcs-v5-pg-01-pageview-3.gif?raw=true" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v7)
+[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-pg-01-pageview-3.gif" alt="Page view demo"/>](https://rydmike.com/flexcolorscheme/themesplayground-v7)
 
 ### Open Source
 

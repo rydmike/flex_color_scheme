@@ -2,11 +2,20 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.4
+
+**Apr 22, 2023**
+
+* **Package**
+  * No changes.
+* **Themes Playground**
+  * **FIX:** AppBar setting for using platform adaptive scroll under elevation tint removal was not working correctly. UI bug in Playground only, no package impact.   
+
 ## 7.0.3
 
 **Apr 19, 2023**
 
-- Fix [#136](https://github.com/rydmike/flex_color_scheme/issues/136) default background color regression on `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+- **Fix:** [#136](https://github.com/rydmike/flex_color_scheme/issues/136) default background color regression on `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
 
 ## 7.0.2
 
@@ -21,7 +30,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * **Package**
   * No changes.
-* **Themes Playground**
+* **CHANGE: Themes Playground**
   * Less chatty UI
   * Revised media size breakpoints. 
   * Vertical color selector mode. 
@@ -31,7 +40,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **Apr 2, 2023**
 
-This is a major update to the **FlexColorScheme** package and a substantial leap for the companion app **Themes Playground**. For a detailed list of all changes, please refer to the incremental log from its development release linked below.
+This is a major update to the **FlexColorScheme** package and a substantial leap for the companion app **Themes Playground**. For a detailed list of all changes, please refer to the incremental log from its development releases linked below.
 
 * [Changes from 6.1.2 to 7.0.0-dev.1](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_0_0_dev_1.md)
 

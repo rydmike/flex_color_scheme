@@ -141,7 +141,7 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -185,9 +185,9 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'OPACITY',
@@ -203,96 +203,6 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-        ] else ...<Widget>[
-          ListTile(
-            enabled: controller.useFlexColorScheme,
-            title: const Text('Dark mode elevation'),
-            subtitle: Slider(
-              min: -0.5,
-              max: 20,
-              divisions: 41,
-              label: controller.useFlexColorScheme
-                  ? controller.appBarElevationDark == null ||
-                          (controller.appBarElevationDark ?? -0.5) < 0
-                      ? 'default 0'
-                      : controller.appBarElevationDark!.toStringAsFixed(1)
-                  : controller.useMaterial3
-                      ? 'default 0'
-                      : 'default 4',
-              value: controller.useFlexColorScheme
-                  ? controller.appBarElevationDark ?? -0.5
-                  : -0.5,
-              onChanged: controller.useFlexColorScheme
-                  ? (double value) {
-                      controller
-                          .setAppBarElevationDark(value < 0 ? null : value);
-                    }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'ELEV',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    controller.useFlexColorScheme
-                        ? controller.appBarElevationDark == null ||
-                                (controller.appBarElevationDark ?? -0.5) < 0
-                            ? 'default 0'
-                            : controller.appBarElevationDark!.toStringAsFixed(1)
-                        : controller.useMaterial3
-                            ? 'default 0'
-                            : 'default 4',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ListTileReveal(
-            enabled: controller.useFlexColorScheme,
-            title: const Text('Dark opacity'),
-            subtitleDense: true,
-            subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
-          ),
-          ListTile(
-            title: Slider(
-              max: 100,
-              divisions: 100,
-              label: (controller.appBarOpacityDark * 100).toStringAsFixed(0),
-              value: controller.appBarOpacityDark * 100,
-              onChanged: controller.useFlexColorScheme
-                  ? (double value) {
-                      controller.setAppBarOpacityDark(value / 100);
-                    }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'OPACITY',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    '${(controller.appBarOpacityDark * 100).toStringAsFixed(0)}'
-                    ' %',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-        if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme &&
                 controller.useSubThemes &&
@@ -337,7 +247,7 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -375,7 +285,128 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Light mode platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(null);
+                    } else {
+                      controller.setAdaptiveAppBarScrollUnderOffLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light custom background color'),
+            labelForDefault: controller.useFlexColorScheme
+                ? 'default (AppBarStyle)'
+                : 'default (primary)',
+            index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setAppBarBackgroundSchemeColorLight(null);
+                    } else {
+                      controller.setAppBarBackgroundSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
         ] else ...<Widget>[
+          ListTile(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Dark mode elevation'),
+            subtitle: Slider(
+              min: -0.5,
+              max: 20,
+              divisions: 41,
+              label: controller.useFlexColorScheme
+                  ? controller.appBarElevationDark == null ||
+                          (controller.appBarElevationDark ?? -0.5) < 0
+                      ? 'default 0'
+                      : controller.appBarElevationDark!.toStringAsFixed(1)
+                  : controller.useMaterial3
+                      ? 'default 0'
+                      : 'default 4',
+              value: controller.useFlexColorScheme
+                  ? controller.appBarElevationDark ?? -0.5
+                  : -0.5,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller
+                          .setAppBarElevationDark(value < 0 ? null : value);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ELEV',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    controller.useFlexColorScheme
+                        ? controller.appBarElevationDark == null ||
+                                (controller.appBarElevationDark ?? -0.5) < 0
+                            ? 'default 0'
+                            : controller.appBarElevationDark!.toStringAsFixed(1)
+                        : controller.useMaterial3
+                            ? 'default 0'
+                            : 'default 4',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ListTileReveal(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Dark opacity'),
+            subtitleDense: true,
+            subtitle: const Text('To use themed opacity, try 85% to 98%\n'),
+          ),
+          ListTile(
+            title: Slider(
+              max: 100,
+              divisions: 100,
+              label: (controller.appBarOpacityDark * 100).toStringAsFixed(0),
+              value: controller.appBarOpacityDark * 100,
+              onChanged: controller.useFlexColorScheme
+                  ? (double value) {
+                      controller.setAppBarOpacityDark(value / 100);
+                    }
+                  : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    '${(controller.appBarOpacityDark * 100).toStringAsFixed(0)}'
+                    ' %',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
           ListTile(
             enabled: controller.useFlexColorScheme && controller.useSubThemes,
             title: const Text('Dark mode scrolled under elevation'),
@@ -418,7 +449,7 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -455,43 +486,23 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ),
-        ],
-        AdaptiveThemePopupMenu(
-          title: const Text('Platform adaptive M3 AppBar scroll '
-              'under tint removal'),
-          index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  controller.useMaterial3
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveAppBarScrollUnderOffDark(null);
-                  } else {
-                    controller.setAdaptiveAppBarScrollUnderOffDark(
-                        AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
-        ),
-        if (isLight)
-          ColorSchemePopupMenu(
-            title: const Text('Light custom background color'),
-            labelForDefault: controller.useFlexColorScheme
-                ? 'default (AppBarStyle)'
-                : 'default (primary)',
-            index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          AdaptiveThemePopupMenu(
+            title: const Text('Dark mode platform adaptive M3 AppBar scroll '
+                'under tint removal'),
+            index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
                 ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setAppBarBackgroundSchemeColorLight(null);
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveAppBarScrollUnderOffDark(null);
                     } else {
-                      controller.setAppBarBackgroundSchemeColorLight(
-                          SchemeColor.values[index]);
+                      controller.setAdaptiveAppBarScrollUnderOffDark(
+                          AdaptiveTheme.values[index]);
                     }
                   }
                 : null,
-          )
-        else
+          ),
           ColorSchemePopupMenu(
             title: const Text('Dark custom background color'),
             labelForDefault: controller.useFlexColorScheme
@@ -509,6 +520,7 @@ class AppBarSettings extends StatelessWidget {
                   }
                 : null,
           ),
+        ],
         const ListTileReveal(
           dense: true,
           title: Text('Background color'),
@@ -516,7 +528,7 @@ class AppBarSettings extends StatelessWidget {
               'color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but this offers more choices. '
-              'Selecting a color overrides used AppBarStyle, set it back '
+              'Selecting a color, overrides used AppBarStyle. Set it back '
               'to default to use AppBarStyle again. Using AppBarStyle also '
               'offers Scaffold background color as AppBar color, which when '
               'using FCS surface blends can be different from ColorScheme '
@@ -542,8 +554,9 @@ class AppBarSettings extends StatelessWidget {
                 TextSpan(
                     style: spanTextStyle,
                     text:
-                        '. The theming and defaults are also incorrect for the '
-                        'action icons in master channel, see '),
+                        '. This is fixed in 3.10 beta, but not in stable 3.7. '
+                        'The theming and defaults are also incorrect for the '
+                        'action icons, see '),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssue123943,
@@ -551,9 +564,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There are partial fixes to this and many other '
-                      'related issues in master channel, but they have not '
-                      'landed in Flutter 3.7.9 stable or earlier versions.',
+                  text: '. There is a fix in master, but it not available in '
+                      '3.10 beta or Flutter stable 3.7, or earlier versions.',
                 ),
               ],
             ),
@@ -599,7 +611,7 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -662,7 +674,7 @@ class AppBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -741,7 +753,7 @@ class AppBarSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7.0 to at least 3.7.9 the BottomAppBar '
+                  text: 'In Flutter 3.7 the BottomAppBar '
                       'color cannot be changed due to the issue described in ',
                 ),
                 LinkTextSpan(
@@ -751,7 +763,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. It has a fix in latest beta 3.10 and will land in '
+                      'next stable release.\n',
                 ),
               ],
             ),
@@ -761,5 +774,3 @@ class AppBarSettings extends StatelessWidget {
     );
   }
 }
-
-// _fcsFlutterIssue110951
