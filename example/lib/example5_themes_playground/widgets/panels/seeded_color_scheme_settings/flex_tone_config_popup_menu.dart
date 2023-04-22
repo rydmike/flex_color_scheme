@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/flex_tone.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [FlexTones] with a popup menu.
@@ -13,12 +14,16 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     required this.index,
     this.onChanged,
     this.title = '',
+    this.flexToneName = '',
+    this.flexToneSetup = '',
     this.contentPadding,
   });
   final int index;
   final ValueChanged<int>? onChanged;
   final String title;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final String flexToneName;
+  final String flexToneSetup;
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +60,25 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
             ),
           )
       ],
-      child: ListTile(
+      child: ListTileReveal(
         enabled: !disabled,
         contentPadding: contentPadding,
         title: Text('$title ${FlexTone.values[index].tone}'),
-        subtitle: Text(FlexTone.values[index].describe),
+        subtitle: Text(
+          '${FlexTone.values[index].describe}.\n'
+          '$flexToneName FlexTones setup has CAM16 chroma:\n'
+          '\n'
+          '$flexToneSetup\n'
+          '\n'
+          'With FlexTones, you can configure which tone from '
+          'generated palettes each color in the ColorScheme use. '
+          'Set limits on used CAM16 chroma values '
+          'for the three colors used as keys for primary, '
+          'secondary and tertiary TonalPalettes. '
+          'Here you can choose between the default Material-3 tone '
+          'mapping, plus eight pre-defined custom FlexTones setups. With '
+          'the API you can make your own FlexTones configurations.\n',
+        ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(

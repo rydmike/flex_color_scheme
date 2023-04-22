@@ -25,33 +25,33 @@ enum FlexTone {
   material(
     tone: 'Material 3',
     describe: 'Default Material 3 design tone map and chroma setup',
-    setup: 'Primary - Chroma from key color, but min 48\n'
-        'Secondary - Chroma set to 16\n'
-        'Tertiary - Chroma set to 24\n'
-        'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8',
+    setup: '  Primary - Chroma from key color, but min 48\n'
+        '  Secondary - Chroma set to 16\n'
+        '  Tertiary - Chroma set to 24\n'
+        '  Neutral - Chroma set to 4\n'
+        '  Neutral variant - Chroma set to 8',
     icon: Icons.blur_circular,
     shade: -5,
   ),
   soft(
     tone: 'Soft',
     describe: 'Softer and more earth like tones than Material 3 defaults',
-    setup: 'Primary - Chroma set to 30\n'
-        'Secondary - Chroma set to 14\n'
-        'Tertiary - Chroma set to 20\n'
-        'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8',
+    setup: '  Primary - Chroma set to 30\n'
+        '  Secondary - Chroma set to 14\n'
+        '  Tertiary - Chroma set to 20\n'
+        '  Neutral - Chroma set to 4\n'
+        '  Neutral variant - Chroma set to 8',
     icon: Icons.blur_on,
     shade: 2,
   ),
   vivid(
     tone: 'Vivid',
     describe: 'More Vivid colors than Material 3 defaults',
-    setup: 'Primary - Chroma from key color, but min 50\n'
-        'Secondary - Chroma from key color\n'
-        'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8',
+    setup: '  Primary - Chroma from key color, but min 50\n'
+        '  Secondary - Chroma from key color\n'
+        '  Tertiary - Chroma from key color\n'
+        '  Neutral - Chroma set to 4\n'
+        '  Neutral variant - Chroma set to 8',
     icon: Icons.tonality,
     shade: 6,
   ),
@@ -60,22 +60,22 @@ enum FlexTone {
     describe: 'Like Vivid, but with more colorful containers, onColors and '
         'surface tones. Creates a surface blend like effect, without '
         'using any blend level',
-    setup: 'Primary - Chroma from key color, but min 50\n'
-        'Secondary - Chroma from key color\n'
-        'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 5\n'
-        'Neutral variant - Chroma set to 10',
+    setup: '  Primary - Chroma from key color, but min 50\n'
+        '  Secondary - Chroma from key color\n'
+        '  Tertiary - Chroma from key color\n'
+        '  Neutral - Chroma set to 5\n'
+        '  Neutral variant - Chroma set to 10',
     icon: Icons.radio_button_checked,
     shade: 10,
   ),
   highContrast(
     tone: 'High contrast',
     describe: 'High contrast version, may be useful for accessibility',
-    setup: 'Primary - Chroma from key color, but min 65\n'
-        'Secondary - Chroma from key color, but min 55\n'
-        'Tertiary - Chroma from key color, but min 55\n'
-        'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8',
+    setup: '  Primary - Chroma from key color, but min 65\n'
+        '  Secondary - Chroma from key color, but min 55\n'
+        '  Tertiary - Chroma from key color, but min 55\n'
+        '  Neutral - Chroma set to 4\n'
+        '  Neutral variant - Chroma set to 8',
     icon: Icons.contrast,
     shade: 14,
   ),
@@ -83,22 +83,22 @@ enum FlexTone {
     tone: 'Ultra contrast',
     describe: 'Ultra high contrast version, useful for accessibility, '
         'less colorful than high contrast, especially dark mode',
-    setup: 'Primary - Chroma from key color, but min 60\n'
-        'Secondary - Chroma from key color, but min 70\n'
-        'Tertiary - Chroma from key color, but min 65\n'
-        'Neutral - Chroma set to 3\n'
-        'Neutral variant - Chroma set to 6',
+    setup: '  Primary - Chroma from key color, but min 60\n'
+        '  Secondary - Chroma from key color, but min 70\n'
+        '  Tertiary - Chroma from key color, but min 65\n'
+        '  Neutral - Chroma set to 3\n'
+        '  Neutral variant - Chroma set to 6',
     icon: Icons.lens,
     shade: 20,
   ),
   jolly(
     tone: 'Jolly',
     describe: 'Jolly color tones with more chroma and pop in them',
-    setup: 'Primary - Chroma from key color, but min 55\n'
-        'Secondary - Chroma from key color, but min 40\n'
-        'Tertiary - Chroma set to 40\n'
-        'Neutral - Chroma set to 6\n'
-        'Neutral variant - Chroma set to 10',
+    setup: '  Primary - Chroma from key color, but min 55\n'
+        '  Secondary - Chroma from key color, but min 40\n'
+        '  Tertiary - Chroma set to 40\n'
+        '  Neutral - Chroma set to 6\n'
+        '  Neutral variant - Chroma set to 10',
     icon: Icons.sunny,
     shade: 8,
   ),
@@ -106,22 +106,22 @@ enum FlexTone {
     tone: 'Vivid background',
     describe: 'Like Vivid surfaces, but with tone mapping for surface '
         'and background swapped',
-    setup: 'Primary - Chroma from key color, but min 50\n'
-        'Secondary - Chroma from key color\n'
-        'Tertiary - Chroma from key color\n'
-        'Neutral - Chroma set to 5\n'
-        'Neutral variant - Chroma set to 10',
+    setup: '  Primary - Chroma from key color, but min 50\n'
+        '  Secondary - Chroma from key color\n'
+        '  Tertiary - Chroma from key color\n'
+        '  Neutral - Chroma set to 5\n'
+        '  Neutral variant - Chroma set to 10',
     icon: Icons.panorama_wide_angle_select_rounded,
     shade: 10,
   ),
   oneHue(
     tone: 'One hue',
     describe: 'If only primary key color given, scheme uses only one hue',
-    setup: 'Primary - Chroma from key color, but min 55\n'
-        'Secondary - Chroma set to 26\n'
-        'Tertiary - Chroma set to 36, no Hue rotation\n'
-        'Neutral - Chroma set to 4\n'
-        'Neutral variant - Chroma set to 8',
+    setup: '  Primary - Chroma from key color, but min 55\n'
+        '  Secondary - Chroma set to 26\n'
+        '  Tertiary - Chroma set to 36, no Hue rotation\n'
+        '  Neutral - Chroma set to 4\n'
+        '  Neutral variant - Chroma set to 8',
     icon: Icons.looks_one_rounded,
     shade: 7,
   );

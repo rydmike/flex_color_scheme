@@ -51,16 +51,29 @@ class SeededColorSchemeSettings extends StatelessWidget {
         UseSeededColorSchemeSwitch(controller: controller, explainMore: false),
         FlexToneConfigPopupMenu(
           title: 'ColorScheme made with FlexTones',
+          flexToneName: _flexToneName,
+          flexToneSetup: _flexToneSetup,
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
           onChanged:
               controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ShowTonalPalette(controller: controller),
         ),
-        const SizedBox(height: 8),
+        ListTileReveal(
+          enabled: controller.useKeyColors,
+          title: const Text('Keep brand colors when using seeded scheme?'),
+          dense: true,
+          subtitle: const Text(
+            'With the switches on the colors below you can '
+            'lock primary, secondary, tertiary and their container colors to '
+            'their scheme input defined colors, instead of using the color '
+            'from the seeded tonal palette. The switches have separate '
+            'states for light and dark theme mode.\n',
+          ),
+        ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),
           child: SchemeColors(tc: controller),
@@ -95,18 +108,6 @@ class SeededColorSchemeSettings extends StatelessWidget {
               style: theme.textTheme.labelSmall,
             ),
           ),
-        ListTileReveal(
-          enabled: controller.useKeyColors,
-          title: const Text('Keep brand color when using seeds?'),
-          subtitleDense: true,
-          subtitle: const Text(
-            'With the switches on the colors above you can '
-            'lock primary, secondary, tertiary and their container colors to '
-            'their scheme input defined colors, instead of using the color '
-            'from the seeded tonal palette. The switches have separate '
-            'states for light and dark theme mode.\n',
-          ),
-        ),
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
@@ -114,7 +115,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
             subtitle: const Text(
               'Main colors are primary, secondary, tertiary, '
               'error and their container colors. Using black and white '
-              'as on colors on the main colors may improve '
+              'as onColors on the main colors may improve '
               'contrast.\n',
             ),
             value: controller.onMainsUseBWLight && controller.useKeyColors,
@@ -128,7 +129,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
             subtitle: const Text(
               'Surfaces are background, surface, '
               'surfaceVariant and inverseSurface colors. '
-              'Using black and white as on colors on surfaces '
+              'Using black and white as onColors on surfaces '
               'may improve contrast.\n',
             ),
             value: controller.onSurfacesUseBWLight && controller.useKeyColors,
@@ -143,7 +144,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
             subtitle: const Text(
               'Main colors are primary, secondary, tertiary, '
               'error and their container colors. Using black and white '
-              'as on colors on the main colors may improve '
+              'as onColors on the main colors may improve '
               'contrast.\n',
             ),
             value: controller.onMainsUseBWDark && controller.useKeyColors,
@@ -156,7 +157,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
             subtitle: const Text(
               'Surfaces are background, surface, '
               'surfaceVariant and inverseSurface colors. '
-              'Using black and white as on colors on surfaces '
+              'Using black and white as onColors on surfaces '
               'may improve contrast.\n',
             ),
             value: controller.onSurfacesUseBWDark && controller.useKeyColors,
@@ -182,27 +183,6 @@ class SeededColorSchemeSettings extends StatelessWidget {
                       controller.schemeIndex == AppColor.schemes.length - 1
                   ? controller.setUseDarkColorsForSeed
                   : null),
-        const ListTileReveal(
-          title: Text('FlexTones'),
-          subtitleDense: true,
-          subtitle: Text(
-            'With FlexTones, you can configure which tone from '
-            'generated palettes each color in the ColorScheme use. '
-            'Set limits on used CAM16 chroma values '
-            'for the three colors used as keys for primary, '
-            'secondary and tertiary TonalPalettes. '
-            'In this app you can choose between the default Material-3 tone '
-            'mapping, plus eight pre-defined custom FlexTones setups. With '
-            'the API you can make your own FlexTones configurations.',
-          ),
-        ),
-        ListTile(
-          dense: true,
-          title: Text('$_flexToneName'
-              ' FlexTones setup has CAM16 chroma:'),
-          subtitle: Text(_flexToneSetup),
-        ),
-        const SizedBox(height: 8),
       ],
     );
   }
