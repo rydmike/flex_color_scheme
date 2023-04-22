@@ -1703,14 +1703,19 @@ class FlexSubThemes {
   ///
   /// Corner [radius] defaults to [kDialogRadius] 28dp.
   static DatePickerThemeData datePickerTheme({
-    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-    required final ColorScheme colorScheme,
-
-    /// A completely custom color for your main [DialogTheme] color.
+    /// Dialog background color.
     ///
-    /// If null and [backgroundSchemeColor] are also not
-    /// defined, this dialog defaults to using [ColorScheme.surface] .
+    /// Defaults to null and gets default via Dialog's default null theme
+    /// behavior.
+    ///
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
+
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the dialog
     /// background color.
@@ -1756,9 +1761,10 @@ class FlexSubThemes {
   }) {
     // final bool useM3 = useMaterial3 ?? false;
 
-    final Color? background = (backgroundSchemeColor == null)
-        ? backgroundColor // might be null, then SDK theme defaults.
-        : schemeColor(backgroundSchemeColor, colorScheme);
+    final Color? background =
+        (colorScheme == null || backgroundSchemeColor == null)
+            ? backgroundColor // might be null, then SDK theme defaults.
+            : schemeColor(backgroundSchemeColor, colorScheme);
 
     return DatePickerThemeData(
       backgroundColor: background,
@@ -1791,8 +1797,8 @@ class FlexSubThemes {
     ///
     /// Can be used to make a custom themed dialog with own background color,
     /// even after the [ThemeData.dialogBackgroundColor] property is
-    /// is deprecated in Flutter SDK. Which it will be in 2022, see
-    /// [issue](https://github.com/flutter/flutter/issues/91772).
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
 
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].

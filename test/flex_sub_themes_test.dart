@@ -1259,6 +1259,120 @@ void main() {
       );
     });
   });
+  group('WITH: FlexSubTheme.datePickerTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes DatePicker tests
+    // -------------------------------------------------------------------------
+    test(
+        'Dialog FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      expect(
+        FlexSubThemes.datePickerTheme(),
+        equals(
+          const DatePickerThemeData(
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.2 background-based-a: GIVEN a '
+        'FlexSubTheme.datePickerTheme with no '
+        'colorScheme, but with backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
+      expect(
+        FlexSubThemes.datePickerTheme(
+            colorScheme: null,
+            backgroundColor: const Color(0xFF343476),
+            backgroundSchemeColor: SchemeColor.tertiary),
+        equals(
+          const DatePickerThemeData(
+            backgroundColor: Color(0xFF343476),
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.3 background-based-b: GIVEN a '
+        'FlexSubTheme.datePickerTheme '
+        'with no backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: null,
+        ),
+        equals(
+          const DatePickerThemeData(
+            backgroundColor: Color(0xFFDDDDDD),
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'with backgroundSchemeColor and no backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: null,
+          backgroundSchemeColor: SchemeColor.tertiary,
+        ),
+        equals(
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.5 custom: GIVEN a custom FlexSubTheme.datePickerTheme '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      expect(
+        FlexSubThemes.datePickerTheme(
+          elevation: 10,
+          radius: 6,
+        ),
+        equals(
+          const DatePickerThemeData(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+  });
   group('WITH: FlexSubTheme.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
