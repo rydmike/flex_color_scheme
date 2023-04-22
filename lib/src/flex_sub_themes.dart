@@ -5235,30 +5235,34 @@ class FlexSubThemes {
         ? selectedColor
         : borderColor;
 
+    final Color disabledForeground = unselectedSchemeColor == null
+        ? colorScheme.onSurface
+        : onUnselectedColor;
+
     return SegmentedButtonThemeData(
       style: ButtonStyle(
-        // TODO(rydmike): Report issue, minimumSize property does nothing.
+        // TODO(rydmike): Issue, minimumSize property does nothing.
+        // https://github.com/flutter/flutter/issues/121493
         minimumSize: ButtonStyleButton.allOrNull<Size>(
             minButtonSize ?? (useM3 ? null : kButtonMinSize)),
         padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return null;
+            return unselectedSchemeColor == null ? null : unselectedColor;
           }
           if (states.contains(MaterialState.selected)) {
             return selectedColor;
           }
-          // TODO(rydmike): Report Flutter transparency bug on SegmentedButton.
           return unselectedSchemeColor == null ? null : unselectedColor;
         }),
         foregroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             if (tintDisable) {
-              return tintedDisable(colorScheme.onSurface, disableTint);
+              return tintedDisable(disabledForeground, disableTint);
             }
-            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+            return disabledForeground.withAlpha(kAlphaDisabled);
           }
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
@@ -5275,7 +5279,8 @@ class FlexSubThemes {
             return onUnselectedColor;
           }
         }),
-        // TODO(Rydmike): Report Flutter SDK SegmentedButton overlayColor bug.
+        // TODO(Rydmike): Issue: Flutter SDK SegmentedButton overlayColor bug.
+        // https://github.com/flutter/flutter/issues/123308
         // SegmentedButton triggers overlay 3 times in Selected mode, 1st
         // time it is selected, next time it is no longer selected,
         // even it if actually is. This results is that we never see the

@@ -1,6 +1,6 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
-version: 7.0.4
+version: 7.1.0-dev.1
 homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues
@@ -46,13 +46,17 @@ dependencies:
   # import the package.
   meta: ^1.8.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # Color utilities by Google (material.io).
   #
-  # Used to compute and create Tonal Palette theme colors.
+  # Used to compute and create Tonal Palette theme colors in tests.
+  # Chore: consider removing those tests, they are already covered by
+  # tests in flex_seed_scheme.
+  #
   # Flutter SDK from 2.10.0 stable also depends on this package.
   #
   # Flutter stable 3.7 uses 0.2.0, and Flutter beta 3.10.x and master are

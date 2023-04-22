@@ -8,8 +8,8 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-class ToggleButtonsSettings extends StatelessWidget {
-  const ToggleButtonsSettings(this.controller, {super.key});
+class SegmentedButtonsSettings extends StatelessWidget {
+  const SegmentedButtonsSettings(this.controller, {super.key});
   final ThemeController controller;
 
   static final Uri _segmentNotTransparentIssue123292 = Uri(
@@ -72,9 +72,7 @@ class ToggleButtonsSettings extends StatelessWidget {
     final String segmentedUnselectedForegroundDefault = controller
                 .segmentedButtonUnselectedSchemeColor ==
             null
-        ? controller.useSubThemes && controller.useFlexColorScheme
-            ? 'default (onSurface) (M3 spec)'
-            : 'default (primary) (Flutter M3 bug, correct spec is onSurface)'
+        ? 'default (onSurface)'
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.segmentedButtonUnselectedSchemeColor!).index].name})';
 
@@ -182,7 +180,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -232,7 +230,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -294,7 +292,7 @@ class ToggleButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected button background color'),
-          labelForDefault: 'default (surface)',
+          labelForDefault: 'default (transparent)',
           index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -376,7 +374,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -426,7 +424,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -468,7 +466,8 @@ class ToggleButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', min height or size cannot be set, ',
+                  text: ', this is fixed in beta 3.10. Min height or size '
+                      'cannot be set, ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -496,7 +495,7 @@ class ToggleButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: ', this is fixed in beta 3.10.\n',
                 ),
               ],
             ),

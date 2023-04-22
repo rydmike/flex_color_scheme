@@ -23,10 +23,10 @@ class ShowcaseCupertino extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: const <Widget>[
+      children: <Widget>[
         SizedBox(height: 8),
         CupertinoButtonShowcase(),
       ],

@@ -186,8 +186,8 @@ class ThemeColorsSettings extends StatelessWidget {
             subtitleDense: true,
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
-              'Material 3 mode secondary and tertiary swap, is done '
-              'first when used.\n',
+              'Material 3 mode secondary and tertiary swap is done '
+              'first, when it is used.\n',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme

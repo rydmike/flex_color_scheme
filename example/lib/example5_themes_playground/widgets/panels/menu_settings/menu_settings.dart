@@ -152,9 +152,9 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
@@ -202,7 +202,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -252,7 +252,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -318,9 +318,9 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
@@ -367,7 +367,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -413,7 +413,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -528,7 +528,7 @@ class MenuSettings extends StatelessWidget {
                           : null,
                 ),
                 trailing: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  padding: const EdgeInsetsDirectional.only(end: 5),
                   child: SizedBox(
                     width: 58,
                     child: Column(
@@ -648,7 +648,7 @@ class MenuSettings extends StatelessWidget {
                           : null,
                 ),
                 trailing: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  padding: const EdgeInsetsDirectional.only(end: 5),
                   child: SizedBox(
                     width: 58,
                     child: Column(
@@ -784,7 +784,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -828,9 +828,9 @@ class MenuSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The selected and focused style of and item found in '
-                      'the is not themed. This is a bug in Flutter, for more '
-                      'information see ',
+                  text: 'The selected and focused style of any item found in '
+                      'the DropdownMenu is not themed. This is a bug in '
+                      'Flutter SDK. For more information see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -848,7 +848,7 @@ class MenuSettings extends StatelessWidget {
                       'on e.g. icons with same color change. This issue '
                       'applies to all menu types. To see it, use defaults and '
                       'set highlighted menu item background to primary. For '
-                      'more information see Flutter.\n',
+                      'more information see Flutter ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -857,7 +857,9 @@ class MenuSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.',
+                  text: '. The issue also contains links to other issues '
+                      'related to the DropdownMenu, that might be of '
+                      'interest.\n',
                 ),
               ],
             ),
@@ -941,7 +943,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -987,7 +989,7 @@ class MenuSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[

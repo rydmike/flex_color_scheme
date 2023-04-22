@@ -89,8 +89,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
       ],
       child: ListTile(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

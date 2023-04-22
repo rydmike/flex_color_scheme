@@ -43,17 +43,17 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'In fact all configs are just starting points for you to '
         'explore and modify further.\n'
         '\n'
-        'In a two panels view, try the Theme simulator as 2nd panel '
-        'with the official Material 3 demo app, using 11" or 12" iPad, '
+        'In two panels view, try the Theme simulator as 2nd panel '
+        'with the official Material 3 demo app. Use the 11" or 12" iPad, '
         'to experience how these examples impact the design of the app '
-        'and components.\n',
+        'and Material components.\n',
   ),
   ThemeTopic(
     heading: 'Theme simulator',
     buttonLabel: 'Theme\nsimulator',
     icon: Icons.phone_iphone,
     info: 'Use the theme simulator and its devices in a side view '
-        'as you change theme settings, and see how the changes '
+        'as you change theme settings, to see how the changes '
         'modify the look and feel of included demo apps.\n',
   ),
   ThemeTopic(
@@ -76,21 +76,22 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
-    info: "FlexColorScheme's Material 2 mode component themes are very "
-        'opinionated. Components look almost like Material 3 mode components, '
+    info: "FlexColorScheme's Material 2 mode component themes are opinionated. "
+        'They look almost like Material 3 mode default components, '
         'but done in Material 2 mode.\n'
         '\n'
         'When using Material 3, there are only a few nuance differences '
         'compared to default M3 styles, plus some minor fixes to a few '
-        'Flutter Material 3 specification deviations.\n',
+        'Flutter Material 3 specification deviations, that Flutter may also '
+        'fix in later versions.\n',
   ),
   ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
     info: 'Theme colors show the color values defined for the selected '
-        'color scheme. You can use any predefined scheme as a starting point '
-        'for your own custom colors.\n',
+        'color scheme. You can also use any predefined scheme as a starting '
+        'point for your own custom colors.\n',
   ),
   ThemeTopic(
     heading: 'Seeded ColorScheme',
@@ -142,7 +143,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.pin_outlined,
     info: 'Text fields allow users to enter text into a UI. They typically '
         'appear in forms and dialogs. TextField theming is done via the '
-        'InputDecorator theme, it is a fairly complex theme with mixed '
+        'InputDecorator theme. It is a very complex theme, with mixed '
         'legacy and MaterialState properties.\n',
   ),
   ThemeTopic(
@@ -169,7 +170,9 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'option, where you can choose if it should always fit in '
         'your AppBar, regardless of what theme you set for the AppBar. '
         'Usually you want this, but sometimes surface might be preferred '
-        'or the Flutter SDK default style. In M2 mode Flutter default '
+        'or the Flutter SDK default style.\n'
+        '\n'
+        'In M2 mode Flutter default '
         'does not work well on surface colored AppBar, and in M3 mode '
         'the default does not work with primary colored AppBar. By using '
         'the FCS forAppBar style, the TabBar always fits with selected '
@@ -177,7 +180,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     heading: 'BottomNavigationBar',
-    buttonLabel: 'Bottom\nNavigationBar',
+    buttonLabel: 'Bottom\nNavBar',
     icon: Icons.video_label,
     info: 'Navigation bars offer a persistent and convenient way to switch '
         'between primary destinations in an app. '

@@ -40,14 +40,14 @@ class App {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '7';
-  static const String versionMinor = '0';
-  static const String versionPatch = '4';
+  static const String versionMinor = '1';
+  static const String versionPatch = '0-dev.1 (beta)';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.7.12 (html renderer)';
+  static const String flutterVersion = 'beta 3.10.0-1.3.pre (skia)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';

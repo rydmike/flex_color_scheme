@@ -58,8 +58,8 @@ enum FlexTone {
   vividSurfaces(
     tone: 'Vivid surfaces',
     describe: 'Like Vivid, but with more colorful containers, onColors and '
-        'surface tones. Creates alpha blend like effect without '
-        'any blend level',
+        'surface tones. Creates a surface blend like effect, without '
+        'using any blend level',
     setup: 'Primary - Chroma from key color, but min 50\n'
         'Secondary - Chroma from key color\n'
         'Tertiary - Chroma from key color\n'

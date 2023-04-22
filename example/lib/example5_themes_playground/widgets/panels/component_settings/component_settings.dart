@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -19,10 +20,19 @@ class ComponentSettings extends StatelessWidget {
   const ComponentSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue117755 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/117755',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -36,11 +46,33 @@ class ComponentSettings extends StatelessWidget {
         SwitchListTileReveal(
           title: const Text('Use M2 style divider in M3'),
           subtitleDense: true,
-          subtitle: const Text('In Material-3 the primary color tinted '
-              'outlineVariant Divider may not fit on all background colors. '
-              'The Material-2 style based on black or white, with opacity, '
-              'always fits. It is also '
-              'less prominent than the M3 style and may be preferred.\n'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Material-3 the primary color tinted outlineVariant '
+                      'Divider may not fit on all background colors. The '
+                      'Material-2 style based on black or white, with opacity, '
+                      'always fits. It is also less prominent than the M3 '
+                      'style and may be preferred. In Flutter 3.3 to at least '
+                      '3.10, the Divider color also has theming '
+                      'inconsistencies, it gets different colors depending on '
+                      'used ThemeData constructor. For more information see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue117755,
+                  text: 'issue #117755',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. FCS fixes this issue, but if you do not use FCS '
+                      'it is a theming issue to aware of.\n',
+                ),
+              ],
+            ),
+          ),
           value: controller.useM2StyleDividerInM3 &&
               controller.useSubThemes &&
               controller.useMaterial3 &&
@@ -85,7 +117,7 @@ class ComponentSettings extends StatelessWidget {
             'Material 3 components implement their own interaction '
             'effects. This setting also styles all of them on component theme '
             'level. Most components are covered, a few cases may not be fully '
-            'supported due to lacking support in the Flutter framework. Their '
+            'supported due to lack of support in the Flutter framework. Their '
             'later inclusion in this setting will be reported as new features, '
             'not as style breaking.\n',
           ),
@@ -104,7 +136,7 @@ class ComponentSettings extends StatelessWidget {
           subtitle: const Text(
             'By default, the border radius on all Material '
             'UI components in FCS follow the Material-3 design guide in M3 '
-            'mode. The defaults used by FCS for M2 mode are also mostly M3 '
+            'mode. The defaults used by FCS for M2 mode, are also mostly M3 '
             'inspired.\n'
             '\n'
             'Radius specification in M3 varies per component. '
@@ -153,7 +185,7 @@ class ComponentSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -242,7 +274,7 @@ class ComponentSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -310,7 +342,7 @@ class ComponentSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -366,7 +398,7 @@ class ComponentSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
