@@ -5319,6 +5319,263 @@ void main() {
           theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
       expect(theme.colorScheme.surfaceTint, equals(Colors.red));
     });
+    test(
+        'FCS10.2: GIVEN a raw default FlexColorScheme test dialog override '
+        'color and default.', () {
+      final ThemeData theme = const FlexColorScheme(
+        primary: Colors.red,
+        dialogBackground: Colors.blue,
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(Colors.white));
+      expect(theme.colorScheme.primaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onPrimaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.secondary, equals(Colors.red));
+      expect(theme.colorScheme.onSecondary, equals(Colors.white));
+      expect(theme.colorScheme.secondaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onSecondaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.tertiary, equals(Colors.red));
+      expect(theme.colorScheme.onTertiary, equals(Colors.white));
+      expect(theme.colorScheme.tertiaryContainer, equals(Colors.red));
+      expect(theme.colorScheme.onTertiaryContainer, equals(Colors.white));
+      expect(theme.colorScheme.error, equals(FlexColor.materialLightError));
+      expect(theme.colorScheme.onError, equals(Colors.white));
+      expect(theme.colorScheme.errorContainer,
+          equals(FlexColor.lightErrorContainer(FlexColor.materialLightError)));
+      expect(theme.colorScheme.onErrorContainer, equals(Colors.black));
+      expect(theme.colorScheme.surface, equals(FlexColor.materialLightSurface));
+      expect(theme.colorScheme.onSurface, equals(Colors.black));
+      expect(theme.colorScheme.background,
+          equals(FlexColor.materialLightBackground));
+      expect(theme.colorScheme.onBackground, equals(Colors.black));
+      expect(theme.scaffoldBackgroundColor,
+          equals(FlexColor.materialLightBackground));
+      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      expect(theme.colorScheme.surfaceTint, equals(Colors.red));
+    });
+    test(
+        'FCS10.3: GIVEN a raw default FlexColorScheme with colorScheme, '
+        'primary and dialog override '
+        'EXPECT colorscheme, and overridden primary and dialog colors.', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
+      final ThemeData theme = FlexColorScheme(
+        colorScheme: colorScheme,
+        primary: Colors.red,
+        dialogBackground: Colors.blue,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(colorScheme.onPrimary));
+      expect(theme.colorScheme.primaryContainer,
+          equals(colorScheme.primaryContainer));
+      expect(theme.colorScheme.onPrimaryContainer,
+          equals(colorScheme.onPrimaryContainer));
+      expect(theme.colorScheme.secondary, equals(colorScheme.secondary));
+      expect(theme.colorScheme.onSecondary, equals(colorScheme.onSecondary));
+      expect(theme.colorScheme.secondaryContainer,
+          equals(colorScheme.secondaryContainer));
+      expect(theme.colorScheme.onSecondaryContainer,
+          equals(colorScheme.onSecondaryContainer));
+      expect(theme.colorScheme.tertiary, equals(colorScheme.tertiary));
+      expect(theme.colorScheme.onTertiary, equals(colorScheme.onTertiary));
+      expect(theme.colorScheme.tertiaryContainer,
+          equals(colorScheme.tertiaryContainer));
+      expect(theme.colorScheme.onTertiaryContainer,
+          equals(colorScheme.onTertiaryContainer));
+      expect(theme.colorScheme.error, equals(colorScheme.error));
+      expect(theme.colorScheme.onError, equals(colorScheme.onError));
+      expect(
+          theme.colorScheme.errorContainer, equals(colorScheme.errorContainer));
+      expect(theme.colorScheme.onErrorContainer,
+          equals(colorScheme.onErrorContainer));
+      expect(theme.colorScheme.surface, equals(colorScheme.surface));
+      expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
+      expect(theme.colorScheme.background, equals(colorScheme.background));
+      expect(theme.colorScheme.onBackground, equals(colorScheme.onBackground));
+      expect(theme.scaffoldBackgroundColor, equals(colorScheme.background));
+      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
+      //
+      expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
+      expect(theme.datePickerTheme.backgroundColor, equals(Colors.blue));
+      expect(theme.timePickerTheme.backgroundColor, equals(Colors.blue));
+    });
+    test(
+        'FCS10.4: GIVEN a raw default FlexColorScheme with colorScheme, '
+        'primary and dialog override and dialog sub theme scheme, '
+        'EXPECT colorscheme, and overridden primary and dialog scheme colors.',
+        () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
+      final ThemeData theme = FlexColorScheme(
+        colorScheme: colorScheme,
+        primary: Colors.red,
+        dialogBackground: Colors.blue,
+        subThemesData: const FlexSubThemesData(
+            dialogBackgroundSchemeColor: SchemeColor.primaryContainer),
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(colorScheme.onPrimary));
+      expect(theme.colorScheme.primaryContainer,
+          equals(colorScheme.primaryContainer));
+      expect(theme.colorScheme.onPrimaryContainer,
+          equals(colorScheme.onPrimaryContainer));
+      expect(theme.colorScheme.secondary, equals(colorScheme.secondary));
+      expect(theme.colorScheme.onSecondary, equals(colorScheme.onSecondary));
+      expect(theme.colorScheme.secondaryContainer,
+          equals(colorScheme.secondaryContainer));
+      expect(theme.colorScheme.onSecondaryContainer,
+          equals(colorScheme.onSecondaryContainer));
+      expect(theme.colorScheme.tertiary, equals(colorScheme.tertiary));
+      expect(theme.colorScheme.onTertiary, equals(colorScheme.onTertiary));
+      expect(theme.colorScheme.tertiaryContainer,
+          equals(colorScheme.tertiaryContainer));
+      expect(theme.colorScheme.onTertiaryContainer,
+          equals(colorScheme.onTertiaryContainer));
+      expect(theme.colorScheme.error, equals(colorScheme.error));
+      expect(theme.colorScheme.onError, equals(colorScheme.onError));
+      expect(
+          theme.colorScheme.errorContainer, equals(colorScheme.errorContainer));
+      expect(theme.colorScheme.onErrorContainer,
+          equals(colorScheme.onErrorContainer));
+      expect(theme.colorScheme.surface, equals(colorScheme.surface));
+      expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
+      expect(theme.colorScheme.background, equals(colorScheme.background));
+      expect(theme.colorScheme.onBackground, equals(colorScheme.onBackground));
+      expect(theme.scaffoldBackgroundColor, equals(colorScheme.background));
+      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
+      //
+      expect(theme.dialogTheme.backgroundColor,
+          equals(colorScheme.primaryContainer));
+      expect(theme.datePickerTheme.backgroundColor,
+          equals(colorScheme.primaryContainer));
+      expect(theme.timePickerTheme.backgroundColor,
+          equals(colorScheme.primaryContainer));
+    });
+    test(
+        'FCS10.5: GIVEN a raw default FlexColorScheme.light with colorScheme, '
+        'primary and dialog over ride as well as FlexColor '
+        'EXPECT colorscheme, and overridden primary and dialog colors.', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
+      final ThemeData theme = FlexColorScheme.light(
+        colorScheme: colorScheme,
+        scheme: FlexScheme.ebonyClay,
+        primary: Colors.red,
+        dialogBackground: Colors.blue,
+        subThemesData: const FlexSubThemesData(),
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(colorScheme.onPrimary));
+      expect(theme.colorScheme.primaryContainer,
+          equals(colorScheme.primaryContainer));
+      expect(theme.colorScheme.onPrimaryContainer,
+          equals(colorScheme.onPrimaryContainer));
+      expect(theme.colorScheme.secondary, equals(colorScheme.secondary));
+      expect(theme.colorScheme.onSecondary, equals(colorScheme.onSecondary));
+      expect(theme.colorScheme.secondaryContainer,
+          equals(colorScheme.secondaryContainer));
+      expect(theme.colorScheme.onSecondaryContainer,
+          equals(colorScheme.onSecondaryContainer));
+      expect(theme.colorScheme.tertiary, equals(colorScheme.tertiary));
+      expect(theme.colorScheme.onTertiary, equals(colorScheme.onTertiary));
+      expect(theme.colorScheme.tertiaryContainer,
+          equals(colorScheme.tertiaryContainer));
+      expect(theme.colorScheme.onTertiaryContainer,
+          equals(colorScheme.onTertiaryContainer));
+      expect(theme.colorScheme.error, equals(colorScheme.error));
+      expect(theme.colorScheme.onError, equals(colorScheme.onError));
+      expect(
+          theme.colorScheme.errorContainer, equals(colorScheme.errorContainer));
+      expect(theme.colorScheme.onErrorContainer,
+          equals(colorScheme.onErrorContainer));
+      expect(theme.colorScheme.surface, equals(colorScheme.surface));
+      expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
+      expect(theme.colorScheme.background, equals(colorScheme.background));
+      expect(theme.colorScheme.onBackground, equals(colorScheme.onBackground));
+      expect(theme.scaffoldBackgroundColor, equals(colorScheme.background));
+      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
+      //
+      expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
+      expect(theme.datePickerTheme.backgroundColor, equals(Colors.blue));
+      expect(theme.timePickerTheme.backgroundColor, equals(Colors.blue));
+    });
+    test(
+        'FCS10.6: GIVEN a raw default FlexColorScheme.light with colorScheme, '
+        'primary and dialog override and dialog sub theme scheme, as well '
+        'as FlexColor '
+        'EXPECT colorscheme, and overridden primary and dialog scheme colors.',
+        () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF345234),
+        brightness: Brightness.light,
+      );
+      final ThemeData theme = FlexColorScheme.light(
+        colorScheme: colorScheme,
+        scheme: FlexScheme.ebonyClay,
+        primary: Colors.red,
+        dialogBackground: Colors.blue,
+        subThemesData: const FlexSubThemesData(
+            dialogBackgroundSchemeColor: SchemeColor.surfaceVariant),
+      ).toTheme;
+      expect(theme.brightness, equals(Brightness.light));
+      expect(theme.primaryColor, equals(Colors.red));
+      expect(theme.colorScheme.primary, equals(Colors.red));
+      expect(theme.colorScheme.onPrimary, equals(colorScheme.onPrimary));
+      expect(theme.colorScheme.primaryContainer,
+          equals(colorScheme.primaryContainer));
+      expect(theme.colorScheme.onPrimaryContainer,
+          equals(colorScheme.onPrimaryContainer));
+      expect(theme.colorScheme.secondary, equals(colorScheme.secondary));
+      expect(theme.colorScheme.onSecondary, equals(colorScheme.onSecondary));
+      expect(theme.colorScheme.secondaryContainer,
+          equals(colorScheme.secondaryContainer));
+      expect(theme.colorScheme.onSecondaryContainer,
+          equals(colorScheme.onSecondaryContainer));
+      expect(theme.colorScheme.tertiary, equals(colorScheme.tertiary));
+      expect(theme.colorScheme.onTertiary, equals(colorScheme.onTertiary));
+      expect(theme.colorScheme.tertiaryContainer,
+          equals(colorScheme.tertiaryContainer));
+      expect(theme.colorScheme.onTertiaryContainer,
+          equals(colorScheme.onTertiaryContainer));
+      expect(theme.colorScheme.error, equals(colorScheme.error));
+      expect(theme.colorScheme.onError, equals(colorScheme.onError));
+      expect(
+          theme.colorScheme.errorContainer, equals(colorScheme.errorContainer));
+      expect(theme.colorScheme.onErrorContainer,
+          equals(colorScheme.onErrorContainer));
+      expect(theme.colorScheme.surface, equals(colorScheme.surface));
+      expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
+      expect(theme.colorScheme.background, equals(colorScheme.background));
+      expect(theme.colorScheme.onBackground, equals(colorScheme.onBackground));
+      expect(theme.scaffoldBackgroundColor, equals(colorScheme.background));
+      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
+      //
+      expect(theme.dialogTheme.backgroundColor,
+          equals(colorScheme.surfaceVariant));
+      expect(theme.datePickerTheme.backgroundColor,
+          equals(colorScheme.surfaceVariant));
+      expect(theme.timePickerTheme.backgroundColor,
+          equals(colorScheme.surfaceVariant));
+    });
   });
 }
 

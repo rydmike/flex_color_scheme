@@ -105,6 +105,7 @@ import 'flex_sub_themes.dart';
 /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+/// * [DatePickerThemeData] for [DatePicker] via [FlexSubThemes.datePickerTheme]
 /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via

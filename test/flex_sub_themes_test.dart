@@ -1266,8 +1266,11 @@ void main() {
     test(
         'Dialog FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.datePickerTheme(),
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+        ),
         equals(
           const DatePickerThemeData(
             elevation: 6,
@@ -1285,16 +1288,17 @@ void main() {
         'FlexSubTheme.datePickerTheme with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
-            colorScheme: null,
+            colorScheme: colorScheme,
             backgroundColor: const Color(0xFF343476),
             backgroundSchemeColor: SchemeColor.tertiary),
         equals(
-          const DatePickerThemeData(
-            backgroundColor: Color(0xFF343476),
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
             elevation: 6,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
               ),
@@ -1355,8 +1359,10 @@ void main() {
     test(
         'Dialog FST9a.5 custom: GIVEN a custom FlexSubTheme.datePickerTheme '
         'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
       expect(
         FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
           elevation: 10,
           radius: 6,
         ),
@@ -8622,7 +8628,6 @@ void main() {
       expect(
         FlexSubThemes.timePickerTheme(
           colorScheme: colorScheme,
-          backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(filled: true),
           elementRadius: 12,

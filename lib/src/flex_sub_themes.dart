@@ -184,6 +184,7 @@ enum SchemeColor {
 /// * [CardTheme] for [Card] via [cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
+/// * [DatePickerThemeData] for [DatePicker] via [datePickerTheme].
 /// * [DialogTheme] for [Dialog] via [dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via [dropdownMenuTheme].
@@ -1703,19 +1704,22 @@ class FlexSubThemes {
   ///
   /// Corner [radius] defaults to [kDialogRadius] 28dp.
   static DatePickerThemeData datePickerTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
     /// Dialog background color.
     ///
-    /// Defaults to null and gets default via Dialog's default null theme
-    /// behavior.
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
+    ///
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
     ///
     /// Can be used to make a custom themed dialog with own background color,
     /// even after the [ThemeData.dialogBackgroundColor] property is
     /// is deprecated in Flutter SDK. See
     /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
-
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the dialog
     /// background color.
@@ -1728,6 +1732,15 @@ class FlexSubThemes {
     /// color of this dialog to other standard dialogs. It sets it via
     /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
+
+    /// Overrides the header's default background fill color.
+    ///
+    /// The dialog's header displays the currently selected date.
+    ///
+    /// Default to primary in M2 and to surface in M3.
+    ///
+    /// The foreground color will use the default contrast pair.
+    final SchemeColor? headerBackgroundSchemeColor,
 
     /// Dialog elevation.
     ///
@@ -1746,25 +1759,10 @@ class FlexSubThemes {
 
     /// Overrides the default value of [Dialog.surfaceTintColor].
     final Color? surfaceTintColor,
-
-    /// A temporary flag used to opt-in to Material 3 features.
-    ///
-    /// If set to true, the theme will use Material3 default styles when
-    /// properties are undefined, if false defaults will use FlexColorScheme's
-    /// own opinionated default values.
-    ///
-    /// The M2/M3 defaults will only be used for properties that are not
-    /// defined, if defined they keep their defined values.
-    ///
-    /// If undefined, defaults to false.
-    // final bool? useMaterial3,
   }) {
-    // final bool useM3 = useMaterial3 ?? false;
-
-    final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
-            ? backgroundColor // might be null, then SDK theme defaults.
-            : schemeColor(backgroundSchemeColor, colorScheme);
+    final Color? background = backgroundSchemeColor == null
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : schemeColor(backgroundSchemeColor, colorScheme);
 
     return DatePickerThemeData(
       backgroundColor: background,
@@ -1790,10 +1788,16 @@ class FlexSubThemes {
   /// The default radius follows Material M3 guide
   /// [specification](https://m3.material.io/components/dialogs/specs).
   static DialogTheme dialogTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    final ColorScheme? colorScheme,
+
     /// Dialog background color.
     ///
-    /// Defaults to null and gets default via Dialog's default null theme
-    /// behavior.
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
+    ///
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
     ///
     /// Can be used to make a custom themed dialog with own background color,
     /// even after the [ThemeData.dialogBackgroundColor] property is
@@ -1801,21 +1805,16 @@ class FlexSubThemes {
     /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
 
-    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-    final ColorScheme? colorScheme,
-
-    /// Selects which color from the passed in [colorScheme] to use as
-    /// dialog background color.
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If not defined, then the passed in [backgroundColor] will be used,
+    /// which may be null too and dialog then falls back to Flutter SDK default
+    /// value for TimePickerDialog, which is [colorScheme.surface].
     ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to Flutter SDK dialog background color
-    /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.background].
-    ///
-    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
-    /// its default as [SchemeColor.surface].
+    /// FlexColorScheme sub-theming uses this property to match the background
+    /// color of this dialog to other standard dialogs. It sets it via
+    /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
     /// Corner radius of the dialog.
@@ -1851,7 +1850,7 @@ class FlexSubThemes {
     final EdgeInsetsGeometry? actionsPadding,
   }) {
     final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
+        colorScheme == null || backgroundSchemeColor == null
             ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
@@ -6337,10 +6336,18 @@ class FlexSubThemes {
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
 
-    /// A completely custom color for your main [DialogTheme] color.
+    /// Dialog background color.
     ///
-    /// If null and [backgroundSchemeColor] are also not
-    /// defined, this dialog defaults to using [ColorScheme.surface] .
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
+    ///
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
+    ///
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
 
     /// Selects which color from the passed in colorScheme to use as the dialog
@@ -6412,7 +6419,7 @@ class FlexSubThemes {
     final bool useM3 = useMaterial3 ?? false;
     final bool useDecorator = useInputDecoratorTheme ?? false;
 
-    final Color? background = (backgroundSchemeColor == null)
+    final Color? background = backgroundSchemeColor == null
         ? backgroundColor // might be null, then SDK theme defaults.
         : schemeColor(backgroundSchemeColor, colorScheme);
 
