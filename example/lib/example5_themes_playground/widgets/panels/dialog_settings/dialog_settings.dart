@@ -340,6 +340,23 @@ class DialogSettings extends StatelessWidget {
               'in Flutter 3.7. Flutter 3.10 beta adds theming support to '
               'the DatePicker.\n'),
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Header background color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (surface)'
+              : 'default (primary)',
+          index: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDatePickerHeaderBackgroundSchemeColor(null);
+                  } else {
+                    controller.setDatePickerHeaderBackgroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         const DatePickerDialogShowcase(),
         const SizedBox(height: 16),
       ],

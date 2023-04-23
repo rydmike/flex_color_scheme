@@ -1357,6 +1357,35 @@ void main() {
       );
     });
     test(
+        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'with backgroundSchemeColor and backgroundColor nad header '
+        'background '
+        'EXPECT equal to DialogTheme with backgroundSchemeColor and '
+        'header background and header foreground contrast ', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: SchemeColor.tertiary,
+          headerBackgroundSchemeColor: SchemeColor.primaryContainer,
+        ),
+        equals(
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            headerBackgroundColor: colorScheme.primaryContainer,
+            headerForegroundColor: colorScheme.onPrimaryContainer,
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
         'Dialog FST9a.5 custom: GIVEN a custom FlexSubTheme.datePickerTheme '
         'EXPECT equal to DialogTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();

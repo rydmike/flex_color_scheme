@@ -6642,7 +6642,8 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundColor: dialogBackground,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              headerBackgroundSchemeColor: null,
+              headerBackgroundSchemeColor:
+                  subTheme.datePickerHeaderBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.datePickerDialogRadius ?? platformRadius,
               shadowColor: useShadow ? colorScheme.shadow : null,

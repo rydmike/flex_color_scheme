@@ -1737,9 +1737,10 @@ class FlexSubThemes {
     ///
     /// The dialog's header displays the currently selected date.
     ///
-    /// Default to primary in M2 and to surface in M3.
+    /// Defaults to primary in M2 and to surface in M3.
     ///
-    /// The foreground color will use the default contrast pair.
+    /// The foreground color will use the correct contrast pair for selected
+    /// [SchemeColor]
     final SchemeColor? headerBackgroundSchemeColor,
 
     /// Dialog elevation.
@@ -1764,11 +1765,17 @@ class FlexSubThemes {
         ? backgroundColor // might be null, then SDK theme defaults.
         : schemeColor(backgroundSchemeColor, colorScheme);
 
+    final Color? headerBackgroundColor = headerBackgroundSchemeColor == null
+        ? null
+        : schemeColor(headerBackgroundSchemeColor, colorScheme);
+    final Color? headerForegroundColor = headerBackgroundSchemeColor == null
+        ? null
+        : schemeColorPair(headerBackgroundSchemeColor, colorScheme);
+
     return DatePickerThemeData(
       backgroundColor: background,
-      // TODO(rydmike): Consider adding header color support to date picker.
-      // headerBackgroundColor: colorScheme.primary,
-      // headerForegroundColor: colorScheme.onPrimary,
+      headerBackgroundColor: headerBackgroundColor,
+      headerForegroundColor: headerForegroundColor,
       elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
