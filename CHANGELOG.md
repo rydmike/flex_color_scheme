@@ -24,7 +24,8 @@ This beta-1 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 be
   - Reviewed and updated status of all known theming issues in info expands.
 
 * **SKIA**
-  - The SKIA renderer is again being used to build all the web examples, including the Themes Playground.
+  - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
+  - The beta-1 version of Themes Playground 7.1 for FCS 7.1 can be tested [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
 
 ## 7.0.4
 
