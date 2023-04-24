@@ -523,6 +523,8 @@ class ShowcaseAppBar extends StatelessWidget {
         AppBarShowcase(),
         SizedBox(height: 8),
         Divider(),
+        SearchBarShowcase(),
+        Divider(),
         BottomAppBarShowcase(),
         Divider(),
         TabBarForAppBarShowcase(),

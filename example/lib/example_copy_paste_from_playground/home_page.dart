@@ -386,6 +386,8 @@ class _TabBarShowCase extends StatelessWidget {
         children: <Widget>[
           AppBarShowcase(),
           SizedBox(height: 8),
+          SearchBarShowcase(),
+          SizedBox(height: 8),
           TabBarForAppBarShowcase(),
           SizedBox(height: 8),
           TabBarForBackgroundShowcase(),

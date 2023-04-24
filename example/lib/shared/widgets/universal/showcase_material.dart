@@ -86,6 +86,8 @@ class ShowcaseMaterial extends StatelessWidget {
         const Divider(),
         const AppBarShowcase(),
         const Divider(),
+        const SearchBarShowcase(),
+        const Divider(),
         const BottomAppBarShowcase(),
         const Divider(),
         const TabBarForAppBarShowcase(),
@@ -1808,6 +1810,83 @@ class _BehindAppBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SearchBarShowcase extends StatefulWidget {
+  const SearchBarShowcase({super.key});
+
+  @override
+  State<SearchBarShowcase> createState() => _SearchBarShowcaseState();
+}
+
+class _SearchBarShowcaseState extends State<SearchBarShowcase> {
+  bool isMicOn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        inputDecorationTheme: const InputDecorationTheme(
+            // border: InputBorder.none,
+            // focusedBorder: InputBorder.none,
+            // enabledBorder: InputBorder.none,
+            // disabledBorder: InputBorder.none,
+            // errorBorder: InputBorder.none,
+            // focusedErrorBorder: InputBorder.none,
+            // filled: false,
+            ),
+      ),
+      child: Builder(builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SearchAnchor(
+              builder: (BuildContext context, SearchController controller) {
+            return SearchBar(
+              controller: controller,
+              hintText: 'Search using SearchBar',
+              padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(horizontal: 16.0)),
+              onTap: () {
+                controller.openView();
+              },
+              onChanged: (_) {
+                controller.openView();
+              },
+              leading: const Icon(Icons.search),
+              trailing: <Widget>[
+                Tooltip(
+                  message: 'Voice search',
+                  child: IconButton(
+                    isSelected: isMicOn,
+                    onPressed: () {
+                      setState(() {
+                        isMicOn = !isMicOn;
+                      });
+                    },
+                    icon: const Icon(Icons.mic_off),
+                    selectedIcon: const Icon(Icons.mic),
+                  ),
+                )
+              ],
+            );
+          }, suggestionsBuilder:
+                  (BuildContext context, SearchController controller) {
+            return List<ListTile>.generate(7, (int index) {
+              final String item = 'item $index';
+              return ListTile(
+                title: Text(item),
+                onTap: () {
+                  setState(() {
+                    controller.closeView(item);
+                  });
+                },
+              );
+            });
+          }),
+        );
+      }),
     );
   }
 }
