@@ -1829,14 +1829,14 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
     return Theme(
       data: Theme.of(context).copyWith(
         inputDecorationTheme: const InputDecorationTheme(
-            // border: InputBorder.none,
-            // focusedBorder: InputBorder.none,
-            // enabledBorder: InputBorder.none,
-            // disabledBorder: InputBorder.none,
-            // errorBorder: InputBorder.none,
-            // focusedErrorBorder: InputBorder.none,
-            // filled: false,
-            ),
+          // border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          // enabledBorder: InputBorder.none,
+          // disabledBorder: InputBorder.none,
+          // errorBorder: InputBorder.none,
+          // focusedErrorBorder: InputBorder.none,
+          filled: false,
+        ),
       ),
       child: Builder(builder: (BuildContext context) {
         return Padding(

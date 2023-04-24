@@ -1518,6 +1518,7 @@ class ThemeController with ChangeNotifier {
       setTooltipRadius(4, false);
       // Dialog settings
       setDialogElevation(24, false);
+      setDatePickerHeaderBackgroundSchemeColor(SchemeColor.primary, false);
       // Set SnackBar to M2/M3 style.
       setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
       // Drawer settings
