@@ -625,9 +625,10 @@ class FlexSubThemes {
     /// In M2 the value will default to EdgeInsets.zero.
     final EdgeInsetsGeometry? padding,
 
+    /// Overrides the default value of [BottomSheet.shadowColor].
+    final Color? shadowColor,
+
     /// Overrides the default value for [BottomAppBar.surfaceTintColor].
-    ///
-    /// If null, [BottomAppBar] will not display an overlay color.
     ///
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
@@ -656,6 +657,7 @@ class FlexSubThemes {
       elevation: elevation,
       height: height,
       padding: padding,
+      shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
     );
   }
@@ -1085,9 +1087,10 @@ class FlexSubThemes {
     /// If null, the bottom sheet's size will be unconstrained.
     final BoxConstraints? constraints,
 
+    /// Overrides the default value of [BottomSheet.shadowColor].
+    final Color? shadowColor,
+
     /// Overrides the default value for surfaceTintColor.
-    ///
-    /// If null, [BottomSheet] will not display an overlay color.
     ///
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
@@ -1105,6 +1108,7 @@ class FlexSubThemes {
         ),
         clipBehavior: clipBehavior,
         constraints: constraints,
+        shadowColor: shadowColor,
         surfaceTintColor: surfaceTintColor,
       );
 
@@ -5173,6 +5177,18 @@ class FlexSubThemes {
         },
       ),
     );
+  }
+
+  // TODO(rydmike): Add SearchBarThemeData support.
+  /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
+  static SearchBarThemeData searchBarThemeData() {
+    return const SearchBarThemeData();
+  }
+
+  // TODO(rydmike): Add SearchViewThemeData support.
+  /// An opinionated [SearchViewThemeData] theme for the [SearchBar].
+  static SearchViewThemeData searchViewThemeData() {
+    return const SearchViewThemeData();
   }
 
   /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].

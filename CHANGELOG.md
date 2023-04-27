@@ -2,6 +2,22 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.1.0-dev.2 
+
+WIP: Not published yet.
+
+**Apr 25, 2023**
+
+This beta-2 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 beta channel. It requires Flutter version 3.10.0-1.3.pre or later. This beta version is a first preparation version of FlexColorScheme for the next stable Flutter release after version 3.7.x.
+
+**NEW**
+
+* Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
+
+**TODO**
+
+* Add some basic theming properties for `SearchBar`.
+
 ## 7.1.0-dev.1
 
 **Apr 24, 2023**

@@ -303,6 +303,11 @@ class SurfaceBlendSettings extends StatelessWidget {
           const Divider(),
           AdaptiveThemePopupMenu(
             title: const Text('Adaptive M3 elevation tint removal'),
+            subtitle: const Text(
+              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
+              'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
+              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
+            ),
             index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
@@ -319,6 +324,10 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           AdaptiveThemePopupMenu(
             title: const Text('Adaptive shadows back in M3'),
+            subtitle: const Text(
+              'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
+              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
+            ),
             index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&

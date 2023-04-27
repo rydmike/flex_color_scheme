@@ -6441,6 +6441,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
               elevation: bottomAppBarElevation ??
                   (useMaterial3 ? null : appBarElevation ?? 0),
+              shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
@@ -6532,6 +6533,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? platformRadius,
+              shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
