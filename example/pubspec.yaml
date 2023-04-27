@@ -58,7 +58,7 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
 
   # Hive local storage, by Simon Leir.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
