@@ -24,7 +24,7 @@
 name: Build Web
 on:
   push:
-    branches: [master]
+    branches: [none]
     paths-ignore:
       - "**.md"
 jobs:
