@@ -37,6 +37,12 @@ This beta-1 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 be
   - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
   - The beta-1 version of Themes Playground 7.1 for FCS 7.1 can be tested [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
 
+## 7.0.5
+
+**Apr 29, 2023**
+
+- **Fix:** [#143](https://github.com/rydmike/flex_color_scheme/issues/143) Glitches in highlighting effect on mouse hover over `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+
 ## 7.0.4
 
 **Apr 22, 2023**
