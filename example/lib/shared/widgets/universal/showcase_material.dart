@@ -86,6 +86,8 @@ class ShowcaseMaterial extends StatelessWidget {
         const Divider(),
         const AppBarShowcase(),
         const Divider(),
+        const SearchBarShowcase(),
+        const Divider(),
         const BottomAppBarShowcase(),
         const Divider(),
         const TabBarForAppBarShowcase(),
@@ -917,8 +919,8 @@ class PopupMenuButtonsShowcase extends StatelessWidget {
                 style: denseBody,
               ),
             ),
-          Row(
-            children: const <Widget>[
+          const Row(
+            children: <Widget>[
               PopupMenuButtonShowcase(),
               SizedBox(width: 16),
               PopupMenuButtonTilesShowcase(),
@@ -1146,12 +1148,12 @@ class TooltipShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
+    return const RepaintBoundary(
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 16,
         runSpacing: 4,
-        children: const <Widget>[
+        children: <Widget>[
           Tooltip(
             message: 'Current tooltip theme',
             child: Text('Text with tooltip'),
@@ -1199,29 +1201,23 @@ class _IconButtonCircleAvatarDropdownShowcaseState
             message: 'This is\nan Icon',
             child: Icon(Icons.flutter_dash),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: IconButton(
-              icon: const Icon(Icons.accessibility),
-              tooltip: 'This is an\nIconButton',
-              onPressed: () {},
-            ),
+          IconButton(
+            icon: const Icon(Icons.accessibility),
+            tooltip: 'This is an\nIconButton',
+            onPressed: () {},
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: IconButton(
-              icon: const Icon(Icons.lock_outlined),
-              selectedIcon: const Icon(Icons.lock_open_outlined),
-              tooltip: isLockOpen
-                  ? 'This is an IconButton\nIn M3 tap to close lock'
-                  : 'This is an IconButton\nIn M3 tap to open lock',
-              isSelected: isLockOpen,
-              onPressed: () {
-                setState(() {
-                  isLockOpen = !isLockOpen;
-                });
-              },
-            ),
+          IconButton(
+            icon: const Icon(Icons.lock_outlined),
+            selectedIcon: const Icon(Icons.lock_open_outlined),
+            tooltip: isLockOpen
+                ? 'This is an IconButton\nIn M3 tap to close lock'
+                : 'This is an IconButton\nIn M3 tap to open lock',
+            isSelected: isLockOpen,
+            onPressed: () {
+              setState(() {
+                isLockOpen = !isLockOpen;
+              });
+            },
           ),
           const Tooltip(
             message: 'This is a\nCircleAvatar',
@@ -1238,10 +1234,9 @@ class _IconButtonCircleAvatarDropdownShowcaseState
 
 class IconButtonShowcase extends StatelessWidget {
   const IconButtonShowcase({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
+    return const RepaintBoundary(
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 16,
@@ -1249,63 +1244,65 @@ class IconButtonShowcase extends StatelessWidget {
         children: <Widget>[
           Column(
             // Standard IconButton
-            children: const <Widget>[
-              IconToggleButton(
+            children: <Widget>[
+              _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Standard',
+                variant: _IconButtonVariant.standard,
               ),
               SizedBox(height: 8),
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Standard (disabled)',
+                variant: _IconButtonVariant.standard,
               ),
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Filled IconButton
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Filled',
-                getDefaultStyle: enabledFilledButtonStyle,
+                variant: _IconButtonVariant.filled,
               ),
               SizedBox(height: 8),
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Filled (disabled)',
-                getDefaultStyle: disabledFilledButtonStyle,
+                variant: _IconButtonVariant.filled,
               ),
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Filled Tonal IconButton
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Filled tonal',
-                getDefaultStyle: enabledFilledTonalButtonStyle,
+                variant: _IconButtonVariant.filledTonal,
               ),
               SizedBox(height: 8),
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Filled tonal (disabled)',
-                getDefaultStyle: disabledFilledTonalButtonStyle,
+                variant: _IconButtonVariant.filledTonal,
               ),
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Outlined IconButton
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Outlined',
-                getDefaultStyle: enabledOutlinedButtonStyle,
+                variant: _IconButtonVariant.outlined,
               ),
               SizedBox(height: 8),
-              IconToggleButton(
+              _IconToggleButton(
                 isEnabled: false,
                 tooltip: 'Outlined (disabled)',
-                getDefaultStyle: disabledOutlinedButtonStyle,
+                variant: _IconButtonVariant.outlined,
               ),
             ],
           ),
@@ -1315,187 +1312,28 @@ class IconButtonShowcase extends StatelessWidget {
   }
 }
 
-// TODO(rydmike): Add variant IconButtons when available in stable.
-// class IconButtonM3Showcase extends StatelessWidget {
-//   const IconButtonM3Showcase({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return RepaintBoundary(
-//       child: Wrap(
-//         crossAxisAlignment: WrapCrossAlignment.center,
-//         spacing: 16,
-//         runSpacing: 4,
-//         children: <Widget>[
-//           Column(
-//             // Standard IconButton
-//             children: const <Widget>[
-//               _IconM3ToggleButton(
-//                 isEnabled: true,
-//                 tooltip: 'Standard',
-//                 variant: _IconButtonVariant.standard,
-//               ),
-//               const SizedBox(height: 8),
-//               _IconM3ToggleButton(
-//                 isEnabled: false,
-//                 tooltip: 'Standard (disabled)',
-//                 variant: _IconButtonVariant.standard,
-//               ),
-//             ],
-//           ),
-//           Column(
-//             children: const <Widget>[
-//               // Filled IconButton
-//               _IconM3ToggleButton(
-//                 isEnabled: true,
-//                 tooltip: 'Filled',
-//                 variant: _IconButtonVariant.filled,
-//               ),
-//               const SizedBox(height: 8),
-//               _IconM3ToggleButton(
-//                 isEnabled: false,
-//                 tooltip: 'Filled (disabled)',
-//                 variant: _IconButtonVariant.filled,
-//               ),
-//             ],
-//           ),
-//           Column(
-//             children: const <Widget>[
-//               // Filled Tonal IconButton
-//               _IconM3ToggleButton(
-//                 isEnabled: true,
-//                 tooltip: 'Filled tonal',
-//                 variant: _IconButtonVariant.filledTonal,
-//               ),
-//               const SizedBox(height: 8),
-//               _IconM3ToggleButton(
-//                 isEnabled: false,
-//                 tooltip: 'Filled tonal (disabled)',
-//                 variant: _IconButtonVariant.filledTonal,
-//               ),
-//             ],
-//           ),
-//           Column(
-//             children: const <Widget>[
-//               // Outlined IconButton
-//               _IconM3ToggleButton(
-//                 isEnabled: true,
-//                 tooltip: 'Outlined',
-//                 variant: _IconButtonVariant.outlined,
-//               ),
-//               const SizedBox(height: 8),
-//               _IconM3ToggleButton(
-//                 isEnabled: false,
-//                 tooltip: 'Outlined (disabled)',
-//                 variant: _IconButtonVariant.outlined,
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+enum _IconButtonVariant { standard, filled, filledTonal, outlined }
 
-// TODO(rydmike): Add variant IconButtons when available in stable.
-//
-// enum _IconButtonVariant { standard, filled, filledTonal, outlined }
-//
-// class _IconM3ToggleButton extends StatefulWidget {
-//   const _IconM3ToggleButton({
-//     required this.isEnabled,
-//     required this.tooltip,
-//     required this.variant,
-//   });
-//
-//   final bool isEnabled;
-//   final String tooltip;
-//   final _IconButtonVariant variant;
-//
-//   @override
-//   State<_IconM3ToggleButton> createState() => _IconM3ToggleButtonState();
-// }
-//
-// class _IconM3ToggleButtonState extends State<_IconM3ToggleButton> {
-//   bool selected = false;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final VoidCallback? onPressed = widget.isEnabled
-//         ? () {
-//             setState(() {
-//               selected = !selected;
-//             });
-//           }
-//         : null;
-//
-//     switch (widget.variant) {
-//       case _IconButtonVariant.standard:
-//         {
-//           return IconButton(
-//             isSelected: selected,
-//             tooltip: widget.tooltip,
-//             icon: const Icon(Icons.settings_outlined),
-//             selectedIcon: const Icon(Icons.settings),
-//             onPressed: onPressed,
-//           );
-//         }
-//       case _IconButtonVariant.filled:
-//         {
-//           return IconButton.filled(
-//             isSelected: selected,
-//             tooltip: widget.tooltip,
-//             icon: const Icon(Icons.settings_outlined),
-//             selectedIcon: const Icon(Icons.settings),
-//             onPressed: onPressed,
-//           );
-//         }
-//       case _IconButtonVariant.filledTonal:
-//         {
-//           return IconButton.filledTonal(
-//             isSelected: selected,
-//             tooltip: widget.tooltip,
-//             icon: const Icon(Icons.settings_outlined),
-//             selectedIcon: const Icon(Icons.settings),
-//             onPressed: onPressed,
-//           );
-//         }
-//       case _IconButtonVariant.outlined:
-//         {
-//           return IconButton.outlined(
-//             isSelected: selected,
-//             tooltip: widget.tooltip,
-//             icon: const Icon(Icons.settings_outlined),
-//             selectedIcon: const Icon(Icons.settings),
-//             onPressed: onPressed,
-//           );
-//         }
-//     }
-//   }
-// }
-
-class IconToggleButton extends StatefulWidget {
-  const IconToggleButton({
+class _IconToggleButton extends StatefulWidget {
+  const _IconToggleButton({
     required this.isEnabled,
     required this.tooltip,
-    this.getDefaultStyle,
-    super.key,
+    required this.variant,
   });
 
   final bool isEnabled;
   final String tooltip;
-  final ButtonStyle? Function(bool, ColorScheme)? getDefaultStyle;
+  final _IconButtonVariant variant;
 
   @override
-  State<IconToggleButton> createState() => _IconToggleButtonState();
+  State<_IconToggleButton> createState() => _IconToggleButtonState();
 }
 
-class _IconToggleButtonState extends State<IconToggleButton> {
+class _IconToggleButtonState extends State<_IconToggleButton> {
   bool selected = false;
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colors = Theme.of(context).colorScheme;
     final VoidCallback? onPressed = widget.isEnabled
         ? () {
             setState(() {
@@ -1503,104 +1341,50 @@ class _IconToggleButtonState extends State<IconToggleButton> {
             });
           }
         : null;
-    final ButtonStyle? style = widget.getDefaultStyle?.call(selected, colors);
 
-    return IconButton(
-      visualDensity: VisualDensity.standard,
-      isSelected: selected,
-      tooltip: widget.tooltip,
-      icon: const Icon(Icons.settings_outlined),
-      selectedIcon: const Icon(Icons.settings),
-      onPressed: onPressed,
-      style: style,
-    );
+    switch (widget.variant) {
+      case _IconButtonVariant.standard:
+        {
+          return IconButton(
+            isSelected: selected,
+            tooltip: widget.tooltip,
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            onPressed: onPressed,
+          );
+        }
+      case _IconButtonVariant.filled:
+        {
+          return IconButton.filled(
+            isSelected: selected,
+            tooltip: widget.tooltip,
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            onPressed: onPressed,
+          );
+        }
+      case _IconButtonVariant.filledTonal:
+        {
+          return IconButton.filledTonal(
+            isSelected: selected,
+            tooltip: widget.tooltip,
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            onPressed: onPressed,
+          );
+        }
+      case _IconButtonVariant.outlined:
+        {
+          return IconButton.outlined(
+            isSelected: selected,
+            tooltip: widget.tooltip,
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            onPressed: onPressed,
+          );
+        }
+    }
   }
-}
-
-ButtonStyle enabledFilledButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    foregroundColor: selected ? colors.onPrimary : colors.primary,
-    backgroundColor: selected ? colors.primary : colors.surfaceVariant,
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
-    hoverColor: selected
-        ? colors.onPrimary.withOpacity(0.08)
-        : colors.primary.withOpacity(0.08),
-    focusColor: selected
-        ? colors.onPrimary.withOpacity(0.12)
-        : colors.primary.withOpacity(0.12),
-    highlightColor: selected
-        ? colors.onPrimary.withOpacity(0.12)
-        : colors.primary.withOpacity(0.12),
-  );
-}
-
-ButtonStyle disabledFilledButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
-  );
-}
-
-ButtonStyle enabledFilledTonalButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    foregroundColor:
-        selected ? colors.onSecondaryContainer : colors.onSurfaceVariant,
-    backgroundColor:
-        selected ? colors.secondaryContainer : colors.surfaceVariant,
-    hoverColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.08)
-        : colors.onSurfaceVariant.withOpacity(0.08),
-    focusColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
-    highlightColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
-  );
-}
-
-ButtonStyle disabledFilledTonalButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
-  );
-}
-
-ButtonStyle enabledOutlinedButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    backgroundColor: selected ? colors.inverseSurface : null,
-    hoverColor: selected
-        ? colors.onInverseSurface.withOpacity(0.08)
-        : colors.onSurfaceVariant.withOpacity(0.08),
-    focusColor: selected
-        ? colors.onInverseSurface.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
-    highlightColor: selected
-        ? colors.onInverseSurface.withOpacity(0.12)
-        : colors.onSurface.withOpacity(0.12),
-    side: BorderSide(color: colors.outline),
-  ).copyWith(
-    foregroundColor:
-        MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
-        return colors.onInverseSurface;
-      }
-      if (states.contains(MaterialState.pressed)) {
-        return colors.onSurface;
-      }
-      return null;
-    }),
-  );
-}
-
-ButtonStyle disabledOutlinedButtonStyle(bool selected, ColorScheme colors) {
-  return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor:
-        selected ? colors.onSurface.withOpacity(0.12) : null,
-    side: selected ? null : BorderSide(color: colors.outline.withOpacity(0.12)),
-  );
 }
 
 class ProgressIndicatorShowcase extends StatefulWidget {
@@ -2026,6 +1810,83 @@ class _BehindAppBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SearchBarShowcase extends StatefulWidget {
+  const SearchBarShowcase({super.key});
+
+  @override
+  State<SearchBarShowcase> createState() => _SearchBarShowcaseState();
+}
+
+class _SearchBarShowcaseState extends State<SearchBarShowcase> {
+  bool isMicOn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        inputDecorationTheme: const InputDecorationTheme(
+          // border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          // enabledBorder: InputBorder.none,
+          // disabledBorder: InputBorder.none,
+          // errorBorder: InputBorder.none,
+          // focusedErrorBorder: InputBorder.none,
+          filled: false,
+        ),
+      ),
+      child: Builder(builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SearchAnchor(
+              builder: (BuildContext context, SearchController controller) {
+            return SearchBar(
+              controller: controller,
+              hintText: 'Search using SearchBar',
+              padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(horizontal: 16.0)),
+              onTap: () {
+                controller.openView();
+              },
+              onChanged: (_) {
+                controller.openView();
+              },
+              leading: const Icon(Icons.search),
+              trailing: <Widget>[
+                Tooltip(
+                  message: 'Voice search',
+                  child: IconButton(
+                    isSelected: isMicOn,
+                    onPressed: () {
+                      setState(() {
+                        isMicOn = !isMicOn;
+                      });
+                    },
+                    icon: const Icon(Icons.mic_off),
+                    selectedIcon: const Icon(Icons.mic),
+                  ),
+                )
+              ],
+            );
+          }, suggestionsBuilder:
+                  (BuildContext context, SearchController controller) {
+            return List<ListTile>.generate(7, (int index) {
+              final String item = 'item $index';
+              return ListTile(
+                title: Text(item),
+                onTap: () {
+                  setState(() {
+                    controller.closeView(item);
+                  });
+                },
+              );
+            });
+          }),
+        );
+      }),
     );
   }
 }
@@ -2798,8 +2659,8 @@ class MenuAnchorShowcase extends StatelessWidget {
               style: denseBody,
             ),
           ),
-        Row(
-          children: const <Widget>[
+        const Row(
+          children: <Widget>[
             Expanded(
               child: MenuAnchorContextMenu(
                 message: 'The new M3 MenuAnchor is cool!',
@@ -3175,8 +3036,8 @@ class ListTileAllShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const <Widget>[
+    return const Column(
+      children: <Widget>[
         ListTileShowcase(),
         Divider(height: 1),
         SwitchTileShowcase(),
@@ -3690,9 +3551,9 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
+      children: <Widget>[
         SnackBarShowcase(),
         SizedBox(height: 16),
         MaterialBannerShowcase(),

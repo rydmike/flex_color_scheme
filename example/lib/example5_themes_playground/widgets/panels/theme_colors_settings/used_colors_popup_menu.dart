@@ -110,8 +110,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
       ],
       child: ListTileReveal(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: title,
         subtitleDense: true,
         subtitle: Text('${_describeUsedColors(index)}\n'),

@@ -1259,6 +1259,155 @@ void main() {
       );
     });
   });
+  group('WITH: FlexSubTheme.datePickerTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes DatePicker tests
+    // -------------------------------------------------------------------------
+    test(
+        'Dialog FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+        ),
+        equals(
+          const DatePickerThemeData(
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.2 background-based-a: GIVEN a '
+        'FlexSubTheme.datePickerTheme with no '
+        'colorScheme, but with backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+            colorScheme: colorScheme,
+            backgroundColor: const Color(0xFF343476),
+            backgroundSchemeColor: SchemeColor.tertiary),
+        equals(
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.3 background-based-b: GIVEN a '
+        'FlexSubTheme.datePickerTheme '
+        'with no backgroundSchemeColor and backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: null,
+        ),
+        equals(
+          const DatePickerThemeData(
+            backgroundColor: Color(0xFFDDDDDD),
+            elevation: 6,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'with backgroundSchemeColor and no backgroundColor '
+        'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: null,
+          backgroundSchemeColor: SchemeColor.tertiary,
+        ),
+        equals(
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'with backgroundSchemeColor and backgroundColor nad header '
+        'background '
+        'EXPECT equal to DialogTheme with backgroundSchemeColor and '
+        'header background and header foreground contrast ', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFFDDDDDD),
+          backgroundSchemeColor: SchemeColor.tertiary,
+          headerBackgroundSchemeColor: SchemeColor.primaryContainer,
+        ),
+        equals(
+          DatePickerThemeData(
+            backgroundColor: colorScheme.tertiary,
+            headerBackgroundColor: colorScheme.primaryContainer,
+            headerForegroundColor: colorScheme.onPrimaryContainer,
+            elevation: 6,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(28),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'Dialog FST9a.5 custom: GIVEN a custom FlexSubTheme.datePickerTheme '
+        'EXPECT equal to DialogTheme() version with same values', () {
+      const ColorScheme colorScheme = ColorScheme.dark();
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          elevation: 10,
+          radius: 6,
+        ),
+        equals(
+          const DatePickerThemeData(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+  });
   group('WITH: FlexSubTheme.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
@@ -7448,11 +7597,10 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.onSurface.withOpacity(0.38)),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-      //   equals(colorScheme.outline),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -7475,12 +7623,11 @@ void main() {
             .resolve(<MaterialState>{MaterialState.disabled}),
         equals(colorScheme.surfaceVariant.withOpacity(0.12)),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!
-      //       .resolve(<MaterialState>{MaterialState.disabled}),
-      //   equals(colorScheme.onSurface.withOpacity(0.12)),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(colorScheme.onSurface.withOpacity(0.12)),
+      );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
@@ -7493,18 +7640,17 @@ void main() {
               colorScheme.onSurface, colorScheme.primary),
         ),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   FlexSubThemes.switchTheme(
-      //     colorScheme: colorScheme,
-      //     useTintedDisable: true,
-      //     useMaterial3: true,
-      //  ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
-      //   equals(
-      //     FlexSubThemes.tintedDisable(
-      //         colorScheme.onSurface, colorScheme.primary),
-      //   ),
-      // );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).trackOutlineColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary),
+        ),
+      );
 
       // Selected thumb colors
       expect(
@@ -7737,11 +7883,10 @@ void main() {
         switchTheme.trackColor!.resolve(<MaterialState>{}),
         equals(colorScheme.surfaceVariant),
       );
-      // TODO(rydmike): Add trackOutlineColor when available in stable.
-      // expect(
-      //   switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
-      //   equals(colorScheme.outline),
-      // );
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<MaterialState>{}),
+        equals(colorScheme.outline),
+      );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
         FlexSubThemes.switchTheme(
@@ -8393,8 +8538,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7,
-            // elevation: 6,
+            elevation: 6,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(28),
@@ -8434,8 +8578,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: colorScheme.tertiary,
             // dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
@@ -8476,8 +8619,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -8515,7 +8657,6 @@ void main() {
       expect(
         FlexSubThemes.timePickerTheme(
           colorScheme: colorScheme,
-          backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(filled: true),
           elementRadius: 12,
@@ -8523,8 +8664,7 @@ void main() {
         ),
         equals(
           TimePickerThemeData(
-            // TODO(rydmike): Elevation does not exist in 3.7.
-            // elevation: 6,
+            elevation: 6,
             backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

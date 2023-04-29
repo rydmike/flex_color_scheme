@@ -184,6 +184,7 @@ enum SchemeColor {
 /// * [CardTheme] for [Card] via [cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
+/// * [DatePickerThemeData] for [DatePicker] via [datePickerTheme].
 /// * [DialogTheme] for [Dialog] via [dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via [dropdownMenuTheme].
@@ -581,7 +582,6 @@ class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
   /// An opinionated [BottomAppBarTheme] theme.
   ///
   /// The [BottomAppBarTheme] allows setting only of background color in FCS.
@@ -590,12 +590,6 @@ class FlexSubThemes {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
-  ///
-  /// Due to an issue in Flutter 3.7 and 3.7.1, that has been resolved in
-  /// master channel, the background color of the [BottomAppBar] cannot
-  /// be changed when using M3. See issue:
-  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
-  /// https://github.com/rydmike/flex_color_scheme/issues/115.
   static BottomAppBarTheme bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -631,9 +625,10 @@ class FlexSubThemes {
     /// In M2 the value will default to EdgeInsets.zero.
     final EdgeInsetsGeometry? padding,
 
+    /// Overrides the default value of [BottomSheet.shadowColor].
+    final Color? shadowColor,
+
     /// Overrides the default value for [BottomAppBar.surfaceTintColor].
-    ///
-    /// If null, [BottomAppBar] will not display an overlay color.
     ///
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
@@ -662,6 +657,7 @@ class FlexSubThemes {
       elevation: elevation,
       height: height,
       padding: padding,
+      shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
     );
   }
@@ -1091,9 +1087,10 @@ class FlexSubThemes {
     /// If null, the bottom sheet's size will be unconstrained.
     final BoxConstraints? constraints,
 
+    /// Overrides the default value of [BottomSheet.shadowColor].
+    final Color? shadowColor,
+
     /// Overrides the default value for surfaceTintColor.
-    ///
-    /// If null, [BottomSheet] will not display an overlay color.
     ///
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
@@ -1111,6 +1108,7 @@ class FlexSubThemes {
         ),
         clipBehavior: clipBehavior,
         constraints: constraints,
+        shadowColor: shadowColor,
         surfaceTintColor: surfaceTintColor,
       );
 
@@ -1706,6 +1704,93 @@ class FlexSubThemes {
     );
   }
 
+  /// An opinionated [DatePickerThemeData] with custom corner radius.
+  ///
+  /// Corner [radius] defaults to [kDialogRadius] 28dp.
+  static DatePickerThemeData datePickerTheme({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// Dialog background color.
+    ///
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
+    ///
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
+    ///
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
+    final Color? backgroundColor,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// If not defined, then the passed in [backgroundColor] will be used,
+    /// which may be null too and dialog then falls back to Flutter SDK default
+    /// value for TimePickerDialog, which is [colorScheme.surface].
+    ///
+    /// FlexColorScheme sub-theming uses this property to match the background
+    /// color of this dialog to other standard dialogs. It sets it via
+    /// [FlexSubThemesData] to [SchemeColor.surface].
+    final SchemeColor? backgroundSchemeColor,
+
+    /// Overrides the header's default background fill color.
+    ///
+    /// The dialog's header displays the currently selected date.
+    ///
+    /// Defaults to primary in M2 and to surface in M3.
+    ///
+    /// The foreground color will use the correct contrast pair for selected
+    /// [SchemeColor]
+    final SchemeColor? headerBackgroundSchemeColor,
+
+    /// Dialog elevation.
+    ///
+    /// If not defined, defaults to [kDialogElevation] = 6.
+    final double? elevation,
+
+    /// Outer corner radius.
+    ///
+    /// If not defined, defaults to [kDialogRadius] 28dp,
+    /// based on M3 Specification
+    /// https://m3.material.io/components/dialogs/specs
+    final double? radius,
+
+    /// Overrides the default value of [Dialog.shadowColor].
+    final Color? shadowColor,
+
+    /// Overrides the default value of [Dialog.surfaceTintColor].
+    final Color? surfaceTintColor,
+  }) {
+    final Color? background = backgroundSchemeColor == null
+        ? backgroundColor // might be null, then SDK theme defaults.
+        : schemeColor(backgroundSchemeColor, colorScheme);
+
+    final Color? headerBackgroundColor = headerBackgroundSchemeColor == null
+        ? null
+        : schemeColor(headerBackgroundSchemeColor, colorScheme);
+    final Color? headerForegroundColor = headerBackgroundSchemeColor == null
+        ? null
+        : schemeColorPair(headerBackgroundSchemeColor, colorScheme);
+
+    return DatePickerThemeData(
+      backgroundColor: background,
+      headerBackgroundColor: headerBackgroundColor,
+      headerForegroundColor: headerForegroundColor,
+      elevation: elevation ?? kDialogElevation,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(radius ?? kDialogRadius),
+        ),
+      ),
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+    );
+  }
+
   /// An opinionated [DialogTheme] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
@@ -1714,32 +1799,33 @@ class FlexSubThemes {
   /// The default radius follows Material M3 guide
   /// [specification](https://m3.material.io/components/dialogs/specs).
   static DialogTheme dialogTheme({
-    /// Dialog background color.
-    ///
-    /// Defaults to null and gets default via Dialog's default null theme
-    /// behavior.
-    ///
-    /// Can be used to make a custom themed dialog with own background color,
-    /// even after the [ThemeData.dialogBackgroundColor] property is
-    /// is deprecated in Flutter SDK. Which it will be in 2022, see
-    /// [issue](https://github.com/flutter/flutter/issues/91772).
-    final Color? backgroundColor,
-
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     final ColorScheme? colorScheme,
 
-    /// Selects which color from the passed in [colorScheme] to use as
-    /// dialog background color.
+    /// Dialog background color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
     ///
-    /// If not defined or [colorScheme] is not defined, then the passed in
-    /// [backgroundColor] will be used, which may be null too and dialog then
-    /// falls back to Flutter SDK dialog background color
-    /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.background].
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
     ///
-    /// FlexColorScheme uses this property via [FlexSubThemesData] and defines
-    /// its default as [SchemeColor.surface].
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
+    final Color? backgroundColor,
+
+    /// Selects which color from the passed in colorScheme to use as the dialog
+    /// background color.
+    ///
+    /// If not defined, then the passed in [backgroundColor] will be used,
+    /// which may be null too and dialog then falls back to Flutter SDK default
+    /// value for TimePickerDialog, which is [colorScheme.surface].
+    ///
+    /// FlexColorScheme sub-theming uses this property to match the background
+    /// color of this dialog to other standard dialogs. It sets it via
+    /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
     /// Corner radius of the dialog.
@@ -1775,7 +1861,7 @@ class FlexSubThemes {
     final EdgeInsetsGeometry? actionsPadding,
   }) {
     final Color? background =
-        (colorScheme == null || backgroundSchemeColor == null)
+        colorScheme == null || backgroundSchemeColor == null
             ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
@@ -2569,7 +2655,7 @@ class FlexSubThemes {
     final Color tint = foreground;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
-    // TODO(rydmike): The tintInteract condition added due to Flutter SDK issue.
+    // TODO(rydmike): Skip tintInteract condition added due to Flutter issue.
     // See https://github.com/flutter/flutter/issues/123829
     return tintInteract
         ? IconButtonThemeData(style: ButtonStyle(
@@ -4561,7 +4647,7 @@ class FlexSubThemes {
             ),
       groupAlignment: groupAlignment,
       labelType: labelType,
-      // TODO(rydmike): This hack used to be needed, but is it still in F3.7?
+      // TODO(rydmike): This hack used to be needed, but is it still in > F3.7?
       // Logic to avoid SDKs over eager asserts and get same result.
       useIndicator: true,
       indicatorColor: effectiveUseIndicator
@@ -5093,6 +5179,18 @@ class FlexSubThemes {
     );
   }
 
+  // TODO(rydmike): Add SearchBarThemeData support.
+  /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
+  static SearchBarThemeData searchBarThemeData() {
+    return const SearchBarThemeData();
+  }
+
+  // TODO(rydmike): Add SearchViewThemeData support.
+  /// An opinionated [SearchViewThemeData] theme for the [SearchBar].
+  static SearchViewThemeData searchViewThemeData() {
+    return const SearchViewThemeData();
+  }
+
   /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
   static SegmentedButtonThemeData segmentedButtonTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
@@ -5235,30 +5333,34 @@ class FlexSubThemes {
         ? selectedColor
         : borderColor;
 
+    final Color disabledForeground = unselectedSchemeColor == null
+        ? colorScheme.onSurface
+        : onUnselectedColor;
+
     return SegmentedButtonThemeData(
       style: ButtonStyle(
-        // TODO(rydmike): Report issue, minimumSize property does nothing.
+        // TODO(rydmike): Issue, minimumSize property does nothing.
+        // https://github.com/flutter/flutter/issues/121493
         minimumSize: ButtonStyleButton.allOrNull<Size>(
             minButtonSize ?? (useM3 ? null : kButtonMinSize)),
         padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
-            return null;
+            return unselectedSchemeColor == null ? null : unselectedColor;
           }
           if (states.contains(MaterialState.selected)) {
             return selectedColor;
           }
-          // TODO(rydmike): Report Flutter transparency bug on SegmentedButton.
           return unselectedSchemeColor == null ? null : unselectedColor;
         }),
         foregroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             if (tintDisable) {
-              return tintedDisable(colorScheme.onSurface, disableTint);
+              return tintedDisable(disabledForeground, disableTint);
             }
-            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+            return disabledForeground.withAlpha(kAlphaDisabled);
           }
           if (states.contains(MaterialState.selected)) {
             if (states.contains(MaterialState.pressed)) {
@@ -5275,7 +5377,8 @@ class FlexSubThemes {
             return onUnselectedColor;
           }
         }),
-        // TODO(Rydmike): Report Flutter SDK SegmentedButton overlayColor bug.
+        // TODO(Rydmike): Issue: Flutter SDK SegmentedButton overlayColor bug.
+        // https://github.com/flutter/flutter/issues/123308
         // SegmentedButton triggers overlay 3 times in Selected mode, 1st
         // time it is selected, next time it is no longer selected,
         // even it if actually is. This results is that we never see the
@@ -5920,20 +6023,19 @@ class FlexSubThemes {
                   : kAlphaM3SwitchUnselectTrackDark)
               : colorScheme.surfaceVariant;
         }),
-        // TODO(rydmike): Add trackOutlineColor when available in stable.
-        // trackOutlineColor:
-        //     MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        //   if (states.contains(MaterialState.selected)) {
-        //     return Colors.transparent;
-        //   }
-        //   if (states.contains(MaterialState.disabled)) {
-        //     if (tintDisable) {
-        //       return tintedDisable(colorScheme.onSurface, baseColor);
-        //     }
-        //     return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-        //   }
-        //   return colorScheme.outline;
-        // }),
+        trackOutlineColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.transparent;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, baseColor);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+          }
+          return colorScheme.outline;
+        }),
         overlayColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.selected)) {
@@ -6011,19 +6113,12 @@ class FlexSubThemes {
     /// Overrides the default value for [TabBar.unselectedLabelStyle].
     final TextStyle? unselectedLabelStyle,
 
-    // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix arrive in stable.
     /// The color of the divider.
     ///
     /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
     /// color is used. If that is null and [useMaterial3] is true,
     /// [ColorScheme.surfaceVariant] will be used,
     /// otherwise divider will not be drawn.
-    ///
-    /// This feature does not work in Flutter 3.7 stable, at least not up until
-    /// version 3.7.7. It is caused by a bug in Flutter SDK. The issue has
-    /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
-    /// master channel, but until the fix lands in Flutter stable, this
-    /// feature does not work.
     final Color? dividerColor,
 
     /// Defines if the theme uses tinted interaction effects.
@@ -6264,10 +6359,18 @@ class FlexSubThemes {
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
 
-    /// A completely custom color for your main [DialogTheme] color.
+    /// Dialog background color.
     ///
-    /// If null and [backgroundSchemeColor] are also not
-    /// defined, this dialog defaults to using [ColorScheme.surface] .
+    /// If null and [backgroundSchemeColor] is also null, then it
+    /// gets default via Dialog's default null theme behavior.
+    ///
+    /// If [backgroundSchemeColor] is defined, it will override any color
+    /// passed in here.
+    ///
+    /// Can be used to make a custom themed dialog with own background color,
+    /// even after the [ThemeData.dialogBackgroundColor] property is
+    /// is deprecated in Flutter SDK. See
+    /// https://github.com/flutter/flutter/issues/91772).
     final Color? backgroundColor,
 
     /// Selects which color from the passed in colorScheme to use as the dialog
@@ -6282,17 +6385,9 @@ class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
-    // TODO(rydmike): TimePickerThemeData elevation not in Flutter 3.7.x.
-    // Exist in master, monitor when it lands in stable and add it.
     /// Dialog elevation.
     ///
     /// If not defined, defaults to [kDialogElevation] = 6.
-    ///
-    /// NOTE:
-    ///
-    /// This elevation does not exist yet in Flutter 3.7. It has no function
-    /// until support from master lands and it is added to updated API in this
-    /// [TimePickerThemeData.timePickerTheme] function.
     final double? elevation,
 
     /// Outer corner radius.
@@ -6347,7 +6442,7 @@ class FlexSubThemes {
     final bool useM3 = useMaterial3 ?? false;
     final bool useDecorator = useInputDecoratorTheme ?? false;
 
-    final Color? background = (backgroundSchemeColor == null)
+    final Color? background = backgroundSchemeColor == null
         ? backgroundColor // might be null, then SDK theme defaults.
         : schemeColor(backgroundSchemeColor, colorScheme);
 
@@ -6390,8 +6485,7 @@ class FlexSubThemes {
 
     return TimePickerThemeData(
       backgroundColor: background,
-      // TODO(rydmike): This elevation does not exist in beta 3.7.0-1.4.pre
-      // elevation: elevation ?? kDialogElevation,
+      elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(radius ?? kDialogRadius),
@@ -6408,7 +6502,8 @@ class FlexSubThemes {
         ),
       ),
       //
-      // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
+      // TODO(rydmike): Fixes for clock dial background color issue in M3.
+      // https://github.com/flutter/flutter/issues/118657
       dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
       dayPeriodColor: useM3
           ? MaterialStateColor.resolveWith((Set<MaterialState> states) {

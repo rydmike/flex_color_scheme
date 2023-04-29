@@ -57,7 +57,9 @@ ThemeData flexThemeDark(ThemeController controller) {
   // which is the effective primary color, the get the effective ThemeData.
   return flexColorSchemeDark(controller, source).toTheme.copyWith(
         // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
-        // This is a fix to avoid the Flutter Drawer width bug and overflow bug
+        // This is a fix to avoid the Flutter Drawer width bug,
+        // https://github.com/flutter/flutter/issues/123507 and overflow bug
+        // https://github.com/flutter/flutter/issues/123380
         // when it animates via zero width in null default to widget default.
         drawerTheme: controller.useSubThemes
             ? null
@@ -244,6 +246,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             dialogRadius: controller.dialogBorderRadius,
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
+            datePickerHeaderBackgroundSchemeColor:
+                controller.datePickerHeaderBackgroundSchemeColor,
+            datePickerDialogRadius: controller.dialogBorderRadius,
             timePickerDialogRadius: controller.dialogBorderRadius,
             timePickerElementRadius: controller.timePickerElementRadius,
             dialogElevation: controller.dialogElevation,

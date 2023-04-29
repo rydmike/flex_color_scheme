@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 7.0.5
+version: 7.1.0-dev.2
 publish_to: 'none'
 environment:
   sdk: '>=2.19.0 <4.0.0'
-  flutter: '>=3.7.0'
+  flutter: '>=3.10.0-1.3.pre'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -58,7 +58,7 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
 
   # Hive local storage, by Simon Leir.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
@@ -96,6 +96,7 @@ dependencies:
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.1.10
+
 
 dev_dependencies:
   flutter_test:

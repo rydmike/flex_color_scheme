@@ -143,10 +143,10 @@ class TabBarSettings extends StatelessWidget {
           shadowColor: Colors.transparent,
           color: theme.colorScheme.surface,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 TabBarForAppBarShowcase(),
                 SizedBox(height: 16),
                 TabBarForBackgroundShowcase(),
@@ -226,7 +226,7 @@ class TabBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -330,7 +330,7 @@ class TabBarSettings extends StatelessWidget {
                   : null,
             ),
             trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
+              padding: const EdgeInsetsDirectional.only(end: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -418,7 +418,7 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -472,7 +472,7 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -529,7 +529,7 @@ class TabBarSettings extends StatelessWidget {
                     text:
                         'In Flutter 3.7 the TabBar dividerColor cannot be set '
                         'via theme in Material 3 mode. It is a bug, that has '
-                        'been fixed in master channel via ',
+                        'been fixed in 3.10 beta and master channel via ',
                   ),
                   LinkTextSpan(
                     style: linkStyle,
@@ -539,7 +539,7 @@ class TabBarSettings extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: '. This feature will work when the fix lands in '
-                        'Flutter stable channel.\n',
+                        'next Flutter stable after 3.7.\n',
                   ),
                 ],
               ),

@@ -573,6 +573,19 @@ class AppBarSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
+          title: Text('SearchBar'),
+          subtitle: Text('The SearchBar with SearchView is new in Flutter '
+              'beta 3.10. A convenient way to create a search bar with a '
+              'view is with the factory SearchAnchor.bar.\n'
+              '\n'
+              'FCS does not provide any convenience theming features for '
+              'the search bar in current version, but may add some later. '
+              'A theming issue where the border in the view cannot be '
+              'removed is being investigated.'),
+        ),
+        const SearchBarShowcase(),
+        const Divider(),
+        const ListTileReveal(
           title: Text('BottomAppBar'),
           subtitle: Text('A BottomAppBar is typically used with '
               'Scaffold.bottomNavigationBar. '

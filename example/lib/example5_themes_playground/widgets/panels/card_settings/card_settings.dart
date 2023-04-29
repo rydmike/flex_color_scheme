@@ -34,7 +34,7 @@ class CardSettings extends StatelessWidget {
             'type card, which by default is set to theme colorScheme surface. '
             'When using Material 3, Card also gets elevation based tint using '
             'the scheme surfaceTint color. When using Material 2, surfaceTint '
-            'has no effect even if specified.\n'
+            'has no effect, even if it is specified.\n'
             '\n'
             'You can set Card theme or widget property surfaceTintColor to '
             'Colors.transparent to remove the elevation tint. In '
@@ -42,8 +42,8 @@ class CardSettings extends StatelessWidget {
             'elevation tint from all widgets on desired platforms.\n'
             '\n'
             'Cards still have elevation shadow in M3 mode as before. You '
-            'an remove the shadow from elevated cards in M3 mode, to make '
-            'only elevation tinted cards by assigning Colors.transparent to '
+            'can remove the shadow from elevated Cards in M3 mode to make '
+            'only elevation tinted Cards by assigning Colors.transparent to '
             'its shadowColor theme or widget property.\n',
           ),
         ),
@@ -55,8 +55,8 @@ class CardSettings extends StatelessWidget {
             'Component themes with border radius can have their radius '
             'overridden and changed individually. It then either '
             'overrides its default value or the set global radius default, '
-            'depending on what is in use. The border radius for Cards defaults '
-            'to 12dp in M3 and to 4db in M2 mode.\n',
+            'depending on what is in use. The border radius for Cards default '
+            'to 12dp in M3 mode, and to 4dp in M2 mode.\n',
           ),
         ),
         ListTile(
@@ -84,7 +84,7 @@ class CardSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[

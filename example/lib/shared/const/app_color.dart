@@ -216,14 +216,8 @@ class AppColor {
       final int index, final ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
-          // TODO(rydmike): Something fishy here! On copy dark to custom.
           dark: controller.useKeyColors
-              ?
-              // controller.useDarkColorsForSeed
-              //     ?
-              controller.customScheme.dark
-              //     :
-              // controller.customScheme.light
+              ? controller.customScheme.dark
               : controller.useToDarkMethod
                   ? controller.customScheme.light.defaultError.toDark(
                       controller.darkMethodLevel,

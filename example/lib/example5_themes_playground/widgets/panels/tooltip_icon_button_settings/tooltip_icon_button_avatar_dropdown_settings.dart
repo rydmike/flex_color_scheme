@@ -129,9 +129,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'OPACITY',
@@ -180,7 +180,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -226,7 +226,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -273,7 +273,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -319,9 +319,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           child: IconButtonCircleAvatarDropdownShowcase(),
         ),
         const ListTileReveal(
-          dense: true,
-          title: Text('Icon info'),
-          subtitle: Text('Icons and IconButtons by default use same foreground '
+          subtitleDense: true,
+          title: Text('IconButton'),
+          subtitle: Text('IconButtons and Icons by default use same foreground '
               'color as active text theme. Some components change '
               'their colors automatically when they use them, but '
               'not all do. Icon usage is very varied, it is '
@@ -332,14 +332,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: IconButtonShowcase(),
         ),
-        // TODO(rydmike): Add variant IconButtons when available in stable.
-        // const Padding(
-        //   padding: EdgeInsets.all(16.0),
-        //   child: IconButtonM3Showcase(),
-        // ),
         ListTileReveal(
           dense: true,
-          title: const Text('IconButton info, known issues and limitations'),
+          title: const Text('Known issues and limitations'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -362,7 +357,8 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                       'therefore kept as it is.\n'
                       '\n'
                       'The constructors for above IconButtons are available in '
-                      'the master channel, but not yet in Flutter 3.7. This ',
+                      'the beta 3.10 and master channel, but not yet in '
+                      'Flutter 3.7. This ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -382,9 +378,10 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Currently you have to create these M3 IconButtons '
-                      'as custom widgets using styleFrom. There is example '
-                      'code showing how to do it correctly in the Flutter ',
+                  text: '. In Flutter 3.3 and 3.7 you have to create these '
+                      'M3 IconButtons as custom widgets using styleFrom. '
+                      'There is example code showing how to do it correctly '
+                      'in the Flutter ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -394,8 +391,15 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. It is a bit tedious to construct them, '
-                      'but at least doable, but not with any built-in '
-                      'constructors yet, nor is theming them possible.\n',
+                      'but at least doable, the built-in '
+                      'constructors are available in Flutter 3.10 beta, but '
+                      'theming them is not possible with above mentioned '
+                      'issue.\n'
+                      '\n'
+                      'Due to this theming limitation, FCS is currently not '
+                      'offering any color theming for the IconButton '
+                      'variants. Their default styles are however quite '
+                      'diverse and use very usable default color mappings.\n',
                 ),
               ],
             ),

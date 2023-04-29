@@ -479,23 +479,19 @@ extension FlexThemeData on ThemeData {
 
     /// The background color of [Dialog] elements.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor].
+    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
+    /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
-    /// It is also applied to dialog themes:
+    /// When using sub-themes, it is also applied to backgroundColor in
+    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
+    /// has not be defined in [subThemesData].
+    ///
+    /// * DatePickerThemeData
     /// * DialogTheme
     /// * TimePickerThemeData
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
-    ///
-    /// If you assign a background [SchemeColor] to
-    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
-    /// opted in on using component sub themes, then the selected scheme
-    /// color will override this value.
-    ///
-    /// Defaults to null, resulting in theme surface being used.
+    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
+    /// is defined, default color is [surface].
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -832,6 +828,8 @@ extension FlexThemeData on ThemeData {
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DatePickerThemeData] for [DatePicker] via
+    ///   [FlexSubThemes.datePickerTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
@@ -1776,23 +1774,19 @@ extension FlexThemeData on ThemeData {
 
     /// The background color of [Dialog] elements.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor].
+    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
+    /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
-    /// It is also applied to dialog themes:
+    /// When using sub-themes, it is also applied to backgroundColor in
+    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
+    /// has not be defined in [subThemesData].
+    ///
+    /// * DatePickerThemeData
     /// * DialogTheme
     /// * TimePickerThemeData
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
-    ///
-    /// If you assign a background [SchemeColor] to
-    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
-    /// opted in on using component sub themes, then the selected scheme
-    /// color will override this value.
-    ///
-    /// Defaults to null, resulting in theme surface being used.
+    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
+    /// is defined, default color is [surface].
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -2129,6 +2123,8 @@ extension FlexThemeData on ThemeData {
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DatePickerThemeData] for [DatePicker] via
+    ///   [FlexSubThemes.datePickerTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via

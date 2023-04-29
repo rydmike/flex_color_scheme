@@ -2,6 +2,41 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.1.0-dev.2 
+
+**Apr 27, 2023**
+
+This beta-2 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 beta channel. This version, like 7.1.0-dev.1 beta-1 requires minimum Flutter version 3.10.0-1.3.pre or later. The **ThemesPlayground** built for this version is using Flutter beta channel version 3.10.0-1.4.pre, but package works fine also with beta channel version 3.10.0-1.3.pre. This version is a preparation and test of FlexColorScheme for the next stable Flutter release after version 3.7.x. 
+
+**NEW**
+
+* Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
+
+## 7.1.0-dev.1
+
+**Apr 24, 2023**
+
+This beta-1 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 beta channel. It requires Flutter version 3.10.0-1.3.pre or later. This beta version is a first preparation version of FlexColorScheme for the next stable Flutter release after version 3.7.x.
+
+**NEW**
+
+* Added `datePickerTheme` to `FlexSubThemes`.
+* Added properties `datePickerDialogRadius` and `datePickerHeaderBackgroundSchemeColor`  to `FlexSubThemesData`.
+
+**THEMES PLAYGROUND**
+
+* **NEW**
+  - Added selection of themed header color scheme color for the DatePickerDialog on the Dialogs panel.
+  - Added showing SearchBar with SearchView to the AppBar panel.
+  - Added showing SearchBar with SearchView to the Widget Showcase.
+
+* **UPDATE**
+  - Reviewed and updated status of all known theming issues in info expands.
+
+* **SKIA**
+  - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
+  - The beta-1 version of Themes Playground 7.1 for FCS 7.1 can be tested [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
+
 ## 7.0.5
 
 **Apr 29, 2023**

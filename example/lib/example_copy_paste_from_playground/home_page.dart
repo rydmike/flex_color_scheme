@@ -238,11 +238,11 @@ class _MaterialButtonsShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
       title: const Text('Material Buttons'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             ElevatedButtonShowcase(),
             SizedBox(height: 8),
             SizedBox(height: 8),
@@ -275,11 +275,11 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.toggle_on_outlined, color: iconColor),
       title: const Text('Common Widgets'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             FabShowcase(),
             SizedBox(height: 8),
             ChipShowcase(),
@@ -321,11 +321,11 @@ class _TextInputFieldShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextField'),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             TextInputField(),
             SizedBox(height: 8),
             DropDownButtonFormField(),
@@ -352,9 +352,9 @@ class _ListTileShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTile'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           ListTileAllShowcase(),
           Divider(),
           ExpansionTileShowcase(),
@@ -381,10 +381,12 @@ class _TabBarShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
       title: const Text('AppBar TabBar BottomAppBar'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           AppBarShowcase(),
+          SizedBox(height: 8),
+          SearchBarShowcase(),
           SizedBox(height: 8),
           TabBarForAppBarShowcase(),
           SizedBox(height: 8),
@@ -412,9 +414,9 @@ class _BottomBarShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.video_label, color: iconColor),
       title: const Text('NavigationBar'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           SizedBox(height: 8),
           BottomNavigationBarShowcase(),
           SizedBox(height: 8),
@@ -460,9 +462,9 @@ class _NavigationDrawerShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.featured_video_outlined, color: iconColor),
       title: const Text('NavigationDrawer'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           NavigationDrawerShowcase(),
           DrawerShowcase(),
           SizedBox(height: 32),
@@ -487,9 +489,9 @@ class _DialogShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
       title: const Text('Dialogs'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           SizedBox(height: 8),
           AlertDialogShowcase(),
           SizedBox(height: 8),
@@ -517,9 +519,9 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.all(16),
             child: BottomSheetShowcase(),
