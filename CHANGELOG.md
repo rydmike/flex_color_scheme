@@ -2,6 +2,12 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.0.5
+
+**Apr 29, 2023**
+
+- **Fix:** [#143](https://github.com/rydmike/flex_color_scheme/issues/143) Glitches in highlighting effect on mouse hover over `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+
 ## 7.0.4
 
 **Apr 22, 2023**
