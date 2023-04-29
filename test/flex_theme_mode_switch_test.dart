@@ -352,6 +352,7 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(const ThemeSwitchApp(
         themeMode: ThemeMode.system,
+        changePadding: true,
       ));
 
       // EXPECT: That we find the built MaterialApp.
@@ -495,6 +496,7 @@ class ThemeSwitchApp extends StatefulWidget {
     this.selected = true,
     this.hasTitle = true,
     this.title,
+    this.changePadding = false,
     super.key,
   });
   final ThemeMode themeMode;
@@ -507,6 +509,7 @@ class ThemeSwitchApp extends StatefulWidget {
   final bool selected;
   final bool hasTitle;
   final Widget? title;
+  final bool changePadding;
 
   @override
   State<ThemeSwitchApp> createState() => _ThemeSwitchAppState();
@@ -515,6 +518,10 @@ class ThemeSwitchApp extends StatefulWidget {
 class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
   ThemeMode? mode;
   late bool selected;
+  bool padNormal = true;
+
+  static const EdgeInsetsGeometry padDir = EdgeInsetsDirectional.all(6);
+  static const EdgeInsetsGeometry padNor = EdgeInsets.all(4);
 
   @override
   void initState() {
@@ -551,9 +558,20 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
                 buttonOrder: widget.order,
                 title: widget.title,
                 hasTitle: widget.hasTitle,
+                optionButtonMargin: widget.changePadding
+                    ? padNormal
+                        ? padNor
+                        : padDir
+                    : null,
+                padding: widget.changePadding
+                    ? padNormal
+                        ? padDir
+                        : padNor
+                    : null,
                 onThemeModeChanged: (ThemeMode value) {
                   setState(() {
                     mode = value;
+                    padNormal = !padNormal;
                   });
                 },
                 flexSchemeData: FlexColor.schemes[FlexScheme.material]!),
@@ -561,10 +579,21 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
               key: const ValueKey<String>('option'),
               flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.light,
               backgroundColor: Colors.white,
+              optionButtonMargin: widget.changePadding
+                  ? padNormal
+                      ? padNor
+                      : padDir
+                  : null,
+              padding: widget.changePadding
+                  ? padNormal
+                      ? padDir
+                      : padNor
+                  : null,
               selected: selected,
               onSelect: () {
                 setState(() {
                   selected = !selected;
+                  padNormal = !padNormal;
                 });
               },
             ),

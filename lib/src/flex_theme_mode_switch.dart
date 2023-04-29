@@ -74,6 +74,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
     this.borderRadius = 4,
     this.padding,
     this.hoverColor,
+    this.focusColor,
   })  : assert(selectedElevation >= 0.0, 'Selected elevation must be >= 0.0'),
         assert(
             unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0');
@@ -98,20 +99,24 @@ class FlexThemeModeSwitch extends StatelessWidget {
   final bool hasTitle;
 
   /// Option label for theme mode light.
+  ///
   /// Defaults to 'LIGHT', assign null to omit the label.
   final String labelLight;
 
   /// Option label for theme mode dark.
+  ///
   /// Defaults to 'DARK', assign null to omit the label.
   final String labelDark;
 
   /// Option label for theme mode system.
+  ///
   /// Defaults to 'SYSTEM', assign null to omit the label.
   final String labelSystem;
 
   /// Include a theme option button for selecting system theme mode.
   ///
   /// Defaults to true.
+  ///
   /// If set to false, only a light and dark-mode options are available.
   final bool showSystemMode;
 
@@ -124,77 +129,103 @@ class FlexThemeModeSwitch extends StatelessWidget {
   final FlexThemeModeButtonOrder buttonOrder;
 
   /// Optional text style for the theme mode selected label.
+  ///
   /// If null, default to Theme.of(context).textTheme.caption).
   final TextStyle? selectedLabelStyle;
 
   /// Optional text style for the theme mode unselected label.
+  ///
   /// If null, default to Theme.of(context).textTheme.caption).
   final TextStyle? unselectedLabelStyle;
 
+  /// Label is positioned above the option button.
+  ///
   /// If true, the label will be above the option button, if false the
   /// label will be below the option button. Defaults to true.
   final bool labelAbove;
 
   /// Background color for the light theme option button.
+  ///
   /// If null, defaults to `Colors.white`.
   final Color? backgroundLight;
 
   /// Background color for the dark theme option button.
+  ///
   /// If null, defaults to `Colors.grey[850]`.
   final Color? backgroundDark;
 
   /// Background color for the system theme option button.
+  ///
   /// If null, defaults to `Colors.grey[500]`.
   final Color? backgroundSystem;
 
   /// Border side for the selected option state.
+  ///
   /// If null, defaults to
   /// `BorderSide(color: Theme.of(context).colorScheme.primary, width: 4)`.
   final BorderSide? selectedBorder;
 
   /// Border side for the unselected option state.
+  ///
   /// If null, defaults to `BorderSide(color: Theme.of(context).dividerColor)`.
   final BorderSide? unselectedBorder;
 
   /// The elevation of the option button when selected.
+  ///
   /// Defaults to 0 dp.
   final double selectedElevation;
 
   /// The elevation of the option button when unselected.
+  ///
   /// Defaults to 0 dp.
   final double unselectedElevation;
 
   /// Padding around the option button.
+  ///
   /// If null, defaults to `const EdgeInsetsDirectional.only(start: 6)`.
-  final EdgeInsets? optionButtonPadding;
+  final EdgeInsetsGeometry? optionButtonPadding;
 
-  /// The margin inside the option button before the scheme color boxes.
+  /// The margin inside the option button, before the scheme color boxes.
+  ///
   /// If null, defaults to `const EdgeInsets.all(4)`.
-  final EdgeInsets? optionButtonMargin;
+  final EdgeInsetsGeometry? optionButtonMargin;
 
-  /// The circular borderRadius of the option button
+  /// The circular borderRadius of the option button.
+  ///
   /// Defaults to 5 dp.
   final double optionButtonBorderRadius;
 
-  /// The height of an individual scheme color box. Defaults to 24 dp.
+  /// The height of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 24 dp.
+  /// The width of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
+  ///
   /// Defaults to 3 dp.
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
+  ///
   /// If null, default to `const EdgeInsets.all(3)`
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   /// The InkWell hover color for the option buttons.
   ///
   /// If null, defaults to `Color(0x50BCBCBC)` in light mode and to
   /// `Color(0x99555555)` dark mode.
   final Color? hoverColor;
+
+  /// The InkWell focus color for the option button.
+  ///
+  /// If not defined, defaults to Theme.of(context).focusColor, via InkWell
+  /// default behavior.
+  final Color? focusColor;
 
   @override
   Widget build(BuildContext context) {
@@ -223,6 +254,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       borderRadius: borderRadius,
       padding: padding,
       hoverColor: hoverColor,
+      focusColor: focusColor,
     );
 
     final FlexThemeModeOptionButton darkButton = FlexThemeModeOptionButton(
@@ -249,6 +281,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       borderRadius: borderRadius,
       padding: padding,
       hoverColor: hoverColor,
+      focusColor: focusColor,
     );
 
     // Option button for system theme mode. For this case we show
@@ -286,6 +319,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       borderRadius: borderRadius,
       padding: padding,
       hoverColor: hoverColor,
+      focusColor: focusColor,
     );
 
     return Row(
@@ -373,7 +407,9 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   /// Defaults to Material default background color if null.
   final Color? backgroundColor;
 
-  /// Optional text label for the button, if null, the label is omitted.
+  /// Optional text label for the button.
+  ///
+  /// If not defined, the label is omitted.
   final String? label;
 
   /// Optional semantic label for the button.
@@ -383,9 +419,12 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   final String? semanticLabel;
 
   /// Optional text style for the [label].
+  ///
   /// If null, default to Theme.of(context).textTheme.caption).
   final TextStyle? labelStyle;
 
+  /// Label is positioned above the option button.
+  ///
   /// If true, the label will be above the option button, if false the
   /// label will be below the option button. Defaults to true.
   final bool labelAbove;
@@ -401,42 +440,54 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   final VoidCallback? onSelect;
 
   /// Border side for the selected option state.
+  ///
   /// If null, defaults to
   /// `BorderSide(color: Theme.of(context).colorScheme.primary, width: 4)`.
   final BorderSide? selectedBorder;
 
   /// Border side for the unselected option state.
+  ///
   /// If null, defaults to `BorderSide(color: Theme.of(context).dividerColor)`.
   final BorderSide? unselectedBorder;
 
   /// The elevation of the option button.
+  ///
   /// Defaults to 0 dp.
   final double elevation;
 
   /// Padding around the option button.
+  ///
   /// If null, defaults to `const EdgeInsetsDirectional.only(start: 6)`.
   final EdgeInsetsGeometry? optionButtonPadding;
 
-  /// The margin inside the option button before the scheme color boxes.
-  /// If null, defaults to `EdgeInsets.all(4)`.
+  /// The margin inside the option button, before the scheme color boxes.
+  ///
+  /// If null, defaults to `const EdgeInsets.all(2)`.
   final EdgeInsetsGeometry? optionButtonMargin;
 
-  /// The circular borderRadius of the option button
+  /// The circular borderRadius of the option button,
+  ///
   /// Defaults to 5 dp.
   final double optionButtonBorderRadius;
 
-  /// The height of an individual scheme color box. Defaults to 24 dp.
+  /// The height of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 24 dp.
+  /// The width of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
+  ///
   /// Defaults to 4 dp.
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
-  /// If null, default to `const EdgeInsets.all(4)`
+  ///
+  /// If null, default to `const EdgeInsets.all(3)`
   final EdgeInsetsGeometry? padding;
 
   /// The InkWell hover color for the option button.
@@ -444,13 +495,14 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   /// If null, defaults to `Color(0x50BCBCBC)` in light mode and to
   /// `Color(0x99555555)` in dark-mode.
   ///
-  /// If using nice custom theming that should be used, pass in
+  /// If using custom theming that should be used, pass in
   /// Theme.of(context).hoverColor.
   final Color? hoverColor;
 
   /// The InkWell focus color for the option button.
   ///
-  /// If not defined, default to Theme.of(context).focusColor.
+  /// If not defined, defaults to Theme.of(context).focusColor, via InkWell
+  /// default behavior.
   final Color? focusColor;
 
   /// If true, sets focus to the button when it is tapped.
@@ -465,17 +517,55 @@ class FlexThemeModeOptionButton extends StatefulWidget {
 
 class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
   late final FocusNode _focusNode;
+  // Paddings needed for the size of the buttons so we can make a SizedBox
+  // with the Ink in a Sized transparent Material on top of the buttons.
+  double padX = 0;
+  double padY = 0;
+  // Default padding around an individual scheme color box.
+  static const EdgeInsets _padding = EdgeInsets.all(3);
+  // The default margin inside the option button, before the scheme color boxes.
+  static const EdgeInsets _optionButtonMargin = EdgeInsets.all(4);
+
+  void updatePaddings() {
+    final EdgeInsetsGeometry padding = widget.padding ?? _padding;
+    if (padding is EdgeInsets) {
+      padX = (padding.left + padding.right) * 2;
+      padY = (padding.top + padding.bottom) * 2;
+    } else if (padding is EdgeInsetsDirectional) {
+      padX = (padding.start + padding.end) * 2;
+      padY = (padding.top + padding.bottom) * 2;
+    }
+    final EdgeInsetsGeometry optionButtonMargin =
+        widget.optionButtonMargin ?? _optionButtonMargin;
+    if (optionButtonMargin is EdgeInsets) {
+      padX += optionButtonMargin.left + optionButtonMargin.right;
+      padY += optionButtonMargin.top + optionButtonMargin.bottom;
+    } else if (optionButtonMargin is EdgeInsetsDirectional) {
+      padX += optionButtonMargin.start + optionButtonMargin.end;
+      padY += optionButtonMargin.top + optionButtonMargin.bottom;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     _focusNode = FocusNode();
+    updatePaddings();
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant FlexThemeModeOptionButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.padding != oldWidget.padding ||
+        widget.optionButtonMargin != oldWidget.optionButtonMargin) {
+      updatePaddings();
+    }
   }
 
   @override
@@ -486,31 +576,6 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
             ? const Color(0x50BCBCBC)
             : const Color(0x99555555));
 
-    // Need the size of the buttons so we can make a SizedBox with the Ink
-    // in a Sized transparent Material on top of the buttons.
-    //
-    // Default padding: 2* 3dp on all sides and two buttons with the padding.
-    double padX = 2 * 4 * 2;
-    double padY = 2 * 4 * 2;
-    // Customized padding can be via EdgeInsets or EdgeInsetsDirectional.
-    if (widget.padding != null) {
-      if (widget.padding is EdgeInsets) {
-        padX = ((widget.padding! as EdgeInsets).left +
-                (widget.padding! as EdgeInsets).right) *
-            2;
-        padY = ((widget.padding! as EdgeInsets).top +
-                (widget.padding! as EdgeInsets).bottom) *
-            2;
-      }
-      if (widget.padding is EdgeInsetsDirectional) {
-        padX = ((widget.padding! as EdgeInsetsDirectional).start +
-                (widget.padding! as EdgeInsetsDirectional).end) *
-            2;
-        padY = ((widget.padding! as EdgeInsetsDirectional).top +
-                (widget.padding! as EdgeInsetsDirectional).bottom) *
-            2;
-      }
-    }
     return Semantics(
       label: widget.semanticLabel ?? widget.label ?? 'Theme mode option button',
       selected: widget.selected,
@@ -549,10 +614,11 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                             ),
                   ),
                   child: Stack(
+                    // alignment: AlignmentDirectional.center,
                     children: <Widget>[
                       Padding(
-                        padding: widget.optionButtonMargin ??
-                            const EdgeInsets.all(4),
+                        padding:
+                            widget.optionButtonMargin ?? _optionButtonMargin,
                         child: Column(
                           children: <Widget>[
                             Row(
@@ -562,14 +628,14 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                                   height: widget.height,
                                   width: widget.width,
                                   borderRadius: widget.borderRadius,
-                                  padding: widget.padding,
+                                  padding: widget.padding ?? _padding,
                                 ),
                                 _SchemeColorBox(
                                   color: widget.flexSchemeColor.secondary,
                                   height: widget.height,
                                   width: widget.width,
                                   borderRadius: widget.borderRadius,
-                                  padding: widget.padding,
+                                  padding: widget.padding ?? _padding,
                                 ),
                               ],
                             ),
@@ -581,14 +647,14 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                                   height: widget.height,
                                   width: widget.width,
                                   borderRadius: widget.borderRadius,
-                                  padding: widget.padding,
+                                  padding: widget.padding ?? _padding,
                                 ),
                                 _SchemeColorBox(
                                   color: widget.flexSchemeColor.tertiary,
                                   height: widget.height,
                                   width: widget.width,
                                   borderRadius: widget.borderRadius,
-                                  padding: widget.padding,
+                                  padding: widget.padding ?? _padding,
                                 ),
                               ],
                             ),
@@ -642,31 +708,38 @@ class _SchemeColorBox extends StatelessWidget {
     this.height = 24,
     this.width = 24,
     this.borderRadius = 4,
-    this.padding,
+    this.padding = const EdgeInsets.all(3),
   });
 
   /// The background color used to draw an individual scheme color box.
+  ///
   /// Required, cannot be null.
   final Color color;
 
-  /// The height of an individual scheme color box. Defaults to 24 dp.
+  /// The height of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double height;
 
-  /// The width of an individual scheme color box. Defaults to 24 dp.
+  /// The width of an individual scheme color box.
+  ///
+  /// Defaults to 24 dp.
   final double width;
 
   /// The circular borderRadius of an individual scheme color box.
+  ///
   /// Defaults to 4 dp.
   final double borderRadius;
 
   /// Padding around an individual scheme color box.
-  /// If null, default to `const EdgeInsets.all(3)`
-  final EdgeInsetsGeometry? padding;
+  ///
+  /// Defaults to `const EdgeInsets.all(3)`.
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ?? const EdgeInsets.all(3),
+      padding: padding,
       child: Container(
         height: height,
         width: width,
