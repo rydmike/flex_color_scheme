@@ -21,7 +21,7 @@
 name: Deploy Web
 on:
   push:
-    branches: [master]
+    branches: [none]
     paths-ignore:
      - "**.md"
   pull_request:
