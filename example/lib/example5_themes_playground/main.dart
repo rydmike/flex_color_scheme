@@ -86,10 +86,10 @@ class PlaygroundApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Whenever the theme controller notifies the animation listener in the
-    // AnimatedBuilder, the MaterialApp is rebuilt.
-    return AnimatedBuilder(
-      animation: controller,
+    // Whenever the theme controller notifies the listenable in the
+    // ListenableBuilder, the MaterialApp is rebuilt.
+    return ListenableBuilder(
+      listenable: controller,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,

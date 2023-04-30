@@ -12,6 +12,10 @@ This beta-2 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 be
 
 * Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
 
+**CHANGE**
+
+* Changed all examples to use new `ListenableBuilder` instead of `AnimatedBuilder`. 
+
 ## 7.1.0-dev.1
 
 **Apr 24, 2023**
