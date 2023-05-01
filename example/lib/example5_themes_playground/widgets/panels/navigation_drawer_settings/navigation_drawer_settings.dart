@@ -537,7 +537,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: 'The NavigationDrawer and its Indicator styling has a '
                       'fair amount of minor issues in Flutter 3.7 and 3.10 '
-                      'beta that limits '
+                      'that limits '
                       'useful styling capabilities options. You can find '
                       'an overview of them and their status in ',
                 ),

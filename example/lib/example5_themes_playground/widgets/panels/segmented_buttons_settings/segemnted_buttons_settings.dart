@@ -466,7 +466,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', this is fixed in beta 3.10. Min height or size '
+                  text: ', this is fixed in 3.10. Min height or size '
                       'cannot be set, ',
                 ),
                 LinkTextSpan(
@@ -495,7 +495,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', this is fixed in beta 3.10.\n',
+                  text: ', this is fixed in 3.10.\n',
                 ),
               ],
             ),

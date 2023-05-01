@@ -47,7 +47,7 @@ class SchemeColors extends StatelessWidget {
     final bool showInputColor = tc.showSchemeInput;
 
     // Size of the color presentation boxes
-    const double boxWidth = 152;
+    const double boxWidth = 150;
     final double boxHeight = showInputColor ? 230 : 200;
 
     // Theme values...

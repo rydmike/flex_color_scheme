@@ -30,7 +30,7 @@ class SurfaceColors extends StatelessWidget {
     // last index in out list of color schemes.
 
     // Size of the color presentation boxes
-    const double boxWidth = 152;
+    const double boxWidth = 150;
     const double boxHeight = 180;
 
     // Theme values...

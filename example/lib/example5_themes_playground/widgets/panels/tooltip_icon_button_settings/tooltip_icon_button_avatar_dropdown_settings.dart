@@ -357,8 +357,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                       'therefore kept as it is.\n'
                       '\n'
                       'The constructors for above IconButtons are available in '
-                      'the beta 3.10 and master channel, but not yet in '
-                      'Flutter 3.7. This ',
+                      'Flutter 3.10, but not in Flutter 3.7. This ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -369,8 +368,8 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                     style: spanTextStyle,
                     text: ' and its referenced PR brought the new styled '
                         'IconButton constructors. These new IconButtons have '
-                        'the same theming limitation as the FilledButton, '
-                        'for more information about it, see issue '),
+                        'the same theming limitation as the FilledButton. '
+                        'For more information about this, see issue '),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssue123829,
@@ -392,14 +391,14 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: '. It is a bit tedious to construct them, '
                       'but at least doable, the built-in '
-                      'constructors are available in Flutter 3.10 beta, but '
+                      'constructors are available in Flutter 3.10, but '
                       'theming them is not possible with above mentioned '
                       'issue.\n'
                       '\n'
                       'Due to this theming limitation, FCS is currently not '
                       'offering any color theming for the IconButton '
                       'variants. Their default styles are however quite '
-                      'diverse and use very usable default color mappings.\n',
+                      'diverse and have very usable default color mappings.\n',
                 ),
               ],
             ),

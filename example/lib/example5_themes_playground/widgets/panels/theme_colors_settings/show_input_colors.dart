@@ -41,7 +41,7 @@ class ShowInputColors extends StatelessWidget {
     final bool showInputColor = controller.showSchemeInput;
 
     // Size of theme color presentation boxes
-    const double boxWidth = 152;
+    const double boxWidth = 150;
     final double boxHeight = showInputColor ? 130 : 78;
 
     // Theme values...

@@ -553,8 +553,7 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                     style: spanTextStyle,
-                    text:
-                        '. This is fixed in 3.10 beta, but not in stable 3.7. '
+                    text: '. This is fixed in 3.10, but not in 3.7. '
                         'The theming and defaults are also incorrect for the '
                         'action icons, see '),
                 LinkTextSpan(
@@ -565,7 +564,7 @@ class AppBarSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. There is a fix in master, but it not available in '
-                      '3.10 beta or Flutter stable 3.7, or earlier versions.',
+                      'Flutter 3.7 or 3.10.',
                 ),
               ],
             ),
@@ -575,13 +574,13 @@ class AppBarSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('SearchBar'),
           subtitle: Text('The SearchBar with SearchView is new in Flutter '
-              'beta 3.10. A convenient way to create a search bar with a '
+              '3.10. A convenient way to create a search bar with a '
               'view is with the factory SearchAnchor.bar.\n'
               '\n'
               'FCS does not provide any convenience theming features for '
               'the search bar in current version, but may add some later. '
-              'A theming issue where the border in the view cannot be '
-              'removed is being investigated.'),
+              'A theming where custom themed decorator cannot be removed '
+              'from the search results view is being investigated.'),
         ),
         const SearchBarShowcase(),
         const Divider(),
@@ -776,8 +775,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. It has a fix in latest beta 3.10 and will land in '
-                      'next stable release.\n',
+                  text: '. The fix is available in Flutter 3.10 '
+                      'and later.\n',
                 ),
               ],
             ),

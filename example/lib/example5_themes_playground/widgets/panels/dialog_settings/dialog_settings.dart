@@ -219,8 +219,8 @@ class DialogSettings extends StatelessWidget {
               'Material 3 styling of the TimePicker. FlexColorScheme adds '
               'M3 styling based on M3 specification already in Flutter 3.7 '
               'where it is supported by its theming capabilities. '
-              'In Flutter 3.10 beta, TimePicker theming is fully supported. '
-              'The 3.10 theming has some bugs though, see known issues.\n'),
+              'In Flutter 3.10 TimePicker theming is fully supported. The '
+              '3.10 theming has some bugs, see known issues below.\n'),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -312,7 +312,7 @@ class DialogSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.10 beta the ClockDial background uses '
+                  text: 'In Flutter 3.10 the ClockDial background uses '
                       'wrong default background color in M3 mode. To see the '
                       'issue turn off FCS in M3 mode. For more info see ',
                 ),
@@ -337,7 +337,7 @@ class DialogSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: Text('Flutter 3.7 does not support any Material 3 styling '
               'of the DatePicker, there is not even a theme for DatePicker '
-              'in Flutter 3.7. Flutter 3.10 beta adds theming support to '
+              'in Flutter 3.7. Flutter 3.10 adds theming support to '
               'the DatePicker.\n'),
         ),
         ColorSchemePopupMenu(

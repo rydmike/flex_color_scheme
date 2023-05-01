@@ -45,10 +45,10 @@ class EffectiveColors extends StatelessWidget {
             'ColorScheme class. Deprecated colors primaryVariant and '
             'secondaryVariant are excluded.\n'
             '\n'
-            'When you make custom components are assign custom colors '
-            'the component themes, prefer using colors that are '
+            'When you make custom components or assign custom colors to '
+            'component themes, prefer using colors that are '
             "available in the application's ColorScheme. Flutter Material "
-            'widget are still bing transitioned to using only ColorScheme '
+            'widgets are still being transitioned to using only ColorScheme '
             'based colors. In M3 mode this migration is well on the way, '
             'but in M2 mode some components still use colors defined '
             'directly in ThemeData. Avoid using colors directly from '
@@ -82,7 +82,7 @@ class EffectiveColors extends StatelessWidget {
                   style: spanTextStyle,
                   text: '.\n'
                       '\n'
-                      'ThemeData colors are still important in Flutter 3.7 '
+                      'ThemeData colors are still important in Flutter 3.10 '
                       'and earlier. Some widgets still depend on them for '
                       'their default colors, especially when using M2. '
                       'FlexColorScheme keeps them in sync with ColorScheme to '

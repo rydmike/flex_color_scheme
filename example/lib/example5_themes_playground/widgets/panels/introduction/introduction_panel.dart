@@ -194,7 +194,7 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: Text('Like Flutter, FlexColorScheme also uses different '
               'theming defaults for some properties in M2 and M3 mode. '
               'If a value has not been set, it will show you what the default '
-              'is, if you toggle M2/M3 it will change to show the default for '
+              'is. When you toggle M2/M3 it will change to show the default for '
               'the used mode. The Playground also shows what the default '
               'values are in Flutter SDK in both M2 and M3 mode, when FCS or '
               'its sub-themes are not being used.'),
@@ -203,8 +203,8 @@ class IntroductionPanel extends StatelessWidget {
           title: Text('Flutter SDK Material 3 Issues'),
           subtitle: Text('In Flutter 3.7 and later there are only minor issues '
               'with Material 3, with low impact on apps using it. '
-              'FlexColorScheme is also able to work around and fix some of '
-              'them. In Flutter 3.3 and earlier, there are many severe issues '
+              'FlexColorScheme is able to work around and fix some of '
+              'them. In Flutter 3.3 and earlier, there are significant issues '
               'related to enabling and using Material 3.'),
         ),
         Padding(
@@ -227,12 +227,12 @@ class IntroductionPanel extends StatelessWidget {
                   style: spanTextStyle,
                   text: '. Due to the large number of issues and also '
                       'incomplete state of Material 3 implementation in '
-                      'Flutter 3.3 and earlier, we do NOT recommend using '
+                      'Flutter 3.3 and earlier, we do not recommend using '
                       'M3 with Flutter 3.3 or earlier versions.\n'
                       '\n'
-                      'In Flutter 3.7 and later, M3 is ready and can be '
-                      'used in production. Some minor M3 fidelity and '
-                      'specification compliance issues still exists. They '
+                      'In Flutter 3.7 or later versions, M3 is ready and can '
+                      'be used in production. Some minor M3 fidelity and '
+                      'specification compliance issues still exist. They '
                       'are minor and will be fixed in later releases.',
                 ),
               ],
