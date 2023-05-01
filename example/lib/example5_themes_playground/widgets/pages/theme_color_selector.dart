@@ -83,7 +83,7 @@ class ThemeColorSelector extends StatelessWidget {
                             : null,
                         dense: isPhone,
                         title: isNarrow
-                            ? const Text('Sub')
+                            ? const Text('Themes')
                             : const Text('Use sub themes'),
                         value: controller.useSubThemes &&
                             controller.useFlexColorScheme,
