@@ -488,7 +488,7 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    sliderIndicatorSchemeColor: ${controller.sliderIndicatorSchemeColor},\n';
-  final String sliderValueTinted = controller.sliderValueTinted == false
+  final String sliderValueTinted = !controller.sliderValueTinted
       ? ''
       : '    sliderValueTinted: ${controller.sliderValueTinted},\n';
   final String sliderValueIndicatorType = controller.sliderValueIndicatorType ==

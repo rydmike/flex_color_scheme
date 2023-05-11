@@ -19,7 +19,6 @@ class UseMaterial3TextTheme extends StatelessWidget {
       case null:
         return 'DEFAULT: Use typography 2021 in M3 and 2018 in M2';
     }
-    return 'DEFAULT: Use typography 2021 in M3 and 2018 in M2';
   }
 
   @override

@@ -2859,11 +2859,9 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
           applicationName: 'MenuAnchor Demo',
           applicationVersion: '1.0.0',
         );
-        break;
       case MenuEntry.showMessage:
       case MenuEntry.hideMessage:
         showingMessage = !showingMessage;
-        break;
       case MenuEntry.colorMenu:
         break;
       case MenuEntry.colorRed:

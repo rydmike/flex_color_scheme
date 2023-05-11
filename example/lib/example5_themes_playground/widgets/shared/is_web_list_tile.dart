@@ -21,7 +21,6 @@ class IsWebListTile extends StatelessWidget {
       case null:
         return 'Actual web platform info (kIsWeb=$kIsWeb) is used';
     }
-    return 'Actual web platform info (kIsWeb=$kIsWeb) is used';
   }
 
   @override

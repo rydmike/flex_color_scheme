@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v2.0.0
+# RydMike LINTER Preferences v2.0.1
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -13,15 +13,15 @@
 # that are turned OFF here, or have a quick placeholder for turning it OFF, are
 # as follows:
 #
-# Core           v2.0.0     : https://pub.dev/packages/lints
+# Core           v2.1.0     : https://pub.dev/packages/lints
 # Recommended    v2.0.0     : https://pub.dev/packages/lints
-# Flutter Lints  v2.0.1     : https://pub.dev/packages/flutter_lints
+# Flutter Lints  v2.1.0     : https://pub.dev/packages/flutter_lints
 # Pedantic       v1.11.1    : https://pub.dev/packages/pedantic
 # Effective Dart v1.3.2     : https://pub.dev/packages/effective_dart
 # Flutter repo   master     : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
 # Lint           v1.8.2     : https://pub.dev/packages/lint
 # VG Analysis    v3.0.0     : https://pub.dev/packages/very_good_analysis
-# RydMike        v2.0.0     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+# RydMike        v2.0.1     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
 include: all_lint_rules.yaml
 analyzer:
@@ -42,7 +42,7 @@ analyzer:
   errors:
     # Without ignore here, we cause import of all_lint_rules to warn, because some rules conflict.
     # We explicitly enabled even conflicting rules and are fixing the conflicts in this file.
-    # Put it to warning temporarily, if you need troubleshoot lint rule settings.
+    # Put it to warning temporarily if you need to troubleshoot lint rule settings.
     included_file_warning: ignore
 
     # Treat missing required parameters as an error, not as a hint or a warning.
@@ -52,20 +52,20 @@ analyzer:
     missing_return: error
 
     # Allow self-reference to deprecated members. This is done because otherwise we have
-    # to annotate every member in every test, assert, etc., when we deprecate something.
+    # to annotate every member in every test, assert, etc. when we deprecate something.
     deprecated_member_use_from_same_package: ignore
 
     # DON'T assign new values to parameters of methods or functions.
     #
     # https://dart-lang.github.io/linter/lints/parameter_assignments.html
     #
-    # Treat assigning new values to a parameter as a warning. We would almost like to set this
-    # to an error. However, this warning rule or even more so if set to an error, can sometimes
-    # be a bit problematic you include other code directly that does it a lot.
-    # It does however, make code safer when this cannot be done without involving
+    # Treats assigning new values to a parameter as a warning. We would almost like to set this
+    # to an error. However, this warning rule, or even more so if you set it to be an error, may
+    # be a bit problematic if/when you include other code directly that does it a lot.
+    # It does, however, make code safer when this cannot be done without involving
     # an extra local variable for clarity and safety. Enabling this error, even as just a warning,
     # does get in the way a bit if all you want to do is a null to default value release runtime
-    # safety/fallback assignment. For that use case you have to add a local rule override. With
+    # safety/fallback assignment. For that use case, you have to add a local rule override. With
     # null-safety, the need for this kind of null check and re-assignment to default if null,
     # is rarely needed. Considering the comment in:
     # https://dart-lang.github.io/linter/lints/parameter_assignments.html:
@@ -74,8 +74,8 @@ analyzer:
     # One might even think the rule would allow using the ??= operator, but it does not. For now,
     # we keep this lint as warning and overriding locally with:
     #
-    # When we need it for the ??= operator, or some copy/paste in of some code that does things
-    # that needs it too, and that we don't want to deal with fixing at the moment.
+    # When we need it for the ??= operator, or some copy/pasted in code that does things that
+    # require it, that we don't want to deal with fixing at the moment.
     parameter_assignments: warning
 
     # Allow having TODOs in the code.
@@ -91,8 +91,8 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/always_put_control_body_on_new_line.html
     #
-    # This sometimes makes things more unclear when one line is enough.
-    # Also single line `if`s are fine as recommended in Effective Dart "DO format your code using dartfmt".
+    # This sometimes makes things more unclear when one line is enough. Also, single line if:s are
+    # fine and also recommended in Effective Dart "DO format your code using dartfmt".
     #
     # Other known linters use:
     #
@@ -137,21 +137,26 @@ linter:
     #
     # This makes most code intent very explicit, sometimes this may help you
     # reason about unfamiliar libs, but it might get tedious when dealing with very familiar ones.
-    # For people used to more relaxed or no type declaration, it is probably the other way around.
-    # This rule is of course also in conflict with some other lint rules, most notably it
+    # For devs used to more relaxed or no type declaration, it is probably the other way around.
+    # This rule is, of course, also in conflict with some other lint rules. Most notably, it
     # violates Effective Dart "AVOID type annotating initialized local variables".
     # https://dart-lang.github.io/linter/lints/omit_local_variable_types.html
-    # Which we find to be a strange rule, the package lint agrees, with the statement that
+    # Which we find to be a strange rule, the package lint agrees with the statement that
     # "Types for local variables may improve readability" and keeps that avoid rule disabled.
     #
-    # Turning always_specify_types lint rule on in a project at later stage is very tedious, fixing
-    # all the analyzer warnings will take quite some time. Having it on as you write new code
+    # Turning always_specify_types lint rule on in a project at a later stage is very tedious,
+    # fixing all the analyzer warnings will take quite some time. Having it on as you write new code
     # is not so bad though, the IDE will handle it most of the time.
-    # Most people probably want this lint rule OFF, but for now we try to keep it on
-    # in our projects. We might reconsider this choice later, for example this issue has requested
+    #
+    # Most people probably want this lint rule OFF, but for now we keep it on in our projects.
+    # We might reconsider this choice later. For example, this issue has requested
     # a new softer related lint rule that could be used only for declarations:
     # https://github.com/dart-lang/linter/issues/1620
-    # If such a lint rule materializes, we might switch to using it instead and turning this one off.
+    # If such a lint rule materializes, we might switch to using it instead and turn off this lint.
+    #
+    # Using always_specify_type ON lint like Flutter repo does, makes it easier to reason about
+    # unfamiliar codebases, especially when you read it on GitHub where the IDE cannot be used to
+    # look into what type an object is.
     #
     # We felt the above long explanation was warranted as a reminder. Keeping the rule listed here
     # and the setting below, in order to easily turn it OFF permanently some day, or in some
@@ -175,17 +180,17 @@ linter:
     # https://dart-lang.github.io/linter/lints/always_use_package_imports.html
     #
     # This rule conflicts with `prefer_relative_imports` so we turn it OFF.
-    # We are still conflicted about which version to use, keeping it this way for now, as support
-    # for relative imports have improved in both IDE's, but adding imports still often get imported as
+    # We are still conflicted about which version to use, keeping it this way for now. Support
+    # for relative imports has improved in both IDEs. Adding imports still often get imported as
     # package imports, and then you have to edit them manually. The IDEs can help with fixing them.
     # The relative paths can be a bit messy to keep track off, package imports are actually
     # a bit easier from that point of view.
-    # Flutter repo now also prefers relative imports over packages imports, so that is
+    # Flutter repo now also prefers relative imports over package imports, so that is
     # another reason to use that.
     #
     # Use what you prefer, but you have to be consistent though, since mixing and matching can
     # cause issues as the same file imported with the different options are considered to be
-    # different libs and code, even if it is the same file. This may impact functionality
+    # different libs and code, even if it is the same file. This may impact the functionality
     # of e.g. singletons, service locators and increase code size.
     #
     # When you refactor and move folders with a lot of code in them, that other code depends
@@ -229,9 +234,10 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/avoid_catches_without_on_clauses.html
     #
-    # Using catch clauses without on clauses make your code prone to encountering unexpected errors that
-    # won't be thrown (and thus will go unnoticed). BUT, there are situations where we voluntarily want to
-    # catch everything, especially as a library. https://github.com/dart-lang/linter/issues/3023
+    # Using catch clauses without on clauses makes your code prone to encountering unexpected
+    # errors that won't be thrown (and thus will go unnoticed). However, there are situations
+    # where we voluntarily want to catch everything, especially as a library.
+    # See https://github.com/dart-lang/linter/issues/3023
     #
     # Other known linters use:
     #
@@ -250,16 +256,16 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/avoid_classes_with_only_static_members.html
     #
-    # Creating classes with the sole purpose of providing utility or otherwise static methods is discouraged
-    # in effective Dart. Dart allows functions to exist outside of classes for this very reason.
-    # Effective Dart says avoid classes with only static members:
+    # Creating classes with the sole purpose of providing utility, or otherwise static methods, is
+    # discouraged in effective Dart. Dart allows functions to exist outside of classes for this
+    # very reason. Effective Dart says avoid classes with only static members:
     # https://dart.dev/guides/language/effective-dart/design#avoid-defining-a-class-that-contains-only-static-members
     # However, the Flutter style guide says use them when it makes sense:
     # https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#begin-global-constant-names-with-prefix-k
     # Colors is an example of such a class, but they still enable this rule in the repo though, go figure.
     #
     # Like Pedantic, we like util and static classes too, so we use them.
-    # We tried the Effective Dart style and used a of kConstants in different const files. This
+    # We tried the Effective Dart style and used kConstants in different const files. This
     # is more cumbersome to use than static classes. The import is simpler with static classes and
     # the code looks cleaner. If you use a lot of constant files, importing them is more tedious,
     # and you cannot enforce a given 'as' name to have a consistent name space prefix. A static
@@ -342,10 +348,11 @@ linter:
     #
     # Our default is to have this rule enabled.
     #
-    # Examples may want to print to the console, you might want to do so during development too. We keep the rule here
-    # to handily disable/enable as and when needed. This lint rule is a good way to find print statements that you
-    # may have used during development in code that should not have them in production, so at least before
-    # committing the code in such projects, make sure to keep this rule enabled by commenting it out here.
+    # In example apps you may want to print to the console. You may want to do so during development
+    # too. We keep the rule here, to handily disable/enable as and when needed. This lint rule is
+    # a good way to find print statements that you may have used during development in code that
+    # should not have them in production, so at least before committing the code in such
+    # projects, make sure to keep this rule enabled by commenting it out here.
     #
     # Other known linters use:
     #
@@ -360,6 +367,7 @@ linter:
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #   RELEASE:     enabled  : By commenting it out. (default)
     #   DEVELOPMENT: disabled : Uncomment below if the warnings bother you during dev or making a console app.
+    #
     # avoid_print: false
 
     # AVOID redundant argument values.
@@ -368,11 +376,12 @@ linter:
     #
     # Using redundant (default) argument values can be useful for in-code documentation
     # purposes and also handy as a template when trying different settings in Flutter. It is often
-    # quicker when dealing with not well known APIs to see parameter values in the call/constructor,
+    # quicker when dealing with not well-known APIs to see parameter values in the call/constructor,
     # instead of using the IDE to peek into its default to figure out what the defaults are.
-    # Occasionally leaving a few redundant default valued parameters in the code is not that bad
-    # when you are developing something new. For public packages you probably want to keep this
-    # rule enabled. I like to sometimes be explicit and specify values that are same as default one.
+    # Occasionally, leaving a few redundant default valued parameters in the code is not that bad
+    # when you are developing something new. For public packages, you probably want to keep this
+    # rule enabled. I like to sometimes be explicit and specify values that are the same as
+    # default one, mostly to make an unfamiliar API more readable on GitHub.
     #
     # Other known linters use:
     #
@@ -395,12 +404,12 @@ linter:
     #
     # Annotating types for function expression parameters is usually unnecessary because the
     # parameter types can almost always be inferred from the context, thus making the practice redundant.
-    # However, since we are using `always_specify_types` we should not have this one ON either
+    # However, since we are using `always_specify_types`, we should not have this one ON either
     # as it conflicts with it. Even if you do not do that, we still recommend keeping this rule OFF.
-    # While always specifying type on callbacks is certainly a bit tedious and not necessary,
+    # While always specifying the type on callbacks is certainly a bit tedious and not necessary,
     # it can sometimes improve readability, so let's not force them to not be allowed.
-    # Then even if you don't use `always_specify_types`, it is possible to sometimes possible to
-    # specify them on closures when it improves readability of unfamiliar closures.
+    # Thus, even if you don't use `always_specify_types`, it is possible to sometimes specify
+    # them on closures when it improves the readability of unfamiliar closures.
     #
     # Other known linters use:
     #
@@ -482,7 +491,7 @@ linter:
     # https://dart-lang.github.io/linter/lints/flutter_style_todos.html
     #
     # Use Flutter-style todos with GitHub username. Useful if you are coding in a
-    # larger team, if not you may also consider turning off the rule by removing
+    # larger team, if not, you may also consider turning off the rule by removing
     # its comment below.
     #
     # Other known linters use:
@@ -503,14 +512,14 @@ linter:
     # https://dart-lang.github.io/linter/lints/lines_longer_than_80_chars.html
     #
     # Using this rule will sometimes force a line of 81 characters to be split in two.
-    # As long as we try to respect that 80 characters limit, going slightly above is fine.
+    # As long as we try to respect the 80-character limit, going slightly above is fine.
     #
-    # For packages keep this rule enabled though, because the pub.dev dart format check will
+    # For packages, keep this rule enabled though, because the pub.dev dart format check will
     # penalize package points if it does not adhere to strict Dart format rules, which
     # requires max 80 char lines. This rule will then help you find cases where you go over
-    # and fix them manually when possible. Funny thing is that Flutter repo violates this rule, but
-    # if you do it in packages for pub.dev you get score deductions. We often disable this rule
-    # if this is not a package, so we keep it listed here as as a handy toggle.
+    # and fix them manually when possible. Ironically, Flutter repo violates this rule, but
+    # if you do it in a package for pub.dev you get a score deduction. We often disable this rule
+    # if this is not a package, so we keep it listed here as a handy toggle.
     #
     # Other known linters use:
     #
@@ -523,7 +532,7 @@ linter:
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    #   PACKAGE:     enabled  : By commenting it out. (Default, even if is not a package, we start with this.)
+    #   PACKAGE:     enabled  : By commenting it out. (Default, even if it is not a package, we start with this.)
     #   APPLICATION: disabled : With false value. (When/if short lines become problematic. We sometimes like 100 chars.)
     # lines_longer_than_80_chars: false
 
@@ -572,18 +581,18 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/prefer_asserts_with_message.html
     #
-    # When assertions fail it's not always simple to understand why. Adding a message to the
+    # When assertions fail, it's not always simple to understand why. Adding a message to the
     # assert function helps the developer to understand why the AssertionError occurs.
     #
-    # While this is true, Dart does nowadays create very clear messages from assert terms by default.
+    # While this is true, Dart does nowadays create very clear messages from assert-terms by default.
     # Flutter SDK does not use this rule or style. When you use code from it for customized
-    # widgets you will end up having to write your own messages for the code snippet.
+    # widgets, you will end up having to write your own messages for the code snippet.
     #
     # Rationale for not using this in Flutter SDK:
     # "Assertions blocks don't require a message because they throw simple to understand errors"
     #
     # We agree, so we do not mind turning OFF this rule when it becomes tedious, but we start
-    # with it ON. With NNBD you also usually a lot less asserts than you did before in Dart code,
+    # with it ON. With NNBD, you also usually need fewer asserts than you did before in Dart code,
     # since NNBD made almost all "not null" assertions unnecessary.
     #
     # Other known linters use:
@@ -605,15 +614,17 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/prefer_constructors_over_static_methods.html
     #
-    # Dart has named constructors. Static methods in other languages (java) are a workaround which don't have
-    # named constructors. We don't mind this lint rule, it is OK, BUT we noticed that
+    # Dart has named constructors. Static methods in other languages (java) are a workaround to
+    # not having named constructors.
+    #
+    # We don't mind this lint rule, it is OK, BUT we noticed that
     # if you want/need to create instances of classes via static helpers in another class, that
-    # this lint rules complains about it. We are OK with preferring a named
-    # constructor over a static method to create an instance from within the same class.
-    # But this lint rule complained about the above usage too where we think it makes sense to use this.
-    # This rule currently complains about use cases that in some scenarios is impossible to comply with.
-    # Maybe this is another issue with this lint rule. We should investigate it further and report
-    # it, if it is. For now we disable this rule.
+    # this lint rules complains about it. We are OK with preferring a named constructor over a
+    # static method to create an instance from within the same class. However, this lint rule
+    # complained about the above usage too, where we think it makes sense to use a static method.
+    # This rule currently complains about use cases that in some scenarios are impossible to comply
+    # with. Maybe this is another issue with this lint rule. We should investigate it further and
+    # report it if it is an issue. For now, we disable this rule.
     # A past now resolved issue with this lint rule was: https://github.com/dart-lang/linter/issues/2149
     #
     # Other known linters use:
@@ -641,12 +652,12 @@ linter:
     # For us single quotes are easier to type. On our ISO keyboards it is next to Enter key, and
     # we don't need the Shift plus the far to reach nr 2 key on R1 to type it. Also, we don't think
     # they compromise on readability.
-    # Then again if you don't care and don't mind mixing and matching, then ALSO
+    # Then again, if you don't care and don't mind mixing and matching, then ALSO
     # turning OFF `prefer_single_quotes` works fine too, and then you can use both options.
     #
     # We thought it was cleaner to stick to one style. Single quotes are easier to type for us,
-    # thus we turn OFF this `prefer_double_quotes` rule. There is another lint rules that recommends you
-    # to use double quotes when you otherwise would need to escape the single quote char, it works
+    # thus we turn OFF this `prefer_double_quotes` rule. There is another lint rule that recommends
+    # you to use double quotes when you otherwise would need to escape the single quote char, it works
     # well when you use the prefer_single_quotes rule as well.
     #
     # Other known linters use:
@@ -666,9 +677,9 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/prefer_expression_function_bodies.html
     #
-    # Certainly good idea in many cases, but not always. For example not always suitable for Flutter, which may
-    # have a `build` method with a single return, but that return is still complex enough that a "body" is worth it,
-    # and it might not even fit on a single line.
+    # Certainly a good idea in many cases, but not always. For example, not always suitable for
+    # Flutter, which may have a `build` method with a single return, but that return is still
+    # complex enough that a "body" is worth it, and it might not even fit on a single line.
     # https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#consider-using--for-short-functions-and-methods
     #
     # Other known linters use:
@@ -691,11 +702,11 @@ linter:
     # Declaring parameters as final when possible is a good practice because it helps
     # avoid accidental reassignments.
     #
-    # Certainly good idea in many cases. There seems to be one "small" false positive issue with it.
-    # Lint is triggered by final constructor properties, eg a in
-    # `final int i;`  the parameter `this.i` is not also final, which is not really needed
-    # since the property is final. However, this triggers the rule, unnecessarily in our opinion.
-    # We need to turn OFF this rule due to that.
+    # Certainly a good idea in many cases. There seems to be one "small" false positive issue with it.
+    # Lint is triggered by final constructor properties, e.g. in
+    # `final int i;` the parameter `this.i` is not also final, which is not really needed
+    # since the property is final. However, this triggers the rule unnecessarily. We had to
+    # turn OFF this rule due to it.
     #
     # We turned OFF the rule. In a test project, after we cleaned up all that could be after Flutter 2.5 upgrade.
     # There were still 150 positives from the rule, from above issue. So after having it on and doing cleanup
@@ -747,10 +758,11 @@ linter:
     #
     # NOTE: There is also the lint rule "package_api_docs", that is enabled as well via all being enabled.
     # https://dart-lang.github.io/linter/lints/package_api_docs.html
-    # "DO provide doc comments for all public APIs.", is what it is supposed to do, but only for packages.
-    # However, if we turn OFF rule "public_member_api_docs", then the "package_api_docs" offers no warnings
-    # on missing API doc comments alone. So our conclusion for now is that this rule has to be used instead
-    # to ensure we find all APIs that should have documentation comments in a package as well.
+    # "DO provide doc comments for all public APIs.", is what it is supposed to do, but only for
+    # packages. However, if we turn OFF the rule "public_member_api_docs", then the
+    # "package_api_docs" offers no warnings on missing API doc comments alone. So our conclusion
+    # for now is that this rule has to be used instead to ensure we find all APIs that should
+    # have documentation comments in a package as well.
     #
     # Other known linters use:
     #
@@ -773,7 +785,7 @@ linter:
     #
     # https://dart-lang.github.io/linter/lints/require_trailing_commas.html
     #
-    # This rule forces commas even in places where it just adds extra lines that
+    # This rule forces commas even in places where it just adds extra lines, that
     # adds little value. There is also not a bulk dart fix for it:
     # https://github.com/dart-lang/sdk/issues/47441
     #
@@ -793,7 +805,7 @@ linter:
     # DO sort constructor declarations before other members.
     #
     # We do like this lint rule, but we want to have the default constructor first, followed
-    # by its properties, after this other named constructors and factories. This rule gets
+    # by its properties, after this, other named constructors and factories. This rule gets
     # in the way of that and forces you to put (often final) constructor properties after all
     # the named constructors and factories, making them tedious to find and disconnected from
     # where we want to see, read and handily edit them. This is especially the case if there are

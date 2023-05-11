@@ -2835,28 +2835,22 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor =
               effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.material:
           effectiveAppBarColor =
               FlexColor.materialLightSurface.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor =
               effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
               effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case null:
           // Style was null, if Opacity used, apply to use M2/M3 mode default.
           if (appBarOpacity != null && appBarOpacity != 1.0) {
@@ -2864,7 +2858,6 @@ class FlexColorScheme with Diagnosticable {
                 ? effectiveSurfaceColor.withOpacity(appBarOpacity)
                 : effectiveColors.primary.withOpacity(appBarOpacity);
           }
-          break;
       }
     }
     // The resulting effectiveAppBarColor may remain null if default values
@@ -4704,35 +4697,28 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor =
               effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.material:
           effectiveAppBarColor =
               FlexColor.materialDarkSurface.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor =
               effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
               effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case null:
           // Style was null, if Opacity used, apply to surface for M2 & M3 mode.
           if (appBarOpacity != null && appBarOpacity != 1.0) {
             effectiveAppBarColor =
                 effectiveSurfaceColor.withOpacity(appBarOpacity);
           }
-          break;
       }
     }
     // The resulting effectiveAppBarColor may remain null if default values
