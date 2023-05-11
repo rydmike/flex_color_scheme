@@ -26,6 +26,12 @@ screenshots:
     path: example/screenshots/fcs_big_pad_light.png
   - description: 'A FlexColorScheme blue dark theme applied on the Flutter M3 demo app in Themes Playground'
     path: example/screenshots/fcs_big_pad_dark.png
+topics:
+  - theme
+  - colorscheme
+  - material3
+  - color
+  - materialdesign
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
