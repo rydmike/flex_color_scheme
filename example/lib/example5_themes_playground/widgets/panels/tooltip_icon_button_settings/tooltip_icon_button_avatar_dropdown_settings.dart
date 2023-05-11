@@ -350,14 +350,14 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', are not yet available via own constructors in '
-                      'Flutter 3.7. With current IconButton theming, only one '
+                  text: ', are available via own constructors in Flutter 3.10. '
+                      'With current IconButton theming, only one '
                       'style is offered and thus only one of the M3 styles '
-                      'can be made with theming, the default style is '
-                      'therefore kept as it is.\n'
+                      'can be made with theming, the default styles are '
+                      'therefore kept as they are.\n'
                       '\n'
-                      'The constructors for above IconButtons are available in '
-                      'Flutter 3.10, but not in Flutter 3.7. This ',
+                      'The constructors for above IconButtons are not '
+                      'available in Flutter 3.7. This ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -367,8 +367,9 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                 TextSpan(
                     style: spanTextStyle,
                     text: ' and its referenced PR brought the new styled '
-                        'IconButton constructors. These new IconButtons have '
-                        'the same theming limitation as the FilledButton. '
+                        'IconButton constructors to 3.10. These new '
+                        'IconButtons have the same theming limitation as the '
+                        'FilledButton. '
                         'For more information about this, see issue '),
                 LinkTextSpan(
                   style: linkStyle,
@@ -380,25 +381,17 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
                   text: '. In Flutter 3.3 and 3.7 you have to create these '
                       'M3 IconButtons as custom widgets using styleFrom. '
                       'There is example code showing how to do it correctly '
-                      'in the Flutter ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIconButtonDoc,
-                  text: 'IconButton API docs',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. It is a bit tedious to construct them, '
-                      'but at least doable, the built-in '
+                      'in the Flutter API docs for 3.3 and 3.7. It is '
+                      'tedious to construct them, but doable. The built-in '
                       'constructors are available in Flutter 3.10, but '
-                      'theming them is not possible with above mentioned '
+                      'theming them is not recommended due to above mentioned '
                       'issue.\n'
                       '\n'
                       'Due to this theming limitation, FCS is currently not '
                       'offering any color theming for the IconButton '
                       'variants. Their default styles are however quite '
-                      'diverse and have very usable default color mappings.\n',
+                      'diverse and have usable default theme based '
+                      'ColorScheme color mappings.\n',
                 ),
               ],
             ),
