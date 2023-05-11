@@ -5181,15 +5181,15 @@ class FlexSubThemes {
 
   // TODO(rydmike): Add SearchBarThemeData support.
   /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
-  static SearchBarThemeData searchBarThemeData() {
-    return const SearchBarThemeData();
-  }
+  // static SearchBarThemeData searchBarThemeData() {
+  //   return const SearchBarThemeData();
+  // }
 
   // TODO(rydmike): Add SearchViewThemeData support.
   /// An opinionated [SearchViewThemeData] theme for the [SearchBar].
-  static SearchViewThemeData searchViewThemeData() {
-    return const SearchViewThemeData();
-  }
+  // static SearchViewThemeData searchViewThemeData() {
+  //   return const SearchViewThemeData();
+  // }
 
   /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
   static SegmentedButtonThemeData segmentedButtonTheme({

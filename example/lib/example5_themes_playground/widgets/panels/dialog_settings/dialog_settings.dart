@@ -358,6 +358,23 @@ class DialogSettings extends StatelessWidget {
               : null,
         ),
         const DatePickerDialogShowcase(),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.10 in M3 mode, the Divider is hard '
+                      'coded and cannot be removed, it looks bad when you use '
+                      'any other header color than the default surface color. '
+                      '\n',
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
       ],
     );

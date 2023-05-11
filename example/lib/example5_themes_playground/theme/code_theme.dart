@@ -1,5 +1,5 @@
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:material_color_utilities/material_color_utilities.dart';
 
 /// A [ThemeExtension] for code highlight color properties used by code viewer.
 class CodeTheme extends ThemeExtension<CodeTheme> {

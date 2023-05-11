@@ -2,32 +2,24 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 7.1.0-dev.2 
+## 7.1.0 
 
-**Apr 27, 2023**
+**May 11, 2023**
 
-This beta-2 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 beta channel. This version, like 7.1.0-dev.1 beta-1 requires minimum Flutter version 3.10.0-1.3.pre or later. The **ThemesPlayground** built for this version is using Flutter beta channel version 3.10.0-1.4.pre, but package works fine also with beta channel version 3.10.0-1.3.pre. This version is a preparation and test of FlexColorScheme for the next stable Flutter release after version 3.7.x. 
+FlexColorScheme v7.1.0 supports new features in Flutter 3.10 and thus requires minimum Flutter 3.10 and Dart 3.0. 
 
 **NEW**
 
 * Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
+* Added `datePickerTheme` to `FlexSubThemes`.
+* Added properties `datePickerDialogRadius` and `datePickerHeaderBackgroundSchemeColor` to `FlexSubThemesData`.
 
 **CHANGE**
 
-* Changed all examples to use new `ListenableBuilder` instead of `AnimatedBuilder`. 
-
-## 7.1.0-dev.1
-
-**Apr 24, 2023**
-
-This beta-1 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 beta channel. It requires Flutter version 3.10.0-1.3.pre or later. This beta version is a first preparation version of FlexColorScheme for the next stable Flutter release after version 3.7.x.
-
-**NEW**
-
-* Added `datePickerTheme` to `FlexSubThemes`.
-* Added properties `datePickerDialogRadius` and `datePickerHeaderBackgroundSchemeColor`  to `FlexSubThemesData`.
+- Updated to use minimum `flex_seed_scheme ^1.3.0`. This version, no longer depends on `material_color_utilities`, thus avoiding all version issues and conflicts when Flutter changes what breaking version of `material_color_utilities` it uses on different channels and versions.
 
 **THEMES PLAYGROUND**
+- Themes Playground 7.1 for FlexColorScheme 7.1 can be found [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
 
 * **NEW**
   - Added selection of themed header color scheme color for the DatePickerDialog on the Dialogs panel.
@@ -36,16 +28,21 @@ This beta-1 of FlexColorScheme v7.1.0. It is a dev release using Flutter 3.10 be
 
 * **UPDATE**
   - Reviewed and updated status of all known theming issues in info expands.
-
-* **SKIA**
   - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
-  - The beta-1 version of Themes Playground 7.1 for FCS 7.1 can be tested [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
+  - Updated all examples to use new `ListenableBuilder` instead of `AnimatedBuilder` where appropriate.
+
 
 ## 7.0.5
 
 **Apr 29, 2023**
 
 - **Fix:** [#143](https://github.com/rydmike/flex_color_scheme/issues/143) Glitches in highlighting effect on mouse hover over `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+
+## 7.1.0-dev.1
+
+**Apr 24, 2023**
+
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_1_0_dev_1.md)
 
 ## 7.0.4
 
