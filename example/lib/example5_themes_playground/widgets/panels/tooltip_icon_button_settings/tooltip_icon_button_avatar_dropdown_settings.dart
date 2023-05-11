@@ -27,11 +27,6 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/pull/123829',
   );
-  static final Uri _fcsFlutterIconButtonDoc = Uri(
-    scheme: 'https',
-    host: 'api.flutter.dev',
-    path: 'flutter/material/IconButton-class.html',
-  );
 
   @override
   Widget build(BuildContext context) {
