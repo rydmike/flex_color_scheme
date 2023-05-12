@@ -109,14 +109,14 @@ class DemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Glue the ThemeController to the MaterialApp.
-    // The AnimatedBuilder Widget listens to the ThemeController for changes.
+    // The ListenableBuilder Widget listens to the ThemeController for changes.
     // Whenever the user updates theme settings, the MaterialApp is rebuilt.
     // It rebuilds the entire app when any value in the themeController is
     // changed, but that is fine, since all property changes in it are of
     // the nature that the entire App UI needs to be redrawn, so this approach
     // works well for this use case.
-    return AnimatedBuilder(
-        animation: themeController,
+    return ListenableBuilder(
+        listenable: themeController,
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,

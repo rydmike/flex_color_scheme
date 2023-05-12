@@ -105,6 +105,7 @@ import 'flex_sub_themes.dart';
 /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+/// * [DatePickerThemeData] for [DatePicker] via [FlexSubThemes.datePickerTheme]
 /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via
@@ -296,6 +297,8 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.useInputDecoratorThemeInDialogs,
+    this.datePickerHeaderBackgroundSchemeColor,
+    this.datePickerDialogRadius,
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
     //
@@ -1894,7 +1897,6 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
-  // TODO(rydmike): Elevation does not exist in Flutter 3.7, enable later.
   /// Elevation of [Dialog].
   ///
   /// The SDK elevation 24 is quite high, casting deep shadows. We make it less
@@ -1908,12 +1910,6 @@ class FlexSubThemesData with Diagnosticable {
   /// as FCS opinionated default.
   ///
   /// If not defined, defaults to [kDialogElevation] = 6.
-  ///
-  /// NOTE:
-  ///
-  /// Dialog elevation does not exist as a theme feature in Flutter 3.7.x
-  /// This property cannot be made to function until it lands in stable channel
-  /// from from master channel, where it exists. Did not land in Flutter 3.7.
   final double? dialogElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color dialogs use as
@@ -1943,14 +1939,31 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
+  // TODO(rydmike): V7.1 add also to DatePickerDialog theme.
   /// Set to true to use the app overall app [InputDecoration] theme in
   /// dialogs themes.
   ///
-  /// Currently only applies to [TimePickerThemeData] but will also be used
-  /// by [DatePicker] theme when it is supported.
+  /// Currently only applies to [TimePickerThemeData], will later also be used
+  /// by [DatePickerDialog] theme if it becomes supported.
   ///
   /// If not defined, defaults to false.
   final bool? useInputDecoratorThemeInDialogs;
+
+  /// The background color of the header in a [DatePikcerDialog].
+  ///
+  /// If not defined, default to [ColorScheme.primary] in M2 and to
+  /// [ColorScheme.surface] in M3.
+  ///
+  /// The foreground color automatically defaults to the correct contrast pair
+  /// for used [SchemeColor].
+  final SchemeColor? datePickerHeaderBackgroundSchemeColor;
+
+  /// Border radius value for [DatePickerDialog].
+  ///
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
+  final double? datePickerDialogRadius;
 
   /// Border radius value for [TimePickerDialog].
   ///
@@ -2055,7 +2068,6 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 3.
   final double? appBarScrolledUnderElevation;
 
-  // TODO(rydmike): Monitor BottomAppBar M3 background issue.
   /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
   /// uses as background color.
   ///
@@ -2063,12 +2075,6 @@ class FlexSubThemesData with Diagnosticable {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
-  ///
-  /// Due to an issue in Flutter 3.7, that has been resolved in
-  /// master channel, the background color of the [BottomAppBar] cannot
-  /// be changed when using M3. See issue:
-  /// https://github.com/flutter/flutter/pull/117082 and more explanation here:
-  /// https://github.com/rydmike/flex_color_scheme/issues/115.
   final SchemeColor? bottomAppBarSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
@@ -2154,19 +2160,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to 0 in M2 and to 3 in M3.
   final double? tabBarIndicatorTopRadius;
 
-  // TODO(rydmike): Monitor TabBarTheme dividerColor bug fix landing in stable.
   /// The color of the divider.
   ///
   /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.surfaceVariant] will be used, otherwise divider will
   /// not be drawn.
-  ///
-  /// This feature does not work in Flutter 3.7 stable, at least not up until
-  /// version 3.7.6. It is caused by a bug in Flutter SDK. The issue has
-  /// been fixed via PR https://github.com/flutter/flutter/pull/119690 in
-  /// master channel, but until the fix lands in Flutter stable, this
-  /// feature does not work.
   final Color? tabBarDividerColor;
 
   /// Border radius value for [Drawer], also used by [NavigationDrawer].
@@ -3062,6 +3061,8 @@ class FlexSubThemesData with Diagnosticable {
     final double? dialogRadius,
     final SchemeColor? dialogBackgroundSchemeColor,
     final bool? useInputDecoratorThemeInDialogs,
+    final SchemeColor? datePickerHeaderBackgroundSchemeColor,
+    final double? datePickerDialogRadius,
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
     //
@@ -3329,6 +3330,11 @@ class FlexSubThemesData with Diagnosticable {
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
       useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
           this.useInputDecoratorThemeInDialogs,
+      datePickerHeaderBackgroundSchemeColor:
+          datePickerHeaderBackgroundSchemeColor ??
+              this.datePickerHeaderBackgroundSchemeColor,
+      datePickerDialogRadius:
+          datePickerDialogRadius ?? this.datePickerDialogRadius,
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
       timePickerElementRadius:
@@ -3727,6 +3733,9 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.useInputDecoratorThemeInDialogs ==
             useInputDecoratorThemeInDialogs &&
+        other.datePickerHeaderBackgroundSchemeColor ==
+            datePickerHeaderBackgroundSchemeColor &&
+        other.datePickerDialogRadius == datePickerDialogRadius &&
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
         //
@@ -4011,6 +4020,8 @@ class FlexSubThemesData with Diagnosticable {
         dialogElevation,
         dialogBackgroundSchemeColor,
         useInputDecoratorThemeInDialogs,
+        datePickerHeaderBackgroundSchemeColor,
+        datePickerDialogRadius,
         timePickerDialogRadius,
         timePickerElementRadius,
         //
@@ -4354,6 +4365,11 @@ class FlexSubThemesData with Diagnosticable {
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
+    properties.add(EnumProperty<SchemeColor>(
+        'datePickerHeaderBackgroundSchemeColor',
+        datePickerHeaderBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'datePickerDialogRadius', datePickerDialogRadius));
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(DiagnosticsProperty<double>(

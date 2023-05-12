@@ -663,8 +663,8 @@ void showMaterial3AboutDialog(BuildContext context,
 
   showAboutDialog(
     context: context,
-    applicationName: 'Material 3 Demo',
-    applicationVersion: '1.0',
+    applicationName: 'Material3 Demo',
+    applicationVersion: 'Made for Flutter 3.10',
     useRootNavigator: useRootNavigator,
     applicationIcon: Icon(
       Icons.looks_3_outlined,

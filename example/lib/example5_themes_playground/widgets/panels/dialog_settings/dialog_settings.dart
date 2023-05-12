@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -12,10 +13,31 @@ class DialogSettings extends StatelessWidget {
   const DialogSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterFix118657 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/118657',
+  );
+
+  static final Uri _fcsFlutterIssue126597 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/126597',
+  );
+
+  static final Uri _fcsFlutterIssue126617 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/126617',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
@@ -34,8 +56,8 @@ class DialogSettings extends StatelessWidget {
           subtitle: Text('In Flutter M2 the default dialog background '
               'color is colorScheme.background for Dialog and '
               'DatePickerDialog, but colorScheme.surface for '
-              'TimePickerDialog. M3 mode will default them all to '
-              'colorScheme.surface when fully implemented.\n'
+              'TimePickerDialog. In M3 mode they all default to '
+              'colorScheme.surface.\n'
               '\n'
               'FlexColorScheme sub-themes use surface as default for all '
               'dialogs in both M2 and M3 mode, to ensure that they have the '
@@ -64,10 +86,26 @@ class DialogSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
+        ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitle: Slider(
+          subtitleDense: true,
+          subtitle: const Text(
+            'The border radius adjusts radius in default dialog and thus '
+            'also AlertDialog. It also set border radius on the '
+            'TimePickerDialog and DatePickerDialog via same control in '
+            'Themes Playground, but the used API for time and date dialogs '
+            'are separate.\n'
+            '\n'
+            'The default border radius in M2 mode is 4dp and M3 mode it is '
+            '28dp. FCS defaults to 28dp in both M2 and M3 when using component '
+            'themes. If you think it is too round, try e.g. 16dp.\n',
+          ),
+        ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          subtitleDense: true,
+          title: Slider(
             min: -1,
             max: 50,
             divisions: 51,
@@ -90,7 +128,7 @@ class DialogSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -116,10 +154,19 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(
+        ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
-          subtitle: Slider(
+          subtitleDense: true,
+          subtitle: const Text(
+            'The elevation adjusts elevation for default dialog and thus '
+            'also AlertDialog. It also sets elevation for the the '
+            'TimePickerDialog and DatePickerDialog to same value.\n',
+          ),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
             min: -1,
             max: 30,
             divisions: 31,
@@ -142,7 +189,7 @@ class DialogSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -180,10 +227,12 @@ class DialogSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('TimePicker'),
           subtitleDense: true,
-          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
+          subtitle: Text('Flutter 3.7 does not implement or fully support '
               'Material 3 styling of the TimePicker. FlexColorScheme adds '
-              'some M3 styling based on M3 specification, where it is already '
-              'supported by its current theming capabilities.\n'),
+              'M3 styling based on M3 specification already in Flutter 3.7 '
+              'where it is supported by its theming capabilities. '
+              'In Flutter 3.10 TimePicker theming is fully supported. The '
+              '3.10 theming has some bugs, see known issues below.\n'),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -219,7 +268,7 @@ class DialogSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -267,17 +316,97 @@ class DialogSettings extends StatelessWidget {
               : null,
         ),
         const TimePickerDialogShowcase(),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.10 the ClockDial background uses '
+                      'wrong default background color in M3 mode. To see the '
+                      'issue turn off FCS in M3 mode. For more info see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterFix118657,
+                  text: 'issue #118657',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. FCS includes a corrections for the issue in its '
+                      'default TimePicker theme.\n',
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 8),
         const Divider(),
         const ListTileReveal(
           title: Text('DatePicker'),
           subtitleDense: true,
-          subtitle: Text('Flutter 3.7 does not yet implement or fully support '
-              'Material 3 styling of the DatePicker, there is not even a '
-              'theme for DatePicker in Flutter 3.7. It has a theme in master '
-              'channel, so it will come to a later Flutter stable version.\n'),
+          subtitle: Text('Flutter 3.7 does not support any Material 3 styling '
+              'of the DatePicker, there is not even a theme for DatePicker '
+              'in Flutter 3.7. Flutter 3.10 adds theming and M3 support to '
+              'the DatePicker.\n'),
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Header background color'),
+          labelForDefault: controller.useMaterial3
+              ? 'default (surface)'
+              : 'default (primary)',
+          index: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDatePickerHeaderBackgroundSchemeColor(null);
+                  } else {
+                    controller.setDatePickerHeaderBackgroundSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
         ),
         const DatePickerDialogShowcase(),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.10 in M3 mode, the Divider is hard '
+                      'coded and cannot be removed, it looks bad when you use '
+                      'any other header color than the default surface color. '
+                      'For more info see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue126597,
+                  text: 'issue #126597',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. The DatePicker manual date entry input field picks '
+                      'up the ambient InputDecorationTheme and it cannot be '
+                      'styled independently, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue126617,
+                  text: 'issue #126617',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
       ],
     );

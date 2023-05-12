@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -13,9 +14,19 @@ class SliderSettings extends StatelessWidget {
   const SliderSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue125329 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/125329',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
     final bool isLight = theme.brightness == Brightness.light;
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
@@ -134,7 +145,7 @@ class SliderSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -158,31 +169,70 @@ class SliderSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTileReveal(
-          title: Text('Slider'),
+        ListTileReveal(
+          title: const Text('Slider'),
           subtitleDense: true,
-          subtitle: Text('There are few minor issue suspects related to '
-              'Slider and its theming that have not been reported yet, mostly '
-              'it is fine. The RangeSlider has some issues and lack proper '
-              'M3 support.\n '),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'There are many issues related to Slider and a few '
+                      'to its theming as well. You can find a collection of '
+                      'issues related to the Slider in the slider umbrella ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue125329,
+                  text: 'issue #125329',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
         ),
+        //
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: SliderShowcase(),
         ),
         const Divider(),
-        const ListTileReveal(
-          title: Text('RangeSlider'),
+        ListTileReveal(
+          title: const Text('RangeSlider'),
           subtitleDense: true,
-          subtitle: Text('The RangeSlider should behave and look like Slider '
-              'in Material 3 mode, but it is not yet available in Flutter '
-              '3.7. It an also not use the same indicator classes as Slider. '
-              'FCS applies its own existing drop style as a better match '
-              'with M3 than the rectangle.\n'
-              '\n'
-              'RangeSlider also behaves differently from Slider when looking '
-              'at things like hover and focus responses, it also lacks any '
-              'kind of keyboard usage support.\n '),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The RangeSlider should behave and look like Slider '
+                      'in Material 3 mode. his design is not yet available in '
+                      'Flutter 3.10 and earlier. It can also not use the same '
+                      'indicator classes as Slider. FCS applies existing drop '
+                      'style as a better match with M3 than the rectangle in '
+                      'M3 mode as default.\n'
+                      '\n'
+                      'RangeSlider also behaves differently from Slider when '
+                      'looking at things like hover and focus responses. It '
+                      'also lacks any kind of keyboard usage support. '
+                      'You can find a collection of issues related to the '
+                      'RangeSlider in the slider umbrella ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue125329,
+                  text: 'issue #125329',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

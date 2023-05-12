@@ -23,7 +23,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +97,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
       ],
       child: ListTileReveal(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

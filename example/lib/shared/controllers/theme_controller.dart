@@ -690,6 +690,9 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = await _themeService.load(
         Store.keyDialogBackgroundSchemeColor,
         Store.defaultDialogBackgroundSchemeColor);
+    _datePickerHeaderBackgroundSchemeColor = await _themeService.load(
+        Store.keyDatePickerHeaderBackgroundSchemeColor,
+        Store.defaultDatePickerHeaderBackgroundSchemeColor);
     _useInputDecoratorThemeInDialogs = await _themeService.load(
         Store.keyUseInputDecoratorThemeInDialogs,
         Store.defaultUseInputDecoratorThemeInDialogs);
@@ -1136,6 +1139,8 @@ class ThemeController with ChangeNotifier {
     // Dialog SETTINGS.
     setDialogBackgroundSchemeColor(
         Store.defaultDialogBackgroundSchemeColor, false);
+    setDatePickerHeaderBackgroundSchemeColor(
+        Store.defaultDatePickerHeaderBackgroundSchemeColor, false);
     setUseInputDecoratorThemeInDialogs(
         Store.defaultUseInputDecoratorThemeInDialogs, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
@@ -1513,6 +1518,7 @@ class ThemeController with ChangeNotifier {
       setTooltipRadius(4, false);
       // Dialog settings
       setDialogElevation(24, false);
+      setDatePickerHeaderBackgroundSchemeColor(SchemeColor.primary, false);
       // Set SnackBar to M2/M3 style.
       setSnackBarSchemeColor(SchemeColor.inverseSurface, false);
       // Drawer settings
@@ -4447,6 +4453,18 @@ class ThemeController with ChangeNotifier {
     _dialogBackgroundSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDialogBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _datePickerHeaderBackgroundSchemeColor;
+  SchemeColor? get datePickerHeaderBackgroundSchemeColor =>
+      _datePickerHeaderBackgroundSchemeColor;
+  void setDatePickerHeaderBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _datePickerHeaderBackgroundSchemeColor) return;
+    _datePickerHeaderBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyDatePickerHeaderBackgroundSchemeColor, value));
   }
 
   late bool _useInputDecoratorThemeInDialogs;

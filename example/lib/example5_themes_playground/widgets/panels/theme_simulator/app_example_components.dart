@@ -286,11 +286,11 @@ class ShowcaseButtons extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
+      children: const <Widget>[
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               ElevatedButtonShowcase(),
               SizedBox(height: 8),
               FilledButtonShowcase(),
@@ -306,7 +306,7 @@ class ShowcaseButtons extends StatelessWidget {
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               ToggleButtonsShowcase(),
               SizedBox(height: 8),
               SegmentedButtonShowcase(),
@@ -316,10 +316,11 @@ class ShowcaseButtons extends StatelessWidget {
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               FabShowcase(),
               SizedBox(height: 8),
               IconButtonCircleAvatarDropdownShowcase(),
+              IconButtonShowcase(),
             ],
           ),
         ),
@@ -341,21 +342,21 @@ class ShowcaseInput extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
-        const CCard(
+      children: const <Widget>[
+        CCard(
           child: TextInputField(),
         ),
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               DropDownButtonFormField(),
               SizedBox(height: 8),
               DropDownMenuShowcase(),
             ],
           ),
         ),
-        const CCard(child: ChipShowcase()),
+        CCard(child: ChipShowcase()),
       ],
     );
   }
@@ -374,19 +375,19 @@ class ShowcaseMenus extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
+      children: const <Widget>[
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               PopupMenuButtonsShowcase(explainUsage: true),
               SizedBox(height: 8),
               DropDownMenuShowcase(explainUsage: true),
             ],
           ),
         ),
-        const MenuBarShowcase(explainUsage: true, explainIndent: 16),
-        const Padding(
+        MenuBarShowcase(explainUsage: true, explainIndent: 16),
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MenuAnchorShowcase(),
         ),
@@ -408,11 +409,11 @@ class ShowcaseSwitches extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
+      children: const <Widget>[
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               SwitchShowcase(),
               CheckboxShowcase(),
               RadioShowcase(),
@@ -423,7 +424,7 @@ class ShowcaseSwitches extends StatelessWidget {
           padding: EdgeInsets.zero,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               SwitchTileShowcase(),
               Divider(height: 1),
               CheckboxTileShowcase(),
@@ -450,12 +451,12 @@ class ShowcaseListTile extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
+      children: const <Widget>[
         CCard(
           padding: EdgeInsets.zero,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               ListTileShowcase(),
               Divider(),
               ExpansionTileShowcase(),
@@ -482,14 +483,14 @@ class ShowcaseSlider extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
-        const CCard(child: SliderShowcase()),
-        const CCard(child: RangeSliderShowcase()),
+      children: const <Widget>[
+        CCard(child: SliderShowcase()),
+        CCard(child: RangeSliderShowcase()),
         CCard(
           padding: EdgeInsets.zero,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               ListTile(title: Text('Progress indicators')),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -521,6 +522,8 @@ class ShowcaseAppBar extends StatelessWidget {
         SizedBox(height: 8),
         AppBarShowcase(),
         SizedBox(height: 8),
+        Divider(),
+        SearchBarShowcase(),
         Divider(),
         BottomAppBarShowcase(),
         Divider(),
@@ -577,20 +580,20 @@ class ShowcaseDialogs extends StatelessWidget {
         0,
         media.padding.bottom + 8,
       ),
-      children: <Widget>[
+      children: const <Widget>[
         CCard(
             child: Column(
-          children: const <Widget>[
+          children: <Widget>[
             AlertDialogShowcase(),
             TimePickerDialogShowcase(),
             DatePickerDialogShowcase(),
           ],
         )),
-        const BottomSheetShowcase(),
-        const SizedBox(height: 16),
-        const BottomSheetModalShowcase(),
-        const SizedBox(height: 32),
-        const MaterialBannerSnackBarShowcase(),
+        BottomSheetShowcase(),
+        SizedBox(height: 16),
+        BottomSheetModalShowcase(),
+        SizedBox(height: 32),
+        MaterialBannerSnackBarShowcase(),
       ],
     );
   }

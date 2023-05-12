@@ -451,11 +451,16 @@ class FlexColorScheme with Diagnosticable {
   /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
   /// controlled separately with only a [ThemeData.from] a color scheme.
   ///
-  /// It is also applied to dialog themes:
+  /// When using sub-themes, it is also applied to backgroundColor in
+  /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
+  /// has not be defined in [subThemesData].
+  ///
+  /// * DatePickerThemeData
   /// * DialogTheme
   /// * TimePickerThemeData
   ///
-  /// If no value is given, it defaults to [surface].
+  /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
+  /// is defined, default color is [surface].
   final Color? dialogBackground;
 
   /// Background theme color for the [AppBar].
@@ -919,22 +924,45 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Opinionated sub themes are provided for:
   ///
+  /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+  /// * [BottomAppBarTheme] for [BottomAppBar] via
+  ///   [FlexSubThemes.bottomAppBarTheme].
   /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
   ///   [FlexSubThemes.bottomNavigationBar].
   /// * [BottomSheetThemeData] for [BottomSheet] via
   ///   [FlexSubThemes.bottomSheetTheme].
+  /// * [ButtonThemeData] for old deprecated buttons, via
+  ///   [FlexSubThemes.buttonTheme].
   /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
   /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
   /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+  /// * [DatePickerThemeData] for [DatePicker] via
+  ///   [FlexSubThemes.datePickerTheme].
   /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+  /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+  /// * [DropdownMenuThemeData] for [DropDownMenu] via
+  ///   [FlexSubThemes.dropdownMenuTheme].
   /// * [ElevatedButtonThemeData] for [ElevatedButton] via
   ///   [FlexSubThemes.elevatedButtonTheme].
+  /// * [FilledButtonThemeData] for [FilledButton] via
+  ///   [FlexSubThemes.filledButtonTheme].
   /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
   ///   [FlexSubThemes.floatingActionButtonTheme].
+  /// * [IconButtonThemeData] for [IconButton] via
+  ///   [FlexSubThemes.iconButtonTheme].
   /// * [InputDecorationTheme] for [InputDecoration] via
   ///   [FlexSubThemes.inputDecorationTheme].
+  /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+  /// * [MenuButtonThemeData] for [MenuButton] via
+  ///   [FlexSubThemes.menuButtonTheme].
+  /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+  ///   [FlexSubThemes.menuTheme].
+  /// * [ListTileThemeData] for [ListTile] via
+  ///   [FlexSubThemes.listTileTheme].
   /// * [NavigationBarThemeData] for [NavigationBar] via
   ///   [FlexSubThemes.navigationBarTheme].
+  /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+  ///   [FlexSubThemes.navigationDrawerTheme].
   /// * [NavigationRailThemeData] for [NavigationRail] via
   ///   [FlexSubThemes.navigationRailTheme].
   /// * [OutlinedButtonThemeData] for [OutlinedButton] via
@@ -942,9 +970,10 @@ class FlexColorScheme with Diagnosticable {
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-  /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+  /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+  /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
   /// * [TextButtonThemeData] for [TextButton] via
   ///   [FlexSubThemes.textButtonTheme].
   /// * [TimePickerThemeData] for [TimePickerDialog] via
@@ -1646,23 +1675,19 @@ class FlexColorScheme with Diagnosticable {
 
     /// The background color of [Dialog] elements.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor].
+    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
+    /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
-    /// It is also applied to dialog themes:
+    /// When using sub-themes, it is also applied to backgroundColor in
+    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
+    /// has not be defined in [subThemesData].
+    ///
+    /// * DatePickerThemeData
     /// * DialogTheme
     /// * TimePickerThemeData
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
-    ///
-    /// If you assign a background [SchemeColor] to
-    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
-    /// opted in on using component sub themes, then the selected scheme
-    /// color will override this value.
-    ///
-    /// Defaults to null, resulting in theme surface being used.
+    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
+    /// is defined, default color is [surface].
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -1999,6 +2024,8 @@ class FlexColorScheme with Diagnosticable {
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DatePickerThemeData] for [DatePicker] via
+    ///   [FlexSubThemes.datePickerTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
@@ -2808,28 +2835,22 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor =
               effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.material:
           effectiveAppBarColor =
               FlexColor.materialLightSurface.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor =
               effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
               effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case null:
           // Style was null, if Opacity used, apply to use M2/M3 mode default.
           if (appBarOpacity != null && appBarOpacity != 1.0) {
@@ -2837,7 +2858,6 @@ class FlexColorScheme with Diagnosticable {
                 ? effectiveSurfaceColor.withOpacity(appBarOpacity)
                 : effectiveColors.primary.withOpacity(appBarOpacity);
           }
-          break;
       }
     }
     // The resulting effectiveAppBarColor may remain null if default values
@@ -3490,23 +3510,19 @@ class FlexColorScheme with Diagnosticable {
 
     /// The background color of [Dialog] elements.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor].
+    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
+    /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
-    /// It is also applied to dialog themes:
+    /// When using sub-themes, it is also applied to backgroundColor in
+    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
+    /// has not be defined in [subThemesData].
+    ///
+    /// * DatePickerThemeData
     /// * DialogTheme
     /// * TimePickerThemeData
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
-    ///
-    /// If you assign a background [SchemeColor] to
-    /// [dialogBackgroundSchemeColor] in [FlexSubThemesData] and you have
-    /// opted in on using component sub themes, then the selected scheme
-    /// color will override this value.
-    ///
-    /// Defaults to null, resulting in theme surface being used.
+    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
+    /// is defined, default color is [surface].
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -3843,6 +3859,8 @@ class FlexColorScheme with Diagnosticable {
     /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+    /// * [DatePickerThemeData] for [DatePicker] via
+    ///   [FlexSubThemes.datePickerTheme].
     /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
@@ -4679,35 +4697,28 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.primary:
           effectiveAppBarColor =
               effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.material:
           effectiveAppBarColor =
               FlexColor.materialDarkSurface.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.background:
           effectiveAppBarColor =
               effectiveBackgroundColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
               effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
-          break;
         case null:
           // Style was null, if Opacity used, apply to surface for M2 & M3 mode.
           if (appBarOpacity != null && appBarOpacity != 1.0) {
             effectiveAppBarColor =
                 effectiveSurfaceColor.withOpacity(appBarOpacity);
           }
-          break;
       }
     }
     // The resulting effectiveAppBarColor may remain null if default values
@@ -6416,6 +6427,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
               elevation: bottomAppBarElevation ??
                   (useMaterial3 ? null : appBarElevation ?? 0),
+              shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
@@ -6507,6 +6519,7 @@ class FlexColorScheme with Diagnosticable {
               elevation: bottomSheetElevation,
               modalElevation: bottomSheetModalElevation,
               radius: subTheme.bottomSheetRadius ?? platformRadius,
+              shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
           : null,
@@ -6611,8 +6624,20 @@ class FlexColorScheme with Diagnosticable {
       //
       // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       //
-      // TODO(Rydmike): Add DatePicker Themedata when available in stable.
-      // datePickerTheme: DatePickerThemeData(),
+      // DatePicker theme
+      datePickerTheme: useSubThemes
+          ? FlexSubThemes.datePickerTheme(
+              colorScheme: colorScheme,
+              backgroundColor: dialogBackground,
+              backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
+              headerBackgroundSchemeColor:
+                  subTheme.datePickerHeaderBackgroundSchemeColor,
+              elevation: subTheme.dialogElevation,
+              radius: subTheme.datePickerDialogRadius ?? platformRadius,
+              shadowColor: useShadow ? colorScheme.shadow : null,
+              surfaceTintColor: removeTint ? Colors.transparent : null,
+            )
+          : null,
       //
       // Dialog Theme.
       dialogTheme: useSubThemes

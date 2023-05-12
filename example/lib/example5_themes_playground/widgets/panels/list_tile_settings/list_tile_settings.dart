@@ -10,8 +10,8 @@ class ListTileSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const <Widget>[
+    return const Column(
+      children: <Widget>[
         SizedBox(height: 8),
         ListTileReveal(
           title: Text('List tiles'),

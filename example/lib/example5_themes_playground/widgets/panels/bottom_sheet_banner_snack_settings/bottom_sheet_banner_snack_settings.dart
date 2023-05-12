@@ -121,7 +121,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -175,7 +175,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -250,7 +250,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -362,7 +362,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -412,7 +412,7 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -508,8 +508,8 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
           title: Text('MaterialBanner'),
           subtitleDense: true,
           subtitle: Text('No theme settings in current version of '
-              'FlexColorScheme. Included to demonstrates its style with '
-              'current theme and used ColorScheme.\n'),
+              'FlexColorScheme. Only included here to demonstrates its style '
+              'with current theme and used ColorScheme.\n'),
         ),
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),

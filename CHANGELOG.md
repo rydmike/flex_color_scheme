@@ -2,11 +2,47 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.1.0 
+
+**May 12, 2023**
+
+FlexColorScheme v7.1.0 supports new theming features in Flutter 3.10, it thus requires minimum Flutter 3.10 and Dart 3.0. 
+
+**NEW**
+
+* Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
+* Added `datePickerTheme` to `FlexSubThemes`.
+* Added properties `datePickerDialogRadius` and `datePickerHeaderBackgroundSchemeColor` to `FlexSubThemesData`.
+
+**CHANGE**
+
+- Updated to use minimum `flex_seed_scheme ^1.3.0`. This version, no longer depends on `material_color_utilities`, thus avoiding all version issues and conflicts when Flutter changes what breaking version of `material_color_utilities` it uses on different channels and versions.
+
+**THEMES PLAYGROUND**
+- Themes Playground 7.1 for FlexColorScheme 7.1 can be found [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
+
+* **NEW**
+  - Added selection of themed header color scheme color for the DatePickerDialog on the Dialogs panel.
+  - Added showing SearchBar with SearchView to the AppBar panel.
+  - Added showing SearchBar with SearchView to the Widget Showcase.
+
+* **UPDATE**
+  - Reviewed and updated status of all known theming issues in info expands.
+  - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
+  - Updated all examples to use new `ListenableBuilder` instead of `AnimatedBuilder` where appropriate.
+
+
 ## 7.0.5
 
 **Apr 29, 2023**
 
 - **Fix:** [#143](https://github.com/rydmike/flex_color_scheme/issues/143) Glitches in highlighting effect on mouse hover over `FlexThemeModeSwitch` and `FlexThemeModeOptionButton`.
+
+## 7.1.0-dev.1
+
+**Apr 24, 2023**
+
+* [Detailed changelog](https://github.com/rydmike/flex_color_scheme/blob/master/changelog/changelog_7_1_0_dev_1.md)
 
 ## 7.0.4
 

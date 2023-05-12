@@ -150,6 +150,7 @@ class Navigation extends StatelessWidget {
         NavigationDrawers(scaffoldKey: scaffoldKey),
         const NavigationRails(),
         const Tabs(),
+        const SearchAnchors(),
         const TopAppBars(),
       ],
     );
@@ -166,10 +167,12 @@ class Selection extends StatelessWidget {
       children: <Widget>[
         Checkboxes(),
         Chips(),
+        DatePickers(),
         Menus(),
         Radios(),
         Sliders(),
         Switches(),
+        TimePickers(),
       ],
     );
   }
@@ -197,7 +200,7 @@ class Buttons extends StatefulWidget {
 class _ButtonsState extends State<Buttons> {
   @override
   Widget build(BuildContext context) {
-    return ComponentDecoration(
+    return const ComponentDecoration(
       label: 'Common buttons',
       tooltipMessage: 'Use ElevatedButton, FilledButton, FilledButton.tonal, '
           'OutlinedButton, or TextButton',
@@ -205,7 +208,7 @@ class _ButtonsState extends State<Buttons> {
         scrollDirection: Axis.horizontal,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const <Widget>[
+          children: <Widget>[
             ButtonsWithoutIcon(isDisabled: false),
             ButtonsWithIcon(),
             ButtonsWithoutIcon(isDisabled: true),
@@ -714,11 +717,11 @@ class Dividers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ComponentDecoration(
+    return const ComponentDecoration(
       label: 'Dividers',
       tooltipMessage: 'Use Divider or VerticalDivider',
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Divider(key: Key('divider')),
         ],
       ),
@@ -731,11 +734,11 @@ class Switches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ComponentDecoration(
+    return const ComponentDecoration(
       label: 'Switches',
       tooltipMessage: 'Use SwitchListTile or Switch',
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           SwitchRow(isEnabled: true),
           SwitchRow(isEnabled: false),
         ],
@@ -1123,7 +1126,7 @@ class IconToggleButtons extends StatefulWidget {
 class _IconToggleButtonsState extends State<IconToggleButtons> {
   @override
   Widget build(BuildContext context) {
-    return ComponentDecoration(
+    return const ComponentDecoration(
       label: 'Icon buttons',
       tooltipMessage: 'Use IconButton',
       child: Row(
@@ -1131,7 +1134,7 @@ class _IconToggleButtonsState extends State<IconToggleButtons> {
         children: <Widget>[
           Column(
             // Standard IconButton
-            children: const <Widget>[
+            children: <Widget>[
               IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Standard',
@@ -1144,7 +1147,7 @@ class _IconToggleButtonsState extends State<IconToggleButtons> {
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Filled IconButton
               IconToggleButton(
                 isEnabled: true,
@@ -1160,7 +1163,7 @@ class _IconToggleButtonsState extends State<IconToggleButtons> {
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Filled Tonal IconButton
               IconToggleButton(
                 isEnabled: true,
@@ -1176,7 +1179,7 @@ class _IconToggleButtonsState extends State<IconToggleButtons> {
             ],
           ),
           Column(
-            children: const <Widget>[
+            children: <Widget>[
               // Outlined IconButton
               IconToggleButton(
                 isEnabled: true,
@@ -1403,16 +1406,99 @@ class _ChipsState extends State<Chips> {
   }
 }
 
+class DatePickers extends StatefulWidget {
+  const DatePickers({super.key});
+
+  @override
+  State<DatePickers> createState() => _DatePickersState();
+}
+
+class _DatePickersState extends State<DatePickers> {
+  DateTime? selectedDate;
+  final DateTime _firstDate = DateTime(DateTime.now().year - 2);
+  final DateTime _lastDate = DateTime(DateTime.now().year + 1);
+
+  @override
+  Widget build(BuildContext context) {
+    return ComponentDecoration(
+      label: 'Date picker',
+      tooltipMessage: 'Use showDatePicker',
+      child: TextButton(
+        onPressed: () async {
+          final DateTime? date = await showDatePicker(
+            context: context,
+            useRootNavigator: false,
+            initialDate: selectedDate ?? DateTime.now(),
+            firstDate: _firstDate,
+            lastDate: _lastDate,
+          );
+          setState(() {
+            selectedDate = date;
+            if (selectedDate != null) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                    'Selected Date: ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'),
+              ));
+            }
+          });
+        },
+        child: const Text(
+          'Show date picker',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class TimePickers extends StatefulWidget {
+  const TimePickers({super.key});
+
+  @override
+  State<TimePickers> createState() => _TimePickersState();
+}
+
+class _TimePickersState extends State<TimePickers> {
+  TimeOfDay? selectedTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return ComponentDecoration(
+      label: 'Time picker',
+      tooltipMessage: 'Use showTimePicker',
+      child: TextButton(
+        onPressed: () async {
+          final TimeOfDay? time = await showTimePicker(
+            useRootNavigator: false,
+            context: context,
+            initialTime: selectedTime ?? TimeOfDay.now(),
+          );
+          setState(() {
+            selectedTime = time;
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Selected time: ${selectedTime!.format(context)}'),
+            ));
+          });
+        },
+        child: const Text(
+          'Show time picker',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
 class SegmentedButtons extends StatelessWidget {
   const SegmentedButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ComponentDecoration(
+    return const ComponentDecoration(
       label: 'Segmented buttons',
       tooltipMessage: 'Use SegmentedButton<T>',
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           SingleChoice(),
           colDivider,
           MultipleChoice(),
@@ -2107,9 +2193,9 @@ class _MenusState extends State<Menus> {
       tooltipMessage: 'Use MenuAnchor or DropdownMenu<T>',
       child: Column(
         children: <Widget>[
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               ButtonAnchorExample(),
               rowDivider,
               IconButtonAnchorExample(),
@@ -2229,6 +2315,102 @@ class _SlidersState extends State<Sliders> {
   }
 }
 
+class SearchAnchors extends StatefulWidget {
+  const SearchAnchors({super.key});
+
+  @override
+  State<SearchAnchors> createState() => _SearchAnchorsState();
+}
+
+class _SearchAnchorsState extends State<SearchAnchors> {
+  String? selectedColor;
+  List<ColorItem> searchHistory = <ColorItem>[];
+
+  Iterable<Widget> getHistoryList(SearchController controller) {
+    return searchHistory.map((ColorItem color) => ListTile(
+          leading: const Icon(Icons.history),
+          title: Text(color.label),
+          trailing: IconButton(
+              icon: const Icon(Icons.call_missed),
+              onPressed: () {
+                controller.text = color.label;
+                controller.selection =
+                    TextSelection.collapsed(offset: controller.text.length);
+              }),
+          onTap: () {
+            controller.closeView(color.label);
+            handleSelection(color);
+          },
+        ));
+  }
+
+  Iterable<Widget> getSuggestions(SearchController controller) {
+    final String input = controller.value.text;
+    return ColorItem.values
+        .where((ColorItem color) => color.label.contains(input))
+        .map((ColorItem filteredColor) => ListTile(
+              leading: CircleAvatar(backgroundColor: filteredColor.color),
+              title: Text(filteredColor.label),
+              trailing: IconButton(
+                  icon: const Icon(Icons.call_missed),
+                  onPressed: () {
+                    controller.text = filteredColor.label;
+                    controller.selection =
+                        TextSelection.collapsed(offset: controller.text.length);
+                  }),
+              onTap: () {
+                controller.closeView(filteredColor.label);
+                handleSelection(filteredColor);
+              },
+            ));
+  }
+
+  void handleSelection(ColorItem color) {
+    setState(() {
+      selectedColor = color.label;
+      if (searchHistory.length >= 5) {
+        searchHistory.removeLast();
+      }
+      searchHistory.insert(0, color);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ComponentDecoration(
+      label: 'Search',
+      tooltipMessage: 'Use SearchAnchor or SearchAnchor.bar',
+      child: Column(
+        children: <Widget>[
+          SearchAnchor.bar(
+            barHintText: 'Search colors',
+            suggestionsBuilder:
+                (BuildContext context, SearchController controller) {
+              if (controller.text.isEmpty) {
+                if (searchHistory.isNotEmpty) {
+                  return getHistoryList(controller);
+                }
+                return <Widget>[
+                  const Center(
+                    child: Text('No search history.',
+                        style: TextStyle(color: Colors.grey)),
+                  )
+                ];
+              }
+              return getSuggestions(controller);
+            },
+          ),
+          const SizedBox(height: 20),
+          if (selectedColor == null)
+            const Text('Select a color')
+          else
+            Text('Last selected color is $selectedColor')
+        ],
+      ),
+    );
+  }
+}
+
 class ComponentDecoration extends StatefulWidget {
   const ComponentDecoration({
     super.key,
@@ -2338,4 +2520,27 @@ class ComponentGroupDecoration extends StatelessWidget {
       ),
     );
   }
+}
+
+enum ColorItem {
+  red('red', Colors.red),
+  orange('orange', Colors.orange),
+  yellow('yellow', Colors.yellow),
+  green('green', Colors.green),
+  blue('blue', Colors.blue),
+  indigo('indigo', Colors.indigo),
+  violet('violet', Color(0xFF8F00FF)),
+  purple('purple', Colors.purple),
+  pink('pink', Colors.pink),
+  silver('silver', Color(0xFF808080)),
+  gold('gold', Color(0xFFFFD700)),
+  beige('beige', Color(0xFFF5F5DC)),
+  brown('brown', Colors.brown),
+  grey('grey', Colors.grey),
+  black('black', Colors.black),
+  white('white', Colors.white);
+
+  const ColorItem(this.label, this.color);
+  final String label;
+  final Color color;
 }

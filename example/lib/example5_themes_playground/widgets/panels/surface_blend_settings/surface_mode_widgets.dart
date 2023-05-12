@@ -94,7 +94,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+  final EdgeInsetsGeometry? contentPadding;
   final String labelForDefault;
   final String? popupLabelDefault;
 
@@ -198,8 +198,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
       },
       child: ListTile(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,11 +241,11 @@ List<Widget> _getModeWidget(ColorScheme scheme, [bool allModes = true]) =>
         message: 'High surface\nlow scaffold',
         child: Icon(Icons.layers),
       ),
-      Tooltip(
+      const Tooltip(
         message: 'High scaffold\nlow surface',
         child: Stack(
           alignment: Alignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top: 10),
               child: Icon(Icons.layers_outlined),

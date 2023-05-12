@@ -8,8 +8,8 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
-class DrawerSettings extends StatelessWidget {
-  const DrawerSettings(this.controller, {super.key});
+class NavigationDrawerSettings extends StatelessWidget {
+  const NavigationDrawerSettings(this.controller, {super.key});
   final ThemeController controller;
 
   static final Uri _drawerM3Spec = Uri(
@@ -132,7 +132,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -186,7 +186,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -245,7 +245,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -371,7 +371,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -420,7 +420,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -471,7 +471,7 @@ class DrawerSettings extends StatelessWidget {
                 : null,
           ),
           trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
+            padding: const EdgeInsetsDirectional.only(end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -536,7 +536,8 @@ class DrawerSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'The NavigationDrawer and its Indicator styling has a '
-                      'fair amount of minor issues in Flutter 3.7 that limits '
+                      'fair amount of minor issues in Flutter 3.7 and 3.10 '
+                      'that limits '
                       'useful styling capabilities options. You can find '
                       'an overview of them and their status in ',
                 ),

@@ -133,8 +133,7 @@ class SliderShowIndicatorPopupMenu extends StatelessWidget {
       ],
       child: ListTile(
         enabled: enabled,
-        contentPadding:
-            contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+        contentPadding: contentPadding,
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +143,7 @@ class SliderShowIndicatorPopupMenu extends StatelessWidget {
           ],
         ),
         trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 10.0),
+          padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: IconTheme(
             data: selectedIconTheme,
             child: ColorSchemeBox(
