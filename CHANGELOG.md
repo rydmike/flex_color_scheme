@@ -4,9 +4,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.1.0 
 
-**May 11, 2023**
+**May 12, 2023**
 
-FlexColorScheme v7.1.0 supports new features in Flutter 3.10 and thus requires minimum Flutter 3.10 and Dart 3.0. 
+FlexColorScheme v7.1.0 supports new theming features in Flutter 3.10, it thus requires minimum Flutter 3.10 and Dart 3.0. 
 
 **NEW**
 

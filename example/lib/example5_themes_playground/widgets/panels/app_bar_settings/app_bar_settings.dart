@@ -31,6 +31,11 @@ class AppBarSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/issues/123943',
   );
+  static final Uri _fcsFlutterIssue126623 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/126623',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -549,7 +554,7 @@ class AppBarSettings extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssue110951,
-                  text: 'issue #117082',
+                  text: 'issue #110951',
                 ),
                 TextSpan(
                     style: spanTextStyle,
@@ -563,8 +568,8 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There is a fix in master, but it not available in '
-                      'Flutter 3.7 or 3.10.',
+                  text: '. There is a fix in master, but it it not available '
+                      'in Flutter 3.7 or 3.10.\n',
                 ),
               ],
             ),
@@ -578,11 +583,39 @@ class AppBarSettings extends StatelessWidget {
               'view is with the factory SearchAnchor.bar.\n'
               '\n'
               'FCS does not provide any convenience theming features for '
-              'the search bar in current version, but may add some later. '
-              'A theming where custom themed decorator cannot be removed '
-              'from the search results view is being investigated.'),
+              'the search bar in current version, but may add some later.\n'),
         ),
         const SearchBarShowcase(),
+        // _fcsFlutterIssue126623
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The InputDecoration theme leeks through into '
+                      'SearchBar and SearchView. From the SearchView it cannot '
+                      'even be removed with a Theme wrapper. For more '
+                      'information, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue126623,
+                  text: 'issue #126623',
+                ),
+                TextSpan(
+                    style: spanTextStyle,
+                    text: '. The Themes Playground '
+                        'uses a Theme wrapper to remove it above, but it is still '
+                        'visible in the view. In the simulator using the '
+                        'Flutter official M3 demo, you can see the issue on '
+                        'both SearchBar and the SearchView.\n '),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         const ListTileReveal(
           title: Text('BottomAppBar'),
@@ -755,7 +788,7 @@ class AppBarSettings extends StatelessWidget {
               'The color of the items in a BottomAppBar cannot be themed. If '
               'you use a background color that requires other contrasting '
               'color than what works on surface and background colors, you '
-              'will have to color its content on widget level.\n'),
+              'will have to color the content on widget level.\n'),
         ),
         ListTileReveal(
           dense: true,

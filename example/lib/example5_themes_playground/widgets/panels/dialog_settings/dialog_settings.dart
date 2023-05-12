@@ -19,6 +19,18 @@ class DialogSettings extends StatelessWidget {
     path: 'flutter/flutter/pull/118657',
   );
 
+  static final Uri _fcsFlutterIssue126597 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/126597',
+  );
+
+  static final Uri _fcsFlutterIssue126617 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/126617',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -337,7 +349,7 @@ class DialogSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: Text('Flutter 3.7 does not support any Material 3 styling '
               'of the DatePicker, there is not even a theme for DatePicker '
-              'in Flutter 3.7. Flutter 3.10 adds theming support to '
+              'in Flutter 3.7. Flutter 3.10 adds theming and M3 support to '
               'the DatePicker.\n'),
         ),
         ColorSchemePopupMenu(
@@ -369,7 +381,27 @@ class DialogSettings extends StatelessWidget {
                   text: 'In Flutter 3.10 in M3 mode, the Divider is hard '
                       'coded and cannot be removed, it looks bad when you use '
                       'any other header color than the default surface color. '
-                      '\n',
+                      'For more info see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue126597,
+                  text: 'issue #126597',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. The DatePicker manual date entry input field picks '
+                      'up the ambient InputDecorationTheme and it cannot be '
+                      'styled independently, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue126617,
+                  text: 'issue #126617',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
                 ),
               ],
             ),
