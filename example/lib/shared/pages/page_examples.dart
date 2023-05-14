@@ -28,7 +28,6 @@ class PageExamples extends StatelessWidget {
             await SubpageDemo.show(context, controller);
           },
         ),
-        const Divider(),
         ListTile(
           title: const Text('Splash page demo 1a'),
           subtitle: const Text(
@@ -40,7 +39,6 @@ class PageExamples extends StatelessWidget {
             await SplashPageOne.show(context, false);
           },
         ),
-        const Divider(),
         ListTile(
           title: const Text('Splash page demo 1b'),
           subtitle: const Text(
@@ -53,7 +51,6 @@ class PageExamples extends StatelessWidget {
             await SplashPageOne.show(context, true);
           },
         ),
-        const Divider(),
         ListTile(
           title: const Text('Splash page demo 2'),
           subtitle: const Text(

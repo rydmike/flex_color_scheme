@@ -2,6 +2,21 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.1.1
+
+**May 14, 2023**
+
+**FIX**
+
+* Fixed regression issue where custom a `textTheme` color is no longer applied. 
+  * See issue [#151](https://github.com/rydmike/flex_color_scheme/issues/151). 
+  * The issue was introduced in version 7.0.0, when adding a feature that provided automatic correct default contrast for **GoogleFonts**, when a default `GoogleFonts` and its `TextTheme`, like `GoogleFonts.notoSansTextTheme()` is used in `textTheme` or `primaryTextTheme` in `FlexColorScheme`. 
+  * The `GoogleFonts` and its  `textTheme` color always defaults to the color from M2 mode default light mode `ThemeData.light().textTheme`. This when used in `ThemeData` forces users to assign correct M2/M3 color and `textTheme`/`primaryTextTheme` contrast color, to all its styles, whenever used in a situation where the default is the wrong color. The default contrast color is basically only correct for a light theme when using Material 2. For anything else, it is incorrect.
+  * FCS version 7.0.0 got rid of the need to make such correction assignment, but it also incorrectly disabled using custom colors used in any custom `TextTheme`.
+  * The applied FIX keeps the desired "no need to give correct contrast color" to a default **GoogleFonts** `TextTheme` in FlexColorScheme and also allows making custom colored text custom text themes.
+  * The FIX is a bit involved, it also led to an idea that maybe `GoogleFonts`, should just keep the font color default as null, and let Flutter's default Theme behavior handle the assignment of correct color for the M2/M3 mode, using each mode's default contrast color, for each style in the `TextTheme`. See issue [#xxx]() for more info on this.
+  * Tests added for the regression and for the new `GoogleFonts` default `TextTheme` being used and nulling its colors, so they get correct M2/M3 mode default contrast colors in both light and dark mode and for both `textTheme` and `primaryTextTheme`. 
+
 ## 7.1.0 
 
 **May 12, 2023**
@@ -28,7 +43,7 @@ FlexColorScheme v7.1.0 supports new theming features in Flutter 3.10, it thus re
 
 * **UPDATE**
   - Reviewed and updated status of all known theming issues in info expands.
-  - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the Themes Playground.
+  - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the **Themes Playground**.
   - Updated all examples to use new `ListenableBuilder` instead of `AnimatedBuilder` where appropriate.
 
 
@@ -94,7 +109,7 @@ This is a major update to the **FlexColorScheme** package and a substantial leap
   - Package: Only tests and documentation additions and updates.
   - Playground: Label and layout corrections.
 
-The [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-v7/) app built for this release is unfortunately not a SKIA renderer build, it is using the HTML renderer. This makes it less performant than the app would otherwise be. Additionally, scaled content, like the **Themes Simulator** panel in the **Playground**, is also fuzzier than it would be with the SKIA renderer. Due to an issue in Flutter stable 3.7.0 to at least 3.7.9, builds made with the SKIA renderer performs very poorly and crash quickly. For more information, see Flutter [issue #122189](https://github.com/flutter/flutter/issues/122189). A new build using the same package version will be made later and released when a fix for the SKIA issues are available on the Flutter stable channel.
+The [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-v7/) app built for this release is unfortunately not a SKIA renderer build, it is using the HTML renderer. This makes it less performant than the app would otherwise be. Additionally, scaled content, like the **Themes Simulator** panel in the **Playground**, is also fuzzier than it would be with the SKIA renderer. Due to an issue in Flutter stable 3.7.0 to at least 3.7.9, builds made with the SKIA renderer performs very poorly and crash quickly. For more information, see Flutter [issue #122189](https://github.com/flutter/flutter/issues/122189). A new build using the same package version will be made later and released when fixes for the SKIA issues are available on the Flutter stable channel.
 
 ## 7.0.0-dev.3
 
@@ -143,9 +158,9 @@ The companion app **Themes Playground**, may get label improvements plus spellin
 
 **FlexColorScheme** version 6.1.0 contains many new features, more component sub-themes and configurable properties. It improves seed-generated color scheme capabilities by adding more pre-configured seed generation configurations and color contrast accessibility options. 
 
-A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes, any seed generation configuration can optionally return results with plain white and black contrasting on colors. This can be applied separately for main on colors and on surfaces.
+A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes. Any seed generation configuration can optionally return results with plain white and black contrasting on colors. This can be applied separately for main on colors and on surfaces.
 
-The **Themes Playground** application, has been updated to include most of the new features. It has been improved to make it easier to discover some of its previously existing features, like using custom colors in the Playground to define your own theme. 
+The **Themes Playground** application has been updated to include most of the new features. It has been improved to make it easier to discover some of its previously existing features, like using custom colors in the Playground to define your own theme. 
 
 **NEW**
 
@@ -200,15 +215,15 @@ The **Themes Playground** application, has been updated to include most of the n
   - Same temporary M3 fix is also used on themed `PopupMenuButton`. 
   - Unfortunately, elevation-based shadow cannot be added to any of them in the M3 mode. It will have to wait for actual implementation of the components and their Material 3 themes with support for it.
   - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, already exist in the Flutter master channel, they will probably land in next new stable release after Flutter 3.3. 
-  - These temporary M3 fixes, make it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3, it is not perfect, but much better.
+  - These temporary M3 fixes, make it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material 3. Since shadow elevations are still not working for them in M3 mode, it is not perfect, but much better.
   - The reasons why these issues exist are because these components have not yet been migrated to M3 in Flutter 3.3, plus the combination of this `Material` elevation [issue #107190](https://github.com/flutter/flutter/issues/107190) in M3 mode. As a result we get no elevation tint or any shadow on such `Material` using widgets in M3 mode.
   - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. Even if only it lands, we will get shadows back in M3 default `Material`, also if the components and their themes do not land. In combination with the here made M3 manual elevation tint fix, they would in such a case get the correct M3 default background elevation tint behaviour and shadow.
-  - The above temporary work-around fixes will be removed when the stable version of the framework implements correct Material 3 elevation behavior for these widgets, and produces the same results itself. Hopefully in the next stable release of Flutter.
+  - The above temporary work-around fixes will be removed when the stable version of the framework implements the correct Material 3 elevation behavior for these widgets, and produces the same results itself. Hopefully in the next stable release of Flutter.
 
 **THEMES PLAYGROUND**
 
 * On **Theme colors** panel:
-  - Improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme, as a starting point for your custom color definitions.
+  - Improved the discoverability of defining and using totally custom colors for your theme in the **Playground**. It has always existed, but maybe now users will discover it more easily. You can still also copy any existing theme as a starting point for your custom color definitions.
   - Simplified the terminology used on the **Theme colors** panel. Also simplified its color presentation.
   - Added an on/off switch that controls the `swapLegacyOnMaterial3` setting.
 
@@ -221,9 +236,9 @@ The **Themes Playground** application, has been updated to include most of the n
     - The Tonal palette color **tones** now have tooltips that present each tone.
 
 * On **Surface blends**: 
-  - Changed the surface blend mode defaults to settings that are more mobile design-friendly. No API change involved. API defaults are the same as before, changes only affect the Playground app defaults. 
+  - Changed surface blend mode defaults to values that are more mobile design-friendly. No API change involved. API defaults are the same as before, changes only affect the Playground app defaults. 
     - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text are placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
-  - The blend mode control now also has a popup-menu, that always shows all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
+  - The blend mode control now also has a popupmenu that always shows all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
 
 * Other **new controllable properties** and features:
   - **AppBar** theming can now use themed `scaffoldBackground` color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.

@@ -57,7 +57,7 @@ class _DemoAppState extends State<DemoApp> {
 
       theme: FlexThemeData.light(
         useMaterial3: true,
-        scheme: FlexScheme.flutterDash,
+        scheme: FlexScheme.redWine,
         blendLevel: 2,
         appBarOpacity: 0.98,
         subThemesData: const FlexSubThemesData(
@@ -73,7 +73,13 @@ class _DemoAppState extends State<DemoApp> {
           navigationRailOpacity: 0.96,
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        // Custom fonts to demonstrate you pass a default GoogleFonts TextTheme
+        // to both textTheme and primaryTextTheme in M2/M3 mode as well as in
+        // light/dark theme and have them get correct default color and
+        // contrast color in all cases. Vanilla ThemeData does not do this.
         fontFamily: GoogleFonts.notoSans().fontFamily,
+        textTheme: GoogleFonts.notoSansTextTheme(),
+        primaryTextTheme: GoogleFonts.notoSansTextTheme(),
       ),
       darkTheme: FlexThemeData.dark(
         useMaterial3: true,
@@ -95,6 +101,12 @@ class _DemoAppState extends State<DemoApp> {
         ),
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: GoogleFonts.notoSans().fontFamily,
+        // Custom fonts to demonstrate you pass a default GoogleFonts TextTheme
+        // to both textTheme and primaryTextTheme in M2/M3 mode as well as in
+        // light/dark theme and have them get correct default color and
+        // contrast color in all cases. Vanilla ThemeData does not do this.
+        textTheme: GoogleFonts.notoSansTextTheme(),
+        primaryTextTheme: GoogleFonts.notoSansTextTheme(),
       ),
 
       // If you want to use ThemeData.from a ColorScheme based on a ColorScheme

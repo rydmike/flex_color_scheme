@@ -231,5 +231,81 @@ void main() {
     test('FCT kInputDecoratorDarkBgLighten is 5', () {
       expect(kInputDecoratorDarkBgLighten, 5);
     });
+    // New in FCS 7.1.1
+    test('FCT kHiLightTextBlend is 20', () {
+      expect(kHiLightTextBlend, 20);
+    });
+    test('FCT kHiDarkTextBlend is 15', () {
+      expect(kHiDarkTextBlend, 15);
+    });
+    test('FCT kMedLightTextBlend is 20', () {
+      expect(kMedLightTextBlend, 20);
+    });
+    test('FCT kMedDarkTextBlend is 12', () {
+      expect(kMedDarkTextBlend, 12);
+    });
+    test('FCT kLoLightTextBlend is 23', () {
+      expect(kLoLightTextBlend, 23);
+    });
+    test('FCT kLoDarkTextBlend is 15', () {
+      expect(kLoDarkTextBlend, 15);
+    });
+    test('FCT kHiLightTextAlpha is 0xD8', () {
+      expect(kHiLightTextAlpha, 0xD8);
+    });
+    test('FCT kHiDarkTextAlpha is 0xE2', () {
+      expect(kHiDarkTextAlpha, 0xE2);
+    });
+    test('FCT kMedLightTextAlpha is 0xF4', () {
+      expect(kMedLightTextAlpha, 0xF4);
+    });
+    test('FCT kMedDarkTextAlpha is 0xFF', () {
+      expect(kMedDarkTextAlpha, 0xFF);
+    });
+    test('FCT kLoLightTextAlpha is 0xFF', () {
+      expect(kLoLightTextAlpha, 0xFF);
+    });
+    test('FCT kLoDarkTextAlpha is 0xFF', () {
+      expect(kLoDarkTextAlpha, 0xFF);
+    });
+    test('FCT kHiLightPrimTextBlend is 10', () {
+      expect(kHiLightPrimTextBlend, 10);
+    });
+    test('FCT kHiDarkPrimTextBlend is 10', () {
+      expect(kHiDarkPrimTextBlend, 10);
+    });
+    test('FCT kMedLightPrimTextBlend is 5', () {
+      expect(kMedLightPrimTextBlend, 5);
+    });
+    test('FCT kAlphaUnselect is 0xDD', () {
+      expect(kAlphaUnselect, 0xDD);
+    });
+    test('FCT kMedDarkPrimTextBlend is 9', () {
+      expect(kMedDarkPrimTextBlend, 9);
+    });
+    test('FCT kLoLightPrimTextBlend is 4', () {
+      expect(kLoLightPrimTextBlend, 4);
+    });
+    test('FCT kLoDarkPrimTextBlend is 7', () {
+      expect(kLoDarkPrimTextBlend, 7);
+    });
+    test('FCT kHiLightPrimTextAlpha is 0xD8', () {
+      expect(kHiLightPrimTextAlpha, 0xD8);
+    });
+    test('FCT kHiDarkPrimTextAlpha is 0xE5', () {
+      expect(kHiDarkPrimTextAlpha, 0xE5);
+    });
+    test('FCT kMedLightPrimTextAlpha is 0xF2', () {
+      expect(kMedLightPrimTextAlpha, 0xF2);
+    });
+    test('FCT kMedDarkPrimTextAlpha is 0xFF', () {
+      expect(kMedDarkPrimTextAlpha, 0xFF);
+    });
+    test('FCT kLoLightPrimTextAlpha is 0xFF', () {
+      expect(kLoLightPrimTextAlpha, 0xFF);
+    });
+    test('FCT kLoDarkPrimTextAlpha is 0xFF', () {
+      expect(kLoDarkPrimTextAlpha, 0xFF);
+    });
   });
 }

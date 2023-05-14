@@ -608,8 +608,8 @@ class AppBarSettings extends StatelessWidget {
                 TextSpan(
                     style: spanTextStyle,
                     text: '. The Themes Playground '
-                        'uses a Theme wrapper to remove it above, but it is still '
-                        'visible in the view. In the simulator using the '
+                        'uses a Theme wrapper to remove it above, but it is '
+                        'still visible in the view. In the simulator using the '
                         'Flutter official M3 demo, you can see the issue on '
                         'both SearchBar and the SearchView.\n '),
               ],

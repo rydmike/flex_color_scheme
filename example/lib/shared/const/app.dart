@@ -165,7 +165,7 @@ class App {
   // the correct opacities on text style if M2 Typography is used, and removes
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
-  static TextTheme get textTheme => GoogleFonts.notoSansTextTheme();
+  static TextTheme? get textTheme => GoogleFonts.notoSansTextTheme();
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.
