@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.1.1
 
-**May 14, 2023**
+**May 15, 2023**
 
 **FIX**
 
@@ -14,7 +14,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * The `GoogleFonts` and its  `textTheme` color always defaults to the color from M2 mode default light mode `ThemeData.light().textTheme`. This when used in `ThemeData` forces users to assign correct M2/M3 color and `textTheme`/`primaryTextTheme` contrast color, to all its styles, whenever used in a situation where the default is the wrong color. The default contrast color is basically only correct for a light theme when using Material 2. For anything else, it is incorrect.
   * FCS version 7.0.0 got rid of the need to make such correction assignment, but it also incorrectly disabled using custom colors used in any custom `TextTheme`.
   * The applied FIX keeps the desired "no need to give correct contrast color" to a default **GoogleFonts** `TextTheme` in FlexColorScheme and also allows making custom colored text custom text themes.
-  * The FIX is a bit involved, it also led to an idea that maybe `GoogleFonts`, should just keep the font color default as null, and let Flutter's default Theme behavior handle the assignment of correct color for the M2/M3 mode, using each mode's default contrast color, for each style in the `TextTheme`. See issue [#xxx]() for more info on this.
+  * The FIX is a bit involved, it also led to an idea that maybe `GoogleFonts`, should just keep the font color default as null, and let Flutter's default Theme behavior handle the assignment of correct color for the M2/M3 mode, using each mode's default contrast color, for each style in the `TextTheme`. See issue [GoogleFonts #401](https://github.com/material-foundation/flutter-packages/issues/401) for more info on this.
   * Tests added for the regression and for the new `GoogleFonts` default `TextTheme` being used and nulling its colors, so they get correct M2/M3 mode default contrast colors in both light and dark mode and for both `textTheme` and `primaryTextTheme`. 
 
 ## 7.1.0 
