@@ -150,7 +150,7 @@ class ThemeColorsSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Swap secondary '
-              'and tertiary'),
+              'and tertiary legacy colors in M3'),
           subtitleDense: true,
           subtitle: const Text(
             'Only applies when using M3, and only to built-in FCS M2 '
