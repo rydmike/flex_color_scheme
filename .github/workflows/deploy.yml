@@ -30,7 +30,7 @@ on:
       - "**.md"
   release:
     branches: [none]
-    types: [publish]
+    types: [none]
 
 jobs:
   flutter_tests:
