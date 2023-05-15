@@ -1,6 +1,6 @@
 ### Archived changelog entry
 
-> The Dart package site [pub.dev](https://pub.dev/) restricts the size of the main [CHANGELOG.md](https://github.com/rydmike/flex_color_scheme/blob/master/CHANGELOG.md) file size to maximum 128kB. To work around this limitation older change entries have been moved into individual files linked from the main changelog.
+> The Dart package site [pub.dev](https://pub.dev/) restricts the size of the main [CHANGELOG.md](https://github.com/rydmike/flex_color_scheme/blob/master/CHANGELOG.md) file size to maximum 128kB. To work around this limitation, older change entries have been moved into individual files linked from the main changelog.
 
 ## 1.0.0-dev.2
 
@@ -17,12 +17,12 @@
 * Removed the constants that had no function in the public interface from the API.
 
 **NEW**
-* Exposed planned configuration APIs for the FlexThemeModeSwitch and FlexThemeModeOptionButton.
+* Exposed planned configuration APIs for FlexThemeModeSwitch and FlexThemeModeOptionButton.
 
 **CHANGE**
 
 * Removed legacy usage of deprecated ThemeData properties textSelectionColor, cursorColor
-  and textSelectionHandleColor. They are no longer needed even for stable channel, they were
+  and textSelectionHandleColor. They are no longer needed even for the stable channel, they were
   useful earlier but not anymore, using only TextSelectionThemeData is
   enough in the latest stable version.
 

@@ -27,7 +27,7 @@ import 'home_page.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/customtheme-v7
+// https://rydmike.com/flexcolorscheme/customtheme-v7-1
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

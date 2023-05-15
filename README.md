@@ -36,7 +36,7 @@ When you opt in on using the component sub-themes in Material-2 mode, border rad
 
 You can also opt in on using Material-3. The Material-3 mode component sub-theming is far less opinionated, using mostly Material-3 defaults. It offers many quick settings to customize Material-3 to fit your custom design goals.
 
-In Flutter **3.7 and later**, using Material-3 design is ready for production use. Some minor issues still exist, please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on status of known **theming** issues in Flutter.
+In Flutter **3.7 and later**, using Material-3 design is ready for production use. Some minor issues still exist, please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on the status of known **theming** issues in Flutter.
 
 <table>
   <tr>

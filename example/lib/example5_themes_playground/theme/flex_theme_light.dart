@@ -491,7 +491,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // light and dark themes and for the primaryTextTheme to always have right
     // contrast for whatever primary color is used. FlexColorScheme also retains
     // the correct opacities on text style if M2 Typography is used, and removes
-    // it from style when M3 Typography is used.
+    // it from style when M3 Typography is used, when using GoogleFonts.
     fontFamily: controller.useAppFont ? App.font : null,
     textTheme: controller.useAppFont ? App.textTheme : null,
     primaryTextTheme: controller.useAppFont ? App.textTheme : null,

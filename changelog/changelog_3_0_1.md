@@ -1,6 +1,6 @@
 ### Archived changelog entry
 
-> The Dart package site [pub.dev](https://pub.dev/) restricts the size of the main [CHANGELOG.md](https://github.com/rydmike/flex_color_scheme/blob/master/CHANGELOG.md) file size to maximum 128kB. To work around this limitation older change entries have been moved into individual files linked from the main changelog.
+> The Dart package site [pub.dev](https://pub.dev/) restricts the size of the main [CHANGELOG.md](https://github.com/rydmike/flex_color_scheme/blob/master/CHANGELOG.md) file size to maximum 128kB. To work around this limitation, older change entries have been moved into individual files linked from the main changelog.
 
 ## 3.0.1
 
@@ -17,5 +17,5 @@
 * Documentation and typo fixes.
 
 **Tests**
-* Added tests for above fix that captures the issue and fails
+* Added tests for the above fix. The test captures the issue and fails
   in version 3.0.0. Total 741 tests, coverage 99.75%.

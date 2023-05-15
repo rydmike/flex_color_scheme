@@ -41,12 +41,13 @@ class App {
   // build numbers.
   static const String versionMajor = '7';
   static const String versionMinor = '1';
-  static const String versionPatch = '0';
+  static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
+  static const String packageVersionMinor = '$versionMajor.$versionMinor.x';
   static const String flutterVersion = 'stable 3.10.0 (canvaskit)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
@@ -165,7 +166,7 @@ class App {
   // the correct opacities on text style if M2 Typography is used, and removes
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
-  static TextTheme get textTheme => GoogleFonts.notoSansTextTheme();
+  static TextTheme? get textTheme => GoogleFonts.notoSansTextTheme();
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.

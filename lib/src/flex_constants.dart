@@ -458,3 +458,130 @@ const int kInputDecoratorLightBgDarken = 3;
 ///
 /// Value: 3
 const int kInputDecoratorDarkBgLighten = 5;
+
+// The v7.1 Blended TextTheme magic values moved to constants
+// -----------------------------------------------------------------------------
+
+// Normal TextTheme
+
+/// High blended light TextTheme alpha blend %
+///
+/// Value: 20
+const int kHiLightTextBlend = 20;
+
+/// High blended dark TextTheme alpha blend %
+///
+/// Value: 15
+const int kHiDarkTextBlend = 15;
+
+/// Medium blended light TextTheme alpha blend %
+///
+/// Value: 20
+const int kMedLightTextBlend = 20;
+
+/// Medium blended dark TextTheme alpha blend %
+///
+/// Value: 15
+const int kMedDarkTextBlend = 12;
+
+/// Low blended light TextTheme alpha blend %
+///
+/// Value: 23
+const int kLoLightTextBlend = 23;
+
+/// Low blended dark TextTheme alpha blend %
+///
+/// Value: 15
+const int kLoDarkTextBlend = 15;
+
+/// High blended light TextTheme alpha value
+///
+/// Value: 0xD8 = 85%
+const int kHiLightTextAlpha = 0xD8;
+
+/// High blended dark TextTheme alpha value
+///
+/// Value: 0xE2 = 92%
+const int kHiDarkTextAlpha = 0xE2;
+
+/// Medium blended light TextTheme alpha value
+///
+/// Value: 0xF4 = 96%
+const int kMedLightTextAlpha = 0xF4;
+
+/// Medium blended dark TextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kMedDarkTextAlpha = 0xFF;
+
+/// Low blended light TextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kLoLightTextAlpha = 0xFF;
+
+/// Low blended dark TextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kLoDarkTextAlpha = 0xFF;
+
+// Primary TextTheme
+
+/// High blended light PrimaryTextTheme alpha blend %
+///
+/// Value: 10
+const int kHiLightPrimTextBlend = 10;
+
+/// High blended dark PrimaryTextTheme alpha blend %
+///
+/// Value: 10
+const int kHiDarkPrimTextBlend = 10;
+
+/// Medium blended light PrimaryTextTheme alpha blend %
+///
+/// Value: 5
+const int kMedLightPrimTextBlend = 5;
+
+/// Medium blended dark PrimaryTextTheme alpha blend %
+///
+/// Value: 9
+const int kMedDarkPrimTextBlend = 9;
+
+/// Low blended light PrimaryTextTheme alpha blend %
+///
+/// Value: 4
+const int kLoLightPrimTextBlend = 4;
+
+/// Low blended dark PrimaryTextTheme alpha blend %
+///
+/// Value: 7
+const int kLoDarkPrimTextBlend = 7;
+
+/// High blended light PrimaryTextTheme alpha value
+///
+/// Value: 0xD8 = 85%
+const int kHiLightPrimTextAlpha = 0xD8;
+
+/// High blended dark PrimaryTextTheme alpha value
+///
+/// Value: 0xE5 = 90%
+const int kHiDarkPrimTextAlpha = 0xE5;
+
+/// Medium blended light PrimaryTextTheme alpha value
+///
+/// Value: 0xF2 = 95%
+const int kMedLightPrimTextAlpha = 0xF2;
+
+/// Medium blended dark PrimaryTextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kMedDarkPrimTextAlpha = 0xFF;
+
+/// Low blended light PrimaryTextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kLoLightPrimTextAlpha = 0xFF;
+
+/// Low blended dark PrimaryTextTheme alpha value
+///
+/// Value: 0xFF = 100%
+const int kLoDarkPrimTextAlpha = 0xFF;

@@ -318,7 +318,6 @@ final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 // and that labelSmall is a bit too small and has weird letter spacing, so we
 // make it bigger and change its letter spacing.
 const TextTheme _textTheme = TextTheme(
-  displayLarge: TextStyle(fontSize: 53),
   displayMedium: TextStyle(fontSize: 41),
   displaySmall: TextStyle(fontSize: 36),
   labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
@@ -381,7 +380,9 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // radius is defined to always be 24:
   bottomSheetRadius: 24,
 
-  // Use the Material 3 like text theme. Defaults to true.
+  // Use the Material3 text theme and typography. Defaults to null.
+  // When null, the correct M2/M3 TextTheme and Typography for respective mode
+  // is used. If true, M3 style is enforced, if false, M2 mode is enforced.
   useTextTheme: true,
 
   // Select input decorator type, only SDK options outline and underline
@@ -642,11 +643,6 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
-        // Use predefined M3 typography while this issue is in effect:
-        // https://github.com/flutter/flutter/issues/103864
-        typography: Typography.material2021(
-          platform: _platform,
-        ),
         // Add all our custom theme extensions, in this case we only have one.
         extensions: <ThemeExtension<dynamic>>{
           lightBrandTheme,
@@ -722,11 +718,6 @@ class _DemoAppState extends State<DemoApp> {
         subThemesData: _useSubThemes ? _subThemesData : null,
         visualDensity: _visualDensity,
         platform: _platform,
-        // Use predefined Material 3 typography while this issue is in effect:
-        // https://github.com/flutter/flutter/issues/103864
-        typography: Typography.material2021(
-          platform: _platform,
-        ),
         // Add all our custom theme extensions, in this case we only have one.
         extensions: <ThemeExtension<dynamic>>{
           darkBrandTheme,

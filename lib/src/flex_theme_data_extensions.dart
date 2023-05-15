@@ -973,10 +973,21 @@ extension FlexThemeData on ThemeData {
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
     final VisualDensity? visualDensity,
 
-    /// Text with a color that contrasts with the card and canvas colors.
+    /// Text with a color that contrasts with background, surface, card and
+    /// canvas colors.
+    ///
+    /// If a default `TextTheme` from package GoogleFonts is passed.
+    /// FlexColorScheme will detect this and make the color in the passed
+    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
+    /// color for M2/M3 mode and contrast for light/dark mode is used.
     final TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
+    ///
+    /// If a default `TextTheme` from package GoogleFonts is passed.
+    /// FlexColorScheme will detect this and make the color in the passed
+    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
+    /// color for M2/M3 mode and contrast for primary color is used.
     final TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
@@ -2265,10 +2276,21 @@ extension FlexThemeData on ThemeData {
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
     final VisualDensity? visualDensity,
 
-    /// Text with a color that contrasts with the card and canvas colors.
+    /// Text with a color that contrasts with background, surface, card and
+    /// canvas colors.
+    ///
+    /// If a default `TextTheme` from package GoogleFonts is passed.
+    /// FlexColorScheme will detect this and make the color in the passed
+    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
+    /// color for M2/M3 mode and contrast for light/dark mode is used.
     final TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
+    ///
+    /// If a default `TextTheme` from package GoogleFonts is passed.
+    /// FlexColorScheme will detect this and make the color in the passed
+    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
+    /// color for M2/M3 mode and contrast for primary color is used.
     final TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
