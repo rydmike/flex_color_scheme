@@ -1677,10 +1677,10 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = '// Made for FlexColorScheme version '
-      '${App.packageVersion}. Make sure you\n'
-      '// use same or higher package version, but still same major version.\n'
-      '// If you use a lower version, some properties may not be supported.\n'
+  final String code = '// Theme config for FlexColorScheme version '
+      '${App.packageVersionMinor}. Make sure you use\n'
+      '// same or higher package version, but still same major version. If you\n'
+      '// use a lower package version, some properties may not be supported.\n'
       '// In that case remove them after copying this theme to your app.\n'
       'theme: FlexThemeData.light(\n'
       '$lightScheme'
@@ -1704,7 +1704,7 @@ String generateThemeDartCode(ThemeController controller) {
       '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
-      '  // To use the playground font, add GoogleFonts package and uncomment\n'
+      '  // To use the Playground font, add GoogleFonts package and uncomment\n'
       '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       'darkTheme: FlexThemeData.dark(\n'
