@@ -232,10 +232,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendDarkTextTheme = controller.blendDarkTextTheme
       ? '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
       : '';
-  final String useTextTheme = controller.useTextTheme == null ||
-          // ignore: use_if_null_to_convert_nulls_to_bools
-          (controller.useTextTheme == true && controller.useMaterial3) ||
-          (controller.useTextTheme == false && !controller.useMaterial3)
+  final String useTextTheme = controller.useTextTheme == null
       ? ''
       : '    useTextTheme: ${controller.useTextTheme},\n';
   final String useM2StyleDividerInM3 =
