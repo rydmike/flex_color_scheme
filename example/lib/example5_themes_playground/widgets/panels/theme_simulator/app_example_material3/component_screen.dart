@@ -2023,7 +2023,6 @@ class _NavigationRailSectionState extends State<NavigationRailSection> {
           child: const Icon(Icons.create), onPressed: () {}),
       groupAlignment: 0.0,
       selectedIndex: navRailIndex,
-      labelType: NavigationRailLabelType.selected,
       destinations: <NavigationRailDestination>[
         ...destinations.map((ExampleDestination destination) {
           return NavigationRailDestination(

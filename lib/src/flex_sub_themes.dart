@@ -2281,7 +2281,7 @@ class FlexSubThemes {
             }
             return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }
-          return foreground;
+          return background;
         });
       }
 

@@ -2,6 +2,20 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.1.2
+
+**May 17, 2023**
+
+**PACKAGE**
+
+**FIX**
+
+* SubThemes ElevatedButton in M3 mode, when using `elevatedButtonSecondarySchemeColor` and there was no value defined on `elevatedButtonSchemeColor` it resulted in wrong color being used as default for `elevatedButtonSchemeColor`. Issue and test fixed.
+
+**CHORE**
+
+* Updated Android runner included for all the examples. The previous one no longer worked with Flutter 3.10, and its used Kotlin version. With included updated version, the examples can be built as Android apps again.
+
 ## 7.1.1
 
 **May 15, 2023**

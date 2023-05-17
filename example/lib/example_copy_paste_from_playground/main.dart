@@ -54,7 +54,6 @@ class _DemoAppState extends State<DemoApp> {
       // Themes Playground app available at:
       // https://rydmike.com/flexcolorscheme/themesplayground-v7
       // And do remember to comment the default Flutter theme above.
-
       theme: FlexThemeData.light(
         useMaterial3: true,
         scheme: FlexScheme.redWine,

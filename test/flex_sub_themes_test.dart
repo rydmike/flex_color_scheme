@@ -2136,7 +2136,7 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.primary),
+        equals(colorScheme.tertiary),
       );
       // Selected background, M3
       expect(

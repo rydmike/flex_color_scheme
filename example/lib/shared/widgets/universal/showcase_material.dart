@@ -440,7 +440,7 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
               ButtonSegment<Calendar>(
                 value: Calendar.month,
                 icon: Icon(Icons.calendar_view_month),
-                label: Text('Month'),
+                label: Text('Mont'),
               ),
               ButtonSegment<Calendar>(
                 value: Calendar.year,
@@ -471,7 +471,7 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
               ButtonSegment<Calendar>(
                 value: Calendar.month,
                 icon: Icon(Icons.calendar_view_month),
-                label: Text('Month'),
+                label: Text('Mont'),
                 enabled: false,
               ),
               ButtonSegment<Calendar>(
