@@ -22,6 +22,7 @@ import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/premade_designs/premade_designs_panel.dart';
 import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/segmented_buttons_settings/segemnted_buttons_settings.dart';
+import '../panels/shape_radius_settings/shape_radius_settings.dart';
 import '../panels/slider_settings/slider_settings.dart';
 import '../panels/surface_blend_settings/surface_blend_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
@@ -56,6 +57,7 @@ class ThemePanel extends StatelessWidget {
       ThemeSimulator(controller: controller),
       ThemeCode(controller),
       ComponentSettings(controller),
+      ShapeRadiusSettings(controller),
       ThemeColorsSettings(controller),
       SeededColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
