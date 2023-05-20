@@ -55,6 +55,12 @@ export 'src/flex_scheme_on_colors.dart';
 /// FlexColorScheme.
 export 'src/flex_scheme_surface_colors.dart';
 
+/// An iOS style rounded "squircle" rectangle, also known as super-ellipses.
+export 'src/flex_squircle.dart';
+
+/// An iOS style stadium "squircle" rectangle, also known as super-ellipses.
+export 'src/flex_stadium_squircle.dart';
+
 /// Defines opinionated component sub-themes used by FlexColorScheme.
 export 'src/flex_sub_themes.dart';
 
