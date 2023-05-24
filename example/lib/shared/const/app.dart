@@ -166,7 +166,30 @@ class App {
   // the correct opacities on text style if M2 Typography is used, and removes
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
-  static TextTheme? get textTheme => GoogleFonts.notoSansTextTheme();
+
+  static final TextStyle notoSansRegular =
+      GoogleFonts.notoSans(fontWeight: FontWeight.w400);
+  static final TextStyle notoSansMedium =
+      GoogleFonts.notoSans(fontWeight: FontWeight.w500);
+  static final TextStyle notoSansBold =
+      GoogleFonts.notoSans(fontWeight: FontWeight.w500);
+  static TextTheme? get textTheme => TextTheme(
+        displayLarge: notoSansRegular, // Regular is default
+        displayMedium: notoSansRegular, // Regular is default
+        displaySmall: notoSansRegular, // Regular is default
+        headlineLarge: notoSansRegular, // Regular is default
+        headlineMedium: notoSansRegular, // Regular is default
+        headlineSmall: notoSansRegular, // Regular is default
+        titleLarge: notoSansRegular, // Regular is default
+        titleMedium: notoSansMedium, // medium is default
+        titleSmall: notoSansMedium, // Medium is default
+        bodyLarge: notoSansRegular, // Regular is default
+        bodyMedium: notoSansRegular, // Regular is default
+        bodySmall: notoSansRegular, // Regular is default
+        labelLarge: notoSansMedium, // Medium is default
+        labelMedium: notoSansMedium, // Medium is default
+        labelSmall: notoSansMedium, // Medium is default
+      );
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.

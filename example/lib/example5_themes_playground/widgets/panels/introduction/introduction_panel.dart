@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../dialogs/show_copy_setup_code_dialog.dart';
@@ -34,8 +35,8 @@ class IntroductionPanel extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
         .copyWith(color: theme.textTheme.bodySmall!.color);
-    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+    final TextStyle linkStyle =
+        App.notoSansBold.copyWith(color: theme.colorScheme.primary);
 
     final EdgeInsetsGeometry listTilePadding = theme.useMaterial3
         ? const EdgeInsetsDirectional.only(

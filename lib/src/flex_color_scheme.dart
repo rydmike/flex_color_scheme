@@ -5656,7 +5656,7 @@ class FlexColorScheme with Diagnosticable {
 
     // TextTheme is a default GoogleFonts TextTheme.
     //
-    // Let's take a look at provided TextTheme, if it is mathc for a
+    // Let's take a look at provided TextTheme, if it is a match for a
     // GoogleFont TextTheme, remove its default colors so we can make one with
     // correct M2/M3 defaults.
     TextTheme? pTextTheme = textTheme;
@@ -5684,7 +5684,7 @@ class FlexColorScheme with Diagnosticable {
 
     // TextTheme is a default GoogleFonts TextTheme.
     //
-    // Let's take a look at provided TextTheme, if it is mathc for a
+    // Let's take a look at provided TextTheme, if it is a match for a
     // GoogleFont TextTheme, remove its default colors so we can make one with
     // correct M2/M3 defaults.
     TextTheme? pPrimTextTheme = primaryTextTheme;
