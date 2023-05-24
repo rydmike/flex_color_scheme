@@ -2,7 +2,19 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 7.1.2
+## 7.2.0
+
+**May 24, 2023**
+
+**PACKAGE**
+
+* **NEW WIP:** Squircle shape feature. Work in progress.
+
+**PLAYGROUND**
+
+* **NEW:** Shape and radius have their own topic, removed from **Component Themes** topic.
+* **NEW:** Toggle show TextStyle details to TextTheme presentations.
+* **NEW:** Font NotoSans Medium (W500) to assets.
 
 **May 17, 2023**
 
@@ -14,7 +26,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CHORE**
 
-* Updated Android runner included for all the examples. The previous one no longer worked with Flutter 3.10, and its used Kotlin version. With included updated version, the examples can be built as Android apps again.
+* Updated Android runner included for all the examples. The previous one no longer worked with Flutter 3.10 and its used Kotlin version. With included updated version, the examples can be built as Android apps again.
+
 
 ## 7.1.1
 

@@ -8,7 +8,7 @@ import '../../shared/use_material3_text_theme.dart';
 import '../../shared/use_tinted_text_theme.dart';
 import 'use_app_font_switch_list_tile.dart';
 
-class PrimaryTextThemeSettings extends StatelessWidget {
+class PrimaryTextThemeSettings extends StatefulWidget {
   const PrimaryTextThemeSettings(this.controller, {super.key});
   final ThemeController controller;
 
@@ -17,6 +17,14 @@ class PrimaryTextThemeSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/issues/118146',
   );
+
+  @override
+  State<PrimaryTextThemeSettings> createState() =>
+      _PrimaryTextThemeSettingsState();
+}
+
+class _PrimaryTextThemeSettingsState extends State<PrimaryTextThemeSettings> {
+  bool showDetails = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +36,19 @@ class PrimaryTextThemeSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        UseMaterial3TextTheme(controller: controller),
-        UseTinted3TextTheme(controller: controller),
-        UseAppFontSwitchLisTile(controller: controller),
+        UseMaterial3TextTheme(controller: widget.controller),
+        UseTinted3TextTheme(controller: widget.controller),
+        const Divider(),
+        UseAppFontSwitchLisTile(controller: widget.controller),
+        SwitchListTile(
+          title: const Text('Show text style details'),
+          value: showDetails,
+          onChanged: (bool value) {
+            setState(() {
+              showDetails = value;
+            });
+          },
+        ),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -46,7 +64,7 @@ class PrimaryTextThemeSettings extends StatelessWidget {
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsPrimTextIssue118146,
+                  uri: PrimaryTextThemeSettings._fcsPrimTextIssue118146,
                   text: 'issue #118146',
                 ),
                 // _fcsChipUmbrellaIssue115364
@@ -65,9 +83,9 @@ class PrimaryTextThemeSettings extends StatelessWidget {
           child: Material(
             type: MaterialType.card,
             color: Theme.of(context).colorScheme.primary,
-            child: const Padding(
-              padding: EdgeInsets.all(16),
-              child: PrimaryTextThemeShowcase(),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: PrimaryTextThemeShowcase(showDetails: showDetails),
             ),
           ),
         ),

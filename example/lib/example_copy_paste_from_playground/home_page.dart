@@ -555,8 +555,15 @@ class _CardShowcase extends StatelessWidget {
   }
 }
 
-class _TextThemeShowcase extends StatelessWidget {
+class _TextThemeShowcase extends StatefulWidget {
   const _TextThemeShowcase();
+
+  @override
+  State<_TextThemeShowcase> createState() => _TextThemeShowcaseState();
+}
+
+class _TextThemeShowcaseState extends State<_TextThemeShowcase> {
+  bool showDetails = false;
 
   @override
   Widget build(BuildContext context) {
@@ -570,16 +577,39 @@ class _TextThemeShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download_outlined, color: iconColor),
       title: const Text('TextTheme'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: TextThemeShowcase(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 8),
+          SwitchListTile(
+            title: const Text('Show text style details'),
+            value: showDetails,
+            onChanged: (bool value) {
+              setState(() {
+                showDetails = value;
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextThemeShowcase(showDetails: showDetails),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _PrimaryTextThemeShowcase extends StatelessWidget {
+class _PrimaryTextThemeShowcase extends StatefulWidget {
   const _PrimaryTextThemeShowcase();
+
+  @override
+  State<_PrimaryTextThemeShowcase> createState() =>
+      _PrimaryTextThemeShowcaseState();
+}
+
+class _PrimaryTextThemeShowcaseState extends State<_PrimaryTextThemeShowcase> {
+  bool showDetails = false;
 
   @override
   Widget build(BuildContext context) {
@@ -593,15 +623,31 @@ class _PrimaryTextThemeShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download, color: iconColor),
       title: const Text('PrimaryTextTheme'),
-      child: SizedBox(
-        width: double.infinity,
-        child: Material(
-          color: Theme.of(context).colorScheme.primary,
-          child: const Padding(
-            padding: EdgeInsets.all(16),
-            child: PrimaryTextThemeShowcase(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 8),
+          SwitchListTile(
+            title: const Text('Show text style details'),
+            value: showDetails,
+            onChanged: (bool value) {
+              setState(() {
+                showDetails = value;
+              });
+            },
           ),
-        ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: Material(
+              color: Theme.of(context).colorScheme.primary,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: PrimaryTextThemeShowcase(showDetails: showDetails),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

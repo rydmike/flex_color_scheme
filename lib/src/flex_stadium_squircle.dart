@@ -6,9 +6,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 
-// import 'basic_types.dart';
-// import 'borders.dart';
-// import 'edge_insets.dart';
+// ignore_for_file: comment_references
 
 /// A stadium border with continuous corners.
 ///
