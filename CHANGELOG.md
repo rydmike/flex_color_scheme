@@ -13,7 +13,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **PLAYGROUND**
 
 * **NEW:** Shape and radius have their own topic, removed from **Component Themes** topic.
-* **NEW:** Toggle show TextStyle details to TextTheme presentations.
+* **NEW:** Add Toggle to show TextStyle details to TextTheme presentations.
 * **NEW:** Font NotoSans Medium (W500) to assets.
 
 **May 17, 2023**
