@@ -215,9 +215,7 @@ class SurfaceBlendSettings extends StatelessWidget {
         //
         if (isLight) ...<Widget>[
           ListTileReveal(
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
             subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
@@ -225,29 +223,28 @@ class SurfaceBlendSettings extends StatelessWidget {
                 'into the onColor, when seed/M3 colors are not used. This '
                 'affects onContainers, onSurface and onBackground. When the '
                 'main onColor blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.\n'),
+                'for primary, secondary, tertiary and error.\n'
+                'When seed color is used, the onColor contrast color always '
+                'gets its correct tonal palette onColor, but if the main '
+                'color is locked to custom color, the computed blended onColor '
+                'contrast color version will be used instead.\n'),
           ),
           ListTile(
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevel.toString(),
-              value: controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      !controller.useKeyColors
+              value: controller.useSubThemes && controller.useFlexColorScheme
                   ? controller.blendOnLevel.toDouble()
                   : 0,
-              onChanged: controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      !controller.useKeyColors
-                  ? (double value) {
-                      controller.setBlendOnLevel(value.toInt());
-                    }
-                  : null,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setBlendOnLevel(value.toInt());
+                        }
+                      : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -260,7 +257,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevel : ""}',
+                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -270,9 +267,7 @@ class SurfaceBlendSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Main colors use onColor blending'),
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             subtitleDense: true,
             subtitle:
                 const Text('In M3 design, only container colors use color '
@@ -282,11 +277,8 @@ class SurfaceBlendSettings extends StatelessWidget {
                     'colors are not used.\n'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useKeyColors
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.setBlendLightOnColors
                 : null,
           ),
@@ -411,9 +403,7 @@ class SurfaceBlendSettings extends StatelessWidget {
         //
         else ...<Widget>[
           ListTileReveal(
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
             subtitleDense: true,
             subtitle: const Text('The contrast onColor blending mixes in its '
@@ -421,29 +411,28 @@ class SurfaceBlendSettings extends StatelessWidget {
                 'not used. This affects onContainers, onSurface and '
                 'onBackground. When the main onColor blending switch is ON, '
                 'it also affects on colors for primary, secondary, '
-                'tertiary and error.\n'),
+                'tertiary and error.\n'
+                'When seed color is used, the onColor contrast color always '
+                'gets its correct tonal palette onColor, but if the main '
+                'color is locked to custom color, the computed blended onColor '
+                'contrast color version will be used instead.\n'),
           ),
           ListTile(
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelDark.toString(),
-              value: controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      !controller.useKeyColors
+              value: controller.useSubThemes && controller.useFlexColorScheme
                   ? controller.blendOnLevelDark.toDouble()
                   : 0,
-              onChanged: controller.useSubThemes &&
-                      controller.useFlexColorScheme &&
-                      !controller.useKeyColors
-                  ? (double value) {
-                      controller.setBlendOnLevelDark(value.toInt());
-                    }
-                  : null,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setBlendOnLevelDark(value.toInt());
+                        }
+                      : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -456,7 +445,7 @@ class SurfaceBlendSettings extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme && !controller.useKeyColors ? controller.blendOnLevelDark : ""}',
+                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -465,9 +454,7 @@ class SurfaceBlendSettings extends StatelessWidget {
             ),
           ),
           SwitchListTileReveal(
-            enabled: controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Main colors use onColor blending'),
             subtitleDense: true,
             subtitle: const Text(
@@ -478,11 +465,8 @@ class SurfaceBlendSettings extends StatelessWidget {
                 'are not used.\n'),
             value: controller.blendDarkOnColors &&
                 controller.useSubThemes &&
-                controller.useFlexColorScheme &&
-                !controller.useKeyColors,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useKeyColors
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.setBlendDarkOnColors
                 : null,
           ),
