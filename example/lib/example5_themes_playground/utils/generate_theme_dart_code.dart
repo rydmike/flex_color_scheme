@@ -210,22 +210,18 @@ String generateThemeDartCode(ThemeController controller) {
   final String tintedDisabledControls = controller.tintedDisabledControls
       ? ''
       : '    tintedDisabledControls: ${controller.tintedDisabledControls},\n';
-  final String blendOnLevelLight =
-      controller.blendOnLevel > 0 && !controller.useKeyColors
-          ? '    blendOnLevel: ${controller.blendOnLevel},\n'
-          : '';
-  final String blendOnLevelDark =
-      controller.blendOnLevelDark > 0 && !controller.useKeyColors
-          ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
-          : '';
-  final String blendLightOnColors =
-      controller.blendLightOnColors || controller.useKeyColors
-          ? ''
-          : '    blendOnColors: ${controller.blendLightOnColors},\n';
-  final String blendDarkOnColors =
-      controller.blendDarkOnColors || controller.useKeyColors
-          ? ''
-          : '    blendOnColors: ${controller.blendDarkOnColors},\n';
+  final String blendOnLevelLight = controller.blendOnLevel > 0
+      ? '    blendOnLevel: ${controller.blendOnLevel},\n'
+      : '';
+  final String blendOnLevelDark = controller.blendOnLevelDark > 0
+      ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
+      : '';
+  final String blendLightOnColors = controller.blendLightOnColors
+      ? ''
+      : '    blendOnColors: ${controller.blendLightOnColors},\n';
+  final String blendDarkOnColors = controller.blendDarkOnColors
+      ? ''
+      : '    blendOnColors: ${controller.blendDarkOnColors},\n';
   final String blendLightTextTheme = controller.blendLightTextTheme
       ? '    blendTextTheme: ${controller.blendLightTextTheme},\n'
       : '';
