@@ -4,18 +4,21 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**May 24, 2023**
+**May 30, 2023**
 
 **PACKAGE**
 
 * **NEW WIP:** Squircle shape feature. Work in progress.
 
-**PLAYGROUND**
+**THEMES PLAYGROUND**
 
-* **NEW:** Shape and radius have their own topic, removed from **Component Themes** topic.
-* **NEW:** Add Toggle to show TextStyle details to TextTheme presentations.
-* **NEW:** Font NotoSans Medium (W500) to assets.
-* **CHANGE:** The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale, because if some colors are locked to use custom colors, using onBlend level has an impact on their contrasting on colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can. 
+* **NEW:** Shape and radius now have their own theming topic panel, removed radius from **Component Themes** topic.
+* **NEW:** Added a switch to show TextStyle details to TextTheme presentations.
+* **NEW:** Added font NotoSans Medium (W500) to assets.
+* **CHANGE:** The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting on colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can. 
+
+
+## 7.1.2
 
 **May 17, 2023**
 
