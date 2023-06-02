@@ -1239,15 +1239,28 @@ class IconButtonShowcase extends StatelessWidget {
     return const RepaintBoundary(
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 16,
+        spacing: 0,
         runSpacing: 4,
         children: <Widget>[
           Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             // Standard IconButton
             children: <Widget>[
+              SizedBox(
+                  width: 65,
+                  child: Text('Default', textAlign: TextAlign.center)),
+              SizedBox(height: 4),
               _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Standard',
+                variant: _IconButtonVariant.standard,
+                toggleable: false,
+              ),
+              SizedBox(height: 8),
+              _IconToggleButton(
+                isEnabled: true,
+                tooltip: 'Standard toggleable',
                 variant: _IconButtonVariant.standard,
               ),
               SizedBox(height: 8),
@@ -1260,10 +1273,21 @@ class IconButtonShowcase extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              SizedBox(
+                  width: 65,
+                  child: Text('Filled', textAlign: TextAlign.center)),
+              SizedBox(height: 4),
               // Filled IconButton
               _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Filled',
+                variant: _IconButtonVariant.filled,
+                toggleable: false,
+              ),
+              SizedBox(height: 8),
+              _IconToggleButton(
+                isEnabled: true,
+                tooltip: 'Filled toggleable',
                 variant: _IconButtonVariant.filled,
               ),
               SizedBox(height: 8),
@@ -1276,10 +1300,20 @@ class IconButtonShowcase extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              SizedBox(
+                  width: 65, child: Text('Tonal', textAlign: TextAlign.center)),
+              SizedBox(height: 4),
               // Filled Tonal IconButton
               _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Filled tonal',
+                variant: _IconButtonVariant.filledTonal,
+                toggleable: false,
+              ),
+              SizedBox(height: 8),
+              _IconToggleButton(
+                isEnabled: true,
+                tooltip: 'Filled tonal toggleable',
                 variant: _IconButtonVariant.filledTonal,
               ),
               SizedBox(height: 8),
@@ -1292,10 +1326,21 @@ class IconButtonShowcase extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              SizedBox(
+                  width: 65,
+                  child: Text('Outlined', textAlign: TextAlign.center)),
+              SizedBox(height: 4),
               // Outlined IconButton
               _IconToggleButton(
                 isEnabled: true,
                 tooltip: 'Outlined',
+                variant: _IconButtonVariant.outlined,
+                toggleable: false,
+              ),
+              SizedBox(height: 8),
+              _IconToggleButton(
+                isEnabled: true,
+                tooltip: 'Outlined toggleable',
                 variant: _IconButtonVariant.outlined,
               ),
               SizedBox(height: 8),
@@ -1319,11 +1364,13 @@ class _IconToggleButton extends StatefulWidget {
     required this.isEnabled,
     required this.tooltip,
     required this.variant,
+    this.toggleable = true,
   });
 
   final bool isEnabled;
   final String tooltip;
   final _IconButtonVariant variant;
+  final bool toggleable;
 
   @override
   State<_IconToggleButton> createState() => _IconToggleButtonState();
@@ -1346,7 +1393,7 @@ class _IconToggleButtonState extends State<_IconToggleButton> {
       case _IconButtonVariant.standard:
         {
           return IconButton(
-            isSelected: selected,
+            isSelected: selected & widget.toggleable,
             tooltip: widget.tooltip,
             icon: const Icon(Icons.settings_outlined),
             selectedIcon: const Icon(Icons.settings),
@@ -1356,7 +1403,7 @@ class _IconToggleButtonState extends State<_IconToggleButton> {
       case _IconButtonVariant.filled:
         {
           return IconButton.filled(
-            isSelected: selected,
+            isSelected: selected & widget.toggleable,
             tooltip: widget.tooltip,
             icon: const Icon(Icons.settings_outlined),
             selectedIcon: const Icon(Icons.settings),
@@ -1366,7 +1413,7 @@ class _IconToggleButtonState extends State<_IconToggleButton> {
       case _IconButtonVariant.filledTonal:
         {
           return IconButton.filledTonal(
-            isSelected: selected,
+            isSelected: selected & widget.toggleable,
             tooltip: widget.tooltip,
             icon: const Icon(Icons.settings_outlined),
             selectedIcon: const Icon(Icons.settings),
@@ -1376,7 +1423,7 @@ class _IconToggleButtonState extends State<_IconToggleButton> {
       case _IconButtonVariant.outlined:
         {
           return IconButton.outlined(
-            isSelected: selected,
+            isSelected: selected & widget.toggleable,
             tooltip: widget.tooltip,
             icon: const Icon(Icons.settings_outlined),
             selectedIcon: const Icon(Icons.settings),
