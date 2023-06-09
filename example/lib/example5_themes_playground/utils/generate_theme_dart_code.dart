@@ -685,12 +685,13 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    datePickerHeaderBackgroundSchemeColor: ${controller.datePickerHeaderBackgroundSchemeColor},\n'
       : '';
-  final String datePickerDialogRadius = controller.dialogBorderRadius != null
-      ? '    datePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
-      : '';
-  final String timePickerDialogRadius = controller.dialogBorderRadius != null
-      ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
-      : '';
+  // TODO(rydmike): Remove commented code
+  // final String datePickerDialogRadius = controller.dialogBorderRadius != null
+  //     ? '    datePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
+  //     : '';
+  // final String timePickerDialogRadius = controller.dialogBorderRadius != null
+  //     ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
+  //     : '';
   final String timePickerElementRadius = controller.timePickerElementRadius !=
           null
       ? '    timePickerElementRadius: ${controller.timePickerElementRadius!.toStringAsFixed(1)},\n'
@@ -1214,8 +1215,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogElevation'
           '$useInputDecoratorThemeInDialogs'
           '$datePickerHeaderBackgroundSchemeColor'
-          '$datePickerDialogRadius'
-          '$timePickerDialogRadius'
+          // TODO(rydmike): Remove commented code
+          // '$datePickerDialogRadius'
+          // '$timePickerDialogRadius'
           '$timePickerElementRadius'
           //
           '$snackBarRadius'
@@ -1421,8 +1423,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogElevation'
           '$useInputDecoratorThemeInDialogs'
           '$datePickerHeaderBackgroundSchemeColor'
-          '$datePickerDialogRadius'
-          '$timePickerDialogRadius'
+          // TODO(rydmike): Remove commented code
+          // '$datePickerDialogRadius'
+          // '$timePickerDialogRadius'
           '$timePickerElementRadius'
           //
           '$snackBarRadius'

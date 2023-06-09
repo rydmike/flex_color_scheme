@@ -176,6 +176,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.defaultRadius,
     this.defaultRadiusAdaptive,
+    //
     this.buttonMinSize,
     this.buttonPadding,
     //
@@ -293,10 +294,13 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipSchemeColor,
     this.tooltipOpacity,
     //
+    this.adaptiveDialogRadius,
     this.dialogRadius,
+    this.dialogRadiusAdaptive,
     this.dialogElevation,
     this.dialogBackgroundSchemeColor,
     this.useInputDecoratorThemeInDialogs,
+    //
     this.datePickerHeaderBackgroundSchemeColor,
     this.datePickerDialogRadius,
     this.timePickerDialogRadius,
@@ -785,9 +789,7 @@ class FlexSubThemesData with Diagnosticable {
   /// you can get the M3 by radius that varies by widget on platforms not
   /// included in your [adaptiveRadius] and use shared global
   /// [defaultRadiusAdaptive] on all widgets in the platforms included in the
-  /// [adaptiveRadius] configuration. When setting a high radius value on
-  /// [defaultRadiusAdaptive] you may want to reduce radius on e.g. menus
-  /// to something lower, like 2 to 8.
+  /// [adaptiveRadius] configuration.
   ///
   /// With this feature you can let components use their default very round
   /// border radius on Android, but set it e.g. to 10 dp on iOS and macOS, and
@@ -795,9 +797,10 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// See class [FlexAdaptive] on how to configure the platform adaptive
   /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
-  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// for a configuration that only keeps M3 default Material 3 radius
   /// on Android and Fuchsia platforms, and when the app is run in a web
-  /// browser on these platforms.
+  /// browser on these platforms, but uses the [defaultRadiusAdaptive] value
+  /// on other platforms, like iOS, desktop and their web usage.
   ///
   /// If not defined, defaults to [FlexAdaptive.off].
   final FlexAdaptive? adaptiveRadius;
@@ -944,7 +947,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If you keep [defaultRadius] null for M3 default, try setting
   /// [defaultRadiusAdaptive] to 10 dp and [adaptiveRadius] to
-  /// [FlexAdaptive.iOSAndDesktop], for a more platform agnotic design on
+  /// [FlexAdaptive.iOSAndDesktop], for a more platform agnostic design on
   /// other platforms and Android and Fuchsia.
   ///
   /// Defaults to null, M3 defaults are used per widget.
@@ -1890,12 +1893,55 @@ class FlexSubThemesData with Diagnosticable {
   /// [tooltipOpacity] has no effect since it cannot act on undefined value.
   final double? tooltipOpacity;
 
+  /// Controls if the [dialogRadiusAdaptive] is used instead of [dialogRadius]
+  /// on configured platforms.
+  ///
+  /// With this feature you can have another configured border radius on
+  /// all dialogs with based on another [ShapeBorder] than the one you have
+  /// defined in [dialogRadius].
+  ///
+  /// If you keep [dialogRadius] undefined and define [dialogRadiusAdaptive],
+  /// you can get the M3 default radius on platforms not included in
+  /// your [adaptiveDialogRadius] and use the [dialogRadiusAdaptive] radius on
+  /// all dialogs in the platforms included in the [adaptiveDialogRadius]
+  /// configuration.
+  ///
+  /// For example for iOS you may want to try 13dp as border radius on dialogs,
+  /// which according to some WEB sources is an approximation used in HIG.
+  /// Flutter uses 14dp on its iOS styled [CupertinoAlertDialog], you can try
+  /// that as well.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example use the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that keeps used [dialogRadius] value on Android and
+  /// Fuchsia platforms, and also when the app is run in a web browser on these
+  /// platforms, but uses the [dialogRadiusAdaptive] value on other platforms,
+  /// like iOS, desktop and their web usage.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveDialogRadius;
+
   /// Border radius value for [Dialog].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
   /// [kDialogRadius] 28dp, based on M3 Specification
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
+
+  /// The [defaultRadiusAdaptive] has the same definition and usage
+  /// [dialogRadius], but is used as default radius on platforms as configured
+  /// by [adaptiveRadius].
+  ///
+  /// If you keep [defaultRadius] null for M3 default, try setting
+  /// [defaultRadiusAdaptive] to 10 dp and [adaptiveRadius] to
+  /// [FlexAdaptive.iOSAndDesktop], for a more platform agnostic design on
+  /// other platforms and Android and Fuchsia.
+  ///
+  /// Defaults to null, M3 defaults are used per widget.
+  /// If not defined and [defaultRadius] is undefined, defaults to
+  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// https://m3.material.io/components/dialogs/specs
+  final double? dialogRadiusAdaptive;
 
   /// Elevation of [Dialog].
   ///
@@ -1960,15 +2006,33 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border radius value for [DatePickerDialog].
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// Specifying this border radius value for the [DatePickerDialog] overrides
+  /// the default shared via general [dialogRadius], and any platform adaptive
+  /// border radius [dialogRadiusAdaptive] it might be specified to use.
+  /// It also overrides getting impacted by border radius specified by
+  /// [defaultRadius] or any adaptive version used via [defaultRadiusAdaptive].
+  ///
+  /// If not defined, defaults to [dialogRadius] or [dialogRadiusAdaptive]
+  /// depending on [adaptiveDialogRadius] setting, if neither of them are
+  /// defined, and global [defaultRadius] is undefined, which may also be
+  /// platform dependent via [adaptiveRadius] to [defaultRadiusAdaptive], then
+  /// the default value is [kDialogRadius] 28dp, based on M3 Specification
   /// https://m3.material.io/components/dialogs/specs
   final double? datePickerDialogRadius;
 
   /// Border radius value for [TimePickerDialog].
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kDialogRadius] 28dp, based on M3 Specification
+  /// Specifying this border radius value for the [TimePickerDialog] overrides
+  /// the default shared via general [dialogRadius], and any platform adaptive
+  /// border radius [dialogRadiusAdaptive] it might be specified to use.
+  /// It also overrides getting impacted by border radius specified by
+  /// [defaultRadius] or any adaptive version used via [defaultRadiusAdaptive].
+  ///
+  /// If not defined, defaults to [dialogRadius] or [dialogRadiusAdaptive]
+  /// depending on [adaptiveDialogRadius] setting, if neither of them are
+  /// defined, and global [defaultRadius] is undefined, which may also be
+  /// platform dependent via [adaptiveRadius] to [defaultRadiusAdaptive], then
+  /// the default value is [kDialogRadius] 28dp, based on M3 Specification
   /// https://m3.material.io/components/dialogs/specs
   final double? timePickerDialogRadius;
 
@@ -3057,10 +3121,13 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
     //
-    final double? dialogElevation,
+    final FlexAdaptive? adaptiveDialogRadius,
     final double? dialogRadius,
+    final double? dialogRadiusAdaptive,
+    final double? dialogElevation,
     final SchemeColor? dialogBackgroundSchemeColor,
     final bool? useInputDecoratorThemeInDialogs,
+    //
     final SchemeColor? datePickerHeaderBackgroundSchemeColor,
     final double? datePickerDialogRadius,
     final double? timePickerDialogRadius,
@@ -3324,7 +3391,9 @@ class FlexSubThemesData with Diagnosticable {
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
       //
+      adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
       dialogRadius: dialogRadius ?? this.dialogRadius,
+      dialogRadiusAdaptive: dialogRadiusAdaptive ?? this.dialogRadiusAdaptive,
       dialogElevation: dialogElevation ?? this.dialogElevation,
       dialogBackgroundSchemeColor:
           dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
@@ -3728,7 +3797,9 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
+        other.adaptiveDialogRadius == adaptiveDialogRadius &&
         other.dialogRadius == dialogRadius &&
+        other.dialogRadiusAdaptive == dialogRadiusAdaptive &&
         other.dialogElevation == dialogElevation &&
         other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
         other.useInputDecoratorThemeInDialogs ==
@@ -4016,7 +4087,9 @@ class FlexSubThemesData with Diagnosticable {
         tooltipSchemeColor,
         tooltipOpacity,
         //
+        adaptiveDialogRadius,
         dialogRadius,
+        dialogRadiusAdaptive,
         dialogElevation,
         dialogBackgroundSchemeColor,
         useInputDecoratorThemeInDialogs,
@@ -4358,13 +4431,18 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
     //
+    properties.add(EnumProperty<FlexAdaptive>(
+        'adaptiveDialogRadius', adaptiveDialogRadius));
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'dialogRadiusAdaptive', dialogRadiusAdaptive));
     properties
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
     properties.add(EnumProperty<SchemeColor>(
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
+    //
     properties.add(EnumProperty<SchemeColor>(
         'datePickerHeaderBackgroundSchemeColor',
         datePickerHeaderBackgroundSchemeColor));

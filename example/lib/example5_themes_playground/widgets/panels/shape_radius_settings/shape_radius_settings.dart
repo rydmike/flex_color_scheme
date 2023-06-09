@@ -19,11 +19,21 @@ class ShapeRadiusSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Color shapeColor = theme.colorScheme.primaryContainer;
-    final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color shapeColor =
+        isLight ? theme.colorScheme.outlineVariant : theme.colorScheme.outline;
+    final Color lineColorPrimary = theme.colorScheme.primary;
+    final Color lineColorOnSurface = theme.colorScheme.onSurface;
+    final Color lineColorError = theme.colorScheme.error;
+    final Color onShapeColor = theme.colorScheme.onSurface;
+
     final bool useMaterial3 = theme.useMaterial3;
     const double height = 75;
     const double width = 190;
+    const double heightBig = 160;
+    const double widthBig = 320;
+    const double lineWidth = 1.5;
+
     final double radius =
         controller.useSubThemes && controller.useFlexColorScheme
             ? controller.defaultRadius ?? (useMaterial3 ? 12 : 4)
@@ -38,15 +48,31 @@ class ShapeRadiusSettings extends StatelessWidget {
           title: const Text('Components shape'),
           subtitleDense: true,
           subtitle: const Text(
-            'By default Material UI widgets with Shape use Circular '
-            'corners or half-circle Stadium shapes. You can change the '
-            'used shape type. FlexColorScheme supports using "Squircle" '
-            'Shape, the type of super-ellipses corner shape used e.g. by '
-            'Apple on iOS. Additionally you can choose between an alternative '
-            'corner shape in Flutter, called Continuous Rectangle, a Beveled '
-            'corner shape is also available. '
-            'You can use the Shape Circular shape as default main shape, and '
-            'e.g. on iOS and macOS select the Squircle Shape.\n',
+            'By default Material UI widgets with ShapeBorder use circular '
+            'corners or half-circle stadium shapes, via the ShapeBorder '
+            'called RoundedRectangleBorder and StadiumBorder. '
+            'You can change the used ShapeBorder type.\n'
+            '\n'
+            'FlexColorScheme supports using "Squircle" '
+            'shape, a type of super-ellipses corner shape used by '
+            'Apple on iOS. This is supported via custom SquircleBorder and '
+            'SquircleStadiumBorder implementations. If Flutter SDK at some '
+            'point starts supporting a version of this shape, it will be '
+            'supported as well. This custom implementation may then later be '
+            'deprecated if the shapes are identical or very close. The '
+            'custom version will be kept around for many version in parallel.\n'
+            '\n'
+            'You can also use an alternative corner ShapeBorder in Flutter, '
+            'called ContinuousRectangleBorder. It was originally added '
+            'in Flutter to provide a Squircle implementation in, but it is '
+            'a very poor match for the version used by Apple on iOS. If you '
+            'multiply used border radius with 2.35, it becomes a closer match, '
+            'but not exactly.\n'
+            '\n'
+            'A beveled shape BeveledRectangleBorder, is also available.\n'
+            '\n'
+            'You could use the Circular shape as default main shape, and '
+            'e.g. on iOS and macOS use the Squircle shape.\n',
           ),
         ),
         Padding(
@@ -56,7 +82,7 @@ class ShapeRadiusSettings extends StatelessWidget {
             runSpacing: 8,
             children: <Widget>[
               Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+                clipBehavior: Clip.antiAlias,
                 color: shapeColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(radius)),
@@ -66,14 +92,14 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Circular Corner',
+                      'Circular',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+                clipBehavior: Clip.antiAlias,
                 color: shapeColor,
                 shape: SquircleBorder(cornerRadius: radius),
                 child: SizedBox(
@@ -81,14 +107,14 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Squircle Corner',
+                      'Squircle',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+                clipBehavior: Clip.antiAlias,
                 color: shapeColor,
                 shape: ContinuousRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(radius)),
@@ -98,14 +124,31 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Continuous Corner',
+                      'ContinuousRectangle',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+                clipBehavior: Clip.antiAlias,
+                color: shapeColor,
+                shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                ),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'Beveled Corner',
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAlias,
                 color: shapeColor,
                 shape: const StadiumBorder(),
                 child: SizedBox(
@@ -129,23 +172,6 @@ class ShapeRadiusSettings extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Squircle Stadium',
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                color: shapeColor,
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'Beveled Corner',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -182,15 +208,15 @@ class ShapeRadiusSettings extends StatelessWidget {
             'The radius on these elements can still be themed, but only '
             'individually. The indicator on NavigationDrawer is button sized '
             'and considered large, it is thus included in the global border '
-            'radius override.\n',
+            'radius override.',
           ),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: Slider(
             min: -1,
-            max: 60,
-            divisions: 61,
+            max: 80,
+            divisions: 81,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.defaultRadius == null ||
                         (controller.defaultRadius ?? -1) < 0
@@ -234,18 +260,110 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
           ),
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Adaptive radius'),
-          index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveRadius(null);
-                  } else {
-                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Stack(
+            children: <Widget>[
+              Material(
+                clipBehavior: Clip.antiAlias,
+                color: shapeColor,
+                shape: SquircleBorder(cornerRadius: radius),
+                child: SizedBox(
+                  height: heightBig,
+                  width: widthBig,
+                  child: Center(
+                    child: Text(
+                      'Squircle background',
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAlias,
+                color: Colors.transparent,
+                shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                  side: BorderSide(width: lineWidth, color: lineColorPrimary),
+                ),
+                child: const SizedBox(
+                  height: heightBig,
+                  width: widthBig,
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAlias,
+                color: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                  side: BorderSide(width: lineWidth, color: lineColorOnSurface),
+                ),
+                child: const SizedBox(
+                  height: heightBig,
+                  width: widthBig,
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAlias,
+                color: Colors.transparent,
+                shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                  side: BorderSide(width: lineWidth, color: lineColorError),
+                ),
+                child: const SizedBox(
+                  height: heightBig,
+                  width: widthBig,
+                ),
+              ),
+
+              //   Material(
+              //     clipBehavior: Clip.antiAliasWithSaveLayer,
+              //     color: shapeColor,
+              //     shape: const StadiumBorder(),
+              //     child: SizedBox(
+              //       height: height,
+              //       width: width,
+              //       child: Center(
+              //         child: Text(
+              //           'Circular Stadium',
+              //           style: TextStyle(color: onShapeColor),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   Material(
+              //     clipBehavior: Clip.antiAliasWithSaveLayer,
+              //     color: shapeColor,
+              //     shape: const SquircleStadiumBorder(),
+              //     child: SizedBox(
+              //       height: height,
+              //       width: width,
+              //       child: Center(
+              //         child: Text(
+              //           'Squircle Stadium',
+              //           style: TextStyle(color: onShapeColor),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+            ],
+          ),
+        ),
+        const Divider(),
+        const ListTileReveal(
+          title: Text('Platform adaptive settings'),
+          // subtitleDense: true,
+          subtitle: Text('With platform adaptive settings you can modify theme '
+              'properties to have a different response on selected platforms. '
+              'You can select which platforms the platform adaptive value '
+              'should be used on. While all other platforms not included '
+              'in this choice, will continue to use the none adaptive '
+              'value or default behavior.\n'
+              '\n'
+              'Using the API you can customize which platform an adaptive '
+              'feature is used on, including separate definitions when using '
+              'the app in a web build on each platform. The selections here '
+              'use built-in combinations, they cover most use cases.'),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes &&
@@ -254,16 +372,11 @@ class ShapeRadiusSettings extends StatelessWidget {
               controller.adaptiveRadius != null,
           title: const Text('Adaptive border radius'),
           subtitleDense: true,
-          subtitle: const Text('You can define a separate global '
-              'border radius override that gets used adaptively on above '
-              'selected platforms. Useful if you for example want to keep '
-              'M3 design radius on Android platform, but want a '
-              'less rounded design on other platforms. '
-              'With the API you can define which platform an adaptive '
-              'feature is used on, including separate definitions when '
-              'using the app in a web build on each platform. The above '
-              'selections are using built-in preconfigured constructors, they '
-              'probably cover most use cases.'),
+          subtitle: const Text('You can define a separate global border radius '
+              'override that gets used adaptively on selected platforms. This '
+              'is useful if you for example want to keep M3 design radius on '
+              'for example Android platform, but want a less rounded border '
+              'radius design on other platforms.'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -330,7 +443,19 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
+        AdaptiveThemePopupMenu(
+          title: const Text('Adaptive radius'),
+          index: controller.adaptiveRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveRadius(null);
+                  } else {
+                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
         PlatformPopupMenu(
           platform: controller.platform,
           onChanged: controller.setPlatform,

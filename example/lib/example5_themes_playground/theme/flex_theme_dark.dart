@@ -244,14 +244,15 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
+            adaptiveDialogRadius:
+                controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb),
+            dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
+            datePickerDialogRadius: controller.datePickerDialogBorderRadius,
+            timePickerDialogRadius: controller.timePickerDialogBorderRadius,
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
             datePickerHeaderBackgroundSchemeColor:
                 controller.datePickerHeaderBackgroundSchemeColor,
-            datePickerDialogRadius: controller.dialogBorderRadius,
-            timePickerDialogRadius: controller.dialogBorderRadius,
-            timePickerElementRadius: controller.timePickerElementRadius,
-            dialogElevation: controller.dialogElevation,
             // SnackBar settings.
             snackBarRadius: controller.snackBarBorderRadius,
             snackBarElevation: controller.snackBarElevation,

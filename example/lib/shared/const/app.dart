@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -210,7 +211,8 @@ class App {
     // Get adaptive border radius value
     final double? adaptiveRadius = controller.defaultRadiusAdaptive;
     // Get effective platform
-    final TargetPlatform platform = controller.platform;
+    final TargetPlatform platform =
+        controller.platform ?? defaultTargetPlatform;
     // Get fake web platform
     final bool? isWeb = controller.fakeIsWeb;
     // Get Adaptive Settings usage.

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -466,40 +464,6 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          title: const Text('Show a fixed test SnackBar'),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5.0),
-            child: FilledButton(
-              onPressed: () {
-                unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
-                    'A SnackBar with SnackBarBehavior.fixed'));
-              },
-              child: const Text('Fixed Snack'),
-            ),
-          ),
-          onTap: () {
-            unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
-                'A SnackBar with SnackBarBehavior.fixed'));
-          },
-        ),
-        ListTile(
-          title: const Text('Show a floating test SnackBar'),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5.0),
-            child: FilledButton(
-              onPressed: () {
-                unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
-                    'A SnackBar with SnackBarBehavior.floating'));
-              },
-              child: const Text('Float Snack'),
-            ),
-          ),
-          onTap: () {
-            unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
-                'A SnackBar with SnackBarBehavior.floating'));
-          },
-        ),
         const SizedBox(height: 8),
         const SnackBarShowcase(),
         const SizedBox(height: 16),
@@ -514,22 +478,6 @@ class BottomSheetBannerSnackSettings extends StatelessWidget {
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),
       ],
-    );
-  }
-
-  Future<void> _showDemoSnackBar(
-      BuildContext context, SnackBarBehavior style, String message) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        behavior: style,
-        showCloseIcon: true,
-        action: SnackBarAction(
-          label: 'Close',
-          onPressed: () {},
-        ),
-        duration: const Duration(milliseconds: 3000),
-      ),
     );
   }
 }

@@ -5593,6 +5593,15 @@ class FlexColorScheme with Diagnosticable {
         ? subTheme.defaultRadiusAdaptive
         : subTheme.defaultRadius;
 
+    // Use adaptive dialog radius?
+    final FlexAdaptive adaptiveDialogRadius =
+        subTheme.adaptiveDialogRadius ?? const FlexAdaptive.off();
+    // Get the correct adaptive dialog default radius.
+    final double? platformDialogRadius =
+        adaptiveDialogRadius.adapt(effectivePlatform)
+            ? subTheme.dialogRadiusAdaptive
+            : subTheme.dialogRadius;
+
     // Logic to determine the default Typography to use.
     //
     // Used Typography deviates from the Flutter standard that _still_ uses the
@@ -6783,7 +6792,9 @@ class FlexColorScheme with Diagnosticable {
               headerBackgroundSchemeColor:
                   subTheme.datePickerHeaderBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
-              radius: subTheme.datePickerDialogRadius ?? platformRadius,
+              radius: subTheme.datePickerDialogRadius ??
+                  platformDialogRadius ??
+                  platformRadius,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )
@@ -6795,7 +6806,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: dialogBackground,
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              radius: subTheme.dialogRadius ?? platformRadius,
+              radius: platformDialogRadius ?? platformRadius,
               elevation: subTheme.dialogElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -7246,7 +7257,9 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: dialogBackground,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
-              radius: subTheme.timePickerDialogRadius ?? platformRadius,
+              radius: subTheme.timePickerDialogRadius ??
+                  platformDialogRadius ??
+                  platformRadius,
               elementRadius: subTheme.timePickerElementRadius,
               inputDecorationTheme: effectiveInputDecorationTheme,
               useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
