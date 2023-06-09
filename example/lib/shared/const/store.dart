@@ -1541,11 +1541,38 @@ class Store {
   // used to reset settings.
   static const bool defaultUseInputDecoratorThemeInDialogs = false;
 
+  // Key used to read and save the adaptiveDialogRadius value.
+  static const String keyAdaptiveDialogRadius = 'adaptiveDialogRadius';
+  // Default value for the adaptiveDialogRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveDialogRadius = null;
+
   // Key used to read and save the dialogBorderRadius value.
   static const String keyDialogBorderRadius = 'dialogBorderRadius';
   // Default value for the dialogBorderRadius, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadius = null;
+
+  // Key used to read and save the dialogBorderRadiusAdaptive value.
+  static const String keyDialogBorderRadiusAdaptive =
+      'dialogBorderRadiusAdaptive';
+  // Default value for the dialogBorderRadiusAdaptive, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDialogBorderRadiusAdaptive = null;
+
+  // Key used to read and save the timePickerDialogBorderRadius value.
+  static const String keyTimePickerDialogBorderRadius =
+      'timePickerDialogBorderRadius';
+  // Default value for the timePickerDialogBorderRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultTimePickerDialogBorderRadius = null;
+
+  // Key used to read and save the datePickerDialogBorderRadius value.
+  static const String keyDatePickerDialogBorderRadius =
+      'datePickerDialogBorderRadius';
+  // Default value for the datePickerDialogBorderRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultDatePickerDialogBorderRadius = null;
 
   // Key used to read and save the timePickerElementRadius value.
   static const String keyTimePickerElementRadius = 'timePickerElementRadius';

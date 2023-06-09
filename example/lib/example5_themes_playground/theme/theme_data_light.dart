@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app.dart';
@@ -62,8 +63,10 @@ ThemeData themeDataLight(ThemeController controller) {
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     typography: controller.useMaterial3
-        ? Typography.material2021(platform: controller.platform)
-        : Typography.material2018(platform: controller.platform),
+        ? Typography.material2021(
+            platform: controller.platform ?? defaultTargetPlatform)
+        : Typography.material2018(
+            platform: controller.platform ?? defaultTargetPlatform),
     // Add a custom theme extension with light mode code highlight colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(colorScheme.surfaceTint, Brightness.light),

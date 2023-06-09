@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../../example5_themes_playground/utils/vertical_shape_border.dart';
 
 /// Used to show the current theme on Material widgets.
 ///
@@ -3608,8 +3612,56 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
   }
 }
 
-class SnackBarShowcase extends StatelessWidget {
+class SnackBarShowcase extends StatefulWidget {
   const SnackBarShowcase({super.key});
+
+  @override
+  State<SnackBarShowcase> createState() => _SnackBarShowcaseState();
+}
+
+class _SnackBarShowcaseState extends State<SnackBarShowcase> {
+  int fixedCount = 0;
+  int pinnedCount = 0;
+
+  Future<void> _showDemoSnackBar(
+      BuildContext context, SnackBarBehavior style, String message) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        behavior: style,
+        showCloseIcon: true,
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {},
+        ),
+        duration: const Duration(milliseconds: 3000),
+      ),
+    );
+  }
+
+  Future<void> _showCustomSnackBar(
+      BuildContext context, SnackBarBehavior style, String message) async {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        clipBehavior: Clip.antiAlias,
+        padding: const EdgeInsets.fromLTRB(24.0, 4, 20, 4),
+        content: Text(message),
+        behavior: style,
+        action: SnackBarAction(
+          label: 'Close',
+          onPressed: () {
+            // Do whatever...
+          },
+        ),
+        duration: const Duration(milliseconds: 3000),
+        shape: VerticalShapeBorder(
+          leftSide: BorderSide(width: 10, color: scheme.error),
+          rightSide: BorderSide(width: 10, color: scheme.tertiaryContainer),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -3679,12 +3731,41 @@ class SnackBarShowcase extends StatelessWidget {
                       const SizedBox(width: 24),
                       Text('A floating SnackBar', style: snackStyle),
                       const Spacer(),
-                      Text('Close', style: snackActionStyle),
+                      Text('Undo', style: snackActionStyle),
                       const SizedBox(width: 24),
                     ],
                   ),
                 ),
               ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Center(
+            child: TextButton(
+              child: const Text(
+                'Show floating SnackBar',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                pinnedCount++;
+                unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
+                    'A floating SnackBar ($pinnedCount)'));
+              },
+            ),
+          ),
+          Center(
+            child: TextButton(
+              child: const Text(
+                'Show custom floating SnackBar',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                pinnedCount++;
+                unawaited(_showCustomSnackBar(
+                    context,
+                    SnackBarBehavior.floating,
+                    'A floating SnackBar ($pinnedCount)'));
+              },
             ),
           ),
           const SizedBox(height: 16),
@@ -3703,11 +3784,25 @@ class SnackBarShowcase extends StatelessWidget {
                     const SizedBox(width: 24),
                     Text('A fixed SnackBar', style: snackStyle),
                     const Spacer(),
-                    Text('Close', style: snackActionStyle),
+                    Text('Undo', style: snackActionStyle),
                     const SizedBox(width: 24),
                   ],
                 ),
               ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Center(
+            child: TextButton(
+              child: const Text(
+                'Show fixed SnackBar',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                fixedCount++;
+                unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
+                    'A fixed SnackBar ($fixedCount)'));
+              },
             ),
           ),
         ],

@@ -34,7 +34,7 @@ class IsWebToggleButtons extends StatelessWidget {
       children: const <Widget>[
         SizedBox(
           width: 65,
-          child: Center(child: Text('IsWeb', style: TextStyle(fontSize: 11))),
+          child: Center(child: Text('Web', style: TextStyle(fontSize: 11))),
         ),
         SizedBox(
           width: 65,
@@ -42,8 +42,7 @@ class IsWebToggleButtons extends StatelessWidget {
         ),
         SizedBox(
           width: 65,
-          child:
-              Center(child: Text('IsNotWeb', style: TextStyle(fontSize: 11))),
+          child: Center(child: Text('Not Web', style: TextStyle(fontSize: 11))),
         ),
       ],
     );

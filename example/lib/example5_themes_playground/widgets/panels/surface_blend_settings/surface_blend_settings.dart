@@ -2,16 +2,11 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
@@ -293,63 +288,6 @@ class SurfaceBlendSettings extends StatelessWidget {
             onChanged: controller.setLightIsWhite,
           ),
           const Divider(),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive M3 elevation tint removal'),
-            subtitle: const Text(
-              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
-              'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
-              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
-            ),
-            index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveRemoveElevationTintLight(null);
-                    } else {
-                      controller.setAdaptiveRemoveElevationTintLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive shadows back in M3'),
-            subtitle: const Text(
-              'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
-              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
-            ),
-            index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveElevationShadowsBackLight(null);
-                    } else {
-                      controller.setAdaptiveElevationShadowsBackLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
-            index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveAppBarScrollUnderOffLight(null);
-                    } else {
-                      controller.setAdaptiveAppBarScrollUnderOffLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
@@ -482,54 +420,6 @@ class SurfaceBlendSettings extends StatelessWidget {
             onChanged: controller.setDarkIsTrueBlack,
           ),
           const Divider(),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive M3 elevation tint removal'),
-            index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveRemoveElevationTintDark(null);
-                    } else {
-                      controller.setAdaptiveRemoveElevationTintDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive shadows back in M3'),
-            index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveElevationShadowsBackDark(null);
-                    } else {
-                      controller.setAdaptiveElevationShadowsBackDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
-          AdaptiveThemePopupMenu(
-            title: const Text('Adaptive M3 AppBar scroll under tint removal'),
-            index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveAppBarScrollUnderOffDark(null);
-                    } else {
-                      controller.setAdaptiveAppBarScrollUnderOffDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
@@ -578,13 +468,6 @@ class SurfaceBlendSettings extends StatelessWidget {
             },
           ),
         ],
-        const Divider(),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
       ],
     );
   }

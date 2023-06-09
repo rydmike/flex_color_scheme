@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/adaptive_theme.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
+import '../../shared/back_to_actual_platform.dart';
 import '../../shared/component_colors_reveal.dart';
-import '../../shared/use_tinted_text_theme.dart';
+import '../../shared/is_web_list_tile.dart';
+import '../../shared/platform_popup_menu.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -24,6 +28,7 @@ class ComponentSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -63,8 +68,8 @@ class ComponentSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. FCS fixes this issue, but if you do not use FCS '
-                      'it is a theming issue to aware of.\n',
+                  text: '. FCS fixes this issue, but if you do not use FCS, '
+                      'it is a theming issue to be aware of.\n',
                 ),
               ],
             ),
@@ -87,10 +92,10 @@ class ComponentSettings extends StatelessWidget {
             'tint or tint of its own color, if it is not primary colored. '
             'Turn OFF for Flutter grey defaults. '
             'Impacts ThemeData disabledColor, but also disabled state color on '
-            'all individual components. Material 3 UI components typically '
+            'all individual components. Material-3 UI components typically '
             'ignore the ThemeData disabledColor. Their disabled styling is '
-            'defined on component themes. This settings also applies disabled '
-            'tint on all components that supports it.\n',
+            'defined on component themes. This setting applies tinted '
+            'disabled style on all components that support it.\n',
           ),
           value: controller.tintedDisabledControls &&
               controller.useSubThemes &&
@@ -108,7 +113,7 @@ class ComponentSettings extends StatelessWidget {
             'own color, if it is not primary colored. '
             'Turn OFF for Flutter grey defaults. '
             'Impacts ThemeData hover, focus, highlight and splash colors. '
-            'Material 3 components implement their own interaction '
+            'Material-3 components implement their own interaction '
             'effects. This setting also styles all of them on component theme '
             'level. Most components are covered, a few cases may not be fully '
             'supported due to lack of support in the Flutter framework. Their '
@@ -122,7 +127,6 @@ class ComponentSettings extends StatelessWidget {
               ? controller.setInteractionEffects
               : null,
         ),
-        UseTinted3TextTheme(controller: controller),
         const Divider(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -234,6 +238,133 @@ class ComponentSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const ListTileReveal(
+          title: Text('Platform adaptive settings'),
+          // subtitleDense: true,
+          subtitle: Text('With platform adaptive settings you can modify theme '
+              'properties to have a different response on selected platforms. '
+              'You can select which platforms the platform adaptive value '
+              'should be used on. While all other platforms not included '
+              'in this choice, will continue to use the none adaptive '
+              'value or default behavior.\n'
+              '\n'
+              'Using the API you can customize which platform an adaptive '
+              'feature is used on, including separate definitions when using '
+              'the app in a web build on each platform. The selections here '
+              'use built-in combinations, they cover most use cases.'),
+        ),
+        if (isLight) ...<Widget>[
+          AdaptiveThemePopupMenu(
+            title: const Text('Bring elevation shadows back'),
+            subtitle: const Text(
+              'Adaptive theme response to bring elevation shadows back in '
+              'Material-3 in light theme mode on selected platforms. '
+              'Has no impact in Material-2 mode.\n'
+              'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
+              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
+            ),
+            index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveElevationShadowsBackLight(null);
+                    } else {
+                      controller.setAdaptiveElevationShadowsBackLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Remove elevation tint'),
+            subtitle: const Text(
+              'Adaptive theme response to remove elevation tint on elevated '
+              'surfaces in Material-3 in light theme mode on selected '
+              'platforms. This is not recommended unless shadows are also '
+              'brought back. '
+              'This setting has no impact in Material-2 mode.\n'
+              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
+              'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
+              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
+            ),
+            index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveElevationTintLight(null);
+                    } else {
+                      controller.setAdaptiveRemoveElevationTintLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        ] else ...<Widget>[
+          AdaptiveThemePopupMenu(
+            title: const Text('Bring elevation shadows back'),
+            subtitle: const Text(
+              'Adaptive theme response to bring elevation shadows back in '
+              'Material-3 in dark theme mode on selected platforms. '
+              'Has no impact in Material-2 mode.\n'
+              'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
+              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
+            ),
+            index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveElevationShadowsBackDark(null);
+                    } else {
+                      controller.setAdaptiveElevationShadowsBackDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          AdaptiveThemePopupMenu(
+            title: const Text('Remove elevation tint'),
+            subtitle: const Text(
+              'Adaptive theme response to remove elevation tint on elevated '
+              'surfaces in Material-3 in dark theme mode on selected '
+              'platforms. This is not recommended in dark mode, unless '
+              'shadows are also brought back. However, even then it is bad '
+              'idea since shadows are not very visible in dark mode. Recommend '
+              'keeping elevation tint in M3 mode in dark mode. You can '
+              'still bring shadows back in dark mode, it can further increase '
+              'elevation separation in dark mode. '
+              'This setting sas no impact in Material-2 mode.\n'
+              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
+              'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
+              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
+            ),
+            index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveElevationTintDark(null);
+                    } else {
+                      controller.setAdaptiveRemoveElevationTintDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        ],
+        PlatformPopupMenu(
+          platform: controller.platform,
+          onChanged: controller.setPlatform,
+        ),
+        IsWebListTile(controller: controller),
+        BackToActualPlatform(controller: controller),
         const Divider(),
         const ComponentColorsReveal(),
         const Padding(

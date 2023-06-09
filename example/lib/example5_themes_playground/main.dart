@@ -130,7 +130,16 @@ class PlaygroundApp extends StatelessWidget {
             // The code that one need to use the same theme is also updated
             // interactively for each change when the cod gent panel is
             // in view.
-            child: HomePage(controller: controller),
+            //
+            // TODO(rydmike): Experiment, can we get SnackBar over Drawer?
+            //  => Yes with an extra Scaffold wrapper, actual used Drawer is
+            //  in page with own Scaffold below it.
+            child: // Scaffold(
+                //body:
+                HomePage(controller: controller),
+            //extendBody: true,
+            //extendBodyBehindAppBar: true,
+            //),
           ),
         );
       },

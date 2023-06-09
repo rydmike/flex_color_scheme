@@ -696,8 +696,19 @@ class ThemeController with ChangeNotifier {
     _useInputDecoratorThemeInDialogs = await _themeService.load(
         Store.keyUseInputDecoratorThemeInDialogs,
         Store.defaultUseInputDecoratorThemeInDialogs);
+    _adaptiveDialogRadius = await _themeService.load(
+        Store.keyAdaptiveDialogRadius, Store.defaultAdaptiveDialogRadius);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
+    _dialogBorderRadiusAdaptive = await _themeService.load(
+        Store.keyDialogBorderRadiusAdaptive,
+        Store.defaultDialogBorderRadiusAdaptive);
+    _timePickerDialogBorderRadius = await _themeService.load(
+        Store.keyTimePickerDialogBorderRadius,
+        Store.defaultTimePickerDialogBorderRadius);
+    _datePickerDialogBorderRadius = await _themeService.load(
+        Store.keyDatePickerDialogBorderRadius,
+        Store.defaultDatePickerDialogBorderRadius);
     _timePickerElementRadius = await _themeService.load(
         Store.keyTimePickerElementRadius, Store.defaultTimePickerElementRadius);
     _dialogElevation = await _themeService.load(
@@ -749,7 +760,7 @@ class ThemeController with ChangeNotifier {
 
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
-    _platform = defaultTargetPlatform;
+    _platform = null;
     _fakeIsWeb = null;
 
     notifyListeners();
@@ -1143,7 +1154,14 @@ class ThemeController with ChangeNotifier {
         Store.defaultDatePickerHeaderBackgroundSchemeColor, false);
     setUseInputDecoratorThemeInDialogs(
         Store.defaultUseInputDecoratorThemeInDialogs, false);
+    setAdaptiveDialogRadius(Store.defaultAdaptiveDialogRadius, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
+    setDialogBorderRadiusAdaptive(
+        Store.defaultDialogBorderRadiusAdaptive, false);
+    setTimePickerDialogBorderRadius(
+        Store.defaultTimePickerDialogBorderRadius, false);
+    setDatePickerDialogBorderRadius(
+        Store.defaultDatePickerDialogBorderRadius, false);
     setTimePickerElementRadius(Store.defaultTimePickerElementRadius, false);
     setDialogElevation(Store.defaultDialogElevation, false);
     //
@@ -4286,7 +4304,7 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySliderTrackHeight, value));
   }
 
-  // Fab, Chip, SnackBar, Popup, Card nad Dialog SETTINGS.
+  // Fab SETTINGS.
   // ===========================================================================
 
   late bool _fabUseShape;
@@ -4327,6 +4345,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyFabSchemeColor, value));
   }
 
+  // Chip SETTINGS.
+  // ===========================================================================
+
   late SchemeColor? _chipSchemeColor;
   SchemeColor? get chipSchemeColor => _chipSchemeColor;
   void setChipSchemeColor(SchemeColor? value, [bool notify = true]) {
@@ -4363,6 +4384,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyChipBorderRadius, value));
   }
 
+  // SnackBar SETTINGS.
+  // ===========================================================================
+
   late double? _snackBarElevation;
   double? get snackBarElevation => _snackBarElevation;
   void setSnackBarElevation(double? value, [bool notify = true]) {
@@ -4398,6 +4422,9 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySnackBarActionSchemeColor, value));
   }
+
+  // PopupMenu and Card SETTINGS.
+  // ===========================================================================
 
   late SchemeColor? _popupMenuSchemeColor;
   SchemeColor? get popupMenuSchemeColor => _popupMenuSchemeColor;
@@ -4445,6 +4472,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyCardBorderRadius, value));
   }
 
+  // Dialog SETTINGS.
+  // ===========================================================================
+
   late SchemeColor? _dialogBackgroundSchemeColor;
   SchemeColor? get dialogBackgroundSchemeColor => _dialogBackgroundSchemeColor;
   void setDialogBackgroundSchemeColor(SchemeColor? value,
@@ -4478,6 +4508,15 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyUseInputDecoratorThemeInDialogs, value));
   }
 
+  late AdaptiveTheme? _adaptiveDialogRadius;
+  AdaptiveTheme? get adaptiveDialogRadius => _adaptiveDialogRadius;
+  void setAdaptiveDialogRadius(AdaptiveTheme? value, [bool notify = true]) {
+    if (value == _adaptiveDialogRadius) return;
+    _adaptiveDialogRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAdaptiveDialogRadius, value));
+  }
+
   late double? _dialogBorderRadius;
   double? get dialogBorderRadius => _dialogBorderRadius;
   void setDialogBorderRadius(double? value, [bool notify = true]) {
@@ -4487,6 +4526,24 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyDialogBorderRadius, value));
   }
 
+  late double? _dialogBorderRadiusAdaptive;
+  double? get dialogBorderRadiusAdaptive => _dialogBorderRadiusAdaptive;
+  void setDialogBorderRadiusAdaptive(double? value, [bool notify = true]) {
+    if (value == _dialogBorderRadiusAdaptive) return;
+    _dialogBorderRadiusAdaptive = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDialogBorderRadiusAdaptive, value));
+  }
+
+  late double? _timePickerDialogBorderRadius;
+  double? get timePickerDialogBorderRadius => _timePickerDialogBorderRadius;
+  void setTimePickerDialogBorderRadius(double? value, [bool notify = true]) {
+    if (value == _timePickerDialogBorderRadius) return;
+    _timePickerDialogBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTimePickerDialogBorderRadius, value));
+  }
+
   late double? _timePickerElementRadius;
   double? get timePickerElementRadius => _timePickerElementRadius;
   void setTimePickerElementRadius(double? value, [bool notify = true]) {
@@ -4494,6 +4551,15 @@ class ThemeController with ChangeNotifier {
     _timePickerElementRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTimePickerElementRadius, value));
+  }
+
+  late double? _datePickerDialogBorderRadius;
+  double? get datePickerDialogBorderRadius => _datePickerDialogBorderRadius;
+  void setDatePickerDialogBorderRadius(double? value, [bool notify = true]) {
+    if (value == _datePickerDialogBorderRadius) return;
+    _datePickerDialogBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDatePickerDialogBorderRadius, value));
   }
 
   late double? _dialogElevation;
@@ -4744,10 +4810,10 @@ class ThemeController with ChangeNotifier {
     notifyListeners();
   }
 
-  // Rest both fake target platform and fake web setting.
+  // Reset both fake target platform and fake web setting.
   void resetFakePlatform() {
     setFakeIsWeb(null, false);
-    setPlatform(defaultTargetPlatform, false);
+    setPlatform(null, false);
     // Notify listeners, after all individual values have been set.
     notifyListeners();
   }
@@ -4761,10 +4827,9 @@ class ThemeController with ChangeNotifier {
   ///
   /// This is OK to be in ThemeController, if this is changed, the entire app
   /// theme must update too, and yes it is a part of ThemeData.
-  late TargetPlatform _platform;
-  TargetPlatform get platform => _platform;
+  late TargetPlatform? _platform;
+  TargetPlatform? get platform => _platform;
   void setPlatform(TargetPlatform? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _platform) return;
     _platform = value;
     if (notify) notifyListeners();

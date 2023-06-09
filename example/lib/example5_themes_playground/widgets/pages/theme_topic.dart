@@ -73,28 +73,6 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'rows of code to reproduce with the vanilla ThemeData factory.\n',
   ),
   ThemeTopic(
-    heading: 'Component themes',
-    buttonLabel: 'Component\nthemes',
-    icon: Icons.widgets_outlined,
-    info: "FlexColorScheme's Material 2 mode component themes are opinionated. "
-        'They look almost like Material 3 mode default components, '
-        'but done in Material 2 mode.\n'
-        '\n'
-        'When using Material 3, there are only a few nuance differences '
-        'compared to default M3 styles, plus some minor fixes to a few '
-        'Flutter Material 3 specification deviations, that Flutter may also '
-        'fix in later versions.\n',
-  ),
-  ThemeTopic(
-    heading: 'Shape and Radius',
-    buttonLabel: 'Shape\nRadius',
-    icon: Icons.rounded_corner_outlined,
-    info: 'The border shape and radius used in corner can be themed. In '
-        'FlexColorScheme you can change it globally for all curved corners '
-        'with one convenient setting. You can also use a different platform '
-        'adaptive response.\n',
-  ),
-  ThemeTopic(
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
@@ -146,6 +124,28 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'component theme colors. It also provides some additional useful '
         'background information about colors in Flutter, that are useful to '
         'be aware of.',
+  ),
+  ThemeTopic(
+    heading: 'Component themes',
+    buttonLabel: 'Component\nthemes',
+    icon: Icons.widgets_outlined,
+    info: "FlexColorScheme's Material 2 mode component themes are opinionated. "
+        'They look almost like Material 3 mode default components, '
+        'but done in Material 2 mode.\n'
+        '\n'
+        'When using Material 3, there are only a few nuance differences '
+        'compared to default M3 styles, plus some minor fixes to a few '
+        'Flutter Material 3 specification deviations, that Flutter may also '
+        'fix in later versions.\n',
+  ),
+  ThemeTopic(
+    heading: 'Shape and Radius',
+    buttonLabel: 'Shape\nRadius',
+    icon: Icons.rounded_corner_outlined,
+    info: 'The border shape and radius used by shape corner can be themed. In '
+        'FlexColorScheme you can change it globally for all curved corners '
+        'with one convenient setting. You can also use a different shape and '
+        'border radius on selected platforms.\n',
   ),
   ThemeTopic(
     heading: 'TextField',

@@ -77,10 +77,12 @@ class SquircleStadiumBorder extends ShapeBorder {
   /// By default this value is [BorderSide.none]. It also must not be null.
   final BorderSide side;
 
-  Path _getPath(Rect rect) {
+  Path _getPath(final Rect rectangle) {
     // The two 180º arcs will always be positioned on the shorter side of the
     // rectangle like with the traditional stadium border shape.
     final double sideWidth = side.width;
+
+    Rect rect = rectangle;
 
     // The side width that is capped by the smallest dimension of the rectangle.
     // It represents the side width value used to render the stroke.
@@ -347,6 +349,6 @@ class SquircleStadiumBorder extends ShapeBorder {
 
   @override
   String toString() {
-    return '$runtimeType($side)';
+    return 'SquircleStadiumBorder($side)';
   }
 }

@@ -4,21 +4,36 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**June 2, 2023**
+**June 10, 2023**
 
 **PACKAGE**
 
-* **NEW WIP:** Squircle shape feature. Work in progress.
+* **NEW:** Feature to enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData` .
+
+* **NEW WIP:** Squircle shape feature. Work in progress. Need border side for Squircle.
+
 
 **THEMES PLAYGROUND**
 
+* **NEW WIP:** Squircle shape feature. Work in progress.
+
 * **NEW:** Shape and radius now have their own theming topic panel, removed radius from **Component Themes** topic.
+* **NEW:** Add adaptive border radius setting to the Dialogs panel. 
+* **NEW:** Add TimePicker border radius override value setting to the Dialogs panel.
+* **NEW:** Add DatePicker border radius override value setting to the Dialogs panel.
+
 * **NEW:** Added a switch to show TextStyle details to TextTheme presentations.
 * **NEW:** Added font NotoSans Medium (W500) to assets.
 * **NEW**: On theme showcase and icon button panels, show both tappable and toggleable `IconButton` styles.
-* **CHANGE:** The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting on colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can. 
+* **CHANGE:** The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting on colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can.
+* **CHANGE:** Changed the order of theming topic panels. All color and surface related topic panels are now before component theme panels.
 
+**TODO**
 
+* Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defult.
+* Playground: Remove experiment with custom SnackBar in showcase.
+* Investigate issue suspect on responsive border radius on dialogs on mock web.
+ 
 ## 7.1.2
 
 **May 17, 2023**
