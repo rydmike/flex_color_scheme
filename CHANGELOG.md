@@ -30,7 +30,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO**
 
-* Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their default.
+* Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defaults.
 * Playground: Remove experiment with custom SnackBar in showcase.
 * Investigate issue suspect on responsive border radius on dialogs on mock web.
 * Investigate VisualDensity or height response change on mobile platforms on ToggleButtons.
