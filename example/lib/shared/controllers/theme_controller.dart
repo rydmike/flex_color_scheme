@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../const/adaptive_theme.dart';
@@ -1178,7 +1177,7 @@ class ThemeController with ChangeNotifier {
     //
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
-    setPlatform(defaultTargetPlatform, false);
+    setPlatform(null, false);
     setFakeIsWeb(null, false);
 
     // Only notify at end, if asked to do so, to do so is default.
