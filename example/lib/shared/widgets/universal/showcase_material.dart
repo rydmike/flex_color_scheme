@@ -390,7 +390,6 @@ class SegmentedButtonShowcase extends StatefulWidget {
 enum Calendar { day, week, month, year }
 
 class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
-  List<bool> selected = <bool>[true, false, false, true];
   Calendar _selected = Calendar.day;
 
   @override
@@ -4567,7 +4566,9 @@ class _ShowTextStyle extends StatelessWidget {
     final String size = style.fontSize!.toStringAsFixed(1);
     final String fontWeight = style.fontWeight!.toString();
     final String color = style.color!.toString();
-    final String spacing = style.letterSpacing!.toStringAsFixed(2);
+    final String spacing = style.letterSpacing != null
+        ? style.letterSpacing!.toStringAsFixed(2)
+        : '';
     final String height = style.height != null
         ? ' height: ${style.height!.toStringAsFixed(2)}'
         : '';

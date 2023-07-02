@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 /// enhanced enums.
 enum FlexTone {
   disabled(
-    tone: 'None',
+    toneLabel: 'None',
     describe: 'Tonal palettes are not in use',
     setup: 'Key color based tonal palettes are not used.\n'
         'Enable at least one key color to seed the palettes.\n'
@@ -23,118 +23,168 @@ enum FlexTone {
     shade: -5,
   ),
   material(
-    tone: 'Material 3',
+    toneLabel: 'Material 3',
     describe: 'Default Material 3 design tone map and chroma setup',
-    setup: '  Primary - Chroma from key color, but min 48\n'
-        '  Secondary - Chroma set to 16\n'
-        '  Tertiary - Chroma set to 24\n'
-        '  Neutral - Chroma set to 4\n'
-        '  Neutral variant - Chroma set to 8',
+    setup: 'Primary - Chroma from key color, but min 48\n'
+        'Secondary - Chroma set to 16\n'
+        'Tertiary - Chroma set to 24\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8\n'
+        'Tonal palette - Common',
     icon: Icons.blur_circular,
     shade: -5,
   ),
   soft(
-    tone: 'Soft',
+    toneLabel: 'Soft',
     describe: 'Softer and more earth like tones than Material 3 defaults',
-    setup: '  Primary - Chroma set to 30\n'
-        '  Secondary - Chroma set to 14\n'
-        '  Tertiary - Chroma set to 20\n'
-        '  Neutral - Chroma set to 4\n'
-        '  Neutral variant - Chroma set to 8',
+    setup: 'Primary - Chroma set to 30\n'
+        'Secondary - Chroma set to 14\n'
+        'Tertiary - Chroma set to 20\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8\n'
+        'Tonal palette - Common',
     icon: Icons.blur_on,
     shade: 2,
   ),
   vivid(
-    tone: 'Vivid',
+    toneLabel: 'Vivid',
     describe: 'More Vivid colors than Material 3 defaults',
-    setup: '  Primary - Chroma from key color, but min 50\n'
-        '  Secondary - Chroma from key color\n'
-        '  Tertiary - Chroma from key color\n'
-        '  Neutral - Chroma set to 4\n'
-        '  Neutral variant - Chroma set to 8',
+    setup: 'Primary - Chroma from key color, but min 50\n'
+        'Secondary - Chroma from key color\n'
+        'Tertiary - Chroma from key color\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8\n'
+        'Tonal palette - Common',
     icon: Icons.tonality,
     shade: 6,
   ),
   vividSurfaces(
-    tone: 'Vivid surfaces',
+    toneLabel: 'Vivid surfaces',
     describe: 'Like Vivid, but with more colorful containers, onColors and '
-        'surface tones. Creates a surface blend like effect, without '
-        'using any blend level',
-    setup: '  Primary - Chroma from key color, but min 50\n'
-        '  Secondary - Chroma from key color\n'
-        '  Tertiary - Chroma from key color\n'
-        '  Neutral - Chroma set to 5\n'
-        '  Neutral variant - Chroma set to 10',
+        'surface tones. Creates alpha blend like effect without '
+        'any blend level',
+    setup: 'Primary - Chroma from key color, but min 50\n'
+        'Secondary - Chroma from key color\n'
+        'Tertiary - Chroma from key color\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 5\n'
+        'Neutral variant - Chroma set to 10\n'
+        'Tonal palette - Common',
     icon: Icons.radio_button_checked,
     shade: 10,
   ),
   highContrast(
-    tone: 'High contrast',
+    toneLabel: 'High contrast',
     describe: 'High contrast version, may be useful for accessibility',
-    setup: '  Primary - Chroma from key color, but min 65\n'
-        '  Secondary - Chroma from key color, but min 55\n'
-        '  Tertiary - Chroma from key color, but min 55\n'
-        '  Neutral - Chroma set to 4\n'
-        '  Neutral variant - Chroma set to 8',
+    setup: 'Primary - Chroma from key color, but min 65\n'
+        'Secondary - Chroma from key color, but min 55\n'
+        'Tertiary - Chroma from key color, but min 55\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8\n'
+        'Tonal palette - Common',
     icon: Icons.contrast,
     shade: 14,
   ),
   ultraContrast(
-    tone: 'Ultra contrast',
+    toneLabel: 'Ultra contrast',
     describe: 'Ultra high contrast version, useful for accessibility, '
         'less colorful than high contrast, especially dark mode',
-    setup: '  Primary - Chroma from key color, but min 60\n'
-        '  Secondary - Chroma from key color, but min 70\n'
-        '  Tertiary - Chroma from key color, but min 65\n'
-        '  Neutral - Chroma set to 3\n'
-        '  Neutral variant - Chroma set to 6',
+    setup: 'Primary - Chroma from key color, but min 60\n'
+        'Secondary - Chroma from key color, but min 70\n'
+        'Tertiary - Chroma from key color, but min 65\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 3\n'
+        'Neutral variant - Chroma set to 6\n'
+        'Tonal palette - Common',
     icon: Icons.lens,
     shade: 20,
   ),
   jolly(
-    tone: 'Jolly',
+    toneLabel: 'Jolly',
     describe: 'Jolly color tones with more chroma and pop in them',
-    setup: '  Primary - Chroma from key color, but min 55\n'
-        '  Secondary - Chroma from key color, but min 40\n'
-        '  Tertiary - Chroma set to 40\n'
-        '  Neutral - Chroma set to 6\n'
-        '  Neutral variant - Chroma set to 10',
+    setup: 'Primary - Chroma from key color, but min 55\n'
+        'Secondary - Chroma from key color, but min 40\n'
+        'Tertiary - Chroma set to 40\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 6\n'
+        'Neutral variant - Chroma set to 10\n'
+        'Tonal palette - Common',
     icon: Icons.sunny,
     shade: 8,
   ),
   vividBackground(
-    tone: 'Vivid background',
+    toneLabel: 'Vivid background',
     describe: 'Like Vivid surfaces, but with tone mapping for surface '
         'and background swapped',
-    setup: '  Primary - Chroma from key color, but min 50\n'
-        '  Secondary - Chroma from key color\n'
-        '  Tertiary - Chroma from key color\n'
-        '  Neutral - Chroma set to 5\n'
-        '  Neutral variant - Chroma set to 10',
+    setup: 'Primary - Chroma from key color, but min 50\n'
+        'Secondary - Chroma from key color\n'
+        'Tertiary - Chroma from key color\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 5\n'
+        'Neutral variant - Chroma set to 10\n'
+        'Tonal palette - Common',
     icon: Icons.panorama_wide_angle_select_rounded,
     shade: 10,
   ),
   oneHue(
-    tone: 'One hue',
+    toneLabel: 'One hue',
     describe: 'If only primary key color given, scheme uses only one hue',
-    setup: '  Primary - Chroma from key color, but min 55\n'
-        '  Secondary - Chroma set to 26\n'
-        '  Tertiary - Chroma set to 36, no Hue rotation\n'
-        '  Neutral - Chroma set to 4\n'
-        '  Neutral variant - Chroma set to 8',
+    setup: 'Primary - Chroma from key color, but min 55\n'
+        'Secondary - Chroma set to 26\n'
+        'Tertiary - Chroma set to 36, no Hue rotation\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 4\n'
+        'Neutral variant - Chroma set to 8\n'
+        'Tonal palette - Common',
     icon: Icons.looks_one_rounded,
     shade: 7,
+  ),
+  candyPop(
+    toneLabel: 'Candy pop',
+    describe: 'A high contrast color scheme, useful for accessible themes, '
+        'with colors that pop like candy. Keeps the background and surface '
+        'white in light mode, and only a slight tint in dark mode. Neutrals '
+        'have very low chroma.',
+    setup: 'Primary - Chroma from key color, but min 60\n'
+        'Secondary - Chroma from key color, but min 44\n'
+        'Tertiary - Chroma from key color, but min 50\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 2\n'
+        'Neutral variant - Chroma set to 4\n'
+        'Tonal palette - Extended',
+    icon: Icons.join_left_outlined,
+    shade: 9,
+  ),
+  chroma(
+    toneLabel: 'Chroma',
+    describe:
+        'A color scheme that follows chroma of each used seed color. Useful '
+        'for manual control of pop or low chromacity. It uses low '
+        'surface tint and neutrals with medium chroma.',
+    setup: 'Primary - Chroma from key color, min 0\n'
+        'Secondary - Chroma from key color, min 0\n'
+        'Tertiary - Chroma from key color, min 0\n'
+        'Error - Chroma from key, unbound. Default Hue 25, Chroma 84\n'
+        'Neutral - Chroma set to 2 (L), 3 (D)\n'
+        'Neutral variant - Chroma set to 4 (L), 6 (D)\n'
+        'Tonal palette - Extended',
+    icon: Icons.lens_outlined,
+    shade: 3,
   );
 
   const FlexTone({
-    required this.tone,
+    required this.toneLabel,
     required this.describe,
     required this.setup,
     required this.icon,
     required this.shade,
   });
 
-  final String tone;
+  final String toneLabel;
   final String describe;
   final String setup;
   final IconData icon;
@@ -162,6 +212,10 @@ enum FlexTone {
         return FlexTones.vividBackground(brightness);
       case FlexTone.oneHue:
         return FlexTones.oneHue(brightness);
+      case FlexTone.candyPop:
+        return FlexTones.candyPop(brightness);
+      case FlexTone.chroma:
+        return FlexTones.chroma(brightness);
     }
   }
 }

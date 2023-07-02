@@ -22,9 +22,9 @@ class SeededColorSchemeSettings extends StatelessWidget {
 
   String get _flexToneName {
     if (controller.useKeyColors) {
-      return FlexTone.values[controller.usedFlexToneSetup].tone;
+      return FlexTone.values[controller.usedFlexToneSetup].toneLabel;
     } else {
-      return FlexTone.values[0].tone;
+      return FlexTone.values[0].toneLabel;
     }
   }
 

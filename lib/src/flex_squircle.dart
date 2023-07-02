@@ -58,10 +58,18 @@ import 'package:flutter/rendering.dart';
 /// ```
 /// {@end-tool}
 ///
-/// The image below depicts a [SquircleBorder] with a width
-/// and height of 200 and a curve radius of 75.
+/// The source code for this Squircle implementation is from this never merged
+/// PR https://github.com/flutter/flutter/pull/27523 which in the comment
+/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
+/// praised for its iOS like fidelity.
 ///
-/// ![](https://flutter.github.io/assets-for-api-docs/assets/painting/Shape.continuous_rectangle.png)
+/// The original code can be found here:
+/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_rectangle_border.dart
+///
+/// In this issue https://github.com/flutter/flutter/issues/91523 it is
+/// claimed here that [ContinuousRectangleBorder] requires a borderRadius
+/// of ~24 to resemble the iOS RoundedRectangle with a cornerRadius of ~10.2,
+/// a factor of 2.3529x
 ///
 /// See also:
 ///
