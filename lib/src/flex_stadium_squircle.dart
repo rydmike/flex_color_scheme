@@ -43,10 +43,13 @@ import 'package:flutter/rendering.dart';
 /// ```
 /// {@end-tool}
 ///
-/// The image below depicts a [SquircleStadiumBorder] with a width of 200
-/// and a height of 100.
+/// The code for this SquircleStadium implementation is from this unmerged PR
+/// https://github.com/flutter/flutter/pull/27523 which in the comment
+/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
+/// praised for its iOS like fidelity.
 ///
-/// ![](https://flutter.github.io/assets-for-api-docs/assets/painting/Shape.continuous_stadium.png)
+/// The original code can be found here:
+/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart
 ///
 /// See also:
 ///

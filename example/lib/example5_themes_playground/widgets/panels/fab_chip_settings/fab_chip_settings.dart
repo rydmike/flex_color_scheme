@@ -41,14 +41,14 @@ class FabChipSettings extends StatelessWidget {
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
-            controller.defaultRadius == null
+            effectiveRadius == null
         ? 'default 16'
         : controller.fabBorderRadius == null && controller.defaultRadius != null
             ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
             : '';
 
     final String chipRadiusDefaultLabel =
-        controller.chipBorderRadius == null && controller.defaultRadius == null
+        controller.chipBorderRadius == null && effectiveRadius == null
             ? 'default 8'
             : controller.chipBorderRadius == null &&
                     controller.defaultRadius != null

@@ -40,7 +40,7 @@ environment:
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.3.0
+  flex_seed_scheme: ^1.4.0
 
   flutter:
     sdk: flutter
@@ -58,6 +58,6 @@ dev_dependencies:
     sdk: flutter
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^4.0.4
+  google_fonts: ^5.1.0
   # Test lib.
   test:

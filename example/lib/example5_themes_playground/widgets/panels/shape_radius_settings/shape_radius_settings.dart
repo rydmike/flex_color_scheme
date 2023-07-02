@@ -28,7 +28,7 @@ class ShapeRadiusSettings extends StatelessWidget {
     final Color onShapeColor = theme.colorScheme.onSurface;
 
     final bool useMaterial3 = theme.useMaterial3;
-    const double height = 75;
+    const double height = 80;
     const double width = 190;
     const double heightBig = 160;
     const double widthBig = 320;
@@ -133,23 +133,6 @@ class ShapeRadiusSettings extends StatelessWidget {
               Material(
                 clipBehavior: Clip.antiAlias,
                 color: shapeColor,
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'Beveled Corner',
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
                 shape: const StadiumBorder(),
                 child: SizedBox(
                   height: height,
@@ -172,6 +155,23 @@ class ShapeRadiusSettings extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Squircle Stadium',
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAlias,
+                color: shapeColor,
+                shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                ),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'Beveled Corner',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -215,8 +215,8 @@ class ShapeRadiusSettings extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: Slider(
             min: -1,
-            max: 80,
-            divisions: 81,
+            max: 100,
+            divisions: 101,
             label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.defaultRadius == null ||
                         (controller.defaultRadius ?? -1) < 0
@@ -273,41 +273,45 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: widthBig,
                   child: Center(
                     child: Text(
-                      'Squircle background',
+                      'Squircle background '
+                      '(h=${heightBig.toStringAsFixed(0)})\n'
+                      'ContinuousRectangleBorder red outline\n'
+                      'using radius x 2.3529',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
                 ),
               ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: Colors.transparent,
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                  side: BorderSide(width: lineWidth, color: lineColorPrimary),
-                ),
-                child: const SizedBox(
-                  height: heightBig,
-                  width: widthBig,
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                  side: BorderSide(width: lineWidth, color: lineColorOnSurface),
-                ),
-                child: const SizedBox(
-                  height: heightBig,
-                  width: widthBig,
-                ),
-              ),
+              // Material(
+              //   clipBehavior: Clip.antiAlias,
+              //   color: Colors.transparent,
+              //   shape: BeveledRectangleBorder(
+              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
+              //    side: BorderSide(width: lineWidth, color: lineColorPrimary),
+              //   ),
+              //   child: const SizedBox(
+              //     height: heightBig,
+              //     width: widthBig,
+              //   ),
+              // ),
+              // Material(
+              //   clipBehavior: Clip.antiAlias,
+              //   color: Colors.transparent,
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
+              //   ide: BorderSide(width: lineWidth, color: lineColorOnSurface),
+              //   ),
+              //   child: const SizedBox(
+              //     height: heightBig,
+              //     width: widthBig,
+              //   ),
+              // ),
               Material(
                 clipBehavior: Clip.antiAlias,
                 color: Colors.transparent,
                 shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(radius * 2.3529)),
                   side: BorderSide(width: lineWidth, color: lineColorError),
                 ),
                 child: const SizedBox(

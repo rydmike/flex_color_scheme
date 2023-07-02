@@ -56,14 +56,14 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
                     : colorScheme.primary.darken(FlexTone.values[i].shade),
                 borderColor: Colors.transparent,
               ),
-              title: Text(FlexTone.values[i].tone, style: txtStyle),
+              title: Text(FlexTone.values[i].toneLabel, style: txtStyle),
             ),
           )
       ],
       child: ListTileReveal(
         enabled: !disabled,
         contentPadding: contentPadding,
-        title: Text('$title ${FlexTone.values[index].tone}'),
+        title: Text('$title ${FlexTone.values[index].toneLabel}'),
         subtitle: Text(
           '${FlexTone.values[index].describe}.\n'
           '$flexToneName FlexTones setup has CAM16 chroma:\n'

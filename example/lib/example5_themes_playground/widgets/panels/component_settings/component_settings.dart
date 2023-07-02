@@ -245,7 +245,7 @@ class ComponentSettings extends StatelessWidget {
           subtitle: Text('With platform adaptive settings you can modify theme '
               'properties to have a different response on selected platforms. '
               'You can select which platforms the platform adaptive value '
-              'should be used on. While all other platforms not included '
+              'should be used on. All other platforms not included '
               'in this choice, will continue to use the none adaptive '
               'value or default behavior.\n'
               '\n'
