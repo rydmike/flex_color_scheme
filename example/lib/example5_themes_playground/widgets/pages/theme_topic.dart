@@ -148,12 +148,108 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'border radius on selected platforms.\n',
   ),
   ThemeTopic(
+    heading: 'Material buttons',
+    buttonLabel: 'Material\nbuttons',
+    icon: Icons.crop_16_9_outlined,
+    info: 'Buttons help people take action, such as sending an email, '
+        'sharing a document, or liking a comment.\n'
+        '\n'
+        'In Flutter Material buttons refer to the standard push buttons, '
+        'implemented using ButtonStyleButton. The buttons are ElevatedButton, '
+        'FilledButton, FilledButton.tonal, OutlinedButton and TextButton. '
+        'They are quite versatile when it comes to their theming capabilities. '
+        'With all the styles offered, they often also work well as they are.\n',
+  ),
+  ThemeTopic(
+    heading: 'Segmented buttons',
+    buttonLabel: 'Segmented\nbuttons',
+    icon: Icons.view_week_outlined,
+    info: 'Segmented buttons help people select options, switch views, '
+        'or sort elements. '
+        'In Flutter segmented buttons includes both the Material 2 style '
+        'ToggleButtons and Material 3 style SegmentedButton.\n'
+        '\n'
+        'FlexColorsScheme uses a sophisticated theme to modernize '
+        'ToggleButtons. For some use cases, like when using only icons, '
+        'it may still fit and work better than the new M3 '
+        'SegmentedButton. ToggleButtons sizes itself to fit each item, you '
+        'have to size the content equally if that is desired. '
+        'SegmentedButton makes all segments same size by default, each '
+        'segment becomes large enough to fit the largest item.\n',
+  ),
+  ThemeTopic(
+    heading: 'FloatingActionButton and Chip',
+    buttonLabel: 'FAB and\nChip',
+    icon: Icons.add_circle,
+    info: 'The FloatingActionButton, the "FAB", represents the most '
+        'important action '
+        'on a screen. It puts key actions within reach. In M2 design it '
+        'uses secondary color by default. In M3 color system secondary '
+        'color is by default a very muted color, in M3 mode it instead '
+        'maps to primaryContainer color. If you use an M3 seed generated '
+        'ColorScheme in M2 mode, it is recommended to use another themed '
+        'color for the FAB than secondary color.\n'
+        '\n'
+        'Chips help people enter information, make selections, filter '
+        'content, or trigger actions. It has a totally new design in M3 '
+        'mode, FCS M2 mode takes some inspiration from it, while also '
+        'retaining some M2 style influences.\n',
+  ),
+  ThemeTopic(
+    heading: 'Switch, CheckBox and Radio',
+    buttonLabel: 'Switch\nCheck Radio',
+    icon: Icons.toggle_on_outlined,
+    info: 'Switches toggle the state of a single item on or off.\n'
+        '\n'
+        'Checkboxes allow users to select one or more items from a set. '
+        'Checkboxes can turn an option on or off.\n'
+        '\n'
+        'Radio buttons allow users to select one option from a set.\n',
+  ),
+  ThemeTopic(
+    heading: 'Tooltip, Icon, CircleAvatar and DropdownButton ',
+    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    icon: Icons.live_help_outlined,
+    info: 'Tooltips display informative text when users hover over, '
+        'focus on, or tap an element.\n',
+  ),
+  ThemeTopic(
+    heading: 'Slider',
+    buttonLabel: 'Slider',
+    icon: Icons.tune,
+    info: 'Sliders allow users to make selections from a range of values.\n'
+        '\n'
+        'Slider and its theme are very configurable in Flutter. Slider '
+        'has classes designed to be extended for complete '
+        'customization capabilities. FCS and Playground offer a good '
+        'starter set. Use copyWith on FCS generated theme if you '
+        'need further customization of the Slider or extend '
+        'its classes.\n',
+  ),
+  ThemeTopic(
     heading: 'TextField',
     icon: Icons.pin_outlined,
     info: 'Text fields allow users to enter text into a UI. They typically '
         'appear in forms and dialogs. TextField theming is done via the '
         'InputDecorator theme. It is a very complex theme, with mixed '
         'legacy and MaterialState properties.\n',
+  ),
+  ThemeTopic(
+    heading: 'Menus',
+    buttonLabel: 'Menus',
+    icon: Icons.arrow_drop_down_circle_outlined,
+    info: 'Menus display a list of choices on a temporary surface.\n'
+        '\n'
+        'The PopupMenuButton is a Material 2 menu control, it still works '
+        'well, but prefer using the new more versatile M3 menu '
+        'components, like MenuAnchor, DropdownMenu and MenuBar.\n',
+  ),
+  ThemeTopic(
+    heading: 'ListTile',
+    buttonLabel: 'ListTile',
+    icon: Icons.dns_outlined,
+    info: 'Lists tiles are often used in lists, with continuous, '
+        'vertical indexes of text or images.\n',
   ),
   ThemeTopic(
     heading: 'AppBar and BottomAppBar',
@@ -242,102 +338,6 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'component sub-themes use surface as default color in both modes.\n',
   ),
   ThemeTopic(
-    heading: 'Material buttons',
-    buttonLabel: 'Material\nbuttons',
-    icon: Icons.crop_16_9_outlined,
-    info: 'Buttons help people take action, such as sending an email, '
-        'sharing a document, or liking a comment.\n'
-        '\n'
-        'In Flutter Material buttons refer to the standard push buttons, '
-        'implemented using ButtonStyleButton. The buttons are ElevatedButton, '
-        'FilledButton, FilledButton.tonal, OutlinedButton and TextButton. '
-        'They are quite versatile when it comes to their theming capabilities. '
-        'With all the styles offered, they often also work well as they are.\n',
-  ),
-  ThemeTopic(
-    heading: 'Segmented buttons',
-    buttonLabel: 'Segmented\nbuttons',
-    icon: Icons.view_week_outlined,
-    info: 'Segmented buttons help people select options, switch views, '
-        'or sort elements. '
-        'In Flutter segmented buttons includes both the Material 2 style '
-        'ToggleButtons and Material 3 style SegmentedButton.\n'
-        '\n'
-        'FlexColorsScheme uses a sophisticated theme to modernize '
-        'ToggleButtons. For some use cases, like when using only icons, '
-        'it may still fit and work better than the new M3 '
-        'SegmentedButton. ToggleButtons sizes itself to fit each item, you '
-        'have to size the content equally if that is desired. '
-        'SegmentedButton makes all segments same size by default, each '
-        'segment becomes large enough to fit the largest item.\n',
-  ),
-  ThemeTopic(
-    heading: 'FloatingActionButton and Chip',
-    buttonLabel: 'FAB and\nChip',
-    icon: Icons.add_circle,
-    info: 'The FloatingActionButton, the "FAB", represents the most '
-        'important action '
-        'on a screen. It puts key actions within reach. In M2 design it '
-        'uses secondary color by default. In M3 color system secondary '
-        'color is by default a very muted color, in M3 mode it instead '
-        'maps to primaryContainer color. If you use an M3 seed generated '
-        'ColorScheme in M2 mode, it is recommended to use another themed '
-        'color for the FAB than secondary color.\n'
-        '\n'
-        'Chips help people enter information, make selections, filter '
-        'content, or trigger actions. It has a totally new design in M3 '
-        'mode, FCS M2 mode takes some inspiration from it, while also '
-        'retaining some M2 style influences.\n',
-  ),
-  ThemeTopic(
-    heading: 'Menus',
-    buttonLabel: 'Menus',
-    icon: Icons.arrow_drop_down_circle_outlined,
-    info: 'Menus display a list of choices on a temporary surface.\n'
-        '\n'
-        'The PopupMenuButton is a Material 2 menu control, it still works '
-        'well, but prefer using the new more versatile M3 menu '
-        'components, like MenuAnchor, DropdownMenu and MenuBar.\n',
-  ),
-  ThemeTopic(
-    heading: 'Tooltip, Icon, CircleAvatar and DropdownButton ',
-    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
-    icon: Icons.live_help_outlined,
-    info: 'Tooltips display informative text when users hover over, '
-        'focus on, or tap an element.\n',
-  ),
-  ThemeTopic(
-    heading: 'Switch, CheckBox and Radio',
-    buttonLabel: 'Switch\nCheck Radio',
-    icon: Icons.toggle_on_outlined,
-    info: 'Switches toggle the state of a single item on or off.\n'
-        '\n'
-        'Checkboxes allow users to select one or more items from a set. '
-        'Checkboxes can turn an option on or off.\n'
-        '\n'
-        'Radio buttons allow users to select one option from a set.\n',
-  ),
-  ThemeTopic(
-    heading: 'Slider',
-    buttonLabel: 'Slider',
-    icon: Icons.tune,
-    info: 'Sliders allow users to make selections from a range of values.\n'
-        '\n'
-        'Slider and its theme are very configurable in Flutter. Slider '
-        'has classes designed to be extended for complete '
-        'customization capabilities. FCS and Playground offer a good '
-        'starter set. Use copyWith on FCS generated theme if you '
-        'need further customization of the Slider or extend '
-        'its classes.\n',
-  ),
-  ThemeTopic(
-    heading: 'ListTile',
-    buttonLabel: 'ListTile',
-    icon: Icons.dns_outlined,
-    info: 'Lists tiles are often used in lists, with continuous, '
-        'vertical indexes of text or images.\n',
-  ),
-  ThemeTopic(
     heading: 'Dialogs',
     icon: Icons.branding_watermark_outlined,
     info: 'Dialogs provide important prompts in a user flow.\n',
@@ -401,28 +401,20 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'makes it always work in dark mode as well.\n',
   ),
   ThemeTopic(
+    heading: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
+    info: 'Material widget is a lower level building block. It cannot '
+        'be themed, but it has Material-2 and Material-3 mode dependent '
+        'behavior. Material is responsible for clipping, elevation '
+        'and ink effects below its children.\n',
+  ),
+  ThemeTopic(
     heading: 'Widget showcase',
     buttonLabel: 'Widget\nshowcase',
     icon: Icons.flutter_dash,
     info: 'This page presents most Flutter Material UI widgets, in one large '
         'page, as they look when the current theme is applied on them.\n',
-  ),
-  ThemeTopic(
-    heading: 'Page examples',
-    buttonLabel: 'Page\nexamples',
-    icon: Icons.article_outlined,
-    info: 'The page examples present the Material showcase content in '
-        'a separate screen. It also contains examples of different ways to '
-        'make full screen themed splash screens.\n',
-  ),
-  ThemeTopic(
-    heading: 'Material',
-    buttonLabel: 'Material',
-    icon: Icons.square,
-    info: 'Material widget is a lower level building block. It cannot '
-        'be themed, but it has Material 2 and Material 3 mode dependent '
-        'behavior. Material is responsible for clipping, elevation '
-        'and ink effects below its children.\n',
   ),
   ThemeTopic(
     heading: 'Android system navigation bar',
@@ -439,5 +431,13 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '"FlexColorScheme.themedSystemNavigationBar" to make it '
         'easy to style with a selected style that fits with a theme made '
         'by FlexColorColorScheme.\n',
+  ),
+  ThemeTopic(
+    heading: 'Page examples',
+    buttonLabel: 'Page\nexamples',
+    icon: Icons.article_outlined,
+    info: 'The page examples present the Material showcase content in '
+        'a separate screen. It also contains examples of different ways to '
+        'make full screen themed splash screens.\n',
   ),
 ];

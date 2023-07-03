@@ -35,21 +35,21 @@ class TabBarStylePopupMenu extends StatelessWidget {
     switch (style) {
       case FlexTabBarStyle.forAppBar:
         return 'Style: forAppbar\n'
-            'Works with used AppBar style in both M2 and M3 mode. '
-            '(FCS default style in M2)';
+            'Works with themed AppBar background color. '
+            'FCS M2 default.';
       case FlexTabBarStyle.forBackground:
         return 'Style: forBackground\n'
-            'Works on surface colors, like Scaffold, but '
-            'also works on surface colored AppBar in M2 and M3';
+            'Works on surface colors, like scaffold '
+            'and surface colored AppBar.';
       case FlexTabBarStyle.flutterDefault:
         return 'Style: flutterDefault\n'
-            'Flutter default style. In M2, works on primary color in '
+            'In M2, works on primary color in '
             'light mode and background color in dark mode. In M3 it '
-            'works on surface colors. (FCS default in M3)';
+            'works on surface colors. FCS M3 default.';
       case FlexTabBarStyle.universal:
         return 'Style: universal\n'
-            'Experimental universal style, has '
-            'low contrast. May change in future versions';
+            'Experimental style, has low contrast. '
+            'May change in future versions.';
       case null:
         return useMaterial3
             ? 'Default (flutterDefault)'

@@ -20,28 +20,6 @@ class TabBarSettings extends StatelessWidget {
     path: 'flutter/flutter/pull/119690',
   );
 
-  String explainTabStyle(final FlexTabBarStyle style) {
-    switch (style) {
-      case FlexTabBarStyle.forAppBar:
-        return 'Style: forAppbar\n'
-            'Works with used app bar style in both M2 and M3 mode. '
-            'FCS Default style';
-      case FlexTabBarStyle.forBackground:
-        return 'Style: forBackground\n'
-            'Works on surface colors, like Scaffold, but '
-            'also works on surface colored AppBar in M2 and M3';
-      case FlexTabBarStyle.flutterDefault:
-        return 'Style: flutterDefault\n'
-            'Flutter default style. In M2, it works on primary color in '
-            'light mode, and background color in dark mode. In M3 it '
-            'works on surface colors.';
-      case FlexTabBarStyle.universal:
-        return 'Style: universal\n'
-            'Experimental universal style, has '
-            'low contrast. May change in future versions';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -149,7 +127,7 @@ class TabBarSettings extends StatelessWidget {
               children: <Widget>[
                 TabBarForAppBarShowcase(),
                 SizedBox(height: 16),
-                TabBarForBackgroundShowcase(),
+                TabBarForBackgroundShowcase(explain: true),
               ],
             ),
           ),

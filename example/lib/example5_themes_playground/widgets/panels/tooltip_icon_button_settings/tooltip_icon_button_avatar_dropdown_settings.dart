@@ -311,7 +311,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: IconButtonCircleAvatarDropdownShowcase(),
+          child: IconShowcase(),
         ),
         const ListTileReveal(
           subtitleDense: true,
@@ -325,7 +325,7 @@ class TooltipIconButtonAvatarDropdownSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: IconButtonShowcase(),
+          child: IconButtonVariantsShowcase(),
         ),
         ListTileReveal(
           dense: true,

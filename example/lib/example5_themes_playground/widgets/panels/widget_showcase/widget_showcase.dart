@@ -11,22 +11,20 @@ class WidgetShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 8),
-          const ShowColorSchemeColors(),
-          const SizedBox(height: 8),
-          const ShowThemeDataColors(),
-          const SizedBox(height: 8),
-          const ShowSubThemeColors(),
-          const Divider(),
-          Text('Widgets', style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 16),
-          const ShowcaseMaterial(),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
+          ShowColorSchemeColors(),
+          SizedBox(height: 8),
+          ShowThemeDataColors(),
+          SizedBox(height: 8),
+          ShowSubThemeColors(),
+          SizedBox(height: 16),
+          ShowcaseMaterial(),
+          SizedBox(height: 8),
         ],
       ),
     );
