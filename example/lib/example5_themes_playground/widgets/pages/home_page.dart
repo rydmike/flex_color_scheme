@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
         media.size.height < App.phoneHeightBreakpoint;
     final bool isBigDesktop =
         media.size.width > App.mediumDesktopWidthBreakpoint;
-    final String materialType = theme.useMaterial3 ? 'M3 - ' : 'M2 - ';
+    final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
 
     // Disable vertical/horizontal setting when it has no effect.
     menuItemsEnabled[8] = isBigDesktop && !widget.controller.isLargeGridView;

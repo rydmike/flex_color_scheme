@@ -55,6 +55,7 @@ class ShowColorSchemeColors extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isDark = colorScheme.brightness == Brightness.dark;
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle headerStyle = theme.textTheme.titleMedium!;
 
     final MediaQueryData media = MediaQuery.of(context);
     final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
@@ -121,10 +122,7 @@ class ShowColorSchemeColors extends StatelessWidget {
           if (showTitle)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'ColorScheme colors',
-                style: theme.textTheme.titleMedium,
-              ),
+              child: Text('ColorScheme colors', style: headerStyle),
             ),
           Wrap(
             alignment: WrapAlignment.start,

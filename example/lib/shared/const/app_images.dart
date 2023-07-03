@@ -49,6 +49,7 @@ class AppImages {
   static const String shopMen = 'assets/images/man-look-right.jpg';
   static const String shopWomen = 'assets/images/woman-look-left.jpg';
   static const String shopPets = 'assets/images/pet.jpg';
+  static const String rydmike = 'assets/images/rydmike.jpg';
 
   // There are 16 images above, only 9 actually used in this setup.
   static const List<String> undraw = <String>[

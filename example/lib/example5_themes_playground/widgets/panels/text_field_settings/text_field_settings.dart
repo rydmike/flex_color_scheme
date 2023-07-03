@@ -121,7 +121,7 @@ class TextFieldSettings extends StatelessWidget {
             }),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: TextInputField(),
+          child: TextFieldShowcase(),
         ),
         if (isLight)
           ColorSchemePopupMenu(
@@ -604,7 +604,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: DropDownButtonFormField(),
+          child: DropdownButtonFormFieldShowcase(),
         ),
         const SizedBox(height: 8),
       ],

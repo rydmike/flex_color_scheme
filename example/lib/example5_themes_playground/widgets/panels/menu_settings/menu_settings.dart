@@ -101,7 +101,7 @@ class MenuSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: PopupMenuButtonsShowcase(explainUsage: false),
+          child: PopupMenuButtonsShowcase(explain: false),
         ),
         const ListTileReveal(
           title: Text('Known limitations'),
@@ -879,7 +879,7 @@ class MenuSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuAnchorShowcase(explainUsage: false),
+          child: MenuAnchorShowcase(explain: false),
         ),
         const SizedBox(height: 16),
         const Divider(),
@@ -893,7 +893,7 @@ class MenuSettings extends StatelessWidget {
           ),
         ),
 
-        const MenuBarShowcase(explainUsage: false),
+        const MenuBarShowcase(explain: false),
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),

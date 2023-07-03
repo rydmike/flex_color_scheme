@@ -319,8 +319,8 @@ class ShowcaseButtons extends StatelessWidget {
             children: <Widget>[
               FabShowcase(),
               SizedBox(height: 8),
-              IconButtonCircleAvatarDropdownShowcase(),
-              IconButtonShowcase(),
+              IconShowcase(),
+              IconButtonVariantsShowcase(),
             ],
           ),
         ),
@@ -344,13 +344,13 @@ class ShowcaseInput extends StatelessWidget {
       ),
       children: const <Widget>[
         CCard(
-          child: TextInputField(),
+          child: TextFieldShowcase(),
         ),
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              DropDownButtonFormField(),
+              DropdownButtonFormFieldShowcase(),
               SizedBox(height: 8),
               DropDownMenuShowcase(),
             ],
@@ -380,13 +380,13 @@ class ShowcaseMenus extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              PopupMenuButtonsShowcase(explainUsage: true),
+              PopupMenuButtonsShowcase(explain: true),
               SizedBox(height: 8),
-              DropDownMenuShowcase(explainUsage: true),
+              DropDownMenuShowcase(explain: true),
             ],
           ),
         ),
-        MenuBarShowcase(explainUsage: true, explainIndent: 16),
+        MenuBarShowcase(explain: true, explainIndent: 16),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MenuAnchorShowcase(),
@@ -425,11 +425,11 @@ class ShowcaseSwitches extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SwitchTileShowcase(),
+              SwitchListTileShowcase(),
               Divider(height: 1),
-              CheckboxTileShowcase(),
+              CheckboxListTileShowcase(),
               Divider(height: 1),
-              RadioTileShowcase(),
+              RadioListTileShowcase(),
             ],
           ),
         ),
