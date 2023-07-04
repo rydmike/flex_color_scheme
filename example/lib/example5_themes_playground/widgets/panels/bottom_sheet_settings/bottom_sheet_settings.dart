@@ -12,44 +12,10 @@ class BottomSheetSettings extends StatelessWidget {
 
   final ThemeController controller;
 
-  static final Uri _fcsFlutterIssue108539 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/108539',
-  );
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final bool isDark = theme.brightness == Brightness.dark;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
-    final String snackDefaultColorLabel = isDark
-        ? (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (light primary, 93% opacity)'
-            : useMaterial3
-                ? 'default (inverseSurface)'
-                : 'default (onSurface)'
-        : (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (dark primary, 95% opacity)'
-            : useMaterial3
-                ? 'default (inverseSurface)'
-                : 'default (onSurface.op80%, alphaBlend surface)';
-
-    final String snackActionDefaultColorLabel = isDark
-        ? (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (inversePrimary)'
-            : useMaterial3
-                ? 'default (inversePrimary)'
-                : 'default (secondary)'
-        : (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (inversePrimary)'
-            : useMaterial3
-                ? 'default (inversePrimary)'
-                : 'default (secondary)';
 
     final String sheetDefaultColorLabel =
         controller.useSubThemes && controller.useFlexColorScheme
