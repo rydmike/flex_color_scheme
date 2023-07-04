@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 ///
 /// This is also a small demonstration of how we can use Dart 2.17
 /// enhanced enums.
-enum FlexTone {
+enum FlexTonesEnum {
   disabled(
     toneLabel: 'None',
     describe: 'Tonal palettes are not in use',
@@ -148,7 +148,7 @@ enum FlexTone {
     describe: 'A high contrast color scheme, useful for accessible themes, '
         'with colors that pop like candy. Keeps the background and surface '
         'white in light mode, and only a slight tint in dark mode. Neutrals '
-        'have very low chroma.',
+        'have very low chroma',
     setup: 'Primary - Chroma from key color, but min 60\n'
         'Secondary - Chroma from key color, but min 44\n'
         'Tertiary - Chroma from key color, but min 50\n'
@@ -164,7 +164,7 @@ enum FlexTone {
     describe:
         'A color scheme that follows chroma of each used seed color. Useful '
         'for manual control of pop or low chromacity. It uses low '
-        'surface tint and neutrals with medium chroma.',
+        'surface tint and neutrals with medium chroma',
     setup: 'Primary - Chroma from key color, min 0\n'
         'Secondary - Chroma from key color, min 0\n'
         'Tertiary - Chroma from key color, min 0\n'
@@ -176,7 +176,7 @@ enum FlexTone {
     shade: 3,
   );
 
-  const FlexTone({
+  const FlexTonesEnum({
     required this.toneLabel,
     required this.describe,
     required this.setup,
@@ -192,29 +192,29 @@ enum FlexTone {
 
   FlexTones tones(Brightness brightness) {
     switch (this) {
-      case FlexTone.disabled:
+      case FlexTonesEnum.disabled:
         return FlexTones.material(brightness);
-      case FlexTone.material:
+      case FlexTonesEnum.material:
         return FlexTones.material(brightness);
-      case FlexTone.soft:
+      case FlexTonesEnum.soft:
         return FlexTones.soft(brightness);
-      case FlexTone.vivid:
+      case FlexTonesEnum.vivid:
         return FlexTones.vivid(brightness);
-      case FlexTone.vividSurfaces:
+      case FlexTonesEnum.vividSurfaces:
         return FlexTones.vividSurfaces(brightness);
-      case FlexTone.highContrast:
+      case FlexTonesEnum.highContrast:
         return FlexTones.highContrast(brightness);
-      case FlexTone.ultraContrast:
+      case FlexTonesEnum.ultraContrast:
         return FlexTones.ultraContrast(brightness);
-      case FlexTone.jolly:
+      case FlexTonesEnum.jolly:
         return FlexTones.jolly(brightness);
-      case FlexTone.vividBackground:
+      case FlexTonesEnum.vividBackground:
         return FlexTones.vividBackground(brightness);
-      case FlexTone.oneHue:
+      case FlexTonesEnum.oneHue:
         return FlexTones.oneHue(brightness);
-      case FlexTone.candyPop:
+      case FlexTonesEnum.candyPop:
         return FlexTones.candyPop(brightness);
-      case FlexTone.chroma:
+      case FlexTonesEnum.chroma:
         return FlexTones.chroma(brightness);
     }
   }

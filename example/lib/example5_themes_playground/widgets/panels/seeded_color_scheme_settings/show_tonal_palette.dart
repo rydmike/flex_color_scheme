@@ -35,7 +35,7 @@ class ShowTonalPalette extends StatelessWidget {
 
     // Get the FlexTones setup
     final FlexTones tones =
-        FlexTone.values[controller.usedFlexToneSetup].tones(brightness);
+        FlexTonesEnum.values[controller.usedFlexToneSetup].tones(brightness);
 
     // Compute all the core Tonal Palettes.
     final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
