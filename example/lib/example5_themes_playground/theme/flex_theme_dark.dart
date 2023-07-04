@@ -408,7 +408,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
-    tones: FlexTone.values[controller.usedFlexToneSetup]
+    tones: FlexTonesEnum.values[controller.usedFlexToneSetup]
         .tones(Brightness.dark)
         .onMainsUseBW(controller.onMainsUseBWDark)
         .onSurfacesUseBW(controller.onSurfacesUseBWDark),

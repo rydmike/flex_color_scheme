@@ -40,7 +40,7 @@ class SurfaceColors extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     // Grab active tones and chroma setup.
-    final FlexTones tones = FlexTone.values[controller.usedFlexToneSetup]
+    final FlexTones tones = FlexTonesEnum.values[controller.usedFlexToneSetup]
         .tones(theme.brightness)
         .onMainsUseBW(isLight
             ? controller.onMainsUseBWLight
