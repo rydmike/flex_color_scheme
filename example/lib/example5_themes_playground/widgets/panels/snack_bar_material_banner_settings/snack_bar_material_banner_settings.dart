@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -52,34 +51,6 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
                 ? 'default (inversePrimary)'
                 : 'default (secondary)';
 
-    final String sheetDefaultColorLabel =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? 'default (surface)'
-            : useMaterial3
-                ? 'default (surface)'
-                : 'default (theme.canvasColor)';
-    final String sheetElevationDefaultLabel =
-        controller.bottomSheetElevation == null
-            ? useMaterial3
-                ? 'default 1'
-                : 'default 4'
-            : '';
-    final String sheetModalElevationDefaultLabel =
-        controller.bottomSheetModalElevation == null
-            ? useMaterial3
-                ? 'default 2'
-                : 'default 8'
-            : '';
-
-    // Get effective platform default global radius.
-    final double? effectiveRadius = App.effectiveRadius(controller);
-    final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
-                null &&
-            effectiveRadius == null
-        ? 'default 28'
-        : controller.bottomSheetBorderRadius == null && effectiveRadius != null
-            ? 'global ${effectiveRadius.toStringAsFixed(0)}'
-            : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
