@@ -42,6 +42,8 @@ ThemeData themeDataDark(ThemeController controller) {
   return ThemeData(
     brightness: Brightness.dark,
     fontFamily: controller.useAppFont ? App.font : null,
+    textTheme: controller.useAppFont ? App.textTheme : null,
+    primaryTextTheme: controller.useAppFont ? App.textTheme : null,
     // The ColorScheme we get here is the same one you can also generate
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
