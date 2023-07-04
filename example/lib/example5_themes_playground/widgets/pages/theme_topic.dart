@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: comment_references
 
+/// TopicGroups groups ThemeTopics into related groups.
+enum TopicGroup {
+  general,
+  color,
+  style,
+  controls,
+  input,
+  appbar,
+  navigation,
+  surfaces,
+  text,
+}
+
 /// A class to hold the heading data we need to display in our [ThemePanel]
 /// topic panels headers and selection buttons.
 @immutable
@@ -12,6 +25,7 @@ class ThemeTopic {
     required this.icon,
     this.iconTurns = 0,
     this.info,
+    this.group = TopicGroup.general,
   }) : _buttonLabel = buttonLabel;
 
   final String heading;
@@ -19,6 +33,8 @@ class ThemeTopic {
   final int iconTurns;
   final String? _buttonLabel;
   final String? info;
+  final TopicGroup group;
+
   String get buttonLabel => _buttonLabel ?? heading;
 }
 
@@ -148,8 +164,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'border radius on selected platforms.\n',
   ),
   ThemeTopic(
-    heading: 'Material buttons',
-    buttonLabel: 'Material\nbuttons',
+    heading: 'Buttons',
+    buttonLabel: 'Buttons',
     icon: Icons.crop_16_9_outlined,
     info: 'Buttons help people take action, such as sending an email, '
         'sharing a document, or liking a comment.\n'
@@ -207,11 +223,21 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'Radio buttons allow users to select one option from a set.\n',
   ),
   ThemeTopic(
-    heading: 'Tooltip, Icon, CircleAvatar and DropdownButton ',
-    buttonLabel: 'Tooltip, Icon\nAvatar, Drop',
+    heading: 'Icon, IconButton and CircleAvatar',
+    buttonLabel: 'Icon\nAvatar',
+    icon: Icons.insert_emoticon,
+    info: 'Icon buttons help people take supplementary actions with a '
+        'single tap. CircleAvatar is used to show a user image, users '
+        'initials or a user avatar.\n',
+  ),
+  ThemeTopic(
+    heading: 'Tooltip and Progress Indicators',
+    buttonLabel: 'Tooltip\nProgress',
     icon: Icons.live_help_outlined,
     info: 'Tooltips display informative text when users hover over, '
-        'focus on, or tap an element.\n',
+        'focus on, or tap an element. Progress indicators inform users '
+        'about the status of ongoing processes, such as loading an app or '
+        'submitting a form.\n',
   ),
   ThemeTopic(
     heading: 'Slider',
@@ -235,24 +261,28 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'legacy and MaterialState properties.\n',
   ),
   ThemeTopic(
-    heading: 'Menus',
-    buttonLabel: 'Menus',
+    heading: 'PopupMenu and Dropdowns',
+    buttonLabel: 'Popup\nDropdowns',
     icon: Icons.arrow_drop_down_circle_outlined,
-    info: 'Menus display a list of choices on a temporary surface.\n'
+    info: 'Popup menus and dropdowns display a list of choices on a '
+        'temporary surface.\n'
         '\n'
-        'The PopupMenuButton is a Material 2 menu control, it still works '
-        'well, but prefer using the new more versatile M3 menu '
+        'The PopupMenuButton is a Material-2 menu control, it still works '
+        'well and can be themed. Consider using the new more versatile M3 menu '
         'components, like MenuAnchor, DropdownMenu and MenuBar.\n',
   ),
   ThemeTopic(
-    heading: 'ListTile',
-    buttonLabel: 'ListTile',
-    icon: Icons.dns_outlined,
-    info: 'Lists tiles are often used in lists, with continuous, '
-        'vertical indexes of text or images.\n',
+    heading: 'DropdownMenu, MenuAnchor and MenuBar',
+    buttonLabel: 'Menus',
+    icon: Icons.segment,
+    info: 'Menus display a list of choices on a temporary surface.\n'
+        '\n'
+        'These menu components are new Material-3 design widgets in Flutter, '
+        'when applicable, prefer using them over other similar '
+        'legacy widgets.\n',
   ),
   ThemeTopic(
-    heading: 'AppBar and BottomAppBar',
+    heading: 'AppBar',
     buttonLabel: 'AppBar',
     icon: Icons.web_asset_outlined,
     info: 'Top app bars display information and actions at the top of a '
@@ -260,10 +290,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'almost black in dark mode. Material 3 defaults to surface color in '
         'both light and dark theme mode. With FCS you can use select if you '
         'want Primary, Material2 surface, background, scaffoldBackground '
-        'colors with their surfaceTint and blends, or use a custom color.\n'
-        '\n'
-        'A bottom app bar displays navigation and key actions at the '
-        'bottom of mobile screens.\n',
+        'colors with their surfaceTint and blends, or use a custom color.\n',
   ),
   ThemeTopic(
     heading: 'TabBar',
@@ -282,6 +309,15 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'the default does not work with primary colored AppBar. By using '
         'the FCS forAppBar style, the TabBar always fits with selected '
         'AppBar theme.\n',
+  ),
+  ThemeTopic(
+    heading: 'BottomAppBar and SearchBar',
+    buttonLabel: 'BottomAppBar\nSearchBar',
+    icon: Icons.search,
+    info: 'A bottom app bar displays navigation and key actions at the '
+        'bottom of mobile screens. SearchBar allows users to enter a keyword '
+        'or phrase and get relevant information. It’s an alternative to '
+        'other forms of navigation.\n',
   ),
   ThemeTopic(
     heading: 'BottomNavigationBar',
@@ -343,16 +379,20 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Dialogs provide important prompts in a user flow.\n',
   ),
   ThemeTopic(
-    heading: 'BottomSheet, SnackBar and MaterialBanner',
-    buttonLabel: 'BottomSheet\nSnack Banner',
+    heading: 'BottomSheet',
+    buttonLabel: 'BottomSheet',
     icon: Icons.call_to_action_outlined,
     info: 'Bottom sheets are surfaces containing supplementary content, '
-        'anchored to the bottom of the screen.\n'
-        '\n'
-        'A SnackBar is used to provide brief messages about app processes '
+        'anchored to the bottom of the screen.\n',
+  ),
+  ThemeTopic(
+    heading: 'SnackBar and MaterialBanner',
+    buttonLabel: 'SnackBar\nBanner',
+    icon: Icons.featured_play_list_outlined,
+    info: 'A SnackBar is used to provide brief messages about app processes '
         'at the bottom of the screen.\n'
         '\n'
-        'Banners are similar to SnackBars, but at the top of '
+        'MaterialBanners are similar to SnackBars, but at the top of '
         'the screen and typically used to provide more information on '
         'topics related to content in the application.\n',
   ),
@@ -362,6 +402,22 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     icon: Icons.picture_in_picture_alt_outlined,
     info: 'Cards contain content and actions that relate '
         'information about a subject.\n',
+  ),
+  ThemeTopic(
+    heading: 'Material',
+    buttonLabel: 'Material',
+    icon: Icons.square,
+    info: 'Material widget is a lower level building block. It cannot '
+        'be themed, but it has Material-2 and Material-3 mode dependent '
+        'behavior. Material is responsible for clipping, elevation '
+        'and ink effects below its children.\n',
+  ),
+  ThemeTopic(
+    heading: 'ListTile',
+    buttonLabel: 'ListTile',
+    icon: Icons.dns_outlined,
+    info: 'Lists tiles are often used in lists, with continuous, '
+        'vertical indexes of text or images.\n',
   ),
   ThemeTopic(
     heading: 'TextTheme',
@@ -399,15 +455,6 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'It actually does so in light theme mode, but not always in Flutter '
         'by default in dark theme mode. FlexColorScheme corrects this and '
         'makes it always work in dark mode as well.\n',
-  ),
-  ThemeTopic(
-    heading: 'Material',
-    buttonLabel: 'Material',
-    icon: Icons.square,
-    info: 'Material widget is a lower level building block. It cannot '
-        'be themed, but it has Material-2 and Material-3 mode dependent '
-        'behavior. Material is responsible for clipping, elevation '
-        'and ink effects below its children.\n',
   ),
   ThemeTopic(
     heading: 'Widget showcase',

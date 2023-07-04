@@ -74,15 +74,6 @@ class ShowcaseMaterial extends StatelessWidget {
         const RadioShowcase(),
         const SizedBox(height: 8),
         //
-        // Tooltip and CircleAvatar
-        //
-        Text('Tooltip and CircleAvatar', style: headerStyle),
-        const SizedBox(height: 8),
-        const TooltipShowcase(),
-        const SizedBox(height: 16),
-        const CircleAvatarShowcase(),
-        const SizedBox(height: 16),
-        //
         // Icon
         //
         Text('Icon', style: headerStyle),
@@ -97,6 +88,20 @@ class ShowcaseMaterial extends StatelessWidget {
         const IconButtonShowcase(),
         const SizedBox(height: 16),
         const IconButtonVariantsShowcase(),
+        const SizedBox(height: 16),
+        //
+        // CircleAvatar
+        //
+        Text('CircleAvatar', style: headerStyle),
+        const SizedBox(height: 16),
+        const CircleAvatarShowcase(),
+        const SizedBox(height: 16),
+        //
+        // Tooltip
+        //
+        Text('Tooltip', style: headerStyle),
+        const SizedBox(height: 8),
+        const TooltipShowcase(),
         const SizedBox(height: 16),
         //
         // ProgressIndicator
@@ -122,40 +127,23 @@ class ShowcaseMaterial extends StatelessWidget {
         const TextFieldShowcase(),
         const SizedBox(height: 16),
         //
-        // DropdownButtonFormField, PopupMenuButton
+        // PopupMenuButton, DropdownButtonFormField, DropDownButton
         //
-        Text('Dropdowns and Menus', style: headerStyle),
+        Text('PopupMenuButton and DropdownButtons', style: headerStyle),
+        const PopupMenuButtonsShowcase(explain: true),
+        const SizedBox(height: 8),
         const DropdownButtonFormFieldShowcase(explain: true),
         const SizedBox(height: 8),
         const DropDownButtonShowcase(explain: true),
         const SizedBox(height: 8),
-        const PopupMenuButtonsShowcase(explain: true),
         //
         // DropdownMenu, MenuBar, MenuAnchor
         //
-        const SizedBox(height: 8),
+        Text('Dropdown Menus and MenuBar', style: headerStyle),
         const DropDownMenuShowcase(explain: true),
-        const MenuBarShowcase(explain: true),
         const MenuAnchorShowcase(explain: true),
+        const MenuBarShowcase(explain: true),
         const SizedBox(height: 16),
-        //
-        // LisTile, SwitchListTile, CheckboxListTile, RadioListTile
-        // and more exotic
-        // ExpansionTile, ExpansionPanelList
-        //
-        Text('All List Tiles', style: headerStyle),
-        const ListTileShowcase(),
-        const Divider(height: 1),
-        const SwitchListTileShowcase(),
-        const Divider(height: 1),
-        const CheckboxListTileShowcase(),
-        const Divider(height: 1),
-        const RadioListTileShowcase(),
-        const Divider(),
-        const ExpansionTileShowcase(),
-        const Divider(),
-        const ExpansionPanelListShowcase(),
-        const SizedBox(height: 32),
         //
         // AppBars and TabBar
         //
@@ -219,6 +207,30 @@ class ShowcaseMaterial extends StatelessWidget {
         const CardShowcase(explain: true),
         const SizedBox(height: 16),
         //
+        // Material
+        //
+        Text('Material', style: headerStyle),
+        const MaterialShowcase(explain: true),
+        const SizedBox(height: 16),
+        //
+        // LisTile, SwitchListTile, CheckboxListTile, RadioListTile
+        // and more exotic
+        // ExpansionTile, ExpansionPanelList
+        //
+        Text('All List Tiles', style: headerStyle),
+        const ListTileShowcase(),
+        const Divider(height: 1),
+        const SwitchListTileShowcase(),
+        const Divider(height: 1),
+        const CheckboxListTileShowcase(),
+        const Divider(height: 1),
+        const RadioListTileShowcase(),
+        const Divider(),
+        const ExpansionTileShowcase(),
+        const Divider(),
+        const ExpansionPanelListShowcase(),
+        const SizedBox(height: 32),
+        //
         // TextTheme and PrimaryTextTheme
         //
         Text('Text', style: headerStyle),
@@ -250,11 +262,6 @@ class ShowcaseMaterial extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        //
-        // Material
-        //
-        Text('Material', style: headerStyle),
-        const MaterialShowcase(explain: true),
       ],
     );
   }
@@ -1048,9 +1055,9 @@ class PopupMenuButtonsShowcase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Text(
-                'The standard Material-1 popup menu. Still usable and '
-                'can be themed to fit with M3 designs, as an alternative '
-                'consider M3 MenuAnchor.',
+                'The PopupMenuButton is a Material-2 design commonly used in '
+                'Material apps. In M3 it has received a slightly updated style '
+                'with elevation tint.',
                 style: denseBody,
               ),
             ),
@@ -1094,6 +1101,7 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: PopupMenuButton<int>(
+        tooltip: 'Show menu using\nListTile items',
         onSelected: (_) {},
         position: PopupMenuPosition.under,
         itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
@@ -1131,7 +1139,7 @@ class DropDownButtonShowcase extends StatefulWidget {
 }
 
 class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
-  String selectedItem = 'Dropdown button 1';
+  String selectedItem = '1 DropdownButton';
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -1157,8 +1165,8 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Text(
-                'An old M2 widget, cannot theme it. '
-                'Avoid it, consider using M3 DropDownMenu instead.',
+                'An older Material-2 widget, it cannot be themed. '
+                'Consider using M3 DropdownMenu instead.',
                 style: denseBody,
               ),
             ),
@@ -1166,15 +1174,18 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
             value: selectedItem,
             onChanged: (String? value) {
               setState(() {
-                selectedItem = value ?? 'Dropdown button 1';
+                selectedItem = value ?? '1 DropdownButton';
               });
             },
             items: <String>[
-              'Dropdown button 1',
-              'Dropdown button 2',
-              'Dropdown button 3',
-              'Dropdown button 4',
-              'Dropdown button 5'
+              '1 DropdownButton',
+              '2 DropdownButton',
+              '3 DropdownButton',
+              '4 DropdownButton',
+              '5 DropdownButton',
+              '6 DropdownButton',
+              '7 DropdownButton',
+              '8 DropdownButton',
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
@@ -1202,7 +1213,7 @@ class DropdownButtonFormFieldShowcase extends StatefulWidget {
 
 class _DropdownButtonFormFieldShowcaseState
     extends State<DropdownButtonFormFieldShowcase> {
-  String selectedItem = 'DropDown FormField - Option 1';
+  String selectedItem = '1 DropdownButtonFormField';
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -1238,15 +1249,18 @@ class _DropdownButtonFormFieldShowcaseState
             value: selectedItem,
             onChanged: (String? value) {
               setState(() {
-                selectedItem = value ?? 'DropDown FormField - Option 1';
+                selectedItem = value ?? '1 DropdownButtonFormField';
               });
             },
             items: <String>[
-              'DropDown FormField - Option 1',
-              'DropDown FormField - Option 2',
-              'DropDown FormField - Option 3',
-              'DropDown FormField - Option 4',
-              'DropDown FormField - Option 5',
+              '1 DropdownButtonFormField',
+              '2 DropdownButtonFormField',
+              '3 DropdownButtonFormField',
+              '4 DropdownButtonFormField',
+              '5 DropdownButtonFormField',
+              '6 DropdownButtonFormField',
+              '7 DropdownButtonFormField',
+              '8 DropdownButtonFormField',
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
@@ -1381,19 +1395,19 @@ class IconShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Tooltip(
-          message: 'Icon is Icon\nAddCircle',
+          message: 'Icon is Icons\nAddCircle',
           child: Icon(Icons.add_circle),
         ),
         Tooltip(
-          message: 'Icon is Icon\nCameraAltOutlined',
+          message: 'Icon is Icons\nCameraAltOutlined',
           child: Icon(Icons.camera_alt_outlined),
         ),
         Tooltip(
-          message: 'Icon is Icon\nFlutterDash',
+          message: 'Icon is Icons\nFlutterDash',
           child: Icon(Icons.flutter_dash),
         ),
         Tooltip(
-          message: 'Icon is Icon\nWarningAmber',
+          message: 'Icon is Icons\nWarningAmber',
           child: Icon(Icons.warning_amber),
         ),
       ],
