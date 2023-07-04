@@ -305,13 +305,14 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
     super.dispose();
   }
 
-  // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
-
-  // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color) =>
-      _isLight(color) ? Colors.black : Colors.white;
+  // TODO(rydmike): Remove not needed onColor logic.
+  // // Return true if the color is light, meaning it needs dark text for contrast.
+  // static bool _isLight(final Color color) =>
+  //     ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  //
+  // // On color used when a theme color property does not have a theme onColor.
+  // static Color _onColor(final Color color) =>
+  //     _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
