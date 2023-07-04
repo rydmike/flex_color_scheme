@@ -123,6 +123,7 @@ class TextFieldSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: TextFieldShowcase(),
         ),
+        const Divider(),
         if (isLight)
           ColorSchemePopupMenu(
             title: const Text('Light theme base color'),
@@ -301,6 +302,50 @@ class TextFieldSettings extends StatelessWidget {
             ),
           )
         ],
+        const Divider(),
+        //
+        // Border color, style and radius
+        //
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Light theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorLight?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorLight(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorLight(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme border color'),
+            labelForDefault: 'default (base color)',
+            index: controller.inputDecoratorBorderSchemeColorDark?.index ?? -1,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    !(!controller.inputDecoratorFocusedHasBorder &&
+                        (!controller.inputDecoratorUnfocusedHasBorder ||
+                            !controller.inputDecoratorUnfocusedBorderIsColored))
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputDecoratorBorderSchemeColorDark(null);
+                    } else {
+                      controller.setInputDecoratorBorderSchemeColorDark(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
         SwitchListTile(
           title: const Text(
             'Border style',
@@ -374,135 +419,10 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTile(
-          title: const Text('Unfocused field has a border'),
-          value: controller.inputDecoratorUnfocusedHasBorder &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setInputDecoratorUnfocusedHasBorder
-              : null,
-        ),
-        SwitchListTile(
-          title: const Text('Unfocused border is colored'),
-          value: controller.inputDecoratorUnfocusedBorderIsColored &&
-              controller.inputDecoratorUnfocusedHasBorder &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes &&
-                  controller.inputDecoratorUnfocusedHasBorder &&
-                  controller.useFlexColorScheme
-              ? controller.setInputDecoratorUnfocusedBorderIsColored
-              : null,
-        ),
-        if (isLight)
-          ColorSchemePopupMenu(
-            title: const Text('Light theme border color'),
-            labelForDefault: 'default (base color)',
-            index: controller.inputDecoratorBorderSchemeColorLight?.index ?? -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !(!controller.inputDecoratorFocusedHasBorder &&
-                        (!controller.inputDecoratorUnfocusedHasBorder ||
-                            !controller.inputDecoratorUnfocusedBorderIsColored))
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setInputDecoratorBorderSchemeColorLight(null);
-                    } else {
-                      controller.setInputDecoratorBorderSchemeColorLight(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          )
-        else
-          ColorSchemePopupMenu(
-            title: const Text('Dark theme border color'),
-            labelForDefault: 'default (base color)',
-            index: controller.inputDecoratorBorderSchemeColorDark?.index ?? -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !(!controller.inputDecoratorFocusedHasBorder &&
-                        (!controller.inputDecoratorUnfocusedHasBorder ||
-                            !controller.inputDecoratorUnfocusedBorderIsColored))
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setInputDecoratorBorderSchemeColorDark(null);
-                    } else {
-                      controller.setInputDecoratorBorderSchemeColorDark(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          ),
-        ListTile(
-          title: const Text('Unfocused border width'),
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              controller.inputDecoratorUnfocusedHasBorder,
-          subtitle: Slider(
-            min: 0,
-            max: 5,
-            divisions: 10,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.inputDecoratorUnfocusedHasBorder
-                ? controller.inputDecoratorBorderWidth == null ||
-                        (controller.inputDecoratorBorderWidth ?? 0) <= 0
-                    ? thinBorderDefaultLabel
-                    : (controller.inputDecoratorBorderWidth
-                            ?.toStringAsFixed(1) ??
-                        '')
-                : controller.inputDecoratorUnfocusedHasBorder ||
-                        !controller.useSubThemes ||
-                        !controller.useFlexColorScheme
-                    ? 'default 1'
-                    : 'none',
-            value: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.inputDecoratorUnfocusedHasBorder
-                ? controller.inputDecoratorBorderWidth ?? 0
-                : 0,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.inputDecoratorUnfocusedHasBorder
-                ? (double value) {
-                    controller.setInputDecoratorBorderWidth(
-                        value <= 0 ? null : value);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          controller.inputDecoratorUnfocusedHasBorder
-                      ? controller.inputDecoratorBorderWidth == null ||
-                              (controller.inputDecoratorBorderWidth ?? 0) <= 0
-                          ? thinBorderDefaultLabel
-                          : (controller.inputDecoratorBorderWidth
-                                  ?.toStringAsFixed(1) ??
-                              '')
-                      : controller.inputDecoratorUnfocusedHasBorder ||
-                              !controller.useSubThemes ||
-                              !controller.useFlexColorScheme
-                          ? 'default 1'
-                          : 'none',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
+        const Divider(),
+        //
+        // Focused border
+        //
         SwitchListTile(
           title: const Text('Focused field has a border'),
           value: controller.inputDecoratorFocusedHasBorder &&
@@ -583,30 +503,98 @@ class TextFieldSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTileReveal(
-          title: Text('DropdownMenu'),
-          subtitleDense: true,
-          subtitle: Text('The DropDownMenu has a text entry used to select '
-              'an option in a dropdown menu by typing in the selection. '
-              'The text entry part matches the used input decoration '
-              'in FCS by default.\n'),
+        //
+        // Unfocused border
+        //
+        SwitchListTile(
+          title: const Text('Unfocused field has a border'),
+          value: controller.inputDecoratorUnfocusedHasBorder &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setInputDecoratorUnfocusedHasBorder
+              : null,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: DropDownMenuShowcase(),
+        SwitchListTile(
+          title: const Text('Unfocused border is colored'),
+          value: controller.inputDecoratorUnfocusedBorderIsColored &&
+              controller.inputDecoratorUnfocusedHasBorder &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes &&
+                  controller.inputDecoratorUnfocusedHasBorder &&
+                  controller.useFlexColorScheme
+              ? controller.setInputDecoratorUnfocusedBorderIsColored
+              : null,
         ),
-        const ListTileReveal(
-          title: Text('DropdownButtonFormField'),
-          subtitleDense: true,
-          subtitle: Text('An older Material widget, it also uses the text '
-              'input decoration theme. Tt does not work well with high '
-              'border radius. Prefer using the DropdownMenu widget instead.\n'),
+        ListTile(
+          title: const Text('Unfocused border width'),
+          enabled: controller.useSubThemes &&
+              controller.useFlexColorScheme &&
+              controller.inputDecoratorUnfocusedHasBorder,
+          subtitle: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
+                ? controller.inputDecoratorBorderWidth == null ||
+                        (controller.inputDecoratorBorderWidth ?? 0) <= 0
+                    ? thinBorderDefaultLabel
+                    : (controller.inputDecoratorBorderWidth
+                            ?.toStringAsFixed(1) ??
+                        '')
+                : controller.inputDecoratorUnfocusedHasBorder ||
+                        !controller.useSubThemes ||
+                        !controller.useFlexColorScheme
+                    ? 'default 1'
+                    : 'none',
+            value: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
+                ? controller.inputDecoratorBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes &&
+                    controller.useFlexColorScheme &&
+                    controller.inputDecoratorUnfocusedHasBorder
+                ? (double value) {
+                    controller.setInputDecoratorBorderWidth(
+                        value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes &&
+                          controller.useFlexColorScheme &&
+                          controller.inputDecoratorUnfocusedHasBorder
+                      ? controller.inputDecoratorBorderWidth == null ||
+                              (controller.inputDecoratorBorderWidth ?? 0) <= 0
+                          ? thinBorderDefaultLabel
+                          : (controller.inputDecoratorBorderWidth
+                                  ?.toStringAsFixed(1) ??
+                              '')
+                      : controller.inputDecoratorUnfocusedHasBorder ||
+                              !controller.useSubThemes ||
+                              !controller.useFlexColorScheme
+                          ? 'default 1'
+                          : 'none',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: DropdownButtonFormFieldShowcase(),
-        ),
-        const SizedBox(height: 8),
       ],
     );
   }

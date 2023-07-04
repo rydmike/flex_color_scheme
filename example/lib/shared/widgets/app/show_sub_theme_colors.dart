@@ -124,9 +124,7 @@ class ShowSubThemeColors extends StatelessWidget {
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color circleAvatarColor = useMaterial3
         ? theme.colorScheme.primaryContainer
-        : isDark
-            ? theme.primaryColorLight
-            : theme.primaryColorDark;
+        : theme.primaryColorDark;
     final Color onCircleAvatarColor = useMaterial3
         ? theme.colorScheme.onPrimaryContainer
         : _onColor(circleAvatarColor, background);

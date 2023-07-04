@@ -22,8 +22,6 @@ class ShapeRadiusSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color shapeColor =
         isLight ? theme.colorScheme.outlineVariant : theme.colorScheme.outline;
-    final Color lineColorPrimary = theme.colorScheme.primary;
-    final Color lineColorOnSurface = theme.colorScheme.onSurface;
     final Color lineColorError = theme.colorScheme.error;
     final Color onShapeColor = theme.colorScheme.onSurface;
 
