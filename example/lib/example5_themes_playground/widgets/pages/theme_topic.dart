@@ -8,7 +8,7 @@ import '../../theme/topic_theme.dart';
 enum TopicGroup {
   general,
   colors,
-  style,
+  components,
   controls,
   inputs,
   bars,
@@ -28,8 +28,8 @@ enum TopicGroup {
         return colors.generalColor!;
       case TopicGroup.colors:
         return colors.colorsColor!;
-      case TopicGroup.style:
-        return colors.stylesColor!;
+      case TopicGroup.components:
+        return colors.componentsColor!;
       case TopicGroup.controls:
         return colors.controlsColor!;
       case TopicGroup.inputs:
@@ -181,7 +181,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'be aware of.',
   ),
   ThemeTopic(
-    group: TopicGroup.style,
+    group: TopicGroup.components,
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
@@ -195,7 +195,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'fix in later versions.\n',
   ),
   ThemeTopic(
-    group: TopicGroup.style,
+    group: TopicGroup.components,
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
     icon: Icons.rounded_corner_outlined,
@@ -205,7 +205,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'border radius on selected platforms.\n',
   ),
   ThemeTopic(
-    group: TopicGroup.style,
+    group: TopicGroup.components,
     heading: 'Widget showcase',
     buttonLabel: 'Widget\nshowcase',
     icon: Icons.flutter_dash,

@@ -258,8 +258,8 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
+    // TODO(rydmike): Optional tested iconColor.
     // final Color iconColor = themeTopics[widget.panel].group.color(context);
-
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
             theme.colorScheme.onBackground)
@@ -315,7 +315,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
                       leading: Icon(themeTopics[widget.panel].icon,
                           color: iconColor),
                       info: themeTopics[widget.panel].info,
-                      // TODO(rydmike): Looked weird, not use?
+                      // TODO(rydmike): Looked weird, won't use it
                       // headingColor:
                       //     themeTopics[widget.panel].group.color(context),
                       child: ThemePanel(widget.panel, widget.controller),
