@@ -6,7 +6,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
   const TopicTheme({
     this.generalColor,
     this.colorsColor,
-    this.stylesColor,
+    this.componentsColor,
     this.controlsColor,
     this.inputsColor,
     this.barsColor,
@@ -16,7 +16,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
   });
   final Color? generalColor;
   final Color? colorsColor;
-  final Color? stylesColor;
+  final Color? componentsColor;
   final Color? controlsColor;
   final Color? inputsColor;
   final Color? barsColor;
@@ -29,7 +29,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
   TopicTheme copyWith({
     Color? generalColor,
     Color? colorsColor,
-    Color? stylesColor,
+    Color? componentsColor,
     Color? controlsColor,
     Color? inputsColor,
     Color? barsColor,
@@ -40,7 +40,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
       TopicTheme(
         generalColor: generalColor ?? this.generalColor,
         colorsColor: colorsColor ?? this.colorsColor,
-        stylesColor: stylesColor ?? this.stylesColor,
+        componentsColor: componentsColor ?? this.componentsColor,
         controlsColor: controlsColor ?? this.controlsColor,
         inputsColor: inputsColor ?? this.inputsColor,
         barsColor: barsColor ?? this.barsColor,
@@ -58,7 +58,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     return TopicTheme(
       generalColor: Color.lerp(generalColor, other.generalColor, t),
       colorsColor: Color.lerp(colorsColor, other.colorsColor, t),
-      stylesColor: Color.lerp(stylesColor, other.stylesColor, t),
+      componentsColor: Color.lerp(componentsColor, other.componentsColor, t),
       controlsColor: Color.lerp(controlsColor, other.controlsColor, t),
       inputsColor: Color.lerp(inputsColor, other.inputsColor, t),
       barsColor: Color.lerp(barsColor, other.barsColor, t),
@@ -70,28 +70,28 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
 
   /// Code view theme colors for light mode.
   static const TopicTheme light = TopicTheme(
-    generalColor: Color(0xFF262649),
+    generalColor: Color(0xFF262654),
     colorsColor: Color(0xFF910CAD),
-    stylesColor: Color(0xFF005191),
+    componentsColor: Color(0xFF035A9F),
     controlsColor: Color(0xFFAF0000),
-    inputsColor: Color(0xFFCB6601),
-    barsColor: Color(0xFF007C4C),
-    navigationColor: Color(0xFF0F7300),
-    surfacesColor: Color(0xFF02381F),
+    inputsColor: Color(0xFFDC6E04),
+    barsColor: Color(0xFF00A8A4),
+    navigationColor: Color(0xFF0A9811),
+    surfacesColor: Color(0xFF1A5901),
     textsColor: Color(0xFF031E79),
   );
 
   /// Code view theme colors for dark mode.
   static const TopicTheme dark = TopicTheme(
-    generalColor: Color(0xFFF1F1F5),
-    colorsColor: Color(0xFFF8E9DF),
-    stylesColor: Color(0xFFE1E6EA),
-    controlsColor: Color(0xFFF5E9E9),
-    inputsColor: Color(0xFFF1E5D3),
-    barsColor: Color(0xFFE3EAC9),
-    navigationColor: Color(0xFFD4EACF),
-    surfacesColor: Color(0xFFE4EEE9),
-    textsColor: Color(0xFFD8E0F6),
+    generalColor: Color(0xFFE4E4FF),
+    colorsColor: Color(0xFFE9B2F6),
+    componentsColor: Color(0xFF6FB1E7),
+    controlsColor: Color(0xFFF18E8E),
+    inputsColor: Color(0xFFECA359),
+    barsColor: Color(0xFF7ED5D1),
+    navigationColor: Color(0xFF83C588),
+    surfacesColor: Color(0xFF419D73),
+    textsColor: Color(0xFF7583B6),
   );
 
   /// A harmonized code view color theme, based on [brightness] where colors
@@ -124,9 +124,9 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
           sourceColorValue,
         ),
       ),
-      stylesColor: Color(
+      componentsColor: Color(
         Blend.harmonize(
-          topicTheme.stylesColor?.value ?? fallbackValue,
+          topicTheme.componentsColor?.value ?? fallbackValue,
           sourceColorValue,
         ),
       ),

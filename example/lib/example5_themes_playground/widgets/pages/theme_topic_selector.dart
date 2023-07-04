@@ -340,14 +340,14 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
 
     final bool isLight = theme.brightness == Brightness.light;
 
+    // TODO(rydmike): Optional tested background color.
     // final Color background = widget.item.group.color(context);
-
     final Color background = Color.alphaBlend(
         scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
 
     final Color iconColor =
         widget.item.group.color(context); //_onColor(background);
-
+    // TODO(rydmike): Old icon Color algo, keep around for a while.
     // final Color iconColor = isLight
     //     ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
     //         theme.colorScheme.onBackground)
