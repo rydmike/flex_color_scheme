@@ -305,6 +305,14 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
     super.dispose();
   }
 
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  static bool _isLight(final Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+
+  // On color used when a theme color property does not have a theme onColor.
+  static Color _onColor(final Color color) =>
+      _isLight(color) ? Colors.black : Colors.white;
+
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
@@ -331,14 +339,21 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
     final Color scaffoldBackground = theme.scaffoldBackgroundColor;
 
     final bool isLight = theme.brightness == Brightness.light;
+
+    // final Color background = widget.item.group.color(context);
+
     final Color background = Color.alphaBlend(
         scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
 
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+    final Color iconColor =
+        widget.item.group.color(context); //_onColor(background);
+
+    // final Color iconColor = isLight
+    //     ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+    //         theme.colorScheme.onBackground)
+    //     : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+    //         theme.colorScheme.onBackground);
+
     final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
 
     final Color unselectedColor =

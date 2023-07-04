@@ -1,0 +1,171 @@
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
+import 'package:flutter/material.dart';
+
+/// A [ThemeExtension] for semantic theme topic group color properties.
+class TopicTheme extends ThemeExtension<TopicTheme> {
+  const TopicTheme({
+    this.generalColor,
+    this.colorsColor,
+    this.stylesColor,
+    this.controlsColor,
+    this.inputsColor,
+    this.barsColor,
+    this.navigationColor,
+    this.surfacesColor,
+    this.textsColor,
+  });
+  final Color? generalColor;
+  final Color? colorsColor;
+  final Color? stylesColor;
+  final Color? controlsColor;
+  final Color? inputsColor;
+  final Color? barsColor;
+  final Color? navigationColor;
+  final Color? surfacesColor;
+  final Color? textsColor;
+
+  /// Must override the copyWith method.
+  @override
+  TopicTheme copyWith({
+    Color? generalColor,
+    Color? colorsColor,
+    Color? stylesColor,
+    Color? controlsColor,
+    Color? inputsColor,
+    Color? barsColor,
+    Color? navigationColor,
+    Color? surfacesColor,
+    Color? textsColor,
+  }) =>
+      TopicTheme(
+        generalColor: generalColor ?? this.generalColor,
+        colorsColor: colorsColor ?? this.colorsColor,
+        stylesColor: stylesColor ?? this.stylesColor,
+        controlsColor: controlsColor ?? this.controlsColor,
+        inputsColor: inputsColor ?? this.inputsColor,
+        barsColor: barsColor ?? this.barsColor,
+        navigationColor: navigationColor ?? this.navigationColor,
+        surfacesColor: surfacesColor ?? this.surfacesColor,
+        textsColor: textsColor ?? this.textsColor,
+      );
+
+  /// Must override the lerp method.
+  @override
+  TopicTheme lerp(ThemeExtension<TopicTheme>? other, double t) {
+    if (other is! TopicTheme) {
+      return this;
+    }
+    return TopicTheme(
+      generalColor: Color.lerp(generalColor, other.generalColor, t),
+      colorsColor: Color.lerp(colorsColor, other.colorsColor, t),
+      stylesColor: Color.lerp(stylesColor, other.stylesColor, t),
+      controlsColor: Color.lerp(controlsColor, other.controlsColor, t),
+      inputsColor: Color.lerp(inputsColor, other.inputsColor, t),
+      barsColor: Color.lerp(barsColor, other.barsColor, t),
+      navigationColor: Color.lerp(navigationColor, other.navigationColor, t),
+      surfacesColor: Color.lerp(surfacesColor, other.surfacesColor, t),
+      textsColor: Color.lerp(textsColor, other.textsColor, t),
+    );
+  }
+
+  /// Code view theme colors for light mode.
+  static const TopicTheme light = TopicTheme(
+    generalColor: Color(0xFF262649),
+    colorsColor: Color(0xFF910CAD),
+    stylesColor: Color(0xFF005191),
+    controlsColor: Color(0xFFAF0000),
+    inputsColor: Color(0xFFCB6601),
+    barsColor: Color(0xFF007C4C),
+    navigationColor: Color(0xFF0F7300),
+    surfacesColor: Color(0xFF02381F),
+    textsColor: Color(0xFF031E79),
+  );
+
+  /// Code view theme colors for dark mode.
+  static const TopicTheme dark = TopicTheme(
+    generalColor: Color(0xFFF1F1F5),
+    colorsColor: Color(0xFFF8E9DF),
+    stylesColor: Color(0xFFE1E6EA),
+    controlsColor: Color(0xFFF5E9E9),
+    inputsColor: Color(0xFFF1E5D3),
+    barsColor: Color(0xFFE3EAC9),
+    navigationColor: Color(0xFFD4EACF),
+    surfacesColor: Color(0xFFE4EEE9),
+    textsColor: Color(0xFFD8E0F6),
+  );
+
+  /// A harmonized code view color theme, based on [brightness] where colors
+  /// are harmonized towards a given [sourceColor].
+  factory TopicTheme.harmonized(Color sourceColor, Brightness brightness) {
+    final int sourceColorValue = sourceColor.value;
+
+    // Fallback color value that can be used for all colors in both modes.
+    const int fallbackValue = 0xFF1565C0; // Bright dark blue
+    // Use the topic theme for target brightness.
+    final TopicTheme topicTheme = brightness == Brightness.light ? light : dark;
+
+    // MaterialColorUtilities Blend function is used to harmonize each color
+    // towards the source color hue. This way the topic theme will fit better
+    // with the overall ColorScheme. This also works well if the source color
+    // for the ColorScheme was extracted from OS theme colors or a device
+    // wallpaper, or any image and then created with ColorScheme.fromSeed.
+    return TopicTheme(
+      generalColor: Color(
+        Blend.harmonize(
+          // As used used in this app we could bang the color, instead of using
+          // a fallback, but this is safer generally.
+          topicTheme.generalColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      colorsColor: Color(
+        Blend.harmonize(
+          topicTheme.colorsColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      stylesColor: Color(
+        Blend.harmonize(
+          topicTheme.stylesColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      controlsColor: Color(
+        Blend.harmonize(
+          topicTheme.controlsColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      inputsColor: Color(
+        Blend.harmonize(
+          topicTheme.inputsColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      barsColor: Color(
+        Blend.harmonize(
+          topicTheme.barsColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      navigationColor: Color(
+        Blend.harmonize(
+          topicTheme.navigationColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      surfacesColor: Color(
+        Blend.harmonize(
+          topicTheme.surfacesColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      textsColor: Color(
+        Blend.harmonize(
+          topicTheme.textsColor?.value ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+    );
+  }
+}

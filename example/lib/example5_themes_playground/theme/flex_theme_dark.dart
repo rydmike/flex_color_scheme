@@ -6,6 +6,7 @@ import '../../shared/const/app_color.dart';
 import '../../shared/const/flex_tone.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
+import 'topic_theme.dart';
 
 /// This function calls [flexColorSchemeDark] and uses
 /// [FlexColorScheme.toTheme] to return the [ThemeData] object represented by
@@ -441,9 +442,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
-    // Add a custom theme extension with light mode code highlight colors.
+    // Add a custom theme extension with light mode code highlight colors and
+    // dark mode topic colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(source, Brightness.dark),
+      TopicTheme.harmonized(source, Brightness.dark),
     },
   );
 }

@@ -29,6 +29,7 @@ class HeaderCard extends StatelessWidget {
     this.trailing,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
+    this.headingColor,
     this.elevation = 0,
     this.enabled = true,
     this.isOpen = true,
@@ -91,6 +92,12 @@ class HeaderCard extends StatelessWidget {
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? headerPadding;
 
+  /// The background color for the header.
+  ///
+  /// If not provided, one that is slightly off from card color
+  /// background color is computed.
+  final Color? headingColor;
+
   /// Elevation of the header card.
   ///
   /// Default to 0.
@@ -144,8 +151,10 @@ class HeaderCard extends StatelessWidget {
     // if it does not have correct ColorScheme assignment in the theme.
     final Color cardColor = color ?? theme.cardColor;
     // Compute a header color with fixed primary blend from the card color,
-    final Color headerColor = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+    // if one was not provided
+    final Color headerColor = headingColor ??
+        Color.alphaBlend(
+            scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
 
     final bool useHeading =
         title != null || subtitle != null || leading != null;
