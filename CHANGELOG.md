@@ -33,6 +33,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Added a switch to show TextStyle details to TextTheme presentations.
 * Added font NotoSans Medium (W500) to assets.
 * On theme showcase and icon button panels, show both tappable and toggleable `IconButton` styles.
+* Theme topic selector uses group color on icon and selector that are harmonized to primary color. 
 
 **CHANGE**
 

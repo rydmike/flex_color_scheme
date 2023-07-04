@@ -66,6 +66,7 @@ class ThemePanel extends StatelessWidget {
       EffectiveColors(controller),
       ComponentSettings(controller),
       ShapeRadiusSettings(controller),
+      const WidgetShowcase(),
       ButtonsSettings(controller),
       SegmentedButtonsSettings(controller),
       FabChipSettings(controller),
@@ -91,7 +92,6 @@ class ThemePanel extends StatelessWidget {
       ListTileSettings(controller),
       TextThemeSettings(controller),
       PrimaryTextThemeSettings(controller),
-      const WidgetShowcase(),
       AndroidNavigationBarSettings(controller),
       PageExamples(controller: controller),
     ].elementAt(page);

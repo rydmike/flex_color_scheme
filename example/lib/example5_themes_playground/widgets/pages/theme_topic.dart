@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/topic_theme.dart';
+
 // ignore_for_file: comment_references
 
-/// TopicGroups groups ThemeTopics into related groups.
+/// Used to groups ThemeTopics into related groups.
 enum TopicGroup {
   general,
-  color,
+  colors,
   style,
   controls,
-  input,
-  appbar,
+  inputs,
+  bars,
   navigation,
   surfaces,
-  text,
+  texts;
+
+  Color color(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    // Get harmonized Topic Theme colors. Fallback used if not setup in theme.
+    final TopicTheme colors = theme.extension<TopicTheme>() ??
+        (isLight ? TopicTheme.light : TopicTheme.dark);
+
+    switch (this) {
+      case TopicGroup.general:
+        return colors.generalColor!;
+      case TopicGroup.colors:
+        return colors.colorsColor!;
+      case TopicGroup.style:
+        return colors.stylesColor!;
+      case TopicGroup.controls:
+        return colors.controlsColor!;
+      case TopicGroup.inputs:
+        return colors.inputsColor!;
+      case TopicGroup.bars:
+        return colors.barsColor!;
+      case TopicGroup.navigation:
+        return colors.navigationColor!;
+      case TopicGroup.surfaces:
+        return colors.surfacesColor!;
+      case TopicGroup.texts:
+        return colors.textsColor!;
+    }
+  }
 }
 
 /// A class to hold the heading data we need to display in our [ThemePanel]
@@ -40,6 +71,7 @@ class ThemeTopic {
 
 const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Introduction',
     icon: Icons.info_outlined,
     info: 'Use Themes Playground to try features and themes '
@@ -47,6 +79,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'with surface blends and try Material 3\n',
   ),
   ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Premade designs',
     buttonLabel: 'Premade\ndesigns',
     icon: Icons.design_services_outlined,
@@ -65,6 +98,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'and Material components.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Theme simulator',
     buttonLabel: 'Theme\nsimulator',
     icon: Icons.phone_iphone,
@@ -73,6 +107,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'modify the look and feel of included demo apps.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Theme code',
     buttonLabel: 'Theme\ncode',
     icon: Icons.integration_instructions_outlined,
@@ -89,6 +124,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'rows of code to reproduce with the vanilla ThemeData factory.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.colors,
     heading: 'Theme colors',
     buttonLabel: 'Theme\ncolors',
     icon: Icons.palette_outlined,
@@ -97,6 +133,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'point for your own custom colors.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.colors,
     heading: 'Seeded ColorScheme',
     buttonLabel: 'Seeded\nColorScheme',
     icon: Icons.colorize_outlined,
@@ -112,6 +149,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'When using custom colors, you can decide if you do so or not.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.colors,
     heading: 'Surface blends',
     buttonLabel: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
@@ -132,6 +170,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'light and dark mode are often a part of the desired design.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.colors,
     heading: 'Effective colors',
     buttonLabel: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
@@ -142,6 +181,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'be aware of.',
   ),
   ThemeTopic(
+    group: TopicGroup.style,
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
@@ -155,6 +195,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'fix in later versions.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.style,
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
     icon: Icons.rounded_corner_outlined,
@@ -164,6 +205,17 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'border radius on selected platforms.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.style,
+    heading: 'Widget showcase',
+    buttonLabel: 'Widget\nshowcase',
+    icon: Icons.flutter_dash,
+    info: 'This is a presentation of Flutter Material UI widgets/components '
+        'in one large panel, of how they look when the current theme is '
+        'applied to them. '
+        'To style them use component theme settings panels for each widget.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Buttons',
     buttonLabel: 'Buttons',
     icon: Icons.crop_16_9_outlined,
@@ -177,6 +229,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'With all the styles offered, they often also work well as they are.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Segmented buttons',
     buttonLabel: 'Segmented\nbuttons',
     icon: Icons.view_week_outlined,
@@ -194,6 +247,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'segment becomes large enough to fit the largest item.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'FloatingActionButton and Chip',
     buttonLabel: 'FAB and\nChip',
     icon: Icons.add_circle,
@@ -212,6 +266,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'retaining some M2 style influences.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Switch, CheckBox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
@@ -223,6 +278,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'Radio buttons allow users to select one option from a set.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Icon, IconButton and CircleAvatar',
     buttonLabel: 'Icon\nAvatar',
     icon: Icons.insert_emoticon,
@@ -231,6 +287,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'initials or a user avatar.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Tooltip and Progress Indicators',
     buttonLabel: 'Tooltip\nProgress',
     icon: Icons.live_help_outlined,
@@ -240,6 +297,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'submitting a form.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.controls,
     heading: 'Slider',
     buttonLabel: 'Slider',
     icon: Icons.tune,
@@ -253,6 +311,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'its classes.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.inputs,
     heading: 'TextField',
     icon: Icons.pin_outlined,
     info: 'Text fields allow users to enter text into a UI. They typically '
@@ -261,6 +320,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'legacy and MaterialState properties.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.inputs,
     heading: 'PopupMenu and Dropdowns',
     buttonLabel: 'Popup\nDropdowns',
     icon: Icons.arrow_drop_down_circle_outlined,
@@ -272,6 +332,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'components, like MenuAnchor, DropdownMenu and MenuBar.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.inputs,
     heading: 'DropdownMenu, MenuAnchor and MenuBar',
     buttonLabel: 'Menus',
     icon: Icons.segment,
@@ -282,6 +343,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'legacy widgets.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.bars,
     heading: 'AppBar',
     buttonLabel: 'AppBar',
     icon: Icons.web_asset_outlined,
@@ -293,6 +355,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'colors with their surfaceTint and blends, or use a custom color.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.bars,
     heading: 'TabBar',
     icon: Icons.tab_outlined,
     info: 'Tabs organize content across different screens, data sets, and '
@@ -311,6 +374,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'AppBar theme.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.bars,
     heading: 'BottomAppBar and SearchBar',
     buttonLabel: 'BottomAppBar\nSearchBar',
     icon: Icons.search,
@@ -320,6 +384,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'other forms of navigation.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.navigation,
     heading: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavBar',
     icon: Icons.video_label,
@@ -335,6 +400,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'elevation 0.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.navigation,
     heading: 'NavigationBar',
     buttonLabel: 'Navigation\nBar',
     icon: Icons.call_to_action,
@@ -351,6 +417,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'background is same as M3 default.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.navigation,
     heading: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
     icon: Icons.view_sidebar_rounded,
@@ -362,6 +429,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'FlexColorScheme sub-theme default is colorScheme.background.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.navigation,
     heading: 'NavigationDrawer',
     buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
@@ -374,11 +442,13 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'component sub-themes use surface as default color in both modes.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.surfaces,
     heading: 'Dialogs',
     icon: Icons.branding_watermark_outlined,
     info: 'Dialogs provide important prompts in a user flow.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.surfaces,
     heading: 'BottomSheet',
     buttonLabel: 'BottomSheet',
     icon: Icons.call_to_action_outlined,
@@ -386,6 +456,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'anchored to the bottom of the screen.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.surfaces,
     heading: 'SnackBar and MaterialBanner',
     buttonLabel: 'SnackBar\nBanner',
     icon: Icons.featured_play_list_outlined,
@@ -397,6 +468,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'topics related to content in the application.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.surfaces,
     heading: 'Card',
     buttonLabel: 'Card',
     icon: Icons.picture_in_picture_alt_outlined,
@@ -404,6 +476,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'information about a subject.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.surfaces,
     heading: 'Material',
     buttonLabel: 'Material',
     icon: Icons.square,
@@ -413,6 +486,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'and ink effects below its children.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.texts,
     heading: 'ListTile',
     buttonLabel: 'ListTile',
     icon: Icons.dns_outlined,
@@ -420,6 +494,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'vertical indexes of text or images.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.texts,
     heading: 'TextTheme',
     buttonLabel: 'Text\nTheme',
     icon: Icons.font_download_outlined,
@@ -447,6 +522,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'extensions.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.texts,
     heading: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
     icon: Icons.font_download,
@@ -457,13 +533,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'makes it always work in dark mode as well.\n',
   ),
   ThemeTopic(
-    heading: 'Widget showcase',
-    buttonLabel: 'Widget\nshowcase',
-    icon: Icons.flutter_dash,
-    info: 'This page presents most Flutter Material UI widgets, in one large '
-        'page, as they look when the current theme is applied on them.\n',
-  ),
-  ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Android system navigation bar',
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
@@ -480,6 +550,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'by FlexColorColorScheme.\n',
   ),
   ThemeTopic(
+    group: TopicGroup.general,
     heading: 'Page examples',
     buttonLabel: 'Page\nexamples',
     icon: Icons.article_outlined,
