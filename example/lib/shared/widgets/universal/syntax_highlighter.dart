@@ -74,6 +74,11 @@ class SyntaxHighlighterStyle {
     // ThemeData extension, is that its harmonization function result is color
     // lerp animated, in sync with the rest of the ThemeData color changes
     // automatically as you change theme in the app, as it should be.
+    // Fallback is only used if CodeTheme is not setup in app's ThemeData.
+    // This will not happen in this app. This kind of fallback would be to
+    // defaults you would use if you had a package that provided a theme
+    // extension, and it would fallback to defaults like this internally if
+    // it had not been added by user to ThemeData as an extension.
     final CodeTheme colors = theme.extension<CodeTheme>() ??
         (isLight ? CodeTheme.light : CodeTheme.dark);
 
