@@ -381,7 +381,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ThemeTopic(
     group: TopicGroup.bars,
     heading: 'BottomAppBar and SearchBar',
-    buttonLabel: 'BottomAppBar\nSearchBar',
+    buttonLabel: 'BottomApp \nSearchBar',
     icon: Icons.search,
     info: 'A bottom app bar displays navigation and key actions at the '
         'bottom of mobile screens. SearchBar allows users to enter a keyword '
