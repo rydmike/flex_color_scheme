@@ -20,9 +20,8 @@ class AppExampleLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
-      body: const LoginColumn(),
+    return const Scaffold(
+      body: LoginColumn(),
     );
   }
 }
