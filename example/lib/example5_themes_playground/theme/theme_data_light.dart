@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -69,9 +70,11 @@ ThemeData themeDataLight(ThemeController controller) {
             platform: controller.platform ?? defaultTargetPlatform)
         : Typography.material2018(
             platform: controller.platform ?? defaultTargetPlatform),
-    // Add a custom theme extension with light mode code highlight colors.
+    // Add a custom theme extension with light mode code highlight colors and
+    // light mode topic colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(colorScheme.surfaceTint, Brightness.light),
+      TopicTheme.harmonized(colorScheme.surfaceTint, Brightness.light),
     },
     // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
     // See: https://github.com/flutter/flutter/issues/123507

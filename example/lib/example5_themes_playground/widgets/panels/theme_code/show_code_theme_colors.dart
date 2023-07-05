@@ -43,7 +43,13 @@ class ShowCodeThemeColors extends StatelessWidget {
     //
     // While the theme extension [CodeTheme] in this example is based on same
     // colors as it static light and dark mode, it is also color harmonized to
-    // source color. In this case theme primary color.
+    // source color. In this case theme surface tint color, which typically
+    // equals primary color.
+    // Fallback is only used if CodeTheme is not setup in app's ThemeData.
+    // This will not happen in this app. This kind of fallback would be to
+    // defaults you would use if you had a package that provided a theme
+    // extension, and it would fallback to defaults like this internally if
+    // it had not been added by user to ThemeData as an extension.
     final CodeTheme colors = theme.extension<CodeTheme>() ??
         (isDark ? CodeTheme.dark : CodeTheme.light);
 

@@ -5,6 +5,7 @@ import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
 import 'flex_theme_dark.dart';
+import 'topic_theme.dart';
 
 // ignore_for_file: comment_references
 
@@ -69,9 +70,11 @@ ThemeData themeDataDark(ThemeController controller) {
             platform: controller.platform ?? defaultTargetPlatform)
         : Typography.material2018(
             platform: controller.platform ?? defaultTargetPlatform),
-    // Add a custom theme extension with light mode code highlight colors.
+    // Add a custom theme extension with light mode code highlight colors and
+    // dark mode topic colors.
     extensions: <ThemeExtension<dynamic>>{
       CodeTheme.harmonized(colorScheme.surfaceTint, Brightness.dark),
+      TopicTheme.harmonized(colorScheme.surfaceTint, Brightness.dark),
     },
     // TODO(rydmike): Remove Drawer workaround when Flutter SDK has a fix.
     // See: https://github.com/flutter/flutter/issues/123507
