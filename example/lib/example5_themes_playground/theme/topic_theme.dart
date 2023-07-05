@@ -68,7 +68,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     );
   }
 
-  /// Code view theme colors for light mode.
+  /// Topic theme colors for light mode.
   static const TopicTheme light = TopicTheme(
     generalColor: Color(0xFF262654),
     colorsColor: Color(0xFF910CAD),
@@ -81,9 +81,9 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     textsColor: Color(0xFF031E79),
   );
 
-  /// Code view theme colors for dark mode.
+  /// Topic theme colors for dark mode.
   static const TopicTheme dark = TopicTheme(
-    generalColor: Color(0xFFE4E4FF),
+    generalColor: Color(0xFFDBDBFC),
     colorsColor: Color(0xFFE9B2F6),
     componentsColor: Color(0xFF6FB1E7),
     controlsColor: Color(0xFFF18E8E),
@@ -94,12 +94,13 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     textsColor: Color(0xFF7583B6),
   );
 
-  /// A harmonized code view color theme, based on [brightness] where colors
+  /// A color harmonized topic theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
   factory TopicTheme.harmonized(Color sourceColor, Brightness brightness) {
     final int sourceColorValue = sourceColor.value;
 
     // Fallback color value that can be used for all colors in both modes.
+    // This use case should never happen when TopicTheme is setup correctly.
     const int fallbackValue = 0xFF1565C0; // Bright dark blue
     // Use the topic theme for target brightness.
     final TopicTheme topicTheme = brightness == Brightness.light ? light : dark;

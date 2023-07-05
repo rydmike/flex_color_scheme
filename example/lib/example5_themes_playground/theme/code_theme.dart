@@ -93,7 +93,9 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     final int sourceColorValue = sourceColor.value;
 
     // Fallback color value that can be used for all colors in both modes.
+    // This use case should never happen when CodeTheme is setup correctly.
     const int fallbackValue = 0xFF1565C0; // Bright dark blue
+
     // Use the code theme for target brightness.
     final CodeTheme codeTheme = brightness == Brightness.light ? light : dark;
 

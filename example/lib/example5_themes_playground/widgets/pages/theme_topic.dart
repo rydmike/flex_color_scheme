@@ -19,7 +19,12 @@ enum TopicGroup {
   Color color(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    // Get harmonized Topic Theme colors. Fallback used if not setup in theme.
+    // Get harmonized Topic Theme colors.
+    // Fallback is only used if TopicTheme is not setup in app's ThemeData.
+    // This will not happen in this app. This kind of fallback would be to
+    // defaults you would use if you had a package that provided a theme
+    // extension, and it would fallback to defaults like this internally if
+    // it had not been added by user to ThemeData as an extension.
     final TopicTheme colors = theme.extension<TopicTheme>() ??
         (isLight ? TopicTheme.light : TopicTheme.dark);
 
