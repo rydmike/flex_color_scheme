@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../const/app.dart';
 import '../../const/app_images.dart';
 
 /// Used to show the current theme on Material widgets.
@@ -4062,8 +4063,46 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
   }
 }
 
-class MaterialBannerShowcase extends StatelessWidget {
-  const MaterialBannerShowcase({super.key});
+class MaterialBannerShowcase extends StatefulWidget {
+  const MaterialBannerShowcase({super.key, this.enableShowBanner = false});
+
+  final bool enableShowBanner;
+
+  @override
+  State<MaterialBannerShowcase> createState() => _MaterialBannerShowcaseState();
+}
+
+class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
+  int showCount = 0;
+
+  Future<void> _showDemoMaterialBanner(
+      BuildContext context, bool twoButtons, String message) async {
+    App.rootMessengerKey.currentState!.showMaterialBanner(
+      // ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        // elevation: 3,
+        content: Text(message),
+        leading: const Icon(Icons.add_alert),
+        actions: <Widget>[
+          if (twoButtons)
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
+                // ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+              },
+            ),
+          TextButton(
+            child: const Text('Dismiss'),
+            onPressed: () {
+              App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
+              // ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -4077,15 +4116,48 @@ class MaterialBannerShowcase extends StatelessWidget {
             leading: const Icon(Icons.agriculture_outlined),
             actions: <Widget>[
               TextButton(
-                child: const Text('OPEN'),
+                child: const Text('Open'),
                 onPressed: () {},
               ),
               TextButton(
-                child: const Text('DISMISS'),
+                child: const Text('Dismiss'),
                 onPressed: () {},
               ),
             ],
           ),
+          const SizedBox(height: 8),
+          if (widget.enableShowBanner)
+            Center(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  TextButton(
+                    child: const Text(
+                      'Show MaterialBanner',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      showCount++;
+                      unawaited(_showDemoMaterialBanner(
+                          context, false, 'A MaterialBanner ($showCount)'));
+                    },
+                  ),
+                  TextButton(
+                    child: const Text(
+                      'Show two button MaterialBanner',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      showCount++;
+                      unawaited(_showDemoMaterialBanner(context, true,
+                          'A MaterialBanner with two actions ($showCount)'));
+                    },
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );

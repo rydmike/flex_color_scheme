@@ -134,6 +134,11 @@ class App {
     return edgeInsetsBigDesktop;
   }
 
+  // A global root Scaffold Messenger key, use to read scaffold state without
+  // context.
+  static final GlobalKey<ScaffoldMessengerState> rootMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   /// The height when we want to pin the panel or color selector, instead of
   /// letting it float and snap back.
   static const double pinnedSelector = 1090;
