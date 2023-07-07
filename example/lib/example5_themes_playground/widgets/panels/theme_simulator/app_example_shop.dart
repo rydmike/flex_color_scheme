@@ -40,8 +40,13 @@ class _AppExampleShopState extends State<AppExampleShop> {
 
   @override
   Widget build(BuildContext context) {
-    const EdgeInsets listViewPadding =
-        EdgeInsets.symmetric(horizontal: 16, vertical: 24);
+    final EdgeInsets safeArea = MediaQuery.viewPaddingOf(context);
+    final EdgeInsetsDirectional listViewPadding = EdgeInsetsDirectional.only(
+      start: 16,
+      end: 16,
+      top: 16 + safeArea.top + kToolbarHeight,
+      bottom: 16,
+    );
     List<Widget> searchResultTiles = <Widget>[];
     if (searchString.isNotEmpty) {
       searchResultTiles = products
@@ -56,32 +61,25 @@ class _AppExampleShopState extends State<AppExampleShop> {
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: theme.scaffoldBackgroundColor,
-          title: SearchBar(
-            onChanged: setSearchString,
-          ),
-          actions: <Widget>[
-            Theme(
-                data: theme.copyWith(
-                  iconTheme: IconThemeData(color: theme.colorScheme.onSurface),
-                ),
-                child: const Row(
-                  children: <Widget>[
-                    CartAppBarAction(),
-                    ShopAbout(useRootNavigator: false)
-                  ],
-                )),
+          title: SearchBar(onChanged: setSearchString),
+          actions: const <Widget>[
+            CartAppBarAction(),
+            ShopAbout(useRootNavigator: false),
           ],
         ),
         body: SafeArea(
+          top: false,
+          bottom: false,
           child: searchString.isNotEmpty
               ? GridView.count(
                   padding: listViewPadding,
                   crossAxisCount: 2,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 24,
-                  childAspectRatio: .70,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: .75,
                   children: searchResultTiles,
                 )
               : ListView(
@@ -279,11 +277,7 @@ class _ProductScreenState extends State<ProductScreen> {
         <Widget>[];
 
     return Scaffold(
-      appBar: AppBar(
-        actions: const <Widget>[
-          CartAppBarAction(),
-        ],
-      ),
+      appBar: AppBar(actions: const <Widget>[CartAppBarAction()]),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -406,12 +400,7 @@ class CallToActionButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: minSize,
       ),
-      child: Text(
-        labelText,
-        style: const TextStyle(
-          fontSize: 16,
-        ),
-      ),
+      child: Text(labelText, style: const TextStyle(fontSize: 16)),
     );
   }
 }
@@ -442,6 +431,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets safeArea = MediaQuery.viewPaddingOf(context);
+    final EdgeInsetsDirectional listViewPadding = EdgeInsetsDirectional.only(
+      start: 0,
+      end: 0,
+      top: 16 + safeArea.top + kToolbarHeight,
+      bottom: 16,
+    );
     final List<ProductRow> productRows = category.selections
         .map((String s) => ProductRow(
               productType: s,
@@ -452,6 +448,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ))
         .toList();
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
         centerTitle: true,
         title: Text(category.title),
@@ -460,15 +458,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ],
       ),
       body: SafeArea(
+        top: false,
+        bottom: false,
         child: ScrollConfiguration(
           behavior: const DragScrollBehavior(),
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(vertical: 18),
+            padding: listViewPadding,
             itemCount: productRows.length,
             itemBuilder: (_, int index) => productRows[index],
-            separatorBuilder: (_, int index) => const SizedBox(
-              height: 18,
-            ),
+            separatorBuilder: (_, int index) => const SizedBox(height: 16),
           ),
         ),
       ),
@@ -494,27 +492,21 @@ class ProductRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   productType,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
+              const SizedBox(height: 8),
               SizedBox(
-                height: 210,
+                height: 222,
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   itemCount: productTiles.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, int index) => productTiles[index],
-                  separatorBuilder: (_, int index) => const SizedBox(
-                    width: 24,
-                  ),
+                  separatorBuilder: (_, int index) => const SizedBox(width: 8),
                 ),
               ),
             ],
@@ -543,34 +535,52 @@ class ProductTile extends StatelessWidget {
             unawaited(SystemSound.play(SystemSoundType.click));
             openContainer();
           },
-          child: SizedBox(
-            width: 150,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                ProductImage(product: product),
-                const SizedBox(height: 8),
-                Text(
-                  product.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.titleSmall,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: theme.useMaterial3 ? 0.4 : 1.5,
+              margin: EdgeInsets.zero,
+              color: theme.colorScheme.surface,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shadowColor: theme.colorScheme.primary,
+              child: SizedBox(
+                width: 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ProductImage(product: product),
+                    const SizedBox(height: 4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Center(
+                        child: Text(
+                          product.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.titleSmall,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Center(
+                        child: Text(
+                          '\$${product.cost}',
+                          style: theme.textTheme.titleMedium!.copyWith(
+                              color: theme.colorScheme.tertiary,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  '\$${product.cost}',
-                  style: theme.textTheme.titleMedium!.copyWith(
-                      color: theme.colorScheme.tertiary,
-                      fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-              ],
+              ),
             ),
           ),
         );
       },
       openBuilder: (BuildContext context, void Function() action) =>
           ProductScreen(product: product),
-      // ),
     );
   }
 }
@@ -588,20 +598,15 @@ class ProductImage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color background = isLight
-        ? theme.scaffoldBackgroundColor
-        : theme.colorScheme.inverseSurface;
+        ? theme.colorScheme.surfaceVariant
+        : theme.colorScheme.onSurface;
     final Color iconColor = isLight
         ? theme.colorScheme.secondary.withOpacity(0.8)
         : theme.colorScheme.secondaryContainer.withOpacity(0.8);
     return AspectRatio(
       aspectRatio: .95,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: background,
-        ),
-        clipBehavior: Clip.hardEdge,
+      child: ColoredBox(
+        color: background,
         child: Image.network(
           product.imageUrls.first,
           loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) =>
@@ -615,6 +620,7 @@ class ProductImage extends StatelessWidget {
           ),
           cacheHeight: 500,
           color: background,
+          fit: BoxFit.cover,
           colorBlendMode: BlendMode.multiply,
         ),
       ),
@@ -651,10 +657,14 @@ class _CartScreenState extends State<CartScreen> {
         .map(
           (OrderItem item) => Row(
             children: <Widget>[
-              SizedBox(
-                width: 125,
-                child: ProductImage(
-                  product: item.product,
+              Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                child: SizedBox(
+                  width: 125,
+                  child: ProductImage(
+                    product: item.product,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -689,8 +699,16 @@ class _CartScreenState extends State<CartScreen> {
           ),
         )
         .toList();
-
+    final EdgeInsets safeArea = MediaQuery.viewPaddingOf(context);
+    final EdgeInsetsDirectional listViewPadding = EdgeInsetsDirectional.only(
+      start: 16,
+      end: 16,
+      top: 16 + safeArea.top + kToolbarHeight,
+      bottom: 16,
+    );
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
         centerTitle: true,
         title: Column(
@@ -701,57 +719,74 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          if (orderItemRows.isNotEmpty)
-            Expanded(
-              child: ScrollConfiguration(
-                behavior: const DragScrollBehavior(),
-                child: ListView.separated(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  itemCount: orderItemRows.length,
-                  itemBuilder: (_, int index) => orderItemRows[index],
-                  separatorBuilder: (_, int index) => const SizedBox(
-                    height: 16,
+      body: SafeArea(
+        top: false,
+        bottom: false,
+        left: false,
+        right: false,
+        child: Column(
+          children: <Widget>[
+            if (orderItemRows.isNotEmpty)
+              Expanded(
+                child: ScrollConfiguration(
+                  behavior: const DragScrollBehavior(),
+                  child: SafeArea(
+                    top: false,
+                    bottom: false,
+                    left: true,
+                    right: true,
+                    child: ListView.separated(
+                      padding: listViewPadding,
+                      itemCount: orderItemRows.length,
+                      itemBuilder: (_, int index) => orderItemRows[index],
+                      separatorBuilder: (_, int index) => const SizedBox(
+                        height: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            else
+              const Expanded(child: Center(child: Text('Your cart is empty'))),
+            Material(
+              elevation: 8,
+              color: theme.colorScheme.surface,
+              surfaceTintColor: theme.colorScheme.surfaceTint,
+              child: SafeArea(
+                top: false,
+                bottom: false,
+                left: true,
+                right: true,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Total',
+                            style: theme.textTheme.bodySmall,
+                          ),
+                          Text(
+                            '\$${cart.totalCost.toStringAsFixed(2)}',
+                            style: theme.textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                      CallToActionButton(
+                        onPressed: () {},
+                        labelText: 'Check Out',
+                        minSize: const Size(220, 45),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
-          else
-            const Expanded(
-              child: Center(
-                child: Text('Your cart is empty'),
-              ),
             ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Total',
-                      style: theme.textTheme.bodySmall,
-                    ),
-                    Text(
-                      '\$${cart.totalCost.toStringAsFixed(2)}',
-                      style: theme.textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-                CallToActionButton(
-                  onPressed: () {},
-                  labelText: 'Check Out',
-                  minSize: const Size(220, 45),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -839,9 +874,7 @@ class _SearchBarState extends State<SearchBar> {
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
         isDense: true,
-        prefixIcon: const Icon(
-          Icons.search,
-        ),
+        prefixIcon: const Icon(Icons.search),
         hintText: 'Search...',
         suffixIcon: IconButton(
           constraints: const BoxConstraints(
@@ -849,9 +882,7 @@ class _SearchBarState extends State<SearchBar> {
             minWidth: 36,
           ),
           splashRadius: 24,
-          icon: const Icon(
-            Icons.clear,
-          ),
+          icon: const Icon(Icons.clear),
           onPressed: () {
             _textEditingController.clear();
             widget.onChanged(_textEditingController.text);
@@ -873,9 +904,7 @@ class Category {
 void _pushScreen({required BuildContext context, required Widget screen}) {
   unawaited(Navigator.push(
     context,
-    MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) => screen,
-    ),
+    MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
   ));
 }
 

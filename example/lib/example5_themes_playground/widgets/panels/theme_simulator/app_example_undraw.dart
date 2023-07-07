@@ -24,7 +24,7 @@ class AppExampleUndraw extends StatefulWidget {
 }
 
 class _AppExampleUndrawState extends State<AppExampleUndraw> {
-  static const int _maxTiles = 1000;
+  static const int _maxTiles = 500;
   late List<MaterialColor> imageColors;
 
   @override
@@ -42,9 +42,13 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets safeArea = MediaQuery.viewPaddingOf(context);
+
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
         appBar: AppBar(
           title: const Text('Undraw'),
           actions: const <Widget>[UndrawAbout(useRootNavigator: false)],
@@ -52,6 +56,8 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
         drawer: AppExampleDrawer(controller: widget.controller),
         bottomNavigationBar: const AppExampleNavigationBar(),
         body: SafeArea(
+          top: false,
+          bottom: false,
           child: BreakpointBuilder(
             type: BreakType.large,
             builder: (BuildContext context, Breakpoint breakpoint) {
@@ -59,8 +65,11 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                 primary: false,
                 slivers: <Widget>[
                   SliverPadding(
-                    padding: const EdgeInsetsDirectional.only(
-                        top: 16, start: 16, end: 16),
+                    padding: EdgeInsetsDirectional.only(
+                      top: 16 + safeArea.top + kToolbarHeight,
+                      start: 16,
+                      end: 16,
+                    ),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate(
                         <Widget>[
@@ -100,7 +109,8 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                     ),
                   ),
                   SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsetsDirectional.only(
+                        start: 16, end: 16, bottom: 90 + safeArea.bottom),
                     sliver: SliverGrid(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: breakpoint.columns ~/ 2,

@@ -138,7 +138,9 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
                 showNavBottomBar: showNavBarExample,
                 scaffoldKey: scaffoldKey,
                 showSecondList: showMediumSizeLayout || showLargeSizeLayout),
-            two: SecondComponentList(scaffoldKey: scaffoldKey),
+            two: SecondComponentList(
+                scaffoldKey: scaffoldKey,
+                showSecondList: showMediumSizeLayout || showLargeSizeLayout),
           ),
         );
       case ScreenSelected.color:
@@ -386,6 +388,8 @@ class _NavigationTransitionState extends State<NavigationTransition> {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       key: widget.scaffoldKey,
       appBar: widget.appBar,
       body: Row(
@@ -551,15 +555,12 @@ class _BarTransition extends State<BarTransition> {
   @override
   Widget build(BuildContext context) {
     return ClipRect(
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: widget.backgroundColor),
-        child: Align(
-          alignment: Alignment.topLeft,
-          heightFactor: heightAnimation.value,
-          child: FractionalTranslation(
-            translation: offsetAnimation.value,
-            child: widget.child,
-          ),
+      child: Align(
+        alignment: Alignment.topLeft,
+        heightFactor: heightAnimation.value,
+        child: FractionalTranslation(
+          translation: offsetAnimation.value,
+          child: widget.child,
         ),
       ),
     );

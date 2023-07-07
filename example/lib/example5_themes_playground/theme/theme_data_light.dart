@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +5,7 @@ import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
 import 'code_theme.dart';
 import 'flex_theme_light.dart';
+import 'topic_theme.dart';
 
 // ignore_for_file: comment_references
 

@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../../shared/utils/app_scroll_behavior.dart';
+
 const SizedBox rowDivider = SizedBox(width: 20);
 const SizedBox colDivider = SizedBox(height: 10);
 const double tinySpacing = 3.0;
@@ -26,27 +28,32 @@ class FirstComponentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
-      child: ListView(
-        padding: showSecondList
-            ? const EdgeInsetsDirectional.only(end: smallSpacing)
-            : EdgeInsets.zero,
-        children: <Widget>[
-          const Actions(),
-          colDivider,
-          const Communication(),
-          colDivider,
-          const Containment(),
-          if (!showSecondList) ...<Widget>[
+      child: ScrollConfiguration(
+        behavior: const DragScrollBehavior(),
+        child: ListView(
+          padding: showSecondList
+              ? EdgeInsetsDirectional.only(top: padding.top, end: smallSpacing)
+              : EdgeInsetsDirectional.only(
+                  top: padding.top, bottom: padding.bottom),
+          children: <Widget>[
+            const Actions(),
             colDivider,
-            Navigation(scaffoldKey: scaffoldKey),
+            const Communication(),
             colDivider,
-            const Selection(),
-            colDivider,
-            const TextInputs()
+            const Containment(),
+            if (!showSecondList) ...<Widget>[
+              colDivider,
+              Navigation(scaffoldKey: scaffoldKey),
+              colDivider,
+              const Selection(),
+              colDivider,
+              const TextInputs()
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -56,23 +63,32 @@ class SecondComponentList extends StatelessWidget {
   const SecondComponentList({
     super.key,
     required this.scaffoldKey,
+    required this.showSecondList,
   });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final bool showSecondList;
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
-      child: ListView(
-        padding: const EdgeInsetsDirectional.only(end: smallSpacing),
-        children: <Widget>[
-          Navigation(scaffoldKey: scaffoldKey),
-          colDivider,
-          const Selection(),
-          colDivider,
-          const TextInputs(),
-        ],
+      child: ScrollConfiguration(
+        behavior: const DragScrollBehavior(),
+        child: ListView(
+          padding: !showSecondList
+              ? const EdgeInsetsDirectional.only(end: smallSpacing)
+              : EdgeInsetsDirectional.only(
+                  top: padding.top, bottom: padding.bottom),
+          children: <Widget>[
+            Navigation(scaffoldKey: scaffoldKey),
+            colDivider,
+            const Selection(),
+            colDivider,
+            const TextInputs(),
+          ],
+        ),
       ),
     );
   }
@@ -1084,19 +1100,24 @@ class _NavigationBarsState extends State<NavigationBars> {
   Widget build(BuildContext context) {
     Widget navigationBar = Focus(
       autofocus: !(widget.isExampleBar || widget.isBadgeExample),
-      child: NavigationBar(
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (int index) {
-          setState(() {
-            selectedIndex = index;
-          });
-          if (!widget.isExampleBar) widget.onSelectItem!(index);
-        },
-        destinations: widget.isExampleBar && widget.isBadgeExample
-            ? barWithBadgeDestinations
-            : widget.isExampleBar
-                ? exampleBarDestinations
-                : appBarDestinations,
+      child: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        removeBottom: true,
+        child: NavigationBar(
+          selectedIndex: selectedIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              selectedIndex = index;
+            });
+            if (!widget.isExampleBar) widget.onSelectItem!(index);
+          },
+          destinations: widget.isExampleBar && widget.isBadgeExample
+              ? barWithBadgeDestinations
+              : widget.isExampleBar
+                  ? exampleBarDestinations
+                  : appBarDestinations,
+        ),
       ),
     );
 
@@ -1920,44 +1941,48 @@ class _NavigationDrawerSectionState extends State<NavigationDrawerSection> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return NavigationDrawer(
-      onDestinationSelected: (int selectedIndex) {
-        setState(() {
-          navDrawerIndex = selectedIndex;
-        });
-      },
-      selectedIndex: navDrawerIndex,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-          child: Text(
-            'Mail',
-            style: theme.textTheme.titleSmall,
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: NavigationDrawer(
+        onDestinationSelected: (int selectedIndex) {
+          setState(() {
+            navDrawerIndex = selectedIndex;
+          });
+        },
+        selectedIndex: navDrawerIndex,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+            child: Text(
+              'Mail',
+              style: theme.textTheme.titleSmall,
+            ),
           ),
-        ),
-        ...destinations.map((ExampleDestination destination) {
-          return NavigationDrawerDestination(
-            label: Text(destination.label),
-            icon: destination.icon,
-            selectedIcon: destination.selectedIcon,
-          );
-        }),
-        const Divider(indent: 28, endIndent: 28),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-          child: Text(
-            'Labels',
-            style: theme.textTheme.titleSmall,
+          ...destinations.map((ExampleDestination destination) {
+            return NavigationDrawerDestination(
+              label: Text(destination.label),
+              icon: destination.icon,
+              selectedIcon: destination.selectedIcon,
+            );
+          }),
+          const Divider(indent: 28, endIndent: 28),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+            child: Text(
+              'Labels',
+              style: theme.textTheme.titleSmall,
+            ),
           ),
-        ),
-        ...labelDestinations.map((ExampleDestination destination) {
-          return NavigationDrawerDestination(
-            label: Text(destination.label),
-            icon: destination.icon,
-            selectedIcon: destination.selectedIcon,
-          );
-        }),
-      ],
+          ...labelDestinations.map((ExampleDestination destination) {
+            return NavigationDrawerDestination(
+              label: Text(destination.label),
+              icon: destination.icon,
+              selectedIcon: destination.selectedIcon,
+            );
+          }),
+        ],
+      ),
     );
   }
 }
@@ -2012,26 +2037,30 @@ class _NavigationRailSectionState extends State<NavigationRailSection> {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationRail(
-      onDestinationSelected: (int selectedIndex) {
-        setState(() {
-          navRailIndex = selectedIndex;
-        });
-      },
-      elevation: 4,
-      leading: FloatingActionButton(
-          child: const Icon(Icons.create), onPressed: () {}),
-      groupAlignment: 0.0,
-      selectedIndex: navRailIndex,
-      destinations: <NavigationRailDestination>[
-        ...destinations.map((ExampleDestination destination) {
-          return NavigationRailDestination(
-            label: Text(destination.label),
-            icon: destination.icon,
-            selectedIcon: destination.selectedIcon,
-          );
-        }),
-      ],
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: NavigationRail(
+        onDestinationSelected: (int selectedIndex) {
+          setState(() {
+            navRailIndex = selectedIndex;
+          });
+        },
+        elevation: 4,
+        leading: FloatingActionButton(
+            child: const Icon(Icons.create), onPressed: () {}),
+        groupAlignment: 0.0,
+        selectedIndex: navRailIndex,
+        destinations: <NavigationRailDestination>[
+          ...destinations.map((ExampleDestination destination) {
+            return NavigationRailDestination(
+              label: Text(destination.label),
+              icon: destination.icon,
+              selectedIcon: destination.selectedIcon,
+            );
+          }),
+        ],
+      ),
     );
   }
 }
@@ -2057,29 +2086,33 @@ class _TabsState extends State<Tabs> with TickerProviderStateMixin {
     return ComponentDecoration(
       label: 'Tabs',
       tooltipMessage: 'Use TabBar',
-      child: SizedBox(
-        height: 80,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              controller: _tabController,
-              tabs: const <Widget>[
-                Tab(
-                  icon: Icon(Icons.videocam_outlined),
-                  text: 'Video',
-                  iconMargin: EdgeInsets.zero,
-                ),
-                Tab(
-                  icon: Icon(Icons.photo_outlined),
-                  text: 'Photos',
-                  iconMargin: EdgeInsets.zero,
-                ),
-                Tab(
-                  icon: Icon(Icons.audiotrack_sharp),
-                  text: 'Audio',
-                  iconMargin: EdgeInsets.zero,
-                ),
-              ],
+      child: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: SizedBox(
+          height: 80,
+          child: Scaffold(
+            appBar: AppBar(
+              bottom: TabBar(
+                controller: _tabController,
+                tabs: const <Widget>[
+                  Tab(
+                    icon: Icon(Icons.videocam_outlined),
+                    text: 'Video',
+                    iconMargin: EdgeInsets.zero,
+                  ),
+                  Tab(
+                    icon: Icon(Icons.photo_outlined),
+                    text: 'Photos',
+                    iconMargin: EdgeInsets.zero,
+                  ),
+                  Tab(
+                    icon: Icon(Icons.audiotrack_sharp),
+                    text: 'Audio',
+                    iconMargin: EdgeInsets.zero,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -2105,51 +2138,67 @@ class TopAppBars extends StatelessWidget {
           'or  SliverAppBar.large',
       child: Column(
         children: <Widget>[
-          AppBar(
-            title: const Text('Center-aligned'),
-            leading: const BackButton(),
-            actions: <Widget>[
-              IconButton(
-                iconSize: 32,
-                icon: const Icon(Icons.account_circle_outlined),
-                onPressed: () {},
-              ),
-            ],
-            centerTitle: true,
-          ),
-          colDivider,
-          AppBar(
-            title: const Text('Small'),
-            leading: const BackButton(),
-            actions: actions,
-            centerTitle: false,
-          ),
-          colDivider,
-          SizedBox(
-            height: 100,
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar.medium(
-                  title: const Text('Medium'),
-                  leading: const BackButton(),
-                  actions: actions,
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: AppBar(
+              title: const Text('Center-aligned'),
+              leading: const BackButton(),
+              actions: <Widget>[
+                IconButton(
+                  iconSize: 32,
+                  icon: const Icon(Icons.account_circle_outlined),
+                  onPressed: () {},
                 ),
-                const SliverFillRemaining(),
               ],
+              centerTitle: true,
             ),
           ),
           colDivider,
-          SizedBox(
-            height: 130,
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar.large(
-                  title: const Text('Large'),
-                  leading: const BackButton(),
-                  actions: actions,
-                ),
-                const SliverFillRemaining(),
-              ],
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: AppBar(
+              title: const Text('Small'),
+              leading: const BackButton(),
+              actions: actions,
+              centerTitle: false,
+            ),
+          ),
+          colDivider,
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: SizedBox(
+              height: 100,
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar.medium(
+                    title: const Text('Medium'),
+                    leading: const BackButton(),
+                    actions: actions,
+                  ),
+                  const SliverFillRemaining(),
+                ],
+              ),
+            ),
+          ),
+          colDivider,
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: SizedBox(
+              height: 130,
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar.large(
+                    title: const Text('Large'),
+                    leading: const BackButton(),
+                    actions: actions,
+                  ),
+                  const SliverFillRemaining(),
+                ],
+              ),
             ),
           ),
         ],
