@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import '../../../../../shared/utils/app_scroll_behavior.dart';
 import 'constants.dart';
 
 class ElevationScreen extends StatelessWidget {
@@ -11,55 +12,60 @@ class ElevationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     final ThemeData theme = Theme.of(context);
     final Color shadowColor = theme.colorScheme.shadow;
     final Color surfaceTint = theme.colorScheme.primary;
-    return Expanded(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 20, 16.0, 0),
-              child: Text(
-                'Surface Tint Color Only',
-                style: theme.textTheme.titleLarge,
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Expanded(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16.0, 20 + padding.top, 16.0, 0),
+                child: Text(
+                  'Surface Tint Color Only',
+                  style: theme.textTheme.titleLarge,
+                ),
               ),
             ),
-          ),
-          ElevationGrid(
-            surfaceTintColor: surfaceTint,
-            shadowColor: theme.useMaterial3 ? Colors.transparent : null,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(<Widget>[
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                child: Text(
-                  'Surface Tint Color and Shadow Color',
-                  style: theme.textTheme.titleLarge,
+            ElevationGrid(
+              surfaceTintColor: surfaceTint,
+              shadowColor: theme.useMaterial3 ? Colors.transparent : null,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(<Widget>[
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                  child: Text(
+                    'Surface Tint Color and Shadow Color',
+                    style: theme.textTheme.titleLarge,
+                  ),
                 ),
-              ),
-            ]),
-          ),
-          ElevationGrid(
-            shadowColor: shadowColor,
-            surfaceTintColor: surfaceTint,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(<Widget>[
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                child: Text(
-                  'Shadow Color Only',
-                  style: theme.textTheme.titleLarge,
+              ]),
+            ),
+            ElevationGrid(
+              shadowColor: shadowColor,
+              surfaceTintColor: surfaceTint,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(<Widget>[
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                  child: Text(
+                    'Shadow Color Only',
+                    style: theme.textTheme.titleLarge,
+                  ),
                 ),
-              ),
-            ]),
-          ),
-          ElevationGrid(shadowColor: shadowColor),
-        ],
+              ]),
+            ),
+            ElevationGrid(shadowColor: shadowColor),
+            SliverPadding(padding: EdgeInsets.only(bottom: padding.bottom)),
+          ],
+        ),
       ),
     );
   }

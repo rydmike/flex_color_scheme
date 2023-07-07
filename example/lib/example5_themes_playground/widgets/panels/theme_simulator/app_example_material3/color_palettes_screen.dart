@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../shared/controllers/theme_controller.dart';
+import '../../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../theme/flex_theme_dark.dart';
 import '../../../../theme/flex_theme_light.dart';
 
@@ -24,6 +25,8 @@ class ColorPalettesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
+
     final ColorScheme lightScheme =
         flexColorSchemeLight(themeController, Colors.black).toScheme;
 
@@ -78,63 +81,75 @@ class ColorPalettesScreen extends StatelessWidget {
           ),
         );
 
-    return Expanded(
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                  child: dynamicColorNotice(),
-                ),
-                schemeLabel('Light ColorScheme'),
-                schemeView(lightScheme),
-                divider,
-                schemeLabel('Dark ColorScheme'),
-                schemeView(darkScheme),
-              ],
-            ),
-          );
-        } else {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5),
+    return ScrollConfiguration(
+      behavior: const DragScrollBehavior(),
+      child: Expanded(
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth < narrowScreenWidthThreshold) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                top: 8 + padding.top,
+                bottom: 8 + padding.bottom,
+              ),
               child: Column(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 8),
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     child: dynamicColorNotice(),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            schemeLabel('Light ColorScheme'),
-                            schemeView(lightScheme),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            schemeLabel('Dark ColorScheme'),
-                            schemeView(darkScheme),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  schemeLabel('Light ColorScheme'),
+                  schemeView(lightScheme),
+                  divider,
+                  schemeLabel('Dark ColorScheme'),
+                  schemeView(darkScheme),
                 ],
               ),
-            ),
-          );
-        }
-      }),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 8 + padding.top,
+                  bottom: 8 + padding.bottom,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 8),
+                      child: dynamicColorNotice(),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              schemeLabel('Light ColorScheme'),
+                              schemeView(lightScheme),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              schemeLabel('Dark ColorScheme'),
+                              schemeView(darkScheme),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        }),
+      ),
     );
   }
 }

@@ -87,6 +87,8 @@ class _AppExampleComponentsState extends State<AppExampleComponents>
           ),
         ),
         body: SafeArea(
+          bottom: false,
+          top: false,
           child: TabBarView(
             controller: tabController,
             children: <Widget>[
@@ -229,10 +231,19 @@ class CCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool useM3 = Theme.of(context).useMaterial3;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Card(
       color: color,
+      shadowColor: useM3 ? Colors.transparent : null,
       margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-      elevation: 0,
+      elevation: useM3
+          ? isDark
+              ? 1
+              : 0.5
+          : isDark
+              ? 3
+              : 2,
       child: Padding(
         padding: padding ?? const EdgeInsets.all(12),
         child: child,
@@ -248,13 +259,13 @@ class ShowcaseColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: <Widget>[
         CCard(
@@ -278,19 +289,22 @@ class ShowcaseButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text('Material Buttons', style: headerStyle),
+              SizedBox(height: 8),
               ElevatedButtonShowcase(),
               SizedBox(height: 8),
               FilledButtonShowcase(),
@@ -307,7 +321,11 @@ class ShowcaseButtons extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text('ToggleButtons', style: headerStyle),
+              SizedBox(height: 8),
               ToggleButtonsShowcase(),
+              SizedBox(height: 8),
+              Text('SegmentedButton', style: headerStyle),
               SizedBox(height: 8),
               SegmentedButtonShowcase(),
             ],
@@ -317,10 +335,32 @@ class ShowcaseButtons extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text('FloatingActionButton', style: headerStyle),
+              SizedBox(height: 8),
               FabShowcase(),
               SizedBox(height: 8),
+              Text('Chip', style: headerStyle),
+              SizedBox(height: 8),
+              ChipShowcase(),
+            ],
+          ),
+        ),
+        CCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Icon', style: headerStyle),
+              SizedBox(height: 8),
               IconShowcase(),
+              SizedBox(height: 8),
+              Text('IconButton', style: headerStyle),
+              IconButtonShowcase(),
+              SizedBox(height: 8),
               IconButtonVariantsShowcase(),
+              SizedBox(height: 8),
+              Text('CircleAvatar', style: headerStyle),
+              SizedBox(height: 8),
+              CircleAvatarShowcase(),
             ],
           ),
         ),
@@ -334,29 +374,40 @@ class ShowcaseInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(
-          child: TextFieldShowcase(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('TextField with InputDecorator', style: headerStyle),
+              SizedBox(height: 8),
+              TextFieldShowcase(),
+            ],
+          ),
         ),
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              DropdownButtonFormFieldShowcase(),
+              Text('DropdownButtonFormField', style: headerStyle),
               SizedBox(height: 8),
-              DropDownMenuShowcase(),
+              DropdownButtonFormFieldShowcase(),
+              SizedBox(height: 16),
+              Text('DropDownButton', style: headerStyle),
+              SizedBox(height: 8),
+              DropDownButtonShowcase(),
             ],
           ),
         ),
-        CCard(child: ChipShowcase()),
       ],
     );
   }
@@ -367,13 +418,13 @@ class ShowcaseMenus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(
@@ -386,7 +437,9 @@ class ShowcaseMenus extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: 8),
         MenuBarShowcase(explain: true, explainIndent: 16),
+        SizedBox(height: 32),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MenuAnchorShowcase(),
@@ -401,21 +454,28 @@ class ShowcaseSwitches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text('Switch', style: headerStyle),
+              SizedBox(height: 8),
               SwitchShowcase(),
+              Text('CheckBox', style: headerStyle),
+              SizedBox(height: 8),
               CheckboxShowcase(),
+              Text('Radio', style: headerStyle),
+              SizedBox(height: 8),
               RadioShowcase(),
             ],
           ),
@@ -443,13 +503,13 @@ class ShowcaseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(
@@ -475,13 +535,13 @@ class ShowcaseSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         CCard(child: SliderShowcase()),
@@ -510,26 +570,32 @@ class ShowcaseAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
         AppBarShowcase(),
         SizedBox(height: 8),
-        Divider(),
         SearchBarShowcase(),
-        Divider(),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('BottomAppBar', style: headerStyle),
+        ),
         BottomAppBarShowcase(),
-        Divider(),
+        SizedBox(height: 16),
         TabBarForAppBarShowcase(),
-        SizedBox(height: 8),
-        Divider(),
+        SizedBox(height: 16),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('TabBar on a surface', style: headerStyle),
+        ),
         TabBarForBackgroundShowcase(),
       ],
     );
@@ -541,26 +607,40 @@ class ShowcaseNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
-        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('BottomNavigationBar (M2)', style: headerStyle),
+        ),
         BottomNavigationBarShowcase(),
-        SizedBox(height: 8),
-        Divider(),
-        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('NavigationBar (M3)', style: headerStyle),
+        ),
         NavigationBarShowcase(),
-        SizedBox(height: 8),
-        Divider(),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('NavigationRail', style: headerStyle),
+        ),
         NavigationRailShowcase(),
-        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('NavigationDrawer', style: headerStyle),
+        ),
         NavigationDrawerShowcase(),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Drawer', style: headerStyle),
+        ),
         DrawerShowcase(),
       ],
     );
@@ -572,23 +652,18 @@ class ShowcaseDialogs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
-        CCard(
-            child: Column(
-          children: <Widget>[
-            AlertDialogShowcase(),
-            TimePickerDialogShowcase(),
-            DatePickerDialogShowcase(),
-          ],
-        )),
+        AlertDialogShowcase(),
+        TimePickerDialogShowcase(),
+        DatePickerDialogShowcase(),
         BottomSheetShowcase(),
         SizedBox(height: 16),
         BottomSheetModalShowcase(),
@@ -604,13 +679,13 @@ class ShowcaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: const <Widget>[
         SizedBox(height: 8),
@@ -634,13 +709,13 @@ class ShowcaseText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final MediaQueryData media = MediaQuery.of(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
       padding: EdgeInsets.fromLTRB(
         0,
-        media.padding.top + 8,
+        padding.top + 8,
         0,
-        media.padding.bottom + 8,
+        padding.bottom + 8,
       ),
       children: <Widget>[
         const CCard(

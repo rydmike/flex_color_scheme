@@ -607,7 +607,7 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
 class ModeOptionButtonApp extends StatefulWidget {
   const ModeOptionButtonApp({
     this.themeMode = ThemeMode.light,
-    this.setFocusOnTap,
+    this.setFocusOnTap = true,
     this.padding,
     this.selected = true,
     this.label,
@@ -616,7 +616,7 @@ class ModeOptionButtonApp extends StatefulWidget {
     super.key,
   });
   final ThemeMode themeMode;
-  final bool? setFocusOnTap;
+  final bool setFocusOnTap;
   final EdgeInsetsGeometry? padding;
   final bool selected;
   final String? label;
@@ -661,7 +661,7 @@ class _ModeOptionButtonAppState extends State<ModeOptionButtonApp> {
             padding: widget.padding,
             selected: selected,
             label: widget.label,
-            setFocusOnTap: true,
+            setFocusOnTap: widget.setFocusOnTap,
             semanticLabel: widget.semanticLabel,
             onSelect: () {
               setState(() {

@@ -226,7 +226,7 @@ class SimulatorFrame extends StatelessWidget {
           // TODO(rydmike): Experiment, simulator app uses theme directly.
           // Instead of theming simulator via inherited theme.of(context), let
           // us try this version where use same theme function as the main app.
-          // It will be more costly, since now new theme computed twice, but
+          // It will be more costly, since now new theme is computed twice, but
           // the advantage is that its change happens at the same time as main
           // app theme changes, and not after it has concluded its change. This
           // feels "faster", or more concurrent and imo offers better UX.

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../const/app.dart';
 import '../controllers/theme_controller.dart';
+import '../utils/app_scroll_behavior.dart';
 import '../widgets/app/about.dart';
 import '../widgets/app/show_color_scheme_colors.dart';
 import '../widgets/app/show_sub_theme_colors.dart';
@@ -41,12 +42,12 @@ class _SubpageDemoState extends State<SubpageDemo> {
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
-    final MediaQueryData media = MediaQuery.of(context);
-    final double topPadding = media.padding.top + kToolbarHeight * 2;
-    final double bottomPadding =
-        media.padding.bottom + kBottomNavigationBarHeight;
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
+    final double topPadding = padding.top + kToolbarHeight * 2;
+    final double bottomPadding = padding.bottom + kBottomNavigationBarHeight;
 
-    final bool isNarrow = media.size.width < App.phoneWidthBreakpoint;
+    final Size size = MediaQuery.sizeOf(context);
+    final bool isNarrow = size.width < App.phoneWidthBreakpoint;
     final double sideMargin = isNarrow ? 8 : App.edgeInsetsTablet;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -76,62 +77,65 @@ class _SubpageDemoState extends State<SubpageDemo> {
             ),
           ),
           body: PageBody(
-            child: ListView(
-              primary: true,
-              padding: EdgeInsets.fromLTRB(
-                sideMargin,
-                topPadding + App.edgeInsetsTablet,
-                sideMargin,
-                App.edgeInsetsTablet + bottomPadding,
-              ),
-              children: <Widget>[
-                Text('Subpage Demo', style: headlineMedium),
-                const Text(
-                  'This screen shows an example page with the same '
-                  'FlexColorScheme based ThemeData inherited theme being used. '
-                  'It also has a NavigationBar and TabBar in the AppBar.',
+            child: ScrollConfiguration(
+              behavior: const DragScrollBehavior(),
+              child: ListView(
+                primary: true,
+                padding: EdgeInsets.fromLTRB(
+                  sideMargin,
+                  topPadding + App.edgeInsetsTablet,
+                  sideMargin,
+                  App.edgeInsetsTablet + bottomPadding,
                 ),
-                const SizedBox(height: 8),
-                if (widget.controller != null)
-                  ListTile(
-                    title: const Text('Theme mode'),
-                    subtitle:
-                        Text('Theme ${widget.controller!.themeMode.name}'),
-                    trailing: ThemeModeSwitch(
-                      themeMode: widget.controller!.themeMode,
-                      onChanged: widget.controller!.setThemeMode,
-                    ),
-                    // Toggle theme mode also via the ListTile tap.
-                    onTap: () {
-                      if (theme.brightness == Brightness.light) {
-                        widget.controller!.setThemeMode(ThemeMode.dark);
-                      } else {
-                        widget.controller!.setThemeMode(ThemeMode.light);
-                      }
-                    },
+                children: <Widget>[
+                  Text('Subpage Demo', style: headlineMedium),
+                  const Text(
+                    'This screen shows an example page with the same '
+                    'FlexColorScheme based ThemeData inherited theme being used. '
+                    'It also has a NavigationBar and TabBar in the AppBar.',
                   ),
-                const Divider(),
-                // Show all key active theme colors.
-                Text('Theme Colors', style: headlineMedium),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
-                  child: ShowColorSchemeColors(),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
-                  child: ShowThemeDataColors(),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
-                  child: ShowSubThemeColors(),
-                ),
-                const Divider(),
-                Text('Theme Showcase', style: headlineMedium),
-                const ShowcaseMaterial(),
-              ],
+                  const SizedBox(height: 8),
+                  if (widget.controller != null)
+                    ListTile(
+                      title: const Text('Theme mode'),
+                      subtitle:
+                          Text('Theme ${widget.controller!.themeMode.name}'),
+                      trailing: ThemeModeSwitch(
+                        themeMode: widget.controller!.themeMode,
+                        onChanged: widget.controller!.setThemeMode,
+                      ),
+                      // Toggle theme mode also via the ListTile tap.
+                      onTap: () {
+                        if (theme.brightness == Brightness.light) {
+                          widget.controller!.setThemeMode(ThemeMode.dark);
+                        } else {
+                          widget.controller!.setThemeMode(ThemeMode.light);
+                        }
+                      },
+                    ),
+                  const Divider(),
+                  // Show all key active theme colors.
+                  Text('Theme Colors', style: headlineMedium),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    child: ShowColorSchemeColors(),
+                  ),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    child: ShowThemeDataColors(),
+                  ),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    child: ShowSubThemeColors(),
+                  ),
+                  const Divider(),
+                  Text('Theme Showcase', style: headlineMedium),
+                  const ShowcaseMaterial(),
+                ],
+              ),
             ),
           ),
           bottomNavigationBar: NavigationBar(

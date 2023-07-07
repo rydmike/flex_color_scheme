@@ -27,7 +27,7 @@ class ShowcaseMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle headerStyle = theme.textTheme.titleMedium!;
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +35,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // Buttons
         //
-        Text('Buttons', style: headerStyle),
+        const Text('Material Buttons', style: headerStyle),
         const SizedBox(height: 8),
         const ElevatedButtonShowcase(),
         const SizedBox(height: 8),
@@ -50,7 +50,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // ToggleButtons and SegmentedButton
         //
-        Text('ToggleButtons and SegmentedButton', style: headerStyle),
+        const Text('ToggleButtons and SegmentedButton', style: headerStyle),
         const SizedBox(height: 8),
         const ToggleButtonsShowcase(),
         const SizedBox(height: 8),
@@ -59,7 +59,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // FloatingActionButton and Chip
         //
-        Text('FloatingActionButton and Chip', style: headerStyle),
+        const Text('FloatingActionButton and Chip', style: headerStyle),
         const SizedBox(height: 8),
         const FabShowcase(),
         const SizedBox(height: 16),
@@ -68,7 +68,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // Switch, CheckBox and Radio
         //
-        Text('Switch, CheckBox and Radio', style: headerStyle),
+        const Text('Switch, CheckBox and Radio', style: headerStyle),
         const SizedBox(height: 8),
         const SwitchShowcase(showCupertinoSwitches: false),
         const CheckboxShowcase(),
@@ -77,14 +77,14 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // Icon
         //
-        Text('Icon', style: headerStyle),
+        const Text('Icon', style: headerStyle),
         const SizedBox(height: 16),
         const IconShowcase(),
         const SizedBox(height: 16),
         //
         // IconButton
         //
-        Text('IconButton', style: headerStyle),
+        const Text('IconButton', style: headerStyle),
         const SizedBox(height: 16),
         const IconButtonShowcase(),
         const SizedBox(height: 16),
@@ -93,28 +93,28 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // CircleAvatar
         //
-        Text('CircleAvatar', style: headerStyle),
+        const Text('CircleAvatar', style: headerStyle),
         const SizedBox(height: 16),
         const CircleAvatarShowcase(),
         const SizedBox(height: 16),
         //
         // Tooltip
         //
-        Text('Tooltip', style: headerStyle),
+        const Text('Tooltip', style: headerStyle),
         const SizedBox(height: 8),
         const TooltipShowcase(),
         const SizedBox(height: 16),
         //
         // ProgressIndicator
         //
-        Text('ProgressIndicator', style: headerStyle),
+        const Text('ProgressIndicator', style: headerStyle),
         const SizedBox(height: 8),
         const ProgressIndicatorShowcase(),
         const SizedBox(height: 16),
         //
         // Slider and RangeSlider
         //
-        Text('Slider and RangeSlider', style: headerStyle),
+        const Text('Slider and RangeSlider', style: headerStyle),
         const SizedBox(height: 8),
         const SliderShowcase(),
         const Divider(),
@@ -123,14 +123,14 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // TextField
         //
-        Text('TextField with InputDecorator', style: headerStyle),
+        const Text('TextField with InputDecorator', style: headerStyle),
         const SizedBox(height: 8),
         const TextFieldShowcase(),
         const SizedBox(height: 16),
         //
         // PopupMenuButton, DropdownButtonFormField, DropDownButton
         //
-        Text('PopupMenuButton and DropdownButtons', style: headerStyle),
+        const Text('PopupMenuButton and DropdownButtons', style: headerStyle),
         const PopupMenuButtonsShowcase(explain: true),
         const SizedBox(height: 8),
         const DropdownButtonFormFieldShowcase(explain: true),
@@ -140,7 +140,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // DropdownMenu, MenuBar, MenuAnchor
         //
-        Text('Dropdown Menus and MenuBar', style: headerStyle),
+        const Text('Dropdown Menus and MenuBar', style: headerStyle),
         const DropDownMenuShowcase(explain: true),
         const MenuAnchorShowcase(explain: true),
         const MenuBarShowcase(explain: true),
@@ -148,7 +148,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // AppBars and TabBar
         //
-        Text('AppBar and TabBar', style: headerStyle),
+        const Text('AppBar and TabBar', style: headerStyle),
         const SizedBox(height: 8),
         const AppBarShowcase(),
         const SizedBox(height: 8),
@@ -159,7 +159,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // BottomAppBar and SearchBar
         //
-        Text('BottomAppBar and SearchBar', style: headerStyle),
+        const Text('BottomAppBar and SearchBar', style: headerStyle),
         const BottomAppBarShowcase(explain: true),
         const SearchBarShowcase(explain: true),
         const SizedBox(height: 16),
@@ -167,7 +167,7 @@ class ShowcaseMaterial extends StatelessWidget {
         // BottomNavigationBar (M2),  NavigationBar (M3)
         // NavigationRail, NavigationDrawer
         //
-        Text('Navigation Components', style: headerStyle),
+        const Text('Navigation Components', style: headerStyle),
         const BottomNavigationBarShowcase(explain: true),
         const SizedBox(height: 8),
         const NavigationBarShowcase(explain: true),
@@ -180,7 +180,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // AlertDialog, TimePickerDialog, DatePickerDialog
         //
-        Text('Dialogs', style: headerStyle),
+        const Text('Dialogs', style: headerStyle),
         const AlertDialogShowcase(),
         const TimePickerDialogShowcase(),
         const DatePickerDialogShowcase(),
@@ -188,7 +188,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // BottomSheet
         //
-        Text('BottomSheet', style: headerStyle),
+        const Text('BottomSheet', style: headerStyle),
         const SizedBox(height: 16),
         const BottomSheetShowcase(),
         const SizedBox(height: 16),
@@ -197,20 +197,20 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // SnackBar and MaterialBanner
         //
-        Text('SnackBar and MaterialBanner', style: headerStyle),
+        const Text('SnackBar and MaterialBanner', style: headerStyle),
         const SizedBox(height: 8),
         const MaterialBannerSnackBarShowcase(),
         //
         // Card
         //
-        Text('Card', style: headerStyle),
+        const Text('Card', style: headerStyle),
         const SizedBox(height: 8),
         const CardShowcase(explain: true),
         const SizedBox(height: 16),
         //
         // Material
         //
-        Text('Material', style: headerStyle),
+        const Text('Material', style: headerStyle),
         const MaterialShowcase(explain: true),
         const SizedBox(height: 16),
         //
@@ -218,7 +218,7 @@ class ShowcaseMaterial extends StatelessWidget {
         // and more exotic
         // ExpansionTile, ExpansionPanelList
         //
-        Text('All List Tiles', style: headerStyle),
+        const Text('All List Tiles', style: headerStyle),
         const ListTileShowcase(),
         const Divider(height: 1),
         const SwitchListTileShowcase(),
@@ -234,7 +234,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // TextTheme and PrimaryTextTheme
         //
-        Text('Text', style: headerStyle),
+        const Text('Text', style: headerStyle),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -3792,10 +3792,15 @@ class DatePickerDialogShowcase extends StatelessWidget {
     return Column(
       children: <Widget>[
         AbsorbPointer(
-          child: DatePickerDialog(
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1930),
-            lastDate: DateTime(2050),
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            removeBottom: true,
+            child: DatePickerDialog(
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1930),
+              lastDate: DateTime(2050),
+            ),
           ),
         ),
         TextButton(
@@ -4165,7 +4170,7 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
 }
 
 class MaterialShowcase extends StatelessWidget {
-  const MaterialShowcase({super.key, this.explain = true});
+  const MaterialShowcase({super.key, this.explain = false});
   final bool explain;
 
   @override
