@@ -82,11 +82,15 @@ class NavigationDrawerSettings extends StatelessWidget {
               'NavigationDrawer looks, since the NavigationDrawer builds '
               'on the Drawer.\n'
               '\n'
-              'Default Flutter background color in M3 is colorScheme.surface, '
+              'Default background in Flutter SDK in M3 is colorScheme.surface, '
               'with elevation tint and no shadow. In M2 it has shadow and '
               'uses color theme.canvasColor, that is typically set '
-              'to colorScheme.background.\n'),
+              'to colorScheme.background. FCS component sub-themes use '
+              'surface as default color in both M2 and M3 modes.\n'),
         ),
+        const SizedBox(height: 8),
+        const DrawerShowcase(explain: false),
+        const SizedBox(height: 16),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
@@ -213,8 +217,6 @@ class NavigationDrawerSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        const DrawerShowcase(explain: false),
         const SizedBox(height: 16),
         // TODO(rydmike): Change M3 Drawer width default info when SDK is fixed.
         ListTile(
@@ -529,7 +531,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known indicator issues'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[

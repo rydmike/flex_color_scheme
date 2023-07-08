@@ -76,15 +76,20 @@ class DialogSettings extends StatelessWidget {
               'colorScheme.surface.\n'
               '\n'
               'FlexColorScheme sub-themes use surface as default for all '
-              'dialogs in both M2 and M3 mode, to ensure that they have the '
+              'dialogs in both M2 and M3 mode. This ensures that they have the '
               'same background by default and that elevation overlay '
               'color works in M2 dark mode when it is another '
               'color than background.\n'
               '\n'
-              'You can theme them to a color scheme based color. With '
+              'You can theme dialogs to a color scheme based color. With '
               'seeded M3 colors, surfaceVariant, primaryContainer and '
-              'inversePrimary are some possible options.\n'),
+              'inversePrimary are possible options.\n'
+              '\n'
+              'The AlertDialog uses the general DialogTheme for theming '
+              'values. TimePicker and DatePicker have their own themes.\n'),
         ),
+        const AlertDialogShowcase(),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
@@ -361,15 +366,6 @@ class DialogSettings extends StatelessWidget {
         BackToActualPlatform(controller: controller),
         const Divider(),
         const ListTileReveal(
-          title: Text('AlertDialog'),
-          subtitleDense: true,
-          subtitle: Text('The Alertdialog works well in both M2 and '
-              'M3 mode.\n'),
-        ),
-        const AlertDialogShowcase(),
-        const SizedBox(height: 8),
-        const Divider(),
-        const ListTileReveal(
           title: Text('TimePicker'),
           subtitleDense: true,
           subtitle: Text('Flutter 3.7 does not implement or fully support '
@@ -388,7 +384,7 @@ class DialogSettings extends StatelessWidget {
             'FlexColorScheme, including its platform adaptive radius settings. '
             'This is a theme override radius for only the TimePicker dialog '
             'radius that is applied on all platforms, it also override the '
-            'platform adaptive dialog radius settings.\n',
+            'platform adaptive dialog radius value.\n',
           ),
         ),
         ListTileReveal(
@@ -573,7 +569,7 @@ class DialogSettings extends StatelessWidget {
             'FlexColorScheme, including its platform adaptive radius settings. '
             'This is a theme override radius for only the DatePicker dialog '
             'radius that is applied on all platforms. It also overrides the '
-            'platform adaptive dialog radius settings.\n',
+            'platform adaptive dialog radius value.\n',
           ),
         ),
         ListTileReveal(
@@ -669,7 +665,9 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The DatePicker manual date entry input field picks '
+                  text: '. Both Divider spacing and color styling has been '
+                      'fixed in master channel. The DatePicker manual date '
+                      'entry input field picks '
                       'up the ambient InputDecorationTheme and it cannot be '
                       'styled independently, see ',
                 ),
@@ -680,7 +678,7 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. This issue has a fix in master channel.\n',
                 ),
               ],
             ),

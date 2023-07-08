@@ -146,6 +146,30 @@ class NavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTileReveal(
+          title: Text('NavigationBar colors and styles'),
+          subtitle: Text(
+            'Default background color is surface with an onSurface overlay '
+            'color in M2. In M3 default background color is surface with '
+            'elevation 3, using M3 elevation tint. '
+            'FlexColorScheme M2 theme default is color scheme '
+            'background, with active surface blend and elevation 0. FCS M3 mode '
+            'background is same as M3 default.\n',
+          ),
+        ),
+        Card(
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          color: useMaterial3
+              ? theme.colorScheme.surfaceVariant
+              : theme.colorScheme.onInverseSurface,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: NavigationBarShowcase(explain: false),
+          ),
+        ),
+        const SizedBox(height: 8),
         ListTileReveal(
           enabled: useMaterial3,
           title: const Text('Use Material 3 default NavigationBar style?'),
@@ -260,18 +284,6 @@ class NavigationBarSettings extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ),
-        Card(
-          elevation: 0.7,
-          shadowColor: Colors.transparent,
-          color: useMaterial3
-              ? theme.colorScheme.surfaceVariant
-              : theme.colorScheme.onInverseSurface,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: NavigationBarShowcase(explain: false),
           ),
         ),
         ListTile(
