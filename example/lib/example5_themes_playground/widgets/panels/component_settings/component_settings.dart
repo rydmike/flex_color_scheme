@@ -260,7 +260,7 @@ class ComponentSettings extends StatelessWidget {
             subtitle: const Text(
               'Adaptive theme response to bring elevation shadows back in '
               'Material-3 in light theme mode on selected platforms. '
-              'Has no impact in Material-2 mode.\n'
+              'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
             ),
@@ -285,7 +285,7 @@ class ComponentSettings extends StatelessWidget {
               'surfaces in Material-3 in light theme mode on selected '
               'platforms. This is not recommended unless shadows are also '
               'brought back. '
-              'This setting has no impact in Material-2 mode.\n'
+              'This setting has no impact in Material-2 mode. '
               'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
@@ -310,7 +310,7 @@ class ComponentSettings extends StatelessWidget {
             subtitle: const Text(
               'Adaptive theme response to bring elevation shadows back in '
               'Material-3 in dark theme mode on selected platforms. '
-              'Has no impact in Material-2 mode.\n'
+              'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
             ),
@@ -339,7 +339,7 @@ class ComponentSettings extends StatelessWidget {
               'keeping elevation tint in M3 mode in dark mode. You can '
               'still bring shadows back in dark mode, it can further increase '
               'elevation separation in dark mode. '
-              'This setting sas no impact in Material-2 mode.\n'
+              'This setting sas no impact in Material-2 mode. '
               'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
