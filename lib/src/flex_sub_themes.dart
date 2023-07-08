@@ -3954,7 +3954,9 @@ class FlexSubThemes {
 
     // Background color, when using normal default, falls back to background.
     final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.surfaceVariant, colorScheme)
+            backgroundSchemeColor ??
+                (useM3 ? SchemeColor.surface : SchemeColor.surfaceVariant),
+            colorScheme)
         .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to primary.
@@ -3965,10 +3967,8 @@ class FlexSubThemes {
     return NavigationBarThemeData(
       height: height,
       elevation: elevation,
-      backgroundColor: backgroundSchemeColor == null
-          ? useFlutterDefaults || useM3
-              ? null
-              : backgroundColor
+      backgroundColor: useFlutterDefaults && backgroundSchemeColor == null
+          ? null
           : backgroundColor,
       surfaceTintColor: surfaceTintColor,
       shadowColor: shadowColor,
