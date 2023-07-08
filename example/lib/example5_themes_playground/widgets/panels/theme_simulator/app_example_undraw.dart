@@ -247,28 +247,28 @@ class _AppExampleDrawerState extends State<AppExampleDrawer> {
             ),
           ),
           const SizedBox(height: 16),
-          const NavigationDrawerDestination(
-            icon: Badge(
-              label: Text('26'),
-              child: Icon(Icons.chat_bubble),
-            ),
-            label: Text('Chat'),
-          ),
-          const NavigationDrawerDestination(
-            icon: Icon(Icons.beenhere),
-            label: Text('Notifications'),
-          ),
+          ThemeModeSwitchListTile(controller: widget.controller),
           const Divider(),
           const NavigationDrawerDestination(
             icon: Icon(Icons.image),
             label: Text('Images'),
           ),
           const NavigationDrawerDestination(
+            icon: Icon(Icons.beenhere),
+            label: Text('Notifications'),
+          ),
+          const NavigationDrawerDestination(
+            icon: Badge(
+              label: Text('12'),
+              child: Icon(Icons.chat_bubble),
+            ),
+            label: Text('Chat'),
+          ),
+          const Divider(),
+          const NavigationDrawerDestination(
             icon: Icon(Icons.logout),
             label: Text('Logout'),
           ),
-          const SizedBox(height: 16),
-          ThemeModeSwitchListTile(controller: widget.controller),
         ],
       ),
     );
@@ -297,19 +297,19 @@ class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
       },
       destinations: const <NavigationDestination>[
         NavigationDestination(
-          icon: Badge(
-            label: Text('12'),
-            child: Icon(Icons.chat_bubble),
-          ),
-          label: 'Chat',
+          icon: Icon(Icons.image),
+          label: 'Images',
         ),
         NavigationDestination(
           icon: Icon(Icons.beenhere),
           label: 'Notifications',
         ),
         NavigationDestination(
-          icon: Icon(Icons.image),
-          label: 'Images',
+          icon: Badge(
+            label: Text('12'),
+            child: Icon(Icons.chat_bubble),
+          ),
+          label: 'Chat',
         ),
       ],
     );

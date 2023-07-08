@@ -65,6 +65,10 @@ class TooltipProgressBarSettings extends StatelessWidget {
               ? controller.setTooltipsMatchBackground
               : null,
         ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: TooltipShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('Tooltip background color'),
           subtitle: controller.tooltipSchemeColor == null
@@ -269,10 +273,6 @@ class TooltipProgressBarSettings extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: TooltipShowcase(),
         ),
         const Divider(),
         const ListTileReveal(
