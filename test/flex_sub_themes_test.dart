@@ -85,9 +85,7 @@ void main() {
           useFlutterDefaults: true,
         ),
         equals(
-          const BottomNavigationBarThemeData(
-            elevation: 0,
-          ),
+          const BottomNavigationBarThemeData(),
         ),
       );
     });
@@ -107,9 +105,7 @@ void main() {
           useFlutterDefaults: true,
         ),
         equals(
-          const BottomNavigationBarThemeData(
-            elevation: 0,
-          ),
+          const BottomNavigationBarThemeData(),
         ),
       );
     });

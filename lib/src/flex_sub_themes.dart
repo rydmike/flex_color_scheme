@@ -994,7 +994,9 @@ class FlexSubThemes {
               ? null
               : backgroundColor
           : backgroundColor,
-      elevation: elevation ?? kBottomNavigationBarElevation,
+      elevation: useFlutterDefaults && elevation == null
+          ? null
+          : elevation ?? kBottomNavigationBarElevation,
       unselectedIconTheme: useDefaultIconTheme
           ? null
           : IconThemeData(

@@ -107,9 +107,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              !controller.useFlutterDefaults,
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
@@ -128,9 +126,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomNavigationBarElevation ?? -1
                 : -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setBottomNavigationBarElevation(
                         value < 0 ? null : value.roundToDouble());
