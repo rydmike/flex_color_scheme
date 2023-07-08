@@ -21,6 +21,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opininated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 
   * The default for M3 mode is unchanged, using elevation 3, via SDK defaults when undefined.
  
+**FIX**
+
+* Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 
 **CHORE**
 
