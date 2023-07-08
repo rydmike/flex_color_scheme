@@ -586,6 +586,7 @@ class FlexSubThemes {
   ///
   /// The [BottomAppBarTheme] allows setting only of background color in FCS.
   /// Other properties are not used by FCS at this stage.
+  ///
   /// The [BottomAppBarTheme] has no properties for foreground color. If you use
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
@@ -595,18 +596,16 @@ class FlexSubThemes {
     required final ColorScheme colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the
-    /// background color for the bottomAppBar.
+    /// background color for the [BottomAppBar].
     ///
-    /// If not defined, [colorScheme.surface] will be used via default M2 and
-    /// M3 widget behavior.
+    /// If not defined, [colorScheme.surface] will be used via default widget
+    /// widget behavior for M3 mode and explicitly defined as used color in
+    /// the created [BottomAppBarTheme] in M2 mode.
     final SchemeColor? backgroundSchemeColor,
 
     /// Overrides the default value for [BottomAppBar.elevation].
     ///
-    /// If this is null, default 3 in M3 and in M2 to 8.
-    /// In FCS M2 it default to 0, or same elevation as AppBar if it is defined
-    /// to another elevation than 0. This logic is handled by
-    /// [FlexColorScheme.toTheme] that passes in the elevation here.
+    /// If undefined (null), defaults to 3 in M3 and to 8 in M2 mode.
     final double? elevation,
 
     /// Overrides the default value for [BottomAppBar.shape].
@@ -649,6 +648,12 @@ class FlexSubThemes {
     // Effective color, if null, keep null for M3 defaults via widget.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // TODO(rydmike): BottomAppBar color default to null only when using M3.
+    // Due to Theme.Data.bottomAppBarColor being deprecated in Flutter SDK,
+    // but still being used in default M2 for widget we have to create a
+    // sub-theme with a background color in M2 when it is null, also the
+    // dark mode default for M2 is horrific.
     final Color? effectiveColor =
         backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 

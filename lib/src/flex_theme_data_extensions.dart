@@ -287,11 +287,11 @@ extension FlexThemeData on ThemeData {
     /// choice, it can easily be adjusted for the theme with this property.
     final double? appBarElevation,
 
-    /// The themed elevation for the bottom app bar.
+    /// The themed elevation for the [BottomAppBar].
     ///
-    /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null to default to M3's
-    /// default elevation of 3, to always get elevation tint.
+    /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+    /// both via the defaults for the respective theme mode from Flutter's
+    /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarTheme].
@@ -1592,11 +1592,10 @@ extension FlexThemeData on ThemeData {
     /// choice, it can easily be adjusted for the theme with this property.
     final double? appBarElevation,
 
-    /// The themed elevation for the bottom app bar.
+    /// The themed elevation for the [BottomAppBar].
     ///
-    /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null to default to M3's
-    /// default elevation of 3, to always get elevation tint.
+    /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+    /// both via the defaults for the respective theme mode
     final double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarTheme].
