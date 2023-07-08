@@ -51,7 +51,9 @@ class BottomNavigationBarSettings extends StatelessWidget {
     final String elevationDefaultLabel = controller
                 .bottomNavigationBarElevation ==
             null
-        ? 'default 0'
+        ? controller.useFlutterDefaults
+            ? 'default 8'
+            : 'default 0'
         : 'global '
             '${controller.bottomNavigationBarElevation!.toStringAsFixed(1)}';
     return Column(
@@ -113,9 +115,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
             min: -1,
             max: 24,
             divisions: 25,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.bottomNavigationBarElevation == null ||
                         (controller.bottomNavigationBarElevation ?? -1) < 0
                     ? elevationDefaultLabel
@@ -143,9 +143,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          !controller.useFlutterDefaults
+                  controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.bottomNavigationBarElevation == null ||
                               (controller.bottomNavigationBarElevation ?? -1) <
                                   0
