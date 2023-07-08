@@ -48,19 +48,14 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
               min: -0.5,
               max: 20,
               divisions: 41,
-              label: controller.useFlexColorScheme
-                  ? controller.bottomAppBarElevationLight == null ||
-                          (controller.bottomAppBarElevationLight ?? -0.5) < 0
-                      ? controller.useMaterial3
-                          ? 'default 3'
-                          // ignore: lines_longer_than_80_chars
-                          : 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                      : (controller.bottomAppBarElevationLight
-                              ?.toStringAsFixed(1) ??
-                          '')
-                  : controller.useMaterial3
+              label: !controller.useFlexColorScheme ||
+                      controller.bottomAppBarElevationLight == null
+                  ? controller.useMaterial3
                       ? 'default 3'
-                      : 'default 8',
+                      : 'default 8'
+                  : (controller.bottomAppBarElevationLight
+                          ?.toStringAsFixed(1) ??
+                      ''),
               value: controller.useFlexColorScheme
                   ? controller.bottomAppBarElevationLight ?? -0.5
                   : -0.5,
@@ -81,21 +76,14 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    controller.useFlexColorScheme
-                        ? controller.bottomAppBarElevationLight == null ||
-                                (controller.bottomAppBarElevationLight ??
-                                        -0.5) <
-                                    0
-                            ? controller.useMaterial3
-                                ? 'default 3'
-                                // ignore: lines_longer_than_80_chars
-                                : 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                            : (controller.bottomAppBarElevationLight
-                                    ?.toStringAsFixed(1) ??
-                                '')
-                        : controller.useMaterial3
+                    !controller.useFlexColorScheme ||
+                            controller.bottomAppBarElevationLight == null
+                        ? controller.useMaterial3
                             ? 'default 3'
-                            : 'default 8',
+                            : 'default 8'
+                        : (controller.bottomAppBarElevationLight
+                                ?.toStringAsFixed(1) ??
+                            ''),
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -111,19 +99,13 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
               min: -0.5,
               max: 20,
               divisions: 41,
-              label: controller.useFlexColorScheme
-                  ? controller.bottomAppBarElevationDark == null ||
-                          (controller.bottomAppBarElevationDark ?? -0.5) < 0
-                      ? controller.useMaterial3
-                          ? 'default 3'
-                          // ignore: lines_longer_than_80_chars
-                          : 'default ${(controller.appBarElevationDark ?? 0).toStringAsFixed(1)}'
-                      : (controller.bottomAppBarElevationDark
-                              ?.toStringAsFixed(1) ??
-                          '')
-                  : controller.useMaterial3
+              label: !controller.useFlexColorScheme ||
+                      controller.bottomAppBarElevationDark == null
+                  ? controller.useMaterial3
                       ? 'default 3'
-                      : 'default 8',
+                      : 'default 8'
+                  : (controller.bottomAppBarElevationDark?.toStringAsFixed(1) ??
+                      ''),
               value: controller.useFlexColorScheme
                   ? controller.bottomAppBarElevationDark ?? -0.5
                   : -0.5,
@@ -144,20 +126,14 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    controller.useFlexColorScheme
-                        ? controller.bottomAppBarElevationDark == null ||
-                                (controller.bottomAppBarElevationDark ?? -0.5) <
-                                    0
-                            ? controller.useMaterial3
-                                ? 'default 3'
-                                // ignore: lines_longer_than_80_chars
-                                : 'default ${(controller.appBarElevationDark ?? 0).toStringAsFixed(1)}'
-                            : (controller.bottomAppBarElevationDark
-                                    ?.toStringAsFixed(1) ??
-                                '')
-                        : controller.useMaterial3
+                    !controller.useFlexColorScheme ||
+                            controller.bottomAppBarElevationDark == null
+                        ? controller.useMaterial3
                             ? 'default 3'
-                            : 'default 8',
+                            : 'default 8'
+                        : (controller.bottomAppBarElevationDark
+                                ?.toStringAsFixed(1) ??
+                            ''),
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -220,7 +196,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterFix117082,
-                  text: 'FIX PR #117082.',
+                  text: 'FIX PR #117082',
                 ),
                 TextSpan(
                   style: spanTextStyle,
@@ -267,9 +243,12 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                     style: spanTextStyle,
                     text: '. The Themes Playground '
                         'uses a Theme wrapper to remove it above, but it is '
-                        'still visible in the view. In the simulator using the '
+                        'still visible in the search results view. In the '
+                        'simulator using the '
                         'Flutter official M3 demo, you can see the issue on '
-                        'both SearchBar and the SearchView.\n '),
+                        'both SearchBar and the SearchView. This issue has '
+                        'been fixed in master channel, but is not yet '
+                        'available in Flutter stable 3.10.\n '),
               ],
             ),
           ),

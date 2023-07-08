@@ -621,11 +621,11 @@ class FlexColorScheme with Diagnosticable {
   /// choice, it can easily be adjusted for the theme with this property.
   final double? appBarElevation;
 
-  /// The themed elevation for the bottom app bar.
+  /// The themed elevation for the [BottomAppBar].
   ///
-  /// If null, defaults to [appBarElevation] in M2. So it matches the themed
-  /// app bar elevation. In M3 it is kept null, to default to M3's default
-  /// elevation of 3, to always get elevation tint.
+  /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+  /// both via the defaults for the respective theme mode from Flutter's
+  /// default elevation behavior of [BottomAppBar].
   final double? bottomAppBarElevation;
 
   /// When set to true, tooltip background color will match the brightness of
@@ -1493,11 +1493,11 @@ class FlexColorScheme with Diagnosticable {
     /// choice, it can easily be adjusted for the theme with this property.
     final double? appBarElevation,
 
-    /// The themed elevation for the bottom app bar.
+    /// The themed elevation for the [BottomAppBar].
     ///
-    /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null, to default to M3's
-    /// default elevation of 3, to always get elevation tint.
+    /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+    /// both via the defaults for the respective theme mode from Flutter's
+    /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarTheme].
@@ -3339,11 +3339,11 @@ class FlexColorScheme with Diagnosticable {
     /// choice, it can easily be adjusted for the theme with this property.
     final double? appBarElevation,
 
-    /// The themed elevation for the bottom app bar.
+    /// The themed elevation for the [BottomAppBar].
     ///
-    /// If null, effective result is [appBarElevation] in M2. So it matches the
-    /// themed app bar elevation. In M3 it is kept null, to default to M3's
-    /// default elevation of 3, to always get elevation tint.
+    /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+    /// both via the defaults for the respective theme mode from Flutter's
+    /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarTheme].
@@ -5382,12 +5382,6 @@ class FlexColorScheme with Diagnosticable {
   ///    This is a slight change from the ColorScheme default that uses
   ///    surface color.
   ///
-  ///  * In M2 the `BottomAppBarTheme` elevation defaults to `appBarElevation`
-  ///    In M3 it is kept null for M3 defaults.
-  ///    It can easily be adjusted directly in the `FlexColorScheme`
-  ///    definition with property value `bottomAppBarElevation` without
-  ///    creating a sub theme or using `copyWith`.
-  ///
   ///  * In `TextSelectionThemeData`, the standard for `selectionColor` is
   ///    `colorScheme.primary` with opacity value `0.4` for dark-mode and `0.12`
   ///    for light mode. Here primary with `0.5` for dark-mode and `0.3` for
@@ -6584,28 +6578,23 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.bottomAppBarTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
-              elevation: bottomAppBarElevation ??
-                  (useMaterial3 ? null : appBarElevation ?? 0),
+              elevation: bottomAppBarElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
             )
-          : useMaterial3
-              // In M3 if we define a none null bottomAppBarElevation, we get
-              // BottomAppBarTheme sub-theme with it defined, otherwise not.
-              ? bottomAppBarElevation != null
-                  ? FlexSubThemes.bottomAppBarTheme(
-                      colorScheme: colorScheme,
-                      elevation: bottomAppBarElevation,
-                    )
-                  : null
-              // In M2 if we define a none null bottomAppBarElevation
-              // or appBarElevation, we get BottomAppBarTheme sub-theme
-              // with its elevation defined and fallback to appBarElevation.
-              : FlexSubThemes.bottomAppBarTheme(
-                  colorScheme: colorScheme,
-                  elevation: bottomAppBarElevation ?? appBarElevation ?? 0,
-                ),
+          // When not using subThemes we will in M2 mode always get a
+          // BottomAppBarTheme with at least background color defined to be
+          // ColorScheme.surface, even if [bottomAppBarElevation] is null.
+          // This is done to avoid issues with deprecation of
+          // ThemeData.bottomAppBarColor that is still used in M2 mode defaults.
+          // When using M3 mode and if [bottomAppBarElevation] is null, we
+          // actually get a default [BottomAppBarTheme()] all null theme made by
+          // FlexSubThemes.bottomAppBarTheme.
+          : FlexSubThemes.bottomAppBarTheme(
+              colorScheme: colorScheme,
+              elevation: bottomAppBarElevation,
+            ),
       //
       // BottomNavigationBar Theme.
       // Opinionated default theming for it:

@@ -115,7 +115,7 @@ void main() {
         'EXPECT its toString to be "FlexTonalPalette.of(40.0, 55.0)"', () {
       expect(
         m1.toString(),
-        equals('FlexTonalPalette.of(40.0, 55.0)'),
+        equals('FlexTonalPalette.of(40.0, 55.0, FlexPaletteType.common)'),
       );
     });
     test(
@@ -153,7 +153,7 @@ void main() {
         m4.toString(),
         equals(
             // ignore: lines_longer_than_80_chars
-            'FlexTonalPalette.fromList({0: 4278190080, 5: 4280616704, 10: 4281798144, 20: 4284095488, 30: 4286524160, 40: 4288692500, 50: 4290795563, 60: 4292964674, 70: 4294937692, 80: 4294948249, 90: 4294958030, 95: 4294962663, 98: 4294965494, 99: 4294966271, 100: 4294967295})'),
+            'FlexTonalPalette.fromList({0: 4278190080, 5: 4280616704, 10: 4281798144, 20: 4284095488, 30: 4286524160, 40: 4288692500, 50: 4290795563, 60: 4292964674, 70: 4294937692, 80: 4294948249, 90: 4294958030, 95: 4294962663, 98: 4294965494, 99: 4294966271, 100: 4294967295}, FlexPaletteType.common)'),
       );
     });
     test(
