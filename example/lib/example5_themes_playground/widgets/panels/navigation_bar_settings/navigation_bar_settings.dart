@@ -131,8 +131,8 @@ class NavigationBarSettings extends StatelessWidget {
 
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.navBarBackgroundSchemeColor == null &&
-            (controller.useFlutterDefaults || controller.useMaterial3));
+        (!controller.useFlutterDefaults ||
+            controller.navBarBackgroundSchemeColor != null);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.navBarOpacity : 1;
     final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
@@ -212,17 +212,13 @@ class NavigationBarSettings extends StatelessWidget {
           ),
         ),
         ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
-              !controller.useFlutterDefaults,
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
           subtitle: Slider(
             min: -1,
             max: 24,
             divisions: 25,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarElevation == null ||
                         (controller.navBarElevation ?? -1) < 0
                     ? elevationDefaultLabel
@@ -230,14 +226,10 @@ class NavigationBarSettings extends StatelessWidget {
                 : controller.useMaterial3
                     ? 'default 3'
                     : 'default 0',
-            value: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navBarElevation ?? -1
                 : -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setNavBarElevation(
                         value < 0 ? null : value.roundToDouble());
@@ -254,9 +246,7 @@ class NavigationBarSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          !controller.useFlutterDefaults
+                  controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navBarElevation == null ||
                               (controller.navBarElevation ?? -1) < 0
                           ? elevationDefaultLabel

@@ -47,15 +47,15 @@ class BottomNavigationBarSettings extends StatelessWidget {
             controller.useFlutterDefaults);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.bottomNavigationBarOpacity : 1;
+
     // Logic for default elevation label.
-    final String elevationDefaultLabel = controller
-                .bottomNavigationBarElevation ==
-            null
-        ? controller.useFlutterDefaults
-            ? 'default 8'
-            : 'default 0'
-        : 'global '
-            '${controller.bottomNavigationBarElevation!.toStringAsFixed(1)}';
+    final String elevationDefaultLabel =
+        controller.bottomNavigationBarElevation == null
+            ? controller.useFlutterDefaults
+                ? 'default 8'
+                : 'default 0'
+            : controller.bottomNavigationBarElevation!.toStringAsFixed(1);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
