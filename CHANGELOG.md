@@ -4,13 +4,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 4, 2023**
+**July 8, 2023**
 
 **PACKAGE**
 
 **NEW**
 
-* Feature to enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData` .
+* New feature that enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData` .
 
 * **WIP:** Squircle shape feature. Work in progress. Need border side for Squircle.
 
@@ -25,9 +25,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 
+
 **CHORE**
 
-* Updated to use version 1.4.0 of FlexSeedScheme. 
+* Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette. 
 
 **THEMES PLAYGROUND**
 
@@ -42,12 +43,20 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Added a switch to show TextStyle details to TextTheme presentations.
 * Added font NotoSans Medium (W500) to assets.
 * On theme showcase and icon button panels, show both tappable and toggleable `IconButton` styles.
-* Theme topic selector uses group color on icon and selector that are harmonized to primary color. 
+* Theme topic selector uses a group color on icons and selected item. The colors are fixed semantic colors, but the colors are M3 harmonized to active theme surface tint color. This makes them fit nicely when the overall color theme of the app changes. It is also a nice additional demo of theme extensions with many colors that are harmonized. The concept is the same as the one used on the code highlighter colors earlier. 
 
 **CHANGE**
 
-* The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting on colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can.
+* The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can.
 * Changed the order of theming topic panels. All color and surface related topic panels are now before component theme panels. Component theme panels have been split into more discrete topics and have a new order.
+* Changed the order of components and labels on many theme topic panels.
+* The apps included in the **Theme Simulator** now all extend content behind their app bars and bottom navigation. This allows themed opacity settings on app bar and bottom navigation to become observable in the simulated apps.
+* The Shop ap in the **Theme Simulator** received style updates to use more theme dependent styling, like Card as containers for shop items. 
+
+**FIX**
+
+* Fixed allowing elevation changes `BottomNavigationBar` and `NavigationBar` when `useFlutterDefaults` it true (ON).
+* Fixed allowing opacity usage on `NavigationBar` when default undefined background color is used. 
 
 **TODO**
 
