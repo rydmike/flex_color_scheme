@@ -100,6 +100,35 @@ class TabBarSettings extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTileReveal(
+          title: Text('TabBar colors and styles'),
+          subtitleDense: true,
+          subtitle: Text('With component themes enabled you can select '
+              'scheme color for the tab items and indicator separately. '
+              'Using TabBarStyle conveniently syncs the TabBar to active '
+              'AppBar or surface theme, but this offers more '
+              'options if that is needed. '
+              'These settings override used TabBarStyle, set them '
+              'back to default to use TabBarStyle again.\n'),
+        ),
+        const SizedBox(height: 8),
+        Card(
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          color: theme.colorScheme.surfaceVariant,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                TabBarForAppBarShowcase(),
+                SizedBox(height: 16),
+                TabBarForBackgroundShowcase(explain: true),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         TabBarStylePopupMenu(
           title: const Text('Select TabBarStyle that fits your use case'),
           labelForDefault:
@@ -114,35 +143,6 @@ class TabBarSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const SizedBox(height: 8),
-        Card(
-          elevation: 0.7,
-          shadowColor: Colors.transparent,
-          color: theme.colorScheme.surface,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                TabBarForAppBarShowcase(),
-                SizedBox(height: 16),
-                TabBarForBackgroundShowcase(explain: true),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        const ListTileReveal(
-          title: Text('Custom TabBar colors and styles'),
-          subtitleDense: true,
-          subtitle: Text('With component themes enabled you can select '
-              'scheme color for the tab items and indicator separately. '
-              'Using TabBarStyle conveniently syncs the TabBar to active '
-              'AppBar or surface theme, but this offers more '
-              'options if that is needed. '
-              'These settings override used TabBarStyle, set them '
-              'back to default to use TabBarStyle again.\n'),
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(

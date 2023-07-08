@@ -110,7 +110,13 @@ class BottomSheetSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         const ListTile(title: Text('Standard BottomSheet')),
+        const SizedBox(height: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: BottomSheetShowcase(),
+        ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
@@ -179,12 +185,14 @@ class BottomSheetSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const Divider(),
+        const ListTile(title: Text('Modal BottomSheet')),
         const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetShowcase(),
+          child: BottomSheetModalShowcase(),
         ),
-        const ListTile(title: Text('Modal BottomSheet')),
+        const SizedBox(height: 16),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
@@ -254,12 +262,6 @@ class BottomSheetSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetModalShowcase(),
-        ),
-        const SizedBox(height: 16),
       ],
     );
   }

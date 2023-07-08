@@ -3835,7 +3835,7 @@ class BottomSheetShowcase extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Material BottomSheet',
+                  'BottomSheet',
                   style: theme.textTheme.titleMedium,
                 ),
                 Text(
@@ -3873,7 +3873,7 @@ class BottomSheetModalShowcase extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Material Modal BottomSheet',
+                  'Modal BottomSheet',
                   style: theme.textTheme.titleMedium,
                 ),
                 Text(

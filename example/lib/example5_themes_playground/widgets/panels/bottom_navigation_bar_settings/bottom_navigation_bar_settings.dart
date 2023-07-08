@@ -60,6 +60,26 @@ class BottomNavigationBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTileReveal(
+          title: Text('BottomNavigationBar colors and styles'),
+          subtitle: Text(
+            'Default SDK background color is theme canvasColor via Material. '
+            'The canvasColor is typically colorScheme.background, elevation '
+            'is 8. FCS sub-theme default is colorScheme.background and '
+            'elevation 0.\n',
+          ),
+        ),
+        Card(
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          color: theme.colorScheme.surfaceVariant,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: BottomNavigationBarShowcase(explain: false),
+          ),
+        ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: 'default (background)',
@@ -159,17 +179,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
             ),
           ),
         ),
-        Card(
-          elevation: 0.7,
-          shadowColor: Colors.transparent,
-          color: theme.colorScheme.surfaceVariant,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: BottomNavigationBarShowcase(explain: false),
-          ),
-        ),
-        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),

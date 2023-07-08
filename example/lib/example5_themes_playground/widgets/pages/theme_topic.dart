@@ -397,12 +397,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'between primary destinations in an app. '
         'The BottomNavigationBar is used for top level destination '
         'navigation on phones in Material 2 design. In Material 3 it '
-        'has been replaced with NavigationBar, prefer using it instead.\n'
-        '\n'
-        'Default SDK background color is theme canvasColor via Material. '
-        'The canvasColor is typically colorScheme.background, elevation '
-        'is 8. FCS sub-theme default is colorScheme.background and '
-        'elevation 0.\n',
+        'has been replaced with NavigationBar, prefer using it instead.\n',
   ),
   ThemeTopic(
     group: TopicGroup.navigation,
@@ -412,14 +407,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Navigation bars offer a persistent and convenient way to switch '
         'between primary destinations in an app. The NavigationBar is '
         'used for top level destination '
-        'navigation on phones in Material 3 design.\n'
-        '\n'
-        'Default background color is surface with an onSurface overlay '
-        'color in M2. In M3 default background color is surface with '
-        'elevation 3, using M3 elevation tint. '
-        'FlexColorScheme M2 theme default is color scheme '
-        'background, with active surface blend and elevation 0. FCS M3 mode '
-        'background is same as M3 default.\n',
+        'navigation on phones in Material 3 design.\n',
   ),
   ThemeTopic(
     group: TopicGroup.navigation,
@@ -435,16 +423,12 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.navigation,
-    heading: 'NavigationDrawer',
+    heading: 'Drawer and NavigationDrawer',
     buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
     info: 'A drawer is used on phones to provide navigation destinations in a '
         'hidden side drawer. On desktop media sizes, a navigation drawer can '
-        'also be used as pinned side menu.\n'
-        '\n'
-        'Flutter default background is colorScheme.background for Drawer '
-        'in M2 mode, but colorScheme.surface in M3. FlexColorScheme '
-        'component sub-themes use surface as default color in both modes.\n',
+        'also be used as pinned side menu.\n',
   ),
   ThemeTopic(
     group: TopicGroup.surfaces,

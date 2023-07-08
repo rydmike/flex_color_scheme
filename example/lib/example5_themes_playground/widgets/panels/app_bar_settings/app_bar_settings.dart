@@ -41,6 +41,30 @@ class AppBarSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTileReveal(
+          title: Text('AppBar colors and styles'),
+          subtitle: Text('With component themes enabled you can select a '
+              'ColorScheme based color for the AppBar background color. '
+              'Using AppBarStyle is convenient and does not require activating '
+              'FlexColorScheme component themes, but doing so offers more '
+              'choices. '
+              'Selecting a color, overrides used AppBarStyle. Set it back '
+              'to default to use AppBarStyle again. Using AppBarStyle also '
+              'offers Scaffold background color as AppBar color, which when '
+              'using surface blends can be different from ColorScheme '
+              'surface and background colors.\n'),
+        ),
+        // Show sample AppBar's in a Card
+        Card(
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          color: theme.colorScheme.surfaceVariant,
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: AppBarShowcase(),
+          ),
+        ),
         if (isLight) ...<Widget>[
           AppBarStylePopupMenu(
             title: const Text('Light AppBarStyle'),
@@ -177,17 +201,6 @@ class AppBarSettings extends StatelessWidget {
           onChanged: controller.useFlexColorScheme
               ? controller.setTransparentStatusBar
               : null,
-        ),
-        // Show sample AppBar's in a Card
-        Card(
-          elevation: 0.7,
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          color: theme.colorScheme.surfaceVariant,
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: AppBarShowcase(),
-          ),
         ),
         if (isLight) ...<Widget>[
           ListTile(
@@ -488,56 +501,6 @@ class AppBarSettings extends StatelessWidget {
                 : null,
           ),
         ],
-        const ListTileReveal(
-          dense: true,
-          title: Text('AppBar background color'),
-          subtitle: Text('With component themes enabled you can select a '
-              'ColorScheme based color for the AppBar background color. '
-              'Using AppBarStyle is convenient and does not require activating '
-              'FlexColorScheme component themes, but doing so offers more '
-              'choices. '
-              'Selecting a color, overrides used AppBarStyle. Set it back '
-              'to default to use AppBarStyle again. Using AppBarStyle also '
-              'offers Scaffold background color as AppBar color, which when '
-              'using surface blends can be different from ColorScheme '
-              'surface and background colors.\n'),
-        ),
-        ListTileReveal(
-          dense: true,
-          title: const Text('Known issues'),
-          subtitle: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'When using SliverAppBar.large or '
-                      'SliverAppBar.medium, the foreground color cannot be '
-                      'changed with widget or theme, see ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue110951,
-                  text: 'issue #110951',
-                ),
-                TextSpan(
-                    style: spanTextStyle,
-                    text: '. This is fixed in 3.10, but not in 3.7. '
-                        'The theming and defaults are also incorrect for the '
-                        'action icons, see '),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue123943,
-                  text: 'issue #123943',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. There is a fix in master, but it it not available '
-                      'in Flutter 3.7 or 3.10.\n',
-                ),
-              ],
-            ),
-          ),
-        ),
         const Divider(),
         const ListTileReveal(
           title: Text('AppBar platform adaptive settings'),
@@ -601,6 +564,43 @@ class AppBarSettings extends StatelessWidget {
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
+        const Divider(),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'When using SliverAppBar.large or '
+                      'SliverAppBar.medium, the foreground color cannot be '
+                      'changed with widget or theme, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue110951,
+                  text: 'issue #110951',
+                ),
+                TextSpan(
+                    style: spanTextStyle,
+                    text: '. This is fixed in 3.10, but not in 3.7. '
+                        'The theming and defaults are also incorrect for the '
+                        'action icons, see '),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue123943,
+                  text: 'issue #123943',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. There is a fix in master, but it it not available '
+                      'in Flutter 3.7 or 3.10.\n',
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -40,6 +40,17 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
               'Its elevation in FCS defaults to AppBar elevation in M2 mode, '
               'when using M3 it defaults to 3 and gets elevation tint.\n'),
         ),
+        const SizedBox(height: 8),
+        Card(
+          elevation: 0,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          color: theme.colorScheme.surfaceVariant,
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: BottomAppBarShowcase(explain: false),
+          ),
+        ),
+        const SizedBox(height: 8),
         if (isLight) ...<Widget>[
           ListTile(
             enabled: controller.useFlexColorScheme,
@@ -156,16 +167,6 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const SizedBox(height: 8),
-        Card(
-          elevation: 0,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          color: theme.colorScheme.surfaceVariant,
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: BottomAppBarShowcase(explain: false),
-          ),
         ),
         const ListTileReveal(
           dense: true,

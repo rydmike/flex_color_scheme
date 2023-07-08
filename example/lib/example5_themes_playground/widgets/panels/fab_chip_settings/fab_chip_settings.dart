@@ -223,6 +223,10 @@ class FabChipSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
+        ),
         ColorSchemePopupMenu(
           title: const Text('Selected Chip color'),
           labelForDefault: controller.useMaterial3
@@ -254,10 +258,6 @@ class FabChipSettings extends StatelessWidget {
                   }
                 }
               : null,
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -341,7 +341,11 @@ class FabChipSettings extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsChipUmbrellaIssue115364,
-                  text: 'issue #115364.',
+                  text: 'issue #115364',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
                 ),
               ],
             ),

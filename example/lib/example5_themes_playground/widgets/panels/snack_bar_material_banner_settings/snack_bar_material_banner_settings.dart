@@ -62,6 +62,8 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
               'floating. When using M3, prefer using the floating '
               'behavior.\n'),
         ),
+        const SizedBox(height: 8),
+        const SnackBarShowcase(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues and limitations'),
@@ -223,9 +225,6 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const SizedBox(height: 8),
-        const SnackBarShowcase(),
-        const SizedBox(height: 16),
         const Divider(),
         const ListTileReveal(
           title: Text('MaterialBanner'),
