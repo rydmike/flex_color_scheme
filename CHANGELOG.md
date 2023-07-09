@@ -28,6 +28,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **FIX**
 
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
+* Added a built-in theme fix to make the elevation tint change in the `AppBar` animate when it changes. Based on Material spec and observed native Android behavior and compose behavior, the `AppBar` color change when it is scrolled under should animate. Flutter M3 apps don't do this, the color change is instant. Discovered a theme workaround that makes it do it. This is now always used in FCS themes until Flutter includes its own fix for it.
 
 
 
