@@ -451,6 +451,16 @@ class Store {
   // Default value for the onSurfacesUseBWDark, also to reset settings.
   static const bool defaultOnSurfacesUseBWDark = false;
 
+  // Key used to read and save the surfacesUseBWLight value.
+  static const String keySurfacesUseBWLight = 'surfacesUseBWLight';
+  // Default value for the surfacesUseBWLight, also to reset settings.
+  static const bool defaultSurfacesUseBWLight = false;
+
+  // Key used to read and save the onSurfacesUseBWDark value.
+  static const String keySurfacesUseBWDark = 'surfacesUseBWDark';
+  // Default value for the onSurfacesUseBWDark, also to reset settings.
+  static const bool defaultSurfacesUseBWDark = false;
+
   // InputDecorator SETTINGS.
   // ===========================================================================
 

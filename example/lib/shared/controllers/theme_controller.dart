@@ -231,6 +231,10 @@ class ThemeController with ChangeNotifier {
         Store.keyOnSurfacesUseBWLight, Store.defaultOnSurfacesUseBWLight);
     _onSurfacesUseBWDark = await _themeService.load(
         Store.keyOnSurfacesUseBWDark, Store.defaultOnSurfacesUseBWDark);
+    _surfacesUseBWLight = await _themeService.load(
+        Store.keySurfacesUseBWLight, Store.defaultSurfacesUseBWLight);
+    _surfacesUseBWDark = await _themeService.load(
+        Store.keySurfacesUseBWDark, Store.defaultSurfacesUseBWDark);
     //
     // InputDecorator SETTINGS.
     _inputDecoratorSchemeColorLight = await _themeService.load(
@@ -871,6 +875,8 @@ class ThemeController with ChangeNotifier {
     setOnMainsUseBWDark(Store.defaultOnMainsUseBWDark, false);
     setOnSurfacesUseBWLight(Store.defaultOnSurfacesUseBWLight, false);
     setOnSurfacesUseBWDark(Store.defaultOnSurfacesUseBWDark, false);
+    setSurfacesUseBWLight(Store.defaultSurfacesUseBWLight, false);
+    setSurfacesUseBWDark(Store.defaultSurfacesUseBWDark, false);
     //
     // InputDecorator SETTINGS.
     setInputDecoratorSchemeColorLight(
@@ -2796,6 +2802,26 @@ class ThemeController with ChangeNotifier {
     _onSurfacesUseBWDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyOnSurfacesUseBWDark, value));
+  }
+
+  late bool _surfacesUseBWLight;
+  bool get surfacesUseBWLight => _surfacesUseBWLight;
+  void setSurfacesUseBWLight(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _surfacesUseBWLight) return;
+    _surfacesUseBWLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySurfacesUseBWLight, value));
+  }
+
+  late bool _surfacesUseBWDark;
+  bool get surfacesUseBWDark => _surfacesUseBWDark;
+  void setSurfacesUseBWDark(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _surfacesUseBWDark) return;
+    _surfacesUseBWDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySurfacesUseBWDark, value));
   }
 
   // InputDecorator SETTINGS.

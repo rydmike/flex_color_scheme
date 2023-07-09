@@ -115,14 +115,13 @@ class IntroductionPanel extends StatelessWidget {
             'web based desktop browsers, or as a native Windows, '
             'Mac or Linux desktop app, where it shines.\n'
             '\n'
-            'The first three themes in the app are example custom color '
-            'schemes, made in the tutorials with the API, they are not '
-            'built-in choices in the package. In the package tutorial '
-            'you learn how to make your own custom color schemes and turn '
-            'them into advanced themes with FlexColorScheme. The last color '
-            'scheme is customizable, you can modify it as desired and also '
-            'copy any built-in scheme to it as a starting point for your own '
-            'colors.\n'
+            'The first three color sets in the app are example custom color '
+            'schemes. They are not built-in choices in the package. In the '
+            'package tutorial you learn how to make your own custom color '
+            'schemes and turn them into advanced themes with FlexColorScheme. '
+            'The last color scheme is customizable, you can modify it as '
+            'desired and also copy any existing one to it as a starting point '
+            'for your own colors.\n'
             '\n'
             'All settings in this demo are persisted locally and can be reset '
             'back to default values at any time. Feel free to experiment with '
@@ -159,8 +158,8 @@ class IntroductionPanel extends StatelessWidget {
         const ListTile(
           subtitle: Text(
             'When you enable component sub-themes you get an only slightly '
-            'opinionated Material 3 default setup. If you turn OFF Material 3, '
-            'you get a Material 2 theme that is inspired by Material 3, '
+            'opinionated Material-3 default setup. If you turn OFF Material-3, '
+            'you get a Material-2 theme that is inspired by Material-3, '
             'without using the "useMaterial3" toggle in ThemeData. All widgets '
             'are then M2 based, you can still give them colors from the M3 '
             'ColorScheme and also use M3 style seeded ColorScheme. ',
@@ -168,9 +167,10 @@ class IntroductionPanel extends StatelessWidget {
         ),
         ListTile(
           subtitle: const Text(
-              'Want to use a FlexColorScheme theme you configured here in '
+              'Want to use the FlexColorScheme theme you configured here in '
               'your Flutter app? Then Copy the setup code, paste it into your '
-              'Flutter app, import FlexColorScheme and your theme is done.'),
+              'Flutter app, import FlexColorScheme and your theme is done. '
+              'What you see in the Themes Playground is what you get.'),
           trailing: FilledButton(
             onPressed: controller.useFlexColorScheme
                 ? () async {
@@ -192,8 +192,8 @@ class IntroductionPanel extends StatelessWidget {
           onChanged: controller.setUseMaterial3,
         ),
         const ListTile(
-          subtitle: Text('Like Flutter, FlexColorScheme also uses different '
-              'theming defaults for some properties in M2 and M3 mode. '
+          subtitle: Text('Like Flutter, FlexColorScheme uses different '
+              'theming defaults for properties in M2 and M3 mode. '
               'If a value has not been set, it will show you what the default '
               'is. When you toggle M2/M3 it will change to show the default for '
               'the used mode. The Playground also shows what the default '
@@ -203,7 +203,7 @@ class IntroductionPanel extends StatelessWidget {
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
           subtitle: Text('In Flutter 3.7 and later there are only minor issues '
-              'with Material 3, with low impact on apps using it. '
+              'with Material-3, with low impact on apps using it. '
               'FlexColorScheme is able to work around and fix some of '
               'them. In Flutter 3.3 and earlier, there are significant issues '
               'related to enabling and using Material 3.'),
@@ -215,9 +215,9 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You can read more about M3 and theming related '
-                      'issues in the FlexColorScheme docs, where theming '
-                      'issues are being ',
+                  text: 'You can read more about M3 and Flutter theming '
+                      'related issues in the FlexColorScheme docs, where '
+                      'Flutter theming related issues are being ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -229,12 +229,14 @@ class IntroductionPanel extends StatelessWidget {
                   text: '. Due to the large number of issues and also '
                       'incomplete state of Material 3 implementation in '
                       'Flutter 3.3 and earlier, we do not recommend using '
-                      'M3 with Flutter 3.3 or earlier versions.\n'
-                      '\n'
-                      'In Flutter 3.7 or later versions, M3 is ready and can '
-                      'be used in production. Some minor M3 fidelity and '
-                      'specification compliance issues still exist. They '
-                      'are minor and will be fixed in later releases.',
+                      'M3 with Flutter 3.3 or earlier versions. '
+                      'However, in Flutter 3.7 or later versions, M3 is '
+                      'ready and can be used in production. Some minor M3 '
+                      'fidelity and specification compliance issues still '
+                      'exist. They are minor and will be fixed in '
+                      'later releases, some are fixed in Flutter 3.10 and '
+                      'even more are ready in master channel and '
+                      'waiting for next stable release.',
                 ),
               ],
             ),
