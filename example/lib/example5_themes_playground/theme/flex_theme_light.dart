@@ -479,7 +479,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     tones: FlexTonesEnum.values[controller.usedFlexToneSetup]
         .tones(Brightness.light)
         .onMainsUseBW(controller.onMainsUseBWLight)
-        .onSurfacesUseBW(controller.onSurfacesUseBWLight),
+        .onSurfacesUseBW(controller.onSurfacesUseBWLight)
+        .surfacesUseBW(controller.surfacesUseBWLight),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintLight,
     //

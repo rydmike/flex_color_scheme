@@ -411,7 +411,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     tones: FlexTonesEnum.values[controller.usedFlexToneSetup]
         .tones(Brightness.dark)
         .onMainsUseBW(controller.onMainsUseBWDark)
-        .onSurfacesUseBW(controller.onSurfacesUseBWDark),
+        .onSurfacesUseBW(controller.onSurfacesUseBWDark)
+        .surfacesUseBW(controller.surfacesUseBWDark),
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //

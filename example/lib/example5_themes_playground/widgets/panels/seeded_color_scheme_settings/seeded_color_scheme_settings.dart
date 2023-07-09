@@ -137,6 +137,21 @@ class SeededColorSchemeSettings extends StatelessWidget {
                 ? controller.setOnSurfacesUseBWLight
                 : null,
           ),
+          SwitchListTileReveal(
+            title: const Text('White surface and background'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'Surface and background colors use tone 100 which is '
+              'always white. You can add this modifier to any seed '
+              'generation strategy. Surface blends will still mix in '
+              'blends to surface and background, using selected blend strategy '
+              'and level.\n',
+            ),
+            value: controller.surfacesUseBWLight && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setSurfacesUseBWLight
+                : null,
+          ),
         ] else ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
@@ -163,6 +178,21 @@ class SeededColorSchemeSettings extends StatelessWidget {
             value: controller.onSurfacesUseBWDark && controller.useKeyColors,
             onChanged: controller.useKeyColors
                 ? controller.setOnSurfacesUseBWDark
+                : null,
+          ),
+          SwitchListTileReveal(
+            title: const Text('Black surface and background'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'Surface and background colors use tone 0, which is always '
+              'true black. You can add this modifier to any seed '
+              'generation strategy. Surface blends will still mix in '
+              'blends to surface and background, using selected blend strategy '
+              'and level.\n',
+            ),
+            value: controller.surfacesUseBWDark && controller.useKeyColors,
+            onChanged: controller.useKeyColors
+                ? controller.setSurfacesUseBWDark
                 : null,
           ),
         ],
