@@ -8,19 +8,22 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **PACKAGE**
 
-**NEW**
-
+**NEW**  
 * New feature that enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData`.
+* Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `FilledButton` and `FilledButton.tonal`. They have the same disabled style when not tinted, so we can do the same to their tinted variants. Even if we still cannot theme them to have different themed colors when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063), we can still theme their disabled state with tint when the option is used.
+* Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `IconButton`, `IconButton.filled`, `IconButton.filledTonal` and `IconButton.outlined` foreground colors. They have the same disabled foreground style when not tinted, so we can do the same to their tinted foreground color variants. We still cannot theme them to have different themed background colors when disabled, or at all when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063). We can only theme their disabled foreground color state with tint, when the option is used.
 
 * **WIP:** Squircle shape feature. Work in progress. Need border side for Squircle.
 
 **CHANGE**
 
-**Style breaking changes**
-* In M2 mode, `bottomAppBarElevation` when undefined now remains undefined in `FlexSubThemes.bottomAppBarTheme` causing default elevation in M2 mode to become 8 like in the SDK default for M2. 
-  * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opininated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 
-  * The default for M3 mode is unchanged, using elevation 3, via SDK defaults when undefined.
 * Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette.
+
+
+* **Style breaking changes:**
+* In M2 mode, `bottomAppBarElevation` when undefined now remains undefined in `FlexSubThemes.bottomAppBarTheme` causing default elevation in M2 mode to become 8 like in the SDK default for M2. 
+    * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opinionated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 
+    * The default for M3 mode is unchanged, using elevation 3, via SDK defaults when undefined.
 
 **FIX**
 

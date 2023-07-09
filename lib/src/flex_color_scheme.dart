@@ -6888,16 +6888,16 @@ class FlexColorScheme with Diagnosticable {
       // IconButton theme.
       //
       // TODO(rydmike): iconButtonTheme limited due Flutter SDK issue.
-      // Supports new coming IconButton styles (filled, filledTonal, outlined)
-      // with interaction effects, but tinted disable is not supported due
-      // to issue: https://github.com/flutter/flutter/issues/123829
-      // Nor is any custom theming of them supported due to same issue.
+      // Supports new IconButton styles (filled, filledTonal, outlined)
+      // with interaction effects. Tinted disable is only supported on the
+      // foreground color supported due to issue:
+      // https://github.com/flutter/flutter/issues/123829
+      // No custom color theming of them supported due to this issue.
       iconButtonTheme: useSubThemes
           ? FlexSubThemes.iconButtonTheme(
               colorScheme: colorScheme,
               useTintedInteraction: subTheme.interactionEffects,
-              // Not available in FCS v7, see issue above.
-              // useTintedDisable: subTheme.tintedDisabledControls,
+              useTintedDisable: subTheme.tintedDisabledControls,
             )
           : null,
       //
