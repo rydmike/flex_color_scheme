@@ -185,6 +185,8 @@ class ThemeController with ChangeNotifier {
     // Material 3 and Seed ColorScheme SETTINGS.
     _useMaterial3 = await _themeService.load(
         Store.keyUseMaterial3, Store.defaultUseMaterial3);
+    _paletteType = await _themeService.load(
+        Store.keyPaletteType, Store.defaultPaletteType);
     _useKeyColors = await _themeService.load(
         Store.keyUseKeyColors, Store.defaultUseKeyColors);
     _useSecondary = await _themeService.load(
@@ -852,6 +854,7 @@ class ThemeController with ChangeNotifier {
     //
     // Material 3 and Seed ColorScheme SETTINGS.
     setUseMaterial3(Store.defaultUseMaterial3, false);
+    setPaletteType(Store.defaultPaletteType, false);
     setUseKeyColors(Store.defaultUseKeyColors, false);
     setUseSecondary(Store.defaultUseSecondary, false);
     setUseTertiary(Store.defaultUseTertiary, false);
@@ -2592,6 +2595,16 @@ class ThemeController with ChangeNotifier {
     _useMaterial3 = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseMaterial3, value));
+  }
+
+  late FlexPaletteType _paletteType;
+  FlexPaletteType get paletteType => _paletteType;
+  void setPaletteType(FlexPaletteType? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _paletteType) return;
+    _paletteType = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPaletteType, value));
   }
 
   late bool _useKeyColors;

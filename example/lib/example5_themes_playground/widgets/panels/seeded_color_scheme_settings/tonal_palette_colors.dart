@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/copy_color_to_clipboard.dart';
@@ -14,6 +15,7 @@ class TonalPaletteColors extends StatelessWidget {
     required this.tonalPalette,
     this.selectedColor,
     this.height = 28,
+    this.paletteType = FlexPaletteType.common,
   });
 
   /// Name of tonal palette.
@@ -28,27 +30,13 @@ class TonalPaletteColors extends StatelessWidget {
   /// Height of the color pick item.
   final double height;
 
-  /// Commonly-used tone values.
-  static const List<int> commonTones = <int>[
-    0,
-    5,
-    10,
-    20,
-    30,
-    40,
-    50,
-    60,
-    70,
-    80,
-    90,
-    95,
-    98,
-    99,
-    100,
-  ];
+  /// Type of palette displayed.
+  final FlexPaletteType paletteType;
 
-  static String _toneLabel(int index) {
-    return TonalPaletteColors.commonTones[index].toString();
+  String _toneLabel(int index) {
+    return paletteType == FlexPaletteType.common
+        ? FlexTonalPalette.commonTones[index].toString()
+        : FlexTonalPalette.extendedTones[index].toString();
   }
 
   static Color _onColor(Color color) {
@@ -88,7 +76,7 @@ class TonalPaletteColors extends StatelessWidget {
                         child: Text(
                           _toneLabel(i),
                           style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 10,
                             fontWeight: FontWeight.w600,
                             color: _onColor(Color(tonalPalette[i])),
                           ),

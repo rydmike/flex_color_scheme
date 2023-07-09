@@ -91,8 +91,8 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   Text('Subpage Demo', style: headlineMedium),
                   const Text(
                     'This screen shows an example page with the same '
-                    'FlexColorScheme based ThemeData inherited theme being used. '
-                    'It also has a NavigationBar and TabBar in the AppBar.',
+                    'FlexColorScheme based ThemeData inherited theme being '
+                    'used. It has a NavigationBar and a TabBar in the AppBar.',
                   ),
                   const SizedBox(height: 8),
                   if (widget.controller != null)
