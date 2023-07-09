@@ -579,6 +579,9 @@ class FlexSubThemes {
       systemOverlayStyle: systemOverlayStyle,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
+      // TODO(rydmike): Workaround to make tint elevation animate.
+      // TODO(rydmike): Create issue for none animated AppBar elevation tint.
+      shape: const RoundedRectangleBorder(),
     );
   }
 
