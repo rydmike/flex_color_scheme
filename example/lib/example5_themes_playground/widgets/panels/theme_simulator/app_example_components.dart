@@ -664,6 +664,7 @@ class ShowcaseDialogs extends StatelessWidget {
         AlertDialogShowcase(),
         TimePickerDialogShowcase(),
         DatePickerDialogShowcase(),
+        SizedBox(height: 16),
         BottomSheetShowcase(),
         SizedBox(height: 16),
         BottomSheetModalShowcase(),
