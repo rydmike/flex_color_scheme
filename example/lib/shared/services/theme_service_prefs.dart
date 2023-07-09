@@ -556,6 +556,7 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= TabBarIndicatorSize.values.length) return defaultValue;
         return TabBarIndicatorSize.values[value] as T;
       }
+      // T is AdaptiveTheme is nullable value.
       if (sameTypes<T, AdaptiveTheme?>()) {
         final int? value = _prefs.getInt(key);
         if (_debug) {
@@ -576,6 +577,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= AdaptiveTheme.values.length) return defaultValue;
         return AdaptiveTheme.values[value] as T;
+      }
+      // T is FlexPaletteType is nullable value.
+      if (sameTypes<T, FlexPaletteType?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexPaletteType?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexPaletteType.values.length) return defaultValue;
+        return FlexPaletteType.values[value] as T;
+      }
+      // T is FlexPaletteType none nullable value.
+      if (sameTypes<T, FlexPaletteType>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexPaletteType : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= FlexPaletteType.values.length) return defaultValue;
+        return FlexPaletteType.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');

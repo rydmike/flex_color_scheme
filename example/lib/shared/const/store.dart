@@ -340,6 +340,11 @@ class Store {
   // Default value for the useMaterial3, also to reset settings.
   static const bool defaultUseMaterial3 = true;
 
+  // Key used to read and save the paletteType value.
+  static const String keyPaletteType = 'paletteType';
+  // Default value for the paletteType, also to reset settings.
+  static const FlexPaletteType defaultPaletteType = FlexPaletteType.common;
+
   // Key used to read and save the useKeyColors value.
   static const String keyUseKeyColors = 'useKeyColors';
   // Default value for the useKeyColors, also to reset settings.

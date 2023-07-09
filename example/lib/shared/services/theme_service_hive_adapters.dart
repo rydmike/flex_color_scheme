@@ -307,3 +307,27 @@ class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveTheme?> {
   @override
   int get typeId => 166;
 }
+
+/// A Hive data type adapter for enum [FlexPaletteType], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexPaletteTypeAdapter extends TypeAdapter<FlexPaletteType?> {
+  @override
+  FlexPaletteType? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= FlexPaletteType.values.length) {
+      return null;
+    } else {
+      return FlexPaletteType.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, FlexPaletteType? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 167;
+}

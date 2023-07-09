@@ -20,15 +20,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * In M2 mode, `bottomAppBarElevation` when undefined now remains undefined in `FlexSubThemes.bottomAppBarTheme` causing default elevation in M2 mode to become 8 like in the SDK default for M2. 
   * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opininated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 
   * The default for M3 mode is unchanged, using elevation 3, via SDK defaults when undefined.
- 
+* Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette.
+
 **FIX**
 
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 
 
-**CHORE**
-
-* Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette. 
 
 **THEMES PLAYGROUND**
 
@@ -38,6 +36,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * Added support for selecting and using `FlexTones.candyPop` and `FlexTones.chroma`.
 * Added support for making any seed strategy use tone 100 (white) or tone 0 (black) as resulting surface and background tones.
+* Added an option to show the new extended tonal palette tones to the seeded color scheme panel.
 * Shape and radius now have their own theming topic panel, removed radius from **Component Themes** topic.
 * Add adaptive border radius setting to the Dialogs panel. 
 * Add TimePicker border radius override value setting to the Dialogs panel.
@@ -66,6 +65,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defaults.
 * Investigate issue suspect on responsive border radius on dialogs on mock web.
 * Investigate VisualDensity or height response change on mobile platforms on ToggleButtons.
+* Review and complement tests.
  
 ## 7.1.2
 

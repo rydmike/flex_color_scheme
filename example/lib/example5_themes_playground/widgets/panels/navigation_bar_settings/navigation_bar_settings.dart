@@ -151,10 +151,9 @@ class NavigationBarSettings extends StatelessWidget {
           subtitle: Text(
             'Default background color is surface with an onSurface overlay '
             'color in M2. In M3 default background color is surface with '
-            'elevation 3, using M3 elevation tint. '
-            'FlexColorScheme M2 theme default is color scheme '
-            'background, with active surface blend and elevation 0. FCS M3 mode '
-            'background is same as M3 default.\n',
+            'elevation 3, using M3 elevation tint. FlexColorScheme M2 theme '
+            'default is color scheme background, with active surface blend '
+            'and elevation 0. FCS M3 mode background is same as M3 default.\n',
           ),
         ),
         Card(

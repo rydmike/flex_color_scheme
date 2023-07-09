@@ -277,7 +277,9 @@ class _ProductScreenState extends State<ProductScreen> {
         <Widget>[];
 
     return Scaffold(
-      appBar: AppBar(actions: const <Widget>[CartAppBarAction()]),
+      appBar: AppBar(
+          title: Text(widget.product.productType),
+          actions: const <Widget>[CartAppBarAction()]),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1045,12 +1047,11 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
 }
 
 class OrderItem {
-  Product product;
-  // Selected size of product; This can be null
-  String? selectedSize;
-  // Selected color of product; This can be null
-  String? selectedColor;
   OrderItem({required this.product, this.selectedSize, this.selectedColor});
+
+  Product product;
+  String? selectedSize;
+  String? selectedColor;
 }
 
 Category _mensCategory = Category(title: 'Men', selections: <String>[
@@ -1078,7 +1079,7 @@ List<Product> products = <Product>[
       ],
       cost: 12.99,
       category: _mensCategory,
-      productType: 'shirts',
+      productType: 'Shirts',
       sizes: <String>['S', 'M', 'L', 'XL']),
   Product(
     name: 'Short Sleeve Henley',
@@ -1090,7 +1091,7 @@ List<Product> products = <Product>[
     ],
     cost: 17.99,
     category: _mensCategory,
-    productType: 'shirts',
+    productType: 'Shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1101,7 +1102,7 @@ List<Product> products = <Product>[
     ],
     cost: 24.99,
     category: _mensCategory,
-    productType: 'shirts',
+    productType: 'Shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1112,7 +1113,7 @@ List<Product> products = <Product>[
     ],
     cost: 29.99,
     category: _mensCategory,
-    productType: 'jeans',
+    productType: 'Jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1123,7 +1124,7 @@ List<Product> products = <Product>[
     ],
     cost: 39.99,
     category: _mensCategory,
-    productType: 'jeans',
+    productType: 'Jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1134,7 +1135,7 @@ List<Product> products = <Product>[
     ],
     cost: 19.99,
     category: _mensCategory,
-    productType: 'shorts',
+    productType: 'Shorts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1145,7 +1146,7 @@ List<Product> products = <Product>[
     ],
     cost: 29.99,
     category: _mensCategory,
-    productType: 'shorts',
+    productType: 'Shorts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1156,7 +1157,7 @@ List<Product> products = <Product>[
     ],
     cost: 15.80,
     category: _mensCategory,
-    productType: 'jackets',
+    productType: 'Jackets',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1167,7 +1168,7 @@ List<Product> products = <Product>[
     ],
     cost: 54.99,
     category: _mensCategory,
-    productType: 'jackets',
+    productType: 'Jackets',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1178,7 +1179,7 @@ List<Product> products = <Product>[
     ],
     cost: 16.99,
     category: _womensCategory,
-    productType: 'shirts',
+    productType: 'Shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1189,7 +1190,7 @@ List<Product> products = <Product>[
     ],
     cost: 22.99,
     category: _womensCategory,
-    productType: 'shirts',
+    productType: 'Shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1200,7 +1201,7 @@ List<Product> products = <Product>[
     ],
     cost: 25.99,
     category: _womensCategory,
-    productType: 'shirts',
+    productType: 'Shirts',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1211,7 +1212,7 @@ List<Product> products = <Product>[
     ],
     cost: 28.99,
     category: _womensCategory,
-    productType: 'jeans',
+    productType: 'Jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1222,7 +1223,7 @@ List<Product> products = <Product>[
     ],
     cost: 34.99,
     category: _womensCategory,
-    productType: 'jeans',
+    productType: 'Jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1233,7 +1234,7 @@ List<Product> products = <Product>[
     ],
     cost: 34.99,
     category: _womensCategory,
-    productType: 'jeans',
+    productType: 'Jeans',
     sizes: <String>['XS', 'S', 'M', 'L', 'XL'],
   ),
   Product(
@@ -1244,7 +1245,7 @@ List<Product> products = <Product>[
     ],
     cost: 9.99,
     category: _petsCategory,
-    productType: 'toys',
+    productType: 'Toys',
   ),
   Product(
     name: 'Wobble Wag Giggle Ball',
@@ -1254,7 +1255,7 @@ List<Product> products = <Product>[
     ],
     cost: 11.99,
     category: _petsCategory,
-    productType: 'toys',
+    productType: 'Toys',
   ),
   Product(
     name: 'Duck Hide Twists',
@@ -1264,7 +1265,7 @@ List<Product> products = <Product>[
     ],
     cost: 8.99,
     category: _petsCategory,
-    productType: 'treats',
+    productType: 'Treats',
   ),
   Product(
     name: "Zuke's Training Treats",
@@ -1274,6 +1275,6 @@ List<Product> products = <Product>[
     ],
     cost: 10.99,
     category: _petsCategory,
-    productType: 'treats',
+    productType: 'Treats',
   ),
 ];
