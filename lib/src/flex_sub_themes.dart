@@ -2454,7 +2454,6 @@ class FlexSubThemes {
         }
         return background;
       });
-
       foregroundColor =
           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
@@ -2465,6 +2464,30 @@ class FlexSubThemes {
         }
         return foreground;
       });
+    } else {
+      // We can in fact do tinted disabled TonalButtons, since they have the
+      // same style.
+      if (tintDisable) {
+        backgroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, background)
+                  .withAlpha(kAlphaVeryLowDisabled);
+            }
+          }
+          return null; // We get default backgroundColor.
+        });
+        foregroundColor =
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, background);
+            }
+          }
+          return null; // We get default foregroundColor.
+        });
+      }
     }
     // TODO(rydmike): Monitor FilledButton no variants theming issue.
     // Temp if, so we get pure default style when tint interact is false, avoids
@@ -2489,7 +2512,7 @@ class FlexSubThemes {
           // TODO(rydmike): Temp comment, can't be reached due temp if above.
           // return foreground.withAlpha(kAlphaPressed);
         }
-        return null;
+        return null; // We get default overlayColor.
       });
     }
 
@@ -2643,8 +2666,14 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
+
+    /// Defines if the theme uses tinted disabled color.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useTintedDisable,
   }) {
     final bool tintInteract = useTintedInteraction ?? false;
+    final bool tintDisable = useTintedDisable ?? false;
 
     // Due to issue:
     // https://github.com/flutter/flutter/pull/121884#issuecomment-1458505977
@@ -2662,19 +2691,20 @@ class FlexSubThemes {
     final Color tint = foreground;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
-    // TODO(rydmike): Skip tintInteract condition added due to Flutter issue.
+    // TODO(rydmike): Conditional tintInteract and tintDisabled due to issue.
     // See https://github.com/flutter/flutter/issues/123829
-    return tintInteract
-        ? IconButtonThemeData(style: ButtonStyle(
+    return tintInteract || tintDisable
+        ? IconButtonThemeData(
+            style: ButtonStyle(
             // TODO(rydmike): Add tinted disable support when doable in SDK.
-            // Due to above mentioned issue it cannot be added now without
-            // destroying the different styles.
-            //
+            // Due to above mentioned issue backgroundColor cannot be added yet
+            // without destroying the different styles.
             // backgroundColor:
-            //   MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            //  MaterialStateProperty.resolveWith((Set<MaterialState> states) {
             //   if (states.contains(MaterialState.disabled)) {
             //     if (tintDisable) {
-            //       return tintedDisable(colorScheme.onSurface, tint);
+            //       return tintedDisable(colorScheme.onSurface, tint)
+            //           .withAlpha(kAlphaVeryLowDisabled);
             //     }
             //     if (states.contains(MaterialState.selected)) {
             //       return colorScheme.onSurface.withOpacity(0.12);
@@ -2686,63 +2716,74 @@ class FlexSubThemes {
             //   }
             //   return Colors.transparent;
             // }),
-            // foregroundColor:
-            //   MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            //   if (states.contains(MaterialState.disabled)) {
-            //     if (tintDisable) {
-            //       return tintedDisable(colorScheme.onSurface, tint);
-            //     }
-            //     return colorScheme.onSurface.withOpacity(0.38);
-            //   }
-            //   if (states.contains(MaterialState.selected)) {
-            //     return colorScheme.onInverseSurface;
-            //   }
-            //   return colorScheme.onSurfaceVariant;
-            // }),
-            overlayColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  if (states.contains(MaterialState.pressed)) {
-                    if (tintInteract) {
-                      return tintedPressed(overlay, tint, factor);
+            foregroundColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              // We can do a tinted foreground color when requested, since it
+              // is the same for all variants by default as well.
+              if (states.contains(MaterialState.disabled)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, tint);
+                }
+                // return colorScheme.onSurface.withOpacity(0.38);
+              }
+              // if (states.contains(MaterialState.selected)) {
+              //   return colorScheme.onInverseSurface;
+              // }
+              // return colorScheme.onSurfaceVariant;
+              return null; // Gets us default for foregroundColor
+            }),
+            overlayColor: tintInteract
+                ? MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.selected)) {
+                      if (states.contains(MaterialState.pressed)) {
+                        if (tintInteract) {
+                          return tintedPressed(overlay, tint, factor);
+                        }
+                        // TODO(rydmike): Add option when Flutter issue fixed.
+                        // return
+                        // colorScheme.onSurface.withAlpha(kAlphaPressed);
+                      }
+                      if (states.contains(MaterialState.hovered)) {
+                        if (tintInteract) {
+                          return tintedHovered(overlay, tint, factor);
+                        }
+                        // TODO(rydmike): Add option when Flutter issue fixed.
+                        // return foreground.withAlpha(kAlphaHovered);
+                      }
+                      if (states.contains(MaterialState.focused)) {
+                        if (tintInteract) {
+                          return tintedFocused(overlay, tint, factor);
+                        }
+                        // TODO(rydmike): Add option when Flutter issue fixed.
+                        // return foreground.withAlpha(kAlphaFocused);
+                      }
+                      return Colors.transparent;
                     }
-                    // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                    // return colorScheme.onSurface.withAlpha(kAlphaPressed);
-                  }
-                  if (states.contains(MaterialState.hovered)) {
-                    if (tintInteract) {
-                      return tintedHovered(overlay, tint, factor);
+                    if (states.contains(MaterialState.pressed)) {
+                      if (tintInteract) {
+                        return tintedPressed(overlay, tint, factor);
+                      }
+                      // TODO(rydmike): Add option when Flutter issue fixed.
+                      // return foreground.withAlpha(kAlphaPressed);
                     }
-                    // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                    // return foreground.withAlpha(kAlphaHovered);
-                  }
-                  if (states.contains(MaterialState.focused)) {
-                    if (tintInteract) {
-                      return tintedFocused(overlay, tint, factor);
+                    if (states.contains(MaterialState.hovered)) {
+                      if (tintInteract) {
+                        return tintedHovered(overlay, tint, factor);
+                      }
+                      // TODO(rydmike): Add option when Flutter issue fixed.
+                      // return colorScheme.onSurface.withAlpha(kAlphaHovered);
                     }
-                    // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                    // return foreground.withAlpha(kAlphaFocused);
-                  }
-                  return Colors.transparent;
-                }
-                if (states.contains(MaterialState.pressed)) {
-                  if (tintInteract) return tintedPressed(overlay, tint, factor);
-                  // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                  // return foreground.withAlpha(kAlphaPressed);
-                }
-                if (states.contains(MaterialState.hovered)) {
-                  if (tintInteract) return tintedHovered(overlay, tint, factor);
-                  // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                  // return colorScheme.onSurface.withAlpha(kAlphaHovered);
-                }
-                if (states.contains(MaterialState.focused)) {
-                  if (tintInteract) return tintedFocused(overlay, tint, factor);
-                  // TODO(rydmike): Add option when Flutter SDK issue fixed.
-                  // return colorScheme.onSurface.withAlpha(kAlphaFocused);
-                }
-                return Colors.transparent;
-              },
-            ),
+                    if (states.contains(MaterialState.focused)) {
+                      if (tintInteract) {
+                        return tintedFocused(overlay, tint, factor);
+                      }
+                      // TODO(rydmike): Add option when Flutter issue fixed.
+                      // return colorScheme.onSurface.withAlpha(kAlphaFocused);
+                    }
+                    return Colors.transparent;
+                  })
+                : null, // Gets us default for overlayColor.
           ))
         : const IconButtonThemeData();
   }

@@ -2958,6 +2958,32 @@ void main() {
                 borderRadius: BorderRadius.all(Radius.circular(5))),
           ));
     });
+    test(
+        'FilledButton FST13.9 M3-custom-disable-states: Does '
+        'FilledButton have right material disabled when tinted disabled '
+        'used on default null color', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
+      final FilledButtonThemeData button = FlexSubThemes.filledButtonTheme(
+        colorScheme: colorScheme,
+        useTintedDisable: true,
+      );
+      final Color tint = colorScheme.primary;
+      // Disabled foreground/background,
+      expect(
+        button.style!.backgroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
+            .withAlpha(kAlphaVeryLowDisabled)),
+      );
+      expect(
+        button.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+    });
   });
   group('WITH: FlexSubTheme.floatingActionButtonTheme ', () {
     // -------------------------------------------------------------------------
@@ -3143,6 +3169,14 @@ void main() {
       final IconButtonThemeData b = FlexSubThemes.iconButtonTheme(
         colorScheme: colorScheme,
         useTintedInteraction: true,
+        useTintedDisable: true,
+      );
+      // Disabled foreground color states
+      expect(
+        b.style!.foregroundColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
       );
       // Overlay color states
       expect(
