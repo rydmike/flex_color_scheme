@@ -281,7 +281,7 @@ class NavigationDrawerSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Based on Material 3 ',
+                  text: 'Based on Material-3 ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -290,18 +290,18 @@ class NavigationDrawerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' it should be 360dp wide, while Material 2 is '
+                  text: ' it should be 360dp wide, while Material-2 is '
                       '304dp in Flutter. '
-                      'Due to a bug in Flutter, it defaults to 304dp in both '
-                      'modes in Flutter 3.7. '
+                      'Due to a bug in Flutter, it defaults to 304 dp in both '
+                      'modes in Flutter 3.7 and 3.10. '
                       'FCS corrects this spec deviation in its defaults.\n'
                       '\n'
-                      'Please note that a 360dp wide Drawer may be too wide '
+                      'Please note that a 360 dp wide Drawer may be too wide '
                       'for smaller or older phones and the Drawer may '
                       'cover the entire width of the phone. This may not be '
-                      'desired, if so adjust the width down. The 304dp M2 '
-                      'spec width is not bad choice in M3 either, maybe a bit '
-                      'wider but below 360dp. Please see ',
+                      'desired, if so adjust the width down. The 304 dp M2 '
+                      'spec width is not a bad choice in M3 either, maybe a '
+                      'bit wider but below 360dp. Please see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -310,7 +310,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information and an analysis of suitable '
+                  text: ' for more information and analysis of suitable '
                       'Drawer width on different sized phones.\n',
                 ),
               ],
@@ -321,13 +321,13 @@ class NavigationDrawerSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('NavigationDrawer'),
           subtitleDense: true,
-          subtitle: Text('The NavigationDrawer is new starting Flutter 3.7, '
-              'it provides an easy way to make a Material 3 specification '
-              'matching Drawer with built in top level navigation items '
+          subtitle: Text('The NavigationDrawer arrived with Flutter 3.7. '
+              'It provides an easy way to make a Material-3 specification '
+              'matching Drawer with built-in top level navigation items '
               'and a selected destination indicator.\n'
               '\n'
               'Default Flutter background color is colorScheme.surface, '
-              'with addition of elevation tint in Material 3 mode.\n'),
+              'with addition of elevation tint in Material-3 mode.\n'),
         ),
         const NavigationDrawerShowcase(explain: false),
         const SizedBox(height: 16),
@@ -539,8 +539,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: 'The NavigationDrawer and its Indicator styling has a '
                       'fair amount of minor issues in Flutter 3.7 and 3.10 '
-                      'that limits '
-                      'useful styling capabilities options. You can find '
+                      'that limits useful styling options. You can find '
                       'an overview of them and their status in ',
                 ),
                 LinkTextSpan(
