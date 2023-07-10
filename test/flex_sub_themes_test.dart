@@ -21,10 +21,12 @@ void main() {
     // to test it here, but included as a stub for potential future additons.
     test(
         'AppBar FST1.1: GIVEN a default FlexSubTheme.appBarTheme() '
-        'EXPECT equal to AppBarTheme', () {
+        'EXPECT equal to AppBarTheme with shape RoundedRectangleBorder()', () {
       expect(
         FlexSubThemes.appBarTheme(),
-        equals(const AppBarTheme()),
+        equals(const AppBarTheme(
+          shape: RoundedRectangleBorder(),
+        )),
       );
     });
   });
@@ -4578,7 +4580,7 @@ void main() {
   });
   group('WITH: FlexSubTheme.menuButtonTheme ', () {
     // -------------------------------------------------------------------------
-    // FlexSubThemes menuBarTheme tests
+    // FlexSubThemes menuButtonTheme tests
     // -------------------------------------------------------------------------
     test(
         'MenuButton FST19.1 : GIVEN a FlexSubTheme.menuButtonTheme() '
@@ -4611,6 +4613,12 @@ void main() {
         radius: 11,
         useTintedInteraction: true,
         useTintedDisable: true,
+      );
+      // No animation duration on menu buttons, this is a fix for issue:
+      // https://github.com/flutter/flutter/issues/123615
+      expect(
+        m1.style!.animationDuration,
+        equals(Duration.zero),
       );
       // Foreground color
       expect(

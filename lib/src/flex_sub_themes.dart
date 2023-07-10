@@ -3450,6 +3450,11 @@ class FlexSubThemes {
 
     return MenuButtonThemeData(
       style: ButtonStyle(
+        // MenuButtons text and background changes should not animate.
+        // If tey do we get this issue:
+        // https://github.com/flutter/flutter/issues/123615
+        // We do not want that. This Duration fixes the issue.
+        animationDuration: Duration.zero,
         // Foreground color, use same for icon.
         foregroundColor: MaterialStateProperty.resolveWith(
           (Set<MaterialState> states) {
