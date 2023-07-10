@@ -12,11 +12,6 @@ class MenuSettings extends StatelessWidget {
   const MenuSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _menuAnimatesIssue123615 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/123615',
-  );
   static final Uri _menuNoThemeOnFocusedIssue123736 = Uri(
     scheme: 'https',
     host: 'github.com',
@@ -118,27 +113,7 @@ class MenuSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n'
-                      '\n'
-                      'The foreground color of text of overlay highlighted '
-                      'menu items animate its color change if its color if '
-                      'different from none highlighted state. This is '
-                      'incorrect behavior by Flutter SDK. It does not happen '
-                      'on e.g. icons with same color change. This issue '
-                      'applies to all menu types. To see it, use defaults and '
-                      'set highlighted menu item background to primary. For '
-                      'more information see Flutter ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _menuAnimatesIssue123615,
-                  text: 'issue #123615',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. The issue also contains links to other issues '
-                      'related to the DropdownMenu, that might be of '
-                      'interest.\n',
+                  text: '.\n',
                 ),
               ],
             ),
@@ -148,7 +123,6 @@ class MenuSettings extends StatelessWidget {
         //
         // MenuAnchor
         //
-        // const SizedBox(height: 16),
         const ListTileReveal(
           title: Text('MenuAnchor'),
           subtitleDense: true,
@@ -162,6 +136,7 @@ class MenuSettings extends StatelessWidget {
             'theme settings for DropdownMenu, MenuAnchor and MenuBar menus.\n',
           ),
         ),
+        const SizedBox(height: 8),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MenuAnchorShowcase(explain: false),
