@@ -14,7 +14,7 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
   final String space = materialName == '' ? '' : ' ';
   // Show a snack bar with the copy message.
   if (context.mounted) {
-    final double? width = MediaQuery.of(context).size.width > 800 ? 700 : null;
+    final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,

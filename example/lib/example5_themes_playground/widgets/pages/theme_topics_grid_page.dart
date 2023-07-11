@@ -104,14 +104,15 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint ||
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint ||
         isCompact;
 
     final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
-    final bool isPinned = media.size.height >= App.pinnedSelector;
+    final bool isPinned = mediaSize.height >= App.pinnedSelector;
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
@@ -125,14 +126,14 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
       // Just a suitable breakpoint for when we want to have more
       // than one column in the body with this particular content.
       final int columns = constraints.maxWidth ~/ 860 + 1;
-      final double margins = App.responsiveInsets(media.size.width, isCompact);
+      final double margins = App.responsiveInsets(mediaSize.width, isCompact);
       // The height diff of the switch = dense - normal.
       final double phoneSwitchReduce =
           isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
       // The height diff with switches removed.
       final double switchRemove = isCompact ? -_kHeightDenseListTile : 0;
       final double headerExtent = _kHeightSelector +
-          media.padding.top +
+          mediaPadding.top +
           margins * 3 +
           phoneReduce +
           phoneSwitchReduce +
@@ -142,12 +143,10 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
         debugPrint('margins ................. : $margins');
         debugPrint('phoneReduce ............. : $phoneReduce');
         debugPrint('kToolbarHeight .......... : $kToolbarHeight');
-        debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
-        debugPrint('media.viewPadding.bottom. : ${media.viewPadding.bottom}');
-        debugPrint('media.padding.top ....... : ${media.padding.top}');
-        debugPrint('media.padding.bottom..... : ${media.padding.bottom}');
-        debugPrint('media.size.width ........ : ${media.size.width}');
-        debugPrint('media.size.height ....... : ${media.size.height}');
+        debugPrint('media.padding.top ....... : ${mediaPadding.top}');
+        debugPrint('media.padding.bottom..... : ${mediaPadding.bottom}');
+        debugPrint('media.size.width ........ : ${mediaSize.width}');
+        debugPrint('media.size.height ....... : ${mediaSize.height}');
       }
       return CustomScrollView(
         controller: scrollController,
@@ -167,7 +166,7 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
               margins,
               margins,
               margins,
-              margins + media.padding.bottom,
+              margins + mediaPadding.bottom,
             ),
             sliver: SliverMasonryGrid.count(
               crossAxisCount: columns,

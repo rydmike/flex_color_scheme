@@ -78,11 +78,11 @@ class _LoginColumnState extends State<LoginColumn> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool useTwoColumns = media.size.height < 500;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool useTwoColumns = mediaSize.height < 500;
     final double spaceFactor = useTwoColumns ? 0.5 : 1;
 
-    if (_debug) debugPrint('Media size ${media.size}');
+    if (_debug) debugPrint('Media size $mediaSize');
 
     return SafeArea(
       child: Center(

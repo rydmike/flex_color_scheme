@@ -144,9 +144,9 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final TextStyle linkStyle =
       theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
-  final MediaQueryData media = MediaQuery.of(context);
-  final double width = media.size.width;
-  final double height = media.size.height;
+  final Size mediaSize = MediaQuery.sizeOf(context);
+  final double width = mediaSize.width;
+  final double height = mediaSize.height;
 
   // Get the card's ShapeBorder from the themed card shape.
   // This was kind of interesting to do, seem to work, for this case at least.

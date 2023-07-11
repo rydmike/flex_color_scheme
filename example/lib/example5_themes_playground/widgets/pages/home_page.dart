@@ -118,11 +118,11 @@ class _HomePageState extends State<HomePage> {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
     final TextTheme textTheme = theme.textTheme;
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final bool isBigDesktop =
-        media.size.width > App.mediumDesktopWidthBreakpoint;
+        mediaSize.width > App.mediumDesktopWidthBreakpoint;
     final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
 
     // Disable vertical/horizontal setting when it has no effect.

@@ -59,9 +59,9 @@ class ShowThemeDataColors extends StatelessWidget {
     final bool isDark = colorScheme.brightness == Brightness.dark;
     final bool useMaterial3 = theme.useMaterial3;
 
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape

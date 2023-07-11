@@ -71,12 +71,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final double margins = App.responsiveInsets(media.size.width);
-    final double topPadding = media.padding.top + kToolbarHeight + margins;
-    final double bottomPadding = media.padding.bottom + margins;
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
+    final double margins = App.responsiveInsets(mediaSize.width);
+    final double topPadding = mediaPadding.top + kToolbarHeight + margins;
+    final double bottomPadding = mediaPadding.bottom + margins;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(

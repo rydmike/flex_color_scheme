@@ -68,7 +68,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final double width = MediaQuery.of(context).size.width;
+    final double width = MediaQuery.sizeOf(context).width;
     final AnimationStatus oneTwoStatus = oneTwoController.status;
     final AnimationStatus railStatus = railController.status;
     // Use rail or navigation bar
@@ -652,9 +652,9 @@ void showMaterial3AboutDialog(BuildContext context,
   final TextStyle linkStyle =
       theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
-  final MediaQueryData media = MediaQuery.of(context);
-  final double width = media.size.width;
-  final double height = media.size.height;
+  final Size mediaSize = MediaQuery.sizeOf(context);
+  final double width = mediaSize.width;
+  final double height = mediaSize.height;
 
   final Uri sourceLink = Uri(
     scheme: 'https',

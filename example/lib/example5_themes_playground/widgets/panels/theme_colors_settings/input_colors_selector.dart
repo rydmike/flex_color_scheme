@@ -182,11 +182,10 @@ class _InputColorsSelectorVerticalState
   @override
   Widget build(BuildContext context) {
     final bool isCompact = widget.controller.compactMode;
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
     final double phoneReduce = isCompact ? App.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce = isCompact ? -3 : 0;
-
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
 
     return SizedBox(
       width: _kWidthOfScrollItem + phoneReduce + margins,
@@ -246,14 +245,15 @@ class SchemeButtonsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final double margins =
-        App.responsiveInsets(media.size.width, controller.compactMode);
+        App.responsiveInsets(mediaSize.width, controller.compactMode);
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final bool isHorizontal = scrollDirection == Axis.horizontal;
-    final double topPadding = isHorizontal ? 0 : media.padding.top + margins;
+    final double topPadding = isHorizontal ? 0 : mediaPadding.top + margins;
 
     return ListView.builder(
       controller: scrollController,
