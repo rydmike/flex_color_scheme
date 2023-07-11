@@ -320,7 +320,7 @@ void main() {
                     .withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(20),
+                Radius.circular(40),
               ),
             ),
             textTheme: ButtonTextTheme.primary,
@@ -409,7 +409,7 @@ void main() {
                     .withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(20),
+                Radius.circular(40),
               ),
             ),
             textTheme: ButtonTextTheme.primary,
@@ -1660,7 +1660,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), //buttonShape,
               elevation: 1,
@@ -1740,7 +1740,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), //buttonShape,
               elevation: 1,
@@ -1802,7 +1802,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), //buttonShape,
               elevation: 1,
@@ -2557,7 +2557,7 @@ void main() {
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+                    Radius.circular(40),
                   ),
                 ),
               ), // buttonShape,
@@ -2584,7 +2584,7 @@ void main() {
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+                    Radius.circular(40),
                   ),
                 ),
               ), // buttonShape,
@@ -5438,7 +5438,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), //buttonShape,
             ).copyWith(
@@ -5597,7 +5597,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), //buttonShape,
             ).copyWith(
@@ -8106,7 +8106,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), // buttonShape,
             ),
@@ -8130,7 +8130,7 @@ void main() {
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(20),
+                  Radius.circular(40),
                 ),
               ), // buttonShape,
             ).copyWith(
@@ -8869,7 +8869,7 @@ void main() {
             disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
             disabledBorderColor:
                 colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(40),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
               minHeight: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dy,
@@ -8906,7 +8906,7 @@ void main() {
             disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
             disabledBorderColor:
                 colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(40),
             constraints: BoxConstraints(
               minWidth: 40 - 2 * 2 + visualDensity.baseSizeAdjustment.dx,
               minHeight: 40 - 2 * 2 + visualDensity.baseSizeAdjustment.dy,

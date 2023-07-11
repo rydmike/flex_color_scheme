@@ -1011,7 +1011,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [TextButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? textButtonRadius;
 
@@ -1031,7 +1031,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius override value for [FilledButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? filledButtonRadius;
 
@@ -1052,7 +1052,7 @@ class FlexSubThemesData with Diagnosticable {
   // /// Border radius override value for [FilledButton.tonal].
   // ///
   // /// If not defined and [defaultRadius] is undefined, defaults to
-  // /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  // /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
   // /// https://m3.material.io/components/buttons/specs
   // final double? filledButtonTonalRadius;
   //
@@ -1072,7 +1072,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [ElevatedButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? elevatedButtonRadius;
 
@@ -1119,7 +1119,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [OutlinedButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp in M2 and StadiumBorder in M3.
+  /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
   /// https://m3.material.io/components/buttons/specs
   final double? outlinedButtonRadius;
 
@@ -1161,7 +1161,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [ToggleButtons].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 20dp.
+  /// [kButtonRadius] 40dp.
   ///
   /// This is not in M3 specification, but FlexColorScheme component
   /// sub-themes harmonizes [ToggleButtons] size

@@ -94,10 +94,14 @@ const EdgeInsetsGeometry kButtonPadding = EdgeInsets.symmetric(horizontal: 16);
 /// Follows Material M3 guide.
 /// https://m3.material.io/components/buttons/specs
 ///
-/// The 20dp was is from older M3 spec version when it was using 20dp instead
-/// of Stadium. FCS M2 uses this as an M3 visual matching default for buttons.
-/// By default FCS uses Stadium on buttons in M3 mode if not specified.
-const double kButtonRadius = 20;
+/// Originally FCS used 20dp that was is from older M3 spec version when it was
+/// using 20dp instead of Stadium. When it later changed to Stadium the radius
+/// for FCS M2 buttons was in version 7.2 changed to use 40 dp radius as an M3
+/// visual matching default for buttons in M2, since it for most used sizes will
+/// result in a Stadium border as well.
+///
+/// By default FCS uses Stadium border on buttons in M3 mode if not specified.
+const double kButtonRadius = 40;
 
 /// Default border radius on Card.
 ///

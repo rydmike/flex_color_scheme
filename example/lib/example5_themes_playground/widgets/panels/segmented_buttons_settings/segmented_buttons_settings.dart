@@ -39,7 +39,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String toggleButtonsRadiusDefaultLabel =
         controller.toggleButtonsBorderRadius == null && effectiveRadius == null
-            ? 'default 20'
+            ? 'default 40'
             : controller.toggleButtonsBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
