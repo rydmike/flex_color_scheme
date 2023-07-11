@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../const/adaptive_theme.dart';
+import '../model/adaptive_theme.dart';
 import '../utils/same_types.dart';
 import 'theme_service.dart';
 // ignore_for_file: comment_references

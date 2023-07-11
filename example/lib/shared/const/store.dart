@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import 'adaptive_theme.dart';
+import '../model/adaptive_theme.dart';
 import 'app_color.dart';
 
 // A simple const class for holding storage keys and default value for each

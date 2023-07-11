@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/const/adaptive_theme.dart';
+import '../../../shared/model/adaptive_theme.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 

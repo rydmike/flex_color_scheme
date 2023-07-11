@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../const/adaptive_theme.dart';
 import '../const/store.dart';
+import '../model/adaptive_theme.dart';
 import '../services/theme_service.dart';
 
 /// Enum to indicate which palette we are using.
