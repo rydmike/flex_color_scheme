@@ -42,8 +42,8 @@ void main() {
     test('FCT kChipRadius is 8', () {
       expect(kChipRadius, 8);
     });
-    test('FCT kButtonRadius is 20', () {
-      expect(kButtonRadius, 20);
+    test('FCT kButtonRadius is 40', () {
+      expect(kButtonRadius, 40);
     });
     test('FCT kInputDecoratorRadius is 10', () {
       expect(kInputDecoratorRadius, 10);

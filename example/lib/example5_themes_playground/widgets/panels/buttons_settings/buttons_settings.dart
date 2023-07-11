@@ -36,7 +36,7 @@ class ButtonsSettings extends StatelessWidget {
         controller.elevatedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
-                : 'default 20'
+                : 'default 40'
             : controller.elevatedButtonBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
@@ -45,7 +45,7 @@ class ButtonsSettings extends StatelessWidget {
         controller.outlinedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
-                : 'default 20'
+                : 'default 40'
             : controller.outlinedButtonBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
@@ -54,7 +54,7 @@ class ButtonsSettings extends StatelessWidget {
         controller.textButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
-                : 'default 20'
+                : 'default 40'
             : controller.textButtonBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
@@ -63,7 +63,7 @@ class ButtonsSettings extends StatelessWidget {
         controller.filledButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
                 ? 'default stadium'
-                : 'default 20'
+                : 'default 40'
             : controller.filledButtonBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'

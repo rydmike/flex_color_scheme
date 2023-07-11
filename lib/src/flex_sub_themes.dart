@@ -1163,7 +1163,7 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp,
+    /// If not defined, defaults to [kButtonRadius] 40dp,
     /// based on earlier M3 specification, that was later changed to stadium.
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
@@ -2049,7 +2049,7 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
     /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
@@ -4752,7 +4752,7 @@ class FlexSubThemes {
 
     /// The button corner border radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
     /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
@@ -6289,7 +6289,7 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp in M2. When using
+    /// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
     /// M3 it defaults to Stadium border based on
     /// https://m3.material.io/components/buttons/specs
     final double? radius,
@@ -6680,7 +6680,7 @@ class FlexSubThemes {
 
     /// The button corner radius.
     ///
-    /// If not defined, defaults to [kButtonRadius] 20dp.
+    /// If not defined, defaults to [kButtonRadius] 40dp.
     ///
     /// This is not in M3 specification, but FlexColorScheme component
     /// sub-themes harmonizes [ToggleButtons] size
