@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../const/store.dart';
 import '../model/adaptive_theme.dart';
+import '../model/visual_density_enum.dart';
 import '../services/theme_service.dart';
 
 /// Enum to indicate which palette we are using.
@@ -58,8 +59,10 @@ class ThemeController with ChangeNotifier {
     // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
     _themeMode =
         await _themeService.load(Store.keyThemeMode, Store.defaultThemeMode);
+    _usedVisualDensity = await _themeService.load(
+        Store.keyThemeMode, Store.defaultUsedVisualDensity);
     _useFlexColorScheme = await _themeService.load(
-        Store.keyUseFlexColorScheme, Store.defaultUseFlexColorScheme);
+        Store.keyUsedVisualDensity, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
     _useFlutterDefaults = await _themeService.load(
@@ -795,6 +798,7 @@ class ThemeController with ChangeNotifier {
     // GENERAL SETTINGS.
     // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
     if (resetMode) setThemeMode(Store.defaultThemeMode, false);
+    setUsedVisualDensity(Store.defaultUsedVisualDensity, false);
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
     setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
@@ -2042,6 +2046,15 @@ class ThemeController with ChangeNotifier {
   // Repeat above pattern for all other theme settings. The properties will
   // not be further explained, property names correspond to equivalent
   // FlexColorScheme properties.
+  late VisualDensityEnum? _usedVisualDensity;
+  VisualDensityEnum? get usedVisualDensity => _usedVisualDensity;
+  void setUsedVisualDensity(VisualDensityEnum? value, [bool notify = true]) {
+    if (value == _usedVisualDensity) return;
+    _usedVisualDensity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyUsedVisualDensity, value));
+  }
+
   late bool _useFlexColorScheme;
   bool get useFlexColorScheme => _useFlexColorScheme;
   void setUseFlexColorScheme(bool? value, [bool notify = true]) {

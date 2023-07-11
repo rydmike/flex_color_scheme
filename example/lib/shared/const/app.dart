@@ -202,6 +202,8 @@ class App {
   ///
   /// Use what you prefer, I just like this one on desktop better than the
   /// default one. The default Flutter one is too dense imo.
+  ///
+  /// Only used by example 4.
   static VisualDensity get visualDensity =>
       FlexColorScheme.comfortablePlatformDensity;
 

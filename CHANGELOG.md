@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 10, 2023**
+**July 11, 2023**
 
 **PACKAGE**
 
@@ -39,6 +39,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * **WIP:** Squircle shape feature. Work in progress.
 
+* Added support for configuring the used VisualDensity. When using mock platform setting in the Playground, it also affects the result of used setting when `VisualDensity.adaptivePlatformDensity`, `FlexColorScheme.comfortablePlatformDensity` or default undefined value, that falls back to `VisualDensity.adaptivePlatformDensity`, are used. 
 * Added support for selecting and using `FlexTones.candyPop` and `FlexTones.chroma`.
 * Added support for making any seed strategy use tone 100 (white) or tone 0 (black) as resulting surface and background tones.
 * Added an option to show the new extended tonal palette tones to the seeded color scheme panel.

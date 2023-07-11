@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
+import '../../shared/model/visual_density_enum.dart';
 import 'code_theme.dart';
 import 'flex_theme_dark.dart';
 import 'topic_theme.dart';
@@ -61,7 +62,8 @@ ThemeData themeDataDark(ThemeController controller) {
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app.
-    visualDensity: App.visualDensity,
+    visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
+        VisualDensityEnum.platform.setting(controller.platform),
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     applyElevationOverlayColor: true,

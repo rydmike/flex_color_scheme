@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/visual_density_enum.dart';
 import '../utils/same_types.dart';
 import 'theme_service.dart';
 // ignore_for_file: comment_references
@@ -599,6 +600,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= FlexPaletteType.values.length) return defaultValue;
         return FlexPaletteType.values[value] as T;
+      }
+      // T is VisualDensityEnum is nullable value.
+      if (sameTypes<T, VisualDensityEnum?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded VisualDensityEnum?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= VisualDensityEnum.values.length) return defaultValue;
+        return VisualDensityEnum.values[value] as T;
+      }
+      // T is VisualDensityEnum none nullable value.
+      if (sameTypes<T, VisualDensityEnum>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded VisualDensityEnum : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= VisualDensityEnum.values.length) return defaultValue;
+        return VisualDensityEnum.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');

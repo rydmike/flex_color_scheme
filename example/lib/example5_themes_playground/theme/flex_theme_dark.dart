@@ -5,6 +5,7 @@ import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/flex_tones_enum.dart';
+import '../../shared/model/visual_density_enum.dart';
 import 'code_theme.dart';
 import 'topic_theme.dart';
 
@@ -416,8 +417,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //
-    // Modify the value in the App class to change it.
-    visualDensity: App.visualDensity,
+    // Get the active app visual density. We use a none null fallback for the
+    // null default of VisualDensity.adaptivePlatformDensity based on
+    // VisualDensityEnum.platform.setting where we can use the Playground
+    // active mock platform for the fake default as well.
+    visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
+        VisualDensityEnum.platform.setting(controller.platform),
     //
     // Custom font, modify in App class to change it.
     // For demonstration purposes the custom font is defined via Google fonts

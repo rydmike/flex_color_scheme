@@ -106,6 +106,9 @@ String generateThemeDartCode(ThemeController controller) {
   // 'FlexColorScheme.dark' factories direct parameters.
   // We avoid adding any code when API default values are being used.
   //
+  final String visualDensity = controller.usedVisualDensity != null
+      ? '  visualDensity: ${controller.usedVisualDensity!.code},\n'
+      : '';
   final String surfaceModeLight = controller.blendLevel > 0 &&
           controller.surfaceModeLight != FlexSurfaceMode.highScaffoldLowSurfaces
       ? '  surfaceMode: ${controller.surfaceModeLight},\n'
@@ -1722,7 +1725,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useKeyColorsLight'
       '$useM3ErrorColors'
       '$flexTonesLight'
-      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$visualDensity'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the Playground font, add GoogleFonts package and uncomment\n'
@@ -1747,7 +1750,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useKeyColorsDark'
       '$useM3ErrorColors'
       '$flexTonesDark'
-      '  visualDensity: FlexColorScheme.comfortablePlatformDensity,\n'
+      '$visualDensity'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the Playground font, add GoogleFonts package and uncomment\n'

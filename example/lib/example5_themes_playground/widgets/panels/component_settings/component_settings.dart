@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -11,6 +12,7 @@ import '../../shared/back_to_actual_platform.dart';
 import '../../shared/component_colors_reveal.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
+import '../../shared/visual_density_popup_menu.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -42,6 +44,28 @@ class ComponentSettings extends StatelessWidget {
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
+        ),
+        VisualDensityPopupMenu(
+          title: const Text('VisualDensity'),
+          subtitle: const Text(
+            'Defines the visual density of user interface components. '
+            'Density, in the context of a UI, is the vertical and horizontal '
+            '"compactness" of the components in the UI. It is without unit, '
+            'since it means different things to different UI components.\n',
+          ),
+          index: controller.usedVisualDensity?.index ?? -1,
+          onChanged: controller.useFlexColorScheme &&
+                  controller.useSubThemes &&
+                  controller.useMaterial3
+              ? (int index) {
+                  if (index < 0 || index >= VisualDensityEnum.values.length) {
+                    controller.setUsedVisualDensity(null);
+                  } else {
+                    controller
+                        .setUsedVisualDensity(VisualDensityEnum.values[index]);
+                  }
+                }
+              : null,
         ),
         const Divider(),
         SwitchListTileReveal(

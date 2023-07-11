@@ -4845,8 +4845,21 @@ class FlexColorScheme with Diagnosticable {
   /// The comfortable visual density is useful on desktop and desktop web
   /// laptops that have touch screens, as it keeps touch targets a bit larger
   /// than when using compact.
-  static VisualDensity get comfortablePlatformDensity {
-    switch (defaultTargetPlatform) {
+  static VisualDensity get comfortablePlatformDensity =>
+      defaultComfortablePlatformDensity(defaultTargetPlatform);
+
+  /// Returns a [VisualDensity] that is adaptive based on the given [platform].
+  ///
+  /// For desktop platforms, this returns [VisualDensity.comfortable], and for
+  /// other platforms, it returns a default [VisualDensity.standard].
+  ///
+  /// See also:
+  ///
+  /// * [comfortablePlatformDensity] which returns a [VisualDensity] that is
+  ///   adaptive based on [defaultTargetPlatform].
+  static VisualDensity defaultComfortablePlatformDensity(
+      TargetPlatform platform) {
+    switch (platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
       case TargetPlatform.fuchsia:
