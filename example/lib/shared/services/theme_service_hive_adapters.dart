@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/visual_density_enum.dart';
 
 /// A Hive data type adapter for enum [ThemeMode].
 class ThemeModeAdapter extends TypeAdapter<ThemeMode> {
@@ -330,4 +331,28 @@ class FlexPaletteTypeAdapter extends TypeAdapter<FlexPaletteType?> {
 
   @override
   int get typeId => 167;
+}
+
+/// A Hive data type adapter for enum [VisualDensityEnum], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class VisualDensityEnumAdapter extends TypeAdapter<VisualDensityEnum?> {
+  @override
+  VisualDensityEnum? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= VisualDensityEnum.values.length) {
+      return null;
+    } else {
+      return VisualDensityEnum.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, VisualDensityEnum? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 168;
 }

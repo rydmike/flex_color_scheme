@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/visual_density_enum.dart';
 import 'app_color.dart';
 
 // A simple const class for holding storage keys and default value for each
@@ -29,6 +30,12 @@ class Store {
   // Default value for the themeMode, also used to reset settings.
   static const ThemeMode defaultThemeMode = ThemeMode.system;
 
+  // Key used to read and save the usedVisualDensity value.
+  static const String keyUsedVisualDensity = 'usedVisualDensity';
+  // Default value for the usedVisualDensity, also to reset settings.
+  static const VisualDensityEnum defaultUsedVisualDensity =
+      VisualDensityEnum.comfortablePlatform;
+
   // Key used to read and save the useFlexColorScheme value.
   static const String keyUseFlexColorScheme = 'useFlexColorScheme';
   // Default value for the useFlexColorScheme, also to reset settings.
@@ -44,7 +51,7 @@ class Store {
   // Default value for the useFlutterDefaults, also to reset settings.
   static const bool defaultUseFlutterDefaults = false;
 
-  // Key used to read and save the keyAdaptiveRemoveElevationTintLight value.
+  // Key used to read and save the adaptiveRemoveElevationTintLight value.
   static const String keyAdaptiveRemoveElevationTintLight =
       'adaptiveRemoveElevationTintLight';
   // Default value for the adaptiveRemoveElevationTintLight,
@@ -52,7 +59,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintLight = null;
 
-  // Key used to read and save the keyAdaptiveElevationShadowsBackLight value.
+  // Key used to read and save the adaptiveElevationShadowsBackLight value.
   static const String keyAdaptiveElevationShadowsBackLight =
       'adaptiveElevationShadowsBackLight';
   // Default value for the adaptiveElevationShadowsBackLight,
@@ -60,7 +67,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackLight = null;
 
-  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffLight value.
+  // Key used to read and save the adaptiveAppBarScrollUnderOffLight value.
   static const String keyAdaptiveAppBarScrollUnderOffLight =
       'adaptiveAppBarScrollUnderOffLight';
   // Default value for the adaptiveAppBarScrollUnderOffLight,
@@ -68,7 +75,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffLight = null;
 
-  // Key used to read and save the keyAdaptiveRemoveElevationTintDark value.
+  // Key used to read and save the adaptiveRemoveElevationTintDark value.
   static const String keyAdaptiveRemoveElevationTintDark =
       'adaptiveRemoveElevationTintDark';
   // Default value for the adaptiveRemoveElevationTintDark,
@@ -76,7 +83,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintDark = null;
 
-  // Key used to read and save the keyAdaptiveElevationShadowsBackDark value.
+  // Key used to read and save the adaptiveElevationShadowsBackDark value.
   static const String keyAdaptiveElevationShadowsBackDark =
       'adaptiveElevationShadowsBackDark';
   // Default value for the adaptiveElevationShadowsBackDark,
@@ -84,7 +91,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackDark = null;
 
-  // Key used to read and save the keyAdaptiveAppBarScrollUnderOffDark value.
+  // Key used to read and save the adaptiveAppBarScrollUnderOffDark value.
   static const String keyAdaptiveAppBarScrollUnderOffDark =
       'adaptiveAppBarScrollUnderOffDark';
   // Default value for the adaptiveAppBarScrollUnderOffDark,
@@ -92,7 +99,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffDark = null;
 
-  // Key used to read and save the keyAdaptiveRadius value.
+  // Key used to read and save the adaptiveRadius value.
   static const String keyAdaptiveRadius = 'adaptiveRadius';
   // Default value for the adaptiveRadius, also to reset settings.
   // We use NULL as default, on nullable settings.
@@ -421,6 +428,9 @@ class Store {
       'keepDarkTertiaryContainer';
   // Default value for the keepDarkTertiaryContainer, also to reset settings.
   static const bool defaultKeepDarkTertiaryContainer = false;
+
+  // TODO(rydmike): Tech debt, refactor usedFlexToneSetup to use FlexTonesEnum.
+  // See for example keyAdaptiveRemoveElevationTintLight and AdaptiveTheme.
 
   // Key used to read and save the usedFlexToneSetup value.
   // It is used to select different pre-made FlexTones configurations used
