@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../const/adaptive_theme.dart';
+import '../model/adaptive_theme.dart';
 
 /// A Hive data type adapter for enum [ThemeMode].
 class ThemeModeAdapter extends TypeAdapter<ThemeMode> {

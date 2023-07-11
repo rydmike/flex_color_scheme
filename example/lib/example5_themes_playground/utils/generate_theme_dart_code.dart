@@ -2,10 +2,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/const/adaptive_theme.dart';
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
+import '../../shared/model/adaptive_theme.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.
