@@ -20,7 +20,7 @@ class ThemeCode extends StatelessWidget {
   final ThemeController controller;
 
   Future<void> _handleCopyCode(BuildContext context, String text) async {
-    final double? width = MediaQuery.of(context).size.width > 800 ? 700 : null;
+    final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
     final ClipboardData data = ClipboardData(text: text);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

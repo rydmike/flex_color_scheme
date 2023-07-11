@@ -69,8 +69,7 @@ Future<T?> showResponsiveDialog<T>({
   required BuildContext context,
   required Widget child,
 }) {
-  final double screenWidth = MediaQuery.of(context).size.width;
-  if (screenWidth >= _kWidthForFullScreenDialog) {
+  if (MediaQuery.sizeOf(context).width >= _kWidthForFullScreenDialog) {
     return showDialog<T>(
       context: context,
       barrierDismissible: true,

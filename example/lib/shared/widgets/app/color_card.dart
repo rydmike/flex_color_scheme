@@ -72,9 +72,9 @@ class ColorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
     final Size effectiveSize =
         size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));

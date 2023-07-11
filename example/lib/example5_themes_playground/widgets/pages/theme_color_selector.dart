@@ -24,12 +24,12 @@ class ThemeColorSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isNarrow = media.size.width < App.phoneWidthBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool isNarrow = mediaSize.width < App.phoneWidthBreakpoint;
     final bool isCompact = controller.compactMode;
     final bool isPhone =
-        isCompact || isNarrow || media.size.height < App.phoneHeightBreakpoint;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
+        isCompact || isNarrow || mediaSize.height < App.phoneHeightBreakpoint;
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     return RepaintBoundary(
       child: HeaderCard(
         margin: EdgeInsets.symmetric(horizontal: margins),
@@ -155,9 +155,10 @@ class _ThemeColorSelectorDelegateWrapper extends StatelessWidget {
   final ThemeController controller;
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = controller.compactMode;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     return Material(
       color: Theme.of(context).colorScheme.surfaceTint.withAlpha(0x38),
       child: ClipRect(
@@ -165,7 +166,7 @@ class _ThemeColorSelectorDelegateWrapper extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Padding(
             padding: EdgeInsets.only(
-              top: media.padding.top + margins,
+              top: mediaPadding.top + margins,
               bottom: margins,
             ),
             child: ThemeColorSelector(controller: controller),

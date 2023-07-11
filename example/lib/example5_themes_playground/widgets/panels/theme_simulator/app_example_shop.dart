@@ -285,7 +285,7 @@ class _ProductScreenState extends State<ProductScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height * .35,
+              height: MediaQuery.sizeOf(context).height * .35,
               color: background,
               padding: const EdgeInsets.symmetric(vertical: 18),
               child: Column(
@@ -987,9 +987,9 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final TextStyle linkStyle =
       theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
-  final MediaQueryData media = MediaQuery.of(context);
-  final double width = media.size.width;
-  final double height = media.size.height;
+  final Size mediaSize = MediaQuery.sizeOf(context);
+  final double width = mediaSize.width;
+  final double height = mediaSize.height;
 
   final Uri sourceLink = Uri(
     scheme: 'https',

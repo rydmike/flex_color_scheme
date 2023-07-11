@@ -106,15 +106,16 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
   @override
   Widget build(BuildContext context) {
     final ThemeController controller = widget.controller;
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
 
     final bool isCompact = widget.controller.compactMode;
-    final bool isPinned = media.size.height >= App.pinnedSelector;
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint ||
+    final bool isPinned = mediaSize.height >= App.pinnedSelector;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint ||
         isCompact;
     final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     // The height diff of the switch = dense - normal.
     final double phoneSwitchReduce =
         isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
@@ -124,7 +125,7 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
     // [ThemeColorSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
     final double headerExtent = _kHeightSelector +
-        media.padding.top +
+        mediaPadding.top +
         margins * 3 +
         phoneReduce +
         phoneSwitchReduce +
@@ -135,12 +136,10 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
       debugPrint('margins ................. : $margins');
       debugPrint('phoneReduce ............. : $phoneReduce');
       debugPrint('kToolbarHeight .......... : $kToolbarHeight');
-      debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
-      debugPrint('media.viewPadding.bottom. : ${media.viewPadding.bottom}');
-      debugPrint('media.padding.top ....... : ${media.padding.top}');
-      debugPrint('media.padding.bottom..... : ${media.padding.bottom}');
-      debugPrint('media.size.width ........ : ${media.size.width}');
-      debugPrint('media.size.height ....... : ${media.size.height}');
+      debugPrint('media.padding.top ....... : ${mediaPadding.top}');
+      debugPrint('media.padding.bottom..... : ${mediaPadding.bottom}');
+      debugPrint('media.size.width ........ : ${mediaSize.width}');
+      debugPrint('media.size.height ....... : ${mediaSize.height}');
     }
     return CustomScrollView(
       controller: scrollController,
@@ -266,12 +265,13 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
 
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
-    final double bottomPadding = media.padding.bottom;
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
+    final double bottomPadding = mediaPadding.bottom;
     final double topPadding =
-        widget.addTopPadding ? media.padding.top + margins : 0;
+        widget.addTopPadding ? mediaPadding.top + margins : 0;
 
     return Expanded(
       child: Row(

@@ -427,17 +427,17 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   // Active state of each menuItem.
   late List<ResponsiveMenuItemIconState> menuItemsIconState;
   // Previous media size.
-  late Size mediaSize;
+  late Size previousMediaSize;
 
   @override
   void didUpdateWidget(covariant ResponsiveScaffold oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final MediaQueryData media = MediaQuery.of(context);
-    if (media.size != mediaSize) {
-      mediaSize = media.size;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    if (mediaSize != previousMediaSize) {
+      previousMediaSize = mediaSize;
       // On purpose not checking the the height here, we want to keep and auto
       // open the rail if this is possibly a phone in landscape mode.
-      final bool isPhone = media.size.width < App.phoneWidthBreakpoint;
+      final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint;
       // This make the rail menu auto-close on phone size and open back up if
       // moving to landscape or none phone size. You can still open a very
       // narrow rail also in phone size, but if you resize the canvas at phone
@@ -471,7 +471,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   void initState() {
     super.initState();
     // Assume zero media size;
-    mediaSize = Size.zero;
+    previousMediaSize = Size.zero;
     // Not set again if changed in the app, only on init,  you can make it do
     // that too if you need it, which you do if want to change the expanded
     // menu max width dynamically while running app.
@@ -498,12 +498,11 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    // Short handle to the media query, used to get size and paddings.
-    final MediaQueryData media = MediaQuery.of(context);
     // We are on media width where we allow the menu to be shown as fixed,
     // we are just going to call that isDesktop, but it could be large tablet
     // or tablet in landscape, or even phone in landscape.
-    final bool isDesktop = media.size.width >= widget.breakpointShowFullMenu;
+    final bool isDesktop =
+        MediaQuery.sizeOf(context).width >= widget.breakpointShowFullMenu;
     // Secret sauce for a simple auto responsive & toggleable drawer-rail-menu.
     if (!isDesktop) activeMenuWidth = widget.railWidth;
     if (!isDesktop && isMenuClosed) activeMenuWidth = 0;

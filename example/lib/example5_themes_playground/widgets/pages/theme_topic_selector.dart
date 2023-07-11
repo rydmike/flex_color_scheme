@@ -71,16 +71,17 @@ class _ThemeTopicSelectorHorizontalState
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint ||
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint ||
         widget.isCompact;
     final double margins =
-        App.responsiveInsets(media.size.width, widget.isCompact);
+        App.responsiveInsets(mediaSize.width, widget.isCompact);
     final double effectiveHeight = App.panelButtonHeight +
         margins * 2 +
         (isPhone ? App.panelButtonPhoneHeightReduce : 0);
-    final double topPadding = media.padding.top;
+    final double topPadding = mediaPadding.top;
     final double buttonHorizontalMargin = isPhone ? 2 : 4;
 
     return FocusTraversalGroup(
@@ -213,11 +214,12 @@ class _ThemeTopicSelectorVerticalState
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final double margins =
-        App.responsiveInsets(media.size.width, widget.isCompact);
+        App.responsiveInsets(mediaSize.width, widget.isCompact);
     final double topPadding =
-        widget.addTopPadding ? media.padding.top + margins : 0;
+        widget.addTopPadding ? mediaPadding.top + margins : 0;
     final double compactWidth = widget.isCompact ? widthReduce : 0;
     final double compactHeight = widget.isCompact ? heightReduce : 0;
 
@@ -316,9 +318,9 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhoneSize = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint;
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final bool isPhoneSize = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final bool isPhone = isPhoneSize || widget.isCompact;
     final double textSize = isPhoneSize || widget.isCompact
         ? widget.isSmall ?? false

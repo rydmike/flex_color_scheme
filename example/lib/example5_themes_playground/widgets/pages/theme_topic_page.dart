@@ -107,13 +107,14 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
   @override
   Widget build(BuildContext context) {
     final ThemeController themeCtrl = widget.controller;
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
-    final bool isPinned = media.size.height >= App.pinnedSelector;
-    final bool isPhone = media.size.width < App.phoneWidthBreakpoint ||
-        media.size.height < App.phoneHeightBreakpoint ||
+    final bool isPinned = mediaSize.height >= App.pinnedSelector;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint ||
         isCompact;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     final double buttonHeight = App.panelButtonHeight +
         (isPhone ? App.panelButtonPhoneHeightReduce : 0);
     final double buttonWidth =
@@ -121,18 +122,16 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
     // All the above is so we can below calculate how high the
     // [_ThemeTopicSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
-    final double headerExtent = buttonHeight + media.padding.top + margins * 2;
+    final double headerExtent = buttonHeight + mediaPadding.top + margins * 2;
     // It was tricky to figure out all the extent details, these helped.
     if (_debug) {
       debugPrint('headerExtent ............ : $headerExtent');
       debugPrint('margins ................. : $margins');
       debugPrint('kToolbarHeight .......... : $kToolbarHeight');
-      debugPrint('media.viewPadding.top.... : ${media.viewPadding.top}');
-      debugPrint('media.viewPadding.bottom. : ${media.viewPadding.bottom}');
-      debugPrint('media.padding.top ....... : ${media.padding.top}');
-      debugPrint('media.padding.bottom..... : ${media.padding.bottom}');
-      debugPrint('media.size.width ........ : ${media.size.width}');
-      debugPrint('media.size.height ....... : ${media.size.height}');
+      debugPrint('media.padding.top ....... : ${mediaPadding.top}');
+      debugPrint('media.padding.bottom..... : ${mediaPadding.bottom}');
+      debugPrint('media.size.width ........ : ${mediaSize.width}');
+      debugPrint('media.size.height ....... : ${mediaSize.height}');
     }
     return Scrollbar(
       controller: scrollController,
@@ -238,10 +237,11 @@ class _ThemePanelView extends StatelessWidget {
     final bool showDivider = !(colorsAreClose(cardColor, background, isLight) ||
         colorsAreClose(headerColor, background, isLight));
 
-    final MediaQueryData media = MediaQuery.of(context);
+    final Size mediaSize = MediaQuery.sizeOf(context);
+    final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = controller.compactMode;
-    final double margins = App.responsiveInsets(media.size.width, isCompact);
-    final double bottomPadding = media.padding.bottom;
+    final double margins = App.responsiveInsets(mediaSize.width, isCompact);
+    final double bottomPadding = mediaPadding.bottom;
 
     final int sideViewIndex = controller.sideViewIndex;
     return LayoutBuilder(

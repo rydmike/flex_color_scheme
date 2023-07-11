@@ -166,9 +166,8 @@ class Breakpoint {
         'MinColumnSize must be null or from 137/2 (=two columns on a small watch) '
         ' to 8192 (=1 column on a 8k screen)');
 
-    final MediaQueryData media = MediaQuery.of(context);
-    final double width = media.size.width;
-    final Orientation orientation = media.orientation;
+    final double width = MediaQuery.sizeOf(context).width;
+    final Orientation orientation = MediaQuery.orientationOf(context);
 
     if (type == BreakType.material) {
       return Breakpoint._calcBreakpoint(
