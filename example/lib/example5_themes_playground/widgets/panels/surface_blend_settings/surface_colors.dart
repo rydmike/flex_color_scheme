@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/flex_tone.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/model/flex_tones_enum.dart';
 import '../../shared/color_name_value.dart';
 
 // Display the all scheme surface colors in currently selected color scheme,

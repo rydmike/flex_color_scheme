@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
-import '../../shared/const/flex_tone.dart';
 import '../../shared/controllers/theme_controller.dart';
+import '../../shared/model/flex_tones_enum.dart';
 import 'code_theme.dart';
 import 'topic_theme.dart';
 
