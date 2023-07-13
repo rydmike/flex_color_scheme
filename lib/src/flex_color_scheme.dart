@@ -310,6 +310,7 @@ class FlexColorScheme with Diagnosticable {
     this.package,
     this.materialTapTargetSize,
     this.pageTransitionsTheme,
+    this.splashFactory,
     this.platform,
     this.typography,
     this.applyElevationOverlayColor = true,
@@ -801,6 +802,22 @@ class FlexColorScheme with Diagnosticable {
   /// This is convenience pass through in FlexColorScheme to avoid a `copyWith`
   /// on `ThemeData` produced by FlexColorScheme.
   final PageTransitionsTheme? pageTransitionsTheme;
+
+  /// Defines the appearance of ink splashes produces by [InkWell]
+  /// and [InkResponse].
+  ///
+  /// Providing a [splashFactory] value will override the default one created
+  /// by [ThemeData], it will also override any splash settings in
+  /// [subThemesData].
+  ///
+  /// See also:
+  ///
+  ///  * [InkSplash.splashFactory], which defines the default splash.
+  ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+  ///    more aggressively than the default.
+  ///  * [InkSparkle.splashFactory], which defines a more aggressive and organic
+  ///    splash with sparkle effects.
+  final InteractiveInkFeatureFactory? splashFactory;
 
   /// The platform adaptive widgets should adapt to target and mechanics too.
   ///
@@ -2233,6 +2250,22 @@ class FlexColorScheme with Diagnosticable {
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
     final PageTransitionsTheme? pageTransitionsTheme,
 
+    /// Defines the appearance of ink splashes produces by [InkWell]
+    /// and [InkResponse].
+    ///
+    /// Providing a [splashFactory] value will override the default one created
+    /// by [ThemeData], it will also override any splash settings in
+    /// [subThemesData].
+    ///
+    /// See also:
+    ///
+    ///  * [InkSplash.splashFactory], which defines the default splash.
+    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+    ///    more aggressively than the default.
+    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+    ///    organic splash with sparkle effects.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -2939,6 +2972,7 @@ class FlexColorScheme with Diagnosticable {
       package: package,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
+      splashFactory: splashFactory,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -4079,6 +4113,22 @@ class FlexColorScheme with Diagnosticable {
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
     final PageTransitionsTheme? pageTransitionsTheme,
 
+    /// Defines the appearance of ink splashes produces by [InkWell]
+    /// and [InkResponse].
+    ///
+    /// Providing a [splashFactory] value will override the default one created
+    /// by [ThemeData], it will also override any splash settings in
+    /// [subThemesData].
+    ///
+    /// See also:
+    ///
+    ///  * [InkSplash.splashFactory], which defines the default splash.
+    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+    ///    more aggressively than the default.
+    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+    ///    organic splash with sparkle effects.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -4814,6 +4864,7 @@ class FlexColorScheme with Diagnosticable {
       package: package,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
+      splashFactory: splashFactory,
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
@@ -5603,11 +5654,20 @@ class FlexColorScheme with Diagnosticable {
     // Use adaptive dialog radius?
     final FlexAdaptive adaptiveDialogRadius =
         subTheme.adaptiveDialogRadius ?? const FlexAdaptive.off();
-    // Get the correct adaptive dialog default radius.
+    // Get the effective used adaptive dialog default radius.
     final double? platformDialogRadius =
         adaptiveDialogRadius.adapt(effectivePlatform)
             ? subTheme.dialogRadiusAdaptive
             : subTheme.dialogRadius;
+
+    // Use adaptive splash?
+    final FlexAdaptive adaptiveSplashType =
+        subTheme.adaptiveSplashType ?? const FlexAdaptive.off();
+    // Get the effective used platform adaptive ink feature.
+    final InteractiveInkFeatureFactory? platformSplash =
+        adaptiveSplashType.adapt(effectivePlatform)
+            ? subTheme.splashTypeAdaptive?.splashFactory()
+            : subTheme.splashType?.splashFactory();
 
     // Logic to determine the default Typography to use.
     //
@@ -6390,13 +6450,16 @@ class FlexColorScheme with Diagnosticable {
       // A correct Material 2 design should use it.
       applyElevationOverlayColor: isDark && applyElevationOverlayColor,
       extensions: extensions,
-      // Input decoration theme.
-      inputDecorationTheme: effectiveInputDecorationTheme,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
       platform: effectivePlatform,
       useMaterial3: useMaterial3,
       visualDensity: visualDensity,
+      // Add SplashFactory, first custom value, then sub-theme platform
+      // dependent configured choice.
+      splashFactory: splashFactory ?? platformSplash,
+      // Input decoration theme.
+      inputDecorationTheme: effectiveInputDecorationTheme,
 
       // COLOR
       //
