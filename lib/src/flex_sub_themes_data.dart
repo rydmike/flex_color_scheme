@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'flex_adaptive.dart';
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
+import 'flex_splash_type.dart';
 import 'flex_sub_themes.dart';
 
 // ignore_for_file: comment_references
@@ -169,6 +170,10 @@ class FlexSubThemesData with Diagnosticable {
     this.adaptiveElevationShadowsBack,
     this.adaptiveAppBarScrollUnderOff,
     this.adaptiveRadius,
+    this.adaptiveSplashType,
+    //
+    this.splashType,
+    this.splashTypeAdaptive,
     //
     this.blendTextTheme = false,
     this.useTextTheme,
@@ -781,9 +786,9 @@ class FlexSubThemesData with Diagnosticable {
   /// Controls if the [defaultRadiusAdaptive] is used instead of [defaultRadius]
   /// on configured platforms.
   ///
-  /// With this feature you can have another configured border radius on
-  /// components with a [ShapeBorder] than the what you have defined in
-  /// [defaultRadius] as default.
+  /// With this feature you can have another configured default border radius on
+  /// components with a [ShapeBorder] than what you defined in [defaultRadius]
+  /// as default radius.
   ///
   /// If you keep [defaultRadius] undefined and define [defaultRadiusAdaptive],
   /// you can get the M3 by radius that varies by widget on platforms not
@@ -804,6 +809,36 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to [FlexAdaptive.off].
   final FlexAdaptive? adaptiveRadius;
+
+  /// Controls if the [splashTypeAdaptive] is used instead of [splashType]
+  /// on configured platforms.
+  ///
+  /// With this feature you can have another configured ink splash type on
+  /// selected adaptive platforms, than the value you defined for [splashType].
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps M3 default Material 3 radius
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms, but uses the [splashTypeAdaptive] value
+  /// on other platforms, like iOS, desktop and their web usage.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveSplashType;
+
+  /// Controls the type of splash factory [ThemeData.splashFactory] will use.
+  ///
+  /// If not defined, defaults to the ThemeData factory default, which produces
+  /// the same result as when [FlexSplashType.inkDefault] is defined.
+  final FlexSplashType? splashType;
+
+  /// Controls the type splash factory [ThemeData.splashFactory] will
+  /// use on platforms defined by [adaptiveSplashType].
+  ///
+  /// If not defined, or the current platform does not match adaptive usage
+  /// criteria defined by [adaptiveSplashType], the used splash type is
+  /// defined by [splashType].
+  final FlexSplashType? splashTypeAdaptive;
 
   /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
@@ -2997,6 +3032,10 @@ class FlexSubThemesData with Diagnosticable {
     final FlexAdaptive? adaptiveElevationShadowsBack,
     final FlexAdaptive? adaptiveAppBarScrollUnderOff,
     final FlexAdaptive? adaptiveRadius,
+    final FlexAdaptive? adaptiveSplashType,
+    //
+    final FlexSplashType? splashType,
+    final FlexSplashType? splashTypeAdaptive,
     //
     final bool? blendTextTheme,
     final bool? useTextTheme,
@@ -3245,6 +3284,10 @@ class FlexSubThemesData with Diagnosticable {
       adaptiveAppBarScrollUnderOff:
           adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
       adaptiveRadius: adaptiveRadius ?? this.adaptiveRadius,
+      adaptiveSplashType: adaptiveSplashType ?? this.adaptiveSplashType,
+      //
+      splashType: splashType ?? this.splashType,
+      splashTypeAdaptive: splashTypeAdaptive ?? this.splashTypeAdaptive,
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useTextTheme: useTextTheme ?? this.useTextTheme,
@@ -3657,6 +3700,10 @@ class FlexSubThemesData with Diagnosticable {
         other.adaptiveElevationShadowsBack == adaptiveElevationShadowsBack &&
         other.adaptiveAppBarScrollUnderOff == adaptiveAppBarScrollUnderOff &&
         other.adaptiveRadius == adaptiveRadius &&
+        other.adaptiveSplashType == adaptiveSplashType &&
+        //
+        other.splashType == splashType &&
+        other.splashTypeAdaptive == splashTypeAdaptive &&
         //
         other.blendTextTheme == blendTextTheme &&
         other.useTextTheme == useTextTheme &&
@@ -3963,6 +4010,10 @@ class FlexSubThemesData with Diagnosticable {
         adaptiveElevationShadowsBack,
         adaptiveAppBarScrollUnderOff,
         adaptiveRadius,
+        adaptiveSplashType,
+        //
+        splashType,
+        splashTypeAdaptive,
         //
         blendTextTheme,
         useTextTheme,
@@ -4217,6 +4268,12 @@ class FlexSubThemesData with Diagnosticable {
         'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
     properties
         .add(EnumProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
+    properties.add(
+        EnumProperty<FlexAdaptive>('adaptiveSplashType', adaptiveSplashType));
+    //
+    properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
+    properties.add(
+        EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
     //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));

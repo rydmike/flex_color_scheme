@@ -13,7 +13,7 @@ import 'package:flutter/foundation.dart';
 ///
 /// The purpose of this feature is to enable using Material design based
 /// themes, that are adjusted differently based on the used platform. A typical
-/// use case is removing Material 3 design features that may be too opinionated
+/// use case is removing Material-3 design features that may be too opinionated
 /// on e.g. iOS and desktop platforms, but you may want to keep them on Android.
 ///
 /// Each platform adaptive theming feature can be configure what platform it
@@ -22,19 +22,24 @@ import 'package:flutter/foundation.dart';
 /// device. The swapping between the default standard theme and the platform
 /// adaptive version, can be done per platform and web usage per platform.
 ///
-/// The following adaptive theme settings are available in [FlexColorScheme]
-/// from version 7.0.0:
+/// The following adaptive theme settings are available in [FlexColorScheme]:
 ///
 /// - [FlexSubThemesData.adaptiveRemoveElevationTint] to adaptively remove
-///   elevation tint when Material 3 mode is used.
+///   elevation tint when Material-3 mode is used.
 /// - [FlexSubThemesData.adaptiveElevationShadowsBack] to adaptively bring
-///   elevation shadows back where they were removed in Material 3, when
-///   Material 3 mode is used.
+///   elevation shadows back where they were removed in Material-3, when
+///   Material-3 mode is used.
 /// - [FlexSubThemesData.adaptiveAppBarScrollUnderOff] to adaptively remove the
-///   [AppBar] scroll under elevation tint when Material 3 mode is used.
+///   [AppBar] scroll under elevation tint when Material-3 mode is used.
 /// - [FlexSubThemesData.adaptiveRadius] to adaptively use global
 ///   [defaultRadiusAdaptive] instead of [defaultRadius] in both
-///   Material 2 and Material 3 mode.
+///   Material-2 and Material-3 mode.
+/// - [FlexSubThemesData.adaptiveDialogRadius] to platform adaptively use
+///   [dialogRadiusAdaptive] instead of [dialogRadius] in both
+///   Material-2 and Material-3 mode as border radius on on dialogs.
+/// - [FlexSubThemesData.adaptiveSplashType] to platform adaptively use
+///   [splashTypeAdaptive] instead of [splashType] in both
+///   Material-2 and Material-3 mode as Ink effect on Material widgets.
 ///
 /// More platform adaptive theming features may be added in future versions,
 /// depending on feedback and requests. One planned **future** platform
@@ -50,7 +55,7 @@ import 'package:flutter/foundation.dart';
 ///
 /// - **FUTURE PLAN**: [FlexSubThemesData.adaptiveSquircle] use Squircle as
 ///   [ShapeBorder] shape instead of Circular, when added, will be available in
-///   both Material 2 and Material 3 mode.
+///   both Material-2 and Material-3 mode.
 ///
 /// Another planned feature is [FlexSubThemesData.adaptiveAppBarStyle], that
 /// can enable you to e.g. use colored AppBar in traditional M2 style, plain

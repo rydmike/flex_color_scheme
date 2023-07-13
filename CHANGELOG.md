@@ -4,11 +4,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 11, 2023**
+**July 13, 2023**
 
 **PACKAGE**
 
 **NEW**  
+
+* New feature that enable platform adaptive Material ink selection via `adaptiveSplashType` a `FlexAdaptive` property and `FlexSplashType` values `splashType` and `splashTypeAdaptive` in `FlexSubThemesData`.
+* FlexColorScheme got `splashFactory` property, which can be used to override any splash type setting in `subThemesData` and also removed the need to do a copy with on `ThemeData` to provide a custom `splashFactory`.
 * New feature that enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData`.
 * Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `FilledButton` and `FilledButton.tonal`. They have the same disabled style when not tinted, so we can do the same to their tinted variants. Even if we still cannot theme them to have different themed colors when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063), we can still theme their disabled state with tint when the option is used.
 * Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `IconButton`, `IconButton.filled`, `IconButton.filledTonal` and `IconButton.outlined` foreground colors. They have the same disabled foreground style when not tinted, so we can do the same to their tinted foreground color variants. We still cannot theme them to have different themed background colors when disabled, or at all when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063). We can only theme their disabled foreground color state with tint, when the option is used.

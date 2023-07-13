@@ -1029,6 +1029,22 @@ extension FlexThemeData on ThemeData {
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
     final PageTransitionsTheme? pageTransitionsTheme,
 
+    /// Defines the appearance of ink splashes produces by [InkWell]
+    /// and [InkResponse].
+    ///
+    /// Providing a [splashFactory] value will override the default one created
+    /// by [ThemeData], it will also override any splash settings in
+    /// [subThemesData].
+    ///
+    /// See also:
+    ///
+    ///  * [InkSplash.splashFactory], which defines the default splash.
+    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+    ///    more aggressively than the default.
+    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+    ///    organic splash with sparkle effects.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -1336,11 +1352,12 @@ extension FlexThemeData on ThemeData {
         visualDensity: visualDensity,
         textTheme: textTheme,
         primaryTextTheme: primaryTextTheme,
-        materialTapTargetSize: materialTapTargetSize,
-        pageTransitionsTheme: pageTransitionsTheme,
         fontFamily: fontFamily,
         fontFamilyFallback: fontFamilyFallback,
         package: package,
+        materialTapTargetSize: materialTapTargetSize,
+        pageTransitionsTheme: pageTransitionsTheme,
+        splashFactory: splashFactory,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
@@ -2331,6 +2348,22 @@ extension FlexThemeData on ThemeData {
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
     final PageTransitionsTheme? pageTransitionsTheme,
 
+    /// Defines the appearance of ink splashes produces by [InkWell]
+    /// and [InkResponse].
+    ///
+    /// Providing a [splashFactory] value will override the default one created
+    /// by [ThemeData], it will also override any splash settings in
+    /// [subThemesData].
+    ///
+    /// See also:
+    ///
+    ///  * [InkSplash.splashFactory], which defines the default splash.
+    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+    ///    more aggressively than the default.
+    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+    ///    organic splash with sparkle effects.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
     ///
@@ -2643,6 +2676,7 @@ extension FlexThemeData on ThemeData {
         package: package,
         materialTapTargetSize: materialTapTargetSize,
         pageTransitionsTheme: pageTransitionsTheme,
+        splashFactory: splashFactory,
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
