@@ -106,6 +106,7 @@ class _DemoAppState extends State<DemoApp> {
         textTheme: GoogleFonts.notoSansTextTheme(),
         primaryTextTheme: GoogleFonts.notoSansTextTheme(),
       ),
+      themeMode: themeMode,
 
       // If you want to use ThemeData.from a ColorScheme based on a ColorScheme
       // from FlexColorScheme, then comment the other two theme setups above and
