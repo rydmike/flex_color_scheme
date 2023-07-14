@@ -37,13 +37,12 @@ class _DemoAppState extends State<DemoApp> {
       // To use this app with the Flutter SDK default theme and default
       // Material Design 2 color scheme, uncomment and use the theme setup below
       // and comment the copy-pasted themes further below,
+      //
       // theme: ThemeData(
-      //   useMaterial3: false,
       //   colorScheme: const ColorScheme.light(),
       //   typography: Typography.material2018(platform: defaultTargetPlatform),
       // ),
       // darkTheme: ThemeData(
-      //   useMaterial3: false,
       //   colorScheme: const ColorScheme.dark(),
       //   typography: Typography.material2018(platform: defaultTargetPlatform),
       // ),
@@ -133,7 +132,6 @@ class _DemoAppState extends State<DemoApp> {
       // ),
 
       // ThemeMode toggle via callback
-      themeMode: themeMode,
       home: HomePage(
         themeMode: themeMode,
         onThemeModeChanged: (ThemeMode mode) {
