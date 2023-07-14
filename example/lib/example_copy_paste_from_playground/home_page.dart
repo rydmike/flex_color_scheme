@@ -128,17 +128,15 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const ShowSubPages(),
               const SizedBox(height: 8),
-              const _MaterialButtonsShowcase(),
+              const _ButtonsSwitchesIconsShowcase(),
               const SizedBox(height: 8),
               const _ToggleFabSwitchesChipsShowcase(),
               const SizedBox(height: 8),
               const _TextInputFieldShowcase(),
               const SizedBox(height: 8),
-              const _ListTileShowcase(),
+              const _AppTabBottomSearchBars(),
               const SizedBox(height: 8),
-              const _TabBarShowCase(),
-              const SizedBox(height: 8),
-              const _BottomBarShowCase(),
+              const _BottomNavigationBarsShowCase(),
               const SizedBox(height: 8),
               const _NavigationRailShowCase(),
               const SizedBox(height: 8),
@@ -149,6 +147,8 @@ class _HomePageState extends State<HomePage> {
               const _MaterialAndBottomSheetShowcase(),
               const SizedBox(height: 8),
               const _CardShowcase(),
+              const SizedBox(height: 8),
+              const _ListTileShowcase(),
               const SizedBox(height: 8),
               const _TextThemeShowcase(),
               const SizedBox(height: 8),
@@ -224,12 +224,13 @@ class _MainPanelState extends State<_MainPanel> {
   }
 }
 
-class _MaterialButtonsShowcase extends StatelessWidget {
-  const _MaterialButtonsShowcase();
+class _ButtonsSwitchesIconsShowcase extends StatelessWidget {
+  const _ButtonsSwitchesIconsShowcase();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -238,14 +239,18 @@ class _MaterialButtonsShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
-      title: const Text('Material Buttons'),
+      title: const Text('Buttons, Switches and Icons'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ElevatedButtonShowcase(),
+            //
+            // Buttons
+            //
+            Text('Material Buttons', style: headerStyle),
             SizedBox(height: 8),
+            ElevatedButtonShowcase(),
             SizedBox(height: 8),
             FilledButtonShowcase(),
             SizedBox(height: 8),
@@ -254,6 +259,57 @@ class _MaterialButtonsShowcase extends StatelessWidget {
             OutlinedButtonShowcase(),
             SizedBox(height: 8),
             TextButtonShowcase(),
+            SizedBox(height: 16),
+            //
+            // ToggleButtons and SegmentedButton
+            //
+            Text('ToggleButtons and SegmentedButton', style: headerStyle),
+            SizedBox(height: 8),
+            ToggleButtonsShowcase(),
+            SizedBox(height: 8),
+            SegmentedButtonShowcase(),
+            SizedBox(height: 16),
+            //
+            // FloatingActionButton and Chip
+            //
+            Text('FloatingActionButton and Chip', style: headerStyle),
+            SizedBox(height: 8),
+            FabShowcase(),
+            SizedBox(height: 16),
+            ChipShowcase(),
+            SizedBox(height: 16),
+            //
+            // Switch, CheckBox and Radio
+            //
+            Text('Switch, CheckBox and Radio', style: headerStyle),
+            SizedBox(height: 8),
+            SwitchShowcase(showCupertinoSwitches: false),
+            CheckboxShowcase(),
+            RadioShowcase(),
+            SizedBox(height: 8),
+            //
+            // Icon
+            //
+            Text('Icon', style: headerStyle),
+            SizedBox(height: 16),
+            IconShowcase(),
+            SizedBox(height: 16),
+            //
+            // IconButton
+            //
+            Text('IconButton', style: headerStyle),
+            SizedBox(height: 16),
+            IconButtonShowcase(),
+            SizedBox(height: 16),
+            IconButtonVariantsShowcase(),
+            SizedBox(height: 16),
+            //
+            // CircleAvatar
+            //
+            Text('CircleAvatar', style: headerStyle),
+            SizedBox(height: 16),
+            CircleAvatarShowcase(),
+            SizedBox(height: 16),
           ],
         ),
       ),
@@ -267,6 +323,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -274,33 +331,36 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
-      leading: Icon(Icons.toggle_on_outlined, color: iconColor),
-      title: const Text('Common Widgets'),
+      leading: Icon(Icons.tune, color: iconColor),
+      title: const Text('Tooltips, Progress Indicators and Sliders'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            FabShowcase(),
+            //
+            // Tooltip
+            //
+            Text('Tooltip', style: headerStyle),
             SizedBox(height: 8),
-            ChipShowcase(),
-            SizedBox(height: 8),
-            ToggleButtonsShowcase(),
-            SizedBox(height: 8),
-            SegmentedButtonShowcase(),
-            SizedBox(height: 8),
-            SwitchShowcase(),
-            CheckboxShowcase(),
-            RadioShowcase(),
-            SliderShowcase(),
-            RangeSliderShowcase(),
-            PopupMenuButtonsShowcase(),
-            DropDownMenuShowcase(explain: true),
-            MenuBarShowcase(),
-            MenuAnchorShowcase(),
-            SizedBox(height: 8),
-            IconShowcase(),
             TooltipShowcase(),
+            SizedBox(height: 16),
+            //
+            // ProgressIndicator
+            //
+            Text('ProgressIndicator', style: headerStyle),
+            SizedBox(height: 8),
+            ProgressIndicatorShowcase(),
+            SizedBox(height: 16),
+            //
+            // Slider and RangeSlider
+            //
+            Text('Slider and RangeSlider', style: headerStyle),
+            SizedBox(height: 8),
+            SliderShowcase(),
+            Divider(),
+            RangeSliderShowcase(),
+            SizedBox(height: 8),
           ],
         ),
       ),
@@ -313,6 +373,7 @@ class _TextInputFieldShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -321,17 +382,37 @@ class _TextInputFieldShowcase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.pin_outlined, color: iconColor),
-      title: const Text('TextField'),
+      title: const Text('TextFields and Menus'),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            //
+            // TextField
+            //
+            Text('TextField with InputDecorator', style: headerStyle),
+            SizedBox(height: 8),
             TextFieldShowcase(),
+            SizedBox(height: 16),
+            //
+            // PopupMenuButton, DropdownButtonFormField, DropDownButton
+            //
+            Text('PopupMenuButton and DropdownButtons', style: headerStyle),
+            PopupMenuButtonsShowcase(explain: true),
             SizedBox(height: 8),
-            DropdownButtonFormFieldShowcase(),
+            DropdownButtonFormFieldShowcase(explain: true),
             SizedBox(height: 8),
-            DropDownMenuShowcase(),
+            DropDownButtonShowcase(explain: true),
+            SizedBox(height: 8),
+            //
+            // DropdownMenu, MenuBar, MenuAnchor
+            //
+            Text('Dropdown Menus and MenuBar', style: headerStyle),
+            DropDownMenuShowcase(explain: true),
+            MenuAnchorShowcase(explain: true),
+            MenuBarShowcase(explain: true),
+            SizedBox(height: 16),
           ],
         ),
       ),
@@ -339,46 +420,13 @@ class _TextInputFieldShowcase extends StatelessWidget {
   }
 }
 
-class _ListTileShowcase extends StatelessWidget {
-  const _ListTileShowcase();
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
-    return StatefulHeaderCard(
-      leading: Icon(Icons.dns_outlined, color: iconColor),
-      title: const Text('ListTile'),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ListTileShowcase(),
-          Divider(height: 1),
-          SwitchListTileShowcase(),
-          Divider(height: 1),
-          CheckboxListTileShowcase(),
-          Divider(height: 1),
-          RadioListTileShowcase(),
-          Divider(),
-          ExpansionTileShowcase(),
-          Divider(),
-          ExpansionPanelListShowcase(),
-        ],
-      ),
-    );
-  }
-}
-
-class _TabBarShowCase extends StatelessWidget {
-  const _TabBarShowCase();
+class _AppTabBottomSearchBars extends StatelessWidget {
+  const _AppTabBottomSearchBars();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -387,27 +435,39 @@ class _TabBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
-      title: const Text('AppBar TabBar BottomAppBar'),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          AppBarShowcase(),
-          SizedBox(height: 8),
-          SearchBarShowcase(),
-          SizedBox(height: 8),
-          TabBarForAppBarShowcase(),
-          SizedBox(height: 8),
-          TabBarForBackgroundShowcase(),
-          SizedBox(height: 8),
-          BottomAppBarShowcase(),
-        ],
+      title: const Text('AppBar TabBar BottomAppBar and SearchBar'),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            //
+            // AppBars and TabBar
+            //
+            Text('AppBar and TabBar', style: headerStyle),
+            SizedBox(height: 8),
+            AppBarShowcase(),
+            SizedBox(height: 8),
+            TabBarForAppBarShowcase(explain: true),
+            SizedBox(height: 8),
+            TabBarForBackgroundShowcase(explain: true),
+            SizedBox(height: 32),
+            //
+            // BottomAppBar and SearchBar
+            //
+            Text('BottomAppBar and SearchBar', style: headerStyle),
+            BottomAppBarShowcase(explain: true),
+            SearchBarShowcase(explain: true),
+            SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _BottomBarShowCase extends StatelessWidget {
-  const _BottomBarShowCase();
+class _BottomNavigationBarsShowCase extends StatelessWidget {
+  const _BottomNavigationBarsShowCase();
 
   @override
   Widget build(BuildContext context) {
@@ -420,15 +480,17 @@ class _BottomBarShowCase extends StatelessWidget {
             theme.colorScheme.onBackground);
     return StatefulHeaderCard(
       leading: Icon(Icons.video_label, color: iconColor),
-      title: const Text('NavigationBar'),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 8),
-          BottomNavigationBarShowcase(),
-          SizedBox(height: 8),
-          NavigationBarShowcase(),
-        ],
+      title: const Text('Bottom Navigation'),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            BottomNavigationBarShowcase(explain: true),
+            SizedBox(height: 8),
+            NavigationBarShowcase(explain: true),
+          ],
+        ),
       ),
     );
   }
@@ -449,7 +511,7 @@ class _NavigationRailShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
-      child: const NavigationRailShowcase(),
+      child: const NavigationRailShowcase(explain: true),
     );
   }
 }
@@ -469,13 +531,16 @@ class _NavigationDrawerShowCase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.featured_video_outlined, color: iconColor),
       title: const Text('NavigationDrawer'),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          NavigationDrawerShowcase(),
-          DrawerShowcase(),
-          SizedBox(height: 32),
-        ],
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            NavigationDrawerShowcase(explain: true),
+            DrawerShowcase(explain: true),
+            SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
@@ -487,6 +552,7 @@ class _DialogShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
@@ -499,6 +565,9 @@ class _DialogShowcase extends StatelessWidget {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          //
+          // AlertDialog, TimePickerDialog, DatePickerDialog
+          //
           SizedBox(height: 8),
           AlertDialogShowcase(),
           SizedBox(height: 8),
@@ -526,15 +595,26 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
     return StatefulHeaderCard(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: BottomSheetShowcase(),
-          ),
-          MaterialBannerSnackBarShowcase(),
-        ],
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            //
+            // BottomSheet
+            //
+            SizedBox(height: 16),
+            BottomSheetShowcase(),
+            SizedBox(height: 16),
+            BottomSheetModalShowcase(),
+            SizedBox(height: 16),
+            //
+            // SnackBar and MaterialBanner
+            //
+            SizedBox(height: 8),
+            MaterialBannerSnackBarShowcase(),
+          ],
+        ),
       ),
     );
   }
@@ -557,8 +637,52 @@ class _CardShowcase extends StatelessWidget {
         title: const Text('Card'),
         child: const Padding(
           padding: EdgeInsets.all(16),
-          child: CardShowcase(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              //
+              // Card
+              //
+              SizedBox(height: 8),
+              CardShowcase(explain: true),
+              SizedBox(height: 16),
+            ],
+          ),
         ));
+  }
+}
+
+class _ListTileShowcase extends StatelessWidget {
+  const _ListTileShowcase();
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onBackground)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onBackground);
+    return StatefulHeaderCard(
+      leading: Icon(Icons.dns_outlined, color: iconColor),
+      title: const Text('ListTiles'),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ListTileShowcase(),
+          Divider(height: 1),
+          SwitchListTileShowcase(),
+          Divider(height: 1),
+          CheckboxListTileShowcase(),
+          Divider(height: 1),
+          RadioListTileShowcase(),
+          Divider(),
+          ExpansionTileShowcase(),
+          Divider(),
+          ExpansionPanelListShowcase(),
+        ],
+      ),
+    );
   }
 }
 
