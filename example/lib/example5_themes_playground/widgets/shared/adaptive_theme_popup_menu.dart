@@ -37,7 +37,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
 
     final String tileLabel = !useDefault
         ? AdaptiveTheme.values[index].label
-        : '${AdaptiveTheme.off.label} (Default)';
+        : 'Undefined (${AdaptiveTheme.off.label})';
 
     final String styleDescribe = !useDefault
         ? AdaptiveTheme.values[index].describe
@@ -88,7 +88,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
               title: i >= AdaptiveTheme.values.length
                   // If we reached max length make default label.
                   ? Text(
-                      '${AdaptiveTheme.off.label} (Default)',
+                      'Undefined (${AdaptiveTheme.off.label})',
                       style: txtStyle,
                     )
                   : Text(AdaptiveTheme.values[i].label, style: txtStyle),
@@ -137,7 +137,7 @@ class _TooltipIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String message = index < 0 || index >= AdaptiveTheme.values.length
-        ? '${AdaptiveTheme.off.label} (Default)'
+        ? 'Undefined (${AdaptiveTheme.off.label})'
         : AdaptiveTheme.values[index].label;
 
     final IconData icon = index < 0 || index >= AdaptiveTheme.values.length

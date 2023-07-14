@@ -170,8 +170,8 @@ class FlexSubThemesData with Diagnosticable {
     this.adaptiveElevationShadowsBack,
     this.adaptiveAppBarScrollUnderOff,
     this.adaptiveRadius,
-    this.adaptiveSplashType,
     //
+    this.adaptiveSplash,
     this.splashType,
     this.splashTypeAdaptive,
     //
@@ -824,19 +824,19 @@ class FlexSubThemesData with Diagnosticable {
   /// on other platforms, like iOS, desktop and their web usage.
   ///
   /// If not defined, defaults to [FlexAdaptive.off].
-  final FlexAdaptive? adaptiveSplashType;
+  final FlexAdaptive? adaptiveSplash;
 
   /// Controls the type of splash factory [ThemeData.splashFactory] will use.
   ///
   /// If not defined, defaults to the ThemeData factory default, which produces
-  /// the same result as when [FlexSplashType.inkDefault] is defined.
+  /// the same result as when [FlexSplashType.defaultSplash] is defined.
   final FlexSplashType? splashType;
 
   /// Controls the type splash factory [ThemeData.splashFactory] will
-  /// use on platforms defined by [adaptiveSplashType].
+  /// use on platforms defined by [adaptiveSplash].
   ///
   /// If not defined, or the current platform does not match adaptive usage
-  /// criteria defined by [adaptiveSplashType], the used splash type is
+  /// criteria defined by [adaptiveSplash], the used splash type is
   /// defined by [splashType].
   final FlexSplashType? splashTypeAdaptive;
 
@@ -3032,8 +3032,8 @@ class FlexSubThemesData with Diagnosticable {
     final FlexAdaptive? adaptiveElevationShadowsBack,
     final FlexAdaptive? adaptiveAppBarScrollUnderOff,
     final FlexAdaptive? adaptiveRadius,
-    final FlexAdaptive? adaptiveSplashType,
     //
+    final FlexAdaptive? adaptiveSplash,
     final FlexSplashType? splashType,
     final FlexSplashType? splashTypeAdaptive,
     //
@@ -3284,8 +3284,8 @@ class FlexSubThemesData with Diagnosticable {
       adaptiveAppBarScrollUnderOff:
           adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
       adaptiveRadius: adaptiveRadius ?? this.adaptiveRadius,
-      adaptiveSplashType: adaptiveSplashType ?? this.adaptiveSplashType,
       //
+      adaptiveSplash: adaptiveSplash ?? this.adaptiveSplash,
       splashType: splashType ?? this.splashType,
       splashTypeAdaptive: splashTypeAdaptive ?? this.splashTypeAdaptive,
       //
@@ -3700,8 +3700,8 @@ class FlexSubThemesData with Diagnosticable {
         other.adaptiveElevationShadowsBack == adaptiveElevationShadowsBack &&
         other.adaptiveAppBarScrollUnderOff == adaptiveAppBarScrollUnderOff &&
         other.adaptiveRadius == adaptiveRadius &&
-        other.adaptiveSplashType == adaptiveSplashType &&
         //
+        other.adaptiveSplash == adaptiveSplash &&
         other.splashType == splashType &&
         other.splashTypeAdaptive == splashTypeAdaptive &&
         //
@@ -4010,8 +4010,8 @@ class FlexSubThemesData with Diagnosticable {
         adaptiveElevationShadowsBack,
         adaptiveAppBarScrollUnderOff,
         adaptiveRadius,
-        adaptiveSplashType,
         //
+        adaptiveSplash,
         splashType,
         splashTypeAdaptive,
         //
@@ -4268,8 +4268,8 @@ class FlexSubThemesData with Diagnosticable {
         'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
     properties
         .add(EnumProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
-    properties.add(
-        EnumProperty<FlexAdaptive>('adaptiveSplashType', adaptiveSplashType));
+    properties
+        .add(EnumProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
     //
     properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
     properties.add(

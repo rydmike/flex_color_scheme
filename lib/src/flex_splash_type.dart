@@ -1,5 +1,6 @@
 // ignore_for_file: comment_references
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_highlight_splash.dart';
@@ -15,7 +16,7 @@ enum FlexSplashType {
   /// the [inkSparkle] effect is used, otherwise [inkRipple] is used.
   ///
   /// This logic is built into the [ThemeData] factory.
-  inkDefault,
+  defaultSplash,
 
   /// The classic and default ink effect used in Material-2.
   ///
@@ -33,38 +34,53 @@ enum FlexSplashType {
   /// animates from the center of its tap/click.
   inkRipple,
 
-  /// Material-3 ink sparkle ripple, centered at the tap or click position
-  /// relative to the tap/click.
+  /// Material-3 ink sparkle ripple, starts from tap position.
   ///
   /// This effect relies on a shader and therefore is unsupported on the Flutter
-  /// Web HTML backend.
+  /// Web HTML backend. If used and the app is built for web, the used
+  /// ink will be [inkRipple].
   ///
   /// Used by default on Android builds in Material-3 mode.
   inkSparkle,
 
-  /// A FlexColorScheme custom splash highlight effect.
+  /// Removes the ink splash effect.
   ///
-  /// An immediate highlight ink feature whose origin starts at the input
-  /// touch point, but expands from touch point in zero duration for an
-  /// immediate highlight effect instead of animated growing ink.
-  inkHighLight,
-  ;
+  /// Use [noSplash] to totally defeat all ink splashes. Only the
+  /// pressed highlight remains, which is usually quite subtle due to
+  /// the typically used highlight color.
+  ///
+  /// For a more prominent immediate click splash, use [instantSplash] that
+  /// utilizes the splash color as an immediate ink.
+  noSplash,
+
+  /// A custom immediate ink splash effect.
+  ///
+  /// Uses an immediate highlight ink feature whose origin starts at the input
+  /// touch point and expands from touch point with zero duration, for an
+  /// immediate splash effect, instead of animated splash color based ink.
+  instantSplash;
 
   /// Return the actual splashFactory defined by the [FlexSplashType] enum.
   ///
-  /// Type [inkDefault] returns null and the type selection is handled by
-  /// [ThemeData] factory defaults.
-  InteractiveInkFeatureFactory? splashFactory() {
+  /// Type [defaultSplash] returns null the type selection should be handled
+  /// by [ThemeData] factory defaults or caller.
+  InteractiveInkFeatureFactory? splashFactory([bool useMaterial3 = true]) {
     switch (this) {
-      case FlexSplashType.inkDefault:
+      case FlexSplashType.defaultSplash:
         return null;
       case FlexSplashType.inkSplash:
-        return InkRipple.splashFactory;
+        return InkSplash.splashFactory;
       case FlexSplashType.inkRipple:
         return InkRipple.splashFactory;
       case FlexSplashType.inkSparkle:
-        return InkSparkle.splashFactory;
-      case FlexSplashType.inkHighLight:
+        return kIsWeb
+            ? useMaterial3
+                ? InkRipple.splashFactory
+                : InkSplash.splashFactory
+            : InkSparkle.splashFactory;
+      case FlexSplashType.noSplash:
+        return NoSplash.splashFactory;
+      case FlexSplashType.instantSplash:
         return FlexHighlightSplash.splashFactory;
     }
   }

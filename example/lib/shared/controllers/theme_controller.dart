@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../const/store.dart';
 import '../model/adaptive_theme.dart';
+import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../services/theme_service.dart';
 
@@ -88,6 +89,13 @@ class ThemeController with ChangeNotifier {
         Store.defaultAdaptiveAppBarScrollUnderOffDark);
     _adaptiveRadius = await _themeService.load(
         Store.keyAdaptiveRadius, Store.defaultAdaptiveRadius);
+    //
+    _adaptiveSplash = await _themeService.load(
+        Store.keyAdaptiveSplash, Store.defaultAdaptiveSplash);
+    _splashType =
+        await _themeService.load(Store.keySplashType, Store.defaultSplashType);
+    _splashTypeAdaptive = await _themeService.load(
+        Store.keySplashTypeAdaptive, Store.defaultSplashTypeAdaptive);
     //
     _isLargeGridView = await _themeService.load(
         Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
@@ -816,6 +824,10 @@ class ThemeController with ChangeNotifier {
     setAdaptiveAppBarScrollUnderOffDark(
         Store.defaultAdaptiveAppBarScrollUnderOffDark, false);
     setAdaptiveRadius(Store.defaultAdaptiveRadius, false);
+    //
+    setAdaptiveSplash(Store.defaultAdaptiveSplash, false);
+    setSplashType(Store.defaultSplashType, false);
+    setSplashTypeAdaptive(Store.defaultSplashTypeAdaptive, false);
     //
     // The IsLargeGridView and ViewIndex settings are never reset to default in
     // a reset, we always keep the current screen and panel on page/panel view.
@@ -2164,6 +2176,33 @@ class ThemeController with ChangeNotifier {
     _adaptiveRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAdaptiveRadius, value));
+  }
+
+  late AdaptiveTheme? _adaptiveSplash;
+  AdaptiveTheme? get adaptiveSplash => _adaptiveSplash;
+  void setAdaptiveSplash(AdaptiveTheme? value, [bool notify = true]) {
+    if (value == _adaptiveSplash) return;
+    _adaptiveSplash = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAdaptiveSplash, value));
+  }
+
+  late SplashTypeEnum? _splashType;
+  SplashTypeEnum? get splashType => _splashType;
+  void setSplashType(SplashTypeEnum? value, [bool notify = true]) {
+    if (value == _splashType) return;
+    _splashType = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySplashType, value));
+  }
+
+  late SplashTypeEnum? _splashTypeAdaptive;
+  SplashTypeEnum? get splashTypeAdaptive => _splashTypeAdaptive;
+  void setSplashTypeAdaptive(SplashTypeEnum? value, [bool notify = true]) {
+    if (value == _splashTypeAdaptive) return;
+    _splashTypeAdaptive = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySplashTypeAdaptive, value));
   }
 
   late bool _isLargeGridView;

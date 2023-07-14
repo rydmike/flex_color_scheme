@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import 'app_color.dart';
 
@@ -104,6 +105,24 @@ class Store {
   // Default value for the adaptiveRadius, also to reset settings.
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveRadius = null;
+
+  // Key used to read and save the adaptiveSplashType value.
+  static const String keyAdaptiveSplash = 'adaptiveSplash';
+  // Default value for the adaptiveSplashType, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveSplash = null;
+
+  // Key used to read and save the splashType value.
+  static const String keySplashType = 'splashType';
+  // Default value for the splashType, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SplashTypeEnum? defaultSplashType = null;
+
+  // Key used to read and save the splashTypeAdaptive value.
+  static const String keySplashTypeAdaptive = 'splashTypeAdaptive';
+  // Default value for the splashTypeAdaptive, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SplashTypeEnum? defaultSplashTypeAdaptive = null;
 
   // Key used to read and save the isLargeGridView value.
   static const String keyIsLargeGridView = 'isLargeGridView';

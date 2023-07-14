@@ -286,6 +286,18 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffDark!.code},\n'
       : '';
 
+  // Splash type settings
+  final String adaptiveSplash = controller.adaptiveSplash != null &&
+          controller.adaptiveSplash != AdaptiveTheme.off
+      ? '    adaptiveSplash: ${controller.adaptiveSplash!.code},\n'
+      : '';
+  final String splashType = controller.splashType != null
+      ? '    splashType: ${controller.splashType!.code},\n'
+      : '';
+  final String splashTypeAdaptive = controller.splashTypeAdaptive != null
+      ? '    splashTypeAdaptive: ${controller.splashTypeAdaptive!.code},\n'
+      : '';
+
   // Default radius, it adaptive variant and border widths.
   final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
@@ -1127,6 +1139,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$thinBorderWidth'
           '$thickBorderWidth'
           //
+          '$adaptiveSplash'
+          '$splashType'
+          '$splashTypeAdaptive'
+          //
           '$adaptiveRemoveElevationTintLight'
           '$adaptiveElevationShadowsBackLight'
           '$adaptiveAppBarScrollUnderOffLight'
@@ -1331,6 +1347,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$blendDarkTextTheme'
           '$useTextTheme'
           '$useM2StyleDividerInM3'
+          //
+          '$adaptiveSplash'
+          '$splashType'
+          '$splashTypeAdaptive'
           //
           '$adaptiveRemoveElevationTintDark'
           '$adaptiveElevationShadowsBackDark'

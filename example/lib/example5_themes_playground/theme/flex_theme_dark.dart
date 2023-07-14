@@ -135,6 +135,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 ?.setting(controller.fakeIsWeb),
             adaptiveRadius:
                 controller.adaptiveRadius?.setting(controller.fakeIsWeb),
+            adaptiveSplash:
+                controller.adaptiveSplash?.setting(controller.fakeIsWeb),
+            //
+            splashType: controller.splashType
+                ?.setting(controller.fakeIsWeb, controller.useMaterial3),
+            splashTypeAdaptive: controller.splashTypeAdaptive
+                ?.setting(controller.fakeIsWeb, controller.useMaterial3),
             // Text theme settings.
             blendTextTheme: controller.blendDarkTextTheme,
             useTextTheme: controller.useTextTheme,

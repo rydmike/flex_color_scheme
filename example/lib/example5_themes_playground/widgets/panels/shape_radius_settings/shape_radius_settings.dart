@@ -367,6 +367,19 @@ class ShapeRadiusSettings extends StatelessWidget {
               'the app in a web build on each platform. The selections here '
               'use built-in combinations, they cover most use cases.'),
         ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Use platform adaptive radius'),
+          index: controller.adaptiveRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveRadius(null);
+                  } else {
+                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
         ListTileReveal(
           enabled: controller.useSubThemes &&
               controller.useFlexColorScheme &&
@@ -444,19 +457,6 @@ class ShapeRadiusSettings extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Adaptive radius'),
-          index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveRadius(null);
-                  } else {
-                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
         ),
         PlatformPopupMenu(
           platform: controller.platform,

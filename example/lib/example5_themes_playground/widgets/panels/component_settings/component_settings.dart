@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
@@ -12,6 +13,7 @@ import '../../shared/back_to_actual_platform.dart';
 import '../../shared/component_colors_reveal.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
+import '../../shared/splash_type_popup_menu.dart';
 import '../../shared/visual_density_popup_menu.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
@@ -54,9 +56,7 @@ class ComponentSettings extends StatelessWidget {
             'since it means different things to different UI components.\n',
           ),
           index: controller.usedVisualDensity?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  controller.useMaterial3
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
               ? (int index) {
                   if (index < 0 || index >= VisualDensityEnum.values.length) {
                     controller.setUsedVisualDensity(null);
@@ -263,8 +263,49 @@ class ComponentSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        SplashTypePopupMenu(
+          title: const Text('Ink splash effect'),
+          subtitle: const Text(
+            'Defines the type of tap ink splash effect used on Material '
+            'UI components.\n',
+          ),
+          index: controller.splashType?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= SplashTypeEnum.values.length) {
+                    controller.setSplashType(null);
+                  } else {
+                    controller.setSplashType(SplashTypeEnum.values[index]);
+                  }
+                }
+              : null,
+        ),
+        SplashTypePopupMenu(
+          title: const Text('Adaptive ink splash effect'),
+          subtitle: const Text(
+            'Defines the type of tap ink splash effect used on Material '
+            'UI components when running on below selected platforms. When not '
+            'on running on these platforms or the if the platform adaptive ink '
+            'feature is OFF, the ink splash effect above is used.\n',
+          ),
+          index: controller.splashTypeAdaptive?.index ?? -1,
+          onChanged: controller.useFlexColorScheme &&
+                  controller.useSubThemes &&
+                  controller.adaptiveSplash != AdaptiveTheme.off &&
+                  controller.adaptiveSplash != null
+              ? (int index) {
+                  if (index < 0 || index >= SplashTypeEnum.values.length) {
+                    controller.setSplashTypeAdaptive(null);
+                  } else {
+                    controller
+                        .setSplashTypeAdaptive(SplashTypeEnum.values[index]);
+                  }
+                }
+              : null,
+        ),
+        const Divider(),
         const ListTileReveal(
-          title: Text('Platform adaptive settings'),
+          title: Text('Platform adaptive behavior'),
           // subtitleDense: true,
           subtitle: Text('With platform adaptive settings you can modify theme '
               'properties to have a different response on selected platforms. '
@@ -278,11 +319,28 @@ class ComponentSettings extends StatelessWidget {
               'the app in a web build on each platform. The selections here '
               'use built-in combinations, they cover most use cases.'),
         ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Platform adaptive ink splash'),
+          subtitle: const Text(
+            'An adaptive theme response used to select a different ink '
+            'splash effect on selected platforms.\n',
+          ),
+          index: controller.adaptiveSplash?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveSplash(null);
+                  } else {
+                    controller.setAdaptiveSplash(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
         if (isLight) ...<Widget>[
           AdaptiveThemePopupMenu(
             title: const Text('Bring elevation shadows back'),
             subtitle: const Text(
-              'Adaptive theme response to bring elevation shadows back in '
+              'An adaptive theme response to bring elevation shadows back in '
               'Material-3 in light theme mode on selected platforms. '
               'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
@@ -305,7 +363,7 @@ class ComponentSettings extends StatelessWidget {
           AdaptiveThemePopupMenu(
             title: const Text('Remove elevation tint'),
             subtitle: const Text(
-              'Adaptive theme response to remove elevation tint on elevated '
+              'An adaptive theme response to remove elevation tint on elevated '
               'surfaces in Material-3 in light theme mode on selected '
               'platforms. This is not recommended unless shadows are also '
               'brought back. '
@@ -332,7 +390,7 @@ class ComponentSettings extends StatelessWidget {
           AdaptiveThemePopupMenu(
             title: const Text('Bring elevation shadows back'),
             subtitle: const Text(
-              'Adaptive theme response to bring elevation shadows back in '
+              'An adaptive theme response to bring elevation shadows back in '
               'Material-3 in dark theme mode on selected platforms. '
               'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
@@ -355,7 +413,7 @@ class ComponentSettings extends StatelessWidget {
           AdaptiveThemePopupMenu(
             title: const Text('Remove elevation tint'),
             subtitle: const Text(
-              'Adaptive theme response to remove elevation tint on elevated '
+              'An adaptive theme response to remove elevation tint on elevated '
               'surfaces in Material-3 in dark theme mode on selected '
               'platforms. This is not recommended in dark mode, unless '
               'shadows are also brought back. However, even then it is bad '
@@ -383,6 +441,7 @@ class ComponentSettings extends StatelessWidget {
                 : null,
           ),
         ],
+        const Divider(),
         PlatformPopupMenu(
           platform: controller.platform,
           onChanged: controller.setPlatform,
