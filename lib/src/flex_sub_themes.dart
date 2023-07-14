@@ -579,7 +579,7 @@ class FlexSubThemes {
       systemOverlayStyle: systemOverlayStyle,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
-      // TODO(rydmike): Workaround to make tint elevation animate.
+      // TODO(rydmike): This is a workaround to make tint elevation animate.
       // TODO(rydmike): Create issue for none animated AppBar elevation tint.
       shape: const RoundedRectangleBorder(),
     );
@@ -652,7 +652,7 @@ class FlexSubThemes {
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
-    // TODO(rydmike): BottomAppBar color default to null only when using M3.
+    // TODO(rydmike): BottomAppBar color defaults to null only when using M3.
     // Due to Theme.Data.bottomAppBarColor being deprecated in Flutter SDK,
     // but still being used in default M2 for widget we have to create a
     // sub-theme with a background color in M2 when it is null, also the
@@ -2108,6 +2108,16 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
+    /// Creates the [InkWell] splash factory, which defines the appearance of
+    /// "ink" splashes that occur in response to taps.
+    ///
+    /// In M2 mode FlexColorScheme passes in the effective splashFactory
+    /// from splashFactory override value or the result from
+    /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+    /// null and the default comes via ThemeData.splashFactory, that is has
+    /// also defined.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -2175,6 +2185,7 @@ class FlexSubThemes {
     if (!useM3) {
       return ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          splashFactory: splashFactory,
           minimumSize: minButtonSize ?? kButtonMinSize,
           padding: padding,
           elevation: elevation ?? kElevatedButtonElevation,
@@ -2319,6 +2330,7 @@ class FlexSubThemes {
 
       return ElevatedButtonThemeData(
         style: ButtonStyle(
+          splashFactory: splashFactory,
           textStyle: textStyle,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
@@ -2401,6 +2413,16 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
+
+    /// Creates the [InkWell] splash factory, which defines the appearance of
+    /// "ink" splashes that occur in response to taps.
+    ///
+    /// In M2 mode FlexColorScheme passes in the effective splashFactory
+    /// from splashFactory override value or the result from
+    /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+    /// null and the default comes via ThemeData.splashFactory, that is has
+    /// also defined.
+    final InteractiveInkFeatureFactory? splashFactory,
 
     /// A temporary flag used to opt-in to Material 3 features.
     ///
@@ -2521,6 +2543,7 @@ class FlexSubThemes {
 
     return FilledButtonThemeData(
       style: ButtonStyle(
+        splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
@@ -4798,6 +4821,16 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
+    /// Creates the [InkWell] splash factory, which defines the appearance of
+    /// "ink" splashes that occur in response to taps.
+    ///
+    /// In M2 mode FlexColorScheme passes in the effective splashFactory
+    /// from splashFactory override value or the result from
+    /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+    /// null and the default comes via ThemeData.splashFactory, that is has
+    /// also defined.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// Defines if the theme uses tinted disabled color.
     ///
     /// If undefined, defaults to false.
@@ -4918,6 +4951,7 @@ class FlexSubThemes {
 
     return OutlinedButtonThemeData(
       style: ButtonStyle(
+        splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
         overlayColor: overlayColor,
@@ -6322,6 +6356,16 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
+    /// Creates the [InkWell] splash factory, which defines the appearance of
+    /// "ink" splashes that occur in response to taps.
+    ///
+    /// In M2 mode FlexColorScheme passes in the effective splashFactory
+    /// from splashFactory override value or the result from
+    /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+    /// null and the default comes via ThemeData.splashFactory, that is has
+    /// also defined.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -6383,6 +6427,7 @@ class FlexSubThemes {
 
     return TextButtonThemeData(
       style: ButtonStyle(
+        splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
         overlayColor: overlayColor,

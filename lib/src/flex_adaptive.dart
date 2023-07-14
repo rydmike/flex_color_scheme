@@ -37,7 +37,7 @@ import 'package:flutter/foundation.dart';
 /// - [FlexSubThemesData.adaptiveDialogRadius] to platform adaptively use
 ///   [dialogRadiusAdaptive] instead of [dialogRadius] in both
 ///   Material-2 and Material-3 mode as border radius on on dialogs.
-/// - [FlexSubThemesData.adaptiveSplashType] to platform adaptively use
+/// - [FlexSubThemesData.adaptiveSplash] to platform adaptively use
 ///   [splashTypeAdaptive] instead of [splashType] in both
 ///   Material-2 and Material-3 mode as Ink effect on Material widgets.
 ///

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/model/visual_density_enum.dart';
+import '../../../shared/model/splash_type_enum.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
-/// Widget used to select used VisualDensity using a popup menu.
+/// Widget used to select used splash type using a popup menu.
 ///
-/// Uses index out out of range of [VisualDensityEnum] to represent
-/// and select no selection of [VisualDensityEnum] which sets its
+/// Uses index out out of range of [SplashTypeEnum] to represent
+/// and select no selection of [SplashTypeEnum] which sets its
 /// value to null in parent, so we can use a selectable item as null input,
 /// to represent default value via no value definition.
-class VisualDensityPopupMenu extends StatelessWidget {
-  const VisualDensityPopupMenu({
+class SplashTypePopupMenu extends StatelessWidget {
+  const SplashTypePopupMenu({
     super.key,
     required this.index,
     this.onChanged,
@@ -33,15 +33,15 @@ class VisualDensityPopupMenu extends StatelessWidget {
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
     final bool useDefault =
-        index < 0 || index >= VisualDensityEnum.values.length || !enabled;
+        index < 0 || index >= SplashTypeEnum.values.length || !enabled;
 
     final String tileLabel = !useDefault
-        ? VisualDensityEnum.values[index].label
-        : 'Undefined (${VisualDensityEnum.platform.label})';
+        ? SplashTypeEnum.values[index].label
+        : 'Undefined (${SplashTypeEnum.defaultSplash.label})';
 
     final String styleDescribe = !useDefault
-        ? VisualDensityEnum.values[index].describe
-        : VisualDensityEnum.platform.describe;
+        ? SplashTypeEnum.values[index].describe
+        : SplashTypeEnum.defaultSplash.describe;
 
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
@@ -49,49 +49,49 @@ class VisualDensityPopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
-      initialValue: useDefault ? VisualDensityEnum.values.length : index,
+      initialValue: useDefault ? SplashTypeEnum.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
         // We return -1 for index that reached max length or any negative
-        // value will cause controller for a VisualDensityEnum to be set to
+        // value will cause controller for a SplashTypeEnum to be set to
         // "null", we need to be able to do that to input "null" property
-        // value to VisualDensityEnum configs.
-        onChanged?.call(index >= VisualDensityEnum.values.length ? -1 : index);
+        // value to SplashTypeEnum configs.
+        onChanged?.call(index >= SplashTypeEnum.values.length ? -1 : index);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i <= VisualDensityEnum.values.length; i++)
+        for (int i = 0; i <= SplashTypeEnum.values.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
-              leading: index == i ||
-                      (index < 0 && i == VisualDensityEnum.values.length)
-                  ? IconTheme(
-                      data: selectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: scheme.primary,
-                        borderColor: Colors.transparent,
-                        child: _TooltipIcon(index: i),
-                      ),
-                    )
-                  : IconTheme(
-                      data: unSelectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: Colors.transparent,
-                        borderColor: scheme.primary,
-                        child: _TooltipIcon(index: i),
-                      ),
-                    ),
-              title: i >= VisualDensityEnum.values.length
+              leading:
+                  index == i || (index < 0 && i == SplashTypeEnum.values.length)
+                      ? IconTheme(
+                          data: selectedIconTheme,
+                          child: ColorSchemeBox(
+                            backgroundColor: scheme.primary,
+                            borderColor: Colors.transparent,
+                            child: _TooltipIcon(index: i),
+                          ),
+                        )
+                      : IconTheme(
+                          data: unSelectedIconTheme,
+                          child: ColorSchemeBox(
+                            backgroundColor: Colors.transparent,
+                            borderColor: scheme.primary,
+                            child: _TooltipIcon(index: i),
+                          ),
+                        ),
+              title: i >= SplashTypeEnum.values.length
                   // If we reached max length make default label.
                   ? Text(
-                      'Undefined (${VisualDensityEnum.platform.label})',
+                      'Undefined (${SplashTypeEnum.defaultSplash.label})',
                       style: txtStyle,
                     )
-                  : Text(VisualDensityEnum.values[i].label, style: txtStyle),
+                  : Text(SplashTypeEnum.values[i].label, style: txtStyle),
             ),
           )
       ],
@@ -121,7 +121,7 @@ class VisualDensityPopupMenu extends StatelessWidget {
               backgroundColor: scheme.primary,
               borderColor: Colors.transparent,
               child: _TooltipIcon(
-                  index: useDefault ? VisualDensityEnum.values.length : index),
+                  index: useDefault ? SplashTypeEnum.values.length : index),
             ),
           ),
         ),
@@ -136,13 +136,13 @@ class _TooltipIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String message = index < 0 || index >= VisualDensityEnum.values.length
-        ? 'Undefined (${VisualDensityEnum.platform.label})'
-        : VisualDensityEnum.values[index].label;
+    final String message = index < 0 || index >= SplashTypeEnum.values.length
+        ? 'Undefined (${SplashTypeEnum.defaultSplash.label})'
+        : SplashTypeEnum.values[index].label;
 
-    final IconData icon = index < 0 || index >= VisualDensityEnum.values.length
+    final IconData icon = index < 0 || index >= SplashTypeEnum.values.length
         ? Icons.texture_outlined
-        : VisualDensityEnum.values[index].icon;
+        : SplashTypeEnum.values[index].icon;
 
     return Tooltip(
       message: message,

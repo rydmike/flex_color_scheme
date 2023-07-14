@@ -73,7 +73,7 @@ enum VisualDensityEnum {
   final IconData icon;
 
   // The setting allows us to use optional platform controlled via app, to
-  // get the correct mocked platform density resposnses for those settings.
+  // get the correct mocked platform density responses for those settings.
   VisualDensity setting(TargetPlatform? platform) {
     switch (this) {
       case VisualDensityEnum.standard:

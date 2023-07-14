@@ -5662,12 +5662,23 @@ class FlexColorScheme with Diagnosticable {
 
     // Use adaptive splash?
     final FlexAdaptive adaptiveSplashType =
-        subTheme.adaptiveSplashType ?? const FlexAdaptive.off();
+        subTheme.adaptiveSplash ?? const FlexAdaptive.off();
     // Get the effective used platform adaptive ink feature.
     final InteractiveInkFeatureFactory? platformSplash =
         adaptiveSplashType.adapt(effectivePlatform)
-            ? subTheme.splashTypeAdaptive?.splashFactory()
-            : subTheme.splashType?.splashFactory();
+            ? subTheme.splashTypeAdaptive?.splashFactory(useMaterial3)
+            : subTheme.splashType?.splashFactory(useMaterial3);
+
+    // We need to make a special case for component splash factories,
+    // if we are using Material2 we need to override the platformSplash factory
+    // for the buttons to get the selected splash in M2 mode, since
+    // in M2 mode the buttons do not fallback to ThemeData.splashFactory, but
+    // in M3 mode they do so we can skip defining th factory for them then.
+    // In M2 mode we also need to fall back to InkSplash.splashFactory, since
+    // in M2 mode FilledButton gets InkRipple by default, but other buttons
+    // get InkSplash by default in M2 mode, Flutter inconsistencies, sigh.
+    final InteractiveInkFeatureFactory? buttonsSplashFactory =
+        useMaterial3 ? null : platformSplash ?? InkSplash.splashFactory;
 
     // Logic to determine the default Typography to use.
     //
@@ -6927,6 +6938,7 @@ class FlexColorScheme with Diagnosticable {
               textStyle: subTheme.elevatedButtonTextStyle,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              splashFactory: buttonsSplashFactory,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -6944,6 +6956,7 @@ class FlexColorScheme with Diagnosticable {
               textStyle: subTheme.filledButtonTextStyle,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              splashFactory: buttonsSplashFactory,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -7147,6 +7160,7 @@ class FlexColorScheme with Diagnosticable {
               textStyle: subTheme.outlinedButtonTextStyle,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              splashFactory: buttonsSplashFactory,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -7294,6 +7308,7 @@ class FlexColorScheme with Diagnosticable {
               textStyle: subTheme.textButtonTextStyle,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              splashFactory: buttonsSplashFactory,
               useMaterial3: useMaterial3,
             )
           : null,

@@ -180,6 +180,14 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 ?.setting(controller.fakeIsWeb),
             adaptiveRadius:
                 controller.adaptiveRadius?.setting(controller.fakeIsWeb),
+            adaptiveSplash:
+                controller.adaptiveSplash?.setting(controller.fakeIsWeb),
+            //
+            splashType: controller.splashType
+                ?.setting(controller.fakeIsWeb, controller.useMaterial3),
+            splashTypeAdaptive: controller.splashTypeAdaptive
+                ?.setting(controller.fakeIsWeb, controller.useMaterial3),
+            //
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
             // If null, it defaults to Material 3 design guide
@@ -506,6 +514,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     fontFamily: controller.useAppFont ? App.font : null,
     textTheme: controller.useAppFont ? App.textTheme : null,
     primaryTextTheme: controller.useAppFont ? App.textTheme : null,
+    //
+    // To test the manual splashFactory override set e.g.
+    // splashFactory: NoSplash.splashFactory,
     //
     // To test manual typography override use this:
     // typography: Typography.material2021(platform: controller.platform),

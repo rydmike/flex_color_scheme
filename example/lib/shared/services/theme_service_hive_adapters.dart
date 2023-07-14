@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 
 /// A Hive data type adapter for enum [ThemeMode].
@@ -355,4 +356,28 @@ class VisualDensityEnumAdapter extends TypeAdapter<VisualDensityEnum?> {
 
   @override
   int get typeId => 168;
+}
+
+/// A Hive data type adapter for enum [SplashTypeEnum], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class SplashTypeEnumAdapter extends TypeAdapter<SplashTypeEnum?> {
+  @override
+  SplashTypeEnum? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= SplashTypeEnum.values.length) {
+      return null;
+    } else {
+      return SplashTypeEnum.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, SplashTypeEnum? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 169;
 }

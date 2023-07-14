@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/adaptive_theme.dart';
+import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../utils/same_types.dart';
 import 'theme_service.dart';
@@ -622,6 +623,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= VisualDensityEnum.values.length) return defaultValue;
         return VisualDensityEnum.values[value] as T;
+      }
+      // T is SplashTypeEnum is nullable value.
+      if (sameTypes<T, SplashTypeEnum?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded SplashTypeEnum?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= SplashTypeEnum.values.length) return defaultValue;
+        return SplashTypeEnum.values[value] as T;
+      }
+      // T is SplashTypeEnum none nullable value.
+      if (sameTypes<T, SplashTypeEnum>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded SplashTypeEnum : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= SplashTypeEnum.values.length) return defaultValue;
+        return SplashTypeEnum.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
