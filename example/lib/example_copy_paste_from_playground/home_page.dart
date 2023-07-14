@@ -552,7 +552,6 @@ class _DialogShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
