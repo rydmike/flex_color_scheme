@@ -5345,6 +5345,16 @@ class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
+    /// Creates the [InkWell] splash factory, which defines the appearance of
+    /// "ink" splashes that occur in response to taps.
+    ///
+    /// In M2 mode FlexColorScheme passes in the effective splashFactory
+    /// from splashFactory override value or the result from
+    /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+    /// null and the default comes via ThemeData.splashFactory, that is has
+    /// also defined.
+    final InteractiveInkFeatureFactory? splashFactory,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -5429,6 +5439,7 @@ class FlexSubThemes {
 
     return SegmentedButtonThemeData(
       style: ButtonStyle(
+        splashFactory: splashFactory,
         // TODO(rydmike): Issue, minimumSize property does nothing.
         // https://github.com/flutter/flutter/issues/121493
         minimumSize: ButtonStyleButton.allOrNull<Size>(

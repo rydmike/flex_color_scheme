@@ -7206,6 +7206,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.segmentedButtonRadius ?? platformRadius,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              splashFactory: buttonsSplashFactory,
               useMaterial3: useMaterial3,
             )
           : null,
