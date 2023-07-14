@@ -3160,9 +3160,9 @@ class FlexColorScheme with Diagnosticable {
     /// If you do not define a [colorScheme], the used colors will be determined
     /// by the [colors] and [scheme] properties. However, when a [colorScheme]
     /// is defined it takes precedence. The [brightness] in the provided
-    /// [colorScheme] is always ignored and set to [Brightness.light] since this
-    /// is the light theme mode factory. Make sure the colors used in your color
-    /// scheme are intended for a light theme.
+    /// [colorScheme] is always ignored and set to [Brightness.dark] since this
+    /// is the dark theme mode factory. Make sure the colors used in your color
+    /// scheme are intended for a dark theme.
     ///
     /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
     /// [surfaceVariant], [background] and [inverseSurface] colors in the
