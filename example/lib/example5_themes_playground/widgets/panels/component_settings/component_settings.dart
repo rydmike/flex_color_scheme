@@ -41,12 +41,6 @@ class ComponentSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        SwitchListTile(
-          title: const Text('Use component sub themes'),
-          value: controller.useSubThemes && controller.useFlexColorScheme,
-          onChanged:
-              controller.useFlexColorScheme ? controller.setUseSubThemes : null,
-        ),
         VisualDensityPopupMenu(
           title: const Text('VisualDensity'),
           subtitle: const Text(
@@ -56,7 +50,7 @@ class ComponentSettings extends StatelessWidget {
             'since it means different things to different UI components.\n',
           ),
           index: controller.usedVisualDensity?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+          onChanged: controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= VisualDensityEnum.values.length) {
                     controller.setUsedVisualDensity(null);
@@ -66,6 +60,12 @@ class ComponentSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        SwitchListTile(
+          title: const Text('Use component sub themes'),
+          value: controller.useSubThemes && controller.useFlexColorScheme,
+          onChanged:
+              controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
         const Divider(),
         SwitchListTileReveal(

@@ -497,7 +497,7 @@ class NavigationBarSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: const Text('Unselected icon and text are less bright. '
               'Shared setting for icon and text, but separate properties '
-              'in API./n'),
+              'in the API.\n'),
           value: controller.navBarMuteUnselected && muteUnselectedEnabled,
           onChanged:
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
