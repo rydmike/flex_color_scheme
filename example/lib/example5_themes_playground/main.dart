@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../shared/const/app.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
@@ -93,7 +92,8 @@ class PlaygroundApp extends StatelessWidget {
       listenable: controller,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
-          scaffoldMessengerKey: App.rootMessengerKey,
+          // TODO(rydmike): Experiment with scaffoldMessengerKey. Remove it.
+          // scaffoldMessengerKey: App.rootMessengerKey,
           debugShowCheckedModeBanner: false,
           title: 'Themes Playground',
           // The Theme controller controls if we use FlexColorScheme made

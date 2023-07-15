@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../const/app.dart';
-import '../../const/app_images.dart';
-
 /// Used to show the current theme on Material widgets.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
@@ -1435,16 +1432,14 @@ class CircleAvatarShowcase extends StatelessWidget {
         Tooltip(
           message: 'CircleAvatar\nwith image',
           child: CircleAvatar(
-            foregroundImage: AssetImage(AppImages.rydmike),
-            child: Text('CA'),
+            child: FlutterLogo(),
           ),
         ),
         Tooltip(
           message: 'CircleAvatar\nwith image\nradius 30',
           child: CircleAvatar(
             radius: 30,
-            foregroundImage: AssetImage(AppImages.rydmike),
-            child: Text('CA'),
+            child: FlutterLogo(size: 40),
           ),
         ),
       ],
@@ -4082,8 +4077,8 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
 
   Future<void> _showDemoMaterialBanner(
       BuildContext context, bool twoButtons, String message) async {
-    App.rootMessengerKey.currentState!.showMaterialBanner(
-      // ScaffoldMessenger.of(context).showMaterialBanner(
+    // App.rootMessengerKey.currentState!.showMaterialBanner(
+    ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         // elevation: 3,
         content: Text(message),
@@ -4093,15 +4088,15 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
             TextButton(
               child: const Text('OK'),
               onPressed: () {
-                App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
-                // ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                // App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
+                ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
               },
             ),
           TextButton(
             child: const Text('Dismiss'),
             onPressed: () {
-              App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
-              // ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+              // App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
+              ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
             },
           ),
         ],

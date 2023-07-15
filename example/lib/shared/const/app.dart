@@ -134,10 +134,11 @@ class App {
     return edgeInsetsBigDesktop;
   }
 
+  // TODO(rydmike): Experiment with scaffoldMessengerKey. Remove it.
   // A global root Scaffold Messenger key, use to read scaffold state without
   // context.
-  static final GlobalKey<ScaffoldMessengerState> rootMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  // static final GlobalKey<ScaffoldMessengerState> rootMessengerKey =
+  //     GlobalKey<ScaffoldMessengerState>();
 
   /// The height when we want to pin the panel or color selector, instead of
   /// letting it float and snap back.
