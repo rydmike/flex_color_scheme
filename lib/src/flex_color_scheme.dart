@@ -6538,6 +6538,12 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.tintedHovered(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
+      // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
+      splashColor: tintedInteractions
+          ? FlexSubThemes.tintedSplash(
+              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
+          : null,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
       // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
       // Use TabBar style dependent function for selected Tab as indicatorColor,
@@ -6546,6 +6552,7 @@ class FlexColorScheme with Diagnosticable {
           ? tabBarStyleColor()
           : FlexSubThemes.schemeColor(
               subTheme.tabBarIndicatorSchemeColor!, colorScheme),
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
       primaryColor: colorScheme.primary,
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
@@ -6568,6 +6575,7 @@ class FlexColorScheme with Diagnosticable {
       // This property is used by `CircleAvatar` and `Slider`.
       // See issue: https://github.com/flutter/flutter/issues/65782
       primaryColorLight: primaryColorLight,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
       // Flutter standard for scaffoldBackgroundColor is colorScheme.background.
@@ -6579,6 +6587,7 @@ class FlexColorScheme with Diagnosticable {
       // separately alone. We want to do so in order to make elegantly nuanced
       // primary color branded themes.
       scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
+
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
       // Define a secondary header color, this property is only used in Flutter
@@ -6587,11 +6596,6 @@ class FlexColorScheme with Diagnosticable {
       // value from the calculated primary swatch.
       // See issue: https://github.com/flutter/flutter/issues/65782
       secondaryHeaderColor: secondaryHeaderColor,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
-      splashColor: tintedInteractions
-          ? FlexSubThemes.tintedSplash(
-              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
-          : null,
 
       // TYPOGRAPHY & ICONOGRAPHY
       //

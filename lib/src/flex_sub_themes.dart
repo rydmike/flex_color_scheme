@@ -4174,6 +4174,7 @@ class FlexSubThemes {
     final Color? surfaceTintColor,
   }) {
     // TODO(rydmike): Drawer indicator tint effect, not supported in Flutter yet
+    // See issue: https://github.com/flutter/flutter/issues/123507
     // final bool tintInteract = useTintedInteraction ?? true;
 
     // Get selected background color, defaults to surface.
@@ -4201,6 +4202,7 @@ class FlexSubThemes {
     final TextStyle style = textStyle ?? const TextStyle();
 
     // TODO(rydmike): Removed interaction tint, not supported in Flutter yet.
+    // See issue: https://github.com/flutter/flutter/issues/123507
     //
     // // Using these tinted overlay variables in all themes for ease of
     // // reasoning and duplication.
@@ -4210,6 +4212,7 @@ class FlexSubThemes {
     // _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // TODO(rydmike): Would need something like this for tinted indicator.
+    // See issue: https://github.com/flutter/flutter/issues/123507
     //  This does not work due to limitations in Flutter SDK implementation.
     //  All we can get is ThemeData based themed hover, press, focus
     //  Report this limitation!
