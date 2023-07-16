@@ -107,9 +107,20 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Theme simulator',
     buttonLabel: 'Theme\nsimulator',
     icon: Icons.phone_iphone,
-    info: 'Use the theme simulator and its devices in a side view '
-        'as you change theme settings, to see how the changes '
-        'modify the look and feel of included demo apps.\n',
+    info: 'Use the theme simulator in a side view '
+        'as you change theme setting and see how the changes '
+        'modify the look and feel of included demo apps on different '
+        'simulated devices.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.general,
+    heading: 'Widget showcase',
+    buttonLabel: 'Widget\nshowcase',
+    icon: Icons.flutter_dash,
+    info: 'This is a presentation of Flutter Material UI widgets '
+        'in one large panel. It shows they look when the current theme is '
+        'applied to them. '
+        'To style them, use component theme settings for each widget.\n',
   ),
   ThemeTopic(
     group: TopicGroup.general,
@@ -121,7 +132,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'the Playground.\n'
         '\n'
         'Use this view as a side panel to see and learn '
-        'what API properties each setting modifies.\n'
+        'what FlexColorScheme API properties each setting modifies.\n'
         '\n'
         'FlexColorScheme works like an advanced ThemeData factory. It returns '
         'a very elaborate Flutter ThemeData object, with a lot less setup '
@@ -142,7 +153,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Seeded ColorScheme',
     buttonLabel: 'Seeded\nColorScheme',
     icon: Icons.colorize_outlined,
-    info: 'In Material 3 color system, seed generated light and '
+    info: 'In Material-3 color system, seed generated light and '
         'dark mode ColorSchemes use the same key colors to generate six '
         'tonal palettes. Light and dark ColorScheme colors, use the same '
         'palettes, but different tones. This ensures that light and '
@@ -150,7 +161,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'To ensure that light and dark themes use identical tonal palettes, '
         'FlexColorScheme uses the light mode colors '
-        'from built-in schemes, to seed generate the ColorSchemes. '
+        'from built-in schemes to seed generate the ColorSchemes. '
         'When using custom colors, you can decide if you do so or not.\n',
   ),
   ThemeTopic(
@@ -158,10 +169,10 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Surface blends',
     buttonLabel: 'Surface\nblends',
     icon: Icons.invert_colors_outlined,
-    info: 'Material 2 design demonstrated using surfaces with primary color '
-        'alpha blends in dark mode. FlexColorScheme surface blends '
+    info: 'Material-2 design demonstrated using surfaces with primary color '
+        'alpha-blends in dark mode. FlexColorScheme surface blends '
         'provides this for both light and dark mode. '
-        'Material 3 design has a new color system where a hint of primary '
+        'Material-3 design has a new color system where a hint of primary '
         'color is also used on surfaces. It is done via its neutral tonal '
         'palettes, that are shifted slightly towards the primary color.\n'
         '\n'
@@ -180,8 +191,9 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     buttonLabel: 'Effective\ncolors',
     icon: Icons.gradient_outlined,
     info: 'The effective colors show the current effective colors in the '
-        "theme's ColorScheme, colors directly in ThemeData and also important "
-        'component theme colors. It also provides some additional useful '
+        "theme's ColorScheme, and also colors still defined directly in "
+        'ThemeData as well as important component theme colors. The info '
+        'expands also provides additional '
         'background information about colors in Flutter, that are useful to '
         'be aware of.',
   ),
@@ -190,34 +202,70 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Component themes',
     buttonLabel: 'Component\nthemes',
     icon: Icons.widgets_outlined,
-    info: "FlexColorScheme's Material 2 mode component themes are opinionated. "
-        'They look almost like Material 3 mode default components, '
-        'but done in Material 2 mode.\n'
+    info: 'To use all theming features on FlexColorScheme you must enable '
+        'component sub-themes. If you are only here for the color '
+        'theming features, and intend to style your component themes yourself, '
+        'you can turn OFF using component.\n'
         '\n'
-        'When using Material 3, there are only a few nuance differences '
-        'compared to default M3 styles, plus some minor fixes to a few '
+        "FlexColorScheme's Material-2 mode component themes are opinionated. "
+        'They look almost like Material-3 mode default components, '
+        'but done in Material-2 mode.\n'
+        '\n'
+        'When using Material-3, there are only a few nuance differences '
+        'compared to default Material-3 styles, plus some minor fixes to a few '
         'Flutter Material 3 specification deviations, that Flutter may also '
         'fix in later versions.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.components,
+    heading: 'Adaptive theme',
+    buttonLabel: 'Adaptive\ntheme',
+    icon: Icons.auto_fix_high,
+    info: 'In Flutter, adaptive widgets refer to UI components that use a '
+        'different style or completely different platform native looking '
+        'component for each target platforms. Flutter only has a few '
+        'components that adapt between iOS and Android versions.\n'
+        '\n'
+        'In a similar manner, FlexColorScheme allows you to define platform '
+        'adaptive theme responses for some key theme '
+        'properties. This allows you to use a different theme, than the main '
+        'one you defined for such a property. For each such property you can '
+        'define which platforms should get the adaptive version. Some '
+        'adaptive settings directly enable/disable a specific feature on the '
+        'selected platforms. Others enable defining another property value '
+        'for the platform adaptive response, like border radius.\n'
+        '\n'
+        'The platform adaptive theme feature does not replace using platform '
+        'adaptive widgets. It is useful if you for example want to use a '
+        'native '
+        'looking Material-3 style on Android, but e.g. want to use a more '
+        'platform agnostic style for iOS, macOS and desktop and make '
+        'Material-3 widgets not look so out of place on these platforms.\n'
+        '\n'
+        'Like platform adaptive widgets, and all other theme settings, the '
+        'adaptive themed style is automatic and happens based on which '
+        'platform the themed app is running on. The native platform build and '
+        'using the app as a web app on same '
+        'platform can have different themed adaptive results.\n',
   ),
   ThemeTopic(
     group: TopicGroup.components,
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
     icon: Icons.rounded_corner_outlined,
-    info: 'The border shape and radius used by shape corner can be themed. In '
-        'FlexColorScheme you can change it globally for all curved corners '
-        'with one convenient setting. You can also use a different shape and '
-        'border radius on selected platforms.\n',
-  ),
-  ThemeTopic(
-    group: TopicGroup.components,
-    heading: 'Widget showcase',
-    buttonLabel: 'Widget\nshowcase',
-    icon: Icons.flutter_dash,
-    info: 'This is a presentation of Flutter Material UI widgets/components '
-        'in one large panel, of how they look when the current theme is '
-        'applied to them. '
-        'To style them use component theme settings panels for each widget.\n',
+    info: 'The border shape and radius used on shape corners can be themed. In '
+        'FlexColorScheme you can change the radius globally for all curved '
+        'corners with one convenient setting. You can also use a different '
+        'border radius on selected platforms. In current version you cannot '
+        "change the shape type, it is always using Flutter's default "
+        'circular.\n'
+        '\n'
+        'A later version may add platform adaptive shape type selection. '
+        'Its main purpose is to enable using Squircle shapes on Apple '
+        'platforms. '
+        'It will be possible to use it on any other platform too, '
+        'if so desired. Flutter SDK does not include the correct Apple '
+        'Squricle shape out of the box.\n',
   ),
   ThemeTopic(
     group: TopicGroup.controls,

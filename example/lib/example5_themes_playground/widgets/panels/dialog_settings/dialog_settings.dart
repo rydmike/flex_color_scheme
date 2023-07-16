@@ -167,12 +167,13 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
+          title: const Text('Dialog border radius'),
           subtitleDense: true,
           subtitle: const Text(
-            'This border radius adjusts radius in base general Dialog and thus '
+            'This border radius adjusts radius for general Dialogs and thus '
             'also AlertDialog. By default in FlexColorScheme the border radius '
             'on the TimePickerDialog and DatePickerDialog also defaults to '
             'this radius if not defined separately.\n'
@@ -235,24 +236,8 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
-        const ListTileReveal(
-          title: Text('Platform adaptive dialog settings'),
-          // subtitleDense: true,
-          subtitle: Text('With platform adaptive settings you can modify theme '
-              'properties to have a different response on selected platforms. '
-              'You can select which platforms the platform adaptive value '
-              'should be used on. While all other platforms not included '
-              'in this choice, will continue to use the none adaptive '
-              'value or default behavior.\n'
-              '\n'
-              'Using the API you can customize which platform an adaptive '
-              'feature is used on, including separate definitions when using '
-              'the app in a web build on each platform. The selections here '
-              'use built-in combinations, they cover most use cases.'),
-        ),
         AdaptiveThemePopupMenu(
-          title: const Text('Adaptive corner radius'),
+          title: const Text('Use platform adaptive dialog border radius'),
           subtitle: const Text('Use alternative dialog corner radius on '
               'selected platforms.\n'),
           index: controller.adaptiveDialogRadius?.index ?? -1,
@@ -272,7 +257,7 @@ class DialogSettings extends StatelessWidget {
               controller.useFlexColorScheme &&
               controller.adaptiveDialogRadius != AdaptiveTheme.off &&
               controller.adaptiveDialogRadius != null,
-          title: const Text('Adaptive border radius'),
+          title: const Text('Adaptive dialog border radius'),
           subtitleDense: true,
           subtitle: const Text(
             'You can define a separate Dialog border radius that gets used '
