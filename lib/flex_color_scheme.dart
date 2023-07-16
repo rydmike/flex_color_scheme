@@ -58,12 +58,6 @@ export 'src/flex_scheme_surface_colors.dart';
 /// Enum used to select ink effect in a FlexSubThemesData configuration.
 export 'src/flex_splash_type.dart';
 
-/// An iOS style rounded "squircle" rectangle, also known as super-ellipses.
-export 'src/flex_squircle.dart';
-
-/// An iOS style stadium "squircle" rectangle, also known as super-ellipses.
-export 'src/flex_stadium_squircle.dart';
-
 /// Defines opinionated component sub-themes used by FlexColorScheme.
 export 'src/flex_sub_themes.dart';
 

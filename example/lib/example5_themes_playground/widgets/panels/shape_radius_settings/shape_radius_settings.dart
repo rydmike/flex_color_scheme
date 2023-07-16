@@ -1,8 +1,9 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/widgets/universal/flex_squircle.dart';
+import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
@@ -23,8 +24,8 @@ class ShapeRadiusSettings extends StatelessWidget {
     final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
 
     final bool useMaterial3 = theme.useMaterial3;
-    const double height = 80;
-    const double width = 190;
+    const double height = 90;
+    const double width = 200;
 
     final double radius =
         controller.useSubThemes && controller.useFlexColorScheme
