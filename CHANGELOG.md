@@ -16,8 +16,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `FilledButton` and `FilledButton.tonal`. They have the same disabled style when not tinted, so we can do the same to their tinted variants. Even if we still cannot theme them to have different themed colors when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063), we can still theme their disabled state with tint when the option is used.
 * Added tinted disable support when `FlexSubThemesData.tintedDisabledControls` is `true` to `IconButton`, `IconButton.filled`, `IconButton.filledTonal` and `IconButton.outlined` foreground colors. They have the same disabled foreground style when not tinted, so we can do the same to their tinted foreground color variants. We still cannot theme them to have different themed background colors when disabled, or at all when enabled, due to [issue #118063](https://github.com/flutter/flutter/issues/118063). We can only theme their disabled foreground color state with tint, when the option is used.
 
-* **WIP:** Squircle shape feature. Work in progress. Need border side for Squircle.
-
 **CHANGE**
 
 * Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette.
@@ -77,7 +75,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defaults.
 * Investigate issue suspect on responsive border radius on dialogs on mock web.
 * Review and complement tests.
- 
+
+**POSTPONED**
+
+* The Squircle and shape selection feature is postponed. It will not land in version 7.2.
+
+
 ## 7.1.2
 
 **May 17, 2023**
