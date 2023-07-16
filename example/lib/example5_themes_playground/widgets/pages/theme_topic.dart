@@ -253,19 +253,17 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
     icon: Icons.rounded_corner_outlined,
-    info: 'The border shape and radius used on shape corners can be themed. In '
-        'FlexColorScheme you can change the radius globally for all curved '
-        'corners with one convenient setting. You can also use a different '
-        'border radius on selected platforms. In current version you cannot '
-        "change the shape type, it is always using Flutter's default "
-        'circular.\n'
+    info: 'The border shape and radius used by components in flutter can '
+        'be themed. With FlexColorScheme you can change the radius globally '
+        'for all curved corners with one convenient setting. You can also use '
+        'a different border radius on selected platforms. With the current '
+        "version you cannot change the shape type, it uses Flutter's default "
+        'circular border shape.\n'
         '\n'
         'A later version may add platform adaptive shape type selection. '
         'Its main purpose is to enable using Squircle shapes on Apple '
-        'platforms. '
-        'It will be possible to use it on any other platform too, '
-        'if so desired. Flutter SDK does not include the correct Apple '
-        'Squricle shape out of the box.\n',
+        'platforms. It will be possible to use it on other platform too. '
+        'Flutter SDK does not include the correct Apple Squricle shape.\n',
   ),
   ThemeTopic(
     group: TopicGroup.controls,
