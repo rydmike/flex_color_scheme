@@ -111,17 +111,17 @@ class IntroductionPanel extends StatelessWidget {
             'large masonry grid view, where you can see many topics at once '
             'when using very large screens. You can open and close topics to '
             'view more or fewer of them at the same time. '
-            'This app works on phones, but is primarily intended to be used on '
-            'web based desktop browsers, or as a native Windows, '
-            'Mac or Linux desktop app, where it shines.\n'
+            'This app is responsive down to phone sizes, but is primarily '
+            'intended to be used on web based desktop browsers, or as a '
+            'native Windows, Mac or Linux desktop app, where it shines.\n'
             '\n'
             'The first three color sets in the app are example custom color '
             'schemes. They are not built-in choices in the package. In the '
             'package tutorial you learn how to make your own custom color '
             'schemes and turn them into advanced themes with FlexColorScheme. '
             'The last color scheme is customizable, you can modify it as '
-            'desired and also copy any existing one to it as a starting point '
-            'for your own colors.\n'
+            'desired and also copy any existing scheme to it as a starting '
+            'point for your own color definitions.\n'
             '\n'
             'All settings in this demo are persisted locally and can be reset '
             'back to default values at any time. Feel free to experiment with '
@@ -131,9 +131,9 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          title: Text('FlexColorScheme Theming'),
+          title: Text('FlexColorScheme theming'),
           subtitle: Text('You can turn OFF FlexColorScheme to see what a '
-              'theme looks like when using vanilla Flutter '
+              'theme looks like when using the vanilla Flutter '
               'ThemeData factory, using the same ColorScheme '
               'as shown when FlexColorScheme is active.'),
         ),
@@ -141,16 +141,16 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: const Text(
             "Turn OFF too see Flutter's standard "
             'theming using the same colors. Component themes are also '
-            'disabled when FlexColorScheme is disabled.',
+            'disabled when FlexColorScheme is OFF.',
           ),
           value: controller.useFlexColorScheme,
           onChanged: controller.setUseFlexColorScheme,
         ),
         SwitchListTile(
-          subtitle: const Text('The opinionated component sub '
-              'theming is ON by default in this app, but OFF by default in '
+          subtitle: const Text('The opinionated component sub-theming '
+              'is ON by default in the Playground, but OFF by default in '
               'the API. By using them you get pre-styled components that you '
-              'can adjust.'),
+              'can adjust further.'),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
@@ -164,6 +164,16 @@ class IntroductionPanel extends StatelessWidget {
             'are then M2 based, you can still give them colors from the M3 '
             'ColorScheme and also use M3 style seeded ColorScheme. ',
           ),
+        ),
+        const ListTile(
+          subtitle: Text('Like Flutter, FlexColorScheme uses different '
+              'theming defaults for properties in M2 and M3 mode. '
+              'If a value has not been set, the Playground will show you what '
+              'the default value is. When you toggle M2/M3 the value will '
+              'change and show the default '
+              'for the used mode. The Playground also shows what the default '
+              'values are in Flutter SDK in both M2 and M3 mode, when '
+              'FlexColorScheme or its sub-themes are not being used.'),
         ),
         ListTile(
           subtitle: const Text(
@@ -186,27 +196,49 @@ class IntroductionPanel extends StatelessWidget {
               : null,
         ),
         const Divider(),
+        const ListTile(
+          title: Text('Material-3 will be made default'),
+          subtitle: Text('Flutter SDK will be switching to using M3 by default '
+              'later during 2023, even when not setting the '
+              '"ThemeData.useMaterial3" flag to true. After that point, '
+              'if you intend to use Material-2, you have to '
+              'explicitly opt-out of using Material-3 by setting the '
+              'flag to false. In anticipation of this change, the '
+              'Themes Playground code gen now always generates the code '
+              'config for selected Material M2/M3 mode to always make it clear '
+              'what the intent is.'),
+        ),
         SwitchListTile(
-          title: const Text('Use Material 3'),
+          title: const Text('Use Material-3 design'),
           value: controller.useMaterial3,
           onChanged: controller.setUseMaterial3,
         ),
         const ListTile(
-          subtitle: Text('Like Flutter, FlexColorScheme uses different '
-              'theming defaults for properties in M2 and M3 mode. '
-              'If a value has not been set, it will show you what the default '
-              'is. When you toggle M2/M3 it will change to show the default for '
-              'the used mode. The Playground also shows what the default '
-              'values are in Flutter SDK in both M2 and M3 mode, when FCS or '
-              'its sub-themes are not being used.'),
+          title: Text('Material-2 will be deprecated'),
+          subtitle: Text(
+              'Another coming big change is the deprecation of Material-2 '
+              'and eventual removal of it from the Flutter SDK '
+              'code-base. If you use M2, you might want to consider migrating '
+              'to M3 soonish. Incidentally, with FlexColorScheme and '
+              'Themes Playground, you can  make a theme that is '
+              'based on Material-3, but looks like Material-2. There '
+              'is even a premade design to demonstrate this in the '
+              'Playground. As such the M2 design is probably not something '
+              'to strive for anymore, but this demonstrates the flexibility '
+              'of Material-3 design in Flutter, and the powerful theming '
+              'features in the Themes Playground.'),
         ),
         const ListTile(
           title: Text('Flutter SDK Material 3 Issues'),
           subtitle: Text('In Flutter 3.7 and later there are only minor issues '
-              'with Material-3, with low impact on apps using it. '
+              'left when using Material-3. The issues have a very low impact '
+              'on apps using Material-3. '
               'FlexColorScheme is able to work around and fix some of '
-              'them. In Flutter 3.3 and earlier, there are significant issues '
-              'related to enabling and using Material 3.'),
+              'the issues. In Flutter 3.3 and earlier, there are significant '
+              'issues related to enabling and using Material-3. Do not use '
+              'Material-3 with Flutter 3.3 or earlier. For the best '
+              'experience when using Material-3, prefer using Flutter 3.10 '
+              'or later.'),
         ),
         Padding(
           padding: listTilePadding,
@@ -217,7 +249,7 @@ class IntroductionPanel extends StatelessWidget {
                   style: spanTextStyle,
                   text: 'You can read more about M3 and Flutter theming '
                       'related issues in the FlexColorScheme docs, where '
-                      'Flutter theming related issues are being ',
+                      'Flutter theming issues are ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -227,16 +259,17 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. Due to the large number of issues and also '
-                      'incomplete state of Material 3 implementation in '
-                      'Flutter 3.3 and earlier, we do not recommend using '
+                      'incomplete state of Material-3 implementation in '
+                      'Flutter 3.3 and earlier, do not use '
                       'M3 with Flutter 3.3 or earlier versions. '
                       'However, in Flutter 3.7 or later versions, M3 is '
-                      'ready and can be used in production. Some minor M3 '
+                      'ready and can be used in production. Some M3 '
                       'fidelity and specification compliance issues still '
-                      'exist. They are minor and will be fixed in '
-                      'later releases, some are fixed in Flutter 3.10 and '
-                      'even more are ready in master channel and '
-                      'waiting for next stable release.',
+                      'exist, even in 3.10 and later. Even if there are '
+                      'quite a large number of issues, they are typically '
+                      'minor and will be fixed in later releases. Many are '
+                      'fixed in master channel and some already in beta '
+                      'channel, waiting for next stable release after 3.10.\n',
                 ),
               ],
             ),
