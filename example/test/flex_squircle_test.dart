@@ -4,7 +4,7 @@
 
 import 'dart:io' show Platform;
 
-import 'package:flex_color_scheme/src/flex_squircle.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/flex_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

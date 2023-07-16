@@ -4,9 +4,10 @@
 
 import 'dart:io' show Platform;
 
-import 'package:flex_color_scheme/src/flex_stadium_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../lib/shared/widgets/universal/flex_stadium_squircle.dart';
 
 void main() {
   test('Continuous rectangle border scale and lerp', () {
