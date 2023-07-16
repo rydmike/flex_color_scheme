@@ -23,7 +23,7 @@ String generateThemeDartCode(ThemeController controller) {
     if (controller.useMaterial3) {
       return '''
   // FlexColorScheme is not in use!
-  // Here is a default Material 3 starting point theme setup for you.
+  // Here is a default Material-3 starting point theme setup for you.
   //
   theme: ThemeData(    
     useMaterial3: true,
@@ -201,9 +201,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '  surfaceTint: const ${controller.surfaceTintDark},\n'
       : '';
   // Are we using Material3?
-  final String useMaterial3 = controller.useMaterial3
-      ? '  useMaterial3: ${controller.useMaterial3},\n'
-      : '';
+  final String useMaterial3 = '  useMaterial3: ${controller.useMaterial3},\n';
   //
   // Code for FlexSubThemesData setup.
   //
