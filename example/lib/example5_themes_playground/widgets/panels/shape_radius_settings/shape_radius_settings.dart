@@ -19,18 +19,12 @@ class ShapeRadiusSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool isLight = theme.brightness == Brightness.light;
-    final Color shapeColor =
-        isLight ? theme.colorScheme.outlineVariant : theme.colorScheme.outline;
-    final Color lineColorError = theme.colorScheme.error;
-    final Color onShapeColor = theme.colorScheme.onSurface;
+    final Color shapeColor = theme.colorScheme.primaryContainer;
+    final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
 
     final bool useMaterial3 = theme.useMaterial3;
     const double height = 80;
     const double width = 190;
-    const double heightBig = 160;
-    const double widthBig = 320;
-    const double lineWidth = 1.5;
 
     final double radius =
         controller.useSubThemes && controller.useFlexColorScheme
@@ -49,28 +43,27 @@ class ShapeRadiusSettings extends StatelessWidget {
             'By default Material UI widgets with ShapeBorder use circular '
             'corners or half-circle stadium shapes, via the ShapeBorder '
             'called RoundedRectangleBorder and StadiumBorder. '
-            'You can change the used ShapeBorder type.\n'
+            'Currently in FCS you cannot change the used ShapeBorder type.\n'
             '\n'
-            'FlexColorScheme supports using "Squircle" '
-            'shape, a type of super-ellipses corner shape used by '
-            'Apple on iOS. This is supported via custom SquircleBorder and '
+            'FlexColorScheme plans to support using "Squircle" '
+            'shape, a type of super-ellipses corner shape used by Apple '
+            'on iOS. This will be supported via custom SquircleBorder and '
             'SquircleStadiumBorder implementations. If Flutter SDK at some '
             'point starts supporting a version of this shape, it will be '
-            'supported as well. This custom implementation may then later be '
-            'deprecated if the shapes are identical or very close. The '
-            'custom version will be kept around for many version in parallel.\n'
+            'supported too. The planned custom implementation may then be '
+            'deprecated if the shapes are identical or very close.\n'
             '\n'
-            'You can also use an alternative corner ShapeBorder in Flutter, '
+            'FCS also plans to support using other built-in shapes, like '
+            'an alternative corner ShapeBorder in Flutter, '
             'called ContinuousRectangleBorder. It was originally added '
             'in Flutter to provide a Squircle implementation in, but it is '
             'a very poor match for the version used by Apple on iOS. If you '
             'multiply used border radius with 2.35, it becomes a closer match, '
             'but not exactly.\n'
             '\n'
-            'A beveled shape BeveledRectangleBorder, is also available.\n'
-            '\n'
-            'You could use the Circular shape as default main shape, and '
-            'e.g. on iOS and macOS use the Squircle shape.\n',
+            'A beveled shape BeveledRectangleBorder, is also available in the '
+            'Flutter SDK.\n'
+            '\n',
           ),
         ),
         Padding(
@@ -90,7 +83,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Circular',
+                      'Circular\n(Flutter SDK)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -105,7 +99,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Squircle',
+                      'Squircle\n(Custom)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -122,7 +117,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'ContinuousRectangle',
+                      'ContinuousRectangle\n(Flutter SDK)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -137,7 +133,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Circular Stadium',
+                      'Circular Stadium\n(Flutter SDK)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -152,7 +149,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Squircle Stadium',
+                      'Squircle Stadium\n(Custom)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -169,7 +167,8 @@ class ShapeRadiusSettings extends StatelessWidget {
                   width: width,
                   child: Center(
                     child: Text(
-                      'Beveled Corner',
+                      'Beveled Corner\n(Flutter SDK)',
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
@@ -178,6 +177,8 @@ class ShapeRadiusSettings extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 8),
+        const Divider(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Components border radius'),
@@ -185,15 +186,16 @@ class ShapeRadiusSettings extends StatelessWidget {
           subtitle: const Text(
             'By default, the border radius on all Material '
             'UI components in FCS follow the Material-3 design guide in M3 '
-            'mode. The defaults used by FCS for M2 mode, are also mostly M3 '
-            'inspired.\n'
+            'mode. The defaults used by FCS for Material-2 mode, are also '
+            'mostly Material-3 inspired.\n'
             '\n'
-            'Radius specification in M3 varies per component. '
-            'Material 2 specification used 4 dp on all components. To use M2 '
+            'Radius specification in Material-3 design varies per component '
+            'type. '
+            'Material-2 specification used 4 dp on all components. To use M2 '
             'specification, set this value to 4. '
             'If you set a value, all major Material UI components will use '
-            'it as their border radius. You can also set radius per '
-            'component, they will then use their own value, regardless of '
+            'it as its border radius. You can also override used radius per '
+            'component, it will then use its own value, regardless of '
             'what is defined here.\n'
             '\n'
             'Radius on very small elements, or components where changing it '
@@ -205,7 +207,7 @@ class ShapeRadiusSettings extends StatelessWidget {
             'FloatingActionButton can be included, but is not by default. '
             'The radius on these elements can still be themed, but only '
             'individually. The indicator on NavigationDrawer is button sized '
-            'and considered large, it is thus included in the global border '
+            'and considered "large", it is thus included in the global border '
             'radius override.',
           ),
         ),
@@ -258,117 +260,24 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Stack(
-            children: <Widget>[
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: SquircleBorder(cornerRadius: radius),
-                child: SizedBox(
-                  height: heightBig,
-                  width: widthBig,
-                  child: Center(
-                    child: Text(
-                      'Squircle background '
-                      '(h=${heightBig.toStringAsFixed(0)})\n'
-                      'ContinuousRectangleBorder red outline\n'
-                      'using radius x 2.3529',
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              // Material(
-              //   clipBehavior: Clip.antiAlias,
-              //   color: Colors.transparent,
-              //   shape: BeveledRectangleBorder(
-              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
-              //    side: BorderSide(width: lineWidth, color: lineColorPrimary),
-              //   ),
-              //   child: const SizedBox(
-              //     height: heightBig,
-              //     width: widthBig,
-              //   ),
-              // ),
-              // Material(
-              //   clipBehavior: Clip.antiAlias,
-              //   color: Colors.transparent,
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
-              //   ide: BorderSide(width: lineWidth, color: lineColorOnSurface),
-              //   ),
-              //   child: const SizedBox(
-              //     height: heightBig,
-              //     width: widthBig,
-              //   ),
-              // ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: Colors.transparent,
-                shape: ContinuousRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(radius * 2.3529)),
-                  side: BorderSide(width: lineWidth, color: lineColorError),
-                ),
-                child: const SizedBox(
-                  height: heightBig,
-                  width: widthBig,
-                ),
-              ),
-
-              //   Material(
-              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-              //     color: shapeColor,
-              //     shape: const StadiumBorder(),
-              //     child: SizedBox(
-              //       height: height,
-              //       width: width,
-              //       child: Center(
-              //         child: Text(
-              //           'Circular Stadium',
-              //           style: TextStyle(color: onShapeColor),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              //   Material(
-              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-              //     color: shapeColor,
-              //     shape: const SquircleStadiumBorder(),
-              //     child: SizedBox(
-              //       height: height,
-              //       width: width,
-              //       child: Center(
-              //         child: Text(
-              //           'Squircle Stadium',
-              //           style: TextStyle(color: onShapeColor),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-            ],
-          ),
-        ),
-        const Divider(),
-        const ListTileReveal(
-          title: Text('Platform adaptive settings'),
-          // subtitleDense: true,
-          subtitle: Text('With platform adaptive settings you can modify theme '
-              'properties to have a different response on selected platforms. '
-              'You can select which platforms the platform adaptive value '
-              'should be used on. While all other platforms not included '
-              'in this choice, will continue to use the none adaptive '
-              'value or default behavior.\n'
-              '\n'
-              'Using the API you can customize which platform an adaptive '
-              'feature is used on, including separate definitions when using '
-              'the app in a web build on each platform. The selections here '
-              'use built-in combinations, they cover most use cases.'),
-        ),
+        // TODO(rydmike): Remove this Platform adaptive setting explanation.
+        // const ListTileReveal(
+        //   title: Text('Platform adaptive settings'),
+        //   // subtitleDense: true,
+        //   subtitle: Text('With platform adaptive settings you can modify theme '
+        //       'properties to have a different response on selected platforms. '
+        //       'You can select which platforms the platform adaptive value '
+        //       'should be used on. While all other platforms not included '
+        //       'in this choice, will continue to use the none adaptive '
+        //       'value or default behavior.\n'
+        //       '\n'
+        //       'Using the API you can customize which platform an adaptive '
+        //       'feature is used on, including separate definitions when using '
+        //       'the app in a web build on each platform. The selections here '
+        //       'use built-in combinations, they cover most use cases.'),
+        // ),
         AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive radius'),
+          title: const Text('Use platform adaptive border radius'),
           index: controller.adaptiveRadius?.index ?? -1,
           onChanged: controller.useFlexColorScheme && controller.useSubThemes
               ? (int index) {
@@ -464,6 +373,135 @@ class ShapeRadiusSettings extends StatelessWidget {
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
+        const Divider(),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Shape outline borders'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Some Material UI components like ToggleButtons, SegmentedButton, '
+            'OutlinedButton and TextField use an outline border on their '
+            'shape. With these '
+            'settings you can modify their thickness values with one common '
+            'config. You can also define and override these value per '
+            "component in each component's settings.\n"
+            '\n'
+            'ThemesPlayground and FlexColorScheme does not enable defining '
+            'outline borders for widgets that do not use them by default. '
+            'With custom component themes, that have a shape property, you '
+            'can do that if you so desire.\n',
+          ),
+        ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Border width'),
+          subtitleDense: true,
+          subtitle: const Text('Default border width for InputDecorator, '
+              'OutlinedButton, ToggleButtons and SegmentedButton.\n'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth == null ||
+                        (controller.thinBorderWidth ?? 0) <= 0
+                    ? 'default 1'
+                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thinBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThinBorderWidth(value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thinBorderWidth == null ||
+                              (controller.thinBorderWidth ?? 0) < 0
+                          ? controller.useMaterial3
+                              ? 'default 1' // M3
+                              : 'default 1' // M2
+                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Thick border width'),
+          subtitleDense: true,
+          subtitle: const Text('Default border width for focused '
+              'InputDecorator and pressed or error OutlinedButton.\n'),
+        ),
+        ListTile(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: Slider(
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth == null ||
+                        (controller.thickBorderWidth ?? 0) < 0
+                    ? useMaterial3
+                        ? 'default 1'
+                        : 'default 2'
+                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
+                : 'default 1',
+            value: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.thickBorderWidth ?? 0
+                : 0,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (double value) {
+                    controller.setThickBorderWidth(value <= 0 ? null : value);
+                  }
+                : null,
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.thickBorderWidth == null ||
+                              (controller.thickBorderWidth ?? 0) <= 0
+                          ? useMaterial3
+                              ? 'default 1'
+                              : 'default 2'
+                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
+                              '')
+                      : 'default 1',
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

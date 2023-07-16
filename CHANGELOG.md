@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 14, 2023**
+**July 16, 2023**
 
 **PACKAGE**
 
@@ -62,7 +62,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **CHANGE**
 
 * The onColor blend-level and on onMain setting are no longer disabled when using seeded ColorScheme. Rationale: If some colors are locked to use custom colors, using onBlend level has an impact on their contrasting colors and should be allowed in the Playground. The API could use it before too, but Playground could not, now it can.
-* Changed the order of theming topic panels. All color and surface related topic panels are now before component theme panels. Component theme panels have been split into more discrete topics and have a new order.
+* Changed the order of theming topic panels. All color and surface related topic panels are now before component theme panels. Theme settings topic panels have been split into more discrete topics and have a new order.
 * Changed the order of components and labels on many theme topic panels.
 * The apps included in the **Theme Simulator** now all extend content behind their app bars and bottom navigation. This allows themed opacity settings on app bar and bottom navigation to become observable in the simulated apps.
 * The Shop app in the **Theme Simulator** received some style updates to use more theme dependent styling, like Card as containers for shop items. 
@@ -76,7 +76,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defaults.
 * Investigate issue suspect on responsive border radius on dialogs on mock web.
-* Investigate VisualDensity or height response change on mobile platforms on ToggleButtons.
 * Review and complement tests.
  
 ## 7.1.2

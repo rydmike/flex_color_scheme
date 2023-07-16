@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/pages/page_examples.dart';
+import '../panels/adaptive_theme_settings/adaptive_theme_settings.dart';
 import '../panels/android_navigation_bar_settings/android_navigation_bar_settings.dart';
 import '../panels/app_bar_settings/app_bar_settings.dart';
 import '../panels/bottom_app_bar_search_bar_settings/bottom_app_bar_search_bar_settings.dart';
@@ -59,14 +60,15 @@ class ThemePanel extends StatelessWidget {
       IntroductionPanel(controller),
       PremadeDesignsPanel(controller),
       ThemeSimulator(controller: controller),
+      const WidgetShowcase(),
       ThemeCode(controller),
       ThemeColorsSettings(controller),
       SeededColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
       EffectiveColors(controller),
       ComponentSettings(controller),
+      AdaptiveThemeSettings(controller),
       ShapeRadiusSettings(controller),
-      const WidgetShowcase(),
       ButtonsSettings(controller),
       SegmentedButtonsSettings(controller),
       FabChipSettings(controller),
