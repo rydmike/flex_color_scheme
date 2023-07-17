@@ -595,6 +595,51 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconDarkSchemeColor},\n';
   //
+  // Text selection setup CODE.
+  //
+  final String inputCursorLightSchemeColor = controller
+              .inputCursorLightSchemeColor ==
+          null
+      ? ''
+      : '    inputCursorSchemeColor: ${controller.inputCursorLightSchemeColor},\n';
+  final String inputSelectionLightSchemeColor = controller
+              .inputCursorLightSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionSchemeColor: ${controller.inputSelectionLightSchemeColor},\n';
+  final String inputSelectionLightOpacity = controller
+              .inputCursorLightSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionOpacity: ${controller.inputSelectionLightOpacity},\n';
+  final String inputSelectionHandleLightSchemeColor = controller
+              .inputCursorLightSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleLightSchemeColor},\n';
+//
+  final String inputCursorDarkSchemeColor = controller
+              .inputCursorDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputCursorSchemeColor: ${controller.inputCursorDarkSchemeColor},\n';
+  final String inputSelectionDarkSchemeColor = controller
+              .inputCursorDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionSchemeColor: ${controller.inputSelectionDarkSchemeColor},\n';
+  final String inputSelectionDarkOpacity = controller
+              .inputCursorDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionOpacity: ${controller.inputSelectionDarkOpacity},\n';
+  final String inputSelectionHandleDarkSchemeColor = controller
+              .inputCursorDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleDarkSchemeColor},\n';
+
+  //
   // Fab and chip, snack, card, and popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
@@ -1204,6 +1249,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorFocusedBorderWidth'
           '$inputDecoratorPrefixIconSchemeColor'
           //
+          '$inputCursorLightSchemeColor'
+          '$inputSelectionLightSchemeColor'
+          '$inputSelectionLightOpacity'
+          '$inputSelectionHandleLightSchemeColor'
+          //
           '$fabUseShape'
           '$fabAlwaysCircular'
           '$fabBorderRadius'
@@ -1415,6 +1465,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
           '$inputDecoratorPrefixIconDarkSchemeColor'
+          //
+          '$inputCursorDarkSchemeColor'
+          '$inputSelectionDarkSchemeColor'
+          '$inputSelectionDarkOpacity'
+          '$inputSelectionHandleDarkSchemeColor'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
