@@ -8557,12 +8557,64 @@ void main() {
           ));
     });
   });
+  group('WITH: FlexSubTheme.textSelectionTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes textSelectionTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'TextSelection FST32.1: GIVEN a FlexSubTheme.textSelectionTheme() '
+        'EXPECT equal to equivalent TextSelectionThemeData().', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      TextSelectionThemeData textSelection = FlexSubThemes.textSelectionTheme(
+        colorScheme: colorScheme,
+      );
+      expect(
+          textSelection,
+          equals(TextSelectionThemeData(
+            cursorColor: colorScheme.primary,
+            selectionColor: colorScheme.primary.withOpacity(0.4),
+            selectionHandleColor: colorScheme.primary,
+          )));
+      //
+      textSelection = FlexSubThemes.textSelectionTheme(
+        colorScheme: colorScheme,
+        cursorSchemeColor: SchemeColor.tertiary,
+        selectionSchemeColor: SchemeColor.secondary,
+        selectionOpacity: 0.3,
+        selectionHandleSchemeColor: SchemeColor.onPrimaryContainer,
+      );
+      expect(
+          textSelection,
+          equals(TextSelectionThemeData(
+            cursorColor: colorScheme.tertiary,
+            selectionColor: colorScheme.secondary.withOpacity(0.3),
+            selectionHandleColor: colorScheme.onPrimaryContainer,
+          )));
+      textSelection = FlexSubThemes.textSelectionTheme(
+        colorScheme: colorScheme,
+        cursorSchemeColor: SchemeColor.tertiary,
+        selectionSchemeColor: SchemeColor.secondary,
+        selectionHandleSchemeColor: SchemeColor.onPrimaryContainer,
+        selectionHandleCustomColor: const Color(0xFFEEDDCC),
+      );
+      expect(
+          textSelection,
+          equals(TextSelectionThemeData(
+            cursorColor: colorScheme.tertiary,
+            selectionColor: colorScheme.secondary.withOpacity(0.4),
+            selectionHandleColor: const Color(0xFFEEDDCC),
+          )));
+    });
+  });
   group('WITH: FlexSubTheme.timePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
     test(
-        'TimePicker FST32.1 default: GIVEN a default '
+        'TimePicker FST33.1 default: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -8602,7 +8654,7 @@ void main() {
     });
 
     test(
-        'TimePicker FST32.2 scheme-based: GIVEN a default '
+        'TimePicker FST33.2 scheme-based: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -8644,7 +8696,7 @@ void main() {
     });
 
     test(
-        'TimePicker FST32.3 background-a: GIVEN a default '
+        'TimePicker FST33.3 background-a: GIVEN a default '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -8685,7 +8737,7 @@ void main() {
     });
 
     test(
-        'TimePicker FST32.4 background-b: GIVEN a custom '
+        'TimePicker FST33.4 background-b: GIVEN a custom '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -8729,7 +8781,7 @@ void main() {
       );
     });
     test(
-        'TimePicker FST32.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
+        'TimePicker FST33.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF345234),
@@ -8847,7 +8899,7 @@ void main() {
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
     test(
-        'ToggleButtons FST33.1: GIVEN a default '
+        'ToggleButtons FST34.1: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -8879,7 +8931,7 @@ void main() {
       );
     });
     test(
-        'ToggleButtons FST33.2 base-color: GIVEN a default '
+        'ToggleButtons FST34.2 base-color: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -8916,7 +8968,7 @@ void main() {
       );
     });
     test(
-        'ToggleButtons FST33.3 M3-base-color: GIVEN a tinted interact disable '
+        'ToggleButtons FST34.3 M3-base-color: GIVEN a tinted interact disable '
         'and default M3 outline border FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -8962,7 +9014,7 @@ void main() {
       );
     });
     test(
-        'ToggleButtons FST33.4 M3-base-color: GIVEN a tinted interact disable '
+        'ToggleButtons FST34.4 M3-base-color: GIVEN a tinted interact disable '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -9015,7 +9067,7 @@ void main() {
     // FlexSubThemes Tooltip tests
     // -------------------------------------------------------------------------
     test(
-        'Tooltip FST34.1 light: GIVEN a light default '
+        'Tooltip FST35.1 light: GIVEN a light default '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -9039,7 +9091,7 @@ void main() {
       );
     });
     test(
-        'Tooltip FST34.2 light: GIVEN a light custom '
+        'Tooltip FST35.2 light: GIVEN a light custom '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();

@@ -278,5 +278,200 @@ void main() {
         equals(fcsScheme.primaryContainer.withOpacity(0.8)),
       );
     });
+    //
+    // Version 7.2 new TextSelectionTheme
+    //
+    test(
+        'FCS8.007-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using text selection props '
+        'EXPECT sub-theme with given properties. ', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          inputCursorSchemeColor: null,
+          inputSelectionSchemeColor: null,
+          inputSelectionOpacity: null,
+          inputSelectionHandleSchemeColor: null,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.textSelectionTheme.cursorColor,
+        equals(fcsScheme.primary),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionColor,
+        equals(fcsScheme.primary.withOpacity(0.3)),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionHandleColor,
+        equals(fcsTheme.primaryColorDark),
+      );
+    });
+    test(
+        'FCS8.008-dark: GIVEN a FlexColorScheme.dark with sub themes '
+        'using text selection props '
+        'EXPECT sub-theme with given properties. ', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          inputCursorSchemeColor: null,
+          inputSelectionSchemeColor: null,
+          inputSelectionOpacity: null,
+          inputSelectionHandleSchemeColor: null,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.textSelectionTheme.cursorColor,
+        equals(fcsScheme.primary),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionColor,
+        equals(fcsScheme.primary.withOpacity(0.5)),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionHandleColor,
+        equals(fcsTheme.primaryColorDark),
+      );
+    });
+    test(
+        'FCS8.009-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using text selection props input selection color props '
+        'EXPECT sub-theme with given properties. ', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          inputDecoratorSchemeColor: SchemeColor.tertiary,
+          inputCursorSchemeColor: null,
+          inputSelectionSchemeColor: null,
+          inputSelectionOpacity: null,
+          inputSelectionHandleSchemeColor: null,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.textSelectionTheme.cursorColor,
+        equals(fcsScheme.tertiary),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionColor,
+        equals(fcsScheme.tertiary.withOpacity(0.3)),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionHandleColor,
+        equals(fcsScheme.tertiary),
+      );
+    });
+    test(
+        'FCS8.010-dark: GIVEN a FlexColorScheme.dark with sub themes '
+        'using text selection props input selection color props '
+        'EXPECT sub-theme with given properties. ', () {
+      final FlexColorScheme fcs = FlexColorScheme.dark(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          inputDecoratorSchemeColor: SchemeColor.tertiary,
+          inputCursorSchemeColor: SchemeColor.secondary,
+          inputSelectionSchemeColor: SchemeColor.onPrimaryContainer,
+          inputSelectionOpacity: 0.35,
+          inputSelectionHandleSchemeColor: SchemeColor.onTertiaryContainer,
+        ),
+      );
+      final ColorScheme fcsScheme = fcs.toScheme;
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.textSelectionTheme.cursorColor,
+        equals(fcsScheme.secondary),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionColor,
+        equals(fcsScheme.onPrimaryContainer.withOpacity(0.35)),
+      );
+      expect(
+        fcsTheme.textSelectionTheme.selectionHandleColor,
+        equals(fcsScheme.onTertiaryContainer),
+      );
+    });
+    //
+    test(
+        'FCS8.011-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using adaptive dialog radius on desktop '
+        'EXPECT sub-theme dialog with given desktop radius on Windows. ', () {
+      debugDefaultTargetPlatformOverride = TargetPlatform.windows;
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          dialogRadius: 20,
+          adaptiveDialogRadius: FlexAdaptive.desktop(),
+          dialogRadiusAdaptive: 10,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.dialogTheme.shape,
+        equals(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      );
+    });
+    test(
+        'FCS8.012-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using adaptive dialog radius on desktop '
+        'EXPECT sub-theme dialog with given none adaptive radius. ', () {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          dialogRadius: 20,
+          adaptiveDialogRadius: FlexAdaptive.desktop(),
+          dialogRadiusAdaptive: 10,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.dialogTheme.shape,
+        equals(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+      );
+    });
+    //
+    test(
+        'FCS8.013-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using adaptive splash on Apple devices '
+        'EXPECT sub-theme splash with given splash on Apple device.', () {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          splashType: FlexSplashType.inkRipple,
+          adaptiveSplash: FlexAdaptive.apple(),
+          splashTypeAdaptive: FlexSplashType.instantSplash,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.splashFactory.toString(),
+        "Instance of '_InstantSplashFactory'",
+      );
+    });
+    test(
+        'FCS8.013-light: GIVEN a FlexColorScheme.light with sub themes '
+        'using adaptive splash on Android devices '
+        'EXPECT sub-theme splash with given none adaptive splash.', () {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          splashType: FlexSplashType.inkRipple,
+          adaptiveSplash: FlexAdaptive.apple(),
+          splashTypeAdaptive: FlexSplashType.instantSplash,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      expect(
+        fcsTheme.splashFactory.toString(),
+        "Instance of '_InkRippleFactory'",
+      );
+    });
   });
 }

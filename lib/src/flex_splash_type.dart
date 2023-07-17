@@ -3,7 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'flex_highlight_splash.dart';
+import 'flex_instant_splash.dart';
 
 /// An enum for easy configuration and selection of ink splash effect in
 /// a [FlexColorScheme.subThemes] configuration.
@@ -64,7 +64,8 @@ enum FlexSplashType {
   ///
   /// Type [defaultSplash] returns null the type selection should be handled
   /// by [ThemeData] factory defaults or caller.
-  InteractiveInkFeatureFactory? splashFactory([bool useMaterial3 = true]) {
+  InteractiveInkFeatureFactory? splashFactory(
+      [bool useMaterial3 = true, bool mockIsWeb = false]) {
     switch (this) {
       case FlexSplashType.defaultSplash:
         return null;
@@ -73,7 +74,7 @@ enum FlexSplashType {
       case FlexSplashType.inkRipple:
         return InkRipple.splashFactory;
       case FlexSplashType.inkSparkle:
-        return kIsWeb
+        return kIsWeb || mockIsWeb
             ? useMaterial3
                 ? InkRipple.splashFactory
                 : InkSplash.splashFactory
@@ -81,7 +82,7 @@ enum FlexSplashType {
       case FlexSplashType.noSplash:
         return NoSplash.splashFactory;
       case FlexSplashType.instantSplash:
-        return FlexHighlightSplash.splashFactory;
+        return FlexInstantSplash.splashFactory;
     }
   }
 }

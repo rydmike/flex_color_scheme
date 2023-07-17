@@ -6486,7 +6486,7 @@ class FlexSubThemes {
 
     /// The opacity applied to [selectionSchemeColor].
     ///
-    /// If not defined, default to [kTextSelectionOpacity] = 0.4 = 40%.
+    /// If not defined, default to [kTextSelectionOpacity] = 0.4 (40%).
     /// Same as Flutter SDK default.
     final double? selectionOpacity,
 
@@ -6511,7 +6511,7 @@ class FlexSubThemes {
 
     // Get used selectionColor, defaults to primary.
     final Color selectionColor =
-        schemeColor(cursorSchemeColor ?? SchemeColor.primary, colorScheme)
+        schemeColor(selectionSchemeColor ?? SchemeColor.primary, colorScheme)
             .withOpacity(selectionOpacity ?? kTextSelectionOpacity);
 
     // Get used selectionHandleColor, defaults to primary.
