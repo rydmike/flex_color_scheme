@@ -298,6 +298,33 @@ class ThemeController with ChangeNotifier {
         Store.keyInputDecoratorPrefixIconDarkSchemeColor,
         Store.defaultInputDecoratorPrefixIconDarkSchemeColor);
     //
+    // TextSelection SETTINGS.
+    _inputCursorLightSchemeColor = await _themeService.load(
+        Store.keyInputCursorLightSchemeColor,
+        Store.defaultInputCursorLightSchemeColor);
+    _inputSelectionLightSchemeColor = await _themeService.load(
+        Store.keyInputSelectionLightSchemeColor,
+        Store.defaultInputSelectionLightSchemeColor);
+    _inputSelectionLightOpacity = await _themeService.load(
+        Store.keyInputSelectionLightOpacity,
+        Store.defaultInputSelectionLightOpacity);
+    _inputSelectionHandleLightSchemeColor = await _themeService.load(
+        Store.keyInputSelectionHandleLightSchemeColor,
+        Store.defaultInputSelectionHandleLightSchemeColor);
+    //
+    _inputCursorDarkSchemeColor = await _themeService.load(
+        Store.keyInputCursorDarkSchemeColor,
+        Store.defaultInputCursorDarkSchemeColor);
+    _inputSelectionDarkSchemeColor = await _themeService.load(
+        Store.keyInputSelectionDarkSchemeColor,
+        Store.defaultInputSelectionDarkSchemeColor);
+    _inputSelectionDarkOpacity = await _themeService.load(
+        Store.keyInputSelectionDarkOpacity,
+        Store.defaultInputSelectionDarkOpacity);
+    _inputSelectionHandleDarkSchemeColor = await _themeService.load(
+        Store.keyInputSelectionHandleDarkSchemeColor,
+        Store.defaultInputSelectionHandleDarkSchemeColor);
+    //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
         Store.keyAppBarStyleLight, Store.defaultAppBarStyleLight);
@@ -927,6 +954,24 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorPrefixIconSchemeColor, false);
     setInputDecoratorPrefixIconDarkSchemeColor(
         Store.defaultInputDecoratorPrefixIconDarkSchemeColor, false);
+    //
+    // TextSelection SETTINGS.
+    setInputCursorLightSchemeColor(
+        Store.defaultInputCursorLightSchemeColor, false);
+    setInputSelectionLightSchemeColor(
+        Store.defaultInputSelectionLightSchemeColor, false);
+    setInputSelectionLightOpacity(
+        Store.defaultInputSelectionLightOpacity, false);
+    setInputSelectionHandleLightSchemeColor(
+        Store.defaultInputSelectionHandleLightSchemeColor, false);
+    //
+    setInputCursorDarkSchemeColor(
+        Store.defaultInputCursorDarkSchemeColor, false);
+    setInputSelectionDarkSchemeColor(
+        Store.defaultInputSelectionDarkSchemeColor, false);
+    setInputSelectionDarkOpacity(Store.defaultInputSelectionDarkOpacity, false);
+    setInputSelectionHandleDarkSchemeColor(
+        Store.defaultInputSelectionHandleDarkSchemeColor, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -3071,6 +3116,94 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keyInputDecoratorPrefixIconDarkSchemeColor, value));
+  }
+
+  // TextSelection SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _inputCursorLightSchemeColor;
+  SchemeColor? get inputCursorLightSchemeColor => _inputCursorLightSchemeColor;
+  void setInputCursorLightSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputCursorLightSchemeColor) return;
+    _inputCursorLightSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputCursorLightSchemeColor, value));
+  }
+
+  late SchemeColor? _inputSelectionLightSchemeColor;
+  SchemeColor? get inputSelectionLightSchemeColor =>
+      _inputSelectionLightSchemeColor;
+  void setInputSelectionLightSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputSelectionLightSchemeColor) return;
+    _inputSelectionLightSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputSelectionLightSchemeColor, value));
+  }
+
+  late double? _inputSelectionLightOpacity;
+  double? get inputSelectionLightOpacity => _inputSelectionLightOpacity;
+  void setInputSelectionLightOpacity(double? value, [bool notify = true]) {
+    if (value == _inputSelectionLightOpacity) return;
+    _inputSelectionLightOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputSelectionLightOpacity, value));
+  }
+
+  late SchemeColor? _inputSelectionHandleLightSchemeColor;
+  SchemeColor? get inputSelectionHandleLightSchemeColor =>
+      _inputSelectionHandleLightSchemeColor;
+  void setInputSelectionHandleLightSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputSelectionHandleLightSchemeColor) return;
+    _inputSelectionHandleLightSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputSelectionHandleLightSchemeColor, value));
+  }
+
+  late SchemeColor? _inputCursorDarkSchemeColor;
+  SchemeColor? get inputCursorDarkSchemeColor => _inputCursorDarkSchemeColor;
+  void setInputCursorDarkSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _inputCursorDarkSchemeColor) return;
+    _inputCursorDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputCursorDarkSchemeColor, value));
+  }
+
+  late SchemeColor? _inputSelectionDarkSchemeColor;
+  SchemeColor? get inputSelectionDarkSchemeColor =>
+      _inputSelectionDarkSchemeColor;
+  void setInputSelectionDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputSelectionDarkSchemeColor) return;
+    _inputSelectionDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputSelectionDarkSchemeColor, value));
+  }
+
+  late double? _inputSelectionDarkOpacity;
+  double? get inputSelectionDarkOpacity => _inputSelectionDarkOpacity;
+  void setInputSelectionDarkOpacity(double? value, [bool notify = true]) {
+    if (value == _inputSelectionDarkOpacity) return;
+    _inputSelectionDarkOpacity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputSelectionDarkOpacity, value));
+  }
+
+  late SchemeColor? _inputSelectionHandleDarkSchemeColor;
+  SchemeColor? get inputSelectionHandleDarkSchemeColor =>
+      _inputSelectionHandleDarkSchemeColor;
+  void setInputSelectionHandleDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputSelectionHandleDarkSchemeColor) return;
+    _inputSelectionHandleDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputSelectionHandleDarkSchemeColor, value));
   }
 
   // AppBar SETTINGS.
