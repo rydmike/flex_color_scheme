@@ -606,6 +606,65 @@ class Store {
   static const SchemeColor? defaultInputDecoratorPrefixIconDarkSchemeColor =
       null;
 
+  // TextSelection SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the inputCursorLightSchemeColor value.
+  static const String keyInputCursorLightSchemeColor =
+      'inputCursorLightSchemeColor';
+  // Default value for the inputCursorLightSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputCursorLightSchemeColor = null;
+
+  // Key used to read and save the inputSelectionLightSchemeColor value.
+  static const String keyInputSelectionLightSchemeColor =
+      'inputSelectionLightSchemeColor';
+  // Default value for the inputSelectionLightSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputSelectionLightSchemeColor = null;
+
+  // Key used to read and save the inputSelectionLightOpacity value.
+  static const String keyInputSelectionLightOpacity =
+      'inputSelectionLightOpacity';
+  // Default value for the inputSelectionLightOpacity, to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputSelectionLightOpacity = null;
+
+  // Key used to read and save the inputSelectionHandleLightSchemeColor value.
+  static const String keyInputSelectionHandleLightSchemeColor =
+      'inputSelectionHandleLightSchemeColor';
+  // Default value for the inputSelectionHandleLightSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputSelectionHandleLightSchemeColor = null;
+
+  // Key used to read and save the inputCursorDarkSchemeColor value.
+  static const String keyInputCursorDarkSchemeColor =
+      'inputCursorDarkSchemeColor';
+  // Default value for the inputCursorDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputCursorDarkSchemeColor = null;
+
+  // Key used to read and save the inputSelectionDarkSchemeColor value.
+  static const String keyInputSelectionDarkSchemeColor =
+      'inputSelectionDarkSchemeColor';
+  // Default value for the inputSelectionDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputSelectionDarkSchemeColor = null;
+
+  // Key used to read and save the inputSelectionDarkOpacity value.
+  static const String keyInputSelectionDarkOpacity =
+      'inputSelectionDarkOpacity';
+  // Default value for the inputSelectionDarkOpacity, to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputSelectionDarkOpacity = null;
+
+  // Key used to read and save the inputSelectionHandleDarkSchemeColor value.
+  static const String keyInputSelectionHandleDarkSchemeColor =
+      'inputSelectionHandleDarkSchemeColor';
+  // Default value for the inputSelectionHandleDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputSelectionHandleDarkSchemeColor = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
