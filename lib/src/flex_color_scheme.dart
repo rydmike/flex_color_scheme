@@ -7319,20 +7319,36 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // TextSelection Theme.
-      // In TextSelectionThemeData, the standard for selectionColor is
-      // colorScheme.primary with opacity value 0.4 for dark and 0.12 light
-      // mode. Here we use primary with 0.5 for dark mode and 0.3 for light
-      // mode. The standard selectionHandleColor is colorScheme.primary,
-      // here we use the slightly darker shade primaryColorDark instead.
-      textSelectionTheme: useSubThemes || !useMaterial3
-          ? TextSelectionThemeData(
-              selectionColor: isDark
-                  ? colorScheme.primary.withAlpha(0xB2) // 50%
-                  : colorScheme.primary.withAlpha(0x4C), // 30%
-              selectionHandleColor: primaryColorDark,
+      textSelectionTheme: useSubThemes
+          ? FlexSubThemes.textSelectionTheme(
+              colorScheme: colorScheme,
+              cursorSchemeColor: subTheme.inputCursorSchemeColor ??
+                  subTheme.inputDecoratorSchemeColor,
+              selectionSchemeColor: subTheme.inputSelectionSchemeColor ??
+                  subTheme.inputDecoratorSchemeColor,
+              selectionOpacity: subTheme.inputSelectionOpacity ??
+                  (isDark
+                      ? kTextSelectionDarkOpacity
+                      : kTextSelectionLightOpacity),
+              selectionHandleSchemeColor:
+                  subTheme.inputSelectionHandleSchemeColor ??
+                      subTheme.inputDecoratorSchemeColor,
+              // An FCS opinionated custom darker handle as default value, when
+              // we don't have selected inputSelectionHandleSchemeColor or when
+              // inputDecoratorSchemeColor has no selection or uses primary.
+              // This gives us previous primaryColorDark, when we have no
+              // selection as before, but one that uses
+              // inputSelectionHandleSchemeColor as first prio and also follows
+              // inputDecoratorSchemeColor when it is different from primary,
+              // where primaryColorDark, might not fit.
+              selectionHandleCustomColor:
+                  (subTheme.inputSelectionHandleSchemeColor != null) ||
+                          (subTheme.inputDecoratorSchemeColor != null &&
+                              subTheme.inputDecoratorSchemeColor !=
+                                  SchemeColor.primary)
+                      ? null
+                      : primaryColorDark,
             )
-          // If we don't use sub themes and useMaterial3 we get no
-          // opinionated style.
           : null,
       //
       // TimePicker Theme.

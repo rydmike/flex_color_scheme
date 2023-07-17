@@ -589,3 +589,27 @@ const int kLoLightPrimTextAlpha = 0xFF;
 ///
 /// Value: 0xFF = 100%
 const int kLoDarkPrimTextAlpha = 0xFF;
+
+// Version 7.2 new const properties
+// -----------------------------------------------------------------------------
+
+/// Opacity on selected text applied to text selection color by default in
+/// [FlexSubThemes.textSelectionTheme].
+///
+/// This is also what Flutter framework 3.10 uses as hardcoded default value in
+/// Material. In Cupertino app it seems to be 0.2.
+///
+/// Value: 0.4 = 40%
+const double kTextSelectionOpacity = 0.4;
+
+/// Opacity on selected text applied to text selection color by default in
+/// [FlexColorScheme.subThemesData] in light mode.
+///
+/// Value: 0.3 = 30%
+const double kTextSelectionLightOpacity = 0.3;
+
+/// Opacity on selected text applied to text selection color by default in
+/// [FlexColorScheme.subThemesData] in dark mode.
+///
+/// Value: 0.5 = 50%
+const double kTextSelectionDarkOpacity = 0.5;

@@ -213,6 +213,7 @@ enum SchemeColor {
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
 /// * [TabBarTheme] for [TabBar] via [tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
+/// * [TextSelectionThemeData] for [TextField] via [textSelectionTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
 /// * [TooltipThemeData] for [Tooltip] via [tooltipTheme].
@@ -6458,6 +6459,70 @@ class FlexSubThemes {
                 ),
               ),
       ),
+    );
+  }
+
+  /// An opinionated [TextSelectionThemeData] theme.
+  ///
+  /// Requires a [ColorScheme], the color scheme would
+  /// typically be equal the color scheme also used to define the color scheme
+  /// for your app theme.
+  static TextSelectionThemeData textSelectionTheme({
+    /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
+    required final ColorScheme colorScheme,
+
+    /// The [SchemeColor] based color of the cursor in the text field.
+    ///
+    /// The cursor indicates the current location of text insertion point in
+    /// the field.
+    ///
+    /// If not defined, [colorScheme.primary] is used.
+    final SchemeColor? cursorSchemeColor,
+
+    /// The [SchemeColor] based background color of selected text.
+    ///
+    /// If not defined, [colorScheme.primary] is used.
+    final SchemeColor? selectionSchemeColor,
+
+    /// The opacity applied to [selectionSchemeColor].
+    ///
+    /// If not defined, default to [kTextSelectionOpacity] = 0.4 = 40%.
+    /// Same as Flutter SDK default.
+    final double? selectionOpacity,
+
+    /// The [SchemeColor] based color of the selection handles on the
+    /// text field.
+    ///
+    /// Selection handles are used to indicate the bounds of the selected text,
+    /// or as a handle to drag the cursor to a new location in the text.
+    ///
+    /// If not defined, [colorScheme.primary] is used.
+    final SchemeColor? selectionHandleSchemeColor,
+
+    /// A custom override color that
+    /// [TextSelectionThemeData.selectionHandleColor] will use if it is defined.
+    ///
+    /// If not defined, the result from [selectionHandleSchemeColor] is used.
+    final Color? selectionHandleCustomColor,
+  }) {
+    // Get used cursorColor, defaults to primary.
+    final Color cursorColor =
+        schemeColor(cursorSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    // Get used selectionColor, defaults to primary.
+    final Color selectionColor =
+        schemeColor(cursorSchemeColor ?? SchemeColor.primary, colorScheme)
+            .withOpacity(selectionOpacity ?? kTextSelectionOpacity);
+
+    // Get used selectionHandleColor, defaults to primary.
+    final Color selectionHandleColor = selectionHandleCustomColor ??
+        schemeColor(
+            selectionHandleSchemeColor ?? SchemeColor.primary, colorScheme);
+
+    return TextSelectionThemeData(
+      cursorColor: cursorColor,
+      selectionColor: selectionColor,
+      selectionHandleColor: selectionHandleColor,
     );
   }
 
