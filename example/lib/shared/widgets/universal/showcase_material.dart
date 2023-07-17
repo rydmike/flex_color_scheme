@@ -4077,7 +4077,6 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
 
   Future<void> _showDemoMaterialBanner(
       BuildContext context, bool twoButtons, String message) async {
-    // App.rootMessengerKey.currentState!.showMaterialBanner(
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         // elevation: 3,
@@ -4088,14 +4087,12 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
             TextButton(
               child: const Text('OK'),
               onPressed: () {
-                // App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
                 ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
               },
             ),
           TextButton(
             child: const Text('Dismiss'),
             onPressed: () {
-              // App.rootMessengerKey.currentState!.hideCurrentMaterialBanner();
               ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
             },
           ),

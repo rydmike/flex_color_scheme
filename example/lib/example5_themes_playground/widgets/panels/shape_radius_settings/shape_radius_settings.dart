@@ -261,22 +261,6 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
           ),
         ),
-        // TODO(rydmike): Remove this Platform adaptive setting explanation.
-        // const ListTileReveal(
-        //   title: Text('Platform adaptive settings'),
-        //   // subtitleDense: true,
-        //   subtitle: Text('With platform adaptive settings you can modify theme '
-        //       'properties to have a different response on selected platforms. '
-        //       'You can select which platforms the platform adaptive value '
-        //       'should be used on. While all other platforms not included '
-        //       'in this choice, will continue to use the none adaptive '
-        //       'value or default behavior.\n'
-        //       '\n'
-        //       'Using the API you can customize which platform an adaptive '
-        //       'feature is used on, including separate definitions when using '
-        //       'the app in a web build on each platform. The selections here '
-        //       'use built-in combinations, they cover most use cases.'),
-        // ),
         AdaptiveThemePopupMenu(
           title: const Text('Use platform adaptive border radius'),
           index: controller.adaptiveRadius?.index ?? -1,
