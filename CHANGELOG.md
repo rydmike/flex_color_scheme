@@ -4,12 +4,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 16, 2023**
+**July 17, 2023**
 
 **PACKAGE**
 
 **NEW**  
 
+* Added `textSelectionTheme` to `FlexSubThemes`, used to make a `TextSelectionThemeData`.
+* Added properties `inputCursorSchemeColor`, `inputSelectionSchemeColor`, `inputSelectionOpacity`, and `inputSelectionHandleSchemeColor`, to `FlexSubThemesData` used to configure `TextSelectionThemeData` as a part of `FlexColorScheme.subThemesData`.
 * Added a new feature that enables platform adaptive Material ink selection via `adaptiveSplash` a `FlexAdaptive` property, and the `FlexSplashType` values `splashType` and `splashTypeAdaptive` in `FlexSubThemesData`.
 * FlexColorScheme got the `splashFactory` property, which can be used to override any splash type setting in `FlexSubThemesData`. This addition also removes the need to do a copy with on `ThemeData` to provide a custom `splashFactory`. Prefer using the `FlexSubThemesData` properties `splashType` and `splashTypeAdaptive` to control the selection of used ink factory together with `adaptiveSplash`, unless you have written a custom ink factory that you want to use, in which case using the `splashFactory` override is appropriate.
 * New feature that enable platform adaptive theming of border radius on dialogs via `adaptiveDialogRadius` a `FlexAdaptive` property and double `dialogRadiusAdaptive` in `FlexSubThemesData`.
@@ -20,8 +22,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette.
 
-
 * **Style breaking changes:**
+* In M2 mode, when not using sub-theme, `ThemeData.textSelectionTheme` now gets default `TextSelectionThemeData()` and its themed style defaults to SDK defaults. Enable and use sub-themes to style it further.    
 * In M2 mode, `bottomAppBarElevation` when undefined now remains undefined in `FlexSubThemes.bottomAppBarTheme` causing default elevation in M2 mode to become 8 like in the SDK default for M2. 
     * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opinionated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 
     * The default for M3 mode is unchanged, using elevation 3, via SDK defaults when undefined.
@@ -30,6 +32,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX**
 
+* Fixed that `TextSelectionThemeData` does not automatically use colors that match and follow `subThemes.inputDecoratorSchemeColor`, when it has been modified and a text selection colors are not explicitly defined. The text selection, cursor and text selection handles should follow the input decoration's base color by default, when they are not defined separately. Defining text selection colors was not possible before version 7.2.0, but defining input decoration colors was, but text selection remained using primary. Now they by default follow the input decoration color, but can also be separately defined via new features in version 7.2.0.
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 * Added a built-in theme fix to make the elevation tint change in the `AppBar` animate when it changes. Based on Material spec and observed native Android behavior and compose behavior, the `AppBar` color change when it is scrolled under should animate. Flutter M3 apps don't do this, the color change is instant. Discovered a theme workaround that makes it do it. This is now always used in FCS themes until Flutter includes its own fix for it.
 * The `FlexSubThemes.menuButtonTheme` and the `MenuButtonThemeData` it makes got a `style` value where `ButtonStyle.animationDuration` is always `Duration.zero`. This solves the issue reported in https://github.com/flutter/flutter/issues/123615, so that there is no need for a fix for the issue as it can be solved with a theme property.
@@ -67,7 +70,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX**
 
-* Fixed allowing elevation changes of `BottomNavigationBar` and `NavigationBar` when `useFlutterDefaults` it true (ON).
+* Fixed allowing elevation changes of `BottomNavigationBar` and `NavigationBar` when `useFlutterDefaults` is true (ON).
 * Fixed allowing opacity usage on `NavigationBar` when default undefined background color is used. 
 
 **TODO**

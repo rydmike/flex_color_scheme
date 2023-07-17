@@ -145,6 +145,8 @@ import 'flex_sub_themes.dart';
 /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via
 ///   [FlexSubThemes.textButtonTheme].
+/// * [TextSelectionThemeData] for [TextField] via
+///   [FlexSubThemes.textSelectionTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via
 ///   [FlexSubThemes.timePickerTheme].
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via
@@ -255,6 +257,11 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorBorderWidth,
     this.inputDecoratorFocusedBorderWidth,
     this.inputDecoratorPrefixIconSchemeColor,
+    //
+    this.inputCursorSchemeColor,
+    this.inputSelectionSchemeColor,
+    this.inputSelectionOpacity,
+    this.inputSelectionHandleSchemeColor,
     //
     this.fabRadius,
     this.fabUseShape = false,
@@ -1580,6 +1587,43 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [inputDecoratorSchemeColor] in FCS M2 and to
   /// [SchemeColor.onSurface] in FCS M3.
   final SchemeColor? inputDecoratorPrefixIconSchemeColor;
+
+  /// The [SchemeColor] based color of the cursor in the text field.
+  ///
+  /// The cursor indicates the current location of text insertion point in
+  /// the field.
+  ///
+  /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is
+  /// not defined [colorScheme.primary] is used.
+  final SchemeColor? inputCursorSchemeColor;
+
+  /// The [SchemeColor] based background color of selected text.
+  ///
+  /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is
+  /// not defined [colorScheme.primary] is used.
+  final SchemeColor? inputSelectionSchemeColor;
+
+  /// The opacity applied to [selectionSchemeColor].
+  ///
+  /// If not defined, defaults to [kTextSelectionLightOpacity] = 0.3 (30%) in
+  /// light mode and to [kTextSelectionDarkOpacity] = 0.5 (50%) in dark mode.
+  /// Flutter SDK defaults to 0.4 (40%) in both light and dark mode, so the
+  /// FlexColorScheme defaults are slightly opinionated.
+  final double? inputSelectionOpacity;
+
+  /// The [SchemeColor] based color of the selection handles on the
+  /// text field.
+  ///
+  /// Selection handles are used to indicate the bounds of the selected text,
+  /// or as a handle to drag the cursor to a new location in the text.
+  ///
+  /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is not
+  /// defined or set to [SchemeColor.primary], then FlexColorScheme (FCS)
+  /// sub-themes defaults to the opinionated selection of
+  /// [ThemeData.primaryColorDark], which in FCS is always a darker tone of
+  /// [colorScheme.primary]. Flutter SDK defaults to [colorScheme.primary], to
+  /// get the same result, use [SchemeColor.primary].
+  final SchemeColor? inputSelectionHandleSchemeColor;
 
   /// Border radius value for [FloatingActionButton].
   ///
@@ -3117,6 +3161,11 @@ class FlexSubThemesData with Diagnosticable {
     final double? inputDecoratorFocusedBorderWidth,
     final SchemeColor? inputDecoratorPrefixIconSchemeColor,
     //
+    final SchemeColor? inputCursorSchemeColor,
+    final SchemeColor? inputSelectionSchemeColor,
+    final double? inputSelectionOpacity,
+    final SchemeColor? inputSelectionHandleSchemeColor,
+    //
     final double? fabRadius,
     final bool? fabUseShape,
     final bool? fabAlwaysCircular,
@@ -3418,6 +3467,15 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorPrefixIconSchemeColor:
           inputDecoratorPrefixIconSchemeColor ??
               this.inputDecoratorPrefixIconSchemeColor,
+      //
+      inputCursorSchemeColor:
+          inputCursorSchemeColor ?? this.inputCursorSchemeColor,
+      inputSelectionSchemeColor:
+          inputSelectionSchemeColor ?? this.inputSelectionSchemeColor,
+      inputSelectionOpacity:
+          inputSelectionOpacity ?? this.inputSelectionOpacity,
+      inputSelectionHandleSchemeColor: inputSelectionHandleSchemeColor ??
+          this.inputSelectionHandleSchemeColor,
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
@@ -3799,6 +3857,12 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorPrefixIconSchemeColor ==
             inputDecoratorPrefixIconSchemeColor &&
         //
+        other.inputCursorSchemeColor == inputCursorSchemeColor &&
+        other.inputSelectionSchemeColor == inputSelectionSchemeColor &&
+        other.inputSelectionOpacity == inputSelectionOpacity &&
+        other.inputSelectionHandleSchemeColor ==
+            inputSelectionHandleSchemeColor &&
+        //
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
         other.fabAlwaysCircular == fabAlwaysCircular &&
@@ -4094,6 +4158,11 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorBorderWidth,
         inputDecoratorFocusedBorderWidth,
         inputDecoratorPrefixIconSchemeColor,
+        //
+        inputCursorSchemeColor,
+        inputSelectionSchemeColor,
+        inputSelectionOpacity,
+        inputSelectionHandleSchemeColor,
         //
         fabRadius,
         fabUseShape,
@@ -4420,6 +4489,15 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorPrefixIconSchemeColor',
         inputDecoratorPrefixIconSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'inputCursorSchemeColor', inputCursorSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'inputSelectionSchemeColor', inputSelectionSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'inputSelectionOpacity', inputSelectionOpacity));
+    properties.add(EnumProperty<SchemeColor>(
+        'inputSelectionHandleSchemeColor', inputSelectionHandleSchemeColor));
     //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));

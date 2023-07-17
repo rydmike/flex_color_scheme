@@ -307,5 +307,14 @@ void main() {
     test('FCT kLoDarkPrimTextAlpha is 0xFF', () {
       expect(kLoDarkPrimTextAlpha, 0xFF);
     });
+    test('FCT kTextSelectionOpacity is 0.4', () {
+      expect(kTextSelectionOpacity, 0.4);
+    });
+    test('FCT kTextSelectionLightOpacity is 0.3', () {
+      expect(kTextSelectionLightOpacity, 0.3);
+    });
+    test('FCT kTextSelectionDarkOpacity is 0.5', () {
+      expect(kTextSelectionDarkOpacity, 0.5);
+    });
   });
 }
