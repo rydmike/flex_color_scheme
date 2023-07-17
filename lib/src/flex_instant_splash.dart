@@ -26,7 +26,7 @@ const double _kSplashConfirmedVelocity = 1.0; // logical pixels per millisecond
 /// See also:
 ///
 ///  * [InkRipple], which is an ink splash feature that expands more
-///    aggressively than this class does.
+///    aggressively than [InkSplash] class does.
 ///  * [InkResponse], which uses gestures to trigger ink highlights and ink
 ///    splashes in the parent [Material].
 ///  * [InkWell], which is a rectangular [InkResponse] (the most common type of
@@ -36,7 +36,7 @@ const double _kSplashConfirmedVelocity = 1.0; // logical pixels per millisecond
 ///    [Material].
 ///  * [Ink], a convenience widget for drawing images and other decorations on
 ///    Material widgets.
-class FlexHighlightSplash extends InteractiveInkFeature {
+class FlexInstantSplash extends InteractiveInkFeature {
   /// Begin a splash, centered at position relative to [referenceBox].
   ///
   /// The [controller] argument is typically obtained via
@@ -52,7 +52,7 @@ class FlexHighlightSplash extends InteractiveInkFeature {
   /// This is the default.
   ///
   /// When the splash is removed, `onRemoved` will be called.
-  FlexHighlightSplash({
+  FlexInstantSplash({
     required MaterialInkController controller,
     required super.referenceBox,
     required TextDirection textDirection,
@@ -110,7 +110,7 @@ class FlexHighlightSplash extends InteractiveInkFeature {
   /// Used to specify this type of ink splash for an [InkWell], [InkResponse],
   /// material [Theme], or [ButtonStyle].
   static const InteractiveInkFeatureFactory splashFactory =
-      _HighlightSplashFactory();
+      _InstantSplashFactory();
 
   @override
   void confirm() {
@@ -121,10 +121,12 @@ class FlexHighlightSplash extends InteractiveInkFeature {
     _alphaController!.forward();
   }
 
+  // coverage:ignore-start
   @override
   void cancel() {
     _alphaController?.forward();
   }
+  // coverage:ignore-end
 
   void _handleAlphaStatusChanged(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
@@ -144,10 +146,12 @@ class FlexHighlightSplash extends InteractiveInkFeature {
   void paintFeature(Canvas canvas, Matrix4 transform) {
     final Paint paint = Paint()..color = color.withAlpha(_alpha.value);
     Offset? center = _position;
+    // coverage:ignore-start
     if (_repositionToReferenceBox) {
       center = Offset.lerp(center, referenceBox.size.center(Offset.zero),
           _radiusController.value);
     }
+    // coverage:ignore-end
     paintInkCircle(
       canvas: canvas,
       transform: transform,
@@ -191,8 +195,8 @@ double _getSplashRadiusForPositionInSize(Size bounds, Offset position) {
   return math.max(math.max(d1, d2), math.max(d3, d4)).ceilToDouble();
 }
 
-class _HighlightSplashFactory extends InteractiveInkFeatureFactory {
-  const _HighlightSplashFactory();
+class _InstantSplashFactory extends InteractiveInkFeatureFactory {
+  const _InstantSplashFactory();
 
   @override
   InteractiveInkFeature create({
@@ -208,7 +212,7 @@ class _HighlightSplashFactory extends InteractiveInkFeatureFactory {
     double? radius,
     VoidCallback? onRemoved,
   }) {
-    return FlexHighlightSplash(
+    return FlexInstantSplash(
       controller: controller,
       referenceBox: referenceBox,
       position: position,
