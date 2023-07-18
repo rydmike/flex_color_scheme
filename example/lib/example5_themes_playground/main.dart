@@ -92,8 +92,6 @@ class PlaygroundApp extends StatelessWidget {
       listenable: controller,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
-          // TODO(rydmike): Experiment with scaffoldMessengerKey. Remove it.
-          // scaffoldMessengerKey: App.rootMessengerKey,
           debugShowCheckedModeBanner: false,
           title: 'Themes Playground',
           // The Theme controller controls if we use FlexColorScheme made
@@ -106,13 +104,8 @@ class PlaygroundApp extends StatelessWidget {
           darkTheme: controller.useFlexColorScheme
               ? flexThemeDark(controller)
               : themeDataDark(controller),
-          // Use the dark or light theme based on controller setting.
+          // Use the dark/light theme based on controller setting.
           themeMode: controller.themeMode,
-          // If we wrap the entire app content in a SelectionArea, it would
-          // makes text selectable and copy enabled in entire app.
-          // How it actually behaves, depends on current
-          // platform. Not using it for now, I was not happy with its behavior.
-          // SelectionArea(child: ... );
           home: GestureDetector(
             // This allows us to un-focus a widget, typically a TextField
             // with focus by tapping somewhere outside it. It is no longer
@@ -125,23 +118,14 @@ class PlaygroundApp extends StatelessWidget {
             // the theme settings that will cause themes above to change and
             // rebuild the entire look of the app based on modified theme.
             //
-            // There are more than 250 properties in the controller that can
+            // There are more than 270 properties in the controller that can
             // be used to control the two light and dark mode themes.
             // Every time one of them is modified, the themed app is rebuilt
             // with the new ThemeData applied.
             // The code that one need to use the same theme is also updated
-            // interactively for each change when the cod gent panel is
+            // interactively for each change when the code gen panel is
             // in view.
-            //
-            // TODO(rydmike): Experiment, can we get SnackBar over Drawer?
-            //  => Yes with an extra Scaffold wrapper, actual used Drawer is
-            //  in page with own Scaffold below it.
-            child: // Scaffold(
-                //body:
-                HomePage(controller: controller),
-            //extendBody: true,
-            //extendBodyBehindAppBar: true,
-            //),
+            child: HomePage(controller: controller),
           ),
         );
       },
