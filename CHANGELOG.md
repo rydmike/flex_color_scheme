@@ -36,8 +36,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * **Known limitation**: Text selection handles on iOS cannot be changed with a theme from `primary` color. So on iOS their themed color is always `colorScheme.primary`. The text selection color and cursor color do follow the theme also on iOS.
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 * Added a built-in theme fix to make the elevation tint change in the `AppBar` animate when it changes. Based on Material spec and observed native Android behavior and compose behavior, the `AppBar` color change when it is scrolled under should animate. Flutter M3 apps don't do this, the color change is instant. Discovered a theme workaround that makes it do it. This is now always used in FCS themes until Flutter includes its own fix for it.
-* The `FlexSubThemes.menuButtonTheme` and the `MenuButtonThemeData` it makes got a `style` value where `ButtonStyle.animationDuration` is always `Duration.zero`. This solves the issue reported in https://github.com/flutter/flutter/issues/123615, so that there is no need for a fix for the issue as it can be solved with a theme property.
-
+* The `FlexSubThemes.menuButtonTheme` and the `MenuButtonThemeData` it makes, got a `style` value, where `ButtonStyle.animationDuration` is always `Duration.zero`. This solves the issue reported in [issue #123615](https://github.com/flutter/flutter/issues/123615), so that there is no need for a fix for the issue, since it can be solved with a theme property.
 
 
 **THEMES PLAYGROUND**
@@ -83,7 +82,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **POSTPONED**
 
-* The Squircle and shape selection feature is postponed. It will not land in version 7.2, it may arrive later this year in version 7.3.
+* The Squircle and shape selection feature is postponed. It may arrive later this year in version 7.3.
 
 
 ## 7.1.2
