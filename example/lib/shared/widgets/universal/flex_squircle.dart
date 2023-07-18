@@ -97,7 +97,7 @@ class SquircleBorder extends ShapeBorder {
   final double cornerRadius;
 
   Path _getPath(Rect rect) {
-    late double limitedRadius; // TODO(rydmike): Added late - review!
+    late double limitedRadius;
     final double width = rect.width;
     final double height = rect.height;
     final double centerX = rect.center.dx;
@@ -230,7 +230,7 @@ class SquircleBorder extends ShapeBorder {
       minimalEdgeLengthSideToCornerRadiusRatio,
       minimalUnclippedSideToCornerRadiusRatio,
       minSideLength / minRadiusEdgeLength,
-    )!; // TODO(rydmike): Review bang need
+    )!;
     limitedRadius = math.min(radius, minSideLength / multiplier);
     return bezierRoundedRect();
   }

@@ -26,7 +26,7 @@ void main() {
       // Expect toTheme to be equal
       expect(fcsDefault.toScheme, equals(fcsMaterialLight.toScheme));
       // Expect toTheme to be equal
-      // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+      // TODO(rydmike): toString on ThemeData match, but not ThemeData.
       // This is repeated for many test cases. It seems like ThemeData
       // equality comparison cannot be guaranteed when using sub-themes that
       // uses MaterialState or MaterialStateProperty.
@@ -242,10 +242,10 @@ void main() {
       expect(m1 == m2, true);
     });
     // Expect toTheme from them to full-fill same condition.
-    // TODO(rydmike): toString on ThemeData equals, but not ThemeData op, why?
+    // TODO(rydmike): toString on ThemeData equals, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   uses MaterialState or MaterialStateProperty.
     //   Investigate first what SDK ThemeData tests do, if they even attempt
     //   it. This is commented for now:
     //

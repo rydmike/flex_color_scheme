@@ -175,7 +175,7 @@ class TestRecordingPaintingContext extends ClipContext
     PaintingContextCallback painter, {
     OpacityLayer? oldLayer,
   }) {
-    canvas.saveLayer(null, Paint()); // TODO(ianh): Expose the alpha somewhere.
+    canvas.saveLayer(null, Paint());
     painter(this, offset);
     canvas.restore();
     return OpacityLayer();
