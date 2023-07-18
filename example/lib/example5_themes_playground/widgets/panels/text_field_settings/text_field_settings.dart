@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -12,6 +13,12 @@ import '../../shared/color_scheme_popup_menu.dart';
 class TextFieldSettings extends StatelessWidget {
   const TextFieldSettings(this.controller, {super.key});
   final ThemeController controller;
+
+  static final Uri _fcsFlutterHandleLimit = Uri(
+    scheme: 'https',
+    host: 'api.flutter.dev',
+    path: 'flutter/material/TextSelectionThemeData/selectionHandleColor.html',
+  );
 
   Future<void> _handleSetToM3(BuildContext context) async {
     final bool? reset = await showDialog<bool?>(
@@ -30,6 +37,9 @@ class TextFieldSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final bool isLight = theme.brightness == Brightness.light;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String thinBorderDefaultLabel =
         controller.inputDecoratorBorderWidth == null &&
@@ -816,6 +826,33 @@ class TextFieldSettings extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Write something and try the text selection style',
               labelText: 'Label: TextField for text selection',
+            ),
+          ),
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The text selection handle color cannot be changed '
+                      'using a global theme when using Material TextField on '
+                      'iOS platforms. They can only be primary color, see API '
+                      'doc ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterHandleLimit,
+                  text: 'selectionHandleColor property',
+                ),
+                TextSpan(
+                    style: spanTextStyle,
+                    text: ' for more information. consider making an '
+                        'improvement proposal issue in the Flutter '
+                        'repo if you want this to change.\n'),
+              ],
             ),
           ),
         ),
