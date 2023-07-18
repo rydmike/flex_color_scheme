@@ -98,6 +98,49 @@ class TextFieldSettings extends StatelessWidget {
                 .toStringAsFixed(1)
             : (defaultBackgroundAlpha / 255 * 100).toStringAsFixed(1);
 
+    // Defaults for tex selection setup and info.
+    //
+    final double defaultSelectionOpacity = isLight
+        ? 0.3 // Light FCS own default
+        : 0.5; // Dark FCS own default
+    //
+    final String selectionLabelLightOpacity =
+        controller.inputSelectionLightOpacity != null
+            ? (controller.inputSelectionLightOpacity! * 100).toStringAsFixed(0)
+            : 'default ${(defaultSelectionOpacity * 100).toStringAsFixed(0)}';
+    final String selectionLabelDarkOpacity =
+        controller.inputSelectionDarkOpacity != null
+            ? (controller.inputSelectionDarkOpacity! * 100).toStringAsFixed(0)
+            : 'default ${(defaultSelectionOpacity * 100).toStringAsFixed(0)}';
+    //
+    final String baseDefaultLabelLightColor = controller
+                .inputDecoratorSchemeColorLight !=
+            null
+        // ignore: lines_longer_than_80_chars
+        ? 'default (base ${SchemeColor.values[controller.inputDecoratorSchemeColorLight!.index].name})'
+        : 'default (base primary)';
+    final String baseDefaultLabelDarkColor = controller
+                .inputDecoratorSchemeColorDark !=
+            null
+        // ignore: lines_longer_than_80_chars
+        ? 'default (base ${SchemeColor.values[controller.inputDecoratorSchemeColorDark!.index].name})'
+        : 'default (base primary)';
+    //
+    final String baseDefaultHandleLabelLightColor = controller
+                    .inputDecoratorSchemeColorLight !=
+                null &&
+            controller.inputDecoratorSchemeColorLight != SchemeColor.primary
+        // ignore: lines_longer_than_80_chars
+        ? 'default (base ${SchemeColor.values[controller.inputDecoratorSchemeColorLight!.index].name})'
+        : 'default (theme.primaryColorDark)';
+    final String baseDefaultHandleLabelDarkColor = controller
+                    .inputDecoratorSchemeColorDark !=
+                null &&
+            controller.inputDecoratorSchemeColorDark != SchemeColor.primary
+        // ignore: lines_longer_than_80_chars
+        ? 'default (base ${SchemeColor.values[controller.inputDecoratorSchemeColorDark!.index].name})'
+        : 'default (theme.primaryColorDark)';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -592,6 +635,187 @@ class TextFieldSettings extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
+            ),
+          ),
+        ),
+        //
+        // Selection color border
+        //
+        const Divider(),
+        if (isLight) ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Light theme cursor'),
+            labelForDefault: baseDefaultLabelLightColor,
+            index: controller.inputCursorLightSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputCursorLightSchemeColor(null);
+                    } else {
+                      controller.setInputCursorLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light theme text selection'),
+            labelForDefault: baseDefaultLabelLightColor,
+            index: controller.inputSelectionLightSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputSelectionLightSchemeColor(null);
+                    } else {
+                      controller.setInputSelectionLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Light theme text selection opacity'),
+            subtitle: Slider(
+              min: -1,
+              max: 100,
+              divisions: 101,
+              label: selectionLabelLightOpacity,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? (controller.inputSelectionLightOpacity ?? -0.01) * 100
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputSelectionLightOpacity(
+                              value < 0 ? null : value / 100);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    selectionLabelLightOpacity,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light theme text selection handles'),
+            labelForDefault: baseDefaultHandleLabelLightColor,
+            index: controller.inputSelectionHandleLightSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputSelectionHandleLightSchemeColor(null);
+                    } else {
+                      controller.setInputSelectionHandleLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        ] else ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme cursor'),
+            labelForDefault: baseDefaultLabelDarkColor,
+            index: controller.inputCursorDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputCursorDarkSchemeColor(null);
+                    } else {
+                      controller.setInputCursorDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme text selection'),
+            labelForDefault: baseDefaultLabelDarkColor,
+            index: controller.inputSelectionDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputSelectionDarkSchemeColor(null);
+                    } else {
+                      controller.setInputSelectionDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Dark theme text selection opacity'),
+            subtitle: Slider(
+              min: -1,
+              max: 100,
+              divisions: 101,
+              label: selectionLabelDarkOpacity,
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? (controller.inputSelectionDarkOpacity ?? -0.01) * 100
+                  : -1,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setInputSelectionDarkOpacity(
+                              value < 0 ? null : value / 100);
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'OPACITY',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    selectionLabelDarkOpacity,
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Dark theme text selection handles'),
+            labelForDefault: baseDefaultHandleLabelDarkColor,
+            index: controller.inputSelectionHandleDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setInputSelectionHandleDarkSchemeColor(null);
+                    } else {
+                      controller.setInputSelectionHandleDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        ],
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: TextField(
+            showCursor: true,
+            decoration: InputDecoration(
+              hintText: 'Write something and try the text selection style',
+              labelText: 'Label: TextField for text selection',
             ),
           ),
         ),

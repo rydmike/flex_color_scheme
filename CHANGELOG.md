@@ -33,6 +33,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **FIX**
 
 * Fixed that `TextSelectionThemeData` does not automatically use colors that match and follow `subThemes.inputDecoratorSchemeColor`, when it has been modified and a text selection colors are not explicitly defined. The text selection, cursor and text selection handles should follow the input decoration's base color by default, when they are not defined separately. Defining text selection colors was not possible before version 7.2.0, but defining input decoration colors was, but text selection remained using primary. Now they by default follow the input decoration color, but can also be separately defined via new features in version 7.2.0.
+  * **Known limitation**: Text selection handles on iOS cannot be changed with a theme from `primary` color. So on iOS their themed color is always `colorScheme.primary`. The text selection color and cursor color do follow the theme also on iOS.
 * Fixed `useFlutterDefaults` when elevation is null in `FlexSubThemes.bottomNavigationBar` not using Flutter SDK default elevation of 8.
 * Added a built-in theme fix to make the elevation tint change in the `AppBar` animate when it changes. Based on Material spec and observed native Android behavior and compose behavior, the `AppBar` color change when it is scrolled under should animate. Flutter M3 apps don't do this, the color change is instant. Discovered a theme workaround that makes it do it. This is now always used in FCS themes until Flutter includes its own fix for it.
 * The `FlexSubThemes.menuButtonTheme` and the `MenuButtonThemeData` it makes got a `style` value where `ButtonStyle.animationDuration` is always `Duration.zero`. This solves the issue reported in https://github.com/flutter/flutter/issues/123615, so that there is no need for a fix for the issue as it can be solved with a theme property.
@@ -43,8 +44,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**
 
-* **WIP:** Squircle shape feature. Work in progress.
-
+* Added text selection theming to the **Text Field** panel. By default, cursor color, text selection color and text selection handles, default to following the input decorator default color or its selected color. The cursor color, text selection, and text selection handle colors, can also be overridden and defined separately. These settings for light and dark mode, have their own property values in the Playground.  
 * Added support for selecting a custom ink splash effect and another custom platform adaptive splash effect on selected other platforms. 
 * Added support for configuring the used VisualDensity. When using mock platform setting in the Playground, it also affects the result of used setting when `VisualDensity.adaptivePlatformDensity`, `FlexColorScheme.comfortablePlatformDensity` or default undefined value, that falls back to `VisualDensity.adaptivePlatformDensity`, are used. 
 * Added support for selecting and using `FlexTones.candyPop` and `FlexTones.chroma`.
@@ -57,7 +57,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Added a switch to show TextStyle details to TextTheme presentations.
 * Added font NotoSans Medium (W500) to assets.
 * On theme showcase and icon button panels, show both tappable and toggleable `IconButton` styles.
-* Theme topic selector uses a group color on icons and selected item. The colors are fixed semantic colors, but the colors are M3 harmonized to active theme surface tint color. This makes them fit nicely when the overall color theme of the app changes. It is also a nice additional demo of theme extensions with many colors that are harmonized. The concept is the same as the one used on the code highlighter colors earlier. 
+* Theme topic selector uses a group color on icons and selected item. The colors are fixed semantic colors, but the colors are Material-3 harmonized to active theme surface tint color. This makes them fit nicely when the overall color theme of the app changes. It is also a nice additional demo of theme extensions with many colors that are harmonized. The concept is the same as the one used on the code highlighter colors earlier. 
 
 
 **CHANGE**
@@ -75,13 +75,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO**
 
-* Playground: Code gen for TimePicker, DatePicker and adaptive border radius. Review their defaults.
+* Playground: Review code gen for TimePicker, DatePicker and adaptive border radius.
 * Investigate issue suspect on responsive border radius on dialogs on mock web.
-* Review and complement tests.
+* Actual tests of code gen for the new features on a device using the copy-paste-playgound test app.
+
 
 **POSTPONED**
 
-* The Squircle and shape selection feature is postponed. It will not land in version 7.2.
+* The Squircle and shape selection feature is postponed. It will not land in version 7.2, it may arrive later this year in version 7.3.
 
 
 ## 7.1.2
