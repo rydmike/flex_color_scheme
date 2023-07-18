@@ -234,7 +234,7 @@ class AdaptiveThemeSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
             title: Text('You can find additional platform adaptive '
-                'settings under Shape Radius, AppBar and Dialog'))
+                'settings under Shape Radius, AppBar and Dialogs'))
       ],
     );
   }
