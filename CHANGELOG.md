@@ -44,6 +44,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**
 
+* Introduction text updated. New information about Material-3 design becoming the default in Flutter SDK soon added, and that Material-2 will be deprecated.
 * Added text selection theming to the **Text Field** panel. By default, cursor color, text selection color and text selection handles, default to following the input decorator default color or its selected color. The cursor color, text selection, and text selection handle colors, can also be overridden and defined separately. These settings for light and dark mode, have their own property values in the Playground.  
 * Added support for selecting a custom ink splash effect and another custom platform adaptive splash effect on selected other platforms. 
 * Added support for configuring the used VisualDensity. When using mock platform setting in the Playground, it also affects the result of used setting when `VisualDensity.adaptivePlatformDensity`, `FlexColorScheme.comfortablePlatformDensity` or default undefined value, that falls back to `VisualDensity.adaptivePlatformDensity`, are used. 
