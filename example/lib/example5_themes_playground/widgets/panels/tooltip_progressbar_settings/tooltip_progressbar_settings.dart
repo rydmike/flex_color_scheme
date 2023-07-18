@@ -279,7 +279,9 @@ class TooltipProgressBarSettings extends StatelessWidget {
           subtitleDense: true,
           title: Text('ProgressIndicator'),
           subtitle: Text('Progress indicators in FCS currently only offer the '
-              'default theme and no customization.\n'),
+              'default theme and no customization. There is a nice new '
+              'feature enable circular end-caps, however that feature cannot '
+              'set via a theme at all.\n'),
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
