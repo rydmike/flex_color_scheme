@@ -2064,7 +2064,8 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
-  // TODO(rydmike): V7.1 add also to DatePickerDialog theme.
+  // TODO(rydmike): Add this also to DatePickerDialog theme.
+
   /// Set to true to use the app overall app [InputDecoration] theme in
   /// dialogs themes.
   ///

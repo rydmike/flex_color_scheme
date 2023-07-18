@@ -28,10 +28,10 @@ void main() {
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
-    // TODO(rydmike): toString on ThemeData match, but not ThemeData, why?
+    // TODO(rydmike): toString on ThemeData match, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   uses MaterialState or MaterialStateProperty. Maybe report this.
     //   Investigate first what SDK ThemeData test do, if they even attempt it.
     test(
         'FCS7.01-Default-Light: GIVEN FlexColorScheme.light() made with light '

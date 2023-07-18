@@ -14,13 +14,6 @@ class WidgetShowcase extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: 8),
-          // TODO(rydmike): Removed colors, they are under effective colors.
-          // ShowColorSchemeColors(),
-          // SizedBox(height: 8),
-          // ShowThemeDataColors(),
-          // SizedBox(height: 8),
-          // ShowSubThemeColors(),
-          // SizedBox(height: 16),
           ShowcaseMaterial(),
           SizedBox(height: 8),
         ],

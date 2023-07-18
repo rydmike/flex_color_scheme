@@ -35,7 +35,7 @@ void main() {
     // TODO(rydmike): toString on ThemeData match, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses MaterialState or MaterialStateProperty. Verify and report this.
+    //   uses MaterialState or MaterialStateProperty. Maybe report this.
     //   Investigate first what SDK ThemeData tests do, if they even attempt it.
     test(
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '

@@ -3102,6 +3102,7 @@ class FlexColor {
 
   // TODO(rydmike): Consider reporting issue with Lime case to Material team.
   // TODO(rydmike): Check if MCU3 avoids this issue when using avoid bad colors.
+
   /// Lime M3 theme color for light primary color.
   ///
   /// This is primary color you get when you seed from M2 [Colors.lime].

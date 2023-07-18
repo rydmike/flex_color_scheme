@@ -1499,7 +1499,6 @@ class _PathPaintPredicate extends _DrawCommandPaintPredicate {
   }
 }
 
-// TODO(ianh): add arguments to test the length, angle, that kind of thing
 class _LinePaintPredicate extends _DrawCommandPaintPredicate {
   _LinePaintPredicate(
       {this.p1,
