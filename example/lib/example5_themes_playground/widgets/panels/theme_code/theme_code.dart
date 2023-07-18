@@ -84,13 +84,19 @@ class ThemeCode extends StatelessWidget {
           subtitle: Text('The above colors have been added as a custom theme '
               'extension to ThemeData. Light and dark mode CodeTheme change '
               'with theme mode and is accessed via Theme.of(context). The '
-              'extension colors are also using Material 3 color harmonization '
+              'extension colors are also using Material-3 color harmonization '
               'with active theme. When you change theme you can see that '
               'these semantic CodeTheme colors are often automatically '
               'slightly adjusted towards the overall theme colors. '
               'This CodeTheme is used as a ThemeExtension example in the '
-              'Themes Playground app. It also demonstrates how to use M3 color '
-              'harmonization of custom theme colors in Flutter.\n'),
+              'Themes Playground app. It also demonstrates how to use '
+              'Material-3 color harmonization of custom theme colors in '
+              'Flutter.\n'
+              '\n'
+              'The used group colors for theme topic panels, are using the '
+              'same theme harmonization. When you change themes you will '
+              'notice that they also change color temperature to fit better '
+              'with selected theme\n'),
         ),
         const SizedBox(height: 8),
       ],

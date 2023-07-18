@@ -501,6 +501,20 @@ class AppBarSettings extends StatelessWidget {
                 : null,
           ),
         ],
+        const ListTileReveal(
+          dense: true,
+          title: Text('AppBar background color'),
+          subtitle: Text('With component themes enabled you can select a '
+              'ColorScheme based color for the AppBar background color. '
+              'Using AppBarStyle is convenient and does not require activating '
+              'FlexColorScheme component themes, but doing so offers more '
+              'choices. '
+              'Selecting a color, overrides used AppBarStyle. Set it back '
+              'to default to use AppBarStyle again. Using AppBarStyle also '
+              'offers Scaffold background color as AppBar color, which when '
+              'using surface blends can be different from ColorScheme '
+              'surface and background colors.\n'),
+        ),
         const Divider(),
         const ListTileReveal(
           title: Text('AppBar platform adaptive settings'),

@@ -603,17 +603,17 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    inputCursorSchemeColor: ${controller.inputCursorLightSchemeColor},\n';
   final String inputSelectionLightSchemeColor = controller
-              .inputCursorLightSchemeColor ==
+              .inputSelectionLightSchemeColor ==
           null
       ? ''
       : '    inputSelectionSchemeColor: ${controller.inputSelectionLightSchemeColor},\n';
   final String inputSelectionLightOpacity = controller
-              .inputCursorLightSchemeColor ==
+              .inputSelectionLightOpacity ==
           null
       ? ''
-      : '    inputSelectionOpacity: ${controller.inputSelectionLightOpacity},\n';
+      : '    inputSelectionOpacity: ${controller.inputSelectionLightOpacity!.toStringAsFixed(2)},\n';
   final String inputSelectionHandleLightSchemeColor = controller
-              .inputCursorLightSchemeColor ==
+              .inputSelectionHandleLightSchemeColor ==
           null
       ? ''
       : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleLightSchemeColor},\n';
@@ -624,17 +624,17 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '    inputCursorSchemeColor: ${controller.inputCursorDarkSchemeColor},\n';
   final String inputSelectionDarkSchemeColor = controller
-              .inputCursorDarkSchemeColor ==
+              .inputSelectionDarkSchemeColor ==
           null
       ? ''
       : '    inputSelectionSchemeColor: ${controller.inputSelectionDarkSchemeColor},\n';
   final String inputSelectionDarkOpacity = controller
-              .inputCursorDarkSchemeColor ==
+              .inputSelectionDarkOpacity ==
           null
       ? ''
-      : '    inputSelectionOpacity: ${controller.inputSelectionDarkOpacity},\n';
+      : '    inputSelectionOpacity: ${controller.inputSelectionDarkOpacity!.toStringAsFixed(2)},\n';
   final String inputSelectionHandleDarkSchemeColor = controller
-              .inputCursorDarkSchemeColor ==
+              .inputSelectionHandleDarkSchemeColor ==
           null
       ? ''
       : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleDarkSchemeColor},\n';
