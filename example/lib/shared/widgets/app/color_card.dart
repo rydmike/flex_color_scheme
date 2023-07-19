@@ -1,6 +1,7 @@
 import 'dart:async';
 
 // import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ import '../../const/app.dart';
 ///
 /// When you tap the ColorCard the color value is copied to the clipboard
 /// in Dart format.
-class ColorCard extends StatelessWidget {
+class ColorCard extends StatefulWidget {
   const ColorCard({
     super.key,
     required this.label,
@@ -37,38 +38,38 @@ class ColorCard extends StatelessWidget {
   /// Default to 0 if not provided.
   final double? elevation;
 
-//   @override
-//   State<ColorCard> createState() => _ColorCardState();
-// }
-//
-// class _ColorCardState extends State<ColorCard> {
-//   late String materialName;
-//   late String nameThatColor;
-//   late String space;
-//   late String hexCode;
-//
-//   // The nameThatColor and materialName lookups are expensive, especially
-//   // nameThatColor. Widget stores them as stateful values to avoid computing
-//   // them every time the widget rebuilds.
-//   @override
-//   void initState() {
-//     super.initState();
-//     materialName = ColorTools.materialName(widget.color);
-//     nameThatColor = ColorTools.nameThatColor(widget.color);
-//     space = materialName == '' ? '' : ' ';
-//     hexCode = widget.color.hexCode;
-//   }
-//
-//   @override
-//   void didUpdateWidget(covariant ColorCard oldWidget) {
-//     super.didUpdateWidget(oldWidget);
-//     if (widget.color != oldWidget.color) {
-//       materialName = ColorTools.materialName(widget.color);
-//       nameThatColor = ColorTools.nameThatColor(widget.color);
-//       space = materialName == '' ? '' : ' ';
-//       hexCode = widget.color.hexCode;
-//     }
-//   }
+  @override
+  State<ColorCard> createState() => _ColorCardState();
+}
+
+class _ColorCardState extends State<ColorCard> {
+  late String materialName;
+  late String nameThatColor;
+  late String space;
+  late String hexCode;
+
+  // The nameThatColor and materialName lookups are expensive, especially
+  // nameThatColor. Widget stores them as stateful values to avoid computing
+  // them every time the widget rebuilds.
+  @override
+  void initState() {
+    super.initState();
+    materialName = ColorTools.materialName(widget.color);
+    nameThatColor = ColorTools.nameThatColor(widget.color);
+    space = materialName == '' ? '' : ' ';
+    hexCode = widget.color.hexCode;
+  }
+
+  @override
+  void didUpdateWidget(covariant ColorCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.color != oldWidget.color) {
+      materialName = ColorTools.materialName(widget.color);
+      nameThatColor = ColorTools.nameThatColor(widget.color);
+      space = materialName == '' ? '' : ' ';
+      hexCode = widget.color.hexCode;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +78,9 @@ class ColorCard extends StatelessWidget {
         mediaSize.height < App.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
     final Size effectiveSize =
-        size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
+        widget.size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
 
-    final String hexCode = color.hexCode;
+    final String hexCode = widget.color.hexCode;
 
     return RepaintBoundary(
       child: SizedBox(
@@ -87,24 +88,24 @@ class ColorCard extends StatelessWidget {
         height: effectiveSize.height,
         child: Tooltip(
           waitDuration: const Duration(milliseconds: 700),
-          message: 'Color #$hexCode ' //$nameThatColor$space$materialName.'
+          message: 'Color #$hexCode $nameThatColor$space$materialName.'
               '\nTap to copy color to Clipboard.',
           child: Card(
-            elevation: elevation ?? 0,
+            elevation: widget.elevation ?? 0,
             surfaceTintColor: Colors.transparent,
-            shadowColor: shadowColor,
+            shadowColor: widget.shadowColor,
             margin: EdgeInsets.zero,
             clipBehavior: Clip.antiAlias,
-            color: color,
+            color: widget.color,
             child: InkWell(
               hoverColor: Colors.transparent,
               onTap: () {
-                unawaited(copyColorToClipboard(context, color));
+                unawaited(copyColorToClipboard(context, widget.color));
               },
               child: Center(
                 child: Text(
-                  label,
-                  style: TextStyle(color: textColor, fontSize: fontSize),
+                  widget.label,
+                  style: TextStyle(color: widget.textColor, fontSize: fontSize),
                   textAlign: TextAlign.center,
                 ),
               ),
