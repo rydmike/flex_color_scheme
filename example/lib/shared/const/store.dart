@@ -1189,6 +1189,23 @@ class Store {
   static const NavigationDestinationLabelBehavior defaultNavBarLabelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
 
+  // Key used to read and save the adaptiveRemoveNavigationBarTintLight value.
+  static const String keyAdaptiveRemoveNavigationBarTintLight =
+      'adaptiveRemoveNavigationBarTintLight';
+  // Default value for the adaptiveRemoveNavigationBarTintLight,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveRemoveNavigationBarTintLight =
+      null;
+
+  // Key used to read and save the adaptiveRemoveNavigationBarTintDark value.
+  static const String keyAdaptiveRemoveNavigationBarTintDark =
+      'adaptiveRemoveNavigationBarTintDark';
+  // Default value for the adaptiveRemoveNavigationBarTintDark,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveTheme? defaultAdaptiveRemoveNavigationBarTintDark = null;
+
   // NavigationRail SETTINGS.
   // ===========================================================================
 

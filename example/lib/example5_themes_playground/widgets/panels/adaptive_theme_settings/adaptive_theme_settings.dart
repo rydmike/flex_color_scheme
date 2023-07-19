@@ -153,7 +153,9 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'This setting has no impact in Material-2 mode. '
               'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
-              'MenuAnchor, NavigationDrawer, PopupMenuButton.\n',
+              'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
+              'separate tint removal setting for the NavigationBar, as you may '
+              'want to keep it on even if otherwise removing tint.\n',
             ),
             index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
@@ -207,7 +209,9 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'This setting sas no impact in Material-2 mode. '
               'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
-              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
+              'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
+              'separate tint removal setting for the NavigationBar, as you may '
+              'want to keep it on even if otherwise removing tint.\n',
             ),
             index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
@@ -234,7 +238,8 @@ class AdaptiveThemeSettings extends StatelessWidget {
         const Divider(),
         const ListTile(
             title: Text('You can find additional platform adaptive '
-                'settings under Shape Radius, AppBar and Dialogs'))
+                'settings under Shape Radius, AppBar, NavigationBar '
+                'and Dialogs'))
       ],
     );
   }

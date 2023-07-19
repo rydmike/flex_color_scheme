@@ -10,6 +10,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**  
 
+* Added `adaptiveRemoveNavigationBarTint` to `FlexSubThemesData` it is used to control platform adaptive elevation tint removal on the `NavigationBar` theme.
 * Added `textSelectionTheme` to `FlexSubThemes`, used to make a `TextSelectionThemeData`.
 * Added properties `inputCursorSchemeColor`, `inputSelectionSchemeColor`, `inputSelectionOpacity`, and `inputSelectionHandleSchemeColor`, to `FlexSubThemesData` used to configure `TextSelectionThemeData` as a part of `FlexColorScheme.subThemesData`.
 * Added a new feature that enables platform adaptive Material ink selection via `adaptiveSplash` a `FlexAdaptive` property, and the `FlexSplashType` values `splashType` and `splashTypeAdaptive` in `FlexSubThemesData`.
@@ -23,6 +24,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Updated to use version 1.4.0 of FlexSeedScheme offering two new `FlexTones` and extended tonal palette.
 
 * **Style breaking changes:**
+* Removed elevation tint impact of the general `FlexSubThemesData.adaptiveRemoveElevationTint` setting, from the `NavigationBar` component. It instead has its own setting in `FlexSubThemesData.adaptiveRemoveNavigationBarTint`, that can be used independently of the general tint removal setting. This was done since it may be preferred to not remove the elevation tint from the `NavigationBar`, even when otherwise doing so on selected platforms.
 * In M2 mode, when not using sub-theme, `ThemeData.textSelectionTheme` now gets default `TextSelectionThemeData()` and its themed style defaults to SDK defaults. Enable and use sub-themes to style it further.    
 * In M2 mode, `bottomAppBarElevation` when undefined now remains undefined in `FlexSubThemes.bottomAppBarTheme` causing default elevation in M2 mode to become 8 like in the SDK default for M2. 
     * Previous default used same elevation as `AppBar` when `bottomAppBarElevation` was undefined, or 0 if `AppBar`'s elevation was also undefined. The rationale for removal of this default behavior is to start cleaning out opinionated behavior that no longer makes sense to keep around, especially since eventually M2 mode is going away in Flutter. 

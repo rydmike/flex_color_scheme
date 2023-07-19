@@ -2,12 +2,17 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/set_navigation_bar_to_m3_dialog.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
+import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/is_web_list_tile.dart';
 import '../../shared/navigators_use_default_switch.dart';
+import '../../shared/platform_popup_menu.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
@@ -30,6 +35,7 @@ class NavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
 
     // Logic for default elevation label.
@@ -503,6 +509,57 @@ class NavigationBarSettings extends StatelessWidget {
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
         ),
         NavigationBarLabelBehaviorListTile(controller: controller),
+        const Divider(),
+        if (isLight)
+          AdaptiveThemePopupMenu(
+            title: const Text('Remove elevation tint'),
+            subtitle: const Text(
+              'An adaptive theme response to remove elevation tint on elevated '
+              'NavigationBar in Material-3 in light theme-mode on selected '
+              'platforms. This setting has no impact in Material-2 mode.\n',
+            ),
+            index: controller.adaptiveRemoveNavigationBarTintLight?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveNavigationBarTintLight(null);
+                    } else {
+                      controller.setAdaptiveRemoveNavigationBarTintLight(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          AdaptiveThemePopupMenu(
+            title: const Text('Remove elevation tint'),
+            subtitle: const Text(
+              'An adaptive theme response to remove elevation tint on elevated '
+              'NavigationBar in Material-3 in dark theme-mode on selected '
+              'platforms. This setting has no impact in Material-2 mode.\n',
+            ),
+            index: controller.adaptiveRemoveNavigationBarTintDark?.index ?? -1,
+            onChanged: controller.useFlexColorScheme &&
+                    controller.useSubThemes &&
+                    controller.useMaterial3
+                ? (int index) {
+                    if (index < 0 || index >= AdaptiveTheme.values.length) {
+                      controller.setAdaptiveRemoveNavigationBarTintDark(null);
+                    } else {
+                      controller.setAdaptiveRemoveNavigationBarTintDark(
+                          AdaptiveTheme.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        PlatformPopupMenu(
+          platform: controller.platform,
+          onChanged: controller.setPlatform,
+        ),
+        IsWebListTile(controller: controller),
+        BackToActualPlatform(controller: controller),
         const Divider(),
         NavigatorsUseDefaultsSwitch(controller: controller),
         const ListTileReveal(

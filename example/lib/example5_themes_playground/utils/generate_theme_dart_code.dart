@@ -1100,6 +1100,21 @@ String generateThemeDartCode(ThemeController controller) {
           NavigationDestinationLabelBehavior.alwaysShow
       ? '    navigationBarLabelBehavior: ${controller.navBarLabelBehavior},\n'
       : '';
+  final String adaptiveRemoveNavigationBarTintLight = controller
+                  .adaptiveRemoveNavigationBarTintLight !=
+              null &&
+          controller.adaptiveRemoveNavigationBarTintLight !=
+              AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveNavigationBarTint: ${controller.adaptiveRemoveNavigationBarTintLight!.code},\n'
+      : '';
+  final String adaptiveRemoveNavigationBarTintDark = controller
+                  .adaptiveRemoveNavigationBarTintDark !=
+              null &&
+          controller.adaptiveRemoveNavigationBarTintDark != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    adaptiveRemoveNavigationBarTint: ${controller.adaptiveRemoveNavigationBarTintDark!.code},\n'
+      : '';
   //
   // NavigationRail setup CODE
   //
@@ -1381,6 +1396,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
+          '$adaptiveRemoveNavigationBarTintLight'
           //
           '$navigationRailSelectedLabelSchemeColor'
           '$navigationRailUnselectedLabelSchemeColor'
@@ -1599,6 +1615,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
+          '$adaptiveRemoveNavigationBarTintDark'
           //
           '$navigationRailSelectedLabelSchemeColor'
           '$navigationRailUnselectedLabelSchemeColor'
