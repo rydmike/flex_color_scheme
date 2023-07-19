@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/utils/link_text_span.dart';
@@ -36,6 +35,101 @@ class DialogSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/126617',
   );
 
+  // The logic for the dialog radius label got to complex for inline ternary,
+  // breaking it out to a function.
+  static String _dialogRadiusLabel(ThemeController controller) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS) {
+      return controller.useMaterial3 ? 'default 28' : 'default 4';
+    }
+    final bool useGlobalRadius =
+        (controller.adaptiveDialogRadius == AdaptiveTheme.off ||
+                controller.adaptiveDialogRadius == null) &&
+            controller.dialogBorderRadius == null;
+    if (useGlobalRadius) {
+      return controller.defaultRadius != null
+          ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
+          : (controller.useMaterial3 ? 'default 28' : 'default 4');
+    } else {
+      return controller.dialogBorderRadius != null
+          ? controller.dialogBorderRadius!.toStringAsFixed(0)
+          : (controller.useMaterial3 ? 'default 28' : 'default 4');
+    }
+  }
+
+  // The logic for the adaptive dialog radius label got to complex for inline
+  // ternary, breaking it out to a function.
+  static String _adaptiveDialogRadiusLabel(ThemeController controller) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS) {
+      return controller.useMaterial3 ? 'default 28' : 'default 4';
+    }
+    final bool useAdaptiveDialogRadius =
+        controller.adaptiveDialogRadius != AdaptiveTheme.off &&
+            controller.adaptiveDialogRadius != null;
+    if (useAdaptiveDialogRadius) {
+      return controller.dialogBorderRadiusAdaptive != null
+          ? controller.dialogBorderRadiusAdaptive!.toStringAsFixed(0)
+          : (controller.useMaterial3 ? 'default 28' : 'default 4');
+    }
+    final bool useAdaptiveRadius =
+        controller.adaptiveRadius != AdaptiveTheme.off &&
+            controller.adaptiveRadius != null;
+    if (useAdaptiveRadius) {
+      return controller.defaultRadiusAdaptive != null
+          ? 'global ${controller.defaultRadiusAdaptive!.toStringAsFixed(0)}'
+          : (controller.useMaterial3 ? 'default 28' : 'default 4');
+    }
+    return controller.useMaterial3 ? 'default 28' : 'default 4';
+  }
+
+  // Some sick hairy logic to display the effective radius on time picker
+  // and date picker dialogs.
+  static String _effectiveDialogRadiusLabel(
+      ThemeController controller, double? radius) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS) {
+      return controller.useMaterial3 ? 'default 28' : 'default 4';
+    }
+
+    // Use defaultRadiusAdaptive instead of defaultRadius?
+    final FlexAdaptive adaptiveRadius =
+        controller.adaptiveRadius?.setting(controller.fakeIsWeb) ??
+            const FlexAdaptive.off();
+    // Get the correct platform default radius.
+    final double? platformRadius = adaptiveRadius.adapt(controller.platform)
+        ? controller.defaultRadiusAdaptive
+        : controller.defaultRadius;
+
+    // Use adaptive dialog radius?
+    final FlexAdaptive adaptiveDialogRadius =
+        controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb) ??
+            const FlexAdaptive.off();
+    // Get the effective used adaptive dialog default radius.
+    final double? platformDialogRadius =
+        adaptiveDialogRadius == const FlexAdaptive.off() &&
+                controller.dialogBorderRadius == null
+            ? null
+            : adaptiveDialogRadius.adapt(controller.platform)
+                ? controller.dialogBorderRadiusAdaptive ?? 28
+                : controller.dialogBorderRadius ?? 28;
+
+    final double? effectiveRadius = platformDialogRadius ?? platformRadius;
+
+    final bool useDefinedRadius = radius != null;
+    if (useDefinedRadius) {
+      return radius.toStringAsFixed(0);
+    } else {
+      if (effectiveRadius != null) {
+        return 'dialog ${effectiveRadius.toStringAsFixed(0)}';
+      }
+    }
+    return controller.useMaterial3 ? 'default 28' : 'default 4';
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -43,26 +137,6 @@ class DialogSettings extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
-    // Get effective platform default global radius.
-    final double? effectiveRadius = App.effectiveRadius(controller);
-    final String dialogRadiusDefaultLabel =
-        controller.dialogBorderRadius == null && effectiveRadius == null
-            ? 'default 28'
-            : controller.dialogBorderRadius == null && effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
-                : '';
-
-    final String dialogAdaptiveRadiusDefaultLabel =
-        controller.dialogBorderRadiusAdaptive == null &&
-                effectiveRadius == null &&
-                controller.adaptiveDialogRadius != AdaptiveTheme.off &&
-                controller.adaptiveDialogRadius != null
-            ? 'default 28'
-            : controller.dialogBorderRadiusAdaptive == null &&
-                    effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
-                : '';
 
     return Column(
       children: <Widget>[
@@ -86,9 +160,11 @@ class DialogSettings extends StatelessWidget {
               'inversePrimary are possible options.\n'
               '\n'
               'The AlertDialog uses the general DialogTheme for theming '
-              'values. TimePicker and DatePicker have their own themes.\n'),
+              'values. TimePicker and DatePicker have their own themes. In '
+              'the Themes Playground they share the same setting for the '
+              'background color, but you can change them individually in '
+              'the produced code.\n'),
         ),
-        const AlertDialogShowcase(),
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
@@ -167,7 +243,7 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
+        const AlertDialogShowcase(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Dialog border radius'),
@@ -181,7 +257,14 @@ class DialogSettings extends StatelessWidget {
             'The Flutter default border radius in M2 mode is 4dp and M3 mode '
             'it is 28dp. FlexColorScheme defaults to 28dp in both M2 and M3 '
             'when using its component themes. If you think it is too round, '
-            'try e.g. 16dp.\n',
+            'try e.g. 16dp.\n'
+            '\n'
+            'If you use adaptive radius on the global default radius, and keep '
+            'this dialog radius at default value and the dialog adaptive '
+            'radius OFF, the Dialogs gets the effective value of the global '
+            'radius value and any used adaptive response. '
+            'The dialog radius settings and its platform adaptive response '
+            'will override any global setting when activated.\n',
           ),
         ),
         ListTileReveal(
@@ -191,14 +274,7 @@ class DialogSettings extends StatelessWidget {
             min: -1,
             max: 50,
             divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.dialogBorderRadius == null ||
-                        (controller.dialogBorderRadius ?? -1) < 0
-                    ? dialogRadiusDefaultLabel
-                    : (controller.dialogBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
-                    ? 'default 28'
-                    : 'default 4',
+            label: _dialogRadiusLabel(controller),
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.dialogBorderRadius ?? -1
                 : -1,
@@ -219,38 +295,13 @@ class DialogSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.dialogBorderRadius == null ||
-                              (controller.dialogBorderRadius ?? -1) < 0
-                          ? dialogRadiusDefaultLabel
-                          : (controller.dialogBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 28'
-                          : 'default 4',
+                  _dialogRadiusLabel(controller),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
-        ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive dialog border radius'),
-          subtitle: const Text('Use alternative dialog corner radius on '
-              'selected platforms.\n'),
-          index: controller.adaptiveDialogRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveDialogRadius(null);
-                  } else {
-                    controller
-                        .setAdaptiveDialogRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
         ),
         ListTileReveal(
           enabled: controller.useSubThemes &&
@@ -265,37 +316,25 @@ class DialogSettings extends StatelessWidget {
             'for example want to keep M3 design Dialog radius on Android '
             'platform, but want a less rounded design on other platforms.\n'
             '\n'
-            'With the API you can define which platform an adaptive '
+            'With the API you can define which platforms an adaptive '
             'feature is used on, including separate definitions when '
-            'using the app in a web build on each platform. The above '
-            'selections are using built-in preconfigured constructors, they '
-            'probably cover most use cases. '
+            'using the app in a web build on each platform. The options '
+            'are using built-in preconfigured constructors, they '
+            'cover typical use cases. '
             '\n'
             'The default border radius in M2 mode is 4dp and M3 mode it is '
             '28dp. FCS defaults to 28dp in both M2 and M3 when using component '
             'themes. If you think it is too round, try e.g. 16dp.\n',
           ),
         ),
-        ListTileReveal(
+        ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitleDense: true,
+          // subtitleDense: true,
           title: Slider(
             min: -1,
             max: 50,
             divisions: 51,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.adaptiveDialogRadius != AdaptiveTheme.off &&
-                    controller.adaptiveDialogRadius != null
-                ? controller.dialogBorderRadiusAdaptive == null ||
-                        (controller.dialogBorderRadiusAdaptive ?? -1) < 0
-                    ? dialogAdaptiveRadiusDefaultLabel
-                    : (controller.dialogBorderRadiusAdaptive
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : controller.useMaterial3
-                    ? 'default 28'
-                    : 'default 4',
+            label: _adaptiveDialogRadiusLabel(controller),
             value: controller.useSubThemes &&
                     controller.useFlexColorScheme &&
                     controller.adaptiveDialogRadius != AdaptiveTheme.off &&
@@ -322,26 +361,29 @@ class DialogSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          controller.adaptiveDialogRadius !=
-                              AdaptiveTheme.off &&
-                          controller.adaptiveDialogRadius != null
-                      ? controller.dialogBorderRadiusAdaptive == null ||
-                              (controller.dialogBorderRadiusAdaptive ?? -1) < 0
-                          ? dialogAdaptiveRadiusDefaultLabel
-                          : (controller.dialogBorderRadiusAdaptive
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 28'
-                          : 'default 4',
+                  _adaptiveDialogRadiusLabel(controller),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
+        ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Use platform adaptive dialog border radius'),
+          subtitle: const Text('Use alternative dialog corner radius on '
+              'selected platforms.\n'),
+          index: controller.adaptiveDialogRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveDialogRadius(null);
+                  } else {
+                    controller
+                        .setAdaptiveDialogRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
         ),
         PlatformPopupMenu(
           platform: controller.platform,
@@ -353,12 +395,12 @@ class DialogSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('TimePicker'),
           subtitleDense: true,
-          subtitle: Text('Flutter 3.7 does not implement or fully support '
-              'Material 3 styling of the TimePicker. FlexColorScheme adds '
+          subtitle: Text('Flutter 3.7 does not support '
+              'Material-3 styling of the TimePicker. FlexColorScheme adds '
               'M3 styling based on M3 specification already in Flutter 3.7 '
               'where it is supported by its theming capabilities. '
-              'In Flutter 3.10 TimePicker theming is fully supported. The '
-              '3.10 theming has some bugs, see known issues below.\n'),
+              'In Flutter 3.10, TimePicker theming is fully supported. The '
+              '3.10 theming has some bugs, see known issues further below.\n'),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -366,10 +408,10 @@ class DialogSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: const Text(
             'TimePicker radius defaults to the general dialog radius in '
-            'FlexColorScheme, including its platform adaptive radius settings. '
-            'This is a theme override radius for only the TimePicker dialog '
-            'radius that is applied on all platforms, it also override the '
-            'platform adaptive dialog radius value.\n',
+            'FlexColorScheme, including its platform adaptive radius settings '
+            'defined above or in general border radius. '
+            'This is a themed override radius for the TimePicker dialog '
+            'that is applied on all platforms.\n',
           ),
         ),
         ListTileReveal(
@@ -379,16 +421,10 @@ class DialogSettings extends StatelessWidget {
             min: -1,
             max: 50,
             divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.timePickerDialogBorderRadius == null ||
-                        (controller.timePickerDialogBorderRadius ?? -1) < 0
-                    ? dialogRadiusDefaultLabel
-                    : (controller.timePickerDialogBorderRadius
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : controller.useMaterial3
-                    ? 'default 28'
-                    : 'default 4',
+            label: _effectiveDialogRadiusLabel(
+              controller,
+              controller.timePickerDialogBorderRadius,
+            ),
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.timePickerDialogBorderRadius ?? -1
                 : -1,
@@ -409,17 +445,10 @@ class DialogSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.timePickerDialogBorderRadius == null ||
-                              (controller.timePickerDialogBorderRadius ?? -1) <
-                                  0
-                          ? dialogRadiusDefaultLabel
-                          : (controller.timePickerDialogBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 28'
-                          : 'default 4',
+                  _effectiveDialogRadiusLabel(
+                    controller,
+                    controller.timePickerDialogBorderRadius,
+                  ),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -427,6 +456,7 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        const TimePickerDialogShowcase(),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text("Time input elements' border radius"),
@@ -498,8 +528,8 @@ class DialogSettings extends StatelessWidget {
             'Keeping it OFF uses null as InputDecoration for '
             'TimePicker sub-theme in order to get widget default decorator '
             'style. Despite this, for some reason the app level themed '
-            'InputDecoration background style still gets used. A potential '
-            'Flutter SDK theming issue to revisit later.\n',
+            'InputDecoration background style still gets used on hover. A '
+            'potential Flutter SDK theming issue to revisit later.\n',
           ),
           value: controller.useInputDecoratorThemeInDialogs &&
               controller.useSubThemes &&
@@ -508,7 +538,6 @@ class DialogSettings extends StatelessWidget {
               ? controller.setUseInputDecoratorThemeInDialogs
               : null,
         ),
-        const TimePickerDialogShowcase(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -551,10 +580,10 @@ class DialogSettings extends StatelessWidget {
           subtitleDense: true,
           subtitle: const Text(
             'DatePicker radius defaults to the general dialog radius in '
-            'FlexColorScheme, including its platform adaptive radius settings. '
-            'This is a theme override radius for only the DatePicker dialog '
-            'radius that is applied on all platforms. It also overrides the '
-            'platform adaptive dialog radius value.\n',
+            'FlexColorScheme, including its platform adaptive radius settings '
+            'defined above or in general border radius. '
+            'This is a themed override radius for the DatePicker dialog '
+            'that is applied on all platforms.\n',
           ),
         ),
         ListTileReveal(
@@ -564,16 +593,10 @@ class DialogSettings extends StatelessWidget {
             min: -1,
             max: 50,
             divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.datePickerDialogBorderRadius == null ||
-                        (controller.datePickerDialogBorderRadius ?? -1) < 0
-                    ? dialogRadiusDefaultLabel
-                    : (controller.datePickerDialogBorderRadius
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : controller.useMaterial3
-                    ? 'default 28'
-                    : 'default 4',
+            label: _effectiveDialogRadiusLabel(
+              controller,
+              controller.datePickerDialogBorderRadius,
+            ),
             value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.datePickerDialogBorderRadius ?? -1
                 : -1,
@@ -594,17 +617,10 @@ class DialogSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.datePickerDialogBorderRadius == null ||
-                              (controller.datePickerDialogBorderRadius ?? -1) <
-                                  0
-                          ? dialogRadiusDefaultLabel
-                          : (controller.datePickerDialogBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 28'
-                          : 'default 4',
+                  _effectiveDialogRadiusLabel(
+                    controller,
+                    controller.datePickerDialogBorderRadius,
+                  ),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -612,6 +628,7 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        const DatePickerDialogShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Header background color'),
           labelForDefault: controller.useMaterial3
@@ -629,7 +646,6 @@ class DialogSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const DatePickerDialogShowcase(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),

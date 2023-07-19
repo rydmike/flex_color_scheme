@@ -63,10 +63,10 @@ class ShapeRadiusSettings extends StatelessWidget {
             'but not exactly.\n'
             '\n'
             'A beveled shape BeveledRectangleBorder, is also available in the '
-            'Flutter SDK.\n'
-            '\n',
+            'Flutter SDK.',
           ),
         ),
+        const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Wrap(
@@ -261,19 +261,6 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
           ),
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive border radius'),
-          index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveRadius(null);
-                  } else {
-                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
-        ),
         ListTileReveal(
           enabled: controller.useSubThemes &&
               controller.useFlexColorScheme &&
@@ -351,6 +338,19 @@ class ShapeRadiusSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Use platform adaptive border radius'),
+          index: controller.adaptiveRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveRadius(null);
+                  } else {
+                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
         ),
         PlatformPopupMenu(
           platform: controller.platform,
@@ -475,7 +475,7 @@ class ShapeRadiusSettings extends StatelessWidget {
                       ? controller.thickBorderWidth == null ||
                               (controller.thickBorderWidth ?? 0) <= 0
                           ? useMaterial3
-                              ? 'default 1'
+                              ? 'default 1&2'
                               : 'default 2'
                           : (controller.thickBorderWidth?.toStringAsFixed(1) ??
                               '')

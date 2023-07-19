@@ -219,7 +219,31 @@ class App {
     final AdaptiveTheme adaptiveConfig =
         controller.adaptiveRadius ?? AdaptiveTheme.off;
     // Should we use adaptive radius or not?
-    final bool adapt = adaptiveConfig.setting().adapt(platform, isWeb);
+    final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
+    // Return the effective platform default radius, may be null.
+    return adapt ? adaptiveRadius : normalRadius;
+  }
+
+  /// Return the correct platform effective dialog border radius setting.
+  ///
+  /// Depends on platform, its mock version and web and its mock version
+  /// and config for if standard or adaptive radius is used on this
+  /// mocked platform and mocked web, or actual ones.
+  static double? effectiveDialogRadius(ThemeController controller) {
+    // Get standard border radius value
+    final double? normalRadius = controller.dialogBorderRadius;
+    // Get adaptive border radius value
+    final double? adaptiveRadius = controller.dialogBorderRadiusAdaptive;
+    // Get effective platform
+    final TargetPlatform platform =
+        controller.platform ?? defaultTargetPlatform;
+    // Get fake web platform
+    final bool? isWeb = controller.fakeIsWeb;
+    // Get Adaptive Settings usage.
+    final AdaptiveTheme adaptiveConfig =
+        controller.adaptiveDialogRadius ?? AdaptiveTheme.off;
+    // Should we use adaptive radius or not?
+    final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
     // Return the effective platform default radius, may be null.
     return adapt ? adaptiveRadius : normalRadius;
   }

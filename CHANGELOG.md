@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.2.0-dev.1
 
-**July 18, 2023**
+**July 19, 2023**
 
 **PACKAGE**
 
@@ -75,9 +75,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO**
 
-* Playground: Review code gen for TimePicker, DatePicker and adaptive border radius.
-* Investigate issue suspect on responsive border radius on dialogs on mock web.
-* Actual tests of code gen for the new features on a device using the copy-paste-playgound test app.
+* FEATURE: Switch fixed thumb size option.
+* Actual tests of code gen for the new features on a device using the copy-paste-playground test app.
 
 
 **POSTPONED**

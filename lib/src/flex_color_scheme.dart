@@ -5656,9 +5656,12 @@ class FlexColorScheme with Diagnosticable {
         subTheme.adaptiveDialogRadius ?? const FlexAdaptive.off();
     // Get the effective used adaptive dialog default radius.
     final double? platformDialogRadius =
-        adaptiveDialogRadius.adapt(effectivePlatform)
-            ? subTheme.dialogRadiusAdaptive
-            : subTheme.dialogRadius;
+        adaptiveDialogRadius == const FlexAdaptive.off() &&
+                subTheme.dialogRadius == null
+            ? null
+            : adaptiveDialogRadius.adapt(effectivePlatform)
+                ? subTheme.dialogRadiusAdaptive ?? kDialogRadius
+                : subTheme.dialogRadius ?? kDialogRadius;
 
     // Use adaptive splash?
     final FlexAdaptive adaptiveSplashType =

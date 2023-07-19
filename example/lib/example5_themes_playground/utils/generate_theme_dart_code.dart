@@ -296,9 +296,13 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    splashTypeAdaptive: ${controller.splashTypeAdaptive!.code},\n'
       : '';
 
-  // Default radius, it adaptive variant and border widths.
+  // Default radius, its adaptive variant.
   final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String adaptiveRadius = controller.adaptiveRadius != null &&
+          controller.adaptiveRadius != AdaptiveTheme.off
+      ? '    adaptiveRadius: ${controller.adaptiveRadius!.code},\n'
       : '';
   final String defaultRadiusAdaptive = controller.defaultRadiusAdaptive !=
               null &&
@@ -306,10 +310,7 @@ String generateThemeDartCode(ThemeController controller) {
           controller.adaptiveRadius != AdaptiveTheme.off
       ? '    defaultRadiusAdaptive: ${controller.defaultRadiusAdaptive!.toStringAsFixed(1)},\n'
       : '';
-  final String adaptiveRadius = controller.adaptiveRadius != null &&
-          controller.adaptiveRadius != AdaptiveTheme.off
-      ? '    adaptiveRadius: ${controller.adaptiveRadius!.code},\n'
-      : '';
+  // Shape border widths
   final String thinBorderWidth = controller.thinBorderWidth != null
       ? '    thinBorderWidth: ${controller.thinBorderWidth!.toStringAsFixed(1)},\n'
       : '';
@@ -738,18 +739,31 @@ String generateThemeDartCode(ThemeController controller) {
   final String dialogBorderRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String adaptiveDialogRadius = controller.adaptiveDialogRadius != null &&
+          controller.adaptiveDialogRadius != AdaptiveTheme.off
+      ? '    adaptiveDialogRadius: ${controller.adaptiveDialogRadius!.code},\n'
+      : '';
+  final String dialogRadiusAdaptive = controller.dialogBorderRadiusAdaptive !=
+              null &&
+          controller.adaptiveDialogRadius != null &&
+          controller.adaptiveDialogRadius != AdaptiveTheme.off
+      ? '    dialogRadiusAdaptive: ${controller.dialogBorderRadiusAdaptive!.toStringAsFixed(1)},\n'
+      : '';
   final String datePickerHeaderBackgroundSchemeColor = controller
               .datePickerHeaderBackgroundSchemeColor !=
           null
       ? '    datePickerHeaderBackgroundSchemeColor: ${controller.datePickerHeaderBackgroundSchemeColor},\n'
       : '';
-  // TODO(rydmike): Remove commented code
-  // final String datePickerDialogRadius = controller.dialogBorderRadius != null
-  //     ? '    datePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
-  //     : '';
-  // final String timePickerDialogRadius = controller.dialogBorderRadius != null
-  //     ? '    timePickerDialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
-  //     : '';
+  final String datePickerDialogRadius = controller
+              .datePickerDialogBorderRadius !=
+          null
+      ? '    datePickerDialogRadius: ${controller.datePickerDialogBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String timePickerDialogRadius = controller
+              .timePickerDialogBorderRadius !=
+          null
+      ? '    timePickerDialogRadius: ${controller.timePickerDialogBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
   final String timePickerElementRadius = controller.timePickerElementRadius !=
           null
       ? '    timePickerElementRadius: ${controller.timePickerElementRadius!.toStringAsFixed(1)},\n'
@@ -1191,8 +1205,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$adaptiveAppBarScrollUnderOffLight'
           //
           '$defaultRadius'
-          '$defaultRadiusAdaptive'
           '$adaptiveRadius'
+          '$defaultRadiusAdaptive'
           //
           '$textButtonBorderRadius'
           '$textButtonSchemeColor'
@@ -1278,14 +1292,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$tooltipOpacity'
           //
           '$dialogBackgroundSchemeColor'
-          '$dialogBorderRadius'
           '$dialogElevation'
+          '$dialogBorderRadius'
+          '$adaptiveDialogRadius'
+          '$dialogRadiusAdaptive'
+          '$datePickerDialogRadius'
+          '$timePickerDialogRadius'
+          '$timePickerElementRadius'
           '$useInputDecoratorThemeInDialogs'
           '$datePickerHeaderBackgroundSchemeColor'
-          // TODO(rydmike): Remove commented code
-          // '$datePickerDialogRadius'
-          // '$timePickerDialogRadius'
-          '$timePickerElementRadius'
           //
           '$snackBarRadius'
           '$snackBarElevation'
@@ -1405,8 +1420,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$adaptiveAppBarScrollUnderOffDark'
           //
           '$defaultRadius'
-          '$defaultRadiusAdaptive'
           '$adaptiveRadius'
+          '$defaultRadiusAdaptive'
           //
           '$thinBorderWidth'
           '$thickBorderWidth'
@@ -1495,14 +1510,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$tooltipOpacity'
           //
           '$dialogBackgroundSchemeColor'
-          '$dialogBorderRadius'
           '$dialogElevation'
+          '$dialogBorderRadius'
+          '$adaptiveDialogRadius'
+          '$dialogRadiusAdaptive'
+          '$datePickerDialogRadius'
+          '$timePickerDialogRadius'
+          '$timePickerElementRadius'
           '$useInputDecoratorThemeInDialogs'
           '$datePickerHeaderBackgroundSchemeColor'
-          // TODO(rydmike): Remove commented code
-          // '$datePickerDialogRadius'
-          // '$timePickerDialogRadius'
-          '$timePickerElementRadius'
           //
           '$snackBarRadius'
           '$snackBarElevation'
