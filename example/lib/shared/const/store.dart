@@ -1485,6 +1485,11 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSwitchThumbSchemeColor = null;
 
+  // Key used to read and save the switchThumbFixedSize value.
+  static const String keySwitchThumbFixedSize = 'switchThumbFixedSize';
+  // Default value for the switchThumbFixedSize, also used to reset settings.
+  static const bool defaultSwitchThumbFixedSize = true;
+
   // Key used to read and save the checkboxSchemeColor value.
   static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';
   // Default value for the checkboxSchemeColor, also used to reset settings.

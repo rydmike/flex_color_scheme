@@ -42,6 +42,7 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchShowcase(),
         ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Switch main color'),
           labelForDefault: labelForDefaultColor,
@@ -71,8 +72,19 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Divider(height: 1),
-        const SizedBox(height: 8),
+        SwitchListTileReveal(
+          title: const Text('Thumb size is fixed'),
+          subtitle: const Text('Turn ON to keep the Switch thumb same size '
+              'when Switch is ON and OFF. Only available in Material-3 '
+              'mode.\n'),
+          value: controller.switchThumbFixedSize &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setSwitchThumbFixedSize
+              : null,
+        ),
+        const Divider(),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: CheckboxShowcase(),
@@ -92,8 +104,7 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Divider(height: 1),
-        const SizedBox(height: 8),
+        const Divider(),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: RadioShowcase(),
@@ -112,7 +123,7 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Divider(height: 1),
+        const Divider(),
         SwitchListTileReveal(
           title: const Text('Unselected toggle is colored'),
           subtitle: const Text('ON: Use main color on unselected toggle\n'

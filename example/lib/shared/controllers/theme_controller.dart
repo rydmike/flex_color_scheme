@@ -667,6 +667,8 @@ class ThemeController with ChangeNotifier {
         Store.keySwitchSchemeColor, Store.defaultSwitchSchemeColor);
     _switchThumbSchemeColor = await _themeService.load(
         Store.keySwitchThumbSchemeColor, Store.defaultSwitchThumbSchemeColor);
+    _switchThumbFixedSize = await _themeService.load(
+        Store.keySwitchThumbFixedSize, Store.defaultSwitchThumbFixedSize);
     _checkboxSchemeColor = await _themeService.load(
         Store.keyCheckboxSchemeColor, Store.defaultCheckboxSchemeColor);
     _radioSchemeColor = await _themeService.load(
@@ -1187,6 +1189,7 @@ class ThemeController with ChangeNotifier {
     setUnselectedToggleIsColored(Store.defaultUnselectedToggleIsColored, false);
     setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
     setSwitchThumbSchemeColor(Store.defaultSwitchThumbSchemeColor, false);
+    setSwitchThumbFixedSize(Store.defaultSwitchThumbFixedSize, false);
     setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
     //
@@ -4480,6 +4483,16 @@ class ThemeController with ChangeNotifier {
     _switchThumbSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySwitchThumbSchemeColor, value));
+  }
+
+  late bool _switchThumbFixedSize;
+  bool get switchThumbFixedSize => _switchThumbFixedSize;
+  void setSwitchThumbFixedSize(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _switchThumbFixedSize) return;
+    _switchThumbFixedSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySwitchThumbFixedSize, value));
   }
 
   late SchemeColor? _checkboxSchemeColor;
