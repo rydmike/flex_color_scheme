@@ -484,7 +484,6 @@ void main() {
     const String str18 = '0x1BCEE'; // -> Color(0xFF01BCEE)
     const String str19 = '0x841B0xCE0xE#'; // -> Color(0xF841BCEE)
     const String emptyStr = ''; // -> Color(0xFF000000)
-    // const String? nullStr = null; // -> Color(0xFF000000)
 
     test('FSE3.01: GIVEN "$str1".toColor EXPECT "Color(0xFF6200EE)".', () {
       expect(str1.toColor, const Color(0xFF6200EE));
