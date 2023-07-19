@@ -7081,7 +7081,8 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
               useFlutterDefaults: subTheme.useFlutterDefaults,
-              surfaceTintColor: removeTint ? Colors.transparent : null,
+              // Remove global tint removal
+              // surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
             )
           : null,

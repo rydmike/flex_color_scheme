@@ -4630,11 +4630,12 @@ void main() {
         theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
         equals(Colors.transparent),
       );
-      // NavigationDrawer
-      expect(
-        theme.navigationBarTheme.surfaceTintColor,
-        equals(Colors.transparent),
-      );
+      // NavigationBar
+      // TODO(rydmike): Remove this test
+      // expect(
+      //   theme.navigationBarTheme.surfaceTintColor,
+      //   equals(Colors.transparent),
+      // );
       expect(
         theme.navigationBarTheme.shadowColor,
         equals(colorScheme.shadow),
@@ -4738,11 +4739,12 @@ void main() {
         theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
         equals(Colors.transparent),
       );
-      // NavigationDrawer
-      expect(
-        theme.navigationBarTheme.surfaceTintColor,
-        equals(Colors.transparent),
-      );
+      // NavigationBar
+      // TODO(rydmike): Remove this test
+      // expect(
+      //   theme.navigationBarTheme.surfaceTintColor,
+      //   equals(Colors.transparent),
+      // );
       expect(
         theme.navigationBarTheme.shadowColor,
         equals(colorScheme.shadow),
@@ -4859,7 +4861,8 @@ void main() {
         theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
         equals(Colors.transparent),
       );
-      // NavigationDrawer
+      // NavigationBar
+      // TODO(rydmike): Remove this test
       expect(
         theme.navigationBarTheme.surfaceTintColor,
         equals(Colors.transparent),
