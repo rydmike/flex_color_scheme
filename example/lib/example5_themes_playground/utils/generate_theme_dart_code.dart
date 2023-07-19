@@ -475,6 +475,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    switchThumbSchemeColor: ${controller.switchThumbSchemeColor},\n';
+  final String switchThumbFixedSize = controller.switchThumbFixedSize
+      ? '    switchThumbFixedSize: ${controller.switchThumbFixedSize},\n'
+      : '';
   final String checkboxSchemeColor = controller.checkboxSchemeColor == null
       ? ''
       : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
@@ -1254,6 +1257,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
+          '$switchThumbFixedSize'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
@@ -1473,6 +1477,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
+          '$switchThumbFixedSize'
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'

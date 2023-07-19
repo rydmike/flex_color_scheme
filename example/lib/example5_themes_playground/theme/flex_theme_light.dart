@@ -236,9 +236,11 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             segmentedButtonBorderSchemeColor:
                 controller.segmentedButtonBorderSchemeColor,
             segmentedButtonBorderWidth: controller.segmentedButtonBorderWidth,
+            //
             // Switch, CheckBox, Radio (toggles) settings.
             switchSchemeColor: controller.switchSchemeColor,
             switchThumbSchemeColor: controller.switchThumbSchemeColor,
+            switchThumbFixedSize: controller.switchThumbFixedSize,
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             // Style of unselected switch/checkbox/radio.
@@ -317,6 +319,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 : Duration(milliseconds: controller.tooltipShowDuration!),
             tooltipSchemeColor: controller.tooltipSchemeColor,
             tooltipOpacity: controller.tooltipOpacity,
+            //
             // Dialog settings.
             dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
             dialogRadius: controller.dialogBorderRadius,
