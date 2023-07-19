@@ -233,6 +233,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.switchSchemeColor,
     this.switchThumbSchemeColor,
+    this.switchThumbFixedSize,
     this.checkboxSchemeColor,
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
@@ -1324,6 +1325,7 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? switchSchemeColor;
 
   // TODO(rydmike): Follow up M3 icon and outline cannot be themed, make issue.
+
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Switch] and [SwitchListTile] use as themed thumb color.
   ///
@@ -1334,6 +1336,18 @@ class FlexSubThemesData with Diagnosticable {
   /// - If [useMaterial3] is false [switchSchemeColor].
   /// - If [useMaterial3 ]is true [SchemeColor.primaryContainer].
   final SchemeColor? switchThumbSchemeColor;
+
+  /// Set to true to keep the [Switch] thumb size fixed.
+  ///
+  /// When true the [Switch] thumb size does not change from small size when
+  /// OFF, to a larger size when ON. This makes the Material-3 Switch even more
+  /// similar to the iOS style Switch.
+  ///
+  /// This setting only applies to the Material-3 mode, it has no effect in
+  /// Material-2 mode.
+  ///
+  /// If undefined, defaults to false.
+  final bool? switchThumbFixedSize;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Checkbox] and [CheckboxListTile] use as base themed color.
@@ -3161,6 +3175,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final SchemeColor? switchSchemeColor,
     final SchemeColor? switchThumbSchemeColor,
+    final bool? switchThumbFixedSize,
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
     final bool? unselectedToggleIsColored,
@@ -3450,6 +3465,7 @@ class FlexSubThemesData with Diagnosticable {
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
       switchThumbSchemeColor:
           switchThumbSchemeColor ?? this.switchThumbSchemeColor,
+      switchThumbFixedSize: switchThumbFixedSize ?? this.switchThumbFixedSize,
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
@@ -3854,6 +3870,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.switchSchemeColor == switchSchemeColor &&
         other.switchThumbSchemeColor == switchThumbSchemeColor &&
+        other.switchThumbFixedSize == switchThumbFixedSize &&
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
@@ -4164,6 +4181,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         switchSchemeColor,
         switchThumbSchemeColor,
+        switchThumbFixedSize,
         checkboxSchemeColor,
         radioSchemeColor,
         unselectedToggleIsColored,
@@ -4472,6 +4490,8 @@ class FlexSubThemesData with Diagnosticable {
         .add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'switchThumbSchemeColor', switchThumbSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'switchThumbFixedSize', switchThumbFixedSize));
     properties.add(
         EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
     properties
