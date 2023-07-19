@@ -348,7 +348,6 @@ class FlexSubThemesData with Diagnosticable {
     this.drawerIndicatorOpacity,
     this.drawerSelectedItemSchemeColor,
     this.drawerUnselectedItemSchemeColor,
-
     //
     this.bottomSheetBackgroundColor,
     this.bottomSheetModalBackgroundColor,
@@ -394,6 +393,7 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarElevation,
     this.navigationBarHeight,
     this.navigationBarLabelBehavior,
+    this.adaptiveRemoveNavigationBarTint,
     //
     this.navigationRailLabelTextStyle,
     this.navigationRailSelectedLabelSize,
@@ -665,7 +665,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Material 3 introduces elevation tint on elevated surface. With the
   /// [adaptiveRemoveElevationTint] property you can define on which platforms
-  /// elevation tint is used when using Material 3.
+  /// elevation tint is used when using Material-3.
   ///
   /// See class [FlexAdaptive] on how to configure the platform adaptive
   /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
@@ -686,7 +686,6 @@ class FlexSubThemesData with Diagnosticable {
   /// - [DropDownMenu]
   /// - [MenuAnchor]
   /// - [MenuBar]
-  /// - [NavigationBar]
   /// - [NavigationDrawer]
   /// - [PopupMenuButton]
   ///
@@ -2828,6 +2827,31 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, default to [NavigationDestinationLabelBehavior.alwaysShow].
   final NavigationDestinationLabelBehavior? navigationBarLabelBehavior;
 
+  /// Controls adaptive elevation tint color usage on the [NavigationBar].
+  ///
+  /// Material-3 introduces elevation tint on elevated surface. With the
+  /// [adaptiveRemoveNavigationBarTint] property you can define on which
+  /// platforms elevation tint is used on [NavigationBar] when using Material-3.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that only keeps elevation tint on Material 3 themes
+  /// on Android and Fuchsia platforms, and when the app is run in a web
+  /// browser on these platforms.
+  ///
+  /// The [adaptiveRemoveNavigationBarTint] feature has no impact in M2 mode.
+  /// It only impacts component themes in FCS where Flutter SDK also support
+  /// elevation tints in its theme. Currently this applies to:
+  ///
+  /// If you want to totally remove elevation tint from all widgets and on all
+  /// platforms when using Material-3, you can optionally set
+  /// [FlexColorScheme.surfaceTint] color to [Colors.transparent]. This also
+  /// works with vanilla [ThemeData.colorScheme] by setting its
+  /// [ColorScheme.surfaceTint] to [Colors.transparent].
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveRemoveNavigationBarTint;
+
   // ---------------------------------------------------------------------------
   //
   // Navigation Rail Properties
@@ -3297,6 +3321,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? navigationBarElevation,
     final double? navigationBarHeight,
     final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
+    final FlexAdaptive? adaptiveRemoveNavigationBarTint,
     //
     final TextStyle? navigationRailLabelTextStyle,
     final double? navigationRailSelectedLabelSize,
@@ -3694,6 +3719,8 @@ class FlexSubThemesData with Diagnosticable {
       navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
       navigationBarLabelBehavior:
           navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
+      adaptiveRemoveNavigationBarTint: adaptiveRemoveNavigationBarTint ??
+          this.adaptiveRemoveNavigationBarTint,
       //
       navigationRailLabelTextStyle:
           navigationRailLabelTextStyle ?? this.navigationRailLabelTextStyle,
@@ -4026,6 +4053,8 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationBarElevation == navigationBarElevation &&
         other.navigationBarHeight == navigationBarHeight &&
         other.navigationBarLabelBehavior == navigationBarLabelBehavior &&
+        other.adaptiveRemoveNavigationBarTint ==
+            adaptiveRemoveNavigationBarTint &&
         //
         other.navigationRailLabelTextStyle == navigationRailLabelTextStyle &&
         other.navigationRailSelectedLabelSize ==
@@ -4294,6 +4323,7 @@ class FlexSubThemesData with Diagnosticable {
         navigationBarElevation,
         navigationBarHeight,
         navigationBarLabelBehavior,
+        adaptiveRemoveNavigationBarTint,
         //
         navigationRailLabelTextStyle,
         navigationRailSelectedLabelSize,
@@ -4749,6 +4779,8 @@ class FlexSubThemesData with Diagnosticable {
         'navigationBarHeight', navigationBarHeight));
     properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
         'navigationBarLabelBehavior', navigationBarLabelBehavior));
+    properties.add(EnumProperty<FlexAdaptive>(
+        'adaptiveRemoveNavigationBarTint', adaptiveRemoveNavigationBarTint));
     //
     properties.add(DiagnosticsProperty<TextStyle>(
         'navigationRailLabelTextStyle', navigationRailLabelTextStyle));
