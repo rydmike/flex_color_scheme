@@ -595,45 +595,69 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
   }
 }
 
-class FabShowcase extends StatelessWidget {
+class FabShowcase extends StatefulWidget {
   const FabShowcase({super.key});
+
+  @override
+  State<FabShowcase> createState() => _FabShowcaseState();
+}
+
+class _FabShowcaseState extends State<FabShowcase> {
+  bool extended = true;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 8,
-        runSpacing: 8,
+        spacing: 16,
+        runSpacing: 16,
         children: <Widget>[
-          FloatingActionButton.small(
-            heroTag: 'FAB small',
-            onPressed: () {},
-            child: const Icon(Icons.accessibility),
+          Tooltip(
+            verticalOffset: 40,
+            waitDuration: const Duration(milliseconds: 500),
+            message: 'FloatingActionButton.small',
+            child: FloatingActionButton.small(
+              heroTag: 'FAB small',
+              onPressed: () {},
+              child: const Icon(Icons.accessibility),
+            ),
           ),
-          FloatingActionButton.extended(
-            heroTag: 'FAB extended false',
-            isExtended: false,
-            onPressed: () {},
-            icon: const Icon(Icons.accessibility),
-            label: const Text('Extended'),
+          Tooltip(
+            verticalOffset: 40,
+            waitDuration: const Duration(milliseconds: 500),
+            message: 'FloatingActionButton',
+            child: FloatingActionButton(
+              heroTag: 'FAB standard',
+              onPressed: () {},
+              child: const Icon(Icons.accessibility),
+            ),
           ),
-          FloatingActionButton.extended(
-            heroTag: 'FAB extended true',
-            isExtended: true,
-            onPressed: () {},
-            icon: const Icon(Icons.accessibility),
-            label: const Text('Extended'),
+          Tooltip(
+            verticalOffset: 40,
+            waitDuration: const Duration(milliseconds: 500),
+            message: 'FloatingActionButton.extended(isExtended: $extended)',
+            child: FloatingActionButton.extended(
+              heroTag: 'FAB extendable',
+              isExtended: extended,
+              onPressed: () {
+                setState(() {
+                  extended = !extended;
+                });
+              },
+              icon: const Icon(Icons.accessibility),
+              label: const Text('Extended'),
+            ),
           ),
-          FloatingActionButton(
-            heroTag: 'FAB standard',
-            onPressed: () {},
-            child: const Icon(Icons.accessibility),
-          ),
-          FloatingActionButton.large(
-            heroTag: 'FAB large',
-            onPressed: () {},
-            child: const Icon(Icons.accessibility),
+          Tooltip(
+            verticalOffset: 60,
+            waitDuration: const Duration(milliseconds: 500),
+            message: 'FloatingActionButton.large',
+            child: FloatingActionButton.large(
+              heroTag: 'FAB large',
+              onPressed: () {},
+              child: const Icon(Icons.accessibility),
+            ),
           ),
         ],
       ),
