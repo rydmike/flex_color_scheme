@@ -40,9 +40,7 @@ class NavigationBarSettings extends StatelessWidget {
 
     // Logic for default elevation label.
     final String elevationDefaultLabel = controller.navBarElevation == null
-        ? controller.useMaterial3
-            ? 'default 3'
-            : 'default 0'
+        ? 'default 3'
         : controller.navBarElevation!.toStringAsFixed(1);
 
     // Logic for background color label.

@@ -1488,7 +1488,7 @@ class Store {
   // Key used to read and save the switchThumbFixedSize value.
   static const String keySwitchThumbFixedSize = 'switchThumbFixedSize';
   // Default value for the switchThumbFixedSize, also used to reset settings.
-  static const bool defaultSwitchThumbFixedSize = true;
+  static const bool defaultSwitchThumbFixedSize = false;
 
   // Key used to read and save the checkboxSchemeColor value.
   static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';

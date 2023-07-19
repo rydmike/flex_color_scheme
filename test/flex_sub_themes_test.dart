@@ -124,7 +124,7 @@ void main() {
         ),
         equals(
           const BottomNavigationBarThemeData(
-            elevation: 0,
+            elevation: 3.0,
             backgroundColor: Colors.white,
             selectedIconTheme: IconThemeData(
                 color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
@@ -149,12 +149,12 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBar(
           colorScheme: colorScheme,
-          elevation: 3,
+          elevation: 2,
           // useFlutterDefaults: false, <<- Expect this to be default
         ),
         equals(
           const BottomNavigationBarThemeData(
-            elevation: 3,
+            elevation: 2,
             backgroundColor: Color(0xff121212),
             selectedIconTheme: IconThemeData(
                 color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
@@ -5000,7 +5000,7 @@ void main() {
     });
     test(
         'NavigationBar FST21.3 custom2: GIVEN a custom1 '
-        'FlexSubTheme.navigationBarTheme() '
+        'FlexSubTheme.navigationBarTheme() in M2 settings '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -5031,6 +5031,7 @@ void main() {
         navBarTheme.toString(),
         equalsIgnoringHashCodes(
           NavigationBarThemeData(
+            elevation: 3,
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             backgroundColor: colorScheme.error.withOpacity(0.9),

@@ -834,7 +834,7 @@ class FlexSubThemes {
 
     /// [BottomNavigationBar] container elevation.
     ///
-    /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+    /// If not defined, defaults to [kBottomNavigationBarElevation] = 3.
     final double? elevation,
 
     /// Whether the labels are shown for the selected
@@ -3858,10 +3858,9 @@ class FlexSubThemes {
 
     /// [NavigationBar] elevation.
     ///
-    /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
-    /// which if:
-    ///  - If [useMaterial] if true, is 3 dp.
-    ///  - If [useMaterial] if false, is 0 dp.
+    /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation
+    /// in M3 mode which is 3 dp. In M2 mode it defaults
+    /// [kBottomNavigationBarElevation] = 3.
     final double? elevation,
 
     /// Overrides the default value of [NavigationBar.surfaceTintColor].
@@ -3961,7 +3960,7 @@ class FlexSubThemes {
     ///
     /// - background       surfaceVariant surface with      surface with
     ///                                   onSurface overlay primary overlay
-    ///                    elev 0         elev 3            elev 3
+    ///                    elev 3         elev 0            elev 3
     /// - height           80             80                80
     /// - indicator        primary op24%  secondary op24%   secondaryContainer
     /// - selected icon    primary        onSurface         onSecondaryContainer
@@ -4037,9 +4036,19 @@ class FlexSubThemes {
         schemeColor(indicatorSchemeColor ?? SchemeColor.primary, colorScheme)
             .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
+    // Make default elevation
+    final double? effectiveElevation = useM3
+        ? elevation
+        // ignore: prefer_if_null_operators
+        : elevation == null
+            ? useFlutterDefaults
+                ? null
+                : kBottomNavigationBarElevation
+            : elevation;
+
     return NavigationBarThemeData(
       height: height,
-      elevation: elevation,
+      elevation: effectiveElevation,
       backgroundColor: useFlutterDefaults && backgroundSchemeColor == null
           ? null
           : backgroundColor,
@@ -5897,8 +5906,8 @@ class FlexSubThemes {
     /// Set to true to keep the [Switch] thumb size fixed.
     ///
     /// When true the [Switch] thumb size does not change from small size when
-    /// OFF, to a larger size when ON. This makes the Material-3 Switch even more
-    /// similar to the iOS style Switch.
+    /// OFF, to a larger size when ON. This makes the Material-3 Switch even
+    /// more similar to the iOS style Switch.
     ///
     /// This setting only applies to the Material-3 mode, it has no effect in
     /// Material-2 mode.
