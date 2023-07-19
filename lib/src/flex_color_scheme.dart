@@ -5446,14 +5446,6 @@ class FlexColorScheme with Diagnosticable {
   ///    This is a slight change from the ColorScheme default that uses
   ///    surface color.
   ///
-  ///  * In `TextSelectionThemeData`, the standard for `selectionColor` is
-  ///    `colorScheme.primary` with opacity value `0.4` for dark-mode and `0.12`
-  ///    for light mode. Here primary with `0.5` for dark-mode and `0.3` for
-  ///    light mode is used. The standard for `selectionHandleColor` is
-  ///    `colorScheme.primary`, here we use the slightly darker shade
-  ///    `primaryColorDark` instead, which does not have a proper color
-  ///    scheme color value in Flutter standard `ColorScheme` based themes.
-  ///
   ///  * A predefined slightly opinionated [InputDecorationTheme] is used. It
   ///    sets `filled` to `true` and fill color to color scheme primary color
   ///    with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
