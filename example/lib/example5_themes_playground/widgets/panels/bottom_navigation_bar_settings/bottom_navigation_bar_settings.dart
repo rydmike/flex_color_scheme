@@ -53,7 +53,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         controller.bottomNavigationBarElevation == null
             ? controller.useFlutterDefaults
                 ? 'default 8'
-                : 'default 0'
+                : 'default 3'
             : controller.bottomNavigationBarElevation!.toStringAsFixed(1);
 
     return Column(

@@ -38,7 +38,10 @@ const int kDarkenSecondaryContainer = 14;
 const double kBottomSheetBorderRadius = 28;
 
 /// Default for elevation of [BottomNavigationBar].
-const double kBottomNavigationBarElevation = 0;
+///
+/// Changed in version 7.2.0 to 3, in order to bring default elevation
+/// of BottomNavigationBar and NavigationBar to same value in M3.
+const double kBottomNavigationBarElevation = 3;
 
 /// Default elevation of none modal Material 3 [BottomSheet].
 ///

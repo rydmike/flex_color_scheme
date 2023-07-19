@@ -90,8 +90,8 @@ void main() {
     test('FCT kBottomSheetModalElevationM2 is 8', () {
       expect(kBottomSheetModalElevationM2, 8);
     });
-    test('FCT kBottomNavigationBarElevation is 0', () {
-      expect(kBottomNavigationBarElevation, 0);
+    test('FCT kBottomNavigationBarElevation is 3.0', () {
+      expect(kBottomNavigationBarElevation, 3.0);
     });
     test('FCT kNavigationBarIndicatorAlpha is 0x3D', () {
       expect(kNavigationBarIndicatorAlpha, 0x3D);

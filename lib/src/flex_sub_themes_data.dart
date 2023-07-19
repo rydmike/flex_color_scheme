@@ -622,7 +622,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// - background       surfaceVariant surface with      surface with
   ///                                   onSurface overlay primary overlay
-  ///                    elev 0         elev 3            elev 3
+  ///                    elev 3         elev 0            elev 3
   /// - height           80             80                80
   /// - indicator        primary op24%  secondary op24%   secondaryContainer
   /// - selected icon    primary        onSurface         onSecondaryContainer
@@ -2587,7 +2587,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [BottomNavigationBar].
   ///
-  /// If not defined, defaults to [kBottomNavigationBarElevation] = 0.
+  /// If not defined, defaults to [kBottomNavigationBarElevation] = 3.
   final double? bottomNavigationBarElevation;
 
   /// Whether the labels are shown for the selected
@@ -2830,10 +2830,9 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The z-coordinate to be used for the [NavigationBar]'s elevation.
   ///
-  /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation,
-  /// which if:
-  ///  - If [useMaterial] if true, is 3 dp.
-  ///  - If [useMaterial] if false, is 0 dp.
+  /// If undefined, defaults to default Flutter SDK [NavigationBar] elevation
+  /// in M3 mode which is 3 dp. In M2 mode it defaults
+  /// [kBottomNavigationBarElevation] = 3.
   final double? navigationBarElevation;
 
   /// Specifies when each [NavigationDestination]'s label should appear.
