@@ -5894,6 +5894,18 @@ class FlexSubThemes {
     /// - If useMaterial3 is true [SchemeColor.primaryContainer].
     final SchemeColor? thumbSchemeColor,
 
+    /// Set to true to keep the [Switch] thumb size fixed.
+    ///
+    /// When true the [Switch] thumb size does not change from small size when
+    /// OFF, to a larger size when ON. This makes the Material-3 Switch even more
+    /// similar to the iOS style Switch.
+    ///
+    /// This setting only applies to the Material-3 mode, it has no effect in
+    /// Material-2 mode.
+    ///
+    /// If undefined, defaults to false.
+    final bool? thumbFixedSize,
+
     /// The splash radius of the circular Material ink response.
     ///
     /// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
@@ -6044,6 +6056,12 @@ class FlexSubThemes {
     else {
       return SwitchThemeData(
         splashRadius: splashRadius,
+        thumbIcon: thumbFixedSize ?? false
+            ? MaterialStateProperty.resolveWith<Icon?>(
+                (Set<MaterialState> states) {
+                return const Icon(Icons.minimize, color: Colors.transparent);
+              })
+            : null,
         thumbColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {

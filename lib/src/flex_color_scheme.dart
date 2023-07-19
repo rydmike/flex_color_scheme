@@ -7262,6 +7262,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.switchSchemeColor,
               thumbSchemeColor: subTheme.switchThumbSchemeColor,
+              thumbFixedSize: subTheme.switchThumbFixedSize,
               unselectedIsColored: subTheme.unselectedToggleIsColored,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
