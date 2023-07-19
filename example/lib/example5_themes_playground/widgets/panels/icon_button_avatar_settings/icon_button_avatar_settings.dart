@@ -148,7 +148,8 @@ class IconButtonAvatarSettings extends StatelessWidget {
               'default colors. FCS takes care of defining light and dark '
               'shades for these legacy ThemeData colors automatically based '
               'on colorScheme.primary color. In M3 mode CircleAvatar defaults '
-              'to using colorScheme.primaryContainer. There is no component '
+              'to using colorScheme.primaryContainer and onPrimaryContainer. '
+              'There is no component '
               'theme available in Flutter for CircleAvatar.\n'),
         ),
         const Padding(
