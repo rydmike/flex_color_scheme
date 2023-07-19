@@ -153,7 +153,7 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'This setting has no impact in Material-2 mode. '
               'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
-              'MenuAnchor, NavigationBar, NavigationDrawer, PopupMenuButton.\n',
+              'MenuAnchor, NavigationDrawer, PopupMenuButton.\n',
             ),
             index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
