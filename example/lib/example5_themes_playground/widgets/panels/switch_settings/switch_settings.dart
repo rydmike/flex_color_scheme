@@ -76,7 +76,8 @@ class SwitchesSettings extends StatelessWidget {
           title: const Text('Thumb size is fixed'),
           subtitle: const Text('Turn ON to keep the Switch thumb the same '
               'size when Switch is ON or OFF. Only available in Material-3 '
-              'mode.\n'),
+              'mode. When on the Material-3 Switch looks even more like an '
+              'iOS Switch.\n'),
           value: controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
