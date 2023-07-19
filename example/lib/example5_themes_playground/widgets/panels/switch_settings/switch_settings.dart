@@ -37,7 +37,7 @@ class SwitchesSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchShowcase(),
@@ -74,13 +74,16 @@ class SwitchesSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Thumb size is fixed'),
-          subtitle: const Text('Turn ON to keep the Switch thumb same size '
-              'when Switch is ON and OFF. Only available in Material-3 '
+          subtitle: const Text('Turn ON to keep the Switch thumb the same '
+              'size when Switch is ON or OFF. Only available in Material-3 '
               'mode.\n'),
           value: controller.switchThumbFixedSize &&
               controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              controller.useFlexColorScheme &&
+              controller.useMaterial3,
+          onChanged: controller.useSubThemes &&
+                  controller.useFlexColorScheme &&
+                  controller.useMaterial3
               ? controller.setSwitchThumbFixedSize
               : null,
         ),

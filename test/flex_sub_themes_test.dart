@@ -7624,6 +7624,33 @@ void main() {
         colorScheme: colorScheme,
         useMaterial3: true,
       );
+      // Thumb Icons - no icon
+      Icon? icon = FlexSubThemes.switchTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+      ).thumbIcon?.resolve(<MaterialState>{});
+      expect(
+        icon,
+        equals(null),
+      );
+      icon = FlexSubThemes.switchTheme(
+        colorScheme: colorScheme,
+        thumbFixedSize: false,
+        useMaterial3: true,
+      ).thumbIcon?.resolve(<MaterialState>{});
+      expect(
+        icon,
+        equals(null),
+      );
+      // Thumb Icons - has hidden icon for fixed size thumb effect.
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          thumbFixedSize: true,
+          useMaterial3: true,
+        ).thumbIcon!.resolve(<MaterialState>{})!.icon,
+        equals(Icons.minimize),
+      );
       // Disabled thumb colors
       expect(
         switchTheme.thumbColor!.resolve(

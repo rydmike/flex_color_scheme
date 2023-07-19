@@ -23,6 +23,7 @@ class MaterialPanel extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: MaterialShowcase(explain: false),
         ),
+        SizedBox(height: 16),
       ],
     );
   }
