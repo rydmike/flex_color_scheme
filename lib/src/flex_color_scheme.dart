@@ -5632,6 +5632,12 @@ class FlexColorScheme with Diagnosticable {
         subTheme.adaptiveRemoveElevationTint ?? const FlexAdaptive.off();
     final bool removeTint = useMaterial3 && subTint.adapt(effectivePlatform);
 
+    // Remove NavigationBar elevation tint in M3?
+    final FlexAdaptive navBarTint =
+        subTheme.adaptiveRemoveNavigationBarTint ?? const FlexAdaptive.off();
+    final bool removeNavBarTint =
+        useMaterial3 && navBarTint.adapt(effectivePlatform);
+
     // Use elevation shadow in M3?
     final FlexAdaptive subShadow =
         subTheme.adaptiveElevationShadowsBack ?? const FlexAdaptive.off();
@@ -7081,8 +7087,7 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
               useFlutterDefaults: subTheme.useFlutterDefaults,
-              // Remove global tint removal
-              // surfaceTintColor: removeTint ? Colors.transparent : null,
+              surfaceTintColor: removeNavBarTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
             )
           : null,

@@ -4666,6 +4666,7 @@ void main() {
         platform: TargetPlatform.iOS,
         subThemesData: const FlexSubThemesData(
           adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveRemoveNavigationBarTint: FlexAdaptive.iOSAndDesktop(),
           adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
         ),
       );
@@ -4740,11 +4741,10 @@ void main() {
         equals(Colors.transparent),
       );
       // NavigationBar
-      // TODO(rydmike): Remove this test
-      // expect(
-      //   theme.navigationBarTheme.surfaceTintColor,
-      //   equals(Colors.transparent),
-      // );
+      expect(
+        theme.navigationBarTheme.surfaceTintColor,
+        equals(Colors.transparent),
+      );
       expect(
         theme.navigationBarTheme.shadowColor,
         equals(colorScheme.shadow),
@@ -4775,6 +4775,7 @@ void main() {
         platform: TargetPlatform.macOS,
         subThemesData: const FlexSubThemesData(
           adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveRemoveNavigationBarTint: FlexAdaptive.iOSAndDesktop(),
           adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
           adaptiveAppBarScrollUnderOff: FlexAdaptive.iOSAndDesktop(),
           adaptiveRadius: FlexAdaptive.iOSAndDesktop(),
@@ -4862,7 +4863,6 @@ void main() {
         equals(Colors.transparent),
       );
       // NavigationBar
-      // TODO(rydmike): Remove this test
       expect(
         theme.navigationBarTheme.surfaceTintColor,
         equals(Colors.transparent),
@@ -4897,6 +4897,7 @@ void main() {
         platform: TargetPlatform.android,
         subThemesData: const FlexSubThemesData(
           adaptiveRemoveElevationTint: FlexAdaptive.iOSAndDesktop(),
+          adaptiveRemoveNavigationBarTint: FlexAdaptive.iOSAndDesktop(),
           adaptiveElevationShadowsBack: FlexAdaptive.iOSAndDesktop(),
         ),
       );
@@ -4966,7 +4967,7 @@ void main() {
         theme.menuTheme.style?.surfaceTintColor,
         equals(null),
       );
-      // NavigationDrawer
+      // NavigationBar
       expect(
         theme.navigationBarTheme.surfaceTintColor,
         equals(null),

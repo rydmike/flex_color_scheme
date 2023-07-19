@@ -547,6 +547,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarIndicatorBorderRadius);
     _navBarLabelBehavior = await _themeService.load(
         Store.keyNavBarLabelBehavior, Store.defaultNavBarLabelBehavior);
+    _adaptiveRemoveNavigationBarTintLight = await _themeService.load(
+        Store.keyAdaptiveRemoveNavigationBarTintLight,
+        Store.defaultAdaptiveRemoveNavigationBarTintLight);
+    _adaptiveRemoveNavigationBarTintDark = await _themeService.load(
+        Store.keyAdaptiveRemoveNavigationBarTintDark,
+        Store.defaultAdaptiveRemoveNavigationBarTintDark);
     //
     // NavigationRail SETTINGS.
     _navRailBackgroundSchemeColor = await _themeService.load(
@@ -1109,6 +1115,10 @@ class ThemeController with ChangeNotifier {
     setNavBarIndicatorBorderRadius(
         Store.defaultNavBarIndicatorBorderRadius, false);
     setNavBarLabelBehavior(Store.defaultNavBarLabelBehavior, false);
+    setAdaptiveRemoveNavigationBarTintLight(
+        Store.defaultAdaptiveRemoveNavigationBarTintLight, false);
+    setAdaptiveRemoveNavigationBarTintDark(
+        Store.defaultAdaptiveRemoveNavigationBarTintDark, false);
     //
     // NavigationRail SETTINGS.
     setNavRailBackgroundSchemeColor(
@@ -4049,6 +4059,30 @@ class ThemeController with ChangeNotifier {
     _navBarLabelBehavior = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyNavBarLabelBehavior, value));
+  }
+
+  late AdaptiveTheme? _adaptiveRemoveNavigationBarTintLight;
+  AdaptiveTheme? get adaptiveRemoveNavigationBarTintLight =>
+      _adaptiveRemoveNavigationBarTintLight;
+  void setAdaptiveRemoveNavigationBarTintLight(AdaptiveTheme? value,
+      [bool notify = true]) {
+    if (value == _adaptiveRemoveNavigationBarTintLight) return;
+    _adaptiveRemoveNavigationBarTintLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyAdaptiveRemoveNavigationBarTintLight, value));
+  }
+
+  late AdaptiveTheme? _adaptiveRemoveNavigationBarTintDark;
+  AdaptiveTheme? get adaptiveRemoveNavigationBarTintDark =>
+      _adaptiveRemoveNavigationBarTintDark;
+  void setAdaptiveRemoveNavigationBarTintDark(AdaptiveTheme? value,
+      [bool notify = true]) {
+    if (value == _adaptiveRemoveNavigationBarTintDark) return;
+    _adaptiveRemoveNavigationBarTintDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyAdaptiveRemoveNavigationBarTintDark, value));
   }
 
   // NavigationRail SETTINGS.
