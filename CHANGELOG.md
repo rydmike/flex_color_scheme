@@ -45,6 +45,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**
 
+* The Navigation Bar got its own setting for elevation tint removal in light and dark mode.
 * Introduction text updated. New information about Material-3 design becoming the default in Flutter SDK soon added, and that Material-2 will be deprecated.
 * Added text selection theming to the **Text Field** panel. By default, cursor color, text selection color and text selection handles, default to following the input decorator default color or its selected color. The cursor color, text selection, and text selection handle colors, can also be overridden and defined separately. These settings for light and dark mode, have their own property values in the Playground.  
 * Added support for selecting a custom ink splash effect and another custom platform adaptive splash effect on selected other platforms. 
@@ -83,7 +84,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **POSTPONED**
 
-* The Squircle and shape selection feature is postponed. It may arrive later this year in version 7.3.
+* The Squircle and platform adaptive shape selection features are postponed. They may arrive later this year in version 7.3 or a later release.
 
 
 ## 7.1.2
