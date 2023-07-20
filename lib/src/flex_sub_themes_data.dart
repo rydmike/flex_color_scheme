@@ -44,7 +44,7 @@ import 'flex_sub_themes.dart';
 ///   this may not be problem since an M3 app is not supposed to use the
 ///   fixed style [SnackBar], so if you only use the floating one, you can
 ///   modify its border radius. The M3 guide mentions it should never be
-///   stadium shaped, so consider keeping the radiuos modest, e.g. 10 or lower.
+///   stadium shaped, so consider keeping the radius modest, e.g. 10 or lower.
 /// * [PopupMenuButton], menus in general like [DropdownMenu] and [MenuAnchor],
 ///   can get a border radius, but not via global default. Values above 10 are
 ///   not a good idea, but up to 8 still works pretty well.
@@ -2088,7 +2088,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to false.
   final bool? useInputDecoratorThemeInDialogs;
 
-  /// The background color of the header in a [DatePikcerDialog].
+  /// The background color of the header in a [DatePickerDialog].
   ///
   /// If not defined, default to [ColorScheme.primary] in M2 and to
   /// [ColorScheme.surface] in M3.

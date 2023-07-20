@@ -1,9 +1,9 @@
 // ignore_for_file: comment_references
 
-/// Enum that can be used to lookup predefined [FlexSchemeData] scheme
+/// Enum that can be used to lookup predefined [FlexSchemeData] color theme
 /// definition objects.
 ///
-/// Contains 40 ready to use built-in matched light and dark color schemes.
+/// Contains 52 ready to use built-in matched light and dark color schemes.
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
   ///
@@ -142,40 +142,40 @@ enum FlexScheme {
   /// [here](https://m3.material.io/styles/color/the-color-system/color-roles).
   dellGenoa,
 
-  /// A red based Material 3 colorscheme.
+  /// A red based Material-3 colorscheme.
   redM3,
 
-  /// A pink based Material 3 colorscheme.
+  /// A pink based Material-3 colorscheme.
   pinkM3,
 
-  /// A purple based Material 3 colorscheme.
+  /// A purple based Material-3 colorscheme.
   purpleM3,
 
-  /// An indigo based Material 3 colorscheme, with old lavender tertiary.
+  /// An indigo based Material-3 colorscheme, with old lavender tertiary.
   indigoM3,
 
-  /// A blue based Material 3 colorscheme.
+  /// A blue based Material-3 colorscheme.
   blueM3,
 
-  /// A cyan based Material 3 colorscheme.
+  /// A cyan based Material-3 colorscheme.
   cyanM3,
 
-  /// A teal based Material 3 colorscheme, with azure blue tertiary.
+  /// A teal based Material-3 colorscheme, with azure blue tertiary.
   tealM3,
 
-  /// A green based Material 3 colorscheme, with william blue-grey tertiary.
+  /// A green based Material-3 colorscheme, with william blue-grey tertiary.
   greenM3,
 
-  /// A lime based Material 3 colorscheme.
+  /// A lime based Material-3 colorscheme.
   limeM3,
 
-  /// A Yukon Gold based Material 3 colorscheme, with mineral green tertiary.
+  /// A Yukon Gold based Material-3 colorscheme, with mineral green tertiary.
   yellowM3,
 
-  /// An orange based Material 3 colorscheme, with verdigris green tertiary.
+  /// An orange based Material-3 colorscheme, with verdigris green tertiary.
   orangeM3,
 
-  /// A deep orange based Material 3 colorscheme.
+  /// A deep orange based Material-3 colorscheme.
   deepOrangeM3,
 
   /// Placeholder for adding a custom scheme. When this scheme
