@@ -7652,6 +7652,14 @@ void main() {
         ).thumbIcon!.resolve(<MaterialState>{})!.icon,
         equals(Icons.minimize),
       );
+      expect(
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          thumbFixedSize: true,
+          useMaterial3: true,
+        ).thumbIcon!.resolve(<MaterialState>{})!.color,
+        equals(Colors.transparent),
+      );
       // Disabled thumb colors
       expect(
         switchTheme.thumbColor!.resolve(
