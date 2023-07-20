@@ -1,4 +1,4 @@
-# This GitHub action runs on a release, when the GitHub repo is "published".
+# This GitHub action runs on a release, when the GitHub repo is "published"
 # This workflow:
 #  - Installs dart and flutter
 #  - Uses flutter stable channel.
