@@ -43,7 +43,7 @@ import 'home_page.dart';
 // in AppColor.schemes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/allthemes-v7-1
+// https://rydmike.com/flexcolorscheme/allthemes-v7-2
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

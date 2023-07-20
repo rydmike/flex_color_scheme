@@ -65,7 +65,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // Switch, CheckBox and Radio
         //
-        const Text('Switch, CheckBox and Radio', style: headerStyle),
+        const Text('Switch, Checkbox and Radio', style: headerStyle),
         const SizedBox(height: 8),
         const SwitchShowcase(showCupertinoSwitches: false),
         const CheckboxShowcase(),

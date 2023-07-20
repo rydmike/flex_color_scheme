@@ -14,7 +14,7 @@ import 'theme_two_topics_page.dart';
 ///
 /// This view no longer like the [ThemeTwoTopicsPage] keep the content of the
 /// page in [CustomScrollView] with a [SliverPersistentHeader]. This is a lot
-/// simpler view suitable for large media where everything is in row with five
+/// simpler view suitable for large media where everything is in a row with five
 /// different vertical lists in the row.
 class ThemeTwoTopicsVerticalPage extends StatelessWidget {
   const ThemeTwoTopicsVerticalPage({

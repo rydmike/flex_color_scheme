@@ -29,7 +29,7 @@ import 'home_page.dart';
 // with the enum related color scheme.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/fourthemes-v7-1
+// https://rydmike.com/flexcolorscheme/fourthemes-v7-2
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

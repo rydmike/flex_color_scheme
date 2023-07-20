@@ -32,7 +32,7 @@ import 'widgets/pages/home_page.dart';
 /// in AppColor.schemesCustom and many other options.
 ///
 /// You can try this app as a web app at:
-/// https://rydmike.com/flexcolorscheme/themesplayground-v7-1
+/// https://rydmike.com/flexcolorscheme/themesplayground-v7-2
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Use a ThemeController, which glues our theme settings to Flutter Widgets.
