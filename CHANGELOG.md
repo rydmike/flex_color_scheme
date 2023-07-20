@@ -84,14 +84,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Fixed allowing elevation changes of `BottomNavigationBar` and `NavigationBar` when `useFlutterDefaults` is true (ON).
 * Fixed allowing opacity usage on `NavigationBar` when default undefined background color is used. 
 
-**TODO**
-
-* Actual tests of code gen for the new features on a device using the copy-paste-playground test app.
-
 
 **POSTPONED**
 
-* The Squircle and platform adaptive shape selection features are postponed. They may arrive later this year in version 7.3 or a later release.
+* The new Squircle and platform adaptive shape selection features were postponed. They may arrive later this year in version 7.3 or a later release. It is pending more investigation into the best choice concerning correct shapes and potential performance issues they might come with.
 
 
 ## 7.1.2
