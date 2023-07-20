@@ -488,13 +488,13 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Set to true to make disabled controls use a slight color tint of their own
   /// main enabled color on their disabled state. Enabling this feature makes
-  /// the theme even more color expressive than Material 3 is by default.
+  /// the theme even more color expressive than Material-3 is by default.
   ///
   /// This setting impacts disabled state of all UI widgets that can be disabled
   /// and can be themed to have a different disable color than the widget
   /// default disabled color. Some widgets even have two different tinted colors
   /// for their disabled state. Starting from FlexColorScheme version 7 a
-  /// consistent tinted style is used an all widgets when opting in on this f
+  /// consistent tinted style is used an all widgets when opting in on this
   /// feature.
   ///
   /// The feature is implemented by always in all sub-themes' [MaterialState]
@@ -877,19 +877,19 @@ class FlexSubThemesData with Diagnosticable {
   /// apps past style, set [blendTextTheme] to true.
   final bool blendTextTheme;
 
-  /// Determines if Material 3 TextTheme and Typography is used.
+  /// Determines if Material-3 TextTheme and Typography is used.
   ///
   /// When opting in on using the sub-theming, this flag controls if the
-  /// TextTheme will use the new Material 3 [Typography.material2021]
-  /// as specified in the [Material 3 Design Guide](https://m3.material.io).
+  /// TextTheme will use the new Material-3 [Typography.material2021]
+  /// as specified in the [Material-3 Design Guide](https://m3.material.io).
   ///
   /// If not defined, and [ThemeData.useMaterial3] is true, then it defaults
-  /// to true. If [ThemeData.useMaterial3] is false, then it defaults to
-  /// false.
+  /// to true. If not defined and [ThemeData.useMaterial3] is false, then it
+  /// defaults to false.
   ///
   /// This toggle works as an override toggle for using
-  /// Typography.material2021] in Material 2 mode and for using
-  /// [Typography.material2018] in Material 3 mode.
+  /// [Typography.material2021] in Material-2 mode and for using
+  /// [Typography.material2018] in Material-3 mode.
   ///
   /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
   /// sub themes are not used, then default typography is
@@ -908,10 +908,10 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// This property was originally used in [FlexColorScheme] to opt-in on using
   /// a custom text theme defined internally by [FlexColorScheme] to look like
-  /// the typography and text theme used in Material 3, before such a text theme
+  /// the typography and text theme used in Material-3, before such a text theme
   /// and typography existed in Flutter. When Flutter started providing M3
   /// text theme and typography, this property was converted into toggle to opt
-  /// in and out of using the th text theme. Typically you do not want to
+  /// in and out of using the text theme. Typically, you do not want to
   /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
   final bool? useTextTheme;
 

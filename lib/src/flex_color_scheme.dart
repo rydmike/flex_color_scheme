@@ -1004,6 +1004,8 @@ class FlexColorScheme with Diagnosticable {
   /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
   /// * [TextButtonThemeData] for [TextButton] via
   ///   [FlexSubThemes.textButtonTheme].
+  /// * [TextSelectionThemeData] for [TextField] via
+  ///   [FlexSubThemes.textSelectionTheme].
   /// * [TimePickerThemeData] for [TimePickerDialog] via
   ///   [FlexSubThemes.timePickerTheme].
   /// * [ToggleButtonsThemeData] for [ToggleButtons] via
@@ -2092,6 +2094,8 @@ class FlexColorScheme with Diagnosticable {
     /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
+    /// * [TextSelectionThemeData] for [TextField] via
+    ///   [FlexSubThemes.textSelectionTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
     ///   [FlexSubThemes.timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
@@ -3955,6 +3959,8 @@ class FlexColorScheme with Diagnosticable {
     /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
+    /// * [TextSelectionThemeData] for [TextField] via
+    ///   [FlexSubThemes.textSelectionTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
     ///   [FlexSubThemes.timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
@@ -5304,6 +5310,7 @@ class FlexColorScheme with Diagnosticable {
   /// https://stackoverflow.com/questions/32942503/material-design-color-palette
   ///
   /// Starting points here:
+  ///
   /// - https://github.com/mbitson/mcg/issues/19
   /// - Good candidate: https://github.com/eugeneford/material-palette-generator
   /// - https://github.com/edelstone/material-palette-generator
@@ -5393,87 +5400,90 @@ class FlexColorScheme with Diagnosticable {
   ///   [issue #90353](https://github.com/flutter/flutter/issues/90353).
   ///   In M3 `ColorScheme.surface` is used by the SDK as well.
   ///
-  ///  * The `indicatorColor` is same as `effectiveTabColor` which uses a
-  ///    function with logic to determine its color based on if a TabBarTheme
-  ///    was selected that should work on current AppBar background color,
-  ///    or on surface/background colors.
+  /// * The `indicatorColor` is same as `effectiveTabColor` which uses a
+  ///   function with logic to determine its color based on if a TabBarTheme
+  ///   was selected that should work on current AppBar background color,
+  ///   or on surface/background colors.
   ///
-  ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme related color for the `primaryColorDark` color, FCS does.
-  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///    The `ThemeData.from` leaves this color at `ThemeData` factory default,
-  ///    this may not match your scheme. Widgets seldom use this color, so the
-  ///    issue is rarely seen.
-  ///    This color property will be deprecated in Flutter, see issue
-  ///    [91772](https://github.com/flutter/flutter/issues/91772).
+  /// * Flutter themes created with `ThemeData.from` does not define any color
+  ///   scheme related color for the `primaryColorDark` color, FCS does.
+  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default,
+  ///   this may not match your scheme. Widgets seldom use this color, so the
+  ///   issue is rarely seen.
+  ///   This color property will be deprecated in Flutter, see issue
+  ///   [91772](https://github.com/flutter/flutter/issues/91772).
   ///
-  ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme related color for the `primaryColorDark` color, FCS does.
-  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///    The `ThemeData.from` leaves this color at `ThemeData` factory default
-  ///    this may not match your scheme. Widgets seldom use this color, so the
-  ///    issue is rarely seen.
-  ///    This color property will be deprecated in Flutter, see issue
-  ///    [91772](https://github.com/flutter/flutter/issues/91772).
+  /// * Flutter themes created with `ThemeData.from` does not define any color
+  ///   scheme related color for the `primaryColorDark` color, FCS does.
+  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default
+  ///   this may not match your scheme. Widgets seldom use this color, so the
+  ///   issue is rarely seen.
+  ///   This color property will be deprecated in Flutter, see issue
+  ///   [91772](https://github.com/flutter/flutter/issues/91772).
   ///
-  ///  * Flutter themes created with `ThemeData.from` does not define any color
-  ///    scheme related color for the `primaryColorDark` color, FCS does.
-  ///    See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///    `ThemeData.from` leaves this color at `ThemeData` factory default this
-  ///    may not match your scheme. Widgets seldom use this color, so the issue
-  ///    is rarely seen.
-  ///    This color property will be deprecated in Flutter, see issue
-  ///    [91772](https://github.com/flutter/flutter/issues/91772).
+  /// * Flutter themes created with `ThemeData.from` does not define any color
+  ///   scheme related color for the `primaryColorDark` color, FCS does.
+  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
+  ///   `ThemeData.from` leaves this color at `ThemeData` factory default this
+  ///   may not match your scheme. Widgets seldom use this color, so the issue
+  ///   is rarely seen.
+  ///   This color property will be deprecated in Flutter, see issue
+  ///   [91772](https://github.com/flutter/flutter/issues/91772).
   ///
-  ///  * Background color for `AppBarTheme` can use a custom color theme
-  ///    in both light and dark themes, that is not dependent on theme
-  ///    primary or surface color.
-  ///    In the versions prior to Flutter 2.0.0 doing this was difficult to do.
-  ///    As presented in https://github.com/flutter/flutter/issues/50606
-  ///    A new feature in Flutter 2.0.0 implemented via:
-  ///    https://github.com/flutter/flutter/pull/71184 makes this easy and
-  ///    better. FlexColorScheme's implementation has been changed to use this
-  ///    new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
+  /// * Background color for `AppBarTheme` can use a custom color theme
+  ///   in both light and dark themes, that is not dependent on theme
+  ///   primary or surface color.
+  ///   In the versions prior to Flutter 2.0.0 doing this was difficult to do.
+  ///   As presented in https://github.com/flutter/flutter/issues/50606
+  ///   A new feature in Flutter 2.0.0 implemented via:
+  ///   https://github.com/flutter/flutter/pull/71184 makes this easy and
+  ///   better. FlexColorScheme's implementation has been changed to use this
+  ///   new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
   ///
-  ///  * The `AppBarTheme` M2 elevation defaults to 0, an iOs style influenced
-  ///    opinionated choice. It can easily be adjusted directly in the
-  ///    `FlexColorScheme` definition with property value `appBarElevation`
-  ///    without creating a sub theme or using `copyWith`.
+  /// * The `AppBarTheme` M2 elevation defaults to 0, an iOs style influenced
+  ///   opinionated choice. It can easily be adjusted directly in the
+  ///   `FlexColorScheme` definition with property value `appBarElevation`
+  ///   without creating a sub theme or using `copyWith`.
   ///
-  ///  * The `bottomAppBarColor` uses color scheme background color to match the
-  ///    background color of the drawer, bottom navigation bar, possible side
-  ///    menu and system navigation bar on android (if theming of it is used).
-  ///    This is a slight change from the ColorScheme default that uses
-  ///    surface color.
+  /// * For the `BottomAppBarTheme` when not using subThemes, we in M2 mode
+  ///   always get a BottomAppBarTheme with at least background color defined
+  ///   to be ColorScheme.surface, even if `bottomAppBarElevation` is null.
+  ///   This is done to avoid issues with deprecation of
+  ///   `ThemeData.bottomAppBarColor` that is still used in M2 mode defaults.
+  ///   When using M3 mode and if `bottomAppBarElevation` is null, we
+  ///   actually get a default `BottomAppBarTheme()` all null theme made by
+  ///   `FlexSubThemes.bottomAppBarTheme`.
   ///
-  ///  * A predefined slightly opinionated [InputDecorationTheme] is used. It
-  ///    sets `filled` to `true` and fill color to color scheme primary color
-  ///    with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
+  /// * A predefined slightly opinionated [InputDecorationTheme] is used. It
+  ///   sets `filled` to `true` and fill color to color scheme primary color
+  ///   with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
   ///
-  ///  * The property `fixTextFieldOutlineLabel` is set to `true` by default,
-  ///    it looks better. The only reason why it is not the default in Flutter,
-  ///    is for default backwards legacy design compatibility.
+  /// * The property `fixTextFieldOutlineLabel` is set to `true` by default,
+  ///   it looks better. The only reason why it is not the default in Flutter,
+  ///   is for default backwards legacy design compatibility.
   ///
-  ///  * For [ThemeData.buttonTheme] the entire color scheme is passed to its
-  ///    `colorScheme` property and it uses `textTheme` set to
-  ///    `ButtonTextTheme.primary`, plus minor changes to padding and tap target
-  ///    size. These modifications make the old buttons almost match the
-  ///    default design and look of their corresponding newer buttons.
-  ///    Thus the `RaisedButton` looks very similar to `ElevatedButton`,
-  ///    `OutlineButton` to `OutlinedButton` and `FlatButton` to `TextButton`.
-  ///    There are some differences in margins and looks, especially in
-  ///    dark-mode, but they are very similar. These legacy buttons are
-  ///    deprecated in Flutter and some no longer exists. The `buttonTheme` is
-  ///    also on a deprecation path and will be removed when it is.
+  /// * For [ThemeData.buttonTheme] the entire color scheme is passed to its
+  ///   `colorScheme` property and it uses `textTheme` set to
+  ///   `ButtonTextTheme.primary`, plus minor changes to padding and tap target
+  ///   size. These modifications make the old buttons almost match the
+  ///   default design and look of their corresponding newer buttons.
+  ///   Thus the `RaisedButton` looks very similar to `ElevatedButton`,
+  ///   `OutlineButton` to `OutlinedButton` and `FlatButton` to `TextButton`.
+  ///   There are some differences in margins and looks, especially in
+  ///   dark-mode, but they are very similar. These legacy buttons are
+  ///   deprecated in Flutter and some no longer exists. The `buttonTheme` is
+  ///   also on a deprecation path and will be removed when it is.
   ///
-  ///  * In older Flutter version, the default theme for Chips contained a
-  ///    design bug that makes the selected `ChoiceChip()` widget look
-  ///    disabled in dark-mode, regardless of if it was created with `ThemeData`
-  ///    or `ThemeData.from` factory. See issue:
-  ///    https:///github.com/flutter/flutter/issues/65663
-  ///    The [ChipThemeData] modification originally used in core
-  ///    FlexColorScheme fixed the issue. The issue has been resolved but
-  ///    same [ChipThemeData] is still in use for backward style compatibility.
+  /// * In older Flutter version, the default theme for Chips contained a
+  ///   design bug that makes the selected `ChoiceChip()` widget look
+  ///   disabled in dark-mode, regardless of if it was created with `ThemeData`
+  ///   or `ThemeData.from` factory. See issue:
+  ///   https:///github.com/flutter/flutter/issues/65663
+  ///   The [ChipThemeData] modification originally used in core
+  ///   FlexColorScheme fixed the issue. The issue has been resolved but
+  ///   same [ChipThemeData] is still in use for backward style compatibility.
   ///
   /// * For [TabBarTheme], in M2 the Flutter standard selected tab and indicator
   ///   color is onSurface in dark mode and on Primary in light mode, which is

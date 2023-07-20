@@ -868,6 +868,8 @@ extension FlexThemeData on ThemeData {
     /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
+    /// * [TextSelectionThemeData] for [TextField] via
+    ///   [FlexSubThemes.textSelectionTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
     ///   [FlexSubThemes.timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
@@ -2190,6 +2192,8 @@ extension FlexThemeData on ThemeData {
     /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
+    /// * [TextSelectionThemeData] for [TextField] via
+    ///   [FlexSubThemes.textSelectionTheme].
     /// * [TimePickerThemeData] for [TimePickerDialog] via
     ///   [FlexSubThemes.timePickerTheme].
     /// * [ToggleButtonsThemeData] for [ToggleButtons] via
