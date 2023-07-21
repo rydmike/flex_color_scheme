@@ -78,29 +78,12 @@ class AdaptiveThemeSettings extends StatelessWidget {
                 }
               : null,
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive ink splash'),
-          subtitle: const Text(
-            'An adaptive theme response used to select a different ink '
-            'splash effect on selected platforms.\n',
-          ),
-          index: controller.adaptiveSplash?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveSplash(null);
-                  } else {
-                    controller.setAdaptiveSplash(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
-        ),
         SplashTypePopupMenu(
           title: const Text('Adaptive ink splash effect'),
           subtitle: const Text(
             'Defines the type of tap ink splash effect used on Material '
             'UI components when running on below selected platforms. When not '
-            'on running on these platforms or the if the platform adaptive ink '
+            'running on these platforms or if the platform adaptive ink '
             'feature is OFF, the ink splash effect above is used.\n',
           ),
           index: controller.splashTypeAdaptive?.index ?? -1,
@@ -114,6 +97,23 @@ class AdaptiveThemeSettings extends StatelessWidget {
                   } else {
                     controller
                         .setSplashTypeAdaptive(SplashTypeEnum.values[index]);
+                  }
+                }
+              : null,
+        ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Use platform adaptive ink splash'),
+          subtitle: const Text(
+            'An adaptive theme response used to select a different ink '
+            'splash effect on selected platforms.\n',
+          ),
+          index: controller.adaptiveSplash?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveSplash(null);
+                  } else {
+                    controller.setAdaptiveSplash(AdaptiveTheme.values[index]);
                   }
                 }
               : null,
@@ -237,9 +237,9 @@ class AdaptiveThemeSettings extends StatelessWidget {
         BackToActualPlatform(controller: controller),
         const Divider(),
         const ListTile(
-            title: Text('You can find additional platform adaptive '
-                'settings under Shape Radius, AppBar, NavigationBar '
-                'and Dialogs'))
+            subtitle: Text('You can find additional platform adaptive '
+                'settings under Shape & Radius, AppBar, NavigationBar '
+                'and Dialogs.'))
       ],
     );
   }

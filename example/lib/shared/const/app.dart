@@ -41,7 +41,7 @@ class App {
   static const String versionMajor = '7';
   static const String versionMinor = '2';
   static const String versionPatch = '0';
-  static const String versionBuild = '01';
+  static const String versionBuild = '02';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       '\nBuild-$versionBuild';
   static const String packageVersion =

@@ -11,7 +11,7 @@
 #    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
 #  - Upload code coverage output to Codecov for analysis.
-#  - Build 5 different WEB example apps using FlexColorScheme.
+#  - Build Playground only
 #    All examples use these steps:
 #    - Flutter clean.
 #    - Flutter build web app, in release mode and with html renderer.
@@ -26,14 +26,14 @@ on:
      - "**.md"
 jobs:
   flutter_tests:
-    name: "Analyze and test package, then build and deploy 5 web apps"
+    name: "Analyze and test package, then build and deploy Playground only"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: "beta"
+          channel: "stable"
       - name: "Show Dart SDK version"
         run: dart --version
       - name: "Show Flutter SDK version"
