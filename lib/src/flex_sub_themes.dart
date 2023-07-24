@@ -1534,11 +1534,24 @@ class FlexSubThemes {
     /// [SchemeColor.onSurface].
     final SchemeColor? deleteIconSchemeColor,
 
-    /// The style to be applied to the chip's label.
+    /// Overrides the default for [ChipAttributes.labelStyle],
+    /// the style of the [DefaultTextStyle] that contains the
+    /// chip's label.
     ///
     /// This only has an effect on label widgets that respect the
     /// [DefaultTextStyle], such as [Text].
-    required TextStyle labelStyle,
+    ///
+    /// This property applies to [ActionChip], [Chip],
+    /// [FilterChip], [InputChip], [RawChip].
+    required final TextStyle labelStyle,
+
+    /// Overrides the default for [ChoiceChip.labelStyle],
+    /// the style of the [DefaultTextStyle] that contains the
+    /// chip's label.
+    ///
+    /// This only has an effect on label widgets that respect the
+    /// [DefaultTextStyle], such as [Text].
+    final TextStyle? secondaryLabelStyle,
 
     /// Corner radius of the Chip.
     ///
@@ -1857,6 +1870,14 @@ class FlexSubThemes {
     /// Overrides the default value for [Dialog.surfaceTintColor].
     final Color? surfaceTintColor,
 
+    /// Overrides the default value for [DefaultTextStyle] for
+    /// [SimpleDialog.title] and [AlertDialog.title].
+    final TextStyle? titleTextStyle,
+
+    /// Overrides the default value for [DefaultTextStyle] for
+    /// [SimpleDialog.children] and [AlertDialog.content].
+    final TextStyle? contentTextStyle,
+
     /// Padding around the set of [actions] at the bottom of the dialog.
     ///
     /// Typically used to provide padding to the button bar between the button
@@ -1888,6 +1909,8 @@ class FlexSubThemes {
       ),
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
+      titleTextStyle: titleTextStyle,
+      contentTextStyle: contentTextStyle,
     );
   }
 
@@ -2630,6 +2653,9 @@ class FlexSubThemes {
     /// Defaults to false.
     final bool alwaysCircular = false,
 
+    /// The text style for an extended [FloatingActionButton]'s label.
+    final TextStyle? extendedTextStyle,
+
     /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
@@ -2664,6 +2690,7 @@ class FlexSubThemes {
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     return FloatingActionButtonThemeData(
+      extendedTextStyle: extendedTextStyle,
       foregroundColor: foreground,
       backgroundColor: background,
       splashColor: tintInteract ? tintedSplash(overlay, tint, factor) : null,
@@ -3409,6 +3436,12 @@ class FlexSubThemes {
     /// If not defined, defaults to 0 via Widget's default behavior.
     final double? radius,
 
+    /// The style for a menu button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [foregroundSchemeColor] is used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+
     /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
@@ -3474,6 +3507,7 @@ class FlexSubThemes {
 
     return MenuButtonThemeData(
       style: ButtonStyle(
+        textStyle: textStyle,
         // MenuButtons text and background changes should not animate.
         // If tey do we get this issue:
         // https://github.com/flutter/flutter/issues/123615
@@ -5368,6 +5402,13 @@ class FlexSubThemes {
     /// also defined.
     final InteractiveInkFeatureFactory? splashFactory,
 
+    /// The style for the segmented button's [Text] widget descendants.
+    ///
+    /// The color of the [textStyle] is typically not used directly, the
+    /// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
+    /// used instead.
+    final MaterialStateProperty<TextStyle?>? textStyle,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -5452,6 +5493,7 @@ class FlexSubThemes {
 
     return SegmentedButtonThemeData(
       style: ButtonStyle(
+        textStyle: textStyle,
         splashFactory: splashFactory,
         // TODO(rydmike): Issue, minimumSize property does nothing.
         // https://github.com/flutter/flutter/issues/121493
@@ -5808,6 +5850,12 @@ class FlexSubThemes {
     /// [ColorScheme.inversePrimary], if a [colorScheme] was not defined, then
     /// defaults to effective foreground color with alpha 0xDD.
     final SchemeColor? actionTextSchemeColor,
+
+    /// Used to configure the [DefaultTextStyle] for the [SnackBar.content]
+    /// widget.
+    ///
+    /// If null, [SnackBar] defines its default using titleMedium
+    final TextStyle? contentTextStyle,
   }) {
     final Color? background =
         (colorScheme == null || backgroundSchemeColor == null)
@@ -5830,11 +5878,13 @@ class FlexSubThemes {
         : null;
 
     final TextStyle? snackTextStyle = foreground != null
-        ? ThemeData(brightness: Brightness.light)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: foreground)
-        : null;
+        ? contentTextStyle == null
+            ? ThemeData(brightness: Brightness.light)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: foreground)
+            : contentTextStyle.copyWith(color: foreground)
+        : contentTextStyle;
 
     return SnackBarThemeData(
       elevation: elevation ?? kSnackBarElevation,
@@ -6635,6 +6685,34 @@ class FlexSubThemes {
     /// If not defined, defaults to false.
     final bool? useInputDecoratorTheme,
 
+    /// Used to configure the [TextStyle]s for the day period control.
+    ///
+    /// If this is null, the time picker defaults to the overall theme's
+    /// [TextTheme.titleMedium].
+    final TextStyle? dayPeriodTextStyle,
+
+    /// The [TextStyle] for the numbers on the time selection dial.
+    ///
+    /// If [dialTextStyle]'s [TextStyle.color] is a [MaterialStateColor], then
+    /// the effective text color can depend on the [MaterialState.selected]
+    /// state, i.e. if the text is selected or not.
+    ///
+    /// If this style is null then the dial's text style is based on the theme's
+    /// [ThemeData.textTheme].
+    final TextStyle? dialTextStyle,
+
+    /// Used to configure the [TextStyle]s for the helper text in the header.
+    ///
+    /// If this is null, the time picker defaults to the overall theme's
+    /// [TextTheme.labelSmall].
+    final TextStyle? helpTextStyle,
+
+    /// Used to configure the [TextStyle]s for the hour/minute controls.
+    ///
+    /// If this is null, the time picker defaults to the overall theme's
+    /// [TextTheme.headline3].
+    final TextStyle? hourMinuteTextStyle,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -6692,6 +6770,12 @@ class FlexSubThemes {
     }
 
     return TimePickerThemeData(
+      // Optional text styles
+      dayPeriodTextStyle: dayPeriodTextStyle,
+      dialTextStyle: dialTextStyle,
+      helpTextStyle: helpTextStyle,
+      hourMinuteTextStyle: hourMinuteTextStyle,
+      //
       backgroundColor: background,
       elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
@@ -6853,6 +6937,13 @@ class FlexSubThemes {
     /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
     final Size? minButtonSize,
 
+    /// The default text style for [ToggleButtons.children].
+    ///
+    /// [TextStyle.color] will be ignored and substituted by [color],
+    /// [selectedColor] or [disabledColor] depending on whether the buttons
+    /// are active, selected, or disabled.
+    final TextStyle? textStyle,
+
     /// VisualDensity for ToggleButtons.
     ///
     /// The ToggleButtons do not implement VisualDensity from theme, but we can
@@ -6916,6 +7007,7 @@ class FlexSubThemes {
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
     return ToggleButtonsThemeData(
+      textStyle: textStyle,
       borderWidth: effectiveWidth,
       selectedColor: onBaseColor,
       color: unselectedColor,
