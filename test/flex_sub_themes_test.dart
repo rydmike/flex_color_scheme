@@ -7130,6 +7130,41 @@ void main() {
         ),
       );
     });
+    test(
+        'SnackBar FST28.6 scheme-based: GIVEN a '
+        'FlexSubTheme.snackBarTheme with '
+        'colorScheme, backgroundSchemeColor and backgroundColor and '
+        'actionTextSchemeColor and content '
+        'EXPECT equal to SnackBarThemeData with scheme colors.', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.snackBarTheme(
+          elevation: 0,
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFF763370),
+          backgroundSchemeColor: SchemeColor.error,
+          actionTextSchemeColor: SchemeColor.tertiary,
+          contentTextStyle: const TextStyle(fontSize: 14, color: Colors.red),
+          radius: 7,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          SnackBarThemeData(
+            backgroundColor: colorScheme.error,
+            elevation: 0,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(7),
+              ),
+            ),
+            contentTextStyle:
+                TextStyle(fontSize: 14, color: colorScheme.onError),
+            actionTextColor: colorScheme.tertiary,
+            disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
+            closeIconColor: colorScheme.onError.withAlpha(0xAA),
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
   });
   group('WITH: FlexSubTheme.switchTheme ', () {
     // -------------------------------------------------------------------------
