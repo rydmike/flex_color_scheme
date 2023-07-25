@@ -331,7 +331,7 @@ class ButtonsSettings extends StatelessWidget {
         //     value: controller.useSubThemes && controller.useFlexColorScheme
         //         ? controller.filledButtonBorderRadius ?? -1
         //         : -1,
-        //   nChanged: controller.useSubThemes && controller.useFlexColorScheme
+        //   onChanged: controller.useSubThemes && controller.useFlexColorScheme
         //         ? (double value) {
         //             controller.setFilledButtonBorderRadius(
         //                 value < 0 ? null : value.roundToDouble());

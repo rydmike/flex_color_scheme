@@ -2,6 +2,39 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 7.3.0
+
+**July 25, 2023**
+
+**PACKAGE**
+
+**NEW**
+
+* To `FlexSubThemes` in:
+  - `buttonTheme` **added** bool `alignedDropdown`
+  - `chipTheme` **added** TextStyle `secondaryLabelStyle`
+  - `dialogTheme` **added** TextStyle `titleTextStyle` and `contentTextStyle`
+  - `floatingActionButtonTheme` **added** TextStyle `extendedTextStyle`
+  - `menuButtonTheme` **added** TextStyle `textStyle`
+  - `snackBarTheme` **added** TextStyle `contentTextStyle`
+  - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle` and `hourMinuteTextStyle`
+  - `toggleButtonsTheme` **added** TextStyle `textStyle`
+
+* To `FlexSubThemesData` **added** 
+  - bool `alignedDropdown`
+
+**THEMES PLAYGROUND**
+
+**NEW**
+
+* The **PopupMenu and Dropdowns** panel got a setting for older Material-2 based `DropdownButtonFormField` and `DropdownButton` to set the new alignment property, which is an ancient theming property in the old `ButtonThemeData` that was used by deprecated and removed Material Buttons, but the theme is still used by these buttons. 
+
+### TODO
+
+* The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**.
+
+* Showcase - DropdownMenu: Remove temp issue demo on it. Create issue for it.
+
 ## 7.2.0
 
 **July 20, 2023**

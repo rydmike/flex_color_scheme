@@ -309,6 +309,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             popupMenuElevation: controller.popupMenuElevation,
             popupMenuSchemeColor: controller.popupMenuSchemeColor,
             popupMenuOpacity: controller.popupMenuOpacity,
+            // DropdownButton settings.
+            alignedDropdown: controller.alignedDropdown,
             // Tooltip
             tooltipRadius: controller.tooltipRadius,
             tooltipWaitDuration: controller.tooltipWaitDuration == null

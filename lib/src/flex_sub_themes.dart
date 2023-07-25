@@ -1181,6 +1181,19 @@ class FlexSubThemes {
     /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
     final Size? minButtonSize,
 
+    /// If true, then a [DropdownButton] menu's width will match the button's
+    /// width.
+    ///
+    /// If false (the default), then the dropdown's menu will be wider than
+    /// its button. In either case the dropdown button will line up the leading
+    /// edge of the menu's value with the leading edge of the values
+    /// displayed by the menu items.
+    ///
+    /// This property only affects [DropdownButton] and its menu.
+    ///
+    /// If not defined default to false.
+    final bool? alignedDropdown,
+
     /// Defines if the theme uses tinted interaction effects.
     ///
     /// If undefined, defaults to false.
@@ -1208,6 +1221,7 @@ class FlexSubThemes {
 
     return ButtonThemeData(
       colorScheme: colorScheme,
+      alignedDropdown: alignedDropdown ?? false,
       minWidth: effectiveMinButtonSize.width,
       height: effectiveMinButtonSize.height,
       padding: padding ?? kButtonPadding,

@@ -708,6 +708,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String popupMenuOpacity = controller.popupMenuOpacity != 1
       ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
       : '';
+  final String alignedDropdown = controller.alignedDropdown
+      ? '    alignedDropdown: ${controller.alignedDropdown},\n'
+      : '';
   //
   // Tooltip setup CODE
   //
@@ -1303,6 +1306,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuElevation'
           '$popupMenuSchemeColor'
           '$popupMenuOpacity'
+          '$alignedDropdown'
           //
           '$tooltipRadius'
           '$tooltipWaitDuration'
@@ -1523,6 +1527,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$popupMenuElevation'
           '$popupMenuSchemeColor'
           '$popupMenuOpacity'
+          '$alignedDropdown'
           //
           '$tooltipRadius'
           '$tooltipWaitDuration'
