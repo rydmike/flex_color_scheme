@@ -728,10 +728,14 @@ class ThemeController with ChangeNotifier {
         Store.keyPopupMenuSchemeColor, Store.defaultPopupMenuSchemeColor);
     _popupMenuOpacity = await _themeService.load(
         Store.keyPopupMenuOpacity, Store.defaultPopupMenuOpacity);
-    _popupMenuElevation = await _themeService.load(
-        Store.keyPopupMenuElevation, Store.defaultPopupMenuElevation);
     _popupMenuBorderRadius = await _themeService.load(
         Store.keyPopupMenuBorderRadius, Store.defaultPopupMenuBorderRadius);
+    _popupMenuElevation = await _themeService.load(
+        Store.keyPopupMenuElevation, Store.defaultPopupMenuElevation);
+    //
+    // DropdownButton SETTING
+    _alignedDropdown = await _themeService.load(
+        Store.keyAlignedDropdown, Store.defaultAlignedDropdown);
     //
     // Card SETTINGS.
     _cardBorderRadius = await _themeService.load(
@@ -1223,8 +1227,11 @@ class ThemeController with ChangeNotifier {
     // PopupMenuButton SETTINGS.
     setPopupMenuSchemeColor(Store.defaultPopupMenuSchemeColor, false);
     setPopupMenuOpacity(Store.defaultPopupMenuOpacity, false);
-    setPopupMenuElevation(Store.defaultPopupMenuElevation, false);
     setPopupMenuBorderRadius(Store.defaultPopupMenuBorderRadius, false);
+    setPopupMenuElevation(Store.defaultPopupMenuElevation, false);
+    //
+    // DropdownButton SETTINGS
+    setAlignedDropdown(Store.defaultAlignedDropdown, false);
     //
     // Card SETTINGS.
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
@@ -4693,7 +4700,7 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySnackBarActionSchemeColor, value));
   }
 
-  // PopupMenu and Card SETTINGS.
+  // PopupMenu, Dropown and Card SETTINGS.
   // ===========================================================================
 
   late SchemeColor? _popupMenuSchemeColor;
@@ -4715,6 +4722,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyPopupMenuOpacity, value));
   }
 
+  late double? _popupMenuBorderRadius;
+  double? get popupMenuBorderRadius => _popupMenuBorderRadius;
+  void setPopupMenuBorderRadius(double? value, [bool notify = true]) {
+    if (value == _popupMenuBorderRadius) return;
+    _popupMenuBorderRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPopupMenuBorderRadius, value));
+  }
+
   late double? _popupMenuElevation;
   double? get popupMenuElevation => _popupMenuElevation;
   void setPopupMenuElevation(double? value, [bool notify = true]) {
@@ -4724,13 +4740,14 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyPopupMenuElevation, value));
   }
 
-  late double? _popupMenuBorderRadius;
-  double? get popupMenuBorderRadius => _popupMenuBorderRadius;
-  void setPopupMenuBorderRadius(double? value, [bool notify = true]) {
-    if (value == _popupMenuBorderRadius) return;
-    _popupMenuBorderRadius = value;
+  late bool _alignedDropdown;
+  bool get alignedDropdown => _alignedDropdown;
+  void setAlignedDropdown(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _alignedDropdown) return;
+    _alignedDropdown = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyPopupMenuBorderRadius, value));
+    unawaited(_themeService.save(Store.keyAlignedDropdown, value));
   }
 
   late double? _cardBorderRadius;

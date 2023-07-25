@@ -185,6 +185,7 @@ class FlexSubThemesData with Diagnosticable {
     this.defaultRadiusAdaptive,
     //
     this.buttonMinSize,
+    this.alignedDropdown,
     this.buttonPadding,
     //
     this.thickBorderWidth,
@@ -1006,6 +1007,19 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined and [ThemeData.useMaterial3] is true,
   /// defaults to `Size(64, 40)`.
   final Size? buttonMinSize;
+
+  /// If true, then a [DropdownButton] and [DropdownButtonFormField] menu's
+  /// width will match the button's width.
+  ///
+  /// If false (the default), then the dropdown's menu will be wider than
+  /// its button. In either case the dropdown button will line up the leading
+  /// edge of the menu's value with the leading edge of the values
+  /// displayed by the menu items.
+  ///
+  /// This property only affects [DropdownButton] and its menu.
+  ///
+  /// If not defined default to false.
+  final bool? alignedDropdown;
 
   /// Padding on [TextButton], [ElevatedButton] and [OutlinedButton].
   ///
@@ -3126,6 +3140,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? defaultRadius,
     final double? defaultRadiusAdaptive,
     final Size? buttonMinSize,
+    final bool? alignedDropdown,
     final EdgeInsetsGeometry? buttonPadding,
     //
     final double? thickBorderWidth,
@@ -3387,6 +3402,7 @@ class FlexSubThemesData with Diagnosticable {
       defaultRadiusAdaptive:
           defaultRadiusAdaptive ?? this.defaultRadiusAdaptive,
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
+      alignedDropdown: alignedDropdown ?? this.alignedDropdown,
       buttonPadding: buttonPadding ?? this.buttonPadding,
       //
       thickBorderWidth: thickBorderWidth ?? this.thickBorderWidth,
@@ -3813,6 +3829,7 @@ class FlexSubThemesData with Diagnosticable {
         other.defaultRadius == defaultRadius &&
         other.defaultRadiusAdaptive == defaultRadiusAdaptive &&
         other.buttonMinSize == buttonMinSize &&
+        other.alignedDropdown == alignedDropdown &&
         other.buttonPadding == buttonPadding &&
         //
         other.thickBorderWidth == thickBorderWidth &&
@@ -4132,6 +4149,7 @@ class FlexSubThemesData with Diagnosticable {
         defaultRadius,
         defaultRadiusAdaptive,
         buttonMinSize,
+        alignedDropdown,
         buttonPadding,
         //
         thickBorderWidth,
@@ -4401,6 +4419,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>(
         'defaultRadiusAdaptive', defaultRadiusAdaptive));
     properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));
+    properties
+        .add(DiagnosticsProperty<bool>('alignedDropdown', alignedDropdown));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
         'buttonPadding', buttonPadding));
     properties

@@ -2,18 +2,29 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class PopupMenuButtonSettings extends StatelessWidget {
   const PopupMenuButtonSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue131282 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/131282',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String popupMenuElevationDefaultLabel =
         controller.popupMenuElevation == null
@@ -223,19 +234,6 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
-          title: Text('DropdownButtonFormField'),
-          subtitleDense: true,
-          subtitle: Text('An older Material-2 widget, it uses the TextField '
-              'input decoration style by default. It does not work well with '
-              'high border radius and filled background, since there is no '
-              'corner clip of background fill color. '
-              'Maybe consider using the M3 DropdownMenu widget instead.\n'),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-          child: DropdownButtonFormFieldShowcase(),
-        ),
-        const ListTileReveal(
           title: Text('DropdownButton'),
           subtitleDense: true,
           subtitle: Text('An older Material-2 widget, it cannot be themed. '
@@ -244,6 +242,58 @@ class PopupMenuButtonSettings extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: DropDownButtonShowcase(),
+        ),
+        SwitchListTileReveal(
+          title: const Text('Match dropdown menu width to button width'),
+          subtitle: const Text('When ON the menu will match its width to the '
+              "parent's button size. If OFF, the menu will be wider. Is OFF by "
+              'default in the FlexColorScheme API, but ON by default in '
+              'Themes Playground. This setting applies to both DropdownButton '
+              'and DropdownButtonFormField.\n'),
+          value: controller.alignedDropdown &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setAlignedDropdown
+              : null,
+        ),
+        const ListTileReveal(
+          title: Text('DropdownButtonFormField'),
+          subtitleDense: true,
+          subtitle: Text('An older Material-2 widget, it uses the ThemeData '
+              'input decoration style if defined. In the Themes '
+              'Playground it is defined in the TextField panel.\n'),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+          child: DropdownButtonFormFieldShowcase(),
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The DropdownButtonFormField does not work well with '
+                      'high border radius and filled background, since there '
+                      'is no corner clip of background fill color. '
+                      'Maybe consider using the M3 DropdownMenu widget '
+                      'instead. See Flutter SDK ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue131282,
+                  text: 'issue #131282',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

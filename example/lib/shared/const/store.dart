@@ -1541,7 +1541,7 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultSliderTrackHeight = null;
 
-  // Fab, Chip SnackBar, Popup, Card and Dialog SETTINGS.
+  // Fab, Chip SnackBar, Popup, Dropdown, Card and Dialog SETTINGS.
   // ===========================================================================
 
   // Key used to read and save the fabUseShape value.
@@ -1638,6 +1638,11 @@ class Store {
   // Default value for the popupMenuElevation, also used to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultPopupMenuElevation = null;
+
+  // Key used to read and save the alignedDropdown value.
+  static const String keyAlignedDropdown = 'alignedDropdown';
+  // Default value for the alignedDropdown, also to reset settings.
+  static const bool defaultAlignedDropdown = true;
 
   // Key used to read and save the cardBorderRadius value.
   static const String keyCardBorderRadius = 'cardBorderRadius';

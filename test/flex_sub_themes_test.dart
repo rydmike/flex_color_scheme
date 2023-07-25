@@ -5435,14 +5435,15 @@ void main() {
         FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                  const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(40),
                 ),
-              ), //buttonShape,
-            ).copyWith(
+              )), //buttonShape,
               side: MaterialStateProperty.resolveWith<BorderSide?>(
                 (final Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
@@ -5496,15 +5497,18 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(52, 40),
-              padding: const EdgeInsets.symmetric(horizontal: 17),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(13),
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
+              padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
+                  const EdgeInsets.symmetric(horizontal: 17)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(13),
+                  ),
                 ),
-              ), //buttonShape,
-            ).copyWith(
+              ),
               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
@@ -5594,14 +5598,16 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40),
+                  ),
                 ),
-              ), //buttonShape,
-            ).copyWith(
+              ),
               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {
@@ -8173,13 +8179,16 @@ void main() {
         FlexSubThemes.textButtonTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           TextButtonThemeData(
-            style: TextButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
+            style: ButtonStyle(
+              minimumSize:
+                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40),
+                  ),
                 ),
-              ), // buttonShape,
+              ),
             ),
           ).toString(),
         ),
@@ -8197,14 +8206,17 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           TextButtonThemeData(
-            style: TextButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
+            style: ButtonStyle(
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
+              shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(40),
+                  ),
                 ),
-              ), // buttonShape,
-            ).copyWith(
+              ),
               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                 (Set<MaterialState> states) {
                   if (states.contains(MaterialState.disabled)) {

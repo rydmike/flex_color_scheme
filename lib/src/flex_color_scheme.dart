@@ -6804,15 +6804,16 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.materialButtonSchemeColor,
               radius: subTheme.textButtonRadius ?? platformRadius,
-              padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
+              alignedDropdown: subTheme.alignedDropdown,
+              padding: subTheme.buttonPadding,
             )
           : useMaterial3
               ? null
               // Opinionated FCS M2 legacy style sub-theme for ButtonThemeData,
               // that we get without opting in on sub-themes. In M3 mode you
-              // get these fixes only when you opt-in on syb-themes. This
-              // theme will should soon be deprecated in Flutter SDK.
+              // get these fixes only when you opt-in on sub-themes. This
+              // theme may soon be deprecated in Flutter SDK.
               : ButtonThemeData(
                   colorScheme: colorScheme,
                   textTheme: ButtonTextTheme.primary,
