@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.3.0
 
-**July 25, 2023**
+**July 27, 2023**
 
 **PACKAGE**
 
@@ -25,7 +25,11 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 
 **CHANGE** 
- - `FlexSubThemes.dropdownMenuTextStyl` now default to `TextTheme.bodyLarge` if not defined.
+
+
+* **Minor style breaking changes:**
+
+ - `FlexSubThemes.dropdownMenuTextStyl` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used in the dropdown menu entries, or with the same default style used in `TextField`in M3 mode. See issue  https://github.com/flutter/flutter/issues/131350 that contains a mention of this style deviant.
 
 **THEMES PLAYGROUND**
 
