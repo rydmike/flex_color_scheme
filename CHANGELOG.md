@@ -23,6 +23,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * To `FlexSubThemesData` **added** 
   - bool `alignedDropdown`
 
+
+**CHANGE** 
+ - `FlexSubThemes.dropdownMenuTextStyl` now default to `TextTheme.bodyLarge` if not defined.
+
 **THEMES PLAYGROUND**
 
 **NEW**

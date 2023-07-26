@@ -130,9 +130,9 @@ class ShowcaseMaterial extends StatelessWidget {
         const Text('PopupMenuButton and DropdownButtons', style: headerStyle),
         const PopupMenuButtonsShowcase(explain: true),
         const SizedBox(height: 8),
-        const DropdownButtonFormFieldShowcase(explain: true),
-        const SizedBox(height: 8),
         const DropDownButtonShowcase(explain: true),
+        const SizedBox(height: 8),
+        const DropdownButtonFormFieldShowcase(explain: true),
         const SizedBox(height: 8),
         //
         // DropdownMenu, MenuBar, MenuAnchor
@@ -1305,7 +1305,6 @@ class DropDownMenuShowcase extends StatefulWidget {
 }
 
 class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
-  // String selectedItem = 'one';
   IconData selectedItem = Icons.alarm;
   @override
   Widget build(BuildContext context) {
@@ -1337,10 +1336,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
                 style: denseBody,
               ),
             ),
-
-          // TODO(rydmike): DropdownMenu Make issue and remove issue demo here.
           DropdownMenu<IconData>(
-            // width: 100,
             initialSelection: selectedItem,
             leadingIcon: Icon(selectedItem),
             onSelected: (IconData? value) {
@@ -1350,34 +1346,31 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
             },
             dropdownMenuEntries: const <DropdownMenuEntry<IconData>>[
               DropdownMenuEntry<IconData>(
-                // style: ButtonStyle(
-                //   padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                //       EdgeInsets.symmetric(horizontal: 12)),
-                // ),
+                style: ButtonStyle(
+                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(horizontal: 12)),
+                ),
                 label: 'Alarm settings',
-                // leadingIcon: Icon(Icons.alarm),
-                // value: 'one',
+                leadingIcon: Icon(Icons.alarm),
                 value: Icons.alarm,
               ),
               DropdownMenuEntry<IconData>(
-                // style: ButtonStyle(
-                //   padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                //       EdgeInsets.symmetric(horizontal: 12)),
-                // ),
+                style: ButtonStyle(
+                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(horizontal: 12)),
+                ),
                 label: 'Disabled settings',
-                // leadingIcon: Icon(Icons.settings),
-                // value: 'two',
+                leadingIcon: Icon(Icons.settings),
                 enabled: false,
                 value: Icons.settings,
               ),
               DropdownMenuEntry<IconData>(
-                // style: ButtonStyle(
-                //   padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                //       EdgeInsets.symmetric(horizontal: 12)),
-                // ),
+                style: ButtonStyle(
+                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(horizontal: 12)),
+                ),
                 label: 'Cabin overview',
                 leadingIcon: Icon(Icons.cabin),
-                // value: 'three',
                 value: Icons.cabin,
               ),
               DropdownMenuEntry<IconData>(
