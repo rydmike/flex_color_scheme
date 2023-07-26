@@ -401,9 +401,9 @@ class _TextInputFieldShowcase extends StatelessWidget {
             Text('PopupMenuButton and DropdownButtons', style: headerStyle),
             PopupMenuButtonsShowcase(explain: true),
             SizedBox(height: 8),
-            DropdownButtonFormFieldShowcase(explain: true),
-            SizedBox(height: 8),
             DropDownButtonShowcase(explain: true),
+            SizedBox(height: 8),
+            DropdownButtonFormFieldShowcase(explain: true),
             SizedBox(height: 8),
             //
             // DropdownMenu, MenuBar, MenuAnchor

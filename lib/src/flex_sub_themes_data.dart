@@ -1834,8 +1834,12 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The [TextStyle] of the text entry in a [DropDownMenu].
   ///
-  /// If not defined, defaults to Flutter SDK default via widget default
-  /// [TextTheme.labelLarge].
+  /// If not defined, defaults to [TextTheme.bodyLarge] this size matches
+  /// the default on the menu entries and in a normal [TextField].
+  /// Flutter SDK defaults via widget default to [TextTheme.labelLarge]. This
+  /// does not match the default of the entries or the [TextField] and looks
+  /// bad. This styling issue is discussed in issue:
+  /// https://github.com/flutter/flutter/issues/131350
   final TextStyle? dropdownMenuTextStyle;
 
   /// The border radius of [Menu] containers.

@@ -18,6 +18,12 @@ class MenuSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/123736',
   );
 
+  static final Uri _menuLeadingIconIssue131350 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/131350',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -110,6 +116,19 @@ class MenuSettings extends StatelessWidget {
                   style: linkStyle,
                   uri: _menuNoThemeOnFocusedIssue123736,
                   text: 'issue #123736',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. Another issue is using leading icons on both menu '
+                      'input field and the items as show in the above example. '
+                      'The widget above actually uses a style work around to '
+                      'do that. You can read more about this issue and also '
+                      'find links to many other DropdownMenu issues in \n',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _menuLeadingIconIssue131350,
+                  text: 'issue #131350',
                 ),
                 TextSpan(
                   style: spanTextStyle,

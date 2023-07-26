@@ -6934,7 +6934,8 @@ class FlexColorScheme with Diagnosticable {
       dropdownMenuTheme: useSubThemes
           ? FlexSubThemes.dropdownMenuTheme(
               colorScheme: colorScheme,
-              textStyle: subTheme.dropdownMenuTextStyle,
+              textStyle: subTheme.dropdownMenuTextStyle ??
+                  effectiveTextTheme.bodyLarge,
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
               surfaceTintColor: removeTint ? Colors.transparent : null,
