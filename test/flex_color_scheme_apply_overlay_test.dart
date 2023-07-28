@@ -279,6 +279,7 @@ void main() {
       final ThemeData dark = ThemeData(
         brightness: Brightness.dark,
         applyElevationOverlayColor: true,
+        useMaterial3: false,
       );
 
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
