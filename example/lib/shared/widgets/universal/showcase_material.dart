@@ -1087,6 +1087,8 @@ class PopupMenuButtonsShowcase extends StatelessWidget {
             children: <Widget>[
               PopupMenuButtonShowcase(),
               SizedBox(width: 16),
+              CheckedPopupMenuButtonShowcase(),
+              SizedBox(width: 16),
               PopupMenuButtonTilesShowcase(),
             ],
           ),
@@ -1111,6 +1113,28 @@ class PopupMenuButtonShowcase extends StatelessWidget {
           PopupMenuItem<int>(value: 5, child: Text('Option 5')),
         ],
         icon: const Icon(Icons.more_vert),
+      ),
+    );
+  }
+}
+
+class CheckedPopupMenuButtonShowcase extends StatelessWidget {
+  const CheckedPopupMenuButtonShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: PopupMenuButton<int>(
+        onSelected: (_) {},
+        position: PopupMenuPosition.under,
+        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
+          CheckedPopupMenuItem<int>(value: 1, child: Text('Option 1')),
+          CheckedPopupMenuItem<int>(value: 2, child: Text('Option 2')),
+          CheckedPopupMenuItem<int>(value: 3, child: Text('Option 3')),
+          CheckedPopupMenuItem<int>(value: 4, child: Text('Option 4')),
+          CheckedPopupMenuItem<int>(value: 5, child: Text('Option 5')),
+        ],
+        icon: const Icon(Icons.playlist_add_check),
       ),
     );
   }
