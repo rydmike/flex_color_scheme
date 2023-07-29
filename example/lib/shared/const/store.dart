@@ -316,11 +316,6 @@ class Store {
   // Default value for the darkIsTrueBlack, also to reset settings.
   static const bool defaultDarkIsTrueBlack = false;
 
-  // Key used to read and save the useDarkColorsForSeed value.
-  static const String keyUseDarkColorsForSeed = 'useDarkColorsForSeed';
-  // Default value for the useCustomDarkColorsForSeed, also to reset settings.
-  static const bool defaultUseDarkColorsForSeed = false;
-
   // Key used to read and save the useToDarkMethod value.
   static const String keyUseToDarkMethod = 'useToDarkMethod';
   // Default value for the useToDarkMethod, also to reset settings.

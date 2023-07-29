@@ -1,14 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../dialogs/copy_scheme_to_custom_dialog.dart';
-import '../../dialogs/reset_custom_colors_dialog.dart';
-import '../../shared/show_input_colors_switch.dart';
+import '../../shared/custom_theme_controls.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'input_colors_popup_menu.dart';
@@ -21,34 +16,6 @@ class ThemeColorsSettings extends StatelessWidget {
     super.key,
   });
   final ThemeController controller;
-
-  Future<void> _handleCopySchemeTap(BuildContext context) async {
-    final bool? copy = await showDialog<bool?>(
-      context: context,
-      builder: (BuildContext context) {
-        return const CopySchemeToCustomDialog();
-      },
-    );
-    if (copy ?? false) {
-      // Copy scheme to custom scheme, by setting custom scheme
-      // to scheme of current scheme index.
-      controller.setCustomScheme(AppColor.scheme(controller));
-      // After copy, set input colors to the custom one so user can edit it.
-      controller.setSchemeIndex(AppColor.schemes.length - 1);
-    }
-  }
-
-  Future<void> _handleResetSchemeTap(BuildContext context) async {
-    final bool? reset = await showDialog<bool?>(
-      context: context,
-      builder: (BuildContext context) {
-        return const ResetCustomColorsDialog();
-      },
-    );
-    if (reset ?? false) {
-      await controller.resetCustomColorsToDefaults();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,53 +41,10 @@ class ThemeColorsSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
-        if (controller.schemeIndex !=
-            (AppColor.schemes.length - 1)) ...<Widget>[
-          ListTile(
-            title: const Text('Use a custom theme?'),
-            subtitle: const Text('Tap here to active the customizable theme.'),
-            onTap: () {
-              controller.setSchemeIndex(AppColor.schemes.length - 1);
-            },
-          ),
-          ListTileReveal(
-            title: const Text('Copy to custom theme?'),
-            subtitleDense: true,
-            subtitle: const Text("When you copy a built-in theme's colors "
-                'to the customizable theme, it becomes a starting point '
-                'for your own custom theme colors.\n'),
-            trailing: FilledButton(
-              onPressed: () async {
-                await _handleCopySchemeTap(context);
-              },
-              child: const Text('Copy'),
-            ),
-            onTap: () async {
-              await _handleCopySchemeTap(context);
-            },
-          )
-        ] else ...<Widget>[
-          const ListTile(
-            title: Text('This theme is customizable!'),
-            subtitle: Text('Tap on main colors above to modify them. You can '
-                'copy/paste values to and from the color picker.'),
-          ),
-          ListTile(
-            title: const Text('Reset custom theme to its default colors?'),
-            trailing: FilledButton(
-              onPressed: () async {
-                await _handleResetSchemeTap(context);
-              },
-              child: const Text('Reset'),
-            ),
-          )
-        ],
-        ShowInputColorsSwitch(controller: controller),
-        const Divider(),
         const ListTileReveal(
-          title: Text('Theme color modifiers:'),
+          title: Text('Theme color modifiers'),
           subtitleDense: true,
-          subtitle: Text('Use the theme color modifiers below to change how '
+          subtitle: Text('Use theme color modifiers below to change how '
               'the input scheme colors are used to define the effective '
               "theme's ColorScheme.\n"),
         ),
@@ -214,8 +138,9 @@ class ThemeColorsSettings extends StatelessWidget {
               SwitchListTileReveal(
                 title: const Text('Computed dark swaps main and container'),
                 subtitleDense: true,
-                subtitle: const Text('If swapped, you can often use them '
-                    'as they are with no white blend level, if light colors '
+                subtitle: const Text('Recommend to turn this one. When '
+                    'swapped, you can often use them as they are with no '
+                    'white blend level, especially if the light colors '
                     'use M3 design intent.\n'),
                 value: controller.toDarkSwapPrimaryAndContainer &&
                     controller.useToDarkMethod &&
@@ -231,11 +156,11 @@ class ThemeColorsSettings extends StatelessWidget {
                 enabled: controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
-                title: const Text('Blend level'),
+                title: const Text('White blend level'),
                 subtitleDense: true,
-                subtitle: const Text('Adjust blend level to desaturate the '
-                    'the light mode colors to make them work better in your '
-                    'dark theme\n'),
+                subtitle: const Text('Adjust white blend level to desaturate '
+                    'the the light mode colors to make them work better in '
+                    'your dark theme\n'),
               ),
               ListTile(
                 title: Slider(
@@ -272,6 +197,8 @@ class ThemeColorsSettings extends StatelessWidget {
             ],
           ),
         ),
+        const Divider(),
+        CustomThemeControls(controller: controller),
       ],
     );
   }

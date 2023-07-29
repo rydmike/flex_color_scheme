@@ -5,7 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/flex_tones_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/show_input_colors_switch.dart';
+import '../../shared/custom_theme_controls.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
@@ -196,23 +196,28 @@ class SeededColorSchemeSettings extends StatelessWidget {
                 : null,
           ),
         ],
-        ShowInputColorsSwitch(controller: controller),
-        if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
-          SwitchListTileReveal(
-              dense: true,
-              title: const Text('Custom dark scheme uses its own key colors'),
-              subtitle: const Text(
-                'Turn ON to use its dark input colors as seed keys for the '
-                'dark theme. This option is only available when using a '
-                'custom dark scheme.\n',
-              ),
-              value: controller.useDarkColorsForSeed &&
-                  controller.useKeyColors &&
-                  controller.schemeIndex == AppColor.schemes.length - 1,
-              onChanged: controller.useKeyColors &&
-                      controller.schemeIndex == AppColor.schemes.length - 1
-                  ? controller.setUseDarkColorsForSeed
-                  : null),
+        const Divider(),
+        CustomThemeControls(controller: controller),
+        // ShowInputColorsSwitch(controller: controller),
+
+        // TODO(rydmike): Remove as not used 29.7.20203
+        //
+        // if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
+        //   SwitchListTileReveal(
+        //       dense: true,
+        //       title: const Text('Custom dark scheme uses its own key colors'),
+        //       subtitle: const Text(
+        //         'Turn ON to use its dark input colors as seed keys for the '
+        //         'dark theme. This option is only available when using a '
+        //         'custom dark scheme.\n',
+        //       ),
+        //       value: controller.useDarkColorsForSeed &&
+        //           controller.useKeyColors &&
+        //           controller.schemeIndex == AppColor.schemes.length - 1,
+        //       onChanged: controller.useKeyColors &&
+        //               controller.schemeIndex == AppColor.schemes.length - 1
+        //           ? controller.setUseDarkColorsForSeed
+        //           : null),
       ],
     );
   }
