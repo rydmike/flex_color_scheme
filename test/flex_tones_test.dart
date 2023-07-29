@@ -4,7 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  // TODO(rydmike): Chore: Consider removing not needed FlexSeedScheme tests.
+  // TODO(rydmike): Consider removing maybe not needed FlexSeedScheme tests.
   // The FlexSeedScheme tests are a legacy in FlexColorScheme from before when
   // the feature had not been moved to its own package.
   //****************************************************************************
