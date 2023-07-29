@@ -175,8 +175,6 @@ class ThemeController with ChangeNotifier {
         Store.keyLightIsWhite, Store.defaultLightIsWhite);
     _darkIsTrueBlack = await _themeService.load(
         Store.keyDarkIsTrueBlack, Store.defaultDarkIsTrueBlack);
-    _useDarkColorsForSeed = await _themeService.load(
-        Store.keyUseDarkColorsForSeed, Store.defaultUseDarkColorsForSeed);
     _useToDarkMethod = await _themeService.load(
         Store.keyUseToDarkMethod, Store.defaultUseToDarkMethod);
     _toDarkSwapPrimaryAndContainer = await _themeService.load(
@@ -897,7 +895,6 @@ class ThemeController with ChangeNotifier {
     setSwapDarkColors(Store.defaultSwapDarkColors, false);
     setLightIsWhite(Store.defaultLightIsWhite, false);
     setDarkIsTrueBlack(Store.defaultDarkIsTrueBlack, false);
-    setUseDarkColorsForSeed(Store.defaultUseDarkColorsForSeed, false);
     setUseToDarkMethod(Store.defaultUseToDarkMethod, false);
     setToDarkSwapPrimaryAndContainer(
         Store.defaultToDarkSwapPrimaryAndContainer, false);
@@ -2616,16 +2613,6 @@ class ThemeController with ChangeNotifier {
     _darkIsTrueBlack = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyDarkIsTrueBlack, value));
-  }
-
-  late bool _useDarkColorsForSeed;
-  bool get useDarkColorsForSeed => _useDarkColorsForSeed;
-  void setUseDarkColorsForSeed(bool? value, [bool notify = true]) {
-    if (value == null) return;
-    if (value == _useDarkColorsForSeed) return;
-    _useDarkColorsForSeed = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyUseDarkColorsForSeed, value));
   }
 
   late bool _useToDarkMethod;

@@ -4,14 +4,17 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.3.0
 
-**July 27, 2023**
+**July 29, 2023**
 
 **PACKAGE**
 
 **NEW**
 
+* To `FlexSubThemes` in `buttonTheme` **added** bool `alignedDropdown`.
+* To `FlexSubThemesData` **added** bool `alignedDropdown`. Setting it to true improves the style of the `DropdownButton` and the `DropdownButtonForField`. They no longer expand outside the width ot the parent dropdown button but are kept size aligned with it.
+  
+ 
 * To `FlexSubThemes` in:
-  - `buttonTheme` **added** bool `alignedDropdown`
   - `chipTheme` **added** TextStyle `secondaryLabelStyle`
   - `dialogTheme` **added** TextStyle `titleTextStyle` and `contentTextStyle`
   - `floatingActionButtonTheme` **added** TextStyle `extendedTextStyle`
@@ -20,16 +23,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle` and `hourMinuteTextStyle`
   - `toggleButtonsTheme` **added** TextStyle `textStyle`
 
-* To `FlexSubThemesData` **added** 
-  - bool `alignedDropdown`
+* The `TextStyle` additions above to mentioned `FlexSubThemes` do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`, which in turn will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
 
 
 **CHANGE** 
 
-
 * **Minor style breaking changes:**
 
- - `FlexSubThemes.dropdownMenuTextStyl` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used in the dropdown menu entries, or with the same default style used in `TextField`in M3 mode. See issue  https://github.com/flutter/flutter/issues/131350 that contains a mention of this style deviant.
+ - `FlexSubThemes.dropdownMenuTextStyle` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used as default style in `TextField`in M3 mode. See issue  https://github.com/flutter/flutter/issues/131350 that contains a mention of this style deviant. In Jetpack compose, the `DropdownMenu` and its `TextField` part correctly defaults to using `bodyLarge`, this is thus assumed to be the correct spec wise. 
 
 **THEMES PLAYGROUND**
 
@@ -37,11 +38,16 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * The **PopupMenu and Dropdowns** panel got a setting for older Material-2 based `DropdownButtonFormField` and `DropdownButton` to set the new alignment property, which is an ancient theming property in the old `ButtonThemeData` that was used by deprecated and removed Material Buttons, but the theme is still used by these buttons. 
 
+**CHANGE**
+
+* Harmonized custom color activation settings on **Theme Colors** and **Seeded ColorScheme**.
+* Removed old switch in custom colors in dark mode, that was used to enable using input scheme color as own seed colors in dark mode when using custom colors. For simplicity, the custom dark mode colors have been used directly as seed colors in a few releases in the Playground already. The control was an old left-over with no function anymore.
+
 ### TODO
 
 * The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**.
 
-* Showcase - DropdownMenu: Remove temp issue demo on it. Create issue for it.
+
 
 ## 7.2.0
 

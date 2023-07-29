@@ -162,7 +162,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'To ensure that light and dark themes use identical tonal palettes, '
         'FlexColorScheme uses the light mode colors '
         'from built-in schemes to seed generate the ColorSchemes. '
-        'When using custom colors, you can decide if you do so or not.\n',
+        'When using custom colors, you decide which colors you seed from in '
+        'light and dark mode separately.\n',
   ),
   ThemeTopic(
     group: TopicGroup.colors,
