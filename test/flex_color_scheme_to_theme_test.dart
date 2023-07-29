@@ -4631,11 +4631,6 @@ void main() {
         equals(Colors.transparent),
       );
       // NavigationBar
-      // TODO(rydmike): Remove this test
-      // expect(
-      //   theme.navigationBarTheme.surfaceTintColor,
-      //   equals(Colors.transparent),
-      // );
       expect(
         theme.navigationBarTheme.shadowColor,
         equals(colorScheme.shadow),
