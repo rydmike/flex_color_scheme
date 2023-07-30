@@ -1664,7 +1664,7 @@ class Store {
       'useInputDecoratorThemeInDialogs';
   // Default value for the useInputDecoratorThemeInDialogs, also
   // used to reset settings.
-  static const bool defaultUseInputDecoratorThemeInDialogs = false;
+  static const bool defaultUseInputDecoratorThemeInDialogs = true;
 
   // Key used to read and save the adaptiveDialogRadius value.
   static const String keyAdaptiveDialogRadius = 'adaptiveDialogRadius';

@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.3.0
 
-**July 29, 2023**
+**July 30, 2023**
 
 **PACKAGE**
 
@@ -26,11 +26,17 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * The `TextStyle` additions above to mentioned `FlexSubThemes` do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`, which in turn will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
 
 
+* Added support for `useInputDecoratorThemeInDialogs` applying also to `DatePickerDialog` and not only `TimePickerDialog`. This feature is not yet fully supported by the framework, but FCS is prepared for it already. More info here: https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
+
 **CHANGE** 
 
 * **Minor style breaking changes:**
 
  - `FlexSubThemes.dropdownMenuTextStyle` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used as default style in `TextField`in M3 mode. See issue  https://github.com/flutter/flutter/issues/131350 that contains a mention of this style deviant. In Jetpack compose, the `DropdownMenu` and its `TextField` part correctly defaults to using `bodyLarge`, this is thus assumed to be the correct spec wise. 
+
+**FIX**
+
+* Fixed `useInputDecoratorThemeInDialogs` not working for some properties in the `InputDecorator`, when the value was null or `false`, where some properties in the `TextField`s in the `TimePickerDialog` did not revert back to default styles. Now they do, but via hard defined values to mimic the default M3 style, as that is the only way to get back to it when a very custom `themeData.inputDecoratorTheme` is being used.
 
 **THEMES PLAYGROUND**
 
@@ -41,12 +47,17 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **CHANGE**
 
 * Harmonized custom color activation settings on **Theme Colors** and **Seeded ColorScheme**.
+
 * Removed old switch in custom colors in dark mode, that was used to enable using input scheme color as own seed colors in dark mode when using custom colors. For simplicity, the custom dark mode colors have been used directly as seed colors in a few releases in the Playground already. The control was an old left-over with no function anymore.
+
+* The global themed input decorator usage is now on by default for `TimePickerdialog` and `DatePickerdialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`.
 
 ### TODO
 
 * The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**.
 
+
+* Fix/update/complement `DatePicker` and `TimePicker` tests. 
 
 
 ## 7.2.0
