@@ -57,7 +57,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**.
 
 
-* Fix/update/complement `DatePicker` and `TimePicker` tests. 
+* Complement the tests for `FlexSubThemes.datePickerTheme` and `FlexSubThemes.timePickerTheme`. 
 
 
 ## 7.2.0
