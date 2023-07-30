@@ -1268,6 +1268,8 @@ void main() {
       expect(
         FlexSubThemes.datePickerTheme(
           colorScheme: colorScheme,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
         ),
         equals(
           const DatePickerThemeData(
@@ -1289,9 +1291,12 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
-            colorScheme: colorScheme,
-            backgroundColor: const Color(0xFF343476),
-            backgroundSchemeColor: SchemeColor.tertiary),
+          colorScheme: colorScheme,
+          backgroundColor: const Color(0xFF343476),
+          backgroundSchemeColor: SchemeColor.tertiary,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
+        ),
         equals(
           DatePickerThemeData(
             backgroundColor: colorScheme.tertiary,
@@ -1316,6 +1321,8 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: null,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
         ),
         equals(
           const DatePickerThemeData(
@@ -1340,6 +1347,8 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: null,
           backgroundSchemeColor: SchemeColor.tertiary,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
         ),
         equals(
           DatePickerThemeData(
@@ -1367,6 +1376,8 @@ void main() {
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
           headerBackgroundSchemeColor: SchemeColor.primaryContainer,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
         ),
         equals(
           DatePickerThemeData(
@@ -1392,6 +1403,8 @@ void main() {
           colorScheme: colorScheme,
           elevation: 10,
           radius: 6,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: true,
         ),
         equals(
           const DatePickerThemeData(
