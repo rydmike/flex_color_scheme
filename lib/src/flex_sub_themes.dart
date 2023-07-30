@@ -1838,7 +1838,6 @@ class FlexSubThemes {
         focusColor: colorScheme.brightness == Brightness.dark
             ? Colors.white.withOpacity(0.12)
             : Colors.black.withOpacity(0.12),
-        fillColor: Colors.transparent,
         border: OutlineInputBorder(
           borderRadius: defaultRadius,
           borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -6898,13 +6897,11 @@ class FlexSubThemes {
           borderRadius: defaultRadius,
           borderSide: BorderSide(color: colorScheme.error, width: 2),
         ),
-        // TODO(rydmike): Commented the hint style, we get default anyway.
-        // hintStyle: hourMinuteTextStyle.copyWith(
-        //     color: colorScheme.onSurface.withOpacity(0.36)),
-        // Prevent the error text from appearing.
-        // TODO(rami-a): Remove this workaround once
-        // https://github.com/flutter/flutter/issues/54104
-        // is fixed.
+        disabledBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(
+              color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+        ),
         errorStyle: const TextStyle(fontSize: 0, height: 0),
       );
     }
