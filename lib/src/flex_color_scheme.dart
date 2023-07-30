@@ -6887,6 +6887,8 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.datePickerDialogRadius ??
                   platformDialogRadius ??
                   platformRadius,
+              inputDecorationTheme: effectiveInputDecorationTheme,
+              useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
             )

@@ -517,27 +517,6 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        SwitchListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Use InputDecoration theme in dialog text entry'),
-          subtitleDense: true,
-          subtitle: const Text(
-            'Turn ON to use the themed InputDecoration '
-            'style on time entry fields.\n'
-            '\n'
-            'Keeping it OFF uses null as InputDecoration for '
-            'TimePicker sub-theme in order to get widget default decorator '
-            'style. Despite this, for some reason the app level themed '
-            'InputDecoration background style still gets used on hover. A '
-            'potential Flutter SDK theming issue to revisit later.\n',
-          ),
-          value: controller.useInputDecoratorThemeInDialogs &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseInputDecoratorThemeInDialogs
-              : null,
-        ),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -564,7 +543,35 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const Divider(),
+        SwitchListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text("Use TextField's InputDecorationTheme in picker "
+              'dialogs'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Turn ON to use the FlexColorScheme themed TextField '
+            'InputDecoration style on time and date text entry fields in '
+            'TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'Turn OFF to use default M3 inspired styles on text input fields '
+            'in TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'NOTE: This feature is not yet supported by DatePicker, when it '
+            'is supported this setting will apply to it as well. DatePicker '
+            'currently only supports using the global TextField themed '
+            'input decorator, like this setting would ON all the time.\n'
+            '\n'
+            'Defaults to ON in the ThemesPlayground, but to null, resulting in '
+            'OFF in the FlexColorScheme API.\n',
+          ),
+          value: controller.useInputDecoratorThemeInDialogs &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseInputDecoratorThemeInDialogs
+              : null,
+        ),
         const Divider(),
         const ListTileReveal(
           title: Text('DatePicker'),

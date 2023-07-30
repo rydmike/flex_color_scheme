@@ -1797,12 +1797,99 @@ class FlexSubThemes {
     /// https://m3.material.io/components/dialogs/specs
     final double? radius,
 
+    /// An input decoration theme, for the time picker.
+    ///
+    /// You would typically pass in one that matches the main used input
+    /// decoration theme in order to get same input style with possible
+    /// rounding used in the app otherwise on the input fields in the picker.
+    ///
+    /// It adds the custom overrides to the passed in decorator, that the widget
+    /// does internally to the default null InputDecorationTheme. There is
+    /// no need to add those in the passed in InputDecorationTheme. Just pass
+    /// in your overall used app InputDecorationTheme.
+    final InputDecorationTheme? inputDecorationTheme,
+
+    /// Set to true to not use the provided [inputDecorationTheme].
+    ///
+    /// If this flag is false, the provided [inputDecorationTheme] is not used,
+    /// additionally the theme fix this theme helper does internally is
+    /// not applied and pure null value is passed. This enables getting the
+    /// default widget behavior input decorator, or opting in on getting the
+    /// provided inputDecorationTheme with the internal style fix for issue
+    /// https://github.com/flutter/flutter/issues/54104 applied automatically
+    /// to the provided inputDecorationTheme.
+    ///
+    /// If not defined, defaults to false.
+    final bool? useInputDecoratorTheme,
+
     /// Overrides the default value of [Dialog.shadowColor].
     final Color? shadowColor,
 
     /// Overrides the default value of [Dialog.surfaceTintColor].
     final Color? surfaceTintColor,
   }) {
+    InputDecorationTheme datePickerDefaultInputDecorationTheme() {
+      const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
+      return InputDecorationTheme(
+        filled: false,
+        hoverColor: colorScheme.brightness == Brightness.dark
+            ? Colors.white.withOpacity(0.04)
+            : Colors.black.withOpacity(0.04),
+        focusColor: colorScheme.brightness == Brightness.dark
+            ? Colors.white.withOpacity(0.12)
+            : Colors.black.withOpacity(0.12),
+        fillColor: Colors.transparent,
+        border: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.primary, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.outline, width: 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.error, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.error, width: 2),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(
+              color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+        ),
+        floatingLabelStyle:
+            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+          }
+          if (states.contains(MaterialState.error)) {
+            if (states.contains(MaterialState.hovered)) {
+              return TextStyle(color: colorScheme.onErrorContainer);
+            }
+            if (states.contains(MaterialState.focused)) {
+              return TextStyle(color: colorScheme.error);
+            }
+            return TextStyle(color: colorScheme.error);
+          }
+          if (states.contains(MaterialState.hovered)) {
+            return TextStyle(color: colorScheme.onSurfaceVariant);
+          }
+          if (states.contains(MaterialState.focused)) {
+            return TextStyle(color: colorScheme.primary);
+          }
+          return TextStyle(color: colorScheme.onSurfaceVariant);
+        }),
+      );
+    }
+
+    final bool useDecorator = useInputDecoratorTheme ?? false;
     final Color? background = backgroundSchemeColor == null
         ? backgroundColor // might be null, then SDK theme defaults.
         : schemeColor(backgroundSchemeColor, colorScheme);
@@ -1826,6 +1913,13 @@ class FlexSubThemes {
       ),
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
+      inputDecorationTheme: useDecorator
+          ? inputDecorationTheme
+          // TODO(rydmike): Raise DatePicker decorator merge issue.
+          // Getting back to default style with an elaborate back to default
+          // input decorator does not work due to this:
+          // https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
+          : datePickerDefaultInputDecorationTheme(),
     );
   }
 
@@ -6746,6 +6840,75 @@ class FlexSubThemes {
         ? backgroundColor // might be null, then SDK theme defaults.
         : schemeColor(backgroundSchemeColor, colorScheme);
 
+    Color defaultHourMinuteColor() {
+      return MaterialStateColor.resolveWith((Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          Color overlayColor = colorScheme.primaryContainer;
+          if (states.contains(MaterialState.pressed)) {
+            overlayColor = colorScheme.onPrimaryContainer;
+          } else if (states.contains(MaterialState.hovered)) {
+            const double hoverOpacity = 0.08;
+            overlayColor =
+                colorScheme.onPrimaryContainer.withOpacity(hoverOpacity);
+          } else if (states.contains(MaterialState.focused)) {
+            const double focusOpacity = 0.12;
+            overlayColor =
+                colorScheme.onPrimaryContainer.withOpacity(focusOpacity);
+          }
+          return Color.alphaBlend(overlayColor, colorScheme.primaryContainer);
+        } else {
+          Color overlayColor = colorScheme.surfaceVariant;
+          if (states.contains(MaterialState.pressed)) {
+            overlayColor = colorScheme.onSurface;
+          } else if (states.contains(MaterialState.hovered)) {
+            const double hoverOpacity = 0.08;
+            overlayColor = colorScheme.onSurface.withOpacity(hoverOpacity);
+          } else if (states.contains(MaterialState.focused)) {
+            const double focusOpacity = 0.12;
+            overlayColor = colorScheme.onSurface.withOpacity(focusOpacity);
+          }
+          return Color.alphaBlend(overlayColor, colorScheme.surfaceVariant);
+        }
+      });
+    }
+
+    InputDecorationTheme timePickerDefaultInputDecorationTheme() {
+      const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(8.0));
+      return InputDecorationTheme(
+        contentPadding: EdgeInsets.zero,
+        filled: true,
+        hoverColor: colorScheme.brightness == Brightness.dark
+            ? Colors.white.withOpacity(0.04)
+            : Colors.black.withOpacity(0.04),
+        fillColor: defaultHourMinuteColor(),
+        focusColor: colorScheme.primaryContainer,
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.error, width: 2),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: defaultRadius,
+          borderSide: BorderSide(color: colorScheme.error, width: 2),
+        ),
+        // TODO(rydmike): Commented the hint style, we get default anyway.
+        // hintStyle: hourMinuteTextStyle.copyWith(
+        //     color: colorScheme.onSurface.withOpacity(0.36)),
+        // Prevent the error text from appearing.
+        // TODO(rami-a): Remove this workaround once
+        // https://github.com/flutter/flutter/issues/54104
+        // is fixed.
+        errorStyle: const TextStyle(fontSize: 0, height: 0),
+      );
+    }
+
     MaterialStateProperty<Color> dayPeriodForegroundColor() {
       return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         Color? textColor;
@@ -6872,7 +7035,10 @@ class FlexSubThemes {
                 // See https://github.com/flutter/flutter/issues/54104
                 errorStyle: const TextStyle(fontSize: 0, height: 0),
               )
-          : null, //const InputDecorationTheme(),
+          // To get back to a default style, we have to provide an explicit
+          // default matching style, very tedious. Read more about this here:
+          // https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
+          : timePickerDefaultInputDecorationTheme(),
     );
   }
 
