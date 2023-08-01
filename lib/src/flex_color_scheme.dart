@@ -7010,7 +7010,9 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
+      listTileTheme: const ListTileThemeData(),
       //
+
       // MenuBar theme, used by MenuBar.
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
