@@ -7917,7 +7917,8 @@ class FlexColorScheme with Diagnosticable {
         'tooltipsMatchBackground', tooltipsMatchBackground));
     properties.add(DiagnosticsProperty<bool>(
         'transparentStatusBar', transparentStatusBar));
-    properties.add(EnumProperty<VisualDensity>('visualDensity', visualDensity));
+    properties.add(
+        DiagnosticsProperty<VisualDensity>('visualDensity', visualDensity));
     properties.add(DiagnosticsProperty<TextTheme>('textTheme', textTheme));
     properties.add(
         DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));

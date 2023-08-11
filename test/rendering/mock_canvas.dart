@@ -10,6 +10,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// This is now imported also by flutter_test.dart from the SDK source on master,
+// may no longer need this custom copied version, but still needed on beta.
+// TODO(rydmike): Remove recording_canvas.dart.dart file when no longer needed.
 import 'recording_canvas.dart';
 
 /// Matches objects or functions that paint a display list that matches the

@@ -7,6 +7,7 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../dialogs/set_text_field_to_defaults_dialog.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -29,6 +30,18 @@ class TextFieldSettings extends StatelessWidget {
     );
     if (reset ?? false) {
       await controller.setTextFieldToM3();
+    }
+  }
+
+  Future<void> _handleSetToDefaults(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetTextFieldToDefaultsDialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setTextFieldToDefaults();
     }
   }
 
@@ -156,22 +169,40 @@ class TextFieldSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         ListTileReveal(
-            enabled: useMaterial3,
-            title: const Text('Use Material 3 default TextField style?'),
-            subtitleDense: true,
-            subtitle: const Text('Update settings below to match M3 default '
-                'values.\n'),
-            trailing: FilledButton(
-              onPressed: useMaterial3
-                  ? () async {
-                      await _handleSetToM3(context);
-                    }
-                  : null,
-              child: const Text('Set to M3'),
-            ),
-            onTap: () async {
+          title: const Text('Use Material 3 default TextField style?'),
+          subtitleDense: true,
+          subtitle: const Text('Update settings below to match M3 default '
+              'values. Also sets text selection style.\n'
+              'Can also be used in M2 mode, but the result is different from '
+              'when used in actual M3 mode.'),
+          trailing: FilledButton(
+            onPressed: () async {
               await _handleSetToM3(context);
-            }),
+            },
+            child: const Text('Set to M3'),
+          ),
+          onTap: () async {
+            await _handleSetToM3(context);
+          },
+        ),
+        ListTileReveal(
+          title: const Text('Reset TextField to FlexColorScheme defaults?'),
+          subtitleDense: true,
+          subtitle: const Text("Update settings to FlexColorScheme's own "
+              'opinionated default values. Also resets text selection style.\n'
+              'The FCS defaults for M2 and M3 are different, the M3 mode '
+              'defaults are very close to M3 defaults, but use a filled '
+              'outline style.'),
+          trailing: FilledButton(
+            onPressed: () async {
+              await _handleSetToDefaults(context);
+            },
+            child: const Text('Defaults'),
+          ),
+          onTap: () async {
+            await _handleSetToDefaults(context);
+          },
+        ),
         const Padding(
           padding: EdgeInsets.all(16),
           child: TextFieldShowcase(),

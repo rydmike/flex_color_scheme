@@ -202,10 +202,11 @@ class SeededColorSchemeSettings extends StatelessWidget {
 
         // TODO(rydmike): Remove as not used 29.7.20203
         //
-        // if (!isLight && controller.schemeIndex == (AppColor.schemes.length - 1))
+        // if (!isLight && controller.schemeIndex ==
+        // (AppColor.schemes.length - 1))
         //   SwitchListTileReveal(
         //       dense: true,
-        //       title: const Text('Custom dark scheme uses its own key colors'),
+        //      title: const Text('Custom dark scheme uses its own key colors'),
         //       subtitle: const Text(
         //         'Turn ON to use its dark input colors as seed keys for the '
         //         'dark theme. This option is only available when using a '
