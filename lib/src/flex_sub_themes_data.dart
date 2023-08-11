@@ -4395,16 +4395,16 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
     //
-    properties.add(EnumProperty<FlexAdaptive>(
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveRemoveElevationTint', adaptiveRemoveElevationTint));
-    properties.add(EnumProperty<FlexAdaptive>(
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveElevationShadowsBack', adaptiveElevationShadowsBack));
-    properties.add(EnumProperty<FlexAdaptive>(
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
-    properties
-        .add(EnumProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
-    properties
-        .add(EnumProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
+    properties.add(
+        DiagnosticsProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
+    properties.add(
+        DiagnosticsProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
     //
     properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
     properties.add(
@@ -4636,7 +4636,7 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
     //
-    properties.add(EnumProperty<FlexAdaptive>(
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveDialogRadius', adaptiveDialogRadius));
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
     properties.add(DiagnosticsProperty<double>(
@@ -4741,9 +4741,11 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'bottomNavigationBarMutedUnselectedLabel',
         bottomNavigationBarMutedUnselectedLabel));
-    properties.add(EnumProperty<double>('bottomNavigationBarSelectedIconSize',
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarSelectedIconSize',
         bottomNavigationBarSelectedIconSize));
-    properties.add(EnumProperty<double>('bottomNavigationBarUnselectedIconSize',
+    properties.add(DiagnosticsProperty<double>(
+        'bottomNavigationBarUnselectedIconSize',
         bottomNavigationBarUnselectedIconSize));
     properties.add(EnumProperty<SchemeColor>(
         'bottomNavigationBarSelectedIconSchemeColor',
@@ -4818,7 +4820,7 @@ class FlexSubThemesData with Diagnosticable {
         'navigationBarHeight', navigationBarHeight));
     properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
         'navigationBarLabelBehavior', navigationBarLabelBehavior));
-    properties.add(EnumProperty<FlexAdaptive>(
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveRemoveNavigationBarTint', adaptiveRemoveNavigationBarTint));
     //
     properties.add(DiagnosticsProperty<TextStyle>(
@@ -4837,9 +4839,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>(
         'navigationRailMutedUnselectedLabel',
         navigationRailMutedUnselectedLabel));
-    properties.add(EnumProperty<double>(
+    properties.add(DiagnosticsProperty<double>(
         'navigationRailSelectedIconSize', navigationRailSelectedIconSize));
-    properties.add(EnumProperty<double>(
+    properties.add(DiagnosticsProperty<double>(
         'navigationRailUnselectedIconSize', navigationRailUnselectedIconSize));
     properties.add(EnumProperty<SchemeColor>(
         'navigationRailSelectedIconSchemeColor',

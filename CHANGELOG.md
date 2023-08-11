@@ -4,14 +4,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.3.0
 
-**August 1, 2023**
+**August 11, 2023**
 
 **PACKAGE**
 
 **NEW**
 
 * To `FlexSubThemes` in `buttonTheme` **added** bool `alignedDropdown`.
-* To `FlexSubThemesData` **added** bool `alignedDropdown`. Setting it to true improves the style of the `DropdownButton` and the `DropdownButtonForField`. They no longer expand outside the width ot the parent dropdown button but are kept size aligned with it.
+* To `FlexSubThemesData` **added** bool `alignedDropdown`. Setting it to true improves the style of the `DropdownButton` and the `DropdownButtonForField`. They no longer expand outside the width of the parent dropdown button but are kept size aligned with it.
   
  
 * To `FlexSubThemes` in:
@@ -23,7 +23,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle` and `hourMinuteTextStyle`
   - `toggleButtonsTheme` **added** TextStyle `textStyle`
 
-* The `TextStyle` additions above to mentioned `FlexSubThemes` do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`, which in turn will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
+* The `TextStyle` additions above to mentioned `FlexSubThemes` do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`, which, in turn, will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
 
 
 * Added support for `useInputDecoratorThemeInDialogs` applying also to `DatePickerDialog` and not only `TimePickerDialog`. This feature is not yet fully supported by the framework, but FCS is prepared for it already. More info here: https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
@@ -32,7 +32,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * **Minor style breaking changes:**
 
- - `FlexSubThemes.dropdownMenuTextStyle` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used as default style in `TextField`in M3 mode. See issue  https://github.com/flutter/flutter/issues/131350 that contains a mention of this style deviant. In Jetpack compose, the `DropdownMenu` and its `TextField` part correctly defaults to using `bodyLarge`, this is thus assumed to be the correct spec wise. 
+ - `FlexSubThemes.dropdownMenuTextStyle` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used as default style in `TextField`in M3 mode. See [issue #131350](https://github.com/flutter/flutter/issues/131350) that contains a mention of this style deviant. In Jetpack compose, the `DropdownMenu` and its `TextField` part correctly defaults to using `bodyLarge`, this is thus assumed to be the correct spec wise. The issue of wrong default text styles in Flutter menus is further discussed in [issue #131676](https://github.com/flutter/flutter/issues/131676). FlexColorScheme will not internally correct the wrong default `TextStyle` on menu items, it will however change to follow the default when Flutter stable does. The difference in the `DropdownMenu` text input field was however significant enough to warrant a change already before the fix lands in Flutter stable.
 
 **FIX**
 
@@ -44,6 +44,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * The **PopupMenu and Dropdowns** panel got a setting for older Material-2 based `DropdownButtonFormField` and `DropdownButton` to set the new alignment property, which is an ancient theming property in the old `ButtonThemeData` that was used by deprecated and removed Material Buttons, but the theme is still used by these buttons. 
 
+* On the TextField panel, feature to set the input decoration style bac to FCS own defaults.
+
 **CHANGE**
 
 * Harmonized custom color activation settings on **Theme Colors** and **Seeded ColorScheme**.
@@ -54,11 +56,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ### TODO
 
-* The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**.
+* The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**. Might postpone to version 7.4.0, depends on when the next Flutter stable is released.
 
-* Add some basic theming for `ListTileThemeData` and `ProgressIndicatorThemeData`.
-
-* Complement the tests for `FlexSubThemes.datePickerTheme` and `FlexSubThemes.timePickerTheme`. 
+* Add some basic theming for `ListTileThemeData` and `ProgressIndicatorThemeData`. Might postpone to version 7.4.0, depends on when the next Flutter stable is released.
 
 
 ## 7.2.0

@@ -1865,6 +1865,9 @@ class FlexSubThemes {
         ),
         floatingLabelStyle:
             MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+          // These styles are copied for M# default, we are not going to test
+          // them again.
+          // coverage:ignore-start
           if (states.contains(MaterialState.disabled)) {
             return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
           }
@@ -1884,6 +1887,7 @@ class FlexSubThemes {
             return TextStyle(color: colorScheme.primary);
           }
           return TextStyle(color: colorScheme.onSurfaceVariant);
+          // coverage:ignore-end
         }),
       );
     }
@@ -3431,7 +3435,7 @@ class FlexSubThemes {
     /// indicate elevation. See [ThemeData.applyElevationOverlayColor].
     final Color? shadowColor,
 
-    /// The surface tint color of the MnuBar's [Material].
+    /// The surface tint color of the MenuBar's [Material].
     ///
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
@@ -6841,6 +6845,9 @@ class FlexSubThemes {
 
     Color defaultHourMinuteColor() {
       return MaterialStateColor.resolveWith((Set<MaterialState> states) {
+        // These styles are copied for M# default, we are not going to test
+        // them again.
+        // coverage:ignore-start
         if (states.contains(MaterialState.selected)) {
           Color overlayColor = colorScheme.primaryContainer;
           if (states.contains(MaterialState.pressed)) {
@@ -6868,6 +6875,7 @@ class FlexSubThemes {
           }
           return Color.alphaBlend(overlayColor, colorScheme.surfaceVariant);
         }
+        // coverage:ignore-end
       });
     }
 

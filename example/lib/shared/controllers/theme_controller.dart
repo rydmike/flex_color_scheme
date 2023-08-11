@@ -934,53 +934,7 @@ class ThemeController with ChangeNotifier {
     setSurfacesUseBWDark(Store.defaultSurfacesUseBWDark, false);
     //
     // InputDecorator SETTINGS.
-    setInputDecoratorSchemeColorLight(
-        Store.defaultInputDecoratorSchemeColorLight, false);
-    setInputDecoratorSchemeColorDark(
-        Store.defaultInputDecoratorSchemeColorDark, false);
-    setInputDecoratorBorderSchemeColorLight(
-        Store.defaultInputDecoratorBorderSchemeColorLight, false);
-    setInputDecoratorBorderSchemeColorDark(
-        Store.defaultInputDecoratorBorderSchemeColorDark, false);
-    setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
-    setInputDecoratorBackgroundAlphaLight(
-        Store.defaultInputDecoratorBackgroundAlphaLight, false);
-    setInputDecoratorBackgroundAlphaDark(
-        Store.defaultInputDecoratorBackgroundAlphaDark, false);
-    setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
-    setInputDecoratorBorderRadius(
-        Store.defaultInputDecoratorBorderRadius, false);
-    setInputDecoratorUnfocusedHasBorder(
-        Store.defaultInputDecoratorUnfocusedHasBorder, false);
-    setInputDecoratorFocusedHasBorder(
-        Store.defaultInputDecoratorFocusedHasBorder, false);
-    setInputDecoratorUnfocusedBorderIsColored(
-        Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
-    setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
-    setInputDecoratorFocusedBorderWidth(
-        Store.defaultInputDecoratorFocusedBorderWidth, false);
-    setInputDecoratorPrefixIconSchemeColor(
-        Store.defaultInputDecoratorPrefixIconSchemeColor, false);
-    setInputDecoratorPrefixIconDarkSchemeColor(
-        Store.defaultInputDecoratorPrefixIconDarkSchemeColor, false);
-    //
-    // TextSelection SETTINGS.
-    setInputCursorLightSchemeColor(
-        Store.defaultInputCursorLightSchemeColor, false);
-    setInputSelectionLightSchemeColor(
-        Store.defaultInputSelectionLightSchemeColor, false);
-    setInputSelectionLightOpacity(
-        Store.defaultInputSelectionLightOpacity, false);
-    setInputSelectionHandleLightSchemeColor(
-        Store.defaultInputSelectionHandleLightSchemeColor, false);
-    //
-    setInputCursorDarkSchemeColor(
-        Store.defaultInputCursorDarkSchemeColor, false);
-    setInputSelectionDarkSchemeColor(
-        Store.defaultInputSelectionDarkSchemeColor, false);
-    setInputSelectionDarkOpacity(Store.defaultInputSelectionDarkOpacity, false);
-    setInputSelectionHandleDarkSchemeColor(
-        Store.defaultInputSelectionHandleDarkSchemeColor, false);
+    await setTextFieldToDefaults(false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -1321,6 +1275,60 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorPrefixIconSchemeColor(null, false);
     setInputDecoratorPrefixIconDarkSchemeColor(null, false);
 
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
+  }
+
+  /// Set TextField values to FlexColorScheme defaults.
+  Future<void> setTextFieldToDefaults([bool doNotify = true]) async {
+    setInputDecoratorSchemeColorLight(
+        Store.defaultInputDecoratorSchemeColorLight, false);
+    setInputDecoratorSchemeColorDark(
+        Store.defaultInputDecoratorSchemeColorDark, false);
+    setInputDecoratorBorderSchemeColorLight(
+        Store.defaultInputDecoratorBorderSchemeColorLight, false);
+    setInputDecoratorBorderSchemeColorDark(
+        Store.defaultInputDecoratorBorderSchemeColorDark, false);
+    setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
+    setInputDecoratorBackgroundAlphaLight(
+        Store.defaultInputDecoratorBackgroundAlphaLight, false);
+    setInputDecoratorBackgroundAlphaDark(
+        Store.defaultInputDecoratorBackgroundAlphaDark, false);
+    setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
+    setInputDecoratorBorderRadius(
+        Store.defaultInputDecoratorBorderRadius, false);
+    setInputDecoratorUnfocusedHasBorder(
+        Store.defaultInputDecoratorUnfocusedHasBorder, false);
+    setInputDecoratorFocusedHasBorder(
+        Store.defaultInputDecoratorFocusedHasBorder, false);
+    setInputDecoratorUnfocusedBorderIsColored(
+        Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
+    setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
+    setInputDecoratorFocusedBorderWidth(
+        Store.defaultInputDecoratorFocusedBorderWidth, false);
+    setInputDecoratorPrefixIconSchemeColor(
+        Store.defaultInputDecoratorPrefixIconSchemeColor, false);
+    setInputDecoratorPrefixIconDarkSchemeColor(
+        Store.defaultInputDecoratorPrefixIconDarkSchemeColor, false);
+    //
+    // TextSelection SETTINGS.
+    setInputCursorLightSchemeColor(
+        Store.defaultInputCursorLightSchemeColor, false);
+    setInputSelectionLightSchemeColor(
+        Store.defaultInputSelectionLightSchemeColor, false);
+    setInputSelectionLightOpacity(
+        Store.defaultInputSelectionLightOpacity, false);
+    setInputSelectionHandleLightSchemeColor(
+        Store.defaultInputSelectionHandleLightSchemeColor, false);
+    //
+    setInputCursorDarkSchemeColor(
+        Store.defaultInputCursorDarkSchemeColor, false);
+    setInputSelectionDarkSchemeColor(
+        Store.defaultInputSelectionDarkSchemeColor, false);
+    setInputSelectionDarkOpacity(Store.defaultInputSelectionDarkOpacity, false);
+    setInputSelectionHandleDarkSchemeColor(
+        Store.defaultInputSelectionHandleDarkSchemeColor, false);
+    //
     // Only notify at end, if asked to do so, to do so is default.
     if (doNotify) notifyListeners();
   }
