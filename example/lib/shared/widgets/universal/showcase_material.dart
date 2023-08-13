@@ -696,6 +696,14 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
             },
           ),
           Switch(
+            value: !isOn1,
+            onChanged: (bool value) {
+              setState(() {
+                isOn1 = !value;
+              });
+            },
+          ),
+          Switch(
             thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
                 (Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
@@ -713,24 +721,17 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
               });
             },
           ),
+          const Text('Disabled'),
           Switch(
             value: isOn1,
             onChanged: null,
           ),
           Switch(
             value: !isOn1,
-            onChanged: (bool value) {
-              setState(() {
-                isOn1 = !value;
-              });
-            },
-          ),
-          Switch(
-            value: !isOn1,
             onChanged: null,
           ),
           if (widget.showCupertinoSwitches) ...<Widget>[
-            const Text('iOS:'),
+            const Text('iOS'),
             CupertinoSwitch(
               activeColor: colorScheme.primary,
               value: isOn1,
@@ -774,7 +775,7 @@ class CheckboxShowcase extends StatefulWidget {
 }
 
 class _CheckboxShowcaseState extends State<CheckboxShowcase> {
-  bool? isSelected1 = true;
+  bool isSelected1 = true;
   bool? isSelected2;
 
   @override
@@ -789,10 +790,38 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
             value: isSelected1,
             onChanged: (bool? value) {
               setState(() {
-                isSelected1 = value;
+                isSelected1 = value ?? false;
               });
             },
           ),
+          Checkbox(
+            value: !isSelected1,
+            onChanged: (bool? value) {
+              setState(() {
+                isSelected1 = !(value ?? false);
+              });
+            },
+          ),
+          const Text('Error'),
+          Checkbox(
+            isError: true,
+            value: isSelected1,
+            onChanged: (bool? value) {
+              setState(() {
+                isSelected1 = value ?? false;
+              });
+            },
+          ),
+          Checkbox(
+            isError: true,
+            value: !isSelected1,
+            onChanged: (bool? value) {
+              setState(() {
+                isSelected1 = !(value ?? false);
+              });
+            },
+          ),
+          const Text('Tri-state'),
           Checkbox(
             tristate: true,
             value: isSelected2,
@@ -802,10 +831,7 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
               });
             },
           ),
-          Checkbox(
-            value: false,
-            onChanged: (bool? value) {},
-          ),
+          const Text('Disabled'),
           const Checkbox(
             value: true,
             onChanged: null,
@@ -861,6 +887,7 @@ class _RadioShowcaseState extends State<RadioShowcase> {
               });
             },
           ),
+          const Text('Disabled'),
           Radio<bool>(
             value: true,
             groupValue: groupValue,
