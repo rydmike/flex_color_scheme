@@ -13,13 +13,12 @@ class SwitchesSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final String labelForDefaultColor =
         (controller.useSubThemes || controller.useMaterial3) &&
                 controller.useFlexColorScheme
             ? 'default (primary)'
-            : isDark
-                ? 'default (tealAccent[200])'
+            : controller.useMaterial3
+                ? 'default (primary)'
                 : 'default (secondary)';
     final String labelForDefaultThumbColor =
         (controller.useSubThemes || controller.useMaterial3) &&
@@ -27,8 +26,8 @@ class SwitchesSettings extends StatelessWidget {
             ? controller.useMaterial3
                 ? 'default (primaryContainer)'
                 : 'default (primary)'
-            : isDark
-                ? 'default (tealAccent[200])'
+            : controller.useMaterial3
+                ? 'default (primaryContainer)'
                 : 'default (secondary)';
 
     final String explainThumb =
