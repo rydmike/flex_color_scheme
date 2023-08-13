@@ -92,6 +92,11 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: CheckboxShowcase(),
         ),
+        if (!controller.useMaterial3)
+          const ListTile(
+            dense: true,
+            title: Text('Error state is not supported in M2 mode'),
+          ),
         ColorSchemePopupMenu(
           title: const Text('Checkbox main color'),
           labelForDefault: labelForDefaultColor,
