@@ -4,7 +4,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.3.0
 
-**August 11, 2023**
+**August 13, 2023**
+
+* Requires minimum Flutter **Channel beta, 3.13.0-0.3.pre**. 
+* This is a WIP branch to prepare for new theming features and changes in the next Flutter stable release. It is assumed to arrive within a month using version number Flutter stable 3.13.0.
 
 **PACKAGE**
 
@@ -23,10 +26,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle` and `hourMinuteTextStyle`
   - `toggleButtonsTheme` **added** TextStyle `textStyle`
 
-* The `TextStyle` additions above to mentioned `FlexSubThemes` do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`, which, in turn, will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
+* The `TextStyle` additions above, to mentioned `FlexSubThemes`, do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`. This in turn, will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
 
 
-* Added support for `useInputDecoratorThemeInDialogs` applying also to `DatePickerDialog` and not only `TimePickerDialog`. This feature is not yet fully supported by the framework, but FCS is prepared for it already. More info here: https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
+* As planned in previous versions, made the `FlexSubThemesData.useInputDecoratorThemeInDialogs` apply also to `DatePickerDialog` and not only to `TimePickerDialog`. This feature is not optimally supported by the framework. The current implementation has severe issues and limitations. See more info in [PR #128950 comment](https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393). Additional info about the differences in how `InputDecorationTheme` behaves in different component themes, read the proposal **"Make InputDecorationTheme usage in components consistent"** in [issue #131666](https://github.com/flutter/flutter/issues/131666).
 
 **CHANGE** 
 
@@ -35,6 +38,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
  - `FlexSubThemes.dropdownMenuTextStyle` now default to `TextTheme.bodyLarge` if not defined. Previously it used Flutter SDK default `TextTheme.bodyLarge`, which is a poor design default as the style does not fit with default style `bodyLarge` used as default style in `TextField`in M3 mode. See [issue #131350](https://github.com/flutter/flutter/issues/131350) that contains a mention of this style deviant. In Jetpack compose, the `DropdownMenu` and its `TextField` part correctly defaults to using `bodyLarge`, this is thus assumed to be the correct spec wise. The issue of wrong default text styles in Flutter menus is further discussed in [issue #131676](https://github.com/flutter/flutter/issues/131676). FlexColorScheme will not internally correct the wrong default `TextStyle` on menu items, it will however change to follow the default when Flutter stable does. The difference in the `DropdownMenu` text input field was however significant enough to warrant a change already before the fix lands in Flutter stable.
 
 **FIX**
+
+* Fixed the `FlexSubThemes.checkboxTheme` that broke due to an unexpected breaking change in Flutter caused by PR [#125643](https://github.com/flutter/flutter/pull/125643). The breaking change is discussed further in [issue #130295](https://github.com/flutter/flutter/issues/130295). The fix to the checkbox theme incorporates the new behavior to keep its custom styling working as before and expected.
 
 * Fixed `useInputDecoratorThemeInDialogs` not working for some properties in the `InputDecorator`, when the value was null or `false`, where some properties in the `TextField`s in the `TimePickerDialog` did not revert back to default styles. Now they do, but via hard defined values to mimic the default M3 style, as that is the only way to get back to it when a very custom `themeData.inputDecoratorTheme` is being used.
 
@@ -54,11 +59,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * The global themed input decorator usage is now on by default for `TimePickerdialog` and `DatePickerdialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`.
 
+**FIX**
+
+* Fixed the old default color info for the toggles Switch, Checkbox and Radio, that are shown when FlexColorScheme is disabled as default values in Material 2 dark mode. They have been updated in Flutter SDK to `ColorScheme.secondary` color and are no longer not the horrid dark mode teal color. This default color info, shown when FlexColorScheme is disabled in the **Themes Playground**, had not been updated for the dark M2 mode Switch, Checkbox and Radio colors. 
+
 ### TODO
 
-* The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**. Might postpone to version 7.4.0, depends on when the next Flutter stable is released.
+* The `TextStyle`'s added to `FlexSubThemes` also needs to be added to `FlexSubThemesData` to pass any configured text styles to respective sub-themes. They will not be added to **Themes Playground** in current generation. They are intended to with API make it easier to use custom `TextStyles` on these components with using a deep `copyWith` on produced `ThemeData` by **FlexColorScheme**. This will probably be postponed to version 7.4.0, depends on when the next Flutter stable is released.
 
-* Add some basic theming for `ListTileThemeData` and `ProgressIndicatorThemeData`. Might postpone to version 7.4.0, depends on when the next Flutter stable is released.
+* Add some basic theming for `ListTileThemeData` and `ProgressIndicatorThemeData`. This will probably be postponed to version 7.4.0, depends on when the next Flutter stable is released.
 
 
 ## 7.2.0
