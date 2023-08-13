@@ -464,10 +464,10 @@ void main() {
   });
   group('WITH: FlexSubTheme.checkboxTheme ', () {
     // -------------------------------------------------------------------------
-    // FlexSubThemes CheckBox tests
+    // FlexSubThemes Checkbox tests
     // -------------------------------------------------------------------------
     test(
-        'CheckBox FST7.1 light: GIVEN a light default '
+        'Checkbox FST7.1 light: GIVEN a light default M2 '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -481,6 +481,37 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
+            side: MaterialStateBorderSide.resolveWith(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                if (states.contains(MaterialState.selected)) {
+                  return const BorderSide(
+                      width: 2.0, color: Colors.transparent);
+                }
+                return BorderSide(
+                  width: 2.0,
+                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+                );
+              }
+              if (states.contains(MaterialState.selected)) {
+                return const BorderSide(width: 0.0, color: Colors.transparent);
+              }
+              // This is M2 SDK default.
+              return const BorderSide(width: 2.0, color: Colors.black54);
+            }),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  if (states.contains(MaterialState.selected)) {
+                    return Colors.grey.shade400;
+                  }
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.primary;
+                }
+                return Colors.transparent;
+              },
+            ),
             checkColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.disabled)) {
@@ -490,18 +521,6 @@ void main() {
                   return colorScheme.onPrimary;
                 }
                 return Colors.grey.shade50;
-              },
-            ),
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return colorScheme.primary;
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
             overlayColor: MaterialStateProperty.resolveWith<Color>(
@@ -535,12 +554,115 @@ void main() {
       );
     });
     test(
-        'CheckBox FST7.2 light-states: Does '
-        'CheckBox have right material states', () {
+        'Checkbox FST7.2 light-states: Does '
+        'Checkbox M2 have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
+      // Side states in M2.
+      //
+      // Side: Disabled and selected
+      expect(
+        (FlexSubThemes.checkboxTheme(colorScheme: colorScheme).side
+                as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{
+          MaterialState.disabled,
+          MaterialState.selected
+        }),
+        equals(const BorderSide(width: 2.0, color: Colors.transparent)),
+      );
+      // Side: Disabled, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        )),
+      );
+      // Side: disabled
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+        )),
+      );
+      // Side: selected
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(const BorderSide(width: 2.0, color: Colors.transparent)),
+      );
+      // Side: default stated, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: default stated, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{}),
+        equals(const BorderSide(width: 2.0, color: Colors.black54)),
+      );
+      //
+      // fillColor
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{
+          MaterialState.disabled,
+          MaterialState.selected
+        }),
+        equals(Colors.grey.shade400),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.transparent),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).fillColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      //
       // Check color
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
@@ -560,46 +682,12 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.onPrimary),
       );
-      // fillColor
-      expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(Colors.grey.shade400),
-      );
-      expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.primary),
-      );
-      expect(
-        FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useTintedDisable: true,
-        ).fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
-      );
-      expect(
-        FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          unselectedIsColored: true,
-        ).fillColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0xDD)),
-      );
-      // Default state for trackColor when unselectedIsColored, is false
-      expect(
-        FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          unselectedIsColored: false,
-        ).fillColor!.resolve(<MaterialState>{}),
-        equals(Colors.black54),
-      );
     });
+    //
+    //
     test(
-        'CheckBox FST7.3 light-M3-states: Does '
-        'CheckBox have right material states', () {
+        'Checkbox FST7.3 light-M3-states: Does '
+        'Checkbox have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
@@ -615,68 +703,160 @@ void main() {
         useTintedInteraction: true,
         unselectedIsColored: true,
       );
-      // Check colors
+      // Side states in M2.
+      //
+      // Side: Disabled and selected
       expect(
-        m.checkColor!.resolve(<MaterialState>{MaterialState.disabled}),
-        equals(Colors.transparent),
-      );
-      expect(
-        m.checkColor!.resolve(
+        (m.side as MaterialStateBorderSide?)!.resolve(
             <MaterialState>{MaterialState.disabled, MaterialState.selected}),
-        equals(colorScheme.surface),
+        equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
+      // Side: Disabled, tinted
       expect(
-        m.checkColor!.resolve(
-            <MaterialState>{MaterialState.selected, MaterialState.error}),
-        equals(colorScheme.onError),
+        (m2.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        )),
       );
+      // Side: disabled
       expect(
-        m.checkColor!.resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.onPrimary),
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+        )),
       );
+      // Side: selected
       expect(
-        m.checkColor!.resolve(<MaterialState>{}),
-        equals(Colors.transparent),
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(const BorderSide(width: 0.0, color: Colors.transparent)),
       );
+      // Side: error
+      expect(
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.error}),
+        equals(BorderSide(width: 2.0, color: colorScheme.error)),
+      );
+      // Side: pressed, tinted
+      expect(
+        (m2.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: pressed
+      expect(
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.pressed}),
+        equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
+      );
+      // Side: hovered, tinted
+      expect(
+        (m2.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: hovered
+      expect(
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.hovered}),
+        equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
+      );
+      // Side: focused, tinted
+      expect(
+        (m2.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: focused
+      expect(
+        (m.side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.focused}),
+        equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
+      );
+      // Side: default, tinted
+      expect(
+        (m2.side as MaterialStateBorderSide?)!.resolve(<MaterialState>{}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: default
+      expect(
+        (m.side as MaterialStateBorderSide?)!.resolve(<MaterialState>{}),
+        equals(BorderSide(width: 2.0, color: colorScheme.onSurfaceVariant)),
+      );
+      //
       // Fill color
+      //
+      // FillColor - disabled, selected
       expect(
-        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
+      // FillColor - disabled
       expect(
-        m.fillColor!.resolve(<MaterialState>{MaterialState.error}),
+        m.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.transparent),
+      );
+      // FillColor - selected, error
+      expect(
+        m.fillColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.error}),
         equals(colorScheme.error),
       );
+      // FillColor - selected
       expect(
         m.fillColor!.resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
       expect(
-        m.fillColor!.resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.onSurface),
+        m.fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
       );
+      // Tinted fillColor
       expect(
-        m.fillColor!.resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.onSurface),
-      );
-      expect(
-        m.fillColor!.resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.onSurface),
-      );
-      expect(
-        m2.fillColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        m2.fillColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.primary)),
       );
+      // Check colors
+      //
+      // checkColor - disabled
       expect(
-        m2.fillColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0xDD)),
+        m.checkColor!.resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.transparent),
       );
+      // checkColor - disabled, selected
       expect(
-        m.fillColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.onSurfaceVariant),
+        m.checkColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(colorScheme.surface),
       );
-      // OverlayColor
+      // checkColor - selected, error
+      expect(
+        m.checkColor!.resolve(
+            <MaterialState>{MaterialState.selected, MaterialState.error}),
+        equals(colorScheme.onError),
+      );
+      // checkColor - selected
+      expect(
+        m.checkColor!.resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      // checkColor - default
+      expect(
+        m.checkColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
+      );
+      // OverlayColors
+      //
       expect(
         m.overlayColor!.resolve(
             <MaterialState>{MaterialState.error, MaterialState.pressed}),
@@ -763,7 +943,7 @@ void main() {
     });
 
     test(
-        'CheckBox FST7.4 dark: GIVEN a dark default '
+        'CheckBox FST7.4 dark: GIVEN an M2 dark default '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -776,6 +956,37 @@ void main() {
             .toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
+            side: MaterialStateBorderSide.resolveWith(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                if (states.contains(MaterialState.selected)) {
+                  return const BorderSide(
+                      width: 2.0, color: Colors.transparent);
+                }
+                return BorderSide(
+                  width: 2.0,
+                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+                );
+              }
+              if (states.contains(MaterialState.selected)) {
+                return const BorderSide(width: 0.0, color: Colors.transparent);
+              }
+              // This is M2 SDK default.
+              return const BorderSide(width: 2.0, color: Colors.white70);
+            }),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  if (states.contains(MaterialState.selected)) {
+                    return Colors.grey.shade800;
+                  }
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.primary;
+                }
+                return Colors.transparent;
+              },
+            ),
             checkColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.disabled)) {
@@ -785,18 +996,6 @@ void main() {
                   return colorScheme.onPrimary;
                 }
                 return Colors.grey.shade400;
-              },
-            ),
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.grey.shade800;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return colorScheme.primary;
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.primary.withAlpha(0xDD);
               },
             ),
             overlayColor: MaterialStateProperty.resolveWith<Color>(
@@ -830,31 +1029,91 @@ void main() {
       );
     });
     test(
-        'CheckBox FST7.5 dark-states: Does CheckBox have '
+        'CheckBox FST7.5 dark-states: Does CheckBox M2 have '
         'right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
       );
-      // Disabled colors
+      // Side states in M2.
+      //
+      // Side: Disabled and selected
       expect(
-        FlexSubThemes.checkboxTheme(
+        (FlexSubThemes.checkboxTheme(colorScheme: colorScheme).side
+                as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{
+          MaterialState.disabled,
+          MaterialState.selected
+        }),
+        equals(const BorderSide(width: 2.0, color: Colors.transparent)),
+      );
+      // Side: Disabled, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
-        ).checkColor!.resolve(<MaterialState>{MaterialState.disabled}),
-        equals(Colors.grey.shade900),
+          useTintedDisable: true,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        )),
+      );
+      // Side: disabled
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(BorderSide(
+          width: 2.0,
+          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+        )),
+      );
+      // Side: selected
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(const BorderSide(width: 2.0, color: Colors.transparent)),
+      );
+      // Side: default stated, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{}),
+        equals(BorderSide(width: 2.0, color: colorScheme.primary)),
+      );
+      // Side: default stated, tinted
+      expect(
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+        ).side as MaterialStateBorderSide?)!
+            .resolve(<MaterialState>{}),
+        equals(const BorderSide(width: 2.0, color: Colors.white70)),
+      );
+      //
+      // fillColor
+      expect(
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .fillColor!
+            .resolve(<MaterialState>{
+          MaterialState.disabled,
+          MaterialState.selected
+        }),
+        equals(Colors.grey.shade800),
       );
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .fillColor!
             .resolve(<MaterialState>{MaterialState.disabled}),
-        equals(Colors.grey.shade800),
-      );
-      // Selected background
-      expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<MaterialState>{MaterialState.selected}),
-        equals(colorScheme.onPrimary),
+        equals(Colors.transparent),
       );
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
@@ -862,45 +1121,30 @@ void main() {
             .resolve(<MaterialState>{MaterialState.selected}),
         equals(colorScheme.primary),
       );
-      // Unselected is colored
-      // trackColor color
       expect(
-        FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<MaterialState>{MaterialState.pressed}),
-        equals(colorScheme.primary.withAlpha(0x44)),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+        ).fillColor!.resolve(
+            <MaterialState>{MaterialState.disabled, MaterialState.selected}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
       );
       expect(
-        FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<MaterialState>{MaterialState.hovered}),
-        equals(colorScheme.primary.withAlpha(0x44)),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).fillColor!.resolve(<MaterialState>{}),
+        equals(Colors.transparent),
       );
+      //
+      // Check color
       expect(
-        FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<MaterialState>{MaterialState.focused}),
-        equals(colorScheme.primary.withAlpha(0x44)),
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.disabled}),
+        equals(Colors.grey.shade900),
       );
-      expect(
-        FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0x44)),
-      );
-      // Default states
       expect(
         FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
             .checkColor!
@@ -908,19 +1152,10 @@ void main() {
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          unselectedIsColored: true,
-        ).fillColor!.resolve(<MaterialState>{}),
-        equals(colorScheme.primary.withAlpha(0xDD)),
-      );
-      // Default state for trackColor when unselectedIsColored, is false
-      expect(
-        FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          // unselectedIsColored: false, Is false by default.
-        ).fillColor!.resolve(<MaterialState>{}),
-        equals(Colors.white70),
+        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+            .checkColor!
+            .resolve(<MaterialState>{MaterialState.selected}),
+        equals(colorScheme.onPrimary),
       );
     });
     test(
@@ -941,6 +1176,35 @@ void main() {
         equalsIgnoringHashCodes(
           CheckboxThemeData(
             splashRadius: 30,
+            side: MaterialStateBorderSide.resolveWith(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                if (states.contains(MaterialState.selected)) {
+                  return const BorderSide(
+                      width: 2.0, color: Colors.transparent);
+                }
+                return BorderSide(
+                  width: 2.0,
+                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+                );
+              }
+              if (states.contains(MaterialState.selected)) {
+                return const BorderSide(width: 0.0, color: Colors.transparent);
+              }
+              // This is M2 SDK default.
+              return const BorderSide(width: 2.0, color: Colors.black54);
+            }),
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.grey.shade400;
+                }
+                if (states.contains(MaterialState.selected)) {
+                  return colorScheme.tertiary;
+                }
+                return Colors.transparent;
+              },
+            ),
             checkColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {
                 if (states.contains(MaterialState.disabled)) {
@@ -950,17 +1214,6 @@ void main() {
                   return colorScheme.onTertiary;
                 }
                 return Colors.grey.shade50;
-              },
-            ),
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(MaterialState.selected)) {
-                  return colorScheme.tertiary;
-                }
-                return Colors.black54;
               },
             ),
             overlayColor: MaterialStateProperty.resolveWith<Color>(
