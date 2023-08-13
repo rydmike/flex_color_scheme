@@ -1360,7 +1360,7 @@ class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? false;
-    final bool unselectedColored = unselectedIsColored ?? false;
+    final bool isBaseColor = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
@@ -1377,6 +1377,107 @@ class FlexSubThemes {
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
+      side: MaterialStateBorderSide.resolveWith((Set<MaterialState> states) {
+        if (useM3) {
+          if (states.contains(MaterialState.disabled)) {
+            if (states.contains(MaterialState.selected)) {
+              return const BorderSide(width: 2.0, color: Colors.transparent);
+            }
+            if (tintDisable) {
+              return BorderSide(
+                  width: 2.0,
+                  color: tintedDisable(colorScheme.onSurface, baseColor));
+            }
+            return BorderSide(
+                width: 2.0,
+                color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
+          }
+
+          if (states.contains(MaterialState.selected)) {
+            return const BorderSide(width: 0.0, color: Colors.transparent);
+          }
+          if (states.contains(MaterialState.error)) {
+            return BorderSide(width: 2.0, color: colorScheme.error);
+          }
+          if (states.contains(MaterialState.pressed)) {
+            if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
+            return BorderSide(width: 2.0, color: colorScheme.onSurface);
+          }
+          if (states.contains(MaterialState.hovered)) {
+            if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
+            return BorderSide(width: 2.0, color: colorScheme.onSurface);
+          }
+          if (states.contains(MaterialState.focused)) {
+            if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
+            return BorderSide(width: 2.0, color: colorScheme.onSurface);
+          }
+          if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
+          return BorderSide(width: 2.0, color: colorScheme.onSurfaceVariant);
+        }
+        // M2 version
+        else {
+          if (states.contains(MaterialState.disabled)) {
+            if (states.contains(MaterialState.selected)) {
+              return const BorderSide(width: 2.0, color: Colors.transparent);
+            }
+            if (tintDisable) {
+              return BorderSide(
+                width: 2.0,
+                color: tintedDisable(colorScheme.onSurface, baseColor),
+              );
+            }
+            return BorderSide(
+              width: 2.0,
+              color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+            );
+          }
+          if (states.contains(MaterialState.selected)) {
+            return const BorderSide(width: 2.0, color: Colors.transparent);
+          }
+          if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
+          // This is M2 SDK default.
+          return BorderSide(
+              width: 2.0, color: isLight ? Colors.black54 : Colors.white70);
+        }
+      }),
+      fillColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (useM3) {
+            if (states.contains(MaterialState.disabled)) {
+              if (states.contains(MaterialState.selected)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, baseColor);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+              }
+              return Colors.transparent;
+            }
+            if (states.contains(MaterialState.selected)) {
+              if (states.contains(MaterialState.error)) {
+                return colorScheme.error;
+              }
+              return baseColor;
+            }
+            return Colors.transparent;
+          }
+          // M2 version
+          else {
+            if (states.contains(MaterialState.disabled)) {
+              if (states.contains(MaterialState.selected)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, baseColor);
+                }
+                return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
+              }
+              return Colors.transparent;
+            }
+            if (states.contains(MaterialState.selected)) {
+              return baseColor;
+            }
+            return Colors.transparent;
+          }
+        },
+      ),
       checkColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (useM3) {
@@ -1393,7 +1494,9 @@ class FlexSubThemes {
               return onBaseColor;
             }
             return Colors.transparent;
-          } else {
+          }
+          // M2 version
+          else {
             if (states.contains(MaterialState.disabled)) {
               return isLight ? Colors.grey.shade200 : Colors.grey.shade900;
             }
@@ -1401,56 +1504,6 @@ class FlexSubThemes {
               return onBaseColor;
             }
             return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
-          }
-        },
-      ),
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (useM3) {
-            if (states.contains(MaterialState.disabled)) {
-              if (tintDisable) {
-                return tintedDisable(colorScheme.onSurface, baseColor);
-              }
-              return colorScheme.onSurface.withAlpha(kAlphaDisabled);
-            }
-            if (states.contains(MaterialState.error)) {
-              return colorScheme.error;
-            }
-            if (states.contains(MaterialState.selected)) {
-              return baseColor;
-            }
-            if (states.contains(MaterialState.pressed)) {
-              if (unselectedColored) return baseColor;
-              return colorScheme.onSurface;
-            }
-            if (states.contains(MaterialState.hovered)) {
-              if (unselectedColored) return baseColor;
-              return colorScheme.onSurface;
-            }
-            if (states.contains(MaterialState.focused)) {
-              if (unselectedColored) return baseColor;
-              return colorScheme.onSurface;
-            }
-            if (unselectedColored) {
-              return baseColor.withAlpha(kAlphaUnselect);
-            }
-            return colorScheme.onSurfaceVariant;
-          } else {
-            if (states.contains(MaterialState.disabled)) {
-              if (tintDisable) {
-                return tintedDisable(colorScheme.onSurface, baseColor);
-              }
-              return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
-            }
-            if (states.contains(MaterialState.selected)) {
-              return baseColor;
-            }
-            // Opinionated color on unselected checkbox.
-            if (unselectedColored) {
-              return baseColor.withAlpha(kAlphaUnselect);
-            }
-            // This is M2 SDK default.
-            return isLight ? Colors.black54 : Colors.white70;
           }
         },
       ),
