@@ -49,7 +49,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * The **PopupMenu and Dropdowns** panel got a setting for older Material-2 based `DropdownButtonFormField` and `DropdownButton` to set the new alignment property, which is an ancient theming property in the old `ButtonThemeData` that was used by deprecated and removed Material Buttons, but the theme is still used by these buttons. 
 
-* On the TextField panel, feature to set the input decoration style bac to FCS own defaults.
+* On the TextField panel, added a feature to set the input decoration style back to FlexColorScheme's own defaults.
 
 **CHANGE**
 
@@ -57,7 +57,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 * Removed old switch in custom colors in dark mode, that was used to enable using input scheme color as own seed colors in dark mode when using custom colors. For simplicity, the custom dark mode colors have been used directly as seed colors in a few releases in the Playground already. The control was an old left-over with no function anymore.
 
-* The global themed input decorator usage is now on by default for `TimePickerdialog` and `DatePickerdialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`.
+* The global themed input decorator usage is now on by default for `TimePickerdialog` and `DatePickerdialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`. Despite the new feature in Flutter SDK, it cannot be removed from the `DatePickerDialog`. This is discussed in [PR #128950 comment](https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393). Additional info is also available in Flutter [issue #131666](https://github.com/flutter/flutter/issues/131666).
 
 **FIX**
 
