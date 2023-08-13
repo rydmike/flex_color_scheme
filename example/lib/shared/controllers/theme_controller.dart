@@ -4695,7 +4695,7 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySnackBarActionSchemeColor, value));
   }
 
-  // PopupMenu, Dropown and Card SETTINGS.
+  // PopupMenu, Dropdown and Card SETTINGS.
   // ===========================================================================
 
   late SchemeColor? _popupMenuSchemeColor;

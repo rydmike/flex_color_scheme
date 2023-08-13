@@ -319,7 +319,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.controls,
-    heading: 'Switch, CheckBox and Radio',
+    heading: 'Switch, Checkbox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
     info: 'Switches toggle the state of a single item on or off.\n'
