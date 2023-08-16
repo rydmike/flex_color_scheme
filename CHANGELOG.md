@@ -15,7 +15,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 **NEW**
 
 * To `FlexSubThemes` in `buttonTheme` **added** bool `alignedDropdown`.
-* To `FlexSubThemesData` **added** bool `alignedDropdown`. Setting it to true improves the style of the `DropdownButton` and the `DropdownButtonForField`. They no longer expand outside the width of the parent dropdown button but are kept size aligned with it.
+* To `FlexSubThemesData` **added** bool `alignedDropdown`. Setting it to true improves the style of the `DropdownButton` and the `DropdownButtonFormField`. They no longer expand outside the width of the parent dropdown button but are kept size aligned with it.
   
  
 * To `FlexSubThemes` in:
