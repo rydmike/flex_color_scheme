@@ -24,7 +24,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
   - `floatingActionButtonTheme` **added** TextStyle `extendedTextStyle`
   - `menuButtonTheme` **added** TextStyle `textStyle`
   - `snackBarTheme` **added** TextStyle `contentTextStyle`
-  - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle` and `hourMinuteTextStyle`
+  - `timePickerTheme` **added** TextStyle `dayPeriodTextStyle`, `dialTextStyle`, `helpTextStyle`, and `hourMinuteTextStyle`
   - `toggleButtonsTheme` **added** TextStyle `textStyle`
 
 * The `TextStyle` additions above, to mentioned `FlexSubThemes`, do not yet bring any new features usable via `FlexColorScheme` theming APIs. They are a preparation for adding more component `TextStyles` to `FlexSubThemesData`. This in turn, will enable more direct `TextStyle` theming via `FlexColorScheme` API without using `copyWith` to override produced `ThemeData`. 
@@ -58,13 +58,11 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 * Removed old switch in custom colors in dark mode, that was used to enable using input scheme color as own seed colors in dark mode when using custom colors. For simplicity, the custom dark mode colors have been used directly as seed colors in a few releases in the Playground already. The control was an old left-over with no function anymore.
 
-* The global themed input decorator usage is now on by default for `TimePickerdialog` and `DatePickerdialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`. Despite the new feature in Flutter SDK, it cannot be removed from the `DatePickerDialog`. This is discussed in [PR #128950 comment](https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393). Additional info is also available in Flutter [issue #131666](https://github.com/flutter/flutter/issues/131666).
+* The global themed input decorator usage is now on by default for `TimePickerDialog` and `DatePickerDialog`. This is the only style currently supported for `DatePickerDialog` in Flutter, so it makes sense to keep it on by default. Turning it OFF for now only removes the custom, input decorator style from the `TimePickerDialog`. Despite the new feature in Flutter SDK, it cannot be removed from the `DatePickerDialog`. This is discussed in [PR #128950 comment](https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393). Additional info is also available in Flutter [issue #131666](https://github.com/flutter/flutter/issues/131666).
 
 **FIX**
 
 * Fixed the old default color info for the toggles Switch, Checkbox and Radio, that are shown when FlexColorScheme is disabled as default values in Material 2 dark mode. They have been updated in Flutter SDK to `ColorScheme.secondary` color and are no longer not the horrid dark mode teal color. This default color info, shown when FlexColorScheme is disabled in the **Themes Playground**, had not been updated for the dark M2 mode Switch, Checkbox and Radio colors. 
-
-
 
 
 ## 7.2.0
