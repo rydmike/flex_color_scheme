@@ -27,7 +27,7 @@ class _DemoAppState extends State<DemoApp> {
   // Used to select if we use the dark or light theme, start with system mode.
   ThemeMode themeMode = ThemeMode.system;
   // Opt in/out on Material 3
-  bool useMaterial3 = false;
+  bool useMaterial3 = true;
 
   @override
   Widget build(BuildContext context) {

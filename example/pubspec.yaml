@@ -4,7 +4,7 @@ version: 7.3.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  flutter: '>=3.13.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -68,7 +68,7 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.0.15
+  path_provider: ^2.1.0
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
