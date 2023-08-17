@@ -2,6 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -11,8 +13,19 @@ class SwitchesSettings extends StatelessWidget {
   const SwitchesSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue130295 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/130295',
+  );
+
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
     final String labelForDefaultColor =
         (controller.useSubThemes || controller.useMaterial3) &&
                 controller.useFlexColorScheme
@@ -111,6 +124,37 @@ class SwitchesSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Prior to version 3.13 Flutter Checkbox theming '
+                      'worked slightly differently concerning how to color '
+                      'the outline and filled state. If you had themed them '
+                      'before, the Flutter release 3.13 breaks the result. '
+                      'The theme needs to be changed to get same result as '
+                      'before. This is an undocumented Flutter breaking '
+                      'change. See ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue130295,
+                  text: 'issue #130295',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' for more information. FlexColorScheme 7.3 includes '
+                      'the needed changes to address this breaking change '
+                      'in Flutter 3.13.\n',
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(),
         const Padding(

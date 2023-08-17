@@ -242,14 +242,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                     style: spanTextStyle,
-                    text: '. The Themes Playground '
-                        'uses a Theme wrapper to remove it above, but it is '
-                        'still visible in the search results view. In the '
-                        'simulator using the '
-                        'Flutter official M3 demo, you can see the issue on '
-                        'both SearchBar and the SearchView. This issue has '
-                        'been fixed in master channel, but is not yet '
-                        'available in Flutter stable 3.10.\n '),
+                    text: '. This issue has been fixed in Flutter 3.13.\n '),
               ],
             ),
           ),

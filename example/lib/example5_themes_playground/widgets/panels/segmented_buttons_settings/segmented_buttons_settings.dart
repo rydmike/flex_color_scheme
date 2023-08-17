@@ -456,32 +456,13 @@ class SegmentedButtonsSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7 the SegmentedButton has a number of '
-                      'small issues. Background is not transparent ',
+                  text: 'In Flutter 3.7 the SegmentedButton has a few '
+                      'small issues, like background is not transparent ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _segmentNotTransparentIssue123292,
-                  text: '(#123292)',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ', this is fixed in 3.10. Min height or size '
-                      'cannot be set, ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _segmentWrongHeightIssue121493,
-                  text: '(#121493)',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ', selectedOverlay state does not work ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _segmentWrongOverlayIssue123308,
-                  text: '(#123308)',
+                  text: '(issue #123292)',
                 ),
                 TextSpan(
                   style: spanTextStyle,
@@ -491,11 +472,31 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _segmentNotM3SpecIssue119733,
-                  text: '(#119733)',
+                  text: '(issue #119733)',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', this is fixed in 3.10.\n',
+                  text: ', these issues are fixed in Flutter 3.10.\n'
+                      'Additionally min height or size '
+                      'cannot be set ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentWrongHeightIssue121493,
+                  text: '(issue #121493)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' and selectedOverlay state does not work ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _segmentWrongOverlayIssue123308,
+                  text: '(issue #123308)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ', these have no fixes yet.',
                 ),
               ],
             ),

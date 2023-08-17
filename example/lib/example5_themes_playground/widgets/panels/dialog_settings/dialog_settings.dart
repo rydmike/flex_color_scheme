@@ -35,6 +35,18 @@ class DialogSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/126617',
   );
 
+  static final Uri _fcsFlutterPull128950 = Uri(
+      scheme: 'https',
+      host: 'github.com',
+      path: 'flutter/flutter/pull/128950',
+      fragment: 'issuecomment-1657177393');
+
+  static final Uri _fcsFlutterIssue131666 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/131666',
+  );
+
   // The logic for the dialog radius label got to complex for inline ternary,
   // breaking it out to a function.
   static String _dialogRadiusLabel(ThemeController controller) {
@@ -525,7 +537,7 @@ class DialogSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.10 the ClockDial background uses '
+                  text: 'In Flutter 3.13 the clock dial background uses '
                       'wrong default background color in M3 mode. To see the '
                       'issue turn off FCS in M3 mode. For more info see ',
                 ),
@@ -557,13 +569,11 @@ class DialogSettings extends StatelessWidget {
             'Turn OFF to use default M3 inspired styles on text input fields '
             'in TimePicker and DatePicker dialogs.\n'
             '\n'
-            'NOTE: This feature is not yet supported by DatePicker, when it '
-            'is supported this setting will apply to it as well. DatePicker '
-            'currently only supports using the global TextField themed '
-            'input decorator, like this setting would ON all the time.\n'
+            'NOTE: This feature has supported by DatePicker in Flutter 3.13. '
+            'However, the support is flawed, see known issues.\n'
             '\n'
-            'Defaults to ON in the ThemesPlayground, but to null, resulting in '
-            'OFF in the FlexColorScheme API.\n',
+            'Defaults to ON in the ThemesPlayground. In the FlexColorScheme '
+            'API it is undefined and thus OFF.\n',
           ),
           value: controller.useInputDecoratorThemeInDialogs &&
               controller.useSubThemes &&
@@ -662,7 +672,7 @@ class DialogSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'In Flutter 3.10 in M3 mode, the Divider is hard '
-                      'coded and cannot be removed, it looks bad when you use '
+                      'coded and cannot be removed, it looks poor when you use '
                       'any other header color than the default surface color. '
                       'For more info see ',
                 ),
@@ -673,10 +683,12 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Both Divider spacing and color styling has been '
-                      'fixed in master channel. The DatePicker manual date '
-                      'entry input field picks '
-                      'up the ambient InputDecorationTheme and it cannot be '
+                  text: '. Both Divider spacing and color styling have been '
+                      'fixed in Flutter 3.13.\n'
+                      '\n'
+                      'The DatePicker manual date '
+                      'entry input field picks up the ambient '
+                      'InputDecorationTheme and it cannot be '
                       'styled independently, see ',
                 ),
                 LinkTextSpan(
@@ -686,7 +698,27 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This issue has a fix in master channel.\n',
+                  text: '. This issue has a feature in Flutter 3.13 to enable '
+                      'using another decorator, but the solution is partially '
+                      'flawed, see\n',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterPull128950,
+                  text: 'PR comment #128950',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This topic is further discussed in ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue131666,
+                  text: 'issue #126617',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
                 ),
               ],
             ),

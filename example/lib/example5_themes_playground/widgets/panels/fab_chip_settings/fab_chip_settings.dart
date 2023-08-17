@@ -318,10 +318,11 @@ class FabChipSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Current Flutter SDK Chip theming has many limitations '
-                      'and M3 styling gaps. You cannot make themed '
-                      'Chips where Selected chips require different text '
-                      'contrast than the normal Chips, there is no way to '
+                  text: 'Prior to version 3.13 Flutter Chip theming had severe '
+                      'theming limitations and M3 styling gaps. You could not '
+                      'make themed Chips where Selected chips required a '
+                      'different text '
+                      'contrast than the normal Chips. It was not possible to '
                       'define different Chip text styles for such a setup. See '
                       'Flutter SDK ',
                 ),
@@ -333,10 +334,14 @@ class FabChipSettings extends StatelessWidget {
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Until it is fixed, stick to theme colors that needs '
-                      'and work with the default Chip text contrast. '
-                      'The Chip has many other known issues, for a list and '
-                      'status of check the umbrella ',
+                  text: '.\n'
+                      'Fixes have been made in Flutter 3.13 to '
+                      'support this, but it is still unverified and not yet '
+                      'available in current FCS version. Until it is verified '
+                      'and supported, prefer theme colors that work with the '
+                      'default Chip text contrast color. '
+                      'The Chip has a few other known issues, for a list and '
+                      'their status of check the umbrella ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -345,7 +350,7 @@ class FabChipSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. Most of them are solved in Flutter 3.13.\n',
                 ),
               ],
             ),

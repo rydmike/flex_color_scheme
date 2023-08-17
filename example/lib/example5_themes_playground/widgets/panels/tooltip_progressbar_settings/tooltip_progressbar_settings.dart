@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -11,9 +12,18 @@ class TooltipProgressBarSettings extends StatelessWidget {
   const TooltipProgressBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _fcsFlutterIssue131690 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/131690',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     final bool isLight = theme.brightness == Brightness.light;
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
@@ -279,13 +289,37 @@ class TooltipProgressBarSettings extends StatelessWidget {
           subtitleDense: true,
           title: Text('ProgressIndicator'),
           subtitle: Text('Progress indicators in FCS currently only offer the '
-              'default theme and no customization. There is a nice new '
-              'feature enable circular end-caps, however that feature cannot '
-              'set via a theme at all.\n'),
+              'default theme and no customization.\n'),
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
           child: ProgressIndicatorShowcase(),
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues and limitations'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'There is a nice new feature to enable circular '
+                      'end-caps in Flutter 3.10. However, that feature cannot '
+                      'set via a theme at all yet. To support bringing the '
+                      'feature Flutter, go upvote this  ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue131690,
+                  text: 'issue #131690',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

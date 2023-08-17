@@ -608,8 +608,7 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There is a fix in master, but it is not available '
-                      'in Flutter 3.7 or 3.10.\n',
+                  text: ', this is fixed in Flutter 3.13.\n',
                 ),
               ],
             ),

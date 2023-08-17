@@ -169,9 +169,15 @@ class SliderSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
+        const ListTile(title: Text('Slider')),
+        //
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SliderShowcase(),
+        ),
         ListTileReveal(
-          title: const Text('Slider'),
-          subtitleDense: true,
+          dense: true,
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -194,15 +200,15 @@ class SliderSettings extends StatelessWidget {
             ),
           ),
         ),
-        //
+        const Divider(),
+        const ListTileReveal(title: Text('RangeSlider')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: SliderShowcase(),
+          child: RangeSliderShowcase(),
         ),
-        const Divider(),
         ListTileReveal(
-          title: const Text('RangeSlider'),
-          subtitleDense: true,
+          title: const Text('Known issues'),
+          dense: true,
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -233,10 +239,6 @@ class SliderSettings extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RangeSliderShowcase(),
         ),
       ],
     );
