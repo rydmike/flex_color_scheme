@@ -6,8 +6,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **August 17, 2023**
 
-- FIX: Themes Playground: Update in-app documentation of known Flutter issues, to reflect changes brought by Flutter 3.13.
-- FIX: Change-log typos by @TahaTesser.
+- FIX: Themes Playground: Update the in-app documentation of known Flutter issues to reflect changes brought by Flutter 3.13.
+- FIX: Changelog 7.3.0 typos and style corrections by @TahaTesser.
 
 ## 7.3.0
 
