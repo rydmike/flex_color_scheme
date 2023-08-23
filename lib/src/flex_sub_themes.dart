@@ -581,7 +581,7 @@ class FlexSubThemes {
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
       // TODO(rydmike): This is a workaround to make tint elevation animate.
-      // TODO(rydmike): Create issue for none animated AppBar elevation tint.
+      // See issue https://github.com/flutter/flutter/issues/131042.
       shape: const RoundedRectangleBorder(),
     );
   }
