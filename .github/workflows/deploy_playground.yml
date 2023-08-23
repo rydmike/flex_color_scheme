@@ -21,7 +21,7 @@
 name: Deploy_Playground
 on:
   push:
-    branches: [none]
+    branches: [master]
     paths-ignore:
      - "**.md"
 jobs:
