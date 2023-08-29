@@ -42,6 +42,9 @@ build/
 # Symbolication related
 app.*.symbols
 
+# Don't want to commit the custom lint log file
+custom_lint.log
+
 # Obfuscation related
 app.*.map.json
 
