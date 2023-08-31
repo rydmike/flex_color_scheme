@@ -7267,7 +7267,7 @@ class FlexSubThemes {
       disabledColor: tintDisable
           ? tintedDisable(colorScheme.onSurface, tint)
               .withAlpha(kAlphaLowDisabled)
-          : colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+          : colorScheme.onSurface.withAlpha(kAlphaDisabled),
       disabledBorderColor: tintDisable
           ? tintedDisable(colorScheme.onSurface, borderColor)
               .withAlpha(kAlphaLowDisabled)
