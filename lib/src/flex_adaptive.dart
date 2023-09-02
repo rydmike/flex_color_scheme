@@ -176,7 +176,7 @@ class FlexAdaptive with Diagnosticable {
   /// Use the adaptive feature on Apple operating system iOS and macOS, but
   /// not when using the app on web browsers builds on iOS and macOS.
   ///
-  /// The rationale fot this config, you want the adaptive feature on
+  /// The rationale for this config, you want the adaptive feature on
   /// Apple devices, but not when it is used in a a browser, in the browser
   /// you want the feature in its default setup.
   const FlexAdaptive.apple({
@@ -198,7 +198,7 @@ class FlexAdaptive with Diagnosticable {
   /// Use the adaptive feature on Apple operating system iOS and macOS, and
   /// when using the app on web browsers builds on iOS and macOS.
   ///
-  /// The rationale fot this config, you want the adaptive feature on
+  /// The rationale for this config, you want the adaptive feature on
   /// Apple devices, and also when the app is used on web on Apple devices.
   /// This is useful for an identical platform adaptive design of the
   /// progressive web app on apple devices. Other devices and their web
