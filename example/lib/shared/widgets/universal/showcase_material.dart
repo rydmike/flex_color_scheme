@@ -4851,21 +4851,21 @@ class TextThemeColumnShowcase extends StatelessWidget {
           'Display Large '
           '(${textTheme.displayLarge!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.displayLarge!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Display Medium '
           '(${textTheme.displayMedium!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.displayMedium!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Display Small '
           '(${textTheme.displaySmall!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.displaySmall!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         const SizedBox(height: 12),
@@ -4873,21 +4873,21 @@ class TextThemeColumnShowcase extends StatelessWidget {
           'Headline Large '
           '(${textTheme.headlineLarge!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.headlineLarge!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Headline Medium '
           '(${textTheme.headlineMedium!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.headlineMedium!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Headline Small '
           '(${textTheme.headlineSmall!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.headlineSmall!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         const SizedBox(height: 12),
@@ -4895,21 +4895,21 @@ class TextThemeColumnShowcase extends StatelessWidget {
           'Title Large '
           '(${textTheme.titleLarge!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.titleLarge!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Title Medium '
           '(${textTheme.titleMedium!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.titleMedium!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Title Small '
           '(${textTheme.titleSmall!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.titleSmall!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         const SizedBox(height: 12),
@@ -4917,21 +4917,21 @@ class TextThemeColumnShowcase extends StatelessWidget {
           'Body Large '
           '(${textTheme.bodyLarge!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.bodyLarge!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Body Medium '
           '(${textTheme.bodyMedium!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.bodyMedium!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Body Small '
           '(${textTheme.bodySmall!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.bodySmall!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         const SizedBox(height: 12),
@@ -4939,21 +4939,21 @@ class TextThemeColumnShowcase extends StatelessWidget {
           'Label Large '
           '(${textTheme.labelLarge!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.labelLarge!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Label Medium '
           '(${textTheme.labelMedium!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.labelMedium!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
         _ShowTextStyle(
           'Label Small '
           '(${textTheme.labelSmall!.fontSize!.toStringAsFixed(0)})',
           style: textTheme.labelSmall!,
-          infoStyle: textTheme.labelSmall!,
+          detailsStyle: textTheme.labelSmall!,
           showDetails: showDetails,
         ),
       ],
@@ -4965,13 +4965,13 @@ class _ShowTextStyle extends StatelessWidget {
   const _ShowTextStyle(
     this.label, {
     required this.style,
-    required this.infoStyle,
+    required this.detailsStyle,
     this.showDetails = false,
   });
 
   final String label;
   final TextStyle style;
-  final TextStyle infoStyle;
+  final TextStyle detailsStyle;
   final bool showDetails;
 
   @override
@@ -4994,9 +4994,10 @@ class _ShowTextStyle extends StatelessWidget {
         if (showDetails) ...<Widget>[
           const SizedBox(height: 4),
           Text(
-              '$font $size pt, $fontWeight $color '
-              'Letter spacing: $spacing$height',
-              style: infoStyle),
+            '$font $size pt, $fontWeight $color '
+            'Letter spacing: $spacing$height',
+            style: detailsStyle,
+          ),
           const SizedBox(height: 4),
         ],
       ],
