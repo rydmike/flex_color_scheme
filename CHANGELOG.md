@@ -6,6 +6,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **September 14, 2023**
 
+- Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
+
 **PACKAGE TODO**
 
 - Add TabBar theme property `tabAlignment`.
