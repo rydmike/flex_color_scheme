@@ -6,14 +6,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **September 14, 2023**
 
-**PACKAGE**
-
-**TODO**
+**PACKAGE TODO**
 
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles
-
-
 - Maybe: 
   - Platform adaptive ShapeBorder configuration (big maybe).
   - Customizable `errorColor` in Playground.
