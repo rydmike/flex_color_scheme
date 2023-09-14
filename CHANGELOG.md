@@ -4,17 +4,32 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**August 19, 2023**
+**September 14, 2023**
+
+**PACKAGE**
 
 **TODO**
 
-- Add TabBar theme property `tabAlignment`. 
+- Add TabBar theme property `tabAlignment`.
+- Add TextStyles
+
+
 - Maybe: 
   - Platform adaptive ShapeBorder configuration (big maybe).
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
   - Updates and features for `Chip` theming.
   - Add fidelity for iOS adaptive AppBar.
+  - InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState.
+  - InputDecorator: Platform adaptive radius.
+  - AppBar: Decoupled foreground/background color.
+  - FAB: Decoupled foreground/background color.
+  - Switch: Optional iOS style, also as platform adaptive style.
+  - DatePicker: Option to style and remove divider.
+
+**THEMES PLAYGROUND**
+
+ 
 
 ## 7.3.1
 
