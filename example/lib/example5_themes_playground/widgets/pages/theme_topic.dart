@@ -110,7 +110,15 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Use the theme simulator in a side view '
         'as you change theme setting and see how the changes '
         'modify the look and feel of included demo apps on different '
-        'simulated devices.\n',
+        'simulated devices.\n'
+        '\n'
+        'The theme simulator is only an approximation of what the embedded '
+        'sample applications would look like on selected device with the '
+        'currently defined active theme. It does not include device features, '
+        'such status bar and system navigation bar. For an accurate '
+        'result, use the current '
+        'generated theme code with the FlexColorScheme package in your own '
+        'application on a real device.\n',
   ),
   ThemeTopic(
     group: TopicGroup.general,
