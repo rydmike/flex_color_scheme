@@ -27,7 +27,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **THEMES PLAYGROUND**
 
- 
+ - FIX: [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
 
 ## 7.3.1
 
