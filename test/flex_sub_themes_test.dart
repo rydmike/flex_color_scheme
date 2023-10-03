@@ -9267,7 +9267,7 @@ void main() {
             focusColor: colorScheme.primary.withAlpha(kAlphaFocused),
             highlightColor: colorScheme.primary.withAlpha(kAlphaHighlight),
             splashColor: colorScheme.primary.withAlpha(kAlphaSplash),
-            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+            disabledColor: colorScheme.onSurface.withAlpha(kAlphaDisabled),
             disabledBorderColor:
                 colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
             borderRadius: BorderRadius.circular(40),
@@ -9304,7 +9304,7 @@ void main() {
             focusColor: colorScheme.secondary.withAlpha(kAlphaFocused),
             highlightColor: colorScheme.secondary.withAlpha(kAlphaHighlight),
             splashColor: colorScheme.secondary.withAlpha(kAlphaSplash),
-            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+            disabledColor: colorScheme.onSurface.withAlpha(kAlphaDisabled),
             disabledBorderColor:
                 colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
             borderRadius: BorderRadius.circular(40),

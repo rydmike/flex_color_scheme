@@ -3061,7 +3061,13 @@ class FlexSubThemes {
     /// true and bordered per the [border].
     ///
     /// Defaults to true.
-    final bool filled = true,
+    final bool? filled,
+
+    /// Whether the input decorator's child is part of a dense form (i.e., uses
+    /// less vertical space).
+    ///
+    /// Defaults to false.
+    final bool? isDense,
 
     /// An optional totally custom fill color used to fill the
     /// `InputDecorator` background with, when `filled` is true.
@@ -3415,7 +3421,8 @@ class FlexSubThemes {
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
-      filled: filled,
+      isDense: isDense ?? false,
+      filled: filled ?? true,
       fillColor: usedFillColor,
       hoverColor: tintInteract ? tintedHover : null,
       focusedBorder: effectiveInputBorder.copyWith(

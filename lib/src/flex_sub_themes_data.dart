@@ -248,6 +248,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
+    this.inputDecoratorIsDense,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
     this.inputDecoratorBackgroundAlpha,
@@ -1492,6 +1493,12 @@ class FlexSubThemesData with Diagnosticable {
   /// The border [inputDecoratorBorderSchemeColor] can be used to define the
   /// border color separately, but it defaults to this color if not defined.
   final SchemeColor? inputDecoratorSchemeColor;
+
+  /// Whether the input decorator's child is part of a dense form (i.e., uses
+  /// less vertical space).
+  ///
+  /// Defaults to false.
+  final bool? inputDecoratorIsDense;
 
   /// Determines if the [InputDecorator] is filled with a color.
   ///
@@ -3203,6 +3210,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
+    final bool? inputDecoratorIsDense,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
     final int? inputDecoratorBackgroundAlpha,
@@ -3500,6 +3508,8 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
+      inputDecoratorIsDense:
+          inputDecoratorIsDense ?? this.inputDecoratorIsDense,
       inputDecoratorIsFilled:
           inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
       inputDecoratorFillColor:
@@ -3900,6 +3910,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
+        other.inputDecoratorIsDense == inputDecoratorIsDense &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBackgroundAlpha == inputDecoratorBackgroundAlpha &&
@@ -4212,6 +4223,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         inputDecoratorRadius,
         inputDecoratorSchemeColor,
+        inputDecoratorIsDense,
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
         inputDecoratorBackgroundAlpha,
@@ -4535,6 +4547,8 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorRadius', inputDecoratorRadius));
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorSchemeColor', inputDecoratorSchemeColor));
+    properties.add(DiagnosticsProperty<bool>(
+        'inputDecoratorIsDense', inputDecoratorIsDense));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsFilled', inputDecoratorIsFilled));
     properties
