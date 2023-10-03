@@ -8,8 +8,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
-**PACKAGE TODO**
+**PACKAGE**
+- Added `isDense` option to `FlexSubThemes.inputDecoratorTheme()`.
+- Added `inputDecoratorIsDense` to `FlexSubThemesData`.
 
+**PACKAGE TODO**
+- Add `inputDecoratorIsDense` option to `FlexSubThemesData`.
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles
 - Maybe: 
@@ -28,6 +32,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **THEMES PLAYGROUND**
 
  - FIX: [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
+
+**THEMES PLAYGROUND TODO**
+
+- Add UI and code gen for dense input decorator.
 
 ## 7.3.1
 
