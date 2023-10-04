@@ -4,16 +4,17 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**September 14, 2023**
+**October 4, 2023**
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
 **PACKAGE**
-- Added `isDense` option to `FlexSubThemes.inputDecoratorTheme()`.
-- Added `inputDecoratorIsDense` to `FlexSubThemesData`.
+- Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
+- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
+- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
+- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 
-**PACKAGE TODO**
-- Add `inputDecoratorIsDense` option to `FlexSubThemesData`.
+**TODO PACKAGE**
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles
 - Maybe: 
@@ -21,19 +22,20 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
   - Updates and features for `Chip` theming.
-  - Add fidelity for iOS adaptive AppBar.
+  - Add fidelity for iOS adaptive AppBar (maybe).
   - InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState.
   - InputDecorator: Platform adaptive radius.
   - AppBar: Decoupled foreground/background color.
   - FAB: Decoupled foreground/background color.
-  - Switch: Optional iOS style, also as platform adaptive style.
+  - Switch: Optional iOS-like style. 
+  - Switch: Platform adaptive iOS-like style.
   - DatePicker: Option to style and remove divider.
 
 **THEMES PLAYGROUND**
 
  - FIX: [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
 
-**THEMES PLAYGROUND TODO**
+**TODO THEMES PLAYGROUND**
 
 - Add UI and code gen for dense input decorator.
 
