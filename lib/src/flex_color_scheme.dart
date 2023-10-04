@@ -6380,6 +6380,7 @@ class FlexColorScheme with Diagnosticable {
             borderSchemeColor: subTheme.inputDecoratorBorderSchemeColor,
             radius: subTheme.inputDecoratorRadius ?? platformRadius,
             borderType: subTheme.inputDecoratorBorderType,
+            contentPadding: subTheme.inputDecoratorContentPadding,
             isDense: subTheme.inputDecoratorIsDense,
             filled: subTheme.inputDecoratorIsFilled,
             fillColor: subTheme.inputDecoratorFillColor,

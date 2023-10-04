@@ -248,6 +248,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.inputDecoratorRadius,
     this.inputDecoratorSchemeColor,
+    this.inputDecoratorContentPadding,
     this.inputDecoratorIsDense,
     this.inputDecoratorIsFilled = true,
     this.inputDecoratorFillColor,
@@ -1493,6 +1494,20 @@ class FlexSubThemesData with Diagnosticable {
   /// The border [inputDecoratorBorderSchemeColor] can be used to define the
   /// border color separately, but it defaults to this color if not defined.
   final SchemeColor? inputDecoratorSchemeColor;
+
+  /// The padding for the input decoration's container.
+  ///
+  /// The decoration's container is the area which is filled if
+  /// [InputDecoration.filled] is true and bordered per the [border].
+  /// It's the area adjacent to [InputDecoration.icon] and above the
+  /// [InputDecoration.icon] and above the widgets that contain
+  /// [InputDecoration.helperText], [InputDecoration.errorText], and
+  /// [InputDecoration.counterText].
+  ///
+  /// By default the [contentPadding] reflects [isDense] and the type of the
+  /// [border]. If [isCollapsed] is true then [contentPadding] is
+  /// [EdgeInsets.zero].
+  final EdgeInsetsGeometry? inputDecoratorContentPadding;
 
   /// Whether the input decorator's child is part of a dense form (i.e., uses
   /// less vertical space).
@@ -3210,6 +3225,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? inputDecoratorRadius,
     final SchemeColor? inputDecoratorSchemeColor,
+    final EdgeInsetsGeometry? inputDecoratorContentPadding,
     final bool? inputDecoratorIsDense,
     final bool? inputDecoratorIsFilled,
     final Color? inputDecoratorFillColor,
@@ -3508,6 +3524,8 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
+      inputDecoratorContentPadding:
+          inputDecoratorContentPadding ?? this.inputDecoratorContentPadding,
       inputDecoratorIsDense:
           inputDecoratorIsDense ?? this.inputDecoratorIsDense,
       inputDecoratorIsFilled:
@@ -3910,6 +3928,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
+        other.inputDecoratorContentPadding == inputDecoratorContentPadding &&
         other.inputDecoratorIsDense == inputDecoratorIsDense &&
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
@@ -4223,6 +4242,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         inputDecoratorRadius,
         inputDecoratorSchemeColor,
+        inputDecoratorContentPadding,
         inputDecoratorIsDense,
         inputDecoratorIsFilled,
         inputDecoratorFillColor,
@@ -4547,6 +4567,8 @@ class FlexSubThemesData with Diagnosticable {
         'inputDecoratorRadius', inputDecoratorRadius));
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorSchemeColor', inputDecoratorSchemeColor));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'inputDecoratorContentPadding', inputDecoratorContentPadding));
     properties.add(DiagnosticsProperty<bool>(
         'inputDecoratorIsDense', inputDecoratorIsDense));
     properties.add(DiagnosticsProperty<bool>(

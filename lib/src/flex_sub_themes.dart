@@ -3051,6 +3051,26 @@ class FlexSubThemes {
     /// If undefined, defaults to [FlexInputBorderType.outline].
     final FlexInputBorderType? borderType,
 
+    /// The padding for the input decoration's container.
+    ///
+    /// The decoration's container is the area which is filled if
+    /// [InputDecoration.filled] is true and bordered per the [border].
+    /// It's the area adjacent to [InputDecoration.icon] and above the
+    /// [InputDecoration.icon] and above the widgets that contain
+    /// [InputDecoration.helperText], [InputDecoration.errorText], and
+    /// [InputDecoration.counterText].
+    ///
+    /// By default the [contentPadding] reflects [isDense] and the type of the
+    /// [border]. If [isCollapsed] is true then [contentPadding] is
+    /// [EdgeInsets.zero].
+    final EdgeInsetsGeometry? contentPadding,
+
+    /// Whether the input decorator's child is part of a dense form (i.e., uses
+    /// less vertical space).
+    ///
+    /// Defaults to false.
+    final bool? isDense,
+
     /// If true the decoration's container is filled with [fillColor].
     ///
     /// Typically this field set to true if [border] is an
@@ -3062,12 +3082,6 @@ class FlexSubThemes {
     ///
     /// Defaults to true.
     final bool? filled,
-
-    /// Whether the input decorator's child is part of a dense form (i.e., uses
-    /// less vertical space).
-    ///
-    /// Defaults to false.
-    final bool? isDense,
 
     /// An optional totally custom fill color used to fill the
     /// `InputDecorator` background with, when `filled` is true.
@@ -3421,6 +3435,7 @@ class FlexSubThemes {
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
+      contentPadding: contentPadding,
       isDense: isDense ?? false,
       filled: filled ?? true,
       fillColor: usedFillColor,
