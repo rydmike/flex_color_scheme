@@ -1481,8 +1481,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Border radius value for [InputDecoration].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kInputDecoratorRadius] 16dpm if [useMaterial3] is false and to
-  /// [kInputDecoratorM3Radius] if [useMaterial3] is true.
+  /// [kInputDecoratorRadius] = 10dp if [useMaterial3] is false and to
+  /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
   final double? inputDecoratorRadius;
 
   /// Defines which [Theme] based [ColorScheme] based color the input decorator
