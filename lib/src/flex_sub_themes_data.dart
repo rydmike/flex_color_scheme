@@ -945,11 +945,10 @@ class FlexSubThemesData with Diagnosticable {
   /// * [Drawer]
   /// * [DropdownMenu]
   /// * [ElevatedButton]
-  /// * [FloatingActionButton]
+  /// * [FloatingActionButton] (if opted in with `fabUseShape: true`)
   /// * [InputDecoration]
   /// * [MenuAnchor]
   /// * [OutlinedButton]
-  /// * [PopupMenuButton]
   /// * [SegmentedButton]
   /// * [TextButton]
   /// * [ToggleButtons]
