@@ -1842,96 +1842,174 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
 
 class ChipShowcase extends StatelessWidget {
   const ChipShowcase({super.key});
+  static const double _chipWidth = 155;
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 8,
-        runSpacing: 8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Chip(
-            label: const Text('Chip'),
-            onDeleted: () {},
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: _chipWidth,
+                child: Chip(
+                  label: const Text('Chip'),
+                  onDeleted: () {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: Chip(
+                  label: Text('Chip'),
+                  avatar: FlutterLogo(),
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: ActionChip(
+                  label: const Text('ActionChip'),
+                  avatar: const Icon(Icons.settings),
+                  onPressed: () {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: ActionChip(
+                  label: Text('ActionChip'),
+                  avatar: Icon(Icons.settings),
+                  onPressed: null,
+                ),
+              ),
+            ],
           ),
-          const Chip(
-            label: Text('Chip'),
-            avatar: FlutterLogo(),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: _chipWidth,
+                child: FilterChip(
+                  label: const Text('FilterChip'),
+                  selected: false,
+                  onSelected: (bool value) {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: FilterChip(
+                  label: Text('FilterChip'),
+                  selected: false,
+                  onSelected: null,
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: FilterChip(
+                  label: const Text('FilterChip'),
+                  selected: true,
+                  onSelected: (bool value) {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: FilterChip(
+                  label: Text('FilterChip'),
+                  selected: true,
+                  onSelected: null,
+                ),
+              ),
+            ],
           ),
-          ActionChip(
-            label: const Text('ActionChip'),
-            avatar: const Icon(Icons.settings),
-            onPressed: () {},
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: _chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  selected: false,
+                  onSelected: (bool value) {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: ChoiceChip(
+                  label: Text('ChoiceChip'),
+                  selected: false,
+                  onSelected: null,
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  selected: true,
+                  onSelected: (bool value) {},
+                ),
+              ),
+              const SizedBox(
+                width: _chipWidth,
+                child: ChoiceChip(
+                  label: Text('ChoiceChip'),
+                  selected: true,
+                ),
+              ),
+            ],
           ),
-          const ActionChip(
-            label: Text('ActionChip'),
-            avatar: Icon(Icons.settings),
-            onPressed: null,
-          ),
-          FilterChip(
-            label: const Text('FilterChip'),
-            selected: true,
-            onSelected: (bool value) {},
-          ),
-          const FilterChip(
-            label: Text('FilterChip'),
-            selected: true,
-            onSelected: null,
-          ),
-          FilterChip(
-            label: const Text('FilterChip'),
-            selected: false,
-            onSelected: (bool value) {},
-          ),
-          const FilterChip(
-            label: Text('FilterChip'),
-            selected: false,
-            onSelected: null,
-          ),
-          ChoiceChip(
-            label: const Text('ChoiceChip'),
-            selected: true,
-            onSelected: (bool value) {},
-          ),
-          const ChoiceChip(
-            label: Text('ChoiceChip'),
-            selected: true,
-          ),
-          ChoiceChip(
-            label: const Text('ChoiceChip'),
-            selected: false,
-            onSelected: (bool value) {},
-          ),
-          const ChoiceChip(
-            label: Text('ChoiceChip'),
-            selected: false,
-            onSelected: null,
-          ),
-          InputChip(
-            selected: true,
-            label: const Text('InputChip'),
-            onSelected: (bool value) {},
-            onDeleted: () {},
-          ),
-          InputChip(
-            selected: true,
-            label: const Text('InputChip'),
-            isEnabled: false,
-            onSelected: (bool value) {},
-            onDeleted: () {},
-          ),
-          InputChip(
-            label: const Text('InputChip'),
-            onSelected: (bool value) {},
-            onDeleted: () {},
-          ),
-          InputChip(
-            label: const Text('InputChip'),
-            isEnabled: false,
-            onSelected: (bool value) {},
-            onDeleted: () {},
-            // onDeleted: () {},
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: _chipWidth,
+                child: InputChip(
+                  label: const Text('InputChip'),
+                  onSelected: (bool value) {},
+                  onDeleted: () {},
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: InputChip(
+                  label: const Text('InputChip'),
+                  isEnabled: false,
+                  onSelected: (bool value) {},
+                  onDeleted: () {},
+                  // onDeleted: () {},
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: InputChip(
+                  selected: true,
+                  label: const Text('InputChip'),
+                  onSelected: (bool value) {},
+                  onDeleted: () {},
+                ),
+              ),
+              SizedBox(
+                width: _chipWidth,
+                child: InputChip(
+                  selected: true,
+                  label: const Text('InputChip'),
+                  isEnabled: false,
+                  onSelected: (bool value) {},
+                  onDeleted: () {},
+                ),
+              ),
+            ],
           ),
         ],
       ),
