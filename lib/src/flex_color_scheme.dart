@@ -2808,6 +2808,14 @@ class FlexColorScheme with Diagnosticable {
 
     // Compute the effective ColorScheme based on all selection options.
     final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
+          // Add the locked effective colors back to our SeedScheme.
+          // Fixes: https://github.com/rydmike/flex_color_scheme/issues/198
+          primary: effectiveColors.primary,
+          primaryContainer: effectiveColors.primaryContainer,
+          secondary: effectiveColors.secondary,
+          secondaryContainer: effectiveColors.secondaryContainer,
+          tertiary: effectiveColors.tertiary,
+          tertiaryContainer: effectiveColors.tertiaryContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below. We don't adjust onColors for
@@ -4700,6 +4708,14 @@ class FlexColorScheme with Diagnosticable {
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
     // Compute the effective ColorScheme based on all selection options.
     final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
+          // Add the locked effective colors back to our SeedScheme.
+          // Fixes: https://github.com/rydmike/flex_color_scheme/issues/198
+          primary: effectiveColors.primary,
+          primaryContainer: effectiveColors.primaryContainer,
+          secondary: effectiveColors.secondary,
+          secondaryContainer: effectiveColors.secondaryContainer,
+          tertiary: effectiveColors.tertiary,
+          tertiaryContainer: effectiveColors.tertiaryContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below. We don't adjust onColors for

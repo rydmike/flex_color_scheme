@@ -4,15 +4,20 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**October 4, 2023**
+**October 14, 2023**
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
 **PACKAGE**
+
+**NEW**
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
+
+**FIX**
+- Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
 
 **TODO PACKAGE**
 - Add TabBar theme property `tabAlignment`.
