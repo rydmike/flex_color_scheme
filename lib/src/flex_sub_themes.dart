@@ -3063,6 +3063,13 @@ class FlexSubThemes {
     /// By default the [contentPadding] reflects [isDense] and the type of the
     /// [border]. If [isCollapsed] is true then [contentPadding] is
     /// [EdgeInsets.zero].
+    ///
+    /// When [isDense] is true, the content padding can be made smaller and
+    /// tighter than when it is false.
+    ///
+    /// If no [contentPadding] is given, Flutter SDK uses default padding values
+    /// that depends on if [isDense] is true or false and if we use outline or
+    /// underline border.
     final EdgeInsetsGeometry? contentPadding,
 
     /// Whether the input decorator's child is part of a dense form (i.e., uses
