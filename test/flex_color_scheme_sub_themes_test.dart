@@ -455,7 +455,7 @@ void main() {
       );
     });
     test(
-        'FCS8.013-light: GIVEN a FlexColorScheme.light with sub themes '
+        'FCS8.014-light: GIVEN a FlexColorScheme.light with sub themes '
         'using adaptive splash on Android devices '
         'EXPECT sub-theme splash with given none adaptive splash.', () {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
@@ -472,6 +472,81 @@ void main() {
         fcsTheme.splashFactory.toString(),
         "Instance of '_InkRippleFactory'",
       );
+    });
+    // Tests for issue https://github.com/rydmike/flex_color_scheme/issues/198
+    test(
+        'FCS8.015-prim: GIVEN a FlexColorScheme.light with sub themes '
+        'using primary appbar background color, using seed generation '
+        'and locking primary to source primary color '
+        'EXPECT expect AppBar to be primary colored.', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.primary,
+        ),
+        keyColors: const FlexKeyColors(
+          keepPrimary: true,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      final ColorScheme scheme = fcs.toScheme;
+      const Color sourceColor = FlexColor.dashBlueLightPrimary;
+      final Color targetColor = scheme.primary;
+      final Color? appBarColor = fcsTheme.appBarTheme.backgroundColor;
+      // Expect primary color to be source blue color.
+      expect(sourceColor, equals(targetColor));
+      // Expect appBar color to be source blue color.
+      expect(appBarColor, equals(targetColor));
+    });
+    test(
+        'FCS8.015-sec: GIVEN a FlexColorScheme.light with sub themes '
+        'using secondary appbar background color, using seed generation '
+        'and locking secondary to source secondary color '
+        'EXPECT expect AppBar to be secondary colored.', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.secondary,
+        ),
+        keyColors: const FlexKeyColors(
+          useSecondary: true,
+          keepSecondary: true,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      final ColorScheme scheme = fcs.toScheme;
+      const Color sourceColor = FlexColor.dashBlueLightSecondary;
+      final Color targetColor = scheme.secondary;
+      final Color? appBarColor = fcsTheme.appBarTheme.backgroundColor;
+      // Expect secondary color to be source blue color.
+      expect(sourceColor, equals(targetColor));
+      // Expect appBar color to be source blue color.
+      expect(appBarColor, equals(targetColor));
+    });
+    test(
+        'FCS8.015-tert: GIVEN a FlexColorScheme.light with sub themes '
+        'using tertiary appbar background color, using seed generation '
+        'and locking tertiary to source tertiary color '
+        'EXPECT expect AppBar to be tertiary colored.', () {
+      final FlexColorScheme fcs = FlexColorScheme.light(
+        scheme: FlexScheme.flutterDash,
+        subThemesData: const FlexSubThemesData(
+          appBarBackgroundSchemeColor: SchemeColor.tertiary,
+        ),
+        keyColors: const FlexKeyColors(
+          useTertiary: true,
+          keepTertiary: true,
+        ),
+      );
+      final ThemeData fcsTheme = fcs.toTheme;
+      final ColorScheme scheme = fcs.toScheme;
+      const Color sourceColor = FlexColor.dashBlueLightTertiary;
+      final Color targetColor = scheme.tertiary;
+      final Color? appBarColor = fcsTheme.appBarTheme.backgroundColor;
+      // Expect secondary color to be source blue color.
+      expect(sourceColor, equals(targetColor));
+      // Expect appBar color to be source blue color.
+      expect(appBarColor, equals(targetColor));
     });
   });
 }
