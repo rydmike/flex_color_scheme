@@ -11,6 +11,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **PACKAGE**
 
 **NEW**
+
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
@@ -20,6 +21,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
 
 **TODO PACKAGE**
+
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles
 - Maybe: 
@@ -38,7 +40,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **THEMES PLAYGROUND**
 
- - FIX: [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
+**FIX**
+
+ - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
+ - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated. 
 
 **TODO THEMES PLAYGROUND**
 
