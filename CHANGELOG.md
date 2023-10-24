@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**October 14, 2023**
+**October 25, 2023**
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
@@ -16,6 +16,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
+- Added `secondarySelectedSchemeColor` property to `FlexSubThemesData`.
 
 **FIX**
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
@@ -23,9 +24,23 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **TODO PACKAGE**
 
 - Add TabBar theme property `tabAlignment`.
-- Add TextStyles
+- Add TextStyles for `FlexSubThemesData` so that:
+  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle` 
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle`
+  - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle`
+  - `FlexSubThemes.menuButtonTheme` **uses** `FlexSubThemesData.menuButtonTextStyle`
+  - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle`
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDayPeriodTextStyle`
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDialTextStyle`, 
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHelpTextStyle`,
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle`,
+  - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
+- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
+  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
+- Add enhanced enum function to `FlexScheme` enum that returns the predefined `FlexSchemeData` data associated with a given enum value. This can be done using already using `FlexColor.schemes` map, this would just be a convenience API.
 - Maybe: 
-  - Platform adaptive ShapeBorder configuration (big maybe).
+  - Platform adaptive ShapeBorder configuration (big maybe, probably push to V8).
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
   - Updates and features for `Chip` theming.
@@ -38,6 +53,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Switch: Platform adaptive iOS-like style.
   - DatePicker: Option to style and remove divider.
 
+**TESTING**
+  - Add full coverage tests for all new package features!
+
 **THEMES PLAYGROUND**
 
 **FIX**
@@ -45,9 +63,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
  - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
  - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated. 
 
-**TODO THEMES PLAYGROUND**
+**TODO THEMES PLAYGROUND AND EXAMPLES**
 
 - Add UI and code gen for dense input decorator.
+- ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 
 ## 7.3.1
 

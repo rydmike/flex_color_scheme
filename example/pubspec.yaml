@@ -58,7 +58,7 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
 
   # Hive local storage, by Simon Leir.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
@@ -73,7 +73,7 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.2.1
+  shared_preferences: ^2.2.2
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
@@ -82,7 +82,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.1.14
+  url_launcher: ^6.2.0
 
 
 dev_dependencies:

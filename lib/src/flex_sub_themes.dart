@@ -1574,6 +1574,16 @@ class FlexSubThemes {
     /// [SchemeColor.secondaryContainer].
     final SchemeColor? selectedSchemeColor,
 
+    /// Defines which [Theme] based [ColorScheme] based color the selected
+    /// ChoiceChips use as their selected state color.
+    ///
+    /// The color scheme contrast pair color is used for text and icons, on the
+    /// [secondarySelectedSchemeColor]
+    ///
+    /// If not defined and [useMaterial3] is true, defaults to
+    /// [selectedSchemeColor].
+    final SchemeColor? secondarySelectedSchemeColor,
+
     /// Defines which [Theme] based [ColorScheme] based color the Chips
     /// use as their color tint base color.
     ///
@@ -1683,8 +1693,10 @@ class FlexSubThemes {
     // theme default. It is not possible due to SDK Chip theming issues
     // and limitations to recreate the exact M3 Chip themes with any other
     // theme colors than the default built-in ones.
-    final bool useM3Defaults =
-        useM3 && baseSchemeColor == null && selectedSchemeColor == null;
+    final bool useM3Defaults = useM3 &&
+        baseSchemeColor == null &&
+        selectedSchemeColor == null &&
+        secondarySelectedSchemeColor == null;
 
     // Get blend color, defaults to surface for M3 and to primary for M2.
     final SchemeColor fallbackBlend =
@@ -1699,11 +1711,18 @@ class FlexSubThemes {
         ? schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme)
         : blendColor.blendAlpha(
             colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
-    // The onSelected onColor
     final Color onSelectedColor =
         schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
 
-    // The onSelected onColor
+    // Secondary selected color
+    final SchemeColor fallbackSecondarySelected =
+        selectedSchemeColor ?? fallbackSelected;
+    final Color secondarySelectedColor = schemeColor(
+        secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
+    final Color onSecondarySelectedColor = schemeColorPair(
+        secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
+
+    // The deleted icon color
     final Color deleteIconColor = schemeColor(
         deleteIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
 
@@ -1723,9 +1742,13 @@ class FlexSubThemes {
     final TextStyle effectiveLabelStyle =
         labelStyle.copyWith(color: colorScheme.onSurface);
 
-    // Text color, uses the foreground color for all chip styles.
+    // Text color, uses the selected foreground color for selected chip styles.
     final TextStyle effectiveSelectedLabelStyle =
         labelStyle.copyWith(color: onSelectedColor);
+
+    // Text color, uses the foreground color for all chip styles.
+    final TextStyle effectiveSecondarySelectedLabelStyle =
+        labelStyle.copyWith(color: onSecondarySelectedColor);
 
     return ChipThemeData(
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
@@ -1754,7 +1777,7 @@ class FlexSubThemes {
 
       // Applies to [ChoiceChip.selectedColor], if set it overrides the
       // [selectedColor], for ChoiceChips.
-      secondarySelectedColor: useM3Defaults ? null : selectedColor,
+      secondarySelectedColor: useM3Defaults ? null : secondarySelectedColor,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
@@ -1782,7 +1805,8 @@ class FlexSubThemes {
       labelStyle: useM3Defaults ? null : effectiveLabelStyle,
 
       // Applies to [ChoiceChip.labelStyle],
-      secondaryLabelStyle: useM3Defaults ? null : effectiveSelectedLabelStyle,
+      secondaryLabelStyle:
+          useM3Defaults ? null : effectiveSecondarySelectedLabelStyle,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
