@@ -18,6 +18,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 - Added `secondarySelectedSchemeColor` property to `FlexSubThemesData`.
 
+- Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map, this is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. Feature https://github.com/rydmike/flex_color_scheme/issues/210
+- 
 **FIX**
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
 
@@ -38,7 +40,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
 - Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
-- Add enhanced enum function to `FlexScheme` enum that returns the predefined `FlexSchemeData` data associated with a given enum value. This can be done using already using `FlexColor.schemes` map, this would just be a convenience API.
 - Maybe: 
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V8).
   - Customizable `errorColor` in Playground.
@@ -54,7 +55,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - DatePicker: Option to style and remove divider.
 
 **TESTING**
-  - Add full coverage tests for all new package features!
+  - Add full coverage tests for all new package features! Among others:
+    - `FlexScheme.data` and `FlexScheme.colors` 
+
 
 **THEMES PLAYGROUND**
 
