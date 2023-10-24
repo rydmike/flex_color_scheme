@@ -6874,6 +6874,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
+              // secondarySelectedSchemeColor: SchemeColor.primaryContainer,
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               labelStyle: effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? platformRadius,

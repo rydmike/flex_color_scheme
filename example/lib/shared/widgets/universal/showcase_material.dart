@@ -1840,9 +1840,23 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
   }
 }
 
-class ChipShowcase extends StatelessWidget {
-  const ChipShowcase({super.key});
+class ChipShowcase extends StatefulWidget {
+  const ChipShowcase({super.key, this.showOptions = false});
+  final bool showOptions;
+
   static const double _chipWidth = 155;
+  static const double _textWidth = 115;
+
+  @override
+  State<ChipShowcase> createState() => _ChipShowcaseState();
+}
+
+class _ChipShowcaseState extends State<ChipShowcase> {
+  bool filterSelected = true;
+  bool inputSelected = true;
+  bool choiceSelected = true;
+  bool showCheckmark = true;
+  bool showAvatar = true;
 
   @override
   Widget build(BuildContext context) {
@@ -1851,37 +1865,69 @@ class ChipShowcase extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Wrap(
-            crossAxisAlignment: WrapCrossAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 0,
             runSpacing: 8,
             children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Chip', style: TextStyle(fontSize: 12)),
+                    Text('No M3 spec', style: TextStyle(fontSize: 12))
+                  ],
+                ),
+              ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: Chip(
                   label: const Text('Chip'),
                   onDeleted: () {},
                 ),
               ),
               const SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: Chip(
                   label: Text('Chip'),
                   avatar: FlutterLogo(),
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('ActionChip', style: TextStyle(fontSize: 12)),
+                    Text('Assist (M3)', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: ActionChip(
                   label: const Text('ActionChip'),
-                  avatar: const Icon(Icons.settings),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
                   onPressed: () {},
                 ),
               ),
-              const SizedBox(
-                width: _chipWidth,
+              SizedBox(
+                width: ChipShowcase._chipWidth,
                 child: ActionChip(
-                  label: Text('ActionChip'),
-                  avatar: Icon(Icons.settings),
+                  label: const Text('ActionChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
                   onPressed: null,
                 ),
               ),
@@ -1889,38 +1935,86 @@ class ChipShowcase extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Wrap(
-            crossAxisAlignment: WrapCrossAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 0,
             runSpacing: 8,
             children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('FilterChip', style: TextStyle(fontSize: 12)),
+                    Text('Filter (M3)', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: FilterChip(
                   label: const Text('FilterChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
                   selected: false,
                   onSelected: (bool value) {},
                 ),
               ),
-              const SizedBox(
-                width: _chipWidth,
+              SizedBox(
+                width: ChipShowcase._chipWidth,
                 child: FilterChip(
-                  label: Text('FilterChip'),
+                  label: const Text('FilterChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
                   selected: false,
                   onSelected: null,
                 ),
               ),
-              SizedBox(
-                width: _chipWidth,
-                child: FilterChip(
-                  label: const Text('FilterChip'),
-                  selected: true,
-                  onSelected: (bool value) {},
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Selected', style: TextStyle(fontSize: 12)),
+                    Text('Filter', style: TextStyle(fontSize: 12)),
+                  ],
                 ),
               ),
-              const SizedBox(
-                width: _chipWidth,
+              SizedBox(
+                width: ChipShowcase._chipWidth,
                 child: FilterChip(
-                  label: Text('FilterChip'),
+                  label: const Text('FilterChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
+                  selected: filterSelected,
+                  onSelected: (bool value) {
+                    setState(() {
+                      filterSelected = value;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                width: ChipShowcase._chipWidth,
+                child: FilterChip(
+                  label: const Text('FilterChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
                   selected: true,
                   onSelected: null,
                 ),
@@ -1933,83 +2027,202 @@ class ChipShowcase extends StatelessWidget {
             spacing: 0,
             runSpacing: 8,
             children: <Widget>[
-              SizedBox(
-                width: _chipWidth,
-                child: ChoiceChip(
-                  label: const Text('ChoiceChip'),
-                  selected: false,
-                  onSelected: (bool value) {},
-                ),
-              ),
               const SizedBox(
-                width: _chipWidth,
-                child: ChoiceChip(
-                  label: Text('ChoiceChip'),
-                  selected: false,
-                  onSelected: null,
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('InputChip', style: TextStyle(fontSize: 12)),
+                    Text('Input (M3)', style: TextStyle(fontSize: 12)),
+                  ],
                 ),
               ),
               SizedBox(
-                width: _chipWidth,
-                child: ChoiceChip(
-                  label: const Text('ChoiceChip'),
-                  selected: true,
-                  onSelected: (bool value) {},
-                ),
-              ),
-              const SizedBox(
-                width: _chipWidth,
-                child: ChoiceChip(
-                  label: Text('ChoiceChip'),
-                  selected: true,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 0,
-            runSpacing: 8,
-            children: <Widget>[
-              SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
                   onSelected: (bool value) {},
                   onDeleted: () {},
                 ),
               ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
                   isEnabled: false,
                   onSelected: (bool value) {},
                   onDeleted: () {},
                   // onDeleted: () {},
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Selected', style: TextStyle(fontSize: 12)),
+                    Text('Input', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: InputChip(
-                  selected: true,
                   label: const Text('InputChip'),
-                  onSelected: (bool value) {},
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  selected: inputSelected,
+                  showCheckmark: showCheckmark,
+                  onSelected: (bool value) {
+                    setState(() {
+                      inputSelected = value;
+                    });
+                  },
                   onDeleted: () {},
                 ),
               ),
               SizedBox(
-                width: _chipWidth,
+                width: ChipShowcase._chipWidth,
                 child: InputChip(
-                  selected: true,
                   label: const Text('InputChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  selected: true,
+                  showCheckmark: showCheckmark,
                   isEnabled: false,
                   onSelected: (bool value) {},
                   onDeleted: () {},
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('ChoiceChip', style: TextStyle(fontSize: 12)),
+                    Text('Suggestion (M3)', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: ChipShowcase._chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
+                  selected: false,
+                  onSelected: (bool value) {},
+                ),
+              ),
+              SizedBox(
+                width: ChipShowcase._chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
+                  selected: false,
+                  onSelected: null,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 0,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(
+                width: ChipShowcase._textWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Selected', style: TextStyle(fontSize: 12)),
+                    Text('Choice/Suggestion', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: ChipShowcase._chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
+                  selected: choiceSelected,
+                  onSelected: (bool value) {
+                    setState(() {
+                      choiceSelected = value;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                width: ChipShowcase._chipWidth,
+                child: ChoiceChip(
+                  label: const Text('ChoiceChip'),
+                  avatar: showAvatar
+                      ? const Icon(Icons.account_circle_rounded)
+                      : null,
+                  showCheckmark: showCheckmark,
+                  selected: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          SwitchListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Show checkmark when selected'),
+            value: showCheckmark,
+            onChanged: (bool value) {
+              setState(() {
+                showCheckmark = value;
+              });
+            },
+          ),
+          SwitchListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Show optional avatar'),
+            value: showAvatar,
+            onChanged: (bool value) {
+              setState(() {
+                showAvatar = value;
+              });
+            },
           ),
         ],
       ),

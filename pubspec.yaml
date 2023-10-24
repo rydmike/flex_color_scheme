@@ -58,6 +58,6 @@ dev_dependencies:
     sdk: flutter
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
   # Test lib.
   test:

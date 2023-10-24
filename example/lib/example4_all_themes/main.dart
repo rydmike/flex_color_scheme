@@ -175,6 +175,7 @@ class DemoApp extends StatelessWidget {
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
           // AppColor.schemes list instead.
           darkTheme: FlexThemeData.dark(
+            tertiary: FlexColor.greenDarkPrimary,
             useMaterial3: themeController.useMaterial3,
             colors: AppColor.customSchemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
@@ -197,6 +198,63 @@ class DemoApp extends StatelessWidget {
             visualDensity: App.visualDensity,
             fontFamily: App.font,
             // We use the nicer Material 3 Typography in both M2 and M3 mode.
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
+          ),
+          // Define the light high contrast theme for the app,
+          // using current scheme index.
+          highContrastTheme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
+            colors: AppColor.customSchemes[themeController.schemeIndex].light,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+            blendLevel: 2,
+            appBarElevation: 0.5,
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
+            tones: FlexTones.ultraContrast(Brightness.light),
+            keyColors: FlexKeyColors(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+              keepPrimary: themeController.keepPrimary,
+              keepSecondary: themeController.keepSecondary,
+              keepTertiary: themeController.keepTertiary,
+            ),
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
+          ),
+          // Define the dark high contrast theme for the app,
+          // using current scheme index.
+          highContrastDarkTheme: FlexThemeData.dark(
+            tertiary: FlexColor.greenDarkPrimary,
+            useMaterial3: themeController.useMaterial3,
+            colors: AppColor.customSchemes[themeController.schemeIndex].dark,
+            surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+            blendLevel: 7,
+            appBarElevation: 0.5,
+            tones: FlexTones.ultraContrast(Brightness.dark),
+            keyColors: FlexKeyColors(
+              useKeyColors: themeController.useKeyColors,
+              useSecondary: themeController.useSecondary,
+              useTertiary: themeController.useTertiary,
+              keepPrimary: themeController.keepDarkPrimary,
+              keepSecondary: themeController.keepDarkSecondary,
+              keepTertiary: themeController.keepDarkTertiary,
+            ),
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
+            visualDensity: App.visualDensity,
+            fontFamily: App.font,
             typography: Typography.material2021(
               platform: defaultTargetPlatform,
             ),

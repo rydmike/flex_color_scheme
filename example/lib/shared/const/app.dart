@@ -47,7 +47,7 @@ class App {
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
   static const String packageVersionMinor = '$versionMajor.$versionMinor.x';
-  static const String flutterVersion = 'stable 3.13.4 (canvaskit)';
+  static const String flutterVersion = 'stable 3.13.8 (canvaskit)';
   static const String copyright = '© 2020 - 2023';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';

@@ -223,10 +223,6 @@ class FabChipSettings extends StatelessWidget {
                 }
               : null,
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
-        ),
         ColorSchemePopupMenu(
           title: const Text('Selected Chip color'),
           labelForDefault: controller.useMaterial3
@@ -309,6 +305,11 @@ class FabChipSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: ChipShowcase(),
         ),
         ListTileReveal(
           dense: true,
