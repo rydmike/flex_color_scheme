@@ -1844,14 +1844,15 @@ class ChipShowcase extends StatefulWidget {
   const ChipShowcase({super.key, this.showOptions = false});
   final bool showOptions;
 
-  static const double _chipWidth = 155;
-  static const double _textWidth = 115;
-
   @override
   State<ChipShowcase> createState() => _ChipShowcaseState();
 }
 
 class _ChipShowcaseState extends State<ChipShowcase> {
+  static const double _fontSize = 11;
+  static const double _chipWidth = 155;
+  static const double _textWidth = 93;
+
   bool filterSelected = true;
   bool inputSelected = true;
   bool choiceSelected = true;
@@ -1865,29 +1866,30 @@ class _ChipShowcaseState extends State<ChipShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.start,
+
             spacing: 0,
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Chip', style: TextStyle(fontSize: 12)),
-                    Text('No M3 spec', style: TextStyle(fontSize: 12))
+                    Text('Chip', style: TextStyle(fontSize: _fontSize)),
+                    Text('No M3 spec', style: TextStyle(fontSize: _fontSize))
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: Chip(
                   label: const Text('Chip'),
                   onDeleted: () {},
                 ),
               ),
               const SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: Chip(
                   label: Text('Chip'),
                   avatar: FlutterLogo(),
@@ -1902,17 +1904,17 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('ActionChip', style: TextStyle(fontSize: 12)),
-                    Text('Assist (M3)', style: TextStyle(fontSize: 12)),
+                    Text('ActionChip', style: TextStyle(fontSize: _fontSize)),
+                    Text('Assist (M3)', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ActionChip(
                   label: const Text('ActionChip'),
                   avatar: showAvatar
@@ -1922,7 +1924,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ActionChip(
                   label: const Text('ActionChip'),
                   avatar: showAvatar
@@ -1940,17 +1942,17 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('FilterChip', style: TextStyle(fontSize: 12)),
-                    Text('Filter (M3)', style: TextStyle(fontSize: 12)),
+                    Text('FilterChip', style: TextStyle(fontSize: _fontSize)),
+                    Text('Filter (M3)', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: FilterChip(
                   label: const Text('FilterChip'),
                   avatar: showAvatar
@@ -1962,7 +1964,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: FilterChip(
                   label: const Text('FilterChip'),
                   avatar: showAvatar
@@ -1982,17 +1984,17 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Selected', style: TextStyle(fontSize: 12)),
-                    Text('Filter', style: TextStyle(fontSize: 12)),
+                    Text('Selected', style: TextStyle(fontSize: _fontSize)),
+                    Text('Filter', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: FilterChip(
                   label: const Text('FilterChip'),
                   avatar: showAvatar
@@ -2008,7 +2010,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: FilterChip(
                   label: const Text('FilterChip'),
                   avatar: showAvatar
@@ -2028,17 +2030,17 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('InputChip', style: TextStyle(fontSize: 12)),
-                    Text('Input (M3)', style: TextStyle(fontSize: 12)),
+                    Text('InputChip', style: TextStyle(fontSize: _fontSize)),
+                    Text('Input (M3)', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
                   avatar: showAvatar
@@ -2050,7 +2052,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
                   avatar: showAvatar
@@ -2072,17 +2074,17 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Selected', style: TextStyle(fontSize: 12)),
-                    Text('Input', style: TextStyle(fontSize: 12)),
+                    Text('Selected', style: TextStyle(fontSize: _fontSize)),
+                    Text('Input', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
                   avatar: showAvatar
@@ -2099,7 +2101,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: InputChip(
                   label: const Text('InputChip'),
                   avatar: showAvatar
@@ -2121,17 +2123,18 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('ChoiceChip', style: TextStyle(fontSize: 12)),
-                    Text('Suggestion (M3)', style: TextStyle(fontSize: 12)),
+                    Text('ChoiceChip', style: TextStyle(fontSize: _fontSize)),
+                    Text('Suggestion (M3)',
+                        style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ChoiceChip(
                   label: const Text('ChoiceChip'),
                   avatar: showAvatar
@@ -2143,7 +2146,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ChoiceChip(
                   label: const Text('ChoiceChip'),
                   avatar: showAvatar
@@ -2163,17 +2166,18 @@ class _ChipShowcaseState extends State<ChipShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(
-                width: ChipShowcase._textWidth,
+                width: _textWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Selected', style: TextStyle(fontSize: 12)),
-                    Text('Choice/Suggestion', style: TextStyle(fontSize: 12)),
+                    Text('Selected', style: TextStyle(fontSize: _fontSize)),
+                    Text('Choice\nSuggestion (M3)',
+                        style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ChoiceChip(
                   label: const Text('ChoiceChip'),
                   avatar: showAvatar
@@ -2189,7 +2193,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                 ),
               ),
               SizedBox(
-                width: ChipShowcase._chipWidth,
+                width: _chipWidth,
                 child: ChoiceChip(
                   label: const Text('ChoiceChip'),
                   avatar: showAvatar
