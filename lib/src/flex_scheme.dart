@@ -1,5 +1,9 @@
 // ignore_for_file: comment_references
 
+import 'dart:ui';
+
+import '../flex_color_scheme.dart';
+
 /// Enum that can be used to lookup predefined [FlexSchemeData] color theme
 /// definition objects.
 ///
@@ -182,5 +186,24 @@ enum FlexScheme {
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the
   /// [FlexScheme.material] theme.
-  custom,
+  custom;
+
+  /// Returns the [FlexSchemeData] associated with this enum value.
+  ///
+  /// Has fallback to [FlexColor.materialBaseline] value, the
+  /// Material 3 defaults.
+  FlexSchemeData get data {
+    return FlexColor.schemes[this] ?? FlexColor.materialBaseline;
+  }
+
+  /// Returns the [FlexSchemeColor] associated with this enum value
+  /// for the given [brightness] value.
+  FlexSchemeColor colors(Brightness brightness) {
+    switch (brightness) {
+      case Brightness.light:
+        return data.light;
+      case Brightness.dark:
+        return data.dark;
+    }
+  }
 }
