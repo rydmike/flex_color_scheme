@@ -69,6 +69,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 
 - Add UI and code gen for dense input decorator.
+- Split FAB and Chip to separate panels. 
+- Make Chips presentation better responsive on phone
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 
 ## 7.3.1
