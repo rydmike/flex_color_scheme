@@ -75,7 +75,7 @@ class App {
   /// This min width was chosen because it gives at least the primary, secondary
   /// and tertiary colors in one Wrap row on panels Input Colors and Seeded
   /// ColorScheme, also when the side-by-side code view appears.
-  static const double sideBySideViewBreakpoint = 760;
+  static const double sideBySideViewBreakpoint = 770;
 
   /// The minimum media size needed for desktop/large tablet menu view,
   /// this is media size.
