@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**October 25, 2023**
+**November 2, 2023**
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
@@ -55,8 +55,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - DatePicker: Option to style and remove divider.
 
 **TESTING**
-  - Add full coverage tests for all new package features! Among others:
-    - `FlexScheme.data` and `FlexScheme.colors` 
+  - Add full coverage tests for all new package features!
 
 
 **THEMES PLAYGROUND**
