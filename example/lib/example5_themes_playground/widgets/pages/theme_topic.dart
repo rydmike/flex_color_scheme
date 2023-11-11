@@ -214,7 +214,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'To use all theming features on FlexColorScheme you must enable '
         'component sub-themes. If you are only here for the color '
         'theming features, and intend to style your component themes yourself, '
-        'you can turn OFF using component.\n'
+        'you can turn OFF using component themes.\n'
         '\n'
         "FlexColorScheme's Material-2 mode component themes are opinionated. "
         'They look almost like Material-3 mode default components, '
@@ -222,7 +222,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'When using Material-3, there are only a few nuance differences '
         'compared to default Material-3 styles, plus some minor fixes to a few '
-        'Flutter Material 3 specification deviations, that Flutter may also '
+        'Flutter Material-3 specification deviations, that Flutter may also '
         'fix in later versions.\n',
   ),
   ThemeTopic(
