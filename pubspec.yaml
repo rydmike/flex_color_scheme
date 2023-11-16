@@ -60,9 +60,9 @@ dev_dependencies:
   # https://pub.dev/packages/google_fonts
   google_fonts: ^6.1.0
   # Leak tracker for ink testing.
-  leak_tracker: 9.0.13
-  leak_tracker_flutter_testing: 1.0.10
-  leak_tracker_testing: 1.0.5
+  # leak_tracker: 9.0.13
+  # leak_tracker_flutter_testing: 1.0.10
+  # leak_tracker_testing: 1.0.5
 
   # Test lib.
   test:

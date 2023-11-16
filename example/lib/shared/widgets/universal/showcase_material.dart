@@ -1389,11 +1389,15 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
             ),
           DropdownMenu<IconData>(
             initialSelection: selectedItem,
+            requestFocusOnTap: true,
             leadingIcon: Icon(selectedItem),
             onSelected: (IconData? value) {
               setState(() {
                 selectedItem = value ?? Icons.alarm;
               });
+              // Unfocus after select, see
+              // https://github.com/flutter/flutter/issues/138343
+              FocusScope.of(context).unfocus();
             },
             dropdownMenuEntries: const <DropdownMenuEntry<IconData>>[
               DropdownMenuEntry<IconData>(

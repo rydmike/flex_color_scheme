@@ -297,7 +297,6 @@ class ResponsiveScaffold extends StatefulWidget {
   ///
   /// To close the drawer, use [Navigator.pop].
   ///
-  /// {@tool dartpad --template=stateful_widget_material}
   /// To disable the drawer edge swipe, set the
   /// [Scaffold.endDrawerEnableOpenDragGesture] to false. Then, use
   /// [ScaffoldState.openEndDrawer] to open the drawer and [Navigator.pop] to
