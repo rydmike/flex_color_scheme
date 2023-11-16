@@ -1,20 +1,12 @@
 // The test for the FlexHighlightSplash.splashFactory is copied from
 // Flutter repo and pretty identical to the test for InkSplash.
-
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:flex_color_scheme/src/flex_instant_splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart'; // import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
-
-// This is now imported also by flutter_test.dart on master from the SDK source,
-// may no longer need this custom copied version, but still needed on beta!
-// TODO(rydmike): Remove mock_canvas.dart file when no longer needed on beta.
-import 'rendering/mock_canvas.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets(

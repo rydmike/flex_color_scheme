@@ -4,14 +4,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**November 2, 2023**
+**November 16, 2023**
 
 - Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
 
 **PACKAGE**
+- Chore: Version bumps for Flutter 3.16
 
 **NEW**
-
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
@@ -19,7 +19,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Added `secondarySelectedSchemeColor` property to `FlexSubThemesData`.
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map, this is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. Feature https://github.com/rydmike/flex_color_scheme/issues/210
-- 
+
+
 **FIX**
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
 
@@ -44,6 +45,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V8).
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
+  - Some `SearchBar` theming features.
   - Updates and features for `Chip` theming.
   - Add fidelity for iOS adaptive AppBar (maybe).
   - InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState.
@@ -52,6 +54,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - FAB: Decoupled foreground/background color.
   - Switch: Optional iOS-like style. 
   - Switch: Platform adaptive iOS-like style.
+  - Checkbox: Shape and border.
   - DatePicker: Option to style and remove divider.
 
 **TESTING**
