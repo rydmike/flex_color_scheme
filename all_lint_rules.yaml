@@ -6,7 +6,6 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
     - always_put_required_named_parameters_first
-    - always_require_non_null_named_parameters
     - always_specify_types
     - always_use_package_imports
     - annotate_overrides
@@ -36,8 +35,6 @@ linter:
     - avoid_relative_lib_imports
     - avoid_renaming_method_parameters
     - avoid_return_types_on_setters
-    - avoid_returning_null
-    - avoid_returning_null_for_future
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters
@@ -86,7 +83,6 @@ linter:
     - implicit_call_tearoffs
     - implicit_reopen
     - invalid_case_patterns
-    - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_annotations
@@ -94,7 +90,6 @@ linter:
     - library_prefixes
     - library_private_types_in_public_api
     - lines_longer_than_80_chars
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - matching_super_parameters
     - missing_whitespace_between_adjacent_strings
@@ -184,7 +179,7 @@ linter:
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_final
-    - unnecessary_getters_setters
+    - unnecessary_getters_settersinvariant_booleans
     - unnecessary_lambdas
     - unnecessary_late
     - unnecessary_library_directive
