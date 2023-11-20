@@ -1,6 +1,16 @@
-# A list of all linter rules. Up-to-date auto generated list of all
-# lint rules can be found here:
-# https://dart.dev/tools/linter-rules/all
+# A list of all linter rules.
+#
+# Up-to-date auto generated list: https://dart.dev/tools/linter-rules/all
+#
+# The list below has removed ALL deprecated lint rules. These following were still included
+# in the above list of all lint rules, but are deprecated and should NOT be used:
+#
+# - avoid_returning_null_for_future (Deprecated)
+# - iterable_contains_unrelated_type (Deprecated)
+# - list_remove_unrelated_type (Deprecated)
+# - always_require_non_null_named_parameters (Deprecated)
+# - avoid_returning_null (Deprecated)
+#
 linter:
   rules:
     - always_declare_return_types
