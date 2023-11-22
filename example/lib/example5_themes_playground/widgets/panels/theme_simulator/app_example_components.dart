@@ -59,6 +59,21 @@ class _AppExampleComponentsState extends State<AppExampleComponents>
         extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(
+          // This check specifies which nested Scrollable's scroll notification
+          // should be listened to.
+          //
+          // When `ThemeData.useMaterial3` is true and scroll view has
+          // scrolled underneath the app bar, this updates the app bar
+          // background color and elevation.
+          //
+          // This sets `notification.depth == 1` to listen to the scroll
+          // notification from the nested `ListView.builder`.
+          //
+          // See example:
+          // https://api.flutter.dev/flutter/material/AppBar-class.html#material.AppBar.4
+          notificationPredicate: (ScrollNotification notification) {
+            return notification.depth == 1;
+          },
           title: const Text('Themed Components'),
           actions: const <Widget>[AboutIconButton(useRootNavigator: false)],
           bottom: TabBar(
