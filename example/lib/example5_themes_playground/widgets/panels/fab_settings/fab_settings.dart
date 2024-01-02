@@ -13,22 +13,10 @@ class FabSettings extends StatelessWidget {
   const FabSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _fcsFlutterIssue115827 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/115827',
-  );
-
   static final Uri _fcsFlutterIssue107946 = Uri(
     scheme: 'https',
     host: 'github.com',
     path: 'flutter/flutter/issues/107946',
-  );
-
-  static final Uri _fcsChipUmbrellaIssue115364 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/115364',
   );
 
   @override
@@ -47,13 +35,6 @@ class FabSettings extends StatelessWidget {
             ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
             : '';
 
-    final String chipRadiusDefaultLabel =
-        controller.chipBorderRadius == null && effectiveRadius == null
-            ? 'default 8'
-            : controller.chipBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
-                : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
