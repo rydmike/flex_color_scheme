@@ -308,8 +308,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.controls,
-    heading: 'FloatingActionButton and Chip',
-    buttonLabel: 'FAB and\nChip',
+    heading: 'Floating Action Button',
+    buttonLabel: 'FAB',
     icon: Icons.add_circle,
     info: 'The FloatingActionButton, the "FAB", represents the most '
         'important action '
@@ -318,9 +318,14 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'color is by default a very muted color, in M3 mode it instead '
         'maps to primaryContainer color. If you use an M3 seed generated '
         'ColorScheme in M2 mode, it is recommended to use another themed '
-        'color for the FAB than secondary color.\n'
-        '\n'
-        'Chips help people enter information, make selections, filter '
+        'color for the FAB than secondary color.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.controls,
+    heading: 'Chip',
+    buttonLabel: 'Chip',
+    icon: Icons.edit_attributes,
+    info: 'Chips help people enter information, make selections, filter '
         'content, or trigger actions. It has a totally new design in M3 '
         'mode, FCS M2 mode takes some inspiration from it, while also '
         'retaining some M2 style influences.\n',

@@ -72,12 +72,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
  - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
  - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated. 
+- Split FAB and Chip to separate panels.
 
-**TODO THEMES PLAYGROUND AND EXAMPLES**
+  **TODO THEMES PLAYGROUND AND EXAMPLES**
 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.
-- Split FAB and Chip to separate panels. 
 - Make Chips presentation better responsive on phone
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 
