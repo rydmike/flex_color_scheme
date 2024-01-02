@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**November 16, 2023**
+**January 2, 2024**
 
 - **FlexColorScheme** has not in v7.4.0 changed created `ThemeData` to set `useMaterial3` to `true` by default if it is undefined in **FlexColorScheme** API, it still defaults to `false`. The **Themes Playground** has for a long time defaulted to defining `useMaterial3` as `true` explicitly, but the **FlexColorScheme** API has always and still defaults it to `false`, if it is not defined. When you upgrade to **Flutter 3.16.0**, if you have not defined that you want to use **Material-3** with the FlexColorScheme API, your app will not suddenly get it when you upgrade to Flutter >=3.16.0 or to this version of FlexColorScheme. Your app theme will not "break-to" Material-3 when you update to Flutter 3.16.0. It will, as before, only use Material-3 if you had already explicitly defined that you want to use it. A later release (v8.0.0) will introduce this breaking change to align with **Flutter's** 3.16.0 new default for `ThemeData`.
 
@@ -19,7 +19,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
-- Added `secondarySelectedSchemeColor` property to `FlexSubThemesData`.
+- Added `secondarySelectedSchemeColor` property to `FlexSubThemes.chipTheme()`.
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map, this is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. Feature https://github.com/rydmike/flex_color_scheme/issues/210
 
@@ -59,6 +59,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Switch: Platform adaptive iOS-like style.
   - Checkbox: Shape and border.
   - DatePicker: Option to style and remove divider.
+  - Investigate if themed AppBar system overlay and can now impact the system navigation
+    bar settings. Implement convenience feature if it can.
 
 **TESTING**
   - Add full coverage tests for all new package features!
@@ -74,6 +76,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 
 - Add UI and code gen for dense input decorator.
+- Add UI for content padding on input decorator.
 - Split FAB and Chip to separate panels. 
 - Make Chips presentation better responsive on phone
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
