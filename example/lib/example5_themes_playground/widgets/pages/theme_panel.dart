@@ -10,10 +10,11 @@ import '../panels/bottom_navigation_bar_settings/bottom_navigation_bar_settings.
 import '../panels/bottom_sheet_settings/bottom_sheet_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
+import '../panels/chip_settings/chip_settings.dart';
 import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
-import '../panels/fab_chip_settings/fab_chip_settings.dart';
+import '../panels/fab_settings/fab_settings.dart';
 import '../panels/icon_button_avatar_settings/icon_button_avatar_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/list_tile_settings/list_tile_settings.dart';
@@ -71,7 +72,8 @@ class ThemePanel extends StatelessWidget {
       ShapeRadiusSettings(controller),
       ButtonsSettings(controller),
       SegmentedButtonsSettings(controller),
-      FabChipSettings(controller),
+      FabSettings(controller),
+      ChipSettings(controller),
       SwitchesSettings(controller),
       IconButtonAvatarSettings(controller),
       TooltipProgressBarSettings(controller),
