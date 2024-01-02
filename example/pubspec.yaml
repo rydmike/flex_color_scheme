@@ -10,7 +10,7 @@ dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
   # Using the container transform navigation in mock Shop in Playground.
   # https://pub.dev/packages/animations
-  animations: ^2.0.8
+  animations: ^2.0.10
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -54,7 +54,7 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.0.7
+  flutter_svg: ^2.0.9
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
@@ -82,7 +82,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.2.0
+  url_launcher: ^6.2.2
 
 
 dev_dependencies:
