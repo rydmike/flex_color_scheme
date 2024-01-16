@@ -38,8 +38,8 @@ class App {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
-  static const String versionMajor = '7';
-  static const String versionMinor = '4';
+  static const String versionMajor = '8';
+  static const String versionMinor = '0';
   static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
@@ -47,7 +47,7 @@ class App {
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
   static const String packageVersionMinor = '$versionMajor.$versionMinor.x';
-  static const String flutterVersion = 'stable 3.16.5 (canvaskit)';
+  static const String flutterVersion = 'stable 3.16.7 (canvaskit)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
