@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 7.4.0
+version: 8.0.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -10,7 +10,7 @@ dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
   # Using the container transform navigation in mock Shop in Playground.
   # https://pub.dev/packages/animations
-  animations: ^2.0.10
+  animations: ^2.0.11
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -68,7 +68,7 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.1.1
+  path_provider: ^2.1.2
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
@@ -82,7 +82,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.2.2
+  url_launcher: ^6.2.3
 
 
 dev_dependencies:

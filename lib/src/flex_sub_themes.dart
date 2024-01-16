@@ -1252,7 +1252,8 @@ class FlexSubThemes {
     );
   }
 
-  /// An opinionated [CardTheme] with custom corner radius and elevation.
+  /// An opinionated [CardTheme] for [Card] with custom
+  /// corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
   /// defaults to [kCardElevation] = 0.

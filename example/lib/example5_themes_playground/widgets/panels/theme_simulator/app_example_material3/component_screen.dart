@@ -2552,7 +2552,7 @@ class ComponentGroupDecoration extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0,
-        color: theme.colorScheme.surfaceVariant.withOpacity(0.3),
+        color: theme.scaffoldBackgroundColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Center(
