@@ -4,18 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0 - WIP
 
-**January 15, 2024**
-
-- TODO: Remove this and set useM3 to true by default!
-  - **FlexColorScheme** has not in v7.4.0 changed created `ThemeData` to set `useMaterial3` to `true` by default if it is undefined in **FlexColorScheme** API, it still defaults to `false`. The **Themes Playground** has for a long time defaulted to defining `useMaterial3` as `true` explicitly, but the **FlexColorScheme** API has always and still defaults it to `false`, if it is not defined. When you upgrade to **Flutter 3.16.0**, if you have not defined that you want to use **Material-3** with the FlexColorScheme API, your app will not suddenly get it when you upgrade to Flutter >=3.16.0 or to this version of FlexColorScheme. Your app theme will not "break-to" Material-3 when you update to Flutter 3.16.0. It will, as before, only use Material-3 if you had already explicitly defined that you want to use it. A later release (v8.0.0) will introduce this breaking change to align with **Flutter's** 3.16.0 new default for `ThemeData`.
-
-
-- Added CONTRIBUTING and CODE OF CONDUCT guidance to the repository.
-
-- Beginning to consider if I should make the next release 8.0 and introduce breaking changes like:
-  - Make `useMaterial3` default to `true` in **FlexColorScheme** API.
-  - Remove almost never used `useFlutterDefaults` property in `FlexSubThemesData` and make M3 mode use Flutter defaults by default.
-  - **TODO:** Add more breaking changes to this list.
+**February 10, 2024**
 
 **PACKAGE**
 - Chore: Version bumps for Flutter 3.16
@@ -35,7 +24,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO PACKAGE**
 
-- Change useMaterial3 to be true by default! 
+- BREAKING: Cnnage useMaterial3 to be true by default, to align with **Flutter's** 3.16.0 new default for `ThemeData`.
+- Schemes: Add the greyscale prototyping themes to the `FlexScheme` enum and colors.
+- Fix FlexThemeModeOptionButton absorb pointer need when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
@@ -82,7 +73,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **FIX**
 
  - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
- - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated. 
+ - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
+ - Chore: Update issue resolution status texts for Dialogs.
 
 **Feature**
 - Split FAB and Chip to separate panels.
