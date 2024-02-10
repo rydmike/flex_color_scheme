@@ -548,8 +548,9 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. FCS includes a corrections for the issue in its '
-                      'default TimePicker theme.\n',
+                  text: '. FCS includes a correction for the issue in its '
+                      'default TimePicker theme. In Flutter 3.16 and later, '
+                      'the issue has also been fixed.\n',
                 ),
               ],
             ),
@@ -566,10 +567,10 @@ class DialogSettings extends StatelessWidget {
             'InputDecoration style on time and date text entry fields in '
             'TimePicker and DatePicker dialogs.\n'
             '\n'
-            'Turn OFF to use default M3 inspired styles on text input fields '
+            'Turn OFF to use default M3 styles on text input fields '
             'in TimePicker and DatePicker dialogs.\n'
             '\n'
-            'NOTE: This feature has supported by DatePicker in Flutter 3.13. '
+            'NOTE: This feature is supported by DatePicker in Flutter 3.13. '
             'However, the support is flawed, see known issues.\n'
             '\n'
             'Defaults to ON in the ThemesPlayground. In the FlexColorScheme '
