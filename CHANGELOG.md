@@ -24,9 +24,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO PACKAGE**
 
-- BREAKING: Cnnage useMaterial3 to be true by default, to align with **Flutter's** 3.16.0 new default for `ThemeData`.
+- BREAKING: Change `useMaterial3` to be true by default, to align with **Flutter's** 3.16.0 default for `ThemeData`. Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Schemes: Add the greyscale prototyping themes to the `FlexScheme` enum and colors.
-- Fix FlexThemeModeOptionButton absorb pointer need when not using onSelected.
+- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
