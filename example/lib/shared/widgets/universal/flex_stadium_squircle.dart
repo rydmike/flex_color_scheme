@@ -342,7 +342,7 @@ class SquircleStadiumBorder extends ShapeBorder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (runtimeType != other.runtimeType) return false;
     return other is SquircleStadiumBorder && other.side == side;
   }
