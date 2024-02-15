@@ -40,14 +40,14 @@ class App {
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '0';
-  static const String versionPatch = '0';
+  static const String versionPatch = '0-dev.1';
   static const String versionBuild = '01';
   static const String version = '$versionMajor.$versionMinor.$versionPatch '
       '\nBuild-$versionBuild';
   static const String packageVersion =
       '$versionMajor.$versionMinor.$versionPatch';
   static const String packageVersionMinor = '$versionMajor.$versionMinor.x';
-  static const String flutterVersion = 'stable 3.16.7 (canvaskit)';
+  static const String flutterVersion = 'stable 3.19.0 (canvaskit)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
