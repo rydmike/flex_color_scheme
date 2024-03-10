@@ -1653,7 +1653,7 @@ class BottomSheetSection extends StatefulWidget {
 
 class _BottomSheetSectionState extends State<BottomSheetSection> {
   bool isNonModalBottomSheetOpen = false;
-  PersistentBottomSheetController<void>? _nonModalBottomSheetController;
+  PersistentBottomSheetController? _nonModalBottomSheetController;
 
   @override
   Widget build(BuildContext context) {
@@ -1689,7 +1689,7 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
 
     return ComponentDecoration(
       label: 'Bottom sheet',
-      tooltipMessage: 'Use showModalBottomSheet<T> or showBottomSheet<T>',
+      tooltipMessage: 'Use showModalBottomSheet<T> or showBottomSheet',
       child: Wrap(
         alignment: WrapAlignment.spaceEvenly,
         children: <Widget>[
@@ -1738,7 +1738,7 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
                 });
               }
 
-              _nonModalBottomSheetController = showBottomSheet<void>(
+              _nonModalBottomSheetController = showBottomSheet(
                 elevation: 8.0,
                 context: context,
                 constraints: const BoxConstraints(maxWidth: 640),
