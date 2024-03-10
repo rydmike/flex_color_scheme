@@ -2,12 +2,12 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.0.0 - WIP
+## 7.4.0 - WIP
 
-**February 10, 2024**
+**March 10, 2024**
 
 **PACKAGE**
-- Chore: Version bumps for Flutter 3.16
+- Chore: Version bumps for Flutter 3.19
 
 **NEW**
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
@@ -24,7 +24,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO PACKAGE**
 
-- BREAKING: Change `useMaterial3` to be true by default, to align with **Flutter's** 3.16.0 default for `ThemeData`. Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
+
 - Schemes: Add the greyscale prototyping themes to the `FlexScheme` enum and colors.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
@@ -42,8 +42,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
 - Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
-- AppBar: Decoupled foreground/background color.
-- FAB: Decoupled foreground/background color.
+- AppBar: Option to decoupled foreground/background color.
+- FAB: Option to decoupled foreground/background color.
 - Switch: Optional iOS-like style.
 - Switch: Platform adaptive iOS-like style.
 - Checkbox: Shape and border.
@@ -51,22 +51,27 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState.
 - InputDecorator: Platform adaptive radius.
 - Updates and features for `Chip` theming.
-- Maybe: 
+- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
+
+
+**TESTING**
+  - Add full coverage tests for all new package features!
+
+POSTPONED TO Version 8.0.0
+- BREAKING: Change `useMaterial3` to be true by default, to align with **Flutter's** 3.16.0 default for `ThemeData`. Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
+
+- Maybe in Version 8.0.0:
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
   - Via support in `FlexSeedScheme` add support for schemes, that are based on Material Color Utilities 0.8.0.
   - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
-  - Some `SearchBar` theming features.  
+  - Some `SearchBar` theming features.
   - Add fidelity for iOS adaptive AppBar (maybe).
   - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color.
 - Investigate:
   - If themed AppBar system overlay can now impact the system navigation
     bar settings. Implement convenience feature if it can.
-
-**TESTING**
-  - Add full coverage tests for all new package features!
-
 
 **THEMES PLAYGROUND**
 
@@ -74,6 +79,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
  - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
  - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
+- Fixed [#222 PersistentBottomSheetController's type in Example 5/Playground](https://github.com/rydmike/flex_color_scheme/issues/222).
  - Chore: Update issue resolution status texts for Dialogs.
 
 **Feature**
