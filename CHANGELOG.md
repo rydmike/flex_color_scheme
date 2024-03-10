@@ -79,7 +79,7 @@ POSTPONED TO Version 8.0.0
 
  - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
  - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
-- Fixed [#222 PersistentBottomSheetController's type in Example 5/Playground](https://github.com/rydmike/flex_color_scheme/issues/222).
+- Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
  - Chore: Update issue resolution status texts for Dialogs.
 
 **Feature**
