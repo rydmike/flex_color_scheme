@@ -1291,18 +1291,48 @@ class FlexSubThemes {
     /// There is no config property in [FlexSubThemesData] for [clipBehavior],
     /// if needed it can be exposed. Feel free to make a PR or submit an issue.
     final Clip clipBehavior = Clip.antiAlias,
-  }) =>
-      CardTheme(
-        clipBehavior: clipBehavior,
-        elevation: elevation,
-        shadowColor: shadowColor,
-        surfaceTintColor: surfaceTintColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kCardRadius),
-          ),
-        ),
-      );
+
+    /// A temporary flag used to opt-in to Material 3 features.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useMaterial3,
+  }) {
+    final bool useM3 = useMaterial3 ?? false;
+
+    // We use this to only create a RoundedRectangleBorder when radius differs
+    // from default in M2 and M3 mode. This is done in order to not make a
+    // a radius that destroys the default style of the `Card.outlined` style.
+    // since its variant get destroyed as soon as you make a theme with a radius
+    // that does not use a border. Which you want for the default elevated
+    // one and filled one.
+    //
+    // See issue:
+    // TODO(rydmike): File and add Card.outline theming issue link here.
+    final bool usesDefaultRadius = radius == null ||
+        (useM3 && radius == kCardRadius) ||
+        (!useM3 && radius == 4);
+
+    return CardTheme(
+      clipBehavior: clipBehavior,
+      elevation: elevation,
+      shadowColor: shadowColor,
+      surfaceTintColor: surfaceTintColor,
+      shape: usesDefaultRadius
+          ? null
+          : RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius),
+              ),
+            ),
+    );
+  }
 
   /// An opinionated [CheckboxThemeData] theme.
   ///

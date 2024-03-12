@@ -428,14 +428,7 @@ void main() {
       expect(
         FlexSubThemes.cardTheme(),
         equals(
-          const CardTheme(
-            clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-            ),
-          ),
+          const CardTheme(clipBehavior: Clip.antiAlias),
         ),
       );
     });

@@ -109,10 +109,12 @@ class CardSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: CardShowcase(explain: false),
+          child: CardTypesShowcase(
+            cardWidth: 140,
+            showThemedOutline: true,
+          ),
         ),
       ],
     );

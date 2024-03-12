@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 7.4.0 - WIP
 
-**March 10, 2024**
+**March 12, 2024**
 
 **PACKAGE**
 - Chore: Version bumps for Flutter 3.19
@@ -77,16 +77,19 @@ POSTPONED TO Version 8.0.0
 
 **FIX**
 
- - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
- - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
+ 
+- Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
+- Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
- - Chore: Update issue resolution status texts for Dialogs.
+- Chore: Update issue resolution status texts for Dialogs.
 
 **Feature**
+- Add #224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
 - Split FAB and Chip to separate panels.
 
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 
+- Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.
 - Make Chips presentation better.
