@@ -21,6 +21,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX**
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
+- Improved the theming logic for `Card` theme so it avoids issue (TODO: add Flutter issue link) when the default radius is used. This is done by not creating a shape theme then and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant. The Flutter theming limitation and imapct is thus now the same in FCS as it is with vanilla Flutter `ThemeData` and its `CardTheme`.    
 
 **TODO PACKAGE**
 
