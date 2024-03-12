@@ -6845,6 +6845,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.cardRadius ?? platformRadius,
               elevation: subTheme.cardElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              useMaterial3: useMaterial3,
             )
           : null,
       //
