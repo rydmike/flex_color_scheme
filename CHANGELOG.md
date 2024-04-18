@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0 - WIP
 
-**March 12, 2024**
+**April 18, 2024**
 
 
 **PACKAGE**
@@ -16,8 +16,8 @@ This version contains a lot of breaking changes due to updates in Material3 Colo
 At the same time a this release uses the forced breaking change to clean up the API and make it 
 more aligned with Flutter's Material3 theming. 
 
-- `useMaterial3` is now true by default, to align with Flutter's 3.16.0 default for ThemeData. To continue using Material2 theming, set useMaterial3 to false.
-- 
+- `useMaterial3` is now true by default, to align with Flutter's 3.16.0 default for ThemeData. To continue using Material2 theming, set useMaterial3 to false. Note that all sub-themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
+
 
 **CHANGE**
 - Change all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` from Flutter 3.19.0-0.3.pre.  
