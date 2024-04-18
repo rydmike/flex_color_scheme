@@ -645,10 +645,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     // Effective color, if null, keep null for M3 defaults via widget.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
@@ -1301,10 +1301,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
 
     // We use this to only create a RoundedRectangleBorder when radius differs
     // from default in M2 and M3 mode. This is done in order to not make a
@@ -1387,10 +1387,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool isBaseColor = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
@@ -1690,11 +1690,11 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
     // Used to toggle between different defaults from M2 and M3.
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintDisable = useTintedDisable ?? false;
 
     // Function used to increase icon color for selections resulting in poor
@@ -2187,10 +2187,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     // Get selected background color, defaults to surface.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
