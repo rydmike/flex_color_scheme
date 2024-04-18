@@ -1408,10 +1408,10 @@ class FlexSubThemes {
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
-      side: MaterialStateBorderSide.resolveWith((Set<MaterialState> states) {
+      side: WidgetStateBorderSide.resolveWith((Set<WidgetState> states) {
         if (useM3) {
-          if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
               return const BorderSide(width: 2.0, color: Colors.transparent);
             }
             if (tintDisable) {
@@ -1424,21 +1424,21 @@ class FlexSubThemes {
                 color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
           }
 
-          if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.selected)) {
             return const BorderSide(width: 0.0, color: Colors.transparent);
           }
-          if (states.contains(MaterialState.error)) {
+          if (states.contains(WidgetState.error)) {
             return BorderSide(width: 2.0, color: colorScheme.error);
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
             return BorderSide(width: 2.0, color: colorScheme.onSurface);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
             return BorderSide(width: 2.0, color: colorScheme.onSurface);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
             return BorderSide(width: 2.0, color: colorScheme.onSurface);
           }
@@ -1447,8 +1447,8 @@ class FlexSubThemes {
         }
         // M2 version
         else {
-          if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
               return const BorderSide(width: 2.0, color: Colors.transparent);
             }
             if (tintDisable) {
@@ -1462,7 +1462,7 @@ class FlexSubThemes {
               color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
             );
           }
-          if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.selected)) {
             return const BorderSide(width: 2.0, color: Colors.transparent);
           }
           if (isBaseColor) return BorderSide(width: 2.0, color: baseColor);
@@ -1471,11 +1471,11 @@ class FlexSubThemes {
               width: 2.0, color: isLight ? Colors.black54 : Colors.white70);
         }
       }),
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+      fillColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
           if (useM3) {
-            if (states.contains(MaterialState.disabled)) {
-              if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, baseColor);
                 }
@@ -1483,8 +1483,8 @@ class FlexSubThemes {
               }
               return Colors.transparent;
             }
-            if (states.contains(MaterialState.selected)) {
-              if (states.contains(MaterialState.error)) {
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
               return baseColor;
@@ -1493,8 +1493,8 @@ class FlexSubThemes {
           }
           // M2 version
           else {
-            if (states.contains(MaterialState.disabled)) {
-              if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, baseColor);
                 }
@@ -1502,24 +1502,24 @@ class FlexSubThemes {
               }
               return Colors.transparent;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return baseColor;
             }
             return Colors.transparent;
           }
         },
       ),
-      checkColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+      checkColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
           if (useM3) {
-            if (states.contains(MaterialState.disabled)) {
-              if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
                 return colorScheme.surface;
               }
               return Colors.transparent;
             }
-            if (states.contains(MaterialState.selected)) {
-              if (states.contains(MaterialState.error)) {
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.error)) {
                 return colorScheme.onError;
               }
               return onBaseColor;
@@ -1528,54 +1528,54 @@ class FlexSubThemes {
           }
           // M2 version
           else {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               return isLight ? Colors.grey.shade200 : Colors.grey.shade900;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return onBaseColor;
             }
             return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
           }
         },
       ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+      overlayColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
           // Error state only exists in M3 mode.
-          if (states.contains(MaterialState.error) && useM3) {
-            if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.error) && useM3) {
+            if (states.contains(WidgetState.pressed)) {
               return colorScheme.error.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return colorScheme.error.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return colorScheme.error.withAlpha(kAlphaFocused);
             }
           }
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return colorScheme.onSurface.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaFocused);
             }
             return Colors.transparent;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (tintInteract) return tintedPressed(overlay, tint, factor);
             return baseColor.withAlpha(kAlphaPressed);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
@@ -1972,26 +1972,26 @@ class FlexSubThemes {
               color: colorScheme.onSurface.withOpacity(0.12), width: 1),
         ),
         floatingLabelStyle:
-            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
           // These styles are copied for M# default, we are not going to test
           // them again.
           // coverage:ignore-start
-          if (states.contains(MaterialState.disabled)) {
+          if (states.contains(WidgetState.disabled)) {
             return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
           }
-          if (states.contains(MaterialState.error)) {
-            if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.error)) {
+            if (states.contains(WidgetState.hovered)) {
               return TextStyle(color: colorScheme.onErrorContainer);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return TextStyle(color: colorScheme.error);
             }
             return TextStyle(color: colorScheme.error);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return TextStyle(color: colorScheme.onSurfaceVariant);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             return TextStyle(color: colorScheme.primary);
           }
           return TextStyle(color: colorScheme.onSurfaceVariant);
@@ -2243,7 +2243,7 @@ class FlexSubThemes {
       menuStyle: MenuStyle(
         surfaceTintColor: surfaceTintColor == null
             ? null
-            : MaterialStatePropertyAll<Color>(surfaceTintColor),
+            : WidgetStatePropertyAll<Color>(surfaceTintColor),
       ),
     );
   }
@@ -2339,7 +2339,7 @@ class FlexSubThemes {
     ///
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -2439,9 +2439,9 @@ class FlexSubThemes {
           ), //buttonShape,
         ).copyWith(
           textStyle: textStyle,
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, tint);
                 }
@@ -2450,9 +2450,9 @@ class FlexSubThemes {
               return foreground;
             },
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, tint)
                       .withAlpha(kAlphaVeryLowDisabled);
@@ -2462,17 +2462,17 @@ class FlexSubThemes {
               return background;
             },
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.hovered)) {
+          overlayColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.hovered)) {
                 if (tintInteract) return tintedHovered(overlay, tint, factor);
                 return overlay.withAlpha(kAlphaHovered);
               }
-              if (states.contains(MaterialState.focused)) {
+              if (states.contains(WidgetState.focused)) {
                 if (tintInteract) return tintedFocused(overlay, tint, factor);
                 return overlay.withAlpha(kAlphaFocused);
               }
-              if (states.contains(MaterialState.pressed)) {
+              if (states.contains(WidgetState.pressed)) {
                 if (tintInteract) return tintedPressed(overlay, tint, factor);
                 return overlay.withAlpha(kAlphaPressed);
               }
@@ -2486,17 +2486,17 @@ class FlexSubThemes {
       // We are using M3 style buttons, with potentially custom radius,
       // elevation, foregroundColor, backgroundColor, overlayColor, padding
       // and minButtonSize.
-      MaterialStateProperty<Color?>? backgroundColor;
-      MaterialStateProperty<Color?>? foregroundColor;
-      MaterialStateProperty<Color?>? overlayColor;
+      WidgetStateProperty<Color?>? backgroundColor;
+      WidgetStateProperty<Color?>? foregroundColor;
+      WidgetStateProperty<Color?>? overlayColor;
 
       // If a baseSchemeColor was given we need to define all M3 color in
       // all states, if it was not defined, we can keeping them all null
       // and let M3 widget defaults handle the colors.
       if (baseSchemeColor != null || tintInteract || tintDisable) {
         foregroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, tint);
             }
@@ -2505,8 +2505,8 @@ class FlexSubThemes {
           return foreground;
         });
         backgroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, tint)
                   .withAlpha(kAlphaVeryLowDisabled);
@@ -2516,16 +2516,16 @@ class FlexSubThemes {
           return background;
         });
         overlayColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return foreground.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return foreground.withAlpha(kAlphaFocused);
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (tintInteract) return tintedPressed(overlay, tint, factor);
             return foreground.withAlpha(kAlphaPressed);
           }
@@ -2537,8 +2537,8 @@ class FlexSubThemes {
       // above or be left at defaults and let widget default define it.
       if (baseSchemeColor == null && onBaseSchemeColor != null) {
         backgroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, tint)
                   .withAlpha(kAlphaVeryLowDisabled);
@@ -2553,19 +2553,19 @@ class FlexSubThemes {
       // custom elevation behavior that is based on how M3 elevation works,
       // but where we can modify the base level. If elevation 1, is passed
       // the result is the same as M3 elevation behavior.
-      final MaterialStateProperty<double?>? elevationM3 = elevation == null
+      final WidgetStateProperty<double?>? elevationM3 = elevation == null
           ? null
-          : MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
+          : WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
                 return 0.0;
               }
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 return elevation + 2.0;
               }
-              if (states.contains(MaterialState.focused)) {
+              if (states.contains(WidgetState.focused)) {
                 return elevation;
               }
-              if (states.contains(MaterialState.pressed)) {
+              if (states.contains(WidgetState.pressed)) {
                 return elevation;
               }
               return elevation;
@@ -2645,7 +2645,7 @@ class FlexSubThemes {
     ///
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -2697,9 +2697,9 @@ class FlexSubThemes {
     final Color tint = background;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
-    MaterialStateProperty<Color?>? backgroundColor;
-    MaterialStateProperty<Color?>? foregroundColor;
-    MaterialStateProperty<Color?>? overlayColor;
+    WidgetStateProperty<Color?>? backgroundColor;
+    WidgetStateProperty<Color?>? foregroundColor;
+    WidgetStateProperty<Color?>? overlayColor;
 
     // TODO(rydmike): Monitor FilledButton no variants theming issue.
     // We only define theme props if we have some settings the default
@@ -2712,8 +2712,8 @@ class FlexSubThemes {
     // color that anyway kills their separate designs.
     if (backgroundSchemeColor != null) {
       backgroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, background)
                 .withAlpha(kAlphaVeryLowDisabled);
@@ -2723,8 +2723,8 @@ class FlexSubThemes {
         return background;
       });
       foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, background);
           }
@@ -2737,8 +2737,8 @@ class FlexSubThemes {
       // same style.
       if (tintDisable) {
         backgroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, background)
                   .withAlpha(kAlphaVeryLowDisabled);
@@ -2747,8 +2747,8 @@ class FlexSubThemes {
           return null; // We get default backgroundColor.
         });
         foregroundColor =
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, background);
             }
@@ -2763,19 +2763,18 @@ class FlexSubThemes {
     // tonal and normal filled button. Added as workaround for issue:
     // https://github.com/flutter/flutter/issues/118063
     if (tintInteract) {
-      overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
+      overlayColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.hovered)) {
           if (tintInteract) return tintedHovered(overlay, tint, factor);
           // TODO(rydmike): Temp comment, can't be reached due temp if above.
           // return foreground.withAlpha(kAlphaHovered);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           if (tintInteract) return tintedFocused(overlay, tint, factor);
           // TODO(rydmike): Temp comment, can't be reached due temp if above.
           // return foreground.withAlpha(kAlphaFocused);
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.pressed)) {
           if (tintInteract) return tintedPressed(overlay, tint, factor);
           // TODO(rydmike): Temp comment, can't be reached due temp if above.
           // return foreground.withAlpha(kAlphaPressed);
@@ -2973,43 +2972,43 @@ class FlexSubThemes {
             // Due to above mentioned issue backgroundColor cannot be added yet
             // without destroying the different styles.
             // backgroundColor:
-            //  MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            //   if (states.contains(MaterialState.disabled)) {
+            //  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            //   if (states.contains(WidgetState.disabled)) {
             //     if (tintDisable) {
             //       return tintedDisable(colorScheme.onSurface, tint)
             //           .withAlpha(kAlphaVeryLowDisabled);
             //     }
-            //     if (states.contains(MaterialState.selected)) {
+            //     if (states.contains(WidgetState.selected)) {
             //       return colorScheme.onSurface.withOpacity(0.12);
             //     }
             //     return Colors.transparent;
             //   }
-            //   if (states.contains(MaterialState.selected)) {
+            //   if (states.contains(WidgetState.selected)) {
             //     return colorScheme.inverseSurface;
             //   }
             //   return Colors.transparent;
             // }),
             foregroundColor:
-                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+                WidgetStateProperty.resolveWith((Set<WidgetState> states) {
               // We can do a tinted foreground color when requested, since it
               // is the same for all variants by default as well.
-              if (states.contains(MaterialState.disabled)) {
+              if (states.contains(WidgetState.disabled)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, tint);
                 }
                 // return colorScheme.onSurface.withOpacity(0.38);
               }
-              // if (states.contains(MaterialState.selected)) {
+              // if (states.contains(WidgetState.selected)) {
               //   return colorScheme.onInverseSurface;
               // }
               // return colorScheme.onSurfaceVariant;
               return null; // Gets us default for foregroundColor
             }),
             overlayColor: tintInteract
-                ? MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
-                      if (states.contains(MaterialState.pressed)) {
+                ? WidgetStateProperty.resolveWith<Color>(
+                    (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
+                      if (states.contains(WidgetState.pressed)) {
                         if (tintInteract) {
                           return tintedPressed(overlay, tint, factor);
                         }
@@ -3017,14 +3016,14 @@ class FlexSubThemes {
                         // return
                         // colorScheme.onSurface.withAlpha(kAlphaPressed);
                       }
-                      if (states.contains(MaterialState.hovered)) {
+                      if (states.contains(WidgetState.hovered)) {
                         if (tintInteract) {
                           return tintedHovered(overlay, tint, factor);
                         }
                         // TODO(rydmike): Add option when Flutter issue fixed.
                         // return foreground.withAlpha(kAlphaHovered);
                       }
-                      if (states.contains(MaterialState.focused)) {
+                      if (states.contains(WidgetState.focused)) {
                         if (tintInteract) {
                           return tintedFocused(overlay, tint, factor);
                         }
@@ -3033,21 +3032,21 @@ class FlexSubThemes {
                       }
                       return Colors.transparent;
                     }
-                    if (states.contains(MaterialState.pressed)) {
+                    if (states.contains(WidgetState.pressed)) {
                       if (tintInteract) {
                         return tintedPressed(overlay, tint, factor);
                       }
                       // TODO(rydmike): Add option when Flutter issue fixed.
                       // return foreground.withAlpha(kAlphaPressed);
                     }
-                    if (states.contains(MaterialState.hovered)) {
+                    if (states.contains(WidgetState.hovered)) {
                       if (tintInteract) {
                         return tintedHovered(overlay, tint, factor);
                       }
                       // TODO(rydmike): Add option when Flutter issue fixed.
                       // return colorScheme.onSurface.withAlpha(kAlphaHovered);
                     }
-                    if (states.contains(MaterialState.focused)) {
+                    if (states.contains(WidgetState.focused)) {
                       if (tintInteract) {
                         return tintedFocused(overlay, tint, factor);
                       }
@@ -3302,8 +3301,8 @@ class FlexSubThemes {
     final Color usedFillColor = fillColor != null
         ? Color.alphaBlend(
             fillColor.withAlpha(effectiveAlpha), colorScheme.surface)
-        : MaterialStateColor.resolveWith((Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        : WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               return tintDisable
                   ? tintDisabledUltraLowColor
                   : colorScheme.onSurface
@@ -3373,24 +3372,23 @@ class FlexSubThemes {
               );
 
     return InputDecorationTheme(
-      labelStyle:
-          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.error)) {
-          if (states.contains(MaterialState.focused)) {
+      labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.error)) {
+          if (states.contains(WidgetState.focused)) {
             return TextStyle(color: colorScheme.error);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return TextStyle(color: colorScheme.onErrorContainer);
           }
           return TextStyle(color: colorScheme.error);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return TextStyle(color: baseColor);
         }
-        if (states.contains(MaterialState.hovered)) {
+        if (states.contains(WidgetState.hovered)) {
           return TextStyle(color: colorScheme.onSurfaceVariant);
         }
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? TextStyle(color: tintDisabledColor)
               : TextStyle(
@@ -3400,13 +3398,13 @@ class FlexSubThemes {
             color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
       floatingLabelStyle:
-          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.error)) {
-          if (states.contains(MaterialState.focused)) {
+          WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.error)) {
+          if (states.contains(WidgetState.focused)) {
             return TextStyle(color: colorScheme.error);
           }
 
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             // TODO(rydmike): Info: M3 uses onErrorContainer.
             // TextStyle(color: colorScheme.onErrorContainer)
             // Excluding it, prefer error as float label color, FCS opinionated.
@@ -3416,13 +3414,13 @@ class FlexSubThemes {
           }
           return TextStyle(color: colorScheme.error);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return TextStyle(color: borderColor);
         }
-        if (states.contains(MaterialState.hovered)) {
+        if (states.contains(WidgetState.hovered)) {
           return TextStyle(color: colorScheme.onSurfaceVariant);
         }
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? TextStyle(color: tintDisabledColor)
               : TextStyle(
@@ -3433,9 +3431,8 @@ class FlexSubThemes {
         return TextStyle(
             color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
-      helperStyle:
-          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      helperStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? TextStyle(color: tintDisabledColor)
               : TextStyle(
@@ -3446,53 +3443,50 @@ class FlexSubThemes {
         return TextStyle(
             color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
-      hintStyle:
-          MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      hintStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return TextStyle(
               color: tintDisable ? tintDisabledColor : disabledColorM2);
         }
         return TextStyle(color: hintColorM2);
       }),
-      iconColor: MaterialStateColor.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? tintDisabledColor
               : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
-      prefixIconColor:
-          MaterialStateColor.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? tintDisabledColor
               : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return prefixIconColor;
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
-      suffixIconColor:
-          MaterialStateColor.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.error)) {
+      suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.error)) {
           // TODO(rydmike): Info: M3 uses onErrorContainer.
-          // if (states.contains(MaterialState.hovered)) {
+          // if (states.contains(WidgetState.hovered)) {
           //   return colorScheme.onErrorContainer;
           // }
           // Excluding it, prefer suffix icon as error color, FCS opinionated.
           return colorScheme.error;
         }
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? tintDisabledColor
               : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
@@ -3600,19 +3594,19 @@ class FlexSubThemes {
           ? null
           : MenuStyle(
               backgroundColor: backgroundSchemeColor != null
-                  ? MaterialStatePropertyAll<Color?>(surface)
+                  ? WidgetStatePropertyAll<Color?>(surface)
                   : null,
               surfaceTintColor: surfaceTintColor != null
-                  ? MaterialStatePropertyAll<Color?>(surfaceTintColor)
+                  ? WidgetStatePropertyAll<Color?>(surfaceTintColor)
                   : null,
               shadowColor: shadowColor != null
-                  ? MaterialStatePropertyAll<Color?>(shadowColor)
+                  ? WidgetStatePropertyAll<Color?>(shadowColor)
                   : null,
               elevation: elevation != null
-                  ? MaterialStatePropertyAll<double?>(elevation)
+                  ? WidgetStatePropertyAll<double?>(elevation)
                   : null,
               shape: radius != null
-                  ? MaterialStatePropertyAll<OutlinedBorder>(
+                  ? WidgetStatePropertyAll<OutlinedBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(radius),
@@ -3631,7 +3625,7 @@ class FlexSubThemes {
   /// menu item.
   ///
   /// If highlight colors are not defined, the highlighted item uses default
-  /// [MaterialState] property response os overlay for highlighted item.
+  /// [WidgetState] property response os overlay for highlighted item.
   /// These states can optionally also use FlexColorScheme tinted style.
   /// Disabled items can also to use the optional FCS tinted style.
   static MenuButtonThemeData menuButtonTheme({
@@ -3688,7 +3682,7 @@ class FlexSubThemes {
     ///
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundSchemeColor] is used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -3762,81 +3756,81 @@ class FlexSubThemes {
         // We do not want that. This Duration fixes the issue.
         animationDuration: Duration.zero,
         // Foreground color, use same for icon.
-        foregroundColor: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        foregroundColor: WidgetStateProperty.resolveWith(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(foregroundColor, disabledTint);
               }
               return foregroundColor.withAlpha(kAlphaDisabled);
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               return indicatorFgColor;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return indicatorFgColor;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return indicatorFgColor;
             }
             return foregroundColor;
           },
         ),
         // icon foreground color.
-        iconColor: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        iconColor: WidgetStateProperty.resolveWith(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(foregroundColor, disabledTint);
               }
               return foregroundColor.withAlpha(kAlphaDisabled);
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               return indicatorFgColor;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return indicatorFgColor;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return indicatorFgColor;
             }
             return foregroundColor;
           },
         ),
-        backgroundColor: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (Set<WidgetState> states) {
             if (indicatorBackgroundSchemeColor != null) {
-              if (states.contains(MaterialState.pressed)) {
+              if (states.contains(WidgetState.pressed)) {
                 return indicatorBgColor;
               }
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 return indicatorBgColor;
               }
-              if (states.contains(MaterialState.focused)) {
+              if (states.contains(WidgetState.focused)) {
                 return indicatorBgColor;
               }
             }
             return transparentBackground ? Colors.transparent : backgroundColor;
           },
         ),
-        overlayColor: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.pressed)) {
+        overlayColor: WidgetStateProperty.resolveWith(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return foregroundColor.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               if (tintInteract) return tintedSplash(overlay, tint, factor);
               return foregroundColor.withAlpha(kAlphaSplash);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (indicatorBackgroundSchemeColor != null) {
                 return Colors.transparent;
               }
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return foregroundColor.withAlpha(kAlphaFocused);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (indicatorBackgroundSchemeColor != null) {
                 return Colors.transparent;
               }
@@ -3925,19 +3919,19 @@ class FlexSubThemes {
           : MenuStyle(
               elevation: elevation == null
                   ? null
-                  : MaterialStatePropertyAll<double?>(elevation),
+                  : WidgetStatePropertyAll<double?>(elevation),
               backgroundColor: backgroundSchemeColor == null && opacity == null
                   ? null
-                  : MaterialStatePropertyAll<Color?>(backgroundColor),
+                  : WidgetStatePropertyAll<Color?>(backgroundColor),
               padding: padding == null
                   ? null
-                  : MaterialStatePropertyAll<EdgeInsetsGeometry?>(padding),
+                  : WidgetStatePropertyAll<EdgeInsetsGeometry?>(padding),
               surfaceTintColor: surfaceTintColor == null
                   ? null
-                  : MaterialStatePropertyAll<Color>(surfaceTintColor),
+                  : WidgetStatePropertyAll<Color>(surfaceTintColor),
               shape: radius == null
                   ? null
-                  : MaterialStatePropertyAll<OutlinedBorder>(
+                  : WidgetStatePropertyAll<OutlinedBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(radius),
@@ -3952,11 +3946,11 @@ class FlexSubThemes {
   ///
   /// The navigation bar can use opinionated color choices from the passed
   /// [colorScheme] to style the bottom navigation bar, it uses "quick"
-  /// settings not requiring usage of MaterialState property resolutions.
+  /// settings not requiring usage of WidgetState property resolutions.
   ///
   /// This sub-theme uses a style that prefers single use config parameters over
   /// the ones that combines many styling options into sub-themes and
-  /// MaterialState properties. This is simpler to use when you want to just
+  /// WidgetState properties. This is simpler to use when you want to just
   /// modify a single property like size and rest is fine. This is done of
   /// course at the expense that the sub-theme instead has a lot of properties.
   ///
@@ -3968,7 +3962,7 @@ class FlexSubThemes {
   ///
   /// You can also use the sub-theme helper as an alternative API for creating
   /// a custom sub-theme for [NavigationBarThemeData], as thins one does not
-  /// need the complicated [MaterialStateProperty] which can be difficult to
+  /// need the complicated [WidgetStateProperty] which can be difficult to
   /// use. It instead exposes properties for the usable states.
   ///
   /// It can also set an [opacity] on the background color.
@@ -4350,9 +4344,9 @@ class FlexSubThemes {
             ),
       labelTextStyle: useDefaultTextStyle
           ? null
-          : MaterialStateProperty.resolveWith<TextStyle>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
+          : WidgetStateProperty.resolveWith<TextStyle>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
                   return textStyle.copyWith(
                     fontSize: labelSize,
                     color: labelColor,
@@ -4371,9 +4365,9 @@ class FlexSubThemes {
             ),
       iconTheme: useDefaultIconTheme
           ? null
-          : MaterialStateProperty.resolveWith<IconThemeData>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
+          : WidgetStateProperty.resolveWith<IconThemeData>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
                   return IconThemeData(
                     size: iconSize,
                     color: iconColor,
@@ -4510,32 +4504,32 @@ class FlexSubThemes {
     //  Report this limitation!
 
     // Color? indicatorStateColor() =>
-    //     MaterialStateColor.resolveWith((Set<MaterialState> states) {
-    //       if (states.contains(MaterialState.selected)) {
-    //         if (states.contains(MaterialState.pressed)) {
+    //     WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    //       if (states.contains(WidgetState.selected)) {
+    //         if (states.contains(WidgetState.pressed)) {
     //           if (tintInteract) return tintedPressed(overlay, tint, factor);
     //           return indicatorColor.withAlpha(kAlphaPressed);
     //         }
-    //         if (states.contains(MaterialState.hovered)) {
+    //         if (states.contains(WidgetState.hovered)) {
     //           if (tintInteract) return tintedHovered(overlay, tint, factor);
     //           return indicatorColor.withAlpha(kAlphaHovered);
     //         }
-    //         if (states.contains(MaterialState.focused)) {
+    //         if (states.contains(WidgetState.focused)) {
     //           if (tintInteract) return tintedFocused(overlay, tint, factor);
     //           return indicatorColor.withAlpha(kAlphaFocused);
     //         }
     //         return indicatorColor;
     //       }
     //
-    //       if (states.contains(MaterialState.hovered)) {
+    //       if (states.contains(WidgetState.hovered)) {
     //         if (tintInteract) return tintedPressed(overlay, tint, factor);
     //         return colorScheme.primary.withAlpha(kAlphaPressed);
     //       }
-    //       if (states.contains(MaterialState.hovered)) {
+    //       if (states.contains(WidgetState.hovered)) {
     //         if (tintInteract) return tintedHovered(overlay, tint, factor);
     //         return colorScheme.onSurface.withAlpha(kAlphaHovered);
     //       }
-    //       if (states.contains(MaterialState.focused)) {
+    //       if (states.contains(WidgetState.focused)) {
     //         if (tintInteract) return tintedHovered(overlay, tint, factor);
     //         return colorScheme.primary.withAlpha(kAlphaHovered);
     //       }
@@ -4556,17 +4550,17 @@ class FlexSubThemes {
               ),
             ),
       labelTextStyle:
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         return style.apply(
-          color: states.contains(MaterialState.selected)
+          color: states.contains(WidgetState.selected)
               ? onIndicatorColor
               : onBackgroundColor,
         );
       }),
-      iconTheme: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+      iconTheme: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         return IconThemeData(
           size: 24.0,
-          color: states.contains(MaterialState.selected)
+          color: states.contains(WidgetState.selected)
               ? onIndicatorColor
               : onBackgroundColor,
         );
@@ -5109,7 +5103,7 @@ class FlexSubThemes {
     ///
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -5171,12 +5165,12 @@ class FlexSubThemes {
 
     // We only define theme props for foregroundColor and overlayColor, if we
     // have some settings the default widget behavior does not handle.
-    MaterialStateProperty<Color?>? foregroundColor;
-    MaterialStateProperty<Color?>? overlayColor;
+    WidgetStateProperty<Color?>? foregroundColor;
+    WidgetStateProperty<Color?>? overlayColor;
     if (baseSchemeColor != null || tintInteract || tintDisable) {
       foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, baseColor);
           }
@@ -5185,17 +5179,16 @@ class FlexSubThemes {
         return baseColor;
       });
 
-      overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
+      overlayColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.hovered)) {
           if (tintInteract) return tintedHovered(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaHovered);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           if (tintInteract) return tintedFocused(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaFocused);
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.pressed)) {
           if (tintInteract) return tintedPressed(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaPressed);
         }
@@ -5205,14 +5198,14 @@ class FlexSubThemes {
 
     // Define side if its widths or color has any custom definition, if not
     // we fall back to default theme.
-    MaterialStateProperty<BorderSide?>? side;
+    WidgetStateProperty<BorderSide?>? side;
     if (outlineSchemeColor != null ||
         outlineWidth != null ||
         pressedOutlineWidth != null ||
         tintDisable ||
         !useM3) {
-      side = MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      side = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
             return BorderSide(
               color: tintedDisable(colorScheme.onSurface, outlineColor)
@@ -5225,13 +5218,13 @@ class FlexSubThemes {
             width: normalWidth,
           );
         }
-        if (states.contains(MaterialState.error)) {
+        if (states.contains(WidgetState.error)) {
           return BorderSide(
             color: colorScheme.error,
             width: pressedWidth,
           );
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.pressed)) {
           return BorderSide(
             color: outlineColor,
             width: pressedWidth,
@@ -5378,8 +5371,8 @@ class FlexSubThemes {
       surfaceTintColor: surfaceTintColor,
       textStyle: effectiveTextStyle?.apply(color: foregroundColor),
       labelTextStyle: effectiveTextStyle != null
-          ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
+          ? WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
                 return effectiveTextStyle.apply(
                     color: foregroundColor?.withAlpha(kAlphaDisabled));
               }
@@ -5470,55 +5463,55 @@ class FlexSubThemes {
 
     return RadioThemeData(
       splashRadius: splashRadius,
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+      fillColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
           if (useM3) {
-            if (states.contains(MaterialState.selected)) {
-              if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.disabled)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, baseColor);
                 }
                 return colorScheme.onSurface.withAlpha(kAlphaDisabled);
               }
-              if (states.contains(MaterialState.pressed)) {
+              if (states.contains(WidgetState.pressed)) {
                 return baseColor;
               }
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 return baseColor;
               }
-              if (states.contains(MaterialState.focused)) {
+              if (states.contains(WidgetState.focused)) {
                 return baseColor;
               }
               return baseColor;
             }
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor);
               }
               return colorScheme.onSurface.withAlpha(kAlphaDisabled);
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               if (unselectedColored) return baseColor.withAlpha(kAlphaUnselect);
               return colorScheme.onSurface;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (unselectedColored) return baseColor.withAlpha(kAlphaUnselect);
               return colorScheme.onSurface;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (unselectedColored) return baseColor.withAlpha(kAlphaUnselect);
               return colorScheme.onSurface;
             }
             if (unselectedColored) return baseColor.withAlpha(kAlphaUnselect);
             return colorScheme.onSurfaceVariant;
           } else {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor);
               }
               return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return baseColor;
             }
             if (unselectedColored) {
@@ -5529,32 +5522,32 @@ class FlexSubThemes {
           }
         },
       ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+      overlayColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return colorScheme.onSurface.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaFocused);
             }
             return Colors.transparent;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (tintInteract) return tintedPressed(overlay, tint, factor);
             return baseColor.withAlpha(kAlphaPressed);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
@@ -5655,7 +5648,7 @@ class FlexSubThemes {
     /// The color of the [textStyle] is typically not used directly, the
     /// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
     /// used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// A temporary flag used to opt-in to Material 3 features.
     ///
@@ -5749,31 +5742,31 @@ class FlexSubThemes {
             minButtonSize ?? (useM3 ? null : kButtonMinSize)),
         padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
         backgroundColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return unselectedSchemeColor == null ? null : unselectedColor;
           }
-          if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.selected)) {
             return selectedColor;
           }
           return unselectedSchemeColor == null ? null : unselectedColor;
         }),
         foregroundColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(disabledForeground, disableTint);
             }
             return disabledForeground.withAlpha(kAlphaDisabled);
           }
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               return onSelectedColor;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return onSelectedColor;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return onSelectedColor;
             }
             return onSelectedColor;
@@ -5790,25 +5783,25 @@ class FlexSubThemes {
         // selected, but there we get the unselected mode all times, so
         // it is not noticed, still one call would be enough.
         overlayColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
           // This nicer overlay for selected overlay never gets seen due
           // to above mentioned Flutter SDK bug. But if it is ever fixed it
           // will get used automatically, via code below.
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return unselectedColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return unselectedColor.withAlpha(kAlphaFocused);
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return unselectedColor.withAlpha(kAlphaPressed);
             }
           } else {
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) {
                 return tintedHovered(unOverlay, unTint, unFactor);
               }
@@ -5816,7 +5809,7 @@ class FlexSubThemes {
                   ? colorScheme.onSurface.withAlpha(kAlphaHovered)
                   : onUnselectedColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) {
                 return tintedFocused(unOverlay, unTint, unFactor);
               }
@@ -5824,7 +5817,7 @@ class FlexSubThemes {
                   ? colorScheme.onSurface.withAlpha(kAlphaFocused)
                   : onUnselectedColor.withAlpha(kAlphaFocused);
             }
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) {
                 return tintedPressed(unOverlay, unTint, unFactor);
               }
@@ -5835,8 +5828,8 @@ class FlexSubThemes {
           }
           return null;
         }),
-        side: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+        side: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return BorderSide(
                 color: tintedDisable(colorScheme.onSurface, disableBorderTint)
@@ -5970,16 +5963,16 @@ class FlexSubThemes {
     }
 
     Color? overlayColor() =>
-        MaterialStateColor.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
+        WidgetStateColor.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.primary.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.primary.withAlpha(kAlphaFocused);
           }
-          if (states.contains(MaterialState.dragged)) {
+          if (states.contains(WidgetState.dragged)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.primary.withAlpha(kAlphaFocused);
           }
@@ -6145,8 +6138,7 @@ class FlexSubThemes {
           : null,
       backgroundColor: background,
       contentTextStyle: snackTextStyle,
-      actionTextColor:
-          MaterialStateColor.resolveWith((Set<MaterialState> states) {
+      actionTextColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
         return actionForeground ?? foreground?.withAlpha(0xDD) ?? Colors.grey;
       }),
       disabledActionTextColor:
@@ -6282,10 +6274,10 @@ class FlexSubThemes {
     if (!useM3) {
       return SwitchThemeData(
         splashRadius: splashRadius,
-        thumbColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, baseColor);
                 }
@@ -6297,22 +6289,22 @@ class FlexSubThemes {
               }
               return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return thumbColor;
             }
             return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
           },
         ),
-        trackColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
+        trackColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor)
                     .withAlpha(kAlphaVeryLowDisabled);
               }
               return isLight ? Colors.black12 : Colors.white10;
             }
-            if (states.contains(MaterialState.selected)) {
+            if (states.contains(WidgetState.selected)) {
               return baseColor.withAlpha(
                   isLight ? kAlphaM2SwitchTrackLight : kAlphaM2SwitchTrackDark);
             }
@@ -6327,31 +6319,31 @@ class FlexSubThemes {
           },
         ),
         overlayColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaFocused);
             }
             return null;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (tintInteract) return tintedPressed(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
@@ -6364,15 +6356,13 @@ class FlexSubThemes {
       return SwitchThemeData(
         splashRadius: splashRadius,
         thumbIcon: thumbFixedSize ?? false
-            ? MaterialStateProperty.resolveWith<Icon?>(
-                (Set<MaterialState> states) {
+            ? WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
                 return const Icon(Icons.minimize, color: Colors.transparent);
               })
             : null,
-        thumbColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
               return colorScheme.surface;
             }
             if (tintDisable) {
@@ -6380,33 +6370,32 @@ class FlexSubThemes {
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               return thumbColor;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return thumbColor;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return thumbColor;
             }
             return onBaseColor;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             return colorScheme.onSurfaceVariant;
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return colorScheme.onSurfaceVariant;
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             return colorScheme.onSurfaceVariant;
           }
           return colorScheme.outline;
         }),
-        trackColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            if (states.contains(MaterialState.selected)) {
+        trackColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor);
               }
@@ -6414,33 +6403,33 @@ class FlexSubThemes {
             }
             return colorScheme.surfaceVariant.withAlpha(kAlphaVeryLowDisabled);
           }
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               return baseColor;
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return baseColor;
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               return baseColor;
             }
             return baseColor;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             return unselectedColored
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
                     : kAlphaM3SwitchUnselectTrackDark)
                 : colorScheme.surfaceVariant;
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             return unselectedColored
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
                     : kAlphaM3SwitchUnselectTrackDark)
                 : colorScheme.surfaceVariant;
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             return unselectedColored
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
@@ -6454,11 +6443,11 @@ class FlexSubThemes {
               : colorScheme.surfaceVariant;
         }),
         trackOutlineColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
             return Colors.transparent;
           }
-          if (states.contains(MaterialState.disabled)) {
+          if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return tintedDisable(colorScheme.onSurface, baseColor);
             }
@@ -6467,31 +6456,31 @@ class FlexSubThemes {
           return colorScheme.outline;
         }),
         overlayColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            if (states.contains(MaterialState.pressed)) {
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaPressed);
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaHovered);
             }
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
               return baseColor.withAlpha(kAlphaFocused);
             }
             return null;
           }
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             if (tintInteract) return tintedPressed(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaPressed);
           }
-          if (states.contains(MaterialState.hovered)) {
+          if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaHovered);
           }
-          if (states.contains(MaterialState.focused)) {
+          if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return colorScheme.onSurface.withAlpha(kAlphaFocused);
           }
@@ -6610,28 +6599,28 @@ class FlexSubThemes {
       dividerColor: dividerColor,
       //
       overlayColor: useCustomOverlay
-          ? MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
-                if (states.contains(MaterialState.hovered)) {
+          ? WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
+                if (states.contains(WidgetState.hovered)) {
                   return overlayBase.withAlpha(kAlphaHovered);
                 }
-                if (states.contains(MaterialState.focused)) {
+                if (states.contains(WidgetState.focused)) {
                   return overlayBase.withAlpha(kAlphaFocused);
                 }
-                if (states.contains(MaterialState.pressed)) {
+                if (states.contains(WidgetState.pressed)) {
                   return overlayBase.withAlpha(kAlphaPressed);
                 }
                 return null;
               }
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 if (tintInteract) return overlayBase.withAlpha(kAlphaHovered);
                 return colorScheme.onSurface.withAlpha(kAlphaHovered);
               }
-              if (states.contains(MaterialState.focused)) {
+              if (states.contains(WidgetState.focused)) {
                 if (tintInteract) return overlayBase.withAlpha(kAlphaFocused);
                 return colorScheme.onSurface.withAlpha(kAlphaFocused);
               }
-              if (states.contains(MaterialState.pressed)) {
+              if (states.contains(WidgetState.pressed)) {
                 if (tintInteract) return overlayBase.withAlpha(kAlphaPressed);
                 return overlayBase.withAlpha(kAlphaPressed);
               }
@@ -6684,7 +6673,7 @@ class FlexSubThemes {
     ///
     /// The color of the [textStyle] is typically not used directly, the
     /// [foregroundColor] is used instead.
-    final MaterialStateProperty<TextStyle?>? textStyle,
+    final WidgetStateProperty<TextStyle?>? textStyle,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -6733,12 +6722,12 @@ class FlexSubThemes {
 
     // We only define theme props for foregroundColor and overlayColor, if we
     // have some settings the default widget behavior does not handle.
-    MaterialStateProperty<Color?>? foregroundColor;
-    MaterialStateProperty<Color?>? overlayColor;
+    WidgetStateProperty<Color?>? foregroundColor;
+    WidgetStateProperty<Color?>? overlayColor;
     if (baseSchemeColor != null || tintInteract || tintDisable) {
       foregroundColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, tint);
           }
@@ -6747,17 +6736,16 @@ class FlexSubThemes {
         return baseColor;
       });
 
-      overlayColor =
-          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
+      overlayColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.hovered)) {
           if (tintInteract) return tintedHovered(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaHovered);
         }
-        if (states.contains(MaterialState.focused)) {
+        if (states.contains(WidgetState.focused)) {
           if (tintInteract) return tintedFocused(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaFocused);
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.pressed)) {
           if (tintInteract) return tintedPressed(overlay, tint, factor);
           return baseColor.withAlpha(kAlphaPressed);
         }
@@ -6941,8 +6929,8 @@ class FlexSubThemes {
 
     /// The [TextStyle] for the numbers on the time selection dial.
     ///
-    /// If [dialTextStyle]'s [TextStyle.color] is a [MaterialStateColor], then
-    /// the effective text color can depend on the [MaterialState.selected]
+    /// If [dialTextStyle]'s [TextStyle.color] is a [WidgetStateColor], then
+    /// the effective text color can depend on the [WidgetState.selected]
     /// state, i.e. if the text is selected or not.
     ///
     /// If this style is null then the dial's text style is based on the theme's
@@ -6981,19 +6969,19 @@ class FlexSubThemes {
         : schemeColor(backgroundSchemeColor, colorScheme);
 
     Color defaultHourMinuteColor() {
-      return MaterialStateColor.resolveWith((Set<MaterialState> states) {
+      return WidgetStateColor.resolveWith((Set<WidgetState> states) {
         // These styles are copied for M# default, we are not going to test
         // them again.
         // coverage:ignore-start
-        if (states.contains(MaterialState.selected)) {
+        if (states.contains(WidgetState.selected)) {
           Color overlayColor = colorScheme.primaryContainer;
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             overlayColor = colorScheme.onPrimaryContainer;
-          } else if (states.contains(MaterialState.hovered)) {
+          } else if (states.contains(WidgetState.hovered)) {
             const double hoverOpacity = 0.08;
             overlayColor =
                 colorScheme.onPrimaryContainer.withOpacity(hoverOpacity);
-          } else if (states.contains(MaterialState.focused)) {
+          } else if (states.contains(WidgetState.focused)) {
             const double focusOpacity = 0.12;
             overlayColor =
                 colorScheme.onPrimaryContainer.withOpacity(focusOpacity);
@@ -7001,12 +6989,12 @@ class FlexSubThemes {
           return Color.alphaBlend(overlayColor, colorScheme.primaryContainer);
         } else {
           Color overlayColor = colorScheme.surfaceVariant;
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             overlayColor = colorScheme.onSurface;
-          } else if (states.contains(MaterialState.hovered)) {
+          } else if (states.contains(WidgetState.hovered)) {
             const double hoverOpacity = 0.08;
             overlayColor = colorScheme.onSurface.withOpacity(hoverOpacity);
-          } else if (states.contains(MaterialState.focused)) {
+          } else if (states.contains(WidgetState.focused)) {
             const double focusOpacity = 0.12;
             overlayColor = colorScheme.onSurface.withOpacity(focusOpacity);
           }
@@ -7051,34 +7039,34 @@ class FlexSubThemes {
       );
     }
 
-    MaterialStateProperty<Color> dayPeriodForegroundColor() {
-      return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+    WidgetStateProperty<Color> dayPeriodForegroundColor() {
+      return WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         Color? textColor;
-        if (states.contains(MaterialState.selected)) {
-          if (states.contains(MaterialState.pressed)) {
+        if (states.contains(WidgetState.selected)) {
+          if (states.contains(WidgetState.pressed)) {
             textColor = colorScheme.onTertiaryContainer;
           } else {
             // not pressed
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               textColor = colorScheme.onTertiaryContainer;
             } else {
               // not focused
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 textColor = colorScheme.onTertiaryContainer;
               }
             }
           }
         } else {
           // unselected
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             textColor = colorScheme.onSurfaceVariant;
           } else {
             // not pressed
-            if (states.contains(MaterialState.focused)) {
+            if (states.contains(WidgetState.focused)) {
               textColor = colorScheme.onSurfaceVariant;
             } else {
               // not focused
-              if (states.contains(MaterialState.hovered)) {
+              if (states.contains(WidgetState.hovered)) {
                 textColor = colorScheme.onSurfaceVariant;
               }
             }
@@ -7117,29 +7105,29 @@ class FlexSubThemes {
       // https://github.com/flutter/flutter/issues/118657
       dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
       dayPeriodColor: useM3
-          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return colorScheme.tertiaryContainer;
               }
               return Colors.transparent;
             })
           : null,
       dayPeriodTextColor: useM3
-          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
+          ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
               return dayPeriodForegroundColor().resolve(states);
             })
           : null,
       // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
       hourMinuteColor: useM3
-          ? MaterialStateColor.resolveWith((Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 Color overlayColor = colorScheme.primaryContainer;
-                if (states.contains(MaterialState.pressed)) {
+                if (states.contains(WidgetState.pressed)) {
                   overlayColor = colorScheme.onPrimaryContainer;
-                } else if (states.contains(MaterialState.focused)) {
+                } else if (states.contains(WidgetState.focused)) {
                   overlayColor =
                       colorScheme.onPrimaryContainer.withAlpha(kAlphaFocused);
-                } else if (states.contains(MaterialState.hovered)) {
+                } else if (states.contains(WidgetState.hovered)) {
                   overlayColor =
                       colorScheme.onPrimaryContainer.withAlpha(kAlphaHovered);
                 }
@@ -7147,11 +7135,11 @@ class FlexSubThemes {
                     overlayColor, colorScheme.primaryContainer);
               } else {
                 Color overlayColor = colorScheme.surfaceVariant;
-                if (states.contains(MaterialState.pressed)) {
+                if (states.contains(WidgetState.pressed)) {
                   overlayColor = colorScheme.onSurface;
-                } else if (states.contains(MaterialState.focused)) {
+                } else if (states.contains(WidgetState.focused)) {
                   overlayColor = colorScheme.onSurface.withAlpha(kAlphaFocused);
-                } else if (states.contains(MaterialState.hovered)) {
+                } else if (states.contains(WidgetState.hovered)) {
                   overlayColor = colorScheme.onSurface.withAlpha(kAlphaHovered);
                 }
                 return Color.alphaBlend(

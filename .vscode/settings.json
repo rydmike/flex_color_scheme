@@ -1,23 +1,24 @@
 {
-    "cSpell.words": [
-        "checkmark",
-        "codecov",
-        "dont",
-        "flexcolorscheme",
-        "flexthemedata",
-        "FTMS",
-        "hashcode",
-        "Intelli",
-        "intellij",
-        "Leir",
-        "Navi",
-        "Overscroll",
-        "Prefs",
-        "Rastel",
-        "Segoe",
-        "sublist",
-        "sysnavbar",
-        "Tert",
-        "themedata"
-    ]
+  "cSpell.words": [
+    "checkmark",
+    "codecov",
+    "dont",
+    "flexcolorscheme",
+    "flexthemedata",
+    "FTMS",
+    "hashcode",
+    "Intelli",
+    "intellij",
+    "Leir",
+    "Navi",
+    "Overscroll",
+    "Prefs",
+    "Rastel",
+    "Segoe",
+    "sublist",
+    "sysnavbar",
+    "Tert",
+    "themedata"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/beta"
 }

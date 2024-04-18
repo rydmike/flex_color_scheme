@@ -35,12 +35,12 @@ topics:
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.13.0'
+  flutter: '3.22.0-0.1.pre'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^1.4.0
+  flex_seed_scheme: ^1.5.0
 
   flutter:
     sdk: flutter

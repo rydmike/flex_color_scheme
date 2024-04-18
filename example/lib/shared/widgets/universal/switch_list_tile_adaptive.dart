@@ -126,11 +126,11 @@ class SwitchListTileAdaptive extends StatelessWidget {
     //     theme.platform == TargetPlatform.macOS) {
     if (theme.useMaterial3) {
       color = theme.switchTheme.thumbColor
-              ?.resolve(<MaterialState>{MaterialState.selected}) ??
+              ?.resolve(<WidgetState>{WidgetState.selected}) ??
           theme.colorScheme.primary;
     } else {
       color = theme.switchTheme.thumbColor
-              ?.resolve(<MaterialState>{MaterialState.selected}) ??
+              ?.resolve(<WidgetState>{WidgetState.selected}) ??
           theme.colorScheme.secondary;
     }
     // }

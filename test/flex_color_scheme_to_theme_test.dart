@@ -31,7 +31,7 @@ void main() {
     // TODO(rydmike): toString on ThemeData match, but not ThemeData.
     //   This is repeated for many test cases. It seems like ThemeData
     //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses MaterialState or MaterialStateProperty. Maybe report this.
+    //   uses WidgetState or WidgetStateProperty. Maybe report this.
     //   Investigate first what SDK ThemeData test do, if they even attempt it.
     test(
         'FCS7.01-Default-Light: GIVEN FlexColorScheme.light() made with light '
@@ -3594,33 +3594,33 @@ void main() {
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+            ?.resolve(<WidgetState>{WidgetState.selected})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+            ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+            ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+            ?.resolve(<WidgetState>{WidgetState.focused})?.width,
         equals(1),
       );
       // OutlinedButton thick widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+            ?.resolve(<WidgetState>{WidgetState.error})?.width,
         equals(2),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+            ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
         equals(2),
       );
     });
@@ -3668,33 +3668,33 @@ void main() {
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+            ?.resolve(<WidgetState>{WidgetState.selected})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+            ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+            ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+            ?.resolve(<WidgetState>{WidgetState.focused})?.width,
         equals(1),
       );
       // OutlinedButton thick widths.
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+            ?.resolve(<WidgetState>{WidgetState.error})?.width,
         equals(1),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+            ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
         equals(1),
       );
     });
@@ -3741,33 +3741,33 @@ void main() {
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+            ?.resolve(<WidgetState>{WidgetState.selected})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+            ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+            ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+            ?.resolve(<WidgetState>{WidgetState.focused})?.width,
         equals(3),
       );
       // OutlinedButton thick widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+            ?.resolve(<WidgetState>{WidgetState.error})?.width,
         equals(4),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+            ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
         equals(4),
       );
     });
@@ -3814,33 +3814,33 @@ void main() {
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+            ?.resolve(<WidgetState>{WidgetState.selected})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+            ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+            ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
         equals(3),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+            ?.resolve(<WidgetState>{WidgetState.focused})?.width,
         equals(3),
       );
       // OutlinedButton thick widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+            ?.resolve(<WidgetState>{WidgetState.error})?.width,
         equals(4),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+            ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
         equals(4),
       );
     });
@@ -3894,33 +3894,33 @@ void main() {
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.selected})?.width,
+            ?.resolve(<WidgetState>{WidgetState.selected})?.width,
         equals(0.5),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.hovered})?.width,
+            ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
         equals(0.5),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.disabled})?.width,
+            ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
         equals(0.5),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.focused})?.width,
+            ?.resolve(<WidgetState>{WidgetState.focused})?.width,
         equals(0.5),
       );
       // OutlinedButton thick widths
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.error})?.width,
+            ?.resolve(<WidgetState>{WidgetState.error})?.width,
         equals(1.5),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
-            ?.resolve(<MaterialState>{MaterialState.pressed})?.width,
+            ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
         equals(1.5),
       );
     });
@@ -4617,17 +4617,17 @@ void main() {
       // DropDownMenu
       expect(
         theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
-            .resolve(<MaterialState>{}),
+            .resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // MenuBar
       expect(
-        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // Menu
       expect(
-        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // NavigationBar
@@ -4722,17 +4722,17 @@ void main() {
       // DropDownMenu
       expect(
         theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
-            .resolve(<MaterialState>{}),
+            .resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // MenuBar
       expect(
-        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // Menu
       expect(
-        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // NavigationBar
@@ -4844,17 +4844,17 @@ void main() {
       // DropDownMenu
       expect(
         theme.dropdownMenuTheme.menuStyle!.surfaceTintColor!
-            .resolve(<MaterialState>{}),
+            .resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // MenuBar
       expect(
-        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuBarTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // Menu
       expect(
-        theme.menuTheme.style!.surfaceTintColor!.resolve(<MaterialState>{}),
+        theme.menuTheme.style!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // NavigationBar

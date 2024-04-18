@@ -80,26 +80,26 @@ class ShowSubThemeColors extends StatelessWidget {
     // Get the themed or default color of all shown components' colors.
     final Color elevatedButtonColor = theme
             .elevatedButtonTheme.style?.backgroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         (useMaterial3 ? colorScheme.surface : colorScheme.primary);
     final Color elevatedForegroundButtonColor = theme
             .elevatedButtonTheme.style?.foregroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         (useMaterial3 ? colorScheme.primary : colorScheme.onPrimary);
     final Color filledButtonColor = theme
             .filledButtonTheme.style?.backgroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         colorScheme.primary;
     final Color tonalButtonColor = theme
             .filledButtonTheme.style?.backgroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         colorScheme.secondaryContainer;
     final Color outlinedButtonColor = theme
             .outlinedButtonTheme.style?.foregroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         colorScheme.primary;
     final Color textButtonColor = theme.textButtonTheme.style?.foregroundColor
-            ?.resolve(<MaterialState>{}) ??
+            ?.resolve(<WidgetState>{}) ??
         colorScheme.primary;
     final Color toggleButtonsColor =
         theme.toggleButtonsTheme.color ?? colorScheme.primary;
@@ -114,13 +114,13 @@ class ShowSubThemeColors extends StatelessWidget {
                 ? theme.colorScheme.onPrimaryContainer
                 : _onColor(floatingActionButtonColor, background));
     final Color switchColor = theme.switchTheme.thumbColor
-            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+            ?.resolve(<WidgetState>{WidgetState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color checkboxColor = theme.checkboxTheme.fillColor
-            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+            ?.resolve(<WidgetState>{WidgetState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color radioColor = theme.radioTheme.fillColor
-            ?.resolve(<MaterialState>{MaterialState.selected}) ??
+            ?.resolve(<WidgetState>{WidgetState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color circleAvatarColor = useMaterial3
         ? theme.colorScheme.primaryContainer
@@ -171,7 +171,7 @@ class ShowSubThemeColors extends StatelessWidget {
             : ElevationOverlay.colorWithOverlay(
                 colorScheme.surface, colorScheme.onSurface, 3.0));
     final Color navigationBarItemColor = theme.navigationBarTheme.iconTheme
-            ?.resolve(<MaterialState>{MaterialState.selected})?.color ??
+            ?.resolve(<WidgetState>{WidgetState.selected})?.color ??
         (useMaterial3
             ? colorScheme.onSecondaryContainer
             : colorScheme.onSurface);

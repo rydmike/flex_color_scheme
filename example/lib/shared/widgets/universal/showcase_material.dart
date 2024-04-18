@@ -704,9 +704,9 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
             },
           ),
           Switch(
-            thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return Icon(Icons.check,
                     color:
                         isLight ? colorScheme.primary : colorScheme.onPrimary);
@@ -1402,7 +1402,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
             dropdownMenuEntries: const <DropdownMenuEntry<IconData>>[
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Alarm settings',
@@ -1411,7 +1411,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Disabled settings',
@@ -1421,7 +1421,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Cabin overview',
@@ -1430,7 +1430,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                   style: ButtonStyle(
-                    padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                    padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
                         EdgeInsets.symmetric(horizontal: 12)),
                   ),
                   label: 'Surveillance view',
@@ -1439,7 +1439,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
                   value: Icons.camera_outdoor_rounded),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Water alert',
@@ -2529,10 +2529,10 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
               SearchAnchor(
                   builder: (BuildContext context, SearchController controller) {
                 return SearchBar(
-                  // elevation: const MaterialStatePropertyAll<double>(1),
+                  // elevation: const WidgetStatePropertyAll<double>(1),
                   controller: controller,
                   hintText: 'Search using SearchBar',
-                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(horizontal: 16.0)),
                   onTap: () {
                     controller.openView();
