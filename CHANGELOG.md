@@ -2,12 +2,25 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 7.4.0 - WIP
+## 8.0.0 - WIP
 
 **March 12, 2024**
 
+
 **PACKAGE**
-- Chore: Version bumps for Flutter 3.19
+- Chore: Version bumps for Flutter 3.22
+
+**BREAKING**
+
+This version contains a lot of breaking changes due to updates in Material3 ColorScheme.
+At the same time a this release uses the forced breaking change to clean up the API and make it 
+more aligned with Flutter's Material3 theming. 
+
+- `useMaterial3` is now true by default, to align with Flutter's 3.16.0 default for ThemeData. To continue using Material2 theming, set useMaterial3 to false.
+- 
+
+**CHANGE**
+- Change all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` from Flutter 3.19.0-0.3.pre.  
 
 **NEW**
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.

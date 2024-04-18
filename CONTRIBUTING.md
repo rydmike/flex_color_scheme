@@ -32,7 +32,7 @@ We value your time and effort, but we also have some guidelines for what kind of
 
 ## Code of conduct
 
-We expect all contributors to follow our code of conduct, which promotes a respectful and inclusive contrubution community.
+We expect all contributors to follow our code of conduct, which promotes a respectful and inclusive contribution community.
 
 ## License
 
