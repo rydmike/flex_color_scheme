@@ -4334,7 +4334,7 @@ class FlexColorScheme with Diagnosticable {
     /// See also:
     ///
     ///   * [Material 3 specification](https://m3.material.io/)
-    final bool useMaterial3 = false,
+    final bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
     /// built-in color schemes when [useMaterial3] is true, that benefit

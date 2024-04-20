@@ -2597,7 +2597,7 @@ void main() {
     final ThemeData tLAppBarNull = FlexThemeData.light(
       scheme: FlexScheme.flutterDash,
       // appBarStyle: null, // Default value
-      // useMaterial3: false, // Default value
+      useMaterial3: false,
     );
     test(
         'FTD3.10 Light: GIVEN a FlexThemeData.light with null appBarStyle and '
@@ -2608,7 +2608,7 @@ void main() {
     final ThemeData tDAppBarNull = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
       // appBarStyle: null, // Default value
-      // useMaterial3: false, // Default value
+      useMaterial3: false,
     );
     test(
         'FTD3.10 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
@@ -2620,7 +2620,7 @@ void main() {
     final ThemeData tLAppBarNullM3 = FlexThemeData.light(
       scheme: FlexScheme.flutterDash,
       // appBarStyle: null, // Default value
-      useMaterial3: true,
+      // useMaterial3: true, // Default value
     );
     test(
         'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
@@ -2630,7 +2630,7 @@ void main() {
     final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
       // appBarStyle: null, // Default value
-      useMaterial3: true,
+      // useMaterial3: true, // Default value
     );
     test(
         'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
@@ -2641,7 +2641,7 @@ void main() {
     // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
     final ThemeData tLSwapLegacy = FlexThemeData.light(
       scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
+      // useMaterial3: true, // Default value
       swapLegacyOnMaterial3: true,
     );
     test(
@@ -2668,7 +2668,7 @@ void main() {
     // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
     final ThemeData tLSwapLegacy2 = FlexThemeData.light(
       scheme: FlexScheme.sanJuanBlue,
-      useMaterial3: true,
+      // useMaterial3: true, // Default value
       swapLegacyOnMaterial3: true,
     );
     test(
@@ -2695,7 +2695,7 @@ void main() {
     // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
     final ThemeData tDSwapLegacy = FlexThemeData.dark(
       scheme: FlexScheme.materialBaseline,
-      useMaterial3: true,
+      // useMaterial3: true, // Default value
       swapLegacyOnMaterial3: true,
     );
     test(
@@ -2722,8 +2722,8 @@ void main() {
     // Test swapLegacyOnMaterial3 when using Material 3 - Swapped result
     final ThemeData tDSwapLegacy2 = FlexThemeData.dark(
       scheme: FlexScheme.sanJuanBlue,
-      useMaterial3: true,
-      swapLegacyOnMaterial3: true,
+      // useMaterial3: true, // Default value
+      // swapLegacyOnMaterial3: true, // Default value
     );
     test(
         'FCS7.100 GIVEN a FlexThemeData.Dark with useMaterial3:true '
