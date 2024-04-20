@@ -556,8 +556,10 @@ void main() {
       //
       // Side: Disabled and selected
       expect(
-        (FlexSubThemes.checkboxTheme(colorScheme: colorScheme).side
-                as WidgetStateBorderSide?)!
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
@@ -566,6 +568,7 @@ void main() {
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
@@ -580,6 +583,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
@@ -591,6 +595,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
@@ -600,6 +605,7 @@ void main() {
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
@@ -608,6 +614,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.black54)),
@@ -615,27 +622,33 @@ void main() {
       //
       // fillColor
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .fillColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.transparent),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       expect(
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         )
             .fillColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
@@ -652,21 +665,24 @@ void main() {
       //
       // Check color
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade200),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{}),
         equals(Colors.grey.shade50),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onPrimary),
       );
     });
@@ -1025,8 +1041,10 @@ void main() {
       //
       // Side: Disabled and selected
       expect(
-        (FlexSubThemes.checkboxTheme(colorScheme: colorScheme).side
-                as WidgetStateBorderSide?)!
+        (FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
@@ -1035,6 +1053,7 @@ void main() {
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
@@ -1049,6 +1068,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
@@ -1060,6 +1080,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
@@ -1069,6 +1090,7 @@ void main() {
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
@@ -1077,6 +1099,7 @@ void main() {
       expect(
         (FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.white70)),
@@ -1084,27 +1107,33 @@ void main() {
       //
       // fillColor
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .fillColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(Colors.grey.shade800),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.transparent),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       expect(
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         )
             .fillColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
@@ -1115,27 +1144,31 @@ void main() {
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).fillColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       //
       // Check color
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade900),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{}),
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.checkboxTheme(colorScheme: colorScheme)
-            .checkColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.checkboxTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).checkColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onPrimary),
       );
     });
@@ -1153,6 +1186,7 @@ void main() {
           baseSchemeColor: SchemeColor.tertiary,
           splashRadius: 30,
           unselectedIsColored: false,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(

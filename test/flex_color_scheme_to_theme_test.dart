@@ -2368,11 +2368,13 @@ void main() {
 
     test(
         'FCS7.82-3L shape: Expect border radius null on popup menu does not '
-        'follow default radius', () {
+        'follow default radius.', () {
       expect(shapeL?.borderRadius, null);
     });
 
+    // Use M2
     final ThemeData tDarkHb = FlexColorScheme.dark(
+      useMaterial3: false,
       scheme: FlexScheme.red,
       surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
       blendLevel: 30,
