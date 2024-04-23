@@ -1277,6 +1277,7 @@ void main() {
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge!,
           useTintedDisable: false, // Default
+          useMaterial3: false,
         ),
         equals(
           ChipThemeData(
@@ -1317,6 +1318,7 @@ void main() {
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge!,
           useTintedDisable: true,
+          useMaterial3: false,
         ),
         equals(
           ChipThemeData(
@@ -1358,7 +1360,7 @@ void main() {
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge!,
           baseSchemeColor: SchemeColor.primary,
-          useMaterial3: true,
+          // useMaterial3: true, // Default
         ),
         equals(
           ChipThemeData(
@@ -1395,7 +1397,7 @@ void main() {
           labelStyle: textTheme.labelLarge!,
           baseSchemeColor: SchemeColor.primary,
           useTintedDisable: true,
-          useMaterial3: true,
+          // useMaterial3: true, // Default
         ),
         equals(
           ChipThemeData(
@@ -1431,7 +1433,7 @@ void main() {
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge!,
-          useMaterial3: true,
+          // useMaterial3: true, // default
         ),
         equals(
           ChipThemeData(
@@ -1453,6 +1455,7 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           labelStyle: textTheme.labelLarge!,
+          useMaterial3: false,
         ),
         equals(
           ChipThemeData(
@@ -1495,6 +1498,7 @@ void main() {
           baseSchemeColor: SchemeColor.secondary,
           labelStyle: textTheme.labelLarge!,
           useTintedDisable: true,
+          useMaterial3: false,
         ),
         equals(
           ChipThemeData(

@@ -271,10 +271,12 @@ void main() {
   // FlexColor error colors match seed colors - Color verification, seed results
   //****************************************************************************
 
+  // TODO(rydmike): Add tests for new colors!
   group('FC-Seed: WITH custom ColorScheme.seed colors brightness', () {
     test('light equals FlexColor error colors and other seed results', () {
       final ColorScheme scheme = ColorScheme.fromSeed(seedColor: Colors.blue);
-      expect(scheme.primary, const Color(0xff0061a4));
+      // TODO(rydmike): primary changed from Flutter version 3.19 to 3.22!
+      expect(scheme.primary, const Color(0xff36618e)); // OLD was: 0xff0061a4
       expect(scheme.onPrimary, const Color(0xffffffff));
       expect(scheme.primaryContainer, const Color(0xffd1e4ff));
       expect(scheme.onPrimaryContainer, const Color(0xff001d36));
@@ -295,26 +297,33 @@ void main() {
       expect(scheme.onErrorContainer, const Color(0xff410002));
       expect(scheme.onErrorContainer, FlexColor.material3LightOnErrorContainer);
       expect(scheme.outline, const Color(0xff73777f));
-      expect(scheme.background, const Color(0xfffdfcff));
-      expect(scheme.onBackground, const Color(0xff1a1c1e));
-      expect(scheme.surface, const Color(0xfffdfcff));
-      expect(scheme.onSurface, const Color(0xff1a1c1e));
+      // TODO(rydmike): Remove test of deprecated background colors
+      // expect(scheme.background, const Color(0xfffdfcff));
+      // expect(scheme.onBackground, const Color(0xff1a1c1e));
+      // TODO(rydmike): surface changed from Flutter version 3.19 to 3.22!
+      expect(scheme.surface, const Color(0xfff8f9ff)); // Old was: 0xfffdfcff
+      expect(scheme.onSurface, const Color(0xff191c20)); // Old was: 0xff1a1c1e
+      // TODO(rydmike): Remove test of deprecated surfaceVariant color
       expect(scheme.surfaceVariant, const Color(0xffdfe2eb));
       expect(scheme.onSurfaceVariant, const Color(0xff43474e));
-      expect(scheme.inverseSurface, const Color(0xff2f3033));
-      expect(scheme.onInverseSurface, const Color(0xfff1f0f4));
-      expect(scheme.inversePrimary, const Color(0xff9ecaff));
+      // TODO(rydmike): many colors changed from Flutter version 3.19 to 3.22!
+      expect(scheme.inverseSurface, const Color(0xff2e3135)); // OLD 0xff2f3033
+      expect(scheme.onInverseSurface, const Color(0xffeff0f7)); //OLD 0xfff1f0f4
+      expect(scheme.inversePrimary, const Color(0xffa0cafd)); // OLD 0xff9ecaff
+      expect(scheme.surfaceTint, const Color(0xff36618e)); // OLD 0xff0061a4
+      //
       expect(scheme.shadow, const Color(0xff000000));
-      expect(scheme.surfaceTint, const Color(0xff0061a4));
       expect(scheme.brightness, Brightness.light);
     });
 
+    // TODO(rydmike): Add tests for new colors!
     test('dark equals FlexColor error colors and other seed results', () {
       final ColorScheme scheme = ColorScheme.fromSeed(
           seedColor: Colors.blue, brightness: Brightness.dark);
-      expect(scheme.primary, const Color(0xff9ecaff));
+      // TODO(rydmike): primary changed from Flutter version 3.19 to 3.22!
+      expect(scheme.primary, const Color(0xffa0cafd)); // OLD 0xff9ecaff
       expect(scheme.onPrimary, const Color(0xff003258));
-      expect(scheme.primaryContainer, const Color(0xff00497d));
+      expect(scheme.primaryContainer, const Color(0xff194975)); //OLD 0xff00497d
       expect(scheme.onPrimaryContainer, const Color(0xffd1e4ff));
       expect(scheme.secondary, const Color(0xffbbc7db));
       expect(scheme.onSecondary, const Color(0xff253140));
@@ -333,17 +342,20 @@ void main() {
       expect(scheme.onErrorContainer, const Color(0xffffb4ab));
       expect(scheme.onErrorContainer, FlexColor.material3DarkOnErrorContainer);
       expect(scheme.outline, const Color(0xff8d9199));
-      expect(scheme.background, const Color(0xff1a1c1e));
-      expect(scheme.onBackground, const Color(0xffe2e2e6));
+      // TODO(rydmike): Remove test of deprecated background colors
+      // expect(scheme.background, const Color(0xff1a1c1e));
+      // expect(scheme.onBackground, const Color(0xffe2e2e6));
       expect(scheme.surface, const Color(0xff1a1c1e));
       expect(scheme.onSurface, const Color(0xffe2e2e6));
-      expect(scheme.surfaceVariant, const Color(0xff43474e));
+      // TODO(rydmike): Remove test of deprecated surfaceVariant color
+      // expect(scheme.surfaceVariant, const Color(0xff43474e));
       expect(scheme.onSurfaceVariant, const Color(0xffc3c7cf));
-      expect(scheme.inverseSurface, const Color(0xffe2e2e6));
-      expect(scheme.onInverseSurface, const Color(0xff2f3033));
-      expect(scheme.inversePrimary, const Color(0xff0061a4));
+      expect(scheme.inverseSurface, const Color(0xffe2e2e6)); // OLD 0xffe2e2e6
+      expect(scheme.onInverseSurface, const Color(0xff2f3033)); //OLD 0xff2f3033
+      expect(scheme.inversePrimary, const Color(0xff0061a4)); // OLD 0xff0061a4
+      expect(scheme.surfaceTint, const Color(0xffa0cafd)); // OLD 0xff9ecaff
+      //
       expect(scheme.shadow, const Color(0xff000000));
-      expect(scheme.surfaceTint, const Color(0xff9ecaff));
       expect(scheme.brightness, Brightness.dark);
     });
   });
