@@ -4,25 +4,38 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0 - WIP
 
-**April 18, 2024**
+**May 20, 2024**
 
 
 **PACKAGE**
 - Chore: Version bumps for Flutter 3.22
 
+**CRITICAL TODOS**
+
+- Update internal scheme to support all colors.
+- Figure out how to handle background not existing in ColorScheme, it was critical in FCS for its surface blends. Need a new approach not using the background color.
+- Pass through of all new ColorScheme colors, 
+- Generate full ColorScheme in Playground.
+- Get all tests to pass, Flutter 3.22 broke hundreds of tests in FCS.
+
+
 **BREAKING**
 
-This version contains a lot of breaking changes due to updates in Material3 ColorScheme.
-At the same time a this release uses the forced breaking change to clean up the API and make it 
-more aligned with Flutter's Material3 theming. 
+This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme.
+At the same time this release uses the forced breaking change to clean up the API and make it 
+more aligned with Flutter's Material-3 theming defaults used as starting points in FCS too. 
 
-- `useMaterial3` is now true by default, to align with Flutter's 3.16.0 default for ThemeData. To continue using Material2 theming, set useMaterial3 to false. Note that all sub-themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
+- `useMaterial3` is now true by default to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
+- The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the new Material3 color scheme used in **Flutter 3.22**. 
 
 **CHANGE**
-- Change all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` from Flutter 3.19.0-0.3.pre.  
+- Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.  
 
 **NEW**
+
+- Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded color scheme. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22, but that did not land yet. The variants like `fidelity` will come later to Flutter. With FlexColorScheme 8.0.0 you can use them already now. 
+
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
@@ -31,7 +44,7 @@ more aligned with Flutter's Material3 theming.
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map, this is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. Feature https://github.com/rydmike/flex_color_scheme/issues/210
 
-- Improved the theming logic for `Card` theme. It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the default radius is used. This is done by not creating a shape theme then and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant. The Flutter theming limitation and imapct is thus now the same in FCS as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
+- Improved the theming logic for `Card` theme. It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme then and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant. The Flutter theming limitation and impact are thus now the same in FCS as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
 
 **FIX**
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
@@ -39,6 +52,7 @@ more aligned with Flutter's Material3 theming.
 
 **TODO PACKAGE**
 
+- Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Schemes: Add the greyscale prototyping themes to the `FlexScheme` enum and colors.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
@@ -71,10 +85,9 @@ more aligned with Flutter's Material3 theming.
 **TESTING**
   - Add full coverage tests for all new package features!
 
-POSTPONED TO Version 8.0.0
-- BREAKING: Change `useMaterial3` to be true by default, to align with **Flutter's** 3.16.0 default for `ThemeData`. Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 
-- Maybe in Version 8.0.0:
+** Maybe in Version 8.1.0 or later **
+
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
   - Via support in `FlexSeedScheme` add support for schemes, that are based on Material Color Utilities 0.8.0.
   - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
@@ -98,7 +111,7 @@ POSTPONED TO Version 8.0.0
 - Chore: Update issue resolution status texts for Dialogs.
 
 **Feature**
-- Add #224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
+- Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
 - Split FAB and Chip to separate panels.
 
 **TODO THEMES PLAYGROUND AND EXAMPLES**
