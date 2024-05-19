@@ -2,7 +2,7 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.0.0 - WIP
+## 8.0.0-dev.1 - WIP
 
 **May 20, 2024**
 
@@ -15,8 +15,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 - Update internal `SchemeColor` to support all colors.
 - Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
-- Pass through of all new ColorScheme colors, 
-- Generate full ColorScheme in Playground.
+- Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
+- Generate full ColorScheme in Themes Playground.
 - Get all tests to pass, Flutter 3.22 broke hundreds of tests in FCS.
 - Flutter 3.22 broke +100 tests in FCS, reviewing and fixing them all take time, 12 breaking tests remaining.
 - Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 419 of them remaining. 
@@ -36,7 +36,7 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
 
 **NEW**
 
-- Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded color scheme. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22, but that did not land yet. The variants like `fidelity` will come later to Flutter. With FlexColorScheme 8.0.0 you can use them already now. 
+- Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22, but that did not land yet. The variants like `fidelity` will come later to Flutter. With FlexColorScheme 8.0.0 you can use them already now. 
 
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
@@ -55,7 +55,7 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
 **TODO PACKAGE**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-- Schemes: Add the greyscale prototyping themes to the `FlexScheme` enum and colors.
+- BREAK: Consider removing FCS legacy property `useFlutterDeaults`. It will not be needed anymore when styles follow M3 defaults.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles for `FlexSubThemesData` so that:
@@ -72,26 +72,25 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
 - Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
-- AppBar: Option to decoupled foreground/background color.
-- FAB: Option to decoupled foreground/background color.
-- Switch: Optional iOS-like style.
-- Switch: Platform adaptive iOS-like style.
-- Checkbox: Shape and border.
-- DatePicker: Option to style and remove divider.
-- InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState.
-- InputDecorator: Platform adaptive radius.
 - Updates and features for `Chip` theming.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
+- AppBar: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
+- FAB: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
+- Switch: Optional iOS-like style. (Maybe push to 8.1.0)
+- Switch: Platform adaptive iOS-like style. (Maybe push to 8.1.0)
+- Checkbox: Shape and border. (Maybe push to 8.1.0)
+- DatePicker: Option to style and remove divider. (Maybe push to 8.1.0)
+- InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState. (Maybe push to 8.2.0)
+- InputDecorator: Platform adaptive radius. (Maybe push to 8.1.0)
 
 
 **TESTING**
   - Add full coverage tests for all new package features!
 
 
-** Maybe in Version 8.1.0 or later **
-
+**Maybe in Version 8.1.0 or later**
+  - Schemes: Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
-  - Via support in `FlexSeedScheme` add support for schemes, that are based on Material Color Utilities 0.8.0.
   - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
   - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
@@ -99,14 +98,12 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
   - Add fidelity for iOS adaptive AppBar (maybe).
   - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color.
 - Investigate:
-  - If themed AppBar system overlay can now impact the system navigation
-    bar settings. Implement convenience feature if it can.
+  - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
 
 **THEMES PLAYGROUND**
 
 **FIX**
 
- 
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
 - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
@@ -121,8 +118,8 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
 - Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.
-- Make Chips presentation better.
-- IconButtons, add a text column explaining the type, as on the Chips panel.
+- Make Chips presentation even better (already improved a lot).
+- ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 
 ## 7.3.1
