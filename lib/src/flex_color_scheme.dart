@@ -2158,6 +2158,29 @@ class FlexColorScheme with Diagnosticable {
     /// configurations.
     final FlexTones? tones,
 
+    /// An optional way to select the used algorithm for seeded [ColorScheme]
+    /// generation, can be used instead of a [FlexTones] provided in [tones].
+    ///
+    /// The [variant] and [tones] are mutually exclusive, only one of them
+    /// can be used. If both are null, the default from [tones] is used.
+    ///
+    /// The [variant] selections includes all the Flutter SDK defined options
+    /// that will be available in the future in Flutter Stable after 3.22.x,
+    /// that are available in master channel now but did not land in Flutter
+    /// 3.22. Variant options that are identical to the Flutter SDK options
+    /// have [FlexSchemeVariant.value], [isFlutterScheme] set to true. These
+    /// enum  options will not respect and use any other seed generation keys
+    /// than the [primaryKey], as they only support using one seed color.
+    ///
+    /// The [FlexSchemeVariant] also includes quick selections for all the
+    /// predefined [FlexTones] configurations. However, with [variant] you can
+    /// only select one of the predefined configurations, and not make custom
+    /// configurations like you can with [FlexTones]. Additionally you cannot
+    /// use the [FlexTones] modifiers [onMainsUseBW], [onSurfacesUseBW] and
+    /// [surfacesUseBW], since the only operate on the [FlexTones]
+    /// configurations passed in to [tones].
+    final FlexSchemeVariant? variant,
+
     /// The density value for specifying the compactness of various UI
     /// components.
     ///
@@ -2605,6 +2628,7 @@ class FlexColorScheme with Diagnosticable {
         neutralVariantKey: surfaceTint,
         // Use provided tones configuration or default one.
         tones: tones,
+        variant: variant,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4031,6 +4055,29 @@ class FlexColorScheme with Diagnosticable {
     /// configurations.
     final FlexTones? tones,
 
+    /// An optional way to select the used algorithm for seeded [ColorScheme]
+    /// generation, can be used instead of a [FlexTones] provided in [tones].
+    ///
+    /// The [variant] and [tones] are mutually exclusive, only one of them
+    /// can be used. If both are null, the default from [tones] is used.
+    ///
+    /// The [variant] selections includes all the Flutter SDK defined options
+    /// that will be available in the future in Flutter Stable after 3.22.x,
+    /// that are available in master channel now but did not land in Flutter
+    /// 3.22. Variant options that are identical to the Flutter SDK options
+    /// have [FlexSchemeVariant.value], [isFlutterScheme] set to true. These
+    /// enum  options will not respect and use any other seed generation keys
+    /// than the [primaryKey], as they only support using one seed color.
+    ///
+    /// The [FlexSchemeVariant] also includes quick selections for all the
+    /// predefined [FlexTones] configurations. However, with [variant] you can
+    /// only select one of the predefined configurations, and not make custom
+    /// configurations like you can with [FlexTones]. Additionally you cannot
+    /// use the [FlexTones] modifiers [onMainsUseBW], [onSurfacesUseBW] and
+    /// [surfacesUseBW], since the only operate on the [FlexTones]
+    /// configurations passed in to [tones].
+    final FlexSchemeVariant? variant,
+
     /// The density value for specifying the compactness of various UI
     /// components.
     ///
@@ -4502,6 +4549,7 @@ class FlexColorScheme with Diagnosticable {
         // defaults that can produce same results as Flutter SDK,
         // ColorScheme.fromSeed(color), when only primary color is used as key.
         tones: tones,
+        variant: variant,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
