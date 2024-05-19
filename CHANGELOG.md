@@ -13,7 +13,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CRITICAL TODOS**
 
-- Update internal scheme to support all colors.
+- Update internal `SchemeColor` to support all colors.
 - Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
 - Pass through of all new ColorScheme colors, 
 - Generate full ColorScheme in Playground.
