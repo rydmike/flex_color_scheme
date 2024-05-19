@@ -147,7 +147,10 @@ class FlexColor {
   /// INFO: v0.1.5 of material_color_utilities changed this color.
   /// Before version 0.1.5. the color value was:
   /// static const Color material3DarkOnErrorContainer = Color(0xFFFFB4A9);
-  static const Color material3DarkOnErrorContainer = Color(0xFFFFB4AB);
+  /// INFO: v0.8.0 of material_color_utilities changed this color.
+  ///  Before version 0.8.9. the color value was:
+  /// static const Color material3DarkOnErrorContainer = Color(0xFFFFB4AB);
+  static const Color material3DarkOnErrorContainer = Color(0xffffdad6);
 
   // High contrast Material 2 standard error colors as per those used in Flutter
   // ColorScheme.highContrastLight and ColorScheme.highContrastDark
