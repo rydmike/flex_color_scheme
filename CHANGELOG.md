@@ -8,6 +8,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 
 **PACKAGE**
+
 - Version 8.0.0 brings FlexColorScheme to be fully aligned and compatible with Flutter's Material-3 theming changes introduced in Flutter 3.22, that has a lot of subtle creaking color styles.
 
 **CRITICAL TODOS**
