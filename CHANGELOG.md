@@ -8,24 +8,25 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 
 **PACKAGE**
-- Chore: Version bumps for Flutter 3.22
+- Version 8.0.0 brings FlexColorScheme to be fully aligned and compatible with Flutter's Material-3 theming changes introduced in Flutter 3.22, that has a lot of subtle creaking color styles.
 
 **CRITICAL TODOS**
 
 - Update internal scheme to support all colors.
-- Figure out how to handle background not existing in ColorScheme, it was critical in FCS for its surface blends. Need a new approach not using the background color.
+- Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
 - Pass through of all new ColorScheme colors, 
 - Generate full ColorScheme in Playground.
 - Get all tests to pass, Flutter 3.22 broke hundreds of tests in FCS.
-
+- Flutter 3.22 broke +100 tests in FCS, reviewing and fixing them all take time, 12 breaking tests remaining.
+- Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 419 of them remaining. 
 
 **BREAKING**
 
 This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme.
-At the same time this release uses the forced breaking change to clean up the API and make it 
-more aligned with Flutter's Material-3 theming defaults used as starting points in FCS too. 
+At the same time, this release uses the forced breaking change to clean up some older APIs. It also becomes
+more aligned with Flutter's Material-3 theming defaults, by using them as starting points in FCS too. 
 
-- `useMaterial3` is now true by default to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
+- `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the new Material3 color scheme used in **Flutter 3.22**. 
 
